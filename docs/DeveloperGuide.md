@@ -8,7 +8,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 2. [Setting Up](#2-setting-up)
 3. [Design](#3-design) <br>
 	3.1. [Architecture](#31-architecture) <br>
-	3.2. [User Interface](#32-ui-component) <br>
+	3.2. [User Interface](#32-user-interface-ui-component) <br>
 	3.3. [Logic](#33-logic-component) <br>
 	3.4. [Model](#34-model-component) <br>
 	3.5. [Storage](#35-storage-component) <br>
@@ -53,7 +53,7 @@ Hence, primary input for the application will be _command-driven_ and using the
 
 ### 2.2. Importing the Project into Eclipse
 
-1. Fork this [repo](#repository), and clone the fork to your computer. 
+1. Fork this [repo](#repository-or-repo), and clone the fork to your computer. 
 2. Open Eclipse. 
 
 	> Note: Ensure that you have installed the **e(fx)clipse** and **Buildship** plug-ins as given
@@ -64,7 +64,7 @@ Hence, primary input for the application will be _command-driven_ and using the
 5. Click `Browse`, then locate the project's directory. 
 6. Click `Finish`. 
 
-  > * If you are asked whether to `Keep` or `Overwrite` [config files](#config-file), choose to `Keep`.
+  > * If you are asked whether to `Keep` or `Overwrite` [config files](#configuration-or-config-file), choose to `Keep`.
   > * Gradle downloads library files from servers during the project set up process. <br>
   Hence, depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish. 
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
@@ -127,6 +127,7 @@ Functions of `Main`:
 
 [**`Commons`**](#commons-component) represents a collection of classes used by multiple other components.
 This collection is encapsulated in the `seedu.addressbook.commons` package. <br>
+
 2 classes in the package, `EventsCenter` and `LogsCenter`, play important roles at the architecture level as discussed. 
 
 Function of `EventsCenter`: 
@@ -142,12 +143,12 @@ Function of `LogsCenter`:
 
 The rest of Tâche consists of the following four components:
 
-* [**`User Interface`**](#32-ui-component) : Facilitates the interaction between the user and the system
+* [**`User Interface`**](#32-user-interface-ui-component) : Facilitates the interaction between the user and the system
 * [**`Logic`**](#33-logic-component) : Executes the user's commands
 * [**`Model`**](#34-model-component) : Holds the data of Tâche in-memory
 * [**`Storage`**](#35-storage-component) : Reads data from, and writes data to, the hard disk
 
-The _Sequence Diagram_ below shows how the different components interact when the user issues the
+The [_Sequence Diagram_](#sequence-diagram) below shows how the different components interact when the user issues the
 command `delete 1`.
 
 <img src="images/SDforDeleteTask.png" width="800"><br>
@@ -158,7 +159,7 @@ _Figure 3.1.2a : Component Interactions for `delete 1` Command (Part 1)_
 
 The diagram below shows how `EventsCenter` reacts to that event, which eventually results in the following: 
 * Updates saved to the hard disk
-* Status bar of the [User Interface](#user-interface) (UI) updated to reflect the 'Last Updated' time
+* Status bar of the [User Interface](#user-interface-ui) (UI) updated to reflect the 'Last Updated' time
 
 <img src="images/SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 3.1.2b : Component Interactions for `delete 1` Command (Part 2)_
@@ -184,19 +185,20 @@ _Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The [User Interface](#user-interface) (UI) consists of a `MainWindow` that is made up of parts 
-e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `CalendarDisplay`, `BrowserPanel` etc. 
+The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts.  
+(e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`) <br>
+
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-> The `UI` component uses the _JavaFX UI framework_. <br>
+> The `UI` component uses the _JavaFX UI_ framework. <br>
 The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+ [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml). 
 
 Functions of `UI`:  
 
 * Executes user commands using the `Logic` component
-* Binds itself to some data in the `Model` so that the UI of Tâche can _auto-update_ when data in the `Model` change
+* Binds itself to some data in the `Model` so that the UI of Tâche can auto-update when data in the `Model` changes
 * Responds to events raised from various parts of the Tâche and updates its UI accordingly
 
 ### 3.3. Logic Component
@@ -211,12 +213,13 @@ Function of `Logic`:
 * Executes the user's command using the following procedure: 
 
 > 1. `Logic` uses the `Parser` class to [parse](#parse) the user command. <br>
-2. This results in a `Command` object which is executed by the `LogicManager`. <br>
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events. <br>
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `UI`. <br>
+> 2. This results in a `Command` object which is executed by the `LogicManager`. <br>
+> 3. The command execution can affect the `Model` and/or raise events (an example of such a command is **adding a task**). <br>
+> 4. The result of the command execution is then encapsulated as a `CommandResult` object. <br>
+> 5. This object is passed back to the `UI`. <br>
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
+Given below is the [Sequence Diagram](#sequence-diagram) for interactions within the `Logic` component for the 
+`execute("delete 1")` API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
@@ -229,13 +232,13 @@ _Figure 3.4.1 : Structure of the Model Component_
 
 Functions of `Model`:
 
-* Stores a `UserPref` object that represents the _user's preferences_
-* Stores the Task Manager data
-* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
-> E.g. The [UI](#user-interface) can be bound to this list so that the UI automatically 
-updates when the data in the list change.
+* Stores a `UserPref` object that represents the user's preferences
+* Stores the data in Tâche
+* Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
+> E.g. The [UI](#user-interface) can be bound to this list so that it automatically 
+updates when this list is modified. <br>
 
-> `Model` does not depend on any of the other three components.
+`Model` does not depend on any of the other three components.
 
 ### 3.5. Storage Component
 
@@ -257,49 +260,51 @@ Functions of `Storage`:
 We are using the `java.util.logging` package for logging. <br>
 The `LogsCenter` class is used to manage logging levels and logging destinations.
 
-* You can control the logging level using the `logLevel` setting in the [configuration file](#config-file)
-  (See [Configuration](#4-2-configuration))
+* You can control the logging level using the `logLevel` setting in the [config file](#configuration-or-config-file)
+  (See [Configuration](#42-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
   
-> Currently, log messages are output through: `Console` and to a `.log` file.
+  > Currently, log messages are output through: `Console` and to a `.log` file.
 
 **Logging Levels**
 
-* `SEVERE` : Message shows critical problem detected which may possibly cause the _termination_ of the application
-* `WARNING` : Message shows that developers can continue with the program, but _with caution_
-* `INFO` : Message shows information showing the _noteworthy actions_ by Tâche
-* `FINE` : Message shows details that are not usually noteworthy but may be _useful in debugging_
+* `SEVERE` : Message shows critical problem detected which may possibly cause the termination of the application
+* `WARNING` : Message shows that developers can continue with the program, but with caution
+* `INFO` : Message shows information showing the noteworthy actions by Tâche
+* `FINE` : Message shows details that are not usually noteworthy but may be useful in debugging
+
   > E.g. print the actual list instead of just its size
 
 ### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g app name, logging level) through the 
-[configuration file](#config-file)(default: `config.json`). 
+[config file](#config-file) (default: `config.json`). 
 
 
 ## 5. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
-### Testing Platforms
+### 5.1. Testing Platforms
 
 **Eclipse**:
 
-* To run _all tests_: Right-click on the `src/test/java` folder. 
-* To run _a subset of tests_: Right-click on a test package, test class, or a test. 
+* To run **all tests**: Right-click on the `src/test/java` folder. 
+* To run **a subset of tests**: Right-click on a test package, test class, or a test. <br>
+
 Then choose `Run as` > `JUnit Test`. 
 
 **Gradle**:
 
 * You can see [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
 
-### Test Types
+### 5.2. Test Types
 
 **GUI Tests**:
 
 These are _System Tests_ that test the entire Tâche by simulating user actions on the 
-[Graphical User Interface](#graphical-user-interface) (GUI). <br>
+[Graphical User Interface](#graphical-user-interface-gui) (GUI). <br>
 These tests are found in the `guitests` package.
 
 **Non-GUI Tests**: 
@@ -307,19 +312,19 @@ These tests are found in the `guitests` package.
 These are tests that do not involve the GUI. They include: 
    * _Unit tests_ that target the lowest level methods/classes <br>
       e.g. `seedu.tache.commons.UrlUtilTest`
-   * _Integration tests_ that check the integration of multiple code units
-      e.g. `seedu.tache.storage.StorageManagerTest` <br>
-      > Those code units are assumed to be working. 
+   * _Integration tests_ that check the integration of multiple code units 
+   (those code units are assumed to be working) <br>
+      e.g. `seedu.tache.storage.StorageManagerTest`
    * _Hybrids of unit and integration tests_ that check multiple code units as well as
       how they are connected together <br>
       e.g. `seedu.tache.logic.LogicManagerTest`
 
-### Testing Mode: Headless GUI Testing
+### 5.3. Testing Mode: Headless GUI Testing
 
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use, 
 our GUI tests can be run in the _headless_ mode. <br>
- In the headless mode, _GUI tests do not show up on the screen_. <br>
- > That means that you can do other things on the computer while the tests are running. 
+ In the headless mode, GUI tests do not show up on the screen. <br>
+ > That means that you can do other things on the computer while the tests are running. <br>
  You can refer to [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in the headless mode.
 
 ### 5.1. Troubleshooting Tests
@@ -328,6 +333,7 @@ our GUI tests can be run in the _headless_ mode. <br>
 
  * Reason: Assertions are not enabled for JUnit tests. <br>
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later). 
+
  * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
@@ -368,22 +374,28 @@ You can follow the following steps to convert the project documentation files to
  1. Make sure you have _set up GitHub Pages_ as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
+    
     > E.g. For [UserGuide.md](UserGuide.md), the URL will be 
     `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
+    
  3. Click on the `Print` option in Chrome's menu.
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
+
     > For best results, use the settings indicated in the screenshot below. <br> 
+    
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 6.5.1 : Saving Documentation as PDF Files in Chrome_
 
 ### 6.6. Managing Dependencies
 
-A project often depends on _third-party libraries_. For example, Tâche depends on the
+A project often depends on third-party libraries. For example, Tâche depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. <br>
-Managing these _dependencies_ can be automated using Gradle. 
-For example, Gradle can _download the dependencies automatically_, which is better than these alternatives: <br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+
+Managing these dependencies can be automated using Gradle. 
+
+> For example, Gradle can download the dependencies automatically, which is better than these alternatives: <br>
+a. Include those libraries in the repo (this bloats the repo size) <br>
+b. Require developers to download those libraries manually (this creates extra work for developers)
 
 ## Appendix A : User Stories
 
@@ -596,7 +608,7 @@ Here are some terms that are worth defining: <br>
 
 > A text-based interface which allows the user to interact with the program by typing in commands
 
-#### Config (or Configuration) File: 
+#### Configuration (or Config) File: 
 
 > Files that configure the initial settings of a program
 
@@ -631,6 +643,10 @@ Here are some terms that are worth defining: <br>
 #### Repository (or "repo"):
 
 > A location where all the files of a particular project are stored
+
+#### Sequence Diagram: 
+
+> A diagram used to model the interactions of a system over time
 
 #### Subtask:
 
