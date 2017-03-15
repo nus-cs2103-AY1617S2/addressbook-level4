@@ -33,7 +33,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
-        this.note = taskToCopy.getNote();
+        this.note = taskToCopy.getNote().orElse(null);
         this.deadline = taskToCopy.getDeadline();
         this.tags = taskToCopy.getTags();
     }
