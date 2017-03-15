@@ -18,7 +18,7 @@ public class Priority {
     /*
      * priority input must be an integer
      */
-    public static final String DEADLINE_VALIDATION_REGEX = "(\\d*)";
+    public static final String PRIORITY_VALIDATION_REGEX = "(\\d*)";
 
     public final int value;
 
