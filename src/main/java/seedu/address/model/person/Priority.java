@@ -23,9 +23,9 @@ public class Priority {
     public final int value;
 
     /**
-     * Validates given address.
+     * Validates given priority.
      *
-     * @throws IllegalValueException if given address string is invalid.
+     * @throws IllegalValueException if given priority is invalid.
      */
     public Priority(int priority) throws IllegalValueException {
         assert priority >= 0;
@@ -36,7 +36,7 @@ public class Priority {
     }
 
     /**
-     * Returns true if a given string is a valid person deadline.
+     * Returns true if a given string is a valid priority.
      */
     public static boolean isValidPriority(int test) {
         if(test == (int)test) {
