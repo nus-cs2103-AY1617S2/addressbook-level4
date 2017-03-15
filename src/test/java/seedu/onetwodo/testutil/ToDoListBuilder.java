@@ -9,7 +9,7 @@ import seedu.onetwodo.model.task.UniqueTaskList;
 /**
  * A utility class to help with building ToDoList objects.
  * Example usage: <br>
- *     {@code ToDoList ab = new ToDoListBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code ToDoList ab = new ToDoListBuilder().withTask(task1, task2).withTag("school").build();}
  */
 public class ToDoListBuilder {
 

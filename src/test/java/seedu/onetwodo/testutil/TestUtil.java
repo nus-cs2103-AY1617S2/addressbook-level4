@@ -77,10 +77,13 @@ public class TestUtil {
             return new Task[]{
                 new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"), new Description(""), new UniqueTagList()),
                 new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"), new Description("get drunk"), new UniqueTagList()),
+                new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"), new Description(""), new UniqueTagList()),
                 new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"), new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Description("can copy answer"), new UniqueTagList()),
                 new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"), new Description(""), new UniqueTagList()),
                 new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Description("brown one"), new UniqueTagList()),
                 new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Description("train legs too"), new UniqueTagList()),
+                new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Description(""), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -94,8 +97,8 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                new Tag("work"),
+                new Tag("school")
             };
         } catch (IllegalValueException e) {
             assert false;

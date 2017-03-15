@@ -6,37 +6,63 @@ import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
- *
+ *  Tasks to be used for testing. Includes default tasks and tasks to be added.
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask taskA, taskB, taskC, taskD, taskE, taskF, taskG, task1, task2, task3;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withDescription("123, Jurong West Ave 6, #08-111").withEndDate("alice@gmail.com")
-                    .withStartDate("85355255")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withDescription("311, Clementi Ave 2, #02-25")
-                    .withEndDate("johnd@gmail.com").withStartDate("98765432")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withStartDate("95352563")
-                    .withEndDate("heinz@yahoo.com").withDescription("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withStartDate("87652533")
-                    .withEndDate("cornelia@google.com").withDescription("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withStartDate("9482224")
-                    .withEndDate("werner@gmail.com").withDescription("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withStartDate("9482427")
-                    .withEndDate("lydia@gmail.com").withDescription("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withStartDate("9482442")
-                    .withEndDate("anna@google.com").withDescription("4th street").build();
+            // Event with all info
+            taskA = new TaskBuilder().withName("guard duty")
+                    .withStartDate("15/12/2018 7am").withEndDate("16/12/2018 11pm")
+                    .withDescription("bring weapon")
+                    .withTags("army", "work")
+                    .build();
+            // Event with missing info
+            taskB = new TaskBuilder().withName("study at home")
+                    .withStartDate("10 Mar 2018").withEndDate("13 mar 2018")
+                    .build();
+            // Deadline with all date info
+            taskC = new TaskBuilder().withName("submit cs2101 reflection")
+                    .withEndDate("13-05-2018 23:30")
+                    .withDescription("use the 7 C")
+                    .withTags("school")
+                    .build();
+            // Deadline with no time
+            taskD = new TaskBuilder().withName("complete 2103 tutorial")
+                    .withEndDate("tomorrow")
+                    .withDescription("bring weapon")
+                    .withTags("school", "favourite")
+                    .build();
+            // Deadline with many missing info
+            taskE = new TaskBuilder().withName("finish assignments")
+                    .withEndDate("11pm")
+                    .build();
+            // To-do with all info
+            taskF = new TaskBuilder().withName("buy new bag")
+                    .withDescription("find cheap ones")
+                    .withTags("shopping", "favourite", "hobby")
+                    .build();
+            // To-do with missing info
+            taskG = new TaskBuilder().withName("change clothes")
+                    .build();
 
+            
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withStartDate("8482424")
-                    .withEndDate("stefan@mail.com").withDescription("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withStartDate("8482131")
-                    .withEndDate("hans@google.com").withDescription("chicago ave").build();
+            task1 = new TaskBuilder().withName("stay over boss house")
+                    .withStartDate("tomorrow 11am").withEndDate("tomorrow 2359")
+                    .withDescription("prepare to get scolded")
+                    .withTags("work")
+                    .build();
+            task2 = new TaskBuilder().withName("do peer evaluation")
+                    .withEndDate("16 july 2018 10:00")
+                    .withDescription("grade everyone 10/10")
+                    .withTags("school")
+                    .build();
+            task3 = new TaskBuilder().withName("reply boss email")
+                    .build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -54,7 +80,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{taskA, taskB, taskC, taskD, taskE, taskF, taskG};
     }
 
     public ToDoList getTypicalToDoList() {

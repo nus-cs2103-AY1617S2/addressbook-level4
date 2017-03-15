@@ -109,7 +109,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
+        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/taskA@gmail.com "
                                 + "a/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
