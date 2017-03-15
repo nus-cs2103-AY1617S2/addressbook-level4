@@ -77,7 +77,7 @@ public class TestUtil {
                 new Task(new Name("Daniel Meier"), new Date(""), new Time("")),
                 new Task(new Name("Elle Meyer"), new Date(""), new Time("")),
                 new Task(new Name("Fiona Kunz"), new Date(""), new Time("")),
-                new Task(new Name("George Best"),new Date(""), new Time("")),
+                new Task(new Name("George Best"), new Date(""), new Time("")),
                 new Task(new Name("Hoon Meier"), new Date(""), new Time("")),
                 new Task(new Name("Ida Mueller"), new Date(""), new Time(""))
             };
