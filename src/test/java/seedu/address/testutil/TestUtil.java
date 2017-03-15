@@ -33,6 +33,7 @@ import seedu.address.model.ToDoApp;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -73,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("George Best"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Deadline(""), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Deadline(""), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("George Best"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Start(""), new Deadline(""), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Start(""), new Deadline(""), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

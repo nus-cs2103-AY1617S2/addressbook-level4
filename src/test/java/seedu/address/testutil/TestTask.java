@@ -4,6 +4,7 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Start;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -12,6 +13,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Start start;
     private Deadline deadline;
     private UniqueTagList tags;
 
@@ -24,11 +26,18 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
+        this.start = taskToCopy.getStart();
+        this.deadline = taskToCopy.getDeadline();
         this.tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
         this.name = name;
+    }
+    
+
+    public void setStart(Start start) {
+        this.start = start;
     }
 
     public void setDeadline(Deadline deadline) {
@@ -44,6 +53,11 @@ public class TestTask implements ReadOnlyTask {
         return name;
     }
 
+    @Override
+    public Start getStart() {
+        return start;
+    }
+    
     @Override
     public Deadline getDeadline() {
         return deadline;

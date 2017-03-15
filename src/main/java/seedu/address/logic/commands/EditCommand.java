@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
@@ -76,10 +77,11 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Start updatedStart = editTaskDescriptor.getStart().orElseGet(taskToEdit::getStart);
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedDeadline, updatedTags);
+        return new Task(updatedName, updatedStart, updatedDeadline, updatedTags);
     }
 
     /**
@@ -88,6 +90,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
+        private Optional<Start> start = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -115,6 +118,15 @@ public class EditCommand extends Command {
             return name;
         }
 
+        public void setStart(Optional<Start> start) {
+            assert start != null;
+            this.start = start;
+        }
+
+        public Optional<Start> getStart() {
+            return start;
+        }
+        
         public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;

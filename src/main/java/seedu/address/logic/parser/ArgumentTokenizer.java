@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+
 import com.joestelmach.natty.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -144,7 +148,7 @@ public class ArgumentTokenizer {
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
-        if (prefix.getPrefix().equals("d/") ||  prefix.getPrefix().equals("s/")) {
+        if (prefix.equals(PREFIX_START) ||  prefix.equals(PREFIX_DEADLINE)) {
             // Parse date
             ParserUtil parserUtil = new ParserUtil();
             value = parserUtil.parseNLPDate(value);
