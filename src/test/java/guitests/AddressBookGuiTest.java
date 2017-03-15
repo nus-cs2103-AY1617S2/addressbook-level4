@@ -12,13 +12,12 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
@@ -28,6 +27,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTestTasks;
+import seedu.address.ui.TaskDescription;
 
 /**
  * A GUI Test class for AddressBook.
@@ -48,10 +48,10 @@ public abstract class AddressBookGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected PersonListPanelHandle personListPanel;
+    protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
+    protected TaskDescription taskDescription;
     private Stage stage;
 
     @BeforeClass
@@ -69,10 +69,9 @@ public abstract class AddressBookGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            personListPanel = mainGui.getPersonListPanel();
+            taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
-            browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
@@ -105,18 +104,18 @@ public abstract class AddressBookGuiTest {
     }
 
     /**
-     * Asserts the person shown in the card is same as the given person
+     * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
     /**
-     * Asserts the size of the person list is equal to the given number.
+     * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = personListPanel.getNumberOfPeople();
-        assertEquals(size, numberOfPeople);
+        int numberOfTask = taskListPanel.getNumberOfTask();
+        assertEquals(size, numberOfTask);
     }
 
     /**

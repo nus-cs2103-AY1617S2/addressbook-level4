@@ -14,7 +14,7 @@ import seedu.address.model.task.ReadOnlyTask;
 /**
  * Provides a handle to a person card in the person list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
     private static final String CONTENT_FIELD_ID = "#content";
     private static final String DATE_TIME_FIELD_ID = "#dateTime";
@@ -22,7 +22,7 @@ public class PersonCardHandle extends GuiHandle {
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -74,10 +74,9 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
-            return getTitle().equals(handle.getTitle())
-                    && getTags().equals(handle.getTags());
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
+            return getTitle().equals(handle.getTitle());
         }
         return super.equals(obj);
     }
