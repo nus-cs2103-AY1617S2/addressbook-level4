@@ -65,7 +65,7 @@ public class EditCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TODO_SUCCESS, todoToEdit));
     }
-    
+
     /**
      * Creates and returns a {@code Todo} with the details of {@code todoToEdit}
      * edited with {@code editTodoDescriptor}.

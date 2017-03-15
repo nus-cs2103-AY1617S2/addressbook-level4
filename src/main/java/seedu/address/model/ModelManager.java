@@ -91,7 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
-    
+
     @Override
     public void loadPreviousState() throws NoPreviousStateException {
     	if (previousTodoList == null) {
@@ -100,7 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
     	resetData(previousTodoList);
     	previousTodoList = null;
     }
-    
+
     //=========== Filtered Todo List Accessors =============================================================
 
     @Override
