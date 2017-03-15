@@ -17,7 +17,7 @@ public class TypicalTestTasks {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withTime("17/02/2017")
                     .withTags("friends").build();
-            
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
