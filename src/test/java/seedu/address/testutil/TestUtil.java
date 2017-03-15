@@ -51,7 +51,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -70,7 +70,7 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Task[] getSamplePersonData() {
+    private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
@@ -106,8 +106,8 @@ public class TestUtil {
         }
     }
 
-    public static List<Task> generateSamplePersonData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+    public static List<Task> generateSampleTaskData() {
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
