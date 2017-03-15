@@ -18,11 +18,7 @@ public class DueDate {
      * @throws IllegalValueException if given description string is invalid.
      */
     public DueDate(String inputDueDate) throws IllegalValueException {
-        if (inputDueDate == "") {
-            this.dueDate = null;
-        } else {
-            this.dueDate = DateParser.parse(inputDueDate);
-        }
+        this.dueDate = DateParser.parse(inputDueDate);
     }
 
     @Override

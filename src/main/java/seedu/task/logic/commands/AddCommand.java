@@ -36,18 +36,21 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String description, String dueDate, String startDate, String endDate, Set<String> tags)
+    public AddCommand(String description, String inputDueDate, String startDate, String endDate, Set<String> tags)
             throws IllegalValueException {
         Duration duration = (startDate == "" || endDate == "") ?
                 null :
                 new Duration(startDate, endDate);
+        DueDate dueDate = (inputDueDate == "") ?
+                null :
+                new DueDate(inputDueDate);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
                 new Description(description),
-                new DueDate(dueDate),
+                dueDate,
                 duration,
                 new UniqueTagList(tagSet)
         );

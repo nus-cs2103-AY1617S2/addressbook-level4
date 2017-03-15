@@ -32,7 +32,9 @@ public class TypicalTestPersons {
                     .withDescription("George Best").build();
 
             // Manually added
-            hoon = new TaskBuilder().withDescription("Hoon Meier").build();
+            hoon = new TaskBuilder().withDescription("Hoon Meier")
+                    .withDueDate("2018/02/09 1230")
+                    .build();
             ida = new TaskBuilder().withDescription("Ida Mueller").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
