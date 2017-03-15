@@ -37,8 +37,10 @@ public interface Model {
 	void updateEvent(int filteredEventListIndex, Event editedEvent)
 			throws DuplicateEventException;
 	
+	/** Updates the switch to use SortedList */
 	void setToSortListSwitch();
 	
+	/** Resets the switch to use FilteredList */
 	void unSetToSortListSwitch();
 	
 	boolean getSortListSwitch();
@@ -46,6 +48,7 @@ public interface Model {
 	/** Returns the filtered event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
 	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
 	
+	/** Returns the sorted event list as an {@code UnmodifiableObservableList<ReadOnlyEvent> }  */
 	UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList();
 
 	/** Updates the filter of the filtered event list to show all events */
