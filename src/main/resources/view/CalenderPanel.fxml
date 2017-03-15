@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<HBox fx:id="test" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView prefHeight="400.0" prefWidth="1050.0">
-        <columns>
-            <TableColumn prefWidth="150.0" text="Sunday" />
-          <TableColumn prefWidth="150.0" text="Monday" />
-          <TableColumn prefWidth="150.0" text="Tuesday" />
-            <TableColumn prefWidth="150.0" text="Wednesday" />
-            <TableColumn prefWidth="150.0" text="Thursday" />
-            <TableColumn prefWidth="150.0" text="Friday" />
-            <TableColumn prefWidth="150.0" text="Saturday" />
-        </columns>
-      </TableView>
+      <Label fx:id="label1" layoutX="-2.0" layoutY="4.0" prefHeight="20.0" prefWidth="600.0" text="                                                                     Date here" />
+      <ListView fx:id="listview1" editable="true" layoutY="24.0" prefHeight="101.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView layoutX="85.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
+      <ListView layoutX="510.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
+      <ListView layoutX="170.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
+      <ListView layoutX="425.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
+      <ListView layoutX="255.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
+      <ListView fx:id="listview11" editable="true" layoutY="124.0" prefHeight="101.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView layoutX="340.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
    </children>
-</HBox>
+</AnchorPane>
