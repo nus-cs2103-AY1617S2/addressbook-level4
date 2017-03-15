@@ -1,4 +1,4 @@
-# DoOrDie Task Manager
+# <img src="docs/images/app_icon.png" width="25" height="25"> DoOrDie Task Manager
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T16-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T16-B2/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/qcfw2kpnoim4tkkp?svg=true)](https://ci.appveyor.com/project/BernardYip/main)
@@ -7,7 +7,6 @@
 <img src="docs/images/Ui.png" width="600"><br><br>
 <img src="docs/images/UI_Today.png" width="600"><br><br>
 <img src="docs/images/UI_ViewTaskDetails.png" width="600"><br><br>
-<img src="docs/images/app_icon.png" width="80"><br><br>
 
 * This is a desktop task manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
