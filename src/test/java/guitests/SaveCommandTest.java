@@ -35,7 +35,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
         TodoList todoListAtSavedLocation = TodoList.load();
         assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
                                                     new TypicalTestTodoLists().getTypicalTodoList()));
-        assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SUCCESS, newPath));
+        assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SAVING_SUCCESS, newPath));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
             assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
                     new TypicalTestTodoLists().getTypicalTodoList()));
             assertResultMessage(String.format(StoreController.RESULT_MESSAGE_WARNING_OVERWRITE, newPath)
-                + "\n" + String.format(StoreController.RESULT_MESSAGE_SUCCESS, newPath));
+                + "\n" + String.format(StoreController.RESULT_MESSAGE_SAVING_SUCCESS, newPath));
         } catch (IOException e) {
             fail();
         }
@@ -67,5 +67,22 @@ public class SaveCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
 
         assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SAME_LOCATION, newPath));
+    }
+
+    @Test
+    public void save_noStoragePath() {
+        String command = "save ";
+        commandBox.runCommand(command);
+
+        assertResultMessage(StoreController.RESULT_MESSAGE_NO_STORAGE_PATH);
+    }
+
+    @Test
+    public void save_invalidStoragePath() {
+        String newPath = "///invalidLocation????/a";
+        String command = "save " + newPath;
+        commandBox.runCommand(command);
+
+        assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SAVING_FAILURE, newPath));
     }
 }

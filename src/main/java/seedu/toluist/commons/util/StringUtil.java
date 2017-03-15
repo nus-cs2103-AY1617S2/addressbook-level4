@@ -2,6 +2,7 @@ package seedu.toluist.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.file.Path;
 
 /**
  * Helper functions for handling strings.

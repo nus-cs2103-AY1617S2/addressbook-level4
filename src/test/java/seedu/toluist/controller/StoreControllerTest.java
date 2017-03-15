@@ -1,0 +1,54 @@
+package seedu.toluist.controller;
+
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+import org.junit.Test;
+
+import seedu.toluist.ui.Ui;
+
+/**
+ * Tests for StoreController
+ */
+public class StoreControllerTest extends ControllerTest {
+    protected Controller controllerUnderTest(Ui renderer) {
+        return new StoreController(renderer);
+    }
+
+    @Test
+    public void getCommandWord() {
+        assertEquals(Arrays.asList(StoreController.COMMAND_WORD),
+                Arrays.asList(StoreController.getCommandWords()));
+    }
+
+    @Test
+    public void matchesCommand() {
+        // With no storage provided
+        assertTrue(controller.matchesCommand("save  "));
+        assertTrue(controller.matchesCommand("save"));
+
+        // with valid storage provided
+        assertTrue(controller.matchesCommand("save aFile.json"));
+
+        // with invalid storage provided
+        assertTrue(controller.matchesCommand("save sfas?////sffsf.json"));
+
+        // with more than 1 parameters
+        assertFalse(controller.matchesCommand("save a b c"));
+    }
+
+    @Test
+    public void tokenize() {
+        HashMap<String, String> tokensNoArgument = new HashMap<>();
+        tokensNoArgument.put(StoreController.STORE_DIRECTORY, null);
+        assertEquals(tokensNoArgument, controller.tokenize("save"));
+
+        HashMap<String, String> tokensOneArgument = new HashMap<>();
+        tokensOneArgument.put(StoreController.STORE_DIRECTORY, "abc");
+        assertEquals(tokensOneArgument, controller.tokenize("save abc"));
+    }
+}

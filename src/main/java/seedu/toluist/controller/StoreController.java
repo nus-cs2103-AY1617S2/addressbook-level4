@@ -10,21 +10,22 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.Tag;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
 /**
- * Responsible for storage-related task
+ * Responsible for saving-related task
  */
 public class StoreController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(StoreController.class);
-    private static final String COMMAND_TEMPLATE = "^save\\s+(?<directory>\\S+)\\s*";
+    private static final String COMMAND_TEMPLATE = "^save(\\s+(?<directory>\\S+))?\\s*";
     public static final String COMMAND_WORD = "save";
     public static final String STORE_DIRECTORY = "directory";
-    public static final String RESULT_MESSAGE_SUCCESS = "Data storage path was changed to %s";
+    public static final String RESULT_MESSAGE_SAVING_FAILURE = "Data could not be saved to %s.";
+    public static final String RESULT_MESSAGE_SAVING_SUCCESS = "Data storage path was changed to %s.";
+    public static final String RESULT_MESSAGE_NO_STORAGE_PATH = "No storage path was provided.";
     public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
-    public static final String RESULT_MESSAGE_SAME_LOCATION = "Current storage path is already set to %s";
+    public static final String RESULT_MESSAGE_SAME_LOCATION = "Current storage path is already set to %s.";
 
     public StoreController(Ui renderer) {
         super(renderer);
@@ -34,6 +35,10 @@ public class StoreController extends Controller {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
         String path = tokens.get(STORE_DIRECTORY);
+
+        if (path == null) {
+            return new CommandResult(RESULT_MESSAGE_NO_STORAGE_PATH);
+        }
 
         Config config = Config.getInstance();
         if (config.getTodoListFilePath().equals(path)) {
@@ -45,9 +50,12 @@ public class StoreController extends Controller {
             message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + "\n";
         }
 
-        TodoList.load().getStorage().move(path);
-        message += String.format(RESULT_MESSAGE_SUCCESS, config.getTodoListFilePath());
-        return new CommandResult(message);
+        if (TodoList.load().getStorage().move(path)) {
+            message += String.format(RESULT_MESSAGE_SAVING_SUCCESS, config.getTodoListFilePath());
+            return new CommandResult(message);
+        } else {
+            return new CommandResult(String.format(RESULT_MESSAGE_SAVING_FAILURE, path));
+        }
     }
 
     public HashMap<String, String> tokenize(String command) {
