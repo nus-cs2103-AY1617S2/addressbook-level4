@@ -114,16 +114,16 @@ public class UniqueLabelList implements Iterable<Label> {
 
     @Override
     public UniqueLabelList clone() {
-        UniqueLabelList y = new UniqueLabelList();
+        UniqueLabelList labelList = new UniqueLabelList();
         try {
 
             for (Label label : internalList) {
-                y.add(new Label(label.getLabelName()));
+                labelList.add(new Label(label.getLabelName()));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return y;
+        return labelList;
     }
 
     /**

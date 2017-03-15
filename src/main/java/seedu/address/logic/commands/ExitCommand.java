@@ -15,24 +15,9 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        saveCurrentState();
         LogicManager.undoCommandHistory.clear();
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
-    }
-
-    /**
-     * Save the data in task manager if command is mutating the data
-     */
-    public void saveCurrentState() {
-        if (isMutating()) {
-            try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @Override

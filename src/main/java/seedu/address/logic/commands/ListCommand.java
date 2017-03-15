@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
-import seedu.address.logic.LogicManager;
 
 /**
  * Lists all tasks in the task manager to the user.
@@ -63,8 +62,6 @@ public class ListCommand extends Command {
                 end = dtParser.parse(endDate).get(0).getDates().get(0);
             }
             start = dtParser.parse("today 000000").get(0).getDates().get(0);
-
-            saveCurrentState();
             model.updateFilteredTaskList(start, end);
         } else if (isParsableDate(startDate) && isParsableDate(endDate)) {
             if (startDate.matches(DATE_VALIDATION_REGEX)) {
@@ -79,7 +76,6 @@ public class ListCommand extends Command {
                 end = dtParser.parse(endDate).get(0).getDates().get(0);
             }
 
-            saveCurrentState();
             if (end.before(start)) {
                 model.updateFilteredTaskList(end, start);
             } else {
@@ -88,24 +84,9 @@ public class ListCommand extends Command {
         } else if (isCompleted != null) {
             model.updateFilteredTaskList(isCompleted);
         } else if ("".equals(startDate) && "".equals(endDate)) {
-            saveCurrentState();
             model.updateFilteredListToShowAll();
         } else {
             throw new IllegalDateTimeValueException();
-        }
-    }
-
-    /**
-     * Save the data in task manager if command is mutating the data
-     */
-    public void saveCurrentState() {
-        if (isMutating()) {
-            try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
         }
     }
 

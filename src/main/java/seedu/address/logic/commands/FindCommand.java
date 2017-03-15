@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -74,7 +73,6 @@ public class FindCommand extends Command {
                 }
                 start = dtParser.parse("today 000000").get(0).getDates().get(0);
 
-                saveCurrentState();
                 model.updateFilteredTaskList(start, end);
             } else if (isParsableDate(startDate) && isParsableDate(endDate)) {
                 if (startDate.matches(DATE_VALIDATION_REGEX)) {
@@ -89,7 +87,6 @@ public class FindCommand extends Command {
                     end = dtParser.parse(this.endDate).get(0).getDates().get(0);
                 }
 
-                saveCurrentState();
                 if (end.before(start)) {
                     model.updateFilteredTaskList(end, start);
                 } else {
@@ -100,22 +97,7 @@ public class FindCommand extends Command {
                 throw new IllegalDateTimeValueException();
             }
         } else {
-            saveCurrentState();
             model.updateFilteredTaskList(keywords);
-        }
-    }
-
-    /**
-     * Save the data in task manager if command is mutating the data
-     */
-    public void saveCurrentState() {
-        if (isMutating()) {
-            try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
         }
     }
 

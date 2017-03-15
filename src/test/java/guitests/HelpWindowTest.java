@@ -6,8 +6,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
+import seedu.address.logic.commands.HelpCommand;
 
 public class HelpWindowTest extends TaskManagerGuiTest {
+
+    @Test
+    public void help_IsMutating() {
+        HelpCommand hc = new HelpCommand();
+        assertFalse(hc.isMutating());
+    }
 
     @Test
     public void openHelpWindow() {

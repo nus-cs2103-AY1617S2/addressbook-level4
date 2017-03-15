@@ -97,20 +97,20 @@ public class UniqueTaskList implements Iterable<Task>, Cloneable {
 
     @Override
     public UniqueTaskList clone() {
-        UniqueTaskList x = new UniqueTaskList();
+        UniqueTaskList taskList = new UniqueTaskList();
         try {
             for (Task task : internalList) {
-                UniqueLabelList y = task.getLabels().clone();
-                x.add(new Task(new Title(task.getTitle().toString()),
+                UniqueLabelList labelList = task.getLabels().clone();
+                taskList.add(new Task(new Title(task.getTitle().toString()),
                         Optional.ofNullable(new Deadline(task.getStartTime().toString())),
                         Optional.ofNullable(new Deadline(task.getDeadline().toString())),
                         task.isCompleted(),
-                        y));
+                        labelList));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return x;
+        return taskList;
     }
 
     public void setTasks(UniqueTaskList replacement) {

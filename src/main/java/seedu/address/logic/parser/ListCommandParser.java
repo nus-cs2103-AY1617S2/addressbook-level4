@@ -35,7 +35,6 @@ public class ListCommandParser {
                 return new ListCommand(new Boolean(false));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 

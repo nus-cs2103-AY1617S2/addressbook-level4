@@ -1,15 +1,23 @@
 package guitests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
+
+    @Test
+    public void find_IsMutating() throws IllegalDateTimeValueException {
+        FindCommand fc = new FindCommand("today");
+        assertFalse(fc.isMutating());
+    }
 
     @Test
     public void find_nonEmptyList() {
