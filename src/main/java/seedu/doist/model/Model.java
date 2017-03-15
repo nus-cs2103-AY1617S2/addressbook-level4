@@ -3,6 +3,7 @@ package seedu.doist.model;
 import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
+import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
@@ -51,6 +52,8 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+    
+    public void updateFilteredTaskList(TaskType type);
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(UniqueTagList tags);

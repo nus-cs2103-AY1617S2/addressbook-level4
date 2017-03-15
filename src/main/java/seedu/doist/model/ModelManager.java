@@ -10,6 +10,7 @@ import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.StringUtil;
+import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
@@ -130,6 +131,12 @@ public class ModelManager extends ComponentManager implements Model {
     	Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
+    
+    @Override
+    public void updateFilteredTaskList(TaskType type) {
+    	Qualifier[] qualifiers = {new TaskTypeQualifier(type)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
+    }
 
     @Override
     public void updateFilteredTaskList(UniqueTagList tags) {
@@ -212,6 +219,26 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             return false;
+        }
+    }
+    
+    private class TaskTypeQualifier implements Qualifier {
+        private TaskType type;
+
+        public TaskTypeQualifier(TaskType type) {
+            this.type = type;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            switch (type) {
+			case finished:
+				return task.getFinishedStatus().getIsFinished() == true;
+			case pending:
+				return task.getFinishedStatus().getIsFinished() == false;
+			default:
+				return true;
+			}
         }
     }
 }
