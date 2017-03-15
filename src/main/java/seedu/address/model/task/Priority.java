@@ -6,7 +6,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Task's priority number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
-public class Priority {
+public class Priority implements Comparable<Priority>{
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be between 1-3";
 
@@ -51,6 +51,13 @@ public class Priority {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Priority comparePriority) {
+        int thisValue = Integer.parseInt(this.value);
+        int otherValue = Integer.parseInt(comparePriority.value);
+        return thisValue - otherValue;
     }
 
 }
