@@ -4,7 +4,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ---
 
-&nbsp;
+<br>
 
 
 ## Table of contents
@@ -20,7 +20,15 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
-&nbsp;
+<br>
+
+
+## Introduction
+<p>Doist is a task manager that can accept natural language commands via keyboard.</p>
+<p>This developer guide aims to help developers better understand the design and implementation of Doist to facilitate further contribution of the development of Doist</p>
+
+
+<br>
 
 
 ## Setting up
@@ -29,8 +37,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 1. **JDK `1.8.0_60`**  or later<br>
 
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
+    > This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
@@ -78,7 +85,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
-&nbsp;
+<br>
 
 
 ## Design
@@ -93,7 +100,7 @@ Given below is a quick overview of each component.
 
 Work in progress.
 
-&nbsp;
+<br>
 
 
 ## Implementation
@@ -122,7 +129,7 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
-&nbsp;
+<br>
 
 
 ## Testing
@@ -172,7 +179,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-&nbsp;
+<br>
 
 
 ## Dev Ops
@@ -226,7 +233,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-&nbsp;
+<br>
 
 
 ## Appendix A : User Stories
@@ -261,7 +268,7 @@ Priority | As a ... | I want to ... |So that I can ...
 **`*`** | user | see my “Trash Bin” that consists of deleted tasks | view and/or recover them
 **`*`** | user | see my tasks on Google Calendar | integrate tasks with Google Calendar
 
-&nbsp;
+<br>
 
 
 ## Appendix B : Use Cases
@@ -451,7 +458,7 @@ Use case ends.
 > 2b1. Doist shows an appropriate message
 > Use case ends
 
-&nbsp;
+<br>
 
 
 ## Appendix C : Non Functional Requirements
@@ -477,7 +484,7 @@ Use case ends.
 See the rest of the NFRs at:
 http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-project-constraints
 
-&nbsp;
+<br>
 
 
 ## Appendix D : Glossary
@@ -520,7 +527,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
 **Mainstream OS**
     Windows, Linux, Unix, OS-X
 
-&nbsp;
+<br>
 
 
 ## Appendix E : Product Survey
@@ -615,3 +622,10 @@ Cons:
 
 * There is no support for priority
 * There is no support for sorting (by priority, by deadline)
+
+
+<style>
+h2 {
+    color: #0074D9;
+}
+</style>
