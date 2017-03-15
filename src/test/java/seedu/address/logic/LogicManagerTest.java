@@ -42,6 +42,7 @@ import seedu.address.model.ToDoApp;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -205,7 +206,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.task1();
         ToDoApp expectedAB = new ToDoApp();
         expectedAB.addTask(toBeAdded);
 
@@ -221,7 +222,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.task1();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal address book
@@ -408,13 +409,14 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Deadline deadline = new Deadline("17 March");
+        Task task1() throws Exception {
+            Name name = new Name("task1");
+            Start start = new Start("17 March 1pm");
+            Deadline deadline = new Deadline("17 March 5pm");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, deadline, tags);
+            return new Task(name, start, deadline, tags);
         }
 
         /**
@@ -427,6 +429,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
+                    new Start(""),
                     new Deadline(""),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -521,6 +524,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new Start(""),
                     new Deadline(""),
                     new UniqueTagList(new Tag("tag"))
             );
