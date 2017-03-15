@@ -10,26 +10,30 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, hoon, ida;
+    //public TestTask alice, benson, carl, fiona, hoon;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withContent("Alice Pauline")
+            alice = new TaskBuilder().withTitle("Alice Pauline")
+                    .withContent("Alice Pauline content")
                     .withTaskDateTime("1/2/2013 9:00")
                     .withTags("friends").build();
-            benson = new TaskBuilder().withContent("Benson Meier")
+            benson = new TaskBuilder().withTitle("Benson Meier")
+                    .withContent("Benson Meier content")
                     .withTaskDateTime("2/3/2014 10:00")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withContent("Carl Kurz").build();
-            daniel = new TaskBuilder().withContent("Daniel Meier").build();
-            elle = new TaskBuilder().withContent("Elle Meyer")
+            carl = new TaskBuilder().withTitle("Carl Kurz").withContent("Carl Kurz content").build();
+            daniel = new TaskBuilder().withTitle("Daniel Meier").build();
+            elle = new TaskBuilder().withTitle("Elle Meyer")
                     .withTaskDateTime("3/4/2015 1:00").build();
-            fiona = new TaskBuilder().withContent("Fiona Kunz").build();
-            george = new TaskBuilder().withContent("George Best").build();
+            fiona = new TaskBuilder().withTitle("Fiona Kunz")
+                    .withContent("Fiona Kunz content").build();
+            //george = new TaskBuilder().withTitle("George Best").build();
 
             // Manually added
-            hoon = new TaskBuilder().withContent("Hoon Meier").build();
-            ida = new TaskBuilder().withContent("Ida Mueller").build();
+            hoon = new TaskBuilder().withTitle("Hoon Meier").build();
+            ida = new TaskBuilder().withTitle("Ida Mueller").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -47,7 +51,8 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+//        return new TestTask[]{alice, benson, carl, fiona};
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona};
     }
 
     public AddressBook getTypicalAddressBook() {

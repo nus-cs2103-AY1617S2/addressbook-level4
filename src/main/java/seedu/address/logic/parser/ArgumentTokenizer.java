@@ -177,6 +177,11 @@ public class ArgumentTokenizer {
         }
 
         @Override
+        public String toString() {
+            return this.prefix;
+        }
+
+        @Override
         public int hashCode() {
             return this.prefix == null ? 0 : this.prefix.hashCode();
         }

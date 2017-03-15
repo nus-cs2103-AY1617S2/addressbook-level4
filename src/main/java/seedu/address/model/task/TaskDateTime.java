@@ -92,8 +92,8 @@ public class TaskDateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Content // instanceof handles nulls
-                        && this.value.equals(((Content) other).fullContent)); // state
+                || (other instanceof TaskDateTime // instanceof handles nulls
+                        && this.value.equals(((TaskDateTime) other).value)); // state
                                                                               // check
     }
 

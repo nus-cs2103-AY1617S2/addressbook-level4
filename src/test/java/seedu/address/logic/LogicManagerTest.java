@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +48,7 @@ import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.Title;
 import seedu.address.storage.StorageManager;
 
 
@@ -196,7 +200,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Content.MESSAGE_CONTENT_CONSTRAINTS);
+                Title.MESSAGE_TITLE_CONSTRAINTS);
         assertCommandFailure("add Valid Name by 11/11/2011 11:11 #invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -349,14 +353,14 @@ public class LogicManagerTest {
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithTitle("KE Y");
+        Task p2 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find KEY",
@@ -368,10 +372,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task p1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithTitle("key key");
+        Task p4 = helper.generateTaskWithTitle("KEy sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
@@ -387,10 +391,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task pTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithTitle("key key");
+        Task p1 = helper.generateTaskWithTitle("sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
         AddressBook expectedAB = helper.generateAddressBook(fourPersons);
@@ -410,12 +414,13 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Content content = new Content("Project Meeting");
+            Title title = new Title("Project Meeting");
+            Content content = new Content("Meeting project CS2103 at UTown");
             TaskDateTime dateTime = new TaskDateTime("8/3/2017 15:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(content, dateTime, tags);
+            return new Task(title, content, dateTime, tags);
         }
 
         /**
@@ -427,7 +432,8 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Content("Task " + seed),
+                    new Title("Task " + seed),
+                    new Content(""),
                     new TaskDateTime("8/3/2017 15:00"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -439,13 +445,15 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getContent().toString());
+            cmd.append(p.getTitle().toString() + " ");
 
-            cmd.append(" by ").append(p.getDateTime().value);
+            cmd.append(PREFIX_CONTENT.toString()).append(p.getContent().toString() + " ");
+
+            cmd.append(PREFIX_DATE_TIME.toString()).append(p.getDateTime().value + " ");
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append(" #").append(t.tagName);
+                cmd.append(PREFIX_TAG.toString() + " ").append(t.tagName);
             }
 
             return cmd.toString();
@@ -521,9 +529,10 @@ public class LogicManagerTest {
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+        Task generateTaskWithTitle(String title) throws Exception {
             return new Task(
-                    new Content(name),
+                    new Title(title),
+                    new Content("content hehe"),
                     new TaskDateTime("22/2/2017 11:00"),
                     new UniqueTagList(new Tag("tag"))
             );

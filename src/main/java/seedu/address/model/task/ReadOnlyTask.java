@@ -8,6 +8,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
+    Title getTitle();
     Content getContent();
     TaskDateTime getDateTime();
 
@@ -23,7 +24,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getContent().equals(this.getContent())); // state checks here onwards
+                && other.getTitle().equals(this.getTitle())); // state checks here onwards
     }
 
     /**
@@ -31,8 +32,9 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getContent())
-               .append(" due by " + getDateTime().value)
+        builder.append(getTitle())
+               .append(" content: " + getContent())
+               .append(" due by: " + getDateTime().value)
                .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

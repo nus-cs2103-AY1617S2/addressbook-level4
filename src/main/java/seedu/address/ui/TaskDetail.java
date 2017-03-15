@@ -46,7 +46,7 @@ public class TaskDetail extends UiPart<Region> {
         String taggings = "";
         taskName.setText(task.getContent().toString());
         startTime.setText(task.getDateTime().toString());
-        for(Tag tag : task.getTags()){
+        for (Tag tag: task.getTags()) {
             taggings += tag.toString();
         }
         tags.setText(taggings);

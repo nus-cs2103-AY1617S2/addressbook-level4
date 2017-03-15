@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
     <tasks>
-        <content>CS2101</content>
+        <title>CS2101</title>
+	<content>Communcation</content>
         <dateTime>1/1/1 1:1</dateTime>
     </tasks>
     <tasks>
-        <content>CS2105</content>
+        <title>CS2105</title>
+	<content>OS</content>
         <dateTime>22/07/2017 13:00</dateTime>
     </tasks>
     <tasks>
-        <content>CS2106</content>
+        <title>CS2106</title>
+	<content>Data base</content>
         <dateTime>03/05/2017 11:00</dateTime>
     </tasks>
     <tasks>
-        <content>CS2107</content>
+        <title>CS2107</title>
+	<content>Security</content>
         <dateTime>2/2/2017 15:00</dateTime>
     </tasks>
     <tasks>
-        <content>CS2100</content>
+        <title>CS2100</title>
+	<content>Computer Organization</content>
         <dateTime>5/5/2017 9:30</dateTime>
     </tasks>
 </addressbook>
