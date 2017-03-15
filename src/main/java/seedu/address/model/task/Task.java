@@ -115,7 +115,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setPriority(replacement.getPriority().orElse(null));
         this.setStatus(replacement.getStatus());
-        this.setNote(replacement.getNote());
+        this.setNote(replacement.getNote().orElse(null));
         this.setDeadline(replacement.getDeadline());
         this.setTags(replacement.getTags());
     }
