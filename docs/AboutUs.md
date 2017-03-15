@@ -4,49 +4,36 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Haya Alsharef](https://github.com/hayaz3)
+<img src="images/hayaz3.png" width="150"><br>
+Role: Developer<br>
+Responsibilities: Team Lead, Scheduling and Tracking<br>
+Component: Storage
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Melvin Soh](https://github.com/InfinityFrost) <br>
+<img src="images/infinityfrost.png" width="150"><br>
+Role: Developer<br>
+Responsibilities: Documentation and Testing<br>
+Component: Logic
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Tan Wei](https://github.com/tanwei0319)
+<img src="images/tanwei0319.jpg" width="150"><br>
+Role: Developer<br>
+Responsibilities: Code Quality, Deliverables and Deadlines<br>
+Component: User Interface
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
+#### [Xu Ruolan](https://github.com/fiomolv)
+<img src="images/fiomolv.jpg" width="150"><br>
+Role: Developer<br>
+Responsibilities: Code Quality and Integration<br>
+Component: Model
 
 -----
 
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
 
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
