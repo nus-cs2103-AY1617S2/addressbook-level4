@@ -34,7 +34,7 @@ public class TodoCard extends UiPart<Region> {
         }
 
         if (todo.getEndTime() != null) {
-        	end.setText(todo.getEndTime().toString());
+            end.setText(todo.getEndTime().toString());
         }
 
         initTags(todo);

@@ -143,7 +143,7 @@ public class LogicManagerTest {
         } catch (CommandException e) {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             System.out.print(e);
         }
 
