@@ -6,7 +6,7 @@ import typetask.commons.exceptions.IllegalValueException;
  * Represents a task's date in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Date {
+public class DueDate {
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task's date should be in this format DD/MM/YYYY";
     public static final String DATE_VALIDATION_REGEX = "(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)";
 
@@ -17,7 +17,7 @@ public class Date {
      *
      * @throws IllegalValueException if given date string is invalid.
      */
-    public Date(String date) throws IllegalValueException {
+    public DueDate(String date) throws IllegalValueException {
         assert date != null;
         String trimmedDate = date.trim();
         if (!isValidDate(trimmedDate)) {
@@ -46,8 +46,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && this.value.equals(((Date) other).value)); // state check
+                || (other instanceof DueDate // instanceof handles nulls
+                && this.value.equals(((DueDate) other).value)); // state check
     }
 
     @Override

@@ -11,7 +11,7 @@ import typetask.commons.util.CollectionUtil;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Date date;
+    private DueDate date;
     private Time time;
 
     /**
@@ -22,7 +22,7 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
     }
-    public Task(Name name, Date date, Time time) {
+    public Task(Name name, DueDate date, Time time) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.date = date;
@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DueDate date) {
         this.date = date;
     }
 
@@ -52,7 +52,7 @@ public class Task implements ReadOnlyTask {
         return name;
     }
     @Override
-    public Date getDate() {
+    public DueDate getDate() {
         return date;
     }
     @Override

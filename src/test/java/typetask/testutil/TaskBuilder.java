@@ -1,7 +1,7 @@
 package typetask.testutil;
 
 import typetask.commons.exceptions.IllegalValueException;
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.Time;
 
@@ -35,7 +35,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withDate(String date) throws IllegalValueException {
-        this.task.setDate(new Date(date));
+        this.task.setDate(new DueDate(date));
         return this;
     }
 

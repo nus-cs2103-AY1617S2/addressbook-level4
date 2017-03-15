@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.commons.util.StringUtil;
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.Time;
 
@@ -73,17 +73,17 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Date>} if {@code phone} is present.
      */
-    public static Optional<Date> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<DueDate> parsePhone(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
-        return phone.isPresent() ? Optional.of(new Date(phone.get())) : Optional.empty();
+        return phone.isPresent() ? Optional.of(new DueDate(phone.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+    public static Optional<DueDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        return date.isPresent() ? Optional.of(new DueDate(date.get())) : Optional.empty();
     }
 
     /**

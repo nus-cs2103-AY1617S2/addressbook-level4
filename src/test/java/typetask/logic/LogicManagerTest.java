@@ -39,7 +39,7 @@ import typetask.model.Model;
 import typetask.model.ModelManager;
 import typetask.model.ReadOnlyTaskManager;
 import typetask.model.TaskManager;
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -398,7 +398,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Date date = new Date("");
+            DueDate date = new DueDate("");
             Time time = new Time("");
             return new Task(name, date, time);
         }

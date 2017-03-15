@@ -1,6 +1,6 @@
 package typetask.testutil;
 
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Time;
@@ -11,7 +11,7 @@ import typetask.model.task.Time;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Date date;
+    private DueDate date;
     private Time time;
 
     public TestTask() {
@@ -32,7 +32,7 @@ public class TestTask implements ReadOnlyTask {
         this.time = time;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DueDate date) {
         this.date = date;
     }
 
@@ -42,7 +42,7 @@ public class TestTask implements ReadOnlyTask {
         return name;
     }
     @Override
-    public Date getDate() {
+    public DueDate getDate() {
         return date;
     }
     @Override
