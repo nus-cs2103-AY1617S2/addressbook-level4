@@ -86,7 +86,10 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getPriority)
                 .orElse(null);
         Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
-        Note updatedNote = editTaskDescriptor.getNote().orElseGet(taskToEdit::getNote);
+        Note updatedNote = editTaskDescriptor.getNote()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getNote)
+                .orElse(null);
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
