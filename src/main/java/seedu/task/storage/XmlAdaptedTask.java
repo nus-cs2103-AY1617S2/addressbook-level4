@@ -45,11 +45,11 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
-        
+
         Duration duration = source.getDuration();
         start = duration != null ? duration.getStartString() : null;
         end = duration != null ? duration.getEndString() : null;
-        
+
         dueDate = source.getDueDate() != null ?
                 source.getDueDate().toString() :
                 null;
