@@ -78,7 +78,7 @@ public class TestUtil {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
                 new Task(new Title("CS2103 Tutorial"), new Venue("COM1-B103"), new StartTime("Tuesday 10:00"),
-                        new EndTime("Tuesday 11:00"), new UrgencyLevel("6"), new Description("Deadline of V0.2"), new UniqueTagList()),
+                        new EndTime("Tuesday 11:00"), new UrgencyLevel("5"), new Description("Deadline of V0.2"), new UniqueTagList()),
                 new Task(new Title("DBS Internship interview"), new Venue("Raffles Place"), new StartTime("March 31, 9:30"),
                         new EndTime("Wednesday 12:00"), new UrgencyLevel("5"), new Description("I love interview"), new UniqueTagList()),
                 new Task(new Title("Hang out with Joe"), new Venue("313 Somerset"), new StartTime("Saturday 11:00"),
