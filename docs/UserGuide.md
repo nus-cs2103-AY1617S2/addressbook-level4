@@ -56,17 +56,17 @@ Are you ready to be a do-ist?
 
 Type the following commands and press <kbd>Enter</kbd> after each command.
 1. **`add Buy the milk \from 3pm \to 5.00`**.
-   > Adds an event for today with a description of "Buy the milk" from 3pm to 5am the next day.
+Adds an event for today with a description of "Buy the milk" from 3pm to 5am the next day.
 2. **`add Buy the vegetables \by 6pm 25th Oct`**.
-   > Adds a task with a description of "Buy the vegetables" which has a 6pm deadline.
+Adds a task with a description of "Buy the vegetables" which has a 6pm deadline.
 3. **`finish 1`**
-   > Marks the first task in the list as finished.
+Marks the first task in the list as finished.
 4. **`list pending`**
-   > Lists all the pending tasks which are not finished yet.
+Lists all the pending tasks which are not finished yet.
 5. **`delete 1`**
-   > Deletes the 1st task shown in the current list.
+Deletes the 1st task shown in the current list.
 6. **`exit`**
-   > Exits the application.
+Exits the application.
 
 Try out different date and time formats for the add command!
 
