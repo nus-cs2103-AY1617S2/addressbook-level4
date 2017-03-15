@@ -9,7 +9,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -57,7 +57,7 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyFloatingTask person) {
+    public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getDescription().fullDescription)
                 && getTags().equals(getTags(person.getTags()));
     }

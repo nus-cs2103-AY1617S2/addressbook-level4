@@ -1,14 +1,16 @@
 package seedu.watodo.model.task;
 
 import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.Task.Status;
 
 /**
- * A read-only immutable interface for a Task in the addressbook.
+ * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyFloatingTask {
+public interface ReadOnlyTask {
 
     Description getDescription();
+    Status getStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -19,7 +21,7 @@ public interface ReadOnlyFloatingTask {
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
-    default boolean isSameStateAs(ReadOnlyFloatingTask other) {
+    default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
@@ -27,7 +29,7 @@ public interface ReadOnlyFloatingTask {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all internal details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();

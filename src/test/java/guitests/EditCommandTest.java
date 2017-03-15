@@ -9,10 +9,8 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.logic.commands.EditCommand;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.Address;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Email;
-import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.DateTime;
 import seedu.watodo.testutil.TaskBuilder;
 import seedu.watodo.testutil.TestTask;
 
@@ -29,7 +27,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+                .withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -94,13 +92,8 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);

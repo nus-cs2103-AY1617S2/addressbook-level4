@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.watodo.commons.util.FxViewUtil;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.
@@ -29,7 +29,7 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadPersonPage(ReadOnlyFloatingTask task) {
+    public void loadPersonPage(ReadOnlyTask task) {
         loadPage("https://www.google.com.sg/#safe=off&q=" + task.getDescription().fullDescription.replaceAll(" ", "+"));
     }
 

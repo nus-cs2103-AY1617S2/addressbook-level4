@@ -10,102 +10,102 @@ import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
-import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task manager data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskList addressBook;
-    private final FilteredList<ReadOnlyFloatingTask> filteredPersons;
+    private final TaskManager taskManager;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManger taskManager, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.addressBook = new TaskList(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getTaskList());
+        this.taskManager = new TaskManager(taskManager);
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
-        this(new TaskList(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskList newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyTaskManger newData) {
+        taskManager.resetData(newData);
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public ReadOnlyTaskList getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskManger getTaskManager() {
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new TaskListChangedEvent(addressBook));
+    private void indicateTaskManagerChanged() {
+        raise(new TaskListChangedEvent(taskManager));
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyFloatingTask target) throws TaskNotFoundException {
-        addressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.removeTask(target);
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addTask(FloatingTask person) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public void updateTask(int filteredPersonListIndex, ReadOnlyFloatingTask editedPerson)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
-        assert editedPerson != null;
+        assert editedTask != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updateTask(addressBookIndex, editedPerson);
-        indicateAddressBookChanged();
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyFloatingTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTasks.setPredicate(null);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyFloatingTask person);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -118,8 +118,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyFloatingTask person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -129,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyFloatingTask person);
+        boolean run(ReadOnlyTask task);
         String toString();
     }
 
@@ -141,9 +141,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyFloatingTask person) {
+        public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getDescription().fullDescription, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().fullDescription, keyword))
                     .findAny()
                     .isPresent();
         }

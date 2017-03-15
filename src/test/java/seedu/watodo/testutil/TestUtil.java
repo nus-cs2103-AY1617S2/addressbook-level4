@@ -29,15 +29,13 @@ import seedu.watodo.TestApp;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.FileUtil;
 import seedu.watodo.commons.util.XmlUtil;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Address;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Email;
 import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.Phone;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.storage.XmlSerializableTaskList;
 
 /**
@@ -144,7 +142,7 @@ public class TestUtil {
     }
 
     public static XmlSerializableTaskList generateSampleStorageTaskList() {
-        return new XmlSerializableTaskList(new TaskList());
+        return new XmlSerializableTaskList(new TaskManager());
     }
 
     /**
@@ -332,7 +330,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyFloatingTask person) {
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

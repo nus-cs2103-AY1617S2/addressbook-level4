@@ -22,8 +22,8 @@ import seedu.watodo.logic.Logic;
 import seedu.watodo.logic.LogicManager;
 import seedu.watodo.model.Model;
 import seedu.watodo.model.ModelManager;
-import seedu.watodo.model.ReadOnlyTaskList;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
 import seedu.watodo.model.util.SampleDataUtil;
 import seedu.watodo.storage.Storage;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskList> addressBookOptional;
-        ReadOnlyTaskList initialData;
+        Optional<ReadOnlyTaskManger> addressBookOptional;
+        ReadOnlyTaskManger initialData;
         try {
             addressBookOptional = storage.readTaskList();
             if (!addressBookOptional.isPresent()) {
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleWatodo);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new TaskList();
+            initialData = new TaskManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new TaskList();
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);

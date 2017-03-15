@@ -11,11 +11,11 @@ import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
-import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
 import seedu.watodo.model.UserPrefs;
 
 /**
- * Manages storage of TaskList data in local storage.
+ * Manages storage of TaskManager data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -47,7 +47,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ TaskList methods ==============================
+    // ================ TaskManager methods ==============================
 
     @Override
     public String getTaskListFilePath() {
@@ -55,23 +55,23 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManger> readTaskList() throws DataConversionException, IOException {
         return readTaskList(TaskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManger> readTaskList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return TaskListStorage.readTaskList(filePath);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList TaskList) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManger TaskList) throws IOException {
         saveTaskList(TaskList, TaskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList TaskList, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManger TaskList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         TaskListStorage.saveTaskList(TaskList, filePath);
     }

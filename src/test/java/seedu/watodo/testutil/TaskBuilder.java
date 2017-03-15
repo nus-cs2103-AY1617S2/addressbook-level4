@@ -3,10 +3,8 @@ package seedu.watodo.testutil;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Address;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Email;
-import seedu.watodo.model.task.Phone;
+import seedu.watodo.model.task.DateTime;
 
 /**
  *
@@ -39,20 +37,12 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
-        return this;
-    }
 
     public TaskBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+        this.person.setPhone(new DateTime(phone));
         return this;
     }
 
-    public TaskBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
-        return this;
-    }
 
     public TestTask build() {
         return this.person;
