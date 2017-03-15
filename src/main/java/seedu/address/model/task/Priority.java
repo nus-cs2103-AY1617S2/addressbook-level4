@@ -93,28 +93,6 @@ public class Priority {
         }
     }
 
-    /**
-     * parse a priority into user input string
-     *
-     * @param priority
-     * @return null if invalid
-     */
-    public static String toUserInputString(Type priority) {
-        assert priority != null;
-        switch (priority) {
-        case NONE:
-            return PRIORITY_NONE;
-        case HIGH:
-            return PRIORITY_HIGH;
-        case MEDIUM:
-            return PRIORITY_MEDIUM;
-        case LOW:
-            return PRIORITY_LOW;
-        default:
-            throw new AssertionError();
-        }
-    }
-
     public static Priority.Type parseXmlString(String priority) throws IllegalValueException {
         assert priority != null;
         try {
