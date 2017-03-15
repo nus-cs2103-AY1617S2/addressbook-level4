@@ -76,7 +76,7 @@ public class TestUtil {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
                 new Task(new Name("Ali Muster"), new Time("09/08/1990"), new UniqueTagList()),
-               
+
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
