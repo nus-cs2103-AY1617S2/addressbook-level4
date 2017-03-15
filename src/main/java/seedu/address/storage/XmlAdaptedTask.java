@@ -55,7 +55,7 @@ public class XmlAdaptedTask {
                 .orElse(Priority.Type.NONE.name());
         status = source.getStatus().value;
         note = source.getNote().map(Note::toString).orElse("");
-        deadline = source.getDeadline().toString();
+        deadline = source.getDeadline().map(Deadline::toString).orElse("");
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
