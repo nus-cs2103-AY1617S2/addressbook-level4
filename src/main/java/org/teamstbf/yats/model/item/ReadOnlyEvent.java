@@ -53,6 +53,7 @@ public interface ReadOnlyEvent {
 		.append(getStartTime())
 		.append(MESSAGE_HYPEN)
 		.append(getEndTime())
+		.append(MESSAGE_NEWLINE)
 		.append("Tags: ");
 		getTags().forEach(builder::append);
 		return builder.toString();
