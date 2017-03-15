@@ -35,6 +35,23 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+    
+    
+    /**
+     * Stringifies title and tags
+     * @return String with title and tags
+     */
+    default String toStringTitleAndTagList() {
+    	String titleAndTagString = getTitle().title + " ";
+    	final StringBuilder builder = new StringBuilder();
+    	builder.append(getTitle()).append(" ");
+    	getTags().iterator().forEachRemaining(builder::append);
+    	
+    	titleAndTagString = builder.toString();
+    	titleAndTagString = titleAndTagString.replace('[', ' ').replace(']', ' ');
+    	
+    	return titleAndTagString;
+    }
 
 }
 
