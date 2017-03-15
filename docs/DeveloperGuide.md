@@ -25,28 +25,28 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 1. **JDK `1.8.0_60`**  or later<br>
 
     > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
+    TaskBoss app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
+3. **e(fx)clipse** plugin for Eclipse (Follow instructions from step two onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 1.2. Importing TaskBoss into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+1. Fork this repo, and clone the fork to your computer
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+3. Click `File` > `Import`
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+5. Click `Browse`, then locate the project's directory
+6. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
+  > * Depending on your connection speed and server load, it can take up to 30 minutes for the set up to finish
+      (This is because Gradle downloads library files from servers during the project set up process).
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 1.3. Configuring Checkstyle
@@ -54,32 +54,31 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. taskboss
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
+5. Click `OK` once, go to the `Main` tab, and use the newly imported check configuration
+6. Tick `files from packages`, click `Change...`, and select the `resources` package
+7. Click `OK` twice, and rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> Note: click on the `files from packages` text after ticking in order to enable the `Change...` button.
 
 ### 1.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-* Solution: Refresh the project in Eclipse:<br>
-  Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
+* Reason: Eclipse fails to recognize new files that appeared due to the Git pull
+* Solution: Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`
 
 **Problem: Eclipse reports some required libraries missing**
 
-* Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
+* Reason: Required libraries may not have been downloaded during the project import
+* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries)
 
 ## Target Users
 
-Our target users (eg. `Jim`) are people who:
-* usually work alone on their personal or office computer
-* do not share their computer with others
-* prefer a command-line approach over a mouse-clicking approach
-* would like to have an organized set up of tasks to categorize, sort, and prioritise them for ease of task management
+Our target users (eg. *Jim*) are people who:
+* Usually work alone on their personal or office computer
+* Do not share their computer with others
+* Prefer a command-line approach over a mouse-clicking approach
+* Would like to have an organized set up of tasks to categorize, sort, and prioritize them for ease of task management
 
 
 ## Design
@@ -89,38 +88,36 @@ Our target users (eg. `Jim`) are people who:
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of TaskBoss.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+**`Main`** has only one class called [`MainApp`](../src/main/java/seedu/taskboss/MainApp.java). It is responsible for:
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/taskboss/MainApp.java). It is responsible for,
+* Initializing the components in the correct sequence, and connecting them up with each other at app launch
+* Shutting down the components and invoking cleanup method where necessary at shut down
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+[**`Commons`**](#common-classes) has a collection of classes used by multiple other components.
+Two of those classes play important roles at the architecture level:
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-Two of those classes play important roles at the architecture level.
-
-* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
+* [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* [`LogsCenter`](../src/main/java/seedu/taskboss/commons/core/LogsCenter.java) : This class is used by many classes to write log messages to TaskBoss' log file
 
-The rest of the App consists of four components.
+The rest of the TaskBoss consists of four components:
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component) : The UI of TaskBoss
+* [**`Logic`**](#logic-component) : The command executor
+* [**`Model`**](#model-component) : The data holder of TaskBoss in-memory
+* [**`Storage`**](#storage-component) : The data reader and writer to and from the hard disk
 
-Each of the four components
+Each of the four components:
 
-* Defines its _API_ in an `interface` with the same name as the Component.
-* Exposes its functionality using a `{Component Name}Manager` class.
+* Defines its _API_ in an `interface` with the same name as the component
+* Exposes its functionality using a `{Component Name}Manager` class
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
+> For example, the [**`Logic`**](#logic-component) (see the class diagram given below) defines its API in the [`Logic.java`](../src/main/java/seedu/taskboss/logic/Logic.java)
+interface and exposes its functionality using the [`LogicManager.java`](../src/main/java/seedu/taskboss/logic/LogicManager.java) class.<br>
+
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.1.2 : Class Diagram of the Logic Component_
 
@@ -135,79 +132,84 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 >Note how the `Model` simply raises a `TaskBossChangedEvent` when the TaskBoss data is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
+The diagram below shows how the [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+
 <img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
-> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
+> Note how the event is propagated through the [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) to the `Storage` and `UI` without `Model` having
+  to be coupled to either of them. This is an example of how this event-driven approach helps us reduce direct
   coupling between components.
 
 The sections below give more details of each component.
 
 ### 3.2. UI component
 
-Author: Alice Bee
+Author: Tan Wei
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/taskboss/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CategoryPanel`,
+`AllTasksPanel`, `StatusBarFooter`, `HelpWindow` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+The [**`UI`**](#ui-component) component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/taskboss/ui/MainWindow.java) is specified in
+ 
+> For example, the layout of the [`MainWindow`](../src/main/java/seedu/taskboss/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
-* Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+* Executes user commands using the [**`Logic`**](#logic-component) component
+* Binds itself to some data in the [**`Model`**](#model-component) so that the UI can auto-update when data in the [**`Model`**](#model-component) change
+* Responds to events raised from various parts of the TaskBoss and updates the UI accordingly
 
 ### 3.3. Logic component
 
-Author: Bernard Choo
+Author: Melvin Soh
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/taskboss/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+The `Logic` component,
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+* Uses the `Parser` class to parse the user command.
+* Executes a `Command` object via the `LogicManager`.
+* Affects the [**`Model`**](#model-component) (e.g. *adding a person*) and/or raises events.
+* Encapsulates as a `CommandResult` object which is passed back to the [**`UI`**](#ui-component).
+
+Given below is the Sequence Diagram for interactions within the [**`Logic`**](#logic-component) component for the *`execute("delete 1")`*
  API call.<br>
+ 
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 3.4. Model component
 
-Author: Cynthia Dharman
+Author: Xu Ruolan
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/taskboss/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the TaskBoss data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* Stores a `UserPref` object that represents the user's preferences
+* Stores the TaskBoss data
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+  so that the UI automatically updates when the data in the list change
+* Does not depend on any of the other three components
 
 ### 3.5. Storage component
 
-Author: Darius Foong
+Author: Haya Alsharef
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -216,8 +218,8 @@ _Figure 2.5.1 : Structure of the Storage Component_
 
 The `Storage` component,
 
-* can save `UserPref` objects in json format and read it back.
-* can save the TaskBoss data in xml format and read it back.
+* Saves `UserPref` objects in json format and reads it back.
+* Saves the TaskBoss data in xml format and reads it back.
 
 ### 3.6. Common classes
 
@@ -227,28 +229,26 @@ Classes used by multiple components are in the `seedu.taskboss.commons` package.
 
 ### 4.1. Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
-and logging destinations.
+We are using `java.util.logging` package for logging. The [`LogsCenter`](../src/main/java/seedu/taskboss/commons/core/LogsCenter.java) class is used to manage the logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
   (See [Configuration](#configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+* The log messages are outputted through `Console` and to a `.log` file
 
 **Logging Levels**
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
-  e.g. print the actual list instead of just its size
+* `WARNING` : Can continue running, but with caution
+* `INFO` : Information showing the noteworthy actions by TaskBoss
+* `FINE` : Details that are not usually noteworthy but may be useful in debugging
+  (e.g. *print the actual list instead of just its size*)
 
 ### 4.2. Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
-
+Certain properties of the application can be controlled (*e.g App name, logging level*) through the configuration file
+(default: `config.json`).
 
 ## Testing
 
@@ -259,51 +259,51 @@ Tests can be found in the `./src/test/java` folder.
 * To run all tests, right-click on the `src/test/java` folder and choose
   `Run as` > `JUnit Test`
 * To run a subset of tests, you can right-click on a test package, test class, or a test and choose
-  to run as a JUnit test.
+  to run as a JUnit test
 
 **Using Gradle**:
 
-* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
+* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle
 
 We have two types of tests:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+* **GUI Tests** - These are _System Tests_ that test TaskBoss by simulating user actions on the GUI.
    These are in the `guitests` package.
 
-2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
-   1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.taskboss.commons.UrlUtilTest`
-   2. _Integration tests_ that are checking the integration of multiple code units
+* **Non-GUI Tests** - These are tests that do not involve the GUI. They include:
+   1. _Unit tests_ that target the lowest level methods/classes. <br>
+      e.g. *`seedu.taskboss.commons.UrlUtilTest`*
+   2. _Integration tests_ that check the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.taskboss.storage.StorageManagerTest`
-   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
-      how the are connected together.<br>
-      e.g. `seedu.taskboss.logic.LogicManagerTest`
+      e.g. *`seedu.taskboss.storage.StorageManagerTest`*
+   3. Hybrids of unit and integration tests that check multiple code units as well as
+      how they are connected together.<br>
+      e.g. *`seedu.taskboss.logic.LogicManagerTest`*
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  our GUI tests can be run in the _headless_ mode.
  In the headless mode, GUI tests do not show up on the screen.
- That means the developer can do other things on the Computer while the tests are running.<br>
- See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
+ That means the developer can do other things on the computer while the tests are running.<br>
+ See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in the _headless_ mode.
 
 ### 5.1. Troubleshooting tests
 
- **Problem: Tests fail because NullPointException when AssertionError is expected**
+ **Problem: Tests fail because of NullPointerException when AssertionError is expected**
 
- * Reason: Assertions are not enabled for JUnit tests.
+ * Reason: Assertions are not enabled for JUnit tests
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
  * Solution: Enable assertions in JUnit tests as described
-   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
-   Delete run configurations created when you ran tests earlier.
+   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option) <br>
+   Delete run configurations created if you ran tests earlier
 
 ## Dev Ops
 
-### 6.1. Build Automation
+### 6.1. Building Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 6.2. Continuous Integration
+### 6.2. Performing Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
@@ -317,36 +317,37 @@ project site.
 
 Here are the steps to create a new release.
 
- 1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
+ 1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file)
  2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
-    and upload the JAR file you created.
+ 3. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
+    and upload the JAR file you created
 
 ### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
 
-Here are the steps to convert the project documentation files to PDF format.
+Here are the steps to convert the project documentation files to PDF format:
 
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
-    documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
+ 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up)
+ 2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
+    documentation file <br>
+    (e.g. *For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`*)
+ 3. Click on the `Print` option in Chrome's menu
+ 4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format <br>
+    For best results, use the settings indicated in the screenshot below <br>
+    
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
+    _Figure 5.4.1 : Saving Documentation as PDF Files in Chrome_
 
 ### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, TaskBoss depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these dependencies
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
-is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+is better than these alternatives that: <br>
+* Include those libraries in the repo (this bloats the repo size)<br>
+* Require developers to download those libraries manually (this creates extra work for developers)<br>
 
 
 ## Appendix A : User Stories
@@ -356,38 +357,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the TaskBoss
+`* * *` | new user | see a list of available commands | refer to that list when I forget how to use TaskBoss
 `* * *` | user | add tasks | record tasks that I need to get done |
 `* * *` | user | delete tasks | get rid of tasks that I no longer need
 `* * *` | user | edit tasks | update any outdated information
-`* * *` | user | see a list of all the tasks | view all my pending tasks in a single view
-`* * *` | user | mark my tasks as done | keep track of the task status
+`* * *` | user | see a list of all the tasks | view all my pending tasks
+`* * *` | user | mark my tasks as done | keep track of my tasks' status
 `* * *` | user | set deadlines for tasks that have due dates | track the urgency of any given task
-`* * *` | user | sort the tasks based on their deadlines | know the most urgent tasks to address
+`* * *` | user | sort the tasks based on their deadlines | know the most urgent task to address
 `* * *` | user | search for any task | find a task if I remember some keywords from the description
+`* * *` | user | type shorter commands | execute commands faster
 `* *` | user | add a description to my tasks | keep note of the details related to any given task
-`* *` | user | undo a command | not worry about any accidental actions I do
-`* *` | user | export all the tasks into a specified folder to save | get access of my tasks from multiple computers
+`* *` | user | undo a command | undo any accidental actions
+`* *` | user | export all the tasks into a specified file | save my tasks in my computer
 `* *` | user | set start and end times for any given task | cater for any event that I need to attend
 `* *` | user | set priority levels for each of my tasks | give my attention to tasks without deadlines that are urgent
-`* *` | user | see my tasks sorted based on priority | check what I need to do urgently
+`* *` | user | sort my tasks based on priority | check what I need to do urgently
 `* *` | user | categorize my tasks | keep my tasks organized
 `* *` | user | see the tasks under a specific category | better manage my pending tasks
 `* *` | user | see the tasks that I have completed | re-trace my completed tasks if need be
-`* *` | user | create categories | add tasks under specific categories
-`* *` | user | view a specific task | focus on that task
+`* *` | user | view a specific task | focus on that task alone
 `* *` | user | clear all tasks under a specific category | delete a bulk of tasks at one time
-`*` | user | set recurring tasks | not have to manually add the same task over and over again
+`*` | user | set recurring tasks | add repeating tasks in one go
 `*` | user | set reminders | be reminded of tasks if need be
-`*` | user | set locations | check location of the task (if any)
+`*` | user | set locations | check locations of the tasks (if any)
 `*` | user | add people | check people associated with the task (if any)
-`*` | user | create labels for tasks | easily group certain similar tasks together
+`*` | user | create labels for tasks | easily group similar tasks together
 `*` | user | redo a command after undoing a command | revert the state of TaskBoss if need be
-`*` | user | type shorter commands | execute commands faster
 `*` | user | integrate Google Calendar | see a monthly view of my tasks
-`*` | user | view all tasks that are between a specified date/time interval | not be distracted by other tasks meant for another time/date
-
-{More to be added}
+`*` | user | view all tasks that are between a specified date/time interval | focus on a particular set of tasks
 
 ## Appendix B : Use Cases
 
