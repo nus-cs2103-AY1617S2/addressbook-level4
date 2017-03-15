@@ -12,16 +12,16 @@ import javafx.collections.ObservableList;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyTaskList {
+public class TaskManager implements ReadOnlyTaskManger {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -38,28 +38,28 @@ public class TaskList implements ReadOnlyTaskList {
         tags = new UniqueTagList();
     }
 
-    public TaskList() {}
+    public TaskManager() {}
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
+     * Creates a TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
-    public TaskList(ReadOnlyTaskList toBeCopied) {
+    public TaskManager(ReadOnlyTaskManger toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
 //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyFloatingTask> persons)
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
-        this.tasks.setPersons(persons);
+        this.tasks.setTasks(tasks);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskList newData) {
+    public void resetData(ReadOnlyTaskManger newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -77,69 +77,69 @@ public class TaskList implements ReadOnlyTaskList {
 //// task-level operations
 
     /**
-     * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
+     * Adds a task to the task manager.
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(FloatingTask p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.add(p);
+    public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.add(task);
     }
 
     /**
      * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
-     * @see #syncMasterTagListWith(FloatingTask)
+     * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyFloatingTask editedReadOnlyPerson)
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException {
-        assert editedReadOnlyPerson != null;
+        assert editedReadOnlyTask != null;
 
-        FloatingTask editedPerson = new FloatingTask(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
+        Task editedTask = new Task(editedReadOnlyTask);
+        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        tasks.updatePerson(index, editedPerson);
+        tasks.updateTask(index, editedTask);
     }
 
     /**
-     * Ensures that every tag in this person:
+     * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(FloatingTask person) {
-        final UniqueTagList personTags = person.getTags();
-        tags.mergeFrom(personTags);
+    private void syncMasterTagListWith(Task task) {
+        final UniqueTagList taskTags = task.getTags();
+        tags.mergeFrom(taskTags);
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         tags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of task tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
+        taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        task.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
      * Ensures that every tag in these persons:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(FloatingTask)
+     *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueTaskList persons) {
-        persons.forEach(this::syncMasterTagListWith);
+    private void syncMasterTagListWith(UniqueTaskList tasks) {
+        tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyFloatingTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
@@ -162,7 +162,7 @@ public class TaskList implements ReadOnlyTaskList {
     }
 
     @Override
-    public ObservableList<ReadOnlyFloatingTask> getTaskList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
@@ -174,9 +174,9 @@ public class TaskList implements ReadOnlyTaskList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskList // instanceof handles nulls
-                && this.tasks.equals(((TaskList) other).tasks)
-                && this.tags.equalsOrderInsensitive(((TaskList) other).tags));
+                || (other instanceof TaskManager // instanceof handles nulls
+                && this.tasks.equals(((TaskManager) other).tasks)
+                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override

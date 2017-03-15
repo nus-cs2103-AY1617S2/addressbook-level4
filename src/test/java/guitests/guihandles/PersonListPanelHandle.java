@@ -14,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.watodo.TestApp;
 import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.testutil.TestUtil;
 
 /**
@@ -31,12 +31,12 @@ public class PersonListPanelHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public List<ReadOnlyFloatingTask> getSelectedTasks() {
-        ListView<ReadOnlyFloatingTask> personList = getListView();
+    public List<ReadOnlyTask> getSelectedTasks() {
+        ListView<ReadOnlyTask> personList = getListView();
         return personList.getSelectionModel().getSelectedItems();
     }
 
-    public ListView<ReadOnlyFloatingTask> getListView() {
+    public ListView<ReadOnlyTask> getListView() {
         return getNode(PERSON_LIST_VIEW_ID);
     }
 
@@ -44,7 +44,7 @@ public class PersonListPanelHandle extends GuiHandle {
      * Returns true if the list is showing the person details correctly and in correct order.
      * @param persons A list of person in the correct order.
      */
-    public boolean isListMatching(ReadOnlyFloatingTask... persons) {
+    public boolean isListMatching(ReadOnlyTask... persons) {
         return this.isListMatching(0, persons);
     }
 
@@ -53,7 +53,7 @@ public class PersonListPanelHandle extends GuiHandle {
      * @param startPosition The starting position of the sub list.
      * @param persons A list of person in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyFloatingTask... persons) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
         if (persons.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " persons");
@@ -81,8 +81,8 @@ public class PersonListPanelHandle extends GuiHandle {
     /**
      * Returns true if the {@code persons} appear as the sub list (in that order) at position {@code startPosition}.
      */
-    public boolean containsInOrder(int startPosition, ReadOnlyFloatingTask... persons) {
-        List<ReadOnlyFloatingTask> personsInList = getListView().getItems();
+    public boolean containsInOrder(int startPosition, ReadOnlyTask... persons) {
+        List<ReadOnlyTask> personsInList = getListView().getItems();
 
         // Return false if the list in panel is too short to contain the given list
         if (startPosition + persons.length > personsInList.size()) {
@@ -101,7 +101,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyFloatingTask> person = getListView().getItems().stream()
+        final Optional<ReadOnlyTask> person = getListView().getItems().stream()
                                                     .filter(p -> p.getDescription().fullDescription.equals(name))
                                                     .findAny();
         if (!person.isPresent()) {
@@ -114,7 +114,7 @@ public class PersonListPanelHandle extends GuiHandle {
     /**
      * Navigates the listview to display and select the person.
      */
-    public TaskCardHandle navigateToPerson(ReadOnlyFloatingTask person) {
+    public TaskCardHandle navigateToPerson(ReadOnlyTask person) {
         int index = getPersonIndex(person);
 
         guiRobot.interact(() -> {
@@ -130,8 +130,8 @@ public class PersonListPanelHandle extends GuiHandle {
     /**
      * Returns the position of the person given, {@code NOT_FOUND} if not found in the list.
      */
-    public int getPersonIndex(ReadOnlyFloatingTask targetPerson) {
-        List<ReadOnlyFloatingTask> personsInList = getListView().getItems();
+    public int getPersonIndex(ReadOnlyTask targetPerson) {
+        List<ReadOnlyTask> personsInList = getListView().getItems();
         for (int i = 0; i < personsInList.size(); i++) {
             if (personsInList.get(i).getDescription().equals(targetPerson.getDescription())) {
                 return i;
@@ -143,7 +143,7 @@ public class PersonListPanelHandle extends GuiHandle {
     /**
      * Gets a person from the list by index
      */
-    public ReadOnlyFloatingTask getTask(int index) {
+    public ReadOnlyTask getTask(int index) {
         return getListView().getItems().get(index);
     }
 
@@ -151,7 +151,7 @@ public class PersonListPanelHandle extends GuiHandle {
         return getPersonCardHandle(new FloatingTask(getListView().getItems().get(index)));
     }
 
-    public TaskCardHandle getPersonCardHandle(ReadOnlyFloatingTask person) {
+    public TaskCardHandle getPersonCardHandle(ReadOnlyTask person) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> personCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSamePerson(person))

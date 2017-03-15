@@ -3,7 +3,7 @@ package seedu.watodo.logic;
 import javafx.collections.ObservableList;
 import seedu.watodo.logic.commands.CommandResult;
 import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component
@@ -18,6 +18,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of tasks */
-    ObservableList<ReadOnlyFloatingTask> getFilteredTaskList();
+    ObservableList<ReadOnlyTask> getFilteredTaskList();
 
 }

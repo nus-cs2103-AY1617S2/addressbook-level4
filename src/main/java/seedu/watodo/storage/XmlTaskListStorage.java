@@ -9,10 +9,10 @@ import java.util.logging.Logger;
 import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.util.FileUtil;
-import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
 
 /**
- * A class to access TaskList data stored as an xml file on the hard disk.
+ * A class to access TaskManager data stored as an xml file on the hard disk.
  */
 public class XmlTaskListStorage implements TaskListStorage {
 
@@ -29,7 +29,7 @@ public class XmlTaskListStorage implements TaskListStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManger> readTaskList() throws DataConversionException, IOException {
         return readTaskList(filePath);
     }
 
@@ -38,32 +38,32 @@ public class XmlTaskListStorage implements TaskListStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException,
+    public Optional<ReadOnlyTaskManger> readTaskList(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
 
         File taskListFile = new File(filePath);
 
         if (!taskListFile.exists()) {
-            logger.info("TaskList file "  + taskListFile + " not found");
+            logger.info("TaskManager file "  + taskListFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyTaskList taskListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskManger taskListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
         return Optional.of(taskListOptional);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList taskList) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManger taskList) throws IOException {
         saveTaskList(taskList, filePath);
     }
 
     /**
-     * Similar to {@link #saveTaskList(ReadOnlyTaskList)}
+     * Similar to {@link #saveTaskList(ReadOnlyTaskManger)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManger taskList, String filePath) throws IOException {
         assert taskList != null;
         assert filePath != null;
 

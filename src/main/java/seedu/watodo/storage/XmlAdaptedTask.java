@@ -8,12 +8,10 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Address;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Email;
 import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.Phone;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * JAXB-friendly version of the Task.
@@ -44,7 +42,7 @@ public class XmlAdaptedTask {
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedTask(ReadOnlyFloatingTask source) {
+    public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getDescription().fullDescription;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {

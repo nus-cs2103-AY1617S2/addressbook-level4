@@ -14,17 +14,17 @@ import seedu.watodo.commons.util.CollectionUtil;
  *
  * Supports a minimal set of list operations.
  *
- * @see FloatingTask#equals(Object)
+ * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<FloatingTask> {
+public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<FloatingTask> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
-    public boolean contains(ReadOnlyFloatingTask toCheck) {
+    public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -34,7 +34,7 @@ public class UniqueTaskList implements Iterable<FloatingTask> {
      *
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(FloatingTask toAdd) throws DuplicateTaskException {
+    public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -49,19 +49,19 @@ public class UniqueTaskList implements Iterable<FloatingTask> {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyFloatingTask editedPerson) throws DuplicateTaskException {
-        assert editedPerson != null;
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+        assert editedTask != null;
 
-        FloatingTask personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
+        Task taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
-        personToUpdate.resetData(editedPerson);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
+        taskToUpdate.resetData(editedTask);
+        // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Task class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        // Then, TaskCard should then bind its text labels to those observable properties.
+        internalList.set(index, taskToUpdate);
     }
 
     /**
@@ -69,33 +69,33 @@ public class UniqueTaskList implements Iterable<FloatingTask> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyFloatingTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
+        final boolean taskFoundAndDeleted = internalList.remove(toRemove);
+        if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
-        return personFoundAndDeleted;
+        return taskFoundAndDeleted;
     }
 
-    public void setPersons(UniqueTaskList replacement) {
+    public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyFloatingTask> persons) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyFloatingTask person : persons) {
-            replacement.add(new FloatingTask(person));
+        for (final ReadOnlyTask task : tasks) {
+            replacement.add(new Task(task));
         }
-        setPersons(replacement);
+        setTasks(replacement);
     }
 
-    public UnmodifiableObservableList<FloatingTask> asObservableList() {
+    public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
 
     @Override
-    public Iterator<FloatingTask> iterator() {
+    public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 

@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.watodo.commons.util.FileUtil;
 import seedu.watodo.commons.util.XmlUtil;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.storage.XmlSerializableTaskList;
 import seedu.watodo.testutil.TaskListBuilder;
 import seedu.watodo.testutil.TestUtil;
@@ -32,7 +32,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        XmlUtil.getDataFromFile(null, TaskList.class);
+        XmlUtil.getDataFromFile(null, TaskManager.class);
     }
 
     @Test
@@ -44,13 +44,13 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_FileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, TaskList.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, TaskManager.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_DataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, TaskList.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, TaskManager.class);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
-        XmlUtil.saveDataToFile(null, new TaskList());
+        XmlUtil.saveDataToFile(null, new TaskManager());
     }
 
     @Test
@@ -75,24 +75,24 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_FileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new TaskList());
+        XmlUtil.saveDataToFile(MISSING_FILE, new TaskManager());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
-        XmlSerializableTaskList dataToWrite = new XmlSerializableTaskList(new TaskList());
+        XmlSerializableTaskList dataToWrite = new XmlSerializableTaskList(new TaskManager());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         XmlSerializableTaskList dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskList.class);
-        assertEquals((new TaskList(dataToWrite)).toString(), (new TaskList(dataFromFile)).toString());
+        assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        TaskListBuilder builder = new TaskListBuilder(new TaskList());
+        TaskListBuilder builder = new TaskListBuilder(new TaskManager());
         dataToWrite = new XmlSerializableTaskList(
                 builder.withPerson(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskList.class);
-        assertEquals((new TaskList(dataToWrite)).toString(), (new TaskList(dataFromFile)).toString());
+        assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
     }
 }
