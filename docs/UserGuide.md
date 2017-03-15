@@ -1,5 +1,4 @@
 # User Guide
-
 &nbsp;
 
 ## Table of contents
