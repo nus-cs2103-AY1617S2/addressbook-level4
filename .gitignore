@@ -18,3 +18,4 @@ classes/
 /bin/
 runtests.sh
 /src/.*
+.project

@@ -5,12 +5,12 @@ import seedu.address.model.Model;
 
 public class UndoCommand extends Command {
 
-	public static final String COMMAND_WORD = "undo";
+    public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes last action if it involves modifying a todo. ";
 
     public static final String MESSAGE_SUCCESS = "Last modifying action undone";
-    
+
     public static final String MESSAGE_NO_ACTION = "Error: no modifying action to undo";
 
     @Override
