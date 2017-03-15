@@ -61,10 +61,10 @@ public class TestUtil {
      * @param personsToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestTask[] addPersonsToList(final TestTask[] persons, TestTask... personsToAdd) {
+        List<TestTask> listOfPersons = asList(persons);
         listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -181,15 +181,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-04-01T10:16:30"), new Location("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -281,7 +281,7 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTask[] removePersonFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
@@ -292,10 +292,10 @@ public class TestUtil {
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestTask[] removePersonsFromList(final TestTask[] persons, TestTask... personsToRemove) {
+        List<TestTask> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
 
     public static void renameFile(File file, String newFileName) {
@@ -313,7 +313,7 @@ public class TestUtil {
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
+    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
         persons[index] = person;
         return persons;
     }

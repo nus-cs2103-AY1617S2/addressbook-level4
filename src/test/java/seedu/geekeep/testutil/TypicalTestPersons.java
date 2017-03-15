@@ -10,32 +10,32 @@ import seedu.geekeep.model.task.UniqueTaskList;
  */
 public class TypicalTestPersons {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestPersons() {
         try {
             alice = new PersonBuilder().withName("Alice Pauline")
                     .withLocation("123, Jurong West Ave 6, #08-111").withStartDateTime("2017-04-01T10:16:30")
-                    .withEndDateTime("2017-04-01T10:16:30")
+                    .withEndDateTime("2017-05-01T10:16:30")
                     .withTags("friends").build();
             benson = new PersonBuilder().withName("Benson Meier").withLocation("311, Clementi Ave 2, #02-25")
-                    .withStartDateTime("2017-04-01T10:16:30").withEndDateTime("2017-04-01T10:16:30")
+                    .withStartDateTime("2017-04-01T10:16:30").withEndDateTime("2017-05-01T10:16:30")
                     .withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withEndDateTime("2017-04-01T10:16:30")
+            carl = new PersonBuilder().withName("Carl Kurz").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("wall street").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withEndDateTime("2017-04-01T10:16:30")
+            daniel = new PersonBuilder().withName("Daniel Meier").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("10th street").build();
-            elle = new PersonBuilder().withName("Elle Meyer").withEndDateTime("2017-04-01T10:16:30")
+            elle = new PersonBuilder().withName("Elle Meyer").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("michegan ave").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").withEndDateTime("2017-04-01T10:16:30")
+            fiona = new PersonBuilder().withName("Fiona Kunz").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("little tokyo").build();
-            george = new PersonBuilder().withName("George Best").withEndDateTime("2017-04-01T10:16:30")
+            george = new PersonBuilder().withName("George Best").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("4th street").build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").withEndDateTime("2017-04-01T10:16:30")
+            hoon = new PersonBuilder().withName("Hoon Meier").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("little india").build();
-            ida = new PersonBuilder().withName("Ida Mueller").withEndDateTime("2017-04-01T10:16:30")
+            ida = new PersonBuilder().withName("Ida Mueller").withEndDateTime("2017-05-01T10:16:30")
                     .withStartDateTime("2017-04-01T10:16:30").withLocation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class TypicalTestPersons {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
             try {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -53,8 +53,8 @@ public class TypicalTestPersons {
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalPersons() {
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalTaskManager() {

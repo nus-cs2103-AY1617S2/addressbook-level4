@@ -14,7 +14,7 @@ import java.util.Optional;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.EditCommand;
-import seedu.geekeep.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.geekeep.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.model.tag.UniqueTagList;
 
@@ -39,24 +39,24 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
-            editPersonDescriptor.setEndDateTime(
-                    ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
-            editPersonDescriptor.setStartDateTime(
-                    ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
-            editPersonDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
+            editTaskDescriptor.setEndDateTime(
+                    ParserUtil.parseEndDateTime(argsTokenizer.getValue(PREFIX_ENDING_DATETIME)));
+            editTaskDescriptor.setStartDateTime(
+                    ParserUtil.parseStartDateTime(argsTokenizer.getValue(PREFIX_STARTING_DATETIME)));
+            editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editPersonDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**

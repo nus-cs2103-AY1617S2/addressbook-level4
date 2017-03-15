@@ -1,6 +1,7 @@
 package seedu.geekeep.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
@@ -35,17 +36,32 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, String startDateTime, String endDateTime, String location, Set<String> tags)
+    public AddCommand(String title, Optional<String> startDateTime, Optional<String> endDateTime,
+            Optional<String> location, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+
+        DateTime start = null, end = null;
+        Location loc = null;
+
+        if (startDateTime.isPresent()) {
+            start = new DateTime(startDateTime.get());
+        }
+        if (endDateTime.isPresent()) {
+            end = new DateTime(endDateTime.get());
+        }
+        if (location.isPresent()) {
+            loc = new Location(location.get());
+        }
+
         this.toAdd = new Task(
                 new Title(title),
-                new DateTime(startDateTime),
-                new DateTime(endDateTime),
-                new Location(location),
+                start,
+                end,
+                loc,
                 new UniqueTagList(tagSet)
         );
     }

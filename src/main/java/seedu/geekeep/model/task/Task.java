@@ -14,6 +14,7 @@ public class Task implements ReadOnlyTask {
     private DateTime endDateTime;
     private DateTime startDateTime;
     private Location location;
+    private boolean isDone;
 
     private UniqueTagList tags;
 
@@ -30,11 +31,25 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Title title, DateTime startDateTime,
                 DateTime endDateTime, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, endDateTime, startDateTime, location, tags);
+        this(title, startDateTime, endDateTime, location, tags, false);
+    }
+
+    public Task(Title title, DateTime startDateTime,
+                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone) {
+        assert !CollectionUtil.isAnyNull(title);
+        if (startDateTime != null) {
+            assert endDateTime != null;
+        }
+        if (startDateTime != null && endDateTime != null) {
+            assert endDateTime.dateTime.isAfter(startDateTime.dateTime);
+        }
+
+
         this.title = title;
         this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
         this.location = location;
+        this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -84,12 +99,12 @@ public class Task implements ReadOnlyTask {
 
         this.setTitle(replacement.getTitle());
         this.setEndDateTime(replacement.getEndDateTime());
-        this.setDateTime(replacement.getStartDateTime());
+        this.setStartDateTime(replacement.getStartDateTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
 
-    public void setDateTime(DateTime startDateTime) {
+    public void setStartDateTime(DateTime startDateTime) {
         assert startDateTime != null;
         this.startDateTime = startDateTime;
     }
@@ -119,6 +134,34 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public boolean isFloatingTask() {
+        return startDateTime == null && endDateTime == null;
+    }
+
+    @Override
+    public boolean isEvent() {
+        return startDateTime != null && endDateTime != null;
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return startDateTime == null && endDateTime != null;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void markDone() {
+        isDone = true;
+    }
+
+    public void markUndone () {
+        isDone = false;
     }
 
 }

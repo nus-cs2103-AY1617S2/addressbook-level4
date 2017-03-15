@@ -40,11 +40,29 @@ public interface ReadOnlyTask {
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
-                || (other != null // this is first to avoid NPE below
+                || (other != null
+                        && other.isEvent()
+                        && this.isEvent() // this is first to avoid NPE below
                         && other.getTitle().equals(this.getTitle()) // state checks here onwards
                         && other.getEndDateTime().equals(this.getEndDateTime())
-                        && other.getStartDateTime().equals(this.getStartDateTime())
-                        && other.getLocation().equals(this.getLocation()));
+                        && other.getStartDateTime().equals(this.getStartDateTime()))
+                || (other != null
+                        && other.isDeadline()
+                        && this.isDeadline()
+                        && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                        && other.getEndDateTime().equals(this.getEndDateTime()))
+                || (other != null
+                        && other.isFloatingTask()
+                        && this.isFloatingTask()
+                        && other.getTitle().equals(this.getTitle())); // state checks here onwards
     }
 
+
+    boolean isFloatingTask();
+
+    boolean isEvent();
+
+    boolean isDeadline();
+
+    boolean isDone();
 }

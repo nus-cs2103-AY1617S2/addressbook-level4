@@ -12,20 +12,20 @@ import seedu.geekeep.model.task.Title;
  */
 public class PersonBuilder {
 
-    private TestPerson person;
+    private TestTask person;
 
     public PersonBuilder() {
-        this.person = new TestPerson();
+        this.person = new TestTask();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
-        this.person = new TestPerson(personToCopy);
+    public PersonBuilder(TestTask personToCopy) {
+        this.person = new TestTask(personToCopy);
     }
 
-    public TestPerson build() {
+    public TestTask build() {
         return this.person;
     }
 

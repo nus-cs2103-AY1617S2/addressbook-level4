@@ -8,41 +8,57 @@ import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
-/**
- * The API of the Model component.
- */
 public interface Model {
+    /** Adds the given task */
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+
+    /** Deletes the task */
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+
+    /** Returns the task manager */
+    ReadOnlyTaskManager getTaskManager();
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskManager newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyTaskManager getAddressBook();
-
-    /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-
-    /** Adds the given person */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
-    /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
-     *
-     * @throws DuplicateTaskException
-     *             if updating the person's details causes the person to be equivalent to another existing person in the
-     *             list.
-     * @throws IndexOutOfBoundsException
-     *             if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
-     */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicateTaskException;
-
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
-
-    /** Updates the filter of the filtered person list to show all persons */
+    /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords */
-    void updateFilteredPersonList(Set<String> keywords);
+    /** Updates the filter of the filtered task list to filter by the given keywords */
+    void updateFilteredTaskList(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by status of the tasks */
+    void updateFilteredTaskListToShowDone();
+
+    /** Updates the filter of the filtered task list to filter by status of the tasks */
+    void updateFilteredTaskListToShowUndone();
+
+    void updateFilteredTaskListToShowEvents();
+
+    void updateFilteredTaskListToShowDeadlines();
+
+    void updateFilteredTaskListToShowFloatingTasks();
+
+    /**
+     * Updates the person located at {@code filteredTaskListIndex} with {@code editedTask}.
+     *
+     * @throws DuplicateTaskException
+     *             if updating the task's details causes the task to be equivalent to another existing person in the
+     *             list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     */
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
+
+    /** Mark the specified task as done */
+    void markTaskDone(int filteredTaskListIndex);
+
+    /** Mark the specified task as undone */
+    void markTaskUndone(int filteredTaskListIndex);
 
 }
+
