@@ -16,6 +16,8 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -64,6 +66,28 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         todoList.removeTask(target);
+        indicateTodoListChanged();
+    }
+
+    @Override
+    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyFinishedException {
+        try {
+            todoList.changeTaskFinishStatus(target, true);
+        } catch (TaskAlreadyUnfinishedException e) {
+            assert false : "finishTask should not try to unfinish tasks!";
+        }
+        indicateTodoListChanged();
+    }
+
+    @Override
+    public synchronized void unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyUnfinishedException {
+        try {
+            todoList.changeTaskFinishStatus(target, false);
+        } catch (TaskAlreadyFinishedException e) {
+            assert false : "unfinishTask should not try to finish tasks!";
+        }
         indicateTodoListChanged();
     }
 

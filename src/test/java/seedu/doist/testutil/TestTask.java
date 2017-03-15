@@ -2,6 +2,7 @@ package seedu.doist.testutil;
 
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 
@@ -12,10 +13,12 @@ public class TestTask implements ReadOnlyTask {
 
     private Description desc;
     private Priority priority;
+    private FinishedStatus finishedStatus;
     private UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();
+        finishedStatus = new FinishedStatus();
         priority = new Priority();
     }
 
@@ -25,6 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.desc = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriority();
+        this.finishedStatus = taskToCopy.getFinishedStatus();
         this.tags = taskToCopy.getTags();
     }
 
@@ -34,6 +38,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setFinishedStatus(boolean isFinished) {
+        this.finishedStatus.setIsFinished(isFinished);
     }
 
     public void setTags(UniqueTagList tags) {
@@ -56,6 +64,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public FinishedStatus getFinishedStatus() {
+        return finishedStatus;
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -63,6 +76,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");
+        sb.append("\\as " + this.getPriority().toString());
         if (!this.getTags().isEmpty()) {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));

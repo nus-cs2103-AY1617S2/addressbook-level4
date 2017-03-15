@@ -15,11 +15,12 @@ import seedu.doist.model.task.ReadOnlyTask;
  * Provides a handle to a person card in the person list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String DESC_FIELD_ID = "#desc";
+    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String START_TIME_FIELD_ID = "#startTime";
+    private static final String END_TIME_FIELD_ID = "#endTime";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String FINISH_STATUS_FIELD_ID = "#isFinished";
 
     private Node node;
 
@@ -32,23 +33,27 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+    private String getDesc() {
+        return getTextFromLabel(DESC_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    private String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    private String getFinishStatus() {
+        return getTextFromLabel(FINISH_STATUS_FIELD_ID);
     }
 
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+    private String getStartTime() {
+        return getTextFromLabel(START_TIME_FIELD_ID);
     }
 
-    public List<String> getTags() {
+    private String getEndTime() {
+        return getTextFromLabel(END_TIME_FIELD_ID);
+    }
+
+    private List<String> getTags() {
         return getTags(getTagsContainer());
     }
 
@@ -73,7 +78,9 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getDescription().desc)
+        return getDesc().equals(person.getDescription().desc)
+                && getPriority().equals(person.getPriority().toString())
+                && getFinishStatus().equals(person.getFinishedStatus().toString())
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -81,10 +88,11 @@ public class TaskCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+            return getDesc().equals(handle.getDesc())
+                    && getStartTime().equals(handle.getStartTime())
+                    && getEndTime().equals(handle.getEndTime())
+                    && getPriority().equals(handle.getPriority())
+                    && getFinishStatus().equals(handle.getFinishStatus())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -92,6 +100,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getDesc() + " " + getPriority();
     }
 }

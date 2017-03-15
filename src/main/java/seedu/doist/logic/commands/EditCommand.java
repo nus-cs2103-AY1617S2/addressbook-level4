@@ -10,6 +10,7 @@ import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
@@ -87,8 +88,9 @@ public class EditCommand extends Command {
         Description updatedName = editTaskDescriptor.getDesc().orElseGet(taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
 
-        return new Task(updatedName, updatedPriority, updatedTags);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedTags);
     }
 
     /**
@@ -99,6 +101,7 @@ public class EditCommand extends Command {
         private Optional<Description> desc = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<FinishedStatus> finishStatus = Optional.empty();
 
         public EditTaskDescriptor() {
         }
@@ -107,6 +110,7 @@ public class EditCommand extends Command {
             this.desc = toCopy.getDesc();
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
+            this.finishStatus = toCopy.finishStatus;
         }
 
         /**
@@ -129,6 +133,10 @@ public class EditCommand extends Command {
 
         public Optional<Description> getDesc() {
             return desc;
+        }
+
+        public Optional<FinishedStatus> getFinishStatus() {
+            return finishStatus;
         }
 
         public Optional<Priority> getPriority() {

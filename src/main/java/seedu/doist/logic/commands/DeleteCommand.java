@@ -3,8 +3,6 @@ package seedu.doist.logic.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import seedu.doist.commons.core.Messages;
-import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
@@ -32,18 +30,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        ArrayList<ReadOnlyTask> tasksToDelete = new ArrayList<ReadOnlyTask>();
-
-        for (int targetIndex : targetIndices) {
-            if (lastShownList.size() < targetIndex) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-            ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-            tasksToDelete.add(taskToDelete);
-        }
-
+        ArrayList<ReadOnlyTask> tasksToDelete = getMultipleTasksFromIndices(targetIndices);
         for (ReadOnlyTask task : tasksToDelete) {
             try {
                 model.deleteTask(task);

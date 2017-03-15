@@ -13,27 +13,33 @@ public class Task implements ReadOnlyTask {
 
     private Description desc;
     private Priority priority;
+    private FinishedStatus finishedStatus;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description name, Priority priority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
+    public Task(Description name, Priority priority, FinishedStatus finishedStatus, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, tags);
         this.desc = name;
         this.priority = priority;
+        this.finishedStatus = finishedStatus;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
+    public Task(Description name, Priority priority, UniqueTagList tags) {
+        this(name, priority, new FinishedStatus(), tags);
+    }
+
     public Task(Description name, UniqueTagList tags) {
-        this(name, new Priority(), tags);
+        this(name, new Priority(), new FinishedStatus(), tags);
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getFinishedStatus(), source.getTags());
     }
 
     public void setDescription(Description desc) {
@@ -56,6 +62,21 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
+    public void setFinishedStatus(boolean isFinished) {
+        assert finishedStatus != null;
+        this.finishedStatus.setIsFinished(isFinished);
+    }
+
+    public void setFinishedStatus(FinishedStatus status) {
+        assert finishedStatus != null;
+        this.finishedStatus = status;
+    }
+
+    @Override
+    public FinishedStatus getFinishedStatus() {
+        return finishedStatus;
+    }
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -76,6 +97,7 @@ public class Task implements ReadOnlyTask {
 
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
+        this.setFinishedStatus(replacement.getFinishedStatus());
         this.setTags(replacement.getTags());
     }
 

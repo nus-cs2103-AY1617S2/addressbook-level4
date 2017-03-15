@@ -13,11 +13,13 @@ import seedu.doist.logic.commands.DeleteCommand;
 import seedu.doist.logic.commands.EditCommand;
 import seedu.doist.logic.commands.ExitCommand;
 import seedu.doist.logic.commands.FindCommand;
+import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.SortCommand;
+import seedu.doist.logic.commands.UnfinishCommand;
 
 /**
  * Parses user input.
@@ -54,6 +56,10 @@ public class Parser {
             return new SortCommandParser().parse(arguments);
         } else if (DeleteCommand.info().canBeTriggeredByWord(commandWord)) {
             return new DeleteCommandParser().parse(arguments);
+        } else if (FinishCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new FinishCommandParser().parse(arguments);
+        } else if (UnfinishCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new UnfinishCommandParser().parse(arguments);
         } else if (ClearCommand.info().canBeTriggeredByWord(commandWord)) {
             return new ClearCommand();
         } else if (FindCommand.info().canBeTriggeredByWord(commandWord)) {

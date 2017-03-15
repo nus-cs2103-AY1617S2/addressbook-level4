@@ -17,6 +17,9 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the to-do list level
@@ -89,8 +92,10 @@ public class TodoList implements ReadOnlyTodoList {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.add(p);
+        if (tasks.add(p)) {
+            // Only sync master tag list if addition of task is successful
+            syncMasterTagListWith(p);
+        }
     }
 
     /**
@@ -107,11 +112,11 @@ public class TodoList implements ReadOnlyTodoList {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any task
-        // in the task list.
-        tasks.updateTask(index, editedTask);
+        if (tasks.updateTask(index, editedTask)) {
+            //Only sync master tag list if editing of task is successful
+            syncMasterTagListWith(editedTask);
+        }
+
     }
 
     /**
@@ -150,6 +155,11 @@ public class TodoList implements ReadOnlyTodoList {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+
+    public boolean changeTaskFinishStatus(ReadOnlyTask key, boolean isToFinish) throws TaskNotFoundException,
+            TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
+        return tasks.changeFinishStatus(key, isToFinish);
     }
 
 //// tag-level operations
