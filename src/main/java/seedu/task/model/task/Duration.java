@@ -21,11 +21,11 @@ public class Duration {
         this.end = DateParser.parse(end);
     }
 
-    String getStartString() {
+    public String getStartString() {
         return DateParser.toString(this.start);
     }
 
-    String getEndString() {
+    public String getEndString() {
         return DateParser.toString(this.end);
     }
 

@@ -17,12 +17,19 @@ public class TypicalTestPersons {
             alice = new TaskBuilder().withDescription("Alice Pauline")
                     .withTags("friends").build();
             benson = new TaskBuilder().withDescription("Benson Meier")
+                    .withDuration("2000/01/01 1000", "2000/01/01 1100")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withDescription("Carl Kurz").build();
-            daniel = new TaskBuilder().withDescription("Daniel Meier").build();
+            carl = new TaskBuilder()
+                    .withDuration("2017/02/22 1200", "2017/12/11 1530")
+                    .withDescription("Carl Kurz").build();
+            daniel = new TaskBuilder()
+                    .withDuration("2016/02/01 1100", "2017/02/01 1100")
+                    .withDescription("Daniel Meier").build();
             elle = new TaskBuilder().withDescription("Elle Meyer").build();
             fiona = new TaskBuilder().withDescription("Fiona Kunz").build();
-            george = new TaskBuilder().withDescription("George Best").build();
+            george = new TaskBuilder()
+                    .withDuration("2014/08/01 1100", "2017/08/01 1506")
+                    .withDescription("George Best").build();
 
             // Manually added
             hoon = new TaskBuilder().withDescription("Hoon Meier").build();
