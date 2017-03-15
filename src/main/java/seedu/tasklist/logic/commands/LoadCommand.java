@@ -21,12 +21,13 @@ public class LoadCommand extends Command {
     private String filePath;
     
     public LoadCommand(String filePath){
+        assert filePath != null;
         this.filePath = filePath.trim();
     }
     
     @Override
     public CommandResult execute() throws CommandException {
-       assert filePath != null;
+       assert model != null;
        try{
            model.loadTaskList(filePath);
            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
