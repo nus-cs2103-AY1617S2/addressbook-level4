@@ -195,11 +195,11 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getPersonListPanel() {
+    public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
 
-    void loadPersonPage(ReadOnlyTask person) {
+    void loadTaskPage(ReadOnlyTask task) {
 //        browserPanel.loadPersonPage(person);
     }
 
