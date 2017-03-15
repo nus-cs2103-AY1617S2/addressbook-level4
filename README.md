@@ -7,10 +7,8 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop task managing application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
+* This is a desktop task managing application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is **written in OOP fashion**.
-
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
@@ -19,13 +17,12 @@
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
 
-
 #### Acknowledgements
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
 
-* This project was adapted from the original address book level 4 
+* This project was adapted from the original address book level 4
   (https://github.com/nus-cs2103-AY1617S2/addressbook-level4).
 
 #### Licence : [MIT](LICENSE)
