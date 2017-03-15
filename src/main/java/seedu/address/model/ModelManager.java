@@ -95,19 +95,22 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
     
-    
+    @Override
     public Stack<String> getUndoStack() {
         return stackOfUndo;
     }
-
+   
+    @Override
     public Stack<ReadOnlyTask> getDeletedStackOfTasksAdd() {
         return stackOfDeletedTasksAdd;
     }
     
+    @Override
     public Stack<ReadOnlyTask> getDeletedStackOfTasks() {
         return stackOfDeletedTasks;
     }
     
+    @Override
     public Stack<Integer> getDeletedStackOfTasksIndex() {
         return stackOfDeletedTaskIndex;
     }
