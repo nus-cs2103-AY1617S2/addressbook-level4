@@ -20,7 +20,7 @@ public class TimeTest {
 
 		// valid phone numbers
 		assertTrue(Time.isValidTime("09/08/2017"));
-		assertTrue(Time.isValidTime("11/12/2017")); 
-		assertTrue(Time.isValidTime("18/03/2018")); 
+		assertTrue(Time.isValidTime("11/12/2017"));
+		assertTrue(Time.isValidTime("18/03/2018"));
 	}
 }
