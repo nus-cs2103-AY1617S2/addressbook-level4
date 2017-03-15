@@ -18,7 +18,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## Setting up
+## 1. Setting up
 
 ### 1.1. Prerequisites
 
@@ -72,7 +72,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 * Reason: Required libraries may not have been downloaded during the project import
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries)
 
-## Target Users
+## 2. Target Users
 
 Our target users (eg. *Jim*) are people who:
 * Usually work alone on their personal or office computer
@@ -81,7 +81,7 @@ Our target users (eg. *Jim*) are people who:
 * Would like to have an organized set up of tasks to categorize, sort, and prioritize them for ease of task management
 
 
-## Design
+## 3. Design
 
 ### 3.1. Architecture
 
@@ -225,7 +225,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.taskboss.commons` package.
 
-## Implementation
+## 4. Implementation
 
 ### 4.1. Logging
 
@@ -250,7 +250,7 @@ We are using `java.util.logging` package for logging. The [`LogsCenter`](../src/
 Certain properties of the application can be controlled (*e.g App name, logging level*) through the configuration file
 (default: `config.json`).
 
-## Testing
+## 5. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -297,7 +297,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option) <br>
    Delete run configurations created if you ran tests earlier
 
-## Dev Ops
+## 6. Dev Ops
 
 ### 6.1. Building Automation
 
