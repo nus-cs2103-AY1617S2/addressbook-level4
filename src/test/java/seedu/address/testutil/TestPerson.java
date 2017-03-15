@@ -15,6 +15,7 @@ public class TestPerson implements ReadOnlyTask {
     private TaskDate startDate;
     private TaskDate endDate;
     private Priority priority;
+    private boolean complete;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -30,6 +31,7 @@ public class TestPerson implements ReadOnlyTask {
         this.startDate = personToCopy.getStartDate();
         this.endDate = personToCopy.getEndDate();
         this.tags = personToCopy.getTags();
+        this.complete = false;
     }
 
     public void setDescription(Description description) {
@@ -92,5 +94,8 @@ public class TestPerson implements ReadOnlyTask {
         return sb.toString();
     }
 
-
+    @Override
+    public boolean isComplete() {
+        return complete;
+    }
 }

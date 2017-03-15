@@ -15,6 +15,7 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private TaskDate startDate;
     private TaskDate endDate;
+    private boolean complete;
 
     private UniqueTagList tags;
 
@@ -31,6 +32,7 @@ public class TestTask implements ReadOnlyTask {
         this.startDate = taskToCopy.getStartDate();
         this.endDate = taskToCopy.getEndDate();
         this.tags = taskToCopy.getTags();
+        this.complete = false;
     }
 
     public void setDescription(Description description) {
@@ -91,6 +93,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("ed/" + this.getEndDate().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public boolean isComplete() {
+        return this.complete;
     }
 
 }
