@@ -41,7 +41,7 @@ public class Priority {
     public static final String PRIORITY_LOW = "low";
     public static final String PRIORITY_NONE = "none";
 
-    public final Type value;
+    private final Type value;
 
     /**
      * Validates given priority.
@@ -140,6 +140,13 @@ public class Priority {
         default:
             return false;
         }
+    }
+
+    /**
+     * @return the current value of the priority
+     */
+    public Type getValue() {
+        return value;
     }
 
     @Override
