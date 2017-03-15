@@ -1,5 +1,6 @@
 package seedu.toluist.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -7,7 +8,9 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 
@@ -15,12 +18,13 @@ import seedu.toluist.ui.Ui;
  * Responsible for storage-related task
  */
 public class StoreController extends Controller {
+    private static final Logger logger = LogsCenter.getLogger(StoreController.class);
     private static final String COMMAND_TEMPLATE = "^save\\s+(?<directory>\\S+)\\s*";
-    private static final String COMMAND_WORD = "saveConfig";
-    private static final String STORE_DIRECTORY = "directory";
-    private static final String RESULT_MESSAGE_TEMPLATE = "Data storage path was changed to %s";
-
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    public static final String COMMAND_WORD = "save";
+    public static final String STORE_DIRECTORY = "directory";
+    public static final String RESULT_MESSAGE_SUCCESS = "Data storage path was changed to %s";
+    public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
+    public static final String RESULT_MESSAGE_SAME_LOCATION = "Current storage path is already set to %s";
 
     public StoreController(Ui renderer) {
         super(renderer);
@@ -29,9 +33,21 @@ public class StoreController extends Controller {
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
-        String directory = tokens.get(STORE_DIRECTORY);
-        TodoList.load().getStorage().move(directory);
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, Config.getInstance().getTodoListFilePath()));
+        String path = tokens.get(STORE_DIRECTORY);
+
+        Config config = Config.getInstance();
+        if (config.getTodoListFilePath().equals(path)) {
+            return new CommandResult(String.format(RESULT_MESSAGE_SAME_LOCATION, path));
+        }
+
+        String message = "";
+        if (FileUtil.isFileExists(new File(path))) {
+            message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + "\n";
+        }
+
+        TodoList.load().getStorage().move(path);
+        message += String.format(RESULT_MESSAGE_SUCCESS, config.getTodoListFilePath());
+        return new CommandResult(message);
     }
 
     public HashMap<String, String> tokenize(String command) {
