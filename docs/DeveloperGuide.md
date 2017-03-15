@@ -74,16 +74,14 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ### 4. Troubleshooting project setup
 
-* Problem: Eclipse reports compile errors after new commits are pulled from Git
-
-    > * Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-    > * Solution: Refresh the project in Eclipse:
+* **Problem**: Eclipse reports compile errors after new commits are pulled from Git
+    - *Reason*: Eclipse fails to recognize new files that appeared due to the Git pull.
+    - *Solution*: Refresh the project in Eclipse:
   Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
 
-* Problem: Eclipse reports some required libraries missing 
-
-    > * Reason: Required libraries may not have been downloaded during the project import.
-    > * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
+* **Problem**: Eclipse reports some required libraries missing 
+    - *Reason*: Required libraries may not have been downloaded during the project import.
+    - *Solution*: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 <br>
 
@@ -237,12 +235,11 @@ These are tests not involving the GUI. They include,
 
 
 ### Troubleshooting tests
- * Problem: Tests fail because NullPointException when AssertionError is expected  
-
-    > * Reason: Assertions are not enabled for JUnit tests.
+ - **Problem**: Tests fail because NullPointException when AssertionError is expected  
+    - *Reason*: Assertions are not enabled for JUnit tests.
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)  
-    > * Solution: Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).  
-    > Delete run configurations created when you ran tests earlier.
+    - *Solution*: Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).  
+    Delete run configurations created when you ran tests earlier.
 
 <br>
 
