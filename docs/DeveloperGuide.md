@@ -347,7 +347,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | specify where to keep my tasks (file and folder) | move them around if need be
 `* * *` | power user | set tags to tasks | group related tasks by tags
 `* * *` | power user | search by tags | know everything I have to do related to that tag
-`* *` | user | sort tasks by deadline | see quickly what task has the closest deadline
+`* *` | user | sort tasks by name, deadline, priority, start date or due date | quickly see what tasks I have to finish first
 `* *` | user | list tasks that don't currently have deadlines | add deadlines to tasks without deadlines
 `* *` | power user | use shortened versions of commands | save time when inputting tasks
 `* *` | user | add different priorities to my tasks | know which tasks need to be done first
@@ -360,8 +360,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | power user | set roughly how much time it requires to finish a task | know how long I need to start and finish a task and not leave it halfway
 `* *` | power user | tell the program how much time I have right now | the program can assign me a task to complete in that time
 `* *` | user | set tasks that are currently underway | be aware of what are the tasks I’m working on right now
-`* *` | user | redo my last action | reverse accidental undo commandss
-`*` | user with many tasks in the to do list | sort tasks by name | locate a task easily
+`* *` | user | redo my last action | reverse accidental undo commands
 `*` | user | list the tasks that are due soon | minimize chance of me missing my deadline
 `*` | paranoid user | set password | protect my privacy
 `*` | power user | sync tasks and events to Google Calendar | see my tasks and events alongside Google Calendar
