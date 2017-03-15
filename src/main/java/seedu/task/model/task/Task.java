@@ -52,6 +52,10 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
+    public void setDueDate(DueDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
     @Override
     public DueDate getDueDate() {
         return dueDate;
@@ -86,6 +90,7 @@ public class Task implements ReadOnlyTask {
 
         this.setDescription(replacement.getDescription());
         this.setDuration(replacement.getDuration());
+        this.setDueDate(replacement.getDueDate());
         this.setTags(replacement.getTags());
     }
 

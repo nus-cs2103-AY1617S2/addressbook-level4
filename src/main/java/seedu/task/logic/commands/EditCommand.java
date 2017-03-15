@@ -8,6 +8,8 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
+import seedu.task.model.task.DueDate;
+import seedu.task.model.task.Duration;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -76,8 +78,9 @@ public class EditCommand extends Command {
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
 
-        return new Task(updatedDescription, null, null, updatedTags);
+        return new Task(updatedDescription, updatedDueDate, null, updatedTags);
     }
 
     /**
@@ -87,19 +90,23 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Duration> duration = Optional.empty();
+        private Optional<DueDate> dueDate = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
+            this.duration = toCopy.getDuration();
+            this.dueDate = toCopy.getDueDate();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.tags, this.duration, this.dueDate);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -109,6 +116,24 @@ public class EditCommand extends Command {
 
         public Optional<Description> getDescription() {
             return description;
+        }
+
+        public void setDuration(Optional<Duration> duration) {
+            assert duration != null;
+            this.duration = duration;
+        }
+
+        public Optional<Duration> getDuration() {
+            return duration;
+        }
+
+        public void setDueDate(Optional<DueDate> dueDate) {
+            assert dueDate != null;
+            this.dueDate = dueDate;
+        }
+
+        public Optional<DueDate> getDueDate() {
+            return dueDate;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
