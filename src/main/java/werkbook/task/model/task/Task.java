@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.commons.util.CollectionUtil;
+import werkbook.task.model.tag.Tag;
 import werkbook.task.model.tag.UniqueTagList;
 
 /**
@@ -111,6 +112,10 @@ public class Task implements ReadOnlyTask {
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
+
+        for (Tag t : replacement.getTags()) {
+            System.out.println(t.toString());
+        }
 
         this.setName(replacement.getName());
         this.setDescription(replacement.getDescription());

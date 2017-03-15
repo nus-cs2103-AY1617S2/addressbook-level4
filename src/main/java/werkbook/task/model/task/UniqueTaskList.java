@@ -9,7 +9,6 @@ import werkbook.task.commons.core.UnmodifiableObservableList;
 import werkbook.task.commons.exceptions.DuplicateDataException;
 import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.commons.util.CollectionUtil;
-
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
  * allow nulls.

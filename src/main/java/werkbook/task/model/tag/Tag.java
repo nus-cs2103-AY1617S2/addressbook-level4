@@ -25,7 +25,7 @@ public class Tag {
         if (!isValidTagName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
         }
-        this.tagName = trimmedName;
+        this.tagName = toTitleCase(trimmedName);
     }
 
     /**
@@ -52,6 +52,13 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    /**
+     * Takes in a string and returns it in title case
+     */
+    public String toTitleCase(String s) {
+        return s.substring(0, 1).toUpperCase().concat(s.substring(1));
     }
 
 }
