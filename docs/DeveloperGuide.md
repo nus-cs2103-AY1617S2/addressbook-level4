@@ -248,17 +248,16 @@ These are tests not involving the GUI. They include,
 
 ### 1. Build Automation
 
-See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
+You can learn how to use Gradle for build automation from [UsingGradle.md](UsingGradle.md).
 
 ### 2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
-See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
+You can read [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
 ### 3. Publishing Documentation
 
-See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
-project site.
+You can learn how to use GitHub Pages to publish documentation to the project site from [UsingGithubPages.md](UsingGithubPages.md).
 
 ### 4. Making a Release
 
@@ -266,34 +265,12 @@ Here are the steps to create a new release.
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
-    and upload the JAR file you created.
+ 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) and upload the JAR file you created.
 
-### 5. Converting Documentation to PDF format
+### 5. Managing Dependencies
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
-as Chrome's PDF engine preserves hyperlinks used in webpages.
-
-Here are the steps to convert the project documentation files to PDF format.
-
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
-    documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
-    <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
-
-### 6. Managing Dependencies
-
-A project often depends on third-party libraries. For example, Doist depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
-can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
-is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+Doist depends on third-party libraries, such as [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing, [Natty](http://natty.joestelmach.com) for date and time parsing.  
+Managing these _dependencies_ has been automated using Gradle. Gradle can download the dependencies automatically, which is better than these alternatives.Therefore, there is no need to include those libraries in the repo, which will bloat the repo size, or download those libraries manually, which reates extra work for developers. To add new 3-party libraries, update `build.gradle`.
 
 <br>
 
