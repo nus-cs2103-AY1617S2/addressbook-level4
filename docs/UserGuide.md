@@ -4,12 +4,17 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+3. [Features](#features)
 4. [Command Summary](#command-summary)
+5. [FAQ](#frequently-asked-questions)
 
-## 1. Quick Start
+## 1. Introduction
+
+
+
+## 2. Getting Started
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
@@ -33,7 +38,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
-## 2. Features
+## 3. Features
 > **Command Format**
 >
 > * Duration must be specified in "hr", "min" and/or "sec".
@@ -42,7 +47,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 > * `<task>` refers to the name of the task.
 > * Parameters include: name, start time, start date, end (due) time, end (due) date, duration.
 
-### 2.1. Adding a task: `add`
+### 3.1. Adding a task: `add`
 
 Adds a task to the task manager<br>
 Formats: 
@@ -62,7 +67,7 @@ Examples:
 * `add committee meeting; 15 june; 2 hr`
 * `add sushi restaurant promotion; 040117 10am; 110117 9pm`
 
-### 2.2. Deleting a task : `delete`
+### 3.2. Deleting a task : `delete`
 
 Deletes the specified task from the task manager.<br>
 Formats:
@@ -74,7 +79,7 @@ Examples:
 
 * `delete watch tv with the children`
 
-### 2.3. Find a task: `find`
+### 3.3. Find a task: `find`
 
 Finds task(s) whose names contain any of the given keywords.<br>
 Formats:
@@ -87,14 +92,14 @@ Examples:
 * `find project`
 * `find meeting; monday`
 
-### 2.4. Listing all tasks : `list`
+### 3.4. Listing all tasks : `list`
 
 Shows a list of all tasks in the task manager.<br>
 Format:
 
 > * `list`
 
-### 2.5. Viewing help : `help`
+### 3.5. Viewing help : `help`
 
 Shows a list of all commands and their usage instructions.<br>
 Formats:
@@ -104,7 +109,7 @@ Formats:
 
 > Help is also shown if you enter an incorrect command. e.g. `abcd`
 
-### 2.6. Select a task : `select`
+### 3.6. Select a task : `select`
 
 Selects a task for user to view its details and make changes to it if needed.<br>
 Formats:
@@ -118,7 +123,7 @@ Examples:
 
 > Task successfully selected will be highlighted for the user to see. 
 
-### 2.7. Update a task : `update`
+### 3.7. Update a task : `update`
 
 Edits the value(s) of parameter(s) of a task.<br>
 Formats:
@@ -132,14 +137,14 @@ Examples:
 * `update project proposal; name app development project proposal; end time 11.59pm`
 
 
-### 2.8. Exiting the program : `exit`
+### 3.8. Exiting the program : `exit`
 
 Exits the program.<br>
 Format:
 
 > * `exit`
 
-### 2.9. Change save file location
+### 3.9. Change save file location
 
 Formats:
 
@@ -149,12 +154,6 @@ Formats:
 Examples:
 
 * `save C:\Users\Jim\Desktop`
-
-## 3. FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
 
@@ -168,4 +167,8 @@ Examples:
 |Help         |`help`                           |                                              |
 |Select       |`select <task>`                  |`select presentation`                         |
 
+## 3. FAQ
 
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with
+       the file that contains the data of your previous Task Manager folder.
