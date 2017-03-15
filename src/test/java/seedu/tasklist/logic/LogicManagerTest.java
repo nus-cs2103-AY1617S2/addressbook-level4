@@ -106,6 +106,7 @@ public class LogicManagerTest {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
+    
     /**
      * Executes the command and confirms that the result message is correct.
      * Both the 'task list' and the 'last shown list' are expected to be empty.
@@ -433,25 +434,25 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-    
+
     @Test
     public void load_invalidCommand_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
         assertCommandFailure("load", expectedMessage);
     }
-    
+
     @Test
     public void load_invalidFilePath_errorMessageShown() throws Exception {
         String expectedMessage = String.format(LoadCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
         assertCommandBehavior("load dejt/%!%", expectedMessage);
     }
-    
+
     @Test
     public void load_invalidFileExtension_errorMessageShown() throws Exception {
         String expectedMessage = String.format(LoadCommand.MESSAGE_INVALID_PATH, "data/task.png");
         assertCommandBehavior("load data/task.png", expectedMessage);
     }
-    
+
 
     /**
      * A utility class to generate test data.
