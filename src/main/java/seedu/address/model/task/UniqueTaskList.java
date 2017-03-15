@@ -102,8 +102,8 @@ public class UniqueTaskList implements Iterable<Task>, Cloneable {
             for (Task task : internalList) {
                 UniqueLabelList y = task.getLabels().clone();
                 x.add(new Task(new Title(task.getTitle().toString()),
-                        Optional.ofNullable(new Deadline(task.getStartTime().toString())),
-                        Optional.ofNullable(new Deadline(task.getDeadline().toString())),
+                        Optional.ofNullable(new Deadline(task.getStartTime().get().toString())),
+                        Optional.ofNullable(new Deadline(task.getDeadline().get().toString())),
                         task.isCompleted(),
                         y));
             }
