@@ -3,14 +3,14 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a task information in the task manager.
+ * Represents a Task's information in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidInformation(String)}
  */
 
 public class Information {
 
     public static final String MESSAGE_INFORMATION_CONSTRAINTS =
-            "Task's information can take any values";
+            "Task's information can take any values, and it should not be blank";
 
     /*
      * The first character of the information must not be a whitespace,
@@ -21,9 +21,9 @@ public class Information {
     public final String value;
 
     /**
-     * Validates a given information.
+     * Validates a given Task's information.
      *
-     * @throws IllegalValueException if given information string is invalid.
+     * @throws IllegalValueException if given Task's information string is invalid.
      */
     public Information(String info) {
         /*assert info != null;
@@ -34,7 +34,7 @@ public class Information {
     }
 
     /**
-     * Returns true if a given string is a valid task information.
+     * Returns true if a given string is a valid Task's information.
      */
     public static boolean isValidInformation(String test) {
         return test.matches(INFORMATION_VALIDATION_REGEX);
