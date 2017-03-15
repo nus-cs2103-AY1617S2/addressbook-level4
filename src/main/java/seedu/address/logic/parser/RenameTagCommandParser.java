@@ -12,23 +12,23 @@ import seedu.address.logic.commands.RenameTagCommand;
  */
 public class RenameTagCommandParser {
 
-	/**
-	 * Parses the given {@code String} of arguments in the context of the RenameTagCommand
-	 * and returns an RenameTagCommand object for execution.
-	 */
-	public Command parse(String args) {
-		// TODO: refactor into some kind of tokenizers
-		String[] tagNames = args.trim().split(" ");
-		try {
-			if (tagNames.length != 2) {
-				// TODO: Name this exception, unchecked
-				throw new Exception(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE));
-			}
-			return new RenameTagCommand(tagNames[0], tagNames[1]);
-		} catch (IllegalValueException ive) {
-			return new IncorrectCommand(ive.getMessage());
-		} catch (Exception e) {
-			return new IncorrectCommand(e.getMessage());
-		}
-	}
+    /**
+     * Parses the given {@code String} of arguments in the context of the
+     * RenameTagCommand and returns an RenameTagCommand object for execution.
+     */
+    public Command parse(String args) {
+        // TODO: refactor into some kind of tokenizers
+        String[] tagNames = args.trim().split(" ");
+        try {
+            if (tagNames.length != 2) {
+                // TODO: Name this exception, unchecked
+                throw new Exception(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE));
+            }
+            return new RenameTagCommand(tagNames[0], tagNames[1]);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        } catch (Exception e) {
+            return new IncorrectCommand(e.getMessage());
+        }
+    }
 }

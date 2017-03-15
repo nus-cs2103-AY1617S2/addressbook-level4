@@ -23,8 +23,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
@@ -40,13 +40,12 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
     private CompletedTaskListPanel completedTaskListPanel;
     private Config config;
-    
+
     // Categorised Task List
     public ObservableList<ReadOnlyTask> taskListToday;
     private ObservableList<ReadOnlyTask> taskListFuture;
     private ObservableList<ReadOnlyTask> taskListCompleted;
-    
-    
+
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
@@ -58,7 +57,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
-    
+
     @FXML
     private AnchorPane completedTaskListPlaceholder;
 
@@ -91,25 +90,27 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination
+     *            the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
+         * version of SDK.
          *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * According to the bug report, TextInputControl (TextField, TextArea)
+         * will consume function-key events. Because CommandBox contains a
+         * TextField, and ResultDisplay contains a TextArea, thus some
+         * accelerators (e.g F1) will not work when the focus is in them because
+         * the key event is consumed by the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * For now, we add following event filter to capture such key events and
+         * open help window purposely so to support accelerators even when focus
+         * is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -127,35 +128,34 @@ public class MainWindow extends UiPart<Region> {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
-        //TODO: show completedTaskPanel when show completed command is implemented
-        completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(),taskListCompleted);
+        // TODO: show completedTaskPanel when show completed command is
+        // implemented
+        completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
     }
-    
+
     /*
      * Prepares categorised task list for today/future/completed ListView
-     * 
+     *
      */
-    protected void prepareTaskList(ObservableList<ReadOnlyTask> taskList){
+    protected void prepareTaskList(ObservableList<ReadOnlyTask> taskList) {
         taskListToday.clear();
         taskListFuture.clear();
         taskListCompleted.clear();
         ListIterator<ReadOnlyTask> iter = taskList.listIterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             ReadOnlyTask tmpTask = iter.next();
             // set task id to be displayed, the id here is 1-based
             tmpTask.setID(iter.nextIndex());
-            if(tmpTask.isToday() && !tmpTask.isDone()){
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
                 taskListToday.add(tmpTask);
-            }else if(!tmpTask.isDone()){
+            } else if (!tmpTask.isDone()) {
                 taskListFuture.add(tmpTask);
-            }else{
+            } else {
                 taskListCompleted.add(tmpTask);
             }
         }
-        
+
     }
-    
-    
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -168,7 +168,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getCompletedTaskListPlaceholder() {
         return completedTaskListPlaceholder;
     }
@@ -183,7 +183,9 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
+     *
+     * @param iconSource
+     *            e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
         FxViewUtil.setStageIcon(primaryStage, iconSource);
@@ -210,16 +212,15 @@ public class MainWindow extends UiPart<Region> {
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                (int) primaryStage.getY());
     }
 
     @FXML
-    public void menuTest(){
+    public void menuTest() {
         completedTaskListPanel.menuTest();
     }
-   
-    
+
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();

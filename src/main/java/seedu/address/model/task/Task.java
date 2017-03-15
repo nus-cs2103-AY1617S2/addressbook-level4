@@ -13,7 +13,6 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private int id;
     private UniqueTagList tags;
-    
 
     private boolean done;
     protected boolean today = false;

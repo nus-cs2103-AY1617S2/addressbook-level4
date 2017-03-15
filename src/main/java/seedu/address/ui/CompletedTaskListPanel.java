@@ -20,11 +20,10 @@ import seedu.address.model.task.ReadOnlyTask;
 public class CompletedTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "CompletedTaskListPanel.fxml";
-    
+
     // Init parameters for completed panel animation
     private static double COMPLETED_PANEL_HEIGHT = 400.0d;
     private boolean flag = false;
-
 
     @FXML
     private ListView<ReadOnlyTask> completedTaskListView;
@@ -51,8 +50,8 @@ public class CompletedTaskListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in completed task list panel changed to : '" + newValue + "'");
-                        //TODO: create a new event
-                        //raise(new TaskPanelSelectionChangedEvent(newValue));
+                        // TODO: create a new event
+                        // raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -78,35 +77,26 @@ public class CompletedTaskListPanel extends UiPart<Region> {
             }
         }
     }
-    
-    
-    public void menuTest(){
-        if(!flag){
-            //show completed task list panel
+
+    public void menuTest() {
+        if (!flag) {
+            // show completed task list panel
             completedTaskListView.setPrefHeight(0.0d);
             flag = true;
-            
+
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.ZERO,
-                            new KeyValue(completedTaskListView.prefHeightProperty(),0)
-                    ),
+                    new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0)),
                     new KeyFrame(Duration.millis(300.0d),
-                            new KeyValue(completedTaskListView.prefHeightProperty(),COMPLETED_PANEL_HEIGHT)
-                    )
-            );
+                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT)));
             timeline.play();
-        }else{
+        } else {
             // collapse
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO,
-                            new KeyValue(completedTaskListView.prefHeightProperty(),COMPLETED_PANEL_HEIGHT)
-                    ),
-                    new KeyFrame(Duration.millis(300.0d),
-                            new KeyValue(completedTaskListView.prefHeightProperty(),0)
-                    )
-            );
+                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT)),
+                    new KeyFrame(Duration.millis(300.0d), new KeyValue(completedTaskListView.prefHeightProperty(), 0)));
             timeline.play();
             flag = false;
         }
