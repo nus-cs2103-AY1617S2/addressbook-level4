@@ -116,33 +116,5 @@ public class TestPerson implements ReadOnlyPerson {
         return sb.toString();
     }
 
-	@Override
-	public Name getTaskName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Date getDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Time getStartTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Time getEndTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
