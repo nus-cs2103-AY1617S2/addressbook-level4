@@ -107,6 +107,10 @@ public class Config {
         return sb.toString();
     }
 
+    public void setFilePath(String newFilePath) {
+        this.filePath = newFilePath;
+    }
+
     public String getFilePath() {
         return filePath;
     }

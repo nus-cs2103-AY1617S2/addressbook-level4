@@ -12,16 +12,17 @@ import seedu.address.storage.XmlSerializableTaskManager;
 import seedu.address.testutil.TestUtil;
 
 /**
- * This class is meant to override some properties of MainApp so that it will be suited for
- * testing
+ * This class is meant to override some properties of MainApp so that it will be
+ * suited for testing
  */
 public class TestApp extends MainApp {
 
     public static final String SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
-    protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
-            TestUtil.getFilePathInSandboxFolder("pref_testing.json");
+    protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING = TestUtil
+            .getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String ADDRESS_BOOK_NAME = "Test";
+    private static final String CONFIG_FILE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("config.json");
     protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
@@ -35,8 +36,7 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            TestUtil.createDataFileWithData(
-                    new XmlSerializableTaskManager(this.initialDataSupplier.get()),
+            TestUtil.createDataFileWithData(new XmlSerializableTaskManager(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
@@ -44,6 +44,7 @@ public class TestApp extends MainApp {
     @Override
     protected Config initConfig(String configFilePath) {
         Config config = super.initConfig(configFilePath);
+        config.setFilePath(CONFIG_FILE_LOCATION_FOR_TESTING);
         config.setAppTitle(APP_TITLE);
         config.setTaskManagerFilePath(saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
@@ -59,7 +60,6 @@ public class TestApp extends MainApp {
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
         return userPrefs;
     }
-
 
     @Override
     public void start(Stage primaryStage) {
