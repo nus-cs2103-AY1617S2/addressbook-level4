@@ -1,13 +1,15 @@
 package seedu.tache.model.task;
 
+import java.util.Optional;
+
 import seedu.tache.model.tag.UniqueTagList;
 
 public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     private Date startDate;
-    private Date endDate;
+    private Optional<Date> endDate;
     private Time startTime;
-    private Time endTime;
+    private Optional<Time> endTime;
 
     public DetailedTask(Name name, UniqueTagList tags) {
         super(name, tags);
@@ -16,9 +18,9 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
     public DetailedTask(Name name, Date startDate, Date endDate, Time startTime, Time endTime, UniqueTagList tags) {
         super(name, tags);
         this.startDate = startDate;
-        this.endDate = endDate;
+        this.endDate = Optional.ofNullable(endDate);
         this.startTime = startTime;
-        this.endTime = endTime;
+        this.endTime = Optional.ofNullable(endTime);
     }
 
     /**
@@ -40,11 +42,11 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     @Override
     public Date getEndDate() {
-        return endDate;
+        return endDate.orElse(getStartDate());
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        this.endDate = Optional.ofNullable(endDate);
     }
 
     @Override
@@ -58,11 +60,11 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     @Override
     public Time getEndTime() {
-        return endTime;
+        return endTime.orElse(getStartTime());
     }
 
     public void setEndTime(Time endTime) {
-        this.endTime = endTime;
+        this.endTime = Optional.ofNullable(endTime);
     }
 
     /**

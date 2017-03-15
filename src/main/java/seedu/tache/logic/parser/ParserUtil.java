@@ -158,6 +158,18 @@ public class ParserUtil {
     }
 
     /**
+     * Returns number of time parameters in input.
+     */
+    public static int numOfTimes(String input) {
+        final Matcher matcher = TIME_FORMAT.matcher(input.trim());
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+        return count;
+    }
+
+    /**
      * Returns data type based on the input
      */
     public static Object determineType(String input) throws IllegalValueException {
@@ -171,6 +183,26 @@ public class ParserUtil {
         throw new IllegalValueException("Invalid Input");
     }
 
+    /**
+     * Returns the first time String encountered
+     */
+    public static String parseTime(String input) throws IllegalValueException {
+        if (isValidTime(input)) {
+            return TIME_FORMAT.matcher(input.trim()).group();
+        } else {
+            throw new IllegalValueException("Invalid Input");
+        }
+    }
+
+    /**
+     * Returns the first date String encountered
+     */
+    public static String parseDate(String input) throws IllegalValueException {
+        if (isValidDate(input)) {
+            return DATE_FORMAT.matcher(input.trim()).group();
+        } else {
+            throw new IllegalValueException("Invalid Input");
+        }
     /**
      * Returns the corresponding integer value of the String entered
      */

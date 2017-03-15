@@ -9,7 +9,7 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "At least one field to edit must be provided.";
+            "Name of task must be alphanumeric.";
 
     /*
      * The first character of the address must not be a whitespace,

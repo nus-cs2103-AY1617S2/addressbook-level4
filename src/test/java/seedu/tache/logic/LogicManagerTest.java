@@ -178,17 +178,17 @@ public class LogicManagerTest {
     }
 
 
-    @Test
-    public void executeAddInvalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-    }
+//    @Test
+//    public void executeAddInvalidArgsFormat() {
+//        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+//        assertCommandFailure("add wrong args wrong args", expectedMessage);
+//    }
 
     @Test
     public void executeAddInvalidTaskData() {
-        assertCommandFailure("add []\\[;] t/HighPriority",
+        assertCommandFailure("add [!*^]\\[] ;HighPriority",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Task t/invalid_-[.tag",
+        assertCommandFailure("add Valid Task ;invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -413,7 +413,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" ;").append(t.tagName);
             }
 
             return cmd.toString();
