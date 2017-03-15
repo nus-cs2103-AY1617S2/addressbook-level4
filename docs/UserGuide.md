@@ -139,7 +139,7 @@ Format:
 > - The index must be a positive integer.
 > - The index refers to the index number of the tasks shown in the most recent listing.
 > - Once a task at the specified index is marked as done, it will be removed from the task list and added to the done list.
-> - You can view the done list with the command ______
+> - You can view the done list with the command `done` without any index specified.
 
 <br>
 
@@ -241,8 +241,7 @@ Reverts the last command. <br>
 Format:
 **`undo`**
 <br>
-> - You can only undo the following commands - `add/edit/kill/clear/sort`.
-> - You cannot use the command `undo` consecutively.
+> - You can only undo the following commands - `add/edit/kill/clear/done`.
 
 <br>
 
@@ -258,9 +257,6 @@ Clears all entries from ezDo. <br>
 Format:
 **`clear`**
 <br>
-> - User will be prompted with clear confirmation.
-
-<br>
 
 ### 10. Moving the save file: `save`
 ---
@@ -269,13 +265,13 @@ Format:
 **`save DIRECTORY`**
 <br>
 > - The directory specified must be valid.
-> - to add more
+> - Admin permissions are required.
 
 <br>
 
 Example:
-* Moves the save file of ezDo to `C:\Desktop`:
-**`save C:\Desktop`** <br>
+* Moves the save file of ezDo to `C:/Desktop`:
+**`save C:/Desktop`** <br>
 
 <br>
 
