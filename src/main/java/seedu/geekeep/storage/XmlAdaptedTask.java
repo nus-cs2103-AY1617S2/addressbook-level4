@@ -27,9 +27,10 @@ public class XmlAdaptedTask {
     private String endDateTime;
     @XmlElement(required = true)
     private String location;
-
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement
+    private String isDone;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -52,6 +53,7 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+        isDone = source.isDone() ? "True" : "False";
     }
 
     /**
@@ -69,6 +71,7 @@ public class XmlAdaptedTask {
         final DateTime startDateTime = this.startDateTime.isEmpty() ? null : new DateTime(this.startDateTime);
         final Location location = this.location.isEmpty() ? null : new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, startDateTime, endDateTime, location, tags);
+        final boolean isDone = this.isDone.equals("True");
+        return new Task(title, startDateTime, endDateTime, location, tags, isDone);
     }
 }
