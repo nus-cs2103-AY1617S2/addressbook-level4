@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
@@ -19,7 +19,7 @@ import seedu.address.commons.util.CollectionUtil;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final SortedList<Task> internalList = new SortedList<Task>(FXCollections.observableArrayList());
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
