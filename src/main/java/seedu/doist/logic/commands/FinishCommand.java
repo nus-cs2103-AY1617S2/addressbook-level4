@@ -1,7 +1,6 @@
 package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
@@ -13,7 +12,6 @@ import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class FinishCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("finished", "finish", "fin"));
     public static final String DEFAULT_COMMAND_WORD = "finish";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -58,6 +56,6 @@ public class FinishCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

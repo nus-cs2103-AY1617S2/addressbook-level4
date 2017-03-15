@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +19,6 @@ import seedu.doist.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("edit"));
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -54,9 +51,8 @@ public class EditCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {

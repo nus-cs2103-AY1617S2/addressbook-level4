@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +14,6 @@ import seedu.doist.model.tag.UniqueTagList;
  */
 public class ListCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("list", "ls"));
     public static final String DEFAULT_COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -49,7 +46,7 @@ public class ListCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 
     public static String getSuccessMessageListUnder(UniqueTagList tagList) {

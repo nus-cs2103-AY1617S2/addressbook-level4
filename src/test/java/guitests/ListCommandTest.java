@@ -35,7 +35,7 @@ public class ListCommandTest extends DoistGUITest {
 
     @Test
     public void testListFinished() {
-        commandBox.runCommand("list finished");
+        commandBox.runCommand("ls finished");
         assertListFinished();
     }
 

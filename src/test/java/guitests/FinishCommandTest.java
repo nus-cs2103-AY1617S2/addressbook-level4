@@ -29,7 +29,7 @@ public class FinishCommandTest extends DoistGUITest {
         assertFinishSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("finish " + currentList.length + 1);
+        commandBox.runCommand("fin " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
         // finish a task that has already been finished
