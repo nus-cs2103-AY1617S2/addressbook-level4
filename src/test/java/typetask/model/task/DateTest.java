@@ -11,15 +11,15 @@ public class DateTest {
     @Test
     public void isValidPhone() {
         // invalid date
-        assertTrue(Date.isValidDate("")); // empty string
-        assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("date")); // non-numeric
-        assertFalse(Date.isValidDate("0208d2017")); // alphabets within digits
-        assertFalse(Date.isValidDate("2 8 2017")); // spaces within digits
+        assertTrue(DueDate.isValidDate("")); // empty string
+        assertFalse(DueDate.isValidDate(" ")); // spaces only
+        assertFalse(DueDate.isValidDate("date")); // non-numeric
+        assertFalse(DueDate.isValidDate("0208d2017")); // alphabets within digits
+        assertFalse(DueDate.isValidDate("2 8 2017")); // spaces within digits
         // valid date
 
-        assertTrue(Date.isValidDate("28/01/2017")); //Number start with 0 for month
-        assertTrue(Date.isValidDate("02/7/1992")); // Number start with 0 for day
-        assertTrue(Date.isValidDate("12/8/2017")); // Correct Date example
+        assertTrue(DueDate.isValidDate("28/01/2017")); //Number start with 0 for month
+        assertTrue(DueDate.isValidDate("02/7/1992")); // Number start with 0 for day
+        assertTrue(DueDate.isValidDate("12/8/2017")); // Correct Date example
     }
 }

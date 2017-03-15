@@ -6,7 +6,7 @@ import java.util.Optional;
 import typetask.commons.core.Messages;
 import typetask.commons.util.CollectionUtil;
 import typetask.logic.commands.exceptions.CommandException;
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -70,7 +70,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        DueDate updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
 
         return new Task(updatedName, updatedDate, updatedTime);
@@ -82,7 +82,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<DueDate> date = Optional.empty();
         private Optional<Time> time = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -117,12 +117,12 @@ public class EditCommand extends Command {
             assert time != null;
             this.time = time;
         }
-        public void setDate(Optional<Date> date) {
+        public void setDate(Optional<DueDate> date) {
             assert date != null;
             this.date = date;
         }
 
-        public Optional<Date> getDate() {
+        public Optional<DueDate> getDate() {
             return date;
         }
 

@@ -8,7 +8,7 @@ package typetask.model.task;
 public interface ReadOnlyTask {
 
     Name getName();
-    Date getDate();
+    DueDate getDate();
     Time getTime();
 
     /**

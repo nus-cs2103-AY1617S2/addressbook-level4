@@ -3,7 +3,7 @@ package typetask.logic.commands;
 
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.exceptions.CommandException;
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.Task;
 import typetask.model.task.Time;
@@ -33,17 +33,17 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new Date(""), new Time(""));
+        this.toAdd = new Task(new Name(name), new DueDate(""), new Time(""));
     }
 
     public AddCommand(String name, String date, String time)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new Date(date), new Time(time));
+        this.toAdd = new Task(new Name(name), new DueDate(date), new Time(time));
     }
 
     public AddCommand(String name, String date)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new Date(date), new Time(""));
+        this.toAdd = new Task(new Name(name), new DueDate(date), new Time(""));
     }
 
     @Override

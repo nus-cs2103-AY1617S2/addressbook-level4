@@ -5,10 +5,10 @@ import java.util.Objects;
 public class DeadlineTask extends Task {
 
     private Name name;
-    private Date date;
+    private DueDate date;
     private Time time;
 
-    public DeadlineTask(Name name, Date date, Time time) {
+    public DeadlineTask(Name name, DueDate date, Time time) {
         super(name);
         this.date = date;
         this.time = time;
@@ -16,7 +16,7 @@ public class DeadlineTask extends Task {
     /**
      * Copy of Constructor.
      */
-    public DeadlineTask(Name name, Date date) {
+    public DeadlineTask(Name name, DueDate date) {
         super(name);
         this.date = date;
     }
@@ -31,7 +31,7 @@ public class DeadlineTask extends Task {
         }
     }
 
-    public Date getDateDeadline() {
+    public DueDate getDateDeadline() {
         return date;
     }
 

@@ -4,7 +4,7 @@ package typetask.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import typetask.commons.exceptions.IllegalValueException;
-import typetask.model.task.Date;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -48,7 +48,7 @@ public class XmlAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException {
         final Name name = new Name(this.name);
-        final Date date = new Date(this.date);
+        final DueDate date = new DueDate(this.date);
         final Time time = new Time(this.time);
         return new Task(name, date, time);
     }
