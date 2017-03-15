@@ -10,23 +10,23 @@ import seedu.address.model.todo.UniqueTodoList;
  */
 public class TypicalTestTodos {
 
-    public TestTodo alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTodo dog, cat, math, english, dishes, lawn, dinner, laundry, car;
 
     public TypicalTestTodos() {
         try {
-            alice = new TodoBuilder().withName("Alice Pauline")
-                    .withTags("friends").build();
-            benson = new TodoBuilder().withName("Benson Meier")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TodoBuilder().withName("Carl Kurz").build();
-            daniel = new TodoBuilder().withName("Daniel Meier").build();
-            elle = new TodoBuilder().withName("Elle Meyer").build();
-            fiona = new TodoBuilder().withName("Fiona Kunz").build();
-            george = new TodoBuilder().withName("George Best").build();
+            dog = new TodoBuilder().withName("Walk the dog")
+                    .withTags("petcare").build();
+            cat = new TodoBuilder().withName("Walk the cat")
+                    .withTags("petcare", "cat").build();
+            math = new TodoBuilder().withName("Do math homework").build();
+            english = new TodoBuilder().withName("Do english homework").build();
+            dishes = new TodoBuilder().withName("Wash dishes").build();
+            lawn = new TodoBuilder().withName("Mow the lawn").build();
+            dinner = new TodoBuilder().withName("Cook dinner").build();
 
             // Manually added
-            hoon = new TodoBuilder().withName("Hoon Meier").build();
-            ida = new TodoBuilder().withName("Ida Mueller").build();
+            laundry = new TodoBuilder().withName("Do laundry").build();
+            car = new TodoBuilder().withName("Wash car").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,7 +44,7 @@ public class TypicalTestTodos {
     }
 
     public TestTodo[] getTypicalTodos() {
-        return new TestTodo[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTodo[] { dog, cat, math, english, dishes, lawn, dinner };
     }
 
     public TodoList getTypicalTodoList() {

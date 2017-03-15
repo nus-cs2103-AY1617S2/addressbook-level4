@@ -48,7 +48,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTodoList newData) {
-        previousTodoList = new TodoList(todoList);
+        if (previousTodoList == null) {
+            previousTodoList = new TodoList(todoList);
+        } else {
+            previousTodoList.resetData(todoList);
+        }
         todoList.resetData(newData);
         indicateTodoListChanged();
     }
