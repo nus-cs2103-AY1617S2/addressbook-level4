@@ -50,11 +50,11 @@ public class DetailedTaskCard extends UiPart<Region> {
         detailedTask.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private static String toAlphabetic(int i) {
+    private static String toAlphabetic(int index) {
         String result = "";
-        while (--i >= 0) {
-            result = (char) ('A' + i % 26) + result;
-            i /= 26;
+        while (--index >= 0) {
+            result = (char) ('A' + index % 26) + result;
+            index /= 26;
         }
         return result;
     }
