@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Optional;
+
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -9,7 +11,9 @@ import seedu.address.model.label.UniqueLabelList;
 public interface ReadOnlyTask {
 
     Title getTitle();
-    Deadline getDeadline();
+    Optional<Deadline> getDeadline();
+    Optional<Deadline> getStartTime();
+    Boolean isCompleted();
 
     /**
      * The returned LabelList is a deep copy of the internal LabelList,
@@ -24,7 +28,10 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                && other.getDeadline().equals(this.getDeadline()));
+                && other.getDeadline().equals(this.getDeadline())
+                && other.getStartTime().equals(this.getStartTime())
+                && other.getLabels().equals(this.getLabels()))
+                && other.isCompleted().equals(this.isCompleted());
     }
 
     /**
@@ -32,12 +39,24 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
-            .append(" Deadline: ")
-            .append(getDeadline().toString())
-            .append(" Label: ");
+        builder.append(getTitle());
+        if (getStartTime().isPresent()) {
+            builder.append(" Start: ")
+                .append(getStartTime().get().toString());
+        }
+        if (getDeadline().isPresent()) {
+            builder.append(" Deadline: ")
+                .append(getDeadline().get().toString());
+        }
+        if (isCompleted()) {
+            builder.append(" Status: Completed");
+        } else {
+            builder.append(" Status: Incomplete");
+        }
+        builder.append(" Label: ");
         getLabels().forEach(builder::append);
         return builder.toString();
     }
+
 
 }

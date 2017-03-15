@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
@@ -41,7 +42,17 @@ public class AddCommand extends Command {
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
+<<<<<<< HEAD
         this.toAdd = new Task(new Title(title), new Deadline(), new UniqueLabelList(labelSet));
+=======
+        this.toAdd = new Task(
+                new Title(title),
+                Optional.empty(),
+                Optional.empty(),
+                false,
+                new UniqueLabelList(labelSet)
+        );
+>>>>>>> V0.2-yesha
     }
 
     /**
@@ -58,23 +69,48 @@ public class AddCommand extends Command {
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
+<<<<<<< HEAD
         this.toAdd = new Task(new Title(title), new Deadline(deadline), new UniqueLabelList(labelSet));
+=======
+        this.toAdd = new Task(
+                new Title(title),
+                Optional.empty(),
+                Optional.ofNullable(new Deadline(deadline)),
+                false,
+                new UniqueLabelList(labelSet)
+        );
+>>>>>>> V0.2-yesha
     }
 
     /**
      * Creates an AddCommand using raw values.
      *
+<<<<<<< HEAD
      * @throws IllegalValueException
      *             if any of the raw values are invalid
+=======
+     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalDateTimeValueException if deadline values are invalid
+>>>>>>> V0.2-yesha
      */
     public AddCommand(String title, String startDate, String deadline, Set<String> labels)
-            throws IllegalValueException {
+            throws IllegalValueException, IllegalDateTimeValueException {
         final Set<Label> labelSet = new HashSet<>();
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
+<<<<<<< HEAD
         // TODO
         this.toAdd = new Task(new Title(title), new Deadline(startDate, deadline), new UniqueLabelList(labelSet));
+=======
+        this.toAdd = new Task(
+                new Title(title),
+                Optional.ofNullable(new Deadline(startDate)),
+                Optional.ofNullable(new Deadline(deadline)),
+                false,
+                new UniqueLabelList(labelSet)
+        );
+>>>>>>> V0.2-yesha
     }
 
     @Override

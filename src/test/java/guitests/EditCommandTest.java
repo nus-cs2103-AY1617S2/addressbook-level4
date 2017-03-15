@@ -22,13 +22,18 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
+<<<<<<< HEAD
         String detailsToEdit = "Meet Bob BY Sunday 2359 #husband";
         int addressBookIndex = 1;
+=======
+        String detailsToEdit = "Meet Bob from 20-04-2017 0900 to 20-04-2017 2359 t/husband";
+        int taskManagerIndex = 1;
+>>>>>>> V0.2-yesha
 
-        TestTask editedTask = new TaskBuilder().withTitle("Meet Bob")
-                .withDeadline("Sunday 2359").withLabels("husband").build();
+        TestTask editedTask = new TaskBuilder().withTitle("Meet Bob").withStartTime("20-04-2017 0900")
+                .withDeadline("20-04-2017 2359").withLabels("husband").withStatus(false).build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -96,8 +101,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
+<<<<<<< HEAD
         commandBox.runCommand("EDIT 3 Complete task 4"
                                 + " BY 11-11-2017 2300 #friends");
+=======
+        commandBox.runCommand("add Complete task 5 from 10-10-2017 0100 to 11-11-2017 "
+                + "2300 t/friends");
+        commandBox.runCommand("edit 3 Complete task 5"
+                                + " from 10-10-2017 0100 to 11-11-2017 2300 t/friends");
+>>>>>>> V0.2-yesha
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -112,10 +124,17 @@ public class EditCommandTest extends TaskManagerGuiTest {
      */
     private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
+<<<<<<< HEAD
         commandBox.runCommand("EDIT " + filteredTaskListIndex + " " + detailsToEdit);
+=======
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        System.out.println("details to edit: " + detailsToEdit);
+        System.out.println("edited task: " + editedTask);
+>>>>>>> V0.2-yesha
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
+        System.out.println("Edited card: " + editedCard);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details

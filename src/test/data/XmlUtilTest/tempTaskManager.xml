@@ -2,7 +2,9 @@
 <taskmanager>
     <tasks>
         <title>Hans Muster</title>
+        <startTime></startTime>
         <deadline isPrivate="false">01-01-2018</deadline>
+        <isCompleted>false</isCompleted>
         <label isPrivate="false">4th street</label>
     </tasks>
     <labels>

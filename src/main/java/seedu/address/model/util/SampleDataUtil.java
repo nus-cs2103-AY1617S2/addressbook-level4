@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.util.Optional;
+
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -15,22 +17,34 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Title("Meet Prof Alex Yeoh"),
-                    new Deadline("Tomorrow 2300"),
+                    Optional.ofNullable(new Deadline("Tomorrow 1600")),
+                    Optional.ofNullable(new Deadline("Tomorrow 2300")),
+                    true,
                     new UniqueLabelList("school")),
                 new Task(new Title("Dinner with family"),
-                    new Deadline("Sunday 2300"),
+                    Optional.ofNullable(new Deadline("Sunday 1800")),
+                    Optional.ofNullable(new Deadline("Sunday 2300")),
+                    false,
                     new UniqueLabelList("family")),
                 new Task(new Title("CS2103 Project Meeting"),
-                    new Deadline("Saturday 1900"),
+                    Optional.ofNullable(new Deadline("Saturday 1600")),
+                    Optional.ofNullable(new Deadline("Saturday 1900")),
+                    false,
                     new UniqueLabelList("school")),
                 new Task(new Title("Birthday Party for David"),
-                    new Deadline("01-04-2017 1900"),
+                    Optional.ofNullable(new Deadline("01-04-2017 1200")),
+                    Optional.ofNullable(new Deadline("01-04-2017 2300")),
+                    true,
                     new UniqueLabelList("family")),
                 new Task(new Title("Catch up with Irfan Ibrahim"),
-                    new Deadline("07-03-2017 1900"),
+                    Optional.ofNullable(new Deadline("01-03-2017 1900")),
+                    Optional.ofNullable(new Deadline("07-03-2017 1900")),
+                    false,
                     new UniqueLabelList("classmates")),
                 new Task(new Title("Meet Roy Balakrishnan for coffee"),
-                    new Deadline("next week 2300"),
+                    Optional.ofNullable(new Deadline("next Monday 1900")),
+                    Optional.ofNullable(new Deadline("next Saturday 1900")),
+                    false,
                     new UniqueLabelList("colleagues"))
             };
         } catch (IllegalValueException e) {

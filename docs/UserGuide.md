@@ -43,20 +43,28 @@ Format: `help`
 ### 2.2. Adding a task: `ADD`
 
 Adds a task to DoOrDie<br />
+<<<<<<< HEAD
 Format: `ADD TASKNAME [#LABEL...] ([BY DEADLINE] | [FROM START_DATE TO END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
+=======
+Format: `add TASKNAME [label LABEL] ([(by) DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
+>>>>>>> V0.2-yesha
 
 > * Tasks can have a deadline, or can do without one as well.
 >   * Tasks added without specifying a deadline will be displayed under "No Deadline".
 >   * Date formats can be flexible. The application is able to parse commonly-used human-readable date formats.
 >     * e.g. `Monday`, `next wed`, `tomorrow`, `5 days after`, `4 Apr` etc.
 > * Dates can include time as well.
->   * If only time is specified, it will default to today's date.
+>   * If only time is specified, it will default to 2359.
 >   * If time is not specified, it will default to the current time of the particular date.
 >   * Time formats are flexible as well. The application supports 24 hour format and AM/PM format.
 >     * e.g. `Monday 3pm`, `today 1930`, `5:30pm`, `10.00 am`
 > * Recurring task will have the same deadline if `daily/weekly/monthly/yearly` is used
 > * Tasks can have any number of label name. (including 0).
+<<<<<<< HEAD
 > * The `ADD ` command adds tasks without specifying `task`.
+=======
+> * Tasks can be created for a date that is already passed.
+>>>>>>> V0.2-yesha
 
 Examples:
 
@@ -73,12 +81,21 @@ Format: `LIST [TYPE]`
 
 > Valid parameters for TYPE:
 > * `tasks` / `task`
+<<<<<<< HEAD
 > * `Complete` / `Completed`
 > * `Incomplete` / `Outstanding`
 > * `Overdue` / `Over`
 > * `BY DATE`
 > * `FROM STARTDATE TO ENDDATE`
 > * `BOOKINGS` / `BOOKING`
+=======
+> * `completed`
+> * `incomplete`
+> * `overdue` / `over`
+> * `by DATE`
+> * `from STARTDATE to ENDDATE`
+> * `bookings` / `booking`
+>>>>>>> V0.2-yesha
 
 Examples:
 
@@ -88,7 +105,11 @@ Examples:
 * `LIST Overdue`<br />
  Lists all overdue tasks
 
+<<<<<<< HEAD
 * `LIST Outstanding`<br />
+=======
+* `list incomplete tasks`<br />
+>>>>>>> V0.2-yesha
  Lists all outstanding tasks
 
 * `LIST Completed`<br />
@@ -103,11 +124,19 @@ Examples:
 * `LIST BOOKINGS`<br />
  Lists all unconfirmed tasks with their respective bookings
 
+<<<<<<< HEAD
 ### 2.4. Editing a task : `UPDATE`
 
 Edits the specified task's details.
 
 Format:`UPDATE [TASK_ID] [TASKNAME] [#LABEL...] ([BY DATE] | [FROM START_DATE TO END_DATE]) [done]`
+=======
+### 2.4. Editing a task : `edit`
+
+Edits the specified task's details.
+
+Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE]) [completed|incomplete]`
+>>>>>>> V0.2-yesha
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />

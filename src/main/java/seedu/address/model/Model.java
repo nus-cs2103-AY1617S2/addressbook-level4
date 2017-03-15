@@ -54,7 +54,12 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Date startDate, Date endDate);
 
+<<<<<<< HEAD
     /** Returns Raw TaskManager */
     TaskManager getRawTaskManager();
+=======
+    /** Updates the filter of the filtered task list to  filter by the given completion status*/
+    void updateFilteredTaskList(Boolean isCompleted);
+>>>>>>> V0.2-yesha
 
 }

@@ -24,7 +24,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
+<<<<<<< HEAD
             + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [#LABEL]...\n"
+=======
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [from START to END][t/LABEL]...\n"
+>>>>>>> V0.2-yesha
             + "Example: " + COMMAND_WORD + " 1 by Sunday t/new";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -77,10 +81,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Optional<Deadline> updatedStartTime = editTaskDescriptor.getStartTime();
+        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
+        Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
 
-        return new Task(updatedTitle, updatedDeadline, updatedLabels);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels);
     }
 
     /**
@@ -89,14 +95,19 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
+        private Optional<Deadline> startTime = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
+        private Optional<Boolean> isCompleted = Optional.empty();
 
         public EditTaskDescriptor() {}
 
+
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
+            this.startTime = toCopy.getStartTime();
             this.deadline = toCopy.getDeadline();
+            this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
         }
 
@@ -104,7 +115,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.deadline, this.labels);
+            return CollectionUtil.isAnyPresent(this.title, this.startTime,
+                    this.isCompleted, this.deadline, this.labels);
+        }
+
+        /**
+         * Returns true if any date is edited.
+         */
+        public boolean isDateEdited() {
+            return CollectionUtil.isAnyPresent(this.startTime, this.deadline);
         }
 
         public void setName(Optional<Title> title) {
@@ -114,6 +133,15 @@ public class EditCommand extends Command {
 
         public Optional<Title> getTitle() {
             return title;
+        }
+
+        public void setStartTime(Optional<Deadline> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
+        }
+
+        public Optional<Deadline> getStartTime() {
+            return startTime;
         }
 
         public void setDeadline(Optional<Deadline> deadline) {
@@ -132,6 +160,13 @@ public class EditCommand extends Command {
 
         public Optional<UniqueLabelList> getLabels() {
             return labels;
+        }
+
+        public void setIsCompleted(Optional<Boolean> isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+        public Optional<Boolean> isCompleted() {
+            return isCompleted;
         }
     }
 

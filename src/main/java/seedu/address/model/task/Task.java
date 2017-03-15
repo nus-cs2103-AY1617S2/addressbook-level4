@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.label.UniqueLabelList;
@@ -12,17 +13,22 @@ import seedu.address.model.label.UniqueLabelList;
 public class Task implements ReadOnlyTask {
 
     private Title title;
-    private Deadline deadline;
+    private Optional<Deadline> deadline;
+    private Optional<Deadline> startTime;
+    private Boolean isCompleted;
 
     private UniqueLabelList labels;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Deadline deadline, UniqueLabelList labels) {
-        assert !CollectionUtil.isAnyNull(title, deadline, labels);
+    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline,
+            boolean isCompleted, UniqueLabelList labels) {
+        assert !CollectionUtil.isAnyNull(title, isCompleted, labels);
         this.title = title;
         this.deadline = deadline;
+        this.startTime = startTime;
+        this.isCompleted = isCompleted;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
     }
 
@@ -30,7 +36,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getDeadline(), source.getLabels());
+        this(source.getTitle(), source.getStartTime(), source.getDeadline(), source.isCompleted(), source.getLabels());
     }
 
     public void setName(Title name) {
@@ -43,14 +49,26 @@ public class Task implements ReadOnlyTask {
         return title;
     }
 
-    public void setDeadline(Deadline deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
+    public void setStartTime(Optional<Deadline> startTime) {
+        if (startTime.isPresent()) {
+            this.startTime = startTime;
+        }
     }
 
     @Override
-    public Deadline getDeadline() {
-        return deadline;
+    public Optional<Deadline> getStartTime() {
+        return startTime == null ? Optional.empty() : startTime;
+    }
+
+    public void setDeadline(Optional<Deadline> deadline) {
+        if (deadline.isPresent()) {
+            this.deadline = deadline;
+        }
+    }
+
+    @Override
+    public Optional<Deadline> getDeadline() {
+        return deadline == null ? Optional.empty() : deadline;
     }
 
     @Override
@@ -70,10 +88,11 @@ public class Task implements ReadOnlyTask {
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
-
         this.setName(replacement.getTitle());
+        this.setStartTime(replacement.getStartTime());
         this.setDeadline(replacement.getDeadline());
         this.setLabels(replacement.getLabels());
+        this.setIsCompleted(replacement.isCompleted());
     }
 
     @Override
@@ -86,12 +105,21 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, deadline, labels);
+        return Objects.hash(title, startTime, deadline, labels);
     }
 
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public Boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
 }

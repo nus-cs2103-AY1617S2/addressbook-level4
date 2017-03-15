@@ -123,8 +123,17 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    @Override
+    public void updateFilteredTaskList(Boolean isCompleted) {
+        updateFilteredTaskListByCompletion(new StatusFilter(isCompleted));
+    }
+
     private void updateFilteredTaskListByDate(DateFilter dateFilter) {
         filteredTasks.setPredicate(dateFilter::run);
+    }
+
+    private void updateFilteredTaskListByCompletion(StatusFilter statusFilter) {
+        filteredTasks.setPredicate(statusFilter::run);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -197,12 +206,28 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            if (task.getDeadline().getDateTime() != null) {
-                return (task.getDeadline().getDateTime().before(endTime)
-                        && task.getDeadline().getDateTime().after(startTime))
-                        || task.getDeadline().getDateTime().equals(endTime);
+            if (task.getDeadline().isPresent() && task.getStartTime().isPresent()) {
+                return (task.getDeadline().get().getDateTime().before(endTime)
+                        && task.getDeadline().get().getDateTime().after(startTime))
+                        || task.getDeadline().get().getDateTime().equals(endTime);
             }
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+
+    private class StatusFilter {
+        private boolean isCompleted;
+
+        StatusFilter(boolean isCompleted) {
+            this.isCompleted = isCompleted;
+        }
+
+        public boolean run(ReadOnlyTask task) {
+            return task.isCompleted().booleanValue() == isCompleted;
+        }
+    }
+
+>>>>>>> V0.2-yesha
 }

@@ -28,10 +28,6 @@ public class Deadline {
     private Date deadline;
     private String value;
 
-    public Deadline() {
-        value = "";
-    }
-
     /**
      * Validates given deadline.
      *
@@ -46,7 +42,11 @@ public class Deadline {
             if (!isEmptyDeadline(strDeadline)) {
                 try {
                     List<Date> dateList;
+<<<<<<< HEAD
                     if (strDeadline.matches(DATE_VALIDATION_REGEX)) {
+=======
+                    if (strDeadline.matches("[a-zA-Z]+")) {
+>>>>>>> V0.2-yesha
                         dateList = dateParser.parse(strDeadline + " 235959").get(0).getDates();
                     } else {
                         dateList = dateParser.parse(strDeadline).get(0).getDates();
@@ -63,23 +63,6 @@ public class Deadline {
                 value = "";
             }
         }
-    }
-
-    /**
-     * Validates given deadline.
-     *
-     * @throws IllegalValueException if given deadline string is invalid.
-     */
-    public Deadline(String startDeadline, String endDeadline) throws IllegalValueException {
-        assert startDeadline != null;
-        if (!isValidDeadline(startDeadline) && !isValidDeadline(endDeadline)) {
-            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-        }
-        //TODO
-        List<Date> startDateList = dateParser.parse(startDeadline).get(0).getDates();
-        List<Date> endDateList = dateParser.parse(endDeadline).get(0).getDates();
-        this.deadline = startDateList.get(0);
-        this.value = deadline.toString();
     }
 
     /**
