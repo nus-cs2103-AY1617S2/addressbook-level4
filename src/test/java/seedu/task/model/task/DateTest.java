@@ -4,10 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.text.SimpleDateFormat;
-
 import org.junit.Test;
 import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 
@@ -17,21 +16,28 @@ public class DateTest {
     @Test
     public void dateIsCorrectlyCreated() throws IllegalValueException {
         PrettyTime pretty = new PrettyTime();
-        
+        PrettyTimeParser prettyParser = new PrettyTimeParser();
+        java.util.Date javaDate = new java.util.Date();
+
         Date testDate = new Date("12/23/99 12:59 pm");
-        assertEquals("12/23/1999 12:59 PM, " + pretty.format(new java.util.Date("23/12/1999 12:59 PM")), testDate.toString());
+        javaDate = prettyParser.parse("23/12/1999 12:59 PM").get(0);
+        assertEquals("12/23/1999 12:59 PM, " + pretty.format(javaDate), testDate.toString());
 
         testDate = new Date("12-25-36 14:59");
-        assertEquals("12/25/2036 2:59 PM, " + pretty.format(new java.util.Date("25/12/2036 2:59 PM")), testDate.toString());
+        javaDate = prettyParser.parse("25/12/2036 2:59 PM").get(0);
+        assertEquals("12/25/2036 2:59 PM, " + pretty.format(javaDate), testDate.toString());
 
         testDate = new Date("12/25/1936 23:59");
-        assertEquals("12/25/1936 11:59 PM, " + pretty.format(new java.util.Date("25/12/1936 11:59 PM")), testDate.toString());
+        javaDate = prettyParser.parse("25/12/1936 11:59 PM").get(0);
+        assertEquals("12/25/1936 11:59 PM, " + pretty.format(javaDate), testDate.toString());
 
         testDate = new Date("1/1/2000 1:23");
-        assertEquals("1/1/2000 1:23 AM, " + pretty.format(new java.util.Date("1/1/2000 1:23 AM")), testDate.toString());
+        javaDate = prettyParser.parse("1/1/2000 1:23 AM").get(0);
+        assertEquals("1/1/2000 1:23 AM, " + pretty.format(javaDate), testDate.toString());
 
         testDate = new Date("25 Dec 2015 00:00");
-        assertEquals("12/25/2015 12:00 AM, " + pretty.format(new java.util.Date("25 Dec 2015")), testDate.toString());
+        javaDate = prettyParser.parse("25 Dec 2015").get(0);
+        assertEquals("12/25/2015 12:00 AM, " + pretty.format(javaDate), testDate.toString());
     }
 
     @Test

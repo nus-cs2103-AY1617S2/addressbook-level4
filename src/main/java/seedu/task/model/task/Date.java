@@ -15,13 +15,12 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Date {
 
     // add to user guide
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like, tomorrow at 5pm or 4th April";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like,"
+                                                        + " tomorrow at 5pm or 4th April";
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
-    
     private final java.util.Date value;
-    
     private static PrettyTimeParser p = new PrettyTimeParser();
-    
+
     /**
      * Validates given date.
      *
@@ -31,7 +30,7 @@ public class Date {
     public Date(String date) throws IllegalValueException {
         assert date != null;
         String trimmedDate = date.trim();
-        
+
         if (date.equals(DEFAULT_DATE) || trimmedDate.equals("")) {
             this.value = null;
         } else {
@@ -39,7 +38,7 @@ public class Date {
             if (!isValidDate(trimmedDate)) {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
-            
+
             List<java.util.Date> dates = p.parse(date);
             this.value = dates.get(0);
         }
@@ -49,11 +48,11 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String input) {
-        
+
         List<java.util.Date> dates = p.parse(input);
-        
+
         if (dates.isEmpty()) {
-            return false;            
+            return false;
         } else {
             return true;
         }
