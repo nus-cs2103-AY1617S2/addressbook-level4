@@ -25,19 +25,19 @@ public class Task implements ReadOnlyTask {
      * Event
      */
     public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
-        if (startDate.toString().isEmpty() && endDate.toString().isEmpty()) {
-            this.type = TaskType.TODO;    
-        } else if (startDate.toString().isEmpty() && !endDate.toString().isEmpty()) {
-            this.type = TaskType.DEADLINE;
-        } else if (!startDate.toString().isEmpty() && !endDate.toString().isEmpty()) {
-            this.type = TaskType.EVENT;
-        }
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isDone = false;
+        if (!startDate.hasDate() && !endDate.hasDate()) {
+            this.type = TaskType.TODO;    
+        } else if (!startDate.hasDate() && endDate.hasDate()) {
+            this.type = TaskType.DEADLINE;
+        } else if (startDate.hasDate() && endDate.hasDate()) {
+            this.type = TaskType.EVENT;
+        }
     }
 
     /**
@@ -109,7 +109,7 @@ public class Task implements ReadOnlyTask {
         this.description = description;
     }
     
-    public void setDone(){
+    public void setDone() {
         assert isDone == false;
         isDone = true;
     }

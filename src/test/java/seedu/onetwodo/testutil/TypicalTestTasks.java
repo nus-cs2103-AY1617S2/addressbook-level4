@@ -23,30 +23,35 @@ public class TypicalTestTasks {
             // Event with missing info
             taskB = new TaskBuilder().withName("study at home")
                     .withStartDate("10 Mar 2018").withEndDate("13 mar 2018")
+                    .withDescription("")
                     .build();
             // Deadline with all date info
             taskC = new TaskBuilder().withName("submit cs2101 reflection")
-                    .withEndDate("13-05-2018 23:30")
+                    .withStartDate("").withEndDate("13-05-2018 23:30")
                     .withDescription("use the 7 C")
                     .withTags("school")
                     .build();
             // Deadline with no time
             taskD = new TaskBuilder().withName("complete 2103 tutorial")
-                    .withEndDate("tomorrow")
+                    .withStartDate("").withEndDate("tomorrow")
                     .withDescription("bring weapon")
                     .withTags("school", "favourite")
                     .build();
             // Deadline with many missing info
             taskE = new TaskBuilder().withName("finish assignments")
-                    .withEndDate("11pm")
+                    .withStartDate("").withEndDate("11pm")
+                    .withDescription("")
                     .build();
             // To-do with all info
             taskF = new TaskBuilder().withName("buy new bag")
+                    .withStartDate("").withEndDate("")
                     .withDescription("find cheap ones")
                     .withTags("shopping", "favourite", "hobby")
                     .build();
             // To-do with missing info
             taskG = new TaskBuilder().withName("change clothes")
+                    .withStartDate("").withEndDate("")
+                    .withDescription("")
                     .build();
 
             
@@ -57,11 +62,13 @@ public class TypicalTestTasks {
                     .withTags("work")
                     .build();
             task2 = new TaskBuilder().withName("do peer evaluation")
-                    .withEndDate("16 july 2018 10:00")
+                    .withStartDate("").withEndDate("16 july 2018 10:00")
                     .withDescription("grade everyone 10/10")
                     .withTags("school")
                     .build();
             task3 = new TaskBuilder().withName("reply boss email")
+                    .withStartDate("").withEndDate("")
+                    .withDescription("")
                     .build();
         } catch (IllegalValueException e) {
             e.printStackTrace();

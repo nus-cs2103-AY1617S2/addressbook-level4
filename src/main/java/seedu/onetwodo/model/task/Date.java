@@ -38,9 +38,11 @@ public class Date {
      */
     public String createDisplayValue(Optional<LocalDateTime> localDateTime) {
         if(!localDateTime.isPresent()) {
-            return "";
+            this.value = "";
+            return value;
         } else {
-            return localDateTime.get().toString();
+            this.value = localDateTime.get().toString();
+            return value;
         }
     }
     
