@@ -14,7 +14,7 @@ import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the todo list.
  */
 public class AddCommand extends Command {
 
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + " Reply boss's email t/HighPriority t/Email";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
     private String commandText;
     private final Task toAdd;

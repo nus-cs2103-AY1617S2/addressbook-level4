@@ -6,7 +6,7 @@ import seedu.todolist.model.ReadOnlyToDoList;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Undone - %1$s";
+    public static final String MESSAGE_UNDO_TASK_SUCCESS = "Undone - %1$s";
     public static final String MESSAGE_NOTHING_TO_UNDO = "Nothing to undo!";
     private CommandAndState commAndState;
     private String commandText;
@@ -24,7 +24,7 @@ public class UndoCommand extends Command {
         String command = commAndState.getCommand().getCommandText();
         ReadOnlyToDoList previousState = commAndState.getState();
         model.resetData(previousState);
-        commandText = String.format(MESSAGE_UNDO_PERSON_SUCCESS, command);
+        commandText = String.format(MESSAGE_UNDO_TASK_SUCCESS, command);
         return new CommandResult(commandText);
     }
 
