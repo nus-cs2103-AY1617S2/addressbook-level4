@@ -6,16 +6,16 @@ import java.util.Optional;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
-import seedu.task.logic.commands.TaskCompletedCommand;
+import seedu.task.logic.commands.UncheckCommand;
 
-public class TaskCompletedParser {
-    public Command parse(String args) {
+public class UncheckedCommandParser {
+	public Command parse(String args) {
 
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskCompletedCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UncheckCommand.MESSAGE_USAGE));
         }
-        return new TaskCompletedCommand(index.get());
+        return new UncheckCommand(index.get());
     }
 }

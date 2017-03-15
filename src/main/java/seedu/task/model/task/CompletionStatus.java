@@ -23,6 +23,10 @@ public class CompletionStatus {
         this.status = !this.status;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(status);
