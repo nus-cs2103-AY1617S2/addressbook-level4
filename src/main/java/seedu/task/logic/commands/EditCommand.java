@@ -77,7 +77,7 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedDescription, null, updatedTags);
+        return new Task(updatedDescription, null, null, updatedTags);
     }
 
     /**

@@ -66,6 +66,6 @@ public class XmlAdaptedTask {
             new Duration(this.start, this.end) :
             null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, duration, tags);
+        return new Task(description, null, duration, tags);
     }
 }
