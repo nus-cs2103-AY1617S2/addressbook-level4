@@ -112,10 +112,6 @@ Format: `add <TASK NAME>`
 
 Examples:
 
-> add CS2103T Meeting
-
-Examples:
-
 * `add CS2103T Meeting`
 * `add Buy milk`
 
@@ -378,8 +374,12 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Task Manager folder.
+ Install the app in the other computer and overwrite the empty data file it creates with 
+ the file that contains the data of your previous Task Manager folder.
+ 
+**Q**: TypeTask does not launch in Eclipse. How can I solve this issue?<br>
+Make sure that you run the program as a java application. Also, try refreshing the Gradle project 
+by try right clicking on the file -> Gradle -> Refresh Gradle project 
  
 &nbsp;
 
