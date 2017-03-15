@@ -465,7 +465,10 @@ public class LogicManagerTest {
                 cmd.append(" p/").append(p.getPriority().get().toString());
             }
 
-            cmd.append(" n/").append(p.getNote());
+            if (p.getNote().isPresent()) {
+                cmd.append(" n/").append(p.getNote().get().toString());
+            }
+
             cmd.append(" d/").append(p.getDeadline().toString());
 
             UniqueTagList tags = p.getTags();

@@ -49,8 +49,11 @@ public interface ReadOnlyTask {
 
         builder.append(" Status: ");
         builder.append(getStatus());
-        builder.append(" Note: ");
-        builder.append(getNote());
+
+        if (getNote().isPresent()) {
+            builder.append(" Note: ").append(getNote().get().toString());
+        }
+
         builder.append(" Deadline: ");
         builder.append(getDeadline().toString());
         builder.append(" Tags: ");
