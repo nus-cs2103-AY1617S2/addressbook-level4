@@ -145,6 +145,10 @@ public class ModelManager extends ComponentManager implements Model {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword))
                     .findAny()
+                    .isPresent() ||
+                    nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
+                    .findAny()
                     .isPresent();
         }
 
