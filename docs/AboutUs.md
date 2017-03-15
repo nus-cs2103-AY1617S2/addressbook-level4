@@ -43,4 +43,3 @@ Role: Developer <br>
 - Other major contributions:
 
 -----
-
