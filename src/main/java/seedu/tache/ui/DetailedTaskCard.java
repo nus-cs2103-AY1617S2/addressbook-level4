@@ -52,9 +52,8 @@ public class DetailedTaskCard extends UiPart<Region> {
 
     private static String toAlphabetic(int i) {
         String result = "";
-        while (--i >= 0)
-        {
-            result = (char)('A' + i % 26 ) + result;
+        while (--i >= 0) {
+            result = (char) ('A' + i % 26) + result;
             i /= 26;
         }
         return result;

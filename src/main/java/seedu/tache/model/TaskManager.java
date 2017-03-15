@@ -136,7 +136,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
-    
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
@@ -225,8 +225,9 @@ public class TaskManager implements ReadOnlyTaskManager {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
-    public boolean removeDetailedTask(ReadOnlyDetailedTask key) throws UniqueDetailedTaskList.DetailedTaskNotFoundException {
+
+    public boolean removeDetailedTask(ReadOnlyDetailedTask key)
+                throws UniqueDetailedTaskList.DetailedTaskNotFoundException {
         if (detailedTasks.remove(key)) {
             return true;
         } else {

@@ -26,7 +26,7 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     public static final int MARGIN_OF_ERROR = 1;
-    
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
@@ -101,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
-    
+
     @Override
     public void updateDetailedTask(int filteredDetailedTaskListIndex, ReadOnlyDetailedTask editedDetailedTask)
             throws DuplicateDetailedTaskException {
@@ -110,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredDetailedTasks.getSourceIndex(filteredDetailedTaskListIndex);
         taskManager.updateDetailedTask(taskManagerIndex, editedDetailedTask);
         indicateTaskManagerChanged();
-        
+
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -139,12 +139,12 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     @Override
     public void updateFilteredDetailedTaskList(Set<String> keywords) {
-        updateFilteredDetailedTaskList(new PredicateExpression(new MultiQualifier(keywords)));     
+        updateFilteredDetailedTaskList(new PredicateExpression(new MultiQualifier(keywords)));
     }
-    
+
     private void updateFilteredDetailedTaskList(Expression expression) {
         filteredDetailedTasks.setPredicate(expression::satisfies);
     }
@@ -169,7 +169,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
         }
-        
+
         @Override
         public boolean satisfies(ReadOnlyDetailedTask detailedTask) {
             return qualifier.run(detailedTask);
@@ -198,9 +198,11 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             String[] nameElements = task.getName().fullName.split(" ");
             boolean partialMatch = false;
-            String trimmedNameKeyWords = nameKeyWords.toString().substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
-            for(int i = 0 ; i < nameElements.length; i++){
-                if(computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR){
+            String trimmedNameKeyWords = nameKeyWords.toString()
+                        .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
+            for (int i = 0; i < nameElements.length; i++) {
+                if (computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase())
+                            <= MARGIN_OF_ERROR) {
                     partialMatch = true;
                     break;
                 }
@@ -211,14 +213,16 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent()
                     || partialMatch;
         }
-        
+
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             String[] nameElements = detailedTask.getName().fullName.split(" ");
             boolean partialMatch = false;
-            String trimmedNameKeyWords = nameKeyWords.toString().substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
-            for(int i = 0 ; i < nameElements.length; i++){
-                if(computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR){
+            String trimmedNameKeyWords = nameKeyWords.toString()
+                        .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
+            for (int i = 0; i < nameElements.length; i++) {
+                if (computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase())
+                            <= MARGIN_OF_ERROR) {
                     partialMatch = true;
                     break;
                 }
@@ -235,25 +239,26 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class DateQualifier implements Qualifier {
         private Set<String> dateKeyWords;
 
         DateQualifier(Set<String> dateKeyWords) {
             this.dateKeyWords = dateKeyWords;
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             return false;
         }
-        
+
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return dateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString(), keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString(),
+                                keyword))
                     .findAny()
-                    .isPresent() 
+                    .isPresent()
                     || dateKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getEndDate().toString(), keyword))
                     .findAny()
@@ -266,25 +271,26 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-    
+
     private class TimeQualifier implements Qualifier {
         private Set<String> timeKeyWords;
 
         TimeQualifier(Set<String> timeKeyWords) {
             this.timeKeyWords = timeKeyWords;
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             return false;
         }
-        
+
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return timeKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(), keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(),
+                                keyword))
                     .findAny()
-                    .isPresent() 
+                    .isPresent()
                     || timeKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getEndTime().toString(), keyword))
                     .findAny()
@@ -297,7 +303,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-    
+
     private class MultiQualifier implements Qualifier {
         private Set<String> multiKeyWords;
         private NameQualifier nameQualifier;
@@ -310,15 +316,16 @@ public class ModelManager extends ComponentManager implements Model {
             dateQualifier = new DateQualifier(multiKeyWords);
             timeQualifier = new TimeQualifier(multiKeyWords);
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             return false;
         }
-        
+
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
-            return nameQualifier.run(detailedTask) || dateQualifier.run(detailedTask) || timeQualifier.run(detailedTask);
+            return nameQualifier.run(detailedTask) || dateQualifier.run(detailedTask)
+                        || timeQualifier.run(detailedTask);
         }
 
         @Override
@@ -327,27 +334,27 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-    
-    private int computeLevenshteinDistance(CharSequence str1, CharSequence str2 ) {
+
+    private int computeLevenshteinDistance(CharSequence str1, CharSequence str2) {
         int[][] distance = new int[str1.length() + 1][str2.length() + 1];
-    
-        for (int i = 0; i <= str1.length(); i++)
-           distance[i][0] = i;
-        for (int j = 1; j <= str2.length(); j++)
-           distance[0][j] = j;
-    
-        for (int i = 1; i <= str1.length(); i++)
-           for (int j = 1; j <= str2.length(); j++)
-              distance[i][j] =
-                 minimum(
+
+        for (int i = 0; i <= str1.length(); i++) {
+            distance[i][0] = i;
+        }
+        for (int j = 1; j <= str2.length(); j++) {
+            distance[0][j] = j;
+        }
+        for (int i = 1; i <= str1.length(); i++) {
+            for (int j = 1; j <= str2.length(); j++) {
+                distance[i][j] = minimum(
                     distance[i - 1][j] + 1,
                     distance[i][j - 1] + 1,
-                    distance[i - 1][j - 1] +
-                        ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
-    
+                    distance[i - 1][j - 1] + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+            }
+        }
         return distance[str1.length()][str2.length()];
     }
-    
+
     private int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
     }

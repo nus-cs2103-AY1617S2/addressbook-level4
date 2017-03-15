@@ -26,9 +26,9 @@ public class DeleteCommandParser {
         }
 
         Optional<Integer> indexType = ParserUtil.determineIndexType(args);
-        if(indexType.get() == ParserUtil.TYPE_TASK) {
+        if (indexType.get() == ParserUtil.TYPE_TASK) {
             return new DeleteCommand(index.get());
-        }else{
+        } else {
             return new DeleteCommand(index.get(), DeleteCommand.TaskType.TypeDetailedTask);
         }
     }
