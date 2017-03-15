@@ -11,10 +11,11 @@ public class VersionTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    @Test
     public void versionParsingAcceptableVersionStringParsedVersionCorrectly() {
-        verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
-        verifyVersionParsedCorrectly("V3.10.2", 3, 10, 2, false);
-        verifyVersionParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
+        assertEquals(Version.fromString("V0.0.0ea"), new Version(0, 0, 0, true));
+        assertEquals(Version.fromString("V3.10.2"), new Version(3, 10, 2, false));
+        assertEquals(Version.fromString("V100.100.100ea"), new Version(100, 100, 100, true));
     }
 
     @Test
@@ -50,8 +51,7 @@ public class VersionTest {
 
     @Test
     public void versionComparableValidVersionCompareToIsCorrect() {
-        Version one;
-        Version another;
+        Version one, another;
 
         // Tests equality
         one = new Version(0, 0, 0, true);
@@ -131,9 +131,4 @@ public class VersionTest {
         assertTrue(one.equals(another));
     }
 
-    @Test
-    private void verifyVersionParsedCorrectly(String versionString,
-                                              int major, int minor, int patch, boolean isEarlyAccess) {
-        assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
-    }
 }

@@ -50,19 +50,12 @@ public class DetailedTaskCard extends UiPart<Region> {
         detailedTask.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private static String toAlphabetic(int i) {
-        int input = i - 1;
-        if (input < 0) {
-            return "-" + toAlphabetic(-input - 1);
+    private static String toAlphabetic(int index) {
+        String result = "";
+        while (--index >= 0) {
+            result = (char) ('A' + index % 26) + result;
+            index /= 26;
         }
-
-        int quot = input / 26;
-        int rem = input % 26;
-        char letter = (char) ((int) 'A' + rem);
-        if (quot == 0) {
-            return "" + letter;
-        } else {
-            return toAlphabetic(quot - 1) + letter;
-        }
+        return result;
     }
 }

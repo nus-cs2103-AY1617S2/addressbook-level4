@@ -1,6 +1,7 @@
 package seedu.tache.commons.util;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,6 +24,7 @@ public class AppUtilTest {
     public void getImageNullGivenAssertionError() {
         thrown.expect(AssertionError.class);
         AppUtil.getImage(null);
+        fail();
     }
 
 }

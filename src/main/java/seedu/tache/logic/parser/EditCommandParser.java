@@ -73,6 +73,8 @@ public class EditCommandParser {
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(EDIT_PARAMETER_DELIMITER))));
                     break;
+                default:
+                    break;
                 }
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
@@ -82,8 +84,11 @@ public class EditCommandParser {
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index.get(), editTaskDescriptor);
+        if (ParserUtil.determineIndexType(preambleFields[0]).get() == ParserUtil.TYPE_TASK) {
+            return new EditCommand(index.get(), editTaskDescriptor);
+        } else {
+            return new EditCommand(index.get(), editTaskDescriptor, EditCommand.TaskType.TypeDetailedTask);
+        }
     }
 
     /**

@@ -1,8 +1,8 @@
 package seedu.tache.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +31,7 @@ public class JsonUserPrefsStorageTest {
     public void readUserPrefsNullFilePathAssertionFailure() throws DataConversionException {
         thrown.expect(AssertionError.class);
         readUserPrefs(null);
+        fail();
     }
 
     private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
@@ -47,7 +48,7 @@ public class JsonUserPrefsStorageTest {
     public void readUserPrefsNotJsonFormatExceptionThrown() throws DataConversionException {
         thrown.expect(DataConversionException.class);
         readUserPrefs("NotJsonFormatUserPrefs.json");
-
+        fail();
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
          */
@@ -86,12 +87,14 @@ public class JsonUserPrefsStorageTest {
     public void savePrefsNullPrefsAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveUserPrefs(null, "SomeFile.json");
+        fail();
     }
 
     @Test
     public void saveUserPrefsNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveUserPrefs(new UserPrefs(), null);
+        fail();
     }
 
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) throws IOException {

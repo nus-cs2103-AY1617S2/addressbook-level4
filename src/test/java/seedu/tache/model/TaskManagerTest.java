@@ -1,6 +1,7 @@
 package seedu.tache.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +41,7 @@ public class TaskManagerTest {
     public void resetDataNullThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         taskManager.resetData(null);
+        fail();
     }
 
     @Test
@@ -61,6 +63,7 @@ public class TaskManagerTest {
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
+        fail();
     }
 
     @Test
@@ -75,6 +78,7 @@ public class TaskManagerTest {
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
+        fail();
     }
 
     /**

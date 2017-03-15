@@ -7,8 +7,8 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* Tâche is a desktop Task Manager. 
-* It is a Java sample application intended for users to manage their to-do items and events in a systematic way. 
+* Tâche is a desktop Task Manager.
+* It is a Java sample application intended for users to manage their to-do items and events in a systematic way.
 * It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
 * The application supports:
@@ -28,8 +28,8 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-  
-* The original source of this code comes from the SE-EDU initiative at https://github.com/se-edu/. 
+
+* The original source of this code comes from the SE-EDU initiative at https://github.com/se-edu/.
 
 
 #### Licence : [MIT](LICENSE)

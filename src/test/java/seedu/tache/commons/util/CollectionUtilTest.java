@@ -79,7 +79,7 @@ public class CollectionUtilTest {
     @Test
     public void isAnyNullCollectionNullReferenceThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        CollectionUtil.isAnyNull((Collection<Object>) null);
+        assertFalse(CollectionUtil.isAnyNull((Collection<Object>) null));
     }
 
     @Test
