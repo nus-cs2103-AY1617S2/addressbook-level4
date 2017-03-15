@@ -6,7 +6,7 @@ public class ListCommandTitle extends ListCommand {
 	
 	@Override
 	public CommandResult execute() {
-		model.sortFilteredEventList();
+		model.updateSortedEventList();
 		return new CommandResult(MESSAGE_SUCCESS);
 	}
 }

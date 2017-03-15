@@ -15,7 +15,10 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -27,6 +30,10 @@ public class ModelManager extends ComponentManager implements Model {
 	private final TaskManager taskManager;
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
+	private ObservableList<ReadOnlyEvent> observedEvents;
+	private SortedList<ReadOnlyEvent> sortedEvents;
+	private boolean toSort = false;
+	
 	/**
 	 * Initializes a ModelManager with the given taskManager and userPrefs.
 	 */
@@ -37,7 +44,9 @@ public class ModelManager extends ComponentManager implements Model {
 		logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
 		this.taskManager = new TaskManager(taskManager);
-		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		observedEvents = FXCollections.observableList(this.taskManager.getTaskList());
+		filteredEvents = observedEvents.filtered(null);
+		sortedEvents = observedEvents.sorted();
 	}
 
 	public ModelManager() {
@@ -87,12 +96,32 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public void setToSortListSwitch() {
+		this.toSort = true;
+	}
+	
+	@Override
+	public void unSetToSortListSwitch() {
+		this.toSort =  false;
+	}
+	
+	@Override
+	public boolean getSortListSwitch() {
+		return toSort;
+	}
 
 	//=========== Filtered Event List Accessors =============================================================
 	
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
 		return new UnmodifiableObservableList<>(filteredEvents);
+	}
+	
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList() {
+		return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
 	}
 
 	@Override
@@ -106,8 +135,12 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 	
 	@Override
-	public void sortFilteredEventList() {
-		filteredEvents.sorted();
+	public void updateSortedEventList() {
+		updateSortedEventListByTitle();
+	}
+	
+	private void updateSortedEventListByTitle() {
+		sortedEvents.sorted();
 	}
 
 	private void updateFilteredEventList(Expression expression) {
