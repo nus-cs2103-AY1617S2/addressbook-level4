@@ -56,15 +56,15 @@ Format: `help`
 
 **Add event**:
 
-Format: `add e event name dt/START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+Format: `add e event name d/START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
 
 **Add tentative event, blocks multiple time slots**:
 
-Format: `add e event name dt/START_DATE START_TIME to [END_DATE] END_TIME or [dt/START_DATE] ... [t/TAG]... [//DESCRIPTION]`<br>
+Format: `add e event name d/START_DATE START_TIME to [END_DATE] END_TIME or [dt/START_DATE] ... [t/TAG]... [//DESCRIPTION]`<br>
 
 **Add task with deadline**:
 
-Format: `add t task name dt/DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
+Format: `add t task name d/DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
 
 **Add task without deadline**:
 
@@ -72,8 +72,8 @@ Format: `add t task name [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 Examples:
 
-* `add e CS2103 Meeting dt/03-03-17 17:00 to 19:00 t/school`
-* `add t Buy tickets dt/03-05-17 //ensure it's front row`
+* `add e CS2103 Meeting d/03-03-17 17:00 to 19:00 t/school`
+* `add t Buy tickets d/03-05-17 //ensure it's front row`
 * `add t Go out for dinner`
 
 ### 3.3 Viewing the active/expired list: `list`
@@ -94,11 +94,11 @@ Format: `list e`<br>
 
 > All tasks and events that have times that overlap in part or whole with this time frame will be displayed
 
-Format: `list dt/START_DATE START_TIME to [END_DATE] END_TIME`<br>
+Format: `list d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
 **View active task or event list within specific time frame**: 
 
-Format: `list [t or e] dt/START_DATE START_TIME to [END_DATE] END_TIME`<br>
+Format: `list [t or e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
 **View overdue tasks** : 
 
@@ -111,8 +111,8 @@ Format: `list c`<br>
 Examples:
 
 * `list c`
-* `list e dt/5-5-18 00:00 to 15:00`
-* `list t dt/5-7-17 00:00 to 8-7-17 16:00`
+* `list e d/5-5-18 00:00 to 15:00`
+* `list t d/5-7-17 00:00 to 8-7-17 16:00`
 
 ### 3.4 Updating a field of a task/event in the active list : `edit`
 
@@ -196,11 +196,11 @@ Format: `history`<br>
 
 * **Help** : `help`<br>
 
-* **Add event** : `add e event name dt/START_DATE START_TIME to [END_DATE] END_TIME [or dt/START_DATE...] ... [t/TAG]... [//DESCRIPTION]`<br>
+* **Add event** : `add e event name d/START_DATE START_TIME to [END_DATE] END_TIME [or d/START_DATE...] ... [t/TAG]... [//DESCRIPTION]`<br>
 
-* **Add task** : `add t task name [dt/DEADLINE] [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
+* **Add task** : `add t task name [d/DEADLINE] [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
 
-* **List active tasks/events/all** : `list [t or e] dt/START_DATE START_TIME to [END_DATE] END_TIME`<br> 
+* **List active tasks/events/all** : `list [t or e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br> 
 
 * **List overdue** : `list o`<br> 
 
