@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Date;
+import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Schedule;
@@ -76,7 +77,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
+     */
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+        assert location != null;
+        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
+    }
+    
+    /**
+     * Parses a {@code Optional<String> periodic} into an {@code Optional<Periodic>} if {@code periodic} is present.
      */
     public static Optional<Periodic> parsePeriodic(Optional<String> periodic) throws IllegalValueException {
         assert periodic != null;
@@ -84,7 +93,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>} if {@code description} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
@@ -92,11 +101,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> schedule} into an {@code Optional<Schedule>} if {@code schedule} is present.
      */
-    public static Optional<Schedule> parseSchedule(Optional<String> timing) throws IllegalValueException {
-        assert timing != null;
-        return timing.isPresent() ? Optional.of(new Schedule(timing.get())) : Optional.empty();
+    public static Optional<Schedule> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+        assert schedule != null;
+        return schedule.isPresent() ? Optional.of(new Schedule(schedule.get())) : Optional.empty();
     }
 
 

@@ -3,18 +3,16 @@ package org.teamstbf.yats.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
-import javax.tools.DocumentationTool.Location;
-
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -81,13 +79,14 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
+        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        Schedule updatedEndTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getEndTime);
+        Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Event(updatedName, updatedPeriodic, updatedStartTime,
+        return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime,
         		updatedEndTime, updatedDescription, updatedTags);
     }
 
@@ -97,7 +96,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> name = Optional.empty();
-        private Optional<Date> deadline = Optional.empty();
+        private Optional<Location> location = Optional.empty();
         private Optional<Schedule> startTime = Optional.empty();
         private Optional<Schedule> endTime = Optional.empty();
         private Optional<Description> description = Optional.empty();
@@ -108,7 +107,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.deadline = toCopy.getDeadline();
+            this.location = toCopy.getLocation();
             this.startTime = toCopy.getStartTime();
             this.endTime = toCopy.getStartTime();
             this.description = toCopy.getDescription();
@@ -120,7 +119,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.startTime, this.description, this.periodic, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.description, this.periodic, this.tags);
         }
 
         public void setName(Optional<Title> name) {
@@ -131,14 +130,14 @@ public class EditCommand extends Command {
         public Optional<Title> getName() {
             return name;
         }
-
-        public void setDeadline(Optional<Date> deadline) {
-            assert deadline != null;
-            this.deadline = deadline;
+        
+        public void setLocation(Optional<Location> location) {
+        	assert location != null;
+        	this.location = location;
         }
 
-        public Optional<Date> getDeadline() {
-            return deadline;
+        public Optional<Location> getLocation() {
+        	return location;
         }
 
         public void setStartTime(Optional<Schedule> schedule) {
@@ -185,6 +184,7 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
+
     }
 
 }
