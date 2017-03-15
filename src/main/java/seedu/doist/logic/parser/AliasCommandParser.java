@@ -28,7 +28,7 @@ public class AliasCommandParser {
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AliasCommand.MESSAGE_USAGE));
         }
-        final String argument = matcher.group("preamble").trim();
+        final String preamble = matcher.group("preamble").trim();
         final String parameters = matcher.group("parameters").trim();
         ArrayList<String> tokens = ParserUtil.getParameterKeysFromString(parameters);
 
@@ -44,8 +44,11 @@ public class AliasCommandParser {
             if (parameter == null || parameter.isEmpty()) {
                 throw new IllegalValueException("command word must be specified");
             }
+            if (!preamble.matches("[a-zA-Z]+")) {
+                throw new IllegalValueException("alias can only contain alphabets");
+            }
             String commandWord = parameter.get(0);
-            return new AliasCommand(argument, commandWord);
+            return new AliasCommand(preamble, commandWord);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
