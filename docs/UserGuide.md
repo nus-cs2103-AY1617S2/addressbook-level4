@@ -183,7 +183,7 @@ Hour | 3
 
 ### Listing tasks : `list`, `ls`
 
-Use the `list` command to list different types of tasks! Doist knows that you have many tasks and would need to filter them in some way to concentrate on doing those tasks. <br>
+You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and would need to filter them in some way to concentrate on doing those tasks. <br>
 `ls` is an alternative command word.
 
 List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
@@ -201,7 +201,7 @@ You can also use the `\in` key for tasks occurring `today`, `this week`, `this m
 `[\in STRING_REPRESENTING_TIME_INTERVAL]`
 > **Examples:** <br>
 > `list \from 3pm \to 5pm` <br>
-> `list \in this week`
+> `list \in this week` <br>
 > **Tips:** <br>
 > See the table of acceptable date and time formats above
 
@@ -219,7 +219,7 @@ List tasks that are under certain tags by using the `\under` key. <br>
 
 ### Finding tasks : `find`
 
-Use the `find` command to find tasks which description contain any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
+You can use the `find` command to find tasks which description contain any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
 `find 'QUERY' ['QUERY'...]`
 > **Examples:** <br>
 > `list \from 3pm \to 5pm` <br>
@@ -239,15 +239,17 @@ Use the `find` command to find tasks which description contain any of the given 
 
 ### Deleting tasks : `delete`
 
-Deletes the specified tasks from to-do list. It is irreversible.<br>
-You can delete more than one task
-Format: `delete INDEX [INDEX...]`
-
+You can use the `delete` command to delete the specified tasks. You can delete more than one task by specifying multiple indices. <br>
+`delete INDEX [INDEX...]`
+> **Examples:** <br>
+> `delete 3` <br>
+> **Tips:** <br>
 > Deletes the tasks at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
+> The index refers to the index number of the task shown in the most recent listing.<br>
 > The index must be a **positive integer** 1, 2, 3, ...
 
-Examples:
+
+**More examples:**
 
 * `list finished`<br>
   `delete 1 2`<br>
@@ -256,17 +258,25 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### Marking tasks as finished : `finish`
+### Marking tasks as finished and not finished : `finish`, `fin`, `finished`, `unfinish`
 
-Mark the specified tasks as finished.<br>
-Format: `finish INDEX [INDEX...]`
+You can use the `finish` command to mark the specified tasks as finished.
+We feel your excitement to finish tasks, thus we have two alternative command words! <br>
+`fin` and `finished` are alternative command words.  <br>
+`finish INDEX [INDEX...]`
 
-> Mark the tasks at the specified `INDEX` as finished.<br>
-> The index refers to the index number shown in the most recent listing.<br>
+Use the `unfinish` command to change the status of an already finished task to not finished.
+`unfinish INDEX [INDEX...]`
+
+> **Examples:** <br>
+> `finish 3` <br>
+> `unfinish 3` <br>
+> **Tips:** <br>
+> The index refers to the index number of the task shown in the most recent listing.<br>
 > The index must be a **positive integer** 1, 2, 3, ...<br>
-> If the tasks at the specified `INDEX` are already finished, no change made.
+> If the task(s) at the specified `INDEX` is/are already finished, there would be no changes made.
 
-Examples:
+**More examples:**
 
 * `list pending \in this week`<br>
   `finish 1 2`<br>
@@ -277,58 +287,63 @@ Examples:
 
 ### Editing an existing task : `edit`
 
-Edit the specified task.<br>
-Format 1: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
-Format 2: `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
+You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task would not change! <br>
+`edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
-> The rule for `edit` command is the same as `add` command
+Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
+> **Examples:** <br>
+> `edit 3 edited description of task` <br>
+> **Tips:** <br>
+> Refer to the section about the `add` command to know how to use the keys of the `edit` command because they are used in the exact same way
 
-Examples:
+**More examples:**
 * `list`<br>
   `edit 1 \desc watch NBA \remind_at this Sunday 8am`<br>
-  Suppose originally, the description of this task is `watch nba`,
-  it will be change to `watch NBA`.
-  The reminder time will also be updated to the specified one: `this Sunday 8am`.
+  Suppose that the description of this task is originally `watch nba`,
+  the new description would be changed to `watch NBA`.
+  The reminder time will also be updated to the specified one which is `this Sunday 8am`.
 
 ### Listing all the tags : `list_tag`, `ls_tag`
+You can use `list_tag` to display a list of all existing tags. <br>
+`(list_tag|ls_tag)`  
 
-Displays a list of all tags.<br>
-Format: `(list_tag|ls_tag)`  
+### Undoing and redoing the previous commands : `undo`, `redo`
 
-> * Tags cannot have space.
+You can use `undo` to undo previous commands. Undo as many times as you wish! <br>
+`undo`
+If you regret undoing a command, you can use `redo` to redo that command. However if you undo a command and then you enter a new command, you will not be able to redo that command anymore.
 
-### Undoing the previous commands : `undo`
+### Clearing all tasks: `clear`
 
-Undo the command previous to the current command.<br>
-Format: `undo`  
-
-### Clearing all entries : `clear`
-
-Clears all entries from the to-do list.<br>
-Format: `clear`  
+Done with all your tasks? Need an empty to-do list?
+You can simply use `clear` to clear all tasks.
+`clear`  
 
 ### Set an alias for a command word : `alias`
 
-Set an alias for an existing command word so that the alias can also be used to trigger the command.<br>
-Format: `alias ALIAS \for COMMAND_WORD`
-
-> `ALIAS` should be a string without spaces, underscores are suggested to replace spaces.
-
-Examples:
-* `alias list_tags \for list_tag`
+You can use `alias` to set an alias for an existing command word so that the alias can also be used to trigger the command.<br>
+`alias ALIAS \for COMMAND_WORD`
+> **Examples:** <br>
+> `alias a \for add` <br>
+> **Tips:** <br>
+> `ALIAS` should have no spaces, we suggest you use underscores to replace spaces. <br>
+> If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word. Do try again!
 
 ### Exiting the program : `exit`
 
-Exits the program.<br>
-Format: `exit`  
+Use `exit` to exit Doist. Don't forget about us! <br>
+`exit`  
 
 ### Changing the storage destination : `save_at`
 
-Change the storage path to the specified one.<br>
-Format: `save_at PATH`
+You can use `save_at` to change the storage path of Doist. <br>
+`save_at PATH`
 
-Examples:
-* `save_at C:\Users\admin\Desktop\todolist.xml`
+> **Examples:** <br>
+> `save_at C:\Users\admin\Desktop\todolist.xml` <br>
+> `save_at Desktop\todolist.xml` <br>
+> **Tips:** <br>
+You can save at a relative path too.
 
 ### Saving the data
 
