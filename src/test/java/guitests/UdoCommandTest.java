@@ -19,7 +19,7 @@ public class UdoCommandTest extends TodoListGuiTest {
         //undo floating task
         assertAddSuccess(floatingTodoToAdd, currentList);
         assertUndoSuccess(currentList);
-        
+
         //undo event
         TestTodo todoToAdd = td.eventTest;
         assertAddSuccess(todoToAdd, currentList);
@@ -33,9 +33,9 @@ public class UdoCommandTest extends TodoListGuiTest {
         assertClearCommandSuccess();
         assertUndoSuccess(currentList);
     }
-    
+
     @Test
-    public void undoDelete() {        
+    public void undoDelete() {
         //delete the first in the list
         TestTodo[] currentList = td.getTypicalTodos();
         int targetIndex = 1;
@@ -75,12 +75,12 @@ public class UdoCommandTest extends TodoListGuiTest {
         assertListSize(0);
         assertResultMessage("Address book has been cleared!");
     }
-    
+
     private void assertUndoSuccess(TestTodo[] currentList) {
         commandBox.runCommand("undo");
         assertTrue(todoListPanel.isListMatching(currentList));
     }
-    
+
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTodo[] currentList) {
         TestTodo todoToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTodo[] expectedRemainder = TestUtil.removeTodoFromList(currentList, targetIndexOneIndexed);
