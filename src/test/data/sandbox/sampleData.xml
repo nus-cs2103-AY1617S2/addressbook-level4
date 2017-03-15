@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <title>Buy Banana</title>
+        <startDate>12/03/2017</startDate>
+        <endDate>12/03/2017</endDate>
+        <description>Sunpride brand</description>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <title>Buy new house</title>
+        <startDate>12/03/2017</startDate>
+        <endDate>15/03/2017</endDate>
+        <description>at 311, Clementi Ave 2, #02-25</description>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <title>Meeting boss</title>
+        <startDate>17/03/2017</startDate>
+        <endDate>17/03/2017</endDate>
+        <description>at the office</description>
+    </tasks>
+    <tasks>
+        <title>Meeting Daniel Meier</title>
+        <startDate>18/03/2017</startDate>
+        <endDate>12/03/2017</endDate>
+        <description>at 10th street</description>
+    </tasks>
+    <tasks>
+        <title>Submit CS2013</title>
+        <startDate>03/04/2017</startDate>
+        <endDate>05/04/2017</endDate>
+        <description>TaskManager Version 1.0.2</description>
+    </tasks>
+    <tasks>
+        <title>Submit FYP Report</title>
+        <startDate>31/03/2017</startDate>
+        <endDate>31/03/2017</endDate>
+        <description>a big burden</description>
+    </tasks>
+    <tasks>
+        <title>Send encyrpted package</title>
+        <startDate>14/03/2017</startDate>
+        <endDate>20/03/2017</endDate>
+        <description>CIA Secret Files</description>
+    </tasks>
+    <tags>friends</tags>
+    <tags>owesMoney</tags>
+</taskmanager>
