@@ -26,13 +26,13 @@ Because there are many different components that may be affected by a single com
 
 The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 1` causes a change in the model which is the command's primary task.
 
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Primary interactions Inside the Logic Component for the `delete 1` Command_
+<img src="images\SDforDeletePerson.png" width="800"><br>
+_Figure _ : Primary Component interactions for `delete 1` command (part 1)_
 
 Only after the task is complete, is an `Event` raised to modify the storage and UI components as can be seen in the next diagram.
 
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Secondary component interactions for `delete 1` command (part 2)_
+_Figure _ : Secondary Component interactions for `delete 1` command (part 2)_
 
 ## Appendix A : User Stories
 
