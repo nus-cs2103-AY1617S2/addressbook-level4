@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,9 +41,9 @@ public class AddCommand extends Command {
      * @throws ParseException
      */
     public AddCommand(String todo,
-    				  String startTime,
-    				  String endTime,
-    				  Set<String> tags)
+                      String startTime,
+                      String endTime,
+                      Set<String> tags)
             throws IllegalValueException, ParseException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -54,11 +53,11 @@ public class AddCommand extends Command {
         //String inputString = "11-11-2012";
         DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
 
-    	this.toAdd = new Todo(
-    			new Name(todo),
-    			dateFormat.parse(startTime),
-    			dateFormat.parse(endTime),
-    			new UniqueTagList(tagSet));
+        this.toAdd = new Todo(
+                new Name(todo),
+                dateFormat.parse(startTime),
+                dateFormat.parse(endTime),
+                new UniqueTagList(tagSet));
     }
 
     /**
@@ -87,7 +86,7 @@ public class AddCommand extends Command {
     }
 
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
-    	final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
