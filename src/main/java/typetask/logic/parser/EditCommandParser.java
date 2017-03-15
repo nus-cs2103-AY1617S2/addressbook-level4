@@ -2,8 +2,6 @@ package typetask.logic.parser;
 
 import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
-import static typetask.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static typetask.logic.parser.CliSyntax.PREFIX_PHONE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;

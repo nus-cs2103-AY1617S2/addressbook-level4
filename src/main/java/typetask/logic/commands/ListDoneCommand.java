@@ -8,7 +8,7 @@ public class ListDoneCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();//need to change to completed list
+        model.updateFilteredListToShowAll(); //need to change to completed list
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

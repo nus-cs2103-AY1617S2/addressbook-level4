@@ -15,9 +15,9 @@ import typetask.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
-    private final int FLOATING_TASK = 0;
-    private final int DEADLINE_TASK_WITH_TIME = 1;
-    private final int DEADLINE_TASK_WITHOUT_TIME = 2;
+    private final int floatingTask = 0;
+    private final int deadlineTaskWithTime = 1;
+    private final int deadlineTaskWithoutTime = 2;
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -27,11 +27,11 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME);
         argsTokenizer.tokenize(args);
         try {
-            if (checkTaskType(argsTokenizer) == FLOATING_TASK) {
+            if (checkTaskType(argsTokenizer) == floatingTask) {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get()
                 );
-            } else if (checkTaskType(argsTokenizer) == DEADLINE_TASK_WITH_TIME) {
+            } else if (checkTaskType(argsTokenizer) == deadlineTaskWithTime) {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_DATE).get(),
@@ -54,11 +54,11 @@ public class AddCommandParser {
     public int checkTaskType(ArgumentTokenizer argsTokenizer) {
         if (argsTokenizer.getValue(PREFIX_DATE).isPresent() &&
                 argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
-            return DEADLINE_TASK_WITH_TIME;
+            return deadlineTaskWithTime;
         } else if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
-            return DEADLINE_TASK_WITHOUT_TIME;
+            return deadlineTaskWithoutTime;
         } else {
-            return FLOATING_TASK;
+            return floatingTask;
         }
     }
 }
