@@ -1,13 +1,22 @@
 package guitests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalDateTimeValueException;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.testutil.TestTask;
 
 public class ListCommandTest extends TaskManagerGuiTest {
+
+    @Test
+    public void list_IsMutating() throws IllegalDateTimeValueException {
+        ListCommand lc = new ListCommand();
+        assertFalse(lc.isMutating());
+    }
 
     @Test
     public void list_AllTask_ReturnTrue() {
