@@ -453,7 +453,7 @@ Format: `exit`
 
 4. Where can we seek further assistance for Suru?
     
-    **A**: Feel free to contact us at support@surutaskmanager.com
+    **A**: Feel free to contact us at e0003823@u.nus.edu
 
 ## 5. Command Summary
 [**Help**](#31-viewing-usage-instructions-help): `help`
