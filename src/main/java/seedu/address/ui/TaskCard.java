@@ -18,6 +18,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label start;
+    @FXML
     private Label deadline;
     @FXML
     private FlowPane tags;
