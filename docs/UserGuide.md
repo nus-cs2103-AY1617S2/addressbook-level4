@@ -35,15 +35,15 @@
 * [Command Summary](#command-summary)
 
 ## Introduction
-In the hectic world of today, people are constantly bombarded by innumerable tasks at hand. As a result, people tend to lose track of their work progress and deviate from their priorities. Problems like these are far too common among working adults and students embarking on tight projects. Thus, our team would like to present to you a solution that could curb all your management problem! 
+In today's hectic world, people are constantly bombarded by innumerable tasks at hand. As a result, people tend to lose track of their work progress and deviate from their priorities. Problems like these are far too common among working adults and students embarking on tightly scheduled projects. Thus, our team presents to you the solution to all your management problems! 
 
 Presenting to you, iManager.
 
-iManager is a task manager application that helps you manage all your tasks at one place. With its interactive UI, user can now experience managing their tasks like never before.  Our product incorporates niche features such as FlexiCommands and Google Integration that brings convenient to user in managing their schedules. iManager remove the need to rely on multiple applications as it manages it all! 
+iManager helps you manage all your tasks in one convenient application. With its interactive UI, managing tasks has never been easier.
+Our product incorporates niche features such as FlexiCommands and Google Integration which saves you time and energy, managing tasks that would otherwise require the use of multiple applications such as Todois and Google Calendar.
 
 Without further ado, let us get started. 
 
-   
 ## Quick Start
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
    > Having any Java 8 version is not enough. <br>
@@ -79,7 +79,7 @@ Without further ado, let us get started.
 Shows a list of commands available in iManager. <br>
 
 Format: `help`
-> A list of commands available is also shown if you enter the wrong command.
+> A list of available commands are also shown if you enter the wrong command.
 
 Examples: 
 
@@ -203,10 +203,10 @@ Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" to the 
-   task list.
+   Add a priority 1 pending task named "exam" that starts at the current time and recurs everyday with description "SR1" and tag  
+   "CS2010" to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on the 22nd October of every year 1300 to 22nd October of every year 1500 with 
+   Add a priority 1 pending task named "exam" that starts on the 22nd October 1300 to 22nd October 1500 that recurs every year with 
    description "SR1" and tag "CS2010" to the task list.
 
 ### Editing a task
@@ -222,7 +222,7 @@ Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every D
 > * Editing the same tag name remove the tag itself. 
     e.g if task contains tag [friends], edit [/t friends] would remove the 'friends' tag
 > * All tags of an existing task can be remove by using `t/none`. Case insensitive. 
-> * Operation is equivalent to deleting a nold task and adding a new task, however tags will not get overwritten unless specified. 
+> * Operation is equivalent to deleting an old task and adding a new task, however tags will not get overwritten unless specified. 
     (refer to previous annotation)
 
 Examples:
@@ -231,8 +231,8 @@ Examples:
    Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500 with description 
    "SR1".
 * `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Edit the first task in the task list such that it start on the 22nd October of every year 1300 to 22nd October of every year 1500 
-   with description "SR1" and append tag "CS2010" to "exam".
+   Edit the first task in the task list such that it starts on the 22nd October 1300 to 22nd October 1500 that recurs every year with 
+   description "SR1" and append tag "CS2010" to "exam".
 
 ### Deleting a task
 
@@ -311,7 +311,7 @@ Examples:
    Mark a task named "exam" in the task list as "done".
  
 ### Finding for tasks
-Find tasks with details containing any of the given keywords. Details include name, priority, description, tags, start date&time and end date&time.
+Find tasks with details containing any of the given keywords. Details include name, priority, description, tags, start date & time and end date & time.
 
 Keyword Type | Result  | Example
 :--------: | -------- | -------- 
@@ -368,16 +368,16 @@ Format: `redo`
 > * `redo` only support add, edit, delete, done, clear and undo command. 
 
 ### Reset saved data
-Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application data will be save in the default save directory. (under project root folder) Once application data gets resetted, it CANNOT be restored. 
+Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application will be saved in the default save directory (under project root folder). When the application is reset, it cannot be restored.
 
 Format: `reset`
 
 ### Save
 #### Saving the data
-The application data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The application data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Changing the save location
-Change the save directory. The application data is saved in a file called iManager.txt under the project root folder by dafault or if the file path is not specified. You can change the location by specifying the file path as a command argument. New file will be automatically created as long as given directory is valid.
+Change the save directory. The application data is saved in a file called "iManager.txt" under the project root folder by default or if the file path is not specified. You can change the location by specifying the file path as a command argument. New file will be automatically created as long as given directory is valid.
 
 Format: `saveto FILEPATH`
 
@@ -396,12 +396,12 @@ Format : `exit`
 ## FAQ
 
 Q: I can't undo my previous commands after reopening iManager <br>
-A: Like most task managers out there, iManager does not support data backup while the application is not running.
+A: Like most task managers out there, iManager does not save a list of previous commands upon exiting.
 
 Q: Is it possible to set my storage path to a portable drive as I want to use them on different computers? <br>
-A: Yes! Just use the `saveto` command and choose the specified path of the portable drive
+A: Yes! Just use the `saveto` command and choose the specified path of the portable drive.
 
-Q: The iManager is not showing everything that i have added when i open it up?
+Q: The iManager is not showing everything that I have added when I open it up ?<br>
 A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks] 
    (#viewing-tasks). 
 
@@ -413,8 +413,8 @@ A: Our iManager only shows Today's task on start-up. To view pending, "done", fl
 | [help](#viewing-help) | `help` | Opens a help page. |
 |  | `help [COMMAND]` | Help with specific command. | 
 | [add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a floating task to the task list. |
-|  | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only start date&time to the task list. |
-|  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only end date&time to the task list. |
+|  | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only start date & time to the task list. |
+|  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only end date & time to the task list. |
 |  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with start date & time and end date & time to the task list. |
 |  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list. |
 | [edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task with the new parameters. |
