@@ -286,7 +286,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return timeKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(),
-                    		keyword))
+                            keyword))
                     .findAny()
                     .isPresent()
                     || timeKeyWords.stream()
