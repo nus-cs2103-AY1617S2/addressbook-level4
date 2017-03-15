@@ -1,3 +1,28 @@
+# Today - Developer Guide
+
+By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
+
+---
+
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+    3.1. [Architecture](#31-architecture)
+    3.2. [UI](#32-ui)
+    3.3. [Logic](#33-logic)
+    3.4. [Model](#34-model)
+    3.5. [Storage](#35-storage)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
+
+* [Appendix A: User Stories](#appendix-a--user-stories)
+* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d--glossary)
+* [Appendix E : Product Survey](#appendix-e--product-survey)
+
+
 ## 1. Introduction
 
 **Today** is a minimalistic task manager that aims to be the simplest way to organize your day. We help users focus on the things that they can control - the tasks they're tackling today.
