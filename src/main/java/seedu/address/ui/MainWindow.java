@@ -33,12 +33,10 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private TaskListPanel personListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
+    private TaskDescription taskDescription;
+    private TaskDetail taskDetail;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -54,6 +52,12 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane taskDescriptionPlaceholder;
+
+    @FXML
+    private AnchorPane taskDetailsPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -113,7 +117,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        taskDescription = new TaskDescription(getTaskDescriptionPlaceholder());
+        taskDetail = new TaskDetail(getTaskDetailsPlaceholder());
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
@@ -134,6 +139,14 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getPersonListPlaceholder() {
         return personListPanelPlaceholder;
+    }
+
+    private AnchorPane getTaskDescriptionPlaceholder() {
+        return taskDescriptionPlaceholder;
+    }
+
+    private AnchorPane getTaskDetailsPlaceholder() {
+        return taskDetailsPlaceholder;
     }
 
     void hide() {
@@ -200,11 +213,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadPersonPage(person);
+        taskDescription.loadPersonPage(person);
+        taskDetail.loadPersonPage(person);
     }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }

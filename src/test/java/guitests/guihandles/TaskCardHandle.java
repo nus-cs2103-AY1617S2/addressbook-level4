@@ -14,16 +14,16 @@ import seedu.address.model.task.ReadOnlyTask;
 /**
  * Provides a handle to a person card in the person list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String DATETIME_FIELD_ID = "#dateTime";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -36,8 +36,8 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getDateTime() {
+        return getTextFromLabel(DATETIME_FIELD_ID);
     }
 
     public String getPhone() {
@@ -79,8 +79,8 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getTags().equals(handle.getTags());
         }
@@ -89,6 +89,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getDateTime();
     }
 }
