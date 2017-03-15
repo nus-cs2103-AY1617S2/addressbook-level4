@@ -3,7 +3,7 @@ package t15b1.taskcrusher.model.event;
 import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
 
 /**
- * stores the location of an event. Location field is optional for an event. 
+ * stores the location of an event. Location field is optional for an event.
  */
 public class Location {
 

@@ -26,7 +26,7 @@ import t15b1.taskcrusher.model.task.Priority;
  * Parses input arguments and creates a new AddCommand object
  */
 public class ListCommandParser {
-	
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns a ListCommand object for execution.
@@ -35,20 +35,20 @@ public class ListCommandParser {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DEADLINE);
         argsTokenizer.tokenize(args);
-        
+
         String flag = ListCommand.NO_FLAG;
         Optional<String> rawFlag = argsTokenizer.getPreamble();
         if (rawFlag.isPresent()) {
         	flag = rawFlag.get();
         }
-        
+
         //TODO Modify below for events; will need PrettyTimeParser
         String deadline = Deadline.NO_DEADLINE;
         Optional<String> rawDeadline = argsTokenizer.getValue(PREFIX_DEADLINE);
         if (rawDeadline.isPresent()) {
-        	deadline = rawDeadline.get();        	
+        	deadline = rawDeadline.get();
         }
-        
+
         switch (flag) {
         	case ListCommand.NO_FLAG:
         		return listTask(deadline, false, false);
@@ -65,10 +65,10 @@ public class ListCommandParser {
         	default:
         		//TODO fix messages
         		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        }        
-        
+        }
+
     }
-    
+
     private Command listTask(String deadline, boolean listTasksOnly, boolean listEventsOnly) {
     	try {
     		return new ListCommand(deadline, listTasksOnly, listEventsOnly);
@@ -78,7 +78,7 @@ public class ListCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     private void listEvent() {
     	//TODO when events are supported
     }

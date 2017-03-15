@@ -22,7 +22,7 @@ public class Deadline {
 
 	/**
 	 * Creates a Deadline using the String passed
-	 * 
+	 *
 	 * @param deadline
 	 * @throws IllegalValueException
 	 */
@@ -38,12 +38,12 @@ public class Deadline {
 		}
 
 	}
-	
+
 	/**
 	 * Creates a Deadline using the String passed. isNew means that this Deadline object is added from user input
 	 * as opposed to being loaded from storage, and therefore the checking of whether the deadline date
 	 * is in the past should NOT be bypassed.
-	 * 
+	 *
 	 * @param deadline
 	 * @throws IllegalValueException
 	 */
@@ -67,7 +67,7 @@ public class Deadline {
             return sdf.format(getDate().get());
 			//return getDate().get().toString();
 		} else {
-			return Deadline.NO_DEADLINE;			
+			return Deadline.NO_DEADLINE;
 		}
 	}
 
@@ -81,7 +81,7 @@ public class Deadline {
 
 	/**
 	 * Returns Deadline in the form of Optional<Date>
-	 * 
+	 *
 	 * @return Deadline in the form of Optional<Date>, empty Optional<Date> if
 	 *         no deadline
 	 */
@@ -100,7 +100,7 @@ public class Deadline {
 
 	/**
 	 * Checks whether a deadline is valid
-	 * 
+	 *
 	 * @param deadlineToCheck
 	 * @return true if deadline exists and is on or after time of checking,
 	 *         false if no deadline, multiple deadlines or deadline is before
@@ -126,10 +126,10 @@ public class Deadline {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Checks whether a deadline is valid
-	 * 
+	 *
 	 * @param deadlineToCheck
 	 * @return true if deadline exists and is on or after time of checking,
 	 *         false if no deadline, multiple deadlines or deadline is before
@@ -141,7 +141,7 @@ public class Deadline {
 		    return true;
 		else if(deadlineToCheck.equals(NO_DEADLINE))
 		    return true;
-		
+
 		Date rightNow = new Date();
 		PrettyTimeParser dateParser = new PrettyTimeParser();
 		List<Date> parsedDeadline = dateParser.parse(deadlineToCheck);

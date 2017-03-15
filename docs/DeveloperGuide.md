@@ -350,15 +350,15 @@ Priority | As a ... | I can ... | So that I can...
 `* * *` | user with [events](#event)| add an event by specifying its start date/time and end date/time either in relative or absolute form i.e. `12 Mar` or `today`<br /><br /> **condition**: <br />when there is already an event booked for that time frame, I can be notified and choose whether or not to force the addition| book that time slot and be reminded of the event
 `* * *` | user with [tentative events](#tentative-event)| temporarily [block](#blocking) multiple time slots for a tentative event<br /><br /> **condition**: <br />I can later confirm its finalized time slot and [release](#releasing) all the other time slots| avoid time clash between events
 `* * *` | user with events| specify the location of an event | later adapt my actions based on where the event is located
-`* * *` | user with [tasks](#task)| add a task with a deadline, either in relative or absolute form | 
-`* * *` | user with tasks| add a task without a deadline | 
+`* * *` | user with [tasks](#task)| add a task with a deadline, either in relative or absolute form |
+`* * *` | user with tasks| add a task without a deadline |
 `* * *` | user with tasks or events that are related to each other | add tags to tasks or events | easily search and categorize tasks or events
 `* * *` | user | add a description to a task or an event | refer to relevant information in the future
 `* * *` | user with tasks| specify the priority of a task | later compare the importance of tasks, which can be especially useful for comparing tasks without deadlines
-`* * *` | user with tasks| view only tasks with deadlines | 
-`* * *` | user with tasks| view only tasks without deadlines | 
-`* * *` | user with an [active task](#active-task-or-event)| view the list of tasks that need to be completed by a specific deadline | 
-`* * *` | user with an active task or event | update their fields.  **For both:** <ul><li>name</li><li>tag</li><li>description</li></ul>**For an event:**<ul><li>time frame</li><li>location</li></ul> **For a task:**<ul><li>priority</li><li>deadline</li></ul>| 
+`* * *` | user with tasks| view only tasks with deadlines |
+`* * *` | user with tasks| view only tasks without deadlines |
+`* * *` | user with an [active task](#active-task-or-event)| view the list of tasks that need to be completed by a specific deadline |
+`* * *` | user with an active task or event | update their fields.  **For both:** <ul><li>name</li><li>tag</li><li>description</li></ul>**For an event:**<ul><li>time frame</li><li>location</li></ul> **For a task:**<ul><li>priority</li><li>deadline</li></ul>|
 `* * *` | user with active events| view the list of events taking place during a specific time frame |
 `* * *` | user with many active tasks | sort tasks by their fields <ul><li>sort by name</li><li>sort by priority</li><li>sort by deadline</li><li>sort by tag</li></ul>| locate tasks with certain fields easily
 `* * *` | user with many active events | sort events by their fields <ul><li>sort by name</li><li>sort by start date</li><li>sort by tag</li></ul>| locate events with certain fields easily
@@ -368,7 +368,7 @@ Priority | As a ... | I can ... | So that I can...
 `* * *` | user with an active task | dismiss an active task and remove from the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the expired list| distinguish between a task that was successfully done with one that failed
 `* * *` | user with overdue tasks and past events| view the list of tasks that are considered overdue or events past relative to the current time | manage them all at once
 `* * *` | user | view the effect of the last action undertaken | confirm the details of the action and amend if necessary
-`* * *` | user with many tasks and events in the active list | search for tasks or events by a keyword <ul><li>keyword in name</li> <li>keyword in tag</li><li>keyword in description </li></ul>| 
+`* * *` | user with many tasks and events in the active list | search for tasks or events by a keyword <ul><li>keyword in name</li> <li>keyword in tag</li><li>keyword in description </li></ul>|
 `* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as `done` in the past
 `* * *` | user who have completed one or more events | view a reverse chronological log of all completed events | see which events I have marked as `done` in the past
 `* * *` | user who have dismissed a task | reverse chronological log of all dismissed tasks | see which tasks I have dismissed
@@ -385,7 +385,7 @@ Priority | As a ... | I can ... | So that I can...
 `* *` | user | view the history of all previously undertaken actions | prevent duplicate commands and correct entries that are erroneous in hindsight
 `* *` | user | choose between automatic save and manual save |
 `*` | user | have an auto-completion for commands that are predictable | avoid the trouble of typing in the full command
-`*` | user | enter the options for a command in any order | 
+`*` | user | enter the options for a command in any order |
 
 ## Appendix B : Sample Use Cases
 
@@ -408,10 +408,10 @@ Use case ends.
 > 2a1. TaskCrusher shows an error message <br>
   Use case resumes at step 1
 
-2b. The entered time slot is already occupied by another event 
-> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event, and confirms whether user wants to force the addition. 
-  2b2. User decides whether or not to force the addition. 
-  
+2b. The entered time slot is already occupied by another event
+> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event, and confirms whether user wants to force the addition.
+  2b2. User decides whether or not to force the addition.
+
 > Use case ends
 
 
@@ -440,8 +440,8 @@ Use case ends
 **MSS**
 
 1. User requests to [display the active list](#list).
-2. TaskCrusher displays the (filtered) active list. 
-3. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indexes can be entered to process more than one item at once. 
+2. TaskCrusher displays the (filtered) active list.
+3. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indexes can be entered to process more than one item at once.
 4. TaskCrusher moves the item from the active list to the expired list.
 
 Use case ends
@@ -463,9 +463,9 @@ Use case resumes at step 2
 **MSS**
 
 1. User requests to [display the active list](#list) with the option to list only overdue tasks and past events relative to the current time.
-2. TaskCrusher displays the filtered list. 
-3. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indexes may be entered to process more than one item at once. 
-4. TaskCrusher prompts the user to enter the reason for dismissing an item, if the user chose to dismiss an item rather than mark as `done`. 
+2. TaskCrusher displays the filtered list.
+3. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indexes may be entered to process more than one item at once.
+4. TaskCrusher prompts the user to enter the reason for dismissing an item, if the user chose to dismiss an item rather than mark as `done`.
 5. User enters the reason for dismissing a task/event. If user does not wish to do so, user enters nothing and proceeds.
 6. TaskCrusher moves the task/event from the active list to the expired list.
 
@@ -489,13 +489,13 @@ Use case ends
 
 1. Should work on any desktop machine running on Windows 7 or later as long as it has Java `1.8.0_60` or higher installed.
 2. Must be fully functioning offline.
-3. No installation on the user machine should be required. 
-4. Should work stand-alone. 
+3. No installation on the user machine should be required.
+4. Should work stand-alone.
 5. Must come with extensive JUnit error-testing.
 6. Must not rely on any relational databases.
-7. Must rely minimally on GUI. GUI is used only for output. 
+7. Must rely minimally on GUI. GUI is used only for output.
 8. Must be able to support CLI.
-9. Supports one and only one user.  
+9. Supports one and only one user.
 10. A user with an above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 11. Should be able to hold up to 1000 tasks without a noticeable decline, say no more than 1.5 seconds, in performance.
 
@@ -509,7 +509,7 @@ Use case ends
 > An event takes place during a specific time frame, which may or may not extend over one or more days.
 
 #### Tentative event
-> A tentative event is an event whose time is not yet finalized. User may add a tentative event together with its possible time slots so that these slots can be blocked until the event is finalized. 
+> A tentative event is an event whose time is not yet finalized. User may add a tentative event together with its possible time slots so that these slots can be blocked until the event is finalized.
 
 #### Blocking
 > when a tentative event blocks a time slot, that time slot by default cannot be occupied by another event.
@@ -524,7 +524,7 @@ Use case ends
 > The active list contains all the active events and tasks. The active list may contain overdue tasks and past events since it is up to the user to remove them from this list.
 
 #### Expired list
-> The expired set contains all the tasks and events that are removed from the active list by the user, which may be recycled. This list can be emptied by the user.  
+> The expired set contains all the tasks and events that are removed from the active list by the user, which may be recycled. This list can be emptied by the user.
 
 ## Appendix E : Product Survey
 This product survey is conducted with respect to Jim's needs. Therefore, it may not mention some of the remarkable features of a product should they be irrelevant to Jim.
@@ -540,13 +540,13 @@ Pros:
 * Adding of tasks can be achieved both through keyboard as well as clicking. After the typing in the task name, you can specify options like due date and tags using meta characters. For example, you can specify due date with `^` followed by date
 * The web page supports many keyboard shortcuts, such as `t` for adding tasks.
 * Removed tasks are temporarily put into trash, from which a customer can recover tasks within 30 days.
-* Can undo a previous delete with one click. 
+* Can undo a previous delete with one click.
 * Can break a task into its subtasks (pro-version).
 
 Cons:
 
 * The Web App is browser-based and needs internet connection, at least for free-versions.
-* Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.  
+* Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.
 * Does not offer time-slot “block” feature for tentative events whose time is yet to be finalized.
 
 **Product: Wunderlist**
@@ -556,14 +556,14 @@ Author: Anshul Aggarwal
 Benefits:
 
 * This to-do list app provides the feature of reminders via in-app notification,email etc.
-* The user can set a deadlines for a task 
-* Very user friendly UI and easy to organise things 
+* The user can set a deadlines for a task
+* Very user friendly UI and easy to organise things
 * Allow Multiple device usage like Iphone,Ipad,Mac,windows and Kindlefire
-* This app is cloud based and has the ability to sync task. 
+* This app is cloud based and has the ability to sync task.
 * Allows to colloborate with friends and colleagues.
 * Data is stored and synced with device when there is internet access,claims to be faster than Google calendar
 * Allow gruping of list into folders
-* Allow #tags to add more context to your to dos 
+* Allow #tags to add more context to your to dos
 * Allow addition of notes to give more clarity
 
 Downsides:

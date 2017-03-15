@@ -25,9 +25,9 @@ import t15b1.taskcrusher.model.task.Priority;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
-	
+
 	private static final Pattern ADD_COMMAND_FORMAT = Pattern.compile("(?<flag>[te])(?<name>.+)");
-	
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -38,41 +38,41 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
 
         Matcher matcher;
-        
+
         try {
         	matcher = ADD_COMMAND_FORMAT.matcher(argsTokenizer.getPreamble().get());
         } catch (NoSuchElementException nsee) {
         	return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        
+
         if (!matcher.matches()) {
         	return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        
+
         final String flag = matcher.group("flag");
         final String name = matcher.group("name");
-        
+
       //TODO Modify below for events; will need PrettyTimeParser
         String deadline = Deadline.NO_DEADLINE;
         Optional<String> rawDeadline = argsTokenizer.getValue(PREFIX_DEADLINE);
         if (rawDeadline.isPresent()) {
-        	deadline = rawDeadline.get();        	
-        }        
-        
+        	deadline = rawDeadline.get();
+        }
+
         String priority = Priority.NO_PRIORITY;
         Optional<String> rawPriority = argsTokenizer.getValue(PREFIX_PRIORITY);
         if (rawPriority.isPresent()) {
         	priority = rawPriority.get();
         }
-        
+
         String description = Description.NO_DESCRIPTION;
         Optional<String> rawDescription = argsTokenizer.getValue(PREFIX_DESCRIPTION);
         if (rawDescription.isPresent()) {
         	description = rawDescription.get();
         }
-        
+
         Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
-        
+
         switch (flag) {
         	case AddCommand.EVENT_FLAG:
         		//TODO when events are supported
@@ -82,10 +82,10 @@ public class AddCommandParser {
         	default:
         		//TODO fix messages
         		return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }        
-        
+        }
+
     }
-    
+
     private Command addTask(String name, String deadline, String priority, String description, Set<String> tags) {
     	try {
     		return new AddCommand(
@@ -100,7 +100,7 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     private void addEvent() {
     	//TODO when events are supported
     }

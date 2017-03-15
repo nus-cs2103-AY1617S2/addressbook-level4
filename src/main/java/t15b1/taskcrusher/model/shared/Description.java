@@ -53,7 +53,7 @@ public class Description {
 
 	/**
 	 * Checks whether a description is valid
-	 * 
+	 *
 	 * @param description
 	 * @return true if description exists and contains at least one
 	 *         non-whitespace character

@@ -89,7 +89,7 @@ public class ParserUtil {
         assert address != null;
         return address.isPresent() ? Optional.of(new Description(address.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */

@@ -37,7 +37,7 @@ public class StorageManager extends ComponentManager implements Storage {
 //    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
 //        this(new TextFileInboxStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
 //    }
-    
+
     // ================ UserPrefs methods ==============================
 
     @Override

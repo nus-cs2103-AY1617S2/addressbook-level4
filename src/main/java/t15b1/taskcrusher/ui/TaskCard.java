@@ -39,7 +39,7 @@ public class TaskCard extends UiPart<Region> {
         showDeadline(task);
         showPriority(task);
         showDescription(task);
-            
+
         initTags(task);
     }
 

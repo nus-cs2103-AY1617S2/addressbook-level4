@@ -22,7 +22,7 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyUserInbox getUserInbox();
 
-    
+
     //========== for tasks =================================================
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
@@ -48,18 +48,18 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to filter by the given up-to Date*/
     void updateFilteredTaskList(Date upToDate);
-    
+
     //========== for events =================================================
-    
+
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
-    
-    void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent) 
+
+    void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent)
             throws UniqueEventList.DuplicateEventException;
-    
+
     void addEvent(Event event) throws UniqueEventList.EventNotFoundException;
-    
+
 
 }

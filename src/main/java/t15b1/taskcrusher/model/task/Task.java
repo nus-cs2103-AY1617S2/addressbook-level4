@@ -23,18 +23,18 @@ public class Task implements ReadOnlyTask {
     private UniqueTagList tags;
 
     /**
-     * Modified for Task. 
+     * Modified for Task.
      */
     public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags){
         assert !CollectionUtil.isAnyNull(name);
-        
+
         this.name = name;
         this.deadline = deadline;
         this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
@@ -66,7 +66,7 @@ public class Task implements ReadOnlyTask {
     public Deadline getDeadline() {
         return deadline;
     }
-    
+
     public void setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;
@@ -76,7 +76,7 @@ public class Task implements ReadOnlyTask {
     public Description getDescription() {
         return description;
     }
-    
+
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
@@ -86,7 +86,7 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    
+
     public boolean hasDeadline(){
         return this.deadline.hasDeadline();
     }

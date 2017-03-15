@@ -44,7 +44,7 @@ public interface ReadOnlyTask {
             builder.append(" " + getDeadline().toString() + " ");
         if(getDescription().hasDescription())
             builder.append(getDescription().toString() + " ");
-        
+
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

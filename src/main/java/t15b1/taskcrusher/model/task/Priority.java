@@ -8,7 +8,7 @@ import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = 
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS =
             "Priority should only take the value from 1 to 3 when specified. Its default is 0";
     public static final String NO_PRIORITY = "0";
     public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
@@ -22,7 +22,7 @@ public class Priority {
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
-        
+
 		if (priority.equals(NO_PRIORITY)) {
 			this.priority = NO_PRIORITY;
 		} else if (isValidPriority(priority)) {
@@ -48,7 +48,7 @@ public class Priority {
     public int hashCode() {
         return priority.hashCode();
     }
-    
+
     /**
      * Checks whether a priority is valid
      * @param priority
@@ -57,7 +57,7 @@ public class Priority {
     public static boolean isValidPriority(String priority) {
         return priority.matches(PRIORITY_VALIDATION_REGEX);
     }
-    
+
     public boolean hasPriority(){
         return !priority.equals(NO_PRIORITY);
     }

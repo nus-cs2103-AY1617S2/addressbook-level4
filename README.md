@@ -7,8 +7,8 @@
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* This is an open-source project. 
-* This application is based on the sample address book project created by team SE-EDU. 
+* This is an open-source project.
+* This application is based on the sample address book project created by team SE-EDU.
 * It is **written in Java 8 and in OOP fashion**.
 * This project has support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
@@ -24,7 +24,7 @@
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-* This project is based on the sample address book project created by SE-EDU (`https://github.com/se-edu/`). 
+* This project is based on the sample address book project created by SE-EDU (`https://github.com/se-edu/`).
 
 
 #### Licence : [MIT](LICENSE)

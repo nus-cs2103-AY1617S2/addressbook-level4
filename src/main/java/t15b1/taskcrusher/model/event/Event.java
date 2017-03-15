@@ -14,18 +14,18 @@ public class Event implements ReadOnlyEvent{
     private Optional<Location> location;
     private Optional<Description> description;
     private UniqueTagList tags;
-    
-    public Event(Name eventName, EventDate eventDate, Optional<Location> location, 
+
+    public Event(Name eventName, EventDate eventDate, Optional<Location> location,
             Optional<Description> description, UniqueTagList tags){
         assert !CollectionUtil.isAnyNull(eventName, eventDate, location, description, tags);
-        
+
         this.eventName = eventName;
-        this.eventDate = eventDate; 
+        this.eventDate = eventDate;
         this.location = location;
         this.description = description;
         this.tags = new UniqueTagList(tags);
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyEvent.
      */
@@ -37,7 +37,7 @@ public class Event implements ReadOnlyEvent{
     public UniqueTagList getTags(){
         return this.tags;
     }
-    
+
     public Name getEventName(){
         return this.eventName;
     }
@@ -49,11 +49,11 @@ public class Event implements ReadOnlyEvent{
     public EventDate getEventDate(){
         return this.eventDate;
     }
-    
+
     public Optional<Location> getLocation(){
         return this.location;
     }
-    
+
     public void setEventName(Name eventName) {
         this.eventName = eventName;
     }
@@ -82,7 +82,7 @@ public class Event implements ReadOnlyEvent{
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
-    
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -100,5 +100,5 @@ public class Event implements ReadOnlyEvent{
     public String toString() {
         return getAsText();
     }
-     
+
 }
