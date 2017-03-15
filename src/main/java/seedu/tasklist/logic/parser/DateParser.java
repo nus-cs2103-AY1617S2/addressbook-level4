@@ -17,7 +17,6 @@ public class DateParser {
      */
     public static List<Date> parse (String date) throws IllegalValueException {
         List<Date> dates = new PrettyTimeParser().parse(date);
-        System.out.println(dates.size());
         if (dates.isEmpty()) {
             throw new IllegalValueException(NO_DATES_MESSAGE);
         }
