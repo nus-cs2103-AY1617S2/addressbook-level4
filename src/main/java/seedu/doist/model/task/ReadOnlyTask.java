@@ -1,6 +1,7 @@
 package seedu.doist.model.task;
 
 import java.util.Comparator;
+import java.util.List;
 
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Priority.PriorityLevel;
@@ -52,5 +53,33 @@ public interface ReadOnlyTask {
             PriorityLevel task2Priority = task2.getPriority().getPriorityLevel();
             return task2Priority.compareTo(task1Priority);
         }
+    }
+
+    /**
+     * Combines multiple comparators together to compare tasks.
+     * For example if you want to sort by end time then by priority,
+     * you create a list of comparators, adding the end time comparator first
+     * then adding the priority comparator.
+     * @return: -1 task1 is compared to be "less" than task2 based on multiple comparators
+     */
+    public class CombinedComparator implements Comparator<ReadOnlyTask> {
+
+        List<Comparator<ReadOnlyTask>> comparators;
+
+        public CombinedComparator(List<Comparator<ReadOnlyTask>> comparators) {
+            this.comparators = comparators;
+        }
+
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            int compareResult = 0;
+            for (Comparator<ReadOnlyTask> comparator : comparators) {
+                if (comparator.compare(task1, task2) != 0) {
+                    return comparator.compare(task1, task2);
+                }
+            }
+            return compareResult;
+        }
+
     }
 }
