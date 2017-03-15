@@ -25,6 +25,8 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+    public static final int MARGIN_OF_ERROR = 1;
+    
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
@@ -194,18 +196,38 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            String[] nameElements = task.getName().fullName.split(" ");
+            boolean partialMatch = false;
+            String trimmedNameKeyWords = nameKeyWords.toString().substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
+            for(int i = 0 ; i < nameElements.length; i++){
+                if(computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR){
+                    partialMatch = true;
+                    break;
+                }
+            }
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent()
+                    || partialMatch;
         }
         
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
+            String[] nameElements = detailedTask.getName().fullName.split(" ");
+            boolean partialMatch = false;
+            String trimmedNameKeyWords = nameKeyWords.toString().substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
+            for(int i = 0 ; i < nameElements.length; i++){
+                if(computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR){
+                    partialMatch = true;
+                    break;
+                }
+            }
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getName().fullName, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent()
+                    || partialMatch;
         }
 
         @Override
@@ -325,6 +347,7 @@ public class ModelManager extends ComponentManager implements Model {
     
         return distance[str1.length()][str2.length()];
     }
+    
     private int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
     }
