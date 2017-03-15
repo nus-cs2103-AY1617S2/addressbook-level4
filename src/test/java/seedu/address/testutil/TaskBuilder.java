@@ -39,14 +39,12 @@ public class TaskBuilder {
         return this;
     }
 
-   
 
     public TaskBuilder withTime(String time) throws IllegalValueException {
         this.task.setTime(new Time(time));
         return this;
     }
 
-   
 
     public TestTask build() {
         return this.task;
