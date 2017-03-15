@@ -48,12 +48,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 //// list overwrite operations
-    
+
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
-    
+
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
@@ -73,8 +73,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncMasterTagListWith(tasks);
     }
 
-//// person-level operations
-    
+//// task-level operations
+
     /**
      * Adds a task to the TaskIt.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
