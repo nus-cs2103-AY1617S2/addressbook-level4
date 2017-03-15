@@ -19,6 +19,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_BY = new Prefix("\\by");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("\\desc");
     public static final Prefix PREFIX_IN = new Prefix("\\in");
+    public static final Prefix PREFIX_FOR = new Prefix("\\for");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

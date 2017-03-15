@@ -46,6 +46,23 @@ public abstract class Command {
         }
     }
 
+    public static boolean setAlias(String alias, String commandWord) {
+        if (commandAliases == null) {
+            setDefaultCommandWords();
+        }
+        for (String word : commandAliases.keySet()) {
+            commandAliases.get(word).remove(alias);
+        }
+        if (commandAliases.get(commandWord) != null) {
+            ArrayList<String> aliases = commandAliases.get(commandWord);
+            aliases.add(alias);
+            System.out.println(aliases);
+            commandAliases.replace(commandWord, aliases);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
      *
