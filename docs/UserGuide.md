@@ -23,7 +23,10 @@ Welcome to Suru, the innovative personal assistant designed to help manage your 
 
 1. Download the latest `suru.jar` from the [releases](../../../releases) tab.
 2. Copy the file to a folder you want to use as the home folder for Suru.
-3. Double-click the file to start Suru. The app should start in a few seconds and you should see an interface similar to this: <img src="images/Ui.jpg" width="600">
+3. Double-click the file to start Suru. The app should start in a few seconds and you should see an interface similar to this: 
+
+<img src="images/Ui.jpg" width="600">
+
 4. Type a command in the command box and press <kbd>Enter</kbd> to execute it.
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some sample commands you can try:
