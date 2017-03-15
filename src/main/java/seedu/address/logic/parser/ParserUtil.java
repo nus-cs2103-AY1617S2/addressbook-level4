@@ -17,6 +17,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Content;
 import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.Title;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -62,6 +63,14 @@ public class ParserUtil {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
+     */
+    public static Optional<Title> parseTitle(Optional<String> title) throws IllegalValueException {
+        assert title != null;
+        return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
     }
 
     /**

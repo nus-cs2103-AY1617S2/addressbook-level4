@@ -82,12 +82,12 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().fullTitle + " ");
         if (this.getContent().isThereContent()) {
-            sb.append(PREFIX_CONTENT + this.getContent().fullContent + " ");
+            sb.append(PREFIX_CONTENT.toString() + this.getContent().fullContent + " ");
         }
         if (this.getDateTime().isThereDateTime()) {
-            sb.append(PREFIX_DATE_TIME + this.getDateTime().value + " ");
+            sb.append(PREFIX_DATE_TIME.toString() + this.getDateTime().value + " ");
         }
-        this.getTags().asObservableList().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append(PREFIX_TAG.toString() + s.tagName + " "));
         return sb.toString();
     }
 }

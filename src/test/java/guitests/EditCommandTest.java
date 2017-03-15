@@ -9,7 +9,7 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Content;
+import seedu.address.model.task.Title;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 
@@ -22,10 +22,11 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby by/12/5/2017 23:00 #husband";
+        String detailsToEdit = "Bobby d/BobBob by/12/5/2017 23:00 #husband";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withContent("Bobby")
+        TestTask editedPerson = new TaskBuilder().withTitle("Bobby")
+                .withContent("BobBob")
                 .withTaskDateTime("12/5/2017 23:00")
                 .withTags("husband").build();
 
@@ -63,7 +64,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int addressBookIndex = 5;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withContent("Belle").build();
+        TestTask editedPerson = new TaskBuilder(personToEdit).withTitle("Belle").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -89,7 +90,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Content.MESSAGE_CONTENT_CONSTRAINTS);
+        assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);

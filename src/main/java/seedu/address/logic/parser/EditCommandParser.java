@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -28,7 +29,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE_TIME, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_CONTENT, PREFIX_DATE_TIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -39,7 +40,8 @@ public class EditCommandParser {
 
         EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setContent(ParserUtil.parseContent(preambleFields.get(1)));
+            editPersonDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
+            editPersonDescriptor.setContent(ParserUtil.parseContent(argsTokenizer.getValue(PREFIX_CONTENT)));
             editPersonDescriptor.setDateTime(ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_DATE_TIME)));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
