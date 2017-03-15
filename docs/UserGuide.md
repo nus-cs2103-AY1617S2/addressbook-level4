@@ -302,22 +302,27 @@ _Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
-| **Command** | **Usage**                       | **Example**                                  |
-|:-----------:|:-------------------------------:|:--------------------------------------------:|
-|Add          |`add <task>; <due date and time>`|`add sushi restaurant promotion; 040117 10am;`|
-|Delete       |`delete <task>`                  |`delete watch tv with the children`           |
-|Find         |`find <task>`                    |`find project`                                |
-|List         |`list`                           |                                              |
-|Help         |`help`                           |                                              |
-|Select       |`select <task>`                  |`select presentation`                         |
+| **Command** | **Usage**                             | **Example**                                  |
+|:-----------:|:-------------------------------------:|:--------------------------------------------:|
+|Add          |`add <task>; <due date and time>`      |`add sushi restaurant promotion; 040117 10am` |
+|Delete       |`delete <task>`                        |`delete watch tv with the children`           |
+|Find         |`find <task>`                          |`find project`                                |
+|List         |`list`                                 |                                              |
+|Select       |`select <task>`                        |`select presentation`                         |
+|Update       |`update <task> <parameter> <new_value>`|`select <buy bread> <name> <buy white bread>` |    
+|Help         |`help`                                 |                                              |
+|Exit         |`exit`                                 |                                              |
 
 
 ## 5. FAQ (Frequently Asked Questions)
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another Computer? <br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Manager folder.
        
+**Q**: How do I add an event to Tâche? <br>
+**A**: Type in **`add`** `<task>; <start date and time>; <end date and time>` as mentioned 
+[here](#add-an-event). 
        
 ## 6. Some Technical Terms
 
