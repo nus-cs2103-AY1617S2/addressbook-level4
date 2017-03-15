@@ -143,8 +143,15 @@ public class ArgumentTokenizer {
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
-
+        if (prefix.getPrefix().equals("d/") ) {
+            // Parse date
+            value = parseNLPDate(value);
+        }
         return value.trim();
+    }
+    
+    private String parseNLPDate(String argsString) {
+        return "Stub";
     }
 
     /**
