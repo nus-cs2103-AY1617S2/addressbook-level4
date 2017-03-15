@@ -76,7 +76,7 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editPersonDescriptor) {
         assert taskToEdit != null;
-        
+
         //After these statements, each field should NOT be null
         Name updatedName = editPersonDescriptor.getName().orElseGet(taskToEdit::getTaskName);
         Priority updatedPriority = editPersonDescriptor.getPriority().orElseGet(taskToEdit::getPriority);

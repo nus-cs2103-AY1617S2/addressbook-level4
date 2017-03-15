@@ -1,5 +1,6 @@
 package t15b1.taskcrusher.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -102,6 +103,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    @Override
+    public void updateFilteredTaskList(Date dateUpTo) {
+        updateFilteredTaskList(new PredicateExpression(new DeadlineQualifier(dateUpTo)));
+    }
+
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -147,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().toString(), keyword))
                     .findAny()
                     .isPresent();
         }
@@ -158,22 +164,50 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class DeadlineQualifier implements Qualifier{
+        private Date dateUpTo;
+
+        DeadlineQualifier(Date date){
+            assert date != null;
+            this.dateUpTo = date;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            //has no deadline
+            if(!task.getDeadline().getDate().isPresent())
+                return false;
+
+            Date deadline = task.getDeadline().getDate().get();
+            assert deadline != null;
+            if(deadline.before(dateUpTo))
+                return true;
+
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return "date up to =" + dateUpTo.toString();
+        }
+    }
+
     @Override
     public void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent) throws DuplicateEventException {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void addEvent(Event event) throws EventNotFoundException {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

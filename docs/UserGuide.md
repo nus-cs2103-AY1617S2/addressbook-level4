@@ -9,7 +9,7 @@ By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp
 5. [FAQ](#faq)
 6. [Storage file format](#storage-file-format)
 
-## 1. Introduction 
+## 1. Introduction
 Welcome. We will take you for an enthralling journey as we bring forward our task manager `TaskCrusher`.
 
 It can help you manage events, deadlines, add tasks with or without deadlines or view your history. This is a great manager if you are looking to move away from clicking as the simplified scheduling is just a few short and sweet command lines away.
@@ -78,33 +78,33 @@ Examples:
 
 ### 3.3 Viewing the active/expired list: `list`
 
-**View the entire active list**: 
+**View the entire active list**:
 
 Format: `list`<br>
 
-**View active task list**: 
+**View active task list**:
 
 Format: `list t`<br>
 
-**View active event list**: 
+**View active event list**:
 
 Format: `list e`<br>
 
-**View active list within specific time frame**: 
+**View active list within specific time frame**:
 
 > All tasks and events that have times that overlap in part or whole with this time frame will be displayed
 
 Format: `list d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
-**View active task or event list within specific time frame**: 
+**View active task or event list within specific time frame**:
 
 Format: `list [t or e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
-**View overdue tasks** : 
+**View overdue tasks** :
 
 Format: `list o`<br>
 
-**View tasks and events in the expired list**: 
+**View tasks and events in the expired list**:
 
 Format: `list c`<br>
 
@@ -127,7 +127,7 @@ Examples:
 
 Format: `edit INDEX [NEW_NAME] prefix/NEW_VALUE [prefix/NEW_VALUE]...`<br>
 
-Examples: 
+Examples:
 
 `edit 1 Read Harry Potter p/3`, assuming that the item with index 1 is a task.
 
@@ -172,7 +172,7 @@ Format: `exit`<br>
 
 Format: `undo`<br>
 
-### 3.11 Recycle 
+### 3.11 Recycle
 
 Brings back the expired tasks/events back to active list, with the deadline/event date altered. The index is as shown by `list c` command.
 
@@ -200,11 +200,11 @@ Format: `history`<br>
 
 * **Add task** : `add t task name [d/DEADLINE] [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
 
-* **List active tasks/events/all** : `list [t or e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br> 
+* **List active tasks/events/all** : `list [t or e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
-* **List overdue** : `list o`<br> 
+* **List overdue** : `list o`<br>
 
-* **List completed** : `list c`<br> 
+* **List completed** : `list c`<br>
 
 * **Edit** : `edit INDEX [NEW_NAME] prefix/NEW_VALUE [prefix/NEW_VALUE]...`<br>
 

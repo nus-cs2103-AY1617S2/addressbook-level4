@@ -12,7 +12,7 @@ public class CliSyntax {
     /* Prefix definitions for tasks*/
     public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
-    
+
     /* Prefix definitions for both tasks and events*/
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("//");

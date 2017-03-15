@@ -12,15 +12,15 @@ import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 import t15b1.taskcrusher.model.UserInbox;
 
 public class TextFileInboxStorage implements UserInboxStorage {
-    
+
     private static final Logger logger = LogsCenter.getLogger(TextFileInboxStorage.class);
 
     private String filePath;
-    
+
     public TextFileInboxStorage(String filePath){
         this.filePath = filePath;
     }
-    
+
     public String getUserInboxFilePath() {
         return this.filePath;
     }
@@ -39,7 +39,7 @@ public class TextFileInboxStorage implements UserInboxStorage {
             logger.info("UserInbox file "  + userInboxFile + " not found");
             return Optional.empty();
         }
-        
+
         ReadOnlyUserInbox userInboxOptional = TextFileStorage.loadDataFromSaveFile(new File(filePath));
 
         return Optional.of(userInboxOptional);
@@ -54,10 +54,10 @@ public class TextFileInboxStorage implements UserInboxStorage {
         assert userInbox != null;
         assert filePath != null;
 
-      
+
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        
+
         TextFileStorage.saveDataToFile(file, new UserInbox(userInbox));
 
     }

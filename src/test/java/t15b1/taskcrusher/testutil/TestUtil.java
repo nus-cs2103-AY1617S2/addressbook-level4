@@ -34,7 +34,7 @@ import t15b1.taskcrusher.model.shared.Description;
 import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
-import t15b1.taskcrusher.model.task.Email;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
@@ -75,15 +75,8 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Priority("9482424"), new Email("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Priority("87249245"), new Email("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Priority("95352563"), new Email("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Priority("87652533"), new Email("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Priority("9482224"), new Email("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Priority("9482427"), new Email("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Priority("9482442"), new Email("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new Priority("8482424"), new Email("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Priority("8482131"), new Email("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                new Task(new Name("sample task1"), new Deadline("11-2-2020"),new Priority("1"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("sample task2"), new Deadline("14-2-2021"),new Priority("2"), new Description("5th street"), new UniqueTagList()),
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -285,10 +278,10 @@ public class TestUtil {
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestCard[] removePersonsFromList(final TestCard[] persons, TestCard... personsToRemove) {
+        List<TestCard> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestCard[listOfPersons.size()]);
     }
 
 
@@ -297,7 +290,7 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+    public static TestCard[] removePersonFromList(final TestCard[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
@@ -308,7 +301,7 @@ public class TestUtil {
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
+    public static TestCard[] replacePersonFromList(TestCard[] persons, TestCard person, int index) {
         persons[index] = person;
         return persons;
     }
@@ -319,10 +312,10 @@ public class TestUtil {
      * @param personsToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestCard[] addPersonsToList(final TestCard[] persons, TestCard... personsToAdd) {
+        List<TestCard> listOfPersons = asList(persons);
         listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestCard[listOfPersons.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {

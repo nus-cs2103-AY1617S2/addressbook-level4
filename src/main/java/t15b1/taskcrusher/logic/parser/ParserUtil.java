@@ -18,7 +18,6 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.Deadline;
-import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 
 /**
@@ -90,7 +89,7 @@ public class ParserUtil {
         assert address != null;
         return address.isPresent() ? Optional.of(new Description(address.get())) : Optional.empty();
     }
-    
+
     /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
      */

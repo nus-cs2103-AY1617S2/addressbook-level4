@@ -17,7 +17,7 @@ import t15b1.taskcrusher.model.ReadOnlyUserInbox;
 import t15b1.taskcrusher.model.UserInbox;
 import t15b1.taskcrusher.model.task.Task;
 import t15b1.taskcrusher.storage.XmlUserInboxStorage;
-import t15b1.taskcrusher.testutil.TypicalTestPersons;
+import t15b1.taskcrusher.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -63,8 +63,8 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
-        UserInbox original = td.getTypicalAddressBook();
+        TypicalTestTasks td = new TypicalTestTasks();
+        UserInbox original = td.getTypicalUserInbox();
         XmlUserInboxStorage xmlAddressBookStorage = new XmlUserInboxStorage(filePath);
 
         //Save in new file and read back
@@ -73,14 +73,14 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new UserInbox(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.hoon));
-        original.removeTask(new Task(td.alice));
+        //original.addTask(new Task(td.shopping));
+        original.removeTask(new Task(td.assignment));
         xmlAddressBookStorage.saveUserInbox(original, filePath);
         readBack = xmlAddressBookStorage.readUserInbox(filePath).get();
         assertEquals(original, new UserInbox(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        //original.addTask(new Task(td.phoneCall));
         xmlAddressBookStorage.saveUserInbox(original); //file path not specified
         readBack = xmlAddressBookStorage.readUserInbox().get(); //file path not specified
         assertEquals(original, new UserInbox(readBack));

@@ -22,7 +22,7 @@ import t15b1.taskcrusher.storage.Storage;
 import t15b1.taskcrusher.storage.StorageManager;
 import t15b1.taskcrusher.storage.XmlUserInboxStorage;
 import t15b1.taskcrusher.testutil.EventsCollector;
-import t15b1.taskcrusher.testutil.TypicalTestPersons;
+import t15b1.taskcrusher.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -64,7 +64,7 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        UserInbox original = new TypicalTestPersons().getTypicalAddressBook();
+        UserInbox original = new TypicalTestTasks().getTypicalUserInbox();
         storageManager.saveUserInbox(original);
         ReadOnlyUserInbox retrieved = storageManager.readUserInbox().get();
         assertEquals(original, new UserInbox(retrieved));

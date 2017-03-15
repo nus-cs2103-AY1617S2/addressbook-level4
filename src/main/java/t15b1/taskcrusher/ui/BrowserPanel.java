@@ -30,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadPersonPage(ReadOnlyTask person) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getTaskName().taskName.replaceAll(" ", "+"));
+        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getTaskName().toString().replaceAll(" ", "+"));
     }
 
     public void loadPage(String url) {

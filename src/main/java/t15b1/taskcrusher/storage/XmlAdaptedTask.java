@@ -2,7 +2,6 @@ package t15b1.taskcrusher.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -12,7 +11,6 @@ import t15b1.taskcrusher.model.shared.Name;
 import t15b1.taskcrusher.model.tag.Tag;
 import t15b1.taskcrusher.model.tag.UniqueTagList;
 import t15b1.taskcrusher.model.task.Deadline;
-import t15b1.taskcrusher.model.task.Email;
 import t15b1.taskcrusher.model.task.Priority;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 import t15b1.taskcrusher.model.task.Task;
@@ -23,7 +21,7 @@ import t15b1.taskcrusher.model.task.Task;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String taskName;
+    private String name;
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
@@ -47,10 +45,10 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        taskName = source.getTaskName().taskName;
-        priority = source.getPriority().value;
-        deadline = source.getDeadline().value;
-        description = source.getDescription().value;
+        name = source.getTaskName().name;
+        priority = source.getPriority().priority;
+        deadline = source.getDeadline().deadline;
+        description = source.getDescription().description;
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -68,9 +66,9 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.taskName);
+        final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final Deadline deadline = new Deadline(this.deadline);
+        final Deadline deadline = new Deadline(this.deadline, Deadline.IS_LOADING_FROM_STORAGE);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Task(name, deadline, priority, description, tags);

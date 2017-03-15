@@ -1,18 +1,21 @@
 package t15b1.taskcrusher.ui;
 
+import java.text.SimpleDateFormat;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String NO_DEADLINE = "no deadline";
-    private static final String DEADLINE_BY = "By ";
-    private static final String PRIORITY_PREPEND = "              Priority = ";
+    private static final String MESSAGE_NO_DEADLINE = "no deadline";
+    private static final String MESSAGE_DEADLINE_BY = "By ";
+    private static final String PRIORITY_PREPEND = " ";
 
     @FXML
     private HBox cardPane;
@@ -31,35 +34,39 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getTaskName().taskName);
+        name.setText(task.getTaskName().toString());
         id.setText(displayedIndex + ". ");
-        showDeadlineIfExists(task);
-        showPriorityIfExists(task);
-        showDescriptionIfExists(task);
-            
+        showDeadline(task);
+        showPriority(task);
+        showDescription(task);
+
         initTags(task);
     }
 
-    private void showDescriptionIfExists(ReadOnlyTask task) {
-        if(task.getDescription().hasNoDescription())
-            description.setText("");
-        else
-            description.setText(task.getDescription().value);
+    private void showDescription(ReadOnlyTask task) {
+    	description.setText(task.getDescription().toString());
     }
 
-    private void showPriorityIfExists(ReadOnlyTask task) {
-        //TODO: make it nicer to show the priority just like how the tags appear
-        if(task.getPriority().isDefaultPriority())
+    private void showPriority(ReadOnlyTask task) {
+        if (task.getPriority().hasPriority()) {
+            StringBuilder stars = new StringBuilder();
+            for(int i=0; i<Integer.parseInt(task.getPriority().toString()); i++)
+                stars.append("*");
+            priority.setText(PRIORITY_PREPEND + stars.toString());
+        } else {
             priority.setText("");
-        else
-            priority.setText(PRIORITY_PREPEND + task.getPriority().value);
+        }
     }
 
-    private void showDeadlineIfExists(ReadOnlyTask task) {
-        if(task.getDeadline().hasNoDeadline())
-            deadline.setText(NO_DEADLINE);
-        else 
-            deadline.setText(DEADLINE_BY + task.getDeadline().value);
+    private void showDeadline(ReadOnlyTask task) {
+        if (task.getDeadline().hasDeadline()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            deadline.setText(sdf.format(task.getDeadline().getDate().get()));
+            //deadline.setText(MESSAGE_DEADLINE_BY + task.getDeadline().toString());
+        } else {
+            deadline.setText(MESSAGE_NO_DEADLINE);
+
+        }
     }
 
     private void initTags(ReadOnlyTask person) {
