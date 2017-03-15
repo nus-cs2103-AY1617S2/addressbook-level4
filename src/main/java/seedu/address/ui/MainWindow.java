@@ -16,7 +16,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,12 +33,10 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TaskListPanel personListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
+    private TaskDescription taskDescription;
+    private TaskDetail taskDetail;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -54,6 +52,12 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane taskDescriptionPlaceholder;
+
+    @FXML
+    private AnchorPane taskDetailsPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -113,8 +117,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        taskDescription = new TaskDescription(getTaskDescriptionPlaceholder());
+        taskDetail = new TaskDetail(getTaskDetailsPlaceholder());
+        personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -134,6 +139,14 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getPersonListPlaceholder() {
         return personListPanelPlaceholder;
+    }
+
+    private AnchorPane getTaskDescriptionPlaceholder() {
+        return taskDescriptionPlaceholder;
+    }
+
+    private AnchorPane getTaskDetailsPlaceholder() {
+        return taskDetailsPlaceholder;
     }
 
     void hide() {
@@ -195,16 +208,12 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
+    public TaskListPanel getPersonListPanel() {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
+    void loadPersonPage(ReadOnlyTask person) {
+        taskDescription.loadPersonPage(person);
+        taskDetail.loadPersonPage(person);
     }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }

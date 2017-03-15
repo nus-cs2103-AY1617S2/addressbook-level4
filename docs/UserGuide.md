@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# myPotato - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team myPotato`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `FEB 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,20 +16,17 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+1. Download and install the latest version of myPotato.
+2. Double-click the icon to start myPotato. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
-
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+3. Type the command in the command line and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+4. Some example commands you can try:
+   * **`list`** : Lists all tasks
+   * **`add`** : CS2103 midterm d/27/03 : adds a task to the task list. 
+   * **`delete`**` 3` : Deletes the 3rd task shown in the current list
+   * **`exit`** : Exits myPotato
+5. Refer to the [Features](#features) section below for details of each command.<br>
 
 
 ## 2. Features
@@ -47,27 +44,37 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the task list.<br>
+Format: `add t/TASK [d/DATE] [#tags]`
 
 > Persons can have any number of tags (including 0)
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add t/CS2103 meeting d/03/03 #Programming Lab 2`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing all tasks : `list`
 
-Shows a list of all persons in the address book.<br>
+Shows a list of all tasks in the task list.<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+### 2.4. Create a list: `createlist`
+
+Create a new list of tasks with a specified name. <br>
+Format: `createlist NAME`
+
+> The name refers to name of the task list.
+
+Examples:
+* `createlist Sports` <br>
+  Create a new list named Sports.
+
+### 2.5. Editing a person : `edit`
 
 Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [t/TASK] [d/DATE] [#tags]`
 
 > * Edits the person at the specified `INDEX`.
     The index refers to the index number shown in the last person listing.<br>
@@ -75,41 +82,44 @@ Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the person's tags by typing `#` without specifying any tags after it. 
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `edit 1  d/22/03`<br>
+  Edits the due date of the `1st task` to be `22/03`.
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 t/Project meeting #iCube`<br>
+  Edits the `2nd task` to Project meeting and add hashtag `iCube..`.
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+* `edit 2 t/Project meeting #`<br>
+  Edits the `2nd task` to Project meeting and clear all existing tags.
+  
+### 2.6. Finding all tasks containing any keyword in their title or due dates: `find`
 
-Finds persons whose names contain any of the given keywords.<br>
+Finds tasks containing any of the given keywords or due by given date.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * The search is case sensitive. e.g `project` will not match `Project`
+> * The order of the keywords does not matter. e.g. `Meeting Project` will match `Project Meeting`
+> * Search can based on task name, date or tags.
+> * Only full words will be matched e.g. `Project` will not match `Projects`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Project` will match `Project Meeting`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find Meeting`<br>
+  Returns `Project Meeting`
+* `find 23/03`<br>
+  Returns Any task due by `23/03`.
 
-### 2.6. Deleting a person : `delete`
+### 2.7. Deleting a task : `delete`
 
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the specified task from the task list. <br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -117,17 +127,17 @@ Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
+  Deletes the 2nd task.
+* `find Project`<br>
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task from the results of the `find` command.
 
-### 2.7. Select a person : `select`
+### 2.8. Select a task : `select`
 
-Selects the person identified by the index number used in the last person listing.<br>
+Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
+> Selects the task and display all details at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -135,52 +145,87 @@ Examples:
 
 * `list`<br>
   `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
+  Selects the `2nd task`.
+* `find Project` <br>
   `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  Selects the `1st task` from the results returned from the `find` command.
+  
+### 2.9. Sorting the list of tasks: `sort`
 
-### 2.8. Clearing all entries : `clear`
+Sort all the tasks by due dates, closest to furthest from the current date. <br>
+Format : `sort`
 
-Clears all entries from the address book.<br>
+### 2.10. Undo previous command: `undo` 
+
+Undo previous add/ delete command. <br>
+Format: `undo`
+
+### 2.11. Clearing all entries : `clear`
+
+Clears all entries from the current task list.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.12. Setting Priority: `priority`
+
+Set Priority for a task with 1 being the most important and 3 being the least important. <br>
+Format: `priority t/TASK p/RANK`
+
+> The `task` refers to the title of the task and the `rank` refers to the ranking of priorities.
+> The rank **must be a positive integer** 1, 2, or 3.
+
+Examples:
+
+* `Priority t/meeting p/1`<br>
+   Mark the priority of meeting as most important
+* `Priority t/CS3230 assignment p/2`<br>
+   Mark the priority of CS3230 assignment as important
+* `Priority t/housework p/3`<br>
+   Mark the priority of housework as the least important
+
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.14. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Tasks data are saved in the hard disk automatically after any command that changes the data..<br>
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous myPotato folder.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
+| **Command** | **Format** |
+| ----------- | --------------- |
+| Help | `help` |
+| |e.g. ` help` |
+| Add  | `add t/TASK [d/task] [#tags]` |
+| |e.g. ` add t/CS2103 meeting d/03/03 #Programming Lab 2` |
+| List  | `list` |
+| |e.g. `list` |
+| Createlist | `createlist NAME` |
+| |e.g. ` createlist Sports` |
+| Edit | `edit INDEX [t/TASK] [d/DATE] [#tags]` |
+| |e.g. ` edit 1 t/CS2101 meeting d/04/03 #Progress Report` |
+| Find  | `find KEYWORD [MORE_KEYWORDS]` |
+| |e.g. ` find CS2101 meeting` |
+| |e.g. ` find #Programming Lab 2` |
+| Delete | `delete INDEX` |
+| |e.g. ` delete 3` |
+| Select | `select INDEX` |
+| |e.g.` select 2` |
+| Sort | `sort` |
+| |e.g.` sort` |
+| Undo | `undo`   |
+| |e.g. `undo` |
+| Clear | `clear` |
+| |e.g. `clear` |
+| Priority | `priority t/TASK p/RANK` |
+| |e.g. ` priority t/Project Meeting p/1` |
+| Exit | `exit` |
+| |e.g. `exit` |

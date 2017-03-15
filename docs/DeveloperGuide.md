@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# myPotato - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team myPotato`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -346,27 +346,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | edit a task | make changes if necessary
+`* * *` | user | add a task | know what I need to do
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | see the list of tasks | track what I have done and not done
+`* * *` | user | add a priority to a task | know what needs to be done first
+`* * *` | user | sort a task by its date |  find the latest task easily
+`* * *` | user | have a task reminder | know when the deadline for a task is
+`* * *` | user | have a back up of my tasks | retrieve tasks which I accidentally deleted
+`* * *` | user | have a command list | know what command format to use and follow
+`* * *` | user | have a list of overdue tasks | track tasks that I have yet to complete.
+`* * *` | user | undo a change | undo the previous action
+`* *` | user | see a list of tasks I have done in a certain day | track the progress
+`* *` | user | duplicate a task | duplicate a task conveniently
+`* *` | user | delete many tasks at once | save time
+`* *` | user | pin my tasks | take note of the most important tasks 
+`* *` | user | categorize my task | find my task conveniently
+`* *` | user | search task by task name| find a specific task without scrolling
+`* *` | user | advanced command suggestion | know what format to follow without referring to the command list
+`* *` | user | launch the application using keyboard shortcuts | access the application without using the mouse.
+`* *` | user | sync with google calendar | use a calendar to schedule my tasks.
+`* *` | user | have a login function | have privacy
+`* *` | user | have an auto complete feature | save my time typing
+`* *` | user | use the task manager anywhere | access it as and when I want. 
+`* *` | user | add a tag to a task | group my tasks 
+`*` | user | export the list of my tasks | send it to another user
+`*` | user | set my profile picture | feel more personal
+`*` | user | option to turn off the task reminder | choose not be prompted again after I have accomplished my task
+`*` | user | customize my task manager | feel more personal
+`*` | user | share my task with other colleagues | collaborate with our colleagues
+`*` | user | set different frequency for my task reminder | prepare for the tasks.
+`*` | user |  open my task list offline | open my task list without Internet access
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `myPotato` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User request to add a task
+2. myPotato shows the list with added task
+
+**Extension**
+
+1a. The command is invalid
+
+> 1a1. myPotato shows the list of command help
+> Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list all tasks
+2. myPotato shows a list of tasks
+3. User requests to delete a specific task in the list
+4. myPotato deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,10 +416,92 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. myPotato shows an error message <br>
   Use case resumes at step 2
 
+#### Use Case: Sort tasks by date
+
+**MSS**
+
+1. User choose a date;
+2. myPotato show all the tasks in that day;
+3. User type in command sort;
+4. myPotato sort and shows the list of tasks according to deadlines;
+Use case ends.
+
+**Extensions**
+
+2a. If there is no task in that day
+
+> 2a1. myPotato shows an error message <br>
+
+3a.If there are more than one tasks sharing the same deadline:
+
+> 3a1. System show the list according to alphabetic order among those tasks.
+
+#### Use Case: Edit tasks
+
+**MSS**
+
+1. User requests to list tasks
+2. myPotato shows a list of tasks
+3. User requests to change a specific task
+4. myPotato shows the specific task
+5. User makes the changes
+6. myPotato saves and update changes <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given name is invalid
+
+> 3a1. myPotato shows an error message<br>
+  Use case resumes at Step 2
+ 
+####Use case: Undo a task
+
+**MSS**
+
+1. User requests to show the list of deleted tasks
+2. myPotato shows the list of tasks
+3. User requests to undo a task
+4. myPotato brings the task back to the to do list
+Use case ends.
+
+**Extension**
+
+2a. The given task is invalid
+
+> 2a1. myPotato shows an error message
+  Use case resumes at step 2
+  
+####Use case: Setting Priority
+
+**MSS**
+
+1. User requests to list tasks
+2. myPotato shows the list of tasks
+3. User requests to set a priority for a task
+4. myPotato updates and save changes
+Use case ends.
+
+**Extension**
+
+2a. The given task is invalid
+
+> 2a1. myPotato shows an error message
+  Use case resumes at step 2
+  
+3a. the list is empty
+
+> Use case ends
+
 {More to be added}
+
 
 ## Appendix C : Non Functional Requirements
 
@@ -403,17 +524,78 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Microsoft Outlook**
 
-Author: ...
+Author: Tang Di Feng
 
 Pros:
 
-* ...
-* ...
+* Email and Calendar features. 
+* Sync Email directly into Calendar. Jim will be able to schedule his tasks.
+* Integrated search function for finding emails, contacts, date. Jim will be able to find a specific task.
+* Portable
+* Retrieve others' calendars for references
 
 Cons:
 
-* ...
-* ...
+* Cost. Jim may not be able to afford solely for his personal use.
+* Little support to run on Linux-based system
+* Too much functionalities and may be complex for users to use. Confusing for Jim.
 
+**Wunderlist**
+
+Author: My Duy Hoang Long
+
+Pros:
+
+* Subtasks can be created for each task
+* Tags can be added to each task using hashtag
+* Allow natural language input
+* Simple and friendly UI
+* Support multiple platforms
+* Share list with other people. Since Jim work alone, this function might not be useful for Jim.
+
+Cons:
+
+* Sync process slow down the application
+* Sync with Google Calendar and Outlook may not work properly
+
+**Google Calendar**
+
+Author : Ivan Koh
+
+Pros
+
+* Can be used in both online and offline mode
+* can use color code to dictate the priority of each task
+* Can share your tasks with others by simply inviting them
+* Support multiple platforms
+* Can view tasks in either daily, monthly, or even yearly mode
+* Can setup reminder in Google Calender, which will be especially useful to Jim
+* Allows you to repeat some events automatically
+* Allows natural language input
+* Allows you to jump to a specific date easily
+* Can sync with other task manager inlcuding Microsoft Outlook
+
+Cons
+
+* Google Calender doesn't allows you to use tags to categorize your task
+
+**HiTask**
+
+Author: Zhang Yan Hao
+
+Pros: 
+      
+* HiTask has data backup, I think this feature is suitable for Jim,
+* since Jim is a forgetful person, he might delete some important task accidentally.
+* HiTask can sync with google calendar, I think this is useful since Jim may have plenty tasks,
+* he might need to rely heavily on google calendar to help him organize his schedule.
+* HiTask is easy to use, available in office, at home and on the road. I think this is useful for Jim,
+* Jim is a busy man, so he might use his free time like on his way to work or back home to check his schedule.
+ 
+Cons:
+
+* HiTask is a team project management and task collaboration, I think this feature is not suitable for Jim,
+  since Jim usually work alone.
+* From the analysis, HiTask is suitable for Jim beside that this is a collaboration tool for group work.
