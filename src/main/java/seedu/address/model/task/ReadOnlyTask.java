@@ -13,7 +13,7 @@ public interface ReadOnlyTask {
     Name getName();
     Optional<Priority> getPriority();
     Status getStatus();
-    Note getNote();
+    Optional<Note> getNote();
     Deadline getDeadline();
 
     /**

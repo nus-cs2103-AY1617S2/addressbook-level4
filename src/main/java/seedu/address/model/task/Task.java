@@ -42,7 +42,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
-                source.getNote(), source.getDeadline(), source.getTags());
+                source.getNote().orElse(null), source.getDeadline(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -81,8 +81,8 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Note getNote() {
-        return note;
+    public Optional<Note> getNote() {
+        return Optional.of(note);
     }
 
     @Override
