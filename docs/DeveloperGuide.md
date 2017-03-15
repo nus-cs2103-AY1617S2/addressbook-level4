@@ -698,21 +698,22 @@ Author: Al Sharef Haya Fayez M
 **Pros:**
 
 * Uses sticky notes to record tasks
-* Has colorful UI
+* Has colourful user interface
 * Provides instant capturing of anything by speech and pictures
-* Able to be integrated with Google Drive and Google Docs
-* Free to use 
-* No need to set up an account
-* Supports offline editing 
-* Supports undo option <br>
+* Integrates with Google Drive and Google Docs
+* Free of charge
+* Supports offline editing <br>
 
 **Cons:**
 
 * Does not support calendar view
-* Hard to organize large amount of notes
+* Hard to organize when there is a large number of notes
 * Unable to categorize tasks
-* Does not support short-cut typed commands
+* Does not support typed commands
 * Depends on mouse clicks <br>
+
+**Verdict-No**
+Having a colourful user interface would be a plus but our target user is someone who prefer typed commands over mouse clicks, which Google Keep does not support.
 
 #### MeisterTask
 
@@ -721,46 +722,56 @@ Author: Tan Wei
 **Pros:**
 
 * Has beautiful user interface
-* Free for personal use
-* Supports third-party application integrations (eg. Google, Dropbox)
+* Free of charge for personal use
+* Supports third-party application integrations (*e.g. Google, Dropbox*)
+* Available across most platforms (*e.g. Web app, Android, OS X*)
 * Can enable task relationships <br>
 
 **Cons:**
 
-* Does not support monthly calendar view
+* Does not support calendar view
+* Hard to organize when there is a large number of tasks
 * Unable to set recurring tasks
-* Unable to set reminders
-* Tasks are in card-view. Can be hard to track large amount of tasks.  <br>
+* Unable to set task reminders <br>
+
+**Verdict-No**
+The fact that MeisterTask is available across many platforms sounds intriguing, but it is not useful in the case of our target users. In addition, our target users most probably need to set recurring tasks.
 
 #### Just
 
-Author: Xu RuoLan
+Author: Xu Ruolan
 
 **Pros:**
-* Has simple and clear user interface
+* Has intuitive user interface
 * Provides statistical analysis to track daily/monthly/yearly statistics
-* Support tasks categorizing 
-* Easy to use(add, delete and sort the tasks)
-* Supports priority setting
-* Supports task reminders <br>
+* Able to categorize tasks
+* Able to prioritize tasks
+* Able to set task reminders <br>
 
 **Cons:**
 
-* Hard to search if the to-do list is long <br>
+* Hard to organize when there is a large number of tasks <br>
+
+**Verdict-No**
+Statistical analysis would be useful for our target users as they are most probably office workers, but Just does not accept typed command-line inputs which are important to our target users.
 
 #### Persoda
 
 Author: Soh Wei Kiat Melvin
 
 **Pros:**
-
-* Provides secure accounts and protected password 
-* Has user-friendly interface
+ 
+* Has an intuitive interface
+* Provides secure accounts and protected password
 * Provides a wide range of functions
-* Requires users to pay per usage
-* Supports task reminders/hierarchy 
-* Supports instant messaging teams within users <br>
+* Able to set task reminders/hierarchy 
+* Able to prioritize tasks
+* Supports instant messaging teams among users <br>
 
 **Cons:**
 
+* Requires users to pay per usage
 * Might be confusing to new users as features are based off different price plans <br>
+
+**Verdict-No**
+Secured accounts and protected password are an added plus to have in any task manager, but they are not necessary in the case of our target users as they never share their computers.
