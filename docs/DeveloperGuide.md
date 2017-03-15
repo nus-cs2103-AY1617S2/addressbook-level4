@@ -296,15 +296,15 @@ Priority | As a ... | I want to ... |So that I can ...
 **`* *`** | user | add or delete tags for a specific task | better filter the tasks
 **`* *`** | user | see a list of tasks within a specified time interval
 **`* *`** | user | see a list of all tasks with a specific tag | filter tasks by tag
-**`* *`** | user |  recover a certain task in the “Trash Bin”
+**`* *`** | user |  recover a certain task in the "Trash Bin"
 **`* *`** | user | use arrow key to see the previous commands I execute | I can re-execute the past commands conveniently without manually typing them
 **`* *`** | user | I want an error message to appear at the feedback textbox | I know what error occured
 **`*`** | user | rename existing commands | customise to the ones I am more used to
 **`*`** | user | reset all changes to existing commands | return to using the default commands
 **`*`** | user | I want the keywords in the command to be highlighted
 **`*`** | user | I want the auto-completion / content-assistant of the keywords when I am typing
-**`*`** | user | create a new task by entering the date in a “natural language” way | it feels more natural when typing
-**`*`** | user | see my “Trash Bin” that consists of deleted tasks | view and/or recover them
+**`*`** | user | create a new task by entering the date in a "natural language" way | it feels more natural when typing
+**`*`** | user | see my "Trash Bin" that consists of deleted tasks | view and/or recover them
 **`*`** | user | see my tasks on Google Calendar | integrate tasks with Google Calendar
 
 <br>
@@ -577,7 +577,7 @@ Author: Lee Yan Hwa
 
 Pros:
 
-* Almost “natural language” command-line interface to enter tasks
+* Almost "natural language" command-line interface to enter tasks
 * Neat UI to display tasks and view different types of tasks (Finished, Overdue, Not finished, Due today, Tomorrow, This Week, Trash)
 * Tasks are automatically added to Smart Lists according to criterias set by user
 * Has subtasks
