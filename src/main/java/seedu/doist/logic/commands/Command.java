@@ -33,6 +33,7 @@ public abstract class Command {
         commandAliases.put("sort",  new ArrayList<>(Arrays.asList("sort_by")));
         commandAliases.put("unfinish",  new ArrayList<>(Arrays.asList("unfin")));
         commandAliases.put("alias",  new ArrayList<>());
+        commandAliases.put("reset_alias",  new ArrayList<>());
     }
 
     public static ArrayList<String> getAliasList(String defaultCommandWord) {
@@ -44,6 +45,22 @@ public abstract class Command {
         } else {
             return new ArrayList<String>();
         }
+    }
+
+    public static boolean setAlias(String alias, String commandWord) {
+        if (commandAliases == null) {
+            setDefaultCommandWords();
+        }
+        for (String word : commandAliases.keySet()) {
+            commandAliases.get(word).remove(alias);
+        }
+        if (commandAliases.get(commandWord) != null) {
+            ArrayList<String> aliases = commandAliases.get(commandWord);
+            aliases.add(alias);
+            commandAliases.replace(commandWord, aliases);
+            return true;
+        }
+        return false;
     }
 
     /**
