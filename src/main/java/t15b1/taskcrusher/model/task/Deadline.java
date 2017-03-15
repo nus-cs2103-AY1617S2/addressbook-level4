@@ -113,10 +113,10 @@ public class Deadline {
 		PrettyTimeParser dateParser = new PrettyTimeParser();
 		List<Date> parsedDeadline = dateParser.parse(deadlineToCheck);
 
-//		//TODO replace parsing with set deadlines to avoid ambiguity/multiple deadlines
-//		if (parsedDeadline.size() != 1) {
-//			return false;
-//		}
+		//TODO replace parsing with set deadlines to avoid ambiguity/multiple deadlines
+		if (parsedDeadline.size() < 1) {
+			return false;
+		}
 
 		Date deadline = parsedDeadline.get(0);
 

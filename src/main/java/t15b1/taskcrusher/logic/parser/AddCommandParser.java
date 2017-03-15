@@ -37,7 +37,14 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_DESCRIPTION);
         argsTokenizer.tokenize(args);
 
-        Matcher matcher = ADD_COMMAND_FORMAT.matcher(argsTokenizer.getPreamble().get());
+        Matcher matcher;
+        
+        try {
+        	matcher = ADD_COMMAND_FORMAT.matcher(argsTokenizer.getPreamble().get());
+        } catch (NoSuchElementException nsee) {
+        	return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        
         if (!matcher.matches()) {
         	return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
