@@ -98,8 +98,17 @@ _Figure 2.1.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-Work in progress.
+#### `Main`
+#### `UI`
+#### `Logic`
+#### `Model`
+#### `Storage`
+#### `Commons`
 
+### 2. UI component
+### 3. Logic component
+### 4. Model component
+### 5. Storage component
 <br>
 
 
