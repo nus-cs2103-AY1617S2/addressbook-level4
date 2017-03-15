@@ -331,11 +331,11 @@ Format: `find [KEYWORDS...]`
 
 > * Keywords are case insensitive. 
 > * The order of the keywords does not matter. 
-> * Partial words will also be matched e.g `ex` will match `exam`.
+> * Partial keyword will also be matched e.g `ex` will match `exam`.
 > * Date format is MM-DD-YYYY e.g. 10-22-2017.
 > * TIME format is HHMM (24 hour Format) e.g. 1300.
 > * Mutiple keywords of varying types is allowed. 
-> * A task is match as long as any of its detail (i.e NAME, PRIORITY, DESCRIPTION etc.) CONTAINS the keyword. 
+> * A task is match so long as any of its detail (i.e NAME, PRIORITY, DESCRIPTION etc.) CONTAINS the keyword. 
 
 Advanced Examples: 
 * `find exam \p1 \dSR1`<br>
@@ -401,10 +401,10 @@ Format : `exit`
 Q: I can't undo my previous commands after reopening iManager <br>
 A: Like most task managers out there, iManager does not save a list of previous commands upon exiting.
 
-Q: Is it possible to set my storage path to a portable drive to use it on a different computer? <br>
+Q: Is it possible to set my storage path to a portable drive and use it on a different computer? <br>
 A: Yes! Just use the `saveto` command and choose the specified path of the portable drive.
 
-Q: The iManager is not showing everything that I have added upon booting?<br>
+Q: The iManager is not showing everything that I have added upon booting up?<br>
 A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks](#viewing-tasks). 
 
 
@@ -428,7 +428,7 @@ A: Our iManager only shows Today's task on start-up. To view pending, "done", fl
 |  | `view f` | View all floating task. |
 |  | `view o` | View all overdue task. |
 |  | `view t` | View all Today's task. |
-| [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done". |
+| [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done." |
 | [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the given keywords. |
 |  | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end. |
 |  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end. |
