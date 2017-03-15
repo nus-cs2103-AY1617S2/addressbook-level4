@@ -127,7 +127,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "###################### UI VIEW REFRESHED ###################"));
-        mainWindow.prepareTaskList(event.data.getTaskList());
+        mainWindow.prepareTaskList(logic.getFilteredTaskList());
     }
 
 }
