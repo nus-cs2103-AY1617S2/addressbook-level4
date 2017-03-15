@@ -20,14 +20,14 @@
    3.11. [Listing Today’s Tasks]()<br>
    3.12. [Listing Priority Tasks]()<br>
    3.13. [Listing Completed Tasks]() <br> 
-   3.14. [Undoing the Latest Command]()<br>   
-   3.15. [Saving Data to Another Folder]()<br> 
-   3.16. [Changing Default Storage Folder]()<br>  
+   3.14. [Undoing the Latest Command]()<br>
+   3.15. [Saving Data to Another Folder]()<br>
+   3.16. [Changing Default Storage Folder]()<br>
    3.17. [Using Data from Another Folder]()<br> 
    3.18. [Clearing all Entries]()<br>
    3.19. [Exiting the Program]()<br>
-   3.20. [Saving your Data]()<br> 
-   3.21. [Differentiating your Tasks’ Urgency]()<br>   
+   3.20. [Saving your Data]()<br>
+   3.21. [Differentiating your Tasks’ Urgency]()<br>
 4. [FAQ](#faq)<br>
 5. [Command Summary](#command-summary)<br>
 
@@ -60,6 +60,7 @@ TypeTask is especially good for you if: <br>
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
 <img src="images/Ui.png" width="600">
+
 Fig 1. TypeTask’s User Interface <br>
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
