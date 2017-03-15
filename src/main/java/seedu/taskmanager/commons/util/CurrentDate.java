@@ -162,8 +162,6 @@ public class CurrentDate {
 						}
 					}
 				}
-			}
-		}
 	}
 
 
@@ -264,18 +262,18 @@ public class CurrentDate {
 			year += 1;
 		}
 
-		if (day < 10) {
-			stringDay = "0" + Integer.toString(day);
-		} else
-			stringDay = Integer.toString(day);
+	if (day < 10) {
+	    stringDay = "0" + Integer.toString(day);
+	} else
+	    stringDay = Integer.toString(day);
 
-		if (month < 10) {
-			stringMonth = "0" + Integer.toString(month);
-		} else
-			stringMonth = Integer.toString(month);
+	if (month < 10) {
+	    stringMonth = "0" + Integer.toString(month);
+	} else
+	    stringMonth = Integer.toString(month);
 
-		stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
+	stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
 
-		return updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
-	}
+	return updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
+    }
 }
