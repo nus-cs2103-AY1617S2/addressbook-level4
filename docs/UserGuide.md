@@ -4,7 +4,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 --- 
 
-## Shortcuts to Information You Need
+## Contents
 
 1. [Introduction](#1-introduction)
 2. [Getting Started](#2-getting-started)
@@ -21,7 +21,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 	3.10. [Exit](#310-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
-6. [Glossary](#6-some-technical-terms)
+6. [Glossary](#6-glossary)
 
 
 ## 1. Introduction
@@ -373,7 +373,7 @@ This command saves all my data in a new data file in a `<new_save_location_direc
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.9.1. Save Command_
 
-### 3.10. Exiting the program : `exit`
+### 3.10. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time to actually perform your tasks!
@@ -408,7 +408,7 @@ _Figure 3.10.1. Exit Command_
 **A**: Type in **`add`** `<task>; <start date and time>; <end date and time>` as mentioned 
 [here](#add-an-event). 
        
-## 6. Some Technical Terms
+## 6. Glossary
 
 #### Case-Sensitive:
 
@@ -422,3 +422,7 @@ E.g. _Jenny_ versus _jenny_
 #### Parameter: 
 
 > Detail associated with a task of yours (e.g. duration, name, start time)
+
+#### Sync:
+
+> Ensure that data files in two or more locations are updated
