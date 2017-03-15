@@ -1,5 +1,4 @@
 # Developer Guide
-
 &nbsp;
 
 ## Table of contents
@@ -34,7 +33,6 @@
 9. [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements) <br>
 10. [Appendix D: Glossary](#appendix-d--glossary) <br>
 11. [Appendix E : Product Survey](#appendix-e--product-survey) <br>
-
 &nbsp;
 
 ## 1. Introduction
@@ -113,7 +111,6 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
-
 &nbsp;
 
 ## 3. Design
@@ -281,7 +278,6 @@ The `Storage` component,
 ### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
-
 &nbsp;
 
 ## 4. Implementation
@@ -309,7 +305,6 @@ and logging destinations.
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
-
 &nbsp;
 
 ## 4. Testing
@@ -360,7 +355,6 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
-
 &nbsp;
 
 ## 5. Dev Ops
@@ -416,7 +410,6 @@ can be automated using Gradle. For example, Gradle can download the dependencies
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
-
 &nbsp;
 
 ## 7. Appendix A : User Stories
@@ -456,7 +449,6 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | view a list of to-do items that are done | I know what tasks I have completed
 `*` | user with many tasks in the task manager | sort task by name | locate a task easily
 `*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
-
 &nbsp;
 
 ## 8. Appendix B : Use Cases
@@ -798,7 +790,7 @@ Use case ends
 
 > 2a1. System shows an error message
 > Use case ends
-
+&nbsp;
 
 ## Appendix C : Non Functional Requirements
 
@@ -815,7 +807,6 @@ Use case ends
 10. Should be able to hold up to 1000 to-do items
 11. Should come with automated unit tests and open source code
 12. Should display command results within 100 milliseconds
-
 &nbsp;
 
 ## 10. Appendix D : Glossary
