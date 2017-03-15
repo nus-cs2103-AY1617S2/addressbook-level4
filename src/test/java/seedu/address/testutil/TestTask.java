@@ -33,6 +33,7 @@ public class TestTask implements ReadOnlyTask {
         this.endDate = taskToCopy.getEndDate();
         this.complete = taskToCopy.isComplete();
         this.tags = taskToCopy.getTags();
+        this.complete = false;
     }
 
     public void setDescription(Description description) {
@@ -103,6 +104,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("ed/" + this.getEndDate().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public boolean isComplete() {
+        return this.complete;
     }
 
 }
