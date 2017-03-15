@@ -17,6 +17,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PrioritizeCommand;
 import seedu.address.logic.commands.SelectCommand;
 
 /**
@@ -74,6 +75,9 @@ public class Parser {
 
         case CompleteCommand.COMMAND_WORD:
             return new CompleteCommandParser().parse(arguments);
+
+        case PrioritizeCommand.COMMAND_WORD:
+            return new PrioritizeCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
