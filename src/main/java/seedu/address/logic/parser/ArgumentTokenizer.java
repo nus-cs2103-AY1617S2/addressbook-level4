@@ -148,7 +148,7 @@ public class ArgumentTokenizer {
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
-        if (prefix.getPrefix().equals(PREFIX_START) ||  prefix.getPrefix().equals(PREFIX_DEADLINE)) {
+        if (prefix.equals(PREFIX_START) ||  prefix.equals(PREFIX_DEADLINE)) {
             // Parse date
             ParserUtil parserUtil = new ParserUtil();
             value = parserUtil.parseNLPDate(value);
