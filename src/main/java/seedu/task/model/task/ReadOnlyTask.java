@@ -46,7 +46,7 @@ public interface ReadOnlyTask {
             builder.append(getDueDate());
         }
         if (getDuration() != null) {
-            builder.append(getDuration());
+            builder.append(" " + getDuration());
         }
         builder.append(" Tags: ");
         getTags().forEach(builder::append);

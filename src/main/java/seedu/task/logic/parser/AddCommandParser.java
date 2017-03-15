@@ -3,6 +3,8 @@ package seedu.task.logic.parser;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_DUEDATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_END;
 
 import java.util.NoSuchElementException;
 
@@ -22,12 +24,20 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DUEDATE, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DUEDATE, PREFIX_START, PREFIX_END, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            String startDate = argsTokenizer.getValue(PREFIX_START).orElse("");
+            String endDate = argsTokenizer.getValue(PREFIX_END).orElse("");
+            if (startDate == "" && endDate != "" || startDate != "" && endDate == "") {
+                throw new NoSuchElementException();
+            }
+
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_DUEDATE).orElse(""),
+                    startDate,
+                    endDate,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

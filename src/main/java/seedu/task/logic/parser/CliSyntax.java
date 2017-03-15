@@ -11,6 +11,8 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_DUEDATE = new Prefix("due/");
+    public static final Prefix PREFIX_END = new Prefix("ends/");
+    public static final Prefix PREFIX_START = new Prefix("starts/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Patterns definitions */
