@@ -1,10 +1,12 @@
 package seedu.task.testutil;
 
 import seedu.task.model.person.Address;
+import seedu.task.model.person.Date;
 import seedu.task.model.person.Email;
 import seedu.task.model.person.Name;
 import seedu.task.model.person.Phone;
 import seedu.task.model.person.ReadOnlyPerson;
+import seedu.task.model.person.Time;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
@@ -92,4 +94,34 @@ public class TestPerson implements ReadOnlyPerson {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+	@Override
+	public Name getTaskName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Date getDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Time getStartTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Time getEndTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
