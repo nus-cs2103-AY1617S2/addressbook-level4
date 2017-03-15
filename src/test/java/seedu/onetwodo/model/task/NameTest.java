@@ -18,10 +18,10 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("do assignments")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("do number 1 hardest tutorial")); // alphanumeric characters
+        assertTrue(Name.isValidName("Do wOrK")); // with capital letters
+        assertTrue(Name.isValidName("YOYOYO today main task is CS2103 tutorial 5")); // long names
     }
 }

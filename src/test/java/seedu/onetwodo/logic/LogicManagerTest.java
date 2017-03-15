@@ -416,14 +416,14 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            StartDate privateStartDate = new StartDate("111111");
-            EndDate endDate = new EndDate("adam@gmail.com");
-            Description privateDescription = new Description("111, alpha street");
+            Name name = new Name("Meet boss");
+            StartDate startDate = new StartDate("tomorrow 7pm");
+            EndDate endDate = new EndDate("tomorrow 8pm");
+            Description description = new Description("Bring report, laptop and coffee for boss");
             Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
+            Tag tag2 = new Tag("longerTag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateStartDate, endDate, privateDescription, tags);
+            return new Task(name, startDate, endDate, description, tags);
         }
 
         /**
@@ -436,22 +436,22 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new StartDate("" + Math.abs(seed)),
-                    new EndDate(seed + "@endDate"),
-                    new Description("House of " + seed),
+                    new StartDate("tomorrow 10pm"),
+                    new EndDate("tomorrow 11pm"),
+                    new Description("This is task numner " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
 
-        /** Generates the correct add command based on the task given */
+        /** Generates the correct add command string based on the task given */
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEndDate());
             cmd.append(" s/").append(p.getStartDate());
+            cmd.append(" e/").append(p.getEndDate());
             cmd.append(" d/").append(p.getDescription());
 
             UniqueTagList tags = p.getTags();
@@ -535,9 +535,9 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new StartDate("1"),
-                    new EndDate("1@endDate"),
-                    new Description("House of 1"),
+                    new StartDate(""),
+                    new EndDate(""),
+                    new Description(""),
                     new UniqueTagList(new Tag("tag"))
             );
         }
