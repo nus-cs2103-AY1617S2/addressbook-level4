@@ -12,7 +12,7 @@ Responsibilities: In charge of logic, Scheduling and tracking
 -----
 
 #### [FOO CHUAN WEN](https://github.com/fcw6323)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+<img src="images/chuanwen.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
