@@ -127,12 +127,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(keywords)));
+    	Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
     @Override
     public void updateFilteredTaskList(UniqueTagList tags) {
-        updateFilteredTaskList(new PredicateExpression(new TagQualifier(tags)));
+    	Qualifier[] qualifiers = {new TagQualifier(tags)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -148,20 +150,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class PredicateExpression implements Expression {
 
-        private final Qualifier qualifier;
+        private final Qualifier[] qualifiers;
 
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
+        PredicateExpression(Qualifier[] qualifiers) {
+            this.qualifiers = qualifiers;
         }
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
+        	boolean isSatisfied = true;
+        	for (Qualifier qualifier : qualifiers) {
+        		isSatisfied = isSatisfied && qualifier.run(task);
+        	}
+            return isSatisfied;
         }
 
         @Override
         public String toString() {
-            return qualifier.toString();
+            return qualifiers.toString();
         }
     }
 
