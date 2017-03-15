@@ -3,7 +3,7 @@ package werkbook.task.logic.parser;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -53,7 +53,7 @@ public class ParserUtil {
      */
     public static Set<String> toSet(Optional<List<String>> list) {
         List<String> elements = list.orElse(Collections.emptyList());
-        return new HashSet<>(elements);
+        return new LinkedHashSet<>(elements);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ParserUtil {
      */
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new LinkedHashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }

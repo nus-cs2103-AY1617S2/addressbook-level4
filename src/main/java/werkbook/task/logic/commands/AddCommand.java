@@ -1,6 +1,6 @@
 package werkbook.task.logic.commands;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import werkbook.task.commons.exceptions.IllegalValueException;
@@ -41,7 +41,10 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String description, String startDateTime, String endDateTime, Set<String> tags)
             throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new LinkedHashSet<>();
+
+        // Starts with default "Incomplete" tag, followed by the rest that are specified
+        tagSet.add(new Tag("Incomplete"));
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
