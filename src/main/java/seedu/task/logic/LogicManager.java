@@ -10,6 +10,8 @@ import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.logic.parser.Parser;
 import seedu.task.model.Model;
+import seedu.task.model.task.Chat;
+import seedu.task.model.task.ChatList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.Storage;
 
@@ -30,6 +32,8 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        ChatList chatList = getChatList();
+        chatList.add(new Chat(commandText));
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         return command.execute();
@@ -38,5 +42,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ChatList getChatList() {
+        // TODO Auto-generated method stub
+        return model.getChatList();
     }
 }
