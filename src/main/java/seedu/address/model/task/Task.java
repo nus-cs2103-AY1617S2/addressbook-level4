@@ -157,6 +157,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
             return task1.compareTo(task2);
         }
 
-};
+   };
    
 }
