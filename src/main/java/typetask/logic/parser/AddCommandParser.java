@@ -39,7 +39,11 @@ public class AddCommandParser {
                         argsTokenizer.getValue(PREFIX_TIME).get()
                 );
             } else if (checkTaskType(argsTokenizer) == deadlineTaskWithTimeNoDate) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                return new AddCommand(
+                        argsTokenizer.getPreamble().get(),
+                        argsTokenizer.getValue(PREFIX_TIME).get(),
+                        deadlineTaskWithTimeNoDate
+                        );
             } else {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),

@@ -48,6 +48,10 @@ public class AddCommand extends Command {
         this.toAdd = new Task(new Name(name), new DueDate(date), new Time(""));
     }
 
+    public AddCommand(String name, String time, int noDate)
+            throws IllegalValueException {
+        this.toAdd = new Task(new Name(name), new DueDate(""), new Time(time));
+    }
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
