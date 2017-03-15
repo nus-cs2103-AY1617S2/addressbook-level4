@@ -347,7 +347,7 @@ Examples:
 
 ### 3.18. Clearing all Entries : `clear`
 Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. <br> 
-`*WARNING*` you will lose all your data after this command. Thus, use it wisely. <br>
+`WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
 
