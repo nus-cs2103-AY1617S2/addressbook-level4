@@ -12,7 +12,6 @@ import seedu.tache.logic.parser.Parser;
 import seedu.tache.model.Model;
 import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
-import seedu.tache.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -23,7 +22,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
     }
