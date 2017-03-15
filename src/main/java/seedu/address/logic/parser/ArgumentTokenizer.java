@@ -151,6 +151,11 @@ public class ArgumentTokenizer {
         return value.trim();
     }
     
+    /**
+     * Parses, analyses and converts 'rich text' into a timestamp
+     * @param String - e.g. 'Tomorrow'
+     * @return String - Timestamp
+     */
     private String parseNLPDate(String argsString) {
         com.joestelmach.natty.Parser nParser = new com.joestelmach.natty.Parser();
         List<DateGroup> groups = nParser.parse(argsString);
