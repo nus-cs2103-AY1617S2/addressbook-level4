@@ -36,6 +36,7 @@
                             </children>
                         </HBox>
                         <Label fx:id="due" text="\$first" styleClass="cell_big_label"/>
+                        <Label fx:id="duration" text="\$first" styleClass="cell_big_label"/>
                         <FlowPane fx:id="tags" />
                     </children>
                 </VBox>

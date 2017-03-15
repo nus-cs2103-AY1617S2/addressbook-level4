@@ -20,6 +20,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Constructor for Task
      * @param description must not be null
+     * @param dueDate may be null
      * @param duration may be null
      * @param tags must not be null
      */
