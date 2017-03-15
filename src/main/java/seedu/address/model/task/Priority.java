@@ -3,7 +3,8 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's priority number in the address book.
+ * Represents a Task's priority number in the address book. 
+ * A smaller priority number indicates a higher priority.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority implements Comparable<Priority>{
@@ -53,6 +54,9 @@ public class Priority implements Comparable<Priority>{
         return value.hashCode();
     }
 
+    /**
+     * Results in Priority sorted in ascending order.
+     */
     @Override
     public int compareTo(Priority comparePriority) {
         int thisValue = Integer.parseInt(this.value);
