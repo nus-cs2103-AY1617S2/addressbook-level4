@@ -8,7 +8,7 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     private Date startDate;
     private Optional<Date> endDate;
-    private Optional<Time> startTime;
+    private Time startTime;
     private Optional<Time> endTime;
 
     public DetailedTask(Name name, UniqueTagList tags) {
@@ -19,7 +19,7 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
         super(name, tags);
         this.startDate = startDate;
         this.endDate = Optional.ofNullable(endDate);
-        this.startTime = Optional.ofNullable(startTime);
+        this.startTime = startTime;
         this.endTime = Optional.ofNullable(endTime);
     }
 
@@ -51,11 +51,11 @@ public class DetailedTask extends Task implements ReadOnlyDetailedTask {
 
     @Override
     public Time getStartTime() {
-        return startTime.orElse(new Time("0000"));
+        return startTime;
     }
 
     public void setStartTime(Time startTime) {
-        this.startTime = Optional.ofNullable(startTime);
+        this.startTime = startTime;
     }
 
     @Override
