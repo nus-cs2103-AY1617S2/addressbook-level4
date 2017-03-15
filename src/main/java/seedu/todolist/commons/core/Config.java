@@ -42,19 +42,19 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getToDoListFilePath() {
         return addressBookFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
+    public void setToDoListFilePath(String addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getToDoListName() {
         return addressBookName;
     }
 
-    public void setAddressBookName(String addressBookName) {
+    public void setToDoListName(String addressBookName) {
         this.addressBookName = addressBookName;
     }
 
