@@ -203,6 +203,7 @@ public class ParserUtil {
         } else {
             throw new IllegalValueException("Invalid Input");
         }
+    }
     /**
      * Returns the corresponding integer value of the String entered
      */
