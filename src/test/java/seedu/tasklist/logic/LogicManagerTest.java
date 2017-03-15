@@ -34,6 +34,7 @@ import seedu.tasklist.logic.commands.FindCommand;
 import seedu.tasklist.logic.commands.HelpCommand;
 import seedu.tasklist.logic.commands.ListCommand;
 import seedu.tasklist.logic.commands.LoadCommand;
+import seedu.tasklist.logic.commands.SaveCommand;
 import seedu.tasklist.logic.commands.SelectCommand;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
 import seedu.tasklist.model.Model;
@@ -106,7 +107,7 @@ public class LogicManagerTest {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
-    
+
     /**
      * Executes the command and confirms that the result message is correct.
      * Both the 'task list' and the 'last shown list' are expected to be empty.
@@ -453,6 +454,23 @@ public class LogicManagerTest {
         assertCommandBehavior("load data/task.png", expectedMessage);
     }
 
+    @Test
+    public void save_invalidCommand_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE);
+        assertCommandFailure("save", expectedMessage);
+    }
+
+    @Test
+    public void save_invalidFilePath_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "dejt/%!%");
+        assertCommandBehavior("save dejt/%!%", expectedMessage);
+    }
+
+    @Test
+    public void save_invalidFileExtension_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(SaveCommand.MESSAGE_INVALID_PATH, "data/task.png");
+        assertCommandBehavior("save data/task.png", expectedMessage);
+    }
 
     /**
      * A utility class to generate test data.
