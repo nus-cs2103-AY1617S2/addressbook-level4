@@ -47,9 +47,9 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list.<br>
-Format: `add t/TASK [d/DATE] [#tags]`
+Format: `add t/TASK_TITLE [d/DATE] [#tags]`
 
-> Persons can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0)
 
 Examples:
 
@@ -60,42 +60,25 @@ Examples:
 Shows a list of all tasks in the task list.<br>
 Format: `list`
 
-### 2.4. Create a list: `createlist`
+### 2.4. Editing a task: `edit`
 
-Create a new list of tasks with a specified name. <br>
-Format: `createlist NAME`
+Edits an existing task in the task list. <br>
+Format: `edit INDEX [TASK_TITLE] [d/date] [#tags]`
 
-> The name refers to name of the task list.
-
-Examples:
-* `createlist Sports` <br>
-  Create a new list named Sports.
-
-### 2.5. Editing a person : `edit`
-
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [t/TASK] [d/DATE] [#tags]`
-
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `#` without specifying any tags after it. 
+> TheEdits the person at the specified INDEX. 
+> The index refers to the index number shown in the last person listing.
+> The index must be a positive integer 1, 2, 3, ...
+> Existing values will be updated to the input values.
+> When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+> You can remove all the person's tags by typing t/ without specifying any tags after it.
 
 Examples:
+*  edit 1  d/22/03<br>
+   Edits the due date the 1st task to be 22/03.
+*  edit 2 Project meeting t/LT1<br>
+   Edits the 2nd task to Project meeting and add hashtag LT1.
 
-* `edit 1  d/22/03`<br>
-  Edits the due date of the `1st task` to be `22/03`.
-
-* `edit 2 t/Project meeting #iCube`<br>
-  Edits the `2nd task` to Project meeting and add hashtag `iCube..`.
-
-* `edit 2 t/Project meeting #`<br>
-  Edits the `2nd task` to Project meeting and clear all existing tags.
-  
-### 2.6. Finding all tasks containing any keyword in their title or due dates: `find`
+### 2.5. Finding all tasks containing any keyword in their title or due dates: `find`
 
 Finds tasks containing any of the given keywords or due by given date.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -114,10 +97,12 @@ Examples:
 * `find 23/03`<br>
   Returns Any task due by `23/03`.
 
-### 2.7. Deleting a task : `delete`
+### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the task list. <br>
 Format: `delete INDEX`
+
+> Alternative: choose the task showing in the list. Type delete
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -132,10 +117,12 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task from the results of the `find` command.
 
-### 2.8. Select a task : `select`
+### 2.7. Select a task : `select`
 
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
+
+> Alternative: click to the task in the showing list
 
 > Selects the task and display all details at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -150,20 +137,25 @@ Examples:
   `select 1`<br>
   Selects the `1st task` from the results returned from the `find` command.
   
-### 2.9. Sorting the list of tasks: `sort`
+### 2.8. Clearing all tasks : `clear`
 
-Sort all the tasks by due dates, closest to furthest from the current date. <br>
-Format : `sort`
+Clears all entries from the current task list.
+Format: clear
 
-### 2.10. Undo previous command: `undo` 
+### 2.9. Exiting the program : exit
+
+Exits the program.
+Format: exit
+
+### 2.10. Saving the data
+
+Tasks data are saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
+  
+### 2.11. Undo previous command: `undo` 
 
 Undo previous add/ delete command. <br>
 Format: `undo`
-
-### 2.11. Clearing all entries : `clear`
-
-Clears all entries from the current task list.<br>
-Format: `clear`
 
 ### 2.12. Setting Priority: `priority`
 
@@ -171,7 +163,7 @@ Set Priority for a task with 1 being the most important and 3 being the least im
 Format: `priority t/TASK p/RANK`
 
 > The `task` refers to the title of the task and the `rank` refers to the ranking of priorities.
-> The rank **must be a positive integer** 1, 2, or 3.
+> The index **must be a positive integer** 1, 2, or 3.
 
 Examples:
 
@@ -182,16 +174,18 @@ Examples:
 * `Priority t/housework p/3`<br>
    Mark the priority of housework as the least important
 
-### 2.13. Exiting the program : `exit`
+### 2.13. Create a list task: Newlist
 
-Exits the program.<br>
-Format: `exit`
-
-### 2.14. Saving the data
-
-Tasks data are saved in the hard disk automatically after any command that changes the data..<br>
-There is no need to save manually.
-
+ Create a new task list 
+ Format: Newlist NAME
+ 
+ The name refers to name of the new task list.
+ 
+ Examples:
+ 
+ * `Newlist Sport`
+    Create a new list called Sport
+ 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -206,10 +200,12 @@ There is no need to save manually.
 | |e.g. ` help` |
 | Add  | `add t/TASK [d/task] [#tags]` |
 | |e.g. ` add t/CS2103 meeting d/03/03 #Programming Lab 2` |
-| List  | `list` |
-| |e.g. `list` |
-| Createlist | `createlist NAME` |
-| |e.g. ` createlist Sports` |
+| Exit | `exit`|
+| |e.g. `exit` |
+| List  | `show a list of task list in the list task` |
+| |e.g. `list Homework` |
+| Newlist | `Newlist NAME` |
+| |e.g. `Newlist Sports` |
 | Edit | `edit INDEX [t/TASK] [d/DATE] [#tags]` |
 | |e.g. ` edit 1 t/CS2101 meeting d/04/03 #Progress Report` |
 | Find  | `find KEYWORD [MORE_KEYWORDS]` |
@@ -219,8 +215,6 @@ There is no need to save manually.
 | |e.g. ` delete 3` |
 | Select | `select INDEX` |
 | |e.g.` select 2` |
-| Sort | `sort` |
-| |e.g.` sort` |
 | Undo | `undo`   |
 | |e.g. `undo` |
 | Clear | `clear` |
@@ -229,3 +223,6 @@ There is no need to save manually.
 | |e.g. ` priority t/Project Meeting p/1` |
 | Exit | `exit` |
 | |e.g. `exit` |
+
+
+
