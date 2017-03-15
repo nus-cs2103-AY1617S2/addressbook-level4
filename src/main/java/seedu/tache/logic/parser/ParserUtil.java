@@ -99,10 +99,7 @@ public class ParserUtil {
      */
     public static boolean isValidDate(String input) {
         final Matcher matcher = DATE_FORMAT.matcher(input.trim());
-        if (matcher.matches()) {
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
     /**
