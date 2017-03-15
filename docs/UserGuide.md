@@ -98,6 +98,9 @@ Simply type "help" to view the help page! <br>
 
 ### Adding a new task : `add`, `do`
 
+Use the `add` command to add tasks. Tracking your tasks is what Doist does best! <br>
+`do` is an alternative command word.
+
 Add a new task with a description using just the `add` command word. <br>
 `(add|do) TASK_DESCRIPTION`
 > **Examples:** <br>
@@ -169,9 +172,10 @@ Hour am/pm | 3pm, 3am
 Hour | 3
 
 > **Tips:** <br>
-> - If you do not explicitly state the time, the date will be assumed to be within the next 24 hours <br>
-> - If you do not explicitly state the date, the time will be assumed to be the current time of the day
-> - The start time and remind time must be earlier or equal to the end time
+> - If you do not explicitly state the date, the date will be assumed to be within the next 24 hours <br>
+> - If you do not explicitly state the time, the time will be assumed to be the current time of the day
+> - If you do not explicitly state the year, the year will be assumed to be the current year
+> - Note that the start time and remind time must be earlier or equal to the end time
 
 **More examples:**
 
@@ -180,20 +184,35 @@ Hour | 3
 
 ### Listing tasks : `list`, `ls`
 
-Displays a list of tasks.<br>
-Format 1: `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]`
+Use the `list` command to list different types of tasks! Doist knows that you have many tasks and would need to filter them in some way to concentrate on doing those tasks. <br>
+`ls` is an alternative command word.
+
+List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
+`(list|ls) [TYPE]`
+> **Examples:** <br>
+> `list` <br>
+> `list all` <br>
+> `list finished` <br>
+> **Tips:** <br>
+> `list` will by default show both pending and overdue tasks.
+
+List tasks occurring during a time period by using the `\from` and `to` keys. <br>
+Format 1:
+
+[\from TIME] [\to TIME] [\under TAG]`
 Format 2: `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]`
+
 
 > - `TYPE` can be `pending`, `overdue`, `finished`
 > - If `TYPE` is not specified, all the tasks will be returned
 > - `STRING_REPRESENTING_TIME_INTERVAL` can be `today`, `this week`, `this month` and so on.
 
-Examples:
+**More examples:**
 
-* list pending \under school_work
-* list pending \in today
-* list \in this week
-* list finished \from 1st March \to 20th March \under internship
+* `list pending \under school_work`
+* `list pending \in today`
+* `list \in this week`
+* `list finished \from 1st March \to 20th March \under internship`
 
 ### Finding all tasks containing any search key in their description : `find`
 
