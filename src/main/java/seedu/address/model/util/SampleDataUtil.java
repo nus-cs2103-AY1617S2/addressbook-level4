@@ -5,6 +5,7 @@ import seedu.address.model.ReadOnlyToDoApp;
 import seedu.address.model.ToDoApp;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.UniqueTagList;
@@ -13,9 +14,9 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Buy printer"), new Deadline(""),
+                new Task(new Name("Buy printer"), new Start("today"), new Deadline("tomorrow"),
                     new UniqueTagList("shopping")),
-                new Task(new Name("Go to the gym"), new Deadline(""),
+                new Task(new Name("Go to the gym"), new Start(""), new Deadline(""),
                     new UniqueTagList("exercise")),
             };
         } catch (IllegalValueException e) {
