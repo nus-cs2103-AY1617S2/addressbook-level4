@@ -146,25 +146,10 @@ public class ArgumentTokenizer {
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
         if (prefix.getPrefix().equals("d/") ) {
             // Parse date
-            value = parseNLPDate(value);
+            ParserUtil parserUtil = new ParserUtil();
+            value = parserUtil.parseNLPDate(value);
         }
         return value.trim();
-    }
-    
-    /**
-     * Parses, analyses and converts 'rich text' into a timestamp
-     * @param String - e.g. 'Tomorrow'
-     * @return String - Timestamp
-     */
-    private String parseNLPDate(String argsString) {
-        com.joestelmach.natty.Parser nParser = new com.joestelmach.natty.Parser();
-        List<DateGroup> groups = nParser.parse(argsString);
-        String output = "";
-        for(DateGroup group:groups) {
-            List dates = group.getDates();
-            output = dates.get(0).toString().replace("CST", "");
-        }
-        return output;
     }
 
     /**
