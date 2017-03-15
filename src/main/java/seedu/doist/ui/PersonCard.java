@@ -33,9 +33,9 @@ public class PersonCard extends UiPart<Region> {
         desc.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().toString());
-        isFinished.setText(task.getFinishedStatus().toString());
-        startTime.setText(" no more start time");
-        endTime.setText(" no more end time");
+        isFinished.setText("finished: " + task.getFinishedStatus().toString());
+        startTime.setText("no start time");
+        endTime.setText("no end time");
         initTags(task);
     }
 
