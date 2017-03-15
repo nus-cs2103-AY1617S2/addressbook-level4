@@ -20,11 +20,15 @@ public class StartTime {
      */
     public StartTime(String starttime) throws IllegalValueException {
         assert starttime != null;
-        String trimmedStartTime = starttime.trim();
-        if (!isValidStartTime(trimmedStartTime)) {
-            throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+        if(starttime.isEmpty()) {
+            this.value = starttime;
+        } else {
+            String trimmedStartTime = starttime.trim();
+            if (!isValidStartTime(trimmedStartTime)) {
+                throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+            }
+            this.value = trimmedStartTime;
         }
-        this.value = trimmedStartTime;
     }
 
     /**
@@ -43,7 +47,7 @@ public class StartTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartTime // instanceof handles nulls
-                && this.value.equals(((StartTime) other).value)); // state check
+                        && this.value.equals(((StartTime) other).value)); // state check
     }
 
     @Override
