@@ -55,20 +55,20 @@ Are you ready to be a do-ist?
 ### Getting started with commands :
 
 Type the following commands and press <kbd>Enter</kbd> after each command.
-1. **`add Buy the milk \from 3pm \to 5.00`**.
+1. **`add Buy the milk \from 3pm \to 5.00`**. <br>
 Adds an event for today with a description of "Buy the milk" from 3pm to 5am the next day.
-2. **`add Buy the vegetables \by 6pm 25th Oct`**.
+2. **`add Buy the vegetables \by 6pm 25th Oct`**. <br>
 Adds a task with a description of "Buy the vegetables" which has a 6pm deadline.
-3. **`finish 1`**
+3. **`finish 1`** <br>
 Marks the first task in the list as finished.
-4. **`list pending`**
+4. **`list pending`** <br>
 Lists all the pending tasks which are not finished yet.
-5. **`delete 1`**
+5. **`delete 1`** <br>
 Deletes the 1st task shown in the current list.
-6. **`exit`**
+6. **`exit`** <br>
 Exits the application.
 
-Try out different date and time formats for the add command!
+Also try out different date and time formats for the add command!
 
 Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -97,6 +97,7 @@ Simply type "help" to view the help page! <br>
 `help`
 
 ### Adding a new task : `add`, `do`
+
 
 Add a new task with a description using just the `add` command word. <br>
 `(add|do) TASK_DESCRIPTION`
@@ -155,10 +156,11 @@ Add a task with tags with the `\under` key. Separate multiple tags with spaces.<
 
 
 **Acceptable Date Formats** <br>
-| Date Format  | Example(s) |
-| ------------ | ------------ |
-| Day Month  | 1st Oct, 1 Oct  |
-| Month Day  | Oct 1st, Oct  |
+Date Format |Examples
+----------- | :------- |
+Day Month | 1st Oct, 1 Oct
+Month Day | Oct 1st, Oct
+Day / Month | 1/10
 
 > **Tips:** <br>
 > - If you do not explicitly state the time, the date will be assumed to be within the next 24 hours <br>
