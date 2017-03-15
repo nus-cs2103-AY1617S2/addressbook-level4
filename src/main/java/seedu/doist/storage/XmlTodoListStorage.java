@@ -12,7 +12,7 @@ import seedu.doist.commons.util.FileUtil;
 import seedu.doist.model.ReadOnlyTodoList;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access TodoList data stored as an xml file on the hard disk.
  */
 public class XmlTodoListStorage implements TodoListStorage {
 
@@ -42,34 +42,34 @@ public class XmlTodoListStorage implements TodoListStorage {
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File todoListFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
+        if (!todoListFile.exists()) {
+            logger.info("To-do List file "  + todoListFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyTodoList addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTodoList todoListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(todoListOptional);
     }
 
     @Override
-    public void saveTodoList(ReadOnlyTodoList addressBook) throws IOException {
-        saveTodoList(addressBook, filePath);
+    public void saveTodoList(ReadOnlyTodoList todoList) throws IOException {
+        saveTodoList(todoList, filePath);
     }
 
     /**
      * Similar to {@link #saveTodoList(ReadOnlyTodoList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException {
+        assert todoList != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTodoList(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTodoList(todoList));
     }
 
 }

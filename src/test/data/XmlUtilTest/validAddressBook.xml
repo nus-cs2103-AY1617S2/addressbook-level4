@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <desc>Alex Yeoh</desc>
-        <priority>VERYIMPORTANT</priority>
-        <tagged>friends</tagged>
-    </persons>
-    <persons>
-        <desc>Bernice Yu</desc>
-        <priority>IMPORTANT</priority>
-        <tagged>colleagues</tagged>
-        <tagged>friends</tagged>
-    </persons>
-    <persons>
-        <desc>Charlotte Oliveiro</desc>
-        <priority>NORMAL</priority>
-        <tagged>neighbours</tagged>
-    </persons>
-    <persons>
-        <desc>David Li</desc>
-        <priority>NORMAL</priority>
-        <tagged>family</tagged>
-    </persons>
-    <persons>
-        <desc>Irfan Ibrahim</desc>
-        <priority>IMPORTANT</priority>
-        <tagged>classmates</tagged>
-    </persons>
-    <persons>
-        <desc>Roy Balakrishnan</desc>
-        <priority>NORMAL</priority>
-        <tagged>colleagues</tagged>
-    </persons>
-    <persons>
-        <desc>hello</desc>
-        <priority>NORMAL</priority>
-    </persons>
-    <tags>friends</tags>
-    <tags>colleagues</tags>
-    <tags>neighbours</tags>
-    <tags>family</tags>
-    <tags>classmates</tags>
-</addressbook>
+<todolist>
+    <tasks>
+        <desc>Buy milk</desc>
+        <priority>Very Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Do CS2103 tutorial</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>tutorial</tagged>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <desc>Exercise at home</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Have some beauty sleep</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <desc>Do more tutorials</desc>
+        <priority>Important</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>tutorial</tagged>
+    </tasks>
+    <tasks>
+        <desc>Talk to people</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+        <tagged>interests</tagged>
+    </tasks>
+    <tasks>
+        <desc>Download Doist</desc>
+        <priority>Normal</priority>
+        <finishedStatus>false</finishedStatus>
+    </tasks>
+    <tags>health</tags>
+    <tags>NUS</tags>
+    <tags>tutorial</tags>
+    <tags>interests</tags>
+</todolist>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <desc>Ali Muster</desc>
+<todolist>
+    <tasks>
+        <desc>Make some friends</desc>
         <priority>NORMAL</priority>
-    </persons>
+        <finishedStatus>false</finishedStatus>
+        <tagged>Friends</tagged>
+    </tasks>
     <tags>Friends</tags>
-</addressbook>
+</todolist>

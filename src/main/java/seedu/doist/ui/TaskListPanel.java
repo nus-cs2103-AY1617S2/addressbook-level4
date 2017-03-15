@@ -11,7 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doist.commons.core.LogsCenter;
-import seedu.doist.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.doist.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.doist.commons.util.FxViewUtil;
 import seedu.doist.model.task.ReadOnlyTask;
 
@@ -48,7 +48,7 @@ public class TaskListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }

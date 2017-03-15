@@ -6,13 +6,13 @@ import java.util.Arrays;
 import seedu.doist.model.TodoList;
 
 /**
- * Clears the address book.
+ * Clears the to-do list.
  */
 public class ClearCommand extends Command {
 
     public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("clear"));
     public static final String DEFAULT_COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "To-do list has been cleared!";
 
     @Override
     public CommandResult execute() {

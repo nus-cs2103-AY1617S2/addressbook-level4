@@ -15,8 +15,8 @@ import seedu.doist.commons.core.Config;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.doist.commons.events.ui.JumpToListRequestEvent;
-import seedu.doist.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.doist.commons.events.ui.ShowHelpRequestEvent;
+import seedu.doist.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.Logic;
 import seedu.doist.model.UserPrefs;
@@ -120,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
     }

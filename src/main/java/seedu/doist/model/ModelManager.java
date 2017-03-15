@@ -16,10 +16,12 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the to-do list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -29,7 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given to-do list and userPrefs.
      */
     public ModelManager(ReadOnlyTodoList todoList, UserPrefs userPrefs) {
         super();
@@ -68,6 +70,28 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyFinishedException {
+        try {
+            todoList.changeTaskFinishStatus(target, true);
+        } catch (TaskAlreadyUnfinishedException e) {
+            assert false : "finishTask should not try to unfinish tasks!";
+        }
+        indicateTodoListChanged();
+    }
+
+    @Override
+    public synchronized void unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyUnfinishedException {
+        try {
+            todoList.changeTaskFinishStatus(target, false);
+        } catch (TaskAlreadyFinishedException e) {
+            assert false : "unfinishTask should not try to finish tasks!";
+        }
+        indicateTodoListChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
         updateFilteredListToShowAll();
@@ -89,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {

@@ -17,6 +17,9 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the to-do list level
@@ -51,9 +54,9 @@ public class TodoList implements ReadOnlyTodoList {
 
 //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> persons)
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
-        this.tasks.setTasks(persons);
+        this.tasks.setTasks(tasks);
     }
 
     public void sortTasks(Comparator<ReadOnlyTask> comparator) {
@@ -69,7 +72,7 @@ public class TodoList implements ReadOnlyTodoList {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "To-do Lists should not have duplicate persons";
+            assert false : "To-do Lists should not have duplicate tasks";
         }
         try {
             setTags(newData.getTagList());
@@ -84,22 +87,24 @@ public class TodoList implements ReadOnlyTodoList {
     /**
      * Adds a task to the to-do list.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.add(p);
+        if (tasks.add(p)) {
+            // Only sync master tag list if addition of task is successful
+            syncMasterTagListWith(p);
+        }
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyTask}.
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * {@code TodoList}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
@@ -107,41 +112,41 @@ public class TodoList implements ReadOnlyTodoList {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any task
-        // in the task list.
-        tasks.updatePerson(index, editedTask);
+        if (tasks.updateTask(index, editedTask)) {
+            //Only sync master tag list if editing of task is successful
+            syncMasterTagListWith(editedTask);
+        }
+
     }
 
     /**
-     * Ensures that every tag in this person:
+     * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Task person) {
-        final UniqueTagList personTags = person.getTags();
-        tags.mergeFrom(personTags);
+    private void syncMasterTagListWith(Task task) {
+        final UniqueTagList taskTags = task.getTags();
+        tags.mergeFrom(taskTags);
 
         // Create map with values = tag object references in the master list
-        // used for checking person tag references
+        // used for checking task tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         tags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of task tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
+        taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        task.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
-     * Ensures that every tag in these persons:
+     * Ensures that every tag in these tasks:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueTaskList persons) {
-        persons.forEach(this::syncMasterTagListWith);
+    private void syncMasterTagListWith(UniqueTaskList tasks) {
+        tasks.forEach(this::syncMasterTagListWith);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
@@ -150,6 +155,11 @@ public class TodoList implements ReadOnlyTodoList {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+
+    public boolean changeTaskFinishStatus(ReadOnlyTask key, boolean isToFinish) throws TaskNotFoundException,
+            TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
+        return tasks.changeFinishStatus(key, isToFinish);
     }
 
 //// tag-level operations

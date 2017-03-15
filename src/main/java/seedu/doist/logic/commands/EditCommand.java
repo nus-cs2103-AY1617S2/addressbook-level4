@@ -10,13 +10,14 @@ import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the to-do list.
  */
 public class EditCommand extends Command {
 
@@ -24,32 +25,32 @@ public class EditCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
-            + ": Edits the details of the person identified " + "by the index number used in the last person listing. "
+            + ": Edits the details of the task identified " + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + DEFAULT_COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [\\as PRIORITY] [\\under TAG]...\n"
+            + "Example: " + DEFAULT_COMMAND_WORD + " 1 do things today \\as IMPORTANT";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists!";
 
-    private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final int filteredTaskListIndex;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param filteredPersonListIndex
+     * @param filteredTaskListIndex
      *            the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor
+     * @param editTaskDescriptor
      *            details to edit the person with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
-        assert filteredPersonListIndex > 0;
-        assert editPersonDescriptor != null;
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+        assert filteredTaskListIndex > 0;
+        assert editTaskDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     public static CommandInfo info() {
@@ -61,68 +62,81 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (filteredTaskListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredPersonListIndex, editedPerson);
+            model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of
-     * {@code personToEdit} edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Task} with the details of
+     * {@code taskToEdit} edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedPerson(ReadOnlyTask taskToEdit, EditPersonDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Description updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getDescription);
+        Description updatedName = editTaskDescriptor.getDesc().orElseGet(taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
 
-        return new Task(updatedName, updatedPriority, updatedTags);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedTags);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value
-     * will replace the corresponding field value of the person.
+     * Stores the details to edit the task with. Each non-empty field value
+     * will replace the corresponding field value of the task.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTaskDescriptor {
         private Optional<Description> desc = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<FinishedStatus> finishStatus = Optional.empty();
 
-        public EditPersonDescriptor() {
+        public EditTaskDescriptor() {
         }
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.desc = toCopy.getName();
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            this.desc = toCopy.getDesc();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
+            this.finishStatus = toCopy.finishStatus;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.desc, this.tags);
+            return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags);
 
         }
 
-        public void setName(Optional<Description> name) {
-            assert name != null;
-            this.desc = name;
+        public void setDesc(Optional<Description> desc) {
+            assert desc != null;
+            this.desc = desc;
         }
 
-        public Optional<Description> getName() {
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Description> getDesc() {
             return desc;
+        }
+
+        public Optional<FinishedStatus> getFinishStatus() {
+            return finishStatus;
         }
 
         public Optional<Priority> getPriority() {
