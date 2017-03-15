@@ -36,17 +36,11 @@ public class DeleteCommand extends Command {
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deleteTask(taskToDelete);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target task cannot be missing";
-        }
-        
-
-        assert model != null;
-        try {
             int indexRemoved = model.deleteTask(taskToDelete);
             model.getUndoStack().push(COMMAND_WORD);
+            System.out.println("getUndoStack() " + COMMAND_WORD);
             model.getDeletedStackOfTasks().push(taskToDelete);
+            System.out.println("getDeletedStackOfTasks() " + taskToDelete.getAsText());
             model.getDeletedStackOfTasksIndex().push(indexRemoved);
         } catch (TaskNotFoundException tnfe) {
             System.out.println("Task not found");
