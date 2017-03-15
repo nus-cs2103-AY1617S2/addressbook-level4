@@ -15,8 +15,8 @@ import typetask.commons.core.Config;
 import typetask.commons.core.LogsCenter;
 import typetask.commons.events.storage.DataSavingExceptionEvent;
 import typetask.commons.events.ui.JumpToListRequestEvent;
-import typetask.commons.events.ui.PersonPanelSelectionChangedEvent;
 import typetask.commons.events.ui.ShowHelpRequestEvent;
+import typetask.commons.events.ui.TaskPanelSelectionChangedEvent;
 import typetask.commons.util.StringUtil;
 import typetask.logic.Logic;
 import typetask.model.UserPrefs;
@@ -120,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
     }
