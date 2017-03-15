@@ -6,9 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import typetask.model.task.ReadOnlyTask;
 
-public class PersonCard extends UiPart<Region> {
+public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -22,12 +22,12 @@ public class PersonCard extends UiPart<Region> {
     private Label time;
 
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        date.setText(person.getDate().value);
-        time.setText(person.getTime().value);
+        date.setText(task.getDate().value);
+        time.setText(task.getTime().value);
     }
 
 }
