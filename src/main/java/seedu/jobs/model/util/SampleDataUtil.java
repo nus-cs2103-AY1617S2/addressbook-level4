@@ -9,7 +9,7 @@ import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.Person;
-import seedu.jobs.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,7 +40,7 @@ public class SampleDataUtil {
                 sampleAB.addPerson(samplePerson);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }
