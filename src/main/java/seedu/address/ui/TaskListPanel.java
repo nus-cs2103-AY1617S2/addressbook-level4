@@ -24,7 +24,7 @@ public class TaskListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<ReadOnlyTask> todayTaskListView;
-    
+
     @FXML
     private ListView<ReadOnlyTask> futureTaskListView;
 
@@ -34,7 +34,7 @@ public class TaskListPanel extends UiPart<Region> {
         setConnections(futureTaskListView, taskListFuture);
         addToPlaceholder(taskListPlaceholder);
     }
-    
+
     private void setConnections(ListView<ReadOnlyTask> taskListView,ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -57,7 +57,7 @@ public class TaskListPanel extends UiPart<Region> {
                     }
                 });
     }
-    
+
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             futureTaskListView.scrollTo(index);

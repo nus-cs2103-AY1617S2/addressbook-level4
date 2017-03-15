@@ -16,10 +16,10 @@ public interface ReadOnlyTask {
     void setToday();
 
     boolean isToday();
-    
+
     // id field reserved for UI to store temporary index
     int getID();
-    
+
     void setID(int id);
 
     /**

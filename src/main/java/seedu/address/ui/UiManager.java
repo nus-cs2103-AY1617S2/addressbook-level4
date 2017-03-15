@@ -123,7 +123,7 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
-    
+
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "###################### UI VIEW REFRESHED ###################"));

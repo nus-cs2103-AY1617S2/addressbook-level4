@@ -40,13 +40,13 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
     private CompletedTaskListPanel completedTaskListPanel;
     private Config config;
-    
+
     // Categorised Task List
     public ObservableList<ReadOnlyTask> taskListToday;
     private ObservableList<ReadOnlyTask> taskListFuture;
     private ObservableList<ReadOnlyTask> taskListCompleted;
-    
-    
+
+
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
@@ -58,7 +58,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
-    
+
     @FXML
     private AnchorPane completedTaskListPlaceholder;
 
@@ -130,7 +130,6 @@ public class MainWindow extends UiPart<Region> {
         //TODO: show completedTaskPanel when show completed command is implemented
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(),taskListCompleted);
     }
-    
     /*
      * Prepares categorised task list for today/future/completed ListView
      * 
@@ -151,11 +150,8 @@ public class MainWindow extends UiPart<Region> {
             }else{
                 taskListCompleted.add(tmpTask);
             }
-        }
-        
+        }   
     }
-    
-    
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;

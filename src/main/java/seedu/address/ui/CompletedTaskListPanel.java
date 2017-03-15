@@ -20,7 +20,7 @@ import seedu.address.model.task.ReadOnlyTask;
 public class CompletedTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "CompletedTaskListPanel.fxml";
-    
+
     // Init parameters for completed panel animation
     private static double COMPLETED_PANEL_HEIGHT = 400.0d;
     private boolean flag = false;
@@ -77,15 +77,14 @@ public class CompletedTaskListPanel extends UiPart<Region> {
                 setGraphic(new TaskCard(task, task.getID()).getRoot());
             }
         }
-    }
-    
-    
+    }    
+
     public void menuTest(){
         if(!flag){
             //show completed task list panel
             completedTaskListView.setPrefHeight(0.0d);
             flag = true;
-            
+   
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO,
