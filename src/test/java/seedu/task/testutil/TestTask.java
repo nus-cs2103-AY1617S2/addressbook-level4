@@ -12,6 +12,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Description description;
     private UniqueTagList tags;
+    private DueDate dueDate;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -33,9 +34,18 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    public void setDueDate(DueDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
     @Override
     public Description getDescription() {
         return description;
+    }
+
+    @Override
+    public DueDate getDueDate() {
+        return this.dueDate;
     }
 
     @Override
@@ -55,9 +65,4 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-    @Override
-    public DueDate getDueDate() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }
