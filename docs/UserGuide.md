@@ -4,12 +4,21 @@ By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `JAN 2016`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Intoduction](#intoduction)
+2. [Quick Start](#quick-start)
+3. [Features](#features)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
-## 1. Quick Start
+## 1. Introduction
+
+TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply with only a single line of command! With the efficacy of a calendar without its shortcomings, TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. TypeTask is especially good for:
+
+Users who wants to do everything through a single line of command
+Users who want an application that works offline
+Users who have tasks that have deadlines/start-dates
+
+## 2. Quick Start
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
@@ -17,234 +26,268 @@ By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `JAN 2016`  &nbsp;&nbsp;&nbs
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `TypeTask.jar` from the [releases](../../../releases) tab.
+
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
+
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
+
    > <img src="images/Ui.png" width="600">
+Fig 1. TypeTask’s User Interface
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+   
 5. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` CS2103T Meeting d/12022107 t/11:00am` :
      adds a task named `CS2103T Meeting` to the Task Manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
+   
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
-## 2. Features
+## 3. Features
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+Let us now explore the interesting features found in TypeTask!
 
-### 2.1. Viewing help : `help`
+### 3.1. Viewing Help : `help`
+
+Having trouble navigating the application? Simply type  help to view a summary of TypeTask’s commands. The help screen will also show if you have entered an incorrect command e.g. abcd. 
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+### 3.2. Adding a Floating Task: `add`
 
-### 2.2. Adding a task: `add`
+The first thing you would do is to add your first task! <br>
 
-Adds a person to the address book<br>
-Format: `add TASK d/DATE t/TIME `
-
-> Tasks can have any number of tags (including 0)
+Format: `add <TASK NAME>`
 
 Examples:
 
-* `add CS2103T Meeting d/12022107 t/11:00am`
-* `add Buy Notebook f/Shopping t/11:00am`
+> add CS2103T Meeting
 
-### 2.3. Listing all tasks : `list`
+Examples:
 
-Shows a list of all tasks in the Task Manager.<br>
+* `add CS2103T Meeting`
+* `add Buy milk`
+
+### 3.2. Adding a Deadline Task: `add`
+
+The first thing you would do is to add your first task! <br>
+
+Format: `add <TASK NAME> d/<DATE> or add <TASK NAME> d/<DATE> t/<TIME>`
+
+Things To Note:
+> Date must be in dd/mm/yyyy format
+> Time must be in hh:mm am/pm format
+> Time is optional
+
+Examples:
+
+* `add CS2103T Meeting d/13/10/2016`
+* `add CS2103T Meeting d/13/10/2016 t/11:10am`
+
+### 3.2. Adding an Event Task: `add`
+
+The first thing you would do is to add your first task! <br>
+
+Format: `add <EVENT NAME> from d/<DATE> t/<TIME> to d/<DATE> t/<TIME>`
+
+Things To Note:
+> Date must be in dd/mm/yyyy format
+> Time must be in hh:mm am/pm format
+> Start Date and End Date is compulsory
+> End Date must not be before Start Date
+> Start Time and End Time is compulsory
+
+Examples:
+
+* `add OPEN HOUSE from d/13/10/2016 t/10:00am to d/16/10/2016 t/5:00 pm`
+* `add CS1010 Lecture from d/10/10/2016 t/12:00pm to d/10/4/2017 t/2:00 pm`
+
+### 3.3. Adding a Priority Task : `add`
+
+Format: `add <TASK NAME> p/<PRIORITY>`
+
+Things To Note:
+> Priority must be high or low
+> Priority can be applied to other type of task or event by adding this additional field “p/<PRIORITY>”
+> Priority will automatic be low if a task is added without the field “p/<PRIORITY>”
+
+Examples:
+* `add CS2103T Meeting p/high`
+* `add Open House from d/5/11/2016 t/11:00am to d/6/11/2016 t/11:00pm p/low`
+
+### 3.3 Finding a Task: find : `find`
+You may not want to go through the struggle of searching throughout your whole list to find a certain task. You can easily find a task by using the find command, then key in any detail about your task. 
+
+Format: `find <KEYWORD>`
+
+Things To Note:
+> The order of the keywords does not matter. e.g. Meeting Tutor will match Tutor Meeting.
+> The input that is a partial word of a task name will be matched e.g. Meeting will match Meetings.
+> The tasks that match at least one keyword will be returned (i.e. OR search). e.g. Meeting will match Meeting Tutor.
+> find is not case-sensitive, i.e. Meeting Tutor will match meeting tutor
+
+Examples:
+* `find Meeting`
+* `find Open house`
+
+### 3.3 Editing a Task: `edit`
+Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command. 
+
+Format: `edit INDEX <TASK NAME> d/<DATE> t/<TIME> p/<PRIORITY>`
+
+Things To Note:
+> Edits the task at the specified INDEX. The index refers to the index number shown in the last task listing.
+> The index must be a positive integer 1, 2, 3, …
+> Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>
+> At least one of the optional fields must be provided.
+> Existing field(s) will be updated with the input fields.
+
+
+Examples:
+* `edit 1 d/02122017 t/11:00am`
+* `edit 2 CS2013T Meeting`
+
+### 3.3 Deleting a Task : `delete`
+There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command. 
+
+Format: `delete <INDEX>`
+
+Things To Note:
+> The task at the specified INDEX will be deleted 
+> The index refers to the index number shown in the most recent listing.
+> The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `delete 1`
+
+### 3.3 Completing a Task : `done`
+Completed a task? Good for you! You can mark the task as done by typing in the done command. This will move the task to your completed list.
+
+Format: `done <INDEX>`
+
+Things To Note:
+> The task at the specified INDEX will be moved from the task list to the completed list.
+> The index refers to the index number shown in the most recent listing.
+> The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `done 2`
+
+### 3.3. Listing all Tasks : `list`
+Want to view a list of all your tasks? Use the command list to view all your tasks in TypeTask. <br>
+
 Format: `list`
 
-### 2.4. Listing today tasks : `listday`
+Things To Note:
+> This list will refresh itself and show you the latest list when you add a new task or event.
+> This list will be sorted by Priority, Date and Time.
 
-Shows a list of today tasks in the Task Manager.<br>
+### 3.4. Listing Today Tasks : `listday`
+By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command. 
+
 Format: `listday`
 
-### 2.5. Listing proirity tasks : `list*`
+Things To Note:
+> This list will refresh itself and show you the latest list when you add a new floating task or task that is due today.
+> This list will be sorted by Priority and Time.
 
-Shows a list of proirity tasks in the Task Manager.<br>
+
+### 3.5. Listing Proirity Tasks : `list*`
+Want to focus on your urgent tasks only? You can use the command list* to see a list of all your important tasks. 
+
 Format: `list*`
 
-### 2.6. Listing completed tasks : `listdone`
+Things To Note:
+> This list will refresh itself and show you the latest list when you add a new task or event with priority.
+> This list will be sorted by Date and Time.
 
-Shows a list of completed tasks in the Task Manager.<br>
+### 3.6. Listing Completed Tasks : `listdone`
+To review what you have done (or maybe feel better about yourself), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
+
 Format: `listdone`
 
-### 2.7. Editing a task : `edit`
+Things To Note:
+> This list will only show you the tasks that are completed. Deleted Task are not included.
 
-Edits an existing task in the address book.<br>
-Format: `edit INDEX [TASK] [d/DATE] [t/TIME]
+### 2.13. Undoing the Latest Command : `undo`
+Did you accidentally type in the wrong command and did an operation you did not want? Well not to worry! You can type in the undo command, as you do not have to go through the hassle of modifying your recent operation. <br>
 
-> * Edits the task at the specified `INDEX`.
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
-
-Examples:
-
-* `edit 1 d/02122017 t/11:00am`<br>
-  Edits the date and time of the 1st task to be `02122017` and `11:00am` respectively.
-
-* `edit 2 CS2013T Meeting t/`<br>
-  Edits the label of the 2nd task to be `CS2013T Meeting` and clears all existing tags.
-
-### 2.8. Finding all tasks containing any keyword in their label: `find`
-
-Finds tasks whose labels contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `meeting` will not match `Meeting`
-> * The order of the keywords does not matter. e.g. `Meeting Tutor` will match `Tutor Meeting`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Meeting` will not match `Meetings`
-> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Meeting` will match `Meeting Tutor`
-
-Examples:
-
-* `find Study`<br>
-  Returns `Study Math` but not `Study`
-* `find Meeting Study Shop`<br>
-  Returns Any tasks having labels `Meeting`, `Study`, or `Shop`
-
-### 2.9. Deleting a task : `delete`
-
-Deletes the specified task from the Task Manager. Irreversible.<br>
-Format: `delete INDEX`
-
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `find Meeting`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
-* `list`<br>
-  `delete 2 3`<br>
-  Deletes the 2nd and 3rd task in the Task Manager.
-
-### 2.10. Complete a task : `done`
-
-Marks the task as done identified by the index number used in the last task listing.<br>
-Format: `Done INDEX`
-
-> Completes the task at the specified `INDEX` and removes it from the list.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`<br>
-  `done 2`<br>
-  Removes the 2nd task in the Task Manager.
-* `find Meeting` <br>
-  `done 1`<br>
-  Removes the 1st task in the results of the `find` command.
-
-### 2.11. Blocking a task : `block`
-
-Blocks the specified task from the Task Manager if task is uncertain. <br>
-Format: `block INDEX`
-
-> Blocks the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `find Meeting`<br>
-  `block 1`<br>
-  Blocks the 1st task in the results of the `find` command.
-* `list`<br>
-  `block 2 3`<br>
-  Blocks the 2nd and 3rd task in the Task Manager.
-
- ### 2.12. Unblocking a task : `unblock`
-
-Unblocks the specified task from the Task Manager if task is certain. <br>
-Format: `unblock INDEX`
-
-> Unblocks the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `find Meeting`<br>
-  `unblock 1`<br>
-  Unblocks the 1st task in the results of the `find` command.
-* `list`<br>
-  `unblock 2 3`<br>
-  Unblocks the 2nd and 3rd task in the Task Manager.
- 
-  ### 2.13. Undo the latest command : `undo`
-
-Undos the recent typed command. <br>
 Format: `undo`
 
-### 2.9. Saving data in another destination folder : `save`
+Things To Note:
+> Undo command will not work if there is no prior command executed.
 
-Saves the data in another folder given by the user. <br>
-Format: `save dest/FILE_PATH`
+### 2.9. Saving the Data to Another Folder : `save`
+You may consider to save the TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
-Examples:
+Format: `save <FILE_PATH>`
 
-* `save dest/C:/Desktop/myTask`<br>
-
-### 2.9. Changing default storage folder : `setting`
-
-Changing the default storage folder in another folder given by the user. <br>
-Format: `setting dest/FILE_PATH`
+Things To Note:
+> The file path provided must be valid
 
 Examples:
 
-* `setting dest/C:/Desktop/myTask`<br>
+* `save C:/Desktop/myTask`
 
-### 2.14. Using data from another folder : `use`
+### 2.9. Changing the Default Storage Folder : `setting`
+Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
-Using data from another folder given by the user. <br>
-Format: `use dest/FILE_PATH`
+Format: `setting <FILE_PATH>`
+
+Things To Note:
+> The file path provided must be valid
 
 Examples:
 
-* `use dest/C:/Desktop/myTask`<br>
+* `setting C:/Desktop/myOtherTask`<br>
 
-### 2.15. Clearing all entries : `clear`
+### 2.14. Using Data from Another Folder : `use`
+After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
 
-Clears all entries from the Task Manager.<br>
+Format: `use <FILE_PATH>`
+
+Things To Note:
+> The file path provided must be valid
+
+Examples:
+
+* `use C:/Desktop/myTask`<br>
+
+### 2.15. Clearing all Entries : `clear`
+Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. 
+`*WARNING*` you will lose all your data after this command. Thus, use it wisely. <br>
+
 Format: `clear`
 
-### 2.16. Exiting the program : `exit`
+### 2.16. Exiting the Program : `exit`
+Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
-Exits the program.<br>
 Format: `exit`
 
 ### 2.17. Saving the data
 
-Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
 
-## 3. FAQ
+### 2.17. Differentiating your tasks’ urgency
+TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
+
+`Red`: this uncompleted task’s deadline has passed! Better get on to it.
+`Yellow`: this uncompleted task was labelled as a priority
+`Green`: this uncompleted task has a deadline but is not due yet. Phew!
+
+> Note that all tasks that fall outside of these categories will appear normally (i.e. no additional colours).
+
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Manager folder.
 
-## 4. Command Summary
+## 5. Command Summary
 Command | Shortcuts | Format | Example
 -------- | :-------- | :--------- | :-----------
 add | a, + | add TASK d/DATE t/TIME | add Shop Shoes d/20082017 t/4:30pm
