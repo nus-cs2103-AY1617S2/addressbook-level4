@@ -198,15 +198,23 @@ Some tasks don't get `done`. We put them aside and after several eons, we discov
 
 You've been tagging a bunch of tasks as `work`. Now that you're quitting Google, you might want to mark them as `Google` instead. Instead of going through your tasks one by one, all of the tasks can be instantly retagged with `Google` with this function.
 
-##### Format: `rename tag from <tag_name> to <new_tag_name>`
+##### Format: `renametag <tag_name> <new_tag_name>`
 ##### Parameters
     tag_name : existing tag name
     new_tag_name : new tag name
 
 ##### Examples
 
-* `rename work to Google`
-* `rename girlfriend to ex-gf`
+* `renametag work Google`
+* `renametag girlfriend ex-gf`
+
+#### Deleting tag
+
+When you reorganize your tasks into different tags, from say "work" vs "family" to something more specific like "boss jim", "boss sarah", "annoying wife jeanie", "daughter Samantha", you can delete your former tags "work" and "family", and retag your tasks.
+
+##### Format: `deletetag <tag_name>`
+##### Parameters
+    tag_name : existing tag name
 
 ### Undo/Redo Commands
 
@@ -248,21 +256,21 @@ Don't worry if you don't have the luxury of a syncing service. If you want to tr
     dir_location: path to store exported file
 ##### Examples
 
-* `export to C:\Desktop`
-* `export to ..\mySecretFolder`
+* `export C:\Desktop`
+* `export ..\mySecretFolder`
 
 #### Import file
 
 In your second computer, plug in the USB stick and get the file path of the previously exported file. Tell **Today** to `import` this file and it will add these tasks to your current tasklist.
 
-##### Format: `import from <path_to_file>`
+##### Format: `import <path_to_file>`
 ##### Parameters
     path_to_location: path to the exported task list
 
 ##### Examples
 
-* `import from C:\Desktop\exported.txt`
-* `import from ..\mySecretFolder\exported.txt`
+* `import C:\Desktop\exported.txt`
+* `import ..\mySecretFolder\exported.txt`
 
 ### Miscellaneous
 #### Getting help
@@ -292,12 +300,12 @@ Work-in-progress
 * **View All Tasks**: `list`
 * **Find Task**: `find <keyword1 keyword2 ...>`
 * **Complete Task**: `done <id1, id2, ...>`
-* **Un-complete Task**: `undone <id1, id2, ...>`
+* **Un-complete Task**: `notdone <id1, id2, ...>`
 * **Update Task**: `update <id> [<new_task_name>] [due <new_deadline>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
 * **Delete Task**: `delete <id1, id2, id3>`
-* **Rename Tag**: `rename tag from <tag_name> to <new_tag_name>`
+* **Rename Tag**: `renametag <tag_name> <new_tag_name>`
 * **Change Storage Location**: `saveto <dir_location>`
-* **Export**: `export to <dir_location>`
-* **Import**: `import from <path_to_file>`
+* **Export**: `export <dir_location>`
+* **Import**: `import <path_to_file>`
 * **Help**: `help [<command>]`
 * **Exit**: `exit`
