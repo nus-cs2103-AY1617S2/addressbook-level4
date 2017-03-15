@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's notes in the ToDoApp
- * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidNotes(String)}
  */
 public class Notes {
 
@@ -23,22 +23,22 @@ public class Notes {
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given notes.
      *
      * @throws IllegalValueException if given address string is invalid.
      */
     public Notes(String notes) throws IllegalValueException {
         assert notes != null;
-        if (!isValidDeadline(notes)) {
+        if (!isValidNotes(notes)) {
             throw new IllegalValueException(MESSAGE_NOTES_CONSTRAINTS);
         }
         this.value = notes;
     }
 
     /**
-     * Returns true if a given string is a valid person deadline.
+     * Returns true if a given string is a valid notes.
      */
-    public static boolean isValidDeadline(String test) {
+    public static boolean isValidNotes(String test) {
         return true;
     }
 
@@ -50,8 +50,8 @@ public class Notes {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                && this.value.equals(((Deadline) other).value)); // state check
+                || (other instanceof Notes // instanceof handles nulls
+                && this.value.equals(((Notes) other).value)); // state check
     }
 
     @Override
