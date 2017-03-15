@@ -391,7 +391,7 @@ Use case ends
 **Extensions**
 
 1a. List is empty
->1a1. System informs user that there is no task to list. 
+>1a1. System informs user that there is no task to list.
 >Use case ends.
 
 #### Use case: search for tasks by keywords
@@ -403,12 +403,12 @@ Use case ends
 **Extensions**
 
 1a. There is no task containing the keyword(s).
-> 1a1. System informs user that no tasks found. 
+> 1a1. System informs user that no tasks found.
 > Use case ends.
 
 #### Use case: list out all tasks
 
-**MSS** 
+**MSS**
 
 1. User requests list of tasks.
 2. System displays list of tasks.
@@ -424,19 +424,19 @@ Use case ends.
 
 **MSS**
 
-1. System display a list of tasks. 
-2. User input task index to specify which task to delete. 
+1. System display a list of tasks.
+2. User input task index to specify which task to delete.
 3. System notifies user that task has been successfully deleted.
 Use case ends.
 
 **Extensions**
 
 2a. List is empty
->2a1. System informs user that there is no task to delete. 
+>2a1. System informs user that there is no task to delete.
 >Use case ends.
 
 2b. User input index is not valid
->2b1. System informs user that the input index is not valid. 
+>2b1. System informs user that the input index is not valid.
 >Use case ends.
 
 ## Appendix C : Non Functional Requirements
