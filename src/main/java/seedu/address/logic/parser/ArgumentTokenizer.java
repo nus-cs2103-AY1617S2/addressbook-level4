@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import com.joestelmach.natty.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -143,7 +144,11 @@ public class ArgumentTokenizer {
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
-
+        if (prefix.getPrefix().equals("d/") ||  prefix.getPrefix().equals("s/")) {
+            // Parse date
+            ParserUtil parserUtil = new ParserUtil();
+            value = parserUtil.parseNLPDate(value);
+        }
         return value.trim();
     }
 

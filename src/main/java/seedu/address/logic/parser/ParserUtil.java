@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.joestelmach.natty.DateGroup;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Name;
@@ -81,5 +83,23 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+    
+    /**
+     * Parses, analyses and converts 'rich text' into a timestamp
+     * 
+     * @param String
+     *            - e.g. 'Tomorrow'
+     * @return String - Timestamp
+     */
+    public String parseNLPDate(String argsString) {
+        com.joestelmach.natty.Parser nParser = new com.joestelmach.natty.Parser();
+        List<DateGroup> groups = nParser.parse(argsString);
+        String output = "";
+        for (DateGroup group : groups) {
+            List dates = group.getDates();
+            output = dates.get(0).toString().replace("CST", "");
+        }
+        return output;
     }
 }
