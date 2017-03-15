@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUC
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
@@ -12,7 +14,6 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void delete() {
-
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
@@ -31,7 +32,12 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         //invalid index
         commandBox.runCommand("DELETE " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
+    }
 
+    @Test
+    public void delete_TestInvalidArgumentLength_ReturnFalse() {
+        commandBox.runCommand("DELETE args1 args2");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     /**
