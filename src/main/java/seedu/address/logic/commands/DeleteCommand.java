@@ -35,7 +35,6 @@ public class DeleteCommand extends Command {
 
             System.out.println("invalid index");
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-                       
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);

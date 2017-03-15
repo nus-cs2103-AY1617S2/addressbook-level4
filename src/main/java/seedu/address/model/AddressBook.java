@@ -18,8 +18,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .equals comparison)
+ * Wraps all data at the address-book level Duplicates are not allowed (by
+ * .equals comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -27,31 +27,33 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueTagList tags;
 
     /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     * The 'unusual' code block below is an non-static initialization block,
+     * sometimes used to avoid duplication between constructors. See
+     * https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * Note that non-static init blocks are not recommended to use. There are
+     * other ways to avoid duplication among constructors.
      */
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons and Tags in the
+     * {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws UniqueTaskList.DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
 
@@ -74,14 +76,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncMasterTagListWith(tasks);
     }
 
-//// person-level operations
+    //// person-level operations
 
     /**
-     * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * Adds a person to the address book. Also checks the new person's tags and
+     * updates {@link #tags} with any new tags found, and updates the Tag
+     * objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniquePersonList.DuplicatePersonException
+     *             if an equivalent person already exists.
      */
     public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(t);
@@ -89,30 +92,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     * Updates the person in the list at position {@code index} with
+     * {@code editedReadOnlyPerson}. {@code AddressBook}'s tag list will be
+     * updated with the tags of {@code editedReadOnlyPerson}.
+     * 
      * @see #syncMasterTagListWith(Person)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     * @throws DuplicatePersonException
+     *             if updating the person's details causes the person to be
+     *             equivalent to another existing person in the list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // TODO: the tags master list will be updated even though the below line
+        // fails.
+        // This can cause the tags master list to have additional tags that are
+        // not tagged to any person
         // in the person list.
         tasks.updateTask(index, editedTask);
     }
 
     /**
-     * Ensures that every tag in this person:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
+     * Ensures that every tag in this person: - exists in the master list
+     * {@link #tags} - points to a Tag object in the master list
      */
     private void syncMasterTagListWith(Task task) {
         final UniqueTagList taskTags = task.getTags();
@@ -123,25 +130,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         tags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of person tags to point to the relevant tags in the
+        // master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
-     * Ensures that every tag in these persons:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Person)
+     * Ensures that every tag in these persons: - exists in the master list
+     * {@link #tags} - points to a Tag object in the master list
+     * 
+     * @see #syncMasterTagListWith(Person)
      */
     private void syncMasterTagListWith(UniqueTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
     public int removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-    	
-    	int indexRemoved = tasks.getInternalList().indexOf(key);
+
+        int indexRemoved = tasks.getInternalList().indexOf(key);
         if (tasks.remove(key)) {
             return indexRemoved;
         } else {
@@ -149,17 +157,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() +  " tags";
+        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() + " tags";
         // TODO: refine later
     }
 
@@ -177,13 +185,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && this.tasks.equals(((AddressBook) other).tasks)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                        && this.tasks.equals(((AddressBook) other).tasks)
+                        && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(tasks, tags);
     }
 }
