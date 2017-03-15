@@ -43,4 +43,12 @@ public interface Model {
     /** Updates the filter of the filtered todo list to filter by the given keywords*/
     void updateFilteredTodoList(Set<String> keywords);
 
+    /** Loads the previous state of the todo list*/
+	void loadPreviousState() throws NoPreviousStateException;
+
+	/**
+	 * Signals that there is no previous todo state to load
+	 */
+	public static class NoPreviousStateException extends Exception {}
+
 }

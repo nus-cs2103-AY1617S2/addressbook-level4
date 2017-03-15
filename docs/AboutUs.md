@@ -7,20 +7,22 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Justin Wong]
 <img src="images/justinwong.jpg" width="150"><br>
 Role: Team Leader <br>
-Responsibilities: 
+Responsibilities:
 Development, Testing, Documentation
 
 #### [Jordan May] <br>
 <img src="images/jordanmay.jpg" width="150"><br>
 **Role**: Developer
-Responsibilities: 
+Responsibilities:
 Development, Testing, Documentation
 
 #### [Andy Peng]
 <img src="images/andypeng.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: 
+Responsibilities:
 Development, Testing, Documentation
+
+#### [Reshmi Sinhahajari]
 
 # Contributors
 
