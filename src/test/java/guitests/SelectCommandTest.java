@@ -34,7 +34,7 @@ public class SelectCommandTest extends AddressBookGuiTest {
         assertSelectionInvalid(1); //invalid index
     }
     //TODO selecet does not work perfectly
-    
+
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
         assertResultMessage("The task index provided is invalid");
