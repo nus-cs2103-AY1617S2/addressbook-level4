@@ -234,9 +234,9 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             switch (type) {
             case finished:
-                return task.getFinishedStatus().getIsFinished() == true;
+                return task.getFinishedStatus().getIsFinished();
             case pending:
-                return task.getFinishedStatus().getIsFinished() == false;
+                return !task.getFinishedStatus().getIsFinished();
             default:
                 return true;
             }
