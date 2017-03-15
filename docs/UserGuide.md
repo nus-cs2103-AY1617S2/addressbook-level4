@@ -40,26 +40,34 @@ _Format:_
 Adds a task to your todo list
 
 _Format:_
-`add [Name-of-Task] [Deadline] (#Tag-1) (#Tag-2) …`
+`add [Name-of-Task] s/[Start Time] e/[End Time] t/Tag-1 t/Tag-2 …`
 
 _Example:_
-`add send TPS report to Bill by Friday 6pm #TPS #report`
+`add send TPS report to Bill s/14-02-2017 4.00 PM e/15-02-2017 5.00 PM t/Urgent t/work`
 
 ## 2.03 Delete task: `delete`
-Removes a task from your todo list
+Deletes a task from your todo list
 
 _Format:_
-`remove [Task-Number]`
+`delete [Task-Number]`
 
 
 ## 2.04 Edit task: `edit`
-Edit task details
+
+Edit the details of the task at the indicated index.
+
+> Index of task refers to the index of the task in the latest list shown to the user.
+> Syntax of the new task follows the syntax in `add` command, e.g.
+> `[Name-of-Task] s/[Start Time] e/[End Time] t/Tag-1 t/Tag-2 …`
 
 _Format:_
-`edit [Task-Number]`
+`edit [Index-of-task-to-be-editted] [New-task]`
 
 ## 2.05 Complete task: `complete`
+
 Marks task as completed
+
+> Index of task refers to the index of the task in the latest list shown to the user.
 
 _Format:_
 `complete [Task-Number]`
