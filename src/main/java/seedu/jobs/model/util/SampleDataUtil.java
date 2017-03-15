@@ -34,14 +34,14 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        try {
-            AddressBook sampleAB = new AddressBook();
-            for (Person samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
-            }
-            return sampleAB;
-        } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
-        }
+//        try {
+//            AddressBook sampleAB = new AddressBook();
+//            for (Person samplePerson : getSamplePersons()) {
+//                sampleAB.addTask(samplePerson);
+//            }
+//            return sampleAB;
+//        } catch (DuplicateTaskException e) {
+//            throw new AssertionError("sample data cannot contain duplicate persons", e);
+//        }
     }
 }

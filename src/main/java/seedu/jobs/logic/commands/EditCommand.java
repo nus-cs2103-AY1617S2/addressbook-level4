@@ -63,7 +63,7 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
+            model.updateTask(filteredPersonListIndex, editedPerson);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }

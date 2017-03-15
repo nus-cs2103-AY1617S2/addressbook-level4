@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
@@ -31,11 +32,11 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
 
     /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
