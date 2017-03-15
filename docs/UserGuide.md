@@ -70,9 +70,7 @@ Fig 1. TypeTask’s User Interface <br>
    * **`exit`** : exits the app
    
 7. Refer to the [Features](#features) section below for details of each command.<br>
-
-
-
+&nbsp;
 ## 3. Features
 Let us now explore the interesting features found in TypeTask!
 
