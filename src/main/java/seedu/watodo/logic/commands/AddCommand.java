@@ -39,29 +39,29 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String description, boolean hasDeadline, Optional<String> deadline, boolean hasStartDate, 
-                      Optional<String> startDate, boolean hasEndDate, Optional<String> endDate, Set<String> tags) 
+    public AddCommand(String description, boolean hasDeadline, Optional<String> deadline, boolean hasStartDate,
+            Optional<String> startDate, boolean hasEndDate, Optional<String> endDate, Set<String> tags)
         throws IllegalValueException {
- 
+
         assert description != null;
-        
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        
+
         TaskType taskType = checkTaskType(hasDeadline, hasStartDate, hasEndDate);
-        
+
         switch (taskType) {
         case FLOAT:
             this.toAdd = new FloatingTask(new Description(description), new UniqueTagList(tagSet));
             break;
         case DEADLINE:
-            this.toAdd = new DeadlineTask(new Description(description), new DateTime(deadline.get()), 
+            this.toAdd = new DeadlineTask(new Description(description), new DateTime(deadline.get()),
                     new UniqueTagList(tagSet));
             break;
         case EVENT:
-            this.toAdd = new EventTask(new Description(description), new DateTime(startDate.get()), 
+            this.toAdd = new EventTask(new Description(description), new DateTime(startDate.get()),
                     new DateTime(endDate.get()), new UniqueTagList(tagSet));
             break;
         case INVALID:
@@ -72,7 +72,7 @@ public class AddCommand extends Command {
 
     /**
      * Checks the type of task(floating, deadline or event) to be added
-     * based on the DATETIME parameters entered by the user. 
+     * based on the DATETIME parameters entered by the user.
      * @throws IllegalValueException if both deadline and startDate are entered, or if only one of startDate or endDate is entered
      */
     private TaskType checkTaskType(boolean hasDeadline, boolean hasStartDate, boolean hasEndDate) throws IllegalValueException {
@@ -81,11 +81,11 @@ public class AddCommand extends Command {
         }
         if (hasDeadline && !hasStartDate && !hasEndDate) {
             return TaskType.DEADLINE;
-        } 
+        }
         if (!hasDeadline && hasStartDate && hasEndDate) {
             return TaskType.EVENT;
-        } 
-        return TaskType.INVALID;     
+        }
+        return TaskType.INVALID;
     }
 
 

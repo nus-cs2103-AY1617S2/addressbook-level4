@@ -6,14 +6,14 @@ import seedu.watodo.model.tag.UniqueTagList;
  * * Guarantees: details are present and not null, field values are validated.
  */
 public class DeadlineTask extends Task implements ReadOnlyTask {
-    
+
     private DateTime deadline;
-    
+
     public DeadlineTask(Description description, DateTime dateTime, UniqueTagList tags) {
         super(description, tags);
-        this.deadline = dateTime; 
+        this.deadline = dateTime;
     }
-    
+
     public DateTime getDeadline() {
         return deadline;
     }
@@ -21,6 +21,5 @@ public class DeadlineTask extends Task implements ReadOnlyTask {
     public void setDeadline(DateTime deadline) {
         this.deadline = deadline;
     }
-    
 
 }

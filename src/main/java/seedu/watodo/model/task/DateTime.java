@@ -16,9 +16,9 @@ public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
     public static final Parser dateTimeParser = new Parser(TimeZone.getTimeZone("GMT"));
-    
+
     public final Date dateTime;
-    
+
 
     /**
      * Validates given DateTime.
@@ -41,7 +41,7 @@ public class DateTime {
         List<DateGroup> parsedDateGroups = dateTimeParser.parse(dateTime);
         return parsedDateGroups.size() == 1 && !parsedDateGroups.get(0).getDates().isEmpty();
     }
-    
+
     /**
      * Converts the given string into a standard Date format of year, month, date, hour, minutes and seconds.
      * Precondition: the String dateTime has already been checked to be valid

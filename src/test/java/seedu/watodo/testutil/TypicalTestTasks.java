@@ -13,7 +13,7 @@ public class TypicalTestTasks {
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTasks() {
-        
+
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
