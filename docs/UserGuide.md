@@ -1,53 +1,121 @@
-# TÃ¢che - User Guide
+# Tâche - User Guide
 
 By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
----
+--- 
+
+## Navigate Me!
 
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
 3. [Features](#features)
+	3.1. [Command Formats](#command-formats)
+	3.2. [Adding Tasks](#add-a-task-add)
+	3.3. [Deleting Tasks](#delete-a-task-delete)
+	3.4. [Finding Tasks](#find-a-task-find)
+	3.5. [Listing Tasks](#list-all-tasks)
+    3.6. [Selecting Tasks](#select-a-task)
+    3.7. [Updating Tasks](#update-a-task)
+	3.8. [Getting Help](#get-help)
+	3.9. [Change Data File Location](#change-data-file-location)
+	3.10. [Exit](#exit)
 4. [Command Summary](#command-summary)
 5. [FAQ](#frequently-asked-questions)
+6. [Glossary](#some-technical-terms)
+
 
 ## 1. Introduction
 
+Hi there, and nice to meet you!
+
+My name is Tâche, and I am a **task manager application** designed to serve busy people like you. 
+Have you ever felt stressed having to deal with a hectic schedule and numerous to-do tasks?
+I am here to be your virtual assistant and help you to manage all your deadlines and events. <br>
+
+You are currently reading my user guide, which has been written to help you with: 
+* Installing me
+* Using me
+* Troubleshooting whenever I give you problems (Hopefully I won't!)
+
+Ready? Let's begin!
 
 
 ## 2. Getting Started
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+0. Ensure that you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
+   > Unfortunately, having any Java 8 version is not enough because I cannot work with earlier versions of Java 8.
 
-1. Download the latest `tache.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your TÃ¢che task manager.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+1. Download the latest `tache.jar` file from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as my home folder.
+3. Double-click the file to start me. My [GUI](#graphical-user-interface-gui) should appear in a few seconds.
 
-<img src="images/Ui.png" width="600"><br>
+  <img src="images/Ui.png" width="600"><br>
+  _Figure 2.1 My GUI_
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`**` Finish Progress Report; 030217 1159PM` :
-     adds a task named `Finish Progress Report` with due date `3rd Feb 2017' and due time '1159PM` to the Task Manager.
-   * **`delete`**` project` : deletes the task with the name `project`
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+4. Type your desired command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+
+   > E.g. Typing **`help`** and pressing <kbd>Enter</kbd> will open my help window.
+   
+   **Let's Try it Out!** <br>
+   (Do the following steps in order)
+   
+   * **`add`**` Finish Progress Report; 030217 1159PM` <br>
+   
+     > Adds a task with the following [parameters](#parameter) into your task list: <br>
+     > **Name**: `Finish Progress Report` <br>
+     > **Due Date**: `3rd Feb 2017` <br>
+     > **Due Time**: `1159PM`
+     
+   * **`list`** <br>
+   
+     > Lists all your tasks. <br>
+     Your task list should contain only 1 task, which is the task you added in the previous step 
+     (i.e. `Finish Progress Report`). 
+     
+   * **`delete`** `Finish Progress Report` <br>
+   
+     > Deletes your task with the name `Finish Progress Report`. 
+     
+   * **`list`** <br>
+   
+     > Your task list should be empty now. 
+     
+   * **`exit`**
+
+     > Time for me to rest!
+
+6. Want more? Refer to the [Features](#features) section below for details of each command I can perform. <br>
 
 
 ## 3. Features
-> **Command Format**
->
-> * Duration must be specified in "hr", "min" and/or "sec".
-> * Time must be specified in "am" and/or "pm".
-> * For <... date and time> parameters, either date or time can be left out but not both.
-> * `<task>` refers to the name of the task.
-> * Parameters include: name, start time, start date, end (due) time, end (due) date, duration.
 
-### 3.1. Adding a task: `add`
+### 3.1. Command Formats
+
+When typing in your commands, do take note of these specifications. <br>
+If not, I will not work! 
+
+* Durations for tasks must be specified in "hr", "min" and/or "sec".
+* Times must be specified in "am" and/or "pm".
+* Either date or time but not both can be left out in <... date and time> parameters.
+
+  > i.e. 
+  > * <start date and time> <br>
+  > * <due date and time> <br>
+  > * <end date and time> <br>
+  
+* `<task>` refers to the name of your task.
+
+* Parameters for your tasks include the following: 
+
+  > * Name
+  > * Start Date
+  > * Start Time
+  > * End or Due Date
+  > * End or Due Time
+  > * Duration
+
+### 3.2. Add a task: `add`
 
 Adds a task to the task manager<br>
 Formats: 
@@ -136,7 +204,6 @@ Examples:
 * `update start time 10am`
 * `update project proposal; name app development project proposal; end time 11.59pm`
 
-
 ### 3.8. Exiting the program : `exit`
 
 Exits the program.<br>
@@ -155,6 +222,7 @@ Examples:
 
 * `save C:\Users\Jim\Desktop`
 
+
 ## 4. Command Summary
 
 | **Command** | **Usage**                       | **Example**                                  |
@@ -167,8 +235,20 @@ Examples:
 |Help         |`help`                           |                                              |
 |Select       |`select <task>`                  |`select presentation`                         |
 
-## 3. FAQ
+
+## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Manager folder.
+       
+       
+## 6. Some Technical Terms
+
+#### Graphical User Interface (GUI): 
+
+> The graphical interface that allows the you to interact with me through graphical icons and visual indicators
+
+#### Parameter: 
+
+> Detail associated with a task of yours (e.g. duration, name, start time)
