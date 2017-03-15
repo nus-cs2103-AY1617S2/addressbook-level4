@@ -225,6 +225,14 @@ public class TaskManager implements ReadOnlyTaskManager {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
+    
+    public boolean removeDetailedTask(ReadOnlyDetailedTask key) throws UniqueDetailedTaskList.DetailedTaskNotFoundException {
+        if (detailedTasks.remove(key)) {
+            return true;
+        } else {
+            throw new UniqueDetailedTaskList.DetailedTaskNotFoundException();
+        }
+    }
 
 //// tag-level operations
 

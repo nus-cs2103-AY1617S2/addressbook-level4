@@ -25,13 +25,13 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Deletes the given task. */
-    void deleteDetailedTask(ReadOnlyDetailedTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteDetailedTask(ReadOnlyDetailedTask target) throws UniqueDetailedTaskList.DetailedTaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /** Adds the given detailed task */
-    void addDetailedTask(DetailedTask detailedTask) throws UniqueTaskList.DuplicateTaskException;
+    void addDetailedTask(DetailedTask detailedTask) throws UniqueDetailedTaskList.DuplicateDetailedTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.

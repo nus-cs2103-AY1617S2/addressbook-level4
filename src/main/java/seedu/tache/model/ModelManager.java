@@ -14,6 +14,7 @@ import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueDetailedTaskList.DetailedTaskNotFoundException;
 import seedu.tache.model.task.UniqueDetailedTaskList.DuplicateDetailedTaskException;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
@@ -71,10 +72,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void deleteDetailedTask(ReadOnlyDetailedTask target) throws DetailedTaskNotFoundException {
+        taskManager.removeDetailedTask(target);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void addDetailedTask(DetailedTask detailedTask) throws DuplicateDetailedTaskException {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -134,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDetailedTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    //========== Inner classes/interfaces/methods used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -292,17 +305,28 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-
-    @Override
-    public void deleteDetailedTask(ReadOnlyDetailedTask target) throws TaskNotFoundException {
-        // TODO Auto-generated method stub
-
+    
+    private int computeLevenshteinDistance(CharSequence str1, CharSequence str2 ) {
+        int[][] distance = new int[str1.length() + 1][str2.length() + 1];
+    
+        for (int i = 0; i <= str1.length(); i++)
+           distance[i][0] = i;
+        for (int j = 1; j <= str2.length(); j++)
+           distance[0][j] = j;
+    
+        for (int i = 1; i <= str1.length(); i++)
+           for (int j = 1; j <= str2.length(); j++)
+              distance[i][j] =
+                 minimum(
+                    distance[i - 1][j] + 1,
+                    distance[i][j - 1] + 1,
+                    distance[i - 1][j - 1] +
+                        ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+    
+        return distance[str1.length()][str2.length()];
     }
-
-    @Override
-    public void addDetailedTask(DetailedTask detailedTask) throws DuplicateTaskException {
-        // TODO Auto-generated method stub
-
+    private int minimum(int a, int b, int c) {
+        return Math.min(Math.min(a, b), c);
     }
 
 }
