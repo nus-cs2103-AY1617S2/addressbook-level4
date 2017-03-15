@@ -22,7 +22,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         
         String name = argsTokenizer.getPreamble().get();
