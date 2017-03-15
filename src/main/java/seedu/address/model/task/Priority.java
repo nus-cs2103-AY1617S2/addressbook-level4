@@ -9,7 +9,28 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static enum Type {
-        NONE, HIGH, MEDIUM, LOW;
+
+        NONE,
+        HIGH,
+        MEDIUM,
+        LOW;
+
+        @Override
+        public String toString() {
+            switch(this) {
+            case NONE:
+                return PRIORITY_NONE;
+            case HIGH:
+                return PRIORITY_HIGH;
+            case MEDIUM:
+                return PRIORITY_MEDIUM;
+            case LOW:
+                return PRIORITY_LOW;
+            default:
+                throw new AssertionError();
+            }
+        }
+
     }
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority can only take specific string "
