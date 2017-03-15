@@ -65,31 +65,31 @@ TypeTask is an easy-to-use task manager which lets you schedule and manage your 
 
 ## 2. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `TypeTask.jar` from the [releases](../../../releases) tab.
+2. Download the latest `TypeTask.jar` from the [releases](../../../releases) tab.
 
-2. Copy the file to the folder you want to use as the home folder for your Task Manager.
+3. Copy the file to the folder you want to use as the home folder for your Task Manager.
 
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
    > <img src="images/Ui.png" width="600">
    Fig 1. TypeTask’s User Interface
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
    
-5. Some example commands you can try:
+6. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` CS2103T Meeting d/12022107 t/11:00am` :
      adds a task named `CS2103T Meeting` to the Task Manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
    
-6. Refer to the [Features](#features) section below for details of each command.<br>
+7. Refer to the [Features](#features) section below for details of each command.<br>
 
 &nbsp;
 
@@ -118,7 +118,7 @@ Examples:
 * `add Buy milk`
 
 
-### 3.2. Adding a Deadline Task: `add`
+### 3.3. Adding a Deadline Task: `add`
 The first thing you would do is to add your first task! <br>
 
 Format: `add <TASK NAME> d/<DATE> or add <TASK NAME> d/<DATE> t/<TIME>`
@@ -136,7 +136,7 @@ Examples:
 * `add CS2103T Meeting d/13/10/2016 t/11:10am`
 
 
-### 3.2. Adding an Event Task: `add`
+### 3.4. Adding an Event Task: `add`
 The first thing you would do is to add your first task! <br>
 
 Format: `add <EVENT NAME> from d/<DATE> t/<TIME> to d/<DATE> t/<TIME>`
@@ -156,7 +156,7 @@ Examples:
 * `add CS1010 Lecture from d/10/10/2016 t/12:00pm to d/10/4/2017 t/2:00 pm`
 
 
-### 3.3. Adding a Priority Task : `add`
+### 3.5. Adding a Priority Task : `add`
 
 Format: `add <TASK NAME> p/<PRIORITY>`
 
@@ -172,7 +172,7 @@ Examples:
 * `add Open House from d/5/11/2016 t/11:00am to d/6/11/2016 t/11:00pm p/low`
 
 
-### 3.3 Finding a Task: find : `find`
+### 3.6 Finding a Task: find : `find`
 You may not want to go through the struggle of searching throughout your whole list to find a certain task. You can easily find a task by using the find command, then key in any detail about your task. 
 
 Format: `find <KEYWORD>`
@@ -190,7 +190,7 @@ Examples:
 * `find Open house`
 
 
-### 3.3 Editing a Task: `edit`
+### 3.7 Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command. 
 
 Format: `edit INDEX <TASK NAME> d/<DATE> t/<TIME> p/<PRIORITY>`
@@ -209,7 +209,7 @@ Examples:
 * `edit 2 CS2013T Meeting`
 
 
-### 3.3 Deleting a Task : `delete`
+### 3.8 Deleting a Task : `delete`
 There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command. 
 
 Format: `delete <INDEX>`
@@ -225,7 +225,7 @@ Examples:
 * `delete 1`
 
 
-### 3.3 Completing a Task : `done`
+### 3.9 Completing a Task : `done`
 Completed a task? Good for you! You can mark the task as done by typing in the done command. This will move the task to your completed list.
 
 Format: `done <INDEX>`
@@ -241,7 +241,7 @@ Examples:
 * `done 2`
 
 
-### 3.3. Listing all Tasks : `list`
+### 3.10. Listing all Tasks : `list`
 Want to view a list of all your tasks? Use the command list to view all your tasks in TypeTask. <br>
 
 Format: `list`
@@ -252,7 +252,7 @@ Things To Note:
 > This list will be sorted by Priority, Date and Time.
 ```
 
-### 3.4. Listing Today Tasks : `listday`
+### 3.11. Listing Today Tasks : `listday`
 By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command. 
 
 Format: `listday`
@@ -264,7 +264,7 @@ Things To Note:
 ```
 
 
-### 3.5. Listing Proirity Tasks : `list*`
+### 3.12. Listing Proirity Tasks : `list*`
 Want to focus on your urgent tasks only? You can use the command list* to see a list of all your important tasks. 
 
 Format: `list*`
@@ -276,7 +276,7 @@ Things To Note:
 ```
 
 
-### 3.6. Listing Completed Tasks : `listdone`
+### 3.13. Listing Completed Tasks : `listdone`
 To review what you have done (or maybe feel better about yourself), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
 Format: `listdone`
@@ -287,7 +287,7 @@ Things To Note:
 ```
 
 
-### 2.13. Undoing the Latest Command : `undo`
+### 3.14. Undoing the Latest Command : `undo`
 Did you accidentally type in the wrong command and did an operation you did not want? Well not to worry! You can type in the undo command, as you do not have to go through the hassle of modifying your recent operation. <br>
 
 Format: `undo`
@@ -298,7 +298,7 @@ Things To Note:
 ```
 
 
-### 2.9. Saving the Data to Another Folder : `save`
+### 3.15. Saving the Data to Another Folder : `save`
 You may consider to save the TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
 Format: `save <FILE_PATH>`
@@ -313,7 +313,7 @@ Examples:
 * `save C:/Desktop/myTask`
 
 
-### 2.9. Changing the Default Storage Folder : `setting`
+### 3.16. Changing the Default Storage Folder : `setting`
 Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
 Format: `setting <FILE_PATH>`
@@ -328,7 +328,7 @@ Examples:
 * `setting C:/Desktop/myOtherTask`<br>
 
 
-### 2.14. Using Data from Another Folder : `use`
+### 3.17. Using Data from Another Folder : `use`
 After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
 
 Format: `use <FILE_PATH>`
@@ -343,25 +343,25 @@ Examples:
 * `use C:/Desktop/myTask`<br>
 
 
-### 2.15. Clearing all Entries : `clear`
+### 3.18. Clearing all Entries : `clear`
 Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. 
 `*WARNING*` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
 
 
-### 2.16. Exiting the Program : `exit`
+### 3.19. Exiting the Program : `exit`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
 Format: `exit`
 
 
-### 2.17. Saving the data
+### 3.20. Saving the data
 
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
 
 
-### 2.17. Differentiating your tasks’ urgency
+### 3.21. Differentiating your tasks’ urgency
 TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
 
 `Red`: this uncompleted task’s deadline has passed! Better get on to it.
