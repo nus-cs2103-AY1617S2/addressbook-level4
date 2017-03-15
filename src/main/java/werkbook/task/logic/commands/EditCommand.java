@@ -7,6 +7,7 @@ import werkbook.task.commons.core.Messages;
 import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.commons.util.CollectionUtil;
 import werkbook.task.logic.commands.exceptions.CommandException;
+import werkbook.task.model.tag.Tag;
 import werkbook.task.model.tag.UniqueTagList;
 import werkbook.task.model.task.Description;
 import werkbook.task.model.task.EndDateTime;
@@ -94,9 +95,14 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getStartDateTime);
         EndDateTime updatedEndDateTime = editTaskDescriptor.getEndDateTime()
                 .orElseGet(taskToEdit::getEndDateTime);
-        // Must make it not override first tag
-        taskToEdit.getTags().mergeFromFirst(editTaskDescriptor.getTags());
-        UniqueTagList updatedTags = new UniqueTagList(taskToEdit.getTags());
+
+        // Does not override status tag
+        if (editTaskDescriptor.getTags().isPresent()) {
+            Tag statusTag = taskToEdit.getTags().asObservableList().get(0);
+            editTaskDescriptor.getTags().get().asModifiableObservableList().add(0, statusTag);
+        }
+
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedDescription, updatedStartDateTime, updatedEndDateTime,
                 updatedTags);
@@ -130,6 +136,15 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.description, this.startDateTime,
                     this.endDateTime, this.tags);
+        }
+
+        public UniqueTagList mergeFromFirst(UniqueTagList source, UniqueTagList dest) {
+            UniqueTagList newList = null;
+
+            Tag first = source.toSet().toArray(new Tag[1])[0];
+            System.out.println(first.tagName);
+
+            return newList;
         }
 
         public void setName(Optional<Name> name) {

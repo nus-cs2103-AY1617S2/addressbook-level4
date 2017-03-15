@@ -8,7 +8,6 @@ import java.util.Optional;
 
 import werkbook.task.commons.core.Messages;
 import werkbook.task.commons.exceptions.IllegalValueException;
-import werkbook.task.commons.util.CollectionUtil;
 import werkbook.task.logic.commands.exceptions.CommandException;
 import werkbook.task.logic.parser.ParserUtil;
 import werkbook.task.model.tag.UniqueTagList;
@@ -133,7 +132,7 @@ public class MarkCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.tags);
+            return true;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
