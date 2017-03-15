@@ -3,13 +3,12 @@ package seedu.address.model.tag;
 import java.util.Comparator;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Task;
 
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag implements Comparable<Tag>, Comparator<Tag> {
+public class Tag implements Comparable<Tag> {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
