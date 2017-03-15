@@ -20,16 +20,16 @@ public class DateTest {
         java.util.Date javaDate = new java.util.Date();
 
         Date testDate = new Date("12/23/99 12:59 pm");
-        javaDate = prettyParser.parse("23/12/1999 12:59 PM").get(0);
+        javaDate = prettyParser.parse("12/23/1999 12:59 PM").get(0);
         assertEquals("12/23/1999 12:59 PM, " + pretty.format(javaDate), testDate.toString());
 
         testDate = new Date("12-25-36 14:59");
-        javaDate = prettyParser.parse("25/12/2036 2:59 PM").get(0);
+        javaDate = prettyParser.parse("12/25/2036 2:59 PM").get(0);
         assertEquals("12/25/2036 2:59 PM, " + pretty.format(javaDate), testDate.toString());
 
-        testDate = new Date("12/25/1936 23:59");
-        javaDate = prettyParser.parse("25/12/1936 11:59 PM").get(0);
-        assertEquals("12/25/1936 11:59 PM, " + pretty.format(javaDate), testDate.toString());
+        testDate = new Date("11/28/1936 23:59");
+        javaDate = prettyParser.parse("11/28/1936 11:59 PM").get(0);
+        assertEquals("11/28/1936 11:59 PM, " + pretty.format(javaDate), testDate.toString());
 
         testDate = new Date("1/1/2000 1:23");
         javaDate = prettyParser.parse("1/1/2000 1:23 AM").get(0);
