@@ -326,13 +326,13 @@ Then choose `Run as` > `JUnit Test`.
 
 **GUI Tests**:
 
-These are _System Tests_ that test the entire Tâche by simulating user actions on the 
+These are _System Tests_ that test the entire Tâche by simulating user actions on the
 [Graphical User Interface](#graphical-user-interface-gui) (GUI). <br>
 These tests are found in the `guitests` package.
 
 **Non-GUI Tests**:
 
-These are tests that do not involve the GUI. They include: 
+These are tests that do not involve the GUI. They include:
    * _Unit tests_ that target the lowest level methods/classes <br>
       e.g. `seedu.tache.commons.UrlUtilTest`
 
@@ -377,7 +377,7 @@ See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) fo
 
 ### 6.3. Publishing Documentation
 
-You can see [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish 
+You can see [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish
 documentation to the project site.
 
 ### 6.4. Making a Release
@@ -385,9 +385,9 @@ documentation to the project site.
 You can do the following to create a new release:
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
- 
+
  2. Tag the repo with the version number. e.g. `v0.1`
- 
+
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
@@ -401,7 +401,7 @@ You can follow the following steps to convert the project documentation files to
  1. Make sure you have _set up GitHub Pages_ as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    
+
     > E.g. For [UserGuide.md](UserGuide.md), the URL will be
     `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
 
@@ -409,7 +409,7 @@ You can follow the following steps to convert the project documentation files to
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
 
     > For best results, use the settings indicated in the screenshot below. <br>
-    
+
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 6.5.1 : Saving Documentation as PDF Files in Chrome_
 
@@ -579,14 +579,14 @@ Use case ends
 
 1. Should be a desktop app (i.e. not a mobile or Web app)
 
-> Desktop apps are more general than other platforms such as mobile/embedded/web. Therefore, they provide a good 
+> Desktop apps are more general than other platforms such as mobile/embedded/web. Therefore, they provide a good
 starting point before you move on to those platforms.
-> You are allowed to integrate with online services such as Google Calendar as long as the app can provide a 
+> You are allowed to integrate with online services such as Google Calendar as long as the app can provide a
 reasonable level of functionality even when offline.
 
 2. [CLI](#command-line-interface) should be the primary mode of input
 
-> If you implement a [GUI](graphical-user-interface), it should be primarily for output (i.e. the GUI is used to give 
+> If you implement a [GUI](graphical-user-interface), it should be primarily for output (i.e. the GUI is used to give
 visual feedback rather than to collect input).
 > Some minimal use of mouse is fine (e.g. to click the minimize button) but the primary input should be command-driven.
 > Mouse actions should have keyboard alternatives and typing compared to mouse or key combinations.
@@ -603,19 +603,19 @@ visual feedback rather than to collect input).
 
 5. Data should be stored locally the form of a human editable text file
 
-> This is to allow advanced users to manipulate the data by editing the data file. 
+> This is to allow advanced users to manipulate the data by editing the data file.
 
 6. Should follow object-oriented paradigm
 7. Should work on Windows 7 or later
 8. Should work without requiring an installer
 
-> Having an optional installer is fine as long as the portable (non-installed) version has all the critical 
+> Having an optional installer is fine as long as the portable (non-installed) version has all the critical
 functionality.
 
-9. Should conform to the Java coding standard. 
-10. Should process and respond to user commands within 1s. 
+9. Should conform to the Java coding standard.
+10. Should process and respond to user commands within 1s.
 11. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 1.8.0_60 or higher installed.
-12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
 should be able to accomplish most of the tasks faster by typing commands as compared to using the mouse.
 
 
@@ -688,7 +688,7 @@ Here are some terms that are worth defining: <br>
 
 ## Appendix E : Product Survey
 
-We had individually studied and surveyed different existing task manager applications, identifying their strengths and 
+We had individually studied and surveyed different existing task manager applications, identifying their strengths and
 weaknesses with regards to how well they can cater for our target user's requirements. <br>
 
 Here are our findings for:
