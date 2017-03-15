@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
 
@@ -42,7 +43,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns true if the list is showing the task details correctly and in correct order.
      * @param tasks A list of tasks in the correct order.
      */
-    public boolean isListMatching(Task... tasks) {
+    public boolean isListMatching(ReadOnlyTask... tasks) {
         return this.isListMatching(0, tasks);
     }
 
@@ -51,7 +52,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param startPosition The starting position of the sub list.
      * @param tasks A list of tasks in the correct order.
      */
-    public boolean isListMatching(int startPosition, Task... tasks) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " tasks");
@@ -77,9 +78,9 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the {@code persons} appear as the sub list (in that order) at position {@code startPosition}.
+     * Returns true if the {@code tasks} appear as the sub list (in that order) at position {@code startPosition}.
      */
-    public boolean containsInOrder(int startPosition, Task... tasks) {
+    public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
         List<Task> tasksInList = getListView().getItems();
 
         // Return false if the list in panel is too short to contain the given list
@@ -87,7 +88,7 @@ public class TaskListPanelHandle extends GuiHandle {
             return false;
         }
 
-        // Return false if any of the persons doesn't match
+        // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
             if (!tasksInList.get(startPosition + i).getTitle().equals(tasks[i].getTitle())) {
                 return false;

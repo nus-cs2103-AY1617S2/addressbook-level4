@@ -12,9 +12,9 @@ public class TypicalTestTasks {
         try {
             hw = new TaskBuilder().withTitle("Do HW")
                     .withTags("school").build();
-            lunch = new PersonBuilder().withTitle("Lunch with Bob")
+            lunch = new TaskBuilder().withTitle("Lunch with Bob")
                     .withTags("leisure", "friends").build();
-            interview = new PersonBuilder().withTitle("Interview for big company")
+            interview = new TaskBuilder().withTitle("Interview for big company")
                     .withTags("career").build();
                    
         } catch (IllegalValueException e) {

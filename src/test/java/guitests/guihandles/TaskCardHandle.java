@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -16,7 +16,6 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class TaskCardHandle  extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
-    private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -32,10 +31,6 @@ public class TaskCardHandle  extends GuiHandle {
 
     public String getTitle() {
         return getTextFromLabel(TITLE_FIELD_ID);
-    }
-
-    public String getDescription() {
-        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -62,7 +57,7 @@ public class TaskCardHandle  extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSameTask(Task task) {
+    public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
                 && getTags().equals(getTags(task.getTags()));
     }
@@ -79,6 +74,6 @@ public class TaskCardHandle  extends GuiHandle {
 
     @Override
     public String toString() {
-        return getTitle() + " " + getDescription();
+        return getTitle();
     }
 }
