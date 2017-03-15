@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.web.WebView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-    <WebView fx:id="browser"/>
+<AnchorPane fx:id="browser" prefHeight="398.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+       <VBox alignment="CENTER_LEFT" blendMode="DARKEN" minHeight="95.0" prefHeight="398.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <stylesheets>
+               <URL value="@DarkTheme.css" />
+               <URL value="@Extensions.css" />
+           </stylesheets>
+           <padding>
+               <Insets bottom="5.0" left="15.0" right="5.0" top="6.0" />
+           </padding>
+
+                                      <children>
+                  <Label fx:id="name1" styleClass="cell_big_label" text="\$first" textOverrun="WORD_ELLIPSIS" />
+               <FlowPane fx:id="tags" blendMode="OVERLAY">
+            <children>
+                        <Label blendMode="SCREEN" depthTest="DISABLE" styleClass="cell_big_label" text="a tag goes here" />
+            </children>
+         </FlowPane>
+               <Label fx:id="description1" styleClass="cell_small_label" text="\$description" />
+               <Label fx:id="start_time" styleClass="cell_small_label" text="\$start_time" />
+               <Label fx:id="end_time" styleClass="cell_small_label" text="\$end_time" />
+           </children>
+       </VBox>
 </AnchorPane>
