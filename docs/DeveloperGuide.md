@@ -235,7 +235,7 @@ Functions of `Model`:
 * Stores a `UserPref` object that represents the user's preferences
 * Stores the data in Tâche
 * Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
-  > E.g. The [UI](#user-interface) can be bound to this list so that it automatically 
+  > E.g. The [UI](#user-interface-ui) can be bound to this list so that it automatically 
 updates when this list is modified. <br>
 
 `Model` does not depend on any of the other three components.
@@ -279,7 +279,7 @@ The `LogsCenter` class is used to manage logging levels and logging destinations
 ### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g app name, logging level) through the 
-[config file](#config-file) (default: `config.json`). 
+[config file](#configuration-or-config-file) (default: `config.json`). 
 
 
 ## 5. Testing
