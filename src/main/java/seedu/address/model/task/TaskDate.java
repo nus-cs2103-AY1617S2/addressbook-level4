@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Task's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class TaskDate {
+public class TaskDate implements Comparable<TaskDate> {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should be in the format dd/MM/yyyy";
@@ -66,6 +66,36 @@ public class TaskDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+    
+    private int getYear() {
+        return Integer.parseInt(this.value.substring(6));
+    }
+    
+    private int getMonth() {
+        return Integer.parseInt(this.value.substring(3,5));        
+    }
+    
+    private int getDay() {
+        return Integer.parseInt(this.value.substring(0,2));       
+    }
+    
+    /**
+     * Results in TaskDate sorted in ascending order.
+     */
+    @Override
+    public int compareTo(TaskDate compareTaskDate) {
+
+        int compareToResult = this.getYear() - compareTaskDate.getYear();
+        
+        if (compareToResult == 0) {
+            compareToResult = this.getMonth() - compareTaskDate.getMonth();
+        }
+        
+        if (compareToResult == 0) {
+            compareToResult = this.getDay() - compareTaskDate.getDay();
+        }
+        return compareToResult;
     }
 
 }
