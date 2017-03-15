@@ -96,21 +96,6 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
 
 	}
-	
-	@Override
-	public void setToSortListSwitch() {
-		this.toSort = true;
-	}
-	
-	@Override
-	public void unSetToSortListSwitch() {
-		this.toSort =  false;
-	}
-	
-	@Override
-	public boolean getSortListSwitch() {
-		return toSort;
-	}
 
 	//=========== Filtered Event List Accessors =============================================================
 	
@@ -134,6 +119,27 @@ public class ModelManager extends ComponentManager implements Model {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
 	
+	private void updateFilteredEventList(Expression expression) {
+		filteredEvents.setPredicate(expression::satisfies);
+	}
+	
+	//=========== Sorted Event List Accessors =============================================================
+	
+	@Override
+	public void setToSortListSwitch() {
+		this.toSort = true;
+	}
+	
+	@Override
+	public void unSetToSortListSwitch() {
+		this.toSort =  false;
+	}
+	
+	@Override
+	public boolean getSortListSwitch() {
+		return toSort;
+	}
+	
 	@Override
 	public void updateSortedEventList() {
 		updateSortedEventListByTitle();
@@ -143,9 +149,6 @@ public class ModelManager extends ComponentManager implements Model {
 		sortedEvents.sorted();
 	}
 
-	private void updateFilteredEventList(Expression expression) {
-		filteredEvents.setPredicate(expression::satisfies);
-	}
 
 	//========== Inner classes/interfaces used for filtering =================================================
 
@@ -199,4 +202,6 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
+	//========== Inner classes/interfaces used for sorting =================================================
+	// TODO: include comparable and comparator classes and interface for sorting by respective attributes
 }

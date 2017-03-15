@@ -37,14 +37,6 @@ public interface Model {
 	void updateEvent(int filteredEventListIndex, Event editedEvent)
 			throws DuplicateEventException;
 	
-	/** Updates the switch to use SortedList */
-	void setToSortListSwitch();
-	
-	/** Resets the switch to use FilteredList */
-	void unSetToSortListSwitch();
-	
-	boolean getSortListSwitch();
-	
 	/** Returns the filtered event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
 	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
 	
@@ -56,6 +48,14 @@ public interface Model {
 
 	/** Updates the filter of the filtered event list to filter by the given keywords */
 	void updateFilteredEventList(Set<String> keywords);
+	
+	/** Updates the switch to use SortedList */
+	void setToSortListSwitch();
+	
+	/** Resets the switch to use FilteredList */
+	void unSetToSortListSwitch();
+	
+	boolean getSortListSwitch();
 	
 	/** Sorts the filtered event list */
 	void updateSortedEventList();
