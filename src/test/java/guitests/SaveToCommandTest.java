@@ -34,5 +34,7 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("saveto " + TEST_SAVE_LOCATION);
         assertTrue(FileUtil.isFileExists(newTestStorage));
+        newTestStorage.delete();
+        newTestStorage.getParentFile().delete();
     }
 }

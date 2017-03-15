@@ -13,6 +13,15 @@ public interface ReadOnlyTask {
 
     boolean isDone();
 
+    void setToday();
+
+    boolean isToday();
+    
+    // id field reserved for UI to store temporary index
+    int getID();
+    
+    void setID(int id);
+
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -43,4 +52,13 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    enum TaskType {
+        TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
+    }
+
+    TaskType getTaskType();
+
+    String getTaskDateTime();
+
+    DateTime getDeadline();
 }

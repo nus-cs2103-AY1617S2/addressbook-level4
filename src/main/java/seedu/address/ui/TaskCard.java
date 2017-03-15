@@ -19,11 +19,14 @@ public class TaskCard extends UiPart<Region> {
     private Label id;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label taskDate;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
+        taskDate.setText(task.getTaskDateTime());
         initTags(task);
     }
 
