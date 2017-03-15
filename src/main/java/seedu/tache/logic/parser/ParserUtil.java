@@ -149,7 +149,7 @@ public class ParserUtil {
         }
         return count;
     }
-    
+
     /**
      * Returns number of time parameters in input.
      */
@@ -175,7 +175,7 @@ public class ParserUtil {
         }
         throw new IllegalValueException("Invalid Input");
     }
-    
+
     /**
      * Returns the first time String encountered
      */
@@ -186,7 +186,7 @@ public class ParserUtil {
             throw new IllegalValueException("Invalid Input");
         }
     }
-    
+
     /**
      * Returns the first date String encountered
      */

@@ -48,31 +48,31 @@ public class AddCommand extends Command {
                 new UniqueTagList(tagSet)
         );
     }
-    
+
     /**
      * Creates an AddCommand using raw name, start date & time, end date & time, and tags values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String startDate, String startTime, Optional<String> endDate, Optional<String> endTime, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(String nameStr, String startDateStr, String startTimeStr, Optional<String> endDateStr,
+            Optional<String> endTimeStr, Set<String> tagsStr) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+        for (String tagName : tagsStr) {
             tagSet.add(new Tag(tagName));
         }
-        Name _name = new Name(name);
-        Date _startDate = new Date(startDate);
-        Time _startTime = new Time(startTime);
-        Date _endDate = null;
-        if (endDate.isPresent()) {
-            _endDate = new Date(endDate.get());
+        Name name = new Name(nameStr);
+        Date startDate = new Date(startDateStr);
+        Time startTime = new Time(startTimeStr);
+        Date endDate = null;
+        if (endDateStr.isPresent()) {
+            endDate = new Date(endDateStr.get());
         }
-        Time _endTime = null;
-        if (endTime.isPresent()) {
-            _endTime = new Time(endTime.get());
+        Time endTime = null;
+        if (endTimeStr.isPresent()) {
+            endTime = new Time(endTimeStr.get());
         }
-        UniqueTagList _tagList = new UniqueTagList(tagSet);
-        this.toAdd = new DetailedTask(_name, _startDate, _endDate, _startTime, _endTime, _tagList);
+        UniqueTagList tagList = new UniqueTagList(tagSet);
+        this.toAdd = new DetailedTask(name, startDate, endDate, startTime, endTime, tagList);
     }
 
     @Override
