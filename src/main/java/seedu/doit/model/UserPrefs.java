@@ -12,11 +12,11 @@ public class UserPrefs {
     public GuiSettings guiSettings;
 
     public UserPrefs() {
-        this.setGuiSettings(500, 500, 0, 0);
+        this.setGuiSettings(1100, 650, 150, 40);
     }
 
     public GuiSettings getGuiSettings() {
-        return guiSettings == null ? new GuiSettings() : guiSettings;
+        return this.guiSettings == null ? new GuiSettings() : this.guiSettings;
     }
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
@@ -24,7 +24,7 @@ public class UserPrefs {
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {
-        guiSettings = new GuiSettings(width, height, x, y);
+        this.guiSettings = new GuiSettings(width, height, x, y);
     }
 
     @Override
@@ -38,17 +38,17 @@ public class UserPrefs {
 
         UserPrefs o = (UserPrefs) other;
 
-        return Objects.equals(guiSettings, o.guiSettings);
+        return Objects.equals(this.guiSettings, o.guiSettings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings);
+        return Objects.hash(this.guiSettings);
     }
 
     @Override
     public String toString() {
-        return guiSettings.toString();
+        return this.guiSettings.toString();
     }
 
 }

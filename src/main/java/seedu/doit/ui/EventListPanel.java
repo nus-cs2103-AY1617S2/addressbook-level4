@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.ui.EventPanelSelectionChangedEvent;
 import seedu.doit.commons.util.FxViewUtil;
+import seedu.doit.logic.Logic;
 import seedu.doit.model.item.ReadOnlyEvent;
 
 /**
@@ -23,9 +24,12 @@ public class EventListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
     @FXML
     private ListView<ReadOnlyEvent> taskListView;
+    Logic logic;
 
-    public EventListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> eventList) {
+    public EventListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> eventList,
+                          Logic logic) {
         super(FXML);
+        this.logic = logic;
         setConnections(eventList);
         addToPlaceholder(eventListPlaceholder);
     }
@@ -69,7 +73,7 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                setGraphic(new EventCard(event, getIndex() + 1, logic).getRoot());
             }
         }
     }

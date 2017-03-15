@@ -1,5 +1,7 @@
 package seedu.doit.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -93,24 +95,41 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
+        String[] test = new String[] {"test"};
+        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        indicateFloatingTaskManagerChanged();
+        indicateEventManagerChanged();
     }
 
     @Override
     public synchronized void deleteFloatingTask(ReadOnlyFloatingTask target) throws FloatingTaskNotFoundException {
         floatingTaskManager.removeFloatingTask(target);
+        String[] test = new String[] {"test"};
+        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
         indicateFloatingTaskManagerChanged();
+        indicateEventManagerChanged();
     }
 
     @Override
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
         eventManager.removeEvent(target);
+        String[] test = new String[] {"test"};
+        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+        indicateFloatingTaskManagerChanged();
         indicateEventManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
+        String[] test = new String[] {"test"};
+        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
