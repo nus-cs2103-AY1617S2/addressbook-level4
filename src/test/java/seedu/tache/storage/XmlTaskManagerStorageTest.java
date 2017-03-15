@@ -2,6 +2,7 @@ package seedu.tache.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
@@ -30,6 +31,7 @@ public class XmlTaskManagerStorageTest {
     public void readTaskManagerNullFilePathAssertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
         readTaskManager(null);
+        fail();
     }
 
     private java.util.Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws Exception {
@@ -52,7 +54,7 @@ public class XmlTaskManagerStorageTest {
 
         thrown.expect(DataConversionException.class);
         readTaskManager("NotXmlFormatTaskManager.xml");
-
+        fail();
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
          */
@@ -89,6 +91,7 @@ public class XmlTaskManagerStorageTest {
     public void saveTaskManagerNullTaskManagerAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(null, "SomeFile.xml");
+        fail();
     }
 
     private void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
@@ -99,6 +102,7 @@ public class XmlTaskManagerStorageTest {
     public void saveTaskManagerNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
+        fail();
     }
 
 }

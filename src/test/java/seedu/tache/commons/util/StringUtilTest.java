@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
 
@@ -146,6 +147,7 @@ public class StringUtilTest {
     public void getDetailsNullGivenAssertionError() {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
+        fail();
     }
 
 }
