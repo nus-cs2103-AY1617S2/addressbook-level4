@@ -98,7 +98,7 @@ When typing in your commands, do take note of the following specifications: <br>
 > Do make sure that you follow the specifications closely, if not I will not work! <br>
 Note: These specifications are [case-sensitive](#case-sensitive). 
 
-* Durations for tasks must be specified in _hr_, _min_ and/or _sec_.
+* Durations for your tasks must be specified in _hr_, _min_ and/or _sec_.
 * Times must be specified in _am_ and/or _pm_.
 * Dates must be specified in _DDMMYY_ format. 
 * Either date or time but not both can be left out in the <... date and time> parameters.
@@ -168,7 +168,7 @@ _Figure 3.2.1. Add Command_
 
 That's it!
 
-Here are the formats to follow when adding tasks that _have specific dates / times_: 
+Here are other formats to follow when adding tasks that _have specific dates / times_: 
 
 #### Add a task with a _deadline_:
 
@@ -196,14 +196,14 @@ Removes a specified task from your task list.<br>
 
 Here are some examples of tasks that you might want to _delete_ from your task list: 
 
-* **Task that no longer need to be done** <br>
+* **Tasks that no longer need to be done** <br>
 
   > You no longer need me to help you keep track of these tasks. 
 
   E.g. **_Do financial report_** <br>
   Your supervisor had delegated the wrong task to you and just corrected his mistake.
 
-* **The task has already been completed by you** <br>
+* **Tasks has already been completed by you** <br>
 
   > There is no need to store these tasks anymore.
 
@@ -216,18 +216,18 @@ Here are some examples of tasks that you might want to _delete_ from your task l
 _Figure 3.3.1. Delete Command_
 
 > * **`delete /all`** <br>
-This command clears your _entire task list_. <br>
-Do think twice before using the command!
+This command will direct me to clear your _entire task list_. <br>
+Do think twice before instructing me to do so!
 
 ### 3.4. Find a task : `find`
 
-Finds task(s) whose name(s) contain the keyword or sequence of keywords `<task>`. <br>
+Finds your task(s) whose name(s) contain the keyword or sequence of keywords `<task>`. <br>
 
 > For example, **`find`** `<home>` can help you search for a task named `do homework`. <br>
 
 Here are some reasons why you might want to _find_ certain tasks: 
 
-* **You want to know the [parameters](#parameter) of a certain task** <br>
+* **You want to know the [parameters](#parameter) of a task** <br>
 
   > Such parameters include the duration of a task, the deadline of a task etc. 
   
@@ -236,7 +236,7 @@ Here are some reasons why you might want to _find_ certain tasks:
   
 * **You want to obtain a list of your tasks that fall under some category** <br>
   
-  > Some tasks might have overlapping words / phrases in their task names. 
+  > Some tasks might have overlapping words / phrases in their names. 
   
   E.g. **Finding the tasks that contain the word _buy_** <br>
   You are going to the mall and wish to clear some items on your grocery list. 
@@ -250,15 +250,16 @@ _Figure 3.4.1. Find Command_
 
 > * **`find`** `<task>; <due date>` <br>
 E.g. **`find`** `project proposal; 041216` <br>
+
 This command shows: 
 * Your tasks that are due by `<due date>`
 * Your [floating tasks](#add-a-floating-task)
 
 ### 3.5. List all tasks : `list`
 
-Displays all your tasks in your task list.<br>
+Displays all tasks in your task list.<br>
 
-Tasks that have specific dates and/or times are listed in _chronological order_. 
+I will list tasks that have specific dates and/or times in a _chronological order_. 
 
 Here is a reason why you might want to _list_ all your tasks: 
 
@@ -268,7 +269,7 @@ Here is a reason why you might want to _list_ all your tasks:
   manually select certain urgent tasks to focus on.
 
 > * **`list`** <br>
-Navigate through my panels as well as your tasks using the arrow keys on your keyboard. <br>
+Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
 _Figure 3.5.1. List Command_
@@ -281,23 +282,24 @@ Here are some reasons why you might want to _select_ a task:
 
 * **You want to know the [parameters](#parameter) of a certain task** <br>
 
-  > Refer to [here](#34-find-a-task-find). 
+  > You can refer to [here](#34-find-a-task-find). 
   
 * **You want to edit the [parameters](#parameter) of a certain task** <br>
 
-  > Refer to the later section on the [update](#37-update-a-task-update) command. 
+  > You can refer to the later section on the [update](#37-update-a-task-update) command. 
 
 > * **`select`** `<task>` <br>
 
 <img src="images/UiSelectCommand.png" width="600"><br>
 _Figure 3.6.1. Select Command_
 
-> If you have _multiple tasks with the same name_, this command will display all those tasks 
-for you. You will have to choose 1 of those displayed tasks manually by navigating to the desired 
-task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
+> If you have _multiple tasks with the same name_, this command will instruct me to display all 
+those tasks for you. You will then have to choose one of those displayed tasks manually by navigating 
+to the desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
 > * **`unselect`** <br>
-This command _cancels your previous selection_ so that you can select another task instead. <br>
+This command _cancels your previous selection_ so that you can select another one of your 
+tasks instead. <br>
 
 <img src="images/UiUnselectCommand.png" width="600"><br>
 _Figure 3.6.2. Unselect Command_
@@ -310,7 +312,7 @@ Here are some examples of tasks which you might want to _update_: <br>
 
 * **Tasks that have already exceeded their deadline**
 
-  > You still want to complete the task, so you set a later deadline for it. <br>
+  > You still want to complete the task, but you intend to postpone its deadline. <br>
   
   **_E.g. Buy aunt's birthday present_** <br>
   You have unfortunately already missed her birthday, but you still want to give her a 
@@ -321,18 +323,18 @@ Here are some examples of tasks which you might want to _update_: <br>
   > You can now add in additional parameters for these tasks that were previously floating tasks. 
   
   **_E.g. Schedule meet-up with Jamie_** <br>
-  Your friend Jamie has come back from her overseas trip, and has finally called you to arrange 
-  a date and time for your meet-up!
+  Your friend Jamie has come back from her overseas trip, and has finally arranged a meet-up with 
+  you!
   
 > * **`update`** `<task>; <parameter> <new_value>` <br>
-This command will make the specified update to a task with the name `<task>`. <br>
+This command will direct me to make the specified update to a task with the name `<task>`. <br>
 You can edit more parameters for your task concurrently using the following format: <br>
 **`update`** `<task>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
 
 > * **`update`** `<parameter> <new_value>` <br>
 E.g. **`update`** `start time 10am` <br>
-This command will make the specified update to a task which has already been selected using my 
-[select](#36-select-a-task-select) command. <br>
+This command will direct me to make the specified update to a task which has already been 
+selected using the [select](#36-select-a-task-select) command. <br>
 Similarly, you can edit more parameters concurrently. 
 
 <img src="images/UiUpdateCommand.png" width="600"><br>
@@ -343,15 +345,15 @@ _Figure 3.7.1. Update Command_
 Shows a list of all commands I can execute and their usage instructions. <br>
 
 > * **`help`** `<command>` <br>
-This command provides specific information about how to use `<command>`.
+This command will instruct me to provide you specific information on how to use `<command>`.
 
 <img src="images/UiHelpCommand.png" width="600"><br>
 _Figure 3.8.1. Help Command_
 
 > * **`help /all`** <br>
-This command directs you back to this user guide. 
+This command will help to direct you back to this user guide. 
 
-> Help will also be shown if you enter an incorrect command. e.g. `abcd`
+> Help will also be shown if you enter an incorrect command! e.g. `abcd`
 
 ### 3.9. Change data file location
 
@@ -361,14 +363,15 @@ Here is a reason why you might want to _change my data file location_:
 
 * **You want to [sync](#sync) my task list and access it from other devices** <br>
 
-  > You can choose to store the data file in a local folder controlled by a cloud
-  syncing device (e.g. Dropbox), allowing you to access my data from multiple computers. 
+  > You can choose to store my data file in a local folder controlled by a cloud
+  syncing device (e.g. Dropbox) so that you can access my data from multiple computers. 
 
 > * **`save`** <br>
-This command saves all my data into the data file. 
+This command directs me to save all my data into the data file. 
 
 > * **`save`** `<new_save_location_directory>` <br>
-This command saves all my data in a new data file in a `<new_save_location_directory>`.
+This command directs me to set my new data file in a `<new_save_location_directory>`, 
+then save all my data in that file.
 
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.9.1. Save Command_
@@ -376,7 +379,7 @@ _Figure 3.9.1. Save Command_
 ### 3.10. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
-Time to actually perform your tasks!
+Time for you to actually perform your tasks!
 
 > * **`exit`** <br>
 
@@ -385,6 +388,9 @@ _Figure 3.10.1. Exit Command_
 
 
 ## 4. Command Summary
+
+Here is a cheat sheet of what I can do. <br>
+Your wish is my command!
 
 | **Command** | **Usage**                                   | **Example**                                        |
 |:-----------:|:-------------------------------------------:|:--------------------------------------------------:|
@@ -399,6 +405,8 @@ _Figure 3.10.1. Exit Command_
 
 
 ## 5. FAQ (Frequently Asked Questions)
+
+Here are some questions that you might want to ask me: 
 
 **Q**: How do I _transfer my data_ to another computer? <br>
 **A**: Install me in the other computer and overwrite the empty data file I create with
