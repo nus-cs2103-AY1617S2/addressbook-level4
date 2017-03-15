@@ -11,7 +11,7 @@ public class HelpWindowTest extends TaskListGuiTest {
 
     @Test
     public void openHelpWindow() {
-        //use accelerator
+        // use accelerator
         commandBox.clickOnTextField();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
@@ -21,13 +21,13 @@ public class HelpWindowTest extends TaskListGuiTest {
         taskListPanel.clickOnListView();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        browserPanel.clickOnWebView();
-        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
+        // browserPanel.clickOnWebView();
+        // assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        //use menu button
+        // use menu button
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 
-        //use command
+        // use command
         assertHelpWindowOpen(commandBox.runHelpCommand());
     }
 
