@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -34,7 +35,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().map(Priority::toString).orElse(""));
-        note.setText(task.getNote().value);
+        note.setText(task.getNote().map(Note::toString).orElse(""));
         status.setText(task.getStatus().value);
         deadline.setText(task.getDeadline().toString());
         initTags(task);
