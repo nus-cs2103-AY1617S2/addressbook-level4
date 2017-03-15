@@ -25,10 +25,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 5. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
-We all love that adrenaline rush when we place a tick on our checklist, mark our tasks as done and actually accomplish what we sought to do. But as our to-do tasks pile up, we tend to forget about them. Everyone barely has time to write our tasks down in a list.
+We all love that adrenaline rush when we place a tick on our checklist, mark our tasks as done and actually accomplish what we sought to do. But as our to-do tasks pile up, we tend to forget about them. Everyone barely has time to write our tasks down in a list. Start typing down your tasks with Doist!
 
-Be a Doist today, one line at a time! Your hands don't even have to leave the keyboard with our command-line input interface.
-Doist allows you to key in, sort, tag, search and even set reminders for your tasks and events so that you can focus on actually doing things.
+Be a Doist today, one line at a time. Your hands don't even have to leave the keyboard with our command-line input interface. Doist allows you to key in, sort, tag, search and even set reminders for your tasks and events so that you can focus on actually doing things.
 
 Doist, rediscover your love for doing things.
 
@@ -156,6 +155,8 @@ Add a task with tags with the `\under` key. Separate multiple tags with spaces.<
 > **Tips:** <br>
 > Tasks can have any number of tags (including 0)
 
+**Acceptable date and time formats** <br>
+
 Date Format |Examples
 ----------- | :------- |
 Day Month | 1st Oct, 1 Oct
@@ -196,16 +197,20 @@ List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` 
 > **Tips:** <br>
 > `list` will by default show both pending and overdue tasks.
 
-List tasks occurring during a time period by using the `\from` and `to` keys. <br>
-Format 1:
+List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
+`[\from TIME] [\to TIME] `
+You can also use the `\in` key for tasks occurring `today`, `this week`, `this month` and so on.
+`[\in STRING_REPRESENTING_TIME_INTERVAL]`
+> **Examples:** <br>
+> `list \from 3pm \to 5pm` <br>
+> `list \in this week`
+> **Tips:** <br>
+> See the table of acceptable date and time formats above
 
-[\from TIME] [\to TIME] [\under TAG]`
-Format 2: `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]`
-
-
-> - `TYPE` can be `pending`, `overdue`, `finished`
-> - If `TYPE` is not specified, all the tasks will be returned
-> - `STRING_REPRESENTING_TIME_INTERVAL` can be `today`, `this week`, `this month` and so on.
+List tasks that are under certain tags by using the `\under` key. <br>
+`[\under TAG]`
+> **Examples:** <br>
+> `list \under shopping` <br>
 
 **More examples:**
 
