@@ -103,6 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         resetData(previousTodoList);
         previousTodoList = null;
+        updateFilteredListToShowAll();
     }
 
     //=========== Filtered Todo List Accessors =============================================================

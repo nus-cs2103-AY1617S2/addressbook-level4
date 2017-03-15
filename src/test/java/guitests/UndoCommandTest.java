@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TestTodo;
 
@@ -42,6 +43,12 @@ public class UndoCommandTest extends TodoListGuiTest {
     public void undo_editValidTodo_success() {
         commandBox.runCommand("edit 1 Feed the dog");
         assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_invalidCommand_failure() {
+        commandBox.runCommand("undoes");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
