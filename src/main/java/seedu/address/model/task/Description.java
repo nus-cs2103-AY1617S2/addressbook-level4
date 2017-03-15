@@ -22,11 +22,15 @@ public class Description {
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
-        String trimmedDescription = description.trim();
-        if (!isValidDescription(trimmedDescription)) {
-            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
+        if(description.isEmpty()) {
+            this.value = description;
+        } else {
+            String trimmedDescription = description.trim();
+            if (!isValidDescription(trimmedDescription)) {
+                throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
+            }
+            this.value = trimmedDescription;
         }
-        this.value = trimmedDescription;
     }
 
     /**
@@ -46,7 +50,7 @@ public class Description {
         return other == this // short circuit if same object
                 || (other instanceof UrgencyLevel // instanceof handles nulls
                         && this.value.equals(((UrgencyLevel) other).value)); // state
-                                                                             // check
+        // check
     }
 
     @Override
