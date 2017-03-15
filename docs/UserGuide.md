@@ -194,21 +194,21 @@ E.g. **`add`** `watch tv with the children; 1hr`
 
 Removes a specified task from your task list.<br>
 
-Here are some examples of tasks that you might want to delete from your task list: 
+Here are some examples of tasks that you might want to _delete_ from your task list: 
 
 * **Task that no longer need to be done** <br>
 
-> You no longer need me to help you keep track of these tasks. 
+  > You no longer need me to help you keep track of these tasks. 
 
-E.g. **_Do financial report_** <br>
-Your supervisor had delegated the wrong task to you and just corrected his mistake.
+  E.g. **_Do financial report_** <br>
+  Your supervisor had delegated the wrong task to you and just corrected his mistake.
 
 * **The task has already been completed by you** <br>
 
-> There is no need to store these tasks anymore.
+  > There is no need to store these tasks anymore.
 
-E.g. **_Visit the dentist_** <br>
-You have just visited your dentist last week and have not scheduled your next appointment. 
+  E.g. **_Visit the dentist_** <br>
+  You have just visited your dentist last week and have not scheduled your next appointment. 
 
 > * **`delete`** `<task>` <br>
 
@@ -225,20 +225,21 @@ Finds task(s) whose name(s) contain the keyword or sequence of keywords `<task>`
 
 > For example, **`find`** `<home>` can help you search for a task named `do homework`. <br>
 
-Here are some examples of reasons why you might want to find certain tasks: 
+Here are some reasons why you might want to _find_ certain tasks: 
 
 * **You want to know the [parameters](#parameter) of a certain task** <br>
 
-///
-
-> You no longer need me to help you keep track of these tasks. 
-
-E.g. **_Do financial report_** <br>
-Your supervisor had delegated the wrong task to you and just corrected his mistake.
-
-* **The task has already been completed by you** <br>
-
-> There is no need to store these tasks anymore.
+  > Such parameters include the duration of a task, the deadline of a task etc. 
+  
+  E.g. **Finding out when your _project proposal_ is due** <br>
+  You want to plan your schedule for the week, taking into account the proposal deadline. 
+  
+* **You want to obtain a list of your tasks that fall under some category** <br>
+  
+  > Some tasks might have overlapping words / phrases in their task names. 
+  
+  E.g. **Finding the tasks that contain the word _buy_** <br>
+  You are going to the mall and wish to clear some items on your grocery list. 
 
 > * **`find`** `<task>` <br>
 I will show you the tasks from your search in my `CalendarPanel` as shown
@@ -250,16 +251,24 @@ _Figure 3.4.1. Find Command_
 > * **`find`** `<task>; <due date>` <br>
 E.g. **`find`** `project proposal; 041216` <br>
 This command shows: 
-* Your tasks that are due before `<due date>`
+* Your tasks that are due by `<due date>`
 * Your [floating tasks](#add-a-floating-task)
 
 ### 3.5. List all tasks : `list`
 
-Shows a list of all your tasks in the task manager.<br>
-Detailed tasks are listed in _chronological order_. 
+Displays all your tasks in your task list.<br>
+
+Tasks that have specific dates and/or times are listed in _chronological order_. 
+
+Here is a reason why you might want to _list_ all your tasks: 
+
+* **You want to prioritize your tasks based on the order of their specific dates / times** <br>
+
+  > You want to have an overview of all your tasks based on urgency, then
+  manually select certain urgent tasks to focus on.
 
 > * **`list`** <br>
-Navigate through the panels and tasks using your arrow keys. <br>
+Navigate through my panels as well as your tasks using the arrow keys on your keyboard. <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
 _Figure 3.5.1. List Command_
@@ -267,18 +276,28 @@ _Figure 3.5.1. List Command_
 ### 3.6. Select a task : `select`
 
 Selects a task for you to view its details. <br>
-With this command, you can make changes to the task if needed!
+
+Here are some reasons why you might want to _select_ a task:
+
+* **You want to know the [parameters](#parameter) of a certain task** <br>
+
+  > Refer to [here](#34-find-a-task-find). 
+  
+* **You want to edit the [parameters](#parameter) of a certain task** <br>
+
+  > Refer to the later section on the [update](#37-update-a-task-update) command. 
 
 > * **`select`** `<task>` <br>
 
 <img src="images/UiSelectCommand.png" width="600"><br>
 _Figure 3.6.1. Select Command_
 
-> If you have tasks with the same name, this command will display all those tasks 
-for you to choose one. <br>
+> If you have _multiple tasks with the same name_, this command will display all those tasks 
+for you. You will have to choose 1 of those displayed tasks manually by navigating to the desired 
+task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
 > * **`unselect`** <br>
-This command cancels your previous selection so that you can select another task instead. <br>
+This command _cancels your previous selection_ so that you can select another task instead. <br>
 
 <img src="images/UiUnselectCommand.png" width="600"><br>
 _Figure 3.6.2. Unselect Command_
@@ -287,26 +306,44 @@ _Figure 3.6.2. Unselect Command_
 
 Edits 1 or more [parameters](#parameter) of a task. <br>
 
+Here are some examples of tasks which you might want to _update_: <br>
+
+* **Tasks that have already exceeded their deadline**
+
+  > You still want to complete the task, so you set a later deadline for it. <br>
+  
+  **_E.g. Buy aunt's birthday present_** <br>
+  You have unfortunately already missed her birthday, but you still want to give her a 
+  belated birthday present the next time you meet her. 
+  
+* **[Floating tasks](#floating-task) that now have known dates / times**
+
+  > You can now add in additional parameters for these tasks that were previously floating tasks. 
+  
+  **_E.g. Schedule meet-up with Jamie_** <br>
+  Your friend Jamie has come back from her overseas trip, and has finally called you to arrange 
+  a date and time for your meet-up!
+  
+> * **`update`** `<task>; <parameter> <new_value>` <br>
+This command will make the specified update to a task with the name `<task>`. <br>
+You can edit more parameters for your task concurrently using the following format: <br>
+**`update`** `<task>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
+
 > * **`update`** `<parameter> <new_value>` <br>
 E.g. **`update`** `start time 10am` <br>
 This command will make the specified update to a task which has already been selected using my 
-['select'](#select-a-task-select) command. <br>
-You can edit more parameters concurrently using the following format: <br>
-**`update`** `<parameter1> <new_value1>; <parameter2> <new_value2>; ...`
- 
-> * **`update`** `<task>; <parameter> <new_value>` <br>
-This command will make the specified update to a task with the name `<task>`. <br>
-You can also add more parameters to modify when using this format. <br>
+[select](#36-select-a-task-select) command. <br>
+Similarly, you can edit more parameters concurrently. 
 
 <img src="images/UiUpdateCommand.png" width="600"><br>
 _Figure 3.7.1. Update Command_
 
 ### 3.8. Get help : `help`
 
-Shows a list of all commands and their usage instructions. <br>
+Shows a list of all commands I can execute and their usage instructions. <br>
 
 > * **`help`** `<command>` <br>
-This command provides specific information about the usage of `<command>`. <br>
+This command provides specific information about how to use `<command>`.
 
 <img src="images/UiHelpCommand.png" width="600"><br>
 _Figure 3.8.1. Help Command_
@@ -318,18 +355,28 @@ This command directs you back to this user guide.
 
 ### 3.9. Change data file location
 
-> * **`save`**
-This command saves all your data into the data file. 
+Modifies the file path of my data file. <br>
+
+Here is a reason why you might want to _change my data file location_: 
+
+* **You want to [sync](#sync) my task list and access it from other devices** <br>
+
+  > You can choose to store the data file in a local folder controlled by a cloud
+  syncing device (e.g. Dropbox), allowing you to access my data from multiple computers. 
+
+> * **`save`** <br>
+This command saves all my data into the data file. 
 
 > * **`save`** `<new_save_location_directory>` <br>
-This command saves all your data in a new data file in a `<new_save_location_directory>`. <br>
+This command saves all my data in a new data file in a `<new_save_location_directory>`.
 
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.9.1. Save Command_
 
 ### 3.10. Exiting the program : `exit`
 
-Saves all your data and exits the program. <br>
+Saves all data and exits the program. <br>
+Time to actually perform your tasks!
 
 > * **`exit`** <br>
 
@@ -339,21 +386,21 @@ _Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
-| **Command** | **Usage**                                   | **Example**                                  |
-|:-----------:|:-------------------------------------------:|:--------------------------------------------:|
-|Add          |**`add`** `<task>; <due date and time>`      |`add sushi restaurant promotion; 040117 10am` |
-|Delete       |**`delete`** `<task>`                        |`delete watch tv with the children`           |
-|Find         |**`find`** `<task>`                          |`find project`                                |
-|List         |**`list`**                                   |                                              |
-|Select       |**`select`** `<task>`                        |`select presentation`                         |
-|Update       |**`update`** `<task> <parameter> <new_value>`|`select <buy bread> <name> <buy white bread>` |    
-|Help         |**`help`**                                   |                                              |
-|Exit         |**`exit`**                                   |                                              |
+| **Command** | **Usage**                                   | **Example**                                        |
+|:-----------:|:-------------------------------------------:|:--------------------------------------------------:|
+|Add          |**`add`** `<task>; <due date and time>`      |**`add`** `project proposal; 041216 2pm`            |
+|Delete       |**`delete`** `<task>`                        |**`delete`** `watch tv with the children`           |
+|Find         |**`find`** `<task>`                          |**`find`** `project`                                |
+|List         |**`list`**                                   |                                                    |
+|Select       |**`select`** `<task>`                        |**`select`** `presentation`                         |
+|Update       |**`update`** `<task> <parameter> <new_value>`|**`update`** `<buy bread> <name> <buy white bread>` |    
+|Help         |**`help`**                                   |                                                    |
+|Exit         |**`exit`**                                   |                                                    |
 
 
 ## 5. FAQ (Frequently Asked Questions)
 
-**Q**: How do I transfer my data to another computer? <br>
+**Q**: How do I _transfer my data_ to another computer? <br>
 **A**: Install me in the other computer and overwrite the empty data file I create with
        the file that contains the data of your previous Task Manager folder.
        
