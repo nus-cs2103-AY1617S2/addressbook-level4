@@ -4,6 +4,11 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ---
 
+&nbsp;
+
+
+## Table of contents
+
 - [Setting Up](#setting-up)
 - [Design](#design)
 - [Implementation](#implementation)
@@ -14,6 +19,8 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
+
+&nbsp;
 
 
 ## Setting up
@@ -71,6 +78,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
+&nbsp;
+
+
 ## Design
 
 ### 1. Architecture
@@ -82,6 +92,9 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Given below is a quick overview of each component.
 
 Work in progress.
+
+&nbsp;
+
 
 ## Implementation
 
@@ -108,6 +121,8 @@ and logging destinations.
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
+
+&nbsp;
 
 
 ## Testing
@@ -156,6 +171,9 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
+
+&nbsp;
+
 
 ## Dev Ops
 
@@ -208,6 +226,8 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+&nbsp;
+
 
 ## Appendix A : User Stories
 
@@ -240,6 +260,9 @@ Priority | As a ... | I want to ... |So that I can ...
 **`*`** | user | create a new task by entering the date in a “natural language” way | it feels more natural when typing
 **`*`** | user | see my “Trash Bin” that consists of deleted tasks | view and/or recover them
 **`*`** | user | see my tasks on Google Calendar | integrate tasks with Google Calendar
+
+&nbsp;
+
 
 ## Appendix B : Use Cases
 
@@ -428,6 +451,8 @@ Use case ends.
 > 2b1. Doist shows an appropriate message
 > Use case ends
 
+&nbsp;
+
 
 ## Appendix C : Non Functional Requirements
 
@@ -451,6 +476,9 @@ Use case ends.
 
 See the rest of the NFRs at:
 http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-project-constraints
+
+&nbsp;
+
 
 ## Appendix D : Glossary
 **Task**
@@ -491,6 +519,9 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
 
 **Mainstream OS**
     Windows, Linux, Unix, OS-X
+
+&nbsp;
+
 
 ## Appendix E : Product Survey
 
