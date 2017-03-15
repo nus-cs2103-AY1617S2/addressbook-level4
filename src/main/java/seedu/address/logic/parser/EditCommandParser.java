@@ -56,7 +56,7 @@ public class EditCommandParser {
     
     public Command parse(String args) {
         assert args != null;
-        List<Optional<String>> editInformation = ParserUtil.splitArgument(args,3);
+        List<Optional<String>> editInformation = ParserUtil.splitArgument(args.trim(),3);
         
         Optional<Integer> index = editInformation.get(0).flatMap(ParserUtil::parseIndex);
         Optional<String> fieldWord = editInformation.get(1);
