@@ -103,7 +103,7 @@ Examples:
   Search for tasks with "birthday" in description
 * `search birthday family`<br>
   Search for tasks with "birthday" and "family" in description
-  
+
 ### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the Task Manager. Irreversible.<br>
@@ -117,7 +117,7 @@ Examples:
 
 * `delete 2`<br>
   Deletes the 2nd task in the Task Manager.
-  
+
 ### 2.7. Clearing all entries : `clear`
 
 Clears all entries from the Task Manager.<br>
@@ -184,6 +184,6 @@ There is no need to save manually.
 
 * **Done** : `done [INDEX]` <br>
   e.g. `done 1`
-  
+
 * **Undone** : `undone [INDEX]` <br>
   e.g. `undone 1`
