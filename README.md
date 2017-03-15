@@ -1,10 +1,6 @@
 # Task Manager
 
-[![Build Status](https://travis-ci.org/CS2103JAN2017-W15-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W15-B1/main)
-[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W15-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W15-B1/main?branch=master)
-
-<img src="docs/images/UI.png" width="600"><br>
-This picture only serves illustration purpose.
+<img src="docs/images/UI1.jpeg" width="600"><br>
 
 * This is a desktop To-Do List application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
