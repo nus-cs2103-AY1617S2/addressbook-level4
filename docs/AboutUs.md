@@ -4,49 +4,28 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Sng Yong Jie Dylan](http://github.com/dylansyj)
+<img src="images/dylansyj.jpg" width="150"><br>
+Role: Developer, Team Lead, Testing <br>
+Responsibilities: Logic
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Ian Tan Wei'en](http://github.com/kishontf)
+<img src="images/kishontf.jpg" width="150"><br>
+Role: Developer, Deliverables and deadlines <br>
+Responsibilities: Storage
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
------
-
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
------
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
+#### [Lim Miao Ling](http://github.com/limmlingg)
+<img src="images/limmlingg.jpg" width="150"><br>
+Role: Developer, Documentation, Scheduling and Tracking <br>
+Responsibilities: GUI
 
  -----
 
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
-
-# Contributors
-
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
+#### [Xu Qixiang](http://github.com/XuQixiang)
+<img src="images/xuqixiang.jpg" width="150"><br>
+Role: Developer, Code Quality, Integration <br>
+Responsibilities: Model

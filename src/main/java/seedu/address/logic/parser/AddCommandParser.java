@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANY_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -17,21 +17,32 @@ import seedu.address.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser {
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_PRIORITY_LEVEL, PREFIX_ANY_INFO, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
+            String deadline = new String("");
+            String priority = new String("");
+            String info = new String("");
+            if (argsTokenizer.getValue(PREFIX_DEADLINE).isPresent()) {
+                deadline = argsTokenizer.getValue(PREFIX_DEADLINE).get();
+            }
+            if (argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).isPresent()) {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY_LEVEL).get();
+            }
+            if (argsTokenizer.getValue(PREFIX_ANY_INFO).isPresent()) {
+                info = argsTokenizer.getValue(PREFIX_ANY_INFO).get();
+            }
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PHONE).get(),
-                    argsTokenizer.getValue(PREFIX_EMAIL).get(),
-                    argsTokenizer.getValue(PREFIX_ADDRESS).get(),
+                    deadline,
+                    priority,
+                    info,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
