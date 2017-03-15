@@ -157,7 +157,7 @@ public class ArgumentTokenizer {
         String output = "";
         for(DateGroup group:groups) {
             List dates = group.getDates();
-            output = dates.toString();
+            output = dates.get(0).toString().replace("CST", "");
         }
         return output;
     }
