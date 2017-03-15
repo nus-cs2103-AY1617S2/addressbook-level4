@@ -4,7 +4,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 --- 
 
-## Navigate Me!
+## Shortcuts to Information You Need
 
 1. [Introduction](#1-introduction)
 2. [Getting Started](#2-getting-started)
@@ -150,13 +150,13 @@ Here are some examples of floating tasks: <br>
 
   > You just want to record these tasks somewhere so that you can get to them when you are free someday. <br>
   
-  **E.g. Learn to bake**
+  **_E.g. Learn to bake_**
   
 * **New tasks which cannot be performed _yet_**
 
   > You want to perform these tasks but you cannot do them yet. <br>
   
-  **E.g. Schedule meet-up with Jamie** <br>
+  **_E.g. Schedule meet-up with Jamie_** <br>
   Your friend Jamie might be overseas and uncontactable for now, so you will have to wait for 
   her to return to the country in order to schedule the meet-up. 
   
@@ -164,7 +164,7 @@ Here are some examples of floating tasks: <br>
  
    > It is too early to know when you have to perform these tasks by. <br>
    
-   **E.g. Watch La La Land in the theatres** <br>
+   **_E.g. Watch La La Land in the theatres_** <br>
    You might not know when the movie "La La Land" will stop showing in the cinemas. It seems to 
    be very popular and hence, many theatres might offer showtimes for it for an extended period 
    of time. 
@@ -172,7 +172,7 @@ Here are some examples of floating tasks: <br>
 So, how do you add floating tasks? Just type in the following command: 
 
 > `add <task>` <br>
-(e.g. add buy detergent)
+E.g. `add buy detergent`
 
 That's it!
 
@@ -181,38 +181,40 @@ That's it!
 For such tasks, type in: 
 
 > `add <task>; <start date and time>; <end date and time>` <br>
-(e.g. add sushi restaurant promotion; 040117 10am; 110117 9pm)
+E.g. `add sushi restaurant promotion; 040117 10am; 110117 9pm`
 
 OR
 
 > `add <task>; <start date and time>; <duration>` <br>
-(e.g. add committee meeting; 150617)
+E.g. `add committee meeting; 150617`
 
 #### Add an _event_:
 
 > `add <task>; <due date and time>` <br>
-(e.g. add project proposal; tue 2pm)
+E.g. `add project proposal; 041216 2pm`
 
 #### Add a task with a _duration_:
 
 > `add <task>; <duration>` <br>
-(e.g. add watch tv with the children; 1hr) 
+E.g. `add watch tv with the children; 1hr`
 
 ### 3.3. Delete a task : `delete`
 
-Deletes the specified task from the task manager.<br>
-Formats:
+Removes a specified task from your task list.<br>
 
-> * `delete <task>`
-> delete /all (delete all activity)
+> * `delete <task>` <br>
+E.g. `delete watch tv with the children`
 
-Examples:
-
-* `delete watch tv with the children`
+> `delete /all` <br>
+This command clears your entire task list. <br>
+Hence, do think twice before typing this command!
 
 ### 3.4. Find a task : `find`
 
-Finds task(s) whose names contain any of the given keywords.<br>
+Finds task(s) whose names contain the keyword `<task>`.<br>
+
+> For example, `find <home>` can help you search for a task called `do **home**work`. 
+
 Formats:
 
 > * `find <task>`
@@ -291,7 +293,6 @@ Format:
 | **Command** | **Usage**                       | **Example**                                  |
 |:-----------:|:-------------------------------:|:--------------------------------------------:|
 |Add          |`add <task>; <due date and time>`|`add sushi restaurant promotion; 040117 10am;`|
-|Clear        |`clear`                          |                                              |
 |Delete       |`delete <task>`                  |`delete watch tv with the children`           |
 |Find         |`find <task>`                    |`find project`                                |
 |List         |`list`                           |                                              |
