@@ -202,9 +202,4 @@ public class MainWindow extends UiPart<Region> {
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
     }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }

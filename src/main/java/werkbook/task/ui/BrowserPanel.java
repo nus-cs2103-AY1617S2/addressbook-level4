@@ -2,9 +2,10 @@ package werkbook.task.ui;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
 import werkbook.task.commons.util.FxViewUtil;
 import werkbook.task.model.task.ReadOnlyTask;
 
@@ -16,7 +17,19 @@ public class BrowserPanel extends UiPart<Region> {
     private static final String FXML = "BrowserPanel.fxml";
 
     @FXML
-    private WebView browser;
+    private AnchorPane browser;
+    @FXML
+    private Label name1;
+    @FXML
+    private Label id;
+    @FXML
+    private FlowPane tags;
+    @FXML
+    private Label description1;
+    @FXML
+    private Label start_time;
+    @FXML
+    private Label end_time;
 
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
@@ -29,19 +42,19 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadTaskPage(ReadOnlyTask task) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().taskName.replaceAll(" ", "+"));
+    void loadTaskPage(ReadOnlyTask task) {
+    	
+    	name1.setText(task.getName().taskName);
+//        id.setText(displayedIndex + ". ");
+        description1.setText(task.getDescription().toString());
+        start_time.setText(task.getStartDateTime().toString());
+        end_time.setText(task.getEndDateTime().toString());
+        initTags(task);
     }
-
-    public void loadPage(String url) {
-        browser.getEngine().load(url);
-    }
-
-    /**
-     * Frees resources allocated to the browser.
-     */
-    public void freeResources() {
-        browser = null;
+    
+    private void initTags(ReadOnlyTask task) {
+    	tags.getChildren().clear();
+    	task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 }
