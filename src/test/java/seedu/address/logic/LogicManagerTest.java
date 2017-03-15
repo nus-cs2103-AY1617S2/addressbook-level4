@@ -517,9 +517,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_saveTo_noWritePermissions() throws Exception {
-
-        assertCommandFailure("saveto C:/", String.format(SaveToCommand.MESSAGE_WRITE_ACCESS_DENIED,
-                new File("C:/", SaveToCommand.TASK_MANAGER_FILE_NAME).getAbsolutePath()));
+        File noWritePermissionsFile = new File("noPermissions", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        if (noWritePermissionsFile.setReadOnly()) {
+            assertCommandFailure("saveto " + noWritePermissionsFile.getParentFile().getAbsolutePath(),
+                    String.format(SaveToCommand.MESSAGE_WRITE_ACCESS_DENIED, noWritePermissionsFile.getAbsolutePath()));
+            noWritePermissionsFile.getParentFile().delete();
+        }
     }
 
     // End SaveToCommand tests
