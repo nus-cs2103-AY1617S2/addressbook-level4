@@ -18,7 +18,7 @@ public class TaskDetail extends UiPart<Region> {
     private static final String FXML = "TaskDetail.fxml";
 
     @FXML
-    private TextField taskName;
+    private TextField title;
 
     @FXML
     private TextField startTime;
@@ -44,7 +44,7 @@ public class TaskDetail extends UiPart<Region> {
     public void loadPersonPage(ReadOnlyTask task) {
         labelTaskName.setTextFill(Color.CHOCOLATE);
         String taggings = "";
-        taskName.setText(task.getContent().toString());
+        title.setText(task.getTitle().toString());
         startTime.setText(task.getDateTime().toString());
         for (Tag tag: task.getTags()) {
             taggings += tag.toString();
