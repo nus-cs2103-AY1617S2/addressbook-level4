@@ -253,7 +253,7 @@ There is no need to save manually.
 * **Help** : `help` <br>
  e.g.
  * `help`
- 
+
 * **Add Task** : `add TASKNAME d/DEADLINE DATE [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
  e.g.
  * `add completeUserGuide d/28-Feb-2017 t/2400 p/high #Important`
