@@ -36,7 +36,7 @@ public class AddCommandParser {
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_DATE).get(),
                         argsTokenizer.getValue(PREFIX_TIME).get()
-                );        
+                );
             } else {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
