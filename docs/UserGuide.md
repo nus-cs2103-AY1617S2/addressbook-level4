@@ -9,25 +9,15 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 1. [Introduction](#1-introduction)
 2. [Getting Started](#2-getting-started)
 3. [Features](#3-features) <br>
-
 	3.1. [Command Formats](#31-command-formats) <br>
-	
 	3.2. [Adding Tasks](#32-add-a-task--add) <br>
-	
 	3.3. [Deleting Tasks](#33-delete-a-task--delete) <br>
-	
 	3.4. [Finding Tasks](#34-find-a-task--find) <br>
-	
 	3.5. [Listing Tasks](#35-list-all-tasks--list) <br>
-	
     3.6. [Selecting Tasks](#36-select-a-task--select) <br>
-    
     3.7. [Updating Tasks](#37-update-a-task--update) <br>
-    
 	3.8. [Getting Help](#38-get-help--help) <br>
-	
 	3.9. [Change Data File Location](#39-change-data-file-location) <br>
-	
 	3.10. [Exit](#310-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
@@ -172,7 +162,9 @@ Here are some examples of floating tasks: <br>
 So, how do you add floating tasks? Just type in the following command: 
 
 > **`add`** `<task>` <br>
-E.g. **`add`** `buy detergent`
+
+<img src="images/UiAddCommand.png" width="600"><br>
+_Figure 3.2.1. Add Command_
 
 That's it!
 
@@ -200,8 +192,10 @@ E.g. **`add`** `watch tv with the children; 1hr`
 
 Removes a specified task from your task list.<br>
 
-> * **`delete`** <task>` <br>
-E.g. **`delete`** `watch tv with the children`
+> * **`delete`** `<task>` <br>
+
+<img src="images/UiDeleteCommand.png" width="600"><br>
+_Figure 3.3.1. Delete Command_
 
 > * **`delete /all`** <br>
 This command clears your entire task list. <br>
@@ -214,7 +208,9 @@ Finds task(s) whose names contain the keyword or sequence of keywords `<task>`.<
 > For example, **`find`** `<home>` can help you search for a task called `do homework`. 
 
 > * **`find`** `<task>` <br>
-E.g. **`find`** `project proposal`
+
+<img src="images/UiFindCommand.png" width="600"><br>
+_Figure 3.4.1. Find Command_
 
 > * **`find`** `<task>; <due date>`
 E.g. **`find`** `project proposal; 041216` <br>
@@ -262,7 +258,6 @@ Edit more parameters concurrently using the following format: <br>
 **`update`** `<parameter1> <new_value1>; <parameter2> <new_value2>; ...`
  
 > * **`update`** `<task>; <parameter> <new_value>` <br>
-E.g. **`update`** `submit project proposal due time 2pm` <br>
 This command will make the specified update to a task with the name `<task>`. <br>
 You can also add more parameters to modify when using this format. <br>
 
@@ -303,6 +298,7 @@ Saves all your data and exits the program. <br>
 
 <img src="images/UiExitCommand.png" width="600"><br>
 _Figure 3.10.1. Exit Command_
+
 
 ## 4. Command Summary
 
