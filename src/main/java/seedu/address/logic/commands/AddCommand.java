@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.Tag;
@@ -34,7 +35,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String deadline, Set<String> tags)
+    public AddCommand(String name, String start, String deadline, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -42,6 +43,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
+                new Start(start),
                 new Deadline(deadline),
                 new UniqueTagList(tagSet)
         );
