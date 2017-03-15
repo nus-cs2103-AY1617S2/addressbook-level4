@@ -19,108 +19,35 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-	private final TaskManager taskManager;
-	private final FilteredList<ReadOnlyEvent> filteredEvents;
-
-	/**
-	 * Initializes a ModelManager with the given taskManager and userPrefs.
-	 */
-	public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
-		super();
-		assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
-
-		logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
-
-		this.taskManager = new TaskManager(taskManager);
-		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
-	}
-
-	public ModelManager() {
-		this(new TaskManager(), new UserPrefs());
-	}
-
-	@Override
-	public void resetData(ReadOnlyTaskManager newData) {
-		taskManager.resetData(newData);
-		indicateTaskManagerChanged();
-	}
-
-	@Override
-	public ReadOnlyTaskManager getTaskManager() {
-		return taskManager;
-	}
-
-	/** Raises an event to indicate the model has changed */
-	private void indicateTaskManagerChanged() {
-		raise(new TaskManagerChangedEvent(taskManager));
-	}
-
-	@Override
-	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-		taskManager.removeEvent(target);
-		indicateTaskManagerChanged();
-	}
-
-	@Override
-	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-		taskManager.addEvent(event);
-		updateFilteredListToShowAll();
-		indicateTaskManagerChanged();
-	}
-
-	@Override
-	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-			throws UniqueEventList.DuplicateEventException {
-		assert editedEvent != null;
-
-		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
-		taskManager.updateEvent(taskManagerIndex, editedEvent);
-		indicateTaskManagerChanged();
-	}
-
-	@Override
-	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
-		// TODO Auto-generated method stub
-	}
-
-	//=========== Filtered Event List Accessors =============================================================
-	
-	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
-		return new UnmodifiableObservableList<>(filteredEvents);
-	}
-
-	@Override
-	public void updateFilteredListToShowAll() {
-		filteredEvents.setPredicate(null);
-	}
-
-	@Override
-	public void updateFilteredEventList(Set<String> keywords) {
-		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
-	}
-	
-	@Override
-	public void sortFilteredEventList() {
-		SortedList<ReadOnlyEvent> sortedEventList = new SortedList<ReadOnlyEvent>(filteredEvents);
-		sortedEventList.sorted();
-	}
-
-	private void updateFilteredEventList(Expression expression) {
-		filteredEvents.setPredicate(expression::satisfies);
-	}
-
-	//========== Inner classes/interfaces used for filtering =================================================
-
 	interface Expression {
 		boolean satisfies(ReadOnlyEvent event);
+
+		@Override
 		String toString();
+	}
+
+	private class NameQualifier implements Qualifier {
+		private Set<String> nameKeyWords;
+
+		NameQualifier(Set<String> nameKeyWords) {
+			this.nameKeyWords = nameKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return nameKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword)).findAny()
+					.isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "title=" + String.join(", ", nameKeyWords);
+		}
 	}
 
 	private class PredicateExpression implements Expression {
@@ -144,28 +71,107 @@ public class ModelManager extends ComponentManager implements Model {
 
 	interface Qualifier {
 		boolean run(ReadOnlyEvent event);
+
+		@Override
 		String toString();
 	}
 
-	private class NameQualifier implements Qualifier {
-		private Set<String> nameKeyWords;
+	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-		NameQualifier(Set<String> nameKeyWords) {
-			this.nameKeyWords = nameKeyWords;
-		}
+	private final TaskManager taskManager;
 
-		@Override
-		public boolean run(ReadOnlyEvent event) {
-			return nameKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword))
-					.findAny()
-					.isPresent();
-		}
+	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
-		@Override
-		public String toString() {
-			return "title=" + String.join(", ", nameKeyWords);
-		}
+	public ModelManager() {
+		this(new TaskManager(), new UserPrefs());
+	}
+
+	/**
+	 * Initializes a ModelManager with the given taskManager and userPrefs.
+	 */
+	public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
+		super();
+		assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
+
+		logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
+
+		this.taskManager = new TaskManager(taskManager);
+		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+	}
+
+	@Override
+	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
+		taskManager.addEvent(event);
+		updateFilteredListToShowAll();
+		indicateTaskManagerChanged();
+	}
+
+	@Override
+	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+		taskManager.removeEvent(target);
+		indicateTaskManagerChanged();
+	}
+
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
+		return new UnmodifiableObservableList<>(filteredEvents);
+	}
+
+	// =========== Filtered Event List Accessors
+	// =============================================================
+
+	@Override
+	public ReadOnlyTaskManager getTaskManager() {
+		return taskManager;
+	}
+
+	/** Raises an event to indicate the model has changed */
+	private void indicateTaskManagerChanged() {
+		raise(new TaskManagerChangedEvent(taskManager));
+	}
+
+	@Override
+	public void resetData(ReadOnlyTaskManager newData) {
+		taskManager.resetData(newData);
+		indicateTaskManagerChanged();
+	}
+
+	@Override
+	public void sortFilteredEventList() {
+		SortedList<ReadOnlyEvent> sortedEventList = new SortedList<ReadOnlyEvent>(filteredEvents);
+		sortedEventList.sorted();
+	}
+
+	@Override
+	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
+		// TODO Auto-generated method stub
+	}
+
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
+
+	@Override
+	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
+			throws UniqueEventList.DuplicateEventException {
+		assert editedEvent != null;
+
+		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+		taskManager.updateEvent(taskManagerIndex, editedEvent);
+		indicateTaskManagerChanged();
+	}
+
+	private void updateFilteredEventList(Expression expression) {
+		filteredEvents.setPredicate(expression::satisfies);
+	}
+
+	@Override
+	public void updateFilteredEventList(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
+	}
+
+	@Override
+	public void updateFilteredListToShowAll() {
+		filteredEvents.setPredicate(null);
 	}
 
 }
