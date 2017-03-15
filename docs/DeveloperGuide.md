@@ -25,7 +25,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Introduction
 <p>Doist is a task manager that can accept natural language commands via keyboard.</p>
-<p>This developer guide aims to help developers better understand the design and implementation of Doist to facilitate further contribution of the development of Doist.</p>
+<p>This developer guide aims to help developers better understand the design and implementation of Doist to facilitate further contribution to the development of Doist.</p>
 
 
 <br>
