@@ -299,10 +299,9 @@ This command saves all your data in a new data file in a `<new_save_location_dir
 
 Saves all your data and exits the program. <br>
 
-> * **`exit`**
-
-       <img src="images/UiExitCommand.png" width="600"><br>
-       _Figure 3.10.1. Exit Command_
+> * **`exit`** <br>
+   <img src="images/UiExitCommand.png" width="600"><br>
+   _Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
