@@ -2,8 +2,8 @@ package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_DUEDATE;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
