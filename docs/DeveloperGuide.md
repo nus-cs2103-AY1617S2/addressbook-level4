@@ -407,11 +407,7 @@ Here are the steps to convert the project documentation files to PDF format.
  
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
-   
-   <img src="images/chrome_save_as_pdf.png" width="300"><br>
-   
-   _Figure 6.5.1 : Saving documentation as PDF files in Chrome_
-
+    
 ### 5.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Address Book depends on the
