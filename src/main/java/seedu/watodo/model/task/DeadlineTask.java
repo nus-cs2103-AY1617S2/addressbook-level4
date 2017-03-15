@@ -5,7 +5,7 @@ import seedu.watodo.model.tag.UniqueTagList;
 /** Represents a task that has to be done by a specific deadline in the task manager.
  * * Guarantees: details are present and not null, field values are validated.
  */
-public class DeadlineTask extends Task {
+public class DeadlineTask extends Task implements ReadOnlyTask {
     
     private DateTime deadline;
     

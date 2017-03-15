@@ -24,10 +24,12 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         status = Status.UNDONE;
     }
-
-
-    public Task(ReadOnlyTask editedReadOnlyTask) {
-        // TODO Auto-generated constructor stub
+    
+    /**
+     * Creates a copy of the given ReadOnlyTask.
+     */
+    public Task(ReadOnlyTask source) {
+        this(source.getDescription(),source.getTags());
     }
 
     public void setDescription(Description description) {

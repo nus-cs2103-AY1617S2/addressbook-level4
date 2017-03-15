@@ -2,7 +2,7 @@ package seedu.watodo.model.task;
 
 import seedu.watodo.model.tag.UniqueTagList;
 
-public class EventTask extends Task {
+public class EventTask extends Task implements ReadOnlyTask {
     
     private DateTime startDateTime;
     private DateTime endDateTime;
