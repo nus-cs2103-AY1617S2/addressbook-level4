@@ -10,15 +10,15 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 2. [Getting Started](#2-getting-started)
 3. [Features](#3-features) <br>
 	3.1. [Command Formats](#31-command-formats) <br>
-	3.2. [Adding Tasks](#32-add-a-task-add) <br>
-	3.3. [Deleting Tasks](#33-delete-a-task-delete) <br>
-	3.4. [Finding Tasks](#34-find-a-task-find) <br>
-	3.5. [Listing Tasks](#35-list-all-tasks-list) <br>
-    3.6. [Selecting Tasks](#36-select-a-task-select) <br>
-    3.7. [Updating Tasks](#37-update-a-task-update) <br>
-	3.8. [Getting Help](#38-get-help-help) <br>
+	3.2. [Adding Tasks](#32-add-a-task--add) <br>
+	3.3. [Deleting Tasks](#33-delete-a-task--delete) <br>
+	3.4. [Finding Tasks](#34-find-a-task--find) <br>
+	3.5. [Listing Tasks](#35-list-all-tasks--list) <br>
+    3.6. [Selecting Tasks](#36-select-a-task--select) <br>
+    3.7. [Updating Tasks](#37-update-a-task--update) <br>
+	3.8. [Getting Help](#38-get-help--help) <br>
 	3.9. [Change Data File Location](#39-change-data-file-location) <br>
-	3.10. [Exit](#310-exit-the-program-exit)
+	3.10. [Exit](#310-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 6. [Glossary](#6-some-technical-terms)
@@ -115,7 +115,7 @@ If not, I will not work!
   > * End or Due Time
   > * Duration
 
-### 3.2. Add a task: `add`
+### 3.2. Add a task : `add`
 
 Adds a task to the task manager<br>
 Formats: 
@@ -147,7 +147,7 @@ Examples:
 
 * `delete watch tv with the children`
 
-### 3.4. Find a task: `find`
+### 3.4. Find a task : `find`
 
 Finds task(s) whose names contain any of the given keywords.<br>
 Formats:
