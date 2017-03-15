@@ -135,10 +135,18 @@ public class TestTodo implements ReadOnlyTodo {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         if (this.getStartTime() != null && this.getEndTime() != null) {
+
             DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
             String startDate = dateFormat.format(this.getStartTime());
             String endDate = dateFormat.format(this.getEndTime());
             sb.append("s/" + startDate + " e/" + endDate + " ");
+
+        } else if (this.getStartTime() == null && this.getEndTime() != null) {
+
+            DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
+            String endDate = dateFormat.format(this.getEndTime());
+            sb.append(" e/" + endDate + " ");
+
         }
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

@@ -39,7 +39,13 @@ public class AddCommandParser {
                         endTime.get(),
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                 );
-        	} else {
+        	} else if (endTime.isPresent() && !startTime.isPresent()) {
+                return new AddCommand(
+                        argsTokenizer.getPreamble().get(),
+                        endTime.get(),
+                        ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
+                );
+            } else {
         		return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))

@@ -76,6 +76,15 @@ public class TodoCardHandle extends GuiHandle {
                 && getStartTime().equals(strStartTime)
                 && getEndTime().equals(strEndTime)
                 && getTags().equals(getTags(todo.getTags()));
+
+        } else if (todo.getStartTime() == null && todo.getEndTime() != null) {
+
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
+            String strEndTime = dateFormat.format(todo.getEndTime());
+            return getFullName().equals(todo.getName().fullName)
+                && getEndTime().equals(strEndTime)
+                && getTags().equals(getTags(todo.getTags()));
+
         } else {
         	return getFullName().equals(todo.getName().fullName)
                     && getTags().equals(getTags(todo.getTags()));

@@ -61,6 +61,31 @@ public class AddCommand extends Command {
     			new UniqueTagList(tagSet));
     }
 
+    /**
+     * Creates an AddCommand using raw values.
+     * * Only adds floating task for now
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws ParseException
+     */
+    public AddCommand(String todo,
+                      String endTime,
+                      Set<String> tags)
+            throws IllegalValueException, ParseException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+
+        //String inputString = "11-11-2012";
+        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
+
+        this.toAdd = new Todo(
+                new Name(todo),
+                dateFormat.parse(endTime),
+                new UniqueTagList(tagSet));
+    }
+
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
     	final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
