@@ -34,7 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
         this.note = taskToCopy.getNote().orElse(null);
-        this.deadline = taskToCopy.getDeadline();
+        this.deadline = taskToCopy.getDeadline().orElse(null);
         this.tags = taskToCopy.getTags();
     }
 
@@ -83,8 +83,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Deadline getDeadline() {
-        return deadline;
+    public Optional<Deadline> getDeadline() {
+        return Optional.of(deadline);
     }
 
     @Override
