@@ -1,14 +1,18 @@
 package seedu.tache.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Date;
+import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Time;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -19,9 +23,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME  [t/TAG]...\n"
+            + "Parameters: NAME [;START DATE & TIME] [;END DATE & TIME] [;TAG...]\n"
             + "Example: " + COMMAND_WORD
-            + " Buy milk from NTUC  t/HighPriority";
+            + " Orientation week camp; 25/7/16 0800; 28/7/2016 0900; HighPriority; Events";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -29,7 +33,7 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
-     * Creates an AddCommand using raw values.
+     * Creates an AddCommand using raw name and tags value.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
@@ -43,6 +47,32 @@ public class AddCommand extends Command {
                 new Name(name),
                 new UniqueTagList(tagSet)
         );
+    }
+    
+    /**
+     * Creates an AddCommand using raw name, start date & time, end date & time, and tags values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddCommand(String name, String startDate, String startTime, Optional<String> endDate, Optional<String> endTime, Set<String> tags)
+            throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        Name _name = new Name(name);
+        Date _startDate = new Date(startDate);
+        Time _startTime = new Time(startTime);
+        Date _endDate = null;
+        if (endDate.isPresent()) {
+            _endDate = new Date(endDate.get());
+        }
+        Time _endTime = null;
+        if (endTime.isPresent()) {
+            _endTime = new Time(endTime.get());
+        }
+        UniqueTagList _tagList = new UniqueTagList(tagSet);
+        this.toAdd = new DetailedTask(_name, _startDate, _endDate, _startTime, _endTime, _tagList);
     }
 
     @Override
