@@ -152,7 +152,14 @@ public class ArgumentTokenizer {
     }
     
     private String parseNLPDate(String argsString) {
-        return "Stub";
+        com.joestelmach.natty.Parser nParser = new com.joestelmach.natty.Parser();
+        List<DateGroup> groups = nParser.parse(argsString);
+        String output = "";
+        for(DateGroup group:groups) {
+            List dates = group.getDates();
+            output = dates.toString();
+        }
+        return output;
     }
 
     /**
