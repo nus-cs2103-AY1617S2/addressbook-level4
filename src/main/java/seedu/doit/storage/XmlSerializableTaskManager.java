@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.IllegalValueException;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
@@ -20,7 +20,7 @@ import seedu.doit.model.tag.Tag;
  * An Immutable TaskManager that is serializable to XML format
  */
 @XmlRootElement(name = "taskmanager")
-public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
+public class XmlSerializableTaskManager implements ReadOnlyItemManager {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -39,7 +39,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     /**
      * Conversion
      */
-    public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
+    public XmlSerializableTaskManager(ReadOnlyItemManager src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));

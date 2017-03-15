@@ -14,7 +14,7 @@ import seedu.doit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.ConfigUtil;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.UserPrefs;
 
 /**
@@ -67,23 +67,23 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
+    public Optional<ReadOnlyItemManager> readTaskManager() throws DataConversionException, IOException {
         return readTaskManager(this.taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyItemManager> readTaskManager(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return this.taskManagerStorage.readTaskManager(filePath);
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+    public void saveTaskManager(ReadOnlyItemManager taskManager) throws IOException {
         saveTaskManager(taskManager, this.taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyItemManager taskManager, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         this.taskManagerStorage.saveTaskManager(taskManager, filePath);
     }

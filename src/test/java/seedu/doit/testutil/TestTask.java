@@ -5,6 +5,7 @@ import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.StartTime;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
@@ -14,7 +15,8 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Description description;
-    private EndTime deadline;
+    private StartTime startTime;
+    private EndTime endTime;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -28,7 +30,8 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
-        this.deadline = taskToCopy.getEndTime();
+        this.startTime = taskToCopy.getStartTime();
+        this.endTime = taskToCopy.getEndTime();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
@@ -52,12 +55,21 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public EndTime getEndTime() {
-        return deadline;
+    public StartTime getStartTime() {
+        return startTime;
     }
 
-    public void setDeadline(EndTime deadline) {
-        this.deadline = deadline;
+    public void setStartTime(StartTime startTime) {
+        this.startTime =  startTime;
+    }
+
+    @Override
+    public EndTime getEndTime() {
+        return endTime;
+    }
+
+    public void setDeadline(EndTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -67,6 +79,22 @@ public class TestTask implements ReadOnlyTask {
 
     public void setDescription(Description description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean hasStartTime() {
+        if (startTime != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasEndTime() {
+        if (endTime != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -88,8 +116,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getDescription().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
+        sb.append("s/" + this.getStartTime().value + " ");
         sb.append("e/" + this.getEndTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+
 }

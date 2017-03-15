@@ -33,7 +33,7 @@ public class TaskListPanel extends UiPart<Region> {
 
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskListView.setItems(taskList);
+        taskListView.setItems(taskList.filtered(task -> !task.hasStartTime() && task.hasEndTime()));
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }

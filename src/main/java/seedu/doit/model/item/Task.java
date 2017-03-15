@@ -13,28 +13,65 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
+    private StartTime startTime;
     private EndTime endTime;
     private Description description;
     private UniqueTagList tags;
 
+    // ================ Constructor methods ==============================
+
     /**
-     * Every field must be present and not null.
+     * Event Constructor where every field must be present and not null.
      */
-    public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
+    public Task(Name name, Priority priority, StartTime startTime, EndTime endTime,
+                Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, startTime, endTime, description, tags);
         this.name = name;
         this.priority = priority;
+        this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
+     * Task Constructor every field must be present except for startTime.
+     */
+    public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
+        this.name = name;
+        this.priority = priority;
+        this.startTime = null;
+        this.endTime = endTime;
+        this.description = description;
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
+    }
+
+    /**
+     * Task Constructor every field must be present except for startTime and endTime.
+     */
+    public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, tags);
+        this.name = name;
+        this.priority = priority;
+        this.startTime = null;
+        this.endTime = endTime;
+        this.description = description;
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
+    }
+
+    /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getEndTime(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getDescription(), source.getTags());
+        this.startTime = source.getStartTime();
+        this.endTime = source.getEndTime();
     }
+
+    // ================ Getter and Setter methods ==============================
 
     @Override
     public Name getName() {
@@ -56,6 +93,17 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
+    @Override
+    public StartTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(StartTime startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
+    }
+
+    @Override
     public EndTime getEndTime() {
         return endTime;
     }
@@ -73,6 +121,22 @@ public class Task implements ReadOnlyTask {
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
+    }
+
+    @Override
+    public boolean hasStartTime() {
+        if (startTime != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasEndTime() {
+        if (endTime != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override

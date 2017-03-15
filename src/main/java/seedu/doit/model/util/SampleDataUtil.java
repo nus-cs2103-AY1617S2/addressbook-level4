@@ -1,7 +1,7 @@
 package seedu.doit.model.util;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
@@ -39,7 +39,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskManager getSampleTaskManager() {
+    public static ReadOnlyItemManager getSampleTaskManager() {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {

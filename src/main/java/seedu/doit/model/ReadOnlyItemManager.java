@@ -8,7 +8,7 @@ import seedu.doit.model.tag.Tag;
 /**
  * Unmodifiable view of an task manager
  */
-public interface ReadOnlyTaskManager {
+public interface ReadOnlyItemManager {
 
     /**
      * Returns an unmodifiable view of the task s list.

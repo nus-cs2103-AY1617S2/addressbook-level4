@@ -28,8 +28,8 @@ public class FloatingTaskCard extends UiPart<Region> {
     public FloatingTaskCard(ReadOnlyFloatingTask floatingTask, int displayedIndex, Logic logic) {
         super(FXML);
         this.name.setText(floatingTask.getName().fullName);
-        displayedIndex += logic.getFilteredTaskList().size();
-        displayedIndex += logic.getFilteredEventList().size();
+        //displayedIndex += logic.getFilteredTaskList().size();
+        //displayedIndex += logic.getFilteredEventList().size();
         this.id.setText(displayedIndex + ". ");
         this.priority.setText(floatingTask.getPriority().value);
         this.description.setText(floatingTask.getDescription().value);

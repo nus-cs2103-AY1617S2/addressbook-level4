@@ -17,8 +17,6 @@ import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.UniqueEventList;
-import seedu.doit.model.item.UniqueFloatingTaskList;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.UniqueTagList;
 
@@ -105,19 +103,13 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
-        List<ReadOnlyFloatingTask> lastShownFloatingTaskList = model.getFilteredFloatingTaskList();
-        List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
-
-        int taskSize = lastShownTaskList.size();
-        int taskAndEventSize = taskSize + lastShownEventList.size();
-        int totalSize = taskAndEventSize + lastShownFloatingTaskList.size();
 
 
-        if (filteredTaskListIndex >= totalSize) {
+        if (filteredTaskListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (filteredTaskListIndex < taskSize) {
+        if (filteredTaskListIndex < lastShownTaskList.size()) {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
             assert taskToEdit != null;
             Task editedTask = createEditedTask(taskToEdit, editEventDescriptor);
@@ -130,30 +122,6 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
-        } else if (filteredTaskListIndex >= taskSize && filteredTaskListIndex < taskAndEventSize) {
-            ReadOnlyEvent taskToEdit = lastShownEventList.get(filteredTaskListIndex - taskSize);
-            Event editedEvent = createEditedEvent(taskToEdit, editEventDescriptor);
-
-            try {
-                model.updateEvent(filteredTaskListIndex - taskSize, editedEvent);
-            } catch (UniqueEventList.DuplicateEventException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            }
-            model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
-
-        } else if (filteredTaskListIndex >= taskAndEventSize && filteredTaskListIndex < totalSize) {
-            ReadOnlyFloatingTask taskToEdit = lastShownFloatingTaskList.get(filteredTaskListIndex - taskAndEventSize);
-            FloatingTask editedFloatingTask = createEditedFloatingTask(taskToEdit, editEventDescriptor);
-
-            try {
-                model.updateFloatingTask(filteredTaskListIndex - taskAndEventSize,
-                    editedFloatingTask);
-            } catch (UniqueFloatingTaskList.DuplicateFloatingTaskException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            }
-            model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } else {
             return null;
             // should not happen
@@ -243,6 +211,7 @@ public class EditCommand extends Command {
         /**
          * Returns true if at least one field is edited.
          */
+        @Override
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.deadline) || super.isAnyFieldEdited();
         }
@@ -282,6 +251,7 @@ public class EditCommand extends Command {
             this.startTime = startTime;
         }
 
+        @Override
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.startTime) || super.isAnyFieldEdited();
         }

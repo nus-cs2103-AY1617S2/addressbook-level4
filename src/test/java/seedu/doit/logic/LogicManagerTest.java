@@ -37,7 +37,7 @@ import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     private Logic logic;
 
     // These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedTaskManager;
+    private ReadOnlyItemManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
 
@@ -116,11 +116,11 @@ public class LogicManagerTest {
      * that the result message is correct. Also confirms that both the 'task
      * manager' and the 'last shown list' are as specified.
      *
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyItemManager,
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyItemManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -129,7 +129,7 @@ public class LogicManagerTest {
      * the result message is correct. Both the 'task manager' and the 'last
      * shown list' are verified to be unchanged.
      *
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyItemManager,
      *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -149,7 +149,7 @@ public class LogicManagerTest {
      * - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyItemManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = this.logic.execute(inputCommand);

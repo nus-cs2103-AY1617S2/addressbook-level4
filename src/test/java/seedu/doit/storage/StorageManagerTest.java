@@ -14,7 +14,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.doit.commons.core.Config;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.storage.DataSavingExceptionEvent;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.UserPrefs;
 import seedu.doit.testutil.EventsCollector;
@@ -60,7 +60,7 @@ public class StorageManagerTest {
          */
         TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         this.storageManager.saveTaskManager(original);
-        ReadOnlyTaskManager retrieved = this.storageManager.readTaskManager().get();
+        ReadOnlyItemManager retrieved = this.storageManager.readTaskManager().get();
         assertEquals(original, new TaskManager(retrieved));
     }
 
@@ -90,7 +90,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        public void saveTaskManager(ReadOnlyItemManager taskManager, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

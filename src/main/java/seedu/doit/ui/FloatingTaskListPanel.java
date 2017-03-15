@@ -11,10 +11,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
-import seedu.doit.commons.events.ui.FloatingTaskPanelSelectionChangedEvent;
+import seedu.doit.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.doit.commons.util.FxViewUtil;
-import seedu.doit.logic.Logic;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
+import seedu.doit.model.item.ReadOnlyTask;
 
 /**
  * Panel containing the list of tasks.
@@ -23,19 +22,16 @@ public class FloatingTaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(FloatingTaskListPanel.class);
     @FXML
-    private ListView<ReadOnlyFloatingTask> taskListView;
-    Logic logic;
+    private ListView<ReadOnlyTask> taskListView;
 
-    public FloatingTaskListPanel(AnchorPane placeholder, ObservableList<ReadOnlyFloatingTask> floatingTaskList,
-                                 Logic logic) {
+    public FloatingTaskListPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> floatingTaskList) {
         super(FXML);
-        this.logic = logic;
         setConnections(floatingTaskList);
         addToPlaceholder(placeholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyFloatingTask> floatingTaskList) {
-        this.taskListView.setItems(floatingTaskList);
+    private void setConnections(ObservableList<ReadOnlyTask> floatingTaskList) {
+        this.taskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime() && !task.hasEndTime()));
         this.taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -51,7 +47,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     this.logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                    raise(new FloatingTaskPanelSelectionChangedEvent(newValue));
+                    raise(new TaskPanelSelectionChangedEvent(newValue));
                 }
             });
     }
@@ -63,17 +59,17 @@ public class FloatingTaskListPanel extends UiPart<Region> {
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyFloatingTask> {
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyFloatingTask floatingTask, boolean empty) {
+        protected void updateItem(ReadOnlyTask floatingTask, boolean empty) {
             super.updateItem(floatingTask, empty);
 
             if (empty || floatingTask == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FloatingTaskCard(floatingTask, getIndex() + 1, logic).getRoot());
+                setGraphic(new TaskCard(floatingTask, getIndex() + 1).getRoot());
             }
         }
     }

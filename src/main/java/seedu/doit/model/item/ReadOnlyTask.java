@@ -6,6 +6,7 @@ package seedu.doit.model.item;
  */
 public interface ReadOnlyTask extends Item {
 
+    StartTime getStartTime();
     EndTime getEndTime();
 
     /**
@@ -16,19 +17,27 @@ public interface ReadOnlyTask extends Item {
             || (other != null // this is first to avoid NPE below
             && other.getName().equals(this.getName()) // state checks here onwards
             && other.getPriority().equals(this.getPriority())
-            && other.getEndTime().equals(this.getEndTime())
+            && ((other.getStartTime() == null &&  this.getStartTime() == null)
+            || (other.getStartTime().equals(this.getStartTime())))
+            && ((other.getEndTime() == null &&  this.getEndTime() == null)
+            && other.getEndTime().equals(this.getEndTime()))
             && other.getDescription().equals(this.getDescription()));
     }
 
     /**
-     * Formats the task as text, showing all details.
+     * Formats the event as text, showing all details.
      */
     @Override
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        String startTime = (getStartTime() != null) ? getStartTime().toString() : "None";
+        String endTime = (getEndTime() != null) ? getEndTime().toString() : "None";
+
         builder.append(getName())
             .append(" Priority: ")
             .append(getPriority())
+            .append(" Start Time: ")
+            .append(getStartTime())
             .append(" End Time: ")
             .append(getEndTime())
             .append(" Description: ")
@@ -38,4 +47,6 @@ public interface ReadOnlyTask extends Item {
         return builder.toString();
     }
 
+    boolean hasStartTime();
+    boolean hasEndTime();
 }
