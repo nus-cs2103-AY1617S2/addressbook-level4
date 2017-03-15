@@ -1,7 +1,5 @@
 package seedu.address.model.task.date;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 /**
  * Represents a Time Value that is unassigned by user.
  */
@@ -14,10 +12,27 @@ public class TimeUnassigned implements TaskDate {
 
     public TimeUnassigned() {}
 
-    public TimeUnassigned(String dateString) throws IllegalValueException {
-        if (dateString != MESSAGE_UNASSIGNED_DATE) {
-            throw new IllegalValueException(MESSAGE_TIMEUNASSIGNED_CONSTRAINTS);
-        }
+    /**
+     * For task with unassigned time, only isfloating is true
+     */
+    public boolean isFloating() {
+        return true;
+    }
+
+    public boolean hasPassed() {
+        return false;
+    }
+
+    public boolean isHappeningToday() {
+        return false;
+    }
+
+    public boolean isHappeningTomorrow() {
+        return false;
+    }
+
+    public boolean isHappeningThisWeek() {
+        return false;
     }
 
     @Override

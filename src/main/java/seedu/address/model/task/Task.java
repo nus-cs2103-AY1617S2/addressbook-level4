@@ -2,12 +2,15 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in Task Manager
+ * Represents a Task in Task Manager.
+ *
+ * Status should be updated everytime task's deadline changes
  */
 public class Task implements ReadOnlyTask {
 
@@ -18,20 +21,24 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private Description description;
     private Deadline deadline;
+    private Status status;
 
     private UniqueTagList tags;
 
     /**
-     * Name, ID, deadline are required and must not be null
+     * Name is required and must not be null
      */
-    public Task(Name name, Deadline deadline, Object... params) {
-        assert !CollectionUtil.isAnyNull(name, deadline);
+    public Task(Name name, Object... params) {
+        assert !CollectionUtil.isAnyNull(name);
 
-        this.ID = DEFAULT_ID;
         this.name = name;
-        this.deadline = deadline;
-        this.description = new Description(DEFAULT_DESCRIPTION);
+        this.ID = new IdentificationNumber();
+        this.deadline = new Deadline();
+        this.description = new Description();
         this.tags = new UniqueTagList();
+
+        // Call update status immediately after creation
+        this.status = new Status();
 
         // Optional parameters
         // ID tends to be set after Task creation,
@@ -39,6 +46,9 @@ public class Task implements ReadOnlyTask {
         for (Object param : params) {
             if (param instanceof Description) {
                 this.description = (Description) param;
+
+            } else if (param instanceof Deadline) {
+                this.deadline = (Deadline) param;
 
             } else if (param instanceof UniqueTagList) {
                 this.tags.mergeFrom((UniqueTagList) param);
@@ -95,6 +105,8 @@ public class Task implements ReadOnlyTask {
     public Task setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;
+        // Status value depends on Deadline value and should be updated here
+        updateStatus();
         return this;
     }
 
@@ -142,6 +154,50 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
         return this;
+    }
+
+    @Override
+    public Status getStatus() {
+        return updateStatus();
+    }
+
+    public Task setStatus(Status status) {
+        this.status = status;
+        updateStatus();
+        return this;
+    }
+
+    public Status updateStatus() {
+        String currentStatus = status.toString();
+        if (currentStatus.equals(Status.DONE)) {
+            // No change
+            return status;
+        } else {
+            // Update status base on Deadline and current time
+            try {
+                if (deadline.isFloating()) {
+                    return status = new Status(Status.FLOATING);
+
+                } else if (deadline.isOverdue()) {
+                    return status = new Status(Status.OVERDUE);
+
+                } else if (deadline.isToday()) {
+                    return status = new Status(Status.TODAY);
+
+                } else if (deadline.isTomorrow()) {
+                    return status = new Status(Status.TOMORROW);
+
+                } else if (deadline.isThisWeek()) {
+                    return status = new Status(Status.THIS_WEEK);
+
+                } else {
+                    return status = new Status(Status.IN_FUTURE);
+                }
+            } catch (IllegalValueException e) {
+                // Impossible
+                return status;
+            }
+        }
     }
 
     @Override
