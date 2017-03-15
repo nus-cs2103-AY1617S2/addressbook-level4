@@ -71,20 +71,20 @@ public class TaskListTest {
     }
 
     /**
-     * A stub ReadOnlyTaskList whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskList whose tasks and tags lists can violate interface constraints.
      */
     private static class TaskListStub implements ReadOnlyTaskList {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        TaskListStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        TaskListStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override
