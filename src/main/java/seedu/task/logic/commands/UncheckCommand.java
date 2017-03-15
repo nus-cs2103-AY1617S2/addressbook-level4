@@ -9,9 +9,10 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 public class UncheckCommand extends TaskCompleted {
-	public static final String COMMAND_WORD = "unchecked";
+    public static final String COMMAND_WORD = "unchecked";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark task completion status to unchecked/incompleted.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark task completion status to unchecked/incompleted."
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1\n"
             + "Parameters: INDEX (must be a positive integer)";
 
@@ -24,12 +25,12 @@ public class UncheckCommand extends TaskCompleted {
     private final int filteredTaskListIndex;
 
 
-	public UncheckCommand (int filteredTaskListIndex) {
-		this.filteredTaskListIndex = filteredTaskListIndex - 1;
-	}
+    public UncheckCommand (int filteredTaskListIndex) {
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+    }
 
-	@Override
-	public CommandResult execute() throws CommandException {
+    @Override
+    public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -38,8 +39,8 @@ public class UncheckCommand extends TaskCompleted {
 
         ReadOnlyTask taskToMarkComplete = lastShownList.get(filteredTaskListIndex);
 
-        if (taskToMarkComplete.getCompletionStatus().getStatus()==false){
-        	throw new CommandException(String.format(MESSAGE_TASK_ALREADY_UNCHECKED, taskToMarkComplete.getName()));
+        if (taskToMarkComplete.getCompletionStatus().getStatus() == false) {
+            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_UNCHECKED, taskToMarkComplete.getName()));
         }
 
         Task completedTask = changeTaskCompletion(taskToMarkComplete);
@@ -51,5 +52,5 @@ public class UncheckCommand extends TaskCompleted {
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UNCHECK_SUCCESS, taskToMarkComplete.getName()));
-	}
+    }
 }

@@ -8,7 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
-public class CheckCommand extends TaskCompleted{
+public class CheckCommand extends TaskCompleted {
 
     public static final String COMMAND_WORD = "checked";
 
@@ -25,12 +25,12 @@ public class CheckCommand extends TaskCompleted{
     private final int filteredTaskListIndex;
 
 
-	public CheckCommand (int filteredTaskListIndex) {
-		this.filteredTaskListIndex = filteredTaskListIndex - 1;
-	}
+    public CheckCommand (int filteredTaskListIndex) {
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+    }
 
-	@Override
-	public CommandResult execute() throws CommandException {
+    @Override
+    public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -39,8 +39,8 @@ public class CheckCommand extends TaskCompleted{
 
         ReadOnlyTask taskToMarkComplete = lastShownList.get(filteredTaskListIndex);
 
-        if (taskToMarkComplete.getCompletionStatus().getStatus()==true){
-        	throw new CommandException(String.format(MESSAGE_TASK_ALREADY_CHECKED, taskToMarkComplete.getName()));
+        if (taskToMarkComplete.getCompletionStatus().getStatus() == true) {
+            throw new CommandException(String.format(MESSAGE_TASK_ALREADY_CHECKED, taskToMarkComplete.getName()));
         }
 
         Task completedTask = changeTaskCompletion(taskToMarkComplete);
@@ -52,6 +52,6 @@ public class CheckCommand extends TaskCompleted{
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_CHECK_SUCCESS, taskToMarkComplete.getName()));
-	}
+    }
 
 }

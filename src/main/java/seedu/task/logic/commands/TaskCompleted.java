@@ -12,10 +12,10 @@ import seedu.task.model.task.Task;
 public abstract class TaskCompleted extends Command {
 
 
-	@Override
+    @Override
     public abstract CommandResult execute() throws CommandException;
 
-	public Task changeTaskCompletion (ReadOnlyTask taskToMarkComplete) {
+    public Task changeTaskCompletion (ReadOnlyTask taskToMarkComplete) {
 
         Name name = taskToMarkComplete.getName();
         StartTime startTime = taskToMarkComplete.getStartTime();

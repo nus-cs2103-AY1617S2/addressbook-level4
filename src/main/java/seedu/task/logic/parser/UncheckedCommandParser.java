@@ -9,7 +9,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.UncheckCommand;
 
 public class UncheckedCommandParser {
-	public Command parse(String args) {
+    public Command parse(String args) {
 
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
