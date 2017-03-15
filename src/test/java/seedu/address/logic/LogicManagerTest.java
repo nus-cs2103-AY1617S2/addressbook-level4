@@ -86,7 +86,8 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        config = new Config();
+        String tempConfigFile = saveFolder.getRoot().getPath() + "TempConfig.json";
+        config = new Config(tempConfigFile);
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), config);
         EventsCenter.getInstance().registerHandler(this);
 
@@ -104,11 +105,6 @@ public class LogicManagerTest {
 
     @After
     public void tearDown() {
-        try {
-            logic.execute("save to data/");
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
         EventsCenter.clearSubscribers();
     }
 
@@ -566,7 +562,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" tag ").append(t.tagName);
             }
 
             return cmd.toString();

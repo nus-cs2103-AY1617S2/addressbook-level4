@@ -3,12 +3,15 @@ package seedu.address.commons.core;
 import java.util.Objects;
 import java.util.logging.Level;
 
+import seedu.address.commons.util.FileUtil;
+
 /**
  * Config values used by the app
  */
 public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
+    private String filePath;
 
     // Config values customizable through config file
     private String appTitle = "Task Manager";
@@ -17,6 +20,19 @@ public class Config {
     private String taskManagerFilePath = "data/taskmanager.xml";
     private String taskManagerName = "MyTaskManager";
 
+    public Config() {
+        this.filePath = DEFAULT_CONFIG_FILE;
+    }
+
+    // Initialized with a specified filepath
+    public Config(String filePath) {
+        if (FileUtil.isWritable(filePath)) {
+            this.filePath = filePath;
+        } else {
+            // TODO: show warning that default file path is used instead
+            this.filePath = DEFAULT_CONFIG_FILE;
+        }
+    }
 
     public String getAppTitle() {
         return appTitle;
@@ -58,20 +74,18 @@ public class Config {
         this.taskManagerName = taskManagerName;
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Config)) { //this handles null as well.
+        if (!(other instanceof Config)) { // this handles null as well.
             return false;
         }
 
         Config o = (Config) other;
 
-        return Objects.equals(appTitle, o.appTitle)
-                && Objects.equals(logLevel, o.logLevel)
+        return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
                 && Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
                 && Objects.equals(taskManagerName, o.taskManagerName);
@@ -91,6 +105,10 @@ public class Config {
         sb.append("\nLocal data file location : " + taskManagerFilePath);
         sb.append("\nTaskManager name : " + taskManagerName);
         return sb.toString();
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
 }

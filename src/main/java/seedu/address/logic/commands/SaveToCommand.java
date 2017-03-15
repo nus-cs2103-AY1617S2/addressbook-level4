@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.io.File;
 import java.io.IOException;
 
-import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.FileUtil;
@@ -49,7 +48,7 @@ public class SaveToCommand extends Command {
         }
 
         try {
-            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+            ConfigUtil.saveConfig(config, config.getFilePath());
         } catch (IOException e) {
             throw new CommandException(MESSAGE_CONFIG_SAVE_FAILURE);
         }

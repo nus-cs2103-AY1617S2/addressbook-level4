@@ -105,7 +105,6 @@ public abstract class TaskManagerGuiTest {
 
     @After
     public void cleanup() throws TimeoutException {
-        commandBox.runCommand("saveto data");
         FxToolkit.cleanupStages();
     }
 
