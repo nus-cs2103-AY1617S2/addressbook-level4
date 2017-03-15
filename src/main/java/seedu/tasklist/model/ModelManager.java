@@ -42,7 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyTaskList taskList, Storage storage) {
         super();
         assert !CollectionUtil.isAnyNull(taskList, storage);
-        
+
         logger.fine("Initializing with task list: " + taskList);
 
         this.taskList = new TaskList(taskList);
@@ -51,12 +51,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.undoStack = new Stack<ReadOnlyTaskList>();
         this.redoStack = new Stack<ReadOnlyTaskList>();
-    }   
+    }
 
     public ModelManager(Storage storage) {
         this(new TaskList(), storage);
     }
-    
+
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
@@ -135,18 +135,18 @@ public class ModelManager extends ComponentManager implements Model {
             super("No available states");
         }
     }
-    
-    @Override 
+
+    @Override
     public synchronized void loadTaskList(String filePath) throws IOException {
 
         Optional<ReadOnlyTaskList> flexiTaskOptional;
         ReadOnlyTaskList loadedData = null;
         try {
             flexiTaskOptional = storage.readTaskList(filePath);
-            if(!flexiTaskOptional.isPresent()){
+            if (!flexiTaskOptional.isPresent()) {
                 logger.info("File not found.");
                 throw new IOException();
-            }else{
+            } else {
                 taskList.resetData(flexiTaskOptional.get());
                 storage.loadTaskList(filePath);
                 updateFilteredListToShowAll();
@@ -155,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
             logger.warning("Wrong file format.");
         }
     }
-       
+
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
