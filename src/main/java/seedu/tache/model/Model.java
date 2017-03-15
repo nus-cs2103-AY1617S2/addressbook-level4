@@ -7,6 +7,7 @@ import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueDetailedTaskList;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -24,13 +25,13 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Deletes the given task. */
-    void deleteDetailedTask(ReadOnlyDetailedTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteDetailedTask(ReadOnlyDetailedTask target) throws UniqueDetailedTaskList.DetailedTaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /** Adds the given detailed task */
-    void addDetailedTask(DetailedTask detailedTask) throws UniqueTaskList.DuplicateTaskException;
+    void addDetailedTask(DetailedTask detailedTask) throws UniqueDetailedTaskList.DuplicateDetailedTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -41,6 +42,16 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
+    
+    /**
+     * Updates the detailed task located at {@code filteredTaskListIndex} with {@code editedDetaileddTask}.
+     *
+     * @throws DuplicateDetailedTaskException if updating the detailed task's details causes the detailed task to be equivalent to
+     *      another existing detailed task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredDetailedTaskListIndex} < 0 or >= the size of the filtered list.
+     */
+    void updateDetailedTask(int filteredDetailedTaskListIndex, ReadOnlyDetailedTask editedDetailedTask)
+            throws UniqueDetailedTaskList.DuplicateDetailedTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -53,5 +64,8 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    void updateFilteredDetailedTaskList(Set<String> keywords);
 
 }

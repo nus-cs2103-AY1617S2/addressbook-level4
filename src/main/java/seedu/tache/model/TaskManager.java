@@ -136,6 +136,27 @@ public class TaskManager implements ReadOnlyTaskManager {
         // in the task list.
         tasks.updateTask(index, editedTask);
     }
+    
+    /**
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
+     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
+     * @see #syncMasterTagListWith(Task)
+     *
+     * @throws DuplicateDetailedTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void updateDetailedTask(int index, ReadOnlyDetailedTask editedReadOnlyDetailedTask)
+            throws UniqueDetailedTaskList.DuplicateDetailedTaskException {
+        assert editedReadOnlyDetailedTask != null;
+
+        DetailedTask editedDetailedTask = new DetailedTask(editedReadOnlyDetailedTask);
+        syncMasterTagListWith(editedDetailedTask);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // in the task list.
+        detailedTasks.updateDetailedTask(index, editedDetailedTask);
+    }
 
     /**
      * Ensures that every tag in this task:
@@ -202,6 +223,14 @@ public class TaskManager implements ReadOnlyTaskManager {
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+    
+    public boolean removeDetailedTask(ReadOnlyDetailedTask key) throws UniqueDetailedTaskList.DetailedTaskNotFoundException {
+        if (detailedTasks.remove(key)) {
+            return true;
+        } else {
+            throw new UniqueDetailedTaskList.DetailedTaskNotFoundException();
         }
     }
 

@@ -41,15 +41,15 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
      *         detailed task to be equivalent to another existing detailed task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateDetailedTask(int index, ReadOnlyDetailedTask editedTask) throws DuplicateDetailedTaskException {
-        assert editedTask != null;
+    public void updateDetailedTask(int index, ReadOnlyDetailedTask editedDetailedTask) throws DuplicateDetailedTaskException {
+        assert editedDetailedTask != null;
 
         DetailedTask taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(editedDetailedTask) && internalList.contains(editedDetailedTask)) {
             throw new DuplicateDetailedTaskException();
         }
 
-        taskToUpdate.resetData(editedTask);
+        taskToUpdate.resetData(editedDetailedTask);
         // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
