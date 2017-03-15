@@ -6,13 +6,13 @@ import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager. Task can be of type floating, deadline or event. 
+ * Represents a Task in the task manager. Task can be of type floating, deadline or event.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
     public enum Status {UNDONE, DONE, OVERDUE} // Represents a Task's current status in the task manager.
-    
+
     protected Description description;
     protected Status status;
     protected UniqueTagList tags;
@@ -24,7 +24,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         status = Status.UNDONE;
     }
-    
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */

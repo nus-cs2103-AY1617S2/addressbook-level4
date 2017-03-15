@@ -440,7 +440,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            
+
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
                 cmd.append(" t/").append(t.tagName);
