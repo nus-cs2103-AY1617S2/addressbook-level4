@@ -24,7 +24,6 @@ public class TypicalTestTodos {
             fiona = new TodoBuilder().withName("Fiona Kunz").build();
             george = new TodoBuilder().withName("George Best").build();
             // Manually added
-
             hoon = new TodoBuilder().withName("Hoon Meier").build();
             ida = new TodoBuilder().withName("Ida Mueller").build();
             eventTest = new TodoBuilder().withName("eventTest").withStartTime("11-11-17T5:00")

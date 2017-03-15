@@ -42,7 +42,7 @@ public class AddCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void add_event() {
+    public void addEvent() {
     	TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd = td.eventTest;
         assertAddSuccess(todoToAdd, currentList);
