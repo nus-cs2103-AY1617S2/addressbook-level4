@@ -31,10 +31,13 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NotDoneCommand;
+import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -333,14 +336,11 @@ public class LogicManagerTest {
 				expectedAB, expectedAB.getTaskList());
 	}
 
-	/*
-	 * TODO: remove comment when DoneCommand is implemented
-	 *
-	 * @Test public void execute_done_invalidArgsFormat() { String
-	 * expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-	 * DoneCommand.MESSAGE_USAGE); assertCommandFailure("done ",
-	 * expectedMessage); }
-	 */
+	@Test public void execute_done_invalidArgsFormat() {
+		String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+		assertCommandFailure("done ", expectedMessage);
+	}
+
 
 	@Test
 	public void execute_doneIndexNotFound_errorMessageShown() throws Exception {
@@ -359,22 +359,20 @@ public class LogicManagerTest {
 		;
 		helper.addToModel(model, threeTasks);
 
-		/*
-		 * TODO: remove comment when DoneCommand is implemented
-		 * assertCommandSuccess("done 2",
-		 * String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
-		 * expectedAB, expectedAB.getTaskList());
-		 */
+
+		assertCommandSuccess("done 2",
+				String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
+				expectedAB, expectedAB.getTaskList());
 	}
 
-	/*
-	 * TODO: remove comment when DoneCommand is implemented
-	 *
-	 * @Test public void execute_notdone_invalidArgsFormat() { String
-	 * expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-	 * NotDoneCommand.MESSAGE_USAGE); assertCommandFailure("notdone ",
-	 * expectedMessage); }
-	 */
+
+
+
+	@Test public void execute_notdone_invalidArgsFormat() {
+		String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotDoneCommand.MESSAGE_USAGE);
+		assertCommandFailure("notdone ",expectedMessage);
+	}
+
 
 	@Test
 	public void execute_notdoneIndexNotFound_errorMessageShown() throws Exception {
@@ -393,12 +391,9 @@ public class LogicManagerTest {
 		expectedAB.updateTask(1, notDoneTask);
 		helper.addToModel(model, threeTasks);
 
-		/*
-		 * TODO: remove comment when DoneCommand is implemented
-		 * assertCommandSuccess("notdone 2",
-		 * String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS,
-		 * notDoneTask), expectedAB, expectedAB.getTaskList());
-		 */
+		assertCommandSuccess("notdone 2", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS,
+				notDoneTask), expectedAB, expectedAB.getTaskList());
+
 	}
 
 	@Test
@@ -477,6 +472,33 @@ public class LogicManagerTest {
 		assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
 				expectedAB, expectedList);
 	}
+
+	@Test
+	public void execute_renametag_invalidArgsFormat() {
+		String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE);
+		assertCommandFailure("renametag ", expectedMessage);
+	}
+
+	// TODO, fix sync of tag list
+	//	@Test
+	//	public void execute_renametag_onlyMatchesFullWordsInTags() throws Exception {
+	//		TestDataHelper helper = new TestDataHelper();
+	//		Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
+	//		Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
+	//		Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
+	//		Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "newkey");
+	//		Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
+	//		Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+	//		Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
+	//
+	//		List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
+	//		TaskManager expectedAB = helper.generateTaskManager(fiveTasks);
+	//		List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
+	//		helper.addToModel(model, fiveTasks);
+	//
+	//		assertCommandSuccess("renametag KEY newkey", String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY", "newkey"), expectedAB,
+	//				expectedList);
+	//	}
 
 	// SaveToCommand Tests
 
