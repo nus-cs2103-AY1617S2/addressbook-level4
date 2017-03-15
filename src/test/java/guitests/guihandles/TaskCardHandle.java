@@ -115,6 +115,13 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getTitle() + " " + getDeadline();
+        String status = "Incomplete";
+        if (isCompleted()) {
+            status = "Completed";
+        }
+        return getTitle() + " Start: " + getStartTime() +
+                " Deadline: " + getDeadline() +
+                " Status: " + status +
+                " Label: " + getLabels();
     }
 }

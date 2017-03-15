@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.DateTimeParser;
+import seedu.address.logic.dateparser.DateTimeParser;
 
 public class DeadlineTest {
 
@@ -34,7 +34,6 @@ public class DeadlineTest {
         assertFalse(deadline1.equals(null));
         assertFalse(deadline1.equals(deadline3));
 
-        Deadline dl = new Deadline();
 
         //hashCode
         assertTrue(deadline1.hashCode() == deadline2.hashCode());
@@ -45,7 +44,7 @@ public class DeadlineTest {
         assertTrue(Deadline.isValidDeadline("11-12-2106")); // date
         assertTrue(Deadline.isValidDeadline("Tomorrow"));
         assertTrue(Deadline.isValidDeadline("9pm")); // two characters only
-        assertTrue(new Deadline().isValidDeadline(dl.toString()));
+        assertTrue(new Deadline("").isValidDeadline(""));
         assertTrue(Deadline.isValidDeadline("")); // empty string
         assertTrue(Deadline.isValidDeadline(" ")); // spaces only
     }
@@ -83,7 +82,7 @@ public class DeadlineTest {
         exception.expect(IllegalDateTimeValueException.class);
         new Deadline("a");
         exception.expect(IllegalDateTimeValueException.class);
-        new Deadline("");
+        new Deadline(" SAC AKBC");
     }
 
     @Test

@@ -5,22 +5,21 @@ import java.util.List;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.dateparser.DateTimeParser;
 import seedu.address.logic.dateparser.DateTimeParserManager;
-import seedu.address.logic.parser.DateTimeParser;
 
 /**
- * Represents a Task's deadline in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
+ * Represents a Task's deadline in the task manager. Guarantees: immutable; is
+ * valid as declared in {@link #isValidDeadline(String)}
  */
 public class Deadline {
 
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline can have zero or more characters";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline can have zero or more characters";
     public static final String DATE_VALIDATION_REGEX = "[a-zA-Z]+";
 
     /*
-     * The deadline must have at least one visible character
-     * TODO: change regex once deadline can be translated to a date
+     * The deadline must have at least one visible character TODO: change regex
+     * once deadline can be translated to a date
      */
     public static final String DEADLINE_VALIDATION_REGEX = ".*";
     private static final DateTimeParser dateParser = new DateTimeParserManager();
@@ -31,8 +30,10 @@ public class Deadline {
     /**
      * Validates given deadline.
      *
-     * @throws IllegalValueException if given deadline string is invalid.
-     * @throws IllegalDateTimeValueException if given deadline could be parse to a valid date
+     * @throws IllegalValueException
+     *             if given deadline string is invalid.
+     * @throws IllegalDateTimeValueException
+     *             if given deadline could be parse to a valid date
      */
     public Deadline(String strDeadline) throws IllegalValueException, IllegalDateTimeValueException {
         assert strDeadline != null;
@@ -42,11 +43,7 @@ public class Deadline {
             if (!isEmptyDeadline(strDeadline)) {
                 try {
                     List<Date> dateList;
-<<<<<<< HEAD
                     if (strDeadline.matches(DATE_VALIDATION_REGEX)) {
-=======
-                    if (strDeadline.matches("[a-zA-Z]+")) {
->>>>>>> V0.2-yesha
                         dateList = dateParser.parse(strDeadline + " 235959").get(0).getDates();
                     } else {
                         dateList = dateParser.parse(strDeadline).get(0).getDates();
@@ -99,7 +96,8 @@ public class Deadline {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Deadline // instanceof handles nulls
-                && this.deadline.equals(((Deadline) other).deadline)); // state check
+                        && this.deadline.equals(((Deadline) other).deadline)); // state
+                                                                               // check
     }
 
     @Override

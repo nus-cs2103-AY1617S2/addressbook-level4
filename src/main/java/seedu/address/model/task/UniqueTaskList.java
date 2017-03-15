@@ -2,12 +2,12 @@ package seedu.address.model.task;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -17,7 +17,6 @@ import seedu.address.model.label.UniqueLabelList;
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task>, Cloneable {
 
@@ -102,8 +101,11 @@ public class UniqueTaskList implements Iterable<Task>, Cloneable {
         try {
             for (Task task : internalList) {
                 UniqueLabelList y = task.getLabels().clone();
-
-                x.add(new Task(new Title(task.getTitle().toString()), new Deadline(task.getDeadline().toString()), y));
+                x.add(new Task(new Title(task.getTitle().toString()),
+                        Optional.ofNullable(new Deadline(task.getStartTime().toString())),
+                        Optional.ofNullable(new Deadline(task.getDeadline().toString())),
+                        task.isCompleted(),
+                        y));
             }
         } catch (Exception e) {
             e.printStackTrace();

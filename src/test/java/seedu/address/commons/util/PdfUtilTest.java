@@ -98,8 +98,8 @@ public class PdfUtilTest extends TaskManagerGuiTest {
         Date today = new Date();
         for (TestTask task : tasks) {
             //TODO: add isDeadlineTask && !isCompleted to ensure only outstanding deadlines are displayed
-            if (task.getDeadline().getDateTime().after(today) && !task.getTitle().toString().contains("999")) {
-                document.add(new Paragraph(task.toString()).setFontSize(10));
+            if (task.getDeadline().get().getDateTime().after(today) && !task.getTitle().toString().contains("999")) {
+                document.add(new Paragraph(task.getAsText()).setFontSize(10));
             }
         }
 
@@ -109,8 +109,8 @@ public class PdfUtilTest extends TaskManagerGuiTest {
         LinkedList<TestTask>[] sortedTasks = new LinkedList[32]; //We use 1-31, ignore 0
         for (TestTask task : tasks) {
             //TODO: isRangeTask (has start/end datetime)
-            if (month == task.getDeadline().getDateTime().getMonth()) {
-                int date = task.getDeadline().getDateTime().getDate();
+            if (month == task.getDeadline().get().getDateTime().getMonth()) {
+                int date = task.getDeadline().get().getDateTime().getDate();
                 if (sortedTasks[date] == null) {
                     sortedTasks[date] = new LinkedList<TestTask>();
                 }

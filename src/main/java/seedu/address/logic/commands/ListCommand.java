@@ -12,22 +12,33 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "LIST";
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " [BY DEADLINE]";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " [BY DEADLINE] | [FROM STARTDATE TO ENDDATE]";
     public static final String DATE_VALIDATION_REGEX = "[a-zA-Z]+";
     private final String endDate;
     private final String startDate;
+    private final Boolean isCompleted;
 
     public ListCommand() {
+        isCompleted = null;
         endDate = "";
         startDate = "";
     }
 
+    public ListCommand(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
+        endDate = "";
+        startDate = "";
+
+    }
+
     public ListCommand(String endDate) throws IllegalDateTimeValueException {
+        isCompleted = null;
         this.endDate = endDate;
         this.startDate = "";
     }
 
     public ListCommand(String startDate, String endDate) throws IllegalDateTimeValueException {
+        isCompleted = null;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -74,6 +85,8 @@ public class ListCommand extends Command {
             } else {
                 model.updateFilteredTaskList(start, end);
             }
+        } else if (isCompleted != null) {
+            model.updateFilteredTaskList(isCompleted);
         } else if ("".equals(startDate) && "".equals(endDate)) {
             saveCurrentState();
             model.updateFilteredListToShowAll();

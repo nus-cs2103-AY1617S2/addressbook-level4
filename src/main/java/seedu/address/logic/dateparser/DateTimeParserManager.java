@@ -32,7 +32,6 @@ import com.joestelmach.natty.generated.DateParser;
 import com.joestelmach.natty.generated.DateWalker;
 import com.joestelmach.natty.generated.TreeRewrite;
 
-import seedu.address.logic.parser.DateTimeParser;
 import seedu.address.logic.parser.Parser;
 
 public class DateTimeParserManager implements DateTimeParser {

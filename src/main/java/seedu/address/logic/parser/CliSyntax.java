@@ -14,6 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TIMEINTERVAL_END = new Prefix("TO ");
     public static final Prefix PREFIX_TIMEINTERVAL_START = new Prefix("FROM ");
     public static final Prefix PREFIX_LABEL = new Prefix("#");
+    public static final Prefix PREFIX_STATUS_COMPLETED = new Prefix("COMPLETED");
+    public static final Prefix PREFIX_STATUS_INCOMPLETE = new Prefix("INCOMPLETE");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

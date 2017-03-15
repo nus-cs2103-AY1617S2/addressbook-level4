@@ -449,19 +449,10 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("ADD ");
-
             cmd.append(p.getTitle().toString());
-
-<<<<<<< HEAD
-            cmd.append(" BY ");
-=======
-            cmd.append(" from ");
-
+            cmd.append(" FROM ");
             cmd.append(p.getStartTime());
-
-            cmd.append(" to ");
->>>>>>> V0.2-yesha
-
+            cmd.append(" TO ");
             cmd.append(p.getDeadline());
 
             UniqueLabelList labels = p.getLabels();

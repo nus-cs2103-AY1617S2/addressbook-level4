@@ -11,7 +11,7 @@ import seedu.address.model.task.ReadOnlyTask;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "UNDO";
-    public static final String MESSAGE_SUCCESS = "Undo-ed previous command";
+    public static final String MESSAGE_SUCCESS = "Undo-ed previous command successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
     public static final String MESSAGE_UNSUCCESSFUL_UNDO = "No previous command to undo";
 

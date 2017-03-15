@@ -214,8 +214,6 @@ public class ModelManager extends ComponentManager implements Model {
             return false;
         }
     }
-<<<<<<< HEAD
-=======
 
     private class StatusFilter {
         private boolean isCompleted;
@@ -228,6 +226,4 @@ public class ModelManager extends ComponentManager implements Model {
             return task.isCompleted().booleanValue() == isCompleted;
         }
     }
-
->>>>>>> V0.2-yesha
 }

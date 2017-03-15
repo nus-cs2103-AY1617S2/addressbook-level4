@@ -42,9 +42,7 @@ public class AddCommand extends Command {
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
-<<<<<<< HEAD
-        this.toAdd = new Task(new Title(title), new Deadline(), new UniqueLabelList(labelSet));
-=======
+
         this.toAdd = new Task(
                 new Title(title),
                 Optional.empty(),
@@ -52,7 +50,6 @@ public class AddCommand extends Command {
                 false,
                 new UniqueLabelList(labelSet)
         );
->>>>>>> V0.2-yesha
     }
 
     /**
@@ -69,9 +66,7 @@ public class AddCommand extends Command {
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
-<<<<<<< HEAD
-        this.toAdd = new Task(new Title(title), new Deadline(deadline), new UniqueLabelList(labelSet));
-=======
+
         this.toAdd = new Task(
                 new Title(title),
                 Optional.empty(),
@@ -79,19 +74,15 @@ public class AddCommand extends Command {
                 false,
                 new UniqueLabelList(labelSet)
         );
->>>>>>> V0.2-yesha
     }
 
     /**
      * Creates an AddCommand using raw values.
      *
-<<<<<<< HEAD
      * @throws IllegalValueException
      *             if any of the raw values are invalid
-=======
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws IllegalDateTimeValueException if deadline values are invalid
->>>>>>> V0.2-yesha
      */
     public AddCommand(String title, String startDate, String deadline, Set<String> labels)
             throws IllegalValueException, IllegalDateTimeValueException {
@@ -99,10 +90,7 @@ public class AddCommand extends Command {
         for (String labelName : labels) {
             labelSet.add(new Label(labelName));
         }
-<<<<<<< HEAD
-        // TODO
-        this.toAdd = new Task(new Title(title), new Deadline(startDate, deadline), new UniqueLabelList(labelSet));
-=======
+
         this.toAdd = new Task(
                 new Title(title),
                 Optional.ofNullable(new Deadline(startDate)),
@@ -110,7 +98,6 @@ public class AddCommand extends Command {
                 false,
                 new UniqueLabelList(labelSet)
         );
->>>>>>> V0.2-yesha
     }
 
     @Override

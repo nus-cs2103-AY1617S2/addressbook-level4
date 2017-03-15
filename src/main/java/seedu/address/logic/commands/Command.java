@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.DateTimeParser;
+import seedu.address.logic.dateparser.DateTimeParser;
 import seedu.address.model.Model;
 
 /**
