@@ -19,7 +19,12 @@ public class TestPerson implements ReadOnlyPerson {
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
-
+    private Name taskName;
+    private Date date;
+    private Time startTime;
+    private Time endTime;
+    private String description;
+    
     public TestPerson() {
         tags = new UniqueTagList();
     }
@@ -70,6 +75,22 @@ public class TestPerson implements ReadOnlyPerson {
         return email;
     }
 
+    public Name getTaskName() {
+    	return taskName;
+    }
+    public Date getDate() {
+    	return date;
+    }
+    public Time getStartTime() {
+    	return startTime;
+    }
+    public Time getEndTime() {
+    	return endTime;
+    }
+    public String getDescription() {
+    	return description;
+    }
+    
     @Override
     public Address getAddress() {
         return address;
