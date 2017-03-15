@@ -46,79 +46,126 @@ Are you ready to be a do-ist?
 2. Copy the file to the folder you want to use as the home folder for Doist. Note that you would be able to edit Doist's storage location of its data later.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
- <img src="images/Ui.png" width="450">
+ <img src="images/Ui.png" width="450"> <br>
  Figure 1: Doist Application Window <br>
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. You could try these example commands:
-   * **`list`** : lists all tasks
-   * **`add Buy the milk \from 3pm \to 5pm`**:
-     adds an event with a description of "Buy the milk" from upcoming 3pm to 5pm
-   * **`delete 3`** : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+
+### Getting started with commands :
+
+Type the following commands and press <kbd>Enter</kbd> after each command.
+1. **`add Buy the milk \from 3pm \to 5.00`**.
+   > Adds an event for today with a description of "Buy the milk" from 3pm to 5am the next day.
+2. **`add Buy the vegetables \by 6pm 25th Oct`**.
+   > Adds a task with a description of "Buy the vegetables" which has a 6pm deadline.
+3. **`finish 1`**
+   > Marks the first task in the list as finished.
+4. **`list pending`**
+   > Lists all the pending tasks which are not finished yet.
+5. **`delete 1`**
+   > Deletes the 1st task shown in the current list.
+6. **`exit`**
+   > Exits the application.
+
+Try out different date and time formats for the add command!
+
+Refer to the [Features](#features) section below for details of each command.<br>
 
 ## 3. Features
 
-> **Command Format**
+**Command Format**
+
+Take note of some general information for our commands :
 > * All commands begin with a command word, followed by parameters.
 > * All parameters are key-value pairs except the first parameter, whose key must be omitted.
+> *e.g.* `add Buy the milk \from 3pm \to 5pm`
 > * All keys start with the backslash `\`.
-> e.g. `\from`, `\every`.
+> *e.g.* `\from`, `\every`.
 > * If you want to use backslash in the value, use `\\`.
-> * Command words and keys will not contain spaces. Underscores are used instead for multiple words.
-> e.g. `list_tag`, `\remind_at`
+> * Command words and keys consisting of multiple words will not contain spaces. Underscores are used instead.
+> *e.g.* `list_tag`, `\remind_at`
 > * Words in `UPPER_CASE` are the values.
-> * (A|B) means A and B can be used interchangeably.
+> * `(A|B)` means A and B can be used interchangeably.
 > * Items in `[]` are optional.
 > * Items with `...` after them can have multiple instances, separated by space.
-> * Key-value pairs can be entered in any order.
+> * Key-value pairs can be entered in any order after the command word.
 
 ### Viewing help : `help`
 
 Simply type "help" to view the help page! <br>
 `help`
 
-> Help is also shown if the command format is invalid. e.g. `abcd`
-
 ### Adding a new task : `add`, `do`
 
 Add a new task with a description using just the `add` command word. <br>
 `(add|do) TASK_DESCRIPTION`
 > **Examples:** <br>
-> add buy milk <br>
+> `add buy milk` <br>
 > **Tips:** <br>
 > To use \ in your description, type \\\
 
 Add a task with a start time and end time for events that occur over a period of time with `\from` and `\to` keys. <br>
 `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
-> add buy milk \from 3pm \to 4pm <br>
-> add buy milk \from 12 Oct 3pm \to 4pm
+> **Examples:** <br>
+>`add buy milk \from 3pm \to 4pm`<br>
+>`add buy milk \from 12 Oct 3pm \to 4pm` <br>
+> **Tips:** <br>
+> See the table of acceptable date and time formats below
 
-Add a task that has a deadline with the `\by` key. If a day is specified but a time is not, current time of the day will be used. <br>
+Add a task that has a deadline with the `\by` key.
 `(add|do) TASK_DESCRIPTION [\by TIME]`
-
-> add buy milk \by 3pm <br>
-> add buy milk \by 28th Feb
-
-You could set reminders with the `\remind_at` key. A pop-up would appear to remind you about the task. <br>
-` [\remind_at REMIND_TIME]`
-
-` [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
-
-> - Tasks can have any number of tags (including 0)
-> - The start time and remind time must be earlier or equal to the end time
-> - Tasks can have neither start time and end time. They are floating tasks
-> - Tasks with the same start time and end time or are only associated with one timing are deadlines
-> - For format 2, start time and end time will both be set to `TIME`
+> **Examples:** <br>
+> `add buy milk \by 3pm` <br>
+> `add buy milk \by 28th Feb` <br>
+> **Tips:** <br>
+> Start time and end time will both be set to `TIME`
 > That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
-> - Tasks can have different start time and end time. They are events
-> - `Priority` can be `normal`, `important`, `very important`
-> - If you do not specify the `priority` of the task, it will be set to a default value of `normal`!
-> - If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and remind time of the task will be updated to its next occurrence.
+> See the table of acceptable date and time formats below
 
-Examples:
+Add a task with higher priorities with the `\as` key. By default, tasks are of normal priority. Since we all have certain tasks that are more important than others, you can indicate that they are important or very important! <br>
+`[\as PRIORITY]`
+> **Examples:** <br>
+>`add buy milk \as important`<br>
+>`add buy milk \as very important` <br>
+> **Tips:** <br>
+> `Priority` can be `normal`, `important`, `very important`
+
+Add a task with a reminder timing with the `\remind` key. State the number of hours before the task's end time that you want to be reminded. A pop-up would appear to remind you about the task at that specified time! <br>
+` [\remind REMINDER_RELATIVE_TIME]`
+> **Examples:** <br>
+> `add buy milk \remind 3` <br>
+> `add buy milk \remind 5 hrs before` <br>
+
+Add a recurring task with the `\every` key. If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and reminder time of the task will be updated to its next occurrence. <br>
+` [\every RECURRENCE_INTERVAL]`
+> **Examples:** <br>
+> `add buy milk \every 4 hours` <br>
+> `add buy milk \every week` <br>
+> `add buy milk \every 3 weeks` <br>
+> `add buy milk \every year` <br>
+
+Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
+` [\under TAG...]`
+> **Examples:** <br>
+> `add buy milk \under shopping friends` <br>
+> `add buy milk \under for_myself` <br>
+> **Tips:** <br>
+> Tasks can have any number of tags (including 0)
+
+
+**Acceptable Date Formats** <br>
+| Date Format  | Example(s) |
+| ------------ | ------------ |
+| Day Month  | 1st Oct, 1 Oct  |
+| Month Day  | Oct 1st, Oct  |
+
+> **Tips:** <br>
+> - If you do not explicitly state the time, the date will be assumed to be within the next 24 hours <br>
+> - If you do not explicitly state the date, the time will be assumed to be the current time of the day
+> - The start time and remind time must be earlier or equal to the end time
+
+**More examples:**
 
 * `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 * `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
