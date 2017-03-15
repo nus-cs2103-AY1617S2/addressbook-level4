@@ -56,7 +56,7 @@ public class Task implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
- 
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
