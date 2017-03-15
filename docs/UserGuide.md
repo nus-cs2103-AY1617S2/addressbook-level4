@@ -76,7 +76,7 @@ Examples:
 
 * `update 2 Assignment 3`<br>
   Updates the name of the 2nd task to be `Assignment 3`.
-* `update 3 startdate/today enddate/tomorrow`
+* `update 3 startdate/today enddate/tomorrow` <br>
   Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
 ### 2.4. Filter all tasks containing any keyword in their name or tag or date: `filter`
@@ -113,6 +113,7 @@ Format: `delete INDEX`
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...<br>
 > Supports deletion of multiple indexes in a single command, by best effort matching.
+> The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
 
 Examples:
 
@@ -120,7 +121,6 @@ Examples:
   Deletes the 2nd task in the todo list.
 * `delete 3 - 6`<br>
   Deletes the 3rd, 4th, 5th, and 6th task in the todo list.<br>
-  Note that the system is whitespace insensitive so `delete 3-6` or `delete 3- 6` would work as well.
 * `delete 3 -`<br>
   Deletes from 3rd to last in the todo list.
 * `delete - 5`<br>
@@ -164,7 +164,7 @@ Format: `redo [NUMBER]`
 
 > Redo the last data-mutating command inputted since the undone point.<br>
 > If a number is entered, redo that ammount of previous commands instead.<br>
-> The number **must be a positive integer** 1, 2, 3, ...
+> The number **must be a positive integer** 1, 2, 3, ... <br>
 > The number must be less than or equal to the number of commands undone.
 
 Examples:
