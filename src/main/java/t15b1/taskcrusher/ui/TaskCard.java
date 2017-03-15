@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import t15b1.taskcrusher.model.task.Deadline;
 import t15b1.taskcrusher.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -31,38 +32,36 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getTaskName().taskName);
+        name.setText(task.getTaskName().toString());
         id.setText(displayedIndex + ". ");
-        showDeadlineIfExists(task);
-        showPriorityIfExists(task);
-        showDescriptionIfExists(task);
+        showDeadline(task);
+        showPriority(task);
+        showDescription(task);
             
         initTags(task);
     }
 
-    private void showDescriptionIfExists(ReadOnlyTask task) {
-        if(task.getDescription().hasNoDescription())
-            description.setText("");
-        else
-            description.setText(task.getDescription().value);
+    private void showDescription(ReadOnlyTask task) {
+    	description.setText(task.getDescription().toString());
     }
 
-    private void showPriorityIfExists(ReadOnlyTask task) {
-        if(task.getPriority().isDefaultPriority())
-            priority.setText("");
-        else{
+    private void showPriority(ReadOnlyTask task) {
+        if (task.getPriority().hasPriority()) {
             StringBuilder stars = new StringBuilder();
-            for(int i=0; i<Integer.parseInt(task.getPriority().value); i++)
+            for(int i=0; i<Integer.parseInt(task.getPriority().toString()); i++)
                 stars.append("*");
             priority.setText(PRIORITY_PREPEND + stars.toString());
+        } else {
+            priority.setText("");
         }
     }
 
-    private void showDeadlineIfExists(ReadOnlyTask task) {
-        if(!task.getDeadline().hasDeadline())
-            deadline.setText(NO_DEADLINE);
-        else
-            deadline.setText(DEADLINE_BY + task.getDeadline().deadline);
+    private void showDeadline(ReadOnlyTask task) {
+        if (task.getDeadline().hasDeadline()) {
+            deadline.setText(DEADLINE_BY + task.getDeadline().toString());
+        } else {
+            deadline.setText(Deadline.NO_DEADLINE);
+        }
     }
 
     private void initTags(ReadOnlyTask person) {

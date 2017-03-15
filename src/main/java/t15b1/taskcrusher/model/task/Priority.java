@@ -9,11 +9,11 @@ import t15b1.taskcrusher.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = 
-            "When specified, priority should only take the value from 1 to 3. It's default is 0";
-    public static final String PRIORITY_VALIDATION_REGEX = "[0-3]";
-    public static final String PRIORITY_DEFAULT_VALUE = "0";
+            "Priority should only take the value from 1 to 3 when specified. Its default is 0";
+    public static final String NO_PRIORITY = "0";
+    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
 
-    public final String value;
+    public final String priority;
 
     /**
      * Validates given priority value.
@@ -22,40 +22,44 @@ public class Priority {
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
-        String trimmedPriority = priority.trim();
-        if (!isValidPriority(trimmedPriority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-        }
-        this.value = trimmedPriority;
+        
+		if (priority.equals(NO_PRIORITY)) {
+			this.priority = NO_PRIORITY;
+		} else if (isValidPriority(priority)) {
+			this.priority = priority;
+		} else {
+			throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+		}
     }
-    
-    public boolean isDefaultPriority(){
-        return value.equals(PRIORITY_DEFAULT_VALUE);
-    }
-    
-    /**
-     * Returns true if a given string is a valid priority value
-     */
-    public static boolean isValidPriority(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX);
-    }
-
 
     @Override
     public String toString() {
-        return value;
+        return priority;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.value.equals(((Priority) other).value)); // state check
+                && this.priority.equals(((Priority) other).priority)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return priority.hashCode();
+    }
+    
+    /**
+     * Checks whether a priority is valid
+     * @param priority
+     * @return
+     */
+    public static boolean isValidPriority(String priority) {
+        return priority.matches(PRIORITY_VALIDATION_REGEX);
+    }
+    
+    public boolean hasPriority(){
+        return !priority.equals(NO_PRIORITY);
     }
 
 }
