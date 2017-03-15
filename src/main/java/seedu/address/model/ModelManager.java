@@ -116,6 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
 			updateFilteredTaskList(new PredicateExpression(
 					new NameAndDateQualifier(keywords, date)));
 		}
+		indicateTaskManagerChanged();
 	}
 
 	private void updateFilteredTaskList(Expression expression) {
