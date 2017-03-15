@@ -186,21 +186,19 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add noflag", expectedMessage);
+        assertCommandFailure("add z Valid Name p/3 //valid description", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        assertCommandFailure("add t d/today p/1 //validdescription",
+        		String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure("add t validname p/not_numbers d/tomorrow //validdescription",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("add t validname p/1 d/yesterday //validdescription",
                 Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add t validname p/1 d/tomorrow //validdescription t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -445,6 +443,7 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
+            cmd.append("t ");
 
             cmd.append(task.getTaskName().toString());
             cmd.append(" d/").append(task.getDeadline());
