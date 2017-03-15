@@ -18,7 +18,7 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.title = taskToCopy.getTask();
+        this.title = taskToCopy.getTitle();
         this.tags = taskToCopy.getTags();
     }
 
