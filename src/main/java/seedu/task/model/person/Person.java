@@ -21,6 +21,8 @@ public class Person implements ReadOnlyPerson {
     private Time startTime;
     private Time endTime;
     private String description;
+    
+    public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time";
 
     private UniqueTagList tags;
 
@@ -42,8 +44,8 @@ public class Person implements ReadOnlyPerson {
     	this.endTime = endTime;
     	this.description = description;
     	try {
-	    	this.name = new Name("sa");
-	    	this.phone = new Phone("12312");
+	    	this.name = new Name("PLACEHOLDER NAME, SHOULD NOT SEE");
+	    	this.phone = new Phone("123");
 	    	this.email = new Email("asdfads@gmail.com");
 	    	this.address = new Address("22 Acacia Avenue");
 	    	tags = new UniqueTagList();
@@ -109,7 +111,7 @@ public class Person implements ReadOnlyPerson {
      * Replaces this person's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
+        //tags.setTags(replacement);
     }
 
     /**
@@ -117,12 +119,16 @@ public class Person implements ReadOnlyPerson {
      */
     public void resetData(ReadOnlyPerson replacement) {
         assert replacement != null;
-
-        this.setTaskName(replacement.getTaskName());
-        this.setDate(replacement.getDate());
-        this.setStartTime(replacement.getStartTime());
-        this.setEndTime(replacement.getEndTime());
-        this.setDescription(replacement.getDescription());
+        
+        try {
+	        this.setTaskName(replacement.getTaskName());
+	        this.setDate(replacement.getDate());
+	        this.setStartTime(replacement.getStartTime());
+	        this.setEndTime(replacement.getEndTime());
+	        this.setDescription(replacement.getDescription());
+        } catch (IllegalValueException ive) {
+        	System.out.println("error");
+        }
     }
 
     @Override
@@ -163,11 +169,19 @@ public class Person implements ReadOnlyPerson {
     public void setDate(Date date) {
     	this.date = date;
     }
-    public void setStartTime(Time startTime) {
-    	this.startTime = startTime;
+    public void setStartTime(Time startTime) throws IllegalValueException {
+    	if (this.endTime == null || this.endTime.compareTo(startTime) >= 0) {
+    		this.startTime = startTime;
+    	} else {
+    		throw new IllegalValueException(MESSAGE_INVALID_TIME);
+    	}
     }
-    public void setEndTime(Time endTime) {
-    	this.endTime = endTime;
+    public void setEndTime(Time endTime) throws IllegalValueException {
+    	if (this.startTime == null || this.startTime.compareTo(endTime) <= 0) {
+    		this.endTime = endTime;
+    	} else {
+    		throw new IllegalValueException(MESSAGE_INVALID_TIME);
+    	}
     }
     public void setDescription(String description) {
     	this.description = description;
