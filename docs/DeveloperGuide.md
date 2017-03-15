@@ -27,13 +27,13 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. Introduction
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="images/Ui.png" width="600"><br>
 _Figure 1.1 : Tâche User Interface_
 
 Tâche is an application designed for people who _store, retrieve and edit their to-do tasks frequently_. 
 We are also targeting our application towards desktop users who _prefer typing on the keyboard over the mouse_. 
 Hence, primary input for the application will be _command-driven_ and using the 
-[Command Line Interface](#command-line-interface) (CLI).  
+[Command Line Interface](#command-line-interface-cli) (CLI).  
 
 
 ## 2. Setting Up
@@ -45,37 +45,39 @@ Hence, primary input for the application will be _command-driven_ and using the
     > Having any Java 8 version is not enough. <br>
     Tâche will not work with earlier versions of Java 8.
 
-2. **Eclipse** Integrated Development Environment
-3. **e(fx)clipse** plugin for Eclipse (Follow the instructions from Step 2 onwards given in
+2. **Eclipse** [IDE](#integrated-development-environment-ide)
+3. **e(fx)clipse** plug-in for Eclipse (Follow the instructions from Step 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plug-in from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plug-in from the Eclipse Marketplace
 
 ### 2.2. Importing the Project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse
-	> Note: Ensure you have installed the **e(fx)clipse** and **Buildship** plug-ins as given
-   in the prerequisites above
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+1. Fork this [repo](#repository), and clone the fork to your computer. 
+2. Open Eclipse. 
+
+	> Note: Ensure that you have installed the **e(fx)clipse** and **Buildship** plug-ins as given
+   in the prerequisites above. 
+   
+3. Click `File` > `Import`. 
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`. 
+5. Click `Browse`, then locate the project's directory. 
+6. Click `Finish`. 
 
   > * If you are asked whether to `Keep` or `Overwrite` [config files](#config-file), choose to `Keep`.
   > * Gradle downloads library files from servers during the project set up process. <br>
-  Hence, depending on your connection speed and server load, it can even take up to _30 minutes_ for the set up to finish. 
+  Hence, depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish. 
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 2.3. Configuring Checkstyle
 
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. tache
-4. Import the Checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice, and rebuild project if prompted
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`. 
+2. Choose `External Configuration File` under `Type`. 
+3. Enter an arbitrary configuration name.  e.g. tache
+4. Import the Checkstyle configuration file found at `config/checkstyle/checkstyle.xml`. 
+5. Click OK once, go to the `Main` tab, and use the newly imported check configuration. 
+6. Tick and select `files from packages`, click `Change...`, and select the `resources` package. 
+7. Click OK twice, and rebuild project if prompted. 
 
 > Note: You can click on the `files from packages` text after ticking in order to enable the `Change...` 
 button. 
@@ -85,24 +87,25 @@ button.
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
 * Reason: Eclipse fails to recognize new files that appeared due to the Git pull. 
-* Solution: _Refresh_ the project in Eclipse: <br>
-  > Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
+* Solution: Refresh the project in Eclipse. 
+
+  > Right click on the project (in Eclipse package explorer), then choose `Gradle` -> `Refresh Gradle Project`.
 
 **Problem: Eclipse reports some required libraries missing**
 
 * Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md) once to refresh the libraries.
 
 
 ## 3. Design
 
-> Tip: The `.pptx` files used to create diagrams in this section can be found in the 
-[diagrams](diagrams/) folder.
+The `.pptx` files used to create diagrams in this section can be found in the 
+[diagrams](diagrams/) folder. <br> 
 
-> You can update a diagram using the following steps:
-1. Modify the diagram in the pptx file
-2. Select the objects of the diagram
-3. Choose `Save as picture`
+You can update a diagram using the following steps:
+1. Modify the diagram in the pptx file. 
+2. Select the objects of the diagram. 
+3. Choose `Save as picture`. 
 
 ### 3.1. Architecture
 
@@ -113,24 +116,27 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 
 #### Main Component
 
-[**'Main'**](#main-component) has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). 
+[**`Main`**](#main-component) has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). 
 
 Functions of `Main`: 
 
-* **At App Launch:** Initializes the components in the correct sequence and connects them with one another
-* **At Shut Down:** Shuts down the components and invokes cleanup method where necessary
+* **At app launch:** Initializes the components in the correct sequence and connects them with one another
+* **At shut down:** Shuts down the components and invokes cleanup method where necessary
 
 #### Commons Component
 
-[**`Commons`**](#commons-component) represents a collection of classes used by multiple other components. <br>
+[**`Commons`**](#commons-component) represents a collection of classes used by multiple other components.
 This collection is encapsulated in the `seedu.addressbook.commons` package. <br>
 2 classes in the package, `EventsCenter` and `LogsCenter`, play important roles at the architecture level as discussed. 
 
-Functions of `EventsCenter` and `LogsCenter`: 
+Function of `EventsCenter`: 
 
-* `EventsCenter` : Uses events to facilitate _inter-component communication_ via an _Event-Driven_ design
+* Uses events to facilitate inter-component communication via an _Event-Driven_ design
 > This class is written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained). 
-* `LogsCenter` : Allows many classes to _write log messages_ to Tâche's log file
+
+Function of `LogsCenter`: 
+
+* Allows many classes to write log messages to Tâche's log file
 
 #### Other Components
 
@@ -144,22 +150,22 @@ The rest of Tâche consists of the following four components:
 The _Sequence Diagram_ below shows how the different components interact when the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeleteTask.png" width="800"><br>
+<img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 3.1.2a : Component Interactions for `delete 1` Command (Part 1)_
 
 > Note how the `Model` simply raises a `TaskManagerChangedEvent` when Tâche's data is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the following: 
+The diagram below shows how `EventsCenter` reacts to that event, which eventually results in the following: 
 * Updates saved to the hard disk
 * Status bar of the [User Interface](#user-interface) (UI) updated to reflect the 'Last Updated' time
 
-<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
+<img src="images/SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 3.1.2b : Component Interactions for `delete 1` Command (Part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. <br>
-  This is an example of how this Event-Driven approach helps us _reduce direct coupling_ between components.
+  This is an example of how this Event-Driven approach helps us reduce direct coupling between components.
   
 Each of the four components: 
 
@@ -182,7 +188,7 @@ The [User Interface](#user-interface) (UI) consists of a `MainWindow` that is ma
 e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `CalendarDisplay`, `BrowserPanel` etc. 
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-> The `UI` component uses the _JavaFX UI framework_. <b>
+> The `UI` component uses the _JavaFX UI framework_. <br>
 The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
@@ -602,6 +608,10 @@ Here are some terms that are worth defining: <br>
 
 > A single or combination of keys that is registered with the system to perform specific activity when pressed
 
+#### Integrated Development Environment (IDE): 
+
+> An application that provides comprehensive facilities for software development
+
 #### Mainstream OS:
 
 > Windows, Linux, Mac
@@ -617,6 +627,10 @@ Here are some terms that are worth defining: <br>
 #### Recurring task:
 
 > A task that has to be completed periodically (e.g. daily or monthly)
+
+#### Repository (or "repo"):
+
+> A location where all the files of a particular project are stored
 
 #### Subtask:
 
