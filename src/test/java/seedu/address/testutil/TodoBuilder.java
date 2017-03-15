@@ -31,26 +31,22 @@ public class TodoBuilder {
         return this;
     }
 
-    public TodoBuilder withStartTime(String DateTime) throws IllegalValueException {
-        Date SetDateTime;
+    public TodoBuilder withStartTime(String strDateTime) throws IllegalValueException {
         try {
-            SetDateTime = new SimpleDateFormat("yy-MM-dd'T'HH:mm").parse(DateTime);
-	        this.todo.setStartTime(SetDateTime);
-	        return this;
-		} catch (ParseException e) {
-	        e.printStackTrace();
+            this.todo.setStartTime(new SimpleDateFormat("yy-MM-dd'T'HH:mm").parse(strDateTime));
+            return this;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    public TodoBuilder withEndTime(String DateTime) throws IllegalValueException {
-        Date SetDateTime;
+    public TodoBuilder withEndTime(String strDateTime) throws IllegalValueException {
         try {
-            SetDateTime = new SimpleDateFormat("yy-MM-dd'T'HH:mm").parse(DateTime);
-	        this.todo.setEndTime(SetDateTime);
-	        return this;
-		} catch (ParseException e) {
-	        e.printStackTrace();
+            this.todo.setEndTime(new SimpleDateFormat("yy-MM-dd'T'HH:mm").parse(strDateTime));
+            return this;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return null;
     }

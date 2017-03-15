@@ -86,7 +86,7 @@ public class TodoCardHandle extends GuiHandle {
                 && getTags().equals(getTags(todo.getTags()));
 
         } else {
-        	return getFullName().equals(todo.getName().fullName)
+            return getFullName().equals(todo.getName().fullName)
                     && getTags().equals(getTags(todo.getTags()));
         }
     }
