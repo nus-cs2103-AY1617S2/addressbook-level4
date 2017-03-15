@@ -1,4 +1,4 @@
-# Address Book (Level 4)
+# DoTomorrow
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T11-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T11-B4/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/577pgluuyspav7bx?svg=true)](https://ci.appveyor.com/project/evanyeung/main)
