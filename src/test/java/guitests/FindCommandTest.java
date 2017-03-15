@@ -15,7 +15,7 @@ public class FindCommandTest extends TodoListGuiTest {
         assertFindResult("find homework", td.math, td.english); // multiple results
 
         //find after deleting one result
-        commandBox.runCommand("delete 3");
+        commandBox.runCommand("delete 1");
         assertFindResult("find homework", td.english);
     }
 

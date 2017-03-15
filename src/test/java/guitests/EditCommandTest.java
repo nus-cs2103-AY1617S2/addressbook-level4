@@ -58,12 +58,12 @@ public class EditCommandTest extends TodoListGuiTest {
 
         String detailsToEdit = "Feed the cat";
         int filteredTodoListIndex = 1;
-        int addressBookIndex = 5;
+        int todoListIndex = 2;
 
-        TestTodo todoToEdit = expectedTodosList[addressBookIndex - 1];
+        TestTodo todoToEdit = expectedTodosList[todoListIndex - 1];
         TestTodo editedTodo = new TodoBuilder(todoToEdit).withName("Feed the cat").build();
 
-        assertEditSuccess(filteredTodoListIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(filteredTodoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_duplicateTodo_failure() {
-        commandBox.runCommand("edit 1 Walk the dog t/petcare");
+        commandBox.runCommand("edit 2 Walk the dog t/petcare");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
     }
 
