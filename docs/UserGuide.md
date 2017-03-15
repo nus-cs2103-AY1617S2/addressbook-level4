@@ -238,7 +238,7 @@ There is no need to save manually.
 
 * **Find exact** : `findexact KEYWORD...`
   e.g. `findexact do homework`
- 
+
 * **Delete** : `delete INDEX`
    e.g. `delete 3`
 
@@ -248,5 +248,4 @@ There is no need to save manually.
 
 * **Save location** : `save PATHNAME`
    e.g. `save C:\Program Files`
-
-
+   
