@@ -17,10 +17,12 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_WORD2 = "a";
     public static final String COMMAND_WORD3 = "+";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
-            + "Parameters: NAME \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a task with and without date to the task list. \n"
+            + " Does not allow time without date. \n"
+            + "Parameters: NAME d/DATE t/TIME\n"
             + "Example: " + COMMAND_WORD
-            + " Read Harry Potter book 1";
+            + " Read Harry Potter book 1 ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 

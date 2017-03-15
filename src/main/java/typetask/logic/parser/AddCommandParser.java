@@ -18,6 +18,7 @@ public class AddCommandParser {
     private final int floatingTask = 0;
     private final int deadlineTaskWithTime = 1;
     private final int deadlineTaskWithoutTime = 2;
+    private final int deadlineTaskWithTimeNoDate = 3;
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -37,6 +38,8 @@ public class AddCommandParser {
                         argsTokenizer.getValue(PREFIX_DATE).get(),
                         argsTokenizer.getValue(PREFIX_TIME).get()
                 );
+            } else if (checkTaskType(argsTokenizer) == deadlineTaskWithTimeNoDate) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             } else {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
@@ -57,6 +60,8 @@ public class AddCommandParser {
             return deadlineTaskWithTime;
         } else if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
             return deadlineTaskWithoutTime;
+        } else if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
+            return deadlineTaskWithTimeNoDate;
         } else {
             return floatingTask;
         }
