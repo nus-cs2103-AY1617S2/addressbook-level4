@@ -59,16 +59,14 @@ public class SaveCommand extends Command {
         if (file.exists()) {
             return new CommandResult(MESSAGE_DUPLICATE_FILE);
         }
-        logger.info("created file : " + file.toString());
         try {
             FileUtil.createIfMissing(file);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_CANNOT_CREATE_FILE);
         }
-        logger.info("created file : " + file.toString());
         TaskManagerSaveChangedEvent event = new TaskManagerSaveChangedEvent(this.model.getTaskManager(),
                 this.saveFilePath);
-        logger.info("created event : " + event.toString());
+        logger.info("Created event : " + event.toString());
         EventsCenter.getInstance().post(event);
         this.storage.handleTaskManagerSaveChangedEvent(event);
         logger.info("---------------------------------------HANDLED event : " + event.toString());

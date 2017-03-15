@@ -5,7 +5,6 @@ import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.logging.Logger;
 
 import seedu.doit.commons.core.LogsCenter;
-import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.IncorrectCommand;
@@ -22,17 +21,15 @@ public class SaveCommandParser {
      * AddCommand and returns an AddCommand object for execution.
      *
      * @throws IllegalValueException
-     * @throws DataConversionException
      *             if not xml file type
      */
     public Command parse(String args) {
         assert args != null;
         String filePath = args.trim();
-        logger.info("argument for save is " + filePath);
+        logger.info("Argument for save is " + filePath);
         try {
             return new SaveCommand(filePath);
         } catch (IllegalValueException ive) {
-            logger.info("_________________Throws IllegalValueException ");
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
 
