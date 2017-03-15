@@ -37,7 +37,7 @@ public class SampleDataUtil {
         try {
             AddressBook sampleAB = new AddressBook();
             for (Person samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+                sampleAB.addTask(samplePerson);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
