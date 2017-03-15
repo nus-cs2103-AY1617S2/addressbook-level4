@@ -43,15 +43,21 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     void loadTaskPage(ReadOnlyTask task) {
-
-        name1.setText(task.getName().taskName);
+    	
+    	name1.setText(task.getName().taskName);
 //        id.setText(displayedIndex + ". ");
         description1.setText(task.getDescription().toString());
         start_time.setText(task.getStartDateTime().toString());
         end_time.setText(task.getEndDateTime().toString());
   //    tags.setAccessibleText(task.getTags().toString());
-        task.getTags().forEach(tag -> tags.getChildren().toString());
+        initTags(task);
+  //    task.getTags().forEach(tag -> tags.getChildren().toString());
   //    task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+    
+    private void initTags(ReadOnlyTask task) {
+    	tags.getChildren().clear();
+    	task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 }
