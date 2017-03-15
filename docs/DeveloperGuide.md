@@ -531,7 +531,7 @@ Pros:
 Cons:
 
 * Does not have good calendar integration.
-* Can not be used offline.
+* Cannot be used offline.
 * Certain operations requires clicking (e.g. dragging and dropping tasks between list), which is not what Jim wants.
 
 **Google Tasks**
