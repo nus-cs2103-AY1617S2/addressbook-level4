@@ -11,21 +11,12 @@ By : `Team myPotato`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `FEB 2017`  &nbsp;&nbsp;&n
 
 ## 1. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
-
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
-
-1. Download and install the latest version of myPotato.
-2. Double-click the icon to start myPotato. The GUI should appear in a few seconds.
+1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+2. Download and install the latest version of myPotato.
+3. Double-click the icon to start myPotato. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
-3. Type the command in the command line and press <kbd>Enter</kbd> to execute it. <br>
+4. Type the command in the command line and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-4. Some example commands you can try:
-   * **`list`** : Lists all tasks
-   * **`add`** : CS2103 midterm d/27/03 : adds a task to the task list. 
-   * **`delete`**` 3` : Deletes the 3rd task shown in the current list
-   * **`exit`** : Exits myPotato
 5. Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -47,7 +38,8 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list.<br>
-Format: `add TASK_TITLE by [d/DATE] [#tags]`
+Format: `add TITLE d/[CONTENT] from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`
+Format: `add TITLE d/[CONTENT] by/[DATE] [TIME] [#tags]`
 
 > Tasks can have any number of tags (including 0)
 
@@ -63,7 +55,8 @@ Format: `list`
 ### 2.4. Editing a task: `edit`
 
 Edits an existing task in the task list. <br>
-Format: `edit INDEX [TASK_TITLE] [d/date] [#tags]`
+Format: `edit INDEX TITLE d/CONTENT from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`
+Format: `edit INDEX TITLE d/CONTENT by/[DATE] [TIME] [#tags]`
 
 > TheEdits the person at the specified INDEX. 
 > The index refers to the index number shown in the last person listing.
