@@ -41,7 +41,7 @@ public class TypicalTestTasks {
             // Deadline with no time
             taskE = new TaskBuilder().withName("complete 2103 tutorial")
                     .withStartDate("").withEndDate("tomorrow")
-                    .withDescription("bring weapon")
+                    .withDescription("bring laptop")
                     .withTags("school", "favourite")
                     .build();
             // Deadline with many missing info
