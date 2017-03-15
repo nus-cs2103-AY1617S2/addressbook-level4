@@ -27,7 +27,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Task to the to-do list. "
             + "Parameters: TITLE @@VENUE from:STARTTIME to:ENDTIME **URGENCYLEVEL d:DESCRIPTION  ##[TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " CS2103 Tutorial @@COM1-B110 from:March 8,10.00am to:March 8, 11.00am **5 d:have to present V0.2 ##lesson ##project";
+            + " CS2103 Tutorial @@COM1-B110 from:March 8,10.00am to:March 8, 11.00am "
+            + "**5 d:have to present V0.2 ##lesson ##project";
 
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
@@ -39,8 +40,9 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, Optional<String> venue, Optional<String> starttime, Optional<String> endtime, Optional<String> urgencyLevel, Optional<String> description, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(String title, Optional<String> venue, Optional<String> starttime, Optional<String> endtime,
+            Optional<String> urgencyLevel, Optional<String> description, Set<String> tags)
+                    throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -53,27 +55,27 @@ public class AddCommand extends Command {
         UrgencyLevel tempUrgencyLevel = null;
         Description tempDescription = null;
 
-        if(venue.isPresent()) {
+        if (venue.isPresent()) {
             tempVenue = new Venue(venue.get());
         } else {
             tempVenue = new Venue("");
         }
-        if(starttime.isPresent()) {
+        if (starttime.isPresent()) {
             tempStartTime = new StartTime(starttime.get());
         } else {
             tempStartTime = new StartTime("");
         }
-        if(endtime.isPresent()) {
+        if (endtime.isPresent()) {
             tempEndTime = new EndTime(endtime.get());
         } else {
             tempEndTime = new EndTime("");
         }
-        if(urgencyLevel.isPresent()) {
+        if (urgencyLevel.isPresent()) {
             tempUrgencyLevel = new UrgencyLevel(urgencyLevel.get());
         } else {
             tempUrgencyLevel = new UrgencyLevel("");
         }
-        if(description.isPresent()) {
+        if (description.isPresent()) {
             tempDescription = new Description(description.get());
         } else {
             tempDescription = new Description("");

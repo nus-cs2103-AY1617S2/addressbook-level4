@@ -22,7 +22,7 @@ public class Description {
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
-        if(description.isEmpty()) {
+        if (description.isEmpty()) {
             this.value = description;
         } else {
             String trimmedDescription = description.trim();

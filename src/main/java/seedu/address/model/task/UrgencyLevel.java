@@ -21,7 +21,7 @@ public class UrgencyLevel {
      */
     public UrgencyLevel(String urgencyLevel) throws IllegalValueException {
         assert urgencyLevel != null;
-        if(urgencyLevel.isEmpty()) {
+        if (urgencyLevel.isEmpty()) {
             this.value = urgencyLevel;
             this.int_value = 0;
         } else {
@@ -46,7 +46,7 @@ public class UrgencyLevel {
         return value;
     }
 
-    public int getIntValue(){
+    public int getIntValue() {
         return int_value;
     }
 

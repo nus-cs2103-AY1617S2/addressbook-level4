@@ -20,7 +20,7 @@ public class StartTime {
      */
     public StartTime(String starttime) throws IllegalValueException {
         assert starttime != null;
-        if(starttime.isEmpty()) {
+        if (starttime.isEmpty()) {
             this.value = starttime;
         } else {
             String trimmedStartTime = starttime.trim();

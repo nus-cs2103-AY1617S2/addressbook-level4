@@ -23,7 +23,8 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime, UrgencyLevel urgencylevel,Description description, UniqueTagList tags) {
+    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime,
+            UrgencyLevel urgencylevel, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
         this.title = title;
         this.venue = venue;
@@ -38,7 +39,8 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(), source.getUrgencyLevel(), source.getDescription(),source.getTags());
+        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(),
+                source.getUrgencyLevel(), source.getDescription(), source.getTags());
     }
 
     public void setTitle(Title name) {
@@ -90,7 +92,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     public UrgencyLevel getUrgencyLevel() {
         return urgencyLevel;
     }
-    
+
     @Override
     public Description getDescription() {
         return description;
@@ -132,7 +134,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
@@ -145,7 +147,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     public String toString() {
         return getAsText();
     }
-    
+
     @Override
     public int compareTo(Task task) {
         return task.getUrgencyLevel().getIntValue() - this.getUrgencyLevel().getIntValue();

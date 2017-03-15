@@ -27,7 +27,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer)[TITLE][@@VENUE][from:STARTTIME][**URGENCYLEVEL][d:DESCRIPTION][to:ENDTIME][##TAG]..\n"
+            + "Parameters: INDEX (must be a positive integer)[TITLE][@@VENUE][from:STARTTIME]"
+            + "[**URGENCYLEVEL][d:DESCRIPTION][to:ENDTIME][##TAG]..\n"
             + "Example: " + COMMAND_WORD + " 1 @@Toilet";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -76,7 +77,7 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+            EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
@@ -87,7 +88,8 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel, updatedDescription, updatedTags);
+        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime,
+                updatedUrgencyLevel, updatedDescription, updatedTags);
     }
 
     /**
@@ -115,12 +117,12 @@ public class EditCommand extends Command {
             this.tags = toCopy.getTags();
         }
 
-
-		/**
+        /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime, this.urgencyLevel, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime,
+                    this.urgencyLevel, this.description, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {

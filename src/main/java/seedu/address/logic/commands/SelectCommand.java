@@ -37,12 +37,12 @@ public class SelectCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        
+
         ReadOnlyTask task = model.getFilteredTaskList().get(targetIndex - 1);
-        
-        String SELECT_COMMAND_RESULT = String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex) + "\n" 
-        + "Task selected: " + task.getTitle().title + "\n"
-        + "Description of task: " + task.getDescription().toString();
+
+        String SELECT_COMMAND_RESULT = String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex) + "\n"
+                + "Task selected: " + task.getTitle().title + "\n"
+                + "Description of task: " + task.getDescription().toString();
         return new CommandResult(SELECT_COMMAND_RESULT);
 
     }

@@ -27,7 +27,7 @@ public class EndTime {
      */
     public EndTime(String endtime) throws IllegalValueException {
         assert endtime != null;
-        if(endtime.isEmpty()) {
+        if (endtime.isEmpty()) {
             this.value = endtime;
         } else {
             String trimmedEndTime = endtime.trim();

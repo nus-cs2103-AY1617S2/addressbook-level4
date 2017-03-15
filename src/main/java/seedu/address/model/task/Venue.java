@@ -22,7 +22,7 @@ public class Venue {
      */
     public Venue(String venue) throws IllegalValueException {
         assert venue != null;
-        if(venue.isEmpty()) {
+        if (venue.isEmpty()) {
             this.value = venue;
         } else {
             String trimmedVenue = venue.trim();
