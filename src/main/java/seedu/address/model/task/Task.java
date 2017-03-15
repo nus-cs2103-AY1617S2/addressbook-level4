@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
@@ -40,7 +41,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getStatus(),
+        this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
                 source.getNote(), source.getDeadline(), source.getTags());
     }
 
@@ -60,8 +61,8 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
+    public Optional<Priority> getPriority() {
+        return Optional.of(priority);
     }
 
     public void setStatus(Status status) {
@@ -112,7 +113,7 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPriority(replacement.getPriority());
+        this.setPriority(replacement.getPriority().orElse(null));
         this.setStatus(replacement.getStatus());
         this.setNote(replacement.getNote());
         this.setDeadline(replacement.getDeadline());

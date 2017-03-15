@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -9,7 +11,7 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Priority getPriority();
+    Optional<Priority> getPriority();
     Status getStatus();
     Note getNote();
     Deadline getDeadline();
@@ -38,16 +40,20 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Status: ")
-                .append(getStatus())
-                .append(" Note: ")
-                .append(getNote())
-                .append(" Deadline: ")
-                .append(getDeadline().toString())
-                .append(" Tags: ");
+
+        builder.append(getName());
+
+        if (getPriority().isPresent()) {
+            builder.append(" Priority: ").append(getPriority().get().toString());
+        }
+
+        builder.append(" Status: ");
+        builder.append(getStatus());
+        builder.append(" Note: ");
+        builder.append(getNote());
+        builder.append(" Deadline: ");
+        builder.append(getDeadline().toString());
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
