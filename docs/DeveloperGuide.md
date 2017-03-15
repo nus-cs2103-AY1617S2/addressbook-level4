@@ -137,6 +137,24 @@ The following are of some key files in the `Ui` component:
 - `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands
 
 ### 3. Logic component
+The `Logic` component handles the execution of commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
+
+The following diagram demonstrate the structure of the `Logic` component  
+<br><img src="images/LogicComponentClassDiagram.jpg" width="800"><br> 
+
+The following are of some key files in the `Logic` component:
+- [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain   
+    These operations are defined using different methods (API).  
+    Some representatives methods are listed here:  
+    ```java
+    - CommandResult execute(String commandText) throws CommandException;
+    - ObservableList<ReadOnlyTask> getFilteredPersonList();
+    ```
+- `LogicManager.java`: contains a `class` that implements the operations specified in `Model.java`.
+- `Parser.java`: contains a `class` that is in charge of parsing commands.
+- `Command.java`: contains a `class` that represents each command defined in Doist.
+- `ParserUtil.java`: contains a class that stores useful methods that are used by the Parser.
+
 ### 4. Model component
 The `Model` component defines classes to represent the data that Doist operates on. It also specifies and implements the operations on these data.  
   
