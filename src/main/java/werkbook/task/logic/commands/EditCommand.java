@@ -138,15 +138,6 @@ public class EditCommand extends Command {
                     this.endDateTime, this.tags);
         }
 
-        public UniqueTagList mergeFromFirst(UniqueTagList source, UniqueTagList dest) {
-            UniqueTagList newList = null;
-
-            Tag first = source.toSet().toArray(new Tag[1])[0];
-            System.out.println(first.tagName);
-
-            return newList;
-        }
-
         public void setName(Optional<Name> name) {
             assert name != null;
             this.name = name;

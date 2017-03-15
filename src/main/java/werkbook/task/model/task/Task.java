@@ -113,10 +113,6 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        for (Tag t : replacement.getTags()) {
-            System.out.println(t.toString());
-        }
-
         this.setName(replacement.getName());
         this.setDescription(replacement.getDescription());
         this.setStartDateTime(replacement.getStartDateTime());
