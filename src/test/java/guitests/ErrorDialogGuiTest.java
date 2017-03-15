@@ -9,7 +9,7 @@ import org.teamstbf.yats.commons.events.storage.DataSavingExceptionEvent;
 
 import guitests.guihandles.AlertDialogHandle;
 
-public class ErrorDialogGuiTest extends AddressBookGuiTest {
+public class ErrorDialogGuiTest extends TaskManagerGuiTest {
 
     @Test
     public void showErrorDialogs() throws InterruptedException {

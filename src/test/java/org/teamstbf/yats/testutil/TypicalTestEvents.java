@@ -11,7 +11,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 public class TypicalTestEvents {
 
 	public static void loadAddressBookWithSampleData(TaskManager ab) {
-		for (TestEvent person : new TypicalTestEvents().getTypicalPersons()) {
+		for (TestEvent person : new TypicalTestEvents().getTypicalTasks()) {
 			try {
 				ab.addEvent(new Event(person));
 			} catch (UniqueEventList.DuplicateEventException e) {
@@ -20,15 +20,19 @@ public class TypicalTestEvents {
 		}
 	}
 
-	public TestEvent abdicate, boop, cower, duck;
+	public TestEvent abdicate, boop, oxygen, cower, duck;
 
 	public TypicalTestEvents() {
 		try {
 			abdicate = new EventBuilder().withTitle("Abdicate the British Throne")
 					.withDescription("caught having a mistress").withStartTime("7:00am").withEndTime("9:00am")
 					.withLocation("Buckingham Palace").withPeriodic("none").withTags("KingGeorgeVI").build();
-			boop = new EventBuilder().withTitle("Boop").withDescription("Boop that nose").withStartTime("1:00am")
-					.withEndTime("2:00am").withLocation("King's Row").withPeriodic("daily").withTags("reaper").build();
+			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose")
+					.withStartTime("1:00am").withEndTime("2:00am").withLocation("King's Row").withPeriodic("daily")
+					.withTags("reaper").build();
+			oxygen = new EventBuilder().withTitle("Oxygen not Included").withDescription("Don't starve together")
+					.withStartTime("3:00am").withEndTime("5:00am").withLocation("Klei Entertainment")
+					.withPeriodic("weekly").withTags("ONN").build();
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
@@ -51,7 +55,7 @@ public class TypicalTestEvents {
 		return ab;
 	}
 
-	public TestEvent[] getTypicalPersons() {
-		return new TestEvent[] { abdicate, boop };
+	public TestEvent[] getTypicalTasks() {
+		return new TestEvent[] { abdicate, boop, oxygen, cower, duck };
 	}
 }

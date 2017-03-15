@@ -16,12 +16,12 @@ import org.teamstbf.yats.testutil.TestEvent;
 import guitests.guihandles.PersonCardHandle;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TaskManagerGuiTest {
 
 	// The list of persons in the person list panel is expected to match this
 	// list.
 	// This list is updated with every successful call to assertEditSuccess().
-	TestEvent[] expectedPersonsList = td.getTypicalPersons();
+	TestEvent[] expectedPersonsList = td.getTypicalTasks();
 
 	/**
 	 * Checks whether the edited person has the correct updated details.
@@ -41,13 +41,13 @@ public class EditCommandTest extends AddressBookGuiTest {
 		commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
 		// confirm the new card contains the right data
-		PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTitle().fullName);
+		PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTitle().fullName);
 		assertMatching(editedPerson, editedCard);
 
 		// confirm the list now contains all previous persons plus the person
 		// with updated details
 		expectedPersonsList[addressBookIndex - 1] = editedPerson;
-		assertTrue(personListPanel.isListMatching(expectedPersonsList));
+		assertTrue(taskListPanel.isListMatching(expectedPersonsList));
 		assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
 	}
 
