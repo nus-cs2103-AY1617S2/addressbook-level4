@@ -14,7 +14,7 @@ public interface ReadOnlyTask {
     Optional<Priority> getPriority();
     Status getStatus();
     Optional<Note> getNote();
-    Deadline getDeadline();
+    Optional<Deadline> getDeadline();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -54,8 +54,10 @@ public interface ReadOnlyTask {
             builder.append(" Note: ").append(getNote().get().toString());
         }
 
-        builder.append(" Deadline: ");
-        builder.append(getDeadline().toString());
+        if (getDeadline().isPresent()) {
+            builder.append(" Deadline: ").append(getDeadline().get().toString());
+        }
+
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -42,7 +42,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
-                source.getNote().orElse(null), source.getDeadline(), source.getTags());
+                source.getNote().orElse(null), source.getDeadline().orElse(null), source.getTags());
     }
 
     public void setName(Name name) {
@@ -86,8 +86,8 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Deadline getDeadline() {
-        return deadline;
+    public Optional<Deadline> getDeadline() {
+        return Optional.of(deadline);
     }
 
     public void setDeadline(Deadline deadline) {
@@ -116,7 +116,7 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority().orElse(null));
         this.setStatus(replacement.getStatus());
         this.setNote(replacement.getNote().orElse(null));
-        this.setDeadline(replacement.getDeadline());
+        this.setDeadline(replacement.getDeadline().orElse(null));
         this.setTags(replacement.getTags());
     }
 
