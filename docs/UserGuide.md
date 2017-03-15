@@ -2,6 +2,8 @@
 
 &nbsp;
 
+## Table of contents
+
 1. [Intoduction](#intoduction)
 2. [Quick Start](#quick-start)
 3. [Features](#features)
@@ -344,7 +346,7 @@ Examples:
 
 
 ### 3.18. Clearing all Entries : `clear`
-Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. 
+Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. <br> 
 `*WARNING*` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
@@ -357,16 +359,15 @@ Format: `exit`
 
 
 ### 3.20. Saving the data
-
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
 
 
 ### 3.21. Differentiating your tasks’ urgency
 TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
 
-`Red`: this uncompleted task’s deadline has passed! Better get on to it.
-`Yellow`: this uncompleted task was labelled as a priority
-`Green`: this uncompleted task has a deadline but is not due yet. Phew!
+`Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
+`Yellow`: this uncompleted task was labelled as a priority. <br>
+`Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
 
 ```
 > Note that all tasks that fall outside of these categories will appear normally (i.e. no additional colours).
