@@ -15,7 +15,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 	3.4. [Model](#34-model-component) <br>
 	3.5. [Storage](#35-storage-component) <br>
 4. [Implementation](#4-implementation) <br>
-6. [Testing](#5-testing) 
+6. [Testing](#5-testing)
 5. [Dev Ops](#6-dev-ops)
 
 ## Appendices
@@ -32,10 +32,10 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 <img src="images/Ui.png" width="600"><br>
 _Figure 1.1 : Tâche User Interface_
 
-Tâche is an application designed for people who _store, retrieve and edit their to-do tasks frequently_. 
-We are also targeting our application towards desktop users who _prefer typing on the keyboard over the mouse_. 
-Hence, primary input for the application will be _command-driven_ and using the 
-[Command Line Interface](#command-line-interface-cli) (CLI).  
+Tâche is an application designed for people who _store, retrieve and edit their to-do tasks frequently_.
+We are also targeting our application towards desktop users who _prefer typing on the keyboard over the mouse_.
+Hence, primary input for the application will be _command-driven_ and using the
+[Command Line Interface](#command-line-interface-cli) (CLI).
 
 
 ## 2. Setting Up
@@ -55,47 +55,47 @@ Hence, primary input for the application will be _command-driven_ and using the
 
 ### 2.2. Importing the Project into Eclipse
 
-1. Fork this [repo](#repository-or-repo), and clone the fork to your computer. 
-2. Open Eclipse. 
+1. Fork this [repo](#repository-or-repo), and clone the fork to your computer.
+2. Open Eclipse.
 
 	> Note: Ensure that you have installed the **e(fx)clipse** and **Buildship** plug-ins as given
-   in the prerequisites above. 
-   
-3. Click `File` > `Import`. 
-4. Click `Gradle` > `Gradle Project` > `Next` > `Next`. 
-5. Click `Browse`, then locate the project's directory. 
-6. Click `Finish`. 
+   in the prerequisites above.
+
+3. Click `File` > `Import`.
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`.
+5. Click `Browse`, then locate the project's directory.
+6. Click `Finish`.
 
   > * If you are asked whether to `Keep` or `Overwrite` [config files](#configuration-or-config-file), choose to `Keep`.
   > * Gradle downloads library files from servers during the project set up process. <br>
-  Hence, depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish. 
+  Hence, depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish.
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 2.3. Configuring Checkstyle
 
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`. 
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`.
 
-2. Choose `External Configuration File` under `Type`. 
+2. Choose `External Configuration File` under `Type`.
 
 3. Enter an arbitrary configuration name.  e.g. tache
 
-4. Import the Checkstyle configuration file found at `config/checkstyle/checkstyle.xml`. 
+4. Import the Checkstyle configuration file found at `config/checkstyle/checkstyle.xml`.
 
-5. Click OK once, go to the `Main` tab, and use the newly imported check configuration. 
+5. Click OK once, go to the `Main` tab, and use the newly imported check configuration.
 
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package. 
+6. Tick and select `files from packages`, click `Change...`, and select the `resources` package.
 
-7. Click OK twice, and rebuild project if prompted. 
+7. Click OK twice, and rebuild project if prompted.
 
-> Note: You can click on the `files from packages` text after ticking in order to enable the `Change...` 
-button. 
+> Note: You can click on the `files from packages` text after ticking in order to enable the `Change...`
+button.
 
 ### 2.4. Troubleshooting Project Setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull. 
-* Solution: Refresh the project in Eclipse. 
+* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
+* Solution: Refresh the project in Eclipse.
 
   > Right click on the project (in Eclipse package explorer), then choose `Gradle` -> `Refresh Gradle Project`.
 
@@ -108,15 +108,15 @@ button.
 
 ## 3. Design
 
-The `.pptx` files used to create diagrams in this section can be found in the 
-[diagrams](diagrams/) folder. <br> 
+The `.pptx` files used to create diagrams in this section can be found in the
+[diagrams](diagrams/) folder. <br>
 
 You can update a diagram using the following steps:
-1. Modify the diagram in the pptx file. 
+1. Modify the diagram in the pptx file.
 
-2. Select the objects of the diagram. 
+2. Select the objects of the diagram.
 
-3. Choose `Save as picture`. 
+3. Choose `Save as picture`.
 
 ### 3.1. Architecture
 
@@ -127,9 +127,9 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 
 #### Main Component
 
-[**`Main`**](#main-component) has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). 
+[**`Main`**](#main-component) has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java).
 
-Functions of `Main`: 
+Functions of `Main`:
 
 * **At app launch:** Initializes the components in the correct sequence and connects them with one another
 
@@ -140,15 +140,15 @@ Functions of `Main`:
 [**`Commons`**](#commons-component) represents a collection of classes used by multiple other components.
 This collection is encapsulated in the `seedu.addressbook.commons` package. <br>
 
-2 classes in the package, `EventsCenter` and `LogsCenter`, play important roles at the architecture level as discussed. 
+2 classes in the package, `EventsCenter` and `LogsCenter`, play important roles at the architecture level as discussed.
 
-Function of `EventsCenter`: 
+Function of `EventsCenter`:
 
 * Uses events to facilitate inter-component communication via an _Event-Driven_ design
 
-  > This class is written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained). 
+  > This class is written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained).
 
-Function of `LogsCenter`: 
+Function of `LogsCenter`:
 
 * Allows many classes to write log messages to Tâche's log file
 
@@ -173,7 +173,7 @@ _Figure 3.1.2a : Component Interactions for `delete 1` Command (Part 1)_
 > Note how the `Model` simply raises a `TaskManagerChangedEvent` when Tâche's data is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how `EventsCenter` reacts to that event, which eventually results in the following: 
+The diagram below shows how `EventsCenter` reacts to that event, which eventually results in the following:
 * Updates saved to the hard disk
 * Status bar of the [User Interface](#user-interface-ui) (UI) updated to reflect the 'Last Updated' time
 
@@ -183,13 +183,13 @@ _Figure 3.1.2b : Component Interactions for `delete 1` Command (Part 2)_
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. <br>
   This is an example of how this Event-Driven approach helps us reduce direct coupling between components.
-  
-Each of the four components: 
+
+Each of the four components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and exposes its functionality 
+For example, the `Logic` component defines its API in the `Logic.java` interface and exposes its functionality
 using the `LogicManager.java` class.<br>
 
 The sections below give more details for each component.
@@ -201,17 +201,17 @@ _Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts.  
+The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts.
 (e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`) <br>
 
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 > The `UI` component uses the _JavaFX UI_ framework. <br>
-The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
+The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. <br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml). 
+ [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
-Functions of `UI`:  
+Functions of `UI`:
 
 * Executes user commands using the `Logic` component
 
@@ -226,9 +226,9 @@ _Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
-Function of `Logic`: 
+Function of `Logic`:
 
-* Executes the user's command using the following procedure: 
+* Executes the user's command using the following procedure:
 
   > 1. `Logic` uses the `Parser` class to [parse](#parse) the user command. <br>
   > 2. This results in a `Command` object which is executed by the `LogicManager`. <br>
@@ -236,7 +236,7 @@ Function of `Logic`:
   > 4. The result of the command execution is then encapsulated as a `CommandResult` object. <br>
   > 5. This object is passed back to the `UI`. <br>
 
-Given below is the [Sequence Diagram](#sequence-diagram) for interactions within the `Logic` component for the 
+Given below is the [Sequence Diagram](#sequence-diagram) for interactions within the `Logic` component for the
 `execute("delete 1")` API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
@@ -254,9 +254,9 @@ Functions of `Model`:
 
 * Stores the data in Tâche
 
-* Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
+* Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed'
 
-  > E.g. The [UI](#user-interface-ui) can be bound to this list so that it automatically 
+  > E.g. The [UI](#user-interface-ui) can be bound to this list so that it automatically
 updates when this list is modified. <br>
 
 `Model` does not depend on any of the other three components.
@@ -268,7 +268,7 @@ _Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-Functions of `Storage`: 
+Functions of `Storage`:
 
 * Saves `UserPref` objects in json format and reads it back
 
@@ -286,7 +286,7 @@ The `LogsCenter` class is used to manage logging levels and logging destinations
   (See [Configuration](#42-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
-  
+
   > Currently, log messages are output through: `Console` and to a `.log` file.
 
 **Logging Levels**
@@ -300,8 +300,8 @@ The `LogsCenter` class is used to manage logging levels and logging destinations
 
 ### 4.2. Configuration
 
-Certain properties of the application can be controlled (e.g app name, logging level) through the 
-[config file](#configuration-or-config-file) (default: `config.json`). 
+Certain properties of the application can be controlled (e.g app name, logging level) through the
+[config file](#configuration-or-config-file) (default: `config.json`).
 
 
 ## 5. Testing
@@ -312,11 +312,11 @@ Tests can be found in the `./src/test/java` folder.
 
 **Eclipse**:
 
-* To run **all tests**: Right-click on the `src/test/java` folder. 
+* To run **all tests**: Right-click on the `src/test/java` folder.
 
 * To run **a subset of tests**: Right-click on a test package, test class, or a test. <br>
 
-Then choose `Run as` > `JUnit Test`. 
+Then choose `Run as` > `JUnit Test`.
 
 **Gradle**:
 
@@ -330,23 +330,23 @@ These are _System Tests_ that test the entire Tâche by simulating user actions o
 [Graphical User Interface](#graphical-user-interface-gui) (GUI). <br>
 These tests are found in the `guitests` package.
 
-**Non-GUI Tests**: 
+**Non-GUI Tests**:
 
 These are tests that do not involve the GUI. They include: 
    * _Unit tests_ that target the lowest level methods/classes <br>
       e.g. `seedu.tache.commons.UrlUtilTest`
-      
-   * _Integration tests_ that check the integration of multiple code units 
+
+   * _Integration tests_ that check the integration of multiple code units
    (those code units are assumed to be working) <br>
       e.g. `seedu.tache.storage.StorageManagerTest`
-      
+
    * _Hybrids of unit and integration tests_ that check multiple code units as well as
       how they are connected together <br>
       e.g. `seedu.tache.logic.LogicManagerTest`
 
 ### 5.3. Testing Mode: Headless GUI Testing
 
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use, 
+Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 our GUI tests can be run in the _headless_ mode. <br>
  In the headless mode, GUI tests do not show up on the screen. <br>
  > That means that you can do other things on the computer while the tests are running. <br>
@@ -357,7 +357,7 @@ our GUI tests can be run in the _headless_ mode. <br>
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
  * Reason: Assertions are not enabled for JUnit tests. <br>
-   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later). 
+   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later).
 
  * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
@@ -371,7 +371,7 @@ You can refer to [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for
 
 ### 6.2. Continuous Integration
 
-We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform 
+We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform
 _Continuous Integration_ on our projects. <br>
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
@@ -382,7 +382,7 @@ documentation to the project site.
 
 ### 6.4. Making a Release
 
-You can do the following to create a new release: 
+You can do the following to create a new release:
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  
@@ -396,19 +396,19 @@ You can do the following to create a new release:
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
 
-You can follow the following steps to convert the project documentation files to PDF format: 
+You can follow the following steps to convert the project documentation files to PDF format:
 
  1. Make sure you have _set up GitHub Pages_ as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
     
-    > E.g. For [UserGuide.md](UserGuide.md), the URL will be 
+    > E.g. For [UserGuide.md](UserGuide.md), the URL will be
     `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
-    
+
  3. Click on the `Print` option in Chrome's menu.
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
 
-    > For best results, use the settings indicated in the screenshot below. <br> 
+    > For best results, use the settings indicated in the screenshot below. <br>
     
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 6.5.1 : Saving Documentation as PDF Files in Chrome_
@@ -418,7 +418,7 @@ You can follow the following steps to convert the project documentation files to
 A project often depends on third-party libraries. For example, Tâche depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. <br>
 
-Managing these dependencies can be automated using Gradle. 
+Managing these dependencies can be automated using Gradle.
 
 > For example, Gradle can download the dependencies automatically, which is better than these alternatives: <br>
 a. Include those libraries in the repo (this bloats the repo size) <br>
@@ -477,7 +477,7 @@ Priority | As a ... | I want to ... | So that I can...
 2. `Tâche` shows a list of commands that contain that letter or sequence of letters
 3. `User` selects specific command in list
 4. `Tâche` performs an [autocomplete](#autocomplete) on user's command
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
@@ -498,7 +498,7 @@ Use case ends.
 2. `Tâche` displays a directory chooser
 3. `User` selects a directory
 4. `Tâche` changes the save location to the one selected
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
@@ -514,7 +514,7 @@ Use case ends.
 2. `Tâche` displays main window
 3. `User` types in shortcut again
 4. `Tâche` minimizes main window
-Use case ends. 
+Use case ends.
 
 ### Use case: Delete task
 
@@ -525,7 +525,6 @@ Use case ends.
 3. `User` requests to delete a specific task in the list
 4.  deletes the task
 Use case ends.
-
 
 **Extensions**
 
@@ -551,7 +550,7 @@ Use case ends.
 1a. [Parameters](#parameter) are wrong
 
 > 1a1. `Tâche` informs `User` that the parameters for the add command are wrong<br>
-Use case ends
+Use case ends.
 
 1b. Task already exists
 
@@ -581,26 +580,26 @@ Use case ends
 1. Should be a desktop app (i.e. not a mobile or Web app)
 
 > Desktop apps are more general than other platforms such as mobile/embedded/web. Therefore, they provide a good 
-starting point before you move on to those platforms. 
+starting point before you move on to those platforms.
 > You are allowed to integrate with online services such as Google Calendar as long as the app can provide a 
-reasonable level of functionality even when offline. 
+reasonable level of functionality even when offline.
 
 2. [CLI](#command-line-interface) should be the primary mode of input
 
 > If you implement a [GUI](graphical-user-interface), it should be primarily for output (i.e. the GUI is used to give 
-visual feedback rather than to collect input). 
+visual feedback rather than to collect input).
 > Some minimal use of mouse is fine (e.g. to click the minimize button) but the primary input should be command-driven.
 > Mouse actions should have keyboard alternatives and typing compared to mouse or key combinations.
-> Design the app in a way that you can perform actions faster by typing compared to mouse or key combinations. 
+> Design the app in a way that you can perform actions faster by typing compared to mouse or key combinations.
 
 3. Should work stand-alone, not a plug-in to another software
 
-> However, you can build optional extensions that integrate your application with other existing software. 
-> Furthermore, you are allowed to build extensions that can plug into your software. 
+> However, you can build optional extensions that integrate your application with other existing software.
+> Furthermore, you are allowed to build extensions that can plug into your software.
 
 4. Should not use relational databases
 
-> Data storage must be done using text files you create yourself. 
+> Data storage must be done using text files you create yourself.
 
 5. Data should be stored locally the form of a human editable text file
 
@@ -611,7 +610,7 @@ visual feedback rather than to collect input).
 8. Should work without requiring an installer
 
 > Having an optional installer is fine as long as the portable (non-installed) version has all the critical 
-functionality. 
+functionality.
 
 9. Should conform to the Java coding standard. 
 10. Should process and respond to user commands within 1s. 
@@ -624,7 +623,7 @@ should be able to accomplish most of the tasks faster by typing commands as comp
 
 ## Appendix D : Glossary
 
-Here are some terms that are worth defining: <br> 
+Here are some terms that are worth defining: <br>
 (arranged in alphabetical order)
 
 #### Autocomplete:
@@ -635,11 +634,11 @@ Here are some terms that are worth defining: <br>
 
 > A text-based interface which allows the user to interact with the program by typing in commands
 
-#### Configuration (or Config) File: 
+#### Configuration (or Config) File:
 
 > Files that configure the initial settings of a program
 
-#### Graphical User Interface (GUI): 
+#### Graphical User Interface (GUI):
 
 > A graphical interface that allows the user to interact with the program through graphical icons and visual indicators
 
@@ -647,7 +646,7 @@ Here are some terms that are worth defining: <br>
 
 > A single or combination of keys that is registered with the system to perform specific activity when pressed
 
-#### Integrated Development Environment (IDE): 
+#### Integrated Development Environment (IDE):
 
 > An application that provides comprehensive facilities for software development
 
@@ -655,7 +654,7 @@ Here are some terms that are worth defining: <br>
 
 > Windows, Linux, Mac
 
-#### Parameter: 
+#### Parameter:
 
 > Detail associated with a task (e.g. duration, name, start time)
 
@@ -671,7 +670,7 @@ Here are some terms that are worth defining: <br>
 
 > A location where all the files of a particular project are stored
 
-#### Sequence Diagram: 
+#### Sequence Diagram:
 
 > A diagram used to model the interactions of a system over time
 
@@ -683,7 +682,7 @@ Here are some terms that are worth defining: <br>
 
 > Ensure that data files in two or more locations are updated
 
-#### User Interface (UI): 
+#### User Interface (UI):
 
 > The visual component of a program through which a user interacts with the software
 
@@ -692,7 +691,7 @@ Here are some terms that are worth defining: <br>
 We had individually studied and surveyed different existing task manager applications, identifying their strengths and 
 weaknesses with regards to how well they can cater for our target user's requirements. <br>
 
-Here are our findings for: 
+Here are our findings for:
 * [Wunderlist](#wunderlist)
 * [Google Calendar](#google-calendar)
 * [Get it Done](#get-it-done)
@@ -751,7 +750,7 @@ Here are our findings for:
 
 **Cons:**
 
-* Difficult to migrate over should one be already using Outlook or other calendars 
+* Difficult to migrate over should one be already using Outlook or other calendars
 * The daily reminder email is fixed at 5AM
 
 ### Get it Done

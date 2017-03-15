@@ -28,7 +28,7 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 Hi there, and nice to meet you!
 
-My name is Tâche, and I am a **task manager application** designed to serve busy people like you. 
+My name is Tâche, and I am a **task manager application** designed to serve busy people like you.
 Have you ever felt stressed having to deal with a hectic schedule and numerous to-do tasks?
 I am here to be your _virtual assistant_ and help you to manage all your deadlines and events. <br>
 
