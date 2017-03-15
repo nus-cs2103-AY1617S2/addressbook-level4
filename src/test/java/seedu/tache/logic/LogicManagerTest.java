@@ -307,7 +307,7 @@ public class LogicManagerTest {
     @Test
     public void executeDeleteInvalidArgsFormatErrorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+        assertIncorrectIndexFormatBehaviorForCommand("delete ;", expectedMessage);
     }
 
     @Test
@@ -338,25 +338,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void executeFindOnlyMatchesFullWordsInNames() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task tTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task t1 = helper.generateTaskWithName("KE Y");
-        Task t2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-
-        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2);
-        helper.addToModel(model, fourTasks);
-
-        assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
-    }
-
-    @Test
     public void executeFindIsNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithName("bla bla KEY bla");
@@ -370,7 +351,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()) + "0 detailed tasks listed!",
                 expectedAB,
                 expectedList);
     }
@@ -389,7 +370,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()) + "0 detailed tasks listed!",
                 expectedAB,
                 expectedList);
     }

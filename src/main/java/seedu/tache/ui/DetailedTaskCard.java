@@ -51,18 +51,11 @@ public class DetailedTaskCard extends UiPart<Region> {
     }
 
     private static String toAlphabetic(int i) {
-        int input = i - 1;
-        if (input < 0) {
-            return "-" + toAlphabetic(-input - 1);
+        String result = "";
+        while (--i >= 0) {
+            result = (char) ('A' + i % 26) + result;
+            i /= 26;
         }
-
-        int quot = input / 26;
-        int rem = input % 26;
-        char letter = (char) ((int) 'A' + rem);
-        if (quot == 0) {
-            return "" + letter;
-        } else {
-            return toAlphabetic(quot - 1) + letter;
-        }
+        return result;
     }
 }
