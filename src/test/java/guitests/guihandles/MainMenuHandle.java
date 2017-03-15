@@ -31,12 +31,12 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public HelpFormatWindowHandle openHelpFormatWindowUsingMenu() {
-        clickOn("Help", "F2");
+        clickOn("Help", "F3");
         return new HelpFormatWindowHandle(guiRobot, primaryStage);
     }
 
     public HelpFormatWindowHandle openHelpFormatWindowUsingAccelerator() {
-        useF2Accelerator();
+        useF3Accelerator();
         return new HelpFormatWindowHandle(guiRobot, primaryStage);
     }
 
@@ -45,8 +45,8 @@ public class MainMenuHandle extends GuiHandle {
         guiRobot.sleep(500);
     }
 
-    private void useF2Accelerator() {
-        guiRobot.push(KeyCode.F2);
+    private void useF3Accelerator() {
+        guiRobot.push(KeyCode.F3);
         guiRobot.sleep(500);
     }
 }
