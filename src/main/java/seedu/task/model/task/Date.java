@@ -33,8 +33,8 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String input) {
-    	format.setLenient(false);
-    	try {
+        format.setLenient(false);
+        try {
             format.parse(input);
             return true;
         } catch (ParseException e) {

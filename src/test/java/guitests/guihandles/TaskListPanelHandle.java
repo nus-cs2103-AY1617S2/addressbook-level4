@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -148,7 +147,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getTaskCardHandle(int index) {
-    	return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {

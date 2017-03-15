@@ -1,6 +1,5 @@
 package seedu.task.model.tag;
 
-
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
@@ -50,6 +49,7 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + tagName + ']';
     }

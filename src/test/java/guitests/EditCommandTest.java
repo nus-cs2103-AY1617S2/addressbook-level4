@@ -10,9 +10,7 @@ import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
 import seedu.task.model.task.Name;
-import seedu.task.model.task.Remark;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
 
