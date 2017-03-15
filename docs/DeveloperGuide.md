@@ -1,20 +1,20 @@
 # AddressBook Level 4 - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](setting-up)
+2. [Design](design)
+3. [Implementation](implementation)
+4. [Testing](testing)
+5. [Dev Ops](dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](appendix-a--user-stories)
+* [Appendix B: Use Cases](appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](appendix-d--glossary)
+* [Appendix E : Product Survey](appendix-e--product-survey)
 
 
 ## 1. Setting up
@@ -91,7 +91,7 @@ Given below is a quick overview of each component.
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -100,10 +100,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](ui-component) : The UI of the App.
+* [**`Logic`**](logic-component) : The command executor.
+* [**`Model`**](model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -222,7 +222,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -346,27 +346,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new task | record tasks that need to be done ‘some day’.
+`* * *` | user | view upcoming tasks | see what needs to be done soon.
+`* * *` | user | delete a task | remove tasks that I no longer care to track.
+`* * *` | new user | view more information about a particular command | learn how to use various commands.
+`* * *` | user | add task deadlines | prioritize what is most urgent.
+`* * *` | user | mark a task as completed | view old tasks.
+`* * *` | user | undo last command | revert my last action if I make a mistake.
+`* * *` | user | add task notes | keep relevant information nearby.
+`* * *` | user | confirm a delete action | avoid accidently delete a task.
+`* * *` | user | view tasks by day | view relevant tasks.
+`* * *` | user | add notification timings | see a popup for high priority tasks prior to the deadline.
+`* * *` | user | assign task prioritize | view tasks by importance.
+`* * *` | user | close the application | save CPU resources.
+`* * *` | user | schedule time to work on a task | plan my time.
+`* * *` | user | modify task details | update tasks.
+`* *` | advanced user | use command shortcuts | save time.
+`* *` | user | backup my data | protect against data loss.
+`* *` | user | create subtasks | break up large tasks.
+`* *` | user | choose custom background | have a pleasant viewing experience.
+`* *` | user | hear nice sounds | further enjoy completing tasks.
+`* *` | user | get reminders | know to start doing something.
+`* *` | user | change calendar view between month/week/day | see my schedule for that time frame.
+`* *` | user | add recurring tasks | avoid repetitive task input.
+`* *` | user | estimate task length | know how much effort is required.
+`* *` | user | add collaborators | know who I have to work with.
+`* *` | user | see error messages for invalid commands | know how to fix my mistake.
+`* *` | user | sort tasks by priority | choose most urgent tasks.
+`* *` | new user | see user guide in a sidebar | have it for easy reference.
+`* *` | user | search tasks by keyword | find tasks.
+`* *` | user | see today's tasks on startup | get started immediately.
+`* *` | user | categorize tasks | organize more effectively.
+`* *` | user | have task manager open on bootup | get started immediately.
+`*` | user | view my command history | review my progress.
+`*` | user | enter distraction-free mode | be stopped from opening games or social websites before tasks are completed
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Create task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to create a task with a name
+2. TaskManager create the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The taske with the name given by the user already exist
+> Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. TaskManager shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TaskManager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,17 +416,115 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. TaskManager shows an error message <br>
   Use case resumes at step 2
 
+#### Use case: Edit/Update task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+3. User type in the change
+4. User requests to update/edit the task
+5. TaskManager change the content of the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+4a. The given index is invalid
+
+> 3a1. AddressBook shows an error message <br>
+  Use case resumes at step 3
+
+#### Use case: Read task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+#### Use case: Complete a task
+
+**MSS**
+
+1. User requests to search for a task with a given name
+2. TaskManager shows the task
+3. User type in the index of the task he/she wants to mark as complete
+3. User request to complete a task
+4. TaskManager marks the task as completed
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TaskManager shows an error message <br>
+  Use case resumes at step 3
+
+#### Use case: List all task
+
+**MSS**
+
+1. User requests to list all tasks
+2. TaskManager shows all the tasks
+Use case ends.
+
+**Extensions**
+
+2a. no tasks exist
+>  2a1. TaskManager shows an error message
+   Use case ends
+
+#### Use case: List a task
+
+**MSS**
+
+1. User type in the index of the task
+2. User request to see the content of the task
+3. TaskManager shows the content of the task
+Use case ends.
+
+**Extensions**
+
+2a. The task does not exist
+> 2a1. TaskManager shows an error message
+  Use case resumes at step 1
 {More to be added}
+
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be open source.
+6. Should open the app in less than 5 sec.
+7. The GUI should not be overcrowded.
+8. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
+9. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
+10. The level of security will be minimal for this product since it is only accessed by a single user.
+11. To extend the software, proper security measures can be put into place in <100 hours.
+12. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
+13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
+14. Should not overload the CPU so that other running process start to lag.
+15. Should not have seperate administrative functions as there is one user who is the Admin by default.
 
 {More to be added}
 
@@ -403,17 +540,36 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
 
-Author: ...
+**Google Calendar**
+
+Author: Jay Kabra
 
 Pros:
-
-* ...
-* ...
+* Syncs with your phone so that the calendar is viewable from gmail on your laptop as well as on your phone
+* Allows you to add reminder notifications for events at a customized amount of time
+* Can customize tasks by color
+* Can easily perform CRUD operations on events
+* Can add recurring events and edit them individually if there are exceptions for a particular day
+* More GUI based rather than command line
+* Relatively intuitive for new users
 
 Cons:
+* No way to prioritize tasks
+* Need connection to the internet to view on laptop - not a desktop application
+* Since it is more GUI based, takes more clicks to add a task rather than typing the task in a command line and having the task added
+* appropriately
 
-* ...
-* ...
+**Google Tasks**
+
+Author:Google
+Pros:
+* easy to use
+* have all the basic functions a normal user would use.
+* easy to install
+
+Cons:
+* cannot change the color of tasks based on priority
+* alert would not pop out automatically
+* everytime I boot up my computer, I have to open the app manually
 
