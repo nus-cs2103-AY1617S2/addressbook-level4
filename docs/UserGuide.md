@@ -6,22 +6,22 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Navigate Me!
 
-1. [Introduction](#introduction)
-2. [Getting Started](#getting-started)
-3. [Features](#features) <br>
-	3.1. [Command Formats](#command-formats) <br>
-	3.2. [Adding Tasks](#add-a-task-add) <br>
-	3.3. [Deleting Tasks](#delete-a-task-delete) <br>
-	3.4. [Finding Tasks](#find-a-task-find) <br>
-	3.5. [Listing Tasks](#list-all-tasks-list) <br>
-    3.6. [Selecting Tasks](#select-a-task-select) <br>
-    3.7. [Updating Tasks](#update-a-task-update) <br>
-	3.8. [Getting Help](#get-help-help) <br>
-	3.9. [Change Data File Location](#change-data-file-location) <br>
-	3.10. [Exit](#exit-the-program-exit)
-4. [Command Summary](#command-summary)
-5. [FAQ](#faq-frequently-asked-questions)
-6. [Glossary](#some-technical-terms)
+1. [Introduction](#1-introduction)
+2. [Getting Started](#2-getting-started)
+3. [Features](#3-features) <br>
+	3.1. [Command Formats](#31-command-formats) <br>
+	3.2. [Adding Tasks](#32-add-a-task-add) <br>
+	3.3. [Deleting Tasks](#33-delete-a-task-delete) <br>
+	3.4. [Finding Tasks](#34-find-a-task-find) <br>
+	3.5. [Listing Tasks](#35-list-all-tasks-list) <br>
+    3.6. [Selecting Tasks](#36-select-a-task-select) <br>
+    3.7. [Updating Tasks](#37-update-a-task-update) <br>
+	3.8. [Getting Help](#38-get-help-help) <br>
+	3.9. [Change Data File Location](#39-change-data-file-location) <br>
+	3.10. [Exit](#310-exit-the-program-exit)
+4. [Command Summary](#4-command-summary)
+5. [FAQ](#5-faq-frequently-asked-questions)
+6. [Glossary](#6-some-technical-terms)
 
 
 ## 1. Introduction
