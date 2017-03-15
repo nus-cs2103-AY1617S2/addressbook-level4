@@ -9,6 +9,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -77,7 +78,7 @@ public class TaskCardHandle extends GuiHandle {
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriority().map(Priority::toString).orElse(""))
                 && getStatus().equals(task.getStatus().value)
-                && getNote().equals(task.getNote().value)
+                && getNote().equals(task.getNote().map(Note::toString).orElse(""))
                 && getTags().equals(getTags(task.getTags()));
     }
 
