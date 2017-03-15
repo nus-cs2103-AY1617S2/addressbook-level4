@@ -10,15 +10,19 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
 import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Name;
+import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Time;
+import seedu.tache.model.task.UniqueDetailedTaskList;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
+
+    public enum TaskType { TypeTask, TypeDetailedTask };
 
     public static final String COMMAND_WORD = "edit";
 
@@ -35,6 +39,7 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private TaskType taskType;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
@@ -50,22 +55,58 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
+    /**
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor details to edit the task with
+     * @param taskType to differentiate between type of task
+     */
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, TaskType taskType) {
+        assert filteredTaskListIndex > 0;
+        assert editTaskDescriptor != null;
+
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+
+        this.taskType = taskType;
+    }
+
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+        if (taskType.equals(TaskType.TypeTask)) {
+            List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            if (filteredTaskListIndex >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+
+            ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            try {
+                model.updateTask(filteredTaskListIndex, editedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+            model.updateFilteredListToShowAll();
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        } else {
+            List<ReadOnlyDetailedTask> lastShownList = model.getFilteredDetailedTaskList();
+
+            if (filteredTaskListIndex >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+
+            ReadOnlyDetailedTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+            DetailedTask editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            try {
+                model.updateDetailedTask(filteredTaskListIndex, editedTask);
+            } catch (UniqueDetailedTaskList.DuplicateDetailedTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+            model.updateFilteredListToShowAll();
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
@@ -76,21 +117,29 @@ public class EditCommand extends Command {
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        if (taskToEdit instanceof DetailedTask) {
-            DetailedTask temp = (DetailedTask) taskToEdit;
-            Name updatedName = editTaskDescriptor.getName().orElseGet(temp::getName);
-            Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(temp::getStartDate);
-            Date updateEndDate = editTaskDescriptor.getEndDate().orElseGet(temp::getEndDate);
-            Time updateStartTime = editTaskDescriptor.getStartTime().orElseGet(temp::getStartTime);
-            Time updateEndTime = editTaskDescriptor.getEndTime().orElseGet(temp::getEndTime);
-            UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-            return new DetailedTask(updatedName, updatedStartDate, updateEndDate, updateStartTime,
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        return new Task(updatedName, updatedTags);
+
+    }
+
+    /**
+     * Creates and returns a {@code DetailedTask} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
+     */
+    private static DetailedTask createEditedTask(ReadOnlyDetailedTask taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
+
+        DetailedTask temp = (DetailedTask) taskToEdit;
+        Name updatedName = editTaskDescriptor.getName().orElseGet(temp::getName);
+        Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(temp::getStartDate);
+        Date updateEndDate = editTaskDescriptor.getEndDate().orElseGet(temp::getEndDate);
+        Time updateStartTime = editTaskDescriptor.getStartTime().orElseGet(temp::getStartTime);
+        Time updateEndTime = editTaskDescriptor.getEndTime().orElseGet(temp::getEndTime);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        return new DetailedTask(updatedName, updatedStartDate, updateEndDate, updateStartTime,
                                     updateEndTime, updatedTags);
-        } else {
-            Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-            UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-            return new Task(updatedName, updatedTags);
-        }
     }
 
     /**
