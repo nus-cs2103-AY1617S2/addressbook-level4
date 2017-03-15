@@ -63,6 +63,10 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile 'com.jfoenix:jfoenix:1.2.0'
+        compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+        compile 'org.ocpsoft.prettytime:prettytime-nlp:4.0.0.Final'
+        compile fileTree(dir: 'libs', include: ['*.jar'])
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +89,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "taskmanager.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -120,8 +124,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
+class TaskManagerTest extends Test {
+    public TaskManagerTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -146,7 +150,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: TaskManagerTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,7 +159,7 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
+task nonGuiTests(type: TaskManagerTest) {
     include 'seedu/address/**'
 
     jacoco {
@@ -164,7 +168,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: TaskManagerTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }

@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.ListIterator;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -33,13 +37,16 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    private CompletedTaskListPanel completedTaskListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
-
+    
+    // Categorised Task List
+    public ObservableList<ReadOnlyTask> taskListToday;
+    private ObservableList<ReadOnlyTask> taskListFuture;
+    private ObservableList<ReadOnlyTask> taskListCompleted;
+    
+    
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
@@ -50,10 +57,10 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
-    private AnchorPane resultDisplayPlaceholder;
-
-    @FXML
     private AnchorPane statusbarPlaceholder;
+    
+    @FXML
+    private AnchorPane completedTaskListPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -113,12 +120,42 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        taskListToday = FXCollections.observableArrayList();
+        taskListFuture = FXCollections.observableArrayList();
+        taskListCompleted = FXCollections.observableArrayList();
+        prepareTaskList(logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        //TODO: show completedTaskPanel when show completed command is implemented
+        completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(),taskListCompleted);
     }
+    
+    /*
+     * Prepares categorised task list for today/future/completed ListView
+     * 
+     */
+    protected void prepareTaskList(ObservableList<ReadOnlyTask> taskList){
+        taskListToday.clear();
+        taskListFuture.clear();
+        taskListCompleted.clear();
+        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
+        while(iter.hasNext()){
+            ReadOnlyTask tmpTask = iter.next();
+            // set task id to be displayed, the id here is 1-based
+            tmpTask.setID(iter.nextIndex());
+            if(tmpTask.isToday() && !tmpTask.isDone()){
+                taskListToday.add(tmpTask);
+            }else if(!tmpTask.isDone()){
+                taskListFuture.add(tmpTask);
+            }else{
+                taskListCompleted.add(tmpTask);
+            }
+        }
+        
+    }
+    
+    
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -128,12 +165,12 @@ public class MainWindow extends UiPart<Region> {
         return statusbarPlaceholder;
     }
 
-    private AnchorPane getResultDisplayPlaceholder() {
-        return resultDisplayPlaceholder;
-    }
-
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+    
+    private AnchorPane getCompletedTaskListPlaceholder() {
+        return completedTaskListPlaceholder;
     }
 
     void hide() {
@@ -178,6 +215,12 @@ public class MainWindow extends UiPart<Region> {
     }
 
     @FXML
+    public void menuTest(){
+        completedTaskListPanel.menuTest();
+    }
+   
+    
+    @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
@@ -197,14 +240,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
-    }
-
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
 }

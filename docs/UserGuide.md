@@ -1,28 +1,74 @@
-# Task Manager - User Guide
+# Today - User Guide
 
 By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 ---
 
-## 1. Quick Start
+1. [Introduction](#introduction)
+2. [Quick Start](#quick-start)
+3. [Features](#features)<br>
+    3.1. [Adding Tasks](#adding-tasks)<br>
+    3.2. [Viewing Tasks](#viewing-tasks)<br>
+    3.3. [Managing Tasks](#managing-tasks)<br>
+    3.4. [Managing Tags](#managing-tags)<br>
+    3.5. [Undo/Redo Commands](#undoredo-commands)<br>
+    3.6. [Miscellaneous](#miscellaneous)<br>
+    3.6. [Advanced Usage](#advanced-usage)<br>
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
-- Please ensure the host has JRE 1.8 or higher installed.
-(Download: http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-- Unzip the zip file and run the .exe file.
+## Introduction
+**Today** is a minimalistic task manager that aims to be the simplest way to organize your day.
 
-## 2. Features
-### Adding tasks
-**Adding a new task**
-Format: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
+In our far too hectic lives, there's just so much to keep track of. Trying to manage everything is a tiring and stressful affair. Instead of overwhelming you with a neverending task list, **Today** helps you focus on the things that you *can* control - the tasks you're going to tackle today.
 
-> task_name : Name of your task<br>
-> deadline (optional) :<br>
->   (1) Date only, `02/03/17` or `020317` (ddmmyy)<br>
->   (2) Time only which means today, `3pm` or `12noon` or `2.30am`<br>
->   (3) Time and Date, write time before date<br>
-> tag1, tag2, … : tags of this task
 
-Examples:
+## Quick Start
+
+Let's get you up and running.
+
+### Installation Instructions
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/ui.png" height="300" style="float:right">
+
+1. Install the latest Java [here](https://java.com/en/download/). This will be required to run the application.
+2. Download `today.jar` from the [releases](../../../releases) tab.
+3. Copy the file to the folder you want to use as the home folder for your task manager.
+4. Double-click the file to start the app and you should see an interface like the image above.
+5. You can start managing your tasks now:
+   * `add Do my homework due today` creates a new entry `Do my homework` with a deadline `today`
+   * `done 1, 3, 4` marks the 1st, 3rd and 4th task as complete and whisks them away to your completed list
+   * `find math` helps you locate all tasks with 'math' in either its title or tag
+6. To find out more about each command, refer to the [Features](#3-features) section below!
+
+### How to get started
+
+As you get used to the features, you can use **Today** any way you like. But for starters, this is what we recommend.
+
+At the start of every working day, go through your inbox and `add` new tasks to your tasklist. Once you're done, review your list and mark out the tasks you want to focus on `today`. Whenever you're `done` with a task, it's shifted out of sight, allowing you to focus on the remaining tasks on hand.
+
+Rinse and repeat until you've no more tasks left for the day!
+
+## Features
+
+> **<span style="font-size:20px">Input Format</span>**<br>
+> * normal text denotes command keywords
+> * `< >` denotes parameters
+> * `[ ]` denotes that the parameter is optional
+
+### Adding Tasks
+
+#### Adding a task
+
+The first step to organizing your tasks is to make sure you have all of them in one place. **Today** makes it easy for you to add new tasks, with the option to specify a deadline or add tags to the task, making it easier for you to manage as your list gets longer.
+##### Format: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
+##### Parameters
+    task_name : Name of your task
+    deadline (optional) :
+      - Date only, `02/03/17` or `020317` (ddmmyy)
+      - Time only which means today, `3pm` or `12noon` or `2.30am`
+      - Time and Date, in any order
+    tag1, tag2, ... (optional) : tags of this task
+##### Examples
 
 * `add Study for CS2106`
 * `add Study for CS2106 due 3pm`
@@ -30,157 +76,236 @@ Examples:
 * `add Study for CS2106 due 3pm today`
 * `add Study for CS2106 due 02/03/17`
 
-> !! Do not use the keywords like `due` in your `<task_name>` or the Task Manager might misunderstand you
+>**Note**: Do not use the keywords like `due` in your `<task_name>` or **Today** might misunderstand
 
-**Adding a new event**
-Format: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
+#### Adding a new event
 
-> event_name : name of the event<br>
-> starting_time : time of start of the event<br>
-> end_time : time of end of the event<br>
-> date: date of the event<br>
-> tag1, tag2, … : tags of this event
+Task management is all about fitting tasks into your busy schedule. The only way to do that is to have a handle on the events you have planned on any given day. **Today** understands that, and allows you to add events as well.
 
-Examples:
+##### Format: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
+##### Parameters
+    event_name : name of the event<br>
+    starting_time : time of start of the event<br>
+    end_time : time of end of the event<br>
+    date (optional) : date of the event (ddmmyy)<br>
+    tag1, tag2, ... (optional): tags of this event
+##### Examples
 
 * `add dinner from 5pm to 5.30pm`
 * `add meeting from 10am to 11am on Wednesday`
 
-### Viewing tasks
-**Listing all ongoing tasks**
-Format: `list`
+### Viewing Tasks
+#### Listing all ongoing tasks
 
-**Finding tasks by keyword**
-Format: `find <keyword1 keyword2 ...>`
-> keyword1, keyword2, … : All the parameters you want in the search.
+By default, **Today** will display all the tasks you have for today. If you performed a `find` command that filters the irrelevant tasks, you can get back your full tasklist by using this command.
 
-Examples:
+##### Format: `list`
+##### Parameters
+    no parameters taken
 
-* `find completed schoolwork`
+#### Finding tasks by keyword
 
-**Finding tasks by datetime**
-Format: `find due <datetime>`
-> datetime : REFER TO ADD TASK
+Most of us have plenty of things to do, which means plenty of tasks on our tasklist. Manually looking through the list to find something would be like looking for a needle in a haystack. **Today** saves you the trouble of doing that with a `find` command.
 
-Examples:
+##### Format: `find <keyword1 keyword2 ...>`
+##### Parameters
+    keyword1, keyword2, ... : All the parameters you want in the search.
+##### Examples
+
+* `find schoolwork`
+* `find math science geography`
+
+#### Finding tasks by deadline
+
+Your favourite band is coming to town and you want to get tickets for their concert. How would you know if you're free to watch that concert three Saturdays from now? Using **Today**'s `find due` command, you'll be able to find out for yourself if you have anything due that day. If you do, maybe it's time to start working on it first!
+
+##### Format: `find due <deadline>`
+##### Parameters
+    deadline :
+      - Date only, `02/03/17` or `020317` (ddmmyy)
+      - Time only which means today, `3pm` or `12noon` or `2.30am`
+      - Time and Date, in any order
+
+##### Examples
 
 * `find due 21042017`
 
 
-### Managing tasks
-**Updating task**
-Format: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
+### Managing Tasks
+#### Marking task as done
 
-> id : displayed task id<br>
-> new_task_name (optional) : new name to replace the old task name<br>
-> new_datetime (optional) : REFER TO ADD TASK
+Once you're done with a task, mark it as `done`and we'll archive it for you. Do this often enough, and you'll have a great sense of satisfaction watching your tasklist get shorter.
 
-Examples:
+##### Format: `done <id1, id2, ...>`
+##### Parameters
+    id1, id2, ... : displayed task ids
+
+##### Examples
+
+* `done 3`
+* `done 3,4,5,6`
+
+#### Marking task as not done
+
+Be honest. If you know you didn't do that task properly, and you want to come back to it, use the `notdone` function to bring it back from the completed list.
+
+##### Format: `notdone <id1, id2, ...>`
+##### Parameters
+    id1, id2, ... : displayed task ids
+
+##### Examples
+
+* `notdone 3`
+* `notdone 3,4,5,6`
+
+#### Updating task
+
+We make mistakes all the time. When you've entered a wrong task name, or even a wrong deadline, correct it using the `update` command.
+
+##### Format: `update <id> [<new_task_name>] [due <new_deadline>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
+##### Parameters
+    id : displayed task id
+    new_task_name (optional) : new name to replace the old task name
+    new_deadline (optional) :
+      - Date only, `02/03/17` or `020317` (ddmmyy)
+      - Time only which means today, `3pm` or `12noon` or `2.30am`
+      - Time and Date, in any order
+    tag1, tag2, ... (optional): tags to be added or removed
+
+##### Examples
 
 * `update 7 clean house`
 * `update 7 due 05/06/17`
 * `update 7 tag schoolwork, CS2103`
 * `update 7 clean house due 04/05/17 tag schoolwork, CS2103`
 
-**Deleting task**
-Format: `delete <id1, id2, id3>`
+#### Deleting task
 
-> id : displayed task id
+Some tasks don't get `done`. We put them aside and after several eons, we discover that we don't have to actually do them anymore. If you're feeling too guilty to mark the task as `done`, that's the perfect time to `delete` it.
 
-Examples:
+##### Format: `delete <id1, id2, ...>`
+##### Parameters
+    id1, id2, ... : displayed task ids
+
+##### Examples
 
 * `delete 3`
 * `delete 3,4,5,6`
 
-**Marking task as complete**
-Format: `complete <id1, id2, ...>`
-
-> id : displayed task id
-
-Examples:
-
-* `complete 3`
-* `complete 3,4,5,6`
-
 ### Managing Tags
 
-**Renaming tag**
-Rename an existing tag<br>
-Format: `rename tag from <tag_name> to <new_tag_name>`
+#### Renaming tag
 
-> tag_name : existing tag name<br>
-> new_tag_name : new tag name
+You've been tagging a bunch of tasks as `work`. Now that you're quitting Google, you might want to mark them as `Google` instead. Instead of going through your tasks one by one, all of the tasks can be instantly retagged with `Google` with this function.
+
+##### Format: `renametag <tag_name> <new_tag_name>`
+##### Parameters
+    tag_name : existing tag name
+    new_tag_name : new tag name
+
+##### Examples
+
+* `renametag work Google`
+* `renametag girlfriend ex-gf`
+
+#### Deleting tag
+
+When you reorganize your tasks into different tags, from say "work" vs "family" to something more specific like "boss jim", "boss sarah", "annoying wife jeanie", "daughter Samantha", you can delete your former tags "work" and "family", and retag your tasks.
+
+##### Format: `deletetag <tag_name>`
+##### Parameters
+    tag_name : existing tag name
 
 ### Undo/Redo Commands
 
-**Undo Command**
-Undo up to 5 commands that have been made by the user<br>
-Format: `undo`
+#### Undo Command
 
-**Redo Command**
-Redo a command that a user has previously undone<br>
-Format: `redo`
+You accidentally marked an undone task as `done`. You can quickly `undo` what you've done and get the task back by using this command. Note that you can only undo a maximum of 5 commands.
 
-### Help
-Format: `help [<command>]`
+##### Format: `undo`
+##### Parameters
+    No parameters taken
 
+#### Redo Command
 
-### Exit
-Format: `exit`
+You used `undo` without meaning to, or you've used `undo` one too many times. Using `redo` will undo your last `undo` command.
 
+##### Format: `redo`
+##### Parameters
+    No parameters taken
 
 ### Advanced Usage
-**Export file**
-Export storage file to specified directory
-Format: `export to <dir_location>`
+#### Change storage location
 
-> dir_location: path to store exported file
+Some of you power-users want to keep your tasks synced between devices. Using this function, you can get **Today** on different devices to point at the same synced file (using a service like Dropbox. This ensures that your tasks will be kept synced when a change is performed on any of your linked devices.
 
-Examples:
+##### Format: `saveto <dir_location>`
+##### Parameters
+    dir_location : path to new save location
+##### Examples
 
-* `export to C:\Desktop`
-* `export to ..\mySecretFolder`
+* `saveto C:\Desktop`
+* `saveto ..\mySecretFolder`
 
-**Import file**
-Add tasks from file to exported task list
-Format: `import from <path_to_file>`
+#### Export file
 
-> path_to_location: path to the exported task list
+Don't worry if you don't have the luxury of a syncing service. If you want to transfer tasks from one computer to the next, you can `export` your tasks, and transfer the output file using a USB stick.
 
-Examples:
+##### Format: `export <dir_location>`
+##### Parameters
+    dir_location: path to store exported file
+##### Examples
 
-* `import from C:\Desktop\exported.txt`
-* `import from ..\mySecretFolder\exported.txt`
+* `export C:\Desktop`
+* `export ..\mySecretFolder`
 
-**Change storage location**
-Set a new storage location
-Format: `save to <dir_location>`
+#### Import file
 
-> dir_location : path to new save location
+In your second computer, plug in the USB stick and get the file path of the previously exported file. Tell **Today** to `import` this file and it will add these tasks to your current tasklist.
 
-Examples:
+##### Format: `import <path_to_file>`
+##### Parameters
+    path_to_location: path to the exported task list
 
-* `save to C:\Desktop`
-* `save to ..\mySecretFolder`
+##### Examples
 
-## 3. FAQ
+* `import C:\Desktop\exported.txt`
+* `import ..\mySecretFolder\exported.txt`
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Task Manager folder.
+### Miscellaneous
+#### Getting help
 
-## 4. Command Usage
+To view this user guide you're currently viewing, you can use the F1 hotkey or use the `help` command.
 
-* **Add Task**: `add <task_name> [due <datetime>] [tag <tag1, tag2, ...>]`
+##### Format: `help`
+##### Parameters
+    No parameters taken
+
+### Exit
+
+At the end of a long day, you deserve some time away from your task manager. You can `exit` **Today** and enjoy the rest of your day!
+
+##### Format: `exit`
+##### Parameters
+    No parameters taken
+
+## FAQ
+
+Work-in-progress
+
+## Command Usage
+
+* **Add Task**: `add <task_name> [due <deadline>] [tag <tag1, tag2, ...>]`
 * **Add Event**: `add <event_name> from <starting_time> to <end_time> [on <date>] [tag <tag1, tag2, ...>]`
 * **View All Tasks**: `list`
 * **Find Task**: `find <keyword1 keyword2 ...>`
-* **Update Task**: `update <id> [<new_task_name>] [due <new_datetime>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
+* **Complete Task**: `done <id1, id2, ...>`
+* **Un-complete Task**: `notdone <id1, id2, ...>`
+* **Update Task**: `update <id> [<new_task_name>] [due <new_deadline>] [tag <tag1, tag2, ...>] [remove tag <tag1, tag2, ...>]`
 * **Delete Task**: `delete <id1, id2, id3>`
-* **Complete Task**: `complete <id1, id2, ...>`
-* **Rename Tag**: `rename tag from <tag_name> to <new_tag_name>`
+* **Rename Tag**: `renametag <tag_name> <new_tag_name>`
+* **Change Storage Location**: `saveto <dir_location>`
+* **Export**: `export <dir_location>`
+* **Import**: `import <path_to_file>`
 * **Help**: `help [<command>]`
 * **Exit**: `exit`
-* **Export**: `export to <dir_location>`
-* **Import**: `import from <path_to_file>`
-* **Change Storage Location**: `save to <dir_location>`

@@ -23,18 +23,22 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> taskListView;
+    private ListView<ReadOnlyTask> todayTaskListView;
+    
+    @FXML
+    private ListView<ReadOnlyTask> futureTaskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture) {
         super(FXML);
-        setConnections(taskList);
+        setConnections(todayTaskListView, taskListToday);
+        setConnections(futureTaskListView, taskListFuture);
         addToPlaceholder(taskListPlaceholder);
     }
-
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+    
+    private void setConnections(ListView<ReadOnlyTask> taskListView,ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+        setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -43,20 +47,21 @@ public class TaskListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-    private void setEventHandlerForSelectionChangeEvent() {
+    private void setEventHandlerForSelectionChangeEvent(ListView<ReadOnlyTask> taskListView) {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                        // TODO: change event to recognise list type
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
-
+    
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
-            taskListView.getSelectionModel().clearAndSelect(index);
+            futureTaskListView.scrollTo(index);
+            futureTaskListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -70,7 +75,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, task.getID()).getRoot());
             }
         }
     }

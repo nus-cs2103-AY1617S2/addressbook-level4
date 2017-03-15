@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -7,151 +8,215 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+	private static final Logger logger = LogsCenter
+			.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+	private final TaskManager taskManager;
+	private final FilteredList<ReadOnlyTask> filteredTasks;
 
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
-        super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+	/**
+	 * Initializes a ModelManager with the given taskManager and userPrefs.
+	 */
+	public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
+		super();
+		assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+		logger.fine("Initializing with task manager: " + taskManager
+				+ " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-    }
+		this.taskManager = new TaskManager(taskManager);
+		filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+	}
 
-    public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
-    }
+	public ModelManager() {
+		this(new TaskManager(), new UserPrefs());
+	}
 
-    @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
-    }
+	@Override
+	public void resetData(ReadOnlyTaskManager newData) {
+		taskManager.resetData(newData);
+		indicateTaskManagerChanged();
+	}
 
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
+	@Override
+	public ReadOnlyTaskManager getTaskManager() {
+		return taskManager;
+	}
 
-    /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
-    }
+	/** Raises an event to indicate the model has changed */
+	private void indicateTaskManagerChanged() {
+		raise(new TaskManagerChangedEvent(taskManager));
+	}
 
-    @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
-        indicateAddressBookChanged();
-    }
+	@Override
+	public synchronized void deleteTask(ReadOnlyTask target)
+			throws TaskNotFoundException {
+		taskManager.removeTask(target);
+		indicateTaskManagerChanged();
+	}
 
-    @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
-        updateFilteredListToShowAll();
-        indicateAddressBookChanged();
-    }
+	@Override
+	public synchronized void addTask(Task task)
+			throws UniqueTaskList.DuplicateTaskException {
+		taskManager.addTask(task);
+		updateFilteredListToShowAll();
+		indicateTaskManagerChanged();
+	}
 
-    @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
-        assert editedTask != null;
+	@Override
+	public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+			throws UniqueTaskList.DuplicateTaskException {
+		assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
-        indicateAddressBookChanged();
-    }
+		int taskManagerIndex = filteredTasks
+				.getSourceIndex(filteredTaskListIndex);
+		taskManager.updateTask(taskManagerIndex, editedTask);
+		indicateTaskManagerChanged();
+	}
 
-    //=========== Filtered Task List Accessors =============================================================
+	@Override
+	public void updateSaveLocation() {
+		indicateTaskManagerChanged();
+	}
 
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
-    }
+	// =========== Filtered Task List Accessors
+	// =============================================================
 
-    @Override
-    public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
-    }
+	@Override
+	public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+		return new UnmodifiableObservableList<>(filteredTasks);
+	}
 
-    @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
-    }
+	@Override
+	public void updateFilteredListToShowAll() {
+		filteredTasks.setPredicate(null);
+	}
 
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
-    }
+	@Override
+	public void updateFilteredTaskList(Set<String> keywords, Date date) {
+		if (date == null) {
+			updateFilteredTaskList(
+					new PredicateExpression(new NameQualifier(keywords)));
+		} else {
+			updateFilteredTaskList(new PredicateExpression(
+					new NameAndDateQualifier(keywords, date)));
+		}
+		indicateTaskManagerChanged();
+	}
 
-    //========== Inner classes/interfaces used for filtering =================================================
+	private void updateFilteredTaskList(Expression expression) {
+		filteredTasks.setPredicate(expression::satisfies);
+	}
 
-    interface Expression {
-        boolean satisfies(ReadOnlyTask task);
-        String toString();
-    }
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
 
-    private class PredicateExpression implements Expression {
+	interface Expression {
+		boolean satisfies(ReadOnlyTask task);
 
-        private final Qualifier qualifier;
+		@Override
+		String toString();
+	}
 
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
-        }
+	private class PredicateExpression implements Expression {
 
-        @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
-        }
+		private final Qualifier qualifier;
 
-        @Override
-        public String toString() {
-            return qualifier.toString();
-        }
-    }
+		PredicateExpression(Qualifier qualifier) {
+			this.qualifier = qualifier;
+		}
 
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-        String toString();
-    }
+		@Override
+		public boolean satisfies(ReadOnlyTask task) {
+			return qualifier.run(task);
+		}
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+		@Override
+		public String toString() {
+			return qualifier.toString();
+		}
+	}
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
+	interface Qualifier {
+		boolean run(ReadOnlyTask task);
 
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
-        }
+		@Override
+		String toString();
+	}
 
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
-        }
-    }
+	private class NameQualifier implements Qualifier {
+		private Set<String> nameKeyWords;
 
+		NameQualifier(Set<String> nameKeyWords) {
+			this.nameKeyWords = nameKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyTask task) {
+			return nameKeyWords.stream()
+					.filter(keyword -> {
+						boolean check = false;
+						check = check || StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword);
+						for (Tag tag : task.getTags().toSet()) {
+							check = check || StringUtil.containsWordIgnoreCase(tag.getTagName(), keyword);
+						}
+						return check;
+					})
+					.findAny()
+					.isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "name=" + String.join(", ", nameKeyWords);
+		}
+	}
+
+	private class NameAndDateQualifier implements Qualifier {
+		private Set<String> nameKeyWords;
+		private Date date;
+
+		NameAndDateQualifier(Set<String> nameKeyWords, Date date) {
+			this.nameKeyWords = nameKeyWords;
+			this.date = date;
+		}
+
+		@Override
+		public boolean run(ReadOnlyTask task) {
+			if (task.getTaskType() != null
+					&& task.getTaskType() != TaskType.TaskWithNoDeadline) {
+				return nameKeyWords.stream()
+						.filter(keyword -> (StringUtil.containsWordIgnoreCase(
+								task.getName().fullName, keyword)
+								|| task.getDeadline().isSameDay(date)))
+						.findAny().isPresent();
+			} else {
+				return nameKeyWords.stream()
+						.filter(keyword -> StringUtil.containsWordIgnoreCase(
+								task.getName().fullName, keyword))
+						.findAny().isPresent();
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "name=" + String.join(", ", nameKeyWords);
+		}
+
+	}
 }
