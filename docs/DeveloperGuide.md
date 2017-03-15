@@ -101,16 +101,16 @@ The `Main` component takes charge of
 - initializing other components (`Model`, `Logic`, `UI`) in the correct order and loading data from local storage when the app launches.  
 - terminating other components when Doist is shut down.
 
-#### `UI`
+#### [`UI`](#2-ui-component)
 The `UI` component takes charge of displaying information and handling all user interactions.
 
-#### `Logic`
+#### [`Logic`](#3-logic-component)
 The `Logic` component takes charge of parsing the user input and executing the commands.
 
-#### `Model`
+#### [`Model`](#4-model-component)
 The `Model` component represent the data that Doist operates on and supports the operations on these data.
 
-#### `Storage`
+#### [`Storage`](#5-storage-component)
 The `Storage` component takes charge of reading data from, and writing data to, the hard disk.
 
 #### `Commons`
