@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import guitests.ToLuistGuiTest;
+import seedu.toluist.commons.core.Messages;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TypicalTestTodoLists;
@@ -24,11 +25,23 @@ public class MarkCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void markComplete_singleTask() {
-        Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
-        String command = "mark complete 1";
+    public void mark_invalidIndex() {
+        String command = "mark";
         commandBox.runCommand(command);
-        assertTaskComplete(true, task);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_INDEX);
+    }
+
+    @Test
+    public void markComplete_singleTask() {
+        Task task1 = new TypicalTestTodoLists().getTypicalTasks()[0];
+        String command1 = "mark complete 1";
+        commandBox.runCommand(command1);
+        assertTaskComplete(true, task1);
+
+        Task task2 = new TypicalTestTodoLists().getTypicalTasks()[1];
+        String command2 = "mark complete 2";
+        commandBox.runCommand(command2);
+        assertTaskComplete(true, task2);
     }
 
     @Test
