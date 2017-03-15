@@ -195,6 +195,7 @@ _Figure 3.1.1b : Component interactions for `delete 1` command (part 2)_
 
 The sections below will give more details of each single component.
 
+
 ### 3.2. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
@@ -211,11 +212,13 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
+```
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+```
 
 ### 3.3. Logic component
 
@@ -225,12 +228,14 @@ _Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
+```
 The `Logic` component,
 
 * `Logic` uses the `Parser` class to parse the user command.
 * This results in a `Command` object which is executed by the `LogicManager`.
 * The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+```
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
@@ -238,6 +243,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 
 _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
+
 
 ### 3.4. Model component
 
@@ -247,6 +253,7 @@ _Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
+```
 The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
@@ -254,6 +261,7 @@ The `Model` component,
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+```
 
 ### 3.5. Storage component
 
@@ -263,10 +271,12 @@ _Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
+```
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+```
 
 ### 3.6. Common classes
 
@@ -324,13 +334,15 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.TypeTask.commons.UrlUtilTest`
+      
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.TypeTask.storage.StorageManagerTest`
+      
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.TypeTask.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -372,7 +384,9 @@ project site.
 Here are the steps to create a new release.
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
+ 
  2. Tag the repo with the version number. e.g. `v0.1`
+ 
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
@@ -384,10 +398,13 @@ as Chrome's PDF engine preserves hyperlinks used in webpages.
 Here are the steps to convert the project documentation files to PDF format.
 
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
+ 
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
     e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    
  1. Click on the `Print` option in Chrome's menu.
+ 
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
    
