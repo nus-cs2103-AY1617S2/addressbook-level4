@@ -449,8 +449,8 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | view a list of to-do items that are done | I know what tasks I have completed
 `*` | user with many tasks in the task manager | sort task by name | locate a task easily
 `*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
-&nbsp;
 
+&nbsp;
 ## 8. Appendix B : Use Cases
 
 > For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
