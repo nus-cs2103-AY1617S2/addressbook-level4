@@ -3,6 +3,7 @@
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Viewing help](#viewing-help)
+    * [Viewing a all command](#viewing-all-commands)
     * [Viewing a specific command](#viewing-a-specific-command)
   * [Adding a task](#adding-a-task)
     * [Adding a floating task](#adding-a-floating-task)
@@ -15,12 +16,12 @@
    * [Deleting a task](#deleting-a-task)
    * [Viewing tasks](#viewing-tasks)
      * [Viewing all tasks](#viewing-all-tasks)
-     * [Viewing a specified task](#viewing-a-specified-task)
      * [Viewing all Today's tasks](#viewing-all-todays-tasks)
      * [Viewing all pending tasks](#viewing-all-pending-tasks)
      * [Viewing all "done" tasks](#viewing-all-done-tasks)
      * [Viewing all floating tasks](#viewing-all-floating-tasks)
      * [Viewing all overdue tasks](#viewing-all-overdue-tasks)
+     * [Viewing a specified task](#viewing-a-specified-task)
    * [Marking a task as "done"](#marking-a-task-as-done)
    * [Finding for tasks](#finding-for-tasks)
    * [Clearing of "done" tasks](#clearing-of-done-tasks)
@@ -71,11 +72,12 @@ Without further ado, let us get started.
 > * Words in `lower_case` are commands and connectors.
 > * `|` means "or".
 > * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
+> * Items with `...` behind can have multiple instances.
 
 
 ### Viewing help
 
+#### Viewing all commands
 Shows a list of commands available in iManager. <br>
 
 Format: `help`
@@ -220,10 +222,10 @@ Format: `Edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every D
 > * Date format is MM-DD-YYYY HHMM (24 hour Format) e.g. 10-22-2017 1500.
 > * Editing `t/TAG` appends to the existing tags of a task.
 > * Editing the same tag name remove the tag itself. 
-    e.g if task contains tag [friends], edit [/t friends] would remove the 'friends' tag
+    e.g if task contains tag [friends], edit [/t friends] would remove the 'friends' tag.
 > * All tags of an existing task can be remove by using `t/none`. Case insensitive. 
-> * Operation is equivalent to deleting an old task and adding a new task, however tags will not get overwritten unless specified. 
-    (refer to previous annotation)
+> * Operation is equivalent to deleting an old task and adding a new task, however tags will not get overwritten unless specified 
+    (refer to previous annotation).
 
 Examples:
 
@@ -255,18 +257,9 @@ Examples:
 ### Viewing tasks
 
 #### Viewing all tasks
-View a list of all task in iManager. 
+View a list of all task in iManager.
+
 Format: `view `<br>
-
-#### Viewing a specified task
-View a specified task by index in iManager. 
-
-Format: `view INDEX`<br>
-> * INDEX refers to the index number shown in the most recent listing of tasks. 
-
-Examples:
-* `view 1` <br>
-   Show the first task in the task list. 
 
 #### Viewing all Today's tasks
 View a list of all today's task in iManager. Does not show floating, "done" and overdue tasks. 
@@ -293,6 +286,16 @@ View a list of all tasks iManage. Does not show pending, "done", floating and To
 
 Format: `view`<br>
 
+#### Viewing a specified task
+View a specified task by index in iManager. 
+
+Format: `view INDEX`<br>
+> * INDEX refers to the index number shown in the most recent listing of tasks. 
+
+Examples:
+* `view 1` <br>
+   Show the first task in the task list. 
+   
 ### Marking a task as "done"
 Mark an existing task as "done" in iManager. A "done" task gets transferred to the "done" list. 
 
@@ -398,12 +401,11 @@ Format : `exit`
 Q: I can't undo my previous commands after reopening iManager <br>
 A: Like most task managers out there, iManager does not save a list of previous commands upon exiting.
 
-Q: Is it possible to set my storage path to a portable drive as I want to use them on different computers? <br>
+Q: Is it possible to set my storage path to a portable drive to use it on a different computer? <br>
 A: Yes! Just use the `saveto` command and choose the specified path of the portable drive.
 
-Q: The iManager is not showing everything that I have added when I open it up ?<br>
-A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks] 
-   (#viewing-tasks). 
+Q: The iManager is not showing everything that I have added upon booting?<br>
+A: Our iManager only shows Today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks](#viewing-tasks). 
 
 
 ## Command Summary
@@ -421,11 +423,11 @@ A: Our iManager only shows Today's task on start-up. To view pending, "done", fl
 | [del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list. |
 | [view](#viewing-tasks) | `view` | View all tasks. |
 |  | `view INDEX` | View a specified task by index. |
-|  | `view t` | View all Today's task. |
 |  | `view p` | View all pending task. |
 |  | `view c` | View all "done" task. |
 |  | `view f` | View all floating task. |
 |  | `view o` | View all overdue task. |
+|  | `view t` | View all Today's task. |
 | [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done". |
 | [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the given keywords. |
 |  | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end. |
