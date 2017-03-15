@@ -1,35 +1,55 @@
 # User Guide
 
- &nbsp
+&nbsp;
 
 1. [Intoduction](#intoduction)
 2. [Quick Start](#quick-start)
 3. [Features](#features)
    3.1. Viewing Help
+   
    3.2. Adding a Floating Task
-   3.3. Adding a Deadline Task 
-   3.4. Adding an Event Task 
+   
+   3.3. Adding a Deadline Task
+   
+   3.4. Adding an Event Task
+   
    3.5. Adding a Priority Task
+   
    3.6. Finding a Task
-   3.7. Editing a Task 
+   
+   3.7. Editing a Task
+   
    3.8. Deleting a Task
+   
    3.9. Completing a Task
+   
    3.10. Listing All Tasks
+   
    3.11. Listing Today’s Tasks
+   
    3.12. Listing Priority Tasks
+   
    3.13. Listing Completed Tasks
+   
    3.14. Undoing the Latest Command 
+   
    3.15. Saving Data to Another Folder 
+   
    3.16. Changing Default Storage Folder
+   
    3.17. Using Data from Another Folder
+   
    3.18. Clearing all Entries
+   
    3.19. Exiting the Program
+   
    3.10. Saving your Data
+   
    3.21. Differentiating your Tasks’ Urgency
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
- &nbsp
+&nbsp;
 
 ## 1. Introduction
 
@@ -39,7 +59,7 @@ TypeTask is an easy-to-use task manager which lets you schedule and manage your 
 > Users who want an application that works offline
 > Users who have tasks that have deadlines/start-dates
 
- &nbsp
+&nbsp;
 
 ## 2. Quick Start
 
@@ -69,7 +89,7 @@ TypeTask is an easy-to-use task manager which lets you schedule and manage your 
    
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
-&nbsp
+&nbsp;
 
 ## 3. Features
 Let us now explore the interesting features found in TypeTask!
@@ -319,7 +339,7 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
 
 > Note that all tasks that fall outside of these categories will appear normally (i.e. no additional colours).
  
-&nbsp
+&nbsp;
  
 ## 4. FAQ
 
@@ -327,7 +347,7 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Manager folder.
  
-  &nbsp
+&nbsp;
 
 ## 5. Command Summary
 Command | Shortcuts | Format | Example
