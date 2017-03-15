@@ -1,27 +1,3 @@
-# Today - Developer Guide
-
-By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
-
----
-
-1. [Introduction](#1-introduction)
-2. [Setting Up](#2-setting-up)
-3. [Design](#3-design) <br>
-    3.1. [Architecture](#31-architecture) <br>
-    3.2. [UI](#32-ui) <br>
-    3.3. [Logic](#33-logic) <br>
-    3.4. [Model](#34-model)<br>
-    3.5. [Storage](#35-storage)
-4. [Implementation](#4-implementation)
-5. [Testing](#5-testing)
-6. [Dev Ops](#6-dev-ops)
-
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
-
 ## 1. Introduction
 
 **Today** is a minimalistic task manager that aims to be the simplest way to organize your day. We help users focus on the things that they can control - the tasks they're tackling today.
@@ -140,7 +116,7 @@ The `UI` component passes user commands using the `Logic` component, auto-update
 
 ### 3.3. Logic
 
-<img src="images/TaskManagerLogicClassDiagram.png">
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerLogicClassDiagram.png" width="800">
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
@@ -154,7 +130,7 @@ When a command is entered, the `Parser` processes the text and selects the appro
 
 ### 3.4. Model
 
-<img src="images/TaskManagerModelClassDiagram.png" width="800"><br>
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
@@ -167,7 +143,7 @@ Lastly, the `UnmodfiableObservableList<ReadOnlyTask>` is bound to the UI. Whenev
 
 ### 3.5. Storage
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
@@ -182,15 +158,12 @@ Similar to the `Model`, `Storage` contains the `UserPrefsStorage` object and the
 
 Because there are many different components that may be affected by a single command, we use events to simplify method calling. In our code, after a command has successfully executed its primary functionality like making a change to the **Model**, it raises an `Event` which is then picked up by **Storage**, and **UI** which then calls the relevant methods to make the appropriate changes.
 
-The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 1` causes a change in the model which is the command's primary task.
+The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 2` causes a change in the model which is the command's primary task.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 3.6.1_ : Primary Component interactions for `delete 1` command (part 1)_
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerSequenceDiagram.png" width="800"><br>
+_Figure 3.6.1_ : Component interactions for `delete 2` command (part 1)_
 
-Only after the task is complete, is an `Event` raised to modify the storage and UI components as can be seen in the next diagram.
-
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 3.6.2_ : Secondary Component interactions for `delete 1` command (part 2)_
+Only after the task is complete, is an `Event` raised to modify the storage and UI components in step 1.1.1.3.
 
 ## 4. Implementation
 
@@ -312,34 +285,6 @@ can be automated using Gradle. For example, Gradle can download the dependencies
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
-
-## Design
-
-### Logic component
-
-<img src="images/TaskManagerLogicClassDiagram.png">
-
-The **Logic** component of the software handles the input from the **UI** and calls methods from the **Model**, **Config**, and **Storage** to perform the appropriate changes.
-
-When a command is entered, the `Parser` processes the text and selects the appropriate `CommandParser` based on the first word in the text to parse the arguments as well. Its respective `Command` is then initialized which calls the relevant methods from other components, and returns a `CommandResult` to the UI to make the relevant changes.
-
-> `Parser` makes use of classes such as `ArgumentTokenizer`, `ParserUtil`, and `CliSyntax` for certain repetitive parsing tasks
-
-> `CommandParser` may return an `IncorrectCommand` in the case when the arguments are not of the suitable format
-
-### Event-Driven Nature
-
-Because there are many different components that may be affected by a single command, we use events to simplify method calling. In our code, after a command has successfully executed its primary functionality like making a change to the **Model**, it raises an `Event` which is then picked up by **Storage**, and **UI** which then calls the relevant methods to make the appropriate changes.
-
-The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 1` causes a change in the model which is the command's primary task.
-
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure _ : Primary Component interactions for `delete 1` command (part 1)_
-
-Only after the task is complete, is an `Event` raised to modify the storage and UI components as can be seen in the next diagram.
-
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure _ : Secondary Component interactions for `delete 1` command (part 2)_
 
 ## Appendix A : User Stories
 
@@ -535,51 +480,49 @@ Use case ends
 
 ## Appendix D : Glossary
 
-## Appendix E : Product Survey
-
-**Any.Do**
+### Any . Do
 
 Author: Ken
 
-Pros:
+#### Pros
 * Simple, Minimalistic
 * Mobile Friendly
-* "Moment", feature that cycles through the tasks you have on that day and prompts you to plan your day
+* "Moment" feature that cycles through the tasks you have on that day and prompts you to plan your day
 
-Cons:
+#### Cons
 * Poor Web Application
 
-**Google Calendar**
+### Google Calendar
 
 Author: Shi Yuan
 
-Pros:
+#### Pros
 * Supports Natural Language commands
 * Synchronizes on all devices
 
-Cons:
+#### Cons
 * Unable to set priorities for tasks
 
-**Things**
+### Things
 
 Author: Yu Li
 
-Pros:
+#### Pros
 * Highly customizable
 * Daily Review
 * Autofill
 
-Cons:
+#### Cons
 * Cannot export
 
-**Wunderlist**
+### Wunderlist
 
 Author: Cao Wei
 
-Pros:
+#### Pros
 * Many shortcuts
 * Sorts tasks by priority and category
 * Compatible with almost every OS
 
-Cons:
+#### Cons
 * No calendar view
