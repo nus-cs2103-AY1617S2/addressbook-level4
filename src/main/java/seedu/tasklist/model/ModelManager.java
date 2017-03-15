@@ -140,7 +140,6 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void loadTaskList(String filePath) throws IOException {
 
         Optional<ReadOnlyTaskList> flexiTaskOptional;
-        ReadOnlyTaskList loadedData = null;
         try {
             flexiTaskOptional = storage.readTaskList(filePath);
             if (!flexiTaskOptional.isPresent()) {
@@ -154,6 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (DataConversionException e) {
             logger.warning("Wrong file format.");
         }
+    }
+    
+    @Override
+    public synchronized void saveTaskList(String filePath) throws IOException {
+        storage.saveTaskList(taskList, filePath);
+        indicateTaskListChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -228,5 +233,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+
 
 }

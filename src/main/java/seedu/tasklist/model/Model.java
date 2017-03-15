@@ -55,6 +55,12 @@ public interface Model {
     public void enableUndoForClear();
 
     /** Loads file from file path 
-     * @throws IOException */
+     * @throws IOException 
+     * */
     void loadTaskList(String filePath) throws IOException;
+    
+    /** Save file given a file path 
+     * @throws IOException 
+     * */
+    void saveTaskList(String filePath) throws IOException;
 }
