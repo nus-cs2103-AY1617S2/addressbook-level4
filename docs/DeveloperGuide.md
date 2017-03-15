@@ -691,7 +691,7 @@ User case ends
 
 ## Appendix E : Product Survey
 
-#### Google Keep
+### Google Keep
 
 Author: Al Sharef Haya Fayez M
 
@@ -716,7 +716,8 @@ Author: Al Sharef Haya Fayez M
 
 Having a colourful user interface would be a plus but our target user is someone who prefer typed commands over mouse clicks, which Google Keep does not support.
 
-#### MeisterTask
+
+### MeisterTask
 
 Author: Tan Wei
 
@@ -739,7 +740,8 @@ Author: Tan Wei
 
 The fact that MeisterTask is available across many platforms sounds intriguing, but it is not useful in the case of our target users. In addition, our target users most probably need to set recurring tasks.
 
-#### Just
+
+### Just
 
 Author: Xu Ruolan
 
@@ -758,7 +760,8 @@ Author: Xu Ruolan
 
 Statistical analysis would be useful for our target users as they are most probably office workers, but Just does not accept typed command-line inputs which are important to our target users.
 
-#### Persoda
+
+### Persoda
 
 Author: Soh Wei Kiat Melvin
 
