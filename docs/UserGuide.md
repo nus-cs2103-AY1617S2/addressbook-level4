@@ -301,8 +301,8 @@ Saves all your data and exits the program. <br>
 
 > * **`exit`**
 
-   <img src="images/UiExitCommand.png" width="600"><br>
-   _Figure 3.10.1. Exit Command_
+       <img src="images/UiExitCommand.png" width="600"><br>
+       _Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
