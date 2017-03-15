@@ -18,11 +18,11 @@ public class LoadCommandParser {
      * and returns an LoadCommand object for execution.
      */
     public Command parse(String args) {
-        if (args == null) {
+        final String[] path = args.trim().split("\\s+");
+        if (path.length > 1 || path[0].isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         }
-
-        return new LoadCommand(args.trim());
+        return new LoadCommand(path[0]);
     }
 }
