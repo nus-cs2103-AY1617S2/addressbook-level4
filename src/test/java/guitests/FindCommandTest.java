@@ -26,7 +26,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void findInvalidCommand_fail() {
+    public void findInvalidCommandFail() {
         commandBox.runCommand("findsoftwareengineering");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }

@@ -199,10 +199,9 @@ public class ModelManager extends ComponentManager implements Model {
             String[] nameElements = task.getName().fullName.split(" ");
             boolean partialMatch = false;
             String trimmedNameKeyWords = nameKeyWords.toString()
-                        .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
+                                         .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
             for (int i = 0; i < nameElements.length; i++) {
-                if (computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase())
-                            <= MARGIN_OF_ERROR) {
+                if (computeLevenshteinDistance(trimmedNameKeyWords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
                     partialMatch = true;
                     break;
                 }
@@ -219,10 +218,9 @@ public class ModelManager extends ComponentManager implements Model {
             String[] nameElements = detailedTask.getName().fullName.split(" ");
             boolean partialMatch = false;
             String trimmedNameKeyWords = nameKeyWords.toString()
-                        .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
+                                         .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
             for (int i = 0; i < nameElements.length; i++) {
-                if (computeLevenshteinDistance(trimmedNameKeyWords , nameElements[i].toLowerCase())
-                            <= MARGIN_OF_ERROR) {
+                if (computeLevenshteinDistance(trimmedNameKeyWords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
                     partialMatch = true;
                     break;
                 }
@@ -255,8 +253,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return dateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString(),
-                                keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString()
+                            , keyword))
                     .findAny()
                     .isPresent()
                     || dateKeyWords.stream()
@@ -287,8 +285,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return timeKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(),
-                                keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString()
+                            , keyword))
                     .findAny()
                     .isPresent()
                     || timeKeyWords.stream()
@@ -325,7 +323,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyDetailedTask detailedTask) {
             return nameQualifier.run(detailedTask) || dateQualifier.run(detailedTask)
-                        || timeQualifier.run(detailedTask);
+                                     || timeQualifier.run(detailedTask);
         }
 
         @Override
@@ -346,10 +344,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
         for (int i = 1; i <= str1.length(); i++) {
             for (int j = 1; j <= str2.length(); j++) {
-                distance[i][j] = minimum(
+                distance[i][j] =
+                 minimum(
                     distance[i - 1][j] + 1,
                     distance[i][j - 1] + 1,
-                    distance[i - 1][j - 1] + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+                    distance[i - 1][j - 1] +
+                        ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
             }
         }
         return distance[str1.length()][str2.length()];

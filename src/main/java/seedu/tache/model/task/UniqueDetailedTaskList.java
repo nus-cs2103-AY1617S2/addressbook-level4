@@ -42,7 +42,7 @@ public class UniqueDetailedTaskList implements Iterable<DetailedTask> {
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateDetailedTask(int index, ReadOnlyDetailedTask editedDetailedTask)
-                throws DuplicateDetailedTaskException {
+                                   throws DuplicateDetailedTaskException {
         assert editedDetailedTask != null;
 
         DetailedTask taskToUpdate = internalList.get(index);
