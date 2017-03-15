@@ -61,7 +61,7 @@ Ready? Let's begin!
 3. Double-click the file to start me. My [GUI](#graphical-user-interface-gui) should appear in a few seconds: 
 
    <img src="images/Ui.png" width="600"><br>
-   _Figure 2.1 My GUI_
+   _Figure 2.1. My GUI_
 
 4. Type your desired command in my command box and press <kbd>Enter</kbd> to execute it. <br>
 
@@ -209,7 +209,7 @@ Hence, do think twice before typing this command!
 
 ### 3.4. Find a task : `find`
 
-Finds task(s) whose names contain the keyword `<task>`.<br>
+Finds task(s) whose names contain the keyword or sequence of keywords `<task>`.<br>
 
 > For example, **`find`** `<home>` can help you search for a task called `do homework`. 
 
@@ -223,8 +223,13 @@ This command shows tasks due before `<due date>` and also [floating tasks](#floa
 ### 3.5. List all tasks : `list`
 
 Shows a list of all your tasks in the task manager.<br>
+Detailed tasks are listed in _chronological order_. 
 
-> * **`list`**
+> * **`list`** <br>
+Navigate through the panels and tasks using your arrow keys. 
+
+   <img src="images/UiListCommand.png" width="600"><br>
+   _Figure 3.5.1. List Command_
 
 ### 3.6. Select a task : `select`
 
@@ -232,12 +237,18 @@ Selects a task for you to view its details. <br>
 With this command, you can make changes to the task if needed!
 
 > * **`select`** `<task>` <br>
-E.g. **`select`** `buy detergent` <br>
-If there are tasks with the same name, this command will display all those tasks for you to choose one. <br>
-I will highlight the task that is successfully selected for you to see. 
+
+   <img src="images/UiSelectCommand.png" width="600"><br>
+   _Figure 3.6.1. Select Command_
+
+> If there are tasks with the same name, this command will display all those tasks 
+for you to choose one. <br>
 
 > * **`unselect`** <br>
 This command cancels your previous selection so that you can select another task instead.
+
+   <img src="images/UiUnselectCommand.png" width="600"><br>
+   _Figure 3.6.2. Unselect Command_
 
 ### 3.7. Update a task : `update`
 
@@ -251,20 +262,24 @@ Edit more parameters concurrently using the following format: <br>
 **`update`** `<parameter1> <new_value1>; <parameter2> <new_value2>; ...`
  
 > * **`update`** `<task>; <parameter> <new_value>` <br>
-E.g. **`update`** `committee meeting start time 10am` <br>
+E.g. **`update`** `submit project proposal due time 2pm` <br>
 This command will make the specified update to a task with the name `<task>`. <br>
 You can also add more parameters to modify when using this format. <br>
-E.g. **`update`** `project proposal; name app development project proposal; end time 11.59pm`
+
+  <img src="images/UiUpdateCommand.png" width="600"><br>
+   _Figure 3.7.1. Update Command_
 
 ### 3.8. Get help : `help`
 
 Shows a list of all commands and their usage instructions. <br>
 
 > * **`help`** `<command>` <br>
-E.g. **`help`** `update`
 This command provides specific information about the usage of `<command>`. 
 
-> * **`help /all`**
+   <img src="images/UiHelpCommand.png" width="600"><br>
+   _Figure 3.8.1. Help Command_
+
+> * **`help /all`** <br>
 This command directs you back to this user guide. 
 
 > Help will also be shown if you enter an incorrect command. e.g. `abcd`
@@ -274,16 +289,20 @@ This command directs you back to this user guide.
 > * **`save`**
 This command saves all your data into the data file. 
 
-> * **`save`** `<new_save_location_directory>`
-E.g. **`save`** `C:\Users\Jim\Desktop`
+> * **`save`** `<new_save_location_directory>` <br>
 This command saves all your data in a new data file in a `<new_save_location_directory>`
+
+   <img src="images/UiSaveCommand.png" width="600"><br>
+   _Figure 3.9.1. Save Command_
 
 ### 3.10. Exiting the program : `exit`
 
-Exits the program. <br>
+Saves all your data and exits the program. <br>
 
 > * **`exit`**
 
+   <img src="images/UiExitCommand.png" width="600"><br>
+   _Figure 3.10.1. Exit Command_
 
 ## 4. Command Summary
 
