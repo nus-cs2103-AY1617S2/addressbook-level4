@@ -17,16 +17,16 @@
    3.8.  [Deleting a Task]() <br> 
    3.9.  [Completing a Task]() <br>
    3.10. [Listing All Tasks]() <br>
-   3.11. [Listing Today’s Tasks]()  <br>
-   3.12. [Listing Priority Tasks]()   <br>
+   3.11. [Listing Today’s Tasks]()<br>
+   3.12. [Listing Priority Tasks]()<br>
    3.13. [Listing Completed Tasks]() <br> 
    3.14. [Undoing the Latest Command]()<br>   
-   3.15. [Saving Data to Another Folder]()  <br> 
-   3.16. [Changing Default Storage Folder]() <br>  
-   3.17. [Using Data from Another Folder]() <br> 
-   3.18. [Clearing all Entries]()  <br>
-   3.19. [Exiting the Program]()   <br>
-   3.20. [Saving your Data]()  <br> 
+   3.15. [Saving Data to Another Folder]()<br> 
+   3.16. [Changing Default Storage Folder]()<br>  
+   3.17. [Using Data from Another Folder]()<br> 
+   3.18. [Clearing all Entries]()<br>
+   3.19. [Exiting the Program]()<br>
+   3.20. [Saving your Data]()<br> 
    3.21. [Differentiating your Tasks’ Urgency]()<br>   
 4. [FAQ](#faq)<br>
 5. [Command Summary](#command-summary)<br>
@@ -35,7 +35,10 @@
 
 ## 1. Introduction
 
-TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply with only a single line of command! With the efficacy of a calendar without its shortcomings, TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. TypeTask is especially good for you if:
+TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply <br>
+with only a single line of command! With the efficacy of a calendar without its shortcomings, <br>
+TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. <br>
+TypeTask is especially good for you if: <br>
 
 > You want to do everything through a single line of command <br>
 > You want an application that works offline <br>
@@ -56,8 +59,8 @@ TypeTask is an easy-to-use task manager which lets you schedule and manage your 
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-   > <img src="images/Ui.png" width="600">
-   Fig 1. TypeTask’s User Interface
+<img src="images/Ui.png" width="600">
+Fig 1. TypeTask’s User Interface <br>
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
