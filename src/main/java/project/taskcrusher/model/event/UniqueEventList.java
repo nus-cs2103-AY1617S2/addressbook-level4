@@ -7,9 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
-import project.taskcrusher.model.event.ReadOnlyEvent;
 
-public class UniqueEventList implements Iterable<Event>{
+public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     //what to do when the events clash?

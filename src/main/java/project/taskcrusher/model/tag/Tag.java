@@ -1,6 +1,5 @@
 package project.taskcrusher.model.tag;
 
-
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 
 /**

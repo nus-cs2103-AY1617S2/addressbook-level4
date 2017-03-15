@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TASK_NAME] [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TASK_NAME]"
+            + " [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited task: %1$s";
@@ -74,7 +75,7 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editPersonDescriptor) {
+            EditTaskDescriptor editPersonDescriptor) {
         assert taskToEdit != null;
 
         //After these statements, each field should NOT be null
@@ -84,7 +85,7 @@ public class EditCommand extends Command {
         Description updatedDescription = editPersonDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedDeadline,updatedPriority, updatedDescription, updatedTags);
+        return new Task(updatedName, updatedDeadline, updatedPriority, updatedDescription, updatedTags);
     }
 
     /**

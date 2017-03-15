@@ -1,9 +1,7 @@
 package project.taskcrusher.model.task;
 
 import java.util.Objects;
-import java.util.Optional;
 
-import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
@@ -25,7 +23,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Modified for Task.
      */
-    public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags){
+    public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
 
         this.name = name;
@@ -38,8 +36,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-    public Task(ReadOnlyTask source){
-        this(source.getTaskName(), source.getDeadline(), source.getPriority(), source.getDescription(), source.getTags());
+    public Task(ReadOnlyTask source) {
+        this(source.getTaskName(), source.getDeadline(), source.getPriority(),
+                source.getDescription(), source.getTags());
     }
 
     public void setTaskName(Name name) {
@@ -87,7 +86,7 @@ public class Task implements ReadOnlyTask {
         return new UniqueTagList(tags);
     }
 
-    public boolean hasDeadline(){
+    public boolean hasDeadline() {
         return this.deadline.hasDeadline();
     }
 

@@ -23,13 +23,13 @@ public class Priority {
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
 
-		if (priority.equals(NO_PRIORITY)) {
-			this.priority = NO_PRIORITY;
-		} else if (isValidPriority(priority)) {
-			this.priority = priority;
-		} else {
-			throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-		}
+        if (priority.equals(NO_PRIORITY)) {
+            this.priority = NO_PRIORITY;
+        } else if (isValidPriority(priority)) {
+            this.priority = priority;
+        } else {
+            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        }
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Priority {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.priority.equals(((Priority) other).priority)); // state check
+                        && this.priority.equals(((Priority) other).priority)); // state check
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Priority {
         return priority.matches(PRIORITY_VALIDATION_REGEX);
     }
 
-    public boolean hasPriority(){
+    public boolean hasPriority() {
         return !priority.equals(NO_PRIORITY);
     }
 

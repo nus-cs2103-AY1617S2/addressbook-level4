@@ -1,6 +1,5 @@
 package project.taskcrusher.logic.commands;
 
-
 import project.taskcrusher.commons.core.EventsCenter;
 import project.taskcrusher.commons.events.ui.ShowHelpRequestEvent;
 

@@ -1,14 +1,13 @@
 package project.taskcrusher.model.task;
 
-import java.util.Optional;
-
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for an active task.
- * Implementations should guarantee: details are present and not null (just empty as Optional<>), field values are validated.
+ * Implementations should guarantee: details are present and not null (just empty as Optional<>),
+ * field values are validated.
  */
 public interface ReadOnlyTask {
 
@@ -24,7 +23,8 @@ public interface ReadOnlyTask {
     UniqueTagList getTags();
 
     /**
-     * Returns true if both have the same state. (interfaces cannot override .equals). Does not check for priority equality
+     * Returns true if both have the same state. (interfaces cannot override .equals).
+     * Does not check for priority equality
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
@@ -40,10 +40,12 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName());
-        if(getDeadline().hasDeadline())
+        if (getDeadline().hasDeadline()) {
             builder.append(" " + getDeadline().toString() + " ");
-        if(getDescription().hasDescription())
+        }
+        if (getDescription().hasDescription()) {
             builder.append(getDescription().toString() + " ");
+        }
 
         builder.append(" Tags: ");
         getTags().forEach(builder::append);

@@ -8,23 +8,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Observable;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
-
-import javax.xml.bind.JAXBException;
 
 import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.exceptions.DataConversionException;
-import project.taskcrusher.commons.util.XmlUtil;
 import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.ReadOnlyTask;
-import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 
 /**
@@ -36,38 +31,38 @@ public class TextFileStorage {
      */
     public static void saveDataToFile(File file, ReadOnlyUserInbox userInbox)
             throws FileNotFoundException {
-    	//read every single task from the userinbox and store it into file
+        //read every single task from the userinbox and store it into file
 
-    	System.out.println("starting???");
-    	System.out.println(file.getName());
+        System.out.println("starting???");
+        System.out.println(file.getName());
 
-    	Logger myLog= LogsCenter.getLogger(TextFileStorage.class);
-    	myLog.fine("starting to write");
+        Logger myLog = LogsCenter.getLogger(TextFileStorage.class);
+        myLog.fine("starting to write");
 
 
-    	try {
-        	BufferedWriter write = new BufferedWriter(new FileWriter(file));
+        try {
+            BufferedWriter write = new BufferedWriter(new FileWriter(file));
 
-        	ObservableList<ReadOnlyTask> listToRead = userInbox.getTaskList();
-        	Iterator<ReadOnlyTask> taskIterator = listToRead.iterator();
-        	while (taskIterator.hasNext()) {
-        		ReadOnlyTask taskToSave = taskIterator.next();
-        		String toWriteToFile = "";
-        		toWriteToFile += taskToSave.getTaskName();
-        		toWriteToFile += " ";
-        		toWriteToFile += "//" + taskToSave.getDescription();
-        		write.write(toWriteToFile);
-        		write.newLine();
-        		write.flush();
-        	}
+            ObservableList<ReadOnlyTask> listToRead = userInbox.getTaskList();
+            Iterator<ReadOnlyTask> taskIterator = listToRead.iterator();
+            while (taskIterator.hasNext()) {
+                ReadOnlyTask taskToSave = taskIterator.next();
+                String toWriteToFile = "";
+                toWriteToFile += taskToSave.getTaskName();
+                toWriteToFile += " ";
+                toWriteToFile += "//" + taskToSave.getDescription();
+                write.write(toWriteToFile);
+                write.newLine();
+                write.flush();
+            }
 
-    	} catch (Exception e) {
+        } catch (Exception e) {
 
-    	}
+        }
 
-    	//need to use iterator to read tasks?
+        //need to use iterator to read tasks?
 
-    	//overwrite the file, I'm guessing
+        //overwrite the file, I'm guessing
 
     }
 
@@ -76,38 +71,38 @@ public class TextFileStorage {
      * @throws IOException
      */
     public static ReadOnlyUserInbox loadDataFromSaveFile(File file) throws DataConversionException,
-                                                                            IOException {
+        IOException {
 
-    	System.out.println("load??");
+        System.out.println("load??");
 
-    	Logger myLog= LogsCenter.getLogger(TextFileStorage.class);
-    	myLog.fine("starting to read");
+        Logger myLog = LogsCenter.getLogger(TextFileStorage.class);
+        myLog.fine("starting to read");
 
-    	//TODO construct tasks, create ReadOnlyUserInbox
+        //TODO construct tasks, create ReadOnlyUserInbox
 
-    	BufferedReader read = new BufferedReader(new FileReader(file));
-    	String line;
-    	UniqueTaskList tasksRead = new UniqueTaskList();
-    	UserInbox inboxToReturn = new UserInbox();
+        BufferedReader read = new BufferedReader(new FileReader(file));
+        String line;
+        UniqueTaskList tasksRead = new UniqueTaskList();
+        UserInbox inboxToReturn = new UserInbox();
 
-    	try {
-        	while ((line = read.readLine()) != null) {
-        		StringTokenizer str = new StringTokenizer(line);
-        		System.out.println(line);
-        		Name taskName = new Name(str.nextToken());
-        		Description description = new Description(str.nextToken().replaceAll("/", ""));
-        		UniqueTagList tagList = new UniqueTagList();
-        		//TODO tasksRead.add(new Task(taskName, description, tagList));
-        		inboxToReturn.setTasks(tasksRead);
-        	}
-    	} catch (Exception e) {
-    		//whatever
-    		e.printStackTrace();
-    	}
+        try {
+            while ((line = read.readLine()) != null) {
+                StringTokenizer str = new StringTokenizer(line);
+                System.out.println(line);
+                Name taskName = new Name(str.nextToken());
+                Description description = new Description(str.nextToken().replaceAll("/", ""));
+                UniqueTagList tagList = new UniqueTagList();
+                //TODO tasksRead.add(new Task(taskName, description, tagList));
+                inboxToReturn.setTasks(tasksRead);
+            }
+        } catch (Exception e) {
+            //whatever
+            e.printStackTrace();
+        }
 
-    	read.close();
+        read.close();
 
-    	return inboxToReturn;
+        return inboxToReturn;
     }
 
 }

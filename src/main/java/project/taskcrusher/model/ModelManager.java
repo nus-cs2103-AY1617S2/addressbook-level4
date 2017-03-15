@@ -164,10 +164,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private class DeadlineQualifier implements Qualifier{
+    private class DeadlineQualifier implements Qualifier {
         private Date dateUpTo;
 
-        DeadlineQualifier(Date date){
+        DeadlineQualifier(Date date) {
             assert date != null;
             this.dateUpTo = date;
         }
@@ -175,14 +175,14 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             //has no deadline
-            if(!task.getDeadline().getDate().isPresent())
+            if (!task.getDeadline().getDate().isPresent()) {
                 return false;
-
+            }
             Date deadline = task.getDeadline().getDate().get();
             assert deadline != null;
-            if(deadline.before(dateUpTo))
+            if (deadline.before(dateUpTo)) {
                 return true;
-
+            }
             return false;
         }
 

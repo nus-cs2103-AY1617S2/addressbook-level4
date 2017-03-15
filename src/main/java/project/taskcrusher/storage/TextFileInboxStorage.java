@@ -17,7 +17,7 @@ public class TextFileInboxStorage implements UserInboxStorage {
 
     private String filePath;
 
-    public TextFileInboxStorage(String filePath){
+    public TextFileInboxStorage(String filePath) {
         this.filePath = filePath;
     }
 

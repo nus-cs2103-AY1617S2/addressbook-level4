@@ -1,7 +1,6 @@
 package project.taskcrusher.model.event;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
-import project.taskcrusher.model.shared.Name;
 
 /**
  * stores a timeslot, from {@code startDate} to {@code endDate}endDate
@@ -15,17 +14,17 @@ public class EventDate {
     public final String startDate;
     public final String endDate;
 
-    public EventDate(String startDate, String endDate) throws IllegalValueException{
-        assert startDate !=null;
+    public EventDate(String startDate, String endDate) throws IllegalValueException {
+        assert startDate != null;
         assert endDate != null;
-        if(!isValidEventDate(startDate, endDate)){
+        if (!isValidEventDate(startDate, endDate)) {
             throw new IllegalValueException(MESSAGE_EVENT_DATE_CONSTRAINTS);
         }
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    private boolean isValidEventDate(String startDate, String endDate){
+    private boolean isValidEventDate(String startDate, String endDate) {
         //TODO: is start > end
         //if start < currentTime
         //if invalid start, end format
@@ -34,7 +33,7 @@ public class EventDate {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return startDate + " " + endDate;
     }
 

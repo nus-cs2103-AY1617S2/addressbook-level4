@@ -14,8 +14,8 @@ import java.util.Optional;
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.EditCommand;
-import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.logic.commands.EditCommand.EditTaskDescriptor;
+import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**

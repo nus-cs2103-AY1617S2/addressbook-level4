@@ -1,6 +1,5 @@
 package project.taskcrusher.model;
 
-
 import javafx.collections.ObservableList;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.task.ReadOnlyTask;

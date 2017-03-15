@@ -8,7 +8,7 @@ import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
 
-public class Event implements ReadOnlyEvent{
+public class Event implements ReadOnlyEvent {
     private Name eventName;
     private EventDate eventDate;
     private Optional<Location> location;
@@ -16,7 +16,7 @@ public class Event implements ReadOnlyEvent{
     private UniqueTagList tags;
 
     public Event(Name eventName, EventDate eventDate, Optional<Location> location,
-            Optional<Description> description, UniqueTagList tags){
+            Optional<Description> description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(eventName, eventDate, location, description, tags);
 
         this.eventName = eventName;
@@ -34,23 +34,23 @@ public class Event implements ReadOnlyEvent{
                 source.getDescription(), source.getTags());
     }
 
-    public UniqueTagList getTags(){
+    public UniqueTagList getTags() {
         return this.tags;
     }
 
-    public Name getEventName(){
+    public Name getEventName() {
         return this.eventName;
     }
 
-    public Optional<Description> getDescription(){
+    public Optional<Description> getDescription() {
         return this.description;
     }
 
-    public EventDate getEventDate(){
+    public EventDate getEventDate() {
         return this.eventDate;
     }
 
-    public Optional<Location> getLocation(){
+    public Optional<Location> getLocation() {
         return this.location;
     }
 

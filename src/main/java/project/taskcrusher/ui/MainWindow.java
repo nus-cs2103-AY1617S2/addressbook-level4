@@ -16,7 +16,6 @@ import project.taskcrusher.commons.events.ui.ExitAppRequestEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 import project.taskcrusher.logic.Logic;
 import project.taskcrusher.model.UserPrefs;
-import project.taskcrusher.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
