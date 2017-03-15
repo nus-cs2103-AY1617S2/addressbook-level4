@@ -4,25 +4,44 @@
 
 ## Table of contents
 
-1. [Introduction](#intoduction)
-2. [Setting Up](#setting-up)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+1. [Introduction](#intoduction)  <br>
+2. [Setting Up](#setting-up)  <br>
+    2.1. [Prerequisites]() <br>
+    2.2. [Importing the project into Eclipse]()  <br>
+    2.3. [Configuring Checkstyle]()  <br>
+    2.4. [Troubleshooting Project Setup]()  <br>
+3. [Design](#design) <br>
+    3.1. [Architecture]() <br>
+    3.2. [UI Component]() <br>
+    3.3. [Logic Component]() <br>
+    3.4. [Model Component]() <br>
+    3.5. [Storage Component]() <br>
+    3.6. [Common Classes]() <br>
+4. [Implementation](#implementation) <br>
+    4.1. [Logging]() <br>
+    4.2  [Configuration]() <br>
+5. [Testing](#testing) <br>
+    5.1 [Troubleshooting tests]() <br>
+6. [Dev Ops](#dev-ops) <br>
+    6.1 [Build Automation]() <br>
+    6.2 [Continuous Integration]() <br>
+    6.3 [Publishing Documentation]() <br>
+    6.4 [Making a Release]() <br>
+    6.5 [Converting Documentation to PDF format]() <br>
+    6.6 [Managing Dependencies]() <br>
+7. [Appendix A: User Stories](#appendix-a--user-stories) <br>
+8. [Appendix B: Use Cases](#appendix-b--use-cases) <br>
+9. [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements) <br>
+10. [Appendix D: Glossary](#appendix-d--glossary) <br>
+11. [Appendix E : Product Survey](#appendix-e--product-survey) <br>
 
 &nbsp;
 
 ## 1. Introduction
 
-TypeTask is a task manager for active users who prefer to manage their tasks and plans by keyboard commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX.
+TypeTask is a task manager for active users who prefer to manage their tasks and plans by keyboard commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX. <br>
 
-This guide illustrates the design and implementation of TypeTask. It will guide you as a developer to understand how TypeTask functions and show you how to be a part of its progress. 
+This guide illustrates the design and implementation of TypeTask. It will guide you as a developer to understand how TypeTask functions and show you how to be a part of its progress.  <br>
 
 &nbsp;
 
@@ -102,7 +121,8 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 ### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+
+_Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
@@ -126,19 +146,19 @@ Two of those classes play important roles at the architecture level.
 
 
 #### `UI`
-The [**`UI`**](#ui-component) component interacts with the user by receiving commands and revealing information.
+The [**`UI`**](#ui-component) component interacts with the user by receiving commands and revealing information. <br>
 
 
 #### `Logic`
-The [**`Logic`**](#logic-component) component processes and executes the user's commands.
+The [**`Logic`**](#logic-component) component processes and executes the user's commands. <br>
 
 
 #### `Model`
-The [**`Model`**](#model-component) component signifies and holds TypeTask's information.
+The [**`Model`**](#model-component) component signifies and holds TypeTask's information. <br>
 
 
 #### `Storage`
-The [**`Storage`**](#storage-component) component component reads data from and writes data to the hard disk.
+The [**`Storage`**](#storage-component) component component reads data from and writes data to the hard disk. <br>
 
 
 Each of the `UI`, `Logic`, `Model` and `Storage` components:
@@ -146,8 +166,8 @@ Each of the `UI`, `Logic`, `Model` and `Storage` components:
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component ([Figure 2.1.2](#logic)) defines its API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
+For example, the `Logic` component ([Figure 3.3.1](#logic)) defines its API in the `Logic.java`
+interface and exposes its functionality using the `LogicManager.java` class. <br>
 
 
 #### Events-Driven nature of the design
@@ -156,7 +176,8 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 command `delete 1`.
 
 <img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+
+_Figure 3.1.1a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
@@ -165,7 +186,8 @@ The diagram below shows how the `EventsCenter` reacts to that event, which event
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+
+_Figure 3.1.1b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -176,7 +198,8 @@ The sections below will give more details of each single component.
 ### 3.2. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+
+_Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
@@ -197,7 +220,8 @@ The `UI` component,
 ### 3.3. Logic component
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+
+_Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
@@ -212,12 +236,14 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
  
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+
+_Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 3.4. Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+
+_Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
@@ -232,7 +258,8 @@ The `Model` component,
 ### 3.5. Storage component
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
+
+_Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
@@ -365,7 +392,8 @@ Here are the steps to convert the project documentation files to PDF format.
     For best results, use the settings indicated in the screenshot below. <br>
    
    <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
+   
+   _Figure 6.5.1 : Saving documentation as PDF files in Chrome_
 
 ### 5.6. Managing Dependencies
 
@@ -376,8 +404,9 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+&nbsp;
 
-## Appendix A : User Stories
+## 7. Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
@@ -415,9 +444,11 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user with many tasks in the task manager | sort task by name | locate a task easily
 `*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
 
-## Appendix B : Use Cases
+&nbsp;
 
->For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
+## 8. Appendix B : Use Cases
+
+> For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use Case: Add task
 
@@ -772,8 +803,9 @@ Use case ends
 11. Should come with automated unit tests and open source code
 12. Should display command results within 100 milliseconds
 
+&nbsp;
 
-## Appendix D : Glossary
+## 10. Appendix D : Glossary
 
 ##### Mainstream OS
 
@@ -785,14 +817,13 @@ Use case ends
 
 ##### Storage folder
 
-> The directory in a computer where the application stores the data
+> The directory found in a computer where the application stores the data
 
+&nbsp;
 
-## Appendix E : Product Survey
+## 11. Appendix E : Product Survey
 
 **Product #1: Wunderlist**
-
-Author: ...
 
 Pros:
 
@@ -819,6 +850,7 @@ Cons:
 * Does not store data into local storage files but links to an online user account instead. Internet connectivity is still dependent if user wants to work from different computers
 * Does not have one-shot approach when performing functions other than adding a task with no deadlines
 * Requires a few clicks to perform functions
+
 
 **Product #2: Google Calendar + Google Task**
 
@@ -859,6 +891,7 @@ Cons:
 * The user has to search through all existing tasks to look for an empty slot, which is not considered a user-friendly approach.
 * Blocking of multiple slots for tasks with unconfirmed timings is not supported. User will not be able to schedule tasks with unconfirmed timings
 * Internet connectivity is required to access the application through other devices
+
 
 **Product #4: Remember the Milk**
 
