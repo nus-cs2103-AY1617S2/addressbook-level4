@@ -57,11 +57,11 @@
 
 ## 1. Introduction
 
-TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply with only a single line of command! With the efficacy of a calendar without its shortcomings, TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. TypeTask is especially good for:
+TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply with only a single line of command! With the efficacy of a calendar without its shortcomings, TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. TypeTask is especially good for you if:
 
-> Users who wants to do everything through a single line of command <br>
-> Users who want an application that works offline <br>
-> Users who have tasks that have deadlines/start-dates <br>
+> You want to do everything through a single line of command <br>
+> You want an application that works offline <br>
+> You want to write tasks that have deadlines or start-dates <br>
 
 &nbsp;
 
@@ -106,7 +106,7 @@ Format: `help`
 
 
 ### 3.2. Adding a Floating Task: `add`
-The first thing you would do is to add your first task! <br>
+The first thing you would do is to add your first task! Lets make it simple by first adding a floating task. <br>
 
 Format: `add <TASK NAME>`
 
@@ -121,7 +121,7 @@ Examples:
 
 
 ### 3.3. Adding a Deadline Task: `add`
-The first thing you would do is to add your first task! <br>
+What if you want to submit a report by a certain date or time. You might want to add a task that has a deadline. <br>
 
 Format: `add <TASK NAME> d/<DATE> or add <TASK NAME> d/<DATE> t/<TIME>`
 
@@ -139,7 +139,7 @@ Examples:
 
 
 ### 3.4. Adding an Event Task: `add`
-The first thing you would do is to add your first task! <br>
+Now you might be interested in adding an event, which has a start time and an end time. <br>
 
 Format: `add <EVENT NAME> from d/<DATE> t/<TIME> to d/<DATE> t/<TIME>`
 
@@ -358,11 +358,11 @@ Have you completed to schedule your tasks? Good job! To exit the program you can
 Format: `exit`
 
 
-### 3.20. Saving the data
+### 3.20. Saving the Data
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
 
 
-### 3.21. Differentiating your tasks’ urgency
+### 3.21. Differentiating your Tasks’ Urgency
 TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
 
 `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
