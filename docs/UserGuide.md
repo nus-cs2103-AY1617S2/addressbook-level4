@@ -58,7 +58,7 @@ Edits an existing task in the task list. <br>
 Format: `edit INDEX TITLE d/CONTENT from/[DATE] [TIME] to/[DATE] [TIME] [#tags]`<br>
 Format: `edit INDEX TITLE d/CONTENT by/[DATE] [TIME] [#tags]`
 
-> TheEdits the person at the specified INDEX. 
+> Edits the person at the specified INDEX. 
 > The index refers to the index number shown in the last person listing.
 > The index must be a positive integer 1, 2, 3, ...
 > Existing values will be updated to the input values.
@@ -67,19 +67,19 @@ Format: `edit INDEX TITLE d/CONTENT by/[DATE] [TIME] [#tags]`
 
 Examples:
 *  edit 1  d/22/03<br>
-   Edits the due date the 1st task to be 22/03.
+   Edits the due date of the 1st task to be 22/03.
 *  edit 2 Project meeting t/LT1<br>
    Edits the 2nd task to Project meeting and add hashtag LT1.
 
 ### 2.5. Finding all tasks containing any keyword in their title or due dates: `find`
 
-Finds tasks containing any of the given keywords or due by given date.<br>
+Find all tasks containing any of the given keywords or due by given date.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `project` will not match `Project`
+> * The keyword is case sensitive. e.g `project` will not match `Project`
 > * The order of the keywords does not matter. e.g. `Meeting Project` will match `Project Meeting`
 > * Search can based on task name, date or tags.
-> * Only full words will be matched e.g. `Project` will not match `Projects`
+> * Only complete word will be matched e.g. `Project` will not match `Projects`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Project` will match `Project Meeting`
 
@@ -117,7 +117,7 @@ Format: `select INDEX`
 
 > Alternative: click to the task in the showing list
 
-> Selects the task and display all details at the specified `INDEX`.<br>
+> Select the task and display all details at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
