@@ -176,7 +176,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/Delete	 SdForLogic.png" width="800"><br>
+<img src="images/DeleteSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
@@ -351,7 +351,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | remove task that I no longer need
 `* * *` | user | update a task | update task details so that my task is update to date
 `* * *` | user | view an existing task | view the details of the task
-`* * *` | user | list outstanding tasks in a chronological order | know what tasks I need to complete and in which order
+`* * *` | user | list outstanding/completed/overdue tasks in a chronological order | know what tasks I need to complete and in which order
 `* * *` | user | add attachments and links to a task | find all the resources and information I need to complete the task in one place
 `* * *` | user | undo my previous operation | can undo any mistakes executed in the previous command
 `* * *` | user | find task based on keywords | find out what are the tasks with the same nature
@@ -374,7 +374,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `Task Manger` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `DoOrDie Task Manger` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Create new task
 Use case ID: UC01 Create new task<br />
@@ -678,6 +678,7 @@ Use case ends
 > 2a1. System notifies the user that there is no completed task<br />
   Use case ends
 
+
 #### Use case: Add location to a task
 Use case ID: UC18 Add location to a task<br />
 Actor: User<br />
@@ -805,6 +806,24 @@ Use case ends
 
 > Use case ends
 
+#### Use case: View overdue tasks
+Use case ID: UC25 View Overdue tasks<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to list overdue tasks
+2. System shows a list of overdue task<br />
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. System notifies the user that there are no overdue tasks<br />
+  Use case ends
+
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 8 or higher installed.
@@ -812,22 +831,23 @@ Use case ends
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should come with automated unit tests and open source code.
-5. Should favor DOS style commands over Unix-style commands.
+5. Should favor Unix-style commands over DOS style commands.
 6. Should be require less than 3 prompts to complete a function
 7. Should backup files after each exit
 8. Should allow user to exit the program with no data loss
-9. Should have basic security features in place
-10. Should be able to document the unhandled errors
-11. Should come with the user guide and other documentations
-12. Intent of the user should be extracted instead of forcing them to adhere to a specific order or keyword
-13. Should run on Java 8 and above
-14. User should be notified if there is a task that overlaps another task
-15. Commands should take less than 5 second to run
-16. When pulling from google calendar, priority is given to google calendar if there is a conflict
-17. When pushing to google calendar, priority is given to the application if there is a conflict
-18. Persistent storage should be updated each time a command that modifies data is executed
-19. Translate english sentence to command
-20. Translate relative dates into absolute dates
+9. Should allow user to enter the program with previous data if the storage file is present and valid
+10. Should create sample data and data storage file when the data storage file is missing
+11. Should have basic security features in place
+12. Should be able to document the unhandled errors
+13. Should come with the user guide and other documentations
+14. Intent of the user should be extracted instead of forcing them to adhere to a specific order or keyword
+15. Should run on Java 8 and above
+16. User should be notified if there is a task that overlaps another task
+17. Commands should take less than 5 second to run
+18. When pulling from google calendar, priority is given to google calendar if there is a conflict
+19. When pushing to google calendar, priority is given to the application if there is a conflict
+20. Persistent storage should be updated each time a command that modifies data is executed
+21. Translate relative dates into absolute dates
 
 ## Appendix D : Glossary
 

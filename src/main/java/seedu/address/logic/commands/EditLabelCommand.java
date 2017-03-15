@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
@@ -17,7 +18,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class EditLabelCommand extends Command {
 
-    public static final String COMMAND_WORD = "editlabel";
+    public static final String COMMAND_WORD = "EDITLABEL";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a label to another label \n"
             + "Existing label will be overwritten by the new label.\n"
@@ -70,6 +71,7 @@ public class EditLabelCommand extends Command {
                 labelExist = true;
 
                 try {
+                    saveCurrentState();
                     model.updateTask(i, task);
                 } catch (DuplicateTaskException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -77,6 +79,25 @@ public class EditLabelCommand extends Command {
             }
         }
         return labelExist;
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
+                        model.getRawTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }

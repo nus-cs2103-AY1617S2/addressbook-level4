@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -162,13 +163,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("HELP", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+        assertCommandSuccess("EXIT", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -179,24 +180,29 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("CLEAR", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        String expectedTitleErrorMessage = "A Task's title should only contain alphanumeric characters and spaces,"
+                + " and it should not be blank";
+
+        assertCommandFailure("ADD 1234 / wrong args wrong args", expectedTitleErrorMessage);
+        assertCommandFailure("ADD Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address",
+                expectedTitleErrorMessage);
+        assertCommandFailure("ADD Valid Name p/12345 valid@email.butNoPrefix a/valid, address",
+                expectedTitleErrorMessage);
+        assertCommandFailure("ADD Valid Name p/12345 e/valid@email.butNoAddressPrefix valid,"
+                + " address", expectedTitleErrorMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] by sunday 0900",
+        assertCommandFailure("ADD []\\[;] BY sunday 0900",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name by friday t/invalid_-[.label",
+        assertCommandFailure("ADD Valid Name BY friday #invalid_-[.label",
                 Label.MESSAGE_LABEL_CONSTRAINTS);
 
     }
@@ -242,7 +248,7 @@ public class LogicManagerTest {
         // prepare task manager state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
+        assertCommandSuccess("LIST",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
@@ -287,12 +293,12 @@ public class LogicManagerTest {
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
+        assertIncorrectIndexFormatBehaviorForCommand("SELECT", expectedMessage);
     }
 
     @Test
     public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
+        assertIndexNotFoundBehaviorForCommand("SELECT");
     }
 
     @Test
@@ -303,7 +309,7 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateAddressBook(threeTasks);
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("select 2",
+        assertCommandSuccess("SELECT 2",
                 String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
                 expectedAB.getTaskList());
@@ -315,12 +321,16 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+        String commandWord = "DELETE";
+        assertCommandFailure(commandWord , expectedMessage); //label or index missing
+        assertCommandFailure(commandWord + " +1", expectedMessage); //signed index treated as invalid label
+        assertCommandFailure(commandWord + " -1", expectedMessage); //signed index treated as invalid label
+        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
     }
 
     @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("delete");
+        assertIndexNotFoundBehaviorForCommand("DELETE");
     }
 
     @Test
@@ -332,17 +342,16 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2",
+        assertCommandSuccess("DELETE 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
     }
 
-
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-        assertCommandFailure("find ", expectedMessage);
+        assertCommandFailure("FIND ", expectedMessage);
     }
 
     @Test
@@ -358,7 +367,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("FIND KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -377,7 +386,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("FIND KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -396,7 +405,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM",
+        assertCommandSuccess("FIND key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -409,12 +418,13 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Title name = new Title("Adam Brown");
-            Deadline deadline = new Deadline("today 2100");
+            Title name = new Title("Meet Adam Brown");
+            Optional<Deadline> startTime = Optional.ofNullable(new Deadline("today 1800"));
+            Optional<Deadline> deadline = Optional.ofNullable(new Deadline("today 2100"));
             Label label1 = new Label("label1");
             Label label2 = new Label("longerlabel2");
             UniqueLabelList labels = new UniqueLabelList(label1, label2);
-            return new Task(name, deadline, labels);
+            return new Task(name, startTime, deadline, false, labels);
         }
 
         /**
@@ -427,7 +437,9 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Task " + seed),
-                    new Deadline("tomorrow 2359"),
+                    Optional.ofNullable(new Deadline("tomorrow 0100")),
+                    Optional.ofNullable(new Deadline("tomorrow 2359")),
+                    false,
                     new UniqueLabelList(new Label("label" + Math.abs(seed)), new Label("label" + Math.abs(seed + 1)))
                     );
         }
@@ -436,17 +448,16 @@ public class LogicManagerTest {
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
-            cmd.append("add ");
-
+            cmd.append("ADD ");
             cmd.append(p.getTitle().toString());
-
-            cmd.append(" by ");
-
+            cmd.append(" FROM ");
+            cmd.append(p.getStartTime());
+            cmd.append(" TO ");
             cmd.append(p.getDeadline());
 
             UniqueLabelList labels = p.getLabels();
             for (Label t: labels) {
-                cmd.append(" t/").append(t.labelName);
+                cmd.append(" #").append(t.labelName);
             }
 
             return cmd.toString();
@@ -525,7 +536,9 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Deadline("next wed 2359"),
+                    Optional.ofNullable(new Deadline("today")),
+                    Optional.ofNullable(new Deadline("next wed 2359")),
+                    false,
                     new UniqueLabelList(new Label("label"))
                     );
         }

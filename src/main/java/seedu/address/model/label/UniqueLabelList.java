@@ -33,8 +33,8 @@ public class UniqueLabelList implements Iterable<Label> {
     public UniqueLabelList() {}
 
     /**
-     * Creates a UniqueLabelList using given String labels.
-     * Enforces no nulls or duplicates.
+     * Creates a UniqueLabelList using given String labels. Enforces no nulls or
+     * duplicates.
      */
     public UniqueLabelList(String... labels) throws DuplicateLabelException, IllegalValueException {
         final List<Label> labelList = new ArrayList<Label>();
@@ -45,8 +45,8 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Creates a UniqueLabelList using given labels.
-     * Enforces no nulls or duplicates.
+     * Creates a UniqueLabelList using given labels. Enforces no nulls or
+     * duplicates.
      */
     public UniqueLabelList(Label... labels) throws DuplicateLabelException {
         assert !CollectionUtil.isAnyNull((Object[]) labels);
@@ -58,8 +58,8 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Creates a UniqueLabelList using given labels.
-     * Enforces no null or duplicate elements.
+     * Creates a UniqueLabelList using given labels. Enforces no null or
+     * duplicate elements.
      */
     public UniqueLabelList(Collection<Label> labels) throws DuplicateLabelException {
         this();
@@ -67,8 +67,7 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Creates a UniqueLabelList using given labels.
-     * Enforces no nulls.
+     * Creates a UniqueLabelList using given labels. Enforces no nulls.
      */
     public UniqueLabelList(Set<Label> labels) {
         assert !CollectionUtil.isAnyNull(labels);
@@ -76,16 +75,16 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Creates a copy of the given list.
-     * Insulates from changes in source.
+     * Creates a copy of the given list. Insulates from changes in source.
      */
     public UniqueLabelList(UniqueLabelList source) {
-        internalList.addAll(source.internalList); // insulate internal list from changes in argument
+        internalList.addAll(source.internalList); // insulate internal list from
+                                                  // changes in argument
     }
 
     /**
-     * Returns all labels in this list as a Set.
-     * This set is mutable and change-insulated against the internal list.
+     * Returns all labels in this list as a Set. This set is mutable and
+     * change-insulated against the internal list.
      */
     public Set<Label> toSet() {
         return new HashSet<>(internalList);
@@ -107,6 +106,27 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
+     * Removes all labels from the list. Warning, this cannot be undone!
+     */
+    public void removeAll() {
+        internalList.clear();
+    }
+
+    @Override
+    public UniqueLabelList clone() {
+        UniqueLabelList y = new UniqueLabelList();
+        try {
+
+            for (Label label : internalList) {
+                y.add(new Label(label.getLabelName()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return y;
+    }
+
+    /**
      * Ensures every label in the argument list exists in this object.
      */
     public void mergeFrom(UniqueLabelList from) {
@@ -115,7 +135,8 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Returns true if the list contains an equivalent Label as the given argument.
+     * Returns true if the list contains an equivalent Label as the given
+     * argument.
      */
     public boolean contains(Label toCheck) {
         assert toCheck != null;
@@ -123,11 +144,12 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Returns true if the list contains an equivalent Label as the given argument.
+     * Returns true if the list contains an equivalent Label as the given
+     * argument.
      */
     public boolean containsStringLabel(String labelToCheck) {
         assert labelToCheck != null;
-        //return internalList.contains(toCheck);
+        // return internalList.contains(toCheck);
         for (Label label : internalList) {
             if (label.getLabelName().equalsIgnoreCase(labelToCheck)) {
                 return true;
@@ -139,7 +161,9 @@ public class UniqueLabelList implements Iterable<Label> {
     /**
      * Adds a Label to the list.
      *
-     * @throws DuplicateLabelException if the Label to add is a duplicate of an existing Label in the list.
+     * @throws DuplicateLabelException
+     *             if the Label to add is a duplicate of an existing Label in
+     *             the list.
      */
     public void add(Label toAdd) throws DuplicateLabelException {
         assert toAdd != null;
@@ -162,8 +186,7 @@ public class UniqueLabelList implements Iterable<Label> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueLabelList // instanceof handles nulls
-                        && this.internalList.equals(
-                                ((UniqueLabelList) other).internalList));
+                        && this.internalList.equals(((UniqueLabelList) other).internalList));
     }
 
     public boolean equalsOrderInsensitive(UniqueLabelList other) {
@@ -176,7 +199,8 @@ public class UniqueLabelList implements Iterable<Label> {
     }
 
     /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     * Signals that an operation would have violated the 'no duplicates'
+     * property of the list.
      */
     public static class DuplicateLabelException extends DuplicateDataException {
         protected DuplicateLabelException() {

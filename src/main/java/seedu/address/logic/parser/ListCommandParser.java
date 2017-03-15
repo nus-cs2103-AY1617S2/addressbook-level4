@@ -2,9 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-
-import java.util.Date;
-import java.util.List;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_COMPLETED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_INCOMPLETE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEINTERVAL_START;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
@@ -18,15 +19,23 @@ public class ListCommandParser {
      */
     public Command parse(String args) {
         try {
-            if (!args.isEmpty() && args.contains("by ")) {
-                ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DEADLINE);
-                argsTokenizer.tokenize(args);
-                List<Date> endDateList = new DateTimeParser().parse(
-                        argsTokenizer.getValue(PREFIX_DEADLINE).get()).get(0).getDates();
-                List<Date> startDateList = new DateTimeParser().parse("now").get(0).getDates();
-                return new ListCommand(startDateList.get(0), endDateList.get(0));
+            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DEADLINE,
+                    PREFIX_TIMEINTERVAL_START, PREFIX_TIMEINTERVAL_END, PREFIX_STATUS_COMPLETED,
+                    PREFIX_STATUS_INCOMPLETE);
+            argsTokenizer.tokenize(args);
+            if (args.trim().contains(PREFIX_TIMEINTERVAL_START.getPrefix())
+                    && args.trim().contains(PREFIX_TIMEINTERVAL_END.getPrefix())) {
+                return new ListCommand(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START).get(),
+                        argsTokenizer.getValue(PREFIX_TIMEINTERVAL_END).get());
+            } else if (args.trim().contains(PREFIX_DEADLINE.getPrefix())) {
+                return new ListCommand(argsTokenizer.getValue(PREFIX_DEADLINE).get());
+            } else if (args.trim().contains(PREFIX_STATUS_COMPLETED.getPrefix())) {
+                return new ListCommand(new Boolean(true));
+            } else if (args.trim().contains(PREFIX_STATUS_INCOMPLETE.getPrefix())) {
+                return new ListCommand(new Boolean(false));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 

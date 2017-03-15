@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -15,7 +16,27 @@ public class IncorrectCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        saveCurrentState();
         throw new CommandException(feedbackToUser);
+    }
+
+    /**
+     * Save the data in task manager if command is mutating the data
+     */
+    public void saveCurrentState() {
+        if (isMutating()) {
+            try {
+                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
+                        model.getRawTaskManager().getImmutableLabelList());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return false;
     }
 
 }
