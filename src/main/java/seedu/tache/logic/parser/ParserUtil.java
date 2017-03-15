@@ -49,7 +49,11 @@ public class ParserUtil {
 
         String index = matcher.group("targetIndex");
         if (!StringUtil.isUnsignedInteger(index)) {
-            return Optional.of(toAlphabeticReverse(index.toUpperCase()));
+            if (!StringUtil.hasSpecialCharactes(index) && !index.equals("0")) {
+                return Optional.of(toAlphabeticReverse(index.toUpperCase()));
+            } else {
+                return Optional.empty();
+            }
         }
         return Optional.of(Integer.parseInt(index));
 

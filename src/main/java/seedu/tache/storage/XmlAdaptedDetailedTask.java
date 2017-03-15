@@ -49,6 +49,7 @@ public class XmlAdaptedDetailedTask {
      *
      * @param source future changes to this will not affect the created XmlAdaptedDetailedTask
      */
+
     public XmlAdaptedDetailedTask(ReadOnlyDetailedTask source) {
         name = source.getName().fullName;
         startDate = source.getStartDate().toString();
