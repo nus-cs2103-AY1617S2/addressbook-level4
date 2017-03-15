@@ -83,7 +83,7 @@ public class LogicManagerTest {
     }
 
     @Before
-    public void setUp() {       
+    public void setUp() {
         String tempTaskListFile = saveFolder.getRoot().getPath() + "TempTaskList.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         model = new ModelManager(new StorageManager(tempTaskListFile, tempPreferencesFile));
