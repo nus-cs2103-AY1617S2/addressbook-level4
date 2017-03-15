@@ -33,6 +33,9 @@ public class ParserUtil {
     private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern DURATION_FORMAT = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
+    
+    public static final int TYPE_TASK = 0;
+    public static final int TYPE_DETAILED_TASK = 1;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -46,7 +49,7 @@ public class ParserUtil {
 
         String index = matcher.group("targetIndex");
         if (!StringUtil.isUnsignedInteger(index)) {
-            return Optional.empty();
+            return Optional.of(toAlphabeticReverse(index.toUpperCase()));
         }
         return Optional.of(Integer.parseInt(index));
 
@@ -165,5 +168,36 @@ public class ParserUtil {
             return new Name(input);
         }
         throw new IllegalValueException("Invalid Input");
+    }
+    
+    /**
+     * Returns the corresponding integer value of the String entered
+     */
+    private static int toAlphabeticReverse(String input) {
+        char lastCharacter = input.charAt(input.length() - 1);
+        int index = lastCharacter - 'A' + 1;
+        for(int i = input.length() - 1; i > 0; i--){
+            index += 26;
+        }
+        return index;
+    }
+    
+    /**
+     * Returns the type of index (Integer/Alphabet) based on the command
+     * Returns the value of TYPE_TASK if index is a integer
+     * Returns the value of TYPE_DETAILED_TASK if index is a alphabet
+     */
+    public static Optional<Integer> determineIndexType(String command) {
+        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String index = matcher.group("targetIndex");
+        if (!StringUtil.isUnsignedInteger(index)) {
+            return Optional.of(TYPE_DETAILED_TASK);
+        }
+        return Optional.of(TYPE_TASK);
+
     }
 }
