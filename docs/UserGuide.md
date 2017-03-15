@@ -221,8 +221,3 @@ Examples:
 | |e.g. `clear` |
 | Priority | `priority t/TASK p/RANK` |
 | |e.g. ` priority t/Project Meeting p/1` |
-| Exit | `exit` |
-| |e.g. `exit` |
-
-
-
