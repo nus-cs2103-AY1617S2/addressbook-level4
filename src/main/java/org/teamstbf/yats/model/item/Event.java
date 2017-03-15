@@ -33,6 +33,18 @@ public class Event implements ReadOnlyEvent {
         this.isDone = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+    
+    public Event(Title name, Periodic periodic, Schedule startTime,
+    		Schedule endTime, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.period = periodic;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
+        this.isDone = false;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
 
     public Event(ReadOnlyEvent editedReadOnlyPerson) {
         this(editedReadOnlyPerson.getTitle(), editedReadOnlyPerson.getLocation(),

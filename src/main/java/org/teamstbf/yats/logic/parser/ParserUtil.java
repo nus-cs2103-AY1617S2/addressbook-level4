@@ -15,6 +15,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -77,9 +78,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Date> parseDeadline(Optional<String> deadline) throws IllegalValueException {
-        assert deadline != null;
-        return deadline.isPresent() ? Optional.of(new Date(deadline.get())) : Optional.empty();
+    public static Optional<Periodic> parsePeriodic(Optional<String> periodic) throws IllegalValueException {
+        assert periodic != null;
+        return periodic.isPresent() ? Optional.of(new Periodic(periodic.get())) : Optional.empty();
     }
 
     /**
@@ -93,7 +94,7 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Schedule> parseTiming(Optional<String> timing) throws IllegalValueException {
+    public static Optional<Schedule> parseSchedule(Optional<String> timing) throws IllegalValueException {
         assert timing != null;
         return timing.isPresent() ? Optional.of(new Schedule(timing.get())) : Optional.empty();
     }

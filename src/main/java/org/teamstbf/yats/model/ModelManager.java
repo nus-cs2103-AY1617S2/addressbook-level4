@@ -82,10 +82,15 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
 	}
+	
 
 	@Override
 	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
-		// TODO Auto-generated method stub
+		assert editedEvent != null;
+
+		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+		taskManager.updateEvent(taskManagerIndex, editedEvent);
+		indicateTaskManagerChanged();
 	}
 
 	//=========== Filtered Event List Accessors =============================================================

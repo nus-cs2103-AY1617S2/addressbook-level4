@@ -28,8 +28,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [b/DEADLINE] [s/TIME] [d/DESCRIPTION] [t/TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " 1 b/02-02-2017 t/school";
+            + "Parameters: INDEX (must be a positive integer) [s/START_TIME] [e/END_TIME] [d/DESCRIPTION] [t/TAGS]...\n"
+            + "Example: " + COMMAND_WORD + " 1 s/02-02-2017 t/school";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -81,15 +81,14 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
-        // Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
-        // Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
         Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
         Schedule updatedEndTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getEndTime);
-        Date updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Event();
+        return new Event(updatedName, updatedPeriodic, updatedStartTime,
+        		updatedEndTime, updatedDescription, updatedTags);
     }
 
     /**
@@ -169,11 +168,11 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setPeriodic(Optional<Periodic> periodic) {
-        	assert periodic != null;
-        	this.periodic = periodic;
-        }
-
+		public void setPeriodic(Optional<Periodic> periodic) {
+			assert periodic != null;
+        	this.periodic = periodic;		
+		}
+		
         public Optional<Periodic> getPeriodic() {
         	return periodic;
         }
@@ -187,4 +186,5 @@ public class EditCommand extends Command {
             return tags;
         }
     }
+
 }
