@@ -12,7 +12,7 @@ public class DateTimeFormatterUtil {
     public static final String YESTERDAY = "yesterday";
     public static final String TODAY = "today";
     public static final String TOMORROW = "tomorrow";
-    public static final String FORMAT_DATE = "dd MMM yyy";
+    public static final String FORMAT_DATE = "E, dd MMM yyy";
     public static final String FORMAT_TIME = "hh:mm a";
     public static final String DATE_TIME_SEPARATOR = ", ";
 

@@ -14,7 +14,7 @@ public class DateTimeFormatterUtilTest {
     public void formatDate() {
         // Test format normal date
         LocalDateTime aDateTime = LocalDateTime.of(2009, 12, 1, 12, 22);
-        String expectedADateTime = "01 Dec 2009";
+        String expectedADateTime = "Tue, 01 Dec 2009";
         assertEquals(expectedADateTime, DateTimeFormatterUtil.formatDate(aDateTime));
 
         // Test format today
@@ -49,7 +49,7 @@ public class DateTimeFormatterUtilTest {
     @Test
     public void formatTaskDeadline() {
         LocalDateTime deadline = LocalDateTime.of(2008, 12, 1, 12, 22);
-        String expectedDeadline = "by 01 Dec 2008, 12:22 PM";
+        String expectedDeadline = "by Mon, 01 Dec 2008, 12:22 PM";
         assertEquals(expectedDeadline, DateTimeFormatterUtil.formatTaskDeadline(deadline));
     }
 
@@ -58,14 +58,14 @@ public class DateTimeFormatterUtilTest {
         // Different days for from and to
         LocalDateTime fromDifferentDay = LocalDateTime.of(2008, 12, 1, 12, 22);
         LocalDateTime toDifferentDay = LocalDateTime.of(2009, 12, 1, 13, 22);
-        String expectedDifferentDayFromTo = "01 Dec 2008, 12:22 PM to 01 Dec 2009, 01:22 PM";
+        String expectedDifferentDayFromTo = "Mon, 01 Dec 2008, 12:22 PM to Tue, 01 Dec 2009, 01:22 PM";
         assertEquals(expectedDifferentDayFromTo,
                 DateTimeFormatterUtil.formatEventRange(fromDifferentDay, toDifferentDay));
 
         // Same day for from and to
         LocalDateTime fromSameDay = LocalDateTime.of(2009, 12, 1, 13, 22);
         LocalDateTime toSameDay = LocalDateTime.of(2009, 12, 1, 17, 22);
-        String expectedSameDayFromTo = "01 Dec 2009, 01:22 PM to 05:22 PM";
+        String expectedSameDayFromTo = "Tue, 01 Dec 2009, 01:22 PM to 05:22 PM";
         assertEquals(expectedSameDayFromTo,
                 DateTimeFormatterUtil.formatEventRange(fromSameDay, toSameDay));
     }
