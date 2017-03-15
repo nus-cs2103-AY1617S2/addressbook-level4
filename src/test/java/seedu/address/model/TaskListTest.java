@@ -17,9 +17,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class TaskListTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -39,19 +39,19 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskList newData = new TypicalTestPersons().getTypicalAddressBook();
+    public void resetData_withValidReadOnlyTaskList_replacesData() {
+        TaskList newData = new TypicalTestTasks().getTypicalTaskList();
         taskList.resetData(newData);
         assertEquals(newData, taskList);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
-        TypicalTestPersons td = new TypicalTestPersons();
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
+        TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskListStub newData = new TaskListStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         taskList.resetData(newData);
@@ -59,12 +59,12 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskList typicalAddressBook = new TypicalTestPersons().getTypicalAddressBook();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TaskList typicalTaskList = new TypicalTestTasks().getTypicalTaskList();
+        List<ReadOnlyTask> newTasks = typicalTaskList.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalTaskList.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TaskListStub newData = new TaskListStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         taskList.resetData(newData);
@@ -73,11 +73,11 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyTaskList whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskList {
+    private static class TaskListStub implements ReadOnlyTaskList {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
+        TaskListStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
