@@ -1,22 +1,45 @@
-# TypeTask - User Guide
+# User Guide
 
-By : `Team T09-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `JAN 2016`  &nbsp;&nbsp;&nbsp;&nbsp;
-
----
+ &nbsp
 
 1. [Intoduction](#intoduction)
 2. [Quick Start](#quick-start)
 3. [Features](#features)
+   3.1. Viewing Help
+   3.2. Adding a Floating Task
+   3.3. Adding a Deadline Task 
+   3.4. Adding an Event Task 
+   3.5. Adding a Priority Task
+   3.6. Finding a Task
+   3.7. Editing a Task 
+   3.8. Deleting a Task
+   3.9. Completing a Task
+   3.10. Listing All Tasks
+   3.11. Listing Today’s Tasks
+   3.12. Listing Priority Tasks
+   3.13. Listing Completed Tasks
+   3.14. Undoing the Latest Command 
+   3.15. Saving Data to Another Folder 
+   3.16. Changing Default Storage Folder
+   3.17. Using Data from Another Folder
+   3.18. Clearing all Entries
+   3.19. Exiting the Program
+   3.10. Saving your Data
+   3.21. Differentiating your Tasks’ Urgency
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
+
+ &nbsp
 
 ## 1. Introduction
 
 TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply with only a single line of command! With the efficacy of a calendar without its shortcomings, TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. TypeTask is especially good for:
 
-Users who wants to do everything through a single line of command
-Users who want an application that works offline
-Users who have tasks that have deadlines/start-dates
+> Users who wants to do everything through a single line of command
+> Users who want an application that works offline
+> Users who have tasks that have deadlines/start-dates
+
+ &nbsp
 
 ## 2. Quick Start
 
@@ -32,7 +55,7 @@ Users who have tasks that have deadlines/start-dates
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 
    > <img src="images/Ui.png" width="600">
-Fig 1. TypeTask’s User Interface
+   Fig 1. TypeTask’s User Interface
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -46,19 +69,19 @@ Fig 1. TypeTask’s User Interface
    
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
+&nbsp
 
 ## 3. Features
-
 Let us now explore the interesting features found in TypeTask!
 
-### 3.1. Viewing Help : `help`
 
+### 3.1. Viewing Help : `help`
 Having trouble navigating the application? Simply type  help to view a summary of TypeTask’s commands. The help screen will also show if you have entered an incorrect command e.g. abcd. 
 
 Format: `help`
 
-### 3.2. Adding a Floating Task: `add`
 
+### 3.2. Adding a Floating Task: `add`
 The first thing you would do is to add your first task! <br>
 
 Format: `add <TASK NAME>`
@@ -72,8 +95,8 @@ Examples:
 * `add CS2103T Meeting`
 * `add Buy milk`
 
-### 3.2. Adding a Deadline Task: `add`
 
+### 3.2. Adding a Deadline Task: `add`
 The first thing you would do is to add your first task! <br>
 
 Format: `add <TASK NAME> d/<DATE> or add <TASK NAME> d/<DATE> t/<TIME>`
@@ -88,8 +111,8 @@ Examples:
 * `add CS2103T Meeting d/13/10/2016`
 * `add CS2103T Meeting d/13/10/2016 t/11:10am`
 
-### 3.2. Adding an Event Task: `add`
 
+### 3.2. Adding an Event Task: `add`
 The first thing you would do is to add your first task! <br>
 
 Format: `add <EVENT NAME> from d/<DATE> t/<TIME> to d/<DATE> t/<TIME>`
@@ -106,6 +129,7 @@ Examples:
 * `add OPEN HOUSE from d/13/10/2016 t/10:00am to d/16/10/2016 t/5:00 pm`
 * `add CS1010 Lecture from d/10/10/2016 t/12:00pm to d/10/4/2017 t/2:00 pm`
 
+
 ### 3.3. Adding a Priority Task : `add`
 
 Format: `add <TASK NAME> p/<PRIORITY>`
@@ -118,6 +142,7 @@ Things To Note:
 Examples:
 * `add CS2103T Meeting p/high`
 * `add Open House from d/5/11/2016 t/11:00am to d/6/11/2016 t/11:00pm p/low`
+
 
 ### 3.3 Finding a Task: find : `find`
 You may not want to go through the struggle of searching throughout your whole list to find a certain task. You can easily find a task by using the find command, then key in any detail about your task. 
@@ -134,6 +159,7 @@ Examples:
 * `find Meeting`
 * `find Open house`
 
+
 ### 3.3 Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command. 
 
@@ -146,10 +172,10 @@ Things To Note:
 > At least one of the optional fields must be provided.
 > Existing field(s) will be updated with the input fields.
 
-
 Examples:
 * `edit 1 d/02122017 t/11:00am`
 * `edit 2 CS2013T Meeting`
+
 
 ### 3.3 Deleting a Task : `delete`
 There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command. 
@@ -164,6 +190,7 @@ Things To Note:
 Examples:
 * `delete 1`
 
+
 ### 3.3 Completing a Task : `done`
 Completed a task? Good for you! You can mark the task as done by typing in the done command. This will move the task to your completed list.
 
@@ -177,6 +204,7 @@ Things To Note:
 Examples:
 * `done 2`
 
+
 ### 3.3. Listing all Tasks : `list`
 Want to view a list of all your tasks? Use the command list to view all your tasks in TypeTask. <br>
 
@@ -185,6 +213,7 @@ Format: `list`
 Things To Note:
 > This list will refresh itself and show you the latest list when you add a new task or event.
 > This list will be sorted by Priority, Date and Time.
+
 
 ### 3.4. Listing Today Tasks : `listday`
 By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command. 
@@ -205,6 +234,7 @@ Things To Note:
 > This list will refresh itself and show you the latest list when you add a new task or event with priority.
 > This list will be sorted by Date and Time.
 
+
 ### 3.6. Listing Completed Tasks : `listdone`
 To review what you have done (or maybe feel better about yourself), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
@@ -213,6 +243,7 @@ Format: `listdone`
 Things To Note:
 > This list will only show you the tasks that are completed. Deleted Task are not included.
 
+
 ### 2.13. Undoing the Latest Command : `undo`
 Did you accidentally type in the wrong command and did an operation you did not want? Well not to worry! You can type in the undo command, as you do not have to go through the hassle of modifying your recent operation. <br>
 
@@ -220,6 +251,7 @@ Format: `undo`
 
 Things To Note:
 > Undo command will not work if there is no prior command executed.
+
 
 ### 2.9. Saving the Data to Another Folder : `save`
 You may consider to save the TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
@@ -233,6 +265,7 @@ Examples:
 
 * `save C:/Desktop/myTask`
 
+
 ### 2.9. Changing the Default Storage Folder : `setting`
 Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
@@ -244,6 +277,7 @@ Things To Note:
 Examples:
 
 * `setting C:/Desktop/myOtherTask`<br>
+
 
 ### 2.14. Using Data from Another Folder : `use`
 After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
@@ -257,20 +291,24 @@ Examples:
 
 * `use C:/Desktop/myTask`<br>
 
+
 ### 2.15. Clearing all Entries : `clear`
 Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. 
 `*WARNING*` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
 
+
 ### 2.16. Exiting the Program : `exit`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
 Format: `exit`
 
+
 ### 2.17. Saving the data
 
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
+
 
 ### 2.17. Differentiating your tasks’ urgency
 TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
@@ -280,12 +318,16 @@ TypeTask automatically assigns your tasks certain colours to help you differenti
 `Green`: this uncompleted task has a deadline but is not due yet. Phew!
 
 > Note that all tasks that fall outside of these categories will appear normally (i.e. no additional colours).
-
+ 
+&nbsp
+ 
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Manager folder.
+ 
+  &nbsp
 
 ## 5. Command Summary
 Command | Shortcuts | Format | Example
