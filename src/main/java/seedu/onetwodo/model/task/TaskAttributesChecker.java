@@ -27,7 +27,7 @@ public class TaskAttributesChecker {
     
     
     private static void checkIsValidTodo(Task taskUnderTest) throws IllegalValueException{
-        if (!taskUnderTest.getStartDate().toString().isEmpty() && taskUnderTest.getEndDate().toString().isEmpty()){
+        if (taskUnderTest.getStartDate().hasDate() && !taskUnderTest.getEndDate().hasDate()){
             //has start date but no end date
             throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
                     MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
@@ -35,7 +35,7 @@ public class TaskAttributesChecker {
     }
     
     private static void checkIsValidStartDate(Task taskUnderTest, LocalDateTime dateCreated) throws IllegalValueException{
-        if (!taskUnderTest.getStartDate().toString().isEmpty()){
+        if (taskUnderTest.getStartDate().hasDate()){
             if(taskUnderTest.getStartDate().getLocalDateTime().compareTo(dateCreated)<0){
                 //startDate of Task is before the date the task is created
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
@@ -45,7 +45,7 @@ public class TaskAttributesChecker {
     }
     
     private static void checkIsValidEndDate(Task taskUnderTest, LocalDateTime dateCreated) throws IllegalValueException{
-        if (!taskUnderTest.getEndDate().toString().isEmpty()){
+        if (taskUnderTest.getEndDate().hasDate()){
             if(taskUnderTest.getEndDate().getLocalDateTime().compareTo(dateCreated)<0){
                 //endDate of Task is before the date the task is created
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
@@ -55,7 +55,7 @@ public class TaskAttributesChecker {
     }
     
     private static void checkIsValidEvent(Task taskUnderTest) throws IllegalValueException{
-        if (!taskUnderTest.getStartDate().toString().isEmpty() && !taskUnderTest.getEndDate().toString().isEmpty()){
+        if (taskUnderTest.getStartDate().hasDate() && taskUnderTest.getEndDate().hasDate()){
             if(taskUnderTest.getEndDate().getLocalDateTime().compareTo(taskUnderTest.getStartDate().getLocalDateTime())<0){
                 //endDate of Task is before startDate
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
