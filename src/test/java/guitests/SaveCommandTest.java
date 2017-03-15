@@ -4,6 +4,9 @@ import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.junit.Test;
 
 import seedu.toluist.TestApp;
@@ -13,9 +16,6 @@ import seedu.toluist.controller.StoreController;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Gui tests for saveConfig command
