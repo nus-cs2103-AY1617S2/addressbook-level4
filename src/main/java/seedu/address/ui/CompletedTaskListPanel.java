@@ -77,14 +77,13 @@ public class CompletedTaskListPanel extends UiPart<Region> {
                 setGraphic(new TaskCard(task, task.getID()).getRoot());
             }
         }
-    }    
+    }
 
     public void menuTest(){
         if(!flag){
             //show completed task list panel
             completedTaskListView.setPrefHeight(0.0d);
             flag = true;
-   
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO,

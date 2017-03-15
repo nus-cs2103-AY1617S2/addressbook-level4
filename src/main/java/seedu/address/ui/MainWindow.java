@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Region> {
     }
     /*
      * Prepares categorised task list for today/future/completed ListView
-     * 
+     *
      */
     protected void prepareTaskList(ObservableList<ReadOnlyTask> taskList){
         taskListToday.clear();
@@ -150,7 +150,7 @@ public class MainWindow extends UiPart<Region> {
             }else{
                 taskListCompleted.add(tmpTask);
             }
-        }   
+        }
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -164,7 +164,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getCompletedTaskListPlaceholder() {
         return completedTaskListPlaceholder;
     }
@@ -214,8 +214,7 @@ public class MainWindow extends UiPart<Region> {
     public void menuTest(){
         completedTaskListPanel.menuTest();
     }
-   
-    
+
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
