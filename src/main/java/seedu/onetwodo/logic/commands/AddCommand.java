@@ -42,7 +42,7 @@ public class AddCommand extends Command {
     public AddCommand(String name, String startDate, String endDate, String description, Set<String> tags)
             throws IllegalValueException {
         
-        dateCreated = LocalDateTime.now().withHour(0).withMinute(0);
+        dateCreated = LocalDateTime.now().withSecond(0).withNano(0);
         
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
