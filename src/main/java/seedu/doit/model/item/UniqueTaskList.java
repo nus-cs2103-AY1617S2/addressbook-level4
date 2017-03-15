@@ -1,4 +1,4 @@
-package seedu.doit.model.task;
+package seedu.doit.model.item;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,4 +1,4 @@
-package seedu.doit.model.task;
+package seedu.doit.model.item;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 
@@ -8,8 +8,8 @@ import seedu.doit.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only contain numbers";
-    public static final String PRIORITY_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be low med high";
+    public static final String PRIORITY_VALIDATION_REGEX = "(low)|(med)|(high)";
 
     public final String value;
 

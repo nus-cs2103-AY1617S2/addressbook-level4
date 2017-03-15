@@ -2,9 +2,9 @@ package seedu.doit.testutil;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.TaskManager;
+import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.Tag;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building TaskManager objects.

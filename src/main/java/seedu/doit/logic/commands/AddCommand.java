@@ -5,14 +5,16 @@ import java.util.Set;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.exceptions.CommandException;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Event;
+import seedu.doit.model.item.FloatingTask;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.StartTime;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.Task;
-import seedu.doit.model.task.UniqueTaskList;
 
 /**
  * Adds a task to the task manager.
@@ -24,12 +26,21 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task manager. "
         + "Parameters: TASK NAME p/PRIORITY  e/END DATE  d/ADDITIONAL DESCRIPTION [t/TAG]...\n"
         + "Example: " + COMMAND_WORD
-        + " add Task A p/1 e/15-3-2020 23:59 d/secret mission A t/secret";
+        + " CS3230 Assignment1 p/high e/tomorrow 23:59 d/Prove bubble sort A t/CS3230\n"
+        + "add Hackathon p/med s/next monday 9am e/next tuesday d/create chatbot  t/hackathon\n"
+        + "add Food p/low d/for myself t/secret";
+
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
 
-    private final Task toAdd;
+    private final Object toAdd; //TO DO: Should change event and floating task to inherit from task
+    private final TASKTYPE taskType;
+
+
+    public enum TASKTYPE {
+        TASK, FLOATING_TASK, EVENT
+    }
 
     /**
      * Creates an AddCommand using raw values.
@@ -38,6 +49,8 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String priority, String dueDate, String text, Set<String> tags)
         throws IllegalValueException {
+
+        taskType = TASKTYPE.TASK;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -45,7 +58,41 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
             new Name(name),
             new Priority(priority),
-            new Deadline(dueDate),
+            new EndTime(dueDate),
+            new Description(text),
+            new UniqueTagList(tagSet)
+        );
+    }
+
+    public AddCommand(String name, String priority, String startDate, String dueDate, String text, Set<String> tags)
+        throws IllegalValueException {
+
+        taskType = TASKTYPE.EVENT;
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Event(
+            new Name(name),
+            new Priority(priority),
+            new StartTime(startDate),
+            new EndTime(dueDate),
+            new Description(text),
+            new UniqueTagList(tagSet)
+        );
+    }
+
+    public AddCommand(String name, String priority, String text, Set<String> tags)
+        throws IllegalValueException {
+
+        taskType = TASKTYPE.FLOATING_TASK;
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new FloatingTask(
+            new Name(name),
+            new Priority(priority),
             new Description(text),
             new UniqueTagList(tagSet)
         );
@@ -55,12 +102,22 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
+            switch(taskType) {
+            case TASK:
+                model.addTask((Task) toAdd);
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            case EVENT:
+                model.addEvent((Event) toAdd);
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            case FLOATING_TASK:
+                model.addFloatingTask((FloatingTask) toAdd);
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            default:
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+        } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
     }
 
 }

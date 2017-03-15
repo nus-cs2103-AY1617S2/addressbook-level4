@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -28,15 +28,15 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
-        priority.setText(task.getPriority().value);
-        description.setText(task.getDescription().value);
-        deadline.setText(task.getDeadline().value);
+        this.name.setText(task.getName().fullName);
+        this.id.setText(displayedIndex + ". ");
+        this.priority.setText(task.getPriority().value);
+        this.description.setText(task.getDescription().value);
+        this.deadline.setText(task.getEndTime().value);
         initTags(task);
     }
 
     private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        task.getTags().forEach(tag -> this.tags.getChildren().add(new Label(tag.tagName)));
     }
 }

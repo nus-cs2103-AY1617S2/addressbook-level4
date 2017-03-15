@@ -6,14 +6,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
 
 /**
  * JAXB-friendly version of the Task.
@@ -48,7 +48,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         priority = source.getPriority().value;
-        deadline = source.getDeadline().value;
+        deadline = source.getEndTime().value;
         description = source.getDescription().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -68,7 +68,7 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
-        final Deadline deadline = new Deadline(this.deadline);
+        final EndTime deadline = new EndTime(this.deadline);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, deadline, description, tags);

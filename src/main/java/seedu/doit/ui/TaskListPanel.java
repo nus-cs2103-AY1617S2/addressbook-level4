@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.doit.commons.util.FxViewUtil;
-import seedu.doit.model.task.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyTask;
 
 /**
  * Panel containing the list of tasks.
@@ -29,6 +29,8 @@ public class TaskListPanel extends UiPart<Region> {
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
+
+
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);

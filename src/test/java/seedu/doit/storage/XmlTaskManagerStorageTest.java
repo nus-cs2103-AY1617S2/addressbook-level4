@@ -15,7 +15,7 @@ import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.FileUtil;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
-import seedu.doit.model.task.Task;
+import seedu.doit.model.item.Task;
 import seedu.doit.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {

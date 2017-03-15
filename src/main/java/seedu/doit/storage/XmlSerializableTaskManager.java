@@ -12,9 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
 
 /**
  * An Immutable TaskManager that is serializable to XML format

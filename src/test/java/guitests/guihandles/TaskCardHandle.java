@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a task card in the task list panel.
@@ -75,7 +75,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
             && getPriority().equals(task.getPriority().value)
-            && getDeadline().equals(task.getDeadline().value)
+            && getDeadline().equals(task.getEndTime().value)
             && getDescription().equals(task.getDescription().value)
             && getTags().equals(getTags(task.getTags()));
     }

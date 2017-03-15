@@ -1,11 +1,11 @@
 package seedu.doit.testutil;
 
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.ReadOnlyTask;
 
 /**
  * A mutable task object. For testing only.
@@ -14,7 +14,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Description description;
-    private Deadline deadline;
+    private EndTime deadline;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -28,7 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
-        this.deadline = taskToCopy.getDeadline();
+        this.deadline = taskToCopy.getEndTime();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
@@ -51,11 +51,12 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public Deadline getDeadline() {
+    @Override
+    public EndTime getEndTime() {
         return deadline;
     }
 
-    public void setDeadline(Deadline deadline) {
+    public void setDeadline(EndTime deadline) {
         this.deadline = deadline;
     }
 
@@ -87,7 +88,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getDescription().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("e/" + this.getDeadline().value + " ");
+        sb.append("e/" + this.getEndTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

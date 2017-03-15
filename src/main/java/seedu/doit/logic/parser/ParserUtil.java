@@ -13,12 +13,13 @@ import java.util.stream.Collectors;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.StringUtil;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.StartTime;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -95,12 +96,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>}
+     * if {@code startTime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
+    }
+
+    /**
      * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>}
      * if {@code deadline} is present.
      */
-    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+    public static Optional<EndTime> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
-        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
+        return deadline.isPresent() ? Optional.of(new EndTime(deadline.get())) : Optional.empty();
     }
 
     /**

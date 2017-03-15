@@ -39,14 +39,14 @@ import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
 import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
+import seedu.doit.model.item.Description;
+import seedu.doit.model.item.EndTime;
+import seedu.doit.model.item.Name;
+import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
-import seedu.doit.model.task.Deadline;
-import seedu.doit.model.task.Description;
-import seedu.doit.model.task.Name;
-import seedu.doit.model.task.Priority;
-import seedu.doit.model.task.ReadOnlyTask;
-import seedu.doit.model.task.Task;
 import seedu.doit.storage.StorageManager;
 
 
@@ -191,11 +191,11 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 5 e/valid,deadline.butNoPriorityPrefix d/valid,description",
+        assertCommandFailure("add Valid Name 5 e/valid, d/valid,description",
             expectedMessage);
-        assertCommandFailure("add Valid Name p/4 valid,deadline.butNoPrefix d/valid, description",
+        assertCommandFailure("add Valid Name d/valid",
             expectedMessage);
-        assertCommandFailure("add Valid Name p/2 e/valid,deadline.butNoDescriptionPrefix valid, description",
+        assertCommandFailure("add Valid Name e/valid",
             expectedMessage);
     }
 
@@ -416,8 +416,8 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Priority privatePriority = new Priority("111111");
-            Deadline deadline = new Deadline("adam@gmail.com");
+            Priority privatePriority = new Priority("low");
+            EndTime deadline = new EndTime("tomorrow");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -435,8 +435,8 @@ public class LogicManagerTest {
         private Task generateTask(int seed) throws Exception {
             return new Task(
                 new Name("Task " + seed),
-                new Priority("" + Math.abs(seed)),
-                new Deadline(seed + "2359"),
+                new Priority("high"),
+                new EndTime(seed + "2359"),
                 new Description("House of " + seed),
                 new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -451,7 +451,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getDeadline());
+            cmd.append(" e/").append(p.getEndTime());
             cmd.append(" p/").append(p.getPriority());
             cmd.append(" d/").append(p.getDescription());
 
@@ -538,8 +538,8 @@ public class LogicManagerTest {
         private Task generateTaskWithName(String name) throws Exception {
             return new Task(
                 new Name(name),
-                new Priority("1"),
-                new Deadline("today"),
+                new Priority("low"),
+                new EndTime("today"),
                 new Description("House of 1"),
                 new UniqueTagList(new Tag("tag"))
             );
