@@ -32,7 +32,7 @@ public class ListCommandTest extends DoistGUITest {
         commandBox.runCommand("list \\under !@#$%^");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
-    
+
     @Test
     public void testListFinished() {
         commandBox.runCommand("list finished");
@@ -52,9 +52,9 @@ public class ListCommandTest extends DoistGUITest {
         }
         assertResultMessage(ListCommand.getSuccessMessageListUnder(tagList));
     }
-    
+
     private void assertListFinished() {
-    	List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
             assertTrue(task.getFinishedStatus().getIsFinished());
         }

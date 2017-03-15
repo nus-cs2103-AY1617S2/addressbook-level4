@@ -128,19 +128,19 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-    	Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
+        Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
-    
+
     @Override
     public void updateFilteredTaskList(TaskType type) {
-    	Qualifier[] qualifiers = {new TaskTypeQualifier(type)};
+        Qualifier[] qualifiers = {new TaskTypeQualifier(type)};
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
     @Override
     public void updateFilteredTaskList(UniqueTagList tags) {
-    	Qualifier[] qualifiers = {new TagQualifier(tags)};
+        Qualifier[] qualifiers = {new TagQualifier(tags)};
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
@@ -165,10 +165,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-        	boolean isSatisfied = true;
-        	for (Qualifier qualifier : qualifiers) {
-        		isSatisfied = isSatisfied && qualifier.run(task);
-        	}
+            boolean isSatisfied = true;
+            for (Qualifier qualifier : qualifiers) {
+                isSatisfied = isSatisfied && qualifier.run(task);
+            }
             return isSatisfied;
         }
 
@@ -221,7 +221,7 @@ public class ModelManager extends ComponentManager implements Model {
             return false;
         }
     }
-    
+
     private class TaskTypeQualifier implements Qualifier {
         private TaskType type;
 
@@ -232,13 +232,13 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (type) {
-			case finished:
-				return task.getFinishedStatus().getIsFinished() == true;
-			case pending:
-				return task.getFinishedStatus().getIsFinished() == false;
-			default:
-				return true;
-			}
+            case finished:
+                return task.getFinishedStatus().getIsFinished() == true;
+            case pending:
+                return task.getFinishedStatus().getIsFinished() == false;
+            default:
+                return true;
+            }
         }
     }
 }

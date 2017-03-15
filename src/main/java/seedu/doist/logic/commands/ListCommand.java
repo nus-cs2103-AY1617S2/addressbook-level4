@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.parser.CliSyntax;
@@ -31,9 +30,9 @@ public class ListCommand extends Command {
     private TaskType type = null;
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
-    	try {
-    		type = TaskType.valueOf(preamble);
-    	} catch (IllegalArgumentException e) {}
+        try {
+            type = TaskType.valueOf(preamble);
+        } catch (IllegalArgumentException e) { }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
@@ -42,10 +41,10 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-    	if (type != null) {
-    		model.updateFilteredTaskList(type);
+        if (type != null) {
+            model.updateFilteredTaskList(type);
             return new CommandResult(MESSAGE_SUCCESS);
-    	} else if (tagList.isEmpty()) {
+        } else if (tagList.isEmpty()) {
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
@@ -66,10 +65,10 @@ public class ListCommand extends Command {
         message = message.trim();
         return message;
     }
-    
+
     public enum TaskType {
-    	pending,
-    	finished,
-    	overdue
+        pending,
+        finished,
+        overdue
     }
 }

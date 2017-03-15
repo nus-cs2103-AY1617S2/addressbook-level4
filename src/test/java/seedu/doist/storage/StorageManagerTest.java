@@ -1,6 +1,5 @@
 package seedu.doist.storage;
 
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
