@@ -179,8 +179,9 @@ Format: `find <KEYWORD>`
 Things To Note:
 > The order of the keywords does not matter. e.g. Meeting Tutor will match Tutor Meeting.
 > The input that is a partial word of a task name will be matched e.g. Meeting will match Meetings.
-> The tasks that match at least one keyword will be returned (i.e. OR search). e.g. Meeting will match Meeting Tutor.
-> find is not case-sensitive, i.e. Meeting Tutor will match meeting tutor
+> The tasks that match at least one keyword will be returned (i.e. OR search).
+e.g. Meeting will match Meeting Tutor.
+> find is not case-sensitive, i.e. Meeting Tutor will match meeting tutor.
 ```
 
 Examples:
@@ -195,7 +196,7 @@ Format: `edit INDEX <TASK NAME> d/<DATE> t/<TIME> p/<PRIORITY>`
 
 ```
 Things To Note:
-> Edits the task at the specified INDEX. The index refers to the index number shown in the last task listing.
+> Edits the task at the specified INDEX. The index refers to the number shown in the last task listing.
 > The index must be a positive integer 1, 2, 3, …
 > Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>
 > At least one of the optional fields must be provided.
@@ -257,7 +258,8 @@ Format: `listday`
 
 ```
 Things To Note:
-> This list will refresh itself and show you the latest list when you add a new floating task or task that is due today.
+> This list will refresh itself and show you the latest list when you 
+add a new floating task or task that is due today.
 > This list will be sorted by Priority and Time.
 ```
 
@@ -269,7 +271,8 @@ Format: `list*`
 
 ```
 Things To Note:
-> This list will refresh itself and show you the latest list when you add a new task or event with priority.
+> This list will refresh itself and show you the latest list 
+when you add a new task or event with priority.
 > This list will be sorted by Date and Time.
 ```
 
@@ -384,20 +387,5 @@ by try right clicking on the file -> Gradle -> Refresh Gradle project
 &nbsp;
 
 ## 5. Command Summary
-Command | Shortcuts | Format | Example
--------- | :-------- | :--------- | :-----------
-add | a, + | add TASK d/DATE t/TIME | add Shop Shoes d/20082017 t/4:30pm
-find | find, search, f | find KEYWORD | find Study Math
-delete | d, remove, rm, - | delete INDEX | delete 10
-done | complete, finish | done INDEX | done 2
-save | s | save FILE_PATH| use C:/Desktop/myTask
-setting | set | setting FILE_PATH| save C:/Desktop/myTask
-use | udf | save FILE_PATH| save C:/Desktop/myOtherTask
-help | help, guide | | |
-list | list, l | | |
-listToday | listday, lt| | |
-listProirity | list*, lp| | |
-listDone | listdone, ld| | |
-undo | u | | |
-clear | cr | | |
-exit | e | | |
+
+<img src="images/commandShortcut.png" width="600">
