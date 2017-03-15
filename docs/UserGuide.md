@@ -106,7 +106,7 @@ Examples:
 * `find ed/04-02-2017`<br>
   Returns all tasks with the end day `04-02-2017`
 
-### 2.5. Finding all tasks by Deadline: `find`
+### 2.6. Finding all tasks by Deadline: `find`
 
 Finds tasks whose deadlines contain any of the given keywords.<br>
 Format: `find sd/date and time` `find ed/date and time`
@@ -123,7 +123,7 @@ Examples:
 * `find ed/05-02-2017`<br>
   Returns all tasks with the end date `05-02-2017`
   
-### 2.6. Deleting a task : `delete`
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task from the TaskBoss.<br>
 Format: `delete INDEX`
@@ -142,7 +142,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Creating a category : `new`
+### 2.8. Creating a category : `new`
 
 Creates a new category in TaskBoss.<br>
 Format: `new CATEGORY`
@@ -151,14 +151,14 @@ Example:
 
 * `new Study`<br>
 
-### 2.8. Clearing tasks by category : `clear`
+### 2.9. Clearing tasks by category : `clear`
 
 Clears all tasks under the specified category from TaskBoss.<br>
 Format: `clear CATEGORY`
 
 > The default categories of TaskBoss are `All Tasks` and `Done`. <br>
 
-### 2.9. Viewing a task : `view`
+### 2.10. Viewing a task : `view`
 
 Views a task by entering the task index from TaskBoss.<br>
 Format: `view INDEX`
@@ -167,7 +167,7 @@ Format: `view INDEX`
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
-### 2.10. Modifying a category name : `name`
+### 2.11. Modifying a category name : `name`
 
 Modifies a category name in TaskBoss.<br>
 Format: `name EXISTING_CATEGORY NEW_CATEGORY`
@@ -176,7 +176,7 @@ Example:
 
 * `name School ModuleStudy`<br>
 
-### 2.11. Listing tasks by category : `listcategory`
+### 2.12. Listing tasks by category : `listcategory`
 
 Lists all tasks under a specified category.<br>
 Format: `listcategory CATEGORY`
@@ -185,7 +185,7 @@ Example:
 
 * `listcategory School`<br>
 
-### 2.12. Marking a task done : `done`
+### 2.13. Marking a task done : `done`
 
 Marks a task done in TaskBoss.<br>
 Format: `done INDEX`
@@ -194,40 +194,40 @@ Format: `done INDEX`
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
-### 2.13. Undoing a command : `undo`
+### 2.14. Undoing a command : `undo`
 
 Undoes a most recent command.<br>
 Format: `undo`
 
-### 2.14. Sorting tasks by deadline : `sort`
+### 2.15. Sorting tasks by deadline : `sort`
 
 Sorts tasks in TaskBoss by their deadlines.<br>
 Format: `sort`
 
 > Tasks are sorted by nearest end date and time
 
-### 2.15. Sorting tasks by priority : `sort p`
+### 2.16. Sorting tasks by priority : `sort p`
 
 Sorts tasks in the TaskBoss by their priorities.<br>
 Format: `sort p`
 
 > Tasks are sorted by descending order of priority levels
 
-### 2.16. Exiting the program : `exit`
+### 2.17. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.17. Saving the data 
+### 2.18. Saving the data 
 
 TaskBoss data will automatically be saved in local hard disk after any command that mutates the data.<br>
 There is no need to save manually.
 
-### 2.18. Exporting data to an existing file : `save e/`
+### 2.19. Exporting data to an existing file : `save e/`
 
 Format: `save e/FILE_PATH`
 
-### 2.19. Exporting the data to a new file : `save n/`
+### 2.20. Exporting the data to a new file : `save n/`
 
 Format: `save n/FILE_PATH NEW_FILE_NAME`
 
