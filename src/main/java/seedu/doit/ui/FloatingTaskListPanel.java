@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.ui.FloatingTaskPanelSelectionChangedEvent;
 import seedu.doit.commons.util.FxViewUtil;
+import seedu.doit.logic.Logic;
 import seedu.doit.model.item.ReadOnlyFloatingTask;
 
 /**
@@ -23,9 +24,12 @@ public class FloatingTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(FloatingTaskListPanel.class);
     @FXML
     private ListView<ReadOnlyFloatingTask> taskListView;
+    Logic logic;
 
-    public FloatingTaskListPanel(AnchorPane placeholder, ObservableList<ReadOnlyFloatingTask> floatingTaskList) {
+    public FloatingTaskListPanel(AnchorPane placeholder, ObservableList<ReadOnlyFloatingTask> floatingTaskList,
+                                 Logic logic) {
         super(FXML);
+        this.logic = logic;
         setConnections(floatingTaskList);
         addToPlaceholder(placeholder);
     }
@@ -69,7 +73,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FloatingTaskCard(floatingTask, getIndex() + 1).getRoot());
+                setGraphic(new FloatingTaskCard(floatingTask, getIndex() + 1, logic).getRoot());
             }
         }
     }

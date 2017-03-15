@@ -28,7 +28,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_nullFilePath_assertionFailure() throws DataConversionException {
-        thrown.expect(AssertionError.class);
+        this.thrown.expect(AssertionError.class);
         readUserPrefs(null);
     }
 
@@ -44,7 +44,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_notJsonFormat_exceptionThrown() throws DataConversionException {
-        thrown.expect(DataConversionException.class);
+        this.thrown.expect(DataConversionException.class);
         readUserPrefs("NotJsonFormatUserPrefs.json");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
@@ -61,7 +61,7 @@ public class JsonUserPrefsStorageTest {
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
         UserPrefs expected = new UserPrefs();
-        expected.setGuiSettings(1000, 500, 300, 100);
+        expected.setGuiSettings(1100, 650, 150, 40);
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
@@ -83,13 +83,13 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void savePrefs_nullPrefs_assertionFailure() throws IOException {
-        thrown.expect(AssertionError.class);
+        this.thrown.expect(AssertionError.class);
         saveUserPrefs(null, "SomeFile.json");
     }
 
     @Test
     public void saveUserPrefs_nullFilePath_assertionFailure() throws IOException {
-        thrown.expect(AssertionError.class);
+        this.thrown.expect(AssertionError.class);
         saveUserPrefs(new UserPrefs(), null);
     }
 
@@ -104,7 +104,7 @@ public class JsonUserPrefsStorageTest {
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(1200, 200, 0, 2);
 
-        String pefsFilePath = testFolder.getRoot() + File.separator + "TempPrefs.json";
+        String pefsFilePath = this.testFolder.getRoot() + File.separator + "TempPrefs.json";
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
 
         //Try writing when the file doesn't exist

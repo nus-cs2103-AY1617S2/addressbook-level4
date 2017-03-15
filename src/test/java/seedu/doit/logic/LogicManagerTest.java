@@ -202,9 +202,8 @@ public class LogicManagerTest {
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 5 e/valid,deadline.butNoPriorityPrefix d/valid,description",
                 expectedMessage);
-        assertCommandFailure("add Valid Name d/valid, description", expectedMessage);
-        assertCommandFailure("add Valid Name e/valid,deadline.butNoDescriptionPrefix valid, description",
-                expectedMessage);
+        assertCommandFailure("add Valid Name d/valid", expectedMessage);
+        assertCommandFailure("add Valid Name e/valid", expectedMessage);
     }
 
     @Test
