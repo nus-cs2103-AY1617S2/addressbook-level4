@@ -22,7 +22,7 @@ public class SelectCommand extends Command {
             + "Parameters: [LIST_NAME] INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " floating 1" + " or " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
+    public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s %2$s";
 
     public SelectCommand(String targetList, int targetIndex) {
         this.targetIndex = targetIndex;
@@ -36,8 +36,8 @@ public class SelectCommand extends Command {
 
         validateTargetIndex(targetIndex, lastShownList);
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetList, targetIndex - 1));
+        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetList, targetIndex));
 
     }
 
