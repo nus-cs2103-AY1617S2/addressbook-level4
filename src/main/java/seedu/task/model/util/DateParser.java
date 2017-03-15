@@ -27,6 +27,11 @@ public class DateParser {
 
     public static String toString(Calendar date) {
         String dateString;
+
+        if (date == null) {
+            return "";
+        }
+
         int year = date.get(Calendar.YEAR);
         int month = date.get(Calendar.MONTH);
         int day = date.get(Calendar.DATE);
