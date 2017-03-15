@@ -2,6 +2,7 @@ package seedu.watodo.model;
 
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.watodo.commons.core.ComponentManager;
@@ -16,7 +17,7 @@ import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the Watodo data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -97,6 +98,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
+    
+    @Override
+    public void updateFilteredByTagsTaskList(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
+    }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -153,5 +159,32 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    
+    private class TagQualifier implements Qualifier {
+      private Set<String> tagKeyWords;
+
+      TagQualifier(Set<String> tagKeyWords) {
+          this.tagKeyWords = tagKeyWords;
+      }
+
+      @Override
+      public boolean run(ReadOnlyFloatingTask task) {
+          String tags = task
+              .getTags()
+              .asObservableList()
+              .stream()
+              .map(tag -> tag.tagName)
+              .collect(Collectors.joining(" "));
+          return tagKeyWords.stream()
+                  .filter(keyword -> StringUtil.containsWordIgnoreCase(tags, keyword))
+                  .findAny()
+                  .isPresent();
+      }
+
+      @Override
+      public String toString() {
+          return "tag=" + String.join(", ", tagKeyWords);
+      }
+  }
 
 }

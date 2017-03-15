@@ -16,6 +16,11 @@ import seedu.watodo.logic.commands.FindCommand;
 import seedu.watodo.logic.commands.HelpCommand;
 import seedu.watodo.logic.commands.IncorrectCommand;
 import seedu.watodo.logic.commands.ListCommand;
+import seedu.watodo.logic.commands.ListAllCommand;
+import seedu.watodo.logic.commands.ListDayCommand;
+import seedu.watodo.logic.commands.ListFloatCommand;
+import seedu.watodo.logic.commands.ListMarkedCommand;
+import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 
 /**
@@ -41,7 +46,7 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -63,8 +68,30 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
+            if(arguments.contains(""+"#")){
+              return new ListTagCommandParser().parse(arguments);
+            }
+        	  switch (arguments) {
+        	  
+            case ListAllCommand.COMMAND_WORD:
+                return new ListAllCommand();
+        		
+        	  case ListDayCommand.COMMAND_WORD:
+        		    return new ListDayCommand();
+        		
+        	  case ListFloatCommand.COMMAND_WORD:
+                return new ListFloatCommand();
+            
+        	  case ListMarkedCommand.COMMAND_WORD:
+                return new ListMarkedCommand();
+                
+        	  case ListWeekCommand.COMMAND_WORD:
+                return new ListWeekCommand();
+            
+        	  default:
+        		    return new ListCommand();
+        	  }
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

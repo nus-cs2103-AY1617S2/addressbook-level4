@@ -34,7 +34,7 @@ import seedu.watodo.logic.commands.DeleteCommand;
 import seedu.watodo.logic.commands.ExitCommand;
 import seedu.watodo.logic.commands.FindCommand;
 import seedu.watodo.logic.commands.HelpCommand;
-import seedu.watodo.logic.commands.ListCommand;
+import seedu.watodo.logic.commands.ListAllCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.Model;
@@ -251,7 +251,7 @@ public class LogicManagerTest {
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
+                ListAllCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
     }

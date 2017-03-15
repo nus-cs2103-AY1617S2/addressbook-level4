@@ -3,7 +3,7 @@ package seedu.watodo.model.task;
 import seedu.watodo.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Task in the addressbook.
+ * A read-only immutable interface for a Task in Watodo.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyFloatingTask {
@@ -12,7 +12,7 @@ public interface ReadOnlyFloatingTask {
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
+     * changes on the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
 

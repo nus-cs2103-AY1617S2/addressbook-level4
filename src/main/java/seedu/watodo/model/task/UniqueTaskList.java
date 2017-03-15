@@ -49,19 +49,19 @@ public class UniqueTaskList implements Iterable<FloatingTask> {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyFloatingTask editedPerson) throws DuplicateTaskException {
-        assert editedPerson != null;
+    public void updateTask(int index, ReadOnlyFloatingTask editedTask) throws DuplicateTaskException {
+        assert editedTask != null;
 
-        FloatingTask personToUpdate = internalList.get(index);
-        if (!personToUpdate.equals(editedPerson) && internalList.contains(editedPerson)) {
+        FloatingTask taskToUpdate = internalList.get(index);
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
-        personToUpdate.resetData(editedPerson);
+        taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Task class.
         // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, personToUpdate);
+        internalList.set(index, taskToUpdate);
     }
 
     /**
@@ -82,10 +82,10 @@ public class UniqueTaskList implements Iterable<FloatingTask> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<? extends ReadOnlyFloatingTask> persons) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyFloatingTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyFloatingTask person : persons) {
-            replacement.add(new FloatingTask(person));
+        for (final ReadOnlyFloatingTask task : tasks) {
+            replacement.add(new FloatingTask(task));
         }
         setPersons(replacement);
     }
