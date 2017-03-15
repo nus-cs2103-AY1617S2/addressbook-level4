@@ -102,19 +102,19 @@ Examples:
 
 ### 2.6. Marking a task : `mark`
 
-Marks the status of a task in the task list as Complete or Incomplete.<br>
+Marks the status of a task in the task list as `Complete` or `Incomplete`.<br>
 Format: `mark INDEX`
 
 > * Marks the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * If the task's status is `Incomplete`, the command will update it to `Complete` and vice-versa
+> * If the task's status is `Incomplete`, the command will update it to `Complete` and vice-versa-
 
 Examples:
 
-* `mark 1`
-> * Updates the task status to `Complete` if it is `Incomplete`.
-> * Updates the task status to `Incomplete` if it is `Complete`.
+* `mark 1`<br>
+  Updates the task status to `Complete` if it is `Incomplete`. <br>
+  Updates the task status to `Incomplete` if it is `Complete`. <br>
 
 ### 2.7. Deleting a task : `delete`
 
@@ -211,10 +211,10 @@ There is no need to save manually.
   e.g. `redo 4`
 
 * **List** : `list` <br>
-  e.g.
+  e.g. `list`
 
 * **Help** : `help` <br>
-  e.g.
+  e.g. `list`
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
