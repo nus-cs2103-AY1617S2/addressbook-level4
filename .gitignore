@@ -1,17 +1,12 @@
 build/
 .gradle/
 .checkstyle
-.settings/
 .idea/
 lib/*
 *.iml
 *.log
 *.log.*
 *.csv
-src/test/data/sandbox/
-preferences.json
 .DS_Store
 ./screenshot*.png
 classes/
-/bin/
-/data
