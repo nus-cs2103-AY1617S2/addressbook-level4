@@ -52,29 +52,34 @@ Format: `help`
 Adds a task  to the task manager<br>
 Format: `add TASK [startdate/START_DATE]  [starttime/START_TIME] [enddate/END_DATE]  [endtime/END_TIME]`
 
-> Acronyms can be used to represent certain commands e.g. `[sd/START_DATE]` is the same as `[startdate/START_DATE]`. `[st/START_TIME]` is the same as `[starttime/START_TIME]`. `[ed/END_DATE]` is the same as `[enddate/END_DATE]`. `[et/END_TIME]` is the same as `[endtime/END_TIME]`.
+> Acronyms can be used to represent certain commands e.g. `[s/START_DATETIME]` is the same as `[startdate/START_DATETIME]`. `[e/END_DATETIME]` is the same as `[enddate/END_DATETIME]`.
 
 Examples:
 
-* `add Progress report ed/15-3-17 et/1600`
+* `add Progress report e/15-3-17T1600`
 * `add shop groceries`
-* `add Team meeting startdate/15-3-17 st/1500 ed/15-3-17 et/1600`
-* `add celebration sd/1-4-17 ed/1-4-17`
+* `add Team meeting startdate/15-3-17T1500 ed/15-3-17T1600`
+* `add celebration s/1-4-17 e/1-4-17`
 
 ### 2.3. Listing all tasks : `list`
 
 Shows a list of all uncompleted tasks in the task manager.<br>
 Format: `list`
 
-### 2.4. Listing all completed tasks : `listcompleted`
+### 2.4. Listing all completed tasks : `listdone`
 
 Shows a list of all completed tasks in the task manager.<br>
-Format: `listcompleted`
+Format: `listdone`
 
-### 2.5. Editing a task : `update`
+### 2.5 Listing all uncompleted tasks : `listundone`
+
+Shows a list of all uncompleted tasks in the task manager.<br>
+Format: `listundone`
+
+### 2.6. Editing a task : `update`
 
 Edits an existing task in the task manager.<br>
-Format: `update INDEX [TASK] [ed/END_DATE] [et/END_TIME]`
+Format: `update INDEX [TASK] [e/END_DATETIME]`
 
 > * Edits the task at the specified INDEX. The index refers to the index number shown in the last task listing.
 > * The index must be a positive integer 1, 2, 3, ...
@@ -83,12 +88,12 @@ Format: `update INDEX [TASK] [ed/END_DATE] [et/END_TIME]`
 
 Examples:
 
-* `update 1 Summary Report et/2359`<br>
+* `update 1 Summary Report e/1-4-17T2359`<br>
  Edits the title of task 1 and updates its ending time to 2359
-* `update 2 ed/ et/`<br>
+* `update 2 e/`<br>
 Clears the existing deadlines for task 2
 
-### 2.8. Finding all tasks containing any keyword in their name or on a specific date : `find`
+### 2.7. Finding all tasks containing any keyword in their name or on a specific date : `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [DATE]`
@@ -109,7 +114,7 @@ Returns any task having the word or substring meet.
 * `find meet 17-3-17`<br>
 Returns any task having the word or substring meet on 17-3-17
 
-### 2.9. Summary of the tasks for current day: `summary`
+### 2.8. Summary of the tasks for current day: `summary`
 
 Displays a summary of tasks which are due on the current day.<br>
 Format: `summary`
@@ -119,7 +124,7 @@ Examples:
 * `summary`<br>
 Returns a list of tasks on the current day
 
-### 2.10. Mark a task as done : `done`
+### 2.9. Mark a task as done : `done`
 
 Mark the specified task from the task manager as done.<br>
 Format: `done INDEX`
@@ -138,7 +143,7 @@ Marks the 2nd task in the task manager as done.
 `done 1`<br>
 Marks the 1st task in the results of the find command as done.
 
-### 2.11. Deleting a task : `delete`
+### 2.10. Deleting a task : `delete`
 
 Deletes the specified task from the task manager. Irreversible.<br>
 Format: `delete INDEX`
@@ -157,22 +162,22 @@ Deletes the 2nd task in the task manager.
 `delete 1`<br>
 Deletes the 1st task in the results of the find command.
 
-### 2.12. Undo most recent command : `undo`
+### 2.11. Undo most recent command : `undo`
 
 Undo the most recent command. Can redo with command redo<br>
 Format: `undo`
 
-### 2.13. Redo most recent undo : `redo`
+### 2.12. Redo most recent undo : `redo`
 
 Redo the most recent undo. Can undo with command undo<br>
 Format: `redo`
 
-### 2.14. Exiting the program : `exit`
+### 2.13. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.15. Saving the data
+### 2.14. Saving the data
 
 Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -184,11 +189,11 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add** `add TASK [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`<br>
- e.g. `add Team meeting sd/15-3-17 st/1500 ed/15-3-17 et/1600`
+* **Add** `add TASK [s/START_DATETIME] [e/END_DATETIME]`<br>
+ e.g. `add Team meeting s/15-3-17T1500 e/15-3-17T1600`
 
-* **Update** : `update INDEX [TASK] [ed/END_DATE] [et/END_TIME]`<br>
-e.g. : `update 1 Summary Report et/2359`
+* **Update** : `update INDEX [TASK] [e/END_DATETIME]`<br>
+e.g. : `update 1 Summary Report e/15-3-17T2359`
 
 * **Delete** : `delete INDEX`<br>
 e.g. `delete 3`
@@ -208,8 +213,14 @@ e.g. `redo`
 * **Check** : `summary`<br>
 e.g. `summary`
 
-* **List uncompleted tasks** : `list` <br>
+* **List all tasks** : `list` <br>
 e.g. `list`
+
+* **List completed tasks** : `list` <br>
+e.g. `listdone`
+
+* **List uncompleted tasks** : `list` <br>
+e.g. `listundone`
 
 * **Help** : `help`<br>
 e.g. `help`
