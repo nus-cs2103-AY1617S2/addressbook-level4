@@ -17,11 +17,14 @@ public interface ReadOnlyTask extends Item {
             || (other != null // this is first to avoid NPE below
             && other.getName().equals(this.getName()) // state checks here onwards
             && other.getPriority().equals(this.getPriority())
+            && other.getDescription().equals(this.getDescription()));
+
+            /*
             && ((other.getStartTime() == null &&  this.getStartTime() == null)
             || (other.getStartTime().equals(this.getStartTime())))
             && ((other.getEndTime() == null &&  this.getEndTime() == null)
-            && other.getEndTime().equals(this.getEndTime()))
-            && other.getDescription().equals(this.getDescription()));
+            || other.getEndTime().equals(this.getEndTime()))
+            */
     }
 
     /**
