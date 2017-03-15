@@ -118,7 +118,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 //    }
 //
 //    /**
-//     * 
+//     *
 //     * Checks whether the edited task has the correct updated details.
 //     *
 //     * @param filteredTaskListIndex index of task to edit in filtered list
