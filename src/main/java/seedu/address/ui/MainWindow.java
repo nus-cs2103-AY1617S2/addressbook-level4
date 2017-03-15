@@ -43,8 +43,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane calenderPlaceholder;
-    
-    
+
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
@@ -118,7 +117,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-    	calenderPanel = new CalenderPanel(calenderPlaceholder);
+        calenderPanel = new CalenderPanel(calenderPlaceholder);
 //        browserPanel = new BrowserPanel(browserPlaceholder);
         personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
