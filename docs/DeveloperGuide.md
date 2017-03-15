@@ -201,23 +201,20 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 Tests can be found in the `./src/test/java` folder.
 
-**In Eclipse**:
+### Types of tests
 
-* To run all tests, right-click on the `src/test/java` folder and choose
-  `Run as` > `JUnit Test`
-* To run a subset of tests, you can right-click on a test package, test class, or a test and choose
-  to run as a JUnit test.
-
-**Using Gradle**:
-
-* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
-
-We have two types of tests:
-
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+#### 1. GUI Tests 
+These are _System Tests_ that test the entire App by simulating user actions on the GUI.
    These are in the `guitests` package.
+> ##### *Headless GUI Testing*
+> Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
+ our GUI tests can be run in the _headless_ mode.
+ In the headless mode, GUI tests do not show up on the screen.
+ That means the developer can do other things on the Computer while the tests are running.
+ See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
+#### 2. Non-GUI Tests
+These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
       e.g. `seedu.address.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
@@ -227,21 +224,25 @@ We have two types of tests:
       how the are connected together.<br>
       e.g. `seedu.address.logic.LogicManagerTest`
 
-#### Headless GUI Testing
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode.
- In the headless mode, GUI tests do not show up on the screen.
- That means the developer can do other things on the Computer while the tests are running.<br>
- See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
+### How to test
+#### 1. In Eclipse
 
-### 1. Troubleshooting tests
+* To run all tests, right-click on the `src/test/java` folder and choose
+  `Run As` > `JUnit Test`
+* To run a subset of tests, you can right-click on a test package, test class, or a test and choose to run as a JUnit test.
 
- **Problem: Tests fail because NullPointException when AssertionError is expected**
+#### 2. Using Gradle
+
+* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
+
+
+### Troubleshooting tests
+ * Problem: Tests fail because NullPointException when AssertionError is expected  
 
  * Reason: Assertions are not enabled for JUnit tests.
-   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
- * Solution: Enable assertions in JUnit tests as described
-   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
+   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)  
+
+ * Solution: Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).
    Delete run configurations created when you ran tests earlier.
 
 <br>
