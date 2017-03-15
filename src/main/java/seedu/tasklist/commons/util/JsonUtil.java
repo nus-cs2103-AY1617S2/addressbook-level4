@@ -111,6 +111,7 @@ public class JsonUtil {
     }
 
 
+    @SuppressWarnings("serial")
     private static class LevelDeserializer extends FromStringDeserializer<Level> {
 
         protected LevelDeserializer(Class<?> vc) {

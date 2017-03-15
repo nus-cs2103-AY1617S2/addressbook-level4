@@ -121,6 +121,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void enableUndoForClear() {
         undoStack.push(new TaskList(taskList));
     }
+    @SuppressWarnings("serial")
     public static class EmptyUndoRedoStackException extends EmptyModelStackException {
         protected EmptyUndoRedoStackException() {
             super("No available states");

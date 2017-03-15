@@ -136,6 +136,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
+    @SuppressWarnings("serial")
     public static class DuplicateTaskException extends DuplicateDataException {
         protected DuplicateTaskException() {
             super("Operation would result in duplicate tasks");
@@ -146,6 +147,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified task in the list would fail because
      * there is no such matching task in the list.
      */
+    @SuppressWarnings("serial")
     public static class TaskNotFoundException extends Exception {}
 
 }
