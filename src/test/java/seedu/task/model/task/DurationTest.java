@@ -24,12 +24,12 @@ public class DurationTest {
         assertTrue(cal.equals(duration.end));
     }
 
-    @Test(expected=AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void nullStartTest() throws IllegalValueException {
         new Duration(null, "2000/01/01 0000");
     }
 
-    @Test(expected=AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void nullEndTest() throws IllegalValueException {
         new Duration("2000/01/01 0000", null);
     }

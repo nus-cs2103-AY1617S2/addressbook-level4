@@ -22,10 +22,17 @@ public interface ReadOnlyTask {
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
-        return other == this // short circuit if same object
-                || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription())
-                && other.getDuration().equals(this.getDuration()));
+        if (other == this) {
+            return true; // short circuit if same object
+        }
+        boolean isDescriptionEqual = (other != null // this is first to avoid NPE below
+                && other.getDescription().equals(this.getDescription()));
+        boolean isDurationEqual =
+                other != null // this is first to avoid NPE below
+                && (other.getDuration() == null && this.getDuration() == null)
+                || (other.getDuration() != null
+                    && other.getDuration().equals(this.getDuration()));
+        return isDescriptionEqual && isDurationEqual;
     }
 
     /**
