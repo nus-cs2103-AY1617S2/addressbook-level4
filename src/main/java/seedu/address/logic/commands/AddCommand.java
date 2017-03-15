@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + " Finish SWE project t/school";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in TaskIt";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskIt";
 
     private final Task toAdd;
 
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }
