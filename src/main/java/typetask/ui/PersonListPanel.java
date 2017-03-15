@@ -11,7 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import typetask.commons.core.LogsCenter;
-import typetask.commons.events.ui.PersonPanelSelectionChangedEvent;
+import typetask.commons.events.ui.TaskPanelSelectionChangedEvent;
 import typetask.commons.util.FxViewUtil;
 import typetask.model.task.ReadOnlyTask;
 
@@ -48,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }

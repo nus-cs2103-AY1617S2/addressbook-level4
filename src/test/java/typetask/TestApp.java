@@ -8,7 +8,7 @@ import typetask.commons.core.Config;
 import typetask.commons.core.GuiSettings;
 import typetask.model.ReadOnlyTaskManager;
 import typetask.model.UserPrefs;
-import typetask.storage.XmlSerializableAddressBook;
+import typetask.storage.XmlSerializableTaskManager;
 import typetask.testutil.TestUtil;
 
 /**
@@ -36,7 +36,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableTaskManager(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
