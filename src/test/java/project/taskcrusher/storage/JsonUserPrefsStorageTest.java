@@ -1,6 +1,5 @@
 package project.taskcrusher.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -16,7 +15,6 @@ import org.junit.rules.TemporaryFolder;
 import project.taskcrusher.commons.exceptions.DataConversionException;
 import project.taskcrusher.commons.util.FileUtil;
 import project.taskcrusher.model.UserPrefs;
-import project.taskcrusher.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

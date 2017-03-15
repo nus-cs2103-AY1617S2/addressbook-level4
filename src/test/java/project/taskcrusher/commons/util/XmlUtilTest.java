@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import project.taskcrusher.commons.util.FileUtil;
-import project.taskcrusher.commons.util.XmlUtil;
 import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.storage.XmlSerializableUserInbox;
 import project.taskcrusher.testutil.TestUtil;

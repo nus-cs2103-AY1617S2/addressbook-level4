@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import project.taskcrusher.commons.core.Config;
 import project.taskcrusher.commons.exceptions.DataConversionException;
-import project.taskcrusher.commons.util.ConfigUtil;
-import project.taskcrusher.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

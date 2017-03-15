@@ -1,6 +1,5 @@
 package project.taskcrusher.commons.util;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -8,8 +7,6 @@ import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import project.taskcrusher.commons.util.FileUtil;
 
 public class FileUtilTest {
 

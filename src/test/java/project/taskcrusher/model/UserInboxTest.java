@@ -14,8 +14,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import project.taskcrusher.model.ReadOnlyUserInbox;
-import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;

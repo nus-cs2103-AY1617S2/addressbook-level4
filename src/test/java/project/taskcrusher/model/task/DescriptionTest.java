@@ -18,6 +18,7 @@ public class DescriptionTest {
         // valid descriptions
         assertTrue(Description.isValidDescription("To kill a mocking bird"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("This should be done after I actually sleep enough")); // long description
+        assertTrue(Description.isValidDescription("This should be done after I actually sleep enough")); // long
+                                                                                                         // description
     }
 }

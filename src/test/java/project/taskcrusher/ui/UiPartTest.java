@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
 import project.taskcrusher.MainApp;
-import project.taskcrusher.ui.UiPart;
 
 public class UiPartTest {
 

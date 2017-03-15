@@ -1,6 +1,5 @@
 package project.taskcrusher.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -16,7 +15,6 @@ import project.taskcrusher.commons.util.FileUtil;
 import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.model.task.Task;
-import project.taskcrusher.storage.XmlUserInboxStorage;
 import project.taskcrusher.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {

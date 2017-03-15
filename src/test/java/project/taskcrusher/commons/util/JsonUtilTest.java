@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import project.taskcrusher.commons.util.FileUtil;
-import project.taskcrusher.commons.util.JsonUtil;
 import project.taskcrusher.testutil.SerializableTestClass;
 import project.taskcrusher.testutil.TestUtil;
 

@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import project.taskcrusher.logic.parser.ArgumentTokenizer;
 import project.taskcrusher.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
