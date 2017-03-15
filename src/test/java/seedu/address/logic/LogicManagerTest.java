@@ -460,7 +460,11 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" s/").append(p.getStatus());
-            cmd.append(" p/").append(Priority.toUserInputString(p.getPriority().value));
+
+            if (p.getPriority().isPresent()) {
+                cmd.append(" p/").append(p.getPriority().get().toString());
+            }
+
             cmd.append(" n/").append(p.getNote());
             cmd.append(" d/").append(p.getDeadline().toString());
 
