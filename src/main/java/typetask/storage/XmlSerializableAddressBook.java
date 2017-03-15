@@ -18,7 +18,7 @@ import typetask.model.task.Task;
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "taskmanager")
 public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
 
     @XmlElement

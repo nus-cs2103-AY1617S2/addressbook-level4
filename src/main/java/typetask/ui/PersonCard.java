@@ -18,18 +18,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label date;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    private Label time;
+
 
     public PersonCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
+        date.setText(person.getDate().value);
+        time.setText(person.getTime().value);
     }
 
 }

@@ -36,12 +36,13 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
+                        
+                  <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+                  <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
                     </children>
                 </VBox>
             </children>
-         <rowConstraints>
-            <RowConstraints />
-         </rowConstraints>
+
         </GridPane>
     </children>
 </HBox>

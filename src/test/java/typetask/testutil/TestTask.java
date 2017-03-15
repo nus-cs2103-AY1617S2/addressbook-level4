@@ -41,7 +41,14 @@ public class TestTask implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
-
+    @Override
+    public Date getDate() {
+        return date;
+    }
+    @Override
+    public Time getTime() {
+        return time;
+    }
     @Override
     public String toString() {
         return getAsText();

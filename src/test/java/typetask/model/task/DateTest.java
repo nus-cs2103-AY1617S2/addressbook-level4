@@ -11,7 +11,7 @@ public class DateTest {
     @Test
     public void isValidPhone() {
         // invalid date
-        assertFalse(Date.isValidDate("")); // empty string
+        assertTrue(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
         assertFalse(Date.isValidDate("date")); // non-numeric
         assertFalse(Date.isValidDate("0208d2017")); // alphabets within digits

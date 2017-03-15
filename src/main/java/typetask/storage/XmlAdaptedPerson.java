@@ -4,9 +4,11 @@ package typetask.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import typetask.commons.exceptions.IllegalValueException;
+import typetask.model.task.Date;
 import typetask.model.task.Name;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
+import typetask.model.task.Time;
 /**
  * JAXB-friendly version of the Person.
  */
@@ -15,11 +17,10 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String date;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
-    private String address;
+    private String time;
+
 
 
     /**
@@ -36,6 +37,8 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getName().fullName;
+        date = source.getDate().value;
+        time = source.getTime().value;
     }
 
     /**
@@ -45,6 +48,8 @@ public class XmlAdaptedPerson {
      */
     public Task toModelType() throws IllegalValueException {
         final Name name = new Name(this.name);
-        return new Task(name);
+        final Date date = new Date(this.date);
+        final Time time = new Time(this.time);
+        return new Task(name, date, time);
     }
 }

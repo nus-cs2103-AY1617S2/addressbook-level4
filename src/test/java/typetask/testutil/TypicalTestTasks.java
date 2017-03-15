@@ -13,17 +13,17 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline").build();
-            benson = new TaskBuilder().withName("Benson Meier").build();
-            carl = new TaskBuilder().withName("Carl Kurz").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").build();
-            elle = new TaskBuilder().withName("Elle Meyer").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").build();
-            george = new TaskBuilder().withName("George Best").build();
+            alice = new TaskBuilder().withName("Alice Pauline").withDate("").withTime("").build();
+            benson = new TaskBuilder().withName("Benson Meier").withDate("").withTime("").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withDate("").withTime("").build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withDate("").withTime("").build();
+            elle = new TaskBuilder().withName("Elle Meyer").withDate("").withTime("").build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").withDate("").withTime("").build();
+            george = new TaskBuilder().withName("George Best").withDate("").withTime("").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").build();
-            ida = new TaskBuilder().withName("Ida Mueller").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").withDate("").withTime("").build();
+            ida = new TaskBuilder().withName("Ida Mueller").withDate("").withTime("").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

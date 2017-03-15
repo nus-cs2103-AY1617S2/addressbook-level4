@@ -11,7 +11,7 @@ public class TimeTest {
     @Test
     public void isValidTime() {
         // invalid Time
-        assertFalse(Time.isValidTime("")); // empty string
+        assertTrue(Time.isValidTime("")); // empty string
         assertFalse(Time.isValidTime(" ")); // spaces only
         assertFalse(Time.isValidTime("phone")); // non-numeric
         assertFalse(Time.isValidTime("90p01")); // alphabets within digits

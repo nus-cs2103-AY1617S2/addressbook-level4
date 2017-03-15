@@ -70,8 +70,10 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
 
-        return new Task(updatedName);
+        return new Task(updatedName, updatedDate, updatedTime);
     }
 
     /**
