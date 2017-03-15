@@ -105,10 +105,12 @@ Ready? Let's begin!
 
 When typing in your commands, do take note of the following specifications: <br>
 
-> Do make sure that you follow the specifications closely, if not I will not work!
+> Do make sure that you follow the specifications closely, if not I will not work! <br>
+The specifications are [case-sensitive](#case-sensitive). 
 
 * Durations for tasks must be specified in _hr_, _min_ and/or _sec_.
 * Times must be specified in _am_ and/or _pm_.
+* Dates must be specified in _DDMMYY_ format. 
 * Either date or time but not both can be left out in the <... date and time> parameters.
 
   > i.e. 
@@ -131,27 +133,29 @@ When typing in your commands, do take note of the following specifications: <br>
 
 Adds a task to your task list. <br>
 
-> Type your [parameters](#parameter) in their respective orders as shown in the examples below. <br>
+> Type your [parameters](#parameter) in their respective orders. <br>
 E.g. If you are adding a task with a deadline as in `add <task>; <due date and time>`, 
 do make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
 
 #### Add a _floating_ task:
 
-A floating task is a task that _does not have any specific times_. You are probably not sure when you are going to do it, nor 
-are you sure when exactly it is due. <br>
+A floating task is a task that _does not have any specific times_. <br>
+You are probably not sure when you are going to do it, nor are you sure when exactly it is due. <br>
 
 Here are some examples of floating tasks: <br>
 
-> This list is not exhaustive!
+> Note: This list is not exhaustive!
 
 * **Hobby-related activities or long-term goals**
 
   > You just want to record these tasks somewhere so that you can get to them when you are free someday. <br>
+  
   **E.g. Learn to bake**
   
 * **New tasks which cannot be performed _yet_**
 
   > You want to perform these tasks but you cannot do them yet. <br>
+  
   **E.g. Schedule meet-up with Jamie** <br>
   Your friend Jamie might be overseas and uncontactable for now, so you will have to wait for 
   her to return to the country in order to schedule the meet-up. 
@@ -159,14 +163,16 @@ Here are some examples of floating tasks: <br>
  * **New tasks which do not have a confirmed deadline**
  
    > It is too early to know when you have to perform these tasks by. <br>
-   E.g. Watch La La Land in the theatres <br>
-   For example, you might not know when the movie "La La Land" will stop showing in the cinemas. This is 
-   because it seems to be very popular and hence, many theatres might offer showtimes for it for an 
-   extended period of time. 
+   
+   **E.g. Watch La La Land in the theatres** <br>
+   You might not know when the movie "La La Land" will stop showing in the cinemas. It seems to 
+   be very popular and hence, many theatres might offer showtimes for it for an extended period 
+   of time. 
    
 So, how do you add floating tasks? Just type in the following command: 
 
-> `add <task>`
+> `add <task>` <br>
+(e.g. add buy detergent)
 
 That's it!
 
@@ -174,27 +180,23 @@ That's it!
 
 For such tasks, type in: 
 
-> `add <task>; <start date and time>; <end date and time>`
+> `add <task>; <start date and time>; <end date and time>` <br>
+(e.g. add sushi restaurant promotion; 040117 10am; 110117 9pm)
 
 OR
 
-> `add <task>; <start date and time>; <duration>`
+> `add <task>; <start date and time>; <duration>` <br>
+(e.g. add committee meeting; 150617)
 
 #### Add an _event_:
 
-> `add <task>; <due date and time>`
+> `add <task>; <due date and time>` <br>
+(e.g. add project proposal; tue 2pm)
 
 #### Add a task with a _duration_:
 
-> `add <task>; <duration>`    
-
-Examples:
-
-* `add watch tv with the children; 1hr`
-* `add iron the clothes; 5pm`
-* `add project proposal; tue 2pm`
-* `add committee meeting; 15 june; 2 hr`
-* `add sushi restaurant promotion; 040117 10am; 110117 9pm`
+> `add <task>; <duration>` <br>
+(e.g. add watch tv with the children; 1hr) 
 
 ### 3.3. Delete a task : `delete`
 
@@ -305,6 +307,11 @@ Format:
        
        
 ## 6. Some Technical Terms
+
+#### Case-Sensitive:
+
+> Text that discriminates between upper-case and lower-case letters <br>
+E.g. _Jenny_ versus _jenny_
 
 #### Floating Task:
 
