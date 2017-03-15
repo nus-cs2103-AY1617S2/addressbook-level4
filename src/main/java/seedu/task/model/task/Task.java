@@ -112,4 +112,14 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    @Override
+    public String getDurationStart() {
+        return duration == null ? null : duration.getStartString();
+    }
+
+    @Override
+    public String getDurationEnd() {
+        return duration == null ? null : duration.getEndString();
+    }
+
 }

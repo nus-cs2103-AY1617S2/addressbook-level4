@@ -84,4 +84,14 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    @Override
+    public String getDurationStart() {
+        return duration == null ? null : duration.getStartString();
+    }
+
+    @Override
+    public String getDurationEnd() {
+        return duration == null ? null : duration.getEndString();
+    }
+
 }

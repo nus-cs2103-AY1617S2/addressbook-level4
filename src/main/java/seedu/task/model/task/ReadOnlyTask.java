@@ -11,6 +11,8 @@ public interface ReadOnlyTask {
     Description getDescription();
     DueDate getDueDate();
     Duration getDuration();
+    String getDurationStart();
+    String getDurationEnd();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

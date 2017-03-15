@@ -17,7 +17,6 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
-import seedu.task.model.task.Duration;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -75,12 +74,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> duration} into an {@code Optional<Duration>}
-     * if {@code duration} is present.
+     * Parses a {@code Optional<String> string} into an {@code Optional<String>}
+     * if {@code string} is present.
      */
-    public static Optional<Duration> parseDuration(Optional<String> duration) throws IllegalValueException {
-        assert duration != null;
-        return duration.isPresent() ? Optional.of(new Duration(duration.get(), duration.get())) : Optional.empty();
+    public static Optional<String> parseString(Optional<String> string) throws IllegalValueException {
+        assert string != null;
+        return string.isPresent() ? Optional.of(new String(string.get())) : Optional.empty();
     }
 
     /**

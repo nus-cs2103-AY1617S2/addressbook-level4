@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
@@ -79,8 +80,16 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
+        String updatedDurationStart = editTaskDescriptor.getDurationStart().orElseGet(taskToEdit::getDurationStart);
+        String updatedDurationEnd = editTaskDescriptor.getDurationEnd().orElseGet(taskToEdit::getDurationEnd);
+        Duration updatedDuration;
+        try {
+            updatedDuration = new Duration(updatedDurationStart, updatedDurationEnd);
+        } catch (IllegalValueException e) {
+            updatedDuration = taskToEdit.getDuration();
+        }
 
-        return new Task(updatedDescription, updatedDueDate, null, updatedTags);
+        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags);
     }
 
     /**
@@ -90,7 +99,8 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
-        private Optional<Duration> duration = Optional.empty();
+        private Optional<String> durationStart = Optional.empty();
+        private Optional<String> durationEnd = Optional.empty();
         private Optional<DueDate> dueDate = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -98,7 +108,8 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
-            this.duration = toCopy.getDuration();
+            this.durationStart = toCopy.getDurationStart();
+            this.durationEnd = toCopy.getDurationEnd();
             this.dueDate = toCopy.getDueDate();
         }
 
@@ -106,7 +117,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.tags, this.duration, this.dueDate);
+            return CollectionUtil.isAnyPresent(this.description, this.tags,
+                    this.durationStart, this.durationEnd, this.dueDate);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -118,13 +130,22 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setDuration(Optional<Duration> duration) {
-            assert duration != null;
-            this.duration = duration;
+        public void setDurationStart(Optional<String> durationStart) {
+            assert durationStart != null;
+            this.durationStart = durationStart;
         }
 
-        public Optional<Duration> getDuration() {
-            return duration;
+        public Optional<String> getDurationStart() {
+            return durationStart;
+        }
+
+        public void setDurationEnd(Optional<String> durationEnd) {
+            assert durationEnd != null;
+            this.durationEnd = durationEnd;
+        }
+
+        public Optional<String> getDurationEnd() {
+            return durationEnd;
         }
 
         public void setDueDate(Optional<DueDate> dueDate) {
