@@ -6,11 +6,11 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
-3. [Design](#3-design)
-    3.1. [Architecture](#31-architecture)
-    3.2. [UI](#32-ui)
-    3.3. [Logic](#33-logic)
-    3.4. [Model](#34-model)
+3. [Design](#3-design)<br>
+    3.1. [Architecture](#31-architecture)<br>
+    3.2. [UI](#32-ui)<br>
+    3.3. [Logic](#33-logic)<br>
+    3.4. [Model](#34-model)<br>
     3.5. [Storage](#35-storage)
 4. [Implementation](#4-implementation)
 5. [Testing](#5-testing)
