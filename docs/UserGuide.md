@@ -2,32 +2,32 @@
 
 &nbsp;
 
-1. [Intoduction](#intoduction)
-2. [Quick Start](#quick-start)
-3. [Features](#features)
-   3.1. [Viewing Help](#viewing-help)
-   3.2. [Adding a Floating Task]()
-   3.3. [Adding a Deadline Task]()
-   3.4. [Adding an Event Task]()
-   3.5. [Adding a Priority Task]()
-   3.6. [Finding a Task]() 
-   3.7. [Editing a Task]()
-   3.8. [Deleting a Task]()
-   3.9. [Completing a Task]()
-   3.10. [Listing All Tasks]()
-   3.11. [Listing Today’s Tasks]()
-   3.12. [Listing Priority Tasks]()
-   3.13. [Listing Completed Tasks]() 
-   3.14. [Undoing the Latest Command]()
-   3.15. [Saving Data to Another Folder]() 
-   3.16. [Changing Default Storage Folder]()
-   3.17. [Using Data from Another Folder]()
-   3.18. [Clearing all Entries]() 
-   3.19. [Exiting the Program]()
-   3.20. [Saving your Data]()
-   3.21.[Differentiating your Tasks’ Urgency]() 
-4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
+1. [Intoduction](#intoduction)<br>
+2. [Quick Start](#quick-start)<br>
+3. [Features](#features)<br>
+   3.1. [Viewing Help](#viewing-help)<br>
+   3.2. [Adding a Floating Task]()<br>
+   3.3. [Adding a Deadline Task]()<br>
+   3.4. [Adding an Event Task]()<br>
+   3.5. [Adding a Priority Task]()<br>
+   3.6. [Finding a Task]() <br>
+   3.7. [Editing a Task]()<br>
+   3.8. [Deleting a Task]()<br>
+   3.9. [Completing a Task]()<br>
+   3.10. [Listing All Tasks]()<br>
+   3.11. [Listing Today’s Tasks]()<br>
+   3.12. [Listing Priority Tasks]()<br>
+   3.13. [Listing Completed Tasks]() <br>
+   3.14. [Undoing the Latest Command]()<br>
+   3.15. [Saving Data to Another Folder]() <br>
+   3.16. [Changing Default Storage Folder]()<br>
+   3.17. [Using Data from Another Folder]()<br>
+   3.18. [Clearing all Entries]() <br>
+   3.19. [Exiting the Program]() <br>
+   3.20. [Saving your Data]()<br>
+   3.21.[Differentiating your Tasks’ Urgency]()<br> 
+4. [FAQ](#faq)<br>
+5. [Command Summary](#command-summary)<br>
 
 &nbsp;
 
