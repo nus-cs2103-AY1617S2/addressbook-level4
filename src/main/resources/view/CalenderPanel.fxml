@@ -6,14 +6,69 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="label1" layoutX="-2.0" layoutY="4.0" prefHeight="20.0" prefWidth="600.0" text="                                                                     Date here" />
-      <ListView fx:id="listview1" editable="true" layoutY="24.0" prefHeight="101.0" prefWidth="86" style="-fx-border-color: [pink;" />
-      <ListView layoutX="85.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
-      <ListView layoutX="510.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
-      <ListView layoutX="170.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
-      <ListView layoutX="425.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
-      <ListView layoutX="255.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
-      <ListView fx:id="listview11" editable="true" layoutY="124.0" prefHeight="101.0" prefWidth="86" style="-fx-border-color: [pink;" />
-      <ListView layoutX="340.0" layoutY="24.0" prefHeight="101.0" prefWidth="86.0" />
+      <Label fx:id="label1" layoutX="112.0" layoutY="-1.0" prefHeight="20.0" prefWidth="600.0" text="                                                                     Date here" />
+      <ListView fx:id="listview1" editable="true" layoutX="130.0" layoutY="64.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView layoutX="215.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="640.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="300.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="555.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="385.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="470.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView fx:id="listview11" editable="true" layoutX="130.0" layoutY="152.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView layoutX="215.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="640.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="300.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="555.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="385.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="470.0" layoutY="152.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView fx:id="listview12" editable="true" layoutX="130.0" layoutY="243.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView layoutX="215.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="640.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="300.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="555.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="385.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="470.0" layoutY="243.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView fx:id="listview13" editable="true" layoutX="130.0" layoutY="340.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: [pink;" />
+      <ListView layoutX="215.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="640.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="300.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="555.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="385.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
+      <ListView layoutX="470.0" layoutY="340.0" prefHeight="54.0" prefWidth="86.0" />
+      <Label fx:id="label11" layoutX="132.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/2" />
+      <Label fx:id="label111" layoutX="224.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/2" />
+      <Label fx:id="label1111" layoutX="309.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/3" />
+      <Label fx:id="label1112" layoutX="394.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/4" />
+      <Label fx:id="label1113" layoutX="479.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/5" />
+      <Label fx:id="label1114" layoutX="564.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/6" />
+      <Label fx:id="label1115" layoutX="653.0" layoutY="37.0" prefHeight="20.0" prefWidth="77.0" text="3/7" />
+      <Label fx:id="label112" layoutX="136.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="  Sunday" />
+      <Label fx:id="label1116" layoutX="228.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Monday" />
+      <Label fx:id="label11111" layoutX="313.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Tuesday" />
+      <Label fx:id="label11121" layoutX="398.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Wednesday" />
+      <Label fx:id="label11131" layoutX="483.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Thursday" />
+      <Label fx:id="label11141" layoutX="568.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Friday" />
+      <Label fx:id="label11151" layoutX="657.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Saturday" />
+      <Label fx:id="label113" layoutX="132.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/8" />
+      <Label fx:id="label1117" layoutX="224.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/9" />
+      <Label fx:id="label11112" layoutX="309.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/10" />
+      <Label fx:id="label11122" layoutX="394.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/11" />
+      <Label fx:id="label11132" layoutX="479.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/12" />
+      <Label fx:id="label11142" layoutX="564.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/13" />
+      <Label fx:id="label11152" layoutX="653.0" layoutY="120.0" prefHeight="20.0" prefWidth="77.0" text="3/14" />
+      <Label fx:id="label1131" layoutX="129.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/15" />
+      <Label fx:id="label11171" layoutX="221.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/16" />
+      <Label fx:id="label111121" layoutX="306.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/17" />
+      <Label fx:id="label111221" layoutX="391.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/18" />
+      <Label fx:id="label111321" layoutX="476.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/19" />
+      <Label fx:id="label111421" layoutX="561.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/20" />
+      <Label fx:id="label111521" layoutX="650.0" layoutY="216.0" prefHeight="20.0" prefWidth="77.0" text="3/21" />
+      <Label fx:id="label11311" layoutX="129.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/22" />
+      <Label fx:id="label111711" layoutX="221.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/23" />
+      <Label fx:id="label1111211" layoutX="306.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/24" />
+      <Label fx:id="label1112211" layoutX="391.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/25" />
+      <Label fx:id="label1113211" layoutX="476.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/26" />
+      <Label fx:id="label1114211" layoutX="561.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/27" />
+      <Label fx:id="label1115211" layoutX="650.0" layoutY="310.0" prefHeight="20.0" prefWidth="77.0" text="3/28" />
    </children>
 </AnchorPane>
