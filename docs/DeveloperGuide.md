@@ -120,15 +120,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the TaskManager data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the TaskManager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images/SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -139,15 +139,16 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Xu Bili
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TodayTaskListPanel`,
+`WeekTaskListPanel`, `FloatingTaskListPanel`,`StatusBarFooter`, `BrowserPanel` etc. 
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -162,7 +163,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Lam Guang Jun
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -181,7 +182,7 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Han Lynn
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -198,7 +199,7 @@ The `Model`,
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Shi Yanzhang
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
