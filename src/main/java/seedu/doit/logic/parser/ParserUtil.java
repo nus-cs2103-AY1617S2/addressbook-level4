@@ -17,6 +17,7 @@ import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.StartTime;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 
@@ -92,6 +93,15 @@ public class ParserUtil {
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
         return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> startTime} into an {@code Optional<StartTime>}
+     * if {@code startTime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
     }
 
     /**

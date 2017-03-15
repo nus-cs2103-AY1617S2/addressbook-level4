@@ -24,8 +24,8 @@ import seedu.doit.model.UserPrefs;
 public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/task_manager.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 650;
+    private static final int MIN_WIDTH = 1100;
 
     private Stage primaryStage;
     private Logic logic;
@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
 
     private TaskListPanel taskListPanel;
+
     private EventListPanel eventListPanel;
     private FloatingTaskListPanel fListPanel;
     private Config config;
@@ -119,8 +120,10 @@ public class MainWindow extends UiPart<Region> {
 
     protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
-        this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredEventList());
-        this.fListPanel = new FloatingTaskListPanel(getFListPlaceholder(), this.logic.getFilteredFloatingTaskList());
+        this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredEventList(),
+                              this.logic);
+        this.fListPanel = new FloatingTaskListPanel(getFListPlaceholder(), this.logic.getFilteredFloatingTaskList(),
+                              this.logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), this.config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), this.logic);
@@ -147,6 +150,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private AnchorPane getFListPlaceholder() {
+
         return this.floatingListPanelPlaceholder;
     }
 
