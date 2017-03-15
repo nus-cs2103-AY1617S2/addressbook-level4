@@ -4,12 +4,11 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ---
 
-1. [Setting Up](#1-setting-up)
-2. [Design](#2-design)
-3. [Implementation](#3-implementation)
-4. [Testing](#4-testing)
-5. [Dev Ops](#5-dev-ops)
-
+- [Setting Up](#setting-up)
+- [Design](#design)
+- [Implementation](#implementation)
+- [Testing](#testing)
+- [Dev Ops](#dev-ops)
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -17,9 +16,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## Setting up
 
-### 1.1. Prerequisites
+### 1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -33,7 +32,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 2. Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
 1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -48,7 +47,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. addressbook
@@ -59,7 +58,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button  
 
-### 1.4. Troubleshooting project setup
+### 4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -72,9 +71,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
-## 2. Design
+## Design
 
-### 2.1. Architecture
+### 1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -84,9 +83,9 @@ Given below is a quick overview of each component.
 
 Work in progress.
 
-## 3. Implementation
+## Implementation
 
-### 3.1. Logging
+### 1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -105,13 +104,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -148,7 +147,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -158,23 +157,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## Dev Ops
 
-### 5.1. Build Automation
+### 1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -183,7 +182,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -200,7 +199,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Doist depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
