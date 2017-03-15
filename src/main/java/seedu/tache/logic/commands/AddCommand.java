@@ -13,6 +13,7 @@ import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Time;
+import seedu.tache.model.task.UniqueDetailedTaskList.DuplicateDetailedTaskException;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -79,9 +80,13 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addTask(toAdd);
+            if (toAdd instanceof DetailedTask) {
+                model.addDetailedTask((DetailedTask) toAdd);
+            } else {
+                model.addTask(toAdd);
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
+        } catch (UniqueTaskList.DuplicateTaskException | DuplicateDetailedTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 

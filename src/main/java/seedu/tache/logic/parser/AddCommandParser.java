@@ -24,10 +24,10 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         try {
-            if (ParserUtil.numOfDates(args) == 0 && ParserUtil.numOfTimes(args) == 0) {
-                return parseFloatingTask(args);
-            } else {
+            if (ParserUtil.hasDate(args) || ParserUtil.hasTime(args)) {
                 return parseTask(args);
+            } else {
+                return parseFloatingTask(args);
             }
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

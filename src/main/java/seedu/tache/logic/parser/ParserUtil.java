@@ -148,25 +148,25 @@ public class ParserUtil {
     /**
      * Returns number of date parameters in input.
      */
-    public static int numOfDates(String input) {
-        final Matcher matcher = DATE_FORMAT.matcher(input.trim());
-        int count = 0;
-        while (matcher.find()) {
-            count++;
+    public static boolean hasDate(String input) {
+        try {
+            parseDate(input);
+            return true;
+        } catch (IllegalValueException ex) {
+            return false;
         }
-        return count;
     }
 
     /**
      * Returns number of time parameters in input.
      */
-    public static int numOfTimes(String input) {
-        final Matcher matcher = TIME_FORMAT.matcher(input.trim());
-        int count = 0;
-        while (matcher.find()) {
-            count++;
+    public static boolean hasTime(String input) {
+        try {
+            parseTime(input);
+            return true;
+        } catch (IllegalValueException ex) {
+            return false;
         }
-        return count;
     }
 
     /**
@@ -187,22 +187,28 @@ public class ParserUtil {
      * Returns the first time String encountered
      */
     public static String parseTime(String input) throws IllegalValueException {
-        if (isValidTime(input)) {
-            return TIME_FORMAT.matcher(input.trim()).group();
-        } else {
-            throw new IllegalValueException("Invalid Input");
+        String[] inputs = input.split(" ");
+        for (String candidate : inputs) {
+            Matcher matcher = TIME_FORMAT.matcher(candidate.trim());
+            if (matcher.lookingAt()) {
+                return matcher.group();
+            }
         }
+        throw new IllegalValueException("Invalid Input");
     }
 
     /**
      * Returns the first date String encountered
      */
     public static String parseDate(String input) throws IllegalValueException {
-        if (isValidDate(input)) {
-            return DATE_FORMAT.matcher(input.trim()).group();
-        } else {
-            throw new IllegalValueException("Invalid Input");
+        String[] inputs = input.split(" ");
+        for (String candidate : inputs) {
+            Matcher matcher = DATE_FORMAT.matcher(candidate.trim());
+            if (matcher.lookingAt()) {
+                return matcher.group();
+            }
         }
+        throw new IllegalValueException("Invalid Input");
     }
     /**
      * Returns the corresponding integer value of the String entered
