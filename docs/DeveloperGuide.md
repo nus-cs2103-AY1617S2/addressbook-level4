@@ -119,6 +119,23 @@ The `Commons` component contains a collection of classes used by multiple other 
 - LogsCenter : enables writing log messages to the log file.
 
 ### 2. UI component
+The `UI` is the main form of interaction between Doist and the user. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist.
+
+The following diagram demonstrate the structure of the `UI` component  
+<br><img src="images/UIComponentClassDiagram.PNG" width="800"><br>
+
+The following are of some key files in the `Ui` component:
+- [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the app. 
+    These operations are defined using different methods (API).  
+    Some representatives methods are listed here:  
+    ```java
+    - void start(Stage primaryStage)
+    - void stop()
+    ```
+- `UiManager.java`: contains a `class` that implements the operations specified in `Ui.java`.
+- `MainWindow.java`: contains a `class` that represents the Main Window viewed by the user
+- `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands
+
 ### 3. Logic component
 ### 4. Model component
 The `Model` component defines classes to represent the data that Doist operates on. It also specifies and implements the operations on these data.  
@@ -126,7 +143,7 @@ The `Model` component defines classes to represent the data that Doist operates 
 The following diagram demonstrate the structure of the `Model` component  
 <br><img src="images/ModelClassDiagram.png" width="800"><br>  
 
-The following is a brief remarks of some key files in the `Model` component:
+The following are of some key files in the `Model` component:
 - [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
     These operations are defined using different methods (API).  
     Some representatives methods are listed here:  
@@ -149,7 +166,7 @@ These data consists of **user preferences** and **to-do list**
 The following diagram demonstrate the structure of the `Storage` component  
 <br><img src="images/StorageClassDiagram.png" width="800"><br>  
 
-The following is a brief remarks of some key files in the `Storage` component:
+The following are of some key files in the `Storage` component:
 - [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines reading and writing operation of user preferences and to-do list.  
     These operations are defined using different methods (API).  
     Some representatives methods are listed here:  
@@ -507,7 +524,7 @@ Use case ends.
 - Have multiple UI themes
 - Come with automated unit tests
 - Be able to hold up to 1000 tasks
-- Run fast enough by responding to a user’s command on the command line interface within 5 secs
+- Run fast enough by responding to a userÂ’s command on the command line interface within 5 secs
 - Be open source
 - Have flexible commands that accept variations
 - Allow user to customise default commands
@@ -558,7 +575,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Finished tasks`
     Tasks that have been `finished`
     - `Recurring task`
-    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the task’s `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
+    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the taskÂ’s `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
 **Mutating Command**
     Any command which causes a change in the state of apps (E.g. add, delete, finished)
@@ -589,7 +606,7 @@ Pros:
 Cons:
 
 * Some of the best features like subtasks is pro-only
-* Doesn’t have support for handwritten tasks, drawings, images, calendar view
+* DoesnÂ’t have support for handwritten tasks, drawings, images, calendar view
 * Reminder timing cannot be customised
 * No attachment of files
 
@@ -611,7 +628,7 @@ Pros:
 Cons:
 
 * Pro version is quite expensive
-* There is no dedicated ‘Sync’ button
+* There is no dedicated Â‘SyncÂ’ button
     * Setup is a bit lengthy, and may require you to download the mobile version as well
 
 
