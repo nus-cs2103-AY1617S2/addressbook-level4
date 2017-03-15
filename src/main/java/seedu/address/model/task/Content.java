@@ -3,13 +3,13 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in the task manager.
+ * Represents a Task's content in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidContent(String)}
  */
 public class Content {
 
     public static final String MESSAGE_CONTENT_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task content should only contain alphanumeric characters and spaces";
 
     /*
      * The first character of the task must not be a whitespace,
@@ -25,7 +25,6 @@ public class Content {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Content(String content) throws IllegalValueException {
-        assert content != null;
         String trimmedContent = content.trim();
         if (!isValidContent(trimmedContent)) {
             throw new IllegalValueException(MESSAGE_CONTENT_CONSTRAINTS);
@@ -33,10 +32,16 @@ public class Content {
         this.fullContent = trimmedContent;
     }
 
+    public boolean isThereContent() {
+        return !fullContent.equals("");
+    }
     /**
      * Returns true if a given string is a valid person name.
      */
     public static boolean isValidContent(String test) {
+        if (test.equals("")) {
+            return true;
+        }
         return test.matches(CONTENT_VALIDATION_REGEX);
     }
 

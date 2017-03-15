@@ -12,6 +12,7 @@ import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.Title;
 
 
 /**
@@ -20,8 +21,10 @@ import seedu.address.model.task.TaskDateTime;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
+    private String title;
+    @XmlElement
     private String content;
-    @XmlElement(required = true)
+    @XmlElement
     private String dateTime;
 
     @XmlElement
@@ -40,6 +43,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
+        title = source.getTitle().fullTitle;
         content = source.getContent().fullContent;
         dateTime = source.getDateTime().value;
         tagged = new ArrayList<>();
@@ -58,9 +62,10 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+        final Title title = new Title(this.title);
         final Content content = new Content(this.content);
         final TaskDateTime dateTime = new TaskDateTime(this.dateTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(content, dateTime, tags);
+        return new Task(title, content, dateTime, tags);
     }
 }

@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -36,6 +36,7 @@ import seedu.address.model.task.Content;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDateTime;
+import seedu.address.model.task.Title;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 /**
@@ -73,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Content("Ali Muster"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Boris Mueller"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Carl Kurz"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Daniel Meier"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Elle Meyer"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Fiona Kunz"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("George Best"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Hoon Meier"), new TaskDateTime(""), new UniqueTagList()),
-                new Task(new Content("Ida Mueller"), new TaskDateTime(""), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("George Best"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new Content(""), new TaskDateTime(""), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"),  new Content(""), new TaskDateTime(""), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -331,7 +332,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

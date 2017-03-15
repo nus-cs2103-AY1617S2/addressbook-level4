@@ -11,6 +11,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
+    private Title title;
     private Content content;
     private TaskDateTime dateTime;
 
@@ -19,8 +20,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Content content, TaskDateTime dateTime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(content);
+    public Task(Title title, Content content, TaskDateTime dateTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title);
+        this.title = title;
         this.content = content;
         this.dateTime = dateTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -30,7 +32,12 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getContent(), source.getDateTime(), source.getTags());
+        this(source.getTitle(), source.getContent(), source.getDateTime(), source.getTags());
+    }
+
+    public void setTitle(Title title) {
+        assert title != null;
+        this.title = title;
     }
 
     public void setContent(Content content) {
@@ -38,15 +45,19 @@ public class Task implements ReadOnlyTask {
         this.content = content;
     }
 
-    @Override
-    public Content getContent() {
-        return content;
-    }
-
-
     public void setDateTime(TaskDateTime dateTime) {
         assert dateTime != null;
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public Title getTitle() {
+        return title;
+    }
+
+    @Override
+    public Content getContent() {
+        return content;
     }
 
     @Override
@@ -72,6 +83,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
+        this.setTitle(replacement.getTitle());
         this.setContent(replacement.getContent());
         this.setDateTime(replacement.getDateTime());
         this.setTags(replacement.getTags());
@@ -87,7 +99,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(content, dateTime, tags);
+        return Objects.hash(title, content, dateTime, tags);
     }
 
     @Override

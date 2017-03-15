@@ -31,14 +31,13 @@
                             <children>
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label" />
-                                    <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+                                    <Label fx:id="title" styleClass="cell_big_label" text="title" />
                                 </HBox>
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
-                        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-                        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+                        <Label fx:id="content" styleClass="cell_small_label" text="content" />
+                        <Label fx:id="dateTime" styleClass="cell_small_label" text="dateTime" />
                     </children>
                 </VBox>
             </children>
