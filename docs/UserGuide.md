@@ -47,7 +47,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list.<br>
-Format: `add t/TASK_TITLE [d/DATE] [#tags]`
+Format: `add TASK_TITLE by [d/DATE] [#tags]`
 
 > Tasks can have any number of tags (including 0)
 
