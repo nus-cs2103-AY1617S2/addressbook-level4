@@ -1,5 +1,7 @@
 package t15b1.taskcrusher.ui;
 
+import java.text.SimpleDateFormat;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -11,8 +13,8 @@ import t15b1.taskcrusher.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String NO_DEADLINE = "no deadline";
-    private static final String DEADLINE_BY = "By ";
+    private static final String MESSAGE_NO_DEADLINE = "no deadline";
+    private static final String MESSAGE_DEADLINE_BY = "By ";
     private static final String PRIORITY_PREPEND = " ";
 
     @FXML
@@ -58,9 +60,12 @@ public class TaskCard extends UiPart<Region> {
 
     private void showDeadline(ReadOnlyTask task) {
         if (task.getDeadline().hasDeadline()) {
-            deadline.setText(DEADLINE_BY + task.getDeadline().toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            deadline.setText(sdf.format(task.getDeadline().getDate().get()));
+            //deadline.setText(MESSAGE_DEADLINE_BY + task.getDeadline().toString());
         } else {
-            deadline.setText(Deadline.NO_DEADLINE);
+            deadline.setText(MESSAGE_NO_DEADLINE);
+
         }
     }
 

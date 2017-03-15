@@ -1,5 +1,6 @@
 package t15b1.taskcrusher.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,9 @@ public class Deadline {
 	@Override
 	public String toString() {
 		if (hasDeadline()) {
-			return getDate().get().toString();
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            return sdf.format(getDate().get());
+			//return getDate().get().toString();
 		} else {
 			return Deadline.NO_DEADLINE;			
 		}
