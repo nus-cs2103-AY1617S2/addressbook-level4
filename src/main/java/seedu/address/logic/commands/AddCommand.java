@@ -61,9 +61,4 @@ public class AddCommand extends Command {
 
     }
     
-    @Override
-    public Boolean isModifying() {
-    	return true;
-    }
-
 }

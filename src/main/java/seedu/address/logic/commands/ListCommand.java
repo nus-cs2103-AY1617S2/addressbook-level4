@@ -17,8 +17,4 @@ public class ListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
     
-    @Override
-    public Boolean isModifying() {
-    	return false;
-    }
 }

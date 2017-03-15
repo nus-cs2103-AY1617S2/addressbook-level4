@@ -29,17 +29,6 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
-     * Modifying command that was previously executed most recently
-     */
-    private Command previousModifyingCommand;
-    
-    public void setPreviousModifyingCommand(Command previousCommand) {
-    	if (previousCommand.isModifying()) {
-    		this.previousModifyingCommand = previousCommand;
-    	}
-    }
-    
-    /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
@@ -80,7 +69,7 @@ public class Parser {
             return new HelpCommand();
             
         case UndoCommand.COMMAND_WORD:
-        	return new UndoCommand(previousModifyingCommand);
+        	return new UndoCommand();
         	
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

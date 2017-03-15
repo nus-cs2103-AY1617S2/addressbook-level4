@@ -22,8 +22,4 @@ public class HelpCommand extends Command {
         return new CommandResult(SHOWING_HELP_MESSAGE);
     }
     
-    @Override
-    public Boolean isModifying() {
-    	return false;
-    }
 }
