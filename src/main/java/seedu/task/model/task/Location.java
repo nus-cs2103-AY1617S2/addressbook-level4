@@ -26,7 +26,7 @@ public class Location {
      */
     public Location(String location) throws IllegalValueException {
         assert location != null;
-        if (location.equals(DEFAULT_LOCATION)) {
+        if (location.equals(DEFAULT_LOCATION) || location.trim().equals("")) {
             this.value = "";
         } else {
             if (!isValidLocation(location)) {

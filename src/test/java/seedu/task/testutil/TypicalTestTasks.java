@@ -15,49 +15,49 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             apply = new TaskBuilder().withName("Apply for internship")
-                    .withStartDate("04-03-1989").withEndDate("08-03-1989")
+                    .withStartDate("04-03-1989 23:59").withEndDate("08-03-1989 23:59")
                     .withRemark("checkout career fair").withLocation("123, Jurong West Ave 6")
                     .withTags("personal").build();
             buy = new TaskBuilder().withName("Buy pencil")
-                    .withStartDate("4-08-2030").withEndDate("09-08-2032")
+                    .withStartDate("4-08-2030 23:59").withEndDate("09-08-2032 23:59")
                     .withRemark("Get the cheapest one").withLocation("311, Clementi Ave 2, #02-25")
                     .withTags("shopping", "school").build();
             calculate = new TaskBuilder().withName("Calculate expenses")
-                    .withStartDate("30-04-03").withEndDate("05-05-2003")
+                    .withStartDate("5-04-03 23:59").withEndDate("05-05-2003 23:59")
                     .withRemark("Calculate for march").withLocation("wall street").build();
             decide = new TaskBuilder().withName("Decide on birthday dinner")
-                    .withStartDate("11-11-02").withEndDate("07-05-2003")
+                    .withStartDate("11-11-02 23:59").withEndDate("07-05-2003 23:59")
                     .withRemark("Japanese or western?").withLocation("10th street").build();
             eat = new TaskBuilder().withName("Eat dinner with Bob")
-                    .withStartDate("13-7-1992").withEndDate("09-02-1992")
+                    .withStartDate("9-1-1992 23:59").withEndDate("09-02-1992 23:59")
                     .withRemark("Somewhere cheap").withLocation("michegan ave").build();
             find = new TaskBuilder().withName("Find old documents")
-                    .withStartDate("17-12-2023").withEndDate("04-02-2027")
+                    .withStartDate("4-1-2023 23:59").withEndDate("04-02-2027 23:59")
                     .withRemark("Should be somewhere at home").withLocation("home").build();
             give = new TaskBuilder().withName("Give dad present")
-                    .withStartDate("3-8-10").withEndDate("13-05-2011")
+                    .withStartDate("3-8-10 23:59").withEndDate("3-10-2011 23:59")
                     .withRemark("Maybe a tie").withLocation("4th street").build();
 
             // Manually added
             handle = new TaskBuilder().withName("Handle 2103 project")
-                    .withStartDate("9-3-1993").withEndDate("23-12-1999")
+                    .withStartDate("9-3-1993 23:59").withEndDate("9-12-1999 23:59")
                     .withRemark("In charge of testing").withLocation("little india").build();
             identify = new TaskBuilder().withName("Identify problems in report")
-                    .withStartDate("31-12-99").withEndDate("24-02-2131")
+                    .withStartDate("3-12-99 23:59").withEndDate("3-22-2131 23:59")
                     .withRemark("Might need help from teammates").withLocation("chicago ave").build();
             jump = new TaskBuilder().withName("Jump ropes")
-                    .withStartDate("31-01-99").withEndDate("24-02-2131")
+                    .withStartDate("01-1-99 23:59").withEndDate("1-02-2131 23:59")
                     .withRemark("Please exercise").withLocation("ERC field").build();
             kick = new TaskBuilder().withName("Kick over the cat")
-                    .withStartDate("11-01-99").withEndDate("24-01-2131")
+                    .withStartDate("11-01-99 23:59").withEndDate("11-24-2131 23:59")
                     .withLocation("Physics Lab").build();
             look = new TaskBuilder().withName("Look for the exam location")
-                    .withStartDate("23-01-99").withEndDate("24-02-2112")
+                    .withStartDate("2-2-99 23:59").withEndDate("2-24-2112 23:59")
                     .withRemark("Please help me find location").build();
             mark = new TaskBuilder().withName("Mark the tasks completed")
-                    .withStartDate("23-01-99")
+                    .withStartDate("1-23-99 23:59")
                     .withRemark("Tick the completed tasks").build();
-            neglect = new TaskBuilder().withName("Neglect all warnings").withStartDate("8-9-2017")
+            neglect = new TaskBuilder().withName("Neglect all warnings").withStartDate("8-9-2017 23:59")
                     .withRemark("Neglect this remark please").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();

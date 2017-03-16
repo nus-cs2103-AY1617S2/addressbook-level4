@@ -1,9 +1,10 @@
 package seedu.task.model.task;
 
-import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
+
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 
@@ -14,13 +15,11 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Date {
 
     // add to user guide
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, use help to see "
-            + "allowed formats or try this format: DD-MM-YY hh:mm AM/PM";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like,"
+                                                        + " tomorrow at 5pm or 4th April";
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
-
-    public static final ArrayList<SimpleDateFormat> ALLOWED_FORMATS = new ArrayList<>();
     private final java.util.Date value;
-    private static SimpleDateFormat format = new SimpleDateFormat("d/M/y h:m a");
+    private static PrettyTimeParser p = new PrettyTimeParser();
 
     /**
      * Validates given date.
@@ -30,105 +29,32 @@ public class Date {
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
-        if (date.equals(DEFAULT_DATE)) {
+        String trimmedDate = date.trim();
+
+        if (date.equals(DEFAULT_DATE) || trimmedDate.equals("")) {
             this.value = null;
         } else {
-            String trimmedDate = date.trim();
 
             if (!isValidDate(trimmedDate)) {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
 
-            if (!trimmedDate.contains("-") && !trimmedDate.contains("/")
-                    && !trimmedDate.matches("[0-9]* [a-zA-Z]{3,}.*")) {
-                java.util.Date currentDate = new java.util.Date();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/y");
-                trimmedDate = dateFormat.format(currentDate) + " " + trimmedDate;
-            }
-
-            this.value = new java.util.Date(getTime(trimmedDate));
+            List<java.util.Date> dates = p.parse(date);
+            this.value = dates.get(0);
         }
-    }
-
-    // date must be valid
-    private long getTime(String date) {
-        Date.format = getDateFormat(date);
-        assert (format) != null;
-        try {
-            return format.parse(date).getTime();
-        } catch (ParseException e) {
-            return 0;
-        }
-    }
-
-    // allow both datetime, date only, time only = current date,
-    // time assume 24HR unless AM/PM specified
-    private static void prepareDateFormats() {
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y H:m"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y HHmm"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y h:m a"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y h:mma"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y ha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y hha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d-M-y"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y H:m"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y HHmm"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y h:m a"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y h:mma"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y ha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y hha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("d/M/y"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy H:m"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy HHmm"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy h:m a"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy h:mma"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy ha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy hha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("dd MMM yy"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("H:m"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("HHmm"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("h:m a"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("h:mma"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("ha"));
-        ALLOWED_FORMATS.add(new SimpleDateFormat("hha"));
-
-    }
-
-    private static SimpleDateFormat getDateFormat(String input) {
-        for (SimpleDateFormat format : ALLOWED_FORMATS) {
-            try {
-                ParsePosition position = new ParsePosition(0);
-                format.setLenient(false);
-                format.parse(input, position).getTime();
-
-                if (position.getIndex() != input.length()) {
-                    throw new ParseException(input, 0);
-                } else {
-                    return format;
-                }
-            } catch (ParseException e) {
-                // check next
-            } catch (NullPointerException e) {
-                // check next
-            }
-        }
-        return null;
     }
 
     /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String input) {
-        if (input.trim().isEmpty()) {
+
+        List<java.util.Date> dates = p.parse(input);
+
+        if (dates.isEmpty()) {
             return false;
-        }
-
-        prepareDateFormats();
-
-        if (getDateFormat(input) != null) {
-            return true;
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -137,8 +63,9 @@ public class Date {
         if (value == null) {
             return new String("");
         }
-        SimpleDateFormat displayFormat = new SimpleDateFormat("d/M/y h:mm a");
-        return displayFormat.format(value);
+        SimpleDateFormat displayFormat = new SimpleDateFormat("M/d/y h:mm a");
+        PrettyTime pretty = new PrettyTime();
+        return displayFormat.format(value) + ", " + pretty.format(value);
     }
 
     @Override

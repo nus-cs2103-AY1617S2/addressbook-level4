@@ -39,7 +39,7 @@
 
 Format: `help`
 
-> Help brings up user guide in another window 
+> Help brings up user guide in another window
 
 ### 2.1.2 Viewing quick overview of command formats : `helpf`
 
@@ -157,7 +157,7 @@ Find task whose name or remark matches **all** the keyword(s). <br>
 
 Format: `findexact KEYWORD...`
 
-> * The search is the same as to `find` except it only matches tasks that contains **all** keywords. 
+> * The search is the same as to `find` except it only matches tasks that contains **all** keywords.
 e.g `do project` will match `do School project` but not `do homework`
 
 ### 2.9 Clearing all task: `clear`
@@ -238,7 +238,7 @@ There is no need to save manually.
 
 * **Find exact** : `findexact KEYWORD...`
   e.g. `findexact do homework`
-  
+
 * **Delete** : `delete INDEX`
    e.g. `delete 3`
 
@@ -248,5 +248,4 @@ There is no need to save manually.
 
 * **Save location** : `save PATHNAME`
    e.g. `save C:\Program Files`
-
-
+   

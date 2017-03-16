@@ -8,7 +8,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/ChanLupSeng.png" width="150"><br>
 Role: Team lead <br>
 - Components in charge of: [Model](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#model-component)
-- Aspects/tools in charge of: Integration, Deliverables and deadlines 
+- Aspects/tools in charge of: Integration, Deliverables and deadlines
 - Features implemented:
 - Other major contributions:
 
@@ -18,9 +18,9 @@ Role: Team lead <br>
 <img src="images/WalterTay.png" width="150"><br>
 Role: Developer <br>
 - Components in charge of: [Storage](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#storage-component)
-- Aspects/tools in charge of: Code quality, Git expert and deadlines. 
-- Features implemented: 
-- Other major contributions: 
+- Aspects/tools in charge of: Code quality, Git expert and deadlines.
+- Features implemented:
+- Other major contributions:
 
 -----
 
@@ -43,4 +43,3 @@ Role: Developer <br>
 - Other major contributions:
 
 -----
-
