@@ -3,6 +3,7 @@ package seedu.doist.logic.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -36,31 +37,31 @@ public abstract class Command {
         commandAliases.put("reset_alias",  new ArrayList<>());
     }
 
+    public static Set<String> getDefaultCommandWordSet() {
+        if (commandAliases == null) {
+            setDefaultCommandWords();
+        }
+        return commandAliases.keySet();
+    }
+
     public static ArrayList<String> getAliasList(String defaultCommandWord) {
         if (commandAliases == null) {
             setDefaultCommandWords();
         }
-        if (commandAliases.get(defaultCommandWord) != null) {
-            return commandAliases.get(defaultCommandWord);
-        } else {
-            return new ArrayList<String>();
-        }
+        return commandAliases.get(defaultCommandWord);
     }
 
-    public static boolean setAlias(String alias, String commandWord) {
+    public static void setAlias(String alias, String commandWord) {
+        assert(commandAliases.get(commandWord) != null);
         if (commandAliases == null) {
             setDefaultCommandWords();
         }
         for (String word : commandAliases.keySet()) {
             commandAliases.get(word).remove(alias);
         }
-        if (commandAliases.get(commandWord) != null) {
-            ArrayList<String> aliases = commandAliases.get(commandWord);
-            aliases.add(alias);
-            commandAliases.replace(commandWord, aliases);
-            return true;
-        }
-        return false;
+        ArrayList<String> aliases = commandAliases.get(commandWord);
+        aliases.add(alias);
+        commandAliases.replace(commandWord, aliases);
     }
 
     /**

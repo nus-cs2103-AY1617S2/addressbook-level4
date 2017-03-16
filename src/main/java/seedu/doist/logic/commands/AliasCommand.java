@@ -14,6 +14,8 @@ public class AliasCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New alias \"%1$s\" added to command \"%2$s\"";
     public static final String MESSAGE_COMMAND_WORD_NOT_EXIST = "This command word \"%1$s\" does not exist";
+    public static final String MESSAGE_ALIAS_IS_DEFAULT_COMMAND_WORD = "The input alias \"%1$s\" " +
+                                                                       "is already a default command word";
 
     private final String defaultCommandWord;
     private final String alias;
@@ -25,11 +27,13 @@ public class AliasCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        boolean isSuccess = Command.setAlias(alias, defaultCommandWord);
-        if (isSuccess) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, alias, defaultCommandWord));
-        } else {
+        if (!Command.getDefaultCommandWordSet().contains(defaultCommandWord)) {
             throw new CommandException(String.format(MESSAGE_COMMAND_WORD_NOT_EXIST, defaultCommandWord));
+        } else if (Command.getDefaultCommandWordSet().contains(alias)) {
+            throw new CommandException(String.format(MESSAGE_ALIAS_IS_DEFAULT_COMMAND_WORD, alias));
+        } else {
+            Command.setAlias(alias, defaultCommandWord);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, alias, defaultCommandWord));
         }
     }
 

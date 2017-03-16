@@ -17,6 +17,8 @@ import seedu.doist.logic.commands.IncorrectCommand;
 public class AliasCommandParser {
     private static final Pattern ALIAS_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
+    public static final String MESSAGE_COMMAND_WORD_NOT_SPECIFIED = "Command word must be specified";
+    public static final String MESSAGE_ALIAS_FORMAT_INVALID = "Alias can only contain alphabets";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -42,10 +44,10 @@ public class AliasCommandParser {
         try {
             List<String> parameter = argsTokenizer.getTokenizedArguments().get(PREFIX_FOR.toString());
             if (parameter == null || parameter.isEmpty()) {
-                throw new IllegalValueException("command word must be specified");
+                throw new IllegalValueException(MESSAGE_COMMAND_WORD_NOT_SPECIFIED);
             }
             if (!preamble.matches("[a-zA-Z]+")) {
-                throw new IllegalValueException("alias can only contain alphabets");
+                throw new IllegalValueException(MESSAGE_ALIAS_FORMAT_INVALID);
             }
             String commandWord = parameter.get(0);
             return new AliasCommand(preamble, commandWord);
