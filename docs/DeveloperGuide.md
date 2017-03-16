@@ -220,8 +220,18 @@ and logging destinations.
 
 <h3 id="user-content-config">Configuration</h3>
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
+Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file. By default, `config.json` will be created, when the configuration file is missing. To modify the configuration, you can either directly change the default `config.json` file or create another json file and pass it to the App as an application parameter before running.
+
+A typical configuration file should have the following format:
+```json
+{
+  "appTitle" : "GeeKeep - Command Line Featured Task Manager",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json",
+  "geeKeepFilePath" : "data/geekeep.xml",
+  "geeKeepName" : "MyGeeKeep"
+}
+```
 
 **[⬆ back to top](#user-content-table)**
 
