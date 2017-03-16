@@ -8,12 +8,12 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.DeadlineTask;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.EventTask;
 import seedu.watodo.model.task.FloatingTask;
 import seedu.watodo.model.task.Task;
-import seedu.watodo.model.task.DateTime;
-import seedu.watodo.model.task.DeadlineTask;
 import seedu.watodo.model.task.UniqueTaskList;
 
 /**
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
-    private enum TaskType {FLOAT, DEADLINE, EVENT, INVALID}
+    public enum TaskType { FLOAT, DEADLINE, EVENT, INVALID }
     private Task toAdd;
 
     /**
@@ -73,9 +73,11 @@ public class AddCommand extends Command {
     /**
      * Checks the type of task(floating, deadline or event) to be added
      * based on the DATETIME parameters entered by the user.
-     * @throws IllegalValueException if both deadline and startDate are entered, or if only one of startDate or endDate is entered
+     * @throws IllegalValueException if both deadline and startDate are entered, 
+     * or if only one of startDate or endDate is entered
      */
-    private TaskType checkTaskType(boolean hasDeadline, boolean hasStartDate, boolean hasEndDate) throws IllegalValueException {
+    private static TaskType checkTaskType(boolean hasDeadline, boolean hasStartDate, boolean hasEndDate) 
+            throws IllegalValueException {
         if (!hasDeadline && !hasStartDate && !hasEndDate) {
             return TaskType.FLOAT;
         }

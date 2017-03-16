@@ -15,8 +15,8 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.StringUtil;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.Description;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
