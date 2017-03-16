@@ -96,29 +96,6 @@ Use case ends
 
 Use case ends
 
-#### Use case: Set deadline to a task
-
-**MSS**
-
-1. User requests to set a deadline to a specific task
-2. Opus sets a deadline for the task and displays the task
-
-Use case ends
-
-**Extensions**
-
-1a. The given index is invalid
-
-> 1a1. Opus shows an error message
-
-Use case ends
-
-1b. The date input by user is invalid
-
-> 1b1. Opus shows an error message
-
-Use case ends
-
 #### Use case: Undo the previous action
 
 **MSS**
@@ -193,23 +170,6 @@ Use case ends
 
 Use case ends
 
-#### Use case: Specify the location of the storage file
-
-**MSS**
-
-1. User requests to specify the location of the storage file
-2. Opus shows the location of the storage file is changed
-
-Use case ends
-
-**Extensions**
-
-1a. The location path is invalid
-
-> 1a1. Opus shows an error message
-
-Use case ends
-
 #### Use case: Add a note to a task
 
 **MSS**
@@ -224,28 +184,5 @@ Use case ends
 1a. The input index is invalid
 
 > 1a1. Opus shows an error message
-
-Use case ends
-
-#### Use case: Set the priority of a task
-
-**MSS**
-
-1. User requests to set the priority of a task
-2. Opus shows the priority is set.
-
-Use case ends
-
-**Extensions**
-
-1a. The input index is invalid
-
-> 1a1. Opus shows an error message
-
-Use case ends
-
-1b. The priority value is invalid
-
-> 1b1. Opus shows an error message
 
 Use case ends
