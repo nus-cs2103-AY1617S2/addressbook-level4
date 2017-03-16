@@ -12,6 +12,7 @@ import seedu.watodo.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     public enum Status { UNDONE, DONE, OVERDUE } // Represents a Task's current status in the task manager.
+
     protected Description description;
     protected Status status;
     protected UniqueTagList tags;
@@ -82,7 +83,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, status, tags);
+        return Objects.hash(description, tags);
     }
 
     @Override
