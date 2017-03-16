@@ -4,13 +4,11 @@ import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.undoredo.exceptions.RedoFailureException;
 
 /**
- * 
  * @author A0124863A
- * 
  * Redo an operation to the task manager
  *
  */
-public class RedoCommand extends Command{
+public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
     
@@ -29,6 +27,5 @@ public class RedoCommand extends Command{
         } catch (RedoFailureException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        
     }
 }

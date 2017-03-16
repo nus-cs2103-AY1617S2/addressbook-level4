@@ -55,7 +55,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tasks.setTasks(tasks);
     }
 
-    public void setCategories(Collection<Category> categories) throws UniqueCategoryList.DuplicateCategoryException {   
+    public void setCategories(Collection<Category> categories) throws UniqueCategoryList.DuplicateCategoryException {
         this.categories.setCategories(categories);
     }
 

@@ -6,29 +6,27 @@ import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * 
  * @author A0124863A
  * Undo an delete operation by adding back the deleted task
- *
  */
 public class UndoDeleteCommand extends UndoCommand {
     private Task task;
-    
+
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
 
     public UndoDeleteCommand(ReadOnlyTask task) {
         this.task = new Task(task);
     }
-    
+
     @Override
     public void execute() throws CommandException {
         assert taskManager != null;
         try {
             taskManager.addTask(task);
-        } catch(DuplicateTaskException e) {
+        } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }        
+        }
     }
 
     @Override
@@ -36,11 +34,4 @@ public class UndoDeleteCommand extends UndoCommand {
         return new UndoAddCommand(task);
     }
 
-
-    
-    
-    
-    
-    
-    
 }

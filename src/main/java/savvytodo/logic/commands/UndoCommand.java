@@ -4,20 +4,13 @@ import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.undoredo.exceptions.UndoFailureException;
 
 /**
- * 
  * @author A0124863A
- * 
  * Undo an operation to the task manager
- *
  */
 public class UndoCommand extends Command {
-    
     public static final String COMMAND_WORD = "undo";
-    
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo an operation to the task manager";
-    
     public static final String MESSAGE_SUCCESS = "undo successfully";
-    
     public static final String MESSAGE_FAILURE = "cannot undo";
     
     @Override
@@ -29,7 +22,6 @@ public class UndoCommand extends Command {
         } catch (UndoFailureException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        
     }
 
 }

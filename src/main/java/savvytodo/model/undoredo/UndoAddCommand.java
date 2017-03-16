@@ -5,10 +5,8 @@ import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * 
  * @author A0124863A
  * Undo an add operation by deleting the added task
- *
  */
 public class UndoAddCommand extends UndoCommand {
     private Task task;
@@ -21,9 +19,9 @@ public class UndoAddCommand extends UndoCommand {
         assert taskManager != null;
         try {
             taskManager.removeTask(task);
-        } catch(TaskNotFoundException e) {
+        } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
-        }  
+        }
     }
 
     @Override

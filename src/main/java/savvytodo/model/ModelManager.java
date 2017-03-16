@@ -55,14 +55,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        
         UndoClearCommand undoClear = new UndoClearCommand(taskManager, newData);
         undoRedoManager.storeUndoCommand(undoClear);
-        undoRedoManager.resetRedo();        
-        
+        undoRedoManager.resetRedo();
         taskManager.resetData(newData);
-
-        
         indicateTaskManagerChanged();
     }
 
@@ -79,22 +75,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        
         UndoDeleteCommand undoDelete = new UndoDeleteCommand(target);
         undoRedoManager.storeUndoCommand(undoDelete);
         undoRedoManager.resetRedo();
-        
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        
         UndoAddCommand undoAdd = new UndoAddCommand(task);
         undoRedoManager.storeUndoCommand(undoAdd);
         undoRedoManager.resetRedo();
-        
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -105,12 +97,10 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        
         Task originalTask = new Task(filteredTasks.get(filteredTaskListIndex));
         UndoEditCommand undoEdit = new UndoEditCommand(filteredTaskListIndex, originalTask, editedTask);
         undoRedoManager.storeUndoCommand(undoEdit);
         undoRedoManager.resetRedo();
-        
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
@@ -193,14 +183,13 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             UndoCommand undo = undoRedoManager.getUndoCommand();
             undo.setTaskManager(taskManager);
-            undo.execute();       
+            undo.execute();
             indicateTaskManagerChanged();
         } catch (EmptyStackException e) {
             throw new UndoFailureException(e.getMessage());
         } catch (CommandException e) {
             throw new UndoFailureException(e.getMessage());
         }
-        
     }
 
     @Override

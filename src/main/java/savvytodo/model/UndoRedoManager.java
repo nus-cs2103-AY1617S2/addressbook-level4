@@ -6,14 +6,10 @@ import java.util.Stack;
 import savvytodo.model.undoredo.UndoCommand;
 
 /**
- * 
  * @author A0124863A
- * 
  * Class that stores the undo and redo commands
- *
  */
 public class UndoRedoManager {
-        
     private Stack<UndoCommand> undoStack = new Stack<UndoCommand>();
     private Stack<UndoCommand> redoStack = new Stack<UndoCommand>();
 
@@ -25,7 +21,7 @@ public class UndoRedoManager {
         redoStack.clear();
     }
     
-    public UndoCommand getUndoCommand() throws EmptyStackException {     
+    public UndoCommand getUndoCommand() throws EmptyStackException {
         UndoCommand undo = undoStack.pop();
         UndoCommand redo = undo.reverseUndo();
         redoStack.push(redo);
@@ -37,7 +33,6 @@ public class UndoRedoManager {
         UndoCommand undo = redo.reverseUndo();
         undoStack.push(undo);
         return redo;
-    }    
-    
+    }
 
 }
