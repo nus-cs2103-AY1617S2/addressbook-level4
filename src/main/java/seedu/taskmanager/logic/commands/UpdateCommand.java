@@ -5,10 +5,11 @@ import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.Deadline;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.UniqueTaskList;
@@ -25,7 +26,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TASK] TO [DATE] FROM [STARTTIME] TO [ENDTIME]\n"
+            + "Parameters: INDEX (must be a positive integer) [TASK] ON [DATE] FROM [STARTTIME] TO [ENDTIME]\n"
             + "Example: " + COMMAND_WORD + " 1 ON 04/03/17 FROM 1630 TO 1830";
 
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
@@ -65,6 +66,7 @@ public class UpdateCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
@@ -79,11 +81,11 @@ public class UpdateCommand extends Command {
 
         TaskName updatedTaskName = updateTaskDescriptor.getTaskName().orElseGet(taskToUpdate::getTaskName);
         Date updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getDate);
-//        EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
-//        Deadline updatedDeadline = updateTaskDescriptor.getDeadline().orElseGet(taskToUpdate::getDeadline);
+        StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
+        EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
 //        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
 
-        return new Task(updatedTaskName, updatedDate /*, updatedEndTime, updatedDeadline, updatedCategories*/);
+        return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime/*, updatedCategories*/);
     }
 
     /**
@@ -93,8 +95,8 @@ public class UpdateCommand extends Command {
     public static class UpdateTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
         private Optional<Date> date = Optional.empty();
-//        private Optional<EndTime> endtime = Optional.empty();
-//       private Optional<Deadline> deadline = Optional.empty();
+        private Optional<StartTime> starttime = Optional.empty();
+        private Optional<EndTime> endtime = Optional.empty();
 //        private Optional<UniqueCategoryList> categories = Optional.empty();
 
         public UpdateTaskDescriptor() {}
@@ -102,8 +104,8 @@ public class UpdateCommand extends Command {
         public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
             this.date = toCopy.getDate();
-//            this.endtime = toCopy.getEndTime();
-//            this.deadline = toCopy.getDeadline();
+            this.starttime = toCopy.getStartTime();
+            this.endtime = toCopy.getEndTime();
 //            this.categories = toCopy.getCategories();
         }
 
@@ -111,8 +113,8 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname/*, this.deadline*/, this.date/*,
-            		                           this.endtime, this.categories*/);
+            return CollectionUtil.isAnyPresent(this.taskname, this.date,
+            		                           this.starttime, this.endtime);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -132,7 +134,16 @@ public class UpdateCommand extends Command {
         public Optional<Date> getDate() {
             return date;
         }
-/*
+
+        public void setStartTime(Optional<StartTime> starttime) {
+        	assert starttime != null;
+        	this.starttime = starttime;
+        }
+
+        public Optional<StartTime> getStartTime() {
+        	return starttime;
+        }
+
         public void setEndTime(Optional<EndTime> endtime) {
         	assert endtime != null;
         	this.endtime = endtime;
@@ -142,15 +153,7 @@ public class UpdateCommand extends Command {
         	return endtime;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
-        	assert deadline != null;
-        	this.deadline = deadline;
-        }
-
-        public Optional<Deadline> getDeadline() {
-        	return deadline;
-        }
-
+        /*
         public void setCategories(Optional<UniqueCategoryList> categories) {
             assert categories != null;
             this.categories = categories;

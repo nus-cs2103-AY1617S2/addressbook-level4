@@ -15,8 +15,8 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.EndTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
@@ -74,14 +74,6 @@ public class ParserUtil {
         return taskname.isPresent() ? Optional.of(new TaskName(taskname.get())) : Optional.empty();
     }
 
-/*   /**
-     * Parses a {@code Optional<String> time} into an {@code Optional<Time>} if {@code time} is present.
-
-    public static Optional<Deadline> parseTime(Optional<String> time) throws IllegalValueException {
-        assert time != null;
-        return time.isPresent() ? Optional.of(new Deadline(time.get())) : Optional.empty();
-    }*/
-
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
      */
@@ -91,19 +83,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> starttime} into an {@code Optional<StartTime>} if {@code starttime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> starttime) throws IllegalValueException {
+    	assert starttime != null;
+    	return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
+    }
+
+    /**
      * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
      */
     public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
     	assert endtime != null;
     	return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
-     */
-    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
-    	assert deadline != null;
-    	return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
     /**
