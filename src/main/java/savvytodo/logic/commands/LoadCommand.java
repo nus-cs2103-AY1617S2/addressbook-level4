@@ -6,7 +6,7 @@ import savvytodo.logic.commands.exceptions.CommandException;
 
 /**
  * Loads a storage XML file from the given filepath
- * @@author A0147827U
+ * @author A0147827U
  */
 public class LoadCommand extends Command{
 

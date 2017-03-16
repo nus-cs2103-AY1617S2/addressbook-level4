@@ -4,7 +4,7 @@ import savvytodo.commons.events.BaseEvent;
 
 /**
  * Loads the storage file in the given file path
- * @@author A0147827U
+ * @author A0147827U
  */
 public class LoadStorageFileEvent extends BaseEvent{
     

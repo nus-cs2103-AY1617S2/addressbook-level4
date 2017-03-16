@@ -54,8 +54,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        //test
-        //config.settaskManagerFilePath("/Users/jingloon/taskmanager.xml");
+        
         storage = new StorageManager(config.gettaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
@@ -189,6 +188,7 @@ public class MainApp extends Application {
         this.stop();
     }
     
+    @Subscribe
     public void handleLoadStorageFileEvent(LoadStorageFileEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();

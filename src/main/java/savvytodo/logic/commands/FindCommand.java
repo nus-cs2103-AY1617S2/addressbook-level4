@@ -7,7 +7,7 @@ import java.util.Set;
  * Keyword matching is case insensitive.
  * 
  *  (modified by)
- *  @@author: A0147827U
+ *  @author: A0147827U
  *  
  */
 public class FindCommand extends Command {
