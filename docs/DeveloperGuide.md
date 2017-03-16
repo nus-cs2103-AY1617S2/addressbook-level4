@@ -165,7 +165,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 
-<h2 id="user-content-model">Model component</h2>
+<h3 id="user-content-model">Model component</h3>
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
@@ -191,9 +191,9 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.geekeep.commons` package. Here are some examples:
-+ `IllegalValueException` is used in both `Logic` and `Model` components to throw an exception when the value is considered invalid.
-+ `UnmodifiableObservableList` is used in `Logic`, `Model` and `Storage` components to provide unmodifiable view of an observable list.
-+ `LogsCenter` is used in all components to create named loggers which are further used to log messages.
++ `IllegalValueException` class is used in both `Logic` and `Model` components to throw an exception when the value is considered invalid.
++ `UnmodifiableObservableList` class is used in `Logic`, `Model` and `Storage` components to provide unmodifiable view of an observable list.
++ `LogsCenter` class is used in all components to create named loggers which are further used to log messages.
 
 **[⬆ back to top](#user-content-table)**
 
