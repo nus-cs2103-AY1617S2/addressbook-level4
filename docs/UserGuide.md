@@ -159,24 +159,39 @@ Autocomplete the user's command on the CLI.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME [n/NOTES] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...` <br>
-  e.g. `add Finish v0.0 documentation n/Urgent s/Incomplete d/28/02/2017 p/1 t/CS2103`
+* **Add**  `add NAME [n/NOTES] [p/PRIORITY] [d/DEADLINE] [t/TAG]...` <br>
+  e.g. `add Do laundry n/from the blue basket p/hi d/23/3/2018 t/friend t/colleague`
 
 * **Clear** : `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
+* **Edit**  `edit INDEX NAME [n/NOTES] [p/PRIORITY] [d/DEADLINE] [t/TAG]...` <br>
+  e.g. `edit 2 Prepare dinner n/for 4 pax p/hi d/23/4/2017 t/friend t/colleague`
+
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find Wash dishes`
 
-* **List** : `list` <br>
-  e.g. `list`
-
 * **Help** : `help` <br>
-  e.g. `help`
+
+* **List** : `list` <br>
+
+* **Mark** : `mark [INDEX]` <br>
+  e.g. `mark 1`
+
+* **Redo** : `redo` <br>
+
+* **Schedule** : `schedule INDEX DEADLINE` <br>
+  e.g. `schedule 6 30/3/2017`
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
+
+* **Unmark** : `unmark [INDEX]` <br>
+  e.g. `unmark 1`
+
+* **Undo** : `undo` <br>
+
 
 
