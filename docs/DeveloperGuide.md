@@ -80,6 +80,11 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gradle](UsingGradle.md#running-tests) once (to refresh the libraries).
 
+**Problem: `Error during compilation: missing tools.jar`**
+
+* Reason: Unsure of the cause of the reason
+* Solution: A known solution is to reinstall `Java JDK 1.8`
+
 
 ## 2. Design
 
