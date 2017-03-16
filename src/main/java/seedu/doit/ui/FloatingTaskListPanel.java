@@ -21,8 +21,11 @@ import seedu.doit.model.item.ReadOnlyTask;
 public class FloatingTaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(FloatingTaskListPanel.class);
+
+    private static ObservableList<ReadOnlyTask> mainTaskList;
     @FXML
     private ListView<ReadOnlyTask> taskListView;
+
 
     public FloatingTaskListPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> floatingTaskList) {
         super(FXML);
@@ -31,6 +34,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> floatingTaskList) {
+        mainTaskList = floatingTaskList;
         this.taskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime() && !task.hasEndTime()));
         this.taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -69,7 +73,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(floatingTask, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(floatingTask, mainTaskList.indexOf(floatingTask) + 1).getRoot());
             }
         }
     }
