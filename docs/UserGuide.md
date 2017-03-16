@@ -157,7 +157,7 @@ To remove the start/end date entirely, simply add the corresponding prefix witho
 Example:
 * `edit 3 e/`<br>
   Removes the deadline from task 3.<br>
- 
+
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
@@ -190,11 +190,11 @@ Format: `mark INDEX`
 Example:
 * `mark 1`<br>
   Updates the task status to `Complete` if it is `Incomplete`. <br>
-  
+
 Oops! Missed out on some project requirements? Just use the `mark` command again to mark the task as `Incomplete` again.<br>
-* `mark 2`<br> 
+* `mark 2`<br>
   Updates the task status to `Incomplete` if it is `Complete`. <br>
-  
+
 > * Marks the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
@@ -276,11 +276,11 @@ Format: `exit`
 
 > **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous task list folder.
-	   
+
 
 **Q**: How do I save my tasks?
 
-> **A**: You don't need to! Your tasks are automatically saved after every command!	   
+> **A**: You don't need to! Your tasks are automatically saved after every command!
 
 ## 6. Commands Cheatsheet
 
