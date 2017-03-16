@@ -440,7 +440,7 @@ Extensions
 > A task with a specified ending time is a deadline
 > E.g. Complete Progress Report by 20 March 2017 2359H
 
-<h3 id="user-content-ae">**Appendix E : Product Survey**</h3>
+<h3 id="user-content-ae">Appendix E : Product Survey</h3>
 
 #### **Google Keep**
 
