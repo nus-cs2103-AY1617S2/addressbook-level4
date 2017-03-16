@@ -19,8 +19,8 @@ public class FlexibleCommand {
 			"exit exits close closes logout logouts",
 			"find finds f search searches lookup",
 			"help helps h manual instruction instructions",
-			"list lists l ls show display showall",
-			"select selects s choose",
+			"list lists l ls show shows display displays showall",
+			"select selects s choose chooses",
 	};
 
 	/**
