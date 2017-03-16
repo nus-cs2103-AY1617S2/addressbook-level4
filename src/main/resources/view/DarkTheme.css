@@ -15,14 +15,25 @@
 	-fx-background-color: #F8F9FA;
 }
 
-#resultDisplay {
+.result-display .content {
+	-fx-background-color: white;
+}
+
+.result-display {
+	-fx-background-color: white, white;
 	-fx-font-family: "Open Sans";
+	-fx-line-spacing: 1em;
+}
+
+.result-display:focused .content {
+	-fx-background-color: white;
 }
 
 #commandTextField {
     -fx-background-color: #34495E;
 	-fx-text-fill: #ecf0f1;
 	-fx-font-family: "Open Sans";
+	-fx-font-size: 17px;
 }
 
 .label {
@@ -142,14 +153,6 @@
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-text-fill: black;
-}
-
-.result-display {
-    -fx-background-color: #ffffff;
-}
-
-.result-display .label {
-    -fx-text-fill: black !important;
 }
 
 .status-bar .label {
