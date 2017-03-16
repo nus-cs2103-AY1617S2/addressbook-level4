@@ -18,12 +18,22 @@ public class TodoCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label start;
+    @FXML
+    private Label end;
+    @FXML
     private FlowPane tags;
 
     public TodoCard(ReadOnlyTodo todo, int displayedIndex) {
         super(FXML);
         name.setText(todo.getName().fullName);
         id.setText(displayedIndex + ". ");
+        if (todo.getStartTime() != null) {
+            start.setText(todo.getStartTime().toString());
+        }
+        if (todo.getEndTime() != null) {
+            end.setText(todo.getEndTime().toString());
+        }
         initTags(todo);
     }
 
