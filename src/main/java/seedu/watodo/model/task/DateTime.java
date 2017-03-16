@@ -16,7 +16,9 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
-    public static final Parser DATE_TIME_PARSER = new Parser(TimeZone.getTimeZone("GMT"));
+
+    public static final Parser dateTimeParser = new Parser(TimeZone.getDefault());
+    
 
     public final Date dateTime;
 
@@ -51,7 +53,11 @@ public class DateTime {
         List<DateGroup> parsedDateGroups = DATE_TIME_PARSER.parse(dateTime);
         return parsedDateGroups.get(0).getDates().get(0);
     }
-
+    
+    /* Checks if the current DateTime is at a later date than another given DateTime */
+    public boolean isLater(DateTime other) {
+        return this.dateTime.after(other.dateTime);
+    }
 
     @Override
     public String toString() {
