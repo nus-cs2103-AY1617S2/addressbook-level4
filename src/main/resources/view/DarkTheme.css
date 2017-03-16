@@ -2,6 +2,15 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.command-box-holder {
+    -fx-background-color: #34495E;
+}
+
+#commandTextField {
+    -fx-background-color: #34495E;
+	-fx-text-fill: #ecf0f1;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -81,7 +90,7 @@
 }
 
 .split-pane {
-    -fx-border-radius: 1;
+    -fx-border-radius: 0;
     -fx-border-width: 1;
     -fx-background-color: derive(#1d1d1d, 20%);
 }
