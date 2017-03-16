@@ -26,7 +26,7 @@ Use case ends
 
 > 1a1. Opus shows an error message
 
-Use case ends
+> Use case ends
 
 #### Use case: Delete task
 
@@ -43,7 +43,7 @@ Use case ends
 
 > 1a1. Opus shows an error message
 
-Use case ends
+> Use case ends
 
 #### Use case: Edit task
 
@@ -60,16 +60,19 @@ Use case ends
 
 > 1a1. Opus shows an error message
 
+> Use case ends
+
 1b. The attribute given is invalid
 
 > 1b1. Opus shows an error message
+
+> Use case ends
 
 1c. The value of the attribute is invalid
 
 > 1c1. Opus shows an error message
 
-Use case ends
-
+> Use case ends
 
 #### Use case: Mark task as complete
 
@@ -86,7 +89,7 @@ Use case ends
 
 > 1a1. Opus shows an error message
 
-Use case ends
+> Use case ends
 
 #### Use case: Undo the previous action
 
@@ -101,7 +104,7 @@ Use case ends
 
 1a. The history stack is empty
 
-Use case ends
+> Use case ends
 
 #### Use case: Redo the previous undo action
 
@@ -125,8 +128,8 @@ Use case ends
 
 1a. The list is empty
 
-1b. The input bttribute is invalid
+1b. The input attribute is invalid
 
 > 1b1. Opus shows an error message
 
-Use case ends
+> Use case ends
