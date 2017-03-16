@@ -302,10 +302,11 @@ Certain properties of the application can be controlled (e.g App name, logging l
 ## 4. Code Quality and Testing
 
 ### 4.1. Code Quality
+
 In Opus, we asipre to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive coding are:
-*Using assertions to check validity of arguments before passing them into functions.
-*Throwing Excpetions when encountering unexpected events.
-*Enforcing 1-to-1 associations
+* Using assertions to check validity of arguments before passing them into functions.
+* Throwing Excpetions when encountering unexpected events.
+* Enforcing 1-to-1 associations
 A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf) 
 
 ### 4.2. Testing
@@ -346,16 +347,12 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
  
 ### 4.3. Improving test coverage using Coveralls
-
-    Coveralls is a code analytic tool that tracks and analyses test coverage of a project. 
-    We have integrated Coveralls into our project to keep track and improve upon the test coverage of the code 
-    to deliver a robust and throughly-tested product. 
+>Coveralls is a code analytic tool that tracks and analyses test coverage of a project. We have integrated Coveralls into our project to keep track and improve upon the test coverage of the code to deliver a robust and throughly-tested product. 
  
  The Coveralls dashboard can be accessed [here](https://coveralls.io/github/CS2103JAN2017-W15-B3/main?branch=master). 
  <br><img src="images/coveralls/coveralls_1.png" width="600"><br>
  
- Upon every pull request, Coveralls will run an analysis of the pushed code and produce a report. 
- To view the coverage report, nagivate the to pull request in Github.
+ Upon every pull request, Coveralls will run an analysis of the pushed code and produce a report. To view the coverage report, nagivate the to pull request in Github.
 
  1. Click on the Coveralls badge in the pull request to open the coverage report as follows:
  <br><img src="images/coveralls/coveralls_2.png" width="600"><br><br>
@@ -363,6 +360,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  <br><img src="images/coveralls/coveralls_3.png" width="600"><br><br>
  Lines that are highlighted in red indicate that there is no test coverage for the code branch.
  <br><img src="images/coveralls/coveralls_4.png" width="600"><br><br>
+ 
     To maintain the code quality of the product, we strongly insist that all possible code branches are well covered with test cases.
 
 ### 4.4. Troubleshooting tests
