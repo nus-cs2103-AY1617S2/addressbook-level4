@@ -158,7 +158,7 @@ By default, **Today** already displays all your uncompleted tasks. However, if y
 
 #### 3.3.1. Marking tasks as **Today**
 
-As suggested in the [quick-start guide](#22-how-to-get-started), we recommend that users compile a list of tasks to focus on, regardless on deadline. The `today` commands shifts tasks from your future list to your list of today's tasks.
+As suggested in the [quick-start guide](#22-how-to-get-started), we recommend that users compile a list of tasks to focus on, regardless on deadline. The `today` command shifts tasks from your future list to your list of today's tasks.
 
 ##### Format: `today <id1, id2, ...>`
 
