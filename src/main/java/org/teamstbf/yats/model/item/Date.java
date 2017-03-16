@@ -6,10 +6,10 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
-public class Deadline {
+public class Date {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task deadline should only be in the format dd/mm/yyyy";
-    public static final String DEADLINE_VALIDATION_REGEX = "^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$";
+    public static final String DEADLINE_VALIDATION_REGEX = "(^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$|^(?![\\s\\S]))";
 
     public final String value;
 
@@ -18,7 +18,7 @@ public class Deadline {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Deadline(String deadline) throws IllegalValueException {
+    public Date(String deadline) throws IllegalValueException {
         assert deadline != null;
         String trimmedDeadline = deadline.trim();
         if (!isValidDeadline(trimmedDeadline)) {
@@ -42,8 +42,8 @@ public class Deadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                && this.value.equals(((Deadline) other).value)); // state check
+                || (other instanceof Date // instanceof handles nulls
+                && this.value.equals(((Date) other).value)); // state check
     }
 
     @Override

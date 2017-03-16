@@ -3,7 +3,7 @@ package org.teamstbf.yats.commons.events.model;
 import org.teamstbf.yats.commons.events.BaseEvent;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates the TaskManager in the model has changed*/
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
@@ -14,6 +14,6 @@ public class TaskManagerChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getPersonList().size() + ", number of tags " + data.getTagList().size();
+        return "number of tasks " + data.getTaskList().size() + ", number of tags " + data.getTagList().size();
     }
 }

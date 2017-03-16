@@ -17,19 +17,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class TaskListPanel extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "PersonListPanel.fxml";
 
     @FXML
     private ListView<ReadOnlyEvent> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyEvent> observableList) {
+    public TaskListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> observableList) {
         super(FXML);
         setConnections(observableList);
-        addToPlaceholder(personListPlaceholder);
+        addToPlaceholder(eventListPlaceholder);
     }
 
     private void setConnections(ObservableList<ReadOnlyEvent> observableList) {
@@ -48,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
                         raise(new EventPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -71,7 +71,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
             }
         }
     }

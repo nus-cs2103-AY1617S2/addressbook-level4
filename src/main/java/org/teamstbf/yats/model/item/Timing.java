@@ -12,7 +12,7 @@ public class Timing {
     public static final String MESSAGE_TIMING_CONSTRAINTS =
             "Task timing should be in the 12 hour format, followed by am|pm "
             + "and the hour and minutes should be separated by ':'";
-    public static final String TIMING_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
+    public static final String TIMING_VALIDATION_REGEX = "((1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)|^(?![\\s\\S]))";
 
     public final String value;
 

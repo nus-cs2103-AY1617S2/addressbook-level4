@@ -12,15 +12,15 @@ import org.teamstbf.yats.commons.util.FileUtil;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access TaskManager data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements TaskManagerStorage {
+public class XmlTaskManagerStorage implements TaskManagerStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
 
     private String filePath;
 
-    public XmlAddressBookStorage(String filePath) {
+    public XmlTaskManagerStorage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -55,21 +55,21 @@ public class XmlAddressBookStorage implements TaskManagerStorage {
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException {
-        saveTaskManager(addressBook, filePath);
+    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+        saveTaskManager(taskManager, filePath);
     }
 
     /**
      * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        assert taskManager != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
 }

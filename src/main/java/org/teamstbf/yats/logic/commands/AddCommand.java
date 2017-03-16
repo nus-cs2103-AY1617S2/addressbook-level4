@@ -1,5 +1,6 @@
 package org.teamstbf.yats.logic.commands;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,9 +10,9 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -25,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an task or event to the task manager. "
             + "Parameters: task name l/location p/period(none/daily/weekly/monthly) s/START TIME  e/END TIME  d/ description [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " meeting with boss l/work p/daily s/7:00pm  e/9:00pm  "
+            + " meeting with boss l/work p/daily s/7:00pm,18/03/2017  e/9:00pm,18/03/2017  "
             + "d/get scolded for being lazy t/kthxbye";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
@@ -51,11 +52,24 @@ public class AddCommand extends Command {
                 new Title(name),
                 new Location(location),
                 new Periodic(period),
-                new Timing(startTime),
-                new Timing(endTime),
+                new Schedule(startTime),
+                new Schedule(endTime),
                 new Description(description),
                 new UniqueTagList(tagSet)
         );
+    }
+
+    /**
+     * Creates an addCommand using a map of parameters
+     * @param addParam
+     * @throws IllegalValueException if any of the parameters are invalid
+     */
+    public AddCommand(HashMap<String, Object> parameters) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : (Set<String>) parameters.get("tag")) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Event(parameters, new UniqueTagList(tagSet));
     }
 
     @Override
@@ -64,7 +78,7 @@ public class AddCommand extends Command {
         try {
             model.addEvent(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueItemList.DuplicatePersonException e) {
+        } catch (UniqueEventList.DuplicateEventException e) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
