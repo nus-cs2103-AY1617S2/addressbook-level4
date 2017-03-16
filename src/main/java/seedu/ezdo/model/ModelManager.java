@@ -14,6 +14,7 @@ import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -246,4 +247,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    public void sortTasks(SortCriteria sortCriteria) {
+        ezDo.sortTasks(sortCriteria);
+        indicateEzDoChanged();
+    }
 }
