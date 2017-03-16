@@ -13,7 +13,7 @@ import project.taskcrusher.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestCard assignment, payment, shopping, phoneCall, application;
-
+    public TestCard notAddedBuyTicket, notAddedQuiz;
     public TypicalTestTasks() {
         try {
             assignment = new TaskBuilder().withName("CS2103 assignment")
@@ -29,6 +29,10 @@ public class TypicalTestTasks {
                     .withDeadline(Deadline.NO_DEADLINE).withDescription("sometime this year").build();
             application = new TaskBuilder().withName("apply to jobs").withPriority("0")
                     .withDeadline("next Monday").withDescription("McDonald's").build();
+            notAddedBuyTicket = new TaskBuilder().withName("Buy Ticket for UEFA").withPriority("3")
+                    .withDeadline("next Tuesday").withDescription("In Portugal").build();
+            notAddedQuiz = new TaskBuilder().withName("Post lecture quiz").withPriority("2")
+                    .withDeadline("Saturday").withDescription("CS2103").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

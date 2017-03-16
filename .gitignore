@@ -15,3 +15,5 @@ classes/
 /data/
 /bin/
 .classpath
+config.json
+

@@ -21,14 +21,14 @@
 //        personListPanel.clickOnListView();
 //        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 //
-//        browserPanel.clickOnWebView();
-//        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
+//        //browserPanel.clickOnWebView();
+//        //assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
 //
 //        //use menu button
-//        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
+//        //assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 //
 //        //use command
-//        assertHelpWindowOpen(commandBox.runHelpCommand());
+//        //assertHelpWindowOpen(commandBox.runHelpCommand());
 //    }
 //
 //    private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {
