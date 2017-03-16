@@ -41,4 +41,10 @@ public interface TaskListStorage {
      */
     void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException;
 
+    /*
+     *Set saving file path
+     *@param filePath
+     */
+    void setFilePath(String filePath);
+
 }
