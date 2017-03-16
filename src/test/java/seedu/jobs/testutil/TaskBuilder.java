@@ -1,5 +1,7 @@
 package seedu.jobs.testutil;
 
+import java.util.Optional;
+
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
@@ -11,27 +13,27 @@ import seedu.jobs.model.task.Phone;
 /**
  *
  */
-public class PersonBuilder {
+public class TaskBuilder {
 
     private TestPerson person;
 
-    public PersonBuilder() {
+    public TaskBuilder() {
         this.person = new TestPerson();
     }
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(TestPerson personToCopy) {
+    public TaskBuilder(TestPerson personToCopy) {
         this.person = new TestPerson(personToCopy);
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+    public TaskBuilder withName(String name) throws IllegalValueException {
+        this.person.setName(new Name(Optional.of(name)));
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
+    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         person.setTags(new UniqueTagList());
         for (String tag: tags) {
             person.getTags().add(new Tag(tag));
@@ -39,17 +41,17 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
+    public TaskBuilder withAddress(String address) throws IllegalValueException {
         this.person.setAddress(new Address(address));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
+    public TaskBuilder withPhone(String phone) throws IllegalValueException {
         this.person.setPhone(new Phone(phone));
         return this;
     }
 
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
+    public TaskBuilder withEmail(String email) throws IllegalValueException {
         this.person.setEmail(new Email(email));
         return this;
     }

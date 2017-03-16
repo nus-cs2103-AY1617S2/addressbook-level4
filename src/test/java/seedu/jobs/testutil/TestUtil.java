@@ -37,6 +37,7 @@ import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.Phone;
 import seedu.jobs.model.task.ReadOnlyPerson;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Person;
 import seedu.jobs.storage.XmlSerializableAddressBook;
 
@@ -52,7 +53,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Task[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -107,7 +108,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 

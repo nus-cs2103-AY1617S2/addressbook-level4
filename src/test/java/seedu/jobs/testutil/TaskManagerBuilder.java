@@ -4,6 +4,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.AddressBook;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 
 /**
@@ -11,20 +12,20 @@ import seedu.jobs.model.task.UniqueTaskList;
  * Example usage: <br>
  *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class TaskManagerBuilder {
 
     private AddressBook addressBook;
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public TaskManagerBuilder(AddressBook addressBook) {
         this.addressBook = addressBook;
     }
 
-    public AddressBookBuilder withPerson(Person task) throws UniqueTaskList.DuplicateTaskException {
+    public TaskManagerBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTask(task);
         return this;
     }
 
-    public AddressBookBuilder withTag(String tagName) throws IllegalValueException {
+    public TaskManagerBuilder withTag(String tagName) throws IllegalValueException {
         addressBook.addTag(new Tag(tagName));
         return this;
     }

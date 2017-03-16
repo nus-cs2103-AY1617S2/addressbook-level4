@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSampleTasks();
+        Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }
