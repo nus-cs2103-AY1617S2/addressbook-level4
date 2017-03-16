@@ -87,9 +87,8 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        if (updatedTags.isTagPresent()) {
+        if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
         	updatedTags.removeAndMerge(taskToEdit.getTags());
-        	// updatedTags.mergeFrom(taskToEdit.getTags());
         } 
        
         return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime,

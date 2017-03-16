@@ -117,6 +117,10 @@ public class UniqueTagList implements Iterable<Tag> {
                 .forEach(internalList::add);
     }
     
+    /**
+     * Brings over all the additional tags from argument list but removes any 
+     * that is both in list and the argument list
+     */
     public void removeAndMerge(UniqueTagList from) {
     	final Set<Tag> alreadyInside = this.toSet();
     	from.internalList.stream()
@@ -148,6 +152,9 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.add(toAdd);
     }
     
+    /**
+     * Returns true if the list is not empty.
+     */
     public boolean isTagPresent() {
     	if (internalList.isEmpty()) {
     		return false;
