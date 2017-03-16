@@ -350,61 +350,24 @@ Example:
 
 ## 3. Command Summary
 
-* **Add** : `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
-  e.g. `add Assigment 1 enddate/Friday tag/school`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Filter** : `filter/list/find [KEYWORDS] [tag/] [name/]` <br>
-  e.g. `find school tag/`
-
-* **Help** : `help`
-
-* **Update** : `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` <br>
-  e.g. `update 1 enddate/11/12/2011`
-
-* **Exit** : `exit/quit`
-
-* **Undo** : `undo [NUMBER]` <br>
-  e.g. `undo 5` <br>
-  e.g. `undo`
-
-* **Redo** : `redo [NUMBER]` <br>
-  e.g. `redo 5` <br>
-  e.g. `redo`
-
-* **History** : `history`
-
-* **Add Alias** : `alias ALIAS PHRASE` <br>
-  e.g. `alias hs history`
-
-* **Delete Alias** : `unalias ALIAS` <br>
-  e.g. `unalias hs`
-
-* **View Aliases** : `viewalias`
-
-* **Change Save Storage Location** : `save FILELOCATION` <br>
-  e.g. `save data/savefile.txt`
-
-* **Change Load Storage Location** : `load FILELOCATION` <br>
-  e.g. `load data/savefile.txt`
-
-* **Switch Display Task Window** : `switch WINDOWIDENTIFIER` <br>
-  e.g. `switch 2` <br>
-  e.g. `switch T`
-
-* **Complete or Make Incomplete a Task** : `mark [complete/incomplete] INDEX` <br>
-  e.g. `mark complete 1` <br>
-  e.g. `mark incomplete 2` <br>
-  e.g. `mark 3`
-
-* **Add a Tag to a Task** : `tag INDEX TAG...` <br>
-  e.g. `tag 1 school` <br>
-  e.g. `tag 3 work home`
-
-* **Remove a Tag from a Task** : `untag INDEX TAG...` <br>
-  e.g. `untag 1 school` <br>
-  e.g. `untag 3 work home`
+**Command** | **Format** | **Examples**
+-------- | :-------- | :---------
+Add | `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `add Assigment 1 enddate/Friday tag/school`
+Clear | `clear`
+Delete | `delete INDEX` | `delete 3`
+Filter | `filter/list/find [KEYWORDS] [tag/] [name/]` | `find school tag/`
+Help | `help`
+Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` |e.g. `update 1 enddate/11/12/2011`
+Exit | `exit/quit`
+Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
+Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
+History | `history`
+Add Alias | `alias ALIAS PHRASE` | `alias hs history`
+Delete Alias | `unalias ALIAS` | `unalias hs`
+View Aliases | `viewalias`
+Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
+Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
+Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
+Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
+Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
+Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
