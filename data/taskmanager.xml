@@ -12,7 +12,7 @@
         <title>Visit Charlotte Oliveiro</title>
         <startDate>20/12/2017</startDate>
         <endDate>20/12/2017</endDate>
-        <description>Her address is Blk 11 Ang Mo Kio Street 74, #11-04</description>
+        <description>hi</description>
         <tagged>social</tagged>
     </tasks>
     <tasks>
@@ -29,8 +29,22 @@
         <description>Submit to tutor in class</description>
         <tagged>schoolwork</tagged>
     </tasks>
+    <tasks>
+        <title>Submit report</title>
+        <startDate></startDate>
+        <endDate></endDate>
+        <description></description>
+    </tasks>
+    <tasks>
+        <title>Submit reports</title>
+        <startDate>01/01/2011</startDate>
+        <endDate>02/02/2012</endDate>
+        <description></description>
+        <tagged>s</tagged>
+    </tasks>
     <tags>social</tags>
     <tags>colleagues</tags>
     <tags>business</tags>
     <tags>schoolwork</tags>
+    <tags>s</tags>
 </taskmanager>
