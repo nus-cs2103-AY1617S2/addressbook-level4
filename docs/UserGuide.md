@@ -186,9 +186,9 @@ Example:
 
 You have just added a few tasks to ezDo with the Add command:
 
- **`add Dye hair p/3 s/06/05/2017 d/07/08/2017`**<br>
+ **`add Dye hair p/1 s/06/05/2017 d/07/08/2017`**<br>
  **`add Buy milk p/1 s/04/05/2017 d/09/06/2017`**<br>
- **`add Cut hair p/2 s/05/05/2017 d/08/07/2017`**
+ **`add Call milkman p/1 s/05/05/2017 d/08/07/2017`**
 
 You can now sort the tasks by name:
 
@@ -290,8 +290,7 @@ Format:
 Brings up the help guide in a separate window. <br>
 Format:
 **`help`**
-<br>
-> - The help guide is also shown if you enter an invalid command e.g. **`kill 1`**
+
 
 <br>
 
