@@ -9,7 +9,8 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 public class CurrentDate {
 
-    public static final String MESSAGE_DAY_CONSTRAINTS = "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
+    public static final String MESSAGE_DAY_CONSTRAINTS = "Task date should be either "
+	    + "a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
 
     public static final String CURRENTDATE_VALIDATION_REGEX_MONDAY1 = "Monday";
     public static final String CURRENTDATE_VALIDATION_REGEX_MONDAY2 = "monday";
@@ -166,13 +167,15 @@ public class CurrentDate {
 
 	if (day < 10) {
 	    stringDay = "0" + Integer.toString(day);
-	} else
+	} else {
 	    stringDay = Integer.toString(day);
+	}
 
 	if (month < 10) {
 	    stringMonth = "0" + Integer.toString(month);
-	} else
+	} else {
 	    stringMonth = Integer.toString(month);
+	}
 
 	stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
 
@@ -207,12 +210,15 @@ public class CurrentDate {
 
 	int diffInDays = dayOfWeek - inputDay;
 
-	if (diffInDays == 0)
+	if (diffInDays == 0) {
 	    return getCurrentDate();
-	if (diffInDays > 0)
+	}
+	if (diffInDays > 0) {
 	    day += (7 - diffInDays);
-	if (diffInDays < 0)
+	}
+	if (diffInDays < 0) {
 	    day -= diffInDays;
+	}
 
 	LocalDate testdate = LocalDate.of(year, month, day);
 	int testdays = testdate.lengthOfMonth();
@@ -229,14 +235,14 @@ public class CurrentDate {
 
 	if (day < 10) {
 	    stringDay = "0" + Integer.toString(day);
-	} else
+	} else {
 	    stringDay = Integer.toString(day);
-
+	}
 	if (month < 10) {
 	    stringMonth = "0" + Integer.toString(month);
-	} else
+	} else {
 	    stringMonth = Integer.toString(month);
-
+	}
 	stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
 
 	return updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;

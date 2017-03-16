@@ -4,8 +4,8 @@ import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * Selects a task identified using it's last displayed index from the task manager.
@@ -36,8 +36,8 @@ public class SelectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
+	EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
+	return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
     }
 

@@ -1,9 +1,9 @@
 package seedu.taskmanager.logic;
 
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component

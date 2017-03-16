@@ -1,13 +1,12 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+//import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDTIME;
-import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
-import seedu.taskmanager.commons.util.CurrentDate;
 
 import java.util.NoSuchElementException;
 
@@ -15,6 +14,8 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
+
+import seedu.taskmanager.commons.util.CurrentDate;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -119,10 +120,10 @@ public class AddCommandParser {
 		    }
 		} catch (ArrayIndexOutOfBoundsException aioobe) {
 		}
-		if (Integer.parseInt(startTime) > Integer.parseInt(endTime))
+		if (Integer.parseInt(startTime) > Integer.parseInt(endTime)){
 		    throw new IllegalValueException(
 			    "Invalid input of time, start time has to be earlier than end time");
-
+		}
 	    }
 
 	    /*
@@ -142,7 +143,8 @@ public class AddCommandParser {
 		    endTime = "2359";
 		} catch (NumberFormatException nfe) {
 		    return new IncorrectCommand(
-			    "Invalid input after prefix BY\nExample of Allowed Format: ADD project meeting BY thursday 1400 \nType HELP for user guide with detailed explanations of all commands");
+			    "Invalid input after prefix BY\nExample of Allowed Format: ADD project meeting BY thursday 1400 \n"
+			    + "Type HELP for user guide with detailed explanations of all commands");
 		}
 		try {
 		    if (!(splited[2].isEmpty())) {
@@ -225,10 +227,13 @@ public class AddCommandParser {
 	    return new IncorrectCommand(ive.getMessage());
 	} catch (ArrayIndexOutOfBoundsException aioobe) {
 	    return new IncorrectCommand(
-		    "Invalid command input!\nExample of Allowed Format: ADD e-mail John BY thursday 1400\nType HELP for user guide with detailed explanations of all commands");
+		    "Invalid command input!\nExample of Allowed Format: ADD e-mail John BY thursday 1400\n"
+		    + "Type HELP for user guide with detailed explanations of all commands");
 	} catch (NumberFormatException nfe) {
 	    return new IncorrectCommand(
-		    "Invalid input after prefix TO, only input of time is allowed\nExample of Allowed Format: ADD project meeting ON thursday 1400 TO 1800\nType HELP for user guide with detailed explanations of all commands");
+		    "Invalid input after prefix TO, only input of time is allowed\n"
+		    + "Example of Allowed Format: ADD project meeting ON thursday 1400 TO 1800\n"
+		    + "Type HELP for user guide with detailed explanations of all commands");
 	}
     }
 
