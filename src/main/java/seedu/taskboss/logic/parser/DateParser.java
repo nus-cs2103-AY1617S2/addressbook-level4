@@ -18,6 +18,8 @@ public class DateParser {
     private static final String END_DATE = "END DATE: ";
     private static final String ERROR_INVALID_DATE = "Failed to understand given date.";
     private static final String ERROR_MULTIPLE_DATES = "Please only enter a single date.";
+    private static final String REGEX_US_DATE = "(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})";
+    private static final String REGEX_NON_US_DATE = "$2-$1-$3";
 
     private com.joestelmach.natty.Parser nattyParser;
 
@@ -25,14 +27,19 @@ public class DateParser {
         this.nattyParser = new com.joestelmach.natty.Parser();
     }
 
-    public DateTime parseStartDate(String rawStartDate) throws IllegalValueException {
-
-        String currentStartDate = rawStartDate;
+    private List<DateGroup> parse(String date) {
+        String currentDate = date;
         if (Locale.getDefault().equals(Locale.US)) {
-            currentStartDate = rawStartDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
+            currentDate = date.replaceAll(REGEX_US_DATE, REGEX_NON_US_DATE);
         }
 
-        List<DateGroup> dateGroupList = this.nattyParser.parse(currentStartDate);
+        List<DateGroup> dateGroupList = this.nattyParser.parse(currentDate);
+        return dateGroupList;
+    }
+
+    public DateTime parseStartDate(String rawStartDate) throws IllegalValueException {
+
+        List<DateGroup> dateGroupList = parse(rawStartDate);
         int numDates = countDates(dateGroupList);
 
         if (numDates == 0) {
@@ -51,12 +58,7 @@ public class DateParser {
 
     public DateTime parseEndDate(String rawEndDate) throws IllegalValueException {
 
-        String currentEndDate = rawEndDate;
-        if (Locale.getDefault().equals(Locale.US)) {
-            currentEndDate = rawEndDate.replaceAll("(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})", "$2-$1-$3");
-        }
-
-        List<DateGroup> dateGroupList = this.nattyParser.parse(currentEndDate);
+        List<DateGroup> dateGroupList = parse(rawEndDate);
         int numDates = countDates(dateGroupList);
 
         if (numDates == 0) {
@@ -85,18 +87,22 @@ public class DateParser {
         return numTotalDates;
     }
 
+    // for testing
     public static String getStartDateInvalidDateError() {
         return START_DATE + ERROR_INVALID_DATE;
     }
 
+    // for testing
     public static String getStartDateMultipleDatesError() {
         return START_DATE + ERROR_MULTIPLE_DATES;
     }
 
+    // for testing
     public static String getEndDateInvalidDateError() {
         return END_DATE + ERROR_INVALID_DATE;
     }
 
+    // for testing
     public static String getEndDateMultipleDatesError() {
         return END_DATE + ERROR_MULTIPLE_DATES;
     }
