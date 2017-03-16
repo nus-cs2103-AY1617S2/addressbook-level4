@@ -1,57 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>Hans Muster</name>
-        <priority isPrivate="false">low</priority>
-        <description isPrivate="false">hans@google.com</description>
-        <address isPrivate="false">4th street</address>
+        <name>Project Security</name>
+        <priority>Low</priority>
+        <description>milestone 3</description>
+        <location>Blk 30 NUS Street 29, #06-40</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>project</categorized>
     </tasks>
     <tasks>
-        <name>Ruth Mueller</name>
-        <priority isPrivate="false">low</priority>
-        <description isPrivate="false">ruth@google.com</description>
-        <address isPrivate="false">81th street</address>
+        <name>Meet up with aunty</name>
+        <priority>Low</priority>
+        <description>2pm, Rmb to bring gifts</description>
+        <location>Blk 30 Lorong 3 Serangoon Gardens, #07-18</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>family</categorized>
+        <categorized>meetup</categorized>
     </tasks>
     <tasks>
-        <name>Heinz Kurz</name>
-        <priority isPrivate="false">low</priority>
-        <description isPrivate="false">heinz@yahoo.com</description>
-        <address isPrivate="false">wall street</address>
+        <name>Skype Meeting 3</name>
+        <priority>High</priority>
+        <description>Skype meeting with project team 2</description>
+        <location>None</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>project</categorized>
     </tasks>
     <tasks>
-        <name>Cornelia Meier</name>
-        <priority isPrivate="false">medium</priority>
-        <description isPrivate="false">cornelia@google.com</description>
-        <address isPrivate="false">10th street</address>
+        <name>David Li BDay</name>
+        <priority>Low</priority>
+        <description>6pm, rmb to buy present</description>
+        <location>Blk 436 Botanic Gardens 26, #16-43</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>family</categorized>
     </tasks>
     <tasks>
-        <name>Werner Meyer</name>
-        <priority isPrivate="false">medium</priority>
-        <description isPrivate="false">werner@gmail.com</description>
-        <address isPrivate="false">michegan ave</address>
+        <name>Driving lesson</name>
+        <priority>Medium</priority>
+        <description>Bring PDL and wear shoes</description>
+        <location>Ubi Crescent</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>Driving</categorized>
     </tasks>
     <tasks>
-        <name>Lydia Kunz</name>
-        <priority isPrivate="false">medium</priority>
-        <description isPrivate="false">lydia@gmail.com</description>
-        <address isPrivate="false">little tokyo</address>
-    </tasks>
-    <tasks>
-        <name>Anna Best</name>
-        <priority isPrivate="false">high</priority>
-        <description isPrivate="false">anna@google.com</description>
-        <address isPrivate="false">4th street</address>
-    </tasks>
-    <tasks>
-        <name>Stefan Meier</name>
-        <priority isPrivate="false">high</priority>
-        <description isPrivate="false">stefan@mail.com</description>
-        <address isPrivate="false">little india</address>
-    </tasks>
-    <tasks>
-        <name>Martin Mueller</name>
-        <priority isPrivate="false">high</priority>
-        <description isPrivate="false">hans@google.com</description>
-        <address isPrivate="false">chicago ave</address>
+        <name>CS8888 Test</name>
+        <priority>High</priority>
+        <description>3pm, Open Book</description>
+        <location>NUS, MPSH 4</location>
+        <dateTime>
+            <startValue></startValue>
+            <endValue></endValue>
+        </dateTime>
+        <recurrence>
+            <occurences>0</occurences>
+            <type>None</type>
+        </recurrence>
+        <status>false</status>
+        <categorized>test</categorized>
     </tasks>
 </taskmanager>

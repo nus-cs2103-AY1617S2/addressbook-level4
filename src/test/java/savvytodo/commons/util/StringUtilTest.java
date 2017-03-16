@@ -148,5 +148,23 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    /**
+     * @author A0140016B
+     */
+    @Test
+    public void firstCharUpperCaseRestLowerCase_validInputs_correctResult() {
+        String actual = "saVVyToDo";
+        String expected = "Savvytodo";
+        assertTrue(expected.equals(StringUtil.firstCharUpperCaseRestLowerCase(actual)));
+    }
+
+    /**
+     * @author A0140016B
+     */
+    @Test
+    public void firstCharUpperCaseRestLowerCase_nullGiven_nullPointerError() {
+        thrown.expect(NullPointerException.class);
+        StringUtil.firstCharUpperCaseRestLowerCase(null);
+    }
 
 }

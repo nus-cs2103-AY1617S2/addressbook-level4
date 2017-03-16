@@ -3,6 +3,7 @@ package savvytodo.model.task;
 import savvytodo.model.category.UniqueCategoryList;
 
 /**
+ * @author A0140016B (Contributer)
  * A read-only immutable interface for a Task in the taskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
@@ -11,7 +12,10 @@ public interface ReadOnlyTask {
     Name getName();
     Priority getPriority();
     Description getDescription();
-    Address getAddress();
+    Location getLocation();
+    DateTime getDateTime();
+    Recurrence getRecurrence();
+    Status isCompleted();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
@@ -28,7 +32,7 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.getDescription().equals(this.getDescription())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getLocation().equals(this.getLocation()));
     }
 
     /**
@@ -37,12 +41,18 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Date Time: ")
+                .append(getDateTime())
+                .append(" Recurrence: ")
+                .append(getRecurrence())
                 .append(" Priority: ")
                 .append(getPriority())
+                .append(" Location: ")
+                .append(getLocation())
                 .append(" Description: ")
                 .append(getDescription())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Status: ")
+                .append(isCompleted())
                 .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();
