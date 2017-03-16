@@ -445,25 +445,27 @@ Extensions
 > (e.g., do an internship).
 <h3 id="user-content-ae">Appendix E : Product Survey</h3>
 
-#### **Google Keep**
+#### [Google Keep](https://www.google.com/keep/)
 
 Author: Goh Yi Rui
 
 Pros:
 
-* Support for lists, plain text, pictures and voice recording
+* Support for lists, plain text, and pictures
 
-* Color codes tasks
+* Support for typing and voice recording
 
-* Easily search through all tasks by name, label, color or category
+* Color coding tasks
 
-* Automatically identify tasks that lie within a same category
+* Easily searching through all tasks by name, label, color or category
 
-* Add personalised labels or taggings
+* Personalised labels or tags
+
+* Automatically identifying tasks that lie within a same category
 
 * Autocompletion and suggestion for tasks
 
-* Synced to Google Account
+* Synchronization to Google Account
 
 Cons:
 
@@ -471,84 +473,84 @@ Cons:
 
 * No support for events, only tasks and notes
 
-* Require user to be online
+* Only online access
 
-* No project managements features
+* No project management features
 
-#### **Google Calendar**
+#### [Google Calendar](https://www.google.com/calendar)
 
 Author: Zhang Hanming
 
 Pros:
 
-* Automatically parsing email and add event to calendar
+* Automatically parsing emails and adding events to calendar
 
-* Reminder before events
+* Reminders
 
 * Intuitive UI
 
 * Categorization of events
 
-* Allow importing and exporting of calendars
+* Allowing importing and exporting calendars
 
 Cons:
 
-* Requires a Google account
+* Requiring a Google account
 
-* Unable to check off completed tasks
+* Not allowing checking off completed tasks
 
-* Mainly a calendar app rather than a task managing one
+* A calendar more than a task manager
 
-#### **Gmail Tasks**
+#### [Gmail Tasks](https://mail.google.com/tasks/canvas)
 
 Author: Liu Ziyang
 
 Pros:
 
-+ Allows to mark a task as done
++ Allowing marking a task as done
 
-+ Allows to postpone a task
++ Allowing postponing a task
 
-+ Has shortcuts for editing tasks
++ Shortcuts for editing tasks
 
-+ Allows self-defined categorizing
++ Personalised categorization
 
-+ Integrates with Google Calendar
++ Integration with Google Calendar
 
 Cons:
 
-+ Only works online
++ Only online access
 
-+ Does not support  command line inputs
++ No support for command line inputs
 
-+ Does not support events
++ No support for events
 
-+ Does not support undoing an action
++ No support for undoing an action
 
-+ Urgent events cannot stand out
++ Poor UI with no displaying difference between urgent and non-urgent tasks
 
-#### **Habitica**
+#### [Habitica](https://habitica.com/static/front)
 
 Author: How Si Wei
 
 Pros:
 
-* Gamification adds extra motivation
+* Gamification and thus more motivation
 
 * Intuitive UI
 
-* Categorization of events through taggings
+* Categorization of events through tags
 
-* Has option to export data
+* Support for exporting data
 
-* Has a large number of official and user-created apps and extensions
+* A large number of official and user-created apps and extensions
 
 Cons:
 
-* Requires a Habitica account
+* Requiring a Habitica account
 
-* Gamification may be distracting
+* A possible distraction due to gamification
 
-* Group plans are only available to paid users
+* Advanced features like group plans restricted to paid users
 
 **[⬆ back to top](#user-content-table)**
