@@ -30,7 +30,10 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 ## 1. Welcome
 
-Werkbook is a command-line based task manager that will help you organise your to-dos in a neat and efficient way.
+Werkbook is a task manager for users to manage their schedules and tasks via a command-line interface.
+With just a single line of command, users can add, manipulate, and organize tasks in a hassle-free manner! Werkbook is a simple, yet fast and powerful tool that will help you to increase your productivity.
+
+Let Werkbook do your werk.
 
 ## 2. Getting Started
 

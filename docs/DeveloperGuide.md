@@ -4,11 +4,12 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Introduction](#introduction)
+2. [Setting Up](#setting-up)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Testing](#testing)
+6. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -17,9 +18,14 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## 1. Introduction
+Werkbook is a task manager for users to manage their schedules and tasks via a command-line interface. Users can add and manipulate tasks according to their needs. Werkbook is a desktop application written in Java, with a GUI implemented with JavaFX.
 
-### 1.1. Prerequisites
+This guide consists of all the information that is required for developers like you to understand, and further contribute to Werkbook's development. We have structured this guide such that each topic will have its own section, along with subsections that will explain the topic in greater detail.  
+
+## 2. Setting up
+
+### 2.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -33,7 +39,7 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 2.2. Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
 1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -48,7 +54,7 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 2.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. werkbook
@@ -59,7 +65,7 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 2.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -73,12 +79,12 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+## 3. Design
 
-### 2.1. Architecture
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
@@ -113,7 +119,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+_Figure 3.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
@@ -121,7 +127,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 command `delete 1`.
 
 <img src="images\SDforDeleteTask.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+_Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskListChangedEvent` when the Task List data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
@@ -129,7 +135,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 <img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 3.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -137,12 +143,12 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### 3.2. UI component
 
 Author: Alice Bee
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/werkbook/task/ui/Ui.java)
 
@@ -160,12 +166,12 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
+### 3.3. Logic component
 
 Author: Bernard Choo
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+_Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/werkbook/task/logic/Logic.java)
 
@@ -177,14 +183,14 @@ _Figure 2.3.1 : Structure of the Logic Component_
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 3.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
+### 3.4. Model component
 
 Author: Cynthia Dharman
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+_Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/werkbook/task/model/Model.java)
 
@@ -196,12 +202,12 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 2.5. Storage component
+### 3.5. Storage component
 
 Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
+_Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/werkbook/task/storage/Storage.java)
 
@@ -210,13 +216,13 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Task List data in xml format and read it back.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `werkbook.task.commons` package.
 
-## 3. Implementation
+## 4. Implementation
 
-### 3.1. Logging
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -235,13 +241,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## 5. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -278,7 +284,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -288,23 +294,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## 6. Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -313,7 +319,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -330,7 +336,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Task List depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
