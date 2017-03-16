@@ -28,14 +28,15 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> futureTaskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
+            ObservableList<ReadOnlyTask> taskListFuture) {
         super(FXML);
         setConnections(todayTaskListView, taskListToday);
         setConnections(futureTaskListView, taskListFuture);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ListView<ReadOnlyTask> taskListView,ObservableList<ReadOnlyTask> taskList) {
+    private void setConnections(ListView<ReadOnlyTask> taskListView, ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent(taskListView);
@@ -48,14 +49,13 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent(ListView<ReadOnlyTask> taskListView) {
-        taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        // TODO: change event to recognise list type
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
+        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                // TODO: change event to recognise list type
+                raise(new TaskPanelSelectionChangedEvent(newValue));
+            }
+        });
     }
 
     public void scrollTo(int index) {
