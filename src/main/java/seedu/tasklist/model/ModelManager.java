@@ -39,11 +39,12 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList taskList, Storage storage) {
+    public ModelManager(ReadOnlyTaskList taskList, Storage storage, UserPrefs userPref) {
         super();
         assert !CollectionUtil.isAnyNull(taskList, storage);
+        assert userPref != null;
 
-        logger.fine("Initializing with task list: " + taskList);
+        logger.fine("Initializing with task list: " + taskList + " and user prefs " + userPref);
 
         this.taskList = new TaskList(taskList);
         this.storage = storage;
@@ -54,7 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager(Storage storage) {
-        this(new TaskList(), storage);
+        this(new TaskList(), storage, new UserPrefs());
     }
 
     @Override

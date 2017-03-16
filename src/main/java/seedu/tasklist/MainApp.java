@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new TaskList();
         }
 
-        return new ModelManager(initialData, storage);
+        return new ModelManager(initialData, storage, userPrefs);
     }
 
     private void initLogging(Config config) {
