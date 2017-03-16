@@ -7,7 +7,7 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 1. [Setting Up](#1-setting-up)
 2. [Design](#2-design)
 3. [Implementation](#3-implementation)
-4. [Testing](#4-testing)
+4. [Code Quality and Testing](#4-testing)
 5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
@@ -299,11 +299,20 @@ Certain properties of the application can be controlled (e.g App name, logging l
 (default: `config.json`):
 
 
-## 4. Testing
+## 4. Code Quality and Testing
+
+### 4.1. Code Quality
+In Opus, we asipre to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive coding are:
+*Using assertions to check validity of arguments before passing them into functions.
+*Throwing Excpetions when encountering unexpected events.
+*Enforcing 1-to-1 associations
+A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf) 
+
+### 4.2. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
-**In Eclipse**:
+**Using JUnit test in Eclipse**:
 
 * To run all tests, right-click on the `src/test/java` folder and choose
   `Run as` > `JUnit Test`
@@ -312,7 +321,7 @@ Tests can be found in the `./src/test/java` folder.
 
 **Using Gradle**:
 
-* See [UsingGradle.md](UsingGradle.md#running-tests) for how to run tests using Gradle.
+* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
 
 We have two types of tests:
 
@@ -335,16 +344,33 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  In the headless mode, GUI tests do not show up on the screen.
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
+ 
+### 4.3. Improving test coverage using Coveralls
 
-### 4.1. Troubleshooting tests
+    Coveralls is a code analytic tool that tracks and analyses test coverage of a project. We have integrated Coveralls into our project to keep track and 
+improve upon the test coverage of the code and deliver a robust and throughly-tested product. 
+ 
+ The Coveralls dashboard can be accessed [here](https://coveralls.io/github/CS2103JAN2017-W15-B3/main?branch=master). 
+ <br><img src="images/coveralls/coveralls_1.png width="600"><br>
+ 
+ Upon every pull request, Coveralls will run an analysis of the pushed code and produce a report. 
+ To view the coverage report, nagivate the to pull request in Github.
+ 1. Click on the Coveralls badge in the pull request to open the coverage report as follows:
+ <br><img src="images/coveralls/coveralls_2.png width="600"><br><br>
+ 2. Scroll the report and select any file to view detailed analysis of the code.
+ <br><img src="images/coveralls/coveralls_3.png width="600"><br><br>
+ Lines that are highlighted in red indicate that there is no test coverage for the code branch.
+ <br><img src="images/coveralls/coveralls_4.png width="600"><br>
 
- **Problem: Tests fail because NullPointException when AssertionError is expected**
+    To maintain the code quality of the product, we strong insist that all possible code branches are well covered with test cases.
 
- * Reason: Assertions are not enabled for JUnit tests.
-   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
- * Solution: Enable assertions in JUnit tests as described
+### 4.4. Troubleshooting tests
+
+#### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
+   This is because Assertions are not enabled for JUnit tests.
+1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
-   Delete run configurations created when you ran tests earlier.
+2. Delete run configurations created when you ran tests earlier.
 
 ## 5. Dev Ops
 
