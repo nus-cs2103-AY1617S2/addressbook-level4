@@ -22,6 +22,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
+    private Label priority;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -30,6 +32,13 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         start.setText("Start: " + task.getStart().value);
         deadline.setText("Deadline: " + task.getDeadline().value);
+        
+        if (task.getPriority().value == 0) {
+            priority.setText("Priority: ");
+        }
+        else {
+            priority.setText("Priority: " + task.getPriority().value);
+        }
         initTags(task);
     }
 
