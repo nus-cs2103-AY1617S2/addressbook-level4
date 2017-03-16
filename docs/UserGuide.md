@@ -69,7 +69,7 @@ Without further ado, let us get started.
 ## Features
 
 > **Command Format**
-> * Words in `UPPER_CASE` are command parameters.
+> * Words in `UPPER_CASE` are command arguments.
 > * Words in `lower_case` are command and connectors, e.g. add and every. 
 > * Letters with slash are command identifiers, e.g. d/ and t/.  
 > * Items in `SQUARE_BRACKETS` are optional.
@@ -99,6 +99,7 @@ List of available commands for help: <br>
 - done <br>
 - find <br>
 - clear <br>
+- toggle <br>
 - undo <br>
 - redo <br>
 - reset <br>
@@ -428,7 +429,7 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 |  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only end date & time to the task list. |
 |  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with both start date & time and end date & time to the task list. |
 |  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list. |
-| [edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task with the new parameters. |
+| [edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task by index or name. |
 | [del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list. |
 | [view](#viewing-tasks) | `view` | View all tasks. |
 |  | `view t` | View all today's task. |
@@ -445,5 +446,5 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 | [redo](#redo-most-recent-undo) | `redo` | Redo the most recent undo. |
 | [saveto](#save) | `saveto PATH` | Change the save directory. |
 |  | `cd` | Show current save directory. |
-|  | `reset` | Reset saved data. |
+| [reset](#reset-saved-data) | `reset` | Reset saved data. |
 | [exit](#exiting-the-application) | `exit` | Exits the application. |
