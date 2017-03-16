@@ -39,7 +39,7 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
 
-    private static Parser dateTimeParser = new com.joestelmach.natty.Parser(TimeZone.getDefault()); // TODO timezones
+    private static Parser dateTimeParser = new Parser(TimeZone.getDefault()); // TODO timezones
     // TODO decide if this is the right class
     public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ISO_DATE_TIME;
 
