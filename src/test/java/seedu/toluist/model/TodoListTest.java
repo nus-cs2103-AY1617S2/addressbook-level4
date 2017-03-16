@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +39,8 @@ public class TodoListTest {
     private final Task task5 = new Task("Task 5");
 
     @Before
-    public void setUp() {
-        when(storage.load()).thenReturn(Optional.of(sampleTodoList));
+    public void setUp() throws IOException {
+        when(storage.load()).thenReturn(sampleTodoList);
         todoList1 = new TodoList();
         todoList1.add(task1);
         todoList1.add(task2);

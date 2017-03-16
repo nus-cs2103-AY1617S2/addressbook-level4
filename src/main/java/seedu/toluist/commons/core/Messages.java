@@ -9,6 +9,6 @@ public class Messages {
     public static final String MESSAGE_SAVING_FAILURE = "The data could not be saved";
     public static final String MESSAGE_STORAGE_SAME_LOCATION = "Current storage path is already set to %s.";
     public static final String MESSAGE_NO_STORAGE_PATH = "No storage path was provided.";
-    public static final String MESSAGE_SET_STORAGE_FAILURE = "Data storage could not be changed to %s.";
+    public static final String MESSAGE_SET_STORAGE_FAILURE = "The storage path %s is invalid.";
     public static final String MESSAGE_SET_STORAGE_SUCCESS = "Data storage path was changed to %s.";
 }
