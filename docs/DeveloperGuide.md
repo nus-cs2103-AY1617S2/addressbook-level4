@@ -2,12 +2,12 @@
 
 By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
-1. [Introduction](##introduction)
-2. [Setting Up](##setting-up)
-3. [Design](##design)
-4. [Implementation](##implementation)
-5. [Testing](##testing)
-6. [Dev Ops](##dev-ops)
+1. [Introduction](#introduction)
+2. [Setting Up](#setting-up)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Testing](#testing)
+6. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -16,7 +16,7 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nb
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Introduction #introduction
+## 1. Introduction
 
 Welcome to ToLuist's Developer Guide.
 
