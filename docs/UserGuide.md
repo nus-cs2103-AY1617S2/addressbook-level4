@@ -71,8 +71,7 @@ Ready? Let's begin!
    * **`list`** <br>
 
      > Lists all your tasks. <br>
-     Your task list should only contain 1 task, which is the task you added in the previous step <br>
-     (i.e. `Finish Progress Report`).
+     Your task list should only contain 1 task, which is the task you added in the previous step (i.e. `Finish Progress Report`).
 
    * **`delete`** `Finish Progress Report` <br>
 
@@ -86,7 +85,7 @@ Ready? Let's begin!
 
      > Time for me to rest!
 
-6. Want more? Refer to the [Features](#3-features) section below for details of each command I can perform. <br>
+6. Want more? Refer to the [Features](#3-features) section below to find out more about each command I can perform. <br>
 
 
 ## 3. Features
@@ -94,9 +93,6 @@ Ready? Let's begin!
 ### 3.1. Command Formats
 
 When typing in your commands, do take note of the following specifications: <br>
-
-> Do make sure that you follow the specifications closely, if not I will not work! <br>
-Note: These specifications are [case-sensitive](#case-sensitive).
 
 * Durations for your tasks must be specified in _hr_, _min_ and/or _sec_.
 * Times must be specified in _am_ and/or _pm_.
@@ -143,8 +139,6 @@ Here are some examples of floating tasks: <br>
   **_E.g. Learn to bake_**
 
 * **New tasks which cannot be performed _yet_**
-
-  > You want to perform these tasks but you cannot do them yet. <br>
 
   **_E.g. Schedule meet-up with Jamie_** <br>
   Your friend Jamie might be overseas and uncontactable for now, so you will have to wait for
@@ -198,14 +192,10 @@ Here are some examples of tasks that you might want to _delete_ from your task l
 
 * **Tasks that no longer need to be done** <br>
 
-  > You no longer need me to help you keep track of these tasks.
-
   E.g. **_Do financial report_** <br>
   Your supervisor had delegated the wrong task to you and just corrected his mistake.
 
-* **Tasks has already been completed by you** <br>
-
-  > There is no need to store these tasks anymore.
+* **Tasks that have already been completed by you** <br>
 
   E.g. **_Visit the dentist_** <br>
   You have just visited your dentist last week and have not scheduled your next appointment.
@@ -225,7 +215,7 @@ Finds your task(s) whose name(s) contain the keyword or sequence of keywords `<t
 
 > For example, **`find`** `<home>` can help you search for a task named `do homework`. <br>
 
-Here are some reasons why you might want to _find_ certain tasks:
+Here are some reasons why you might want to _find_ a task or some tasks:
 
 * **You want to know the [parameters](#parameter) of a task** <br>
 
@@ -234,7 +224,7 @@ Here are some reasons why you might want to _find_ certain tasks:
   E.g. **Finding out when your _project proposal_ is due** <br>
   You want to plan your schedule for the week, taking into account the proposal deadline.
 
-* **You want to obtain a list of your tasks that fall under some category** <br>
+* **You want to obtain a list of tasks that fall under some category** <br>
 
   > Some tasks might have overlapping words / phrases in their names.
 
@@ -242,7 +232,7 @@ Here are some reasons why you might want to _find_ certain tasks:
   You are going to the mall and wish to clear some items on your grocery list.
 
 > * **`find`** `<task>` <br>
-I will show you the tasks from your search in my `CalendarPanel` as shown
+I will show you the tasks from your search in my right panel as shown
 in the following diagram.
 
 <img src="images/UiFindCommand.png" width="600"><br>
@@ -265,8 +255,8 @@ Here is a reason why you might want to _list_ all your tasks:
 
 * **You want to prioritize your tasks based on the order of their specific dates / times** <br>
 
-  > You want to have an overview of all your tasks based on urgency, then
-  manually select certain urgent tasks to focus on.
+  > You want to have an overview of all your tasks based on how urgent they are, then
+  manually select some of these tasks to focus on.
 
 > * **`list`** <br>
 Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
@@ -282,11 +272,11 @@ Here are some reasons why you might want to _select_ a task:
 
 * **You want to know the [parameters](#parameter) of a certain task** <br>
 
-  > You can refer to [here](#34-find-a-task-find).
+  > You can refer to [here](#34-find-a-task--find).
 
 * **You want to edit the [parameters](#parameter) of a certain task** <br>
 
-  > You can refer to the later section on the [update](#37-update-a-task-update) command.
+  > You can refer to the later section on the [update](#37-update-a-task--update) command.
 
 > * **`select`** `<task>` <br>
 
@@ -295,7 +285,7 @@ _Figure 3.6.1. Select Command_
 
 > If you have _multiple tasks with the same name_, this command will instruct me to display all
 those tasks for you. You will then have to choose one of those displayed tasks manually by navigating
-to the desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
+to your desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
 > * **`unselect`** <br>
 This command _cancels your previous selection_ so that you can select another one of your
@@ -312,7 +302,7 @@ Here are some examples of tasks which you might want to _update_: <br>
 
 * **Tasks that have already exceeded their deadline**
 
-  > You still want to complete the task, but you intend to postpone its deadline. <br>
+  > You still want to complete a certain task, but you intend to postpone its deadline. <br>
 
   **_E.g. Buy aunt's birthday present_** <br>
   You have unfortunately already missed her birthday, but you still want to give her a
@@ -331,14 +321,14 @@ This command will direct me to make the specified update to a task with the name
 You can edit more parameters for your task concurrently using the following format: <br>
 **`update`** `<task>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
 
+<img src="images/UiUpdateCommand.png" width="600"><br>
+_Figure 3.7.1. Update Command_
+
 > * **`update`** `<parameter> <new_value>` <br>
 E.g. **`update`** `start time 10am` <br>
 This command will direct me to make the specified update to a task which has already been
-selected using the [select](#36-select-a-task-select) command. <br>
-Similarly, you can edit more parameters concurrently.
-
-<img src="images/UiUpdateCommand.png" width="600"><br>
-_Figure 3.7.1. Update Command_
+selected using the [select](#36-select-a-task--select) command. <br>
+Similarly, you can edit multiple parameters concurrently.
 
 ### 3.8. Get help : `help`
 
@@ -409,7 +399,7 @@ Your wish is my command!
 Here are some questions that you might want to ask me:
 
 **Q**: How do I _transfer my data_ to another computer? <br>
-**A**: Install me in the other computer and overwrite the empty data file I create with
+**A**: Install me in the other computer and _overwrite the empty data file_ I create with
        the file that contains the data of your previous Task Manager folder.
 
 **Q**: How do I add an _event_? <br>
@@ -417,11 +407,6 @@ Here are some questions that you might want to ask me:
 [here](#add-an-event).
 
 ## 6. Glossary
-
-#### Case-Sensitive:
-
-> Text that discriminates between upper-case and lower-case letters <br>
-E.g. _Jenny_ versus _jenny_
 
 #### Graphical User Interface (GUI):
 
