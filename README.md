@@ -1,4 +1,4 @@
-# Tâche
+# Tache
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B4/main.svg?branch=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/uro4shn2404er9kr?svg=true)](https://ci.appveyor.com/project/loveandbejoyful/main)
@@ -7,7 +7,7 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* Tâche is a desktop Task Manager.
+* Tache is a desktop Task Manager.
 * It is a Java sample application intended for users to manage their to-do items and events in a systematic way.
 * It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
