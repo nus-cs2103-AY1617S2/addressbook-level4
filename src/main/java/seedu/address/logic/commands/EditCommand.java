@@ -6,8 +6,8 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
@@ -126,7 +126,7 @@ public class EditCommand extends Command {
         public Optional<Start> getStart() {
             return start;
         }
-        
+
         public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;
@@ -135,7 +135,7 @@ public class EditCommand extends Command {
         public Optional<Deadline> getDeadline() {
             return deadline;
         }
-        
+
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;

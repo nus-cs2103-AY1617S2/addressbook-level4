@@ -1,28 +1,28 @@
 package seedu.address.logic.parser;
 
 import java.util.List;
+
 import com.joestelmach.natty.DateGroup;
 
 public class NattyParser {
     private static NattyParser instance = null;
+    // Exists only to defeat instantiation.
     protected NattyParser() {
-        // Exists only to defeat instantiation.
-     }
-    
+    }
+
     // Returns the singleton instance
     public static NattyParser getInstance() {
-        if(instance == null) {
-           instance = new NattyParser();
+        if (instance == null) {
+            instance = new NattyParser();
         }
         return instance;
-     }
+    }
 
-    
+
     /**
      * Parses, analyses and converts 'rich text' into a timestamp
-     * 
-     * @param String
-     *            - e.g. 'Tomorrow'
+     *
+     * @param String - e.g. 'Tomorrow'
      * @return String - Timestamp
      */
     public String parseNLPDate(String argsString) {
