@@ -19,3 +19,4 @@ classes/
 /bin/
 runtests.sh
 /src/.*
+/config/checkstyle/awesometodoformat.xml
