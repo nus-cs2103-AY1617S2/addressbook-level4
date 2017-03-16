@@ -7,7 +7,6 @@ public class Schedule {
 	public static final String MESSAGE_TIME_CONSTRAINTS = "cannot include 2 or more commas in time/date entry";
 	private Timing time;
 	private Date date;
-
 	public String value;
 
 	/**
@@ -18,7 +17,6 @@ public class Schedule {
 	 * @param deadline
 	 * @throws IllegalValueException
 	 */
-
 	public Schedule(String timetoparse) throws IllegalValueException {
 		String[] stringArray = timetoparse.split(",");
 		if (stringArray.length > 2 || stringArray.length == 0) {
@@ -42,7 +40,6 @@ public class Schedule {
 			this.date = new Date(stringArray[1]);
 			this.value = timetoparse;
 		}
-
 	}
 
 	@Override

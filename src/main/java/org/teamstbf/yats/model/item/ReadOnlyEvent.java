@@ -25,11 +25,11 @@ public interface ReadOnlyEvent {
 		return builder.toString();
 	}
 
+	Title getTitle();
+
 	Date getDeadline();
 
 	Description getDescription();
-
-	Schedule getEndTime();
 
 	Location getLocation();
 
@@ -37,13 +37,13 @@ public interface ReadOnlyEvent {
 
 	Schedule getStartTime();
 
+	Schedule getEndTime();
+
 	/**
 	 * The returned TagList is a deep copy of the internal TagList, changes on
 	 * the returned list will not affect the person's internal tags.
 	 */
 	UniqueTagList getTags();
-
-	Title getTitle();
 
 	/**
 	 * Returns true if both have the same state. (interfaces cannot override

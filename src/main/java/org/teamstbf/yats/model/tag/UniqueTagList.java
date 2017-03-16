@@ -116,6 +116,20 @@ public class UniqueTagList implements Iterable<Tag> {
                 .filter(tag -> !alreadyInside.contains(tag))
                 .forEach(internalList::add);
     }
+    
+    /**
+     * Brings over all the additional tags from argument list but removes any 
+     * that is both in list and the argument list
+     */
+    public void removeAndMerge(UniqueTagList from) {
+    	final Set<Tag> alreadyInside = this.toSet();
+    	from.internalList.stream()
+    			.filter(tag -> alreadyInside.contains(tag))
+    			.forEach(internalList::remove);
+    	from.internalList.stream()
+    			.filter(tag -> !alreadyInside.contains(tag))
+    			.forEach(internalList::add);
+    }
 
     /**
      * Returns true if the list contains an equivalent Tag as the given argument.
@@ -136,6 +150,17 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.add(toAdd);
+    }
+    
+    /**
+     * Returns true if the list is not empty.
+     */
+    public boolean isTagPresent() {
+    	if (internalList.isEmpty()) {
+    		return false;
+    	} else {
+    		return true;
+    	}
     }
 
     @Override
