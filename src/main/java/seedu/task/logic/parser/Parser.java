@@ -18,7 +18,9 @@ import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.logic.commands.ListByDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
+import seedu.task.logic.commands.ListByUndoneCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
 
@@ -78,6 +80,12 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListByDoneCommand.COMMAND_WORD:
+            return new ListByDoneCommand(true);
+
+        case ListByUndoneCommand.COMMAND_WORD:
+            return new ListByUndoneCommand(false);
 
         case ListByTagCommand.COMMAND_WORD:
         case ListByTagCommand.COMMAND_WORD_SINGLE_T:

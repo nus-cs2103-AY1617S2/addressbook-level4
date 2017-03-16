@@ -114,6 +114,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keyword)));
     }
 
+    @Override
+    public void updateFilteredTaskList(boolean value) {
+        updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
+    }
+
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -192,6 +197,29 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "Tag=" +  tagKeyWord;
         }
+    }
+
+    private class DoneQualifier implements Qualifier {
+
+    	private boolean value;
+
+    	DoneQualifier(boolean value) {
+    	    this.value = value;
+    	}
+
+    	@Override
+    	public boolean run(ReadOnlyTask task) {
+    	    if (this.value == true & task.isDone()) {
+    	        return true;
+    	    }
+    	    else if (this.value == false & task.isDone() == false) {
+    	        return true;
+    	    }
+    	    else {
+    	        return false;
+    	    }
+
+    	}
     }
 
 
