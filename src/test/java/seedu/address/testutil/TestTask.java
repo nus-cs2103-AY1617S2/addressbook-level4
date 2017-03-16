@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
@@ -15,6 +16,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Start start;
     private Deadline deadline;
+    private Priority priority;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -28,6 +30,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.start = taskToCopy.getStart();
         this.deadline = taskToCopy.getDeadline();
+        this.priority = taskToCopy.getPriority();
         this.tags = taskToCopy.getTags();
     }
 
@@ -44,6 +47,10 @@ public class TestTask implements ReadOnlyTask {
         this.deadline = deadline;
     }
     
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+    
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -57,10 +64,15 @@ public class TestTask implements ReadOnlyTask {
     public Start getStart() {
         return start;
     }
-    
+
     @Override
     public Deadline getDeadline() {
         return deadline;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override

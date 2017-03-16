@@ -7,6 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
@@ -79,9 +80,10 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Start updatedStart = editTaskDescriptor.getStart().orElseGet(taskToEdit::getStart);
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedStart, updatedDeadline, updatedTags);
+        return new Task(updatedName, updatedStart, updatedDeadline, updatedPriority, updatedTags);
     }
 
     /**
@@ -92,6 +94,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<Start> start = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -126,7 +129,7 @@ public class EditCommand extends Command {
         public Optional<Start> getStart() {
             return start;
         }
-        
+
         public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;
@@ -134,6 +137,15 @@ public class EditCommand extends Command {
 
         public Optional<Deadline> getDeadline() {
             return deadline;
+        }
+        
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
         
         public void setTags(Optional<UniqueTagList> tags) {
