@@ -12,7 +12,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo an operation to the task manager";
     public static final String MESSAGE_SUCCESS = "undo successfully";
     public static final String MESSAGE_FAILURE = "cannot undo";
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

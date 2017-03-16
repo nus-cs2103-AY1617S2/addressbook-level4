@@ -16,18 +16,18 @@ public class UndoRedoManager {
     public void storeUndoCommand(UndoCommand undoCommand) {
         undoStack.push(undoCommand);
     }
-    
+
     public void resetRedo() {
         redoStack.clear();
     }
-    
+
     public UndoCommand getUndoCommand() throws EmptyStackException {
         UndoCommand undo = undoStack.pop();
         UndoCommand redo = undo.reverseUndo();
         redoStack.push(redo);
         return undo;
     }
-    
+
     public UndoCommand getRedoCommand() throws EmptyStackException {
         UndoCommand redo = redoStack.pop();
         UndoCommand undo = redo.reverseUndo();

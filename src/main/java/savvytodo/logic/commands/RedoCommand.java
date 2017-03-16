@@ -9,15 +9,11 @@ import savvytodo.model.undoredo.exceptions.RedoFailureException;
  *
  */
 public class RedoCommand extends Command {
-
     public static final String COMMAND_WORD = "redo";
-    
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo an operation to the task manager";
-    
     public static final String MESSAGE_SUCCESS = "redo successfully";
-    
     public static final String MESSAGE_FAILURE = "cannot redo";
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
