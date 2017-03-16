@@ -80,7 +80,7 @@ Our UI is broken down into 4 main sections:
 
 > **Parameter Format**
 > 
-> * *Datetime*<br>The datetime format should be `DD-MM-YY HHMM`
+> * *DateTime*<br>The dateTime format should be `DD-MM-YY HHMM`
 > * *Location*<br>The location description has no restriction.
 > * *Tag*<br>Each tag is a single word. 
 
@@ -185,6 +185,8 @@ Format: `listdone`
 
 Shows only uncompleted tasks in the main window.
 
+> Sorted in chronological order. You will see tasks closest to their starting date or due date at the top.
+
 Format: `listundone`
 
 ### 3.9. Finding all tasks containing any keyword in their title, tag, or on a specific date: `find`
@@ -238,9 +240,37 @@ Format: `exit`
 
 ## 4. FAQ
 
-**Q**: How do I read the task card presented to me?
+**Q**: The app will not run even though I have Java 8 installed?!
 <br>
-**A**: 
+**A**: Ensure you have Java version 1.8.0_60 or later installed in your Computer. This app will not work with earlier versions of Java 8.
+
+**Q**: Can I control each of the panel individually?
+<br>
+**A**: No, all 3 panels are controlled together.
+
+**Q**: Can I resize each of the panel individually?
+<br>
+**A**: Yes, you can adjust them just like you would a typical window.
+
+**Q**: Can I change a task into a deadline, event, or vice versa?
+<br>
+**A**: Yes, just update the task's ending DateTime for deadlines and its starting DateTime for events.
+
+**Q**: Can I change the order of display?
+<br>
+**A**: No, the tasks are always listed in chronological order, starting from today.
+
+**Q**: How do I save the data?
+<br>
+**A**: Task manager data are saved in the hard disk automatically (in XML format) after any command that changes the data.
+
+**Q**: Can I edit the saved data directly in XML?
+<br>
+**A**: Yes, the app will update accordingly when you launch it.
+
+**Q**: Can I quit without using the exit command?
+<br>
+**A**: You can quit anyway you prefer since all changes are automatically saved.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task manager folder.
