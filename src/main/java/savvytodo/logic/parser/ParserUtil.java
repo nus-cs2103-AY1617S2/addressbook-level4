@@ -29,7 +29,6 @@ public class ParserUtil {
 
     private static final int ARRAY_FIELD_2 = 1;
     private static final int ARRAY_FIELD_1 = 0;
-    private static final String[] EMPTY_ARRAY_OF_SIZE_2 = new String[2];
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
@@ -77,7 +76,7 @@ public class ParserUtil {
      */
     public static String[] getDateTimeFromArgs(Optional<String> dateTime) {
         assert dateTime != null;
-        return dateTime.isPresent() ? dateTime.get().split(StringUtil.WHITESPACE_REGEX) : EMPTY_ARRAY_OF_SIZE_2;
+        return dateTime.isPresent() ? dateTime.get().split(StringUtil.WHITESPACE_REGEX) : DateTime.DEFAULT_VALUES;
     }
 
     /**
@@ -85,7 +84,7 @@ public class ParserUtil {
      */
     public static String[] getRecurrenceFromArgs(Optional<String> recurrence) {
         assert recurrence != null;
-        return recurrence.isPresent() ? recurrence.get().split(StringUtil.WHITESPACE_REGEX) : EMPTY_ARRAY_OF_SIZE_2;
+        return recurrence.isPresent() ? recurrence.get().split(StringUtil.WHITESPACE_REGEX) : Recurrence.DEFAULT_VALUES;
     }
 
     /**

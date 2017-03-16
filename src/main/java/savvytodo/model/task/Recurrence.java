@@ -73,6 +73,7 @@ public class Recurrence {
             "If recurrence type is NONE, occurences can only be 0";
     public static final String MESSAGE_RECURR_NOT_MATCH =
             "Task recurrence type should be 'none', 'daily', 'weekly', 'monthly' or 'yearly'";
+    public static final String[] DEFAULT_VALUES = {Type.None.toString(), "0"};
 
     /**
      * Validates given Recurrence.

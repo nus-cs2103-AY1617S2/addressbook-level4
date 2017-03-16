@@ -11,6 +11,7 @@ import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -22,10 +23,11 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY] [r/RECURRING_TYPE] "
-            + "[n/NUM_OF_RECURRENCE] [c/CATEGORIES] [d/DESCRIPTION]...\n"
+            + "Parameters: NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
+            + "[r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "Project Meeting s/05-10-2016 2pm e/6pm r/daily n/2 c/CS2103 d/Discuss about roles and milestones";
+            + "Project Meeting dt/05/10/2016 1400 05/10/2016 1800 r/weekly 2 c/CS2103 "
+            + "d/Discuss about roles and milestones";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -50,6 +52,8 @@ public class AddCommand extends Command {
                 new Location(location),
                 new UniqueCategoryList(categorySet)
         );
+
+        this.toAdd.setCompleted(new Status());
     }
 
     @Override

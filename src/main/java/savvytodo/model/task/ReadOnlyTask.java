@@ -15,7 +15,7 @@ public interface ReadOnlyTask {
     Location getLocation();
     DateTime getDateTime();
     Recurrence getRecurrence();
-    boolean isCompleted();
+    Status isCompleted();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,

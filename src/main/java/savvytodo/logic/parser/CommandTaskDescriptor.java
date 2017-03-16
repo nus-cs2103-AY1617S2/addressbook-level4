@@ -8,6 +8,7 @@ import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Status;
 
 /**
  * @author A0140016B
@@ -21,6 +22,7 @@ public class CommandTaskDescriptor {
     private Optional<Description> description = Optional.empty();
     private Optional<Location> location = Optional.empty();
     private Optional<UniqueCategoryList> categories = Optional.empty();
+    private Optional<Status> status = Optional.empty();
 
     public CommandTaskDescriptor() {
     }
@@ -31,6 +33,7 @@ public class CommandTaskDescriptor {
         this.description = toCopy.getDescription();
         this.location = toCopy.getLocation();
         this.categories = toCopy.getCategories();
+        this.status = toCopy.getStatus();
     }
 
     /**
@@ -74,6 +77,15 @@ public class CommandTaskDescriptor {
 
     public Optional<Location> getLocation() {
         return location;
+    }
+
+    public void setStatus(Optional<Status> status) {
+        assert status != null;
+        this.status = status;
+    }
+
+    public Optional<Status> getStatus() {
+        return status;
     }
 
     public void setCategories(Optional<UniqueCategoryList> categories) {

@@ -54,7 +54,7 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 Adds a task to the Savvy To-Do<br>
-Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+Format: `add TASK_NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 > Parameters | Description
 > -------- | :--------

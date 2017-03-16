@@ -8,6 +8,7 @@ import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 
 /**
  * A mutable task object. For testing only.
@@ -21,7 +22,7 @@ public class TestTask implements ReadOnlyTask {
     private DateTime dateTime;
     private Recurrence recurrence;
     private UniqueCategoryList categories;
-    private boolean isCompleted;
+    private Status isCompleted;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -99,11 +100,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public boolean isCompleted() {
+    public Status isCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(boolean isCompleted) {
+    public void setCompleted(Status isCompleted) {
         this.isCompleted = isCompleted;
     }
 
