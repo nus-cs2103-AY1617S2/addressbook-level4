@@ -22,11 +22,9 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Name name, Time time, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, time, email, address, tags);
+        assert !CollectionUtil.isAnyNull(name, time, tags);
         this.name = name;
         this.time = time;
-        this.email = email;
-        this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
