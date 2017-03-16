@@ -1,4 +1,4 @@
-<!--(27 Feb | Tian Song: User Stories, UC01 - UC12, Product Survey | Mustaqiim: UC13 - UC25, Product Survey | Shawn: Product Survey | Jeremy: Product Survey)-->
+[//]: # (27 Feb | Tian Song: User Stories, UC01 - UC12, Product Survey | Mustaqiim: UC13 - UC25, Product Survey | Shawn: Product Survey | Jeremy: Product Survey)
 
 # Suru - Developer Guide
 
@@ -116,7 +116,9 @@ Each of the four components
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.<br>
+
 <img src="images/LogicClassDiagram.png" width="800"><br>
+
 _Figure 2.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
@@ -124,12 +126,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 <img src="images\SDforDeletePerson.png" width="800"><br>
+
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Suru data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+
 <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -141,6 +146,7 @@ The sections below give more details of each component.
 Author: 
 
 <img src="images/UiClassDiagram.png" width="800"><br>
+
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
@@ -161,6 +167,7 @@ The `UI` component,
 Author: 
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
+
 _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
@@ -171,7 +178,9 @@ _Figure 2.3.1 : Structure of the Logic Component_
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.<br>
+
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
+
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 3.4. Model component
@@ -179,6 +188,7 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 Author: 
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
+
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
@@ -196,6 +206,7 @@ The `Model`
 Author: 
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
+
 _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
