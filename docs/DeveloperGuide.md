@@ -1,6 +1,7 @@
-# AddressBook Level 4 - Developer Guide
+# Bullet Journal - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+
+By : `Team F12-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -290,11 +291,47 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ## 5. Dev Ops
 
-### 5.1. Build Automation
+### 5.1. Version Control Workflow
+
+#### 5.1.1. General Guidelines
+
+All members should work on their individual branches for **code implementation**. Please avoid committing code changes directly into master. Instead, push your local branch to our central remote repo, create a new PR of your branch, and assign another member to review. Since we have 2 people in charge of each component, please assign the relevant member as your reviewer.
+
+For new pull request (PR), code changes should be **reviewed by at least one other member** before merging PR. The reviewer should at least comment that the PR is ok to merge so the team may know PR has been reviewed.
+
+##### Component Delegation
+
+1. Model: @bryan , @arishuynhvan
+2. GUI: @WangYu-g, @zhypaul
+3. Logic: @bryan, @arishuynhvan
+4. Storage: @WangYu-g, @zhypaul
+
+#### 5.1.2. Merge Branches
+
+1. After you have made necessary changes on your local feature branch and decided to merge into our remote master branch, try to pull the remote master into your local master first.
+2. Merge the local master into your local feature branch with **rebase** (*not merge*).
+3. Push your local feature branch to remote feature branch.
+4. Create a new pull request and assign a reviewer (as described in 5.1.1)
+
+#### 5.1.3. Roll back Commits after Pushed
+
+1. Open terminal from SourceTree (the icon could be found on the top right corner of SourceTree window)
+2. Use `git log` to find the code number of the commit which you  want to revert your branch to. E.g. 82ad6ad8e3410ade014e4b9ecec94a57c2df51bb
+2. `git rebase -i <commit number>` . E.g. `git rebase -i 82ad6ad8e3410ade014e4b9ecec94a57c2df51bb` . You will see an editor where you can pick (keep) or drop (delete/remove) commits. There are other commands as well, which are displayed as instruction in the editor. To start making changes to your commit, press `i` key and edit the changes.
+3. When you have finished making the changes, press `Esc` key and type `:wq` to save changes and quit editor. (This is Vim-based editor so commands very similar to Vim)
+4. `git push -f` to overwrite your remote branch
+
+You can refer to [this article](http://christoph.ruegg.name/blog/git-howto-revert-a-commit-already-pushed-to-a-remote-reposit.html) for more explanations
+
+For **documentation changes**, it is ok to make direct changes in the master branch.
+
+
+
+### 5.2. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 5.3. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
@@ -347,13 +384,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add events | remind myself what i need to do
+`* * *` | user | add tasks | finish them before deadline
+`* * *` | user | add deadlines | prioritize my tasks
+`* * *` | user | CRUD events, tasks, deadlines | help myself make tasks more manageable
+`* * *` | user | undo last operation | easily correct my mistake
+`* * *` | user | have some flexiblity in commands | use the task manager more comfortably
+`* * *` | user | simple search for finding an item | navigate to certain tasks more conveniently
+`* * *` | user | view uncompleted/completed tasks | feel sense of achievement and stress
+`* * *` | user | specify which folder data is stored | manipulate the data more directly
 
-{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -403,17 +443,67 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Calendar**
 
-Author: ...
+Author: Bryan Lee
 
-Pros:
+**Pros:**
 
-* ...
-* ...
+* Google Calendar is easy and fast to set up, especially if you use a Google account
+* Clean, minimal interface, easy to invite people to events
+* Organize events and appointments via different calendars
 
-Cons:
+**Cons:**
 
-* ...
-* ...
+* Possible problems communicating with other calendars such as iCal
+* Not specifically a task manager, just a calendar
 
+**Momentum**
+
+Author: Aris Huynh
+
+**Pros:**
+
+- Central focus task visibly displayed in the center of the site
+- Accessible from Chrome
+- Local Storage of tasks in browser
+- Simple to-do list with checkboxes as done indicator
+
+**Cons:**
+
+- Lack of data persistence when Chrome cache is cleared
+- Poor sync for the same account across browsers and devices
+- Poor responsiveness on small screen size
+- Tasks can only be text-based for free version
+
+
+**Apple's Notes App**
+
+Author: Wang Yu
+
+**Pros:**
+
+* Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed
+* Due to its sustainability, Notes is very suitable for traditional notes takers who are not comfortable with being restricted by commands and forms
+* With the Notes App on iCloud.com, users can easily get to see their notes on different platforms if Internet connection is available
+
+**Cons:**
+
+* Notes is only available for the Apple OS platform. As our target are MS users, Notes is not an option for them
+* Notes cannot recognize task's data and group them together
+* All the updating need to be done by directly manipulating the text, which is quite a bother
+* If the user mistakenly edited something wrongly, there is no turning back for them since there is no undo function
+
+**Calendar in iPhone**
+
+Author: Zhang Heyang
+
+**Pros:**
+
+* Supports iPhone and related devices
+
+**Cons:**
+
+* No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan
+* Display interface too small, unable to see all events
+* Add/Remove function not user-friendly enough, hard to find
