@@ -71,6 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void doneTask(int filteredTaskListIndex) {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
+        setDoneStatus(DoneStatus.UNDONE);
         updateFilteredUndoneTaskList();
         indicateToDoListChanged();
     }
@@ -78,7 +79,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         toDoList.addTask(task);
-        updateFilteredListToShowAll();
+        setDoneStatus(DoneStatus.UNDONE);
+        updateFilteredUndoneTaskList();
         indicateToDoListChanged();
     }
 
