@@ -1,6 +1,7 @@
 package seedu.tasklist.model.task;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -184,5 +185,11 @@ public class EventTask extends Task implements ReadOnlyEventTask {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    @Override
+    public Date getDeadlineParameter() throws ParseException {
+        Date deadlineParameter = new Date(Long.MAX_VALUE - 1); //to appear before floating tasks
+        return deadlineParameter;
     }
 }

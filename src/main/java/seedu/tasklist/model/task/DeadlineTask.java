@@ -1,6 +1,7 @@
 package seedu.tasklist.model.task;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -161,5 +162,13 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    @Override
+    public Date getDeadlineParameter() throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date deadlineParameter = formatter.parse(formatter.format(deadline));
+        System.out.println(deadlineParameter.toString());
+        return deadlineParameter;
     }
 }

@@ -1,5 +1,9 @@
 package seedu.tasklist.model.task;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 import seedu.tasklist.commons.util.CollectionUtil;
@@ -137,5 +141,11 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    @Override
+    public Date getDeadlineParameter() throws ParseException {
+        Date deadlineParameter = new Date(Long.MAX_VALUE);
+        return deadlineParameter;
     }
 }
