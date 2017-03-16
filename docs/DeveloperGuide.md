@@ -26,14 +26,36 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
     > Having any Java 8 version is not enough. <br>
     This app will not work with earlier versions of Java 8.
 
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
+2. **Eclipse** IDE. Follow the instructions in [this page](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE)      to download and install Eclipse. 
+    >Eclipse Neon and above recommended for this project.
+3. **e(fx)clipse** plugin for Eclipse. (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
+4. **Buildship Gradle Integration**
+    >Buildship is bundled together with Eclipse Neon and above.
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
+### 1.2. Installing Checkstyle manually
+    
+>As of August 16, 2017, Checkstyle repository in Eclipse Marketplace is unavailable. 
 
-### 1.2. Importing the project into Eclipse
+1. Download the compressed .zip file [here](https://sourceforge.net/projects/eclipse-cs/?source=typ_redirect). **Do not** extract the contents.
+2. Launch Eclipse Neon.
+3. Click `Help` > `Install new Software...`.
+<br><img src="images/checkstyle/checkstyle_1.png" width="400"><br><br>
+4. Click `Add..`.
+<br><img src="images/checkstyle/checkstyle_2.png" width="400"><br><br>
+5. Click `Archive` to open up a directory window.
+<br><img src="images/checkstyle/checkstyle_3.png" width="400"><br><br>
+6. Nagivate and select the **uncompressed** download file. Click `Open` > `OK`.
+<br><img src="images/checkstyle/checkstyle_4.png" width="400"><br><br>
+7. Check `Checkstyle` and click `Next`
+<br><img src="images/checkstyle/checkstyle_5.png" width="400"><br><br>
+8. Click `Next` and accept the user license agreement as follows. 
+<br><img src="images/checkstyle/checkstyle_6.png" width="400"><br><br>
+9. Click `Finish` to install Checkstyle.
+<br><img src="images/checkstyle/checkstyle_7.png" width="400"><br><br>
+
+### 1.3. Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
 1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -48,7 +70,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 1.4. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. opus
@@ -59,7 +81,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 1.5. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
