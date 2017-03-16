@@ -4,6 +4,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
+0. [Introduction](#introduction)
 1. [Quick Start](#quick-start)
 2. [Features](#features)
 3. [Command Summary](#command-summary)
@@ -11,6 +12,9 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ## TaskBoss Prototype
 <img src="images/TaskBoss (all tasks).png" width="600"> <br>
+
+## 0. Introduction
+Have you ever been overwhelmed with too many tasks? Perhaps a couple of these tasks might have slipped your mind. Fear not, as TaskBoss is here. TaskBoss is a user friendly task manager which supports a wide range of features. With an autosave feature, you will never have to worry about losing any of your data entered into TaskBoss.
 
 ## 1. Quick Start
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
@@ -278,56 +282,3 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 |[save](#220-exporting-the-data-to-a-new-file--save-n)|**`save n/FILE_PATH NEW_FILE_NAME`**            |
 
 <br>
-
-* **Add**  `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g. `add n/Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 c/Leisure p/1`
-
-* **Clear by Category** : `clear CATEGORY`
-  e.g. `clear School`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find by name** : `find n/TASK_NAME` <br>
-  e.g. `find n/Meeting`
-
-* **Find by end date** : `find sd/END_DATE` <br>
-  e.g. `find d/03-01-2017`
-
-* **Find by task information** : `find i/INFORMATION` <br>
-  e.g. `find i/Meeting room 3`
-  
-* **Create category** : `new CATEGORY` <br>
-
-* **Edit category** : `name EXISTING_CATEGORY NEW_CATEGORY` <br>
-
-* **List** : `list` <br>
-
-* **List by category** : `listcategory` <br>
-  e.g. `listcategory study`
-
-* **Help** : `help` <br>
-
-* **Edit** : `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g.`edit 1 i/Use Stack et/23:59`
-
-* **Undo** : `undo` <br>
-
-* **Sort by deadline** : `sort` <br>
-
-* **Sort by priority** : `sort p` <br>
-
-* **Mark done** : `done INDEX` <br>
-
-* **View** : `view INDEX` <br>
-
-* **Export to a existing file** : `save e/FILE_PATH` <br>
-
-* **Export to a new file** : `save n/FILE_PATH NEW_FILE_NAME` <br>
-
-
-
-
-
-
-
