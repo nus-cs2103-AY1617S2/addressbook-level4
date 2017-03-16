@@ -58,6 +58,9 @@ public class TaskDate {
 
     @Override
     public boolean equals(Object other) {
+        if (this.value == null) {
+            return false;
+        }
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
                 && this.value.equals(((TaskDate) other).value)); // state check

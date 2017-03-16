@@ -33,12 +33,16 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private CalenderPanel calenderPanel;
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private Config config;
 
     @FXML
     private AnchorPane browserPlaceholder;
+
+    @FXML
+    private AnchorPane calenderPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -113,7 +117,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        calenderPanel = new CalenderPanel(calenderPlaceholder);
+//      browserPanel = new BrowserPanel(browserPlaceholder);
         personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
