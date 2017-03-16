@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Andrew Sugiarto](http://www.comp.nus.edu.sg/~damithch) <br>
+#### [Andrew Sugiarto](https://github.com/azraelos) <br>
 <img src="images/azraelos.png" width="150"><br>
 * **Role:** UI <br>
 * **Responsibilities:** <br>
