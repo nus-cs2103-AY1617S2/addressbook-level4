@@ -275,6 +275,11 @@ Format: `exit`
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous task list folder.
+	   
+
+**Q**: How do I save my tasks?
+
+**A**: You don't need to! Your tasks are automatically saved after every command!	   
 
 ## 6. Commands Cheatsheet
 
