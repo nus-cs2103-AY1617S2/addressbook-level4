@@ -25,9 +25,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Phone;
+import seedu.address.model.task.StartEndDateTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -124,6 +126,27 @@ public class ParserUtil {
         return new UniqueTagList(tagSet);
     }
 
+    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
+        assert deadline != null;
+        return deadline.isPresent() ? Optional.of(new Deadline(parseDateTimeString(deadline.get()))) : Optional.empty();
+    }
+
+    public static Optional<StartEndDateTime> parseStartEndDateTime(Optional<String> startDateTime,
+            Optional<String> endDateTime) throws IllegalValueException {
+        assert startDateTime != null && endDateTime != null;
+
+        if (!startDateTime.isPresent() || !endDateTime.isPresent()) {
+            // TODO If it is malformed should we just ignore or should we do further checks and throw an error?
+            return Optional.empty();
+        }
+
+        StartEndDateTime startEndDateTime = new StartEndDateTime(parseDateTimeString(startDateTime.get()),
+                                                                 parseDateTimeString(endDateTime.get()));
+
+        return Optional.of(startEndDateTime);
+    }
+
+    // TODO notice the inconsistencies of the parsing class, maybe need to change this
     /**
      * Parses Date strings into a {@code ZonedDateTime}.
      */
@@ -145,4 +168,5 @@ public class ParserUtil {
         }
         throw new IllegalValueException(dateTime + "TODO is not a valid date.");
     }
+
 }

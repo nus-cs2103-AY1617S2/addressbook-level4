@@ -77,9 +77,21 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+
+        Optional<Deadline> updatedDeadline = personToEdit.getDeadline();
+        if (editPersonDescriptor.getDeadline().isPresent()) {
+            // TODO can we just pass the optional instead?
+            updatedDeadline = Optional.of(editPersonDescriptor.getDeadline().get());
+        }
+
+        Optional<StartEndDateTime> updatedStartEndDateTime = personToEdit.getStartEndDateTime();
+        if (editPersonDescriptor.getStartEndDateTime().isPresent()) {
+            // TODO can we just pass the optional instead?
+            updatedStartEndDateTime = Optional.of(editPersonDescriptor.getStartEndDateTime().get());
+        }
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, null, null, updatedTags); // TODO use proper arguments
+        return new Task(updatedName, updatedDeadline, updatedStartEndDateTime, updatedTags);
     }
 
     /**
