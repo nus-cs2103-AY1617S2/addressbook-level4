@@ -70,8 +70,8 @@ Without further ado, let us get started.
 
 > **Command Format**
 > * Words in `UPPER_CASE` are the parameters.
-> * Words in `lower_case` are command and connectors, e.g,. add and every. 
-> * Letters with slash are command identifiers,. e.g, d/ and t/.  
+> * Words in `lower_case` are command and connectors; e.g., add and every. 
+> * Letters with slash are command identifiers; e.g., d/ and t/.  
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` behind can have multiple instances.
 > * `|` means "or".
@@ -322,8 +322,8 @@ Format: `find [KEYWORDS...]`
 > * Keywords are case insensitive. 
 > * The order of the keywords does not matter. 
 > * Partial keyword will also be matched; e.g. `ex` will match `exam`.
-> * Date format is MM-DD-YYYY e.g. 10-22-2017.
-> * TIME format is HHMM (24-hour format) e.g. 1300.
+> * Date format is MM-DD-YYYY; e.g. 10-22-2017.
+> * TIME format is HHMM (24-hour format); e.g. 1300.
 > * Mutiple keywords of varying types are allowed. 
 > * A task is match so long as **ANY** of its details (i.e., name, priority level, description etc.) contains the keyword. 
 
