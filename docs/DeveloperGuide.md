@@ -1,5 +1,7 @@
 # Developer Guide
 
+## Table of Contents
+
 1. [Setting Up](#1-setting-up)
 2. [Design](#2-design)
 3. [Implementation](#3-implementation)
@@ -66,6 +68,7 @@
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
 
+**[⬆ back to top](#table-of-contents)**
 
 ## 2. Design
 
@@ -181,6 +184,8 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.geekeep.commons` package.
 
+**[⬆ back to top](#table-of-contents)**
+
 ## 3. Implementation
 
 ### Logging
@@ -207,6 +212,7 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+**[⬆ back to top](#table-of-contents)**
 
 ## 4. Testing
 
@@ -251,6 +257,8 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
+**[⬆ back to top](#table-of-contents)**
+
 ## 5. Dev Ops
 
 ### Build Automation
@@ -279,6 +287,8 @@ can be automated using Gradle. For example, Gradle can download the dependencies
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 6. Appendices
 
@@ -529,3 +539,5 @@ Cons:
 * Gamification may be distracting
 
 * Group plans are only available to paid users
+
+**[⬆ back to top](#table-of-contents)**
