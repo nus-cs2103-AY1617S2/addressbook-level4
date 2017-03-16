@@ -49,7 +49,7 @@ Copy the file to the folder you want to use as the home folder for your Werkbook
 
 ### ii. Starting Werkbook
 To start Werkbook, simple double click on `werkbook.jar`.
- 
+
 <img src="images/userguide-figure-2.jpg" width="100"><br>
 *Figure 2: Launching werkbook.jar*
 
@@ -58,7 +58,7 @@ After launching Werkbook, you will be greeted with the main interface.
 
 <img src="images/userguide-figure-3.jpg" width="600"><br>
 *Figure 3: Werkbook's main interface*
-    
+
 You can find the **Command Box** at the top of the interface, this is where you type your commands!
 
 The **Results Panel** is located below the **Command Box**, and it tells you the result of your command.
@@ -67,7 +67,7 @@ All of your tasks can be found in the **Task Panel**, it is initially empty unti
 
 ### iv. Quick Start
 Here's a quick guide to get you started with Werkbook.
-    
+
 **Feeling lost?**
 
 Typing **`help`** in the **Command Box** will bring up the help window with a list of all of the available commands.
