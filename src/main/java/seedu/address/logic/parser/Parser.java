@@ -28,11 +28,11 @@ public class Parser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static Parser instance = null;
-    
+
     protected Parser() {
         // Exists only to defeat instantiation.
      }
-    
+
     // Returns the singleton instance
     public static Parser getInstance() {
         if(instance == null) {

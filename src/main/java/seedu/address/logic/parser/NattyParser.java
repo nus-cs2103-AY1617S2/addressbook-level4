@@ -8,7 +8,7 @@ public class NattyParser {
     protected NattyParser() {
         // Exists only to defeat instantiation.
      }
-    
+
     // Returns the singleton instance
     public static NattyParser getInstance() {
         if(instance == null) {
@@ -17,12 +17,11 @@ public class NattyParser {
         return instance;
      }
 
-    
+
     /**
      * Parses, analyses and converts 'rich text' into a timestamp
-     * 
-     * @param String
-     *            - e.g. 'Tomorrow'
+     *
+     * @param String - e.g. 'Tomorrow'
      * @return String - Timestamp
      */
     public String parseNLPDate(String argsString) {
