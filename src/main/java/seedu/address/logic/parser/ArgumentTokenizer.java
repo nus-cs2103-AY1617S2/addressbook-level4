@@ -150,8 +150,8 @@ public class ArgumentTokenizer {
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
         if (prefix.equals(PREFIX_START) ||  prefix.equals(PREFIX_DEADLINE)) {
             // Parse date
-            ParserUtil parserUtil = new ParserUtil();
-            value = parserUtil.parseNLPDate(value);
+            NattyParser nattyParser = NattyParser.getInstance();
+            value = nattyParser.parseNLPDate(value);
         }
         return value.trim();
     }
