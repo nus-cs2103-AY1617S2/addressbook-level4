@@ -64,10 +64,10 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 <br><img src="images/gradle/gradle_3.png" width="400"><br><br>
 6. Click `Browse` and nagivate to the directory of the cloned repository. Click `Finish` to begin importing the project.
 <br><img src="images/gradle/gradle_4.png" width="400"><br><br>
-    >* Gradle will begin importing and building the project. This process may take up 15 minutes depending on the internet connection speed.
-<br><img src="images/gradle/gradle_5.png" width="400"><br><br>
-    >* Upon completion, locate the Gradle Tasks menu at the lower section of Eclipse Neon.
-<br><img src="images/gradle/gradle_6.png" width="400"><br><br>
+>* Gradle will begin importing and building the project. This process may take up 15 minutes depending on the internet connection speed.
+> <br><img src="images/gradle/gradle_5.png" width="400"><br><br>
+>* Upon completion, locate the Gradle Tasks menu at the lower section of Eclipse Neon.
+> <br><img src="images/gradle/gradle_6.png" width="400"><br><br>
 7. Open the project menu and select `build` > `build` to build and test the project.
 <br><img src="images/gradle/gradle_7.png" width="400"><br><br>
 8. Check that the project has builded successfully in the Console view.
