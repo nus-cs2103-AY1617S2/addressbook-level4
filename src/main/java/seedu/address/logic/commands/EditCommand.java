@@ -143,7 +143,7 @@ public class EditCommand extends Command {
         public Optional<Deadline> getDeadline() {
             return deadline;
         }
-        
+
         public void setPriority(Optional<Priority> priority) {
             assert priority != null;
             this.priority = priority;
@@ -152,7 +152,7 @@ public class EditCommand extends Command {
         public Optional<Priority> getPriority() {
             return priority;
         }
-      
+
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
