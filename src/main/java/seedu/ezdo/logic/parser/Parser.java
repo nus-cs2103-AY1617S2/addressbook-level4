@@ -20,6 +20,7 @@ import seedu.ezdo.logic.commands.QuitCommand;
 import seedu.ezdo.logic.commands.RedoCommand;
 import seedu.ezdo.logic.commands.SaveCommand;
 import seedu.ezdo.logic.commands.SelectCommand;
+import seedu.ezdo.logic.commands.SortCommand;
 import seedu.ezdo.logic.commands.UndoCommand;
 
 /**
@@ -86,6 +87,10 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
         case HelpCommand.SHORT_COMMAND_WORD:
             return new HelpCommand();
+
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.SHORT_COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
