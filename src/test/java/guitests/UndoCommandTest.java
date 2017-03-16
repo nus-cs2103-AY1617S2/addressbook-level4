@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TestTodo;
 
@@ -17,7 +18,7 @@ public class UndoCommandTest extends TodoListGuiTest {
     @Test
     public void undo_noActionToUndo_failure() {
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
-        //        assertResultMessage(UndoCommand.MESSAGE_NO_ACTION);
+        assertResultMessage(UndoCommand.MESSAGE_NO_ACTION);
     }
 
     @Test
@@ -47,7 +48,7 @@ public class UndoCommandTest extends TodoListGuiTest {
     @Test
     public void undo_invalidCommand_failure() {
         commandBox.runCommand("undoes");
-        //        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
@@ -60,6 +61,6 @@ public class UndoCommandTest extends TodoListGuiTest {
 
         // confirm the list now contains all previous todos
         assertTrue(todoListPanel.isListMatching(originalList));
-        //        assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
+        assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
 }
