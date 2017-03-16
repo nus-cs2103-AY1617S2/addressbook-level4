@@ -146,8 +146,8 @@ Here are some of the key files in the `Logic` component:
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
-    - CommandResult execute(String commandText) throws CommandException;
-    - ObservableList<ReadOnlyTask> getFilteredPersonList();  
+    CommandResult execute(String commandText) throws CommandException;
+    ObservableList<ReadOnlyTask> getFilteredPersonList();  
     ```  
 - `LogicManager.java`: contains a `class` that implements the operations specified in `Model.java`.
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
@@ -164,9 +164,9 @@ Here are some of the key files in the `Model` component:
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
-    - void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.TaskAlreadyFinishedException;
-    - void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    - void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;  
+    void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.TaskAlreadyFinishedException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;  
     ```  
 - `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
 - `TodoList.java`: contains a `class` that represents the to-do list.
@@ -187,10 +187,10 @@ Here are some of the key files in the `Storage` component:
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
-    - Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
-    - void saveUserPrefs(UserPrefs userPrefs) throws IOException;
-    - Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
-    - void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
+    void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+    Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
+    void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
     ```  
 - `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`.
 - `XmlTodoListStorage`: contains a `class` that implements the R/W operations on **to-do list**. An instance of this class is utilized in `StorageManager`.
