@@ -5,6 +5,7 @@ import seedu.address.model.ReadOnlyToDoApp;
 import seedu.address.model.ToDoApp;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
@@ -16,9 +17,9 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Name("Buy printer"), new Start("today"), new Deadline("tomorrow"),
-                    new Priority(1), new UniqueTagList("shopping")),
+                    new Priority(1), new UniqueTagList("shopping"), new Notes("this is a note")),
                 new Task(new Name("Go to the gym"), new Start(""), new Deadline(""),
-                    new Priority(0), new UniqueTagList("exercise")),
+                    new Priority(0), new UniqueTagList("exercise"), new Notes("")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
