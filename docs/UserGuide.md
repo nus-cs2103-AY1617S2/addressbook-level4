@@ -24,9 +24,8 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`**` Do laundry :
-     adds a task named `John Doe` to Opus.
+   * **`list`** : lists all tasks in the main application window
+   * **`add`**` Do laundry` : adds a task named `Do laundry` to the task manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
