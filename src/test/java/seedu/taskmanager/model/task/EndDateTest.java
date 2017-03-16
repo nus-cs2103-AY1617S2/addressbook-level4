@@ -10,7 +10,6 @@ public class EndDateTest {
     @Test
     public void isValidEndDate() {
         // blank end date
-        assertFalse(EndDate.isValidEndDate("")); // empty string
         assertFalse(EndDate.isValidEndDate(" ")); // spaces only
 
         // missing parts
@@ -27,6 +26,7 @@ public class EndDateTest {
         assertFalse(EndDate.isValidEndDate("01,02,2017")); // invalid separator
 
         // valid end date
+        assertTrue(EndDate.isValidEndDate(""));
         assertTrue(EndDate.isValidEndDate("01/02/2017"));
         assertTrue(EndDate.isValidEndDate("15/12/2019"));
     }

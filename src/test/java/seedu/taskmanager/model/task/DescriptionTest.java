@@ -10,10 +10,10 @@ public class DescriptionTest {
     @Test
     public void isValidDescription() {
         // invalid description
-        assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
 
         // valid description
+        assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription("Banana must be ripe"));
         assertTrue(Description.isValidDescription("-")); // one character
         assertTrue(Description.isValidDescription("Meeting at Leng Inc; "

@@ -11,7 +11,6 @@ public class StartDateTest {
     public void isValidStartDate() {
 
         // blank end date
-        assertFalse(StartDate.isValidStartDate("")); // empty string
         assertFalse(StartDate.isValidStartDate(" ")); // spaces only
 
         // missing parts
@@ -28,6 +27,7 @@ public class StartDateTest {
         assertFalse(StartDate.isValidStartDate("01,02,2017")); // invalid separator
 
         // valid end date
+        assertTrue(StartDate.isValidStartDate(""));
         assertTrue(StartDate.isValidStartDate("01/02/2017"));
         assertTrue(StartDate.isValidStartDate("15/12/2019"));
     }

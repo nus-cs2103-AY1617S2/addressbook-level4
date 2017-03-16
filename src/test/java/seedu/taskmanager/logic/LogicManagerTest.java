@@ -49,7 +49,6 @@ import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.storage.StorageManager;
 
-
 public class LogicManagerTest {
 
     /**
@@ -187,14 +186,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Title 01/03/2017 e/05/03/2017 d/valid, "
-                + "description.butNoStartDatePrefix", expectedMessage);
         assertCommandFailure("add Valid Title s/01/03/2017 05/03/2017 d/valid, "
-                + "description.butNoEndDatePrefix", expectedMessage);
+                + "description.butNoEndDatePrefix", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, "
-                + "description.butNoDescriptionPrefix", expectedMessage);
+                + "description.butNoDescriptionPrefix", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
     }
 
     @Test
