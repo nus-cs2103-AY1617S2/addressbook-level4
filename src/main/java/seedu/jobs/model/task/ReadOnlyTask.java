@@ -33,8 +33,8 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append(" Task: ").append(getName()).append(" From: ").append(getStartTime())
-                .append(" To: ").append(getEndTime()).append(" Status : ").append(isCompleted())
+        builder.append(getName()).append(" Task Name: ").append(getName()).append(" From: ").append(getStartTime())
+                .append(" To: ").append(getEndTime()).append(" Status : ").append((!isCompleted())?"Not Completed" : "Completed")
                 .append(" Description: ").append(getDescription());
         return builder.toString();
     }

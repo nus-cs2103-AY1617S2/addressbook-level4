@@ -1,5 +1,6 @@
 package seedu.jobs.model.task;
 
+import java.util.Optional;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
 /**
@@ -13,14 +14,14 @@ public class Description {
     public static final int DESCRIPTION_LENGTH_CONSTRAINT = 150;
     public final String value;
 
-    public Description(String description) throws IllegalValueException {
-        if (description == null) {
+    public Description(Optional<String> description) throws IllegalValueException {
+        if (!description.isPresent()) {
             this.value = DEFAULT_DESCRIPTION;
         } else {
-            if (!isValidDescription(description)) {
+            if (!isValidDescription(description.get())) {
                 throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINT);
             }
-            this.value = description;
+            this.value = description.get();
         }
     }
 

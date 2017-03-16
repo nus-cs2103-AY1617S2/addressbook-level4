@@ -1,5 +1,7 @@
 package seedu.jobs.model.task;
 
+import java.util.Optional;
+
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
 /**
@@ -24,9 +26,9 @@ public class Name {
      *
      * @throws IllegalValueException if given name string is invalid.
      */
-    public Name(String name) throws IllegalValueException {
-        assert name != null;
-        String trimmedName = name.trim();
+    public Name(Optional<String> name) throws IllegalValueException {
+        assert name.get() != null;
+        String trimmedName = name.get().trim();
         if (!isValidName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }

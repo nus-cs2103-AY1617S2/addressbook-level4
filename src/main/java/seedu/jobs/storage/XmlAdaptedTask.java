@@ -2,6 +2,7 @@ package seedu.jobs.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -64,10 +65,10 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
-        final Time startTime = new Time(this.startTime);
-        final Time endTime = new Time(this.endTime);
-        final Description description = new Description(this.description);
+        final Name name = new Name(Optional.of(this.name));
+        final Time startTime = new Time(Optional.of(this.startTime));
+        final Time endTime = new Time(Optional.of(this.endTime));
+        final Description description = new Description(Optional.of(this.description));
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, startTime, endTime, description, tags);
     }

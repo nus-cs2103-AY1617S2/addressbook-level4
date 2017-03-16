@@ -71,7 +71,7 @@ public class ParserUtil {
      */
     public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+        return name.isPresent() ? Optional.of(new Name(name)) : Optional.empty();
     }
 
     /**
@@ -79,7 +79,7 @@ public class ParserUtil {
      */
     public static Optional<Time> parseStart(Optional<String> startTime) throws IllegalValueException {
         assert startTime != null;
-        return startTime.isPresent() ? Optional.of(new Time(startTime.get())) : Optional.empty();
+        return startTime.isPresent() ? Optional.of(new Time(startTime)) : Optional.empty();
     }
 
     /**
@@ -87,7 +87,7 @@ public class ParserUtil {
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
-        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
+        return description.isPresent() ? Optional.of(new Description(description)) : Optional.empty();
     }
 
     /**
@@ -95,7 +95,7 @@ public class ParserUtil {
      */
     public static Optional<Time> parseEnd(Optional<String> endTime) throws IllegalValueException {
         assert endTime != null;
-        return endTime.isPresent() ? Optional.of(new Time(endTime.get())) : Optional.empty();
+        return endTime.isPresent() ? Optional.of(new Time(endTime)) : Optional.empty();
     }
 
     /**

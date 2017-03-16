@@ -1,6 +1,7 @@
 package seedu.jobs.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
@@ -25,7 +26,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " name/tutorial start/13/01/17 11:00 end/13/01/17 12:00 recur/7 desc/\"Tutorial of CS2103\" tag/CS2103";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task added: \n %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in JOBS";
 
     private final Task toAdd;
@@ -36,7 +37,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String starttime, String endtime, String description, Set<String> tags)
+    public AddCommand(Optional<String> name, Optional<String> starttime, Optional<String> endtime, Optional<String> description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {

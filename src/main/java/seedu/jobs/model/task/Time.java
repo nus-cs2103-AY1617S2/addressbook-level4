@@ -1,5 +1,7 @@
 package seedu.jobs.model.task;
 
+import java.util.Optional;
+
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
 /**
@@ -21,14 +23,14 @@ public class Time {
      * @throws IllegalValueException
      *             if the input is invalid
      */
-    public Time(String time) throws IllegalValueException {
-        if (time == null) {
+    public Time(Optional<String> startTime) throws IllegalValueException {
+        if (!startTime.isPresent()) {
             this.value = DEFAULT_TIME;
         } else {
-            if (!isValidTime(time)) {
+            if (!isValidTime(startTime.get())) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINT);
             }
-            this.value = time;
+            this.value = startTime.get();
         }
     }
 
