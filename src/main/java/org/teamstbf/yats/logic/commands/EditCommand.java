@@ -154,22 +154,6 @@ public class EditCommand extends Command {
 			this.startTime = schedule;
 		}
 
-		public Optional<Date> getDeadline() {
-			return deadline;
-		}
-
-		public Optional<Description> getDescription() {
-			return description;
-		}
-
-		public Optional<Schedule> getEndTime() {
-			return endTime;
-		}
-
-		public Optional<Periodic> getPeriodic() {
-			return periodic;
-		}
-
 		public Optional<Schedule> getStartTime() {
 			return startTime;
 		}
@@ -177,6 +161,37 @@ public class EditCommand extends Command {
 		public void setEndTime(Optional<Schedule> schedule) {
 			assert schedule != null;
 			this.endTime = schedule;
+		}
+
+		public Optional<Schedule> getEndTime() {
+			return endTime;
+		}
+
+		public void setPeriodic(Optional<Periodic> periodic) {
+			assert periodic != null;
+			this.periodic = periodic;
+		}
+
+		public Optional<Periodic> getPeriodic() {
+			return periodic;
+		}
+
+		public void setDescription(Optional<Description> description) {
+			assert description != null;
+			this.description = description;
+		}
+
+		public Optional<Description> getDescription() {
+			return description;
+		}
+
+		public Optional<Date> getDeadline() {
+			return deadline;
+		}
+
+		public void setTags(Optional<UniqueTagList> tags) {
+			assert tags != null;
+			this.tags = tags;
 		}
 
 		public Optional<UniqueTagList> getTags() {
