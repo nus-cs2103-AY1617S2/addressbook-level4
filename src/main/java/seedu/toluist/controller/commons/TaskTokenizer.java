@@ -1,6 +1,7 @@
 package seedu.toluist.controller.commons;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,9 +9,6 @@ import java.util.regex.Pattern;
  * Tokenize task into index, description, start date and/or end date.
  */
 public class TaskTokenizer {
-    public static final int START_INDEX = 0;
-    public static final int INVALID_INDEX = -1;
-
     public static final String TASK_VIEW_INDEX = "index";
     public static final String TASK_DESCRIPTION = "description";
     public static final String TASK_START_DATE_KEYWORD = "startdate/";
@@ -27,26 +25,15 @@ public class TaskTokenizer {
         }
         if (hasDescription) {
             String description = matcher.group(TASK_DESCRIPTION);
-            // TODO: Allow any ordering to still work, by extracting tokens more generally.
-            int startDateIndex = description.lastIndexOf(TASK_START_DATE_KEYWORD);
-            int endDateIndex = description.lastIndexOf(TASK_END_DATE_KEYWORD);
-            String startDate = null;
-            String endDate = null;
-            if (endDateIndex != INVALID_INDEX) {
-                // This is a task with deadline
-                endDate = description.substring(endDateIndex + TASK_END_DATE_KEYWORD.length());
-                description = description.substring(START_INDEX, endDateIndex);
-                if (startDateIndex != INVALID_INDEX) {
-                    // This is an event
-                    startDate = description.substring(startDateIndex + TASK_START_DATE_KEYWORD.length());
-                    description = description.substring(START_INDEX, startDateIndex);
-                }
-            } // Else this is a floating task
-            // Note: We are not dealing with tasks that have only a start date.
-
-            tokens.put(TASK_DESCRIPTION, description);
-            tokens.put(TASK_START_DATE_KEYWORD, startDate);
-            tokens.put(TASK_END_DATE_KEYWORD, endDate);
+            HashMap<String, String> descriptionTokens = KeywordTokenizer.tokenize(
+                                                            description,
+                                                            TASK_DESCRIPTION,
+                                                            TASK_START_DATE_KEYWORD,
+                                                            TASK_END_DATE_KEYWORD);
+            tokens.putAll(descriptionTokens);
+        }
+        for (Map.Entry<String, String> token : tokens.entrySet()) {
+            System.out.println(token.getKey() + ": " + token.getValue());
         }
         return tokens;
     }

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexTokenizer;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
@@ -67,7 +68,7 @@ public class UpdateTaskController extends Controller {
 
     private CommandResult update(Task task, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (!description.isEmpty()) {
+        if (StringUtil.isPresent(description)) {
             task.setDescription(description);
         }
         if (endDateTime != null) {

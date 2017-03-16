@@ -61,10 +61,10 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         command = "update " + eventIndex + " " + newerTaskDescription + " enddate/" + newerEndDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerEndDate);
-        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
-        assertFalse(isTaskShown(task4));
+        assertTrue(isTaskShown(task4));
     }
 
     @Test
@@ -106,9 +106,9 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
                 " startdate/" + newerStartDate + " enddate/" + newerEndDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerStartDate, newerEndDate);
-        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
-        assertFalse(isTaskShown(task4));
+        assertTrue(isTaskShown(task4));
     }
 }

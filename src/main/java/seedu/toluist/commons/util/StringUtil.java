@@ -8,6 +8,10 @@ import java.io.StringWriter;
  */
 public class StringUtil {
 
+    public static boolean isPresent(String string) {
+        return string != null && !string.isEmpty();
+    }
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
