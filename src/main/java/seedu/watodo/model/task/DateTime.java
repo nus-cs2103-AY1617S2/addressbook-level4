@@ -15,7 +15,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
-    public static final Parser dateTimeParser = new Parser(TimeZone.getTimeZone("GMT"));
+    public static final Parser dateTimeParser = new Parser(TimeZone.getDefault());
     
     public final Date dateTime;
     
