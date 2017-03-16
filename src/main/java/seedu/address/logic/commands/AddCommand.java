@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
             + "Parameters: NAME d/DATE e/EMAIL g/GROUP  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + "study english d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
+            + " study english d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the todo list";
