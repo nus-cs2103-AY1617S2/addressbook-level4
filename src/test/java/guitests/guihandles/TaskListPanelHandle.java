@@ -101,6 +101,12 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        System.out.println("name is: " + name);
+        System.out.println("size is: " + getListView().getItems().size());
+        for(ReadOnlyTask task: getListView().getItems()) {
+            System.out.println(task.getName().toString());
+        }
+        
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                                                     .filter(p -> p.getName().fullName.equals(name))
                                                     .findAny();

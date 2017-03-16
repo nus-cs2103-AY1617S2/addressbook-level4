@@ -74,10 +74,10 @@ public class TypicalTestTasks {
                     .withDescription("prepare to get scolded")
                     .withTags("work")
                     .build();
-            task2 = new TaskBuilder().withName("do peer evaluation")
+            task2 = new TaskBuilder().withName("do boss evaluation")
                     .withStartDate("").withEndDate("16 july 2018 10:00")
-                    .withDescription("grade everyone 10/10")
-                    .withTags("school")
+                    .withDescription("grade him 10/10")
+                    .withTags("work", "school")
                     .build();
             task3 = new TaskBuilder().withName("reply boss email")
                     .withStartDate("").withEndDate("")
