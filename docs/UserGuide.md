@@ -315,7 +315,7 @@ Examples:
    Mark a task named "exam" in the task list as "done".
  
 ### Finding for tasks
-Find tasks with details containing any of the input keywords. Details include name, priority, description, tags, start date & time and end date & time.
+Find tasks with details matching any of the input keywords. Details include name, priority, description, tags, start date & time and end date & time.
 
 Format: `find [KEYWORDS...]`
 
@@ -327,23 +327,30 @@ Format: `find [KEYWORDS...]`
 > * Mutiple keywords of varying types are allowed. 
 > * A task is match so long as **ANY** of its details (i.e., name, priority level, description etc.) contains the keyword. 
 
-| KEYWORD Type | Result  | Example |
+| KEYWORD format | Result  | Example |
 |:------------:|---------|---------|
-| NAME | Find all tasks whoose name matches the input. | `find exam` |
-| PRIORITY | Find a task whoose priority matches the input. | `find \p1` |
-| DESCRIPTION | Find a task whoose description matches the input. | `find \dSR1` |
-| TAG | Find all tasks whoose tag matches the input. | `find \tCS2010` |
-| MM-DD-YYYY | Find all tasks whoose starts date or end date matches the input. | `find 10-22-2017` |
-| \mMM-YYYY | Find all tasks whoose starts or ends on a particular month and year that matches the input. | `find \m10-2017` |
-| \yYYYY | Find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017` |
-| \hHHMM | Find all tasks whoose starts time or end time matches the input. | `find \h1500` 
+| `NAME` | Find all tasks whose name matches the input. | `find exam` |
+| `\pPRIORITY` | Find a task whose priority level matches the input. | `find \p1` |
+| `\dDESCRIPTION` | Find a task whose description matches the input. | `find \dSR1` |
+| `\tTAG` | Find all tasks whose tag matches the input. | `find \tCS2010` |
+| `MM-DD-YYYY` | Find all tasks whose start date or end date matches the input. | `find 10-22-2017` |
+| `\mMM-YYYY` | Find all tasks whose start date or end date matches a particular month and year. | `find \m10-2017` |
+| `\yYYYY` | Find all tasks whose start date or end date matches a particular year. |  `find \y2017` |
+| `\hHHMM` | Find all tasks whose start time or end time matches the input. | `find \h1500` |
 
 Advanced examples: 
 * `find exam \p1 \dSR1`<br>
-   Find all tasks whoose name contains "exam" or priority contains "1" or description contains "SR1".
+   Find all tasks whose 
+   * 1) name matches "exam" or 
+   * 2) priority matches "1" or
+   * 3) description matches "SR1".
 * `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
-   Find all tasks whoose name contains "exam" or priority contains "1" or description contains "SR1" or tag contains "2010" or (starts 
-   or ends on October 2017") or (start time or end time contains "1500").
+   Find all tasks whose 
+   * 1) name matches "exam" or
+   * 2) priority matches "1" or 
+   * 3) description matches "SR1" or 
+   * 4) tag matches "2010" or 
+   * 5) start date or end date matches October 2017 or 6) start time or end time matches 1500.
    
 ### Clearing of "done" tasks
 Clears all "done" tasks. <br>
@@ -431,9 +438,14 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 |  | `view INDEX` | View a specified task by index. |
 | [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done." |
 | [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the input keywords. |
-|  | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end. |
-|  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end. |
-|  | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end.  |
+|  | `find NAME` | Find all tasks whose name matches the input. | `find exam` |
+|  | `find \pPRIORITY` | Find a task whose priority level matches the input. | `find \p1` |
+|  | `find \dDESCRIPTION` | Find a task whose description matches the input. | `find \dSR1` |
+|  | `find \tTAG` | Find all tasks whose tag matches the input. | `find \tCS2010` |
+|  | `find MM-DD-YYYY` | Find all tasks whose start date or end date matches the input. | `find 10-22-2017` |
+|  | `find \mMM-YYYY` | Find all tasks whose start date or end date matches a particular month and year. | `find \m10-2017` |
+|  | `find \yYYYY` | Find all tasks whose start date or end date matches a particular year. |  `find \y2017` |
+|  | `find \hHHMM` | Find all tasks whose start time or end time matches the input. | `find \h1500` |
 | [clear](#clearing-of-done-tasks) | `clear` | Clear all "done" tasks. |
 | [toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar. |
 | [undo](#undo-most-recent-command) | `undo` | Undo the most recent command. |
@@ -442,4 +454,3 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 |  | `cd` | Show current save directory. |
 |  | `reset` | Reset saved data. |
 | [exit](#exiting-the-application) | `exit` | Exits the application. |
-
