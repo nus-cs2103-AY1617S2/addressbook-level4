@@ -22,8 +22,8 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `opus.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
@@ -50,26 +50,28 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Help is shown only if you enter `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a person to the address book<br>
-Format: `add NAME [n/NOTES] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Adds a person to the task manager<br>
+Format: `add NAME [n/NOTES] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 
-> Task can have a deadline
-> Task can have a priority ranking from 1 - 5
-> Task can have any number of tags (including 0)
+> * Task can have notes
+> * Task can have a deadline
+> * Task can have a a status
+> * Task can have a priority ranking from 1 - 3
+> * Task can have any number of tags (including 0)
 
 Examples:
 
 * `add Do laundry`
-* `add Finish v0.0 documentation t/CS2103T`
+* `add Finish v0.0 documentation n/Urgent s/Incomplete d/28/02/2017 p/1 t/CS2103T`
 
 ### 2.3. Sort tasks : `sort`
 
-Sorts the list of task currently being shown according to the parameters.<br>
-Format: `sort [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Sorts the list of tasks currently being shown according to the parameters.<br>
+Format: `sort [s/STATUS] [d/DEADLINE] [p/PRIORITY]...`
 
 ### 2.4. Editing a task : `edit`
 
@@ -87,7 +89,7 @@ Format: `edit INDEX [NAME] [n/NOTES] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 Examples:
 
 * `edit 1 Finish tutorial exercises`<br>
-  Edits the name of the 1st task to `Finish tutorial exercises`.
+Edits the name of the 1st task to `Finish tutorial exercises`.
 
 ### 2.5. Mark task
 
@@ -117,30 +119,21 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Set deadline for task
-
-Sets a new deadline for task.<br>
-Format: `schedule INDEX DEADLINE`
-
-> * Updates the task deadline at the specified `INDEX` as `DEADLINE`.
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-
-### 2.8. Undo
+### 2.7. Undo
 
 Undo the latest command.<br>
 Format: `undo`
 
 > * Reverts the change done by the command that was run previously.
 
-### 2.9. Redo
+### 2.8. Redo
 
 Reverts the previous undo.<br>
 Format: `redo`
 
 > * Reverts the change done by the previous undo.
 
-### 2.10. Find
+### 2.9. Find
 
 Displays a list of tasks based on keywords and/or tags.<br>
 Format: `find [NAME] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
@@ -148,7 +141,7 @@ Format: `find [NAME] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
 
-### 2.11. Autocomplete
+### 2.10. Autocomplete
 
 Autocomplete the user's command on the CLI.
 
@@ -166,8 +159,8 @@ Autocomplete the user's command on the CLI.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Add**  `add NAME [n/NOTES] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...` <br>
+  e.g. `add Finish v0.0 documentation n/Urgent s/Incomplete d/28/02/2017 p/1 t/CS2103`
 
 * **Clear** : `clear`
 
@@ -175,13 +168,13 @@ Autocomplete the user's command on the CLI.
    e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+  e.g. `find Wash dishes`
 
 * **List** : `list` <br>
-  e.g.
+  e.g. 'list'
 
 * **Help** : `help` <br>
-  e.g.
+  e.g. 'help'
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
