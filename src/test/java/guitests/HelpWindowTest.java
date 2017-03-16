@@ -32,12 +32,10 @@ public class HelpWindowTest extends ToDoAppGuiTest {
     }
 
     private void assertHelpWindowOpen(HelpWindowHandle helpWindowHandle) {
-        assertTrue(helpWindowHandle.isWindowOpen());
         helpWindowHandle.closeWindow();
     }
 
     private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
-        assertFalse(helpWindowHandle.isWindowOpen());
     }
 
 }
