@@ -16,8 +16,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.SelectCommand;
+
 
 /**
  * Parses user input.
@@ -73,7 +74,7 @@ public class Parser {
             return new HelpCommand();
 
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(arguments);
+            return new SaveCommand(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
