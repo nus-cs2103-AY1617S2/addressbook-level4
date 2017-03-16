@@ -10,13 +10,9 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class Description {
 
     public static final String MESSAGE_TASK_CONSTRAINTS =
-            "Task description can take any values, and it should not be blank";
+            "Task description can take any values, and it can be blank";
 
-    /*
-     * The first character of the task must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "(^$)|([^\\s].*)";
 
     public final String value;
 
