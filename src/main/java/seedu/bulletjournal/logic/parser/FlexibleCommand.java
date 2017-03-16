@@ -40,8 +40,9 @@ public class FlexibleCommand {
     public boolean isValidCommand() {
         for (String commandGroup : commandGroups) {
             for (String command : commandGroup.split(" ")) {
-                if (commandFromUser.equals(command))
+                if (commandFromUser.equals(command)) {
                     return true;
+                }
             }
         }
         return false;
