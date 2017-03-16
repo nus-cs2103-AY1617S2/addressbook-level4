@@ -49,7 +49,7 @@ public class SampleDataUtil {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {
-                sampleAB.addCategory(sampleTask);
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {

@@ -1,5 +1,6 @@
 package savvytodo.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -10,10 +11,18 @@ import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.commons.events.model.TaskManagerChangedEvent;
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.commons.util.StringUtil;
+import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.TaskNotFoundException;
+import savvytodo.model.undoredo.UndoAddCommand;
+import savvytodo.model.undoredo.UndoClearCommand;
+import savvytodo.model.undoredo.UndoCommand;
+import savvytodo.model.undoredo.UndoDeleteCommand;
+import savvytodo.model.undoredo.UndoEditCommand;
+import savvytodo.model.undoredo.exceptions.RedoFailureException;
+import savvytodo.model.undoredo.exceptions.UndoFailureException;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -24,6 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final UndoRedoManager undoRedoManager;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -35,6 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
+        this.undoRedoManager = new UndoRedoManager();
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
@@ -44,6 +55,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        UndoClearCommand undoClear = new UndoClearCommand(taskManager, newData);
+        undoRedoManager.storeUndoCommand(undoClear);
+        undoRedoManager.resetRedo();
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -61,12 +75,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
+        UndoDeleteCommand undoDelete = new UndoDeleteCommand(target);
+        undoRedoManager.storeUndoCommand(undoDelete);
+        undoRedoManager.resetRedo();
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskManager.addCategory(task);
+        taskManager.addTask(task);
+        UndoAddCommand undoAdd = new UndoAddCommand(task);
+        undoRedoManager.storeUndoCommand(undoAdd);
+        undoRedoManager.resetRedo();
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -77,6 +97,10 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        Task originalTask = new Task(filteredTasks.get(filteredTaskListIndex));
+        UndoEditCommand undoEdit = new UndoEditCommand(filteredTaskListIndex, originalTask, editedTask);
+        undoRedoManager.storeUndoCommand(undoEdit);
+        undoRedoManager.resetRedo();
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
@@ -154,4 +178,31 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
+    public void undo() throws UndoFailureException {
+        try {
+            UndoCommand undo = undoRedoManager.getUndoCommand();
+            undo.setTaskManager(taskManager);
+            undo.execute();
+            indicateTaskManagerChanged();
+        } catch (EmptyStackException e) {
+            throw new UndoFailureException(e.getMessage());
+        } catch (CommandException e) {
+            throw new UndoFailureException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void redo() throws RedoFailureException {
+        try {
+            UndoCommand redo = undoRedoManager.getRedoCommand();
+            redo.setTaskManager(taskManager);
+            redo.execute();
+            indicateTaskManagerChanged();
+        } catch (EmptyStackException e) {
+            throw new RedoFailureException(e.getMessage());
+        } catch (CommandException e) {
+            throw new RedoFailureException(e.getMessage());
+        }
+    }
 }
