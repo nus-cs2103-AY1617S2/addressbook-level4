@@ -8,8 +8,8 @@
   * [Adding a task](#adding-a-task)
     * [Adding a floating task](#adding-a-floating-task)
     * [Adding a pending task](#adding-a-pending-task)
-       * [Adding a pending task with START DATE & TIME only](#adding-a-pending-task-with-start-date--time-only)
-       * [Adding a pending task with END DATE & TIME only](#adding-a-pending-task-with-end-date--time-only)
+       * [Adding a pending task with START DATE & TIME](#adding-a-pending-task-with-start-date--time)
+       * [Adding a pending task with END DATE & TIME](#adding-a-pending-task-with-end-date--time)
        * [Adding a pending task with both START DATE & TIME and END DATE & TIME](#adding-a-pending-task-with-both-start-date--time-and-end-date--time)
     * [Adding a recurring task](#adding-a-recurring-task)
    * [Editing a task](#editing-a-task)
@@ -28,9 +28,10 @@
    * [Toggle Google Calendar](#toggle-google-calendar)
    * [Undo most recent command](#undo-most-recent-command)
    * [Redo most recent undo](#redo-most-recent-undo)
-   * [Reset saved data](#reset-saved-data)
-   * [Save](#saving-the-data)
+   * [Save](#save)
+     * [Saving the data](#saving-the-data)
      * [Changing the save location](#changing-the-save-location)
+     * [Reset saved data](#reset-saved-data)
    * [Exiting the application](#exiting-the-application)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -127,7 +128,7 @@ Examples:
    Add a priority 1 floating task named "exam" with description "SR1" and tag "CS2010" to the task list.
 
 #### Adding a pending task
-##### Adding a pending task with START DATE & TIME only
+##### Adding a pending task with START DATE & TIME 
 
 Adds a pending task with only start date & time to the task list. <br>
 
@@ -141,11 +142,11 @@ Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]`
 
 Examples:
 * `add exam on 10-22-2017` <br> 
-   Add a pending task named "exam" on 22 October 2017, current time to the task list.
+   Add a pending task named "exam" on 22 October 2017, current time, to the task list.
 * `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" on 22 October 2017, 1500 with description "SR1" and tag "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" on 22 October 2017 1500 with attached description "SR1" and tag "CS2010" to the task list.
  
-##### Adding a pending task with END DATE & TIME only
+##### Adding a pending task with END DATE & TIME 
 
 Adds a pending task with only end date & time to the task list. <br>
 
@@ -159,10 +160,10 @@ Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]`
 
 Examples: 
 * `add exam by 10-22-2017` <br>
-   Add a pending task named "exam" that starts now and end by 22 October 2017, 2359 to the task list.
+   Add a pending task named "exam" that starts from the current date and time to 22 October 2017 2359 to the task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts now and end by 22 October 2017, 1500 with description "SR1" and tag "CS2010" 
-   to the task list.
+   Add a priority 1 pending task named "exam" that starts from the current date and time to 22 October 2017 1500 with attached 
+   description "SR1" and tag "CS2010" to the task list.
   
 ##### Adding a pending task with both START DATE & TIME and END DATE & TIME 
 
@@ -179,10 +180,10 @@ Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTIO
 
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016` <br>
-   Add a pending task named "exam" that starts from 22 October 2017, current time to 22 October 2017, 2359 to the task list.
+   Add a pending task named "exam" that starts from 22 October 2017, current time, to 22 October 2017, 2359 to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 22 October 2017, 1300 to 22 October 2017, 1500 with description "SR1" and 
-   tag "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with attached description 
+   "SR1" and tag "CS2010" to the task list.
   
 #### Adding a recurring task 
 
@@ -204,11 +205,11 @@ Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time and recurs everyday with description "SR1" and tag  
+   Add a priority 1 pending task named "exam" that starts at the current time everyday with attached description "SR1" and tag  
    "CS2010" to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts on the 22nd October 1300 to 22nd October 1500 that recurs every year with 
-   description "SR1" and tag "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" that starts from 22nd October 1300 to 22nd October 1500 every year with 
+   attached description "SR1" and tag "CS2010" to the task list.
 
 ### Editing a task
 
@@ -228,11 +229,11 @@ Format: `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every D
 
 Examples:
 * `Edit 1 on 10-22-2017 1500 p/1 d/SR1`<br>
-   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017, 1500 with description 
-   "SR1".
+   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 1500 with attached 
+   description "SR1".
 * `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Edit the first task in the task list such that it starts on the 22nd October 1300 to 22nd October 1500 that recurs every year with 
-   description "SR1" and append tag "CS2010" to "exam".
+   Edit the first task in the task list such that it starts from 22nd October 1300 to 22nd October 1500 every year with 
+   attached description "SR1" and append tag "CS2010" to "exam".
 
 ### Deleting a task
 
@@ -297,7 +298,7 @@ Examples:
    Show the first task in the task list. 
    
 ### Marking a task as "done"
-Mark an existing task as "done" in iManager. A "done" task gets transferred to the "done" list. 
+Mark an existing task as "done" in iManager. Marked tasks will be transferred to the "done" list. 
 
 Format: `done INDEX|NAME`
 
@@ -316,17 +317,6 @@ Examples:
 ### Finding for tasks
 Find tasks with details containing any of the given keywords. Details include name, priority, description, tags, start date & time and end date & time.
 
-| Keyword Type | Result  | Example |
-|:------------:|---------|---------|
-| NAME | Find all tasks whoose name matches the input. | `find exam` |
-| PRIORITY | Find a task whoose priority matches the input. | `find \p1` |
-| DESCRIPTION | Find a task whoose description matches the input. | `find \dSR1` |
-| TAG | Find all tasks whoose tag matches the input. | `find \tCS2010` |
-| MM-DD-YYYY | Find all tasks whoose starts date or end date matches the input. | `find 10-22-2017` |
-| \mMM-YYYY | Find all tasks whoose starts or ends on a particular month and year that matches the input. | `find \m10-2017` |
-| \yYYYY | Find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017` |
-| \hHHMM | Find all tasks whoose starts time or end time matches the input. | `find \h1500` |
-
 Format: `find [KEYWORDS...]`
 
 > * Keywords are case insensitive. 
@@ -336,6 +326,17 @@ Format: `find [KEYWORDS...]`
 > * TIME format is HHMM (24-hour format) e.g. 1300.
 > * Mutiple keywords of varying types is allowed. 
 > * A task is match so long as **ANY** of its detail (i.e., name, priority level, description etc.) contains the keyword. 
+
+| Keyword Type | Result  | Example |
+|:------------:|---------|---------|
+| NAME | Find all tasks whoose name matches the input. | `find exam` |
+| PRIORITY | Find a task whoose priority matches the input. | `find \p1` |
+| DESCRIPTION | Find a task whoose description matches the input. | `find \dSR1` |
+| TAG | Find all tasks whoose tag matches the input. | `find \tCS2010` |
+| MM-DD-YYYY | Find all tasks whoose starts date or end date matches the input. | `find 10-22-2017` |
+| \mMM-YYYY | Find all tasks whoose starts or ends on a particular month and year that matches the input. | `find \m10-2017` |
+| \yYYYY | Find all tasks whoose starts or ends on a particular year that matches the input. |  `find \y2017` |
+| \hHHMM | Find all tasks whoose starts time or end time matches the input. | `find \h1500` 
 
 Advanced examples: 
 * `find exam \p1 \dSR1`<br>
@@ -352,7 +353,7 @@ Format: `clear`
 > * Cleared tasks in the current session can be restored using the [undo](#undo-most-recent-command) command.
 
 ### Toggle Google Calendar
-Toggle the view of Google Calendar. The tasks in iManager will be synchronised with your Google Calendar. You cannot make any modification through the calendar.
+Toggle the view of Google Calendar. The tasks in iManager will be synchronised with your Google Calendar. **No modification** can be made through the calendar.
 
 Format: `toggle`
 
@@ -370,26 +371,26 @@ Format: `redo`
 
 > * `redo` **ONLY** support add, edit, delete, done, clear and undo command. 
 
-### Reset saved data
-Reset the applcation data. iManager can completely erase the saved data and start with a "clean" state. Application will be saved in the default save directory under project root folder. When the application is reset, it **CANNOT** be restored.
-
-Format: `reset`
-
 ### Save
 #### Saving the data
-The application data is saved to the hard disk automatically after any command that changes the data. There is no need to save manually.
+iManager automatically save data to the hard disk whenever a command modifies the data. There is no need to save manually.
 
 #### Changing the save location
-Change the save directory. The application data is saved to a file named "iManager.txt" under the project root folder by default or when the file path is yet specified. You can change the location by specifying the file path as a command argument. A new save file will be created automatically if the directory given is valid.
+Change the save directory. The application data is save to a file named "iManager.txt" under the project root folder by default or when the file path is yet specified. You can change the location by specifying the file path as a command argument. iManager automatically creates a new save file if the input directory is valid.
 
 Format: `saveto FILEPATH`
 
-> * FILEPATH must be valid
-> * `cd` will tell you the current location of the save data. 
+> * FILEPATH must be valid.
+> * `cd` will tell you the current location of the saved data. 
 
 Examples:
-* `cd`
 * `saveto C:\Users\Computing\Desktop\CS2103`
+* `cd`
+
+#### Reset saved data
+Reset the application data. Saved data will be completely erase; iManager will start with a "clean" state. The default save directory will be use. Erased data **CANNOT** be restored.
+
+Format: `reset`
 
 ### Exiting the application
 Exits the application.
@@ -398,13 +399,13 @@ Format : `exit`
 
 ## FAQ
 
-Q: I can't undo my previous commands after reopening iManager <br>
+Q: I can't undo my previous commands after reopening iManager. <br>
 A: Like most task managers out there, iManager does not save a list of previous commands upon exiting.
 
 Q: Is it possible to set my storage path to a portable drive and use it on a different computer? <br>
-A: Yes! Just use the `saveto` command and choose the specified path of the portable drive.
+A: Yes! Just use the [saveto](#changing-the-save-location) command and choose the specified path of the portable drive.
 
-Q: The iManager is not showing everything that I have added upon booting up?<br>
+Q: The iManager is not showing everything that I have added upon booting up. <br>
 A: Our iManager only shows today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks](#viewing-tasks). 
 
 
@@ -417,7 +418,7 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 | [add](#adding-a-task) | `add NAME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a floating task to the task list. |
 |  | `add NAME at START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only start date & time to the task list. |
 |  | `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with only end date & time to the task list. |
-|  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with start date & time and end date & time to the task list. |
+|  | `add NAME from END_DATETIME to START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a pending task with both start date & time and end date & time to the task list. |
 |  | `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Adds a recurring task that spans over a period of time to the task list. |
 | [edit](#editing-a-task) | `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG...]` | Edit a task with the new parameters. |
 | [del](#deleting-a-task) | `del INDEX|NAME|TAG` | Delete a task from the task list. |
@@ -437,8 +438,8 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 | [toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar. |
 | [undo](#undo-most-recent-command) | `undo` | Undo the most recent command. |
 | [redo](#redo-most-recent-undo) | `redo` | Redo the most recent undo. |
-| [reset](#reset-saved-data) | `reset` | Reset saved data. |
 | [saveto](#save) | `saveto PATH` | Change the save directory. |
 |  | `cd` | Show current save directory. |
+|  | `reset` | Reset saved data. |
 | [exit](#exiting-the-application) | `exit` | Exits the application. |
 
