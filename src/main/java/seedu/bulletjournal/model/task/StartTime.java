@@ -4,7 +4,7 @@ package seedu.bulletjournal.model.task;
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 
 /**
- * Address morphed into task details
+ * Address morphed into task start time
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
