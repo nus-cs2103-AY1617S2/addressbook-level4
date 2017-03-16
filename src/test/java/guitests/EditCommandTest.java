@@ -93,6 +93,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
 
+
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Deadline.MESSAGE_PHONE_CONSTRAINTS);
 
@@ -104,6 +105,20 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        //Flexible commands of edit are valid but values are invalid
+        commandBox.runCommand("edits 1 *&");
+        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+
+        commandBox.runCommand("e 1 *&");
+        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+
+        commandBox.runCommand("change 1 *&");
+        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+
+        commandBox.runCommand("changes 1 *&");
+        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+
     }
 
     @Test
