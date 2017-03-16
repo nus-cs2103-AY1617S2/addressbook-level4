@@ -1,10 +1,12 @@
 package savvytodo.logic.parser;
 
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static savvytodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_RECURRENCE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -14,7 +16,6 @@ import java.util.Optional;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.Command;
 import savvytodo.logic.commands.EditCommand;
-import savvytodo.logic.commands.EditCommand.EditTaskDescriptor;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.model.category.UniqueCategoryList;
 
@@ -29,8 +30,8 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DESCRIPTION, PREFIX_ADDRESS, PREFIX_CATEGORY);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DATE_TIME, PREFIX_RECURRENCE,
+                PREFIX_DESCRIPTION, PREFIX_LOCATION, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -39,23 +40,25 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        CommandTaskDescriptor cmdTaskDescriptor = new CommandTaskDescriptor();
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
-            editTaskDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editTaskDescriptor.setCategories(
+            cmdTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            cmdTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            cmdTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            cmdTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+            cmdTaskDescriptor.setDateTime(ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_DATE_TIME)));
+            cmdTaskDescriptor.setRecurrence(ParserUtil.parseRecurrence(argsTokenizer.getValue(PREFIX_RECURRENCE)));
+            cmdTaskDescriptor.setCategories(
                     parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
+        if (!cmdTaskDescriptor.isAnyFieldPresent()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(index.get(), cmdTaskDescriptor);
     }
 
     /**

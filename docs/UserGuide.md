@@ -39,7 +39,6 @@ By : `Team F12-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 
 ## 2. Features
-[//]: # (@@author jingloon,yeejfe)
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
@@ -54,9 +53,8 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ### 2.2. Adding a task: `add`
-[//]: # (@@author yeejfe)
 Adds a task to the Savvy To-Do<br>
-Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+Format: `add TASK_NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 > Parameters | Description
 > -------- | :--------
@@ -66,7 +64,7 @@ Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVE
 > LOCATION | `Optional` Specifies the location where the task happens.
 > PRIORITY_LEVEL | `Optional` Specifies the priority level of the task.<br>`Accepts` values `low`, `medium`, `high`<br>`Defaults` to `medium`
 > RECURRING_TYPE | `Optional` Specifies the recurring type of the task.<br>`Accepts` values `none`, `daily`, `weekly`, `monthly`, `yearly`<br>`Defaults` to `none`
-> NUMBER_OF_RECURRENCE | `Optional` Specifies the number of times the task recurrs. <br>`Defaults` to `1`<br>`Ignored` if RECURRING_TYPE is `none`
+> NUMBER_OF_RECURRENCE | `Optional` Specifies the number of times the task recurs. <br>`Defaults` to `0`<br>`Ignored` if RECURRING_TYPE is `none`
 > CATEGORY | `Optional` Specifies a custom category for the task. This can be used for keeping track of similar tasks.
 > DESCRIPTION | `Optional` Describes the task.
 
@@ -75,7 +73,7 @@ Format: `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVE
 > If only the DATE is specified, the TIME defaults to starting at 12am or ending at 11:59pm.<br>If only the TIME is specified, the DATE defaults to today.<br><br>If only `START_DATE` is supplied, the task will be a 1-day event starting from the specified `START_DATE` and ending on the same day at 11:59pm.<br>If only `END_DATE` is supplied, the task will start today at 12am.<br><br>The date and time can be entered in a formal format like <i>17-03-2016</i>, or a natural format like <i>next wednesday, 2pm</i>. The formal format follows the system's settings for whether <i>mm-dd-yyyy</i> or <i>dd-mm-yyyy</i> is used.
 
 Examples:
-* `add Project Meeting s/05-10-2016 2pm e/6pm r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
+* `add Project Meeting dt/05/10/2017 1400 = 06/10/2017 1800 r/daily n/2 c/CS2103 d/Discuss about roles and milestones` <br>
   Add task named, Project Meeting, under CS2103 category. The task is schedule to take place on 5th and 6th of October 2016 from 2pm to 6pm each day.
 * `add NUSSU Leadership Camp s/05-10-2016 2pm e/08-10-2016 6pm c/NUSSU`
   Add task named, NUSSU Leadership Camp, under NUSSU category. The 4 day 3 night is schedule to take place from 5th October, 2pm to 8th of October 2016, 6pm.
@@ -90,7 +88,7 @@ Format: `list`
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the Savvy To-Do. <br>
-Format: `edit INDEX [t/TASK_NAME] [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+Format: `edit INDEX [t/TASK_NAME] [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -184,9 +182,9 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Add**  `add TASK_NAME [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+* **Add**  `add TASK_NAME [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
-* **Edit**  `edit INDEX [t/TASK_NAME] [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE] [n/NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
+* **Edit**  `edit INDEX [TASK_NAME] [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] [r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]`
 
 * **Clear** : `clear`
 
@@ -199,9 +197,6 @@ There is no need to save manually.
 * **Help** : `help` <br>
 
 * **Select** : `select INDEX` <br>
-
-
-[//]: # (@@author yeejfe)
 
 ## 5. Keyboard Shortcuts
 

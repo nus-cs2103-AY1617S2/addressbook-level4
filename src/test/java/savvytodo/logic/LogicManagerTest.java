@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,6 +25,7 @@ import savvytodo.commons.core.EventsCenter;
 import savvytodo.commons.events.model.TaskManagerChangedEvent;
 import savvytodo.commons.events.ui.JumpToListRequestEvent;
 import savvytodo.commons.events.ui.ShowHelpRequestEvent;
+import savvytodo.commons.util.EnumUtil;
 import savvytodo.logic.commands.AddCommand;
 import savvytodo.logic.commands.ClearCommand;
 import savvytodo.logic.commands.Command;
@@ -41,11 +43,13 @@ import savvytodo.model.ReadOnlyTaskManager;
 import savvytodo.model.TaskManager;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
 import savvytodo.storage.StorageManager;
 
@@ -181,21 +185,22 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
+    /**
+     * @author A0140016B
+     * Only name is a required argument
+     */
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add ", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/low d/valid description a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers d/valid description a/valid, address",
+        assertCommandFailure("add []\\[;] p/low d/valid description l/valid, location", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/not_numbers d/valid description l/valid, location",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/low d/valid description a/valid, address c/invalid_-[.category",
+        assertCommandFailure("add Valid Name p/low d/valid description l/valid, addlocation c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
 
     }
@@ -389,16 +394,16 @@ public class LogicManagerTest {
 
         Task assessment() throws Exception {
             Name name = new Name("Assessment 2");
-            Priority privatePhone = new Priority("high");
+            Priority privatePriority = new Priority("high");
             Description description = new Description("Weightage 15%");
-            Address privateAddress = new Address("111, alpha street");
+            Location privateLocation = new Location("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
             UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(name, privatePhone, description, privateAddress, categories);
+            DateTime dateTime = new DateTime(DateTime.DEFAULT_VALUES);
+            Recurrence recurrence = new Recurrence(Recurrence.DEFAULT_VALUES);
+            return new Task(name, privatePriority, description, privateLocation, categories, dateTime, recurrence);
         }
-
-        private final String[] SEED_PRIORITIES = { "low", "medium", "high" };
 
         /**
          * Generates a valid task using the given seed.
@@ -408,10 +413,17 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-
-            return new Task(new Name("Task " + seed), new Priority(SEED_PRIORITIES[seed % 3]),
-                    new Description("describe " + seed), new Address("House of " + seed), new UniqueCategoryList(
-                            new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1))));
+            String[] prioritySeedProperties = EnumUtil.getNames(Priority.Level.class);
+            String[] recurrenceSeedProperties = EnumUtil.getNames(Recurrence.Type.class);
+            String dateTimeSeedProperties = Integer.toString(new Random().nextInt((29 - 1) + 1) + 1);
+            return new Task(new Name("Task " + seed),
+                    new Priority(prioritySeedProperties[seed % 3]),
+                    new Description("describe " + seed),
+                    new Location("House of " + seed),
+                    new UniqueCategoryList(new Category("category" + Math.abs(seed)),
+                            new Category("category" + Math.abs(seed + 1))),
+                    new DateTime("01/03/2017 1600", dateTimeSeedProperties + "/03/2017 1800"),
+                    new Recurrence(recurrenceSeedProperties[seed % 5], Math.abs(seed)));
         }
 
         /** Generates the correct add command based on the task given */
@@ -423,7 +435,7 @@ public class LogicManagerTest {
             cmd.append(p.getName().toString());
             cmd.append(" d/").append(p.getDescription());
             cmd.append(" p/").append(p.getPriority());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(" l/").append(p.getLocation());
 
             UniqueCategoryList categories = p.getCategories();
             for (Category t : categories) {
@@ -505,7 +517,8 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name), new Priority("low"), new Description("1 description"),
-                    new Address("House of 1"), new UniqueCategoryList(new Category("category")));
+                    new Location("House of 1"), new UniqueCategoryList(new Category("category")),
+                    new DateTime(DateTime.DEFAULT_VALUES), new Recurrence(Recurrence.DEFAULT_VALUES));
         }
     }
 }

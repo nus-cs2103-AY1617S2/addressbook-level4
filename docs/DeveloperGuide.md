@@ -344,7 +344,7 @@ b. Require developers to download those libraries manually (this creates extra w
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
-Priority | As a(n) ... | I want to ... | So that I can...
+Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new [task](#task) | record task that needs to be completed
@@ -363,8 +363,6 @@ Priority | As a(n) ... | I want to ... | So that I can...
 `* *` | advanced user | have [alias](#alias) for keywords | quickly type what I want
 `*` | user | set recurring task | not add a similar task each time
 `*` | user | have smart autocomplete suggestions as I enter my task | speed up the process of creating a task
-[//]: # (@@author yeejfe)
-
 
 ## Appendix B : Use Cases
 
@@ -607,8 +605,6 @@ Use case ends.
 ### Development
 1. All code should be properly documented.
 
-[//]: # (@@author yeejfe)
-
 ## Appendix D : Glossary
 
 ##### Mainstream OS
@@ -624,8 +620,6 @@ Use case ends.
 ##### Alias
 
 > For instance, 'ppt' stands for 'presentation'
-
-[//]: # (@@author yeejfe)
 
 ## Appendix E : Product Survey
 

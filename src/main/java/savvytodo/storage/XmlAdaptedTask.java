@@ -8,11 +8,14 @@ import javax.xml.bind.annotation.XmlElement;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 
 /**
@@ -22,12 +25,18 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
+    @XmlElement
     private String priority;
-    @XmlElement(required = true)
+    @XmlElement
     private String description;
-    @XmlElement(required = true)
-    private String address;
+    @XmlElement
+    private String location;
+    @XmlElement
+    private DateTime dateTime;
+    @XmlElement
+    private Recurrence recurrence;
+    @XmlElement
+    private boolean status;
 
     @XmlElement
     private List<XmlAdaptedCategory> categorized = new ArrayList<>();
@@ -45,10 +54,13 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
+        name = source.getName().name;
         priority = source.getPriority().value;
         description = source.getDescription().value;
-        address = source.getAddress().value;
+        location = source.getLocation().value;
+        dateTime = source.getDateTime();
+        recurrence = source.getRecurrence();
+        status = source.isCompleted().value;
         categorized = new ArrayList<>();
         for (Category category : source.getCategories()) {
             categorized.add(new XmlAdaptedCategory(category));
@@ -68,8 +80,12 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
         final Description description = new Description(this.description);
-        final Address address = new Address(this.address);
+        final Location location = new Location(this.location);
         final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
-        return new Task(name, priority, description, address, categories);
+        final DateTime dateTime = new DateTime(this.dateTime.startValue, this.dateTime.endValue);
+        final Recurrence recurrence = new Recurrence(this.recurrence.type.toString(), this.recurrence.occurences);
+        final Status status = new Status(this.status);
+
+        return new Task(name, priority, description, location, categories, dateTime, recurrence, status);
     }
 }

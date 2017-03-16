@@ -1,6 +1,7 @@
 package savvytodo.model.task;
 
 import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.commons.util.StringUtil;
 
 /**
  * Represents a Task's priority in the task manager
@@ -9,7 +10,18 @@ import savvytodo.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be 'low', 'medium' or 'high'";
-    public static final String PRIORITY_VALIDATION_REGEX = "(^low$)|(^medium$)|(^high$)";
+
+    /**
+     * @author A0140016B
+     * Get type enum object from it's name, ignoring cases
+     * @param String recurrence type
+     * @return Corresponding enum object
+     */
+    public enum Level {
+        Low,
+        Medium,
+        High
+    }
 
     public final String value;
 
@@ -24,14 +36,20 @@ public class Priority {
         if (!isValidPriority(trimmedPriority)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        this.value = trimmedPriority;
+        this.value = StringUtil.firstCharUpperCaseRestLowerCase(trimmedPriority);
     }
 
     /**
      * Returns true if a given string is a valid task priority.
      */
     public static boolean isValidPriority(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX);
+        boolean matches = false;
+        for (Level level : Level.values()) {
+            if (level.toString().equalsIgnoreCase(test)) {
+                matches = true;
+            }
+        }
+        return matches;
     }
 
     @Override
@@ -43,7 +61,7 @@ public class Priority {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                        && this.value.equals(((Priority) other).value)); // state check
+                        && this.value.equalsIgnoreCase(((Priority) other).value)); // state check
     }
 
     @Override
