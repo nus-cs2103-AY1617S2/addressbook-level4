@@ -79,12 +79,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPriority);
-        Description updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getDescription);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCategories);
+        return new Task(updatedName, updatedPriority, updatedDescription, updatedAddress, updatedCategories);
     }
 
     /**
@@ -93,8 +93,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Priority> phone = Optional.empty();
-        private Optional<Description> email = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
+        private Optional<Description> description = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueCategoryList> categories = Optional.empty();
 
@@ -102,8 +102,8 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
+            this.priority = toCopy.getPriority();
+            this.description = toCopy.getDescription();
             this.address = toCopy.getAddress();
             this.categories = toCopy.getCategories();
         }
@@ -112,7 +112,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.categories);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.address, this.categories);
         }
 
         public void setName(Optional<Name> name) {
@@ -124,22 +124,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Priority> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
-        public Optional<Priority> getPhone() {
-            return phone;
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
-        public void setEmail(Optional<Description> email) {
-            assert email != null;
-            this.email = email;
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
-        public Optional<Description> getEmail() {
-            return email;
+        public Optional<Description> getDescription() {
+            return description;
         }
 
         public void setAddress(Optional<Address> address) {

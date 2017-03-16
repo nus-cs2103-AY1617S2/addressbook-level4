@@ -160,18 +160,30 @@ Examples:
 * `find shopping` <br>
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
+  
+### 2.8. Undo an operation : `undo`
 
-### 2.8. Clearing all entries : `clear`
+Undo the last operation that changed the task manager.<br>
+Format: `undo`
+
+### 2.9. Redo an operation : `redo`
+
+Undo the last undo operation.<br>
+Format: `redo`
+
+> Can only be used after an undo operation.<br>
+
+### 2.10. Clearing all entries : `clear`
 
 Clears all displayed entries from the interface<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.12. Saving the data
 
 Savvy To-Do data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -195,6 +207,10 @@ There is no need to save manually.
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
 
 * **List** : `list` <br>
+
+* **Undo** : `undo` <br>
+
+* **Redo** : `redo` <br>
 
 * **Help** : `help` <br>
 

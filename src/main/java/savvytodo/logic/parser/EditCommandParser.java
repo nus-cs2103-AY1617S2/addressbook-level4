@@ -42,8 +42,8 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            editTaskDescriptor.setPriority(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setDescription(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
             editTaskDescriptor.setCategories(
                     parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));

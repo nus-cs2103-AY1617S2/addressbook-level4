@@ -16,7 +16,9 @@ import savvytodo.logic.commands.FindCommand;
 import savvytodo.logic.commands.HelpCommand;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.logic.commands.ListCommand;
+import savvytodo.logic.commands.RedoCommand;
 import savvytodo.logic.commands.SelectCommand;
+import savvytodo.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -70,6 +72,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+            
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+            
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
