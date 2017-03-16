@@ -33,7 +33,6 @@ public class IncompleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MARK_INCOMPLETE_SUCCESS = "Incompleted Task: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the instruction book.";
 
     private final int filteredTaskListIndex;

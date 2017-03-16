@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.task.Task;
 
@@ -25,10 +24,14 @@ public class CompleteCommandParser {
         Optional<String> listName = ParserUtil.parseListName(args);
         if (!index.isPresent() || !listName.isPresent() || listName.get().equals(Task.TASK_NAME_COMPLETED)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
+        }
+        String listNameString = listName.get();
+        if (!listName.isPresent()) {
+            listNameString = Task.TASK_NAME_NON_FLOATING;
         }
 
-        return new CompleteCommand(listName.get(), index.get());
+        return new CompleteCommand(listNameString, index.get());
     }
 
 }

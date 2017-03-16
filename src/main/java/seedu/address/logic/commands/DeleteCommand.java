@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
     public final String targetList;
 
     public DeleteCommand(String targetList, int targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex - 1;
         this.targetList = targetList;
     }
 
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
 
         validateTargetIndex(targetIndex, lastShownList);
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex);
 
         try {
             model.deleteTask(taskToDelete);

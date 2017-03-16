@@ -1,0 +1,25 @@
+package seedu.address.model.tag;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
+public class TagTest {
+
+    @Test
+    public void equalsTest() {
+        Tag firstTag, secondTag, thirdTag;
+        try {
+            firstTag = new Tag("everydayToDos");
+            secondTag = new Tag("everydayToDos");
+            thirdTag = new Tag("everydayToDo");
+            assertTrue(firstTag.equals(secondTag));
+            assertFalse(firstTag.equals(thirdTag));
+        } catch (IllegalValueException e) {
+        }
+    }
+
+}
