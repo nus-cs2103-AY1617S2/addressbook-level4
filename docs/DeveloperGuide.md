@@ -302,7 +302,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ### **Appendix A : User Stories**
 
-Priorities: High (must have) - \* \* \*, Medium (nice to have) - \* \*, Low (unlikely to have) - \*
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a ... | I want to ... | So that I can... |
 |--- | :--- | :--- | :--- |
