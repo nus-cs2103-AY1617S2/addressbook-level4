@@ -1,5 +1,6 @@
 package seedu.ezdo.model.todo;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -100,6 +101,63 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
+    }
+
+    public enum SortCriteria {
+        NAME, START_DATE, DUE_DATE, PRIORITY
+    }
+
+    /**
+     * Sorts the internal list of tasks by the criteria specified.
+     *
+     * @param sortCriteria A constant that represents the sorting criteria.
+     */
+    public void sortTasks(SortCriteria sortCriteria) {
+        Comparator<Task> taskComparator = null;
+        switch (sortCriteria) {
+        case NAME:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOneName = taskOne.getName().toString();
+                    String taskTwoName = taskTwo.getName().toString();
+                    return taskOneName.compareTo(taskTwoName);
+                }
+            };
+            break;
+        case DUE_DATE:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOnePriority = taskOne.getPriority().toString();
+                    String taskTwoPriority = taskTwo.getPriority().toString();
+                    return taskOnePriority.compareTo(taskTwoPriority);
+                }
+            };
+            break;
+        case START_DATE:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOneStartDate = taskOne.getStartDate().toString();
+                    String taskTwoStartDate = taskTwo.getStartDate().toString();
+                    return taskOneStartDate.compareTo(taskTwoStartDate);
+                }
+            };
+            break;
+        case PRIORITY:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOnePriority = taskOne.getPriority().toString();
+                    String taskTwoPriority = taskTwo.getPriority().toString();
+                    return taskOnePriority.compareTo(taskTwoPriority);
+                }
+            };
+            break;
+        }
+        assert taskComparator != null;
+        FXCollections.sort(internalList, taskComparator);
     }
 
     @Override
