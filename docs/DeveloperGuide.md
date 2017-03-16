@@ -82,29 +82,25 @@ More information about using Gradle can be found [here](https://github.com/CS210
   > * If any settings files are changed by Eclipse during the import process, you can discard those changes.
 
 ### 1.4. Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. opus
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`.
+2. Choose `External Configuration File` under `Type`.
+3. Enter an arbitrary configuration name e.g. opus.
+4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`.
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
+6. Check and select `files from packages`, click `Change...`, and select the `resource`.
+7. Click OK twice. Rebuild project as required.
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> Click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 ### 1.5. Troubleshooting project setup
 
-**Problem: Eclipse reports compile errors after new commits are pulled from Git**
+#### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git
+> This is beacuase Eclipse failed to recognize the new files that are pulled from Git.<br>
+1. Right click on the project (in Eclipse package explorer) and choose `Gradle` -> `Refresh Gradle Project`.
 
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-* Solution: Refresh the project in Eclipse:<br>
-  Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
-
-**Problem: Eclipse reports some required libraries missing**
-
-* Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
-
+#### 1.5.2.  Eclipse reports missing libraries
+> Eclipse has failed to retrieve all required dependencies during the project import.<br>
+1. Right click on the project and select `Gradle` > [`Run tests using Gradle`](UsingGradle.md).
 
 ## 2. Design
 
