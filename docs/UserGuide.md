@@ -34,7 +34,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
    * **`add`**` Do laundry` : adds a task named `Do laundry` to the task manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
 ## 2. Features
@@ -171,10 +171,10 @@ Autocomplete the user's command on the CLI.
   e.g. `find Wash dishes`
 
 * **List** : `list` <br>
-  e.g. 'list'
+  e.g. `list`
 
 * **Help** : `help` <br>
-  e.g. 'help'
+  e.g. `help`
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
