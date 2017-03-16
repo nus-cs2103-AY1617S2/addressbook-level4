@@ -67,7 +67,7 @@ Our UI is broken down into 4 main sections:
 1. [List Undone](#38-listing-all-uncompleted-tasks-listundone)
 1. [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find)
 1. [Undo](#310-undo-most-recent-command-undo)
-1. [Redo](#311-redo-most-recent-undo-redo)
+1. [Redo](#311-redo-most-recent-undo)
 1. [Saving](#312-saving-the-data)
 1. [Exit](#313-exiting-the-program-exit)
 
@@ -90,7 +90,7 @@ Our UI is broken down into 4 main sections:
 > * *Deadlines* are tasks with only an ending DateTime.
 > * *Floating Tasks* are tasks without any temporal restrictions.
 
-### 3.1. Viewing help : `help`
+### 3.1. Viewing help: `help`
 
 Opens a window that displays this User Guide.
 
@@ -114,7 +114,7 @@ Examples:
 * `add Team meeting s/15-3-17 1500 e/15-3-17 1600`
 * `add Birthday Celebration s/1-4-17 e/1-4-17`
 
-### 3.3. Updating a task : `update`
+### 3.3. Updating a task: `update`
 
 Updates an existing task in the task manager with new value(s).<br>
 Format: `update TASKID [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
@@ -134,7 +134,7 @@ Examples:
 * `update 2 e/`<br>
 Clears the existing deadlines for task with *TaskID 2*
 
-### 3.4. Marks a task as done or undone : `done` & `undone`
+### 3.4. Marks a task as done or undone: `done` & `undone`
 
 Marks the task with the specified *TaskID* as done.
 
@@ -154,7 +154,7 @@ Marks the task with *TaskID 2* in the task manager as done.
 Marks the task with *TaskID 1* as done after you find it with the [find]() command.
 
 
-### 3.5. Deleting a task : `delete`
+### 3.5. Deleting a task: `delete`
 
 Deletes the specified task from the task manager.
 
@@ -169,25 +169,25 @@ Examples:
 * `delete 2`<br>
 Deletes the task with *TaskID 2* in the task manager.
 
-### 3.6. Listing all tasks : `list`
+### 3.6. Listing all tasks: `list`
 
 Shows all tasks, completed or otherwise, in the main window.
 
 Format: `list`
 
-### 3.7. Listing all completed tasks : `listdone`
+### 3.7. Listing all completed tasks: `listdone`
 
 Shows only completed tasks in the main window.
 
 Format: `listdone`
 
-### 3.8 Listing all uncompleted tasks : `listundone`
+### 3.8 Listing all uncompleted tasks: `listundone`
 
 Shows only uncompleted tasks in the main window.
 
 Format: `listundone`
 
-### 3.9. Finding all tasks containing any keyword in their title, tag, or on a specific date : `find`
+### 3.9. Finding all tasks containing any keyword in their title, tag, or on a specific date: `find`
 
 Find and displays only tasks whose title or tag contain any of the given keywords, and/or on the specified date.
 
@@ -208,13 +208,13 @@ Returns any task having the word or substring meet.
 * `find meet 17-3-17`<br>
 Returns any task having the word or substring meet still ongoing on 17-3-17
 
-### 3.10. Undo most recent command : `undo`
+### 3.10. Undo most recent command: `undo`
 
 Undo the most recent command. Can redo with command redo
 
 Format: `undo`
 
-### 3.11. Redo most recent undo : `redo`
+### 3.11. Redo most recent undo: `redo`
 
 Redo the most recent undo. Can undo with command undo.
 
@@ -226,7 +226,7 @@ Task manager data are saved in the hard disk automatically (in XML format) after
 
 > There is no need to save manually.
 
-### 3.13. Exiting the program : `exit`
+### 3.13. Exiting the program: `exit`
 
 Exits the program.
 
