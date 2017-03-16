@@ -1,6 +1,4 @@
-# Use Cases
-
-By : `CS2103JAN2017-W15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+# Appendix B: Use Cases
 
 ---
 

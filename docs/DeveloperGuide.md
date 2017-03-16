@@ -341,111 +341,20 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ## Appendix A : User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
-
-
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | New user | See the instructions to use the program | Learn how to use it and refer to the instructions
-`* * *` | New user | Know the format of adding a task | Add a new task correctly
-`* * *` | User | Add a task that has a deadline | Create a task that needs to be completed by a certain time
-`* * *` | User | Add a task that does not have a deadline | Create a floating task that needs to be completed
-`* * *` | User | Add a task that can be set to repeat at a given interval | Have recurring tasks without having to add the same task at each interval
-`* * *` | User | Add an event that spans from a start to end time | Create an event with a time span
-`* * *` | User | Add an event description | Attach more details to the event
-`* * *` | User | View all task titles in order of scheduled date/time | See what tasks I need to do next
-`* * *` | User | Select a task title | See in detail the information attached to the task
-`* * *` | User | Search for a task by typing in a keyword | Find a specific task
-`* * *` | User | View the completion status of the task | See the progress of the task
-`* * *` | User | Organize tasks by their completion status | Keep track of which tasks are done and which are not
-`* * *` | User | Update a task's completion status | Keep a record of tasks that have been completed
-`* * *` | User | Update the deadline of a task | Make changes to deadlines if necessary
-`* * *` | User | Update the information attached to the task | Reflect changes in the plan as well as new requirements to fulfill.
-`* * *` | User | Delete a task | Get rid of tasks that no longer needs to tracked
-`* * *` | User | Undo any action | Reverse any wrong action that was taken
-`* * *` | User | Use the program offline | Keep track of my tasks without anInternet connection
-`* * *` | User | Specify the storage file and location | Control the save file location and name
-`* *` | User | Attach an email to the task | Find the email that prompted the task easily
-`* *` | User | Give a task a priority | Better manage my tasks based on importance
-`* *` | User | Sort the tasks based on completion status, date, priority, category, etc. | Organize my tasks more intuitively
-`* *` | User | Schedule a follow up action after a task is marked as completed | Attach follow up actions if any
-`* *` | User | Open the application using a keyboard shortcut | Access my task manager quickly and without fuss
-`* *` | User | See typing suggestions when typing a new task | Add tasks without typing out everything
-`* *` | User | Set a task to be automatically deleted once the due date/time has passed | Save time by not having to update it manually
-`*` | User | Attach a web page to the task | Act on that web page later
+Refer to [Appendix A: User Stories](UserStories.md)
 
 ## Appendix B : Use Cases
 
-Refer to [Use Cases](UseCases.md)
+Refer to [Appendix B: Use Cases](UseCases.md)
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should work as a command line interface.
-5. Should be able to start up within 10 seconds.
-6. Should be able run commands and display the result within 3 seconds.
-7. Should have a user interface that is intuitive, responsive, and simple to understand and use.
-
-{More to be added}
+Refer to [Appendix C: Non Functional Requirements](NFR.md)
 
 ## Appendix D : Glossary
-1. Event: Task that has a start time and an end time
-2. Deadline: Task that has to be completed before a specific deadline
-3. Floating Tasks: Task that has no specific timing attached
-4. Simple Search: Search for items by keywords in the item title and item description
-5. CRUD: Create, Read, Update, Delete
 
-##### Mainstream OS
-
-> Windows, Linux, Unix, OS-X
+Refer to [Appendix D: Glossary](Glossary.md)
 
 ## Appendix E : Product Survey
 
-**Remember the Milk**
-
-Pros:
-
-1. Available on almost any platform.
-2. Natural language input
-3. Can set as many reminders as you want on multiple platforms
-4. Includes collaboration and sharing features
-
-Cons:
-
-1. Pro version with the more impressive features is expensive (most importantly push notifications are only available in the pro version.)
-2. Lacks location based reminders
-
-**Google Inbox**
-
-Pros:
-
-1. Organize your emails like it is a to-do list
-2. Automatic sorting of emails (tasks) into bundles
-3. Snooze emails which will pop-up later like its new
-4. Support for classic to-do tasks (Reminders)
-5. Supported on most platforms
-6. Free
-
-Cons:
-
-1. Tied to Google ecosystem
-2. Requires a change in workflow regarding emails
-3. Reminders are limited
-
-**Any.do**
-
-Pros:
-
-1. Automatically syncs across platforms
-2. Suggestive typing & voice input
-3. Timed reminders as well as recurring tasks
-4. Able to have multiple lists for different tasks
-
-Cons:
-
-1. Freemium model is somewhat restrictive:
-2. Limited moments
-3. Location based reminders unavailable
+Refer to [Appendix E: Product Survey](ProductSurvey.md)
