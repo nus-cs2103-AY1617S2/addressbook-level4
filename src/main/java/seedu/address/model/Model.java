@@ -23,7 +23,7 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
+
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *

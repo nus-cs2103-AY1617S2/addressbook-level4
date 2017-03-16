@@ -34,7 +34,7 @@ public class TestTask implements ReadOnlyTask {
     public void setName(Name name) {
         this.name = name;
     }
-    
+
 
     public void setStart(Start start) {
         this.start = start;
@@ -43,7 +43,7 @@ public class TestTask implements ReadOnlyTask {
     public void setDeadline(Deadline deadline) {
         this.deadline = deadline;
     }
-    
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -57,7 +57,7 @@ public class TestTask implements ReadOnlyTask {
     public Start getStart() {
         return start;
     }
-    
+
     @Override
     public Deadline getDeadline() {
         return deadline;

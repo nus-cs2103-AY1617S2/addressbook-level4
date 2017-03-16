@@ -35,7 +35,7 @@ public class TaskBuilder {
         }
         return this;
     }
-    
+
     public TestTask build() {
         return this.task;
     }
