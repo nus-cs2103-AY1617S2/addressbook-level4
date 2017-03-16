@@ -8,8 +8,8 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 2. [Getting Started](#2-getting-started)
     1. [Installation](#i-installation)
     2. [Starting Werkbook](#ii-starting-werkbook)
-    3. [Interface Introduction](#i-interface-introduction)
-    4. [Quick Start](#i-quick-start)
+    3. [Interface Introduction](#iii-interface-introduction)
+    4. [Quick Start](#iv-quick-start)
 3. [User Interface](#3-user-interface)
 4. [Features](#4-features)
     1. [Task Management](#i-task-management)
@@ -136,7 +136,7 @@ Example:
 > * A task must have a name, the description is optional<br>
 > * The task can also optionally have a End Date/Time, or both a Start Date/Time and End Date/Time<br>
 
-#### b. List tasks
+#### b. List task
 
 If you want to see a list of all the tasks you have added, you can use the `list` command.<br>
 Format: `list`
@@ -229,7 +229,7 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-#### b. Undo/Redo
+#### b. Undo Redo
 
 Undo the last command(s) executed. <br>
 Format: `undo [AMOUNT]`
