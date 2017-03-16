@@ -1,6 +1,8 @@
 package seedu.tasklist.model;
 
+import java.text.ParseException;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -201,5 +203,83 @@ public class TaskList implements ReadOnlyTaskList {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
+    }
+    
+    /**
+     * Tasks are sorted according to Name in ascending order
+     */
+    public void sortByName() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.getName().compareTo(t2.getName());
+            }
+        });
+    }
+    
+    /**
+     * Tasks are sorted according to Priority in descending order
+     */
+    public void sortByPriority() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.getPriority().compareTo(t2.getPriority());
+            }
+        });
+    }
+    
+    /**
+     * Tasks are sorted according to Deadline in ascending order, 
+     * followed by event task, and floating task listed in no particular order
+     */
+    public void sortByDeadline() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                try {
+                    return t1.getDeadlineParameter().compareTo(t2.getDeadlineParameter());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
+    }
+    
+    /**
+     * Tasks are sorted according to StartDate in ascending order, 
+     * followed by deadline task, and floating task listed in no particular order
+     */
+    public void sortByStartDate() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                try {
+                    return t1.getStartDateParameter().compareTo(t2.getStartDateParameter());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
+    }
+    
+    /**
+     * Tasks are sorted according to EndDate in ascending order, 
+     * followed by deadline task, and floating task listed in no particular order
+     */
+    public void sortByEndDate() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                try {
+                    return t1.getEndDateParameter().compareTo(t2.getEndDateParameter());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
     }
 }
