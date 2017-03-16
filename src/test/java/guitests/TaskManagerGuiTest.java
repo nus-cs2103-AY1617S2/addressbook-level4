@@ -14,7 +14,6 @@ import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
-import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TaskListPanelHandle;
@@ -46,7 +45,6 @@ public abstract class TaskManagerGuiTest {
      *   for easy access from child classes.
      */
     protected MainGuiHandle mainGui;
-    protected MainMenuHandle mainMenu;
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
@@ -66,7 +64,6 @@ public abstract class TaskManagerGuiTest {
     public void setup() throws Exception {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
-            mainMenu = mainGui.getMainMenu();
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
