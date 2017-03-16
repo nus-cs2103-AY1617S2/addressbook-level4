@@ -78,7 +78,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 **Problem: Eclipse reports some required libraries missing**
 
 * Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md#running-tests) once (to refresh the libraries).
 
 
 ## 2. Design
@@ -262,7 +262,7 @@ Tests can be found in the `./src/test/java` folder.
 
 **Using Gradle**:
 
-* See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
+* See [UsingGradle.md](UsingGradle.md#running-tests) for how to run tests using Gradle.
 
 We have two types of tests:
 
@@ -300,7 +300,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ### 5.1. Build Automation
 
-See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
+See [UsingGradle.md](UsingGradle.md#using-gradle) to learn how to use Gradle for build automation.
 
 ### 5.2. Continuous Integration
 
