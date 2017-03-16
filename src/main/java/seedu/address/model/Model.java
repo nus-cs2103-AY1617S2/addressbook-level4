@@ -3,10 +3,9 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Task;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
-import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.

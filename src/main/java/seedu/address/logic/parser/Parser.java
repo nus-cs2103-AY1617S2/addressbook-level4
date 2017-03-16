@@ -29,17 +29,17 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static Parser instance = null;
 
+    // Exists only to defeat instantiation.
     protected Parser() {
-        // Exists only to defeat instantiation.
-     }
+    }
 
     // Returns the singleton instance
     public static Parser getInstance() {
-        if(instance == null) {
-           instance = new Parser();
+        if (instance == null) {
+            instance = new Parser();
         }
         return instance;
-     }
+    }
 
     /**
      * Parses user input into command for execution.
