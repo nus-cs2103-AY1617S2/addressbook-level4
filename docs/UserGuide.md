@@ -357,7 +357,7 @@ Clear | `clear`
 Delete | `delete INDEX` | `delete 3`
 Filter | `filter/list/find [KEYWORDS] [tag/] [name/]` | `find school tag/`
 Help | `help`
-Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` |e.g. `update 1 enddate/11/12/2011`
+Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `update 1 enddate/11/12/2011`
 Exit | `exit/quit`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
 Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
