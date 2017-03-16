@@ -192,4 +192,18 @@ public class EventTask extends Task implements ReadOnlyEventTask {
         Date deadlineParameter = new Date(Long.MAX_VALUE - 1); //to appear before floating tasks
         return deadlineParameter;
     }
+
+    @Override
+    public Date getStartDateParameter() throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date deadlineParameter = formatter.parse(formatter.format(startDate));
+        return deadlineParameter;
+    }
+
+    @Override
+    public Date getEndDateParameter() throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date deadlineParameter = formatter.parse(formatter.format(endDate));
+        return deadlineParameter;
+    }
 }

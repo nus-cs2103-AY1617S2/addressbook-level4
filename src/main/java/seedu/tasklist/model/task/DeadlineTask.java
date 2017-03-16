@@ -168,7 +168,18 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
     public Date getDeadlineParameter() throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date deadlineParameter = formatter.parse(formatter.format(deadline));
-        System.out.println(deadlineParameter.toString());
+        return deadlineParameter;
+    }
+
+    @Override
+    public Date getStartDateParameter() throws ParseException {
+        Date deadlineParameter = new Date(Long.MAX_VALUE -1); //appear before floating task
+        return deadlineParameter;
+    }
+
+    @Override
+    public Date getEndDateParameter() throws ParseException {
+        Date deadlineParameter = new Date(Long.MAX_VALUE -1); //appear before floating task
         return deadlineParameter;
     }
 }
