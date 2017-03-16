@@ -73,10 +73,10 @@ public class AddCommand extends Command {
     /**
      * Checks the type of task(floating, deadline or event) to be added
      * based on the DATETIME parameters entered by the user.
-     * @throws IllegalValueException if both deadline and startDate are entered, 
+     * @throws IllegalValueException if both deadline and startDate are entered,
      * or if only one of startDate or endDate is entered
      */
-    private static TaskType checkTaskType(boolean hasDeadline, boolean hasStartDate, boolean hasEndDate) 
+    private static TaskType checkTaskType(boolean hasDeadline, boolean hasStartDate, boolean hasEndDate)
             throws IllegalValueException {
         if (!hasDeadline && !hasStartDate && !hasEndDate) {
             return TaskType.FLOAT;
