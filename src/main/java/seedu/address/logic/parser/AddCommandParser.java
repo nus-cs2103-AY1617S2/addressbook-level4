@@ -24,11 +24,11 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
-        
+
         String name = argsTokenizer.getPreamble().get();
         String start = argsTokenizer.getValue(PREFIX_START).orElse("");
         String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
-        
+
         try {
             return new AddCommand(name, start, deadline,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))

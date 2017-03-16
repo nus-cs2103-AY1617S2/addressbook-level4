@@ -126,7 +126,7 @@ public class EditCommand extends Command {
         public Optional<Start> getStart() {
             return start;
         }
-        
+
         public void setDeadline(Optional<Deadline> deadline) {
             assert deadline != null;
             this.deadline = deadline;
@@ -135,7 +135,7 @@ public class EditCommand extends Command {
         public Optional<Deadline> getDeadline() {
             return deadline;
         }
-        
+
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
