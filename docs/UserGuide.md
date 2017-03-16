@@ -281,34 +281,17 @@ Format: `exit`
 
 ## 6. Commands Cheatsheet
 
-* **Add**  `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]` <br>
-  e.g. `Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find Milk`
-
-* **Mark** : `mark INDEX` <br>
-  e.g. `mark 1`
-
-* **Undo** : `undo` <br>
-  e.g. `undo`
-
-* **Redo** : `redo` <br>
-  e.g. `redo`
-
-* **List** : `list` <br>
-  e.g. `list`
-
-* **Help** : `help` <br>
-  e.g. `list`
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-* **Exit** : `exit` <br>
-  e.g. `exit`
+Command | Purpose | Format
+--- | --- | ---
+`add` | Adds a task | `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
+`list` | List all tasks | `list`
+`edit` | Edit specified task | `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]...`
+`find` | Find tasks based on specified keywords | `find KEYWORD [MORE_KEYWORD]`
+`mark` | Mark specified task as complete | `mark INDEX`
+`delete` | Delete specified task | `delete INDEX`
+`clear` | Clear all tasks | `clear`
+`help` | Display help page | `help`
+`undo` | Undo command(s) | `undo [AMOUNT]`
+`redo` | Redo command(s) | `redo [AMOUNT]`
+`save` | Change save location | `save SAVE_LOCATION`
+`exit` | Exit the program | `exit`
