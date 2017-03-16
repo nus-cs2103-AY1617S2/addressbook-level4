@@ -60,13 +60,9 @@ Use case ends
 
 > 1a1. Opus shows an error message
 
-> Use case ends
-
 1b. The attribute given is invalid
 
 > 1b1. Opus shows an error message
-
-> Use case ends
 
 1c. The value of the attribute is invalid
 
@@ -90,7 +86,7 @@ Use case ends
 
 > 1a1. Opus shows an error message
 
-> Use case ends
+Use case ends
 
 #### Use case: Undo the previous action
 
@@ -105,7 +101,7 @@ Use case ends
 
 1a. The history stack is empty
 
-> Use case ends
+Use case ends
 
 #### Use case: Redo the previous undo action
 
@@ -128,8 +124,6 @@ Use case ends
 **Extensions**
 
 1a. The list is empty
-
-> Use case ends
 
 1b. The input bttribute is invalid
 
