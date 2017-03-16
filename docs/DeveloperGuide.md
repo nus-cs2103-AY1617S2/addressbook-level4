@@ -130,7 +130,7 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 
 The sections below give more details of each component.
 
-<h3 id="user-content-ui">UI component<h3>
+<h3 id="user-content-ui">UI component</h3>
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 
