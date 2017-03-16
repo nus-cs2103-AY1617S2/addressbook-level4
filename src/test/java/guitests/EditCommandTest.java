@@ -93,7 +93,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit 1 d/abcd");
 
         assertResultMessage(Deadline.MESSAGE_PHONE_CONSTRAINTS);
 
