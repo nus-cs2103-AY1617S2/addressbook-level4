@@ -46,4 +46,10 @@ public interface Model {
 
     /** Returns the chat list as an {@code FilteredList<Chat>} */
     ChatList getChatList();
+
+    /** Returns undo tasks */
+    Task previousTask();
+
+	String previousCommand();
+
 }

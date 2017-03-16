@@ -26,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final ChatList chatList;
+    private final UndoRedo undoRedo = new UndoRedo();
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -64,12 +65,17 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
+        Task deletedTask = new Task(target);
+        undoRedo.pushUndo(deletedTask);
+        undoRedo.pushCommand("Delete");
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
+        undoRedo.pushUndo(task);
+        undoRedo.pushCommand("Add");
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -162,6 +168,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ChatList getChatList() {
         return chatList;
+    }
+
+    @Override
+    public Task previousTask(){
+    	Task task = undoRedo.popUndo();
+    	return task;
+    }
+
+    @Override
+    public String previousCommand(){
+    	String command = undoRedo.popCommand();
+    	return command;
     }
 
 }

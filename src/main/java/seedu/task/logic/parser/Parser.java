@@ -19,6 +19,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UncheckCommand;
+import seedu.task.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -78,6 +79,9 @@ public class Parser {
 
         case UncheckCommand.COMMAND_WORD:
             return new UncheckedCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+        	return new UndoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
