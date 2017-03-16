@@ -224,7 +224,7 @@ We make mistakes all the time. When you've entered a wrong task name, or even a 
 
 #### 3.3.5. Deleting tasks
 
-Some tasks don't get `done`. We put them aside and after several eons, we discover that we don't have to actually do them anymore. If you're feeling too guilty to mark the task as `done`, that's the perfect time to `delete` it.
+Some tasks don't get `done`. We put them aside and after several eons, we discover that we don't have to do them anymore. If you're feeling too guilty to mark the task as `done`, that's the perfect time to `delete` it.
 
 ##### Format: `delete <id1, id2, ...>`
 
