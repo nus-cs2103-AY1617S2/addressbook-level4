@@ -41,7 +41,7 @@ allprojects {
         junitVersion = '4.12'
         testFxVersion = '4.0.+'
         monocleVersion = '1.8.0_20'
-		nattyTimeVersion = '0.12'
+		nattyTimeVersion = '0.13'
         checkstyleVersion = '7.1.2'
 
         libDir = 'lib'

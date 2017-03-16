@@ -15,10 +15,12 @@ public class SelectCommandTest extends ToDoListGuiTest {
         assertSelectionSuccess("e2"); // 2nd event task in the list
         assertSelectionSuccess("d3"); // last deadline task in the list
         
-        assertSelectionInvalid("t100"); // invalid index
-        assertSelectionInvalid("t4"); // invalid index
+        // invalid index
+        assertSelectionInvalid("t100");
+        assertSelectionInvalid("t4");
+        assertSelectionInvalid("t0");
+        assertSelectionInvalid("t-1");
 
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test

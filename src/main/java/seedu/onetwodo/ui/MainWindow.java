@@ -255,6 +255,19 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTodoTaskListPanel() {
         return this.todoTaskListPanel;
     }
+    
+/*    public TaskListPanel getTaskListPanel(TaskType type) {
+        switch(type) {
+        case DEADLINE:
+            return getDeadlineTaskListPanel();
+        case EVENT:
+            return getEventTaskListPanel();
+        case TODO:
+            return getTodoTaskListPanel();
+        default:
+            return getTodoTaskListPanel();
+        }
+    }*/
 
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);

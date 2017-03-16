@@ -36,8 +36,8 @@ public class HelpWindowTest extends ToDoListGuiTest {
         helpWindowHandle.closeWindow();
     }
 
-//    private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
-//        assertFalse(helpWindowHandle.isWindowOpen());
-//    }
-
+/*    private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
+        assertFalse(helpWindowHandle.isWindowOpen());
+    }
+*/
 }
