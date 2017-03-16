@@ -11,6 +11,14 @@
     -fx-background-color: #34495E;
 }
 
+.result-holder {
+	-fx-background-color: #F8F9FA;
+}
+
+#resultDisplay {
+	-fx-font-family: "Open Sans";
+}
+
 #commandTextField {
     -fx-background-color: #34495E;
 	-fx-text-fill: #ecf0f1;
