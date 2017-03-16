@@ -151,7 +151,7 @@ public class TestTask implements ReadOnlyTask {
 
     public int compareStartTime(Task other) {
         if (this.hasStartTime() && other.hasStartTime()) {
-            return this.getStartTime().compareTo(other.getStartTime());
+            return compareName(other);
         } else if (this.hasStartTime()) {
             return -1;
         } else if (other.hasStartTime()) {
@@ -163,7 +163,7 @@ public class TestTask implements ReadOnlyTask {
 
     public int compareEndTime(Task other) {
         if (this.hasEndTime() && other.hasEndTime()) {
-            return this.getEndTime().compareTo(other.getEndTime());
+            return compareName(other);
         } else if (this.hasEndTime()) {
             return -1;
         } else if (other.hasEndTime()) {
