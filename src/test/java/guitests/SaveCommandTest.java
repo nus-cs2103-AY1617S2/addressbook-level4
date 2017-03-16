@@ -56,7 +56,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
             assertResultMessage(String.format(StoreController.RESULT_MESSAGE_WARNING_OVERWRITE, newPath)
                 + "\n" + String.format(StoreController.RESULT_MESSAGE_SAVING_SUCCESS, newPath));
         } catch (IOException e) {
-            fail();
+            fail("Should not reach here");
         }
     }
 
