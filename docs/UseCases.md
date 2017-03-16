@@ -1,7 +1,5 @@
 # Appendix B: Use Cases
 
----
-
 - [Use Case Diagram](#use-case-diagram)
 - [Use Cases](#use-cases-1)
     - [Add Floating Task](#add-floating-task)

@@ -1,7 +1,5 @@
 # Appendix E: Product Survey
 
----
-
 - [Remember the Milk](#remember-the-milk)
 - [Google Inbox](#google-inbox)
 - [Any.do](#any-do)

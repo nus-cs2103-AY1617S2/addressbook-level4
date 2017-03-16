@@ -1,7 +1,5 @@
 # Appendix D: Glossary
 
----
-
 1. Event: Task that has a start time and an end time
 2. Deadline: Task that has to be completed before a specific deadline
 3. Floating Tasks: Task that has no specific timing attached
