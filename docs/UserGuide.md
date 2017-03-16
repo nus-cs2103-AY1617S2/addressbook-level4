@@ -23,9 +23,8 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
     2. [Program Usage](#ii-program-usage)
         1. [Help](#a-help)
         2. [Undo/Redo](#b-undo-redo)
-        3. [Save data](#c-save-data)
-        4. [Change save location](#d-change-save-location)
-        5. [Exit program](#e-exit-program)
+        3. [Change save location](#c-change-save-location)
+        4. [Exit program](#d-exit-program)
 5. [FAQ](#5-faq)
 6. [Commands Cheatsheet](#6-commands-cheatsheet)
 
@@ -241,7 +240,7 @@ Examples:
   `redo`<br>
   The final action would be the deletion of the 2nd task in the task list.
 
-#### c. Save data
+#### c. Change save location
 
 Saves all changes to disk. <br>
 Format: `save [SAVE_LOCATION]`
@@ -250,9 +249,7 @@ The first time the task manager is saved without `SAVE_LOCATION` the user would 
 Task list data are saved in the hard disk at the last save location automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-#### d. Change save location
-
-#### e. Exit program
+#### d. Exit program
 
 Exits the program.<br>
 Format: `exit`
