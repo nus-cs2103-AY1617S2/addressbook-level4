@@ -9,8 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Person date's format should be mm.dd";
-    
-    //set date to mm.dd (e.g.01.01)
+    //set date to mm.dd(e.g.01.01)
     public static final String DATE_VALIDATION_REGEX = "\\d\\d\\.\\d\\d";
 
     public final String value;
