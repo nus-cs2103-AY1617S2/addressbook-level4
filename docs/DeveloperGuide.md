@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |--- | :--- | :--- | :--- |
 | `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App |
 | `* * *` | user | add a new task with title | add a floating task |
-| `* * *` | user | add a new task with title and ending time| set a deadline for the task |
+| `* * *` | user | add a new task with title and ending time| add a deadline |
 | `* * *` | user | add a new task with title, starting time and ending time| add an event |
 | `* * *` | user | list tasks| have a look at all my tasks |
 | `* * *` | user | list unfinished tasks | see all the tasks I have yet to complete |
@@ -425,24 +425,24 @@ Extensions
 
 > Windows, Linux, Unix, OS-X
 
-**CLI**
-
-> Command Line Interface
-
-**GUI**
-
-> Graphical User Interface
-
 **Task**
 
-> A task may or may not have a specific ending time
-> E.g. Complete Progress Report
+> A task may or may not have a specific starting or ending time
+
+**Floating Task**
+
+> A task without starting or ending time is a floating task
+> (e.g., wash clothes).
 
 **Deadline**
 
-> A task with a specified ending time is a deadline
-> E.g. Complete Progress Report by 20 March 2017 2359H
+> A task only with a specified ending time is a deadline
+> (e.g., submit report).
 
+**Event**
+
+> A task with both starting and ending time is an event
+> (e.g., do an internship).
 <h3 id="user-content-ae">Appendix E : Product Survey</h3>
 
 #### **Google Keep**
