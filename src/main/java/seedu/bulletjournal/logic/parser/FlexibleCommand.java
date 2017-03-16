@@ -31,10 +31,13 @@ public class FlexibleCommand {
 		commandFromUser = cfu;
 	}
 
+	/**
+	 * @return the correct command string that matches COMMAND_WORD of command classes
+	 */
 	public String getCommandWord(){
 		for (String commandGroup: commandGroups){
 			for (String command: commandGroup.split(" ")){
-				if (commandFromUser == command)
+				if (commandFromUser.equals(command))
 					return commandGroup.split(" ")[0];
 			}
 		}
