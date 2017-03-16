@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Calendar;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,7 +34,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, Set<String> tags)
+    public AddCommand(String title, String start, String end, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -41,6 +42,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
+                start,
+                end,
                 new UniqueTagList(tagSet)
         );
     }

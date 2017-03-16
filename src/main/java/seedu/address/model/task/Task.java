@@ -1,18 +1,42 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Calendar;
 
 import seedu.address.model.tag.UniqueTagList;
 
 public class Task implements ReadOnlyTask{
     
     protected Title title;
+    //TODO use Calendar object
+    //protected Calendar start;
+    //protected Calendar end;
+    protected String start;
+    protected String end;
     
     protected UniqueTagList tags;
     
-    
+    /**
+     * Constructor for floating task
+     * @param title
+     * @param tags
+     */
     public Task(Title title, UniqueTagList tags) {
         this.title = title;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.start = null;
+        this.end = null;
+    }
+    
+    /**
+     * Constructor for deadlined tasks
+     * @param title
+     * @param tags
+     */
+    public Task(Title title, String start, String end, UniqueTagList tags) {
+        this.title = title;
+        this.start = start;
+        this.end = end;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
@@ -30,6 +54,22 @@ public class Task implements ReadOnlyTask{
     
     public Title getTitle() {
         return title;
+    }
+    
+    public void setStart(String start) {
+        this.start = start;
+    }
+    
+    public String getStart() {
+        return start;
+    }
+    
+    public void setEnd(String end) {
+        this.end = end;
+    }
+    
+    public String getEnd() {
+        return end;
     }
     
     /**
