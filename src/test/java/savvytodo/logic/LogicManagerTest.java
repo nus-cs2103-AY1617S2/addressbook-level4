@@ -206,7 +206,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.assessment();
         TaskManager expectedAB = new TaskManager();
-        expectedAB.addCategory(toBeAdded);
+        expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
@@ -464,7 +464,7 @@ public class LogicManagerTest {
          */
         void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p : tasksToAdd) {
-                taskManager.addCategory(p);
+                taskManager.addTask(p);
             }
         }
 

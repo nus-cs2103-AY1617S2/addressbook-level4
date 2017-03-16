@@ -55,7 +55,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tasks.setTasks(tasks);
     }
 
-    public void setCategories(Collection<Category> categories) throws UniqueCategoryList.DuplicateCategoryException {
+    public void setCategories(Collection<Category> categories) throws UniqueCategoryList.DuplicateCategoryException {   
         this.categories.setCategories(categories);
     }
 
@@ -81,7 +81,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addCategory(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(p);
         tasks.add(p);
     }
