@@ -128,8 +128,8 @@ Here are some of the key files in the `Ui` component:
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
-    - void start(Stage primaryStage)
-    - void stop()  
+    void start(Stage primaryStage)
+    void stop()  
     ```  
 - `UiManager.java`: contains a `class` that implements the operations specified in `Ui.java`.
 - `MainWindow.java`: contains a `class` that represents the Main Window viewed by the user.
