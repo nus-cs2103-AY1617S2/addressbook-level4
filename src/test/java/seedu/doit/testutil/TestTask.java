@@ -6,6 +6,7 @@ import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTime;
+import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
@@ -120,6 +121,56 @@ public class TestTask implements ReadOnlyTask {
         sb.append(((this.hasEndTime()) ? "e/" + this.getEndTime().value : "") + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    /**
+     * Compares the current task with another Task other.
+     * The current task is considered to be less than the other task if
+     * 1) This item has a earlier start time associated
+     * 2) both items are not events but this item has a later end time
+     * 3) but this task has a lexicographically smaller name (useful when sorting tasks in testing)
+     */
+    @Override
+    public int compareTo(Task other) {
+        int comparedStartTime = compareStartTime(other);
+        if (comparedStartTime != 0) {
+            return comparedStartTime;
+        }
+
+        int comparedEndTime = compareEndTime(other);
+        if (comparedEndTime != 0) {
+            return comparedEndTime;
+        }
+
+        return compareName(other);
+    }
+
+    private int compareName(Task other) {
+        return this.getName().toString().compareTo(other.getName().toString());
+    }
+
+    public int compareStartTime(Task other) {
+        if (this.hasStartTime() && other.hasStartTime()) {
+            return this.getStartTime().compareTo(other.getStartTime());
+        } else if (this.hasStartTime()) {
+            return -1;
+        } else if (other.hasStartTime()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int compareEndTime(Task other) {
+        if (this.hasEndTime() && other.hasEndTime()) {
+            return this.getEndTime().compareTo(other.getEndTime());
+        } else if (this.hasEndTime()) {
+            return -1;
+        } else if (other.hasEndTime()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 

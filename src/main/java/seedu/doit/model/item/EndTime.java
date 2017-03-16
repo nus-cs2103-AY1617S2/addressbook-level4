@@ -69,4 +69,8 @@ public class EndTime {
         return input.format(formatter);
     }
 
+    public int compareTo(EndTime other) {
+        return this.value.compareTo(other.value);
+    }
+
 }

@@ -69,4 +69,8 @@ public class StartTime {
         return input.format(formatter);
     }
 
+    public int compareTo(StartTime other) {
+        return this.value.compareTo(other.value);
+    }
+
 }
