@@ -418,24 +418,24 @@ Extensions
 
 <h3 id="appendix-d--glossary">Appendix D : Glossary</h3>
 
-#### **Mainstream OS**
+**Mainstream OS**
 
 > Windows, Linux, Unix, OS-X
 
-#### **CLI**
+**CLI**
 
 > Command Line Interface
 
-#### **GUI**
+**GUI**
 
 > Graphical User Interface
 
-#### **Task**
+**Task**
 
 > A task may or may not have a specific ending time
 > E.g. Complete Progress Report
 
-#### **Deadline**
+**Deadline**
 
 > A task with a specified ending time is a deadline
 > E.g. Complete Progress Report by 20 March 2017 2359H
