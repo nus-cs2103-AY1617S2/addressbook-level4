@@ -98,17 +98,17 @@ Now you're all set to start managing your tasks! Feel free too refer to our [Fea
 <img src="images/annotated-ui.png" width="600"><br>
 1. Menu bar
 2. Command box
-    * Commands are entered here
+ > Commands are entered here
 3. Output box
-    * Results of commands are displayed here
+ > Results of commands are displayed here
 4. Task cards listing
-    * Tasks retrieved are listed here
+ > Tasks retrieved are listed here
 5. Selected card display
-    * Additional details about the selected task is displayed here
+ > Additional details about the selected task is displayed here
 6. Last saved status
-    * Time of when the tasks are saved is shown here
+ > Time of when the tasks are saved is shown here
 7. Save location status
-    * Current save location is shown here
+ > Current save location is shown here
 
 ## 4. Features
 
@@ -178,8 +178,6 @@ Example:
 > * Only full words will be matched e.g. `Cake` will not match `Cakes`
 > * tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Milk` will match `Get the Milk`
-
-
 
 #### e. Mark task
 
@@ -273,13 +271,13 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another Computer?
 
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
+> **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous task list folder.
 	   
 
 **Q**: How do I save my tasks?
 
-**A**: You don't need to! Your tasks are automatically saved after every command!	   
+> **A**: You don't need to! Your tasks are automatically saved after every command!	   
 
 ## 6. Commands Cheatsheet
 
