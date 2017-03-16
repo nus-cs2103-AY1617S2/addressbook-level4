@@ -7,6 +7,7 @@ public class StartEndDateTime {
     private ZonedDateTime startDateTime;
     private ZonedDateTime endDateTime;
 
+    // TODO add throws IllegalValueException
     public StartEndDateTime(ZonedDateTime startDateTime, ZonedDateTime endDateTime) {
         assert startDateTime != null && endDateTime != null;
 
