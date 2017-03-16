@@ -60,7 +60,6 @@ public class AddCommandParser {
             }
             List<Date> dates = new PrettyTimeParser()
                     .parse(args.substring(lastOccuranceEnd + 1, args.length()));
-            System.out.println(dates.get(0));
             args = args.substring(0, lastOccuranceStart);
             matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME)
                     .matcher(args);
@@ -72,7 +71,6 @@ public class AddCommandParser {
             }
             dates.addAll(new PrettyTimeParser().parse(
                     args.substring(lastOccuranceEnd + 1, args.length())));
-            System.out.println(dates.get(1));
             if (dates
                     .size() >= LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
                 String taskName = args.substring(0, lastOccuranceStart).trim();
