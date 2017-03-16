@@ -112,7 +112,7 @@ Now you're all set to start managing your tasks! Feel free too refer to our [Fea
 When you receive a new task, you can add it to Werkbook using the `add` command.<br>
 Format: `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
 
-Examples:
+Example:
 * `Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important`
 
 > * Date and time must be formatted as DD/MM/YYYY HHMM<br>
@@ -154,7 +154,7 @@ Example:
 Too many tasks? Don't worry! Simply use the `find` command to bring up a list of tasks containing the specified keyword in the name.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-Examples:
+Example:
 * `find Milk`<br>
   Returns `Get the Milk` but not `Get the milk`
 
@@ -169,31 +169,27 @@ Examples:
 
 #### e. Mark task
 
-Marks the status of a task in the task list as `Complete` or `Incomplete`.<br>
+Finally done with that long and tedious project? Mark it as `Completed` using the `mark` command!<br>
 Format: `mark INDEX`
 
+Example:
+* `mark 1`<br>
+  Updates the task status to `Complete` if it is `Incomplete`. <br>
+  
+Oops! Missed out on some project requirements? Just use the `mark` command again to mark the task as `Incomplete` again.<br>
+* `mark 2`<br> 
+  Updates the task status to `Incomplete` if it is `Complete`. <br>
+  
 > * Marks the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * If the task's status is `Incomplete`, the command will update it to `Complete` and vice-versa.
-
-Examples:
-
-* `mark 1`<br>
-  Updates the task status to `Complete` if it is `Incomplete`. <br>
-  Updates the task status to `Incomplete` if it is `Complete`. <br>
 
 #### f. Delete task
 
-Deletes the specified task from the task list.<br>
+Accidentally added duplicate tasks? Use the `delete` command to remove the specified task from Werkbook.<br>
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
 Examples:
-
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task list.
@@ -201,9 +197,13 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
+
 #### g. Clear all tasks
 
-Clears all entries from the task list.<br>
+Seeking a fresh start? Use the `clear` command to clear all the tasks in Werkbook and start anew!<br>
 Format: `clear`
 
 ### ii. Program Usage
