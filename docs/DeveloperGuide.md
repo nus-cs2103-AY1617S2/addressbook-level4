@@ -1,6 +1,6 @@
 # Opus - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,23 +16,21 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+---
 
 ## 1. Setting up
 
 ### 1.1. Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
-
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
-
-2. **Eclipse** IDE. Follow the instructions in [this page](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE)      to download and install Eclipse. 
-    >Eclipse Neon and above recommended for this project.
-3. **e(fx)clipse** plugin for Eclipse. (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+1. **JDK 1.8.0_60 or later**<br>
+    > JDK version `1.8.0_60` or later is required to run the project correctly
+2. **Eclipse IDE Neon**. 
+    >Follow the instructions in [this page](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE) to download and install Eclipse.
+3. **e(fx)clipse plugin for Eclipse**. 
+    >Follow the instructions given in [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious) to set up e(fx)clipse for Eclipse
 4. **Buildship Gradle Integration**
     >Buildship is bundled together with Eclipse Neon and above.
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+5. **Checkstyle Plug-in**
 
 ### 1.2. Installing Checkstyle manually
     
