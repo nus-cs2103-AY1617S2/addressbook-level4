@@ -23,7 +23,7 @@ Welcome to ToLuist's Developer Guide.
 By going through this document, you will learn how to set up the project, understand the architecture of the 
 application as well as know how to troubleshoot some common development issues.
 
-We have organized the guide in a top-down so that, as a new developer, you can look at the big picture of the project
+We have organized the guide in a top-down manner so that, as a new developer, you can look at the big picture of the project
  before zooming in on specific components.
 
 ## 2. Setting up
@@ -176,13 +176,13 @@ _Figure 3.2.3 : Interactions Inside the UI for the `add study` Command_
 
 The reactive approach is borrowed from modern Javascript front-end frameworks such as [React.js](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org/v2/guide/reactivity.html).
 
-### 3.2 Dispatcher component
+### 3.3. Dispatcher component
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
 `Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command.
 
-### 3.3. Controller component
+### 3.4. Controller component
 
 <img src="images/ControllerClassDiagram.png" width="600"><br>
 _Figure 3.3 : Structure of the Controller Component_
@@ -195,13 +195,13 @@ _Figure 3.3 : Structure of the Controller Component_
 - After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
 
 
-### 3.4. Model component
+### 3.5. Model component
 
 **API** : [`TodoList.java`](../src/main/java/seedu/toluist/model/TodoList.java)
 
 The `Model` stores the task data for the app inside the memory.
 
-### 3.5. Storage component
+### 3.6. Storage component
 
 **API** : [`TodoListStorage.java`](../src/main/java/seedu/toluist/storage/TodoListStorage.java)
 
