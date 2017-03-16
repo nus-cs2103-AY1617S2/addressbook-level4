@@ -4,7 +4,7 @@ Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app.
 
 This Developer Guide is for any developer who wishes to continue development of this project. You should be proficient in Java.
 
-## Table of Contents
+<h2 id="table-of-contents">Table of Contents</h2>
 
 1. [Setting Up](#1-setting-up)
 2. [Design](#2-design)
@@ -23,7 +23,7 @@ This Developer Guide is for any developer who wishes to continue development of 
     * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+<h2 id="1-setting-up">1. Setting up</h2>
 
 #### Prerequisites
 
@@ -78,7 +78,7 @@ This Developer Guide is for any developer who wishes to continue development of 
 
 **[⬆ back to top](#table-of-contents)**
 
-## 2. Design
+<h2 id="2-design">2. Design</h2>
 
 ### Architecture
 
@@ -130,7 +130,7 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 
 The sections below give more details of each component.
 
-### UI component
+<h3 id="ui-component">UI component<h3>
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 
@@ -150,7 +150,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### Logic component
+<h3 id="logic-component">Logic component</h3>
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -165,7 +165,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 
-### Model component
+<h2 id="model-component">Model component</h2>
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
@@ -178,7 +178,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### Storage component
+<h3 id="storage-component">Storage component</h3>
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 
@@ -194,7 +194,7 @@ Classes used by multiple components are in the `seedu.geekeep.commons` package.
 
 **[⬆ back to top](#table-of-contents)**
 
-## 3. Implementation
+<h2 id="3-implementation">3. Implementation</h2>
 
 ### Logging
 
@@ -222,7 +222,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 **[⬆ back to top](#table-of-contents)**
 
-## 4. Testing
+<h2 id="4-testing">4. Testing</h2>
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -267,9 +267,9 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 **[⬆ back to top](#table-of-contents)**
 
-## 5. Dev Ops
+<h2 id="5-dev-ops">5. Dev Ops</h2>
 
-### Build Automation
+### **Build Automation**
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
@@ -298,9 +298,9 @@ b. Require developers to download those libraries manually (this creates extra w
 
 **[⬆ back to top](#table-of-contents)**
 
-## 6. Appendices
+<h2 id="6-appendices">6. Appendices</h2>
 
-### **Appendix A : User Stories**
+<h3 id="appendix-a--user-stories">Appendix A : User Stories</h3>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | user who also uses Google Calendar | sync tasks to Google Calendar | see existing tasks and add local tasks to Google Calendar |
 
 
-### **Appendix B : Use Cases**
+<h3 id="appendix-b--use-cases">Appendix B : Use Cases</h3>
 
 (For all use cases below, the System is the TaskManager and the Actor is the user, unless specified otherwise)
 
@@ -400,7 +400,7 @@ Extensions
 
 > Use case ends
 
-### **Appendix C : Non Functional Requirements**
+<h3 id="appendix-c--non-functional-requirements">Appendix C : Non Functional Requirements</h3>
 
 1. Should work on Windows 7 or later as long as it has Java 1.8.0_60 or higher installed.
 
@@ -416,7 +416,7 @@ Extensions
 
 7. Users should be able to execute all commands by using the CLI alone
 
-### **Appendix D : Glossary**
+<h3 id="appendix-d--glossary">Appendix D : Glossary</h3>
 
 #### **Mainstream OS**
 
@@ -440,7 +440,7 @@ Extensions
 > A task with a specified ending time is a deadline
 > E.g. Complete Progress Report by 20 March 2017 2359H
 
-### **Appendix E : Product Survey**
+<h3 id="appendix-e--product-survey">**Appendix E : Product Survey**</h3>
 
 #### **Google Keep**
 
