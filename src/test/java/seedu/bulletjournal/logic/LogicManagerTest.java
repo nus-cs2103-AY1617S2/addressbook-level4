@@ -41,8 +41,8 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.BeginTime;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -189,20 +189,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 s/valid@email.butNoPhonePrefix b/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name d/12345 valid@email.butNoPrefix b/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name d/12345 s/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add []\\[;] d/12345 s/valid@e.mail b/valid, address",
                 TaskName.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        assertCommandFailure("add Valid Name d/not_numbers s/valid@e.mail b/valid, address",
                 Deadline.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("add Valid Name d/12345 s/notAnEmail b/valid, address",
                 Status.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name d/12345 s/valid@e.mail b/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -418,7 +418,7 @@ public class LogicManagerTest {
             TaskName taskName = new TaskName("Adam Brown");
             Deadline privatePhone = new Deadline("111111");
             Status status = new Status("adam@gmail.com");
-            Detail privateAddress = new Detail("111, alpha street");
+            BeginTime privateAddress = new BeginTime("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -437,7 +437,7 @@ public class LogicManagerTest {
                     new TaskName("Person " + seed),
                     new Deadline("" + Math.abs(seed)),
                     new Status(seed + "@email"),
-                    new Detail("House of " + seed),
+                    new BeginTime("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -449,9 +449,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(" s/").append(p.getEmail());
+            cmd.append(" d/").append(p.getPhone());
+            cmd.append(" b/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -536,7 +536,7 @@ public class LogicManagerTest {
                     new TaskName(name),
                     new Deadline("1"),
                     new Status("1@email"),
-                    new Detail("House of 1"),
+                    new BeginTime("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

@@ -3,8 +3,8 @@ package seedu.bulletjournal.testutil;
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.BeginTime;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
 
@@ -40,7 +40,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withDetail(String address) throws IllegalValueException {
-        this.task.setAddress(new Detail(address));
+        this.task.setAddress(new BeginTime(address));
         return this;
     }
 
