@@ -77,7 +77,7 @@
 
 .split-pane:horizontal .split-pane-divider {
     -fx-border-color: transparent #09005e transparent #09005e;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-background-color: transparent, derive(#07013d, 10%);
 }
 
 .split-pane {
