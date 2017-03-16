@@ -8,6 +8,10 @@ This Developer Guide is for any developer who wishes to continue development of 
 
 1. [Setting Up](#1-setting-up)
 2. [Design](#2-design)
+    * [UI](#ui-component)
+    * [Logic](#logic-component)
+    * [Model](#model-component)
+    * [Storage](#storage-component)
 3. [Implementation](#3-implementation)
 4. [Testing](#4-testing)
 5. [Dev Ops](#5-dev-ops)
