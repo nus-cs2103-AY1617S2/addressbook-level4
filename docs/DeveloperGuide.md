@@ -86,26 +86,34 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
+#### Main
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
+#### Commons
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* `LogsCenter` : Used by many classes to write log messages to the App's log file for debugging and communication between developers.
 
-The rest of the App consists of four components.
+#### User Interface (UI)
+The [**`UI`**](#ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists. 
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+#### Logic
+The [**`Logic`**](#logic-component) accepts commands sent from the user pass it to the model to process.
 
-Each of the four components
+#### Model
+The [**`Model`**](#model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
+
+#### Storage
+The [**`Storage`**](#storage-component) Reads data from, and writes data to, the hard disk.
+
+Each of the four components, [**`UI`**](#ui-component), [**`Logic`**](#logic-component), 
+[**`Model`**](#model-component) and [**`Storage`**](#storage-component)
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
@@ -115,8 +123,9 @@ interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.1.2 : Class Diagram of the Logic Component_
 
-#### Events-Driven nature of the design
+#### Events-Driven Architecture
 
+Event-driven architecture (EDA) consists of event emitters and receivers that allow loosely coupled components to communicate each other. The affected components react only when they receive events and process accordingly.
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
@@ -139,17 +148,31 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Xu Bili
+Author: [Xu Bili](http://github.com/xbili)
+
+The `UI` component allows users to enter commands and receive the results through its graphical interfaces. It is responsible to handle the user interactions and ensure the commands are passed to `Logic` correctly.
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TodayTaskListPanel`,
-`WeekTaskListPanel`, `FloatingTaskListPanel`,`StatusBarFooter`, `BrowserPanel` etc. 
+The UI consists of a `MainWindow` consists of multiple parts e.g.`CommandBox`, `ResultDisplay`, `TodayTaskListPanel`,
+`WeekTaskListPanel`, `FloatingTaskListPanel`,`StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
+The `CommandBox` allows users to enter the commands which will later be executed in `Logic`.
+
+The `ResultDisplay` panel shows the feedback of the commands.
+
+The `TodayTaskListPanel` shows all incomplete tasks that are due today and completed tasks that have been done today.
+
+The `WeekTaskListPanel` shows all incomplete tasks that are due within a week.
+
+The `FloatingTaskListPanel` shows all the incomplete tasks that do not have deadlines.
+
+The `StatusBarFooter` shows when the app has been last updated and storage file path.
+ 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
@@ -163,7 +186,11 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Lam Guang Jun
+Author: [Lam Guang Jun](http://github.com/gjlam95)
+
+The `Logic` component process all the business logic and incoming requests. 
+It manipulates data based on the `Model` component and communicates with the `UI` component
+to display the final output.
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -180,36 +207,41 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+In this diagram, the `Logic Manager` receives an event to delete the task at index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is pass back to the `UI` component through `CommandResult`.
+
 ### 2.4. Model component
 
-Author: Han Lynn
+Author: [Han Lynn](http://github.com/hlynn93)
+
+The `Model` component handles the data related logic and defines the structure of the data. It reacts to the `Logic` requests and changes its and its attributes' states accordingly.
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model` component does not depends on other three components and consists of three main objects: `Task`, `Tag` and `UserPref`.
+* The `UserPref` object represents the user's preferences.
+* The `Task` object stores the attributes of task which consist of `Name`, `Priority`, `Status`, `Note`, `StartTime` and `EndTime`. It is also linked to the `Tag` object that categorises the existing tasks.
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
 ### 2.5. Storage component
 
-Author: Shi Yanzhang
+Author: [Shi Yanzhang](http://github.com/mynameisyz)
+
+The `Storage` component reads and writes component state information to the storage files in the hard disk.
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-The `Storage` component,
+The `Storage` component listens the `TaskManagerChangedEvent` and 
+whenever there is a change to the task manager data, the component updates the storage files accordingly. It
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
+* saves `UserPref` objects in json format and read it back.
+* saves the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
