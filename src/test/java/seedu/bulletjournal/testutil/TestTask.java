@@ -82,10 +82,14 @@ public class TestTask implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-
-    public String getAddCommand() {
+/**
+ * Assume addCommand is one of the valid add commands as defined in FlexibleCommand class
+ * @param command
+ * @return
+ */
+    public String getAddCommand(String addCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append(addCommand + this.getName().fullName + " ");
         sb.append("b/" + this.getAddress().value + " ");
         sb.append("d/" + this.getPhone().value + " ");
         sb.append("s/" + this.getEmail().value + " ");

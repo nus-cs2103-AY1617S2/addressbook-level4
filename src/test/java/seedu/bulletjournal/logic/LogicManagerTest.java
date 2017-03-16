@@ -165,12 +165,19 @@ public class LogicManagerTest {
     @Test
     public void execute_help() {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TodoList(), Collections.emptyList());
+        assertCommandSuccess("h", HelpCommand.SHOWING_HELP_MESSAGE, new TodoList(), Collections.emptyList());
+        assertCommandSuccess("manual", HelpCommand.SHOWING_HELP_MESSAGE, new TodoList(), Collections.emptyList());
+        assertCommandSuccess("instructions", HelpCommand.SHOWING_HELP_MESSAGE, new TodoList(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new TodoList(), Collections.emptyList());
+        assertCommandSuccess("close", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new TodoList(), Collections.emptyList());
+        assertCommandSuccess("logout", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TodoList(), Collections.emptyList());
     }
 
@@ -182,6 +189,24 @@ public class LogicManagerTest {
         model.addPerson(helper.generatePerson(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
+
+        model.addPerson(helper.generatePerson(1));
+        model.addPerson(helper.generatePerson(2));
+        model.addPerson(helper.generatePerson(3));
+
+        assertCommandSuccess("clr", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
+
+        model.addPerson(helper.generatePerson(1));
+        model.addPerson(helper.generatePerson(2));
+        model.addPerson(helper.generatePerson(3));
+
+        assertCommandSuccess("c", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
+
+        model.addPerson(helper.generatePerson(1));
+        model.addPerson(helper.generatePerson(2));
+        model.addPerson(helper.generatePerson(3));
+
+        assertCommandSuccess("empty", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
     }
 
 
@@ -216,7 +241,25 @@ public class LogicManagerTest {
         expectedAB.addPerson(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+        assertCommandSuccess(helper.generateAddCommand("add ", toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getPersonList());
+
+        model.deletePerson(toBeAdded);
+        assertCommandSuccess(helper.generateAddCommand("a ", toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getPersonList());
+
+        model.deletePerson(toBeAdded);
+        assertCommandSuccess(helper.generateAddCommand("create ", toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getPersonList());
+
+        model.deletePerson(toBeAdded);
+        assertCommandSuccess(helper.generateAddCommand("new ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
                 expectedAB.getPersonList());
@@ -233,7 +276,7 @@ public class LogicManagerTest {
         model.addPerson(toBeAdded); // person already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand("add ", toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
 
     }
 
@@ -249,6 +292,31 @@ public class LogicManagerTest {
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
+                ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("l",
+                ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("ls",
+                ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("show",
+                ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("display",
+                ListCommand.MESSAGE_SUCCESS,
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("showall",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
@@ -315,6 +383,20 @@ public class LogicManagerTest {
                 expectedAB.getPersonList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
+
+        assertCommandSuccess("s 2",
+                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                expectedAB,
+                expectedAB.getPersonList());
+        assertEquals(1, targetedJumpIndex);
+        assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
+
+        assertCommandSuccess("choose 2",
+                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                expectedAB,
+                expectedAB.getPersonList());
+        assertEquals(1, targetedJumpIndex);
+        assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
     }
 
 
@@ -342,6 +424,8 @@ public class LogicManagerTest {
                 String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
                 expectedAB,
                 expectedAB.getPersonList());
+
+        //TODO: JUnit tests for variations of delete command
     }
 
 
@@ -368,6 +452,21 @@ public class LogicManagerTest {
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
+
+        assertCommandSuccess("f KEY",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("search KEY",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("lookup KEY",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
     }
 
     @Test
@@ -387,6 +486,21 @@ public class LogicManagerTest {
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
+
+        assertCommandSuccess("f KEY",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("search KEY",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("lookup KEY",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
     }
 
     @Test
@@ -403,6 +517,21 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         assertCommandSuccess("find key rAnDoM",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("search key rAnDoM",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("f key rAnDoM",
+                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                expectedAB,
+                expectedList);
+
+        assertCommandSuccess("lookup key rAnDoM",
                 Command.getMessageForPersonListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -442,11 +571,12 @@ public class LogicManagerTest {
             );
         }
 
-        /** Generates the correct add command based on the person given */
-        private String generateAddCommand(Task p) {
+        /** Generates the correct add command based on the person given
+         * Assumption: command is a valid command word for add*/
+        private String generateAddCommand(String command, Task p) {
             StringBuffer cmd = new StringBuffer();
 
-            cmd.append("add ");
+            cmd.append(command);
 
             cmd.append(p.getName().toString());
             cmd.append(" s/").append(p.getEmail());

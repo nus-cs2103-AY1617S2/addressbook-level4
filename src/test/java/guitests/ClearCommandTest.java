@@ -11,20 +11,58 @@ public class ClearCommandTest extends AddressBookGuiTest {
 
         //verify a non-empty list can be cleared
         assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
-        assertClearCommandSuccess();
+        assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
         assertTrue(personListPanel.isListMatching(td.hoon));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
         //verify clear command works when the list is empty
-        assertClearCommandSuccess();
+        assertClearCommandSuccess("clear");
+
+        //verify other commands can work after a clear command
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand("delete 1");
+        assertListSize(0);
+        assertClearCommandSuccess("clr");
+
+
+        //verify other commands can work after a clear command
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand("delete 1");
+        assertListSize(0);
+        assertClearCommandSuccess("c");
+
+        //verify other commands can work after a clear command
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand("delete 1");
+        assertListSize(0);
+        assertClearCommandSuccess("clears");
+
+        //verify other commands can work after a clear command
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand("delete 1");
+        assertListSize(0);
+        assertClearCommandSuccess("empty");
+
+
+        //verify other commands can work after a clear command
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand("delete 1");
+        assertListSize(0);
+        assertClearCommandSuccess("empties");
+
     }
 
-    private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+    private void assertClearCommandSuccess(String clearCommand) {
+        commandBox.runCommand(clearCommand);
         assertListSize(0);
         assertResultMessage("Address book has been cleared!");
     }

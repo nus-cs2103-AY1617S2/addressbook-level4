@@ -17,7 +17,6 @@ import seedu.bulletjournal.logic.commands.HelpCommand;
 import seedu.bulletjournal.logic.commands.IncorrectCommand;
 import seedu.bulletjournal.logic.commands.ListCommand;
 import seedu.bulletjournal.logic.commands.SelectCommand;
-
 /**
  * Parses user input.
  */
@@ -40,7 +39,10 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandFromUser = matcher.group("commandWord");
+        FlexibleCommand flexibleCmd = new FlexibleCommand(commandFromUser);
+        final String commandWord = flexibleCmd.getCommandWord();
+
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
