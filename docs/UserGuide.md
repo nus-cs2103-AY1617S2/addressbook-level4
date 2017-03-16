@@ -56,7 +56,7 @@ To start Werkbook, simple double click on `werkbook.jar`.
 ### iii. Interface Introduction
 After launching Werkbook, you will be greeted with the main interface.
 
-<img src="images/userguide-figure-3.jpg" width="600"><br>
+<img src="images/userguide-figure-3.png" width="600"><br>
 *Figure 3: Werkbook's main interface*
 
 You can find the **Command Box** at the top of the interface, this is where you type your commands!
