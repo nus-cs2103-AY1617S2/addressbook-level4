@@ -29,8 +29,9 @@ public class FlexibleCommand {
     public String getCommandWord() {
         for (String commandGroup : commandGroups) {
             for (String command : commandGroup.split(" ")) {
-                if (commandFromUser.equals(command))
+                if (commandFromUser.equals(command)) {
                     return commandGroup.split(" ")[0];
+                }
             }
         }
         return commandFromUser;
