@@ -117,13 +117,7 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
 
         browserPanel = new BrowserPanel(browserPlaceholder);
-        try{
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        }
-        catch(Exception e){
-        	System.out.println(getTaskListPlaceholder());
-        	//System.out.println(logic.getFilteredTaskList());
-        }
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);

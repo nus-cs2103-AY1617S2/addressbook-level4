@@ -9,7 +9,7 @@ import seedu.jobs.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -28,7 +28,7 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().fullName);
+        name.setText(task.getName().getName());
         id.setText(displayedIndex + ". ");
         startTime.setText(task.getStartTime().value);
         description.setText(task.getDescription().value);

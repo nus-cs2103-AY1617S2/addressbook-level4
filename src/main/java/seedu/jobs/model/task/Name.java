@@ -27,6 +27,7 @@ public class Name {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Name(Optional<String> name) throws IllegalValueException {
+    	System.out.println(name.get());
         assert name.get() != null;
         String trimmedName = name.get().trim();
         if (!isValidName(trimmedName)) {
@@ -41,7 +42,10 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.length() <= NAME_LENGTH_CONSTRAINTS;
     }
-
+    
+    public String getName(){
+    	return fullName;
+    }
 
     @Override
     public String toString() {
