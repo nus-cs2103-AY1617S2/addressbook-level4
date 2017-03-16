@@ -10,7 +10,7 @@ public class Description {
      */
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Description can contain any characters";
-    public static final String DESCRIPTION_VALIDATION_REGEX = ".+";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "^\\w+(.+)?";
 
     public final String value;
 
@@ -48,8 +48,8 @@ public class Description {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UrgencyLevel // instanceof handles nulls
-                        && this.value.equals(((UrgencyLevel) other).value)); // state
+                || (other instanceof Description // instanceof handles nulls
+                        && this.value.equals(((Description) other).value)); // state
         // check
     }
 
