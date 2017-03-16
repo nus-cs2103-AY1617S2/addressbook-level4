@@ -13,7 +13,6 @@ import seedu.tasklist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.tasklist.commons.exceptions.DataConversionException;
 import seedu.tasklist.model.ReadOnlyTaskList;
 import seedu.tasklist.model.UserPrefs;
-import seedu.tasklist.commons.core.Config;
 
 /**
  * Manages storage of TaskList data in local storage.
@@ -23,7 +22,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private TaskListStorage taskListStorage;
     private UserPrefsStorage userPrefsStorage;
-    private Config config;
 
 
     public StorageManager(TaskListStorage taskListStorage, UserPrefsStorage userPrefsStorage) {
@@ -75,9 +73,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveTaskList(ReadOnlyTaskList flexitask, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskListStorage.saveTaskList(flexitask, filePath);
         taskListStorage = new XmlTaskListStorage(filePath);
-        config.setTaskListFilePath(filePath);
     }
 
 
