@@ -64,7 +64,7 @@ Use case ends
 
 1b. The attribute given is invalid
 
-> 3b1. Opus shows an error message
+> 1b1. Opus shows an error message
 
 > Use case ends
 
@@ -72,7 +72,7 @@ Use case ends
 
 > 1c1. Opus shows an error message
 
-> Use case ends
+Use case ends
 
 
 #### Use case: Mark task as complete
