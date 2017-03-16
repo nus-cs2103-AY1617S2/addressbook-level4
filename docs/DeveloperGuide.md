@@ -1,14 +1,16 @@
-# TaskManager - Developer Guide
+# DoMe! Developer Guide
 
-By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#1-setting-up)
-2. [Design](#2-design)
-3. [Implementation](#3-implementation)
-4. [Testing](#4-testing)
-5. [Dev Ops](#5-dev-ops)
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
+7. [Appendices](#7-appendices)
 
 * [Appendix A : User Stories](#appendix-a--user-stories)
 * [Appendix B : Use Cases](#appendix-b--use-cases)
@@ -16,14 +18,19 @@ By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 * [Appendix D : Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+## 1. Introduction
 
-## 1. Setting up
+*DoMe!* is a simple todo app for users to manage their daily tasks, such as keeping track of deadlines and scheduling of events. This app is also a Java desktop application that has a GUI.
 
-### 1.1. Prerequisites
+This guide describes the design and implementation of *DoMe!*. Through this guide, you will gain an understanding of how *DoMe!* works and how you can further contribute to its development.
+
+## 2. Setting up
+
+### 2.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
-    > Having any Java 8 version is not enough. <br>
+    > Having any Java 8 version is not enough. 
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
@@ -33,7 +40,7 @@ By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 2.2. Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
 1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -48,7 +55,7 @@ By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 2.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. taskmanager
@@ -59,7 +66,7 @@ By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 2.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -73,12 +80,12 @@ By : `Team W15-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+## 3. Design
 
-### 2.1. Architecture
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
@@ -100,10 +107,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`UI`**](#ui-component) : Shows the user interface of the application.
+* [**`Logic`**](#logic-component) : Executes commands.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`Storage`**](#storage-component) : Reads data from the hard disk, and writes data to the hard disk.
 
 Each of the four components
 
@@ -113,23 +120,23 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+_Figure 3.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images\SDforDeletePerson1.jpg" width="800"><br>
+_Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+<img src="images\SDForDeletePersonEventHandling1.jpg" width="800"><br>
+_Figure 3.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -137,11 +144,11 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### 3.2. UI component
 
 Author: Alice Bee
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/UIClassDiagram1.jpg" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/
@@ -161,12 +168,12 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
+### 3.3. Logic component
 
 Author: Bernard Choo
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+_Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
@@ -178,46 +185,46 @@ _Figure 2.3.1 : Structure of the Logic Component_
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 3.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
+### 3.4. Model component
 
 Author: Cynthia Dharman
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+<img src="images/ModelClassDiagram1.png" width="800"><br>
+_Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* depends on none of the other three components.
 
-### 2.5. Storage component
+### 3.5. Storage component
 
 Author: Darius Foong
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
+<img src="images/StorageClassDiagram1.png" width="800"><br>
+_Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component,
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* saves `UserPref` objects in json format and read it back.
+* saves the Address Book data in xml format and read it back.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.taskmanager.commons` package.
 
-## 3. Implementation
+## 4. Implementation
 
-### 3.1. Logging
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -231,18 +238,18 @@ and logging destinations.
 **Logging Levels**
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
+* `WARNING` : Caution advised if the application were to continue
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## 5. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -279,7 +286,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -289,23 +296,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## 6. Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -314,7 +321,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -331,7 +338,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Address Book depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
@@ -340,7 +347,9 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-## Appendix A : User Stories
+## 7. Appendices
+
+### Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
@@ -363,20 +372,17 @@ Priority | As a ... | I want to ... | So that I can...
 |`***`|User|change UI theme|customise the application|
 |`***`|User|choose location to store save data|adjust application according to my needs|
 |`**`|User|list upcoming deadlines|keep track of my deadlines|
+|`**`|User|be alerted of conflicting tasks|avoid duplicates|
 |`**`|User|have a relevant link for my task|keep track of the task details|
 |`**`|User|snooze my tasks|adjust application according to my needs|
 |`**`|User|be reminded of my tasks x minutes before deadline|get reminder to do my task|
 |`**`|User|repeat tasks|add a repeating task just once|
 |`**`|User|add notes about a task|keep track of my progress|
-|`**`|User|be alerted of conflicting tasks|avoid duplicates|
-|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
-|`*`|User|change font size|adjust application according to my needs|
-|`*`|User|view progress report|have a detailed overview of my current progress|
-|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
 |`*`|User|add a message of the day|customise the application|
+|`*`|User|use arrow keys to scroll through previously typed commands|save myself the trouble of typing similar words|
+|`*`|User|view my tasks in calendar form|have a visual representation of my schedule|
 
-
-## Appendix B : Use Cases
+### Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `TaskManager`)
 
@@ -386,28 +392,31 @@ Priority | As a ... | I want to ... | So that I can...
 |[Add task](#use-case-add-task)|Adds a task to the todo list. The task may have a concrete or floating time. Including tags at the end of the task is optional|
 |[Delete task](#use-case-delete-task)|Removes a task from the todo list|
 |[Mark task as complete](#use-case-complete-task)|Marks a task done by its name|
-|[List Upcoming Deadlines](#use-case-list-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
+|[Edit task](#use-case-edit-task)|Access a particular task and make changes|
+|[Add tags to created task](#use-case-add-tags-to-created-task)|Adds one or more tags to a task to label it|
+|[Search](#use-case-search)|Displays a list of tasks with matching keywords as queried|
 |[List uncompleted tasks](#use-case-list-uncompleted-tasks)| Lists all uncompleted tasks|
 |[List completed tasks](#use-case-list-completed-tasks)| Lists all completed tasks|
-|[Calendar View](#use-case-calendar-view)|View the todo list as a calendar|
-|[Sync with Google Calendar](#use-case-sync-with-google-calendar)|Synchronise the todo list with a Google Calendar|
-|[Customize File Storing](#use-case-customize-file-storing)|Set a custom location for where to save the data|
+|[View overdue tasks](#use-case-view-overdue-tasks)|Displays a list of tasks that are overdue|
+|[Show progress report](#use-case-show-task-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
+|[Sync with Google Calendar](#use-case-sync-with-google-calendar)|Synchronises the todo list with a Google Calendar|
+|[Undo previous command](#use-case-undo-previous-command)|Undoes the previous command|
+|[Change UI theme](#use-case-change-ui-theme)|Changes the theme of user interface|
+|[Customize file storing](#use-case-customize-file-storing)|Sets a custom location for where to save the data|
+|[List upcoming deadlines](#use-case-list-upcoming-deadlines)|Lists the tasks with upcoming deadlines within the next 2 weeks|
+|[Same name detection](#use-case-same-name-detection)|Detects same name and send warning|
+|[Attach links](#use-case-attach-links)|Attaches links to a task|
+|[Snooze task](#use-case-snooze-task)|Snoozes task to a later time|
 |[Reminder mode](#use-case-reminder-mode)|Sets whether the application will send a reminder as a task's deadline draws near|
-|[Attach Links](#use-case-attach-links)|Attaches links to a task|
-|[Show Progress Report](#use-case-show-task-progress-report)|Displays the current statistics on how many tasks have been added, completed, and pending completion|
-|[Search](#use-case-search)|Displays a list of tasks with matching keywords as queried|
-|[View Overdue Tasks](#use-case-view-overdue-tasks)|Displays a list of tasks that are overdue|
-|[Undo Previous Command](#use-case-undo-previous-command)|Undo the previous command|
-|[Repeat Task](#use-case-repeat-task)|Repeat the task every week|
-|[Add Tags to Created Task](#use-case-add-tags-to-created-task)|Add one or more tags to a task to label it|
-|[Customise Message of the Day](#use-case-customise-message-of-the-day)|Add a message of the day that is displayed each time the program starts up|
-|[Scroll Through Previous Commands](#use-case-scroll-through-previous-commands)|Iterate through previously executed commands|
+|[Repeat task](#use-case-repeat-task)|Repeats the task every week|
+|[Customise 'Message of the Day'](#use-case-customise-message-of-the-day)|Adds a message of the day that is displayed each time the program starts up|
+|[Scroll through previous commands](#use-case-scroll-through-previous-commands)|Iterates through previously executed commands|
+|[Calendar view](#use-case-calendar-view)|Views the todo list as a calendar|
 
 ---
 
-### Use Case: Display Help
-
-#### Main Success Scenario:
+#### Use Case: Display Help
+##### Main Success Scenario:
 
 1. User requests to display help.
 2. System displays the help messages.
@@ -422,9 +431,8 @@ Priority | As a ... | I want to ... | So that I can...
 
 ---
 
-### Use Case: Add Task
-
-#### Main Success Scenario:
+#### Use Case: Add Task
+##### Main Success Scenario:
 
 1. User requests to add a task.
 2. System accepts the task.
@@ -439,8 +447,8 @@ Priority | As a ... | I want to ... | So that I can...
 
 ---
 
-### Use case: Delete Task
-#### Main Success Scenario:
+#### Use case: Delete Task
+##### Main Success Scenario:
 1. User requests to list tasks.
 2. System displays tasks.
 3. User deletes a task by its index.
@@ -457,16 +465,15 @@ Use case resumes at step 2.
 
 ---
 
-### Use Case: Complete Task
-
-#### Main Success Scenario:
+#### Use Case: Complete Task
+##### Main Success Scenario:
 1. User requests to list tasks.
 2. System displays tasks.
 3. User selects a task based on its task number and marks it as completed.
 4. System marks the task as completed.
 5. Use case ends.
 
-#### Extension
+##### Extension
 2a. There is no list.
 > Use case ends.
 
@@ -480,8 +487,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Edit Task
-#### Main Success Scenario:
+#### Use case: Edit Task
+##### Main Success Scenario:
 1. User requests to list uncompleted tasks.
 2. System displays uncompleted tasks.
 3. User edits a task.
@@ -498,7 +505,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Add Tags to Created Task
+#### Use case: Add Tags to Created Task
+##### Main Success Scenario:
 1. User requests to list tasks.
 2. System shows a list of tasks.
 3. User requests to add tags to a specific task in the list.
@@ -515,16 +523,16 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Search
-#### Main Success Scenario:
+#### Use case: Search
+##### Main Success Scenario:
 1. User requests for a list of tasks that have matching keywords typed in.
-2. System shows a list of tasks that have the matching keywords.  
+2. System shows a list of tasks that have the matching keywords. 
 3. Use case ends. 
 
 ---
 
-### Use case: List Uncompleted Tasks
-#### Main Success Scenario:
+#### Use case: List Uncompleted Tasks
+##### Main Success Scenario:
 1. User requests for list of uncompleted tasks.
 2. System display list of uncompleted task.
 3. Use case ends.
@@ -536,8 +544,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: List Completed Tasks
-#### Main Success Scenario:
+#### Use case: List Completed Tasks
+##### Main Success Scenario:
 1. User requests for list of completed tasks.
 2. System display list of completed task.
 3. Use case ends.
@@ -549,45 +557,43 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: View Overdue Tasks
-#### Main Success Scenario:
+#### Use case: View Overdue Tasks
+##### Main Success Scenario:
 1. User requests for a list of overdue tasks. 
 2. System shows a list of tasks that are overdue. 
 3. Use case ends.
 
 ---
 
-### Use case: Show Task Progress Report
-
-#### Main Success Scenario:
+#### Use case: Show Task Progress Report
+##### Main Success Scenario:
 1. User requests for a report of his/her completed tasks, overdue tasks and upcoming tasks.
 2. System shows a report of the user's completed tasks, overdue tasks and upcoming tasks.
 3. Use case ends.
 
-#### Extension
+##### Extension
 2a. The list is empty.
 > 2a1. Use case ends.
 
 ---
 
-### Use case: Sync with Google Calendar
-
-#### Main Success Scenario:
+#### Use case: Sync with Google Calendar
+##### Main Success Scenario:
 1. User requests to sync his/her to-do list by giving his/her email address.
 2. System requests password of the email account from user.
 3. User enter the password.
 4. System shows success message to the user.
 5. Use case ends.
 
-#### Extension
+##### Extension
 3a. Email address/Password provided by the user is incorrect 
 > 3a1. System shows error message.
 > 3a2. Use case ends.
 
 ---
 
-### Use case: Undo Previous Command
-#### Main Success Scenario:
+#### Use case: Undo Previous Command
+##### Main Success Scenario:
 1. User requests to undo a previous command that mutates the data. 
 2. System returns the command that was undone.
 3. Use case ends.
@@ -598,14 +604,24 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Customize File Storing
-#### Main Success Scenario:
+#### Use case: Change UI Theme
+##### Main Success Scenario:
+1. User requests to change theme.
+2. System prompts user to select a new theme from list.
+3. User selects theme from list.
+4. System changes the theme.
+5. Use case ends.
+
+---
+
+#### Use case: Customize File Storing
+##### Main Success Scenario:
 1. User requests to store data in the specified file instead of the default storing location.
 2. System transfer all data to the specified file.
 3. System shows success message.
 4. Use case ends.
 
-#### Extension
+##### Extension
 1a. Specified file does not exist 
 > 1a1. System shows error message that specified file does not exist.
 > 1a2. Use case ends.
@@ -616,24 +632,35 @@ Use case resumes at step 2.
 
 ---
 
-
-### Use Case: List Upcoming Deadlines
-
-#### Main Success Scenario:
+#### Use Case: List Upcoming Deadlines
+##### Main Success Scenario:
 1. User requests to view all upcoming deadlines.
 2. System displays all tasks that have yet to be marked as complete.
 3. Use case ends.
 
 ---
 
-### Use case: Attach Links
-#### Main Success Scenario:
+#### Use case: Same Name Detection
+##### Main Success Scenario:
+1. User requests to add a new task.
+2. System detects same name and display message.
+3. User changes the task name.
+4. System adds task.
+5. Use case ends.
+
+##### Extensions
+3. Same name detected again.
+> 3a1. Go back to 2.
+---
+
+#### Use case: Attach Links
+##### Main Success Scenario:
 1. User inputs a link and requests for it to be attached to a task corresponding to the input task number.
 2. System attach the specified link to the specified task.
 3. System shows success message.
 4. Use case ends.
 
-#### Extension
+##### Extension
 1a. The provided link is of invalid format.
 > 1a1. System shows error message that the link is of invalid format.
 > 1a2. Use case ends.
@@ -644,18 +671,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Calendar View
-
-#### Main Success Scenario:
-1. User requests to view todo list in the form of a calendar.
-2. System displays the current and next month as a calendar.
-3. System populates the days with dots for incomplete tasks' due dates.
-4. Use case ends.
-
----
-
-### Use case: Snooze Tasks
-#### Main Success Scenario:
+#### Use case: Snooze Tasks
+##### Main Success Scenario:
 1. User requests to list tasks.
 2. System displays tasks.
 3. User snoozes a task.
@@ -671,14 +688,14 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Reminder mode
-#### Main Success Scenario:
+#### Use case: Reminder mode
+##### Main Success Scenario:
 1. User requests to turn on/off reminder mode for the specified task(s).
 2. System start/stop tracking the specified tasks for reminder.
 3. System shows success message.
 4. Use case ends.
 
-#### Extension
+##### Extension
 1a. Some of the specified task(s) do not exist/are completed/are overdue.
 > 1a1. System shows the list of task numbers previously input by the user that are invalid.
 > 1a2. Use case ends.
@@ -690,8 +707,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Repeat Task
-#### Main Success Scenario:
+#### Use case: Repeat Task
+##### Main Success Scenario:
 1. User requests to list persons.
 2. System shows a list of persons. 
 3. User requests to repeat a specific task in the list. 
@@ -708,8 +725,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Customise Message of the Day
-#### Main Success Scenario:
+#### Use case: Customise 'Message of the Day'
+##### Main Success Scenario:
 1. User requests set a Message of the Day.
 2. System shows current message if it exists. 
 3. User edits the Message of the Day. 
@@ -718,8 +735,8 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: Scroll Through Previous Commands
-#### Main Success Scenario:
+#### Use case: Scroll Through Previous Commands
+##### Main Success Scenario:
 1. User presses the arrow keys to retype the previously typed commands.
 2. System shows previous command if it exists.
 3. Use case ends.
@@ -734,34 +751,15 @@ Use case resumes at step 2.
 
 ---
 
-### Use case: View A Task Progress
-#### Main Success Scenario:
-1. User requests to list uncompleted tasks.
-2. System displays uncompleted tasks.
-3. User requests to view a task's progress.
-4. System displays the task progress.
-5. Use case ends.
-
-##### Extensions
-2. There is no such task.
-> 2a1. Use case ends.
+#### Use case: Calendar View
+##### Main Success Scenario:
+1. User requests to view todo list in the form of a calendar.
+2. System displays the current and next month as a calendar.
+3. System populates the days with dots for incomplete tasks' due dates.
+4. Use case ends.
 
 ---
-
-### Use case: Same Name Detection
-#### Main Success Scenario:
-1. User requests to add a new task.
-2. System detects same name and display message.
-3. User changes the task name.
-4. System adds task.
-5. Use case ends.
-
-##### Extensions
-3. Same name detected again.
-> 3a1. Go back to 2.
-
----
-## Appendix C : Non Functional Requirements
+### Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -770,15 +768,18 @@ Use case resumes at step 2.
 
 {More to be added}
 
-## Appendix D : Glossary
+
+---
+### Appendix D : Glossary
 
 ##### Mainstream OS
 
-> Windows, Linux, Unix, OS-X
+> > Windows, Linux, Unix, OS-X
 
-## Appendix E : Product Survey
+---
+### Appendix E : Product Survey
 
-**Reminders**
+**Reminders** (surveyed by Ng Shao Hui)
 
 > Pros:
 > * Simple and intuitive interface
@@ -790,7 +791,7 @@ Use case resumes at step 2.
 > * Lacks collaborative features
 > * Unable to customise
 
-**Todoist**
+**Todoist** (surveyed by Low Tian Wei)
 
 > Pros:
 > * Ubiquitous, available in many platforms
@@ -803,7 +804,7 @@ Use case resumes at step 2.
 > * Search function limited in free plan
 > * Not available in Windows except for Windows 10
 
-**Cozi Family Organiser**
+**Cozi Family Organiser** (surveyed by Gng Jia Hui)
 
 > Pros:
 > * Many relevant categories like Upcoming Events, Groceries and Calendar
@@ -816,7 +817,7 @@ Use case resumes at step 2.
 > * Some categories like Birthdays are only available in the premium version
 > * Calendar cannot be synced to Google Calendar
 
-**Evernote**
+**Evernote** (surveyed by Ng Shao Hui)
 
 > Pros:
 > * Able to store multiple lists under different headings
@@ -828,7 +829,7 @@ Use case resumes at step 2.
 > * Need to pay to access app over more than 2 devices
 > * No calendar view
 
-**Wunderlist**
+**Wunderlist** (surveyed by Ng Shao Hui)
 > Pros:
 > * Cross platform
 > * Desktop version available
@@ -839,3 +840,15 @@ Use case resumes at step 2.
 > * Unable to repeat tasks
 > * Unable to add subtasks
 
+**Remember The Milk** (surveyed by Le Minh Phuc)
+> Pros: 
+> * Is essentially a CLI app modified to be more interactive using tags
+> * Has desktop version
+> * Has an email-like interface, which is familiar and easy to use
+> * Has a pleasant blue colour theme
+> * Allows the more tech-savy user to set keyboard shortcut
+> * Allows tasks to be repeated
+
+> Cons:
+> * Does not allow the user to divide a task into smaller subtasks
+> * Does not allow the user to attach links/files to a task
