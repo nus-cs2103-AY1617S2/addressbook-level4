@@ -1,5 +1,9 @@
 package seedu.tache.ui;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -34,7 +38,17 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadPage(String url) {
-        browser.getEngine().load(url);
+        try {
+            String calendarTemplate = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")
+                        + "/src/main/resources/html/calendar.html")));
+
+            browser.getEngine().setJavaScriptEnabled(true);
+            browser.getEngine().loadContent(calendarTemplate);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     /**
