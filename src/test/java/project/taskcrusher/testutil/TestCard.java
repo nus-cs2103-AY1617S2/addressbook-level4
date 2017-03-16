@@ -84,7 +84,7 @@ public class TestCard implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getTaskName().name + " ");
+        sb.append("add t " + this.getTaskName().name);
         if (this.getDeadline().hasDeadline()) {
             sb.append("d/" + this.getDeadline().deadline + " ");
         }

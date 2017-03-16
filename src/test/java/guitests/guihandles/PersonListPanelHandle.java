@@ -158,6 +158,7 @@ public class PersonListPanelHandle extends GuiHandle {
         if (personCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {
+            System.out.println("Returning null");
             return null;
         }
     }

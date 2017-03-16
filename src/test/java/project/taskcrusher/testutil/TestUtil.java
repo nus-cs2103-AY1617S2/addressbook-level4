@@ -340,6 +340,9 @@ public class TestUtil {
     }
 
     public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+        if (card == null) {
+            assert false;
+        }
         return card.isSameTask(person);
     }
 
