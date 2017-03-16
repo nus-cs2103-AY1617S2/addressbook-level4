@@ -94,7 +94,7 @@ Show details of a specific command using `[COMMAND]` flag.
 List of available commands for help: <br>
 - add <br>
 - edit <br>
-- delete <br>
+- del <br>
 - view <br>
 - done <br>
 - find <br>
@@ -103,6 +103,8 @@ List of available commands for help: <br>
 - undo <br>
 - redo <br>
 - saveto <br>
+- cd <br>
+- reset <br>
 - exit <br>
 
 Format: `help [COMMAND]`
