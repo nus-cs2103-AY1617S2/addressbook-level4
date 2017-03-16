@@ -1,15 +1,24 @@
 package seedu.address.logic.parser;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
@@ -26,6 +35,11 @@ import seedu.address.model.task.Phone;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+
+    private static Parser dateTimeParser = new com.joestelmach.natty.Parser(TimeZone.getDefault()); // TODO timezones
+    // TODO decide if this is the right class
+    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ISO_DATE_TIME;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -108,5 +122,27 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    /**
+     * Parses Date strings into a {@code ZonedDateTime}.
+     */
+    public static ZonedDateTime parseDateTimeString(String dateTime) throws IllegalValueException {
+        List<DateGroup> groups = dateTimeParser.parse(dateTime);
+        for (DateGroup group : groups) {
+            List<Date> dates = group.getDates();
+            if (dates.size() > 0) {
+                // TODO comment Avoid old Date class where possible format
+                Instant instant = dates.get(0).toInstant();
+                ZoneId zoneId = ZoneId.systemDefault();
+
+                // TODO use a ZonedDateTime so user can see time in his timezone, perhaps
+                // Instant can be used where possible and only when reading input and output from user
+                // we use ZonedDateTime
+                ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(instant, zoneId);
+                return zonedDateTime;
+            }
+        }
+        throw new IllegalValueException(dateTime + "TODO is not a valid date.");
     }
 }

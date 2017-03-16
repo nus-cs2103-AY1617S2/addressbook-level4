@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Task(updatedName, updatedTags);
+        return new Task(updatedName, null, null, updatedTags); // TODO use proper arguments
     }
 
     /**

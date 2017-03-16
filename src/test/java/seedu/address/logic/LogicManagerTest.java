@@ -7,10 +7,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,14 +38,17 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.TaskList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartEndDateTime;
 import seedu.address.model.task.Task;
 import seedu.address.storage.StorageManager;
 
@@ -414,13 +420,18 @@ public class LogicManagerTest {
      * A utility class to generate test data.
      */
     class TestDataHelper {
+        // TODO starting test date time, start from 1970, which means to be updated
+        // since time can pass and tasks won't always be valid
+        // note also systemDefault is a bad idea
+        private ZonedDateTime startTestDateTime = ZonedDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneId.systemDefault());
 
         Task accept() throws Exception {
             Name name = new Name("Accept Changes");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            // TODO improve maybe not to use just Optionals
+            return new Task(name, Optional.empty(), Optional.empty(), tags);
         }
 
         /**
@@ -431,8 +442,12 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
+            // note to change
             return new Task(
                     new Name("Task" + seed),
+                    Optional.of(new Deadline(startTestDateTime.plusDays(seed))),
+                    Optional.of(new StartEndDateTime(startTestDateTime.plusDays(seed + 1),
+                            startTestDateTime.plusDays(seed + 2))),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -444,6 +459,21 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(task.getName().toString());
+
+            if (task.getDeadline().isPresent()) {
+                cmd.append(" by ");
+                // TODO double check
+                cmd.append(task.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+            }
+
+            if (task.getStartEndDateTime().isPresent()) {
+                // TODO double check
+                StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
+                cmd.append(" from ");
+                cmd.append(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+                cmd.append(" to ");
+                cmd.append(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            }
 
             UniqueTagList tags = task.getTags();
             for (Tag t: tags) {
@@ -524,8 +554,11 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
+            // TODO check if we really want optional
             return new Task(
                     new Name(name),
+                    Optional.empty(),
+                    Optional.empty(),
                     new UniqueTagList(new Tag("tag"))
             );
         }

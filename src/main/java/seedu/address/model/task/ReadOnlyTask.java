@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -9,6 +11,15 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
+
+    /**
+     * TODO getDeadline()
+     */
+    Optional<Deadline> getDeadline();
+    /**
+     * Start and End Date time
+     */
+    Optional<StartEndDateTime> getStartEndDateTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
