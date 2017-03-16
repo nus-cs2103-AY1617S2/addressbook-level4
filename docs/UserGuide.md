@@ -3,7 +3,7 @@
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Viewing help](#viewing-help)
-    * [Viewing a all command](#viewing-all-commands)
+    * [Viewing all command](#viewing-all-commands)
     * [Viewing a specific command](#viewing-a-specific-command)
   * [Adding a task](#adding-a-task)
     * [Adding a floating task](#adding-a-floating-task)
@@ -53,14 +53,14 @@ Without further ado, let us get started.
    
 1. Download the latest `iManager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your iManager application.
-3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [UI Control](#ui-control) for a more detailed walkthrough of various UI components. 
+3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="800">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
    * **`add SunRiseMarathon`**: adds a reminder to attend SunRise Marathon.
-   * **`find Today`**: searches the task list for all events happening today. 
+   * **`view t`**:  view a list for all events happening today. 
    * **`exit`**: exits the application.
 6. Refer to the [Features](#features) section below for details of each command.
 
@@ -69,9 +69,9 @@ Without further ado, let us get started.
 ## Features
 
 > **Command Format**
-> * Words in `UPPER_CASE` are the parameters.
-> * Words in `lower_case` are command and connectors; e.g., add and every. 
-> * Letters with slash are command identifiers; e.g., d/ and t/.  
+> * Words in `UPPER_CASE` are command parameters.
+> * Words in `lower_case` are command and connectors, e.g. add and every. 
+> * Letters with slash are command identifiers, e.g. d/ and t/.  
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` behind can have multiple instances.
 > * `|` means "or".
@@ -86,7 +86,7 @@ Format: `help`
 
 Examples: 
 * `help` <br>
-  Shows all available commands with examples.
+  Shows all available commands with example.
 
 #### Viewing a specific command
 Show details of a specific command using `[COMMAND]` flag.
@@ -135,16 +135,16 @@ Adds a pending task with only start date & time to the task list. <br>
 Format: `add NAME on START_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
 
 > * Name, description and tag are case insensitive.
-> * Tasks can have any number of tags.
+> * Task can have any number of tags.
 > * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format); e.g. 10-22-2017 1500.
+> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
 > * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
 
 Examples:
 * `add exam on 10-22-2017` <br> 
    Add a pending task named "exam" on 22 October 2017, current time, to the task list.
 * `add exam on 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" on 22 October 2017 1500 with attached description "SR1" and tag "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" on 22 October 2017 1500 with "SR1" and tag "CS2010" to the task list.
  
 ##### Adding a pending task with END DATE & TIME 
 
@@ -153,17 +153,17 @@ Adds a pending task with only end date & time to the task list. <br>
 Format: `add NAME by END_DATETIME [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
 
 > * Name, description and tag are case insensitive.
-> * Tasks can have any number of tags.
+> * Task can have any number of tags.
 > * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format); e.g. 10-22-2017 1500.
+> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
 > * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
 
 Examples: 
 * `add exam by 10-22-2017` <br>
    Add a pending task named "exam" that starts from the current date and time to 22 October 2017 2359 to the task list.
 * `add exam by 10-22-2017 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from the current date and time to 22 October 2017 1500 with attached 
-   description "SR1" and tag "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" that starts from the current date and time to 22 October 2017 1500 with description "SR1" 
+   and tag "CS2010" to the task list.
   
 ##### Adding a pending task with both START DATE & TIME and END DATE & TIME 
 
@@ -174,15 +174,15 @@ Format: `add NAME from START_DATETIME to END_DATETIME [p/PRIORITY] [d/DESCRIPTIO
 > * Name, description and tag are case insensitive.
 > * Tasks can have any number of tags.
 > * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format); e.g. 10-22-2017 1500.
+> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
 > * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
 > * If end time (i.e. HHMM) is not specified, it will be set to **2359**.
 
 Examples:
 * `add exam from 10-22-2017 to 10-22-2016` <br>
-   Add a pending task named "exam" that starts from 22 October 2017, current time, to 22 October 2017, 2359 to the task list.
+   Add a pending task named "exam" that starts from 22 October 2017, current time, to 22 October 2017 2359 to the task list.
 * `add exam from 10-22-2017 1300 to 10-22-2016 1500 p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with attached description 
+   Add a priority 1 pending task named "exam" that starts from 22 October 2017 1300 to 22 October 2017 1500 with description 
    "SR1" and tag "CS2010" to the task list.
   
 #### Adding a recurring task 
@@ -192,48 +192,48 @@ Adds a recurring task that spans over a period of time to the task list. <br>
 Format: `add NAME [at|on|by|from START_DATETIME to END_DATETIME] every [DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION] [t/TAG]` 
 
 > * Name, description and tag are case insensitive.
-> * Tasks can have any number of tags.
+> * Task can have any number of tags.
 > * If task's priority is not specified, it will be set to lowest priority.
-> * Date format is MM-DD-YYYY HHMM (24-hour format); e.g. 10-22-2017 1500.
+> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
 > * If start time (i.e. HHMM) is not specified, it will be set to **CURRENT** time.
 > * If end time (i.e. HHMM) is not specified, it will be set to **2359**.
-> * Any form of abbreviation can be use for `WEEK`, case insensitive; e.g., Tue, Tues, tues, and Tuesday. 
+> * Any form of abbreviation can be use for `WEEK`, case insensitive, e.g. Tue, Tues, tues, and Tuesday. 
 > * **No abbreviation** is allowed for `DAY`, `MONTH` and `YEAR`.
 > * Month (i.e. MM) is ignored for every `MONTH`.
 > * It is **SUFFICE** to use time (i.e. HHMM) for every `DAY` and `WEEK`. Date (i.e. MM-DD-YYYY) will be ignored.
-> * One must include `START_DATETIME` and `END_DATETIME` for every `MONTH` and `YEAR`. 
+> * You must include `START_DATETIME` and `END_DATETIME` for every `MONTH` and `YEAR`. 
 
 Examples:
 * `add exam every day p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts at the current time everyday with attached description "SR1" and tag  
-   "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" that starts at the current time everyday with description "SR1" and tag "CS2010" to the 
+   task list.
 * `add exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Add a priority 1 pending task named "exam" that starts from 22nd October 1300 to 22nd October 1500 every year with 
-   attached description "SR1" and tag "CS2010" to the task list.
+   Add a priority 1 pending task named "exam" that starts from 22nd October 1300 to 22nd October 1500 every year with description "SR1" 
+   and tag "CS2010" to the task list.
 
 ### Editing a task
 
-Edit a task in task list by index or name<br>
+Edit a task in task list by index or name. <br>
 
 Format: `edit INDEX|NAME [at|on|by|from START_DATETIME to END_DATETIME] [every DAY|WEEK|MONTH|YEAR] [p/PRIORITY] [d/DESCRIPTION][t/TAG...]`
 
 > * Name, description and tag are case insensitive.
 > * `INDEX` refers to the index number shown in the most recent listing of tasks. 
-> * `INDEX` **MUST** be positive integer; e.g., 1, 2 and 3.
-> * Date format is MM-DD-YYYY HHMM (24-hour format); e.g. 10-22-2017 1500.
-> * Editing `t/TAG` appends to the existing tags of a task.
+> * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
+> * Date format is MM-DD-YYYY HHMM (24-hour format), e.g. 10-22-2017 1500.
+> * Using `t/TAG` appends to the set of existing tags of a task.
 > * Editing the same tag name remove the tag itself - if a task contains a tag named "friends", using `edit [/t friends]` will remove       it.
-> * All tags of an existing task can be remove using `t/none`, case insensitive. 
-> * Operation is equivalent to deleting an old task and adding a new task, however, tags will not get overwritten unless otherwise 
+> * All tags of an existing task can be remove using `t/none`. 
+> * Operation is equivalent to deleting an old task and adding a new task, however, tags are not overwritten unless otherwise 
     specified (refer to previous annotation).
 
 Examples:
 * `Edit 1 on 10-22-2017 1500 p/1 d/SR1`<br>
-   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 1500 with attached 
-   description "SR1".
+   Edit the first task in the task list such that it is a priority 1 pending task named "exam" on 22 October 2017 1500 with description 
+   "SR1".
 * `Edit exam from 10-22-2017 1300 to 10-22-2017 1500 every year p/1 d/SR1 t/CS2010`<br>
-   Edit the first task in the task list such that it starts from 22nd October 1300 to 22nd October 1500 every year with 
-   attached description "SR1" and append tag "CS2010" to "exam".
+   Edit the first task in the task list such that it starts from 22nd October 1300 to 22nd October 1500 every year with description 
+   "SR1" and tag "CS2010".
 
 ### Deleting a task
 
@@ -243,7 +243,7 @@ Format: `del NAME|INDEX|TAG`
 
 > * Name and tag are case insensitive.
 > * `INDEX` refers to the index number shown in the most recent listing of tasks.
-> * `INDEX` **MUST** be positive integer; e.g., 1, 2 and 3.
+> * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
 > * Deleted task can be restored using the [undo](#undo-most-recent-command) command.
 
 Examples: 
@@ -252,7 +252,7 @@ Examples:
 * `delete 1`<br>
    Delete the first task in the task list.
 * `delete CS2010`<br>
-   Delete all tasks containing tag "CS2010".
+   Delete all tasks containing the tag "CS2010".
 
 ### Viewing tasks
 
@@ -277,12 +277,12 @@ View a list of all "done" task in iManager. Does not show pending, floating, ove
 Format: `view d`<br>
 
 #### Viewing all floating tasks
-View a list of all floating tasks in iManage. Does not show pending, "done", overdue and today's tasks. 
+View a list of all floating tasks in iManager. Does not show pending, "done", overdue and today's tasks. 
 
 Format: `view f`<br>
 
 #### Viewing all overdue tasks
-View a list of all tasks iManage. Does not show pending, "done", floating and today's tasks. 
+View a list of all overdue tasks in iManager. Does not show pending, "done", floating and today's tasks. 
 
 Format: `view`<br>
 
@@ -304,9 +304,9 @@ Format: `done INDEX|NAME`
 
 > * Name is case insensitive.
 > * `INDEX` refers to the index number shown in the most recent listing of tasks.
-> * `INDEX` **MUST** be positive integer; e.g., 1, 2 and 3.
-> * Marking an unfinished task will change its status to "done" while marking a "done" task will change back to its previous status.
-> * Command can be reverted with the [undo](#undo-most-recent-command) command.
+> * `INDEX` **MUST** be positive integer, e.g. 1, 2 and 3.
+> * Marking an unfinished task will change its status to "done" while marking a "done" task will revert to its previous status.
+> * Command can be reverted using the [undo](#undo-most-recent-command) command.
 
 Examples: 
 * `done 1`<br>
@@ -315,20 +315,10 @@ Examples:
    Mark a task named "exam" in the task list as "done".
  
 ### Finding for tasks
-Find tasks with details matching any of the input keywords. Details include name, priority, description, tags, start date & time and end date & time.
+Find tasks with details matching any of the `[KEYWORDS...]` flag. Details include name, priority, description, tags, start date & time and end date & time.
 
-Format: `find [KEYWORDS...]`
-
-> * Keywords are case insensitive. 
-> * The order of the keywords does not matter. 
-> * Partial keyword will also be matched; e.g. `ex` will match `exam`.
-> * Date format is MM-DD-YYYY; e.g. 10-22-2017.
-> * TIME format is HHMM (24-hour format); e.g. 1300.
-> * Mutiple keywords of varying types are allowed. 
-> * A task is match so long as **ANY** of its details (i.e., name, priority level, description etc.) contains the keyword. 
-
-| KEYWORD format | Result  | Example |
-|:------------:|---------|---------|
+| KEYWORD | Result  | Example |
+|:------------:|---------|-----------|
 | `NAME` | Find all tasks whose name matches the input. | `find exam` |
 | `\pPRIORITY` | Find a task whose priority level matches the input. | `find \p1` |
 | `\dDESCRIPTION` | Find a task whose description matches the input. | `find \dSR1` |
@@ -338,19 +328,30 @@ Format: `find [KEYWORDS...]`
 | `\yYYYY` | Find all tasks whose start date or end date matches a particular year. |  `find \y2017` |
 | `\hHHMM` | Find all tasks whose start time or end time matches the input. | `find \h1500` |
 
+Format: `find [KEYWORDS...]`
+
+> * Keywords are case insensitive. 
+> * The order of the keywords does not matter. 
+> * Partial keyword will also be matched, e.g. `ex` will match `exam`.
+> * Date format is MM-DD-YYYY, e.g. 10-22-2017.
+> * TIME format is HHMM (24-hour format), e.g. 1300.
+> * Mutiple keywords of various formats are allowed. 
+> * A task is matched so long as **ANY** of its details (i.e. name, priority level, description etc.) matches a keyword. 
+
 Advanced examples: 
 * `find exam \p1 \dSR1`<br>
    Find all tasks whose 
-   * 1) name matches "exam" or 
-   * 2) priority matches "1" or
-   * 3) description matches "SR1".
+   * name matches "exam" or 
+   * priority matches "1" or
+   * description matches "SR1".
 * `find exam \p1 \dSR1 \tCS2010 \m10-2017 \h1500`<br>
    Find all tasks whose 
-   * 1) name matches "exam" or
-   * 2) priority matches "1" or 
-   * 3) description matches "SR1" or 
-   * 4) tag matches "2010" or 
-   * 5) start date or end date matches October 2017 or 6) start time or end time matches 1500.
+   * name matches "exam" or
+   * priority matches "1" or 
+   * description matches "SR1" or 
+   * tag matches "2010" or 
+   * start date or end date matches October 2017 or 
+   * start time or end time matches 1500.
    
 ### Clearing of "done" tasks
 Clears all "done" tasks. <br>
@@ -369,7 +370,7 @@ Undo the most recent command that was successfully executed. Only commands that 
 
 Format: `undo`
 
-> * `undo` only support add, edit, delete, done, clear and redo command. 
+> * `undo` **ONLY** support add, edit, delete, done, clear and redo command. 
 
 ### Redo most recent undo
 Redo the most recent undo. Only redo commands that modify iManager in the same session. Command history will be cleared once iManager exits. 
@@ -383,7 +384,7 @@ Format: `redo`
 iManager automatically save data to the hard disk whenever a command modifies the data. There is no need to save manually.
 
 #### Changing the save location
-Change the save directory. The application data is save to a file named "iManager.txt" under the project root folder by default or when the file path is yet specified. You can change the location by specifying the file path as a command argument. iManager automatically creates a new save file if the input directory is valid.
+Change the save directory. The application data is save to a file named "iManager.txt" under the project root folder by default or when the file path is yet specified. You can change the location by specifying the file path as a command argument. iManager automatically creates a new save file if the file path is valid.
 
 Format: `saveto FILEPATH`
 
@@ -395,7 +396,7 @@ Examples:
 * `cd`
 
 #### Reset saved data
-Reset the application data. Saved data will be completely erase; iManager will start with a "clean" state. The default save directory will be use. Erased data **CANNOT** be restored.
+Reset the application data. Saved data will be completely erase - iManager will start with a "clean" state. The default save directory will be use. Erased data **CANNOT** be restored.
 
 Format: `reset`
 
@@ -437,15 +438,7 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 |  | `view o` | View all overdue task. |
 |  | `view INDEX` | View a specified task by index. |
 | [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done." |
-| [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the input keywords. |
-|  | `find NAME` | Find all tasks whose name matches the input. | `find exam` |
-|  | `find \pPRIORITY` | Find a task whose priority level matches the input. | `find \p1` |
-|  | `find \dDESCRIPTION` | Find a task whose description matches the input. | `find \dSR1` |
-|  | `find \tTAG` | Find all tasks whose tag matches the input. | `find \tCS2010` |
-|  | `find MM-DD-YYYY` | Find all tasks whose start date or end date matches the input. | `find 10-22-2017` |
-|  | `find \mMM-YYYY` | Find all tasks whose start date or end date matches a particular month and year. | `find \m10-2017` |
-|  | `find \yYYYY` | Find all tasks whose start date or end date matches a particular year. |  `find \y2017` |
-|  | `find \hHHMM` | Find all tasks whose start time or end time matches the input. | `find \h1500` |
+| [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find all tasks with details containing any of the input keywords. |
 | [clear](#clearing-of-done-tasks) | `clear` | Clear all "done" tasks. |
 | [toggle](#toggle-google-calendar) | `toggle` | Toggle Google Calendar. |
 | [undo](#undo-most-recent-command) | `undo` | Undo the most recent command. |
