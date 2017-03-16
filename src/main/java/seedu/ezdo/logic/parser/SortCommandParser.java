@@ -14,10 +14,10 @@ import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
  */
 public class SortCommandParser implements CommandParser {
 
-    private static final String NAME_SORT_KEYWORD = "name";
-    private static final String PRIORITY_SORT_KEYWORD = "priority";
-    private static final String START_DATE_SORT_KEYWORD = "start date";
-    private static final String DUE_DATE_SORT_KEYWORD = "due date";
+    private static final String NAME_SORT_KEYWORD = "n";
+    private static final String PRIORITY_SORT_KEYWORD = "p";
+    private static final String START_DATE_SORT_KEYWORD = "s";
+    private static final String DUE_DATE_SORT_KEYWORD = "d";
     /**
      * Parses the given {@code String} of arguments in the context of the DoneCommand
      * and returns an DoneCommand object for execution.
