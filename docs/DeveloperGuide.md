@@ -418,31 +418,31 @@ Extensions
 
 ### **Appendix D : Glossary**
 
-##### **Mainstream OS**
+#### **Mainstream OS**
 
 > Windows, Linux, Unix, OS-X
 
-##### **CLI**
+#### **CLI**
 
 > Command Line Interface
 
-##### **GUI**
+#### **GUI**
 
 > Graphical User Interface
 
-##### **Task**
+#### **Task**
 
 > A task may or may not have a specific ending time
 > E.g. Complete Progress Report
 
-##### **Deadline**
+#### **Deadline**
 
 > A task with a specified ending time is a deadline
 > E.g. Complete Progress Report by 20 March 2017 2359H
 
 ### **Appendix E : Product Survey**
 
-##### **Google Keep**
+#### **Google Keep**
 
 Author: Goh Yi Rui
 
@@ -472,7 +472,7 @@ Cons:
 
 * No project managements features
 
-##### **Google Calendar**
+#### **Google Calendar**
 
 Author: Zhang Hanming
 
@@ -496,7 +496,7 @@ Cons:
 
 * Mainly a calendar app rather than a task managing one
 
-##### **Gmail Tasks**
+#### **Gmail Tasks**
 
 Author: Liu Ziyang
 
@@ -524,7 +524,7 @@ Cons:
 
 + Urgent events cannot stand out
 
-##### **Habitica**
+#### **Habitica**
 
 Author: How Si Wei
 
