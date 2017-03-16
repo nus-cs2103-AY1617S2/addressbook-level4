@@ -52,7 +52,7 @@ public abstract class AddressBookGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
-    private Stage stage;
+    protected Stage stage;
 
     @BeforeClass
     public static void setupSpec() {
