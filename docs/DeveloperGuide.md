@@ -7,7 +7,7 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 1. [Setting Up](#1-setting-up)
 2. [Design](#2-design)
 3. [Implementation](#3-implementation)
-4. [Code Quality and Testing](#4-testing)
+4. [Code Quality and Testing](#4-code-quality-and-testing)
 5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
@@ -347,22 +347,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  
 ### 4.3. Improving test coverage using Coveralls
 
-    Coveralls is a code analytic tool that tracks and analyses test coverage of a project. We have integrated Coveralls into our project to keep track and 
-improve upon the test coverage of the code and deliver a robust and throughly-tested product. 
+    Coveralls is a code analytic tool that tracks and analyses test coverage of a project. 
+    We have integrated Coveralls into our project to keep track and improve upon the test coverage of the code 
+    to deliver a robust and throughly-tested product. 
  
  The Coveralls dashboard can be accessed [here](https://coveralls.io/github/CS2103JAN2017-W15-B3/main?branch=master). 
- <br><img src="images/coveralls/coveralls_1.png width="600"><br>
+ <br><img src="images/coveralls/coveralls_1.png" width="600"><br>
  
  Upon every pull request, Coveralls will run an analysis of the pushed code and produce a report. 
  To view the coverage report, nagivate the to pull request in Github.
- 1. Click on the Coveralls badge in the pull request to open the coverage report as follows:
- <br><img src="images/coveralls/coveralls_2.png width="600"><br><br>
- 2. Scroll the report and select any file to view detailed analysis of the code.
- <br><img src="images/coveralls/coveralls_3.png width="600"><br><br>
- Lines that are highlighted in red indicate that there is no test coverage for the code branch.
- <br><img src="images/coveralls/coveralls_4.png width="600"><br>
 
-    To maintain the code quality of the product, we strong insist that all possible code branches are well covered with test cases.
+ 1. Click on the Coveralls badge in the pull request to open the coverage report as follows:
+ <br><img src="images/coveralls/coveralls_2.png" width="600"><br><br>
+ 2. Scroll the report and select any file to view detailed analysis of the code.
+ <br><img src="images/coveralls/coveralls_3.png" width="600"><br><br>
+ Lines that are highlighted in red indicate that there is no test coverage for the code branch.
+ <br><img src="images/coveralls/coveralls_4.png" width="600"><br><br>
+    To maintain the code quality of the product, we strongly insist that all possible code branches are well covered with test cases.
 
 ### 4.4. Troubleshooting tests
 
