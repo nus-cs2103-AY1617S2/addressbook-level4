@@ -20,9 +20,9 @@ public class EndDate extends Date {
     public EndDate(String dateString) throws IllegalValueException {
         super(dateString);
         assert dateString != null;
-        defaultDateTime.withHour(23).withMinute(59);
+        LocalDateTime newDefaultDateTime=defaultDateTime.withHour(23).withMinute(59);
         String trimmedInput = dateString.trim();
-        this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, defaultDateTime);
+        this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, newDefaultDateTime);
         this.value = createDisplayValue(localDateTime);
     }
     
