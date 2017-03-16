@@ -49,6 +49,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 1.3. Configuring Checkstyle
+
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. opus
