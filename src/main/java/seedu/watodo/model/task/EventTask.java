@@ -15,7 +15,7 @@ public class EventTask extends Task implements ReadOnlyTask {
     public static final String MESSAGE_EVENT_TASK_CONSTRAINT = "End date/time must be later than start date/time!";
     /**
      * Every field must be present and not null. End time must be later than start time.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
     */
     public EventTask(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags) throws IllegalValueException {
         super(description, tags);
@@ -41,7 +41,6 @@ public class EventTask extends Task implements ReadOnlyTask {
     public void setEndDateTime(DateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
-    
 
     @Override
     public void resetData(ReadOnlyTask replacement) {
@@ -50,14 +49,14 @@ public class EventTask extends Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
         this.setStatus(replacement.getStatus());
-        //TODO the datetimes in 
+        //TODO the datetimes in
     }
-    
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeadlineTask // instanceof handles nulls
-                        && this.isSameStateAs((ReadOnlyTask) other) 
+                        && this.isSameStateAs((ReadOnlyTask) other)
                         && this.getStartDateTime().equals(((EventTask) other).getStartDateTime())
                         && this.getEndDateTime().equals(((EventTask) other).getEndDateTime()));
     }

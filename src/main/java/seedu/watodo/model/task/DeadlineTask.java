@@ -30,14 +30,14 @@ public class DeadlineTask extends Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
         this.setStatus(replacement.getStatus());
-        //TODO the deadline in 
+        //TODO the deadline in
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeadlineTask // instanceof handles nulls
-                        && this.isSameStateAs((ReadOnlyTask) other) 
+                        && this.isSameStateAs((ReadOnlyTask) other)
                         && this.getDeadline().equals(((DeadlineTask) other).getDeadline()));
     }
 
