@@ -12,15 +12,15 @@ public class FlexibleCommand {
 	private String commandFromUser ="";
 
 	private String[] commandGroups = new String[] {
-			"add a create new",
-			"clear clr c empty",
-			"delete d del remove rm",
-			"edit e change ",
-			"exit close logout",
-			"find f search lookup",
-			"help h manual instruction instructions",
-			"list l ls show display showall",
-			"select s choose",
+			"add a adds create creates new",
+			"clear clr c clears empty empties",
+			"delete d deletes del remove removes rm",
+			"edit edits e change changes",
+			"exit exits close closes logout logouts",
+			"find finds f search searches lookup",
+			"help helps h manual instruction instructions",
+			"list lists l ls show display showall",
+			"select selects s choose",
 	};
 
 	/**
