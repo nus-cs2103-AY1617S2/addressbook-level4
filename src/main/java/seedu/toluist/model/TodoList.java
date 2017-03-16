@@ -2,7 +2,6 @@ package seedu.toluist.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -26,8 +25,7 @@ public class TodoList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TodoList // instanceof handles nulls
-                && allTasks.equals(((TodoList) other).getTasks())
-                && Objects.equals(storage, ((TodoList) other).storage));
+                && allTasks.equals(((TodoList) other).getTasks()));
     }
 
     public ArrayList<Task> getTasks() {
@@ -69,8 +67,8 @@ public class TodoList {
         this.storage = DEFAULT_STORAGE;
     }
 
-    public TodoListStorage setStorage(TodoListStorage storage) {
-        return storage;
+    public void setStorage(TodoListStorage storage) {
+        this.storage = storage;
     }
 
     public TodoListStorage getStorage() {
