@@ -57,18 +57,29 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ### 1.3. Importing the project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
-
+0. Clone this repository through this [link](https://github.com/CS2103JAN2017-W15-B3/main.git).
+1. Launch Eclipse
+    > Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given in the prerequisites above.
+2. Click `File` > `Import`.
+3. Click `Gradle` > `Gradle Project` and then `Next`.
+<br><img src="images/gradle/gradle_2.png" width="400"><br><br>
+4. Click `Next` in the Gradle Import Wizard.
+<br><img src="images/gradle/gradle_3.png" width="400"><br><br>
+5. Click `Browse` and nagivate to the directory of the cloned repository. Click `Finish` to begin importing the project.
+<br><img src="images/gradle/gradle_4.png" width="400"><br><br>
+Gradle will begin importing and building the project. This process may take up 15 minutes depending on the internet connection speed.
+<br><img src="images/gradle/gradle_5.png" width="400"><br><br>
+Upon completion, locate the Gradle Tasks menu at the lower section of Eclipse Neon.
+<br><img src="images/gradle/gradle_6.png" width="400"><br><br>
+6. Open the project menu and select `build` > `build` to build and test the project.
+<br><img src="images/gradle/gradle_7.png" width="400"><br><br>
+7. Check that the project has builded successfully in the Console view.
+<br><img src="images/gradle/gradle_8.png" width="400"><br><br>
+More information about using Gradle can be found [here](https://github.com/CS2103JAN2017-W15-B3/main/blob/docs-settingup/docs/UsingGradle.md).
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * If any settings files are changed by Eclipse during the import process, you can discard those changes.
 
 ### 1.4. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
