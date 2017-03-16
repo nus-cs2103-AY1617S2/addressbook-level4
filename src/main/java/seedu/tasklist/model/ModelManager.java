@@ -148,6 +148,40 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    /**
+     * Sort based on parameter specified
+     * @param parameter
+     */
+    public void sortTaskList(String parameter) {
+        assert parameter != null;
+        switch (parameter) {
+        case "Name":
+            taskList.sortByName();
+            break;
+
+        case "Priority":
+            taskList.sortByPriority();
+            break;
+
+        case "Deadline":
+            taskList.sortByDeadline();
+            break;
+
+        case "Start Date":
+            taskList.sortByStartDate();
+            break;
+
+        case "End Date":
+            taskList.sortByEndDate();
+            break;
+
+        default:
+            break;
+        }
+
+        indicateTaskListChanged();
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
