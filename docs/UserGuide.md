@@ -2,7 +2,9 @@
 
 By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
-Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app created by us,  a 4 man team, for NUS's CS2103 Software Engineering module. You can find out more about our team [here](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/AboutUs.md).
+Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app created by us, a 4 man team, for NUS's CS2103 Software Engineering module. You can find out more about our team [here](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/AboutUs.md).
+
+Geekeep automatically categorizes your tasks into events, deadlines or just plain tasks. It affords you all the basic functionalities of a task manager from just the Command-Line alone!
 
 ---
 
@@ -55,14 +57,40 @@ Our UI is broken down into 4 main sections:
 
 ## 3. Features
 
+1. [Help](#31-viewing-help-help)
+1. [Add](#32-adding-a-task-add)
+1. [Update](#33-updating-a-task-update)
+1. [Done & Undone](#34-marks-a-task-as-done-or-undone-done-undone)
+1. [Delete](#35-deleting-a-task-delete)
+1. [List](#36-listing-all-tasks-list)
+1. [List Done](#37-listing-all-completed-tasks-listdone)
+1. [List Undone](#38-listing-all-uncompleted-tasks-listundone)
+1. [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find)
+1. [Undo](#310-undo-most-recent-command-undo)
+1. [Redo](#311-redo-most-recent-undo-redo)
+1. [Saving](#312-saving-the-data)
+1. [Exit](#313-exiting-the-program-exit)
+
 > **Command Format**
 >
-> * Words in UPPER_CASE are the parameters.
-> * Items in SQUARE_BRACKETS are optional.
+> * Words in *UPPER_CASE* are the parameters.
+> * Items in *SQUARE_BRACKETS* are optional.
 > * Items with ... after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 2.1. Viewing help : `help`
+> **Parameter Format**
+> 
+> * *Datetime*<br>The datetime format should be `DD-MM-YY HHMM`
+> * *Location*<br>The location description has no restriction.
+> * *Tag*<br>Each tag is a single word. 
+
+> **Task Type**
+>
+> * *Events* are tasks with a starting DateTime and an ending DateTime. A starting DateTime must be matched with a later ending DateTime.
+> * *Deadlines* are tasks with only an ending DateTime.
+> * *Floating Tasks* are tasks without any temporal restrictions.
+
+### 3.1. Viewing help : `help`
 
 Opens a window that displays this User Guide.
 
@@ -70,7 +98,7 @@ Format: `help`
 
 > If your command did not follow the format specified, a short help summary of the command will be shown just below your CLI.
 
-### 2.2. Adding a task: `add`
+### 3.2. Adding a task: `add`
 
 Adds a task  to the task manager.
 
@@ -86,7 +114,7 @@ Examples:
 * `add Team meeting s/15-3-17 1500 e/15-3-17 1600`
 * `add Birthday Celebration s/1-4-17 e/1-4-17`
 
-### 2.3. Updating a task : `update`
+### 3.3. Updating a task : `update`
 
 Updates an existing task in the task manager with new value(s).<br>
 Format: `update TASKID [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
@@ -106,7 +134,7 @@ Examples:
 * `update 2 e/`<br>
 Clears the existing deadlines for task with *TaskID 2*
 
-### 2.4. Marks a task as done or undone : `done` & `undone`
+### 3.4. Marks a task as done or undone : `done` & `undone`
 
 Marks the task with the specified *TaskID* as done.
 
@@ -126,7 +154,7 @@ Marks the task with *TaskID 2* in the task manager as done.
 Marks the task with *TaskID 1* as done after you find it with the [find]() command.
 
 
-### 2.5. Deleting a task : `delete`
+### 3.5. Deleting a task : `delete`
 
 Deletes the specified task from the task manager.
 
@@ -141,25 +169,25 @@ Examples:
 * `delete 2`<br>
 Deletes the task with *TaskID 2* in the task manager.
 
-### 2.3. Listing all tasks : `list`
+### 3.6. Listing all tasks : `list`
 
 Shows all tasks, completed or otherwise, in the main window.
 
 Format: `list`
 
-### 2.4. Listing all completed tasks : `listdone`
+### 3.7. Listing all completed tasks : `listdone`
 
 Shows only completed tasks in the main window.
 
 Format: `listdone`
 
-### 2.5 Listing all uncompleted tasks : `listundone`
+### 3.8 Listing all uncompleted tasks : `listundone`
 
 Shows only uncompleted tasks in the main window.
 
 Format: `listundone`
 
-### 2.7. Finding all tasks containing any keyword in their title, tag, or on a specific date : `find`
+### 3.9. Finding all tasks containing any keyword in their title, tag, or on a specific date : `find`
 
 Find and displays only tasks whose title or tag contain any of the given keywords, and/or on the specified date.
 
@@ -180,25 +208,25 @@ Returns any task having the word or substring meet.
 * `find meet 17-3-17`<br>
 Returns any task having the word or substring meet still ongoing on 17-3-17
 
-### 2.11. Undo most recent command : `undo`
+### 3.10. Undo most recent command : `undo`
 
 Undo the most recent command. Can redo with command redo
 
 Format: `undo`
 
-### 2.12. Redo most recent undo : `redo`
+### 3.11. Redo most recent undo : `redo`
 
 Redo the most recent undo. Can undo with command undo.
 
 Format: `redo`
 
-### 2.14. Saving the data
+### 3.12. Saving the data
 
 Task manager data are saved in the hard disk automatically (in XML format) after any command that changes the data.
 
 > There is no need to save manually.
 
-### 2.13. Exiting the program : `exit`
+### 3.13. Exiting the program : `exit`
 
 Exits the program.
 
@@ -208,7 +236,7 @@ Format: `exit`
 
 **[⬆ back to top](#table-of-contents)**
 
-## 3. FAQ
+## 4. FAQ
 
 **Q**: How do I read the task card presented to me?
 <br>
@@ -219,27 +247,26 @@ Format: `exit`
 
 **[⬆ back to top](#table-of-contents)**
 
-## 4. Command Summary
+## 5. Command Summary
 
 | Command | Format | example |
 |--- | :--- | :--- |
-| Help | `help` | `help` |
-| Add | `add TASK [s/START_DATETIME] [e/END_DATETIME]` | `add Team meeting s/15-3-17 1500 e/15-3-17 1600` |
-| Update | `update TASKID [TASK] [e/END_DATETIME]` | `update 1 Summary Report e/15-3-17 2359` |
-| Done | `done TASKID` | `done 1` |
-| Delete | `delete TASKID` | `delete 3` |
-| List all tasks | `list` | `list` |
-| List only completed tasks | `listdone` | `listdone` |
-| List only uncompleted tasks | `listundone` | `listundone` |
-| Find | `find KEYWORD [MORE_KEYWORDS] [DATE]` | `find report` |
-| Undo | `undo` | `undo` |
-| Redo | `redo` | `redo` |
-| Exit | `exit` | `exit` |
-
+| [Help](#31-viewing-help-help) | `help` | `help` |
+| [Add](#32-adding-a-task-add) | `add TASK [s/START_DATETIME] [e/END_DATETIME]` | `add Team meeting s/15-3-17 1500 e/15-3-17 1600` |
+| [Update](#33-updating-a-task-update) | `update TASKID [TASK] [e/END_DATETIME]` | `update 1 Summary Report e/15-3-17 2359` |
+| [Done & Undone](#34-marks-a-task-as-done-or-undone-done-undone) | `done TASKID` | `done 1` |
+| [Delete](#35-deleting-a-task-delete) | `delete TASKID` | `delete 3` |
+| [List all tasks](#36-listing-all-tasks-list) | `list` | `list` |
+| [List only completed tasks](#37-listing-all-completed-tasks-listdone) | `listdone` | `listdone` |
+| [List only uncompleted tasks](#38-listing-all-uncompleted-tasks-listundone) | `listundone` | `listundone` |
+| [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find) | `find KEYWORD [MORE_KEYWORDS] [DATE]` | `find report` |
+| [Undo](#310-undo-most-recent-command-undo) | `undo` | `undo` |
+| [Redo](#311-redo-most-recent-undo-redo) | `redo` | `redo` |
+| [Exit](#313-exiting-the-program-exit) | `exit` | `exit` |
 
 **[⬆ back to top](#table-of-contents)**
 
-## 5. Contact Us
+## 6. Contact Us
 
 * **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/CS2103AUG2016-W15-B4/main/issues)
   if you notice any bugs or have suggestions on how to improve.
