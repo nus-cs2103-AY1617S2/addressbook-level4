@@ -94,7 +94,7 @@ Once you've finished getting the groceries, it's time to mark it as complete by 
 
 **Ready to go!**
 
-Now you're all set to start managing your tasks! Feel free too refer to our [Features](#features) section below for details of each command.
+Now you're all set to start managing your tasks! Feel free too refer to our [Features](#4-features) section below for details of each command.
 
 ## 3. User Interface
 

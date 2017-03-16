@@ -4,12 +4,12 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 ---
 
-1. [Introduction](#introduction)
-2. [Setting Up](#setting-up)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
