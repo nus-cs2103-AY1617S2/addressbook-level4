@@ -7,6 +7,7 @@ import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.ui.JumpToListRequestEvent;
 import seedu.doit.commons.events.ui.ShowHelpRequestEvent;
+import seedu.doit.commons.util.FileUtil;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.Command;
@@ -33,6 +35,7 @@ import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.Model;
@@ -47,6 +50,7 @@ import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
+import seedu.doit.storage.Storage;
 import seedu.doit.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -58,6 +62,7 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    private Storage storage;
     private Logic logic;
 
     // These are for checking the correctness of the events raised
@@ -85,7 +90,8 @@ public class LogicManagerTest {
         this.model = new ModelManager();
         String tempTaskManagerFile = this.saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = this.saveFolder.getRoot().getPath() + "TempPreferences.json";
-        this.logic = new LogicManager(this.model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        this.storage = new StorageManager(tempTaskManagerFile, tempPreferencesFile);
+        this.logic = new LogicManager(this.model, this.storage);
         EventsCenter.getInstance().registerHandler(this);
 
         this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last
@@ -401,6 +407,43 @@ public class LogicManagerTest {
 
         assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
+    }
+
+    @Test
+    public void execute_save_successful() throws Exception {
+        String filePath = "data/testfile1.xml";
+        File file = new File(filePath);
+        file.delete();
+        assertCommandSuccess("save " + filePath, String.format(SaveCommand.MESSAGE_SUCCESS, filePath),
+                this.model.getTaskManager(), this.model.getFilteredTaskList());
+        file.delete();
+    }
+
+    @Test
+    public void execute_save_not_xml() throws Exception {
+        String filePath = "";
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_NOT_XML_FILE);
+    }
+
+    @Test
+    public void execute_save_invalidFileName() throws Exception {
+        String filePath = "data/??.xml";
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_INVALID_FILE_NAME);
+    }
+
+    @Test
+    public void execute_save_duplicateFile() throws Exception {
+        String filePath = "data/testfile3.xml";
+        File file = new File(filePath);
+        FileUtil.createIfMissing(file);
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_DUPLICATE_FILE);
+        file.delete();
+    }
+
+    @Test
+    public void execute_save_inSameFile() throws Exception {
+        String filePath = this.storage.getTaskManagerFilePath();
+        assertCommandFailure("save " + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
     }
 
     /**
