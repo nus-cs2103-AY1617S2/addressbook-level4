@@ -14,19 +14,19 @@ public class Task implements ReadOnlyTask {
     private TaskName taskName;
     private Deadline deadline;
     private Status status;
-    private Detail detail;
+    private BeginTime beginTime;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Deadline deadline, Status status, Detail detail, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(taskName, deadline, status, detail, tags);
+    public Task(TaskName taskName, Deadline deadline, Status status, BeginTime beginTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(taskName, deadline, status, beginTime, tags);
         this.taskName = taskName;
         this.deadline = deadline;
         this.status = status;
-        this.detail = detail;
+        this.beginTime = beginTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -67,14 +67,14 @@ public class Task implements ReadOnlyTask {
         return status;
     }
 
-    public void setAddress(Detail detail) {
-        assert detail != null;
-        this.detail = detail;
+    public void setAddress(BeginTime beginTime) {
+        assert beginTime != null;
+        this.beginTime = beginTime;
     }
 
     @Override
-    public Detail getAddress() {
-        return detail;
+    public BeginTime getAddress() {
+        return beginTime;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, deadline, status, detail, tags);
+        return Objects.hash(taskName, deadline, status, beginTime, tags);
     }
 
     @Override

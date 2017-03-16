@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.BeginTime;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -68,8 +68,8 @@ public class XmlAdaptedPerson {
         final TaskName taskName = new TaskName(this.name);
         final Deadline deadline = new Deadline(this.phone);
         final Status status = new Status(this.email);
-        final Detail detail = new Detail(this.address);
+        final BeginTime beginTime = new BeginTime(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(taskName, deadline, status, detail, tags);
+        return new Task(taskName, deadline, status, beginTime, tags);
     }
 }

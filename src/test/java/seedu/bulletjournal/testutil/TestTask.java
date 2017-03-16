@@ -1,8 +1,8 @@
 package seedu.bulletjournal.testutil;
 
 import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.BeginTime;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
@@ -13,7 +13,7 @@ import seedu.bulletjournal.model.task.TaskName;
 public class TestTask implements ReadOnlyTask {
 
     private TaskName taskName;
-    private Detail detail;
+    private BeginTime beginTime;
     private Status status;
     private Deadline deadline;
     private UniqueTagList tags;
@@ -29,7 +29,7 @@ public class TestTask implements ReadOnlyTask {
         this.taskName = personToCopy.getName();
         this.deadline = personToCopy.getPhone();
         this.status = personToCopy.getEmail();
-        this.detail = personToCopy.getAddress();
+        this.beginTime = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,8 +37,8 @@ public class TestTask implements ReadOnlyTask {
         this.taskName = taskName;
     }
 
-    public void setAddress(Detail detail) {
-        this.detail = detail;
+    public void setAddress(BeginTime beginTime) {
+        this.beginTime = beginTime;
     }
 
     public void setEmail(Status status) {
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Detail getAddress() {
-        return detail;
+    public BeginTime getAddress() {
+        return beginTime;
     }
 
     @Override

@@ -7,8 +7,8 @@ import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.BeginTime;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -25,8 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [d/PHONE] [s/EMAIL] [b/ADDRESS ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 d/91234567 s/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Detail updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        BeginTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<TaskName> taskName = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<Status> status = Optional.empty();
-        private Optional<Detail> detail = Optional.empty();
+        private Optional<BeginTime> beginTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
@@ -105,7 +105,7 @@ public class EditCommand extends Command {
             this.taskName = toCopy.getName();
             this.deadline = toCopy.getPhone();
             this.status = toCopy.getEmail();
-            this.detail = toCopy.getAddress();
+            this.beginTime = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.detail, this.tags);
+            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.beginTime, this.tags);
         }
 
         public void setName(Optional<TaskName> taskName) {
@@ -143,13 +143,13 @@ public class EditCommand extends Command {
             return status;
         }
 
-        public void setAddress(Optional<Detail> detail) {
-            assert detail != null;
-            this.detail = detail;
+        public void setAddress(Optional<BeginTime> beginTime) {
+            assert beginTime != null;
+            this.beginTime = beginTime;
         }
 
-        public Optional<Detail> getAddress() {
-            return detail;
+        public Optional<BeginTime> getAddress() {
+            return beginTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
