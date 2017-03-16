@@ -1,6 +1,6 @@
 # Task Manager
 
-<img src="docs/images/UI1.jpeg" width="600"><br>
+<img src="docs/images/UISketch.jpg" width="600"><br>
 
 * This is a desktop To-Do List application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
