@@ -37,7 +37,7 @@ public class TestTask implements ReadOnlyTask {
     public void setName(Name name) {
         this.name = name;
     }
-    
+
 
     public void setStart(Start start) {
         this.start = start;
@@ -46,11 +46,11 @@ public class TestTask implements ReadOnlyTask {
     public void setDeadline(Deadline deadline) {
         this.deadline = deadline;
     }
-    
+  
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
-    
+  
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
