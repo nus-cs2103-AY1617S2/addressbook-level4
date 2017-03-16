@@ -22,4 +22,16 @@ public class FloatingTask extends Task {
     public FloatingTask(ReadOnlyTask source) {
         this(source.getDescription(), source.getTags());
     }
+
+    /**
+     * Updates this task with the details of {@code replacement}.
+     */
+    public void resetData(ReadOnlyTask replacement) {
+        assert replacement != null;
+
+        this.setDescription(replacement.getDescription());
+        this.setTags(replacement.getTags());
+    }
+
+
 }
