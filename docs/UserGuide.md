@@ -22,7 +22,7 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 In our far too hectic lives, there's just so much to keep track of. Trying to manage everything is a tiring and stressful affair. Instead of overwhelming you with a neverending task list, **Today** helps you focus on the things that you *can* control - the tasks you're going to tackle today.
 
-This user guide is here to guide you through the [installation](#installation-instructions) of our application and give you a walkthrough of our [basic features](#features). We've also provided a [cheatsheet](#command-summary) with a summary of all our commands available.
+This user guide is here to guide you through the [installation](#21-installation-instructions) of our application and give you a walkthrough of our [basic features](#3-features). We've also provided a [cheatsheet](#5-command-summary) with a summary of all our commands available.
 
 ## 2. Quick Start
 
