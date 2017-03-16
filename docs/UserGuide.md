@@ -63,6 +63,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 |[save](#220-exporting-the-data-to-a-new-file--save-n)|Save TaskBoss          |
 
 <br>
+
 ### 2.1. Viewing help : `help`
 
 Format: `help`
@@ -254,6 +255,29 @@ Format: `save e/FILE_PATH`
 Format: `save n/FILE_PATH NEW_FILE_NAME`
 
 ## 3. Command Summary
+
+<br>
+
+|Command    |Parameters                                                        |
+|:---------:|:-------------------------------------------------------------------------------------------|
+|[help](#21-viewing-help--help)                       |**`help`**              |
+|[add](#22-adding-a-task-add)                         |**`add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY [p/PRIORITY_LEVEL]`**             |
+|[list](#23-listing-all-tasks--list)                  |**`list`**        |
+|[edit](#24-editing-a-task--edit)                     |**`edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`**            |
+|[find](#25-finding-all-tasks-by-name-find)           |**`find n/TASK_NAME`**              |
+|[delete](#27-deleting-a-task--delete)                |**`delete INDEX`**         |
+|[new](#28-creating-a-category--new)               |**`new CATEGORY`**      |
+|[clear](#29-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
+|[view](#210-viewing-a-task--view)                    |**`view INDEX`**             |
+|[name](#211-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
+|[list](#212-listing-tasks-by-category--listcategory) |**`list`**  |
+|[done](#213-marking-a-task-done--done)               |**`done INDEX`**        |
+|[undo](#214-undoing-a-command--undo)                 |**`undo`**            |
+|[sort](#215-sorting-tasks-by-deadline--sort)         |**`sort p`**   |
+|[exit](#217-exiting-the-program--exit)               |**`exit`**           |
+|[save](#220-exporting-the-data-to-a-new-file--save-n)|**`save n/FILE_PATH NEW_FILE_NAME`**            |
+
+<br>
 
 * **Add**  `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
   e.g. `add n/Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 c/Leisure p/1`
