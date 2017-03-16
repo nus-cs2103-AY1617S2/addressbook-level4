@@ -50,12 +50,12 @@ public class Task implements ReadOnlyTask {
         assert start != null;
         this.start = start;
     }
-    
+
     @Override
     public Start getStart() {
         return start;
     }
-    
+
     public void setDeadline(Deadline deadline) {
         assert deadline != null;
         this.deadline = deadline;

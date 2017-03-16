@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the ToDoApp";
 
     private final Task toAdd;
- 
+
     /**
      * Creates an AddCommand using raw values.
      *

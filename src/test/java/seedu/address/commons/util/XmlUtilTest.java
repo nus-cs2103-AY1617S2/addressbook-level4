@@ -13,8 +13,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.ToDoApp;
 import seedu.address.storage.XmlSerializableToDoApp;
-import seedu.address.testutil.ToDoAppBuilder;
 import seedu.address.testutil.TestUtil;
+import seedu.address.testutil.ToDoAppBuilder;
 
 public class XmlUtilTest {
 

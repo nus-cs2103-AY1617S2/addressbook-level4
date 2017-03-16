@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 /**
  * Represents a Task's priority in the ToDoApp
  * stores as an integer, the higher the value, the higher the priority
- * Guarantees: integer  
+ * Guarantees: integer
  */
 public class Priority {
 
@@ -39,9 +39,9 @@ public class Priority {
      * Returns true if a given string is a valid priority.
      */
     public static boolean isValidPriority(int test) {
-        if(test == (int)test) {
+        if (test == (int) test) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

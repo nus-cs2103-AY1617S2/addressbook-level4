@@ -1,10 +1,8 @@
 package seedu.address.logic.parser;
 
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 
-import com.joestelmach.natty.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
