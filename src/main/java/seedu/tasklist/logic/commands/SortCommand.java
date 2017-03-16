@@ -10,7 +10,7 @@ public class SortCommand extends Command{
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ":Sorts task according to the parameter specified. Only 1 of the 4. Name:n"
             + "Priority:p + StartDate: sd or EndDate:ed\n"
-            + "Parameters: n, p, sd, ed\n"
+            + "Parameters: n/, p/, sd/, ed/\n"
             + "Example: " + COMMAND_WORD + "n";
 
     
