@@ -7,11 +7,10 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Phone;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartEndDateTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -33,20 +32,20 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditTaskDescriptor editPersonDescriptor;
 
     /**
      * @param filteredPersonListIndex the index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(int filteredPersonListIndex, EditTaskDescriptor editPersonDescriptor) {
         assert filteredPersonListIndex > 0;
         assert editPersonDescriptor != null;
 
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredPersonListIndex = filteredPersonListIndex - 1;
 
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editPersonDescriptor = new EditTaskDescriptor(editPersonDescriptor);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Task createEditedPerson(ReadOnlyTask personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
+                                             EditTaskDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
@@ -84,23 +83,21 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * corresponding field value of the task.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<StartEndDateTime> startEndDateTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditTaskDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+            this.deadline = toCopy.getDeadline();
+            this.startEndDateTime = toCopy.getStartEndDateTime();
             this.tags = toCopy.getTags();
         }
 
@@ -108,7 +105,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.startEndDateTime, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -120,31 +117,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setDeadline(Optional<Deadline> deadline) {
+            assert deadline != null;
+            this.deadline = deadline;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<Deadline> getDeadline() {
+            return deadline;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setStartEndDateTime(Optional<StartEndDateTime> startEndDateTime) {
+            assert startEndDateTime != null;
+            this.startEndDateTime = startEndDateTime;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
-        }
-
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<StartEndDateTime> getStartEndDateTime() {
+            return startEndDateTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
