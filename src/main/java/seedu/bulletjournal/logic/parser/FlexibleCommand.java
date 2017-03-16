@@ -5,12 +5,9 @@ package seedu.bulletjournal.logic.parser;
  * Note: hard-coded for v0.2, will implement nlp for future versions
  * @author Tu An - arishuynhvan
  */
-import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class FlexibleCommand {
-
-	private String commandFromUser ="";
-
+	private String commandFromUser = "";
 	private String[] commandGroups = new String[] {
 			"add a adds create creates new",
 			"clear clr c clears empty empties",
@@ -27,16 +24,16 @@ public class FlexibleCommand {
 	 * Constructor must take in a valid string input
 	 * @param cfu
 	 */
-	public FlexibleCommand(String cfu){
+	public FlexibleCommand(String cfu) {
 		commandFromUser = cfu;
 	}
 
 	/**
 	 * @return the correct command string that matches COMMAND_WORD of command classes
 	 */
-	public String getCommandWord(){
-		for (String commandGroup: commandGroups){
-			for (String command: commandGroup.split(" ")){
+	public String getCommandWord() {
+		for (String commandGroup: commandGroups) {
+			for (String command: commandGroup.split(" ")) {
 				if (commandFromUser.equals(command))
 					return commandGroup.split(" ")[0];
 			}
@@ -44,10 +41,10 @@ public class FlexibleCommand {
 		return commandFromUser;
 	}
 
-	public boolean isValidCommand(){
-		for (String commandGroup: commandGroups){
-			for (String command: commandGroup.split(" ")){
-				if (commandFromUser == command)
+	public boolean isValidCommand() {
+		for (String commandGroup: commandGroups) {
+			for (String command: commandGroup.split(" ")) {
+				if (commandFromUser.equals(command))
 					return true;
 			}
 		}
