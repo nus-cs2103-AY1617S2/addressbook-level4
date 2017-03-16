@@ -33,8 +33,7 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 5. **Checkstyle Plug-in**.
 
 ### 1.2. Installing Checkstyle manually
-    
->As of August 16, 2017, Checkstyle repository in Eclipse Marketplace is unavailable. 
+    As of August 16, 2017, the Checkstyle repository in Eclipse Marketplace is unavailable. 
 
 1. Download the compressed .zip file [here](https://sourceforge.net/projects/eclipse-cs/?source=typ_redirect). **Do not** extract the contents.
 2. Launch Eclipse Neon.
@@ -53,25 +52,25 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 9. Click `Finish` to install Checkstyle.
 <br><img src="images/checkstyle/checkstyle_7.png" width="400"><br><br>
 
-### 1.3. Importing the project into Eclipse
+### 1.3. Importing the project through Gradle
 
-0. Clone this repository through this [link](https://github.com/CS2103JAN2017-W15-B3/main.git).
-1. Launch Eclipse.
-    > Ensure you have installed the **e(fx)clipse** and **buildship** plugins per the prerequisites above.
-2. Click `File` > `Import`.
-3. Click `Gradle` > `Gradle Project` and then `Next`.
+1. Clone this repository through this [link](https://github.com/CS2103JAN2017-W15-B3/main.git).
+2. Launch Eclipse.
+    >Ensure you have installed the **e(fx)clipse** and **buildship** plugins per the prerequisites above.
+3. Click `File` > `Import`.
+4. Click `Gradle` > `Gradle Project` and then `Next`.
 <br><img src="images/gradle/gradle_2.png" width="400"><br><br>
-4. Click `Next` in the Gradle Import Wizard.
+5. Click `Next` in the Gradle Import Wizard.
 <br><img src="images/gradle/gradle_3.png" width="400"><br><br>
-5. Click `Browse` and nagivate to the directory of the cloned repository. Click `Finish` to begin importing the project.
+6. Click `Browse` and nagivate to the directory of the cloned repository. Click `Finish` to begin importing the project.
 <br><img src="images/gradle/gradle_4.png" width="400"><br><br>
-Gradle will begin importing and building the project. This process may take up 15 minutes depending on the internet connection speed.
+    >* Gradle will begin importing and building the project. This process may take up 15 minutes depending on the internet connection speed.
 <br><img src="images/gradle/gradle_5.png" width="400"><br><br>
-Upon completion, locate the Gradle Tasks menu at the lower section of Eclipse Neon.
+    >* Upon completion, locate the Gradle Tasks menu at the lower section of Eclipse Neon.
 <br><img src="images/gradle/gradle_6.png" width="400"><br><br>
-6. Open the project menu and select `build` > `build` to build and test the project.
+7. Open the project menu and select `build` > `build` to build and test the project.
 <br><img src="images/gradle/gradle_7.png" width="400"><br><br>
-7. Check that the project has builded successfully in the Console view.
+8. Check that the project has builded successfully in the Console view.
 <br><img src="images/gradle/gradle_8.png" width="400"><br><br>
 More information about using Gradle can be found [here](https://github.com/CS2103JAN2017-W15-B3/main/blob/docs-settingup/docs/UsingGradle.md).
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
@@ -87,18 +86,18 @@ More information about using Gradle can be found [here](https://github.com/CS210
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Check and select `files from packages`, click `Change...`, and select the `resource`.
 7. Click OK twice. Rebuild project as required.
-
-> Click on the `files from packages` text after ticking in order to enable the `Change...` button
+    
+    Click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 ### 1.5. Troubleshooting project setup
 
 #### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
-> This is beacuase Eclipse failed to recognize the new files that are pulled from Git.<br>
-1. Right click on the project (in Eclipse package explorer) and choose `Gradle` -> `Refresh Gradle Project`.
+    This is because Eclipse failed to recognize the new files that are pulled from Git.
+1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
 
 #### 1.5.2.  Eclipse reports missing libraries.
-> Eclipse has failed to retrieve all required dependencies during the project import.<br>
-1. Right click on the project and select `Gradle` > [`Run tests using Gradle`](UsingGradle.md).
+    Eclipse has failed to retrieve all required dependencies during the project import.
+1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
 
 ## 2. Design
 
