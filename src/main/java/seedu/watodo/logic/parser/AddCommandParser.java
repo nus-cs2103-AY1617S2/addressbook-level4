@@ -1,9 +1,9 @@
 package seedu.watodo.logic.parser;
 
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_START_DATETIME;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;

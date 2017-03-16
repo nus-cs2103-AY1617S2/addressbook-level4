@@ -9,9 +9,10 @@ import seedu.watodo.model.tag.UniqueTagList;
  *  Guarantees: details are present and not null, field values are validated.
  */
 public class EventTask extends Task implements ReadOnlyTask {
-    
+
     private DateTime startDateTime;
     private DateTime endDateTime;
+
     public static final String MESSAGE_EVENT_TASK_CONSTRAINT = "End date/time must be later than start date/time!";
     
     /**
@@ -19,6 +20,7 @@ public class EventTask extends Task implements ReadOnlyTask {
      * @throws IllegalValueException 
      */
     public EventTask(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags) throws IllegalValueException {
+
         super(description, tags);
 
         if (!endDate.isLater(startDate)) {
@@ -79,5 +81,6 @@ public class EventTask extends Task implements ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 
 }

@@ -6,7 +6,6 @@ import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
