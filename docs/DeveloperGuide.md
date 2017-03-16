@@ -1,6 +1,6 @@
 # Opus - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -10,11 +10,9 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 4. [Testing](#4-testing)
 5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix B: Glossary](#appendix-d--glossary)
+* [Appendix C : Product Survey](#appendix-e--product-survey)
 
 
 ## 1. Setting up
@@ -373,7 +371,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 > A contact detail that is not meant to be shared with others
 
-## Appendix E : Product Survey
+## Appendix C : Product Survey
 
 [**Simpliday**](http://www.simpliday.com/)
 
