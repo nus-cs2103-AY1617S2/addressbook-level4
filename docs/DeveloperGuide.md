@@ -57,7 +57,7 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 
 0. Clone this repository through this [link](https://github.com/CS2103JAN2017-W15-B3/main.git).
 1. Launch Eclipse.
-    > Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given in the prerequisites above.
+    > Ensure you have installed the **e(fx)clipse** and **buildship** plugins per the prerequisites above.
 2. Click `File` > `Import`.
 3. Click `Gradle` > `Gradle Project` and then `Next`.
 <br><img src="images/gradle/gradle_2.png" width="400"><br><br>
