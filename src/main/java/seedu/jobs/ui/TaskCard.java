@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -40,4 +39,5 @@ public class TaskCard extends UiPart<Region> {
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
 }

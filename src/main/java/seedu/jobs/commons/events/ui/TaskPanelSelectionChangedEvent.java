@@ -1,7 +1,7 @@
 package seedu.jobs.commons.events.ui;
 
 import seedu.jobs.commons.events.BaseEvent;
-import seedu.jobs.model.task.ReadOnlyPerson;
+
 import seedu.jobs.model.task.ReadOnlyTask;
 
 /**
