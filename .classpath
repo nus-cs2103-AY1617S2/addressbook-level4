@@ -22,10 +22,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="lib" path="C:/Users/User/.gradle/caches/modules-2/files-2.1/com.joestelmach/natty/0.12/dd404d4e27fe087c07d29acb8f7050371ad5eb4e/natty-0.12.jar" sourcepath="C:/Users/User/.gradle/caches/modules-2/files-2.1/com.joestelmach/natty/0.12/3a03d3ebce619aa03147af0da9605eacd6155905/natty-0.12-sources.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/ical4j-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
-	<classpathentry kind="lib" path="lib/natty-0.13.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -3,9 +3,6 @@ package seedu.onetwodo.logic.parser;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
-import seedu.onetwodo.commons.exceptions.IllegalValueException;
-import static seedu.onetwodo.model.task.Date.MESSAGE_DATE_INPUT_CONSTRAINTS;
-
 import java.util.Date;
 import java.util.List;
 import java.time.Instant;
@@ -14,6 +11,8 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Optional;
 
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
+import static seedu.onetwodo.model.task.Date.MESSAGE_DATE_INPUT_CONSTRAINTS;
 
 public class DateTimeParser {
     
