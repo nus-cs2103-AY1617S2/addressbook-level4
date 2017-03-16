@@ -4,9 +4,17 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 ---
 
+1. [Introduction](#introduction)
 1. [Quick Start](#quick-start)
 2. [Features](#features)
 3. [Command Summary](#command-summary)
+
+## 1. Introduction
+
+Have you ever felt overloaded with work? Don't know where to start?<br>
+Introducing ToLuist, the answer to all of your problems!<br>
+ToLuist is an application which will help you to manage all your tasks, allowing you to sort out your life.<br>
+ToLuist is designed with you in mind, ensuring that you are able to focus on what is important to you.
 
 ## 1. Quick Start
 
@@ -17,15 +25,17 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 2. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-3. Some example commands you can try:
+3. Try out some example commands:
    * **`add`**` Try Out Todo List` :
      adds a task named `Try Out Todo List` to the todo list.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list.
    * **`exit`** : exits the app.
 4. Refer to the [Features](#features) section below for details of each command.<br>
 
-
 ## 2. Features
+
+ToLuist is focused towards users who like to type.<br>
+All the features of the application can be accessed through the use of a keyboard, by entering commands into the on-screen text field.<br>
 
 > **Command Format**
 >
@@ -36,29 +46,34 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 > * Options with '/' allow either word to be used.
 
 ### 2.0. Viewing tasks
-Viewing all tasks in the todo list<br>
+
+View all tasks in the todo list<br>
 Format: `list`
 > * A list of tasks will always be displayed.
 > * When starting the program, the list will show all tasks which are currently not completed.
-> * When performing find operations, this list will be updated to show only the results searched for.
+> * When performing `filter` operations, this list will be updated to show only the results searched for.
 
 ### 2.1. Viewing help : `help`
 
+Shows commands which are in the system.<br>
 Format: `help`
 
-> Help is also shown if you enter an incorrect command. e.g. `abcd`
+> * Help is also shown if you enter an incorrect command.
 
 ### 2.2. Adding a task: `add`
 
 Adds a task to the todo list<br>
 Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE]`
 
+> * Both 'startdate' and 'enddate' use the same time format.
+> * 
+
 Examples:
 
 * `add Do Homework` <br>
   Adds a task called 'Do Homework'.
 * `add Meeting With Boss startdate/11-11-2011 17:30 enddate/11-11-2011 19:30` <br>
-  Adds a task called 'Meeting With Boss', set to begin 11-11-2011 17:30, and the end date to be 11-11-2011 19:30.
+  Adds a task called 'Meeting With Boss', with start date 11-11-2011 17:30, and end date to be 11-11-2011 19:30.
 * `add Check Email enddate/today` <br>
   Adds a task called 'Check Email', sets the end date to be today's date.
 
@@ -79,19 +94,18 @@ Examples:
 * `update 3 startdate/today enddate/tomorrow` <br>
   Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
-### 2.4. Filter all tasks containing any keyword in their name or tag or date: `filter`
+### 2.4. Filter all tasks for a given keyword: `filter`
 
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `filter/list/find [KEYWORDS] [tag/] [name/]`
 
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * By default only the name is searched.
-> * Adding 'tag/' will search by tag instead.
-> * Adding 'name/' will still search by name.
+> * By default the name and tag is searched.
+> * Adding 'tag/' will search by only tag.
+> * Adding 'name/' will search by only name.
 > * If no keyword is entered, the list of all tasks is displayed.
-> * 'tag/' and 'name/' can be combined to search by multiple fields.
-> * Partial words will be matched e.g. `Han` will match `Hans`.
+> * Partial words will be matched. e.g. `Han` will match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
 
@@ -100,7 +114,7 @@ Examples:
 * `find Assignment`<br>
   Returns `Assignment 1` and also `assignment 2`.
 * `find Assignment Project Tutorial`<br>
-  Returns any task having `Assignment`, `Project`, or `Tutorial` in their names.
+  Returns any task having `Assignment`, `Project`, or `Tutorial` in their names or tags.
 * `find school tag/` <br>
   Returns any task with tags with 'school' in the name.
 
@@ -109,11 +123,11 @@ Examples:
 Deletes the specified task from the todo list. Reversible with `undo` command.<br>
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...<br>
-> Supports deletion of multiple indexes in a single command, by best effort matching.
-> The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index refers to the index number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...<br>
+> * Supports deletion of multiple indexes in a single command, by best effort matching.
+> * The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
 
 Examples:
 
@@ -131,6 +145,7 @@ Examples:
 ### 2.6. Clearing all entries : `clear`
 
 Clears all entries from the todo list.<br>
+Useful for when you want to start from a clean slate.<br>
 Format: `clear`
 
 ### 2.7. Exiting the program : `exit`
@@ -216,7 +231,6 @@ Example:
   `addTaskNamedTest` <br>
   Performs the command `add Test` which will add a new task called 'Test'.
 
-
 ### 2.13. Delete alias for commands: `unalias`
 
 Removes an alias for a command. <br>
@@ -284,7 +298,7 @@ Example:
 
 ### 2.18. Complete or Make Incomplete a Task : `mark`
 
-Marks a task to be complete or incomplete.
+Marks a task to be complete or incomplete. <br>
 Format: `mark [complete/incomplete] INDEX`
 
 > * Using complete as a parameter will mark the selected task as complete.
@@ -301,7 +315,7 @@ Example:
 
 ### 2.19. Add a Tag to a Task : `tag`
 
-Adds a tag or multiple tags to an existing task.
+Adds a tag or multiple tags to an existing task. <br>
 Format: `tag INDEX TAG...`
 
 > * If the tag already exists, the command will notify you and do nothing.
@@ -315,7 +329,7 @@ Example:
 
 ### 2.20. Remove a Tag from a Task : `untag`
 
-Removes a tag or multiple tags from an existing task.
+Removes a tag or multiple tags from an existing task. <br>
 Format: `untag INDEX TAG...`
 
 > * If the tag already does not exist, the command will notify you and do nothing.
