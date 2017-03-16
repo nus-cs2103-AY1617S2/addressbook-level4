@@ -128,11 +128,11 @@ Examples:
 ### 2.5. Deleting a task : `delete`
 
 Deletes the specified task from the todo list. Reversible with `undo` command.<br>
-Format: `delete INDEX`
+Format: `delete INDEX(ES)`
 
 > * Deletes the task at the specified `INDEX`. <br>
-> * The index refers to the index number shown in the most recent listing.<br>
-> * The index **must be a positive integer** 1, 2, 3, ...<br>
+> * The index(es) refers to the index number shown in the most recent listing.<br>
+> * The index(es) **must be a positive integer** 1, 2, 3, ...<br>
 > * Supports deletion of multiple indexes in a single command, by best effort matching.
 > * The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
 
@@ -306,11 +306,13 @@ Example:
 ### 2.18. Complete or Make Incomplete a Task : `mark`
 
 Marks a task to be complete or incomplete. <br>
-Format: `mark [complete/incomplete] INDEX`
+Format: `mark [complete/incomplete] INDEX(ES)`
 
-> * Using complete as a parameter will mark the selected task as complete.
-> * Using incomplete as a parameter will mark the selected task as incomplete.
+> * Using complete as a parameter will mark the selected task(s) as complete.
+> * Using incomplete as a parameter will mark the selected task(s) as incomplete.
 > * Using neither will default the command to mark as complete.
+> * Supports marking of multiple indexes in a single command, by best effort matching.
+> * The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
 
 Example:
 * `mark complete 1` <br>
@@ -354,7 +356,7 @@ Example:
 -------- | :-------- | :---------
 Add | `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `add Assigment 1 enddate/Friday tag/school`
 Clear | `clear`
-Delete | `delete INDEX` | `delete 3`
+Delete | `delete INDEX(ES)` | `delete 3`
 Filter | `filter/list/find [KEYWORDS] [tag/] [name/]` | `find school tag/`
 Help | `help`
 Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `update 1 enddate/11/12/2011`
@@ -368,6 +370,6 @@ View Aliases | `viewalias`
 Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
 Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
 Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
-Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
+Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
 Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
 Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
