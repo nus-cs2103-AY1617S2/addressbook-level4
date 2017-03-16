@@ -10,7 +10,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed tasks";
-    
+
     private DoneStatus doneStatus;
 
     public ListCommand(String parameter) {
@@ -31,7 +31,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         switch (doneStatus) {
-        case ALL: // 
+        case ALL:
             model.setDoneStatus(DoneStatus.ALL);
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
@@ -43,7 +43,7 @@ public class ListCommand extends Command {
             model.setDoneStatus(DoneStatus.UNDONE);
             model.updateFilteredUndoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);
-        default: 
+        default:
             model.setDoneStatus(DoneStatus.UNDONE);
             model.updateFilteredUndoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);

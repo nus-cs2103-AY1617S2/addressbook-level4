@@ -1,6 +1,7 @@
 package seedu.onetwodo.ui;
 
 import java.util.logging.Logger;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;

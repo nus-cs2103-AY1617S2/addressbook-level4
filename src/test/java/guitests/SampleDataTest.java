@@ -10,7 +10,7 @@ import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.testutil.TestUtil;
 
 public class SampleDataTest extends ToDoListGuiTest {
-    
+
     @Override
     protected ToDoList getInitialData() {
         // return null to force test app to load data from file only

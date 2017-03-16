@@ -15,7 +15,7 @@ public class Task implements ReadOnlyTask {
     private EndDate endDate;
     private Description description;
     private UniqueTagList tags;
-    
+
     private TaskType type;
     private boolean isDone;
 
@@ -32,7 +32,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isDone = false;
         if (!startDate.hasDate() && !endDate.hasDate()) {
-            this.type = TaskType.TODO;    
+            this.type = TaskType.TODO;
         } else if (!startDate.hasDate() && endDate.hasDate()) {
             this.type = TaskType.DEADLINE;
         } else if (startDate.hasDate() && endDate.hasDate()) {
@@ -44,10 +44,12 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getTags(), source.getDoneStatus());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(),
+                source.getTags(), source.getDoneStatus());
     }
-    
-    public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags, boolean isDone) {
+
+    public Task(Name name, StartDate startDate, EndDate endDate, Description description,
+            UniqueTagList tags, boolean isDone) {
         this(name, startDate, endDate, description, tags);
         this.isDone = isDone;
     }
@@ -77,23 +79,23 @@ public class Task implements ReadOnlyTask {
     public boolean getDoneStatus() {
         return isDone;
     }
-    
+
     @Override
     public TaskType getTaskType() {
         return type;
     }
-    
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    
+
     // Setters
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
-    
+
     public void setStartDate(StartDate startDate) {
         assert startDate != null;
         this.startDate = startDate;
@@ -108,7 +110,7 @@ public class Task implements ReadOnlyTask {
         assert description != null;
         this.description = description;
     }
-    
+
     public void setDone() {
         assert isDone == false;
         isDone = true;
@@ -117,7 +119,7 @@ public class Task implements ReadOnlyTask {
     public void setTaskType(TaskType type) {
         this.type = type;
     }
-    
+
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
@@ -155,5 +157,5 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-    
+
 }

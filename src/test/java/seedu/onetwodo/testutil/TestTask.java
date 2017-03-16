@@ -2,8 +2,8 @@ package seedu.onetwodo.testutil;
 
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
@@ -38,7 +38,7 @@ public class TestTask implements ReadOnlyTask {
         this.isDone = taskToCopy.getDoneStatus();
         this.tags = taskToCopy.getTags();
         if (!startDate.hasDate() && !endDate.hasDate()) {
-            this.type = TaskType.TODO;    
+            this.type = TaskType.TODO;
         } else if (!startDate.hasDate() && endDate.hasDate()) {
             this.type = TaskType.DEADLINE;
         } else if (startDate.hasDate() && endDate.hasDate()) {
@@ -76,12 +76,12 @@ public class TestTask implements ReadOnlyTask {
     public boolean getDoneStatus() {
         return isDone;
     }
-    
+
     @Override
     public UniqueTagList getTags() {
         return tags;
     }
-    
+
     // Setter
     public void setName(Name name) {
         this.name = name;
@@ -90,7 +90,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(StartDate startDate) {
         this.startDate = startDate;
     }
-    
+
     public void setEndDate(EndDate endDate) {
         this.endDate = endDate;
     }
@@ -98,15 +98,15 @@ public class TestTask implements ReadOnlyTask {
     public void setDescription(Description description) {
         this.description = description;
     }
-    
+
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-    
+
     public void setTaskType(TaskType type) {
         this.type = type;
     }
-    
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -119,19 +119,19 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append(AddCommand.COMMAND_WORD + " " + this.getName().fullName + " ");
-        if(this.hasStartDate()) {
+        if (this.hasStartDate()) {
             sb.append("s/" + this.getStartDate().value + " ");
         }
-        if(this.hasEndDate()) {
+        if (this.hasEndDate()) {
             sb.append("e/" + this.getEndDate().value + " ");
         }
-        if(this.hasDescription()) {
+        if (this.hasDescription()) {
             sb.append("d/" + this.getDescription().value + " ");
         }
-        if(this.hasTag()) {
+        if (this.hasTag()) {
             this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         }
-        
+
         return sb.toString();
     }
 }

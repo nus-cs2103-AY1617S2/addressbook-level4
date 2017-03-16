@@ -1,10 +1,10 @@
 package seedu.onetwodo.logic.parser;
 
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.onetwodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
@@ -42,5 +42,5 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
 }

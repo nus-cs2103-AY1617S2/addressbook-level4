@@ -32,12 +32,12 @@ import seedu.onetwodo.commons.util.XmlUtil;
 import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
-import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.StartDate;
+import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.storage.XmlSerializableToDoList;
 
 /**

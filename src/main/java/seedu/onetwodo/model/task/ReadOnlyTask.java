@@ -20,19 +20,19 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
-    
+
     default boolean hasStartDate() {
         return getStartDate().hasDate();
     }
-    
+
     default boolean hasEndDate() {
         return getEndDate().hasDate();
     }
-    
+
     default boolean hasDescription() {
         return getDescription().hasDescription();
     }
-    
+
     default boolean hasTag() {
         return getTags().hasTag();
     }
@@ -43,7 +43,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName())) 
+                && other.getName().equals(this.getName()))
                 && String.valueOf(other.getDoneStatus()).equals(String.valueOf(this.getDoneStatus()));
     }
 
@@ -54,19 +54,19 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
 
-        if(this.hasStartDate()) {
+        if  (this.hasStartDate()) {
             builder.append("\n").append(getStartDate());
         }
 
-        if(this.hasEndDate()) {
+        if (this.hasEndDate()) {
             builder.append("\n").append(getEndDate());
         }
 
-        if(this.hasDescription()) {
+        if (this.hasDescription()) {
             builder.append("\n").append("Description: ").append(getDescription());
         }
 
-        if(this.hasTag()) {
+        if (this.hasTag()) {
             builder.append("\n").append("Tags: ");
             getTags().forEach(builder::append);
         }

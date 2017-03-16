@@ -15,14 +15,14 @@ public class AddCommandTest extends ToDoListGuiTest {
 
     @Test
     public void add() {
-/*      
+/*
 
         TODO: write add tests here. Use td.getTypicalTasks for testing.
         TODO: command back import if needed.
         Suggestion: 1) Add multiple tasks with same TaskType.
                     2) Add duplicated task.
                     3) Clear task and try add again.
-                    
+
         TestTask[] currentList = td.getTypicalTasks();
 
         //add one task
@@ -50,7 +50,7 @@ public class AddCommandTest extends ToDoListGuiTest {
 */
     }
 
-/*      
+/*
         private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
@@ -61,7 +61,7 @@ public class AddCommandTest extends ToDoListGuiTest {
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
-        
+
         //TODO: confirms that the successful add result is what we expected
     }
 */

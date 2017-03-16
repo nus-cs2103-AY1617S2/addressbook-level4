@@ -17,8 +17,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive prefix integer)\n"
+            + "Example: " + COMMAND_WORD + " t1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
         if (filteredByDoneStatus.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        
+
         ReadOnlyTask taskToDelete = filteredByDoneStatus.get(targetIndex - 1);
 
         try {

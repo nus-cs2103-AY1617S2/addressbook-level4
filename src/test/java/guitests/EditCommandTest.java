@@ -1,20 +1,21 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
+//import guitests.guihandles.TaskCardHandle;
+
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.EditCommand;
-import seedu.onetwodo.logic.commands.FindCommand;
+//import seedu.onetwodo.logic.commands.FindCommand;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.task.EndDate;
-import seedu.onetwodo.model.task.Description;
+//import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
-import seedu.onetwodo.model.task.StartDate;
-import seedu.onetwodo.testutil.TaskBuilder;
+//import seedu.onetwodo.model.task.StartDate;
+//import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
@@ -24,7 +25,7 @@ public class EditCommandTest extends ToDoListGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
-/*   
+/*
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "GUARD duties s/15-12-2018 7:30am e/16-12-2018 11:30pm d/bring helmet t/army";
@@ -101,7 +102,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " e99999 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
-    
+
     @Test
     public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " d1");

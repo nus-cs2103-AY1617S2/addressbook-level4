@@ -9,7 +9,7 @@ public class DateTest {
     @Test
     public void isValidDate() {
         // "TODO test for start & end date
-        
+
         /*
         assertTrue(Date.isValidDate(""));
         // blank email

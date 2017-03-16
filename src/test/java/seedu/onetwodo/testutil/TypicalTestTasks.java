@@ -67,7 +67,7 @@ public class TypicalTestTasks {
                     .withDescription("")
                     .build();
 
-            
+
             // Manually added
             task1 = new TaskBuilder().withName("stay over boss house")
                     .withStartDate("tomorrow 11am").withEndDate("tomorrow 2359")

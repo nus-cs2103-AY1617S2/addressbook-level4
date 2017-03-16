@@ -50,7 +50,7 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel eventTaskListPanel;
     private TaskListPanel todoTaskListPanel;
     private CommandBox commandBox;
-    
+
     private JFXDialog dialog;
 
     private Config config;
@@ -103,7 +103,7 @@ public class MainWindow extends UiPart<Region> {
     private void loadFonts(Scene scene) {
         Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
     }
-    
+
     private void loadStyleSheets(Scene scene) {
         scene.getStylesheets().add(DONE_STYLESHEET);
     }
@@ -146,20 +146,20 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() { 
+    void fillInnerParts() {
         deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), getDoneTaskList(), TaskType.DEADLINE);
         eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), getDoneTaskList(), TaskType.EVENT);
         todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), getDoneTaskList(), TaskType.TODO);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
-        
+
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         commandBox.focus();
     }
-    
+
     private ObservableList<ReadOnlyTask> getDoneTaskList() {
         return logic.getFilteredTasksByDoneStatus();
-}
+    }
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -255,7 +255,7 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTodoTaskListPanel() {
         return this.todoTaskListPanel;
     }
-    
+
 /*    public TaskListPanel getTaskListPanel(TaskType type) {
         switch(type) {
         case DEADLINE:
@@ -285,7 +285,7 @@ public class MainWindow extends UiPart<Region> {
         dialog.show();
         setCloseDialogHandler();
     }
-    
+
     private void setCloseDialogHandler() {
         EventHandler<KeyEvent> eventHandler = new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
@@ -301,14 +301,14 @@ public class MainWindow extends UiPart<Region> {
         };
         primaryStage.getScene().setOnKeyReleased(eventHandler);
     }
-    
+
     void closeDialog() {
         if (dialog == null) {
             return;
         }
         dialog.close();
         dialog = null;
-        commandBox.focus();        
+        commandBox.focus();
     }
 
     void releaseResources() {

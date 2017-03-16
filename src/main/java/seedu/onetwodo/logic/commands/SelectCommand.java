@@ -42,7 +42,7 @@ public class SelectCommand extends Command {
         if (filteredByDoneStatus.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        
+
         ReadOnlyTask taskToSelect = filteredByDoneStatus.get(targetIndex - 1);
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1, taskType));

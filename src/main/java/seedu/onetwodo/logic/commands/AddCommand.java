@@ -8,12 +8,12 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskAttributesChecker;
-import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
@@ -27,8 +27,8 @@ public class AddCommand extends Command {
             + "Parameters: NAME  s/START_DATE  e/END_DATE  d/DESCRIPTION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Take nap s/03-03-2018 17:00 e/03-03-2018 21:00 "
-            + "d/tonight don't need to sleep already t/nap t/habbit";    
-    
+            + "d/tonight don't need to sleep already t/nap t/habbit";
+
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
@@ -42,9 +42,9 @@ public class AddCommand extends Command {
      */
     public AddCommand(String name, String startDate, String endDate, String description, Set<String> tags)
             throws IllegalValueException {
-        
+
         dateCreated = LocalDateTime.now().withSecond(0).withNano(0);
-        
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -60,7 +60,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException{
+    public CommandResult execute() throws CommandException {
         assert model != null;
         try {
             model.addTask(toAdd);

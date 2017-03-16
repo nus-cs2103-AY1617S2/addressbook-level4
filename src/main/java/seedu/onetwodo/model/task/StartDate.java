@@ -11,7 +11,7 @@ import seedu.onetwodo.logic.parser.DateTimeParser;
  * Represents a Task's start date in the toDo list.
  */
 public class StartDate extends Date {
-    
+
     /**
      * Create a start date.
      *
@@ -25,20 +25,20 @@ public class StartDate extends Date {
         this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, newDefaultDateTime);
         this.value = createDisplayValue(localDateTime);
     }
-    
+
     /**
-     * 
+     *
      * @param localDateTime input optional LocalDateTime
      * @return String to be displayed to user.
      */
     @Override
     public String createDisplayValue(Optional<LocalDateTime> localDateTime) {
-        if(!localDateTime.isPresent()) {
+        if (!localDateTime.isPresent()) {
             return "";
         } else {
-            return "Start: " + localDateTime.get().toLocalDate().toString() 
+            return "Start: " + localDateTime.get().toLocalDate().toString()
                     + " " + localDateTime.get().toLocalTime().toString();
         }
     }
-    
+
 }

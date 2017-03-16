@@ -43,7 +43,7 @@ public class Description {
     public boolean hasDescription() {
         return !value.trim().isEmpty();
     }
-    
+
     @Override
     public String toString() {
         return value;

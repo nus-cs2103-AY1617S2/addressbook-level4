@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
-import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.StartDate;
+import seedu.onetwodo.model.task.Task;
 
 /**
  * JAXB-friendly version of the Task.
@@ -73,7 +73,7 @@ public class XmlAdaptedTask {
         final EndDate endDate = new EndDate(this.endDate);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        Task task = new Task(name, startDate, endDate, description, tags, Boolean.valueOf(this.isDone)); 
+        Task task = new Task(name, startDate, endDate, description, tags, Boolean.valueOf(this.isDone));
         return task;
     }
 }

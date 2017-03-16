@@ -77,18 +77,18 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return taskFoundAndDeleted;
     }
-    
+
     /**
      * Marks the equivalent task as completed.
      *
-     * 
+     *
      */
     public void done(int index) {
         Task taskToComplete = internalList.get(index);
         taskToComplete.setDone();
         internalList.set(index, taskToComplete);
     }
-    
+
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);

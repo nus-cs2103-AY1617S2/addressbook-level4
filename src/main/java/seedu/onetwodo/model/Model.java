@@ -21,7 +21,7 @@ public interface Model {
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-    
+
     /** Mark the given tasks completed. */
     void doneTask(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
 
@@ -48,10 +48,10 @@ public interface Model {
     void updateFilteredTaskList(Set<String> keywords);
 
     void updateFilteredUndoneTaskList();
-    
+
     void updateFilteredDoneTaskList();
-    
+
     DoneStatus getDoneStatus();
-    
+
     void setDoneStatus(DoneStatus doneStatus);
 }

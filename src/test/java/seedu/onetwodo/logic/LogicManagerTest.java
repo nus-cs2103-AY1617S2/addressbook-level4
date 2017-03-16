@@ -42,13 +42,13 @@ import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.TaskType;
-import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.storage.StorageManager;
 
 
@@ -191,8 +191,8 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         // TODO improve paser to prevent double prefix for s/ e/ and d/
-        
-        /*assertCommandFailure("add Valid Name 12345 e/tomorrow 5pm e/tomorrow 6pm d/too much EndDate", expectedMessage);
+
+        /*assertCommandFailure("add Valid Name 12345 e/tomorrow 5pm e/tomorrow 6pm d/many EndDate", expectedMessage);
         assertCommandFailure("add Valid Name d/more than one description d/more description", expectedMessage);
         assertCommandFailure("add Valid Name s/tomorrow s/tomorrow e/tomorrow d/too much StartDate", expectedMessage);*/
     }
@@ -439,7 +439,7 @@ public class LogicManagerTest {
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Task(name, startDate, endDate, description, tags);
         }
-        
+
 
         /** Generates the correct add command string based on the task given */
         String generateAddCommand(Task p) {
@@ -447,17 +447,17 @@ public class LogicManagerTest {
 
             cmd.append("add ");
             cmd.append(p.getName().toString());
-            
-            if(p.hasStartDate()) {
+
+            if (p.hasStartDate()) {
                 cmd.append(" s/").append(p.getStartDate());
             }
-            if(p.hasEndDate()) {
+            if (p.hasEndDate()) {
                 cmd.append(" e/").append(p.getEndDate());
             }
-            if(p.hasDescription()) {
+            if (p.hasDescription()) {
                 cmd.append(" d/").append(p.getDescription());
             }
-            if(p.hasTag()) {
+            if (p.hasTag()) {
                 UniqueTagList tags = p.getTags();
                 for (Tag t: tags) {
                     cmd.append(" t/").append(t.tagName);
@@ -524,7 +524,7 @@ public class LogicManagerTest {
          */
         List<Task> generateTaskList(int numGenerated, TaskType taskType) throws Exception {
             List<Task> tasks = new ArrayList<>();
-            
+
             for (int i = 1; i <= numGenerated; i++) {
                 switch(taskType) {
                 case EVENT:
@@ -534,7 +534,7 @@ public class LogicManagerTest {
                     tasks.add(generateDeadlineTaskWithName("Deadline Task " + i));
                     break;
                 case TODO:
-                    tasks.add(generateToDoTaskWithName("ToDo Task " + i));  
+                    tasks.add(generateToDoTaskWithName("ToDo Task " + i));
                     break;
                 }
             }
@@ -544,7 +544,7 @@ public class LogicManagerTest {
         List<Task> generateTaskList(Task... tasks) {
             return Arrays.asList(tasks);
         }
-        
+
         /**
          * Generates a Event Task object with given name. Other fields will have some dummy values.
          */
@@ -569,7 +569,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag"))
             );
         }
-        
+
         /**
          * Generates a ToDo Task object with given name. Other fields will have some dummy values.
          */
@@ -582,7 +582,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag"))
             );
         }
-        
+
         /**
          * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned task will have the same state.

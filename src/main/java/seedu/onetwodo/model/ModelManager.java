@@ -66,7 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
-    
+
     @Override
     public synchronized void doneTask(int filteredTaskListIndex) {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -114,14 +114,14 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     @Override
-    public void updateFilteredUndoneTaskList(){
+    public void updateFilteredUndoneTaskList() {
         updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == false));
     }
-    
+
     @Override
-    public void updateFilteredDoneTaskList(){
+    public void updateFilteredDoneTaskList() {
         updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
     }
 
@@ -131,7 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
     public DoneStatus getDoneStatus() {
         return doneStatus;
     }
-    
+
     @Override
     public void setDoneStatus(DoneStatus doneStatus) {
         this.doneStatus = doneStatus;

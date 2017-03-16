@@ -40,12 +40,12 @@ public class TaskBuilder {
         this.task.setEndDate(new EndDate(endDate));
         return this;
     }
-    
+
     public TaskBuilder withDescription(String description) throws IllegalValueException {
         this.task.setDescription(new Description(description));
         return this;
     }
-    
+
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {

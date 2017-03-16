@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
-import seedu.onetwodo.logic.LogicManager;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.Command;
@@ -42,7 +41,7 @@ public class Parser {
         if (userInput.isEmpty()) {
             EventsCenter.getInstance().post(new CloseDialogEvent());
         }
-        
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -66,7 +65,7 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
-            
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

@@ -13,7 +13,7 @@ import seedu.onetwodo.model.task.TaskType;
  * Parses input arguments and creates a new DoneCommand object
  */
 public class DoneCommandParser {
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the DoneCommand
      * and returns an DoneCommand object for execution.

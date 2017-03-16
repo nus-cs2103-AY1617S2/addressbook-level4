@@ -1,11 +1,10 @@
 package seedu.onetwodo.model.task;
 
-
-import seedu.onetwodo.commons.exceptions.IllegalValueException;
-
-import java.time.*;
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
 
 /**
@@ -16,12 +15,12 @@ public class Date {
 
     public static final String MESSAGE_DATE_INPUT_CONSTRAINTS = "Invalid date input. "
             + "Please check the format in user guide or help command.";
-    
+
     public String value;  // value to be displayed to user
     protected Optional<LocalDateTime> localDateTime;
-    
+
     // to be used if no date OR time is specified.
-    protected LocalDateTime defaultDateTime = LocalDateTime.now(); 
+    protected LocalDateTime defaultDateTime = LocalDateTime.now();
 
     /**
      * Create a date.
@@ -34,12 +33,12 @@ public class Date {
     }
 
     /**
-     * 
+     *
      * @param localDateTime input optional LocalDateTime
      * @return String to be displayed to user.
      */
     public String createDisplayValue(Optional<LocalDateTime> localDateTime) {
-        if(!localDateTime.isPresent()) {
+        if (!localDateTime.isPresent()) {
             this.value = "";
             return value;
         } else {
@@ -47,15 +46,15 @@ public class Date {
             return value;
         }
     }
-    
+
     public Date getDate() {
         return this;
     }
-    
+
     public boolean hasDate() {
         return this.localDateTime.isPresent();
     }
-    
+
     @Override
     public String toString() {
         return value;
@@ -72,8 +71,8 @@ public class Date {
     public int hashCode() {
         return value.hashCode();
     }
-    
-    public LocalDateTime getLocalDateTime() throws NoSuchElementException{
+
+    public LocalDateTime getLocalDateTime() throws NoSuchElementException {
         return localDateTime.get();
     }
 

@@ -103,10 +103,10 @@ public class UiManager extends ComponentManager implements Ui {
 
     //==================== Event Handling Code ===============================================================
     @Subscribe
-    private void handleCloseDialog(CloseDialogEvent event){
+    private void handleCloseDialog(CloseDialogEvent event) {
         mainWindow.closeDialog();
     }
-    
+
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -124,13 +124,13 @@ public class UiManager extends ComponentManager implements Ui {
         // Scroll when testing
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         switch (event.taskType) {
-        case DEADLINE: 
+        case DEADLINE:
             mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
             break;
-        case EVENT: 
+        case EVENT:
             mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
             break;
-        case TODO: 
+        case TODO:
             mainWindow.getTodoTaskListPanel().scrollTo(event.targetIndex);
             break;
         }

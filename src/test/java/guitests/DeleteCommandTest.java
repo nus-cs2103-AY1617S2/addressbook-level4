@@ -1,5 +1,7 @@
 package guitests;
 
+import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 //import org.controlsfx.control.PropertySheet.Item;
 
 //import static org.junit.Assert.assertTrue;
@@ -16,27 +18,27 @@ public class DeleteCommandTest extends ToDoListGuiTest {
 
     @Test
     public void delete() {
-/*      
+/*
 
         TODO: write delete tests here. Use td.getTypicalTasks for testing.
         TODO: command back import if needed.
         Suggestion: 1) Delete first item from any TaskType
                     2) Delete last item same TaskType
                     3) Delete the item that was just deleted
-*/            
-        
+*/
+
         //TestTask[] currentList = td.getTypicalTasks();
-        
+
         // invalid index
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e99999");
         assertResultMessage("The task index provided is invalid");
-        
+
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e-1");
-        assertResultMessage("The task index provided is invalid");
-        
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e0");
-        assertResultMessage("The task index provided is invalid");
-        
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
         // empty list
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e1");
@@ -58,7 +60,7 @@ public class DeleteCommandTest extends ToDoListGuiTest {
 
          //confirm the result message is correct
          assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
-         
+s
          TODO: Make a method that checks if delete is success.
          Suggestion: 1) check if deleted item is really gone/ result list is as expected
                      2) check if delete result message is what we expected.

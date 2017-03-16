@@ -1,8 +1,13 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
+
+//import seedu.onetwodo.logic.commands.EditCommand;
+
+import seedu.onetwodo.logic.commands.SelectCommand;
 
 public class SelectCommandTest extends ToDoListGuiTest {
 
@@ -14,13 +19,16 @@ public class SelectCommandTest extends ToDoListGuiTest {
         assertSelectionSuccess("t1"); // first to-do task in the list
         assertSelectionSuccess("e2"); // 2nd event task in the list
         assertSelectionSuccess("d3"); // last deadline task in the list
-        
+
         // invalid index
         assertSelectionInvalid("t100");
         assertSelectionInvalid("t4");
-        assertSelectionInvalid("t0");
-        assertSelectionInvalid("t-1");
 
+        commandBox.runCommand(SelectCommand.COMMAND_WORD + " t0");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand(SelectCommand.COMMAND_WORD + " t-1");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -37,7 +45,7 @@ public class SelectCommandTest extends ToDoListGuiTest {
 
     private void assertSelectionSuccess(String prefixIndex) {
         commandBox.runCommand("select " + prefixIndex);
-        String displayPrefixIndex = prefixIndex.substring(0,1).toUpperCase()
+        String displayPrefixIndex = prefixIndex.substring(0, 1).toUpperCase()
                                         + prefixIndex.substring(1);
         assertResultMessage("Selected Task: " + displayPrefixIndex);
         //assertTaskSelected(prefixIndex);

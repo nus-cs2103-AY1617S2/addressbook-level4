@@ -146,7 +146,7 @@ public class ToDoList implements ReadOnlyToDoList {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
+
     public void doneTask(int index) {
         tasks.done(index);
     }
