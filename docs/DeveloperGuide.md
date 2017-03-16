@@ -4,12 +4,13 @@
 2. [Design](#2-design)
 3. [Implementation](#3-implementation)
 4. [Testing](#4-testing)
-5. [Dev Ops](#5-dev-ops)<br><br>
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+5. [Dev Ops](#5-dev-ops)
+6. [Appendices](#6-appendices)
+    * [Appendix A: User Stories](#appendix-a--user-stories)
+    * [Appendix B: Use Cases](#appendix-b--use-cases)
+    * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+    * [Appendix D: Glossary](#appendix-d--glossary)
+    * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
 ## 1. Setting up
@@ -279,7 +280,9 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-## **Appendix A : User Stories**
+## 6. Appendices
+
+### **Appendix A : User Stories**
 
 Priorities: High (must have) - \* \* \*, Medium (nice to have) - \* \*, Low (unlikely to have) - \*
 
@@ -319,7 +322,7 @@ Priorities: High (must have) - \* \* \*, Medium (nice to have) - \* \*, Low (unl
 | `*` | user who also uses Google Calendar | sync tasks to Google Calendar | see existing tasks and add local tasks to Google Calendar |
 
 
-## **Appendix B : Use Cases**
+### **Appendix B : Use Cases**
 
 (For all use cases below, the System is the TaskManager and the Actor is the user, unless specified otherwise)
 
@@ -379,7 +382,7 @@ Extensions
 
 > Use case ends
 
-## **Appendix C : Non Functional Requirements**
+### **Appendix C : Non Functional Requirements**
 
 1. Should work on Windows 7 or later as long as it has Java 1.8.0_60 or higher installed.
 
@@ -395,7 +398,7 @@ Extensions
 
 7. Users should be able to execute all commands by using the CLI alone
 
-## **Appendix D : Glossary**
+### **Appendix D : Glossary**
 
 ##### **Mainstream OS**
 
@@ -419,7 +422,7 @@ Extensions
 > A task with a specified ending time is a deadline
 > E.g. Complete Progress Report by 20 March 2017 2359H
 
-## **Appendix E : Product Survey**
+### **Appendix E : Product Survey**
 
 ##### **Google Keep**
 
