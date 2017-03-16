@@ -28,15 +28,12 @@ public class TodoCard extends UiPart<Region> {
         super(FXML);
         name.setText(todo.getName().fullName);
         id.setText(displayedIndex + ". ");
-        
         if (todo.getStartTime() != null) {
             start.setText(todo.getStartTime().toString());
         }
-        
         if (todo.getEndTime() != null) {
-        	end.setText(todo.getEndTime().toString());
+            end.setText(todo.getEndTime().toString());
         }
-        
         initTags(todo);
     }
 
