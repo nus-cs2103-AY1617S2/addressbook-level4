@@ -54,7 +54,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        
+
         storage = new StorageManager(config.gettaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
@@ -187,7 +187,7 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
-    
+
     @Subscribe
     public void handleLoadStorageFileEvent(LoadStorageFileEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

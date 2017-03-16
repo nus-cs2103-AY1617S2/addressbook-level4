@@ -26,5 +26,5 @@ public class LoadCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         }
     }
-    
+
 }

@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
