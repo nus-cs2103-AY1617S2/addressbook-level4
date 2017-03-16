@@ -22,6 +22,7 @@ public class FindController extends Controller {
 
     private static final String TAG_PARAMETER = "tag/";
     private static final String NAME_PARAMETER = "name/";
+    private static final String NULL_PARAMETER = "";
     private static final String TRUE_PARAMETER = "true";
     private static final String FALSE_PARAMETER = "false";
     private static final String KEYWORDS_PARAMETER = "keywords";
@@ -30,10 +31,12 @@ public class FindController extends Controller {
     private static final String COMMAND_SPLITTER_REGEX = " ";
     private static final int PARAMETER_SECTION = 1;
 
-    private static final String RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
+    private static final String FIND_RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
+    private static final String LIST_RESULT_MESSAGE_TEMPLATE = "Listing all tasks.";
     private static final String NAME_MESSAGE = "name";
     private static final String TAG_MESSAGE = "tag";
     private static final String NAME_AND_TAG_MESSAGE = "name and tag";
+    private static final String STRING_JOINING_MESSAGE = "\", \"";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -65,14 +68,14 @@ public class FindController extends Controller {
 
     private String[] convertToArray(String keywords) {
         if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { "" };
+            return new String[] { NULL_PARAMETER };
         }
 
         String trimmedKeywords = keywords.trim();
         String[] keywordList = trimmedKeywords.split(" ");
         ArrayList<String> replacementList = new ArrayList<>();
         for (String keyword : keywordList) {
-            if (!keyword.equals("")) {
+            if (!keyword.equals(NULL_PARAMETER)) {
                 replacementList.add(keyword);
             }
         }
@@ -81,24 +84,30 @@ public class FindController extends Controller {
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
                                         String[] keywordList, int foundCount) {
-        String searchParameters;
-        if (isSearchByName && isSearchByTag) {
-            searchParameters = NAME_AND_TAG_MESSAGE;
-        } else if (isSearchByName) {
-            searchParameters = NAME_MESSAGE;
-        } else { //isSearchByTag
-            searchParameters = TAG_MESSAGE;
-        }
+        if (keywordList[0].equals(NULL_PARAMETER)) {
+            return new CommandResult(LIST_RESULT_MESSAGE_TEMPLATE);
+        } else {
+            String searchParameters;
 
-        String keywords = String.join(" ", keywordList);
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, keywords, searchParameters, foundCount));
+            if (isSearchByName && isSearchByTag) {
+                searchParameters = NAME_AND_TAG_MESSAGE;
+            } else if (isSearchByName) {
+                searchParameters = NAME_MESSAGE;
+            } else { //isSearchByTag
+                searchParameters = TAG_MESSAGE;
+            }
+
+            String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
+            return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
+                                     keywords, searchParameters, foundCount));
+        }
     }
 
     public HashMap<String, String> tokenize(String command) {
         HashMap<String, String> tokens = new HashMap<>();
 
         // search by tag
-        if (command.contains(TAG_PARAMETER)) {
+        if (command.contains(TAG_PARAMETER) || !command.contains(NAME_PARAMETER)) {
             tokens.put(TAG_PARAMETER, TRUE_PARAMETER);
         } else {
             tokens.put(TAG_PARAMETER, FALSE_PARAMETER);
@@ -112,8 +121,8 @@ public class FindController extends Controller {
         }
 
         // keyword for matching
-        String keywords = command.replace(TAG_PARAMETER, "");
-        keywords = keywords.replace(NAME_PARAMETER, "");
+        String keywords = command.replace(TAG_PARAMETER, NULL_PARAMETER);
+        keywords = keywords.replace(NAME_PARAMETER, NULL_PARAMETER);
         String[] listOfParameters = keywords.split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
         if (listOfParameters.length > 1) {
             tokens.put(KEYWORDS_PARAMETER, listOfParameters[PARAMETER_SECTION].trim());
