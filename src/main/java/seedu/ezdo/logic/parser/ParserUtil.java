@@ -48,7 +48,7 @@ public class ParserUtil {
     }
 
     /**
-     * Returns the specified index in the {@code command} if it is a positive unsigned integer
+     * Returns the specified sorting criteria in the {@code command} if it is present.
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<String> parseSortCriteria(String command) {
@@ -59,7 +59,6 @@ public class ParserUtil {
 
         String sortCriteria = matcher.group("sortCriteria");
         return Optional.of(sortCriteria);
-
     }
 
     /**

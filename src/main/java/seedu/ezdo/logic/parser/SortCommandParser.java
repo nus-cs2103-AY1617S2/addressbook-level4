@@ -18,9 +18,10 @@ public class SortCommandParser implements CommandParser {
     private static final String PRIORITY_SORT_KEYWORD = "p";
     private static final String START_DATE_SORT_KEYWORD = "s";
     private static final String DUE_DATE_SORT_KEYWORD = "d";
+
     /**
-     * Parses the given {@code String} of arguments in the context of the DoneCommand
-     * and returns an DoneCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns an SortCommand object for execution.
      */
     public Command parse(String args) {
         Optional<String> sortCriteriaField = ParserUtil.parseSortCriteria(args);
