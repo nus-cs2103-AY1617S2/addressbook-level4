@@ -23,10 +23,7 @@ Welcome to Suru, the innovative personal assistant designed to help manage your 
 
 1. Download the latest `suru.jar` from the [releases](../../../releases) tab.
 2. Copy the file to a folder you want to use as the home folder for Suru.
-3. Double-click the file to start Suru. The app should start in a few seconds and you should see an interface similar to this: 
-
-<img src="images/Ui.jpg" width="600">
-
+3. Double-click the file to start Suru. The app should start in a few seconds and you should see an interface similar to this: <img src="images/Ui.jpg" width="600">
 4. Type a command in the command box and press <kbd>Enter</kbd> to execute it.
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some sample commands you can try:
@@ -125,8 +122,7 @@ Examples:
 * `add write essay by 15/7/17 #blogging`
 * `add write essay #blogging`
 
-
-### 3.8. Listing all tasks: `list`
+### 3.7. Listing all tasks: `list`
 
 Suru displays a list of all your tasks.
 
@@ -134,17 +130,23 @@ Suru displays a list of all your tasks.
 
 Format: `list`
 
-### 3.9. Listing unchecked tasks: `list unchecked`
+### 3.8. Listing unchecked tasks: `list unchecked`
 
 Suru displays a list of all unchecked tasks in your task manager.
 
 Format: `list unchecked`
 
-### 3.10. Listing checked tasks: `list checked`
+### 3.9. Listing checked tasks: `list checked`
 
 Shows a list of all checked tasks in your task manager.
 
 Format: `list checked`
+
+### 3.10. Listing tagged tasks: `list #TAGNAME`
+
+Shows a list of all tagged tasks in your task manager.
+
+Format: `list #TAGNAME`
 
 ### 3.11. Edit task: `edit INDEX`
 
@@ -156,7 +158,7 @@ Format: `edit INDEX`
 
 > * The index refers to the index number shown in the last listing presented by Suru.
 > * The index **must be a positive integer** 1, 2, 3, ...
-> * The existing task will be updated with your newly entrered information.
+> * The existing task will be updated with your newly entered information.
 
 Examples:
 
@@ -167,8 +169,24 @@ Examples:
 * `list`
 `edit 2 buy groceries`
  Edits the description of the 2nd task in the list to be `buy groceries`.
+ 
+### 3.12. Edit tags: `edit INDEX #TAGNAME`
 
-### 3.12. Deleting a task: `delete INDEX`
+Edit tags at the specified task `INDEX`.
+
+Format: `edit INDEX #TAGNAME`
+
+> * The index refers to the index number shown in the last listing presented by Suru.
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * The existing tags in the task will be updated with your newly entered information.
+
+Examples:
+
+* `list`
+`edit 1 #home #kitchen`
+  Edits the tags in the 1st task to home and kitchen.
+
+### 3.13. Deleting a task: `delete INDEX`
 
 Deletes the selected task from your task manager.
 
@@ -185,8 +203,24 @@ Examples:
 * `list`
   `delete 2`
   Deletes the 2nd task in the list.
+  
+### 3.14. Deleting tags in a task: `edit INDEX #`
 
-### 3.13. Undoing a command: `undo`
+Deletes tags in the selected task from your task manager.
+
+Format: `edit INDEX #`
+
+> * Deletes the tags in the task at the specified `INDEX`.
+> * The index refers to the index number shown in the last listing presented by Suru.
+> * The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `list`
+  `edit 2 #`
+  Deletes the tags in the 2nd task in the list.
+
+### 3.15. Undoing a command: `undo`
 
 Reverses your previous command.
 
@@ -195,7 +229,7 @@ Format: `undo`
 > Only reverses operations that manipulate data, i.e. `add`, `edit` and `delete`.
 
 
-### 3.14. Redoing an undone command: `redo`
+### 3.16. Redoing an undone command: `redo`
 
 Reverses your previous undo operation.
 
@@ -203,7 +237,7 @@ Format: `redo`
 
 > Only reverses the previous `undo` operation.
 
-### 3.15. Finding all tasks containing a keyword: `find KEYWORD` 
+### 3.17. Finding all tasks containing a keyword: `find KEYWORD` 
 
 Finds tasks whose properties contain any of your given keywords.
 
@@ -227,7 +261,7 @@ Examples:
 * `find 17/7/17`
   Returns any task having the date `17/7/17`.
 
-### 3.16. Finding unchecked tasks containg a keyword: `find unchecked KEYWORD`
+### 3.18. Finding unchecked tasks containg a keyword: `find unchecked KEYWORD`
 
 Finds unchecked tasks whose properties contain any of your given keywords.
 
@@ -235,14 +269,14 @@ Format: `find unchecked KEYWORD [MORE_KEYWORDS]`
 
 > Similar to [regular `find` feature](#315-finding-all-tasks-containing-a-keyword-find-keyword), but only searches through `unchecked` tasks
 
-### 3.17. Finding checked tasks containing a keyword: `find checked KEYWORD`
+### 3.19. Finding checked tasks containing a keyword: `find checked KEYWORD`
 Finds checked tasks whose properties contain any of the given keywords.
 
 Format: `find checked KEYWORD [MORE_KEYWORDS]`
 
 > Similar to [regular `find` feature](#315-finding-all-tasks-containing-a-keyword-find-keyword), but only searches through `checked` tasks
 
-### 3.18. Checking off a task: `check INDEX`
+### 3.20. Checking off a task: `check INDEX`
 
 Checks off a task to indicate that it has been completed.
 
@@ -261,7 +295,7 @@ Examples:
   `check 1`
   Checks off the 1st task in the results of the `find` command.
 
-### 3.19. Unchecking a task: `uncheck INDEX`
+### 3.21. Unchecking a task: `uncheck INDEX`
 
 Unchecks a task to indicate that it is incomplete.
 
@@ -280,13 +314,13 @@ Examples:
   `uncheck 1`
   Unchecks the 1st task in the results of the `find` command.
 
-### 3.20. Viewing usage instructions: `help`
+### 3.22. Viewing usage instructions: `help`
 
 Shows a list of commands that Suru accepts.
 
 Format: `help`
 
-### 3.21. Viewing specific command's usage instructions: `help COMMAND`
+### 3.23. Viewing specific command's usage instructions: `help COMMAND`
 
 Shows usage instructions for a specific command.
 
@@ -299,29 +333,29 @@ Examples:
 * `help add`
 Shows usage instructions for the `add` command.
 
-### 3.22. Defining save destination: `saveto FOLDER_PATH`
+### 3.24. Defining save destination: `saveto FILE_PATH`
 Allows you to define the destination Suru should save to.
 
-Format: `saveto FOLDER_PATH`
+Format: `saveto FILE_PATH`
 
-> The `FOLDER_PATH` should be the address of the folder you wish to save your tasks to.
+> The `FILE_PATH` should be the address of the file you wish to save your tasks to.
 
 Examples:
 
 * `saveto C:/Suru`
 
-### 3.23. Defining target to load from: `loadfrom FOLDER_PATH`
+### 3.25. Defining target to load from: `loadfrom FILE_PATH`
 Allows you to define the target Suru should load from.
 
-Format: `loadfrom FOLDER_PATH`
+Format: `loadfrom FILE_PATH`
 
-> The `FOLDER_PATH` should be the address of the folder you wish to load your tasks from.
+> The `FILE_PATH` should be the address of the file you wish to load your tasks from.
 
 Examples:
 
 * `loadfrom C:/Suru`
 
-### 3.24. Adding reminders to a task: `add DESCRIPTION reminders: FREQUENCY`
+### 3.26. Adding reminders to a task: `add DESCRIPTION reminders: FREQUENCY`
 
 Adds a new task with reminders.
 
@@ -345,7 +379,7 @@ Examples:
 * `add write article on blog from 27/01/17 to 26/06/17 reminders: every week`
 
 
-### 3.25. Editing reminders of a task: `edit INDEX reminders: FREQUENCY`
+### 3.27. Editing reminders of a task: `edit INDEX reminders: FREQUENCY`
 
 Edits an existing task's reminders.
 
@@ -357,7 +391,7 @@ Examples:
 * `list`
 `edit 1 reminders: daily`
 
-### 3.26. Removing reminders from a task: `edit INDEX reminders:`*`(EMPTY)`*
+### 3.28. Removing reminders from a task: `edit INDEX reminders:`*`(EMPTY)`*
 
 Removes an existing task's reminders.
 
@@ -366,7 +400,7 @@ Format:`edit INDEX reminders:`*`(EMPTY)`*
 * `edit 2 buy groceries reminders:`
   Edits the description of the 2nd task to be `buy groceries` and clears all existing reminders.
 
-### 3.27. Adding a recurring task: `add DESCRIPTION recurring: FREQUENCY`
+### 3.29. Adding a recurring task: `add DESCRIPTION recurring: FREQUENCY`
 
 Add a recurring task.
 
@@ -390,7 +424,7 @@ Examples:
 * `add write essay recurring: weekly`
 * `add write essay recurring: every 2 weeks`
 
-### 3.28. Sorting tasks: `sort by PROPERTY`
+### 3.30. Sorting tasks: `sort by PROPERTY`
 Suru sorts your tasks by a chosen property.
 
 Format: `sort by PROPERTY`
@@ -410,7 +444,7 @@ Examples:
 * `sort by start`
 * `sort by end`
 
-### 3.29. Using hotkeys: `-HOTKEY`
+### 3.31. Using hotkeys: `-HOTKEY`
 Suru recognizes a hotkey combination and executes the required operation.
 
 Format: `-HOTKEY`
@@ -427,7 +461,7 @@ Examples:
 * `-s due date`: sorts by `due date`
 * `-ls`: lists all tasks
 
-### 3.30. Adding a task to Google Calendar: `addGTask DESCRIPTION`
+### 3.32. Adding a task to Google Calendar: `addGTask DESCRIPTION`
 Add tasks to Google Calendar.
 
 Format: `addGTask DESCRIPTION`
@@ -435,7 +469,7 @@ Format: `addGTask DESCRIPTION`
 Examples:
 * `addGTask meet team for dinner`
 
-### 3.31. Exiting the app: `exit`
+### 3.33. Exiting the app: `exit`
 Exits Suru.
 
 Format: `exit`
@@ -456,7 +490,7 @@ Format: `exit`
 
 4. Where can we seek further assistance for Suru?
     
-    **A**: Feel free to contact us at e0003823@u.nus.edu
+    **A**: Feel free to contact us at support@surutaskmanager.com
 
 ## 5. Command Summary
 [**Help**](#31-viewing-usage-instructions-help): `help`
