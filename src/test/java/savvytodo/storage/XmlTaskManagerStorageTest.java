@@ -81,7 +81,7 @@ public class XmlTaskManagerStorageTest {
         //Save and read without specifying file path
         original.addTask(new Task(td.interview));
         xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
-        readBack = xmlTaskManagerStorage.readTaskManaager().get(); //file path not specified
+        readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
 
     }

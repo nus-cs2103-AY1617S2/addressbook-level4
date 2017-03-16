@@ -29,12 +29,12 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManaager() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
         return taskManagerBook(filePath);
     }
 
     /**
-     * Similar to {@link #readTaskManaager()}
+     * Similar to {@link #readTaskManager()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
