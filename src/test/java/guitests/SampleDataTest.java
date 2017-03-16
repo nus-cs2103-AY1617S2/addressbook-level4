@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import seedu.jobs.model.AddressBook;
 import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.testutil.TestUtil;
 

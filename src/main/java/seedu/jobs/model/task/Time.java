@@ -15,7 +15,7 @@ public class Time {
     public static final String TIME_VALIDATION_REGEX = "^[0-3]*[0-9]/[0-3]*[0-9]/(?:[0-9][0-9])?[0-9][0-9]\\s+(0*[1-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9])";
 
     public static final String DEFAULT_TIME = "";
-    public final String value;
+    public String value;
 
     /**
      * Validates given time-values input.
@@ -26,11 +26,17 @@ public class Time {
     public Time(Optional<String> startTime) throws IllegalValueException {
         if (!startTime.isPresent()) {
             this.value = DEFAULT_TIME;
-        } else {
-            if (!isValidTime(startTime.get())) {
+        } 
+        else {
+        	if(startTime.get().equals("")){
+        		this.value = DEFAULT_TIME;
+        	}
+        	else if (!isValidTime(startTime.get())) {
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINT);
             }
-            this.value = startTime.get();
+        	else{
+                this.value = startTime.get();
+        	}
         }
     }
 

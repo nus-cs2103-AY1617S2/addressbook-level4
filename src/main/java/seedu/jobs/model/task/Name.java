@@ -27,7 +27,6 @@ public class Name {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Name(Optional<String> name) throws IllegalValueException {
-    	System.out.println(name.get());
         assert name.get() != null;
         String trimmedName = name.get().trim();
         if (!isValidName(trimmedName)) {
