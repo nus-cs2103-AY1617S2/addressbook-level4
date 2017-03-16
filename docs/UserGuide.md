@@ -102,7 +102,6 @@ List of available commands for help: <br>
 - toggle <br>
 - undo <br>
 - redo <br>
-- reset <br>
 - saveto <br>
 - exit <br>
 
@@ -446,5 +445,5 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 | [redo](#redo-most-recent-undo) | `redo` | Redo the most recent undo. |
 | [saveto](#save) | `saveto PATH` | Change the save directory. |
 |  | `cd` | Show current save directory. |
-| [reset](#reset-saved-data) | `reset` | Reset saved data. |
+|  | `reset` | Reset saved data. |
 | [exit](#exiting-the-application) | `exit` | Exits the application. |
