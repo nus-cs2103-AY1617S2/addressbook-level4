@@ -42,7 +42,7 @@ allprojects {
         testFxVersion = '4.0.+'
         monocleVersion = '1.8.0_20'
         checkstyleVersion = '7.1.2'
-        
+
         nattyVersion = '0.13'
 
         libDir = 'lib'
