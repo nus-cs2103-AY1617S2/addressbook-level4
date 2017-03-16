@@ -3,7 +3,7 @@
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Viewing help](#viewing-help)
-    * [Viewing all command](#viewing-all-commands)
+    * [Viewing all commands](#viewing-all-commands)
     * [Viewing a specific command](#viewing-a-specific-command)
   * [Adding a task](#adding-a-task)
     * [Adding a floating task](#adding-a-floating-task)
