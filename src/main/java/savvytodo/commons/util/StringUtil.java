@@ -10,6 +10,8 @@ public class StringUtil {
 
     public static final String EMPTY_STRING = "";
 
+    public static final String WHITESPACE_REGEX = "\\s+";
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.

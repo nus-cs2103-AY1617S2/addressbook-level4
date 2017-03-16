@@ -15,15 +15,21 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.commons.util.StringUtil;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Recurrence;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
 public class ParserUtil {
+
+    private static final int ARRAY_FIELD_2 = 1;
+    private static final int ARRAY_FIELD_1 = 0;
+    private static final String[] EMPTY_ARRAY_OF_SIZE_2 = new String[2];
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
@@ -61,9 +67,25 @@ public class ParserUtil {
     *         the input, {@code Optional.empty()} otherwise.
     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
+        return Arrays.stream(Arrays.copyOf(preamble.split(StringUtil.WHITESPACE_REGEX, numFields), numFields))
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Extract a {@code Optional<String> dateTime} into an {@code String[]} if {@code dateTime} is present.
+     */
+    public static String[] getDateTimeFromArgs(Optional<String> dateTime) {
+        assert dateTime != null;
+        return dateTime.isPresent() ? dateTime.get().split(StringUtil.WHITESPACE_REGEX) : EMPTY_ARRAY_OF_SIZE_2;
+    }
+
+    /**
+     * Extract a {@code Optional<String> recurrence} into an {@code String[]} if {@code recurrence} is present.
+     */
+    public static String[] getRecurrenceFromArgs(Optional<String> recurrence) {
+        assert recurrence != null;
+        return recurrence.isPresent() ? recurrence.get().split(StringUtil.WHITESPACE_REGEX) : EMPTY_ARRAY_OF_SIZE_2;
     }
 
     /**
@@ -88,6 +110,36 @@ public class ParserUtil {
     public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
         assert location != null;
         return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> dateTime} into an {@code Optional<DateTime>}
+     * if {@code dateTime} is present.
+     */
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
+        assert dateTime != null;
+        if (dateTime.isPresent()) {
+            String [] dateTimeValues = dateTime.get().split(StringUtil.WHITESPACE_REGEX);
+            return Optional
+                    .of(new DateTime(dateTimeValues[ARRAY_FIELD_1], dateTimeValues[ARRAY_FIELD_2]));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Parses a {@code Optional<String> recurrence} into an {@code Optional<Recurrence>}
+     * if {@code recurrence} is present.
+     */
+    public static Optional<Recurrence> parseRecurrence(Optional<String> recurrence) throws IllegalValueException {
+        assert recurrence != null;
+        if (recurrence.isPresent()) {
+            String [] recurValues = recurrence.get().split(StringUtil.WHITESPACE_REGEX);
+            return Optional
+                    .of(new Recurrence(recurValues[ARRAY_FIELD_1], Integer.parseInt(recurValues[ARRAY_FIELD_2])));
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**

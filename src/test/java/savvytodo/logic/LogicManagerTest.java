@@ -181,13 +181,14 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
+    /**
+     * @author A0140016B
+     * Only name is a required argument
+     */
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 123 e/valid@descr.butNoPriorityPrefix l/valid,location", expectedMessage);
-        assertCommandFailure("add Valid Name p/123 valid@descr.butNoPrefix l/valid, location", expectedMessage);
-        assertCommandFailure("add Valid Name p/123 e/valid@descr.butNoLocationPrefix valid, location", expectedMessage);
+        assertCommandFailure("add ", expectedMessage);
     }
 
     @Test

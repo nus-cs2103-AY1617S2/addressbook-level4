@@ -37,8 +37,8 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String description, String location, Set<String> categories)
-            throws IllegalValueException {
+    public AddCommand(String name, String priority, String description, String location, String[] dateTime,
+            String[] recurrence, Set<String> categories) throws IllegalValueException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
@@ -61,7 +61,6 @@ public class AddCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
     }
 
 }
