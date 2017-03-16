@@ -18,5 +18,7 @@ public class CliSyntax {
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
+    
+    // TODO: need to modify to only lowercase and uppercase letters, numbers, ".", " ", and "/"
+    public static final Pattern PATH_ARGS_FORMAT = Pattern.compile("([ 0-9a-zA-Z/.-])+"); 
 }
