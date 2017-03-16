@@ -16,9 +16,9 @@ import savvytodo.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String LOCATION_FIELD_ID = "#address";
+    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String CATEGORIES_FIELD_ID = "#categories";
 
     private Node node;
@@ -36,16 +36,16 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getLocation() {
+        return getTextFromLabel(LOCATION_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+    public String getDescription() {
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
     public List<String> getCategories() {
@@ -73,10 +73,10 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().fullName)
-                && getPhone().equals(task.getPriority().value)
-                && getEmail().equals(task.getDescription().value)
-                && getAddress().equals(task.getAddress().value)
+        return getFullName().equals(task.getName().name)
+                && getPriority().equals(task.getPriority().value)
+                && getDescription().equals(task.getDescription().value)
+                && getLocation().equals(task.getLocation().value)
                 && getCategories().equals(getCategories(task.getCategories()));
     }
 
@@ -85,9 +85,9 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+                    && getPriority().equals(handle.getPriority())
+                    && getDescription().equals(handle.getDescription())
+                    && getLocation().equals(handle.getLocation())
                     && getCategories().equals(handle.getCategories());
         }
         return super.equals(obj);
@@ -95,6 +95,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getLocation();
     }
 }
