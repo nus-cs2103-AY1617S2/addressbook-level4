@@ -23,10 +23,10 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
+            + "Parameters: NAME [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
             + "[r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "Project Meeting dt/05/10/2016 1400 05/10/2016 1800 r/weekly 2 c/CS2103 "
+            + "Project Meeting dt/05/10/2016 1400 = 05/10/2016 1800 r/weekly 2 c/CS2103 "
             + "d/Discuss about roles and milestones";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";

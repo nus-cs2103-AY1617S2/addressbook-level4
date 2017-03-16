@@ -26,7 +26,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [dt/START_DATE END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
+            + "[NAME] [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
             + "[r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]...\n"
             + "Example: " + COMMAND_WORD + " 1 c/CS2103 d/Complete group project component";
 

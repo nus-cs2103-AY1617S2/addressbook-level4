@@ -35,7 +35,7 @@ public class DateTime implements Comparable<DateTime> {
             .withResolverStyle(ResolverStyle.STRICT);
     private static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter.ofPattern(DATE_STRING_FORMAT);
 
-    private static final String DATETIME_STRING_CONNECTOR = " to ";
+    private static final String DATETIME_STRING_CONNECTOR = " = ";
     public static final String[] DEFAULT_VALUES = new String[2];
 
     /**

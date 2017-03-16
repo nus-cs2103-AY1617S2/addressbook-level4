@@ -21,6 +21,8 @@ public class Task implements ReadOnlyTask {
 
     private UniqueCategoryList categories;
 
+    private TaskType type;
+
     /**
      * Every field must be present and not null.
      */
@@ -123,6 +125,14 @@ public class Task implements ReadOnlyTask {
         categories.setCategories(replacement);
     }
 
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+
     /**
      * Updates this task with the details of {@code replacement}.
      */
@@ -152,6 +162,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    /**
+     * @author A0140016B
+     * Get type enum object of TaskType
+     */
+    public enum TaskType {
+        Deadline,
+        Event,
+        Floating;
     }
 
 }
