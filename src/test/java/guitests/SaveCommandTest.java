@@ -19,7 +19,7 @@ import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
- * Gui tests for saveConfig command
+ * Gui tests for save command
  */
 public class SaveCommandTest extends ToLuistGuiTest {
     @Test

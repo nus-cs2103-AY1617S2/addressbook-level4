@@ -9,11 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import javafx.util.Pair;
-import org.junit.rules.ExpectedException;
 import seedu.toluist.TestApp;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.FileUtil;

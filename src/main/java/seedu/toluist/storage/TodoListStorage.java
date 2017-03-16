@@ -1,7 +1,6 @@
 package seedu.toluist.storage;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javafx.util.Pair;
 import seedu.toluist.model.TodoList;
