@@ -4,7 +4,6 @@ import static junit.framework.TestCase.fail;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Rule;
