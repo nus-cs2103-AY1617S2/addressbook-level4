@@ -9,11 +9,11 @@ public class EndTimeTest {
 
     @Test
     public void isValidEndTime() {
-        // blank email
+        // blank EndTime
         assertFalse(EndTime.isValidEndTime("")); // empty string
         //assertFalse(EndTime.isValidEndTime(" ")); // spaces only
 
-        // valid email
+        // valid EndTime
         assertTrue(EndTime.isValidEndTime("march fifteenth")); //alphabets
         assertTrue(EndTime.isValidEndTime("20170315")); // number
         assertTrue(EndTime.isValidEndTime("By end of March")); // alphabets with capital
