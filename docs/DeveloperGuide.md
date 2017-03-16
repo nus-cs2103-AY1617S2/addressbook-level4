@@ -10,9 +10,9 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 4. [Testing](#4-testing)
 5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix B: Glossary](#appendix-d--glossary)
-* [Appendix C : Product Survey](#appendix-e--product-survey)
+* [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
+* [Appendix B: Glossary](#appendix-b--glossary)
+* [Appendix C : Product Survey](#appendix-c--product-survey)
 
 
 ## 1. Setting up
