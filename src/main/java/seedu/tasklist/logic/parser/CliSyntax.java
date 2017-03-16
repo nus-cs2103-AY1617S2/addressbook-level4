@@ -14,9 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_COMMENT = new Prefix("c/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_STARTDATE = new Prefix("sd/");
-    public static final Prefix PREFIX_ENDDATE = new Prefix("ed/");
+
 
 
 
