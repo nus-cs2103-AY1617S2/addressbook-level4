@@ -32,7 +32,7 @@ public class AddCommandParser {
         String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
         int priority = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
         String notes = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
-      
+
         try {
             return new AddCommand(name, start, deadline, priority,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)), notes
