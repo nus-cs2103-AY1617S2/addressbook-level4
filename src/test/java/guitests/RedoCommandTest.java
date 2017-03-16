@@ -57,6 +57,26 @@ public class RedoCommandTest extends AddressBookGuiTest {
         assertRedoSuccess();
     }
 
+    @Test
+    public void undo_markCompleteThenRedo_success() throws Exception {
+        commandBox.runCommand("complete 1");
+
+        assertRedoSuccess();
+
+        commandBox.runCommand("edit 1 d/floating");
+        commandBox.runCommand("complete floating 1");
+
+        assertRedoSuccess();
+    }
+
+    @Test
+    public void undo_markIncompleteThenRedo_success() throws Exception {
+        commandBox.runCommand("complete 1");
+        commandBox.runCommand("incomplete 1");
+
+        assertRedoSuccess();
+    }
+
     /**
      * Runs the undo command to undo the previously executed command and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
