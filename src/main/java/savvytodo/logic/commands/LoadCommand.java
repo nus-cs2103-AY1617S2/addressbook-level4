@@ -23,6 +23,7 @@ public class LoadCommand extends Command{
     
     public LoadCommand(String filePath) {
         this.filePath = filePath;
+  
     }
     
     @Override

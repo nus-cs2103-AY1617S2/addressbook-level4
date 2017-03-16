@@ -16,6 +16,7 @@ import savvytodo.logic.commands.FindCommand;
 import savvytodo.logic.commands.HelpCommand;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.logic.commands.ListCommand;
+import savvytodo.logic.commands.LoadCommand;
 import savvytodo.logic.commands.SelectCommand;
 
 /**
@@ -70,7 +71,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
+            
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommandParser().parse(arguments);
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
