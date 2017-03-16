@@ -25,8 +25,8 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/task_manager_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 500;
+    private static final int MIN_WIDTH = 750;
 
     private Stage primaryStage;
     private Logic logic;
