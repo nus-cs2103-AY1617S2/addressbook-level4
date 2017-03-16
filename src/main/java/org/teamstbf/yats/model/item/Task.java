@@ -6,8 +6,8 @@ import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Person in the address book. Guarantees: details are present and
+ * not null, field values are validated.
  */
 public class Task implements ReadOnlyItem {
 
@@ -20,6 +20,13 @@ public class Task implements ReadOnlyItem {
 	private UniqueTagList tags;
 
 	/**
+	 * Creates a copy of the given ReadOnlyPerson.
+	 */
+	public Task(ReadOnlyItem source) {
+		this(source.getTitle(), source.getDeadline(), source.getTiming(), source.getDescription(), source.getTags());
+	}
+
+	/**
 	 * Every field must be present and not null.
 	 */
 	public Task(Title title, Date deadline, Schedule schedule, Description description, UniqueTagList tags) {
@@ -28,29 +35,15 @@ public class Task implements ReadOnlyItem {
 		this.deadline = deadline;
 		this.schedule = schedule;
 		this.description = description;
-		this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-	}
-
-	/**
-	 * Creates a copy of the given ReadOnlyPerson.
-	 */
-	public Task(ReadOnlyItem source) {
-		this(source.getTitle(), source.getDeadline(), source.getTiming(), source.getDescription(), source.getTags());
-	}
-
-	public void setTitle(Title name) {
-		assert name != null;
-		this.title = name;
+		this.tags = new UniqueTagList(tags); // protect internal tags from
+												// changes in the arg list
 	}
 
 	@Override
-	public Title getTitle() {
-		return title;
-	}
-
-	public void setDeadline(Date deadline) {
-		assert deadline != null;
-		this.deadline = deadline;
+	public boolean equals(Object other) {
+		return other == this // short circuit if same object
+				|| (other instanceof ReadOnlyItem // instanceof handles nulls
+						&& this.isSameStateAs((ReadOnlyItem) other));
 	}
 
 	@Override
@@ -58,29 +51,9 @@ public class Task implements ReadOnlyItem {
 		return deadline;
 	}
 
-	public void setTiming(Schedule schedule) {
-		assert schedule != null;
-		this.schedule = schedule;
-	}
-
-	@Override
-	public Schedule getTiming() {
-		return schedule;
-	}
-
-	public void setDescription(Description description) {
-		assert description != null;
-		this.description = description;
-	}
-
 	@Override
 	public Description getDescription() {
 		return description;
-	}
-
-	public void setPeriodic(Periodic periodic) {
-		assert periodic != null;
-		this.periodic = periodic;
 	}
 
 	@Override
@@ -93,11 +66,21 @@ public class Task implements ReadOnlyItem {
 		return new UniqueTagList(tags);
 	}
 
-	/**
-	 * Replaces this person's tags with the tags in the argument tag list.
-	 */
-	public void setTags(UniqueTagList replacement) {
-		tags.setTags(replacement);
+	@Override
+	public Schedule getTiming() {
+		return schedule;
+	}
+
+	@Override
+	public Title getTitle() {
+		return title;
+	}
+
+	@Override
+	public int hashCode() {
+		// use this method for custom fields hashing instead of implementing
+		// your own
+		return Objects.hash(title, deadline, schedule, description, tags);
 	}
 
 	/**
@@ -113,23 +96,41 @@ public class Task implements ReadOnlyItem {
 		this.setTags(replacement.getTags());
 	}
 
-	@Override
-	public boolean equals(Object other) {
-		return other == this // short circuit if same object
-				|| (other instanceof ReadOnlyItem // instanceof handles nulls
-						&& this.isSameStateAs((ReadOnlyItem) other));
+	public void setDeadline(Date deadline) {
+		assert deadline != null;
+		this.deadline = deadline;
 	}
 
-	@Override
-	public int hashCode() {
-		// use this method for custom fields hashing instead of implementing your own
-		return Objects.hash(title, deadline, schedule, description, tags);
+	public void setDescription(Description description) {
+		assert description != null;
+		this.description = description;
+	}
+
+	public void setPeriodic(Periodic periodic) {
+		assert periodic != null;
+		this.periodic = periodic;
+	}
+
+	/**
+	 * Replaces this person's tags with the tags in the argument tag list.
+	 */
+	public void setTags(UniqueTagList replacement) {
+		tags.setTags(replacement);
+	}
+
+	public void setTiming(Schedule schedule) {
+		assert schedule != null;
+		this.schedule = schedule;
+	}
+
+	public void setTitle(Title name) {
+		assert name != null;
+		this.title = name;
 	}
 
 	@Override
 	public String toString() {
 		return getAsText();
 	}
-
 
 }

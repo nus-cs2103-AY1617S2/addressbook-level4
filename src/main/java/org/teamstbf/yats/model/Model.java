@@ -12,24 +12,33 @@ import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
  * The API of the Model component.
  */
 public interface Model {
-	/** Clears existing backing model and replaces with the provided new data. */
-	void resetData(ReadOnlyTaskManager newData);
-
-	/** Returns the TaskManager */
-	ReadOnlyTaskManager getTaskManager();
+	/** Adds the given Event */
+	void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
 	/** Deletes the given Event. */
 	void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
 
-	/** Adds the given Event */
-	void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+	/** Returns the TaskManager */
+	ReadOnlyTaskManager getTaskManager();
 
 	/**
-	 * Updates the event located at {@code filteredEventListIndex} with {@code editedEvent}.
+	 * Clears existing backing model and replaces with the provided new data.
+	 */
+	void resetData(ReadOnlyTaskManager newData);
+
+	/** Sorts the filtered event list */
+	void sortFilteredEventList();
+
+	/**
+	 * Updates the event located at {@code filteredEventListIndex} with
+	 * {@code editedEvent}.
 	 *
-	 * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
-	 *      another existing event in the list.
-	 * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
+	 * @throws DuplicateEventException
+	 *             if updating the event's details causes the event to be
+	 *             equivalent to another existing event in the list.
+	 * @throws IndexOutOfBoundsException
+	 *             if {@code filteredEventListIndex} < 0 or >= the size of the
+	 *             filtered list.
 	 */
 	void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException;

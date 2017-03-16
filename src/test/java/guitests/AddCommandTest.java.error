@@ -10,12 +10,12 @@ import org.teamstbf.yats.testutil.TestUtil;
 
 import guitests.guihandles.PersonCardHandle;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {
         //add one person
-        TestEvent[] currentList = td.getTypicalPersons();
+        TestEvent[] currentList = td.getTypicalTasks();
         TestEvent personToAdd = td.cower;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
@@ -28,7 +28,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         //add duplicate person
         commandBox.runCommand(td.cower.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_EVENT);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -43,11 +43,11 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getTitle().fullName);
+        PersonCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getTitle().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
         TestEvent[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

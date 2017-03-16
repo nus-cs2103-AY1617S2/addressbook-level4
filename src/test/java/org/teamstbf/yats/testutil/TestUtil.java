@@ -292,7 +292,7 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestEvent[] removePersonFromList(final TestEvent[] list, int targetIndexInOneIndexedFormat) {
+    public static TestEvent[] removeTaskFromList(final TestEvent[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
