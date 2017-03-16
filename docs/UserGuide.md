@@ -6,6 +6,10 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 1. [Welcome](#1-welcome)
 2. [Getting Started](#2-getting-started)
+    1. [Installation](#i-installation)
+    2. [Starting Werkbook](#ii-starting-werkbook)
+    3. [Interface Introduction](#i-interface-introduction)
+    4. [Quick Start](#i-quick-start)
 3. [User Interface](#3-user-interface)
 4. [Features](#4-features)
     1. [Task Management](#i-task-management)
@@ -31,27 +35,65 @@ Werkbook is a task manager.
 
 ## 2. Getting Started
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
-    > Having any Java 8 version is not enough.
-    > This app will not work with earlier versions of Java 8.
-1. Download the latest `werkbook.jar` from the [releases](../../../releases) tab.
+### i. Installation
+Ensure you have Java version `1.8.0_60` or later installed in your Computer.
+> Having any Java 8 version is not enough.
 
-2. Copy the file to the folder you want to use as the home folder for your Werkbook.
+> This app will not work with earlier versions of Java 8.
 
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
-    > <img src="images/Ui.png" width="600">
+Download the latest `werkbook.jar` from the [Releases](../../../releases) tab as shown in *Figure 1* below.
 
-4. Type the command in the command box and press <kbd>Enter</kbd> to execute it.
-    > e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+<img src="images/userguide-figure-1.jpg" width="600"><br>
+*Figure 1: Latest release*
 
-5. Some example commands you can try:
-    * **`list`** : Lists all tasks
-    * **`add`**` : Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important` <br>
-     Adds a task named `Walk the dog` into task list.
-    * **`delete`**` 3` : Deletes the 3rd task shown in the current list
-    * **`exit`** : Exits the app
+Copy the file to the folder you want to use as the home folder for your Werkbook.
 
-6. Refer to the [Features](#features) section below for details of each command.
+### ii. Starting Werkbook
+To start Werkbook, simple double click on `werkbook.jar`.
+ 
+<img src="images/userguide-figure-2.jpg" width="100"><br>
+*Figure 2: Launching werkbook.jar*
+
+### iii. Interface Introduction
+After launching Werkbook, you will be greeted with the main interface.
+
+<img src="images/userguide-figure-3.jpg" width="600"><br>
+*Figure 3: Werkbook's main interface*
+    
+You can find the **Command Box** at the top of the interface, this is where you type your commands!
+
+The **Results Panel** is located below the **Command Box**, and it tells you the result of your command.
+
+All of your tasks can be found in the **Task Panel**, it is initially empty until you fill it up with tasks.
+
+### iv. Quick Start
+Type the command in the **Command Box** and press <kbd>Enter</kbd> to execute it.
+    
+**Feeling lost?**
+
+Typing **`help`** in the **Command Box** will bring up the help window with a list of all of the available commands.
+
+**Adding your first task**
+
+Let's start by adding a new task to Werkbook. Perhaps you want to remind yourself to get the groceries, you can type the following command in the **Command Box**:
+
+`> add Get Groceries`
+
+**Making changes**
+
+You can also specify a deadline by editing the task using the following command:
+
+`> edit 1 e/05/03/2017 2030`
+
+**Completing a task**
+
+Once you've finished getting the groceries, it's time to mark it as complete by typing the following command:
+
+`> mark 1`
+
+**Ready to go!**
+
+Now you're all set to start managing your tasks! Feel free too refer to our [Features](#features) section below for details of each command.
 
 ## 3. User Interface
 
@@ -127,7 +169,7 @@ Format: `mark INDEX`
 > * Marks the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * If the task's status is `Incomplete`, the command will update it to `Complete` and vice-versa-
+> * If the task's status is `Incomplete`, the command will update it to `Complete` and vice-versa.
 
 Examples:
 
@@ -232,11 +274,11 @@ Format: `exit`
 * **Mark** : `mark INDEX` <br>
   e.g. `mark 1`
 
-* **Undo** : `undo INDEX` <br>
-  e.g. `undo 4`
+* **Undo** : `undo` <br>
+  e.g. `undo`
 
-* **Redo** : `redo INDEX` <br>
-  e.g. `redo 4`
+* **Redo** : `redo` <br>
+  e.g. `redo`
 
 * **List** : `list` <br>
   e.g. `list`
