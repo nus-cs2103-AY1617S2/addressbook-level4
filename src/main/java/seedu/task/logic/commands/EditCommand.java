@@ -82,10 +82,11 @@ public class EditCommand extends Command {
         DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
         String updatedDurationStart = editTaskDescriptor.getDurationStart().orElseGet(taskToEdit::getDurationStart);
         String updatedDurationEnd = editTaskDescriptor.getDurationEnd().orElseGet(taskToEdit::getDurationEnd);
-        Duration updatedDuration = null;
+        Duration updatedDuration = taskToEdit.getDuration();
         try {
-            updatedDuration = (updatedDurationStart == null | updatedDurationEnd == null) ?
-                    taskToEdit.getDuration() : new Duration(updatedDurationStart, updatedDurationEnd);
+            if (updatedDurationStart != null && updatedDurationEnd != null) {
+                updatedDuration = new Duration(updatedDurationStart, updatedDurationEnd);
+            }
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
