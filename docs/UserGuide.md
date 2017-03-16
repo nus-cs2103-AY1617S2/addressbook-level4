@@ -157,6 +157,9 @@ Autocomplete the user's command on the CLI.
 
 ## 3. FAQ
 
+**Q**: Where do I download the latest under development version of Opus?
+**A**: You may download the latest unstable release of our application [here](../../../releases), but we strongly recommend using the stable build for your own sanity.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Address Book folder.
