@@ -47,9 +47,9 @@ Doit is simple to use as all functions can be executed with just a single line o
 
 1. Ensure that you have Java version `1.8.0_60` or later installed on your computer.<br>
 
-   > Just having any Java 8 version is not enough. <br>
-   > Doit will not work with earlier versions of Java 8.<br>
-   > You can download the latest version of Java 8 at http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html.
+ > Just having any Java 8 version is not enough. <br>
+ > Doit will not work with earlier versions of Java 8.<br>
+ > You can download the latest version of Java 8 at http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html.
 
 2. Download the latest `Doit.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for Doit.
@@ -162,7 +162,6 @@ Examples:
 * `edit 2 et/9pm p/high #`<br>
   Edits the name of the 2nd item's deadline to `9pm` and priority to `high` and clears all existing tags.<br>
 
-
 ### 4.5 Finding all Items Containing any Keywords in Their Names, Tags and Timings: `find`
 
 Finds items whose names, tags and timings contain any of the given keywords.<br>
@@ -202,12 +201,12 @@ Format: `done [ITEM_TYPE] INDEX`
 Examples:
 
 * `done 2`<br>
-  Marks the 2nd item in the task manager as done.
+ Marks the 2nd item in the task manager as done.
 * `find MA1521 Tutorial 1`<br>
-  `done 1`<br>
-  Marks the 1st item in the results of the `find` command.
-* `done ftask 2`<br>
-  Marks the 3rd floating task shown in the floating task column of the default  task manager page as done.
+ `done 1`<br>
+ Marks the 1st item in the results of the `find` command.
+* `done 3`<br>
+ Marks the 3rd floating task shown in the floating task column of the default task manager page as done.
 
 
 ### 4.7 Deleting specified items from Doit: `delete`
@@ -221,10 +220,10 @@ Format: `delete INDEX`
 Examples:
 
 * `delete 2`<br>
-  Deletes the 2nd item in the task manager.
+ Deletes the 2nd item in the task manager.
 * `find MA1521 Tutorial 1`<br>
-  `delete 1`<br>
-  Deletes the 1st item in the results of the `find` command.
+ `delete 1`<br>
+ Deletes the 1st item in the results of the `find` command.
 
 
 ### 4.8 Clearing all entries : `clear`
@@ -246,8 +245,8 @@ Examples:
   Saves the data file in a file named savefile.xml at inside folder2 which is inside folder1 of the Doit Application folder.<br>
 * `save savefile.xml`<br>
   Saves the data file in a file named savefile.xml in the Doit Application folder.<br>
-### 4.10 Exiting the program : `exit`
 
+### 4.10 Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`
 
@@ -282,27 +281,27 @@ There is no need to save manually.<br>
   * `add finishCS3230Lab sd/01-Mar-17 st/2000 p/med #CS3230`
 
 * **Undo** : `undo` <br>
-  e.g.
-  * `undo`
+ e.g.
+ * `undo`
 
-* **Edit**  `edit INDEX [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
-  e.g.
-  * `edit 1 t/9pm p/high #CS1010`
+* **Edit** `edit INDEX [t/DEADLINE TIME] [p/PRIORITY] [#TAG]...`<br>
+ e.g.
+ * `edit 1 t/9pm p/high #CS1010`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g.
-  * `find MA1101R assignment`
-  * `find 01-Mar-2017`
+ e.g.
+ * `find MA1101R assignment`
+ * `find 01-Mar-2017`
 
 * **Done** : `done [ITEM_TYPE] INDEX` <br>
-  e.g.
-  * `done 1`
-  * `done ftask 1`
-  * `done task 3`
+ e.g.
+ * `done 1`
+ * `done ftask 1`
+ * `done task 3`
 
 * **Delete** : `delete INDEX` <br>
-  e.g.
-  * `delete 3`
+ e.g.
+ * `delete 3`
 
 * **Clear** : `clear` <br>
   e.g.

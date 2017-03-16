@@ -3,6 +3,9 @@ package seedu.doit.storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -24,23 +27,32 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         this.filePath = filePath;
     }
 
+    @Override
     public String getTaskManagerFilePath() {
-        return filePath;
+        return this.filePath;
+    }
+
+    @Override
+    public void setTaskManagerFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(filePath);
+        return readTaskManager(this.filePath);
     }
 
     /**
      * Similar to {@link #readTaskManager()}
      *
-     * @param filePath location of the data. Cannot be null
-     * @throws DataConversionException if the file is not in the correct format.
+     * @param filePath
+     *            location of the data. Cannot be null
+     * @throws DataConversionException
+     *             if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException,
-        FileNotFoundException {
+    @Override
+    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
+            throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
         File taskManagerFile = new File(filePath);
@@ -57,14 +69,16 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 
     @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-        saveTaskManager(taskManager, filePath);
+        saveTaskManager(taskManager, this.filePath);
     }
 
     /**
      * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
      *
-     * @param filePath location of the data. Cannot be null
+     * @param filePath
+     *            location of the data. Cannot be null
      */
+    @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         assert taskManager != null;
         assert filePath != null;
@@ -72,6 +86,19 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+    }
+
+    @Override
+    public void copyTaskManager(String oldPath, String newPath) throws IOException {
+        assert oldPath != null;
+        assert newPath != null;
+        try {
+            logger.info("Copying file.");
+            Files.copy(Paths.get(oldPath), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {
+            logger.info("I/O Exception when copying file.");
+            throw new IOException("Error when copying file.");
+        }
     }
 
 }
