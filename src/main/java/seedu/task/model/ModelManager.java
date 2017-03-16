@@ -84,9 +84,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        Task taskBackup = new Task(filteredTasks.get(filteredTaskListIndex));
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        undoRedo.pushUndo(taskBackup);
+        undoRedo.pushTaskIndex(taskManagerIndex);
+        undoRedo.pushCommand("Edit");
         indicateTaskManagerChanged();
     }
 
@@ -172,14 +175,39 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public Task previousTask(){
-    	Task task = undoRedo.popUndo();
-    	return task;
+    	return undoRedo.popUndo();
     }
 
     @Override
     public String previousCommand(){
-    	String command = undoRedo.popCommand();
-    	return command;
+    	return undoRedo.popCommand();
+    }
+
+    @Override
+    public int previousIndex(){
+    	return undoRedo.popTaskIndex();
+    }
+
+    @Override
+    public synchronized void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException {
+    	taskManager.removeTask(target);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void addTaskUndo(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.addTask(task);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void updateTaskUndo(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
     }
 
 }

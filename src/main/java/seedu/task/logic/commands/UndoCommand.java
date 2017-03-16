@@ -2,6 +2,7 @@ package seedu.task.logic.commands;
 
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class UndoCommand extends Command {
@@ -12,7 +13,7 @@ public class UndoCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNDO_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_UNDO_SUCCESS = "Undo Command Successful";
 
 
     @Override
@@ -22,13 +23,30 @@ public class UndoCommand extends Command {
     	Task previousTask = model.previousTask();
 
         switch (previousCommand){
-        case "Add": try {
-				model.deleteTask(previousTask);
+        case "Add":
+        	try {
+				model.deleteTaskUndo(previousTask);
 			} catch (TaskNotFoundException pnfe) {
 				assert false : "The target task cannot be missing";
 			}
+        	break;
+        case "Delete":
+        	try {
+				model.addTaskUndo(previousTask);
+			} catch (DuplicateTaskException e1) {
+				// TODO Auto-generated catch block
+			}
+        	break;
+        case "Edit":
+			try {
+				model.updateTaskUndo(model.previousIndex(), previousTask);
+			} catch (DuplicateTaskException e) {
+				e.printStackTrace();
+			}
+        	break;
+		default:
+			System.out.println("HELPPPP");
         }
-
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 

@@ -8,6 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -52,4 +53,11 @@ public interface Model {
 
 	String previousCommand();
 
+	void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException;
+
+	void addTaskUndo(Task task) throws DuplicateTaskException;
+
+	void updateTaskUndo(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException;
+
+	int previousIndex();
 }
