@@ -289,7 +289,7 @@ Format: `exit`
 | [List all tasks](#36-listing-all-tasks-list) | `list` | `list` |
 | [List only completed tasks](#37-listing-all-completed-tasks-listdone) | `listdone` | `listdone` |
 | [List only uncompleted tasks](#38-listing-all-uncompleted-tasks-listundone) | `listundone` | `listundone` |
-| [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find) | `find KEYWORD [MORE_KEYWORDS] [DATE]` | `find report` |
+| [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find) | `find KEYWORD [MORE_KEYWORDS] [DATE]` | `find report 15-3-17` |
 | [Undo](#310-undo-most-recent-command-undo) | `undo` | `undo` |
 | [Redo](#311-redo-most-recent-undo-redo) | `redo` | `redo` |
 | [Exit](#313-exiting-the-program-exit) | `exit` | `exit` |
