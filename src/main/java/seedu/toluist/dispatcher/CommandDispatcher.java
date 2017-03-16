@@ -18,6 +18,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
+import seedu.toluist.controller.ClearController;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
@@ -68,6 +69,7 @@ public class CommandDispatcher extends Dispatcher {
     private Collection<Class <? extends Controller>> getAllControllerClasses() {
         return new ArrayList<>(Arrays.asList(
                 AddTaskController.class,
+                ClearController.class,
                 UpdateTaskController.class,
                 DeleteTaskController.class,
                 StoreController.class,
