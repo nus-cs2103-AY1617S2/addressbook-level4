@@ -16,7 +16,7 @@ import seedu.address.commons.events.storage.FileLocationChangedEvent;
  */
 
 public class SaveCommand extends Command {
-    public static final String COMMAND_WORD = "Save";
+    public static final String COMMAND_WORD = "save";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "the path that you wish to save the file to/fileName.xml"
                                                + "Example: " + COMMAND_WORD + "data/File.xml";
     public static final String MESSAGE_SUCCESS = "Task list has been saved!";
