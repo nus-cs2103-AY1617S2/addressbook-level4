@@ -10,8 +10,8 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINT = "Time should always follow the dd/mm/yy hh:mm format";
-    public static final String TIME_VALIDATION_REGEX = "^[0-3]*[0-9]/[0-3]*[0-9]/(?:[0-9][0-9])?[0-9][0-9]\\s+"
-            + "(0*[1-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9])";
+    public static final String TIME_VALIDATION_REGEX = "^[0-3]*[0-9]/[0-3]*[0-9]/(?:[0-9][0-9])?[0-9][0-9]\\s+(0*[1-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9])";
+
     public static final String DEFAULT_TIME = "";
     public final String value;
 
