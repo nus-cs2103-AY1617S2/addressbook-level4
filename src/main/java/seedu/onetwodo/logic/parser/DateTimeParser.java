@@ -4,6 +4,7 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
+import static seedu.onetwodo.model.task.Date.MESSAGE_DATE_INPUT_CONSTRAINTS;
 
 import java.util.Date;
 import java.util.List;
@@ -15,9 +16,6 @@ import java.util.Optional;
 
 
 public class DateTimeParser {
-    
-    public static final String MESSAGE_DATE_PARSE_FAILURE = "Invalid date input. Please check the format.";
-
     
     public DateTimeParser() {}
     
@@ -42,13 +40,13 @@ public class DateTimeParser {
         
         List<DateGroup> dateGroups = parser.parse(input);
         if(dateGroups.isEmpty()) {
-            throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
+            throw new IllegalValueException(MESSAGE_DATE_INPUT_CONSTRAINTS);
         }
         DateGroup dateGroup = dateGroups.get(0);
         List<Date> dates = dateGroup.getDates();
 
         if(dates.isEmpty()) {
-            throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
+            throw new IllegalValueException(MESSAGE_DATE_INPUT_CONSTRAINTS);
         }
         Date parsedDateTime = dates.get(0);
         LocalDateTime localDateTime = toLocalDateTime(parsedDateTime);
