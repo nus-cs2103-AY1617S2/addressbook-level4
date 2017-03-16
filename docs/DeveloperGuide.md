@@ -14,75 +14,89 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 * [Appendix B: Glossary](#appendix-b--glossary)
 * [Appendix C : Product Survey](#appendix-c--product-survey)
 
+---
 
 ## 1. Setting up
 
 ### 1.1. Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
+1. **JDK 1.8.0_60 or later**.
+    > JDK version `1.8.0_60` or later is required to run the project correctly
+2. **Eclipse IDE Neon**. 
+    >Follow the instructions [here](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE) to download and install Eclipse.
+3. **e(fx)clipse plugin for Eclipse**. 
+    >Follow the instructions [here](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious) to set up e(fx)clipse for Eclipse
+4. **Buildship Gradle Integration**.
+    >Buildship is bundled together with Eclipse Neon and above.
+5. **Checkstyle Plug-in**.
 
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
+### 1.2. Installing Checkstyle manually
+    As of August 16, 2017, the Checkstyle repository in Eclipse Marketplace is unavailable. 
 
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+1. Download the compressed .zip file [here](https://sourceforge.net/projects/eclipse-cs/?source=typ_redirect). **Do not** extract the contents.
+2. Launch Eclipse Neon.
+3. Click `Help` > `Install new Software...`.
+<br><img src="images/checkstyle/checkstyle_1.png" width="400"><br><br>
+4. Click `Add..`.
+<br><img src="images/checkstyle/checkstyle_2.png" width="400"><br><br>
+5. Click `Archive` to open up a directory window.
+<br><img src="images/checkstyle/checkstyle_3.png" width="400"><br><br>
+6. Nagivate and select the **uncompressed** download file. Click `Open` > `OK`.
+<br><img src="images/checkstyle/checkstyle_4.png" width="400"><br><br>
+7. Check `Checkstyle` and click `Next`.
+<br><img src="images/checkstyle/checkstyle_5.png" width="400"><br><br>
+8. Click `Next` and accept the user license agreement as follows. 
+<br><img src="images/checkstyle/checkstyle_6.png" width="400"><br><br>
+9. Click `Finish` to install Checkstyle.
+<br><img src="images/checkstyle/checkstyle_7.png" width="400"><br><br>
 
+### 1.3. Importing the project through Gradle
 
-### 1.2. Importing the project into Eclipse
-
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
-
+1. Clone this repository through this [link](https://github.com/CS2103JAN2017-W15-B3/main.git).
+2. Launch Eclipse.
+    >Ensure you have installed the **e(fx)clipse** and **buildship** plugins per the prerequisites above.
+3. Click `File` > `Import`.
+4. Click `Gradle` > `Gradle Project` and then `Next`.
+<br><img src="images/gradle/gradle_2.png" width="400"><br><br>
+5. Click `Next` in the Gradle Import Wizard.
+<br><img src="images/gradle/gradle_3.png" width="400"><br><br>
+6. Click `Browse` and nagivate to the directory of the cloned repository. Click `Finish` to begin importing the project.
+<br><img src="images/gradle/gradle_4.png" width="400"><br><br>
+   > * Gradle will begin importing and building the project. This process may take up 15 minutes depending on the internet connection speed.
+   > <br><img src="images/gradle/gradle_5.png" width="400"><br><br>
+   > * Upon completion, locate the Gradle Tasks menu at the lower section of Eclipse Neon.
+   > <br><img src="images/gradle/gradle_6.png" width="400"><br>
+7. Open the project menu and select `build` > `build` to build and test the project.
+<br><img src="images/gradle/gradle_7.png" width="400"><br><br>
+8. Check that the project has builded successfully in the Console view.
+<br><img src="images/gradle/gradle_8.png" width="400"><br><br>
+More information about using Gradle can be found [here](https://github.com/CS2103JAN2017-W15-B3/main/blob/docs-settingup/docs/UsingGradle.md).
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * If any settings files are changed by Eclipse during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
 
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. opus
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
+### 1.4. Configuring Checkstyle
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`.
+2. Choose `External Configuration File` under `Type`.
+3. Enter an arbitrary configuration name e.g. opus.
+4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`.
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
-
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
-
-### 1.4. Running the project
-
-1. Create a new run configuration and name it `Run Gradle`
-2. In `Gradle Tasks` textbox, input `run`
-3. Click on `Apply` and `Run`
-4. Opus should build and run
+6. Check and select `files from packages`, click `Change...`, and select the `resource`.
+7. Click OK twice. Rebuild project as required.
+    
+    Click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 ### 1.5. Troubleshooting project setup
 
-**Problem: Eclipse reports compile errors after new commits are pulled from Git**
+#### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
+    This is because Eclipse failed to recognize the new files that are pulled from Git.
+1. Right click on the project (in Eclipse package explorer) and choose `Gradle` > `Refresh Gradle Project`.
 
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-* Solution: Refresh the project in Eclipse:<br>
-  Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
-
-**Problem: Eclipse reports some required libraries missing**
-
-* Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md#running-tests) once (to refresh the libraries).
-
-**Problem: `Error during compilation: missing tools.jar`**
-
-* Reason: Unsure of the cause of the reason
-* Solution: A known solution is to reinstall `Java JDK 1.8`
-
+#### 1.5.2.  Eclipse reports missing libraries.
+    Eclipse has failed to retrieve all required dependencies during the project import.
+1. Right click on the project and select `Gradle` > `Run tests using Gradle`.
 
 ## 2. Design
 
