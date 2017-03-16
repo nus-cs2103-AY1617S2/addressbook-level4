@@ -10,6 +10,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.FileLocationChangedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.UserPrefs;
@@ -76,6 +77,10 @@ public class StorageManager extends ComponentManager implements Storage {
         taskListStorage.saveTaskList(taskList, filePath);
     }
 
+    public void setFilePath(String filePath) {
+        taskListStorage.setFilePath(filePath);
+    }
+
 
     @Override
     @Subscribe
@@ -86,6 +91,11 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    public void handleFileStorageLocationChangedEvent(FileLocationChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "File Location is changed."));
+        setFilePath(event.getFilePath());
     }
 
 }
