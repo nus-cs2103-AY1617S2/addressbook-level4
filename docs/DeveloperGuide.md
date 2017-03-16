@@ -127,10 +127,10 @@ Here are some of the key files in the `Ui` component:
 - [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the App. 
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
-    ```java
+    ```java  
     - void start(Stage primaryStage)
-    - void stop()
-    ```
+    - void stop()  
+    ```  
 - `UiManager.java`: contains a `class` that implements the operations specified in `Ui.java`.
 - `MainWindow.java`: contains a `class` that represents the Main Window viewed by the user.
 - `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands.
@@ -145,10 +145,10 @@ Here are some of the key files in the `Logic` component:
 - [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain the results of computations.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
-    ```java
+    ```java  
     - CommandResult execute(String commandText) throws CommandException;
-    - ObservableList<ReadOnlyTask> getFilteredPersonList();
-    ```
+    - ObservableList<ReadOnlyTask> getFilteredPersonList();  
+    ```  
 - `LogicManager.java`: contains a `class` that implements the operations specified in `Model.java`.
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
@@ -163,11 +163,11 @@ Here are some of the key files in the `Model` component:
 - [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
-    ```java
+    ```java  
     - void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.TaskAlreadyFinishedException;
     - void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    - void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-    ```
+    - void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;  
+    ```  
 - `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
 - `TodoList.java`: contains a `class` that represents the to-do list.
 - `Task.java`: contains a `class` that represents each to-do list item (i.e. task).
@@ -186,12 +186,12 @@ Here are some of the key files in the `Storage` component:
 - [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines R/W operations on **user preferences** and **to-do list**.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
-    ```java
+    ```java  
     - Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
     - void saveUserPrefs(UserPrefs userPrefs) throws IOException;
     - Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException;
-    - void saveTodoList(ReadOnlyTodoList todoList) throws IOException;
-    ```
+    - void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
+    ```  
 - `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`.
 - `XmlTodoListStorage`: contains a `class` that implements the R/W operations on **to-do list**. An instance of this class is utilized in `StorageManager`.
 - `JsonUserPrefsStorage`: contains a `class` that implements the R/W operations on **user preferences**. An instance of this class is used in `StorageManager`.
