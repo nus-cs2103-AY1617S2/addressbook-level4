@@ -25,9 +25,9 @@ application as well as know how to troubleshoot some common development issues.
 We have organized the guide in a top-down so that, as a new developer, you can look at the big picture of the project
  before zooming in on specific components.
 
-## 1. Setting up
+## 2. Setting up
 
-### 1.1. Prerequisites
+### 2.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -40,7 +40,7 @@ We have organized the guide in a top-down so that, as a new developer, you can l
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 2.2. Importing the project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -55,7 +55,7 @@ We have organized the guide in a top-down so that, as a new developer, you can l
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 2.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. toluist
@@ -66,7 +66,7 @@ We have organized the guide in a top-down so that, as a new developer, you can l
 
 > You should click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 2.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -80,12 +80,12 @@ We have organized the guide in a top-down so that, as a new developer, you can l
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+## 3. Design
 
-### 2.1. Architecture
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1 : Architecture Diagram_
+_Figure 3.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of ToLuist.
 Given below is a quick overview of each component.
@@ -123,16 +123,16 @@ bridge between the UI and the Model. Model & Storage store and maintain the data
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### 3.2. UI component
 
 <img src="images/UiClassDiagram.png" width="600"><br>
-_Figure 2.2 : Structure of the UI Component_
+_Figure 3.2 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/toluist/ui/Ui.java)
 
 **JavaFX** is used for the UI. `MainWindow` holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
 
-#### 2.2.1. UiView
+#### 3.2.1. UiView
 
 **API** : [`UiView.java`](../src/main/java/seedu/toluist/ui/view/UiView.java)
 
@@ -158,33 +158,33 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 - Set UI component values (e.g. using `setText` on an FXML `Text` object).
 - Attach subviews and propagate the chain.
 
-#### 2.2.2. UiStore ####
+#### 3.2.2. UiStore ####
 
 **API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
 
 `UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
 
-#### 2.2.3. Reactive nature of the UI ####
+#### 3.2.3. Reactive nature of the UI ####
 
 To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`.
 
 The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the `UiStore`, without knowing what was the exact change.
 
 <img src="images/UiSequence.png" width="600"><br>
-_Figure 2.1.3 : Interactions Inside the UI for the `add study` Command_
+_Figure 3.2.3 : Interactions Inside the UI for the `add study` Command_
 
 The reactive approach is borrowed from modern Javascript front-end frameworks such as [React.js](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org/v2/guide/reactivity.html).
 
-### 2.2 Dispatcher component
+### 3.2 Dispatcher component
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
 `Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command.
 
-### 2.3. Controller component
+### 3.3. Controller component
 
 <img src="images/ControllerClassDiagram.png" width="600"><br>
-_Figure 2.3.1 : Structure of the Controller Component_
+_Figure 3.3 : Structure of the Controller Component_
 
 **API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
@@ -194,13 +194,13 @@ _Figure 2.3.1 : Structure of the Controller Component_
 - After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
 
 
-### 2.4. Model component
+### 3.4. Model component
 
 **API** : [`TodoList.java`](../src/main/java/seedu/toluist/model/TodoList.java)
 
 The `Model` stores the task data for the app inside the memory.
 
-### 2.5. Storage component
+### 3.5. Storage component
 
 **API** : [`TodoListStorage.java`](../src/main/java/seedu/toluist/storage/TodoListStorage.java)
 
@@ -225,13 +225,13 @@ changes in the storage is much more robust, as we can avoid checking every Contr
 get the previous data state. An additional benefit is that the integrity of the data change order is guaranteed in 
 the `historyStack`, and we do not need to keep track of what the previous mutating commands were.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.toluist.commons` package.
 
-## 3. Implementation
+## 4. Implementation
 
-### 3.1. Logging
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -250,12 +250,12 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging.
   e.g. The actual list is printed instead of just its size.
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 You can control certain properties of the application (e.g App name, logging level) through the configuration file
 (default: `config.json`).
 
-## 4. Testing
+## 5. Testing
 
 You can find the tests in the `./src/test/java` folder.
 
@@ -292,7 +292,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -302,23 +302,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## 6. Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -327,7 +327,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -344,7 +344,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Address Book depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
