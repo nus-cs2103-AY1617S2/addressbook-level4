@@ -4,7 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import com.joestelmach.natty.*;
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 
@@ -15,7 +16,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
-    public static final Parser dateTimeParser = new Parser(TimeZone.getTimeZone("GMT"));
+    public static final Parser DATE_TIME_PARSER = new Parser(TimeZone.getTimeZone("GMT"));
 
     public final Date dateTime;
 
@@ -38,7 +39,7 @@ public class DateTime {
      * Returns true if a given string is a valid date time.
      */
     public static boolean isValidDateTime(String dateTime) {
-        List<DateGroup> parsedDateGroups = dateTimeParser.parse(dateTime);
+        List<DateGroup> parsedDateGroups = DATE_TIME_PARSER.parse(dateTime);
         return parsedDateGroups.size() == 1 && !parsedDateGroups.get(0).getDates().isEmpty();
     }
 
@@ -47,7 +48,7 @@ public class DateTime {
      * Precondition: the String dateTime has already been checked to be valid
      */
     private Date convertToDateFormat(String dateTime) {
-        List<DateGroup> parsedDateGroups = dateTimeParser.parse(dateTime);
+        List<DateGroup> parsedDateGroups = DATE_TIME_PARSER.parse(dateTime);
         return parsedDateGroups.get(0).getDates().get(0);
     }
 

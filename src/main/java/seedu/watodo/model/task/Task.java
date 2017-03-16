@@ -11,7 +11,7 @@ import seedu.watodo.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    public enum Status {UNDONE, DONE, OVERDUE} // Represents a Task's current status in the task manager.
+    public enum Status { UNDONE, DONE, OVERDUE } // Represents a Task's current status in the task manager.
 
     protected Description description;
     protected Status status;
@@ -29,7 +29,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(),source.getTags());
+        this(source.getDescription(), source.getTags());
     }
 
     public void setDescription(Description description) {
