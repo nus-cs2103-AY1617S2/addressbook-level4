@@ -137,6 +137,14 @@ public class UniqueTagList implements Iterable<Tag> {
         }
         internalList.add(toAdd);
     }
+    
+    public boolean isTagPresent() {
+    	if (internalList.isEmpty()) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+    }
 
     @Override
     public Iterator<Tag> iterator() {
