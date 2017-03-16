@@ -97,7 +97,7 @@ Given below is a quick overview of each component.
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#3-6-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -106,10 +106,10 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#3-2-ui-component) : The UI of the App.
+* [**`Logic`**](#3-3-logic-component) : The command executor.
+* [**`Model`**](#3-4-model-component) : Holds the data of the App in-memory.
+* [**`Storage`**](#3-5-storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -228,7 +228,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](#4-2-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -267,7 +267,7 @@ We have two types of tests:
 1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
    These are in the `guitests` package.
 
-2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
+2. **Non-GUI Tests** - These are tests not involving the GUI. They include:
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
       e.g. `werkbook.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
