@@ -10,3 +10,4 @@ lib/*
 .DS_Store
 ./screenshot*.png
 classes/
+/bin/
