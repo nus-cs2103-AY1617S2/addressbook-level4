@@ -38,9 +38,13 @@ public class CommandBoxHandle extends GuiHandle {
         pressEnter();
         guiRobot.sleep(200); //Give time for the command to take effect
     }
-
-    public HelpWindowHandle runHelpCommand() {
-        enterCommand("help");
+/**
+ *
+ * @param helpCommand must be one of the valid help commands in FlexibleCommand
+ * @return
+ */
+    public HelpWindowHandle runHelpCommand(String helpCommand) {
+        enterCommand(helpCommand);
         pressEnter();
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
