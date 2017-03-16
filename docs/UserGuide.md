@@ -31,7 +31,7 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 ## 1. Welcome
 
-Werkbook is a task manager.
+Werkbook is a command-line based task manager that will help you organise your to-dos in a neat and efficient way.
 
 ## 2. Getting Started
 
@@ -109,44 +109,54 @@ Now you're all set to start managing your tasks! Feel free too refer to our [Fea
 
 #### a. Add task
 
-Adds a task to the task list<br>
-Date and time must be formatted as DD/MM/YYYY HHMM<br>
-A task must have a name, the description is optional<br>
-The task can also optionally have a End Date/Time, or both a Start Date/Time and End Date/Time<br>
+When you receive a new task, you can add it to Werkbook using the `add` command.<br>
 Format: `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
 
 Examples:
-
 * `Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important`
+
+> * Date and time must be formatted as DD/MM/YYYY HHMM<br>
+> * A task must have a name, the description is optional<br>
+> * The task can also optionally have a End Date/Time, or both a Start Date/Time and End Date/Time<br>
 
 #### b. List tasks
 
-Shows a list of all tasks in the task list.<br>
+If you want to see a list of all the tasks you have added, you can use the `list` command.<br>
 Format: `list`
 
 #### c. Edit task
 
-Edits a task in the task list.<br>
+Perhaps the deadline for your project has been pushed back, or maybe you want to change the details of a task that you have already created. You can use the `edit` command to change the description and start/end times of your existing tasks.<br>
 Format: `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]...`
 
+Examples:
+* `edit 1 e/01/01/2018 2359`<br>
+  Edits the deadline of the 1st task to be `01/01/2018 2359`.<br>
+* `edit 2 d/Help to finish up essay`<br>
+  Edits the description of the 2nd task to be `Help to finish up essay`<br>
+
+To remove the start/end date entirely, simply add the corresponding prefix without specifying a new date.
+
+Example:
+* `edit 3 e/`<br>
+  Removes the deadline from task 3.<br>
+ 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
-> * Providing the prefix for start or end date/time without supplying a date/time will remove it from the task
 > * Existing values will be updated to the input values.
 
-Examples:
 
-* `edit 1 d/Get the Fish`<br>
-  Edits the description of the 1st task to be `Get the Fish`.
-* `edit 2 s/`<br>
-  Removes the start date/time of the 2nd task.
 
 #### d. Find task
 
-Finds tasks whose name or description contain any of the given keywords.<br>
+Too many tasks? Don't worry! Simply use the `find` command to bring up a list of tasks containing the specified keyword in the name.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
+
+Examples:
+* `find Milk`<br>
+  Returns `Get the Milk` but not `Get the milk`
 
 > * The search is case sensitive. e.g `milk` will not match `Milk`
 > * The order of the keywords does not matter. e.g. `Apple Juice` will match `Juice Apple`
@@ -155,10 +165,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > * tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Milk` will match `Get the Milk`
 
-Examples:
 
-* `find Milk`<br>
-  Returns `Get the Milk` but not `Get the milk`
 
 #### e. Mark task
 
