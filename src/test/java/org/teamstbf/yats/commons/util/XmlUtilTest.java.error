@@ -14,7 +14,7 @@ import org.teamstbf.yats.commons.util.FileUtil;
 import org.teamstbf.yats.commons.util.XmlUtil;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.storage.XmlSerializableTaskManager;
-import org.teamstbf.yats.testutil.AddressBookBuilder;
+import org.teamstbf.yats.testutil.TaskManagerBuilder;
 import org.teamstbf.yats.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -86,9 +86,9 @@ public class XmlUtilTest {
         assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        AddressBookBuilder builder = new AddressBookBuilder(new TaskManager());
+        TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
         dataToWrite = new XmlSerializableTaskManager(
-                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
+                builder.withEvent(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
