@@ -1,5 +1,9 @@
 # Developer Guide
 
+Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app.
+
+This Developer Guide is for any developer who wishes to continue development of this project. You should be proficient in Java.
+
 ## Table of Contents
 
 1. [Setting Up](#1-setting-up)
