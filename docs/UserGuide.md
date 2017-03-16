@@ -413,7 +413,7 @@ Q: Is it possible to set my storage path to a portable drive and use it on a dif
 A: Yes! Just use the [saveto](#changing-the-save-location) command and choose the specified path of the portable drive.
 
 Q: The iManager is not showing everything that I have added upon booting up. <br>
-A: Our iManager only shows today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks](#viewing-tasks). 
+A: Our iManager only shows today's task on start-up. To view pending, "done", floating or overdue task please refer to [Viewing tasks](#viewing-tasks) for more information. 
 
 
 ## Command Summary
