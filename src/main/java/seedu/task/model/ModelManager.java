@@ -201,25 +201,25 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class DoneQualifier implements Qualifier {
 
-    	private boolean value;
+        private boolean value;
 
-    	DoneQualifier(boolean value) {
-    	    this.value = value;
-    	}
+        DoneQualifier(boolean value) {
+            this.value = value;
+        }
 
-    	@Override
-    	public boolean run(ReadOnlyTask task) {
-    	    if (this.value  & task.isDone()) {
-    	        return true;
-    	    }
-    	    else if (!this.value  & !task.isDone()) {
-    	        return true;
-    	    }
-    	    else {
-    	        return false;
-    	    }
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (this.value  & task.isDone()) {
+                return true;
+            }
+            else if (!this.value  & !task.isDone()) {
+                return true;
+            }
+            else {
+                return false;
+            }
 
-    	}
+        }
     }
 
 
