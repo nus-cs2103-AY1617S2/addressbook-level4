@@ -4,26 +4,26 @@ Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app.
 
 This Developer Guide is for any developer who wishes to continue development of this project. You should be proficient in Java.
 
-<h2 id="table-of-contents">Table of Contents</h2>
+<h2 id="user-content-table">Table of Contents</h2>
 
-1. [Setting Up](#1-setting-up)
-2. [Design](#2-design)
-    * [UI](#ui-component)
-    * [Logic](#logic-component)
-    * [Model](#model-component)
-    * [Storage](#storage-component)
-3. [Implementation](#3-implementation)
-4. [Testing](#4-testing)
-5. [Dev Ops](#5-dev-ops)
-6. [Appendices](#6-appendices)
-    * [Appendix A: User Stories](#appendix-a--user-stories)
-    * [Appendix B: Use Cases](#appendix-b--use-cases)
-    * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-    * [Appendix D: Glossary](#appendix-d--glossary)
-    * [Appendix E : Product Survey](#appendix-e--product-survey)
+1. [Setting Up](#user-content-1)
+2. [Design](#user-content-2)
+    * [UI](#user-content-ui)
+    * [Logic](#user-content-logic)
+    * [Model](#user-content-model)
+    * [Storage](#user-content-storage)
+3. [Implementation](#user-content-3)
+4. [Testing](#user-content-4)
+5. [Dev Ops](#user-content-5)
+6. [Appendices](#user-content-6)
+    * [Appendix A: User Stories](#user-content-aa)
+    * [Appendix B: Use Cases](#user-content-ab)
+    * [Appendix C: Non Functional Requirements](#user-content-ac)
+    * [Appendix D: Glossary](#user-content-ad)
+    * [Appendix E : Product Survey](#user-content-ae)
 
 
-<h2 id="1-setting-up">1. Setting up</h2>
+<h2 id="user-content-1">1. Setting up</h2>
 
 #### Prerequisites
 
@@ -76,9 +76,9 @@ This Developer Guide is for any developer who wishes to continue development of 
 * Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#user-content-table)**
 
-<h2 id="2-design">2. Design</h2>
+<h2 id="user-content-2">2. Design</h2>
 
 ### Architecture
 
@@ -130,7 +130,7 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 
 The sections below give more details of each component.
 
-<h3 id="ui-component">UI component<h3>
+<h3 id="user-content-ui">UI component<h3>
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 
@@ -150,7 +150,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-<h3 id="logic-component">Logic component</h3>
+<h3 id="user-content-logic">Logic component</h3>
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -165,7 +165,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 
-<h2 id="model-component">Model component</h2>
+<h2 id="user-content-model">Model component</h2>
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
@@ -178,7 +178,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-<h3 id="storage-component">Storage component</h3>
+<h3 id="user-content-storage">Storage component</h3>
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 
@@ -192,9 +192,9 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.geekeep.commons` package.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#user-content-table)**
 
-<h2 id="3-implementation">3. Implementation</h2>
+<h2 id="user-content-3">3. Implementation</h2>
 
 ### Logging
 
@@ -220,9 +220,9 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#user-content-table)**
 
-<h2 id="4-testing">4. Testing</h2>
+<h2 id="user-content-4">4. Testing</h2>
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -265,9 +265,9 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#user-content-table)**
 
-<h2 id="5-dev-ops">5. Dev Ops</h2>
+<h2 id="user-content-5">5. Dev Ops</h2>
 
 ### **Build Automation**
 
@@ -296,11 +296,11 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#user-content-table)**
 
-<h2 id="6-appendices">6. Appendices</h2>
+<h2 id="user-content-6">6. Appendices</h2>
 
-<h3 id="appendix-a--user-stories">Appendix A : User Stories</h3>
+<h3 id="user-content-aa">Appendix A : User Stories</h3>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | user who also uses Google Calendar | sync tasks to Google Calendar | see existing tasks and add local tasks to Google Calendar |
 
 
-<h3 id="appendix-b--use-cases">Appendix B : Use Cases</h3>
+<h3 id="user-content-ab">Appendix B : Use Cases</h3>
 
 (For all use cases below, the System is the TaskManager and the Actor is the user, unless specified otherwise)
 
@@ -400,7 +400,7 @@ Extensions
 
 > Use case ends
 
-<h3 id="appendix-c--non-functional-requirements">Appendix C : Non Functional Requirements</h3>
+<h3 id="user-content-ac">Appendix C : Non Functional Requirements</h3>
 
 1. Should work on Windows 7 or later as long as it has Java 1.8.0_60 or higher installed.
 
@@ -416,7 +416,7 @@ Extensions
 
 7. Users should be able to execute all commands by using the CLI alone
 
-<h3 id="appendix-d--glossary">Appendix D : Glossary</h3>
+<h3 id="user-content-ad">Appendix D : Glossary</h3>
 
 **Mainstream OS**
 
@@ -440,7 +440,7 @@ Extensions
 > A task with a specified ending time is a deadline
 > E.g. Complete Progress Report by 20 March 2017 2359H
 
-<h3 id="appendix-e--product-survey">**Appendix E : Product Survey**</h3>
+<h3 id="user-content-ae">**Appendix E : Product Survey**</h3>
 
 #### **Google Keep**
 
@@ -548,4 +548,4 @@ Cons:
 
 * Group plans are only available to paid users
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#user-content-table)**
