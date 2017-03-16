@@ -143,7 +143,9 @@ and they can be loaded using the `UiPartLoader`.
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/geekeep/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+ [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml), and it looks like:
+
+ <img src="images/MainWindowLayout.png" width="800"><br>
 
 The `UI` component,
 * Executes user commands using the `Logic` component.
