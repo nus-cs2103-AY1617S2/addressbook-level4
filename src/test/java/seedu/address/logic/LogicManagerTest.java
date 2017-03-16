@@ -41,6 +41,7 @@ import seedu.address.model.ReadOnlyToDoApp;
 import seedu.address.model.ToDoApp;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
@@ -418,7 +419,8 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, start, deadline, priority, tags);
+            Notes notes = new Notes("this is a note");
+            return new Task(name, start, deadline, priority, tags, notes);
         }
 
         /**
@@ -434,7 +436,8 @@ public class LogicManagerTest {
                     new Start(""),
                     new Deadline(""),
                     new Priority(seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
+                    new Notes("this is a note")
             );
         }
 
@@ -530,7 +533,8 @@ public class LogicManagerTest {
                     new Start(""),
                     new Deadline(""),
                     new Priority(0),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueTagList(new Tag("tag")),
+                    new Notes("")
             );
         }
     }

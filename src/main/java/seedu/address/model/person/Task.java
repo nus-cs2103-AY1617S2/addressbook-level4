@@ -16,24 +16,27 @@ public class Task implements ReadOnlyTask {
     private Deadline deadline;
     private Priority priority;
     private UniqueTagList tags;
+    private Notes notes;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Start start, Deadline deadline, Priority priority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, start, deadline, tags);
+    public Task(Name name, Start start, Deadline deadline, Priority priority, UniqueTagList tags, Notes notes) {
+        assert !CollectionUtil.isAnyNull(name, start, deadline, tags, notes);
         this.name = name;
         this.start = start;
         this.deadline = deadline;
         this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.notes = notes;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStart(), source.getDeadline(), source.getPriority(), source.getTags());
+        this(source.getName(), source.getStart(), source.getDeadline(), 
+                source.getPriority(), source.getTags(), source.getNotes());
     }
 
     public void setName(Name name) {
@@ -89,6 +92,16 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    @Override
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Notes notes) {
+        assert notes != null;
+        this.notes = notes;
+    }
+
     /**
      * Updates this person with the details of {@code replacement}.
      */
@@ -100,6 +113,7 @@ public class Task implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
+        this.setNotes(replacement.getNotes());
     }
 
     @Override
