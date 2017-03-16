@@ -17,7 +17,6 @@ import seedu.bulletjournal.logic.commands.HelpCommand;
 import seedu.bulletjournal.logic.commands.IncorrectCommand;
 import seedu.bulletjournal.logic.commands.ListCommand;
 import seedu.bulletjournal.logic.commands.SelectCommand;
-import seedu.bulletjournal.logic.parser.FlexibleCommand;
 /**
  * Parses user input.
  */
