@@ -173,7 +173,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 **API** : [`Model.java`](../src/main/java/seedu/geekeep/model/Model.java)
 
-The `Model`
+The `Model` component
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Task Manager data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
