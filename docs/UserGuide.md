@@ -228,8 +228,8 @@ Format: `help`
 
 #### b. Undo/Redo
 
-Undo the last command executed. <br>
-Format: `undo`
+Undo the last command(s) executed. <br>
+Format: `undo [AMOUNT]`
 
 > Undo the last command executed.
 > Repeated use of undo will undo the previous command from the last command undone
@@ -240,8 +240,8 @@ Examples:
   `undo`<br>
   Undo the deletion of the 2nd task in the task list.
 
-Redo the last undo command executed. <br>
-Format: `undo`
+Redo the last undo command(s) executed. <br>
+Format: `undo [AMOUNT]`
 
 > Redo the last undo command executed.
 > Repeated use of redo will redo the previous undo command from the last undo command redone
@@ -256,7 +256,7 @@ Examples:
 #### c. Change save location
 
 Saves all changes to disk. <br>
-Format: `save [SAVE_LOCATION]`
+Format: `save SAVE_LOCATION`
 
 The first time the task manager is saved without `SAVE_LOCATION` the user would be asked to specify where to save.<br>
 Task list data are saved in the hard disk at the last save location automatically after any command that changes the data.<br>
