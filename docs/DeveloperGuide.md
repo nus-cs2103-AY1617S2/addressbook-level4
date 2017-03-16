@@ -366,7 +366,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 ### 4.4. Troubleshooting tests
 
 #### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-   This is because Assertions are not enabled for JUnit tests.
+    This is because Assertions are not enabled for JUnit tests.
 1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
 2. Delete run configurations created when you ran tests earlier.
@@ -413,15 +413,15 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 5.6. Managing Dependencies and External Libraries
 
-A project often depends on third-party libraries. For example, this App depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
-can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
-is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
-
+In Opus, Gradle is used to managed all dependencies and external libraries. The external libraries used in this project are:
+* [ControlsFx](http://fxexperience.com/controlsfx/) `8.40.11`
+* [Guava](https://github.com/google/guava) `19.0`
+* [Jackson](https://github.com/FasterXML/jackson) `2.7.0`
+* [jUnit](http://junit.org/junit4/) `4.12`
+* [TestFx](https://github.com/TestFX/TestFX) `4.0`
+* [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle) `1.8.0_20`
 
 ## Appendix A : Non Functional Requirements
 
@@ -438,10 +438,6 @@ b. Require developers to download those libraries manually (this creates extra w
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
 
 ## Appendix C : Product Survey
 
