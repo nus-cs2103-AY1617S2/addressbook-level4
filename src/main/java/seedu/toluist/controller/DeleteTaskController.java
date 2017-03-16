@@ -52,8 +52,7 @@ public class DeleteTaskController extends Controller {
     }
 
     public HashMap<String, String> tokenize(String command) {
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        return taskTokenizer.tokenize(command, true, false);
+        return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, false);
     }
 
     private CommandResult delete(TodoList todoList, List<Task> tasks) {

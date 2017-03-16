@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
  * Tokenize task into index, description, start date and/or end date.
  */
 public class TaskTokenizer {
-    private String commandTemplate;
-
     public static final int START_INDEX = 0;
     public static final int INVALID_INDEX = -1;
 
@@ -18,11 +16,8 @@ public class TaskTokenizer {
     public static final String TASK_START_DATE_KEYWORD = "startdate/";
     public static final String TASK_END_DATE_KEYWORD = "enddate/";
 
-    public TaskTokenizer(String commandTemplate) {
-        this.commandTemplate = commandTemplate;
-    }
-
-    public HashMap<String, String> tokenize(String commandArgs, boolean hasIndex, boolean hasDescription) {
+    public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
+            boolean hasIndex, boolean hasDescription) {
         Pattern pattern = Pattern.compile(commandTemplate);
         Matcher matcher = pattern.matcher(commandArgs.trim());
         matcher.find();

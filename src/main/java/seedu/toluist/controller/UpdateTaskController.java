@@ -62,8 +62,7 @@ public class UpdateTaskController extends Controller {
     }
 
     public HashMap<String, String> tokenize(String command) {
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        return taskTokenizer.tokenize(command, true, true);
+        return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, true);
     }
 
     private CommandResult update(Task task, String description,
