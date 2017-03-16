@@ -14,9 +14,16 @@ import seedu.address.model.task.StartEndDateTime;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Optional<Deadline> deadline;
+    private Optional<StartEndDateTime> startEndDateTime;
     private UniqueTagList tags;
 
     public TestTask() {
+        // TODO perhaps a better idea for each of the test tasks to always have their dates
+        // this is a temporary hack
+        deadline = Optional.empty();
+        startEndDateTime = Optional.empty();
+
         tags = new UniqueTagList();
     }
 
@@ -42,6 +49,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Optional<Deadline> getDeadline() {
+        return deadline;
+    }
+
+    @Override
+    public Optional<StartEndDateTime> getStartEndDateTime() {
+        return startEndDateTime;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -56,17 +73,5 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
-    }
-
-    @Override
-    public Optional<StartEndDateTime> getStartEndDateTime() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Optional<Deadline> getDeadline() {
-        // TODO Auto-generated method stub
-        return null;
     }
 }
