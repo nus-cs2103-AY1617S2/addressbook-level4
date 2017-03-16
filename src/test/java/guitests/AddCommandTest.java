@@ -16,15 +16,14 @@ public class AddCommandTest extends AddressBookGuiTest {
     public void add() {
         //add one task
         TestCard[] currentList = td.getTypicalTasks();
-//        //TODO: need to have some new task, not a duplicate
-//        TestCard taskToAdd = td.assignment;
-//        assertAddSuccess(taskToAdd, currentList);
-//        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
-//
-//        //add another task
-//        taskToAdd = td.phoneCall;
-//        assertAddSuccess(taskToAdd, currentList);
-//        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        TestCard taskToAdd = td.notAddedQuiz;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+
+        //add another task
+        taskToAdd = td.notAddedBuyTicket;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
 
         //add duplicate task
         commandBox.runCommand(td.phoneCall.getAddCommand());
