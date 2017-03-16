@@ -25,9 +25,6 @@ public class ListCommand extends Command {
         case "ALL": // view all tasks
             doneStatus = DoneStatus.ALL;
             break;
-        default:
-            doneStatus = DoneStatus.DEFAULT;
-            break;
         }
     }
 
@@ -46,8 +43,8 @@ public class ListCommand extends Command {
             model.setDoneStatus(DoneStatus.UNDONE);
             model.updateFilteredUndoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);
-        default: // view date
-            model.setDoneStatus(DoneStatus.DEFAULT);
+        default: 
+            model.setDoneStatus(DoneStatus.UNDONE);
             model.updateFilteredUndoneTaskList();
             return new CommandResult(MESSAGE_SUCCESS);
         }

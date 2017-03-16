@@ -50,7 +50,6 @@ public abstract class Command {
         case UNDONE:
             return filtered.filtered(t -> t.getDoneStatus() == false);
         case ALL: 
-        case DEFAULT:
         default:
             return filtered;
         }

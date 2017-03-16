@@ -1,7 +1,6 @@
 package seedu.onetwodo.logic.parser;
 
 public enum DoneStatus {
-    DEFAULT("default"),
     DONE("done"),
     UNDONE("undone"),
     ALL("all");

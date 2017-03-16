@@ -17,7 +17,7 @@ public class ListCommandParser {
         String argsTrimmed = args.trim();
         
         if (argsTrimmed.isEmpty()) {
-            return new ListCommand("DEFAULT");
+            return new ListCommand("UNDONE");
         } else if (argsTrimmed.equals("done")) {
             return new ListCommand("DONE");
         } else if (argsTrimmed.equals("all")) {
