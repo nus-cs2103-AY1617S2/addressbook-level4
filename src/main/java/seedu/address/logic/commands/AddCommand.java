@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      * * Only adds floating task for now
      *
      * @throws IllegalValueException if any of the raw values are invalid
-     * @throws ParseException 
+     * @throws ParseException
      */
     public AddCommand(String todo, String startTime, String endTime, Set<String> tags)
             throws IllegalValueException, ParseException {
@@ -46,29 +46,29 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        
+
         //String inputString = "11-11-2012";
         DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
 
-    	this.toAdd = new Todo(
-    			new Name(todo),
-    			dateFormat.parse(startTime),
-    			dateFormat.parse(endTime),
-    			new UniqueTagList(tagSet));
+        this.toAdd = new Todo(
+                new Name(todo),
+                dateFormat.parse(startTime),
+                dateFormat.parse(endTime),
+                new UniqueTagList(tagSet));
     }
-    
+
     public AddCommand(String todo, Set<String> tags) throws IllegalValueException {
-    	final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        
+
         this.toAdd = new Todo(
                 new Name(todo),
                 new UniqueTagList(tagSet)
         );
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

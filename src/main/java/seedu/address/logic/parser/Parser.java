@@ -34,7 +34,7 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws ParseException 
+     * @throws ParseException
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());

@@ -10,7 +10,7 @@ import seedu.address.model.todo.UniqueTodoList;
  */
 public class TypicalTestTodos {
 
-    public TestTodo alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTodo alice, benson, carl, daniel, elle, fiona, george, eventTest, hoon, ida;
 
     public TypicalTestTodos() {
         try {
@@ -23,10 +23,12 @@ public class TypicalTestTodos {
             elle = new TodoBuilder().withName("Elle Meyer").build();
             fiona = new TodoBuilder().withName("Fiona Kunz").build();
             george = new TodoBuilder().withName("George Best").build();
-
             // Manually added
+
             hoon = new TodoBuilder().withName("Hoon Meier").build();
             ida = new TodoBuilder().withName("Ida Mueller").build();
+            eventTest = new TodoBuilder().withName("eventTest").withStartTime("11-11-17T5:00")
+                    .withEndTime("11-11-17T6:00").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
