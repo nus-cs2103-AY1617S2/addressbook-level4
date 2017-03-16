@@ -5,7 +5,7 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.StartTime;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.TaskName;
@@ -16,23 +16,23 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new TaskName("Alex Yeoh"), new Deadline("87438807"), new Status("alexyeoh@gmail.com"),
-                    new Detail("Blk 30 Geylang Street 29, #06-40"),
+                    new StartTime("Blk 30 Geylang Street 29, #06-40"),
                     new UniqueTagList("friends")),
                 new Task(new TaskName("Bernice Yu"), new Deadline("99272758"), new Status("berniceyu@gmail.com"),
-                    new Detail("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    new StartTime("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new UniqueTagList("colleagues", "friends")),
                 new Task(new TaskName("Charlotte Oliveiro"), new Deadline("93210283"),
                     new Status("charlotte@yahoo.com"),
-                    new Detail("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    new StartTime("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new UniqueTagList("neighbours")),
                 new Task(new TaskName("David Li"), new Deadline("91031282"), new Status("lidavid@google.com"),
-                    new Detail("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    new StartTime("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     new UniqueTagList("family")),
                 new Task(new TaskName("Irfan Ibrahim"), new Deadline("92492021"), new Status("irfan@outlook.com"),
-                    new Detail("Blk 47 Tampines Street 20, #17-35"),
+                    new StartTime("Blk 47 Tampines Street 20, #17-35"),
                     new UniqueTagList("classmates")),
                 new Task(new TaskName("Roy Balakrishnan"), new Deadline("92624417"), new Status("royb@gmail.com"),
-                    new Detail("Blk 45 Aljunied Street 85, #11-31"),
+                    new StartTime("Blk 45 Aljunied Street 85, #11-31"),
                     new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {

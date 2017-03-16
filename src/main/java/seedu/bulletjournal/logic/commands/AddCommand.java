@@ -8,7 +8,7 @@ import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.StartTime;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.TaskName;
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new TaskName(name), new Deadline(phone), new Status(email), new Detail(address),
+        this.toAdd = new Task(new TaskName(name), new Deadline(phone), new Status(email), new StartTime(address),
                 new UniqueTagList(tagSet));
     }
 

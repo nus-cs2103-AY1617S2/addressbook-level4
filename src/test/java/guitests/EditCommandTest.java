@@ -10,7 +10,7 @@ import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.logic.commands.EditCommand;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
+import seedu.bulletjournal.model.task.StartTime;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.testutil.TaskBuilder;
@@ -100,7 +100,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Status.MESSAGE_EMAIL_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Detail.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertResultMessage(StartTime.MESSAGE_ADDRESS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);

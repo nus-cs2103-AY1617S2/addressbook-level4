@@ -8,8 +8,8 @@ import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.Deadline;
-import seedu.bulletjournal.model.task.Detail;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
+import seedu.bulletjournal.model.task.StartTime;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.TaskName;
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Detail updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        StartTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         private Optional<TaskName> taskName = Optional.empty();
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<Status> status = Optional.empty();
-        private Optional<Detail> detail = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
@@ -105,7 +105,7 @@ public class EditCommand extends Command {
             this.taskName = toCopy.getName();
             this.deadline = toCopy.getPhone();
             this.status = toCopy.getEmail();
-            this.detail = toCopy.getAddress();
+            this.startTime = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.detail, this.tags);
+            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.startTime, this.tags);
         }
 
         public void setName(Optional<TaskName> taskName) {
@@ -143,13 +143,13 @@ public class EditCommand extends Command {
             return status;
         }
 
-        public void setAddress(Optional<Detail> detail) {
-            assert detail != null;
-            this.detail = detail;
+        public void setAddress(Optional<StartTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
-        public Optional<Detail> getAddress() {
-            return detail;
+        public Optional<StartTime> getAddress() {
+            return startTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

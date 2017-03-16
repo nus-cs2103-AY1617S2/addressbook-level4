@@ -10,12 +10,12 @@ public class DetailTest {
     @Test
     public void isValidAddress() {
         // invalid addresses
-        assertFalse(Detail.isValidAddress("")); // empty string
-        assertFalse(Detail.isValidAddress(" ")); // spaces only
+        assertFalse(StartTime.isValidAddress("")); // empty string
+        assertFalse(StartTime.isValidAddress(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Detail.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Detail.isValidAddress("-")); // one character
-        assertTrue(Detail.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(StartTime.isValidAddress("Blk 456, Den Road, #01-355"));
+        assertTrue(StartTime.isValidAddress("-")); // one character
+        assertTrue(StartTime.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }
