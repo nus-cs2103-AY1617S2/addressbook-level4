@@ -2,8 +2,8 @@ package seedu.bulletjournal.logic.parser;
 
 import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_BEGINTIME;
-import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.bulletjournal.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;

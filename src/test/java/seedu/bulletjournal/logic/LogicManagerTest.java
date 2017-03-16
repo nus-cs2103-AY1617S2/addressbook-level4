@@ -41,9 +41,9 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
+import seedu.bulletjournal.model.task.BeginTime;
 import seedu.bulletjournal.model.task.Deadline;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
-import seedu.bulletjournal.model.task.StartTime;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.TaskName;
@@ -418,7 +418,7 @@ public class LogicManagerTest {
             TaskName taskName = new TaskName("Adam Brown");
             Deadline privatePhone = new Deadline("111111");
             Status status = new Status("adam@gmail.com");
-            StartTime privateAddress = new StartTime("111, alpha street");
+            BeginTime privateAddress = new BeginTime("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -437,7 +437,7 @@ public class LogicManagerTest {
                     new TaskName("Person " + seed),
                     new Deadline("" + Math.abs(seed)),
                     new Status(seed + "@email"),
-                    new StartTime("House of " + seed),
+                    new BeginTime("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -536,7 +536,7 @@ public class LogicManagerTest {
                     new TaskName(name),
                     new Deadline("1"),
                     new Status("1@email"),
-                    new StartTime("House of 1"),
+                    new BeginTime("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
