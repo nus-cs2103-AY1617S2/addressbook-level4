@@ -26,24 +26,29 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
-
     @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
+
+            System.out.println("invalid index");
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
-            model.deleteTask(taskToDelete);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target task cannot be missing";
+            int indexRemoved = model.deleteTask(taskToDelete);
+            model.getUndoStack().push(COMMAND_WORD);
+            System.out.println("getUndoStack() " + COMMAND_WORD);
+            model.getDeletedStackOfTasks().push(taskToDelete);
+            System.out.println("getDeletedStackOfTasks() " + taskToDelete.getAsText());
+            model.getDeletedStackOfTasksIndex().push(indexRemoved);
+        } catch (TaskNotFoundException tnfe) {
+            System.out.println("Task not found");
         }
-
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 

@@ -21,8 +21,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: TITLE d/CONTENT by/DATE_TIME [#TAG]...\n"
-            + "Example: " + COMMAND_WORD
+            + "Parameters: TITLE d/CONTENT by/DATE_TIME [#TAG]...\n" + "Example: " + COMMAND_WORD
             + " Awesome title d/badass content by/12/12/2017 11:00 #project #meeting";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -33,20 +32,16 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand using raw values.
      *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
      */
-    public AddCommand(String title, String content, String dateTime, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(String title, String content, String dateTime, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
-                new Title(title),
-                new Content(content),
-                new TaskDateTime(dateTime),
-                new UniqueTagList(tagSet)
-        );
+        this.toAdd = new Task(new Title(title), new Content(content), new TaskDateTime(dateTime),
+                new UniqueTagList(tagSet));
     }
 
     @Override
@@ -54,6 +49,8 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            model.getUndoStack().push(COMMAND_WORD);
+            model.getDeletedStackOfTasksAdd().push(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

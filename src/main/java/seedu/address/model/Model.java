@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Set;
+import java.util.Stack;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
@@ -12,14 +13,20 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
-    /** Clears existing backing model and replaces with the provided new data. */
+	
+	Stack<String> getUndoStack();	
+	Stack<ReadOnlyTask> getDeletedStackOfTasksAdd();
+	Stack<ReadOnlyTask> getDeletedStackOfTasks();
+	Stack<Integer> getDeletedStackOfTasksIndex();
+
+	/** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    int deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -42,5 +49,6 @@ public interface Model {
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+    
 
 }

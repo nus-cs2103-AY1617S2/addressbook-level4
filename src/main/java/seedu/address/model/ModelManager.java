@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,13 +25,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-
+    private final Stack<String> stackOfUndo;
+    private final Stack<ReadOnlyTask> stackOfDeletedTasksAdd;
+    private final Stack<ReadOnlyTask> stackOfDeletedTasks;
+    private final Stack<Integer> stackOfDeletedTaskIndex;
+    
+    
+    
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        
+        stackOfUndo = new Stack<>();
+        stackOfDeletedTasksAdd = new Stack<>();
+        stackOfDeletedTasks = new Stack<>();
+        stackOfDeletedTaskIndex = new Stack<>();
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -47,6 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
     }
+    
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
@@ -59,9 +72,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
+    public synchronized int deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        int indexRemoved = addressBook.removeTask(target);
         indicateAddressBookChanged();
+        return indexRemoved;
     }
 
     @Override
@@ -80,6 +94,30 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updateTask(taskIndex, editedTask);
         indicateAddressBookChanged();
     }
+    
+    @Override
+    public Stack<String> getUndoStack() {
+        return stackOfUndo;
+    }
+   
+    @Override
+    public Stack<ReadOnlyTask> getDeletedStackOfTasksAdd() {
+        return stackOfDeletedTasksAdd;
+    }
+    
+    @Override
+    public Stack<ReadOnlyTask> getDeletedStackOfTasks() {
+        return stackOfDeletedTasks;
+    }
+    
+    @Override
+    public Stack<Integer> getDeletedStackOfTasksIndex() {
+        return stackOfDeletedTaskIndex;
+    }
+    
+    
+    
+    
 
     //=========== Filtered Person List Accessors =============================================================
 
