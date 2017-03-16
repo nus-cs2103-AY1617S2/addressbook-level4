@@ -26,7 +26,27 @@ public class AddCommandTest extends AddressBookGuiTest {
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
         //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertTrue(personListPanel.isListMatching(currentList));
+
+        //add duplicate person
+        commandBox.runCommand(td.hoon.getAddCommand("adds "));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertTrue(personListPanel.isListMatching(currentList));
+
+        //add duplicate person with "a" command
+        commandBox.runCommand(td.hoon.getAddCommand("a "));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertTrue(personListPanel.isListMatching(currentList));
+
+        //add duplicate person with "new" command
+        commandBox.runCommand(td.hoon.getAddCommand("new "));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertTrue(personListPanel.isListMatching(currentList));
+
+        //add duplicate person with "create" command
+        commandBox.runCommand(td.hoon.getAddCommand("create "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertTrue(personListPanel.isListMatching(currentList));
 
@@ -35,12 +55,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertAddSuccess(td.assignment);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("ad Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private void assertAddSuccess(TestTask personToAdd, TestTask... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+        commandBox.runCommand(personToAdd.getAddCommand("add "));
 
         //confirm the new card contains the right data
         TaskCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
