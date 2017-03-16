@@ -19,7 +19,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `TaskBoss.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+2. Copy the file to the folder you want to use as the home folder for TaskBoss.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -41,6 +41,28 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
+<br>
+
+|Command    |Description                                                          |
+|:---------:|:-------------------------------------------------------------------:|
+|[help](#21-viewing-help--help)                       |View help              |
+|[add](#22-adding-a-task-add)                         |Add a task             |
+|[list](#23-listing-all-tasks--list)                  |List the tasks         |
+|[edit](#24-editing-a-task--edit)                     |Edit a task            |
+|[find](#25-finding-all-tasks-by-name-find)           |Find tasks             |
+|[delete](#27-deleting-a-task--delete)                |Delete a task          |
+|[new](#28-creating-a-category--new)               |Create a category      |
+|[clear](#29-clearing-tasks-by-category--clear)       |Clear tasks in category|
+|[view](#210-viewing-a-task--view)                    |View a task            |
+|[name](#211-modifying-a-category-name--name)         |Rename a category      |
+|[list](#212-listing-tasks-by-category--listcategory) |List tasks in category |
+|[done](#213-marking-a-task-done--done)               |Mark task as done      |
+|[undo](#214-undoing-a-command--undo)                 |Undo a task            |
+|[sort](#215-sorting-tasks-by-deadline--sort)         |Sort tasks by deadline |
+|[exit](#217-exiting-the-program--exit)               |Exit TaskBoss          |
+|[save](#220-exporting-the-data-to-a-new-file--save-n)|Save TaskBoss          |
+
+<br>
 ### 2.1. Viewing help : `help`
 
 Format: `help`
