@@ -10,5 +10,5 @@ lib/*
 .DS_Store
 ./screenshot*.png
 classes/
-/data/
-/bin/
+data/
+bin/
