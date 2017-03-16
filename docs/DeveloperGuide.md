@@ -185,7 +185,7 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 ### 3.4. Controller component
 
 <img src="images/ControllerClassDiagram.png" width="600"><br>
-_Figure 3.3 : Structure of the Controller Component_
+_Figure 3.4 : Structure of the Controller Component_
 
 **API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
@@ -226,7 +226,7 @@ changes in the storage is much more robust, as we can avoid checking every Contr
 get the previous data state. An additional benefit is that the integrity of the data change order is guaranteed in 
 the `historyStack`, and we do not need to keep track of what the previous mutating commands were.
 
-### 3.6. Common classes
+### 3.7. Common classes
 
 Classes used by multiple components are in the `seedu.toluist.commons` package.
 
