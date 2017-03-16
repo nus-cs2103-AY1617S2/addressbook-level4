@@ -9,10 +9,11 @@ Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app created 
 ## Table of Contents
 
 1. [Quick Start](#1-quick-start)
-1. [Features](#2-features)
-1. [FAQ](#3-faq)
-1. [Command Summary](#4-command-summary)
-1. [Contact Us](#5-contact-us)
+1. [UI](#2-ui)
+1. [Features](#3-features)
+1. [FAQ](#4-faq)
+1. [Command Summary](#5-command-summary)
+1. [Contact Us](#6-contact-us)
 
 ## 1. Quick Start
 
@@ -22,7 +23,7 @@ Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app created 
 
 2. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
 3. Move the file to the folder you want to use as the home folder for your task manager.
-4. Double-click the file to start the app. The GUI should appear in a few seconds.
+4. Double-click the file to start the app. You should see the GUI appear in a few seconds.
     <br><br>
     <img src="images/Ui.png" width="600">
     <br>
@@ -39,10 +40,20 @@ e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
 **[⬆ back to top](#table-of-contents)**
 
-## 2. Features
+## 2. UI
 
-1.
-1.
+<img src="images/UiBreakdownDiagram.png" width="600">
+
+Our UI is broken down into 4 main sections:
+
+1. *Command Box*<br>You enter your CLI commands here. When you enter an invalid command, it turns red.
+1. *Result Display*<br>The result of your command, whether success, failure or error, will be depicted here.
+1. *Event, Task, and Deadline List Panel*<br>The 3 types of tasks are displayed accordingly here. They are updated whenever you execute a relevant command.
+1. *Status Bar Footer*<br>Shows you the last updated time and the file storage location.
+
+**[⬆ back to top](#table-of-contents)**
+
+## 3. Features
 
 > **Command Format**
 >
@@ -65,7 +76,7 @@ Adds a task  to the task manager.
 
 Format: `add TASK [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION] [tag/TAGS...]`
 
-> Acronyms can be used to represent all parameter prefix<br>
+> You can use acronyms to represent all the parameter prefix<br>
  e.g. `[s/START_DATETIME]` is the same as `[start/START_DATETIME]`. `[e/END_DATETIME]` is the same as `[end/END_DATETIME]`.
 
 Examples:
@@ -84,6 +95,8 @@ Format: `update TASKID [start/START_DATETIME] [end/END_DATETIME]  [loc/LOCATION]
 > * *TaskID* refers to the number shown beside the title of the task.
 > * *TaskID* must be a positive integer 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
+> You can use acronyms to represent all the parameter prefix<br>
+ e.g. `[s/START_DATETIME]` is the same as `[start/START_DATETIME]`. `[e/END_DATETIME]` is the same as `[end/END_DATETIME]`.
 > * Existing values will be updated to the input values.
 
 Examples:
@@ -209,7 +222,7 @@ Format: `exit`
 ## 4. Command Summary
 
 | Command | Format | example |
-|--- | :--- | :--- | :--- |
+|--- | :--- | :--- |
 | Help | `help` | `help` |
 | Add | `add TASK [s/START_DATETIME] [e/END_DATETIME]` | `add Team meeting s/15-3-17 1500 e/15-3-17 1600` |
 | Update | `update TASKID [TASK] [e/END_DATETIME]` | `update 1 Summary Report e/15-3-17 2359` |
@@ -229,7 +242,7 @@ Format: `exit`
 ## 5. Contact Us
 
 * **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/CS2103AUG2016-W15-B4/main/issues)
-  if you noticed bugs or have suggestions on how to improve.
+  if you notice any bugs or have suggestions on how to improve.
 
 * **Contributing** : We welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
