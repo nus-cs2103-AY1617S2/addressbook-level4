@@ -25,7 +25,7 @@ public class TypicalTestTasks {
             Stats_soc = new TaskBuilder().withTitle("Statistics society meeting").withVenue("S16 04-30")
                     .withStartTime("Wednesday 19:00").withEndTime("Wednesday 21:00").withUrgencyLevel("1").withDescription("I love you").build();
             Tuition_part_time = new TaskBuilder().withTitle("Tuition part-time job").withVenue("Jun Wei's house at Jurong Ease Avenue 1")
-                    .withStartTime("Next Thursday 19:00").withEndTime("Next Thursday 21:00").withUrgencyLevel("7").withDescription("I love you").build();
+                    .withStartTime("Next Thursday 19:00").withEndTime("Next Thursday 21:00").withUrgencyLevel("5").withDescription("I love you").build();
             Strings_rehearsal = new TaskBuilder().withTitle("Strings ensemble rehearsal").withVenue("UCC hall")
                     .withStartTime("Friday 9:00").withEndTime("Friday 18:00").withUrgencyLevel("2").withDescription("I love you").build();
             dinner_auntie = new TaskBuilder().withTitle("Dinner with auntie").withVenue("Home")
