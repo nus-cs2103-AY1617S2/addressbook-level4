@@ -31,9 +31,9 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 ## 1. Welcome
 
 Werkbook is a task manager for users to manage their schedules and tasks via a command-line interface.
-With just a single line of command, users can add, manipulate, and organize tasks in a hassle-free manner! Werkbook is a simple, yet fast and powerful tool that will help you to increase your productivity.
+With just a single line of command, users can add, manipulate, and organize tasks in a hassle-free manner! Werkbook is a simple, yet fast and powerful tool that will help you increase your productivity.
 
-Let Werkbook werk your work.
+Let Werkbook werk your work!
 
 ## 2. Getting Started
 
@@ -50,7 +50,7 @@ Download the latest `werkbook.jar` from the [Releases](../../../releases) tab as
 Copy the file to the folder you want to use as the home folder for your Werkbook.
 
 ### ii. Starting Werkbook
-To start Werkbook, simple double click on `werkbook.jar`.
+To start Werkbook, simply double click on `werkbook.jar`.
 
 <img src="images/userguide-figure-2.jpg" width="100"><br>
 *Figure 2: Launching werkbook.jar*
@@ -94,7 +94,7 @@ Once you've finished getting the groceries, it's time to mark it as complete by 
 
 **Ready to go!**
 
-Now you're all set to start managing your tasks! Feel free too refer to our [Features](#4-features) section below for details of each command.
+Now you're all set to start managing your tasks! Feel free to refer to our [Features](#4-features) section below for details of each command.
 
 ## 3. User Interface
 
@@ -286,7 +286,7 @@ Format: `exit`
 
 Command | Purpose | Format
 --- | --- | ---
-`add` | Adds a task | `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
+`add` | Add a task | `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
 `list` | List all tasks | `list`
 `edit` | Edit specified task | `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]...`
 `find` | Find tasks based on specified keywords | `find KEYWORD [MORE_KEYWORD]`
