@@ -315,7 +315,7 @@ Examples:
    Mark a task named "exam" in the task list as "done".
  
 ### Finding for tasks
-Find tasks with details containing any of the given keywords. Details include name, priority, description, tags, start date & time and end date & time.
+Find tasks with details containing any of the input keywords. Details include name, priority, description, tags, start date & time and end date & time.
 
 Format: `find [KEYWORDS...]`
 
@@ -324,10 +324,10 @@ Format: `find [KEYWORDS...]`
 > * Partial keyword will also be matched; e.g. `ex` will match `exam`.
 > * Date format is MM-DD-YYYY e.g. 10-22-2017.
 > * TIME format is HHMM (24-hour format) e.g. 1300.
-> * Mutiple keywords of varying types is allowed. 
-> * A task is match so long as **ANY** of its detail (i.e., name, priority level, description etc.) contains the keyword. 
+> * Mutiple keywords of varying types are allowed. 
+> * A task is match so long as **ANY** of its details (i.e., name, priority level, description etc.) contains the keyword. 
 
-| Keyword Type | Result  | Example |
+| KEYWORD Type | Result  | Example |
 |:------------:|---------|---------|
 | NAME | Find all tasks whoose name matches the input. | `find exam` |
 | PRIORITY | Find a task whoose priority matches the input. | `find \p1` |
@@ -430,7 +430,7 @@ A: Our iManager only shows today's task on start-up. To view pending, "done", fl
 |  | `view o` | View all overdue task. |
 |  | `view INDEX` | View a specified task by index. |
 | [done](#marking-a-task-as-done) | `done INDEX|NAME` | Mark a task as "done." |
-| [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the given keywords. |
+| [find](#finding-for-tasks) | `find [KEYWORDS..]` | Find tasks with details containing any of the input keywords. |
 |  | `find \mMM-YYYY`| Search for tasks belonging to a particular month and year, both start and end. |
 |  | `find \yYYYY`| Search for tasks belonging to a particular year, both start and end. |
 |  | `find\hHHMM`| Search for tasks belonging to a particular time, both start and end.  |
