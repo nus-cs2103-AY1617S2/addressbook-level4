@@ -18,6 +18,7 @@ import seedu.tasklist.logic.commands.IncorrectCommand;
 import seedu.tasklist.logic.commands.ListCommand;
 import seedu.tasklist.logic.commands.RedoCommand;
 import seedu.tasklist.logic.commands.SelectCommand;
+import seedu.tasklist.logic.commands.SortCommand;
 import seedu.tasklist.logic.commands.UndoCommand;
 
 /**
