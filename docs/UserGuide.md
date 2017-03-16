@@ -4,10 +4,25 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Welcome](#welcome)
+2. [Getting Started](#getting-started)
+3. [User Interface](#user-interface)
+4. [Features](#features)
+    1. [Task Management](#task-management)
+        1. [Add task](#add-task)
+        2. [List task](#list-task)
+        3. [Edit task](#edit-task)
+        4. [Find task](#find-task)
+        5. [Mark task](#mark-task)
+        6. [Delete task](#delete-task)
+        7. [Clear all tasks](#clear-all-tasks)
+    2. [Program Usage](#program-usage)
+        1. [Undo/Redo](#undo-redo)
+        2. [Save data](#save-data)
+        3. [Change save location](#change-save-location)
+        4. [Exit program](#exit-program)
+5. [FAQ](#faq)
+6. [Commands Cheatsheet](#commands-cheatsheet)
 
 ## 1. Quick Start
 
