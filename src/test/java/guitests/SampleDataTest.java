@@ -8,7 +8,7 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.util.SampleDataUtil;
 import org.teamstbf.yats.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskManagerGuiTest {
     @Override
     protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
@@ -24,6 +24,6 @@ public class SampleDataTest extends AddressBookGuiTest {
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
         Event[] expectedList = SampleDataUtil.getSampleEvents();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

@@ -18,14 +18,18 @@ import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 import javafx.collections.transformation.FilteredList;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 	private final TaskManager taskManager;
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
+
+	public ModelManager() {
+		this(new TaskManager(), new UserPrefs());
+	}
 
 	/**
 	 * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -40,15 +44,25 @@ public class ModelManager extends ComponentManager implements Model {
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
 	}
 
-	public ModelManager() {
-		this(new TaskManager(), new UserPrefs());
-	}
-	
 	@Override
-	public void resetData(ReadOnlyTaskManager newData) {
-		taskManager.resetData(newData);
+	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
+		taskManager.addEvent(event);
+		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
 	}
+
+	@Override
+	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+		taskManager.removeEvent(target);
+		indicateTaskManagerChanged();
+	}
+
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
+		return new UnmodifiableObservableList<>(filteredEvents);
+	}
+
+	// =========== Filtered Event List Accessors ============================
 
 	@Override
 	public ReadOnlyTaskManager getTaskManager() {
@@ -61,17 +75,12 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-		taskManager.removeEvent(target);
+	public void resetData(ReadOnlyTaskManager newData) {
+		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
 
-	@Override
-	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-		taskManager.addEvent(event);
-		updateFilteredListToShowAll();
-		indicateTaskManagerChanged();
-	}
+	// ========== Inner classes/interfaces used for filtering ===============
 
 	@Override
 	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
@@ -82,7 +91,6 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
 	}
-	
 
 	@Override
 	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
@@ -91,13 +99,6 @@ public class ModelManager extends ComponentManager implements Model {
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
-	}
-
-	//=========== Filtered Event List Accessors =============================================================
-	
-	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
-		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
 	@Override
@@ -109,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateFilteredEventList(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
-	
+
 	@Override
 	public void sortFilteredEventList() {
 		filteredEvents.sorted();
@@ -119,10 +120,13 @@ public class ModelManager extends ComponentManager implements Model {
 		filteredEvents.setPredicate(expression::satisfies);
 	}
 
-	//========== Inner classes/interfaces used for filtering =================================================
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
 
 	interface Expression {
 		boolean satisfies(ReadOnlyEvent event);
+
+		@Override
 		String toString();
 	}
 
@@ -147,6 +151,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 	interface Qualifier {
 		boolean run(ReadOnlyEvent event);
+
+		@Override
 		String toString();
 	}
 
@@ -160,8 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return nameKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword))
-					.findAny()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword)).findAny()
 					.isPresent();
 		}
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
@@ -73,27 +74,26 @@ public class EditCommand extends Command {
 	}
 
 	/**
-     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
-     */
-    private static Event createEditedTask(ReadOnlyEvent taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
-        assert taskToEdit != null;
+	 * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+	 * edited with {@code editTaskDescriptor}.
+	 */
+	private static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+		assert taskToEdit != null;
 
-        Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
-        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
-        Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
-        	updatedTags.removeAndMerge(taskToEdit.getTags());
-        } 
-       
-        return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime,
-        		updatedEndTime, updatedDescription, updatedTags);
-    }
+		Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
+		Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+		Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+		Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+		Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+		Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
+		UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
+			updatedTags.removeAndMerge(taskToEdit.getTags());
+		}
+
+		return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime, updatedEndTime,
+				updatedDescription, updatedTags);
+	}
 
 	/**
 	 * Stores the details to edit the person with. Each non-empty field value
@@ -102,6 +102,7 @@ public class EditCommand extends Command {
 	public static class EditTaskDescriptor {
 		private Optional<Title> name = Optional.empty();
 		private Optional<Location> location = Optional.empty();
+		private Optional<Date> deadline = Optional.empty();
 		private Optional<Schedule> startTime = Optional.empty();
 		private Optional<Schedule> endTime = Optional.empty();
 		private Optional<Description> description = Optional.empty();
@@ -114,8 +115,9 @@ public class EditCommand extends Command {
 		public EditTaskDescriptor(EditTaskDescriptor toCopy) {
 			this.name = toCopy.getName();
 			this.location = toCopy.getLocation();
+			this.deadline = toCopy.getDeadline();
 			this.startTime = toCopy.getStartTime();
-			this.endTime = toCopy.getEndTime();
+			this.endTime = toCopy.getStartTime();
 			this.description = toCopy.getDescription();
 			this.periodic = toCopy.getPeriodic();
 			this.tags = toCopy.getTags();
@@ -152,6 +154,22 @@ public class EditCommand extends Command {
 			this.startTime = schedule;
 		}
 
+		public Optional<Date> getDeadline() {
+			return deadline;
+		}
+
+		public Optional<Description> getDescription() {
+			return description;
+		}
+
+		public Optional<Schedule> getEndTime() {
+			return endTime;
+		}
+
+		public Optional<Periodic> getPeriodic() {
+			return periodic;
+		}
+
 		public Optional<Schedule> getStartTime() {
 			return startTime;
 		}
@@ -161,38 +179,9 @@ public class EditCommand extends Command {
 			this.endTime = schedule;
 		}
 
-		public Optional<Schedule> getEndTime() {
-			return endTime;
-		}
-
-		public void setDescription(Optional<Description> description) {
-			assert description != null;
-			this.description = description;
-		}
-
-		public Optional<Description> getDescription() {
-			return description;
-		}
-
-		public void setPeriodic(Optional<Periodic> periodic) {
-			assert periodic != null;
-			this.periodic = periodic;
-		}
-
-		public Optional<Periodic> getPeriodic() {
-			return periodic;
-		}
-
-		public void setTags(Optional<UniqueTagList> tags) {
-			assert tags != null;
-			this.tags = tags;
-		}
-
 		public Optional<UniqueTagList> getTags() {
 			return tags;
 		}
-		
-
 	}
 
 }
