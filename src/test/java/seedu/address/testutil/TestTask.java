@@ -49,15 +49,15 @@ public class TestTask implements ReadOnlyTask {
     public void setDeadline(Deadline deadline) {
         this.deadline = deadline;
     }
-  
+
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
-  
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
-    
+
     public void setNotes(Notes notes) {
         this.notes = notes;
     }

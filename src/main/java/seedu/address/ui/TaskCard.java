@@ -34,7 +34,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         start.setText("Start: " + task.getStart().value);
         deadline.setText("Deadline: " + task.getDeadline().value);
-        
+
         if (task.getPriority().value == 0) {
             priority.setText("Priority: ");
         }

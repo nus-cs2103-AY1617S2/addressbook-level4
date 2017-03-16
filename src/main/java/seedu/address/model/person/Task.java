@@ -35,7 +35,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStart(), source.getDeadline(), 
+        this(source.getName(), source.getStart(), source.getDeadline(),
                 source.getPriority(), source.getTags(), source.getNotes());
     }
 
@@ -68,7 +68,7 @@ public class Task implements ReadOnlyTask {
     public Deadline getDeadline() {
         return deadline;
     }
-    
+
     @Override
     public Priority getPriority() {
         return priority;
@@ -78,7 +78,6 @@ public class Task implements ReadOnlyTask {
         assert priority != null;
         this.priority = priority;
     }
-    
 
     @Override
     public UniqueTagList getTags() {
