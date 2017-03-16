@@ -59,7 +59,14 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 1.4. Running the project
+
+1. Create a new run configuration and name it `Run Gradle`
+2. In `Gradle Tasks` textbox, input `run`
+3. Click on `Apply` and `Run`
+4. Opus should build and run
+
+### 1.5. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
