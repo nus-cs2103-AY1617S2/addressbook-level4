@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 /**
  * Represents a Task's priority in the ToDoApp
  * stores as an integer, the higher the value, the higher the priority
- * Guarantees: integer  
+ * Guarantees: integer
  */
 public class Priority {
 
