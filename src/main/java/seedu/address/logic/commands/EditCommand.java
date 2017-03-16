@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
@@ -82,8 +83,9 @@ public class EditCommand extends Command {
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
 
-        return new Task(updatedName, updatedStart, updatedDeadline, updatedPriority, updatedTags);
+        return new Task(updatedName, updatedStart, updatedDeadline, updatedPriority, updatedTags, updatedNotes);
     }
 
     /**
@@ -96,13 +98,16 @@ public class EditCommand extends Command {
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Notes> notes = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.deadline = toCopy.getDeadline();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
+            this.notes = toCopy.getNotes();
         }
 
         /**
@@ -155,6 +160,14 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+        public void setNotes(Optional<Notes> notes) {
+            assert notes != null;
+            this.notes = notes;
+        }
+
+        public Optional<Notes> getNotes() {
+            return notes;
         }
     }
 }
