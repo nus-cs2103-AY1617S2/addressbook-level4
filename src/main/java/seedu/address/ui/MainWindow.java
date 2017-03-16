@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Region> {
         // implemented
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
     }
-
+  
     /*
      * Prepares categorised task list for today/future/completed ListView
      *
@@ -154,7 +154,6 @@ public class MainWindow extends UiPart<Region> {
                 taskListCompleted.add(tmpTask);
             }
         }
-
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

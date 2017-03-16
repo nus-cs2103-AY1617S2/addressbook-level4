@@ -29,7 +29,8 @@ public class AddCommandParser {
         Matcher matcher;
         String tags[] = {};
 
-        Pattern pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_TAGS + CliSyntax.WILDCARD);
+        Pattern pattern = Pattern.compile(
+                CliSyntax.WILDCARD + CliSyntax.WITH_TAGS + CliSyntax.WILDCARD);
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             matcher = Pattern.compile(CliSyntax.WITH_TAGS).matcher(args);
@@ -39,12 +40,15 @@ public class AddCommandParser {
                 lastOccuranceEnd = matcher.end();
                 lastOccuranceStart = matcher.start();
             }
-            tags = args.substring(lastOccuranceEnd + 1, args.length()).split(" ");
+            tags = args.substring(lastOccuranceEnd + 1, args.length())
+                    .split(" ");
             args = args.substring(0, lastOccuranceStart);
         }
 
         // args do not have tags now
-        pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_AND_STARTING_TIME + CliSyntax.WILDCARD);
+        pattern = Pattern.compile(
+                CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_AND_STARTING_TIME
+                        + CliSyntax.WILDCARD);
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
             matcher = Pattern.compile(CliSyntax.WITH_DEADLINE).matcher(args);
@@ -54,39 +58,49 @@ public class AddCommandParser {
                 lastOccuranceStart = matcher.start();
                 lastOccuranceEnd = matcher.end();
             }
-            List<Date> dates = new PrettyTimeParser().parse(args.substring(lastOccuranceEnd + 1, args.length()));
-            matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME).matcher(args);
+            List<Date> dates = new PrettyTimeParser()
+                    .parse(args.substring(lastOccuranceEnd + 1, args.length()));
+            args = args.substring(0, lastOccuranceStart);
+            matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME)
+                    .matcher(args);
             lastOccuranceEnd = args.length() - 1;
             lastOccuranceStart = 0;
             while (matcher.find()) {
                 lastOccuranceStart = matcher.start();
                 lastOccuranceEnd = matcher.end();
             }
-            dates.addAll(new PrettyTimeParser().parse(args.substring(lastOccuranceEnd + 1, args.length())));
-            if (dates.size() >= LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
+            dates.addAll(new PrettyTimeParser().parse(
+                    args.substring(lastOccuranceEnd + 1, args.length())));
+            if (dates
+                    .size() >= LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) {
                 String taskName = args.substring(0, lastOccuranceStart).trim();
                 try {
-                    return new AddCommand(taskName, dates.get(0), dates.get(1), tags);
+                    return new AddCommand(taskName, dates.get(1), dates.get(0),
+                            tags);
                 } catch (IllegalValueException ive) {
                     return new IncorrectCommand(ive.getMessage());
                 }
             }
         }
 
-        pattern = Pattern.compile(CliSyntax.WILDCARD + CliSyntax.WITH_DEADLINE_ONLY + CliSyntax.WILDCARD);
+        pattern = Pattern.compile(CliSyntax.WILDCARD
+                + CliSyntax.WITH_DEADLINE_ONLY + CliSyntax.WILDCARD);
         matcher = pattern.matcher(args);
         if (matcher.matches()) {
-            matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
+            matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY)
+                    .matcher(args);
             int lastOccuranceEnd = args.length() - 1;
             int lastOccuranceStart = 0;
             while (matcher.find()) {
                 lastOccuranceStart = matcher.start();
                 lastOccuranceEnd = matcher.end();
             }
-            List<Date> dates = new PrettyTimeParser().parse(args.substring(lastOccuranceEnd + 1, args.length()));
+            List<Date> dates = new PrettyTimeParser()
+                    .parse(args.substring(lastOccuranceEnd + 1, args.length()));
             args = args.substring(0, lastOccuranceStart);
             if (dates.size() >= LEAST_DATES_FOR_DEADLINE_ONLY_TASK) {
-                matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY).matcher(args);
+                matcher = Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY)
+                        .matcher(args);
                 int lastOccurance = args.length() - 1;
                 while (matcher.find()) {
                     lastOccurance = matcher.start();
