@@ -6,14 +6,15 @@ import java.util.Optional;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
+import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.Deadline;
-import org.teamstbf.yats.model.item.UniqueItemList;
+import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
@@ -21,154 +22,181 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+	public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the last task listing. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [b/DEADLINE] [s/TIME] [d/DESCRIPTION] [t/TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " 1 b/02-02-2017 t/school";
+	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+			+ "by the index number used in the last task listing. "
+			+ "Existing values will be overwritten by the input values.\n"
+			+ "Parameters: INDEX (must be a positive integer) [s/START_TIME] [e/END_TIME] [d/DESCRIPTION] [t/TAGS]...\n"
+			+ "Example: " + COMMAND_WORD + " 1 s/10:00am,10/10/2017 e/5:00pm,10/10/2017 d/lots of work to do t/school";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+	public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
-    private final int filteredTaskListIndex;
-    private final EditTaskDescriptor editTaskDescriptor;
+	private final int filteredTaskListIndex;
+	private final EditTaskDescriptor editTaskDescriptor;
 
-    /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task
-     */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
+	/**
+	 * @param filteredTaskListIndex
+	 *            the index of the task in the filtered task list to edit
+	 * @param editTaskDescriptor
+	 *            details to edit the task
+	 */
+	public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+		assert filteredTaskListIndex > 0;
+		assert editTaskDescriptor != null;
 
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+		// converts filteredTaskListIndex from one-based to zero-based.
+		this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
-    }
+		this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+	}
 
-    @Override
-    public CommandResult execute() throws CommandException {
-        List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+	@Override
+	public CommandResult execute() throws CommandException {
+		List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+		if (filteredTaskListIndex >= lastShownList.size()) {
+			throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+		}
 
-        ReadOnlyEvent taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+		ReadOnlyEvent taskToEdit = lastShownList.get(filteredTaskListIndex);
+		Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        try {
-            model.updatePerson(filteredTaskListIndex, editedTask);
-        } catch (UniqueItemList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
-    }
+		try {
+			model.updateEvent(filteredTaskListIndex, editedTask);
+		} catch (UniqueEventList.DuplicateEventException dpe) {
+			throw new CommandException(MESSAGE_DUPLICATE_TASK);
+		}
+		model.updateFilteredListToShowAll();
+		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+	}
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Event createEditedTask(ReadOnlyEvent personToEdit,
-                                             EditTaskDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+	/**
+	 * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+	 * edited with {@code editTaskDescriptor}.
+	 */
+	private static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+		assert taskToEdit != null;
 
-        Title updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getTitle);
-        // Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getDeadline);
-        // Timing updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getTiming);
-        Description updatedAddress = editPersonDescriptor.getDescription().orElseGet(personToEdit::getDescription);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+		Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
+		Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+		Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+		Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
+		Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+		Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
+		UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
+			updatedTags.removeAndMerge(taskToEdit.getTags());
+		}
 
-        return new Event();
-    }
+		return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime, updatedEndTime,
+				updatedDescription, updatedTags);
+	}
 
-    /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
-     */
-    public static class EditTaskDescriptor {
-        private Optional<Title> name = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
-        private Optional<Timing> timing = Optional.empty();
-        private Optional<Description> description = Optional.empty();
-        private Optional<Periodic> periodic = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+	/**
+	 * Stores the details to edit the person with. Each non-empty field value
+	 * will replace the corresponding field value of the person.
+	 */
+	public static class EditTaskDescriptor {
+		private Optional<Title> name = Optional.empty();
+		private Optional<Location> location = Optional.empty();
+		private Optional<Date> deadline = Optional.empty();
+		private Optional<Schedule> startTime = Optional.empty();
+		private Optional<Schedule> endTime = Optional.empty();
+		private Optional<Description> description = Optional.empty();
+		private Optional<Periodic> periodic = Optional.empty();
+		private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+		public EditTaskDescriptor() {
+		}
 
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.deadline = toCopy.getDeadline();
-            this.timing = toCopy.getTiming();
-            this.description = toCopy.getDescription();
-            this.periodic = toCopy.getPeriodic();
-            this.tags = toCopy.getTags();
-        }
+		public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+			this.name = toCopy.getName();
+			this.location = toCopy.getLocation();
+			this.deadline = toCopy.getDeadline();
+			this.startTime = toCopy.getStartTime();
+			this.endTime = toCopy.getStartTime();
+			this.description = toCopy.getDescription();
+			this.periodic = toCopy.getPeriodic();
+			this.tags = toCopy.getTags();
+		}
 
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.deadline, this.timing, this.description, this.periodic, this.tags);
-        }
+		/**
+		 * Returns true if at least one field is edited.
+		 */
+		public boolean isAnyFieldEdited() {
+			return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.description,
+					this.periodic, this.tags);
+		}
 
-        public void setName(Optional<Title> name) {
-            assert name != null;
-            this.name = name;
-        }
+		public void setName(Optional<Title> name) {
+			assert name != null;
+			this.name = name;
+		}
 
-        public Optional<Title> getName() {
-            return name;
-        }
+		public Optional<Title> getName() {
+			return name;
+		}
 
-        public void setDeadline(Optional<Deadline> deadline) {
-            assert deadline != null;
-            this.deadline = deadline;
-        }
+		public void setLocation(Optional<Location> location) {
+			assert location != null;
+			this.location = location;
+		}
 
-        public Optional<Deadline> getDeadline() {
-            return deadline;
-        }
+		public Optional<Location> getLocation() {
+			return location;
+		}
 
-        public void setTiming(Optional<Timing> timing) {
-            assert timing != null;
-            this.timing = timing;
-        }
+		public void setStartTime(Optional<Schedule> schedule) {
+			assert schedule != null;
+			this.startTime = schedule;
+		}
 
-        public Optional<Timing> getTiming() {
-            return timing;
-        }
+		public Optional<Schedule> getStartTime() {
+			return startTime;
+		}
 
-        public void setDescription(Optional<Description> description) {
-            assert description != null;
-            this.description = description;
-        }
+		public void setEndTime(Optional<Schedule> schedule) {
+			assert schedule != null;
+			this.endTime = schedule;
+		}
 
-        public Optional<Description> getDescription() {
-            return description;
-        }
+		public Optional<Schedule> getEndTime() {
+			return endTime;
+		}
 
-        public void setPeriodic(Optional<Periodic> periodic) {
-        	assert periodic != null;
-        	this.periodic = periodic;
-        }
+		public void setPeriodic(Optional<Periodic> periodic) {
+			assert periodic != null;
+			this.periodic = periodic;
+		}
 
-        public Optional<Periodic> getPeriodic() {
-        	return periodic;
-        }
+		public Optional<Periodic> getPeriodic() {
+			return periodic;
+		}
 
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
-        }
+		public void setDescription(Optional<Description> description) {
+			assert description != null;
+			this.description = description;
+		}
 
-        public Optional<UniqueTagList> getTags() {
-            return tags;
-        }
-    }
+		public Optional<Description> getDescription() {
+			return description;
+		}
+
+		public Optional<Date> getDeadline() {
+			return deadline;
+		}
+
+		public void setTags(Optional<UniqueTagList> tags) {
+			assert tags != null;
+			this.tags = tags;
+		}
+
+		public Optional<UniqueTagList> getTags() {
+			return tags;
+		}
+	}
+
 }

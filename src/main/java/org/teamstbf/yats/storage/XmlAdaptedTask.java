@@ -11,15 +11,15 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String title;
@@ -37,24 +37,24 @@ public class XmlAdaptedPerson {
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the person's internal tags.
+     * changes on the returned list will not affect the task's internal tags.
      */
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedPerson(ReadOnlyEvent source) {
+    public XmlAdaptedTask(ReadOnlyEvent source) {
         title = source.getTitle().fullName;
         location = source.getLocation().value;
         period = source.getPeriod().value;
@@ -68,9 +68,9 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the model's Task object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Event toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -80,8 +80,8 @@ public class XmlAdaptedPerson {
         final Title title = new Title(this.title);
         final Location location = new Location(this.location);
         final Periodic period = new Periodic(this.period);
-        final Timing startTime = new Timing(this.startTime);
-        final Timing endTime = new Timing(this.endTime);
+        final Schedule startTime = new Schedule(this.startTime);
+        final Schedule endTime = new Schedule(this.endTime);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Event(title, location, period, startTime, endTime, description, tags);

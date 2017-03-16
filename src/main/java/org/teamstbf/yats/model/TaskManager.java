@@ -11,9 +11,8 @@ import java.util.Set;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Task;
-import org.teamstbf.yats.model.item.UniqueItemList;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
+import org.teamstbf.yats.model.item.UniqueEventList;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -25,7 +24,7 @@ import javafx.collections.ObservableList;
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniqueItemList events;
+    private final UniqueEventList events;
     private final UniqueTagList tags;
 
     /*
@@ -36,7 +35,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *   among constructors.
      */
     {
-        events = new UniqueItemList();
+        events = new UniqueEventList();
         tags = new UniqueTagList();
     }
 
@@ -53,8 +52,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// list overwrite operations
 
     public void setPersons(List<? extends ReadOnlyEvent> persons)
-            throws UniqueItemList.DuplicatePersonException {
-        this.events.setPersons(persons);
+            throws UniqueEventList.DuplicateEventException {
+        this.events.setEvents(persons);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -64,8 +63,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
-        } catch (UniqueItemList.DuplicatePersonException e) {
+            setPersons(newData.getTaskList());
+        } catch (UniqueEventList.DuplicateEventException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -83,9 +82,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Also checks the new person's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the person to point to those in {@link #tags}.
      *
-     * @throws UniqueItemList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueEventList.DuplicateEventException if an equivalent person already exists.
      */
-    public void addEvent(Event p) throws UniqueItemList.DuplicatePersonException {
+    public void addEvent(Event p) throws UniqueEventList.DuplicateEventException {
         syncMasterTagListWith(p);
         events.add(p);
     }
@@ -95,12 +94,12 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateEventException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyEvent editedReadOnlyPerson)
-            throws UniqueItemList.DuplicatePersonException {
+    public void updateEvent(int index, Event editedReadOnlyPerson)
+            throws UniqueEventList.DuplicateEventException {
         assert editedReadOnlyPerson != null;
 
         Event editedPerson = new Event(editedReadOnlyPerson);
@@ -108,9 +107,20 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        events.updatePerson(index, editedPerson);
+        events.updateEvent(index, editedPerson);
     }
 
+    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyPerson)
+            throws UniqueEventList.DuplicateEventException {
+        assert editedReadOnlyPerson != null;
+
+        Event editedPerson = new Event(editedReadOnlyPerson);
+        syncMasterTagListWith(editedPerson);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        events.updateEvent(index, editedPerson);
+    }
     /**
      * Ensures that every tag in this person:
      *  - exists in the master list {@link #tags}
@@ -137,15 +147,15 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueItemList persons) {
+    private void syncMasterTagListWith(UniqueEventList persons) {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyEvent key) throws UniqueItemList.PersonNotFoundException {
+    public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
         if (events.remove(key)) {
             return true;
         } else {
-            throw new UniqueItemList.PersonNotFoundException();
+            throw new UniqueEventList.EventNotFoundException();
         }
     }
 
@@ -164,7 +174,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyEvent> getPersonList() {
+    public ObservableList<ReadOnlyEvent> getTaskList() {
         return new UnmodifiableObservableList<>(events.asObservableList());
     }
 
@@ -187,7 +197,4 @@ public class TaskManager implements ReadOnlyTaskManager {
         return Objects.hash(events, tags);
     }
 
-	public void addTask(Event event) {
-		// TODO Auto-generated method stub
-	}
 }

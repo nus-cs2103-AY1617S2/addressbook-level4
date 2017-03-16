@@ -11,109 +11,122 @@ import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.Task;
-import org.teamstbf.yats.model.item.UniqueItemList;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
-import org.teamstbf.yats.model.item.UniqueItemList.PersonNotFoundException;
+import org.teamstbf.yats.model.item.UniqueEventList;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
+import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 import javafx.collections.transformation.FilteredList;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
 	private final TaskManager taskManager;
-	private final FilteredList<ReadOnlyEvent> filteredPersons;
-
-	/**
-	 * Initializes a ModelManager with the given addressBook and userPrefs.
-	 */
-	public ModelManager(ReadOnlyTaskManager addressBook, UserPrefs userPrefs) {
-		super();
-		assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
-
-		logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-		this.taskManager = new TaskManager(addressBook);
-		filteredPersons = new FilteredList<>(this.taskManager.getPersonList());
-	}
+	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	public ModelManager() {
 		this(new TaskManager(), new UserPrefs());
 	}
 
-	@Override
-	public void resetData(ReadOnlyTaskManager newData) {
-		taskManager.resetData(newData);
-		indicateAddressBookChanged();
+	/**
+	 * Initializes a ModelManager with the given taskManager and userPrefs.
+	 */
+	public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
+		super();
+		assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
+
+		logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
+
+		this.taskManager = new TaskManager(taskManager);
+		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
 	}
 
 	@Override
-	public ReadOnlyTaskManager getAddressBook() {
+	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
+		taskManager.addEvent(event);
+		updateFilteredListToShowAll();
+		indicateTaskManagerChanged();
+	}
+
+	@Override
+	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+		taskManager.removeEvent(target);
+		indicateTaskManagerChanged();
+	}
+
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
+		return new UnmodifiableObservableList<>(filteredEvents);
+	}
+
+	// =========== Filtered Event List Accessors ============================
+
+	@Override
+	public ReadOnlyTaskManager getTaskManager() {
 		return taskManager;
 	}
 
 	/** Raises an event to indicate the model has changed */
-	private void indicateAddressBookChanged() {
+	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
 	}
 
 	@Override
-	public synchronized void deletePerson(ReadOnlyEvent target) throws PersonNotFoundException {
-		taskManager.removePerson(target);
-		indicateAddressBookChanged();
+	public void resetData(ReadOnlyTaskManager newData) {
+		taskManager.resetData(newData);
+		indicateTaskManagerChanged();
+	}
+
+	// ========== Inner classes/interfaces used for filtering ===============
+
+	@Override
+	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
+			throws UniqueEventList.DuplicateEventException {
+		assert editedEvent != null;
+
+		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+		taskManager.updateEvent(taskManagerIndex, editedEvent);
+		indicateTaskManagerChanged();
 	}
 
 	@Override
-	public synchronized void addEvent(Event event) throws UniqueItemList.DuplicatePersonException {
-		taskManager.addEvent(event);
-		updateFilteredListToShowAll();
-		indicateAddressBookChanged();
-	}
+	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
+		assert editedEvent != null;
 
-	@Override
-	public void updatePerson(int filteredPersonListIndex, ReadOnlyEvent editedPerson)
-			throws UniqueItemList.DuplicatePersonException {
-		assert editedPerson != null;
-
-		int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-		taskManager.updatePerson(addressBookIndex, editedPerson);
-		indicateAddressBookChanged();
-	}
-
-	@Override
-	public void updatePerson(int filteredPersonListIndex, Event editedPerson) throws DuplicatePersonException {
-		// TODO Auto-generated method stub
-	}
-
-	//=========== Filtered Person List Accessors =============================================================
-
-	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
-		return new UnmodifiableObservableList<>(filteredPersons);
+		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+		taskManager.updateEvent(taskManagerIndex, editedEvent);
+		indicateTaskManagerChanged();
 	}
 
 	@Override
 	public void updateFilteredListToShowAll() {
-		filteredPersons.setPredicate(null);
+		filteredEvents.setPredicate(null);
 	}
 
 	@Override
-	public void updateFilteredPersonList(Set<String> keywords) {
-		updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+	public void updateFilteredEventList(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
 
-	private void updateFilteredPersonList(Expression expression) {
-		filteredPersons.setPredicate(expression::satisfies);
+	@Override
+	public void sortFilteredEventList() {
+		filteredEvents.sorted();
 	}
 
-	//========== Inner classes/interfaces used for filtering =================================================
+	private void updateFilteredEventList(Expression expression) {
+		filteredEvents.setPredicate(expression::satisfies);
+	}
+
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
 
 	interface Expression {
-		boolean satisfies(ReadOnlyEvent person);
+		boolean satisfies(ReadOnlyEvent event);
+
+		@Override
 		String toString();
 	}
 
@@ -126,8 +139,8 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 
 		@Override
-		public boolean satisfies(ReadOnlyEvent person) {
-			return qualifier.run(person);
+		public boolean satisfies(ReadOnlyEvent event) {
+			return qualifier.run(event);
 		}
 
 		@Override
@@ -137,7 +150,9 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	interface Qualifier {
-		boolean run(ReadOnlyEvent person);
+		boolean run(ReadOnlyEvent event);
+
+		@Override
 		String toString();
 	}
 
@@ -149,22 +164,16 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 
 		@Override
-		public boolean run(ReadOnlyEvent person) {
+		public boolean run(ReadOnlyEvent event) {
 			return nameKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTitle().fullName, keyword))
-					.findAny()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword)).findAny()
 					.isPresent();
 		}
 
 		@Override
 		public String toString() {
-			return "name=" + String.join(", ", nameKeyWords);
+			return "title=" + String.join(", ", nameKeyWords);
 		}
-	}
-
-	@Override
-	public void addEvent(Task task) throws DuplicatePersonException {
-		// TODO Auto-generated method stub
 	}
 
 }

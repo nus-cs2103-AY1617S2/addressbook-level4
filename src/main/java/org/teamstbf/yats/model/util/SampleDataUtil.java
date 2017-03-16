@@ -7,9 +7,9 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Timing;
+import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.UniqueItemList.DuplicatePersonException;
+import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
@@ -20,30 +20,30 @@ public class SampleDataUtil {
 					new Event(new Title("Vascular Medicine Research"),
 							new Location("Hospital"),
 							new Periodic("none"),
-							new Timing("6:00pm"),
-							new Timing("8:00pm"),
+							new Schedule("6:00pm"),
+							new Schedule("8:00pm"),
 							new Description("Research to be extended and continued to "
 									+ "alleviate carcinogenic vascularity"),
 							new UniqueTagList("research")),
 					new Event(new Title("Grocery Shopping"),
 							new Location("FoodCourt"),
 							new Periodic("monthly"),
-							new Timing("10:00pm"),
-							new Timing("2:00pm"),
+							new Schedule("10:00pm"),
+							new Schedule("2:00pm"),
 							new Description("Buy some food"),
 							new UniqueTagList("necessitires")),
 					new Event(new Title("Vscan Access Mid Term"),
 							new Location("School"),
 							new Periodic("daily"),
-							new Timing("2:30pm"),
-							new Timing("2:30pm"),
+							new Schedule("2:30pm"),
+							new Schedule("2:30pm"),
 							new Description("To revise on p value mathematical induction"),
 							new UniqueTagList("school", "learn")),
 					new Event(new Title("Project Milestone Documentation"),
 							new Location("School"),
 							new Periodic("weekly"),
-							new Timing("4:00pm"),
-							new Timing("5:00pm"),
+							new Schedule("4:00pm"),
+							new Schedule("5:00pm"),
 							new Description("prepare project doucments"),
 							new UniqueTagList("school","learn"))
 			};
@@ -59,7 +59,7 @@ public class SampleDataUtil {
 				sampleTM.addEvent(sampleTask);
 			}
 			return sampleTM;
-		} catch (DuplicatePersonException e) {
+		} catch (DuplicateEventException e) {
 			throw new AssertionError("sample data cannot contain duplicate persons", e);
 		}
 	}

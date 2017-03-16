@@ -1,5 +1,0 @@
-Renaming of TaskManager to ItemManager
-Renaming of ReadOnlyTaskManager to ReadOnlyItemManager
-Renaming of Task to Item
-Implementing Item superclass
-Update strings with Tasks, Tasklist and its variants to fit its proper naming
