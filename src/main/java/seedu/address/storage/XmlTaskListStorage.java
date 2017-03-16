@@ -72,4 +72,7 @@ public class XmlTaskListStorage implements TaskListStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(taskList));
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 }
