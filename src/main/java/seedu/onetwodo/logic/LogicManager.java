@@ -45,7 +45,6 @@ public class LogicManager extends ComponentManager implements Logic {
         DoneStatus doneStatus = model.getDoneStatus();
         switch (doneStatus) {
         case ALL: 
-        case DEFAULT:
             model.updateFilteredListToShowAll();
             break;
         case DONE:
