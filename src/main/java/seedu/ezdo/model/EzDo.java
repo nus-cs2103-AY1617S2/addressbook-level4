@@ -16,6 +16,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
 /**
  * Wraps all data at the ezDo level
@@ -57,6 +58,10 @@ public class EzDo implements ReadOnlyEzDo {
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
+    }
+
+    public void sortTasks(SortCriteria sortCriteria) {
+        tasks.sortTasks(sortCriteria);
     }
 
     public void resetData(ReadOnlyEzDo newData) {
