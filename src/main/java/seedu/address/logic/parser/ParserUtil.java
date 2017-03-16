@@ -11,12 +11,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.joestelmach.natty.DateGroup;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -75,30 +74,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
-     */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
-    }
-
-    /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
@@ -108,5 +83,23 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+    
+    /**
+     * Parses, analyses and converts 'rich text' into a timestamp
+     * 
+     * @param String
+     *            - e.g. 'Tomorrow'
+     * @return String - Timestamp
+     */
+    public String parseNLPDate(String argsString) {
+        com.joestelmach.natty.Parser nParser = new com.joestelmach.natty.Parser();
+        List<DateGroup> groups = nParser.parse(argsString);
+        String output = "";
+        for (DateGroup group : groups) {
+            List dates = group.getDates();
+            output = dates.get(0).toString().replace("CST", "");
+        }
+        return output;
     }
 }

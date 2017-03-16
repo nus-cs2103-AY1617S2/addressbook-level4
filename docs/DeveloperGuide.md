@@ -347,47 +347,178 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add a new task | 
+`* * *` | user | edit a new task | change information of a task
+`* * *` | user | delete a task | remove tasks that I no longer need to track
+`* * *` | user | list out all uncompleted tasks | To view outstanding tasks
+`* * *` | user | block out a period of time | keep a period of time unavailable
+`* * *` | user | release a blocked period of time | make a period of time available again
+`* * *` | user | find upcoming tasks by date | can track of what is dued soon
+`* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
+`* * *` | user | get more information about a command | learn how to use various commands
+`* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task 
+`* * *` | user | retrieve tasks by tag | so that I can see tasks associated with a label
+`* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
+`* * *` | user | assign priority to tasks | so that I can keep track of the priority of tasks
+`* * *` | user | retrieve tasks based on priority | so that I can see tasks ranked by priority
+`* *` | advanced user | use shorter versions of a command to type faster | more quickly use the app
+`* *` | complex user | break a task into subtasks | keep track of complex tasks
+`* *` | frequent user | add a recurring task | keep track of task that needs to be done many times
+`* *` | user | get a week view of tasks | plan for my week
+`* *` | frequent user | access app with shortcut | quickly access the app
+`* *` | user | change the reccurence setting of a task | update if the task is recurring
+`* ` | user | create a copy of task in google calendar | refer to tasks outside of app
+`* ` | user | set task reminders | remind myself of certain tasks
+`* ` | user | sync the  to my google calendar | sync the tasks with the calendar and get notified
+`* ` | user | specify the location of the storage file | save the data to the location of my preference
+`* ` | international user | specify the timezone of task | keep track of tasks due across different timezones
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TodoApp` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add a task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. User inputs command to add a new task
+2. TodoApp adds said task, and shows the task's details
+Use case ends
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TodoApp deletes the task
+Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+#### Use case: Edit a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to edit the details of a specific task in the list
+4. TodoApp edits the details of that task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3b. The attribute given is invalid
+
+> 3b1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3c. Value of the attribute is invalid
+
+> 3c1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3d. Value of the attribute is the same as the previous value
+> 3d1. TodoApp does nothing
+
+>Use case ends
+
+
+#### Use case: List task
+
+**MSS**
+
+1. User input command to list task
+2. TodoApp shows a list of tasks sorted by due dates
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> 2a1. TodoApp shows a message to indicate that the list is empty
+Use case ends
+
+#### Use case: Mark a task as complete
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User marks a specific task in the list as complete
+4. TodoApp marks the task as complete
+Use case ends
+
+**Extensions**
+
+2a. List is empty
 
 > Use case ends
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 3a1. TodoApp shows an error message
+Use case resumes at step 2
+
+#### Use case: Set deadline to a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to set a deadline to a specific task
+4. TodoApp sets a deadline for the task and displays the task
+Use case ends
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. TodoApp shows an error message
+Use case resumes at step 2
+
+3b. The date input by user is invalid
+
+> 3b1. TodoApp shows an error message
+Use case resumes at step 2
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should include well-written guides for both users and developers
+5. Should follow good OOP principles
+6. Should be integrated with automated tests
 
 {More to be added}
 
@@ -403,17 +534,40 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: ...
+Author: Lim Jing Rong
 
 Pros:
 
-* ...
-* ...
+* Simple to use
+* Intuitive UI
+* Cloud support
+* Good integration (Github, etc)
+* Modular and flexible based on user
+* Can be fitlered by tags & users
 
 Cons:
 
-* ...
-* ...
+* Tasks have to be small enough to be described in a few words
+* Okay for specific projects/todo lists. Bad if you have multiple 'big projects'
+
+**Wunderlist**
+
+Author: Lim Jing Rong
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Desktop application, Chrome ext, mobile app, web app, etc)
+* Cloud support
+* Great UI/ graphics
+* Free
+* Good search
+
+Cons:
+
+* Not much integrations
+* No options for subtasks
+* No repeat options
 
