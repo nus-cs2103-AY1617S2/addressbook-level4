@@ -15,17 +15,26 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nb
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
+## 1. Introduction
+
+Welcome to ToLuist's Developer Guide.
+
+By going through this document, you will learn how to set up the project, understand the architecture of the 
+application as well as know how to troubleshoot some common development issues.
+
+We have organized the guide in a top-down so that, as a new developer, you can look at the big picture of the project
+ before zooming in on specific components.
+
 ## 1. Setting up
 
 ### 1.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
+    > Having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
+3. **e(fx)clipse** plugin for Eclipse (Do step 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
@@ -94,32 +103,36 @@ Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* `LogsCenter` : This class is used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of five components:
 
 * [**`UI`**](#ui-component) renders the GUI of the app.
-* [**`Dispatcher`**](#dispatcher-component) Invokes a suitable command executor.
+* [**`Dispatcher`**](#dispatcher-component) invokes a suitable command executor.
 * [**`Controller`**](#logic-component) executes the command.
 * [**`Model`**](#model-component) holds the data of the application in the memory.
 * [**`Storage`**](#storage-component) reads data from, and writes data to, the hard disk.
 
 Each of the five components defines its _API_ in an `interface` with the same name as the Component.
 
-Our architecture follows the MVC Pattern. UI displays data and interacts with the user. Commands are passed through Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the bridge between UI and Model. Model & Storage stores and maintain the data. A lot of inspirations for this design are drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
+Our architecture follows the MVC Pattern. UI displays data and interacts with the user. Commands are passed through 
+the Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the 
+bridge between the UI and the Model. Model & Storage store and maintain the data. A lot of inspirations for this design
+ was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr
+ .com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
 The sections below give more details of each component.
 
-### 2.1. UI component
+### 2.2. UI component
 
 <img src="images/UiClassDiagram.png" width="600"><br>
-_Figure 2.1 : Structure of the UI Component_
+_Figure 2.2 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/toluist/ui/Ui.java)
 
 **JavaFX** is used for the UI. `MainWindow` holds all the views that make up the different parts of the UI. These views inherit from the abstract `UiView` class, while `MainWindow` itself inherits from the abstract `UiPart` class.
 
-#### 2.1.1. UiView
+#### 2.2.1. UiView
 
 **API** : [`UiView.java`](../src/main/java/seedu/toluist/ui/view/UiView.java)
 
@@ -145,13 +158,13 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 - Set UI component values (e.g. using `setText` on an FXML `Text` object).
 - Attach subviews and propagate the chain.
 
-#### 2.1.2. UiStore ####
+#### 2.2.2. UiStore ####
 
 **API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
 
 `UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
 
-#### 2.1.3. Reactive nature of the UI ####
+#### 2.2.3. Reactive nature of the UI ####
 
 To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`.
 
@@ -162,7 +175,7 @@ _Figure 2.1.3 : Interactions Inside the UI for the `add study` Command_
 
 The reactive approach is borrowed from modern Javascript front-end frameworks such as [React.js](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org/v2/guide/reactivity.html).
 
-#### 2.2 Dispatcher component
+### 2.2 Dispatcher component
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
@@ -203,7 +216,14 @@ The `Storage` component
 
 To undo the most recent changes, we simply pop the irrelevant strings in `historyStack` and then deserialize the json string at the top of the stack into task list data.
 
-This approach is reliable as it eliminates the need to implement an `unexecute` method for each `Controller`, as well as stores the changes separately for each command that will mutate the task list.
+An alternative approach to implementing undoable history is to create a `unexecute` method for each mutating 
+command, 
+and have a local 
+history 
+of the data changes in each Controller instance. Compared to this alternative, storing a centralized history of data 
+changes in the storage is much more robust, as we can avoid checking every Controller instance to 
+get the previous data state. An additional benefit is that the integrity of the data change order is guaranteed in 
+the `historyStack`, and we do not need to keep track of what the previous mutating commands were.
 
 ### 2.6. Common classes
 
