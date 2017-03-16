@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# DoOrDie - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-T16-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `JAN 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. doordie
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -347,27 +347,420 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | create a new task |
+`* * *` | user | delete a task | remove task that I no longer need
+`* * *` | user | update a task | update task details so that my task is update to date
+`* * *` | user | view an existing task | view the details of the task
+`* * *` | user | list outstanding task chronologically | know what tasks I need to complete and in which order
+`* * *` | user | add attachments and links to a task | find all the resources and information I need to complete the task in one place
+`* * *` | user | undo my previous operation | can undo any mistakes executed in the previous command
+`* * *` | user | find task based on keywords | find out what are the tasks with the same nature
+`* * *` | user | add a label to a task | tag a task with a specific label for filtering
+`* * *` | user | remove a label from a task | remove a specific task from a label for further filtering
+`* * *` | user | edit a label | change a label on all existing tasks that are associated with this label
+`* * *` | user | list all task with the same label | view all related tasks
+`* * *` | user | book multiple time slots for a task | not need to wait till a time slot is confirmed to be able to add the task
+`* * *` | user | other slots to be freed when I confirm a particular slot | better allocate my time for other tasks
+`* * *` | user | add a recurring task | not need to create the same task every time
+`* * *` | user | mark the completion of a task | better organise outstanding task
+`* * *` | user | view my completed task | keep track of what task I have completed
+`* *` | user | add location to a task | attach location for events type of tasks
+`* *` | user | be able to view my agenda for the day | know what tasks to work on
+`* *` | user | iterate through my command history | re-execute a command that I have previously executed before
+`* *` | user | have words that I am typing to be autocompleted by the system | execute a command at a faster rate
+`* *` | user | delete all labels and its association | remove a label that I no longer need
+`*` | user | launch application using shortcut | not need to find the execution file to run the application
+`*` | user | generate a printable format schedule | refer to the tasks when I have no access to a laptop
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Task Manger` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Create new task
+Use case ID: UC01 Create new task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User enters command to create new task and details of the task.
+2. System verify task details and creates the new task.
+3. System displays the details of the new task created.<br />
 Use case ends.
+
+**Extensions**
+
+2a. System verifies if there are any clashes with the time slot chosen.
+
+> 2a1. There is a clash<br />
+  System shows a warning message to the user.<br />
+  Resume at step 3.
+
+#### Use case: Delete a task
+Use case ID: UC02 Delete task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of tasks is being displayed<br />
+
+**MSS**
+
+1. User requests to delete a specific task in the list.
+2. System deletes the task.<br />
+Use case ends.
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. System shows an error message<br />
+  Use case resumes at step 1
+
+#### Use case: Update a task
+Use case ID: UC03 Update a task<br />
+Actor: User<br />
+Precondition: A list of tasks is being displayed<br />
+
+**MSS**
+
+1. User identifies the task to update, enters attributes of the task. to be changed and instructs system to save changes
+2. System saves the updated task<br />
+Use case ends
+
+**Extensions**
+
+3a. There is a clash with another task
+
+> 3a1. System shows error to the user<br />
+  3a2. System asks user to reenter the attributes (timeslot)<br />
+  Resume at step 2.
+
+#### Use case: View an existing task
+Use case ID: UC04 View an existing task<br />
+Actor: User<br />
+Precondition: A list of tasks is being displayed<br />
+
+**MSS**
+
+1. User identifies the task to view
+2. System displays the details of the task<br />
+Use case ends
+
+#### Use case: View all outstanding tasks in a chronological order
+Use case ID: UC05 View all outstanding tasks in a chronological order<br />
+Actor: User<br />
+Precondition: User has opened the application.<br />
+
+**MSS**
+
+1. User prompts the system to list all outstanding tasks
+2. System displays a list of all outstanding tasks<br />
+Use case ends
+
+**Extensions**
+
+2a. There are no outstanding tasks
+
+> 2a1. System notifies user that there are no outstanding tasks<br />
+  Use case ends
+
+#### Use case: Add attachments and links to a task
+Use case ID: UC06 Add attachments and links to a task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of task is being displayed<br />
+
+**MSS**
+
+1. User identifies the task to attach a file/hyperlink and specifies the location of the file or hyperlink
+2. System adds the links and attachments to the task and displays the updated task<br />
+Use case ends
+
+#### Use case: Undo previous operation
+Use case ID: UC07 Undo previous operation<br />
+Actor: User<br />
+
+**MSS**
+
+1. User requests to undo the previous operation
+2. System reverts the results of the last command executed by the user<br />
+Use case ends
+
+**Extensions**
+
+2a. Previously executed command does not manipulate data
+
+> 2a1. System executes the undo command and notifies user that nothing was changed<br />
+  Use case ends
+
+2b. No previously executed command exist
+
+> 2b1. System notifies the user that there is no previous operation executed in the current session<br />
+  Use case ends
+
+#### Use case: Find a task
+Use case ID: UC08 Find a task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User enters some search terms for search for a task
+2. System searches for a task based on search terms and returns a list of task that fit the criteria<br />
+Use case ends
+
+**Extensions**
+
+2a. No task found based on search term
+
+> 2a1. System notifies user that no task matches the search term<br />
+  Use case ends
+
+#### Use case: Add a label to an outstanding task
+Use case ID: UC09 Add a label to an outstanding task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of tasks is being displayed<br />
+
+**MSS**
+
+1. User requests to add a label to a task
+2. System tags the task with the specified label and notifies user<br />
+Use case ends
+
+**Extensions**
+
+1a. User specifies an invalid or non-existent task
+
+> 1a1. System notifies user that the task does not exist<br />
+  Use case ends
+
+#### Use case: Remove a label from a task
+Use case ID: UC10 Remove a label from a task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of task is being displayed<br />
+
+**MSS**
+
+1. User request to remove a label from a task
+2. System removes the label from the task and notifies user
+
+**Extensions**
+
+1a. User request to remove a label from an invalid or non-existent task
+
+> 1a1. System notifies user that the task does not exists<br />
+  Use case ends
+
+#### Use case: Edit a label
+Use case ID: UC11 Edit a label<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User request to edit a label to a new label
+2. System searches through all tasks and renames all labels to the new label<br />
+Use case ends
+
+**Extensions**
+
+1a. User specifies an invalid or non-existent task/label
+
+> 1a1. System notifies user that the task/label specified does not exist<br />
+  Use case ends
+
+#### Use case: List all tasks under a label
+Use case ID: UC12 List all outstanding tasks under a label<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User requests to list tasks with a label name
+2. System shows a list of tasks under a label name<br />
+Use case ends
+
+**Extensions**
+
+1a. The given label name is invalid
+
+> 1a1. System shows an error message<br />
+  Use case ends
+
+#### Use case: Booking multiple slots for a task
+Use case ID: UC13 Booking multiple slots for a task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User creates a scheduled task with multiple date slots
+2. System checks for overlap of events and allocate the selected slots for a task<br />
+Use case ends.
+
+**Extensions**
+
+2a. There is an overlap of events
+
+> 1a1. System shows a warning message to the user<br />
+  Use case ends
+
+#### Use case: Free-ing slot when user confirms a slot for a task
+Use case ID: UC14 Free-ing slot when user confirms a slot for a task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User confirms a slot for a booked task
+2. System free the rest of the not selected time slots and display the details of the updated task<br />
+Use case ends
+
+**Extensions**
+
+1a. The given input is invalid
+
+> Use case ends
+
+2a. The confirmed task has a clash with another task
+
+> 3a1. System shows a warning message to the user<br />
+  Use case resumes at step 2
+
+#### Use case: Add a recurring task
+Use case ID: UC15 Add a recurring task<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User request to add a recurring task and inputs the information required
+2. System creates recurring task and displays the task<br />
+Use case ends
+
+**Extensions**
+
+2a. The input in invalid or insufficient
+
+> 2a1. System shows error message<br />
+  Resume at step 1
+
+#### Use case: Mark a task as completed
+Use case ID: UC16 Mark a task as completed<br />
+Actor: User<br />
+Precondition: A list of tasks is being displayed<br />
+
+**MSS**
+
+1. User marks a specific task in the list as completed
+2. System update the task, set it to be completed and display the updated task<br />
+Use case ends
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. System shows an error message<br />
+  Use case resumes at step 1
+
+#### Use case: View completed tasks
+Use case ID: UC17 View completed tasks<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to list completed tasks
+2. System shows a list of completed task<br />
+Use case ends
+
+**Extensions**
+
+2a. The list is empty
+
+> 2a1. System notifies the user that there is no completed task<br />
+  Use case ends
+
+#### Use case: Add location to a task
+Use case ID: UC18 Add location to a task<br />
+Actor: User<br />
+Precondition: User has opened the application and a list of tasks is being displayed<br />
+
+**MSS**
+
+1. User selects a task to add location to the task and specifies location
+2. System adds the location attribute to the task and displays updated task<br />
+Use case ends
+
+#### Use case: List down agenda for the day
+Use case ID: UC19 List down agenda for the day<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User prompts system to display agenda for the day
+2. System returns the list of tasks for the current day<br />
+Use case ends
+
+**Extensions**
+
+2a. There are no tasks for the current day
+
+> System notifies the user that there are no tasks for the current day<br />
+  Use case ends
+
+#### Use case: Iterate through command history
+Use case ID: UC20 Iterate through command history<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User request to iterate through previous commands executed
+2. System retrieves a list previously used command and displays it to the user<br />
+Use case ends
+
+**Extensions**
+
+1a. No previous commands
+
+> Use case ends
+
+#### Use case: Autocomplete words that user is typing
+Use case ID: UC21 Autocomplete words that user is typing<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User is in the midst of typing a command and request for an autocomplete option
+2. System searches through a dictionary and completes the command if there is a single term found<br />
+Use case ends
+
+**Extensions**
+
+2a. No match found
+
+> Use case ends
+
+2b. Multiple matches found
+
+> 2b1. System will display list of words that currently match whatever the user is typing
+
+> 2b2. User continues to enter more letters into the command and request for an autocomplete option again<br />
+  Steps 2b1-2b2 are repeated until there is 0 or 1 word that matches the partial command<br />
+  Use case resumes from step 2
+
+#### Use case: Delete a label
+Use case ID: UC22 Delete a label<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User requests to list outstanding tasks (UC05)
+2. System shows a list of tasks with its details
+3. User selects the label to delete
+4. System delete the label and display the updated list of tasks<br />
+Use case ends
 
 **Extensions**
 
@@ -377,19 +770,70 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. System shows an error message<br />
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Launch application using shortcut
+Use case ID: UC23 Launch application using shortcut<br />
+Actor: User<br />
+Precondition: User has booted up his computer<br />
+
+**MSS**
+
+1. User inputs the shortcut to launch the application
+2. Operating System launch System<br />
+Use case ends
+
+**Extensions**
+
+1a. The input is invalid
+
+> Use case ends
+
+2a. System is already running
+
+> Use case ends
+
+#### Use case: PDF to printable format
+Use case ID: UC24 PDF to printable format<br />
+Actor: User<br />
+Precondition: User has opened the application<br />
+
+**MSS**
+
+1. User request to print schedule for datetime range
+2. System generates printable format<br />
+Use case ends
+
+**Extensions**
+
+1a. The given date time range is invalid.
+
+> Use case ends
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 8 or higher installed.
+2. Should be able to hold up to 1000 tasks.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+4. Should come with automated unit tests and open source code.
+5. Should favor DOS style commands over Unix-style commands.
+6. Should be require less than 3 prompts to complete a function
+7. Should backup files after each exit
+8. Should allow user to exit the program with no data loss
+9. Should have basic security features in place
+10. Should be able to document the unhandled errors
+11. Should come with the user guide and other documentations
+12. Intent of the user should be extracted instead of forcing them to adhere to a specific order or keyword
+13. Should run on Java 8 and above
+14. User should be notified if there is a task that overlaps another task
+15. Commands should take less than 5 second to run
+16. When pulling from google calendar, priority is given to google calendar if there is a conflict
+17. When pushing to google calendar, priority is given to the application if there is a conflict
+18. Persistent storage should be updated each time a command that modifies data is executed
+19. Translate english sentence to command
+20. Translate relative dates into absolute dates
 
 ## Appendix D : Glossary
 
@@ -397,23 +841,73 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-**Product Name**
+**Todoist**
 
-Author: ...
+Author: Lai Zhiyuan
 
 Pros:
 
-* ...
-* ...
+* Their application and extensions are accessable through 10 over different platforms, which makes it easy for users to collaborate and access their tasks everywhere.
+* Application is straightforward to use, and they allow users to easily access the more important details of the to-do item.
+* See at a glance whether the user is focusing on the right tasks.
+* The Karma Mode feature in the application encourages the user to keep up with the good habit of clearing their tasks on hand.
+* Allows users to break down big tasks to smaller sub-tasks.
+* Provide priority levels to prioritize your tasks on-hand.
+* Allows sharing of projects, delegating tasks and discussions on cross platform device.
+* Allow user to search for tasks by typing keywords into search bar.
+* Allow user to upload notes or files to tasks.
 
 Cons:
 
-* ...
-* ...
+* Does not have the features to allow users to create subproject.
+* A few important features such as location based reminders, ability to add tasks via email and full collaboration capabilities are not available to free users.
+* Karma report are only available to premium users.
+
+**Wunderlist**
+
+Author: Yip Mun Kit Bernard
+
+Pros:
+
+* Can easily edit and rearrange tasks based on changing priorities.
+* Allow sharing of task list with other users or collaborators.
+* Reminders for the upcoming deadlines no matter which device the user is carrying at the moment.
+* Allows the users to upload files to their tasks.
+* Easy and straightforward for new user to get started.
+* Customizable user interface.
+* Allows the user to assign tasks to collarborators.
+* The application has features that suggest some task list to get started such as Work list.
+* Application supports many different platforms and many different browser plugins.
+
+Cons:
+
+* No location based reminders.
+* Only the paid versions allows the user to upload files of any size.
+* Limit the number of collaborators to 25.
+
+**Any.do**
+
+Author: Simaria Yesha Bharat
+
+Pros:
+
+* Interactive search feature which provides suggestions to users while they type on the search bar.
+* Simple and easy to use interface. Easy to get started for new users.
+* AI assistance to review tasks and connect to smart robots who can help the user to accomplish the task.
+* Tasks are almost instantly synced across different platforms.
+* Chat system feature which allows different collaborators to chat with each other.
+* Work seamlessly with other service providers such as Google calendar, Exchange and iCloud.
+* User Interface is customizable.
+* Able to capture task by voice.
+* Application have smart suggestion feature.
+
+Cons:
+
+* Customization of recurring tasks are only available to premium users.
+* Unlimited collaboration feature is only available to premium users.
+* Extensive location based reminders are only available to premium users.
+* Limits the size on attachments.
+* Timed and location based services only available to premium users.
 
