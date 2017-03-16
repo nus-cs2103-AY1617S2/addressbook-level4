@@ -62,9 +62,7 @@ Without further ado, let us get started.
    * **`add SunRiseMarathon`**: adds a reminder to attend SunRise Marathon.
    * **`view t`**:  view a list for all events happening today. 
    * **`exit`**: exits the application.
-6. Refer to the [Features](#features) section below for details of each command.
-
-### Task Status     
+6. Refer to the [Features](#features) section below for details of each command.    
 
 ## Features
 
