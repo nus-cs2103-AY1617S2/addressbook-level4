@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.task.commons.core.Messages;
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
@@ -85,7 +84,7 @@ public class EditCommand extends Command {
         Duration updatedDuration;
         try {
             updatedDuration = new Duration(updatedDurationStart, updatedDurationEnd);
-        } catch (IllegalValueException e) {
+        } catch (Exception e) {
             updatedDuration = taskToEdit.getDuration();
         }
 
