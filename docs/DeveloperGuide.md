@@ -192,7 +192,10 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.geekeep.commons` package.
+Classes used by multiple components are in the `seedu.geekeep.commons` package. Here are some examples:
++ `IllegalValueException` is used in both `Logic` and `Model` components to throw an exception when the value is considered invalid.
++ `UnmodifiableObservableList` is used in `Logic`, `Model` and `Storage` components to provide unmodifiable view of an observable list.
++ `LogsCenter` is used in all components to create named loggers which are further used to log messages.
 
 **[⬆ back to top](#user-content-table)**
 
