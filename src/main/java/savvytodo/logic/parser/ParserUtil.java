@@ -76,7 +76,8 @@ public class ParserUtil {
      */
     public static String[] getDateTimeFromArgs(Optional<String> dateTime) {
         assert dateTime != null;
-        return dateTime.isPresent() ? dateTime.get().split(StringUtil.WHITESPACE_REGEX) : DateTime.DEFAULT_VALUES;
+        return dateTime.isPresent() ? dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR)
+                : DateTime.DEFAULT_VALUES;
     }
 
     /**
@@ -118,7 +119,7 @@ public class ParserUtil {
     public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
         assert dateTime != null;
         if (dateTime.isPresent()) {
-            String [] dateTimeValues = dateTime.get().split(StringUtil.WHITESPACE_REGEX);
+            String [] dateTimeValues = dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
             return Optional
                     .of(new DateTime(dateTimeValues[ARRAY_FIELD_1], dateTimeValues[ARRAY_FIELD_2]));
         } else {

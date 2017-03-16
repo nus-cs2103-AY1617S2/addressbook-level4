@@ -12,6 +12,7 @@ import savvytodo.model.category.Category;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Recurrence;
 import savvytodo.testutil.TaskBuilder;
 import savvytodo.testutil.TestTask;
 
@@ -25,10 +26,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Project 1 p/high d/2pm l/NUS mall c/Meeting";
-        int taskManagerIndex = 1;
+        int taskManagerIndex = 2;
 
         TestTask editedTask = new TaskBuilder().withName("Project 1").withPriority("high").withDescription("2pm")
-                .withLocation("NUS mall").withCategories("Meeting").build();
+                .withLocation("NUS mall").withCategories("Meeting").withDateTime("02/03/2017 1400", "03/03/2017 1400")
+                .withRecurrence(Recurrence.DEFAULT_VALUES).withStatus(false).build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -39,7 +41,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie")
+                .withDateTime("02/03/2017 1400", "03/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
+                .withStatus(false).build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -50,7 +54,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories()
+                .withDateTime("02/03/2017 1400", "03/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
+                .withStatus(false).build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -64,7 +70,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Midterm test 2").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Midterm test 2")
+                .withDateTime("05/03/2017 1400", "06/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
+                .withStatus(false).build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -105,7 +113,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand(
-                "edit 3 Assignment 1 p/high d/2359 Mon 23 Aug " + "l/None");
+                "edit 3 Assignment 1 dt/01/03/2017 1400 = 02/03/2017 1400 p/high d/Start early l/None");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

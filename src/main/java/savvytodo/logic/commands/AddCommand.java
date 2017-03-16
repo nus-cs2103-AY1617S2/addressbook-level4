@@ -7,10 +7,12 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
@@ -50,7 +52,9 @@ public class AddCommand extends Command {
                 new Priority(priority),
                 new Description(description),
                 new Location(location),
-                new UniqueCategoryList(categorySet)
+                new UniqueCategoryList(categorySet),
+                new DateTime(dateTime),
+                new Recurrence(recurrence)
         );
 
         this.toAdd.setCompleted(new Status());

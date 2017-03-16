@@ -41,12 +41,18 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Date Time: ")
+                .append(getDateTime())
+                .append(" Recurrence: ")
+                .append(getRecurrence())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Description: ")
-                .append(getDescription())
                 .append(" Location: ")
                 .append(getLocation())
+                .append(" Description: ")
+                .append(getDescription())
+                .append(" Status: ")
+                .append(isCompleted())
                 .append(" Categories: ");
         getCategories().forEach(builder::append);
         return builder.toString();

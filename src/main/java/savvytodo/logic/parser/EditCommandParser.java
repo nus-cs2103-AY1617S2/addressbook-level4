@@ -2,9 +2,11 @@ package savvytodo.logic.parser;
 
 import static savvytodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_DATE_TIME;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static savvytodo.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static savvytodo.logic.parser.CliSyntax.PREFIX_RECURRENCE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,8 +30,8 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DESCRIPTION, PREFIX_LOCATION, PREFIX_CATEGORY);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DATE_TIME, PREFIX_RECURRENCE,
+                PREFIX_DESCRIPTION, PREFIX_LOCATION, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -44,6 +46,8 @@ public class EditCommandParser {
             cmdTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
             cmdTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             cmdTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+            cmdTaskDescriptor.setDateTime(ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_DATE_TIME)));
+            cmdTaskDescriptor.setRecurrence(ParserUtil.parseRecurrence(argsTokenizer.getValue(PREFIX_RECURRENCE)));
             cmdTaskDescriptor.setCategories(
                     parseCategoriesForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
         } catch (IllegalValueException ive) {

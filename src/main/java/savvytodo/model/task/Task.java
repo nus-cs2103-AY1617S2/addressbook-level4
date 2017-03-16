@@ -6,6 +6,7 @@ import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
 
 /**
+ * @author A0140016B
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
@@ -21,19 +22,34 @@ public class Task implements ReadOnlyTask {
 
     private UniqueCategoryList categories;
 
-    private TaskType type;
-
     /**
      * Every field must be present and not null.
      */
     public Task(Name name, Priority priority, Description description, Location location,
-            UniqueCategoryList categories) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories);
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location, categories, dateTime, recurrence);
         this.name = name;
         this.priority = priority;
         this.description = description;
         this.location = location;
         this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
+        this.dateTime = dateTime;
+        this.recurrence = recurrence;
+        this.isCompleted = new Status();
+    }
+
+    public Task(Name name, Priority priority, Description description, Location location,
+            UniqueCategoryList categories, DateTime dateTime, Recurrence recurrence, Status status) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, location,
+                categories, dateTime, recurrence, status);
+        this.name = name;
+        this.priority = priority;
+        this.description = description;
+        this.location = location;
+        this.categories = new UniqueCategoryList(categories); //protect internal categories from changes in the arg list
+        this.dateTime = dateTime;
+        this.recurrence = recurrence;
+        this.isCompleted = status;
     }
 
     /**
@@ -41,7 +57,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getLocation(),
-                source.getCategories());
+                source.getCategories(), source.getDateTime(), source.getRecurrence());
     }
 
     public void setName(Name name) {
@@ -106,6 +122,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Status isCompleted() {
+        assert isCompleted != null;
         return isCompleted;
     }
 
@@ -123,14 +140,6 @@ public class Task implements ReadOnlyTask {
      */
     public void setCategories(UniqueCategoryList replacement) {
         categories.setCategories(replacement);
-    }
-
-    public TaskType getType() {
-        return type;
-    }
-
-    public void setType(TaskType type) {
-        this.type = type;
     }
 
     /**
@@ -156,22 +165,12 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, description, location, categories);
+        return Objects.hash(name, priority, description, location, categories, dateTime, recurrence, isCompleted);
     }
 
     @Override
     public String toString() {
         return getAsText();
-    }
-
-    /**
-     * @author A0140016B
-     * Get type enum object of TaskType
-     */
-    public enum TaskType {
-        Deadline,
-        Event,
-        Floating;
     }
 
 }

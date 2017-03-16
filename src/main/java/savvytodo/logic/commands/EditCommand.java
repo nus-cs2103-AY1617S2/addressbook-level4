@@ -6,11 +6,13 @@ import savvytodo.commons.core.Messages;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.logic.parser.CommandTaskDescriptor;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -83,8 +85,11 @@ public class EditCommand extends Command {
         Description updatedDescription = cmdTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         Location updatedLocation = cmdTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
+        DateTime updatedDateTime = cmdTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
+        Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence().orElseGet(taskToEdit::getRecurrence);
 
-        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories);
+        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories,
+                updatedDateTime, updatedRecurrence);
     }
 
 }

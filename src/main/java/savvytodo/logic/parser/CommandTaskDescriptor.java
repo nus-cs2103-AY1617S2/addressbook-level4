@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Status;
 
 /**
@@ -22,6 +24,8 @@ public class CommandTaskDescriptor {
     private Optional<Description> description = Optional.empty();
     private Optional<Location> location = Optional.empty();
     private Optional<UniqueCategoryList> categories = Optional.empty();
+    private Optional<DateTime> dateTime = Optional.empty();
+    private Optional<Recurrence> recurrence = Optional.empty();
     private Optional<Status> status = Optional.empty();
 
     public CommandTaskDescriptor() {
@@ -34,6 +38,8 @@ public class CommandTaskDescriptor {
         this.location = toCopy.getLocation();
         this.categories = toCopy.getCategories();
         this.status = toCopy.getStatus();
+        this.dateTime = toCopy.getDateTime();
+        this.recurrence = toCopy.getRecurrence();
     }
 
     /**
@@ -79,6 +85,24 @@ public class CommandTaskDescriptor {
         return location;
     }
 
+    public void setDateTime(Optional<DateTime> dateTime) {
+        assert dateTime != null;
+        this.dateTime = dateTime;
+    }
+
+    public Optional<DateTime> getDateTime() {
+        return dateTime;
+    }
+
+    public void setRecurrence(Optional<Recurrence> recurrence) {
+        assert recurrence != null;
+        this.recurrence = recurrence;
+    }
+
+    public Optional<Recurrence> getRecurrence() {
+        return recurrence;
+    }
+
     public void setStatus(Optional<Status> status) {
         assert status != null;
         this.status = status;
@@ -96,4 +120,5 @@ public class CommandTaskDescriptor {
     public Optional<UniqueCategoryList> getCategories() {
         return categories;
     }
+
 }

@@ -12,7 +12,7 @@ public class Description {
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
             "Description should not be empty";
     public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
-    public static final String DESCRIPTION_DEFAULT_VALUES = "No Description Given.";
+    public static final String DESCRIPTION_DEFAULT_VALUES = "No description given.";
 
     public final String value;
 

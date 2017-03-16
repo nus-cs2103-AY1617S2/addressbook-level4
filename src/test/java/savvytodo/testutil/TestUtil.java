@@ -32,11 +32,13 @@ import savvytodo.commons.util.XmlUtil;
 import savvytodo.model.TaskManager;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
 import savvytodo.storage.XmlSerializableTaskManager;
 
@@ -75,16 +77,33 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Priority("low"), new Description("hans@google.com"), new Location("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Boris Mueller"), new Priority("low"), new Description("ruth@google.com"), new Location("81th street"), new UniqueCategoryList()),
-                new Task(new Name("Carl Kurz"), new Priority("low"), new Description("heinz@yahoo.com"), new Location("wall street"), new UniqueCategoryList()),
-                new Task(new Name("Daniel Meier"), new Priority("low"), new Description("cornelia@google.com"), new Location("10th street"), new UniqueCategoryList()),
-                new Task(new Name("Elle Meyer"), new Priority("low"), new Description("werner@gmail.com"), new Location("michegan ave"), new UniqueCategoryList()),
-                new Task(new Name("Fiona Kunz"), new Priority("low"), new Description("lydia@gmail.com"), new Location("little tokyo"), new UniqueCategoryList()),
-                new Task(new Name("George Best"), new Priority("low"), new Description("anna@google.com"), new Location("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Hoon Meier"), new Priority("low"), new Description("stefan@mail.com"), new Location("little india"), new UniqueCategoryList()),
-                new Task(new Name("Ida Mueller"), new Priority("low"), new Description("hans@google.com"), new Location("chicago ave"), new UniqueCategoryList())
-            };
+                new Task(new Name("Ali Muster"), new Priority("low"), new Description("hans@google.com"),
+                        new Location("4th street"), new UniqueCategoryList(), new DateTime("01/03/2017 1400", "02/03/2017 1400"),
+                        new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Boris Mueller"), new Priority("low"), new Description("ruth@google.com"),
+                        new Location("81th street"), new UniqueCategoryList(),
+                        new DateTime("02/03/2017 1400", "03/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Carl Kurz"), new Priority("low"), new Description("heinz@yahoo.com"),
+                        new Location("wall street"), new UniqueCategoryList(),
+                        new DateTime("03/03/2017 1400", "04/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Daniel Meier"), new Priority("low"), new Description("cornelia@google.com"),
+                        new Location("10th street"), new UniqueCategoryList(),
+                        new DateTime("04/03/2017 1400", "05/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Elle Meyer"), new Priority("low"), new Description("werner@gmail.com"),
+                        new Location("michegan ave"), new UniqueCategoryList(),
+                        new DateTime("05/03/2017 1400", "06/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new Description("lydia@gmail.com"),
+                        new Location("little tokyo"), new UniqueCategoryList(),
+                        new DateTime("06/03/2017 1400", "07/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("George Best"), new Priority("low"), new Description("anna@google.com"),
+                        new Location("4th street"), new UniqueCategoryList(), new DateTime("01/03/2017 1400", "02/03/2017 1400"),
+                        new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Hoon Meier"), new Priority("low"), new Description("stefan@mail.com"),
+                        new Location("little india"), new UniqueCategoryList(),
+                        new DateTime("07/03/2017 1400", "08/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),
+                new Task(new Name("Ida Mueller"), new Priority("low"), new Description("hans@google.com"),
+                        new Location("chicago ave"), new UniqueCategoryList(),
+                        new DateTime("08/03/2017 1400", "09/03/2017 1400"), new Recurrence(Recurrence.DEFAULT_VALUES)),            };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;

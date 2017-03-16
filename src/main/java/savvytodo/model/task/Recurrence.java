@@ -66,8 +66,8 @@ public class Recurrence {
 
     }
 
-    public final int occurences;
-    public final Type type;
+    public int occurences;
+    public Type type;
 
     public static final String MESSAGE_RECURR_CONSTRAINTS =
             "If recurrence type is NONE, occurences can only be 0";
@@ -76,12 +76,20 @@ public class Recurrence {
     public static final String[] DEFAULT_VALUES = {Type.None.toString(), "0"};
 
     /**
+     * Default constructor
+     * @throws IllegalValueException
+     * @throws NumberFormatException
+     */
+    public Recurrence() throws NumberFormatException, IllegalValueException {
+        this(DEFAULT_VALUES);
+    }
+
+    /**
      * Validates given Recurrence.
      * @throws IllegalValueException if given Recurrence is invalid.
      */
     public Recurrence(String type, int occurences) throws IllegalValueException {
         assert type != null;
-        assert occurences >= 0;
         String trimmedType = type.trim();
         if (!Type.matches(type)) {
             throw new IllegalValueException(MESSAGE_RECURR_NOT_MATCH);
@@ -94,14 +102,29 @@ public class Recurrence {
     }
 
     /**
+     * Constructor when given input as String array
+     * @param recurrence
+     * @throws IllegalValueException
+     * @throws NumberFormatException
+     */
+    public Recurrence(String[] recurrence) throws NumberFormatException, IllegalValueException {
+        this(recurrence[0], Integer.parseInt(recurrence[1]));
+    }
+
+    /**
      * Returns true if a given string is a valid task Recurrence and num is more than -1.
      */
     public static boolean isValidRecurrence(String type, int numOfTimes) {
-        if (numOfTimes == 0 && Type.isNone(type) == false) {
+        if (numOfTimes >= 0 && Type.matches(type)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.type.toString() + " " + this.occurences;
     }
 
 }

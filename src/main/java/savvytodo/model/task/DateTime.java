@@ -16,8 +16,8 @@ import savvytodo.commons.util.StringUtil;
  */
 public class DateTime implements Comparable<DateTime> {
 
-    public final String startValue;
-    public final String endValue;
+    public String startValue;
+    public String endValue;
 
     private LocalDateTime start;
     private LocalDateTime end;
@@ -35,8 +35,17 @@ public class DateTime implements Comparable<DateTime> {
             .withResolverStyle(ResolverStyle.STRICT);
     private static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter.ofPattern(DATE_STRING_FORMAT);
 
-    private static final String DATETIME_STRING_CONNECTOR = " = ";
-    public static final String[] DEFAULT_VALUES = new String[2];
+    public static final String DATETIME_STRING_CONNECTOR = " = ";
+    public static final String[] DEFAULT_VALUES = {StringUtil.EMPTY_STRING, StringUtil.EMPTY_STRING};
+
+    /**
+     * Default constructor
+     * @throws IllegalValueException
+     * @throws DateTimeException
+     */
+    public DateTime() throws DateTimeException, IllegalValueException {
+        this(DEFAULT_VALUES);
+    }
 
     /**
      * Validates given DateTime.
@@ -69,6 +78,16 @@ public class DateTime implements Comparable<DateTime> {
         this.end = endDateTime;
         this.endValue = this.end.format(DATE_STRING_FORMATTER);
         this.startValue = this.start.format(DATE_STRING_FORMATTER);
+    }
+
+    /**
+     * Constructor when given input as String array
+     * @param dateTime
+     * @throws IllegalValueException
+     * @throws DateTimeException
+     */
+    public DateTime(String[] dateTime) throws DateTimeException, IllegalValueException {
+        this(dateTime[0], dateTime[1]);
     }
 
     /**
@@ -148,27 +167,11 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Get method for startDateTime
-     * @return LocalDateTime
-     */
-    public LocalDateTime getStart() {
-        return start;
-    }
-
-    /**
      * Set method for endDateTime
      * @param LocalDateTime
      */
     public void setEnd(LocalDateTime endDateTime) {
         this.end = endDateTime;
-    }
-
-    /**
-     * Get method for endDateTime
-     * @return LocalDateTime
-     */
-    public LocalDateTime getEnd() {
-        return end;
     }
 
 }

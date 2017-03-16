@@ -8,7 +8,7 @@ package savvytodo.model.task;
  */
 public class Status {
 
-    public final boolean status;
+    public final boolean value;
 
     public static final boolean COMPLETED = true;
     public static final boolean ONGOING = false;
@@ -24,19 +24,19 @@ public class Status {
      * Defaults to Not Completed
      */
     public Status() {
-        status = ONGOING;
+        value = ONGOING;
     }
 
     /**
      * Changing the status
      */
     public Status(boolean newStatus) {
-        this.status = newStatus;
+        this.value = newStatus;
     }
 
     @Override
     public String toString() {
-        if (status) {
+        if (value) {
             return MESSAGE_STATUS_COMPLETED;
         } else {
             return MESSAGE_STATUS_ONGOING;
