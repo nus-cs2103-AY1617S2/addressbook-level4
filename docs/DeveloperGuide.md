@@ -1,4 +1,4 @@
-# Tâche - Developer Guide
+# Tache - Developer Guide
 
 By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -30,9 +30,9 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 ## 1. Introduction
 
 <img src="images/Ui.png" width="600"><br>
-_Figure 1.1 : Tâche User Interface_
+_Figure 1.1 : Tache User Interface_
 
-Tâche is an application designed for people who _store, retrieve and edit their to-do tasks frequently_.
+Tache is an application designed for people who _store, retrieve and edit their to-do tasks frequently_.
 We are also targeting our application towards desktop users who _prefer typing on the keyboard over the mouse_.
 Hence, primary input for the application will be _command-driven_ and using the
 [Command Line Interface](#command-line-interface-cli) (CLI).
@@ -45,7 +45,7 @@ Hence, primary input for the application will be _command-driven_ and using the
 1. **JDK `1.8.0_60`**  or later<br>
 
     > Having any Java 8 version is not enough. <br>
-    Tâche will not work with earlier versions of Java 8.
+    Tache will not work with earlier versions of Java 8.
 
 2. **Eclipse** [IDE](#integrated-development-environment-ide)
 3. **e(fx)clipse** plug-in for Eclipse (Follow the instructions from Step 2 onwards given in
@@ -150,17 +150,17 @@ Function of `EventsCenter`:
 
 Function of `LogsCenter`:
 
-* Allows many classes to write log messages to Tâche's log file
+* Allows many classes to write log messages to Tache's log file
 
 #### Other Components
 
-The rest of Tâche consists of the following four components:
+The rest of Tache consists of the following four components:
 
 * [**`User Interface`**](#32-user-interface-ui-component) : Facilitates the interaction between the user and the system
 
 * [**`Logic`**](#33-logic-component) : Executes the user's commands
 
-* [**`Model`**](#34-model-component) : Holds the data of Tâche in-memory
+* [**`Model`**](#34-model-component) : Holds the data of Tache in-memory
 
 * [**`Storage`**](#35-storage-component) : Reads data from, and writes data to, the hard disk
 
@@ -170,7 +170,7 @@ command `delete 1`.
 <img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 3.1.2a : Component Interactions for `delete 1` Command (Part 1)_
 
-> Note how the `Model` simply raises a `TaskManagerChangedEvent` when Tâche's data is changed,
+> Note how the `Model` simply raises a `TaskManagerChangedEvent` when Tache's data is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how `EventsCenter` reacts to that event, which eventually results in the following:
@@ -215,9 +215,9 @@ Functions of `UI`:
 
 * Executes user commands using the `Logic` component
 
-* Binds itself to some data in the `Model` so that the UI of Tâche can auto-update when data in the `Model` changes
+* Binds itself to some data in the `Model` so that the UI of Tache can auto-update when data in the `Model` changes
 
-* Responds to events raised from various parts of the Tâche and updates its UI accordingly
+* Responds to events raised from various parts of the Tache and updates its UI accordingly
 
 ### 3.3. Logic Component
 
@@ -252,7 +252,7 @@ Functions of `Model`:
 
 * Stores a `UserPref` object that represents the user's preferences
 
-* Stores the data in Tâche
+* Stores the data in Tache
 
 * Exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed'
 
@@ -272,7 +272,7 @@ Functions of `Storage`:
 
 * Saves `UserPref` objects in json format and reads it back
 
-* Saves Tâche's data in xml format and reads it back
+* Saves Tache's data in xml format and reads it back
 
 
 ## 4. Implementation
@@ -293,7 +293,7 @@ The `LogsCenter` class is used to manage logging levels and logging destinations
 
 * `SEVERE` : Message shows critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Message shows that developers can continue with the program, but with caution
-* `INFO` : Message shows information showing the noteworthy actions by Tâche
+* `INFO` : Message shows information showing the noteworthy actions by Tache
 * `FINE` : Message shows details that are not usually noteworthy but may be useful in debugging
 
   > E.g. print the actual list instead of just its size
@@ -326,7 +326,7 @@ Then choose `Run as` > `JUnit Test`.
 
 **GUI Tests**:
 
-These are _System Tests_ that test the entire Tâche by simulating user actions on the
+These are _System Tests_ that test the entire Tache by simulating user actions on the
 [Graphical User Interface](#graphical-user-interface-gui) (GUI). <br>
 These tests are found in the `guitests` package.
 
@@ -415,7 +415,7 @@ You can follow the following steps to convert the project documentation files to
 
 ### 6.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Tâche depends on the
+A project often depends on third-party libraries. For example, Tache depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. <br>
 
 Managing these dependencies can be automated using Gradle.
@@ -474,16 +474,16 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. `User` types a letter or a sequence of letters
-2. `Tâche` shows a list of commands that contain that letter or sequence of letters
+2. `Tache` shows a list of commands that contain that letter or sequence of letters
 3. `User` selects specific command in list
-4. `Tâche` performs an [autocomplete](#autocomplete) on user's command
+4. `Tache` performs an [autocomplete](#autocomplete) on user's command
 Use case ends.
 
 **Extensions**
 
 2a. No command contains letter or sequence of letters typed by `User`
 
-> 2a1. `Tâche` informs `User` that there is no such command
+> 2a1. `Tache` informs `User` that there is no such command
   Use case ends
 
 2b. `User` makes changes to input
@@ -495,9 +495,9 @@ Use case ends.
 **MSS**
 
 1. `User` requests to change data file location
-2. `Tâche` displays a directory chooser
+2. `Tache` displays a directory chooser
 3. `User` selects a directory
-4. `Tâche` changes the save location to the one selected
+4. `Tache` changes the save location to the one selected
 Use case ends.
 
 **Extensions**
@@ -511,9 +511,9 @@ Use case ends.
 **MSS**
 
 1. `User` types in predefined keyboard shortcut
-2. `Tâche` displays main window
+2. `Tache` displays main window
 3. `User` types in shortcut again
-4. `Tâche` minimizes main window
+4. `Tache` minimizes main window
 Use case ends.
 
 ### Use case: Delete task
@@ -521,7 +521,7 @@ Use case ends.
 **MSS**
 
 1. `User` requests to list tasks
-2. `Tâche` shows a list of tasks
+2. `Tache` shows a list of tasks
 3. `User` requests to delete a specific task in the list
 4.  deletes the task
 Use case ends.
@@ -534,7 +534,7 @@ Use case ends.
 
 3a. Given index is invalid
 
-> 3a1. `Tâche` informs the `User` that the given index is invalid<br>
+> 3a1. `Tache` informs the `User` that the given index is invalid<br>
 Use case resumes at step 2
 
 ### Use case: Add task
@@ -542,19 +542,19 @@ Use case resumes at step 2
 **MSS**
 
 1. `User` requests to add a task
-2. `Tâche` shows user that task is added
+2. `Tache` shows user that task is added
 Use case ends.
 
 **Extensions**
 
 1a. [Parameters](#parameter) are wrong
 
-> 1a1. `Tâche` informs `User` that the parameters for the add command are wrong<br>
+> 1a1. `Tache` informs `User` that the parameters for the add command are wrong<br>
 Use case ends.
 
 1b. Task already exists
 
-> 1b1. `Tâche` informs `User` that the task already exists<br>
+> 1b1. `Tache` informs `User` that the task already exists<br>
 Use case ends
 
 ### Use case: Undo task
@@ -562,14 +562,14 @@ Use case ends
 **MSS**
 
 1. `User` requests to undo previous command
-2. `Tâche` reverts back to previous state before last change
+2. `Tache` reverts back to previous state before last change
 Use case ends.
 
 **Extensions**
 
 2a. No user command executed beforehand
 
-> 2a1. `Tâche` shows that it has nothing to undo<br>
+> 2a1. `Tache` shows that it has nothing to undo<br>
 Use case ends
 
 

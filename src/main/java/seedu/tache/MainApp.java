@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import junit.framework.AssertionFailedError;
 import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.core.LogsCenter;
