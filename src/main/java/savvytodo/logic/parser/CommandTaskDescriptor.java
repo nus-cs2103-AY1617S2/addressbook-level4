@@ -36,7 +36,7 @@ public class CommandTaskDescriptor {
     /**
      * Returns true if at least one field is edited.
      */
-    public boolean isAnyFieldEdited() {
+    public boolean isAnyFieldPresent() {
         return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.location, this.categories);
     }
 

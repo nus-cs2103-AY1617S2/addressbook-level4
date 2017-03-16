@@ -50,7 +50,7 @@ public class EditCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!cmdTaskDescriptor.isAnyFieldEdited()) {
+        if (!cmdTaskDescriptor.isAnyFieldPresent()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 

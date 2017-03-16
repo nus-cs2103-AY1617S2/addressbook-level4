@@ -21,12 +21,14 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the at least one details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [d/DESCRIPTION] [l/LOCATION ] [c/CATEGORIES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/low d/2pm";
+            + "[NAME] [s/START_DATE] [e/END_DATE] [l/LOCATION] [p/PRIORITY] [r/RECURRING_TYPE] "
+            + "[n/NUM_OF_RECURRENCE] [c/CATEGORIES] [d/DESCRIPTION]...\n"
+            + "Example: " + COMMAND_WORD + " 1 c/CS2103 d/Complete group project component";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
