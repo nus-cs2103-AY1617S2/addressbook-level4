@@ -1,13 +1,16 @@
 package seedu.toluist.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.TodoListStorage;
 
@@ -15,6 +18,7 @@ import seedu.toluist.storage.TodoListStorage;
  * TodoList Model
  */
 public class TodoList {
+    private static final Logger logger = LogsCenter.getLogger(TodoList.class);
     public static final TodoListStorage DEFAULT_STORAGE = new JsonStorage();
     private static TodoList currentTodoList;
 
@@ -53,9 +57,11 @@ public class TodoList {
     public TodoList(TodoListStorage storage) {
         currentTodoList = this;
         this.storage = storage;
-        Optional<TodoList> todoListOptional = storage.load();
-        if (todoListOptional.isPresent()) {
-            allTasks = todoListOptional.get().getTasks();
+        try {
+            TodoList todoList = storage.load();
+            allTasks = todoList.getTasks();
+        } catch (IOException e) {
+            logger.severe("Data cannot be loaded");
         }
     }
 
@@ -75,11 +81,19 @@ public class TodoList {
         return storage;
     }
 
+    /**
+     * Save the todo list data to disk
+     * @return true / false
+     */
     public boolean save() {
         currentTodoList = this;
         return storage.save(this);
     }
 
+    /**
+     * Add a task to todolist
+     * @param task task to be added
+     */
     public void add(Task task) {
         // Don't allow duplicate tasks
         if (allTasks.indexOf(task) > -1) {
@@ -89,6 +103,10 @@ public class TodoList {
         allTasks.add(task);
     }
 
+    /**
+     * Remove a task from todo list
+     * @param task task to be removed
+     */
     public void remove(Task task) {
         allTasks.remove(task);
     }
