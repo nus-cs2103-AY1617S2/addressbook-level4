@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 import seedu.watodo.TestApp;
 import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.events.BaseEvent;
-import seedu.watodo.model.TaskList;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.TaskManager;
+import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.testutil.TestUtil;
 import seedu.watodo.testutil.TypicalTestTasks;
 
@@ -86,8 +86,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected TaskList getInitialData() {
-        TaskList ab = new TaskList();
+    protected TaskManager getInitialData() {
+        TaskManager ab = new TaskManager();
         TypicalTestTasks.loadTaskManagerWithSampleData(ab);
         return ab;
     }
@@ -107,7 +107,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyFloatingTask person, TaskCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

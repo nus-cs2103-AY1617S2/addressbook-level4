@@ -3,19 +3,19 @@ package seedu.watodo.model.task;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in the address book.
+ * Represents a Task's name in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Task Descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task Descriptions can take any characters, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String DECRIPTION_VALIDATION_REGEX = "*";
+    public static final String DECRIPTION_VALIDATION_REGEX = "[^\\s].*";
 
     public final String fullDescription;
 
@@ -26,19 +26,18 @@ public class Description {
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
-        String trimmedName = description.trim();
-        if (!isValidDescription(trimmedName)) {
+        String trimmedDescriptor = description.trim();
+        if (!isValidDescription(trimmedDescriptor)) {
             throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.fullDescription = trimmedName;
+        this.fullDescription = trimmedDescriptor;
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task description
      */
     public static boolean isValidDescription(String test) {
-        //return test.matches(DECRIPTION_VALIDATION_REGEX);
-        return true;
+        return test.matches(DECRIPTION_VALIDATION_REGEX);
     }
 
 

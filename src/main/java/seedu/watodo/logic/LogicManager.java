@@ -10,7 +10,7 @@ import seedu.watodo.logic.commands.CommandResult;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.logic.parser.Parser;
 import seedu.watodo.model.Model;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.storage.Storage;
 
 /**
@@ -36,7 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyFloatingTask> getFilteredTaskList() {
+    public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
 }

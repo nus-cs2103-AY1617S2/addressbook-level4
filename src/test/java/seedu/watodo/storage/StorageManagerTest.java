@@ -14,8 +14,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
-import seedu.watodo.model.ReadOnlyTaskList;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
 import seedu.watodo.storage.JsonUserPrefsStorage;
 import seedu.watodo.storage.Storage;
@@ -64,10 +64,10 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        TaskList original = new TypicalTestTasks().getTypicalTaskManager();
+        TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskList(original);
-        ReadOnlyTaskList retrieved = storageManager.readTaskList().get();
-        assertEquals(original, new TaskList(retrieved));
+        ReadOnlyTaskManger retrieved = storageManager.readTaskList().get();
+        assertEquals(original, new TaskManager(retrieved));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleTaskListChangedEvent(new TaskListChangedEvent(new TaskList()));
+        storage.handleTaskListChangedEvent(new TaskListChangedEvent(new TaskManager()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -96,7 +96,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveTaskList(ReadOnlyTaskList addressBook, String filePath) throws IOException {
+        public void saveTaskList(ReadOnlyTaskManger addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

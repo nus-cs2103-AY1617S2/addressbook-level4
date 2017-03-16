@@ -1,9 +1,9 @@
 package seedu.watodo.logic.parser;
 
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_END_DATETIME;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -24,11 +24,14 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_START_DATETIME, PREFIX_END_DATETIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).isPresent(), argsTokenizer.getValue(PREFIX_DEADLINE),
+                    argsTokenizer.getValue(PREFIX_START_DATETIME).isPresent(), argsTokenizer.getValue(PREFIX_START_DATETIME),
+                    argsTokenizer.getValue(PREFIX_END_DATETIME).isPresent(), argsTokenizer.getValue(PREFIX_END_DATETIME),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

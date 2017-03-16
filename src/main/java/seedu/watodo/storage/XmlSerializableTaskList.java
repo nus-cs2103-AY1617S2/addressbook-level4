@@ -11,16 +11,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
- * An Immutable TaskList that is serializable to XML format
+ * An Immutable TaskManager that is serializable to XML format
  */
 @XmlRootElement(name = "tasklist")
-public class XmlSerializableTaskList implements ReadOnlyTaskList {
+public class XmlSerializableTaskList implements ReadOnlyTaskManger {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -39,14 +39,14 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     /**
      * Conversion
      */
-    public XmlSerializableTaskList(ReadOnlyTaskList src) {
+    public XmlSerializableTaskList(ReadOnlyTaskManger src) {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyFloatingTask> getTaskList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         final ObservableList<FloatingTask> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
