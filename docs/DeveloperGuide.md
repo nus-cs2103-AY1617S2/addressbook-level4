@@ -22,15 +22,15 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 
 ### 1.1. Prerequisites
 
-1. **JDK 1.8.0_60 or later**<br>
+1. **JDK 1.8.0_60 or later**.
     > JDK version `1.8.0_60` or later is required to run the project correctly
 2. **Eclipse IDE Neon**. 
-    >Follow the instructions in [this page](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE) to download and install Eclipse.
+    >Follow the instructions [here](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE) to download and install Eclipse.
 3. **e(fx)clipse plugin for Eclipse**. 
-    >Follow the instructions given in [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious) to set up e(fx)clipse for Eclipse
-4. **Buildship Gradle Integration**
+    >Follow the instructions [here](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious) to set up e(fx)clipse for Eclipse
+4. **Buildship Gradle Integration**.
     >Buildship is bundled together with Eclipse Neon and above.
-5. **Checkstyle Plug-in**
+5. **Checkstyle Plug-in**.
 
 ### 1.2. Installing Checkstyle manually
     
@@ -46,7 +46,7 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 <br><img src="images/checkstyle/checkstyle_3.png" width="400"><br><br>
 6. Nagivate and select the **uncompressed** download file. Click `Open` > `OK`.
 <br><img src="images/checkstyle/checkstyle_4.png" width="400"><br><br>
-7. Check `Checkstyle` and click `Next`
+7. Check `Checkstyle` and click `Next`.
 <br><img src="images/checkstyle/checkstyle_5.png" width="400"><br><br>
 8. Click `Next` and accept the user license agreement as follows. 
 <br><img src="images/checkstyle/checkstyle_6.png" width="400"><br><br>
@@ -56,7 +56,7 @@ By : `Team Opus(W15-B3)`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&n
 ### 1.3. Importing the project into Eclipse
 
 0. Clone this repository through this [link](https://github.com/CS2103JAN2017-W15-B3/main.git).
-1. Launch Eclipse
+1. Launch Eclipse.
     > Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given in the prerequisites above.
 2. Click `File` > `Import`.
 3. Click `Gradle` > `Gradle Project` and then `Next`.
@@ -92,11 +92,11 @@ More information about using Gradle can be found [here](https://github.com/CS210
 
 ### 1.5. Troubleshooting project setup
 
-#### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git
+#### 1.5.1.  Eclipse reports compile errors after merging new commits pulled from Git.
 > This is beacuase Eclipse failed to recognize the new files that are pulled from Git.<br>
 1. Right click on the project (in Eclipse package explorer) and choose `Gradle` -> `Refresh Gradle Project`.
 
-#### 1.5.2.  Eclipse reports missing libraries
+#### 1.5.2.  Eclipse reports missing libraries.
 > Eclipse has failed to retrieve all required dependencies during the project import.<br>
 1. Right click on the project and select `Gradle` > [`Run tests using Gradle`](UsingGradle.md).
 
