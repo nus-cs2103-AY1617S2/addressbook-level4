@@ -209,10 +209,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     	@Override
     	public boolean run(ReadOnlyTask task) {
-    	    if (this.value == true & task.isDone()) {
+    	    if (this.value  & task.isDone()) {
     	        return true;
     	    }
-    	    else if (this.value == false & task.isDone() == false) {
+    	    else if (!this.value  & !task.isDone()) {
     	        return true;
     	    }
     	    else {
