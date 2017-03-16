@@ -65,8 +65,15 @@ Format: `help`
 Adds a task to the todo list<br>
 Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE]`
 
-> * Both 'startdate' and 'enddate' use the same time format.
-> * 
+> * Both 'startdate' and 'enddate' use the same datetime format.
+> * 'startdate' requires a valid 'enddate' to be used in the same command.
+> * The values entered for 'startdate' and 'enddate' use the Natty parser to determine the final value:<br>
+    Formal dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
+    Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
+    Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
+    Formal times are parsed in as well. i.e. `0600h`, `8pm`, `noon`, `4:30 p.m.`<br>
+    Similar to dates, relative times are also allowed. i.e. `5 minutes from now`, `in 10 minutes`, `5 hours ago`<br>
+    For more details, please visit http://natty.joestelmach.com/doc.jsp.
 
 Examples:
 
