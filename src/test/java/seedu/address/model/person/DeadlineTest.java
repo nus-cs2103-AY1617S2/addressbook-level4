@@ -11,15 +11,9 @@ public class DeadlineTest {
     public void isValidDeadline() {
         // blank deadline
         assertTrue(Deadline.isValidDeadline("")); // empty string
-        assertFalse(Deadline.isValidDeadline(" ")); // spaces only
-
-        // missing parts
-        assertFalse(Deadline.isValidDeadline("12")); // missing local part
-        assertFalse(Deadline.isValidDeadline("March")); // missing '@' symbol
-        assertFalse(Deadline.isValidDeadline("Sally")); // missing domain name
-
         // valid deadline
         assertTrue(Deadline.isValidDeadline("17 Mar"));
-        assertTrue(Deadline.isValidDeadline("17/03"));
+        assertTrue(Deadline.isValidDeadline("3 am"));
+        assertTrue(Deadline.isValidDeadline("tomorrow"));
     }
 }

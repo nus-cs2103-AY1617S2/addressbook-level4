@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Priority;
