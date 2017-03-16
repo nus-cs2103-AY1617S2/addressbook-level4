@@ -37,8 +37,7 @@ Werkbook is a task manager.
 
 ### i. Installation
 Ensure you have Java version `1.8.0_60` or later installed in your Computer.
-> Having any Java 8 version is not enough.
-
+> Having any Java 8 version is not enough.<br>
 > This app will not work with earlier versions of Java 8.
 
 Download the latest `werkbook.jar` from the [Releases](../../../releases) tab as shown in *Figure 1* below.
@@ -67,7 +66,7 @@ The **Results Panel** is located below the **Command Box**, and it tells you the
 All of your tasks can be found in the **Task Panel**, it is initially empty until you fill it up with tasks.
 
 ### iv. Quick Start
-Type the command in the **Command Box** and press <kbd>Enter</kbd> to execute it.
+Here's a quick guide to get you started with Werkbook.
     
 **Feeling lost?**
 
