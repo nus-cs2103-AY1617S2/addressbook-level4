@@ -43,6 +43,22 @@ public class SelectCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("select " + index);
         assertResultMessage("Selected Person: " + index);
         assertPersonSelected(index);
+
+        commandBox.runCommand("s " + index);
+        assertResultMessage("Selected Person: " + index);
+        assertPersonSelected(index);
+
+        commandBox.runCommand("choose " + index);
+        assertResultMessage("Selected Person: " + index);
+        assertPersonSelected(index);
+
+        commandBox.runCommand("selects " + index);
+        assertResultMessage("Selected Person: " + index);
+        assertPersonSelected(index);
+
+        commandBox.runCommand("chooses " + index);
+        assertResultMessage("Selected Person: " + index);
+        assertPersonSelected(index);
     }
 
     private void assertPersonSelected(int index) {
