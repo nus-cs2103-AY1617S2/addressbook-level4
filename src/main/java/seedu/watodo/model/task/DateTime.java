@@ -50,7 +50,11 @@ public class DateTime {
         List<DateGroup> parsedDateGroups = dateTimeParser.parse(dateTime);
         return parsedDateGroups.get(0).getDates().get(0);
     }
-
+    
+    /* Checks if the current DateTime is at a later date than another given DateTime */
+    public boolean isLater(DateTime other) {
+        return this.dateTime.after(other.dateTime);
+    }
 
     @Override
     public String toString() {

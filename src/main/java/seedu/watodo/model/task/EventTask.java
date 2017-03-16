@@ -2,17 +2,30 @@ package seedu.watodo.model.task;
 
 import java.util.Objects;
 
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.UniqueTagList;
 
+/** Represents an event with a start and end time in the task manager.
+ *  Guarantees: details are present and not null, field values are validated.
+ */
 public class EventTask extends Task implements ReadOnlyTask {
     
     private DateTime startDateTime;
     private DateTime endDateTime;
+    public static final String MESSAGE_EVENT_TASK_CONSTRAINT = "End date/time must be later than start date/time!";
     
-    public EventTask(Description description, DateTime startDate, DateTime dueDate, UniqueTagList tags) {
+    /**
+     * Every field must be present and not null. End time must be later than start time.
+     * @throws IllegalValueException 
+     */
+    public EventTask(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags) throws IllegalValueException {
         super(description, tags);
+
+        if (!endDate.isLater(startDate)) {
+            throw new IllegalValueException(MESSAGE_EVENT_TASK_CONSTRAINT);
+        }
         this.setStartDateTime(startDate);
-        this.setEndDateTime(dueDate);
+        this.setEndDateTime(endDate);
     }
 
     public DateTime getStartDateTime() {
