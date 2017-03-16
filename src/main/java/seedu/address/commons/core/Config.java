@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "Yesterday's Tomorrow";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/addressbook.xml";
+    private String addressBookFilePath = "data/yesterdayTomorrow.xml";
     private String addressBookName = "My Yesterday's Tomorrow";
 
 
