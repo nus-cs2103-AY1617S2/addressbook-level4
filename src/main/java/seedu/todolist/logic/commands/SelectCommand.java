@@ -8,7 +8,7 @@ import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.task.ReadOnlyTask;
 
 /**
- * Selects a task identified using it's last displayed index from the address book.
+ * Selects a task identified using it's last displayed index from the to-do list.
  */
 public class SelectCommand extends Command {
 
