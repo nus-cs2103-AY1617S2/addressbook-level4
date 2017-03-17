@@ -141,6 +141,7 @@
 }
 
 .grid-pane .anchor-pane {
+    -fx-border-color: transparent;
     -fx-background-color: #293132;
 }
 
@@ -269,7 +270,7 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
+    -fx-border-color: transparent;
     -fx-border-width: 1 1 1 1;
 }
 
@@ -295,3 +296,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
