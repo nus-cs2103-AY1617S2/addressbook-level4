@@ -93,6 +93,11 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.list-view {
+    -fx-background-color: #293132;
+    -fx-border-color: transparent;
+}
+
 .list-cell {
     -fx-background-color: #1C2122;
     -fx-label-padding: 0 0 0 0;
