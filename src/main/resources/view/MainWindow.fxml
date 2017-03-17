@@ -25,12 +25,12 @@
             </menus>
         </MenuBar>
 
-        <HBox styleClass="background">
+        <HBox styleClass="background" minHeight="100" prefHeight="100">
             <padding>
                 <Insets top="5.0" bottom="5.0" left="10.0" right="10.0" />
             </padding>
             <children>
-                <AnchorPane fx:id="resultDisplayPlaceholder" />
+                <AnchorPane fx:id="resultDisplayPlaceholder"/>
                 <!-- TODO: Time and date goes here -->
             </children>
         </HBox>
