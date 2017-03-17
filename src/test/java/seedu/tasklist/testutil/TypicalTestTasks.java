@@ -26,7 +26,7 @@ public class TypicalTestTasks {
                     .withTags("class").withStartDate("15/3/2017 15:00:10")
                     .withEndDate("15/3/2017 18:00:10").build();
             homework = new FloatingTaskBuilder().withName("CS3245 homework 3")
-                    .withComment("discuss with classmates").withPriority("high")
+                    .withComment("discuss with classmates").withPriority("low")
                     .withStatus(false)
                     .withTags("class").build();
             groceries = new FloatingTaskBuilder().withName("Buy groceries").withComment("go NTUC")
@@ -34,7 +34,7 @@ public class TypicalTestTasks {
             java = new FloatingTaskBuilder().withName("Update Java for CS2103T").withStatus(false)
                     .withPriority("high").withComment("Find out why jdk is not displaying the correct ver").build();
             cs2103T = new DeadlineTaskBuilder().withName("Implement undo for this").withComment("By today")
-                    .withPriority("high").withDeadline("15/3/2017 18:00:10").withStatus(false).build();
+                    .withPriority("medium").withDeadline("15/3/2017 18:00:10").withStatus(false).build();
             drink = new FloatingTaskBuilder().withName("Drink water").withComment("To improve brain function")
                     .withPriority("high").withStatus(false).build();
 

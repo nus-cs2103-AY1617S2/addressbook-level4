@@ -7,7 +7,9 @@ public class SortCommand extends Command{
     private final String parameter;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ":Sorts task according to the parameter specified. Only 1 of the 5. Name:n"
+            + ":Sorts task according to the parameter specified. "
+            + "Only 1 of the 5. "
+            + "Name:n"
             + "Priority:p or StartDate: sd or EndDate:ed or Deadline:d\n"
             + "Parameters: n, p, sd, ed\n"
             + "Example: " + COMMAND_WORD + " n";
