@@ -59,7 +59,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[clear](#28-clearing-tasks-by-category--clear)       |Clear tasks in category|
 |[view](#29-viewing-a-task--view)                    |View a task            |
 |[name](#210-modifying-a-category-name--name)         |Rename a category      |
-|[done](#211-marking-a-task-done--done)               |Mark task as done      |
+|[done](#211-marking-a-task-done--done)               |Mark a task as done      |
 |[undo](#212-undoing-a-command--undo)                 |Undo a task            |
 |[sort](#213-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
 |[save](#215-exporting-the-data--save)                |Save TaskBoss          |
