@@ -47,27 +47,43 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
 
+    public static String config_file = Config.DEFAULT_CONFIG_FILE;
 
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
+        initEventsCenter();
 
-        storage = new StorageManager(config.gettaskManagerFilePath(), config.getUserPrefsFilePath());
+        initApplicationFromConfig(getApplicationParameter("config"), true);
+    }
+
+    /**
+     * Starts application. Updates UI with new logic if UI already exists.
+     * @author A0140036X
+     * @param configFilePath File path of json file containing configurations
+     * @param useSampleDataIfStorageFileNotFound If true, sample data is to be used if storage file is not found.
+     * If false, an empty task manager will be created.
+     */
+    public void initApplicationFromConfig(String configFilePath, boolean useSampleDataIfStorageFileNotFound) {
+        config = initConfig(configFilePath);
+
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, useSampleDataIfStorageFileNotFound ? null : new TaskManager());
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic, config, userPrefs);
-
-        initEventsCenter();
+        if (ui == null) {
+            ui = new UiManager(logic, config, userPrefs);
+        } else {
+            ui.setLogic(logic);
+        }
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -75,15 +91,26 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    /**
+     * Initializes model based on storage. If storage file is not found, default task manager provided will be used.
+     * If task manager is null, sample task manager will be created.
+     * @param storage
+     * @param userPrefs
+     * @param defaultTaskManager
+     * @return
+     */
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, TaskManager defaultTaskManager) {
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
             taskManagerOptional = storage.readTaskManager();
             if (!taskManagerOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskManager");
+                logger.info("Data file not found. Will be starting with "
+                        + ((defaultTaskManager == null ? "a sample " : "provided ") + "TaskManager"));
             }
-            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            logger.info("Data file found " + storage.getTaskManagerFilePath());
+            initialData = taskManagerOptional.orElseGet(
+                    defaultTaskManager == null ? SampleDataUtil::getSampleTaskManager : () -> new TaskManager());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
@@ -101,29 +128,26 @@ public class MainApp extends Application {
 
     protected Config initConfig(String configFilePath) {
         Config initializedConfig;
-        String configFilePathUsed;
-
-        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
             logger.info("Custom Config file specified " + configFilePath);
-            configFilePathUsed = configFilePath;
+            config_file = configFilePath;
         }
 
-        logger.info("Using config file : " + configFilePathUsed);
+        logger.info("Using config file : " + config_file);
 
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
+            Optional<Config> configOptional = ConfigUtil.readConfig(config_file);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
-                    "Using default config properties");
+            logger.warning("Config file at " + config_file + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
+            ConfigUtil.saveConfig(initializedConfig, config_file);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -141,8 +165,8 @@ public class MainApp extends Application {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
-                    "Using default user prefs");
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
@@ -153,7 +177,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save preference file : " + StringUtil.getDetails(e));
         }
 
         return initializedPrefs;
@@ -188,11 +212,38 @@ public class MainApp extends Application {
         this.stop();
     }
 
+    /**
+     * Loads a new task manager file.
+     * 1. Update and save config file with new storage file path
+     * 2. Update UI with new logic
+     * 3. Save task manager into new file
+     * @author A0140036X
+     */
     @Subscribe
     public void handleLoadStorageFileEvent(LoadStorageFileEvent event) {
+        System.out.println("Load");
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        this.stop();
+        String taskManagerFilePath = event.getFilePath();
+        config.setTaskManagerFilePath(taskManagerFilePath);
+
+        try {
+            ConfigUtil.saveConfig(config, config_file);
+        } catch (IOException e) {
+            logger.severe("Failed to save config " + StringUtil.getDetails(e));
+            this.stop();
+        }
+
+        logger.info("Setting UI with new logic");
+        initApplicationFromConfig(config_file, false);
+
+        try {
+            storage.saveTaskManager(model.getTaskManager());
+        } catch (IOException e) {
+            logger.severe("Failed to save task manager " + StringUtil.getDetails(e));
+            this.stop();
+        }
     }
+
     public static void main(String[] args) {
         launch(args);
     }

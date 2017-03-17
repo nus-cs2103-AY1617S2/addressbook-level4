@@ -344,7 +344,7 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-    private static <T> List<T> asList(T[] objs) {
+    public static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
         for (T obj : objs) {
             list.add(obj);

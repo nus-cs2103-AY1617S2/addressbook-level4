@@ -14,7 +14,7 @@ public interface TaskManagerStorage {
     /**
      * Returns the file path of the data file.
      */
-    String gettaskManagerFilePath();
+    String getTaskManagerFilePath();
 
     /**
      * Returns TaskManager data as a {@link ReadOnlyTaskManager}.
@@ -25,7 +25,7 @@ public interface TaskManagerStorage {
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     /**
-     * @see #gettaskManagerFilePath()
+     * @see #getTaskManagerFilePath()
      */
     Optional<ReadOnlyTaskManager> taskManagerBook(String filePath) throws DataConversionException, IOException;
 

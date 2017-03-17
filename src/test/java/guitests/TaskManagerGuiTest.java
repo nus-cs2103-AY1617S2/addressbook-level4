@@ -78,7 +78,8 @@ public abstract class TaskManagerGuiTest {
         EventsCenter.clearSubscribers();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
         FxToolkit.showStage();
-        while (!stage.isShowing());
+        while (!stage.isShowing())
+            ;
         mainGui.focusOnMainApp();
     }
 
@@ -129,5 +130,9 @@ public abstract class TaskManagerGuiTest {
     public void raise(BaseEvent e) {
         //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
+    }
+
+    public void sleep(int milliseconds) {
+        new GuiRobot().sleep(milliseconds);
     }
 }

@@ -26,8 +26,7 @@ public class TypicalTestTasks {
                     .withDescription("Celebration @ 1pm").withLocation("wall street")
                     .withDateTime("03/03/2017 1400", "04/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).build();
-            meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")
-                    .withDescription("cornelia@google.com").withLocation("10th street")
+            meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")                    .withDescription("cornelia@google.com").withLocation("10th street")
                     .withDateTime("04/03/2017 1400", "05/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).build();
             test = new TaskBuilder().withName("CS2103 midterm test").withPriority("high")
@@ -68,12 +67,34 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{assignment, appointment, birthday, meeting, test, presentation, project};
+        return new TestTask[] { assignment, appointment, birthday, meeting, test, presentation, project };
     }
 
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);
         return ab;
+    }
+
+    /**
+     * generates a list of tasks with random details
+     * @author A0140036x
+     * @return
+     */
+    public TestTask[] getGeneratedTasks(int numberOfTasks) {
+        TestTask[] ret = new TestTask[numberOfTasks];
+        for (int i = 0; i < ret.length; i++) {
+            TestTask temp = new TestTask();
+            try {
+                temp.setName(new Name("Task " + i));
+                temp.setEmail(new Description("" + i));
+                temp.setAddress(new Address("" + i));
+                temp.setPriority(new Priority(i % 2 == 0 ? "low" : "high"));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            ret[i] = temp;
+        }
+        return ret;
     }
 }

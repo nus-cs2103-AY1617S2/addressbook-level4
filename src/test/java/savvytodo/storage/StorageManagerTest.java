@@ -68,7 +68,7 @@ public class StorageManagerTest {
 
     @Test
     public void gettaskManagerFilePath() {
-        assertNotNull(storageManager.gettaskManagerFilePath());
+        assertNotNull(storageManager.getTaskManagerFilePath());
     }
 
     @Test

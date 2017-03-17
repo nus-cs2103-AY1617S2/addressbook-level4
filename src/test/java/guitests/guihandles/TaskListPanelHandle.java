@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -55,8 +54,9 @@ public class TaskListPanelHandle extends GuiHandle {
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
-            throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " tasks");
+            throw new IllegalArgumentException(
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks, got "
+                            + (tasks.length + startPosition) + " instead");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
@@ -102,8 +102,8 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                                                    .filter(p -> p.getName().name.equals(name))
-                                                    .findAny();
+                .filter(p -> p.getName().fullName.equals(name)).findAny();
+ 
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
@@ -125,7 +125,6 @@ public class TaskListPanelHandle extends GuiHandle {
         guiRobot.sleep(100);
         return getTaskCardHandle(task);
     }
-
 
     /**
      * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
@@ -154,8 +153,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
-                .findFirst();
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task)).findFirst();
         if (taskCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
