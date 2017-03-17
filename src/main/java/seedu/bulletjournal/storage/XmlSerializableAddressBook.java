@@ -23,7 +23,7 @@ import seedu.bulletjournal.model.task.Task;
 public class XmlSerializableAddressBook implements ReadOnlyTodoList {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedTask> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -41,7 +41,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTodoList {
      */
     public XmlSerializableAddressBook(ReadOnlyTodoList src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
