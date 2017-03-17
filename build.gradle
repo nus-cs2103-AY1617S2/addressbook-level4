@@ -89,7 +89,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "iManager.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
