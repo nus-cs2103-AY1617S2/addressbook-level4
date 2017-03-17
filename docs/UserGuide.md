@@ -257,7 +257,7 @@ Format: `exit`
 |[add](#22-adding-a-task-add)                         |**`add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY [p/PRIORITY_LEVEL]`**             |
 |[list](#23-listing-all-tasks--list)                  |**`list` `list c/CATEGORY NAME`**        |
 |[edit](#24-editing-a-task--edit)                     |**`edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`**|
-|[find](#25-finding-all-tasks-by-name-or-by-datetime--find)|**`find n/TASK_NAME  find sd/date and time  find ed/date and time`**|
+|[find](#25-finding-all-tasks-by-name-or-by-datetime--find)|**`find n/TASK_NAME`  `find sd/date and time`  `find ed/date and time`**|
 |[delete](#26-deleting-a-task--delete)                |**`delete INDEX`**         |
 |[new](#27-creating-a-category--new)               |**`new CATEGORY`**      |
 |[clear](#28-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
@@ -265,8 +265,8 @@ Format: `exit`
 |[name](#210-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
 |[done](#211-marking-a-task-done--done)               |**`done INDEX`**        |
 |[undo](#212-undoing-a-command--undo)                 |**`undo`**            |
-|[sort](#213-sorting-tasks--sort)                     |**`sort`**   |
-|[save](#215-exporting-the-data--save)                |**`save e/FILE_PATH save n/FILE_PATH NEW_FILE_NAME`**|
+|[sort](#213-sorting-tasks--sort)                     |**`sort` `sort p`**   |
+|[save](#215-exporting-the-data--save)                |**`save e/FILE_PATH` `save n/FILE_PATH NEW_FILE_NAME`**|
 |[exit](#216-exiting-the-program--exit)               |**`exit`**           |
 
 <br>
