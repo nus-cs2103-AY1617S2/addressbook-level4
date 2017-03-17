@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
             + "Parameters: NAME  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " exam t/CS2010";
+            + " exam from 10 Jan 8pm to 10 Jan 10pm t/CS2010";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
                 // TODO probably not worth but might want to consider allowing endDateTime to be optional
             }
             ZonedDateTime startDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
-            ZonedDateTime endDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
+            ZonedDateTime endDateTime = ParserUtil.parseDateTimeString(endDateTimeArgs.get());
             startEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime));
         }
 
