@@ -92,4 +92,18 @@ public class KeywordTokenizerTest {
         expected.put("EFGHI", "xyzabc  def");
         assertTrue(actual.equals(expected));
     }
+
+    @Test
+    public void tokenize_updateTaskCommand() {
+        String description = "update v0.3 enddate/next wednesday tags/ohno tag manysubtasks startdate/today";
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", "startdate/",
+                                                                                               "enddate/",
+                                                                                               "tags/");
+        HashMap<String, String> expected = new HashMap<String, String>();
+        expected.put("description", "update v0.3");
+        expected.put("startdate/", "today");
+        expected.put("enddate/", "next wednesday");
+        expected.put("tags/", "ohno tag manysubtasks");
+        assertTrue(actual.equals(expected));
+    }
 }
