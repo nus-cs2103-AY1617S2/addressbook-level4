@@ -7,10 +7,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
@@ -29,10 +31,10 @@ public class TaskListPanel extends UiPart<Region> {
         Status.THIS_WEEK, Status.IN_FUTURE
     };
 
-    @FXML
-    private ListView<TaskGroupPanel> taskListView;
-
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
+
+    @FXML
+    private VBox taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
@@ -66,41 +68,16 @@ public class TaskListPanel extends UiPart<Region> {
      * Instantiate TaskGroupPanel objects and add them to taskListView.
      */
     private void initTaskGroups() {
-        ObservableList<TaskGroupPanel> groups = FXCollections.observableArrayList();
         for (String groupName : groupNames) {
             TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, taskListMap.get(groupName));
-            groups.add(taskGroupPanel);
+            taskListView.getChildren().add(taskGroupPanel.getRoot());
         }
-        taskListView.setItems(groups);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
-    }
-
-    public void scrollTo(int index) {
-        Platform.runLater(() -> {
-            taskListView.scrollTo(index);
-            taskListView.getSelectionModel().clearAndSelect(index);
-        });
-    }
-
-    class TaskListViewCell extends ListCell<TaskGroupPanel> {
-
-        @Override
-        protected void updateItem(TaskGroupPanel panel, boolean empty) {
-            super.updateItem(panel, empty);
-
-            if (empty || panel == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new TaskGroupPanel(panel.getTitle(), panel.getTasks()).getRoot());
-            }
-        }
     }
 
 }
