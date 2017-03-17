@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new task | 
+`* * *` | user | add a new task |
 `* * *` | user | edit a new task | change information of a task
 `* * *` | user | delete a task | remove tasks that I no longer need to track
 `* * *` | user | list out all uncompleted tasks | To view outstanding tasks
@@ -357,7 +357,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
 `* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
 `* * *` | user | get more information about a command | learn how to use various commands
-`* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task 
+`* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task
 `* * *` | user | retrieve tasks by tag | so that I can see tasks associated with a label
 `* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
 `* * *` | user | assign priority to tasks | so that I can keep track of the priority of tasks

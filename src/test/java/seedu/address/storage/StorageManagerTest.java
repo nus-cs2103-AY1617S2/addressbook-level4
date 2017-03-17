@@ -14,8 +14,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.ToDoAppChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.ToDoApp;
 import seedu.address.model.ReadOnlyToDoApp;
+import seedu.address.model.ToDoApp;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.EventsCollector;
 import seedu.address.testutil.TypicalTestTasks;

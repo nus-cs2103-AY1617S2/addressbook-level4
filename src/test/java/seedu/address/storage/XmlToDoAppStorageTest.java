@@ -13,8 +13,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ToDoApp;
 import seedu.address.model.ReadOnlyToDoApp;
+import seedu.address.model.ToDoApp;
 import seedu.address.model.person.Task;
 import seedu.address.testutil.TypicalTestTasks;
 

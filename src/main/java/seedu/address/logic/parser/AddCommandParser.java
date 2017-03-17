@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -12,7 +13,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -24,12 +24,18 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_PRIORITY, PREFIX_TAG, PREFIX_NOTES);
         argsTokenizer.tokenize(args);
+
+        String name = argsTokenizer.getPreamble().get();
+        String start = argsTokenizer.getValue(PREFIX_START).orElse("");
+        String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
+        int priority = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
+        String notes = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
+
         try {
-            return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
+            return new AddCommand(name, start, deadline, priority,
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)), notes
             );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

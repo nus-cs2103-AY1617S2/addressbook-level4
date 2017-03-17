@@ -3,10 +3,9 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Task;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
-import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -23,7 +22,7 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
+
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
