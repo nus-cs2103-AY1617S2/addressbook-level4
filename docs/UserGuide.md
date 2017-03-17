@@ -50,8 +50,9 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
+Format: `add NAME [s/START_TIME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
 
+> * Task can have a start time
 > * Task can have a deadline
 > * Task can have a priority ranking from 1 - 5
 > * Task can have any number of tags (including 0)
@@ -60,6 +61,7 @@ Examples:
 
 * `add Buy Printer`
 * `add Do CS2103 Homework p/1 t/CS2103 n/Buy from Challenger.`
+* `add Do CS2101 Homework s/tomorrow d/next week.`
 
 ### 2.3. Listing out uncomplete tasks : `list`
 
