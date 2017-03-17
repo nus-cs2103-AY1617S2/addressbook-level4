@@ -63,7 +63,7 @@ public class XmlAddressBookStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        ToDoList original = td.getTypicalAddressBook();
+        ToDoList original = td.getTypicalToDoList();
         XmlToDoListStorage xmlAddressBookStorage = new XmlToDoListStorage(filePath);
 
         //Save in new file and read back
