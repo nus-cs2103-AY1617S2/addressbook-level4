@@ -36,7 +36,7 @@ import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 /**
@@ -74,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Description("Ali Muster"), new Priority("9482424"), new TaskDate("hans@google.com"), new TaskDate("hans@google.com"),  new UniqueTagList()),
-                new Task(new Description("Boris Mueller"), new Priority("87249245"), new TaskDate("ruth@google.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("Carl Kurz"), new Priority("95352563"), new TaskDate("heinz@yahoo.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("Daniel Meier"), new Priority("87652533"), new TaskDate("cornelia@google.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("Elle Meyer"), new Priority("9482224"), new TaskDate("werner@gmail.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("Fiona Kunz"), new Priority("9482427"), new TaskDate("lydia@gmail.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("George Best"), new Priority("9482442"), new TaskDate("anna@google.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("Hoon Meier"), new Priority("8482424"), new TaskDate("stefan@mail.com"), new TaskDate("hans@google.com"), new UniqueTagList()),
-                new Task(new Description("Ida Mueller"), new Priority("8482131"), new TaskDate("hans@google.com"), new TaskDate("hans@google.com"), new UniqueTagList())
+                new Task(new Description("Ali Muster"), new Priority("9482424"), new Timing("hans@google.com"), new Timing("hans@google.com"),  new UniqueTagList()),
+                new Task(new Description("Boris Mueller"), new Priority("87249245"), new Timing("ruth@google.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("Carl Kurz"), new Priority("95352563"), new Timing("heinz@yahoo.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("Daniel Meier"), new Priority("87652533"), new Timing("cornelia@google.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("Elle Meyer"), new Priority("9482224"), new Timing("werner@gmail.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("Fiona Kunz"), new Priority("9482427"), new Timing("lydia@gmail.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("George Best"), new Priority("9482442"), new Timing("anna@google.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("Hoon Meier"), new Priority("8482424"), new Timing("stefan@mail.com"), new Timing("hans@google.com"), new UniqueTagList()),
+                new Task(new Description("Ida Mueller"), new Priority("8482131"), new Timing("hans@google.com"), new Timing("hans@google.com"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

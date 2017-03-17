@@ -10,8 +10,8 @@ public interface ReadOnlyTask {
 
     Description getDescription();
     Priority getPriority();
-    TaskDate getStartDate();
-    TaskDate getEndDate();
+    Timing getStartTiming();
+    Timing getEndTiming();
     boolean isComplete();
 
     /**
@@ -28,8 +28,8 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getPriority() == this.getPriority()
-                && other.getStartDate().equals(this.getStartDate()))
-                && other.getEndDate().equals(this.getEndDate());
+                && other.getStartTiming().equals(this.getStartTiming()))
+                && other.getEndTiming().equals(this.getEndTiming());
     }
 
     /**
@@ -40,10 +40,10 @@ public interface ReadOnlyTask {
         builder.append(getDescription())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Start Date: ")
-                .append(getStartDate())
-                .append(" End Date: ")
-                .append(getEndDate())
+                .append(" Start Timing: ")
+                .append(getStartTiming())
+                .append(" End Timing: ")
+                .append(getEndTiming())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

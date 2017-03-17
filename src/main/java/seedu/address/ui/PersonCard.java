@@ -31,7 +31,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getDescription().description);
         id.setText(displayedIndex + ". ");
         phone.setText("Priority:" + person.getPriority().value);
-        email.setText(person.getStartDate().value);
+        email.setText(person.getStartTiming().value);
 //        endDate.setText(person.getEndDate().value);
         initTags(person);
     }

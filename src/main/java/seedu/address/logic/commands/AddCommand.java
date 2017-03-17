@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -46,8 +46,8 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Description(name),
                 new Priority(priority),
-                new TaskDate(startDate),
-                new TaskDate(endDate),
+                new Timing(startDate),
+                new Timing(endDate),
                 new UniqueTagList(tagSet)
         );
     }
