@@ -144,6 +144,9 @@ public class UniqueLabelListTest {
 
         //Test different order
         assertTrue(normalList.equalsOrderInsensitive(unorderedList));
+
+        //Test null
+        assertFalse(normalList.equalsOrderInsensitive(disruptiveList));
     }
 
     @Test
