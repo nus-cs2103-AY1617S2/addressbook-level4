@@ -10,6 +10,7 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,8 +80,16 @@ public class AddCommandParser {
         if (tagsParameterString.isPresent()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
         }
-        Task toAdd = new Task(new Description(preamble), tagList);
 
+        Date startDate = null, endDate = null;
+        Optional<String> from = tokenizer.getValue(PREFIX_FROM);
+        Optional<String> to = tokenizer.getValue(PREFIX_TO);
+        if (from.isPresent() && to.isPresent()) {
+            startDate = ParserUtil.parseDate(from.toString());
+            endDate =  ParserUtil.parseDate(to.toString());
+        }
+
+        Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);
         // set priority
         Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
         if (priority.isPresent()) {
