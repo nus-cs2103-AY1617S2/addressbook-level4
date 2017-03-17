@@ -1,10 +1,28 @@
 # Developer Guide
-*  [Setting Up](#setting-up)
-* [Design](#design)
-* [Implementation](#implementation)
-* [Testing](#testing)
-* [Dev Ops](#dev-ops)
-
+1. [Setting Up](#setting-up)
+   * 1.1. [Prerequisites](#prerequisites)
+   * 1.2. [Importing the project into Eclipse](#importing-the-project-into-eclipse)
+   * 1.3. [Configuring Checkstyle](#configuring-checkstyle)
+   * 1.4. Troubleshooting project setup
+2. [Design](#design)
+   * 2.1. Architecture
+   * 2.2. UI component
+   * 2.3. Logic component
+   * 2.4. Model component
+   * 2.5. Storage component
+   * 2.6. Common classes
+3. [Implementation](#implementation)
+   * 3.1. Logging
+   * 3.2. Configuration
+4. [Testing](#testing)
+   * 4.1. Troubleshooting tests
+5. [Dev Ops](#dev-ops)
+   * 5.1. Build Automation
+   * 5.2. Continuous Integration
+   * 5.3. Publishing Documentation
+   * 5.4. Making a Release
+   * 5.5. Converting Documentation to PDF format
+   
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -12,9 +30,9 @@
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## Setting up
+## 1. Setting up
 
-### Prerequisites
+### 1.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
     > Having any Java 8 version is not enough.
@@ -27,7 +45,7 @@
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### Importing the project into Eclipse
+### 1.2. Importing the project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -40,9 +58,9 @@
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * If Eclipse has auto-changed any settings files during the import process, you can discard those changes.
 
-### Configuring Checkstyle
+### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. taskManager
@@ -53,7 +71,7 @@
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### Troubleshooting project setup
+### 1.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -67,9 +85,9 @@
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## Design
+## 2. Design
 
-### Architecture
+### 2.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -80,7 +98,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/description/MainApp.java). It is responsible for,
+`Main` only has one class called [`MainApp`](../src/main/java/seedu/description/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -88,14 +106,14 @@ Given below is a quick overview of each component.
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
+* `EventsCenter` : Used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
+  (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`UI`**](#ui-component) : Displays the User interface(UI) of the App.
+* [**`Logic`**](#logic-component) : Executes commands input by the user.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
@@ -117,7 +135,7 @@ command `delete 1`.
 <img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
+> Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -131,7 +149,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### UI component
+### 2.2. UI component
 
 Author: Ye Huan Hui
 
@@ -154,9 +172,9 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### Logic component
+### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Lee Jin Shun
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -173,26 +191,26 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### Model component
+### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Hon Kean Wai
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/description/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* Stores a `UserPref` object that represents the user's preferences.
+* Stores the Task Manager data.
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* Does not depend on any of the other three components.
 
-### Storage component
+### 2.5. Storage component
 
-Author: Darius Foong
+Author: Chew Chia Sin
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -201,16 +219,16 @@ _Figure 2.5.1 : Structure of the Storage Component_
 
 The `Storage` component,
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
+* Saves `UserPref` objects in json format and reads it back.
+* Saves the Task Manager data in xml format and reads it back.
 
-### Common classes
+### 2.6. Common classes
 
 Classes used by multiple components are in the `seedu.doit.commons` package.
 
-## Implementation
+## 3. Implementation
 
-### Logging
+### 3.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -229,13 +247,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### Configuration
+### 3.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## Testing
+## 4. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -272,7 +290,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### Troubleshooting tests
+### 4.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -282,23 +300,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## Dev Ops
+## 5. Dev Ops
 
-### Build Automation
+### 5.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### Continuous Integration
+### 5.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### Publishing Documentation
+### 5.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### Making a Release
+### 5.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -307,7 +325,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### Converting Documentation to PDF format
+### 5.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -324,7 +342,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### Managing Dependencies
+### 5.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
