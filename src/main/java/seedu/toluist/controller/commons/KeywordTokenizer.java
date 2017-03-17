@@ -41,7 +41,7 @@ public class KeywordTokenizer {
                 indexKeywordPairs.add(indexKeywordPair);
             }
         }
-        if (indexKeywordPairs.size() == 0) {
+        if (indexKeywordPairs.isEmpty()) {
             if (StringUtil.isPresent(description) && StringUtil.isPresent(defaultKeyword)) {
                 tokens.put(defaultKeyword, description);
             }
