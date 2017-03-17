@@ -20,7 +20,7 @@ public class RedoController extends Controller {
     private static final String REDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "List redo-ed %d times";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(RedoController.class);
 
     public RedoController(Ui renderer) {
         super(renderer);

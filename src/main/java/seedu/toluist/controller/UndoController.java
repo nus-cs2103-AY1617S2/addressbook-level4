@@ -20,7 +20,7 @@ public class UndoController extends Controller {
     private static final String UNDO_TIMES = "number";
     private static final String RESULT_MESSAGE_TEMPLATE = "List undo-ed %d times";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
     public UndoController(Ui renderer) {
         super(renderer);

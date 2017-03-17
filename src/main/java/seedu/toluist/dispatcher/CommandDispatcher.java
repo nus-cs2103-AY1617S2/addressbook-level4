@@ -37,7 +37,7 @@ import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 

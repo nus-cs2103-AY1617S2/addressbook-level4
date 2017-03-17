@@ -31,7 +31,7 @@ public class MarkController extends Controller {
     private static final String INDEX_TERM = "index";
     private static final String MARK_COMPLETE = "complete";
     private static final String MARK_INCOMPLETE = "incomplete";
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(MarkController.class);
 
     public MarkController(Ui renderer) {
         super(renderer);

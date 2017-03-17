@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
@@ -15,11 +14,10 @@ import seedu.toluist.ui.UiStore;
  * ListController is responsible for rendering the initial UI
  */
 public class ClearController extends Controller {
+    private static final Logger logger = LogsCenter.getLogger(ClearController.class);
     private static final String RESULT_MESSAGE = "All tasks cleared.";
     private static final String COMMAND_WORD = "clear";
-    private static final String COMMAND_REGEX = "^clear *";
-
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final String COMMAND_REGEX = "^clear\\s*";
 
     public ClearController(Ui renderer) {
         super(renderer);
@@ -29,7 +27,7 @@ public class ClearController extends Controller {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.load();
-        todoList.setTasks(new ArrayList<Task>());
+        todoList.setTasks(new ArrayList<>());
         todoList.save();
 
         UiStore.getInstance().setTask(todoList.getTasks());
