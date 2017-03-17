@@ -9,7 +9,7 @@ import seedu.task.model.tag.UniqueTagList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask,Comparable<ReadOnlyTask> {
 
     private Name name;
     private Date startDate;
@@ -145,5 +145,12 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-
+    
+    @Override
+    public int compareTo(ReadOnlyTask o) {
+        if(Date.doesPrecede(this.getEndDate(), o.getEndDate())) 
+            return -1;
+        else 
+            return 1;
+    }
 }

@@ -81,4 +81,13 @@ public class Date {
         return value.hashCode();
     }
 
+    /**
+     * Compares two dates and returns true if date1 precedes date 2
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static boolean doesPrecede(Date date1, Date date2){
+       return date1.value.before(date2.value);
+    }
 }
