@@ -24,7 +24,7 @@ public class DeleteTaskController extends Controller {
 
     private static final String RESULT_MESSAGE_DELETE_TASK = "Deleted %s: %s";
 
-    private Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
     public DeleteTaskController(Ui renderer) {
         super(renderer);

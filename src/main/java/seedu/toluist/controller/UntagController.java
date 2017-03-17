@@ -31,7 +31,7 @@ public class UntagController extends Controller {
     private static final String FAIL_MESSAGE_TEMPLATE = "Failed to remove \"%s\".\n";
     private static final String RESULT_MESSAGE_TEMPLATE = "%s%d tag(s) successfully removed.";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(UntagController.class);
 
     public UntagController(Ui renderer) {
         super(renderer);
