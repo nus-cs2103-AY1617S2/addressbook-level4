@@ -70,7 +70,7 @@ public class DateTime {
      * i.e May 19, 2017 8:30 PM
      */
     public String formatDateTime() {
-        SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy hh:mm aa");
+        SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy h:mm aa");
         SimpleDateFormat sdfToday = new SimpleDateFormat("MMM dd, yyyy");
         // No time provided by user
         if (this.IsTimeInferred()) {
