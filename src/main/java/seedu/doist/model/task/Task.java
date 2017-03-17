@@ -33,6 +33,10 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
+    public Task(Description name, Priority priority, FinishedStatus finishedStatus, UniqueTagList tags) {
+        this(name, priority, finishedStatus, tags, null, null);
+    }
+
     public Task(Description name, Priority priority, UniqueTagList tags) {
         this(name, priority, new FinishedStatus(), tags, null, null);
     }
