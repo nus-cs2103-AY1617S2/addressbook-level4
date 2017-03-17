@@ -66,7 +66,7 @@ public class TaskManagerTest {
         List<Category> newCategories = new ArrayList<>(typicalTaskManager.getCategoryList());
         // Repeat the first category twice
         newCategories.add(newCategories.get(0));
-        TaskManagerStub newData = new TaskManagerStub(newTaskss, newCategories);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
