@@ -14,18 +14,20 @@ public class XmlAdaptedCategory {
     public String categoryName;
 
     /**
-     * Constructs an XmlAdaptedCategory.
-     * This is the no-arg constructor that is required by JAXB.
-	 */
-    public XmlAdaptedCategory() {}
+     * Constructs an XmlAdaptedCategory. This is the no-arg constructor that is
+     * required by JAXB.
+     */
+    public XmlAdaptedCategory() {
+    }
 
     /**
      * Converts a given Category into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created
-	 */
+     * @param source
+     *            future changes to this will not affect the created
+     */
     public XmlAdaptedCategory(Category source) {
-    	categoryName = source.categoryName;
+        categoryName = source.categoryName;
     }
 
     /**

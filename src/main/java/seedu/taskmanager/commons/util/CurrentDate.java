@@ -192,14 +192,14 @@ public class CurrentDate {
 
         if (day < 10) {
             stringDay = "0" + Integer.toString(day);
-        } else
+        } else {
             stringDay = Integer.toString(day);
-
+        }
         if (month < 10) {
             stringMonth = "0" + Integer.toString(month);
-        } else
+        } else {
             stringMonth = Integer.toString(month);
-
+        }
         stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
 
         newdate = stringDay + "/" + stringMonth + "/" + stringYear;
@@ -238,12 +238,15 @@ public class CurrentDate {
 
         int diffInDays = dayOfWeek - inputDay;
 
-        if (diffInDays == 0)
+        if (diffInDays == 0) {
             return getCurrentDate();
-        if (diffInDays > 0)
+        }
+        if (diffInDays > 0) {
             day += (7 - diffInDays);
-        if (diffInDays < 0)
+        }
+        if (diffInDays < 0) {
             day -= diffInDays;
+        }
 
         LocalDate testdate = LocalDate.of(year, month, day);
         int testdays = testdate.lengthOfMonth();
@@ -252,7 +255,6 @@ public class CurrentDate {
             month += 1;
             day -= testdays;
         }
-
         if (month > 12) {
             month = 1;
             year += 1;
