@@ -17,18 +17,18 @@ public class AddCommandTest extends TaskBossGuiTest {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
-        assertAddSuccess(taskToAdd, currentList);
+        assertAddSuccess(false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
         taskToAdd = td.ida;
-        assertAddSuccess(taskToAdd, currentList);
+        assertAddSuccess(false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task using short command
-        commandBox.runCommand(td.kelvin.getShortAddCommand());
+        taskToAdd = td.kelvin;
+        assertAddSuccess(true, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());
@@ -37,15 +37,19 @@ public class AddCommandTest extends TaskBossGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(false, td.alice);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
-        commandBox.runCommand(taskToAdd.getAddCommand());
+    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList) {
+        if (isShortCommand) {
+            commandBox.runCommand(taskToAdd.getShortAddCommand());
+        } else {
+            commandBox.runCommand(taskToAdd.getAddCommand());
+        }
 
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
