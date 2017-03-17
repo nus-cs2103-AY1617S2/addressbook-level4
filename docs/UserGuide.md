@@ -53,7 +53,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[add](#22-adding-a-task-add)                         |Add a task             |
 |[list](#23-listing-all-tasks--list)                  |List the tasks         |
 |[edit](#24-editing-a-task--edit)                     |Edit a task            |
-|[find](#25-finding-all-tasks-by-name-or-by-datetime--find)           |Find tasks             |
+|[find](#25-finding-all-tasks-by-name-or-by-datetime--find)           |Find tasks by name or by datetime             |
 |[delete](#26-deleting-a-task--delete)                |Delete a task          |
 |[new](#27-creating-a-category--new)               |Create a category      |
 |[clear](#28-clearing-tasks-by-category--clear)       |Clear tasks in category|
@@ -61,7 +61,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[name](#210-modifying-a-category-name--name)         |Rename a category      |
 |[done](#211-marking-a-task-done--done)               |Mark task as done      |
 |[undo](#212-undoing-a-command--undo)                 |Undo a task            |
-|[sort](#213-sorting-tasks--sort)                     |Sort tasks by deadline |
+|[sort](#213-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
 |[save](#225-exporting-the-data--save)                |Save TaskBoss          |
 |[exit](#216-exiting-the-program--exit)               |Exit TaskBoss          |
 
