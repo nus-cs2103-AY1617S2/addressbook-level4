@@ -19,7 +19,7 @@ OneTwoDo also supports the following for developers:
 
 #### Site Map
 * [User Guide](https://cs2103jan2017-f14-b1.github.io/main/UserGuide.pdf)
-* [Developer Guide](https://cs2103jan2017-f14-b1.github.io/main/DeveloperGuide.html)
+* [Developer Guide](https://cs2103jan2017-f14-b1.github.io/main/DeveloperGuide.pdf)
 * [Learning Outcomes](docs/LearningOutcomes.md)
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
