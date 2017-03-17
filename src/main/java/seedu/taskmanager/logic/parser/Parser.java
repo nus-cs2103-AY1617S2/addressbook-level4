@@ -18,6 +18,7 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
+import seedu.taskmanager.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -80,6 +81,9 @@ public class Parser {
             
         case ChangeDirectoryCommand.COMMAND_WORD:
             return new ChangeDirectoryCommandParser().parse(arguments);
+            
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
