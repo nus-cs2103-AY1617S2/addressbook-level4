@@ -244,6 +244,30 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
+
+    //========== handle undo and redo operation =================================================
+    public void saveCurrentToHistory() {
+        TodoList toSave = new TodoList();
+        toSave.resetData(todoList);
+        todoListHistory.addToHistory(toSave);
+        todoListHistory.forgetStatesAfter();
+    }
+
+    public void recoverPreviousTodoList() {
+        TodoList previousTodoList = todoListHistory.getPreviousState();
+        System.out.println(previousTodoList);
+        if (previousTodoList != null) {
+            todoList.resetData(previousTodoList);
+        }
+    }
+
+    public void recoverNextTodoList() {
+        TodoList nextTodoList = todoListHistory.getNextState();
+        System.out.println(nextTodoList);
+        if (nextTodoList != null) {
+            todoList.resetData(nextTodoList);
+        }
+    }
 }
 
 

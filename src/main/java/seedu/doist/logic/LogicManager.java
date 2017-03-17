@@ -32,11 +32,20 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+
+        model.saveCurrentToHistory();
         return command.execute();
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredTaskList();
+    }
+
+    public void undo() {
+        model.recoverPreviousTodoList();
+    }
+    public void redo() {
+        model.recoverNextTodoList();
     }
 }

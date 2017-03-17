@@ -20,4 +20,6 @@ public interface Logic {
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredPersonList();
 
+    void undo();
+    void redo();
 }

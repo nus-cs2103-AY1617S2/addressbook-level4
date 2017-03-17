@@ -57,4 +57,9 @@ public interface Model {
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
     void sortTasksByPriority();
+
+    //========== handle undo and redo operation =================================================
+    void saveCurrentToHistory();
+    void recoverPreviousTodoList();
+    void recoverNextTodoList();
 }

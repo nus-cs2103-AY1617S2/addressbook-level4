@@ -49,6 +49,12 @@ public class CommandBox extends UiPart<Region> {
             handleUpKey();
         } else if (event.getCode() == KeyCode.DOWN) {
             handleDownKey();
+        } else if (event.getCode() == KeyCode.RIGHT) {
+            event.consume();
+            logic.redo();
+        } else if (event.getCode() == KeyCode.LEFT) {
+            event.consume();
+            logic.undo();
         }
     }
 
