@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -91,6 +92,15 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
+
+    @Override
+    public synchronized void completeTodo(int filteredTodoListIndex, Date completeTime) {
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.completeTodo(filteredTodoListIndex, completeTime);
+        previousTodoList = tempTodoList;
+        indicateTodoListChanged();
+    }
+
 
     @Override
     public void loadPreviousState() throws NoPreviousStateException {

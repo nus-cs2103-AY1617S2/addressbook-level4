@@ -1,5 +1,6 @@
 package seedu.address.model.todo;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -62,6 +63,15 @@ public class UniqueTodoList implements Iterable<Todo> {
         // The right way is to implement observable properties in the Todo class.
         // Then, TodoCard should then bind its text labels to those observable properties.
         internalList.set(index, todoToUpdate);
+    }
+
+    /**
+     * Completes the todo in the list at position {@code index} with {@code completeTime}
+     */
+    public void completeTodo(int index, Date completeTime) {
+        Todo todoToComplete = internalList.get(index);
+        todoToComplete.setCompleteTime(completeTime);
+        internalList.set(index, todoToComplete);
     }
 
     /**

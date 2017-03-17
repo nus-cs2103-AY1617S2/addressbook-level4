@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -107,6 +108,13 @@ public class TodoList implements ReadOnlyTodoList {
         // This can cause the tags master list to have additional tags that are not tagged to any todo
         // in the todo list.
         todos.updateTodo(index, editedTodo);
+    }
+
+    /**
+     * Completes the todo in the list at position {@code index} with {@code completeTime}.
+     */
+    public void completeTodo(int index, Date completeTime) {
+        todos.completeTodo(index, completeTime);
     }
 
     /**

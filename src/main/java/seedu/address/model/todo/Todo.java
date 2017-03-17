@@ -90,13 +90,13 @@ public class Todo implements ReadOnlyTodo {
     public Date getEndTime() {
         return endtime;
     }
-    
+
     public void setCompleteTime(Date completeTime) {
         if (completeTime != null) {
             this.completeTime = completeTime;
         }
     }
-    
+
     @Override
     public Date getCompleteTime() {
         return completeTime;

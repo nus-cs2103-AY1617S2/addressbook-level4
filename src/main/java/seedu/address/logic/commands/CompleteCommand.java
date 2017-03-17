@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.todo.ReadOnlyTodo;
-import seedu.address.model.todo.UniqueTodoList.TodoNotFoundException;
 
 /**
  * Completes a todo identified using its last displayed index from the todo list
@@ -21,10 +25,22 @@ public class CompleteCommand extends Command {
 
     public static final String MESSAGE_COMPLETE_TODO_SUCCESS = "Completed Todo: %1$s";
 
-    public final int targetIndex;
+    public static final String COMPLETE_TIME_FORMAT = "yy-MM-dd'T'HH:mm";
+
+    public final int filteredTodoListIndex;
+    public final Date completeTime;
 
     public CompleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+        // convert index from 1 based to 0 based
+        this.filteredTodoListIndex = targetIndex - 1;
+        this.completeTime = new Date();
+    }
+
+    public CompleteCommand(int targetIndex, String completeTime) throws ParseException {
+     // convert index from 1 based to 0 based
+        this.filteredTodoListIndex = targetIndex - 1;
+        DateFormat completeTimeFormat = new SimpleDateFormat(COMPLETE_TIME_FORMAT);
+        this.completeTime = completeTimeFormat.parse(completeTime);
     }
 
     @Override
@@ -32,19 +48,14 @@ public class CompleteCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTodo> lastShownList = model.getFilteredTodoList();
 
-        if (lastShownList.size() < targetIndex) {
+        if (lastShownList.size() <= filteredTodoListIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTodo todoToComplete = lastShownList.get(targetIndex - 1);
+        model.completeTodo(filteredTodoListIndex, completeTime);
 
-        try {
-            model.completeTodo(todoToComplete);
-        } catch (TodoNotFoundException tnfe) {
-            assert false : "The target todo cannot be missing";
-        }
-
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TODO_SUCCESS, todoToComplete));
+        return new CommandResult(String.format(MESSAGE_COMPLETE_TODO_SUCCESS,
+                lastShownList.get(filteredTodoListIndex)));
     }
 
 }
