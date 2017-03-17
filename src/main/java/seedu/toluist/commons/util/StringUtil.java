@@ -8,6 +8,10 @@ import java.io.StringWriter;
  */
 public class StringUtil {
 
+    /**
+     * Returns true if string is not null and not empty
+     * @param string
+     */
     public static boolean isPresent(String string) {
         return string != null && !string.isEmpty();
     }
