@@ -1,6 +1,6 @@
 package seedu.toluist.storage;
 
-import java.util.Optional;
+import java.io.IOException;
 
 import javafx.util.Pair;
 import seedu.toluist.model.TodoList;
@@ -10,21 +10,46 @@ import seedu.toluist.model.TodoList;
  */
 public interface TodoListStorage {
     /**
-     * Serialize a todolist to the disk
+     * Serialize a todolist to the disk, using a default storage path
+     * supplied by the singleton Config
      * @param todoList todolist to be saved
      * @return true if the saving was successful, false otherwise
      */
     boolean save(TodoList todoList);
 
     /**
-     * Load todo list data from disk
-     * @return Optional.of(todoList) if the todo list can be loaded, Optional.empty() otherwise
+     * Serialize a todolist to the disk at the specified storage path
+     * If saving is successful, the todolist storage path in the config will be changed
+     * accordingly
+     * @param todoList todolist to be saved
+     * @param todoListStoragePath storage path to save todo list data at
+     * @return true if the saving was successful, false otherwise
      */
-    Optional<TodoList> load();
+    boolean save(TodoList todoList, String todoListStoragePath);
+
+    /**
+     * Load todo list data from disk, using a default storage path
+     * supplied by the singleton Config
+     * @return todo list data
+     * @throws IOException if data cannot be loaded
+     */
+    TodoList load() throws IOException;
+
+    /**
+     * Load todo list data from disk from the specified storage path
+     * If loading is successful, the todolist storage path in the config will be changed
+     * accordingly
+     * @return todo list data
+     * @param todoListStoragePath storage path to load todo list data from
+     * @throws IOException if data cannot be loaded
+     */
+    TodoList load(String todoListStoragePath) throws IOException;
 
     /**
      * Move the todo list data to somewhere else
-     * @param todoListStoragePath
+     * If moving is successful, the todolist storage path in the config will be changed
+     * accordingly
+     * @param todoListStoragePath storage path to move todo list data to
      * @return true if the moving was successful, false otherwise
      */
     boolean move(String todoListStoragePath);

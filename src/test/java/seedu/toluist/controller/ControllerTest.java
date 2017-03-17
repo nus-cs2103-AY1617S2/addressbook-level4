@@ -3,7 +3,7 @@ package seedu.toluist.controller;
 import static junit.framework.TestCase.fail;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,8 +38,8 @@ public abstract class ControllerTest {
     protected abstract Controller controllerUnderTest(Ui renderer);
 
     @Before
-    public void setUp() {
-        when(storage.load()).thenReturn(Optional.of(new TypicalTestTodoLists().getTypicalTodoList()));
+    public void setUp() throws IOException {
+        when(storage.load()).thenReturn(new TypicalTestTodoLists().getTypicalTodoList());
         todoList = new TodoList(storage);
         controller = controllerUnderTest(renderer);
     }

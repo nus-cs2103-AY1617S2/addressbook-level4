@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import seedu.toluist.TestApp;
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.controller.StoreController;
 import seedu.toluist.model.TodoList;
@@ -18,7 +19,7 @@ import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
- * Gui tests for saveConfig command
+ * Gui tests for save command
  */
 public class SaveCommandTest extends ToLuistGuiTest {
     @Test
@@ -35,7 +36,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
         TodoList todoListAtSavedLocation = TodoList.load();
         assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
                                                     new TypicalTestTodoLists().getTypicalTodoList()));
-        assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SAVING_SUCCESS, newPath));
+        assertResultMessage(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, newPath));
     }
 
     @Test
@@ -54,7 +55,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
             assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
                     new TypicalTestTodoLists().getTypicalTodoList()));
             assertResultMessage(String.format(StoreController.RESULT_MESSAGE_WARNING_OVERWRITE, newPath)
-                + "\n" + String.format(StoreController.RESULT_MESSAGE_SAVING_SUCCESS, newPath));
+                + "\n" + String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, newPath));
         } catch (IOException e) {
             fail("Should not reach here");
         }
@@ -66,7 +67,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
         String command = "save " + newPath;
         commandBox.runCommand(command);
 
-        assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SAME_LOCATION, newPath));
+        assertResultMessage(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, newPath));
     }
 
     @Test
@@ -74,7 +75,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
         String command = "save ";
         commandBox.runCommand(command);
 
-        assertResultMessage(StoreController.RESULT_MESSAGE_NO_STORAGE_PATH);
+        assertResultMessage(Messages.MESSAGE_NO_STORAGE_PATH);
     }
 
     @Test
@@ -83,6 +84,6 @@ public class SaveCommandTest extends ToLuistGuiTest {
         String command = "save " + newPath;
         commandBox.runCommand(command);
 
-        assertResultMessage(String.format(StoreController.RESULT_MESSAGE_SAVING_FAILURE, newPath));
+        assertResultMessage(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, newPath));
     }
 }
