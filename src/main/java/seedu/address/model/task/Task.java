@@ -17,7 +17,7 @@ public class Task implements ReadOnlyTask {
     private static final String DEFAULT_DESCRIPTION = "";
     private static final IdentificationNumber DEFAULT_ID = IdentificationNumber.ZERO;
 
-    private IdentificationNumber ID;
+    //private IdentificationNumber ID;
     private Name name;
     private Description description;
     private Deadline deadline;
@@ -54,10 +54,7 @@ public class Task implements ReadOnlyTask {
 
             } else if (param instanceof Tag) {
                 this.tags.add((Tag) param);
-
-            } else if (param instanceof IdentificationNumber) {
-                this.ID = (IdentificationNumber) param;
-            }
+            } 
         }
     }
 
@@ -65,10 +62,10 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getID(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getDeadline(), source.getDescription(), source.getTags());
     }
 
-    public Task(Name name2, IdentificationNumber identificationNumber, Description description2, Deadline deadline2,
+    public Task(Name name2, Description description2, Deadline deadline2,
         UniqueTagList uniqueTagList) {
         // TODO Auto-generated constructor stub
     }
@@ -76,6 +73,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Getters and setters
      */
+    
+    /*
     public Task setID(IdentificationNumber ID) {
         this.ID = ID;
         return this;
@@ -89,6 +88,7 @@ public class Task implements ReadOnlyTask {
     public boolean isIDUnassigned() {
         return ID.equals(DEFAULT_ID);
     }
+    */
 
     public Task setName(Name name) {
         assert name != null;
@@ -147,7 +147,6 @@ public class Task implements ReadOnlyTask {
     public Task resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setID(replacement.getID());
         this.setName(replacement.getName());
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());

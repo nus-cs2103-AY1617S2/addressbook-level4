@@ -73,11 +73,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      */
     public void addTask(Task t) {
-        // TODO: Need to check if task with given ID already exists
-        if (t.isIDUnassigned()) {
-            t.setID(new IdentificationNumber(nextAvailableID));
-            nextAvailableID.inc();
-        }
         syncMasterTagListWith(t);
         tasks.add(t);
     }
