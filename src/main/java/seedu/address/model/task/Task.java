@@ -78,7 +78,7 @@ public class Task implements ReadOnlyTask {
      * Getters and setters
      */
     public Task setID(IdentificationNumber ID) {
-        this.ID = ID;
+        this.ID = new IdentificationNumber(1);
         return this;
     }
 
