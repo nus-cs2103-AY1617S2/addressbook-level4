@@ -173,13 +173,15 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
 
     @Override
     public Date getStartDateParameter() throws ParseException {
-        Date deadlineParameter = new Date(Long.MAX_VALUE -1); //appear before floating task
+      //appear before floating task
+        Date deadlineParameter = new Date(Long.MAX_VALUE - 1);
         return deadlineParameter;
     }
 
     @Override
     public Date getEndDateParameter() throws ParseException {
-        Date deadlineParameter = new Date(Long.MAX_VALUE -1); //appear before floating task
+        //appear before floating task
+        Date deadlineParameter = new Date(Long.MAX_VALUE - 1);
         return deadlineParameter;
     }
 }
