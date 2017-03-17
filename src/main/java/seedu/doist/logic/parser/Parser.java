@@ -22,6 +22,7 @@ import seedu.doist.logic.commands.ResetAliasCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.SortCommand;
 import seedu.doist.logic.commands.UnfinishCommand;
+import seedu.doist.logic.commands.ViewAliasCommand;
 
 /**
  * Parses user input.
@@ -76,6 +77,8 @@ public class Parser {
             return new AliasCommandParser().parse(arguments);
         } else if (ResetAliasCommand.info().canBeTriggeredByWord(commandWord)) {
             return new ResetAliasCommand();
+        } else if (ViewAliasCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new ViewAliasCommand();
         } else {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

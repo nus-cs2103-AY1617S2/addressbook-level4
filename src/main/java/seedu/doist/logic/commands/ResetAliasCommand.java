@@ -1,7 +1,7 @@
 package seedu.doist.logic.commands;
 
 /**
- * Terminates the program.
+ * Reset aliases to the default.
  */
 public class ResetAliasCommand extends Command {
 

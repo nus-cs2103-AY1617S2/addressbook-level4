@@ -46,7 +46,7 @@ public class AliasCommandParser {
             if (parameter == null || parameter.isEmpty()) {
                 throw new IllegalValueException(MESSAGE_COMMAND_WORD_NOT_SPECIFIED);
             }
-            if (!preamble.matches("[a-zA-Z]+")) {
+            if (!preamble.matches("[a-zA-Z_]+")) {
                 throw new IllegalValueException(MESSAGE_ALIAS_FORMAT_INVALID);
             }
             String commandWord = parameter.get(0);
