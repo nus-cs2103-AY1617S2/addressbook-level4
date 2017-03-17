@@ -1,28 +1,36 @@
 # Using Gradle
+<br>
 
-[Gradle](https://gradle.org/) is a build automation tool. It can automate build-related tasks such as
+[Gradle](https://gradle.org/) is a build automation tool. It can automate build-related tasks such as:
 * Running tests
 * Managing library dependencies
 * Analyzing code for style compliance
+<br>
 
 The gradle configuration for this project is defined in the _build script_  [`build.gradle`](../build.gradle).
-> To learn more about gradle build scripts,
-refer [Build Scripts Basics](https://docs.gradle.org/current/userguide/tutorial_using_tasks.html).
+
+> To learn more about gradle build scripts, read up on [Build Scripts Basics](https://docs.gradle.org/current/userguide/tutorial_using_tasks.html).
+
+<br><br>
 
 ## Running Gradle Commands
 
-To run a Gradle command, open a command window on the project folder and enter the Gradle command.
+To run a Gradle command, open a command window on the project folder and enter the Gradle command.<br>
 Gradle commands look like this:
-* On Windows :`gradlew <task1> <task2> ...` e.g. `gradlew clean allTests`
+* On Windows  : `gradlew <task1> <task2> ...` e.g. `gradlew clean allTests`
 * On Mac/Linux: `./gradlew <task1> <task2>...`  e.g. `./gradlew clean allTests`
+<br>
 
-> If you do not specify any tasks, Gradlew will run the default tasks `clean` `headless` `allTests` `coverage`
+> If you do not specify any tasks, Gradle will run the default tasks `clean` `headless` `allTests` `coverage`.
+
+<br><br>
 
 ## Cleaning the Project
 
 * **`clean`** <br>
   Deletes the files created during the previous build tasks (e.g. files in the `build` folder).<br>
   e.g. `./gradlew clean`
+  <br>
 
   >**Tip `clean` to force Gradle to execute a task**: <br>
   When running a Gradle task, Gradle will try to figure out if the task needs running at all.
@@ -32,20 +40,27 @@ Gradle commands look like this:
   that task with `clean`. Once the build files have been `clean`ed, Gradle has no way to determine if
   the output will be same as before, so it will be forced to execute the task.
 
+<br><br>
+
 ## Creating the JAR file
 
 * **`shadowJar`** <br>
   Creates the `addressbook.jar` file in the `build/jar` folder, _if the current file is outdated_.<br>
   e.g. `./gradlew shadowJar`
-
+  <br>
+  
   > To force Gradle to create the JAR file even if the current one is up-to-date, you can '`clean`' first. <br>
     e.g. `./gradlew clean shadowJar`
+<br>
 
 **Note: Why do we create a fat JAR?**
+
 If we package only our own class files into the JAR file, it will not work properly unless the user has all the other
   JAR files (i.e. third party libraries) our classes depend on, which is rather inconvenient.
   Therefore, we package all dependencies into a single JAR files, creating what is also known as a _fat_ JAR file.
   To create a fat JAR fil, we use the Gradle plugin [shadow jar](https://github.com/johnrengelman/shadow).
+  
+<br><br>
 
 ## Running the application
 
@@ -54,6 +69,8 @@ If we package only our own class files into the JAR file, it will not work prope
 
 * **`runShadow`** <br>
   Builds the application as a fat JAR, and then runs it.
+
+<br><br>
 
 ## Running code style checks
 
@@ -65,6 +82,8 @@ If we package only our own class files into the JAR file, it will not work prope
 
 The set of code style rules implemented can be found in `config/checkstyle/checkstyle.xml`.
 To enable _exceptions_ to code styles, add in the comment `//CODESTYLE.OFF: RuleName` at the start of the section and  `//CODESTYLE.ON: RuleName` at the end of the section.
+
+<br><br>
 
 ## Running Tests
 
@@ -86,6 +105,7 @@ Here are some examples:
 * `./gradlew headless allTests` -- Runs all tests in headless mode
 * `./gradlew clean nonGuiTests` -- Cleans the project and runs non-GUI tests
 
+<br><br>
 
 ## Updating Dependencies
 
@@ -96,6 +116,8 @@ relevant Gradle tasks.
  Checks whether the project has the required dependencies to compile and run the main program, and download
  any missing dependencies before compiling the classes.<br>
  See `build.gradle` -> `allprojects` -> `dependencies` -> `compile` for the list of dependencies required.
+ 
+ <br>
 
 * **`compileTestJava`**<br>
   Checks whether the project has the required dependencies to perform testing, and download
