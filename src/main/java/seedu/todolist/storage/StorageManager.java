@@ -20,18 +20,18 @@ import seedu.todolist.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private ToDoListStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ToDoListStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
     public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlAddressBookStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+        this(new XmlToDoListStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -50,30 +50,30 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public String getToDoListFilePath() {
+        return addressBookStorage.getToDoListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyToDoList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException {
+        return readToDoList(addressBookStorage.getToDoListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyToDoList> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyToDoList> readToDoList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return addressBookStorage.readToDoList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyToDoList addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveToDoList(ReadOnlyToDoList addressBook) throws IOException {
+        saveToDoList(addressBook, addressBookStorage.getToDoListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyToDoList addressBook, String filePath) throws IOException {
+    public void saveToDoList(ReadOnlyToDoList addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        addressBookStorage.saveToDoList(addressBook, filePath);
     }
 
 
@@ -82,7 +82,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleAddressBookChangedEvent(ToDoListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveToDoList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

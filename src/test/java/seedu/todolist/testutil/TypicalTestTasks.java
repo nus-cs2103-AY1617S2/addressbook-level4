@@ -33,7 +33,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(ToDoList ab) {
+    public static void loadToDoListWithSampleData(ToDoList ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
@@ -47,9 +47,9 @@ public class TypicalTestTasks {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public ToDoList getTypicalAddressBook() {
+    public ToDoList getTypicalToDoList() {
         ToDoList ab = new ToDoList();
-        loadAddressBookWithSampleData(ab);
+        loadToDoListWithSampleData(ab);
         return ab;
     }
 }

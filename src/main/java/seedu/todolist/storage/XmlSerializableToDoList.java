@@ -20,7 +20,7 @@ import seedu.todolist.model.task.Task;
  * An Immutable AddressBook that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyToDoList {
+public class XmlSerializableToDoList implements ReadOnlyToDoList {
 
     @XmlElement
     private List<XmlAdaptedTask> persons;
@@ -31,7 +31,7 @@ public class XmlSerializableAddressBook implements ReadOnlyToDoList {
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableToDoList() {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class XmlSerializableAddressBook implements ReadOnlyToDoList {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyToDoList src) {
+    public XmlSerializableToDoList(ReadOnlyToDoList src) {
         this();
         persons.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));

@@ -12,7 +12,7 @@ import seedu.todolist.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends ToDoListStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,13 +21,13 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getAddressBookFilePath();
+    String getToDoListFilePath();
 
     @Override
-    Optional<ReadOnlyToDoList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyToDoList addressBook) throws IOException;
+    void saveToDoList(ReadOnlyToDoList addressBook) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.

@@ -27,12 +27,12 @@ public class SampleDataUtil {
     public static ReadOnlyToDoList getSampleToDoList() {
         try {
             ToDoList sampleAB = new ToDoList();
-            for (Task samplePerson : getSampleTasks()) {
-                sampleAB.addTask(samplePerson);
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

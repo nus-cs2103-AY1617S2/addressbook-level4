@@ -60,15 +60,15 @@ public class StorageManagerTest {
          * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
-        ToDoList original = new TypicalTestTasks().getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyToDoList retrieved = storageManager.readAddressBook().get();
+        ToDoList original = new TypicalTestTasks().getTypicalToDoList();
+        storageManager.saveToDoList(original);
+        ReadOnlyToDoList retrieved = storageManager.readToDoList().get();
         assertEquals(original, new ToDoList(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getToDoListFilePath());
     }
 
     @Test
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlToDoListStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyToDoList addressBook, String filePath) throws IOException {
+        public void saveToDoList(ReadOnlyToDoList addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

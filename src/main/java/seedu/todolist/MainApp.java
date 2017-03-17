@@ -77,7 +77,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyToDoList> addressBookOptional;
         ReadOnlyToDoList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readToDoList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ToDoList");
             }
