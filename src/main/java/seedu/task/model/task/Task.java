@@ -11,6 +11,7 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
+    private TaskId id;
     private Description description;
     private DueDate dueDate;
     private Duration duration;
@@ -37,6 +38,11 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags());
+    }
+
+    @Override
+    public TaskId getId() {
+        return this.id;
     }
 
     /**

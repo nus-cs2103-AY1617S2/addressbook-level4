@@ -8,6 +8,7 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
+    TaskId getId();
     Description getDescription();
     DueDate getDueDate();
     Duration getDuration();

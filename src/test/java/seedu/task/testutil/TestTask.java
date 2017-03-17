@@ -5,12 +5,14 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.TaskId;
 
 /**
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
+    private TaskId id;
     private Description description;
     private Duration duration;
     private UniqueTagList tags;
@@ -43,6 +45,11 @@ public class TestTask implements ReadOnlyTask {
 
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    @Override
+    public TaskId getId() {
+        return this.id;
     }
 
     @Override
