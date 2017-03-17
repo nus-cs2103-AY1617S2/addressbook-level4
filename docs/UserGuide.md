@@ -74,7 +74,6 @@ Now that we are familiar with ezDo's interface, let us get started with the feat
 
 A summary of the commands available on ezDo is shown in Table 1 for your convenience.<br>
 
-<center>
 
 | Command |Description                                                     |
 |:-------:|----------------------------------------------------------------|
@@ -91,7 +90,6 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 |[quit / q](#11-exiting-the-program-quit--q)      |Quits ezDo              |
 |[help / h](#12-viewing-help-help--h)             |Shows the user guide    |
 
-</center>
 
 <h5 align="center">Table 1: Summary of Commands in ezDo</h5>
 
@@ -411,8 +409,6 @@ _**Brings up the help guide in a separate window.**_<br>
 
 For your convenience, the parameters for every command available in ezDo are summarised in Table 2 below.
 
-<center>
-
 |Command|Parameters                                               |
 |:-----:|---------------------------------------------------------|
 |[add / a](#1-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]...`**             |
@@ -427,8 +423,6 @@ For your convenience, the parameters for every command available in ezDo are sum
 |[save](#10-moving-the-save-file-save)      |**`save DIRECTORY`**    |
 |[quit / q](#11-exiting-the-program-quit--q)    |**`quit`**              |
 |[help / h](#12-viewing-help-help--h)           |**`help`**    |
-
-</center>
 
 <h5 align="center">Table 2: Command Summary</h5>
 
