@@ -60,7 +60,7 @@ public class UpdateTaskController extends Controller {
         LocalDateTime endDateTime = DateTimeUtil.parseDateString(endDateToken);
 
         String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
-        String[] tagStrings = tagsToken.split(TAGS_SEPARATOR_REGEX);
+        String[] tagStrings = tagsToken == null ? new String[] {} : tagsToken.split(TAGS_SEPARATOR_REGEX);
         List<String> tagList = Arrays.asList(tagStrings);
         Set<Tag> tags = (Set<Tag>) tagList.
                                stream().
