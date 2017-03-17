@@ -1,8 +1,8 @@
 # Developer Guide
 1. [Setting Up](#setting-up)
-   * 1.1. Prerequisites(#prerequisites)
-   * 1.2. Importing the project into Eclipse(#importing-the-project-into-eclipse)
-   * 1.3. Configuring Checkstyle(#configuring-checkstyle)
+   * 1.1. [Prerequisites](#prerequisites)
+   * 1.2. [Importing the project into Eclipse](#importing-the-project-into-eclipse)
+   * 1.3. [Configuring Checkstyle](#configuring-checkstyle)
    * 1.4. Troubleshooting project setup
 2. [Design](#design)
    * 2.1. Architecture
