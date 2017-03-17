@@ -35,12 +35,6 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ UserPrefs methods ==============================
-
-    @Override
-    public void setFilePath(String filepath) {
-    	String actualFilePath = filepath + "/tasklist.xml";
-    	TaskBossStorage = new XmlTaskBossStorage(actualFilePath);
-    }
     
     @Override
     public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
@@ -55,6 +49,12 @@ public class StorageManager extends ComponentManager implements Storage {
 
     // ================ TaskBoss methods ==============================
 
+    @Override
+    public void setFilePath(String filepath) {
+    	String actualFilePath = filepath + "/tasklist.xml";
+    	TaskBossStorage = new XmlTaskBossStorage(actualFilePath);
+    }
+    
     @Override
     public String getTaskBossFilePath() {
         return taskBossStorage.getTaskBossFilePath();
