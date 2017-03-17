@@ -127,7 +127,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public boolean hasStartTime() {
-        if (this.startTime != null) {
+        if (this.startTime.value != null) {
             return true;
         }
         return false;
@@ -135,7 +135,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public boolean hasEndTime() {
-        if (this.endTime != null) {
+        if (this.endTime.value != null) {
             return true;
         }
         return false;
