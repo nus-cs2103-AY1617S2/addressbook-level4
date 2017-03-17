@@ -24,11 +24,11 @@ public class TaskTokenizer {
         }
         if (hasDescription) {
             String description = matcher.group(TASK_DESCRIPTION);
-            String[] keywords = {TASK_START_DATE_KEYWORD, TASK_END_DATE_KEYWORD};
             HashMap<String, String> descriptionTokens = KeywordTokenizer.tokenize(
                                                             description,
                                                             TASK_DESCRIPTION,
-                                                            keywords);
+                                                            TASK_START_DATE_KEYWORD,
+                                                            TASK_END_DATE_KEYWORD);
             tokens.putAll(descriptionTokens);
         }
         return tokens;
