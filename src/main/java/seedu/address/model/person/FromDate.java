@@ -41,10 +41,16 @@ public class FromDate {
      */
     public static boolean isValidFromDate(String test) {
         Pattern pattern = Pattern.compile(FROMDATE_VALIDATION_REGEX);
-        Matcher matcher = pattern.matcher(test);
-        boolean day = Integer.parseInt(matcher.group(1)) < 32;
-        boolean month = Integer.parseInt(matcher.group(2)) < 13;
-        return (test.matches(FROMDATE_VALIDATION_REGEX) && day && month);
+        Matcher matchers = pattern.matcher(test);
+        if (test.matches(FROMDATE_VALIDATION_REGEX)) {
+            matchers.matches();
+            String day = matchers.group(1);
+            String month = matchers.group(2);
+            boolean daytrue = Integer.parseInt(day) < 32;
+            boolean monthtrue = (Integer.parseInt(month) < 13) && (Integer.parseInt(month) > 0);
+            return daytrue && monthtrue;
+        }
+        return false;
     }
 
     @Override
