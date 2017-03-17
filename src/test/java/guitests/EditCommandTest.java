@@ -105,7 +105,7 @@ public class EditCommandTest extends TaskListGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Amuse friend t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -128,6 +128,6 @@ public class EditCommandTest extends TaskListGuiTest {
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskListIndex - 1] = editedTask;
         assertTrue(personListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }

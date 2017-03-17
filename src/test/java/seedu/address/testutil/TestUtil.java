@@ -8,6 +8,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -71,16 +72,17 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
+            // TODO maybe they should not be empty optionals
             return new Task[]{
-                new Task(new Name("Allocate Work"), new UniqueTagList()),
-                new Task(new Name("Buy Groceries"), new UniqueTagList()),
-                new Task(new Name("Count doomsday"), new UniqueTagList()),
-                new Task(new Name("Die tomorrow"), new UniqueTagList()),
-                new Task(new Name("Elicit crap"), new UniqueTagList()),
-                new Task(new Name("Fool around"), new UniqueTagList()),
-                new Task(new Name("Goof around"), new UniqueTagList()),
-                new Task(new Name("Help someone"), new UniqueTagList()),
-                new Task(new Name("Improve tasks"), new UniqueTagList())
+                new Task(new Name("Allocate Work"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Buy Groceries"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Count doomsday"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Die tomorrow"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Elicit crap"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Fool around"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Goof around"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Help someone"), Optional.empty(), Optional.empty(), new UniqueTagList()),
+                new Task(new Name("Improve tasks"), Optional.empty(), Optional.empty(), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

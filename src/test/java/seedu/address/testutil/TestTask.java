@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartEndDateTime;
 
 /**
  * A mutable task object. For testing only.
@@ -10,9 +14,16 @@ import seedu.address.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Optional<Deadline> deadline;
+    private Optional<StartEndDateTime> startEndDateTime;
     private UniqueTagList tags;
 
     public TestTask() {
+        // TODO perhaps a better idea for each of the test tasks to always have their dates
+        // this is a temporary hack
+        deadline = Optional.empty();
+        startEndDateTime = Optional.empty();
+
         tags = new UniqueTagList();
     }
 
@@ -20,8 +31,13 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
-        this.tags = taskToCopy.getTags();
+        // TODO perhaps a better idea for each of the test tasks to always have their dates
+        // this is a temporary hack
+        deadline = Optional.empty();
+        startEndDateTime = Optional.empty();
+
+        name = taskToCopy.getName();
+        tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
@@ -38,6 +54,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Optional<Deadline> getDeadline() {
+        return deadline;
+    }
+
+    @Override
+    public Optional<StartEndDateTime> getStartEndDateTime() {
+        return startEndDateTime;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -48,6 +74,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+        // TODO add the new fields
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
