@@ -101,14 +101,8 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-<<<<<<< HEAD
-        final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                .filter(p -> p.getName().name.equals(name)).findAny();
-=======
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().name.equals(name))
                 .findAny();
->>>>>>> 6bd425a... Fixed TestTask.getGeneratedTasks() to ensure non-null values of attributes
-
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
