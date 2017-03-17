@@ -1,11 +1,10 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TitledPane;
@@ -32,15 +31,11 @@ public class TaskGroupPanel extends UiPart<Region> {
 
     private String title;
 
-    private int indexOffset;
-
-    public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList, int indexOffset) {
+    public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList, List<Integer> taskIndexList) {
         super(FXML);
-        setIndexOffset(indexOffset);
-        setConnections(taskList);
         setTitle(title, taskList.size());
         setExpandingListener();
-        createTaskGroupView(taskList);
+        createTaskGroupView(taskList, taskIndexList);
         closeTitlePane();
         registerAsAnEventHandler(this);
     }
@@ -53,10 +48,6 @@ public class TaskGroupPanel extends UiPart<Region> {
         titledPane.setExpanded(true);
     }
 
-    public void setIndexOffset(int indexOffset) {
-        this.indexOffset = indexOffset;
-    }
-
     public void setTitle(String title, int taskCount) {
         this.title = title;
         titledPane.setText(title + " (" + taskCount + ")");
@@ -66,24 +57,14 @@ public class TaskGroupPanel extends UiPart<Region> {
         return this.title;
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        // When taskList changes, update everything
-        taskList.addListener(new ListChangeListener<ReadOnlyTask>() {
-            public void onChanged(Change<? extends ReadOnlyTask> change) {
-                setTitle(title, taskList.size());
-                createTaskGroupView(taskList);
-            }
-        });
-    }
-
     /**
      * Instantiate TaskCard objects and add them to taskListView.
      */
-    private void createTaskGroupView(ObservableList<ReadOnlyTask> taskList) {
+    private void createTaskGroupView(ObservableList<ReadOnlyTask> taskList, List<Integer> taskIndexList) {
         taskGroupView.getChildren().clear();
         int index = 0;
         for (ReadOnlyTask task : taskList) {
-            TaskCard taskCard = new TaskCard(task, index + 1 + indexOffset);
+            TaskCard taskCard = new TaskCard(task, taskIndexList.get(index) + 1);
             taskGroupView.getChildren().add(taskCard.getRoot());
             index++;
         }
