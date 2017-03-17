@@ -102,4 +102,8 @@ public class TodoList {
         List<Task> taskList = getTasks().stream().filter(predicate).collect(Collectors.toList());
         return new ArrayList<>(taskList);
     }
+
+    public void setTasks(ArrayList<Task> newTaskList) {
+        allTasks = newTaskList;
+    }
 }
