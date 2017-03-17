@@ -1,6 +1,7 @@
 package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_XML_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.FILEPATH_ARGS_FORMAT;
 
 import java.util.regex.Matcher;
@@ -10,6 +11,7 @@ import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 
 public class ChangeDirectoryCommandParser {
+    public static final String XML_FILE_EXT = "xml";
     /**
      * Parses the given {@code String} of path in the context of the ChangeDirCommand
      * and returns an ChangeDirCommand object for execution.
@@ -20,6 +22,19 @@ public class ChangeDirectoryCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
         }
+        if (!isValidXmlPath(args)) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+        }
         return new ChangeDirectoryCommand(args.trim());
+    }
+    
+    public boolean isValidXmlPath (String args) {
+        String filePath = args.trim();
+        String extension = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
+        if (extension.equals(XML_FILE_EXT)) {
+            return true;
+        }
+        return false;
     }
 }
