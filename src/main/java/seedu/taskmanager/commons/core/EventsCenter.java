@@ -1,7 +1,6 @@
 package seedu.taskmanager.commons.core;
 
 import com.google.common.eventbus.EventBus;
-
 import java.util.logging.Logger;
 
 import seedu.taskmanager.commons.events.BaseEvent;
