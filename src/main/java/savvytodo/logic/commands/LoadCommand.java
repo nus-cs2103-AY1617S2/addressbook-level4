@@ -23,14 +23,12 @@ public class LoadCommand extends Command{
     
     public LoadCommand(String filePath) {
         this.filePath = filePath;
-  
     }
     
     @Override
     public CommandResult execute() throws CommandException {
         EventsCenter.getInstance().post(new LoadStorageFileEvent(filePath));
-        return new CommandResult(MESSAGE_SUCCESS);
- 
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
     }
 
 }

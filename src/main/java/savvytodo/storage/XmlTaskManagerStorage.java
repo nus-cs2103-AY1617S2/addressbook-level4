@@ -24,7 +24,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         this.filePath = filePath;
     }
 
-    public String gettaskManagerFilePath() {
+    public String getTaskManagerFilePath() {
         return filePath;
     }
 

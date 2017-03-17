@@ -45,7 +45,7 @@ public class TestTask implements ReadOnlyTask {
         this.email = email;
     }
 
-    public void setPhone(Priority phone) {
+    public void setPriority(Priority phone) {
         this.phone = phone;
     }
 

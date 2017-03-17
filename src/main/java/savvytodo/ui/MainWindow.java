@@ -54,6 +54,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+    private CommandBox commandBox;
+    private ResultDisplay resultDisplay;
+    private StatusBarFooter statusBar;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -114,10 +117,26 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.gettaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+
+        if (taskListPanel == null) {
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        } else {
+            taskListPanel.setConnections(logic.getFilteredTaskList());
+        }
+
+        if (resultDisplay == null) {
+            resultDisplay = new ResultDisplay(getResultDisplayPlaceholder());
+        }
+
+        if (statusBar == null) {
+            statusBar = new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        } else {
+            statusBar.setSaveLocation(config.getTaskManagerFilePath());
+        }
+
+        if (commandBox == null) {
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        }
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -173,8 +192,8 @@ public class MainWindow extends UiPart<Region> {
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                (int) primaryStage.getY());
     }
 
     @FXML
@@ -207,4 +226,20 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.freeResources();
     }
 
+    /**
+     * 
+     * @return logic
+     */
+    public Logic getLogic() {
+        return logic;
+    }
+
+    /**
+     * Sets the logic for the window
+     * @param logic
+     */
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+        this.fillInnerParts();
+    }
 }

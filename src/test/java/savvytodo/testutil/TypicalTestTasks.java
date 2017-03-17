@@ -2,6 +2,10 @@ package savvytodo.testutil;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.TaskManager;
+import savvytodo.model.task.Address;
+import savvytodo.model.task.Description;
+import savvytodo.model.task.Name;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -14,13 +18,10 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            assignment = new TaskBuilder().withName("Assignment 1")
-                    .withAddress("None").withDescription("2359 Mon 23 Aug")
-                    .withPriority("high")
-                    .withCategories("friends").build();
-            appointment = new TaskBuilder().withName("dental").withAddress("KTPH")
-                    .withDescription("Wisdom tooth").withPriority("high")
-                    .withCategories("owesMoney", "friends").build();
+            assignment = new TaskBuilder().withName("Assignment 1").withAddress("None")
+                    .withDescription("2359 Mon 23 Aug").withPriority("high").withCategories("friends").build();
+            appointment = new TaskBuilder().withName("dental").withAddress("KTPH").withDescription("Wisdom tooth")
+                    .withPriority("high").withCategories("owesMoney", "friends").build();
             birthday = new TaskBuilder().withName("My birthday").withPriority("medium")
                     .withDescription("Celebration @ 1pm").withAddress("wall street").build();
             meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")
@@ -54,12 +55,34 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{assignment, appointment, birthday, meeting, test, presentation, project};
+        return new TestTask[] { assignment, appointment, birthday, meeting, test, presentation, project };
     }
 
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);
         return ab;
+    }
+
+    /**
+     * generates a list of tasks with random details
+     * @author A0140036x
+     * @return
+     */
+    public TestTask[] getGeneratedTasks(int numberOfTasks) {
+        TestTask[] ret = new TestTask[numberOfTasks];
+        for (int i = 0; i < ret.length; i++) {
+            TestTask temp = new TestTask();
+            try {
+                temp.setName(new Name("Task " + i));
+                temp.setEmail(new Description("" + i));
+                temp.setAddress(new Address("" + i));
+                temp.setPriority(new Priority(i % 2 == 0 ? "low" : "high"));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            ret[i] = temp;
+        }
+        return ret;
     }
 }

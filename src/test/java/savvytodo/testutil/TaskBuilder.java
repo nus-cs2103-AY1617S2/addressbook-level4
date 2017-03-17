@@ -45,7 +45,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
-        this.task.setPhone(new Priority(priority));
+        this.task.setPriority(new Priority(priority));
         return this;
     }
 
