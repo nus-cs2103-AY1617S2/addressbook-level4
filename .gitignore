@@ -19,4 +19,4 @@ classes/
 runtests.sh
 /src/.*
 .project
-/config/checkstyle/CS2103.xml
+/config/checkstyle/awesometodoformat.xml
