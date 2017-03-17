@@ -241,7 +241,7 @@ Format: `redo`
 
 Finds tasks whose properties contain any of your given keywords.
 
-<img src="find.jpg" width="600">
+<img src="images/find.jpg" width="600">
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
