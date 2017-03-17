@@ -77,10 +77,7 @@ public class AddTaskController extends Controller {
 
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime startDateTime, LocalDateTime endDateTime, Set<Tag> tags) {
-        Task task = new Task(description, startDateTime, endDateTime);
-        if (!tags.isEmpty()) {
-            task.replaceTags(tags);
-        }
+        Task task = new Task(description, startDateTime, endDateTime, tags);
         todoList.add(task);
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
