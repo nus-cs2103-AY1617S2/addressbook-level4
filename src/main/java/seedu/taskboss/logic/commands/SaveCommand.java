@@ -15,7 +15,7 @@ public static final String COMMAND_WORD = "save";
     
     public static final String MESSAGE_SUCCESS = "The data has been saved!";
     
-    public static final String MESSAGE_INVALID_FILEPATH = The filepath is invalid.";
+    public static final String MESSAGE_INVALID_FILEPATH = "The filepath is invalid.";
 
     private final String filepath;
     
