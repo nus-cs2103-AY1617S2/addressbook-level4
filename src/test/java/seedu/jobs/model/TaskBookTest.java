@@ -15,10 +15,8 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jobs.model.tag.Tag;
-import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.testutil.TypicalTestTasks;
 
 public class TaskBookTest {
@@ -51,7 +49,7 @@ public class TaskBookTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Person(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
         TaskBookStub newData = new TaskBookStub(newTasks, newTags);
 
@@ -61,9 +59,9 @@ public class TaskBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskBook typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
-        List<ReadOnlyTaskBook> newTask = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TaskBook typicalTaskBook = new TypicalTestTasks().getTypicalAddressBook();
+        ObservableList<ReadOnlyTask> newTask = typicalTaskBook.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalTaskBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
         TaskBookStub newData = new TaskBookStub(newTask, newTags);
