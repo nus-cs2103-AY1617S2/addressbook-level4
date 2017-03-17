@@ -153,7 +153,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #293132;
 }
 
 .context-menu .label {
@@ -161,7 +161,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #293132;
 }
 
 .menu-bar .label {
@@ -172,7 +172,7 @@
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: #293132;
 }
 
 /*
