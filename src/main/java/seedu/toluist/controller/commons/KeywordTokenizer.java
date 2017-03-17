@@ -1,8 +1,8 @@
 package seedu.toluist.controller.commons;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Vector;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.util.Pair;
@@ -23,58 +23,38 @@ public class KeywordTokenizer {
      * @return a HashMap of keyword-token pairs
      */
     public static HashMap<String, String> tokenize(String description, String defaultKeyword, String... keywords) {
-        HashMap<String, String> tokens = new HashMap<String, String>();
+        HashMap<String, String> tokens = new HashMap<>();
         if (!StringUtil.isPresent(description)) {
             return tokens;
         }
-        if (keywords == null || keywords.length == 0) {
-            if (StringUtil.isPresent(defaultKeyword)) {
-                tokens.put(defaultKeyword, description);
-            }
-            return tokens;
+
+        ArrayList<Pair<Integer, String>> indexKeywordPairs = new ArrayList<>();
+        String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
+        if (defaultKeyword != null) {
+            indexKeywordPairs.add(new Pair<>(START_INDEX, defaultKeyword));
         }
-        Vector<Pair<Integer, String>> indexKeywordPairs = new Vector<Pair<Integer, String>>();
-        for (String keyword : keywords) {
+
+        for (String keyword : nonNullKeywords) {
             int index = description.lastIndexOf(keyword);
             if (index != INVALID_INDEX) {
-                Pair<Integer, String> indexKeywordPair = new Pair<Integer, String>(index, keyword);
+                Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);
                 indexKeywordPairs.add(indexKeywordPair);
             }
         }
-        if (indexKeywordPairs.isEmpty()) {
-            if (StringUtil.isPresent(defaultKeyword)) {
-                tokens.put(defaultKeyword, description);
-            }
-            return tokens;
-        }
+
         Collections.sort(indexKeywordPairs, Comparator.comparing(pair -> ((Pair<Integer, String>) pair).getKey()));
 
-        int firstIndex = indexKeywordPairs.get(START_INDEX).getKey();
-        tokens.putAll(addToken(description, defaultKeyword, START_INDEX, firstIndex - 1));
-
-        for (int i = 0; i < indexKeywordPairs.size() - 1; i++) {
+        for (int i = 0; i < indexKeywordPairs.size(); i++) {
             Pair<Integer, String> currentIndexKeywordPair = indexKeywordPairs.get(i);
-            Pair<Integer, String> nextIndexKeywordPair = indexKeywordPairs.get(i + 1);
-            int currentIndex = currentIndexKeywordPair.getKey();
-            int nextIndex = nextIndexKeywordPair.getKey();
+            int startIndex = currentIndexKeywordPair.getKey();
+            int endIndex = i + 1 < indexKeywordPairs.size()
+                    ? indexKeywordPairs.get(i + 1).getKey() - indexKeywordPairs.get(i + 1).getValue().length()
+                    : description.length();
             String keyword = currentIndexKeywordPair.getValue();
-            tokens.putAll(addToken(description, keyword, currentIndex + keyword.length(), nextIndex - 1));
+            String token = description.substring(startIndex, endIndex).trim();
+            tokens.put(keyword, token);
         }
 
-        Pair<Integer, String> lastIndexKeywordPair = indexKeywordPairs.lastElement();
-        int lastIndex = lastIndexKeywordPair.getKey();
-        String lastKeyword = lastIndexKeywordPair.getValue();
-        tokens.putAll(addToken(description, lastKeyword, lastIndex + lastKeyword.length(), description.length()));
-        return tokens;
-    }
-
-    private static HashMap<String, String> addToken(String description, String keyword, int startIndex, int endIndex) {
-        HashMap<String, String> tokens = new HashMap<String, String>();
-        if (startIndex > endIndex || !StringUtil.isPresent(keyword)) {
-            return tokens;
-        }
-        String token = description.substring(startIndex, endIndex).trim();
-        tokens.put(keyword, token);
         return tokens;
     }
 }
