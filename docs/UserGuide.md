@@ -34,7 +34,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
      adds a task named `submit proposal` to the TaskBoss.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
 ## 2. Features
