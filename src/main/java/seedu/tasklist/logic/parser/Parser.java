@@ -79,7 +79,7 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 

@@ -1,8 +1,8 @@
 package seedu.tasklist.logic.commands;
 
 
-public class SortCommand extends Command{
-    
+public class SortCommand extends Command {
+
     public static final String COMMAND_WORD = "sort";
     private final String parameter;
 
@@ -15,7 +15,7 @@ public class SortCommand extends Command{
             + "Example: " + COMMAND_WORD + " n";
     public static final String MESSAGE_FAILURE = "Invalid sorting parameter used!" + MESSAGE_USAGE;
     public static final String MESSAGE_SUCCESS = "Task sorted according to given parameter.";
-    
+
     public SortCommand(String parameter) {
         switch (parameter) {
         case "d":
@@ -40,12 +40,12 @@ public class SortCommand extends Command{
 
     @Override
     public CommandResult execute() {
-       
-        if(parameter == null) {
+
+        if (parameter == null) {
             return new CommandResult(MESSAGE_FAILURE);
         }
         model.sortTaskList(parameter);
-        return new CommandResult(MESSAGE_SUCCESS); 
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
 }

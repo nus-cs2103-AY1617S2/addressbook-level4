@@ -104,13 +104,13 @@ public class Priority {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     /** Compares the priority of one task with another */
     public int compareTo(Priority priority) {
         String thisValue = new String("Z");
         String otherValue = new String("Z");
-        
-        if(this.toString().equals(PRIORITY_HIGH)) {
+
+        if (this.toString().equals(PRIORITY_HIGH)) {
             thisValue = "A";
         } else if (this.toString().equals(PRIORITY_MEDIUM)) {
             thisValue = "M";
@@ -119,7 +119,7 @@ public class Priority {
         } else if (this.toString().equals(PRIORITY_NIL)) {
             thisValue = "Z";
         }
-        if(priority.toString().equals(PRIORITY_HIGH)) {
+        if (priority.toString().equals(PRIORITY_HIGH)) {
             otherValue = "A";
         } else if (priority.toString().equals(PRIORITY_MEDIUM)) {
             otherValue = "M";
@@ -128,7 +128,7 @@ public class Priority {
         }  else if (this.toString().equals(PRIORITY_NIL)) {
             thisValue = "Z";
         }
-        
+
         return thisValue.compareTo(otherValue);
     }
 }

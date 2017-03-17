@@ -52,7 +52,7 @@ public interface Model {
 
     /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
     public void enableUndoForClear();
-    
+
     /**Sort tasks according to parameter specified by user */
     public void sortTaskList(String parameter);
 }

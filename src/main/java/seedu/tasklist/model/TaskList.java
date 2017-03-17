@@ -204,7 +204,7 @@ public class TaskList implements ReadOnlyTaskList {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
-    
+
     /**
      * Tasks are sorted according to Name in ascending order
      */
@@ -216,7 +216,7 @@ public class TaskList implements ReadOnlyTaskList {
             }
         });
     }
-    
+
     /**
      * Tasks are sorted according to Priority in descending order
      */
@@ -228,9 +228,9 @@ public class TaskList implements ReadOnlyTaskList {
             }
         });
     }
-    
+
     /**
-     * Tasks are sorted according to Deadline in ascending order, 
+     * Tasks are sorted according to Deadline in ascending order,
      * followed by event task, and floating task listed in no particular order
      */
     public void sortByDeadline() {
@@ -246,9 +246,9 @@ public class TaskList implements ReadOnlyTaskList {
             }
         });
     }
-    
+
     /**
-     * Tasks are sorted according to StartDate in ascending order, 
+     * Tasks are sorted according to StartDate in ascending order,
      * followed by deadline task, and floating task listed in no particular order
      */
     public void sortByStartDate() {
@@ -264,9 +264,9 @@ public class TaskList implements ReadOnlyTaskList {
             }
         });
     }
-    
+
     /**
-     * Tasks are sorted according to EndDate in ascending order, 
+     * Tasks are sorted according to EndDate in ascending order,
      * followed by deadline task, and floating task listed in no particular order
      */
     public void sortByEndDate() {

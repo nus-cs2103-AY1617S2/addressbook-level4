@@ -33,11 +33,11 @@ public abstract class Task implements ReadOnlyTask {
      * Replaces this task's tags with the tags in the argument tag list.
      */
     public abstract void setTags(UniqueTagList replacement);
-    
+
     public abstract Date getDeadlineParameter() throws ParseException;
-    
+
     public abstract Date getStartDateParameter() throws ParseException;
-    
+
     public abstract Date getEndDateParameter() throws ParseException;
 
 
