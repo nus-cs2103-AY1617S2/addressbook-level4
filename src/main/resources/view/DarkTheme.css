@@ -3,6 +3,10 @@
 	src: url('OpenSans-Regular.ttf');
 }
 
+.scroll-pane {
+	-fx-border-width: 0 0 0 0;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }

@@ -8,6 +8,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -30,15 +31,18 @@ public class TaskGroupPanel extends UiPart<Region> {
     @FXML
     private VBox taskGroupView;
 
+    private String title;
+
     private int indexOffset;
 
     private boolean isExpanded;
 
     public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList, int indexOffset) {
         super(FXML);
-        setTitle(title);
         setIndexOffset(indexOffset);
         setConnections(taskList);
+        setTitle(title, taskList.size());
+        createTaskGroupView(taskList);
         closeTitlePane();
         registerAsAnEventHandler(this);
     }
@@ -57,23 +61,25 @@ public class TaskGroupPanel extends UiPart<Region> {
         this.indexOffset = indexOffset;
     }
 
-    public void setTitle(String title) {
-        titledPane.setText(title);
+    public void setTitle(String title, int taskCount) {
+        Label label = new Label(title + " (" + taskCount + ")");
+        label.setOnMouseClicked(e -> handleMouseClicked());
+        titledPane.setGraphic(label);
+        this.title = title;
     }
 
     public String getTitle() {
-        return titledPane.getText();
+        return title;
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         // When taskList changes, update everything
         taskList.addListener(new ListChangeListener<ReadOnlyTask>() {
             public void onChanged(Change<? extends ReadOnlyTask> change) {
+                setTitle(title, taskList.size());
                 createTaskGroupView(taskList);
             }
         });
-
-        createTaskGroupView(taskList);
     }
 
     /**
