@@ -11,10 +11,10 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Address App";
+    private String appTitle = "ToDoApp";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String toDoAppFilePath = "data/addressbook.xml";
+    private String toDoAppFilePath = "data/todoapp.xml";
     private String toDoAppName = "MyToDoApp";
 
 
