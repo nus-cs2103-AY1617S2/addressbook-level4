@@ -35,7 +35,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ UserPrefs methods ==============================
-    
+
     @Override
     public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
         return userPrefsStorage.readUserPrefs();
@@ -54,7 +54,7 @@ public class StorageManager extends ComponentManager implements Storage {
     	String actualFilePath = filepath + "/tasklist.xml";
     	taskBossStorage = new XmlTaskBossStorage(actualFilePath);
     }
-    
+
     @Override
     public String getTaskBossFilePath() {
         return taskBossStorage.getTaskBossFilePath();
