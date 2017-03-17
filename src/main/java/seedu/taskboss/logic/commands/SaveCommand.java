@@ -9,7 +9,7 @@ public class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-		+ "Saves the data at specific filepath.\n"
+                + "Saves the data at specific filepath.\n"
     		+ "Example: " + COMMAND_WORD
     		+ " C://user/desktop/taskboss";
 
