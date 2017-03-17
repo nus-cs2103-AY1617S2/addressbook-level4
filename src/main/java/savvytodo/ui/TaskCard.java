@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import savvytodo.commons.util.StringUtil;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -20,7 +22,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label priority;
     @FXML
-    private Label address;
+    private Label status;
+    @FXML
+    private Label dateTimeRecur;
     @FXML
     private Label description;
     @FXML
@@ -30,10 +34,23 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().name);
         id.setText(displayedIndex + ". ");
-        priority.setText(task.getPriority().value);
-        address.setText(task.getLocation().value);
         description.setText(task.getDescription().value);
+        priority.setText(task.getPriority().value);
+        dateTimeRecur.setText(getDateTimeRecur(task));
+        status.setText(task.isCompleted().toString());
         initCategories(task);
+    }
+
+    private String getDateTimeRecur(ReadOnlyTask task) {
+        if (task.getDateTime().toString().equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
+            return "This is a floating task";
+        } else if (task.getDateTime().startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
+                || task.getDateTime().startValue == null) {
+            return "Deadline: " + task.getDateTime().toString();
+        } else {
+            return "Event: " + task.getDateTime().toString() + DateTime.DATETIME_STRING_CONNECTOR
+                    + task.getRecurrence().toString();
+        }
     }
 
     private void initCategories(ReadOnlyTask task) {
