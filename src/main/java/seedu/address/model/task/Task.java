@@ -7,7 +7,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
@@ -21,9 +21,7 @@ public class Task implements ReadOnlyTask {
     private Optional<Deadline> deadline;
 
     /**
-     * Every field must be present and not null. // TODO
-     * @param startEndDateTime
-     * @param deadline
+     * Every field must not be null except for the {@code Optional} fields.
      */
     public Task(Name name, Optional<Deadline> deadline, Optional<StartEndDateTime> startEndDateTime,
             UniqueTagList tags) {
@@ -51,6 +49,18 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
+    @Override
+    public Optional<Deadline> getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * Only allow changing the {@link StartEndDateTime} if there is actually a value (not {@link Optional}).
+     */
+    public void setDeadline(Deadline dateTime) {
+        assert dateTime != null;
+        this.deadline = Optional.of(dateTime);
+    }
 
     @Override
     public Optional<StartEndDateTime> getStartEndDateTime() {
@@ -58,21 +68,11 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * TODO Only accepts a StartEndDateTime if not there is no point updating the value
+     * Only allow changing the {@link StartEndDateTime} if there is actually a value (not {@link Optional}).
      */
     public void setStartEndDateTime(StartEndDateTime dateTime) {
         assert dateTime != null;
         this.startEndDateTime = Optional.of(dateTime);
-    }
-
-    @Override
-    public Optional<Deadline> getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Deadline dateTime) {
-        assert dateTime != null;
-        this.deadline = Optional.of(dateTime);
     }
 
     @Override
@@ -94,6 +94,20 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
+        // TODO to use or not to use a new Optional to wrap the Deadline
+        // replacement Deadline is currently reused
+        if (replacement.getDeadline().isPresent()) {
+            this.deadline = Optional.of(replacement.getDeadline().get());
+        } else {
+            this.deadline = Optional.empty();
+        }
+        // TODO to use or not to use a new Optional to wrap the startEndDateTime
+        // replacement startEndDateTime is currently reused
+        if (replacement.getStartEndDateTime().isPresent()) {
+            this.startEndDateTime = Optional.of(replacement.getStartEndDateTime().get());
+        } else {
+            this.deadline = Optional.empty();
+        }
         this.setTags(replacement.getTags());
     }
 
