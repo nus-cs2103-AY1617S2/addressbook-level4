@@ -12,6 +12,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparator;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -122,6 +123,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        filteredTasks.sort(new TaskComparator());
+
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
