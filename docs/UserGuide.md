@@ -7,7 +7,8 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 0. [Introduction](#0-introduction)
 1. [Quick Start](#1-quick-start)
 2. [Features](#2-features)
-3. [Command Summary](#3-command-summary)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
  
 
 ## TaskBoss Prototype
@@ -121,7 +122,7 @@ Examples:
 * `edit 3 p/3`<br>
   Edits the priority level of 3rd task to be 3. 
 
-### 2.5. Finding all tasks by Name or by Datetime: `find`
+### 2.5. Finding all tasks by Name or by Datetime : `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find n/TASK_NAME` 
@@ -220,7 +221,7 @@ Format: `done INDEX`
 Undoes a most recent command.<br>
 Format: `undo`
 
-### 2.13. Sorting tasks: `sort`
+### 2.13. Sorting tasks : `sort`
 
 Sorts tasks in TaskBoss by their deadlines.<br>
 Format: `sort` 
@@ -247,7 +248,13 @@ Exits the program.<br>
 Format: `exit`
 
 
-## 3. Command Summary
+## 3. FAQ
+
+**_Q: How do I save my task data in TaskBoss?_** <br>
+TaskBoss saves your data to ‘data/taskboss.xml’ by default whenever your task list is updated. There is no need to save manually. You can also change the storage location using the `save` command.
+
+
+## 4. Command Summary
 
 <br>
 
