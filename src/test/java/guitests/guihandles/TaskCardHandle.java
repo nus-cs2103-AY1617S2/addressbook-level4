@@ -8,7 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import savvytodo.commons.util.StringUtil;
 import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.ReadOnlyTask;
 
 /**
@@ -16,8 +18,9 @@ import savvytodo.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String LOCATION_FIELD_ID = "#address";
+    private static final String DATETIME_RECUR_FIELD_ID = "#dateTimeRecur";
     private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String STATUS_FIELD_ID = "#status";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String CATEGORIES_FIELD_ID = "#categories";
 
@@ -36,12 +39,16 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getLocation() {
-        return getTextFromLabel(LOCATION_FIELD_ID);
+    public String getDateTimeRecur() {
+        return getTextFromLabel(DATETIME_RECUR_FIELD_ID);
     }
 
     public String getPriority() {
         return getTextFromLabel(PRIORITY_FIELD_ID);
+    }
+
+    public String getStatus() {
+        return getTextFromLabel(STATUS_FIELD_ID);
     }
 
     public String getDescription() {
@@ -72,11 +79,23 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(CATEGORIES_FIELD_ID).query();
     }
 
+    private String getDateTimeRecurrence(ReadOnlyTask task) {
+        if (task.getDateTime().toString().equalsIgnoreCase(StringUtil.EMPTY_STRING)) {
+            return "This is a floating task";
+        } else if (task.getDateTime().startValue.equalsIgnoreCase(StringUtil.EMPTY_STRING)
+                || task.getDateTime().startValue == null) {
+            return "Deadline: " + task.getDateTime().toString();
+        } else {
+            return "Event: " + task.getDateTime().toString() + DateTime.DATETIME_STRING_CONNECTOR
+                    + task.getRecurrence().toString();
+        }
+    }
+
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().name)
                 && getPriority().equals(task.getPriority().value)
                 && getDescription().equals(task.getDescription().value)
-                && getLocation().equals(task.getLocation().value)
+                && getStatus().equals(task.isCompleted().toString())
                 && getCategories().equals(getCategories(task.getCategories()));
     }
 
@@ -87,7 +106,7 @@ public class TaskCardHandle extends GuiHandle {
             return getFullName().equals(handle.getFullName())
                     && getPriority().equals(handle.getPriority())
                     && getDescription().equals(handle.getDescription())
-                    && getLocation().equals(handle.getLocation())
+                    && getStatus().equals(handle.getStatus())
                     && getCategories().equals(handle.getCategories());
         }
         return super.equals(obj);
@@ -95,6 +114,7 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getLocation();
+        return getFullName() + " " + getStatus();
     }
+
 }

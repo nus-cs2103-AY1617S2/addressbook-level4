@@ -124,7 +124,7 @@ public class Recurrence {
 
     @Override
     public String toString() {
-        return this.type.toString() + " " + this.occurences;
+        return this.type.toString() + "(" + this.occurences + ")";
     }
 
 }

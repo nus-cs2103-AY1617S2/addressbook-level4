@@ -27,6 +27,7 @@ import savvytodo.model.task.Recurrence;
  */
 public class ParserUtil {
 
+    private static final int SIZE_OF_DATE_TIME_INPUT = 1;
     private static final int ARRAY_FIELD_2 = 1;
     private static final int ARRAY_FIELD_1 = 0;
 
@@ -76,8 +77,16 @@ public class ParserUtil {
      */
     public static String[] getDateTimeFromArgs(Optional<String> dateTime) {
         assert dateTime != null;
-        return dateTime.isPresent() ? dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR)
-                : DateTime.DEFAULT_VALUES;
+        if (dateTime.isPresent()) {
+            String [] dateTimeValues = dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
+            if (dateTimeValues.length == SIZE_OF_DATE_TIME_INPUT) {
+                return new String[] {StringUtil.EMPTY_STRING, dateTimeValues[ARRAY_FIELD_1]};
+            } else {
+                return dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
+            }
+        } else {
+            return DateTime.DEFAULT_VALUES;
+        }
     }
 
     /**
@@ -120,8 +129,11 @@ public class ParserUtil {
         assert dateTime != null;
         if (dateTime.isPresent()) {
             String [] dateTimeValues = dateTime.get().split(DateTime.DATETIME_STRING_CONNECTOR);
-            return Optional
-                    .of(new DateTime(dateTimeValues[ARRAY_FIELD_1], dateTimeValues[ARRAY_FIELD_2]));
+            if (dateTimeValues.length == SIZE_OF_DATE_TIME_INPUT) {
+                return Optional.of(new DateTime(StringUtil.EMPTY_STRING, dateTimeValues[ARRAY_FIELD_1]));
+            } else {
+                return Optional.of(new DateTime(dateTimeValues[ARRAY_FIELD_1], dateTimeValues[ARRAY_FIELD_2]));
+            }
         } else {
             return Optional.empty();
         }

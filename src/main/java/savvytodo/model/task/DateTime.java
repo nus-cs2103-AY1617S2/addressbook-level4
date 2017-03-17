@@ -36,6 +36,7 @@ public class DateTime implements Comparable<DateTime> {
     private static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter.ofPattern(DATE_STRING_FORMAT);
 
     public static final String DATETIME_STRING_CONNECTOR = " = ";
+    private static final String DATETIME_STRING_TO_STRING_CONNECTOR = " ~ ";
     public static final String[] DEFAULT_VALUES = {StringUtil.EMPTY_STRING, StringUtil.EMPTY_STRING};
 
     /**
@@ -55,13 +56,13 @@ public class DateTime implements Comparable<DateTime> {
      */
     public DateTime(String startDateTime, String endDateTime) throws DateTimeException, IllegalValueException {
         if (endDateTime != null && !endDateTime.isEmpty()) {
-            this.end = LocalDateTime.parse(endDateTime, DATE_FORMATTER);
+            this.end = LocalDateTime.parse(endDateTime.trim(), DATE_FORMATTER);
             this.endValue = this.end.format(DATE_STRING_FORMATTER);
         } else {
             this.endValue = endDateTime;
         }
         if (startDateTime != null && !startDateTime.isEmpty()) {
-            this.start = LocalDateTime.parse(startDateTime, DATE_FORMATTER);
+            this.start = LocalDateTime.parse(startDateTime.trim(), DATE_FORMATTER);
             this.startValue = this.start.format(DATE_STRING_FORMATTER);
             if (!isValidDateTime(this.start, this.end)) {
                 throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
@@ -104,7 +105,7 @@ public class DateTime implements Comparable<DateTime> {
     @Override
     public String toString() {
         if (this.start != null && this.end != null) {
-            return startValue + DATETIME_STRING_CONNECTOR + endValue;
+            return startValue + DATETIME_STRING_TO_STRING_CONNECTOR + endValue;
         } else if (this.end != null) {
             return endValue;
         } else {
