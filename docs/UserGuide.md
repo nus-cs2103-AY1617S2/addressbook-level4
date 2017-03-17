@@ -18,7 +18,7 @@
    * 4.4 [Editing an Item](#)
    * 4.5 [Finding an Item](#)
    * 4.6 [Marking Item as Done](#)
-   * 4.7 [Delete a Item](#)
+   * 4.7 [Delete an Item](#)
    * 4.8 [Clear All Items](#)
    * 4.9 [Saving New Location](#)
    * 4.10 [Exiting The Program](#)
