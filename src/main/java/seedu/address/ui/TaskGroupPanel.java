@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
@@ -9,7 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ShowTaskGroupEvent;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -28,20 +32,25 @@ public class TaskGroupPanel extends UiPart<Region> {
 
     private int indexOffset;
 
+    private boolean isExpanded;
+
     public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList, int indexOffset) {
         super(FXML);
         setTitle(title);
         setIndexOffset(indexOffset);
         setConnections(taskList);
         closeTitlePane();
+        registerAsAnEventHandler(this);
     }
 
     public void closeTitlePane() {
         titledPane.setExpanded(false);
+        isExpanded = false;
     }
 
     public void openTitlePane() {
         titledPane.setExpanded(true);
+        isExpanded = true;
     }
 
     public void setIndexOffset(int indexOffset) {
@@ -79,4 +88,19 @@ public class TaskGroupPanel extends UiPart<Region> {
             index++;
         }
     }
+
+    @FXML
+    private void handleMouseClicked() {
+        EventsCenter.getInstance().post(new ShowTaskGroupEvent(getTitle()));
+    }
+
+    @Subscribe
+    private void handleShowTaskGroupEvent(ShowTaskGroupEvent event) {
+        if (getTitle().equals(event.title) && !isExpanded) {
+            openTitlePane();
+        } else {
+            closeTitlePane();
+        }
+    }
+
 }
