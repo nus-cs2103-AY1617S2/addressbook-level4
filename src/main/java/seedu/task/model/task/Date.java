@@ -94,6 +94,8 @@ public class Date {
      * @return
      */
     public static boolean doesPrecede(Date date1, Date date2){
+        if (date1.value == null) return false;
+        if (date2.value == null) return true;
        return date1.value.before(date2.value);
     }
 }

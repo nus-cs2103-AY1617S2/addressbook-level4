@@ -119,7 +119,6 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public int compareTo(ReadOnlyTask o) {
-        // TODO Auto-generated method stub
         return(Date.doesPrecede(this.getEndDate(), o.getEndDate()))?-1:1;
     }
 }

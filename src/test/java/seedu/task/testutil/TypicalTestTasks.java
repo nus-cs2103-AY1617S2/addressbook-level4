@@ -49,10 +49,10 @@ public class TypicalTestTasks {
                     .withStartDate("01-1-99 23:59").withEndDate("1-02-2131 23:59")
                     .withRemark("Please exercise").withLocation("ERC field").build();
             kick = new TaskBuilder().withName("Kick over the cat")
-                    .withStartDate("11-01-99 23:59").withEndDate("11-24-2131 23:59")
+                    .withStartDate("11-01-99 23:59").withEndDate("11-24-2031 23:59")
                     .withLocation("Physics Lab").build();
             look = new TaskBuilder().withName("Look for the exam location")
-                    .withStartDate("2-2-99 23:59").withEndDate("2-24-2112 23:59")
+                    .withStartDate("2-2-99 23:59").withEndDate("2-27-2112 23:59")
                     .withRemark("Please help me find location").build();
             mark = new TaskBuilder().withName("Mark the tasks completed")
                     .withStartDate("1-23-99 23:59")

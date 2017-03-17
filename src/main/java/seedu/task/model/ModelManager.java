@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
+//        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList().sorted(new TaskComparator()));
     }
 
