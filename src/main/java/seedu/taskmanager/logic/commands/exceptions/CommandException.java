@@ -5,6 +5,6 @@ package seedu.taskmanager.logic.commands.exceptions;
  */
 public class CommandException extends Exception {
     public CommandException(String message) {
-        super(message);
+	super(message);
     }
 }

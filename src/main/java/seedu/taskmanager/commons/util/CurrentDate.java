@@ -9,7 +9,9 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 public class CurrentDate {
 
-	public static final String MESSAGE_DAY_CONSTRAINTS = "Task date should be either a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
+
+	public static final String MESSAGE_DAY_CONSTRAINTS = "Task date should be either "
+    + "a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
 
 	public static final String CURRENTDATE_VALIDATION_REGEX_TODAY1 = "Today";
 	public static final String CURRENTDATE_VALIDATION_REGEX_TODAY2 = "today";
@@ -173,7 +175,6 @@ public class CurrentDate {
 	public static int getCurrentDay() {
 		Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 		int day = calendar.get(Calendar.DATE);
-
 		return day;
 	}
 
@@ -266,14 +267,14 @@ public class CurrentDate {
 
 	if (day < 10) {
 	    stringDay = "0" + Integer.toString(day);
-	} else
+	} else {
 	    stringDay = Integer.toString(day);
-
+	}
 	if (month < 10) {
 	    stringMonth = "0" + Integer.toString(month);
-	} else
+	} else {
 	    stringMonth = Integer.toString(month);
-
+	}
 	stringYear = Integer.toString(year).substring(Math.max(Integer.toString(year).length() - 2, 0));
 
 	return updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
