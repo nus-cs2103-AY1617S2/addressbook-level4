@@ -2,15 +2,14 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -25,21 +24,16 @@ public class TaskGroupPanel extends UiPart<Region> {
     private TitledPane titledPane;
 
     @FXML
-    private ListView<ReadOnlyTask> taskGroupView;
+    private VBox taskGroupView;
 
-    public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList) {
+    private int indexOffset;
+
+    public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList, int indexOffset) {
         super(FXML);
         setTitle(title);
+        setIndexOffset(indexOffset);
         setConnections(taskList);
         closeTitlePane();
-        updateListViewHeight();
-    }
-
-    void updateListViewHeight() {
-        final int countItems = getTasks().size();
-        final int ITEM_HEIGHT = 110;
-        // Add 2 pixels for border
-        taskGroupView.setPrefHeight(countItems * ITEM_HEIGHT + 2);
     }
 
     public void closeTitlePane() {
@@ -50,6 +44,10 @@ public class TaskGroupPanel extends UiPart<Region> {
         titledPane.setExpanded(true);
     }
 
+    public void setIndexOffset(int indexOffset) {
+        this.indexOffset = indexOffset;
+    }
+
     public void setTitle(String title) {
         titledPane.setText(title);
     }
@@ -58,45 +56,27 @@ public class TaskGroupPanel extends UiPart<Region> {
         return titledPane.getText();
     }
 
-    public ObservableList<ReadOnlyTask> getTasks() {
-        return taskGroupView.getItems();
-    }
-
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskGroupView.setItems(taskList);
-        taskGroupView.setCellFactory(listView -> new TaskGroupViewCell());
-        setEventHandlerForSelectionChangeEvent();
-    }
-
-    private void setEventHandlerForSelectionChangeEvent() {
-        taskGroupView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task group panel " + getTitle() + " changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
-    }
-
-    public void scrollTo(int index) {
-        Platform.runLater(() -> {
-            taskGroupView.scrollTo(index);
-            taskGroupView.getSelectionModel().clearAndSelect(index);
-        });
-    }
-
-    class TaskGroupViewCell extends ListCell<ReadOnlyTask> {
-
-        @Override
-        protected void updateItem(ReadOnlyTask task, boolean empty) {
-            super.updateItem(task, empty);
-
-            if (empty || task == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+        // When taskList changes, update everything
+        taskList.addListener(new ListChangeListener<ReadOnlyTask>() {
+            public void onChanged(Change<? extends ReadOnlyTask> change) {
+                createTaskGroupView(taskList);
             }
+        });
+
+        createTaskGroupView(taskList);
+    }
+
+    /**
+     * Instantiate TaskCard objects and add them to taskListView.
+     */
+    private void createTaskGroupView(ObservableList<ReadOnlyTask> taskList) {
+        taskGroupView.getChildren().clear();
+        int index = 0;
+        for (ReadOnlyTask task : taskList) {
+            TaskCard taskCard = new TaskCard(task, index + 1 + indexOffset);
+            taskGroupView.getChildren().add(taskCard.getRoot());
+            index++;
         }
     }
 }

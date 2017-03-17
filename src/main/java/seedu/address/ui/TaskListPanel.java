@@ -37,15 +37,14 @@ public class TaskListPanel extends UiPart<Region> {
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         initTaskListsByStatus(taskList);
-        initTaskGroups();
+        createTaskListView();
         addToPlaceholder(taskListPlaceholder);
 
         // When taskList changes, update everything
         taskList.addListener(new ListChangeListener<ReadOnlyTask>() {
-
             public void onChanged(Change<? extends ReadOnlyTask> change) {
                 initTaskListsByStatus(taskList);
-                initTaskGroups();
+                createTaskListView();
             }
         });
     }
@@ -74,11 +73,14 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      * Instantiate TaskGroupPanel objects and add them to taskListView.
      */
-    private void initTaskGroups() {
+    private void createTaskListView() {
+        int indexOffset = 0;
         taskListView.getChildren().clear();
         for (String groupName : groupNames) {
-            TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, taskListMap.get(groupName));
+            ObservableList<ReadOnlyTask> tasks = taskListMap.get(groupName);
+            TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, tasks, indexOffset);
             taskListView.getChildren().add(taskGroupPanel.getRoot());
+            indexOffset += tasks.size();
         }
     }
 

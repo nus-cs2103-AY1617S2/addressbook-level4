@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
@@ -12,6 +13,10 @@
     </stylesheets>
 	<text> </text>
     <content>
-        <ListView fx:id="taskGroupView" VBox.vgrow="NEVER" />
+		<ScrollPane VBox.vgrow="NEVER" fitToWidth="true">
+			<content>
+        		<VBox fx:id="taskGroupView" VBox.vgrow="NEVER"/>
+			</content>
+		</ScrollPane>
     </content>
 </TitledPane>
