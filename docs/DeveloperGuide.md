@@ -4,12 +4,12 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Target Users](#target-users)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Target Users](#2-target-users)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -96,7 +96,7 @@ Given below is a quick overview of each component.
 * Initializing the components in the correct sequence, and connecting them up with each other at app launch
 * Shutting down the components and invoking cleanup method where necessary at shut down
 
-[**`Commons`**](#common-classes) has a collection of classes used by multiple other components.
+[**`Commons`**](#36-common-classes) has a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level:
 
 * [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -105,17 +105,17 @@ Two of those classes play important roles at the architecture level:
 
 The rest of the TaskBoss consists of four components:
 
-* [**`UI`**](#ui-component) : The UI of TaskBoss
-* [**`Logic`**](#logic-component) : The command executor
-* [**`Model`**](#model-component) : The data holder of TaskBoss in-memory
-* [**`Storage`**](#storage-component) : The data reader and writer to and from the hard disk
+* [**`UI`**](#32-ui-component) : The UI of TaskBoss
+* [**`Logic`**](#33-logic-component) : The command executor
+* [**`Model`**](#34-model-component) : The data holder of TaskBoss in-memory
+* [**`Storage`**](#35-storage-component) : The data reader and writer to and from the hard disk
 
 Each of the four components:
 
 * Defines its _API_ in an `interface` with the same name as the component
 * Exposes its functionality using a `{Component Name}Manager` class
 
-> For example, the [**`Logic`**](#logic-component) (see the class diagram given below) defines its API in the [`Logic.java`](../src/main/java/seedu/taskboss/logic/Logic.java)
+> For example, the [**`Logic`**](#33-logic-component) component (see the class diagram given below) defines its API in the [`Logic.java`](../src/main/java/seedu/taskboss/logic/Logic.java)
 interface and exposes its functionality using the [`LogicManager.java`](../src/main/java/seedu/taskboss/logic/LogicManager.java) class.<br>
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
@@ -129,18 +129,15 @@ command `delete 1`.
 <img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskBossChangedEvent` when the TaskBoss data is changed,
- instead of asking the `Storage` to save the updates to the hard disk.
+> Note how the `Model` component simply raises a `TaskBossChangedEvent` when the TaskBoss data is changed,
+ instead of asking the `Storage` component to save the updates to the hard disk.
 
-The diagram below shows how the [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+The diagram below shows how the [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the user interface being updated to reflect the 'Last Updated' time. <br>
 
 <img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
-> Note how the event is propagated through the [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this event-driven approach helps us reduce direct
-  coupling between components.
+> Note how the event is propagated through the [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) to the `Storage` and `UI` components without the `Model` component having to be coupled to either of them. This is an example of how this event-driven approach helps us reduce direct coupling between components.
 
 The sections below give more details of each component.
 
@@ -153,20 +150,19 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/taskboss/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CategoryPanel`,
+The [**`UI`**](#32-ui-component) component consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CategoryPanel`,
 `AllTasksPanel`, `StatusBarFooter`, `HelpWindow` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The [**`UI`**](#ui-component) component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
+The [**`UI`**](#32-ui-component) component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  
 > For example, the layout of the [`MainWindow`](../src/main/java/seedu/taskboss/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The [**`UI`**](#32-ui-component) component,
 
-* Executes user commands using the [**`Logic`**](#logic-component) component
-* Binds itself to some data in the [**`Model`**](#model-component) so that the UI can auto-update when data in the [**`Model`**](#model-component) change
-* Responds to events raised from various parts of the TaskBoss and updates the UI accordingly
+* Executes user commands using the [**`Logic`**](#33-logic-component) component
+* Binds itself to some data in the [**`Model`**](#34-model-component) component so that the user interface can auto-update when data in the [**`Model`**](#34-model-component) component change
+* Responds to events raised from various parts of the TaskBoss and updates the user interface accordingly
 
 ### 3.3. Logic component
 
@@ -177,14 +173,14 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/taskboss/logic/Logic.java)
 
-The `Logic` component,
+The [**`Logic`**](#33-logic-component) component,
 
 * Uses the `Parser` class to parse the user command.
 * Executes a `Command` object via the `LogicManager`.
-* Affects the [**`Model`**](#model-component) (e.g. *adding a person*) and/or raises events.
-* Encapsulates as a `CommandResult` object which is passed back to the [**`UI`**](#ui-component).
+* Affects the [**`Model`**](#34-model-component) component (e.g. *adding a person*) and/or raises events.
+* Encapsulates as a `CommandResult` object which is passed back to the [**`UI`**](#32-ui-component) component.
 
-Given below is the Sequence Diagram for interactions within the [**`Logic`**](#logic-component) component for the *`execute("delete 1")`*
+Given below is the Sequence Diagram for interactions within the [**`Logic`**](#33-logic-component) component for the *`execute("delete 1")`*
  API call.<br>
  
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
@@ -199,12 +195,11 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/taskboss/model/Model.java)
 
-The `Model` component,
+The [**`Model`**](#34-model-component) component,
 
 * Stores a `UserPref` object that represents the user's preferences
 * Stores the TaskBoss data
-* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the [**`UI`**](#32-ui-component) component can be bound to this list so that the user interface automatically updates when the data in the list change
 * Does not depend on any of the other three components
 
 ### 3.5. Storage component
@@ -216,7 +211,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/taskboss/storage/Storage.java)
 
-The `Storage` component,
+The [**`Storage`**](#35-storage-component) component,
 
 * Saves `UserPref` objects in json format and reads it back.
 * Saves the TaskBoss data in xml format and reads it back.
@@ -332,7 +327,7 @@ Here are the steps to convert the project documentation files to PDF format:
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up)
  2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file <br>
-    (e.g. *For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`*)
+    (e.g. *For [UserGuide.md](UserGuide.md), the URL will be `https://cs2103jan2017-w14-b2.github.io/main/docs/UserGuide.html`*)
  3. Click on the `Print` option in Chrome's menu
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format <br>
     For best results, use the settings indicated in the screenshot below <br>

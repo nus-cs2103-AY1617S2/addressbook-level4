@@ -4,13 +4,18 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [Command Summary](#command-summary)
+0. [Introduction](#0-introduction)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
  
 
 ## TaskBoss Prototype
 <img src="images/TaskBoss (all tasks).png" width="600"> <br>
+
+## 0. Introduction
+Have you ever been overwhelmed with too many tasks? Perhaps a couple of these tasks might have slipped your mind. Fear not, as TaskBoss is here. TaskBoss is a user friendly task manager which supports a wide range of features. With an autosave feature, you will never have to worry about losing any of your data entered into TaskBoss.
 
 ## 1. Quick Start
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
@@ -19,7 +24,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `TaskBoss.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+2. Copy the file to the folder you want to use as the home folder for TaskBoss.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -29,7 +34,7 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
      adds a task named `submit proposal` to the TaskBoss.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
 ## 2. Features
@@ -41,6 +46,28 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
+<br>
+
+|Command    |Description                                                          |
+|:---------:|:-------------------------------------------------------------------:|
+|[help](#21-viewing-help--help)                       |View help              |
+|[add](#22-adding-a-task-add)                         |Add a task             |
+|[list](#23-listing-all-tasks--list)                  |List the tasks         |
+|[edit](#24-editing-a-task--edit)                     |Edit a task            |
+|[find](#25-finding-all-tasks-by-name-or-by-datetime--find)           |Find tasks by name or by datetime             |
+|[delete](#26-deleting-a-task--delete)                |Delete a task          |
+|[new](#27-creating-a-category--new)               |Create a category      |
+|[clear](#28-clearing-tasks-by-category--clear)       |Clear tasks in category|
+|[view](#29-viewing-a-task--view)                    |View a task            |
+|[name](#210-modifying-a-category-name--name)         |Rename a category      |
+|[done](#211-marking-a-task-done--done)               |Mark a task as done      |
+|[undo](#212-undoing-a-command--undo)                 |Undo a task            |
+|[sort](#213-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
+|[save](#215-exporting-the-data--save)                |Save TaskBoss          |
+|[exit](#216-exiting-the-program--exit)               |Exit TaskBoss          |
+
+<br>
+
 ### 2.1. Viewing help : `help`
 
 Format: `help`
@@ -50,8 +77,8 @@ Format: `help`
 Adds a task to the TaskBoss<br>
 Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
 
-> * Date can be written in any format whether using slashes, dashes, or natural language  <br>
-> * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>` <br>
+> * Date can be written in any format whether using slashes, dashes, or natural language.  <br>
+> * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>`. <br>
 > * Priority level is either `1` (low priority), `2` (medium priority) or `3` (high priority).
 > * Order of optional parameters does not matter.
 > * All fields are optional except TASK_NAME.
@@ -66,7 +93,14 @@ Examples:
 ### 2.3. Listing all tasks : `list`
 
 Shows a list of all tasks in the TaskBoss.<br>
-Format: `list`
+Format: `list` 
+
+Shows a list of tasks under a specified category. <br>
+Format: `list c/CATEGORY NAME` 
+
+Example:
+* `list c/Project`<br>
+
 
 ### 2.4. Editing a task : `edit`
 
@@ -75,7 +109,7 @@ Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIOR
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
+    The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * Order of the optional parameters does not matter.
@@ -88,49 +122,46 @@ Examples:
 * `edit 3 p/3`<br>
   Edits the priority level of 3rd task to be 3. 
 
-### 2.5. Finding all tasks by Name: `find`
+### 2.5. Finding all tasks by Name or by Datetime : `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find n/TASK_NAME` 
 
-> * The search is case-sensitive. e.g `Project` will not match `project`
-> * The order of the keywords does not matter. e.g. `meeting project` will match `project meeting`
-> * The name/date/information is searched according to the command user enters.
-> * Only full words will be matched e.g. `meeting` will not match `meetings`
+Finds tasks whose start datetime contains the given keywords.<br>
+Formats: `find sd/date and time` `find ed/date and time`
+
+> * The search for name is case-insensitive. e.g `Project` will match `project`.
+> * The order of the name keywords does not matter. e.g. `meeting project` will match `project meeting`.
+> * For name searching, only full words will be matched e.g. `meeting` will not match `meetings`.
+> * The date is searched according to the date format user enters.
+> * The date format for find date command is restricted as following:
+  (1). DD-MM-YYYY
+  (2). DD/MM/YY
+  (3). DD/MM/YY
+  (4). MM/DD/YYYY
 
 Examples:
 
 * `find n/Meeting`<br>
-  Returns all tasks whose name contains `Meeting`
+  Returns all tasks whose name contains `Meeting`.
   
-* `find ed/04-02-2017`<br>
-  Returns all tasks with the end day `04-02-2017`
-
-### 2.6. Finding all tasks by Deadline: `find`
-
-Finds tasks whose deadlines contain any of the given keywords.<br>
-Format: `find sd/date and time` `find ed/date and time`
-
-> * The date is searched according to the date format user enters.
-> * The date format for find date command is restricted either DD-MM-YYYY or DD/MM/YY formats 
-or MM-DD-YYYY or MM/DD/YYYY, depending on your system's settings.
-
-Examples:
+* `find n/shopping milk`<br>
+  Returns all tasks whose name contains at least one of the keywords: `shopping` and `milk`.
 
 * `find sd/04-02-2017`<br>
-  Returns all tasks with the start date `04-02-2017`
+  Returns all tasks with the start date `04-02-2017`.
   
 * `find ed/05-02-2017`<br>
-  Returns all tasks with the end date `05-02-2017`
+  Returns all tasks with the end date `05-02-2017`.
   
-### 2.7. Deleting a task : `delete`
+### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the TaskBoss.<br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index refers to the index number shown in the most recent listing. <br>
+> The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
 Examples:
 
@@ -142,32 +173,32 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 2.8. Creating a category : `new`
+### 2.7. Creating a category : `new`
 
-Creates a new category in TaskBoss.<br>
+Creates a new category in TaskBoss. <br>
 Format: `new CATEGORY`
 
 Example:
 
 * `new Study`<br>
 
-### 2.9. Clearing tasks by category : `clear`
+### 2.8. Clearing tasks by category : `clear`
 
-Clears all tasks under the specified category from TaskBoss.<br>
+Clears all tasks under the specified category from TaskBoss. <br>
 Format: `clear CATEGORY`
 
 > The default categories of TaskBoss are `All Tasks` and `Done`. <br>
 
-### 2.10. Viewing a task : `view`
+### 2.9. Viewing a task : `view`
 
 Views a task by entering the task index from TaskBoss.<br>
 Format: `view INDEX`
 
 > Views the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
-### 2.11. Modifying a category name : `name`
+### 2.10. Modifying a category name : `name`
 
 Modifies a category name in TaskBoss.<br>
 Format: `name EXISTING_CATEGORY NEW_CATEGORY`
@@ -176,112 +207,73 @@ Example:
 
 * `name School ModuleStudy`<br>
 
-### 2.12. Listing tasks by category : `listcategory`
+### 2.11. Marking a task done : `done`
 
-Lists all tasks under a specified category.<br>
-Format: `listcategory CATEGORY`
-
-Example:
-
-* `listcategory School`<br>
-
-### 2.13. Marking a task done : `done`
-
-Marks a task done in TaskBoss.<br>
+Marks a task as done in TaskBoss.<br>
 Format: `done INDEX`
 
 > Marks the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
-### 2.14. Undoing a command : `undo`
+### 2.12. Undoing a command : `undo`
 
 Undoes a most recent command.<br>
 Format: `undo`
 
-### 2.15. Sorting tasks by deadline : `sort`
+### 2.13. Sorting tasks : `sort`
 
 Sorts tasks in TaskBoss by their deadlines.<br>
-Format: `sort`
-
-> Tasks are sorted by nearest end date and time
-
-### 2.16. Sorting tasks by priority : `sort p`
+Format: `sort` 
 
 Sorts tasks in the TaskBoss by their priorities.<br>
-Format: `sort p`
+Format: `sort p` 
 
-> Tasks are sorted by descending order of priority levels
+### 2.14. Saving the data 
 
-### 2.17. Exiting the program : `exit`
+TaskBoss data will automatically be saved in local hard disk after entering any command that mutates the data.<br>
+There is no need to save manually.
+
+### 2.15. Exporting the data : `save`
+
+Exports data to an existing file.
+Format: `save e/FILE_PATH` 
+
+Creates a new file and exports data to that file.
+Format: `save n/FILE_PATH NEW_FILE_NAME` 
+
+### 2.16. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.18. Saving the data 
 
-TaskBoss data will automatically be saved in local hard disk after any command that mutates the data.<br>
-There is no need to save manually.
+## 3. FAQ
 
-### 2.19. Exporting data to an existing file : `save e/`
-
-Format: `save e/FILE_PATH`
-
-### 2.20. Exporting the data to a new file : `save n/`
-
-Format: `save n/FILE_PATH NEW_FILE_NAME`
-
-## 3. Command Summary
-
-* **Add**  `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g. `add n/Post-exam celebration i/@Zouk sd/10-03-2017 ed/11-03-2017 c/Leisure p/1`
-
-* **Clear by Category** : `clear CATEGORY`
-  e.g. `clear School`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find by name** : `find n/TASK_NAME` <br>
-  e.g. `find n/Meeting`
-
-* **Find by end date** : `find sd/END_DATE` <br>
-  e.g. `find d/03-01-2017`
-
-* **Find by task information** : `find i/INFORMATION` <br>
-  e.g. `find i/Meeting room 3`
-  
-* **Create category** : `new CATEGORY` <br>
-
-* **Edit category** : `name EXISTING_CATEGORY NEW_CATEGORY` <br>
-
-* **List** : `list` <br>
-
-* **List by category** : `listcategory` <br>
-  e.g. `listcategory study`
-
-* **Help** : `help` <br>
-
-* **Edit** : `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]` <br>
-  e.g.`edit 1 i/Use Stack et/23:59`
-
-* **Undo** : `undo` <br>
-
-* **Sort by deadline** : `sort` <br>
-
-* **Sort by priority** : `sort p` <br>
-
-* **Mark done** : `done INDEX` <br>
-
-* **View** : `view INDEX` <br>
-
-* **Export to a existing file** : `save e/FILE_PATH` <br>
-
-* **Export to a new file** : `save n/FILE_PATH NEW_FILE_NAME` <br>
+**_Q: How do I save my task data in TaskBoss?_** <br>
+TaskBoss saves your data to ‘data/taskboss.xml’ by default whenever your task list is updated. There is no need to save manually. You can also change the storage location using the `save` command.
 
 
+## 4. Command Summary
 
+<br>
 
+|Command    |Parameters                                                        |
+|:---------:|:-------------------------------------------------------------------------------------------|
+|[help](#21-viewing-help--help)                       |**`help`**              |
+|[add](#22-adding-a-task-add)                         |**`add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY [p/PRIORITY_LEVEL]`**             |
+|[list](#23-listing-all-tasks--list)                  |**`list` `list c/CATEGORY NAME`**        |
+|[edit](#24-editing-a-task--edit)                     |**`edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`**|
+|[find](#25-finding-all-tasks-by-name-or-by-datetime--find)|**`find n/TASK_NAME`  `find sd/date and time`  `find ed/date and time`**|
+|[delete](#26-deleting-a-task--delete)                |**`delete INDEX`**         |
+|[new](#27-creating-a-category--new)               |**`new CATEGORY`**      |
+|[clear](#28-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
+|[view](#29-viewing-a-task--view)                    |**`view INDEX`**             |
+|[name](#210-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
+|[done](#211-marking-a-task-done--done)               |**`done INDEX`**        |
+|[undo](#212-undoing-a-command--undo)                 |**`undo`**            |
+|[sort](#213-sorting-tasks--sort)                     |**`sort` `sort p`**   |
+|[save](#215-exporting-the-data--save)                |**`save e/FILE_PATH` `save n/FILE_PATH NEW_FILE_NAME`**|
+|[exit](#216-exiting-the-program--exit)               |**`exit`**           |
 
-
-
+<br>
