@@ -3,7 +3,6 @@ package seedu.taskboss.logic.parser;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import com.joestelmach.natty.DateGroup;
 
@@ -11,7 +10,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.task.DateTime;
 
 /*
- * Parses date
+ * Parses date and returns a DateTime object for execution
  */
 public class DateTimeParser {
 
@@ -38,6 +37,10 @@ public class DateTimeParser {
         return numDates >= 1;
     }
 
+    /**
+     * Parses a given {@code String date}
+     * @return List<DateGroup>
+     */
     public List<DateGroup> parse(String date) {
         String currentDate = date;
         if (Locale.getDefault().equals(Locale.US)) {
@@ -49,7 +52,8 @@ public class DateTimeParser {
     }
 
     /**
-     * Parses a given {@code String date}
+     * Calls helper parse() to parse a given {@code String date}
+     * and verifies accepted date input
      * @return parsed DateTime object
      */
     public DateTime parseDate(String date) throws IllegalValueException {
@@ -67,10 +71,9 @@ public class DateTimeParser {
         return new DateTime(dateGroup.getDates().get(0), dateGroup.isDateInferred(), dateGroup.isTimeInferred());
     }
 
-    public Optional<String> convert(Optional<DateTime> dateTime) {
-        return dateTime.isPresent() ? Optional.of(dateTime.toString()) : Optional.empty();
-    }
-
+    /**
+     * Returns number of DateGroup present in a given {@code List<DateGroup>}
+     */
     private int countDates(List<DateGroup> dateGroups) {
         int numTotalDates = 0;
         for (DateGroup dateGroup : dateGroups) {
