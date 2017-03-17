@@ -15,8 +15,8 @@ import javafx.scene.layout.Region;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.ui.NewResultAvailableEvent;
 import seedu.task.commons.util.FxViewUtil;
+import seedu.task.model.ChatList;
 import seedu.task.model.task.Chat;
-import seedu.task.model.task.ChatList;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.
