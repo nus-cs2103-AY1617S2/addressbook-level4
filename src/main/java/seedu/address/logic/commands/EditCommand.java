@@ -6,8 +6,12 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.tag.UniqueTagList;
@@ -19,15 +23,15 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+            + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the ToDoApp.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -54,8 +58,8 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(personToEdit, editTaskDescriptor);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -63,21 +67,25 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
     }
 
     /**
-     * Creates and returns a {@code Task} with the details of {@code personToEdit}
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask personToEdit,
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) {
-        assert personToEdit != null;
+        assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(personToEdit::getName);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Start updatedStart = editTaskDescriptor.getStart().orElseGet(taskToEdit::getStart);
+        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
 
-        return new Task(updatedName, updatedTags);
+        return new Task(updatedName, updatedStart, updatedDeadline, updatedPriority, updatedTags, updatedNotes);
     }
 
     /**
@@ -86,13 +94,20 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
+        private Optional<Start> start = Optional.empty();
+        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Notes> notes = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
+            this.deadline = toCopy.getDeadline();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
+            this.notes = toCopy.getNotes();
         }
 
         /**
@@ -111,6 +126,33 @@ public class EditCommand extends Command {
             return name;
         }
 
+        public void setStart(Optional<Start> start) {
+            assert start != null;
+            this.start = start;
+        }
+
+        public Optional<Start> getStart() {
+            return start;
+        }
+
+        public void setDeadline(Optional<Deadline> deadline) {
+            assert deadline != null;
+            this.deadline = deadline;
+        }
+
+        public Optional<Deadline> getDeadline() {
+            return deadline;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
@@ -118,6 +160,14 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+        public void setNotes(Optional<Notes> notes) {
+            assert notes != null;
+            this.notes = notes;
+        }
+
+        public Optional<Notes> getNotes() {
+            return notes;
         }
     }
 }
