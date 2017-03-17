@@ -2,6 +2,12 @@ package savvytodo.testutil;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.TaskManager;
+import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
+import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
+import savvytodo.model.task.Name;
+import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
@@ -26,7 +32,8 @@ public class TypicalTestTasks {
                     .withDescription("Celebration @ 1pm").withLocation("wall street")
                     .withDateTime("03/03/2017 1400", "04/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).build();
-            meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")                    .withDescription("cornelia@google.com").withLocation("10th street")
+            meeting = new TaskBuilder().withName("CS2103 Project Meeting").withPriority("medium")
+                    .withDescription("cornelia@google.com").withLocation("10th street")
                     .withDateTime("04/03/2017 1400", "05/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).build();
             test = new TaskBuilder().withName("CS2103 midterm test").withPriority("high")
@@ -87,9 +94,12 @@ public class TypicalTestTasks {
             TestTask temp = new TestTask();
             try {
                 temp.setName(new Name("Task " + i));
-                temp.setEmail(new Description("" + i));
-                temp.setAddress(new Address("" + i));
+                temp.setDescription(new Description("" + i));
+                temp.setLocation(new Location("" + i));
                 temp.setPriority(new Priority(i % 2 == 0 ? "low" : "high"));
+                temp.setCategories(new UniqueCategoryList());
+                temp.setDateTime(new DateTime());
+                temp.setRecurrence(new Recurrence());
             } catch (IllegalValueException e) {
                 e.printStackTrace();
             }
