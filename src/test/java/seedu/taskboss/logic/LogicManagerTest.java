@@ -137,7 +137,8 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalValueException, InvalidDatesException {
+    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalValueException,
+        InvalidDatesException {
         TaskBoss expectedTaskBoss = new TaskBoss(model.getTaskBoss());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
