@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
 import seedu.address.model.tag.UniqueTagList;

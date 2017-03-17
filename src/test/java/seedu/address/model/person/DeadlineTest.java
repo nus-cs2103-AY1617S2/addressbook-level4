@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
