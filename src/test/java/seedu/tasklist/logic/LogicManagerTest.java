@@ -109,6 +109,28 @@ public class LogicManagerTest {
     }
 
     /**
+     * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
+     * Also confirms that both the 'task list' and the 'last shown list' are as specified.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskList, List)
+     */
+    private void assertCommandSuccess(String inputCommand, String expectedMessage,
+                                      ReadOnlyTaskList expectedTaskList,
+                                      List<? extends ReadOnlyTask> expectedShownList) {
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskList, expectedShownList);
+    }
+
+    /**
+     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
+     * Both the 'task list' and the 'last shown list' are verified to be unchanged.
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskList, List)
+     */
+    private void assertCommandFailure(String inputCommand, String expectedMessage) {
+        TaskList expectedTaskList = new TaskList(model.getTaskList());
+        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
+        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskList, expectedShownList);
+    }
+
+    /**
      * Executes the command and confirms that the result message is correct.
      * Both the 'task list' and the 'last shown list' are expected to be empty.
      * @see #assertCommandBehavior(String, String, ReadOnlyTaskList, List)
@@ -140,27 +162,6 @@ public class LogicManagerTest {
         assertEquals(expectedTaskList, latestSavedTaskList);
     }
 
-    /**
-     * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'task list' and the 'last shown list' are as specified.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskList, List)
-     */
-    private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskList expectedTaskList,
-                                      List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskList, expectedShownList);
-    }
-
-    /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'task list' and the 'last shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskList, List)
-     */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskList expectedTaskList = new TaskList(model.getTaskList());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskList, expectedShownList);
-    }
 
     /**
      * Executes the command, confirms that the result message is correct
