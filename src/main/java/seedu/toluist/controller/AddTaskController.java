@@ -56,8 +56,7 @@ public class AddTaskController extends Controller {
     }
 
     public HashMap<String, String> tokenize(String command) {
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        return taskTokenizer.tokenize(command, false, true);
+        return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, false, true);
     }
 
     private CommandResult add(TodoList todoList, String description,
