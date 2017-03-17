@@ -93,8 +93,8 @@ public class TestUtil {
                         new DateTime("Feb 28, 2017"), new Information("little india"), new UniqueCategoryList()),
                 new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("chicago ave"), new UniqueCategoryList()),
-                new Task(new Name("Johnny Depp"), new PriorityLevel("2"), new DateTime("tomorrow"),
-                        new DateTime("next sat 5pm"), new Information("Silicon Valley"), new UniqueCategoryList())
+                new Task(new Name("Johnny Depp"), new PriorityLevel("2"), new DateTime("next sat 5pm"),
+                        new DateTime("tomorrow"), new Information("Silicon Valley"), new UniqueCategoryList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

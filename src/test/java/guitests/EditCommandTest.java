@@ -111,7 +111,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     //@@ A0143157J
     @Test
     public void edit_invalidDates_failure() {
-        commandBox.runCommand("edit 3 sd/tomorrow ed/next fri 5pm");
+        commandBox.runCommand("edit 3 sd/next fri 5pm ed/tomorrow");
 
         assertResultMessage(EditCommand.ERROR_INVALID_DATES);
     }

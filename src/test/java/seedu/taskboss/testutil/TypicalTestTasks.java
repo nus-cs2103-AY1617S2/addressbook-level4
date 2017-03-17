@@ -57,8 +57,8 @@ public class TypicalTestTasks {
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("chicago ave").build();
             johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("2")
-                    .withStartDateTime("tomorrow")
-                    .withEndDateTime("next sat 5pm")
+                    .withStartDateTime("next sat 5pm")
+                    .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
