@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "ToDo App";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String toDoListFilePath = "data/addressbook.xml";
+    private String toDoListFilePath = "data/todolist.xml";
     private String toDoListName = "MyToDoList";
 
 
@@ -46,16 +46,16 @@ public class Config {
         return toDoListFilePath;
     }
 
-    public void setToDoListFilePath(String addressBookFilePath) {
-        this.toDoListFilePath = addressBookFilePath;
+    public void setToDoListFilePath(String toDoListFilePath) {
+        this.toDoListFilePath = toDoListFilePath;
     }
 
     public String getToDoListName() {
         return toDoListName;
     }
 
-    public void setToDoListName(String addressBookName) {
-        this.toDoListName = addressBookName;
+    public void setToDoListName(String toDoListName) {
+        this.toDoListName = toDoListName;
     }
 
 
