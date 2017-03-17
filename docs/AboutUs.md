@@ -52,6 +52,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of:
 * Components in charge of:
 * Features implemented:
+	* Undo operation
+	* Redo operation
 * Code written:
 * Other major contributions:
     * Initial refactoring from AddressBook-Level-4 to SavvyTo-Do

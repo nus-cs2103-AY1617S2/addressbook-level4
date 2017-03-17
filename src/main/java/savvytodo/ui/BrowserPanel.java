@@ -9,6 +9,7 @@ import savvytodo.commons.util.FxViewUtil;
 import savvytodo.model.task.ReadOnlyTask;
 
 /**
+ * @author A0140016B
  * The Browser Panel of the App.
  */
 public class BrowserPanel extends UiPart<Region> {
@@ -30,7 +31,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadTaskPage(ReadOnlyTask task) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
+        loadPage("https://www.google.com.sg/maps/search/" + task.getLocation().value.replaceAll(" ", "+"));
     }
 
     public void loadPage(String url) {

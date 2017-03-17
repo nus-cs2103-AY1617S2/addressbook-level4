@@ -72,16 +72,16 @@ public class XmlTaskManagerStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addCategory(new Task(td.discussion));
+        original.addTask(new Task(td.discussion));
         original.removeTask(new Task(td.presentation));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.taskManagerBook(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addCategory(new Task(td.interview));
+        original.addTask(new Task(td.interview));
         xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
-        readBack = xmlTaskManagerStorage.readTaskManaager().get(); //file path not specified
+        readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
 
     }

@@ -7,6 +7,8 @@ import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 import savvytodo.model.task.UniqueTaskList.DuplicateTaskException;
+import savvytodo.model.undoredo.exceptions.RedoFailureException;
+import savvytodo.model.undoredo.exceptions.UndoFailureException;
 
 /**
  * The API of the Model component.
@@ -42,5 +44,11 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
+    /** Undo an operation */
+    void undo() throws UndoFailureException;
+
+    /** Redo an operation */
+    void redo() throws RedoFailureException;
 
 }

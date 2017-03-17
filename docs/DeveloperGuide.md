@@ -344,18 +344,18 @@ b. Require developers to download those libraries manually (this creates extra w
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
-Priority | As a(n) ... | I want to ... | So that I can...
+Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new [task](#task) | record task that needs to be completed
 `* * *` | user | update a task | modify the details of the task without deletion and re-addition
 `* * *` | user | delete a task | remove entries that I no longer need
-`* * *` | user | find a task by some keywords | locate similar tasks without having to go through the entire list
+`* * *` | user | find a task by some (case-insensitive) keywords | locate similar tasks without having to go through the entire list
 `* * *` | user | mark a completed task done | know this task has been completed
 `* * *` | user | view list of ongoing tasks| know what tasks need to be done
 `* * *` | user | view list of archived tasks| know what has been completed
 `* * *` | user | sort ongoing tasks by due date or priority | know what has been completed and upcoming schedule
-`* * *` | user | change storage location | choose to store the data file in a local folder controlled by a cloud syncing service
+`* * *` | user | change storage location | potentially move the storage to a folder that I can access from the cloud and use it on other devices
 `* *` | user | undo the recent command | revert the changes quickly
 `* *` | user | view the calendar view | better plan my tasks
 `* *` | user | view selected day summary of tasks | know what tasks need to be done for that day
@@ -363,8 +363,6 @@ Priority | As a(n) ... | I want to ... | So that I can...
 `* *` | advanced user | have [alias](#alias) for keywords | quickly type what I want
 `*` | user | set recurring task | not add a similar task each time
 `*` | user | have smart autocomplete suggestions as I enter my task | speed up the process of creating a task
-[//]: # (@@author yeejfe)
-
 
 ## Appendix B : Use Cases
 
@@ -607,8 +605,6 @@ Use case ends.
 ### Development
 1. All code should be properly documented.
 
-[//]: # (@@author yeejfe)
-
 ## Appendix D : Glossary
 
 ##### Mainstream OS
@@ -624,8 +620,6 @@ Use case ends.
 ##### Alias
 
 > For instance, 'ppt' stands for 'presentation'
-
-[//]: # (@@author yeejfe)
 
 ## Appendix E : Product Survey
 
