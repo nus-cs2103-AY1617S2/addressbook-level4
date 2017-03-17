@@ -35,7 +35,7 @@ import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.Name;
 import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
-import seedu.todolist.storage.XmlSerializableAddressBook;
+import seedu.todolist.storage.XmlSerializableToDoList;
 
 /**
  * A utility class for test cases.
@@ -141,8 +141,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new ToDoList());
+    public static XmlSerializableToDoList generateSampleStorageAddressBook() {
+        return new XmlSerializableToDoList(new ToDoList());
     }
 
     /**

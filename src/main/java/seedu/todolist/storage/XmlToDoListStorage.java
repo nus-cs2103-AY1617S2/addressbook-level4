@@ -14,13 +14,13 @@ import seedu.todolist.model.ReadOnlyToDoList;
 /**
  * A class to access ToDoList data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements ToDoListStorage {
+public class XmlToDoListStorage implements ToDoListStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlToDoListStorage.class);
 
     private String filePath;
 
-    public XmlAddressBookStorage(String filePath) {
+    public XmlToDoListStorage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -39,19 +39,19 @@ public class XmlAddressBookStorage implements ToDoListStorage {
      * @throws DataConversionException if the file is not in the correct format.
      */
     public Optional<ReadOnlyToDoList> readToDoList(String filePath) throws DataConversionException,
-    FileNotFoundException {
+        FileNotFoundException {
         assert filePath != null;
 
-        File addressBookFile = new File(filePath);
+        File toDoListFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("AddressBook file "  + addressBookFile + " not found");
+        if (!toDoListFile.exists()) {
+            logger.info("ToDoList file "  + toDoListFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyToDoList addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyToDoList toDoListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(addressBookOptional);
+        return Optional.of(toDoListOptional);
     }
 
     @Override
@@ -63,13 +63,13 @@ public class XmlAddressBookStorage implements ToDoListStorage {
      * Similar to {@link #saveToDoList(ReadOnlyToDoList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveToDoList(ReadOnlyToDoList addressBook, String filePath) throws IOException {
-        assert addressBook != null;
+    public void saveToDoList(ReadOnlyToDoList toDoList, String filePath) throws IOException {
+        assert toDoList != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableToDoList(toDoList));
     }
 
 }

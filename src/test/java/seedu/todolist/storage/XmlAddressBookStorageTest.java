@@ -34,7 +34,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyToDoList> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readToDoList(addToTestDataPathIfNotNull(filePath));
+        return new XmlToDoListStorage(filePath).readToDoList(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -64,7 +64,7 @@ public class XmlAddressBookStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         ToDoList original = td.getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlToDoListStorage xmlAddressBookStorage = new XmlToDoListStorage(filePath);
 
         //Save in new file and read back
         xmlAddressBookStorage.saveToDoList(original, filePath);
@@ -93,7 +93,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private void saveAddressBook(ReadOnlyToDoList addressBook, String filePath) throws IOException {
-        new XmlAddressBookStorage(filePath).saveToDoList(addressBook, addToTestDataPathIfNotNull(filePath));
+        new XmlToDoListStorage(filePath).saveToDoList(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test

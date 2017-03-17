@@ -8,7 +8,7 @@ import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.GuiSettings;
 import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.UserPrefs;
-import seedu.todolist.storage.XmlSerializableAddressBook;
+import seedu.todolist.storage.XmlSerializableToDoList;
 import seedu.todolist.testutil.TestUtil;
 
 /**
@@ -36,7 +36,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableToDoList(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
