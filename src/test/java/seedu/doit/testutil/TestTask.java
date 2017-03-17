@@ -172,57 +172,55 @@ public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
             return 0;
         }
     }
-    
-    
-    
-   /**
-    * Compares the current TestTask with another TestTask other.
-    * The current task is considered to be less than the other task if
-    * 1) This item has a earlier start time associated
-    * 2) both items are not events but this item has a later end time
-    * 3) but this task has a lexicographically smaller name (useful when sorting tasks in testing)
-    */
-   @Override
-   public int compareTo(Task other) {
-       int comparedStartTime = compareStartTime(other);
-       if (comparedStartTime != 0) {
-           return comparedStartTime;
-       }
 
-       int comparedEndTime = compareEndTime(other);
-       if (comparedEndTime != 0) {
-           return comparedEndTime;
-       }
+    /**
+     * Compares the current TestTask with another TestTask other.
+     * The current task is considered to be less than the other task if
+     * 1) This item has a earlier start time associated
+     * 2) both items are not events but this item has a later end time
+     * 3) but this task has a lexicographically smaller name (useful when sorting tasks in testing)
+     */
+    @Override
+    public int compareTo(Task other) {
+        int comparedStartTime = compareStartTime(other);
+        if (comparedStartTime != 0) {
+            return comparedStartTime;
+        }
 
-       return compareName(other);
-   }
+        int comparedEndTime = compareEndTime(other);
+        if (comparedEndTime != 0) {
+            return comparedEndTime;
+        }
 
-   private int compareName(Task other) {
-       return this.getName().toString().compareTo(other.getName().toString());
-   }
+        return compareName(other);
+    }
 
-   public int compareStartTime(Task other) {
-       if (this.hasStartTime() && other.hasStartTime()) {
-           return compareName(other);
-       } else if (this.hasStartTime()) {
-           return 1;
-       } else if (other.hasStartTime()) {
-           return -1;
-       } else {
-           return 0;
-       }
-   }
+    private int compareName(Task other) {
+        return this.getName().toString().compareTo(other.getName().toString());
+    }
 
-   public int compareEndTime(Task other) {
-       if (this.hasEndTime() && other.hasEndTime()) {
-           return compareName(other);
-       } else if (this.hasEndTime()) {
-           return -1;
-       } else if (other.hasEndTime()) {
-           return 1;
-       } else {
-           return 0;
-       }
-   }
+    public int compareStartTime(Task other) {
+        if (this.hasStartTime() && other.hasStartTime()) {
+            return compareName(other);
+        } else if (this.hasStartTime()) {
+            return 1;
+        } else if (other.hasStartTime()) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int compareEndTime(Task other) {
+        if (this.hasEndTime() && other.hasEndTime()) {
+            return compareName(other);
+        } else if (this.hasEndTime()) {
+            return -1;
+        } else if (other.hasEndTime()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
 }
