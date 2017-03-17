@@ -34,7 +34,7 @@ public class Timing {
             }
             this.value = trimmedTiming;
         } else {
-            this.value = null;
+            this.value = "n/a";
         }
     }
 
@@ -43,16 +43,20 @@ public class Timing {
      */
     public static boolean isValidTiming(String test) {
     	boolean isValid = false;
-        for(int i=0; i<timing_format.length; i++){
-        	SimpleDateFormat sdf = new SimpleDateFormat(timing_format[i]);
-            sdf.setLenient(false);
-	        try {
-	            //throws ParseException if date is not valid
-	            sdf.parse(test);
-	            isValid = true;
-	            break;
-	        } catch (ParseException e) {
-	        }
+    	if(test.equals("n/a")){
+    		isValid = true;
+    	} else{
+    		for(int i=0; i<timing_format.length; i++){
+            	SimpleDateFormat sdf = new SimpleDateFormat(timing_format[i]);
+                sdf.setLenient(false);
+    	        try {
+    	            //throws ParseException if date is not valid
+    	            sdf.parse(test);
+    	            isValid = true;
+    	            break;
+    	        } catch (ParseException e) {
+    	        }
+    		}
         }
         return isValid;
     }

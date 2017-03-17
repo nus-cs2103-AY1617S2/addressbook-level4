@@ -72,7 +72,7 @@ public class PrioritizeCommand extends Command {
                 .orElseGet(taskToPrioritize::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToPrioritize::getPriority);
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToPrioritize::getStartTiming);
-        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToPrioritize::getStartTiming);
+        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToPrioritize::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToPrioritize::getTags);
 
 
