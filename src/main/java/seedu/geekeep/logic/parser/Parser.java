@@ -19,7 +19,6 @@ import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.ListDoneCommand;
 import seedu.geekeep.logic.commands.ListUndoneCommand;
-import seedu.geekeep.logic.commands.SelectCommand;
 import seedu.geekeep.logic.commands.UndoneCommand;
 
 /**
@@ -53,9 +52,6 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

@@ -33,7 +33,6 @@ import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
-import seedu.geekeep.logic.commands.SelectCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
@@ -471,34 +470,6 @@ public class LogicManagerTest {
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
-    }
-
-    @Test
-    public void execute_select_jumpsToCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        helper.addToModel(model, threeTasks);
-
-        assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
-                expectedAB,
-                expectedAB.getTaskList());
-        assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
-    }
-
-
-    @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
-    }
-
-    @Test
-    public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
     }
 
     @Test
