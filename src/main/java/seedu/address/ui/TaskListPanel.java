@@ -3,17 +3,15 @@ package seedu.address.ui;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
@@ -41,6 +39,15 @@ public class TaskListPanel extends UiPart<Region> {
         initTaskListsByStatus(taskList);
         initTaskGroups();
         addToPlaceholder(taskListPlaceholder);
+
+        // When taskList changes, update everything
+        taskList.addListener(new ListChangeListener<ReadOnlyTask>() {
+
+            public void onChanged(Change<? extends ReadOnlyTask> change) {
+                initTaskListsByStatus(taskList);
+                initTaskGroups();
+            }
+        });
     }
 
     /**
@@ -68,6 +75,7 @@ public class TaskListPanel extends UiPart<Region> {
      * Instantiate TaskGroupPanel objects and add them to taskListView.
      */
     private void initTaskGroups() {
+        taskListView.getChildren().clear();
         for (String groupName : groupNames) {
             TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, taskListMap.get(groupName));
             taskListView.getChildren().add(taskGroupPanel.getRoot());
