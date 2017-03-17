@@ -34,7 +34,7 @@
 
 .text-field .content {
     -fx-text-fill: white;
-    -fx-highlight-fill: white;
+    -fx-highlight-fill: #CFCFCF;
     -fx-background-radius: 0;
     -fx-background-color: transparent, #1C2122, transparent, #1C2122;
 }
@@ -46,7 +46,7 @@
 
 .text-field:focused {
     -fx-background-radius: 0;
-    -fx-highlight-fill: #1C2122;
+    -fx-highlight-fill: #CFCFCF;
 }
 
 .text-area {
@@ -58,7 +58,7 @@
 
 .text-area .content {
     -fx-text-fill: white;
-    -fx-highlight-fill: white;
+    -fx-highlight-fill: #CFCFCF;
     -fx-background-radius: 0;
     -fx-background-color: transparent, #1C2122, transparent, #1C2122;
 }
@@ -70,7 +70,7 @@
 
 .text-area:focused {
     -fx-background-radius: 0;
-    -fx-highlight-fill: #1C2122;
+    -fx-highlight-fill: #CFCFCF;
 }
 
 .tab-pane {
