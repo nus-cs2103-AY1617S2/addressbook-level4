@@ -25,7 +25,8 @@ public class EditCommandTest extends ToDoAppGuiTest {
         String detailsToEdit = "Bobby t/husband";
         int toDoAppIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withStart("today")
+                .withDeadline("tomorrow").withPriority(1).withTags("husband").withNotes("").build();
 
         assertEditSuccess(toDoAppIndex, toDoAppIndex, detailsToEdit, editedTask);
     }
@@ -95,8 +96,8 @@ public class EditCommandTest extends ToDoAppGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline s/today d/tomorrow "
+                                + "p/1 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
