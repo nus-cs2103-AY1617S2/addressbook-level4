@@ -49,7 +49,7 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-        
+
         case EditCommand.ALTERNATIVE_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -58,7 +58,7 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-        
+
         case DeleteCommand.ALTERNATIVE_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
