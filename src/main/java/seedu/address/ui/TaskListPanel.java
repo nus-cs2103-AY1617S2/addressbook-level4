@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -33,6 +34,7 @@ public class TaskListPanel extends UiPart<Region> {
     };
 
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
+    private HashMap<String, ArrayList<Integer>> taskIndexMap;
 
     @FXML
     private VBox taskListView;
@@ -62,17 +64,17 @@ public class TaskListPanel extends UiPart<Region> {
      */
     private void initTaskListsByStatus(ObservableList<ReadOnlyTask> taskList) {
         taskListMap = new HashMap<String, ObservableList<ReadOnlyTask>>();
+        taskIndexMap = new HashMap<String, ArrayList<Integer>>();
         for (String groupName : groupNames) {
             taskListMap.put(groupName, FXCollections.observableArrayList());
+            taskIndexMap.put(groupName, new ArrayList<Integer>());
         }
+        int index = 0;
         for (ReadOnlyTask task : taskList) {
             String taskStatus = task.getStatus().toString();
-            for (String groupName : groupNames) {
-                if (groupName.equals(taskStatus)) {
-                    taskListMap.get(groupName).add(task);
-                    break;
-                }
-            }
+            taskListMap.get(taskStatus).add(task);
+            taskIndexMap.get(taskStatus).add(index);
+            index++;
         }
     }
 
@@ -80,18 +82,17 @@ public class TaskListPanel extends UiPart<Region> {
      * Instantiate TaskGroupPanel objects and add them to taskListView.
      */
     private void createTaskListView() {
-        int indexOffset = 0;
         taskListView.getChildren().clear();
         for (String groupName : groupNames) {
             ObservableList<ReadOnlyTask> tasks = taskListMap.get(groupName);
-            TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, tasks, indexOffset);
+            ArrayList<Integer> taskIndexList = taskIndexMap.get(groupName);
+            TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, tasks, taskIndexList);
             taskListView.getChildren().add(taskGroupPanel.getRoot());
 
             // Restore expanding state
             if (lastShownGroupName != null && lastShownGroupName.equals(groupName)) {
                 taskGroupPanel.openTitlePane();
             }
-            indexOffset += tasks.size();
         }
     }
 
