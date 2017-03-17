@@ -52,7 +52,7 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            mainWindow.fillInnerParts(); 
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -124,7 +124,9 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+        
+        //FOR BROWSER
+        //mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 
