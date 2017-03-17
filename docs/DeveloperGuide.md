@@ -96,7 +96,7 @@ Given below is a quick overview of each component.
 * Initializing the components in the correct sequence, and connecting them up with each other at app launch
 * Shutting down the components and invoking cleanup method where necessary at shut down
 
-[**`Commons`**](#common-classes) has a collection of classes used by multiple other components.
+[**`Commons`**](#36-common-classes) has a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level:
 
 * [`EventsCenter`](../src/main/java/seedu/taskboss/commons/core/EventsCenter.java) : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
