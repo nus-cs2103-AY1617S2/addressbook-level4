@@ -59,4 +59,40 @@ public class KeywordTokenizerTest {
         expected.put("non default", "description");
         assertTrue(actual.equals(expected));
     }
+
+    @Test
+    public void tokenize_generalSituationOrderedKeywords() {
+        String description = "long description with many key-value pairs like A x y z B C D x y EFGHI  xyzabc  def  ";
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description,
+                                                                   "description",
+                                                                   "with",
+                                                                   "A",
+                                                                   "B C D",
+                                                                   "EFGHI");
+        HashMap<String, String> expected = new HashMap<String, String>();
+        expected.put("description", "long description");
+        expected.put("with", "many key-value pairs like");
+        expected.put("A", "x y z");
+        expected.put("B C D", "x y");
+        expected.put("EFGHI", "xyzabc  def");
+        assertTrue(actual.equals(expected));
+    }
+
+    @Test
+    public void tokenize_generalSituationUnorderedKeywords() {
+        String description = "long description with many key-value pairs like A x y z B C D x y EFGHI  xyzabc  def  ";
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description,
+                                                                   "description",
+                                                                   "B C D",
+                                                                   "with",
+                                                                   "EFGHI",
+                                                                   "A");
+        HashMap<String, String> expected = new HashMap<String, String>();
+        expected.put("description", "long description");
+        expected.put("with", "many key-value pairs like");
+        expected.put("A", "x y z");
+        expected.put("B C D", "x y");
+        expected.put("EFGHI", "xyzabc  def");
+        assertTrue(actual.equals(expected));
+    }
 }
