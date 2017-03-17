@@ -6,8 +6,8 @@ import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the task manager. Guarantees: details are present and
+ * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask, Comparable<Task> {
 
@@ -23,15 +23,16 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     /**
      * Event Constructor where every field must be present and not null.
      */
-    public Task(Name name, Priority priority, StartTime startTime, EndTime endTime,
-                Description description, UniqueTagList tags) {
+    public Task(Name name, Priority priority, StartTime startTime, EndTime endTime, Description description,
+            UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, startTime, endTime, description, tags);
         this.name = name;
         this.priority = priority;
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
     }
 
     /**
@@ -41,7 +42,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
         this.name = name;
         this.priority = priority;
-        this.startTime = null;
+        this.startTime = new StartTime();
         this.endTime = endTime;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
@@ -49,14 +50,15 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     /**
-     * Task Constructor every field must be present except for startTime and endTime.
+     * Task Constructor every field must be present except for startTime and
+     * endTime.
      */
     public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, priority, description, tags);
         this.name = name;
         this.priority = priority;
-        this.startTime = null;
-        this.endTime = endTime;
+        this.startTime = new StartTime();
+        this.endTime = new EndTime();
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
@@ -75,7 +77,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(Name name) {
@@ -85,7 +87,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Priority getPriority() {
-        return priority;
+        return this.priority;
     }
 
     public void setPriority(Priority priority) {
@@ -95,7 +97,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public StartTime getStartTime() {
-        return startTime;
+        return this.startTime;
     }
 
     public void setStartTime(StartTime startTime) {
@@ -105,7 +107,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public EndTime getEndTime() {
-        return endTime;
+        return this.endTime;
     }
 
     public void setEndTime(EndTime endTime) {
@@ -115,7 +117,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Description getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(Description description) {
@@ -125,7 +127,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public boolean hasStartTime() {
-        if (startTime != null) {
+        if (this.startTime != null) {
             return true;
         }
         return false;
@@ -133,7 +135,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public boolean hasEndTime() {
-        if (endTime != null) {
+        if (this.endTime != null) {
             return true;
         }
         return false;
@@ -141,14 +143,14 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
+        return new UniqueTagList(this.tags);
     }
 
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
+        this.tags.setTags(replacement);
     }
 
     /**
@@ -189,17 +191,17 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-            || (other instanceof ReadOnlyTask // instanceof handles nulls
-            && this.isSameStateAs((ReadOnlyTask) other));
+        return (other == this // short circuit if same object
+        ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
+        ) && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     /**
-     * Compares the current task with another Task other.
-     * The current task is considered to be less than the other task if
-     * 1) This item has a earlier start time associated
-     * 2) both items are not events but this item has a later end time
-     * 3) but this task has a lexicographically smaller name (useful when sorting tasks in testing)
+     * Compares the current task with another Task other. The current task is
+     * considered to be less than the other task if 1) This item has a earlier
+     * start time associated 2) both items are not events but this item has a
+     * later end time 3) but this task has a lexicographically smaller name
+     * (useful when sorting tasks in testing)
      */
     @Override
     public int compareTo(Task other) {
@@ -244,12 +246,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-
-
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, priority, endTime, description, tags);
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(this.name, this.priority, this.endTime, this.description, this.tags);
     }
 
     @Override
