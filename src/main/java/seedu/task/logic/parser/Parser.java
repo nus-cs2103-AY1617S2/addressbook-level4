@@ -61,15 +61,18 @@ public class Parser {
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
+        case SelectCommand.COMMAND_WORD_HOTKEY:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_WORD_HOTKEY:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD_HOTKEY:
             return new FindCommandParser().parse(arguments);
 
         case FindExactCommand.COMMAND_WORD:
@@ -79,12 +82,16 @@ public class Parser {
             return new FindExactCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD_SHORTFORM:
+        case ListCommand.COMMAND_WORD_HOTKEY:
             return new ListCommand();
 
         case ListByDoneCommand.COMMAND_WORD:
+        case ListByDoneCommand.COMMAND_WORD_HOTKEY:
             return new ListByDoneCommand(true);
 
         case ListByUndoneCommand.COMMAND_WORD:
+        case ListByUndoneCommand.COMMAND_WORD_HOTKEY:
             return new ListByUndoneCommand(false);
 
         case ListByTagCommand.COMMAND_WORD:
@@ -97,6 +104,7 @@ public class Parser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD_HOTKEY:
             return new HelpCommand();
 
         case HelpFormatCommand.COMMAND_WORD:
