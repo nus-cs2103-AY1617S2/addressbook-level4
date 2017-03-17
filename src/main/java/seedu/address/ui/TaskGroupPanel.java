@@ -8,7 +8,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -35,13 +34,12 @@ public class TaskGroupPanel extends UiPart<Region> {
 
     private int indexOffset;
 
-    private boolean isExpanded;
-
     public TaskGroupPanel(String title, ObservableList<ReadOnlyTask> taskList, int indexOffset) {
         super(FXML);
         setIndexOffset(indexOffset);
         setConnections(taskList);
         setTitle(title, taskList.size());
+        setExpandingListener();
         createTaskGroupView(taskList);
         closeTitlePane();
         registerAsAnEventHandler(this);
@@ -49,12 +47,10 @@ public class TaskGroupPanel extends UiPart<Region> {
 
     public void closeTitlePane() {
         titledPane.setExpanded(false);
-        isExpanded = false;
     }
 
     public void openTitlePane() {
         titledPane.setExpanded(true);
-        isExpanded = true;
     }
 
     public void setIndexOffset(int indexOffset) {
@@ -62,14 +58,12 @@ public class TaskGroupPanel extends UiPart<Region> {
     }
 
     public void setTitle(String title, int taskCount) {
-        Label label = new Label(title + " (" + taskCount + ")");
-        label.setOnMouseClicked(e -> handleMouseClicked());
-        titledPane.setGraphic(label);
         this.title = title;
+        titledPane.setText(title + " (" + taskCount + ")");
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
@@ -95,16 +89,17 @@ public class TaskGroupPanel extends UiPart<Region> {
         }
     }
 
-    @FXML
-    private void handleMouseClicked() {
-        EventsCenter.getInstance().post(new ShowTaskGroupEvent(getTitle()));
+    private void setExpandingListener() {
+        titledPane.expandedProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue && newValue != oldValue) {
+                EventsCenter.getInstance().post(new ShowTaskGroupEvent(getTitle()));
+            }
+        });
     }
 
     @Subscribe
     private void handleShowTaskGroupEvent(ShowTaskGroupEvent event) {
-        if (getTitle().equals(event.title) && !isExpanded) {
-            openTitlePane();
-        } else {
+        if (!getTitle().equals(event.title) && titledPane.isExpanded()) {
             closeTitlePane();
         }
     }
