@@ -16,13 +16,13 @@ public class KeywordTokenizer {
     public static final int START_INDEX = 0;
 
     /**
-     * Tokenize a string description into their respective keywords
+     * Tokenize a string description into their respective keywords (by best effort matching)
      * @param description is the full text supplied by the user to be tokenized
      * @param defaultKeyword is for the rest of the text that did not get tokenized by any user-specified keywords
      * @param keywords is the list of keywords to find and to tokenize
      * @return a HashMap of keyword-token pairs
      */
-    public static HashMap<String, String> tokenize(String description, String defaultKeyword, String... keywords) {
+    public static HashMap<String, String> tokenize(String description, String defaultKeyword, String[] keywords) {
         HashMap<String, String> tokens = new HashMap<String, String>();
         if (!StringUtil.isPresent(description)) {
             return tokens;
@@ -77,5 +77,14 @@ public class KeywordTokenizer {
             tokens.put(lastKeyword, lastToken);
         }
         return tokens;
+    }
+
+    public static HashMap<String, String> tokenize(String description, String[] keywords) {
+        return tokenize(description, null, keywords);
+    }
+
+    public static HashMap<String, String> tokenize(String description, String defaultKeyword) {
+        String[] keywords = {};
+        return tokenize(description, defaultKeyword, keywords);
     }
 }

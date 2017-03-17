@@ -32,7 +32,8 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_onlyOneNonDefaultKeywordGiven() {
-        HashMap<String, String> actual = KeywordTokenizer.tokenize(null, null, "non-default");
+        String[] keywords = {"non-default"};
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(null, null, keywords);
         HashMap<String, String> expected = new HashMap<String, String>();
         assertTrue(actual.equals(expected));
     }
@@ -47,14 +48,16 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_descriptionAndNonMatchingNonDefaultKeywordsGiven() {
-        HashMap<String, String> actual = KeywordTokenizer.tokenize("description", null, "non-default");
+        String[] keywords = {"non-default"};
+        HashMap<String, String> actual = KeywordTokenizer.tokenize("description", null, keywords);
         HashMap<String, String> expected = new HashMap<String, String>();
         assertTrue(actual.equals(expected));
     }
 
     @Test
     public void tokenize_descriptionAndMatchingNonDefaultKeywordsGiven() {
-        HashMap<String, String> actual = KeywordTokenizer.tokenize("non default description", null, "non default");
+        String[] keywords = {"non default"};
+        HashMap<String, String> actual = KeywordTokenizer.tokenize("non default description", null, keywords);
         HashMap<String, String> expected = new HashMap<String, String>();
         expected.put("non default", "description");
         assertTrue(actual.equals(expected));
@@ -62,13 +65,9 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_generalSituationOrderedKeywords() {
+        String[] keywords = {"with", "A", "B C D", "EFGHI"};
         String description = "long description with many key-value pairs like A x y z B C D x y EFGHI  xyzabc  def  ";
-        HashMap<String, String> actual = KeywordTokenizer.tokenize(description,
-                                                                   "description",
-                                                                   "with",
-                                                                   "A",
-                                                                   "B C D",
-                                                                   "EFGHI");
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", keywords);
         HashMap<String, String> expected = new HashMap<String, String>();
         expected.put("description", "long description");
         expected.put("with", "many key-value pairs like");
@@ -80,13 +79,9 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_generalSituationUnorderedKeywords() {
+        String[] keywords = {"B C D", "with", "EFGHI", "A"};
         String description = "long description with many key-value pairs like A x y z B C D x y EFGHI  xyzabc  def  ";
-        HashMap<String, String> actual = KeywordTokenizer.tokenize(description,
-                                                                   "description",
-                                                                   "B C D",
-                                                                   "with",
-                                                                   "EFGHI",
-                                                                   "A");
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", keywords);
         HashMap<String, String> expected = new HashMap<String, String>();
         expected.put("description", "long description");
         expected.put("with", "many key-value pairs like");
