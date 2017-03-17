@@ -35,8 +35,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      * other ways to avoid duplication among constructors.
      */
     {
-	tasks = new UniqueTaskList();
-	// categories = new UniqueCategoryList();
+        tasks = new UniqueTaskList();
+        // categories = new UniqueCategoryList();
     }
 
     public TaskManager() {
@@ -47,14 +47,14 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
-	this();
-	resetData(toBeCopied);
+        this();
+        resetData(toBeCopied);
     }
 
     //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
-	this.tasks.setTasks(tasks);
+        this.tasks.setTasks(tasks);
     }
 
     /*
@@ -63,17 +63,17 @@ public class TaskManager implements ReadOnlyTaskManager {
      * this.categories.setCategories(categories); }
      */
     public void resetData(ReadOnlyTaskManager newData) {
-	assert newData != null;
-	try {
-	    setTasks(newData.getTaskList());
-	} catch (UniqueTaskList.DuplicateTaskException e) {
-	    assert false : "ProcrastiNomores should not have duplicate tasks";
-	} /*
-	   * try { setCategories(newData.getCategoryList()); } catch
-	   * (UniqueCategoryList.DuplicateCategoryException e) { assert false :
-	   * "ProcrastiNomores should not have duplicate categories"; }
-	   * syncMasterCategoryListWith(tasks);
-	   */
+        assert newData != null;
+        try {
+            setTasks(newData.getTaskList());
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            assert false : "ProcrastiNomores should not have duplicate tasks";
+        } /*
+           * try { setCategories(newData.getCategoryList()); } catch
+           * (UniqueCategoryList.DuplicateCategoryException e) { assert false :
+           * "ProcrastiNomores should not have duplicate categories"; }
+           * syncMasterCategoryListWith(tasks);
+           */
     }
 
     //// task-level operations
@@ -88,15 +88,15 @@ public class TaskManager implements ReadOnlyTaskManager {
      *             if an equivalent task already exists.
      */
     public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
-	// syncMasterCategoryListWith(t);
-	tasks.add(t);
+        // syncMasterCategoryListWith(t);
+        tasks.add(t);
     }
 
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code ProcrastiNomore}'s category list will
      * be updated with the categories of {@code editedReadOnlyTask}.
-     * 
+     *
      * @see #syncMasterCategoryListWith(Task)
      *
      * @throws DuplicateTaskException
@@ -106,16 +106,16 @@ public class TaskManager implements ReadOnlyTaskManager {
      *             if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
-	assert editedReadOnlyTask != null;
+        assert editedReadOnlyTask != null;
 
-	Task editedTask = new Task(editedReadOnlyTask);
-	// syncMasterCategoryListWith(editedTask);
-	// TODO: the categories master list will be updated even though the
-	// below line fails.
-	// This can cause the categories master list to have additional
-	// categories that are not categorized to any task
-	// in the task list.
-	tasks.updateTask(index, editedTask);
+        Task editedTask = new Task(editedReadOnlyTask);
+        // syncMasterCategoryListWith(editedTask);
+        // TODO: the categories master list will be updated even though the
+        // below line fails.
+        // This can cause the categories master list to have additional
+        // categories that are not categorized to any task
+        // in the task list.
+        tasks.updateTask(index, editedTask);
     }
 
     /**
@@ -126,13 +126,13 @@ public class TaskManager implements ReadOnlyTaskManager {
      * private void syncMasterCategoryListWith(Task task) { final
      * UniqueCategoryList taskCategories = task.getCategories();
      * categories.mergeFrom(taskCategories);
-     * 
+     *
      * // Create map with values = category object references in the master list
      * // used for checking task category references final Map<Category,
      * Category> masterCategoryObjects = new HashMap<>();
      * categories.forEach(category -> masterCategoryObjects.put(category,
      * category));
-     * 
+     *
      * // Rebuild the list of task categories to point to the relevant
      * categories in the master category list. final Set<Category>
      * correctCategoryReferences = new HashSet<>();
@@ -143,7 +143,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Ensures that every category in these tasks: - exists in the master list
      * {@link #categories} - points to a Category object in the master list
-     * 
+     *
      * @see #syncMasterCategoryListWith(Task)
      */
     /*
@@ -151,11 +151,11 @@ public class TaskManager implements ReadOnlyTaskManager {
      * tasks.forEach(this::syncMasterCategoryListWith); }
      */
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-	if (tasks.remove(key)) {
-	    return true;
-	} else {
-	    throw new UniqueTaskList.TaskNotFoundException();
-	}
+        if (tasks.remove(key)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
     }
 
     //// tag-level operations
@@ -167,17 +167,17 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public String toString() {
-	return tasks.asObservableList().size()
-		+ " tasks, "/*
-			     * + categories.asObservableList().size() +
-			     * " categories"
-			     */;
-	// TODO: refine later
+        return tasks.asObservableList().size()
+                + " tasks, "/*
+                             * + categories.asObservableList().size() +
+                             * " categories"
+                             */;
+        // TODO: refine later
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-	return new UnmodifiableObservableList<>(tasks.asObservableList());
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     /*
@@ -186,23 +186,23 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof TaskManager // instanceof handles nulls
-			&& this.tasks.equals(
-				((TaskManager) other).tasks)/*
-							     * &&
-							     * this.categories.
-							     * equalsOrderInsensitive
-							     * (((TaskManager)
-							     * other).
-							     * categories)
-							     */);
+        return other == this // short circuit if same object
+                || (other instanceof TaskManager // instanceof handles nulls
+                        && this.tasks.equals(
+                                ((TaskManager) other).tasks)/*
+                                                             * &&
+                                                             * this.categories.
+                                                             * equalsOrderInsensitive
+                                                             * (((TaskManager)
+                                                             * other).
+                                                             * categories)
+                                                             */);
     }
 
     @Override
     public int hashCode() {
-	// use this method for custom fields hashing instead of implementing
-	// your own
-	return Objects.hash(tasks/* , categories */);
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(tasks/* , categories */);
     }
 }

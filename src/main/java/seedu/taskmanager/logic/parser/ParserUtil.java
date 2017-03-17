@@ -33,16 +33,16 @@ public class ParserUtil {
      * unsigned integer Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
-	final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
-	if (!matcher.matches()) {
-	    return Optional.empty();
-	}
+        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
 
-	String index = matcher.group("targetIndex");
-	if (!StringUtil.isUnsignedInteger(index)) {
-	    return Optional.empty();
-	}
-	return Optional.of(Integer.parseInt(index));
+        String index = matcher.group("targetIndex");
+        if (!StringUtil.isUnsignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
 
     }
 
@@ -52,20 +52,20 @@ public class ParserUtil {
      * list contained in the {@code Optional} is empty
      */
     public static Set<String> toSet(Optional<List<String>> list) {
-	List<String> elements = list.orElse(Collections.emptyList());
-	return new HashSet<>(elements);
+        List<String> elements = list.orElse(Collections.emptyList());
+        return new HashSet<>(elements);
     }
 
     /**
      * Splits a preamble string into ordered fields.
-     * 
+     *
      * @return A list of size {@code numFields} where the ith element is the ith
      *         field value if specified in the input, {@code Optional.empty()}
      *         otherwise.
      */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-	return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)
-		.collect(Collectors.toList());
+        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -73,8 +73,8 @@ public class ParserUtil {
      * {@code Optional<TaskName>} if {@code taskname} is present.
      */
     public static Optional<TaskName> parseTaskName(Optional<String> taskname) throws IllegalValueException {
-	assert taskname != null;
-	return taskname.isPresent() ? Optional.of(new TaskName(taskname.get())) : Optional.empty();
+        assert taskname != null;
+        return taskname.isPresent() ? Optional.of(new TaskName(taskname.get())) : Optional.empty();
     }
 
     /**
@@ -82,8 +82,8 @@ public class ParserUtil {
      * {@code date} is present.
      */
     public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
-	assert date != null;
-	return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        assert date != null;
+        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
     }
 
     /**
@@ -91,8 +91,8 @@ public class ParserUtil {
      * {@code Optional<StartTime>} if {@code starttime} is present.
      */
     public static Optional<StartTime> parseStartTime(Optional<String> starttime) throws IllegalValueException {
-	assert starttime != null;
-	return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
+        assert starttime != null;
+        return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
     }
 
     /**
@@ -100,19 +100,19 @@ public class ParserUtil {
      * {@code Optional<EndTime>} if {@code endtime} is present.
      */
     public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
-	assert endtime != null;
-	return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
+        assert endtime != null;
+        return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
     }
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
     public static UniqueCategoryList parseCategories(Collection<String> categories) throws IllegalValueException {
-	assert categories != null;
-	final Set<Category> categorySet = new HashSet<>();
-	for (String categoryName : categories) {
-	    categorySet.add(new Category(categoryName));
-	}
-	return new UniqueCategoryList(categorySet);
+        assert categories != null;
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(new Category(categoryName));
+        }
+        return new UniqueCategoryList(categorySet);
     }
 }
