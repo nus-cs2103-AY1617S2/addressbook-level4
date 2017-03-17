@@ -4,9 +4,9 @@ package seedu.taskboss.logic.commands;
  * Saves the data at specific filepath. Creates filepath if it does not exist
  */
 
-public class SaveCommand extends Command{
+public class SaveCommand extends Command {
 
-public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
     		+ "Saves the data at specific filepath.\n"
@@ -23,11 +23,12 @@ public static final String COMMAND_WORD = "save";
     	this.filepath = filepath;
     }
 
-  @Override
-  public CommandResult execute() {
+    @Override
+    public CommandResult execute() {
   	assert storage != null;
 	storage.setFilePath(filepath);
-	return new CommandResult(MESSAGE_SUCCESS);
-	}
+	
+    return new CommandResult(MESSAGE_SUCCESS);
+    }
 
 }
