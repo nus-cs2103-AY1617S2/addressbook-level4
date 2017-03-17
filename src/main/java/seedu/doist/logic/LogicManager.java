@@ -44,11 +44,4 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredTaskList();
     }
-
-    public void undo() {
-        model.recoverPreviousTodoList();
-    }
-    public void redo() {
-        model.recoverNextTodoList();
-    }
 }

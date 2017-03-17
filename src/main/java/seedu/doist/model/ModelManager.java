@@ -264,6 +264,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (isAtMostRecentState) {
             recoverPreviousTodoList();
         }
+        indicateTodoListChanged();
     }
 
     public void recoverNextTodoList() {
@@ -271,6 +272,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (nextTodoList != null) {
             todoList.resetData(nextTodoList);
         }
+        indicateTodoListChanged();
     }
 }
 

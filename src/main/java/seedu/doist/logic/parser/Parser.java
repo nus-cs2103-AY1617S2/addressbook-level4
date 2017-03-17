@@ -18,9 +18,11 @@ import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
+import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.ResetAliasCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.SortCommand;
+import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.UnfinishCommand;
 
 /**
@@ -76,6 +78,10 @@ public class Parser {
             return new AliasCommandParser().parse(arguments);
         } else if (ResetAliasCommand.info().canBeTriggeredByWord(commandWord)) {
             return new ResetAliasCommand();
+        } else if (UndoCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new UndoCommand(1);
+        } else if (RedoCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new RedoCommand(1);
         } else {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

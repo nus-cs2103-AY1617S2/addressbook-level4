@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -15,6 +17,8 @@ import seedu.doist.commons.util.FxViewUtil;
 import seedu.doist.commons.util.History;
 import seedu.doist.logic.Logic;
 import seedu.doist.logic.commands.CommandResult;
+import seedu.doist.logic.commands.RedoCommand;
+import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
@@ -24,6 +28,9 @@ public class CommandBox extends UiPart<Region> {
 
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
+
+    final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+    final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
 
     @FXML
     private TextField commandTextField;
@@ -49,12 +56,22 @@ public class CommandBox extends UiPart<Region> {
             handleUpKey();
         } else if (event.getCode() == KeyCode.DOWN) {
             handleDownKey();
-        } else if (event.getCode() == KeyCode.RIGHT) {
-            event.consume();
-            logic.redo();
-        } else if (event.getCode() == KeyCode.LEFT) {
-            event.consume();
-            logic.undo();
+        } else {  // use control+z and control+y to execute undo and re-do operation
+            try {
+                if (undoKeys.match(event)) {
+                    event.consume();
+                    logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
+                } else if (redoKeys.match(event)) {
+                    event.consume();
+                    logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
+                }
+            } catch (CommandException e) {
+                // handle command failure
+                setStyleToIndicateCommandFailure();
+                commandTextField.setText("");
+                logger.info("Invalid command: " + commandTextField.getText());
+                raise(new NewResultAvailableEvent(e.getMessage()));
+            }
         }
     }
 
