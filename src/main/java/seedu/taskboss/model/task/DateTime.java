@@ -1,5 +1,6 @@
 package seedu.taskboss.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -9,8 +10,9 @@ public class DateTime {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates format should be in dd-mm-yyyy,"
             + " or word format like 5pm tomorrow, " + "and does not accept doubles.";
+    private String EMPTY_STRING = "";
 
-    public final String value;
+    public String value;
     private boolean isDateInferred;
     private boolean isTimeInferred;
     private Date date;
@@ -28,10 +30,12 @@ public class DateTime {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
 
-        if (!trimmedDate.equals("")) {
+        if (trimmedDate.equals(EMPTY_STRING)) {
+            this.value = EMPTY_STRING;
+        } else {
             parseDateTime(trimmedDate);
+            formatDateTime();
         }
-        this.value = date.toString();
     }
 
     public DateTime(Date dateTime, boolean isDateInferred, boolean isTimeInferred) {
@@ -47,7 +51,7 @@ public class DateTime {
      * @throws IllegalValueException
      */
     public boolean isValidDateTime(String date) {
-        if (date.equals("")) {
+        if (date.equals(EMPTY_STRING)) {
             return true;
         } else {
             return dtParser.isParseable(date);
@@ -59,6 +63,21 @@ public class DateTime {
         this.date = dateTime.getDate();
         this.setIsDateInferred(dateTime.isDateInferred);
         this.setIsTimeInferred(dateTime.isTimeInferred);
+    }
+
+    /**
+     * Format the current natty-parsed date into a string of our intended format
+     * i.e May 19, 2017 8:30 PM
+     */
+    private void formatDateTime() {
+        SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy hh:mm aa");
+        SimpleDateFormat sdfToday = new SimpleDateFormat("MMM dd, yyyy");
+        // No time provided by user
+        if (this.IsTimeInferred()) {
+            this.value = sdfToday.format(this.date);
+        } else {
+            this.value = sdfGeneral.format(this.date);
+        }
     }
 
     @Override
