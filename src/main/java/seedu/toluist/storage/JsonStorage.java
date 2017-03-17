@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Optional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import javafx.util.Pair;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.FileUtil;
@@ -30,13 +32,15 @@ public class JsonStorage implements TodoListStorage {
             return false;
         }
         // push current todo list json string into historyStack if the stack is empty
+
         try {
             historyStack.addLast(JsonUtil.toJsonString(todoList));
-            redoHistoryStack.clear();
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             // Should not reach here
-            assert false;
+            e.printStackTrace();
         }
+        redoHistoryStack.clear();
+
         Config.getInstance().setTodoListFilePath(storagePath);
         return true;
     }

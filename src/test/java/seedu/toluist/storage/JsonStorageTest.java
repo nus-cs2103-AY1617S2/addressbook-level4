@@ -67,6 +67,7 @@ public class JsonStorageTest {
     public void load_invalidJson() {
         try {
             loadDataFromPath(INVALID_JSON_DATA_FILE_PATH);
+            fail("Should not reach here");
         } catch (IOException e) {
             // good to go
         }
