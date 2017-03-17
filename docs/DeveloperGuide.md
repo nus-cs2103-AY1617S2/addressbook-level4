@@ -1,9 +1,10 @@
 # Developer Guide
-*  [Setting Up](#setting-up)
-* [Design](#design)
-* [Implementation](#implementation)
-* [Testing](#testing)
-* [Dev Ops](#dev-ops)
+1. [Setting Up](#setting-up)
+   1.1 Prerequisitesassd
+2. [Design](#design)
+3. [Implementation](#implementation)
+4. [Testing](#testing)
+5. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -12,7 +13,7 @@
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## Setting up
+## 1. Setting up
 
 ### Prerequisites
 
@@ -117,7 +118,7 @@ command `delete 1`.
 <img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
+> Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -156,7 +157,7 @@ The `UI` component,
 
 ### Logic component
 
-Author: Bernard Choo
+Author: Lee Jin Shun
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -175,7 +176,7 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### Model component
 
-Author: Cynthia Dharman
+Author: Hon Kean Wai
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -192,7 +193,7 @@ The `Model`,
 
 ### Storage component
 
-Author: Darius Foong
+Author: Chew Chia Sin
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -282,23 +283,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## Dev Ops
+## 5. Dev Ops
 
-### Build Automation
+### 5.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### Continuous Integration
+### 5.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### Publishing Documentation
+### 5.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### Making a Release
+### 5.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -307,7 +308,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### Converting Documentation to PDF format
+### 5.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -324,7 +325,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### Managing Dependencies
+### 5.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
