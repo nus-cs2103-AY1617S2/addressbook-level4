@@ -4,7 +4,7 @@ import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.Model;
-import seedu.todolist.storage.Storage;
+import seedu.taskboss.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
