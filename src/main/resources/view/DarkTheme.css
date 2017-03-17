@@ -179,12 +179,6 @@
     -fx-text-fill: white;
 }
 
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
 .grid-pane .anchor-pane {
     -fx-background-color: #293132;
 }
