@@ -3,6 +3,7 @@ package seedu.taskboss.logic.parser;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.io.*
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,6 +81,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
