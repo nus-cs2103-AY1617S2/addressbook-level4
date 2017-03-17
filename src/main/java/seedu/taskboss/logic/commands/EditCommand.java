@@ -21,6 +21,7 @@ import seedu.taskboss.model.task.UniqueTaskList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_SHORT = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "

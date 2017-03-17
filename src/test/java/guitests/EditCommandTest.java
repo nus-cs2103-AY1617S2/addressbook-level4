@@ -31,9 +31,36 @@ public class EditCommandTest extends TaskBossGuiTest {
                .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
                .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
 
-        assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0143157J
+    @Test
+    public void edit_allFieldsWithShortCommand_success() throws Exception {
+        String detailsToEdit = "Alice p/2 sd/today ed/next fri 1am i/100,"
+                + " Jurong West Ave 6, #08-111 c/meeting";
+        int taskBossIndex = 1;
+
+        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("2")
+               .withStartDateTime("today").withEndDateTime("next fri 1am")
+               .withInformation("100, Jurong West Ave 6, #08-111").withCategories("meeting").build();
+
+        assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+    }
+
+    //@@author A0143157J
+    @Test
+    public void edit_notAllFiendsWithShortCommand_success() throws Exception {
+        String detailsToEdit = "c/work c/fun";
+        int taskBossIndex = 2;
+
+        TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("work", "fun").build();
+
+        assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+    }
+
+    //@@author A0143157J
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "c/sweetie c/bestie";
@@ -42,9 +69,10 @@ public class EditCommandTest extends TaskBossGuiTest {
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withCategories("sweetie", "bestie").build();
 
-        assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
+    //@@author
     @Test
     public void edit_clearCategories_success() throws Exception {
         String detailsToEdit = "c/";
@@ -53,7 +81,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withCategories().build();
 
-        assertEditSuccess(taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -67,7 +95,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -117,9 +145,13 @@ public class EditCommandTest extends TaskBossGuiTest {
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int taskBossIndex,
+    private void assertEditSuccess(boolean isShortCommand, int filteredTaskListIndex, int taskBossIndex,
                                     String detailsToEdit, TestTask editedTask) {
-        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        if (isShortCommand) {
+            commandBox.runCommand("e " + filteredTaskListIndex + " " + detailsToEdit);
+        } else {
+            commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        }
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
