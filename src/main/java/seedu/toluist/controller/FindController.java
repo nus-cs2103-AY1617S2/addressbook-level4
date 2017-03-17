@@ -87,19 +87,19 @@ public class FindController extends Controller {
         if (keywordList[0].equals(NULL_PARAMETER)) {
             return new CommandResult(String.format(LIST_RESULT_MESSAGE_TEMPLATE, foundCount));
         } else {
-            String searchParameters;
+            String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
 
             if (isSearchByName && isSearchByTag) {
-                searchParameters = NAME_AND_TAG_MESSAGE;
+                return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
+                    keywords, NAME_AND_TAG_MESSAGE, foundCount));
             } else if (isSearchByName) {
-                searchParameters = NAME_MESSAGE;
+                return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
+                    keywords, NAME_MESSAGE, foundCount));
             } else { //isSearchByTag
-                searchParameters = TAG_MESSAGE;
+                return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
+                    keywords, TAG_MESSAGE, foundCount));
             }
-
-            String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
-            return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
-                                     keywords, searchParameters, foundCount));
+            
         }
     }
 
