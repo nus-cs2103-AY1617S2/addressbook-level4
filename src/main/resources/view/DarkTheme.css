@@ -24,8 +24,28 @@
 }
 
 .text-field {
-    -fx-font-size: 10pt;
     -fx-font-family: "Consolas";
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-field .content {
+    -fx-text-fill: white;
+    -fx-highlight-fill: white;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-field:focused .content {
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-field:focused {
+    -fx-background-radius: 0;
+    -fx-highlight-fill: #1C2122;
 }
 
 .text-area {
