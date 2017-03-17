@@ -58,7 +58,7 @@
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * If Eclipse has auto-changed any settings files during the import process, you can discard those changes.
 
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
@@ -98,7 +98,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/description/MainApp.java). It is responsible for,
+`Main` only has one class called [`MainApp`](../src/main/java/seedu/description/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -106,14 +106,14 @@ Given below is a quick overview of each component.
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
+* `EventsCenter` : Used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
+  (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
+* [**`UI`**](#ui-component) : Displays the User interface(UI) of the App.
+* [**`Logic`**](#logic-component) : Executes commands input by the user.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
@@ -200,13 +200,13 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/description/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* Stores a `UserPref` object that represents the user's preferences.
+* Stores the Task Manager data.
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* Does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
@@ -219,8 +219,8 @@ _Figure 2.5.1 : Structure of the Storage Component_
 
 The `Storage` component,
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
+* Saves `UserPref` objects in json format and reads it back.
+* Saves the Task Manager data in xml format and reads it back.
 
 ### 2.6. Common classes
 
