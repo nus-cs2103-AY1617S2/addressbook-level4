@@ -106,7 +106,7 @@ public class Task implements ReadOnlyTask {
         if (replacement.getStartEndDateTime().isPresent()) {
             this.startEndDateTime = Optional.of(replacement.getStartEndDateTime().get());
         } else {
-            this.deadline = Optional.empty();
+            this.startEndDateTime = Optional.empty();
         }
         this.setTags(replacement.getTags());
     }
