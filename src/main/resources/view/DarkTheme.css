@@ -51,6 +51,7 @@
 
 .text-area {
     -fx-text-fill: white;
+    -fx-font-family: "Ubuntu";
     -fx-background-insets: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent, #1C2122, transparent, #1C2122;
