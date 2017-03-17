@@ -76,15 +76,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Date("9482424"), new Deadline("hans@google.com"), new StartTime("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Boris Mueller"), new Date("87249245"), new Deadline("ruth@google.com"), new StartTime("81th street"), new UniqueCategoryList()),
-                new Task(new Name("Carl Kurz"), new Date("95352563"), new Deadline("heinz@yahoo.com"), new StartTime("wall street"), new UniqueCategoryList()),
-                new Task(new Name("Daniel Meier"), new Date("87652533"), new Deadline("cornelia@google.com"), new StartTime("10th street"), new UniqueCategoryList()),
-                new Task(new Name("Elle Meyer"), new Date("9482224"), new Deadline("werner@gmail.com"), new StartTime("michegan ave"), new UniqueCategoryList()),
-                new Task(new Name("Fiona Kunz"), new Date("9482427"), new Deadline("lydia@gmail.com"), new StartTime("little tokyo"), new UniqueCategoryList()),
-                new Task(new Name("George Best"), new Date("9482442"), new Deadline("anna@google.com"), new StartTime("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Hoon Meier"), new Date("8482424"), new Deadline("stefan@mail.com"), new StartTime("little india"), new UniqueCategoryList()),
-                new Task(new Name("Ida Mueller"), new Date("8482131"), new Deadline("hans@google.com"), new StartTime("chicago ave"), new UniqueCategoryList())
+                new Task(new TaskName("Ali Muster"), new Date("9482424"), new Deadline("hans@google.com"), new StartTime("4th street"), new UniqueCategoryList()),
+                new Task(new TaskName("Boris Mueller"), new Date("87249245"), new Deadline("ruth@google.com"), new StartTime("81th street"), new UniqueCategoryList()),
+                new Task(new TaskName("Carl Kurz"), new Date("95352563"), new Deadline("heinz@yahoo.com"), new StartTime("wall street"), new UniqueCategoryList()),
+                new Task(new TaskName("Daniel Meier"), new Date("87652533"), new Deadline("cornelia@google.com"), new StartTime("10th street"), new UniqueCategoryList()),
+                new Task(new TaskName("Elle Meyer"), new Date("9482224"), new Deadline("werner@gmail.com"), new StartTime("michegan ave"), new UniqueCategoryList()),
+                new Task(new TaskName("Fiona Kunz"), new Date("9482427"), new Deadline("lydia@gmail.com"), new StartTime("little tokyo"), new UniqueCategoryList()),
+                new Task(new TaskName("George Best"), new Date("9482442"), new Deadline("anna@google.com"), new StartTime("4th street"), new UniqueCategoryList()),
+                new Task(new TaskName("Hoon Meier"), new Date("8482424"), new Deadline("stefan@mail.com"), new StartTime("little india"), new UniqueCategoryList()),
+                new Task(new TaskName("Ida Mueller"), new Date("8482131"), new Deadline("hans@google.com"), new StartTime("chicago ave"), new UniqueCategoryList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -113,7 +113,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
+     * Appends the file TaskName to the sandbox folder path.
      * Creates the sandbox folder if it doesn't exist.
      * @param fileName
      * @return

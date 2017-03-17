@@ -6,7 +6,7 @@ import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.Deadline;
-// import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 
 /**
@@ -27,7 +27,7 @@ public class TaskBuilder {
 		this.task = new TestTask(taskToCopy);
 	}
 
-	public TaskBuilder withName(String taskname) throws IllegalValueException {
+	public TaskBuilder withTaskName(String taskname) throws IllegalValueException {
 		this.task.setTaskName(new TaskName(taskname));
 		return this;
 	}
@@ -49,11 +49,17 @@ public class TaskBuilder {
 		return this;
 	}
 
-	/*
-	 * public TaskBuilder withStartTime(String starttime) throws
-	 * IllegalValueException { this.task.setStartTime(new StartTime(starttime));
-	 * return this; }
-	 */
+	
+	public TaskBuilder withStartTime(String startTime) throws IllegalValueException { 
+		this.task.setStartTime(new StartTime(startTime));
+		return this; 
+	}
+	
+	public TaskBuilder withEndTime(String endTime) throws IllegalValueException {
+		this.task.setEndTime(new EndTime(endTime));
+		return this;
+	}
+	 
 
 	public TestTask build() {
 		return this.task;

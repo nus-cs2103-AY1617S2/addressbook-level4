@@ -17,10 +17,10 @@ public class TypicalTestTasks {
             alice = new TaskBuilder().withTaskName("Alice Pauline")
                     .withDate("123, Jurong West Ave 6, #08-111").withDeadline("alice@gmail.com")
                     .withStartTime("85355255")
-                    .withCategories("friends").build();
+                    /*.withCategories("friends")*/.build();
             benson = new TaskBuilder().withTaskName("Benson Meier").withDate("311, Clementi Ave 2, #02-25")
                     .withDeadline("johnd@gmail.com").withStartTime("98765432")
-                    .withCategories("owesMoney", "friends").build();
+                    /*.withCategories("owesMoney", "friends")*/.build();
             carl = new TaskBuilder().withTaskName("Carl Kurz").withStartTime("95352563")
                     .withDeadline("heinz@yahoo.com").withDate("wall street").build();
             daniel = new TaskBuilder().withTaskName("Daniel Meier").withStartTime("87652533")
@@ -43,23 +43,23 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalPersons()) {
+    public static void loadTaskManagerWithSampleData(TaskManager tm) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                tm.addTask(new Task(task));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }
     }
 
-    public TestTask[] getTypicalPersons() {
+    public TestTask[] getTypicalTasks() {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
-        return ab;
+    public TaskManager getTypicalTaskManager() {
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleData(tm);
+        return tm;
     }
 }
