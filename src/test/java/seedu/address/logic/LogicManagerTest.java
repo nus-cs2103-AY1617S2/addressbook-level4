@@ -191,9 +191,6 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-//        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
         assertCommandFailure("add Valid Name 12.12 e/valid@email.butNoDatePrefix g/valid,group", expectedMessage);
         assertCommandFailure("add Valid Name d/12.12 valid@email.butNoPrefix g/valid, group", expectedMessage);
         assertCommandFailure("add Valid Name d/12.12 e/valid@email.butNoGroupPrefix valid, address", expectedMessage);
@@ -201,18 +198,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-//        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-//                Name.MESSAGE_NAME_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-//                Phone.MESSAGE_PHONE_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-//                Email.MESSAGE_EMAIL_CONSTRAINTS);
-//        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-//                Tag.MESSAGE_TAG_CONSTRAINTS);
-    	assertCommandFailure("add []\\[;] d/12.12 e/valid@e.mail g/valid, group",
-                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/not_numbers e/valid@e.mail g/valid, group",
                 Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add []\\[;] d/12.12 e/valid@e.mail g/valid, group",
+                Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12.12 e/notAnEmail g/valid, group",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12.12 e/valid@e.mail g/valid, group t/invalid_-[.tag",
