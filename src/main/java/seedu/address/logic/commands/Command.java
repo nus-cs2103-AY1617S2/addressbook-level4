@@ -36,9 +36,6 @@ public abstract class Command {
         case ReadOnlyTask.TASK_NAME_FLOATING:
             lastShownList = model.getFloatingTaskList();
             break;
-        case ReadOnlyTask.TASK_NAME_NON_FLOATING:
-            lastShownList = model.getNonFloatingTaskList();
-            break;
         case ReadOnlyTask.TASK_NAME_COMPLETED:
             lastShownList = model.getCompletedTaskList();
             break;
@@ -57,7 +54,7 @@ public abstract class Command {
      * @throws CommandException
      */
     protected void validateTargetIndex(int targetIndex, List<ReadOnlyTask> taskList) throws CommandException {
-        if (targetIndex > taskList.size()) {
+        if (targetIndex >= taskList.size() || taskList.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }

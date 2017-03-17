@@ -10,8 +10,6 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo a task. ";
-
     public static final String MESSAGE_SUCCESS = "Undone";
     public static final String MESSAGE_NO_BACKWARDS_COMMAND = "There's no previous command to undo.";
     /*

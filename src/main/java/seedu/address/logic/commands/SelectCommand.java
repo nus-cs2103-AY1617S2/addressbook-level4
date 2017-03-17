@@ -25,7 +25,7 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s %2$s";
 
     public SelectCommand(String targetList, int targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex - 1;
         this.targetList = targetList;
     }
 
@@ -36,8 +36,8 @@ public class SelectCommand extends Command {
 
         validateTargetIndex(targetIndex, lastShownList);
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetList, targetIndex - 1));
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetList, targetIndex));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetList, targetIndex));
+        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetList, targetIndex + 1));
 
     }
 

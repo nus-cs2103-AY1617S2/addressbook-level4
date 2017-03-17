@@ -168,9 +168,6 @@ public class ModelManager extends ComponentManager implements Model {
         case Task.TASK_NAME_COMPLETED:
             addressBookIndex = this.completedTasks.getSourceIndex(taskListIndex);
             break;
-        case Task.TASK_NAME_NON_FLOATING:
-            addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
-            break;
         default:
             addressBookIndex = this.nonFloatingTasks.getSourceIndex(taskListIndex);
             break;
