@@ -9,7 +9,7 @@ import java.util.TreeSet;
 import seedu.toluist.commons.util.StringUtil;
 
 /**
- * Tokenize string of indexes into a list of integer index.
+ * Parse string of indexes into a list of integer index.
  */
 public class IndexParser {
     private static final String HYPHEN = "-";

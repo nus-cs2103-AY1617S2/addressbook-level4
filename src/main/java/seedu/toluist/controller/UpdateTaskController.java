@@ -1,16 +1,14 @@
 package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexParser;
+import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
@@ -30,8 +28,6 @@ public class UpdateTaskController extends Controller {
     private static final String COMMAND_UPDATE_TASK = "update";
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
-
-    private static final String TAGS_SEPARATOR_REGEX = " ";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
@@ -60,13 +56,7 @@ public class UpdateTaskController extends Controller {
         LocalDateTime endDateTime = DateTimeUtil.parseDateString(endDateToken);
 
         String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
-        String[] tagStrings = tagsToken == null ? new String[] {} : tagsToken.split(TAGS_SEPARATOR_REGEX);
-        List<String> tagList = Arrays.asList(tagStrings);
-        Set<Tag> tags = (Set<Tag>) tagList.
-                               stream().
-                               filter(tagString -> !tagString.isEmpty()).
-                               map(tagString -> new Tag((String) tagString)).
-                               collect(Collectors.toSet());
+        Set<Tag> tags = TagParser.parseTags(tagsToken);
 
         commandResult = update(task, description, startDateTime, endDateTime, tags);
 
