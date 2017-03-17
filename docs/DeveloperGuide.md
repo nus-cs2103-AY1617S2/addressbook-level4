@@ -1,27 +1,27 @@
 # Developer Guide
 1. [Setting Up](#setting-up)
-   > 1.1. Prerequisites(#prerequisites)
-   > 1.2. Importing the project into Eclipse(#importing-the-project-into-eclipse)
-   > 1.3. Configuring Checkstyle(#configuring-checkstyle)
-   > 1.4. Troubleshooting project setup
+   * 1.1. Prerequisites(#prerequisites)
+   * 1.2. Importing the project into Eclipse(#importing-the-project-into-eclipse)
+   * 1.3. Configuring Checkstyle(#configuring-checkstyle)
+   * 1.4. Troubleshooting project setup
 2. [Design](#design)
-   > 2.1. Architecture
-   > 2.2. UI component
-   > 2.3. Logic component
-   > 2.4. Model component
-   > 2.5. Storage component
-   > 2.6. Common classes
+   * 2.1. Architecture
+   * 2.2. UI component
+   * 2.3. Logic component
+   * 2.4. Model component
+   * 2.5. Storage component
+   * 2.6. Common classes
 3. [Implementation](#implementation)
-   > 3.1. Logging
-   > 3.2. Configuration
+   * 3.1. Logging
+   * 3.2. Configuration
 4. [Testing](#testing)
-   > 4.1. Troubleshooting tests
+   * 4.1. Troubleshooting tests
 5. [Dev Ops](#dev-ops)
-   > 5.1. Build Automation
-   > 5.2. Continuous Integration
-   > 5.3. Publishing Documentation
-   > 5.4. Making a Release
-   > 5.5. Converting Documentation to PDF format
+   * 5.1. Build Automation
+   * 5.2. Continuous Integration
+   * 5.3. Publishing Documentation
+   * 5.4. Making a Release
+   * 5.5. Converting Documentation to PDF format
    
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
