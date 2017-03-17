@@ -64,8 +64,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTodoListChanged() {
-        todoListHistory.forgetStatesAfter();
-        todoListHistory.addToHistory(todoList);
         raise(new TodoListChangedEvent(todoList));
     }
 

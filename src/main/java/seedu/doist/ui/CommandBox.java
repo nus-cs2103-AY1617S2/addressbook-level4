@@ -74,7 +74,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleEnterKey() {
         try {
             String userCommandText = commandTextField.getText();
-            restoreCommandHistory(userCommandText);
+            restoreCommandHistoryAndAppend(userCommandText);
             CommandResult commandResult = logic.execute(userCommandText);
             // process result of the command
             setStyleToIndicateCommandSuccess();
@@ -93,7 +93,7 @@ public class CommandBox extends UiPart<Region> {
 
     //Restores the command history pointer
     //Throws exception is 'add' fails
-    private void restoreCommandHistory(String userCommandText) {
+    private void restoreCommandHistoryAndAppend(String userCommandText) {
         commandHistory.restore();
         if (!commandHistory.addToHistory(userCommandText)) {
             throw new ArrayIndexOutOfBoundsException();
