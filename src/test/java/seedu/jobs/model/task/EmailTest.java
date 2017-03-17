@@ -1,4 +1,4 @@
-package seedu.jobs.model.person;
+package seedu.jobs.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
