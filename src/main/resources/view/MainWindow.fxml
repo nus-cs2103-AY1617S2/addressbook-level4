@@ -24,12 +24,23 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="anchor-pane-with-border"
-		  minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-              <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
-          </padding>
-      </AnchorPane>
+      <SplitPane dividerPositions = "0.8" VBox.vgrow="ALWAYS">
+         <items>
+            <VBox>
+                <children>
+                <AnchorPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder"
+					  styleClass="anchor-pane-with-border" minHeight="100" prefHeight="100" maxHeight="100">
+					  <padding>
+						  <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
+					  </padding>
+				  </AnchorPane>
+                </children>
+            </VBox>
+            <VBox>
+                <!-- Current time and date goes here -->
+            </VBox>
+         </items>
+      </SplitPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
             <VBox fx:id="personList" minWidth="340" prefWidth="340">
