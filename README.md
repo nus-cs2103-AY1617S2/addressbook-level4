@@ -7,10 +7,8 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop task managing application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
+* This is a desktop task managing application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is **written in OOP fashion**.
-
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
@@ -18,7 +16,6 @@
 * [Learning Outcomes](docs/LearningOutcomes.md)
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
-
 
 #### Acknowledgements
 
