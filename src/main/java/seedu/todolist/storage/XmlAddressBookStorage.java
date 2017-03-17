@@ -12,9 +12,9 @@ import seedu.todolist.commons.util.FileUtil;
 import seedu.todolist.model.ReadOnlyToDoList;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access ToDoList data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlAddressBookStorage implements ToDoListStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
@@ -24,22 +24,22 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         this.filePath = filePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getToDoListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyToDoList> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException {
+        return readToDoList(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readToDoList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyToDoList> readAddressBook(String filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+    public Optional<ReadOnlyToDoList> readToDoList(String filePath) throws DataConversionException,
+    FileNotFoundException {
         assert filePath != null;
 
         File addressBookFile = new File(filePath);
@@ -55,15 +55,15 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyToDoList addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveToDoList(ReadOnlyToDoList addressBook) throws IOException {
+        saveToDoList(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyToDoList)}
+     * Similar to {@link #saveToDoList(ReadOnlyToDoList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyToDoList addressBook, String filePath) throws IOException {
+    public void saveToDoList(ReadOnlyToDoList addressBook, String filePath) throws IOException {
         assert addressBook != null;
         assert filePath != null;
 
