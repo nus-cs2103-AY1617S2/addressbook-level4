@@ -39,6 +39,7 @@ public class EditIsDoneCommand extends Command {
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCE, updatedTaskDone));
     }
