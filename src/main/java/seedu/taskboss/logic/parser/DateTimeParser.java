@@ -12,7 +12,7 @@ import seedu.taskboss.model.task.DateTime;
 /*
  * Parses date
  */
-public class DateParser {
+public class DateTimeParser {
 
     private static final String START_DATE = "START DATE: ";
     private static final String END_DATE = "END DATE: ";
@@ -23,11 +23,22 @@ public class DateParser {
 
     private com.joestelmach.natty.Parser nattyParser;
 
-    public DateParser() {
+    public DateTimeParser() {
         this.nattyParser = new com.joestelmach.natty.Parser();
     }
 
-    private List<DateGroup> parse(String date) {
+    /**
+     * Returns if a given {@code String date} is a valid date input
+     * Used in DateTime class
+     */
+    public boolean isParseable(String date) {
+        List<DateGroup> tempDateGroupList = this.nattyParser.parse(date);
+        int numDates = countDates(tempDateGroupList);
+
+        return numDates >= 1;
+    }
+
+    public List<DateGroup> parse(String date) {
         String currentDate = date;
         if (Locale.getDefault().equals(Locale.US)) {
             currentDate = date.replaceAll(REGEX_US_DATE, REGEX_NON_US_DATE);
@@ -37,8 +48,27 @@ public class DateParser {
         return dateGroupList;
     }
 
-    public DateTime parseStartDate(String rawStartDate) throws IllegalValueException {
+    /**
+     * Parses a given {@code String date}
+     * @return parsed DateTime object
+     */
+    public DateTime parseDate(String date) throws IllegalValueException { 
+        List <DateGroup> dateGroupList = parse(date);
+        int numDates = countDates(dateGroupList);
+        
+        if (numDates == 0 && !date.equals("")) {
+            throw new IllegalValueException(ERROR_INVALID_DATE);
+        } else if (numDates > 1) {
+            throw new IllegalValueException(ERROR_MULTIPLE_DATES);
+        } 
 
+        DateGroup dateGroup = dateGroupList.get(0);
+
+        return new DateTime(dateGroup.getDates().get(0), dateGroup.isDateInferred(), dateGroup.isTimeInferred());
+    }
+
+    // MAY BE REMOVING
+    public DateTime parseStartDate(String rawStartDate) throws IllegalValueException {
         List<DateGroup> dateGroupList = parse(rawStartDate);
         int numDates = countDates(dateGroupList);
 
@@ -56,6 +86,7 @@ public class DateParser {
 
     }
 
+    // MAY BE REMOVING
     public DateTime parseEndDate(String rawEndDate) throws IllegalValueException {
 
         List<DateGroup> dateGroupList = parse(rawEndDate);

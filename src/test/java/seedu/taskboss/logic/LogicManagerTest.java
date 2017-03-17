@@ -36,7 +36,7 @@ import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.logic.parser.DateParser;
+import seedu.taskboss.logic.parser.DateTimeParser;
 import seedu.taskboss.logic.parser.ParserUtil;
 import seedu.taskboss.model.Model;
 import seedu.taskboss.model.ModelManager;
@@ -218,9 +218,9 @@ public class LogicManagerTest {
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
-                DateParser.getStartDateMultipleDatesError());
+                DateTimeParser.getStartDateMultipleDatesError());
         assertCommandFailure("add n/Valid Name p/1 sd/invalid date ed/monday to friday i/valid, information",
-                DateParser.getStartDateInvalidDateError());
+                DateTimeParser.getStartDateInvalidDateError());
     }
 
     @Test

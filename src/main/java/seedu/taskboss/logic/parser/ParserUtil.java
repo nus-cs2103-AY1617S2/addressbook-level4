@@ -89,7 +89,7 @@ public class ParserUtil {
 
         if (startDateTime.isPresent()) {
             try {
-                DateParser dateParser = new DateParser();
+                DateTimeParser dateParser = new DateTimeParser();
                 DateTime dt = dateParser.parseStartDate(startDateTime.toString().trim());
                 return Optional.of(dt);
             } catch (IllegalValueException ive) {
@@ -105,7 +105,7 @@ public class ParserUtil {
 
         if (endDateTime.isPresent()) {
             try {
-                DateParser dateParser = new DateParser();
+                DateTimeParser dateParser = new DateTimeParser();
                 DateTime dt = dateParser.parseEndDate(endDateTime.toString().trim());
                 return Optional.of(dt);
             } catch (IllegalValueException ive) {
@@ -125,7 +125,7 @@ public class ParserUtil {
         assert startDateTime != null;
 
         try {
-            DateParser dateParser = new DateParser();
+            DateTimeParser dateParser = new DateTimeParser();
             DateTime dateTimeParsed = dateParser.parseStartDate(startDateTime.trim());
             return dateTimeParsed.toString();
         } catch (IllegalValueException ive) {
@@ -143,7 +143,7 @@ public class ParserUtil {
         assert endDateTime != null;
 
         try {
-            DateParser dateParser = new DateParser();
+            DateTimeParser dateParser = new DateTimeParser();
             DateTime dateTimeParsed = dateParser.parseEndDate(endDateTime.trim());
             return dateTimeParsed.toString();
         } catch (IllegalValueException ive) {
