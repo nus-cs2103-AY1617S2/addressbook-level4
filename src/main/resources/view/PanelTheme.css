@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Avenir Light';
+    src: url('/fonts/avenir-light.ttf');
+}
+
+.header-font {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Avenir Light";
+    -fx-font-size: 15;
+}
+
+.header-deadlines {
+    -fx-background-color: #E55A5A;
+}
+
+.header-events {
+    -fx-background-color: #4AB6AC;
+}
+
+.header-todo {
+    -fx-background-color: #6BA0DD;
+}
+
+.panel-shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.tasklist {
+	-fx-background-color: #FFFFFF;
+	-fx-border-width: 3;
+	-fx-border-color: #FFFFFF;
+}
+
+.list-cell {
+	-fx-background-color: #FFFFFF;
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.list-cell .label {
+    -fx-text-fill: #010504;
+}
+
+.grid-pane {
+    -fx-background-color: transparent;
+}
+
+.grid-pane .anchor-pane {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.chip {
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 40;
+    -fx-text-fill: white;
+    -fx-background-position: center center;
+}
+

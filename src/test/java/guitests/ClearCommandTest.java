@@ -1,8 +1,11 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import seedu.onetwodo.logic.commands.ClearCommand;
+import seedu.onetwodo.logic.commands.DeleteCommand;
 
 public class ClearCommandTest extends ToDoListGuiTest {
 
@@ -14,9 +17,9 @@ public class ClearCommandTest extends ToDoListGuiTest {
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        //assertTrue(taskListPanel.isListMatching(td.hoon));
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand(td.task1.getAddCommand());
+        //assertTrue(taskListPanel.isListMatching(td.task1));
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e1");
         assertListSize(0);
 
         //verify clear command works when the list is empty
@@ -24,7 +27,7 @@ public class ClearCommandTest extends ToDoListGuiTest {
     }
 
     private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+        commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
         assertResultMessage("ToDo List has been cleared!");
     }

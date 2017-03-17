@@ -3,6 +3,7 @@ package seedu.onetwodo.model;
 import java.util.Set;
 
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
@@ -20,6 +21,9 @@ public interface Model {
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+
+    /** Mark the given tasks completed. */
+    void doneTask(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -43,4 +47,11 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    void updateFilteredUndoneTaskList();
+
+    void updateFilteredDoneTaskList();
+
+    DoneStatus getDoneStatus();
+
+    void setDoneStatus(DoneStatus doneStatus);
 }

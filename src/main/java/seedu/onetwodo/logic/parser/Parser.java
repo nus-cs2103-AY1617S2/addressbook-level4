@@ -6,10 +6,13 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.onetwodo.commons.core.EventsCenter;
+import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.DeleteCommand;
+import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.logic.commands.ExitCommand;
 import seedu.onetwodo.logic.commands.FindCommand;
@@ -35,6 +38,10 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
+        if (userInput.isEmpty()) {
+            EventsCenter.getInstance().post(new CloseDialogEvent());
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -56,6 +63,9 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -63,7 +73,7 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -1,14 +1,23 @@
 package seedu.onetwodo.ui;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.GuiSettings;
@@ -17,6 +26,7 @@ import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.model.UserPrefs;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -26,19 +36,24 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
+    private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
+    private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_WIDTH = 650;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
-    private Config config;
+    private TaskListPanel deadlineTaskListPanel;
+    private TaskListPanel eventTaskListPanel;
+    private TaskListPanel todoTaskListPanel;
+    private CommandBox commandBox;
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+    private JFXDialog dialog;
+
+    private Config config;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -47,13 +62,22 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane deadlineListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane eventListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane todoListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane dialogStackPane;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -69,9 +93,19 @@ public class MainWindow extends UiPart<Region> {
         setWindowMinSize();
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
+        loadFonts(scene);
+        loadStyleSheets(scene);
         primaryStage.setScene(scene);
 
         setAccelerators();
+    }
+
+    private void loadFonts(Scene scene) {
+        Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
+    }
+
+    private void loadStyleSheets(Scene scene) {
+        scene.getStylesheets().add(DONE_STYLESHEET);
     }
 
     public Stage getPrimaryStage() {
@@ -113,11 +147,18 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), getDoneTaskList(), TaskType.DEADLINE);
+        eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), getDoneTaskList(), TaskType.EVENT);
+        todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), getDoneTaskList(), TaskType.TODO);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+
+        commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        commandBox.focus();
+    }
+
+    private ObservableList<ReadOnlyTask> getDoneTaskList() {
+        return logic.getFilteredTasksByDoneStatus();
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -132,8 +173,16 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    private AnchorPane getDeadlineListPlaceholder() {
+        return deadlineListPanelPlaceholder;
+    }
+
+    private AnchorPane getEventListPlaceholder() {
+        return eventListPanelPlaceholder;
+    }
+
+    private AnchorPane getTodosListPlaceholder() {
+        return todoListPanelPlaceholder;
     }
 
     void hide() {
@@ -195,12 +244,71 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public TaskListPanel getDeadlineTaskListPanel() {
+        return this.deadlineTaskListPanel;
     }
+
+    public TaskListPanel getEventTaskListPanel() {
+        return this.eventTaskListPanel;
+    }
+
+    public TaskListPanel getTodoTaskListPanel() {
+        return this.todoTaskListPanel;
+    }
+
+/*    public TaskListPanel getTaskListPanel(TaskType type) {
+        switch(type) {
+        case DEADLINE:
+            return getDeadlineTaskListPanel();
+        case EVENT:
+            return getEventTaskListPanel();
+        case TODO:
+            return getTodoTaskListPanel();
+        default:
+            return getTodoTaskListPanel();
+        }
+    }*/
 
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
+    }
+
+    public void openDialog(ReadOnlyTask task) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Text nameText = new Text(task.getName().fullName);
+        Text descriptionText = new Text(task.getDescription().value);
+        nameText.setWrappingWidth(MIN_WIDTH);
+        descriptionText.setWrappingWidth(MIN_WIDTH);
+        content.setHeading(nameText);
+        content.setBody(descriptionText);
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        setCloseDialogHandler();
+    }
+
+    private void setCloseDialogHandler() {
+        EventHandler<KeyEvent> eventHandler = new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent ke) {
+                if (ke.getCode() == KeyCode.ENTER) {
+                    // Ignore initial enter event from command,
+                    // instead handle empty string commands in parser.
+                    return;
+                }
+                ke.consume();
+                closeDialog();
+                primaryStage.getScene().setOnKeyReleased(null);
+            }
+        };
+        primaryStage.getScene().setOnKeyReleased(eventHandler);
+    }
+
+    void closeDialog() {
+        if (dialog == null) {
+            return;
+        }
+        dialog.close();
+        dialog = null;
+        commandBox.focus();
     }
 
     void releaseResources() {

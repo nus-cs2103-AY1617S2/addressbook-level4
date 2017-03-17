@@ -4,23 +4,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.onetwodo.model.task.Description;
-
 public class DescriptionTest {
 
     @Test
     public void isValidDescription() {
         assertTrue(Description.isValidDescription(""));
-        /*
-         * // invalid description
-         * assertFalse(Description.isValidDescription("")); // empty string
-         * assertFalse(Description.isValidDescription(" ")); // spaces only
-         * // valid description assertTrue(Description.
-         * isValidDescription("Blk 456, Den Road, #01-355"));
-         * assertTrue(Description.isValidDescription("-")); // one character
-         * assertTrue(Description.
-         * isValidDescription("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA"
-         * ));
-         */
+
+        // valid description
+        assertTrue(Description.isValidDescription("this module so harddddddd"));
+        assertTrue(Description.isValidDescription("-")); // one character
+        assertTrue(Description.isValidDescription("Task difficulty level: 9000, effort required: 99999,"
+                + " rest period available: NULL"));  // long description
+        assertTrue(Description.isValidDescription("12345+_=-~`| ~!@#$%^&*()[];',./{}:")); // special input
     }
 }

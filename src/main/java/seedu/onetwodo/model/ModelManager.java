@@ -10,6 +10,7 @@ import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList;
@@ -24,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final ToDoList toDoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private DoneStatus doneStatus;
 
     /**
      * Initializes a ModelManager with the given toDoList and userPrefs.
@@ -35,7 +37,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with toDo list: " + toDoList + " and user prefs " + userPrefs);
 
         this.toDoList = new ToDoList(toDoList);
-        filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
+        this.filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
+        this.doneStatus = DoneStatus.UNDONE;
     }
 
     public ModelManager() {
@@ -65,9 +68,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void doneTask(int filteredTaskListIndex) {
+        int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        toDoList.doneTask(toDoListIndex);
+        setDoneStatus(DoneStatus.UNDONE);
+        updateFilteredUndoneTaskList();
+        indicateToDoListChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         toDoList.addTask(task);
-        updateFilteredListToShowAll();
+        setDoneStatus(DoneStatus.UNDONE);
+        updateFilteredUndoneTaskList();
         indicateToDoListChanged();
     }
 
@@ -102,7 +115,27 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    @Override
+    public void updateFilteredUndoneTaskList() {
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == false));
+    }
+
+    @Override
+    public void updateFilteredDoneTaskList() {
+        updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
+
+    @Override
+    public DoneStatus getDoneStatus() {
+        return doneStatus;
+    }
+
+    @Override
+    public void setDoneStatus(DoneStatus doneStatus) {
+        this.doneStatus = doneStatus;
+    }
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);

@@ -1,9 +1,11 @@
 package seedu.onetwodo.logic.commands;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -15,28 +17,31 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive prefix integer)\n"
+            + "Example: " + COMMAND_WORD + " t1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
+    public final TaskType taskType;
     public final int targetIndex;
 
-    public DeleteCommand(int targetIndex) {
+    public DeleteCommand(char taskType, int targetIndex) {
+        this.taskType = TaskType.getTaskTypeFromChar(taskType);
         this.targetIndex = targetIndex;
     }
 
 
     @Override
     public CommandResult execute() throws CommandException {
-
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
 
-        if (lastShownList.size() < targetIndex) {
+        if (filteredByDoneStatus.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask taskToDelete = filteredByDoneStatus.get(targetIndex - 1);
 
         try {
             model.deleteTask(taskToDelete);

@@ -1,0 +1,4 @@
+.label:done .text {
+	-fx-strikethrough: true;
+	-fx-opacity: 0.5;
+}

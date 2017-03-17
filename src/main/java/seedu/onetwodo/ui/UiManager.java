@@ -14,6 +14,7 @@ import seedu.onetwodo.commons.core.ComponentManager;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -64,7 +65,8 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        mainWindow.releaseResources();
+        // Release resources when browser panel is loaded
+        // mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -100,6 +102,10 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     //==================== Event Handling Code ===============================================================
+    @Subscribe
+    private void handleCloseDialog(CloseDialogEvent event) {
+        mainWindow.closeDialog();
+    }
 
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
@@ -115,14 +121,27 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        // Scroll when testing
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+        switch (event.taskType) {
+        case DEADLINE:
+            mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
+            break;
+        case EVENT:
+            mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
+            break;
+        case TODO:
+            mainWindow.getTodoTaskListPanel().scrollTo(event.targetIndex);
+            break;
+        }
     }
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+        mainWindow.openDialog(event.getNewSelection());
+        // Opens browserPanel
+        // mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }

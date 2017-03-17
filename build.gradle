@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.onetwodo.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -41,6 +41,7 @@ allprojects {
         junitVersion = '4.12'
         testFxVersion = '4.0.+'
         monocleVersion = '1.8.0_20'
+		nattyTimeVersion = '0.13'
         checkstyleVersion = '7.1.2'
 
         libDir = 'lib'
@@ -63,6 +64,8 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+		compile "com.joestelmach:natty:$nattyTimeVersion"
+        compile "com.jfoenix:jfoenix:1.0.0"
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +88,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "onetwodo.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }

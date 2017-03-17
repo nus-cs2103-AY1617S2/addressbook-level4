@@ -1,6 +1,7 @@
 package seedu.onetwodo.commons.events.ui;
 
 import seedu.onetwodo.commons.events.BaseEvent;
+import seedu.onetwodo.model.task.TaskType;
 
 /**
  * Indicates a request to jump to the list of Tasks
@@ -8,9 +9,11 @@ import seedu.onetwodo.commons.events.BaseEvent;
 public class JumpToListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
+    public final TaskType taskType;
 
-    public JumpToListRequestEvent(int targetIndex) {
+    public JumpToListRequestEvent(int targetIndex, TaskType taskType) {
         this.targetIndex = targetIndex;
+        this.taskType = taskType;
     }
 
     @Override

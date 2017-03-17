@@ -43,7 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedPerson}.
+     * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
@@ -77,6 +77,18 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return taskFoundAndDeleted;
     }
+
+    /**
+     * Marks the equivalent task as completed.
+     *
+     *
+     */
+    public void done(int index) {
+        Task taskToComplete = internalList.get(index);
+        taskToComplete.setDone();
+        internalList.set(index, taskToComplete);
+    }
+
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);

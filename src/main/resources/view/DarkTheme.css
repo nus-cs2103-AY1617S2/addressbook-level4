@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Avenir Light';
+    src: url('/fonts/avenir-light.ttf');
+}
+
+.root {
+    -fx-focus-color: transparent;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -25,7 +34,10 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Avenir Light";
+    -fx-border-color: #FFFFFF;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
 }
 
 .tab-pane {
@@ -76,24 +88,14 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent #F4F3F3 transparent #F4F3F3;
+    -fx-background-color: transparent, derive(#FDFDFD, 10%);
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-.list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
-}
-
-.list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-background-color: derive(#FDFDFD, 20%);
 }
 
 .cell_big_label {
@@ -107,12 +109,12 @@
 }
 
 .anchor-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: derive(#FDFDFD, 20%);
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#FDFDFD, 20%);
+     -fx-border-color: derive(#FDFDFD, 10%);
      -fx-border-top-width: 1px;
 }
 
@@ -141,16 +143,6 @@
 
 .status-bar-with-border .label {
     -fx-text-fill: white;
-}
-
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .context-menu {
@@ -250,9 +242,19 @@
     -fx-text-fill: white;
 }
 
+.scroll-bar {
+    -fx-border-color: transparent;
+    -fx-background-color: #FFFFFF;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #FFFFFF;
+}
+
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
+    -fx-background-color: derive(gray, 33%);
+    -fx-background-insets: 6, 0, 0;
+    -fx-background-radius: 3em;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {

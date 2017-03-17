@@ -1,18 +1,20 @@
 package seedu.onetwodo.logic.commands;
 
-import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
+import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
-import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.StartDate;
+import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
 /**
@@ -23,11 +25,11 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the last task listing. "
+            + "by the index used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] "
+            + "Parameters: INDEX (must be a positive prefix integer) [NAME] "
             + "[s/START_DATE] [e/END_DATE] [d/DESCRIPTION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Example: " + COMMAND_WORD + " e1 s/tmr 9:00am d/beware of dogs";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -35,34 +37,38 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private final TaskType taskType;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, char taskType) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
+        this.filteredTaskListIndex = filteredTaskListIndex;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.taskType = TaskType.getTaskTypeFromChar(taskType);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
+        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (filteredByDoneStatus.size() < filteredTaskListIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = filteredByDoneStatus.get(filteredTaskListIndex - 1);
+        int internalIndex = lastShownList.indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(internalIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

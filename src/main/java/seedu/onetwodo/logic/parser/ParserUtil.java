@@ -15,8 +15,8 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.StartDate;
 

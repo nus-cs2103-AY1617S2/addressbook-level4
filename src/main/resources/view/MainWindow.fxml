@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <?import java.net.URL?>
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <stylesheets>
-      <URL value="@DarkTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -24,33 +32,116 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border">
-         <padding>
-            <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
-         </padding>
-      </AnchorPane>
-       <AnchorPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="anchor-pane-with-border" minHeight="100" prefHeight="100" maxHeight="100">
+      <StackPane fx:id="dialogStackPane" VBox.vgrow="ALWAYS">
+         <children>
+            <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5, 0.5">
+               <items>
+                  <VBox fx:id="DeadlineList" alignment="CENTER" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
+                      <padding>
+                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                      </padding>
+                     <children>
+                        <HBox prefHeight="64.0" prefWidth="320.0" styleClass="header-deadlines" stylesheets="@PanelTheme.css">
+                           <children>
+                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="21.0" />
+                                 </HBox.margin>
+                                 <image>
+                                    <Image url="@../images/alarm.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" styleClass="header-font" stylesheets="@PanelTheme.css" text="Deadlines" textAlignment="CENTER">
+                                 <HBox.margin>
+                                    <Insets right="30.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <AnchorPane fx:id="deadlineListPanelPlaceholder" styleClass="list-view" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="EventList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="64.0" prefWidth="320.0" styleClass="header-events" stylesheets="@PanelTheme.css">
+                           <children>
+                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/events-calendar.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="21.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" styleClass="header-font" stylesheets="@PanelTheme.css" text="Events" textAlignment="CENTER">
+                                 <HBox.margin>
+                                    <Insets right="30.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="TodoList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="64.0" prefWidth="320.0" stylesheets="@PanelTheme.css">
+                           <children>
+                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/no-alarm.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="21.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="1000.0" styleClass="header-font" stylesheets="@PanelTheme.css" text="To do" textAlignment="CENTER">
+                                 <HBox.margin>
+                                    <Insets right="30.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="header-task-panel" />
+                              <String fx:value="header-todo" />
+                           </styleClass>
+                        </HBox>
+                        <AnchorPane fx:id="todoListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
+         </children>
+      </StackPane>
+       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
            <padding>
-               <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
+               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-         <items>
-            <VBox fx:id="personList" minWidth="340" prefWidth="340">
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                </padding>
-               <children>
-                  <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-               </children>
-            </VBox>
-            <AnchorPane fx:id="browserPlaceholder" prefWidth="340" >
-                <padding>
-                    <Insets top="10" bottom="10" left="10" right="10"/>
-                </padding>
-            </AnchorPane>
-         </items>
-      </SplitPane>
+      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </AnchorPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
    </children>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
 </VBox>

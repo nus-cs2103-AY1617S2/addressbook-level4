@@ -32,12 +32,12 @@ import seedu.onetwodo.commons.util.XmlUtil;
 import seedu.onetwodo.model.ToDoList;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
-import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Description;
+import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
-import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.StartDate;
+import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.storage.XmlSerializableToDoList;
 
 /**
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new StartDate("9482424"), new EndDate("hans@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new StartDate("87249245"), new EndDate("ruth@google.com"), new Description("81th street"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new StartDate("95352563"), new EndDate("heinz@yahoo.com"), new Description("wall street"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new StartDate("87652533"), new EndDate("cornelia@google.com"), new Description("10th street"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new StartDate("9482224"), new EndDate("werner@gmail.com"), new Description("michegan ave"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new StartDate("9482427"), new EndDate("lydia@gmail.com"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new StartDate("9482442"), new EndDate("anna@google.com"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), new StartDate("8482424"), new EndDate("stefan@mail.com"), new Description("little india"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new StartDate("8482131"), new EndDate("hans@google.com"), new Description("chicago ave"), new UniqueTagList())
+                new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"), new Description("get drunk"), new UniqueTagList()),
+                new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"), new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Description("brown one"), new UniqueTagList()),
+                new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Description("train legs too"), new UniqueTagList()),
+                new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Description(""), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -97,8 +97,8 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                new Tag("work"),
+                new Tag("school")
             };
         } catch (IllegalValueException e) {
             assert false;

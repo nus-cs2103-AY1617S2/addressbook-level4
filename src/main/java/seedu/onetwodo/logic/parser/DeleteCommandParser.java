@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
+import seedu.onetwodo.model.task.TaskType;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -18,14 +19,15 @@ public class DeleteCommandParser {
      * and returns an DeleteCommand object for execution.
      */
     public Command parse(String args) {
-
-        Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        String argsTrimmed = args.trim();
+        char taskType = argsTrimmed.charAt(0);
+        Optional<Integer> index = ParserUtil.parseIndex(argsTrimmed.substring(1));
+        if (!index.isPresent() || TaskType.getTaskTypeFromChar(taskType) == null) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(index.get());
+        return new DeleteCommand(taskType, index.get());
     }
 
 }

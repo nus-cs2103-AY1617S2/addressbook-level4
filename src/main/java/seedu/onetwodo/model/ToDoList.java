@@ -147,6 +147,10 @@ public class ToDoList implements ReadOnlyToDoList {
         }
     }
 
+    public void doneTask(int index) {
+        tasks.done(index);
+    }
+
 //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

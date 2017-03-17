@@ -2,7 +2,6 @@ package seedu.onetwodo.model.task;
 
 import java.util.Objects;
 
-import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
@@ -15,41 +14,50 @@ public class Task implements ReadOnlyTask {
     private StartDate startDate;
     private EndDate endDate;
     private Description description;
-
     private UniqueTagList tags;
 
+    private TaskType type;
+    private boolean isDone;
+
+    //@@author A0141138N
     /**
      * Every field must be present and not null.
+     * Event
      */
     public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, startDate, endDate, description, tags);
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isDone = false;
+        if (!startDate.hasDate() && !endDate.hasDate()) {
+            this.type = TaskType.TODO;
+        } else if (!startDate.hasDate() && endDate.hasDate()) {
+            this.type = TaskType.DEADLINE;
+        } else if (startDate.hasDate() && endDate.hasDate()) {
+            this.type = TaskType.EVENT;
+        }
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(),
+                source.getTags(), source.getDoneStatus());
     }
 
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
+    public Task(Name name, StartDate startDate, EndDate endDate, Description description,
+            UniqueTagList tags, boolean isDone) {
+        this(name, startDate, endDate, description, tags);
+        this.isDone = isDone;
     }
 
+    // Getters
     @Override
     public Name getName() {
         return name;
-    }
-
-    public void setStartDate(StartDate startDate) {
-        assert startDate != null;
-        this.startDate = startDate;
     }
 
     @Override
@@ -57,19 +65,9 @@ public class Task implements ReadOnlyTask {
         return startDate;
     }
 
-    public void setEndDate(EndDate endDate) {
-        assert endDate != null;
-        this.endDate = endDate;
-    }
-
     @Override
     public EndDate getEndDate() {
         return endDate;
-    }
-
-    public void setDescription(Description description) {
-        assert description != null;
-        this.description = description;
     }
 
     @Override
@@ -78,8 +76,48 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public boolean getDoneStatus() {
+        return isDone;
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return type;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
+    }
+
+    // Setters
+    public void setName(Name name) {
+        assert name != null;
+        this.name = name;
+    }
+
+    public void setStartDate(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(EndDate endDate) {
+        assert endDate != null;
+        this.endDate = endDate;
+    }
+
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
+    }
+
+    public void setDone() {
+        assert isDone == false;
+        isDone = true;
+    }
+
+    public void setTaskType(TaskType type) {
+        this.type = type;
     }
 
     /**

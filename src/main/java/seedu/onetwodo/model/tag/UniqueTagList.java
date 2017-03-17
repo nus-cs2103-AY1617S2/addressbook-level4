@@ -158,6 +158,10 @@ public class UniqueTagList implements Iterable<Tag> {
         return this == other || new HashSet<>(this.internalList).equals(new HashSet<>(other.internalList));
     }
 
+    public boolean hasTag() {
+        return !internalList.isEmpty();
+    }
+
     @Override
     public int hashCode() {
         return internalList.hashCode();

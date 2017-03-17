@@ -1,54 +1,53 @@
 package seedu.onetwodo.logic.parser;
 
+import static seedu.onetwodo.model.task.Date.MESSAGE_DATE_INPUT_CONSTRAINTS;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
-import java.util.Date;
-import java.util.List;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.Optional;
-
 
 public class DateTimeParser {
-    
-    public static final String MESSAGE_DATE_PARSE_FAILURE = "Invalid date input. Please check the format.";
 
-    
     public DateTimeParser() {}
-    
+
     //private static Parser parser = new Parser();
 
     /**
      * Parse user input using Natty library.
-     * 
+     *
      * @param input trimmed user's input for date & time.
      * @param defaultDateTime if no date OR time is stated, use this value.
      * @return LocalDateTime if Natty parses successfully. Else, return empty Optional.
      */
-    public static Optional<LocalDateTime> parseDateTime(String input, LocalDateTime defaultDateTime) 
+    public static Optional<LocalDateTime> parseDateTime(String input, LocalDateTime defaultDateTime)
                 throws IllegalValueException {
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             return Optional.empty();
         }
 
         // Input exist. Try to parse it using Natty.
         Parser parser = new Parser();
-        
+
         List<DateGroup> dateGroups = parser.parse(input);
-        if(dateGroups.isEmpty()) {
-            throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
+        if (dateGroups.isEmpty()) {
+            throw new IllegalValueException(MESSAGE_DATE_INPUT_CONSTRAINTS);
         }
         DateGroup dateGroup = dateGroups.get(0);
         List<Date> dates = dateGroup.getDates();
 
-        if(dates.isEmpty()) {
-            throw new IllegalValueException(MESSAGE_DATE_PARSE_FAILURE);
+        if (dates.isEmpty()) {
+            throw new IllegalValueException(MESSAGE_DATE_INPUT_CONSTRAINTS);
         }
         Date parsedDateTime = dates.get(0);
         LocalDateTime localDateTime = toLocalDateTime(parsedDateTime);
@@ -57,11 +56,11 @@ public class DateTimeParser {
 
         return Optional.of(formattedFinalisedDateTime);
     }
-    
+
     /**
      * Convert a EndDate represented in UTC to local machine representation.
-     * 
-     * @param dateTime the date and time that Natty uses. 
+     *
+     * @param dateTime the date and time that Natty uses.
      * @return local machine date and time.
      */
     private static LocalDateTime toLocalDateTime (Date dateTime) {
@@ -70,11 +69,11 @@ public class DateTimeParser {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
         return localDateTime;
     }
-    
+
     /**
      * Fill in the missing information that user missed out. It can be date OR time input.
-     * 
-     * @param localDateTime the local date and time that Natty thinks the user might want. 
+     *
+     * @param localDateTime the local date and time that Natty thinks the user might want.
      * @param defaultDateTime to be used to replace missing date/time
      * @param dateGroup Natty parsed output.
      * @return final version of LocalDateTime that user might want specifically.
@@ -89,8 +88,8 @@ public class DateTimeParser {
         } else {
             finalDateTime = localDateTime;
         }
-        
+
         return finalDateTime;
     }
-    
+
 }

@@ -7,7 +7,7 @@
 
 Having trouble keeping track with the tasks you have to complete? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you are looking for.
 
-OneTwoDo has a simple and clean interface. It clearly displays 3 categories of tasks, namely events, deadlines and to-do's. 
+OneTwoDo has a simple and clean interface. It clearly displays 3 categories of tasks, namely events, deadlines and to-do's.
 
 OneTwoDo is specially designed to be keyboard-friendly. By just typing one line of command, OneTwoDo will faithfully execute your wish. No extra buttons needed to click!
 

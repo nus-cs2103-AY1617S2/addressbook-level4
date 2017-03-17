@@ -40,6 +40,10 @@ public class Description {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
+    public boolean hasDescription() {
+        return !value.trim().isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;
