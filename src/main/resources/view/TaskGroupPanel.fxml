@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
 
-<TitledPane fx:id="titledPane" onMouseClicked="#handleMouseClicked" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane fx:id="titledPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
 	<text> </text>
     <content>
-		<ScrollPane fitToWidth="true" VBox.vgrow="NEVER">
+		<ScrollPane minHeight="0.0" styleClass=".scroll-pane" fitToWidth="true" VBox.vgrow="NEVER">
 			<content>
         		<VBox fx:id="taskGroupView" VBox.vgrow="NEVER" />
 			</content>
