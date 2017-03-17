@@ -2,6 +2,11 @@ package savvytodo.testutil;
 
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.TaskManager;
+<<<<<<< HEAD
+=======
+import savvytodo.model.category.UniqueCategoryList;
+import savvytodo.model.task.DateTime;
+>>>>>>> 6bd425a... Fixed TestTask.getGeneratedTasks() to ensure non-null values of attributes
 import savvytodo.model.task.Description;
 import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
@@ -95,6 +100,9 @@ public class TypicalTestTasks {
                 temp.setDescription(new Description("" + i));
                 temp.setLocation(new Location("" + i));
                 temp.setPriority(new Priority(i % 2 == 0 ? "low" : "high"));
+                temp.setCategories(new UniqueCategoryList());
+                temp.setDateTime(new DateTime());
+                temp.setRecurrence(new Recurrence());
             } catch (IllegalValueException e) {
                 e.printStackTrace();
             }
