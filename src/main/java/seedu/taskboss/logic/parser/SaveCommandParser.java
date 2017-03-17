@@ -18,8 +18,8 @@ public class SaveCommandParser {
     public Command parse(String args) {
         File file = new File(args.trim());
 
-        if(!file.exists() && !file.isDirectory()) {
-        	file.mkdirs();
+        if (!file.exists() && !file.isDirectory()) {
+            file.mkdirs();
         }
 
         return new SaveCommand(args.trim());
