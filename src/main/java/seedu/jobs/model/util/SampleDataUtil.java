@@ -3,7 +3,7 @@ package seedu.jobs.model.util;
 import java.util.Optional;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
-import seedu.jobs.model.AddressBook;
+import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
@@ -39,7 +39,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyTaskBook getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TaskBook sampleAB = new TaskBook();
             for (Task sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }

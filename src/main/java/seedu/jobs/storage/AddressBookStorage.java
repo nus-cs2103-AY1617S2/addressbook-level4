@@ -7,7 +7,7 @@ import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.model.ReadOnlyTaskBook;
 
 /**
- * Represents a storage for {@link seedu.jobs.model.AddressBook}.
+ * Represents a storage for {@link seedu.jobs.model.TaskBook}.
  */
 public interface AddressBookStorage {
 

@@ -1,7 +1,7 @@
 package seedu.jobs.testutil;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
-import seedu.jobs.model.AddressBook;
+import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Task;
@@ -14,9 +14,9 @@ import seedu.jobs.model.task.UniqueTaskList;
  */
 public class TaskManagerBuilder {
 
-    private AddressBook addressBook;
+    private TaskBook addressBook;
 
-    public TaskManagerBuilder(AddressBook addressBook) {
+    public TaskManagerBuilder(TaskBook addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -30,7 +30,7 @@ public class TaskManagerBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public TaskBook build() {
         return addressBook;
     }
 }
