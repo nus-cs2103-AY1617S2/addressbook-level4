@@ -27,7 +27,7 @@ public class SaveCommand extends Command {
     public CommandResult execute() {
   	assert storage != null;
 	storage.setFilePath(filepath);
-	
+
     return new CommandResult(MESSAGE_SUCCESS);
     }
 
