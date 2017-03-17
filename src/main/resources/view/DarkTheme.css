@@ -240,6 +240,10 @@
     -fx-text-fill: white;
 }
 
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
     -fx-background-insets: 3;
