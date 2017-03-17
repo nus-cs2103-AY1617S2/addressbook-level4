@@ -56,7 +56,7 @@ public class AddCommandParser {
 
     private String checkStartDateTimeEmpty(Optional<String> test) throws IllegalValueException {
         try {
-            return ParserUtil.parseStartDate(test.get());
+            return test.get();
         } catch (NoSuchElementException nsee) {
             return "";
         }
@@ -64,7 +64,7 @@ public class AddCommandParser {
 
     private String checkEndDateTimeEmpty(Optional<String> test) throws IllegalValueException {
         try {
-            return ParserUtil.parseEndDate(test.get());
+            return test.get();
         } catch (NoSuchElementException nsee) {
             return "";
         }

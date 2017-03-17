@@ -66,10 +66,10 @@ public class DateTime {
     }
 
     /**
-     * Format the current natty-parsed date into a string of our intended format
+     * Format the current natty-parsed Date into a string of our intended format
      * i.e May 19, 2017 8:30 PM
      */
-    private void formatDateTime() {
+    public String formatDateTime() {
         SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy hh:mm aa");
         SimpleDateFormat sdfToday = new SimpleDateFormat("MMM dd, yyyy");
         // No time provided by user
@@ -78,6 +78,7 @@ public class DateTime {
         } else {
             this.value = sdfGeneral.format(this.date);
         }
+        return this.value;
     }
 
     @Override

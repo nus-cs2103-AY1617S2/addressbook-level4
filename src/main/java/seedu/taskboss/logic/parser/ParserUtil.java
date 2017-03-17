@@ -84,29 +84,17 @@ public class ParserUtil {
         return priorityLevel.isPresent() ? Optional.of(new PriorityLevel(priorityLevel.get())) : Optional.empty();
     }
 
-    public static Optional<DateTime> parseStartDateTime(Optional<String> startDateTime) {
-        assert startDateTime != null;
+    /**
+     * Parses a {@code Optional<String> dateTime into an {@code Optional<DateTime>}
+     * if {@code dateTime} is present.
+     */
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) {
+        assert dateTime != null;
 
-        if (startDateTime.isPresent()) {
+        if (dateTime.isPresent()) {
             try {
                 DateTimeParser dateParser = new DateTimeParser();
-                DateTime dt = dateParser.parseStartDate(startDateTime.toString().trim());
-                return Optional.of(dt);
-            } catch (IllegalValueException ive) {
-                return Optional.empty();
-            }
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    public static Optional<DateTime> parseEndDateTime(Optional<String> endDateTime) {
-        assert endDateTime != null;
-
-        if (endDateTime.isPresent()) {
-            try {
-                DateTimeParser dateParser = new DateTimeParser();
-                DateTime dt = dateParser.parseEndDate(endDateTime.toString().trim());
+                DateTime dt = dateParser.parseDate(dateTime.toString().trim());
                 return Optional.of(dt);
             } catch (IllegalValueException ive) {
                 return Optional.empty();
