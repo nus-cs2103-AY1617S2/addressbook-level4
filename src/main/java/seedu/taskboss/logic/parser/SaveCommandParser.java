@@ -1,6 +1,6 @@
 package seedu.taskboss.logic.parser;
 
-import java.io.*;
+import java.io.File;
 
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.SaveCommand;
@@ -15,9 +15,10 @@ public class SaveCommandParser {
      * Parses the given arguments in the context of the SaveCommand
      * and returns an SaveCommand object for execution.
      */
-    public Command parse(String args){
+    public Command parse(String args) {
         File file = new File(args.trim());
-        if (!file.exists() && !file.isDirectory()){
+        
+        if(!file.exists() && !file.isDirectory()) {
         	file.mkdirs();
         }
 
