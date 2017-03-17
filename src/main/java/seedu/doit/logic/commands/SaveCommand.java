@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
-import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.FileUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.storage.TaskManagerStorage;
@@ -24,29 +23,24 @@ public class SaveCommand extends Command {
             + " save/xml/in/this/file/as/name.xml";
 
     public static final String MESSAGE_SUCCESS = " Tasks saved at %1$s";
-    public static final String MESSAGE_DUPLICATE_FILE = "Another file already exists in the file path.";
-    public static final String MESSAGE_NOT_XML_FILE = "It must be a .xml file.";
-    public static final String MESSAGE_USING_SAME_FILE = "It is the current file you are choosing. "
+    public static final String MESSAGE_DUPLICATE_FILE = "Another file already exists in the file path!";
+    public static final String MESSAGE_NOT_XML_FILE = "It must be a .xml file!\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_USING_SAME_FILE = " is the current file you are choosing. "
             + "It will be auto saved.";
-    public static final String MESSAGE_CANNOT_CREATE_FILE = "Cannot create the .xml file.";
-
+    public static final String MESSAGE_CANNOT_CREATE_FILE = "Cannot create the .xml file!\n"
+            + "Maybe you have the : character in file name.";
+    public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file path!\nCannot contain characters"
+            + " * ? \" < > |\n" + MESSAGE_USAGE;
     public final String saveFilePath;
     public TaskManagerStorage taskManagerStorage;
     private static final Logger logger = LogsCenter.getLogger(SaveCommand.class);
 
     /**
      * Creates an SaveCommand using raw values.
-     *
-     * @throws IllegalValueException
-     *             if file is not xml
      */
-    public SaveCommand(String newFilePath) throws IllegalValueException {
+    public SaveCommand(String newFilePath) {
         assert newFilePath != null;
         this.saveFilePath = newFilePath;
-        if (!newFilePath.endsWith(".xml")) {
-            throw new IllegalValueException(MESSAGE_NOT_XML_FILE);
-        }
-
     }
 
     @Override
@@ -54,10 +48,20 @@ public class SaveCommand extends Command {
         assert this.model != null;
         File file = new File(this.saveFilePath);
         if (this.saveFilePath.equals(this.storage.getTaskManagerFilePath())) {
-            return new CommandResult(MESSAGE_USING_SAME_FILE);
+            logger.info(this.saveFilePath + "is current file path. Do not need to save.");
+            throw new CommandException(this.saveFilePath + MESSAGE_USING_SAME_FILE);
+        }
+        if (!FileUtil.isValidPath(this.saveFilePath)) {
+            logger.info("Invalid File Name: " + this.saveFilePath);
+            throw new CommandException(MESSAGE_INVALID_FILE_NAME);
+        }
+        if (!this.saveFilePath.endsWith(".xml")) {
+            logger.info("File not of type xml: " + this.saveFilePath);
+            throw new CommandException(MESSAGE_NOT_XML_FILE);
         }
         if (file.exists()) {
-            return new CommandResult(MESSAGE_DUPLICATE_FILE);
+            logger.info("Duplicate file path: " + this.saveFilePath);
+            throw new CommandException(MESSAGE_DUPLICATE_FILE);
         }
         try {
             FileUtil.createIfMissing(file);
