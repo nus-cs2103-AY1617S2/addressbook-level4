@@ -83,7 +83,6 @@ public class TaskCardHandle extends GuiHandle {
         return getName().equals(task.getName().toString())
                 && getDeadline().equals(task.getDeadline().toString())
                 && getDescription().equals(task.getDescription().toString())
-                && getID().equals(task.getID().toString())
                 && compareStringListOrderInsensitive(getTags(), getTags(task.getTags()));
     }
 

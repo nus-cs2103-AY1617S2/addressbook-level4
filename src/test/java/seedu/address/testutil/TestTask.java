@@ -36,7 +36,6 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.deadline = taskToCopy.getDeadline();
         this.description = taskToCopy.getDescription();
-        this.id = taskToCopy.getID();
         this.tags = taskToCopy.getTags();
         this.status = taskToCopy.getStatus();
         updateStatus();
@@ -128,11 +127,6 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public IdentificationNumber getID() {
-        return id;
-    }
-
-    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -147,7 +141,6 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().toString() + " ");
         sb.append("dl/" + this.getDeadline().toString() + " ");
         sb.append("ds/" + this.getDescription().toString() + " ");
-        sb.append("id/" + this.getID().toString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
