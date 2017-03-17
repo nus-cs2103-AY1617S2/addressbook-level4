@@ -31,7 +31,7 @@ public class TagController extends Controller {
     private static final String FAIL_MESSAGE_TEMPLATE = "Failed to add \"%s\".\n";
     private static final String RESULT_MESSAGE_TEMPLATE = "%s%d tag(s) successfully added.";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
     public TagController(Ui renderer) {
         super(renderer);

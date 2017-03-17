@@ -26,7 +26,7 @@ public class UpdateTaskController extends Controller {
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
 
-    private Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
     public UpdateTaskController(Ui renderer) {
         super(renderer);

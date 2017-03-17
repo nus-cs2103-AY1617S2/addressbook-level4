@@ -2,7 +2,6 @@ package seedu.toluist;
 
 import java.util.function.Supplier;
 
-import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TestUtil;
 
@@ -22,7 +21,6 @@ public class TestApp extends MainApp {
 
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
-        LogsCenter.getLogger(getClass()).info("initial data supplier ...... " + initialDataSupplier.get().toString());
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TodoList todoList = initialDataSupplier.get();

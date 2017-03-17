@@ -35,7 +35,7 @@ public class FindController extends Controller {
     private static final String TAG_MESSAGE = "tag";
     private static final String NAME_AND_TAG_MESSAGE = "name and tag";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
     public FindController(Ui renderer) {
         super(renderer);
