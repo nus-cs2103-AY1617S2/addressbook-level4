@@ -43,13 +43,21 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Deadline(deadline),
-                new Description(description),
+                CreateDeadline(deadline),
+                CreateDescription(description),
                 //new IdentificationNumber(id),
                 new UniqueTagList(tagSet)
         );
     }
+    
+    public Deadline CreateDeadline(String deadline) throws IllegalValueException{
+    	return (deadline == null ? new Deadline() : new Deadline(deadline));
+    }
 
+    public Description CreateDescription(String description){
+    	return (description == null ? new Description() : new Description(description));
+    }
+    
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
