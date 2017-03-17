@@ -62,6 +62,7 @@ public class Parser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_WORD_SHORT:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
