@@ -20,6 +20,7 @@ import seedu.taskboss.model.task.UniqueTaskList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD_SHORT = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskBoss. "
             + "Parameters: NAME [p/PRIORITY_LEVEL] [sd/START_DATE] [ed/END_DATE] "

@@ -108,4 +108,16 @@ public class TestTask implements ReadOnlyTask {
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
         return sb.toString();
     }
+    
+    //@@author A0143157J
+    public String getShortAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("a " + "n/" + this.getName().fullName + " ");
+        sb.append("p/" + this.getPriorityLevel().value + " ");
+        sb.append("sd/" + this.getStartDateTime().value + " ");
+        sb.append("ed/" + this.getEndDateTime().value + " ");
+        sb.append("i/" + this.getInformation().value + " ");
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
+        return sb.toString();
+    }
 }
