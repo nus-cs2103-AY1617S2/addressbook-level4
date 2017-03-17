@@ -364,6 +364,7 @@ Format: `add DESCRIPTION reminders FREQUENCY:`
 > Tasks will be added to your task manager with reminders that will notify you at your desired frequency.
 
 Accepted frequencies:
+
 | Frequency                    | Remarks                         |
 |------------------------------|---------------------------------|
 | Daily                        | Occurs every day                |
@@ -409,6 +410,7 @@ Format: `add DESCRIPTION recurring: FREQUENCY`
 > Tasks will be added to your task manager that will repeat at your desired frequency.
 
 Accepted frequencies:
+
 | Frequency                    | Remarks                         |
 |------------------------------|---------------------------------|
 | Daily                        | Occurs every day                |
@@ -432,6 +434,7 @@ Format: `sort by PROPERTY`
 > Tasks will be sorted and listed by the chosen property
 
 Accepted Properties:
+
 | Property    | Remarks                                |
 |-------------|----------------------------------------|
 | DESCRIPTION | Sorts by the descriptions of the tasks |
@@ -450,6 +453,7 @@ Suru recognizes a hotkey combination and executes the required operation.
 Format: `-HOTKEY`
 
 Accepted Hotkeys:
+
 | Hotkey    | Remarks                                |
 |-------------|----------------------------------------|
 | -a | Shorthand for `add` command |
