@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
-     * @throws InvalidDatesException 
+     * @throws InvalidDatesException
      */
     public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
             String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
@@ -48,11 +48,11 @@ public class AddCommand extends Command {
         }
         DateTime startDateTimeObj = new DateTime(startDateTime);
         DateTime endDateTimeObj = new DateTime(endDateTime);
-        
+
         if (startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
-        
+
         this.toAdd = new Task(
                 new Name(name),
                 new PriorityLevel(priorityLevel),

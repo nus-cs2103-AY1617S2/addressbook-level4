@@ -25,7 +25,7 @@ public class AddCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws InvalidDatesException 
+     * @throws InvalidDatesException
      */
     public Command parse(String args) throws InvalidDatesException {
         ArgumentTokenizer argsTokenizer =

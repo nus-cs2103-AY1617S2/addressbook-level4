@@ -116,7 +116,7 @@ public class LogicManagerTest {
      * that the result message is correct. Also confirms that both the
      * 'taskboss' and the 'last shown list' are as specified.
      * @throws IllegalValueException
-     * @throws InvalidDatesException 
+     * @throws InvalidDatesException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
@@ -132,7 +132,7 @@ public class LogicManagerTest {
      * the result message is correct. Both the 'taskboss' and the 'last shown
      * list' are verified to be unchanged.
      * @throws IllegalValueException
-     * @throws InvalidDatesException 
+     * @throws InvalidDatesException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
@@ -153,7 +153,7 @@ public class LogicManagerTest {
      * - the backing list shown by UI matches the {@code shownList} <br>
      * - {@code expectedTaskBoss} was saved to the storage file. <br>
      * @throws IllegalValueException
-     * @throws InvalidDatesException 
+     * @throws InvalidDatesException
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
             String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
