@@ -70,7 +70,7 @@ public class EditCommand extends Command {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        } 
+        }
 
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
@@ -79,7 +79,7 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
-     * @throws InvalidDatesException 
+     * @throws InvalidDatesException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
