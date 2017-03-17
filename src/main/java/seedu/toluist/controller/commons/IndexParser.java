@@ -11,7 +11,7 @@ import seedu.toluist.commons.util.StringUtil;
 /**
  * Tokenize string of indexes into a list of integer index.
  */
-public class IndexTokenizer {
+public class IndexParser {
     private static final String HYPHEN = "-";
 
     /**
