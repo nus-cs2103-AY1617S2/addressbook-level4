@@ -86,9 +86,9 @@ This Developer Guide is for any developer who wishes to continue development of 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/geekeep/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connect them up with each other.
-* At shut down: Shuts down the components and invoke cleanup method where necessary.
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/geekeep/MainApp.java). It is responsible for
+* at app launch: initializing the components in the correct sequence, and connecting them up with each other.
+* at shut down: shutting down the components and invoking cleanup method where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
@@ -103,8 +103,8 @@ The rest of the App consists four components.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
 Each of the four components
-* Defines its _API_ in an `interface` with the same name as the Component.
-* Exposes its functionality using a `{Component Name}Manager` class.
+* defines its _API_ in an `interface` with the same name as the Component.
+* exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
@@ -145,10 +145,10 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/geekeep/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
-* Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+The `UI` component:
+* executes user commands using the `Logic` component.
+* binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* responds to events raised from various parts of the App and updates the UI accordingly.
 
 <h3 id="user-content-logic">Logic component</h3>
 
@@ -171,7 +171,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 **API** : [`Model.java`](../src/main/java/seedu/geekeep/model/Model.java)
 
-The `Model`,
+The `Model` component:
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Task Manager data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
@@ -184,9 +184,9 @@ The `Model`,
 
 **API** : [`Storage.java`](../src/main/java/seedu/geekeep/storage/Storage.java)
 
-The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
+The `Storage` component:
+* can save `UserPref` objects in JSON format and read it back.
+* can save the Task Manager data in XML format and read it back.
 
 ### Common classes
 
@@ -302,8 +302,8 @@ Here are the steps to create a new release.
 
 ### Managing Dependencies
 
-A project often depends on third-party libraries. For example, Task Manager depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
+A project often depends on third-party libraries. For example, Geekeep depends on the
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for JSON parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
