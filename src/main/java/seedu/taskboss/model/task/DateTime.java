@@ -13,8 +13,8 @@ public class DateTime {
     private static final String EMPTY_STRING = "";
 
     public String value;
-    private Boolean isDateInferred;
-    private Boolean isTimeInferred;
+    private boolean isDateInferred;
+    private boolean isTimeInferred;
     private Date date;
     private DateTimeParser dtParser;
 
@@ -73,7 +73,7 @@ public class DateTime {
         SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy h:mm aa");
         SimpleDateFormat sdfToday = new SimpleDateFormat("MMM dd, yyyy");
         // No time provided by user
-        if (this.IsTimeInferred()) {
+        if (this.isTimeInferred()) {
             this.value = sdfToday.format(this.date);
         } else {
             this.value = sdfGeneral.format(this.date);
@@ -98,11 +98,11 @@ public class DateTime {
         return value.hashCode();
     }
 
-    public boolean IsDateInferred() {
+    public boolean isDateInferred() {
         return isDateInferred;
     }
 
-    public boolean IsTimeInferred() {
+    public boolean isTimeInferred() {
         return isTimeInferred;
     }
 
