@@ -4,10 +4,10 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-0. [Introduction](#introduction)
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [Command Summary](#command-summary)
+0. [Introduction](#0.introduction)
+1. [Quick Start](#1.quick-start)
+2. [Features](#2.features)
+3. [Command Summary](#3.command-summary)
  
 
 ## TaskBoss Prototype
