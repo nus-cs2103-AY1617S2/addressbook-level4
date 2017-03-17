@@ -42,6 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
         this.toAdd = new Person(
                 new Name(name),
                 new Date(date),
