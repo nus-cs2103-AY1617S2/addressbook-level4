@@ -25,6 +25,11 @@ public class AddCommandTest extends TaskBossGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+        //add another task using short command
+        commandBox.runCommand(td.kelvin.getShortAddCommand());
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(currentList));
+
         //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
