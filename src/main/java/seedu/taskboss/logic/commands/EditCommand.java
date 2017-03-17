@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -145,18 +146,32 @@ public class EditCommand extends Command {
             return priorityLevel;
         }
 
-        public void setStartDateTime(Optional<DateTime> startDateTime) {
+        public void setStartDateTime(Optional<DateTime> startDateTime) throws IllegalValueException {
             assert startDateTime != null;
-            this.startDateTime = startDateTime;
+
+            if (startDateTime.isPresent()) {
+                String formattedString = startDateTime.get().formatDateTime();
+                DateTime formattedDateTime = new DateTime(formattedString);
+                this.startDateTime = Optional.of(formattedDateTime);
+            } else {
+                this.startDateTime = startDateTime;
+            }
         }
 
         public Optional<DateTime> getStartDateTime() {
             return startDateTime;
         }
 
-        public void setEndDateTime(Optional<DateTime> endDateTime) {
+        public void setEndDateTime(Optional<DateTime> endDateTime) throws IllegalValueException {
             assert endDateTime != null;
-            this.endDateTime = endDateTime;
+
+            if (endDateTime.isPresent()) {
+                String formattedString = endDateTime.get().formatDateTime();
+                DateTime formattedDateTime = new DateTime(formattedString);
+                this.endDateTime = Optional.of(formattedDateTime);
+            } else {
+                this.endDateTime = endDateTime;
+            }
         }
 
         public Optional<DateTime> getEndDateTime() {
@@ -180,5 +195,6 @@ public class EditCommand extends Command {
         public Optional<UniqueCategoryList> getCategories() {
             return categories;
         }
+
     }
 }

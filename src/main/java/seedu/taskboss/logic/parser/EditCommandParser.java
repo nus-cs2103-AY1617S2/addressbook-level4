@@ -47,9 +47,9 @@ public class EditCommandParser {
             editTaskDescriptor.setPriorityLevel(ParserUtil.
                     parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY)));
             editTaskDescriptor.setStartDateTime(ParserUtil.
-                    parseStartDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
+                    parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
             editTaskDescriptor.setEndDateTime(ParserUtil.
-                    parseEndDateTime(argsTokenizer.getValue(PREFIX_END_DATE)));
+                    parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE)));
             editTaskDescriptor.setInformation(ParserUtil.parseInformation
                     (argsTokenizer.getValue(PREFIX_INFORMATION)));
             editTaskDescriptor.setCategories(parseCategoriesForEdit
