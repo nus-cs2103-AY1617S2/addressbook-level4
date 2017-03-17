@@ -126,7 +126,7 @@ public class Task implements ReadOnlyTask {
         return isCompleted;
     }
 
-    public void setCompleted(Status isCompleted) {
+    public void setStatus(Status isCompleted) {
         this.isCompleted = isCompleted;
     }
 
@@ -153,6 +153,9 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setLocation(replacement.getLocation());
         this.setCategories(replacement.getCategories());
+        this.setDateTime(replacement.getDateTime());
+        this.setRecurrence(replacement.getRecurrence());
+        this.setStatus(replacement.isCompleted());
     }
 
     @Override

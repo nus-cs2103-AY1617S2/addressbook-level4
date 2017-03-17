@@ -57,7 +57,7 @@ public class AddCommand extends Command {
                 new Recurrence(recurrence)
         );
 
-        this.toAdd.setCompleted(new Status());
+        this.toAdd.setStatus(new Status());
     }
 
     @Override

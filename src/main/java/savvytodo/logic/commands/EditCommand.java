@@ -13,6 +13,7 @@ import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -64,6 +65,8 @@ public class EditCommand extends Command {
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, cmdTaskDescriptor);
 
+        System.out.println(editedTask.getDateTime());
+
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
@@ -87,9 +90,10 @@ public class EditCommand extends Command {
         UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
         DateTime updatedDateTime = cmdTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
         Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence().orElseGet(taskToEdit::getRecurrence);
+        Status updatedStatus = cmdTaskDescriptor.getStatus().orElseGet(taskToEdit::isCompleted);
 
         return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories,
-                updatedDateTime, updatedRecurrence);
+                updatedDateTime, updatedRecurrence, updatedStatus);
     }
 
 }
