@@ -19,6 +19,7 @@ public abstract class Command {
     private static HashMap<String, ArrayList<String>> commandAliases;
 
     public static void setDefaultCommandWords() {
+        // TODO: change the string to something like: AddCommand.DEFAULT_COMMAND_WORD
         commandAliases = new HashMap<String, ArrayList<String>>();
         commandAliases.put("add",  new ArrayList<>(Arrays.asList("do")));
         commandAliases.put("clear",  new ArrayList<>());
@@ -34,6 +35,8 @@ public abstract class Command {
         commandAliases.put("unfinish",  new ArrayList<>(Arrays.asList("unfin")));
         commandAliases.put("alias",  new ArrayList<>());
         commandAliases.put("reset_alias",  new ArrayList<>());
+        commandAliases.put("undo",  new ArrayList<>());
+        commandAliases.put("redo",  new ArrayList<>());
     }
 
     public static ArrayList<String> getAliasList(String defaultCommandWord) {
