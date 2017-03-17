@@ -19,6 +19,7 @@ public class DateTimeParser {
     private static final String ERROR_MULTIPLE_DATES = "Please only enter a single date.";
     private static final String REGEX_US_DATE = "(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})";
     private static final String REGEX_NON_US_DATE = "$2-$1-$3";
+    private static final String EMPTY_STRING = "";
 
     private com.joestelmach.natty.Parser nattyParser;
 
@@ -55,7 +56,7 @@ public class DateTimeParser {
         List <DateGroup> dateGroupList = parse(date);
         int numDates = countDates(dateGroupList);
 
-        if (numDates == 0 && !date.equals("")) {
+        if (!date.equals(EMPTY_STRING) && numDates == 0) {
             throw new IllegalValueException(ERROR_INVALID_DATE);
         } else if (numDates > 1) {
             throw new IllegalValueException(ERROR_MULTIPLE_DATES);
