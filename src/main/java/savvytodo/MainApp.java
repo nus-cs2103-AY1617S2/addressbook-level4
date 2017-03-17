@@ -221,7 +221,6 @@ public class MainApp extends Application {
      */
     @Subscribe
     public void handleLoadStorageFileEvent(LoadStorageFileEvent event) {
-        System.out.println("Load");
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         String taskManagerFilePath = event.getFilePath();
         config.setTaskManagerFilePath(taskManagerFilePath);
