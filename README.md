@@ -23,7 +23,20 @@
 
 #### Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent
+* This project is a morphing of [AddressBook Level 4](https://github.com/nus-cs2103-AY1617S2/addressbook-level4) which provides educational sample code for us.
+* Some parts of this sample application are inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+
+#### Dependencies
+
+* #### Libraries
+  * Guava
+  * JavaFX
+  * Jackson
+
+* #### Testing Frameworks
+  * TestFX
+  * JUnit
+
 
 #### Licence : [MIT](LICENSE)
