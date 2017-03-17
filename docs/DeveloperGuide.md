@@ -1,11 +1,28 @@
 # Developer Guide
 1. [Setting Up](#setting-up)
-   > 1.1 Prerequisite
+   > 1.1. Prerequisites(#prerequisites)
+   > 1.2. Importing the project into Eclipse(#importing-the-project-into-eclipse)
+   > 1.3. Configuring Checkstyle(#configuring-checkstyle)
+   > 1.4. Troubleshooting project setup
 2. [Design](#design)
+   > 2.1. Architecture
+   > 2.2. UI component
+   > 2.3. Logic component
+   > 2.4. Model component
+   > 2.5. Storage component
+   > 2.6. Common classes
 3. [Implementation](#implementation)
+   > 3.1. Logging
+   > 3.2. Configuration
 4. [Testing](#testing)
+   > 4.1. Troubleshooting tests
 5. [Dev Ops](#dev-ops)
-
+   > 5.1. Build Automation
+   > 5.2. Continuous Integration
+   > 5.3. Publishing Documentation
+   > 5.4. Making a Release
+   > 5.5. Converting Documentation to PDF format
+   
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -15,7 +32,7 @@
 
 ## 1. Setting up
 
-### Prerequisites
+### 1.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
     > Having any Java 8 version is not enough.
@@ -28,7 +45,7 @@
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### Importing the project into Eclipse
+### 1.2. Importing the project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -43,7 +60,7 @@
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### Configuring Checkstyle
+### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. taskManager
@@ -54,7 +71,7 @@
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### Troubleshooting project setup
+### 1.4. Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -68,9 +85,9 @@
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## Design
+## 2. Design
 
-### Architecture
+### 2.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -132,7 +149,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### UI component
+### 2.2. UI component
 
 Author: Ye Huan Hui
 
@@ -155,7 +172,7 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### Logic component
+### 2.3. Logic component
 
 Author: Lee Jin Shun
 
@@ -174,7 +191,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### Model component
+### 2.4. Model component
 
 Author: Hon Kean Wai
 
@@ -191,7 +208,7 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### Storage component
+### 2.5. Storage component
 
 Author: Chew Chia Sin
 
@@ -205,13 +222,13 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Task Manager data in xml format and read it back.
 
-### Common classes
+### 2.6. Common classes
 
 Classes used by multiple components are in the `seedu.doit.commons` package.
 
-## Implementation
+## 3. Implementation
 
-### Logging
+### 3.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -230,13 +247,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### Configuration
+### 3.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## Testing
+## 4. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -273,7 +290,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### Troubleshooting tests
+### 4.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
