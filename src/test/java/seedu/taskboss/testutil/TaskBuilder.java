@@ -1,7 +1,6 @@
 package seedu.taskboss.testutil;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
-import seedu.taskboss.logic.parser.ParserUtil;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.DateTime;
@@ -51,12 +50,12 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withStartDateTime(String startDateTime) throws IllegalValueException {
-        this.task.setStartDateTime((new DateTime(ParserUtil.parseStartDate(startDateTime))));
+        this.task.setStartDateTime((new DateTime(startDateTime)));
         return this;
     }
 
     public TaskBuilder withEndDateTime(String endDateTime) throws IllegalValueException {
-        this.task.setEndDateTime(new DateTime(ParserUtil.parseEndDate(endDateTime)));
+        this.task.setEndDateTime(new DateTime(endDateTime));
         return this;
     }
 
