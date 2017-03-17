@@ -1,6 +1,6 @@
 # Developer Guide
 1. [Setting Up](#setting-up)
-   1.1 Prerequisitesassd
+   > 1.1 Prerequisite
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
