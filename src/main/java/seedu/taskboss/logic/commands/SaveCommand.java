@@ -20,12 +20,12 @@ public class SaveCommand extends Command {
     private final String filepath;
 
     public SaveCommand(String filepath) {
-    	this.filepath = filepath;
+        this.filepath = filepath;
     }
 
     @Override
     public CommandResult execute() {
-  	assert storage != null;
+        assert storage != null;
 	storage.setFilePath(filepath);
 
         return new CommandResult(MESSAGE_SUCCESS);
