@@ -4,7 +4,7 @@ package seedu.todolist.model.tag;
 import seedu.todolist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the to-do list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
@@ -39,7 +39,7 @@ public class Tag {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && this.tagName.equals(((Tag) other).tagName)); // state check
+                        && this.tagName.equals(((Tag) other).tagName)); // state check
     }
 
     @Override
