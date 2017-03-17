@@ -56,7 +56,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[find](#25-finding-all-tasks-by-name-find)           |Find tasks             |
 |[delete](#27-deleting-a-task--delete)                |Delete a task          |
 |[new](#28-creating-a-category--new)               |Create a category      |
-|[list](#29-listing-task-by--category)                |List tasks by category |
+|[list](#29-listing-tasks-by-category--list)                |List tasks by category |
 |[clear](#210-clearing-tasks-by-category--clear)       |Clear tasks in category|
 |[view](#211-viewing-a-task--view)                    |View a task            |
 |[name](#212-modifying-a-category-name--name)         |Rename a category      |
@@ -64,7 +64,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[undo](#214-undoing-a-command--undo)                 |Undo a task            |
 |[sort](#215-sorting-tasks-by-deadline--sort)         |Sort tasks by deadline |
 |[exit](#217-exiting-the-program--exit)               |Exit TaskBoss          |
-|[save](#218-exporting-the-data-to-a-new-file--save-n)|Save TaskBoss          |
+|[save](#220-exporting-the-data-to-a-new-file--save-n)|Save TaskBoss          |
 
 <br>
 
@@ -102,7 +102,7 @@ Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIOR
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
+    The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * Order of the optional parameters does not matter.
@@ -128,10 +128,10 @@ Format: `find n/TASK_NAME`
 Examples:
 
 * `find n/Meeting`<br>
-  Returns all tasks whose name contains `Meeting`
+  Returns all tasks whose name contains `Meeting`.
   
-* `find ed/04-02-2017`<br>
-  Returns all tasks with the end day `04-02-2017`
+* `find n/shopping milk`<br>
+  Returns all tasks whose name contains at least one of the keywords: `shopping` and `milk`.
 
 ### 2.6. Finding all tasks by Deadline: `find`
 
@@ -139,8 +139,11 @@ Finds tasks whose deadlines contain any of the given keywords.<br>
 Format: `find sd/date and time` `find ed/date and time`
 
 > * The date is searched according to the date format user enters.
-> * The date format for find date command is restricted either DD-MM-YYYY or DD/MM/YY formats.
-or MM-DD-YYYY or MM/DD/YYYY, depending on your system's settings.
+> * The date format for find date command is restricted as following:
+  (1). DD-MM-YYYY
+  (2). DD/MM/YY
+  (3). DD/MM/YY
+  (4). MM/DD/YYYY
 
 Examples:
 
@@ -157,7 +160,7 @@ Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing. <br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
 Examples:
 
@@ -199,9 +202,9 @@ Format: `clear CATEGORY`
 Views a task by entering the task index from TaskBoss.<br>
 Format: `view INDEX`
 
-> Views the task at the specified `INDEX` <br>
+> Views the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
 ### 2.12. Modifying a category name : `name`
 
@@ -214,12 +217,12 @@ Example:
 
 ### 2.13. Marking a task done : `done`
 
-Marks a task done in TaskBoss.<br>
+Marks a task as done in TaskBoss.<br>
 Format: `done INDEX`
 
 > Marks the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** (*e.g. 1, 2, 3, ...*).
 
 ### 2.14. Undoing a command : `undo`
 
@@ -238,7 +241,8 @@ Format: `sort`
 Sorts tasks in the TaskBoss by their priorities.<br>
 Format: `sort p`
 
-> Tasks are sorted by descending order of priority levels.
+> Tasks are sorted by descending order of priority levels. 
+> Tasks with higher priority will be shown at the top.
 
 ### 2.17. Exiting the program : `exit`
 
@@ -247,7 +251,7 @@ Format: `exit`
 
 ### 2.18. Saving the data 
 
-TaskBoss data will automatically be saved in local hard disk after any command that mutates the data.<br>
+TaskBoss data will automatically be saved in local hard disk after entering any command that mutates the data.<br>
 There is no need to save manually.
 
 ### 2.19. Exporting data to an existing file : `save e/`
@@ -279,6 +283,6 @@ Format: `save n/FILE_PATH NEW_FILE_NAME`
 |[undo](#214-undoing-a-command--undo)                 |**`undo`**            |
 |[sort](#216-sorting-tasks-by-deadline--sort)         |**`sort p`**   |
 |[exit](#217-exiting-the-program--exit)               |**`exit`**           |
-|[save](#218-exporting-the-data-to-a-new-file--save-n)|**`save n/FILE_PATH NEW_FILE_NAME`**            |
+|[save](#220-exporting-the-data-to-a-new-file--save-n)|**`save n/FILE_PATH NEW_FILE_NAME`**            |
 
 <br>
