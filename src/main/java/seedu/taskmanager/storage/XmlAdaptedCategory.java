@@ -29,10 +29,13 @@ public class XmlAdaptedCategory {
     }
 
     /**
-     * Converts this jaxb-friendly adapted category object into the model's Category object.
+     * Converts this jaxb-friendly adapted category object into the model's
+     * Category object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
-	 */
+     * @throws IllegalValueException
+     *             if there were any data constraints violated in the adapted
+     *             person
+     */
     public Category toModelType() throws IllegalValueException {
         return new Category(categoryName);
     }

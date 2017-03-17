@@ -22,15 +22,15 @@ public class SearchCommandParser {
      * FindCommand and returns an SearchCommand object for execution.
      */
     public Command parse(String args) {
-	final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-	if (!matcher.matches()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
-	}
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        }
 
-	// keywords delimited by whitespace
-	final String[] keywords = matcher.group("keywords").split("\\s+");
-	final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-	return new SearchCommand(keywordSet);
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new SearchCommand(keywordSet);
     }
 
 }

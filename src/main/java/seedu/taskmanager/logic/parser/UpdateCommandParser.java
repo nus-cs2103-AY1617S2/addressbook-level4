@@ -10,6 +10,7 @@ import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
 
 //import java.util.Collection;
 //import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -33,53 +34,54 @@ public class UpdateCommandParser {
      * EditCommand and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
-	assert args != null;
-	ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME,
-		PREFIX_ENDTIME/* , PREFIX_CATEGORY */);
-	argsTokenizer.tokenize(args);
-	List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+        assert args != null;
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_DEADLINE, PREFIX_STARTTIME,
+                PREFIX_ENDTIME/* , PREFIX_CATEGORY */);
+        argsTokenizer.tokenize(args);
+        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
-	Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-	if (!index.isPresent()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
-	}
+        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
+        }
 
-	UpdateTaskDescriptor updateTaskDescriptor = new UpdateTaskDescriptor();
-	try {
-	    Optional<String> taskName = preambleFields.get(1);
-	    Optional<String> date = argsTokenizer.getValue(PREFIX_DATE);
-	    Optional<String> deadline = argsTokenizer.getValue(PREFIX_DEADLINE);
-	    Optional<String> startTime = argsTokenizer.getValue(PREFIX_STARTTIME);
-	    Optional<String> endTime = argsTokenizer.getValue(PREFIX_ENDTIME);
+        UpdateTaskDescriptor updateTaskDescriptor = new UpdateTaskDescriptor();
+        try {
+            Optional<String> taskName = preambleFields.get(1);
+            Optional<String> date = argsTokenizer.getValue(PREFIX_DATE);
+            Optional<String> deadline = argsTokenizer.getValue(PREFIX_DEADLINE);
+            Optional<String> startTime = argsTokenizer.getValue(PREFIX_STARTTIME);
+            Optional<String> endTime = argsTokenizer.getValue(PREFIX_ENDTIME);
 
-	    if (deadline.isPresent()) {
-		String stringDeadline = deadline.toString();
-		String[] splited = stringDeadline.split("\\s+");
-		date = Optional.of(splited[0]);
-		startTime = Optional.of(splited[1]);
-	    }
+            if (deadline.isPresent()) {
+                String stringDeadline = deadline.toString();
+                String[] splited = stringDeadline.split("\\s+");
+                date = Optional.of(splited[0]);
+                startTime = Optional.of(splited[1]);
+            }
 
-	    if (date.isPresent()) {
-		if (date.get().matches(DATE_VALIDATION_REGEX2)) {
-		    date = Optional.of(CurrentDate.getNewDate(date.get()));
-		}
-	    }
+            if (date.isPresent()) {
+                if (date.get().matches(DATE_VALIDATION_REGEX2)) {
+                    date = Optional.of(CurrentDate.getNewDate(date.get()));
+                }
+            }
 
-	    updateTaskDescriptor.setTaskName(ParserUtil.parseTaskName(taskName));
-	    updateTaskDescriptor.setDate(ParserUtil.parseDate(date));
-	    updateTaskDescriptor.setStartTime(ParserUtil.parseStartTime(startTime));
-	    updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(endTime));
+            updateTaskDescriptor.setTaskName(ParserUtil.parseTaskName(taskName));
+            updateTaskDescriptor.setDate(ParserUtil.parseDate(date));
+            updateTaskDescriptor.setStartTime(ParserUtil.parseStartTime(startTime));
+            updateTaskDescriptor.setEndTime(ParserUtil.parseEndTime(endTime));
 
-	    // updateTaskDescriptor.setCategories(parseCategoriesForUpdate(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
-	} catch (IllegalValueException ive) {
-	    return new IncorrectCommand(ive.getMessage());
-	}
+            // updateTaskDescriptor.setCategories(parseCategoriesForUpdate(
+            // ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
 
-	if (!updateTaskDescriptor.isAnyFieldUpdated()) {
-	    return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_UPDATED);
-	}
+        if (!updateTaskDescriptor.isAnyFieldUpdated()) {
+            return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_UPDATED);
+        }
 
-	return new UpdateCommand(index.get(), updateTaskDescriptor);
+        return new UpdateCommand(index.get(), updateTaskDescriptor);
     }
 
     /**

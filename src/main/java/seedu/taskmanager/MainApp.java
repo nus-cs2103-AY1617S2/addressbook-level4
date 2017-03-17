@@ -48,48 +48,48 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-    logger.info("=============================[ Initializing TaskManager ]===========================");
-    super.init();
+        logger.info("=============================[ Initializing TaskManager ]===========================");
+        super.init();
 
-    config = initConfig(getApplicationParameter("config"));
-    storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        config = initConfig(getApplicationParameter("config"));
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
-    userPrefs = initPrefs(config);
+        userPrefs = initPrefs(config);
 
-    initLogging(config);
+        initLogging(config);
 
-    model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs);
 
-    logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage);
 
-    ui = new UiManager(logic, config, userPrefs);
+        ui = new UiManager(logic, config, userPrefs);
 
-    initEventsCenter();
+        initEventsCenter();
     }
 
     private String getApplicationParameter(String parameterName) {
-    Map<String, String> applicationParameters = getParameters().getNamed();
-    return applicationParameters.get(parameterName);
+        Map<String, String> applicationParameters = getParameters().getNamed();
+        return applicationParameters.get(parameterName);
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-    Optional<ReadOnlyTaskManager> taskManagerOptional;
-    ReadOnlyTaskManager initialData;
-    try {
-        taskManagerOptional = storage.readTaskManager();
-        if (!taskManagerOptional.isPresent()) {
-        logger.info("Data file not found. Will be starting with a sample TaskManager");
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
+        try {
+            taskManagerOptional = storage.readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskManager");
+            }
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
         }
-        initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
-    } catch (DataConversionException e) {
-        logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
-        initialData = new TaskManager();
-    } catch (IOException e) {
-        logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
-        initialData = new TaskManager();
-    }
 
-    return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -103,8 +103,8 @@ public class MainApp extends Application {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
-        logger.info("Custom Config file specified " + configFilePath);
-        configFilePathUsed = configFilePath;
+            logger.info("Custom Config file specified " + configFilePath);
+            configFilePathUsed = configFilePath;
         }
 
         logger.info("Using config file : " + configFilePathUsed);
@@ -114,7 +114,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
-            + "Using default config properties");
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
