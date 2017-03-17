@@ -69,6 +69,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public String getAddCommand() {
+        // TODO add the new fields
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
