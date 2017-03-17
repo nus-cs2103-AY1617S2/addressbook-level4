@@ -1,6 +1,6 @@
 package seedu.taskboss.logic.parser;
 
-import java.util.io.*;
+import java.io.*;
 
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.SaveCommand;
