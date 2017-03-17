@@ -1,8 +1,11 @@
 # Task Manager
 
+[![Build Status](https://travis-ci.org/CS2103JAN2017-W15-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W15-B1/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W15-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W15-B1/main?branch=master)
+
 <img src="docs/images/UISketch.jpg" width="600"><br>
 
-* This is a desktop To-Do List application. It has a GUI but most of the user interactions happen using
+* This is a desktop To-do List application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
 
 * It is a Java application intended as a tool to help **office workers** working in a **highly specialized, email-oriented** environment to keep track of their tasks more efficiently.
