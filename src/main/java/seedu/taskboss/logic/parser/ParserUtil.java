@@ -105,42 +105,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date}
-     *
-     * @return parsed dateTime in String
-     */
-    public static String parseStartDate(String startDateTime) throws IllegalValueException {
-        assert startDateTime != null;
-
-        try {
-            DateTimeParser dateParser = new DateTimeParser();
-            DateTime dateTimeParsed = dateParser.parseStartDate(startDateTime.trim());
-            return dateTimeParsed.toString();
-        } catch (IllegalValueException ive) {
-            throw new IllegalValueException(ive.getMessage());
-        }
-
-    }
-
-    /**
-     * Parses a {@code String date}
-     *
-     * @return parsed dateTime in String
-     */
-    public static String parseEndDate(String endDateTime) throws IllegalValueException {
-        assert endDateTime != null;
-
-        try {
-            DateTimeParser dateParser = new DateTimeParser();
-            DateTime dateTimeParsed = dateParser.parseEndDate(endDateTime.trim());
-            return dateTimeParsed.toString();
-        } catch (IllegalValueException ive) {
-            throw new IllegalValueException(ive.getMessage());
-        }
-
-    }
-
-    /**
      * Parses a {@code Optional<String> information} into an {@code Optional<Information>}
      * if {@code information} is present.
      */

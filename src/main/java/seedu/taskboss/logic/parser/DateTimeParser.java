@@ -14,8 +14,6 @@ import seedu.taskboss.model.task.DateTime;
  */
 public class DateTimeParser {
 
-    private static final String START_DATE = "START DATE: ";
-    private static final String END_DATE = "END DATE: ";
     private static final String ERROR_INVALID_DATE = "Failed to understand given date.";
     private static final String ERROR_MULTIPLE_DATES = "Please only enter a single date.";
     private static final String REGEX_US_DATE = "(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})";
@@ -67,45 +65,6 @@ public class DateTimeParser {
         return new DateTime(dateGroup.getDates().get(0), dateGroup.isDateInferred(), dateGroup.isTimeInferred());
     }
 
-    // MAY BE REMOVING
-    public DateTime parseStartDate(String rawStartDate) throws IllegalValueException {
-        List<DateGroup> dateGroupList = parse(rawStartDate);
-        int numDates = countDates(dateGroupList);
-
-        if (numDates == 0) {
-            throw new IllegalValueException(START_DATE + ERROR_INVALID_DATE);
-        }
-
-        if (numDates > 1) {
-            throw new IllegalValueException(START_DATE + ERROR_MULTIPLE_DATES);
-        }
-
-        DateGroup dateGroup = dateGroupList.get(0);
-
-        return new DateTime(dateGroup.getDates().get(0), dateGroup.isDateInferred(), dateGroup.isTimeInferred());
-
-    }
-
-    // MAY BE REMOVING
-    public DateTime parseEndDate(String rawEndDate) throws IllegalValueException {
-
-        List<DateGroup> dateGroupList = parse(rawEndDate);
-        int numDates = countDates(dateGroupList);
-
-        if (numDates == 0) {
-            throw new IllegalValueException(END_DATE + ERROR_INVALID_DATE);
-        }
-
-        if (numDates > 1) {
-            throw new IllegalValueException(END_DATE + ERROR_MULTIPLE_DATES);
-        }
-
-        DateGroup dateGroup = dateGroupList.get(0);
-
-        return new DateTime(dateGroup.getDates().get(0), dateGroup.isDateInferred(), dateGroup.isTimeInferred());
-
-    }
-
     public Optional<String> convert(Optional<DateTime> dateTime) {
         return dateTime.isPresent() ? Optional.of(dateTime.toString()) : Optional.empty();
     }
@@ -119,22 +78,12 @@ public class DateTimeParser {
     }
 
     // for testing
-    public static String getStartDateInvalidDateError() {
-        return START_DATE + ERROR_INVALID_DATE;
+    public static String getInvalidDateError() {
+        return ERROR_INVALID_DATE;
     }
 
     // for testing
-    public static String getStartDateMultipleDatesError() {
-        return START_DATE + ERROR_MULTIPLE_DATES;
-    }
-
-    // for testing
-    public static String getEndDateInvalidDateError() {
-        return END_DATE + ERROR_INVALID_DATE;
-    }
-
-    // for testing
-    public static String getEndDateMultipleDatesError() {
-        return END_DATE + ERROR_MULTIPLE_DATES;
+    public static String getMultipleDatesError() {
+        return ERROR_MULTIPLE_DATES;
     }
 }
