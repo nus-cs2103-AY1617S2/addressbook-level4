@@ -52,15 +52,15 @@ public class DateTimeParser {
      * Parses a given {@code String date}
      * @return parsed DateTime object
      */
-    public DateTime parseDate(String date) throws IllegalValueException { 
+    public DateTime parseDate(String date) throws IllegalValueException {
         List <DateGroup> dateGroupList = parse(date);
         int numDates = countDates(dateGroupList);
-        
+
         if (numDates == 0 && !date.equals("")) {
             throw new IllegalValueException(ERROR_INVALID_DATE);
         } else if (numDates > 1) {
             throw new IllegalValueException(ERROR_MULTIPLE_DATES);
-        } 
+        }
 
         DateGroup dateGroup = dateGroupList.get(0);
 
