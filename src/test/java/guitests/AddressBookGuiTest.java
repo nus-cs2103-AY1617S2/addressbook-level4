@@ -27,7 +27,7 @@ import seedu.jobs.commons.events.BaseEvent;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.testutil.TestUtil;
-import seedu.jobs.testutil.TypicalTestPersons;
+import seedu.jobs.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for AddressBook.
@@ -40,7 +40,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -88,7 +88,7 @@ public abstract class AddressBookGuiTest {
      */
     protected TaskBook getInitialData() {
         TaskBook ab = new TaskBook();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadAddressBookWithSampleData(ab);
         return ab;
     }
 

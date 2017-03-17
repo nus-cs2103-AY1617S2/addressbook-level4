@@ -3,16 +3,17 @@ package seedu.jobs.testutil;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
-    public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
@@ -44,17 +45,17 @@ public class TypicalTestPersons {
     }
 
     public static void loadAddressBookWithSampleData(TaskBook ab) {
-        for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestTask task : new TypicalTestTasks().getTypicalPersons()) {
             try {
-                ab.addTask(new Person(person));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalPersons() {
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskBook getTypicalAddressBook() {
