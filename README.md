@@ -2,7 +2,7 @@
 
 [![Build Status](https://api.travis-ci.org/CS2103JAN2017-W09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W09-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W09-B1/main?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b077f2482a4a417ea854f187bef77721)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4d3a289fcdb3469cb2ddaede8990d379)](https://www.codacy.com/app/Jslyfer/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W09-B1/main&amp;utm_campaign=Badge_Grade)
 <!---[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
 [![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
