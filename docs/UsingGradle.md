@@ -124,4 +124,3 @@ relevant Gradle tasks.
   any missing dependencies before compiling the test classes.<br>
   See `build.gradle` -> `allprojects` -> `dependencies` -> `testCompile` for the list of
   dependencies required.
-  
