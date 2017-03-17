@@ -26,7 +26,7 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         assert storage != null;
-	storage.setFilePath(filepath);
+        storage.setFilePath(filepath);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
