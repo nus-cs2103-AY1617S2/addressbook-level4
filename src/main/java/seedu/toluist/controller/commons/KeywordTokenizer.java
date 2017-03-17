@@ -50,9 +50,8 @@ public class KeywordTokenizer {
         for (int i = 0; i < indexKeywordPairs.size(); i++) {
             Pair<Integer, String> currentIndexKeywordPair = indexKeywordPairs.get(i);
             int startIndex = currentIndexKeywordPair.getKey();
-            // endIndex depends on whether the currentIndexKeywordPair is the last pair.
             // Generally, we match the text to the index before the first character of the next keyword.
-            // For last pair, we simply match the text to the end of the description.
+            // For last pair of currentIndexKeywordPair, we simply match the text to the end of the description.
             int endIndex = i + 1 < indexKeywordPairs.size()
                     ? indexKeywordPairs.get(i + 1).getKey() - indexKeywordPairs.get(i + 1).getValue().length()
                     : description.length();
