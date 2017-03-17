@@ -1,6 +1,6 @@
 # Werkbook - User Guide
 
-By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -30,8 +30,8 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp
 
 ## 1. Welcome
 
-Werkbook is a task manager for users to manage their schedules and tasks via a command-line interface.
-With just a single line of command, users can add, manipulate, and organize tasks in a hassle-free manner! Werkbook is a simple, yet fast and powerful tool that will help you increase your productivity.
+Werkbook is a task manager for you to manage their schedules and tasks via a command-line interface.
+With just a single line of command, you can add, manipulate, and organize tasks in a hassle-free manner! Werkbook is a simple, yet fast and powerful tool that will help you increase your productivity.
 
 Let Werkbook werk your work!
 
@@ -173,7 +173,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Example:
 * `find Milk`<br>
-  Returns `Get the Milk` but not `Get the milk`
+  Retrieves the task `Get the Milk` but not `Get the milk`
 
 > * The search is case sensitive. e.g `milk` will not match `Milk`
 > * The order of the keywords does not matter. e.g. `Apple Juice` will match `Juice Apple`
@@ -205,12 +205,12 @@ Accidentally added duplicate tasks? Use the `delete` command to remove the speci
 Format: `delete INDEX`
 
 Examples:
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd task in the task list.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+>`list`
+>`delete 2`
+* Deletes the 2nd task in the task list.
+>`find Betsy`
+>`delete 1`
+* Deletes the 1st task in the results of the `find` command.
 
 > * Deletes the task at the specified `INDEX`. <br>
 > * The index refers to the index number shown in the most recent listing.<br>
@@ -225,13 +225,16 @@ Format: `clear`
 
 #### a. Help
 
+Displays the help sheet.
+
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-#### b. Undo Redo
+#### b. Undo/Redo
 
-Undo the last command(s) executed. <br>
+Undo the last command(s) executed.
+
 Format: `undo [AMOUNT]`
 
 > Undo the last command executed.
@@ -239,21 +242,27 @@ Format: `undo [AMOUNT]`
 
 Examples:
 
-* `delete 2`<br>
-  `undo`<br>
+>`delete 2`
+>`undo`
   Undo the deletion of the 2nd task in the task list.
 
-Redo the last undo command(s) executed. <br>
+>`delete 2`
+>`delete 3`
+>`undo 2`
+  Undo the deletion of the 2nd and 3rd task in the task list.
+
+Redo the last undo command(s) executed.
+
 Format: `undo [AMOUNT]`
 
 > Redo the last undo command executed.
-> Repeated use of redo will redo the previous undo command from the last undo command redone
 
 Examples:
 
-* `delete 2`<br>
-  `undo`<br>
-  `redo`<br>
+
+>`delete 2`
+>`undo`
+>`redo`
   The final action would be the deletion of the 2nd task in the task list.
 
 #### c. Change save location
@@ -261,9 +270,7 @@ Examples:
 Saves all changes to disk. <br>
 Format: `save SAVE_LOCATION`
 
-The first time the task manager is saved without `SAVE_LOCATION` the user would be asked to specify where to save.<br>
-Task list data are saved in the hard disk at the last save location automatically after any command that changes the data.<br>
-There is no need to save manually.
+Changes where tasks data and user config are saved to specified `SAVE_LOCATION`.
 
 #### d. Exit program
 

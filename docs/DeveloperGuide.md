@@ -1,6 +1,6 @@
 # Werkbook - Developer Guide
 
-By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -106,8 +106,8 @@ Two of those classes play important roles at the architecture level.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#3-2-ui-component) : The UI of the App.
-* [**`Logic`**](#3-3-logic-component) : The command executor.
+* [**`UI`**](#3-2-ui-component) : Provides a graphical user interface to the app
+* [**`Logic`**](#3-3-logic-component) : Handles commands entered
 * [**`Model`**](#3-4-model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#3-5-storage-component) : Reads data from, and writes data to, the hard disk.
 
@@ -145,7 +145,7 @@ The sections below give more details of each component.
 
 ### 3.2. UI component
 
-Author: Alice Bee
+Author: Shi Ying
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
@@ -168,7 +168,7 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-Author: Bernard Choo
+Author: Zheng Yu
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 3.3.1 : Structure of the Logic Component_
@@ -187,7 +187,7 @@ _Figure 3.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 3.4. Model component
 
-Author: Cynthia Dharman
+Author: Wenhan
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
@@ -204,7 +204,7 @@ The `Model`,
 
 ### 3.5. Storage component
 
-Author: Darius Foong
+Author: Wang Ce
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
