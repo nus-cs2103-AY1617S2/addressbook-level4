@@ -158,7 +158,7 @@ Examples:
 * `find shopping` <br>
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
-  
+
 ### 2.8. Undo an operation : `undo`
 
 Undo the last operation that changed the task manager.<br>
