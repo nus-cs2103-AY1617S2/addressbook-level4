@@ -31,18 +31,27 @@ public class AddCommandParser {
         try {
             Optional<String> startTime = argsTokenizer.getValue(PREFIX_START_TIME);
             Optional<String> endTime = argsTokenizer.getValue(PREFIX_END_TIME);
+
             if (startTime.isPresent() && endTime.isPresent()) {
-                return new AddCommand(
+                return new AddCommand (
                         argsTokenizer.getPreamble().get(),
                         startTime.get(),
+                        endTime.get(),
+                        ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
+                );
+            } else if (endTime.isPresent() && !startTime.isPresent()) {
+                return new AddCommand(
+                        argsTokenizer.getPreamble().get(),
                         endTime.get(),
                         ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                 );
             } else {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
-                        ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+                        ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
+                );
             }
+
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

@@ -18,7 +18,7 @@ import seedu.address.model.todo.UniqueTodoList;
 import seedu.address.model.todo.UniqueTodoList.DuplicateTodoException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the todolist level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TodoList implements ReadOnlyTodoList {

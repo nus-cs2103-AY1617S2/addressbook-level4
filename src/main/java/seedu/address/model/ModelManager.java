@@ -16,13 +16,17 @@ import seedu.address.model.todo.UniqueTodoList;
 import seedu.address.model.todo.UniqueTodoList.TodoNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the todo list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
+    /**
+     * Holds the previous state of the todo list before the most recent modifying change
+     */
+    private TodoList previousTodoList;
     private final FilteredList<ReadOnlyTodo> filteredTodos;
 
     /**
@@ -44,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTodoList newData) {
+        previousTodoList = new TodoList(todoList);
         todoList.resetData(newData);
         indicateTodoListChanged();
     }
@@ -60,13 +65,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTodo(ReadOnlyTodo target) throws TodoNotFoundException {
+        TodoList tempTodoList = new TodoList(todoList);
         todoList.removeTodo(target);
+        previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
 
     @Override
     public synchronized void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException {
+        TodoList tempTodoList = new TodoList(todoList);
         todoList.addTodo(todo);
+        previousTodoList = tempTodoList;
         updateFilteredListToShowAll();
         indicateTodoListChanged();
     }
@@ -77,8 +86,19 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTodo != null;
 
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
+        TodoList tempTodoList = new TodoList(todoList);
         todoList.updateTodo(todoListIndex, editedTodo);
+        previousTodoList = tempTodoList;
         indicateTodoListChanged();
+    }
+
+    @Override
+    public void loadPreviousState() throws NoPreviousStateException {
+        if (previousTodoList == null) {
+            throw new NoPreviousStateException();
+        }
+        resetData(previousTodoList);
+        previousTodoList = null;
     }
 
     //=========== Filtered Todo List Accessors =============================================================

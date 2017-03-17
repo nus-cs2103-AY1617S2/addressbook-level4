@@ -45,7 +45,7 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public Todo(Name name, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+        assert !CollectionUtil.isAnyNull(name, endtime, tags);
         this.name = name;
         this.endtime = endtime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
