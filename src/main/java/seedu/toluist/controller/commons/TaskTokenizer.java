@@ -1,7 +1,6 @@
 package seedu.toluist.controller.commons;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,9 +30,6 @@ public class TaskTokenizer {
                                                             TASK_DESCRIPTION,
                                                             keywords);
             tokens.putAll(descriptionTokens);
-        }
-        for (Map.Entry<String, String> token : tokens.entrySet()) {
-            System.out.println(token.getKey() + ": " + token.getValue());
         }
         return tokens;
     }
