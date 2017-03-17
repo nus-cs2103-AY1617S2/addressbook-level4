@@ -4,12 +4,12 @@ By : `Team W14-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Target Users](#target-users)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Target Users](#2-target-users)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
