@@ -35,6 +35,6 @@ public interface Storage extends TaskBossStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskBossChangedEvent(TaskBossChangedEvent tbce);
-    
+
     void setFilePath(String filepath);
 }
