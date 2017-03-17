@@ -6,7 +6,7 @@ import java.util.Optional;
 import seedu.jobs.commons.events.model.AddressBookChangedEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.exceptions.DataConversionException;
-import seedu.jobs.model.ReadOnlyAddressBook;
+import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.UserPrefs;
 
 /**
@@ -24,10 +24,10 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     String getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyTaskBook addressBook) throws IOException;
 
     /**
      * Saves the current version of the Description Book to the hard disk.

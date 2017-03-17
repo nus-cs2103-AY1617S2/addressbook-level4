@@ -1,14 +1,14 @@
 package seedu.jobs.commons.events.model;
 
 import seedu.jobs.commons.events.BaseEvent;
-import seedu.jobs.model.ReadOnlyAddressBook;
+import seedu.jobs.model.ReadOnlyTaskBook;
 
 /** Indicates the AddressBook in the model has changed*/
 public class AddressBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlyTaskBook data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data) {
+    public AddressBookChangedEvent(ReadOnlyTaskBook data) {
         this.data = data;
     }
 

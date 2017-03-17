@@ -22,7 +22,7 @@ import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyTaskBook {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -44,7 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyTaskBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,7 +60,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskBook newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());

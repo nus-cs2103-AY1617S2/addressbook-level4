@@ -23,7 +23,7 @@ import seedu.jobs.logic.LogicManager;
 import seedu.jobs.model.AddressBook;
 import seedu.jobs.model.Model;
 import seedu.jobs.model.ModelManager;
-import seedu.jobs.model.ReadOnlyAddressBook;
+import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.UserPrefs;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.storage.Storage;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskBook> addressBookOptional;
+        ReadOnlyTaskBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
