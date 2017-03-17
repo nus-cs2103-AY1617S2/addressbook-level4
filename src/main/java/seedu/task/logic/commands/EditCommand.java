@@ -72,9 +72,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws CommandException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+                                             EditTaskDescriptor editTaskDescriptor) throws CommandException {
         assert taskToEdit != null;
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
@@ -88,7 +89,7 @@ public class EditCommand extends Command {
                 updatedDuration = new Duration(updatedDurationStart, updatedDurationEnd);
             }
         } catch (IllegalValueException e) {
-            e.printStackTrace();
+            throw new CommandException(e.getMessage());
         }
 
         return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags);
