@@ -10,11 +10,11 @@ public class DateTime {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates format should be in dd-mm-yyyy,"
             + " or word format like 5pm tomorrow, " + "and does not accept doubles.";
-    private String EMPTY_STRING = "";
+    private static final String EMPTY_STRING = "";
 
     public String value;
-    private boolean isDateInferred;
-    private boolean isTimeInferred;
+    private Boolean isDateInferred;
+    private Boolean isTimeInferred;
     private Date date;
     private DateTimeParser dtParser;
 

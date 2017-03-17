@@ -19,7 +19,7 @@ public interface Logic {
      * @throws IllegalValueException
      */
     CommandResult execute(String commandText) throws CommandException,
-    IllegalValueException, InvalidDatesException;
+        IllegalValueException, InvalidDatesException;
 
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
