@@ -70,6 +70,12 @@ public class Date {
 
     @Override
     public boolean equals(Object other) {
+        Date otherDate = ((Date) other);
+        if (otherDate.value == null && this.value == null) {
+            return true;
+        } else if (otherDate.value == null || this.value == null) {
+            return false;
+        }
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
                         && this.value.equals(((Date) other).value)); // state
