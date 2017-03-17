@@ -99,7 +99,7 @@ public class FindController extends Controller {
                 return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
                     keywords, TAG_MESSAGE, foundCount));
             }
-            
+
         }
     }
 
