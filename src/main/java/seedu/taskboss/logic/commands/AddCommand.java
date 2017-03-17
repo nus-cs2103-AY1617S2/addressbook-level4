@@ -49,7 +49,8 @@ public class AddCommand extends Command {
         DateTime startDateTimeObj = new DateTime(startDateTime);
         DateTime endDateTimeObj = new DateTime(endDateTime);
 
-        if (startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
+        if (startDateTimeObj.getDate() != null && endDateTimeObj.getDate() != null &&
+                startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
