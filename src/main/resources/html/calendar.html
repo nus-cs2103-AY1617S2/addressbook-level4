@@ -15,7 +15,6 @@ $(document).ready(function() {
 			center: 'title',
 			right: 'month,basicWeek,basicDay'
 		},
-		defaultDate: '2017-02-12',
 		navLinks: true, // can click day/week names to navigate views
 		editable: true,
 		eventLimit: true, // allow "more" link when too many events
@@ -78,4 +77,18 @@ $(document).ready(function() {
 	});
 
 });
+
+function add_event(name) {
+	$(document).ready(function() {
+		var myCalendar = $('#calendar'); 
+		myCalendar.fullCalendar();
+		var myEvent = {
+		  title: name,
+		  allDay: true,
+		  start: new Date(),
+		  end: new Date()
+		};
+		myCalendar.fullCalendar( 'renderEvent', myEvent, true );
+	});
+}
 </script>

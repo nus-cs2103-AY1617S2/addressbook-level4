@@ -217,6 +217,10 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.loadTaskPage(task);
     }
 
+    void addTaskEvent(ReadOnlyTask task) {
+        browserPanel.add_event_today(task.getName().fullName);
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }

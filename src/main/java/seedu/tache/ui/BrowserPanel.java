@@ -31,6 +31,7 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
+        loadCalendar();
     }
 
     public void loadTaskPage(ReadOnlyTask task) {
@@ -38,17 +39,21 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadPage(String url) {
+        browser.getEngine().load(url);
+    }
+
+    private void loadCalendar() {
         try {
             String calendarTemplate = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")
-                        + "/src/main/resources/html/calendar.html")));
-
-            browser.getEngine().setJavaScriptEnabled(true);
+                    + "/src/main/resources/html/calendar.html")));
             browser.getEngine().loadContent(calendarTemplate);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
 
+    public void add_event_today(String name) {
+        browser.getEngine().executeScript("add_event('" + name + "')");
     }
 
     /**
