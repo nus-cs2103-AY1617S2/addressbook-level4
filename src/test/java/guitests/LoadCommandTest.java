@@ -18,7 +18,7 @@ public class LoadCommandTest extends TaskManagerGuiTest {
 
     /**
      * Tests loading of new file that doesn't exist
-     * 
+     *
      * @author A0140036X
      */
     @Test

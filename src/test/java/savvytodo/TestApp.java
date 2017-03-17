@@ -43,7 +43,7 @@ public class TestApp extends MainApp {
 
     @Override
     public void init() throws Exception {
-        CONFIG_FILE = TEST_CONFIG;
+        config_file = TEST_CONFIG;
         super.init();
 
         config.setTaskManagerFilePath(saveFileLocation);

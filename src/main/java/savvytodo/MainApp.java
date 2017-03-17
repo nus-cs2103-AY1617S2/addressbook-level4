@@ -47,7 +47,7 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
 
-    public static String CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
+    public static String config_file = Config.DEFAULT_CONFIG_FILE;
 
     @Override
     public void init() throws Exception {
@@ -63,7 +63,7 @@ public class MainApp extends Application {
      * Starts application. Updates UI with new logic if UI already exists.
      * @author A0140036X
      * @param configFilePath File path of json file containing configurations
-     * @param useSampleDataIfStorageFileNotFound If true, sample data is to be used if storage file is not found. 
+     * @param useSampleDataIfStorageFileNotFound If true, sample data is to be used if storage file is not found.
      * If false, an empty task manager will be created.
      */
     public void initApplicationFromConfig(String configFilePath, boolean useSampleDataIfStorageFileNotFound) {
@@ -92,7 +92,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Initializes model based on storage. If storage file is not found, default task manager provided will be used. 
+     * Initializes model based on storage. If storage file is not found, default task manager provided will be used.
      * If task manager is null, sample task manager will be created.
      * @param storage
      * @param userPrefs
@@ -131,23 +131,23 @@ public class MainApp extends Application {
 
         if (configFilePath != null) {
             logger.info("Custom Config file specified " + configFilePath);
-            CONFIG_FILE = configFilePath;
+            config_file = configFilePath;
         }
 
-        logger.info("Using config file : " + CONFIG_FILE);
+        logger.info("Using config file : " + config_file);
 
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(CONFIG_FILE);
+            Optional<Config> configOptional = ConfigUtil.readConfig(config_file);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + CONFIG_FILE + " is not in the correct format. "
+            logger.warning("Config file at " + config_file + " is not in the correct format. "
                     + "Using default config properties");
             initializedConfig = new Config();
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, CONFIG_FILE);
+            ConfigUtil.saveConfig(initializedConfig, config_file);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -227,14 +227,14 @@ public class MainApp extends Application {
         config.setTaskManagerFilePath(taskManagerFilePath);
 
         try {
-            ConfigUtil.saveConfig(config, CONFIG_FILE);
+            ConfigUtil.saveConfig(config, config_file);
         } catch (IOException e) {
             logger.severe("Failed to save config " + StringUtil.getDetails(e));
             this.stop();
         }
 
         logger.info("Setting UI with new logic");
-        initApplicationFromConfig(CONFIG_FILE, false);
+        initApplicationFromConfig(config_file, false);
 
         try {
             storage.saveTaskManager(model.getTaskManager());

@@ -227,7 +227,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     * 
+     *
      * @return logic
      */
     public Logic getLogic() {
