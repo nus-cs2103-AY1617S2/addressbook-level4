@@ -1,5 +1,6 @@
 package seedu.doist.logic.parser;
 
+import com.joestelmach.natty.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,6 +55,12 @@ public class ParserUtil {
             indices.add(parseIndex(component));
         }
         return indices;
+    }
+    
+    public static List<String> parseDate (String date) {
+        com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
+        
+        
     }
 
     /**
