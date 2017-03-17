@@ -12,8 +12,8 @@ import javafx.scene.layout.Region;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.events.ui.NewResultAvailableEvent;
 import seedu.doist.commons.util.FxViewUtil;
+import seedu.doist.commons.util.History;
 import seedu.doist.logic.Logic;
-import seedu.doist.logic.commands.CommandHistory;
 import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.exceptions.CommandException;
 
@@ -23,6 +23,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
 
     private final Logic logic;
+    private final History<String> commandHistory = new History<String>();
 
     @FXML
     private TextField commandTextField;
@@ -53,7 +54,7 @@ public class CommandBox extends UiPart<Region> {
 
     //Handles Down key press
     private void handleDownKey() {
-        String userCommandText = CommandHistory.getNextCommand();
+        String userCommandText = commandHistory.getNextState();
         if (userCommandText == null) {
             setCommandInput("");
         } else {
@@ -63,7 +64,7 @@ public class CommandBox extends UiPart<Region> {
 
     //Handle Up key press
     private void handleUpKey() {
-        String userCommandText = CommandHistory.getPreviousCommand();
+        String userCommandText = commandHistory.getPreviousState();
         if (userCommandText == null) {
             setCommandInput("");
         } else {
@@ -75,7 +76,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleEnterKey() {
         try {
             String userCommandText = commandTextField.getText();
-            manageCommandHistory(userCommandText);
+            restoreCommandHistory(userCommandText);
             CommandResult commandResult = logic.execute(userCommandText);
             // process result of the command
             setStyleToIndicateCommandSuccess();
@@ -94,9 +95,9 @@ public class CommandBox extends UiPart<Region> {
 
     //Restores the command history pointer
     //Throws exception is 'add' fails
-    private void manageCommandHistory(String userCommandText) {
-        CommandHistory.restore();
-        if (!CommandHistory.addCommandHistory(userCommandText)) {
+    private void restoreCommandHistory(String userCommandText) {
+        commandHistory.restore();
+        if (!commandHistory.addToHistory(userCommandText)) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }

@@ -10,6 +10,7 @@ import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
+import seedu.doist.commons.util.History;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.Tag;
@@ -30,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
+    private final History<TodoList> todoListHistory = new History<TodoList>();
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
@@ -62,6 +64,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTodoListChanged() {
+        todoListHistory.forgetStatesAfter();
+        todoListHistory.addToHistory(todoList);
         raise(new TodoListChangedEvent(todoList));
     }
 
