@@ -13,6 +13,7 @@ public interface ReadOnlyTodo {
     Name getName();
     Date getStartTime();
     Date getEndTime();
+    Date getCompleteTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -22,14 +23,15 @@ public interface ReadOnlyTodo {
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
-     * didn't check for startTime and endTime
+     * didn't check for startTime, endTime, or completeTime
      */
     default boolean isSameStateAs(ReadOnlyTodo other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName())); // state checks here onwards
                 //&& other.getStartTime().equals(this.getStartTime())
-                //&& other.getEndTime().equals(this.getEndTime()));
+                //&& other.getEndTime().equals(this.getEndTime())
+                //&& other.getCompleteTime().equals(this.getCompleteTime()));
     }
 
     /**
@@ -48,6 +50,11 @@ public interface ReadOnlyTodo {
         if (getEndTime() != null) {
             builder.append(" End: ")
                 .append(getEndTime());
+        }
+
+        if (getCompleteTime() != null) {
+            builder.append(" Complete: ")
+                .append(getCompleteTime());
         }
 
         builder.append(" Tags: ");
