@@ -41,29 +41,28 @@ public class AddCommand extends Command {
     public AddCommand(String name, Optional<String> deadlineDateTimeArgs, Optional<String> startDateTimeArgs,
                       Optional<String> endDateTimeArgs, Set<String> tags) throws IllegalValueException {
 
-        // TODO Improve SLAP build deadline
+        // TODO Improve SLAP initializeDeadline and maybe use lambda?
         Optional<Deadline> deadline = Optional.empty();
         if (deadlineDateTimeArgs.isPresent()) {
             ZonedDateTime deadlineDateTime = ParserUtil.parseDateTimeString(deadlineDateTimeArgs.get());
             deadline = Optional.of(new Deadline(deadlineDateTime));
         }
-        // deadline = deadlineArgs.flatMap(ParserUtil::parseDateTimeString); TODO use lambda
 
-        // TODO Improve SLAP build startEndDateTime
+        // TODO Improve SLAP initializeStartEndDateTime and maybe use lambda?
         Optional<StartEndDateTime> startEndDateTime = Optional.empty();
         boolean isStartDateTimePresent = startDateTimeArgs.isPresent();
 
         if (isStartDateTimePresent) {
             if (!endDateTimeArgs.isPresent()) {
                 throw new IllegalValueException("End date must exist if there is a start date");
-                // TODO maybe allow endDateTime to be optional
+                // TODO probably not worth but might want to consider allowing endDateTime to be optional
             }
             ZonedDateTime startDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
             ZonedDateTime endDateTime = ParserUtil.parseDateTimeString(startDateTimeArgs.get());
             startEndDateTime = Optional.of(new StartEndDateTime(startDateTime, endDateTime));
         }
 
-        // TODO Improve SLAP build tags
+        // TODO Improve SLAP initializeTags
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
