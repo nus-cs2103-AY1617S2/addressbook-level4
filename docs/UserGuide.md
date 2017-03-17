@@ -497,62 +497,20 @@ Format: `exit`
     **A**: Feel free to contact us at support@surutaskmanager.com
 
 ## 5. Command Summary
-[**Help**](#31-viewing-usage-instructions-help): `help`
 
-[**Add**](#32-adding-a-task-with-no-specified-completion-date-add):`add DESCRIPTION from START_DATE to END_DATE #TAGNAME... recurring:... reminders:...`
-Examples:
-> * `add Write essay`
-> * `add Write essay by 24/12/17`
-> * `add Write essay from 20/12/17`
-> * `add Write essay from 20/12/17 to 24/12/17`
-> * `add Write essay #school #homework`
-> * `add Write essay from 20/12/17 recurring: weekly`
-> * `add Write essay reminders: 1 day, 30 mins`
-
-[**List**](#38-listing-all-tasks-list): `list`
-Examples:
-> * `list unchecked`
-> * `list checked`
-
-[**Edit**](#311-edit-task-edit-index): `edit INDEX`
-Examples:
-> * `edit 2 buy groceries`
-> * `edit 1 buy groceries by 13/5/17`
-
-[**Delete**](#312-deleting-a-task-delete-index): `delete INDEX`
-Examples:
-> * `delete 3`
-
-[**Undo**](#313-undoing-a-command-undo): `undo`
-
-[**Redo**](#314-redoing-an-undone-command-redo): `redo`
-
-[**Find**](#315-finding-all-tasks-containing-a-keyword-find-keyword): `find KEYWORD [MORE_KEYWORDS]`
-Examples:
-> * `find Essay`
-> * `find Essay Jogging`
-
-[**Check**](#318-checking-off-a-task-check-index): `check INDEX`
-> * `list`
-> `check 1`
-
-[**Uncheck**](#319-unchecking-a-task-uncheck-index): `uncheck INDEX`
-> * `list`
-> `uncheck 1`
-
-[**Save To**](#322-defining-save-destination-saveto-folder-path): `saveto FOLDER_PATH`
-Examples:
-> * `saveto C:/Suru`
-
-[**Load From**](#323-defining-target-to-load-from-loadfrom-folder-path): `loadfrom FOLDER_PATH`
-Examples:
-> * `loadfrom C:/Suru`
-
-[**Sort**](#328-sorting-tasks-sort-by-property): `sort by PROPERTY`
-Examples:
-> * `sort by description`
-> * `sort by start`
-> * `sort by end`
-
-
-[**Exit**](#331-exiting-the-app-exit): `exit`
+|Command|Syntax|Examples|
+|-------|--------|------|
+|[**Help**](#31-viewing-usage-instructions-help)|`help`|`help`|
+|[**Add**](#32-adding-a-task-with-no-specified-completion-date-add)|`add DESCRIPTION from START_DATE to END_DATE` <br> `#TAGNAME... recurring:... reminders:...`| `add Write essay`<br>`add Write essay by 24/12/17`<br>`add Write essay from 20/12/17`<br>`add Write essay from 20/12/17 to 24/12/17`<br>`add Write essay #school #homework`<br>`add Write essay from 20/12/17 recurring: weekly`<br>`add Write essay reminders: 1 day, 30 mins`|
+|[**List**](#38-listing-all-tasks-list)|`list`|`list unchecked`<br>`list checked`|
+|[**Edit**](#311-edit-task-edit-index)|`edit INDEX`|`edit 2 buy groceries`<br>`edit 1 buy groceries by 13/5/17`|
+|[**Delete**](#312-deleting-a-task-delete-index)|`delete INDEX`|`delete 3`|
+|[**Undo**](#313-undoing-a-command-undo)|`undo`|`undo`|
+|[**Redo**](#314-redoing-an-undone-command-redo)|`redo`|`redo`|
+|[**Find**](#315-finding-all-tasks-containing-a-keyword-find-keyword)|`find KEYWORD [MORE_KEYWORDS]`|`find Essay`<br>`find Essay Jogging`|
+|[**Check**](#318-checking-off-a-task-check-index)|`check INDEX`|`list` > `check 1`
+|[**Uncheck**](#319-unchecking-a-task-uncheck-index)|`uncheck INDEX`|`list` > `uncheck 1`
+|[**Save To**](#322-defining-save-destination-saveto-folder-path)|`saveto FOLDER_PATH`|`saveto C:/Suru`|
+|[**Load From**](#323-defining-target-to-load-from-loadfrom-folder-path)|`loadfrom FOLDER_PATH`|`loadfrom C:/Suru`|
+|[**Sort**](#328-sorting-tasks-sort-by-property)|`sort by PROPERTY`|`sort by description`<br>`sort by start`<br>`sort by end`
+|[**Exit**](#331-exiting-the-app-exit)|`exit`|`exit`|
