@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+//@@author A0140042A
+/**
+ * A test class that tests auto complete function on the GUI text field itself
+ */
 public class CommandBoxAutocompleteTest extends TaskManagerGuiTest {
 
     @Test

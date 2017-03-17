@@ -2,15 +2,14 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,13 +17,13 @@ import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.label.UniqueLabelList.DuplicateLabelException;
 
+//@@author A0140042A
 /**
  * Test file for UniqueLabelList
  */
 public class UniqueLabelListTest {
 
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
+    public static final String ERROR_DUPLICATE_LABEL = "Operation would result in duplicate labels";
 
     UniqueLabelList normalList;
     UniqueLabelList unorderedList;
@@ -44,36 +43,62 @@ public class UniqueLabelListTest {
     }
 
     @Test
-    public void uniqueLabelList_TestInitializationEmpty_ThrowIllegalValueException()
-            throws DuplicateLabelException, IllegalValueException {
-        exception.expect(IllegalValueException.class);
-        new UniqueLabelList("");
+    public void uniqueLabelList_TestInitializationEmpty_ThrowIllegalValueException() {
+        try {
+            new UniqueLabelList("");
+        } catch (IllegalValueException e) {
+            assertTrue(Label.MESSAGE_LABEL_CONSTRAINTS.equals(e.getMessage()));
+        }
     }
 
     @Test
-    public void uniqueLabelList_TestInitializationNull_ThrowAssertionException()
-            throws DuplicateLabelException, IllegalValueException {
-        exception.expect(AssertionError.class);
-        new UniqueLabelList("validTag", null, null);
+    public void uniqueLabelList_TestInitializationNull_ThrowAssertionException() {
+        try {
+            new UniqueLabelList("validTag", null, null);
+        } catch (AssertionError e) {
+            assertTrue(null == e.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected Error!");
+        }
     }
 
     @Test
-    public void uniqueLabelList_TestInitializationDuplicateString_ThrowDuplicateLabelException()
-            throws DuplicateLabelException, IllegalValueException {
-        exception.expect(DuplicateLabelException.class);
-        Label label = new Label("validTag");
-        new UniqueLabelList(label, label);
+    public void uniqueLabelList_TestInitializationLabelNull_ThrowAssertionException() {
+        try {
+            new UniqueLabelList(new Label("validTag"), null, null);
+        } catch (AssertionError e) {
+            assertTrue(null == e.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected Error!");
+        }
     }
 
     @Test
-    public void uniqueLabelList_TestInitializationDuplicateList_ThrowDuplicateLabelException()
-            throws DuplicateLabelException, IllegalValueException {
-        exception.expect(DuplicateLabelException.class);
-        List<Label> labels = new LinkedList<Label>();
-        labels.add(new Label("tag1"));
-        labels.add(new Label("tag2"));
-        labels.add(new Label("tag1"));
-        new UniqueLabelList(labels);
+    public void uniqueLabelList_TestInitializationDuplicateString_ThrowDuplicateLabelException() {
+        try {
+            Label label = new Label("validTag");
+            new UniqueLabelList(label, label);
+        } catch (DuplicateLabelException e) {
+            assertTrue(ERROR_DUPLICATE_LABEL.equals(e.getMessage()));
+        } catch (Exception e) {
+            fail("Unexpected Error!");
+        }
+    }
+
+    @Test
+    public void uniqueLabelList_TestInitializationDuplicateList_ThrowDuplicateLabelException() {
+        try {
+            List<Label> labels = new LinkedList<Label>();
+            labels.add(new Label("tag1"));
+            labels.add(new Label("tag2"));
+            labels.add(new Label("tag1"));
+            new UniqueLabelList(labels);
+        } catch (DuplicateLabelException e) {
+            assertTrue(ERROR_DUPLICATE_LABEL.equals(e.getMessage()));
+        } catch (Exception e) {
+            fail("Unexpected Error!");
+        }
+
     }
 
     @Test
@@ -129,12 +154,17 @@ public class UniqueLabelListTest {
     }
 
     @Test
-    public void uniqueLabelList_TestDuplicateLabels()
-            throws DuplicateLabelException, IllegalValueException {
-        exception.expect(DuplicateLabelException.class);
-        UniqueLabelList duplicateTagList = new UniqueLabelList();
-        duplicateTagList.add(new Label("label"));
-        duplicateTagList.add(new Label("label"));
+    public void uniqueLabelList_TestDuplicateLabels() {
+        try {
+            UniqueLabelList duplicateTagList = new UniqueLabelList();
+            duplicateTagList.add(new Label("label"));
+            duplicateTagList.add(new Label("label"));
+        } catch (DuplicateLabelException e) {
+            assertTrue(ERROR_DUPLICATE_LABEL.equals(e.getMessage()));
+        } catch (Exception e) {
+            fail("Unexpected Error!");
+        }
+
     }
 
     @Test

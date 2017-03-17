@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 
+//@@author A0140042A
 /**
  * A list of labels that enforces no nulls and uniqueness between its elements.
  *
