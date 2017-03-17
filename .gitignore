@@ -8,6 +8,7 @@ lib/*
 *.log
 *.log.*
 *.csv
+.*
 config.json
 src/test/data/sandbox/
 preferences.json
@@ -18,4 +19,8 @@ classes/
 /bin/
 runtests.sh
 /src/.*
+<<<<<<< HEAD
 .project
+=======
+/config/checkstyle/awesometodoformat.xml
+>>>>>>> merge_with_deadline

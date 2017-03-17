@@ -37,7 +37,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     @FXML
-    private void handleCommandInputChanged() throws ParseException {
+    public void handleCommandInputChanged() throws ParseException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
