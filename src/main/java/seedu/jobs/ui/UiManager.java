@@ -15,7 +15,7 @@ import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
-import seedu.jobs.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
@@ -52,7 +52,7 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            mainWindow.fillInnerParts(); 
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -64,7 +64,8 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        mainWindow.releaseResources();
+//        THIS IS FOR BROWSER (the releaseResources)
+//        mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -116,13 +117,17 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
+
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        
+        //FOR BROWSER
+        //mainWindow.loadTaskPage(event.getNewSelection());
     }
+
 
 }

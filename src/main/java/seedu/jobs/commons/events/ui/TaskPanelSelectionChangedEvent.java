@@ -1,17 +1,18 @@
 package seedu.jobs.commons.events.ui;
 
 import seedu.jobs.commons.events.BaseEvent;
+
 import seedu.jobs.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Task List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
+public class TaskPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final ReadOnlyTask newSelection;
 
-    public PersonPanelSelectionChangedEvent(ReadOnlyTask newSelection) {
+    public TaskPanelSelectionChangedEvent(ReadOnlyTask newSelection) {
         this.newSelection = newSelection;
     }
 

@@ -1,55 +1,45 @@
 package seedu.jobs.model.task;
 
-
+import java.util.Optional;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Task's description in JOBS.
  */
+
 public class Description {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Task addresses can take any values, and it should not be blank";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
-
+    public static final String DEFAULT_DESCRIPTION = "";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINT = "Description cannot be more than 150 characters";
+    public static final int DESCRIPTION_LENGTH_CONSTRAINT = 150;
     public final String value;
 
-    /**
-     * Validates given address.
-     *
-     * @throws IllegalValueException if given address string is invalid.
-     */
-    public Description(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidAddress(address)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+    public Description(Optional<String> description) throws IllegalValueException {
+        if (!description.isPresent()) {
+            this.value = DEFAULT_DESCRIPTION;
+        } else {
+            if (!isValidDescription(description.get())) {
+                throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINT);
+            }
+            this.value = description.get();
         }
-        this.value = address;
     }
 
-    /**
-     * Returns true if a given string is a valid person email.
-     */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    public static boolean isValidDescription(String description) {
+        return description.length() <= DESCRIPTION_LENGTH_CONSTRAINT;
     }
 
     @Override
     public String toString() {
-        return value;
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && this.value.equals(((Description) other).value)); // state check
+                        && this.value.equals(((Description) other).value)); // state
+                                                                            // check
     }
 
     @Override

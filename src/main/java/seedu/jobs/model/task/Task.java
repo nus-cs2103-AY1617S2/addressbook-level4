@@ -6,29 +6,27 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.tag.UniqueTagList;
 
-/**
- * Represents a Task in the JOBS.
- * Guarantees: details are present and not null, field values are validated.
- */
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Phone phone;
-    private Email email;
+    private Time startTime;
+    private Time endTime;
     private Description description;
-
+    private boolean isCompleted;
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, description, tags);
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
+        this.isCompleted = false;
     }
     
     public Task(Name name) throws IllegalValueException{
@@ -43,7 +41,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags());
+        this.isCompleted = source.isCompleted();
     }
 
     public void setName(Name name) {
@@ -56,33 +55,33 @@ public class Task implements ReadOnlyTask {
         return name;
     }
 
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
+    public void setStartTime(Time startTime) {
+        assert startTime != null;
+        this.startTime = startTime;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
+    public void setEndTime(Time endTime) {
+        assert endTime != null;
+        this.endTime = endTime;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public Time getEndTime() {
+        return endTime;
     }
 
-    public void setAddress(Description description) {
+    public void setDescription(Description description) {
         assert description != null;
         this.description = description;
     }
 
     @Override
-    public Description getAddress() {
+    public Description getDescription() {
         return description;
     }
 
@@ -92,22 +91,22 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
 
     /**
-     * Updates this person with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPhone(replacement.getPhone());
-        this.setEmail(replacement.getEmail());
-        this.setAddress(replacement.getAddress());
+        this.setStartTime(replacement.getStartTime());
+        this.setEndTime(replacement.getEndTime());
+        this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
 
@@ -115,13 +114,14 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, description, tags);
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(name, startTime, endTime, description, tags);
     }
 
     @Override
@@ -129,4 +129,8 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    @Override
+    public boolean isCompleted() {
+        return isCompleted;
+    }
 }

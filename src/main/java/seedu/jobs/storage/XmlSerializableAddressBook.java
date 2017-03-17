@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.IllegalValueException;
-import seedu.jobs.model.ReadOnlyAddressBook;
+import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
@@ -20,10 +20,10 @@ import seedu.jobs.model.task.Task;
  * An Immutable AddressBook that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+public class XmlSerializableAddressBook implements ReadOnlyTaskBook {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -32,24 +32,24 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyTaskBook src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getPersonList() {
-        final ObservableList<Task> tasks = this.persons.stream().map(p -> {
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        final ObservableList<Task> tasks = this.tasks.stream().map(t -> {
             try {
-                return p.toModelType();
+                return t.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
                 //TODO: better error handling

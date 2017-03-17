@@ -24,10 +24,10 @@ import javafx.stage.Stage;
 import seedu.jobs.TestApp;
 import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.events.BaseEvent;
-import seedu.jobs.model.AddressBook;
-import seedu.jobs.model.task.ReadOnlyTask;
+import seedu.jobs.model.TaskBook;
+import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.testutil.TestUtil;
-import seedu.jobs.testutil.TypicalTestPersons;
+import seedu.jobs.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for AddressBook.
@@ -40,7 +40,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -86,9 +86,9 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
-        TypicalTestPersons.loadAddressBookWithSampleData(ab);
+    protected TaskBook getInitialData() {
+        TaskBook ab = new TaskBook();
+        TypicalTestTasks.loadAddressBookWithSampleData(ab);
         return ab;
     }
 
@@ -107,8 +107,8 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, person));
     }
 
     /**
