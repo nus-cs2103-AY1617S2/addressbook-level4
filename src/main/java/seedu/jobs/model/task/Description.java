@@ -25,7 +25,7 @@ public class Description {
         }
     }
 
-    public boolean isValidDescription(String description) {
+    public static boolean isValidDescription(String description) {
         return description.length() <= DESCRIPTION_LENGTH_CONSTRAINT;
     }
 
