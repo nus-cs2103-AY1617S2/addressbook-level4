@@ -13,6 +13,9 @@ import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.UserPrefs;
+import seedu.taskmanager.commons.core.Config;
+import seedu.taskmanager.commons.events.storage.TaskManagerStorageDirectoryChangedEvent;
+import seedu.taskmanager.storage.XmlTaskManagerStorage;
 
 /**
  * Manages storage of TaskManager data in local storage.
@@ -32,6 +35,9 @@ public class StorageManager extends ComponentManager implements Storage {
 
     public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    }
+    
+    public StorageManager() {
     }
 
     // ================ UserPrefs methods ==============================
@@ -76,6 +82,15 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
+    public void updateTaskManagerStorageDirectory(String newFilePath, Config newConfig) {
+        taskManagerStorage = new XmlTaskManagerStorage(newFilePath);
+        indicateTaskManagerStorageDirectoryChanged(newFilePath, newConfig);
+    }
+    
+    //Raise an event that the tars storage directory has changed
+    private void indicateTaskManagerStorageDirectoryChanged(String newFilePath, Config newConfig) {
+        raise(new TaskManagerStorageDirectoryChangedEvent(newFilePath, newConfig));
+    }
 
     @Override
     @Subscribe

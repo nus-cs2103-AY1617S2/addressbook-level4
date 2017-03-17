@@ -22,6 +22,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 
     public XmlTaskManagerStorage(String filePath) {
         this.filePath = filePath;
+        logger.info("XmlTaskManagerStorage at : " + filePath);
     }
 
     public String getTaskManagerFilePath() {
@@ -67,7 +68,9 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         assert taskManager != null;
         assert filePath != null;
 
+        logger.info("File saved at : " + filePath);
         File file = new File(filePath);
+        logger.info("The absolute path : " + file.getAbsolutePath());
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
