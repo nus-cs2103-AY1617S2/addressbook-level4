@@ -25,18 +25,21 @@ public class KeywordTokenizer {
     public static HashMap<String, String> tokenize(String description, String defaultKeyword, String... keywords) {
         HashMap<String, String> tokens = new HashMap<>();
         if (!StringUtil.isPresent(description)) {
+            // Early termination, no description means there is nothing to tokenize.
             return tokens;
         }
 
         ArrayList<Pair<Integer, String>> indexKeywordPairs = new ArrayList<>();
         String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
         if (defaultKeyword != null) {
+            // Everything that is not matched (guaranteed to be at the left) will be tokenized to the default keyword
             indexKeywordPairs.add(new Pair<>(START_INDEX, defaultKeyword));
         }
 
         for (String keyword : nonNullKeywords) {
             int index = description.lastIndexOf(keyword);
             if (index != INVALID_INDEX) {
+                // Index in indexKeywordPairs refers to the index behind the last character of the keyword.
                 Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);
                 indexKeywordPairs.add(indexKeywordPair);
             }
@@ -47,6 +50,9 @@ public class KeywordTokenizer {
         for (int i = 0; i < indexKeywordPairs.size(); i++) {
             Pair<Integer, String> currentIndexKeywordPair = indexKeywordPairs.get(i);
             int startIndex = currentIndexKeywordPair.getKey();
+            // endIndex depends on whether the currentIndexKeywordPair is the last pair.
+            // Generally, we match the text to the index before the first character of the next keyword.
+            // For last pair, we simply match the text to the end of the description.
             int endIndex = i + 1 < indexKeywordPairs.size()
                     ? indexKeywordPairs.get(i + 1).getKey() - indexKeywordPairs.get(i + 1).getValue().length()
                     : description.length();
