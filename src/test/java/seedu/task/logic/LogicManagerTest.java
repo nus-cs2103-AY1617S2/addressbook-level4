@@ -189,19 +189,25 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name d/05-05-2015 validRemark.butNoPrefix l/valid, location", expectedMessage);
+      
+        assertCommandFailure("add", expectedMessage);
+
+//        assertCommandFailure("add valid name s/04-05-15 s/01-05-15 r/Duplicate startDate prefix", expectedMessage);
+//        assertCommandFailure("add valid name e/04-05-15 e/05-05-2015 r/Duplicate endDate prefix", expectedMessage);
+//        assertCommandFailure("add valid name r/wrong r/args Duplicate remark prefix", expectedMessage);
+//        assertCommandFailure("add valid name l/wrong l/args Duplicate location prefix", expectedMessage);
+
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] d/12345 r/validRemark l/valid, address",
+        assertCommandFailure("add []\\[;] s/6789 e/12345 r/validRemark l/valid, address",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/not_numbers r/validRemark l/valid, address",
+        assertCommandFailure("add Valid Name s/not_numbers e/not_numbers r/validRemark l/valid, address",
                 Date.MESSAGE_DATE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name p/12345 r/notAnEmail a/valid, address",
         //        Remark.MESSAGE_REMARK_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/05-05-2015 r/validRemark l/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name s/04-05-15 e/05-05-2015 r/validRemark l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -415,13 +421,14 @@ public class LogicManagerTest {
 
         Task allocate() throws Exception {
             Name name = new Name("Allocate time for exercise");
-            Date privateDate = new Date("10-03-2017");
+            Date startDate = new Date("9-03-2017 2300");
+            Date endDate = new Date("10-03-2017 2300");
             Remark remark = new Remark("Just do it");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateDate, remark, privateLocation, tags);
+            return new Task(name, startDate, endDate, remark, privateLocation, tags, false);
         }
 
         /**
@@ -434,10 +441,11 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Date("05-05-2015"), //not random for now
+                    new Date("4-05-15 2200"), //not random for now
+                    new Date("05-05-2015 2100"),
                     new Remark(seed + "@email"),
                     new Location("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))), false
             );
         }
 
@@ -446,10 +454,10 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
-
             cmd.append(p.getName().toString());
+            cmd.append(" s/").append(p.getStartDate());
+            cmd.append(" e/").append(p.getEndDate());
             cmd.append(" r/").append(p.getRemark());
-            cmd.append(" d/").append(p.getDate());
             cmd.append(" l/").append(p.getLocation());
 
             UniqueTagList tags = p.getTags();
@@ -533,10 +541,10 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new Date("4-05-2015"),
                     new Date("05-05-2015"),
                     new Remark("1@email"),
-                    new Location("House of 1"),
-                    new UniqueTagList(new Tag("tag"))
+                    new Location("House of 1"), new UniqueTagList(new Tag("tag")), false
             );
         }
     }

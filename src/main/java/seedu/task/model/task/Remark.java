@@ -3,30 +3,34 @@ package seedu.task.model.task;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in KIT.
- * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
+ * Represents a Task's phone number in KIT. Guarantees: immutable; is valid as
+ * declared in {@link #isValidRemark(String)}
  */
 public class Remark {
 
-    public static final String MESSAGE_REMARK_CONSTRAINTS =
-            "Task remarks can contain any character";
+    public static final String MESSAGE_REMARK_CONSTRAINTS = "Task remarks can contain any character";
     // to be changed to fit remarks constraints
     public static final String REMARK_VALIDATION_REGEX = ".*";
-
+    public static final String DEFAULT_REMARK = "DEFAULT_REMARK";
     public final String value;
 
     /**
      * Validates given remark.
      *
-     * @throws IllegalValueException if given remark string is invalid.
+     * @throws IllegalValueException
+     *             if given remark string is invalid.
      */
     public Remark(String remark) throws IllegalValueException {
         assert remark != null;
-        String trimmedRemark = remark.trim();
-        if (!isValidRemark(trimmedRemark)) {
-            throw new IllegalValueException(MESSAGE_REMARK_CONSTRAINTS);
+        if (remark.equals(DEFAULT_REMARK)) {
+            this.value = "";
+        } else {
+            String trimmedRemark = remark.trim();
+            if (!isValidRemark(trimmedRemark)) {
+                throw new IllegalValueException(MESSAGE_REMARK_CONSTRAINTS);
+            }
+            this.value = trimmedRemark;
         }
-        this.value = trimmedRemark;
     }
 
     /**
@@ -45,7 +49,8 @@ public class Remark {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Remark // instanceof handles nulls
-                && this.value.equals(((Remark) other).value)); // state check
+                        && this.value.equals(((Remark) other).value)); // state
+                                                                       // check
     }
 
     @Override

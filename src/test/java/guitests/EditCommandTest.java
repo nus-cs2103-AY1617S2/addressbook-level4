@@ -23,11 +23,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Buy milk d/12-03-2017 r/remark l/Block 123, Bobby Street 3 t/shopping";
+        String detailsToEdit = "Buy milk s/10 mar 17 e/12-03-2017 r/remark l/Block 123, Bobby Street 3 t/shopping";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Buy milk").withDate("12-03-2017")
-                .withRemark("remark").withLocation("Block 123, Bobby Street 3").withTags("shopping").build();
+        TestTask editedTask = new TaskBuilder().withName("Buy milk").withStartDate("10 mar 17")
+                .withEndDate("12-03-2017").withRemark("remark")
+                .withLocation("Block 123, Bobby Street 3").withTags("shopping").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -91,7 +92,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 d/abcd");
+        commandBox.runCommand("edit 1 s/abcd");
+        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 e/abcd");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
         //allow remark to be any characters
@@ -107,7 +111,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Apply for internship d/08-03-1989 r/checkout career fair "
+        commandBox.runCommand("edit 3 Apply for internship s/04-03-1989 23:59 "
+                                + "e/08-03-1989 23:59 r/checkout career fair "
                                 + "l/123, Jurong West Ave 6 t/personal");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

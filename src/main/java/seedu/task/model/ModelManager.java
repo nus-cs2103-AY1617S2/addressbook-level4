@@ -65,6 +65,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.updateDone(index, target);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
@@ -95,7 +101,22 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, false)));
+    }
+
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, isExact)));
+    }
+
+    @Override
+    public void updateFilteredTaskList(String keyword) {
+        updateFilteredTaskList(new PredicateExpression(new TagQualifier(keyword)));
+    }
+
+    @Override
+    public void updateFilteredTaskList(boolean value) {
+        updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -134,24 +155,73 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class NameQualifier implements Qualifier {
+        private boolean isExact = false;
         private Set<String> nameKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords, boolean isExact) {
+            this.isExact = isExact;
             this.nameKeyWords = nameKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
+            if (isExact) {
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, nameKeyWords);
+            } else {
+                return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
+            }
         }
-
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    private class TagQualifier implements Qualifier {
+
+        private String tagKeyWord;
+
+        TagQualifier(String tagKeyWord) {
+            this.tagKeyWord = tagKeyWord;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return StringUtil.containsTagIgnoreCase(task.getTags(), tagKeyWord);
+        }
+
+        @Override
+        public String toString() {
+            return "Tag=" +  tagKeyWord;
+        }
+    }
+
+    private class DoneQualifier implements Qualifier {
+
+        private boolean value;
+
+        DoneQualifier(boolean value) {
+            this.value = value;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (this.value  & task.isDone()) {
+                return true;
+            }
+            else if (!this.value  & !task.isDone()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+    }
+
+
 
 }

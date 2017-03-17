@@ -15,6 +15,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
+import seedu.task.commons.events.ui.ShowHelpFormatRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.StringUtil;
@@ -111,6 +112,12 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
+    }
+
+    @Subscribe
+    private void handleShowHelpFormatEvent(ShowHelpFormatRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.handleHelpFormat();
     }
 
     @Subscribe

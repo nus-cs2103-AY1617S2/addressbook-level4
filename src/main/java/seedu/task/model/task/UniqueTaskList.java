@@ -64,6 +64,14 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
     }
 
+    public void done(int index) {
+    // TODO Auto-generated method stub
+        Task taskDone = internalList.get(index);
+        taskDone.setIsDone(true);
+        internalList.set(index, taskDone);
+    }
+
+
     /**
      * Removes the equivalent task from the list.
      *
@@ -77,6 +85,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return taskFoundAndDeleted;
     }
+
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);

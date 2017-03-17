@@ -41,7 +41,7 @@ If you are not sure where to start, take a sneakpeek at the help sheet!
 
 Format: `help`
 
-> Help brings up user guide in another window 
+> Help brings up user guide in another window
 
 ### 2.1.2 Viewing quick overview of command formats : `helpf`
 
@@ -51,7 +51,7 @@ Format: `helpf`, `hf`
 
 ### 2.2 Adding a task: `add`
 
-If you are ready to start exploring KIT, do it by adding a task! 
+If you are ready to start exploring KIT, do it by adding a task!
 
 Adds a task to KIT. New tasks are [not done] by default. <br>
 
@@ -65,6 +65,7 @@ Here are some examples:
 * `add do 2103 project r/waiting for john’s reply e/3 march 17 l/nus soc t/school`
 * `add buy groceries r/cabbage and broccoli s/2 jul 17 t/personal`
 * `add feed the cat\/dog t/personal t/family e/01-01/2017` 
+
 
 Supported Date/Time formats:
 > * DD/MM/YY, DD-MM-YY and also dates such as 12 march 17.
@@ -189,7 +190,7 @@ Description: Finds task whose name or remark matches **all** the keyword(s). <br
 
 Format: `findexact KEYWORD...`
 
-> * The search is the same as to `find` except it only matches tasks that contains **all** keywords. 
+> * The search is the same as to `find` except it only matches tasks that contains **all** keywords.
 e.g `do project` will match `do School project` but not `do homework`
 
 ### 2.9 Clearing all task: `clear`
@@ -273,7 +274,7 @@ In KIT, data are saved automatically after a change has been made. There is no n
 
 * **Find exact** : `findexact KEYWORD...`
   e.g. `findexact do homework`
-  
+
 * **Delete** : `delete INDEX`
    e.g. `delete 3`
 
@@ -283,4 +284,4 @@ In KIT, data are saved automatically after a change has been made. There is no n
 
 * **Save location** : `save PATHNAME`
    e.g. `save C:\Program Files`
-
+   

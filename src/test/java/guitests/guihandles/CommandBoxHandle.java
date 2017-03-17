@@ -45,6 +45,12 @@ public class CommandBoxHandle extends GuiHandle {
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
+    public HelpFormatWindowHandle runHelpFormatCommand() {
+        enterCommand("helpf");
+        pressEnter();
+        return new HelpFormatWindowHandle(guiRobot, primaryStage);
+    }
+
     public ObservableList<String> getStyleClass() {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
     }

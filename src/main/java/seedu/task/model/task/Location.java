@@ -3,33 +3,37 @@ package seedu.task.model.task;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's location in KIT.
- * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
+ * Represents a Task's location in KIT. Guarantees: immutable; is valid as
+ * declared in {@link #isValidLocation(String)}
  */
 public class Location {
 
-    public static final String MESSAGE_LOCATION_CONSTRAINTS =
-            "Task locations can take any values, and it should not be blank";
-
+    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task locations can take any values,"
+            + " and it should not be blank";
     /*
-     * The first character of the location must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the location must not be a whitespace, otherwise
+     * " " (a blank string) becomes a valid input.
      */
     public static final String LOCATION_VALIDATION_REGEX = "[^\\s].*";
-
+    public static final String DEFAULT_LOCATION = "DEFAULT_LOCATION";
     public final String value;
 
     /**
      * Validates given location.
      *
-     * @throws IllegalValueException if given location string is invalid.
+     * @throws IllegalValueException
+     *             if given location string is invalid.
      */
     public Location(String location) throws IllegalValueException {
         assert location != null;
-        if (!isValidLocation(location)) {
-            throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
+        if (location.equals(DEFAULT_LOCATION) || location.trim().equals("")) {
+            this.value = "";
+        } else {
+            if (!isValidLocation(location)) {
+                throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
+            }
+            this.value = location;
         }
-        this.value = location;
     }
 
     /**
@@ -48,7 +52,8 @@ public class Location {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Location // instanceof handles nulls
-                && this.value.equals(((Location) other).value)); // state check
+                        && this.value.equals(((Location) other).value)); // state
+                                                                         // check
     }
 
     @Override

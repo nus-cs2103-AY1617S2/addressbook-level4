@@ -25,8 +25,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/DATE] [e/REMARK] [a/LOCATION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/03-04-2017 e/walk the dog";
+            + "Parameters: INDEX (must be a positive integer) [NAME] [s/START] [e/END] "
+            + "[r/REMARK] [l/LOCATION ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 s/03-04-2017 r/walk the dog";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -78,12 +79,14 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Date updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
+        Date updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
+        Date updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
         Remark updatedRemark = editTaskDescriptor.getRemark().orElseGet(taskToEdit::getRemark);
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedDate, updatedRemark, updatedLocation, updatedTags);
+        return new Task(updatedName, updatedStartDate, updatedEndDate, updatedRemark,
+        updatedLocation, updatedTags, false);
     }
 
     /**
@@ -92,7 +95,8 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
+        private Optional<Date> startDate = Optional.empty();
+        private Optional<Date> endDate = Optional.empty();
         private Optional<Remark> remark = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -101,7 +105,8 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.date = toCopy.getDate();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
             this.remark = toCopy.getRemark();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
@@ -111,7 +116,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.remark, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate,
+                    this.remark, this.location, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -123,13 +129,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDate(Optional<Date> date) {
-            assert date != null;
-            this.date = date;
+        public void setStartDate(Optional<Date> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<Date> getDate() {
-            return date;
+        public Optional<Date> getStartDate() {
+            return startDate;
+        }
+
+        public void setEndDate(Optional<Date> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
+        }
+
+        public Optional<Date> getEndDate() {
+            return endDate;
         }
 
         public void setRemark(Optional<Remark> remark) {

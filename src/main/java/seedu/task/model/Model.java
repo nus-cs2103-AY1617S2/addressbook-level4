@@ -21,6 +21,9 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    /** Updates the task to done */
+    void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+
     /** Adds the given Task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -42,5 +45,15 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
+    /** Updates the filter of the filtered task list to filter by any or exactly all of the given keywords*/
+    void updateFilteredTaskList(Set<String> keywords, boolean isExact);
+
+    /** Updates the filter of the filtered task list to filter by the given keyword of tags*/
+    void updateFilteredTaskList(String keyword);
+
+    /** Updates the filer of the filtered task list to filter by done or undone task*/
+    void updateFilteredTaskList(boolean value);
+
 
 }

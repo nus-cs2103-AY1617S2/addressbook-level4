@@ -24,7 +24,27 @@ public class AddCommandTest extends TaskManagerGuiTest {
         taskToAdd = td.identify;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //add task without tag
+        taskToAdd = td.jump;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //add task without remark
+        taskToAdd = td.kick;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //add task without location
+        taskToAdd = td.look;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+        //add task without end date
+        taskToAdd = td.mark;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //add task without start date
+        taskToAdd = td.neglect;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         //add duplicate task
         commandBox.runCommand(td.handle.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);

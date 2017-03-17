@@ -1,57 +1,79 @@
 package seedu.task.model.task;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's date in KIT.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Represents a Task's date in KIT. Guarantees: immutable; is valid as declared
+ * in {@link #isValidDate(String)}
  */
 public class Date {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be in this format: DD-MM-YYYY";
-    public static final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    public final String value;
+    // add to user guide
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like,"
+                                                        + " tomorrow at 5pm or 4th April";
+    public static final String DEFAULT_DATE = "DEFAULT_DATE";
+    private final java.util.Date value;
+    private static PrettyTimeParser p = new PrettyTimeParser();
 
     /**
      * Validates given date.
      *
-     * @throws IllegalValueException if given date string is invalid.
+     * @throws IllegalValueException
+     *             if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
         String trimmedDate = date.trim();
-        if (!isValidDate(trimmedDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+
+        if (date.equals(DEFAULT_DATE) || trimmedDate.equals("")) {
+            this.value = null;
+        } else {
+
+            if (!isValidDate(trimmedDate)) {
+                throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            }
+
+            List<java.util.Date> dates = p.parse(date);
+            this.value = dates.get(0);
         }
-        this.value = trimmedDate;
     }
 
     /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String input) {
-        format.setLenient(false);
-        try {
-            format.parse(input);
-            return true;
-        } catch (ParseException e) {
+
+        List<java.util.Date> dates = p.parse(input);
+
+        if (dates.isEmpty()) {
             return false;
+        } else {
+            return true;
         }
     }
 
     @Override
     public String toString() {
-        return value;
+        if (value == null) {
+            return new String("");
+        }
+        SimpleDateFormat displayFormat = new SimpleDateFormat("M/d/y h:mm a");
+        PrettyTime pretty = new PrettyTime();
+        return displayFormat.format(value) + ", " + pretty.format(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
-                && this.value.equals(((Date) other).value)); // state check
+                        && this.value.equals(((Date) other).value)); // state
+                                                                     // check
     }
 
     @Override
