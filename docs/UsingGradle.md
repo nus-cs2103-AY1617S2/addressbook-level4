@@ -48,7 +48,7 @@ Gradle commands look like this:
   Creates the `addressbook.jar` file in the `build/jar` folder, _if the current file is outdated_.<br>
   e.g. `./gradlew shadowJar`
   <br>
-  
+
   > To force Gradle to create the JAR file even if the current one is up-to-date, you can '`clean`' first. <br>
     e.g. `./gradlew clean shadowJar`
 <br>
@@ -59,7 +59,7 @@ If we package only our own class files into the JAR file, it will not work prope
   JAR files (i.e. third party libraries) our classes depend on, which is rather inconvenient.
   Therefore, we package all dependencies into a single JAR files, creating what is also known as a _fat_ JAR file.
   To create a fat JAR fil, we use the Gradle plugin [shadow jar](https://github.com/johnrengelman/shadow).
-  
+
 <br><br>
 
 ## Running the application
@@ -116,7 +116,7 @@ relevant Gradle tasks.
  Checks whether the project has the required dependencies to compile and run the main program, and download
  any missing dependencies before compiling the classes.<br>
  See `build.gradle` -> `allprojects` -> `dependencies` -> `compile` for the list of dependencies required.
- 
+
  <br>
 
 * **`compileTestJava`**<br>
@@ -124,3 +124,4 @@ relevant Gradle tasks.
   any missing dependencies before compiling the test classes.<br>
   See `build.gradle` -> `allprojects` -> `dependencies` -> `testCompile` for the list of
   dependencies required.
+  

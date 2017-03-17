@@ -25,7 +25,7 @@ If you would like to customize your AppVeyor build further, you can learn more a
 
 2. Go to https://ci.appveyor.com/. Under `Login`, click on `GitHub` to login with your GitHub account (as shown in Figure 1).
    Enter your GitHub account details if needed.<br><br>
-   
+
    <p align="center"><img src="images/appveyor/login.png"></p>
    <h5 align="center">Figure 1: "GitHub" Button in AppVeyor</h5>
 <br>
@@ -39,7 +39,7 @@ If you would like to customize your AppVeyor build further, you can learn more a
 
     * On your first usage of AppVeyor, you will need to give AppVeyor authorization to your GitHub account. Click on `Authorize GitHub`.<br><br>      <p align="center"><img src="images/appveyor/add-project-2.png"></p>
     <h5 align="center">Figure 3: "GitHub" and "Authorise GitHub" Button in AppVeyor</h5><br>
-    
+
     * This will bring you to a GitHub page that manages the access of third-party applications to your repositories. Depending on whether you are the owner of the repository, you can click either one of the following:<br><br>
 
         - Grant access (as shown in Figure 4):<br><br>

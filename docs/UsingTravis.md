@@ -22,7 +22,7 @@ from [Travis CI Documentation](https://docs.travis-ci.com/).
 
 1. From [this repository](https://github.com/CS2103JAN2017-W14-B4/main), ___fork___ and ___clone___ it to your computer.<br><br>
 
-2. Go to https://travis-ci.org/ and click `Sign in with GitHub` as shown in Figure 1, then enter your GitHub account details if needed.<br><br> 
+2. Go to https://travis-ci.org/ and click `Sign in with GitHub` as shown in Figure 1, then enter your GitHub account details if needed.<br><br>
 <p align="center"><img src="images/signing_in.png"></p><br>
 <h5 align="center">Figure 1: Sign in with GitHub button on Travis Website</h5><br>
 
@@ -79,7 +79,7 @@ Check scripts should print out errors in the following format:
 ```
 SEVERITY:FILENAME:LINE: MESSAGE
 ```
-where 
+where
 * `SEVERITY` is either `ERROR` or `WARN`,
 * `FILENAME` is the path to the file relative to the current directory,
 * `LINE` is the line of the file where the error occurred
