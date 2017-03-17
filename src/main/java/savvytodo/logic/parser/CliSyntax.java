@@ -7,12 +7,14 @@ import savvytodo.logic.parser.ArgumentTokenizer.Prefix;
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
-public class CliSyntax {
+public interface CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
+    public static final Prefix PREFIX_DATE_TIME = new Prefix("dt/");
+    public static final Prefix PREFIX_RECURRENCE = new Prefix("r/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
-    public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
+    public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
 
     /* Patterns definitions */

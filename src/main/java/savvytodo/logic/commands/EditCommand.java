@@ -1,17 +1,19 @@
 package savvytodo.logic.commands;
 
 import java.util.List;
-import java.util.Optional;
 
 import savvytodo.commons.core.Messages;
-import savvytodo.commons.util.CollectionUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
+import savvytodo.logic.parser.CommandTaskDescriptor;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -22,32 +24,34 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the at least one details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [d/DESCRIPTION] [a/ADDRESS ] [c/CATEGORIES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/low d/2pm";
+            + "[NAME] [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
+            + "[r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]...\n"
+            + "Example: " + COMMAND_WORD + " 1 c/CS2103 d/Complete group project component";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     private final int filteredTaskListIndex;
-    private final EditTaskDescriptor editTaskDescriptor;
+    private final CommandTaskDescriptor cmdTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, CommandTaskDescriptor cmdTaskDescriptor) {
         assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
+        assert cmdTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
-        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.cmdTaskDescriptor = new CommandTaskDescriptor(cmdTaskDescriptor);
     }
 
     @Override
@@ -59,7 +63,9 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, cmdTaskDescriptor);
+
+        System.out.println(editedTask.getDateTime());
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -72,92 +78,22 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
-     * edited with {@code editTaskDescriptor}.
+     * edited with {@code cmdTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, CommandTaskDescriptor cmdTaskDescriptor) {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPhone = editTaskDescriptor.getPhone().orElseGet(taskToEdit::getPriority);
-        Description updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getDescription);
-        Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
-        UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
+        Name updatedName = cmdTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Priority updatedPriority = cmdTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Description updatedDescription = cmdTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        Location updatedLocation = cmdTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+        UniqueCategoryList updatedCategories = cmdTaskDescriptor.getCategories().orElseGet(taskToEdit::getCategories);
+        DateTime updatedDateTime = cmdTaskDescriptor.getDateTime().orElseGet(taskToEdit::getDateTime);
+        Recurrence updatedRecurrence = cmdTaskDescriptor.getRecurrence().orElseGet(taskToEdit::getRecurrence);
+        Status updatedStatus = cmdTaskDescriptor.getStatus().orElseGet(taskToEdit::isCompleted);
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCategories);
+        return new Task(updatedName, updatedPriority, updatedDescription, updatedLocation, updatedCategories,
+                updatedDateTime, updatedRecurrence, updatedStatus);
     }
 
-    /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
-     */
-    public static class EditTaskDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Priority> phone = Optional.empty();
-        private Optional<Description> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
-        private Optional<UniqueCategoryList> categories = Optional.empty();
-
-        public EditTaskDescriptor() {}
-
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
-            this.categories = toCopy.getCategories();
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.categories);
-        }
-
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return name;
-        }
-
-        public void setPhone(Optional<Priority> phone) {
-            assert phone != null;
-            this.phone = phone;
-        }
-
-        public Optional<Priority> getPhone() {
-            return phone;
-        }
-
-        public void setEmail(Optional<Description> email) {
-            assert email != null;
-            this.email = email;
-        }
-
-        public Optional<Description> getEmail() {
-            return email;
-        }
-
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return address;
-        }
-
-        public void setCategories(Optional<UniqueCategoryList> categories) {
-            assert categories != null;
-            this.categories = categories;
-        }
-
-        public Optional<UniqueCategoryList> getCategories() {
-            return categories;
-        }
-    }
 }

@@ -1,11 +1,14 @@
 package savvytodo.testutil;
 
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 
 /**
  * A mutable task object. For testing only.
@@ -13,10 +16,13 @@ import savvytodo.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
-    private Description email;
-    private Priority phone;
+    private Description description;
+    private Location location;
+    private Priority priority;
+    private DateTime dateTime;
+    private Recurrence recurrence;
     private UniqueCategoryList categories;
+    private Status isCompleted;
 
     public TestTask() {
         categories = new UniqueCategoryList();
@@ -27,9 +33,9 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
-        this.phone = taskToCopy.getPriority();
-        this.email = taskToCopy.getDescription();
-        this.address = taskToCopy.getAddress();
+        this.priority = taskToCopy.getPriority();
+        this.description = taskToCopy.getDescription();
+        this.location = taskToCopy.getLocation();
         this.categories = taskToCopy.getCategories();
     }
 
@@ -37,16 +43,16 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setEmail(Description email) {
-        this.email = email;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
-    public void setPriority(Priority phone) {
-        this.phone = phone;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setCategories(UniqueCategoryList categories) {
@@ -60,17 +66,46 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Priority getPriority() {
-        return phone;
+        return priority;
     }
 
     @Override
     public Description getDescription() {
-        return email;
+        return description;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        assert dateTime != null;
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setRecurrence(Recurrence recurrence) {
+        assert recurrence != null;
+        this.recurrence = recurrence;
+    }
+
+    @Override
+    public Recurrence getRecurrence() {
+        return recurrence;
+    }
+
+    @Override
+    public Status isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Status isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     @Override
@@ -85,8 +120,8 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("add " + this.getName().name + " ");
+        sb.append("l/" + this.getLocation().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         sb.append("d/" + this.getDescription().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));

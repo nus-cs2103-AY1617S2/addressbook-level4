@@ -7,10 +7,13 @@ import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -22,9 +25,11 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: NAME p/PRIORTY d/DESCRIPTION a/ADDRESS  [c/CATEGORY]...\n"
+            + "Parameters: NAME [dt/START_DATE = END_DATE] [l/LOCATION] [p/PRIORITY_LEVEL] "
+            + "[r/RECURRING_TYPE NUMBER_OF_RECURRENCE] [c/CATEGORY] [d/DESCRIPTION]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "Dinner p/low d/with family a/311, Clementi Ave 2, #02-25 c/friends c/owesMoney";
+            + "Project Meeting dt/05/10/2016 1400 = 05/10/2016 1800 r/weekly 2 c/CS2103 "
+            + "d/Discuss about roles and milestones";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -36,8 +41,8 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String description, String address, Set<String> categories)
-            throws IllegalValueException {
+    public AddCommand(String name, String priority, String description, String location, String[] dateTime,
+            String[] recurrence, Set<String> categories) throws IllegalValueException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
@@ -46,9 +51,13 @@ public class AddCommand extends Command {
                 new Name(name),
                 new Priority(priority),
                 new Description(description),
-                new Address(address),
-                new UniqueCategoryList(categorySet)
+                new Location(location),
+                new UniqueCategoryList(categorySet),
+                new DateTime(dateTime),
+                new Recurrence(recurrence)
         );
+
+        this.toAdd.setStatus(new Status());
     }
 
     @Override
@@ -60,7 +69,6 @@ public class AddCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
     }
 
 }

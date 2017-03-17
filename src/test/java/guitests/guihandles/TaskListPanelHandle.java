@@ -91,7 +91,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getName().fullName.equals(tasks[i].getName().fullName)) {
+            if (!tasksInList.get(startPosition + i).getName().name.equals(tasks[i].getName().name)) {
                 return false;
             }
         }
@@ -103,6 +103,7 @@ public class TaskListPanelHandle extends GuiHandle {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                 .filter(p -> p.getName().fullName.equals(name)).findAny();
+ 
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }

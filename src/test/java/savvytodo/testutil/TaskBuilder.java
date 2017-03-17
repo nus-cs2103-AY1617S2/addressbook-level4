@@ -3,13 +3,16 @@ package savvytodo.testutil;
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
-import savvytodo.model.task.Address;
+import savvytodo.model.task.DateTime;
 import savvytodo.model.task.Description;
+import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
+import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 
 /**
- *
+ * @author A0140016B
  */
 public class TaskBuilder {
 
@@ -39,8 +42,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withAddress(String address) throws IllegalValueException {
-        this.task.setAddress(new Address(address));
+    public TaskBuilder withLocation(String location) throws IllegalValueException {
+        this.task.setLocation(new Location(location));
         return this;
     }
 
@@ -50,7 +53,22 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withDescription(String description) throws IllegalValueException {
-        this.task.setEmail(new Description(description));
+        this.task.setDescription(new Description(description));
+        return this;
+    }
+
+    public TaskBuilder withDateTime(String start, String end) throws IllegalValueException {
+        this.task.setDateTime(new DateTime(start, end));
+        return this;
+    }
+
+    public TaskBuilder withRecurrence(String[] recurrence) throws IllegalValueException {
+        this.task.setRecurrence(new Recurrence(recurrence));
+        return this;
+    }
+
+    public TaskBuilder withStatus(boolean isCompleted) throws IllegalValueException {
+        this.task.setCompleted(new Status(isCompleted));
         return this;
     }
 

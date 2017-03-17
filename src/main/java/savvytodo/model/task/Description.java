@@ -10,15 +10,16 @@ import savvytodo.commons.exceptions.IllegalValueException;
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "There are no constraints";
+            "Description should not be empty";
     public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
+    public static final String DESCRIPTION_DEFAULT_VALUES = "No description given.";
 
     public final String value;
 
     /**
      * Validates given description.
      *
-     * @throws IllegalValueException if given description address string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
