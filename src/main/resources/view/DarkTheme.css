@@ -24,6 +24,7 @@
 }
 
 .text-field {
+    -fx-padding: 10px;
     -fx-font-family: "Consolas";
     -fx-text-fill: white;
     -fx-background-insets: 0;
