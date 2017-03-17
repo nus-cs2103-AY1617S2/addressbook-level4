@@ -31,8 +31,13 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.name = taskToCopy.getName();
-        this.tags = taskToCopy.getTags();
+        // TODO perhaps a better idea for each of the test tasks to always have their dates
+        // this is a temporary hack
+        deadline = Optional.empty();
+        startEndDateTime = Optional.empty();
+
+        name = taskToCopy.getName();
+        tags = taskToCopy.getTags();
     }
 
     public void setName(Name name) {
