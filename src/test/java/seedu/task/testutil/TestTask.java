@@ -116,4 +116,10 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+    @Override
+    public int compareTo(ReadOnlyTask o) {
+        // TODO Auto-generated method stub
+        return(Date.doesPrecede(this.getEndDate(), o.getEndDate()))?-1:1;
+    }
 }
