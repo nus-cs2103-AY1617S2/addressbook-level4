@@ -16,6 +16,7 @@ import seedu.toluist.ui.Ui;
  * AddTaskController is responsible for adding a task (and event)
  */
 public class AddTaskController extends Controller {
+    private static final Logger logger = LogsCenter.getLogger(AddTaskController.class);
 
     private static final String COMMAND_TEMPLATE = "^add"
             + "(\\s+(?<description>.+))?";
@@ -23,8 +24,6 @@ public class AddTaskController extends Controller {
     private static final String COMMAND_ADD_TASK = "add";
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
-
-    private Logger logger = LogsCenter.getLogger(getClass());
 
     public AddTaskController(Ui renderer) {
         super(renderer);
@@ -57,8 +56,7 @@ public class AddTaskController extends Controller {
     }
 
     public HashMap<String, String> tokenize(String command) {
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        return taskTokenizer.tokenize(command, false, true);
+        return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, false, true);
     }
 
     private CommandResult add(TodoList todoList, String description,

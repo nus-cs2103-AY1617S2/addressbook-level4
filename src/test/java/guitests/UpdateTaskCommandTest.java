@@ -61,10 +61,10 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         command = "update " + eventIndex + " " + newerTaskDescription + " enddate/" + newerEndDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerEndDate);
-        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
-        assertFalse(isTaskShown(task4));
+        assertTrue(isTaskShown(task4));
     }
 
     @Test
@@ -98,17 +98,17 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task2));
         assertTrue(isTaskShown(task3));
 
-        // update all parameters for event
+        // update all parameters for event (and test startdate and enddate not in order)
         String newerTaskDescription = "attend CS2103T tutorial";
         LocalDateTime newerStartDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
         command = "update " + eventIndex + " " + newerTaskDescription +
-                " startdate/" + newerStartDate + " enddate/" + newerEndDate;
+                  " enddate/" + newerEndDate + " startdate/" + newerStartDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerStartDate, newerEndDate);
-        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
-        assertFalse(isTaskShown(task4));
+        assertTrue(isTaskShown(task4));
     }
 }
