@@ -65,7 +65,19 @@ public class History<State> {
         }
     }
 
+    /**
+     * forget all the states in the overflow except the peek
+     */
     public void forgetStatesAfter() {
-        overflow.empty();
+        if (!overflow.isEmpty()) {
+            history.push(overflow.pop());
+        }
+        overflow.clear();
+    }
+
+    public boolean isAtMostRecentState() {
+        return overflow.isEmpty();
     }
 }
+
+

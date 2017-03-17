@@ -52,7 +52,7 @@ public class FinishCommand extends Command {
         if (!tasksFinished.isEmpty()) {
             outputMessage += String.format(MESSAGE_FINISH_TASK_SUCCESS, tasksFinished);
         }
-        return new CommandResult(outputMessage);
+        return new CommandResult(outputMessage, true);
     }
 
     public static CommandInfo info() {

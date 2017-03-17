@@ -71,7 +71,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), true);
     }
 
     /**

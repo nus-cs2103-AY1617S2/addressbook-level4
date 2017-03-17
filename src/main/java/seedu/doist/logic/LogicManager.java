@@ -34,7 +34,9 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
 
         CommandResult result = command.execute();
-        model.saveCurrentToHistory();
+        if (result.isMutating) {
+            model.saveCurrentToHistory();
+        }
         return result;
     }
 
