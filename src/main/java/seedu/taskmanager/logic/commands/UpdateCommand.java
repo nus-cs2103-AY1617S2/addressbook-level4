@@ -1,7 +1,5 @@
 package seedu.taskmanager.logic.commands;
 
-//import static seedu.taskmanager.model.task.Date.DATE_VALIDATION_REGEX2;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -97,7 +95,7 @@ public class UpdateCommand extends Command {
      * Stores the details to edit the task with. Each non-empty field value will
      * replace the corresponding field value of the task.
      */
-    public static class UpdateTaskDescriptor {
+  public static class UpdateTaskDescriptor {
 	private Optional<TaskName> taskname = Optional.empty();
 	private Optional<Date> date = Optional.empty();
 	private Optional<StartTime> starttime = Optional.empty();

@@ -6,13 +6,12 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-//import seedu.taskmanager.model.person.Address;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.EndTime;
-import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
@@ -29,8 +28,7 @@ public class XmlAdaptedTask {
     private String startTime;
     @XmlElement(required = true)
     private String date;
-//    @XmlElement(required = true)
-//    private String address;
+
 
     @XmlElement
     private List<XmlAdaptedCategory> categorised = new ArrayList<>();
@@ -72,7 +70,6 @@ public class XmlAdaptedTask {
         final Date date = new Date(this.date);
         final StartTime starttime = new StartTime(this.startTime);
         final EndTime endtime = new EndTime(this.endTime);
-//        final Address address = new Address(this.address);
 //        final UniqueCategoryList categories = new UniqueCategoryList(taskCategories);
         return new Task(taskname, date, starttime, endtime/*, categories*/);
 
