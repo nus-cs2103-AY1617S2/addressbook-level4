@@ -77,8 +77,8 @@ Format: `help`
 Adds a task to the TaskBoss<br>
 Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL]`
 
-> * Date can be written in any format whether using slashes, dashes, or natural language  <br>
-> * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>` <br>
+> * Date can be written in any format whether using slashes, dashes, or natural language.  <br>
+> * Time should be in 24-hour clock format or 12 hour format with AM or PM next to it, i.e `hr:min <PM/AM>`. <br>
 > * Priority level is either `1` (low priority), `2` (medium priority) or `3` (high priority).
 > * Order of optional parameters does not matter.
 > * All fields are optional except TASK_NAME.
@@ -120,10 +120,10 @@ Examples:
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find n/TASK_NAME` 
 
-> * The search is case-sensitive. e.g `Project` will not match `project`
-> * The order of the keywords does not matter. e.g. `meeting project` will match `project meeting`
+> * The search is case-sensitive. e.g `Project` will not match `project`.
+> * The order of the keywords does not matter. e.g. `meeting project` will match `project meeting`.
 > * The name/date/information is searched according to the command user enters.
-> * Only full words will be matched e.g. `meeting` will not match `meetings`
+> * Only full words will be matched e.g. `meeting` will not match `meetings`.
 
 Examples:
 
@@ -139,7 +139,7 @@ Finds tasks whose deadlines contain any of the given keywords.<br>
 Format: `find sd/date and time` `find ed/date and time`
 
 > * The date is searched according to the date format user enters.
-> * The date format for find date command is restricted either DD-MM-YYYY or DD/MM/YY formats 
+> * The date format for find date command is restricted either DD-MM-YYYY or DD/MM/YY formats.
 or MM-DD-YYYY or MM/DD/YYYY, depending on your system's settings.
 
 Examples:
@@ -156,7 +156,7 @@ Deletes the specified task from the TaskBoss.<br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
+> The index refers to the index number shown in the most recent listing. <br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
@@ -171,7 +171,7 @@ Examples:
 
 ### 2.8. Creating a category : `new`
 
-Creates a new category in TaskBoss.<br>
+Creates a new category in TaskBoss. <br>
 Format: `new CATEGORY`
 
 Example:
@@ -180,7 +180,7 @@ Example:
 
 ### 2.9. Clearing tasks by category : `clear`
 
-Clears all tasks under the specified category from TaskBoss.<br>
+Clears all tasks under the specified category from TaskBoss. <br>
 Format: `clear CATEGORY`
 
 > The default categories of TaskBoss are `All Tasks` and `Done`. <br>
@@ -190,7 +190,7 @@ Format: `clear CATEGORY`
 Views a task by entering the task index from TaskBoss.<br>
 Format: `view INDEX`
 
-> Views the task at the specified `INDEX`. <br>
+> Views the task at the specified `INDEX` <br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -238,7 +238,7 @@ Format: `sort`
 Sorts tasks in the TaskBoss by their priorities.<br>
 Format: `sort p`
 
-> Tasks are sorted by descending order of priority levels
+> Tasks are sorted by descending order of priority levels.
 
 ### 2.17. Exiting the program : `exit`
 
