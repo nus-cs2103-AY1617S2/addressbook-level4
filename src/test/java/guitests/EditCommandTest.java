@@ -3,6 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -125,6 +127,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
+        Arrays.sort(expectedTasksList);
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }

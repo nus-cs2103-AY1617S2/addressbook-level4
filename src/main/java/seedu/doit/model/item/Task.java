@@ -224,9 +224,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         if (this.hasStartTime() && other.hasStartTime()) {
             return compareName(other);
         } else if (this.hasStartTime()) {
-            return -1;
-        } else if (other.hasStartTime()) {
             return 1;
+        } else if (other.hasStartTime()) {
+            return -1;
         } else {
             return 0;
         }
