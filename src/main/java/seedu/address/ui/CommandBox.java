@@ -36,7 +36,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.autocomplete = new AutocompleteTrie();
-        this.commandHistory = new CommandHistoryLinkedList();
+        this.commandHistory = CommandHistoryLinkedList.getInstance();
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
@@ -96,19 +96,24 @@ public class CommandBox extends UiPart<Region> {
      * Gets the next executed command from the current command (if iterated through before)
      */
     private void getNextCommand() {
-        String text = commandHistory.next();
-        text = text == null ? commandTextField.getText() : text;
-        commandTextField.setText(text);
-        moveCursorToEndOfField();
+        String command = commandHistory.next();
+        setCommandAndCursorToEnd(command);
     }
 
     /**
      * Gets the previously executed command from the current command
      */
     private void getPreviousCommand() {
-        String text = commandHistory.previous();
-        text = text == null ? commandTextField.getText() : text;
-        commandTextField.setText(text);
+        String command = commandHistory.previous();
+        setCommandAndCursorToEnd(command);
+    }
+
+    /**
+     * Sets the command to the string input given along with the cursor at the end
+     */
+    private void setCommandAndCursorToEnd(String command) {
+        command = command == null ? commandTextField.getText() : command;
+        commandTextField.setText(command);
         moveCursorToEndOfField();
     }
 

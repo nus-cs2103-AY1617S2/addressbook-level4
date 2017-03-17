@@ -5,14 +5,26 @@ import java.util.ListIterator;
 
 /**
  * Class to keep track of previous command executions
+ * Singleton pattern is used as creating multiple instances of CommandHistory would mess up the history of the execution
  */
 public class CommandHistoryLinkedList implements CommandHistory {
+    private static CommandHistoryLinkedList instance;
     private LinkedList<String> history;
     private ListIterator<String> cursor;
     private boolean hasDirection = false;
     private boolean isTraversingBack = true;
 
-    public CommandHistoryLinkedList() {
+    /**
+     * Gets the instance of the CommandHistory
+     */
+    public static CommandHistoryLinkedList getInstance() {
+        if (instance == null) {
+            instance = new CommandHistoryLinkedList();
+        }
+        return instance;
+    }
+
+    private CommandHistoryLinkedList() {
         history = new LinkedList<String>();
         resetIterator();
     }

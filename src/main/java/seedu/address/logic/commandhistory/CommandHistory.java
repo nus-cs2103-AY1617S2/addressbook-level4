@@ -1,5 +1,8 @@
 package seedu.address.logic.commandhistory;
 
+/**
+ * Interface for iterating through the command history
+ */
 public interface CommandHistory {
 
     /**
