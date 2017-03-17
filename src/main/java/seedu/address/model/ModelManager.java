@@ -66,14 +66,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
-    
+
     @Override
     public synchronized void addTask(Task task) {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
-    
+
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
         assert editedTask != null;

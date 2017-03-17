@@ -2,7 +2,6 @@ package seedu.address.model.task;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +16,7 @@ public class TaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
-    /** Get the task with given ID 
+    /** Get the task with given ID
     public Optional<Task> getTaskByID(IdentificationNumber ID) {
         for (Task task : internalList) {
             if (task.getID().equals(ID)) {

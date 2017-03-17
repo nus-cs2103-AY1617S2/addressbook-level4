@@ -54,7 +54,7 @@ public class Task implements ReadOnlyTask {
 
             } else if (param instanceof Tag) {
                 this.tags.add((Tag) param);
-            } 
+            }
         }
     }
 
@@ -73,7 +73,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Getters and setters
      */
-    
+
     /*
     public Task setID(IdentificationNumber ID) {
         this.ID = ID;

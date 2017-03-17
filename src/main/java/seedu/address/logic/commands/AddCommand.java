@@ -9,7 +9,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 
@@ -49,15 +48,15 @@ public class AddCommand extends Command {
                 new UniqueTagList(tagSet)
         );
     }
-    
-    public Deadline CreateDeadline(String deadline) throws IllegalValueException{
-    	return (deadline == null ? new Deadline() : new Deadline(deadline));
+
+    public Deadline CreateDeadline(String deadline) throws IllegalValueException {
+        return (deadline == null ? new Deadline() : new Deadline(deadline));
     }
 
-    public Description CreateDescription(String description){
-    	return (description == null ? new Description() : new Description(description));
+    public Description CreateDescription(String description) {
+        return (description == null ? new Description() : new Description(description));
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
