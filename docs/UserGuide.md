@@ -50,8 +50,9 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
+Format: `add NAME [s/START_TIME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
 
+> * Task can have a start time
 > * Task can have a deadline
 > * Task can have a priority ranking from 1 - 5
 > * Task can have any number of tags (including 0)
@@ -60,6 +61,7 @@ Examples:
 
 * `add Buy Printer`
 * `add Do CS2103 Homework p/1 t/CS2103 n/Buy from Challenger.`
+* `add Do CS2101 Homework s/tomorrow d/next week.`
 
 ### 2.3. Listing out uncomplete tasks : `list`
 
@@ -87,7 +89,7 @@ Examples:
 * `edit 2 t/`<br>
   Edits clears all existing tags of the task in Index 2.
 
-  
+
 ### 2.5. Mark task
 
 Marks a task as complete.<br>
@@ -130,7 +132,7 @@ Examples:
 * `schedule 2 07/07/17`<br>
 Adds a deadline of 7th July 2017 to task at index 2.
 
-### 2.7. Find specific tasks 
+### 2.7. Find specific tasks
 
 Retrieve tasks based on various conditions.<br>
 Format: `find [d/DEADLINE] [p/PRIORITY] [t/TAG]`
@@ -162,9 +164,9 @@ There is no need to save manually.
 
 * **Add**  `add NAME [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]` <br>
   e.g. `add Do CS2103 Homework p/1 t/CS2103 n/Buy from Challenger.`
-  
+
 * **Edit**  `edit INDEX [NAME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]` <br>
-  e.g. `edit 1 Finish CS2103 work`  
+  e.g. `edit 1 Finish CS2103 work`
 
 
 * **Find** : `find [d/DEADLINE] [p/PRIORITY] [t/TAG]` <br>

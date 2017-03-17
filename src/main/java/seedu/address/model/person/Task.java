@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -14,22 +12,31 @@ import seedu.address.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private Start start;
+    private Deadline deadline;
+    private Priority priority;
     private UniqueTagList tags;
+    private Notes notes;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, tags);
+    public Task(Name name, Start start, Deadline deadline, Priority priority, UniqueTagList tags, Notes notes) {
+        assert !CollectionUtil.isAnyNull(name, start, deadline, tags, notes);
         this.name = name;
+        this.start = start;
+        this.deadline = deadline;
+        this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.notes = notes;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getName(), source.getStart(), source.getDeadline(),
+                source.getPriority(), source.getTags(), source.getNotes());
     }
 
     public void setName(Name name) {
@@ -40,6 +47,36 @@ public class Task implements ReadOnlyTask {
     @Override
     public Name getName() {
         return name;
+    }
+
+    public void setStart(Start start) {
+        assert start != null;
+        this.start = start;
+    }
+
+    @Override
+    public Start getStart() {
+        return start;
+    }
+
+    public void setDeadline(Deadline deadline) {
+        assert deadline != null;
+        this.deadline = deadline;
+    }
+
+    @Override
+    public Deadline getDeadline() {
+        return deadline;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
@@ -54,6 +91,16 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    @Override
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Notes notes) {
+        assert notes != null;
+        this.notes = notes;
+    }
+
     /**
      * Updates this person with the details of {@code replacement}.
      */
@@ -61,7 +108,11 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
+        this.setStart(replacement.getStart());
+        this.setDeadline(replacement.getDeadline());
+        this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
+        this.setNotes(replacement.getNotes());
     }
 
     @Override
