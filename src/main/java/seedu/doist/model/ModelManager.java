@@ -247,7 +247,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //========== handle undo and redo operation =================================================
+    //========== handle undo and re-do operation =================================================
     public void saveCurrentToHistory() {
         todoListHistory.forgetStatesAfter();
         TodoList toSave = new TodoList();
