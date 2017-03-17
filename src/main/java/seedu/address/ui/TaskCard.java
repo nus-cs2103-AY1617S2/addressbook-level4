@@ -37,8 +37,7 @@ public class TaskCard extends UiPart<Region> {
 
         if (task.getPriority().value == 0) {
             priority.setText("Priority: ");
-        }
-        else {
+        } else {
             priority.setText("Priority: " + task.getPriority().value);
         }
         initTags(task);
