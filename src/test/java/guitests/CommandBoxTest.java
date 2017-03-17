@@ -12,7 +12,7 @@ import seedu.geekeep.ui.CommandBox;
 
 public class CommandBoxTest extends AddressBookGuiTest {
 
-    private static final String COMMAND_THAT_SUCCEEDS = "select 3";
+    private static final String COMMAND_THAT_SUCCEEDS = "find NOSUCHTASKEXIST";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
     private ArrayList<String> defaultStyleOfCommandBox;
