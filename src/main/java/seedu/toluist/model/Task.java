@@ -2,8 +2,8 @@ package seedu.toluist.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Objects;
+import java.util.TreeSet;
 
 import seedu.toluist.commons.util.DateTimeUtil;
 
@@ -13,7 +13,7 @@ import seedu.toluist.commons.util.DateTimeUtil;
 public class Task implements Comparable<Task> {
 
     // List of tags is unique
-    private HashSet<Tag> allTags = new HashSet<>();
+    private TreeSet<Tag> allTags = new TreeSet<>();
     private String description;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
@@ -121,10 +121,10 @@ public class Task implements Comparable<Task> {
     }
 
     public void replaceTags(Collection<Tag> tags) {
-        this.allTags = new HashSet<>(tags);
+        this.allTags = new TreeSet<>(tags);
     }
 
-    public HashSet<Tag> getAllTags() {
+    public TreeSet<Tag> getAllTags() {
         return allTags;
     }
 

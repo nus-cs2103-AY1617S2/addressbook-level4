@@ -2,12 +2,17 @@ package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
@@ -22,6 +27,8 @@ public class AddTaskController extends Controller {
             + "(\\s+(?<description>.+))?";
 
     private static final String COMMAND_ADD_TASK = "add";
+
+    private static final String TAGS_SEPARATOR_REGEX = " ";
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
 
@@ -45,7 +52,16 @@ public class AddTaskController extends Controller {
         String endDateToken = tokens.get(TaskTokenizer.TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.parseDateString(endDateToken);
 
-        commandResult = add(todoList, description, startDateTime, endDateTime);
+        String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
+        String[] tagStrings = tagsToken.split(TAGS_SEPARATOR_REGEX);
+        List<String> tagList = Arrays.asList(tagStrings);
+        Set<Tag> tags = (Set<Tag>) tagList.
+                               stream().
+                               filter(tagString -> !tagString.isEmpty()).
+                               map(tagString -> new Tag((String) tagString)).
+                               collect(Collectors.toSet());
+
+        commandResult = add(todoList, description, startDateTime, endDateTime, tags);
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
@@ -60,8 +76,12 @@ public class AddTaskController extends Controller {
     }
 
     private CommandResult add(TodoList todoList, String description,
-            LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        todoList.add(new Task(description, startDateTime, endDateTime));
+            LocalDateTime startDateTime, LocalDateTime endDateTime, Set<Tag> tags) {
+        Task task = new Task(description, startDateTime, endDateTime);
+        if (!tags.isEmpty()) {
+            task.replaceTags(tags);
+        }
+        todoList.add(task);
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
