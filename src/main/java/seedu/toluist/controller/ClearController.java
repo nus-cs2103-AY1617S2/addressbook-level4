@@ -17,6 +17,7 @@ import seedu.toluist.ui.UiStore;
 public class ClearController extends Controller {
     private static final String RESULT_MESSAGE = "All tasks cleared.";
     private static final String COMMAND_WORD = "clear";
+    private static final String COMMAND_REGEX = "^clear *";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -42,7 +43,7 @@ public class ClearController extends Controller {
     }
 
     public boolean matchesCommand(String command) {
-        return command.equals(COMMAND_WORD);
+        return command.matches(COMMAND_REGEX);
     }
 
     public static String[] getCommandWords() {
