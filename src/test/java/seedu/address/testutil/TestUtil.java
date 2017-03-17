@@ -16,7 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TodoCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -29,16 +29,13 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.TodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.model.todo.Name;
+import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.model.todo.Todo;
+import seedu.address.storage.XmlSerializableTodoList;
 
 /**
  * A utility class for test cases.
@@ -52,7 +49,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final Todo[] SAMPLE_TODO_DATA = getSampleTodoData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -71,19 +68,19 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Person[] getSamplePersonData() {
+    private static Todo[] getSampleTodoData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Person[]{
-                new Person(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Person(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Person(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Person(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Person(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Person(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Person(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Person(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+            return new Todo[]{
+                new Todo(new Name("Ali Muster"), new UniqueTagList()),
+                new Todo(new Name("Boris Mueller"), new UniqueTagList()),
+                new Todo(new Name("Carl Kurz"), new UniqueTagList()),
+                new Todo(new Name("Daniel Meier"), new UniqueTagList()),
+                new Todo(new Name("Elle Meyer"), new UniqueTagList()),
+                new Todo(new Name("Fiona Kunz"), new UniqueTagList()),
+                new Todo(new Name("George Best"), new UniqueTagList()),
+                new Todo(new Name("Hoon Meier"), new UniqueTagList()),
+                new Todo(new Name("Ida Mueller"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -107,8 +104,8 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+    public static List<Todo> generateSampleTodoData() {
+        return Arrays.asList(SAMPLE_TODO_DATA);
     }
 
     /**
@@ -127,7 +124,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTodoList(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -144,8 +141,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+    public static XmlSerializableTodoList generateSampleStorageTodoList() {
+        return new XmlSerializableTodoList(new TodoList());
     }
 
     /**
@@ -280,49 +277,49 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of todos.
+     * @param todos The list of todos
+     * @param todosToRemove The subset of todos.
+     * @return The modified todos after removal of the subset from todos.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
-        List<TestPerson> listOfPersons = asList(persons);
-        listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+    public static TestTodo[] removeTodosFromList(final TestTodo[] todos, TestTodo... todosToRemove) {
+        List<TestTodo> listOfTodos = asList(todos);
+        listOfTodos.removeAll(asList(todosToRemove));
+        return listOfTodos.toArray(new TestTodo[listOfTodos.size()]);
     }
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the todo at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
-        return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestTodo[] removeTodoFromList(final TestTodo[] list, int targetIndexInOneIndexedFormat) {
+        return removeTodosFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces todos[i] with a todo.
+     * @param todos The array of todos.
+     * @param todo The replacement todo
+     * @param index The index of the todo to be replaced.
      * @return
      */
-    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestTodo[] replaceTodoFromList(TestTodo[] todos, TestTodo todo, int index) {
+        todos[index] = todo;
+        return todos;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends todos to the array of todos.
+     * @param todos A array of todos.
+     * @param todosToAdd The todos that are to be appended behind the original array.
+     * @return The modified array of todos.
      */
-    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
-        List<TestPerson> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+    public static TestTodo[] addTodosToList(final TestTodo[] todos, TestTodo... todosToAdd) {
+        List<TestTodo> listOfTodos = asList(todos);
+        listOfTodos.addAll(asList(todosToAdd));
+        return listOfTodos.toArray(new TestTodo[listOfTodos.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -333,8 +330,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndTodo(TodoCardHandle card, ReadOnlyTodo todo) {
+        return card.isSameTodo(todo);
     }
 
     public static Tag[] getTagList(String tags) {
