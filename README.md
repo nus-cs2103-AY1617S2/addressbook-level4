@@ -1,6 +1,7 @@
 # Task Manager
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W15-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W15-B1/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/emc2if8afmp5hpeq/branch/master?svg=true)](https://ci.appveyor.com/project/shinlos/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W15-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W15-B1/main?branch=master)
 
 <img src="docs/images/UISketch.jpg" width="600"><br>
