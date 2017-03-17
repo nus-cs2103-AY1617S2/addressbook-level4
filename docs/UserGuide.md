@@ -62,7 +62,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[done](#211-marking-a-task-done--done)               |Mark task as done      |
 |[undo](#212-undoing-a-command--undo)                 |Undo a task            |
 |[sort](#213-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
-|[save](#225-exporting-the-data--save)                |Save TaskBoss          |
+|[save](#215-exporting-the-data--save)                |Save TaskBoss          |
 |[exit](#216-exiting-the-program--exit)               |Exit TaskBoss          |
 
 <br>
