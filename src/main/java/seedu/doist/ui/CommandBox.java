@@ -65,9 +65,7 @@ public class CommandBox extends UiPart<Region> {
     //Handle Up key press
     private void handleUpKey() {
         String userCommandText = commandHistory.getPreviousState();
-        if (userCommandText == null) {
-            setCommandInput("");
-        } else {
+        if (userCommandText != null) {
             setCommandInput(userCommandText);
         }
     }

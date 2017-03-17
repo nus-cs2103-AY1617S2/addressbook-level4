@@ -1,5 +1,6 @@
 package seedu.doist.commons.util;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class History<State> {
@@ -29,11 +30,16 @@ public class History<State> {
 
     /**
      * Method that returns the previous state entered by user
-     * Returns null if history is empty
+     * Return null if history is empty
      */
     public State getPreviousState() {
-        overflow.push(history.pop());
-        return overflow.peek();
+        try {
+            State previousState = history.pop();
+            overflow.push(previousState);
+            return previousState;
+        } catch (EmptyStackException e) {
+            return null;
+        }
     }
 
     /**
@@ -41,8 +47,12 @@ public class History<State> {
      * Returns null if overflow is empty
      */
     public State getNextState() {
-        history.push(overflow.pop());
-        return history.peek();
+        try {
+            history.push(overflow.pop());
+            return overflow.peek();
+        } catch (EmptyStackException e) {
+            return null;
+        }
     }
 
     /**
