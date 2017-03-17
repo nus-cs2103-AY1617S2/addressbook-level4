@@ -47,7 +47,7 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
 
-    public static String config_file = Config.DEFAULT_CONFIG_FILE;
+    public static String CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
     @Override
     public void init() throws Exception {
@@ -131,23 +131,23 @@ public class MainApp extends Application {
 
         if (configFilePath != null) {
             logger.info("Custom Config file specified " + configFilePath);
-            config_file = configFilePath;
+            CONFIG_FILE = configFilePath;
         }
 
-        logger.info("Using config file : " + config_file);
+        logger.info("Using config file : " + CONFIG_FILE);
 
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(config_file);
+            Optional<Config> configOptional = ConfigUtil.readConfig(CONFIG_FILE);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + config_file + " is not in the correct format. "
+            logger.warning("Config file at " + CONFIG_FILE + " is not in the correct format. "
                     + "Using default config properties");
             initializedConfig = new Config();
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, config_file);
+            ConfigUtil.saveConfig(initializedConfig, CONFIG_FILE);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -226,14 +226,14 @@ public class MainApp extends Application {
         config.setTaskManagerFilePath(taskManagerFilePath);
 
         try {
-            ConfigUtil.saveConfig(config, config_file);
+            ConfigUtil.saveConfig(config, CONFIG_FILE);
         } catch (IOException e) {
             logger.severe("Failed to save config " + StringUtil.getDetails(e));
             this.stop();
         }
 
         logger.info("Setting UI with new logic");
-        initApplicationFromConfig(config_file, false);
+        initApplicationFromConfig(CONFIG_FILE, false);
 
         try {
             storage.saveTaskManager(model.getTaskManager());
