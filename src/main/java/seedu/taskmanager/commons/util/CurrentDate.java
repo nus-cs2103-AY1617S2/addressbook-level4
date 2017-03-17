@@ -214,7 +214,7 @@ public class CurrentDate {
 	/**
 	 * If user inputs a day, function will changes the day given by user to the
 	 * actual date relative to the current calender.
-	 * 
+	 *
 	 * @param givenDay
 	 * @return updatedDate in DD/MM/YY format
 	 * @throws IllegalValueException

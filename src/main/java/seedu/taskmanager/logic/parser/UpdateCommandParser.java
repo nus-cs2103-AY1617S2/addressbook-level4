@@ -92,7 +92,7 @@ public class UpdateCommandParser {
      * private Optional<UniqueCategoryList>
      * parseCategoriesForUpdate(Collection<String> categories) throws
      * IllegalValueException { assert categories != null;
-     * 
+     *
      * if (categories.isEmpty()) { return Optional.empty(); } Collection<String>
      * categorySet = categories.size() == 1 && categories.contains("") ?
      * Collections.emptySet() : categories; return

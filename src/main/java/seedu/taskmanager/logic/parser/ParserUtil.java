@@ -58,7 +58,7 @@ public class ParserUtil {
 
     /**
      * Splits a preamble string into ordered fields.
-     * 
+     *
      * @return A list of size {@code numFields} where the ith element is the ith
      *         field value if specified in the input, {@code Optional.empty()}
      *         otherwise.

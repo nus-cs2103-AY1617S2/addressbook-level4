@@ -96,7 +96,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Updates the task in the list at position {@code index} with
      * {@code editedReadOnlyTask}. {@code ProcrastiNomore}'s category list will
      * be updated with the categories of {@code editedReadOnlyTask}.
-     * 
+     *
      * @see #syncMasterCategoryListWith(Task)
      *
      * @throws DuplicateTaskException
@@ -126,13 +126,13 @@ public class TaskManager implements ReadOnlyTaskManager {
      * private void syncMasterCategoryListWith(Task task) { final
      * UniqueCategoryList taskCategories = task.getCategories();
      * categories.mergeFrom(taskCategories);
-     * 
+     *
      * // Create map with values = category object references in the master list
      * // used for checking task category references final Map<Category,
      * Category> masterCategoryObjects = new HashMap<>();
      * categories.forEach(category -> masterCategoryObjects.put(category,
      * category));
-     * 
+     *
      * // Rebuild the list of task categories to point to the relevant
      * categories in the master category list. final Set<Category>
      * correctCategoryReferences = new HashSet<>();
@@ -143,7 +143,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Ensures that every category in these tasks: - exists in the master list
      * {@link #categories} - points to a Category object in the master list
-     * 
+     *
      * @see #syncMasterCategoryListWith(Task)
      */
     /*

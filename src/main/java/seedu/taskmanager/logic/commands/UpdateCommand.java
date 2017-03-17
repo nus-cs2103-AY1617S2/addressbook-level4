@@ -162,7 +162,7 @@ public class UpdateCommand extends Command {
 	/*
 	 * public void setCategories(Optional<UniqueCategoryList> categories) {
 	 * assert categories != null; this.categories = categories; }
-	 * 
+	 *
 	 * public Optional<UniqueCategoryList> getCategories() { return
 	 * categories; }
 	 */

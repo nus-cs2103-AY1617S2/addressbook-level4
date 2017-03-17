@@ -87,7 +87,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Replaces this task's categories with the categories in the argument
      * category list.
-     * 
+     *
      * public void setCategories(UniqueCategoryList replacement) {
      * categories.setCategories(replacement); }
      */
