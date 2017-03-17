@@ -55,8 +55,8 @@ public class XmlToDoListStorage implements ToDoListStorage {
     }
 
     @Override
-    public void saveToDoList(ReadOnlyToDoList addressBook) throws IOException {
-        saveToDoList(addressBook, filePath);
+    public void saveToDoList(ReadOnlyToDoList toDoList) throws IOException {
+        saveToDoList(toDoList, filePath);
     }
 
     /**
