@@ -30,7 +30,7 @@ public class AddCommandParser {
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_DEADLINE).orElse(null),
                     //ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION).get()),
-                    argsTokenizer.getOptionalValue(PREFIX_DESCRIPTION).orElse(""),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(null),
                     //argsTokenizer.getValue(PREFIX_ID).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );

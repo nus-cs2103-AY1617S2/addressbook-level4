@@ -4,14 +4,12 @@
         <name>Go fly kite</name>
         <deadline>Mon, Feb 27 2017</deadline>
         <description>Flying kite at park</description>
-        <id>1</id>
         <tagged>friends</tagged>
     </tasks>
     <tasks>
         <name>Buy christmas presents</name>
         <deadline>Sat, Dec 23 2017</deadline>
         <description>Buy presents for Familiy and Friends</description>
-        <id>2</id>
         <tagged>christmas</tagged>
         <tagged>presents</tagged>
     </tasks>
@@ -19,7 +17,6 @@
         <name>Meeting with Charlotte Oliveiro</name>
         <deadline>Thu, Feb 02 2017</deadline>
         <description>Prepare for Meeting with Charlotte</description>
-        <id>3</id>
         <tagged>important</tagged>
         <tagged>meeting</tagged>
     </tasks>
@@ -27,7 +24,6 @@
         <name>Dinner outing with family</name>
         <deadline>Sun, Dec 17 2017</deadline>
         <description>Going to the zoo with family</description>
-        <id>4</id>
         <tagged>zoo</tagged>
         <tagged>family</tagged>
     </tasks>
@@ -35,14 +31,12 @@
         <name>Class reunion</name>
         <deadline>Mon, Jan 15 2018</deadline>
         <description>Secondary school class reunion</description>
-        <id>5</id>
         <tagged>classmates</tagged>
     </tasks>
     <tasks>
         <name>Company meeting</name>
         <deadline>Thu, May 04 2017</deadline>
         <description>Prepare for company meeting</description>
-        <id>6</id>
         <tagged>important</tagged>
         <tagged>meeting</tagged>
     </tasks>
@@ -50,7 +44,6 @@
         <name>newtask</name>
         <deadline>Fri, Mar 10 2017</deadline>
         <description>buy eggs</description>
-        <id>12</id>
         <tagged>no</tagged>
     </tasks>
     <tags>friends</tags>

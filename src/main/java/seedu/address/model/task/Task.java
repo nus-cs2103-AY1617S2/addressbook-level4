@@ -32,7 +32,6 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name);
 
         this.name = name;
-        this.ID = new IdentificationNumber();
         this.deadline = new Deadline();
         this.description = new Description();
         this.tags = new UniqueTagList();
@@ -78,7 +77,7 @@ public class Task implements ReadOnlyTask {
      * Getters and setters
      */
     public Task setID(IdentificationNumber ID) {
-        this.ID = new IdentificationNumber(1);
+        this.ID = ID;
         return this;
     }
 

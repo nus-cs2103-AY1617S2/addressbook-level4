@@ -25,11 +25,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby dl/19/08/2014 ds/bobby@gmail.com id/555 t/husband";
+        String detailsToEdit = "Bobby dl/19/08/2014 ds/bobby@gmail.com t/husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withDeadline("19/08/2014")
-                .withDescription("bobby@gmail.com").withID("555").withTags("husband").build();
+                .withDescription("bobby@gmail.com").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -99,8 +99,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
         //commandBox.runCommand("edit 1 e/yahoo!!!");
         //assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 id/a");
-        assertResultMessage(IdentificationNumber.MESSAGE_ID_CONSTRAINTS);
+        //commandBox.runCommand("edit 1 id/a");
+        //assertResultMessage(IdentificationNumber.MESSAGE_ID_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
