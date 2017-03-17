@@ -33,8 +33,9 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         command.setData(model);
 
+        CommandResult result = command.execute();
         model.saveCurrentToHistory();
-        return command.execute();
+        return result;
     }
 
     @Override

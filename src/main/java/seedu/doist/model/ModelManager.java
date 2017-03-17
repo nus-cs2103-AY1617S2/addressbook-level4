@@ -45,6 +45,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.todoList = new TodoList(todoList);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
+
+        saveCurrentToHistory();
     }
 
     public ModelManager() {
@@ -255,7 +257,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void recoverPreviousTodoList() {
         TodoList previousTodoList = todoListHistory.getPreviousState();
-        System.out.println(previousTodoList);
         if (previousTodoList != null) {
             todoList.resetData(previousTodoList);
         }
@@ -263,7 +264,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void recoverNextTodoList() {
         TodoList nextTodoList = todoListHistory.getNextState();
-        System.out.println(nextTodoList);
         if (nextTodoList != null) {
             todoList.resetData(nextTodoList);
         }
