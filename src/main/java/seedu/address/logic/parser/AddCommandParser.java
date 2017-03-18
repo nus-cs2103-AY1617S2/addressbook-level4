@@ -30,17 +30,7 @@ public class AddCommandParser {
         this.args = arguments;
         String tags[] = {};
 
-        /*
-         * Pattern pattern = Pattern.compile( CliSyntax.WILDCARD +
-         * CliSyntax.WITH_TAGS + CliSyntax.WILDCARD); matcher =
-         * pattern.matcher(args); if (matcher.matches()) { matcher =
-         * Pattern.compile(CliSyntax.WITH_TAGS).matcher(args); int
-         * lastOccuranceEnd = 0; int lastOccuranceStart = 0; while
-         * (matcher.find()) { lastOccuranceEnd = matcher.end();
-         * lastOccuranceStart = matcher.start(); } tags =
-         * args.substring(lastOccuranceEnd + 1, args.length()) .split(" "); args
-         * = args.substring(0, lastOccuranceStart); }
-         */
+        // find and remove tags
         String tagsString = getArgument(CliSyntax.TAGS);
         System.out.println("tags: " + tagsString);
         if (tagsString != null)
@@ -48,54 +38,8 @@ public class AddCommandParser {
         for (String tag : tags)
             System.out.println(tag);
 
-        // args do not have tags now
-        /*
-         * pattern = Pattern.compile( CliSyntax.WILDCARD +
-         * CliSyntax.WITH_DEADLINE_AND_STARTING_TIME + CliSyntax.WILDCARD);
-         * matcher = pattern.matcher(args); if (matcher.matches()) { matcher =
-         * Pattern.compile(CliSyntax.WITH_DEADLINE).matcher(args); int
-         * lastOccuranceEnd = args.length() - 1; int lastOccuranceStart = 0;
-         * while (matcher.find()) { lastOccuranceStart = matcher.start();
-         * lastOccuranceEnd = matcher.end(); } List<Date> dates = new
-         * PrettyTimeParser() .parse(args.substring(lastOccuranceEnd + 1,
-         * args.length())); args = args.substring(0, lastOccuranceStart);
-         * matcher = Pattern.compile(CliSyntax.WITH_STARTING_TIME)
-         * .matcher(args); lastOccuranceEnd = args.length() - 1;
-         * lastOccuranceStart = 0; while (matcher.find()) { lastOccuranceStart =
-         * matcher.start(); lastOccuranceEnd = matcher.end(); } dates.addAll(new
-         * PrettyTimeParser().parse( args.substring(lastOccuranceEnd + 1,
-         * args.length()))); if (dates .size() >=
-         * LEAST_DATES_FOR_DEADLINE_AND_STARTING_TIME_TASK) { String taskName =
-         * args.substring(0, lastOccuranceStart).trim(); try { return new
-         * AddCommand(taskName, dates.get(1), dates.get(0), tags); } catch
-         * (IllegalValueException ive) { return new
-         * IncorrectCommand(ive.getMessage()); } } }
-         */
-
-        /*
-         * pattern = Pattern.compile(CliSyntax.WILDCARD +
-         * CliSyntax.WITH_DEADLINE_ONLY + CliSyntax.WILDCARD); matcher =
-         * pattern.matcher(args); if (matcher.matches()) { matcher =
-         * Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY) .matcher(args); int
-         * lastOccuranceEnd = args.length() - 1; int lastOccuranceStart = 0;
-         * while (matcher.find()) { lastOccuranceStart = matcher.start();
-         * lastOccuranceEnd = matcher.end(); } List<Date> dates = new
-         * PrettyTimeParser() .parse(args.substring(lastOccuranceEnd + 1,
-         * args.length())); args = args.substring(0, lastOccuranceStart); if
-         * (dates.size() >= LEAST_DATES_FOR_DEADLINE_ONLY_TASK) { matcher =
-         * Pattern.compile(CliSyntax.WITH_DEADLINE_ONLY) .matcher(args); int
-         * lastOccurance = args.length() - 1; while (matcher.find()) {
-         * lastOccurance = matcher.start(); } String taskName =
-         * args.substring(0, lastOccurance).trim(); try { return new
-         * AddCommand(taskName, dates.get(0), tags); } catch
-         * (IllegalValueException ive) { return new
-         * IncorrectCommand(ive.getMessage()); } } }
-         *
-         * try { return new AddCommand(args.trim(), tags); } catch
-         * (IllegalValueException ive) { return new
-         * IncorrectCommand(ive.getMessage()); }
-         */
-
+        // find and remove starting time and deadline if the syntax is "<name>
+        // from <starting time> to <deadline>"
         List<Date> startingTimeAndDeadline = getStartingTimeAndDeadline();
         if (startingTimeAndDeadline != null) {
             try {
@@ -109,6 +53,9 @@ public class AddCommandParser {
                 return new IncorrectCommand(e.getMessage());
             }
         }
+
+        // find and remove starting time and deadline if the syntax is "<name>
+        // due <deadline>"
         Date deadline = getDeadline();
         if (deadline != null) {
             try {
