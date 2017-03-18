@@ -34,13 +34,13 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 2.1. Viewing help : `HELP`
+### 2.1. Viewing help : `help`
 
 Format: `help`
 
 > * Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task: `ADD`
+### 2.2. Adding a task: `add`
 
 Adds a task to DoOrDie<br />
 Format: `add TASKNAME [# LABEL...] ([by DEADLINE] | [from START_DATE to END_DATE]) [repeat (hourly|daily|weekly|monthly|yearly)]`
@@ -66,7 +66,7 @@ Examples:
  * `add Make baby by next wednesday`
  * `add go to school repeat daily`
 
-### 2.3 Listing all tasks : `LIST`
+### 2.3 Listing all tasks : `list`
 
 Shows a list of all tasks in DoOrDie. Able to filter by type of task (task), or based on status of task such as completed or outstanding.
 
