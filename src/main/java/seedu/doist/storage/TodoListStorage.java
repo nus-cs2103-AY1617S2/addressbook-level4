@@ -31,14 +31,14 @@ public interface TodoListStorage {
 
     /**
      * Saves the given {@link ReadOnlyTodoList} to the storage.
-     * @param addressBook cannot be null.
+     * @param todoList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTodoList(ReadOnlyTodoList addressBook) throws IOException;
+    void saveTodoList(ReadOnlyTodoList todoList) throws IOException;
 
     /**
      * @see #saveTodoList(ReadOnlyTodoList)
      */
-    void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException;
+    void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException;
 
 }
