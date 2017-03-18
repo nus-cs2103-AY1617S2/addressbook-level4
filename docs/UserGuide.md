@@ -366,6 +366,10 @@ Format: `alias ALIAS \for COMMAND_WORD`
 > - `ALIAS` should have no spaces, we suggest you use underscores to replace spaces. <br>
 > - If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word. Do try again!
 
+You can then use `view_alias` to view the list of aliases!
+<br>
+Format: `view_alias`
+
 ### 3.12 Exiting the program : `exit`
 
 Use `exit` to exit Doist. Don't forget about us! <br>
