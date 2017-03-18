@@ -24,10 +24,10 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 s/01/01/2017 d/08/09/2018 t/husband";
+        String detailsToEdit = "Alson p/1 s/01/01/2017 d/08/09/2018 t/husband";
         int ezDoIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("1")
+        TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("1")
                 .withStartDate("01/01/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
@@ -36,10 +36,10 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_shortCommand_success() throws Exception {
-        String detailsToEdit = "Blobby p/3 s/02/02/2017 d/10/10/2019 t/guy";
+        String detailsToEdit = "Alson p/3 s/02/02/2017 d/10/10/2019 t/guy";
         int ezDoIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Blobby").withPriority("3")
+        TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("02/02/2017").withDueDate("10/10/2019")
                 .withTags("guy").build();
 
@@ -49,37 +49,37 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_eachFieldSpecified_success() throws Exception {
 
-        commandBox.runCommand("edit 1 Bobby p/1 s/01/01/2017 d/08/09/2018 t/husband");
+        commandBox.runCommand("edit 1 Alson p/1 s/01/01/2017 d/08/09/2018 t/husband");
 
         int ezDoIndex = 1;
 
         String detailsToEdit = "p/3";
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+        TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("01/01/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
-        detailsToEdit = "Bobby s/11/11/2017";
+        detailsToEdit = "Alson s/11/11/2017";
 
-        editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("11/11/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
-        detailsToEdit = "Bobby d/01/01/2018";
+        detailsToEdit = "Alson d/01/01/2018";
 
-        editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("11/11/2017").withDueDate("01/01/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
-        detailsToEdit = "Bobby t/brother";
+        detailsToEdit = "Alson t/brother";
 
-        editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
+        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("11/11/2017").withDueDate("01/01/2018")
                 .withTags("brother").build();
 
@@ -112,12 +112,13 @@ public class EditCommandTest extends EzDoGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Elle");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Ellll";
         int filteredTaskListIndex = 1;
         int ezDoIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[ezDoIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Ellll").build();
 
         assertEditSuccess(false, filteredTaskListIndex, ezDoIndex, detailsToEdit, editedTask);
     }
