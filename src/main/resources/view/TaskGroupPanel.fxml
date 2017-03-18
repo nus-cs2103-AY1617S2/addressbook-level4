@@ -17,7 +17,7 @@
     </stylesheets>
 	<text> </text>
     <content>
-		<ScrollPane minHeight="0.0" styleClass=".scroll-pane" fitToWidth="true" VBox.vgrow="NEVER">
+		<ScrollPane fx:id="scrollPane" minHeight="0.0" styleClass=".scroll-pane" fitToWidth="true" VBox.vgrow="NEVER">
 			<content>
         		<VBox fx:id="taskGroupView" VBox.vgrow="NEVER" />
 			</content>
