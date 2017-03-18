@@ -5,43 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import seedu.doist.model.ReadOnlyAliasListMap;
+import seedu.doist.storage.util.HashMapElementAdapter;
 
 /**
  * An Immutable AliasListMap that is serializable to XML format
  */
 @XmlRootElement(name = "aliaslistMap")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class XmlSerializableAliasListMap implements ReadOnlyAliasListMap {
 
-    @XmlElementWrapper(name = "aliasListMapping")
-    Map<String, ListWrapper> stringToStringArrMap;
-
-    /**
-     * Wrapper for internal ArrayList of aliasList
-     */
-    class ListWrapper {
-
-        @XmlElementWrapper(name = "aliasList")
-        private List<String> list;
-
-        public void setList(List<String> list) {
-            this.list = list;
-        }
-
-        public List<String> getList() {
-            return list;
-        }
-    }
+    @XmlElement(name = "aliasListMap")
+    @XmlJavaTypeAdapter(HashMapElementAdapter.class)
+    Map<String, List<String>> aliasListMap;
 
     /**
      * Creates an empty XmlSerializableAliasListMap.
      * This empty constructor is required for marshalling to XML format.
      */
     public XmlSerializableAliasListMap() {
-        stringToStringArrMap = new HashMap<String, ListWrapper>();
+        aliasListMap = new HashMap<String, List<String>>();
     }
 
     /**
@@ -52,9 +41,8 @@ public class XmlSerializableAliasListMap implements ReadOnlyAliasListMap {
         Map<String, ArrayList<String>> map = src.getAliasListMapping();
         for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
             System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-            ListWrapper wrapper = new ListWrapper();
-            wrapper.setList(entry.getValue());
-            stringToStringArrMap.put(entry.getKey(), wrapper);
+            List<String> list = entry.getValue();
+            aliasListMap.put(entry.getKey(), list);
         }
     }
 
@@ -64,11 +52,15 @@ public class XmlSerializableAliasListMap implements ReadOnlyAliasListMap {
     @Override
     public Map<String, ArrayList<String>> getAliasListMapping() {
         Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-
-        for (Map.Entry<String, ListWrapper> entry : stringToStringArrMap.entrySet()) {
+        for (Map.Entry<String, List<String>> entry : aliasListMap.entrySet()) {
             System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-            ArrayList<String> arrayList = new ArrayList<String>(entry.getValue().getList());
-            map.put(entry.getKey(), arrayList);
+            ArrayList<String> list = null;
+            if (entry.getValue() != null) {
+                list = new ArrayList<String>(entry.getValue());
+            } else {
+                list = new ArrayList<String>();
+            }
+            map.put(entry.getKey(), list);
         }
         return map;
     }
