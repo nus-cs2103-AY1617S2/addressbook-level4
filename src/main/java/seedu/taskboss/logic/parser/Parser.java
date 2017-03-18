@@ -68,6 +68,7 @@ public class Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD_SHORT:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:

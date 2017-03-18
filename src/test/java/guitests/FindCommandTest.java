@@ -20,6 +20,12 @@ public class FindCommandTest extends TaskBossGuiTest {
     }
 
     @Test
+    public void find_usingShortCommand() {
+        assertFindResult("f sd/Dec"); // no results
+        assertFindResult("f sd/Feb 18", td.alice, td.carl, td.daniel); // multiple results
+    }
+
+    @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
         assertFindResult("find n/Jean"); // no results
