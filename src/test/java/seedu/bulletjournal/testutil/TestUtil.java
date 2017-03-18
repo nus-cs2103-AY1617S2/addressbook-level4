@@ -32,7 +32,7 @@ import seedu.bulletjournal.commons.util.XmlUtil;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new TaskName("Ali Muster"), new DueDate("9482424"), new Status("undone"), new StartDate("4th street"), new UniqueTagList()),
-                new Task(new TaskName("Boris Mueller"), new DueDate("87249245"), new Status("undone"), new StartDate("81th street"), new UniqueTagList()),
-                new Task(new TaskName("Carl Kurz"), new DueDate("95352563"), new Status("undone"), new StartDate("wall street"), new UniqueTagList()),
-                new Task(new TaskName("Daniel Meier"), new DueDate("87652533"), new Status("undone"), new StartDate("10th street"), new UniqueTagList()),
-                new Task(new TaskName("Elle Meyer"), new DueDate("9482224"), new Status("undone"), new StartDate("michegan ave"), new UniqueTagList()),
-                new Task(new TaskName("Fiona Kunz"), new DueDate("9482427"), new Status("undone"), new StartDate("little tokyo"), new UniqueTagList()),
-                new Task(new TaskName("George Best"), new DueDate("9482442"), new Status("undone"), new StartDate("4th street"), new UniqueTagList()),
-                new Task(new TaskName("Hoon Meier"), new DueDate("8482424"), new Status("undone"), new StartDate("little india"), new UniqueTagList()),
-                new Task(new TaskName("Ida Mueller"), new DueDate("8482131"), new Status("undone"), new StartDate("chicago ave"), new UniqueTagList())
+                new Task(new TaskName("Ali Muster"), new DueDate("9482424"), new Status("undone"), new BeginDate("4th street"), new UniqueTagList()),
+                new Task(new TaskName("Boris Mueller"), new DueDate("87249245"), new Status("undone"), new BeginDate("81th street"), new UniqueTagList()),
+                new Task(new TaskName("Carl Kurz"), new DueDate("95352563"), new Status("undone"), new BeginDate("wall street"), new UniqueTagList()),
+                new Task(new TaskName("Daniel Meier"), new DueDate("87652533"), new Status("undone"), new BeginDate("10th street"), new UniqueTagList()),
+                new Task(new TaskName("Elle Meyer"), new DueDate("9482224"), new Status("undone"), new BeginDate("michegan ave"), new UniqueTagList()),
+                new Task(new TaskName("Fiona Kunz"), new DueDate("9482427"), new Status("undone"), new BeginDate("little tokyo"), new UniqueTagList()),
+                new Task(new TaskName("George Best"), new DueDate("9482442"), new Status("undone"), new BeginDate("4th street"), new UniqueTagList()),
+                new Task(new TaskName("Hoon Meier"), new DueDate("8482424"), new Status("undone"), new BeginDate("little india"), new UniqueTagList()),
+                new Task(new TaskName("Ida Mueller"), new DueDate("8482131"), new Status("undone"), new BeginDate("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

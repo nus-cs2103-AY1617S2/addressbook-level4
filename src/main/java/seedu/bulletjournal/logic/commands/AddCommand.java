@@ -7,7 +7,7 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -25,8 +25,8 @@ public class AddCommand extends Command {
             + "Parameters: NAME d/PHONE s/EMAIL b/ADDRESS  [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " John Doe d/98765432 s/johnd@gmail.com b/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
     private final Task toAdd;
 
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new TaskName(name), new DueDate(phone), new Status(email), new StartDate(address),
+        this.toAdd = new Task(new TaskName(name), new DueDate(phone), new Status(email), new BeginDate(address),
                 new UniqueTagList(tagSet));
     }
 
@@ -53,7 +53,7 @@ public class AddCommand extends Command {
             model.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

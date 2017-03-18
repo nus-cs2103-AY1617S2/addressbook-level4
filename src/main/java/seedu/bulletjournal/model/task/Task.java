@@ -14,19 +14,19 @@ public class Task implements ReadOnlyTask {
     private TaskName taskName;
     private DueDate dueDate;
     private Status status;
-    private StartDate startDate;
+    private BeginDate beginDate;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, DueDate dueDate, Status status, StartDate startDate, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(taskName, dueDate, status, startDate, tags);
+    public Task(TaskName taskName, DueDate dueDate, Status status, BeginDate beginDate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(taskName, dueDate, status, beginDate, tags);
         this.taskName = taskName;
         this.dueDate = dueDate;
         this.status = status;
-        this.startDate = startDate;
+        this.beginDate = beginDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getTaskName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
     public void setName(TaskName taskName) {
@@ -43,7 +43,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskName getName() {
+    public TaskName getTaskName() {
         return taskName;
     }
 
@@ -67,14 +67,14 @@ public class Task implements ReadOnlyTask {
         return status;
     }
 
-    public void setAddress(StartDate startDate) {
-        assert startDate != null;
-        this.startDate = startDate;
+    public void setAddress(BeginDate beginDate) {
+        assert beginDate != null;
+        this.beginDate = beginDate;
     }
 
     @Override
-    public StartDate getAddress() {
-        return startDate;
+    public BeginDate getAddress() {
+        return beginDate;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setName(replacement.getName());
+        this.setName(replacement.getTaskName());
         this.setPhone(replacement.getPhone());
         this.setEmail(replacement.getEmail());
         this.setAddress(replacement.getAddress());
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, dueDate, status, startDate, tags);
+        return Objects.hash(taskName, dueDate, status, beginDate, tags);
     }
 
     @Override

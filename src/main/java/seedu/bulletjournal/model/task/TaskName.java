@@ -9,14 +9,14 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
  */
 public class TaskName {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_TASKNAME_CONSTRAINTS =
             "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TASKNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
 
@@ -29,7 +29,7 @@ public class TaskName {
         assert name != null;
         String trimmedName = name.trim();
         if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_TASKNAME_CONSTRAINTS);
         }
         this.fullName = trimmedName;
     }
@@ -38,7 +38,7 @@ public class TaskName {
      * Returns true if a given string is a valid person name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+        return test.matches(TASKNAME_VALIDATION_REGEX);
     }
 
 

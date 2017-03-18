@@ -41,7 +41,7 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -222,9 +222,9 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] d/12345 s/undone b/valid, address",
-                TaskName.MESSAGE_NAME_CONSTRAINTS);
+                TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/not_numbers s/undone b/valid, address",
-                DueDate.MESSAGE_PHONE_CONSTRAINTS);
+                DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/notAn@Email.com b/valid, address",
                 Status.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/undone b/valid, address t/invalid_-[.tag",
@@ -276,7 +276,7 @@ public class LogicManagerTest {
         model.addPerson(toBeAdded); // person already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand("add ", toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand("add ", toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -547,7 +547,7 @@ public class LogicManagerTest {
             TaskName taskName = new TaskName("Adam Brown");
             DueDate privatePhone = new DueDate("111111");
             Status status = new Status("undone");
-            StartDate privateAddress = new StartDate("111, alpha street");
+            BeginDate privateAddress = new BeginDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -566,7 +566,7 @@ public class LogicManagerTest {
                     new TaskName("Person " + seed),
                     new DueDate("" + Math.abs(seed)),
                     new Status(seed + "undone"),
-                    new StartDate("House of " + seed),
+                    new BeginDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -578,7 +578,7 @@ public class LogicManagerTest {
 
             cmd.append(command);
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getTaskName().toString());
             cmd.append(" s/").append(p.getEmail());
             cmd.append(" d/").append(p.getPhone());
             cmd.append(" b/").append(p.getAddress());
@@ -666,7 +666,7 @@ public class LogicManagerTest {
                     new TaskName(name),
                     new DueDate("1"),
                     new Status("undone"),
-                    new StartDate("House of 1"),
+                    new BeginDate("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

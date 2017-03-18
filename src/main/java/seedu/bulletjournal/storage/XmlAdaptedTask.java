@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -45,7 +45,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
+        name = source.getTaskName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -68,8 +68,8 @@ public class XmlAdaptedTask {
         final TaskName taskName = new TaskName(this.name);
         final DueDate dueDate = new DueDate(this.phone);
         final Status status = new Status(this.email);
-        final StartDate startDate = new StartDate(this.address);
+        final BeginDate beginDate = new BeginDate(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(taskName, dueDate, status, startDate, tags);
+        return new Task(taskName, dueDate, status, beginDate, tags);
     }
 }

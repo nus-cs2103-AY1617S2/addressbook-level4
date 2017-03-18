@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.testutil.TestTask;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TodoListGuiTest {
 
     @Test
     public void find_nonEmptyList() {

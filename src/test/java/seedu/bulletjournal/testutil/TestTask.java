@@ -1,7 +1,7 @@
 package seedu.bulletjournal.testutil;
 
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -13,7 +13,7 @@ import seedu.bulletjournal.model.task.TaskName;
 public class TestTask implements ReadOnlyTask {
 
     private TaskName taskName;
-    private StartDate startDate;
+    private BeginDate beginDate;
     private Status status;
     private DueDate dueDate;
     private UniqueTagList tags;
@@ -26,10 +26,10 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code personToCopy}.
      */
     public TestTask(TestTask personToCopy) {
-        this.taskName = personToCopy.getName();
+        this.taskName = personToCopy.getTaskName();
         this.dueDate = personToCopy.getPhone();
         this.status = personToCopy.getEmail();
-        this.startDate = personToCopy.getAddress();
+        this.beginDate = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,8 +37,8 @@ public class TestTask implements ReadOnlyTask {
         this.taskName = taskName;
     }
 
-    public void setAddress(StartDate startDate) {
-        this.startDate = startDate;
+    public void setAddress(BeginDate beginDate) {
+        this.beginDate = beginDate;
     }
 
     public void setEmail(Status status) {
@@ -54,7 +54,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskName getName() {
+    public TaskName getTaskName() {
         return taskName;
     }
 
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public StartDate getAddress() {
-        return startDate;
+    public BeginDate getAddress() {
+        return beginDate;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class TestTask implements ReadOnlyTask {
  */
     public String getAddCommand(String addCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append(addCommand + this.getName().fullName + " ");
+        sb.append(addCommand + this.getTaskName().fullName + " ");
         sb.append("b/" + this.getAddress().value + " ");
         sb.append("d/" + this.getPhone().value + " ");
         sb.append("s/" + this.getEmail().value + " ");

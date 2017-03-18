@@ -9,7 +9,7 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.logic.commands.EditCommand;
 import seedu.bulletjournal.model.tag.Tag;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
@@ -17,7 +17,7 @@ import seedu.bulletjournal.testutil.TaskBuilder;
 import seedu.bulletjournal.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TodoListGuiTest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -91,33 +91,33 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
-        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 d/abcd");
 
-        assertResultMessage(DueDate.MESSAGE_PHONE_CONSTRAINTS);
+        assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 s/yahoo!!!");
         assertResultMessage(Status.MESSAGE_EMAIL_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 b/");
-        assertResultMessage(StartDate.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertResultMessage(BeginDate.MESSAGE_ADDRESS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
 
         //Flexible commands of edit are valid but values are invalid
         commandBox.runCommand("edits 1 *&");
-        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("e 1 *&");
-        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("change 1 *&");
-        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("changes 1 *&");
-        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
     }
 
@@ -125,7 +125,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_duplicatePerson_failure() {
         commandBox.runCommand("edit 3 Assignment for CS2103 d/85355255 s/undone "
                                 + "b/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -142,7 +142,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
+        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTaskName().fullName);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

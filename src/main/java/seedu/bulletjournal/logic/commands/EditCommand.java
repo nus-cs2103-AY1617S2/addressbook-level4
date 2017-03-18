@@ -7,7 +7,7 @@ import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.BeginDate;
 import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
@@ -30,7 +30,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
     private final int filteredPersonListIndex;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -65,7 +65,7 @@ public class EditCommand extends Command {
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
         } catch (UniqueTaskList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
@@ -78,10 +78,10 @@ public class EditCommand extends Command {
     private static Task createEditedPerson(ReadOnlyTask personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
+        TaskName updatedName = editPersonDescriptor.getTaskName().orElseGet(personToEdit::getTaskName);
         DueDate updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        StartDate updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        BeginDate updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -95,17 +95,17 @@ public class EditCommand extends Command {
         private Optional<TaskName> taskName = Optional.empty();
         private Optional<DueDate> dueDate = Optional.empty();
         private Optional<Status> status = Optional.empty();
-        private Optional<StartDate> startDate = Optional.empty();
+        private Optional<BeginDate> beginDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
         }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.taskName = toCopy.getName();
+            this.taskName = toCopy.getTaskName();
             this.dueDate = toCopy.getPhone();
             this.status = toCopy.getEmail();
-            this.startDate = toCopy.getAddress();
+            this.beginDate = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskName, this.dueDate, this.status, this.startDate, this.tags);
+            return CollectionUtil.isAnyPresent(this.taskName, this.dueDate, this.status, this.beginDate, this.tags);
         }
 
         public void setName(Optional<TaskName> taskName) {
@@ -121,7 +121,7 @@ public class EditCommand extends Command {
             this.taskName = taskName;
         }
 
-        public Optional<TaskName> getName() {
+        public Optional<TaskName> getTaskName() {
             return taskName;
         }
 
@@ -143,13 +143,13 @@ public class EditCommand extends Command {
             return status;
         }
 
-        public void setAddress(Optional<StartDate> startDate) {
-            assert startDate != null;
-            this.startDate = startDate;
+        public void setAddress(Optional<BeginDate> beginDate) {
+            assert beginDate != null;
+            this.beginDate = beginDate;
         }
 
-        public Optional<StartDate> getAddress() {
-            return startDate;
+        public Optional<BeginDate> getAddress() {
+            return beginDate;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
