@@ -46,7 +46,10 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
+        //Index adjusted to 0 based
+        int adjustedIndex = targetIndex - 1;
+
+        ReadOnlyTask taskToDone = lastShownList.get(adjustedIndex);
 
         Task doneTask;
 
@@ -57,9 +60,9 @@ public class DoneCommand extends Command {
         }
 
         try {
-            model.updateTask(targetIndex, doneTask);
+            model.updateTask(adjustedIndex, doneTask);
         } catch (DuplicateTaskException e) {
-            //Task should never be a duplicate
+            System.out.println("here");
             assert false;
         }
 
