@@ -2,7 +2,9 @@ package seedu.tasklist.testutil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
@@ -102,11 +104,17 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
     @Override
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
+        Calendar currentStartDate = new GregorianCalendar();
+        currentStartDate.setTime(this.startDate);
+        Calendar currentEndDate = new GregorianCalendar();
+        currentEndDate.setTime(this.endDate);
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getStartDate().getMonth() + "-" + this.getStartDate().getDay() + "-"
-                + this.getStartDate().getYear() + " " + this.getStartDate().getHours() + ":"
-                + this.getStartDate().getMinutes() + ":" + this.getStartDate().getSeconds() + " ");
-        sb.append("to " + this.getEndDate().toString() + " ");
+        sb.append("d/" + currentStartDate.get(Calendar.MONTH) + "-" + currentStartDate.get(Calendar.DATE) + "-"
+                + currentStartDate.get(Calendar.YEAR) + " " + currentStartDate.get(Calendar.HOUR_OF_DAY) + ":"
+                + currentStartDate.get(Calendar.MINUTE) + ":" + currentStartDate.get(Calendar.SECOND) + " ");
+        sb.append("to" + currentEndDate.get(Calendar.MONTH) + "-" + currentEndDate.get(Calendar.DATE) + "-"
+                + currentEndDate.get(Calendar.YEAR) + " " + currentEndDate.get(Calendar.HOUR_OF_DAY) + ":"
+                + currentEndDate.get(Calendar.MINUTE) + ":" + currentEndDate.get(Calendar.SECOND) + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
