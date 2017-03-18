@@ -15,10 +15,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 
+//@@author A0162877N
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser {
+public class FindCommandParser extends Parser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the

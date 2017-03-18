@@ -77,8 +77,8 @@ public class DeleteLabelCommand extends Command {
     public void saveCurrentState() {
         if (isMutating()) {
             try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
+                LogicManager.undoCommandHistory.addStorageHistory(model.getTaskManager().getImmutableTaskList(),
+                        model.getTaskManager().getImmutableLabelList());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
