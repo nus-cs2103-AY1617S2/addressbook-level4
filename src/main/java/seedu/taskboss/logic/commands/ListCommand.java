@@ -7,9 +7,9 @@ package seedu.taskboss.logic.commands;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD_SHORT = "l";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
-
 
     @Override
     public CommandResult execute() {

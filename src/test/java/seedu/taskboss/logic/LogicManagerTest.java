@@ -267,13 +267,26 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskBoss expectedAB = helper.generateTaskBoss(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        TaskBoss expectedTB = helper.generateTaskBoss(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTB.getTaskList();
 
         // prepare TaskBoss state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedTB, expectedList);
+    }
+
+    @Test
+    public void execute_listShortCommand_showsAllTasks() throws Exception {
+        // prepare expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskBoss expectedTB = helper.generateTaskBoss(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTB.getTaskList();
+
+        // prepare TaskBoss state
+        helper.addToModel(model, 2);
+
+        assertCommandSuccess("l", ListCommand.MESSAGE_SUCCESS, expectedTB, expectedList);
     }
 
     /**
