@@ -12,16 +12,16 @@ public class FindCommandTest extends AddressBookGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find milk", td.buymilk, td.dumpmilk); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
-        assertFindResult("finds Meier", td.daniel);
-        assertFindResult("search Meier", td.daniel);
-        assertFindResult("f Meier", td.daniel);
-        assertFindResult("lookup Meier", td.daniel);
-        assertFindResult("searches Meier", td.daniel);
+        assertFindResult("find milk", td.dumpmilk);
+        assertFindResult("finds milk", td.dumpmilk);
+        assertFindResult("search milk", td.dumpmilk);
+        assertFindResult("f milk", td.dumpmilk);
+        assertFindResult("lookup milk", td.dumpmilk);
+        assertFindResult("searches milk", td.dumpmilk);
     }
 
     @Test

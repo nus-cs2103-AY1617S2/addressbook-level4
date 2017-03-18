@@ -16,37 +16,37 @@ public class AddCommandTest extends AddressBookGuiTest {
     public void add() {
         //add one person
         TestTask[] currentList = td.getTypicalPersons();
-        TestTask personToAdd = td.hoon;
+        TestTask personToAdd = td.hangclothes;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
         //add another person
-        personToAdd = td.ida;
+        personToAdd = td.interviewprep;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
 
         //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertTrue(personListPanel.isListMatching(currentList));
 
         //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand("adds "));
+        commandBox.runCommand(td.hangclothes.getAddCommand("adds "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertTrue(personListPanel.isListMatching(currentList));
 
         //add duplicate person with "a" command
-        commandBox.runCommand(td.hoon.getAddCommand("a "));
+        commandBox.runCommand(td.hangclothes.getAddCommand("a "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertTrue(personListPanel.isListMatching(currentList));
 
         //add duplicate person with "new" command
-        commandBox.runCommand(td.hoon.getAddCommand("new "));
+        commandBox.runCommand(td.hangclothes.getAddCommand("new "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertTrue(personListPanel.isListMatching(currentList));
 
         //add duplicate person with "create" command
-        commandBox.runCommand(td.hoon.getAddCommand("create "));
+        commandBox.runCommand(td.hangclothes.getAddCommand("create "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertTrue(personListPanel.isListMatching(currentList));
 
@@ -55,7 +55,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertAddSuccess(td.assignment);
 
         //invalid command
-        commandBox.runCommand("ad Johnny");
+        commandBox.runCommand("ad Join club");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
