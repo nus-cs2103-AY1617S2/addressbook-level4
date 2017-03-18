@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.storage.TodoListStorage;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
@@ -38,7 +38,7 @@ public class TodoListTest {
     private final Task task5 = new Task("Task 5");
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws DataStorageException {
         when(storage.load()).thenReturn(sampleTodoList);
         todoList1 = new TodoList();
         todoList1.add(task1);

@@ -3,6 +3,7 @@ package seedu.toluist.storage;
 import java.io.IOException;
 
 import javafx.util.Pair;
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.model.TodoList;
 
 /**
@@ -31,9 +32,9 @@ public interface TodoListStorage {
      * Load todo list data from disk, using a default storage path
      * supplied by the singleton Config
      * @return todo list data
-     * @throws IOException if data cannot be loaded
+     * @throws DataStorageException if data cannot be loaded
      */
-    TodoList load() throws IOException;
+    TodoList load() throws DataStorageException;
 
     /**
      * Load todo list data from disk from the specified storage path
@@ -43,7 +44,7 @@ public interface TodoListStorage {
      * @param todoListStoragePath storage path to load todo list data from
      * @throws IOException if data cannot be loaded
      */
-    TodoList load(String todoListStoragePath) throws IOException;
+    TodoList load(String todoListStoragePath) throws DataStorageException;
 
     /**
      * Move the todo list data to somewhere else

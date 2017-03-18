@@ -1,6 +1,5 @@
 package seedu.toluist.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.TodoListStorage;
 
@@ -59,7 +59,7 @@ public class TodoList {
         try {
             TodoList todoList = storage.load();
             allTasks = todoList.getTasks();
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             logger.severe("Data cannot be loaded");
         }
     }
