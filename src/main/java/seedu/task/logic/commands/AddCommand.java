@@ -11,6 +11,7 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -48,11 +49,13 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        Long id = System.currentTimeMillis();
         this.toAdd = new Task(
                 new Description(description),
                 dueDate,
                 duration,
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new TaskId(id)
         );
     }
 

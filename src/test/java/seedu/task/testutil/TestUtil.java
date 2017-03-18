@@ -35,6 +35,7 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.storage.XmlSerializableTaskList;
 
 /**
@@ -72,15 +73,59 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Description("Ali Muster"), null, null, new UniqueTagList()),
-                new Task(new Description("Boris Mueller"), null, null, new UniqueTagList()),
-                new Task(new Description("Carl Kurz"), null, null, new UniqueTagList()),
-                new Task(new Description("Daniel Meier"), null, null, new UniqueTagList()),
-                new Task(new Description("Elle Meyer"), null, null, new UniqueTagList()),
-                new Task(new Description("Fiona Kunz"), null, null, new UniqueTagList()),
-                new Task(new Description("George Best"), null, null, new UniqueTagList()),
-                new Task(new Description("Hoon Meier"), null, null, new UniqueTagList()),
-                new Task(new Description("Ida Mueller"), null, null, new UniqueTagList())
+                new Task(new Description("Ali Muster"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(100)
+                        ),
+                new Task(new Description("Boris Mueller"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(101)
+                        ),
+                new Task(new Description("Carl Kurz"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(102)
+                        ),
+                new Task(new Description("Daniel Meier"),
+                        null, null,
+                        new UniqueTagList(),
+                        new TaskId(103)
+                        ),
+                new Task(new Description("Elle Meyer"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(104)
+                        ),
+                new Task(new Description("Fiona Kunz"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(105)
+                        ),
+                new Task(new Description("George Best"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(106)
+                        ),
+                new Task(new Description("Hoon Meier"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(106)
+                        ),
+                new Task(new Description("Ida Mueller"),
+                        null,
+                        null,
+                        new UniqueTagList(),
+                        new TaskId(107)
+                        )
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

@@ -13,6 +13,7 @@ import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -85,6 +86,7 @@ public class EditCommand extends Command {
         String updatedDurationStart = editTaskDescriptor.getDurationStart().orElseGet(taskToEdit::getDurationStart);
         String updatedDurationEnd = editTaskDescriptor.getDurationEnd().orElseGet(taskToEdit::getDurationEnd);
         Duration updatedDuration = taskToEdit.getDuration();
+        TaskId originalId = taskToEdit.getTaskId();
         try {
             // ensure that there must be start and end date if editing a non existing duration
             if (taskToEdit.getDuration() == null && (updatedDurationStart == null ^ updatedDurationEnd == null)) {
@@ -98,7 +100,7 @@ public class EditCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags);
+        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags, originalId);
     }
 
     /**
