@@ -27,14 +27,21 @@
                     </padding>
 
                     <children>
-                        <HBox spacing="5" alignment="CENTER_LEFT">
+                        <VBox spacing="5" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
+                                    <Label fx:id="id" styleClass="cell_big_label"/>
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
                                 </HBox>
+                                <HBox spacing="5" alignment="CENTER_LEFT">
+                                    <Label fx:id="start" styleClass="cell_small_label"/>
+                                    <Label fx:id="end" styleClass="cell_small_label"/>
+                                </HBox>
+                                <HBox spacing="5" alignment="CENTER_LEFT">
+                                    <Label fx:id="complete" styleClass="cell_small_label"/>
+                                </HBox>
                             </children>
-                        </HBox>
+                        </VBox>
                         <FlowPane fx:id="tags" />
                     </children>
                 </VBox>

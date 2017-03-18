@@ -27,6 +27,9 @@ public class TypicalTestTodos {
             // Manually added
             laundry = new TodoBuilder().withName("Do laundry").build();
             car = new TodoBuilder().withName("Wash car").build();
+            eventTest = new TodoBuilder().withName("eventTest").withStartTime("11-11-17T5:00")
+                    .withEndTime("11-11-17T6:00").build();
+            deadLineTest = new TodoBuilder().withName("deadLineTest").withEndTime("11-11-17T6:00").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -44,7 +47,7 @@ public class TypicalTestTodos {
     }
 
     public TestTodo[] getTypicalTodos() {
-        return new TestTodo[] { dog, cat, math, english, dishes, lawn, dinner };
+        return new TestTodo[] { dog, cat, math, english, dishes, lawn, dinner};
     }
 
     public TodoList getTypicalTodoList() {

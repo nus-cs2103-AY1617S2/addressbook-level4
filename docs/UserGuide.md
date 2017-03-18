@@ -53,7 +53,7 @@ Adds an event<br>
 Format: `add EVENT s/STARTTIME e/ENDTIME [t/tag]`
 
 Adds a deadline<br>
-Format: `add DEADLINE d/DEADLINE [t/tag]`
+Format: `add DEADLINE e/DEADLINE [t/tag]`
 
 Examples:
 
@@ -87,7 +87,7 @@ Edits an event.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
 Edits an deadline.<br>
-Format: `edit INDEX [TASK] [d/DEADLINE] [t/TAG]`
+Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
 Edits an task.<br>
 Format: `edit INDEX [TASK] [t/TAG]`
@@ -102,7 +102,7 @@ Format: `edit INDEX [TASK] [t/TAG]`
 
 Examples:
 
-* `edit 1 Play with dog d/11-11-2017/16:00`<br>
+* `edit 1 Play with dog e/17-03-17T8:00`<br>
   Edits the task description and deadline of the 1st todo to be listed
 
 ### 2.5. Finding all todos containing any keyword in their description: `find`
@@ -110,7 +110,7 @@ Examples:
 Finds todos whose descriptions contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case insensitive.
+> * The search is case sensitive.
 > * The order of the keywords does not matter.
 > * Only the task description is searched.
 > * Only full words will be matched e.g.
@@ -143,29 +143,45 @@ Examples:
 ### 2.7. Mark todo as completed : `complete`
 
 Marks the specified todo as completed.<br>
-Format: `complete INDEX`
+Format: `complete INDEX [COMPLETETIME]`
 
-### 2.8. Undo last command : `undo`
+> * If COMPLETETIME is not specified, COMPLETETIME will be automatically set to the current time
+
+Examples:
+
+* `complete 1`<br>
+* `complete 2 17-03-17T8:00`<br>
+
+### 2.8. Mark todo as uncompleted : `uncomplete`
+
+Marks the specified todo as uncompleted.<br>
+Format: `uncomplete INDEX`
+
+Example:
+
+* `uncomplete 1`<br>
+
+### 2.9. Undo last command : `undo`
 
 Undoes last command if it involves changing a todo.<br>
 Format: `undo`
 
-### 2.9. Clearing all entries : `clear`
+### 2.10. Clearing all entries : `clear`
 
 Clears all todos. Irreversible.<br>
 Format: `clear`
 
-### 2.10. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data
+### 2.12. Saving the data
 
 Todo data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.12 Setting the data save location : `savefile`
+### 2.13 Setting the data save location : `savefile`
 
 Sets the save file location containing todo data.<br>
 Format: `savefile PATH_TO_FILE`
@@ -190,10 +206,10 @@ Examples:
   e.g. `add Finish math homework`
 
 * **Add Event** : `add TODO s/STARTTIME e/ENDTIME` <br>
-  e.g. `add Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
+  e.g. `add Take the dog for a walk s/17-03-17T8:00 e/17-03-17T9:00`
 
-* **Add Deadline** : `add TODO d/DEADLINE` <br>
-  e.g. `add Finish programming project d/11-11-2017/17:00`
+* **Add Deadline** : `add TODO e/DEADLINE` <br>
+  e.g. `add Finish programming project e/17-03-17T8:00`
 
 * **Edit** : `edit INDEX [TASK]` <br>
   e.g. `edit 1 Take cat for a walk`
@@ -207,8 +223,11 @@ Examples:
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find Dog`
 
-* **Complete** : `complete INDEX` <br>
-  e.g. `complete INDEX`
+* **Complete** : `complete INDEX [COMPLETETIME]` <br>
+  e.g. `complete 1 17-03-17T8:00`
+
+  * **Uncomplete** : `uncomplete INDEX` <br>
+  e.g. `uncomplete 1`
 
 * **Undo** : `undo` <br>
   e.g. `undo`

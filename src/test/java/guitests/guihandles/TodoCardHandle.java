@@ -1,5 +1,7 @@
 package guitests.guihandles;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +19,8 @@ import seedu.address.model.todo.ReadOnlyTodo;
 public class TodoCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String STARTTIME_FIELD_ID = "#start";
+    private static final String ENDTIME_FIELD_ID = "#end";
 
     private Node node;
 
@@ -56,10 +60,35 @@ public class TodoCardHandle extends GuiHandle {
     private Region getTagsContainer() {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
-
+    private String getStartTime() {
+        return getTextFromLabel(STARTTIME_FIELD_ID);
+    }
+    private String getEndTime() {
+        return getTextFromLabel(ENDTIME_FIELD_ID);
+    }
     public boolean isSameTodo(ReadOnlyTodo todo) {
-        return getFullName().equals(todo.getName().fullName)
+        if (todo.getStartTime() != null && todo.getEndTime() != null) {
+
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
+            String strStartTime = dateFormat.format(todo.getStartTime());
+            String strEndTime = dateFormat.format(todo.getEndTime());
+            return getFullName().equals(todo.getName().fullName)
+                && getStartTime().equals(strStartTime)
+                && getEndTime().equals(strEndTime)
                 && getTags().equals(getTags(todo.getTags()));
+
+        } else if (todo.getStartTime() == null && todo.getEndTime() != null) {
+
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
+            String strEndTime = dateFormat.format(todo.getEndTime());
+            return getFullName().equals(todo.getName().fullName)
+                && getEndTime().equals(strEndTime)
+                && getTags().equals(getTags(todo.getTags()));
+
+        } else {
+            return getFullName().equals(todo.getName().fullName)
+                    && getTags().equals(getTags(todo.getTags()));
+        }
     }
 
     @Override
