@@ -26,7 +26,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Introduction
 <p>Doist is a task manager that can simplify your life with the press of a button! Designed for users who like to use the keyboard, Doist can accept natural language commands to help you keep track of all your daily tasks.</p>
-<p>This developer guide aims to give developers a nut and bolts view of Doist, to encourage and facilitate contribution to the development of this application.</p>
+<p>This developer guide aims to give developers a nuts and bolts insight into Doist, to encourage and facilitate contribution to the development of this application.</p>
 
 
 <br>
@@ -203,15 +203,15 @@ Here are some of the key files in the `Storage` component:
 ## Implementation
 
 ### 1. Undo and Redo
-Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, the new resulted to-do list will be stored into the history.
-> Note: Although `undo` and `redo` should also be considered as mutating commands,  they will not trigger the resulted to-do list to be stored into the history
+Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, the new state of the to-do list will be stored into history.
+> Note: Although `undo` and `redo` should also be considered as mutating commands, they will not trigger the new state of the to-do list to be stored into history.
 
-`undo` and `redo` are implemented by navigating through the to-do list history mentioned above.  
-To be more specific, to-do list history are represented by 2 stacks of `TodoList` object, as implemented in this file: [`History.java`](#../src/main/java/seedu/doist/commons/util/History.java).
+`undo` and `redo` are implemented by navigating through the to-do list history as mentioned above.  
+To be more specific, the to-do list history is represented by 2 stacks of `TodoList` objects, as implemented in this file: [`History.java`](#../src/main/java/seedu/doist/commons/util/History.java).
 
-> Remark: There are 2 common ways to implement undo and redo feature: `1. saving state (what we use)` and `generating state (saving command)`. There are 2 reasons why we choose the first implementation:
-> 1. If we use the other method, that is, savimg command, we have to implement a reverse method for each command, which will be time consuming due to the complexity of the commands.
-> 2. When we copy `TodoList` object, the inside `Task` objects will not be copied, only new references will be created, which will not be too memory-intensive.
+> Remark: There are 2 common ways to implement undo and redo feature: `1. saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
+> 1. If we save the commands instead, we have to implement a reverse / undo method for each command, which will be time-consuming due to the complexity of the commands.
+> 2. When we copy the `TodoList` object, the constituent `Task` objects will not be copied. Thus, only new references will be created and this is less memory-intensive compared to creating a deep copy of all the `Task` objects.
 
 ### 2. Logging
 
