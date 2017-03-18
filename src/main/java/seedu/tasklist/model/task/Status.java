@@ -22,6 +22,18 @@ public class Status {
         this.status = status;
     }
 
+    public boolean checkStatus() {
+        return this.status;
+    }
+
+    public void setCompleted() {
+        this.status = COMPLETED;
+    }
+
+    public void setUncompleted() {
+        this.status = UNCOMPLETED;
+    }
+
     @Override
     public String toString() {
         return status ? "completed" : "uncompleted";
