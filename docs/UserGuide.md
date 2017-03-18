@@ -6,13 +6,13 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
-3. [Features](#3-features)
-    3.1. [Adding Tasks](#31-adding-tasks)
-    3.2. [Viewing Tasks](#32-viewing-tasks)
-    3.3. [Managing Tasks](#33-managing-tasks)
-    3.4. [Managing Tags](#34-managing-tags)
-    3.5. [Undo/Redo Commands](#35-undoredo-commands)
-    3.6. [Advanced Usage](#36-advanced-usage)
+3. [Features](#3-features)<br>
+    3.1. [Adding Tasks](#31-adding-tasks)<br>
+    3.2. [Viewing Tasks](#32-viewing-tasks)<br>
+    3.3. [Managing Tasks](#33-managing-tasks)<br>
+    3.4. [Managing Tags](#34-managing-tags)<br>
+    3.5. [Undo/Redo Commands](#35-undoredo-commands)<br>
+    3.6. [Advanced Usage](#36-advanced-usage)<br>
     3.7. [Miscellaneous](#37-miscellaneous)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
