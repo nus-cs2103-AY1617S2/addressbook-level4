@@ -14,6 +14,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.storage.FileStorageChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -44,6 +45,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected String configPath;
     protected UserPrefs userPrefs;
 
 
@@ -74,14 +76,14 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> taskManagerkOptional;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
-            taskManagerkOptional = storage.readTaskManager();
-            if (!taskManagerkOptional.isPresent()) {
+            taskManagerOptional = storage.readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
-            initialData = taskManagerkOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
@@ -125,6 +127,7 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
+        configPath = configFilePathUsed;
         return initializedConfig;
     }
 
@@ -184,6 +187,35 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
+    }
+
+    //@@author A0140042A
+    /**
+     * Handles FileStorageChangedEvent to save the config and reinitialize the app with the new path
+     * @throws Exception
+     */
+    @Subscribe
+    public void handleFileStorageChangedEvent(FileStorageChangedEvent event) throws Exception {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        //Update & save the config file
+        config.setTaskManagerFilePath(event.getFilePath());
+        try {
+            ConfigUtil.saveConfig(config, configPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Save all data into the new location
+        storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
+
+        config = initConfig(configPath);
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        userPrefs = initPrefs(config);
+        initLogging(config);
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage);
+        ui.setLogic(logic);
+        initEventsCenter();
     }
 
     public static void main(String[] args) {
