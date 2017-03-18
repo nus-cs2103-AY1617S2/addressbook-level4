@@ -40,11 +40,11 @@ public class SwitchConfigTest {
 
         assertEquals(switchConfig.getPredicate("i"),
                 Optional.of(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE));
-        assertEquals(switchConfig.getPredicate("t"),
+        assertEquals(switchConfig.getPredicate("T"),
                 Optional.of(TaskSwitchPredicate.TODAY_SWITCH_PREDICATE));
-        assertEquals(switchConfig.getPredicate("w"),
+        assertEquals(switchConfig.getPredicate("W"),
                 Optional.of(TaskSwitchPredicate.WITHIN_7_DAYS_SWITCH_PREDICATE));
-        assertEquals(switchConfig.getPredicate("c"),
+        assertEquals(switchConfig.getPredicate("C"),
                 Optional.of(TaskSwitchPredicate.COMPLETED_SWITCH_PREDICATE));
         assertEquals(switchConfig.getPredicate("a"),
                 Optional.of(TaskSwitchPredicate.ALL_SWITCH_PREDICATE));

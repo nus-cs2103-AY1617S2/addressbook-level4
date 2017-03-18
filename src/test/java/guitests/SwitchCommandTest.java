@@ -72,6 +72,20 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     }
 
     @Test
+    public void switch_ToValidTabUsingShortcutNameCaseInsensitive() {
+        assertTrue(areTasksShown(floatingTask, eventIn6Days));
+        assertFalse(isTaskShown(taskWithDeadline));
+
+        String tabToday = "Today";
+        String switchToToday = "switch T ";
+        commandBox.runCommand(switchToToday);
+        assertTrue(isTaskShown(taskWithDeadline));
+        assertFalse(isTaskShown(floatingTask));
+        assertFalse(isTaskShown(eventIn6Days));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, tabToday, 1, 3));
+    }
+
+    @Test
     public void switch_ToValidTabUsingNumber() {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));

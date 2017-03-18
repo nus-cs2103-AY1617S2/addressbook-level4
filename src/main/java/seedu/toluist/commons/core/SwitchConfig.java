@@ -35,7 +35,7 @@ public class SwitchConfig {
         }
 
         for (String keyword : keywords) {
-            keywordPredicateMapping.put(keyword, predicate);
+            keywordPredicateMapping.put(keyword.toLowerCase(), predicate);
         }
     }
 
@@ -45,10 +45,11 @@ public class SwitchConfig {
      * @return a present optional of the predicate if there is a match, Optional.empty() otherwise
      */
     public Optional<TaskSwitchPredicate> getPredicate(String keyword) {
-        if (!keywordPredicateMapping.containsKey(keyword)) {
+        String normalizedKeyword = keyword.toLowerCase();
+        if (!keywordPredicateMapping.containsKey(normalizedKeyword)) {
             return Optional.empty();
         }
-        return Optional.of(keywordPredicateMapping.get(keyword));
+        return Optional.of(keywordPredicateMapping.get(normalizedKeyword));
     }
 
     /**
