@@ -31,6 +31,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
+    public static final String MESSAGE_INVALID_DURATION = "Must have start date and end date for duration.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -85,6 +86,11 @@ public class EditCommand extends Command {
         String updatedDurationEnd = editTaskDescriptor.getDurationEnd().orElseGet(taskToEdit::getDurationEnd);
         Duration updatedDuration = taskToEdit.getDuration();
         try {
+            // ensure that there must be start and end date if editing a non existing duration
+            if (taskToEdit.getDuration() == null && (updatedDurationStart==null ^ updatedDurationEnd == null)) {
+                throw new CommandException(MESSAGE_INVALID_DURATION);
+            }
+            // ensure we only update duration if new start and end date are not null
             if (updatedDurationStart != null && updatedDurationEnd != null) {
                 updatedDuration = new Duration(updatedDurationStart, updatedDurationEnd);
             }
