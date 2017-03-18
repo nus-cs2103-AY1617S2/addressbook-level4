@@ -9,15 +9,19 @@ import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Handle switch tab command
  */
 public class SwitchController extends Controller {
-    private static final String RESULT_MESSAGE = "Switch switch";
+    public static final String RESULT_MESSAGE_SWITCH_SUCCESS = "Switched to tab \"%s\"."
+        + " Showing %d out of %d filtered tasks.";
+    public static final String RESULT_MESSAGE_SWITCH_FAILURE = "\"%s\" is not a valid tab.";
     private static final String COMMAND_TEMPLATE = "switch\\s+(?<tab>\\S+)\\s*";
     private static final String COMMAND_WORD = "switch";
     public static final String TAB = "tab";
@@ -30,10 +34,21 @@ public class SwitchController extends Controller {
     public CommandResult execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String keyword = tokens.get(TAB);
-        TaskSwitchPredicate predicate = switchConfig.getPredicate(keyword).get();
-        UiStore.getInstance().setSwitchPredicate(predicate);
+        Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
+
+        if (!switchPredicateOptional.isPresent()) {
+            return new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
+        }
+
+        TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();
+        UiStore.getInstance().setSwitchPredicate(switchPredicate);
         renderer.render();
-        return new CommandResult(RESULT_MESSAGE);
+        return new CommandResult(String.format(
+                RESULT_MESSAGE_SWITCH_SUCCESS,
+                switchPredicate.getDisplayName(),
+                UiStore.getInstance().getTasks().stream().filter(switchPredicate.getPredicate()).collect(
+                        Collectors.toList()).size(),
+                UiStore.getInstance().getTasks().size()));
     }
 
     public HashMap<String, String> tokenize(String command) {

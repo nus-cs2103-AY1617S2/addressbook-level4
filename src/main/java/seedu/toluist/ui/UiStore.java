@@ -23,6 +23,8 @@ public class UiStore {
         return instance;
     }
 
+    private UiStore() {}
+
     public void setSwitchPredicate(TaskSwitchPredicate switchPredicate) {
         this.switchPredicate = switchPredicate;
     }

@@ -4,6 +4,7 @@ import seedu.toluist.model.TaskSwitchPredicate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -48,5 +49,12 @@ public class SwitchConfig {
             return Optional.empty();
         }
         return Optional.of(keywordPredicateMapping.get(keyword));
+    }
+
+    /**
+     * Return lists of predicates
+     */
+    public List<TaskSwitchPredicate> getAllPredicates() {
+        return predicateArrayList;
     }
 }
