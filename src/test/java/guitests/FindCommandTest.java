@@ -11,23 +11,23 @@ public class FindCommandTest extends TodoListGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find supper"); // no results
+        assertFindResult("find homework", td.math, td.english); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find homework", td.english);
     }
 
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("find homework"); // no results
     }
 
     @Test
     public void find_invalidCommand_fail() {
-        commandBox.runCommand("findgeorge");
+        commandBox.runCommand("findhomework");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
