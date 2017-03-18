@@ -1,3 +1,4 @@
+//@@evanyeung A0163744B
 package seedu.task.model.task;
 
 import static org.junit.Assert.assertFalse;
@@ -49,7 +50,7 @@ public class TaskTest {
         task2.setTags(new UniqueTagList("Other"));
         assertFalse(task1.equals(task2));
     }
-    
+
     @Test(expected = AssertionError.class)
     public void setTagsTest() {
         Task task = new Task(DESCRIPTION, DUE_DATE, DURATION, TAGS);

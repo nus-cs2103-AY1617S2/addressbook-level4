@@ -67,6 +67,7 @@ public class Task implements ReadOnlyTask {
         return dueDate;
     }
 
+    //@@evanyeung A0163744B
     @Override
     public Duration getDuration() {
         return duration;
@@ -75,6 +76,7 @@ public class Task implements ReadOnlyTask {
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
+    //@@evanyeung
 
     @Override
     public UniqueTagList getTags() {
@@ -85,7 +87,9 @@ public class Task implements ReadOnlyTask {
      * Replaces this tasks's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
+        //@@evanyeung A0163744B
         assert replacement != null;
+        //@@evanyeung
         tags.setTags(replacement);
     }
 
