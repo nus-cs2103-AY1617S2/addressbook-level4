@@ -12,7 +12,7 @@ public class BookCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_IsMutating() throws IllegalDateTimeValueException, IllegalValueException {
-        BookCommand bc = new BookCommand("book command","nothing");
+        BookCommand bc = new BookCommand("book command", "nothing");
         assertTrue(bc.isMutating());
     }
 
