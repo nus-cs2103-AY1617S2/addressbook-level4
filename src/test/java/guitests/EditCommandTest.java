@@ -24,7 +24,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         int todoListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby").withVenue("91234567")
-                .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3").withTags("husband").build();
+                .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3").withUrgencyLevel("1").withDescription("i love you").withTags("husband").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTask);
     }
@@ -53,7 +53,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Tuition part-time job");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
