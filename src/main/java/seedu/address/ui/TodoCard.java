@@ -1,11 +1,13 @@
 package seedu.address.ui;
 
+import java.text.SimpleDateFormat;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-//import javafx.scene.paint.Color;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.model.todo.ReadOnlyTodo;
 
 public class TodoCard extends UiPart<Region> {
@@ -38,7 +40,8 @@ public class TodoCard extends UiPart<Region> {
             end.setText("End: " + todo.getEndTime().toString());
         }
         if (todo.getCompleteTime() != null) {
-            complete.setText("Complete");
+            complete.setText(String.format("Completed at %1$s",
+                    new SimpleDateFormat(CompleteCommand.COMPLETE_TIME_FORMAT).format(todo.getCompleteTime())));
             complete.setStyle("-fx-text-fill: #00ad36;");
         } else {
             complete.setText("Not Complete");
