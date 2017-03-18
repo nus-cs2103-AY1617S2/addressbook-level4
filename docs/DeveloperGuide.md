@@ -9,6 +9,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Table of contents
 
+- [Introduction](#introduction)
 - [Setting Up](#setting-up)
 - [Design](#design)
 - [Implementation](#implementation)
@@ -25,7 +26,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Introduction
 <p>Doist is a task manager that can simplify your life with the press of a button! Designed for users who like to use the keyboard, Doist can accept natural language commands to help you keep track of all your daily tasks.</p>
-<p>This developer guide aims to give developers a nut and bolts view of Doist, to encourage and facilitate contribution to the development of this application.</p>
+<p>This developer guide aims to give developers a nuts and bolts insight into Doist, to encourage and facilitate contribution to the development of this application.</p>
 
 
 <br>
@@ -201,10 +202,20 @@ Here are some of the key files in the `Storage` component:
 
 ## Implementation
 
-### 1. Logging
+### 1. Undo and Redo
+Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, the new state of the to-do list will be stored into history.
+> Note: Although `undo` and `redo` should also be considered as mutating commands, they will not trigger the new state of the to-do list to be stored into history.
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
-and logging destinations.
+`undo` and `redo` are implemented by navigating through the to-do list history as mentioned above.  
+To be more specific, the to-do list history is represented by 2 stacks of `TodoList` objects, as implemented in this file: [`History.java`](#../src/main/java/seedu/doist/commons/util/History.java).
+
+> Remark: There are 2 common ways to implement undo and redo feature: `1. saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
+> 1. If we save the commands instead, we have to implement a reverse / undo method for each command, which will be time-consuming due to the complexity of the commands.
+> 2. When we copy the `TodoList` object, the constituent `Task` objects will not be copied. Thus, only new references will be created and this is less memory-intensive compared to creating a deep copy of all the `Task` objects.
+
+### 2. Logging
+
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
   (See [Configuration](#configuration))
@@ -212,7 +223,7 @@ and logging destinations.
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
 
-**Logging Levels**
+#### Logging Levels
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Can continue, but with caution
@@ -220,7 +231,7 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 2. Configuration
+### 3. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
@@ -314,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... |So that I can ...
 -------- | :------- | :------------ | :-----------
-**`* * *`** | user | create a new task with a optional start time, optional end time, optional reminder time, optional recurrence interval and ranked priority | create an priortised event, deadline or a floating task that might be recurring
+**`* * *`** | user | create a new task with a optional start time, end time and other properties | create an priortised event, deadline or a floating task that might be recurring
 **`* * *`** | user | view the details of a task | see details of a task such as recurrance interval
 **`* * *`** | user | see a list of pending, overdue or finished tasks separately
 **`* * *`** | user | edit task properties
@@ -329,13 +340,13 @@ Priority | As a ... | I want to ... |So that I can ...
 **`* *`** | user | add or delete tags for a specific task | better filter the tasks
 **`* *`** | user | see a list of tasks within a specified time interval
 **`* *`** | user | see a list of all tasks with a specific tag | filter tasks by tag
-**`* *`** | user |  recover a certain task in the "Trash Bin"
-**`* *`** | user | use arrow key to see the previous commands I execute | I can re-execute the past commands conveniently without manually typing them
-**`* *`** | user | I want an error message to appear at the feedback textbox | I know what error occured
+**`* *`** | user | recover a certain task in the "Trash Bin"
+**`* *`** | user | use arrow key to see the previous commands I execute | re-execute the past commands conveniently without manually typing them
+**`* *`** | user | see an error message to appear at the feedback textbox | figure out what error occured
 **`*`** | user | rename existing commands | customise to the ones I am more used to
 **`*`** | user | reset all changes to existing commands | return to using the default commands
-**`*`** | user | I want the keywords in the command to be highlighted
-**`*`** | user | I want the auto-completion / content-assistant of the keywords when I am typing
+**`*`** | user | see keywords in the command being highlighted
+**`*`** | user | type with auto-completion / content-assistant of the keywords
 **`*`** | user | create a new task by entering the date in a "natural language" way | it feels more natural when typing
 **`*`** | user | see my "Trash Bin" that consists of deleted tasks | view and/or recover them
 **`*`** | user | see my tasks on Google Calendar | integrate tasks with Google Calendar
@@ -351,10 +362,10 @@ Priority | As a ... | I want to ... |So that I can ...
 
 **MSS**
 
-1. User types in the command for adding a new task and specifies the parameters.
+1. User types in the command for adding a new task and specifies the parameters
 2. Doist adds a new task, and displays a success message
 
-Use case ends.
+Use case ends
 
 **Extensions**
 
@@ -415,12 +426,12 @@ Use case ends.
 > 2c1. Doist shows and appropriate message
 > Use case ends
 
-### Use Case: Delete a task
+### Use Case: Delete tasks
 
 **MSS**
 
-1. User types in the command to delete a task
-2. Doist deletes the task, and displays a success message
+1. User types in the command to delete tasks
+2. Doist deletes the specified tasks, and displays a success message
 
 Use case ends.
 
@@ -440,8 +451,8 @@ Use case ends.
 
 **MSS**
 
-1. User types in the command to undo the previous mutating command
-2. Doist performs the undo, and displays a success message
+1. User types in the command or press `Ctrl+z` to undo the previous mutating command
+2. Doist performs the undo operation, and displays a success message
 
 Use case ends.
 
@@ -457,12 +468,12 @@ Use case ends.
 > 2b1. Doist shows an appropriate message
 > Use case ends
 
-### Use Case: Mark task as finished
+### Use Case: Mark tasks as finished
 
 **MSS**
 
-1. User types in the command to mark a task as finished
-2. Doist marks the task as finished, and displays a success message
+1. User types in the command to mark tasks as finished
+2. Doist marks the specified tasks as finished, and displays a success message
 
 Use case ends.
 
@@ -583,7 +594,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Deadline`
     A task with the same `start time` and `end time`. It represents tasks that have to be done before a specific time
     - `Floating task`
-    A task with no `start time` and `end time`. It represents tasks that are not associated with any timing. It can only be `pending` and `finished`, never `overdue`.
+    A task with neither `start time` nor `end time`. It represents tasks that are not associated with any timing. It can only be `pending` and `finished`, never `overdue`
     - `Pending tasks`
     Tasks that have not been `finished` nor `ended`
     - `Overdue tasks`
@@ -597,7 +608,7 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     Reading and Writing
 
 **Mutating Command**
-    Any command which causes a change in the state of apps (E.g. add, delete, finished)
+    Any command which causes a change in the state of apps (E.g. `add`, `delete`, `finish`)
 
 **Mainstream OS**
     Windows, Linux, Unix, OS-X
