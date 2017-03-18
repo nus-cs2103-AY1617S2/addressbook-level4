@@ -55,6 +55,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
+import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.storage.StorageManager;
 
 
@@ -373,6 +374,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+        // sort by a field other than name so that it does not affect test
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
+
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -392,6 +396,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
+        // sort by a field other than name so that it does not affect test
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
+
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithName("bla bla KEY bla");
         Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -411,6 +418,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
+        // sort by a field other than name so that it does not affect test
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
+
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
