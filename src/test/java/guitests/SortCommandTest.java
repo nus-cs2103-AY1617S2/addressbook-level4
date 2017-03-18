@@ -1,7 +1,5 @@
 package guitests;
 
-import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -11,7 +9,6 @@ import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.testutil.TestTask;
-import seedu.ezdo.testutil.TestUtil;
 import seedu.ezdo.testutil.TypicalTestTasks;
 
 public class SortCommandTest extends EzDoGuiTest {
