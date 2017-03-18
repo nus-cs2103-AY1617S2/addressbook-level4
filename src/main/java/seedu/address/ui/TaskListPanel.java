@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -14,7 +17,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeViewRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Status;
@@ -36,7 +41,8 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     // Additional status to view all tasks
-    private static final String ALL_TASKS = "All tasks";
+    private static final String ALL_TASKS = "All";
+    private static final String CALENDAR = "Calendar";
 
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
     private HashMap<String, ArrayList<Integer>> taskIndexMap;
@@ -51,22 +57,24 @@ public class TaskListPanel extends UiPart<Region> {
     private int lastTaskCount;
     private double lastScrollPosition;
 
+    private ObservableList<ReadOnlyTask> taskList;
+
     private ListChangeListener taskListListener;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
-        viewTasksWithStatus(taskList, ALL_TASKS);
+        setTaskList(taskList);
+        viewTasksWithStatus(Arrays.asList(ALL_TASKS));
         addToPlaceholder(taskListPlaceholder);
+        registerAsAnEventHandler(this);
     }
 
-    /** ViewCalendar displays tasks grouped by status */
-    private void viewCalendar(ObservableList<ReadOnlyTask> taskList) {
-        viewTasksWithStatus(taskList, Status.FLOATING, Status.OVERDUE, Status.TODAY,
-                                        Status.TOMORROW, Status.THIS_WEEK, Status.IN_FUTURE);
+    public void setTaskList(ObservableList<ReadOnlyTask> taskList) {
+        this.taskList = taskList;
     }
 
-    private void viewTasksWithStatus(ObservableList<ReadOnlyTask> taskList, String... statusList) {
-        initTaskListsByStatus(taskList, statusList);
+    private void viewTasksWithStatus(List<String> statusList) {
+        initTaskListsByStatus(statusList);
         createTaskListView(statusList);
 
         // update taskList listener
@@ -76,7 +84,7 @@ public class TaskListPanel extends UiPart<Region> {
         taskListListener = new ListChangeListener<ReadOnlyTask>() {
             public void onChanged(Change<? extends ReadOnlyTask> change) {
                 saveScrollingState(statusList);
-                initTaskListsByStatus(taskList, statusList);
+                initTaskListsByStatus(statusList);
                 createTaskListView(statusList);
                 restoreScrollingState();
             }
@@ -85,7 +93,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     /** Update scrolling state of its child nodes */
-    private void saveScrollingState(String[] statusList) {
+    private void saveScrollingState(List<String> statusList) {
         lastExpanded = null;
         for (String status : statusList) {
             TaskGroupPanel childNode = childGroupMap.get(status);
@@ -116,7 +124,7 @@ public class TaskListPanel extends UiPart<Region> {
      * A hashMap maps from status to corresponding task lists and index lists.
      * Index list contains original index of tasks in taskList.
      */
-    private void initTaskListsByStatus(ObservableList<ReadOnlyTask> taskList, String[] statusList) {
+    private void initTaskListsByStatus(List<String> statusList) {
         // Clear current data
         displayedTasks = new ArrayList<ReadOnlyTask>();
         taskListMap = new HashMap<String, ObservableList<ReadOnlyTask>>();
@@ -148,7 +156,7 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      * Instantiate TaskGroupPanel objects and add them to taskListView.
      */
-    private void createTaskListView(String[] statusList) {
+    private void createTaskListView(List<String> statusList) {
         taskListView.getChildren().clear();
         childGroupMap = new HashMap<String, TaskGroupPanel>();
 
@@ -171,6 +179,20 @@ public class TaskListPanel extends UiPart<Region> {
 
     private List<ReadOnlyTask> getDisplayedTasks() {
         return displayedTasks;
+    }
+
+    @Subscribe
+    private void handleChangeViewRequestEvent(ChangeViewRequestEvent event) {
+        ArrayList<String> groupsToView = new ArrayList<String>();
+        for (String group : event.viewGroups) {
+            if (group.equals(CALENDAR)) {
+                groupsToView.addAll(Arrays.asList(Status.FLOATING, Status.OVERDUE,
+                                                    Status.TODAY, Status.TOMORROW, Status.IN_FUTURE));
+            } else {
+                groupsToView.add(group);
+            }
+        }
+        viewTasksWithStatus(groupsToView);
     }
 
 }
