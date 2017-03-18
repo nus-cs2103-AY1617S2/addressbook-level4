@@ -58,7 +58,19 @@ public class ArgumentTokenizer {
             -> Optional.of(values.get(values.size() - 1)));
         String tagStringToSplit = tagString.get();
         String[] splittedTags = tagStringToSplit.split(" ");
-        List<String> tags = new ArrayList<String>(Arrays.asList(splittedTags));
+        List<String> tags;
+        if(!tagStringToSplit.equals("")) {
+            ArrayList<String> processedTags = new ArrayList<String>();
+            for(int i=0; i<splittedTags.length; i++) {
+                if(!splittedTags[i].equals("")) {
+                    processedTags.add(splittedTags[i]);
+                }
+            }
+            String[] newTags = processedTags.toArray(new String[processedTags.size()]);
+            tags = new ArrayList<String>(Arrays.asList(newTags));
+        } else {
+            tags = new ArrayList<String>(Arrays.asList(splittedTags));
+        }
         return Optional.of(tags);
 
     }
