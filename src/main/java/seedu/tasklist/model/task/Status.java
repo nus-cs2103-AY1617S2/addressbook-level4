@@ -22,7 +22,7 @@ public class Status {
         this.status = status;
     }
 
-    public boolean checkStatus() {
+    public boolean getStatus() {
         return this.status;
     }
 
