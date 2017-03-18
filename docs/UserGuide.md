@@ -131,7 +131,7 @@ Examples:
 * `add CS1010 Lecture from d/10/10/2016 t/12:00pm to d/10/4/2017 t/2:00 pm`
 
 
-### 3.5. Adding a Priority Task : `add`
+### 3.5. Adding a Priority Task/Event : `add`
 
 Format: `add <TASK NAME> p/<PRIORITY>`
 
@@ -149,8 +149,8 @@ Examples:
 * `add Open House from d/5/11/2016 t/11:00am to d/6/11/2016 t/11:00pm p/low`
 
 
-### 3.6 Finding a Task: find : `find`
-You may not want to go through the struggle of searching throughout your whole list to find a certain task. You can easily find a task by using the find command, then key in any detail about your task. 
+### 3.6 Finding a Task: `find`
+You may not want search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task. 
 
 Format: `find <KEYWORD>`
 
@@ -199,7 +199,6 @@ Format: `delete <INDEX>`
 Things To Note:
 > The task at the specified INDEX will be deleted 
 > The index refers to the index number shown in the most recent listing.
-> The index must be a positive integer 1, 2, 3, ...
 ```
 
 Examples:
@@ -216,7 +215,6 @@ Things To Note:
 > The task at the specified INDEX will be moved from the task 
   list to the completed list.
 > The index refers to the index number shown in the most recent listing.
-> The index must be a positive integer 1, 2, 3, ...
 ```
 
 Examples:
@@ -244,7 +242,7 @@ Format: `listday`
 Things To Note:
 > This list will refresh itself and show you the latest list when you 
 add a new floating task or task that is due today.
-> This list will be sorted by Priority and Time.
+> This list will be sorted by Priority then Time.
 ```
 
 
@@ -262,7 +260,7 @@ when you add a new task or event with priority.
 
 
 ### 3.13. Listing Completed Tasks : `listdone`
-To review what you have done (or maybe feel better about yourself), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
+To review what you have done (and feel better about yourself!), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
 Format: `listdone`
 
@@ -274,7 +272,7 @@ Things To Note:
 
 
 ### 3.14. Undoing the Latest Command : `undo`
-Did you accidentally type in the wrong command and did an operation you did not want? Well not to worry! You can type in the undo command, as you do not have to go through the hassle of modifying your recent operation. <br>
+Typed in the wrong command and submitted an operation you do not want? Fret not! You can use the undo command to save the hassle of modifying your recent operation. <br>
 
 Format: `undo`
 
@@ -285,7 +283,7 @@ Things To Note:
 
 
 ### 3.15. Saving the Data to Another Folder : `save`
-You may consider to save the TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
+You may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
 Format: `save <FILE_PATH>`
 
