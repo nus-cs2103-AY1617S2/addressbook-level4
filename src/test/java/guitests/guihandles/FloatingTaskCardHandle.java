@@ -8,19 +8,18 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
  * Provides a handle to a task card in the task list panel.
  */
-public class TaskCardHandle extends GuiHandle {
+public class FloatingTaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
    // private static final String INDEX_FIELD_ID = "#idx";
    // private static final String TIME_FIELD_ID = "#time";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     //private static final String PRIORITY_FIELD_ID = "#priority";
-    private static final String DEADLINE_FIELD_ID = "#";
     private static final String TAGS_FIELD_ID = "#tags";
     //private static final String EMPTY_PREFIX = "";
     //private static final String COMPLETED_PREFIX = "Completed on ";
@@ -30,7 +29,7 @@ public class TaskCardHandle extends GuiHandle {
 
     private Node node;
 
-    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public FloatingTaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -59,10 +58,6 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(PRIORITY_FIELD_ID);
     }*/
 
-    public String getDeadline() {
-        return getTextFromLabel(DEADLINE_FIELD_ID);
-    }
-
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
@@ -87,23 +82,6 @@ public class TaskCardHandle extends GuiHandle {
         return this.guiRobot.from(this.node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().fullName)
-           // && getPriority().equals(task.getPriority().value)
-            && getDeadline().equals(task.getEndTime().value)
-            && getDescription().equals(task.getDescription().value)
-            && getTags().equals(getTags(task.getTags()));
-    }
-    /*
-    //change this after logic change type
-    public boolean isSameEvent(ReadOnlyEvent event) {
-        return getFullName().equals(event.getName().fullName)
-           // && getPriority().equals(task.getPriority().value)
-            && getDeadline().equals(event.getEndTime().value)
-            && getDescription().equals(event.getDescription().value)
-            && getTags().equals(getTags(event.getTags()));
-    }
-
     //change this after logic change type
     public boolean isSameFloatingTask(ReadOnlyFloatingTask floatingTask) {
         return getFullName().equals(floatingTask.getName().fullName)
@@ -113,15 +91,14 @@ public class TaskCardHandle extends GuiHandle {
             && getDescription().equals(floatingTask.getDescription().value)
             && getTags().equals(getTags(floatingTask.getTags()));
     }
-    */
+
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof TaskCardHandle) {
-            TaskCardHandle handle = (TaskCardHandle) obj;
+        if (obj instanceof FloatingTaskCardHandle) {
+            FloatingTaskCardHandle handle = (FloatingTaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                 //&& getPriority().equals(handle.getPriority())
-                && getDeadline().equals(handle.getDeadline())
                 && getDescription().equals(handle.getDescription())
                 && getTags().equals(handle.getTags());
         }

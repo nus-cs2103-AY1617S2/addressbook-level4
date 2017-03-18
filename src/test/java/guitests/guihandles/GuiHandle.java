@@ -34,48 +34,48 @@ public class GuiHandle {
     }
 
     public void focusOnWindow(String stageTitle) {
-        logger.info("Focusing " + stageTitle);
-        Optional<Window> window = guiRobot.listTargetWindows()
+        this.logger.info("Focusing " + stageTitle);
+        Optional<Window> window = this.guiRobot.listTargetWindows()
             .stream()
             .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
 
         if (!window.isPresent()) {
-            logger.warning("Can't find stage " + stageTitle + ", Therefore, aborting focusing");
+            this.logger.warning("Can't find stage " + stageTitle + ", Therefore, aborting focusing");
             return;
         }
-        intermediateStage = Optional.ofNullable((Stage) window.get());
-        guiRobot.targetWindow(window.get());
-        guiRobot.interact(() -> window.get().requestFocus());
-        logger.info("Finishing focus " + stageTitle);
+
+        this.guiRobot.targetWindow(window.get());
+        this.guiRobot.interact(() -> window.get().requestFocus());
+        this.logger.info("Finishing focus " + stageTitle);
     }
 
     protected <T extends Node> T getNode(String query) {
-        return guiRobot.lookup(query).query();
+        return this.guiRobot.lookup(query).query();
     }
 
     protected String getTextFieldText(String filedName) {
-        TextField textField = getNode(filedName);
+        TextField textField = (TextField) getNode(filedName);
         return textField.getText();
     }
 
     protected void setTextField(String textFieldId, String newText) {
-        guiRobot.clickOn(textFieldId);
-        TextField textField = getNode(textFieldId);
+        this.guiRobot.clickOn(textFieldId);
+        TextField textField = (TextField) getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        this.guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {
-        guiRobot.type(KeyCode.ENTER).sleep(500);
+        this.guiRobot.type(KeyCode.ENTER).sleep(500);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
-        return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
+        return ((Label) this.guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
     }
 
     public void focusOnSelf() {
-        if (stageTitle != null) {
-            focusOnWindow(stageTitle);
+        if (this.stageTitle != null) {
+            focusOnWindow(this.stageTitle);
         }
     }
 
@@ -84,16 +84,16 @@ public class GuiHandle {
     }
 
     public void closeWindow() {
-        Optional<Window> window = guiRobot.listTargetWindows()
+        Optional<Window> window = this.guiRobot.listTargetWindows()
             .stream()
-            .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
+            .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(this.stageTitle)).findAny();
 
         if (!window.isPresent()) {
             return;
         }
 
-        guiRobot.targetWindow(window.get());
-        guiRobot.interact(() -> ((Stage) window.get()).close());
+        this.guiRobot.targetWindow(window.get());
+        this.guiRobot.interact(() -> ((Stage) window.get()).close());
         focusOnMainApp();
     }
 }

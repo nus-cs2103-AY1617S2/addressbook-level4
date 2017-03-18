@@ -23,11 +23,11 @@
                         <URL value="@Extensions.css"/>
                     </stylesheets>
                     <padding>
-                        <Insets bottom="5" left="15" right="5" top="5"/>
+                        <Insets bottom="2" left="15" right="5" top="0"/>
                     </padding>
 
                     <children>
-                        <HBox spacing="5" alignment="CENTER_LEFT">
+                        <HBox spacing="0" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>

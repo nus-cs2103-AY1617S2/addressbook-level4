@@ -16,6 +16,8 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.FloatingTaskCardHandle;
 import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -34,6 +36,8 @@ import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.ReadOnlyEvent;
+import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
@@ -344,6 +348,15 @@ public class TestUtil {
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
+
+    public static boolean compareCardAndEvent(EventCardHandle card, ReadOnlyEvent event) {
+        return card.isSameEvent(event);
+    }
+
+    public static boolean compareCardAndFloatingTask(FloatingTaskCardHandle card, ReadOnlyFloatingTask floatingTask) {
+        return card.isSameFloatingTask(floatingTask);
+    }
+
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {

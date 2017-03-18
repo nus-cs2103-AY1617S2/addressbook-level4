@@ -2,6 +2,8 @@ package seedu.doit.testutil;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.TaskManager;
+import seedu.doit.model.item.Event;
+import seedu.doit.model.item.FloatingTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.Tag;
@@ -20,16 +22,27 @@ public class TaskManagerBuilder {
     }
 
     public TaskManagerBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskManager.addTask(task);
+        this.taskManager.addTask(task);
         return this;
     }
 
+    public TaskManagerBuilder withEvent(Event event) {//throws UniqueTaskList.DuplicateTaskException {
+        this.taskManager.addEvent(event);
+        return this;
+    }
+
+    public TaskManagerBuilder withFloatingTask(FloatingTask task) {//throws UniqueTaskList.DuplicateTaskException {
+        this.taskManager.addFloatingTask(task);
+        return this;
+    }
+
+
     public TaskManagerBuilder withTag(String tagName) throws IllegalValueException {
-        taskManager.addTag(new Tag(tagName));
+        this.taskManager.addTag(new Tag(tagName));
         return this;
     }
 
     public TaskManager build() {
-        return taskManager;
+        return this.taskManager;
     }
 }
