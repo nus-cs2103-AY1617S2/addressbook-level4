@@ -45,12 +45,6 @@ public class TimePoint implements TaskDate {
                                 DateUtil.getBeginOfDay(tmr), DateUtil.getEndOfDay(tmr));
     }
 
-    public boolean isHappeningThisWeek() {
-        DateValue today = DateUtil.getToday();
-        return DateUtil.haveIntersection(date.getBeginning(), date.getEnding(),
-                                DateUtil.getBeginOfWeek(today), DateUtil.getEndOfWeek(today));
-    }
-
     @Override
     public String toString() {
         return String.format(OUTPUT_FORMAT, date.toString());

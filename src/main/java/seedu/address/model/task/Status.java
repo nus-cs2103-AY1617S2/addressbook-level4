@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  *      + Today
  *      + Tomorrow
  *      + This Week
- *      + In future
+ *      + future
  *  ** Status should not be used when comparing tasks as it is volatile and changes
  *  depending on current time **
  */
@@ -27,7 +27,7 @@ public class Status {
      */
     public static final String[] ALLOWED_STATUS_VALUES = {
         "Done", "Undone", "Floating", "Overdue",
-        "Today", "Tomorrow", "This week", "In future"
+        "Today", "Tomorrow", "Future"
     };
 
     /* Status values string contants */
@@ -37,8 +37,7 @@ public class Status {
     public static final String OVERDUE = "Overdue";
     public static final String TODAY = "Today";
     public static final String TOMORROW = "Tomorrow";
-    public static final String THIS_WEEK = "This week";
-    public static final String IN_FUTURE = "In future";
+    public static final String FUTURE = "Future";
 
     public final String status;
 
