@@ -187,11 +187,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(labels.asObservableList());
     }
 
+    @Override
     public ObservableList<ReadOnlyTask> getImmutableTaskList() throws CloneNotSupportedException {
         UniqueTaskList oldTaskList = tasks.clone();
         return new UnmodifiableObservableList<>(oldTaskList.asObservableList());
     }
 
+    @Override
     public ObservableList<Label> getImmutableLabelList() throws CloneNotSupportedException {
         UniqueLabelList oldLabelList = labels.clone();
         return new UnmodifiableObservableList<>(oldLabelList.asObservableList());

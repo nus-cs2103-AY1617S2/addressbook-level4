@@ -22,4 +22,16 @@ public interface ReadOnlyTaskManager {
      */
     ObservableList<Label> getLabelList();
 
+    /**
+     * Returns a clone of the current unmodifiable view of the task list.
+     * This list will not contain any duplicate tasks.
+     */
+    ObservableList<ReadOnlyTask> getImmutableTaskList() throws CloneNotSupportedException;
+
+    /**
+     * Returns a clone of the current unmodifiable view of the labels list.
+     * This list will not contain any duplicate labels.
+     */
+    ObservableList<Label> getImmutableLabelList() throws CloneNotSupportedException;
+
 }
