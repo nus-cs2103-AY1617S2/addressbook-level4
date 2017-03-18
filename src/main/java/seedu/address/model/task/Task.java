@@ -132,4 +132,9 @@ public class Task implements ReadOnlyTask {
         this.id = id;
     }
 
+    @Override
+    public String getTaskAbsoluteDateTime() {
+        return null;
+    }
+
 }

@@ -87,7 +87,7 @@ public class TaskWithDeadline extends Task {
         if (startingTime == null) {
             return "Due: " + deadline.toString();
         } else {
-            return "Begin: " + startingTime.toString() + ";Due: "
+            return "Begin: " + startingTime.toString() + "; Due: "
                     + deadline.toString();
         }
     }
@@ -102,7 +102,20 @@ public class TaskWithDeadline extends Task {
                         .get(Calendar.DAY_OF_YEAR));
     }
 
+    @Override
     public DateTime getDeadline() {
         return deadline;
+    }
+
+    @Override
+    public String getTaskAbsoluteDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd/MM/yyyy HH:mm:ss");
+        if (startingTime == null) {
+            return "Due: " + dateFormat.format(deadline.getDate());
+        } else {
+            return "Begin: " + dateFormat.format(startingTime.getDate())
+                    + "; Due: " + dateFormat.format(deadline.getDate());
+        }
     }
 }
