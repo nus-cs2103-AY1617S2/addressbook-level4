@@ -55,7 +55,6 @@ public class DoneCommand extends Command {
 
         try {
             doneTask = createDoneTask(taskToDone);
-            System.out.println(doneTask.getStatus().getStatus());
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
