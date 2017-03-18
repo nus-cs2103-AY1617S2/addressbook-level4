@@ -18,11 +18,12 @@ public class AliasCommandParser {
     private static final Pattern ALIAS_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
     public static final String MESSAGE_COMMAND_WORD_NOT_SPECIFIED = "Command word must be specified. \n%1$s";
-    public static final String MESSAGE_ALIAS_FORMAT_INVALID = "Alias can only contain alphabets. \n%1$s";
+    public static final String MESSAGE_ALIAS_FORMAT_INVALID = "Alias can only contain alphabet"
+                                                                    + "and underscores. \n%1$s";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ListCommand
-     * and returns an ListCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AliasCommand
+     * and returns an AliasCommand object for execution.
      */
     public Command parse(String args) {
         final Matcher matcher = ALIAS_COMMAND_REGEX.matcher(args.trim());
