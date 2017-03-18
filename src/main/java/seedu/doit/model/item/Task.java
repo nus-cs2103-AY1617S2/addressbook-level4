@@ -1,7 +1,5 @@
 package seedu.doit.model.item;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Objects;
 
 import seedu.doit.commons.util.CollectionUtil;
@@ -223,7 +221,6 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     public int compareItems(ReadOnlyTask other) {
-        assertTrue(other.isEvent() || other.isFloatingTask() || other.isTask());
 
         if (this.isTask() && other.isTask()) {
             return compareName(other);
