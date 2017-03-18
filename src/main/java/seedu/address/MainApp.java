@@ -208,14 +208,6 @@ public class MainApp extends Application {
         //Save all data into the new location
         storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
 
-        config = initConfig(configPath);
-        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
-        userPrefs = initPrefs(config);
-        initLogging(config);
-        model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, storage);
-        ui.setLogic(logic);
-        initEventsCenter();
     }
 
     public static void main(String[] args) {
