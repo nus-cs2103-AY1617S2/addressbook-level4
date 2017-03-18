@@ -20,7 +20,6 @@ public class TypicalTestPersons {
                     .withDuration("2000/01/01 1000", "2000/01/01 1100")
                     .withTags("owesMoney", "friends").build();
             carl = new TaskBuilder()
-                    .withDuration("2017/02/22 1200", "2017/12/11 1530")
                     .withDescription("Carl Kurz").build();
             daniel = new TaskBuilder()
                     .withDuration("2016/02/01 1100", "2017/02/01 1100")
