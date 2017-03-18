@@ -1,5 +1,7 @@
 package seedu.doit.model.item;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Objects;
 
 import seedu.doit.commons.util.CollectionUtil;
@@ -221,7 +223,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     public int compareItems(ReadOnlyTask other) {
-
+        assertTrue(other.isEvent() || other.isFloatingTask() || other.isTask());
 
         if (this.isTask() && other.isTask()) {
             return compareName(other);
@@ -247,9 +249,8 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
             return 1;
         }
 
-        //Should never reach this
+        // Should never reach this
         return 0;
-
     }
 
     @Override

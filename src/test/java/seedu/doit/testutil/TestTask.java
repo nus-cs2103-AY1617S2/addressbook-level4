@@ -1,5 +1,7 @@
 package seedu.doit.testutil;
 
+import static org.junit.Assert.assertTrue;
+
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
@@ -163,6 +165,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     public int compareItems(ReadOnlyTask other) {
+        assertTrue(other.isEvent() || other.isFloatingTask() || other.isTask());
 
         if (this.isTask() && other.isTask()) {
             return compareName(other);
@@ -190,7 +193,6 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
         //Should never reach this
         return 0;
-
     }
 
 }
