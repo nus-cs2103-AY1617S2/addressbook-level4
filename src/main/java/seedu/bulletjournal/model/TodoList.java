@@ -83,7 +83,7 @@ public class TodoList implements ReadOnlyTodoList {
      *
      * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniqueTaskList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicatePersonException {
         syncMasterTagListWith(p);
         persons.add(p);
     }
@@ -139,7 +139,7 @@ public class TodoList implements ReadOnlyTodoList {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {

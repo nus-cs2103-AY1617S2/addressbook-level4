@@ -10,7 +10,7 @@ public class ClearCommandTest extends TodoListGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(taskListPanel.isListMatching(td.getTypicalPersons()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command

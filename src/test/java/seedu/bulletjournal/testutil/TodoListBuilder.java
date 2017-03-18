@@ -20,7 +20,7 @@ public class TodoListBuilder {
     }
 
     public TodoListBuilder withPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
-        todoList.addPerson(task);
+        todoList.addTask(task);
         return this;
     }
 

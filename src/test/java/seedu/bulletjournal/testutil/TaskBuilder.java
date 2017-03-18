@@ -39,12 +39,12 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withDetail(String address) throws IllegalValueException {
+    public TaskBuilder withBeginDate(String address) throws IllegalValueException {
         this.task.setAddress(new BeginDate(address));
         return this;
     }
 
-    public TaskBuilder withDeadline(String deadline) throws IllegalValueException {
+    public TaskBuilder withDueDate(String deadline) throws IllegalValueException {
         this.task.setPhone(new DueDate(deadline));
         return this;
     }

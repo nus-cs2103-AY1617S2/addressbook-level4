@@ -238,7 +238,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TodoList expectedAB = new TodoList();
-        expectedAB.addPerson(toBeAdded);
+        expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand("add ", toBeAdded),
@@ -246,19 +246,19 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getPersonList());
 
-        model.deletePerson(toBeAdded);
+        model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("a ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
                 expectedAB.getPersonList());
 
-        model.deletePerson(toBeAdded);
+        model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("create ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
                 expectedAB.getPersonList());
 
-        model.deletePerson(toBeAdded);
+        model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("new ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
@@ -417,7 +417,7 @@ public class LogicManagerTest {
         List<Task> threePersons = helper.generatePersonList(3);
 
         TodoList expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removePerson(threePersons.get(1));
+        expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
@@ -622,7 +622,7 @@ public class LogicManagerTest {
          */
         private void addToAddressBook(TodoList todoList, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                todoList.addPerson(p);
+                todoList.addTask(p);
             }
         }
 

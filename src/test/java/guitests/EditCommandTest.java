@@ -21,15 +21,15 @@ public class EditCommandTest extends TodoListGuiTest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedPersonsList = td.getTypicalPersons();
+    TestTask[] expectedPersonsList = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby d/91234567 s/undone b/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Burn clothes d/91234567 s/undone b/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withTaskName("Bobby").withDeadline("91234567")
-                .withStatus("undone").withDetail("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedPerson = new TaskBuilder().withTaskName("Burn clothes").withDueDate("91234567")
+                .withStatus("undone").withBeginDate("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

@@ -59,14 +59,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
-        todoList.removePerson(target);
+    public synchronized void deleteTask(ReadOnlyTask target) throws PersonNotFoundException {
+        todoList.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
-        todoList.addPerson(task);
+        todoList.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }

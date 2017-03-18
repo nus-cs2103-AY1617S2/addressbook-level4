@@ -44,7 +44,7 @@ public class SampleDataUtil {
         try {
             TodoList sampleAB = new TodoList();
             for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+                sampleAB.addTask(samplePerson);
             }
             return sampleAB;
         } catch (DuplicatePersonException e) {

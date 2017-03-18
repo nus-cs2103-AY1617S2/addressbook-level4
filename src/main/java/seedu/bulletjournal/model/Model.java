@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyTodoList getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given person */
     void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException;

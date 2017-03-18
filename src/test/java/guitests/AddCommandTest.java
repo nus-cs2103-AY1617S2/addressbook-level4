@@ -15,7 +15,7 @@ public class AddCommandTest extends TodoListGuiTest {
     @Test
     public void add() {
         //add one person
-        TestTask[] currentList = td.getTypicalPersons();
+        TestTask[] currentList = td.getTypicalTasks();
         TestTask personToAdd = td.hangclothes;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);

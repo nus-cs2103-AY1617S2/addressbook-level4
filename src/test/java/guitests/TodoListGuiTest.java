@@ -88,7 +88,7 @@ public abstract class TodoListGuiTest {
      */
     protected TodoList getInitialData() {
         TodoList ab = new TodoList();
-        TypicalTestTasks.loadAddressBookWithSampleData(ab);
+        TypicalTestTasks.loadTodoListWithSampleData(ab);
         return ab;
     }
 
