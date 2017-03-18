@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -25,6 +26,9 @@ public class TaskGroupPanel extends UiPart<Region> {
 
     @FXML
     private TitledPane titledPane;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     @FXML
     private VBox taskGroupView;
@@ -55,6 +59,35 @@ public class TaskGroupPanel extends UiPart<Region> {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public boolean isExpanded() {
+        return titledPane.isExpanded();
+    }
+
+    public double getScrollPosition() {
+        return scrollPane.getVvalue();
+    }
+
+    public void scrollToEnd() {
+        openTitlePane();
+        safelyScrollTo(scrollPane.getVmax());
+    }
+
+    public void scrollTo(double vValue) {
+        openTitlePane();
+        safelyScrollTo(vValue);
+    }
+
+    public int getTaskCount() {
+        return taskGroupView.getChildren().size();
+    }
+
+    // Value used for scroling must be within vmax and vmin
+    public void safelyScrollTo(double vValue) {
+        vValue = Math.min(vValue, scrollPane.getVmax());
+        vValue = Math.max(vValue, scrollPane.getVmin());
+        scrollPane.setVvalue(vValue);
     }
 
     /**

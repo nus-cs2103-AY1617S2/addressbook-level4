@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -16,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ShowTaskGroupEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Status;
@@ -33,11 +30,14 @@ public class TaskListPanel extends UiPart<Region> {
 
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
     private HashMap<String, ArrayList<Integer>> taskIndexMap;
+    private HashMap<String, TaskGroupPanel> childGroupMap;
 
     @FXML
     private VBox taskListView;
 
-    private String lastShownGroupName;
+    private String lastExpanded;
+    private int lastTaskCount;
+    private double lastScrollPosition;
 
     private ListChangeListener taskListListener;
 
@@ -45,7 +45,6 @@ public class TaskListPanel extends UiPart<Region> {
         super(FXML);
         viewTasksWithStatus(taskList, ALL_TASKS);
         addToPlaceholder(taskListPlaceholder);
-        registerAsAnEventHandler(this);
     }
 
     /** ViewCalendar displays tasks grouped by status */
@@ -64,11 +63,39 @@ public class TaskListPanel extends UiPart<Region> {
         }
         taskListListener = new ListChangeListener<ReadOnlyTask>() {
             public void onChanged(Change<? extends ReadOnlyTask> change) {
+                collectScrollingState(statusList);
                 initTaskListsByStatus(taskList, statusList);
                 createTaskListView(statusList);
+                restoreScrollingState();
             }
         };
         taskList.addListener(taskListListener);
+    }
+
+    /** Update scrolling state of its child nodes */
+    private void collectScrollingState(String[] statusList) {
+        lastExpanded = null;
+        for (String status : statusList) {
+            TaskGroupPanel childNode = childGroupMap.get(status);
+            if (childNode.isExpanded()) {
+                lastExpanded = childNode.getTitle();
+                lastScrollPosition = childNode.getScrollPosition();
+                lastTaskCount = childNode.getTaskCount();
+                return;
+            }
+        }
+    }
+
+    /** Restore scrolling state based on previously collected info. */
+    private void restoreScrollingState() {
+        if (lastExpanded != null) {
+            TaskGroupPanel childNode = childGroupMap.get(lastExpanded);
+            if (childNode.getTaskCount() > lastTaskCount) {
+                childNode.scrollToEnd();
+            } else {
+                childNode.scrollTo(lastScrollPosition);
+            }
+        }
     }
 
     /**
@@ -104,18 +131,16 @@ public class TaskListPanel extends UiPart<Region> {
      */
     private void createTaskListView(String[] statusList) {
         taskListView.getChildren().clear();
+        childGroupMap = new HashMap<String, TaskGroupPanel>();
+
         for (String status : statusList) {
             // Create new task group & add them to current view.
             ObservableList<ReadOnlyTask> tasks = taskListMap.get(status);
             ArrayList<Integer> taskIndexList = taskIndexMap.get(status);
             TaskGroupPanel taskGroupPanel = new TaskGroupPanel(status, tasks, taskIndexList);
 
+            childGroupMap.put(status, taskGroupPanel);
             taskListView.getChildren().add(taskGroupPanel.getRoot());
-
-            // Restore expanding state
-            if (lastShownGroupName != null && lastShownGroupName.equals(status)) {
-                taskGroupPanel.openTitlePane();
-            }
         }
     }
 
@@ -123,11 +148,6 @@ public class TaskListPanel extends UiPart<Region> {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
-    }
-
-    @Subscribe
-    private void handleShowTaskGroupEvent(ShowTaskGroupEvent event) {
-        lastShownGroupName = event.title;
     }
 
 }
