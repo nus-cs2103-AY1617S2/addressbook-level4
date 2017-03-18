@@ -118,6 +118,13 @@ public class TodoList implements ReadOnlyTodoList {
     }
 
     /**
+     * Uncompletes the todo in the list at position {@code index}.
+     */
+    public void uncompleteTodo(int index) {
+        todos.uncompleteTodo(index);
+    }
+
+    /**
      * Ensures that every tag in this todo:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list

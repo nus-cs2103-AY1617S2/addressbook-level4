@@ -92,9 +92,7 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setCompleteTime(Date completeTime) {
-        if (completeTime != null) {
-            this.completeTime = completeTime;
-        }
+        this.completeTime = completeTime;
     }
 
     @Override

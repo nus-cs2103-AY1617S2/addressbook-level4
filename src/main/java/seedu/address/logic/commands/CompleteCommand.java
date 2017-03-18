@@ -17,7 +17,7 @@ public class CompleteCommand extends Command {
     public static final String COMMAND_WORD = "complete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes last action if it involves modifying a todo.\n"
+            + ": Completes todo.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

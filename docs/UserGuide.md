@@ -152,27 +152,36 @@ Examples:
 * `complete 1`<br>
 * `complete 2 17-03-17T8:00`<br>
 
-### 2.8. Undo last command : `undo`
+### 2.8. Mark todo as uncompleted : `uncomplete`
+
+Marks the specified todo as uncompleted.<br>
+Format: `uncomplete INDEX`
+
+Example:
+
+* `uncomplete 1`<br>
+
+### 2.9. Undo last command : `undo`
 
 Undoes last command if it involves changing a todo.<br>
 Format: `undo`
 
-### 2.9. Clearing all entries : `clear`
+### 2.10. Clearing all entries : `clear`
 
 Clears all todos. Irreversible.<br>
 Format: `clear`
 
-### 2.10. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data
+### 2.12. Saving the data
 
 Todo data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.12 Setting the data save location : `savefile`
+### 2.13 Setting the data save location : `savefile`
 
 Sets the save file location containing todo data.<br>
 Format: `savefile PATH_TO_FILE`
@@ -216,6 +225,9 @@ Examples:
 
 * **Complete** : `complete INDEX [COMPLETETIME]` <br>
   e.g. `complete 1 17-03-17T8:00`
+
+  * **Uncomplete** : `uncomplete INDEX` <br>
+  e.g. `uncomplete 1`
 
 * **Undo** : `undo` <br>
   e.g. `undo`

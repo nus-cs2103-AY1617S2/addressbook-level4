@@ -101,6 +101,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTodoListChanged();
     }
 
+    @Override
+    public synchronized void uncompleteTodo(int filteredTodoListIndex) {
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.uncompleteTodo(filteredTodoListIndex);
+        previousTodoList = tempTodoList;
+        indicateTodoListChanged();
+    }
+
 
     @Override
     public void loadPreviousState() throws NoPreviousStateException {

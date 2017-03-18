@@ -75,6 +75,15 @@ public class UniqueTodoList implements Iterable<Todo> {
     }
 
     /**
+     * Uncompletes the todo in the list at position {@code index}
+     */
+    public void uncompleteTodo(int index) {
+        Todo todoToUncomplete = internalList.get(index);
+        todoToUncomplete.setCompleteTime(null);
+        internalList.set(index, todoToUncomplete);
+    }
+
+    /**
      * Removes the equivalent todo from the list.
      *
      * @throws TodoNotFoundException if no such todo could be found in the list.

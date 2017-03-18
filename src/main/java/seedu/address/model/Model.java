@@ -40,6 +40,12 @@ public interface Model {
      */
     void completeTodo(int filteredTodoListIndex, Date completeTime);
 
+    /**
+     * Uncompletes the todo located at {@code filteredTodoListIndex}
+     */
+    void uncompleteTodo(int filteredTodoListIndex);
+
+
     /** Returns the filtered todo list as an {@code UnmodifiableObservableList<ReadOnlyTodo>} */
     UnmodifiableObservableList<ReadOnlyTodo> getFilteredTodoList();
 
