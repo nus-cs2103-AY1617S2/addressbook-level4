@@ -9,6 +9,7 @@ import java.util.EmptyStackException;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
+    public static final String COMMAND_WORD_SHORT = "u";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undoes the most recent operation entered by user\n"

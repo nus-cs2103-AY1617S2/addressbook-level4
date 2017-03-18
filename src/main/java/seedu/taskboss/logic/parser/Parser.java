@@ -88,6 +88,7 @@ public class Parser {
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_WORD_SHORT:
             return new UndoCommand();
 
         default:
