@@ -37,7 +37,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     //@@author A0143157J
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
-        String detailsToEdit = "Amanda p/2 sd/today ed/next fri 1am i/discuss about life, #08-111 c/relax";
+        String detailsToEdit = "Amanda p/2 sd/today ed/next fri 1am i/discuss about life c/relax";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("2")
