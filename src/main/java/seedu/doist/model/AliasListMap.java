@@ -69,6 +69,10 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         setDefaultCommandWords();
     }
 
+    public AliasListMap(ReadOnlyAliasListMap src) {
+        commandAliases = new HashMap<String, ArrayList<String>>(src.getAliasListMapping());
+    }
+
 //// util methods
 
     @Override

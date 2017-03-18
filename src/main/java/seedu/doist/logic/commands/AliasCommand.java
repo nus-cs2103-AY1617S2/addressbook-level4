@@ -27,17 +27,17 @@ public class AliasCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        if (!Command.getDefaultCommandWordSet().contains(defaultCommandWord)) {
+        if (!model.getDefaultCommandWordSet().contains(defaultCommandWord)) {
             throw new CommandException(String.format(MESSAGE_COMMAND_WORD_NOT_EXIST, defaultCommandWord));
-        } else if (Command.getDefaultCommandWordSet().contains(alias)) {
+        } else if (model.getDefaultCommandWordSet().contains(alias)) {
             throw new CommandException(String.format(MESSAGE_ALIAS_IS_DEFAULT_COMMAND_WORD, alias));
         } else {
-            Command.setAlias(alias, defaultCommandWord);
+            model.setAlias(alias, defaultCommandWord);
             return new CommandResult(String.format(MESSAGE_SUCCESS, alias, defaultCommandWord));
         }
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
+        return new CommandInfo(model.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

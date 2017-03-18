@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -56,5 +57,19 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
+    /** Sorts the tasks by Priority */
     void sortTasksByPriority();
+
+    ///// Alias List Map
+    /** Returns the AliasListMap */
+    ReadOnlyAliasListMap getAliasListMap();
+
+    /** Sets an alias in the AliasListMap */
+    void setAlias(String alias, String commandWord);
+
+    /** Get the alias list of a defaultCommandWord */
+    ArrayList<String> getAliasList(String defaultCommandWord);
+
+    /** Get the set of default command words */
+    Set<String> getDefaultCommandWordSet();
 }
