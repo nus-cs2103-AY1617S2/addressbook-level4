@@ -34,14 +34,13 @@
 ## 1. Introduction
 
 TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply <br>
-with only a single line of command! With the efficacy of a calendar without its shortcomings, <br>
+with a single line of command! With the efficacy of a calendar without its shortcomings, <br>
 TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. <br>
 TypeTask is especially good for you if: <br>
 
 > You want to do everything through a single line of command <br>
 > You want an application that works offline <br>
 > You want to write tasks that have deadlines or start-dates <br>
-&nbsp;
 
 ## 2. Quick Start
 
