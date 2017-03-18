@@ -69,9 +69,4 @@ public class TaskSwitchPredicate {
                 && predicate.equals(((TaskSwitchPredicate) other).predicate)
                 && displayName.equals(((TaskSwitchPredicate) other).displayName));
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(predicate, displayName);
-    }
 }

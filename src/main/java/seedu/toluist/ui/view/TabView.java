@@ -3,6 +3,9 @@ package seedu.toluist.ui.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.toluist.model.TaskSwitchPredicate;
+import seedu.toluist.ui.UiStore;
+
+import java.util.stream.Collectors;
 
 /**
  * View to display the tab bar
@@ -24,7 +27,12 @@ public class TabView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        tabLabel.setText(switchPredicate.getDisplayName());
+        UiStore uiStore = UiStore.getInstance();
+        String taskInfo = "("
+                + uiStore.getTasks().stream()
+                         .filter(switchPredicate.getPredicate()).collect(Collectors.toList()).size()
+                + "/" + uiStore.getTasks().size() + ")";
+        tabLabel.setText(switchPredicate.getDisplayName() + taskInfo);
         if (isSelected) {
             tabLabel.getStyleClass().add(SELECTED_TAB_CLASS);
         }
