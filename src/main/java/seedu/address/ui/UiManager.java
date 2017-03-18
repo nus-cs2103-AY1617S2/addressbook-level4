@@ -52,6 +52,7 @@ public class UiManager extends ComponentManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
+        //@@author A0164212U
         try {
         	logic.execute("find " + getTodayDate());
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
@@ -63,13 +64,14 @@ public class UiManager extends ComponentManager implements Ui {
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
-
+    
     private String getTodayDate(){
     	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     	Date date = new Date();
     	String dateString = dateFormat.format(date);
     	return dateString;
     }
+    //@@author
     
     @Override
     public void stop() {
