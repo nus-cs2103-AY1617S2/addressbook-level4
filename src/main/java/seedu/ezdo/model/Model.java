@@ -30,7 +30,7 @@ public interface Model {
     /** Checks the task and makes sure the dates are logical.
      * i.e. start date not after due date.
      */
-    void checkTaskDate(Task task) throws DateException;
+    void checkTaskDate(ReadOnlyTask task) throws DateException;
     /** Marks a task as done.
      * @throws TaskNotFoundException */
     void doneTask(Task task) throws TaskNotFoundException;
