@@ -55,7 +55,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a person to the task manager<br>
-Format: `add NAME [n/NOTES] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Format: `add NAME [n/NOTES] [s/STATUS] [d/DATETIME] [p/PRIORITY] [t/TAG]...`
 
 > * Task can have notes
 > * Task can have a deadline
@@ -71,12 +71,12 @@ Examples:
 ### 2.3. Sort tasks : `sort`
 
 Sorts the list of tasks currently being shown according to the parameters.<br>
-Format: `sort [s/STATUS] [d/DEADLINE] [p/PRIORITY]...`
+Format: `sort [s/STATUS] [d/DATETIME] [p/PRIORITY]...`
 
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in Opus.<br>
-Format: `edit INDEX [NAME] [n/NOTES] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Format: `edit INDEX [NAME] [n/NOTES] [d/DATETIME] [p/PRIORITY] [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -136,7 +136,7 @@ Format: `redo`
 ### 2.9. Find
 
 Displays a list of tasks based on keywords and/or tags.<br>
-Format: `find [NAME] [s/STATUS] [d/DEADLINE] [p/PRIORITY] [t/TAG]...`
+Format: `find [NAME] [s/STATUS] [d/DATETIME] [p/PRIORITY] [t/TAG]...`
 
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
@@ -159,7 +159,7 @@ Autocomplete the user's command on the CLI.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME [n/NOTES] [p/PRIORITY] [d/DEADLINE] [t/TAG]...` <br>
+* **Add**  `add NAME [n/NOTES] [p/PRIORITY] [d/DATETIME] [t/TAG]...` <br>
   e.g. `add Do laundry n/from the blue basket p/hi d/23/3/2018 t/friend t/colleague`
 
 * **Clear** : `clear`
@@ -167,7 +167,7 @@ Autocomplete the user's command on the CLI.
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Edit**  `edit INDEX NAME [n/NOTES] [p/PRIORITY] [d/DEADLINE] [t/TAG]...` <br>
+* **Edit**  `edit INDEX NAME [n/NOTES] [p/PRIORITY] [d/DATETIME] [t/TAG]...` <br>
   e.g. `edit 2 Prepare dinner n/for 4 pax p/hi d/23/4/2017 t/friend t/colleague`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
@@ -182,7 +182,7 @@ Autocomplete the user's command on the CLI.
 
 * **Redo** : `redo` <br>
 
-* **Schedule** : `schedule INDEX DEADLINE` <br>
+* **Schedule** : `schedule INDEX DATETIME` <br>
   e.g. `schedule 6 30/3/2017`
 
 * **Select** : `select INDEX` <br>

@@ -8,11 +8,11 @@ import org.junit.Test;
 public class DateTimeTest {
 
     @Test
-    public void isValidDeadline() {
-        // invalid deadline
+    public void isValidDateTime() {
+        // invalid dateTime
         assertFalse(DateTime.isValidDateTime("03/12/2016")); // inputs a date earlier than the current date
 
-        // valid deadline
+        // valid dateTime
         assertTrue(DateTime.isValidDateTime("03/12/2217")); // inputs a date later than the current date
     }
 }

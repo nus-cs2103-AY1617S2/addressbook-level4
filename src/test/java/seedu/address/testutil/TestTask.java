@@ -19,7 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private Note note;
     private Status status;
     private Priority priority;
-    private DateTime deadline;
+    private DateTime dateTime;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -34,7 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
         this.note = taskToCopy.getNote().orElse(null);
-        this.deadline = taskToCopy.getDeadline().orElse(null);
+        this.dateTime = taskToCopy.getDateTime().orElse(null);
         this.tags = taskToCopy.getTags();
     }
 
@@ -54,8 +54,8 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setDeadline(DateTime deadline) {
-        this.deadline = deadline;
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -83,8 +83,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<DateTime> getDeadline() {
-        return Optional.of(deadline);
+    public Optional<DateTime> getDateTime() {
+        return Optional.of(dateTime);
     }
 
     @Override
@@ -111,8 +111,8 @@ public class TestTask implements ReadOnlyTask {
 
         sb.append("s/" + this.getStatus().value + " ");
 
-        if (this.getDeadline().isPresent()) {
-            sb.append("d/" + this.getDeadline().get().toString() + " ");
+        if (this.getDateTime().isPresent()) {
+            sb.append("d/" + this.getDateTime().get().toString() + " ");
         }
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

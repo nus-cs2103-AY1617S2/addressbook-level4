@@ -427,11 +427,11 @@ public class LogicManagerTest {
             Priority priority = new Priority("hi");
             Status email = new Status("incomplete");
             Note note = new Note("edit slides");
-            DateTime deadline = new DateTime("12/12/2020");
+            DateTime dateTime = new DateTime("12/12/2020");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, priority, email, note, deadline, tags);
+            return new Task(name, priority, email, note, dateTime, tags);
         }
 
         /**
@@ -469,8 +469,8 @@ public class LogicManagerTest {
                 cmd.append(" n/").append(p.getNote().get().toString());
             }
 
-            if (p.getDeadline().isPresent()) {
-                cmd.append(" d/").append(p.getDeadline().get().toString());
+            if (p.getDateTime().isPresent()) {
+                cmd.append(" d/").append(p.getDateTime().get().toString());
             }
 
             UniqueTagList tags = p.getTags();

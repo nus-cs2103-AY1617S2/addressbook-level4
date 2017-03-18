@@ -24,7 +24,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("low")
-                .withStatus("incomplete").withNote("For our project proposal").withDeadline("12/12/2017").build();
+                .withStatus("incomplete").withNote("For our project proposal").withDateTime("12/12/2017").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }

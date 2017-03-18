@@ -100,11 +100,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
+     * Parses a {@code Optional<String> dateTime} into an {@code Optional<DateTime>} if {@code dateTime} is present.
      */
-    public static Optional<DateTime> parseDeadline(Optional<String> deadline) throws IllegalValueException {
-        assert deadline != null;
-        return deadline.isPresent() ? Optional.of(new DateTime(deadline.get())) : Optional.empty();
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
+        assert dateTime != null;
+        return dateTime.isPresent() ? Optional.of(new DateTime(dateTime.get())) : Optional.empty();
     }
 
     /**

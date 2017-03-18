@@ -27,7 +27,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private Label deadline;
+    private Label dateTime;
     @FXML
     private FlowPane tags;
 
@@ -38,7 +38,7 @@ public class TaskCard extends UiPart<Region> {
         priority.setText(task.getPriority().map(Priority::toString).orElse(""));
         note.setText(task.getNote().map(Note::toString).orElse(""));
         status.setText(task.getStatus().value);
-        deadline.setText(task.getDeadline().map(DateTime::toString).orElse(""));
+        dateTime.setText(task.getDateTime().map(DateTime::toString).orElse(""));
         initTags(task);
     }
 
