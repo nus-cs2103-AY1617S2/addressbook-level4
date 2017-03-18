@@ -6,13 +6,13 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
-3. [Features](#3-features)<br>
-    3.1. [Adding Tasks](#31-adding-tasks)<br>
-    3.2. [Viewing Tasks](#32-viewing-tasks)<br>
-    3.3. [Managing Tasks](#33-managing-tasks)<br>
-    3.4. [Managing Tags](#34-managing-tags)<br>
-    3.5. [Undo/Redo Commands](#35-undoredo-commands)<br>
-    3.6. [Advanced Usage](#36-advanced-usage)<br>
+3. [Features](#3-features)
+    3.1. [Adding Tasks](#31-adding-tasks)
+    3.2. [Viewing Tasks](#32-viewing-tasks)
+    3.3. [Managing Tasks](#33-managing-tasks)
+    3.4. [Managing Tags](#34-managing-tags)
+    3.5. [Undo/Redo Commands](#35-undoredo-commands)
+    3.6. [Advanced Usage](#36-advanced-usage)
     3.7. [Miscellaneous](#37-miscellaneous)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
@@ -22,14 +22,14 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 In our far too hectic lives, there's just so much to keep track of. Trying to manage everything is a tiring and stressful affair. Instead of overwhelming you with a neverending task list, **Today** helps you focus on the things that you *can* control - the tasks you're going to tackle today.
 
-This user guide is here to guide you through the [installation](#21-installation-instructions) of our application and give you a walkthrough of our [basic features](#3-features). We've also provided a [cheatsheet](#5-command-summary) with a summary of all our commands available.
+This user guide is here to guide you through the [installation](#installation-instructions) of our application and give you a walkthrough of our [basic features](#features). We've also provided a [cheatsheet](#command-summary) with a summary of all our commands available.
 
 ## 2. Quick Start
 
 Let's get you up and running.
 
 ### 2.1. Installation Instructions
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/ui.png" height="300">
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/uidesc.png" height="300">
 
 _Fig 2.1.1. Default view of the task manager_
 
@@ -42,11 +42,9 @@ _Fig 2.1.1. Default view of the task manager_
 
 As you get used to the features, you can use **Today** any way you like. But for starters, this is what we recommend.
 
-| Index | Action | Example Command |
-| :---: | ------ | --------------- |
-|1| At the start of every working day, go through your inbox and `add` new tasks to your tasklist. | `add Redesign event poster due tomorrow` adds the task `Redesign event poster` with the deadline `tomorrow` |
-|2|Once you're done, review your list and mark out the tasks you want to focus on `today`. | `today F1, F2, F3` shifts the tasks indexed F1, F2, F3 to today's list |
-|3|Whenever you're `done` with a task, it's shifted out of sight, allowing you to focus on the remaining tasks on hand.|`done T1, T3, T4` marks the tasks indexed T1, T2 and T4 as complete and whisks them away to your completed list|
+1. At the start of every working day, go through your inbox and `add` new tasks to your tasklist.
+2. Once you're done, review your list and mark out the tasks you want to focus on `today`.
+3. Whenever you're `done` with a task, it's shifted out of sight, allowing you to focus on the remaining tasks on hand.
 
 Rinse and repeat until you have no more tasks left!
 
@@ -56,9 +54,7 @@ Rinse and repeat until you have no more tasks left!
 > * normal text denotes command keywords
 > * `< >` denotes parameters
 > * `[ ]` denotes that the parameter is optional
-> * `T<number>` denotes a task to be done today
-> * `F<number>` denotes a task to be done in the future
-> * `C<number>` denotes a task that has already been completed
+
 
 ### 3.1. Adding Tasks
 
@@ -151,9 +147,6 @@ By default, **Today** already displays all your uncompleted tasks. However, if y
 
 ##### Format: `list`
 
-##### Parameters
-    no parameters taken
-
 ### 3.3. Managing Tasks
 
 #### 3.3.1. Marking tasks as **Today**
@@ -169,6 +162,10 @@ As suggested in the [quick-start guide](#22-how-to-get-started), we recommend th
 
 * `today F1`
 * `today F1, F3, F4`
+
+> * `T<number>` denotes a task to be done today
+> * `F<number>` denotes a task to be done in the future
+> * `C<number>` denotes a task that has already been completed
 
 #### 3.3.2. Marking task as done
 
@@ -224,7 +221,7 @@ We make mistakes all the time. When you've entered a wrong task name, or even a 
 
 #### 3.3.5. Deleting tasks
 
-Some tasks don't get `done`. We put them aside and after several eons, we discover that we don't have to do them anymore. If you're feeling too guilty to mark the task as `done`, that's the perfect time to `delete` it.
+Some tasks don't get `done`. We put them aside and after several eons, we discover that we don't have to actually do them anymore. If you're feeling too guilty to mark the task as `done`, that's the perfect time to `delete` it.
 
 ##### Format: `delete <id1, id2, ...>`
 
@@ -278,19 +275,11 @@ You accidentally marked an undone task as `done`. You can quickly `undo` what yo
 
 ##### Format: `undo`
 
-##### Parameters
-
-    No parameters taken
-
 #### 3.5.2. Redo Command
 
 You used `undo` without meaning to, or you've used `undo` one too many times. Using `redo` will undo your last `undo` command.
 
 ##### Format: `redo`
-
-##### Parameters
-
-    No parameters taken
 
 ### 3.6. Advanced Usage
 
@@ -347,19 +336,11 @@ To view this user guide you're currently viewing, you can use the F1 hotkey or u
 
 ##### Format: `help`
 
-##### Parameters
-
-    No parameters taken
-
 ### 3.7.2. Exit
 
 At the end of a long day, you deserve some time away from your task manager. You can `exit` **Today** and enjoy the rest of your day!
 
 ##### Format: `exit`
-
-##### Parameters
-
-    No parameters taken
 
 ## 4. FAQ
 
@@ -382,5 +363,5 @@ Work-in-progress
 | **Change Storage Location**| `saveto <dir_location>`|
 | **Export**| `export <dir_location>`|
 | **Import**| `import <path_to_file>`|
-| **Help**| `help [<command>]`|
+| **Help**| `help`|
 | **Exit**| `exit`|
