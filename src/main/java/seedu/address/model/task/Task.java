@@ -62,7 +62,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<Priority> getPriority() {
-        return Optional.of(priority);
+        return Optional.ofNullable(priority);
     }
 
     public void setStatus(Status status) {
