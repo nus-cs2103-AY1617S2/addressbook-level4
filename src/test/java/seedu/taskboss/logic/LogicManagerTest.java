@@ -190,7 +190,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_helpShortCommand() throws IllegalValueException {
+    public void execute_helpShortCommand() throws IllegalValueException, InvalidDatesException {
         assertCommandSuccess("h", HelpCommand.SHOWING_HELP_MESSAGE,
                 new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
@@ -203,7 +203,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_exitShortCommand() throws IllegalValueException {
+    public void execute_exitShortCommand() throws IllegalValueException, InvalidDatesException {
         assertCommandSuccess("x", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
