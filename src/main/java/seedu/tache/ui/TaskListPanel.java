@@ -27,8 +27,6 @@ public class TaskListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
-    @FXML
-    private ListView<ReadOnlyDetailedTask> detailedTaskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
@@ -48,12 +46,6 @@ public class TaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
-    private void setDetailedTaskConnections(ObservableList<ReadOnlyDetailedTask> detailedTaskList) {
-        detailedTaskListView.setItems(detailedTaskList);
-        detailedTaskListView.setCellFactory(listView -> new DetailedTaskListViewCell());
-        setEventHandlerForDTSelectionChangeEvent();
-    }
-
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
@@ -66,16 +58,6 @@ public class TaskListPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in task list panel changed to : '" + newValue + "'");
                         raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
-    }
-
-    private void setEventHandlerForDTSelectionChangeEvent() {
-        detailedTaskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new DetailedTaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -98,21 +80,6 @@ public class TaskListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
-            }
-        }
-    }
-
-    class DetailedTaskListViewCell extends ListCell<ReadOnlyDetailedTask> {
-
-        @Override
-        protected void updateItem(ReadOnlyDetailedTask detailedTask, boolean empty) {
-            super.updateItem(detailedTask, empty);
-
-            if (empty || detailedTask == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new DetailedTaskCard(detailedTask, getIndex() + 1).getRoot());
             }
         }
     }
