@@ -20,6 +20,7 @@ import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
 import seedu.taskboss.logic.commands.UndoCommand;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 /**
  * Parses user input.
  */
@@ -34,8 +35,9 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
+     * @throws InvalidDatesException
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput) throws InvalidDatesException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

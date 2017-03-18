@@ -30,6 +30,11 @@ public class AddCommandTest extends TaskBossGuiTest {
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
+        //add invalid dates task
+        commandBox.runCommand(td.johnny.getAddCommand());
+        assertResultMessage(AddCommand.ERROR_INVALID_DATES);
+        assertTrue(taskListPanel.isListMatching(currentList));
+
         //add to empty list
         commandBox.runCommand("clear");
         assertAddSuccess(td.alice);

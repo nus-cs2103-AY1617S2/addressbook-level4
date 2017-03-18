@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.DateTime;
@@ -29,6 +30,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
+    public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
 
     private final Task toAdd;
 
@@ -36,18 +38,27 @@ public class AddCommand extends Command {
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
+     * @throws InvalidDatesException
      */
     public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
-            String information, Set<String> categories) throws IllegalValueException {
+            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }
+        DateTime startDateTimeObj = new DateTime(startDateTime);
+        DateTime endDateTimeObj = new DateTime(endDateTime);
+
+        if (startDateTimeObj.getDate() != null && endDateTimeObj.getDate() != null &&
+                startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
+            throw new InvalidDatesException(ERROR_INVALID_DATES);
+        }
+
         this.toAdd = new Task(
                 new Name(name),
                 new PriorityLevel(priorityLevel),
-                new DateTime(startDateTime),
-                new DateTime(endDateTime),
+                startDateTimeObj,
+                endDateTimeObj,
                 new Information(information),
                 new UniqueCategoryList(categorySet)
         );

@@ -108,6 +108,15 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
+    //@@author A01431457J
+    @Test
+    public void edit_invalidDates_failure() {
+        commandBox.runCommand("edit 3 sd/next fri 5pm ed/tomorrow");
+
+        assertResultMessage(EditCommand.ERROR_INVALID_DATES);
+    }
+
+    //@@author
     /**
      * Checks whether the edited task has the correct updated details.
      *

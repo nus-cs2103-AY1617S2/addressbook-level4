@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
@@ -33,6 +35,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss.";
+    public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -52,7 +55,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException, InvalidDatesException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -60,13 +63,15 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-
         try {
+            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             model.updateTask(filteredTaskListIndex, editedTask);
+        } catch (InvalidDatesException ide) {
+            throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
@@ -74,9 +79,11 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws InvalidDatesException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+                                             EditTaskDescriptor editTaskDescriptor)
+                                                     throws InvalidDatesException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -90,6 +97,12 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getInformation);
         UniqueCategoryList updatedCategories = editTaskDescriptor.getCategories()
                 .orElseGet(taskToEdit::getCategories);
+
+        if (updatedStartDateTime.getDate() != null &&
+                updatedEndDateTime.getDate() != null &&
+                updatedStartDateTime.getDate().after(updatedEndDateTime.getDate())) {
+            throw new InvalidDatesException(ERROR_INVALID_DATES);
+        }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
                 updatedInformation, updatedCategories);
@@ -145,18 +158,32 @@ public class EditCommand extends Command {
             return priorityLevel;
         }
 
-        public void setStartDateTime(Optional<DateTime> startDateTime) {
+        public void setStartDateTime(Optional<DateTime> startDateTime) throws IllegalValueException {
             assert startDateTime != null;
-            this.startDateTime = startDateTime;
+
+            if (startDateTime.isPresent()) {
+                String formattedString = startDateTime.get().formatDateTime();
+                DateTime formattedDateTime = new DateTime(formattedString);
+                this.startDateTime = Optional.of(formattedDateTime);
+            } else {
+                this.startDateTime = startDateTime;
+            }
         }
 
         public Optional<DateTime> getStartDateTime() {
             return startDateTime;
         }
 
-        public void setEndDateTime(Optional<DateTime> endDateTime) {
+        public void setEndDateTime(Optional<DateTime> endDateTime) throws IllegalValueException {
             assert endDateTime != null;
-            this.endDateTime = endDateTime;
+
+            if (endDateTime.isPresent()) {
+                String formattedString = endDateTime.get().formatDateTime();
+                DateTime formattedDateTime = new DateTime(formattedString);
+                this.endDateTime = Optional.of(formattedDateTime);
+            } else {
+                this.endDateTime = endDateTime;
+            }
         }
 
         public Optional<DateTime> getEndDateTime() {
@@ -180,5 +207,6 @@ public class EditCommand extends Command {
         public Optional<UniqueCategoryList> getCategories() {
             return categories;
         }
+
     }
 }

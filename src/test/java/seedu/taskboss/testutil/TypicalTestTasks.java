@@ -10,7 +10,7 @@ import seedu.taskboss.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, johnny;
 
     public TypicalTestTasks() {
         try {
@@ -56,6 +56,10 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("chicago ave").build();
+            johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("2")
+                    .withStartDateTime("next sat 5pm")
+                    .withEndDateTime("tomorrow")
+                    .withInformation("Silicon Valley").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
