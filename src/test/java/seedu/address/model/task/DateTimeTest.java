@@ -10,9 +10,9 @@ public class DateTimeTest {
     @Test
     public void isValidDateTime() {
         // invalid dateTime
-        assertFalse(DateTime.isValidDateTime("03/12/2016")); // inputs a date earlier than the current date
+        assertFalse(DateTime.isValidDateTime("fasdf")); // inputs an invalid date string
 
         // valid dateTime
-        assertTrue(DateTime.isValidDateTime("03/12/2217")); // inputs a date later than the current date
+        assertTrue(DateTime.isValidDateTime("03/12/2217")); // inputs a valid date string
     }
 }

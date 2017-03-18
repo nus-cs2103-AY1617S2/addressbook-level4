@@ -9,12 +9,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     /*
-     * Represents a Task's datetime object in the task manager.
+     * Represents a Task's dateTime in the task manager.
      * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
      */
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
-            "Task datetime should be in the format of dd/mm/yyyy";
+            "Task date time should be in the format of dd/mm/yyyy";
 
     public final Date dateTime;
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -26,9 +26,6 @@ public class DateTime {
      */
     public DateTime(Date dateTime) throws IllegalValueException {
         assert dateTime != null;
-        if (!isValidDateTime(dateTime)) {
-            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-        }
         this.dateTime = dateTime;
     }
 
@@ -37,11 +34,7 @@ public class DateTime {
         Date dateTimeObj = null;
         try {
             dateTimeObj = formatter.parse(dateTime);
-            if (!isValidDateTime(dateTimeObj)) {
-                throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-            }
         } catch (ParseException e) {
-            e.printStackTrace();
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
         this.dateTime = dateTimeObj;
@@ -49,18 +42,21 @@ public class DateTime {
 
     /**
      * Returns true if a given date is a valid task dateTime.
+     * @throws IllegalValueException 
      */
-    public static boolean isValidDateTime(Date test) {
-        return test.after(new Date());
-    }
-
     public static boolean isValidDateTime(String test) {
         try {
-            return formatter.parse(test).after(new Date());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        	if(formatter.parse(test) != null) {
+                return true;
+            } 
+        } catch (ParseException pe) {
+            try {
+                throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
+			} catch (IllegalValueException e) {
+			    
+		    }
         }
-        return false;
+	    return false;
     }
 
     @Override
