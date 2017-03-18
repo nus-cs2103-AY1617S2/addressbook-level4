@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/CS2103JAN2017-W15-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W15-B1/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/emc2if8afmp5hpeq/branch/master?svg=true)](https://ci.appveyor.com/project/shinlos/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W15-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W15-B1/main?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9467b8288bd94bffad35d9961c0e16f7)](https://www.codacy.com/app/shinlos/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W15-B1/main&amp;utm_campaign=Badge_Grade)
 
 <img src="docs/images/UISketch.jpg" width="600"><br>
 
