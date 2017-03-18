@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
@@ -31,6 +34,9 @@ public class XmlAdaptedTask {
 
     @XmlElement
     private List<XmlAdaptedLabel> labeled = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedBooking> bookingSlots = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -56,8 +62,12 @@ public class XmlAdaptedTask {
         }
         isCompleted = source.isCompleted();
         labeled = new ArrayList<>();
+        bookingSlots = new ArrayList<>();
         for (Label label : source.getLabels()) {
             labeled.add(new XmlAdaptedLabel(label));
+        }
+        for (Booking booking : source.getBookings()) {
+            bookingSlots.add(new XmlAdaptedBooking(booking));
         }
     }
 
@@ -65,13 +75,18 @@ public class XmlAdaptedTask {
      * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
+     * @throws CommandException
      */
-    public Task toModelType() throws IllegalValueException, IllegalDateTimeValueException {
+    public Task toModelType() throws IllegalValueException, IllegalDateTimeValueException, CommandException {
         final List<Label> taskLabels = new ArrayList<>();
         final Optional<Deadline> startTime;
         final Optional<Deadline> deadline;
+        final List<Booking> taskBookings = new ArrayList<>();
         for (XmlAdaptedLabel label : labeled) {
             taskLabels.add(label.toModelType());
+        }
+        for (XmlAdaptedBooking booking : bookingSlots) {
+            taskBookings.add(booking.toModelType());
         }
         final Title title = new Title(this.title);
         if (this.startTime != null) {
@@ -85,6 +100,7 @@ public class XmlAdaptedTask {
             deadline = Optional.empty();
         }
         final UniqueLabelList labels = new UniqueLabelList(taskLabels);
-        return new Task(title, startTime, deadline, isCompleted, labels);
+        final UniqueBookingList bookings = new UniqueBookingList(taskBookings);
+        return new Task(title, startTime, deadline, isCompleted, labels, bookings);
     }
 }

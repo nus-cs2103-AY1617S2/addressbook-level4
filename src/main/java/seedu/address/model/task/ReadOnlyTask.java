@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.util.Optional;
 
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -20,6 +21,12 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal labels.
      */
     UniqueLabelList getLabels();
+
+    /**
+     * The returned BookingList is a deep copy of the internal BookingList,
+     * changes on the returned list will not affect the task's internal bookings.
+     */
+    UniqueBookingList getBookings();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -55,8 +62,9 @@ public interface ReadOnlyTask {
         }
         builder.append(" Label: ");
         getLabels().forEach(builder::append);
+        builder.append(" Booking: ");
+        getBookings().forEach(builder::append);
         return builder.toString();
     }
-
 
 }

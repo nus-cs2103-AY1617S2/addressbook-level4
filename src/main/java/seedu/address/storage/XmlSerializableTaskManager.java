@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
@@ -55,6 +56,9 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
                 e.printStackTrace();
                 return null;
             } catch (IllegalDateTimeValueException e) {
+                e.printStackTrace();
+                return null;
+            } catch (CommandException e) {
                 e.printStackTrace();
                 return null;
             }

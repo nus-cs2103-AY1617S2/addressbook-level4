@@ -18,16 +18,17 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.label.UniqueLabelList.DuplicateLabelException;
 
+//@@author A0162877N
 public class UniqueBookingList implements Iterable<Booking>{
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty LabelList.
+     * Constructs empty BookingList.
      */
     public UniqueBookingList() {}
 
     /**
-     * Creates a UniqueLabelList using given String labels. Enforces no nulls or
+     * Creates a UniqueBookingList using given String bookings. Enforces no nulls or
      * duplicates.
      * @throws CommandException
      */
@@ -40,20 +41,20 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Creates a UniqueLabelList using given labels. Enforces no nulls or
+     * Creates a UniqueBookingList using given bookings. Enforces no nulls or
      * duplicates.
      */
-    public UniqueBookingList(Booking... labels) throws DuplicateBookingException {
-        assert !CollectionUtil.isAnyNull((Object[]) labels);
-        final List<Booking> initialLabels = Arrays.asList(labels);
-        if (!CollectionUtil.elementsAreUnique(initialLabels)) {
+    public UniqueBookingList(Booking... booking) throws DuplicateBookingException {
+        assert !CollectionUtil.isAnyNull((Object[]) booking);
+        final List<Booking> initialBookings = Arrays.asList(booking);
+        if (!CollectionUtil.elementsAreUnique(initialBookings)) {
             throw new DuplicateBookingException();
         }
-        internalList.addAll(initialLabels);
+        internalList.addAll(initialBookings);
     }
 
     /**
-     * Creates a UniqueLabelList using given labels. Enforces no null or
+     * Creates a UniqueBookingList using given bookings. Enforces no null or
      * duplicate elements.
      * @throws DuplicateBookingException
      */
@@ -63,7 +64,7 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Creates a UniqueLabelList using given labels. Enforces no nulls.
+     * Creates a UniqueBookingList using given bookings. Enforces no nulls.
      */
     public UniqueBookingList(Set<Booking> labels) {
         assert !CollectionUtil.isAnyNull(labels);
@@ -79,7 +80,7 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Returns all labels in this list as a Set. This set is mutable and
+     * Returns all bookings in this list as a Set. This set is mutable and
      * change-insulated against the internal list.
      */
     public Set<Booking> toSet() {
@@ -87,7 +88,7 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Replaces the Tags in this list with those in the argument label list.
+     * Replaces the Tags in this list with those in the argument booking list.
      */
     public void setBookings(UniqueBookingList replacement) {
         this.internalList.setAll(replacement.internalList);
@@ -102,7 +103,7 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Removes all labels from the list. Warning, this cannot be undone!
+     * Removes all bookings from the list. Warning, this cannot be undone!
      */
     public void removeAll() {
         internalList.clear();
@@ -123,7 +124,7 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Ensures every label in the argument list exists in this object.
+     * Ensures every booking in the argument list exists in this object.
      */
     public void mergeFrom(UniqueBookingList from) {
         final Set<Booking> alreadyInside = this.toSet();
@@ -140,7 +141,7 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Returns true if the list contains an equivalent Label as the given
+     * Returns true if the booking list contains an equivalent booking as the given
      * argument.
      */
     public boolean containsStringBooking(Booking bookingToCheck) {
@@ -155,10 +156,10 @@ public class UniqueBookingList implements Iterable<Booking>{
     }
 
     /**
-     * Adds a Label to the list.
+     * Adds a booking to the list.
      *
      * @throws DuplicateLabelException
-     *             if the Label to add is a duplicate of an existing Label in
+     *             if the booking to add is a duplicate of an existing booking in
      *             the list.
      */
     public void add(Booking toAdd) throws DuplicateBookingException {
