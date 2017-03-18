@@ -28,10 +28,8 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
 
-    private final String groupNames[] = {
-        Status.FLOATING, Status.OVERDUE, Status.TODAY, Status.TOMORROW,
-        Status.THIS_WEEK, Status.IN_FUTURE
-    };
+    // Additional status to view all tasks
+    private static final String ALL_TASKS = "All tasks";
 
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
     private HashMap<String, ArrayList<Integer>> taskIndexMap;
@@ -41,39 +39,62 @@ public class TaskListPanel extends UiPart<Region> {
 
     private String lastShownGroupName;
 
+    private ListChangeListener taskListListener;
+
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
-        initTaskListsByStatus(taskList);
-        createTaskListView();
+        viewTasksWithStatus(taskList, ALL_TASKS);
         addToPlaceholder(taskListPlaceholder);
         registerAsAnEventHandler(this);
+    }
 
-        // When taskList changes, update everything
-        taskList.addListener(new ListChangeListener<ReadOnlyTask>() {
+    /** ViewCalendar displays tasks grouped by status */
+    private void viewCalendar(ObservableList<ReadOnlyTask> taskList) {
+        viewTasksWithStatus(taskList, Status.FLOATING, Status.OVERDUE, Status.TODAY,
+                                        Status.TOMORROW, Status.THIS_WEEK, Status.IN_FUTURE);
+    }
+
+    private void viewTasksWithStatus(ObservableList<ReadOnlyTask> taskList, String... statusList) {
+        initTaskListsByStatus(taskList, statusList);
+        createTaskListView(statusList);
+
+        // update taskList listener
+        if (taskListListener != null) {
+            taskList.removeListener(taskListListener);
+        }
+        taskListListener = new ListChangeListener<ReadOnlyTask>() {
             public void onChanged(Change<? extends ReadOnlyTask> change) {
-                initTaskListsByStatus(taskList);
-                createTaskListView();
+                initTaskListsByStatus(taskList, statusList);
+                createTaskListView(statusList);
             }
-        });
+        };
+        taskList.addListener(taskListListener);
     }
 
     /**
      * Groups tasks based on task status.
      *
-     * A hashMap maps from groupName to corresponding task lists.
+     * A hashMap maps from status to corresponding task lists and index lists.
+     * Index list contains original index of tasks in taskList.
      */
-    private void initTaskListsByStatus(ObservableList<ReadOnlyTask> taskList) {
+    private void initTaskListsByStatus(ObservableList<ReadOnlyTask> taskList, String[] statusList) {
         taskListMap = new HashMap<String, ObservableList<ReadOnlyTask>>();
         taskIndexMap = new HashMap<String, ArrayList<Integer>>();
-        for (String groupName : groupNames) {
-            taskListMap.put(groupName, FXCollections.observableArrayList());
-            taskIndexMap.put(groupName, new ArrayList<Integer>());
+        for (String status : statusList) {
+            taskListMap.put(status, FXCollections.observableArrayList());
+            taskIndexMap.put(status, new ArrayList<Integer>());
         }
         int index = 0;
         for (ReadOnlyTask task : taskList) {
             String taskStatus = task.getStatus().toString();
-            taskListMap.get(taskStatus).add(task);
-            taskIndexMap.get(taskStatus).add(index);
+            if (taskListMap.containsKey(taskStatus)) {
+                taskListMap.get(taskStatus).add(task);
+                taskIndexMap.get(taskStatus).add(index);
+            }
+            if (taskListMap.containsKey(ALL_TASKS)) {
+                taskListMap.get(ALL_TASKS).add(task);
+                taskIndexMap.get(ALL_TASKS).add(index);
+            }
             index++;
         }
     }
@@ -81,16 +102,18 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      * Instantiate TaskGroupPanel objects and add them to taskListView.
      */
-    private void createTaskListView() {
+    private void createTaskListView(String[] statusList) {
         taskListView.getChildren().clear();
-        for (String groupName : groupNames) {
-            ObservableList<ReadOnlyTask> tasks = taskListMap.get(groupName);
-            ArrayList<Integer> taskIndexList = taskIndexMap.get(groupName);
-            TaskGroupPanel taskGroupPanel = new TaskGroupPanel(groupName, tasks, taskIndexList);
+        for (String status : statusList) {
+            // Create new task group & add them to current view.
+            ObservableList<ReadOnlyTask> tasks = taskListMap.get(status);
+            ArrayList<Integer> taskIndexList = taskIndexMap.get(status);
+            TaskGroupPanel taskGroupPanel = new TaskGroupPanel(status, tasks, taskIndexList);
+
             taskListView.getChildren().add(taskGroupPanel.getRoot());
 
             // Restore expanding state
-            if (lastShownGroupName != null && lastShownGroupName.equals(groupName)) {
+            if (lastShownGroupName != null && lastShownGroupName.equals(status)) {
                 taskGroupPanel.openTitlePane();
             }
         }
