@@ -184,20 +184,20 @@ public class UniqueTaskList implements Iterable<Task> {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         Date date1 = null, date2 = null;
 
+        // empty dates are considered lower in value so that they show at the bottom of the list
+        if (dateString1.isEmpty() && dateString2.isEmpty()) {
+            return 0;
+        } else if (dateString1.isEmpty()) {
+            return 1;
+        } else if (dateString2.isEmpty()) {
+            return -1;
+        }
+
         try {
             date1 = dateFormat.parse(dateString1);
             date2 = dateFormat.parse(dateString2);
         } catch (ParseException pe) {
             assert false : "The date format should not be invalid.";
-        }
-
-        // empty dates are considered lower in value so that they show at the bottom of the list
-        if (date1 == null && date2 == null) {
-            return 0;
-        } else if (date1 == null) {
-            return 1;
-        } else if (date2 == null) {
-            return -1;
         }
 
         return date1.compareTo(date2);
