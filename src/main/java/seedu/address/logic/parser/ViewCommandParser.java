@@ -17,7 +17,6 @@ public class ViewCommandParser {
     public Command parse(String args) {
 
         try {
-            System.out.println(args);
             return new ViewCommand(args.split("\\s+"));
         } catch (IllegalValueException e) {
             return new IncorrectCommand(e.getMessage());

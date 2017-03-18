@@ -187,11 +187,8 @@ public class Task implements ReadOnlyTask {
                 } else if (deadline.isTomorrow()) {
                     return status = new Status(Status.TOMORROW);
 
-                } else if (deadline.isThisWeek()) {
-                    return status = new Status(Status.THIS_WEEK);
-
                 } else {
-                    return status = new Status(Status.IN_FUTURE);
+                    return status = new Status(Status.FUTURE);
                 }
             } catch (IllegalValueException e) {
                 // Impossible

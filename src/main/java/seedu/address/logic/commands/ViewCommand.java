@@ -29,7 +29,7 @@ public class ViewCommand extends Command {
     public static final int NOT_FOUND = -1;
 
     public static final String[] VIEW_GROUPS = {
-        Status.DONE, Status.FLOATING, Status.OVERDUE, Status.TODAY, Status.TOMORROW, Status.IN_FUTURE,
+        Status.DONE, Status.FLOATING, Status.OVERDUE, Status.TODAY, Status.TOMORROW, Status.FUTURE,
         ALL, CALENDAR
     };
 

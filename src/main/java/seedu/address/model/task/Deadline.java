@@ -63,10 +63,6 @@ public class Deadline {
         return date.isHappeningTomorrow();
     }
 
-    public boolean isThisWeek() {
-        return date.isHappeningThisWeek();
-    }
-
     @Override
     public String toString() {
         return date.toString();

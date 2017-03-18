@@ -187,7 +187,7 @@ public class TaskListPanel extends UiPart<Region> {
         for (String group : event.viewGroups) {
             if (group.equals(CALENDAR)) {
                 groupsToView.addAll(Arrays.asList(Status.FLOATING, Status.OVERDUE,
-                                                    Status.TODAY, Status.TOMORROW, Status.IN_FUTURE));
+                                                    Status.TODAY, Status.TOMORROW, Status.FUTURE));
             } else {
                 groupsToView.add(group);
             }
