@@ -36,6 +36,7 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
+                        <Label fx:id="status" styleClass="cell_small_label" text='\$status' />
                         <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" />
                         <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
