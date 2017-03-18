@@ -61,7 +61,8 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream()
+                .forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 
@@ -105,5 +106,11 @@ public class TestTask implements ReadOnlyTask {
     public void setID(int id) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public String getTaskAbsoluteDateTime() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
