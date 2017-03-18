@@ -8,39 +8,62 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 
 public class SelectCommandTest extends TaskBossGuiTest {
 
-
     @Test
     public void selectTask_nonEmptyList() {
 
-        assertSelectionInvalid(10); // invalid index
+        assertSelectionInvalid(false, 10); // invalid index
         assertNoTaskSelected();
 
-        assertSelectionSuccess(1); // first task in the list
+        assertSelectionSuccess(false, 1); // first task in the list
         int taskCount = td.getTypicalTasks().length;
-        assertSelectionSuccess(taskCount); // last task in the list
+        assertSelectionSuccess(false, taskCount); // last task in the list
         int middleIndex = taskCount / 2;
-        assertSelectionSuccess(middleIndex); // a task in the middle of the list
+        assertSelectionSuccess(false, middleIndex); // a task in the middle of the list
 
-        assertSelectionInvalid(taskCount + 1); // invalid index
+        assertSelectionInvalid(false, taskCount + 1); // invalid index
         assertTaskSelected(middleIndex); // assert previous selection remains
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test
+    public void selectTaskShortCommand_nonEmptyList() {
+
+        assertSelectionInvalid(true, 20); // invalid index
+        assertNoTaskSelected();
+
+        assertSelectionSuccess(true, 1); // first task in the list
+        int taskCount = td.getTypicalTasks().length;
+        assertSelectionSuccess(true, taskCount); // last task in the list
+        int middleIndex = taskCount / 2;
+        assertSelectionSuccess(true, middleIndex); // a task in the middle of the list
+
+        assertSelectionInvalid(true, taskCount + 1); // invalid index
+        assertTaskSelected(middleIndex); // assert previous selection remains
+    }
+
+    @Test
     public void selectTask_emptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertSelectionInvalid(1); //invalid index
+        assertSelectionInvalid(false, 1); //invalid index
     }
 
-    private void assertSelectionInvalid(int index) {
-        commandBox.runCommand("select " + index);
+    private void assertSelectionInvalid(boolean isShortCommand, int index) {
+        if (isShortCommand) {
+            commandBox.runCommand("sl " + index);
+        } else {
+            commandBox.runCommand("select " + index);
+        }
         assertResultMessage("The task index provided is invalid");
     }
 
-    private void assertSelectionSuccess(int index) {
-        commandBox.runCommand("select " + index);
+    private void assertSelectionSuccess(boolean isShortCommand, int index) {
+        if (isShortCommand) {
+            commandBox.runCommand("sl " + index);
+        } else {
+            commandBox.runCommand("select " + index);
+        }
         assertResultMessage("Selected Task: " + index);
         assertTaskSelected(index);
     }

@@ -23,14 +23,16 @@ import seedu.taskboss.model.task.UniqueTaskList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_SHORT = "e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
+            + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PRIORITY_LEVEL]"
+            + "Parameters: INDEX (must be a positive integer) [n/NAME] [p/PRIORITY_LEVEL]"
             + " [sd/START_DATE] [ed/END_DATE]"
             + " [i/INFORMATION ] [c/CATEGORY]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/1";
+            + "Example: " + COMMAND_WORD + " 1 p/1" + " || " + COMMAND_WORD_SHORT + " 1 p/1";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

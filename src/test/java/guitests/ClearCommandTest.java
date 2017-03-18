@@ -11,7 +11,7 @@ public class ClearCommandTest extends TaskBossGuiTest {
 
         //verify a non-empty list can be cleared
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
-        assertClearCommandSuccess();
+        assertClearCommandSuccess(false);
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hoon.getAddCommand());
@@ -19,12 +19,21 @@ public class ClearCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
+        //verify the short clear command can work
+        commandBox.runCommand(td.kelvin.getShortAddCommand());
+        assertListSize(1);
+        assertClearCommandSuccess(true);
+
         //verify clear command works when the list is empty
-        assertClearCommandSuccess();
+        assertClearCommandSuccess(false);
     }
 
-    private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+    private void assertClearCommandSuccess(boolean isShortCommand) {
+        if (isShortCommand) {
+            commandBox.runCommand("c");
+        } else {
+            commandBox.runCommand("clear");
+        }
         assertListSize(0);
         assertResultMessage("TaskBoss has been cleared!");
     }

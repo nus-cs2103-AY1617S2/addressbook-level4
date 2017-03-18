@@ -92,9 +92,7 @@ public class LogicManagerTest {
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskBoss = new TaskBoss(model.getTaskBoss()); // last saved
-        // assumed
-        // to be up
-        // to date
+                                                                 // assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -190,9 +188,23 @@ public class LogicManagerTest {
         assertTrue(helpShown);
     }
 
+
+    @Test
+    public void execute_helpShortCommand() throws IllegalValueException, InvalidDatesException {
+        assertCommandSuccess("h", HelpCommand.SHOWING_HELP_MESSAGE,
+                new TaskBoss(), Collections.emptyList());
+        assertTrue(helpShown);
+    }
+
     @Test
     public void execute_exit() throws IllegalValueException, InvalidDatesException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new TaskBoss(), Collections.emptyList());
+    }
+
+    @Test
+    public void execute_exitShortCommand() throws IllegalValueException, InvalidDatesException {
+        assertCommandSuccess("x", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
 
@@ -260,13 +272,26 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskBoss expectedAB = helper.generateTaskBoss(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        TaskBoss expectedTB = helper.generateTaskBoss(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTB.getTaskList();
 
         // prepare TaskBoss state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedTB, expectedList);
+    }
+
+    @Test
+    public void execute_listShortCommand_showsAllTasks() throws Exception {
+        // prepare expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskBoss expectedTB = helper.generateTaskBoss(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTB.getTaskList();
+
+        // prepare TaskBoss state
+        helper.addToModel(model, 2);
+
+        assertCommandSuccess("l", ListCommand.MESSAGE_SUCCESS, expectedTB, expectedList);
     }
 
     /**

@@ -15,11 +15,13 @@ import java.util.Set;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD_SHORT = "f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
+            + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/NAME or sd/STARTDATETIME or ed/ENDDATETIME \n"
-            + "Example: " + COMMAND_WORD + " n/meeting";
+            + "Example: " + COMMAND_WORD + " n/meeting" + " || " + COMMAND_WORD_SHORT + " sd/Mar";
 
     private final String keywords;
     private final String prefix;

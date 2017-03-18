@@ -10,14 +10,14 @@ import seedu.taskboss.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, johnny;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, johnny, kelvin;
 
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withInformation("123, Jurong West Ave 6, #08-111")
                     .withPriorityLevel("3")
-                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
@@ -27,11 +27,11 @@ public class TypicalTestTasks {
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
-                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("wall street").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
-                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("10th street").build();
             elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("2")
@@ -60,6 +60,10 @@ public class TypicalTestTasks {
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
+            kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("1")
+                    .withStartDateTime("today 10am")
+                    .withEndDateTime("next wed")
+                    .withInformation("clementi ave 2").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
