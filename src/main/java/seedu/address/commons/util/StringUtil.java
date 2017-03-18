@@ -2,7 +2,6 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,9 +68,8 @@ public class StringUtil {
      * @return Date object
      */
     public static Date parseDate(String s, String dateFormat) throws IllegalValueException {
-        DateFormat formatter = new SimpleDateFormat(dateFormat);
         try {
-            return formatter.parse(s);
+            return new SimpleDateFormat(dateFormat).parse(s);
         } catch (ParseException e) {
             throw new IllegalValueException("Date must be entered as: " + dateFormat);
         }
