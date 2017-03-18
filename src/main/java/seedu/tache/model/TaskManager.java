@@ -12,11 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.DetailedTask;
-import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.UniqueDetailedTaskList;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -26,7 +23,6 @@ import seedu.tache.model.task.UniqueTaskList;
 public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
-    private final UniqueDetailedTaskList detailedTasks;
     private final UniqueTagList tags;
 
     /*
@@ -38,7 +34,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     {
         tasks = new UniqueTaskList();
-        detailedTasks = new UniqueDetailedTaskList();
         tags = new UniqueTagList();
     }
 
@@ -59,11 +54,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tasks.setTasks(tasks);
     }
 
-    public void setDetailedTasks(List<? extends ReadOnlyDetailedTask> detailedTasks)
-            throws UniqueDetailedTaskList.DuplicateDetailedTaskException {
-        this.detailedTasks.setDetailedTasks(detailedTasks);
-    }
-
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
@@ -76,17 +66,11 @@ public class TaskManager implements ReadOnlyTaskManager {
             assert false : "TaskManagers should not have duplicate tasks";
         }
         try {
-            setDetailedTasks(newData.getDetailedTaskList());
-        } catch (UniqueDetailedTaskList.DuplicateDetailedTaskException e) {
-            assert false : "TaskManagers should not have duplicate detailed tasks";
-        }
-        try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "TaskManagers should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
-        syncMasterTagListWith(detailedTasks);
     }
 
 //// task-level operations
@@ -101,19 +85,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         tasks.add(p);
-    }
-
-    /**
-     * Adds a detailed task to the task manager.
-     * Also checks the new detailed task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the detailed task to point to those in {@link #tags}.
-     *
-     * @throws UniqueDetailedTaskList.DuplicateDetailedTaskException if an equivalent detailed task already exists.
-     */
-    public void addDetailedTask(DetailedTask detailedTask)
-            throws UniqueDetailedTaskList.DuplicateDetailedTaskException {
-        syncMasterTagListWith(detailedTask);
-        detailedTasks.add(detailedTask);
     }
 
     /**
@@ -138,27 +109,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
-     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
-     * @see #syncMasterTagListWith(Task)
-     *
-     * @throws DuplicateDetailedTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
-     */
-    public void updateDetailedTask(int index, ReadOnlyDetailedTask editedReadOnlyDetailedTask)
-            throws UniqueDetailedTaskList.DuplicateDetailedTaskException {
-        assert editedReadOnlyDetailedTask != null;
-
-        DetailedTask editedDetailedTask = new DetailedTask(editedReadOnlyDetailedTask);
-        syncMasterTagListWith(editedDetailedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any task
-        // in the task list.
-        detailedTasks.updateDetailedTask(index, editedDetailedTask);
-    }
-
-    /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
@@ -179,26 +129,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Ensures that every tag in this detailed task:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
-     */
-    private void syncMasterTagListWith(DetailedTask detailedTask) {
-        final UniqueTagList taskTags = detailedTask.getTags();
-        tags.mergeFrom(taskTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking task tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of task tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        detailedTask.setTags(new UniqueTagList(correctTagReferences));
-    }
-
-    /**
      * Ensures that every tag in these tasks:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
@@ -208,30 +138,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    /**
-     * Ensures that every tag in these tasks:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
-     *  @see #syncMasterTagListWith(Task)
-     */
-    private void syncMasterTagListWith(UniqueDetailedTaskList detailedTasks) {
-        detailedTasks.forEach(this::syncMasterTagListWith);
-    }
-
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
-        }
-    }
-
-    public boolean removeDetailedTask(ReadOnlyDetailedTask key)
-                   throws UniqueDetailedTaskList.DetailedTaskNotFoundException {
-        if (detailedTasks.remove(key)) {
-            return true;
-        } else {
-            throw new UniqueDetailedTaskList.DetailedTaskNotFoundException();
         }
     }
 
@@ -252,11 +163,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
-    }
-
-    @Override
-    public ObservableList<ReadOnlyDetailedTask> getDetailedTaskList() {
-        return new UnmodifiableObservableList<>(detailedTasks.asObservableList());
     }
 
     @Override

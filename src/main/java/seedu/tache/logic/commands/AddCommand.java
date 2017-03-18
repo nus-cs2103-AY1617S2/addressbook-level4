@@ -9,11 +9,9 @@ import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Date;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Time;
-import seedu.tache.model.task.UniqueDetailedTaskList.DuplicateDetailedTaskException;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -73,20 +71,16 @@ public class AddCommand extends Command {
             endTime = new Time(endTimeStr.get());
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new DetailedTask(name, startDate, endDate, startTime, endTime, tagList);
+        this.toAdd = new Task(name, startDate, endDate, startTime, endTime, tagList);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            if (toAdd instanceof DetailedTask) {
-                model.addDetailedTask((DetailedTask) toAdd);
-            } else {
-                model.addTask(toAdd);
-            }
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicateTaskException | DuplicateDetailedTaskException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 

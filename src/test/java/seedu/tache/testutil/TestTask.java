@@ -1,8 +1,10 @@
 package seedu.tache.testutil;
 
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Date;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Time;
 
 /**
  * A mutable task object. For testing only.
@@ -10,6 +12,10 @@ import seedu.tache.model.task.ReadOnlyTask;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Date startDate;
+    private Date endDate;
+    private Time startTime;
+    private Time endTime;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -38,6 +44,30 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Date getStartDate() {
+        // TODO Auto-generated method stub
+        return startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        // TODO Auto-generated method stub
+        return endDate;
+    }
+
+    @Override
+    public Time getStartTime() {
+        // TODO Auto-generated method stub
+        return startTime;
+    }
+
+    @Override
+    public Time getEndTime() {
+        // TODO Auto-generated method stub
+        return endTime;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -53,4 +83,5 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append(";" + s.tagName + " "));
         return sb.toString();
     }
+
 }

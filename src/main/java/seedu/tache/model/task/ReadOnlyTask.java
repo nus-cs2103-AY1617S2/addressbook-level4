@@ -9,6 +9,10 @@ import seedu.tache.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
+    Date getStartDate();
+    Date getEndDate();
+    Time getStartTime();
+    Time getEndTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

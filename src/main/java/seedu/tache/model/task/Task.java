@@ -1,6 +1,7 @@
 package seedu.tache.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.model.tag.UniqueTagList;
@@ -12,6 +13,10 @@ import seedu.tache.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
+    private Date startDate;
+    private Optional<Date> endDate;
+    private Time startTime;
+    private Optional<Time> endTime;
     private UniqueTagList tags;
 
     /**
@@ -23,11 +28,22 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
+    public Task(Name name, Date startDate, Date endDate, Time startTime, Time endTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, tags);
+        this.name = name;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.startDate = startDate;
+        this.endDate = Optional.ofNullable(endDate);
+        this.startTime = startTime;
+        this.endTime = Optional.ofNullable(endTime);
+    }
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(),
+                source.getTags());
     }
 
     public void setName(Name name) {
@@ -38,6 +54,42 @@ public class Task implements ReadOnlyTask {
     @Override
     public Name getName() {
         return name;
+    }
+
+    @Override
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate.orElse(getStartDate());
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = Optional.ofNullable(endDate);
+    }
+
+    @Override
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    @Override
+    public Time getEndTime() {
+        return endTime.orElse(getStartTime());
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = Optional.ofNullable(endTime);
     }
 
     @Override
@@ -58,6 +110,10 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
         this.setName(replacement.getName());
+        this.setEndDate(replacement.getEndDate());
+        this.setStartDate(replacement.getStartDate());
+        this.setStartTime(replacement.getStartTime());
+        this.setEndTime(replacement.getEndTime());
         this.setTags(replacement.getTags());
     }
 
