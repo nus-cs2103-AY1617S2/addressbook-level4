@@ -1,3 +1,4 @@
+//@@author A0139221N
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -173,6 +174,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
         assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
+//@@author
 
     @Test
     public void edit_missingTaskIndex_failure() {
@@ -213,6 +215,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     /**
      * Checks whether the edited task has the correct updated details.
+     * Includes checking if the rest of the tasks are affected. They should not be changed.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
      * @param taskListIndex index of task to edit in the address book.

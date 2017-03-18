@@ -1,3 +1,4 @@
+//@@author A0139221N
 package seedu.tasklist.testutil;
 
 import java.text.DateFormat;
@@ -24,6 +25,9 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
     private Date deadline;
     public static final String TYPE = "deadline";
 
+    /**
+     * Creates a empty deadline task with no details
+     */
     public TestDeadlineTask() {
         tags = new UniqueTagList();
     }
@@ -40,61 +44,97 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
         this.tags = taskToCopy.getTags();
     }
 
+    /**
+     * Returns the type of the task.
+     */
     @Override
     public String getType() {
         return TYPE;
     }
 
+    /**
+     * Returns the deadline of the deadline task.
+     */
     @Override
     public Date getDeadline() {
         return this.deadline;
     }
 
+    /**
+     * Sets the name of the task.
+     */
     @Override
     public void setName(Name name) {
         this.name = name;
     }
 
+    /**
+     * Returns the name of the task.
+     */
     @Override
     public Name getName() {
         return this.name;
     }
 
+    /**
+     * Sets the comment of the task.
+     */
     @Override
     public void setComment(Comment comment) {
         this.comment = comment;
     }
 
+    /**
+     * Returns the comment of the task.
+     */
     @Override
     public Comment getComment() {
         return this.comment;
     }
 
+    /**
+     * Returns the tags of the task.
+     */
     @Override
     public UniqueTagList getTags() {
         return this.tags;
     }
 
+    /**
+     * Sets the priority of the task
+     */
     @Override
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
+    /**
+     * Returns the priority of the task.
+     */
     @Override
     public Priority getPriority() {
         return this.priority;
     }
 
+    /**
+     * Sets the status of the task.
+     */
     @Override
     public void setStatus(Status status) {
         this.status = status;
     }
 
+    /**
+     * Returns the status of the task.
+     */
     @Override
     public Status getStatus() {
         return this.status;
     }
 
+    /**
+     * Generates a command line input to add this task.
+     */
     @Override
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
@@ -110,6 +150,10 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
         return sb.toString();
     }
 
+    /**
+     * Returns a String version of the task.
+     * Format: name, deadline, comment, priority, tags.
+     */
     @Override
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -125,6 +169,9 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
         return builder.toString();
     }
 
+    /**
+     * Checks if the task is the same as another task
+     */
     @Override
     public boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
@@ -138,20 +185,34 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
                 && ((ReadOnlyDeadlineTask) other).getDeadline().equals(this.getDeadline()));
     }
 
+    /**
+     * Sets the tags of the task to {@code replacement}.
+     * @param replacement
+     */
     @Override
     public void setTags(UniqueTagList replacement) {
         this.tags = replacement;
     }
 
+    /**
+     * Returns a String version of the task.
+     */
     @Override
     public String toString() {
         return getAsText();
     }
 
+    /**
+     * Sets the deadline of the deadline task to {@code deadline}.
+     * @param deadline
+     */
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns the deadline as a String in the format dd/MM/yyyy HH:mm:ss
+     */
     @Override
     public String getDeadlineString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
