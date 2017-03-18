@@ -1,8 +1,8 @@
 package seedu.bulletjournal.testutil;
 
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.BeginTime;
-import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
@@ -13,9 +13,9 @@ import seedu.bulletjournal.model.task.TaskName;
 public class TestTask implements ReadOnlyTask {
 
     private TaskName taskName;
-    private BeginTime beginTime;
+    private StartDate startDate;
     private Status status;
-    private Deadline deadline;
+    private DueDate dueDate;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -27,9 +27,9 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask personToCopy) {
         this.taskName = personToCopy.getName();
-        this.deadline = personToCopy.getPhone();
+        this.dueDate = personToCopy.getPhone();
         this.status = personToCopy.getEmail();
-        this.beginTime = personToCopy.getAddress();
+        this.startDate = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,16 +37,16 @@ public class TestTask implements ReadOnlyTask {
         this.taskName = taskName;
     }
 
-    public void setAddress(BeginTime beginTime) {
-        this.beginTime = beginTime;
+    public void setAddress(StartDate startDate) {
+        this.startDate = startDate;
     }
 
     public void setEmail(Status status) {
         this.status = status;
     }
 
-    public void setPhone(Deadline deadline) {
-        this.deadline = deadline;
+    public void setPhone(DueDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -59,8 +59,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Deadline getPhone() {
-        return deadline;
+    public DueDate getPhone() {
+        return dueDate;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public BeginTime getAddress() {
-        return beginTime;
+    public StartDate getAddress() {
+        return startDate;
     }
 
     @Override

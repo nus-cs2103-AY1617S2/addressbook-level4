@@ -7,7 +7,7 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Deadline {
+public class DueDate {
 
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
@@ -19,7 +19,7 @@ public class Deadline {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Deadline(String phone) throws IllegalValueException {
+    public DueDate(String phone) throws IllegalValueException {
         assert phone != null;
         String trimmedPhone = phone.trim();
         if (!isValidPhone(trimmedPhone)) {
@@ -43,8 +43,8 @@ public class Deadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                && this.value.equals(((Deadline) other).value)); // state check
+                || (other instanceof DueDate // instanceof handles nulls
+                && this.value.equals(((DueDate) other).value)); // state check
     }
 
     @Override

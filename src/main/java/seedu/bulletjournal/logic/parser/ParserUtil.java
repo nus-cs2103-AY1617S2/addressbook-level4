@@ -15,8 +15,8 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 import seedu.bulletjournal.commons.util.StringUtil;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.BeginTime;
-import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
 
@@ -77,17 +77,17 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      */
-    public static Optional<Deadline> parsePhone(Optional<String> phone) throws IllegalValueException {
+    public static Optional<DueDate> parsePhone(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
-        return phone.isPresent() ? Optional.of(new Deadline(phone.get())) : Optional.empty();
+        return phone.isPresent() ? Optional.of(new DueDate(phone.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      */
-    public static Optional<BeginTime> parseAddress(Optional<String> address) throws IllegalValueException {
+    public static Optional<StartDate> parseAddress(Optional<String> address) throws IllegalValueException {
         assert address != null;
-        return address.isPresent() ? Optional.of(new BeginTime(address.get())) : Optional.empty();
+        return address.isPresent() ? Optional.of(new StartDate(address.get())) : Optional.empty();
     }
 
     /**

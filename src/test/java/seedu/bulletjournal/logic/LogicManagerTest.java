@@ -41,8 +41,8 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.BeginTime;
-import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -214,20 +214,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 s/valid@email.butNoPhonePrefix b/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 valid@email.butNoPrefix b/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 s/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 s/validEmail.butNoPhonePrefix b/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name d/12345 validEmail.butNoPrefix b/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name d/12345 s/validEmail.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] d/12345 s/valid@e.mail b/valid, address",
+        assertCommandFailure("add []\\[;] d/12345 s/undone b/valid, address",
                 TaskName.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/not_numbers s/valid@e.mail b/valid, address",
-                Deadline.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345 s/notAnEmail b/valid, address",
+        assertCommandFailure("add Valid Name d/not_numbers s/undone b/valid, address",
+                DueDate.MESSAGE_PHONE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12345 s/notAn@Email.com b/valid, address",
                 Status.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345 s/valid@e.mail b/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name d/12345 s/undone b/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -545,9 +545,9 @@ public class LogicManagerTest {
 
         private Task adam() throws Exception {
             TaskName taskName = new TaskName("Adam Brown");
-            Deadline privatePhone = new Deadline("111111");
-            Status status = new Status("adam@gmail.com");
-            BeginTime privateAddress = new BeginTime("111, alpha street");
+            DueDate privatePhone = new DueDate("111111");
+            Status status = new Status("undone");
+            StartDate privateAddress = new StartDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -564,9 +564,9 @@ public class LogicManagerTest {
         private Task generatePerson(int seed) throws Exception {
             return new Task(
                     new TaskName("Person " + seed),
-                    new Deadline("" + Math.abs(seed)),
-                    new Status(seed + "@email"),
-                    new BeginTime("House of " + seed),
+                    new DueDate("" + Math.abs(seed)),
+                    new Status(seed + "undone"),
+                    new StartDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -664,9 +664,9 @@ public class LogicManagerTest {
         private Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new TaskName(name),
-                    new Deadline("1"),
-                    new Status("1@email"),
-                    new BeginTime("House of 1"),
+                    new DueDate("1"),
+                    new Status("undone"),
+                    new StartDate("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

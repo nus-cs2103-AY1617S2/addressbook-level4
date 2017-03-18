@@ -7,8 +7,8 @@ import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.BeginTime;
-import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.StartDate;
+import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -79,9 +79,9 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
+        DueDate updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        BeginTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        StartDate updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
         return new Task(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -93,9 +93,9 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<TaskName> taskName = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<DueDate> dueDate = Optional.empty();
         private Optional<Status> status = Optional.empty();
-        private Optional<BeginTime> beginTime = Optional.empty();
+        private Optional<StartDate> startDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
@@ -103,9 +103,9 @@ public class EditCommand extends Command {
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.taskName = toCopy.getName();
-            this.deadline = toCopy.getPhone();
+            this.dueDate = toCopy.getPhone();
             this.status = toCopy.getEmail();
-            this.beginTime = toCopy.getAddress();
+            this.startDate = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
 
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.taskName, this.deadline, this.status, this.beginTime, this.tags);
+            return CollectionUtil.isAnyPresent(this.taskName, this.dueDate, this.status, this.startDate, this.tags);
         }
 
         public void setName(Optional<TaskName> taskName) {
@@ -125,13 +125,13 @@ public class EditCommand extends Command {
             return taskName;
         }
 
-        public void setPhone(Optional<Deadline> deadline) {
-            assert deadline != null;
-            this.deadline = deadline;
+        public void setPhone(Optional<DueDate> dueDate) {
+            assert dueDate != null;
+            this.dueDate = dueDate;
         }
 
-        public Optional<Deadline> getPhone() {
-            return deadline;
+        public Optional<DueDate> getPhone() {
+            return dueDate;
         }
 
         public void setEmail(Optional<Status> status) {
@@ -143,13 +143,13 @@ public class EditCommand extends Command {
             return status;
         }
 
-        public void setAddress(Optional<BeginTime> beginTime) {
-            assert beginTime != null;
-            this.beginTime = beginTime;
+        public void setAddress(Optional<StartDate> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
         }
 
-        public Optional<BeginTime> getAddress() {
-            return beginTime;
+        public Optional<StartDate> getAddress() {
+            return startDate;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

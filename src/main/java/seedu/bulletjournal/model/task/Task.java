@@ -12,21 +12,21 @@ import seedu.bulletjournal.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private TaskName taskName;
-    private Deadline deadline;
+    private DueDate dueDate;
     private Status status;
-    private BeginTime beginTime;
+    private StartDate startDate;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Deadline deadline, Status status, BeginTime beginTime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(taskName, deadline, status, beginTime, tags);
+    public Task(TaskName taskName, DueDate dueDate, Status status, StartDate startDate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(taskName, dueDate, status, startDate, tags);
         this.taskName = taskName;
-        this.deadline = deadline;
+        this.dueDate = dueDate;
         this.status = status;
-        this.beginTime = beginTime;
+        this.startDate = startDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -47,14 +47,14 @@ public class Task implements ReadOnlyTask {
         return taskName;
     }
 
-    public void setPhone(Deadline deadline) {
-        assert deadline != null;
-        this.deadline = deadline;
+    public void setPhone(DueDate dueDate) {
+        assert dueDate != null;
+        this.dueDate = dueDate;
     }
 
     @Override
-    public Deadline getPhone() {
-        return deadline;
+    public DueDate getPhone() {
+        return dueDate;
     }
 
     public void setEmail(Status status) {
@@ -67,14 +67,14 @@ public class Task implements ReadOnlyTask {
         return status;
     }
 
-    public void setAddress(BeginTime beginTime) {
-        assert beginTime != null;
-        this.beginTime = beginTime;
+    public void setAddress(StartDate startDate) {
+        assert startDate != null;
+        this.startDate = startDate;
     }
 
     @Override
-    public BeginTime getAddress() {
-        return beginTime;
+    public StartDate getAddress() {
+        return startDate;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, deadline, status, beginTime, tags);
+        return Objects.hash(taskName, dueDate, status, startDate, tags);
     }
 
     @Override
