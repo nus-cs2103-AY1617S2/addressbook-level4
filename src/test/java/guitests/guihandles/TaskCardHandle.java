@@ -108,15 +108,27 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     private String getEndDate() {
-        return getTextFromLabel(ENDDATE_FIELD_ID).split(" ", 3)[2];
+        try {
+            return getTextFromLabel(ENDDATE_FIELD_ID).split(" ", 3)[2];
+        } catch (ArrayIndexOutOfBoundsException aob) {
+            return "";
+        }
     }
 
     private String getStartDate() {
-        return getTextFromLabel(STARTDATE_FIELD_ID).split(" ", 3)[2];
+        try {
+            return getTextFromLabel(STARTDATE_FIELD_ID).split(" ", 3)[2];
+        } catch (ArrayIndexOutOfBoundsException aob) {
+            return "";
+        }
     }
 
     private String getDeadline() {
-        return getTextFromLabel(DEADLINE_FIELD_ID).split(" ", 2)[1];
+        try {
+            return getTextFromLabel(DEADLINE_FIELD_ID).split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException aob) {
+            return "";
+        }
     }
 
     private boolean getStatus() {
