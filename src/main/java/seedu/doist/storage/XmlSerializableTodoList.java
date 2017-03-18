@@ -47,7 +47,7 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> persons = this.tasks.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
@@ -56,7 +56,7 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(persons);
+        return new UnmodifiableObservableList<>(tasks);
     }
 
     @Override

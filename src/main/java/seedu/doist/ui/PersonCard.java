@@ -14,25 +14,28 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label desc;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label priority;
     @FXML
-    private Label address;
+    private Label isFinished;
     @FXML
-    private Label email;
+    private Label startTime;
+    @FXML
+    private Label endTime;
     @FXML
     private FlowPane tags;
 
     public PersonCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getDescription().desc);
+        desc.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
-        phone.setText(task.getPriority().toString());
-        address.setText(" no more start time");
-        email.setText(" no more end time");
+        priority.setText(task.getPriority().toString());
+        isFinished.setText("finished: " + task.getFinishedStatus().toString());
+        startTime.setText("no start time");
+        endTime.setText("no end time");
         initTags(task);
     }
 

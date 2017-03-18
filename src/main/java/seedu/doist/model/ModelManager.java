@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -10,12 +11,15 @@ import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.StringUtil;
+import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
+import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -68,6 +72,28 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyFinishedException {
+        try {
+            todoList.changeTaskFinishStatus(target, true);
+        } catch (TaskAlreadyUnfinishedException e) {
+            assert false : "finishTask should not try to unfinish tasks!";
+        }
+        indicateTodoListChanged();
+    }
+
+    @Override
+    public synchronized void unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
+        TaskAlreadyUnfinishedException {
+        try {
+            todoList.changeTaskFinishStatus(target, false);
+        } catch (TaskAlreadyFinishedException e) {
+            assert false : "unfinishTask should not try to finish tasks!";
+        }
+        indicateTodoListChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
         updateFilteredListToShowAll();
@@ -89,7 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -103,12 +129,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(keywords)));
+        Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
     @Override
-    public void updateFilteredTaskList(UniqueTagList tags) {
-        updateFilteredTaskList(new PredicateExpression(new TagQualifier(tags)));
+    public void updateFilteredTaskList(TaskType type, UniqueTagList tags) {
+        ArrayList<Qualifier> qualifiers = new ArrayList<Qualifier>();
+        if (type != null) {
+            qualifiers.add(new TaskTypeQualifier(type));
+        }
+        if (!tags.isEmpty()) {
+            qualifiers.add(new TagQualifier(tags));
+        }
+        updateFilteredTaskList(new PredicateExpression(qualifiers.toArray(new Qualifier[qualifiers.size()])));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -124,20 +158,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class PredicateExpression implements Expression {
 
-        private final Qualifier qualifier;
+        private final Qualifier[] qualifiers;
 
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
+        PredicateExpression(Qualifier[] qualifiers) {
+            this.qualifiers = qualifiers;
         }
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
+            boolean isSatisfied = true;
+            for (Qualifier qualifier : qualifiers) {
+                isSatisfied = isSatisfied && qualifier.run(task);
+            }
+            return isSatisfied;
         }
 
         @Override
         public String toString() {
-            return qualifier.toString();
+            return qualifiers.toString();
         }
     }
 
@@ -182,6 +220,26 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
             return false;
+        }
+    }
+
+    private class TaskTypeQualifier implements Qualifier {
+        private TaskType type;
+
+        public TaskTypeQualifier(TaskType type) {
+            this.type = type;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            switch (type) {
+            case finished:
+                return task.getFinishedStatus().getIsFinished();
+            case pending:
+                return !task.getFinishedStatus().getIsFinished();
+            default:
+                return true;
+            }
         }
     }
 }

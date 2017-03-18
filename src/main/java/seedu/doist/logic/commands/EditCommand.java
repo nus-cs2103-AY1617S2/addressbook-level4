@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +8,7 @@ import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
@@ -20,14 +19,13 @@ import seedu.doist.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("edit"));
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
             + ": Edits the details of the task identified " + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [/as PRIORITY] [/under TAG]...\n"
-            + "Example: " + DEFAULT_COMMAND_WORD + " 1 do stuff today";
+            + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [\\as PRIORITY] [\\under TAG]...\n"
+            + "Example: " + DEFAULT_COMMAND_WORD + " 1 do things today \\as IMPORTANT";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -53,9 +51,8 @@ public class EditCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -87,8 +84,9 @@ public class EditCommand extends Command {
         Description updatedName = editTaskDescriptor.getDesc().orElseGet(taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
 
-        return new Task(updatedName, updatedPriority, updatedTags);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedTags);
     }
 
     /**
@@ -99,20 +97,23 @@ public class EditCommand extends Command {
         private Optional<Description> desc = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<FinishedStatus> finishStatus = Optional.empty();
 
         public EditTaskDescriptor() {
         }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.desc = toCopy.getDesc();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
+            this.finishStatus = toCopy.finishStatus;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.desc, this.tags);
+            return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags);
 
         }
 
@@ -121,8 +122,17 @@ public class EditCommand extends Command {
             this.desc = desc;
         }
 
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
         public Optional<Description> getDesc() {
             return desc;
+        }
+
+        public Optional<FinishedStatus> getFinishStatus() {
+            return finishStatus;
         }
 
         public Optional<Priority> getPriority() {

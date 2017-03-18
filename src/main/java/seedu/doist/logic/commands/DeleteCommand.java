@@ -1,10 +1,7 @@
 package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import seedu.doist.commons.core.Messages;
-import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
@@ -14,7 +11,6 @@ import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("delete", "del"));
     public static final String DEFAULT_COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -32,18 +28,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        ArrayList<ReadOnlyTask> tasksToDelete = new ArrayList<ReadOnlyTask>();
-
-        for (int targetIndex : targetIndices) {
-            if (lastShownList.size() < targetIndex) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-            ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-            tasksToDelete.add(taskToDelete);
-        }
-
+        ArrayList<ReadOnlyTask> tasksToDelete = getMultipleTasksFromIndices(targetIndices);
         for (ReadOnlyTask task : tasksToDelete) {
             try {
                 model.deleteTask(task);
@@ -55,6 +40,6 @@ public class DeleteCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

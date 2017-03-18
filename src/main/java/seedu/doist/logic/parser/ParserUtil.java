@@ -18,6 +18,7 @@ import seedu.doist.commons.util.StringUtil;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -44,13 +45,30 @@ public class ParserUtil {
     }
 
     /**
-     * Returns an array of integers separated using space in the input string
+     * Returns an list of integers separated using space in the input string
      */
     public static List<Optional<Integer>> parseIndices(String command) {
         ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
         String[] commandStringComponents = command.trim().split(" ");
         for (String component : commandStringComponents) {
             indices.add(parseIndex(component));
+        }
+        return indices;
+    }
+
+    /**
+     * Returns an array of integers separated using space in the input string
+     */
+    public static int[] parseStringToIntArray(String string) {
+        List<Optional<Integer>> optionalIndices = ParserUtil.parseIndices(string);
+        for (Optional<Integer> optionalIndex : optionalIndices) {
+            if (!optionalIndex.isPresent()) {
+                return null;
+            }
+        }
+        int[] indices = new int[optionalIndices.size()];
+        for (int i = 0; i < indices.length; i++) {
+            indices[i] = optionalIndices.get(i).get().intValue();
         }
         return indices;
     }
@@ -82,6 +100,14 @@ public class ParserUtil {
     public static Optional<Description> parseDesc(Optional<String> desc) throws IllegalValueException {
         assert desc != null;
         return desc.isPresent() ? Optional.of(new Description(desc.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priorityRawValue) throws IllegalValueException {
+        assert priorityRawValue != null;
+        return priorityRawValue.isPresent() ? Optional.of(new Priority(priorityRawValue.get())) : Optional.empty();
     }
 
     /**

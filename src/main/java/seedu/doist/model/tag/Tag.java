@@ -1,6 +1,5 @@
 package seedu.doist.model.tag;
 
-
 import seedu.doist.commons.exceptions.IllegalValueException;
 
 /**

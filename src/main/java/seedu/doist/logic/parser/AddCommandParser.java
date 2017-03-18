@@ -1,7 +1,6 @@
 package seedu.doist.logic.parser;
 
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_AS;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_EVERY;
@@ -11,6 +10,7 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +18,10 @@ import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.logic.commands.AddCommand;
 import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.IncorrectCommand;
+import seedu.doist.model.tag.UniqueTagList;
+import seedu.doist.model.task.Description;
+import seedu.doist.model.task.Priority;
+import seedu.doist.model.task.Task;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -27,7 +31,6 @@ public class AddCommandParser {
     private static final Pattern ADD_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                      "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
 
-    // argsTokenizer.getValue(PREFIX_PHONE).get() is an an example of how to use the tokenizer
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -38,7 +41,7 @@ public class AddCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        final String argument = matcher.group("preamble");
+        final String preamble = matcher.group("preamble");
         final String parameters = matcher.group("parameters").trim();
         ArrayList<String> tokens = ParserUtil.getParameterKeysFromString(parameters);
 
@@ -51,9 +54,38 @@ public class AddCommandParser {
         argsTokenizer.tokenize(parameters);
 
         try {
-            return new AddCommand(argument, argsTokenizer.getTokenizedArguments());
+            Task taskToAdd = createTaskFromParameters(preamble, argsTokenizer);
+            return new AddCommand(taskToAdd);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+    }
+
+    /**
+     * Creates a task from raw values of parameters.
+     *
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
+     */
+    private Task createTaskFromParameters(String preamble, ArgumentTokenizer tokenizer) throws IllegalValueException {
+        if (preamble == null || preamble.trim().isEmpty()) {
+            throw new IllegalValueException(AddCommand.MESSAGE_NO_DESC);
+        }
+
+        UniqueTagList tagList = new UniqueTagList();
+
+        // create task with specified tags
+        Optional<String> tagsParameterString = tokenizer.getValue(PREFIX_UNDER);
+        if (tagsParameterString.isPresent()) {
+            tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
+        }
+        Task toAdd = new Task(new Description(preamble), tagList);
+
+        // set priority
+        Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
+        if (priority.isPresent()) {
+            toAdd.setPriority(priority.get());
+        }
+        return toAdd;
     }
 }

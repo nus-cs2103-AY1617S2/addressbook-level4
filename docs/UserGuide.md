@@ -125,6 +125,7 @@ Format: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
 Add a task that has a deadline with the `\by` key.
 <br>
 Format: `(add|do) TASK_DESCRIPTION [\by TIME]`
+
 > **Examples:** <br>
 > - `add buy milk \by 3pm` <br>
 > - `add buy milk \by 28th Feb` <br>
@@ -133,7 +134,6 @@ Format: `(add|do) TASK_DESCRIPTION [\by TIME]`
 > - `Start time` and `end time` will both be set to `TIME` in this format
 > - That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
 > - See the table of acceptable date and time formats below
-
 
 **Acceptable date and time formats** <br>
 

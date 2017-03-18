@@ -3,6 +3,7 @@ package seedu.doist.model;
 import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
+import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
@@ -21,6 +22,14 @@ public interface Model {
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+
+    /** Finishes the given task. */
+    void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+        UniqueTaskList.TaskAlreadyFinishedException;
+
+    /** Unfinishes the given task. */
+    void unfinishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+        UniqueTaskList.TaskAlreadyUnfinishedException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -44,8 +53,8 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(UniqueTagList tags);
+    /** Updates the filter of the filtered task list to filter by the given task type and tags*/
+    void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
     void sortTasksByPriority();
 }
