@@ -137,12 +137,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void checkTaskDate(ReadOnlyTask task) throws DateException {
+        assert task != null;
         try {
-            if (DateUtil.isTaskDateValid(task) == false) {
+            if (!DateUtil.isTaskDateValid(task)) {
                 throw new DateException("Start date after due date!");
             }
         } catch (ParseException pe) {
-            System.out.println("wtf man");
+            logger.info("Parse exception while checking if task date valid");
         }
     }
     //=========== Filtered Task List Accessors =============================================================
