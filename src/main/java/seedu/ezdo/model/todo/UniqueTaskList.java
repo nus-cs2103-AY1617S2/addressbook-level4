@@ -1,8 +1,11 @@
 package seedu.ezdo.model.todo;
 
+import java.text.ParseException;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -121,17 +124,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 public int compare(Task taskOne, Task taskTwo) {
                     String taskOneName = taskOne.getName().toString();
                     String taskTwoName = taskTwo.getName().toString();
-                    return taskOneName.compareTo(taskTwoName);
-                }
-            };
-            break;
-        case DUE_DATE:
-            taskComparator = new Comparator<Task>() {
-                @Override
-                public int compare(Task taskOne, Task taskTwo) {
-                    String taskOnePriority = taskOne.getPriority().toString();
-                    String taskTwoPriority = taskTwo.getPriority().toString();
-                    return taskOnePriority.compareTo(taskTwoPriority);
+                    return taskOneName.compareToIgnoreCase(taskTwoName);
                 }
             };
             break;
@@ -141,16 +134,37 @@ public class UniqueTaskList implements Iterable<Task> {
                 public int compare(Task taskOne, Task taskTwo) {
                     String taskOneStartDate = taskOne.getStartDate().toString();
                     String taskTwoStartDate = taskTwo.getStartDate().toString();
-                    return taskOneStartDate.compareTo(taskTwoStartDate);
+                    return compareDateStrings(taskOneStartDate, taskTwoStartDate);
                 }
             };
             break;
+        case DUE_DATE:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOneDueDate = taskOne.getDueDate().toString();
+                    String taskTwoDueDate = taskTwo.getDueDate().toString();
+                    return compareDateStrings(taskOneDueDate, taskTwoDueDate);
+                }
+            };
+            break;
+
         case PRIORITY:
             taskComparator = new Comparator<Task>() {
                 @Override
                 public int compare(Task taskOne, Task taskTwo) {
                     String taskOnePriority = taskOne.getPriority().toString();
                     String taskTwoPriority = taskTwo.getPriority().toString();
+
+                    // treat no priority as the lowest value
+                    if (taskOnePriority.isEmpty() && taskTwoPriority.isEmpty()) {
+                        return 0;
+                    } else if (taskOnePriority.isEmpty()) {
+                        return 1;
+                    } else if (taskTwoPriority.isEmpty()) {
+                        return -1;
+                    }
+
                     return taskOnePriority.compareTo(taskTwoPriority);
                 }
             };
@@ -158,6 +172,35 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         assert taskComparator != null;
         FXCollections.sort(internalList, taskComparator);
+    }
+
+    /**
+     * Compares two dates strings. Both strings must be in the format dd/MM/yyyy hh:mm.
+     * Empty strings are considered to be of lower value than non-empty strings.
+     * @return an int representing the comparison result of the two date strings.
+     * @throws ParseException if any of the date strings cannot be parsed.
+     */
+    private int compareDateStrings(String dateString1, String dateString2) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        Date date1 = null, date2 = null;
+
+        try {
+            date1 = dateFormat.parse(dateString1);
+            date2 = dateFormat.parse(dateString2);
+        } catch (ParseException pe) {
+            assert false : "The date format should not be invalid.";
+        }
+
+        // empty dates are considered lower in value so that they show at the bottom of the list
+        if (date1 == null && date2 == null) {
+            return 0;
+        } else if (date1 == null) {
+            return 1;
+        } else if (date2 == null) {
+            return -1;
+        }
+
+        return date1.compareTo(date2);
     }
 
     @Override
