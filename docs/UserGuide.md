@@ -153,11 +153,11 @@ Hour.Min | 03.00, 3.00
 Hour am/pm | 3pm, 3am
 Hour | 3
 
- **Remarks:** <br>
-* If you do not explicitly state the date, the date will be assumed to be within the next 24 hours <br>
-* If you do not explicitly state the time, the time will be assumed to be the current time of the day
-* If you do not explicitly state the year, the year will be assumed to be the current year
-* Note that the start time and remind time must be earlier or equal to the end time
+> **Remarks:** <br>
+> - If you do not explicitly state the date, the date will be assumed to be within the next 24 hours <br>
+> - If you do not explicitly state the time, the time will be assumed to be the current time of the day
+> - If you do not explicitly state the year, the year will be assumed to be the current year
+> - Note that the start time and remind time must be earlier or equal to the end time
 
 **Priority** <br>
 Add a task with higher priorities with the `\as` key. By default, tasks are of normal priority. Since we all have certain tasks that are more important than others, you can indicate that they are important or very important! <br>
