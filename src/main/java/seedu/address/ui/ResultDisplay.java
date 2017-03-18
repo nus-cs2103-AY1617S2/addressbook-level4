@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -21,9 +24,14 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
-
-    private final StringProperty displayed = new SimpleStringProperty("");
-
+    
+    //@@author A0164212U
+    DateFormat df = new SimpleDateFormat("MMMM dd, YYYY");
+    Date dateobj = new Date();
+    String date = df.format(dateobj);
+    private final StringProperty displayed = new SimpleStringProperty("Welcome!\nThe date today is " + date);
+    //@@author 
+    
     @FXML
     private AnchorPane mainPane;
 

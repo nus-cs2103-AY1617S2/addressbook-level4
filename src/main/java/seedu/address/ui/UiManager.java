@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -50,6 +53,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
+        	logic.execute("find " + getTodayDate());
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
@@ -60,6 +64,13 @@ public class UiManager extends ComponentManager implements Ui {
         }
     }
 
+    private String getTodayDate(){
+    	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	Date date = new Date();
+    	String dateString = dateFormat.format(date);
+    	return dateString;
+    }
+    
     @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
