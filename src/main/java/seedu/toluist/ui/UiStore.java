@@ -7,17 +7,29 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.toluist.model.Task;
+import seedu.toluist.model.TaskSwitchPredicate;
 
 public class UiStore {
     private static UiStore instance;
 
     private ArrayList<Task> viewedTasks = new ArrayList<>();
+    private TaskSwitchPredicate switchPredicate = TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE;
 
     public static UiStore getInstance() {
         if (instance == null) {
             instance = new UiStore();
         }
         return instance;
+    }
+
+    private UiStore() {}
+
+    public void setSwitchPredicate(TaskSwitchPredicate switchPredicate) {
+        this.switchPredicate = switchPredicate;
+    }
+
+    public TaskSwitchPredicate getSwitchPredicate() {
+        return switchPredicate;
     }
 
     public void setTask(ArrayList<Task> tasks) {

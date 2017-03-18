@@ -17,6 +17,7 @@ import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
+import seedu.toluist.ui.view.TabBarView;
 import seedu.toluist.ui.view.TaskListUiView;
 
 /**
@@ -45,9 +46,13 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
+    @FXML
+    private AnchorPane tabPanePlaceholder;
+
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
     private ResultView resultView;
+    private TabBarView tabBarView;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -74,6 +79,7 @@ public class MainWindow extends UiPart<Region> {
         taskListUiView.render();
         commandBox.render();
         resultView.render();
+        tabBarView.render();
     }
 
     private void setAccelerators() {
@@ -126,6 +132,10 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
+    private AnchorPane getTabPanePlaceholder() {
+        return tabPanePlaceholder;
+    }
+
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
@@ -153,6 +163,9 @@ public class MainWindow extends UiPart<Region> {
 
         resultView = new ResultView();
         resultView.setParent(getResultDisplayPlaceholder());
+
+        tabBarView = new TabBarView();
+        tabBarView.setParent(getTabPanePlaceholder());
     }
 
     void show() {

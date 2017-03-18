@@ -28,6 +28,7 @@ import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
+import seedu.toluist.controller.SwitchController;
 import seedu.toluist.controller.TagController;
 import seedu.toluist.controller.UnaliasController;
 import seedu.toluist.controller.UndoController;
@@ -85,6 +86,7 @@ public class CommandDispatcher extends Dispatcher {
                 FindController.class,
                 TagController.class,
                 MarkController.class,
+                SwitchController.class,
                 ListController.class
         ));
     }
