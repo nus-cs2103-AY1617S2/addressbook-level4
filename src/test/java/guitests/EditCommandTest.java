@@ -37,18 +37,16 @@ public class EditCommandTest extends TaskBossGuiTest {
     //@@author A0143157J
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
-        String detailsToEdit = "Carl p/2 sd/today ed/next fri 1am i/100,"
-                + " Jurong West Ave 6, #08-111 c/meeting";
-        int taskBossIndex = 2;
+        String detailsToEdit = "Amanda p/2 sd/today ed/next fri 1am i/discuss about life, #08-111 c/relax";
+        int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Carl").withPriorityLevel("2")
+        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("2")
                .withStartDateTime("today").withEndDateTime("next fri 1am")
-               .withInformation("100, Jurong West Ave 6, #08-111").withCategories("meeting").build();
+               .withInformation("discuss about life").withCategories("relax").build();
 
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
-    //@@author A0143157J
     @Test
     public void edit_notAllFiendsWithShortCommand_success() throws Exception {
         String detailsToEdit = "c/work c/fun";
@@ -60,7 +58,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
-    //@@author A0143157J
+    //@@author
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "c/sweetie c/bestie";
@@ -72,7 +70,6 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
-    //@@author
     @Test
     public void edit_clearCategories_success() throws Exception {
         String detailsToEdit = "c/";
