@@ -7,7 +7,7 @@ import java.util.Date;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 
 /*
- * Checks for dates 
+ * Checks for dates
  */
 public class DateUtil {
     public static boolean checkTaskDate(ReadOnlyTask task) throws ParseException {

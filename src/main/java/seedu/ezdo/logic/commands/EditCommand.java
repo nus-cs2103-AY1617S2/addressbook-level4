@@ -69,7 +69,7 @@ public class EditCommand extends Command {
         } catch (DateException de) {
             throw new CommandException(Messages.MESSAGE_TASK_DATES_INVALID);
         }
-        
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
