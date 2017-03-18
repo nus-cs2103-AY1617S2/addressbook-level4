@@ -87,7 +87,7 @@ public class EditCommand extends Command {
         Duration updatedDuration = taskToEdit.getDuration();
         try {
             // ensure that there must be start and end date if editing a non existing duration
-            if (taskToEdit.getDuration() == null && (updatedDurationStart==null ^ updatedDurationEnd == null)) {
+            if (taskToEdit.getDuration() == null && (updatedDurationStart == null ^ updatedDurationEnd == null)) {
                 throw new CommandException(MESSAGE_INVALID_DURATION);
             }
             // ensure we only update duration if new start and end date are not null
