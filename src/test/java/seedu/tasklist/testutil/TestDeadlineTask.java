@@ -2,7 +2,9 @@ package seedu.tasklist.testutil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
@@ -96,10 +98,12 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
     @Override
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
+        Calendar currentDate = new GregorianCalendar();
+        currentDate.setTime(this.deadline);
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getDeadline().getMonth() + "-" + this.getDeadline().getDay() + "-"
-                + this.getDeadline().getYear() + " " + this.getDeadline().getHours() + ":"
-                + this.getDeadline().getMinutes() + ":" + this.getDeadline().getSeconds() + " ");
+        sb.append("d/" + currentDate.get(Calendar.MONTH) + "-" + currentDate.get(Calendar.DATE) + "-"
+                + currentDate.get(Calendar.YEAR) + " " + currentDate.get(Calendar.HOUR_OF_DAY) + ":"
+                + currentDate.get(Calendar.MINUTE) + ":" + currentDate.get(Calendar.SECOND) + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
