@@ -185,6 +185,13 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_helpShortCommand() throws IllegalValueException {
+        assertCommandSuccess("h", HelpCommand.SHOWING_HELP_MESSAGE,
+                new TaskBoss(), Collections.emptyList());
+        assertTrue(helpShown);
+    }
+
+    @Test
     public void execute_exit() throws IllegalValueException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());

@@ -82,6 +82,7 @@ public class Parser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD_SHORT:
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
