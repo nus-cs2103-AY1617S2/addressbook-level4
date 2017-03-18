@@ -28,9 +28,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String description;
 
-    @XmlElement
+    @XmlElement (nillable = true)
     private String startTime;
-    @XmlElement
+    @XmlElement (nillable = true)
     private String deadline;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -52,8 +52,16 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         this.name = source.getName().fullName;
         this.priority = source.getPriority().value;
-        this.startTime = source.getStartTime().value;
-        this.deadline = source.getEndTime().value;
+        if (source.hasStartTime()) {
+            this.startTime = source.getStartTime().value;
+        } else {
+            this.startTime = null;
+        }
+        if (source.hasEndTime()) {
+            this.deadline = source.getEndTime().value;
+        } else {
+            this.deadline = null;
+        }
         this.description = source.getDescription().value;
         this.tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {

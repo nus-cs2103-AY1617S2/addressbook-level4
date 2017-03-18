@@ -6,13 +6,12 @@ import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTime;
-import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.UniqueTagList;
 
 /**
  * A mutable task object. For testing only.
  */
-public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
+public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     private Name name;
     private Description description;
@@ -107,6 +106,30 @@ public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
         this.tags = tags;
     }
 
+    /**
+     * Indicates if this item is an event
+     */
+    @Override
+    public boolean isEvent() {
+        return (hasStartTime() && hasEndTime());
+    }
+
+    /**
+     * Indicates if this item is a floatingTask
+     */
+    @Override
+    public boolean isFloatingTask() {
+        return (!hasStartTime() && !hasEndTime());
+    }
+
+    /**
+     * Indicates if this item is a task
+     */
+    @Override
+    public boolean isTask() {
+        return (!hasStartTime() && hasEndTime());
+    }
+
     @Override
     public String toString() {
         return getAsText();
@@ -131,96 +154,43 @@ public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
      * 3) but this task has a lexicographically smaller name (useful when sorting tasks in testing)
      */
     @Override
-    public int compareTo(TestTask other) {
-        int comparedStartTime = compareStartTime(other);
-        if (comparedStartTime != 0) {
-            return comparedStartTime;
-        }
-
-        int comparedEndTime = compareEndTime(other);
-        if (comparedEndTime != 0) {
-            return comparedEndTime;
-        }
-
-        return compareName(other);
+    public int compareTo(ReadOnlyTask other) {
+        return compareItems(other);
     }
 
-    private int compareName(TestTask other) {
+    private int compareName(ReadOnlyTask other) {
         return this.getName().toString().compareTo(other.getName().toString());
     }
 
-    public int compareStartTime(TestTask other) {
-        if (this.hasStartTime() && other.hasStartTime()) {
+    public int compareItems(ReadOnlyTask other) {
+
+        if (this.isTask() && other.isTask()) {
             return compareName(other);
-        } else if (this.hasStartTime()) {
-            return 1;
-        } else if (other.hasStartTime()) {
+        } else if (this.isTask() && other.isEvent()) {
             return -1;
-        } else {
-            return 0;
+        } else if (this.isTask() && other.isFloatingTask()) {
+            return -1;
         }
-    }
 
-    public int compareEndTime(TestTask other) {
-        if (this.hasEndTime() && other.hasEndTime()) {
+        if (this.isEvent() && other.isEvent()) {
             return compareName(other);
-        } else if (this.hasEndTime()) {
-            return -1;
-        } else if (other.hasEndTime()) {
+        } else if (this.isEvent() && other.isTask()) {
             return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    /**
-     * Compares the current TestTask with another TestTask other.
-     * The current task is considered to be less than the other task if
-     * 1) This item has a earlier start time associated
-     * 2) both items are not events but this item has a later end time
-     * 3) but this task has a lexicographically smaller name (useful when sorting tasks in testing)
-     */
-    @Override
-    public int compareTo(Task other) {
-        int comparedStartTime = compareStartTime(other);
-        if (comparedStartTime != 0) {
-            return comparedStartTime;
+        } else if (this.isEvent() && other.isFloatingTask()) {
+            return -1;
         }
 
-        int comparedEndTime = compareEndTime(other);
-        if (comparedEndTime != 0) {
-            return comparedEndTime;
-        }
-
-        return compareName(other);
-    }
-
-    private int compareName(Task other) {
-        return this.getName().toString().compareTo(other.getName().toString());
-    }
-
-    public int compareStartTime(Task other) {
-        if (this.hasStartTime() && other.hasStartTime()) {
+        if (this.isFloatingTask() && other.isFloatingTask()) {
             return compareName(other);
-        } else if (this.hasStartTime()) {
+        } else if (this.isFloatingTask() && other.isTask()) {
             return 1;
-        } else if (other.hasStartTime()) {
-            return -1;
-        } else {
-            return 0;
+        } else if (this.isFloatingTask() && other.isEvent()) {
+            return 1;
         }
-    }
 
-    public int compareEndTime(Task other) {
-        if (this.hasEndTime() && other.hasEndTime()) {
-            return compareName(other);
-        } else if (this.hasEndTime()) {
-            return -1;
-        } else if (other.hasEndTime()) {
-            return 1;
-        } else {
-            return 0;
-        }
+        //Should never reach this
+        return 0;
+
     }
 
 }

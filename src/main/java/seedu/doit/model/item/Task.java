@@ -9,7 +9,7 @@ import seedu.doit.model.tag.UniqueTagList;
  * Represents a Task in the task manager. Guarantees: details are present and
  * not null, field values are validated.
  */
-public class Task implements ReadOnlyTask, Comparable<Task> {
+public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     private Name name;
     private Priority priority;
@@ -127,18 +127,22 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public boolean hasStartTime() {
-        if (this.startTime.value != null) {
-            return true;
+        if (this.startTime == null) {
+            return false;
+        } else if (this.startTime.value == null) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean hasEndTime() {
-        if (this.endTime.value != null) {
-            return true;
+        if (this.endTime == null) {
+            return false;
+        } else if (this.endTime.value == null) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -156,6 +160,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     /**
      * Indicates if this item is an event
      */
+    @Override
     public boolean isEvent() {
         return (hasStartTime() && hasEndTime());
     }
@@ -163,6 +168,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     /**
      * Indicates if this item is a floatingTask
      */
+    @Override
     public boolean isFloatingTask() {
         return (!hasStartTime() && !hasEndTime());
     }
@@ -170,6 +176,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     /**
      * Indicates if this item is a task
      */
+    @Override
     public boolean isTask() {
         return (!hasStartTime() && hasEndTime());
     }
@@ -193,8 +200,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     @Override
     public boolean equals(Object other) {
         return (other == this // short circuit if same object
-        ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
-        ) && this.isSameStateAs((ReadOnlyTask) other));
+            ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
+            ) && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     /**
@@ -205,46 +212,44 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * (useful when sorting tasks in testing)
      */
     @Override
-    public int compareTo(Task other) {
-        int comparedStartTime = compareStartTime(other);
-        if (comparedStartTime != 0) {
-            return comparedStartTime;
-        }
-
-        int comparedEndTime = compareEndTime(other);
-        if (comparedEndTime != 0) {
-            return comparedEndTime;
-        }
-
-        return compareName(other);
+    public int compareTo(ReadOnlyTask other) {
+        return compareItems(other);
     }
 
-    private int compareName(Task other) {
+    private int compareName(ReadOnlyTask other) {
         return this.getName().toString().compareTo(other.getName().toString());
     }
 
-    public int compareStartTime(Task other) {
-        if (this.hasStartTime() && other.hasStartTime()) {
-            return compareName(other);
-        } else if (this.hasStartTime()) {
-            return 1;
-        } else if (other.hasStartTime()) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
+    public int compareItems(ReadOnlyTask other) {
 
-    public int compareEndTime(Task other) {
-        if (this.hasEndTime() && other.hasEndTime()) {
+
+        if (this.isTask() && other.isTask()) {
             return compareName(other);
-        } else if (this.hasEndTime()) {
+        } else if (this.isTask() && other.isEvent()) {
             return -1;
-        } else if (other.hasEndTime()) {
-            return 1;
-        } else {
-            return 0;
+        } else if (this.isTask() && other.isFloatingTask()) {
+            return -1;
         }
+
+        if (this.isEvent() && other.isEvent()) {
+            return compareName(other);
+        } else if (this.isEvent() && other.isTask()) {
+            return 1;
+        } else if (this.isEvent() && other.isFloatingTask()) {
+            return -1;
+        }
+
+        if (this.isFloatingTask() && other.isFloatingTask()) {
+            return compareName(other);
+        } else if (this.isFloatingTask() && other.isTask()) {
+            return 1;
+        } else if (this.isFloatingTask() && other.isEvent()) {
+            return 1;
+        }
+
+        //Should never reach this
+        return 0;
+
     }
 
     @Override

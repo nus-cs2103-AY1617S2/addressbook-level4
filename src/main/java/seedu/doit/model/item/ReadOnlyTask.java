@@ -52,5 +52,8 @@ public interface ReadOnlyTask extends Item {
 
     boolean hasStartTime();
     boolean hasEndTime();
-    int compareTo(Task other);
+    int compareTo(ReadOnlyTask other);
+    boolean isTask();
+    boolean isEvent();
+    boolean isFloatingTask();
 }
