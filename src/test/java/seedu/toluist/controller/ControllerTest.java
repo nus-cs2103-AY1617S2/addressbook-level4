@@ -3,14 +3,13 @@ package seedu.toluist.controller;
 import static junit.framework.TestCase.fail;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.TodoListStorage;
@@ -38,7 +37,7 @@ public abstract class ControllerTest {
     protected abstract Controller controllerUnderTest(Ui renderer);
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws DataStorageException {
         when(storage.load()).thenReturn(new TypicalTestTodoLists().getTypicalTodoList());
         todoList = new TodoList(storage);
         controller = controllerUnderTest(renderer);

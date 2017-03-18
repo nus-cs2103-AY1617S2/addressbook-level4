@@ -2,6 +2,7 @@ package seedu.toluist.storage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.util.ArrayDeque;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javafx.util.Pair;
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.TodoList;
@@ -45,20 +47,25 @@ public class JsonStorage implements TodoListStorage {
         return true;
     }
 
-    public TodoList load() throws IOException {
+    public TodoList load() throws DataStorageException {
         return load(Config.getInstance().getTodoListFilePath());
     }
 
 
-    public TodoList load(String storagePath) throws IOException {
-        String jsonString = FileUtil.readFromFile(new File(storagePath));
-        // push todo list json string into historyStack if the stack is empty
-        if (historyStack.isEmpty()) {
-            historyStack.addLast(jsonString);
+    public TodoList load(String storagePath) throws DataStorageException {
+        try {
+            String jsonString = FileUtil.readFromFile(new File(storagePath));
+            // push todo list json string into historyStack if the stack is empty
+            if (historyStack.isEmpty()) {
+                historyStack.addLast(jsonString);
+            }
+            TodoList todoList = JsonUtil.fromJsonString(jsonString, TodoList.class);
+
+            Config.getInstance().setTodoListFilePath(storagePath);
+            return todoList;
+        } catch (IOException | InvalidPathException e) {
+            throw new DataStorageException(e.getMessage());
         }
-        TodoList todoList = JsonUtil.fromJsonString(jsonString, TodoList.class);
-        Config.getInstance().setTodoListFilePath(storagePath);
-        return todoList;
     }
 
     public boolean move(String newStoragePath) {
@@ -67,7 +74,7 @@ public class JsonStorage implements TodoListStorage {
         TodoList todoList;
         try {
             todoList = load();
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             return false;
         }
 

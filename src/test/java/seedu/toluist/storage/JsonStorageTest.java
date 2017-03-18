@@ -14,6 +14,7 @@ import org.junit.Test;
 import javafx.util.Pair;
 import seedu.toluist.TestApp;
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.JsonUtil;
 import seedu.toluist.model.Task;
@@ -57,7 +58,7 @@ public class JsonStorageTest {
         TodoList todoList = null;
         try {
             todoList = loadDataFromPath(EMPTY_JSON_DATA_FILE_PATH);
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             fail("Should not throw exception");
         }
         assertEquals(todoList, new TodoList());
@@ -68,7 +69,7 @@ public class JsonStorageTest {
         try {
             loadDataFromPath(INVALID_JSON_DATA_FILE_PATH);
             fail("Should not reach here");
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             // good to go
         }
     }
@@ -78,18 +79,18 @@ public class JsonStorageTest {
         TodoList todoList = null;
         try {
             todoList = loadDataFromPath(TYPICAL_JSON_DATA_FILE_PATH);
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             fail("Should not throw exception");
         }
         assertEquals(todoList, typicalTodoList);
     }
 
     @Test
-    public void load_withPathEmptyData() throws IOException {
+    public void load_withPathEmptyData() throws DataStorageException {
         TodoList todoList = null;
         try {
             todoList = loadDataFromPath(EMPTY_JSON_DATA_FILE_PATH);
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             fail("Should not throw exception");
         }
         assertEquals(todoList, new TodoList());
@@ -101,7 +102,7 @@ public class JsonStorageTest {
         try {
             storage.load(INVALID_JSON_DATA_FILE_PATH);
             fail("Should not reach here");
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             // good to go
             assertEquals(Config.getInstance().getTodoListFilePath(), TestApp.SAVE_LOCATION_FOR_TESTING);
         }
@@ -112,7 +113,7 @@ public class JsonStorageTest {
         TodoList todoList = null;
         try {
             todoList = loadDataFromPath(TYPICAL_JSON_DATA_FILE_PATH);
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             fail("Should not throw exception");
         }
         assertEquals(todoList, typicalTodoList);
@@ -125,7 +126,7 @@ public class JsonStorageTest {
     }
 
     @Test
-    public void save_nonExistingFile() throws IOException {
+    public void save_nonExistingFile() throws DataStorageException, IOException {
         String path = NON_EXISTING_FILE_PATH;
         FileUtil.removeFile(new File(path));
         assertTrue(saveDataToPath(typicalTodoList, path));
@@ -133,7 +134,7 @@ public class JsonStorageTest {
     }
 
     @Test
-    public void save_overwriteFile() throws IOException {
+    public void save_overwriteFile() throws DataStorageException, IOException {
         String path = EXISTING_FILE_PATH;
         FileUtil.createFile(new File(path));
         assertTrue(saveDataToPath(typicalTodoList, path));
@@ -147,7 +148,7 @@ public class JsonStorageTest {
     }
 
     @Test
-    public void save_WithPathNonExistingFile() throws IOException {
+    public void save_WithPathNonExistingFile() throws DataStorageException, IOException {
         String path = NON_EXISTING_FILE_PATH;
         FileUtil.removeFile(new File(path));
         assertTrue(storage.save(typicalTodoList, path));
@@ -156,7 +157,7 @@ public class JsonStorageTest {
     }
 
     @Test
-    public void save_WithPathOverwriteFile() throws IOException {
+    public void save_WithPathOverwriteFile() throws DataStorageException, IOException {
         String path = EXISTING_FILE_PATH;
         FileUtil.createFile(new File(path));
         assertTrue(storage.save(typicalTodoList, path));
@@ -165,7 +166,7 @@ public class JsonStorageTest {
     }
 
     @Test
-    public void move_toInvalidPath() throws IOException {
+    public void move_toInvalidPath() throws DataStorageException, IOException {
         String oldPath = TestUtil.getFilePathInSandboxFolder("old.json");
         saveDataToPath(typicalTodoList, oldPath);
         assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(oldPath)));
@@ -177,7 +178,7 @@ public class JsonStorageTest {
     }
 
     @Test
-    public void move_toValidPath() throws IOException {
+    public void move_toValidPath() throws DataStorageException, IOException {
         String oldPath = TestUtil.getFilePathInSandboxFolder("old.json");
         saveDataToPath(typicalTodoList, oldPath);
         assertEquals(JsonUtil.toJsonString(typicalTodoList), FileUtil.readFromFile(new File(oldPath)));
@@ -274,9 +275,9 @@ public class JsonStorageTest {
      * Helper method to set storage path in config and load data from config-defined path
      * @param path new todo list data path
      * @return Optional of todo list
-     * @throws IOException
+     * @throws DataStorageException
      */
-    private TodoList loadDataFromPath(String path) throws IOException {
+    private TodoList loadDataFromPath(String path) throws DataStorageException {
         Config.getInstance().setTodoListFilePath(path);
         return storage.load();
     }

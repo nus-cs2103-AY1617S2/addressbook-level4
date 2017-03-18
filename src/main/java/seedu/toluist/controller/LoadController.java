@@ -1,6 +1,5 @@
 package seedu.toluist.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -9,6 +8,7 @@ import java.util.regex.Pattern;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
+import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
@@ -49,7 +49,7 @@ public class LoadController extends Controller {
             UiStore.getInstance().setTask(newTodoList.getTasks());
             renderer.render();
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path));
-        } catch (IOException e) {
+        } catch (DataStorageException e) {
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
         }
     }

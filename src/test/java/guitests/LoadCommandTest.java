@@ -65,16 +65,15 @@ public class LoadCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void save_invalidStoragePath() {
-        String newPath = "///invalidLocation????/a";
+    public void load_invalidStoragePath() {
+        String newPath = "sfas?////sffsf.json";
         String command = "load " + newPath;
         commandBox.runCommand(command);
-
         assertResultMessage(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, newPath));
     }
 
     @Test
-    public void save_invalidData() {
+    public void load_invalidData() {
         String newPath = "./src/test/data/StorageTest/NotJsonFormatData.json";
         String command = "load " + newPath;
         commandBox.runCommand(command);
