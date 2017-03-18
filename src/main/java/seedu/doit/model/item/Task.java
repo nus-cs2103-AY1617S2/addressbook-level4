@@ -263,8 +263,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return getAsText();
     }
 
-    static class TaskComparator implements Comparator<Task>
-    {
+    static class TaskComparator implements Comparator<Task> {
         @Override
         public int compare(Task t1, Task t2) {
             return t1.compareTo(t2);
