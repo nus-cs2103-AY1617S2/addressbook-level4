@@ -14,9 +14,6 @@ public class SelectCommandTest extends TaskBossGuiTest {
         assertSelectionInvalid(false, 10); // invalid index
         assertNoTaskSelected();
 
-        assertSelectionInvalid(false, -1); // invalid index
-        assertNoTaskSelected();
-
         assertSelectionSuccess(false, 1); // first task in the list
         int taskCount = td.getTypicalTasks().length;
         assertSelectionSuccess(false, taskCount); // last task in the list
@@ -33,9 +30,6 @@ public class SelectCommandTest extends TaskBossGuiTest {
     public void selectTaskShortCommand_nonEmptyList() {
 
         assertSelectionInvalid(true, 20); // invalid index
-        assertNoTaskSelected();
-
-        assertSelectionInvalid(true, -1); // invalid index
         assertNoTaskSelected();
 
         assertSelectionSuccess(true, 1); // first task in the list
