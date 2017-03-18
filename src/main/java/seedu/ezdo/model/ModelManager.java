@@ -83,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task)
-	    throws UniqueTaskList.DuplicateTaskException, DateException {
+            throws UniqueTaskList.DuplicateTaskException, DateException {
 	checkTaskDate(task);
         ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
         undoStack.push(prevState);
