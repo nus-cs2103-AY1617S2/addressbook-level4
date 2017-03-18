@@ -41,7 +41,6 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         switch(taskType) {
-
         case TYPE_INCOMPLETE:
             model.getFilteredIncompleteTaskList();
             break;
