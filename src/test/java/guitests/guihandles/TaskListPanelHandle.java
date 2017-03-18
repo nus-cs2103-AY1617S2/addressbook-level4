@@ -25,10 +25,10 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public List<TaskCardHandle> getTaskCards() {
-        Node[] nodes = (Node[]) getAllCardNodes().toArray();
+        Set<Node> nodes = getAllCardNodes();
         ArrayList<TaskCardHandle> taskCards = new ArrayList<TaskCardHandle>();
-        for (int i = 0;  i < nodes.length;  i++) {
-            taskCards.add(new TaskCardHandle(guiRobot, primaryStage, nodes[i]));
+        for (Node node : nodes) {
+            taskCards.add(new TaskCardHandle(guiRobot, primaryStage, node));
         }
         return taskCards;
     }
@@ -38,15 +38,15 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatching(ReadOnlyTask... tasks) throws IllegalArgumentException {
-        TaskCardHandle[] taskCards = (TaskCardHandle[]) getTaskCards().toArray();
-        if (tasks.length != taskCards.length) {
+        List<TaskCardHandle> taskCards = getTaskCards();
+        if (tasks.length != taskCards.size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + taskCards.length + " tasks");
+                    "Expected " + taskCards.size() + " tasks");
         }
-        for (int i = 0; i < tasks.length; i++) {
+        for (ReadOnlyTask task : tasks) {
             boolean found = false;
-            for (int j = 0;  j < taskCards.length;  j++) {
-                if (TestUtil.compareCardAndTask(taskCards[j], tasks[i])) {
+            for (TaskCardHandle taskCard : taskCards) {
+                if (TestUtil.compareCardAndTask(taskCard, task)) {
                     found = true;
                     break;
                 }
@@ -56,6 +56,17 @@ public class TaskListPanelHandle extends GuiHandle {
             }
         }
         return true;
+    }
+
+    public TaskCardHandle getTaskCardWithID(int id) {
+        List<TaskCardHandle> taskCards = getTaskCards();
+        for (TaskCardHandle taskCard : taskCards) {
+            // TODO: remove this close bracket in id
+            if (taskCard.getID().equals(id + ") ")) {
+                return taskCard;
+            }
+        }
+        return null;
     }
 
     protected Set<Node> getAllCardNodes() {

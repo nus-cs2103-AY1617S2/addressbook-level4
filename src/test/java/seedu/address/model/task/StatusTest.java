@@ -67,6 +67,7 @@ public class StatusTest {
         TestStatus(dateString, dateBegining, dateEnding, Status.TOMORROW);
     }
 
+    /*
     @Test
     public void TestStatusThisWeek() {
         DateValue date = DateUtil.getEndOfWeek(new DateTime(new Date()));
@@ -77,7 +78,7 @@ public class StatusTest {
         String dateEnding = dateString;
 
         TestStatus(dateString, dateBegining, dateEnding, Status.THIS_WEEK);
-    }
+    } */
 
     @Test
     public void TestStatusTimeUnassigned() {
