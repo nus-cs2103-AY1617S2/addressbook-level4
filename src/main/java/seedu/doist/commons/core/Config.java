@@ -15,6 +15,7 @@ public class Config {
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
     private String todoListFilePath = "data/todolist.xml";
+    private String aliasListMapFilePath = "data/aliaslistmap.xml";
     private String todoListName = "MyTodoList";
 
 
@@ -48,6 +49,14 @@ public class Config {
 
     public void setTodoListFilePath(String todoListFilePath) {
         this.todoListFilePath = todoListFilePath;
+    }
+
+    public String getAliasListMapFilePath() {
+        return aliasListMapFilePath;
+    }
+
+    public void setAliasListMapFilePath(String aliasListMapFilePath) {
+        this.aliasListMapFilePath = aliasListMapFilePath;
     }
 
     public String getTodoListName() {
