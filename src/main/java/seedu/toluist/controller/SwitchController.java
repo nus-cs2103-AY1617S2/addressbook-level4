@@ -1,26 +1,26 @@
 package seedu.toluist.controller;
 
-import seedu.toluist.controller.commons.SwitchConfig;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import seedu.toluist.commons.core.SwitchConfig;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 /**
  * Handle switch tab command
  */
 public class SwitchController extends Controller {
-    public static final String RESULT_MESSAGE_SWITCH_SUCCESS = "Switched to tab \"%s\"."
+    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED = "Switched to tab \"%s\"."
         + " Showing %d out of %d filtered tasks.";
+    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_ALL = "Switched to tab \"%s\"."
+            + " Showing %d out of all %d existing tasks.";
     public static final String RESULT_MESSAGE_SWITCH_FAILURE = "\"%s\" is not a valid tab.";
     private static final String COMMAND_TEMPLATE = "switch\\s+(?<tab>\\S+)\\s*";
     private static final String COMMAND_WORD = "switch";
@@ -40,11 +40,15 @@ public class SwitchController extends Controller {
             return new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
         }
 
+        UiStore uiStore = UiStore.getInstance();
+        String messageTemplate = uiStore.getTasks().size() == TodoList.load().getTasks().size()
+                ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
+                : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
         TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();
         UiStore.getInstance().setSwitchPredicate(switchPredicate);
         renderer.render();
         return new CommandResult(String.format(
-                RESULT_MESSAGE_SWITCH_SUCCESS,
+                messageTemplate,
                 switchPredicate.getDisplayName(),
                 UiStore.getInstance().getTasks().stream().filter(switchPredicate.getPredicate()).collect(
                         Collectors.toList()).size(),

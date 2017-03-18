@@ -2,7 +2,6 @@ package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.TaskSwitchPredicate;
 
 /**

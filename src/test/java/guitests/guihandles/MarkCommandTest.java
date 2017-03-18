@@ -18,10 +18,12 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
  */
 public class MarkCommandTest extends ToLuistGuiTest {
     @Before
-    public void makeAllTaskIncomplete() {
+    public void setUp() {
         for (Task task : TodoList.load().getTasks()) {
             task.setCompleted(false);
         }
+        String switchViewtoAll = "switch a";
+        commandBox.runCommand(switchViewtoAll);
     }
 
     @Test

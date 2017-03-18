@@ -2,8 +2,9 @@ package seedu.toluist.ui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+
+import seedu.toluist.commons.core.SwitchConfig;
 import seedu.toluist.commons.util.FxViewUtil;
-import seedu.toluist.controller.commons.SwitchConfig;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.UiStore;
 
