@@ -13,4 +13,11 @@ public class TaskMemento {
     public TaskMemento(Task task) {
         this.task = task;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskMemento // instanceof handles nulls
+                && this.task.equals(((TaskMemento) other).task));
+    }
 }
