@@ -84,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task)
             throws UniqueTaskList.DuplicateTaskException, DateException {
-	checkTaskDate(task);
+        checkTaskDate(task);
         ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
         undoStack.push(prevState);
         redoStack.clear();
@@ -137,13 +137,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void checkTaskDate(ReadOnlyTask task) throws DateException {
-	try {
-	    if (DateUtil.checkTaskDate(task) == false) {
-		throw new DateException("Start date after due date!");
-	    }
-	} catch (ParseException pe) {
-	    System.out.println("wtf man");
-	}
+        try {
+            if (DateUtil.isTaskDateValid(task) == false) {
+                throw new DateException("Start date after due date!");
+            }
+        } catch (ParseException pe) {
+            System.out.println("wtf man");
+        }
     }
     //=========== Filtered Task List Accessors =============================================================
 
