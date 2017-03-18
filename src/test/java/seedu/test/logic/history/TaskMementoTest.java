@@ -17,32 +17,32 @@ import seedu.task.model.task.Duration;
 import seedu.task.model.task.Task;
 
 public class TaskMementoTest {
-    private static Description DESCRIPTION;
-    private static DueDate DUE_DATE;
-    private static Duration DURATION;
-    private static UniqueTagList TAGS;
+    private static Description description;
+    private static DueDate dueDate;
+    private static Duration duration;
+    private static UniqueTagList tags;
 
     @Before
     public void setup() throws DuplicateTagException, IllegalValueException {
-        DESCRIPTION = new Description("Task");
-        DUE_DATE = new DueDate("2017/01/01 0100");
-        DURATION = new Duration("2017/01/01 0000", "2017/01/01 0100");
-        TAGS = new UniqueTagList("Task");
+        description = new Description("Task");
+        dueDate = new DueDate("2017/01/01 0100");
+        duration = new Duration("2017/01/01 0000", "2017/01/01 0100");
+        tags = new UniqueTagList("Task");
     }
 
     @Test
     public void equivalenceTest() throws DuplicateTagException, IllegalValueException {
-        TaskMemento memento1 = new TaskMemento(new Task(DESCRIPTION, DUE_DATE, DURATION, TAGS));
-        TaskMemento memento2 = new TaskMemento(new Task(DESCRIPTION, DUE_DATE, DURATION, TAGS));
+        TaskMemento memento1 = new TaskMemento(new Task(description, dueDate, duration, tags));
+        TaskMemento memento2 = new TaskMemento(new Task(description, dueDate, duration, tags));
         assertTrue(memento1.equals(memento2));
 
-        TaskMemento memento3 = new TaskMemento(new Task(new Description("Other"), DUE_DATE, DURATION, TAGS));
+        TaskMemento memento3 = new TaskMemento(new Task(new Description("Other"), dueDate, duration, tags));
         assertFalse(memento1.equals(memento3));
-        TaskMemento memento4 = new TaskMemento(new Task(DESCRIPTION, null, DURATION, TAGS));
+        TaskMemento memento4 = new TaskMemento(new Task(description, null, duration, tags));
         assertFalse(memento1.equals(memento4));
-        TaskMemento memento5 = new TaskMemento(new Task(DESCRIPTION, DUE_DATE, null, TAGS));
+        TaskMemento memento5 = new TaskMemento(new Task(description, dueDate, null, tags));
         assertFalse(memento1.equals(memento5));
-        TaskMemento memento6 = new TaskMemento(new Task(DESCRIPTION, DUE_DATE, DURATION, new UniqueTagList("Other")));
+        TaskMemento memento6 = new TaskMemento(new Task(description, dueDate, duration, new UniqueTagList("Other")));
         assertFalse(memento1.equals(memento6));
     }
 
