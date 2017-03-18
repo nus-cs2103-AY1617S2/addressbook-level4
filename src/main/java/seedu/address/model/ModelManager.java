@@ -48,11 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTodoList newData) {
-        if (previousTodoList == null) {
-            previousTodoList = new TodoList(todoList);
-        } else {
-            previousTodoList.resetData(todoList);
-        }
+        previousTodoList = new TodoList(todoList);
         todoList.resetData(newData);
         indicateTodoListChanged();
     }
@@ -103,7 +99,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         resetData(previousTodoList);
         previousTodoList = null;
-        updateFilteredListToShowAll();
     }
 
     //=========== Filtered Todo List Accessors =============================================================
