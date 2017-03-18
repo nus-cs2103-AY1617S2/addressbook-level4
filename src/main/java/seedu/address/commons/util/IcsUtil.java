@@ -1,9 +1,12 @@
 package seedu.address.commons.util;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.validate.ValidationException;
 
@@ -15,31 +18,21 @@ public class IcsUtil {
     /**
      * Returns the ics data in the file as an object of the specified type.
      *
-     * @param file           Points to a valid xml file containing data that match the {@code classToConvert}.
+     * @param path           Points to a valid ics file containing calendar data.
      *                       Cannot be null.
-     * @param classToConvert The class corresponding to the xml data.
-     *                       Cannot be null.
-     * @throws FileNotFoundException Thrown if the file is missing.
-     * @throws JAXBException         Thrown if the file is empty or does not have the correct format.
+     * @throws ParserException Thrown if the file path is invalid.
+     * @throws IOException     Thrown if the data in calendar file is invalid.
      */
-    /*
-    @SuppressWarnings("unchecked")
-    public static <T> T getDataFromFile(File file, Class<T> classToConvert)
-            throws FileNotFoundException, JAXBException {
 
-        assert file != null;
-        assert classToConvert != null;
+    public static Calendar getDataFromFile(String path) throws IOException, ParserException {
 
-        if (!FileUtil.isFileExists(file)) {
-            throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
-        }
+        assert path != null;
 
-        JAXBContext context = JAXBContext.newInstance(classToConvert);
-        Unmarshaller um = context.createUnmarshaller();
-
-        return ((T) um.unmarshal(file));
+        FileInputStream fin = new FileInputStream(path);
+        CalendarBuilder builder = new CalendarBuilder();
+        Calendar calendar = builder.build(fin);
+        return calendar;
     }
-    */
 
     /**
      * Saves the tasks in the task manager in ics format.
@@ -52,7 +45,7 @@ public class IcsUtil {
      * @throws IOException          Thrown if the file path is invalid.
      * @throws ValidationException  Thrown if the data in calendar is invalid.
      */
-    public static <T> void saveDataToFile(String path, Calendar calendar) throws ValidationException, IOException {
+    public static void saveDataToFile(String path, Calendar calendar) throws ValidationException, IOException {
 
         assert path != null;
         assert path.endsWith(".ics");
