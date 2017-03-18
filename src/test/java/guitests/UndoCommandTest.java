@@ -41,7 +41,7 @@ public class UndoCommandTest extends TaskBossGuiTest {
 
         //undo one command
         TestTask[] currentList = td.getTypicalTasks();
-        
+
         TestTask taskToAdd = td.ida;
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand("delete " + currentList.length);
