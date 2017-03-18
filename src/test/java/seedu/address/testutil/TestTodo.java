@@ -19,6 +19,7 @@ public class TestTodo implements ReadOnlyTodo {
     private Name name;
     private Date starttime;
     private Date endtime;
+    private Date completeTime;
 
     private UniqueTagList tags;
     /**
@@ -87,6 +88,15 @@ public class TestTodo implements ReadOnlyTodo {
     @Override
     public Date getEndTime() {
         return endtime;
+    }
+
+    public void setCompleteTime(Date completeTime) {
+        this.completeTime = completeTime;
+    }
+
+    @Override
+    public Date getCompleteTime() {
+        return completeTime;
     }
 
     @Override
