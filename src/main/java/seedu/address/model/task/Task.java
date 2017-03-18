@@ -49,6 +49,9 @@ public class Task implements ReadOnlyTask {
             } else if (param instanceof Deadline) {
                 this.deadline = (Deadline) param;
 
+            } else if (param instanceof Status) {
+                this.status = (Status) param;
+
             } else if (param instanceof UniqueTagList) {
                 this.tags.mergeFrom((UniqueTagList) param);
 
@@ -62,7 +65,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getDeadline(), source.getDescription(), source.getStatus(), source.getTags());
     }
 
     public Task(Name name2, Description description2, Deadline deadline2,
@@ -150,6 +153,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
+        this.setStatus(replacement.getStatus());
         this.setTags(replacement.getTags());
         return this;
     }
