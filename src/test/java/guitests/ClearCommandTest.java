@@ -14,8 +14,8 @@ public class ClearCommandTest extends AddressBookGuiTest {
         assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
@@ -23,38 +23,38 @@ public class ClearCommandTest extends AddressBookGuiTest {
         assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("clr");
 
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("c");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("clears");
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("empty");
 
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.hangclothes.getAddCommand("add "));
+        assertTrue(personListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("empties");
