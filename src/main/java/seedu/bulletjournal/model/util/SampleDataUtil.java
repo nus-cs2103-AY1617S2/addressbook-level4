@@ -40,7 +40,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTodoList getSampleAddressBook() {
+    public static ReadOnlyTodoList getSampleTodoList() {
         try {
             TodoList sampleAB = new TodoList();
             for (Task samplePerson : getSamplePersons()) {
