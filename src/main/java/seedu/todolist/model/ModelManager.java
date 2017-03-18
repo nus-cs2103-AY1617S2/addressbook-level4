@@ -1,5 +1,8 @@
 package seedu.todolist.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -114,9 +117,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    //TODO
     //@@author A0139633B
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
+        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+            //get current time and compare with the task's end time
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy h.mm a");
+            Date currentDate = new Date();
+            String taskDateString = task.getEndTime().toString();
+
+            try {
+                Date taskDate = dateFormat.parse(taskDateString);
+                return currentDate.compareTo(taskDate) > 0;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
