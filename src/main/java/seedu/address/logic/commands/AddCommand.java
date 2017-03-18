@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -30,6 +28,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
+    public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
+    public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
+    private static final String DATE_FORMAT = "yy-MM-dd'T'HH:mm";
 
     private final Todo toAdd;
 
@@ -38,25 +39,21 @@ public class AddCommand extends Command {
      * * Only adds floating task for now
      *
      * @throws IllegalValueException if any of the raw values are invalid
-     * @throws ParseException
      */
     public AddCommand(String todo,
                       String startTime,
                       String endTime,
                       Set<String> tags)
-            throws IllegalValueException, ParseException {
+            throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
 
-        //String inputString = "11-11-2012";
-        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
-
         this.toAdd = new Todo(
                 new Name(todo),
-                dateFormat.parse(startTime),
-                dateFormat.parse(endTime),
+                StringUtil.parseDate(startTime, DATE_FORMAT),
+                StringUtil.parseDate(endTime, DATE_FORMAT),
                 new UniqueTagList(tagSet));
     }
 
@@ -65,23 +62,19 @@ public class AddCommand extends Command {
      * * Only adds floating task for now
      *
      * @throws IllegalValueException if any of the raw values are invalid
-     * @throws ParseException
      */
     public AddCommand(String todo,
                       String endTime,
                       Set<String> tags)
-            throws IllegalValueException, ParseException {
+            throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
 
-        //String inputString = "11-11-2012";
-        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
-
         this.toAdd = new Todo(
                 new Name(todo),
-                dateFormat.parse(endTime),
+                StringUtil.parseDate(endTime, DATE_FORMAT),
                 new UniqueTagList(tagSet));
     }
 

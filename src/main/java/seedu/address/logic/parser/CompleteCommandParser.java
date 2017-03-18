@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
@@ -19,7 +19,7 @@ public class CompleteCommandParser {
      * Parses the given {@code String} of arguments in the context of the CompleteCommand
      * and returns an CompleteCommand object for execution.
      */
-    public Command parse(String args) throws ParseException {
+    public Command parse(String args) {
 
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer();
@@ -31,10 +31,14 @@ public class CompleteCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
         }
         Optional<String> completeTime = preambleFields.get(1);
-        if (completeTime.isPresent()) {
-            return new CompleteCommand(index.get(), completeTime.get());
-        } else {
-            return new CompleteCommand(index.get());
+        try {
+            if (completeTime.isPresent()) {
+                return new CompleteCommand(index.get(), completeTime.get());
+            } else {
+                return new CompleteCommand(index.get());
+            }
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
         }
     }
 

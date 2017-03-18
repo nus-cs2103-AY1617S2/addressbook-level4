@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.util.Date;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.todo.ReadOnlyTodo;
 
@@ -36,11 +34,10 @@ public class CompleteCommand extends Command {
         this.completeTime = new Date();
     }
 
-    public CompleteCommand(int targetIndex, String completeTime) throws ParseException {
+    public CompleteCommand(int targetIndex, String completeTime) throws IllegalValueException {
      // convert index from 1 based to 0 based
         this.filteredTodoListIndex = targetIndex - 1;
-        DateFormat completeTimeFormat = new SimpleDateFormat(COMPLETE_TIME_FORMAT);
-        this.completeTime = completeTimeFormat.parse(completeTime);
+        this.completeTime = StringUtil.parseDate(completeTime, COMPLETE_TIME_FORMAT);
     }
 
     @Override

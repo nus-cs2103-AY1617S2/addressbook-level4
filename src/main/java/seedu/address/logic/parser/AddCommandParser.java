@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.text.ParseException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -22,9 +21,8 @@ public class AddCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException
      */
-    public Command parse(String args) throws ParseException {
+    public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);

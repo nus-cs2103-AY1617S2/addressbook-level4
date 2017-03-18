@@ -2,6 +2,12 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Helper functions for handling strings.
@@ -54,5 +60,20 @@ public class StringUtil {
      */
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
+    }
+
+    /**
+     * Parses a Date from a string
+     * @param s String to parse
+     * @param dateFormat Format to use to parse string
+     * @return Date object
+     */
+    public static Date parseDate(String s, String dateFormat) throws IllegalValueException {
+        DateFormat formatter = new SimpleDateFormat(dateFormat);
+        try {
+            return formatter.parse(s);
+        } catch (ParseException e) {
+            throw new IllegalValueException("Date must be entered as: " + dateFormat);
+        }
     }
 }
