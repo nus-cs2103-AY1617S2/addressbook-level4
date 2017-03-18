@@ -59,10 +59,10 @@ public class ArgumentTokenizer {
         String tagStringToSplit = tagString.get();
         String[] splittedTags = tagStringToSplit.split(" ");
         List<String> tags;
-        if(!tagStringToSplit.equals("")) {
+        if (!tagStringToSplit.equals("")) {
             ArrayList<String> processedTags = new ArrayList<String>();
-            for(int i=0; i<splittedTags.length; i++) {
-                if(!splittedTags[i].equals("")) {
+            for (int i = 0; i < splittedTags.length; i++) {
+                if (!splittedTags[i].equals("")) {
                     processedTags.add(splittedTags[i]);
                 }
             }
