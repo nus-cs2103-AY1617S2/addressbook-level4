@@ -55,7 +55,6 @@ public class ListCommand extends Command {
             break;
 
         default:
-            System.out.println("Executing list all tasks");
             model.updateFilteredListToShowAll();
         }
         return new CommandResult(MESSAGE_SUCCESS);
