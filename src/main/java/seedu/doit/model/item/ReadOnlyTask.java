@@ -37,23 +37,32 @@ public interface ReadOnlyTask extends Item {
         String endTime = (getEndTime() != null) ? getEndTime().toString() : "None";
 
         builder.append(getName())
-            .append(" Priority: ")
-            .append(getPriority())
-            .append(" Start Time: ")
-            .append(getStartTime())
-            .append(" End Time: ")
-            .append(getEndTime())
-            .append(" Description: ")
-            .append(getDescription())
-            .append(" Tags: ");
+               .append(" Priority: ")
+               .append(getPriority());
+        if (hasStartTime()) {
+            builder.append(" Start Time: ");
+            builder.append(getStartTime());
+        }
+        if (hasEndTime()) {
+            builder.append(" End Time: ");
+            builder.append(getEndTime());
+        }
+        builder.append(" Description: ")
+               .append(getDescription())
+               .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
     boolean hasStartTime();
+
     boolean hasEndTime();
+
     int compareTo(ReadOnlyTask other);
+
     boolean isTask();
+
     boolean isEvent();
+
     boolean isFloatingTask();
 }
