@@ -24,8 +24,6 @@ public class ArgumentTokenizer {
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
 
-    private final String EMPTY_STRING = "";
-    private final String SPACE = " ";
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
@@ -59,10 +57,10 @@ public class ArgumentTokenizer {
         Optional<String> tagString = getAllValues(prefix).flatMap((values)
             -> Optional.of(values.get(values.size() - 1)));
         String tagStringToSplit = tagString.get();
-        String[] splittedTags = tagStringToSplit.split(SPACE);
+        String[] splittedTags = tagStringToSplit.split(" ");
         List<String> tags;
 
-        if (!EMPTY_STRING.equals(tagStringToSplit)) {
+        if (!"".equals(tagStringToSplit)) {
             ArrayList<String> processedTags = new ArrayList<String>();
             for (int i = 0; i < splittedTags.length; i++) {
                 if (!splittedTags[i].equals("")) {
