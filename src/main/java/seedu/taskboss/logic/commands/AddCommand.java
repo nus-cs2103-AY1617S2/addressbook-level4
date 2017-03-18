@@ -23,11 +23,14 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_WORD_SHORT = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskBoss. "
-            + "Parameters: NAME [p/PRIORITY_LEVEL] [sd/START_DATE] [ed/END_DATE] "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
+            + ": Adds a task to TaskBoss. "
+            + "Parameters: n/NAME [p/PRIORITY_LEVEL] [sd/START_DATE] [ed/END_DATE] "
             + "[i/INFORMATION] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " n/Submit report p/3 sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project";
+            + " n/Submit report p/3 sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project\n"
+            + "Example: " + COMMAND_WORD_SHORT
+            + " n/Watch movie sd/feb 19 c/Fun";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";

@@ -10,10 +10,11 @@ public class ListByCategoryCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all tasks with the specified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " OR l c/"
+            + ": Lists all tasks with the specified "
             + "category name (case-sensitive) as a list with index numbers.\n"
-            + "Parameters: c/CATEGORYNAME "
-            + "Example: " + COMMAND_WORD + " c/project";
+            + "Parameters: c/CATEGORYNAME\n"
+            + "Example: " + COMMAND_WORD + " c/project" + " || " + "l c/project";
 
     private final Category category;
 

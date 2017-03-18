@@ -14,10 +14,10 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_WORD_SHORT = "d";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Deletes the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1" + " || " + COMMAND_WORD_SHORT + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
