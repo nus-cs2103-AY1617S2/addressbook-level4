@@ -1,0 +1,4 @@
+.tab-pane.selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #4A90E2;
+}

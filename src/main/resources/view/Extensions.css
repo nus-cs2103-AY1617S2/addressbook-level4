@@ -18,8 +18,3 @@
 .completed .text {
     -fx-strikethrough: true;
 }
-
-.tab-lbl.selected .text {
-    -fx-underline: true;
-    -fx-font-weight: bold;
-}

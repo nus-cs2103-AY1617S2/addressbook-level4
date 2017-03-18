@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="132.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="tabPane" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" styleClass="tab-pane" stylesheets="@../stylesheet/TabView.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="tabLabel" styleClass="tab-lbl" text="Label" />
+      <Label fx:id="tabShortcutLabel" styleClass="tab-lbl" text="Label" underline="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="tabLabel" text="Label" />
    </children>
-</StackPane>
+</HBox>
