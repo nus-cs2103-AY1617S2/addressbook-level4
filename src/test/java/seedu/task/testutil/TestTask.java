@@ -14,9 +14,9 @@ public class TestTask implements ReadOnlyTask {
 
     private TaskId id;
     private Description description;
+    private DueDate dueDate;
     private Duration duration;
     private UniqueTagList tags;
-    private DueDate dueDate;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -26,7 +26,10 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
+        this.id = taskToCopy.getId();
         this.description = taskToCopy.getDescription();
+        this.dueDate = taskToCopy.getDueDate();
+        this.duration = taskToCopy.getDuration();
         this.tags = taskToCopy.getTags();
     }
 
