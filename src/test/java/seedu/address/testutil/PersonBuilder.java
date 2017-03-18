@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
@@ -46,11 +45,6 @@ public class PersonBuilder {
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
         this.person.setPhone(new Priority(phone));
-        return this;
-    }
-
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
         return this;
     }
 

@@ -2,56 +2,47 @@
 <whatsleft>
     <persons>
         <description>Hans Muster</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">hans@google.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">4th street</location>
     </persons>
     <persons>
         <description>Ruth Mueller</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">ruth@google.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">81th street</location>
     </persons>
     <persons>
         <description>Heinz Kurz</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">heinz@yahoo.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">wall street</location>
     </persons>
     <persons>
         <description>Cornelia Meier</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">cornelia@google.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">10th street</location>
     </persons>
     <persons>
         <description>Werner Meyer</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">werner@gmail.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">michegan ave</location>
     </persons>
     <persons>
         <description>Lydia Kunz</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">lydia@gmail.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">little tokyo</location>
     </persons>
     <persons>
         <description>Anna Best</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">anna@google.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">4th street</location>
     </persons>
     <persons>
         <description>Stefan Meier</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">stefan@mail.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">little india</location>
     </persons>
     <persons>
         <description>Martin Mueller</description>
-        <phone isPrivate="false">high</phone>
-        <email isPrivate="false">hans@google.com</email>
+        <priority isPrivate="false">high</priority>
         <location isPrivate="false">chicago ave</location>
     </persons>
 </whatsleft>

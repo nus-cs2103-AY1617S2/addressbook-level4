@@ -8,7 +8,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
@@ -26,7 +25,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[DESCRIPTION] [p/PRIORITY] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
+            + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/high e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
@@ -80,12 +79,11 @@ public class EditCommand extends Command {
 
         Description updatedDescription = editActivityDescriptor.getDescription().orElseGet(
             activityToEdit::getDescription);
-        Priority updatedPhone = editActivityDescriptor.getPhone().orElseGet(activityToEdit::getPriority);
-        Email updatedEmail = editActivityDescriptor.getEmail().orElseGet(activityToEdit::getEmail);
+        Priority updatedPriority = editActivityDescriptor.getPriority().orElseGet(activityToEdit::getPriority);
         Location updatedLocation = editActivityDescriptor.getLocation().orElseGet(activityToEdit::getLocation);
         UniqueTagList updatedTags = editActivityDescriptor.getTags().orElseGet(activityToEdit::getTags);
 
-        return new Activity(updatedDescription, updatedPhone, updatedEmail, updatedLocation, updatedTags);
+        return new Activity(updatedDescription, updatedPriority, updatedLocation, updatedTags);
     }
 
     /**
@@ -94,8 +92,7 @@ public class EditCommand extends Command {
      */
     public static class EditActivityDescriptor {
         private Optional<Description> description = Optional.empty();
-        private Optional<Priority> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -103,8 +100,7 @@ public class EditCommand extends Command {
 
         public EditActivityDescriptor(EditActivityDescriptor toCopy) {
             this.description = toCopy.getDescription();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
+            this.priority = toCopy.getPriority();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
@@ -113,7 +109,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.phone, this.email, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.priority, this.location, this.tags);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -125,22 +121,13 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setPhone(Optional<Priority> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
-        public Optional<Priority> getPhone() {
-            return phone;
-        }
-
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setLocation(Optional<Location> location) {

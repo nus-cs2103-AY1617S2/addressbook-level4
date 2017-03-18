@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
@@ -23,9 +22,7 @@ public class XmlAdaptedActivity {
     @XmlElement(required = true)
     private String description;
     @XmlElement(required = true)
-    private String phone;
-    @XmlElement(required = true)
-    private String email;
+    private String priority;
     @XmlElement(required = true)
     private String location;
 
@@ -46,8 +43,7 @@ public class XmlAdaptedActivity {
      */
     public XmlAdaptedActivity(ReadOnlyActivity source) {
         description = source.getDescription().description;
-        phone = source.getPriority().value;
-        email = source.getEmail().value;
+        priority = source.getPriority().value;
         location = source.getLocation().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -66,10 +62,9 @@ public class XmlAdaptedActivity {
             personTags.add(tag.toModelType());
         }
         final Description description = new Description(this.description);
-        final Priority phone = new Priority(this.phone);
-        final Email email = new Email(this.email);
+        final Priority priority = new Priority(this.priority);
         final Location location = new Location(this.location);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Activity(description, phone, email, location, tags);
+        return new Activity(description, priority, location, tags);
     }
 }

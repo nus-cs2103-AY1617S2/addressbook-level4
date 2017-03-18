@@ -32,7 +32,6 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.WhatsLeft;
 import seedu.address.model.person.Activity;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
@@ -75,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Activity[]{
-                new Activity(new Description("Ali Muster"), new Priority("high"), new Email("hans@google.com"), new Location("4th street"), new UniqueTagList()),
-                new Activity(new Description("Boris Mueller"), new Priority("low"), new Email("ruth@google.com"), new Location("81th street"), new UniqueTagList()),
-                new Activity(new Description("Carl Kurz"), new Priority("medium"), new Email("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList()),
-                new Activity(new Description("Daniel Meier"), new Priority("medium"), new Email("cornelia@google.com"), new Location("10th street"), new UniqueTagList()),
-                new Activity(new Description("Elle Meyer"), new Priority("high"), new Email("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList()),
-                new Activity(new Description("Fiona Kunz"), new Priority("low"), new Email("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList()),
-                new Activity(new Description("George Best"), new Priority("medium"), new Email("anna@google.com"), new Location("4th street"), new UniqueTagList()),
-                new Activity(new Description("Hoon Meier"), new Priority("high"), new Email("stefan@mail.com"), new Location("little india"), new UniqueTagList()),
-                new Activity(new Description("Ida Mueller"), new Priority("high"), new Email("hans@google.com"), new Location("chicago ave"), new UniqueTagList())
+                new Activity(new Description("Ali Muster"), new Priority("high"), new Location("4th street"), new UniqueTagList()),
+                new Activity(new Description("Boris Mueller"), new Priority("low"), new Location("81th street"), new UniqueTagList()),
+                new Activity(new Description("Carl Kurz"), new Priority("medium"), new Location("wall street"), new UniqueTagList()),
+                new Activity(new Description("Daniel Meier"), new Priority("medium"), new Location("10th street"), new UniqueTagList()),
+                new Activity(new Description("Elle Meyer"), new Priority("high"), new Location("michegan ave"), new UniqueTagList()),
+                new Activity(new Description("Fiona Kunz"), new Priority("low"), new Location("little tokyo"), new UniqueTagList()),
+                new Activity(new Description("George Best"), new Priority("medium"), new Location("4th street"), new UniqueTagList()),
+                new Activity(new Description("Hoon Meier"), new Priority("high"), new Location("little india"), new UniqueTagList()),
+                new Activity(new Description("Ida Mueller"), new Priority("high"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

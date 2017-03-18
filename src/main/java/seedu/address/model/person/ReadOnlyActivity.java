@@ -10,7 +10,6 @@ public interface ReadOnlyActivity {
 
     Description getDescription();
     Priority getPriority();
-    Email getEmail();
     Location getLocation();
 
     /**
@@ -27,20 +26,17 @@ public interface ReadOnlyActivity {
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
-                && other.getEmail().equals(this.getEmail())
                 && other.getLocation().equals(this.getLocation()));
     }
 
     /**
-     * Formats the activity as text, showing all contact details.
+     * Formats the activity as text, showing all details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Email: ")
-                .append(getEmail())
                 .append(" Location: ")
                 .append(getLocation())
                 .append(" Tags: ");

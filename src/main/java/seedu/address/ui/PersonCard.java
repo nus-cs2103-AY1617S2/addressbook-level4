@@ -22,8 +22,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label place;
     @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
 
     public PersonCard(ReadOnlyActivity person, int displayedIndex) {
@@ -32,7 +30,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPriority().value);
         place.setText(person.getLocation().value);
-        email.setText(person.getEmail().value);
         initTags(person);
     }
 
