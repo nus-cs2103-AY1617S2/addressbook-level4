@@ -15,7 +15,6 @@ import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
-import seedu.taskboss.logic.commands.ListByCategoryCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
@@ -69,10 +68,7 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ListByCategoryCommand.COMMAND_WORD:
-            return new ListByCategoryCommandParser().parse(arguments);
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
