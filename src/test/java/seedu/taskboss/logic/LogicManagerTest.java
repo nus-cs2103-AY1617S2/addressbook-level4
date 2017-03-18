@@ -92,9 +92,7 @@ public class LogicManagerTest {
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskBoss = new TaskBoss(model.getTaskBoss()); // last saved
-        // assumed
-        // to be up
-        // to date
+                                                                 // assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -189,6 +187,12 @@ public class LogicManagerTest {
     @Test
     public void execute_exit() throws IllegalValueException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                new TaskBoss(), Collections.emptyList());
+    }
+
+    @Test
+    public void execute_exitShortCommand() throws IllegalValueException {
+        assertCommandSuccess("x", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
 

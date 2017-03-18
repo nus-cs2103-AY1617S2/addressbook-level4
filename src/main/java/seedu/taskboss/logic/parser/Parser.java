@@ -77,6 +77,7 @@ public class Parser {
             return new ListByCategoryCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD_SHORT:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
