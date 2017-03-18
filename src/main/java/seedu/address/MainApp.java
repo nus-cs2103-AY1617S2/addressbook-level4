@@ -101,33 +101,31 @@ public class MainApp extends Application {
 
     protected Config initConfig(String configFilePath) {
         Config initializedConfig;
-        String configFilePathUsed;
 
-        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
+        configPath = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
             logger.info("Custom Config file specified " + configFilePath);
-            configFilePathUsed = configFilePath;
+            configPath = configFilePath;
         }
 
-        logger.info("Using config file : " + configFilePathUsed);
+        logger.info("Using config file : " + configPath);
 
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
+            Optional<Config> configOptional = ConfigUtil.readConfig(configPath);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
+            logger.warning("Config file at " + configPath + " is not in the correct format. " +
                     "Using default config properties");
             initializedConfig = new Config();
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
+            ConfigUtil.saveConfig(initializedConfig, configPath);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
-        configPath = configFilePathUsed;
         return initializedConfig;
     }
 
@@ -205,9 +203,17 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
 
-        //Save all data into the new location
-        storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
+        //Reinitialize components
+        config = initConfig(configPath);
+        userPrefs = initPrefs(config);
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage);
+        //Set the Ui to the new logic since we don't want to destroy the old UI
+        ui.setLogic(logic);
 
+        //Save all current data into the new location
+        storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
     }
 
     public static void main(String[] args) {

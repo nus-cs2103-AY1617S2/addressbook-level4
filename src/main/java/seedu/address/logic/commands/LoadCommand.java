@@ -5,8 +5,8 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.storage.FileStorageChangedEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 
-public class SaveAsCommand extends Command {
-    public static final String COMMAND_WORD = "SAVEAS";
+public class LoadCommand extends Command {
+    public static final String COMMAND_WORD = "LOAD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Save data to a new filepath "
             + "Parameters: FILEPATH\n" + "Example: " + COMMAND_WORD
@@ -17,7 +17,7 @@ public class SaveAsCommand extends Command {
 
     private String storagePath;
 
-    public SaveAsCommand(String storagePath) {
+    public LoadCommand(String storagePath) {
         this.storagePath = storagePath.trim();
     }
 

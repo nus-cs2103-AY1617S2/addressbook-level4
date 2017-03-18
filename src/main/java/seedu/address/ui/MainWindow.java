@@ -31,6 +31,9 @@ public class MainWindow extends UiPart<Region> {
 
     private Stage primaryStage;
     private Logic logic;
+    private CommandBox commandBox;
+    private ResultDisplay resultDisplay;
+    private StatusBarFooter statusBarFooter;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -112,13 +115,36 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0140042A
+    /**
+     * Fill up components in the main window,
+     * but only update appropriate components if already initialized
+     */
     public void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+
+        if (taskListPanel == null) {
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        } else {
+            //Update the logic only
+            taskListPanel.setConnections(logic.getFilteredTaskList());
+        }
+
+        if (resultDisplay == null) {
+            resultDisplay = new ResultDisplay(getResultDisplayPlaceholder());
+        }
+
+        if (statusBarFooter == null) {
+            statusBarFooter = new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        } else {
+            statusBarFooter.setSaveLocation(config.getTaskManagerFilePath());
+        }
+
+        if (commandBox == null) {
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        }
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -205,6 +231,10 @@ public class MainWindow extends UiPart<Region> {
 
     public void releaseResources() {
         browserPanel.freeResources();
+    }
+
+    public void setLogic(Logic logic) {
+        this.logic = logic;
     }
 
 }

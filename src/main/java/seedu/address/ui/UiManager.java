@@ -125,4 +125,10 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.loadTaskPage(event.getNewSelection());
     }
 
+    @Override
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+        mainWindow.setLogic(logic);
+        mainWindow.fillInnerParts();
+    }
 }
