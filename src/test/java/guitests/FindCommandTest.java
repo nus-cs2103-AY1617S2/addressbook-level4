@@ -11,7 +11,7 @@ public class FindCommandTest extends TodoListGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
+        assertFindResult("find money"); // no results
         assertFindResult("find milk", td.buymilk, td.dumpmilk); // multiple results
 
         //find after deleting one result
@@ -27,19 +27,19 @@ public class FindCommandTest extends TodoListGuiTest {
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("find jacket"); // no results
     }
 
     @Test
     public void find_invalidCommand_fail() {
-        commandBox.runCommand("findgeorge");
+        commandBox.runCommand("findgarbage");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }

@@ -142,12 +142,12 @@ public class EditCommandTest extends TodoListGuiTest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getTaskName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTaskName().fullName);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(personListPanel.isListMatching(expectedPersonsList));
+        assertTrue(taskListPanel.isListMatching(expectedPersonsList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 }

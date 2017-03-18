@@ -10,12 +10,12 @@ public class ClearCommandTest extends TodoListGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalPersons()));
         assertClearCommandSuccess("clear");
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hangclothes));
+        assertTrue(taskListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 
@@ -24,7 +24,7 @@ public class ClearCommandTest extends TodoListGuiTest {
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hangclothes));
+        assertTrue(taskListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("clr");
@@ -32,21 +32,21 @@ public class ClearCommandTest extends TodoListGuiTest {
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hangclothes));
+        assertTrue(taskListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("c");
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hangclothes));
+        assertTrue(taskListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("clears");
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hangclothes));
+        assertTrue(taskListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("empty");
@@ -54,7 +54,7 @@ public class ClearCommandTest extends TodoListGuiTest {
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertTrue(personListPanel.isListMatching(td.hangclothes));
+        assertTrue(taskListPanel.isListMatching(td.hangclothes));
         commandBox.runCommand("delete 1");
         assertListSize(0);
         assertClearCommandSuccess("empties");
@@ -64,6 +64,6 @@ public class ClearCommandTest extends TodoListGuiTest {
     private void assertClearCommandSuccess(String clearCommand) {
         commandBox.runCommand(clearCommand);
         assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertResultMessage("Todo list has been cleared!");
     }
 }

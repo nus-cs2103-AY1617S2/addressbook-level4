@@ -48,7 +48,7 @@ public abstract class TodoListGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected TaskListPanelHandle personListPanel;
+    protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
@@ -69,7 +69,7 @@ public abstract class TodoListGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            personListPanel = mainGui.getPersonListPanel();
+            taskListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
@@ -115,7 +115,7 @@ public abstract class TodoListGuiTest {
      * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = personListPanel.getNumberOfPeople();
+        int numberOfPeople = taskListPanel.getNumberOfPeople();
         assertEquals(size, numberOfPeople);
     }
 

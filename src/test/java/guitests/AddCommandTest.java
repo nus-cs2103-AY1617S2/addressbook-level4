@@ -28,27 +28,27 @@ public class AddCommandTest extends TodoListGuiTest {
         //add duplicate person
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person
         commandBox.runCommand(td.hangclothes.getAddCommand("adds "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person with "a" command
         commandBox.runCommand(td.hangclothes.getAddCommand("a "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person with "new" command
         commandBox.runCommand(td.hangclothes.getAddCommand("new "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person with "create" command
         commandBox.runCommand(td.hangclothes.getAddCommand("create "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -63,12 +63,12 @@ public class AddCommandTest extends TodoListGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand("add "));
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getTaskName().fullName);
+        TaskCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getTaskName().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
         TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }
