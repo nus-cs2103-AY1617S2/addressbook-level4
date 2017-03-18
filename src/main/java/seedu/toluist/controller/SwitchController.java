@@ -22,9 +22,10 @@ public class SwitchController extends Controller {
     public static final String RESULT_MESSAGE_SWITCH_SUCCESS_ALL = "Switched to tab \"%s\"."
             + " Showing %d out of all %d existing tasks.";
     public static final String RESULT_MESSAGE_SWITCH_FAILURE = "\"%s\" is not a valid tab.";
-    private static final String COMMAND_TEMPLATE = "switch\\s+(?<tab>\\S+)\\s*";
-    private static final String COMMAND_WORD = "switch";
+    public static final String RESULT_MESSAGE_NO_TAB = "A tab to switch to was not provided";
+    public static final String COMMAND_WORD = "switch";
     public static final String TAB = "tab";
+    private static final String COMMAND_TEMPLATE = "switch(\\s+(?<tab>\\S+))?\\s*";
     private SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
 
     public SwitchController(Ui renderer) {
@@ -34,6 +35,11 @@ public class SwitchController extends Controller {
     public CommandResult execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String keyword = tokens.get(TAB);
+
+        if (keyword == null) {
+            return new CommandResult(RESULT_MESSAGE_NO_TAB);
+        }
+
         Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
 
         if (!switchPredicateOptional.isPresent()) {

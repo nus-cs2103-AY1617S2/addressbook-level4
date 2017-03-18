@@ -1,10 +1,10 @@
 package seedu.toluist.model;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * Tests for TaskSwitchPredicate
@@ -23,15 +23,14 @@ public class TaskSwitchPredicateTest {
 
     @Test
     public void within7DaysSwitchPredicate() {
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now(), TaskSwitchPredicate.WITHIN_7_DAYS_SWITCH_PREDICATE, true);
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(6), TaskSwitchPredicate
-                .WITHIN_7_DAYS_SWITCH_PREDICATE, true);
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().minusDays(1), TaskSwitchPredicate
-                        .TODAY_SWITCH_PREDICATE,
-                false);
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(7), TaskSwitchPredicate
-                        .TODAY_SWITCH_PREDICATE,
-                false);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now(),
+                TaskSwitchPredicate.WITHIN_7_DAYS_SWITCH_PREDICATE, true);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(6),
+                TaskSwitchPredicate.WITHIN_7_DAYS_SWITCH_PREDICATE, true);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().minusDays(1),
+                TaskSwitchPredicate.TODAY_SWITCH_PREDICATE, false);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(7),
+                TaskSwitchPredicate.TODAY_SWITCH_PREDICATE, false);
     }
 
 

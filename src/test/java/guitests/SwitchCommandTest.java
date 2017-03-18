@@ -1,16 +1,17 @@
 package guitests;
 
-import org.junit.Before;
-import org.junit.Test;
-import seedu.toluist.controller.SwitchController;
-import seedu.toluist.model.Task;
-import seedu.toluist.model.TodoList;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+
+import seedu.toluist.controller.SwitchController;
+import seedu.toluist.model.Task;
+import seedu.toluist.model.TodoList;
 
 /**
  * Gui tests for switch command
@@ -31,6 +32,13 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         todoList.save();
         commandBox.runCommand("list");
         commandBox.runCommand("switch i");
+    }
+
+    @Test
+    public void switch_noTab() {
+        String command = "switch ";
+        commandBox.runCommand(command);
+        assertResultMessage(SwitchController.RESULT_MESSAGE_NO_TAB);
     }
 
     @Test

@@ -1,11 +1,11 @@
 package seedu.toluist.ui.view;
 
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.UiStore;
-
-import java.util.stream.Collectors;
 
 /**
  * View to display the tab bar
