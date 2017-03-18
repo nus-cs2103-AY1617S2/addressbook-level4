@@ -15,6 +15,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.storage.FileStorageChangedEvent;
+import seedu.address.commons.events.storage.ForceSaveEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -189,7 +190,7 @@ public class MainApp extends Application {
 
     //@@author A0140042A
     /**
-     * Handles FileStorageChangedEvent to save the config and reinitialize the app with the new path
+     * Handles FileStorageChangedEvent to load the data from the new location
      * @throws Exception
      */
     @Subscribe
@@ -215,6 +216,17 @@ public class MainApp extends Application {
         //Save all current data into the new location
         storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
     }
+
+    /**
+     * Handles ForceSaveEvent to save the config to a location
+     * @throws Exception
+     */
+    @Subscribe
+    public void handleForceSaveEvent(ForceSaveEvent event) throws Exception {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
+    }
+    //@@author
 
     public static void main(String[] args) {
         launch(args);
