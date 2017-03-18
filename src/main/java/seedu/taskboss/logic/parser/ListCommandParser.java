@@ -6,7 +6,6 @@ import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import java.util.NoSuchElementException;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
-import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListByCategoryCommand;

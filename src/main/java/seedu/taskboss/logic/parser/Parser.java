@@ -15,7 +15,6 @@ import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
-import seedu.taskboss.logic.commands.ListByCategoryCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
