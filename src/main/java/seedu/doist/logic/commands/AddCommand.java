@@ -5,7 +5,7 @@ import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the to-do list.
  */
 public class AddCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "add";

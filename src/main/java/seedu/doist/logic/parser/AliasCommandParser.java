@@ -17,8 +17,8 @@ import seedu.doist.logic.commands.IncorrectCommand;
 public class AliasCommandParser {
     private static final Pattern ALIAS_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
-    public static final String MESSAGE_COMMAND_WORD_NOT_SPECIFIED = "Command word must be specified";
-    public static final String MESSAGE_ALIAS_FORMAT_INVALID = "Alias can only contain alphabets";
+    public static final String MESSAGE_COMMAND_WORD_NOT_SPECIFIED = "Command word must be specified. \n%1$s";
+    public static final String MESSAGE_ALIAS_FORMAT_INVALID = "Alias can only contain alphabets. \n%1$s";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -44,10 +44,12 @@ public class AliasCommandParser {
         try {
             List<String> parameter = argsTokenizer.getTokenizedArguments().get(PREFIX_FOR.toString());
             if (parameter == null || parameter.isEmpty()) {
-                throw new IllegalValueException(MESSAGE_COMMAND_WORD_NOT_SPECIFIED);
+                throw new IllegalValueException(String.format(MESSAGE_COMMAND_WORD_NOT_SPECIFIED,
+                                                    AliasCommand.MESSAGE_USAGE));
             }
             if (!preamble.matches("[a-zA-Z_]+")) {
-                throw new IllegalValueException(MESSAGE_ALIAS_FORMAT_INVALID);
+                throw new IllegalValueException(String.format(MESSAGE_ALIAS_FORMAT_INVALID,
+                                                    AliasCommand.MESSAGE_USAGE));
             }
             String commandWord = parameter.get(0);
             return new AliasCommand(preamble, commandWord);

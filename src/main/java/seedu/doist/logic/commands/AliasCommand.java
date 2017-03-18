@@ -3,7 +3,7 @@ package seedu.doist.logic.commands;
 import seedu.doist.logic.commands.exceptions.CommandException;
 
 /**
- * Adds a person to the address book.
+ * Adds an alias for an existing command
  */
 public class AliasCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "alias";
