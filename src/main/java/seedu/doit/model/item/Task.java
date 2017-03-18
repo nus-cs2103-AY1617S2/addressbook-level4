@@ -1,5 +1,6 @@
 package seedu.doit.model.item;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.doit.commons.util.CollectionUtil;
@@ -261,5 +262,14 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public String toString() {
         return getAsText();
     }
+
+    static class TaskComparator implements Comparator<Task>
+    {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t1.compareTo(t2);
+        }
+    }
+
 
 }

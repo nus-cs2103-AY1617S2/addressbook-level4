@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks.sorted());
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
