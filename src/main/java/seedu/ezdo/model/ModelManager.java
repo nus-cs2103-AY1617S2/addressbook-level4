@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.text.ParseException;
 import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -9,7 +10,9 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
+import seedu.ezdo.commons.util.DateUtil;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
@@ -79,7 +82,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) 
+	    throws UniqueTaskList.DuplicateTaskException, DateException {
+	checkTaskDate(task);
         ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
         undoStack.push(prevState);
         redoStack.clear();
@@ -100,8 +105,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, DateException {
         assert editedTask != null;
+        checkTaskDate(editedTask);
         ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
         undoStack.push(prevState);
         redoStack.clear();
@@ -128,7 +134,17 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
-
+    
+    @Override
+    public void checkTaskDate(ReadOnlyTask task) throws DateException {
+	try {
+	    if (DateUtil.checkTaskDate(task) == false) {
+		throw new DateException("Start date after due date!");
+	    }
+	} catch (ParseException pe) {
+	    System.out.println("wtf man");
+	}
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     private void updateFilteredTaskList(Expression expression) {
