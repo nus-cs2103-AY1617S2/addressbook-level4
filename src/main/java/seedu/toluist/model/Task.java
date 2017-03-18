@@ -168,6 +168,24 @@ public class Task implements Comparable<Task> {
         return false;
     }
 
+    /**
+     * Check if the task datetimes are within interval
+     * @param from interval from
+     * @param to interval to
+     * @return true / false
+     */
+    public boolean isWithinInterval(LocalDateTime from, LocalDateTime to) {
+        boolean startDateTimeWithinInterval = from == null
+                || (startDateTime != null
+                && DateTimeUtil.isBeforeOrEqual(from, startDateTime)
+                && DateTimeUtil.isBeforeOrEqual(startDateTime, to));
+        boolean endDateTimeWithinInterval = to == null
+                || (endDateTime != null
+                && DateTimeUtil.isBeforeOrEqual(from, endDateTime)
+                && DateTimeUtil.isBeforeOrEqual(endDateTime, to));
+        return startDateTimeWithinInterval || endDateTimeWithinInterval;
+    }
+
     @Override
     /**
      * Compare by end date -> start date -> priority -> description
