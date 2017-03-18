@@ -37,7 +37,7 @@ facilitate communication between event creators and event consumers.
 
 ## Use API Design `[LO-ApiDesign]`
 
-Note how components of AddressBook have well-defined APIs. For example, the API of the `Logic` component
+Note how components of TaskManager have well-defined APIs. For example, the API of the `Logic` component
 is given in the [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -50,7 +50,7 @@ is given in the [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 ## Use Assertions `[LO-Assertions]`
 
-Note how the AddressBook app uses Java `assert`s to verify assumptions.
+Note how the TaskManager app uses Java `assert`s to verify assumptions.
 
 **Resources**
 
@@ -63,13 +63,13 @@ Note how the AddressBook app uses Java `assert`s to verify assumptions.
  * Make sure assertions are enabled in Eclipse by forcing an assertion failure (e.g. add `assert false;` somewhere in
  the code and run the code to ensure the runtime reports an assertion failure).
 
- * Add more assertions to AddressBook as you see fit.
+ * Add more assertions to TaskManager as you see fit.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Logging `[LO-Logging]`
 
-Note [how the AddressBook app uses Java's `java.util.log` package to do logging](DeveloperGuide.md#31-logging).
+Note [how the TaskManager app uses Java's `java.util.log` package to do logging](DeveloperGuide.md#31-logging).
 
 **Resources**
 
@@ -84,18 +84,18 @@ Note [how the AddressBook app uses Java's `java.util.log` package to do logging]
 
 #### Exercise: Add more logging
 
- Add more logging to AddressBook as you see fit.
+ Add more logging to TaskManager as you see fit.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Defensive Coding `[LO-DefensiveCoding]`
 
- Note how AddressBook uses the `ReadOnly*` interfaces to prevent objects being modified by clients who are not
+ Note how TaskManager uses the `ReadOnly*` interfaces to prevent objects being modified by clients who are not
  supposed to modify them.
 
 #### Exercise: identify more places for defensive coding
 
-Analyze the AddressBook code/design to identify,
+Analyze the TaskManager code/design to identify,
 
 * where defensive coding is used
 * where the code can be more defensive
@@ -104,7 +104,7 @@ Analyze the AddressBook code/design to identify,
 
 ## Use Build Automation `[LO-BuildAutomation]`
 
-Note [how the AddressBook app uses Gradle to automate build tasks](UsingGradle.md).
+Note [how the TaskManager app uses Gradle to automate build tasks](UsingGradle.md).
 
 **Resources**
 
@@ -126,8 +126,8 @@ Note [how the AddressBook app uses Gradle to automate build tasks](UsingGradle.m
 
 ## Use Continuous Integration `[LO-ContinuousIntegration]`
 
-Note [how the AddressBook app uses Travis to perform Continuous Integration](UsingTravis.md).
-([![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4))
+Note [how the TaskManager app uses Travis to perform Continuous Integration](UsingTravis.md).
+([![Build Status](https://travis-ci.org/se-edu/taskmanager-level4.svg?branch=master)](https://travis-ci.org/se-edu/taskmanager-level4))
 
 **Resources**
 
@@ -143,9 +143,9 @@ Note [how the AddressBook app uses Travis to perform Continuous Integration](Usi
 ## Use Code Coverage `[LO-CodeCoverage]`
 
 Note how our CI server [Travis uses Coveralls to report code coverage](UsingTravis.md).
-([![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master))
+([![Coverage Status](https://coveralls.io/repos/github/se-edu/taskmanager-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/taskmanager-level4?branch=master))
 After setting up Coveralls for your project, you can visit Coveralls website to find details about the
-coverage of code pushed to your repo. [Here](https://coveralls.io/github/se-edu/addressbook-level4?branch=master) is an example.
+coverage of code pushed to your repo. [Here](https://coveralls.io/github/se-edu/taskmanager-level4?branch=master) is an example.
 
 
 #### Exercise: Use EclEmma to measure coverage locally
@@ -178,11 +178,11 @@ the efficiency and effectiveness of test cases testing the
 
 Consider the [`StorageManagerTest.java`](../src/test/java/seedu/address/storage/StorageManagerTest.java) class.
 
-* Test methods `prefsReadSave()` and `addressBookReadSave()` are integration tests. Note how they simply test if
+* Test methods `prefsReadSave()` and `taskManagerReadSave()` are integration tests. Note how they simply test if
   The `StorageManager` class is correctly wired to its dependencies.
 
-* Test method `handleAddressBookChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses
-  _dependency injection_ to isolate the SUT `StorageManger::handleAddressBookChangedEvent(...)` from its
+* Test method `handleTaskManagerChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses
+  _dependency injection_ to isolate the SUT `StorageManger::handleTaskManagerChangedEvent(...)` from its
   dependencies.
 
 Compare the above with [`LogicManagerTest`](../src/test/java/seedu/address/logic/LogicManagerTest.java).
@@ -291,9 +291,9 @@ Here are some example design patterns used in the code base.
 ## Do Code Reviews `[LO-CodeReview]`
 
 * Note how some PRs in this project have been reviewed by other developers.
-  Here is an [example](https://github.com/se-edu/addressbook-level4/pull/147).
+  Here is an [example](https://github.com/se-edu/taskmanager-level4/pull/147).
 * Also note how we have used [Codacy](https://www.codacy.com) to do automate some part of the code review workload
-  ([![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade))
+  ([![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/taskmanager-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/taskmanager-level4&amp;utm_campaign=Badge_Grade))
 
 Here are some things you can comment on when reviewing code:
 

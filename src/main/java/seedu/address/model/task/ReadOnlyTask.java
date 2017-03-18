@@ -3,26 +3,42 @@ package seedu.address.model.task;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Task in the addressbook.
- * Implementations should guarantee: details are present and not null, field values are validated.
+ * A read-only immutable interface for a Task in the taskmanager.
+ * Implementations should guarantee: details are present and not null, field
+ * values are validated.
  */
 public interface ReadOnlyTask {
 
     Name getName();
 
+    boolean isDone();
+
+    void setToday();
+
+    boolean isToday();
+
+    // id field reserved for UI to store temporary index
+    int getID();
+
+    void setID(int id);
+
     /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the task's internal tags.
+     * The returned TagList is a deep copy of the internal TagList, changes on
+     * the returned list will not affect the task's internal tags.
      */
     UniqueTagList getTags();
 
     /**
-     * Returns true if both have the same state. (interfaces cannot override .equals)
+     * Returns true if both have the same state. (interfaces cannot override
+     * .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName())); // state checks here onwards
+                        && other.getName().equals(this.getName())); // state
+                                                                    // checks
+                                                                    // here
+                                                                    // onwards
     }
 
     /**
@@ -30,10 +46,19 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Tags: ");
+        builder.append(getName()).append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Done: ").append(isDone());
         return builder.toString();
     }
 
+    enum TaskType {
+        TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
+    }
+
+    TaskType getTaskType();
+
+    String getTaskDateTime();
+
+    DateTime getDeadline();
 }
