@@ -23,7 +23,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
+        String detailsToEdit = "n/Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
                 + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
@@ -60,7 +60,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find n/Elle");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "n/Belle";
         int filteredTaskListIndex = 1;
         int taskBossIndex = 5;
 
@@ -72,13 +72,13 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+        commandBox.runCommand("edit n/Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 8 n/Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -90,7 +90,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
+        commandBox.runCommand("edit 1 n/*&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 p/abcd");
@@ -102,7 +102,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/3 sd/Feb 19, 2017 5pm ed/Feb 28, 2017 5pm"
+        commandBox.runCommand("edit 3 n/Alice Pauline p/3 sd/Feb 19, 2017 5pm ed/Feb 28, 2017 5pm"
                                 + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
