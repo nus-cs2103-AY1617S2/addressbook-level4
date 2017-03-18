@@ -43,11 +43,13 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            //@@author A0138377U
             if (argsTokenizer.isEmpty(PREFIX_DEADLINE)) {
                 editTaskDescriptor.setDeadline(Optional.of(new Deadline()));
             } else {
                 editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
             }
+            //@@ author
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setID(ParserUtil.parseId(argsTokenizer.getValue(PREFIX_ID)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
