@@ -13,7 +13,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.FileUtil;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.item.Task;
 import seedu.doit.testutil.TypicalTestTasks;
@@ -33,7 +33,7 @@ public class XmlTaskManagerStorageTest {
         readTaskManager(null);
     }
 
-    private java.util.Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyItemManager> readTaskManager(String filePath) throws Exception {
         return new XmlTaskManagerStorage(filePath).readTaskManager(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -68,7 +68,7 @@ public class XmlTaskManagerStorageTest {
 
         //Save in new file and read back
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
-        ReadOnlyTaskManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
+        ReadOnlyItemManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
@@ -92,7 +92,7 @@ public class XmlTaskManagerStorageTest {
         saveTaskManager(null, "SomeFile.xml");
     }
 
-    private void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+    private void saveTaskManager(ReadOnlyItemManager taskManager, String filePath) throws IOException {
         new XmlTaskManagerStorage(filePath).saveTaskManager(taskManager, addToTestDataPathIfNotNull(filePath));
     }
 

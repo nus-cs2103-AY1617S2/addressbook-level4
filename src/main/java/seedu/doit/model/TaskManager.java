@@ -22,7 +22,7 @@ import seedu.doit.model.tag.UniqueTagList;
  * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskManager implements ReadOnlyTaskManager {
+public class TaskManager implements ReadOnlyItemManager {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -44,7 +44,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
-    public TaskManager(ReadOnlyTaskManager toBeCopied) {
+    public TaskManager(ReadOnlyItemManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,7 +60,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyItemManager newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.FileUtil;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 
 /**
  * A class to access TaskManager data stored as an xml file on the hard disk.
@@ -38,7 +38,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
+    public Optional<ReadOnlyItemManager> readTaskManager() throws DataConversionException, IOException {
         return readTaskManager(this.filePath);
     }
 
@@ -51,7 +51,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      *             if the file is not in the correct format.
      */
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
+    public Optional<ReadOnlyItemManager> readTaskManager(String filePath)
             throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
@@ -62,24 +62,24 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
             return Optional.empty();
         }
 
-        ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyItemManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
         return Optional.of(taskManagerOptional);
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+    public void saveTaskManager(ReadOnlyItemManager taskManager) throws IOException {
         saveTaskManager(taskManager, this.filePath);
     }
 
     /**
-     * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
+     * Similar to {@link #saveTaskManager(ReadOnlyItemManager)}
      *
      * @param filePath
      *            location of the data. Cannot be null
      */
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyItemManager taskManager, String filePath) throws IOException {
         assert taskManager != null;
         assert filePath != null;
 
