@@ -23,6 +23,8 @@ public class CompleteCommand extends Command {
 
     public static final String MESSAGE_COMPLETE_TODO_SUCCESS = "Completed Todo: %1$s";
 
+    public static final String MESSAGE_TODO_ALREADY_COMPLETE = "This todo is already complete";
+
     public static final String COMPLETE_TIME_FORMAT = "yy-MM-dd'T'HH:mm";
 
     public final int filteredTodoListIndex;
@@ -49,10 +51,15 @@ public class CompleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
 
+        ReadOnlyTodo todoToComplete = lastShownList.get(filteredTodoListIndex);
+
+        if (todoToComplete.getCompleteTime() != null) {
+            throw new CommandException(MESSAGE_TODO_ALREADY_COMPLETE);
+        }
+
         model.completeTodo(filteredTodoListIndex, completeTime);
 
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TODO_SUCCESS,
-                lastShownList.get(filteredTodoListIndex)));
+        return new CommandResult(String.format(MESSAGE_COMPLETE_TODO_SUCCESS, todoToComplete));
     }
 
 }
