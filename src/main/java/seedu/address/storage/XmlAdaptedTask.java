@@ -23,7 +23,7 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String priority;
     @XmlElement(required = true)
     private String status;
@@ -52,7 +52,7 @@ public class XmlAdaptedTask {
         priority = source.getPriority()
                 .map(Priority::getValue)
                 .map(Priority.Type::name)
-                .orElse(Priority.Type.NONE.name());
+                .orElse(null);
         status = source.getStatus().value;
         note = source.getNote().map(Note::toString).orElse("");
         deadline = source.getDeadline().map(Deadline::toString).orElse("");
@@ -73,7 +73,10 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Priority priority = new Priority(Priority.parseXmlString(this.priority));
+        Priority priority = null;
+        if (this.priority != null) {
+            priority = new Priority(Priority.parseXmlString(this.priority));
+        }
         final Status status = new Status(this.status);
         final Note note = new Note(this.note);
         final Deadline deadline = new Deadline(this.deadline);
