@@ -256,6 +256,54 @@ public class TaskTest {
         assertEquals(testTask1.compareTo(testTask2), -1);
     }
 
+    @Test
+    public void isWithinInterval_nullFromNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.MIN);
+        Task event = new Task("event", LocalDateTime.MIN, LocalDateTime.MAX);
+
+        assertTrue(floatingTask.isWithinInterval(null, null));
+        assertTrue(taskWithDeadline.isWithinInterval(null, null));
+        assertTrue(event.isWithinInterval(null, null));
+    }
+
+    @Test
+    public void isWithinInterval_nonNullFromNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.MIN);
+        Task event = new Task("event", LocalDateTime.MIN, LocalDateTime.MAX);
+
+        assertTrue(floatingTask.isWithinInterval(LocalDateTime.MIN, null));
+        assertTrue(taskWithDeadline.isWithinInterval(LocalDateTime.MIN, null));
+        assertTrue(event.isWithinInterval(LocalDateTime.MIN, null));
+    }
+
+    @Test
+    public void isWithinInterval_nullFromNonNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.MIN);
+        Task event = new Task("event", LocalDateTime.MIN, LocalDateTime.MAX);
+
+        assertTrue(floatingTask.isWithinInterval(null, LocalDateTime.MIN));
+        assertTrue(taskWithDeadline.isWithinInterval(null, LocalDateTime.MIN));
+        assertTrue(event.isWithinInterval(null, LocalDateTime.MIN));
+    }
+
+    @Test
+    public void isWithinInterval_nonNullFromNonNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline1 = new Task("task with deadline", LocalDateTime.MAX);
+        Task taskWithDeadline2 = new Task("task with deadline", LocalDateTime.MIN);
+        Task event1 = new Task("event", LocalDateTime.MIN, LocalDateTime.MIN.plusDays(2));
+        Task event2 = new Task("event", LocalDateTime.MAX.minusDays(2), LocalDateTime.MAX);
+
+        assertFalse(floatingTask.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX));
+        assertFalse(taskWithDeadline1.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX.minusDays(1)));
+        assertTrue(taskWithDeadline2.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX));
+        assertTrue(event1.isWithinInterval(LocalDateTime.MIN.plusDays(1), LocalDateTime.MAX));
+        assertTrue(event2.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX.minusDays(1)));
+    }
+
     /**
      * Check if the set of tags in the tasks and the tags passed in are identical
      */
