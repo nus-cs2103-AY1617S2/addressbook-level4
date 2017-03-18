@@ -1,6 +1,7 @@
 package seedu.tasklist.model.util;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.model.ReadOnlyTaskList;
@@ -24,7 +25,7 @@ public class SampleDataUtil {
                     new Comment("prepare notes"),
                     new Priority("high"),
                     new Status(),
-                    new Date(117, 4, 1),
+                    new GregorianCalendar(2017, 4, 1).getTime(),
                     new UniqueTagList("work")),
                 new FloatingTask(new Name("Shopping"),
                     new Comment("with mom"),
@@ -35,8 +36,8 @@ public class SampleDataUtil {
                     new Comment("inform boss"),
                     new Priority("high"),
                     new Status(),
-                    new Date(117, 4, 5),
-                    new Date(117, 4, 8),
+                    new GregorianCalendar(2017, 4, 5).getTime(),
+                    new GregorianCalendar(2017, 4, 8).getTime(),
                     new UniqueTagList("work")),
                 new FloatingTask(new Name("Watch Movie"),
                     new Comment("need to relax"),
