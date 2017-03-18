@@ -14,6 +14,7 @@ import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.logic.Logic;
 import seedu.taskboss.logic.commands.CommandResult;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -39,7 +40,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     @FXML
-    private void handleCommandInputChanged() throws IllegalValueException {
+    private void handleCommandInputChanged() throws IllegalValueException, InvalidDatesException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 

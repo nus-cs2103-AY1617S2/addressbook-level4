@@ -1,48 +1,85 @@
+//@@author A0143157J
 package seedu.taskboss.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.parser.DateTimeParser;
 
 public class DateTime {
 
-    private static final int EMPTY = 0;
-
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates format should be in dd-mm-yyyy,"
             + " or word format like 5pm tomorrow, " + "and does not accept doubles.";
+    private static final String EMPTY_STRING = "";
 
-    public final String value;
-    private final boolean isDateInferred;
-    private final boolean isTimeInferred;
-    private Date dateTime;
+    public String value;
+    private boolean isDateInferred;
+    private boolean isTimeInferred;
+    private Date date;
+    private DateTimeParser dtParser;
 
     public DateTime(String date) throws IllegalValueException {
         assert date != null;
-        isDateInferred = false;
-        isTimeInferred = false;
-        dateTime = null;
+
+        this.dtParser = new DateTimeParser();
+        this.isDateInferred = false;
+        this.isTimeInferred = false;
+        this.date = null;
         String trimmedDate = date.trim();
         if (!isValidDateTime(trimmedDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = trimmedDate;
+
+        if (trimmedDate.equals(EMPTY_STRING)) {
+            this.value = EMPTY_STRING;
+        } else {
+            parseDateTime(trimmedDate);
+            formatDateTime();
+        }
     }
 
     public DateTime(Date dateTime, boolean isDateInferred, boolean isTimeInferred) {
-        this.dateTime = dateTime;
+        this.date = dateTime;
         this.isDateInferred = isDateInferred;
         this.isTimeInferred = isTimeInferred;
-        value = this.dateTime.toString();
+        value = this.date.toString();
     }
 
     /**
-     * Returns if a given string is not empty.
+     * Returns if a given string is a valid date input.
      *
      * @throws IllegalValueException
      */
     public boolean isValidDateTime(String date) {
-        //return (date.length() > EMPTY || "".equals(date));
-        return true;
+        if (date.equals(EMPTY_STRING)) {
+            return true;
+        } else {
+            return dtParser.isParseable(date);
+        }
+    }
+
+    private void parseDateTime(String date) throws IllegalValueException {
+        DateTime dateTime = dtParser.parseDate(date);
+        this.date = dateTime.getDate();
+        this.setIsDateInferred(dateTime.isDateInferred);
+        this.setIsTimeInferred(dateTime.isTimeInferred);
+    }
+
+    /**
+     * Format the current natty-parsed Date into a string of our intended format
+     * i.e May 19, 2017 8:30 PM
+     */
+    public String formatDateTime() {
+        SimpleDateFormat sdfGeneral = new SimpleDateFormat("MMM dd, yyyy h:mm aa");
+        SimpleDateFormat sdfToday = new SimpleDateFormat("MMM dd, yyyy");
+        // No time provided by user
+        if (this.isTimeInferred()) {
+            this.value = sdfToday.format(this.date);
+        } else {
+            this.value = sdfGeneral.format(this.date);
+        }
+        return this.value;
     }
 
     @Override
@@ -62,12 +99,24 @@ public class DateTime {
         return value.hashCode();
     }
 
-    public boolean getIsDateInferred() {
+    public boolean isDateInferred() {
         return isDateInferred;
     }
 
-    public boolean getIsTimeInferred() {
+    public boolean isTimeInferred() {
         return isTimeInferred;
+    }
+
+    public void setIsDateInferred(boolean status) {
+        this.isDateInferred = status;
+    }
+
+    public void setIsTimeInferred(boolean status) {
+        this.isTimeInferred = status;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
 }

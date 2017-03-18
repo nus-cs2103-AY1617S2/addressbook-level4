@@ -36,8 +36,8 @@ import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.logic.parser.DateParser;
-import seedu.taskboss.logic.parser.ParserUtil;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
+import seedu.taskboss.logic.parser.DateTimeParser;
 import seedu.taskboss.model.Model;
 import seedu.taskboss.model.ModelManager;
 import seedu.taskboss.model.ReadOnlyTaskBoss;
@@ -103,7 +103,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() throws IllegalValueException {
+    public void execute_invalid() throws IllegalValueException, InvalidDatesException {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                HelpCommand.MESSAGE_USAGE));
@@ -114,13 +114,14 @@ public class LogicManagerTest {
      * that the result message is correct. Also confirms that both the
      * 'taskboss' and the 'last shown list' are as specified.
      * @throws IllegalValueException
+     * @throws InvalidDatesException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             ReadOnlyTaskBoss expectedTaskBoss,
-            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException {
+            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException, InvalidDatesException {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
     }
 
@@ -129,11 +130,13 @@ public class LogicManagerTest {
      * the result message is correct. Both the 'taskboss' and the 'last shown
      * list' are verified to be unchanged.
      * @throws IllegalValueException
+     * @throws InvalidDatesException
      *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBoss,
      *      List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalValueException {
+    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalValueException,
+        InvalidDatesException {
         TaskBoss expectedTaskBoss = new TaskBoss(model.getTaskBoss());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBoss, expectedShownList);
@@ -149,10 +152,11 @@ public class LogicManagerTest {
      * - the backing list shown by UI matches the {@code shownList} <br>
      * - {@code expectedTaskBoss} was saved to the storage file. <br>
      * @throws IllegalValueException
+     * @throws InvalidDatesException
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand,
             String expectedMessage, ReadOnlyTaskBoss expectedTaskBoss,
-            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException {
+            List<? extends ReadOnlyTask> expectedShownList) throws IllegalValueException, InvalidDatesException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -172,17 +176,18 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() throws IllegalValueException {
+    public void execute_unknownCommandWord() throws IllegalValueException, InvalidDatesException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_help() throws IllegalValueException {
+    public void execute_help() throws IllegalValueException, InvalidDatesException {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE,
                 new TaskBoss(), Collections.emptyList());
         assertTrue(helpShown);
     }
+
 
     @Test
     public void execute_helpShortCommand() throws IllegalValueException {
@@ -192,7 +197,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_exit() throws IllegalValueException {
+    public void execute_exit() throws IllegalValueException, InvalidDatesException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBoss(), Collections.emptyList());
     }
@@ -214,13 +219,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidArgsFormat() throws IllegalValueException {
+    public void execute_add_invalidArgsFormat() throws IllegalValueException, InvalidDatesException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add Valid Name p/1 sd/today ed/tomorrow", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidTaskData() throws IllegalValueException {
+    public void execute_add_invalidTaskData() throws IllegalValueException, InvalidDatesException {
         assertCommandFailure("add n/[]\\[;] p/1 sd/today ed/tomorrow i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name p/not_numbers sd/today ed/tomorrow i/valid, information",
@@ -229,9 +234,9 @@ public class LogicManagerTest {
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
-                DateParser.getStartDateMultipleDatesError());
-        assertCommandFailure("add n/Valid Name p/1 sd/invalid date ed/monday to friday i/valid, information",
-                DateParser.getStartDateInvalidDateError());
+                DateTimeParser.getMultipleDatesError());
+        assertCommandFailure("add n/Valid Name p/1 sd/invalid date ed/tomorroq i/valid, information",
+                DateTime.MESSAGE_DATE_CONSTRAINTS);
     }
 
     @Test
@@ -378,7 +383,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_invalidArgsFormat() throws IllegalValueException {
+    public void execute_find_invalidArgsFormat() throws IllegalValueException, InvalidDatesException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
@@ -443,12 +448,12 @@ public class LogicManagerTest {
         Task p3 = helper.generateTaskWithStartDateTime("2 July, 2017");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, p2, p3);
-        TaskBoss expectedAB = helper.generateTaskBoss(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1);
+        TaskBoss expectedTB = helper.generateTaskBoss(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p1);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find sd/Mon Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+        assertCommandSuccess("find sd/Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedTB, expectedList);
     }
 
     @Test
@@ -461,10 +466,10 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, p2, p3);
         TaskBoss expectedAB = helper.generateTaskBoss(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p1);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find ed/Mon Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find ed/Mar", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 
@@ -476,8 +481,8 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             PriorityLevel privatePriorityLevel = new PriorityLevel("1");
-            DateTime startDateTime = new DateTime(ParserUtil.parseStartDate("today 5pm"));
-            DateTime endDateTime = new DateTime(ParserUtil.parseEndDate("tomorrow 8pm"));
+            DateTime startDateTime = new DateTime("today 5pm");
+            DateTime endDateTime = new DateTime("tomorrow 8pm");
             Information privateInformation = new Information("111, alpha street");
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
@@ -498,8 +503,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     new PriorityLevel("" + Math.abs(seed)),
-                    new DateTime("Feb 19 10am, 2017"),
-                    new DateTime("Feb 20 10am, 2017"),
+                    new DateTime("Feb 19 10am 2017"),
+                    new DateTime("Feb 20 10am 2017"),
                     new Information("House of " + seed),
                     new UniqueCategoryList(new Category("category" + Math.abs(seed)),
                            new Category("category" + Math.abs(seed + 1)))
@@ -515,8 +520,8 @@ public class LogicManagerTest {
 
             cmd.append(" n/").append(p.getName().toString());
             cmd.append(" p/").append(p.getPriorityLevel());
-            cmd.append(" sd/").append(ParserUtil.parseStartDate(p.getStartDateTime().toString()));
-            cmd.append(" ed/").append(ParserUtil.parseEndDate(p.getEndDateTime().toString()));
+            cmd.append(" sd/").append(p.getStartDateTime().toString());
+            cmd.append(" ed/").append(p.getEndDateTime().toString());
             cmd.append(" i/").append(p.getInformation());
 
             UniqueCategoryList categories = p.getCategories();
@@ -537,7 +542,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskBoss based on the list of Tasks given.
+         * Generates TaskBoss based on the list of Tasks given.
          */
         TaskBoss generateTaskBoss(List<Task> tasks) throws Exception {
             TaskBoss taskBoss = new TaskBoss();
@@ -606,8 +611,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new PriorityLevel("1"),
-                    new DateTime("Feb 19 10am, 2017"),
-                    new DateTime("Feb 20 10am, 2017"),
+                    new DateTime("Feb 19 10am 2017"),
+                    new DateTime("Feb 20 10am 2017"),
                     new Information("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );
@@ -621,8 +626,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name("testTask"),
                     new PriorityLevel("1"),
-                    new DateTime(ParserUtil.parseStartDate(startDatetime)),
-                    new DateTime("Feb 20 10am, 2018"),
+                    new DateTime(startDatetime),
+                    new DateTime("Feb 20 10am 2018"),
                     new Information("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );
@@ -636,8 +641,8 @@ public class LogicManagerTest {
             return new Task(
                     new Name("testTask"),
                     new PriorityLevel("1"),
-                    new DateTime("Feb 20 10am, 2017"),
-                    new DateTime(ParserUtil.parseStartDate(endDatetime)),
+                    new DateTime("Feb 20 10am 2017"),
+                    new DateTime(endDatetime),
                     new Information("House of 1"),
                     new UniqueCategoryList(new Category("category"))
             );
