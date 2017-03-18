@@ -1,6 +1,12 @@
 package seedu.tasklist.logic.commands;
 
+import java.util.List;
+
+import seedu.tasklist.commons.core.Messages;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
+import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Task;
+import seedu.tasklist.model.task.UniqueTaskList;
 
 /**
  * Marks a task as done using its last displayed index from FlexiTask
@@ -25,7 +31,22 @@ public class DoneCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        // TODO Auto-generated method stub
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (lastShownList.size() < targetIndex) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
+
+        Task doneTask;
+
+        doneTask = createDoneTask(taskToDone);
+
+        model.updateTask(targetIndex, doneTask);
+
+        model.updateFilteredListToShowAll();
+        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
         return null;
     }
 
