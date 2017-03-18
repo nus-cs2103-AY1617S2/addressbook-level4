@@ -16,33 +16,33 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withName("Do laundry")
                     .withNote("Twice as many detergent this time").withStatus("incomplete")
-                    .withPriority("hi").withDateTime("12/12/2017")
+                    .withPriority("hi").withDateTime("12/12/2017 12:00")
                     .withTags("chores").build();
             benson = new TaskBuilder().withName("Wash the dishes").withNote("They're in the sink")
-                    .withStatus("incomplete").withPriority("mid").withDateTime("12/12/2017")
+                    .withStatus("incomplete").withPriority("mid").withDateTime("12/12/2017 12:00")
                     .withTags("chores").build();
             carl = new TaskBuilder().withName("Do CS2103T post lecture quiz")
-                    .withPriority("hi").withDateTime("12/12/2017")
+                    .withPriority("hi").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("On IVLE").build();
             daniel = new TaskBuilder().withName("Buy milk")
-                    .withPriority("low").withDateTime("12/12/2017")
+                    .withPriority("low").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("Low fat").build();
             elle = new TaskBuilder().withName("Write reflections for CS2101")
-                    .withPriority("hi").withDateTime("12/12/2017")
+                    .withPriority("hi").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("Include more reflection rather than description").build();
             fiona = new TaskBuilder().withName("Meet Prof Joe for consultation")
-                    .withPriority("mid").withDateTime("12/12/2017")
+                    .withPriority("mid").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("COM02-01").build();
             george = new TaskBuilder().withName("Pay school fees")
-                    .withPriority("hi").withDateTime("12/12/2017")
+                    .withPriority("hi").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
             hoon = new TaskBuilder().withName("Submit research proposal")
-                    .withPriority("hi").withDateTime("12/12/2017")
+                    .withPriority("hi").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
             ida = new TaskBuilder().withName("Apply for scholarship")
-                    .withPriority("low").withDateTime("12/12/2017")
+                    .withPriority("low").withDateTime("12/12/2017 12:00")
                     .withStatus("incomplete").withNote("Apply via iDA website").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();

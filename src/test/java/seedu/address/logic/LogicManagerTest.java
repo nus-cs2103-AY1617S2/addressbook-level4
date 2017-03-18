@@ -427,7 +427,7 @@ public class LogicManagerTest {
             Priority priority = new Priority("hi");
             Status email = new Status("incomplete");
             Note note = new Note("edit slides");
-            DateTime dateTime = new DateTime("12/12/2020");
+            DateTime dateTime = new DateTime("12/12/2020 12:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -447,7 +447,7 @@ public class LogicManagerTest {
                     generatePriorityWithSeed(seed),
                     new Status(seed + "@email"),
                     new Note("House of " + seed),
-                    new DateTime("12/12/" + (2017 + seed)),
+                    new DateTime("12/12/" + (2017 + seed) + " 12:00"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -557,7 +557,7 @@ public class LogicManagerTest {
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
-                    new DateTime("12/12/2020"),
+                    new DateTime("12/12/2020 12:00"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

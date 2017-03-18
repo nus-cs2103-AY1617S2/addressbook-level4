@@ -1,8 +1,9 @@
 package seedu.address.model.task;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -14,29 +15,27 @@ public class DateTime {
      */
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
-            "Task date time should be in the format of dd/mm/yyyy";
+            "Task date time should be in the format of [Day]/[Month]/[Year] [Hour]:[Minute]";
 
-    public final Date dateTime;
-    private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    public final LocalDateTime dateTime;
+    private static DateTimeFormatter formatter = DateTimeFormatter
+    		.ofPattern("dd/MM/uuuu HH:mm")
+    		.withResolverStyle(ResolverStyle.STRICT);;
 
     /**
      * Validates given dateTime.
      *
      * @throws IllegalValueException if given dateTime is invalid.
      */
-    public DateTime(Date dateTime) throws IllegalValueException {
+    public DateTime(LocalDateTime dateTime) throws IllegalValueException {
         assert dateTime != null;
         this.dateTime = dateTime;
     }
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
-        Date dateTimeObj = null;
-        try {
-            dateTimeObj = formatter.parse(dateTime);
-        } catch (ParseException e) {
-            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-        }
+        LocalDateTime dateTimeObj = null;
+        dateTimeObj = LocalDateTime.parse(dateTime, formatter);
         this.dateTime = dateTimeObj;
     }
 
@@ -45,19 +44,20 @@ public class DateTime {
      * @throws IllegalValueException 
      */
     public static boolean isValidDateTime(String test) {
-        try {
-        	if(formatter.parse(test) != null) {
-                return true;
-            } 
-        } catch (ParseException pe) {
-            try {
-                throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-			} catch (IllegalValueException e) {
-			    
-		    }
-        }
-	    return false;
+    	try {
+    		if(LocalDateTime.parse(test, formatter) != null) {
+    			return true;
+    		}
+    	} catch (DateTimeParseException dtpe) {
+    		try {
+				throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
+			} catch (IllegalValueException ive) {
+			}
+    	}
+		return false;
     }
+    
+    
 
     @Override
     public String toString() {

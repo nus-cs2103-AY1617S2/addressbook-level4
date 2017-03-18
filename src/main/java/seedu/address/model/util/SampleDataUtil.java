@@ -1,6 +1,6 @@
 package seedu.address.model.util;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -16,29 +16,28 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
-        Date currentDate = new Date();
-        long oneDayInMs = 1000 * 60 * 60 * 24;
+        LocalDateTime currentDate = LocalDateTime.now();
         try {
             return new Task[] {
                 new Task(new Name("Finalise CS2101 Report"), new Priority("hi"), new Status("incomplete"),
                     new Note("User Guide and Developer Guide"),
-                    new DateTime(new Date(currentDate.getTime() + oneDayInMs)),
+                    new DateTime(currentDate.minusDays(2)), 
                     new UniqueTagList("school")),
                 new Task(new Name("Buy a new laptop"), new Priority("mid"), new Status("incomplete"),
                     new Note("Avoid HP. Because, reasons."),
-                    new DateTime(new Date(currentDate.getTime() + oneDayInMs)),
+                    new DateTime(currentDate.plusDays(2)),
                     new UniqueTagList("personal")),
                 new Task(new Name("Clean the toilet"), new Priority("low"), new Status("incomplete"),
                     new Note("Mom says she can smell it from a mile away."),
-                    new DateTime(new Date(currentDate.getTime() + oneDayInMs)),
+                    new DateTime(currentDate.plusDays(2)),
                     new UniqueTagList("personal")),
                 new Task(new Name("Prepare for job interviews"), new Priority("mid"), new Status("incomplete"),
                     new Note("Equip yourself to overcome the quarter-life crisis"),
-                    new DateTime(new Date(currentDate.getTime() + oneDayInMs)),
+                    new DateTime(currentDate.plusDays(4)),
                     new UniqueTagList("work")),
                 new Task(new Name("Do CS2103 Tutorial"), new Priority("low"), new Status("incomplete"),
                     new Note("You need it to pass the module, trust me."),
-                    new DateTime(new Date(currentDate.getTime() + oneDayInMs)),
+                    new DateTime(currentDate.plusDays(4)),
                     new UniqueTagList("classmates")),
             };
         } catch (IllegalValueException e) {
