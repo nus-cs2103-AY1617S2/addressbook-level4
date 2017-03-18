@@ -78,6 +78,11 @@ public class ModelManager extends ComponentManager implements Model {
         return aliasListMap.getDefaultCommandWordSet();
     }
 
+    @Override
+    public void resetToDefaultCommandWords() {
+        aliasListMap.setDefaultCommandWords();
+    }
+
     private void indicateAliasListMapChanged() {
         raise(new AliasListMapChangedEvent(aliasListMap));
     }

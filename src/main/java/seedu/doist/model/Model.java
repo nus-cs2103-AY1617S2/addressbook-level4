@@ -72,4 +72,7 @@ public interface Model {
 
     /** Get the set of default command words */
     Set<String> getDefaultCommandWordSet();
+
+    /** Resets alias list to default */
+    void resetToDefaultCommandWords();
 }
