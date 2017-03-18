@@ -27,12 +27,12 @@ public interface Storage extends ToDoListStorage, UserPrefsStorage {
     Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException;
 
     @Override
-    void saveToDoList(ReadOnlyToDoList addressBook) throws IOException;
+    void saveToDoList(ReadOnlyToDoList toDoList) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the To Do List to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(ToDoListChangedEvent abce);
+    void handleToDoListChangedEvent(ToDoListChangedEvent abce);
 }

@@ -24,67 +24,67 @@ public class ToDoListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final ToDoList addressBook = new ToDoList();
+    private final ToDoList toDoList = new ToDoList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), toDoList.getTaskList());
+        assertEquals(Collections.emptyList(), toDoList.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        toDoList.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyToDoList_replacesData() {
         ToDoList newData = new TypicalTestTasks().getTypicalToDoList();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        toDoList.resetData(newData);
+        assertEquals(newData, toDoList);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        ToDoListStub newData = new ToDoListStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        toDoList.resetData(newData);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        ToDoList typicalAddressBook = new TypicalTestTasks().getTypicalToDoList();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        ToDoList typicalToDoList = new TypicalTestTasks().getTypicalToDoList();
+        List<ReadOnlyTask> newTasks = typicalToDoList.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalToDoList.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        ToDoListStub newData = new ToDoListStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        toDoList.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyToDoList whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyToDoList {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+    private static class ToDoListStub implements ReadOnlyToDoList {
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        ToDoListStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override

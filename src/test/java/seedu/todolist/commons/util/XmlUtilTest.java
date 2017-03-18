@@ -13,8 +13,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.todolist.model.ToDoList;
 import seedu.todolist.storage.XmlSerializableToDoList;
-import seedu.todolist.testutil.AddressBookBuilder;
 import seedu.todolist.testutil.TestUtil;
+import seedu.todolist.testutil.ToDoListBuilder;
 
 public class XmlUtilTest {
 
@@ -85,7 +85,7 @@ public class XmlUtilTest {
         assertEquals((new ToDoList(dataToWrite)).toString(), (new ToDoList(dataFromFile)).toString());
         //TODO: use equality instead of string comparisons
 
-        AddressBookBuilder builder = new AddressBookBuilder(new ToDoList());
+        ToDoListBuilder builder = new ToDoListBuilder(new ToDoList());
         dataToWrite = new XmlSerializableToDoList(
                 builder.withPerson(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
 
