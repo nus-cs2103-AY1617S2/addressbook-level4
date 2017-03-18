@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -19,7 +20,16 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Status;
 
 /**
- * Panel containing the list of tasks.
+ * Panel containing the list of groups of tasks.
+ *
+ * - viewTasksWithStatus decides which groups of task will be displayed by using
+ *   given statusList.
+ * - Upon taskList change event, the program do the following:
+ *      + Save the current view (which panel is expanded and scroll position)
+ *      + Reload view with new data
+ *      + Restore view state
+ * - taskIndexMap stores original index of tasks in taskList, because when we distribute
+ *   tasks to different groups, the index of them might not be in consecutive order anymore.
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
@@ -31,6 +41,8 @@ public class TaskListPanel extends UiPart<Region> {
     private HashMap<String, ObservableList<ReadOnlyTask>> taskListMap;
     private HashMap<String, ArrayList<Integer>> taskIndexMap;
     private HashMap<String, TaskGroupPanel> childGroupMap;
+
+    private ArrayList<ReadOnlyTask> displayedTasks;
 
     @FXML
     private VBox taskListView;
@@ -63,7 +75,7 @@ public class TaskListPanel extends UiPart<Region> {
         }
         taskListListener = new ListChangeListener<ReadOnlyTask>() {
             public void onChanged(Change<? extends ReadOnlyTask> change) {
-                collectScrollingState(statusList);
+                saveScrollingState(statusList);
                 initTaskListsByStatus(taskList, statusList);
                 createTaskListView(statusList);
                 restoreScrollingState();
@@ -73,7 +85,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     /** Update scrolling state of its child nodes */
-    private void collectScrollingState(String[] statusList) {
+    private void saveScrollingState(String[] statusList) {
         lastExpanded = null;
         for (String status : statusList) {
             TaskGroupPanel childNode = childGroupMap.get(status);
@@ -105,12 +117,16 @@ public class TaskListPanel extends UiPart<Region> {
      * Index list contains original index of tasks in taskList.
      */
     private void initTaskListsByStatus(ObservableList<ReadOnlyTask> taskList, String[] statusList) {
+        // Clear current data
+        displayedTasks = new ArrayList<ReadOnlyTask>();
         taskListMap = new HashMap<String, ObservableList<ReadOnlyTask>>();
         taskIndexMap = new HashMap<String, ArrayList<Integer>>();
         for (String status : statusList) {
             taskListMap.put(status, FXCollections.observableArrayList());
             taskIndexMap.put(status, new ArrayList<Integer>());
         }
+
+        // Load new data
         int index = 0;
         for (ReadOnlyTask task : taskList) {
             String taskStatus = task.getStatus().toString();
@@ -121,6 +137,9 @@ public class TaskListPanel extends UiPart<Region> {
             if (taskListMap.containsKey(ALL_TASKS)) {
                 taskListMap.get(ALL_TASKS).add(task);
                 taskIndexMap.get(ALL_TASKS).add(index);
+            }
+            if (taskListMap.containsKey(ALL_TASKS) || taskListMap.containsKey(taskStatus)) {
+                displayedTasks.add(task);
             }
             index++;
         }
@@ -148,6 +167,10 @@ public class TaskListPanel extends UiPart<Region> {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
+    }
+
+    private List<ReadOnlyTask> getDisplayedTasks() {
+        return displayedTasks;
     }
 
 }
