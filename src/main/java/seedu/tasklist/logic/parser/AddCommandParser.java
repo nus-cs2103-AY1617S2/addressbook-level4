@@ -32,7 +32,7 @@ public class AddCommandParser {
                     ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)),
                     argsTokenizer.getValue(PREFIX_COMMENT),
                     argsTokenizer.getValue(PREFIX_PRIORITY),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
+                    ParserUtil.toSet(argsTokenizer.getAllTags(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

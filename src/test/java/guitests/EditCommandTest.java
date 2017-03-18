@@ -46,7 +46,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_DeadlineTask_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Eat food d/03-16-17 00:00:00 p/medium c/to fill stomach t/life t/yummy";
+        String detailsToEdit = "Eat food d/03-16-17 00:00:00 p/medium c/to fill stomach t/life yummy";
         int taskListIndex = 5;
 
         TestTask editedTask = new DeadlineTaskBuilder().
@@ -80,7 +80,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "t/sweetie bestie";
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];

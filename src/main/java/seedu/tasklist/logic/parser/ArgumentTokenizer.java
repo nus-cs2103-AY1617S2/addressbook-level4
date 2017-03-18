@@ -48,6 +48,21 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Returns all the tags as a list.
+     */
+    public Optional<List<String>> getAllTags(Prefix prefix) {
+        if (!this.tokenizedArguments.containsKey(prefix)) {
+            return Optional.empty();
+        }
+        Optional<String> tagString = getAllValues(prefix).flatMap((values)
+            -> Optional.of(values.get(values.size() - 1)));
+        String tagStringToSplit = tagString.get();
+        String[] splittedTags = tagStringToSplit.split(" ");
+        List<String> tags = new ArrayList<String>(Arrays.asList(splittedTags));
+        return Optional.of(tags);
+
+    }
+    /**
      * Returns all values of given prefix.
      */
     public Optional<List<String>> getAllValues(Prefix prefix) {
