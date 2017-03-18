@@ -3,10 +3,18 @@ package seedu.tasklist.logic.commands;
 import java.util.List;
 
 import seedu.tasklist.commons.core.Messages;
+import seedu.tasklist.commons.exceptions.IllegalValueException;
 import seedu.tasklist.logic.commands.exceptions.CommandException;
+import seedu.tasklist.model.task.DeadlineTask;
+import seedu.tasklist.model.task.EventTask;
+import seedu.tasklist.model.task.FloatingTask;
+import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
+import seedu.tasklist.model.task.ReadOnlyEventTask;
+import seedu.tasklist.model.task.ReadOnlyFloatingTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.model.task.Status;
 import seedu.tasklist.model.task.Task;
-import seedu.tasklist.model.task.UniqueTaskList;
+import seedu.tasklist.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Marks a task as done using its last displayed index from FlexiTask
@@ -22,6 +30,7 @@ public class DoneCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done Task: %1$s";
+    public static final String MESSAGE_DONE_ERROR = "Task is already marked as done!";
 
     public final int targetIndex;
 
@@ -41,13 +50,56 @@ public class DoneCommand extends Command {
 
         Task doneTask;
 
-        doneTask = createDoneTask(taskToDone);
+        try {
+            doneTask = createDoneTask(taskToDone);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
+        }
 
-        model.updateTask(targetIndex, doneTask);
+        try {
+            model.updateTask(targetIndex, doneTask);
+        } catch (DuplicateTaskException e) {
+            //Task should never be a duplicate
+            assert false;
+        }
 
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
-        return null;
+    }
+
+    /**
+     * Creates and returns a {@code Task} with the details of {@code taskToDone}
+     * edited with status as COMPLETED.
+     * @throws IllegalValueException
+     */
+    private Task createDoneTask(ReadOnlyTask taskToDone) throws IllegalValueException {
+        assert taskToDone != null;
+
+        Status status = taskToDone.getStatus();
+        if (status.checkStatus() == Status.COMPLETED) {
+            throw new IllegalValueException(MESSAGE_DONE_ERROR);
+        }
+
+        String type = taskToDone.getType();
+        switch (type) {
+        case FloatingTask.TYPE:
+            FloatingTask doneFloatingTask = new FloatingTask((ReadOnlyFloatingTask) taskToDone);
+            doneFloatingTask.getStatus().setCompleted();
+            return doneFloatingTask;
+
+        case DeadlineTask.TYPE:
+            DeadlineTask doneDeadlineTask = new DeadlineTask((ReadOnlyDeadlineTask) taskToDone);
+            doneDeadlineTask.getStatus().setCompleted();
+            return doneDeadlineTask;
+
+        case EventTask.TYPE:
+            EventTask doneEventTask = new EventTask((ReadOnlyEventTask) taskToDone);
+            doneEventTask.getStatus().setCompleted();
+            return doneEventTask;
+
+        default:
+            return null;
+        }
     }
 
 }
