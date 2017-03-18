@@ -85,6 +85,7 @@ public class Task implements ReadOnlyTask {
      * Replaces this tasks's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
+        assert replacement != null;
         tags.setTags(replacement);
     }
 
