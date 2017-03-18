@@ -16,14 +16,14 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private Status status;
     private Note note;
-    private Deadline deadline;
+    private DateTime deadline;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Status status, Note note, Deadline deadline, UniqueTagList tags) {
+    public Task(Name name, Priority priority, Status status, Note note, DateTime deadline, UniqueTagList tags) {
         // Name should never be null because it is required for each task.
         // Status should never be null because every created task should be marked as incomplete.
         // Tags should never be null because zero tags is represented as an empty list.
@@ -86,11 +86,11 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<Deadline> getDeadline() {
+    public Optional<DateTime> getDeadline() {
         return Optional.of(deadline);
     }
 
-    public void setDeadline(Deadline deadline) {
+    public void setDeadline(DateTime deadline) {
         this.deadline = deadline;
     }
 

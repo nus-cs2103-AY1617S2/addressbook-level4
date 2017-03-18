@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -48,7 +48,7 @@ public class AddCommand extends Command {
                 new Priority(priority),
                 new Status(status),
                 new Note(note),
-                new Deadline(deadline),
+                new DateTime(deadline),
                 new UniqueTagList(tagSet)
         );
     }

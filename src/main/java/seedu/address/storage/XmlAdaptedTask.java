@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -55,7 +55,7 @@ public class XmlAdaptedTask {
                 .orElse(Priority.Type.NONE.name());
         status = source.getStatus().value;
         note = source.getNote().map(Note::toString).orElse("");
-        deadline = source.getDeadline().map(Deadline::toString).orElse("");
+        deadline = source.getDeadline().map(DateTime::toString).orElse("");
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -76,7 +76,7 @@ public class XmlAdaptedTask {
         final Priority priority = new Priority(Priority.parseXmlString(this.priority));
         final Status status = new Status(this.status);
         final Note note = new Note(this.note);
-        final Deadline deadline = new Deadline(this.deadline);
+        final DateTime deadline = new DateTime(this.deadline);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, status, note, deadline, tags);
     }

@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import java.util.Optional;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -19,7 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private Note note;
     private Status status;
     private Priority priority;
-    private Deadline deadline;
+    private DateTime deadline;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -54,7 +54,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setDeadline(Deadline deadline) {
+    public void setDeadline(DateTime deadline) {
         this.deadline = deadline;
     }
 
@@ -83,7 +83,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<Deadline> getDeadline() {
+    public Optional<DateTime> getDeadline() {
         return Optional.of(deadline);
     }
 

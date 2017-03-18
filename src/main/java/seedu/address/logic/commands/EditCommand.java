@@ -7,7 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -90,7 +90,7 @@ public class EditCommand extends Command {
                 .map(Optional::of)
                 .orElseGet(taskToEdit::getNote)
                 .orElse(null);
-        Deadline updatedDeadline = editTaskDescriptor
+        DateTime updatedDeadline = editTaskDescriptor
                 .getDeadline()
                 .map(Optional::of)
                 .orElseGet(taskToEdit::getDeadline)
@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<Status> status = Optional.empty();
         private Optional<Note> note = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<DateTime> deadline = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -167,12 +167,12 @@ public class EditCommand extends Command {
             return note;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
+        public void setDeadline(Optional<DateTime> deadline) {
             assert deadline != null;
             this.deadline = deadline;
         }
 
-        public Optional<Deadline> getDeadline() {
+        public Optional<DateTime> getDeadline() {
             return deadline;
         }
 

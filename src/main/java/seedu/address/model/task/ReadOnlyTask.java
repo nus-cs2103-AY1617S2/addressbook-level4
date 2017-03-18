@@ -14,7 +14,7 @@ public interface ReadOnlyTask {
     Optional<Priority> getPriority();
     Status getStatus();
     Optional<Note> getNote();
-    Optional<Deadline> getDeadline();
+    Optional<DateTime> getDeadline();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
