@@ -31,7 +31,7 @@ public class TaskCardHandle extends GuiHandle {
 
     private Node node;
 
-    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    protected TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -40,15 +40,15 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
+    private String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getComment() {
+    private String getComment() {
         return getTextFromLabel(COMMENT_FIELD_ID);
     }
 
-    public List<String> getTags() {
+    private List<String> getTags() {
         return getTags(getTagsContainer());
     }
 
@@ -152,6 +152,7 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getComment();
+        return getFullName() + " " + getDeadline() + getStartDate() + " " + getEndDate()
+                + " " + getComment() + " " + getPriority() + " " + getTags();
     }
 }

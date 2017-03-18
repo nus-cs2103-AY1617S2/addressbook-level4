@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import seedu.tasklist.commons.util.IntegerUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
@@ -141,9 +142,18 @@ public class TestDeadlineTask extends TestTask implements ReadOnlyDeadlineTask {
         Calendar currentDate = new GregorianCalendar();
         currentDate.setTime(this.deadline);
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + currentDate.get(Calendar.MONTH) + "-" + currentDate.get(Calendar.DATE) + "-"
-                + currentDate.get(Calendar.YEAR) + " " + currentDate.get(Calendar.HOUR_OF_DAY) + ":"
-                + currentDate.get(Calendar.MINUTE) + ":" + currentDate.get(Calendar.SECOND) + " ");
+        String minutes = (IntegerUtil.isSingleDigit(currentDate.get(Calendar.MINUTE)))
+                            ? "0" + Integer.toString(currentDate.get(Calendar.MINUTE))
+                            : Integer.toString(currentDate.get(Calendar.MINUTE));
+        String seconds = (IntegerUtil.isSingleDigit(currentDate.get(Calendar.SECOND)))
+                            ? "0" + Integer.toString(currentDate.get(Calendar.SECOND))
+                            : Integer.toString(currentDate.get(Calendar.SECOND));
+        sb.append("d/" + (currentDate.get(Calendar.MONTH) + 1) + "-"
+                + currentDate.get(Calendar.DATE) + "-"
+                + currentDate.get(Calendar.YEAR) + " "
+                + currentDate.get(Calendar.HOUR) + ":"
+                + minutes + ":"
+                + seconds + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

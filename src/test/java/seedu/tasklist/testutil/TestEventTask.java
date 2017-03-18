@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import seedu.tasklist.commons.util.IntegerUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.Comment;
 import seedu.tasklist.model.task.Name;
@@ -152,13 +153,31 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
         currentStartDate.setTime(this.startDate);
         Calendar currentEndDate = new GregorianCalendar();
         currentEndDate.setTime(this.endDate);
+        String startMinutes = (IntegerUtil.isSingleDigit(currentStartDate.get(Calendar.MINUTE)))
+                ? "0" + Integer.toString(currentStartDate.get(Calendar.MINUTE))
+                : Integer.toString(currentStartDate.get(Calendar.MINUTE));
+        String startSeconds = (IntegerUtil.isSingleDigit(currentStartDate.get(Calendar.SECOND)))
+                ? "0" + Integer.toString(currentStartDate.get(Calendar.SECOND))
+                : Integer.toString(currentStartDate.get(Calendar.SECOND));
+        String endMinutes = (IntegerUtil.isSingleDigit(currentEndDate.get(Calendar.MINUTE)))
+                ? "0" + Integer.toString(currentEndDate.get(Calendar.MINUTE))
+                : Integer.toString(currentEndDate.get(Calendar.MINUTE));
+        String endSeconds = (IntegerUtil.isSingleDigit(currentEndDate.get(Calendar.SECOND)))
+                ? "0" + Integer.toString(currentEndDate.get(Calendar.SECOND))
+                : Integer.toString(currentEndDate.get(Calendar.SECOND));
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + currentStartDate.get(Calendar.MONTH) + "-" + currentStartDate.get(Calendar.DATE) + "-"
-                + currentStartDate.get(Calendar.YEAR) + " " + currentStartDate.get(Calendar.HOUR_OF_DAY) + ":"
-                + currentStartDate.get(Calendar.MINUTE) + ":" + currentStartDate.get(Calendar.SECOND) + " ");
-        sb.append("to " + currentEndDate.get(Calendar.MONTH) + "-" + currentEndDate.get(Calendar.DATE) + "-"
-                + currentEndDate.get(Calendar.YEAR) + " " + currentEndDate.get(Calendar.HOUR_OF_DAY) + ":"
-                + currentEndDate.get(Calendar.MINUTE) + ":" + currentEndDate.get(Calendar.SECOND) + " ");
+        sb.append("d/" + (currentStartDate.get(Calendar.MONTH) + 1) + "-"
+                    + currentStartDate.get(Calendar.DATE) + "-"
+                    + currentStartDate.get(Calendar.YEAR) + " "
+                    + currentStartDate.get(Calendar.HOUR_OF_DAY) + ":"
+                    + startMinutes + ":"
+                    + startSeconds + " ");
+        sb.append("to " + (currentEndDate.get(Calendar.MONTH) + 1)
+                    + "-" + currentEndDate.get(Calendar.DATE) + "-"
+                    + currentEndDate.get(Calendar.YEAR) + " "
+                    + currentEndDate.get(Calendar.HOUR_OF_DAY) + ":"
+                    + endMinutes + ":"
+                    + endSeconds + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
