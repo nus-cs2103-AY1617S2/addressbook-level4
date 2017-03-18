@@ -10,17 +10,16 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes, hangclothes, interviewprep;
+    public TestTask assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes, hangclothes,
+            interviewprep;
 
     public TypicalTestTasks() {
         try {
             assignment = new TaskBuilder().withTaskName("Assignment for CS2103")
                     .withDetail("123, Jurong West Ave 6, #08-111").withStatus("alice@gmail.com")
-                    .withDeadline("85355255")
-                    .withTags("friends").build();
+                    .withDeadline("85355255").withTags("friends").build();
             buymilk = new TaskBuilder().withTaskName("Buy milk").withDetail("311, Clementi Ave 2, #02-25")
-                    .withStatus("johnd@gmail.com").withDeadline("98765432")
-                    .withTags("owesMoney", "friends").build();
+                    .withStatus("johnd@gmail.com").withDeadline("98765432").withTags("owesMoney", "friends").build();
             creatework = new TaskBuilder().withTaskName("Create more work").withDeadline("95352563")
                     .withStatus("heinz@yahoo.com").withDetail("wall street").build();
             dumpmilk = new TaskBuilder().withTaskName("Dump milk").withDeadline("87652533")
@@ -54,7 +53,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalPersons() {
-        return new TestTask[]{assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes};
+        return new TestTask[] { assignment, buymilk, creatework, dumpmilk, eatleftovers, findsocks, getclothes };
     }
 
     public TodoList getTypicalAddressBook() {
