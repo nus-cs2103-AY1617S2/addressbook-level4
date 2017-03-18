@@ -156,7 +156,7 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
         sb.append("d/" + currentStartDate.get(Calendar.MONTH) + "-" + currentStartDate.get(Calendar.DATE) + "-"
                 + currentStartDate.get(Calendar.YEAR) + " " + currentStartDate.get(Calendar.HOUR_OF_DAY) + ":"
                 + currentStartDate.get(Calendar.MINUTE) + ":" + currentStartDate.get(Calendar.SECOND) + " ");
-        sb.append("to" + currentEndDate.get(Calendar.MONTH) + "-" + currentEndDate.get(Calendar.DATE) + "-"
+        sb.append("to " + currentEndDate.get(Calendar.MONTH) + "-" + currentEndDate.get(Calendar.DATE) + "-"
                 + currentEndDate.get(Calendar.YEAR) + " " + currentEndDate.get(Calendar.HOUR_OF_DAY) + ":"
                 + currentEndDate.get(Calendar.MINUTE) + ":" + currentEndDate.get(Calendar.SECOND) + " ");
         sb.append("c/" + this.getComment().value + " ");

@@ -1,6 +1,5 @@
 package seedu.tasklist.model.util;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
@@ -53,8 +52,8 @@ public class SampleDataUtil {
                     new Comment("At Orchard"),
                     new Priority("medium"),
                     new Status(),
-                    new Date(),
-                    new Date(),
+                    new GregorianCalendar(2017, 4, 1, 18, 0).getTime(),
+                    new GregorianCalendar(2017, 4, 1, 20, 0).getTime(),
                     new UniqueTagList("family"))
             };
         } catch (IllegalValueException e) {
