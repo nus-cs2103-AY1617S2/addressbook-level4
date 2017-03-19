@@ -13,8 +13,8 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private TaskDate startDate;
-    private TaskDate endDate;
+    private Timing startTiming;
+    private Timing endTiming;
     private boolean complete;
 
     private UniqueTagList tags;
@@ -22,12 +22,12 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Priority priority, TaskDate startDate, TaskDate endDate, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, priority, startDate, tags);
+    public Task(Description description, Priority priority, Timing startTiming, Timing endTiming, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, priority, startTiming, tags);
         this.description = description;
         this.priority = priority;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTiming = startTiming;
+        this.endTiming = endTiming;
         this.complete = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -36,8 +36,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getStartDate(),
-            source.getEndDate(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getStartTiming(),
+            source.getEndTiming(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -60,24 +60,24 @@ public class Task implements ReadOnlyTask {
         return priority;
     }
 
-    public void setStartDate(TaskDate date) {
-        assert date != null;
-        this.startDate = date;
+    public void setStartTiming(Timing startTiming) {
+        assert startTiming != null;
+        this.startTiming = startTiming;
     }
 
     @Override
-    public TaskDate getStartDate() {
-        return startDate;
+    public Timing getStartTiming() {
+        return startTiming;
     }
 
-    public void setEndDate(TaskDate date) {
-        assert date != null;
-        this.endDate = date;
+    public void setEndTiming(Timing endTiming) {
+        assert endTiming != null;
+        this.endTiming = endTiming;
     }
 
     @Override
-    public TaskDate getEndDate() {
-        return endDate;
+    public Timing getEndTiming() {
+        return endTiming;
     }
 
     public void setComplete() {
@@ -108,8 +108,8 @@ public class Task implements ReadOnlyTask {
 
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
-        this.setStartDate(replacement.getStartDate());
-        this.setEndDate(replacement.getEndDate());
+        this.setStartTiming(replacement.getStartTiming());
+        this.setEndTiming(replacement.getEndTiming());
         this.setTags(replacement.getTags());
     }
 
@@ -123,7 +123,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, priority, startDate, endDate, tags);
+        return Objects.hash(description, priority, startTiming, endTiming, tags);
     }
 
     @Override

@@ -11,7 +11,7 @@ import seedu.address.model.task.EditTaskDescriptor;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 import seedu.address.model.task.UniqueTaskList;
 
 public class PrioritizeCommand extends Command {
@@ -71,8 +71,8 @@ public class PrioritizeCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription()
                 .orElseGet(taskToPrioritize::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToPrioritize::getPriority);
-        TaskDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToPrioritize::getStartDate);
-        TaskDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToPrioritize::getStartDate);
+        Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToPrioritize::getStartTiming);
+        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToPrioritize::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToPrioritize::getTags);
 
 
