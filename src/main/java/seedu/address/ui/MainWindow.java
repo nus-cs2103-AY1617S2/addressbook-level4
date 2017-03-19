@@ -45,6 +45,9 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
+    private AnchorPane sidePanelPlaceholder;
+
+    @FXML
     private AnchorPane resultDisplayPlaceholder;
 
     @FXML
@@ -128,6 +131,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getSidePanelPlaceholder() {
+        return sidePanelPlaceholder;
     }
 
     void hide() {
