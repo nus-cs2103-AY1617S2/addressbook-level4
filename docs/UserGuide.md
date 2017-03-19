@@ -51,7 +51,8 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 > * Parameters can be in any order.
 
 ### 2.1. Viewing help : `help`
-Format: `help`<br>
+Allows you to view the list of commands available in doTASK. <br>
+Format: `help` <br>
 
 > Help is shown if you enter an incorrect command e.g. `asdf` <br>
 > Alternatively, type `help` to obtain a list of commands that you can use.
