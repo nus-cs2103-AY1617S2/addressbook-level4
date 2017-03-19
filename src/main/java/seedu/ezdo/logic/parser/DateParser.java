@@ -14,7 +14,7 @@ public class DateParser {
 
     public static final String USER_DATE_INPUT_FORMAT = "dd/MM/yyyy HH:mm";
     public static final String USER_DATE_OUTPUT_FORMAT = "dd/MM/yyyy HH:mm";
-    public static final String NATTY_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
+    public static final String NATTY_DATE_FORMAT = "MM/dd/yyyy HH:mm";
 
     public final SimpleDateFormat userInputDateFormat = new SimpleDateFormat(USER_DATE_INPUT_FORMAT);
     public final SimpleDateFormat userOutputDateFormat = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
