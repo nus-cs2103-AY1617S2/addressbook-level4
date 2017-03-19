@@ -10,6 +10,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class StateCommandPair {
     private Command executeCommand;
     private Command undoCommand;
+    private Model model;
+    
+    public void setModel(Model model) {
+        this.model = model;
+    }
     
     public StateCommandPair(Command cmd, Command inverseCmd) {
         this.executeCommand = cmd;
@@ -21,6 +26,7 @@ public class StateCommandPair {
      * @throws CommandException 
      */
     public void executeCommand() throws CommandException {
+        this.executeCommand.setData(model);
         this.executeCommand.execute();
     }
     
@@ -29,6 +35,8 @@ public class StateCommandPair {
      * @throws CommandException 
      */
     public void executeInverseCommand() throws CommandException {
+        System.out.println("State Pair - executing undo");
+        this.undoCommand.setData(model);
         this.undoCommand.execute();
     }
 }
