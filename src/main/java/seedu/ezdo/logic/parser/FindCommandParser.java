@@ -39,16 +39,18 @@ public class FindCommandParser implements CommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         assert args != null;
- 
+
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE,
                 PREFIX_TAG);
         argsTokenizer.tokenize(args);
         String namesToMatch = argsTokenizer.getPreamble().orElse(""); //eat sleep rave relax
         String[] splitNames = namesToMatch.split("\\s+");
+        
         Optional<Priority> findPriority;
         Optional<TaskDate> findStartDate;
         Optional<TaskDate> findDueDate;
         Set<String> findTags;
+        
         try {
             findPriority = ParserUtil.parsePriority(getOptionalValue(argsTokenizer, PREFIX_PRIORITY));
             findStartDate = ParserUtil.parseStartDate(getOptionalValue(argsTokenizer, PREFIX_STARTDATE), true);

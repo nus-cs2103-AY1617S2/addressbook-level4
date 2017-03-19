@@ -90,7 +90,7 @@ public class ParserUtil {
         assert startDate != null;
         return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
-    
+
     public static Optional<TaskDate> parseStartDate(Optional<String> startDate, boolean isFind) throws IllegalValueException {
         assert startDate != null;
         return startDate.isPresent() ? Optional.of(new StartDate(startDate.get(), isFind)) : Optional.empty();
