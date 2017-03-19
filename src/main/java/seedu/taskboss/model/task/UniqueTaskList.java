@@ -74,7 +74,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 break;
 
             default:
-                throw new IllegalValueException("Invalid sorting type.");   
+                throw new IllegalValueException("Invalid sorting type.");
         }
 
         FXCollections.sort(internalList, taskCmp);

@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) {
         super();

@@ -19,7 +19,6 @@ public class Task implements ReadOnlyTask {
 
     private UniqueCategoryList categories;
 
-
     /**
      * Every field must be present and not null.
      */

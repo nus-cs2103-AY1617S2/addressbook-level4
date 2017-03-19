@@ -44,7 +44,6 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
     /**
      * Creates a TaskBoss using the Tasks and Categories in the {@code toBeCopied}
-     * @throws IllegalValueException 
      */
     public TaskBoss(ReadOnlyTaskBoss toBeCopied) {
         this();
@@ -154,7 +153,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
      * Sorts tasks in TaskBoss according to these sort types:
      * - start date and time
      * - end date and time
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void sortTasks(SortBy sortType) throws IllegalValueException {
         tasks.sort(sortType);

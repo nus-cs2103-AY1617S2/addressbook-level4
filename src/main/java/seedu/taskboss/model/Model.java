@@ -25,7 +25,7 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given task 
+    /** Adds the given task
      * @throws IllegalValueException */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
@@ -34,7 +34,7 @@ public interface Model {
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -60,7 +60,7 @@ public interface Model {
 
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException;
-    
+
     /** Sorts the task list according to the provided sort type
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;
