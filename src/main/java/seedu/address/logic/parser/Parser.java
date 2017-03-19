@@ -173,8 +173,12 @@ public class Parser {
         if (task.getTags().asObservableList().size() > 0) {
             builder.append(" ");
             builder.append(CliSyntax.PREFIX_TAG.getPrefix());
-            task.getTags().forEach(builder::append);
+            final StringBuilder tagBuilder = new StringBuilder();
+            task.getTags().forEach(tagBuilder::append);
+            // Remove square brackets for tags
+            builder.append(tagBuilder.toString().replaceAll("\\[", "").replaceAll("\\]",""));
         }
+        System.out.println(builder.toString());
         return builder.toString();
     }
 }
