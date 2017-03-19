@@ -90,6 +90,11 @@ public class ParserUtil {
         assert startDate != null;
         return startDate.isPresent() ? Optional.of(new StartDate(startDate.get())) : Optional.empty();
     }
+    
+    public static Optional<TaskDate> parseStartDate(Optional<String> startDate, boolean isFind) throws IllegalValueException {
+        assert startDate != null;
+        return startDate.isPresent() ? Optional.of(new StartDate(startDate.get(), isFind)) : Optional.empty();
+    }
 
     /**
      * Parses a {@code Optional<String> dueDate} into an {@code Optional<DueDate>} if {@code dueDate} is present.
@@ -97,6 +102,14 @@ public class ParserUtil {
     public static Optional<TaskDate> parseDueDate(Optional<String> dueDate) throws IllegalValueException {
         assert dueDate != null;
         return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get())) : Optional.empty();
+    }
+    
+    /**
+     * Parses a {@code Optional<String> dueDate} into an {@code Optional<DueDate>} if {@code dueDate} is present.
+     */
+    public static Optional<TaskDate> parseDueDate(Optional<String> dueDate, boolean isFind) throws IllegalValueException {
+        assert dueDate != null;
+        return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get(), isFind)) : Optional.empty();
     }
 
     /**
