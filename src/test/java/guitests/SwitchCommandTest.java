@@ -45,7 +45,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void switch_ToInvalidTab() {
+    public void switch_toInvalidTab() {
         String tab = "fffs";
         String command = "switch " + tab;
         commandBox.runCommand(command);
@@ -53,7 +53,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void switch_ToValidTabUsingShortcutName() {
+    public void switch_toValidTabUsingShortcutName() {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
@@ -73,7 +73,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void switch_ToValidTabUsingShortcutNameCaseInsensitive() {
+    public void switch_toValidTabUsingShortcutNameCaseInsensitive() {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
@@ -86,7 +86,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void switch_ToValidTabUsingNumber() {
+    public void switch_toValidTabUsingNumber() {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
@@ -106,7 +106,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     }
 
     @Test
-    public void switch_ToValidTabAfterFiltering() {
+    public void switch_toValidTabAfterFiltering() {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
