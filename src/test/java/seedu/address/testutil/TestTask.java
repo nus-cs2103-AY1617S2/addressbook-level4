@@ -123,7 +123,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("s/" + this.getStatus().value + " ");
 
         if (this.getStartTime().isPresent()) {
-            sb.append("d/" + this.getStartTime().get().toString() + " ");
+            sb.append("b/" + this.getStartTime().get().toString() + " ");
         }
 
         if (this.getEndTime().isPresent()) {

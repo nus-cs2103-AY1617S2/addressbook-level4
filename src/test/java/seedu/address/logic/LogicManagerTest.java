@@ -472,7 +472,7 @@ public class LogicManagerTest {
             }
 
             if (p.getStartTime().isPresent()) {
-                cmd.append(" d/").append(p.getStartTime().get().toString());
+                cmd.append(" b/").append(p.getStartTime().get().toString());
             }
 
             if (p.getEndTime().isPresent()) {

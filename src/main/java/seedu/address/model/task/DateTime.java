@@ -37,7 +37,7 @@ public class DateTime {
         if (!isValidDateTime(dateTime)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
-        this.dateTime = LocalDateTime.parse(dateTime, formatter);;
+        this.dateTime = LocalDateTime.parse(dateTime, formatter);
     }
 
     /**
