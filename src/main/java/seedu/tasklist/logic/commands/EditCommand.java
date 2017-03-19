@@ -1,3 +1,4 @@
+//@@author A0139221N
 package seedu.tasklist.logic.commands;
 
 import java.util.Date;
@@ -62,6 +63,10 @@ public class EditCommand extends Command {
     }
 
     @Override
+    /**
+     * Executes the edit command.
+     * @throws CommandException if any on the parameters is incorrect.
+     */
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 

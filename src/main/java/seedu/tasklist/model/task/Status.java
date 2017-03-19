@@ -8,23 +8,23 @@ public class Status {
 
     public static final boolean COMPLETED = true;
     public static final boolean UNCOMPLETED = false;
-    public boolean status;
+    public boolean value;
 
     public Status() {
-        status = UNCOMPLETED;
+        value = UNCOMPLETED;
     }
 
     public Status(boolean status) {
-        this.status = status;
+        this.value = status;
     }
 
     public void setStatus(boolean status) {
-        this.status = status;
+        this.value = status;
     }
 
     @Override
     public String toString() {
-        return status ? "completed" : "uncompleted";
+        return value ? "completed" : "uncompleted";
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Status {
             return false;
         }
         Status status = (Status) other;
-        return (this.status == status.status);
+        return (this.value == status.value);
     }
 
 }
