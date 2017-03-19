@@ -86,49 +86,54 @@ In order to make better contribution, you should:
 
 <h2 id="user-content-2">2. Design</h2>
 
-### Architecture
+<h3 id="user-content-architecture">Architecture</h3>
 
 <img src="images/Architecture.png" width="600"><br>
+_Figure 2.1 : Architecture Diagram_
+
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/geekeep/MainApp.java). It is responsible for
-* at app launch: initializing the components in the correct sequence, and connecting them up with each other.
-* at shut down: shutting down the components and invoking cleanup method where necessary.
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/geekeep/MainApp.java). It is responsible for:
+* At app launch: initializing the components in the correct sequence, and connecting them up with each other.
+* At shut down: shutting down the components and invoking cleanup method where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 * `EventsCentre` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
+  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design).
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
-The rest of the App consists four components.
-* [**`UI`**](#ui-component) : Renders the UI
-* [**`Logic`**](#logic-component) : Parses and executes commands
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
+The rest of the app consists four components:
+* [**`UI`**](#ui-component) : Renders the UI.
+* [**`Logic`**](#logic-component) : Parses and executes commands.
+* [**`Model`**](#model-component) : Holds the data of the app in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
-Each of the four components
-* defines its _API_ in an `interface` with the same name as the Component.
-* exposes its functionality using a `{Component Name}Manager` class.
+Each of the four components:
+* Defines its _API_ in an `interface` with the same name as the Component.
+* Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
+_Figure 2.2 : Class Diagram of the Logic Component_
 
 ##### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800">
+<img src="images\SDforDeletePerson.png" width="800"><br>
+_Figure 2.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800">
+<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+_Figure 2.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -136,9 +141,10 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 
 The sections below give more details of each component.
 
-<h3 id="user-content-ui">UI component</h3>
+<h3 id="user-content-ui">UI Component</h3>
 
 <img src="images/UiClassDiagram.png" width="800"><br>
+_Figure 2.4 : Class Diagram of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/geekeep/ui/Ui.java)
 
@@ -149,16 +155,17 @@ and they can be loaded using the `UiPartLoader`.
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/geekeep/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+ [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
 The `UI` component:
-* executes user commands using the `Logic` component.
-* binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* responds to events raised from various parts of the App and updates the UI accordingly.
+* Executes user commands using the `Logic` component.
+* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Responds to events raised from various parts of the app and updates the UI accordingly.
 
-<h3 id="user-content-logic">Logic component</h3>
+<h3 id="user-content-logic">Logic Component</h3>
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
+_Figure 2.5 : Class Diagram of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/geekeep/logic/Logic.java)
 
@@ -170,31 +177,34 @@ The `UI` component:
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
+_Figure 2.6 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-<h3 id="user-content-model">Model component</h3>
+<h3 id="user-content-model">Model Component</h3>
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
+_Figure 2.7 : Class Diagram of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/geekeep/model/Model.java)
 
 The `Model` component:
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* Stores a `UserPref` object that represents the user's preferences.
+* Stores the Task Manager data.
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* Does not depend on any of the other three components.
 
-<h3 id="user-content-storage">Storage component</h3>
+<h3 id="user-content-storage">Storage Component</h3>
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
+_Figure 2.8 : Class Diagram of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/geekeep/storage/Storage.java)
 
 The `Storage` component:
-* can save `UserPref` objects in JSON format and read it back.
-* can save the Task Manager data in XML format and read it back.
+* Can save `UserPref` objects in JSON format and read it back.
+* Can save the Task Manager data in XML format and read it back.
 
-### Common classes
+<h3 id="user-content-commons">Common Classes</h3>
 
 You can find classes used by multiple components in the `seedu.geekeep.commons` package. Here are some examples of common classes:
 * `IllegalValueException` class used by both `Logic` and `Model` components is responsible for throwing an exception when the value is considered invalid.
