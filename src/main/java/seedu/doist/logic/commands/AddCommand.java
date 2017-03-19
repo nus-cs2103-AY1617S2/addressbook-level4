@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
@@ -37,6 +39,6 @@ public class AddCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
+        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

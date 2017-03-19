@@ -1,6 +1,6 @@
 package seedu.doist.model;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -68,7 +68,10 @@ public interface Model {
     void setAlias(String alias, String commandWord);
 
     /** Get the alias list of a defaultCommandWord */
-    ArrayList<String> getAliasList(String defaultCommandWord);
+    List<String> getAliasList(String defaultCommandWord);
+
+    /** Get the valid command list of a defaultCommandWord */
+    List<String> getValidCommandList(String defaultCommandWord);
 
     /** Get the set of default command words */
     Set<String> getDefaultCommandWordSet();

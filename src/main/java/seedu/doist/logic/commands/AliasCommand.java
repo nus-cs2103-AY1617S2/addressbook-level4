@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.doist.logic.commands.exceptions.CommandException;
 
 /**
@@ -38,6 +40,6 @@ public class AliasCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(model.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
+        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

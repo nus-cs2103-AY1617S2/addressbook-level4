@@ -67,7 +67,7 @@ public class XmlAliasListMapStorage implements AliasListMapStorage {
     public void saveAliasListMap(ReadOnlyAliasListMap aliasListMap, String filePath) throws IOException {
         assert aliasListMap != null;
         assert filePath != null;
-        logger.info("trying to save alias list map...");
+        logger.fine("XMLAliasListMapStorage: Trying to save alias list map...");
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);

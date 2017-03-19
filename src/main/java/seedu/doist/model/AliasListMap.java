@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,11 +46,11 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         return Collections.unmodifiableMap(commandAliases);
     }
 
-    public ArrayList<String> getAliasList(String defaultCommandWord) {
+    public List<String> getAliasList(String defaultCommandWord) {
         if (commandAliases == null) {
             setDefaultCommandWords();
         }
-        return commandAliases.get(defaultCommandWord);
+        return Collections.unmodifiableList(commandAliases.get(defaultCommandWord));
     }
 
     public void setAlias(String alias, String commandWord) {

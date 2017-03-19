@@ -1,6 +1,7 @@
 package seedu.doist.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -69,8 +70,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ArrayList<String> getAliasList(String defaultCommandWord) {
+    public List<String> getAliasList(String defaultCommandWord) {
         return aliasListMap.getAliasList(defaultCommandWord);
+    }
+
+    @Override
+    public List<String> getValidCommandList(String defaultCommandWord) {
+        List<String> list = new ArrayList<String>(aliasListMap.getAliasList(defaultCommandWord));
+        list.add(defaultCommandWord);
+        return list;
     }
 
     @Override

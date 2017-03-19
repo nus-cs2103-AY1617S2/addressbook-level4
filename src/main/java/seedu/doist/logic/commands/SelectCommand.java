@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -40,6 +42,6 @@ public class SelectCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
+        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }
