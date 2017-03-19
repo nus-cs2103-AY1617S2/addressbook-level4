@@ -6,8 +6,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Yoshiaki Nishimura](http://github.com/yoshi-1224)
 <img src="images/yoshi-1224.jpg" width="150"><br>
-**Role**: Team lead, in charge of Model & Storage <br>
-**Responsibilities**: Documentation, Deliverables and deadlines, Scheduling and tracking
+**Role**: Team lead, in charge of UI & Model <br>
+**Responsibilities**: Documentation, Deliverables and deadlines, Scheduling and tracking, Testing, Travis, Git
 
 -----
 
@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Anshul Aggarwal](http://github.com/aanshul20)
 <img src="images/aanshul20.jpg" width="150"><br>
-**Role**: Developer, in charge of GUI <br>
+**Role**: Developer, in charge of Storage <br>
 **Responsibilities**: Testing
 
 -----
