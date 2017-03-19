@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -129,8 +130,13 @@ public class Parser {
             return null;
 
         case DeleteCommand.COMMAND_WORD:
-            return null;
-
+            Optional<Integer> index = ParserUtil.parseIndex(arguments);
+            // Get data of command to be deleted
+            ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
+            System.out.println("Got task to delete");
+            System.out.println(taskToDelete.getAsText());
+            return null;//new AddCommandParser().parse("some argument..");
+        
         default:
             return null;
         }
