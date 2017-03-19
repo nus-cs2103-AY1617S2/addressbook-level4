@@ -131,9 +131,8 @@ public class ModelManager extends ComponentManager implements Model {
         undoStack.push(prevState);
         redoStack.clear();
     }
-  
+
     @Override
-  
     public void checkTaskDate(ReadOnlyTask task) throws DateException {
         assert task != null;
         try {
