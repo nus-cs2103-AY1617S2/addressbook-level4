@@ -12,13 +12,13 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 public class DateUtil {
     public static boolean isTaskDateValid(ReadOnlyTask task) throws ParseException {
         assert task != null;
+        if (task.getStartDate().toString().isEmpty() || task.getDueDate().toString().isEmpty()) {
+            return true;
+        }
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy H:mm");
         Date startDate = df.parse(task.getStartDate().toString());
         Date dueDate = df.parse(task.getDueDate().toString());
-        if (task.getStartDate().toString().equals("") || task.getDueDate().toString().equals("")) {
-            return true;
-        }
-        return (startDate.compareTo(dueDate) < 0);
+        return (startDate.compareTo(dueDate) <= 0);
     }
 
 
