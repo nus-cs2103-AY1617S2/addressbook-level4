@@ -44,7 +44,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(PHONE_FIELD_ID);
     }
 
-    public String getEmail() {
+    public String getStatus() {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
@@ -75,7 +75,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSamePerson(ReadOnlyTask person) {
         return getFullName().equals(person.getName().fullName)
                 && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
+                && getStatus().equals(person.getStatus().value)
                 && getAddress().equals(person.getAddress().value)
                 && getTags().equals(getTags(person.getTags()));
     }
@@ -86,7 +86,7 @@ public class TaskCardHandle extends GuiHandle {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
+                    && getStatus().equals(handle.getStatus())
                     && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }

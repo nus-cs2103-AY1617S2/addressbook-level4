@@ -80,7 +80,7 @@ public class EditCommand extends Command {
 
         TaskName updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Deadline updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Status updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        Status updatedEmail = editPersonDescriptor.getStatus().orElseGet(personToEdit::getStatus);
         BeginTime updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.taskName = toCopy.getName();
             this.deadline = toCopy.getPhone();
-            this.status = toCopy.getEmail();
+            this.status = toCopy.getStatus();
             this.beginTime = toCopy.getAddress();
             this.tags = toCopy.getTags();
         }
@@ -139,7 +139,7 @@ public class EditCommand extends Command {
             this.status = status;
         }
 
-        public Optional<Status> getEmail() {
+        public Optional<Status> getStatus() {
             return status;
         }
 

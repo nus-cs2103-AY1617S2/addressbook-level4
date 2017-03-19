@@ -12,8 +12,8 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 public class Status {
 
     public static final String MESSAGE_STATUS_CONSTRAINTS =
-            "Task status should be done/undone/completed/incompleted/finished/unfinished.";
-    public static final String STATUS_VALIDATION_REGEX = "(done|undone|incompleted|completed|finished|unfinished)";
+            "Task status should be done/undone.";
+    public static final String STATUS_VALIDATION_REGEX = "(done|undone)";
 
     public final String value;
 
@@ -22,9 +22,9 @@ public class Status {
      *
      * @throws IllegalValueException if given status string is invalid.
      */
-    public Status(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
+    public Status(String status) throws IllegalValueException {
+        assert status != null;
+        String trimmedEmail = status.trim().toLowerCase();
         if (!isValidStatus(trimmedEmail)) {
             throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
         }

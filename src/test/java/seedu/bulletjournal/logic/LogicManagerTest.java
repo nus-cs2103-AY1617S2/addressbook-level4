@@ -579,7 +579,7 @@ public class LogicManagerTest {
             cmd.append(command);
 
             cmd.append(p.getName().toString());
-            cmd.append(" s/").append(p.getEmail());
+            cmd.append(" s/").append(p.getStatus());
             cmd.append(" d/").append(p.getPhone());
             cmd.append(" b/").append(p.getAddress());
 

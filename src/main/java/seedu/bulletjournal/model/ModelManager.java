@@ -23,7 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
-    private final FilteredList<ReadOnlyTask> filteredPersons;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,7 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.todoList = new TodoList(addressBook);
-        filteredPersons = new FilteredList<>(this.todoList.getPersonList());
+        filteredTasks = new FilteredList<>(this.todoList.getPersonList());
     }
 
     public ModelManager() {
@@ -76,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicatePersonException {
         assert editedPerson != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
         todoList.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
@@ -85,12 +85,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTasks.setPredicate(null);
     }
 
     @Override
@@ -99,13 +99,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    
+    //@@author A0105748B
+    @Override
+    public void updateMatchedTaskList(Set<String> keywords) {
+        updateMatchedTaskList(new PredicateExpression(new StatusQualifier(keywords)));
+    }
+
+    private void updateMatchedTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask person);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -118,8 +128,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -151,6 +161,27 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class StatusQualifier implements Qualifier {
+        private Set<String> statusKeyWords;
+
+        StatusQualifier(Set<String> nameKeyWords) {
+            this.statusKeyWords = nameKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return statusKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStatus().value, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "status=" + String.join(", ", statusKeyWords);
         }
     }
 

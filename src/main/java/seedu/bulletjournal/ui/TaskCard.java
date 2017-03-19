@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         phone.setText(task.getPhone().value);
         address.setText(task.getAddress().value);
-        email.setText(task.getEmail().value);
+        email.setText(task.getStatus().value);
         initTags(task);
     }
 

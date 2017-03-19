@@ -29,13 +29,13 @@ public class StatusTest {
         assertFalse(Status.isValidStatus("peterjack@webmail@com")); // not specific word
 
         // valid status
-        assertTrue(Status.isValidStatus("incompleted"));
-        assertTrue(Status.isValidStatus("incompleted"));  // specific word
-        assertTrue(Status.isValidStatus("finished"));   // specific word
-        assertTrue(Status.isValidStatus("unfinished"));  // specific word
+        assertTrue(Status.isValidStatus("undone"));
+        assertTrue(Status.isValidStatus("undone"));  // specific word
+        assertTrue(Status.isValidStatus("done"));   // specific word
+        assertTrue(Status.isValidStatus("done"));  // specific word
         assertTrue(Status.isValidStatus("done"));  // specific word
         assertTrue(Status.isValidStatus("undone"));    // specific word
-        assertTrue(Status.isValidStatus("completed"));   // specific word
-        assertTrue(Status.isValidStatus("done"));    // specific word
+        assertTrue(Status.isValidStatus("done"));   // specific word
+        assertTrue(Status.isValidStatus("undone"));    // specific word
     }
 }
