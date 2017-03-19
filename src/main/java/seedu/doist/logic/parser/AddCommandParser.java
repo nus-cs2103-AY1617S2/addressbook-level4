@@ -49,7 +49,8 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY,
                                                                 PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
 
-        if (!argsTokenizer.validateTokens(tokens) || (argsTokenizer.validateDate(tokens) == -1)) {
+        if (!argsTokenizer.validateTokens(tokens) ||
+                (argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -83,11 +84,14 @@ public class AddCommandParser {
         }
 
         Date startDate = null, endDate = null;
-        Optional<String> from = tokenizer.getValue(PREFIX_FROM);
-        Optional<String> to = tokenizer.getValue(PREFIX_TO);
-        if (from.isPresent() && to.isPresent()) {
-            startDate = ParserUtil.parseDate(from.toString());
-            endDate =  ParserUtil.parseDate(to.toString());
+        int dateFormat = tokenizer.getDateFormat();
+        switch (dateFormat) {
+        case ArgumentTokenizer.DATE_NIL : break;
+        case ArgumentTokenizer.DATE_BY :  endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get()); break;
+        case ArgumentTokenizer.DATE_FROM : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_FROM).get());
+                                           endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_TO).get());
+                                           break;
+        default : ;
         }
 
         Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);
