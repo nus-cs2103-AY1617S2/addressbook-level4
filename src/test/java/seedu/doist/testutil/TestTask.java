@@ -1,5 +1,7 @@
 package seedu.doist.testutil;
 
+import java.util.Date;
+
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.FinishedStatus;
@@ -15,11 +17,14 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private FinishedStatus finishedStatus;
     private UniqueTagList tags;
+    private Date startDate;
+    private Date endDate;
 
     public TestTask() {
         tags = new UniqueTagList();
         finishedStatus = new FinishedStatus();
         priority = new Priority();
+        startDate = endDate = null;
     }
 
     /**
@@ -66,6 +71,16 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public FinishedStatus getFinishedStatus() {
         return finishedStatus;
+    }
+
+    @Override
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
     }
 
     @Override
