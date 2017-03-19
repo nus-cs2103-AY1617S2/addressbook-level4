@@ -1,7 +1,7 @@
 package seedu.taskboss.storage;
 
 import java.io.IOException;
-import seedu.taskboss.model.ReadOnlyTaskBoss;
+import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.UserPrefs;
 
 /**
@@ -16,14 +16,14 @@ public class StorageStub extends StorageManager {
         this.filepath = filepath;
     }
     
-    @Override
-    public void StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
+
+    private void StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
         this.taskBossStorage = taskBossStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
     @Override
-    public void saveTaskBoss(ReadOnlyTaskBoss taskBoss) throws IOException; {
+    public void saveTaskBoss(TaskBossStorage taskBoss) throws IOException; {
         this.taskBoss = taskBoss;
     }
 
