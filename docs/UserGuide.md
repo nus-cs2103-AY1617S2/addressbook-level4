@@ -89,7 +89,7 @@ Examples:
 * `list Overdue`<br />
  Lists all overdue tasks
 
-* `list Outstanding tasks`<br /> 
+* `list Outstanding tasks`<br />
 * `list Incomplete tasks`<br />
  Lists all outstanding tasks
 
@@ -110,7 +110,7 @@ Examples:
 Edits the specified task's details.
 
 Format:`update [TASK_ID] [TASKNAME] [#Label...] ([by DATE] | [from start_date to end_date]) [done]`
- 
+
 ### 2.4. Editing a task : `edit`
 
 Edits the specified task's details.

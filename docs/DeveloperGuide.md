@@ -825,7 +825,7 @@ Use case ends
 
 > 2a1. System notifies the user that there are no overdue tasks<br />
   Use case ends
-  
+
 #### Use case: Save current data to a new file location
 Use case ID: UC26 Save data to new file location<br />
 Actor: User<br />
@@ -843,7 +843,7 @@ Use case ends
 
 > 1a1. System notifies the user that the file is invalid or not a file<br />
   Use case ends
-  
+
 #### Use case: Replace data in task manager with new file specified
 Use case ID: UC27 Load data from new location<br />
 Actor: User<br />
