@@ -439,7 +439,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add Task
+#### Use case 1 : Add Task
 
 **MSS**
 
@@ -454,7 +454,7 @@ Use case ends.
 > 1a1. doTASK shows an error message <br>
   Use case resumes at step 1
 
-#### Use case: Delete Task
+#### Use case 2 : Delete Task
 
 **MSS**
 
@@ -475,7 +475,7 @@ Use case ends.
 > 3a1. doTASK shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Prioritize a task
+#### Use case 3 : Prioritize a task
 
 **MSS**
 
@@ -489,7 +489,7 @@ Use case ends
 
 > Use case ends
 
-#### Use case: Tagging a task
+#### Use case 4 : Tagging a task
 
 **MSS**
 
@@ -509,7 +509,7 @@ Use case ends
 
 > doTASK show an error message.
 
-#### Use case: List commands
+#### Use case 5 : List commands
 
 **MSS**
 
@@ -517,7 +517,7 @@ Use case ends
 2. doTASK shows a list of basic commands <br>
 Use case ends.
 
-#### Use case: Editing parameters of a specified task
+#### Use case 6 : Editing parameters of a specified task
 
 **MSS**
 
@@ -538,7 +538,7 @@ Use case ends.
 > 3a1. doTASK shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Searching for a task
+#### Use case 7 : Searching for a task
 
 **MSS**
 
@@ -552,7 +552,7 @@ Use case ends.
 
 > Use case ends
 
-#### Use case: Completing a task
+#### Use case 8 : Completing a task
 
 **MSS**
 
@@ -568,7 +568,7 @@ Use case ends.
 
 > Use case ends
 
-#### Use case: Clear all the tasks
+#### Use case 9 : Clear all the tasks
 
 **MSS** 
 
@@ -576,7 +576,7 @@ Use case ends.
 2. doTASK clears the list of tasks
 Use case ends.
 
-#### Use case: Clearing a specified subset of tasks
+#### Use case 10 : Clearing a specified subset of tasks
 
 **MSS**
 
@@ -586,7 +586,7 @@ Use case ends.
 4. doTASK clears the list of tasks
 Use case ends.
 
-#### Use case: Find upcoming tasks
+#### Use case 11 : Find upcoming tasks
 
 **MSS**
 
