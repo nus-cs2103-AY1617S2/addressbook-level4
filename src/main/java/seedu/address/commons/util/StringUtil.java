@@ -2,12 +2,25 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
+import java.util.List;
+
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
 
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+    private static final int DEADLINE_INDEX = 0;
+    private static final String TIME_CONSTRAINTS = "MM DD YY is the expected numerical sequence. \n";
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -54,5 +67,23 @@ public class StringUtil {
      */
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
+    }
+    //@@author A0122017Y
+    public static LocalDateTime parseStringToTime(String deadLineArg) throws IllegalValueException {
+        //empty start date
+        if (deadLineArg == null) {
+            throw new IllegalValueException(TIME_CONSTRAINTS);
+        }
+        
+        PrettyTimeParser timeParser = new PrettyTimeParser();
+        List<Date> parsedResult = timeParser.parse(deadLineArg);
+        
+        //cannot parse
+        if (parsedResult.isEmpty()) {
+            throw new IllegalValueException(TIME_CONSTRAINTS);      
+        }
+        
+        //wrap in LocalDateTime class
+        return LocalDateTime.ofInstant(parsedResult.get(DEADLINE_INDEX).toInstant(), ZoneId.systemDefault());
     }
 }
