@@ -101,11 +101,32 @@ public class Parser {
 
     /**
      * Parses user input into its inverse command for undo command.
+     * Only supports inverse of Add, Delete, Edit.
      *
      * @param userInput full user input string
      * @return the inverse of the command based on the user input
      */
     public Command parseInverseCommand(String userInput) {
-        return this.parseCommand(userInput); // Stub
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+        switch (commandWord) {
+
+        case AddCommand.COMMAND_WORD:
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+
+        case EditCommand.COMMAND_WORD:
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+        
+        default:
+            return null;
+        }
     }
 }
