@@ -45,8 +45,8 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 > Command Format
 >
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BREACKETS` are optional.
+> * Items in `UPPER_CASE` are the parameters.
+> * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
@@ -54,12 +54,13 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 Format: `help`<br>
 
 > Help is shown if you enter an incorrect command e.g. `asdf` <br>
-> Alternatively, type /help to obtain a list of commands that you can use.
+> Alternatively, type `help` to obtain a list of commands that you can use.
 
-### 2.2. Shifting tabs: `switch`
-Switch the current tab to the next tab.
+### 2.2. Switching tabs: `switch`
+Switch the current tab to the next tab. <br>
 Format: `switch`
-> There will be 3 tabs, which can be toggled using this command.
+
+> There will be 4 tabs, which can be toggled using this command.
 > The order in which the tabs will be switched is as follows: 'Priority' -> 'Overview' -> 'Today' -> 'Priority'.
 
 ### 2.3. Adding a Task : `add`
@@ -69,13 +70,13 @@ Adds a task to the task manager. <br>
 Adds a floating task to the task manager. <br>
 Format: `add TASK_NAME p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
 	 > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
-	 > `ANY_INFO` allows you to key in details with regards to the task, optional.<br>
-	 > `TAGS` allows you to assign tags to the tasks, optional.
+	 > `ANY_INFO` allows you to key in details with regards to the task [optional].<br>
+	 > `TAGS` allows you to assign tags to the tasks [optional].
 
 Adds a task, with a specified deadline, to the task manager. <br>
 Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
-   > `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year".
-	 > If no year is specified, the current year of the system will be used as the year of the deadline.
+     > `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year". <br>
+	 > If no year is specified, the current year of the system will be used as the year of the deadline.<br>
 	 > The month must be typed out as the first three letters of the month.
 
 
@@ -87,29 +88,29 @@ Examples:
 ### 2.4. Listing the tasks: `list`
 
 Shows a list of all the tasks in the task manager.<br>
-> Listing is done automatically when user switches between the tabs.<br>
-> However, user can specify to list all the tasks he has in the task manager, which will be shown in a pop up.<br>
-> User can also sort it accordingly to the deadlines, priorities, etc.
-> The index of the task as referenced by the task manager will be shown beside the task description, no matter what sort of list is queried.
+> Listing is done automatically when you switch between the tabs.<br>
+> However, you can choose to list all the tasks you have in the task manager. This list will be shown in a pop up.<br>
+> You can also sort it according to the deadlines, priorities, etc.
+> The index of the task as referenced by the task manager will always be shown alongside the task, ie. the index is not affected by filtering the list.
 
-Shows a list of all the tasks in lexographical order.<br>
+Shows a list of all the tasks in lexicographical order.<br>
 Format: `list all`
 
-Shows a list of all the tasks sorted by deadlines.<br>
-Format: `list deadlines`
+Shows a list of all the tasks sorted by deadline.<br>
+Format: `list deadline`
 
-Shows a list of all the tasks sorted by priority.<br>
+Shows a list of all the tasks sorted by priority level.<br>
 Format: `list priority`
 
 Shows a list of the tasks sorted by a stated priority level, from 1 - 4.<br>
 Format: `list priority PRIORITY_LEVEL`
-> Tasks can be given any priority level from 0 to 3.
-> Tasks with PRORITY_LEVEL priority will be displayed.
+> Tasks can be given any priority level from 1 to 4.
+> Tasks with `PRORITY_LEVEL` priority will be displayed.
 
 Examples:
 * `list priority 1`
 
-Shows a list of tasks of the tags sorted in lexographical order.<br>
+Shows a list of tasks of the tags sorted in lexicographical order.<br>
 Format: `list t/TAGS...`
 > The tasks listed will be in clusters according to tags, but sorted in alphabetical order.<br>
 
@@ -120,9 +121,9 @@ Examples:
 Edits an existing task in the task manager.<br>
 Format: `edit i/INDEX [n/TASK_NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
 
-> * Edits the task labeled by the INDEX digit as shown on the screen. The INDEX must be a positive integer, e.g. 1, 2, 3, ...
-> * The index of a task can be found beside the task description when viewed via the list or search command.
-> * At least one of the optional [fields] must be provided.
+> * Edits the task as denoted by the `INDEX` digit as shown on the screen. The `INDEX` must be a positive integer, e.g. 1, 2, 3, ...
+> * The index of a task can be found beside the task description.
+> * At least **one** of the optional [fields] must be provided.
 > * Existing fields will be overwritten.
 
 Examples:
