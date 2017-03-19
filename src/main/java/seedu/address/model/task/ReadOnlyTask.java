@@ -67,6 +67,10 @@ public interface ReadOnlyTask {
         return getEndTime().isPresent()? "Due at: "+ getEndTime().get().toString() : "";
     }
     
+    default String getUrgencyLevelString(){
+        return getUrgencyLevel().isPresent()? "Urgency: "+ getUrgencyLevel().get().toString() : "";
+    }
+    
     default String getStatusString(){
         return hasTaskCompleted()? "Status: Completed" : "Status: Not completed";
     }
