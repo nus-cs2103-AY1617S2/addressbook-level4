@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
 
-<TitledPane fx:id="titledPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane fx:id="titledPane" styleClass=".titled-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
