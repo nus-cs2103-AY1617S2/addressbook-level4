@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -18,6 +19,8 @@ import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.model.Model;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.logic.commands.RedoCommand;
 
 /**
@@ -106,24 +109,26 @@ public class Parser {
      * @param userInput full user input string
      * @return the inverse of the command based on the user input
      */
-    public Command parseInverseCommand(String userInput) {
+    public Command parseInverseCommand(String userInput, Model model) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
+        switch (commandWord) {
+            
         case AddCommand.COMMAND_WORD:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return new DeleteCommand(lastShownList.size() + 1);
 
         case EditCommand.COMMAND_WORD:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return null;
 
         case DeleteCommand.COMMAND_WORD:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return null;
         
         default:
             return null;
