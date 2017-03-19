@@ -243,20 +243,22 @@ A typical configuration file should have the following format:
 
 <h2 id="user-content-4">4. Testing</h2>
 
-Tests can be found in the `./src/test/java` folder.
+GeeKeep uses JUnit as the main testing framework and you can find all the tests in the `./src/test/java` folder.
+
+<h3 id="user-content-rt">Running Tests</h3>
 
 **In Eclipse**:
 * To run all tests, right-click on the `src/test/java` folder and choose
-  `Run as` > `JUnit Test`
+  `Run as` > `JUnit Test`.
 * To run a subset of tests, you can right-click on a test package, test class, or a test and choose
   to run as a JUnit test.
 
 **Using Gradle**:
 * See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
 
-We have two types of tests:
+There are two types of tests in this project:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+1. **GUI Tests** - These are _System Tests_ that test the entire app by simulating user actions on the GUI.
    These are in the `guitests` package.
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
@@ -270,10 +272,10 @@ We have two types of tests:
       e.g. `seedu.geekeep.logic.LogicManagerTest`
 
 #### Headless GUI Testing
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode.
+A good news for you is that because this project uses the [TestFX](https://github.com/TestFX/TestFX) library, you can
+ run GUI tests in the _headless_ mode.
  In the headless mode, GUI tests do not show up on the screen.
- That means the developer can do other things on the Computer while the tests are running.<br>
+ That means you can do other things on the computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
 #### Troubleshooting tests
@@ -283,6 +285,22 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
+
+<h3 id="user-content-wt">Writing Tests</h3>
+
+In this project, [Coveralls](https://coveralls.zendesk.com) is used to track how many statements are executed by test cases over time. You can check the current coverage report [here](https://coveralls.io/github/CS2103JAN2017-W15-B4/main?branch=master).
+
+A sample coverage report looks like _Figure 4.1_ given below:
+
+<img src="images/coverage.png" width="800"><br>
+_Figure 4.1 Sample Coverage Report_
+
+If you click any of the source files in the report, for example, `InvalidDataTimeException` in _Figure 4.2_, you can find uncovered lines colored with red:
+
+<img src="images/coverage_in_file.png" width="800"><br>
+_Figure 4.2 Coverage Report for InvalidDataTimeException_
+
+Referring to the coverage report, you are welcomed to pick source files with low coverage and write more test cases to improve the percentage of code coverage.
 
 **[⬆ back to top](#user-content-table)**
 
