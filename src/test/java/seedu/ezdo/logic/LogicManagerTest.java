@@ -414,7 +414,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
+        Task pTarget3 = helper.generateTaskWithName("key key bla");
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
@@ -422,7 +422,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM",
+        assertCommandSuccess("find bla",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedEZ,
                 expectedList);
