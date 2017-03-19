@@ -6,7 +6,6 @@ import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
-import seedu.bulletjournal.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
