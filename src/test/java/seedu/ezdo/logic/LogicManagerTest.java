@@ -55,6 +55,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
+import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.storage.StorageManager;
 
 
@@ -101,6 +102,9 @@ public class LogicManagerTest {
         latestSavedEzDo = new EzDo(model.getEzDo()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
+
+        // sort by a field other than name so that it does not affect the tests
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
     }
 
     @After

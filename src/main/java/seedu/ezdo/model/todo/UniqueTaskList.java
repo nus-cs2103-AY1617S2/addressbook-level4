@@ -1,5 +1,8 @@
 package seedu.ezdo.model.todo;
 
+import static seedu.ezdo.commons.util.DateUtil.compareDateStrings;
+
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -101,6 +104,77 @@ public class UniqueTaskList implements Iterable<Task> {
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
+
+    public enum SortCriteria {
+        NAME, START_DATE, DUE_DATE, PRIORITY
+    }
+
+    /**
+     * Sorts the internal list of tasks by the criteria specified.
+     *
+     * @param sortCriteria A constant that represents the sorting criteria.
+     */
+    public void sortTasks(SortCriteria sortCriteria) {
+        Comparator<Task> taskComparator = null;
+        switch (sortCriteria) {
+        case NAME:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOneName = taskOne.getName().toString();
+                    String taskTwoName = taskTwo.getName().toString();
+                    return taskOneName.compareToIgnoreCase(taskTwoName);
+                }
+            };
+            break;
+        case START_DATE:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOneStartDate = taskOne.getStartDate().toString();
+                    String taskTwoStartDate = taskTwo.getStartDate().toString();
+                    return compareDateStrings(taskOneStartDate, taskTwoStartDate);
+                }
+            };
+            break;
+        case DUE_DATE:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOneDueDate = taskOne.getDueDate().toString();
+                    String taskTwoDueDate = taskTwo.getDueDate().toString();
+                    return compareDateStrings(taskOneDueDate, taskTwoDueDate);
+                }
+            };
+            break;
+
+        case PRIORITY:
+            taskComparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task taskOne, Task taskTwo) {
+                    String taskOnePriority = taskOne.getPriority().toString();
+                    String taskTwoPriority = taskTwo.getPriority().toString();
+
+                    // treat no priority as the lowest value
+                    if (taskOnePriority.isEmpty() && taskTwoPriority.isEmpty()) {
+                        return 0;
+                    } else if (taskOnePriority.isEmpty()) {
+                        return 1;
+                    } else if (taskTwoPriority.isEmpty()) {
+                        return -1;
+                    }
+
+                    return taskOnePriority.compareTo(taskTwoPriority);
+                }
+            };
+            break;
+        default:
+            assert false : "Unsupported sort criteria should not be used";
+        }
+        assert taskComparator != null;
+        FXCollections.sort(internalList, taskComparator);
+    }
+
 
     @Override
     public Iterator<Task> iterator() {

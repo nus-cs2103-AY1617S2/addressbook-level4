@@ -17,6 +17,7 @@ import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -29,6 +30,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final EzDo ezDo;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    private SortCriteria currentSortCriteria;
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
@@ -43,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.ezDo = new EzDo(ezDo);
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
+        currentSortCriteria = SortCriteria.NAME;
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         updateFilteredListToShowAll();
@@ -83,6 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
         checkTaskDate(task);
         updateStacks();
         ezDo.addTask(task);
+        ezDo.sortTasks(currentSortCriteria);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
@@ -103,6 +108,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
+        ezDo.sortTasks(currentSortCriteria);
         indicateEzDoChanged();
     }
 
@@ -261,4 +267,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    public void sortTasks(SortCriteria sortCriteria) {
+        this.currentSortCriteria = sortCriteria;
+        ezDo.sortTasks(sortCriteria);
+        indicateEzDoChanged();
+    }
 }

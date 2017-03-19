@@ -27,6 +27,7 @@ import seedu.ezdo.model.todo.TaskDate;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern SORT_CRITERIA_ARGS_FORMAT = Pattern.compile("(?<sortCriteria>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -44,6 +45,20 @@ public class ParserUtil {
         }
         return Optional.of(Integer.parseInt(index));
 
+    }
+
+    /**
+     * Returns the specified sorting criteria in the {@code command} if it is present.
+     * Returns an {@code Optional.empty()} otherwise.
+     */
+    public static Optional<String> parseSortCriteria(String command) {
+        final Matcher matcher = SORT_CRITERIA_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String sortCriteria = matcher.group("sortCriteria");
+        return Optional.of(sortCriteria);
     }
 
     /**

@@ -9,6 +9,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -20,6 +21,8 @@ public interface Model {
 
     /** Returns the EzDo */
     ReadOnlyEzDo getEzDo();
+
+    void sortTasks(SortCriteria sortCriteria);
 
     /** Deletes the given task. */
     void killTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
