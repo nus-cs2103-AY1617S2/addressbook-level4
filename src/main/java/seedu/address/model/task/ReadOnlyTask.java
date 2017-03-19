@@ -59,7 +59,7 @@ public interface ReadOnlyTask {
         if (getStartTime().isPresent()) {
             builder.append(" Start Time: ").append(getStartTime().get().toString());
         }
-        
+
         if (getEndTime().isPresent()) {
             builder.append(" End Time: ").append(getEndTime().get().toString());
         }

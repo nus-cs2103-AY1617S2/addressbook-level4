@@ -24,7 +24,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Status status, Note note, DateTime startTime, DateTime endTime, UniqueTagList tags) {
+    public Task(Name name, Priority priority, Status status,
+            Note note, DateTime startTime, DateTime endTime, UniqueTagList tags) {
         // Name should never be null because it is required for each task.
         // Status should never be null because every created task should be marked as incomplete.
         // Tags should never be null because zero tags is represented as an empty list.
@@ -44,7 +45,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
-                source.getNote().orElse(null), source.getStartTime().orElse(null), source.getEndTime().orElse(null), source.getTags());
+                source.getNote().orElse(null), source.getStartTime().orElse(null),
+                source.getEndTime().orElse(null), source.getTags());
     }
 
     public void setName(Name name) {
@@ -96,15 +98,15 @@ public class Task implements ReadOnlyTask {
         this.startTime = dateTime;
     }
 
-	public Optional<DateTime> getEndTime() {
-		return Optional.of(endTime);
-	}
+    public Optional<DateTime> getEndTime() {
+        return Optional.of(endTime);
+    }
 
-	public void setEndTime(DateTime endTime) {
-		this.endTime = endTime;
-	}
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
+    }
 
-	@Override
+    @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }

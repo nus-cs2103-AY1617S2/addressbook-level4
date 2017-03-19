@@ -19,7 +19,8 @@ public class TestTask implements ReadOnlyTask {
     private Note note;
     private Status status;
     private Priority priority;
-    private DateTime dateTime;
+    private DateTime startTime;
+    private DateTime endTime;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -34,7 +35,8 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
         this.note = taskToCopy.getNote().orElse(null);
-        this.dateTime = taskToCopy.getStartTime().orElse(null);
+        this.startTime = taskToCopy.getStartTime().orElse(null);
+        this.endTime = taskToCopy.getEndTime().orElse(null);
         this.tags = taskToCopy.getTags();
     }
 
@@ -54,8 +56,12 @@ public class TestTask implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setStartTime(DateTime startTime) {
+        this.startTime = startTime;
+    }
+    
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -84,7 +90,12 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartTime() {
-        return Optional.of(dateTime);
+        return Optional.of(startTime);
+    }
+    
+    @Override
+    public Optional<DateTime> getEndTime() {
+        return Optional.of(endTime);
     }
 
     @Override
@@ -113,6 +124,10 @@ public class TestTask implements ReadOnlyTask {
 
         if (this.getStartTime().isPresent()) {
             sb.append("d/" + this.getStartTime().get().toString() + " ");
+        }
+        
+        if (this.getEndTime().isPresent()) {
+            sb.append("e/" + this.getEndTime().get().toString() + " ");
         }
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

@@ -96,13 +96,14 @@ public class EditCommand extends Command {
                 .orElseGet(taskToEdit::getStartTime)
                 .orElse(null);
         DateTime updatedEndTime = editTaskDescriptor
-                .getStartTime()
+                .getEndTime()
                 .map(Optional::of)
-                .orElseGet(taskToEdit::getStartTime)
+                .orElseGet(taskToEdit::getEndTime)
                 .orElse(null);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedStatus, updatedNote, updatedStartTime, updatedEndTime, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedStatus, updatedNote,
+                updatedStartTime, updatedEndTime, updatedTags);
     }
 
     /**
@@ -135,7 +136,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.priority, this.status,
-                    this.note, this.startTime, this.tags);
+                    this.note, this.startTime, this.endTime, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -182,10 +183,10 @@ public class EditCommand extends Command {
         public Optional<DateTime> getStartTime() {
             return startTime;
         }
-        
+
         public void setEndTime(Optional<DateTime> endTime) {
             assert endTime != null;
-            this.startTime = endTime;
+            this.endTime = endTime;
         }
 
         public Optional<DateTime> getEndTime() {

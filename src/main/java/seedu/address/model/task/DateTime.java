@@ -19,8 +19,8 @@ public class DateTime {
 
     public final LocalDateTime dateTime;
     private static DateTimeFormatter formatter = DateTimeFormatter
-    		.ofPattern("dd/MM/uuuu HH:mm")
-    		.withResolverStyle(ResolverStyle.STRICT);;
+            .ofPattern("dd/MM/uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);;
 
     /**
      * Validates given dateTime.
@@ -34,28 +34,26 @@ public class DateTime {
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
-        if(!isValidDateTime(dateTime)) {
-        	throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
+        if (!isValidDateTime(dateTime)) {
+            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
         this.dateTime = LocalDateTime.parse(dateTime, formatter);;
     }
 
     /**
      * Returns true if a given date is a valid task dateTime.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public static boolean isValidDateTime(String test) {
-    	try {
-    		if(LocalDateTime.parse(test, formatter) != null) {
-    			return true;
-    		}
-    	} catch (DateTimeParseException dtpe) {
-    	
-    	}
-		return false;
+        try {
+            if (LocalDateTime.parse(test, formatter) != null) {
+                return true;
+            }
+        } catch (DateTimeParseException dtpe) {
+
+        }
+        return false;
     }
-    
-    
 
     @Override
     public String toString() {

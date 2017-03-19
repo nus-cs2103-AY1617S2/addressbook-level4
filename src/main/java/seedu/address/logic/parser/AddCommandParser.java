@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -26,8 +26,8 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS, PREFIX_NOTE, 
-                		PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS, PREFIX_NOTE,
+                        PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         argsTokenizer.createFloatingTask();
         try {

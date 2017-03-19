@@ -427,11 +427,12 @@ public class LogicManagerTest {
             Priority priority = new Priority("hi");
             Status email = new Status("incomplete");
             Note note = new Note("edit slides");
-            DateTime dateTime = new DateTime("12/12/2020 12:00");
+            DateTime startTime = new DateTime("12/12/2020 12:00");
+            DateTime endTime = new DateTime("12/12/2020 13:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, priority, email, note, dateTime, tags);
+            return new Task(name, priority, email, note, startTime, endTime, tags);
         }
 
         /**
@@ -448,6 +449,7 @@ public class LogicManagerTest {
                     new Status(seed + "@email"),
                     new Note("House of " + seed),
                     new DateTime("12/12/" + (2017 + seed) + " 12:00"),
+                    new DateTime("12/12/" + (2017 + seed) + " 13:00"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -471,6 +473,10 @@ public class LogicManagerTest {
 
             if (p.getStartTime().isPresent()) {
                 cmd.append(" d/").append(p.getStartTime().get().toString());
+            }
+            
+            if (p.getEndTime().isPresent()) {
+                cmd.append(" e/").append(p.getEndTime().get().toString());
             }
 
             UniqueTagList tags = p.getTags();
@@ -558,6 +564,7 @@ public class LogicManagerTest {
                     new Status("incomplete"),
                     new Note("House of 1"),
                     new DateTime("12/12/2020 12:00"),
+                    new DateTime("12/12/2020 13:00"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
