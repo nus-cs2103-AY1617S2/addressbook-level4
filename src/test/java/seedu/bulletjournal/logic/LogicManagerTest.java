@@ -316,7 +316,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
 
-        assertCommandSuccess("showall",
+        assertCommandSuccess("displays",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);

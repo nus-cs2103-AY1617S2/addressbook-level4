@@ -19,13 +19,13 @@ public class TypicalTestTasks {
                     .withDetail("123, Jurong West Ave 6, #08-111").withStatus("undone")
                     .withDeadline("85355255").withTags("friends").build();
             buymilk = new TaskBuilder().withTaskName("Buy milk").withDetail("311, Clementi Ave 2, #02-25")
-                    .withStatus("undone").withDeadline("98765432").withTags("owesMoney", "friends").build();
+                    .withStatus("done").withDeadline("98765432").withTags("owesMoney", "friends").build();
             creatework = new TaskBuilder().withTaskName("Create more work").withDeadline("95352563")
-                    .withStatus("undone").withDetail("wall street").build();
+                    .withStatus("done").withDetail("wall street").build();
             dumpmilk = new TaskBuilder().withTaskName("Dump milk").withDeadline("87652533")
                     .withStatus("undone").withDetail("10th street").build();
             eatleftovers = new TaskBuilder().withTaskName("Eat leftovers").withDeadline("9482224")
-                    .withStatus("undone").withDetail("michegan ave").build();
+                    .withStatus("done").withDetail("michegan ave").build();
             findsocks = new TaskBuilder().withTaskName("Find socks").withDeadline("9482427")
                     .withStatus("undone").withDetail("little tokyo").build();
             getclothes = new TaskBuilder().withTaskName("Get clothes").withDeadline("9482442")
@@ -33,7 +33,7 @@ public class TypicalTestTasks {
 
             // Manually added
             hangclothes = new TaskBuilder().withTaskName("Hang up clothes").withDeadline("8482424")
-                    .withStatus("undone").withDetail("little india").build();
+                    .withStatus("done").withDetail("little india").build();
             interviewprep = new TaskBuilder().withTaskName("Interview preparation").withDeadline("8482131")
                     .withStatus("undone").withDetail("chicago ave").build();
         } catch (IllegalValueException e) {
