@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,6 +27,8 @@ import seedu.tasklist.model.task.Priority;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+    private Hashtable<String, String> flexibleCommands;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -106,6 +109,43 @@ public class ParserUtil {
     public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
         assert priority != null;
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
+    }
+
+    /**
+     * Initialises the Hashtable for parsing flexible command words and prefixes (Hashtable allows duplicate keys).
+     * Keys being the acceptable alternatives, values being the legitimate command words (stated in the UserGuide.md)
+     * Creates the Hashtable only once and will retrieve from storage the subsequent times.
+     *
+     */
+    public Hashtable<String, String> initialiseFlexibleCommands() {
+        //if storage has it, just return that from storage itself?
+        //command words
+        flexibleCommands = new Hashtable<String, String>();
+        flexibleCommands.put("insert", "add");
+        flexibleCommands.put("new", "add");
+        flexibleCommands.put("adds", "add");
+        flexibleCommands.put("change", "edit");
+        flexibleCommands.put("modify", "edit");
+        flexibleCommands.put("edits", "edit");
+        flexibleCommands.put("remove", "delete");
+        flexibleCommands.put("deletes", "delete");
+        flexibleCommands.put("cancel", "delete");
+        flexibleCommands.put("clean", "clear");
+        flexibleCommands.put("locate", "find");
+        flexibleCommands.put("arrange", "sort");
+        //prefixes
+        flexibleCommands.put("tag/", "t/");
+        flexibleCommands.put("tags/", "t/");
+        flexibleCommands.put("comment/", "c/");
+        flexibleCommands.put("comments/", "c/");
+        flexibleCommands.put("info/", "c/");
+        flexibleCommands.put("priority/", "p/");
+        flexibleCommands.put("urgency/", "p/");
+        flexibleCommands.put("date/", "d/");
+        flexibleCommands.put("dates/", "d/");
+
+        return flexibleCommands;
+
     }
 
 }
