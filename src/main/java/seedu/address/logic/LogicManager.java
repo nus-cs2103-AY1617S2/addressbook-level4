@@ -36,11 +36,12 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         // Evaluate inverse of command
-        Command inverseCommand = parser.parseInverseCommand(commandText);
+        Command inverseCommand = parser.parseInverseCommand(commandText, model);
         // Check if inverse of command exist
         if (inverseCommand != null) {
             // Store the command
             StateCommandPair stateCommandPair = new StateCommandPair(command, inverseCommand);
+            stateCommandPair.setModel(model);
             stateManager.onNewCommand(stateCommandPair);
         }
         // Execute the command
