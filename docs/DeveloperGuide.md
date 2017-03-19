@@ -31,7 +31,7 @@ In order to make better contribution, you should:
 
 <h2 id="user-content-1">1. Setting up</h2>
 
-#### Prerequisites
+<h3 id="user-content-pre">Prerequisites</h3>
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -42,10 +42,10 @@ In order to make better contribution, you should:
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace or its [official website](http://eclipse-cs.sourceforge.net/#!/install)
 
 
-#### Importing the project into Eclipse
+<h3 id="user-content-import">Importing The Project into Eclipse</h3>
 
 1. Fork this repo, and clone the fork to your computer.
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -57,21 +57,22 @@ In order to make better contribution, you should:
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
+      (This is because Gradle downloads library files from servers during the project set up process).
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-#### Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. TaskManager
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
+<h3 id="user-content-checkstyle">Configuring Checkstyle</h3>
+
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`.
+2. Choose `External Configuration File` under `Type`.
+3. Enter an arbitrary configuration name e.g. GeeKeep.
+4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`.
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
+6. Tick and select `files from packages`, click `Change...`, and select the `resources` package.
+7. Click OK twice. Rebuild project if prompted.
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button.
 
-#### Troubleshooting project setup
+<h3 id="user-content-trouble">Troubleshooting Project Setup</h3>
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 * Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
