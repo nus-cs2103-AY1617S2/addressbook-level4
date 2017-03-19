@@ -2,12 +2,15 @@ package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
@@ -45,7 +48,10 @@ public class AddTaskController extends Controller {
         String endDateToken = tokens.get(TaskTokenizer.TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.parseDateString(endDateToken);
 
-        commandResult = add(todoList, description, startDateTime, endDateTime);
+        String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
+        Set<Tag> tags = TagParser.parseTags(tagsToken);
+
+        commandResult = add(todoList, description, startDateTime, endDateTime, tags);
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
@@ -60,8 +66,10 @@ public class AddTaskController extends Controller {
     }
 
     private CommandResult add(TodoList todoList, String description,
-            LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        todoList.add(new Task(description, startDateTime, endDateTime));
+            LocalDateTime startDateTime, LocalDateTime endDateTime, Set<Tag> tags) {
+        Task task = new Task(description, startDateTime, endDateTime);
+        task.replaceTags(tags);
+        todoList.add(task);
         return new CommandResult(RESULT_MESSAGE_ADD_TASK);
     }
 
