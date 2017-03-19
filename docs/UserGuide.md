@@ -29,22 +29,24 @@ Our application doTASK helps to improve your productivity and accountability in 
 > <img src="images/add_screen.jpg" width="600">
 
 
-6. After step 5, you can view your task in 3 different tabs.
+6. After step 5, you can view your task in 3 different tabs. <br>
 
-   > **Today/Date**
+ 	**Today/Date**
    >
    > * Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Press Ctrl+Left Arrow or Ctrl+Right Arrow to navigate between the dates.
    > <img src="images/today_screen.jpg" width="600">
    >
-   > **Overview**
+   <br>
+    **Overview**
    >
    > * Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Hold the Down Arrow key to navigate between the dates.
    > <img src="images/overview_screen.jpg" width="600">
    >
-   > **Priority**
+   <br>
+    **Priority**
    >
    > * Shows you 4 options of priority tabs, from highest to lowest, which are indicated by different colours. Selecting the tab allows you to view the list of tasks that is under that priority.<br>
-	> Eg. By using `switch` feature, you can select the `Highest Priority` , it will bring you to the list of tasks that you have in it.<br>
+   > Eg. By using `switch` feature, you can select the `Highest Priority` , it will bring you to the list of tasks that you have in it.<br>
    > <img src="images/priority_screen.jpg" width="600">1
 
 ## 3. Features
