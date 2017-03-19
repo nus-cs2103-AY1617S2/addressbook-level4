@@ -23,7 +23,6 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Parses user input.
@@ -104,7 +103,7 @@ public class Parser {
         }
     }
 
-    //@@author A0114395E    
+    //@@author A0114395E
     /**
      * Parses user input into its inverse command for undo command.
      * Only supports inverse of Add, Delete, Edit.
@@ -140,7 +139,7 @@ public class Parser {
             return null;
         }
     }
-    
+
     //@@author A0114395E
     /*
      * Helper method to parse a ReadOnlyTask into an command-line Add statement to be stored.
@@ -171,7 +170,7 @@ public class Parser {
             builder.append(CliSyntax.PREFIX_NOTES.getPrefix());
             builder.append(task.getNotes().toString());
         }
-        if (task.getTags().asObservableList().size() > 0){
+        if (task.getTags().asObservableList().size() > 0) {
             builder.append(" ");
             builder.append(CliSyntax.PREFIX_TAG.getPrefix());
             task.getTags().forEach(builder::append);
