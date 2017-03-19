@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + " Join groups d/98765432 s/undone b/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
     private final Task toAdd;
 
