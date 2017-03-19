@@ -22,15 +22,15 @@ public class TaskSwitchPredicateTest {
     }
 
     @Test
-    public void within7DaysSwitchPredicate() {
+    public void next7DaysSwitchPredicate() {
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now(),
-                TaskSwitchPredicate.WITHIN_7_DAYS_SWITCH_PREDICATE, true);
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(6),
-                TaskSwitchPredicate.WITHIN_7_DAYS_SWITCH_PREDICATE, true);
-        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().minusDays(1),
-                TaskSwitchPredicate.TODAY_SWITCH_PREDICATE, false);
+                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, false);
         assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(7),
-                TaskSwitchPredicate.TODAY_SWITCH_PREDICATE, false);
+                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, true);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(1),
+                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, true);
+        assertTaskWithDeadlineSatisfiesPredicate(LocalDateTime.now().plusDays(8),
+                TaskSwitchPredicate.NEXT_7_DAYS_SWITCH_PREDICATE, false);
     }
 
 

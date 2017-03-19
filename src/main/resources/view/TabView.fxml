@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="tabPane" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" styleClass="tab-pane" stylesheets="@../stylesheet/TabView.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="tabPane" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" styleClass="tab" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="tabShortcutLabel" styleClass="tab-lbl" text="Label" underline="true">
          <font>

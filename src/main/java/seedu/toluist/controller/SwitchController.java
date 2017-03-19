@@ -17,11 +17,11 @@ import seedu.toluist.ui.UiStore;
  * Handle switch tab command
  */
 public class SwitchController extends Controller {
-    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED = "Switched to tab \"%s\"."
+    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED = "Switched to tab %s."
         + " Showing %d out of %d filtered tasks.";
-    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_ALL = "Switched to tab \"%s\"."
+    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_ALL = "Switched to tab %s."
             + " Showing %d out of all %d existing tasks.";
-    public static final String RESULT_MESSAGE_SWITCH_FAILURE = "\"%s\" is not a valid tab.";
+    public static final String RESULT_MESSAGE_SWITCH_FAILURE = "%s is not a valid tab.";
     public static final String RESULT_MESSAGE_NO_TAB = "A tab to switch to was not provided";
     public static final String COMMAND_WORD = "switch";
     public static final String TAB = "tab";

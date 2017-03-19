@@ -1,0 +1,101 @@
+@import "Colors.css";
+@import "Fonts.css";
+
+/* DEFAULT STYLING */
+
+.root {
+    -fx-background-color: theme-divider;
+    -fx-control-inner-background: theme-divider;
+    -fx-font-family: "Roboto";
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: theme-primary-text;
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+.list-view {
+    -fx-border-radius: 2em;
+}
+
+.list-cell {
+    -fx-background-color: theme-text;
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2.0;
+    -fx-padding: 0.5em 0.5em 0.5em 0.1em;
+    -fx-border-color: theme-primary;
+    -fx-border-width: 0 0 2 0;
+    -fx-prompt-text-fill: theme-secondary-text;
+    -fx-highlight-fill: theme-primary-text;
+    -fx-font-family: "Roboto Bold";
+}
+
+.text-field:focused {
+    -fx-border-color: theme-primary-dark;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-text-fill: theme-primary-text;
+}
+
+/* COMMON CLASSES */
+
+.dark {
+    -fx-background-color: theme-primary-text;
+    -fx-control-inner-background: theme-primary-text;
+    -fx-highlight-fill: theme-divider;
+    -fx-text-fill: theme-divider;
+}
+
+/* TAB PANE */
+
+.tabs {
+    -fx-background-color: theme-primary-dark;
+    -fx-padding: 0 10 0 10;
+}
+
+.tabs .tab .label {
+    -fx-text-fill: theme-primary-light;
+    -fx-font-family: "Roboto Bold";
+}
+
+.tabs .tab.selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: theme-accent;
+}
+
+.tabs .tab.selected .label {
+    -fx-text-fill: theme-text;
+}
+
+/* TASK */
+
+.task {
+    -fx-border-color: theme-secondary-text;
+    -fx-border-width: 0 0 1 0;
+}
+
+.task .completed .text {
+    -fx-strikethrough: true;
+}

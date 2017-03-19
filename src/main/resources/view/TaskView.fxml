@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
@@ -7,11 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import java.net.URL?>
 
-<VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="task" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
-      <URL value="@DarkTheme.css" />
+      <URL value="@../stylesheet/DefaultTheme.css" />
    </stylesheets>
    <children>
       <FlowPane>

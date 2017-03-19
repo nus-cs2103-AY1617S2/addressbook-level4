@@ -33,7 +33,7 @@ public class TabView extends UiView {
     @Override
     protected void viewDidMount() {
         UiStore uiStore = UiStore.getInstance();
-        String taskInfo = "("
+        String taskInfo = " ("
                 + uiStore.getTasks().stream()
                          .filter(switchPredicate.getPredicate()).collect(Collectors.toList()).size()
                 + "/" + uiStore.getTasks().size() + ")";
