@@ -33,8 +33,8 @@ up doTASK, as well as guide you on how to use it to make you more efficient in p
 
 6. After step 5, you can view your task in 3 different tabs. <br>
 
- 	**Today/Date**
-   > Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Press __Ctrl+Left Arrow__ or __Ctrl+Right Arrow__ to navigate between the dates.
+ **Today/Date**
+ > Shows you the list of tasks you have for the specified date. By default, it will show the tasks for today. Press __Ctrl+Left Arrow__ or __Ctrl+Right Arrow__ to navigate between the dates.
    > <img src="images/today_screen.jpg" width="600">
    >
 
