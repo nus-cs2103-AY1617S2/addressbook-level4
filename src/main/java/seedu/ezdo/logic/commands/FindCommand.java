@@ -3,9 +3,7 @@ package seedu.ezdo.logic.commands;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.ezdo.model.todo.DueDate;
 import seedu.ezdo.model.todo.Priority;
-import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.TaskDate;
 
 /**
