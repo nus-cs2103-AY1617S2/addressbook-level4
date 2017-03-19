@@ -361,63 +361,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <h3 id="user-content-ab">Appendix B : Use Cases</h3>
 
-(For all use cases below, the System is the TaskManager and the Actor is the user, unless specified otherwise)
+(For all use cases below, the System is the GeeKeep and the Actor is the user, unless specified otherwise)
 
-#### **Use case: `Reschedule a task`**
+#### **Use case: UC01 - `Reschedule a task`**
 
-MSS
+MSS:
 
-1. User requests to search or list tasks
+1. User requests to list tasks or search tasks.
 
-2. TaskManager shows an indexed list of tasks
+2. GeeKeep shows an indexed list of tasks.
 
-3. User requests to update a specific task and the details in the list
+3. User requests to update the starting time or ending time of a specific task.
 
-4. TaskManager updates new detail value
+4. GeeKeep updates that task with new value.
 
-5. TaskManager shows the updated task
+5. GeeKeep shows the updated task<br>
+Use case ends.
 
-6.  Use case ends.
+Extensions:
 
-Extensions
+2a. The task does not exist.
 
-2a. The task does not exist
+> Use case ends.
 
+3a. The given index is invalid.
+
+> 3a1. GeeKeep shows an error message.<br>
+> Use case resumes at step 2.
+
+3b. The format of new starting time or ending time is invalid.
+
+> 3b1. GeeKeep shows an error message.<br>
+> Use case resumes at step 3.
+
+3c. The given ending time is smaller than the starting time format.
+
+> 3c1. GeeKeep shows an error message.<br>
+> Use case resumes at step 3.
+
+#### **Use case: UC02 - `View summary of tasks for today`**
+
+MSS:
+
+1. User requests to list tasks for today.
+
+2. GeeKeep shows a list of all tasks for today.
+
+3. User requests to list only completed tasks for today.
+
+4. GeeKeep shows a list of all completed tasks for today.
+
+5. User requests to list only uncompleted tasks for today.
+
+6. GeeKeep shows a list of uncompleted tasks for today.
+Use case ends.
+
+Extensions:
+
+2a. There are no tasks for today.
+
+> 2a1. GeeKeep shows an error message.<br>
 > Use case ends
 
-3a. The given index is invalid
+3a. There are no completed tasks for today.
 
-> 3a1. TaskManager shows an error message
+> 3a1. GeeKeep shows an error message.<br>
+> Use case resumes at step 5.
 
-> Use case resumes at step 2
+5a. There are no uncompleted tasks for today.
 
-3b. The given details to update is invalid
-
-> 3b1. TaskManager shows an error message
-
-> Use case resumes at step 3
-
-3c. The given detail value format is invalid
-
-> 3c1. TaskManager shows an error message
-
-> Use case resumes at step 3
-
-#### **Use case: `Summary of tasks for the day`**
-
-MSS
-
-1. User requests to see summary of tasks for the day
-
-2. TaskManager shows a list of all tasks for the day
-
-3. Use case ends.
-
-Extensions
-
-2a. There are no tasks for the day
-
-> Use case ends
+> 5a1. GeeKeep shows an error message.<br>
+> Use case ends.
 
 <h3 id="user-content-ac">Appendix C : Non Functional Requirements</h3>
 
