@@ -3,6 +3,7 @@ package seedu.toluist.ui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,17 +40,23 @@ public class UiStore {
     }
 
     public Task getTask(int index) {
-        return viewedTasks.get(index);
+        return getTasks().get(index);
     }
 
+    /**
+     * Returns list of tasks are currently shown on the Ui
+     */
     public ArrayList<Task> getTasks() {
-        return viewedTasks;
+        return viewedTasks.stream()
+                          .filter(switchPredicate.getPredicate())
+                          .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Task> getTasks(List<Integer> indexes) {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        List<Task> shownTasks = getTasks();
+        ArrayList<Task> tasks = new ArrayList<>();
         for (int index : indexes) {
-            tasks.add(viewedTasks.get(index - 1));
+            tasks.add(shownTasks.get(index - 1));
         }
         return tasks;
     }

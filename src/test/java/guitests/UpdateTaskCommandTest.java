@@ -138,4 +138,19 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task3));
         assertTrue(isTaskShown(task4));
     }
+
+    @Test
+    public void updateTaskAfterMarkingComplete() {
+        String markCompleteCommand = "mark 1";
+        commandBox.runCommand(markCompleteCommand);
+
+        // update description
+        Task task = new TypicalTestTodoLists().getTypicalTasks()[1];
+        String newDescription = "do homework for Melvin";
+        String updateCommand = "update 1 " + newDescription;
+        task.setDescription(newDescription);
+        commandBox.runCommand(updateCommand);
+        assertFalse(isTaskShown(new TypicalTestTodoLists().getTypicalTasks()[1]));
+        assertTrue(isTaskShown(task));
+    }
 }

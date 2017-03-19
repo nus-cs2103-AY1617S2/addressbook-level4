@@ -6,7 +6,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.Task;
-import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -26,8 +25,7 @@ public class TaskListUiView extends UiView {
     @Override
     protected void viewDidMount () {
         UiStore store = UiStore.getInstance();
-        TaskSwitchPredicate switchPredicate = store.getSwitchPredicate();
-        ObservableList<Task> taskList = store.getUiTasks().filtered(switchPredicate.getPredicate());
+        ObservableList<Task> taskList = store.getUiTasks();
         setConnections(taskList);
         FxViewUtil.makeFullWidth(getRoot());
     }
