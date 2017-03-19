@@ -22,6 +22,6 @@ public class StorageStub extends StorageManager {
 
     @Override
     public String getTaskBossFilePath() {
-        return this.filepath
+        return this.filepath;
     }
 }
