@@ -10,8 +10,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
-import seedu.address.model.StateManager;
 import seedu.address.model.StateCommandPair;
+import seedu.address.model.StateManager;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.storage.Storage;
 

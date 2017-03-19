@@ -17,11 +17,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyTask;
-import seedu.address.logic.commands.RedoCommand;
 
 /**
  * Parses user input.
@@ -90,13 +90,13 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        
+
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();       
-        
+            return new UndoCommand();
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -116,7 +116,7 @@ public class Parser {
         }
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        
+
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
@@ -130,7 +130,7 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return null;
-        
+
         default:
             return null;
         }
