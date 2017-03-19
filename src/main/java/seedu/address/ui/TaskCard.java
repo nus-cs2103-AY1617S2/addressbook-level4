@@ -22,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label identificationnumber;
+    private Label status;
     @FXML
     private FlowPane tags;
 
@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(Integer.toString(displayedIndex) + ") ");
         deadline.setText(task.getDeadline().toString());
         description.setText(task.getDescription().toString());
-        identificationnumber.setText(task.getID().toString());
+        status.setText(task.getStatus().toString());
         initTags(task);
     }
 

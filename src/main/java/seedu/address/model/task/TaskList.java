@@ -2,7 +2,6 @@ package seedu.address.model.task;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +16,7 @@ public class TaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
-    /** Get the task with given ID */
+    /** Get the task with given ID
     public Optional<Task> getTaskByID(IdentificationNumber ID) {
         for (Task task : internalList) {
             if (task.getID().equals(ID)) {
@@ -25,7 +24,7 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return Optional.ofNullable(null);
-    }
+    }*/
 
     /** Adds a task to the list.  */
     public void add(Task toAdd) {
@@ -69,6 +68,7 @@ public class TaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
+    /*
     public boolean removeById(IdentificationNumber ID) throws TaskNotFoundException {
         assert ID != null;
         final Optional<Task> toRemove = getTaskByID(ID);
@@ -76,7 +76,7 @@ public class TaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
         return internalList.remove(toRemove);
-    }
+    }*/
 
     public void setTasks(TaskList replacement) {
         this.internalList.setAll(replacement.internalList);
