@@ -6,6 +6,7 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
+
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
@@ -131,4 +132,5 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertTrue(personListPanel.isListMatching(expectedPersonsList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
+
 }

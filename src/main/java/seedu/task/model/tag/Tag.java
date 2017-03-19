@@ -1,12 +1,14 @@
 package seedu.task.model.tag;
 
+import java.util.Comparator;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag implements Comparable<Tag> {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
@@ -53,4 +55,17 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    @Override
+    public int compareTo(Tag compareTag) {
+        return this.tagName.compareTo(compareTag.tagName);
+    }
+
+    public static Comparator<Tag> TagComparator
+        = new Comparator<Tag>() {
+
+        public int compare(Tag tag1, Tag tag2) {
+             return tag1.compareTo(tag2);
+        }
+
+    };
 }

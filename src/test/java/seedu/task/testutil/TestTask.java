@@ -105,9 +105,4 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-    @Override
-    public boolean isComplete() {
-        return this.complete;
-    }
-
 }
