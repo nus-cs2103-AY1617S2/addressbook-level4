@@ -17,7 +17,7 @@ import seedu.address.model.task.EditTaskDescriptor;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -86,8 +86,8 @@ public class CompleteCommand extends Command {
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToComplete::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToComplete::getPriority);
-        TaskDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToComplete::getStartDate);
-        TaskDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToComplete::getStartDate);
+        Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToComplete::getStartTiming);
+        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToComplete::getStartTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToComplete::getTags);
 
 

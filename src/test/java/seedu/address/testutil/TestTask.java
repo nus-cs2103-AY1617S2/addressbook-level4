@@ -4,7 +4,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 
 /**
  * A mutable Task object. For testing only.
@@ -13,8 +13,8 @@ public class TestTask implements ReadOnlyTask {
 
     private Description description;
     private Priority priority;
-    private TaskDate startDate;
-    private TaskDate endDate;
+    private Timing startDate;
+    private Timing endDate;
     private boolean complete;
 
     private UniqueTagList tags;
@@ -29,8 +29,8 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.description = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriority();
-        this.startDate = taskToCopy.getStartDate();
-        this.endDate = taskToCopy.getEndDate();
+        this.startDate = taskToCopy.getStartTiming();
+        this.endDate = taskToCopy.getEndTiming();
         this.tags = taskToCopy.getTags();
         this.complete = false;
     }
@@ -39,11 +39,11 @@ public class TestTask implements ReadOnlyTask {
         this.description = description;
     }
 
-    public void setStartDate(TaskDate startDate) {
+    public void setStartDate(Timing startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(TaskDate endDate) {
+    public void setEndDate(Timing endDate) {
         this.endDate = endDate;
     }
 
@@ -66,12 +66,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getStartDate() {
+    public Timing getStartTiming() {
         return startDate;
     }
 
     @Override
-    public TaskDate getEndDate() {
+    public Timing getEndTiming() {
         return endDate;
     }
 
@@ -89,8 +89,8 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("sd/" + this.getStartDate().value + " ");
-        sb.append("ed/" + this.getEndDate().value + " ");
+        sb.append("sd/" + this.getStartTiming().value + " ");
+        sb.append("ed/" + this.getEndTiming().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

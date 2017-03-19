@@ -4,7 +4,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 
 /**
  * A mutable person object. For testing only.
@@ -12,8 +12,8 @@ import seedu.address.model.task.TaskDate;
 public class TestPerson implements ReadOnlyTask {
 
     private Description description;
-    private TaskDate startDate;
-    private TaskDate endDate;
+    private Timing startDate;
+    private Timing endDate;
     private Priority priority;
     private boolean complete;
     private UniqueTagList tags;
@@ -28,8 +28,8 @@ public class TestPerson implements ReadOnlyTask {
     public TestPerson(TestPerson personToCopy) {
         this.description = personToCopy.getDescription();
         this.priority = personToCopy.getPriority();
-        this.startDate = personToCopy.getStartDate();
-        this.endDate = personToCopy.getEndDate();
+        this.startDate = personToCopy.getStartTiming();
+        this.endDate = personToCopy.getEndTiming();
         this.tags = personToCopy.getTags();
         this.complete = false;
     }
@@ -38,12 +38,12 @@ public class TestPerson implements ReadOnlyTask {
         this.description = description;
     }
 
-    public void setStartDate(TaskDate taskDate) {
-        this.startDate = taskDate;
+    public void setStartDate(Timing timing) {
+        this.startDate = timing;
     }
 
-    public void setEndDate(TaskDate taskDate) {
-        this.endDate = taskDate;
+    public void setEndDate(Timing timing) {
+        this.endDate = timing;
     }
 
     public void setPriority(Priority priority) {
@@ -65,12 +65,12 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getStartDate() {
+    public Timing getStartTiming() {
         return startDate;
     }
 
     @Override
-    public TaskDate getEndDate() {
+    public Timing getEndTiming() {
         return endDate;
     }
 
@@ -88,8 +88,8 @@ public class TestPerson implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append("sd/" + this.getStartDate().value + " ");
-        sb.append("ed/" + this.getEndDate().value + " ");
+        sb.append("sd/" + this.getStartTiming().value + " ");
+        sb.append("ed/" + this.getEndTiming().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
