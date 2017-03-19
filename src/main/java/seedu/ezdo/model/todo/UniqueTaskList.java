@@ -182,7 +182,8 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     private int compareDateStrings(String dateString1, String dateString2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-        Date date1 = null, date2 = null;
+        Date date1 = null;
+        Date date2 = null;
 
         // empty dates are considered lower in value so that they show at the bottom of the list
         if (dateString1.isEmpty() && dateString2.isEmpty()) {
