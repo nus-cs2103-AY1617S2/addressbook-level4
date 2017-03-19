@@ -1,0 +1,60 @@
+@import "Colors.css";
+
+.root {
+    -fx-background-color: theme-white;
+    -fx-control-inner-background: theme-white;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: theme-black;
+}
+
+/* COMMON CLASSES */
+
+.dark {
+    -fx-background-color: theme-dark;
+    -fx-control-inner-background: theme-black;
+    -fx-highlight-fill: theme-gray;
+    -fx-text-fill: theme-gray;
+}
+
+/* TAB PANE */
+
+.tabs {
+    -fx-background-color: theme-blue;
+    -fx-padding: 0 10 0 10;
+}
+
+.tabs .tab .label {
+    -fx-text-fill: theme-white;
+}
+
+.tabs .tab.selected {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: theme-white;
+}
+
