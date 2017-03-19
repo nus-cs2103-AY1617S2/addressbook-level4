@@ -27,16 +27,10 @@ public class StateManager {
     }
     
     /**
-     * On each new command, add a new command onto the undo stack to track its history
+     * On each new command, add a new command onto the undo stack to track its history and clear the redo history stack
      */
-    public void trackCommand(StateCommandPair newCommandPair){
+    public void onNewCommand(StateCommandPair newCommandPair){
         this.undoStack.push(newCommandPair);
-    }
-    
-    /**
-     * Clears the redo-stack (Typically when the user enters a new command)
-     */
-    public void clearRedoStack(StateCommandPair newCommandPair){
         this.redoStack.clear();
     }
 
