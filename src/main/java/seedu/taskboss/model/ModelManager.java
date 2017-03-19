@@ -34,18 +34,19 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
      * @throws IllegalValueException
      */
-    public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) throws IllegalValueException {
         super();
         assert !CollectionUtil.isAnyNull(taskBoss, userPrefs);
 
         logger.fine("Initializing with TaskBoss: " + taskBoss + " and user prefs " + userPrefs);
 
         this.taskBoss = new TaskBoss(taskBoss);
+        sortTasks(SortBy.END_DATE_TIME);
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
     }
 
-    public ModelManager() {
+    public ModelManager() throws IllegalValueException {
         this(new TaskBoss(), new UserPrefs());
     }
 

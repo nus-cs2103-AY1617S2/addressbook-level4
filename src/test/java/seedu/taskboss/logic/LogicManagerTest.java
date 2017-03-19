@@ -84,7 +84,7 @@ public class LogicManagerTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IllegalValueException {
         model = new ModelManager();
         String tempTaskBossFile = saveFolder.getRoot().getPath() + "TempTaskBoss.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";

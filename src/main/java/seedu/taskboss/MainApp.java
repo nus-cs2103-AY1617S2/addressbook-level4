@@ -16,6 +16,7 @@ import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.core.Version;
 import seedu.taskboss.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskboss.commons.exceptions.DataConversionException;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.ConfigUtil;
 import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.logic.Logic;
@@ -73,7 +74,7 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) throws IllegalValueException {
         Optional<ReadOnlyTaskBoss> taskBossOptional;
         ReadOnlyTaskBoss initialData;
         try {
