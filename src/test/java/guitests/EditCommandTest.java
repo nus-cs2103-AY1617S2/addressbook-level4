@@ -24,11 +24,11 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 s/01/01/2017 10:00 d/08/09/2018 t/husband";
+        String detailsToEdit = "Bobby p/1 s/01/01/2017 10:00 d/08/09/2018 10:00 t/husband";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("1")
-                .withStartDate("01/01/2017").withDueDate("08/09/2018")
+                .withStartDate("01/01/2017 10:00").withDueDate("08/09/2018 10:00")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
