@@ -1,6 +1,7 @@
 package project.taskcrusher.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
@@ -21,11 +22,14 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyUserInbox getUserInbox();
-
+    
 
     //========== for tasks =================================================
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    
+    /** Done the given task. */
+    void doneTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;

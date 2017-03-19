@@ -75,6 +75,8 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateUserInboxChanged();
     }
+    
+   
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -209,5 +211,11 @@ public class ModelManager extends ComponentManager implements Model {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void doneTask(ReadOnlyTask target) throws TaskNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

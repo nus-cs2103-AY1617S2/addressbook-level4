@@ -16,6 +16,7 @@ public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline provided must be a relative or absolute date";
     public static final String NO_DEADLINE = "";
+    public static final String COMPLETED_DEADLINE = "completed";
     public static final boolean IS_LOADING_FROM_STORAGE = false;
 
     public final String deadline;
@@ -31,7 +32,9 @@ public class Deadline {
 
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
-        } else if (isValidDeadline(deadline)) {
+        }else if (deadline.equals(COMPLETED_DEADLINE)) {
+            this.deadline = COMPLETED_DEADLINE;
+        }else if (isValidDeadline(deadline)) {
             this.deadline = deadline;
         } else {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
@@ -161,7 +164,7 @@ public class Deadline {
     }
 
     public boolean hasDeadline() {
-        return !deadline.equals(NO_DEADLINE);
+        return !(deadline.equals(NO_DEADLINE)||deadline.equals(COMPLETED_DEADLINE));
     }
 
 }
