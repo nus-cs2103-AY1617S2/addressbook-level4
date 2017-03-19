@@ -15,7 +15,7 @@ import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.commons.util.FileUtil;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.ReadOnlyTaskBook;
-import seedu.jobs.model.task.Person;
+import seedu.jobs.model.task.Task;
 import seedu.jobs.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {
@@ -72,14 +72,14 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new TaskBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Person(td.hoon));
-        original.removeTask(new Person(td.alice));
+        original.addTask(new Task(td.CS4101));
+        original.removeTask(new Task(td.CS3101));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new TaskBook(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Person(td.ida));
+        original.addTask(new Task(td.CS4102));
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
         assertEquals(original, new TaskBook(readBack));
