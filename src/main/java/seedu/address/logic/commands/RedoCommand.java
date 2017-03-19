@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.GlobalStack;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
@@ -39,16 +40,16 @@ public class RedoCommand extends Command {
                     ReadOnlyTask unmutableTask = gStack.redoDelete();
                     model.deleteTask(unmutableTask);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
-                }   /*else if (toRedo.getClass() == ObservableList.class) { //clear command
-                    gStack.redoClear();
-                    model.resetData(new TaskManager());
-                    }*/
+                }
+            } else {
+                gStack.redoClear();
+                model.resetData(new TaskManager());
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
             }
         } catch (DuplicateTaskException e) {
             throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             return new CommandResult(MESSAGE_FAIL);
         }
-        return new CommandResult(String.format(MESSAGE_FAIL));
     }
 }

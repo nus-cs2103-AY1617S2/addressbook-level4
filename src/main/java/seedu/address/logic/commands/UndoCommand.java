@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.GlobalStack;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
@@ -38,20 +39,24 @@ public class UndoCommand extends Command {
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 } else if (parserInfo.equals(COMMAND_WORD_DELETE)) { // it'll be delete command
                     gStack.undoDelete(); // pushes task to redostack
-                    System.out.println("To be restored : " + toUndo.toString());
-                    System.out.println("Index to be restored" + ((Task) toUndo).getEditTaskIndex());
-                    model.undoState(((Task) toUndo).getEditTaskIndex(), (Task) toUndo);
+                    /**Debugging purpose
+                     * System.out.println("To be restored : " + toUndo.toString());
+                     * System.out.println("Index to be restored" + ((Task) toUndo).getEditTaskIndex());
+                    */
+                    model.insertTasktoIndex(((Task) toUndo).getEditTaskIndex(), (Task) toUndo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
-                } /*else if (toUndo.getClass() == ObservableList.class) { // undo clear command
-                ObservableList<ReadOnlyTask> undo = gStack.undoClear();
-                model.undoState(0, null, undo);
-                }*/
+                }
+            } else {
+                TaskManager undo = gStack.undoClear();
+                //System.out.println(undo.toString());
+                model.resetData(undo);
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
             }
         } catch (TaskNotFoundException e) {
             throw new CommandException("Task not found");
         } catch (DuplicateTaskException e) {
-            e.printStackTrace();
+            throw new CommandException("Error : Duplicate Task Found");
         }
-        return new CommandResult(MESSAGE_FAIL);
+        return null;
     }
 }

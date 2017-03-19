@@ -3,7 +3,7 @@ package seedu.address.logic;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-import javafx.collections.ObservableList;
+import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
@@ -79,25 +79,14 @@ public class GlobalStack {
         return undoTask;
     }
 
-    public int getUndoDeleteIndex() {
-        int undoIndex = (int) undoStack.pop();
-        redoStack.push(undoIndex);
-        return undoIndex;
-    }
-
     public ReadOnlyTask redoDelete() {
         ReadOnlyTask redoTask = (ReadOnlyTask) redoStack.pop();
         undoStack.push(redoTask);
         return redoTask;
     }
 
-    public void getRedoDeleteIndex() {
-        int redoIndex = (int) redoStack.pop();
-        undoStack.push(redoIndex);
-    }
-
-    public ObservableList<ReadOnlyTask> undoClear() {
-        ObservableList<ReadOnlyTask> toUndo = (ObservableList<ReadOnlyTask>) undoStack.pop();
+    public TaskManager undoClear() {
+        TaskManager toUndo = (TaskManager) undoStack.pop();
         redoStack.push(toUndo);
         return toUndo;
     }
@@ -114,6 +103,7 @@ public class GlobalStack {
         return redoStack;
     }
 
+    /** Debugging purpose */
     public void printStack () {
         Stack<Object> temp = (Stack<Object>) undoStack.clone();
         for (int i = 0; i < temp.size(); i++) {

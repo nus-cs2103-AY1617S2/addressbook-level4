@@ -60,7 +60,9 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             GlobalStack gStack = GlobalStack.getInstance();
             gStack.getUndoStack().push(toAdd);
-            gStack.printStack();
+            /**Debugging purpose
+             * gStack.printStack();
+             */
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -83,9 +84,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undoState(int indexToBeRestored, Task deletedTask)
+    public void insertTasktoIndex(int indexToBeRestored, Task deletedTask)
             throws DuplicateTaskException {
         addressBook.addTaskToIndex(indexToBeRestored, deletedTask);
+    }
+
+    @Override
+    public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
+        addressBook.setTasks(list);
     }
 
     //=========== Filtered Task List Accessors =============================================================

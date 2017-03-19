@@ -16,7 +16,9 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         GlobalStack gStack = GlobalStack.getInstance();
-        gStack.getUndoStack().push(model.getTaskManager().getTaskList());
+        // Pushes the most updated list of the task manager into undo stack before wiping data
+        TaskManager tm = new TaskManager(model.getTaskManager());
+        gStack.getUndoStack().push(tm);
         model.resetData(new TaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }
