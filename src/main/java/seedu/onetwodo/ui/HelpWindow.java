@@ -18,9 +18,8 @@ public class HelpWindow extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
-    private static final String TITLE = "Help";
-    private static final String USERGUIDE_URL =
-            "https://cs2103jan2017-f14-b1.github.io/main/docs/UserGuide.html";
+    private static final String TITLE = "Cheatsheet";
+    private static final String USERGUIDE_URL = "/view/help.html";
 
     @FXML
     private WebView browser;
@@ -30,9 +29,10 @@ public class HelpWindow extends UiPart<Region> {
     public HelpWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot());
-        //Null passed as the parent stage to make it non-modal.
+        // Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
+        dialogStage.setMaximized(true); // TODO: set a more appropriate initial
+                                        // size
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
         browser.getEngine().load(USERGUIDE_URL);
