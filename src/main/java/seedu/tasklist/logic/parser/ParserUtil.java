@@ -28,7 +28,7 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    private Hashtable<String, String> flexibleCommands;
+    private static Hashtable<String, String> flexibleCommands;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -114,10 +114,9 @@ public class ParserUtil {
     /**
      * Initialises the Hashtable for parsing flexible command words and prefixes (Hashtable allows duplicate keys).
      * Keys being the acceptable alternatives, values being the legitimate command words (stated in the UserGuide.md)
-     * Creates the Hashtable only once and will retrieve from storage the subsequent times.
      *
      */
-    public Hashtable<String, String> initialiseFlexibleCommands() {
+    public static Hashtable<String, String> initialiseFlexibleCommands() {
         //if storage has it, just return that from storage itself?
         //command words
         flexibleCommands = new Hashtable<String, String>();

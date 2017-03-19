@@ -35,7 +35,7 @@ public class AddCommandTest extends TaskListGuiTest {
         assertAddSuccess(td.tutorial);
 
         //invalid command
-        commandBox.runCommand("adds newTask");
+        commandBox.runCommand("adding newTask");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
