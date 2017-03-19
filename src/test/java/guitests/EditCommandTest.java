@@ -119,7 +119,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
         // confirm the list now contains all previous todos plus the todo with updated details
         expectedTodosList[addressBookIndex - 1] = editedTodo;
-        assertTrue(todoListPanel.isListMatching(expectedTodosList));
+        assertTrue(todoListPanel.isListMatching(true, expectedTodosList));
 
         //edit result didn't show in display
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));

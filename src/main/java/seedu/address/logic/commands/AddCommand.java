@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
     public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
-    private static final String DATE_FORMAT = "yy-MM-dd'T'HH:mm";
+    public static final String DATE_FORMAT = "h:mma dd/MM/yyyy";
 
     private final Todo toAdd;
 

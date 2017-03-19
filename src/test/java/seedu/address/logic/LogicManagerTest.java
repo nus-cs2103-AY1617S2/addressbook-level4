@@ -415,9 +415,9 @@ public class LogicManagerTest {
          */
 
         TodoList generateTodoListReturnTodoList(int numGenerated) throws Exception {
-            TodoList addressBook = new TodoList();
-            addToTodoList(addressBook, numGenerated);
-            return addressBook;
+            TodoList todoList = new TodoList();
+            addToTodoList(todoList, numGenerated);
+            return todoList;
         }
 
         /**

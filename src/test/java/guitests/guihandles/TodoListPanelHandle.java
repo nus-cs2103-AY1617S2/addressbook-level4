@@ -40,19 +40,21 @@ public class TodoListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the todo details correctly and in correct order.
+     * @param compareCompleteTime true to use complete time in match comparison
      * @param todos A list of todo in the correct order.
      */
-    public boolean isListMatching(ReadOnlyTodo... todos) {
-        return this.isListMatching(0, todos);
+    public boolean isListMatching(boolean compareCompleteTime, ReadOnlyTodo... todos) {
+        return this.isListMatching(0, compareCompleteTime, todos);
     }
 
     /**
      * Returns true if the list is showing the todo details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
+     * @param compareCompleteTime True to use complete time in match comparison
      * @param todos A list of todo in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTodo... todos) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, boolean compareCompleteTime,
+            ReadOnlyTodo... todos) throws IllegalArgumentException {
         if (todos.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " todos");
@@ -62,7 +64,7 @@ public class TodoListPanelHandle extends GuiHandle {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTodo(getTodoCardHandle(startPosition + i), todos[i])) {
+            if (!TestUtil.compareCardAndTodo(getTodoCardHandle(startPosition + i), todos[i], compareCompleteTime)) {
                 return false;
             }
         }

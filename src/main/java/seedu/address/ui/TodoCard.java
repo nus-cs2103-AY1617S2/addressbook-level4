@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.model.todo.ReadOnlyTodo;
 
@@ -34,10 +35,12 @@ public class TodoCard extends UiPart<Region> {
         name.setText(todo.getName().fullName);
         id.setText(displayedIndex + ". ");
         if (todo.getStartTime() != null) {
-            start.setText("Start: " + todo.getStartTime().toString());
+            start.setText(String.format("Start: %1$s",
+                    new SimpleDateFormat(AddCommand.DATE_FORMAT).format(todo.getStartTime())));
         }
         if (todo.getEndTime() != null) {
-            end.setText("End: " + todo.getEndTime().toString());
+            end.setText(String.format("End: %1$s",
+                    new SimpleDateFormat(AddCommand.DATE_FORMAT).format(todo.getEndTime())));
         }
         if (todo.getCompleteTime() != null) {
             complete.setText(String.format("Completed at %1$s",

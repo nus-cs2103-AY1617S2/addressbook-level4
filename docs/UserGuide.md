@@ -23,7 +23,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all Todos
-   * **`add`**` Take the dog for a walk s/11-11-2017 e/11-11-2017/17:30` :
+   * **`add`**` Take the dog for a walk s/5:00PM 11/11/2011 e/6:00PM 11/11/2011` :
    * **`delete`**` 3` : deletes the 3rd Todo shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -58,8 +58,8 @@ Format: `add DEADLINE e/DEADLINE [t/tag]`
 Examples:
 
 * `add Finish math homework t/school`
-* `add Take the dog for a walk s/11-11-2017/17:00 e/11-11-17/17:30`
-* `add Finish programming project d/11-11-2017/17:00`
+* `add Take the dog for a walk s/5:00PM 11/11/2011 e/6:00PM 11/11/2011`
+* `add Finish programming project d/5:00PM 11/11/2011`
 
 ### 2.3. Listing all todos : `list`
 
@@ -102,7 +102,7 @@ Format: `edit INDEX [TASK] [t/TAG]`
 
 Examples:
 
-* `edit 1 Play with dog e/17-03-17T8:00`<br>
+* `edit 1 Play with dog e/5:00PM 11/11/2011`<br>
   Edits the task description and deadline of the 1st todo to be listed
 
 ### 2.5. Finding all todos containing any keyword in their description: `find`
@@ -188,11 +188,9 @@ Format: `savefile PATH_TO_FILE`
 
 > Changes the file save location to specified `PATH_TO_FILE`. <br>
 
-If the path does not exist it will be created
-
 Examples:
 
-* `save Documents/savefiles/`
+* `savefile Documents\savefiles\todofile.xml`
 
 ## 3. FAQ
 
@@ -206,7 +204,7 @@ Examples:
   e.g. `add Finish math homework`
 
 * **Add Event** : `add TODO s/STARTTIME e/ENDTIME` <br>
-  e.g. `add Take the dog for a walk s/17-03-17T8:00 e/17-03-17T9:00`
+  e.g. `add Take the dog for a walk s/6:00PM 11/11/2017 e/7:00PM 11/11/2017`
 
 * **Add Deadline** : `add TODO e/DEADLINE` <br>
   e.g. `add Finish programming project e/17-03-17T8:00`

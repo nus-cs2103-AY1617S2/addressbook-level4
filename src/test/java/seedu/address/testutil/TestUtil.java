@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -72,15 +73,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Todo[]{
-                new Todo(new Name("Ali Muster"), new UniqueTagList()),
-                new Todo(new Name("Boris Mueller"), new UniqueTagList()),
-                new Todo(new Name("Carl Kurz"), new UniqueTagList()),
-                new Todo(new Name("Daniel Meier"), new UniqueTagList()),
-                new Todo(new Name("Elle Meyer"), new UniqueTagList()),
-                new Todo(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Todo(new Name("George Best"), new UniqueTagList()),
-                new Todo(new Name("Hoon Meier"), new UniqueTagList()),
-                new Todo(new Name("Ida Mueller"), new UniqueTagList())
+                new Todo(new Name("Walk the dog"), new UniqueTagList()),
+                new Todo(new Name("Walk the cat"), new UniqueTagList()),
+                new Todo(new Name("Do math homework"), new UniqueTagList()),
+                new Todo(new Name("Do english homework"), new UniqueTagList()),
+                new Todo(new Name("Wash dishes"), new UniqueTagList()),
+                new Todo(new Name("Mow the lawn"), new UniqueTagList()),
+                new Todo(new Name("Cook dinner"), new UniqueTagList()),
+                new Todo(new Name("Do laundry"), new UniqueTagList()),
+                new Todo(new Name("Wash car"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -330,8 +331,36 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTodo(TodoCardHandle card, ReadOnlyTodo todo) {
-        return card.isSameTodo(todo);
+    /**
+     * Completes the todo at targetIndexOneIndexedFormat
+     * @param todos The list of todos
+     * @param targetIndexOneIndexedFormat index of todo to be completed
+     * @param completeTime
+     * @return The modified todos after completing the specified todo.
+     */
+    public static TestTodo[] completeTodoInList(final TestTodo[] todos, int targetIndexOneIndexedFormat,
+            Date completeTime) {
+        int index = targetIndexOneIndexedFormat - 1; //array is zero indexed
+        TestTodo todoToComplete = todos[index];
+        todoToComplete.setCompleteTime(completeTime);
+        return replaceTodoFromList(todos, todoToComplete, index);
+    }
+
+    /**
+     * Uncompletes the todo at targetIndexOneIndexedFormat
+     * @param todos The list of todos
+     * @param targetIndexOneIndexedFormat index of todo to be uncompleted
+     * @return The modified todos after uncompleting the specified todo.
+     */
+    public static TestTodo[] uncompleteTodoInList(final TestTodo[] todos, int targetIndexOneIndexedFormat) {
+        int index = targetIndexOneIndexedFormat - 1; //array is zero indexed
+        TestTodo todoToUncomplete = todos[index];
+        todoToUncomplete.setCompleteTime(null);
+        return replaceTodoFromList(todos, todoToUncomplete, index);
+    }
+
+    public static boolean compareCardAndTodo(TodoCardHandle card, ReadOnlyTodo todo, boolean compareCompleteTime) {
+        return card.isSameTodo(todo, compareCompleteTime);
     }
 
     public static Tag[] getTagList(String tags) {

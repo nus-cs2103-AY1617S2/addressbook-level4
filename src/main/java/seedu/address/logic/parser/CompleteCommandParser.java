@@ -20,15 +20,12 @@ public class CompleteCommandParser {
      * and returns an CompleteCommand object for execution.
      */
     public Command parse(String args) {
-
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer();
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(null), 2);
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
         }
         Optional<String> completeTime = preambleFields.get(1);
         try {

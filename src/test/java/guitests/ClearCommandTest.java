@@ -10,12 +10,12 @@ public class ClearCommandTest extends TodoListGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(todoListPanel.isListMatching(td.getTypicalTodos()));
+        assertTrue(todoListPanel.isListMatching(true, td.getTypicalTodos()));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.laundry.getAddCommand());
-        assertTrue(todoListPanel.isListMatching(td.laundry));
+        assertTrue(todoListPanel.isListMatching(true, td.laundry));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 

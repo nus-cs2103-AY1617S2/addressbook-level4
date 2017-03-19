@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.ReadOnlyTodo;
 
@@ -21,6 +23,7 @@ public class TodoCardHandle extends GuiHandle {
     private static final String TAGS_FIELD_ID = "#tags";
     private static final String STARTTIME_FIELD_ID = "#start";
     private static final String ENDTIME_FIELD_ID = "#end";
+    private static final String COMPLETETIME_FIELD_ID = "#complete";
 
     private Node node;
 
@@ -60,35 +63,44 @@ public class TodoCardHandle extends GuiHandle {
     private Region getTagsContainer() {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
+
     private String getStartTime() {
         return getTextFromLabel(STARTTIME_FIELD_ID);
     }
+
     private String getEndTime() {
         return getTextFromLabel(ENDTIME_FIELD_ID);
     }
-    public boolean isSameTodo(ReadOnlyTodo todo) {
-        if (todo.getStartTime() != null && todo.getEndTime() != null) {
 
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
-            String strStartTime = dateFormat.format(todo.getStartTime());
-            String strEndTime = dateFormat.format(todo.getEndTime());
-            return getFullName().equals(todo.getName().fullName)
-                && getStartTime().equals(strStartTime)
-                && getEndTime().equals(strEndTime)
-                && getTags().equals(getTags(todo.getTags()));
+    private String getCompleteTime() {
+        return getTextFromLabel(COMPLETETIME_FIELD_ID);
+    }
 
-        } else if (todo.getStartTime() == null && todo.getEndTime() != null) {
-
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy");
-            String strEndTime = dateFormat.format(todo.getEndTime());
-            return getFullName().equals(todo.getName().fullName)
-                && getEndTime().equals(strEndTime)
-                && getTags().equals(getTags(todo.getTags()));
-
-        } else {
-            return getFullName().equals(todo.getName().fullName)
-                    && getTags().equals(getTags(todo.getTags()));
+    public boolean isSameTodo(ReadOnlyTodo todo, boolean checkCompleteTime) {
+        if (checkCompleteTime) {
+            DateFormat completeCommandDateFormat = new SimpleDateFormat(CompleteCommand.COMPLETE_TIME_FORMAT);
+            if (todo.getCompleteTime() != null && !getCompleteTime().equals("Completed at "
+                + completeCommandDateFormat.format(todo.getCompleteTime()))) {
+                return false;
+            }
         }
+        return isSameTodo(todo);
+    }
+
+    public boolean isSameTodo(ReadOnlyTodo todo) {
+        DateFormat addCommandDateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
+        if (todo.getStartTime() != null
+                && !getStartTime().equals("Start: " + addCommandDateFormat.format(todo.getStartTime()))) {
+            return false;
+        }
+        if (todo.getEndTime() != null
+            && !getEndTime().equals("End: " + addCommandDateFormat.format(todo.getEndTime()))) {
+            return false;
+        }
+        if (todo.getCompleteTime() != null && getCompleteTime().equals("Not Complete")) {
+            return false;
+        }
+        return getFullName().equals(todo.getName().fullName) && getTags().equals(getTags(todo.getTags()));
     }
 
     @Override

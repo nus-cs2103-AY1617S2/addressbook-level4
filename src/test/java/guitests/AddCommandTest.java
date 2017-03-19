@@ -29,7 +29,7 @@ public class AddCommandTest extends TodoListGuiTest {
         //add duplicate todo
         commandBox.runCommand(td.laundry.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TODO);
-        assertTrue(todoListPanel.isListMatching(currentList));
+        assertTrue(todoListPanel.isListMatching(true, currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -44,14 +44,14 @@ public class AddCommandTest extends TodoListGuiTest {
     @Test
     public void addEventTest() {
         TestTodo[] currentList = td.getTypicalTodos();
-        TestTodo todoToAdd = td.eventTest;
+        TestTodo todoToAdd = td.lunch;
         assertAddSuccess(todoToAdd, currentList);
     }
 
     @Test
     public void addDeadLineTest() {
         TestTodo[] currentList = td.getTypicalTodos();
-        TestTodo todoToAdd = td.deadLineTest;
+        TestTodo todoToAdd = td.job;
         assertAddSuccess(todoToAdd, currentList);
     }
 
@@ -65,7 +65,7 @@ public class AddCommandTest extends TodoListGuiTest {
 
         //confirm the list now contains all previous todos plus the new todo
         TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
-        assertTrue(todoListPanel.isListMatching(expectedList));
+        assertTrue(todoListPanel.isListMatching(true, expectedList));
     }
 
 }

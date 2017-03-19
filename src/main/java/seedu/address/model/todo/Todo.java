@@ -13,8 +13,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class Todo implements ReadOnlyTodo {
 
     private Name name;
-    private Date starttime;
-    private Date endtime;
+    private Date startTime;
+    private Date endTime;
     private Date completeTime;
 
     private UniqueTagList tags;
@@ -28,27 +28,34 @@ public class Todo implements ReadOnlyTodo {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    public Todo(Todo todo) {
-        assert !CollectionUtil.isAnyNull(todo);
-        this.name = todo.getName();
-        this.tags = new UniqueTagList(todo.getTags()); // protect internal tags from changes in the arg list
-    }
-    /** for unit-test
-     * Constructor for a scheduled task
+    /**
+     * Constructor for a deadline
      */
-
-    public Todo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, starttime, endtime, tags);
+    public Todo(Name name, Date endTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, endTime, tags);
         this.name = name;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    public Todo(Name name, Date endtime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, endtime, tags);
+    /**
+     * Constructor for an event
+     */
+    public Todo(Name name, Date startTime, Date endTime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, startTime, endTime, tags);
         this.name = name;
-        this.endtime = endtime;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+    /**
+     * Constructor for general todo
+     */
+    public Todo(Name name, Date startTime, Date endTime, Date completeTime, UniqueTagList tags) {
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.completeTime = completeTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -56,7 +63,7 @@ public class Todo implements ReadOnlyTodo {
      * Creates a copy of the given ReadOnlyTodo.
      */
     public Todo(ReadOnlyTodo source) {
-        this(source.getName(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getCompleteTime(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -69,26 +76,26 @@ public class Todo implements ReadOnlyTodo {
         return name;
     }
 
-    public void setStartTime(Date starttime) {
-        if (starttime != null) {
-            this.starttime = starttime;
+    public void setStartTime(Date startTime) {
+        if (startTime != null) {
+            this.startTime = startTime;
         }
     }
 
     @Override
     public Date getStartTime() {
-        return starttime;
+        return startTime;
     }
 
-    public void setEndTime(Date endtime) {
-        if (endtime != null) {
-            this.endtime = endtime;
+    public void setEndTime(Date endTime) {
+        if (endTime != null) {
+            this.endTime = endTime;
         }
     }
 
     @Override
     public Date getEndTime() {
-        return endtime;
+        return endTime;
     }
 
     public void setCompleteTime(Date completeTime) {
@@ -135,7 +142,7 @@ public class Todo implements ReadOnlyTodo {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, starttime, endtime, completeTime, tags);
+        return Objects.hash(name, startTime, endTime, completeTime, tags);
     }
 
     @Override

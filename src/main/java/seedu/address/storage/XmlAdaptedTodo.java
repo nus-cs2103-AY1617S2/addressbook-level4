@@ -1,11 +1,13 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.Name;
@@ -19,6 +21,15 @@ public class XmlAdaptedTodo {
 
     @XmlElement(required = true)
     private String name;
+
+    @XmlElement(required = true)
+    private String startTime = "";
+
+    @XmlElement(required = true)
+    private String endTime = "";
+
+    @XmlElement(required = true)
+    private String completeTime = "";
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -37,6 +48,15 @@ public class XmlAdaptedTodo {
      */
     public XmlAdaptedTodo(ReadOnlyTodo source) {
         name = source.getName().fullName;
+        if (source.getStartTime() != null) {
+            startTime = source.getStartTime().toString();
+        }
+        if (source.getEndTime() != null) {
+            endTime = source.getEndTime().toString();
+        }
+        if (source.getCompleteTime() != null) {
+            completeTime = source.getCompleteTime().toString();
+        }
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -55,6 +75,21 @@ public class XmlAdaptedTodo {
         }
         final Name name = new Name(this.name);
         final UniqueTagList tags = new UniqueTagList(todoTags);
-        return new Todo(name, tags);
+        Date startTime = null;
+        Date endTime = null;
+        Date completeTime = null;
+        try {
+            startTime = StringUtil.parseDate(this.startTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+        } catch (IllegalValueException e) {
+        }
+        try {
+            endTime = StringUtil.parseDate(this.endTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+        } catch (IllegalValueException e) {
+        }
+        try {
+            completeTime = StringUtil.parseDate(this.completeTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+        } catch (IllegalValueException e) {
+        }
+        return new Todo(name, startTime, endTime, completeTime, tags);
     }
 }

@@ -109,7 +109,7 @@ public abstract class TodoListGuiTest {
      * Asserts the todo shown in the card is same as the given todo
      */
     public void assertMatching(ReadOnlyTodo todo, TodoCardHandle card) {
-        assertTrue(TestUtil.compareCardAndTodo(card, todo));
+        assertTrue(TestUtil.compareCardAndTodo(card, todo, true));
     }
 
     /**

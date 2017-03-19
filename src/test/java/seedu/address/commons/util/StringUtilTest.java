@@ -2,14 +2,19 @@ package seedu.address.commons.util;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 public class StringUtilTest {
 
@@ -148,5 +153,26 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    //---------------- Tests for parseDate --------------------------------------
+
+    @Test
+    public void parseDate_emptyString_illegalValueException() throws IllegalValueException {
+        thrown.expect(IllegalValueException.class);
+        StringUtil.parseDate("", "dd/MM/yyyy");
+    }
+
+    @Test
+    public void parseDate_noMatch_illegalValueException() throws IllegalValueException {
+        thrown.expect(IllegalValueException.class);
+        StringUtil.parseDate("asdf", "dd/MM/yyyy");
+    }
+
+    @Test
+    public void parseDate_stringMatch_success() throws IllegalValueException, ParseException {
+        String dateString = "08/08/2008";
+        String dateFormat = "dd/MM/yyyy";
+        assertEquals(StringUtil.parseDate(dateString, dateFormat),
+                new SimpleDateFormat(dateFormat).parse(dateString));
+    }
 
 }

@@ -78,7 +78,7 @@ public class TodoList implements ReadOnlyTodoList {
 //// todo-level operations
 
     /**
-     * Adds a todo to the address book.
+     * Adds a todo to the todo list.
      * Also checks the new todo's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the todo to point to those in {@link #tags}.
      *

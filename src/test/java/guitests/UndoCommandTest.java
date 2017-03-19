@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TestTodo;
 
@@ -14,7 +13,7 @@ public class UndoCommandTest extends TodoListGuiTest {
     /**
      * The list of todos in the todo list panel is expected to match this list
      */
-    TestTodo[] originalList = td.getTypicalTodos();
+    private TestTodo[] originalList = td.getTypicalTodos();
 
     @Test
     public void undo_noActionToUndo_failure() {
@@ -23,8 +22,26 @@ public class UndoCommandTest extends TodoListGuiTest {
     }
 
     @Test
+    public void undo_listTodos_failure() {
+        commandBox.runCommand("list");
+        assertResultMessage(UndoCommand.MESSAGE_NO_ACTION);
+    }
+
+    @Test
     public void undo_addValidFloatingTask_success() {
         commandBox.runCommand(td.laundry.getAddCommand());
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_addValidDeadline_success() {
+        commandBox.runCommand(td.job.getAddCommand());
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_addValidEvent_success() {
+        commandBox.runCommand(td.lunch.getAddCommand());
         assertUndoSuccess();
     }
 
@@ -47,6 +64,18 @@ public class UndoCommandTest extends TodoListGuiTest {
     }
 
     @Test
+    public void undo_completeValidTodo_success() {
+        commandBox.runCommand("complete 1");
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_uncompleteValidTodo_success() {
+        commandBox.runCommand("complete 1");
+        assertUndoSuccess();
+    }
+
+    @Test
     public void undo_invalidCommand_failure() {
         commandBox.runCommand("undoes");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
@@ -59,7 +88,7 @@ public class UndoCommandTest extends TodoListGuiTest {
     private void assertUndoSuccess() {
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         // confirm the list now contains all previous todos
-        assertTrue(todoListPanel.isListMatching(originalList));
+        assertTrue(todoListPanel.isListMatching(true, originalList));
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
 }
