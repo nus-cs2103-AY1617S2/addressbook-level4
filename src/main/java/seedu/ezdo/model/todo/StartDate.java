@@ -24,5 +24,17 @@ public class StartDate extends TaskDate {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
+    
+    /**
+     * Validates given start date when user finds by start date
+     *
+     * @throws IllegalValueException if given start date string is invalid.
+     */
+    public StartDate(String startDate, boolean isFind) throws IllegalValueException {
+        super(startDate, isFind);
+        if (!isValidTaskDate(this.value, true)) {
+            throw new IllegalValueException(MESSAGE_FIND_DATE_CONSTRAINTS);
+        }
+    }
 
 }
