@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks in the active list "
             + "before the deadline, if provided"
             + "Parameters: [t] [d/DEADLINE] \n"
-            + "Example: " + COMMAND_WORD + "t d/tomorrow";
+            + "Example: " + COMMAND_WORD + " t d/tomorrow";
     public static final String MESSAGE_SUCCESS = "Listed all relevant tasks";
 
     //TODO some values here reserved for later
