@@ -155,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority,
                                        Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
