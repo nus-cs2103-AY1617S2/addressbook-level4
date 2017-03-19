@@ -10,7 +10,7 @@ import seedu.ezdo.model.todo.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, jack, kappa, leroy;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, jack, kappa, leroy, megan;
 
     public TypicalTestTasks() {
         try {
@@ -72,6 +72,11 @@ public class TypicalTestTasks {
                     .withDueDate("")
                     .build();
             leroy = new TaskBuilder().withName("Leroy Jenkins")
+                    .withPriority("")
+                    .withStartDate("")
+                    .withDueDate("")
+                    .build();
+            megan = new TaskBuilder().withName("Megan Fox")
                     .withPriority("")
                     .withStartDate("")
                     .withDueDate("")

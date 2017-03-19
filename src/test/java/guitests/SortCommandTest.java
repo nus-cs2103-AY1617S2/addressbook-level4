@@ -19,6 +19,7 @@ public class SortCommandTest extends EzDoGuiTest {
         try {
             ez.addTask(new Task(td.kappa));
             ez.addTask(new Task(td.leroy));
+            ez.addTask(new Task(td.megan));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "not possible";
         }
@@ -32,25 +33,25 @@ public class SortCommandTest extends EzDoGuiTest {
         // sort by start date
         commandBox.runCommand("sort s");
         expectedList = new TestTask[]{td.elle, td.george, td.daniel, td.carl, td.benson, td.fiona, td.alice, td.kappa,
-                                      td.leroy};
+                                      td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // sort by due date
         commandBox.runCommand("s d");
         expectedList = new TestTask[]{td.carl, td.elle, td.george, td.daniel, td.fiona, td.benson, td.alice, td.kappa,
-                                      td.leroy};
+                                      td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // sort by name
         commandBox.runCommand("sort n");
         expectedList = new TestTask[]{td.alice, td.benson, td.carl, td.daniel, td.elle, td.fiona, td.george, td.kappa,
-                                      td.leroy};
+                                      td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // sort by priority
         commandBox.runCommand("s p");
         expectedList = new TestTask[]{td.alice, td.benson, td.carl, td.daniel, td.fiona, td.elle, td.george, td.kappa,
-                                      td.leroy};
+                                      td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         //invalid command
@@ -67,7 +68,7 @@ public class SortCommandTest extends EzDoGuiTest {
         // check that Jack is in the right place after adding him
         commandBox.runCommand(td.jack.getAddCommand(false));
         expectedList = new TestTask[]{td.carl, td.elle, td.george, td.jack, td.daniel, td.fiona, td.benson, td.alice,
-                                      td.kappa, td.leroy};
+                                      td.kappa, td.leroy, td.megan};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // check that Carl is in the right place after editing his due date
