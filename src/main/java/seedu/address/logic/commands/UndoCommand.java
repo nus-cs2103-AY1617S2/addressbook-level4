@@ -10,7 +10,7 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Undid most recent command";
     public static final String MESSAGE_FAIL = "No command to undo";
-    
+
     private final StateManager stateManager = StateManager.getInstance();
 
     @Override
