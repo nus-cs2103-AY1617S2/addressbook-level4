@@ -10,20 +10,20 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 ## 1. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
+1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 
-1. Download the latest version of `doTASK.jar` from [releases] tab.
+2. Download the latest version of `doTASK.jar` from [releases] tab.
 
-2. Copy the file to the folder you want to use as the home folder for your doTASK.
+3. Copy the file to the folder you want to use as the home folder for your doTASK.
 
-3. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
+4. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
 > <img src="images/startup_screen.jpg" width="600">
 
-4. Get started by adding your first task that you have in mind! Refer to the "2. Features" for further instructions. <br>
+5. Get started by adding your first task that you have in mind! Refer to the "2. Features" for further instructions. <br>
 > <img src="images/add_screen.jpg" width="600">
 
 
-5. After step 5, you can view your task in 3 different tabs.
+6. After step 5, you can view your task in 3 different tabs.
 
    > **Today/Date**
    >
