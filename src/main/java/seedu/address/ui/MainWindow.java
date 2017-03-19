@@ -142,6 +142,8 @@ public class MainWindow extends UiPart<Region> {
 
         if (commandBox == null) {
             commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        } else {
+            commandBox.setLogic(logic);
         }
     }
     //@@author

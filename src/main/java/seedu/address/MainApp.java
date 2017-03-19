@@ -205,13 +205,12 @@ public class MainApp extends Application {
         }
 
         //Reinitialize components
-        config = initConfig(configPath);
-        userPrefs = initPrefs(config);
-        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        storage.setTaskManagerFilePath(event.getFilePath());
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model, storage);
         //Set the Ui to the new logic since we don't want to destroy the old UI
         ui.setLogic(logic);
+        model.updateFilteredListToShowAll();
 
         //Save all current data into the new location
         storage.saveTaskManager(model.getTaskManager(), event.getFilePath());

@@ -32,26 +32,42 @@ public class LoadAndSaveAsCommandTest extends TaskManagerGuiTest {
 
         //Add a new test to file1
         commandBox.runCommand(td.task8.getAddCommand());
-        TestUtil.addTasksToList(tasks, td.task8);
+        tasks = TestUtil.addTasksToList(tasks, td.task8);
 
         //Save current data to a new location
         commandBox.runCommand("SAVEAS " + file1);
 
-        //Save data to a new location
+        //Save data to a new location (file1 : 1-8 | file2 : 1-8)
         commandBox.runCommand("SAVEAS " + file2);
 
-        //Delete the newly added task
+        //Delete the newly added task and add task 9
         commandBox.runCommand("DELETE 8");
-
-        //Load the newly saved file
-        commandBox.runCommand("LOAD " + file1);
-
-        //Check if the newly loaded file has task 8
+        tasks = TestUtil.removeTasksFromList(tasks, td.task8);
+        commandBox.runCommand(td.task9.getAddCommand());
+        tasks = TestUtil.addTasksToList(tasks, td.task9);
         assertTrue(taskListPanel.isListMatching(tasks));
 
+        //Load the newly saved file (file1 : 1-8 | file2 : 1-7, 9)
+        commandBox.runCommand("LOAD " + file1);
+        tasks = TestUtil.removeTasksFromList(tasks, td.task9);
+
+        //Check if file1 still has task 8
+        tasks = TestUtil.addTasksToList(td.getTypicalTasks(), td.task8);
+        assertTrue(taskListPanel.isListMatching(tasks));
+
+        //Now add something to file 1 (file1 : 1-8 | file2 : 1-7, 9)
+        tasks = TestUtil.removeTasksFromList(tasks, td.task8);
+        tasks = TestUtil.removeTasksFromList(tasks, td.task7);
+        commandBox.runCommand("DELETE 8");
+        commandBox.runCommand("DELETE 7");
+        commandBox.runCommand(td.task9.getAddCommand());
+        tasks = TestUtil.addTasksToList(tasks, td.task9);
+        assertTrue(taskListPanel.isListMatching(tasks));
+        //(file1 : 1-6, 9 | file2 : 1-7, 9)
+
         //Load back the new file and check if 8 is deleted
+        tasks = TestUtil.addTasksToList(td.getTypicalTasks(), td.task9);
         commandBox.runCommand("LOAD " + file2);
-        TestUtil.removeTasksFromList(tasks, td.task8);
         assertTrue(taskListPanel.isListMatching(tasks));
     }
 
