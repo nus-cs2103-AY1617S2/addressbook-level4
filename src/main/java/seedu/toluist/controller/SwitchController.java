@@ -55,9 +55,8 @@ public class SwitchController extends Controller {
         return new CommandResult(String.format(
                 messageTemplate,
                 switchPredicate.getDisplayName(),
-                UiStore.getInstance().getShownTasks().stream().filter(switchPredicate.getPredicate()).collect(
-                        Collectors.toList()).size(),
-                UiStore.getInstance().getShownTasks().size()));
+                UiStore.getInstance().getShownTasks().size(),
+                UiStore.getInstance().getTasks().size()));
     }
 
     public HashMap<String, String> tokenize(String command) {
