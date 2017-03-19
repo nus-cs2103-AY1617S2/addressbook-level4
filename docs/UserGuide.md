@@ -12,11 +12,11 @@ By : `W09-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. Introduction
 
-Welcome to Suru, the innovative personal assistant designed to help manage your tasks like a boss. This guide will help you to get Suru installed on your computer and show you how to get the most out of your chatbot.
+Welcome to Suru, the innovative personal assistant designed to help manage your tasks like a boss. This guide will help you install Suru on your computer and show you how to get the most out of your chatbot.
 
 ## 2. Quick Start
 
-0. Before we begin, please ensure you have [Java version `1.8.0_60`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or later installed in your Computer.
+0. Before we begin, please ensure you have [Java version `1.8.0_60`](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) or later installed in your computer.
 
    > Having any Java 8 version is not enough.
    > This app will not work with earlier versions of Java 8.
@@ -24,11 +24,11 @@ Welcome to Suru, the innovative personal assistant designed to help manage your 
 1. Download the latest `suru.jar` from the [releases](../../../releases) tab.
 2. Copy the file to a folder you want to use as the home folder for Suru.
 3. Double-click the file to start Suru. The app should start in a few seconds and you should see an interface similar to this: <img src="images/Ui.jpg" width="600">
-4. Type a command in the command box and press <kbd>Enter</kbd> to execute it.
+4. Type a command in the command box and press <kbd>Enter</kbd> to execute it
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some sample commands you can try:
    * **`list`** : lists all of your tasks
-   * **`add`**` write essay `**`by`**` 13/3/17` : Adds a task "write essay" with a due date "13/3/17"
+   * **`add`**` write essay `**`by`**` 13/3/17` : adds a task "write essay" with a due date "13/3/17"
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#3-features) section below for details of each command.
@@ -36,16 +36,16 @@ Welcome to Suru, the innovative personal assistant designed to help manage your 
 
 ## 3. Features
 
-> **Command Format**
+> **Command format**
 >
-> * Words in `UPPER_CASE` are the parameters.
+> * Items in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
 > **Saving the data**
 >
-> By default, task manager data is saved in the hard disk automatically after commands that change the data.
+> By default, data is saved in the hard disk automatically after each command.
 There is no need to save manually.
 
 ### 3.1. Viewing usage instructions: `help`
@@ -55,9 +55,11 @@ Suru shows you a list of common commands and how to use them to manage your task
 
 Format: `help`
 
-> Command-specific tips are also shown if you happen to enter an incorrect command or incomplete information. e.g. typing `ad` instead of `add`.
+> Command-specific tips are also shown if you happen to enter an incorrect command or incomplete information e.g. typing `ad` instead of `add`.
 
-### 3.2. Adding a task with no specified completion date: `add`
+### 3.2. Adding a task 
+
+#### 3.2.1. Adding a task with no specified completion date: `add`
 
 Adds a task with just the task description.
 
@@ -71,7 +73,7 @@ Examples:
 
 * `add write essay`
 
-### 3.3. Adding a task with a due date: `add DESCRIPTION by DUE_DATE`
+#### 3.2.2. Adding a task with a due date: `add DESCRIPTION by DUE_DATE`
 
 Adds a task with a due date.
 
@@ -83,7 +85,7 @@ Examples:
 
 * `add write essay by 13/7/17`
 
-### 3.4. Adding a task with a start date: `add DESCRIPTION from START_DATE`
+#### 3.2.3. Adding a task with a start date: `add DESCRIPTION from START_DATE`
 
 Adds a task with a start date.
 
@@ -95,7 +97,7 @@ Examples:
 
 * `add write essay from 13/7/17`
 
-### 3.5. Adding a task with a duration: `add DESCRIPTION from START_DATE to END_DATE`
+#### 3.2.4. Adding a task with a duration: `add DESCRIPTION from START_DATE to END_DATE`
 
 Adds a task with a duration.
 
@@ -107,7 +109,7 @@ Examples:
 
 * `add write essay from 13/7/17 to 15/7/17`
 
-### 3.6. Adding a task with tags: `add DESCRIPTION #TAGNAME`
+#### 3.2.5. Adding a task with tags: `add DESCRIPTION #TAGNAME`
 
 Adds a task with tags.
 
@@ -122,7 +124,9 @@ Examples:
 * `add write essay by 15/7/17 #blogging`
 * `add write essay #blogging`
 
-### 3.7. Listing all tasks: `list`
+### 3.3. Listing
+
+#### 3.3.1. Listing all tasks: `list`
 
 Suru displays a list of all your tasks.
 
@@ -130,25 +134,25 @@ Suru displays a list of all your tasks.
 
 Format: `list`
 
-### 3.8. Listing unchecked tasks: `list unchecked`
+#### 3.3.2. Listing unchecked tasks: `list unchecked`
 
 Suru displays a list of all unchecked tasks in your task manager.
 
 Format: `list unchecked`
 
-### 3.9. Listing checked tasks: `list checked`
+#### 3.3.3. Listing checked tasks: `list checked`
 
 Shows a list of all checked tasks in your task manager.
 
 Format: `list checked`
 
-### 3.10. Listing tagged tasks: `list #TAGNAME`
+#### 3.3.4. Listing tagged tasks: `list #TAGNAME`
 
 Shows a list of all tagged tasks in your task manager.
 
 Format: `list #TAGNAME`
 
-### 3.11. Edit task: `edit INDEX`
+### 3.4. Edit task: `edit INDEX [TASK DETAILS]`
 
 Edits a task at the specified `INDEX`.
 
@@ -162,15 +166,15 @@ Format: `edit INDEX`
 
 Examples:
 
-* `list`
-`edit 1 buy groceries by 13/5/17`
+* `list`<br>
+`edit 1 buy groceries by 13/5/17`<br>
   Edits the description of the selected task to `buy groceries` and due date to `13/5/17`.
 
-* `list`
-`edit 2 buy groceries`
+* `list`<br>
+`edit 2 buy groceries`<br>
  Edits the description of the 2nd task in the list to be `buy groceries`.
  
-### 3.12. Edit tags: `edit INDEX #TAGNAME`
+#### 3.4.1. Edit tags: `edit INDEX #TAGNAME`
 
 Edit tags at the specified task `INDEX`.
 
@@ -182,11 +186,11 @@ Format: `edit INDEX #TAGNAME`
 
 Examples:
 
-* `list`
-`edit 1 #home #kitchen`
+* `list`<br>
+`edit 1 #home #kitchen`<br>
   Edits the tags in the 1st task to home and kitchen.
 
-### 3.13. Deleting a task: `delete INDEX`
+### 3.5. Deleting a task: `delete INDEX`
 
 Deletes the selected task from your task manager.
 
@@ -194,42 +198,43 @@ Deletes the selected task from your task manager.
 
 Format: `delete INDEX`
 
-> * Deletes the task at the specified `INDEX`.
 > * The index refers to the index number shown in the last listing presented by Suru.
 > * The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the task at the specified `INDEX`.
+
 
 Examples:
 
-* `list`
-  `delete 2`
+* `list`<br>
+  `delete 2`<br>
   Deletes the 2nd task in the list.
   
-### 3.14. Deleting tags in a task: `edit INDEX #`
+#### 3.5.1 Deleting tags in a task: `delete INDEX #TAG_NAME`
 
 Deletes tags in the selected task from your task manager.
 
-Format: `edit INDEX #`
+Format: `delete INDEX #TAG_NAME`
 
-> * Deletes the tags in the task at the specified `INDEX`.
 > * The index refers to the index number shown in the last listing presented by Suru.
 > * The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the tag with specified `TAG_NAME` in the task at the specified `INDEX`.
 
 Examples:
 
-* `list`
-  `edit 2 #`
+* `list`<br>
+  `delete 2 #homework`<br>
   Deletes the tags in the 2nd task in the list.
 
-### 3.15. Undoing a command: `undo`
+### 3.6. Undoing a command: `undo`
 
 Reverses your previous command.
 
 Format: `undo`
 
-> Only reverses operations that manipulate data, i.e. `add`, `edit` and `delete`.
+> Only reverses operations that alter data, i.e. `add`, `edit` and `delete`.
 
 
-### 3.16. Redoing an undone command: `redo`
+### 3.7. Redoing an undone command: `redo`
 
 Reverses your previous undo operation.
 
@@ -237,7 +242,48 @@ Format: `redo`
 
 > Only reverses the previous `undo` operation.
 
-### 3.17. Finding all tasks containing a keyword: `find KEYWORD` 
+
+### 3.8. Checking off a task: `check INDEX`
+
+Checks off a task to indicate that it has been completed.
+
+Format: `check INDEX`
+
+> * The index refers to the index number shown in the last listing presented by Suru.
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * Checks off the task at the specified `INDEX`.
+
+Examples:
+
+* `list`<br>
+  `check 2`<br>
+  Checks off the 2nd task in the listing.
+* `find Essay`<br>
+  `check 1`<br>
+  Checks off the 1st task in the results of the `find` command.
+
+### 3.9. Unchecking a task: `uncheck INDEX`
+
+Unchecks a task to indicate that it is incomplete.
+
+Format: `uncheck INDEX`
+
+> * The index refers to the index number shown in the last listing presented by Suru.
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * Unchecks the task at the specified `INDEX`.
+
+Examples:
+
+* `list`<br>
+  `uncheck 2`<br>
+  Unchecks the 2nd task in the listing.
+* `find Essay`<br>
+  `uncheck 1`<br>
+  Unchecks the 1st task in the results of the `find` command.
+  
+### 3.10. Search 
+
+#### 3.10.1. Finding all tasks containing a keyword: `find KEYWORD [MORE_KEYWORDS]` 
 
 Finds tasks whose properties contain any of your given keywords.
 
@@ -245,8 +291,8 @@ Finds tasks whose properties contain any of your given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is **NOT** case sensitive. e.g `write` will match `Write`.
-> * The order of the keywords does not matter. e.g. `Write Essay` will match `Essay Write`.
+> * The search is **NOT** case sensitive e.g `write` will match `Write`.
+> * The order of the keywords does not matter e.g. `Write Essay` will match `Essay Write`.
 > * All properties are searched e.g. `DUE_DATE`, `TAGS`, `DESCRIPTION` etc.
 > * Only full words will be matched e.g. `Ess` will not match `Essay`.
 > * Tasks matching at least one keyword will be returned
@@ -254,86 +300,29 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find Essay`
+* `find Essay`<br>
   Returns `Write Essay` and `essay writing`.
-* `find Essay Writing Competition`
+* `find Essay Writing Competition`<br>
   Returns any task having keywords `Essay`, `Writing`, or `Competition`.
-* `find 17/7/17`
+* `find 17/7/17`<br>
   Returns any task having the date `17/7/17`.
 
-### 3.18. Finding unchecked tasks containg a keyword: `find unchecked KEYWORD`
+#### 3.10.2. Finding unchecked tasks containg a keyword: `find unchecked KEYWORD`
 
 Finds unchecked tasks whose properties contain any of your given keywords.
 
 Format: `find unchecked KEYWORD [MORE_KEYWORDS]`
 
-> Similar to [regular `find` feature](#315-finding-all-tasks-containing-a-keyword-find-keyword), but only searches through `unchecked` tasks
+> Similar to [regular `find` feature](#315-finding-all-tasks-containing-a-keyword-find-keyword), but only searches through `unchecked` tasks.
 
-### 3.19. Finding checked tasks containing a keyword: `find checked KEYWORD`
+#### 3.10.3. Finding checked tasks containing a keyword: `find checked KEYWORD`
 Finds checked tasks whose properties contain any of the given keywords.
 
 Format: `find checked KEYWORD [MORE_KEYWORDS]`
 
-> Similar to [regular `find` feature](#315-finding-all-tasks-containing-a-keyword-find-keyword), but only searches through `checked` tasks
+> Similar to [regular `find` feature](#315-finding-all-tasks-containing-a-keyword-find-keyword), but only searches through `checked` tasks.
 
-### 3.20. Checking off a task: `check INDEX`
-
-Checks off a task to indicate that it has been completed.
-
-Format: `check INDEX`
-
-> * Checks off the task at the specified `INDEX`.
-> * The index refers to the index number shown in the last listing presented by Suru.
-> * The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`
-  `check 2`
-  Checks off the 2nd task in the listing.
-* `find Essay`
-  `check 1`
-  Checks off the 1st task in the results of the `find` command.
-
-### 3.21. Unchecking a task: `uncheck INDEX`
-
-Unchecks a task to indicate that it is incomplete.
-
-Format: `uncheck INDEX`
-
-> * Unchecks the task at the specified `INDEX`.
-> * The index refers to the index number shown in the last listing presented by Suru.
-> * The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`
-  `uncheck 2`
-  Unchecks the 2nd task in the listing.
-* `find Essay`
-  `uncheck 1`
-  Unchecks the 1st task in the results of the `find` command.
-
-### 3.22. Viewing usage instructions: `help`
-
-Shows a list of commands that Suru accepts.
-
-Format: `help`
-
-### 3.23. Viewing specific command's usage instructions: `help COMMAND`
-
-Shows usage instructions for a specific command.
-
-Format: `help COMMAND`
-
-> Command-specific tips are also shown if you happen to enter an incorrect command or incomplete information. e.g. typing `add` without any information following.
-
-Examples:
-
-* `help add`
-Shows usage instructions for the `add` command.
-
-### 3.24. Defining save destination: `saveto FILE_PATH`
+### 3.11. Defining save destination: `saveto FILE_PATH`
 Allows you to define the destination Suru should save to.
 
 Format: `saveto FILE_PATH`
@@ -342,9 +331,9 @@ Format: `saveto FILE_PATH`
 
 Examples:
 
-* `saveto C:/Suru`
+* `saveto C:/Suru/suru-data.xml`
 
-### 3.25. Defining target to load from: `loadfrom FILE_PATH`
+### 3.12. Defining target to load from: `loadfrom FILE_PATH`
 Allows you to define the target Suru should load from.
 
 Format: `loadfrom FILE_PATH`
@@ -353,13 +342,13 @@ Format: `loadfrom FILE_PATH`
 
 Examples:
 
-* `loadfrom C:/Suru`
+* `loadfrom C:/Suru/suru-data.xml`
 
-### 3.26. Adding reminders to a task: `add DESCRIPTION reminders: FREQUENCY`
+### 3.13. Adding reminders to a task: `add DESCRIPTION reminders: FREQUENCY`
 
 Adds a new task with reminders.
 
-Format: `add DESCRIPTION reminders FREQUENCY:`
+Format: `add DESCRIPTION reminders FREQUENCY`
 
 > Tasks will be added to your task manager with reminders that will notify you at your desired frequency.
 
@@ -380,7 +369,7 @@ Examples:
 * `add write article on blog from 27/01/17 to 26/06/17 reminders: every week`
 
 
-### 3.27. Editing reminders of a task: `edit INDEX reminders: FREQUENCY`
+### 3.14. Editing reminders of a task: `edit INDEX reminders: FREQUENCY`
 
 Edits an existing task's reminders.
 
@@ -389,19 +378,19 @@ Format: `edit INDEX reminders: FREQUENCY`
 
 Examples:
 
-* `list`
+* `list`<br>
 `edit 1 reminders: daily`
 
-### 3.28. Removing reminders from a task: `edit INDEX reminders:`*`(EMPTY)`*
+### 3.15. Removing reminders from a task: `edit INDEX reminders:`*`(EMPTY)`*
 
 Removes an existing task's reminders.
 
 Format:`edit INDEX reminders:`*`(EMPTY)`*
 
-* `edit 2 buy groceries reminders:`
+* `edit 2 buy groceries reminders:`<br>
   Edits the description of the 2nd task to be `buy groceries` and clears all existing reminders.
 
-### 3.29. Adding a recurring task: `add DESCRIPTION recurring: FREQUENCY`
+### 3.16. Adding a recurring task: `add DESCRIPTION recurring: FREQUENCY`
 
 Add a recurring task.
 
@@ -426,12 +415,12 @@ Examples:
 * `add write essay recurring: weekly`
 * `add write essay recurring: every 2 weeks`
 
-### 3.30. Sorting tasks: `sort by PROPERTY`
+### 3.17. Sorting tasks: `sort by PROPERTY`
 Suru sorts your tasks by a chosen property.
 
 Format: `sort by PROPERTY`
 
-> Tasks will be sorted and listed by the chosen property
+> Tasks will be sorted and listed by the chosen property.
 
 Accepted Properties:
 
@@ -447,10 +436,10 @@ Examples:
 * `sort by start`
 * `sort by end`
 
-### 3.31. Using hotkeys: `-HOTKEY`
-Suru recognizes a hotkey combination and executes the required operation.
+### 3.18. Using shorthand: `-SHORTHAND`
+Suru recognizes a shorthand combination and executes the corresponding operation.
 
-Format: `-HOTKEY`
+Format: `-SHORTHAND`
 
 Accepted Hotkeys:
 
@@ -465,15 +454,7 @@ Examples:
 * `-s due date`: sorts by `due date`
 * `-ls`: lists all tasks
 
-### 3.32. Adding a task to Google Calendar: `addGTask DESCRIPTION`
-Add tasks to Google Calendar.
-
-Format: `addGTask DESCRIPTION`
-
-Examples:
-* `addGTask meet team for dinner`
-
-### 3.33. Exiting the app: `exit`
+### 3.19. Exiting the app: `exit`
 Exits Suru.
 
 Format: `exit`
@@ -486,7 +467,7 @@ Format: `exit`
 
 2. Does Suru sync my data across different devices?
 
-    **A**: Unfortunately, Suru currently does not sync your data across different devices. Alternatively, you can specify your save location in a synced folder (such as a dropbox folder) on your computer using the [`saveto`](#322-defining-save-destination-saveto-folder-path) command. Thereafter, simply use the [`loadfrom`](#323-defining-target-to-load-from-loadfrom-folder-path) command on your other device to retrieve your synchronized data.
+    **A**: Unfortunately, Suru currently does not offer support to sync your data across different devices. Alternatively, you can specify your save location in a synced folder (such as a Dropbox folder) on your computer using the [`saveto`](#322-defining-save-destination-saveto-folder-path) command. Thereafter, simply use the [`loadfrom`](#323-defining-target-to-load-from-loadfrom-folder-path) command on your other device to retrieve your synchronized data.
 
 3. Does Suru require internet connectivity to work?
 
@@ -494,7 +475,7 @@ Format: `exit`
 
 4. Where can we seek further assistance for Suru?
     
-    **A**: Feel free to contact us at support@surutaskmanager.com
+    **A**: Feel free to contact us at e0003823@u.nus.edu.
 
 ## 5. Command Summary
 
