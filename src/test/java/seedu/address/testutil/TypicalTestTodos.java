@@ -27,9 +27,9 @@ public class TypicalTestTodos {
             // Manually added
             laundry = new TodoBuilder().withName("Do laundry").build();
             car = new TodoBuilder().withName("Wash car").build();
-            job = new TodoBuilder().withName("Apply to job").withEndTime("11-11-17T6:00").build();
-            lunch = new TodoBuilder().withName("lunch").withStartTime("11-11-17T5:00")
-                    .withEndTime("11-11-17T6:00").build();
+            job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/2017").build();
+            lunch = new TodoBuilder().withName("lunch").withStartTime("12:00PM 11/11/2017")
+                    .withEndTime("1:00PM 11/11/2017").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

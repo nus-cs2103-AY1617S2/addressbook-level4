@@ -81,14 +81,17 @@ public class XmlAdaptedTodo {
         try {
             startTime = StringUtil.parseDate(this.startTime, "EEE MMM dd HH:mm:ss zzz yyyy");
         } catch (IllegalValueException e) {
+            e.printStackTrace();
         }
         try {
             endTime = StringUtil.parseDate(this.endTime, "EEE MMM dd HH:mm:ss zzz yyyy");
         } catch (IllegalValueException e) {
+            e.printStackTrace();
         }
         try {
             completeTime = StringUtil.parseDate(this.completeTime, "EEE MMM dd HH:mm:ss zzz yyyy");
         } catch (IllegalValueException e) {
+            e.printStackTrace();
         }
         return new Todo(name, startTime, endTime, completeTime, tags);
     }

@@ -1,9 +1,8 @@
 package seedu.address.testutil;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.Name;
@@ -32,9 +31,9 @@ public class TodoBuilder {
 
     public TodoBuilder withStartTime(String strDateTime) throws IllegalValueException {
         try {
-            this.todo.setStartTime(new SimpleDateFormat("yy-MM-dd'T'HH:mm").parse(strDateTime));
+            this.todo.setStartTime(StringUtil.parseDate(strDateTime,  AddCommand.DATE_FORMAT));
             return this;
-        } catch (ParseException e) {
+        } catch (IllegalValueException e) {
             e.printStackTrace();
         }
         return null;
@@ -42,9 +41,9 @@ public class TodoBuilder {
 
     public TodoBuilder withEndTime(String strDateTime) throws IllegalValueException {
         try {
-            this.todo.setEndTime(new SimpleDateFormat("yy-MM-dd'T'HH:mm").parse(strDateTime));
+            this.todo.setEndTime(StringUtil.parseDate(strDateTime, AddCommand.DATE_FORMAT));
             return this;
-        } catch (ParseException e) {
+        } catch (IllegalValueException e) {
             e.printStackTrace();
         }
         return null;

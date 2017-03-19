@@ -45,7 +45,7 @@ public class CompleteCommandTest extends TodoListGuiTest {
             ab.addTodo(new Todo(td.job));
             ab.addTodo(new Todo(td.lunch));
         } catch (UniqueTodoList.DuplicateTodoException e) {
-            assert false : "TodoLists should not have duplicate todos";
+            e.printStackTrace();
         }
         return ab;
     }
