@@ -41,8 +41,13 @@
 						<Label fx:id="description" styleClass="cell_small_label" text="\$description" />
 					</children>
 				</HBox>
-				<Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
-				<Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+				<FlowPane>
+					<children>
+						<Label styleClass="cell_small_label" text="Date: " />
+						<Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+            <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+					</children>
+				</FlowPane>
 				<FlowPane fx:id="tags" />
 			</children>
 		</VBox>
