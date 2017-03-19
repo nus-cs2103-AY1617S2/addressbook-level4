@@ -91,4 +91,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input into its inverse command for undo command.
+     *
+     * @param userInput full user input string
+     * @return the inverse of the command based on the user input
+     */
+    public Command parseInverseCommand(String userInput) {
+        return this.parseCommand(userInput); // Stub
+    }
 }
