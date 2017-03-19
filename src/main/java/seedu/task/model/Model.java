@@ -55,5 +55,7 @@ public interface Model {
     /** Updates the filer of the filtered task list to filter by done or undone task*/
     void updateFilteredTaskList(boolean value);
 
+	/** Changes the file path for data to be saved in*/
+    void changeFilePath(String pathName);
 
 }

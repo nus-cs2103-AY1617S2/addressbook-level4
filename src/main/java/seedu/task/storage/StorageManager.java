@@ -8,6 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.events.model.FilePathChangedEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
@@ -76,6 +77,11 @@ public class StorageManager extends ComponentManager implements Storage {
 
         logger.fine("Attempting to write to data file: " + filePath);
         taskManagerStorage.saveTaskManager(taskManager, filePath);
+    }
+    
+    @Override
+    @Subscribe
+    public void handleFilePathChangedEvent(FilePathChangedEvent event) {
     }
 
 
