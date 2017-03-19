@@ -36,14 +36,16 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         // update tags
         command = "update 2 tags/tag2";
         commandBox.runCommand(command);
-        Task task2 = new Task(newDescription, null, null, new ArrayList<>(Arrays.asList(tag2)));
+        Task task2 = new Task(newDescription, null, null);
+        task2.replaceTags(new ArrayList<>(Arrays.asList(tag2)));
         assertFalse(isTaskShown(task));
         assertTrue(isTaskShown(task2));
 
         // update tags with new tags
         command = "update 2 tags/tag1 tag3";
         commandBox.runCommand(command);
-        Task task3 = new Task(newDescription, null, null, new ArrayList<>(Arrays.asList(tag1, tag3)));
+        Task task3 = new Task(newDescription, null, null);
+        task3.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag3)));
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertTrue(isTaskShown(task3));
@@ -83,7 +85,8 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         command = "update " + eventIndex + " " + newerTaskDescription + " enddate/" + newerEndDate + " tags/tag1 tag3";
         commandBox.runCommand(command);
-        Task task4 = new Task(newerTaskDescription, null, newerEndDate, new ArrayList<>(Arrays.asList(tag1, tag3)));
+        Task task4 = new Task(newerTaskDescription, null, newerEndDate);
+        task4.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag3)));
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
@@ -128,7 +131,8 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         command = "update " + eventIndex + " " + newerTaskDescription +
                   " enddate/" + newerEndDate + " tags/tag1 "  + " startdate/" + newerStartDate;
         commandBox.runCommand(command);
-        Task task4 = new Task(newerTaskDescription, newerStartDate, newerEndDate, new ArrayList<>(Arrays.asList(tag1)));
+        Task task4 = new Task(newerTaskDescription, newerStartDate, newerEndDate);
+        task4.replaceTags(new ArrayList<>(Arrays.asList(tag1)));
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));

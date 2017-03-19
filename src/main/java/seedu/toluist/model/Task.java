@@ -38,14 +38,9 @@ public class Task implements Comparable<Task> {
     }
 
     public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        this(description, startDateTime, endDateTime, new TreeSet<Tag>());
-    }
-
-    public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, Collection<Tag> tags) {
         this.setDescription(description.trim());
         this.setStartDateTime(startDateTime);
         this.setEndDateTime(endDateTime);
-        this.allTags = new TreeSet<>(tags);
         validate();
     }
 

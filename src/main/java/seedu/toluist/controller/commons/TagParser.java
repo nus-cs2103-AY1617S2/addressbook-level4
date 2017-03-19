@@ -16,11 +16,11 @@ public class TagParser {
     public static Set<Tag> parseTags(String tagsString) {
         String[] tagStrings = tagsString == null ? new String[] {} : tagsString.split(TAGS_SEPARATOR_REGEX);
         List<String> tagList = Arrays.asList(tagStrings);
-        Set<Tag> tags = (Set<Tag>) tagList.
-                               stream().
-                               filter(tagString -> !tagString.isEmpty()).
-                               map(tagString -> new Tag((String) tagString)).
-                               collect(Collectors.toSet());
+        Set<Tag> tags = (Set<Tag>) tagList
+                .stream()
+                .filter(tagString -> !tagString.isEmpty())
+                .map(tagString -> new Tag((String) tagString))
+                .collect(Collectors.toSet());
         return tags;
     }
 }
