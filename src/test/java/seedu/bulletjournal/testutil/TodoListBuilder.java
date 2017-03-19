@@ -19,7 +19,7 @@ public class TodoListBuilder {
         this.todoList = todoList;
     }
 
-    public TodoListBuilder withPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
+    public TodoListBuilder withPerson(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
         return this;
     }

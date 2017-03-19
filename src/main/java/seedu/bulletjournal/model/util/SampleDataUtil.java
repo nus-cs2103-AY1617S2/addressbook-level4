@@ -9,7 +9,7 @@ import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.TaskName;
-import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.bulletjournal.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
@@ -47,7 +47,7 @@ public class SampleDataUtil {
                 sampleAB.addTask(samplePerson);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateTaskException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
         }
     }
