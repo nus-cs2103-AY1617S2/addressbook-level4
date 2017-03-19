@@ -20,7 +20,6 @@
 			<padding>
 				<Insets bottom="10" left="10" right="7" top="10" />
 			</padding>
-
 			<children>
 				<HBox spacing="5" alignment="CENTER_LEFT">
 					<padding>
@@ -46,6 +45,7 @@
 					<children>
 						<Label styleClass="cell_small_label" text="Date: " />
 						<Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+            <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
 					</children>
 				</FlowPane>
 				<FlowPane fx:id="tags" />

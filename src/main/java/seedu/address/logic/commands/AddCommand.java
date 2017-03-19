@@ -9,7 +9,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 
@@ -35,7 +34,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String deadline, String description, String id, Set<String> tags)
+    public AddCommand(String name, String deadline, String description, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -43,12 +42,22 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Deadline(deadline),
-                new Description(description),
-                new IdentificationNumber(id),
+                CreateDeadline(deadline),
+                CreateDescription(description),
+                //new IdentificationNumber(id),
                 new UniqueTagList(tagSet)
         );
     }
+
+    //@@author A0138377U
+    public Deadline CreateDeadline(String deadline) throws IllegalValueException {
+        return (deadline == null ? new Deadline() : new Deadline(deadline));
+    }
+
+    public Description CreateDescription(String description) {
+        return (description == null ? new Description() : new Description(description));
+    }
+    //@@author
 
     @Override
     public CommandResult execute() throws CommandException {
