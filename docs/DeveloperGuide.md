@@ -205,28 +205,28 @@ You can find classes used by multiple components in the `seedu.geekeep.commons` 
 
 <h2 id="user-content-3">3. Implementation</h2>
 
-### Logging
+<h3 id="user-content-logging">Logging</h3>
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
+You can find implementation of logging in `java.util.logging` package. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#user-content-config))
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
+* You can control the logging level using the `logLevel` setting in the configuration file
+  (See [Configuration](#user-content-config)).
+* To create a `Logger` for a class and log messages according to
+  the specified logging level, you can use `LogsCenter.getLogger(Class)`.
 * Currently log messages are output through: `Console` and to a `.log` file.
 
 **Logging Levels**
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
+* `SEVERE` : Critical problem detected which may possibly cause the termination of the application.
+* `WARNING` : Can continue, but with caution.
+* `INFO` : Information showing the noteworthy actions by the App.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
-  e.g. print the actual list instead of just its size
+  e.g. print the actual list instead of just its size.
 
 <h3 id="user-content-config">Configuration</h3>
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file. By default, `config.json` will be created, when the configuration file is missing. To modify the configuration, you can either directly change the default `config.json` file or create another json file and pass it to the App as an application parameter before running.
+You can control certain properties of the application (e.g app name, logging level) through the configuration file. By default, `config.json` will be created, when the configuration file is missing. To modify the configuration, you can either directly change the default `config.json` file or create another json file and pass it to the app as an application parameter before running.
 
 A typical configuration file should have the following format:
 ```json
@@ -238,6 +238,7 @@ A typical configuration file should have the following format:
   "geeKeepName" : "MyGeeKeep"
 }
 ```
+Note: If you are going to create your own configuration file, remember to stick to the format given above.
 
 **[⬆ back to top](#user-content-table)**
 
