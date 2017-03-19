@@ -1,6 +1,8 @@
 package seedu.ezdo.model;
 
 import java.util.EmptyStackException;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -11,7 +13,11 @@ import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
 import seedu.ezdo.commons.util.CollectionUtil;
 import seedu.ezdo.commons.util.StringUtil;
+import seedu.ezdo.model.tag.Tag;
+import seedu.ezdo.model.todo.DueDate;
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
@@ -135,9 +141,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    @Override
+   /* @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, new Optional(), new Optional(), new Optional())));
+    } */
+    
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority, Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
     }
 
     @Override
@@ -226,23 +237,48 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
-
-        NameQualifier(Set<String> nameKeyWords) {
+        private Optional<Priority> priority;
+        private Optional<StartDate> startDate;
+        private Optional<DueDate> dueDate;
+        private Set<String> tags;
+        
+        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority, Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
             this.nameKeyWords = nameKeyWords;
+            this.priority = priority;
+            this.startDate = startDate;
+            this.dueDate = dueDate;
+            this.tags = tags;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent()
-                    && !task.getDone();
+            String taskStartDate = task.getStartDate().toString();
+            String taskDueDate = task.getDueDate().toString();
+            Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
+            
+            return (nameKeyWords.contains("") || nameKeyWords.stream()
+                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
+                    && !task.getDone()
+                    && (!priority.isPresent() || task.getPriority().toString().equals(priority.get().toString()))
+                    && (!startDate.isPresent() || (taskStartDate.length() != 0) && taskStartDate.substring(0, startDate.get().toString().length()).equals(startDate.get().toString()))
+                    && (!dueDate.isPresent() || (taskDueDate.length() != 0) && taskDueDate.substring(0, dueDate.get().toString().length()).equals(dueDate.get().toString()))
+                    && (taskTagStringSet.containsAll(tags));
         }
 
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+        
+        public Set<String> convertToTagStringSet(Set<Tag> tags) {
+            Object[] tagArray = tags.toArray();
+            Set<String> tagSet = new HashSet<String>();
+            
+            for (int i = 0; i < tags.size(); i++) {
+                tagSet.add(((Tag)tagArray[i]).tagName);
+            }
+            
+            return tagSet;
         }
     }
 
