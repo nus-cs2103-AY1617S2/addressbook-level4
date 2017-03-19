@@ -1,6 +1,7 @@
 package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -46,8 +47,8 @@ public class UpdateTaskController extends Controller {
         String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        int index = IndexParser.getIndex(indexToken);
-        Task task = uiStore.getTask(index);
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getTasks().size());
+        Task task = uiStore.getTasks(indexes).get(0);
 
         String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
         LocalDateTime startDateTime = DateTimeUtil.parseDateString(startDateToken);

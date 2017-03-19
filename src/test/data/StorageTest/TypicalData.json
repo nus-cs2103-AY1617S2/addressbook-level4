@@ -1,9 +1,9 @@
 {
   "allTasks" : [ {
     "allTags" : [ {
-      "tagName" : "work"
-    }, {
       "tagName" : "lewis"
+    }, {
+      "tagName" : "work"
     } ],
     "description" : "clean the house while Lewis is gone",
     "startDateTime" : null,
@@ -12,9 +12,9 @@
     "priority" : "LOW"
   }, {
     "allTags" : [ {
-      "tagName" : "work"
-    }, {
       "tagName" : "louis"
+    }, {
+      "tagName" : "work"
     } ],
     "description" : "do assignments for Louis",
     "startDateTime" : null,

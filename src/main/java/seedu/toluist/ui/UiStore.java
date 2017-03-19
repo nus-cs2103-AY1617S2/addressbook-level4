@@ -39,10 +39,6 @@ public class UiStore {
         this.viewedTasks = tasks;
     }
 
-    public Task getTask(int index) {
-        return getTasks().get(index);
-    }
-
     /**
      * Returns list of tasks are currently shown on the Ui
      */
@@ -56,6 +52,9 @@ public class UiStore {
         List<Task> shownTasks = getTasks();
         ArrayList<Task> tasks = new ArrayList<>();
         for (int index : indexes) {
+            if (index < 1 || index > shownTasks.size()) {
+                continue;
+            }
             tasks.add(shownTasks.get(index - 1));
         }
         return tasks;
