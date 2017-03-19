@@ -144,6 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
         } catch (ParseException pe) {
             logger.info("Parse exception while checking if task date valid");
+            throw new DateException("Error parsing dates!");
         }
     }
     //=========== Filtered Task List Accessors =============================================================
