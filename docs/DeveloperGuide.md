@@ -389,7 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a ... | I want to ... | So that I can... |
 |--- | :--- | :--- | :--- |
-| `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App |
+| `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the app |
 | `* * *` | user | add a new task with title | add a floating task |
 | `* * *` | user | add a new task with title and ending time| add a deadline |
 | `* * *` | user | add a new task with title, starting time and ending time| add an event |
