@@ -34,7 +34,7 @@
                 <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                     <children>
                         <AnchorPane fx:id="taskListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-                        <AnchorPane fx:id="sidePanelPlaceholder" HBox.hgrow="ALWAYS" />
+                        <AnchorPane fx:id="sidePanelPlaceholder" maxWidth="300" prefWidth="300" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
             </children>
