@@ -13,7 +13,9 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 ## 1. Introduction
 
-Our application doTASK helps to improve your productivity and accountability in managing your daily activities. The main feature of our application is its prioritisation framework, which lets you focus on the important things. This user guide will provide you with the basic information you'll need in setting up doTASK, as well as how to use it to make you more efficient in prioritising your tasks.
+Our application doTASK helps to improve your productivity and accountability in managing your daily activities. The main feature of our application is its
+prioritisation framework, which lets you focus on the important things. This user guide will provide you with the basic information you'll need in setting
+up doTASK, as well as guide you on how to use it to make you more efficient in prioritising your tasks.
 
 ## 2. Quick Start
 
@@ -26,9 +28,8 @@ Our application doTASK helps to improve your productivity and accountability in 
 4. Double-click on the file to start the application. The GUI should appear in a few seconds.<br>
 > <img src="images/startup_screen.jpg" width="600">
 
-5. Get started by adding your first task that you have in mind! Refer to the "2. Features" for further instructions. <br>
+5. Get started by adding your first task that you have in mind! Refer to **3. Features** for further instructions. <br>
 > <img src="images/add_screen.jpg" width="600">
-
 
 6. After step 5, you can view your task in 3 different tabs. <br>
 
@@ -59,7 +60,7 @@ Our application doTASK helps to improve your productivity and accountability in 
 
 ### 3.1. Viewing help : `help`
 Allows you to view the list of commands available in doTASK. <br>
-Format: `help` <br>
+Format: `help`
 
 
 > Help is shown if you enter an incorrect command e.g. `asdf` <br>
@@ -68,27 +69,28 @@ Format: `help` <br>
 
 ### 3.2. Switching tabs: `switch`
 Switch the current tab to the next tab. <br>
-
 Format: `switch`
 
 > There will be 4 tabs, which can be toggled using this command.
 > The order in which the tabs will be switched is as follows: 'Priority' -> 'Overview' -> 'Today' -> 'Priority'.
 
 ### 3.3. Adding a Task : `add`
-Adds a task to the task manager. <br>
+Adds a task to the task manager.
 > doTASK currently supports the use of floating tasks and tasks with a single deadline.<br>
+> * Floating tasks are tasks that have no deadlines, and can be completed at any time. <br>
+> * Tasks with deadlines will be complemented with reminders, so you won't forget to do them!
 
 Adds a floating task to the task manager. <br>
 Format: `add TASK_NAME p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
-	 > `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
-	 > `ANY_INFO` allows you to key in details with regards to the task [optional].<br>
-	 > `TAGS` allows you to assign tags to the tasks [optional].
+  > * `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
+	 > * `ANY_INFO` allows you to key in details with regards to the task [optional].<br>
+	 > * `TAGS` allows you to assign tags to the tasks [optional].
 
 Adds a task, with a specified deadline, to the task manager. <br>
 Format: `add TASK_NAME d/DEADLINE p/PRIORITY_LEVEL [i/ANY_INFO] [t/TAGS]`
-     > `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year". <br>
-	 > If no year is specified, the current year of the system will be used as the year of the deadline.<br>
-	 > The month must be typed out as the first three letters of the month.
+   > * `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year". <br>
+	 > * If no year is specified, the current year of the system will be used as the year of the deadline.<br>
+	 > * The month must be typed out as the first three letters of the month.
 
 
 Examples:
@@ -143,11 +145,10 @@ Examples:
 
 ### 3.6. Deleting a task: `delete`
 Deletes the specified task.<br>
-
 Format: `delete INDEX_NUMBER`
 
-> Task labeled INDEX_NUMBER will be deleted from the list.<br>
-> INDEX_NUMBER of task is shown according to the current tab.
+> The task labelled `INDEX_NUMBER` will be deleted from the list.<br>
+> `INDEX_NUMBER` of tasks is shown according to the current tab.
 
 Examples:
 * `delete 2`
@@ -157,8 +158,8 @@ Examples:
 
 Marks the specified task as complete.<br>
 Format: `complete INDEX_NUMBER`
-> Task labeled INDEX_NUMBER will be marked as completed.<br>
-> INDEX_NUMBER of task is shown according to the current tab.
+> The task labelled `INDEX_NUMBER` will be marked as completed.<br>
+> `INDEX_NUMBER` of tasks is shown according to the current tab.
 
 Examples:
 * `complete 2`
@@ -176,27 +177,27 @@ Format: `progress NUMBER_OF_DAYS`
 Examples:
 * `progress 7`
 
-### 3.9. Search for tasks: `search`
+### 3.9. Search for tasks: `find`
 
-Searches for tasks based on keywords that the user inputs.<br>
+Searches for tasks based on keywords that you want.<br>
 
-Format: `search KEYWORD`
+Format: `find KEYWORD`
 > No special characters such as ASCII whitespace is allowed.<br>
 > A popout will appear to show you the list of tasks that contains the stated `KEYWORD`.
 
 Examples:
-* `search potato`
+* `find potato`
 
 ### 3.10. Undo previous action : `undo`
 
-Undoes previous action that user made.<br>
+Undoes previous action that you've made.<br>
 Format : `undo`
 > The command last executed will be reversed.
 > Only 1 command will be reversed at a time.
 
 ### 3.11. Redo previous action : `redo`
 
-Redoes previous `undo` that user made.<br>
+Redoes previous `undo` that you've made.<br>
 Format : `redo`
 > Any previous `undo` will be reversed, in successive order.
 
@@ -211,7 +212,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 **A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
 
 **Q**: How do I clear all the tasks under a certain tag?<br>
-**A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click to confirm that you want to clear the tasks with that tag.
+**A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so. Click to confirm that you want to clear the tasks with that tag.
 
 **Q**: Will I get reminded if the deadlines of tasks are nearing?<br>
 **A**: For tasks that are due in 24 hours, there will be a notification in the system tray reminding you of the task.
@@ -252,8 +253,8 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 * **Checking progress/performance** : `progress NUMBER_OF_DAYS`<br>
 	e.g. `progress 7`
 
-* **Search for tasks** : `search KEYWORD`<br>
-	e.g. `search potato`
+* **Search for tasks** : `find KEYWORD`<br>
+	e.g. `find potato`
 
 * **Undo previous action** : `undo`<br>
 
