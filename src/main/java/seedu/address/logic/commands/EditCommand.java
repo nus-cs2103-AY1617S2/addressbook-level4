@@ -31,8 +31,7 @@ public class EditCommand extends UndoableCommand {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)[TITLE][@@VENUE][from:STARTTIME]"
-            + "[**URGENCYLEVEL][d:DESCRIPTION][to:ENDTIME][##TAG]..\n"
-            + "Example: " + COMMAND_WORD + " 1 @@Toilet";
+            + "[**URGENCYLEVEL][d:DESCRIPTION][to:ENDTIME][##TAG]..\n" + "Example: " + COMMAND_WORD + " 1 @@Toilet";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -44,8 +43,10 @@ public class EditCommand extends UndoableCommand {
     private CommandResult commandResultToUndo;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor
+     *            details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
@@ -56,7 +57,8 @@ public class EditCommand extends UndoableCommand {
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
-  //@@author A0143648Y
+
+    // @@author A0143648Y
     @Override
     public CommandResult execute() throws CommandException {
         originalToDoList = new ToDoList(model.getToDoList());
@@ -79,7 +81,7 @@ public class EditCommand extends UndoableCommand {
         updateUndoLists();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
-    
+
     @Override
     public void updateUndoLists() {
         if (previousToDoLists == null) {
@@ -101,8 +103,7 @@ public class EditCommand extends UndoableCommand {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
@@ -113,13 +114,13 @@ public class EditCommand extends UndoableCommand {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime,
-                updatedUrgencyLevel, updatedDescription, updatedTags);
+        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel,
+                updatedDescription, updatedTags);
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
@@ -130,7 +131,8 @@ public class EditCommand extends UndoableCommand {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
@@ -146,8 +148,8 @@ public class EditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime,
-                    this.urgencyLevel, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime, this.urgencyLevel,
+                    this.description, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {

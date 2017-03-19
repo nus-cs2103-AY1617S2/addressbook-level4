@@ -90,17 +90,18 @@ public class AddCommand extends UndoableCommand {
         this.toAdd = new Task(tempTitle, tempVenue, tempStartTime, tempEndTime, tempUrgencyLevel, tempDescription,
                 new UniqueTagList(tagSet));
     }
-  //@@author A0143648Y
+
+    // @@author A0143648Y
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
             originalToDoList = new ToDoList(model.getToDoList());
-            
+
             model.addTask(toAdd);
             commandResultToUndo = new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
             updateUndoLists();
-            
+
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

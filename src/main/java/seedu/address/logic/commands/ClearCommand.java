@@ -17,7 +17,8 @@ public class ClearCommand extends UndoableCommand {
     public static final String MESSAGE_RESTORED = "To-do list has been restored!";
     private ReadOnlyToDoList originalToDoList;
     private CommandResult commandResultToUndo;
-  //@@author A0143648Y
+
+    // @@author A0143648Y
     @Override
     public CommandResult execute() {
         assert model != null;
@@ -27,7 +28,6 @@ public class ClearCommand extends UndoableCommand {
         updateUndoLists();
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
 
     @Override
     public void updateUndoLists() {
