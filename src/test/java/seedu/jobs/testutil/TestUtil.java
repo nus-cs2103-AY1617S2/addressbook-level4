@@ -289,8 +289,8 @@ public class TestUtil {
     /**
      * Removes a subset from the list of tasks.
      * @param tasks The list of tasks
-     * @param tasksToRemove The subset of persons.
-     * @return The modified tasks after removal of the subset from persons.
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
@@ -300,7 +300,7 @@ public class TestUtil {
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -309,7 +309,7 @@ public class TestUtil {
     }
 
     /**
-     * Replaces tasks[i] with a person.
+     * Replaces tasks[i] with a task.
      * @param tasks The array of tasks.
      * @param task The replacement task
      * @param index The index of the task to be replaced.
@@ -341,7 +341,7 @@ public class TestUtil {
     }
 
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
-        return card.isSamePerson(task);
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

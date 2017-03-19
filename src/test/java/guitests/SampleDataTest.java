@@ -10,7 +10,7 @@ import seedu.jobs.model.task.Task;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskBookGuiTest {
     @Override
     protected TaskBook getInitialData() {
         // return null to force test app to load data from file only
@@ -24,8 +24,8 @@ public class SampleDataTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void taskBook_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }
