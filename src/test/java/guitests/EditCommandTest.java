@@ -25,11 +25,11 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby d/91234567 s/bobby@gmail.com b/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby d/91234567 s/undone b/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
         TestTask editedPerson = new TaskBuilder().withTaskName("Bobby").withDeadline("91234567")
-                .withStatus("bobby@gmail.com").withDetail("Block 123, Bobby Street 3").withTags("husband").build();
+                .withStatus("undone").withDetail("Block 123, Bobby Street 3").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -98,7 +98,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Deadline.MESSAGE_PHONE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 s/yahoo!!!");
-        assertResultMessage(Status.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(Status.MESSAGE_STATUS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 b/");
         assertResultMessage(BeginTime.MESSAGE_ADDRESS_CONSTRAINTS);
@@ -123,7 +123,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Assignment for CS2103 d/85355255 s/alice@gmail.com "
+        commandBox.runCommand("edit 3 Assignment for CS2103 d/85355255 s/undone "
                                 + "b/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }

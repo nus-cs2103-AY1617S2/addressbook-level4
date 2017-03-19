@@ -226,7 +226,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name d/not_numbers s/valid@e.mail b/valid, address",
                 Deadline.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/notAnEmail b/valid, address",
-                Status.MESSAGE_EMAIL_CONSTRAINTS);
+                Status.MESSAGE_STATUS_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/valid@e.mail b/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -546,7 +546,7 @@ public class LogicManagerTest {
         private Task adam() throws Exception {
             TaskName taskName = new TaskName("Adam Brown");
             Deadline privatePhone = new Deadline("111111");
-            Status status = new Status("adam@gmail.com");
+            Status status = new Status("undone");
             BeginTime privateAddress = new BeginTime("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -565,7 +565,7 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName("Person " + seed),
                     new Deadline("" + Math.abs(seed)),
-                    new Status(seed + "@email"),
+                    new Status("undone"),
                     new BeginTime("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -665,7 +665,7 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName(name),
                     new Deadline("1"),
-                    new Status("1@email"),
+                    new Status("undone"),
                     new BeginTime("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
