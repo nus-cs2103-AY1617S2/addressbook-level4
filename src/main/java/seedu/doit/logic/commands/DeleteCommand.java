@@ -3,11 +3,7 @@ package seedu.doit.logic.commands;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.logic.commands.exceptions.CommandException;
-import seedu.doit.model.item.ReadOnlyEvent;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.UniqueEventList.EventNotFoundException;
-import seedu.doit.model.item.UniqueFloatingTaskList.FloatingTaskNotFoundException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -39,15 +35,10 @@ public class DeleteCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
-        UnmodifiableObservableList<ReadOnlyFloatingTask> lastShownFloatingTaskList = model
-                .getFilteredFloatingTaskList();
-        UnmodifiableObservableList<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
 
         int taskSize = lastShownTaskList.size();
-        int taskAndEventSize = taskSize + lastShownEventList.size();
-        int totalSize = taskAndEventSize + lastShownFloatingTaskList.size();
 
-        if (targetIndex <= taskSize) {
+        if (targetIndex <= lastShownTaskList.size()) {
             ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
 
             try {
@@ -57,27 +48,7 @@ public class DeleteCommand extends Command {
             }
 
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
-        } else if (taskSize < targetIndex &&  targetIndex <= taskAndEventSize) {
-            ReadOnlyEvent taskToDelete = lastShownEventList.get(targetIndex - 1 - taskSize);
-
-            try {
-                model.deleteEvent(taskToDelete);
-            } catch (EventNotFoundException pnfe) {
-                assert false : "The target event cannot be missing";
-            }
-
-            return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, taskToDelete));
-        } else if (taskAndEventSize < targetIndex &&  targetIndex <= totalSize) {
-            ReadOnlyFloatingTask taskToDelete = lastShownFloatingTaskList.get(targetIndex - 1 - taskAndEventSize);
-
-            try {
-                model.deleteFloatingTask(taskToDelete);
-            } catch (FloatingTaskNotFoundException pnfe) {
-                assert false : "The target floating task cannot be missing";
-            }
-
-            return new CommandResult(String.format(MESSAGE_DELETE_FLOATING_TASK_SUCCESS, taskToDelete));
-        } else {
+        }  else {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }

@@ -40,7 +40,7 @@ import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
@@ -66,7 +66,7 @@ public class LogicManagerTest {
     private Logic logic;
 
     // These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedTaskManager;
+    private ReadOnlyItemManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
 
@@ -122,11 +122,11 @@ public class LogicManagerTest {
      * that the result message is correct. Also confirms that both the 'task
      * manager' and the 'last shown list' are as specified.
      *
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyItemManager,
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyItemManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -135,7 +135,7 @@ public class LogicManagerTest {
      * the result message is correct. Both the 'task manager' and the 'last
      * shown list' are verified to be unchanged.
      *
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyItemManager,
      *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -155,7 +155,7 @@ public class LogicManagerTest {
      * - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyItemManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = this.logic.execute(inputCommand);
@@ -367,8 +367,10 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+        Collections.sort(fourTasks);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        Collections.sort(expectedList);
         helper.addToModel(this.model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
@@ -384,6 +386,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
+        Collections.sort(fourTasks);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(this.model, fourTasks);

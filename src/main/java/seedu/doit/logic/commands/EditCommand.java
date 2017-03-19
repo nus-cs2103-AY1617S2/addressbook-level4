@@ -8,17 +8,11 @@ import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
-import seedu.doit.model.item.Event;
-import seedu.doit.model.item.FloatingTask;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
-import seedu.doit.model.item.ReadOnlyEvent;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.UniqueEventList;
-import seedu.doit.model.item.UniqueFloatingTaskList;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.tag.UniqueTagList;
 
@@ -61,63 +55,33 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                         EditTaskDescriptor editTaskDescriptor) {
+                                         EditEventDescriptor editEventDescriptor) {
         assert taskToEdit != null;
-        assert editTaskDescriptor != null;
+        assert editEventDescriptor != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Name updatedName = editEventDescriptor.getName().orElseGet(taskToEdit::getName);
+        Priority updatedPriority = editEventDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        StartTime updatedStartTime = editEventDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        EndTime updatedDeadline = editEventDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
+        Description updatedDescription = editEventDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedDeadline, updatedDescription, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedStartTime,
+                        updatedDeadline, updatedDescription, updatedTags);
     }
 
-    private static FloatingTask createEditedFloatingTask(ReadOnlyFloatingTask taskToEdit,
-                                                         EditFloatingTaskDescriptor editTaskDescriptor) {
-        assert taskToEdit != null;
-
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new FloatingTask(updatedName, updatedPriority, updatedDescription, updatedTags);
-    }
-
-    private static Event createEditedEvent(ReadOnlyEvent taskToEdit,
-                                           EditEventDescriptor editTaskDescriptor) {
-        assert taskToEdit != null;
-
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-        return new Event(updatedName, updatedPriority, updatedStartTime, updatedDeadline,
-            updatedDescription, updatedTags);
-    }
 
     @Override
     public CommandResult execute() throws CommandException {
 
         List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
-        List<ReadOnlyFloatingTask> lastShownFloatingTaskList = model.getFilteredFloatingTaskList();
-        List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
-
-        int taskSize = lastShownTaskList.size();
-        int taskAndEventSize = taskSize + lastShownEventList.size();
-        int totalSize = taskAndEventSize + lastShownFloatingTaskList.size();
 
 
-        if (filteredTaskListIndex >= totalSize) {
+        if (filteredTaskListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (filteredTaskListIndex < taskSize) {
+        if (filteredTaskListIndex < lastShownTaskList.size()) {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
             assert taskToEdit != null;
             Task editedTask = createEditedTask(taskToEdit, editEventDescriptor);
@@ -130,30 +94,6 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
-        } else if (filteredTaskListIndex >= taskSize && filteredTaskListIndex < taskAndEventSize) {
-            ReadOnlyEvent taskToEdit = lastShownEventList.get(filteredTaskListIndex - taskSize);
-            Event editedEvent = createEditedEvent(taskToEdit, editEventDescriptor);
-
-            try {
-                model.updateEvent(filteredTaskListIndex - taskSize, editedEvent);
-            } catch (UniqueEventList.DuplicateEventException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            }
-            model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
-
-        } else if (filteredTaskListIndex >= taskAndEventSize && filteredTaskListIndex < totalSize) {
-            ReadOnlyFloatingTask taskToEdit = lastShownFloatingTaskList.get(filteredTaskListIndex - taskAndEventSize);
-            FloatingTask editedFloatingTask = createEditedFloatingTask(taskToEdit, editEventDescriptor);
-
-            try {
-                model.updateFloatingTask(filteredTaskListIndex - taskAndEventSize,
-                    editedFloatingTask);
-            } catch (UniqueFloatingTaskList.DuplicateFloatingTaskException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            }
-            model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } else {
             return null;
             // should not happen
@@ -243,6 +183,7 @@ public class EditCommand extends Command {
         /**
          * Returns true if at least one field is edited.
          */
+        @Override
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.deadline) || super.isAnyFieldEdited();
         }
@@ -282,6 +223,7 @@ public class EditCommand extends Command {
             this.startTime = startTime;
         }
 
+        @Override
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.startTime) || super.isAnyFieldEdited();
         }

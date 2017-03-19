@@ -3,11 +3,7 @@ package seedu.doit.logic.commands;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.logic.commands.exceptions.CommandException;
-import seedu.doit.model.item.ReadOnlyEvent;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.UniqueEventList;
-import seedu.doit.model.item.UniqueFloatingTaskList;
 import seedu.doit.model.item.UniqueTaskList;
 
 public class DoneCommand extends Command {
@@ -35,15 +31,8 @@ public class DoneCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
-        UnmodifiableObservableList<ReadOnlyFloatingTask> lastShownFloatingTaskList = model
-            .getFilteredFloatingTaskList();
-        UnmodifiableObservableList<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
 
-        int taskSize = lastShownTaskList.size();
-        int taskAndEventSize = taskSize + lastShownEventList.size();
-        int totalSize = taskAndEventSize + lastShownFloatingTaskList.size();
-
-        if (targetIndex <= taskSize) {
+        if (targetIndex <= lastShownTaskList.size()) {
             ReadOnlyTask taskToDone = lastShownTaskList.get(targetIndex - 1);
 
             try {
@@ -53,26 +42,6 @@ public class DoneCommand extends Command {
             }
 
             return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
-        } else if (taskSize < targetIndex &&  targetIndex <= taskAndEventSize) {
-            ReadOnlyEvent taskToDone = lastShownEventList.get(targetIndex - 1 - taskSize);
-
-            try {
-                model.deleteEvent(taskToDone);
-            } catch (UniqueEventList.EventNotFoundException pnfe) {
-                assert false : "The target event cannot be missing";
-            }
-
-            return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, taskToDone));
-        } else if (taskAndEventSize < targetIndex &&  targetIndex <= totalSize) {
-            ReadOnlyFloatingTask taskToDone = lastShownFloatingTaskList.get(targetIndex - 1 - taskAndEventSize);
-
-            try {
-                model.deleteFloatingTask(taskToDone);
-            } catch (UniqueFloatingTaskList.FloatingTaskNotFoundException pnfe) {
-                assert false : "The target floating task cannot be missing";
-            }
-
-            return new CommandResult(String.format(MESSAGE_DONE_FLOATING_TASK_SUCCESS, taskToDone));
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

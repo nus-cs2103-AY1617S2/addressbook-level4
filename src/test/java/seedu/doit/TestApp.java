@@ -6,7 +6,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.doit.commons.core.Config;
 import seedu.doit.commons.core.GuiSettings;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.UserPrefs;
 import seedu.doit.storage.XmlSerializableTaskManager;
 import seedu.doit.testutil.TestUtil;
@@ -22,13 +22,13 @@ public class TestApp extends MainApp {
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
         TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     protected static final String TASK_MANAGER_NAME = "Test";
-    protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyItemManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyTaskManager> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyItemManager> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;

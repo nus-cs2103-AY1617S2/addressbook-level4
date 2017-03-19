@@ -7,8 +7,6 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
-import seedu.doit.model.item.Event;
-import seedu.doit.model.item.FloatingTask;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.StartTime;
@@ -67,12 +65,12 @@ public class AddCommand extends Command {
     public AddCommand(String name, String priority, String startDate, String dueDate, String text, Set<String> tags)
         throws IllegalValueException {
 
-        taskType = TASKTYPE.EVENT;
+        taskType = TASKTYPE.TASK;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Event(
+        this.toAdd = new Task(
             new Name(name),
             new Priority(priority),
             new StartTime(startDate),
@@ -85,12 +83,12 @@ public class AddCommand extends Command {
     public AddCommand(String name, String priority, String text, Set<String> tags)
         throws IllegalValueException {
 
-        taskType = TASKTYPE.FLOATING_TASK;
+        taskType = TASKTYPE.TASK;
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new FloatingTask(
+        this.toAdd = new Task(
             new Name(name),
             new Priority(priority),
             new Description(text),
@@ -107,10 +105,10 @@ public class AddCommand extends Command {
                 model.addTask((Task) toAdd);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
             case EVENT:
-                model.addEvent((Event) toAdd);
+                model.addTask((Task) toAdd);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
             case FLOATING_TASK:
-                model.addFloatingTask((FloatingTask) toAdd);
+                model.addTask((Task) toAdd);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
             default:
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
