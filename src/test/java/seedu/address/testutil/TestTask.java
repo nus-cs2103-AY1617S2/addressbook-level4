@@ -1,12 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Title;
 import seedu.address.model.tag.UniqueTagList;
 
 public class TestTask implements ReadOnlyTask {
     private Title title;
+    private String start;
+    private String end;
 
     private UniqueTagList tags;
 
@@ -20,6 +21,8 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.title = taskToCopy.getTitle();
         this.tags = taskToCopy.getTags();
+        this.start = taskToCopy.getStart();
+        this.end = taskToCopy.getEnd();
     }
 
     public void setTitle(Title title) {
@@ -31,6 +34,15 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+
+    public void setEnd(String end) {
+        this.end = end;
+    }
+    
     @Override
     public Title getTitle() {
         return title;
@@ -42,6 +54,16 @@ public class TestTask implements ReadOnlyTask {
         return tags;
     }
 
+    @Override
+    public String getStart() {
+        return start;    
+    }
+    
+    @Override
+    public String getEnd() {
+        return end;
+    }
+    
     @Override
     public String toString() {
         return getAsText();

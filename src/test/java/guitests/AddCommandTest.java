@@ -16,17 +16,17 @@ public class AddCommandTest extends AddressBookGuiTest {
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.lunch;
+        TestTask taskToAdd = td.meeting;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.hw1;
+        taskToAdd = td.assignment;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
-        commandBox.runCommand(td.lunch.getAddCommand());
+        commandBox.runCommand(td.meeting.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
@@ -35,7 +35,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertAddSuccess(td.interview);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds meeting");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 

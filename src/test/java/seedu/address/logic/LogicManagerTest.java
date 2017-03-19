@@ -185,15 +185,14 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add t/args wrong args", expectedMessage);
+        assertCommandFailure("add Valid Title from by invalidDate", expectedMessage);
+        assertCommandFailure("add Valid Title t/tag NoTagPrefix", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] ",
+        assertCommandFailure("add *[]\\[;] ",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
         assertCommandFailure("add Valid Name t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);

@@ -6,7 +6,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 public class TypicalTestTasks {
-    public TestTask hw1, hw2, lunch, interview;
+    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment;
 
     public TypicalTestTasks() {
         try {
@@ -18,6 +18,14 @@ public class TypicalTestTasks {
                     .withTags("leisure", "friends").build();
             interview = new TaskBuilder().withTitle("Interview for big company")
                     .withTags("career").build();
+            shopping = new TaskBuilder().withTitle("Shopping with friends")
+                    .withTags("leisure", "friends").build();
+            
+            // Manually added
+            meeting = new TaskBuilder().withTitle("Software Engineering Meeting")
+                    .withTags("school").build();
+            assignment = new TaskBuilder().withTitle("CS3230 Assignment")
+                    .withTags("school").build();
                    
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -36,7 +44,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{hw1, hw2, lunch, interview};
+        return new TestTask[]{hw1, hw2, lunch, interview, shopping};
     }
 
     public AddressBook getTypicalAddressBook() {
