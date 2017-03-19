@@ -14,7 +14,7 @@ public class Time {
      *
      * @throws IllegalValueException if given time string is invalid.
      */
-    public Time(String time) throws IllegalValueException {
+    public Time(String time) {
         assert time != null;
         String trimmedStartTime = time.trim();
         /*if (!isValidTime(trimmedStartTime)) {

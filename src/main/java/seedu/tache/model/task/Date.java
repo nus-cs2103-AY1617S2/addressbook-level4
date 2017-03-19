@@ -14,7 +14,7 @@ public class Date {
      *
      * @throws IllegalValueException if given date string is invalid.
      */
-    public Date(String date) throws IllegalValueException {
+    public Date(String date) {
         assert date != null;
         String trimmedStartDate = date.trim();
         /*if (!isValidDate(trimmedStartDate)) {

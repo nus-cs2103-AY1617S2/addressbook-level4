@@ -10,12 +10,8 @@ import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
-import seedu.tache.model.task.DetailedTask;
-import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.UniqueDetailedTaskList.DetailedTaskNotFoundException;
-import seedu.tache.model.task.UniqueDetailedTaskList.DuplicateDetailedTaskException;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
@@ -31,7 +27,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final FilteredList<ReadOnlyDetailedTask> filteredDetailedTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -44,7 +39,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        filteredDetailedTasks = new FilteredList<>(this.taskManager.getDetailedTaskList());
     }
 
     public ModelManager() {
@@ -81,19 +75,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteDetailedTask(ReadOnlyDetailedTask target) throws DetailedTaskNotFoundException {
-        taskManager.removeDetailedTask(target);
-        indicateTaskManagerChanged();
-    }
-
-    @Override
-    public void addDetailedTask(DetailedTask detailedTask) throws DuplicateDetailedTaskException {
-        taskManager.addDetailedTask(detailedTask);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
-    }
-
-    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
@@ -101,17 +82,6 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
-    }
-
-    @Override
-    public void updateDetailedTask(int filteredDetailedTaskListIndex, ReadOnlyDetailedTask editedDetailedTask)
-            throws DuplicateDetailedTaskException {
-        assert editedDetailedTask != null;
-
-        int taskManagerIndex = filteredDetailedTasks.getSourceIndex(filteredDetailedTaskListIndex);
-        taskManager.updateDetailedTask(taskManagerIndex, editedDetailedTask);
-        indicateTaskManagerChanged();
-
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -122,14 +92,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyDetailedTask> getFilteredDetailedTaskList() {
-        return new UnmodifiableObservableList<>(filteredDetailedTasks);
-    }
-
-    @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-        filteredDetailedTasks.setPredicate(null);
     }
 
     @Override
@@ -141,20 +105,10 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    @Override
-    public void updateFilteredDetailedTaskList(Set<String> keywords) {
-        updateFilteredDetailedTaskList(new PredicateExpression(new MultiQualifier(keywords)));
-    }
-
-    private void updateFilteredDetailedTaskList(Expression expression) {
-        filteredDetailedTasks.setPredicate(expression::satisfies);
-    }
-
     //========== Inner classes/interfaces/methods used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
-        boolean satisfies(ReadOnlyDetailedTask task);
         String toString();
     }
 
@@ -172,11 +126,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyDetailedTask detailedTask) {
-            return qualifier.run(detailedTask);
-        }
-
-        @Override
         public String toString() {
             return qualifier.toString();
         }
@@ -184,7 +133,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
-        boolean run(ReadOnlyDetailedTask task);
         String toString();
     }
 
@@ -215,25 +163,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyDetailedTask detailedTask) {
-            String[] nameElements = detailedTask.getName().fullName.split(" ");
-            boolean partialMatch = false;
-            String trimmedNameKeyWords = nameKeyWords.toString()
-                                         .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
-            for (int i = 0; i < nameElements.length; i++) {
-                if (computeLevenshteinDistance(trimmedNameKeyWords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
-                    partialMatch = true;
-                    break;
-                }
-            }
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent()
-                    || partialMatch;
-        }
-
-        @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
@@ -249,19 +178,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return false;
-        }
-
-        @Override
-        public boolean run(ReadOnlyDetailedTask detailedTask) {
-            return dateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartDate().toString(),
-                            keyword))
-                    .findAny()
-                    .isPresent()
-                    || dateKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getEndDate().toString(), keyword))
-                    .findAny()
-                    .isPresent();
         }
 
         @Override
@@ -281,19 +197,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return false;
-        }
-
-        @Override
-        public boolean run(ReadOnlyDetailedTask detailedTask) {
-            return timeKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getStartTime().toString(),
-                            keyword))
-                    .findAny()
-                    .isPresent()
-                    || timeKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(detailedTask.getEndTime().toString(), keyword))
-                    .findAny()
-                    .isPresent();
         }
 
         @Override
@@ -319,12 +222,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return false;
-        }
-
-        @Override
-        public boolean run(ReadOnlyDetailedTask detailedTask) {
-            return nameQualifier.run(detailedTask) || dateQualifier.run(detailedTask)
-                                     || timeQualifier.run(detailedTask);
         }
 
         @Override
