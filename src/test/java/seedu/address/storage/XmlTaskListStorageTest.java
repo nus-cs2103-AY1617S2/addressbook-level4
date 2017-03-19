@@ -71,8 +71,7 @@ public class XmlTaskListStorageTest {
         // Save in new file and read back
         xmlTaskListStorage.saveTaskList(original, filePath);
         ReadOnlyTaskList readBack = xmlTaskListStorage.readTaskList(filePath).get();
-        TaskList tl = new TaskList(readBack);
-        assertEquals(original, tl);
+        assertEquals(original, new TaskList(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hoon));
