@@ -43,6 +43,15 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Adds a task to the specified index in the list
+     * @param index
+     * @param toAdd
+     */
+    public void addToIndex(int index, Task toAdd) {
+        assert toAdd != null;
+        internalList.add(index, toAdd);
+    }
+    /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to

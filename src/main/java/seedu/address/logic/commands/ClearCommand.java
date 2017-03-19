@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.GlobalStack;
 import seedu.address.model.TaskManager;
 
 /**
@@ -14,6 +15,8 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
+        GlobalStack gStack = GlobalStack.getInstance();
+        gStack.getUndoStack().push(model.getTaskManager().getTaskList());
         model.resetData(new TaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }

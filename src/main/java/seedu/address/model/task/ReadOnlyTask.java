@@ -12,7 +12,7 @@ public interface ReadOnlyTask {
     Deadline getDate();
     PriorityLevel getPriority();
     Information getInfo();
-
+    String getParserInfo();
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the task's internal tags.
@@ -45,6 +45,8 @@ public interface ReadOnlyTask {
                 .append(getInfo())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("ParserInfo: ")
+               .append(getParserInfo());
         return builder.toString();
     }
 

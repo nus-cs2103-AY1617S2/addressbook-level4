@@ -23,7 +23,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private final UniqueTaskList tasks;
+    private UniqueTaskList tasks;
     private final UniqueTagList tags;
 
     /*
@@ -87,6 +87,18 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(t);
         tasks.add(t);
     }
+    /**
+     * Adds a task to the task manager at specified index
+     * Adapted from addTask method
+     *
+     * @param index
+     * @param t
+     * @throws UniqueTaskList.DuplicateTaskException
+     */
+    public void addTaskToIndex (int index, Task t) throws UniqueTaskList.DuplicateTaskException {
+        //syncMasterTagListWith(t);
+        tasks.addToIndex(index, t);
+    }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
@@ -145,6 +157,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+    // Usage for undo/redo command
+    public void loadTaskManagerList(UniqueTaskList tasks) {
+        this.tasks.setTasks(tasks);
     }
 
 //// tag-level operations

@@ -23,18 +23,30 @@ public class UndoCommand extends Command {
             if (gStack.getUndoStack().isEmpty()) {
                 throw new CommandException(GlobalStack.MESSAGE_NOTHING_TO_UNDO);
             }
-            Task toUndo = gStack.getUndoStack().peek(); //needs improvement
-            String parserInfo = toUndo.getParserInfo();
-            if (parserInfo.equals(COMMAND_WORD_ADD)) {
-                gStack.undoAdd();
-                model.deleteTask(toUndo);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
-            } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
-                gStack.undoEdit();
-                model.updateTask(toUndo.getEditTaskIndex(), toUndo);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
+            Object toUndo = gStack.getUndoStack().peek(); //needs improvement
+            gStack.printStack();
+            if (toUndo.getClass() == Task.class) {
+                String parserInfo = ((Task) toUndo).getParserInfo();
+                System.out.println("Parser Info = " + parserInfo);
+                if (parserInfo.equals(COMMAND_WORD_ADD)) {
+                    gStack.undoAdd();
+                    model.deleteTask((Task) toUndo);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
+                } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
+                    gStack.undoEdit();
+                    model.updateTask(((Task) toUndo).getEditTaskIndex(), (Task) toUndo);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
+                } else if (parserInfo.equals(COMMAND_WORD_DELETE)) { // it'll be delete command
+                    gStack.undoDelete(); // pushes task to redostack
+                    System.out.println("To be restored : " + toUndo.toString());
+                    System.out.println("Index to be restored" + ((Task) toUndo).getEditTaskIndex());
+                    model.undoState(((Task) toUndo).getEditTaskIndex(), (Task) toUndo);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
+                } /*else if (toUndo.getClass() == ObservableList.class) { // undo clear command
+                ObservableList<ReadOnlyTask> undo = gStack.undoClear();
+                model.undoState(0, null, undo);
+                }*/
             }
-            return new CommandResult(String.format(MESSAGE_FAIL, toUndo));
         } catch (TaskNotFoundException e) {
             throw new CommandException("Task not found");
         } catch (DuplicateTaskException e) {

@@ -18,7 +18,7 @@ public class Task implements ReadOnlyTask {
     private Information info;
     private UniqueTagList tags;
     private String parserInfo;
-    private int editTaskIndex;
+    private int index;
     /**
      * Every field must be present and not null.
      */
@@ -87,11 +87,11 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setEditTaskIndex(int index) {
-        this.editTaskIndex = index;
+        this.index = index;
     }
 
     public int getEditTaskIndex() {
-        return this.editTaskIndex;
+        return this.index;
     }
 
     @Override

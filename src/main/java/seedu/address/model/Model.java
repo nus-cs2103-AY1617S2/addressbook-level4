@@ -24,6 +24,10 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Loads the Task manager with modified list */
+    void undoState(int index, Task task)
+             throws UniqueTaskList.DuplicateTaskException;
+
     /**
      * Updates the task located at {@code filteredTakkListIndex} with {@code editedTask}.
      *

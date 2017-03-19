@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.GlobalStack;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class RedoCommand extends Command {
 
@@ -22,20 +24,31 @@ public class RedoCommand extends Command {
             if (gStack.getRedoStack().isEmpty()) {
                 throw new CommandException(GlobalStack.MESSAGE_NOTHING_TO_REDO);
             }
-            Task toRedo = gStack.getRedoStack().peek(); //needs improvement
-            String parserInfo = toRedo.getParserInfo();
-            if (parserInfo.equals(COMMAND_WORD_ADD)) {
-                gStack.redoAdd();
-                model.addTask(toRedo);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
-            } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
-                gStack.redoEdit();
-                model.updateTask(toRedo.getEditTaskIndex(), toRedo);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
+            Object toRedo = gStack.getRedoStack().peek(); //needs improvement
+            if (toRedo.getClass() == Task.class) { //add or edit command
+                String parserInfo = ((Task) toRedo).getParserInfo();
+                if (parserInfo.equals(COMMAND_WORD_ADD)) {
+                    gStack.redoAdd();
+                    model.addTask((Task) toRedo);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
+                } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
+                    gStack.redoEdit();
+                    model.updateTask(((Task) toRedo).getEditTaskIndex(), (Task) toRedo);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
+                } else { //delete command
+                    ReadOnlyTask unmutableTask = gStack.redoDelete();
+                    model.deleteTask(unmutableTask);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
+                }   /*else if (toRedo.getClass() == ObservableList.class) { //clear command
+                    gStack.redoClear();
+                    model.resetData(new TaskManager());
+                    }*/
             }
-            return new CommandResult(String.format(MESSAGE_FAIL, toRedo));
         } catch (DuplicateTaskException e) {
             throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException e) {
+            return new CommandResult(MESSAGE_FAIL);
         }
+        return new CommandResult(String.format(MESSAGE_FAIL));
     }
 }

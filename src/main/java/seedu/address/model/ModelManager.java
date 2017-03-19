@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -23,7 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager addressBook;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given task manager and userPrefs.
@@ -79,6 +80,12 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void undoState(int indexToBeRestored, Task deletedTask)
+            throws DuplicateTaskException {
+        addressBook.addTaskToIndex(indexToBeRestored, deletedTask);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -153,5 +160,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
 }
