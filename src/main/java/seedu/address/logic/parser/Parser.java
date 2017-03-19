@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -118,6 +120,7 @@ public class Parser {
         }
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        Optional<Integer> index = null;
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
@@ -128,10 +131,20 @@ public class Parser {
             return new DeleteCommand(lastShownList.size() + 1);
 
         case EditCommand.COMMAND_WORD:
-            return null;
+            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
+            argsTokenizer.tokenize(arguments);
+            List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+            index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+            ReadOnlyTask taskToEdit = lastShownList.get(index.get() - 1);
+            final StringBuilder editBuilder = new StringBuilder();
+            editBuilder.append(" ");
+            editBuilder.append(index.get().toString());
+            editBuilder.append(" ");
+            editBuilder.append(getTaskArgs(taskToEdit));
+            return new EditCommandParser().parse(editBuilder.toString());
 
         case DeleteCommand.COMMAND_WORD:
-            Optional<Integer> index = ParserUtil.parseIndex(arguments);
+            index = ParserUtil.parseIndex(arguments);
             // Get data of command to be deleted
             ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
             return new AddCommandParser().parse(getTaskArgs(taskToDelete));
@@ -175,7 +188,7 @@ public class Parser {
             final StringBuilder tagBuilder = new StringBuilder();
             task.getTags().forEach(tagBuilder::append);
             // Remove square brackets for tags
-            builder.append(tagBuilder.toString().replaceAll("\\[", "").replaceAll("\\]",""));
+            builder.append(tagBuilder.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
         }
         return builder.toString();
     }
