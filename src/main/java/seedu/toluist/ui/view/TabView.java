@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.UiStore;
 
@@ -40,7 +41,7 @@ public class TabView extends UiView {
         tabShortcutLabel.setText(switchPredicate.getDisplayName().substring(0, 1));
         tabLabel.setText(switchPredicate.getDisplayName().substring(1) + taskInfo);
         if (isSelected) {
-            tabPane.getStyleClass().add(SELECTED_TAB_CLASS);
+            FxViewUtil.addStyleClass(tabPane, SELECTED_TAB_CLASS);
         }
     }
 }

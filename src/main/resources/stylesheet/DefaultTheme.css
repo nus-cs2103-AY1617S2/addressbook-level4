@@ -100,8 +100,12 @@
     -fx-border-width: 0 0 1 0;
 }
 
-.task .completed .text {
+.task.completed .status-text .text {
     -fx-strikethrough: true;
+}
+
+.task.overdue .status-text.label {
+    -fx-text-fill: theme-danger;
 }
 
 /* TAG */

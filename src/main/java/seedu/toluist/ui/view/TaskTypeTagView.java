@@ -1,5 +1,7 @@
 package seedu.toluist.ui.view;
 
+import seedu.toluist.commons.util.FxViewUtil;
+
 /**
  * View to display the task type
  */
@@ -20,9 +22,9 @@ public class TaskTypeTagView extends TagView {
     protected void viewDidMount() {
         super.viewDidMount();
         if (isTask) {
-            tagLabel.getStyleClass().add(TASK_STYLE_CLASS);
+            FxViewUtil.addStyleClass(tagLabel, TASK_STYLE_CLASS);
         } else {
-            tagLabel.getStyleClass().add(EVENT_STYLE_CLASS);
+            FxViewUtil.addStyleClass(tagLabel, EVENT_STYLE_CLASS);
         }
     }
 }
