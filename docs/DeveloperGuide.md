@@ -1,8 +1,14 @@
 # Developer Guide
 
-Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app.
+This guide is for developers who wish to continue developing GeeKeep.
 
-This Developer Guide is for any developer who wishes to continue development of this project. You should be proficient in Java.
+GeeKeep is a simple Command-Line-Interface (CLI) based Task Manager app. It provides an efficient way to manage tasks for those who prefer typing. In this guide, you can find information which is helpful in getting started as a GeeKeep contributor to coding, testing, or designing the architecture.
+
+In order to make better contribution, you should:
+* Be proficient in object-oriented programming with Java.
+* Be familiar with [libraries](../README.md#dependencies), e.g. JavaFX, used by GeeKeep.
+* Be familiar with [testing frameworks](../README.md#dependencies), e.g. JUnit, used by GeeKeep.
+* Follow the [Java coding standard](https://oss-generic.github.io/process/codingStandards/CodingStandard-Java.html).
 
 <h2 id="user-content-table">Table of Contents</h2>
 
