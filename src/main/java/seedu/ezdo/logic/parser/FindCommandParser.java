@@ -48,17 +48,17 @@ public class FindCommandParser implements CommandParser {
         Optional<TaskDate> findStartDate;
         Optional<TaskDate> findDueDate;
         Set<String> findTags;
-        
+
         try {
             findPriority = ParserUtil.parsePriority(getOptionalValue(argsTokenizer, PREFIX_PRIORITY));
             findStartDate = ParserUtil.parseStartDate(getOptionalValue(argsTokenizer, PREFIX_STARTDATE), true);
             findDueDate = ParserUtil.parseDueDate(getOptionalValue(argsTokenizer, PREFIX_DUEDATE), true);
             findTags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
-            
+
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
-        
+
         Set<String> keywords = new HashSet<String>(Arrays.asList(splitNames));
         return new FindCommand(keywords, findPriority, findStartDate, findDueDate, findTags);
     }

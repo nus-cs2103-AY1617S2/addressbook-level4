@@ -155,17 +155,13 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-
-   /* @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, new Optional(), new Optional(), new Optional())));
-    } */
-
+    
     @Override
     public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority,
                                        Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
-        updateFilteredTaskList(new PredicateExpression
-                              (new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
+        updateFilteredTaskList(
+                new PredicateExpression(new NameQualifier(
+                        keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
     }
 
     @Override
@@ -258,7 +254,7 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<StartDate> startDate;
         private Optional<DueDate> dueDate;
         private Set<String> tags;
-        
+
         NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority,
                       Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
             this.nameKeyWords = nameKeyWords;
@@ -273,7 +269,7 @@ public class ModelManager extends ComponentManager implements Model {
             String taskStartDate = task.getStartDate().toString();
             String taskDueDate = task.getDueDate().toString();
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
-            
+
             return (nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
@@ -291,15 +287,15 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
-        
+
         public Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
             Set<String> tagSet = new HashSet<String>();
-            
+
             for (int i = 0; i < tags.size(); i++) {
                 tagSet.add(((Tag) tagArray[i]).tagName);
             }
-            
+
             return tagSet;
         }
     }

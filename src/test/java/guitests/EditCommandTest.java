@@ -24,11 +24,11 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/1 s/01/01/2017 10:00 d/08/09/2018 10:00 t/husband";
+        String detailsToEdit = "Bobby p/1 s/01/01/2017 10:00 d/08/09/2018 t/husband";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("1")
-                .withStartDate("01/01/2017 10:00").withDueDate("08/09/2018 10:00")
+                .withStartDate("01/01/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -36,11 +36,11 @@ public class EditCommandTest extends EzDoGuiTest {
 
     @Test
     public void edit_shortCommand_success() throws Exception {
-        String detailsToEdit = "Blobby p/3 s/02/02/2017 10:00 d/10/10/2019 10:00 t/guy";
+        String detailsToEdit = "Blobby p/3 s/02/02/2017 d/10/10/2019 t/guy";
         int ezDoIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Blobby").withPriority("3")
-                .withStartDate("02/02/2017 10:00").withDueDate("10/10/2019 10:00")
+                .withStartDate("02/02/2017").withDueDate("10/10/2019")
                 .withTags("guy").build();
 
         assertEditSuccess(true, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -49,30 +49,30 @@ public class EditCommandTest extends EzDoGuiTest {
     @Test
     public void edit_eachFieldSpecified_success() throws Exception {
 
-        commandBox.runCommand("edit 1 Bobby p/1 s/01/01/2017 10:00 d/08/09/2018 10:00 t/husband");
+        commandBox.runCommand("edit 1 Bobby p/1 s/01/01/2017 d/08/09/2018 t/husband");
 
         int ezDoIndex = 1;
 
         String detailsToEdit = "p/3";
 
         TestTask editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
-                .withStartDate("01/01/2017 10:00").withDueDate("08/09/2018 10:00")
+                .withStartDate("01/01/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
-        detailsToEdit = "Bobby s/11/11/2017 10:00";
+        detailsToEdit = "Bobby s/11/11/2017";
 
         editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
-                .withStartDate("11/11/2017 10:00").withDueDate("08/09/2018 10:00")
+                .withStartDate("11/11/2017").withDueDate("08/09/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
 
-        detailsToEdit = "Bobby d/01/01/2018 10:00";
+        detailsToEdit = "Bobby d/01/01/2018";
 
         editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
-                .withStartDate("11/11/2017 10:00").withDueDate("01/01/2018 10:00")
+                .withStartDate("11/11/2017").withDueDate("01/01/2018")
                 .withTags("husband").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -80,7 +80,7 @@ public class EditCommandTest extends EzDoGuiTest {
         detailsToEdit = "Bobby t/brother";
 
         editedTask = new TaskBuilder().withName("Bobby").withPriority("3")
-                .withStartDate("11/11/2017 10:00").withDueDate("01/01/2018 10:00")
+                .withStartDate("11/11/2017").withDueDate("01/01/2018")
                 .withTags("brother").build();
 
         assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
@@ -185,8 +185,6 @@ public class EditCommandTest extends EzDoGuiTest {
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
-        System.out.println("what we see: " + editedCard.getTags().toString());
-        System.out.println("what we get: " + editedTask.toString());
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details

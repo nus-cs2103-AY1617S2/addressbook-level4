@@ -55,7 +55,7 @@ public abstract class TaskDate {
     public static boolean isValidTaskDate(String test) {
         return test.matches(TASKDATE_VALIDATION_REGEX);
     }
-    
+
     public static boolean isValidTaskDate(String test, boolean isFind) {
         return test.matches(FIND_TASKDATE_VALIDATION_REGEX);
     }

@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     private final Optional<TaskDate> dueDateToMatch;
     private final Set<String> tagsToMatch;
 
-    public FindCommand(Set<String> keywords, Optional<Priority> priorityToMatch, Optional<TaskDate> startDateToMatch, 
+    public FindCommand(Set<String> keywords, Optional<Priority> priorityToMatch, Optional<TaskDate> startDateToMatch,
                        Optional<TaskDate> dueDateToMatch, Set<String> tagsToMatch) {
         this.keywords = keywords;
         this.priorityToMatch = priorityToMatch;
