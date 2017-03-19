@@ -49,10 +49,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        priority = source.getPriority()
-                .map(Priority::getValue)
-                .map(Priority.Type::name)
-                .orElse(null);
+        if (source.getPriority().isPresent()) {
+            priority = source.getPriority().get().getValue().name();
+        }
         status = source.getStatus().value;
         note = source.getNote().map(Note::toString).orElse("");
         deadline = source.getDeadline().map(Deadline::toString).orElse("");
