@@ -20,4 +20,35 @@ public class DateUtil {
         }
         return (startDate.compareTo(dueDate) < 0);
     }
+
+
+    /**
+     * Compares two dates strings. Both strings must be in the format dd/MM/yyyy hh:mm.
+     * Empty strings are considered to be of lower value than non-empty strings.
+     * @return an int representing the comparison result of the two date strings.
+     * @throws ParseException if any of the date strings cannot be parsed.
+     */
+    public static int compareDateStrings(String dateString1, String dateString2) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        Date date1 = null;
+        Date date2 = null;
+
+        // empty dates are considered lower in value so that they show at the bottom of the list
+        if (dateString1.isEmpty() && dateString2.isEmpty()) {
+            return 0;
+        } else if (dateString1.isEmpty()) {
+            return 1;
+        } else if (dateString2.isEmpty()) {
+            return -1;
+        }
+
+        try {
+            date1 = dateFormat.parse(dateString1);
+            date2 = dateFormat.parse(dateString2);
+        } catch (ParseException pe) {
+            assert false : "The date format should not be invalid.";
+        }
+
+        return date1.compareTo(date2);
+    }
 }
