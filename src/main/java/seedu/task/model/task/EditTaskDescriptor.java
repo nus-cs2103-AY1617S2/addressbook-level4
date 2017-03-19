@@ -1,9 +1,9 @@
-package seedu.address.model.task;
+package seedu.task.model.task;
 
 import java.util.Optional;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.model.tag.UniqueTagList;
 
 /**
  * Stores the details to edit the person with. Each non-empty field value will replace the

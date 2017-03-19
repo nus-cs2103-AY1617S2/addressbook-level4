@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.task.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,12 +12,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.TaskList;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.TaskList;
+import seedu.task.model.task.Task;
+import seedu.task.testutil.TypicalTestTasks;
 
 public class XmlTaskListStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskListStorageTest/");

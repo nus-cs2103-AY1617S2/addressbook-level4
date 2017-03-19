@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.task.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,10 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.TaskList;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.TestUtil;
+import seedu.task.model.TaskList;
+import seedu.task.storage.XmlSerializableAddressBook;
+import seedu.task.testutil.AddressBookBuilder;
+import seedu.task.testutil.TestUtil;
 
 public class XmlUtilTest {
 

@@ -1,4 +1,4 @@
-package seedu.address.commons.util;
+package seedu.task.commons.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -1,7 +1,7 @@
-package seedu.address.commons.events.model;
+package seedu.task.commons.events.model;
 
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyTaskList;
+import seedu.task.commons.events.BaseEvent;
+import seedu.task.model.ReadOnlyTaskList;
 
 /** Indicates the TaskList in the model has changed*/
 public class TaskListChangedEvent extends BaseEvent {

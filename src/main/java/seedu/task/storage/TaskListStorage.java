@@ -1,13 +1,13 @@
-package seedu.address.storage;
+package seedu.task.storage;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyTaskList;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.model.ReadOnlyTaskList;
 
 /**
- * Represents a storage for {@link seedu.address.model.TaskList}.
+ * Represents a storage for {@link seedu.task.model.TaskList}.
  */
 public interface TaskListStorage {
 

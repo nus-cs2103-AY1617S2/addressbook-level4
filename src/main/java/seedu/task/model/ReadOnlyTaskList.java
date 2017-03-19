@@ -1,8 +1,8 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * Unmodifiable view of an entire ToDo list

@@ -1,9 +1,9 @@
-package seedu.address.testutil;
+package seedu.task.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.TaskList;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.TaskList;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
 
 /**
  *

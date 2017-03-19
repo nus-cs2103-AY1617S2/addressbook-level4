@@ -1,10 +1,10 @@
-package seedu.address.commons.util;
+package seedu.task.commons.util;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.address.commons.core.Config;
-import seedu.address.commons.exceptions.DataConversionException;
+import seedu.task.commons.core.Config;
+import seedu.task.commons.exceptions.DataConversionException;
 
 /**
  * A class for accessing the Config File.

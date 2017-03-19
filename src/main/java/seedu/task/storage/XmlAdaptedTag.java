@@ -1,9 +1,9 @@
-package seedu.address.storage;
+package seedu.task.storage;
 
 import javax.xml.bind.annotation.XmlValue;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.tag.Tag;
 
 /**
  * JAXB-friendly adapted version of the Tag.

@@ -1,7 +1,7 @@
 //@@author A0164212U
-package seedu.address.model.task;
+package seedu.task.model.task;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's priority number in the address book.

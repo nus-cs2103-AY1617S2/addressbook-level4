@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.task.storage;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -11,13 +11,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.TaskListChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.TaskList;
-import seedu.address.model.UserPrefs;
-import seedu.address.testutil.EventsCollector;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.task.commons.events.model.TaskListChangedEvent;
+import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.TaskList;
+import seedu.task.model.UserPrefs;
+import seedu.task.testutil.EventsCollector;
+import seedu.task.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 

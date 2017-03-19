@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.task.testutil;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,19 +25,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
-import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.TaskList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Timing;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.task.TestApp;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.commons.util.XmlUtil;
+import seedu.task.model.TaskList;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Description;
+import seedu.task.model.task.Priority;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.Timing;
+import seedu.task.storage.XmlSerializableAddressBook;
 
 /**
  * A utility class for test cases.

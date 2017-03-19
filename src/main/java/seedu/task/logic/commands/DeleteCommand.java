@@ -1,10 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.task.commons.core.Messages;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the task manager.

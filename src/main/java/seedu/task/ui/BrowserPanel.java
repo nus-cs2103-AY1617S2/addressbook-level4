@@ -1,12 +1,12 @@
-package seedu.address.ui;
+package seedu.task.ui;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.task.commons.util.FxViewUtil;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.

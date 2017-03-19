@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.task.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.util.FxViewUtil;
+import seedu.task.commons.util.FxViewUtil;
 
 /**
  * The Calender Panel of the App.

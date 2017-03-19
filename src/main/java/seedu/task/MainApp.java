@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.task;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,26 +10,26 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.TaskList;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import seedu.task.commons.core.Config;
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.core.Version;
+import seedu.task.commons.events.ui.ExitAppRequestEvent;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.ConfigUtil;
+import seedu.task.commons.util.StringUtil;
+import seedu.task.logic.Logic;
+import seedu.task.logic.LogicManager;
+import seedu.task.model.Model;
+import seedu.task.model.ModelManager;
+import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.TaskList;
+import seedu.task.model.UserPrefs;
+import seedu.task.model.util.SampleDataUtil;
+import seedu.task.storage.Storage;
+import seedu.task.storage.StorageManager;
+import seedu.task.ui.Ui;
+import seedu.task.ui.UiManager;
 
 /**
  * The main entry point to the application.
@@ -45,7 +45,6 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
 
     @Override
     public void init() throws Exception {
@@ -110,12 +109,13 @@ public class MainApp extends Application {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
-                    "Using default config properties");
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -135,15 +135,16 @@ public class MainApp extends Application {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
-                    "Using default user prefs");
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TaskList");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {

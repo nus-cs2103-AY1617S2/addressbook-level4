@@ -1,9 +1,9 @@
-package seedu.address.logic;
+package seedu.task.logic;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.task.logic.commands.CommandResult;
+import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * API of the Logic component

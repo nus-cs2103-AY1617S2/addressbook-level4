@@ -1,10 +1,10 @@
-package seedu.address.testutil;
+package seedu.task.testutil;
 
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Timing;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Description;
+import seedu.task.model.task.Priority;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Timing;
 
 /**
  * A mutable person object. For testing only.

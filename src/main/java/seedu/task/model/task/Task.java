@@ -1,9 +1,9 @@
-package seedu.address.model.task;
+package seedu.task.model.task;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.model.tag.UniqueTagList;
 
 /**
  * Represents a Task in the ToDo List.

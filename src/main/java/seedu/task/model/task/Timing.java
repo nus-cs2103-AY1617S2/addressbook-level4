@@ -1,9 +1,9 @@
-package seedu.address.model.task;
+package seedu.task.model.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's date in the address book.

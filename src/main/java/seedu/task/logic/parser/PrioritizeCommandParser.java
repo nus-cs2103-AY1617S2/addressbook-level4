@@ -1,17 +1,17 @@
-package seedu.address.logic.parser;
+package seedu.task.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.task.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.model.task.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.PrioritizeCommand;
-import seedu.address.model.task.Priority;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.logic.commands.PrioritizeCommand;
+import seedu.task.model.task.Priority;
 
 public class PrioritizeCommandParser {
 

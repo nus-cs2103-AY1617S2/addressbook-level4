@@ -1,22 +1,22 @@
-package seedu.address.logic.parser;
+package seedu.task.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.EditTaskDescriptor;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.EditCommand;
+import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.EditTaskDescriptor;
 
 /**
  * Parses input arguments and creates a new EditCommand object

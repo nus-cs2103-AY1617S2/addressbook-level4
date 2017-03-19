@@ -1,7 +1,7 @@
-package seedu.address.commons.events.ui;
+package seedu.task.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.task.commons.events.BaseEvent;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * Represents a selection change in the Task List Panel

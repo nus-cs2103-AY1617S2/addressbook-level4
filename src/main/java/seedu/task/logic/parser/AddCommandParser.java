@@ -1,17 +1,17 @@
-package seedu.address.logic.parser;
+package seedu.task.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.IncorrectCommand;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.IncorrectCommand;
 
 /**
  * Parses input arguments and creates a new AddCommand object

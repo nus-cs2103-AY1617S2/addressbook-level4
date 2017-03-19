@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,10 +14,10 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.testutil.TypicalTestPersons;
 
 public class AddressBookTest {
 

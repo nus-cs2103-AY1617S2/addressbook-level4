@@ -1,14 +1,14 @@
-package seedu.address.model.util;
+package seedu.task.model.util;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.TaskList;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Timing;
-import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.TaskList;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Description;
+import seedu.task.model.task.Priority;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.Timing;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {

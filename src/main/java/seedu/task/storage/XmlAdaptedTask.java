@@ -1,18 +1,18 @@
-package seedu.address.storage;
+package seedu.task.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Timing;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Description;
+import seedu.task.model.task.Priority;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.Timing;
 
 /**
  * JAXB-friendly version of the Task.

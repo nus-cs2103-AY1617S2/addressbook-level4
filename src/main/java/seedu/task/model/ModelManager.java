@@ -1,19 +1,19 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.TaskListChangedEvent;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
-import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.model.TaskListChangedEvent;
+import seedu.task.commons.util.CollectionUtil;
+import seedu.task.commons.util.StringUtil;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.

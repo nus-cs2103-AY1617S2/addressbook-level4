@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.task.logic.parser;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,13 +11,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.Timing;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.StringUtil;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Description;
+import seedu.task.model.task.Priority;
+import seedu.task.model.task.Timing;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
