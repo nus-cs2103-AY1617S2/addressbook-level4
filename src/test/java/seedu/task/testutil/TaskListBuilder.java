@@ -1,15 +1,14 @@
-package seedu.address.testutil;
+package seedu.task.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.TaskList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.TaskList;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
 
 /**
- * A utility class to help with building TaskList objects.
- * Example usage: <br>
- *     {@code TaskList ab = new TaskListBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ * A utility class to help with building TaskList objects. Example usage: <br>
+ * {@code TaskList ab = new TaskListBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class TaskListBuilder {
 
