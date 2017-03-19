@@ -5,7 +5,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 
 /**
  *
@@ -44,7 +44,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setStartDate(new TaskDate(email));
+        this.person.setStartDate(new Timing(email));
         return this;
     }
 

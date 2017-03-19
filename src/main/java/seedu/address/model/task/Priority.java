@@ -25,7 +25,7 @@ public class Priority {
             }
             this.value = trimmedPriority;
         } else {
-            this.value = null;
+            this.value = "3";
         }
     }
 

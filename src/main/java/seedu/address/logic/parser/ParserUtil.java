@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -68,25 +68,25 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Description>} if {@code name} is present.
      */
-    public static Optional<Description> parseDescription(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Description(name.get())) : Optional.empty();
+    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
+        assert description != null;
+        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Priority>} if {@code phone} is present.
      */
-    public static Optional<Priority> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Priority(phone.get())) : Optional.empty();
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<TaskDate>} if {@code email} is present.
+     * Parses a {@code Optional<String> email} into an {@code Optional<Timing>} if {@code email} is present.
      */
-    public static Optional<TaskDate> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new TaskDate(email.get())) : Optional.empty();
+    public static Optional<Timing> parseTiming(Optional<String> timing) throws IllegalValueException {
+        assert timing != null;
+        return timing.isPresent() ? Optional.of(new Timing(timing.get())) : Optional.empty();
     }
 
     /**

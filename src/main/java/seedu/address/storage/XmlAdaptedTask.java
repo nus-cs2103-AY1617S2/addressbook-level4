@@ -12,7 +12,7 @@ import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 
 /**
  * JAXB-friendly version of the Task.
@@ -48,8 +48,8 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         priority = source.getPriority().value;
-        startDate = source.getStartDate().value;
-        endDate = source.getEndDate().value;
+        startDate = source.getStartTiming().value;
+        endDate = source.getEndTiming().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -68,8 +68,8 @@ public class XmlAdaptedTask {
         }
         final Description description = new Description(this.description);
         final Priority priority = new Priority(this.priority);
-        final TaskDate startDate = new TaskDate(this.startDate);
-        final TaskDate endDate = new TaskDate(this.endDate);
+        final Timing startDate = new Timing(this.startDate);
+        final Timing endDate = new Timing(this.endDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(description, priority, startDate, endDate, tags);
     }

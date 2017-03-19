@@ -13,8 +13,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class EditTaskDescriptor {
     private Optional<Description> description = Optional.empty();
     private Optional<Priority> priority = Optional.empty();
-    private Optional<TaskDate> startDate = Optional.empty();
-    private Optional<TaskDate> endDate = Optional.empty();
+    private Optional<Timing> startTiming = Optional.empty();
+    private Optional<Timing> endTiming = Optional.empty();
     private Optional<UniqueTagList> tags = Optional.empty();
 
     public EditTaskDescriptor() {}
@@ -22,8 +22,8 @@ public class EditTaskDescriptor {
     public EditTaskDescriptor(EditTaskDescriptor toCopy) {
         this.description = toCopy.getDescription();
         this.priority = toCopy.getPriority();
-        this.startDate = toCopy.getStartDate();
-        this.endDate = toCopy.getEndDate();
+        this.startTiming = toCopy.getStartTiming();
+        this.endTiming = toCopy.getEndTiming();
         this.tags = toCopy.getTags();
     }
 
@@ -32,7 +32,7 @@ public class EditTaskDescriptor {
      */
     public boolean isAnyFieldEdited() {
         return CollectionUtil.isAnyPresent(this.description, this.priority,
-                                      this.startDate, this.endDate, this.tags);
+                                      this.startTiming, this.endTiming, this.tags);
     }
 
     public void setDescription(Optional<Description> description) {
@@ -53,22 +53,22 @@ public class EditTaskDescriptor {
         return priority;
     }
 
-    public void setStartDate(Optional<TaskDate> startDate) {
-        assert startDate != null;
-        this.startDate = startDate;
+    public void setStartTiming(Optional<Timing> startTiming) {
+        assert startTiming != null;
+        this.startTiming = startTiming;
     }
 
-    public Optional<TaskDate> getStartDate() {
-        return startDate;
+    public Optional<Timing> getStartTiming() {
+        return startTiming;
     }
 
-    public void setEndDate(Optional<TaskDate> endDate) {
-        assert endDate != null;
-        this.endDate = endDate;
+    public void setEndTiming(Optional<Timing> endTiming) {
+        assert endTiming != null;
+        this.endTiming = endTiming;
     }
 
-    public Optional<TaskDate> getEndDate() {
-        return endDate;
+    public Optional<Timing> getEndTiming() {
+        return endTiming;
     }
 
 

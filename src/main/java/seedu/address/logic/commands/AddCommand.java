@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.Timing;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -28,16 +28,16 @@ public class AddCommand extends Command {
             + " Study for midterm p/1 sd/04/03/2017 ed/06/03/2017 t/study t/midterm";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values.
      *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalValueException if any of the raw values are invalid 
      */
-    public AddCommand(String name, String priority, String startDate, String endDate, Set<String> tags)
+    public AddCommand(String name, String priority, String startTiming, String endTiming, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -46,8 +46,8 @@ public class AddCommand extends Command {
         this.toAdd = new Task(
                 new Description(name),
                 new Priority(priority),
-                new TaskDate(startDate),
-                new TaskDate(endDate),
+                new Timing(startTiming),
+                new Timing(endTiming),
                 new UniqueTagList(tagSet)
         );
     }
@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

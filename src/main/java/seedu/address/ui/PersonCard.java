@@ -13,29 +13,30 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+//@@author A0164212U
     @FXML
-    private Label name;
+    private Label description;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label priority;
     @FXML
-    private Label email;
-//    @FXML
-//    private Label endDate;
+    private Label startTiming;
+    @FXML
+    private Label endTiming;
     @FXML
     private FlowPane tags;
 
     public PersonCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getDescription().description);
+        description.setText(person.getDescription().description);
         id.setText(displayedIndex + ". ");
-        phone.setText("Priority:" + person.getPriority().value);
-        email.setText(person.getStartDate().value);
-//        endDate.setText(person.getEndDate().value);
+        priority.setText("Priority:" + person.getPriority().value);
+        startTiming.setText("Start Timing: " + person.getStartTiming().value);
+        endTiming.setText("End Timing: " + person.getEndTiming().value);
         initTags(person);
     }
-
+//@@author 
     private void initTags(ReadOnlyTask person) {
 //        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
