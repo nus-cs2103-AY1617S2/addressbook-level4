@@ -31,10 +31,6 @@ public class TimeUnassigned implements TaskDate {
         return false;
     }
 
-    public boolean isHappeningThisWeek() {
-        return false;
-    }
-
     @Override
     public String toString() {
         return MESSAGE_UNASSIGNED_DATE;

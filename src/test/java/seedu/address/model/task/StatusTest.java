@@ -11,9 +11,6 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateUtil;
-import seedu.address.model.task.date.DateTime;
-import seedu.address.model.task.date.DateValue;
 
 public class StatusTest {
 
@@ -65,18 +62,6 @@ public class StatusTest {
         String dateEnding = dateString + " 00:01 pm";
 
         TestStatus(dateString, dateBegining, dateEnding, Status.TOMORROW);
-    }
-
-    @Test
-    public void TestStatusThisWeek() {
-        DateValue date = DateUtil.getEndOfWeek(new DateTime(new Date()));
-        String dateString = " " + date.getDate() + "-"
-                                + (date.getMonth() + 1) + "-"
-                                + (date.getYear() + 1900);
-        String dateBegining = dateString + " 00:00 am";
-        String dateEnding = dateString;
-
-        TestStatus(dateString, dateBegining, dateEnding, Status.THIS_WEEK);
     }
 
     @Test

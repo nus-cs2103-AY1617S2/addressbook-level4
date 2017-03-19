@@ -53,12 +53,6 @@ public class TimePeriod implements TaskDate {
                                 DateUtil.getBeginOfDay(tmr), DateUtil.getEndOfDay(tmr));
     }
 
-    public boolean isHappeningThisWeek() {
-        DateValue today = DateUtil.getToday();
-        return DateUtil.haveIntersection(beginDate.getBeginning(), endDate.getEnding(),
-                                DateUtil.getBeginOfWeek(today), DateUtil.getEndOfWeek(today));
-    }
-
     @Override
     public String toString() {
         return String.format(OUTPUT_FORMAT, beginDate.toString(), endDate.toString());
