@@ -59,7 +59,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartTime(DateTime startTime) {
         this.startTime = startTime;
     }
-    
+
     public void setEndTime(DateTime endTime) {
         this.endTime = endTime;
     }
@@ -92,7 +92,7 @@ public class TestTask implements ReadOnlyTask {
     public Optional<DateTime> getStartTime() {
         return Optional.of(startTime);
     }
-    
+
     @Override
     public Optional<DateTime> getEndTime() {
         return Optional.of(endTime);
@@ -125,7 +125,7 @@ public class TestTask implements ReadOnlyTask {
         if (this.getStartTime().isPresent()) {
             sb.append("d/" + this.getStartTime().get().toString() + " ");
         }
-        
+
         if (this.getEndTime().isPresent()) {
             sb.append("e/" + this.getEndTime().get().toString() + " ");
         }

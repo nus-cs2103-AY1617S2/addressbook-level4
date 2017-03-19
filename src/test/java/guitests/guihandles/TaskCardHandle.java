@@ -25,7 +25,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String ENDTIME_FIELD_ID = "#endTime";
     private static final String TAGS_FIELD_ID = "#tags";
-    
+
     private Node node;
 
     public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
@@ -52,11 +52,11 @@ public class TaskCardHandle extends GuiHandle {
     public String getStatus() {
         return getTextFromLabel(STATUS_FIELD_ID);
     }
-    
+
     public String getStartTime() {
         return getTextFromLabel(STARTTIME_FIELD_ID);
     }
-    
+
     public String getEndTime() {
         return getTextFromLabel(ENDTIME_FIELD_ID);
     }

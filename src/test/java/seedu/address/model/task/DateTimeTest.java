@@ -15,12 +15,4 @@ public class DateTimeTest {
         // valid dateTime
         assertTrue(DateTime.isValidDateTime("03/12/2217 12:00")); // inputs a valid date string
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }

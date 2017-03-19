@@ -21,7 +21,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Create a google doc p/low s/incomplete n/For our project proposal "
-        		+ "d/12/12/2017 12:00 e/12/12/2017 13:00 t/";
+                + "d/12/12/2017 12:00 e/12/12/2017 13:00 t/";
         int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("low")
@@ -92,8 +92,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Do laundry p/hi s/incomplete "
-                                + "n/Twice as many detergent this time " 
-                            	+ "d/12/12/2017 12:00 e/12/12/2017 13:00 t/chores");
+                + "n/Twice as many detergent this time "
+                + "d/12/12/2017 12:00 e/12/12/2017 13:00 t/chores");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

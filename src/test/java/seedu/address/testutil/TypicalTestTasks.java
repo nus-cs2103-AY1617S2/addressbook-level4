@@ -19,8 +19,8 @@ public class TypicalTestTasks {
                     .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
             benson = new TaskBuilder().withName("Wash the dishes")
-            		.withNote("They're in the sink").withStatus("incomplete")
-            		.withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
+                    .withNote("They're in the sink").withStatus("incomplete")
+                    .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
             carl = new TaskBuilder().withName("Do CS2103T post lecture quiz")
                     .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")

@@ -19,7 +19,7 @@ public class MarkCommandTest extends TaskManagerGuiTest {
 
         TestTask taskToMark = expectedTasksList[taskManagerIndex - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withStatus("complete")
-        		.withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
+                .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
 
         assertMarkSuccess(taskManagerIndex, taskManagerIndex, markedTask);
     }

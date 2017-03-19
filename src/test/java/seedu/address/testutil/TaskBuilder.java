@@ -59,7 +59,7 @@ public class TaskBuilder {
         this.task.setStartTime(new DateTime(startTime));
         return this;
     }
-    
+
     public TaskBuilder withEndTime(String endTime) throws IllegalValueException {
         this.task.setEndTime(new DateTime(endTime));
         return this;
