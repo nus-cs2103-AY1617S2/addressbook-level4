@@ -25,4 +25,16 @@ public class DueDate extends TaskDate {
         }
     }
 
+    /**
+     * Validates given due date when user finds by date.
+     *
+     * @throws IllegalValueException if given due date string is invalid.
+     */
+    public DueDate(String dueDate, boolean isFind) throws IllegalValueException {
+        super(dueDate, isFind);
+        if (!isValidTaskDate(this.value, true)) {
+            throw new IllegalValueException(MESSAGE_FIND_DATE_CONSTRAINTS);
+        }
+    }
+
 }
