@@ -28,7 +28,8 @@ public class History {
     }
 
     /**
-     * Retrieve previous TaskManager state and pushes a copy into the Redo History
+     * Retrieve previous TaskManager state and pushes a copy of current state into the Redo History
+     * @param currentState
      * @return previous TaskManager state
      * @throws InvalidUndoException
      */
@@ -42,9 +43,10 @@ public class History {
     }
 
     /**
-     * Retrieve preceding TaskManager state and pushes a copy into the Undo History
+     * Retrieve preceding TaskManager state and pushes a copy of current state into the Undo History
+     * @param currentState
      * @return preceding TaskManager state
-     * @throws InvalidRedoException
+     * @throws InvalidUndoException
      */
     public TaskManager getPrecedingState(TaskManager currentState) throws InvalidUndoException {
         if (this.redoStack.isEmpty()) {
