@@ -27,13 +27,14 @@ public class Event implements ReadOnlyEvent {
     /**
      * Every field must be present and not null.
      */
-    public Event(Title title, Venue venue, StartTime startTime, EndTime endTime, Description description, UniqueTagList tags, boolean status) {
+    public Event(Title title, Venue venue, StartTime startTime, EndTime endTime, UrgencyLevel urgencyLevel, Description description, boolean status, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, status);
         this.title = title;
         this.venue = venue;
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.urgencyLevel = urgencyLevel;
         this.isEventCompleted = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -46,9 +47,10 @@ public class Event implements ReadOnlyEvent {
                 source.getVenue().orElse(null), 
                 source.getStartTime(), 
                 source.getEndTime(),
+                source.getUrgencyLevel().orElse(null), 
                 source.getDescription().orElse(null),
-                source.getTags(),
-                source.hasEventCompleted());
+                source.hasEventCompleted(),
+                source.getTags());
     }
 
     public void setTitle(Title name) {
@@ -70,10 +72,25 @@ public class Event implements ReadOnlyEvent {
         assert venue != null;
         this.venue = venue;
     }
+    
+    @Override
+    public String toString() {
+        return getAsText();
+    }
 
     @Override
     public Optional<Venue> getVenue() {
         return Optional.ofNullable(venue);
+    }
+
+    @Override
+    public StartTime getStartTime() {
+        return this.startTime;
+    }
+
+    @Override
+    public EndTime getEndTime() {
+        return this.endTime;
     }
     
     @Override
@@ -135,20 +152,6 @@ public class Event implements ReadOnlyEvent {
         return Objects.hash(title, venue, startTime, endTime, description, tags);
     }
 
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
-    @Override
-    public StartTime getStartTime() {
-        return this.startTime;
-    }
-
-    @Override
-    public EndTime getEndTime() {
-        return this.endTime;
-    }
 
     public int compareTo(Event o){
         if (this.startTime.compareTo(o.startTime) == 0){
