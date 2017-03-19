@@ -108,6 +108,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void sortTaskListByDeadline() {
+        //filteredTasks.sort();
+    }
+
+    @Override
     public void updateFilteredTaskListByName(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
