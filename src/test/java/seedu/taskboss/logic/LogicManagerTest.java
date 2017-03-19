@@ -50,7 +50,7 @@ import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
-import seedu.taskboss.storage.StorageManager;
+import seedu.taskboss.storage.StorageStub;
 
 public class LogicManagerTest {
 
@@ -88,7 +88,7 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempTaskBossFile = saveFolder.getRoot().getPath() + "TempTaskBoss.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskBossFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageStub(tempTaskBossFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskBoss = new TaskBoss(model.getTaskBoss()); // last saved
