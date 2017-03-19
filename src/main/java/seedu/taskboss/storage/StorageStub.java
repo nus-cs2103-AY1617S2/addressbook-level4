@@ -6,14 +6,13 @@ import seedu.taskboss.model.ReadOnlyTaskBoss;
 /**
  * StorageStub class for dependency injection
  */
-public class StorageStub extends StorageManager {
+public class StorageStub extends Storage {
 
     private TaskBossStorage taskBoss;
-    private String tbFilePath, prefFilePath;
+    private String tbFilePath;
 
-    public StorageStub(String tbFilePath, String prefFilePath) {
+    public StorageStub(String tbFilePath) {
         this.tbFilePath = tbFilePath;
-        this.prefFilePath = prefFilePath;
     }
 
     @Override
