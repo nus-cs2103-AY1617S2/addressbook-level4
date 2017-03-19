@@ -102,6 +102,9 @@ public class LogicManagerTest {
         latestSavedEzDo = new EzDo(model.getEzDo()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
+
+        // sort by a field other than name so that it does not affect the tests
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
     }
 
     @After
@@ -374,9 +377,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
-        // sort by a field other than name so that it does not affect test
-        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
-
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -396,9 +396,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
-        // sort by a field other than name so that it does not affect test
-        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
-
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithName("bla bla KEY bla");
         Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -418,9 +415,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        // sort by a field other than name so that it does not affect test
-        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
-
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
