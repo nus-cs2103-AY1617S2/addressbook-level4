@@ -41,23 +41,23 @@ public class SelectCommandTest extends TodoListGuiTest {
 
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Person: " + index);
+        assertResultMessage("Selected Task: " + index);
         assertPersonSelected(index);
 
         commandBox.runCommand("s " + index);
-        assertResultMessage("Selected Person: " + index);
+        assertResultMessage("Selected Task: " + index);
         assertPersonSelected(index);
 
         commandBox.runCommand("choose " + index);
-        assertResultMessage("Selected Person: " + index);
+        assertResultMessage("Selected Task: " + index);
         assertPersonSelected(index);
 
         commandBox.runCommand("selects " + index);
-        assertResultMessage("Selected Person: " + index);
+        assertResultMessage("Selected Task: " + index);
         assertPersonSelected(index);
 
         commandBox.runCommand("chooses " + index);
-        assertResultMessage("Selected Person: " + index);
+        assertResultMessage("Selected Task: " + index);
         assertPersonSelected(index);
     }
 

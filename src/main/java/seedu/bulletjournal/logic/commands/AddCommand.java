@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
             + "Parameters: TASKNAME d/DUEDATE s/STATUS b/BEGINDATE  [t/TAG]...\n" + "Example: " + COMMAND_WORD
-            + " John Doe d/98765432 s/undone b/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+            + " Join groups d/98765432 s/undone b/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
@@ -36,13 +36,13 @@ public class AddCommand extends Command {
      * @throws IllegalValueException
      *             if any of the raw values are invalid
      */
-    public AddCommand(String name, String phone, String email, String address, Set<String> tags)
+    public AddCommand(String taskname, String duedate, String status, String begindate, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new TaskName(name), new DueDate(phone), new Status(email), new BeginDate(address),
+        this.toAdd = new Task(new TaskName(taskname), new DueDate(duedate), new Status(status), new BeginDate(begindate),
                 new UniqueTagList(tagSet));
     }
 
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

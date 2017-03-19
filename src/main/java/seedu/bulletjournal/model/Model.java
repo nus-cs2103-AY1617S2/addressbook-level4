@@ -19,10 +19,10 @@ public interface Model {
     ReadOnlyTodoList getAddressBook();
 
     /** Deletes the given person. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException;
+    void addTask(Task task) throws UniqueTaskList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
@@ -31,7 +31,7 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */

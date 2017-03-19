@@ -50,7 +50,7 @@ public class TodoList implements ReadOnlyTodoList {
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyTask> persons)
+    public void setTasks(List<? extends ReadOnlyTask> persons)
             throws UniqueTaskList.DuplicatePersonException {
         this.persons.setPersons(persons);
     }
@@ -62,7 +62,7 @@ public class TodoList implements ReadOnlyTodoList {
     public void resetData(ReadOnlyTodoList newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
+            setTasks(newData.getPersonList());
         } catch (UniqueTaskList.DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
@@ -97,7 +97,7 @@ public class TodoList implements ReadOnlyTodoList {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyPerson)
             throws UniqueTaskList.DuplicatePersonException {
         assert editedReadOnlyPerson != null;
 
@@ -139,11 +139,11 @@ public class TodoList implements ReadOnlyTodoList {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 

@@ -13,7 +13,7 @@ import seedu.bulletjournal.commons.util.StringUtil;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
-import seedu.bulletjournal.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.bulletjournal.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -59,25 +59,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws PersonNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         todoList.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicatePersonException {
         todoList.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+    public void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicatePersonException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        todoList.updatePerson(addressBookIndex, editedPerson);
+        todoList.updateTask(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 

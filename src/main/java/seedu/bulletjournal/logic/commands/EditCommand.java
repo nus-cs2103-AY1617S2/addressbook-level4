@@ -26,7 +26,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [TASKNAME] [d/DUEDATE] [s/STATUS] [b/BEGINDATE ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 d/91234567 s/johndoe@yahoo.com";
+            + "Example: " + COMMAND_WORD + " 1 d/91234567 s/undone";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -63,7 +63,7 @@ public class EditCommand extends Command {
         Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
+            model.updateTask(filteredPersonListIndex, editedPerson);
         } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

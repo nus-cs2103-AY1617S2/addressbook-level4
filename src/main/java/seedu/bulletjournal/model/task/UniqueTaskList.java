@@ -69,11 +69,11 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws PersonNotFoundException if no such person could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws PersonNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
-            throw new PersonNotFoundException();
+            throw new TaskNotFoundException();
         }
         return personFoundAndDeleted;
     }
@@ -125,6 +125,6 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified person in the list would fail because
      * there is no such matching person in the list.
      */
-    public static class PersonNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {}
 
 }

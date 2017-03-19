@@ -4,7 +4,7 @@ import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
-import seedu.bulletjournal.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.bulletjournal.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(personToDelete);
-        } catch (PersonNotFoundException pnfe) {
+        } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
 
