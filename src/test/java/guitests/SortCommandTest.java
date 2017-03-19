@@ -38,19 +38,20 @@ public class SortCommandTest extends EzDoGuiTest {
         // sort by due date
         commandBox.runCommand("s d");
         expectedList = new TestTask[]{td.carl, td.elle, td.george, td.daniel, td.fiona, td.benson, td.alice, td.kappa,
-        td.leroy};
+                                      td.leroy};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // sort by name
         commandBox.runCommand("sort n");
+        
         expectedList = new TestTask[]{td.alice, td.benson, td.carl, td.daniel, td.elle, td.fiona, td.george, td.kappa,
-        td.leroy};
+                                      td.leroy};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // sort by priority
         commandBox.runCommand("s p");
         expectedList = new TestTask[]{td.alice, td.benson, td.carl, td.daniel, td.fiona, td.elle, td.george, td.kappa,
-        td.leroy};
+                                      td.leroy};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         //invalid command
@@ -67,7 +68,7 @@ public class SortCommandTest extends EzDoGuiTest {
         // check that Jack is in the right place after adding him
         commandBox.runCommand(td.jack.getAddCommand(false));
         expectedList = new TestTask[]{td.carl, td.elle, td.george, td.jack, td.daniel, td.fiona, td.benson, td.alice,
-                                      td.kappa,td.leroy};
+                                      td.kappa, td.leroy};
         assertTrue(taskListPanel.isListMatching(expectedList));
 
         // check that Carl is in the right place after editing his due date
