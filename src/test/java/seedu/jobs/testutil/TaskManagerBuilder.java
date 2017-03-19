@@ -14,23 +14,23 @@ import seedu.jobs.model.task.UniqueTaskList;
  */
 public class TaskManagerBuilder {
 
-    private TaskBook addressBook;
+    private TaskBook taskManager;
 
-    public TaskManagerBuilder(TaskBook addressBook) {
-        this.addressBook = addressBook;
+    public TaskManagerBuilder(TaskBook taskManager) {
+        this.taskManager = taskManager;
     }
 
     public TaskManagerBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskManager.addTask(task);
         return this;
     }
 
     public TaskManagerBuilder withTag(String tagName) throws IllegalValueException {
-        addressBook.addTag(new Tag(tagName));
+        taskManager.addTag(new Tag(tagName));
         return this;
     }
 
     public TaskBook build() {
-        return addressBook;
+        return taskManager;
     }
 }
