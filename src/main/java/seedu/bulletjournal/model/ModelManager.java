@@ -101,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredPersonList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+
     //@@author A0105748B
     @Override
     public void updateMatchedTaskList(Set<String> keywords) {
@@ -163,7 +163,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class StatusQualifier implements Qualifier {
         private Set<String> statusKeyWords;
 

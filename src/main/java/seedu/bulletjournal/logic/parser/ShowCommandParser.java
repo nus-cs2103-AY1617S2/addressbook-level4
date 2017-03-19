@@ -10,8 +10,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 import seedu.bulletjournal.logic.commands.Command;
-import seedu.bulletjournal.logic.commands.ShowCommand;
 import seedu.bulletjournal.logic.commands.IncorrectCommand;
+import seedu.bulletjournal.logic.commands.ShowCommand;
 
 /**
  * Parses input arguments and creates a new ShowCommand object
