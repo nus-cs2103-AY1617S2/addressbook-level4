@@ -7,7 +7,7 @@ import seedu.address.model.StateManager;
  * Redo most recent command
  */
 public class RedoCommand extends Command {
-    public static final String COMMAND_WORD = "Redo";
+    public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_SUCCESS = "Redid most recent command";
     private final StateManager stateManager = StateManager.getInstance();
 
