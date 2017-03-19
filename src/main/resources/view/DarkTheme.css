@@ -15,7 +15,7 @@
 
 #taskListPanelPlaceholder {
 	-fx-background-image: url("../images/astronaut.png");
-	-fx-background-repeat: stretch;   
+	-fx-background-repeat: stretch;
 	-fx-background-position: bottom right;
 }
 
