@@ -63,6 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskList.removeTask(target);
         indicateTaskListChanged();
     }
+    
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {

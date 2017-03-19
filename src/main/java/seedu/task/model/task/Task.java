@@ -16,6 +16,7 @@ public class Task implements ReadOnlyTask {
     private DueDate dueDate;
     private Duration duration;
     private UniqueTagList tags;
+    private Complete complete;
 
 
     /**
@@ -31,6 +32,7 @@ public class Task implements ReadOnlyTask {
         this.dueDate = dueDate;
         this.duration = duration;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.complete = new Complete(false);
     }
 
     /**
@@ -71,15 +73,30 @@ public class Task implements ReadOnlyTask {
     public Duration getDuration() {
         return duration;
     }
+    
+    @Override
+    public Complete getComplete() {
+        return complete;
+    }
 
     public void setDuration(Duration duration) {
         this.duration = duration;
+    }
+    
+    public void setComplete() {
+        this.complete.setCompete();
+    }
+    
+    public void resetComplete() {
+        this.complete.setNotCompete();
     }
 
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
+    
+
 
     /**
      * Replaces this tasks's tags with the tags in the argument tag list.
