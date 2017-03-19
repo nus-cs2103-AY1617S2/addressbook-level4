@@ -17,7 +17,7 @@ public class StorageStub extends StorageManager {
     }
     
     @Override
-    public StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
+    public void StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
         this.taskBossStorage = taskBossStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
