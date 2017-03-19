@@ -185,7 +185,7 @@ public class UniqueTagList implements Iterable<Tag> {
             super("Operation would result in duplicate tags");
         }
     }
-    
+
     /**
      * Signals that an operation targeting a specified tag in the list would fail because
      * there is no such matching tag in the list.
