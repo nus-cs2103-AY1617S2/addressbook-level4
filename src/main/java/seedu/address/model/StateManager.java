@@ -26,6 +26,13 @@ public class StateManager {
     }
     
     /**
+     * On each new command, add a new command onto the undo stack to track its history
+     */
+    public void trackCommand(StateCommandPair newCommandPair){
+        this.undoStack.push(newCommandPair);
+    }
+    
+    /**
      * Undo the most recent command, then store that undo command in a redo stack
      */
     public void undo() {
