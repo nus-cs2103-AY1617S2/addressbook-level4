@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ReadOnlyToDoList;
+import seedu.address.model.ToDoList;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
@@ -20,7 +23,7 @@ import seedu.address.model.task.Venue;
 /**
  * Edits the details of an existing task in the to-do list.
  */
-public class EditCommand extends Command {
+public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -37,6 +40,8 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private ReadOnlyToDoList originalToDoList;
+    private CommandResult commandResultToUndo;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
@@ -51,9 +56,10 @@ public class EditCommand extends Command {
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
-
+  //@@author A0143648Y
     @Override
     public CommandResult execute() throws CommandException {
+        originalToDoList = new ToDoList(model.getToDoList());
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -69,7 +75,26 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
+        commandResultToUndo = new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        updateUndoLists();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+    
+    @Override
+    public void updateUndoLists() {
+        if (previousToDoLists == null) {
+            previousToDoLists = new ArrayList<ReadOnlyToDoList>(3);
+            previousCommandResults = new ArrayList<CommandResult>(3);
+        }
+        if (previousToDoLists.size() >= 3) {
+            previousToDoLists.remove(0);
+            previousCommandResults.remove(0);
+            previousToDoLists.add(originalToDoList);
+            previousCommandResults.add(commandResultToUndo);
+        } else {
+            previousToDoLists.add(originalToDoList);
+            previousCommandResults.add(commandResultToUndo);
+        }
     }
 
     /**
