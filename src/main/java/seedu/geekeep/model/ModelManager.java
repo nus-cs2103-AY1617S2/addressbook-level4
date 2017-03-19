@@ -229,4 +229,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    @Override
+    public void redo() throws NothingToRedoException {
+        if (futureTaskManagers.empty()) {
+            throw new NothingToRedoException();
+        }
+        pastTaskManagers.push(new TaskManager(taskManager));
+        taskManager.resetData(futureTaskManagers.pop());
+        indicateTaskManagerChanged();
+    }
+
 }

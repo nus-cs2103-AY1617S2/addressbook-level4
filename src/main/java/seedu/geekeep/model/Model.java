@@ -16,6 +16,12 @@ public interface Model {
     public static class NothingToUndoException extends Exception {
     }
 
+    /**
+     * Signals that an undo command would fail because there is nothing to redo.
+     */
+    public static class NothingToRedoException extends Exception {
+    }
+
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -68,6 +74,8 @@ public interface Model {
     void markTaskUndone(int filteredTaskListIndex);
 
     void undo() throws NothingToUndoException;
+
+    void redo() throws NothingToRedoException;
 
 }
 
