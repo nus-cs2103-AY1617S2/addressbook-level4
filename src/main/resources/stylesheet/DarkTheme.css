@@ -1,12 +1,14 @@
 @import "Colors.css";
 
+/* DEFAULT STYLING */
+
 .root {
     -fx-background-color: theme-white;
     -fx-control-inner-background: theme-white;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: theme-black;
     -fx-background-insets: 3;
 }
 
@@ -25,6 +27,20 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2.0;
+    -fx-padding: 0.5em 0.5em 0.5em 0.1em;
+    -fx-border-color: theme-gray;
+    -fx-border-width: 0 0 2 0;
+    -fx-prompt-text-fill: derive(theme-black, 50.0%);
+    -fx-highlight-fill: theme-black;
+}
+
+.text-field:focused {
+    -fx-border-color: derive(theme-black, 80.0%);
 }
 
 .label {
@@ -58,3 +74,8 @@
     -fx-border-color: theme-white;
 }
 
+/* TASK */
+
+.completed .text {
+    -fx-strikethrough: true;
+}
