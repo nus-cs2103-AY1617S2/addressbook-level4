@@ -169,6 +169,8 @@ public class UniqueTaskList implements Iterable<Task> {
                 }
             };
             break;
+        default:
+            assert false : "Unsupported sort criteria should not be used";
         }
         assert taskComparator != null;
         FXCollections.sort(internalList, taskComparator);
