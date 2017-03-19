@@ -24,7 +24,7 @@ public class Task implements ReadOnlyTask{
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, EndTime endTime, Description description, boolean status, UrgencyLevel urgencyLevel, UniqueTagList tags) {
+    public Task(Title title, Venue venue, EndTime endTime, UrgencyLevel urgencyLevel, Description description, boolean status,  UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, status);
         this.title = title;
         this.venue = venue;
@@ -42,9 +42,9 @@ public class Task implements ReadOnlyTask{
         this(source.getTitle(), 
                 source.getVenue().orElse(null), 
                 source.getEndTime().orElse(null),
+                source.getUrgencyLevel().orElse(null),
                 source.getDescription().orElse(null), 
                 source.hasTaskCompleted(),
-                source.getUrgencyLevel().orElse(null),
                 source.getTags());
     }
 
