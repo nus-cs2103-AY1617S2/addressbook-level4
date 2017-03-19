@@ -2,6 +2,7 @@
 package seedu.address.model;
 
 import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Class to store an action, and it's inverse
@@ -10,31 +11,24 @@ public class StateCommandPair {
     private Command executeCommand;
     private Command undoCommand;
     
-    public StateCommandPair(Command cmd) {
+    public StateCommandPair(Command cmd, Command inverseCmd) {
         this.executeCommand = cmd;
-        this.undoCommand = this.evaluateInverse(cmd);
+        this.undoCommand = inverseCmd;
     }
     
     /**
      * Executes the command previously entered (for redo)
+     * @throws CommandException 
      */
-    public void execute() {
-        System.out.println(executeCommand);
+    public void execute() throws CommandException {
+        this.executeCommand.execute();
     }
     
     /**
      * Executes the inverse of the command previously entered (for undo)
+     * @throws CommandException 
      */
-    public void executeInvese() {
-        System.out.println(undoCommand);
-    }
-    
-    /**
-     * 
-     * @param Command
-     * @return an Inverse action of the Command
-     */
-    private Command evaluateInverse(Command cmd) {
-        return cmd;// stub
+    public void executeInvese() throws CommandException {
+        this.undoCommand.execute();
     }
 }
