@@ -1,5 +1,6 @@
 package seedu.ezdo.model.task;
 
+import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.util.DateUtil.compareDateStrings;
 
 import java.text.ParseException;
@@ -44,12 +45,20 @@ public class ModelManagerTest {
         modelManager.checkTaskDate(task);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void compareDate_parseFail() {
         String dateStringOne = "12345";
-        String dateStringTwo = "11/11/2016";
+        String dateStringTwo = "11/11/2016 12:34";
 
-        compareDateStrings(dateStringOne, dateStringTwo);
+        boolean parsingFailed;
+        try {
+            compareDateStrings(dateStringOne, dateStringTwo);
+            parsingFailed = false;
+        } catch (AssertionError ae) {
+            parsingFailed =  true;
+        }
+
+        assertTrue(parsingFailed);
     }
 
 
