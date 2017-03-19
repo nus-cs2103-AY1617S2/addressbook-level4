@@ -49,9 +49,10 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY,
                                                                 PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
 
-        if (!argsTokenizer.validateTokens(tokens)) {
+        if (!argsTokenizer.validateTokens(tokens) || (argsTokenizer.validateDate(tokens) == -1)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
         argsTokenizer.tokenize(parameters);
 
         try {
