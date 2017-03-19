@@ -1,8 +1,8 @@
 package seedu.bulletjournal.testutil;
 
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.BeginTime;
-import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.BeginDate;
+import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
@@ -13,9 +13,9 @@ import seedu.bulletjournal.model.task.TaskName;
 public class TestTask implements ReadOnlyTask {
 
     private TaskName taskName;
-    private BeginTime beginTime;
+    private BeginDate beginDate;
     private Status status;
-    private Deadline deadline;
+    private DueDate dueDate;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -26,10 +26,10 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code personToCopy}.
      */
     public TestTask(TestTask personToCopy) {
-        this.taskName = personToCopy.getName();
-        this.deadline = personToCopy.getPhone();
+        this.taskName = personToCopy.getTaskName();
+        this.dueDate = personToCopy.getPhone();
         this.status = personToCopy.getEmail();
-        this.beginTime = personToCopy.getAddress();
+        this.beginDate = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,16 +37,16 @@ public class TestTask implements ReadOnlyTask {
         this.taskName = taskName;
     }
 
-    public void setAddress(BeginTime beginTime) {
-        this.beginTime = beginTime;
+    public void setAddress(BeginDate beginDate) {
+        this.beginDate = beginDate;
     }
 
     public void setEmail(Status status) {
         this.status = status;
     }
 
-    public void setPhone(Deadline deadline) {
-        this.deadline = deadline;
+    public void setPhone(DueDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -54,13 +54,13 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskName getName() {
+    public TaskName getTaskName() {
         return taskName;
     }
 
     @Override
-    public Deadline getPhone() {
-        return deadline;
+    public DueDate getPhone() {
+        return dueDate;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public BeginTime getAddress() {
-        return beginTime;
+    public BeginDate getAddress() {
+        return beginDate;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class TestTask implements ReadOnlyTask {
  */
     public String getAddCommand(String addCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append(addCommand + this.getName().fullName + " ");
+        sb.append(addCommand + this.getTaskName().fullName + " ");
         sb.append("b/" + this.getAddress().value + " ");
         sb.append("d/" + this.getPhone().value + " ");
         sb.append("s/" + this.getEmail().value + " ");

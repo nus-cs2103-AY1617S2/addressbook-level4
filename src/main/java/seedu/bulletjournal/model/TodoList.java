@@ -15,7 +15,6 @@ import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
-import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
 /**
  * Wraps all data at the address-book level
@@ -23,7 +22,7 @@ import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
  */
 public class TodoList implements ReadOnlyTodoList {
 
-    private final UniqueTaskList persons;
+    private final UniqueTaskList tasks;
     private final UniqueTagList tags;
 
     /*
@@ -34,7 +33,7 @@ public class TodoList implements ReadOnlyTodoList {
      *   among constructors.
      */
     {
-        persons = new UniqueTaskList();
+        tasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
@@ -50,9 +49,9 @@ public class TodoList implements ReadOnlyTodoList {
 
 //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyTask> persons)
-            throws UniqueTaskList.DuplicatePersonException {
-        this.persons.setPersons(persons);
+    public void setTasks(List<? extends ReadOnlyTask> persons)
+            throws UniqueTaskList.DuplicateTaskException {
+        this.tasks.setPersons(persons);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -62,8 +61,8 @@ public class TodoList implements ReadOnlyTodoList {
     public void resetData(ReadOnlyTodoList newData) {
         assert newData != null;
         try {
-            setPersons(newData.getPersonList());
-        } catch (UniqueTaskList.DuplicatePersonException e) {
+            setTasks(newData.getTaskList());
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
         try {
@@ -71,7 +70,7 @@ public class TodoList implements ReadOnlyTodoList {
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "AddressBooks should not have duplicate tags";
         }
-        syncMasterTagListWith(persons);
+        syncMasterTagListWith(tasks);
     }
 
 //// person-level operations
@@ -83,9 +82,9 @@ public class TodoList implements ReadOnlyTodoList {
      *
      * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniqueTaskList.DuplicatePersonException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        persons.add(p);
+        tasks.add(p);
     }
 
     /**
@@ -97,8 +96,8 @@ public class TodoList implements ReadOnlyTodoList {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
-            throws UniqueTaskList.DuplicatePersonException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyPerson)
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyPerson != null;
 
         Task editedPerson = new Task(editedReadOnlyPerson);
@@ -106,7 +105,7 @@ public class TodoList implements ReadOnlyTodoList {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        persons.updatePerson(index, editedPerson);
+        tasks.updatePerson(index, editedPerson);
     }
 
     /**
@@ -139,11 +138,11 @@ public class TodoList implements ReadOnlyTodoList {
         persons.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
-        if (persons.remove(key)) {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+        if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 
@@ -157,13 +156,13 @@ public class TodoList implements ReadOnlyTodoList {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return tasks.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getPersonList() {
-        return new UnmodifiableObservableList<>(persons.asObservableList());
+    public ObservableList<ReadOnlyTask> getTaskList() {
+        return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
     @Override
@@ -175,13 +174,13 @@ public class TodoList implements ReadOnlyTodoList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TodoList // instanceof handles nulls
-                && this.persons.equals(((TodoList) other).persons)
+                && this.tasks.equals(((TodoList) other).tasks)
                 && this.tags.equalsOrderInsensitive(((TodoList) other).tags));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(tasks, tags);
     }
 }
