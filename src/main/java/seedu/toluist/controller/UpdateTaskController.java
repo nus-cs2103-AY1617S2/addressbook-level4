@@ -47,8 +47,8 @@ public class UpdateTaskController extends Controller {
         String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getTasks().size());
-        Task task = uiStore.getTasks(indexes).get(0);
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
+        Task task = uiStore.getShownTasks(indexes).get(0);
 
         String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
         LocalDateTime startDateTime = DateTimeUtil.parseDateString(startDateToken);

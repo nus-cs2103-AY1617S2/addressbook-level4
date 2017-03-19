@@ -39,17 +39,21 @@ public class UiStore {
         this.viewedTasks = tasks;
     }
 
+    public ArrayList<Task> getTasks() {
+        return viewedTasks;
+    }
+
     /**
      * Returns list of tasks are currently shown on the Ui
      */
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getShownTasks() {
         return viewedTasks.stream()
                           .filter(switchPredicate.getPredicate())
                           .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public ArrayList<Task> getTasks(List<Integer> indexes) {
-        List<Task> shownTasks = getTasks();
+    public ArrayList<Task> getShownTasks(List<Integer> indexes) {
+        List<Task> shownTasks = getShownTasks();
         ArrayList<Task> tasks = new ArrayList<>();
         for (int index : indexes) {
             if (index < 1 || index > shownTasks.size()) {
@@ -61,6 +65,6 @@ public class UiStore {
     }
 
     public ObservableList<Task> getUiTasks() {
-        return FXCollections.observableArrayList(getTasks());
+        return FXCollections.observableArrayList(getShownTasks());
     }
 }

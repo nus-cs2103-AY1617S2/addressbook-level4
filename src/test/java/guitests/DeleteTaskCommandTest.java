@@ -86,7 +86,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         }
 
         // Use shallow copy of task list so it doesn't mutate upon calling delete command
-        List<Task> allTasks = (List<Task>) UiStore.getInstance().getTasks().clone();
+        List<Task> allTasks = (List<Task>) UiStore.getInstance().getShownTasks().clone();
 
         commandBox.runCommand(deleteCommand);
 

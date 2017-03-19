@@ -46,7 +46,6 @@ public class SwitchController extends Controller {
             return new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
         }
 
-        UiStore uiStore = UiStore.getInstance();
         String messageTemplate = uiStore.getTasks().size() == TodoList.load().getTasks().size()
                 ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
                 : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
@@ -56,9 +55,9 @@ public class SwitchController extends Controller {
         return new CommandResult(String.format(
                 messageTemplate,
                 switchPredicate.getDisplayName(),
-                UiStore.getInstance().getTasks().stream().filter(switchPredicate.getPredicate()).collect(
+                UiStore.getInstance().getShownTasks().stream().filter(switchPredicate.getPredicate()).collect(
                         Collectors.toList()).size(),
-                UiStore.getInstance().getTasks().size()));
+                UiStore.getInstance().getShownTasks().size()));
     }
 
     public HashMap<String, String> tokenize(String command) {

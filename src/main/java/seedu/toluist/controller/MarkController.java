@@ -44,7 +44,7 @@ public class MarkController extends Controller {
         String indexToken = tokens.get(INDEX_TERM);
         String markTypeToken = tokens.get(MARK_TERM);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken,
-                UiStore.getInstance().getTasks().size());
+                UiStore.getInstance().getShownTasks().size());
 
         if (indexes.isEmpty()) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX);
@@ -67,7 +67,7 @@ public class MarkController extends Controller {
     }
 
     private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
-        ArrayList<Task> tasks = UiStore.getInstance().getTasks(taskIndexes);
+        ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
             task.setCompleted(isCompleted);
         }
