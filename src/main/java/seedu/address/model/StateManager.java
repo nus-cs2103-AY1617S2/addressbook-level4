@@ -4,7 +4,6 @@ package seedu.address.model;
 import java.util.Stack;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.StateCommandPair;
 
 /**
  * Singleton class to handle Undo/Redo commands
@@ -31,21 +30,21 @@ public class StateManager {
     /**
      * Check if stack exist for redo
      */
-    public boolean redoStackHasCommands(){
+    public boolean redoStackHasCommands() {
         return !redoStack.isEmpty();
     }
 
     /**
      * Check if stack exist for undo
      */
-    public boolean undoStackHasCommands(){
+    public boolean undoStackHasCommands() {
         return !undoStack.isEmpty();
     }
 
     /**
      * On each new command, add a new command onto the undo stack to track its history and clear the redo history stack
      */
-    public void onNewCommand(StateCommandPair newCommandPair){
+    public void onNewCommand(StateCommandPair newCommandPair) {
         this.undoStack.push(newCommandPair);
         this.redoStack.clear();
     }

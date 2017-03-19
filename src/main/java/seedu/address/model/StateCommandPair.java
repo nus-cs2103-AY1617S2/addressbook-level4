@@ -1,7 +1,7 @@
 //@@author A0114395E
 package seedu.address.model;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
