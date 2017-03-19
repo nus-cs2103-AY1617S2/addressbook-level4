@@ -40,9 +40,7 @@ public class XmlTaskListStorageTest {
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
+        return prefsFileInTestDataFolder != null ? TEST_DATA_FOLDER + prefsFileInTestDataFolder : null;
     }
 
     @Test
@@ -56,8 +54,10 @@ public class XmlTaskListStorageTest {
         thrown.expect(DataConversionException.class);
         readTaskList("NotXmlFormatTaskList.xml");
         fail();
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
+        /*
+         * IMPORTANT: Any code below an exception-throwing line (like the one
+         * above) will be ignored. That means you should not have more than one
+         * exception test in one method
          */
     }
 
@@ -68,22 +68,23 @@ public class XmlTaskListStorageTest {
         TaskList original = td.getTypicalTaskList();
         XmlTaskListStorage xmlTaskListStorage = new XmlTaskListStorage(filePath);
 
-        //Save in new file and read back
+        // Save in new file and read back
         xmlTaskListStorage.saveTaskList(original, filePath);
         ReadOnlyTaskList readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskList(readBack));
 
-        //Modify data, overwrite exiting file, and read back
+        // Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hoon));
         original.removeTask(new Task(td.alice));
         xmlTaskListStorage.saveTaskList(original, filePath);
         readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskList(readBack));
 
-        //Save and read without specifying file path
+        // Save and read without specifying file path
         original.addTask(new Task(td.ida));
-        xmlTaskListStorage.saveTaskList(original); //file path not specified
-        readBack = xmlTaskListStorage.readTaskList().get(); //file path not specified
+        xmlTaskListStorage.saveTaskList(original); // file path not specified
+        readBack = xmlTaskListStorage.readTaskList().get(); // file path not
+                                                            // specified
         assertEquals(original, new TaskList(readBack));
 
     }
@@ -105,6 +106,5 @@ public class XmlTaskListStorageTest {
         saveTaskList(new TaskList(), null);
         fail();
     }
-
 
 }

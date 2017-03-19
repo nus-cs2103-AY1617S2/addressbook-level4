@@ -27,8 +27,6 @@ public class XmlAdaptedTask {
     private String startDate;
     @XmlElement(required = true)
     private String endDate;
-    @XmlElement(required = true)
-    private String address;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
