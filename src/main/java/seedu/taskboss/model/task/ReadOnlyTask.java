@@ -6,7 +6,7 @@ import seedu.taskboss.model.category.UniqueCategoryList;
  * A read-only immutable interface for a Task in TaskBoss.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyTask extends Comparable<ReadOnlyTask>{
+public interface ReadOnlyTask {
 
     Name getName();
     PriorityLevel getPriorityLevel();
@@ -19,7 +19,6 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask>{
      * changes on the returned list will not affect the task's internal categories.
      */
     UniqueCategoryList getCategories();
-    int compareTo(ReadOnlyTask o);
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
