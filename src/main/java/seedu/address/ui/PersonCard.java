@@ -31,12 +31,14 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         description.setText(person.getDescription().description);
         id.setText(displayedIndex + ". ");
-        priority.setText("Priority:" + person.getPriority().value);
+        priority.setText("Priority: " + person.getPriority().value);
+        priority.setStyle("-fx-background-color: " + person.getPriority().getPriorityColor() + ";");
         startTiming.setText("Start Timing: " + person.getStartTiming().value);
         endTiming.setText("End Timing: " + person.getEndTiming().value);
         initTags(person);
     }
 //@@author 
+
     private void initTags(ReadOnlyTask person) {
 //        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
