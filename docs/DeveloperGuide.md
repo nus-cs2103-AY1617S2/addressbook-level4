@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# doTASK - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Miao Ling`, `Ian`, `Qi Xiang` and `Dylan`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -439,14 +439,29 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add Task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User request to add a task
+2. doTASK adds the task <br>
+Use case ends.
+
+**Extensions**
+
+1a. The task has invalid parameters eg. a/
+
+> 1a1. doTASK shows an error message <br>
+  Use case resumes at step 1
+
+#### Use case: Delete Task
+
+**MSS**
+
+1. User requests to list tasks
+2. doTASK shows a list of tasks
+3. User requests to delete a specific task in the list
+4. doTASK deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -457,10 +472,95 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. doTASK shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
+
+#### Use case: List commands
+
+**MSS**
+
+1. User requests to get a list of basic commands
+2. doTASK shows a list of basic commands <br>
+Use case ends.
+
+#### Use case: Editing parameters of a specified task
+
+**MSS**
+
+1. User requests to get a list of tasks
+2. doTASK shows a list of tasks
+3. User requests to edit the parameters of a specified task
+4. doTASK edits the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends.
+
+3a. Specified parameters are wrong
+
+> 3a1. doTASK shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Searching for a task
+
+**MSS**
+
+1. User requests to search for a task
+2. doTASK shows a list of tasks related to the the keyword
+Use case ends.
+
+**Extensions**
+
+2a. There no tasks related to the keyword
+
+> Use case ends
+
+#### Use case: Completing a task
+
+**MSS**
+
+1. User requests to search for a task
+2. doTask shows a list of tasks related to the keyword
+3. User requests to mark the task as completed
+4. doTASK marks the task as completed
+Use case ends.
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+#### Use case: Clear all the tasks
+
+**MSS** 
+
+1. User requests to clear all the tasks
+2. doTASK clears the list of tasks
+Use case ends.
+
+#### Use case: Clearing a specified subset of tasks
+
+**MSS**
+
+1. User requests to search for the tasks related to the input
+2. doTASK shows the list of tasks related to the input
+3. User requests to clear the list of tasks
+4. doTASK clears the list of tasks
+Use case ends.
+
+#### Use case: Find upcoming tasks
+
+**MSS**
+
+1. User requests to search for the upcoming tasks
+2. doTASK shows the list of task that is near to the dateline
+Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
