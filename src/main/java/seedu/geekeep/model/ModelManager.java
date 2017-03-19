@@ -1,6 +1,7 @@
 package seedu.geekeep.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -23,6 +24,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final Stack<TaskManager> pastTaskManagers;
+    private final Stack<TaskManager> futureTaskManagers;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -35,6 +38,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        pastTaskManagers = new Stack<>();
+        futureTaskManagers = new Stack<>();
 
     }
 
@@ -44,6 +49,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -60,12 +67,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -76,6 +87,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskListIndex, editedTask);
         indicateTaskManagerChanged();
@@ -159,6 +172,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTaskDone(taskListIndex);
         indicateTaskManagerChanged();
@@ -166,6 +181,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTaskUndone(taskListIndex);
         indicateTaskManagerChanged();
