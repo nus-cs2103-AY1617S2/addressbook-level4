@@ -499,12 +499,12 @@ public class LogicManagerTest {
     public void assertUndoException() {
         assertCommandFailure("undo", History.MESSAGE_INVALID_UNDO);
     }
-    
+
     @Test
     public void assertRedoException() {
         assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
     }
-    
+
     @Test
     public void executeUndoFailure() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -514,7 +514,7 @@ public class LogicManagerTest {
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
         assertCommandFailure("undo", History.MESSAGE_INVALID_UNDO);
     }
-    
+
     @Test
     public void executeRedoFailure() throws Exception {
         TestDataHelper helper = new TestDataHelper();
