@@ -1,0 +1,72 @@
+package seedu.address.logic.commands;
+
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.EndTime;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UrgencyLevel;
+import seedu.address.model.task.Venue;
+
+/**
+ * Adds a Task to the address book.
+ */
+public class AddTaskCommand extends Command {
+
+    public static final String COMMAND_WORD = "add";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Task to the to-do list. "
+            + "Parameters: TITLE @@VENUE from:STARTTIME to:ENDTIME **URGENCYLEVEL d:DESCRIPTION  ##[TAG]...\n"
+            + "Example: " + COMMAND_WORD
+            + " CS2103 Tutorial @@COM1-B110 from:March 8,10.00am to:March 8, 11.00am "
+            + "**5 d:have to present V0.2 ##lesson ##project";
+
+    public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the address book";
+
+    private final Task toAdd;
+
+    /**
+     * Creates an AddCommand using raw values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddTaskCommand(String title, Optional<String> venue, Optional<String> endtime,
+            Optional<String> urgencyLevel, Optional<String> description, Set<String> tags)
+                    throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+
+        Title tempTitle = new Title(title);
+        Venue tempVenue = venue.isPresent()? new Venue(venue.get()) : null;
+        EndTime tempEndTime = endtime.isPresent()? new EndTime(endtime.get()) : null;
+        UrgencyLevel tempUrgencyLevel = urgencyLevel.isPresent()? new UrgencyLevel(urgencyLevel.get()) : null;
+        Description tempDescription = description.isPresent()? new Description(description.get()) : null;
+        UniqueTagList tagList = new UniqueTagList(tagSet);
+
+        this.toAdd = new Task(tempTitle, tempVenue, tempEndTime, tempUrgencyLevel, tempDescription, false, tagList);
+    }
+
+    @Override
+    public CommandResult execute() throws CommandException {
+        assert model != null;
+        try {
+            model.addTask(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
+    }
+
+}
