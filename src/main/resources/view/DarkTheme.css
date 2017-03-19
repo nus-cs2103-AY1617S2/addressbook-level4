@@ -19,7 +19,7 @@
 
 .titled-pane {
 	-fx-text-fill: #e74c3c;
-	-fx-font-family: "Open Sans Semibold";
+	-fx-font-family: "Open Sans";
 	-fx-font-size: 17px;
 }
 
@@ -31,18 +31,22 @@
 }
 
 .titled-pane > .title > .arrow-button .arrow {
-	-fx-background-color: #e74c3c;
+	-fx-background-color: white;
+	-fx-border-color: #e74c3c;
+	-fx-border-width: 1 1 1 1;
 	-fx-background-insets: 1 0 -1 0, 0;
 	-fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
-	-fx-shape: "M 0 0 h 7 l -3.5 4 z";
+	-fx-shape: "M 0 0 h 4 l -2 2 z";
 	-fx-effect: null;
 }
 
-.titled-pane:focused > .title > .arrow-button .arrow {
-	-fx-background-color: #e74c3c;
+.titled-pane:collapsed > .title > .arrow-button .arrow {
+	-fx-background-color: white;
+	-fx-border-color: #e74c3c;
+	-fx-border-width: 1 1 1 1;
 	-fx-background-insets: 1 0 -1 0, 0;
 	-fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
-	-fx-shape: "M 0 0 h 7 l -3.5 4 z";
+	-fx-shape: "M 0 0 h 4 l -2 2 z";
 	-fx-effect: null;
 }
 
@@ -188,13 +192,13 @@
 
 .cell_big_label {
 	-fx-font-family: "Open Sans" !important;
-    -fx-font-size: 17px;
-    -fx-text-fill: black !important;
+    -fx-font-size: 16px;
+    -fx-text-fill: #22313F !important;
 }
 
 .cell_small_label {
 	-fx-font-family: "Open Sans Light" !important;
-    -fx-font-size: 16px;
+    -fx-font-size: 15px;
     -fx-text-fill: #6C7A89;
 }
 
