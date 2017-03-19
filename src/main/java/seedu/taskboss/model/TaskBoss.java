@@ -10,12 +10,14 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 import seedu.taskboss.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 
 /**
  * Wraps all data at the taskboss level
@@ -42,6 +44,7 @@ public class TaskBoss implements ReadOnlyTaskBoss {
 
     /**
      * Creates a TaskBoss using the Tasks and Categories in the {@code toBeCopied}
+     * @throws IllegalValueException 
      */
     public TaskBoss(ReadOnlyTaskBoss toBeCopied) {
         this();
@@ -147,6 +150,16 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         }
     }
 
+    /**
+     * Sorts tasks in TaskBoss according to these sort types:
+     * - start date and time
+     * - end date and time
+     * @throws IllegalValueException 
+     */
+    public void sortTasks(SortBy sortType) throws IllegalValueException {
+        tasks.sort(sortType);
+    }
+
 //// category-level operations
 
     public void addCategory(Category t) throws UniqueCategoryList.DuplicateCategoryException {
@@ -184,4 +197,5 @@ public class TaskBoss implements ReadOnlyTaskBoss {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, categories);
     }
+
 }
