@@ -22,9 +22,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String name;
     @XmlElement
-    private StartTime startTime;
+    private String startTime;
     @XmlElement
-    private EndTime endTime;
+    private String endTime;
     @XmlElement(required = true)
     private boolean completed;
     @XmlElement
@@ -47,8 +47,16 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        startTime = source.getStartTime();
-        endTime = source.getEndTime();
+        if (startTime != null) {
+            startTime = source.getStartTime().toString();
+        } else {
+            startTime = "";
+        }
+        if (endTime != null) {
+            endTime = source.getEndTime().toString();
+        } else {
+            endTime = "";
+        }
         completed = source.isComplete();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -67,8 +75,18 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final StartTime startTime = this.startTime;
-        final EndTime endTime = this.endTime;
+        StartTime startTime;
+        EndTime endTime;
+        if (this.startTime.equals("")) {
+            startTime = null;
+        } else {
+            startTime = new StartTime(this.startTime);
+        }
+        if (this.endTime.equals("")) {
+            endTime = null;
+        } else {
+            endTime = new EndTime(this.endTime);
+        }
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, startTime, endTime, tags);
     }
