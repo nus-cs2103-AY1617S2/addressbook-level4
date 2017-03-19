@@ -35,7 +35,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand using raw values.
      *
-     * @throws IllegalValueException if any of the raw values are invalid 
+     * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String priority, String startTiming, String endTiming, Set<String> tags)
             throws IllegalValueException {

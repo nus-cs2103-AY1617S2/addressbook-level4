@@ -37,7 +37,7 @@ public class PersonCard extends UiPart<Region> {
         endTiming.setText("End Timing: " + person.getEndTiming().value);
         initTags(person);
     }
-//@@author 
+//@@author
 
     private void initTags(ReadOnlyTask person) {
 //        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

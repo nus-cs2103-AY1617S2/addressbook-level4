@@ -13,12 +13,12 @@ public class Timing {
 
     public static final String MESSAGE_TIMING_CONSTRAINTS =
             "Task date should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
-    public static final String[] timing_format = {
-//    		"dd/MM/yyyy HH:mm",
-    		"HH:mm dd/MM/yyyy",
-    		"dd/MM/yyyy"
+    public static final String[] TIMING_FORMAT = {
+//          "dd/MM/yyyy HH:mm",
+        "HH:mm dd/MM/yyyy",
+        "dd/MM/yyyy"
     };
-    
+
     public final String value;
 
     /**
@@ -42,21 +42,21 @@ public class Timing {
      * Returns if a given string is a valid date.
      */
     public static boolean isValidTiming(String test) {
-    	boolean isValid = false;
-    	if(test.equals("n/a")){
-    		isValid = true;
-    	} else{
-    		for(int i=0; i<timing_format.length; i++){
-            	SimpleDateFormat sdf = new SimpleDateFormat(timing_format[i]);
+        boolean isValid = false;
+        if (test.equals("n/a")) {
+            isValid = true;
+        } else {
+            for (int i = 0; i < TIMING_FORMAT.length; i++) {
+                SimpleDateFormat sdf = new SimpleDateFormat(TIMING_FORMAT[i]);
                 sdf.setLenient(false);
-    	        try {
-    	            //throws ParseException if date is not valid
-    	            sdf.parse(test);
-    	            isValid = true;
-    	            break;
-    	        } catch (ParseException e) {
-    	        }
-    		}
+                try {
+                    //throws ParseException if date is not valid
+                    sdf.parse(test);
+                    isValid = true;
+                    break;
+                } catch (ParseException e) {
+                }
+            }
         }
         return isValid;
     }
