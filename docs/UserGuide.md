@@ -109,18 +109,16 @@ Examples:
 ## 2.9. Finding all tasks containing any keyword in the task name: `find`
 
 Finds tasks that satisfy given parameters
-Format: find KEYWORDS [dl/DATE] [ds/KEYWORDS] 
+Format: find KEYWORDS [dl/DATE]
 
-> finds tasks whose task name contain any of the given keywords
+> finds tasks whose task name or description contains any of the given keywords
 > ‘find dl/’ finds tasks whose deadline falls on specified date
-> ‘find ds/’ finds tasks whose task description contain any of the given keywords
 > 
-> The search is case sensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
+> The search is case insensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
 
 Examples:
 
-* `find Project Name`
-* `find ds/Some description of the project`
+* `find Project Name/Description`
 * `find dl/12-08-2017`
 
 ## 2.10. Clearing all entries : `clear`
