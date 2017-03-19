@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new TaskName("Task1"), new Deadline("111111"), new PriorityLevel("1"), new Information("Information 1"), new UniqueTagList()),
-                new Task(new TaskName("Task2"), new Deadline("222222"), new PriorityLevel("2"), new Information("Information 2"), new UniqueTagList()),
-                new Task(new TaskName("Task3"), new Deadline("333333"), new PriorityLevel("3"), new Information("Information 3"), new UniqueTagList()),
-                new Task(new TaskName("Task4"), new Deadline("444444"), new PriorityLevel("4"), new Information("Information 4"), new UniqueTagList()),
-                new Task(new TaskName("Task5"), new Deadline("555555"), new PriorityLevel("1"), new Information("Information 5"), new UniqueTagList()),
-                new Task(new TaskName("Task6"), new Deadline("666666"), new PriorityLevel("2"), new Information("Information 6"), new UniqueTagList()),
-                new Task(new TaskName("Task7"), new Deadline("777777"), new PriorityLevel("3"), new Information("Information 7"), new UniqueTagList()),
-                new Task(new TaskName("Task8"), new Deadline("888888"), new PriorityLevel("4"), new Information("Information 8"), new UniqueTagList()),
-                new Task(new TaskName("Task9"), new Deadline("999999"), new PriorityLevel("1"), new Information("Information 9"), new UniqueTagList())
+                new Task(new TaskName("Task1"), new Deadline("01-Jan-2017"), new PriorityLevel("1"), new Information("Information 1"), new UniqueTagList()),
+                new Task(new TaskName("Task2"), new Deadline("02-Feb-2017"), new PriorityLevel("2"), new Information("Information 2"), new UniqueTagList()),
+                new Task(new TaskName("Task3"), new Deadline("03-Mar-2017"), new PriorityLevel("3"), new Information("Information 3"), new UniqueTagList()),
+                new Task(new TaskName("Task4"), new Deadline("04-Apr-2017"), new PriorityLevel("4"), new Information("Information 4"), new UniqueTagList()),
+                new Task(new TaskName("Task5"), new Deadline("05-May-2017"), new PriorityLevel("1"), new Information("Information 5"), new UniqueTagList()),
+                new Task(new TaskName("Task6"), new Deadline("06-Jun-2017"), new PriorityLevel("2"), new Information("Information 6"), new UniqueTagList()),
+                new Task(new TaskName("Task7"), new Deadline("07-Jul-2017"), new PriorityLevel("3"), new Information("Information 7"), new UniqueTagList()),
+                new Task(new TaskName("Task8"), new Deadline("08-Aug-2017"), new PriorityLevel("4"), new Information("Information 8"), new UniqueTagList()),
+                new Task(new TaskName("Task9"), new Deadline("09-Sep-2017"), new PriorityLevel("1"), new Information("Information 9"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

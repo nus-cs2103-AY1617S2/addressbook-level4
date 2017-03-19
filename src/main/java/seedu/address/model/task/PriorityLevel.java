@@ -3,15 +3,15 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents priority level of a task in the task manager.
+ * Represents a Task's priority level in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriorityLevel(String)}
  */
 
 public class PriorityLevel {
 
-    public static final String MESSAGE_PRIORITY_LEVEL_CONSTRAINTS =
-            "Priority Level should be indicated by integers 1 to 4"
-            + ", with 1 being the highest priority and 4 being the lowest priority";
+    public static final String MESSAGE_PRIORITY_LEVEL_CONSTRAINTS = "Priority Levels should be indicated by an integer,"
+            + "ranging from 1 to 4; with 1 being the highest priority and 4 being the lowest priority.";
+
     public static final String PRIORITY_LEVEL_VALIDATION_REGEX = "[1-4]";
 
     public final String value;
