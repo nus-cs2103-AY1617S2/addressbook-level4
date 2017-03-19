@@ -1,3 +1,4 @@
+//@@author A0114395E
 package seedu.address.model;
 
 import seedu.address.logic.commands.*;
