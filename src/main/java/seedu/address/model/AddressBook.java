@@ -126,7 +126,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         // Rebuild the list of task tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        //TODO work for other task types as well
         task.setTags(new UniqueTagList(correctTagReferences));
     }
 

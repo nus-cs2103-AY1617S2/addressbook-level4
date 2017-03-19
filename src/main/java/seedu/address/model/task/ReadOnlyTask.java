@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
 
 /**
  * A read-only immutable interface for a Task in the task manager.
@@ -9,8 +10,8 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Title getTitle();
-    String getStart();
-    String getEnd();
+    Date getStart();
+    Date getEnd();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -33,6 +34,10 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
+        		.append("Start: ")
+        		.append(getStart() + " ")
+        		.append("End: ")
+        		.append(getEnd() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

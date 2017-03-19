@@ -4,8 +4,8 @@ package seedu.address.model.task;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book. Guarantees: immutable; is
- * valid as declared in {@link #isValidName(String)}
+ * Represents a Task's title in the task manager. Guarantees: immutable; is
+ * valid as declared in {@link #isValidTitle(String)}
  */
 public class Title {
 
@@ -29,7 +29,7 @@ public class Title {
         assert title != null;
         String trimmedTitle= title.trim();
 
-        // if (!isValidName(trimmedName)) {
+        // if (!isValidTitle(trimmedName)) {
         // throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         // }
         this.title = trimmedTitle;
@@ -38,7 +38,7 @@ public class Title {
     /**
      * Returns true if a given string is a valid person name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidTitle(String test) {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 

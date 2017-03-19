@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Calendar;
 
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
 
 public class Task implements ReadOnlyTask{
     
@@ -11,8 +12,8 @@ public class Task implements ReadOnlyTask{
     //TODO use Calendar object
     //protected Calendar start;
     //protected Calendar end;
-    protected String start;
-    protected String end;
+    protected Date start;
+    protected Date end;
     
     protected UniqueTagList tags;
     
@@ -24,16 +25,27 @@ public class Task implements ReadOnlyTask{
     public Task(Title title, UniqueTagList tags) {
         this.title = title;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.start = null;
-        this.end = null;
+        this.start = new Date();
+        this.end = new Date();
     }
-    
     /**
      * Constructor for deadlined tasks
      * @param title
      * @param tags
      */
-    public Task(Title title, String start, String end, UniqueTagList tags) {
+    public Task(Title title, Date start, UniqueTagList tags) {
+        this.title = title;
+        this.start = start;
+        this.end = new Date();
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+    
+    /**
+     * Constructor for event tasks
+     * @param title
+     * @param tags
+     */
+    public Task(Title title, Date start, Date end, UniqueTagList tags) {
         this.title = title;
         this.start = start;
         this.end = end;
@@ -44,7 +56,7 @@ public class Task implements ReadOnlyTask{
      * Creates a copy of the given Task.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getTags());
+        this(source.getTitle(), source.getStart(), source.getEnd(), source.getTags());
     }
     
     public void setTitle(Title title) {
@@ -56,19 +68,25 @@ public class Task implements ReadOnlyTask{
         return title;
     }
     
-    public void setStart(String start) {
+    public void setStart(Date start) {
         this.start = start;
     }
     
-    public String getStart() {
+    public Date getStart() {
+    	if (start == null) {
+    		return new Date();
+    	}
         return start;
     }
     
-    public void setEnd(String end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
     
-    public String getEnd() {
+    public Date getEnd() {
+    	if (end == null) {
+    		return new Date();
+    	}
         return end;
     }
     
@@ -94,6 +112,8 @@ public class Task implements ReadOnlyTask{
         assert replacement != null;
 
         this.setTitle(replacement.getTitle());
+        this.setStart(replacement.getStart());
+        this.setEnd(replacement.getEnd());
         this.setTags(replacement.getTags());
     }
     
@@ -109,7 +129,9 @@ public class Task implements ReadOnlyTask{
     public boolean isSameStateAs(Task other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getTitle().equals(this.getTitle()));
+                && other.getTitle().equals(this.getTitle())
+                && other.getStart().equals(this.getStart())
+                && other.getEnd().equals(this.getEnd()));
     }
 
     @Override
@@ -123,11 +145,15 @@ public class Task implements ReadOnlyTask{
     }
     
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats the task as text, showing all details.
      */
     public String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
+        		.append("Start: ")
+        	   	.append(getStart())
+        	   	.append("End: ")
+        	   	.append(getEnd())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
