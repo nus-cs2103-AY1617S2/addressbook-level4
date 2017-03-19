@@ -47,7 +47,6 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         String acceptedCommandWord = commandWord;
         if (flexibleCommands.containsKey(commandWord)) {
-            System.out.println("contains in hashtable");
             acceptedCommandWord = flexibleCommands.get(commandWord);
         }
         final String arguments = matcher.group("arguments");

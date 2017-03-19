@@ -29,6 +29,7 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static Hashtable<String, String> flexibleCommands;
+    private static Hashtable<String, String> flexiblePrefixes;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -112,40 +113,58 @@ public class ParserUtil {
     }
 
     /**
-     * Initialises the Hashtable for parsing flexible command words and prefixes (Hashtable allows duplicate keys).
+     * Initialises the Hashtable for parsing flexible command words (Hashtable allows duplicate keys).
      * Keys being the acceptable alternatives, values being the legitimate command words (stated in the UserGuide.md)
      *
      */
     public static Hashtable<String, String> initialiseFlexibleCommands() {
-        //if storage has it, just return that from storage itself?
-        //command words
         flexibleCommands = new Hashtable<String, String>();
         flexibleCommands.put("insert", "add");
+        flexibleCommands.put("create", "add");
         flexibleCommands.put("new", "add");
         flexibleCommands.put("adds", "add");
+        flexibleCommands.put("Add", "add");
         flexibleCommands.put("change", "edit");
         flexibleCommands.put("modify", "edit");
         flexibleCommands.put("edits", "edit");
+        flexibleCommands.put("Edit", "edit");
         flexibleCommands.put("remove", "delete");
         flexibleCommands.put("deletes", "delete");
         flexibleCommands.put("cancel", "delete");
+        flexibleCommands.put("Delete", "delete");
         flexibleCommands.put("clean", "clear");
+        flexibleCommands.put("Clear", "clear");
         flexibleCommands.put("locate", "find");
+        flexibleCommands.put("Find", "find");
         flexibleCommands.put("arrange", "sort");
-        //prefixes
-        flexibleCommands.put("tag/", "t/");
-        flexibleCommands.put("tags/", "t/");
-        flexibleCommands.put("comment/", "c/");
-        flexibleCommands.put("comments/", "c/");
-        flexibleCommands.put("info/", "c/");
-        flexibleCommands.put("priority/", "p/");
-        flexibleCommands.put("urgency/", "p/");
-        flexibleCommands.put("date/", "d/");
-        flexibleCommands.put("dates/", "d/");
 
         return flexibleCommands;
 
     }
 
+    /**
+     * Initialises the Hashtable for parsing flexible prefixes (Hashtable allows duplicate keys).
+     * Keys being the acceptable alternatives, values being the legitimate prefixes (stated in the UserGuide.md)
+     *
+     */
+    public static Hashtable<String, String> initialiseFlexiblePrefixes() {
+        flexiblePrefixes = new Hashtable<String, String>();
+        //prefixes
+        flexiblePrefixes.put("tag/", "t/");
+        flexiblePrefixes.put("tags/", "t/");
+        flexiblePrefixes.put("T/", "t/");
+        flexiblePrefixes.put("comment/", "c/");
+        flexiblePrefixes.put("comments/", "c/");
+        flexiblePrefixes.put("info/", "c/");
+        flexiblePrefixes.put("C/", "c/");
+        flexiblePrefixes.put("priority/", "p/");
+        flexiblePrefixes.put("P/", "p/");
+        flexiblePrefixes.put("urgency/", "p/");
+        flexiblePrefixes.put("date/", "d/");
+        flexiblePrefixes.put("dates/", "d/");
+        flexiblePrefixes.put("D/", "d/");
+
+        return flexiblePrefixes;
+    }
 }
 
