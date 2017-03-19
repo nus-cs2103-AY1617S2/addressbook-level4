@@ -34,9 +34,10 @@ public class DateTime {
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
-        LocalDateTime dateTimeObj = null;
-        dateTimeObj = LocalDateTime.parse(dateTime, formatter);
-        this.dateTime = dateTimeObj;
+        if(!isValidDateTime(dateTime)) {
+        	throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
+        }
+        this.dateTime = LocalDateTime.parse(dateTime, formatter);;
     }
 
     /**
@@ -49,10 +50,7 @@ public class DateTime {
     			return true;
     		}
     	} catch (DateTimeParseException dtpe) {
-    		try {
-				throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-			} catch (IllegalValueException ive) {
-			}
+    	
     	}
 		return false;
     }
