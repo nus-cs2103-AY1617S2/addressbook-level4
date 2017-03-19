@@ -38,14 +38,12 @@ up doTASK, as well as guide you on how to use it to make you more efficient in p
    > <img src="images/today_screen.jpg" width="600">
    >
 
-    **Overview**
-
-   > Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Hold the __Down Arrow key__ to navigate between the dates.
+ **Overview**
+ > Shows you an overall view of the dates. The highest priority tasks will be shown as a preview for every single date. Hold the __Down Arrow key__ to navigate between the dates.
    > <img src="images/overview_screen.jpg" width="600">
 
-    **Priority**
-
-   > Shows you 4 options of priority tabs, from highest to lowest, which are indicated by different colours. Selecting the tab allows you to view the list of tasks that is under that priority.<br>
+ **Priority**
+ > Shows you 4 options of priority tabs, from highest to lowest, which are indicated by different colours. Selecting the tab allows you to view the list of tasks that is under that priority.<br>
    > Eg. By using `switch` feature, you can select the _Highest Priority_ tab. It will bring you to the list of tasks that you have in that tab.<br>
    > <img src="images/priority_screen.jpg" width="600">
 
