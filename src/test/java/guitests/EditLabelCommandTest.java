@@ -7,6 +7,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.EditLabelCommand;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.testutil.TestTask;
@@ -20,7 +21,7 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("EDITLABEL nonexistentlabel newlabel");
+        commandBox.runCommand(EditLabelCommand.COMMAND_WORD + " nonexistentlabel newlabel");
 
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -30,10 +31,10 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
     public void editLabel_invalidCommands() {
         TestTask[] currentList = td.getTypicalTasks();
         //No change should occur for any of these commands
-        runAndAssertTrue("EDITLABEL notEnoughArguments", currentList);
-        runAndAssertTrue("EDITLABEL", currentList);
-        runAndAssertTrue("EDITLABEL !@#asdajn newLabel", currentList);
-        runAndAssertTrue("EDITLABEL friends !@#!@sdfs", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " notEnoughArguments", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + "", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " !@#asdajn newLabel", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " friends !@#!@sdfs", currentList);
     }
 
     @Test
@@ -53,7 +54,7 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
             }
         }
 
-        runAndAssertTrue("EDITLABEL friends allies", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " friends allies", currentList);
     }
 
     /**
