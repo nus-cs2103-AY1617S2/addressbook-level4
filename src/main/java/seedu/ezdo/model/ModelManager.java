@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.text.ParseException;
 import java.util.EmptyStackException;
 import java.util.HashSet;
 import java.util.Optional;
@@ -11,7 +12,9 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
+import seedu.ezdo.commons.util.DateUtil;
 import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.DueDate;
@@ -57,9 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyEzDo newData) {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.resetData(newData);
         indicateEzDoChanged();
     }
@@ -76,19 +77,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void killTask(ReadOnlyTask target) throws TaskNotFoundException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.removeTask(target);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+    public synchronized void addTask(Task task)
+            throws UniqueTaskList.DuplicateTaskException, DateException {
+        checkTaskDate(task);
+        updateStacks();
         ezDo.addTask(task);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
@@ -96,9 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.doneTask(doneTask);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
@@ -106,11 +103,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, DateException {
         assert editedTask != null;
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        checkTaskDate(editedTask);
+        updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
         indicateEzDoChanged();
@@ -135,6 +131,25 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    @Override
+    public void updateStacks() throws EmptyStackException {
+        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
+        undoStack.push(prevState);
+        redoStack.clear();
+    }
+
+    @Override
+    public void checkTaskDate(ReadOnlyTask task) throws DateException {
+        assert task != null;
+        try {
+            if (!DateUtil.isTaskDateValid(task)) {
+                throw new DateException("Start date after due date!");
+            }
+        } catch (ParseException pe) {
+            logger.info("Parse exception while checking if task date valid");
+            throw new DateException("Error parsing dates!");
+        }
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     private void updateFilteredTaskList(Expression expression) {
