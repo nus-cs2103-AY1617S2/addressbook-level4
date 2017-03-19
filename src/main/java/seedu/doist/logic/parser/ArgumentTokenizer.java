@@ -21,6 +21,11 @@ public class ArgumentTokenizer {
     /** Given prefixes **/
     private final List<Prefix> prefixes;
     private ArrayList<Prefix> temp;
+    private static final int DATE_BY = 1;
+    private static final int DATE_FROM = 2;
+    private static final int DATE_TO = 2;
+    private static final int DATE_INVALID = -1;
+
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
@@ -85,6 +90,52 @@ public class ArgumentTokenizer {
             }
         }
         return flag;
+    }
+
+    /**
+     * Method to validate whether the date parameters in the command are valid
+     * eg. The command "add Buy milk \\from today \\by Friday" should fail, as \from should always be accompanied by \to
+     * @param tokens recognized in the command
+     * @return A number corresponding to the command format it matches
+     * eg 0 means no date parameters were provided, 1 means only \by was user,and -1 means the command format is illegal
+     */
+
+    public int validateDate(ArrayList<String> tokens) {
+        int count = 0;
+        count = count + validateBy(tokens) + validateFrom(tokens) + validateTo(tokens);
+        switch (count) {
+        case 0 : return 0;
+        case DATE_BY : return DATE_BY;
+        case (DATE_FROM + DATE_TO) : return DATE_TO;
+        default : return -1;
+        }
+    }
+
+    public int validateBy(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_BY.getPrefix())) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public int validateFrom(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_FROM.getPrefix())) {
+                return 2;
+            }
+        }
+        return 0;
+    }
+
+    public int validateTo(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_TO.getPrefix())) {
+                return 2;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -210,7 +261,7 @@ public class ArgumentTokenizer {
 
     /**
      * A prefix that marks the beginning of an argument.
-     * e.g. '/t' in 'add James /t friend'
+     * e.g. '\\under' in 'add James \\under friend'
      */
     public static class Prefix {
         final String prefix;
