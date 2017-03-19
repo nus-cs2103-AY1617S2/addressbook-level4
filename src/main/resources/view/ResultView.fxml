@@ -3,6 +3,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" stylesheets="@../stylesheet/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
      <TextArea fx:id="resultDisplay" editable="false" prefHeight="115.0" prefWidth="320.0" promptText="The result of your command will be shown here." styleClass="dark" wrapText="true" />
 </AnchorPane>

@@ -17,6 +17,9 @@ import seedu.toluist.model.TodoList;
  * Gui tests for switch command
  */
 public class SwitchCommandTest extends ToLuistGuiTest {
+    private static final String TAB_TODAY = "TODAY";
+    private static final String TAB_NEXT_7_DAYS = "NEXT 7 DAYS";
+
     private Task floatingTask = new Task("floating task");
     private Task taskWithDeadline = new Task("last week task", LocalDateTime.now());
     private Task eventIn6Days = new Task("event", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(4));
@@ -54,21 +57,19 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
-        String tabToday = "Today";
         String switchToToday = "switch t";
         commandBox.runCommand(switchToToday);
         assertTrue(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertFalse(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, tabToday, 1, 3));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3));
 
-        String tabWithin7Days = "Within 7 Days";
-        String switchToWithin7Days = "switch w";
-        commandBox.runCommand(switchToWithin7Days);
-        assertTrue(isTaskShown(taskWithDeadline));
+        String switchToNext7Days = "switch n";
+        commandBox.runCommand(switchToNext7Days);
+        assertFalse(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertTrue(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, tabWithin7Days, 2, 3));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3));
     }
 
     @Test
@@ -76,13 +77,12 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
-        String tabToday = "Today";
         String switchToToday = "switch T ";
         commandBox.runCommand(switchToToday);
         assertTrue(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertFalse(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, tabToday, 1, 3));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3));
     }
 
     @Test
@@ -90,21 +90,19 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         assertTrue(areTasksShown(floatingTask, eventIn6Days));
         assertFalse(isTaskShown(taskWithDeadline));
 
-        String tabToday = "Today";
         String switchToToday = "switch 2";
         commandBox.runCommand(switchToToday);
         assertTrue(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertFalse(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, tabToday, 1, 3));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3));
 
-        String tabWithin7Days = "Within 7 Days";
-        String switchToWithin7Days = "switch 3";
-        commandBox.runCommand(switchToWithin7Days);
-        assertTrue(isTaskShown(taskWithDeadline));
+        String switchToNext7Days = "switch 3";
+        commandBox.runCommand(switchToNext7Days);
+        assertFalse(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertTrue(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, tabWithin7Days, 2, 3));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3));
     }
 
     @Test
@@ -115,21 +113,19 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String commandFilter = "filter task";
         commandBox.runCommand(commandFilter);
 
-        String tabToday = "Today";
         String switchToToday = "switch t";
         commandBox.runCommand(switchToToday);
         assertTrue(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertFalse(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED, tabToday, 1, 2));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED, TAB_TODAY, 1, 2));
 
-        String tabWithin7Days = "Within 7 Days";
-        String switchToWithin7Days = "switch w";
-        commandBox.runCommand(switchToWithin7Days);
-        assertTrue(isTaskShown(taskWithDeadline));
+        String switchToNext7Days = "switch n";
+        commandBox.runCommand(switchToNext7Days);
+        assertFalse(isTaskShown(taskWithDeadline));
         assertFalse(isTaskShown(floatingTask));
         assertFalse(isTaskShown(eventIn6Days));
-        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED, tabWithin7Days, 1,
-                2));
+        assertResultMessage(String.format(SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED,
+                                         TAB_NEXT_7_DAYS, 0, 2));
     }
 }
