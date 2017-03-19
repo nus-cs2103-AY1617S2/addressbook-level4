@@ -1,13 +1,15 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
+
 
 /**
  * A mutable task object. For testing only.
@@ -15,11 +17,10 @@ import seedu.address.model.task.Venue;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
-    private EndTime endtime;
-    private StartTime starttime;
-    private Venue venue;
-    private UrgencyLevel urgencyLevel;
-    private Description description;
+    private Optional<EndTime> endtime;
+    private Optional<Venue> venue;
+    private Optional<UrgencyLevel> urgencyLevel;
+    private Optional<Description> description;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -32,7 +33,6 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.title = taskToCopy.getTitle();
         this.venue = taskToCopy.getVenue();
-        this.starttime = taskToCopy.getStartTime();
         this.endtime = taskToCopy.getEndTime();
         this.urgencyLevel = taskToCopy.getUrgencyLevel();
         this.description = taskToCopy.getDescription();
@@ -44,23 +44,19 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public void setEndTime(EndTime endtime) {
-        this.endtime = endtime;
-    }
-
-    public void setStartTime(StartTime starttime) {
-        this.starttime = starttime;
+        this.endtime = Optional.of(endtime);
     }
 
     public void setVenue(Venue venue) {
-        this.venue = venue;
+        this.venue = Optional.of(venue);
     }
 
 	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
-		this.urgencyLevel = urgencyLevel;
+	    this.urgencyLevel = Optional.of(urgencyLevel);
 	}
 
     public void setDescription(Description description) {
-        this.description = description;
+        this.description = Optional.of(description);
     }
 
     public void setTags(UniqueTagList tags) {
@@ -70,31 +66,6 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Title getTitle() {
         return title;
-    }
-
-    @Override
-    public Venue getVenue() {
-        return venue;
-    }
-
-    @Override
-    public StartTime getStartTime() {
-        return starttime;
-    }
-
-    @Override
-    public EndTime getEndTime() {
-        return endtime;
-    }
-
-	@Override
-	public UrgencyLevel getUrgencyLevel() {
-		return urgencyLevel;
-	}
-
-    @Override
-    public Description getDescription() {
-        return description;
     }
 
     @Override
@@ -110,12 +81,43 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("@@" + this.getVenue().value + " ");
-        sb.append("from:" + this.getStartTime().value + " ");
-        sb.append("to:" + this.getEndTime().value + " ");
-        sb.append("**" + this.getUrgencyLevel().value + " ");
-        sb.append("d:" + this.getDescription().value + " ");
+        sb.append("@@" + this.getVenueString());
+        sb.append("to:" + this.getEndTimeString());
+        sb.append("**" + this.getUrgencyLevelString());
+        sb.append("d:" + this.getDescriptionString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("##" + s.tagName + " "));
         return sb.toString();
     }
+    
+    public String getEditCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("edit" + this.getTitle().title + " ");
+        sb.append("@@" + this.getVenueString());
+        sb.append("to:" + this.getEndTimeString());
+        sb.append("**" + this.getUrgencyLevelString());
+        sb.append("d:" + this.getDescriptionString() + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("##" + s.tagName + " "));
+        return sb.toString();
+    }
+
+    @Override
+    public Optional<EndTime> getEndTime() {
+        return endtime;
+    }
+
+    @Override
+    public Optional<Venue> getVenue() {
+        return venue;
+    }
+
+    @Override
+    public Optional<Description> getDescription() {
+        return description;
+    }
+
+    @Override
+    public Optional<UrgencyLevel> getUrgencyLevel() {
+        return urgencyLevel;
+    }
+
 }
