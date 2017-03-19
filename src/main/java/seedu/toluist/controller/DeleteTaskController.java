@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.controller.commons.IndexTokenizer;
+import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
@@ -39,7 +39,7 @@ public class DeleteTaskController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        List<Integer> indexes = IndexTokenizer.splitStringToIndexes(indexToken, todoList.getTasks().size());
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, todoList.getTasks().size());
         List<Task> tasks = uiStore.getTasks(indexes);
         commandResult = delete(todoList, tasks);
 

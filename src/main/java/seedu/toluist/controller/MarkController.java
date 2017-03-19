@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.CollectionUtil;
-import seedu.toluist.controller.commons.IndexTokenizer;
+import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
@@ -43,7 +43,7 @@ public class MarkController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String indexToken = tokens.get(INDEX_TERM);
         String markTypeToken = tokens.get(MARK_TERM);
-        List<Integer> indexes = IndexTokenizer.splitStringToIndexes(indexToken,
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken,
                 UiStore.getInstance().getTasks().size());
 
         if (indexes.isEmpty()) {

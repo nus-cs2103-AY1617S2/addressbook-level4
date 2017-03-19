@@ -12,6 +12,7 @@ public class TaskTokenizer {
     public static final String TASK_DESCRIPTION = "description";
     public static final String TASK_START_DATE_KEYWORD = "startdate/";
     public static final String TASK_END_DATE_KEYWORD = "enddate/";
+    public static final String TASK_TAGS_KEYWORD = "tags/";
 
     public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
             boolean hasIndex, boolean hasDescription) {
@@ -28,7 +29,8 @@ public class TaskTokenizer {
                                                             description,
                                                             TASK_DESCRIPTION,
                                                             TASK_START_DATE_KEYWORD,
-                                                            TASK_END_DATE_KEYWORD);
+                                                            TASK_END_DATE_KEYWORD,
+                                                            TASK_TAGS_KEYWORD);
             tokens.putAll(descriptionTokens);
         }
         return tokens;
