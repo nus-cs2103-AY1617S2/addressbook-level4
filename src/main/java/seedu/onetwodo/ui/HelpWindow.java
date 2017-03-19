@@ -21,13 +21,14 @@ public class HelpWindow extends UiPart<Region> {
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Cheatsheet";
-    private static final String USERGUIDE_URL = "/view/help.html";
+    private static final String HELPWINDOW_URL = "/view/help.html";
 
     @FXML
     private WebView browser;
 
     private final Stage dialogStage;
 
+    // @@author A0141138N
     public HelpWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot());
@@ -37,7 +38,7 @@ public class HelpWindow extends UiPart<Region> {
                                          // size
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
-        URL help = MainApp.class.getResource(USERGUIDE_URL);
+        URL help = MainApp.class.getResource(HELPWINDOW_URL);
         browser.getEngine().load(help.toString());
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
