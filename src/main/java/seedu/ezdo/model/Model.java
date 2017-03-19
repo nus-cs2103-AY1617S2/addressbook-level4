@@ -44,6 +44,10 @@ public interface Model {
      * @throws EmptyStackException */
     void redo() throws EmptyStackException;
 
+    /** Update stack when new command is executed
+     * @throws EmptyStackException */
+    void updateStacks() throws EmptyStackException;
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
