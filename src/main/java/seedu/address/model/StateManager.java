@@ -27,7 +27,21 @@ public class StateManager {
         }
         return instance;
     }
-    
+
+    /**
+     * Check if stack exist for redo
+     */
+    public boolean redoStackHasCommands(){
+        return !redoStack.isEmpty();
+    }
+
+    /**
+     * Check if stack exist for undo
+     */
+    public boolean undoStackHasCommands(){
+        return !undoStack.isEmpty();
+    }
+
     /**
      * On each new command, add a new command onto the undo stack to track its history and clear the redo history stack
      */
