@@ -416,9 +416,9 @@ public class LogicManagerTest {
                 expectedTaskManager,
                 expectedList);
     }
-    
+
     @Test
-    public void executeUndo_resetToPreviousState() throws Exception {
+    public void executeUndoResetToPreviousState() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
         Task testTask2 = helper.generateTaskWithName("Task2");
@@ -426,23 +426,23 @@ public class LogicManagerTest {
         List<Task> oneTasks = helper.generateTaskList(testTask1);
         TaskManager expectedTaskManager = helper.generateAddressBook(oneTasks);
         Task testTask1Copy = helper.generateTaskWithName("Task1");
-        
+
         //Undo adding one task
         model.addTask(testTask1);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.EMPTY_LIST);
-        
+
         //Undo adding task when there is 1 existing task
         model.resetData(new TaskManager());
         model.addTask(testTask1);
         model.addTask(testTask2);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
-        
+
         //Undo Deletion
         model.resetData(new TaskManager());
         model.addTask(testTask1);
         model.deleteTask(testTask1);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
-        
+
         //Undo Edit
         model.resetData(new TaskManager());
         model.addTask(testTask1Copy);
