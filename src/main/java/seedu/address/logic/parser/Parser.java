@@ -23,6 +23,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Parses user input.
@@ -103,6 +104,7 @@ public class Parser {
         }
     }
 
+    //@@author A0114395E    
     /**
      * Parses user input into its inverse command for undo command.
      * Only supports inverse of Add, Delete, Edit.
@@ -133,12 +135,47 @@ public class Parser {
             Optional<Integer> index = ParserUtil.parseIndex(arguments);
             // Get data of command to be deleted
             ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
-            System.out.println("Got task to delete");
-            System.out.println(taskToDelete.getAsText());
-            return null;//new AddCommandParser().parse("some argument..");
-        
+            return new AddCommandParser().parse(getAddArgs(taskToDelete));
         default:
             return null;
         }
+    }
+    
+    //@@author A0114395E
+    /*
+     * Helper method to parse a ReadOnlyTask into an command-line Add statement to be stored.
+     * @param ReadOnlyTask
+     * @returns String consisting of how a user would have typed the 'Add' command
+     */
+    private static String getAddArgs(ReadOnlyTask task) {
+        // Build arguments
+        final StringBuilder builder = new StringBuilder();
+        builder.append(task.getName());
+        if (task.getStart().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_START.getPrefix());
+            builder.append(task.getStart().toString());
+        }
+        if (task.getDeadline().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_DEADLINE.getPrefix());
+            builder.append(task.getDeadline().toString());
+        }
+        if (task.getPriority().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_PRIORITY.getPrefix());
+            builder.append(task.getPriority().toString());
+        }
+        if (task.getNotes().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_NOTES.getPrefix());
+            builder.append(task.getNotes().toString());
+        }
+        if (task.getTags().asObservableList().size() > 0){
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_TAG.getPrefix());
+            task.getTags().forEach(builder::append);
+        }
+        return builder.toString();
     }
 }
