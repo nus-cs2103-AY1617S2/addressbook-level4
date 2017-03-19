@@ -86,9 +86,19 @@ public class Timing implements Comparable<Timing> {
     /**
      * Results in Timing sorted in ascending order.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public int compareTo(Timing compareTiming) {
-        return this.date.compareTo(compareTiming.date);
+        int compareToResult = this.date.getYear() - compareTiming.date.getYear();
+
+        if (compareToResult == 0) {
+            compareToResult = this.date.getMonth() - compareTiming.date.getMonth();
+        }
+
+        if (compareToResult == 0) {
+            compareToResult = this.date.getDay() - compareTiming.date.getDay();
+        }
+        return compareToResult;
     }
 
 }
