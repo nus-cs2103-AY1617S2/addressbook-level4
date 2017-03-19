@@ -4,11 +4,17 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 
 ---
 
-1. [Quick Start] (#quick-start)
-2. [Features] (#features)
-3. [FAQ] (#faq)
+1. [Introduction] (#introduction)
+2. [Quick Start] (#quick-start)
+3. [Features] (#features)
+4. [FAQ] (#faq)
+5. [Command Summary] (#command-summary)
 
-## 1. Quick Start
+## 1. Introduction
+
+Our application doTASK helps to improve your productivity and accountability in managing your daily activities. The main feature of our application is the prioritization framework, which let you focus on the important things. This user guide will provide you with the basic information in setting up the doTASK, as well as how to use it to make you become more efficient in prioritising your tasks.
+
+## 2. Quick Start
 
 1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 
@@ -41,7 +47,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 	> Eg. By using `switch` feature, you can select the `Highest Priority` , it will bring you to the list of tasks that you have in it.<br>
    > <img src="images/priority_screen.jpg" width="600">1
 
-## 2. Features
+## 3. Features
 
 > Command Format
 >
@@ -54,17 +60,20 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 Allows you to view the list of commands available in doTASK. <br>
 Format: `help` <br>
 
+
 > Help is shown if you enter an incorrect command e.g. `asdf` <br>
 > Alternatively, type `help` to obtain a list of commands that you can use.
 
+
 ### 2.2. Switching tabs: `switch`
 Switch the current tab to the next tab. <br>
+
 Format: `switch`
 
 > There will be 4 tabs, which can be toggled using this command.
 > The order in which the tabs will be switched is as follows: 'Priority' -> 'Overview' -> 'Today' -> 'Priority'.
 
-### 2.3. Adding a Task : `add`
+### 3.3. Adding a Task : `add`
 Adds a task to the task manager. <br>
 > doTASK currently supports the use of floating tasks and tasks with a single deadline.<br>
 
@@ -86,7 +95,7 @@ Examples:
 * add CS3230 Assignment 1 d/8 Jan 2018 p/1 i/How to do? t/School t/CS3230
 
 
-### 2.4. Listing the tasks: `list`
+### 3.4. Listing the tasks: `list`
 
 Shows a list of all the tasks in the task manager.<br>
 > Listing is done automatically when you switch between the tabs.<br>
@@ -118,7 +127,7 @@ Format: `list t/TAGS...`
 Examples:
 * `list t/CS3230 t/Work`
 
-### 2.5. Editing an existing task: `edit`
+### 3.5. Editing an existing task: `edit`
 Edits an existing task in the task manager.<br>
 Format: `edit i/INDEX [n/TASK_NAME] [d/DEADLINE] [p/PRIORITY_LEVEL] [i/ANY_INFO] [t/TAGS]...`
 
@@ -131,7 +140,7 @@ Examples:
 * `edit i/1 n/Assignment 2 d/25 Feb 2018 p/2`
 * `edit i/4 n/Exercise`
 
-### 2.6. Deleting a task: `delete`
+### 3.6. Deleting a task: `delete`
 Deletes the specified task.
 Format: `delete INDEX_NUMBER`
 
@@ -142,7 +151,7 @@ Examples:
 * `delete 2`
 * `delete 5`
 
-### 2.7. Completion of a task: `complete`
+### 3.7. Completion of a task: `complete`
 
 Marks the specified task as complete.<br>
 Format: `complete INDEX_NUMBER`
@@ -153,7 +162,7 @@ Examples:
 * `complete 2`
 * `complete 5`
 
-### 2.8. Track overall progress: `progress`
+### 3.8. Track overall progress: `progress`
 
 Shows all the tasks completed over time and also specifying any overdue tasks.<br>
 > A general overview of performance/efficiency based on the usage of the task manager will be shown.<br>
@@ -165,7 +174,7 @@ Format: `progress NUMBER_OF_DAYS`
 Examples:
 * `progress 7`
 
-### 2.9. Search for tasks: `search`
+### 3.9. Search for tasks: `search`
 
 Searches for tasks based on keywords by user's input.<br>
 
@@ -176,25 +185,25 @@ Format: `search KEYWORD`
 Examples:
 * `search potato`
 
-### 2.10. Undo previous action : `undo`
+### 3.10. Undo previous action : `undo`
 
 Undos previous action that user made.<br>
 Format : `undo`
 > Any previous valid command will be reversed.
 > Only 1 command will be reversed at a time.
 
-### 2.11. Redo previous action : `redo`
+### 3.11. Redo previous action : `redo`
 
 Redos previous `undo` that user made.<br>
 Format : `redo`
 > Any previous `undo` will be reversed, in successive order.
 
-### 2.12. Saving the tasks
+### 3.12. Saving the tasks
 
 Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
 
-## 3. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
@@ -211,7 +220,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 **Q**: Will I get reminded if the deadline of certain high priority tasks are near?<br>
 **A**: For the tasks that is due in the next 24 hours, it will be distinguished by the colours on its name.
 
-## 4. Command Summary
+## 5. Command Summary
 
 * **Help** : `help`
 
