@@ -1,5 +1,7 @@
 package seedu.taskboss.model.task;
 
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.DuplicateDataException;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 
 /**
@@ -20,6 +23,62 @@ import seedu.taskboss.commons.util.CollectionUtil;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+
+    public enum SortBy {
+        START_DATE_TIME, END_DATE_TIME
+    }
+
+    public void sort(SortBy sortType) throws IllegalValueException {
+        Comparator<ReadOnlyTask> taskCmp = null;
+        switch(sortType) {
+            case START_DATE_TIME:
+                taskCmp =  new Comparator<ReadOnlyTask>() {
+                    @Override
+                    public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+                        Date startDateTime1 = o1.getStartDateTime().getDate();
+                        Date startDateTime2 = o2.getStartDateTime().getDate();
+                        if (startDateTime1 == null &&
+                            startDateTime2 == null) {
+                                return 0;
+                        } else if (startDateTime1 == null) {
+                            return 1;
+                        } else if (startDateTime2 == null) {
+                            return -1;
+                        } else {
+                            return o1.getStartDateTime().getDate()
+                                .compareTo(o2.getStartDateTime().getDate());
+                        }
+                    }
+                };
+                break;
+
+            case END_DATE_TIME:
+                taskCmp = new Comparator<ReadOnlyTask> () {
+                    @Override
+                    public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+                        Date endDateTime1 = o1.getEndDateTime().getDate();
+                        Date endDateTime2 = o2.getEndDateTime().getDate();
+                        if (endDateTime1 == null &&
+                            endDateTime2 == null) {
+                                return 0;
+                        } else if (endDateTime1 == null) {
+                            return 1;
+                        } else if (endDateTime2 == null) {
+                            return -1;
+                        } else {
+                            return o1.getEndDateTime().getDate()
+                                .compareTo(o2.getEndDateTime().getDate());
+                        }
+                    }
+                };
+                break;
+
+            default:
+                throw new IllegalValueException("Invalid sorting type.");   
+        }
+
+        FXCollections.sort(internalList, taskCmp);
+    }
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
