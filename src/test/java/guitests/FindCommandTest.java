@@ -18,7 +18,7 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find p/2 d/14/04/2016", td.daniel);
         assertFindResult("find p/1", td.alice, td.benson);
         assertFindResult("find t/owesMoney", td.benson);
-        
+
         //find after deleting one result
         commandBox.runCommand("kill 1");
         assertFindResult("find Meier", td.daniel);
@@ -45,7 +45,7 @@ public class FindCommandTest extends EzDoGuiTest {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
         commandBox.runCommand("find s/10a");
-        assertResultMessage("Please enter a date in this form: DD/MM/YYYY"); 
+        assertResultMessage("Please enter a date in this form: DD/MM/YYYY");
     }
 
     private void assertFindResult(String command, TestTask... expectedHits) {

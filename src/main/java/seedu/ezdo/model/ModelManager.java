@@ -160,10 +160,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, new Optional(), new Optional(), new Optional())));
     } */
-    
+
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority, Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
+    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority,
+                                       Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
+        updateFilteredTaskList(new PredicateExpression
+                              (new NameQualifier(keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
     }
 
     @Override
@@ -257,7 +259,8 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<DueDate> dueDate;
         private Set<String> tags;
         
-        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority, Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
+        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority,
+                      Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
             this.nameKeyWords = nameKeyWords;
             this.priority = priority;
             this.startDate = startDate;
@@ -275,8 +278,12 @@ public class ModelManager extends ComponentManager implements Model {
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
                     && !task.getDone()
                     && (!priority.isPresent() || task.getPriority().toString().equals(priority.get().toString()))
-                    && (!startDate.isPresent() || (taskStartDate.length() != 0) && taskStartDate.substring(0, startDate.get().toString().length()).equals(startDate.get().toString()))
-                    && (!dueDate.isPresent() || (taskDueDate.length() != 0) && taskDueDate.substring(0, dueDate.get().toString().length()).equals(dueDate.get().toString()))
+                    && (!startDate.isPresent() || (taskStartDate.length() != 0)
+                            && taskStartDate.substring(0, startDate.get().toString().length())
+                                            .equals(startDate.get().toString()))
+                    && (!dueDate.isPresent() || (taskDueDate.length() != 0)
+                            && taskDueDate.substring(0, dueDate.get().toString().length())
+                                          .equals(dueDate.get().toString()))
                     && (taskTagStringSet.containsAll(tags));
         }
 
@@ -290,7 +297,7 @@ public class ModelManager extends ComponentManager implements Model {
             Set<String> tagSet = new HashSet<String>();
             
             for (int i = 0; i < tags.size(); i++) {
-                tagSet.add(((Tag)tagArray[i]).tagName);
+                tagSet.add(((Tag) tagArray[i]).tagName);
             }
             
             return tagSet;

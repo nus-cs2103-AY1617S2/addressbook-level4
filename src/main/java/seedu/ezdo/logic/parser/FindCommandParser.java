@@ -9,7 +9,6 @@ import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -19,7 +18,6 @@ import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
-import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.TaskDate;
 
@@ -45,7 +43,7 @@ public class FindCommandParser implements CommandParser {
         argsTokenizer.tokenize(args);
         String namesToMatch = argsTokenizer.getPreamble().orElse(""); //eat sleep rave relax
         String[] splitNames = namesToMatch.split("\\s+");
-        
+
         Optional<Priority> findPriority;
         Optional<TaskDate> findStartDate;
         Optional<TaskDate> findDueDate;

@@ -24,7 +24,7 @@ public class StartDate extends TaskDate {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }
-    
+
     /**
      * Validates given start date when user finds by start date
      *

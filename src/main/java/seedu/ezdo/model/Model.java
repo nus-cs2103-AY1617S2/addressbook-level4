@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
-import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
@@ -66,9 +65,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-
     /** Updates the filter of the filtered task list to filter by multiple fields*/
-    void updateFilteredTaskList(Set<String> keywords, Optional toMatch1, Optional toMatch2, Optional toMatch3, Set<String> toMatchTag);
+    void updateFilteredTaskList(Set<String> keywords, Optional toMatch1,
+            Optional toMatch2, Optional toMatch3, Set<String> toMatchTag);
 
     /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredDoneList();
