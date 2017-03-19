@@ -210,6 +210,7 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
         //Set the Ui to the new logic since we don't want to destroy the old UI
         ui.setLogic(logic);
+        //Update UI to show all tasks
         model.updateFilteredListToShowAll();
 
         //Save all current data into the new location
