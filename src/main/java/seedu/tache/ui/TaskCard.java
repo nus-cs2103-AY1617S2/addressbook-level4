@@ -19,7 +19,7 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private Label name;
-    
+
     @FXML
     private Label startDate;
 
