@@ -9,10 +9,11 @@ import seedu.taskboss.model.ReadOnlyTaskBoss;
 public class StorageStub extends StorageManager {
 
     private TaskBossStorage taskBoss;
-    private String filepath;
+    private String tbFilePath, prefFilePath;
 
-    public StorageStub(String filepath) {
-        this.filepath = filepath;
+    public StorageStub(String tbFilePath, String prefFilePath) {
+        this.tbFilePath = tbFilePath;
+        this.prefFilePath = prefFilePath;
     }
 
     @Override
@@ -22,6 +23,6 @@ public class StorageStub extends StorageManager {
 
     @Override
     public String getTaskBossFilePath() {
-        return this.filepath;
+        return this.tbFilePath;
     }
 }
