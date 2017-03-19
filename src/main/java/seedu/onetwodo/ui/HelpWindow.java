@@ -1,5 +1,6 @@
 package seedu.onetwodo.ui;
 
+import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.util.FxViewUtil;
 
@@ -31,11 +33,12 @@ public class HelpWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         // Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); // TODO: set a more appropriate initial
-                                        // size
+        dialogStage.setMaximized(false); // TODO: set a more appropriate initial
+                                         // size
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
-        browser.getEngine().load(USERGUIDE_URL);
+        URL help = MainApp.class.getResource(USERGUIDE_URL);
+        browser.getEngine().load(help.toString());
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
 
