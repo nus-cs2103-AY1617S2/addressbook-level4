@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -9,11 +11,11 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Title getTitle();
-    StartTime getStartTime();
-    Venue getVenue();
-    EndTime getEndTime();
-    UrgencyLevel getUrgencyLevel();
-    Description getDescription();
+    Optional<EndTime> getEndTime();
+    Optional<Venue> getVenue();
+    Optional<Description> getDescription();
+    Optional<UrgencyLevel> getUrgencyLevel();
+    Boolean hasTaskCompleted();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -28,32 +30,50 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
-                && other.getStartTime().equals(this.getStartTime())
-                && other.getVenue().equals(this.getVenue())
                 && other.getEndTime().equals(this.getEndTime())
-                && other.getUrgencyLevel().equals(this.getUrgencyLevel())
+                && other.getVenue().equals(this.getVenue())
                 && other.getDescription().equals(this.getDescription()));
     }
 
     /**
      * Formats the Task as text, showing all contact details.
      */
+    //@@ author:A0122017Y
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
-                .append(" Venue ")
-                .append(getVenue())
-                .append(" StartTime: ")
-                .append(getStartTime())
-                .append(" EndTime: ")
-                .append(getEndTime())
-                .append(" Urgency level: ")
-                .append(getUrgencyLevel())
-                .append(" Description ")
-                .append(getDescription()).append(" Tags: ");
+        builder.append("Title of task: ")
+                .append(getTitle())
+                .append(getVenueString())
+                .append(getDescriptionString())
+                .append(getEndTimeString())
+                .append(getStatusString());
 
         getTags().forEach(builder::append);
         return builder.toString();
     }
+    /**
+     * Check if venues are present. 
+     * If null, empty string is returned.
+     */
+    default String getVenueString(){
+        return getVenue().isPresent()? "At: " + getVenue().get().toString() : "";
+    }
+    
+    default String getDescriptionString(){
+        return getDescription().isPresent()? "Description: " + getDescription().get().toString() : "";
+    }
+    
+    default String getEndTimeString(){
+        return getEndTime().isPresent()? "Due at: "+ getEndTime().get().toString() : "";
+    }
+    
+    default String getStatusString(){
+        return hasTaskCompleted()? "Status: Completed" : "Status: Not completed";
+    }
+    
+    default String getStatusDisplay(){
+        return hasTaskCompleted()? getTitle().toString()+" [DONE]!!" : getTitle().toString();
+    }
+    //@@
 
 }
