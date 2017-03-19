@@ -261,17 +261,33 @@ Format: `undo`
 Clears all entries from DoOrDie.<br />
 Format: `clear`
 
-### 2.13. Push task changes to Google Calendar : `push`
+### 2.13. Save current Task Manager to a specified location : `saveas`
+
+Saves current Task Manager tasks to a location provided<br />
+After saving, the Task Manager will save changes to the new location<br />
+Format: `saveas FILEPATH_RELATIVE_TO_JAR`
+
+> * FILEPATH_RELATIVE_TO_JAR must be a file ending with `*.xml`
+
+### 2.14. Load data from a specified file to the Task Manager : `load`
+
+Replaces all task with the newly loaded data in the specified file path<br />
+After loading, the Task Manager will save changes to the new location<br />
+Format: `load FILEPATH_RELATIVE_TO_JAR`
+
+> * FILEPATH_RELATIVE_TO_JAR must be a file ending with `*.xml`
+
+### 2.15. Push task changes to Google Calendar : `push`
 
 Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
 Format: `push`
 
-### 2.14. Pull task changes from Google Calendar : `pull`
+### 2.16. Pull task changes from Google Calendar : `pull`
 
 Downloads data from Google Calendar. Priority goes to `Google Calendar` if there is a conflict.<br />
 Format: `pull`
 
-### 2.15. Export agenda to PDF file : `export`
+### 2.17. Export agenda to PDF file : `export`
 
 Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
 Format: `export ([DATE] | [from START_DATE to END_DATE])`
@@ -292,12 +308,12 @@ Examples:
 * `export from 2nd Feb to 9th Feb`<br />
   Saves a PDF with tasks and details from 2nd February to 9th February of the current year
 
-### 2.16. Exiting the program : `exit`
+### 2.18. Exiting the program : `exit`
 
 Exits DoOrDie<br />
 Format: `exit`
 
-### 2.17. Saving the data
+### 2.19. Saving the data
 
 DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
@@ -341,6 +357,12 @@ There is no need to save manually.
 * **Undo** `undo`
 
 * **Clear** `clear`
+
+* **Save to a certain location** `saveas FILEPATH_RELATIVE_TO_JAR`<br />
+  e.g. `saveas data/taskmanager2.xml`
+
+* **Load data from a different file** `load FILEPATH_RELATIVE_TO_JAR`<br />
+  e.g. `load data/taskmanager2.xml`
 
 * **Push** `push`
 

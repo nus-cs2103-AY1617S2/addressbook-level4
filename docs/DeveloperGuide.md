@@ -364,6 +364,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a recurring task | not need to create the same task every time
 `* * *` | user | mark the completion of a task | differentiate it from other outstanding tasks I need to complete
 `* * *` | user | view my completed tasks | keep track of what tasks I have completed
+`* * *` | user | save my task manager data to a different location | create a new copy of my data elsewhere
+`* * *` | user | load data into my task manager | start working on another set of data without changing the file settings myself
 `* *` | user | add location to a task | attach location for event type of tasks
 `* *` | user | be able to view my agenda for the day | know what tasks to work on for the day
 `* *` | user | iterate through my command history | re-execute a command that I have previously executed before
@@ -822,6 +824,42 @@ Use case ends
 2a. The list is empty
 
 > 2a1. System notifies the user that there are no overdue tasks<br />
+  Use case ends
+  
+#### Use case: Save current data to a new file location
+Use case ID: UC26 Save data to new file location<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to save data to a new file path specified
+2. System saves the data and changes will be saved to the new location<br />
+Use case ends
+
+**Extensions**
+
+1a. The file path specified is invalid (does not end with .xml)/not a file
+
+> 1a1. System notifies the user that the file is invalid or not a file<br />
+  Use case ends
+  
+#### Use case: Replace data in task manager with new file specified
+Use case ID: UC27 Load data from new location<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to replace data in Task Manager with new file path
+2. System loads the data and changes will be saved to the new location<br />
+Use case ends
+
+**Extensions**
+
+1a. The file path specified is invalid/does not end with .xml/not a file
+
+> 1a1. System notifies the user that the file is invalid/does not end with .xml/not a file<br />
   Use case ends
 
 ## Appendix C : Non Functional Requirements
