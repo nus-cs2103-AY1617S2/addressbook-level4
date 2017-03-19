@@ -36,6 +36,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -414,6 +415,39 @@ public class LogicManagerTest {
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedTaskManager,
                 expectedList);
+    }
+    
+    @Test
+    public void executeUndo_resetToPreviousState() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+        Task testTask2 = helper.generateTaskWithName("Task2");
+        Task testTask3 = helper.generateTaskWithName("Task3");
+        List<Task> oneTasks = helper.generateTaskList(testTask1);
+        TaskManager expectedTaskManager = helper.generateAddressBook(oneTasks);
+        Task testTask1Copy = helper.generateTaskWithName("Task1");
+        
+        //Undo adding one task
+        model.addTask(testTask1);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.EMPTY_LIST);
+        
+        //Undo adding task when there is 1 existing task
+        model.resetData(new TaskManager());
+        model.addTask(testTask1);
+        model.addTask(testTask2);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
+        
+        //Undo Deletion
+        model.resetData(new TaskManager());
+        model.addTask(testTask1);
+        model.deleteTask(testTask1);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
+        
+        //Undo Edit
+        model.resetData(new TaskManager());
+        model.addTask(testTask1Copy);
+        model.updateTask(0, testTask2);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
     }
 
 
