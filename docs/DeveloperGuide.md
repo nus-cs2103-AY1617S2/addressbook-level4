@@ -475,7 +475,39 @@ Use case ends.
 > 3a1. doTASK shows an error message <br>
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Prioritize a task
+
+**MSS**
+
+1. User requests to list down the tasks by priority
+2. doTASK shows a list of tasks in 2x2 matrix which are sorted in 4 different priorities
+Use case ends
+
+**Extensions**
+
+1a. The list is empty
+
+> Use case ends
+
+#### Use case: Tagging a task
+
+**MSS**
+
+1. User requests to list down the tasks by tags
+2. doTASK request the user for the name of the tag
+3. User input the name of the tag
+2. doTASK executes the command and list the task under the given tag
+Use case ends
+
+**Extensions**
+
+1a. The list is empty
+
+> Use case ends
+
+2a. The name of the tag does not exist
+
+> doTASK show an error message.
 
 #### Use case: List commands
 
