@@ -6,7 +6,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a Task's title in the to-do list.
  * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
  */
-public class Title {
+public class Title implements Comparable<Title>{
 
     public static final String MESSAGE_TITLE_CONSTRAINTS =
             "Task titles should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -56,6 +56,11 @@ public class Title {
     @Override
     public int hashCode() {
         return title.hashCode();
+    }
+
+    @Override
+    public int compareTo(Title other) {
+        return this.title.compareTo(other.title);
     }
 
 }
