@@ -249,9 +249,9 @@ _**Sorts the list of tasks according to the specified ordertype lexicographicall
 
 You have just added a few tasks to ezDo with the following **`add`** commands:<br>
 
- **`add Dye hair p/3 s/06/05/2017 d/07/08/2017`**
- **`add Buy milk p/1 s/04/05/2017 d/09/06/2017`**
- **`add Cut hair p/2 s/05/05/2017 d/08/07/2017`**
+ **`add Dye hair p/1 s/06/05/2017 d/07/08/2017`**<br>
+ **`add Buy milk p/1 s/04/05/2017 d/09/06/2017`**<br>
+ **`add Call milkman p/1 s/05/05/2017 d/08/07/2017`**
 
 You can now sort the tasks by name using either one of the following commands:<br>
 
