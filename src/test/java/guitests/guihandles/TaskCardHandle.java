@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -53,19 +53,12 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(node -> ((Labeled) node).getText())
+        return tagsContainer.getChildrenUnmodifiable().stream().map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
 
     private List<String> getTags(UniqueTagList tags) {
-        return tags
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.toList());
+        return tags.asObservableList().stream().map(tag -> tag.tagName).collect(Collectors.toList());
     }
 
     private Region getTagsContainer() {
@@ -74,20 +67,16 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask person) {
         return getFullName().equals(person.getDescription().description)
-                && getPhone().equals(person.getPriority().value)
-                && getEmail().equals(person.getStartDate().value)
-                && getEmail().equals(person.getEndDate().value)
-                && getTags().equals(getTags(person.getTags()));
+                && getPhone().equals(person.getPriority().value) && getEmail().equals(person.getStartTiming().value)
+                && getEmail().equals(person.getEndTiming().value) && getTags().equals(getTags(person.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+            return getFullName().equals(handle.getFullName()) && getPhone().equals(handle.getPhone())
+                    && getEmail().equals(handle.getEmail()) && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);

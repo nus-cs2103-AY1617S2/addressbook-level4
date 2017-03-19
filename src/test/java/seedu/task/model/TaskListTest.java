@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,10 +14,10 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
+import seedu.task.testutil.TypicalTestTasks;
 
 public class TaskListTest {
 
@@ -71,7 +71,8 @@ public class TaskListTest {
     }
 
     /**
-     * A stub ReadOnlyTaskList whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskList whose tasks and tags lists can violate interface
+     * constraints.
      */
     private static class TaskListStub implements ReadOnlyTaskList {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
