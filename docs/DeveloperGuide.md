@@ -288,16 +288,16 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 <h2 id="user-content-5">5. Dev Ops</h2>
 
-### **Build Automation**
+<h3 id="user-content-ba">Build Automation</h3>
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### Continuous Integration
+<h3 id="user-content-ci">Continuous Integration</h3>
 
-We use [Travis CI](https://travis-ci.org/) to perform _Continuous Integration_ on our projects.
-See [UsingTravis.md](UsingTravis.md) for more details.
+This project uses [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_.
+See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### Making a Release
+<h3 id="user-content-mr"> Making a Release</h3>
 
 Here are the steps to create a new release.
 
@@ -306,10 +306,29 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file your created.
 
-### Managing Dependencies
+<h3 id="user-content-pdf"> Converting Documentation to PDF</h3>
 
-A project often depends on third-party libraries. For example, Geekeep depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for JSON parsing. Managing these _dependencies_
+You are recommended to use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
+as Chrome's PDF engine preserves hyperlinks used in webpages.
+
+Here are the steps to convert the project documentation files to PDF format.
+
+ 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
+ 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
+    documentation file. <br>
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+ 1. Click on the `Print` option in Chrome's menu.
+ 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
+    For best results, use the settings indicated in the screenshot below. <br>
+    <img src="images/chrome_save_as_pdf.png" width="300"><br>
+    _Figure 5.1 : Saving documentation as PDF files in Chrome_
+
+<h3 id="user-content-md"> Managing Dependencies</h3>
+
+A project often depends on third-party libraries or testing frameworks. For example, GeeKeep depends on the
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for JSON parsing. A full list of GeeKeep's dependencies can be found in [README.md](../README.md#dependencies).
+
+Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives:<br>
 * Include those libraries in the project's repo (this bloats the repo size)<br>
