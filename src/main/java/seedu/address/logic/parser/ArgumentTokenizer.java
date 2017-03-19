@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -53,7 +54,8 @@ public class ArgumentTokenizer {
         prefix.add(PREFIX_NOTE);
         prefix.add(PREFIX_PRIORITY);
         prefix.add(PREFIX_STATUS);
-        prefix.add(PREFIX_DATETIME);
+        prefix.add(PREFIX_STARTTIME);
+        prefix.add(PREFIX_ENDTIME);
 
         for (int i = 0; i < positions.size(); i++) {
             prefix.remove(positions.get(i).getPrefix());
@@ -62,8 +64,10 @@ public class ArgumentTokenizer {
         for (int i = 0; i < prefix.size(); i++) {
             if (prefix.get(i).equals(PREFIX_PRIORITY)) {
                 saveArgument(prefix.get(i), "none");
-            } else if (prefix.get(i).equals(PREFIX_DATETIME)) {
-                saveArgument(prefix.get(i), "31/12/2017");
+            } else if (prefix.get(i).equals(PREFIX_STARTTIME)) {
+                saveArgument(prefix.get(i), "31/12/2017 12:00");
+            } else if (prefix.get(i).equals(PREFIX_ENDTIME)) {
+                saveArgument(prefix.get(i), "31/12/2017 13:00");
             } else {
                 saveArgument(prefix.get(i), "");
             }

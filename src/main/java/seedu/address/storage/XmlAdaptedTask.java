@@ -30,7 +30,9 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String note;
     @XmlElement(required = true)
-    private String dateTime;
+    private String startTime;
+    @XmlElement(required = true)
+    private String endTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -55,7 +57,8 @@ public class XmlAdaptedTask {
                 .orElse(Priority.Type.NONE.name());
         status = source.getStatus().value;
         note = source.getNote().map(Note::toString).orElse("");
-        dateTime = source.getDateTime().map(DateTime::toString).orElse("");
+        startTime = source.getStartTime().map(DateTime::toString).orElse("");
+        endTime = source.getEndTime().map(DateTime::toString).orElse("");
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -76,8 +79,9 @@ public class XmlAdaptedTask {
         final Priority priority = new Priority(Priority.parseXmlString(this.priority));
         final Status status = new Status(this.status);
         final Note note = new Note(this.note);
-        final DateTime dateTime = new DateTime(this.dateTime);
+        final DateTime startTime = new DateTime(this.startTime);
+        final DateTime endTime = new DateTime(this.endTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, priority, status, note, dateTime, tags);
+        return new Task(name, priority, status, note, startTime, endTime, tags);
     }
 }

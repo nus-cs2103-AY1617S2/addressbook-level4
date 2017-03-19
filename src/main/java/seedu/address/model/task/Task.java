@@ -16,14 +16,15 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private Status status;
     private Note note;
-    private DateTime dateTime;
+    private DateTime startTime;
+    private DateTime endTime;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Priority priority, Status status, Note note, DateTime dateTime, UniqueTagList tags) {
+    public Task(Name name, Priority priority, Status status, Note note, DateTime startTime, DateTime endTime, UniqueTagList tags) {
         // Name should never be null because it is required for each task.
         // Status should never be null because every created task should be marked as incomplete.
         // Tags should never be null because zero tags is represented as an empty list.
@@ -33,7 +34,8 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
         this.status = status;
         this.note = note;
-        this.dateTime = dateTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -42,7 +44,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
-                source.getNote().orElse(null), source.getDateTime().orElse(null), source.getTags());
+                source.getNote().orElse(null), source.getStartTime().orElse(null), source.getEndTime().orElse(null), source.getTags());
     }
 
     public void setName(Name name) {
@@ -86,15 +88,23 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<DateTime> getDateTime() {
-        return Optional.of(dateTime);
+    public Optional<DateTime> getStartTime() {
+        return Optional.of(startTime);
     }
 
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setStartTime(DateTime dateTime) {
+        this.startTime = dateTime;
     }
 
-    @Override
+	public Optional<DateTime> getEndTime() {
+		return Optional.of(endTime);
+	}
+
+	public void setEndTime(DateTime endTime) {
+		this.endTime = endTime;
+	}
+
+	@Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
@@ -116,7 +126,7 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority().orElse(null));
         this.setStatus(replacement.getStatus());
         this.setNote(replacement.getNote().orElse(null));
-        this.setDateTime(replacement.getDateTime().orElse(null));
+        this.setStartTime(replacement.getStartTime().orElse(null));
         this.setTags(replacement.getTags());
     }
 

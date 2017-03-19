@@ -27,7 +27,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [n/NOTE] [s/STATUS] [d/DATETIME] [t/TAG]...\n"
+            + "[NAME] [p/PRIORITY] [n/NOTE] [s/STATUS] [d/STARTTIME] [e/ENDTIME] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/mid s/complete";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -90,14 +90,19 @@ public class EditCommand extends Command {
                 .map(Optional::of)
                 .orElseGet(taskToEdit::getNote)
                 .orElse(null);
-        DateTime updatedDateTime = editTaskDescriptor
-                .getDateTime()
+        DateTime updatedStartTime = editTaskDescriptor
+                .getStartTime()
                 .map(Optional::of)
-                .orElseGet(taskToEdit::getDateTime)
+                .orElseGet(taskToEdit::getStartTime)
+                .orElse(null);
+        DateTime updatedEndTime = editTaskDescriptor
+                .getStartTime()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getStartTime)
                 .orElse(null);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedStatus, updatedNote, updatedDateTime, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedStatus, updatedNote, updatedStartTime, updatedEndTime, updatedTags);
     }
 
     /**
@@ -109,7 +114,8 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<Status> status = Optional.empty();
         private Optional<Note> note = Optional.empty();
-        private Optional<DateTime> dateTime = Optional.empty();
+        private Optional<DateTime> startTime = Optional.empty();
+        private Optional<DateTime> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -119,7 +125,8 @@ public class EditCommand extends Command {
             this.priority = toCopy.getPriority();
             this.status = toCopy.getStatus();
             this.note = toCopy.getNote();
-            this.dateTime = toCopy.getDateTime();
+            this.startTime = toCopy.getStartTime();
+            this.endTime = toCopy.getEndTime();
             this.tags = toCopy.getTags();
         }
 
@@ -128,7 +135,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.priority, this.status,
-                    this.note, this.dateTime, this.tags);
+                    this.note, this.startTime, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -167,13 +174,22 @@ public class EditCommand extends Command {
             return note;
         }
 
-        public void setDateTime(Optional<DateTime> dateTime) {
-            assert dateTime != null;
-            this.dateTime = dateTime;
+        public void setStartTime(Optional<DateTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
-        public Optional<DateTime> getDateTime() {
-            return dateTime;
+        public Optional<DateTime> getStartTime() {
+            return startTime;
+        }
+        
+        public void setEndTime(Optional<DateTime> endTime) {
+            assert endTime != null;
+            this.startTime = endTime;
+        }
+
+        public Optional<DateTime> getEndTime() {
+            return endTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

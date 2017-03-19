@@ -34,7 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority().orElse(null);
         this.status = taskToCopy.getStatus();
         this.note = taskToCopy.getNote().orElse(null);
-        this.dateTime = taskToCopy.getDateTime().orElse(null);
+        this.dateTime = taskToCopy.getStartTime().orElse(null);
         this.tags = taskToCopy.getTags();
     }
 
@@ -83,7 +83,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<DateTime> getDateTime() {
+    public Optional<DateTime> getStartTime() {
         return Optional.of(dateTime);
     }
 
@@ -111,8 +111,8 @@ public class TestTask implements ReadOnlyTask {
 
         sb.append("s/" + this.getStatus().value + " ");
 
-        if (this.getDateTime().isPresent()) {
-            sb.append("d/" + this.getDateTime().get().toString() + " ");
+        if (this.getStartTime().isPresent()) {
+            sb.append("d/" + this.getStartTime().get().toString() + " ");
         }
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
