@@ -134,19 +134,18 @@ public class Parser {
             Optional<Integer> index = ParserUtil.parseIndex(arguments);
             // Get data of command to be deleted
             ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
-            return new AddCommandParser().parse(getAddArgs(taskToDelete));
+            return new AddCommandParser().parse(getTaskArgs(taskToDelete));
         default:
             return null;
         }
     }
 
-    //@@author A0114395E
     /*
-     * Helper method to parse a ReadOnlyTask into an command-line Add statement to be stored.
+     * Helper method to parse a ReadOnlyTask into an command-line statement to be stored.
      * @param ReadOnlyTask
-     * @returns String consisting of how a user would have typed the 'Add' command
+     * @returns String consisting of how a user would have typed the original command
      */
-    private static String getAddArgs(ReadOnlyTask task) {
+    private static String getTaskArgs(ReadOnlyTask task) {
         // Build arguments
         final StringBuilder builder = new StringBuilder();
         builder.append(task.getName());
@@ -178,7 +177,6 @@ public class Parser {
             // Remove square brackets for tags
             builder.append(tagBuilder.toString().replaceAll("\\[", "").replaceAll("\\]",""));
         }
-        System.out.println(builder.toString());
         return builder.toString();
     }
 }
