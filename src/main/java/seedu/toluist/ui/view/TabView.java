@@ -9,7 +9,7 @@ import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.UiStore;
 
 /**
- * View to display the tab bar
+ * View to display the individual tab
  */
 public class TabView extends UiView {
     private static final String SELECTED_TAB_CLASS = "selected";

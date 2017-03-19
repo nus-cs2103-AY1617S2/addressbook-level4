@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+
+
+<Label fx:id="tagLabel" stylesheets="@../stylesheet/DefaultTheme.css" text="Label" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <styleClass>
+      <String fx:value="dark" />
+      <String fx:value="tag" />
+   </styleClass>
+</Label>

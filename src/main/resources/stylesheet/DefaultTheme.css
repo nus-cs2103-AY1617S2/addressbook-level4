@@ -4,8 +4,8 @@
 /* DEFAULT STYLING */
 
 .root {
-    -fx-background-color: theme-divider;
-    -fx-control-inner-background: theme-divider;
+    -fx-background-color: theme-background;
+    -fx-control-inner-background: theme-background;
     -fx-font-family: "Roboto";
 }
 
@@ -31,17 +31,12 @@
     -fx-padding: 8 1 8 1;
 }
 
-.list-view {
-    -fx-border-radius: 2em;
-}
-
 .list-cell {
-    -fx-background-color: theme-text;
+    -fx-background-color: transparent;
 }
 
 .text-field {
     -fx-background-color: transparent;
-    -fx-background-radius: 2.0;
     -fx-padding: 0.5em 0.5em 0.5em 0.1em;
     -fx-border-color: theme-primary;
     -fx-border-width: 0 0 2 0;
@@ -54,6 +49,15 @@
     -fx-border-color: theme-primary-dark;
 }
 
+.text-area {
+    -fx-background-radius: 0;
+}
+
+.text-area .content {
+    -fx-background-radius: 0;
+    -fx-padding: 10;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-text-fill: theme-primary-text;
@@ -64,8 +68,8 @@
 .dark {
     -fx-background-color: theme-primary-text;
     -fx-control-inner-background: theme-primary-text;
-    -fx-highlight-fill: theme-divider;
-    -fx-text-fill: theme-divider;
+    -fx-highlight-fill: theme-text;
+    -fx-text-fill: theme-text;
 }
 
 /* TAB PANE */
@@ -99,3 +103,23 @@
 .task .completed .text {
     -fx-strikethrough: true;
 }
+
+/* TAG */
+
+.tag {
+    -fx-font-family: "Roboto Bold";
+    -fx-padding: 5 10 5 10;
+    -fx-font-size: 11;
+    -fx-background-radius: 5;
+}
+
+.tag.event-tag {
+    -fx-font-size: 12;
+    -fx-background-color: theme-primary-dark;
+}
+
+.tag.task-tag {
+    -fx-font-size: 12;
+    -fx-background-color: derive(theme-accent, -10%);
+}
+

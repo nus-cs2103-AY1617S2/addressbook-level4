@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="task" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" styleClass="task" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@../stylesheet/DefaultTheme.css" />
    </stylesheets>
    <children>
-      <FlowPane>
+      <FlowPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
          <children>
             <Label fx:id="id" text="Label">
                <FlowPane.margin>
@@ -32,9 +32,14 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <FlowPane fx:id="tagsPane" alignment="CENTER_LEFT" columnHalignment="CENTER" hgap="5.0">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+            </FlowPane>
          </children>
       </FlowPane>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
+      <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
          <children>
             <ImageView fx:id="clockIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="date">
