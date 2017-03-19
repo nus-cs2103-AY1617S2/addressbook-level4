@@ -92,10 +92,10 @@ public class Parser {
             return new HelpCommand();
         
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();        
+            return new UndoCommand();       
         
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();            
+            return new RedoCommand();
             
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
@@ -116,11 +116,12 @@ public class Parser {
         }
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-            
+
         case AddCommand.COMMAND_WORD:
             return new DeleteCommand(lastShownList.size() + 1);
 

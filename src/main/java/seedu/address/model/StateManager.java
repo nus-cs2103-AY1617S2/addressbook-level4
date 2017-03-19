@@ -10,11 +10,11 @@ import seedu.address.model.StateCommandPair;
  * Singleton class to handle Undo/Redo commands
  */
 public class StateManager {
-    
+
     private static StateManager instance = null;
     private Stack<StateCommandPair> undoStack;
     private Stack<StateCommandPair> redoStack;
-    
+
     // Exists only to defeat instantiation.
     protected StateManager() {
         undoStack = new Stack<StateCommandPair>();
@@ -52,7 +52,7 @@ public class StateManager {
 
     /**
      * Undo the most recent command, then store that undo command in a redo stack
-     * @throws CommandException 
+     * @throws CommandException
      */
     public void undo() throws CommandException {
         if (undoStack.isEmpty()) {
@@ -66,10 +66,10 @@ public class StateManager {
             currentCommand.executeInverseCommand();
         }
     }
-    
+
     /**
      * Redo the most recently 'undo' command, then store that redo command in the undo stack
-     * @throws CommandException 
+     * @throws CommandException
      */
     public void redo() throws CommandException {
         if (redoStack.isEmpty()) {
