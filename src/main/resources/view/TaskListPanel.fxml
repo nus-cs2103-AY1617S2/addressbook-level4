@@ -11,7 +11,7 @@
         <URL value="@Extensions.css" />
     </stylesheets>
 	<children>
-		<VBox fx:id="taskListView" VBox.vgrow="ALWAYS">
+		<VBox fx:id="taskListView" VBox.vgrow="NEVER">
 		</VBox>
 	</children>
 </VBox>

@@ -13,6 +13,12 @@
 	src: url('OpenSans-Semibold.ttf');
 }
 
+#taskListPanelPlaceholder {
+	-fx-background-image: url("../images/astronaut.png");
+	-fx-background-repeat: stretch;   
+	-fx-background-position: bottom right;
+}
+
 .scroll-pane {
 	-fx-border-width: 0 0 0 0;
 }
