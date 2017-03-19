@@ -24,6 +24,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    //@@author A0143157J
     public enum SortBy {
         START_DATE_TIME, END_DATE_TIME
     }
@@ -45,8 +46,7 @@ public class UniqueTaskList implements Iterable<Task> {
                     } else if (startDateTime2 == null) {
                         return -1;
                     } else {
-                        return o1.getStartDateTime().getDate()
-                            .compareTo(o2.getStartDateTime().getDate());
+                        return startDateTime1.compareTo(startDateTime2);
                     }
                 }
             };
@@ -66,8 +66,7 @@ public class UniqueTaskList implements Iterable<Task> {
                     } else if (endDateTime2 == null) {
                         return -1;
                     } else {
-                        return o1.getEndDateTime().getDate()
-                            .compareTo(o2.getEndDateTime().getDate());
+                        return endDateTime1.compareTo(endDateTime2);
                     }
                 }
             };
@@ -80,6 +79,7 @@ public class UniqueTaskList implements Iterable<Task> {
         FXCollections.sort(internalList, taskCmp);
     }
 
+    //@@author
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
