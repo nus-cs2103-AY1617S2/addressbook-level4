@@ -18,6 +18,8 @@ public class Task implements ReadOnlyTask {
     private DateTime endDateTime;
 
     private UniqueCategoryList categories;
+    
+    private static final String EMPTY_STRING = "";
 
     /**
      * Every field must be present and not null.
@@ -136,6 +138,20 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask o) {
+        if (this.endDateTime.getDate().equals(EMPTY_STRING) &&
+                o.getEndDateTime().getDate().equals(EMPTY_STRING)) {
+            return 0;
+        } else if (this.endDateTime.getDate().equals(EMPTY_STRING)) {
+            return -1;
+        } else if(o.getEndDateTime().getDate().equals(EMPTY_STRING)) {
+            return 1;
+        } else {
+            return this.endDateTime.getDate().compareTo(o.getEndDateTime().getDate());
+        }
     }
 
 }
