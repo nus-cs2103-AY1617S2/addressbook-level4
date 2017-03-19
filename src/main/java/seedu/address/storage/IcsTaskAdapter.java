@@ -13,6 +13,7 @@ import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.Priority;
 import net.fortuna.ical4j.util.UidGenerator;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
 import seedu.address.model.task.ReadOnlyTask;
@@ -63,7 +64,7 @@ public class IcsTaskAdapter {
         seedu.address.model.task.Priority priority = new seedu.address.model.task.Priority(priorityString);
         Instruction instruction = new Instruction(instructionString);
 
-        Task task = new Task(title, deadline, priority, instruction, null);
+        Task task = new Task(title, deadline, priority, instruction, new UniqueTagList());
         return task;
     }
 
@@ -79,18 +80,10 @@ public class IcsTaskAdapter {
 
     private static String parsePriority(Component component) {
         String priorityString = "3";
-        if (component.getProperty("priority") == null) {
+        if (component.getProperty("priority") != null) {
             priorityString = component.getProperty("priority").getValue();
         }
         return priorityString;
-    }
-
-    private static String parseDescription(Component component) {
-        String instructionString = "nothing yet";
-        if (component.getProperty("description") == null) {
-            instructionString = component.getProperty("description").getValue();
-        }
-        return instructionString;
     }
 
     private static int parsePriority(ReadOnlyTask task) {
@@ -98,6 +91,14 @@ public class IcsTaskAdapter {
         String priorityStringUnsigned = priorityString.replaceAll("-", "");
 
         return 6 - Integer.parseInt(priorityStringUnsigned);
+    }
+
+    private static String parseDescription(Component component) {
+        String instructionString = "nothing yet";
+        if (component.getProperty("description") != null) {
+            instructionString = component.getProperty("description").getValue();
+        }
+        return instructionString;
     }
 
 }

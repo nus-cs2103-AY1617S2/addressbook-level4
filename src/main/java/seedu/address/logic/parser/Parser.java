@@ -90,10 +90,10 @@ public class Parser {
             return new UndoCommand();
 
         case ImportCommand.COMMAND_WORD:
-            return new ImportCommand();
+            return new ImportCommand(arguments);
 
         case ExportCommand.COMMAND_WORD:
-            return new ExportCommand();
+            return new ExportCommand(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

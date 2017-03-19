@@ -105,7 +105,7 @@ public class Deadline {
         if (parsedDeadline.size() != 0) {
             return parsedDeadline.get(0).getDates().get(0);
         }
-        return null;
+        return new Date();
     }
 
     @Override

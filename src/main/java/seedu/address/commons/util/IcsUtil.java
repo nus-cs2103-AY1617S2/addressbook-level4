@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import java.io.File;
+//import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class IcsUtil {
         FileInputStream fin = new FileInputStream(path);
         CalendarBuilder builder = new CalendarBuilder();
         Calendar calendar = builder.build(fin);
+        fin.close();
         return calendar;
     }
 
@@ -51,9 +54,14 @@ public class IcsUtil {
         assert path.endsWith(".ics");
         assert calendar != null;
 
+        File out = new File(path);
+        out.createNewFile();
+
         FileOutputStream fout = new FileOutputStream(path);
         CalendarOutputter outputter = new CalendarOutputter();
         outputter.output(calendar, fout);
+        fout.close();
+
     }
 
 }

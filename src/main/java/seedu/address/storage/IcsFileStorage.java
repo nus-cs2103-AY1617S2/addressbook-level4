@@ -11,9 +11,11 @@ import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.ProdId;
+import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.IcsUtil;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
 /**
@@ -25,12 +27,13 @@ public class IcsFileStorage {
      * @throws IOException         thrown when the ICS file path is invalid.
      * @throws ValidationException thrown when task data is incompatible for ICS file type.
      */
-    public static void saveDataToFile(String path, List<Task> tasks) throws ValidationException, IOException {
+    public static void saveDataToFile(String path, List<ReadOnlyTask> tasks) throws ValidationException, IOException {
         Calendar calendar = new Calendar();
         calendar.getProperties().add(new ProdId("-//CS2103JAN2017-W09-B1//Burdens 0.3//EN"));
+        calendar.getProperties().add(Version.VERSION_2_0);
         calendar.getProperties().add(CalScale.GREGORIAN);
 
-        for (Task task : tasks) {
+        for (ReadOnlyTask task : tasks) {
             VEvent event = IcsTaskAdapter.taskToVEvent(task);
             calendar.getComponents().add(event);
         }
