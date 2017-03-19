@@ -47,13 +47,13 @@ In order to make better contribution, you should:
 
 #### Importing the project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+1. Fork this repo, and clone the fork to your computer.
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+   in the prerequisites above).
+3. Click `File` > `Import`.
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`.
+5. Click `Browse`, then locate the project's directory.
+6. Click `Finish`.
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
@@ -196,10 +196,10 @@ The `Storage` component:
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.geekeep.commons` package. Here are some examples:
-+ `IllegalValueException` class is used in both `Logic` and `Model` components to throw an exception when the value is considered invalid.
-+ `UnmodifiableObservableList` class is used in `Logic`, `Model` and `Storage` components to provide unmodifiable view of an observable list.
-+ `LogsCenter` class is used in all components to create named loggers which are further used to log messages.
+You can find classes used by multiple components in the `seedu.geekeep.commons` package. Here are some examples of common classes:
+* `IllegalValueException` class used by both `Logic` and `Model` components is responsible for throwing an exception when the value is considered invalid.
+* `UnmodifiableObservableList` class used by `Logic`, `Model` and `Storage` components is responsible for providing an unmodifiable view of an observable list.
+* `LogsCenter` class used by all components is responsible for creating named loggers which you can further use to log messages and debug your code.
 
 **[⬆ back to top](#user-content-table)**
 
@@ -311,9 +311,9 @@ Here are the steps to create a new release.
 A project often depends on third-party libraries. For example, Geekeep depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for JSON parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
-is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+is better than these alternatives:<br>
+* Include those libraries in the project's repo (this bloats the repo size)<br>
+* Require you to download those libraries manually (this creates extra work for you)<br>
 
 **[⬆ back to top](#user-content-table)**
 
@@ -537,27 +537,27 @@ Author: Liu Ziyang
 
 Pros:
 
-+ Allowing marking a task as done
+* Allowing marking a task as done
 
-+ Allowing postponing a task
+* Allowing postponing a task
 
-+ Shortcuts for editing tasks
+* Shortcuts for editing tasks
 
-+ Personalised categorization
+* Personalised categorization
 
-+ Integration with Google Calendar
+* Integration with Google Calendar
 
 Cons:
 
-+ Only online access
+* Only online access
 
-+ No support for command line inputs
+* No support for command line inputs
 
-+ No support for events
+* No support for events
 
-+ No support for undoing an action
+* No support for undoing an action
 
-+ Poor UI with no displaying difference between urgent and non-urgent tasks
+* Poor UI with no displaying difference between urgent and non-urgent tasks
 
 #### [Habitica](https://habitica.com/static/front)
 
