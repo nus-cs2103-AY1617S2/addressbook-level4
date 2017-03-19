@@ -35,4 +35,10 @@ public class CliSyntax {
 
     public static final String DEFAULT_DEADLINE = " at 2359";
     public static final String DEFAULT_STARTING_TIME = " at 0000";
+
+    /* Find Command Keywords */
+    public static final String FIND_NAME = "title";
+    public static final String FIND_DEADLINE = "due";
+    public static final String FIND_PERIOD = "during";
+    public static final String FIND_TAG = "tag";
 }
