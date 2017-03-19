@@ -202,7 +202,7 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 **A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click to confirm that you want to clear the tasks with that tag.
 
 **Q**: Will I get reminded if the deadlines of tasks are nearing?<br>
-**A**: For tasks that are due in 24 hours, there will be a notification in the system tray reminding you of the task.a
+**A**: For tasks that are due in 24 hours, there will be a notification in the system tray reminding you of the task.
 
 ## 4. Command Summary
 
