@@ -62,7 +62,7 @@ public class TodoList implements ReadOnlyTodoList {
     public void resetData(ReadOnlyTodoList newData) {
         assert newData != null;
         try {
-            setTasks(newData.getPersonList());
+            setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "AddressBooks should not have duplicate persons";
         }
@@ -162,7 +162,7 @@ public class TodoList implements ReadOnlyTodoList {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getPersonList() {
+    public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 

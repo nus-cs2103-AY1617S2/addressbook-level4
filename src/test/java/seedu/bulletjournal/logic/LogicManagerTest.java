@@ -244,25 +244,25 @@ public class LogicManagerTest {
         assertCommandSuccess(helper.generateAddCommand("add ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
         model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("a ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
         model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("create ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
         model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("new ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
     }
 
@@ -286,7 +286,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         TodoList expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -380,21 +380,21 @@ public class LogicManagerTest {
         assertCommandSuccess("select 2",
                 String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
 
         assertCommandSuccess("s 2",
                 String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
 
         assertCommandSuccess("choose 2",
                 String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
     }
@@ -423,7 +423,7 @@ public class LogicManagerTest {
         assertCommandSuccess("delete 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
         //TODO: JUnit tests for variations of delete command
     }

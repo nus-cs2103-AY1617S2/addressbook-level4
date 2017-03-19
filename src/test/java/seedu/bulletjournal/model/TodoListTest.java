@@ -28,7 +28,7 @@ public class TodoListTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), todoList.getPersonList());
+        assertEquals(Collections.emptyList(), todoList.getTaskList());
         assertEquals(Collections.emptyList(), todoList.getTagList());
     }
 
@@ -60,7 +60,7 @@ public class TodoListTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         TodoList typicalAddressBook = new TypicalTestTasks().getTypicalTodoList();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getPersonList();
+        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -83,7 +83,7 @@ public class TodoListTest {
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getPersonList() {
+        public ObservableList<ReadOnlyTask> getTaskList() {
             return persons;
         }
 

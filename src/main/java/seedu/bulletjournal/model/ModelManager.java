@@ -35,7 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.todoList = new TodoList(addressBook);
-        filteredPersons = new FilteredList<>(this.todoList.getPersonList());
+        filteredPersons = new FilteredList<>(this.todoList.getTaskList());
     }
 
     public ModelManager() {
