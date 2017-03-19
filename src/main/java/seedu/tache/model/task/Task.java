@@ -13,9 +13,9 @@ import seedu.tache.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Date startDate;
+    private Optional<Date> startDate;
     private Optional<Date> endDate;
-    private Time startTime;
+    private Optional<Time> startTime;
     private Optional<Time> endTime;
     private UniqueTagList tags;
 
@@ -25,6 +25,10 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
+        this.startDate = Optional.ofNullable(new Date("-"));
+        this.endDate = Optional.ofNullable(new Date("-"));
+        this.startTime = Optional.ofNullable(new Time("-"));
+        this.endTime = Optional.ofNullable(new Time("-"));
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -32,9 +36,9 @@ public class Task implements ReadOnlyTask {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.startDate = startDate;
+        this.startDate = Optional.ofNullable(startDate);
         this.endDate = Optional.ofNullable(endDate);
-        this.startTime = startTime;
+        this.startTime = Optional.ofNullable(startTime);
         this.endTime = Optional.ofNullable(endTime);
     }
 
@@ -58,11 +62,11 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Date getStartDate() {
-        return startDate;
+        return startDate.orElse(new Date("-"));
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate = Optional.ofNullable(startDate);
     }
 
     @Override
@@ -76,11 +80,11 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Time getStartTime() {
-        return startTime;
+        return startTime.orElse(new Time("-"));
     }
 
     public void setStartTime(Time startTime) {
-        this.startTime = startTime;
+        this.startTime = Optional.ofNullable(startTime);
     }
 
     @Override

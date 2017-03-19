@@ -26,7 +26,11 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName())); // state checks here onwards
+                && other.getName().equals(this.getName())
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
+                && other.getStartTime().equals(this.getStartTime())
+                && other.getEndTime().equals(this.getEndTime())); // state checks here onwards
     }
 
     /**
@@ -35,6 +39,10 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(getStartDate())
+                .append(getEndDate())
+                .append(getStartTime())
+                .append(getEndTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
