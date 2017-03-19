@@ -39,6 +39,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.History;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -494,7 +495,38 @@ public class LogicManagerTest {
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, tempTaskManager, taskTwoOnly);
     }
 
+    @Test
+    public void assertUndoException() {
+        assertCommandFailure("undo", History.MESSAGE_INVALID_UNDO);
+    }
+    
+    @Test
+    public void assertRedoException() {
+        assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
+    }
+    
+    @Test
+    public void executeUndoFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
 
+        model.addTask(testTask1);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandFailure("undo", History.MESSAGE_INVALID_UNDO);
+    }
+    
+    @Test
+    public void executeRedoFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+        List<Task> oneTasks = helper.generateTaskList(testTask1);
+        TaskManager expectedTaskManager = helper.generateAddressBook(oneTasks);
+
+        model.addTask(testTask1);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
+        assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
+    }
 
     /**
      * A utility class to generate test data.
