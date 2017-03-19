@@ -2,6 +2,8 @@
 package seedu.address.model;
 
 import java.util.Stack;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.StateCommandPair;
 
 /**
@@ -36,8 +38,9 @@ public class StateManager {
 
     /**
      * Undo the most recent command, then store that undo command in a redo stack
+     * @throws CommandException 
      */
-    public void undo() {
+    public void undo() throws CommandException {
         if (undoStack.isEmpty()) {
             // Can't undo as no history
             System.out.println("No undo commands found");
@@ -46,14 +49,15 @@ public class StateManager {
             StateCommandPair currentCommand = undoStack.pop();
             redoStack.push(currentCommand);
             // Executing undo command
-            currentCommand.executeInvese();
+            currentCommand.executeInverseCommand();
         }
     }
     
     /**
      * Redo the most recently 'undo' command, then store that redo command in the undo stack
+     * @throws CommandException 
      */
-    public void redo() {
+    public void redo() throws CommandException {
         if (redoStack.isEmpty()) {
             // Can't redo as no history
             System.out.println("No redo commands found");
@@ -62,7 +66,7 @@ public class StateManager {
             StateCommandPair currentCommand = redoStack.pop();
             undoStack.push(currentCommand);
             // Executing redo command
-            currentCommand.execute();
+            currentCommand.executeCommand();
         }
     }
 }

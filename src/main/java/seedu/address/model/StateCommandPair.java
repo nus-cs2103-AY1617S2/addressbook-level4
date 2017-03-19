@@ -20,7 +20,7 @@ public class StateCommandPair {
      * Executes the command previously entered (for redo)
      * @throws CommandException 
      */
-    public void execute() throws CommandException {
+    public void executeCommand() throws CommandException {
         this.executeCommand.execute();
     }
     
@@ -28,7 +28,7 @@ public class StateCommandPair {
      * Executes the inverse of the command previously entered (for undo)
      * @throws CommandException 
      */
-    public void executeInvese() throws CommandException {
+    public void executeInverseCommand() throws CommandException {
         this.undoCommand.execute();
     }
 }
