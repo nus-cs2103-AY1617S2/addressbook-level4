@@ -33,6 +33,13 @@ public class StateManager {
     }
     
     /**
+     * Clears the redo-stack (Typically when the user enters a new command)
+     */
+    public void clearRedoStack(StateCommandPair newCommandPair){
+        this.redoStack.clear();
+    }
+
+    /**
      * Undo the most recent command, then store that undo command in a redo stack
      */
     public void undo() {
