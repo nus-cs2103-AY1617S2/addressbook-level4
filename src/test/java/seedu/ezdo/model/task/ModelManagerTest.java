@@ -24,13 +24,13 @@ public class ModelManagerTest {
 
     private ModelManager modelManager;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Before
     public void setUp() {
         modelManager = new ModelManager();
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void checkDate_parseFail() throws Exception {
