@@ -42,8 +42,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new TaskName(taskname), new DueDate(duedate), new Status(status), new BeginDate(begindate),
-                new UniqueTagList(tagSet));
+        this.toAdd = new Task(new TaskName(taskname), new DueDate(duedate), new Status(status),
+                new BeginDate(begindate), new UniqueTagList(tagSet));
     }
 
     @Override
