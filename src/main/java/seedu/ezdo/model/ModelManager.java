@@ -54,9 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyEzDo newData) {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.resetData(newData);
         indicateEzDoChanged();
     }
@@ -73,9 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void killTask(ReadOnlyTask target) throws TaskNotFoundException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.removeTask(target);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
@@ -85,9 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task)
             throws UniqueTaskList.DuplicateTaskException, DateException {
         checkTaskDate(task);
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.addTask(task);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
@@ -95,9 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.doneTask(doneTask);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
@@ -108,9 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException, DateException {
         assert editedTask != null;
         checkTaskDate(editedTask);
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
         indicateEzDoChanged();
@@ -136,6 +126,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateStacks() throws EmptyStackException {
+        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
+        undoStack.push(prevState);
+        redoStack.clear();
+    }
+  
+    @Override
+  
     public void checkTaskDate(ReadOnlyTask task) throws DateException {
         assert task != null;
         try {
