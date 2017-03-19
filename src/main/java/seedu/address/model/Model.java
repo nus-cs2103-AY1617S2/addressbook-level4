@@ -50,5 +50,10 @@ public interface Model {
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
     
+    //mark a given task as done
+    int markTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    
+    //mark a given task as undone
+    int unmarkTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
 }

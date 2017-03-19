@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -195,4 +193,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         // your own
         return Objects.hash(tasks, tags);
     }
+
+    public int markTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+        int indexMarked = tasks.getInternalList().indexOf(key);
+        if (tasks.mark(key)) {
+            return indexMarked;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
+    public int unmarkTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+        int indexUnmarked = tasks.getInternalList().indexOf(key);
+        if (tasks.unmark(key)) {
+            return indexUnmarked;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
 }

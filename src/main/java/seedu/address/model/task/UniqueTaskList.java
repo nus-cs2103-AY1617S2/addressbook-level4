@@ -130,6 +130,48 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+    
+    //Marks the equivalent task from the list.
+    //throws TaskNotFoundException if no such task could be found in the list.
+    public boolean mark(ReadOnlyTask toMark) throws TaskNotFoundException {
+        assert toMark != null;
+        final boolean taskFoundAndMarked = internalList.contains(toMark);
+        if (!taskFoundAndMarked) {
+            throw new TaskNotFoundException();
+        }
+        return taskFoundAndMarked;
+    }
+    
+    //Marks the equivalent task from the list.
+    //throws TaskNotFoundException if no such task could be found in the list.
+    public boolean unmark(ReadOnlyTask toUnmark) throws TaskNotFoundException {
+        assert toUnmark != null;
+        final boolean taskFoundAndMarked = internalList.contains(toUnmark);
+        if (!taskFoundAndMarked) {
+            throw new TaskNotFoundException();
+        }
+        return taskFoundAndMarked;
+    }
+    //Mark a task as done
+    public void mark(Task toMark) {
+        assert toMark != null;
+        if (toMark.getStatus() == true) {
+        	System.out.println("The task has been marked as done already");
+        }
+        else {
+        toMark.setStatus(true);
+        }
+    }
+    //Mark a task as undone
+    public void unmark(Task toUnmark){
+    	assert toUnmark != null;
+        if (toUnmark.getStatus() == false) {
+        	System.out.println("The task has not been done yet");
+        }
+        else {
+        toUnmark.setStatus(false);
+        }
+    }
 
 }
 

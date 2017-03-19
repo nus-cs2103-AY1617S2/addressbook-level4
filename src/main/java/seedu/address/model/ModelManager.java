@@ -194,4 +194,18 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+	@Override
+	public int markTask(ReadOnlyTask target) throws TaskNotFoundException {
+		int indexMarked = addressBook.markTask(target);
+        indicateAddressBookChanged();
+        return indexMarked;
+	}
+
+	@Override
+	public int unmarkTask(ReadOnlyTask target) throws TaskNotFoundException {
+		int indexUnmarked = addressBook.unmarkTask(target);
+        indicateAddressBookChanged();
+        return indexUnmarked;
+	}
+
 }

@@ -66,6 +66,6 @@ public class XmlAdaptedTask {
         final Content content = new Content(this.content);
         final TaskDateTime dateTime = new TaskDateTime(this.dateTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, content, dateTime, tags);
+        return new Task(title, content, dateTime, tags, false);
     }
 }
