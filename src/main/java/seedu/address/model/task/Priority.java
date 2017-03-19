@@ -12,7 +12,7 @@ public class Priority {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be between 1-3";
 
     public final String value;
-    
+
     private String priorityColor;
 
     /**
@@ -30,7 +30,7 @@ public class Priority {
         } else {
             this.value = "3";
         }
-        
+
         setPriorityColor(this.value);
     }
 
@@ -57,26 +57,26 @@ public class Priority {
     public int hashCode() {
         return value.hashCode();
     }
- 
-    public String getPriorityColor(){
-    	return priorityColor;
+
+    public String getPriorityColor() {
+        return priorityColor;
     }
-    
-    public void setPriorityColor(String priorityValue){
-    	switch(priorityValue){
-    	case "1":
-    		priorityColor = "red";
-    		break;
-    	case "2":
-    		priorityColor = "darkorange";
-    		break;
-    	case "3":
-    		priorityColor = "yellow";
-    		break;
-    	default:
-    		priorityColor = "yellow";
-    		break;
-    	}
+
+    public void setPriorityColor(String priorityValue) {
+        switch(priorityValue) {
+        case "1":
+            priorityColor = "red";
+            break;
+        case "2":
+            priorityColor = "darkorange";
+            break;
+        case "3":
+            priorityColor = "yellow";
+            break;
+        default:
+            priorityColor = "yellow";
+            break;
+        }
     }
 
 }
