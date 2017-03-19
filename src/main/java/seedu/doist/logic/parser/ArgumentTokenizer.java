@@ -21,11 +21,12 @@ public class ArgumentTokenizer {
     /** Given prefixes **/
     private final List<Prefix> prefixes;
     private ArrayList<Prefix> temp;
-    private static final int DATE_BY = 1;
-    private static final int DATE_FROM = 2;
-    private static final int DATE_TO = 2;
-    private static final int DATE_INVALID = -1;
-
+    private int dateFormat;
+    public static final int DATE_BY = 1;
+    public static final int DATE_FROM = 2;
+    public static final int DATE_TO = 2;
+    public static final int DATE_INVALID = -1;
+    public static final int DATE_NIL = 0;
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
@@ -35,6 +36,7 @@ public class ArgumentTokenizer {
      */
     public ArgumentTokenizer(Prefix... prefixes) {
         this.prefixes = Arrays.asList(prefixes);
+        dateFormat = -1;
     }
 
     /**
@@ -104,38 +106,43 @@ public class ArgumentTokenizer {
         int count = 0;
         count = count + validateBy(tokens) + validateFrom(tokens) + validateTo(tokens);
         switch (count) {
-        case 0 : return 0;
-        case DATE_BY : return DATE_BY;
-        case (DATE_FROM + DATE_TO) : return DATE_TO;
-        default : return -1;
+        case DATE_NIL : dateFormat = DATE_NIL; break;
+        case DATE_BY : dateFormat = DATE_BY; break;
+        case (DATE_FROM + DATE_TO) : dateFormat = DATE_TO; break;
+        default : dateFormat = DATE_INVALID;
         }
+        return dateFormat;
     }
 
     public int validateBy(ArrayList<String> token) {
         for (String prefix: token) {
             if (prefix.equals(CliSyntax.PREFIX_BY.getPrefix())) {
-                return 1;
+                return DATE_BY;
             }
         }
-        return 0;
+        return DATE_NIL;
     }
 
     public int validateFrom(ArrayList<String> token) {
         for (String prefix: token) {
             if (prefix.equals(CliSyntax.PREFIX_FROM.getPrefix())) {
-                return 2;
+                return DATE_FROM;
             }
         }
-        return 0;
+        return DATE_NIL;
     }
 
     public int validateTo(ArrayList<String> token) {
         for (String prefix: token) {
             if (prefix.equals(CliSyntax.PREFIX_TO.getPrefix())) {
-                return 2;
+                return DATE_TO;
             }
         }
-        return 0;
+        return DATE_NIL;
+    }
+
+    public int getDateFormat() {
+        return dateFormat;
     }
 
     /**
