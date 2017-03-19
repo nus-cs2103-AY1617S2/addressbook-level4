@@ -209,7 +209,7 @@ public class TaskTest {
     }
 
     @Test
-    public void compareTo_sameEndDateTimeDifferentStartDateTime() {
+    public void compareTo_sameEndDateTimeDifferentPr() {
         LocalDateTime to = LocalDateTime.now();
         Task event1 = new Task("event 1", to.minusDays(1), to);
         Task event2 = new Task("event 2", to.minusDays(2), to);
@@ -254,6 +254,15 @@ public class TaskTest {
         Task testTask1 = new Task("floating 1");
         Task testTask2 = new Task("floating 2");
         assertEquals(testTask1.compareTo(testTask2), -1);
+    }
+
+    @Test
+    public void compareTo_nonOverdueOverdue() {
+        Task task1 = new Task("yesterday", LocalDateTime.now().minusDays(1));
+        task1.setCompleted(true);
+        Task task2 = new Task("today", LocalDateTime.now());
+
+        assertEquals(task2.compareTo(task1), -1);
     }
 
     @Test
