@@ -16,7 +16,7 @@ public class Timing implements Comparable<Timing> {
     public static final String[] TIMING_FORMAT = {
             // "dd/MM/yyyy HH:mm",
             "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
-
+    public static final String NULL_TIMING = "n/a";
     public final String value;
     private Date date;
 
@@ -34,7 +34,7 @@ public class Timing implements Comparable<Timing> {
             }
             this.value = trimmedTiming;
         } else {
-            this.value = "n/a";
+            this.value = NULL_TIMING;
         }
     }
 
@@ -43,7 +43,7 @@ public class Timing implements Comparable<Timing> {
      */
     private boolean isValidTiming(String test) {
         boolean isValid = false;
-        if (test.equals("n/a")) {
+        if (test.equals(NULL_TIMING)) {
             isValid = true;
         } else {
             for (int i = 0; i < TIMING_FORMAT.length; i++) {
@@ -89,7 +89,18 @@ public class Timing implements Comparable<Timing> {
     @SuppressWarnings("deprecation")
     @Override
     public int compareTo(Timing compareTiming) {
-        int compareToResult = this.date.getYear() - compareTiming.date.getYear();
+        boolean thisNull = this.date.equals(NULL_TIMING);
+        boolean otherNull = compareTiming.date.equals(NULL_TIMING);
+
+        if (thisNull && otherNull) {
+            return 0;
+        } else if (thisNull) {
+            return 1;
+        } else if (otherNull) {
+            return -1;
+        }
+
+        int compareToResult = this.date.getYear() - compareTiming.date.getYear() + 3800;
 
         if (compareToResult == 0) {
             compareToResult = this.date.getMonth() - compareTiming.date.getMonth();
