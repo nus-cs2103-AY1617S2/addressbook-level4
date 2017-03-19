@@ -22,6 +22,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.undo.UndoManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -212,6 +213,9 @@ public class MainApp extends Application {
         ui.setLogic(logic);
         //Update UI to show all tasks since we have loaded the new Task Manager in
         model.updateFilteredListToShowAll();
+
+        //Restart the undo manager
+        UndoManager.getInstance().clear();
 
         //Save all current data into the new location
         storage.saveTaskManager(model.getTaskManager(), event.getFilePath());
