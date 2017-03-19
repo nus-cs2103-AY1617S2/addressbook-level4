@@ -20,8 +20,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label venue;
     @FXML
-    private Label startTime;
-    @FXML
     private Label endTime;
     @FXML
     private Label urgencyLevel;
@@ -34,15 +32,47 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        venue.setText("Venue at: " + task.getVenue().value);
-        startTime.setText("Start from: " + task.getStartTime().value);
-        endTime.setText("End at: " + task.getEndTime().value);
-        urgencyLevel.setText("Urgency: " + task.getUrgencyLevel().value);
-        description.setText("Description: " + task.getDescription().value);
+        initEndTime(task);
+        initVenue(task);
+        initDescription(task);
         initTags(task);
+    }
+    //@@author A0122017Y
+    private void initVenue(ReadOnlyTask task){
+        boolean isVenuePresent = task.getVenue().isPresent();
+        String venueContent = "";
+        if (isVenuePresent) {
+            venueContent = "Venue at: " + task.getVenue().toString();
+        }
+        venue.setText(venueContent);
+    }
+    
+    private void initDescription(ReadOnlyTask task){
+        String descriptionContent = "";
+        if (task.getDescription().isPresent()) {
+            descriptionContent = "Description: " + task.getDescription().toString();
+        }
+        description.setText(descriptionContent);
+    }
+    
+    private void initUrgency(ReadOnlyTask task){
+        String urgencyContent = "";
+        if (task.getUrgencyLevel().isPresent()) {
+            urgencyContent = "Urgency: " + task.getDescription().toString();
+        }
+        urgencyLevel.setText(urgencyContent);
+    }
+    
+    private void initEndTime(ReadOnlyTask task){
+        String endTimeContent = "";
+        if (task.getEndTime().isPresent()) {
+            endTimeContent = "Deadline: " + task.getEndTime().toString();
+        }
+        description.setText(endTimeContent);
     }
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+    //@@
 }
