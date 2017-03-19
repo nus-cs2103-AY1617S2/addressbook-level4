@@ -29,13 +29,13 @@
 
 #### Dependencies
 
-* #### Libraries
+* Libraries
   * Guava
   * JavaFX
   * Jackson
-
-* #### Testing Frameworks
   * TestFX
+
+* Testing Frameworks
   * JUnit
 
 
