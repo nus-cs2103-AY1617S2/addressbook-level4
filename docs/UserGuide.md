@@ -7,6 +7,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 1. [Quick Start] (#quick-start)
 2. [Features] (#features)
 3. [FAQ] (#faq)
+4. [Command Summary] (#command-summary)
 
 ## 1. Quick Start
 
@@ -130,11 +131,11 @@ Examples:
 * `edit i/4 n/Exercise`
 
 ### 2.6. Deleting a task: `delete`
-Deletes the specified task.
+Deletes the specified task.<br>
 Format: `delete INDEX_NUMBER`
 
-> Task labeled by INDEX_NUMBER will be deleted from the list.<br>
-> INDEX_NUMBER of task is shown as according to the current tab.
+> Task labeled INDEX_NUMBER will be deleted from the list.<br>
+> INDEX_NUMBER of task is shown according to the current tab.
 
 Examples:
 * `delete 2`
@@ -144,8 +145,8 @@ Examples:
 
 Marks the specified task as complete.<br>
 Format: `complete INDEX_NUMBER`
-> The task at INDEX_NUMBER will be marked as completed.<br>
-> INDEX_NUMBER of task is shown as according to the current tab.
+> Task labeled INDEX_NUMBER will be marked as completed.<br>
+> INDEX_NUMBER of task is shown according to the current tab.
 
 Examples:
 * `complete 2`
@@ -153,61 +154,55 @@ Examples:
 
 ### 2.8. Track overall progress: `progress`
 
-Shows all the tasks completed over time and also specifying any overdue tasks.<br>
-> A general overview of performance/efficiency based on the usage of the task manager will be shown.<br>
+Shows all the tasks completed over time and also specifies any overdue tasks.<br>
+A general overview of performance or efficiency based on the usage of the task manager will be shown.<br>
 
 Format: `progress NUMBER_OF_DAYS`
-> `NUMBER_OF_DAYS` is a integer which indicates the your progress for the past `NUMBER_OF_DAYS` days (excluding today).<br>
-> This command will provide an analysis on the number of task that you have completed/overdue.
+> `NUMBER_OF_DAYS` is a integer which indicates your progress for the past `NUMBER_OF_DAYS` days (excluding today).<br>
+> This command will provide an analysis on the number of tasks that you have completed or are overdue.
 
 Examples:
 * `progress 7`
 
 ### 2.9. Search for tasks: `search`
 
-Searches for tasks based on keywords by user's input.<br>
+Searches for tasks based on keywords that the user inputs.<br>
 
 Format: `search KEYWORD`
-> A valid input needs to be keyed in. No special characters such as ASCII whitespace is allowed.<br>
-> A popout will appear to show you the list of tasks that contains the stated `KEYWORD`
+> No special characters such as ASCII whitespace is allowed.<br>
+> A popout will appear to show you the list of tasks that contains the stated `KEYWORD`.
 
 Examples:
 * `search potato`
 
 ### 2.10. Undo previous action : `undo`
 
-Undos previous action that user made.<br>
+Undoes previous action that user made.<br>
 Format : `undo`
-> Any previous valid command will be reversed.
+> The command last executed will be reversed.
 > Only 1 command will be reversed at a time.
 
 ### 2.11. Redo previous action : `redo`
 
-Redos previous `undo` that user made.<br>
+Redoes previous `undo` that user made.<br>
 Format : `redo`
 > Any previous `undo` will be reversed, in successive order.
 
 ### 2.12. Saving the tasks
 
-Upon creation of tasks, the tasks will be automatically saved in the folder where the program is held in.
+Upon creation of tasks, the tasks will be automatically saved in the folder where the program is stored in.
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
 
 ## 3. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
 
-**Q**: If I had keyed in the wrong details for a recently added task, how do I change it?<br>
-**A**: Head to the recently added tab and select the task that you have just added (it should be at the top of the list). Click on the task and edit accordingly. Click done after completion.
-
-**Q**: How do I clear all tasks?<br>
-**A**: Under the `help` button, there will be a reset feature. It automatically wipes the saved data.
-
 **Q**: How do I clear all the tasks under a certain tag?<br>
-**A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click confirm to clear the tasks of the tags.
+**A**: Navigate to `Priority` tab, click the `Clear All` button. There will be a confirmation prompt upon doing so, click to confirm that you want to clear the tasks with that tag.
 
-**Q**: Will I get reminded if the deadline of certain high priority tasks are near?<br>
-**A**: For the tasks that is due in the next 24 hours, it will be distinguished by the colours on its name.
+**Q**: Will I get reminded if the deadlines of tasks are nearing?<br>
+**A**: For tasks that are due in 24 hours, there will be a notification in the system tray reminding you of the task.a
 
 ## 4. Command Summary
 
