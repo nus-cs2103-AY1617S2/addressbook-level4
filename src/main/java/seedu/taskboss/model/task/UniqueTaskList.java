@@ -31,50 +31,50 @@ public class UniqueTaskList implements Iterable<Task> {
     public void sort(SortBy sortType) throws IllegalValueException {
         Comparator<ReadOnlyTask> taskCmp = null;
         switch(sortType) {
-            case START_DATE_TIME:
-                taskCmp =  new Comparator<ReadOnlyTask>() {
-                    @Override
-                    public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
-                        Date startDateTime1 = o1.getStartDateTime().getDate();
-                        Date startDateTime2 = o2.getStartDateTime().getDate();
-                        if (startDateTime1 == null &&
-                            startDateTime2 == null) {
-                                return 0;
-                        } else if (startDateTime1 == null) {
-                            return 1;
-                        } else if (startDateTime2 == null) {
-                            return -1;
-                        } else {
-                            return o1.getStartDateTime().getDate()
-                                .compareTo(o2.getStartDateTime().getDate());
-                        }
+        case START_DATE_TIME:
+            taskCmp =  new Comparator<ReadOnlyTask>() {
+                @Override
+                public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+                    Date startDateTime1 = o1.getStartDateTime().getDate();
+                    Date startDateTime2 = o2.getStartDateTime().getDate();
+                    if (startDateTime1 == null &&
+                        startDateTime2 == null) {
+                        return 0;
+                    } else if (startDateTime1 == null) {
+                        return 1;
+                    } else if (startDateTime2 == null) {
+                        return -1;
+                    } else {
+                        return o1.getStartDateTime().getDate()
+                            .compareTo(o2.getStartDateTime().getDate());
                     }
-                };
-                break;
+                }
+            };
+            break;
 
-            case END_DATE_TIME:
-                taskCmp = new Comparator<ReadOnlyTask> () {
-                    @Override
-                    public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
-                        Date endDateTime1 = o1.getEndDateTime().getDate();
-                        Date endDateTime2 = o2.getEndDateTime().getDate();
-                        if (endDateTime1 == null &&
-                            endDateTime2 == null) {
-                                return 0;
-                        } else if (endDateTime1 == null) {
-                            return 1;
-                        } else if (endDateTime2 == null) {
-                            return -1;
-                        } else {
-                            return o1.getEndDateTime().getDate()
-                                .compareTo(o2.getEndDateTime().getDate());
-                        }
+        case END_DATE_TIME:
+            taskCmp = new Comparator<ReadOnlyTask> () {
+                @Override
+                public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+                    Date endDateTime1 = o1.getEndDateTime().getDate();
+                    Date endDateTime2 = o2.getEndDateTime().getDate();
+                    if (endDateTime1 == null &&
+                        endDateTime2 == null) {
+                        return 0;
+                    } else if (endDateTime1 == null) {
+                        return 1;
+                    } else if (endDateTime2 == null) {
+                        return -1;
+                    } else {
+                        return o1.getEndDateTime().getDate()
+                            .compareTo(o2.getEndDateTime().getDate());
                     }
-                };
-                break;
+                }
+            };
+            break;
 
-            default:
-                throw new IllegalValueException("Invalid sorting type.");
+        default:
+            throw new IllegalValueException("Invalid sorting type.");
         }
 
         FXCollections.sort(internalList, taskCmp);

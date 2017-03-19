@@ -16,7 +16,6 @@ import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
-import seedu.taskboss.model.task.UniqueTaskList;
 import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
 
