@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -24,6 +25,13 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Adds an item into a specific index in the list of tasks*/
+    void insertTasktoIndex(int index, Task task)
+             throws UniqueTaskList.DuplicateTaskException;
+
+    /** Replaces the current list of tasks with the specified list*/
+    void loadList (ObservableList<ReadOnlyTask> list) throws DuplicateTaskException;
+
     /**
      * Updates the task located at {@code filteredTakkListIndex} with {@code editedTask}.
      *
@@ -42,5 +50,4 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
-
 }

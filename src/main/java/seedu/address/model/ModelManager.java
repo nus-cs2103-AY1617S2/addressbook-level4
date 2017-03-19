@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -13,6 +14,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -23,7 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager addressBook;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given task manager and userPrefs.
@@ -79,6 +81,17 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void insertTasktoIndex(int indexToBeRestored, Task deletedTask)
+            throws DuplicateTaskException {
+        addressBook.addTaskToIndex(indexToBeRestored, deletedTask);
+    }
+
+    @Override
+    public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
+        addressBook.setTasks(list);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -153,5 +166,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
 }

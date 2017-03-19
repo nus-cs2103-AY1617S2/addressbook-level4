@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.logic.GlobalStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -37,9 +39,21 @@ public class DeleteCommand extends Command {
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-
+        Task task = new Task (taskToDelete);
+        task.setParserInfo("delete");
+        task.setEditTaskIndex(targetIndex - 1);
         try {
+            GlobalStack gStack = GlobalStack.getInstance();
+            gStack.getUndoStack().push(task); // task that got deleted, to be restored
+            /**Debugging purpose
+             * System.out.println("Parser Info : " + task.getParserInfo());
+             * System.out.println("Index = " + index);
+             * System.out.println("Task added to stack : " + gStack.getUndoStack().peek().toString());
+            */
             model.deleteTask(taskToDelete);
+            /**Debugging purpose
+             * gStack.printStack();
+             */
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
