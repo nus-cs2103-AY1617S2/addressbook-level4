@@ -8,6 +8,7 @@ import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
+        Hashtable<String, String> flexiblePrefixes = ParserUtil.getFlexiblePrefixes();
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG, PREFIX_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);

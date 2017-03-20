@@ -32,13 +32,20 @@ public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
+     * Default constructor that initialises the hashtables for flexible commands and prefixes at program startup.
+     */
+    public Parser() {
+        ParserUtil.initialiseFlexibleCommands();
+        ParserUtil.initialiseFlexiblePrefixes();
+    }
+    /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
-        Hashtable<String, String> flexibleCommands = ParserUtil.initialiseFlexibleCommands();
+        Hashtable<String, String> flexibleCommands = ParserUtil.getFlexibleCommands();
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

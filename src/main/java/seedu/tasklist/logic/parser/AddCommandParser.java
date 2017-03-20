@@ -6,6 +6,7 @@ import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.tasklist.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Hashtable;
 import java.util.NoSuchElementException;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
@@ -23,6 +24,7 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
+        Hashtable<String, String> flexiblePrefixes = ParserUtil.getFlexiblePrefixes();
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_COMMENT, PREFIX_PRIORITY, PREFIX_TAG);
         argsTokenizer.tokenize(args);

@@ -147,7 +147,7 @@ public class ParserUtil {
      * Keys being the acceptable alternatives, values being the legitimate prefixes (stated in the UserGuide.md)
      *
      */
-    public static Hashtable<String, String> initialiseFlexiblePrefixes() {
+    public static void initialiseFlexiblePrefixes() {
         flexiblePrefixes = new Hashtable<String, String>();
         //prefixes
         flexiblePrefixes.put("tag/", "t/");
@@ -164,7 +164,32 @@ public class ParserUtil {
         flexiblePrefixes.put("dates/", "d/");
         flexiblePrefixes.put("D/", "d/");
 
+
+    }
+
+    /**
+     * Returns the Hashtable for flexible commands.
+     */
+    public static Hashtable<String, String> getFlexibleCommands() {
+        return flexibleCommands;
+    }
+
+    /**
+     * Returns the Hashtable for flexible prefixes.
+     */
+    public static Hashtable<String, String> getFlexiblePrefixes() {
         return flexiblePrefixes;
+    }
+
+    /**
+     * Return the legitimate prefix if the input prefix conforms to one of the listed alternatives.
+     * If it does not conform, return the input prefix as it is.
+     *
+     */
+    public static String parseFlexiblePrefix(String input, Hashtable<String, String> flexiblePrefixes) {
+
+
+        return "";
     }
 }
 
