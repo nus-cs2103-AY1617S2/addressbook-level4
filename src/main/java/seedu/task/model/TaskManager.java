@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
+
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.tag.Tag;

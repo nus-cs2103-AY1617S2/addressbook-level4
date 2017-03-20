@@ -1,7 +1,10 @@
 package seedu.task.model.task;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -89,6 +92,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
+        FXCollections.sort(internalList, new TaskComparator());
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
@@ -98,6 +102,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         setTasks(replacement);
     }
+    
 
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
