@@ -11,6 +11,10 @@ import seedu.address.model.tag.UniqueTagList;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask{
+    
+    public static final String TASK_TYPE_DEADLINE = "deadline";
+    public static final String TASK_TYPE_EVENT = "event";
+    public static final String TASK_TYPE_FLOAT = "float";
 
     private Title title;
     private Venue venue;
@@ -67,11 +71,11 @@ public class Task implements ReadOnlyTask{
     
     private String sortCategory() {
         if (isDeadlineTask()) {
-            return "deadline";
+            return "TASK_TYPE_DEADLINE";
         } else if (isEventTask()) {
-            return "event";
+            return "TASK_TYPE_EVENT";
         } else {
-            return "float";
+            return "FLOAT";
         }
     }
     
