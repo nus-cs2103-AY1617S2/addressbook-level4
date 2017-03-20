@@ -140,56 +140,16 @@ public class Parser {
             editBuilder.append(" ");
             editBuilder.append(index.get().toString());
             editBuilder.append(" ");
-            editBuilder.append(getTaskArgs(taskToEdit));
+            editBuilder.append(ParserUtil.getTaskArgs(taskToEdit));
             return new EditCommandParser().parse(editBuilder.toString());
 
         case DeleteCommand.COMMAND_WORD:
             index = ParserUtil.parseIndex(arguments);
             // Get data of command to be deleted
             ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
-            return new AddCommandParser().parse(getTaskArgs(taskToDelete));
+            return new AddCommandParser().parse(ParserUtil.getTaskArgs(taskToDelete));
         default:
             return null;
         }
-    }
-
-    /*
-     * Helper method to parse a ReadOnlyTask into an command-line statement to be stored.
-     * @param ReadOnlyTask
-     * @returns String consisting of how a user would have typed the original command
-     */
-    private static String getTaskArgs(ReadOnlyTask task) {
-        // Build arguments
-        final StringBuilder builder = new StringBuilder();
-        builder.append(task.getName());
-        if (task.getStart().toString().length() > 0) {
-            builder.append(" ");
-            builder.append(CliSyntax.PREFIX_START.getPrefix());
-            builder.append(task.getStart().toString());
-        }
-        if (task.getDeadline().toString().length() > 0) {
-            builder.append(" ");
-            builder.append(CliSyntax.PREFIX_DEADLINE.getPrefix());
-            builder.append(task.getDeadline().toString());
-        }
-        if (task.getPriority().toString().length() > 0) {
-            builder.append(" ");
-            builder.append(CliSyntax.PREFIX_PRIORITY.getPrefix());
-            builder.append(task.getPriority().toString());
-        }
-        if (task.getNotes().toString().length() > 0) {
-            builder.append(" ");
-            builder.append(CliSyntax.PREFIX_NOTES.getPrefix());
-            builder.append(task.getNotes().toString());
-        }
-        if (task.getTags().asObservableList().size() > 0) {
-            builder.append(" ");
-            builder.append(CliSyntax.PREFIX_TAG.getPrefix());
-            final StringBuilder tagBuilder = new StringBuilder();
-            task.getTags().forEach(tagBuilder::append);
-            // Remove square brackets for tags
-            builder.append(tagBuilder.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
-        }
-        return builder.toString();
     }
 }
