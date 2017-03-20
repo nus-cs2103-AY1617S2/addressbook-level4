@@ -44,8 +44,9 @@ public interface ReadOnlyTask {
     //@@ author:A0122017Y
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Title of task: ")
-                .append(getTitle())
+        builder.append("This is a " + getTaskCategory() + " task, ")
+                .append("Title of task is ")
+                .append(getTitle()+ " ")
                 .append(getVenueString())
                 .append(getDescriptionString())
                 .append(getEndTimeString());
@@ -58,23 +59,23 @@ public interface ReadOnlyTask {
      * If null, empty string is returned.
      */
     default String getVenueString(){
-        return getVenue().isPresent()? "At: " + getVenue().get().toString() : "";
+        return getVenue().isPresent()? "At: " + getVenue().get().toString() + " ": "";
     }
     
     default String getStartTimeString(){
-        return getStartTime().isPresent()? "Start at: "+ getStartTime().get().toString() : "";
+        return getStartTime().isPresent()? "Start at: "+ getStartTime().get().toString() + " ": "";
     }
     
     default String getEndTimeString(){
-        return getEndTime().isPresent()? "Done by: "+ getEndTime().get().toString() : "";
+        return getEndTime().isPresent()? "Done by: "+ getEndTime().get().toString() + " ": "";
     }
     
     default String getUrgencyLevelString(){
-        return getUrgencyLevel().isPresent() ? "Urgency level at: " +getUrgencyLevel().get().toString() : "";
+        return getUrgencyLevel().isPresent() ? "Urgency level at: " +getUrgencyLevel().get().toString() + " ": "";
     }
     
     default String getDescriptionString(){
-        return getDescription().isPresent()? "Description: " + getDescription().get().toString() : "";
+        return getDescription().isPresent()? "Description: " + getDescription().get().toString() + " ": "";
     }
     //@@
 
