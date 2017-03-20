@@ -1,10 +1,14 @@
 package seedu.toluist.ui;
 
+import java.util.Arrays;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -64,7 +68,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-        setAccelerators();
+        configureKeyCombinations();
         configureChildrenViews();
     }
 
@@ -79,16 +83,16 @@ public class MainWindow extends UiPart<Region> {
         tabBarView.render();
     }
 
-    private void setAccelerators() {
+    private void configureKeyCombinations() {
+        configureSwitchTabKeyCombinations();
     }
 
     /**
-     * Sets the accelerator of a MenuItem.
+     * Sets the key combination on root.
      * @param keyCombination the KeyCombination value of the accelerator
+     * @param handler the event handler
      */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
-
+    private void setKeyCombination(KeyCombination keyCombination, EventHandler<ActionEvent> handler) {
         /*
          * TODO: the code below can be removed once the bug reported here
          * https://bugs.openjdk.java.net/browse/JDK-8131666
@@ -106,7 +110,7 @@ public class MainWindow extends UiPart<Region> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
+                handler.handle(new ActionEvent());
                 event.consume();
             }
         });
@@ -114,6 +118,32 @@ public class MainWindow extends UiPart<Region> {
 
     void hide() {
         primaryStage.hide();
+    }
+
+    private void configureSwitchTabKeyCombinations() {
+        String[] tabNames = new String[] { "i", "t", "n", "c", "a" };
+        Arrays.stream(tabNames).forEach(tabName -> {
+            KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName), KeyCombination.CONTROL_DOWN);
+            String switchCommand = "switch " + tabName;
+            EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(UiManager.getInstance(), switchCommand);
+            setKeyCombination(keyCombination, handler);
+        });
+    }
+
+    /**
+     * Get matching key code for a string
+     * @param s string
+     * @returna key code
+     */
+    private KeyCode getKeyCode(String s) {
+        switch (s) {
+        case "i": return KeyCode.I;
+        case "t": return KeyCode.T;
+        case "n": return KeyCode.N;
+        case "c": return KeyCode.C;
+        case "a": return KeyCode.A;
+        default: return KeyCode.ESCAPE;
+        }
     }
 
     private AnchorPane getTaskListPlaceholder() {
