@@ -83,7 +83,8 @@ public class AddCommandParser {
             tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
         }
 
-        Date startDate = null, endDate = null;
+        Date startDate = null;
+        Date endDate = null;
         int dateFormat = tokenizer.getDateFormat();
         switch (dateFormat) {
         case ArgumentTokenizer.DATE_NIL : break;
@@ -91,7 +92,7 @@ public class AddCommandParser {
         case ArgumentTokenizer.DATE_FROM : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_FROM).get());
                                            endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_TO).get());
                                            break;
-        default : ;
+        default : break;
         }
 
         Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);

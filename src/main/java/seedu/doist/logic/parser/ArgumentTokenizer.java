@@ -140,7 +140,7 @@ public class ArgumentTokenizer {
         case DATE_NIL : dateFormat = DATE_NIL; break;
         case DATE_BY : dateFormat = DATE_BY; break;
         case (DATE_FROM + DATE_TO) : dateFormat = DATE_TO; break;
-        default : dateFormat = DATE_INVALID;
+        default : dateFormat = DATE_INVALID; break;
         }
         return dateFormat;
     }
