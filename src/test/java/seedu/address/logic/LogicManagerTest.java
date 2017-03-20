@@ -557,7 +557,7 @@ public class LogicManagerTest {
             return new Task(
                     new Name("Task " + seed),
                     generatePriorityWithSeed(seed),
-                    new Status(seed + "@email"),
+                    new Status("incomplete"),
                     new Note("House of " + seed),
                     new DateTime("12/12/" + (2017 + seed) + " 12:00"),
                     new DateTime("12/12/" + (2017 + seed) + " 13:00"),
