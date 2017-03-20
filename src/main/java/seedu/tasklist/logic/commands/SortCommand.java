@@ -29,6 +29,7 @@ public class SortCommand extends Command {
             break;
         default:
             this.parameter = null;
+            break;
         }
     }
 

@@ -107,8 +107,8 @@ public class Priority {
 
     /** Compares the priority of one task with another */
     public int compareTo(Priority priority) {
-        String thisValue = new String("Z");
-        String otherValue = new String("Z");
+        String thisValue = "Z";
+        String otherValue = "Z";
 
         if (this.toString().equals(PRIORITY_HIGH)) {
             thisValue = "A";

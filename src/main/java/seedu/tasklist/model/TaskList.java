@@ -251,6 +251,8 @@ public class TaskList implements ReadOnlyTaskList {
                     case EventTask.TYPE:
                         t1Date = ((EventTask) t1).getStartDate();
                         break;
+                    default:
+                        break;
                     }
 
                     switch (t2.getType()) {
@@ -262,6 +264,8 @@ public class TaskList implements ReadOnlyTaskList {
                         break;
                     case EventTask.TYPE:
                         t2Date =  ((EventTask) t2).getStartDate();
+                        break;
+                    default:
                         break;
                     }
                     return t1Date.compareTo(t2Date);
