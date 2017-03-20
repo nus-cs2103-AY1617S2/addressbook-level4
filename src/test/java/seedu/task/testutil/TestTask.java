@@ -26,7 +26,7 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this.id = taskToCopy.getId();
+        this.id = taskToCopy.getTaskId();
         this.description = taskToCopy.getDescription();
         this.dueDate = taskToCopy.getDueDate();
         this.duration = taskToCopy.getDuration();
@@ -41,6 +41,9 @@ public class TestTask implements ReadOnlyTask {
         this.duration = duration;
     }
 
+    public void setTaskId(TaskId id) {
+        this.id = id;
+    }
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -51,7 +54,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskId getId() {
+    public TaskId getTaskId() {
         return this.id;
     }
 

@@ -8,7 +8,7 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-    TaskId getId();
+    TaskId getTaskId();
     Description getDescription();
     DueDate getDueDate();
     Duration getDuration();
@@ -29,22 +29,25 @@ public interface ReadOnlyTask {
         if (other == this) {
             return true; // short circuit if same object
         }
+
         boolean isDescriptionEqual = (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()));
+
         boolean isDueDateEqual =
                 other != null // this is first to avoid NPE below
                 && (other.getDueDate() == null && this.getDueDate() == null)
                 || (other.getDueDate() != null
                     && other.getDueDate().equals(this.getDueDate()));
+
         boolean isDurationEqual =
                 other != null // this is first to avoid NPE below
                 && (other.getDuration() == null && this.getDuration() == null)
                 || (other.getDuration() != null
                     && other.getDuration().equals(this.getDuration()));
+
         boolean isTagsEqual = other != null && other.getTags().equals(this.getTags());
 
         return isDescriptionEqual && isDueDateEqual && isDurationEqual && isTagsEqual;
-      //@@evanyeung
     }
 
     /**
