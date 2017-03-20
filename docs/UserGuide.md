@@ -59,10 +59,9 @@ Example:
 * `Delete 1`
 
 ### Find a task: `find`
-Find is the command word that can be used to find a task
+Find is the command word that can be used to find a task containing any of the given keywords including substring
 
 Format: `find name/Name`
->The command finds tasks which have names containing any of the given keywords including substring.
 
 Example:
 * `find cs2103`
@@ -88,11 +87,11 @@ Update is the command word to edit a specific tasks
 
 Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 1. The commands inside square bracket are optional.
->User updates a specific task by specifying the new entry they wish to be reflected on the existing task list
+2. To remove details from existing task, leave detail after / empty
 
 Example:
 * `update index/1 desc/"The venue has been changed"`
-* `update index/2 start/02-04-17 17:20`
+* `update index/2 start/02-04-17 17:20 end/`
 
 ### Exit the program : `exit`
 Exits the program
