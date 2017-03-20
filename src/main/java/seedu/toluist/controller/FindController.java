@@ -86,21 +86,21 @@ public class FindController extends Controller {
                                         String[] keywordList, int foundCount) {
         if (keywordList[0].equals(NULL_PARAMETER)) {
             return new CommandResult(String.format(LIST_RESULT_MESSAGE_TEMPLATE, foundCount));
-        } else {
-            String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
-
-            if (isSearchByName && isSearchByTag) {
-                return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
-                    keywords, NAME_AND_TAG_MESSAGE, foundCount));
-            } else if (isSearchByName) {
-                return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
-                    keywords, NAME_MESSAGE, foundCount));
-            } else { //isSearchByTag
-                return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
-                    keywords, TAG_MESSAGE, foundCount));
-            }
-
         }
+
+        String searchParameters;
+
+        if (isSearchByName && isSearchByTag) {
+            searchParameters = NAME_AND_TAG_MESSAGE;
+        } else if (isSearchByName) {
+            searchParameters = NAME_MESSAGE;
+        } else { //isSearchByTag
+            searchParameters = TAG_MESSAGE;
+        }
+
+        String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
+        return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
+                                 keywords, searchParameters, foundCount));
     }
 
     public HashMap<String, String> tokenize(String command) {
