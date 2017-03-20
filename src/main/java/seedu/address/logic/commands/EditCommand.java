@@ -7,10 +7,15 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Activity;
+import seedu.address.model.person.ByDate;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.FromDate;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.ToDate;
 import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -80,10 +85,16 @@ public class EditCommand extends Command {
         Description updatedDescription = editActivityDescriptor.getDescription().orElseGet(
             activityToEdit::getDescription);
         Priority updatedPriority = editActivityDescriptor.getPriority().orElseGet(activityToEdit::getPriority);
+        StartTime updatedStartTime = editActivityDescriptor.getStartTime().orElseGet(activityToEdit::getStartTime);
+        FromDate updatedFromDate = editActivityDescriptor.getFromDate().orElseGet(activityToEdit::getFromDate);
+        EndTime updatedEndTime = editActivityDescriptor.getEndTime().orElseGet(activityToEdit::getEndTime);
+        ToDate updatedToDate = editActivityDescriptor.getToDate().orElseGet(activityToEdit::getToDate);
+        ByDate updatedByDate = editActivityDescriptor.getByDate().orElseGet(activityToEdit::getByDate);
         Location updatedLocation = editActivityDescriptor.getLocation().orElseGet(activityToEdit::getLocation);
         UniqueTagList updatedTags = editActivityDescriptor.getTags().orElseGet(activityToEdit::getTags);
 
-        return new Activity(updatedDescription, updatedPriority, updatedLocation, updatedTags);
+        return new Activity(updatedDescription, updatedPriority, updatedStartTime, updatedFromDate,
+                updatedEndTime, updatedToDate, updatedByDate, updatedLocation, updatedTags);
     }
 
     /**
@@ -93,6 +104,11 @@ public class EditCommand extends Command {
     public static class EditActivityDescriptor {
         private Optional<Description> description = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
+        private Optional<StartTime> starttime = Optional.empty();
+        private Optional<FromDate> fromdate = Optional.empty();
+        private Optional<EndTime> endtime = Optional.empty();
+        private Optional<ToDate> todate = Optional.empty();
+        private Optional<ByDate> bydate = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -101,6 +117,11 @@ public class EditCommand extends Command {
         public EditActivityDescriptor(EditActivityDescriptor toCopy) {
             this.description = toCopy.getDescription();
             this.priority = toCopy.getPriority();
+            this.starttime = toCopy.getStartTime();
+            this.fromdate = toCopy.getFromDate();
+            this.endtime = toCopy.getEndTime();
+            this.todate = toCopy.getToDate();
+            this.bydate = toCopy.getByDate();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
@@ -121,8 +142,47 @@ public class EditCommand extends Command {
             return description;
         }
 
+        public void setStartTime(Optional<StartTime> starttime) {
+            this.starttime = starttime;
+        }
+
+        public Optional<StartTime> getStartTime() {
+            return starttime;
+        }
+
+        public void setFromDate(Optional<FromDate> fromdate) {
+            this.fromdate = fromdate;
+        }
+
+        public Optional<FromDate> getFromDate() {
+            return fromdate;
+        }
+
+        public void setEndTime(Optional<EndTime> endtime) {
+            this.endtime = endtime;
+        }
+
+        public Optional<EndTime> getEndTime() {
+            return endtime;
+        }
+
+        public void setToDate(Optional<ToDate> todate) {
+            this.todate = todate;
+        }
+
+        public Optional<ToDate> getToDate() {
+            return todate;
+        }
+
+        public void setByDate(Optional<ByDate> bydate) {
+            this.bydate = bydate;
+        }
+
+        public Optional<ByDate> getByDate() {
+            return bydate;
+        }
+
         public void setPriority(Optional<Priority> priority) {
-            assert priority != null;
             this.priority = priority;
         }
 
@@ -131,7 +191,6 @@ public class EditCommand extends Command {
         }
 
         public void setLocation(Optional<Location> location) {
-            assert location != null;
             this.location = location;
         }
 
