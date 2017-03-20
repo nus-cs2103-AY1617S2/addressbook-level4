@@ -22,7 +22,7 @@ public class AddCommandTest extends TodoListGuiTest {
         currentList = TestUtil.addTodosToList(currentList, todoToAdd);
 
         //add another todo
-        todoToAdd = td.car;
+        todoToAdd = td.shopping;
         assertAddSuccess(todoToAdd, currentList);
         currentList = TestUtil.addTodosToList(currentList, todoToAdd);
 

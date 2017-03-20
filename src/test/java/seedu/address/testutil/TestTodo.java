@@ -171,11 +171,11 @@ public class TestTodo implements ReadOnlyTodo {
             DateFormat dateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
             sb.append(" e/" + dateFormat.format(this.getEndTime()));
             if (this.getStartTime() != null) {
-                sb.append(" s/" + dateFormat.format(this.getStartTime()) + " ");
+                sb.append(" s/" + dateFormat.format(this.getStartTime()));
             }
         }
 
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        this.getTags().asObservableList().stream().forEach(s -> sb.append(" t/" + s.tagName + " "));
         return sb.toString();
     }
 }

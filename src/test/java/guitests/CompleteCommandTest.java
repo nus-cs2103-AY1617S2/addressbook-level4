@@ -3,19 +3,11 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CompleteCommand.MESSAGE_COMPLETE_TODO_SUCCESS;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.model.TodoList;
-import seedu.address.model.todo.Todo;
-import seedu.address.model.todo.UniqueTodoList;
 import seedu.address.testutil.TestTodo;
 import seedu.address.testutil.TestUtil;
 
@@ -24,34 +16,16 @@ public class CompleteCommandTest extends TodoListGuiTest {
     /**
      * The list of todos in the todo list panel is expected to match this list
      */
-    private TestTodo[] originalList;
     private TestTodo[] currentList;
-    private Date timeOfCompletion;
+    private String timeOfCompletion = "7:11PM 19/03/2017";
 
     @Before
     public void setUp() {
-        originalList = td.getTypicalTodos();
-        currentList = TestUtil.addTodosToList(originalList, td.job, td.lunch);
-        try {
-            timeOfCompletion = StringUtil.parseDate("7:11PM 19/03/2017", CompleteCommand.COMPLETE_TIME_FORMAT);
-        } catch (IllegalValueException e) {
-        }
-    }
-
-    @Override
-    protected TodoList getInitialData() {
-        TodoList ab = super.getInitialData();
-        try {
-            ab.addTodo(new Todo(td.job));
-            ab.addTodo(new Todo(td.lunch));
-        } catch (UniqueTodoList.DuplicateTodoException e) {
-            e.printStackTrace();
-        }
-        return ab;
+        currentList = td.getTypicalTodos();
     }
 
     @Test
-    public void complete_validFloatingTodoNoTimeSpecified_success() {
+    public void complete_validFloatingTaskNoTimeSpecified_success() {
         assertCompleteSuccess(1, currentList);
     }
 
@@ -67,7 +41,7 @@ public class CompleteCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void complete_validFloatingTodoTimeSpecified_success() {
+    public void complete_validFloatingTaskTimeSpecified_success() {
         assertCompleteSuccess(1, timeOfCompletion, currentList);
     }
 
@@ -82,9 +56,20 @@ public class CompleteCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void complete_alreadyCompleted_failure() {
-        commandBox.runCommand("complete 1");
-        commandBox.runCommand("complete 1");
+    public void complete_alreadyCompletedFloatingTask_failure() {
+        commandBox.runCommand("complete 10");
+        assertResultMessage("This todo is already complete");
+    }
+
+    @Test
+    public void complete_alreadyCompletedDeadline_failure() {
+        commandBox.runCommand("complete 11");
+        assertResultMessage("This todo is already complete");
+    }
+
+    @Test
+    public void complete_alreadyCompletedEvent_failure() {
+        commandBox.runCommand("complete 12");
         assertResultMessage("This todo is already complete");
     }
 
@@ -104,7 +89,7 @@ public class CompleteCommandTest extends TodoListGuiTest {
     public void complete_invalidIndex_failure() {
         int invalidIndex = currentList.length + 1;
         commandBox.runCommand("complete " + invalidIndex);
-        assertResultMessage("The todo index provided is invalid");
+        assertResultMessage(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
     }
 
     /**
@@ -113,7 +98,8 @@ public class CompleteCommandTest extends TodoListGuiTest {
      * @param currentList A copy of the current list of todos (before completion).
      */
     private void assertCompleteSuccess(int targetIndexOneIndexed, final TestTodo[] currentList) {
-        TestTodo[] completedTodoList = TestUtil.completeTodoInList(currentList, targetIndexOneIndexed, new Date());
+        TestTodo[] completedTodoList = TestUtil.completeTodoInList(currentList, targetIndexOneIndexed,
+            timeOfCompletion);
 
         commandBox.runCommand("complete " + targetIndexOneIndexed);
 
@@ -128,12 +114,11 @@ public class CompleteCommandTest extends TodoListGuiTest {
      * @param currentList A copy of the current list of todos (before completion).
      */
     private void assertCompleteSuccess(int targetIndexOneIndexed,
-            Date completeTime, final TestTodo[] currentList) {
+            String completeTime, final TestTodo[] currentList) {
         TestTodo todoToComplete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTodo[] completedTodoList = TestUtil.completeTodoInList(currentList, targetIndexOneIndexed, completeTime);
 
-        commandBox.runCommand("complete " + targetIndexOneIndexed + " "
-                + new SimpleDateFormat(CompleteCommand.COMPLETE_TIME_FORMAT).format(completeTime));
+        commandBox.runCommand("complete " + targetIndexOneIndexed + " " + completeTime);
 
         //confirm the list now shows the todo as completed
         assertTrue(todoListPanel.isListMatching(true, completedTodoList));

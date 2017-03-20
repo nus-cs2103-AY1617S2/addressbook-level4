@@ -10,7 +10,8 @@ import seedu.address.model.todo.UniqueTodoList;
  */
 public class TypicalTestTodos {
 
-    public TestTodo dog, cat, math, english, dishes, lawn, dinner, laundry, car, job, lunch;
+    public TestTodo dog, cat, math, english, dishes, lawn, dinner, essay, toilet,
+                    car, library, tennis, shopping, laundry, job, lunch;
 
     //@@author A0163786N
     public TypicalTestTodos() {
@@ -24,10 +25,18 @@ public class TypicalTestTodos {
             dishes = new TodoBuilder().withName("Wash dishes").build();
             lawn = new TodoBuilder().withName("Mow the lawn").build();
             dinner = new TodoBuilder().withName("Cook dinner").build();
+            essay = new TodoBuilder().withName("Write essay").withEndTime("6:00PM 11/11/2017").build();
+            toilet = new TodoBuilder().withName("Go to the bathroom").withStartTime("12:00PM 11/11/2017")
+                    .withEndTime("1:00PM 11/11/2017").build();
+            car = new TodoBuilder().withName("Wash car").withCompleteTime("6:00PM 11/11/2017").build();
+            library = new TodoBuilder().withName("Return library book").withEndTime("6:00PM 11/11/2017")
+                    .withCompleteTime("6:00PM 11/11/2017").build();
+            tennis = new TodoBuilder().withName("Play tennis").withStartTime("12:00PM 11/11/2017")
+                    .withEndTime("1:00PM 11/11/2017").withCompleteTime("6:00PM 11/11/2017").build();
 
             // Manually added
+            shopping = new TodoBuilder().withName("Go shopping").build();
             laundry = new TodoBuilder().withName("Do laundry").build();
-            car = new TodoBuilder().withName("Wash car").withCompleteTime("6:00PM 11/11/2017").build();
             job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/2017").build();
             lunch = new TodoBuilder().withName("lunch").withStartTime("12:00PM 11/11/2017")
                     .withEndTime("1:00PM 11/11/2017").build();
@@ -48,7 +57,7 @@ public class TypicalTestTodos {
     }
 
     public TestTodo[] getTypicalTodos() {
-        return new TestTodo[] { dog, cat, math, english, dishes, lawn, dinner};
+        return new TestTodo[] { dog, cat, math, english, dishes, lawn, dinner, essay, toilet, car, library, tennis};
     }
 
     public TodoList getTypicalTodoList() {

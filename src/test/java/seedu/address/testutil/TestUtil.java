@@ -29,7 +29,9 @@ import junit.framework.AssertionFailedError;
 import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.model.TodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -339,10 +341,17 @@ public class TestUtil {
      * @return The modified todos after completing the specified todo.
      */
     public static TestTodo[] completeTodoInList(final TestTodo[] todos, int targetIndexOneIndexedFormat,
-            Date completeTime) {
+            String completeTime) {
+        Date completeDate = null;
+        try {
+            completeDate = StringUtil.parseDate(completeTime, CompleteCommand.COMPLETE_TIME_FORMAT);
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "invalid complete time format";
+        }
         int index = targetIndexOneIndexedFormat - 1; //array is zero indexed
         TestTodo todoToComplete = todos[index];
-        todoToComplete.setCompleteTime(completeTime);
+        todoToComplete.setCompleteTime(completeDate);
         return replaceTodoFromList(todos, todoToComplete, index);
     }
     //@@author A0163786N
