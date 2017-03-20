@@ -15,7 +15,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Title;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -59,22 +61,30 @@ public class EditCommandParser {
         List<Optional<String>> editInformation = ParserUtil.splitArgument(args.trim(),3);
         
         if (!(editInformation.size()==3)){
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,EditCommand.MESSAGE_USAGE));
         }
+        
         Optional<Integer> index = editInformation.get(0).flatMap(ParserUtil::parseIndex);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NOT_EDITED));
+        }
+        
         Optional<String> fieldWord = editInformation.get(1);
         Optional<String> updateInformation = editInformation.get(2);
-        if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
         
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            String string = fieldWord.get();
-            if (FIELDWORD_TITLE.equals(string)) {
+            String fieldWordName = fieldWord.get();
+            if (FIELDWORD_TITLE.equals(fieldWordName)) {
+                if(!Title.isValidName(updateInformation.get())) {
+                    return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
+                }
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
             }
-            if (FIELDWORD_TAG.equals(string)) {
+            if (FIELDWORD_TAG.equals(fieldWordName)) {
+                if(!Tag.isValidTagName(updateInformation.get())) {
+                    return new IncorrectCommand(Tag.MESSAGE_TAG_CONSTRAINTS);
+                }
                 editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
             } 
         }catch (IllegalValueException ive) {
@@ -100,9 +110,10 @@ public class EditCommandParser {
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
 
-        if (tags.isEmpty()) {
+        if (tags.equals("null")) {
             return Optional.empty();
         }
+        
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }

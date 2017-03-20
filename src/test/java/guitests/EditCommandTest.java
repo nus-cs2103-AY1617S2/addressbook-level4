@@ -22,28 +22,17 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "edit title do Hw 1";
+        String detailsToEdit = "title Do Homework";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("assignment due").build();
-
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
-    }
-
-    @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "edit title";
-        int addressBookIndex = 2;
-
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).build();
+        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withTags("school").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "edit";
+        String detailsToEdit = "tag null";
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
@@ -54,11 +43,11 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find assignment due");
+        commandBox.runCommand("find Do HW 1");
 
         String detailsToEdit = "Homework due";
         int filteredTaskListIndex = 1;
-        int addressBookIndex = 5;
+        int addressBookIndex = 1;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Homework due").build();
@@ -67,9 +56,15 @@ public class EditCommandTest extends AddressBookGuiTest {
     }
 
     @Test
+    public void edit_notAllFieldsSpecified_failure() {
+        commandBox.runCommand("edit 1 title");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+    
+    @Test
     public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit title Homework due");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NOT_EDITED));
     }
 
     @Test
@@ -80,8 +75,8 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_noFieldsSpecified_failure() {
-        commandBox.runCommand("edit 1");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        commandBox.runCommand("edit ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,EditCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -95,7 +90,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 1 title Homework due");
+        commandBox.runCommand("edit 1 title Do HW 1");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
