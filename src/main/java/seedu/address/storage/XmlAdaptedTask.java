@@ -24,15 +24,15 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String title;
-    @XmlElement
+    @XmlElement(required = true)
     private String venue;
-    @XmlElement
+    @XmlElement(required = true)
     private String startTime;
-    @XmlElement
+    @XmlElement(required = true)
     private String endTime;
-    @XmlElement
+    @XmlElement(required = true)
     private String urgencyLevel;
-    @XmlElement
+    @XmlElement(required = true)
     private String description;
 
     @XmlElement
