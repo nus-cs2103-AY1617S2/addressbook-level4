@@ -26,7 +26,7 @@ public class DateParser {
         int day = getDay(date);
         int hour = getHour(date);
         int minute = getMinute(date);
-        if(!isValidDate(year, month, day, hour, minute)) {
+        if (!isValidDate(year, month, day, hour, minute)) {
             throw new IllegalValueException(DATE_ILLEGAL_DATE);
         }
         cal.set(year, month, day, hour, minute, DEFAULT_SECONDS);

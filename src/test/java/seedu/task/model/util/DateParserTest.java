@@ -38,6 +38,7 @@ public class DateParserTest {
         assertTrue(DateParser.isValidDateString("0000/01/01 1200"));
         assertTrue(DateParser.isValidDateString("2017/03/10 0317"));
     }
+
     @Test
     public void isValidDate() {
         // invalid date
