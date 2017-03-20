@@ -19,14 +19,14 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "EDIT";
+    public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [BY DEADLINE] [#LABEL]...\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [BY DEADLINE] [FROM START TO END][#LABEL]...\n"
-            + "Example: " + COMMAND_WORD + " 1 BY Sunday #new";
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [#LABEL]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [from START to END][#LABEL]...\n"
+            + "Example: " + COMMAND_WORD + " 1 by Sunday #new";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

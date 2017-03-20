@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.booking.Booking;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
@@ -36,6 +38,14 @@ public class TaskBuilder {
         task.setLabels(new UniqueLabelList());
         for (String label: labels) {
             task.getLabels().add(new Label(label));
+        }
+        return this;
+    }
+
+    public TaskBuilder withBookings(String ... bookings) throws IllegalValueException, CommandException {
+        task.setLabels(new UniqueLabelList());
+        for (String booking: bookings) {
+            task.getBookings().add(new Booking(booking));
         }
         return this;
     }

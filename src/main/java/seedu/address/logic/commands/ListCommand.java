@@ -10,11 +10,11 @@ import seedu.address.commons.exceptions.IllegalDateTimeValueException;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "LIST";
+    public static final String COMMAND_WORD = "list";
     public static final String DEFAULT_STARTTIME = "00:00:00";
     public static final String DEFAULT_ENDTIME = "23:59:59";
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " [BY DEADLINE] | [FROM STARTDATE TO ENDDATE]";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " [by DEADLINE] | [from STARTDATE to ENDDATE]";
     private final String endDate;
     private final String startDate;
     private final Boolean isCompleted;

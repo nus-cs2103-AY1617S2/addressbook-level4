@@ -21,47 +21,47 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("FIND 38"); // no results
-        assertFindResult("FIND 3", td.task3); // multiple results
+        assertFindResult("find 38"); // no results
+        assertFindResult("find 3", td.task3); // multiple results
 
         //find after deleting one result
-        commandBox.runCommand("DELETE 1");
-        assertFindResult("FIND 3");
+        commandBox.runCommand("delete 1");
+        assertFindResult("find 3");
     }
 
     @Test
     public void find_nonEmptyListLabel() {
-        assertFindResult("FIND owesMoney", td.task2); // find only 1 label
+        assertFindResult("find owesMoney", td.task2); // find only 1 label
     }
 
     @Test
     public void find_nonEmptyListMultipleLabel() {
-        assertFindResult("FIND owesMoney friends", td.task1, td.task2); //find 2 label
+        assertFindResult("find owesMoney friends", td.task1, td.task2); //find 2 label
     }
 
     @Test
     public void find_nonEmptyListStartEndDate_singleResult() {
-        assertFindResult("FIND BY 10-11-2017 2359", td.task6); // 1 result
-        assertFindResult("FIND FROM today TO 11-11-2017 0000", td.task6); // 1 result
+        assertFindResult("find by 10-11-2017 2359", td.task6); // 1 result
+        assertFindResult("find from today to 11-11-2017 0000", td.task6); // 1 result
     }
 
     @Test
     public void find_nonEmptyListStartEndDate_pass() {
-        assertFindResult("FIND FROM today TO christmas",
+        assertFindResult("find from today to christmas",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
-        assertFindResult("FIND FROM 25-12-2017 2359 TO 01-01-2017 2359",
+        assertFindResult("find from 25-12-2017 2359 to 01-01-2017 2359",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
-        assertFindResult("FIND BY christmas",
+        assertFindResult("find by christmas",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
-        assertFindResult("FIND BY 25-12-2017",
+        assertFindResult("find by 25-12-2017",
                 td.task1, td.task2, td.task3, td.task4, td.task5, td.task6, td.task7); // 7 result
-        assertFindResult("FIND BY 01-01-2016"); // 7 result
+        assertFindResult("find by 01-01-2016"); // 7 result
     }
 
     @Test
     public void find_emptyList() {
-        commandBox.runCommand("CLEAR");
-        assertFindResult("FIND task 1"); // no results
+        commandBox.runCommand("clear");
+        assertFindResult("find task 1"); // no results
     }
 
     @Test
@@ -72,13 +72,13 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_validCommandNoInput_fail() {
-        commandBox.runCommand("FIND"); // no input here
+        commandBox.runCommand("find"); // no input here
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void find_invalidDate_fail() {
-        commandBox.runCommand("FIND BY FROM TO ");
+        commandBox.runCommand("find by from to ");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
