@@ -1,6 +1,7 @@
 package typetask.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -9,6 +10,7 @@ import typetask.commons.core.LogsCenter;
 import typetask.commons.core.UnmodifiableObservableList;
 import typetask.commons.events.model.TaskManagerChangedEvent;
 import typetask.commons.util.CollectionUtil;
+import typetask.commons.util.StorageUtil;
 import typetask.commons.util.StringUtil;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -23,6 +25,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private Stack<TaskManager> taskManagerHistory = new Stack<TaskManager>();
+    private Stack<TaskManager> redoTaskManagerHistory = new Stack<TaskManager>();
+    
+    public static final Integer STATUS_EMPTY_HISTORY = 0;
+    public static final Integer STATUS_AVAILABLE_HISTORY = 1;
+    public static final Integer STATUS_ERROR_HISTORY = -1;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -79,6 +87,58 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0139926R
+    /** Stores current TaskManager state */
+    @Override
+    public synchronized void storeTaskManager(String command) {
+
+        StorageUtil.storeConfig(null);
+        taskManagerHistory.push(new TaskManager(taskManager));
+        redoTaskManagerHistory.clear();
+        StorageUtil.clearRedoConfig();
+    }
+
+    /** Reverts changes made from restoring recently saved TaskManager state */
+    @Override
+    public synchronized int revertTaskManager() {
+        if (StorageUtil.isRedoConfigHistoryEmpty() && redoTaskManagerHistory.isEmpty()) {
+            return STATUS_EMPTY_HISTORY;
+        } else if (!redoTaskManagerHistory.isEmpty() && redoTaskManagerHistory.peek() == null) {
+            redoTaskManagerHistory.pop();
+            taskManagerHistory.push(null);
+            return STATUS_AVAILABLE_HISTORY;
+        } else {
+            TaskManager redoTaskManager = redoTaskManagerHistory.pop();
+            taskManagerHistory.push(new TaskManager(taskManager));
+            this.resetData(redoTaskManager);
+            return STATUS_AVAILABLE_HISTORY;
+        }
+    }
+    /** Restores recently saved TaskManager state */
+    @Override
+    public synchronized int restoreTaskManager() {
+        if (StorageUtil.isConfigHistoryEmpty() && taskManagerHistory.isEmpty()) {
+            return STATUS_EMPTY_HISTORY;
+        } else if (!taskManagerHistory.isEmpty() && taskManagerHistory.peek() == null) { 
+            taskManagerHistory.pop();
+            redoTaskManagerHistory.push(null);
+            return STATUS_AVAILABLE_HISTORY;
+        } else {
+            TaskManager recentTaskManager = taskManagerHistory.pop();
+            redoTaskManagerHistory.push(new TaskManager(taskManager));
+            this.resetData(recentTaskManager);
+            return STATUS_AVAILABLE_HISTORY;
+        }
+
+    }
+    @Override
+    public synchronized void rollBackTaskManager(boolean isStorageOperation) {
+
+        taskManagerHistory.pop();
+        if (isStorageOperation) {
+            StorageUtil.undoConfig();
+        }
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     @Override

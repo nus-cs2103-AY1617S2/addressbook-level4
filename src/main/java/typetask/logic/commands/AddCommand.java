@@ -55,6 +55,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
+        model.storeTaskManager(COMMAND_WORD);
         model.addTask(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
