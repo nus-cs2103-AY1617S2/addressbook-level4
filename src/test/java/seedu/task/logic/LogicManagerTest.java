@@ -47,6 +47,7 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskComparator;
 import seedu.task.storage.StorageManager;
 
 
@@ -441,8 +442,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Date("4-05-15 2200"), //not random for now
-                    new Date("05-05-2015 2100"),
+                    new Date(seed + "-05-15 2200"),
+                    new Date(seed + "-05-15 2100"),
                     new Remark(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))), false
@@ -528,11 +529,14 @@ public class LogicManagerTest {
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTask(i));
             }
+            Collections.sort(tasks, new TaskComparator());
             return tasks;
         }
 
         List<Task> generateTaskList(Task... tasks) {
-            return Arrays.asList(tasks);
+            List<Task> toReturn = Arrays.asList(tasks);
+            Collections.sort(toReturn, new TaskComparator());
+            return toReturn;
         }
 
         /**
