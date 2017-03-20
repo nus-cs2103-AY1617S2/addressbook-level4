@@ -35,7 +35,7 @@ public class EndTime implements Comparable<EndTime> {
     }
 
     protected Date getEndTime() {
-    	return this.endTime;
+        return this.endTime;
     }
 
     public String toString() {
