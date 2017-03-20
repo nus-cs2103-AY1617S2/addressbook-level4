@@ -1,6 +1,5 @@
 package seedu.doit.model;
 
-
 import javafx.collections.ObservableList;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.Tag;
