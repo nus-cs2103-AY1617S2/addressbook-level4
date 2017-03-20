@@ -25,12 +25,6 @@ public class AddCommandTest extends TaskBossGuiTest {
         assertAddSuccess(false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add another task with high priority using "!"
-        //@@author A0144904H
-        taskToAdd = td.johnny;
-        assertAddSuccess(false, taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-
         //add another task using short command
         taskToAdd = td.kelvin;
         assertAddSuccess(true, taskToAdd, currentList);

@@ -56,7 +56,7 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("chicago ave").build();
-            johnny = new TaskBuilder().withName("Johnny Depp!")
+            johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("No priority")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
