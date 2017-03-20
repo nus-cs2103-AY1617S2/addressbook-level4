@@ -62,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
-    	raise(new FilePathChangedEvent(newPath));
+    	raise(new FilePathChangedEvent(newPath, taskManager));
     }
 
     @Override
@@ -98,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void changeFilePath(String newPath) {
     	indicateFilePathChanged(newPath);
+    	indicateTaskManagerChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
