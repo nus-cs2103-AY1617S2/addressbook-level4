@@ -50,6 +50,9 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
+    private AnchorPane resultDisplayPlaceholder;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -130,9 +133,10 @@ public class MainWindow extends UiPart<Region> {
         new CommandBox(getCommandBoxPlaceholder(), logic);
         // TODO: show completedTaskPanel when show completed command is
         // implemented
+        new ResultDisplay(getResultDisplayPlaceholder());
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
     }
-  
+
     /*
      * Prepares categorised task list for today/future/completed ListView
      *
@@ -158,6 +162,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
+    }
+
+    private AnchorPane getResultDisplayPlaceholder() {
+        return resultDisplayPlaceholder;
     }
 
     private AnchorPane getStatusbarPlaceholder() {
