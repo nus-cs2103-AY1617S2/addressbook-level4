@@ -21,7 +21,7 @@ By : `Team W15B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp
 ## 1. Introduction
 Werkbook is a task manager for users to manage their schedules and tasks via a command-line interface. Users can add and manipulate tasks according to their needs. Werkbook is a desktop application written in Java, with a GUI implemented with JavaFX.
 
-This guide consists of all the information that is required for developers like you to understand, and further contribute to Werkbook's development. We have structured this guide such that each topic will have its own section, along with subsections that will explain the topic in greater detail.  
+This guide consists of all the information that is required for developers like you to understand, and further contribute to Werkbook's development. We have structured this guide such that each topic will have its own section, along with subsections that will explain the topic in greater detail.
 
 ## 2. Setting up
 
