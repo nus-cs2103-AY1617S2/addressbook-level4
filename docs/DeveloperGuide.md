@@ -243,7 +243,7 @@ and logging destinations.
   the specified logging level, you can use `LogsCenter.getLogger(Class)`.
 * Currently log messages are output through: `Console` and to a `.log` file.
 
-**Logging Levels**
+**Logging Levels:**
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application.
 * `WARNING` : Can continue, but with caution.
@@ -346,7 +346,7 @@ See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) fo
 
 <h3 id="user-content-mr"> Making a Release</h3>
 
-Here are the steps to create a new release.
+Here are the steps to create a new release:
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  2. Tag the repo with the version number. e.g. `v0.1`
@@ -358,7 +358,7 @@ Here are the steps to create a new release.
 You are recommended to use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
 
-Here are the steps to convert the project documentation files to PDF format.
+Here are the steps to convert the project documentation files to PDF format:
 
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
