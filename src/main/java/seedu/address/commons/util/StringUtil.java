@@ -20,7 +20,10 @@ public class StringUtil {
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
     private static final int DEADLINE_INDEX = 0;
-    private static final String TIME_CONSTRAINTS = "MM DD YY is the expected numerical sequence. \n";
+    public static final String TIME_CONSTRAINTS = "Task time should be in the form of DD/MM/YYYY HH:MM, e.g 20/03/2017 4:18 \n"
+            + "Or name of the day, e.g Wed 4:18 \n"
+            + "Or relative days, e.g tomorrow 4:18 \n"
+            + "Notice that no abbreviation is accepted for relatives. e.g tmrw is invalid.";
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
