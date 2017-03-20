@@ -35,15 +35,15 @@ public class FindCommandParser {
             new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START, PREFIX_END, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
 
-        Set<String> priorityKeyWordSet = new HashSet<>(argsTokenizer.getAllValues(PREFIX_PRIORITY)
+        Set<String> priorityKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_PRIORITY)
             .orElse(Collections.emptyList()));
-        Set<String> startKeyWordSet = new HashSet<>(argsTokenizer.getAllValues(PREFIX_START)
+        Set<String> startKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_START)
             .orElse(Collections.emptyList()));
-        Set<String> deadlineKeyWordSet = new HashSet<>(argsTokenizer.getAllValues(PREFIX_END)
+        Set<String> deadlineKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_END)
             .orElse(Collections.emptyList()));
-        Set<String> tagsKeyWordSet = new HashSet<>(argsTokenizer.getAllValues(PREFIX_TAG)
+        Set<String> tagsKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_TAG)
             .orElse(Collections.emptyList()));
-        Set<String> descKeyWordSet = new HashSet<>(argsTokenizer.getAllValues(PREFIX_DESCRIPTION)
+        Set<String> descKeyWordSet = new HashSet<>(argsTokenizer.getAllValuesWithoutPrefix(PREFIX_DESCRIPTION)
             .orElse(Collections.emptyList()));
 
 
