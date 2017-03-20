@@ -7,6 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.tasklist.logic.commands.DoneCommand;
 import seedu.tasklist.testutil.DeadlineTaskBuilder;
+import seedu.tasklist.testutil.EventTaskBuilder;
 import seedu.tasklist.testutil.FloatingTaskBuilder;
 import seedu.tasklist.testutil.TestTask;
 
@@ -43,6 +44,22 @@ public class DoneCommandTest extends TaskListGuiTest {
                 withComment("By today").
                 withPriority("high").
                 withStatus(true).
+                build();
+        assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
+    }
+
+    @Test
+    public void done_EventTask_success() throws Exception {
+        int doneTaskIndex = 1;
+
+        TestTask doneTask = new EventTaskBuilder().
+                withName("CS2103T tutorial").
+                withStartDate("15/3/2017 15:00:10").
+                withEndDate("15/3/2017 18:00:10").
+                withComment("prepare V0.2 presentation").
+                withPriority("high").
+                withStatus(true).
+                withTags("class").
                 build();
         assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
     }
