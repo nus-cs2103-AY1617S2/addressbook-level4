@@ -12,7 +12,7 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 ## 1. Introduction
 
 Have you ever felt overloaded with work? Don't know where to start?<br>
-Introducing ToLuist, the answer to all of your problems!<br>
+Now you can use ToLuist, the answer to all of your problems!<br>
 ToLuist is an application which will help you to manage all your tasks, allowing you to sort out your life.<br>
 ToLuist is designed with you in mind, ensuring that you are able to focus on what is important to you.
 
@@ -28,7 +28,7 @@ ToLuist is designed with you in mind, ensuring that you are able to focus on wha
 3. Try out some example commands:
    * **`add`**` Try Out Todo List` :
      adds a task named `Try Out Todo List` to the todo list.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list.
+   * **`delete`**` 1` : deletes the 1st task shown in the current list.
    * **`exit`** : exits the app.
 4. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -67,11 +67,11 @@ Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE]`
 
 > * Both 'startdate' and 'enddate' use the same datetime format.
 > * 'startdate' requires a valid 'enddate' to be used in the same command.
-> * The values entered for 'startdate' and 'enddate' use the Natty parser to determine the final value:<br>
-    Formal dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
+> * The values entered for 'startdate' and 'enddate' are very flexible:<br>
+    Standard dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
     Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
     Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
-    Formal times are parsed in as well. i.e. `0600h`, `8pm`, `noon`, `4:30 p.m.`<br>
+    Standard times are parsed in as well. i.e. `0600h`, `8pm`, `noon`, `4:30 p.m.`<br>
     Similar to dates, relative times are also allowed. i.e. `5 minutes from now`, `in 10 minutes`, `5 hours ago`<br>
     For more details, please visit http://natty.joestelmach.com/doc.jsp.
 
@@ -82,7 +82,7 @@ Examples:
 * `add Meeting With Boss startdate/11-11-2011 17:30 enddate/11-11-2011 19:30` <br>
   Adds a task called 'Meeting With Boss', with start date 11-11-2011 17:30, and end date to be 11-11-2011 19:30.
 * `add Check Email enddate/today` <br>
-  Adds a task called 'Check Email', sets the end date to be today's date.
+  Adds a task called 'Check Email', and sets the deadline to be today's date.
 
 ### 2.3. Updating a task : `update`
 
@@ -90,9 +90,8 @@ Updates an existing task in the todo list.<br>
 Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE]`
 
 > * Updates the task at the specified `INDEX`. <br>
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * Existing values will be updated to the input values.
+    The index refers to the index number shown in the last task listing.
+> * Only fields entered will be updated.
 
 Examples:
 
@@ -119,22 +118,20 @@ Format: `filter/list/find [KEYWORDS] [tag/] [name/]`
 Examples:
 
 * `find Assignment`<br>
-  Returns `Assignment 1` and also `assignment 2`.
+  Lists any task with `Assignment` in their names or tags.
 * `find Assignment Project Tutorial`<br>
   Returns any task having `Assignment`, `Project`, or `Tutorial` in their names or tags.
 * `find school tag/` <br>
-  Returns any task with tags with 'school' in the name.
+  Returns any task with the word 'school' in the tag name.
 
 ### 2.5. Deleting a task : `delete`
 
-Deletes the specified task from the todo list. Reversible with `undo` command.<br>
+Deletes the specified task from the todo list.<br>
 Format: `delete INDEX(ES)`
 
 > * Deletes the task at the specified `INDEX`. <br>
 > * The index(es) refers to the index number shown in the most recent listing.<br>
-> * The index(es) **must be a positive integer** 1, 2, 3, ...<br>
-> * Supports deletion of multiple indexes in a single command, by best effort matching.
-> * The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
+> * Supports deletion of multiple indexes in a single command.
 
 Examples:
 
@@ -166,8 +163,7 @@ Undoes previous commands by the user.<br>
 Format: `undo [NUMBER]`
 
 > Undo the last data-mutating command inputted by the user.<br>
-> If a number is entered, undoes that ammount of previous commands instead.<br>
-> The number **must be a positive integer** 1, 2, 3, ...
+> If a number is entered, undoes that ammount of previous commands instead.
 
 Examples:
 
@@ -186,7 +182,6 @@ Format: `redo [NUMBER]`
 
 > Redo the last data-mutating command inputted since the undone point.<br>
 > If a number is entered, redo that ammount of previous commands instead.<br>
-> The number **must be a positive integer** 1, 2, 3, ... <br>
 > The number must be less than or equal to the number of commands undone.
 
 Examples:
@@ -311,8 +306,7 @@ Format: `mark [complete/incomplete] INDEX(ES)`
 > * Using complete as a parameter will mark the selected task(s) as complete.
 > * Using incomplete as a parameter will mark the selected task(s) as incomplete.
 > * Using neither will default the command to mark as complete.
-> * Supports marking of multiple indexes in a single command, by best effort matching.
-> * The system is whitespace insensitive i.e. `delete 3-6` is the same as `delete 3 - 6`.
+> * Supports marking of multiple indexes in a single command.
 
 Example:
 * `mark complete 1` <br>
@@ -355,21 +349,21 @@ Example:
 **Command** | **Format** | **Examples**
 -------- | :-------- | :---------
 Add | `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `add Assigment 1 enddate/Friday tag/school`
+Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
+Add Alias | `alias ALIAS PHRASE` | `alias hs history`
+Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
+Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
 Clear | `clear`
 Delete | `delete INDEX(ES)` | `delete 3`
+Delete Alias | `unalias ALIAS` | `unalias hs`
+Exit | `exit/quit`
 Filter | `filter/list/find [KEYWORDS] [tag/] [name/]` | `find school tag/`
 Help | `help`
-Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `update 1 enddate/11/12/2011`
-Exit | `exit/quit`
-Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
-Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
 History | `history`
-Add Alias | `alias ALIAS PHRASE` | `alias hs history`
-Delete Alias | `unalias ALIAS` | `unalias hs`
-View Aliases | `viewalias`
-Change Save Storage Location | `save FILELOCATION` | `save data/savefile.txt`
-Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
-Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
 Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
-Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
+Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
+Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
+Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `update 1 enddate/11/12/2011`
 Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
+Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
+View Aliases | `viewalias`
