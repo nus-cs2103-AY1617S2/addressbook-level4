@@ -3,6 +3,7 @@ package project.taskcrusher.logic.commands;
 import project.taskcrusher.commons.core.Messages;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
+import project.taskcrusher.model.Model;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
+        Model.adddel.add(0);
     }
 
 

@@ -24,10 +24,14 @@ import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 public class UserInbox implements ReadOnlyUserInbox {
 
     private final UniqueTaskList tasks;
+    private final UniqueTaskList deleted;
+    private final UniqueTaskList added;
     private final UniqueTagList tags;
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
+        deleted = new UniqueTaskList();
+        added = new UniqueTaskList();
     }
 
     public UserInbox() {}
@@ -84,6 +88,13 @@ public class UserInbox implements ReadOnlyUserInbox {
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         tasks.add(p);
+        added.add(p);
+    }
+    
+    public void addUndoTask(Task p) throws UniqueTaskList.DuplicateTaskException, UniqueTaskList.TaskNotFoundException {
+        syncMasterTagListWith(p);
+        tasks.add(p);
+        deleted.remove(p);
     }
 
     /**
@@ -137,8 +148,18 @@ public class UserInbox implements ReadOnlyUserInbox {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
         if (tasks.remove(key)) {
+        	deleted.add((Task) key);
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+    
+    public boolean removeUndoTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
+        if (tasks.remove(key)) {
+        	added.remove(key);
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
@@ -162,6 +183,14 @@ public class UserInbox implements ReadOnlyUserInbox {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+    
+    public ObservableList<ReadOnlyTask> getDeletedList() {
+        return new UnmodifiableObservableList<>(deleted.asObservableList());
+    }
+    
+    public ObservableList<ReadOnlyTask> getAddedList() {
+        return new UnmodifiableObservableList<>(added.asObservableList());
     }
 
     @Override

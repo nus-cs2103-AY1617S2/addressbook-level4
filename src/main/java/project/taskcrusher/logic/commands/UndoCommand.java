@@ -1,11 +1,12 @@
 package project.taskcrusher.logic.commands;
 
-import project.taskcrusher.commons.core.Messages;
+import project.taskcrusher.model.Model;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
+import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -29,30 +30,43 @@ public class UndoCommand extends Command {
 
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException{
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
+        int check = Model.adddel.remove(Model.adddel.size()-1);
+        if (check == 0)
+        {
+        	UnmodifiableObservableList<ReadOnlyTask> deletedList = model.getFilteredDeletedList();
+        	Task taskToAdd = (Task) deletedList.get(deletedList.size()-1);
+        	try{model.addUndoTask(taskToAdd);}
+        	catch(DuplicateTaskException e){}
+        }
+        else if (check == 1)
+        {
+        	UnmodifiableObservableList<ReadOnlyTask> addedList = model.getFilteredAddedList();
+        	Task taskToDelete = (Task) addedList.get(addedList.size()-1);
+        	try{model.deleteUndoTask(taskToDelete);}
+        	catch(TaskNotFoundException e){}
+        }
         /*if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }*/
 
         ReadOnlyTask taskToDelete = lastShownList.get(lastShownList.size()-1);
-        final Task toAdd;
-        String delete = "delete";
-        String add = "add";
 
-        try {
-        	model.deleteTask(taskToDelete);
-           /*if(delete.equals("delete")){
-        	  // model.addTask(taskToDelete);
-           }else if(add.equals("add")){
-        	   model.deleteTask(taskToDelete);
-           }*/
-           
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target person cannot be missing";
-        }
+//        try {
+//        	model.deleteTask(taskToDelete);
+//           /*if(delete.equals("delete")){
+//        	  // model.addTask(taskToDelete);
+//           }else if(add.equals("add")){
+//        	   model.deleteTask(taskToDelete);
+//           }*/
+//           
+//        } catch (TaskNotFoundException pnfe) {
+//            assert false : "The target person cannot be missing";
+//        }
+        
+        Model.adddel.trimToSize();
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
