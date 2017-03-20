@@ -10,12 +10,12 @@ import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_VENUE = new Prefix("@@");
-    public static final Prefix PREFIX_STARTTIME = new Prefix("from:");
-    public static final Prefix PREFIX_ENDTIME = new Prefix("to:");
-    public static final Prefix PREFIX_TAG = new Prefix("##");
-    public static final Prefix PREFIX_URGENCYLEVEL = new Prefix("**");
-    public static final Prefix PREFIX_DESCRIPTION = new Prefix("d:");
+    public static final Prefix PREFIX_VENUE = new Prefix("place/");
+    public static final Prefix PREFIX_STARTTIME = new Prefix("from/");
+    public static final Prefix PREFIX_ENDTIME = new Prefix("to/");
+    public static final Prefix PREFIX_TAG = new Prefix("#");
+    public static final Prefix PREFIX_URGENCYLEVEL = new Prefix("level/");
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("des/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
