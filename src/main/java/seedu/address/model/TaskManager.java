@@ -53,6 +53,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
+        this.tasks.sortList();
     }
 
     public void setLabels(Collection<Label> labels) throws UniqueLabelList.DuplicateLabelException {
@@ -72,6 +73,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             assert false : "Task manager should not have duplicate tasks";
         }
         syncMasterLabelListWith(tasks);
+        tasks.sortList();
     }
 
     public void undoData(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState) {
@@ -88,6 +90,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             assert false : "Task manager should not have duplicate tasks";
         }
         syncMasterLabelListWith(tasks);
+        tasks.sortList();
     }
 
     //// task-level operations
@@ -102,6 +105,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterLabelListWith(p);
         tasks.add(p);
+        tasks.sortList();
     }
 
     /**
@@ -123,6 +127,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the labels master list to have additional labels that are not labeled to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
+        tasks.sortList();
     }
 
     /**
@@ -179,6 +184,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
+        tasks.sortList();
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
