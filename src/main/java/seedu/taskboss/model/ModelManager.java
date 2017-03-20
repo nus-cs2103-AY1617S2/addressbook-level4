@@ -29,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskBoss taskBoss;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final Stack<ReadOnlyTaskBoss> taskbossHistory;
+    private SortBy currentSortType;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
@@ -41,7 +42,9 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with TaskBoss: " + taskBoss + " and user prefs " + userPrefs);
 
         this.taskBoss = new TaskBoss(taskBoss);
-        sortTasks(SortBy.END_DATE_TIME);
+        // sort by end date time by default
+        currentSortType = SortBy.END_DATE_TIME;
+        sortTasks(currentSortType);
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
     }
@@ -84,7 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.addTask(task);
-        taskBoss.sortTasks(SortBy.END_DATE_TIME);
+        taskBoss.sortTasks(currentSortType);
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
     }
@@ -96,13 +99,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
-        taskBoss.sortTasks(SortBy.END_DATE_TIME);
+        taskBoss.sortTasks(currentSortType);
         indicateTaskBossChanged();
     }
 
     @Override
     public void sortTasks(SortBy sortType) throws IllegalValueException {
         assert sortType != null;
+        this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
         indicateTaskBossChanged();
     }
