@@ -12,11 +12,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.ReadOnlyEvent;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueEventList;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -27,7 +24,6 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 public class ToDoList implements ReadOnlyToDoList {
 
     private final UniqueTaskList tasks;
-    private final UniqueEventList events;
     private final UniqueTagList tags;
 
     /*
@@ -40,7 +36,6 @@ public class ToDoList implements ReadOnlyToDoList {
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
-        events = new UniqueEventList();
     }
 
     public ToDoList() {}
@@ -59,11 +54,6 @@ public class ToDoList implements ReadOnlyToDoList {
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
-    
-    public void setEvents(List<? extends ReadOnlyEvent> events)
-            throws UniqueEventList.DuplicateEventException {
-        this.events.setEvents(events);
-    }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
@@ -77,17 +67,11 @@ public class ToDoList implements ReadOnlyToDoList {
             assert false : "To-Do Lists should not have duplicate Tasks";
         }
         try {
-            setEvents(newData.getEventList());
-        } catch (UniqueEventList.DuplicateEventException e) {
-            assert false : "To-Do Lists should not have duplicate Events";
-        }
-        try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "To-Do Lists should not have duplicate tags";
         }
-        syncMasterTagListWithTasks(tasks);
-        syncMasterTagListWithEvents(events);
+        syncMasterTagListWith(tasks);
     }
 
 //// Task-level operations
@@ -99,14 +83,9 @@ public class ToDoList implements ReadOnlyToDoList {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent Task already exists.
      */
-    public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWithTask(t);
-        tasks.add(t);
-    }
-    
-    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
-        syncMasterTagListWithEvent(e);
-        events.add(e);
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(p);
+        tasks.add(p);
     }
 
     /**
@@ -123,23 +102,11 @@ public class ToDoList implements ReadOnlyToDoList {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWithTask(editedTask);
+        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any Task
         // in the Task list.
         tasks.updateTask(index, editedTask);
-    }
-    
-    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
-            throws UniqueEventList.DuplicateEventException {
-        assert editedReadOnlyEvent != null;
-
-        Event editedEvent = new Event(editedReadOnlyEvent);
-        syncMasterTagListWithEvent(editedEvent);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any Task
-        // in the Task list.
-        events.updateEvent(index, editedEvent);
     }
 
     /**
@@ -147,7 +114,7 @@ public class ToDoList implements ReadOnlyToDoList {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWithTask(Task task) {
+    private void syncMasterTagListWith(Task task) {
         final UniqueTagList taskTags = task.getTags();
         tags.mergeFrom(taskTags);
 
@@ -161,21 +128,6 @@ public class ToDoList implements ReadOnlyToDoList {
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
-    
-    private void syncMasterTagListWithEvent(Event event) {
-        final UniqueTagList eventTags = event.getTags();
-        tags.mergeFrom(eventTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking Task tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of Task tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        eventTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        event.setTags(new UniqueTagList(correctTagReferences));
-    }
 
     /**
      * Ensures that every tag in these Tasks:
@@ -183,12 +135,8 @@ public class ToDoList implements ReadOnlyToDoList {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWithTasks(UniqueTaskList tasks) {
-        tasks.forEach(this::syncMasterTagListWithTask);
-    }
-    
-    private void syncMasterTagListWithEvents(UniqueEventList events) {
-        events.forEach(this::syncMasterTagListWithEvent);
+    private void syncMasterTagListWith(UniqueTaskList tasks) {
+        tasks.forEach(this::syncMasterTagListWith);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
@@ -209,20 +157,13 @@ public class ToDoList implements ReadOnlyToDoList {
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " Tasks, " 
-                + events.asObservableList().size() + "Events, "
-                + tags.asObservableList().size() +  " tags";
+        return tasks.asObservableList().size() + " Tasks, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
-    }
-    
-    @Override
-    public ObservableList<ReadOnlyEvent> getEventList() {
-        return new UnmodifiableObservableList<>(events.asObservableList());
     }
 
     @Override
@@ -235,8 +176,7 @@ public class ToDoList implements ReadOnlyToDoList {
         return other == this // short circuit if same object
                 || (other instanceof ToDoList // instanceof handles nulls
                 && this.tasks.equals(((ToDoList) other).tasks)
-                && this.tags.equalsOrderInsensitive(((ToDoList) other).tags))
-                && this.events.equals(((ToDoList) other).events);
+                && this.tags.equalsOrderInsensitive(((ToDoList) other).tags));
     }
 
     @Override
