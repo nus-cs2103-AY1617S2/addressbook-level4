@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Date;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -60,5 +61,14 @@ public interface Model {
 
     /** Informs eventbus about the change in save location */
     void updateSaveLocation(String path);
+
+    /** Divides task lists by categories into three separate ObservableList
+     *  which will be provided by UI
+     * 
+     * @param taskListToday task to be displayed under category 'Today'
+     * @param taskListFuture task to be displayed under category 'Future'
+     * @param taskListCompleted task to be displayed under category 'Completed'
+     */
+    void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,ObservableList<ReadOnlyTask> taskListCompleted);
 
 }

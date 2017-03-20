@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.util.Date;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -159,6 +161,27 @@ public class ModelManager extends ComponentManager implements Model {
                 return f;
             }).findAny().isPresent();
         };
+    }
+
+    @Override
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,ObservableList<ReadOnlyTask> taskListCompleted) {
+        ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
+        taskListToday.clear();
+        taskListFuture.clear();
+        taskListCompleted.clear();
+        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
+        while (iter.hasNext()) {
+            ReadOnlyTask tmpTask = iter.next();
+            // set task id to be displayed, the id here is 1-based
+            tmpTask.setID(iter.nextIndex());
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                taskListToday.add(tmpTask);
+            } else if (!tmpTask.isDone()) {
+                taskListFuture.add(tmpTask);
+            } else {
+                taskListCompleted.add(tmpTask);
+            }
+        }
     }
 
     public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {

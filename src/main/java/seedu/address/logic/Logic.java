@@ -20,4 +20,9 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    /** Divides task lists by categories into three separate ObservableList
+     *  which will be provided by UI
+     */
+    void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,ObservableList<ReadOnlyTask> taskListCompleted);
+
 }
