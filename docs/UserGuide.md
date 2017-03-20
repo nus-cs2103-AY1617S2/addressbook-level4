@@ -12,7 +12,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 	* [update](#update-a-task-update)
 	* [exit](#exit-the-program--exit)
 	* [save](#save-the-data)
-* [Advanced Features](#advance-features)
+* [Advanced Features](#advanced-features)
 	* [undo/redo](#undo/redo-command)
 * [Command Summary](#command-summary)
 
