@@ -83,7 +83,7 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
-    
+
     //@@author A0114395E
     /*
      * Helper method to parse a ReadOnlyTask into an command-line statement to be stored.

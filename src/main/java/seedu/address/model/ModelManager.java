@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateToDoAppChanged();
     }
-    
+
     @Override
     public synchronized void addTask(Task task, int idx) throws UniqueTaskList.DuplicateTaskException {
         toDoApp.addTask(task, idx);
