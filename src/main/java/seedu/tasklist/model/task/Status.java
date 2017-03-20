@@ -22,21 +22,6 @@ public class Status {
         this.status = status;
     }
 
-    //@@author A0143355J
-    public boolean getStatus() {
-        return this.status;
-    }
-
-    //@@author A0143355J
-    public void setCompleted() {
-        this.status = COMPLETED;
-    }
-
-    //@@author A0143355J
-    public void setUncompleted() {
-        this.status = UNCOMPLETED;
-    }
-
     @Override
     public String toString() {
         return status ? "completed" : "uncompleted";

@@ -79,7 +79,7 @@ public class DoneCommand extends Command {
         assert taskToDone != null;
 
         Status status = taskToDone.getStatus();
-        if (status.getStatus() == Status.COMPLETED) {
+        if (status.status == Status.COMPLETED) {
             throw new IllegalValueException(MESSAGE_DONE_ERROR);
         }
 
@@ -87,17 +87,17 @@ public class DoneCommand extends Command {
         switch (type) {
         case FloatingTask.TYPE:
             FloatingTask doneFloatingTask = new FloatingTask((ReadOnlyFloatingTask) taskToDone);
-            doneFloatingTask.getStatus().setCompleted();
+            doneFloatingTask.getStatus().status = Status.COMPLETED;
             return doneFloatingTask;
 
         case DeadlineTask.TYPE:
             DeadlineTask doneDeadlineTask = new DeadlineTask((ReadOnlyDeadlineTask) taskToDone);
-            doneDeadlineTask.getStatus().setCompleted();
+            doneDeadlineTask.getStatus().status = Status.COMPLETED;
             return doneDeadlineTask;
 
         case EventTask.TYPE:
             EventTask doneEventTask = new EventTask((ReadOnlyEventTask) taskToDone);
-            doneEventTask.getStatus().setCompleted();
+            doneEventTask.getStatus().status = Status.COMPLETED;
             return doneEventTask;
 
         default:
