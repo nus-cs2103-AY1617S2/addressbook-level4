@@ -17,8 +17,10 @@ public class Task implements ReadOnlyTask{
     private StartTime startTime;
     private EndTime endTime;
     private Description description;
-    private Boolean isTaskCompleted;
     private UrgencyLevel urgencyLevel;
+    
+    private String category;
+    private boolean isCompleted;
 
     private UniqueTagList tags;
 
@@ -34,6 +36,7 @@ public class Task implements ReadOnlyTask{
         this.description = description;
         this.urgencyLevel = urgencyLevel;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.category = sortCategory();
     }
     
     //@@A0122017Y
@@ -49,6 +52,34 @@ public class Task implements ReadOnlyTask{
                 source.getDescription().orElse(null), 
                 source.getTags());
     }
+    
+    private boolean isDeadlineTask(){
+        return this.endTime != null && startTime == null;
+    }
+    
+    private boolean isEventTask(){
+        return this.endTime != null && startTime != null;
+    }
+    
+    private boolean isFloatingTask(){
+        return this.endTime == null;
+    }
+    
+    private String sortCategory() {
+        if (isDeadlineTask()) {
+            return "deadline";
+        } else if (isEventTask()) {
+            return "event";
+        } else {
+            return "float";
+        }
+    }
+    
+    @Override
+    public String getTaskCategory(){
+        return this.category;
+    }
+    
     //@@
     
     public void setTitle(Title name) {

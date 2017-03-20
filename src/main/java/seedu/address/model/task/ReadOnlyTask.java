@@ -16,6 +16,8 @@ public interface ReadOnlyTask {
     Optional<Venue> getVenue();
     Optional<Description> getDescription();
     Optional<UrgencyLevel> getUrgencyLevel();
+    
+    String getTaskCategory();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
