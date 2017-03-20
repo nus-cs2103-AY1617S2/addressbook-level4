@@ -8,6 +8,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0139161J
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
@@ -34,7 +35,7 @@ public class RedoCommand extends Command {
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
                 } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
                     gStack.redoEdit();
-                    model.updateTask(((Task) toRedo).getEditTaskIndex(), (Task) toRedo);
+                    model.updateTask(((Task) toRedo).getIndex(), (Task) toRedo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
                 } else { //delete command
                     ReadOnlyTask unmutableTask = gStack.redoDelete();

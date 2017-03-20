@@ -7,6 +7,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0139161J
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
@@ -35,7 +36,7 @@ public class UndoCommand extends Command {
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
                     gStack.undoEdit();
-                    model.updateTask(((Task) toUndo).getEditTaskIndex(), (Task) toUndo);
+                    model.updateTask(((Task) toUndo).getIndex(), (Task) toUndo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 } else if (parserInfo.equals(COMMAND_WORD_DELETE)) { // it'll be delete command
                     gStack.undoDelete(); // pushes task to redostack
@@ -43,7 +44,7 @@ public class UndoCommand extends Command {
                      * System.out.println("To be restored : " + toUndo.toString());
                      * System.out.println("Index to be restored" + ((Task) toUndo).getEditTaskIndex());
                     */
-                    model.insertTasktoIndex(((Task) toUndo).getEditTaskIndex(), (Task) toUndo);
+                    model.insertTasktoIndex(((Task) toUndo).getIndex(), (Task) toUndo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 }
             } else {

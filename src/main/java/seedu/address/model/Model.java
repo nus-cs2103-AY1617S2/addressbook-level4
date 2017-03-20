@@ -25,12 +25,14 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    //@@author A0139161J
     /** Adds an item into a specific index in the list of tasks*/
     void insertTasktoIndex(int index, Task task)
              throws UniqueTaskList.DuplicateTaskException;
 
     /** Replaces the current list of tasks with the specified list*/
     void loadList (ObservableList<ReadOnlyTask> list) throws DuplicateTaskException;
+    //@@author
 
     /**
      * Updates the task located at {@code filteredTakkListIndex} with {@code editedTask}.

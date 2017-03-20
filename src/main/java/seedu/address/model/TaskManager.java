@@ -87,6 +87,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(t);
         tasks.add(t);
     }
+
+    //@@author A0139161J
     /**
      * Adds a task to the task manager at specified index
      * Adapted from addTask method
@@ -99,6 +101,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         //syncMasterTagListWith(t);
         tasks.addToIndex(index, t);
     }
+    //@@author
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.

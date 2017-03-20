@@ -50,6 +50,7 @@ public class AddCommand extends Command {
                 new Information(info),
                 new UniqueTagList(tagSet)
         );
+        //@@author A0139161J
         toAdd.setParserInfo("add");
     }
 
@@ -63,6 +64,7 @@ public class AddCommand extends Command {
             /**Debugging purpose
              * gStack.printStack();
              */
+            //@@author
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
