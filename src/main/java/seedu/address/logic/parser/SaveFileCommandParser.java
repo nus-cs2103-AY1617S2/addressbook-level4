@@ -20,7 +20,7 @@ public class SaveFileCommandParser {
      * and returns a SaveFileCommand object for execution.
      * @throws ParseException
      */
-    public Command parse(String args) throws ParseException {
+    public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(null), 1);

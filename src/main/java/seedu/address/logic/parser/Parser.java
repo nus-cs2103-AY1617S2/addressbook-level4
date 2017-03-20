@@ -17,8 +17,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.UncompleteCommand;
 import seedu.address.logic.commands.SaveFileCommand;
+import seedu.address.logic.commands.UncompleteCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 /**
