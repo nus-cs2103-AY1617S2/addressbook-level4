@@ -12,6 +12,7 @@ import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
+import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
@@ -76,6 +77,13 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void markTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        taskManager.markTask(taskIndex, taskToDone);
         indicateTaskManagerChanged();
     }
 

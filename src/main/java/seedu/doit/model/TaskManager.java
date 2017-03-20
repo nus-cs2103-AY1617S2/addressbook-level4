@@ -111,6 +111,17 @@ public class TaskManager implements ReadOnlyItemManager {
     }
 
     /**
+     * Marks an existing task in the to-do list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DuplicateTaskException
+     */
+    public void markTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        tasks.mark(taskIndex, taskToDone);
+    }
+
+    /**
      * Ensures that every tag in this task:
      * - exists in the master list {@link #tags}
      * - points to a Tag object in the master list
