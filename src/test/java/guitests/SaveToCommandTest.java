@@ -16,13 +16,13 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
     @Test
     public void saveTo() {
         // verify that 'saveto' command doesn't affect list
-        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
         assertSaveToSuccess();
-        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
 
         // verify other commands can work after a saveto command
         commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(taskListPanel.isListMatching(TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
+        assertTrue(futureTaskListPanel.isListMatching(TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
         commandBox.runCommand("delete 1");
         assertListSize(td.getTypicalTasks().length);
     }
