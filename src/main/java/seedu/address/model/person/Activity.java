@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -13,6 +12,11 @@ public class Activity implements ReadOnlyActivity {
 
     private Description description;
     private Priority priority;
+    private StartTime startTime;
+    private FromDate fromDate;
+    private EndTime endTime;
+    private ToDate toDate;
+    private ByDate byDate;
     private Location location;
 
     private UniqueTagList tags;
@@ -20,10 +24,17 @@ public class Activity implements ReadOnlyActivity {
     /**
      * Every field must be present and not null.
      */
-    public Activity(Description description, Priority priority, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, priority, location, tags);
+    public Activity(Description description, Priority priority, StartTime startTime,
+    		FromDate fromDate, EndTime endTime, ToDate toDate, ByDate byDate, Location location,
+    		UniqueTagList tags) {
+    	assert description != null;
         this.description = description;
         this.priority = priority;
+        this.startTime = startTime;
+        this.fromDate = fromDate;
+        this.endTime = endTime;
+        this.toDate = toDate;
+        this.byDate = byDate;
         this.location = location;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -32,10 +43,58 @@ public class Activity implements ReadOnlyActivity {
      * Creates a copy of the given ReadOnlyActivity.
      */
     public Activity(ReadOnlyActivity source) {
-        this(source.getDescription(), source.getPriority(), source.getLocation(), source.getTags());
+        this(source.getDescription(),
+    		source.getPriority(),
+    		source.getStartTime(),
+    		source.getFromDate(),
+    		source.getEndTime(),
+    		source.getToDate(),
+        	source.getByDate(),
+    		source.getLocation(),
+    		source.getTags());
     }
 
-    public void setDescription(Description description) {
+    public StartTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(StartTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public FromDate getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(FromDate fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public EndTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(EndTime endTime) {
+		this.endTime = endTime;
+	}
+
+	public ToDate getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(ToDate toDate) {
+		this.toDate = toDate;
+	}
+
+	public ByDate getByDate() {
+		return byDate;
+	}
+
+	public void setByDate(ByDate byDate) {
+		this.byDate = byDate;
+	}
+
+	public void setDescription(Description description) {
         assert description != null;
         this.description = description;
     }
@@ -46,7 +105,6 @@ public class Activity implements ReadOnlyActivity {
     }
 
     public void setPriority(Priority priority) {
-        assert priority != null;
         this.priority = priority;
     }
 
@@ -56,7 +114,6 @@ public class Activity implements ReadOnlyActivity {
     }
 
     public void setLocation(Location location) {
-        assert location != null;
         this.location = location;
     }
 
@@ -85,6 +142,11 @@ public class Activity implements ReadOnlyActivity {
 
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
+        this.setStartTime(replacement.getStartTime());
+        this.setToDate(replacement.getToDate());
+        this.setEndTime(replacement.getEndTime());
+        this.setToDate(replacement.getToDate());
+        this.setByDate(replacement.getByDate());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
