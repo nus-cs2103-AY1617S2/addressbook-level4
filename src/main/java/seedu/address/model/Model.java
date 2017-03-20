@@ -3,11 +3,8 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.ReadOnlyEvent;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueEventList;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -26,8 +23,6 @@ public interface Model {
 
     /** Adds the given Task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
-    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -41,12 +36,12 @@ public interface Model {
 
     /** Returns the filtered Task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-    UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
 
     /** Updates the filter of the filtered Task list to show all Tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered Task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
 
 }
