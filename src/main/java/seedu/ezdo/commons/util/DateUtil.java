@@ -29,7 +29,7 @@ public class DateUtil {
      * @throws ParseException if any of the date strings cannot be parsed.
      */
     public static int compareDateStrings(String dateString1, String dateString2) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date1 = null;
         Date date2 = null;
 
