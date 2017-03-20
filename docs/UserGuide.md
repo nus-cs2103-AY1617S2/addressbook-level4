@@ -166,7 +166,7 @@ Example:
 
 ### 2.11. Saving the program data to a specified path: save
 Save FlexiTask list to a file specified by user<br>
-Format: save FILE_PATH/FILE_NAME.xml 
+Format: save FILE_PATH/FILE_NAME.xml
 
 > File extension must be xml<br>
 > If specified file does not exists, FlexiTask will create the file.
@@ -176,7 +176,7 @@ Example:
 
 ### 2.12. Loading the program data from a specified path: load
 Load FlexiTask list from file specified by user<br>
-Format: load FILE_PATH/FILE_NAME.xml 
+Format: load FILE_PATH/FILE_NAME.xml
 
 > File extension must be xml<br>
 > File specified must exist
