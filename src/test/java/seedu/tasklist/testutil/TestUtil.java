@@ -90,7 +90,7 @@ public class TestUtil {
                                     new Comment("Find out why jdk is not displaying the correct ver"),
                                     new Priority("high"), new Status(), new UniqueTagList()),
                 new DeadlineTask(new Name("Implement undo for this"), new Comment("By today"),
-                                    new Priority("medium"), new Status(), new Date(117, 5, 5, 17, 0), new UniqueTagList()),
+                                    new Priority("medium"), new Status(), new Date(), new UniqueTagList()),
                 new FloatingTask(new Name("Drink water"), new Comment("To improve brain function"),
                                     new Priority("medium"), new Status(), new UniqueTagList()),
                 new EventTask(new Name("Internship interview"), new Comment("at mediacorp"), new Priority("high"),
