@@ -69,14 +69,14 @@ public class StringUtil {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
     //@@author A0122017Y
-    public static LocalDateTime parseStringToTime(String deadLineArg) throws IllegalValueException {
+    public static LocalDateTime parseStringToTime(String timeArg) throws IllegalValueException {
         //empty start date
-        if (deadLineArg == null) {
+        if (timeArg == null) {
             throw new IllegalValueException(TIME_CONSTRAINTS);
         }
         
         PrettyTimeParser timeParser = new PrettyTimeParser();
-        List<Date> parsedResult = timeParser.parse(deadLineArg);
+        List<Date> parsedResult = timeParser.parse(timeArg);
         
         //cannot parse
         if (parsedResult.isEmpty()) {
