@@ -145,17 +145,17 @@ public class CalenderPanel extends UiPart<Region> {
         Calendar firstDay = Calendar.getInstance();
         Date firstDate;
 
-        if (dayOfTheWeek.equals("星期一") || dayOfTheWeek.equals("Monday")) {
+        if ("星期一".equals(dayOfTheWeek) || "Monday".equals(dayOfTheWeek)) {
             firstDay.add(Calendar.DATE, -1);
-        } else if (dayOfTheWeek.equals("星期二") || dayOfTheWeek.equals("Tuesday")) {
+        } else if ("星期二".equals(dayOfTheWeek) || "Tuesday".equals(dayOfTheWeek)) {
             firstDay.add(Calendar.DATE, -2);
-        } else if (dayOfTheWeek.equals("星期三") || dayOfTheWeek.equals("Wednesday")) {
+        } else if ("星期三".equals(dayOfTheWeek) || "Wednesday".equals(dayOfTheWeek)) {
             firstDay.add(Calendar.DATE, -3);
-        } else if (dayOfTheWeek.equals("星期四") || dayOfTheWeek.equals("Thursday")) {
+        } else if ("星期四".equals(dayOfTheWeek) || "Thursday".equals(dayOfTheWeek)) {
             firstDay.add(Calendar.DATE, -4);
-        } else if (dayOfTheWeek.equals("星期五") || dayOfTheWeek.equals("Friday")) {
+        } else if ("星期五".equals(dayOfTheWeek) || "Friday".equals(dayOfTheWeek)) {
             firstDay.add(Calendar.DATE, -5);
-        } else if (dayOfTheWeek.equals("星期六") || dayOfTheWeek.equals("Saturday")) {
+        } else if ("星期六".equals(dayOfTheWeek) || "Saturday".equals(dayOfTheWeek)) {
             firstDay.add(Calendar.DATE, -6);
         }
 
