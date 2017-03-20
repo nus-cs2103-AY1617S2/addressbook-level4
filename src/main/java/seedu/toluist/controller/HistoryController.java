@@ -1,14 +1,11 @@
 package seedu.toluist.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
-import seedu.toluist.ui.UiStore;
 
 /**
  * ListController is responsible for rendering the initial UI
