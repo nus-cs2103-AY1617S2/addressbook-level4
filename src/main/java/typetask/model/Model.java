@@ -40,13 +40,13 @@ public interface Model {
 
     /** Stores current TaskManager state */
     void storeTaskManager(String command);
-    
+
     /** Restores most recently stored TaskManager state */
     int restoreTaskManager();
-    
+
     /** Undo most recently restored TaskManager state */
     int revertTaskManager();
-    
+
     /** Removes most recently stored TaskManager state upon fail in check */
     void rollBackTaskManager(boolean isStorageOperation);
 

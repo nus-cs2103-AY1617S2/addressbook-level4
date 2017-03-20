@@ -27,7 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private Stack<TaskManager> taskManagerHistory = new Stack<TaskManager>();
     private Stack<TaskManager> redoTaskManagerHistory = new Stack<TaskManager>();
-    
+
     public static final Integer STATUS_EMPTY_HISTORY = 0;
     public static final Integer STATUS_AVAILABLE_HISTORY = 1;
     public static final Integer STATUS_ERROR_HISTORY = -1;
@@ -119,7 +119,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized int restoreTaskManager() {
         if (StorageUtil.isConfigHistoryEmpty() && taskManagerHistory.isEmpty()) {
             return STATUS_EMPTY_HISTORY;
-        } else if (!taskManagerHistory.isEmpty() && taskManagerHistory.peek() == null) { 
+        } else if (!taskManagerHistory.isEmpty() && taskManagerHistory.peek() == null) {
             taskManagerHistory.pop();
             redoTaskManagerHistory.push(null);
             return STATUS_AVAILABLE_HISTORY;

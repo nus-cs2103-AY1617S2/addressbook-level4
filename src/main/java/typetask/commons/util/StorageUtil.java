@@ -15,7 +15,6 @@ public class StorageUtil {
     private static Stack<Config> redoConfigHistory = new Stack<Config>();
     private static Stack<OperationType> operationHistory = new Stack<OperationType>();
     private static Stack<OperationType> redoOperationHistory = new Stack<OperationType>();
-    
     private static final int INDEX_DIRECTORY = 0;
     private static final int INDEX_FILE_NAME = 1;
     private static final int FILE_PATH_ARRAY_LENGTH = 2;
@@ -40,10 +39,10 @@ public class StorageUtil {
     public static boolean isRedoConfigHistoryEmpty() {
         return redoConfigHistory.isEmpty();
     }
-    
+
     //Returns true if configHistory is empty
     public static boolean isConfigHistoryEmpty() {
         return configHistory.isEmpty();
     }
-    
+
 }
