@@ -19,6 +19,6 @@ public class HistoryCommandTest extends ToLuistGuiTest{
         commandBox.runCommand(command1);
         String command2 = "history";
         commandBox.runCommand(command2);
-        assertResultMessage("\nadd\nhistory\n2 commands displayed.");
+        assertResultMessage("\nadd task\nhistory\n3 commands displayed.");
     }
 }
