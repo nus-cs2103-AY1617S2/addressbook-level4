@@ -1,5 +1,6 @@
 package seedu.tasklist.model;
 
+import java.io.IOException;
 import java.util.Set;
 
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
@@ -55,4 +56,14 @@ public interface Model {
 
     /**Sort tasks according to parameter specified by user */
     public void sortTaskList(String parameter);
+
+    /** Loads file from file path
+     * @throws IOException
+     * */
+    void loadTaskList(String filePath) throws IOException;
+
+    /** Save file given a file path
+     * @throws IOException
+     * */
+    void saveTaskList(String filePath) throws IOException;
 }
