@@ -12,6 +12,8 @@ This product is a tool to accept natural language commands via keyboards to mana
 	* [update](#update-a-task-update)
 	* [exit](#exit-the-program--exit)
 	* [save](#save-the-data)
+* [Advanced Features](#advance-features)
+	* [undo/redo](#undo/redo-command)
 * [Command Summary](#command-summary)
 
 
@@ -101,6 +103,15 @@ Format: `exit`
 ### Save the data 
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+## Advanced Features
+
+###Undo/Redo command
+**Undo** and **Redo** are classic features, allowing you to undo the previous action taken. This will result in any changes made to certain task(s) being restored.
+
+Example:
+* `delete Dinner with Mom (Task with Dinner with Mom is deleted)`
+* `undo (Task Dinner with Mom is restored with all its previous details)`
+
 ## Command Summary
 Command | Format  
 -------- | :--------
@@ -111,3 +122,4 @@ find | `find name/Name`
 list | `list * | completed | pending | overdue`
 update | `update index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
 exit | `exit`
+
