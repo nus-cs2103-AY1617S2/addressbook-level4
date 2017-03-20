@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="taskListTypePlaceholder" styleClass="anchor-pane-with-border" 
+<AnchorPane fx:id="taskListTypePlaceholder" styleClass="anchor-pane-with-border"
                                     xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
