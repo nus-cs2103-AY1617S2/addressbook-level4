@@ -17,6 +17,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import seedu.tasklist.commons.util.StringUtil;
+import seedu.tasklist.model.tag.Tag;
 
 /**
  * Unmodifiable view of an observable list
@@ -310,4 +312,20 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
         backingList.forEach(action);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        ListIterator<E> li = listIterator();
+        while (li.hasNext()) {
+            E current = li.next();
+            String currentString;
+            if (current instanceof Tag) {
+                currentString = StringUtil.removeSquareBrackets(current.toString());
+            } else {
+                currentString = current.toString();
+            }
+            sb.append(currentString + " ");
+        }
+        return sb.toString().trim();
+    }
 }

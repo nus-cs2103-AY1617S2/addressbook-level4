@@ -1,10 +1,10 @@
 package seedu.tasklist.model;
 
 import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
-import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
@@ -46,16 +46,19 @@ public interface Model {
     void updateFilteredTaskList(Set<String> keywords);
 
     /** Get the previous state (undo) of the task list */
-    public void setPreviousState() throws EmptyModelStackException;
+    public void setPreviousState() throws EmptyStackException;
 
     /** Get the next state (redo) of the task list */
-    public void setNextState() throws EmptyModelStackException;
+    public void setNextState() throws EmptyStackException;
 
     /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
     public void enableUndoForClear();
 
     /**Sort tasks according to parameter specified by user */
     public void sortTaskList(String parameter);
+
+    /** Updates the filter of the filered task list to filter by the given tag keywords*/
+    void updateFilteredTaskListTag(Set<String> keyword);
 
     /** Loads file from file path
      * @throws IOException

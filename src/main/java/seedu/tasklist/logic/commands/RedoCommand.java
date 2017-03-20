@@ -1,6 +1,6 @@
 package seedu.tasklist.logic.commands;
 
-import seedu.tasklist.commons.exceptions.EmptyModelStackException;
+import java.util.EmptyStackException;
 
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
@@ -13,7 +13,7 @@ public class RedoCommand extends Command {
         try {
             model.setNextState();
             return new CommandResult(MESSAGE_REDO_SUCCESS);
-        } catch (EmptyModelStackException e) {
+        } catch (EmptyStackException e) {
             return new CommandResult(MESSAGE_REDO_FAILED);
         }
     }
