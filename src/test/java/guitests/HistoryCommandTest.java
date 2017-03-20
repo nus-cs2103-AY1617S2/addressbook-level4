@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * Gui tests for history command
  */
-public class HistoryCommandTest extends ToLuistGuiTest{
+public class HistoryCommandTest extends ToLuistGuiTest {
     @Test
     public void viewHistory() {
         String command = "history";
