@@ -140,22 +140,4 @@ public class FloatingTask extends Task implements ReadOnlyFloatingTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    @Override
-    public Date getDeadlineParameter() throws ParseException {
-        Date deadlineParameter = new Date(Long.MAX_VALUE);
-        return deadlineParameter;
-    }
-
-    @Override
-    public Date getStartDateParameter() throws ParseException {
-        Date deadlineParameter = new Date(Long.MAX_VALUE);
-        return deadlineParameter;
-    }
-
-    @Override
-    public Date getEndDateParameter() throws ParseException {
-        Date deadlineParameter = new Date(Long.MAX_VALUE);
-        return deadlineParameter;
-    }
 }

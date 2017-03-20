@@ -163,25 +163,4 @@ public class DeadlineTask extends Task implements ReadOnlyDeadlineTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    @Override
-    public Date getDeadlineParameter() throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date deadlineParameter = formatter.parse(formatter.format(deadline));
-        return deadlineParameter;
-    }
-
-    @Override
-    public Date getStartDateParameter() throws ParseException {
-      //appear before floating task
-        Date deadlineParameter = new Date(Long.MAX_VALUE - 1);
-        return deadlineParameter;
-    }
-
-    @Override
-    public Date getEndDateParameter() throws ParseException {
-        //appear before floating task
-        Date deadlineParameter = new Date(Long.MAX_VALUE - 1);
-        return deadlineParameter;
-    }
 }
