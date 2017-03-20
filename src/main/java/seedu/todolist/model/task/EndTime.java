@@ -51,7 +51,7 @@ public class EndTime implements Comparable<EndTime> {
     }
 
     public int compareTo(EndTime other) {
-    	return endTime.compareTo(other.getEndTime());
+        return endTime.compareTo(other.getEndTime());
     }
 
     public int hashCode() {
