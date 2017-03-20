@@ -1,6 +1,6 @@
 package seedu.tasklist.logic.commands;
 
-import seedu.tasklist.commons.exceptions.EmptyModelStackException;
+import java.util.EmptyStackException;
 
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
@@ -13,7 +13,7 @@ public class UndoCommand extends Command {
         try {
             model.setPreviousState();
             return new CommandResult(MESSAGE_UNDO_SUCCESS);
-        } catch (EmptyModelStackException e) {
+        } catch (EmptyStackException e) {
             return new CommandResult(MESSAGE_UNDO_FAILED);
         }
     }

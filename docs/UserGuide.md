@@ -166,7 +166,27 @@ Example:
 * clear completed
 * clear completed 2103
 
-### 2.11. Exiting the program: exit
+### 2.11. Saving the program data to a specified path: save
+Save FlexiTask list to a file specified by user<br>
+Format: save FILE_PATH/FILE_NAME.xml 
+
+> File extension must be xml<br>
+> If specified file does not exists, FlexiTask will create the file.
+
+Example:
+* save data/mytasklist.xml
+
+### 2.12. Loading the program data from a specified path: load
+Load FlexiTask list from file specified by user<br>
+Format: load FILE_PATH/FILE_NAME.xml 
+
+> File extension must be xml<br>
+> File specified must exist
+
+Example:
+* load users/user/Documents/mytasklist.xml
+
+### 2.13. Exiting the program: exit
 Exits the program<br>
 Format: exit
 
@@ -207,6 +227,12 @@ Format: exit
 
 * **Clear** : `clear [TAG]...`<br>
 	e.g. `clear completed 2103
+
+* **Save** : `save FILE_PATH/FILE_NAME.xml`<br>
+e.g. `save data/mytasklist.xml
+
+* **Load** : `load FILE_PATH/FILE_NAME.xml`<br>
+e.g. `load users/user/Documents/mytasklist.xml
 
 * **Exit** : `exit`<br>
 	e.g. `exit`
