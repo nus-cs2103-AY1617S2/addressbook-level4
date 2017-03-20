@@ -64,12 +64,13 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.endDateTime, this.startDateTime,
-                                               this.location, this.tags);
+            if(this.startDateTime == null || this.endDateTime == null) {
+                return true;
+            }
+            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags);
         }
 
         public void setEndDateTime(Optional<DateTime> endDateTime) {
-            assert endDateTime != null;
             this.endDateTime = endDateTime;
         }
 
@@ -79,7 +80,6 @@ public class UpdateCommand extends Command {
         }
 
         public void setStartDateTime(Optional<DateTime> startDateTime) {
-            assert startDateTime != null;
             this.startDateTime = startDateTime;
         }
 
@@ -115,10 +115,14 @@ public class UpdateCommand extends Command {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        DateTime updatedEndDateTime
-                = editTaskDescriptor.getEndDateTime().orElseGet(taskToEdit::getEndDateTime);
-        DateTime updatedStartDateTime
-                = editTaskDescriptor.getStartDateTime().orElseGet(taskToEdit::getStartDateTime);
+        DateTime updatedEndDateTime = null;
+        if (editTaskDescriptor.getEndDateTime() != null) {
+            updatedEndDateTime = editTaskDescriptor.getEndDateTime().orElseGet(taskToEdit::getEndDateTime);
+        }
+        DateTime updatedStartDateTime = null;
+        if (editTaskDescriptor.getStartDateTime() != null) {
+            updatedStartDateTime = editTaskDescriptor.getStartDateTime().orElseGet(taskToEdit::getStartDateTime);
+        }
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
