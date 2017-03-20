@@ -10,11 +10,8 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.ToDoListChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.Event;
-import seedu.address.model.task.ReadOnlyEvent;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueEventList;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -27,7 +24,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final ToDoList todoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final FilteredList<ReadOnlyEvent> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given ToDoList and userPrefs.
@@ -40,7 +36,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.todoList = new ToDoList(todoList);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
-        filteredEvents = new FilteredList<>(this.todoList.getEventList());
     }
 
     public ModelManager() {
@@ -75,13 +70,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateToDoListChanged();
     }
-    
-    @Override
-    public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-        todoList.addEvents(event);
-        updateFilteredListToShowAll();
-        indicateToDoListChanged();
-    }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -98,11 +86,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
-    }
-    
-    @Override
-    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-        return new UnmodifiableObservableList<>(filteredEvents);
     }
 
     @Override
