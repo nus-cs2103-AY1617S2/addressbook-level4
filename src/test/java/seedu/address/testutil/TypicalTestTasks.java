@@ -10,7 +10,7 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, taskWithoutPriority;
 
     public TypicalTestTasks() {
         try {
@@ -44,6 +44,9 @@ public class TypicalTestTasks {
             ida = new TaskBuilder().withName("Apply for scholarship")
                     .withPriority("low").withDeadline("12/12/2017")
                     .withStatus("incomplete").withNote("Apply via iDA website").build();
+            taskWithoutPriority = new TaskBuilder().withName("Submit research proposal")
+                    .withNullPriority().withDeadline("12/12/2017").withStatus("incomplete")
+                    .withNote("To Prof Obama's pigeonhole").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

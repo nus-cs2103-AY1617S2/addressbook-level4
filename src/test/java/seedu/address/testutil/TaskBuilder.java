@@ -60,6 +60,11 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withNullPriority() {
+        this.task.setPriority(null);
+        return this;
+    }
+
     public TestTask build() {
         return this.task;
     }

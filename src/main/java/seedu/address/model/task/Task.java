@@ -21,7 +21,13 @@ public class Task implements ReadOnlyTask {
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * Accepts null values for priority, note and deadline only.
+     * @param name
+     * @param priority
+     * @param status
+     * @param note
+     * @param deadline
+     * @param tags
      */
     public Task(Name name, Priority priority, Status status, Note note, Deadline deadline, UniqueTagList tags) {
         // Name should never be null because it is required for each task.
@@ -62,7 +68,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<Priority> getPriority() {
-        return Optional.of(priority);
+        return Optional.ofNullable(priority);
     }
 
     public void setStatus(Status status) {
