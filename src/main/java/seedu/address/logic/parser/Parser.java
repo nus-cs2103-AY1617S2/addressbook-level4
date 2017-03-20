@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 /**
@@ -70,6 +71,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
