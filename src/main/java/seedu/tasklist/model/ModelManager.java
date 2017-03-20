@@ -163,16 +163,8 @@ public class ModelManager extends ComponentManager implements Model {
             taskList.sortByPriority();
             break;
 
-        case "Deadline":
-            taskList.sortByDeadline();
-            break;
-
-        case "Start Date":
-            taskList.sortByStartDate();
-            break;
-
-        case "End Date":
-            taskList.sortByEndDate();
+        case "Date":
+            taskList.sortByDate();
             break;
 
         default:
