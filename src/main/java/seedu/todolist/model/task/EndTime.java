@@ -12,7 +12,7 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
  * Represents a Task's end time in the to-do list.
  */
 
-public class EndTime implements Comparable<EndTime>{
+public class EndTime implements Comparable<EndTime> {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
             "End time should follow the format: DD-MM-YYYY TIME. E.g. \n"

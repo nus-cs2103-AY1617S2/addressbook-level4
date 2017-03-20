@@ -29,13 +29,13 @@ public class StartTime implements Comparable<StartTime> {
             this.startTime = temp;
         }
     }
-    
+
     public StartTime(Date startTime) {
-    	this.startTime = startTime;
+        this.startTime = startTime;
     }
 
     protected Date getStartTime() {
-    	return this.startTime;
+        return this.startTime;
     }
 
     public String toString() {
@@ -49,9 +49,9 @@ public class StartTime implements Comparable<StartTime> {
                 || (other instanceof StartTime // instanceof handles nulls
                 && this.toString().equals(((StartTime) other).toString())); // state check
     }
-    
+
     public int compareTo(StartTime other) {
-    	return startTime.compareTo(other.getStartTime());
+        return startTime.compareTo(other.getStartTime());
     }
 
     public int hashCode() {
