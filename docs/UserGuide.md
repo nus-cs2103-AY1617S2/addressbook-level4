@@ -11,7 +11,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 ## 1. Start Project
 
-1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br />
+1. Ensure you have Java version `1.8.0_111` or later installed in your Computer.<br />
 
    > Having any Java 8 version is not enough. <br />
    > This app will not work with earlier versions of Java 8.
@@ -22,8 +22,6 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 <img src="images/Ui.png" width="600">
 
 5. Refer to the [Features](#features) section below for details of each command.<br />
-6. Pressing the up or down key will allow you to iterate through previous commands executed (if any).
-7. Pressing the tab key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
 
 ## 2. Features
 
@@ -317,6 +315,12 @@ Format: `exit`
 
 DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
+
+### 2.20. Iterating through previously executed commands
+Pressing the UP or DOWN key will allow you to iterate through previous commands executed (if any).
+
+### 2.21. Autocompletion of commands and reserved keywords
+Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
 
 ## 3. FAQ
 
