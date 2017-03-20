@@ -89,18 +89,25 @@ public class Timing implements Comparable<Timing> {
     @SuppressWarnings("deprecation")
     @Override
     public int compareTo(Timing compareTiming) {
-        if (this.date == null || compareTiming.date == null) {
-            System.out.println(this.date + "NULL!!!" + compareTiming.date);
-
-        }
-        boolean thisNull = this.date.equals(NULL_TIMING);
-        boolean otherNull = compareTiming.date.equals(NULL_TIMING);
+        boolean thisNull = this.date == null;
+        boolean otherNull = compareTiming.date == null;
 
         if (thisNull && otherNull) {
             return 0;
         } else if (thisNull) {
             return 1;
         } else if (otherNull) {
+            return -1;
+        }
+
+        boolean thisNullTiming = this.date.equals(NULL_TIMING);
+        boolean otherNullTiming = compareTiming.date.equals(NULL_TIMING);
+
+        if (thisNullTiming && otherNullTiming) {
+            return 0;
+        } else if (thisNullTiming) {
+            return 1;
+        } else if (otherNullTiming) {
             return -1;
         }
 
