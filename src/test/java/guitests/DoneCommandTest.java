@@ -94,6 +94,13 @@ public class DoneCommandTest extends TaskListGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void done_alreadyCompleted_failure() throws Exception {
+        commandBox.runCommand("done 4");
+        commandBox.runCommand("done 4");
+        assertResultMessage(DoneCommand.MESSAGE_DONE_ERROR);
+    }
+
 
     /**
      * Runs done command to mark the task at the specified index as completed
