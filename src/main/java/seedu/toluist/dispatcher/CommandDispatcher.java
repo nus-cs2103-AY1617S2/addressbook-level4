@@ -43,7 +43,7 @@ public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
-    
+
     /**
      * ArrayList to store previous commands entered since starting the application
      */
@@ -57,7 +57,7 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public void dispatch(Ui renderer, String command) {
-        commandHistory.add(command);
+        recordCommand(command);
         String deAliasedCommand = aliasConfig.dealias(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
@@ -66,12 +66,17 @@ public class CommandDispatcher extends Dispatcher {
 
         CommandResult feedbackToUser;
         if (controller.getClass().isInstance(new HistoryController(renderer))) {
-            feedbackToUser = ((HistoryController)controller).execute(deAliasedCommand, commandHistory);
+            feedbackToUser = ((HistoryController) controller).execute(deAliasedCommand, commandHistory);
         } else {
             feedbackToUser = controller.execute(deAliasedCommand);
         }
 
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
+    }
+
+    private void recordCommand(String command) {
+        commandHistory.add(command);
+        historyPointer = commandHistory.size();
     }
 
     private Controller getBestFitController(Ui renderer, String command) {

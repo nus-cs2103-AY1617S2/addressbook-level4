@@ -1,6 +1,5 @@
 package seedu.toluist.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import seedu.toluist.dispatcher.CommandResult;

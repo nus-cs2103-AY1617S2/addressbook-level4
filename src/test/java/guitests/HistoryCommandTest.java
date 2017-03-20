@@ -10,15 +10,15 @@ public class HistoryCommandTest extends ToLuistGuiTest{
     public void viewHistory() {
         String command = "history";
         commandBox.runCommand(command);
-        assertResultMessage("\nhistory\n2 commands displayed.");
+        assertResultMessage("\n" + command + "\n2 commands displayed.");
     }
-    
+
     @Test
     public void addTaskAndViewHistory() {
         String command1 = "add task";
         commandBox.runCommand(command1);
         String command2 = "history";
         commandBox.runCommand(command2);
-        assertResultMessage("\nadd task\nhistory\n3 commands displayed.");
+        assertResultMessage("\n" + command1 + "\n" + command2 + "\n3 commands displayed.");
     }
 }

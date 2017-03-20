@@ -21,6 +21,11 @@ public class HistoryController extends Controller {
         super(renderer);
     }
 
+    @Override
+    public CommandResult execute(String command) {
+        return null; //not used
+    }
+
     public CommandResult execute(String command, ArrayList<String> commandHistory) {
         logger.info(getClass().getName() + " will handle command");
 
@@ -39,10 +44,5 @@ public class HistoryController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
-    }
-
-    @Override
-    public CommandResult execute(String command) {
-        return null; //not used
     }
 }
