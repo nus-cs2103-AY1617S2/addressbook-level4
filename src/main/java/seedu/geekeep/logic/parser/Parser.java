@@ -11,7 +11,6 @@ import seedu.geekeep.logic.commands.ClearCommand;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.DeleteCommand;
 import seedu.geekeep.logic.commands.DoneCommand;
-import seedu.geekeep.logic.commands.UpdateCommand;
 import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
@@ -20,6 +19,7 @@ import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.ListDoneCommand;
 import seedu.geekeep.logic.commands.ListUndoneCommand;
 import seedu.geekeep.logic.commands.UndoneCommand;
+import seedu.geekeep.logic.commands.UpdateCommand;
 
 /**
  * Parses user input.
