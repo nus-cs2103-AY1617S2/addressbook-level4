@@ -31,7 +31,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_event_success() throws Exception {
+    public void editEventsuccess() throws Exception {
         String detailsToEdit = "Bobby s/11-10-17T3:00 e/11-11-17T6:00 t/husband";
         int addressBookIndex = 1;
 
@@ -42,7 +42,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_deadLine_success() throws Exception {
+    public void editDeadLineSuccess() throws Exception {
         String detailsToEdit = "Bobby e/11-11-17T6:00 t/husband";
         int addressBookIndex = 3;
 
@@ -52,7 +52,7 @@ public class EditCommandTest extends TodoListGuiTest {
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
     }
     @Test
-    public void edit_allFieldsSpecifiedEvent_success() throws Exception {
+    public void editAllFieldsSpecifiedEventSuccess() throws Exception {
         String detailsToEdit = "Bobby t/husband";
         int addressBookIndex = 1;
 

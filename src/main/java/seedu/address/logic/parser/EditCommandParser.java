@@ -62,8 +62,6 @@ public class EditCommandParser {
                 } catch (NoSuchElementException | ParseException e) {
 
                 }
-            } else {
-
             }
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTodoDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
