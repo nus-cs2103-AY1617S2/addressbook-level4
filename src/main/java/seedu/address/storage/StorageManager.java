@@ -49,7 +49,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ TodoList methods ==============================
-    
+
     //@@author A0163720M
     /** Raises an event to indicate the save file path has changed */
     private void indicateSaveFilePathChanged(String saveFilePath) {
