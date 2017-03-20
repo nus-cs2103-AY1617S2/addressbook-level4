@@ -55,7 +55,14 @@ public class Todo implements ReadOnlyTodo {
      * Creates a copy of the given ReadOnlyTodo.
      */
     public Todo(ReadOnlyTodo source) {
-        this(source.getName(), source.getTags());
+        this.name = source.getName();
+        this.tags = source.getTags();
+        if (source.getStartTime() != null && source.getEndTime() != null) {
+            this.starttime = source.getStartTime();
+            this.endtime = source.getEndTime();
+        } else if (source.getStartTime() == null && source.getEndTime() != null) {
+            this.endtime = source.getEndTime();
+        }
     }
 
     public void setName(Name name) {

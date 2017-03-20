@@ -4,13 +4,15 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.address.testutil.TestTodo;
+
 public class ClearCommandTest extends TodoListGuiTest {
 
     @Test
     public void clear() {
-
+        TestTodo[] temp = td.getTypicalTodos();
         //verify a non-empty list can be cleared
-        assertTrue(todoListPanel.isListMatching(td.getTypicalTodos()));
+        assertTrue(todoListPanel.isListMatching(temp));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command

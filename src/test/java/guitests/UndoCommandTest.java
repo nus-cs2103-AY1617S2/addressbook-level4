@@ -9,7 +9,7 @@ import guitests.guihandles.TodoCardHandle;
 import seedu.address.testutil.TestTodo;
 import seedu.address.testutil.TestUtil;
 
-public class UdoCommandTest extends TodoListGuiTest {
+public class UndoCommandTest extends TodoListGuiTest {
     @Test
     public void undoAdd() {
         //add one todo

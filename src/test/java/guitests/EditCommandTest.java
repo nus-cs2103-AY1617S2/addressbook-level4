@@ -31,6 +31,36 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
+    public void edit_event_success() throws Exception {
+        String detailsToEdit = "Bobby s/11-10-17T3:00 e/11-11-17T6:00 t/husband";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withStartTime("11-10-17T3:00").
+                withEndTime("11-11-17T6:00").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void edit_deadLine_success() throws Exception {
+        String detailsToEdit = "Bobby e/11-11-17T6:00 t/husband";
+        int addressBookIndex = 3;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").
+                withEndTime("11-11-17T6:00").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+    @Test
+    public void edit_allFieldsSpecifiedEvent_success() throws Exception {
+        String detailsToEdit = "Bobby t/husband";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+    @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
         int addressBookIndex = 2;

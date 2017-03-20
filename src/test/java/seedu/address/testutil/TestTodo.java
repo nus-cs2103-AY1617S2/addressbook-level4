@@ -26,6 +26,8 @@ public class TestTodo implements ReadOnlyTodo {
      */
     public TestTodo() {
         this.name = null;
+        this.starttime = null;
+        this.endtime = null;
         this.tags = new UniqueTagList(); // protect internal tags from changes in the arg list
     }
 

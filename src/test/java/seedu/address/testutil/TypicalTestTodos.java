@@ -10,7 +10,8 @@ import seedu.address.model.todo.UniqueTodoList;
  */
 public class TypicalTestTodos {
 
-    public TestTodo alice, benson, carl, daniel, elle, fiona, george, eventTest, deadLineTest, hoon, ida;
+    public TestTodo alice, benson, carl, daniel, elle, fiona, george,
+        event, deadLine, eventTest, deadLineTest, hoon, ida;
 
     public TypicalTestTodos() {
         try {
@@ -23,6 +24,12 @@ public class TypicalTestTodos {
             elle = new TodoBuilder().withName("Elle Meyer").build();
             fiona = new TodoBuilder().withName("Fiona Kunz").build();
             george = new TodoBuilder().withName("George Best").build();
+
+            //fail
+            event = new TodoBuilder().withName("event").withStartTime("11-10-17T3:00")
+                    .withEndTime("11-11-17T6:00").build();
+            deadLine = new TodoBuilder().withName("deadLine").withEndTime("11-09-17T6:00").build();
+
             // Manually added
             hoon = new TodoBuilder().withName("Hoon Meier").build();
             ida = new TodoBuilder().withName("Ida Mueller").build();

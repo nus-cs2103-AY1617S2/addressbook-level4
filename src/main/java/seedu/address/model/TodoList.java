@@ -100,8 +100,16 @@ public class TodoList implements ReadOnlyTodoList {
     public void updateTodo(int index, ReadOnlyTodo editedReadOnlyTodo)
             throws UniqueTodoList.DuplicateTodoException {
         assert editedReadOnlyTodo != null;
-
-        Todo editedTodo = new Todo(editedReadOnlyTodo);
+        Todo editedTodo = null;
+        if (editedReadOnlyTodo.getStartTime() != null && editedReadOnlyTodo.getEndTime() != null) {
+            editedTodo = new Todo(editedReadOnlyTodo.getName(), editedReadOnlyTodo.getStartTime(),
+                     editedReadOnlyTodo.getEndTime(), editedReadOnlyTodo.getTags());
+        } else if (editedReadOnlyTodo.getStartTime() == null && editedReadOnlyTodo.getEndTime() != null) {
+            editedTodo = new Todo(editedReadOnlyTodo.getName(), editedReadOnlyTodo.getEndTime(),
+                    editedReadOnlyTodo.getTags());
+        } else {
+            editedTodo = new Todo(editedReadOnlyTodo);
+        }
         syncMasterTagListWith(editedTodo);
         // Todo: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any todo
