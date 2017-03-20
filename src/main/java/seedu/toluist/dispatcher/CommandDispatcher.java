@@ -65,7 +65,7 @@ public class CommandDispatcher extends Dispatcher {
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
-                .orElse(new UnknownCommandController(renderer)); // fail-safe
+                .orElse(new UnknownCommandController()); // fail-safe
     }
 
     private Collection<Class <? extends Controller>> getAllControllerClasses() {
@@ -96,12 +96,12 @@ public class CommandDispatcher extends Dispatcher {
                 .stream()
                 .map((Class<? extends Controller> klass) -> {
                     try {
-                        Constructor constructor = klass.getConstructor(Ui.class);
-                        return (Controller) constructor.newInstance(renderer);
+                        Constructor constructor = klass.getConstructor();
+                        return (Controller) constructor.newInstance();
                     } catch (NoSuchMethodException | InstantiationException
                             | IllegalAccessException | InvocationTargetException e) {
                         // fail-safe. But should not actually reach here
-                        return new UnknownCommandController(renderer);
+                        return new UnknownCommandController();
                     }
                 })
                 .collect(Collectors.toList());

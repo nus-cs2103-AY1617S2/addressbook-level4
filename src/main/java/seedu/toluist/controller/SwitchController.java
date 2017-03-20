@@ -9,7 +9,6 @@ import seedu.toluist.commons.core.SwitchConfig;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -26,10 +25,6 @@ public class SwitchController extends Controller {
     public static final String TAB = "tab";
     private static final String COMMAND_TEMPLATE = "switch(\\s+(?<tab>\\S+))?\\s*";
     private SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
-
-    public SwitchController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
@@ -50,7 +45,7 @@ public class SwitchController extends Controller {
                 : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
         TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();
         UiStore.getInstance().setSwitchPredicate(switchPredicate);
-        renderer.render();
+
         return new CommandResult(String.format(
                 messageTemplate,
                 switchPredicate.getDisplayName(),

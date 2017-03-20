@@ -15,7 +15,6 @@ import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * UpdateTaskController is responsible for updating a task
@@ -31,10 +30,6 @@ public class UpdateTaskController extends Controller {
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
-
-    public UpdateTaskController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
@@ -63,7 +58,6 @@ public class UpdateTaskController extends Controller {
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
-            renderer.render();
         }
 
         return commandResult;

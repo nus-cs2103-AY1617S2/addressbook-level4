@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ShowHelpRequestEvent;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
+import seedu.toluist.model.Task;
 
 /**
  * The manager of the UI component. Singleton
@@ -48,6 +50,10 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow.show();
             String listCommand = "list";
             dispatcher.dispatch(this, listCommand);
+            // Re-render when data change is observed
+            UiStore.getInstance()
+                   .getObservableTasks()
+                   .addListener((ListChangeListener.Change<? extends Task> c) -> render());
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);

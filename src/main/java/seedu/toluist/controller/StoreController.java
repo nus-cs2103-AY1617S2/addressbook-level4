@@ -12,7 +12,6 @@ import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * Responsible for saving-related task
@@ -24,10 +23,6 @@ public class StoreController extends Controller {
     public static final String STORE_DIRECTORY = "directory";
 
     public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
-
-    public StoreController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");

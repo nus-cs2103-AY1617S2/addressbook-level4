@@ -10,7 +10,6 @@ import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -32,10 +31,6 @@ public class UntagController extends Controller {
     private static final String RESULT_MESSAGE_TEMPLATE = "%s%d tag(s) successfully removed.";
 
     private static final Logger logger = LogsCenter.getLogger(UntagController.class);
-
-    public UntagController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
@@ -59,7 +54,6 @@ public class UntagController extends Controller {
 
         if (todoList.save()) {
             uiStore.setTask(todoList.getTasks());
-            renderer.render();
         }
 
         // display formatting

@@ -2,8 +2,9 @@ package seedu.toluist.controller;
 
 import java.util.HashMap;
 
+import seedu.toluist.commons.core.EventsCenter;
+import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.ui.Ui;
 
 /**
  * Handle exit command
@@ -13,12 +14,8 @@ public class ExitController extends Controller {
     public static final String COMMAND_WORD_QUIT = "quit";
     private static final String COMMAND_TEMPLATE = "^(exit|quit)\\s*";
 
-    public ExitController(Ui renderer) {
-        super(renderer);
-    }
-
     public CommandResult execute(String command) {
-        renderer.stop();
+        EventsCenter.getInstance().post(new ExitAppRequestEvent());
         // This result won't be displayed
         return new CommandResult("");
     }

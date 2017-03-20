@@ -11,7 +11,6 @@ import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -22,10 +21,6 @@ public class LoadController extends Controller {
     private static final String COMMAND_TEMPLATE = "^load(\\s+(?<directory>\\S+))?\\s*";
     public static final String COMMAND_WORD = "load";
     public static final String STORE_DIRECTORY = "directory";
-
-    public LoadController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
@@ -47,7 +42,6 @@ public class LoadController extends Controller {
             TodoList newTodoList = TodoList.load().getStorage().load(path);
             newTodoList.save();
             UiStore.getInstance().setTask(newTodoList.getTasks());
-            renderer.render();
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path));
         } catch (DataStorageException e) {
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
