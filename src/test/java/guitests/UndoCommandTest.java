@@ -18,7 +18,6 @@ public class UndoCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("clear");
         assertListSize(0);
         assertUndoSuccess();
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
 
         //undo delete command
         TestTask[] currentList = td.getTypicalTasks();
@@ -31,7 +30,6 @@ public class UndoCommandTest extends AddressBookGuiTest {
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
         assertUndoSuccess();
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
 
         //undo add command
         //add one person
@@ -44,11 +42,12 @@ public class UndoCommandTest extends AddressBookGuiTest {
         TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
         assertUndoSuccess();
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+
 
         //undo edit command....working in progress...
     }
     private void assertUndoSuccess() {
         commandBox.runCommand("undo");
+        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
     }
 }

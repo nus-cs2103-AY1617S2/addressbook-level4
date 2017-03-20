@@ -8,7 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import typetask.commons.core.Messages;
 import typetask.logic.commands.EditCommand;
+import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Time;
 import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 
@@ -79,11 +81,11 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        //commandBox.runCommand("edit 1 d/1");
-        //assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
+        commandBox.runCommand("edit 1 d/1");
+        assertResultMessage(DueDate.MESSAGE_DATE_CONSTRAINTS);
 
-        //commandBox.runCommand("edit 1 t/13:11am");
-        //assertResultMessage(Time.MESSAGE_TIME_CONSTRAINTS);
+        commandBox.runCommand("edit 1 t/13:11am");
+        assertResultMessage(Time.MESSAGE_TIME_CONSTRAINTS);
 
     }
 
