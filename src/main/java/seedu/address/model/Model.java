@@ -55,7 +55,8 @@ public interface Model {
      * Updates the filter of the filtered task list to filter by the given
      * keywords
      */
-    void updateFilteredTaskList(Set<String> keywords, Date date);
+    void updateFilteredTaskList(Set<String> keywords, Date date,
+            Set<String> tagKeys);
 
     /** Informs eventbus about the change in save location */
     void updateSaveLocation();

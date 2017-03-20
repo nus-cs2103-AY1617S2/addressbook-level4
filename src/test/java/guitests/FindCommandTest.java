@@ -35,6 +35,6 @@ public class FindCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");
-        assertTrue(taskListPanel.isListMatching(expectedHits));
+        assertTrue(futureTaskListPanel.isListMatching(expectedHits));
     }
 }

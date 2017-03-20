@@ -70,20 +70,22 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName())
-                        && hasSameDateTime(other)); // state
+                && other.getName().equals(this.getName())
+                && hasSameDateTime(other)); // state
         // checks
         // here
         // onwards
     }
 
     default boolean hasSameDateTime(ReadOnlyTask other) {
-        if (this.getTaskType() != other.getTaskType()) {
-            return false;
-        } else {
-            return this.getTaskAbsoluteDateTime()
-                    .equals(other.getTaskAbsoluteDateTime());
-        }
+        return true;
+        // TODO: Implement these enums first, if throw NullPointException
+        //        if (this.getTaskType() != other.getTaskType()) {
+        //            return false;
+        //        } else {
+        //            return this.getTaskAbsoluteDateTime()
+        //                    .equals(other.getTaskAbsoluteDateTime());
+        //        }
     }
 
     /**

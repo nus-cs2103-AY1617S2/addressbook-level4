@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+
+import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 
 /**
  * Finds and lists all tasks in task manager whose name contains any of the
@@ -19,20 +22,22 @@ public class FindCommand extends Command {
 
     private final Set<String> keywords;
     private final Date date;
+    private final Set<String> tagKeys;
 
-    public FindCommand(Set<String> keywords) {
+    public FindCommand(Set<String> keywords, List<DateGroup> dates,
+            Set<String> tagKeys) {
         this.keywords = keywords;
-        this.date = null;
-    }
-
-    public FindCommand(Set<String> keywords, Date date) {
-        this.keywords = keywords;
-        this.date = date;
+        if (dates != null && dates.size() > 0
+                && dates.get(0).getDates().size() > 0)
+            this.date = dates.get(0).getDates().get(0);
+        else
+            this.date = null;
+        this.tagKeys = tagKeys;
     }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords, date);
+        model.updateFilteredTaskList(keywords, date, tagKeys);
         return new CommandResult(getMessageForTaskListShownSummary(
                 model.getFilteredTaskList().size()));
     }

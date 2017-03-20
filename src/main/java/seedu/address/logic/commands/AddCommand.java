@@ -84,11 +84,11 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
     }
 
 }
