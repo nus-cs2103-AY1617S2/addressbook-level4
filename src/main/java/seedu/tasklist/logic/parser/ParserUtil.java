@@ -123,19 +123,14 @@ public class ParserUtil {
         flexibleCommands.put("create", "add");
         flexibleCommands.put("new", "add");
         flexibleCommands.put("adds", "add");
-        flexibleCommands.put("Add", "add");
         flexibleCommands.put("change", "edit");
         flexibleCommands.put("modify", "edit");
         flexibleCommands.put("edits", "edit");
-        flexibleCommands.put("Edit", "edit");
         flexibleCommands.put("remove", "delete");
         flexibleCommands.put("deletes", "delete");
         flexibleCommands.put("cancel", "delete");
-        flexibleCommands.put("Delete", "delete");
         flexibleCommands.put("clean", "clear");
-        flexibleCommands.put("Clear", "clear");
         flexibleCommands.put("locate", "find");
-        flexibleCommands.put("Find", "find");
         flexibleCommands.put("arrange", "sort");
 
         return flexibleCommands;
@@ -152,18 +147,13 @@ public class ParserUtil {
         //prefixes
         flexiblePrefixes.put("tag/", "t/");
         flexiblePrefixes.put("tags/", "t/");
-        flexiblePrefixes.put("T/", "t/");
         flexiblePrefixes.put("comment/", "c/");
         flexiblePrefixes.put("comments/", "c/");
         flexiblePrefixes.put("info/", "c/");
-        flexiblePrefixes.put("C/", "c/");
         flexiblePrefixes.put("priority/", "p/");
-        flexiblePrefixes.put("P/", "p/");
         flexiblePrefixes.put("urgency/", "p/");
         flexiblePrefixes.put("date/", "d/");
         flexiblePrefixes.put("dates/", "d/");
-        flexiblePrefixes.put("D/", "d/");
-
 
     }
 
@@ -187,7 +177,7 @@ public class ParserUtil {
      *
      */
     public static String parseFlexiblePrefix(String input, Hashtable<String, String> flexiblePrefixes) {
-
+        input = input.toLowerCase();
 
         return "";
     }

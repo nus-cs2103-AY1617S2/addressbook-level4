@@ -51,7 +51,8 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        String commandWord = matcher.group("commandWord");
+        commandWord = commandWord.toLowerCase();
         String acceptedCommandWord = commandWord;
         if (flexibleCommands.containsKey(commandWord)) {
             acceptedCommandWord = flexibleCommands.get(commandWord);
