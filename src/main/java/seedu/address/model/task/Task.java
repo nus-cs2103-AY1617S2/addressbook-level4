@@ -16,7 +16,8 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private Status status;
     private Note note;
-    private Deadline deadline;
+    private DateTime startTime;
+    private DateTime endTime;
 
     private UniqueTagList tags;
 
@@ -29,7 +30,8 @@ public class Task implements ReadOnlyTask {
      * @param deadline
      * @param tags
      */
-    public Task(Name name, Priority priority, Status status, Note note, Deadline deadline, UniqueTagList tags) {
+    public Task(Name name, Priority priority, Status status,
+            Note note, DateTime startTime, DateTime endTime, UniqueTagList tags) {
         // Name should never be null because it is required for each task.
         // Status should never be null because every created task should be marked as incomplete.
         // Tags should never be null because zero tags is represented as an empty list.
@@ -39,7 +41,8 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
         this.status = status;
         this.note = note;
-        this.deadline = deadline;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -48,7 +51,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
-                source.getNote().orElse(null), source.getDeadline().orElse(null), source.getTags());
+                source.getNote().orElse(null), source.getStartTime().orElse(null),
+                source.getEndTime().orElse(null), source.getTags());
     }
 
     public void setName(Name name) {
@@ -92,12 +96,20 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<Deadline> getDeadline() {
-        return Optional.of(deadline);
+    public Optional<DateTime> getStartTime() {
+        return Optional.of(startTime);
     }
 
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
+    public void setStartTime(DateTime dateTime) {
+        this.startTime = dateTime;
+    }
+
+    public Optional<DateTime> getEndTime() {
+        return Optional.of(endTime);
+    }
+
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -122,7 +134,7 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority().orElse(null));
         this.setStatus(replacement.getStatus());
         this.setNote(replacement.getNote().orElse(null));
-        this.setDeadline(replacement.getDeadline().orElse(null));
+        this.setStartTime(replacement.getStartTime().orElse(null));
         this.setTags(replacement.getTags());
     }
 

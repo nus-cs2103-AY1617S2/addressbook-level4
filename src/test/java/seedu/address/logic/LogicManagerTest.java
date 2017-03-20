@@ -46,7 +46,7 @@ import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -538,11 +538,12 @@ public class LogicManagerTest {
             Priority priority = new Priority("hi");
             Status email = new Status("incomplete");
             Note note = new Note("edit slides");
-            Deadline deadline = new Deadline("12/12/2020");
+            DateTime startTime = new DateTime("12/12/2020 12:00");
+            DateTime endTime = new DateTime("12/12/2020 13:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, priority, email, note, deadline, tags);
+            return new Task(name, priority, email, note, startTime, endTime, tags);
         }
 
         /**
@@ -558,7 +559,8 @@ public class LogicManagerTest {
                     generatePriorityWithSeed(seed),
                     new Status(seed + "@email"),
                     new Note("House of " + seed),
-                    new Deadline("12/12/" + (2017 + seed)),
+                    new DateTime("12/12/" + (2017 + seed) + " 12:00"),
+                    new DateTime("12/12/" + (2017 + seed) + " 13:00"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -580,8 +582,12 @@ public class LogicManagerTest {
                 cmd.append(" n/").append(p.getNote().get().toString());
             }
 
-            if (p.getDeadline().isPresent()) {
-                cmd.append(" d/").append(p.getDeadline().get().toString());
+            if (p.getStartTime().isPresent()) {
+                cmd.append(" b/").append(p.getStartTime().get().toString());
+            }
+
+            if (p.getEndTime().isPresent()) {
+                cmd.append(" e/").append(p.getEndTime().get().toString());
             }
 
             UniqueTagList tags = p.getTags();
@@ -668,7 +674,8 @@ public class LogicManagerTest {
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
-                    new Deadline("12/12/2020"),
+                    new DateTime("12/12/2020 12:00"),
+                    new DateTime("12/12/2020 13:00"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
