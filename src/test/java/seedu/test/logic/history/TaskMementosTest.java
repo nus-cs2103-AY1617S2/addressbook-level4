@@ -17,6 +17,7 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 
 public class TaskMementosTest {
     private TaskMemento memento1;
@@ -29,17 +30,23 @@ public class TaskMementosTest {
                 new Description("Task 1"),
                 new DueDate("2017/01/01 0100"),
                 new Duration("2017/01/01 0000", "2017/01/01 0100"),
-                new UniqueTagList("Task1")));
+                new UniqueTagList("Task1"),
+                new TaskId(101)
+                ));
         memento2 = new TaskMemento(new Task(
                 new Description("Task 2"),
                 new DueDate("2017/01/01 0100"),
                 new Duration("2015/01/01 1200", "2016/02/01 0100"),
-                new UniqueTagList("Task2")));
+                new UniqueTagList("Task2"),
+                new TaskId(102)
+                ));
         memento3 = new TaskMemento(new Task(
                 new Description("Task 3"),
                 new DueDate("2017/02/22 2300"),
                 new Duration("2017/02/19 1243", "2017/05/25 1245"),
-                new UniqueTagList("Task3")));
+                new UniqueTagList("Task3"),
+                new TaskId(103)
+                ));
     }
 
     @Test
