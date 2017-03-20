@@ -164,22 +164,23 @@ public class ParserUtil {
         return flexibleCommands;
     }
 
-    /**
-     * Returns the Hashtable for flexible prefixes.
-     */
-    public static Hashtable<String, String> getFlexiblePrefixes() {
-        return flexiblePrefixes;
-    }
+
 
     /**
      * Return the legitimate prefix if the input prefix conforms to one of the listed alternatives.
      * If it does not conform, return the input prefix as it is.
-     *
+     * If the prefix is an invalid one, the error will be detected during the tokenisation process.
      */
-    public static String parseFlexiblePrefix(String input, Hashtable<String, String> flexiblePrefixes) {
-        input = input.toLowerCase();
-
-        return "";
+    public static String parseFlexiblePrefix(String input) {
+        String result = input;
+        result.toLowerCase();
+        Set<String> keys = flexiblePrefixes.keySet();
+        for (String key: keys) {
+            if (input.contains(key)) {
+                result = result.replaceAll(key, flexiblePrefixes.get(key));
+            }
+        }
+        return result;
     }
 }
 
