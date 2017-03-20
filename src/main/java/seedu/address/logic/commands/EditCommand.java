@@ -19,7 +19,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [t/TAG]...\n"
@@ -33,10 +34,13 @@ public class EditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor
+     *            details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex,
+            EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
@@ -51,7 +55,8 @@ public class EditCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
@@ -63,7 +68,8 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
+        return new CommandResult(
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
     }
 
     /**
@@ -71,25 +77,29 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+            EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Name updatedName = editTaskDescriptor.getName()
+                .orElseGet(taskToEdit::getName);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags()
+                .orElseGet(taskToEdit::getTags);
         boolean updatedDone = taskToEdit.isDone();
-
+        // TODO: Change Task constructor to TaskWithoutDeadline() or
+        // TaskWithDeadline() based on task type
         return new Task(updatedName, updatedTags, updatedDone);
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();

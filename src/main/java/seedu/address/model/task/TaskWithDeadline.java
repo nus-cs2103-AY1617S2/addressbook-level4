@@ -44,8 +44,11 @@ public class TaskWithDeadline extends Task {
         }
     }
 
-    public TaskWithDeadline(ReadOnlyTask source) {
-        super(source);
+    public TaskWithDeadline(ReadOnlyTask source) throws IllegalValueException {
+
+        this(source.getName(), source.getTags(),
+                source.getStartingTime().getDate(),
+                source.getDeadline().getDate(), source.isDone());
     }
 
     /**
@@ -105,6 +108,11 @@ public class TaskWithDeadline extends Task {
     @Override
     public DateTime getDeadline() {
         return deadline;
+    }
+
+    @Override
+    public DateTime getStartingTime() {
+        return startingTime;
     }
 
     @Override

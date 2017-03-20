@@ -112,12 +112,15 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords, Date date,
             Set<String> tagKeys) {
         Predicate<ReadOnlyTask> predicate = t -> false;
-        if (keywords != null)
+        if (keywords != null) {
             predicate = predicate.or(isTitleContainsKeyword(keywords));
-        if (date != null)
+        }
+        if (date != null) {
             predicate = predicate.or(isDueOnThisDate(date));
-        if (tagKeys != null)
+        }
+        if (tagKeys != null) {
             predicate = predicate.or(isTagsContainKeyword(tagKeys));
+        }
         filteredTasks.setPredicate(predicate);
         indicateTaskManagerChanged();
     }

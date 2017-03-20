@@ -12,8 +12,11 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
+import seedu.address.model.task.TaskWithDeadline;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -40,29 +43,43 @@ public class FutureTaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the task details correctly and in correct order.
-     * @param tasks A list of task in the correct order.
+     * Returns true if the list is showing the task details correctly and in
+     * correct order.
+     * 
+     * @param tasks
+     *            A list of task in the correct order.
+     * @throws IllegalValueException
+     * @throws IllegalArgumentException
      */
-    public boolean isListMatching(ReadOnlyTask... tasks) {
+    public boolean isListMatching(ReadOnlyTask... tasks)
+            throws IllegalArgumentException, IllegalValueException {
         return this.isListMatching(0, tasks);
     }
 
     /**
-     * Returns true if the list is showing the task details correctly and in correct order.
-     * @param startPosition The starting position of the sub list.
-     * @param tasks A list of task in the correct order.
+     * Returns true if the list is showing the task details correctly and in
+     * correct order.
+     * 
+     * @param startPosition
+     *            The starting position of the sub list.
+     * @param tasks
+     *            A list of task in the correct order.
+     * @throws IllegalValueException
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
+            throws IllegalArgumentException, IllegalValueException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
-            throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " tasks");
+            throw new IllegalArgumentException(
+                    "List size mismatched\n" + "Expected "
+                            + (getListView().getItems().size() - 1) + " tasks");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+            if (!TestUtil.compareCardAndTask(
+                    getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
         }
@@ -78,19 +95,22 @@ public class FutureTaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the {@code tasks} appear as the sub list (in that order) at position {@code startPosition}.
+     * Returns true if the {@code tasks} appear as the sub list (in that order)
+     * at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
         List<ReadOnlyTask> tasksInList = getListView().getItems();
 
-        // Return false if the list in panel is too short to contain the given list
+        // Return false if the list in panel is too short to contain the given
+        // list
         if (startPosition + tasks.length > tasksInList.size()) {
             return false;
         }
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getName().fullName.equals(tasks[i].getName().fullName)) {
+            if (!tasksInList.get(startPosition + i).getName().fullName
+                    .equals(tasks[i].getName().fullName)) {
                 return false;
             }
         }
@@ -99,10 +119,9 @@ public class FutureTaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(500); // Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                .filter(p -> p.getName().fullName.equals(name))
-                .findAny();
+                .filter(p -> p.getName().fullName.equals(name)).findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
@@ -125,9 +144,9 @@ public class FutureTaskListPanelHandle extends GuiHandle {
         return getTaskCardHandle(task);
     }
 
-
     /**
-     * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
+     * Returns the position of the task given, {@code NOT_FOUND} if not found in
+     * the list.
      */
     public int getTaskIndex(ReadOnlyTask targetTask) {
         List<ReadOnlyTask> tasksInList = getListView().getItems();
@@ -146,17 +165,27 @@ public class FutureTaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public TaskCardHandle getTaskCardHandle(int index) {
-        return getTaskCardHandle(new Task(getListView().getItems().get(index)));
+    public TaskCardHandle getTaskCardHandle(int index)
+            throws IllegalValueException {
+        ReadOnlyTask source = getListView().getItems().get(index);
+        if (source.getTaskType() == TaskType.TaskWithNoDeadline) {
+            return getTaskCardHandle(new TaskWithoutDeadline(
+                    getListView().getItems().get(index)));
+        } else {
+            return getTaskCardHandle(
+                    new TaskWithDeadline(getListView().getItems().get(index)));
+        }
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n)
+                        .isSameTask(task))
                 .findFirst();
         if (taskCardNode.isPresent()) {
-            return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
+            return new TaskCardHandle(guiRobot, primaryStage,
+                    taskCardNode.get());
         } else {
             return null;
         }
