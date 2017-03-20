@@ -46,8 +46,8 @@ public class TypicalTestTasks {
                     .withPriority("low").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Apply via iDA website").build();
             taskWithoutPriority = new TaskBuilder().withName("Submit research proposal")
-                    .withNullPriority().withDeadline("12/12/2017").withStatus("incomplete")
-                    .withNote("To Prof Obama's pigeonhole").build();
+                    .withNullPriority().withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
+                    .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
