@@ -9,12 +9,12 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## Table of contents
 
-- [Introduction](#introduction)
-- [Setting Up](#setting-up)
-- [Design](#design)
-- [Implementation](#implementation)
-- [Testing](#testing)
-- [Dev Ops](#dev-ops)
+1. [Introduction](#introduction)
+2. [Setting Up](#setting-up)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Testing](#testing)
+6. [Dev Ops](#dev-ops)
 - [Appendix A: User Stories](#appendix-a--user-stories)
 - [Appendix B: Use Cases](#appendix-b--use-cases)
 - [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -24,7 +24,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 <br>
 
 
-## Introduction
+## 1. Introduction
 <p>Doist is a task manager that can simplify your life with the press of a button! Designed for users who like to use the keyboard, Doist can accept natural language commands to help you keep track of all your daily tasks.</p>
 <p>This developer guide aims to give developers a nuts and bolts insight into Doist, to encourage and facilitate contribution to the development of this application.</p>
 
@@ -32,9 +32,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 <br>
 
 
-## Setting up
+## 2. Setting up
 
-### 1. Prerequisites
+### 2.1. Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
 
@@ -47,7 +47,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 2. Importing the project into Eclipse
+### 2.2. Importing the project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -62,7 +62,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 3. Configuring Checkstyle
+### 2.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. addressbook
@@ -73,7 +73,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button  
 
-### 4. Troubleshooting project setup
+### 2.4. Troubleshooting project setup
 
 * **Problem**: Eclipse reports compile errors after new commits are pulled from Git
     - *Reason*: Eclipse fails to recognize new files that appeared due to the Git pull.
@@ -87,9 +87,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 <br>
 
 
-## Design
+## 3. Design
 
-### 1. Architecture
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -118,7 +118,7 @@ The `Commons` component is akin to the nervous system of the App. It contains a 
 - EventsCenter : supports the communication among different components using events
 - LogsCenter : enables writing log messages to the log file.
 
-### 2. UI component
+### 3.2. UI component
 The `UI` is the main form of interaction between Doist and the user. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist.
 
 The following diagram represents the structure of the `UI` component  
@@ -136,7 +136,7 @@ Here are some of the key files in the `Ui` component:
 - `MainWindow.java`: contains a `class` that represents the Main Window viewed by the user.
 - `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands.
 
-### 3. Logic component
+### 3.3. Logic component
 The `Logic` component handles the execution of the commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
 
 The following diagram represents the structure of the `Logic` component  
@@ -154,7 +154,7 @@ Here are some of the key files in the `Logic` component:
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
 
-### 4. Model component
+### 3.4. Model component
 The `Model` component defines classes that represent the data Doist operates on. It also specifies and implements operations that work on the data.  
   
 The following diagram represents the structure of the `Model` component  
@@ -174,7 +174,7 @@ Here are some of the key files in the `Model` component:
 - `Task.java`: contains a `class` that represents each to-do list item (i.e. task).
 - `UserPrefs.java`: contains a class that stores user preferences such as the position and size of the app window.
 
-### 5. Storage component
+### 3.5. Storage component
 The `Storage` component takes charge of reading and writing (R/W) data, to and from the hard drive.
 This data consists of **user preferences** and **to-do list** :
 - **user preferences** is stored in a **JSON** file.
@@ -200,9 +200,9 @@ Here are some of the key files in the `Storage` component:
 <br>
 
 
-## Implementation
+## 4. Implementation
 
-### 1. Undo and Redo
+### 4.1. Undo and Redo
 Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, the new state of the to-do list will be stored into history.
 > Note: Although `undo` and `redo` should also be considered as mutating commands, they will not trigger the new state of the to-do list to be stored into history.
 
@@ -213,7 +213,7 @@ To be more specific, the to-do list history is represented by 2 stacks of `TodoL
 > 1. If we save the commands instead, we have to implement a reverse / undo method for each command, which will be time-consuming due to the complexity of the commands.
 > 2. When we copy the `TodoList` object, the constituent `Task` objects will not be copied. Thus, only new references will be created and this is less memory-intensive compared to creating a deep copy of all the `Task` objects.
 
-### 2. Logging
+### 4.2. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
@@ -231,7 +231,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3. Configuration
+### 4.3. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
@@ -239,13 +239,13 @@ Certain properties of the application can be controlled (e.g App name, logging l
 <br>
 
 
-## Testing
+## 5. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
-### Types of tests
+### 5.1. Types of tests
 
-#### 1. GUI Tests 
+#### 5.1.1. GUI Tests 
 These are _System Tests_ that test the entire App by simulating user actions on the GUI.
    These are in the `guitests` package.
 > ##### *Headless GUI Testing*
@@ -255,7 +255,7 @@ These are _System Tests_ that test the entire App by simulating user actions on 
  That means the developer can do other things on the Computer while the tests are running.
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-#### 2. Non-GUI Tests
+#### 5.1.2. Non-GUI Tests
 These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
       e.g. `seedu.address.commons.UrlUtilTest`
@@ -266,19 +266,19 @@ These are tests not involving the GUI. They include,
       how the are connected together.<br>
       e.g. `seedu.address.logic.LogicManagerTest`
 
-### How to test
-#### 1. In Eclipse
+### 5.2. How to test
+#### 5.2.1. In Eclipse
 
 * To run all tests, right-click on the `src/test/java` folder and choose
   `Run As` > `JUnit Test`
 * To run a subset of tests, you can right-click on a test package, test class, or a test and choose to run as a JUnit test.
 
-#### 2. Using Gradle
+#### 5.2.2. Using Gradle
 
 * See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle.
 
 
-### Troubleshooting tests
+### 5.3. Troubleshooting tests
  - **Problem**: Tests fail because NullPointException when AssertionError is expected  
     - *Reason*: Assertions are not enabled for JUnit tests.
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)  
@@ -288,22 +288,22 @@ These are tests not involving the GUI. They include,
 <br>
 
 
-## Dev Ops
+## 6. Dev Ops
 
-### 1. Build Automation
+### 6.1. Build Automation
 
 You can learn how to use Gradle for build automation from [UsingGradle.md](UsingGradle.md).
 
-### 2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 You can read [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 You can learn how to use GitHub Pages to publish documentation to the project site from [UsingGithubPages.md](UsingGithubPages.md).
 
-### 4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -311,7 +311,7 @@ Here are the steps to create a new release.
  2. Tag the repo with the version number. e.g. `v0.1`
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) and upload the JAR file you created.
 
-### 5. Managing Dependencies
+### 6.5. Managing Dependencies
 
 Doist depends on third-party libraries, such as [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing, [Natty](http://natty.joestelmach.com) for date and time parsing.  
 Managing these _dependencies_ has been automated using Gradle. Gradle can download the dependencies automatically, which is better than these alternatives.Therefore, there is no need to include those libraries in the repo, which will bloat the repo size, or download those libraries manually, which reates extra work for developers. To add new 3-party libraries, update `build.gradle`.
