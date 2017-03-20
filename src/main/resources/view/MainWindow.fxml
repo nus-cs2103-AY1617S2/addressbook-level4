@@ -47,7 +47,7 @@
                <Button fx:id="incompleteButton" text="Incomplete"/>
                <Button fx:id="completedButton" text="Completed"/>
                <Button fx:id="upcomingButton" text="Upcoming"/>
-               <Button fx:id="overdueButton" text="Overdue"/> 
+               <Button fx:id="overdueButton" text="Overdue"/>
                </children>
                </HBox>
                   <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
