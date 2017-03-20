@@ -349,4 +349,3 @@ Command Description | Command Format | Example
 | Pull | `pull` |
 | Export | `export ([by DATE] | [from START_DATE to END_DATE])` | `export today`
 | Exit | `exit` |
-  
