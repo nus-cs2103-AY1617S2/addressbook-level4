@@ -57,7 +57,7 @@ public class DateParser {
                     DateFormat df = new SimpleDateFormat(dateFormat);
                     df.setLenient(false);
                     try {
-                        Date date = df.parse(dateString);
+                        Date date = df.parse(matchedSubstr);
                         String convertedSubstr = (date.getMonth() + 1) + "/"   // Starting at 0
                                                     + date.getDate() + "/"
                                                     + (date.getYear() + 1900); // Years from 1900
