@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
@@ -27,6 +28,8 @@ import seedu.address.model.UserPrefs;
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String RESOURCE_FONT_UBUNTU = "/resources/fonts/Ubuntu.ttf";
+    private static final String RESOURCE_FONT_CONSOLAS = "/resources/fonts/Consolas.ttf";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -48,6 +51,11 @@ public class UiManager extends ComponentManager implements Ui {
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+        // Loads application fonts
+        int TYPICAL_FONT_SIZE = -1;
+        Font.loadFont(getClass().getResourceAsStream(RESOURCE_FONT_UBUNTU), TYPICAL_FONT_SIZE);
+        Font.loadFont(getClass().getResourceAsStream(RESOURCE_FONT_CONSOLAS), TYPICAL_FONT_SIZE);
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);

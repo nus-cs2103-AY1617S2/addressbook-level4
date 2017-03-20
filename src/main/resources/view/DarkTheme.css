@@ -1,31 +1,77 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #293132;
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Ubuntu";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Ubuntu";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Ubuntu";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 10px;
+    -fx-font-family: "Consolas";
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-field .content {
+    -fx-text-fill: white;
+    -fx-highlight-fill: #CFCFCF;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-field:focused .content {
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-field:focused {
+    -fx-background-radius: 0;
+    -fx-highlight-fill: #CFCFCF;
+}
+
+.text-area {
+    -fx-text-fill: white;
+    -fx-font-family: "Ubuntu";
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-area .content {
+    -fx-text-fill: white;
+    -fx-highlight-fill: #CFCFCF;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-area:focused .content {
+    -fx-background-radius: 0;
+    -fx-background-color: transparent, #1C2122, transparent, #1C2122;
+}
+
+.text-area:focused {
+    -fx-background-radius: 0;
+    -fx-highlight-fill: #CFCFCF;
 }
 
 .tab-pane {
@@ -36,43 +82,6 @@
     -fx-padding: 0 0 0 0;
     -fx-min-height: 0;
     -fx-max-height: 0;
-}
-
-.table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
 }
 
 .split-pane:horizontal .split-pane-divider {
@@ -86,47 +95,36 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.list-view {
+    -fx-background-color: #293132;
+    -fx-border-color: transparent;
+}
+
 .list-cell {
+    -fx-background-color: #1C2122;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-color: transparent;
 }
 
 .list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_big_label {
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-size: 11px;
-    -fx-text-fill: #010504;
-}
-
-.anchor-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-.anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-text-fill: white;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #293132;
     -fx-text-fill: black;
-}
-
-.result-display {
-    -fx-background-color: #ffffff;
-}
-
-.result-display .label {
-    -fx-text-fill: black !important;
 }
 
 .status-bar .label {
@@ -134,7 +132,7 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #293132;
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }
@@ -143,18 +141,13 @@
     -fx-text-fill: white;
 }
 
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
 .grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-color: transparent;
+    -fx-background-color: #293132;
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #293132;
 }
 
 .context-menu .label {
@@ -162,18 +155,18 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #293132;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Ubuntu";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: #293132;
 }
 
 /*
@@ -187,7 +180,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Ubuntu", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -250,6 +243,10 @@
     -fx-text-fill: white;
 }
 
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
     -fx-background-insets: 3;
@@ -274,7 +271,7 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
+    -fx-border-color: transparent;
     -fx-border-width: 1 1 1 1;
 }
 
@@ -300,3 +297,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
