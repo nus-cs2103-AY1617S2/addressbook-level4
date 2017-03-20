@@ -37,6 +37,14 @@ public interface Model {
     /** Returns the filtered activity list as an {@code UnmodifiableObservableList<ReadOnlyActivity>} */
     UnmodifiableObservableList<ReadOnlyActivity> getFilteredActivityList();
 
+    /** Returns the filtered unscheduled task activity list as an
+     * {@code UnmodifiableObservableList<ReadOnlyActivity>} */
+    UnmodifiableObservableList<ReadOnlyActivity> getFilteredScheduledActivityList();
+
+    /** Returns the filtered list of scheduled activity list as an
+     * {@code UnmodifiableObservableList<ReadOnlyActivity>} */
+    UnmodifiableObservableList<ReadOnlyActivity> getFilteredUnscheduledActivityList();
+
     /** Updates the filter of the filtered activity list to show all activities */
     void updateFilteredListToShowAll();
 
