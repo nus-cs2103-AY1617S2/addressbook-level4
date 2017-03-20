@@ -39,9 +39,9 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #fafafa;
+    -fx-control-inner-background: #fafafa;
+    -fx-background-color: #fafafa;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -76,14 +76,17 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent #fafafa transparent #1d1d1d;
+    -fx-background-color: transparent, derive(#fafafa, 10%);
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#fafafa, 20%);
+    -fx-text-box-border: none;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .list-cell {
@@ -263,11 +266,11 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
+    -fx-padding: 0 5 0 5;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 5 0 5 0;
 }
 
 #cardPane {
@@ -307,9 +310,9 @@
 }
 
 #resultDisplayPlaceholder, #resultDisplay .content, #mainPane {
-    -fx-text-box-border: none;
     -fx-font-family: "Roboto Regular";
     -fx-font-size: 16;
+    -fx-text-box-border: none;
     -fx-background-color: #dd4b39;
     -fx-focus-color: #dd4b39;
     -fx-faint-focus-color: #dd4b39;
