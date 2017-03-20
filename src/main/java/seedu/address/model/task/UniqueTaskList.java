@@ -91,6 +91,7 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacement);
     }
 
+
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
