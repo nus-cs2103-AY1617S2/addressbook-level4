@@ -27,7 +27,7 @@ public class EditCommandTest extends TaskBossGuiTest {
                 + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("High priority")
+        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("Yes")
                .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
                .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
 
@@ -40,7 +40,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         String detailsToEdit = "n/Amanda p/No sd/today 5.30pm ed/next fri 1am i/discuss about life c/relax";
         int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("No priority")
+        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("No")
                .withStartDateTime("today 5.30pm").withEndDateTime("next fri 1am")
                .withInformation("discuss about life").withCategories("relax").build();
 

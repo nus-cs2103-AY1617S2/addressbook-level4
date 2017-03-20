@@ -16,51 +16,51 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withInformation("123, Jurong West Ave 6, #08-111")
-                    .withPriorityLevel("High priority")
+                    .withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
                     .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("No priority")
+                    .withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("High priority")
+            carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("No priority")
+            daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("High priority")
+            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("No priority")
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPriorityLevel("High priority")
+            george = new TaskBuilder().withName("George Best").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("No priority")
+            hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("High priority")
+            ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("chicago ave").build();
-            johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("No priority")
+            johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
-            kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("High priority")
+            kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("Yes")
                     .withStartDateTime("today 10am")
                     .withEndDateTime("next wed")
                     .withInformation("clementi ave 2").build();
