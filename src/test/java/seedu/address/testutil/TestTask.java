@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.Optional;
 
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
@@ -17,9 +18,11 @@ public class TestTask implements ReadOnlyTask {
     private Optional<Deadline> deadline;
     private UniqueLabelList labels;
     private Boolean isCompleted;
+    private UniqueBookingList bookings;
 
     public TestTask() {
         labels = new UniqueLabelList();
+        bookings = new UniqueBookingList();
     }
 
     /**
@@ -31,6 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.deadline = taskToCopy.getDeadline();
         this.labels = taskToCopy.getLabels();
         this.isCompleted = taskToCopy.isCompleted();
+        this.bookings = taskToCopy.getBookings();
     }
 
     public void setTitle(Title name) {
@@ -79,24 +83,24 @@ public class TestTask implements ReadOnlyTask {
 
     private String getAddCommandWithoutDate() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ADD " + this.getTitle().title + " ");
+        sb.append("add " + this.getTitle().title + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("#" + s.labelName + " "));
         return sb.toString();
     }
 
     private String getAddCommandWithDeadline() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ADD " + this.getTitle().title + " ");
-        sb.append(" BY " + this.getDeadline().get().toString() + " ");
+        sb.append("add " + this.getTitle().title + " ");
+        sb.append(" by " + this.getDeadline().get().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("#" + s.labelName + " "));
         return sb.toString();
     }
 
     private String getAddCommandWithInterval() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ADD " + this.getTitle().title + " ");
-        sb.append(" FROM " + this.getStartTime().get().toString() + " ");
-        sb.append(" TO " + this.getDeadline().get().toString() + " ");
+        sb.append("add " + this.getTitle().title + " ");
+        sb.append(" from " + this.getStartTime().get().toString() + " ");
+        sb.append(" to " + this.getDeadline().get().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("#" + s.labelName + " "));
         return sb.toString();
     }
@@ -117,5 +121,10 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Boolean isCompleted() {
         return isCompleted == null ? Boolean.FALSE : isCompleted;
+    }
+
+    @Override
+    public UniqueBookingList getBookings() {
+        return bookings;
     }
 }

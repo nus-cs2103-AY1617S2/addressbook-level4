@@ -56,7 +56,4 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to  filter by the given completion status*/
     void updateFilteredTaskList(Boolean isCompleted);
-
-    /** Returns Raw TaskManager */
-    TaskManager getRawTaskManager();
 }

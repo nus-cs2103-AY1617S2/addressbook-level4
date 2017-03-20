@@ -18,7 +18,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class EditLabelCommand extends Command {
 
-    public static final String COMMAND_WORD = "EDITLABEL";
+    public static final String COMMAND_WORD = "editlabel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a label to another label \n"
             + "Existing label will be overwritten by the new label.\n"
@@ -87,8 +87,8 @@ public class EditLabelCommand extends Command {
     public void saveCurrentState() {
         if (isMutating()) {
             try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
+                LogicManager.undoCommandHistory.addStorageHistory(model.getTaskManager().getImmutableTaskList(),
+                        model.getTaskManager().getImmutableLabelList());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }

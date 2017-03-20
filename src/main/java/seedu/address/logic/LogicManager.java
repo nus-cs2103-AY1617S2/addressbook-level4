@@ -9,7 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.dateparser.DateTimeParser;
-import seedu.address.logic.dateparser.DateTimeParserManager;
+import seedu.address.logic.dateparser.DateTimeManager;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.undo.UndoManager;
 import seedu.address.model.Model;
@@ -30,7 +30,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
-        dtParser = new DateTimeParserManager();
+        dtParser = new DateTimeManager();
         undoCommandHistory = UndoManager.getInstance();
     }
 

@@ -8,7 +8,7 @@ import seedu.address.model.TaskManager;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "CLEAR";
+    public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Task manager has been cleared!";
 
 
@@ -26,8 +26,8 @@ public class ClearCommand extends Command {
     public void saveCurrentState() {
         if (isMutating()) {
             try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
+                LogicManager.undoCommandHistory.addStorageHistory(model.getTaskManager().getImmutableTaskList(),
+                        model.getTaskManager().getImmutableLabelList());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
