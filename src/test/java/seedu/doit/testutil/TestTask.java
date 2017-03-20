@@ -161,7 +161,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     private int compareName(ReadOnlyTask other) {
-        return this.getName().toString().compareTo(other.getName().toString());
+        return this.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
 
     public int compareItems(ReadOnlyTask other) {
