@@ -1,5 +1,6 @@
 package seedu.toluist.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -20,7 +21,7 @@ public class HistoryController extends Controller {
         super(renderer);
     }
 
-    public CommandResult execute(String command) {
+    public CommandResult execute(String command, ArrayList<String> commandHistory) {
         logger.info(getClass().getName() + " will handle command");
 
         String result = String.join("\n", commandHistory);
@@ -38,5 +39,10 @@ public class HistoryController extends Controller {
 
     public static String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    @Override
+    public CommandResult execute(String command) {
+        return null; //not used
     }
 }
