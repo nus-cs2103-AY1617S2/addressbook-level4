@@ -27,7 +27,6 @@ import seedu.tache.commons.events.BaseEvent;
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.testutil.TestUtil;
-import seedu.tache.testutil.TypicalTestDetailedTasks;
 import seedu.tache.testutil.TypicalTestTasks;
 
 /**
@@ -90,7 +89,6 @@ public abstract class TaskManagerGuiTest {
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
         TypicalTestTasks.loadTaskManagerWithSampleData(ab);
-        TypicalTestDetailedTasks.loadTaskManagerWithSampleData(ab);
         return ab;
     }
 
