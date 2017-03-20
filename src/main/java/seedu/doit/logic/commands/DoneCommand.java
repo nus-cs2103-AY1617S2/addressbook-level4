@@ -17,10 +17,6 @@ public class DoneCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Completed Task: %1$s";
-    public static final String MESSAGE_DONE_FLOATING_TASK_SUCCESS = "Completed Floating Task: %1$s";
-    public static final String MESSAGE_DONE_EVENT_SUCCESS = "Completed Event: %1$s";
-
-
     public final int targetIndex;
 
     public DoneCommand(int targetIndex) {

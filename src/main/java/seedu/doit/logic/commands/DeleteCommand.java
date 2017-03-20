@@ -21,9 +21,6 @@ public class DeleteCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
-    public static final String MESSAGE_DELETE_FLOATING_TASK_SUCCESS = "Deleted Floating Task: %1$s";
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
-
 
     public final int targetIndex;
 
@@ -36,7 +33,6 @@ public class DeleteCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
 
-        int taskSize = lastShownTaskList.size();
 
         if (targetIndex <= lastShownTaskList.size()) {
             ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
