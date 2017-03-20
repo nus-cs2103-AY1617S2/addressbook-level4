@@ -11,7 +11,7 @@ import seedu.taskboss.model.task.Task;
 
 public class MarkDoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks the task, identified by the index"
             + " the index nnumber used in the last lisitng, as done in TaskBoss once"
