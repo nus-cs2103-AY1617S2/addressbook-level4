@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.task.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -147,11 +147,15 @@ class AddressBookTest extends Test {
 }
 
 task guiTests(type: AddressBookTest) {
-    include 'guitests/**'
+    include 'guitests/AddCommandTest.*'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }
+}
+
+task utilTest(type: AddressBookTest) {
+    include 'seedu/task/commons/util/XmlUtil.Test.*'
 }
 
 
