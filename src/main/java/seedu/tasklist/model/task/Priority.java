@@ -107,26 +107,26 @@ public class Priority {
 
     /** Compares the priority of one task with another */
     public int compareTo(Priority priority) {
-        String thisValue = "Z";
-        String otherValue = "Z";
+        Integer thisValue = 0;
+        Integer otherValue = 0;
 
         if (this.toString().equals(PRIORITY_HIGH)) {
-            thisValue = "A";
+            thisValue = 0;
         } else if (this.toString().equals(PRIORITY_MEDIUM)) {
-            thisValue = "M";
+            thisValue = 1;
         } else if (this.toString().equals(PRIORITY_LOW)) {
-            thisValue = "Q";
+            thisValue = 2;
         } else if (this.toString().equals(PRIORITY_NIL)) {
-            thisValue = "Z";
+            thisValue = 3;
         }
         if (priority.toString().equals(PRIORITY_HIGH)) {
-            otherValue = "A";
+            otherValue = 0;
         } else if (priority.toString().equals(PRIORITY_MEDIUM)) {
-            otherValue = "M";
+            otherValue = 1;
         } else if (priority.toString().equals(PRIORITY_LOW)) {
-            otherValue = "Q";
+            otherValue = 2;
         }  else if (this.toString().equals(PRIORITY_NIL)) {
-            thisValue = "Z";
+            thisValue = 3;
         }
 
         return thisValue.compareTo(otherValue);
