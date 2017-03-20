@@ -19,14 +19,17 @@ public class BookCommand extends Command {
 
     public static final String COMMAND_WORD = "book";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Books time slots for a task. "
-            + "Parameters: TITLE [#LABEL] on DATE STARTTIME to ENDTIME, DATE STARTTIME to ENDTIME...\n" + "Example: " + COMMAND_WORD
-            + " Meet John Doe #friends #owesMoney on 31-10-2017 2pm to 5pm, 01-10-2017 2pm to 5pm, 30-10-2017 1pm to 2pm";
+            + "Parameters: TITLE [#LABEL] on DATE STARTTIME to ENDTIME, DATE STARTTIME to ENDTIME...\n"
+            + "Example: " + COMMAND_WORD
+            + " Meet John Doe #friends #owesMoney on 31-10-2017 2pm to 5pm,"
+            + " 01-10-2017 2pm to 5pm, 30-10-2017 1pm to 2pm";
     public static final String MESSAGE_SUCCESS = "New booking added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This booking slot already exists in the task manager";
 
     private final Task toAdd;
 
-    public BookCommand(String title, Set<String> labels, String...dates) throws IllegalValueException, CommandException {
+    public BookCommand(String title, Set<String> labels, String...dates)
+            throws IllegalValueException, CommandException {
         final Set<Label> labelSet = new HashSet<>();
         final Set<Booking> bookingSet = new HashSet<>();
         for (String labelName : labels) {

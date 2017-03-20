@@ -19,7 +19,8 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]... | [(by DEADLINE) | (from STARTDATE to ENDDATE)]\n" + "Example: " + COMMAND_WORD + " meet alice";
+            + "Parameters: KEYWORD [MORE_KEYWORDS]... |"
+            + " [(by DEADLINE) | (from STARTDATE to ENDDATE)]\n" + "Example: " + COMMAND_WORD + " meet alice";
     public static final String DEFAULT_STARTTIME = "00:00:00";
     public static final String DEFAULT_ENDTIME = "23:59:59";
 

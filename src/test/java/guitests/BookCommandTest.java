@@ -14,7 +14,8 @@ public class BookCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_IsMutating() throws IllegalDateTimeValueException, IllegalValueException, CommandException {
         TestTask booking = new TaskBuilder().withTitle("Complete booking")
-                .withLabels("friends").withBookings("10-10-2017 2pm to 5pm, 11-10-2017 2pm to 5pm, 12-10-2017 2pm to 5pm")
+                .withLabels("friends").withBookings("10-10-2017 2pm to 5pm,"
+                        + " 11-10-2017 2pm to 5pm, 12-10-2017 2pm to 5pm")
                 .withStatus(false).build();
         commandBox.runCommand(booking.getAddCommand());
         TaskCardHandle addedCard = taskListPanel.navigateToTask(booking.getTitle().title);

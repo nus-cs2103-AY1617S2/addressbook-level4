@@ -19,7 +19,7 @@ import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.label.UniqueLabelList.DuplicateLabelException;
 
 //@@author A0162877N
-public class UniqueBookingList implements Iterable<Booking>{
+public class UniqueBookingList implements Iterable<Booking> {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
 
     /**
@@ -32,7 +32,8 @@ public class UniqueBookingList implements Iterable<Booking>{
      * duplicates.
      * @throws CommandException
      */
-    public UniqueBookingList(String... bookings) throws DuplicateLabelException, IllegalValueException, CommandException {
+    public UniqueBookingList(String... bookings)
+            throws DuplicateLabelException, IllegalValueException, CommandException {
         final List<Booking> bookingList = new ArrayList<Booking>();
         for (String label : bookings) {
             bookingList.add(new Booking(label));
