@@ -10,9 +10,6 @@ import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
 
-/**
- *
- */
 public class TypicalTestTasks {
 
     public TestTask tutorial, homework, groceries, java, cs2103T, drink, internship, ida;
