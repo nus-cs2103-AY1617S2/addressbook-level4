@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane styleClass="anchor-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here...">
+<AnchorPane styleClass="anchor-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <ComboBox fx:id="commandTextField" editable="true" onAction="#handleCommandInputChanged" onInputMethodTextChanged="#handleInputMethodTextChanged" prefWidth="258.0" promptText="Enter command here..." stylesheets="@comboxBoxStyle.css">
       <effect>
-         <Lighting bumpInput="$null">
+         <Lighting>
+            <bumpInput>
+               <Lighting bumpInput="$null" specularConstant="2.0">
+                  <light>
+                     <Light.Distant color="#901717" />
+                  </light>
+               </Lighting>
+            </bumpInput>
             <light>
                <Light.Distant />
             </light>
          </Lighting>
-      </effect></TextField>
+      </effect>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </ComboBox>
 </AnchorPane>
