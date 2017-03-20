@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -96,15 +97,41 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredListToShowUnchecked() {
+        filteredTasks.setPredicate(isUnchecked);
     }
 
-    private void updateFilteredPersonList(Expression expression) {
+    @Override
+    public void updateFilteredListToShowChecked() {
+        filteredTasks.setPredicate(isChecked);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+
+    private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
+
+    /** Predicate to check if completionStatus is false */
+    Predicate<ReadOnlyTask> isUnchecked = new Predicate<ReadOnlyTask> () {
+        @Override
+        public boolean test(ReadOnlyTask t) {
+            return t.getCompletionStatus().getStatus() == false;
+        }
+    };
+
+    /** Predicate to check if completionStatus is true */
+    Predicate<ReadOnlyTask> isChecked = new Predicate<ReadOnlyTask> () {
+        @Override
+        public boolean test(ReadOnlyTask t) {
+            return t.getCompletionStatus().getStatus() == true;
+        }
+    };
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
