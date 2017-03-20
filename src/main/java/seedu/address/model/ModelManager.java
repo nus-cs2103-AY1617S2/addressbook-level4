@@ -23,7 +23,9 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final ToDoList todoList;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredFloats;
+    private FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given ToDoList and userPrefs.
@@ -35,7 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with to-do list: " + todoList + " and user prefs " + userPrefs);
 
         this.todoList = new ToDoList(todoList);
-        filteredTasks = new FilteredList<>(this.todoList.getTaskList());
+        filteredTasks = new FilteredList<>(this.todoList.getFilteredTasks());
+        filteredFloats = new FilteredList<>(this.todoList.getFilteredFloats());
+        filteredEvents = new FilteredList<>(this.todoList.getFilteredEvents());
     }
 
     public ModelManager() {
@@ -91,6 +95,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        filteredFloats.setPredicate(null);
+        filteredEvents.setPredicate(null);
     }
 
     @Override
@@ -100,6 +106,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        filteredFloats.setPredicate(expression::satisfies);
+        filteredEvents.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
