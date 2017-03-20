@@ -14,6 +14,7 @@ public class Task implements ReadOnlyTask{
 
     private Title title;
     private Venue venue;
+    private StartTime startTime;
     private EndTime endTime;
     private Description description;
     private Boolean isTaskCompleted;
@@ -24,30 +25,32 @@ public class Task implements ReadOnlyTask{
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, EndTime endTime, UrgencyLevel urgencyLevel, Description description, boolean status,  UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, status);
+    public Task(Title title, Venue venue, StartTime startTime, EndTime endTime, UrgencyLevel urgencyLevel, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title);
         this.title = title;
         this.venue = venue;
+        this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
-        this.isTaskCompleted = status;
         this.urgencyLevel = urgencyLevel;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-
+    
+    //@@A0122017Y
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
         this(source.getTitle(), 
-                source.getVenue().orElse(null), 
+                source.getVenue().orElse(null),
+                source.getStartTime().orElse(null),
                 source.getEndTime().orElse(null),
                 source.getUrgencyLevel().orElse(null),
                 source.getDescription().orElse(null), 
-                source.hasTaskCompleted(),
                 source.getTags());
     }
-
+    //@@
+    
     public void setTitle(Title name) {
         assert name != null;
         this.title = name;
@@ -66,13 +69,13 @@ public class Task implements ReadOnlyTask{
         return this.endTime;
     }
     
-    @Override
-    public Boolean hasTaskCompleted(){
-        return this.isTaskCompleted;
-    }
 
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+    
+    public void setStartTime(StartTime startTime) {
+        this.startTime = startTime;
     }
 
     @Override
@@ -83,6 +86,11 @@ public class Task implements ReadOnlyTask{
     @Override
     public Optional<UrgencyLevel> getUrgencyLevel() {
         return Optional.ofNullable(this.urgencyLevel);
+    }
+    
+    @Override
+    public Optional<StartTime> getStartTime() {
+        return Optional.ofNullable(this.startTime);
     }
     
     @Override
@@ -118,6 +126,7 @@ public class Task implements ReadOnlyTask{
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
         this.setTitle(replacement.getTitle());
+        this.setStartTime(replacement.getStartTime().orElse(null));
         this.setEndTime(replacement.getEndTime().orElse(null));
         this.setVenue(replacement.getVenue().orElse(null));
         this.setDescription(replacement.getDescription().orElse(null));
