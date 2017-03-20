@@ -26,7 +26,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
-        this.storage= storage;
+        this.storage = storage;
         this.parser = new Parser();
     }
 
