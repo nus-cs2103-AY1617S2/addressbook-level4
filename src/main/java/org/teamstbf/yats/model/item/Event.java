@@ -31,41 +31,36 @@ public class Event implements ReadOnlyEvent {
 	 * @param tags
 	 * @throws IllegalValueException
 	 */
+
 	public Event(HashMap<String, Object> parameters, UniqueTagList tags) throws IllegalValueException {
 		assert !CollectionUtil.isAnyNull(parameters.get("name"));
 		this.name = new Title((String) parameters.get("name"));
-
 		// check optional parameters' existence
 		if (parameters.get("period") != null) {
 			this.period = new Periodic((String) parameters.get("period"));
 		} else {
 			this.period = new Periodic("none");
 		}
-
 		if (parameters.get("location") != null) {
 			this.location = new Location((String) parameters.get("location"));
 		} else {
 			this.location = new Location(" ");
 		}
-
 		if (parameters.get("start") != null) {
 			this.startTime = new Schedule((String) parameters.get("start"));
 		} else {
 			this.startTime = new Schedule(" ");
 		}
-
 		if (parameters.get("end") != null) {
 			this.endTime = new Schedule((String) parameters.get("end"));
 		} else {
 			this.endTime = new Schedule(" ");
 		}
-
 		if (parameters.get("description") != null) {
 			this.description = new Description((String) parameters.get("description"));
 		} else {
 			this.description = new Description(" ");
 		}
-
 		this.isDone = false;
 		this.tags = new UniqueTagList(tags);
 	}
@@ -77,7 +72,9 @@ public class Event implements ReadOnlyEvent {
 	}
 
 	/**
+	 *
 	 * Every field must be present and not null.
+	 *
 	 */
 	public Event(Title name, Location location, Periodic periodic, Schedule startTime, Schedule endTime,
 			Description description, UniqueTagList tags) {
@@ -90,10 +87,11 @@ public class Event implements ReadOnlyEvent {
 		this.description = description;
 		this.isDone = false;
 		this.tags = new UniqueTagList(tags); // protect internal tags from
-												// changes in the arg list
+		// changes in the arg list
 	}
 
 	@Override
+
 	public boolean equals(Object other) {
 		return other == this // short circuit if same object
 				|| (other instanceof ReadOnlyItem // instanceof handles nulls
@@ -101,47 +99,55 @@ public class Event implements ReadOnlyEvent {
 	}
 
 	@Override
+
 	public Date getDeadline() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+
 	public Description getDescription() {
 		return description;
 	}
 
 	@Override
+
 	public Schedule getEndTime() {
 		return endTime;
 	}
 
 	@Override
+
 	public Location getLocation() {
 		return location;
 	}
 
 	@Override
+
 	public Periodic getPeriod() {
 		return this.period;
 	}
 
 	@Override
+
 	public Schedule getStartTime() {
 		return startTime;
 	}
 
 	@Override
+
 	public UniqueTagList getTags() {
 		return new UniqueTagList(tags);
 	}
 
 	@Override
+
 	public Title getTitle() {
 		return name;
 	}
 
 	@Override
+
 	public int hashCode() {
 		// use this method for custom fields hashing instead of implementing
 		// your own
@@ -149,11 +155,13 @@ public class Event implements ReadOnlyEvent {
 	}
 
 	/**
+	 *
 	 * Updates this person with the details of {@code replacement}.
+	 *
 	 */
+
 	public void resetData(ReadOnlyEvent replacement) {
 		assert replacement != null;
-
 		this.setTitle(replacement.getTitle());
 		this.setPeriod(replacement.getPeriod());
 		this.setLocation(replacement.getLocation());
@@ -189,8 +197,11 @@ public class Event implements ReadOnlyEvent {
 	}
 
 	/**
+	 *
 	 * Replaces this person's tags with the tags in the argument tag list.
+	 *
 	 */
+
 	public void setTags(UniqueTagList replacement) {
 		tags.setTags(replacement);
 	}
@@ -201,6 +212,7 @@ public class Event implements ReadOnlyEvent {
 	}
 
 	@Override
+
 	public String toString() {
 		return getAsText();
 	}

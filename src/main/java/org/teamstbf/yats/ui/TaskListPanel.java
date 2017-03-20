@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);

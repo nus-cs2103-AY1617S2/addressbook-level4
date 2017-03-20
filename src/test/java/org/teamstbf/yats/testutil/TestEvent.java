@@ -30,14 +30,14 @@ public class TestEvent implements ReadOnlyEvent {
 	/**
 	 * Creates a copy of {@code personToCopy}.
 	 */
-	public TestEvent(TestEvent personToCopy) {
-		this.name = personToCopy.getTitle();
-		this.period = personToCopy.getPeriod();
-		this.location = personToCopy.getLocation();
-		this.startTime = personToCopy.getStartTime();
-		this.endTime = personToCopy.getEndTime();
-		this.description = personToCopy.getDescription();
-		this.tags = personToCopy.getTags();
+	public TestEvent(TestEvent eventToCopy) {
+		this.name = eventToCopy.getTitle();
+		this.period = eventToCopy.getPeriod();
+		this.location = eventToCopy.getLocation();
+		this.startTime = eventToCopy.getStartTime();
+		this.endTime = eventToCopy.getEndTime();
+		this.description = eventToCopy.getDescription();
+		this.tags = eventToCopy.getTags();
 	}
 
 	public String getAddCommand() {
