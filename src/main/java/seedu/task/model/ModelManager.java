@@ -7,6 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.model.FilePathChangedEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
@@ -61,6 +62,11 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
+    
+    /** Raises an event to indicate the file path has changed */
+    private void indicateFilePathChanged(String newPath) {
+    	raise(new FilePathChangedEvent(newPath, taskManager));
+    }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -90,6 +96,12 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+    }
+    
+    @Override
+    public void changeFilePath(String newPath) {
+    	indicateFilePathChanged(newPath);
+    	indicateTaskManagerChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
