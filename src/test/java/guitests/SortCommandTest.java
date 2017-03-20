@@ -39,26 +39,12 @@ public class SortCommandTest extends TaskListGuiTest {
         commandBox.runCommand(commandName);
         assertSortSuccess(expectedListName);
 
-        //sort by start date
-        TestTask[] expectedListStartDate = {td.tutorial, td.cs2103T, td.groceries, td.homework, td.drink, td.java };
-        String commandStartDate = "sort sd";
-        commandBox.runCommand(commandStartDate);
+        //sort by date
+        TestTask[] expectedListDate = {td.tutorial, td.cs2103T, td.groceries, td.homework, td.drink, td.java };
+        String commandDate = "sort d";
+        commandBox.runCommand(commandDate);
         assertResultMessage(SortCommand.MESSAGE_SUCCESS);
-        assertSortSuccess(expectedListStartDate);
-
-        //sort by end date
-        TestTask[] expectedListEndDate = {td.tutorial, td.cs2103T, td.groceries, td.homework, td.drink, td.java};
-        String commandEndDate = "sort ed";
-        commandBox.runCommand(commandEndDate);
-        assertResultMessage(SortCommand.MESSAGE_SUCCESS);
-        assertSortSuccess(expectedListEndDate);
-
-        //sort by deadline date
-        TestTask[] expectedListDeadline =  {td.cs2103T, td.tutorial, td.groceries, td.homework, td.drink, td.java};
-        String commandDeadline = "sort d";
-        commandBox.runCommand(commandDeadline);
-        assertResultMessage(SortCommand.MESSAGE_SUCCESS);
-        assertSortSuccess(expectedListDeadline);
+        assertSortSuccess(expectedListDate);
 
         //sort by start priority
         TestTask[] expectedListPriority = {td.tutorial, td.drink, td.java, td.cs2103T, td.groceries, td.homework};
