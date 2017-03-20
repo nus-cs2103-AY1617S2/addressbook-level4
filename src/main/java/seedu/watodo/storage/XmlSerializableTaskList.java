@@ -13,7 +13,7 @@ import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.ReadOnlyTaskManger;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
@@ -47,7 +47,7 @@ public class XmlSerializableTaskList implements ReadOnlyTaskManger {
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<FloatingTask> tasks = this.tasks.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

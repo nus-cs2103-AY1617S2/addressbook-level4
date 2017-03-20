@@ -15,7 +15,7 @@ import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.util.FileUtil;
 import seedu.watodo.model.ReadOnlyTaskManger;
 import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.storage.XmlTaskListStorage;
 import seedu.watodo.testutil.TypicalTestTasks;
 
@@ -73,14 +73,14 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new FloatingTask(td.hoon));
-        original.removeTask(new FloatingTask(td.alice));
+        original.addTask(new Task(td.hoon));
+        original.removeTask(new Task(td.alice));
         xmlTaskListStorage.saveTaskList(original, filePath);
         readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new FloatingTask(td.ida));
+        original.addTask(new Task(td.ida));
         xmlTaskListStorage.saveTaskList(original); //file path not specified
         readBack = xmlTaskListStorage.readTaskList().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
