@@ -32,11 +32,11 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
 
-    private final Object toAdd; //TO DO: Should change event and floating task to inherit from task
+    private final Task toAdd;
 
 
     /**
-     * Creates an AddCommand using raw values.
+     * Creates an AddCommand using raw values for task.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
@@ -56,6 +56,11 @@ public class AddCommand extends Command {
         );
     }
 
+    /**
+     * Creates an AddCommand using raw values for event.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
     public AddCommand(String name, String priority, String startDate, String dueDate, String text, Set<String> tags)
         throws IllegalValueException {
 
@@ -73,6 +78,11 @@ public class AddCommand extends Command {
         );
     }
 
+    /**
+     * Creates an AddCommand using raw values for floating task.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
     public AddCommand(String name, String priority, String text, Set<String> tags)
         throws IllegalValueException {
 
@@ -92,7 +102,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addTask((Task) toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

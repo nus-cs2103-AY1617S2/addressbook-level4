@@ -12,7 +12,6 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
 
         + ": Completes the task identified by the index number used in the last task list.\n"
-
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 

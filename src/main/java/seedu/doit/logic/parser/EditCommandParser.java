@@ -15,7 +15,7 @@ import java.util.Optional;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.EditCommand;
-import seedu.doit.logic.commands.EditCommand.EditEventDescriptor;
+import seedu.doit.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.model.tag.UniqueTagList;
 
@@ -42,7 +42,7 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
+        EditTaskDescriptor editEventDescriptor = new EditTaskDescriptor();
 
         try {
             editEventDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
