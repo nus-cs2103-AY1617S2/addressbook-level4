@@ -2,8 +2,8 @@
 
 This product is a tool to accept natural language commands via keyboards to manage the user's schedule and todo tasks.
 
-* [Start the program](#start-the-program)
-* [Commands](#commands)
+* [Getting Started](#getting-started)
+* [Feature Details](#feature-details)
 	* [help](#view-help--help)
 	* [add](#add-a-task-add)
 	* [delete](#delete-a-task-delete)
@@ -16,12 +16,17 @@ This product is a tool to accept natural language commands via keyboards to mana
 
 
 
-## Start the program
+## Getting Started
+Double click the JOBS.jar file to start the program.
 
-1. Double click the JOBS.jar file to start the program.
-2. The application will be launched in few seconds.
+1. User input/command bar: Enter your to-dos here easily using the given Command Tags.
+2. Display screen: Your tasks are categorised and displayed here according to time and priority by default.
+3. Task category: This shows the type or category that the displayed tasks belong to (e.g. ALL TASKS,
+OVERDUE TASKS, #Assignment, etc.)
+6. Calendar screen: Your tasks wiil be displayed on the monthly calender.
+7. Exit button: Click to exit the program. Alternatively, type exit in the command bar to exit.
 
-## Commands
+## Feature Details
 
 ### View help : `help`
 Format: `help`
@@ -30,7 +35,7 @@ Format: `help`
 2. Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ### Add a task: `add`
-Add is the command word to add a task to the task handler application.
+Add is the command word to add a task to the task handler application
 
 Format: `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
 
@@ -46,7 +51,7 @@ Example :
 * `add name/swim desc/"Remember to swim"`
 
 ### Delete a task: `delete`
-Delete is the command word that can be used to delete a task.
+Delete is the command word that can be used to delete a task
 
 Format: `delete index/INDEX`
 
@@ -54,7 +59,8 @@ Example:
 * `Delete 1`
 
 ### Find a task: `find`
-Find is the command word that can be used to find a task.
+Find is the command word that can be used to find a task
+
 Format: `find name/Name`
 >The command finds tasks which have names containing any of the given keywords including substring.
 
@@ -64,6 +70,7 @@ Example:
 
 ### List tasks : `list`
 List is the command word to list down all the existing tasks
+
 Formats: `list * | completed | pending | overdue`
 1. \* will list all tasks
 2. completed will list all completed tasks
@@ -78,6 +85,7 @@ Example:
 
 ### Update a task: `update`
 Update is the command word to edit a specific tasks
+
 Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 1. The commands inside square bracket are optional.
 >User updates a specific task by specifying the new entry they wish to be reflected on the existing task list
@@ -87,7 +95,8 @@ Example:
 * `update index/2 start/02-04-17 17:20`
 
 ### Exit the program : `exit`
-Exits the program.
+Exits the program
+
 Format: `exit`  
 
 ### Save the data 
