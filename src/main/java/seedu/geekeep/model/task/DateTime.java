@@ -14,6 +14,7 @@ public class DateTime {
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date and time format should be in this format: DD-MM-YY HHMM";
     public static final String DATETIME_VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{2}\\s{1}\\d{4}";
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
     /**
      *  Validates given dateTime.
@@ -24,7 +25,6 @@ public class DateTime {
 
     public final LocalDateTime dateTime;
     public final String value;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
     public DateTime(String dateTimeString) throws IllegalValueException {
         if (!isValidDateTime(dateTimeString)) {
