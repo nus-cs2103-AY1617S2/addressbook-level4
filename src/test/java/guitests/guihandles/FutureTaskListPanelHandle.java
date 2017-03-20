@@ -45,7 +45,7 @@ public class FutureTaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param tasks
      *            A list of task in the correct order.
      * @throws IllegalValueException
@@ -59,7 +59,7 @@ public class FutureTaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param startPosition
      *            The starting position of the sub list.
      * @param tasks
@@ -168,7 +168,8 @@ public class FutureTaskListPanelHandle extends GuiHandle {
     public TaskCardHandle getTaskCardHandle(int index)
             throws IllegalValueException {
         ReadOnlyTask source = getListView().getItems().get(index);
-        if (source.getTaskType() == TaskType.TaskWithNoDeadline) {
+        if (source.getTaskType() == TaskType.TaskWithNoDeadline
+                || source.getTaskType() == null) {
             return getTaskCardHandle(new TaskWithoutDeadline(
                     getListView().getItems().get(index)));
         } else {

@@ -80,10 +80,13 @@ public interface ReadOnlyTask {
     }
 
     default boolean hasSameDateTime(ReadOnlyTask other) {
-        if (this.getTaskType() != other.getTaskType()) {
-            return false;
-        } else if (this.getTaskType() == TaskType.TaskWithNoDeadline) {
+        if ((this.getTaskType() == null
+                || this.getTaskType() == TaskType.TaskWithNoDeadline)
+                && (other.getTaskType() == null || other
+                        .getTaskType() == TaskType.TaskWithNoDeadline)) {
             return true;
+        } else if (this.getTaskType() != other.getTaskType()) {
+            return false;
         } else {
             return this.getTaskAbsoluteDateTime()
                     .equals(other.getTaskAbsoluteDateTime());

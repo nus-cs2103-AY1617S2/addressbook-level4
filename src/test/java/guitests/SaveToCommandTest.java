@@ -6,15 +6,19 @@ import java.io.File;
 
 import org.junit.Test;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.testutil.TestUtil;
 
 public class SaveToCommandTest extends TaskManagerGuiTest {
-    private static final String TEST_SAVE_LOCATION = FileUtil.getPath("./src/test/data/SaveToCommandTest/");
-    private static final File newTestStorage = new File(TEST_SAVE_LOCATION + "taskmanager.xml");
+    private static final String TEST_SAVE_LOCATION = FileUtil
+            .getPath("./src/test/data/SaveToCommandTest/");
+    private static final File newTestStorage = new File(
+            TEST_SAVE_LOCATION + "taskmanager.xml");
 
     @Test
-    public void saveTo() {
+    public void saveTo()
+            throws IllegalArgumentException, IllegalValueException {
         // verify that 'saveto' command doesn't affect list
         assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
         assertSaveToSuccess();
@@ -22,7 +26,8 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
 
         // verify other commands can work after a saveto command
         commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(futureTaskListPanel.isListMatching(TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
+        assertTrue(futureTaskListPanel.isListMatching(
+                TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
         commandBox.runCommand("delete 1");
         assertListSize(td.getTypicalTasks().length);
     }
