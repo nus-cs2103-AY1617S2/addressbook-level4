@@ -32,15 +32,16 @@ Format: `help`
 ### Add a task: `add`
 Add is the command word to add a task to the task handler application.
 Format: `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
+
 1. The commands inside square brackets are optional.
-2. The time format follows `DD-MM-YY HH:mm`
+2. The time format follows `DD/MM/YY hh:mm`
 3. If no deadline and task-type supplied, the task will be considered a **floating task**
 4. If only one time supplied, the task will be considered a **task with deadline**
 5. The recur specifies the recurrence period **in days**.
 
 Example :
-* `add name/tutorial start/13-01-17 11:00 end/13-01-17 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
-* `add name/v0.0 end/03-03-17 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
+* `add name/tutorial start/13/01/17 11:00 end/13/01/17 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
+* `add name/v0.0 end/03/03/17 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
 * `add name/swim desc/"Remember to swim"`
 
 ### Delete a task: `delete`
@@ -75,7 +76,7 @@ Example:
 
 ### Update a task: `update`
 Update is the command word to edit a specific tasks
-Format : `update index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 1. The commands inside square bracket are optional.
 >User updates a specific task by specifying the new entry they wish to be reflected on the existing task list
 
