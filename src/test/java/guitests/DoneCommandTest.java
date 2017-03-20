@@ -6,6 +6,7 @@ import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.tasklist.commons.core.Messages;
 import seedu.tasklist.logic.commands.DoneCommand;
 import seedu.tasklist.testutil.DeadlineTaskBuilder;
 import seedu.tasklist.testutil.EventTaskBuilder;
@@ -85,6 +86,12 @@ public class DoneCommandTest extends TaskListGuiTest {
     public void done_missingIndex_failure() throws Exception {
         commandBox.runCommand("done");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void done_invalidIndex_failure() throws Exception {
+        commandBox.runCommand("done 100");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
 
