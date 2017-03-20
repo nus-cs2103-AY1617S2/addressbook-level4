@@ -59,6 +59,6 @@ public interface Model {
             Set<String> tagKeys);
 
     /** Informs eventbus about the change in save location */
-    void updateSaveLocation();
+    void updateSaveLocation(String path);
 
 }

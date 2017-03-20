@@ -23,7 +23,7 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private StatusBar syncStatus;
     @FXML
-    private StatusBar saveLocationStatus;
+    private StatusBar messageStatus;
 
     private static final String FXML = "StatusBarFooter.fxml";
 
@@ -41,7 +41,11 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void setSaveLocation(String location) {
-        this.saveLocationStatus.setText(location);
+        setMessageStatus(location);
+    }
+    
+    private void setMessageStatus(String status) {
+        this.messageStatus.setText(status);
     }
 
     private void setSyncStatus(String status) {
@@ -53,5 +57,6 @@ public class StatusBarFooter extends UiPart<Region> {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
+        setMessageStatus(abce.message);
     }
 }
