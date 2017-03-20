@@ -87,7 +87,7 @@ public class ToDoApp implements ReadOnlyToDoApp {
         syncMasterTagListWith(p);
         tasks.add(p);
     }
-    
+
     /**
      * Adds a task to the address book at a specified index.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
