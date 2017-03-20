@@ -46,7 +46,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     /**
-     * Task Constructor every field must be present except for startTime and
+     * FloatingTask Constructor every field must be present except for startTime and
      * endTime.
      */
     public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
@@ -83,6 +83,16 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         assert priority != null;
         this.priority = priority;
     }
+
+    @Override
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
 
     @Override
     public StartTime getStartTime() {

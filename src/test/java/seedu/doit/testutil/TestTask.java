@@ -59,6 +59,15 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     @Override
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    @Override
     public StartTime getStartTime() {
         return startTime;
     }
@@ -84,6 +93,8 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public void setDescription(Description description) {
         this.description = description;
     }
+
+
 
     @Override
     public boolean hasStartTime() {
