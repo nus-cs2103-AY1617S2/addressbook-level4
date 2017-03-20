@@ -11,11 +11,11 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Title getTitle();
+    Optional<StartTime> getStartTime();
     Optional<EndTime> getEndTime();
     Optional<Venue> getVenue();
     Optional<Description> getDescription();
     Optional<UrgencyLevel> getUrgencyLevel();
-    Boolean hasTaskCompleted();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -30,6 +30,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
+                && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())
                 && other.getVenue().equals(this.getVenue())
                 && other.getDescription().equals(this.getDescription()));
@@ -45,8 +46,7 @@ public interface ReadOnlyTask {
                 .append(getTitle())
                 .append(getVenueString())
                 .append(getDescriptionString())
-                .append(getEndTimeString())
-                .append(getStatusString());
+                .append(getEndTimeString());
 
         getTags().forEach(builder::append);
         return builder.toString();
@@ -59,24 +59,20 @@ public interface ReadOnlyTask {
         return getVenue().isPresent()? "At: " + getVenue().get().toString() : "";
     }
     
-    default String getDescriptionString(){
-        return getDescription().isPresent()? "Description: " + getDescription().get().toString() : "";
+    default String getStartTimeString(){
+        return getStartTime().isPresent()? "Start at: "+ getStartTime().get().toString() : "";
     }
     
     default String getEndTimeString(){
-        return getEndTime().isPresent()? "Due at: "+ getEndTime().get().toString() : "";
+        return getEndTime().isPresent()? "Done by: "+ getEndTime().get().toString() : "";
     }
     
     default String getUrgencyLevelString(){
-        return getUrgencyLevel().isPresent()? "Urgency: "+ getUrgencyLevel().get().toString() : "";
+        return getUrgencyLevel().isPresent() ? "Urgency level at: " +getUrgencyLevel().get().toString() : "";
     }
     
-    default String getStatusString(){
-        return hasTaskCompleted()? "Status: Completed" : "Status: Not completed";
-    }
-    
-    default String getStatusDisplay(){
-        return hasTaskCompleted()? getTitle().toString()+" [DONE]!!" : getTitle().toString();
+    default String getDescriptionString(){
+        return getDescription().isPresent()? "Description: " + getDescription().get().toString() : "";
     }
     //@@
 
