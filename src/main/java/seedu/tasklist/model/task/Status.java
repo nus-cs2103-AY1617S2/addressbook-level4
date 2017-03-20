@@ -22,16 +22,19 @@ public class Status {
         this.status = status;
     }
 
+    //@@author A0143355J
     public boolean getStatus() {
-        return status;
+        return this.status;
     }
 
+    //@@author A0143355J
     public void setCompleted() {
-        status = COMPLETED;
+        this.status = COMPLETED;
     }
 
+    //@@author A0143355J
     public void setUncompleted() {
-        status = UNCOMPLETED;
+        this.status = UNCOMPLETED;
     }
 
     @Override
