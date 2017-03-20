@@ -480,7 +480,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            PriorityLevel privatePriorityLevel = new PriorityLevel("High priority");
+            PriorityLevel privatePriorityLevel = new PriorityLevel("Yes");
             DateTime startDateTime = new DateTime("today 5pm");
             DateTime endDateTime = new DateTime("tomorrow 8pm");
             Information privateInformation = new Information("111, alpha street");
