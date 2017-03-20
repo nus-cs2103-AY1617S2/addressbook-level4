@@ -29,10 +29,10 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.description = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriority();
+        this.complete = taskToCopy.isComplete();
         this.startDate = taskToCopy.getStartTiming();
         this.endDate = taskToCopy.getEndTiming();
         this.tags = taskToCopy.getTags();
-        this.complete = false;
     }
 
     public void setDescription(Description description) {
@@ -49,6 +49,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -76,6 +80,11 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public boolean isComplete() {
+        return complete;
+    }
+
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -85,6 +94,7 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //TODO add complete instance variable?
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
@@ -93,11 +103,6 @@ public class TestTask implements ReadOnlyTask {
         sb.append("ed/" + this.getEndTiming().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
-    }
-
-    @Override
-    public boolean isComplete() {
-        return this.complete;
     }
 
 }

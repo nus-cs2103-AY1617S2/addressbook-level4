@@ -1,15 +1,16 @@
 package seedu.task.model.task;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the ToDo List.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the ToDo List. Guarantees: details are present and not
+ * null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask, Comparable<Task> {
 
     private Description description;
     private Priority priority;
@@ -29,15 +30,16 @@ public class Task implements ReadOnlyTask {
         this.startTiming = startTiming;
         this.endTiming = endTiming;
         this.complete = false;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getStartTiming(),
-            source.getEndTiming(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getStartTiming(), source.getEndTiming(),
+                source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -84,6 +86,7 @@ public class Task implements ReadOnlyTask {
         this.complete = true;
     }
 
+    @Override
     public boolean isComplete() {
         return this.complete;
     }
@@ -117,12 +120,13 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(description, priority, startTiming, endTiming, tags);
     }
 
@@ -130,5 +134,33 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+
+    /**
+     * Results in Tasks sorted by priority, followed by endDate, then startDate.
+     * Note: If a and b are tasks and a.compareTo(b) == 0, that does not imply
+     * a.equals(b).
+     */
+    @Override
+    public int compareTo(Task compareTask) {
+
+        int compareToResult = this.priority.compareTo(compareTask.priority);
+
+        if (compareToResult == 0) {
+            compareToResult = this.endTiming.compareTo(compareTask.endTiming);
+        }
+
+        if (compareToResult == 0) {
+            compareToResult = this.startTiming.compareTo(compareTask.startTiming);
+        }
+        return compareToResult;
+    }
+
+    public static Comparator<Task> TaskComparator = new Comparator<Task>() {
+
+        public int compare(Task task1, Task task2) {
+            return task1.compareTo(task2);
+        }
+
+    };
 
 }
