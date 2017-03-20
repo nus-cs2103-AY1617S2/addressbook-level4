@@ -23,15 +23,15 @@ public class Status {
     }
 
     public boolean getStatus() {
-        return this.status;
+        return status;
     }
 
     public void setCompleted() {
-        this.status = COMPLETED;
+        status = COMPLETED;
     }
 
     public void setUncompleted() {
-        this.status = UNCOMPLETED;
+        status = UNCOMPLETED;
     }
 
     @Override
