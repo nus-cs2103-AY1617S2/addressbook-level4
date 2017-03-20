@@ -23,7 +23,6 @@ import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.FindController;
-import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
 import seedu.toluist.controller.RedoController;
@@ -32,6 +31,7 @@ import seedu.toluist.controller.SwitchController;
 import seedu.toluist.controller.TagController;
 import seedu.toluist.controller.UnaliasController;
 import seedu.toluist.controller.UndoController;
+import seedu.toluist.controller.UnknownCommandController;
 import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
@@ -65,7 +65,7 @@ public class CommandDispatcher extends Dispatcher {
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
-                .orElse(new ListController(renderer)); // fail-safe
+                .orElse(new UnknownCommandController(renderer)); // fail-safe
     }
 
     private Collection<Class <? extends Controller>> getAllControllerClasses() {
@@ -87,7 +87,7 @@ public class CommandDispatcher extends Dispatcher {
                 TagController.class,
                 MarkController.class,
                 SwitchController.class,
-                ListController.class
+                UnknownCommandController.class
         ));
     }
 
@@ -101,7 +101,7 @@ public class CommandDispatcher extends Dispatcher {
                     } catch (NoSuchMethodException | InstantiationException
                             | IllegalAccessException | InvocationTargetException e) {
                         // fail-safe. But should not actually reach here
-                        return new ListController(renderer);
+                        return new UnknownCommandController(renderer);
                     }
                 })
                 .collect(Collectors.toList());

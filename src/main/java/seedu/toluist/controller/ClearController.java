@@ -11,7 +11,7 @@ import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
- * ListController is responsible for rendering the initial UI
+ * UnknownCommandController is responsible for rendering the initial UI
  */
 public class ClearController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(ClearController.class);
