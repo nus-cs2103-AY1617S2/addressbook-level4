@@ -49,7 +49,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ TodoList methods ==============================
-
+    
+    //@@author A0163720M
     /** Raises an event to indicate the save file path has changed */
     private void indicateSaveFilePathChanged(String saveFilePath) {
         raise(new SaveFilePathChangedEvent(saveFilePath));
@@ -82,7 +83,7 @@ public class StorageManager extends ComponentManager implements Storage {
         todoListStorage.saveTodoList(todoList, filePath);
     }
 
-
+    //@@author A0163720M
     public void updateSaveFilePath(String saveFilePath) throws DataConversionException, IOException {
         logger.fine("Attempting to update save file: " + saveFilePath);
 
@@ -113,7 +114,8 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
+    
+    //@@author A0163720M
     @Override
     @Subscribe
     public void handleSaveFilePathChangedEvent(SaveFilePathChangedEvent event) {
