@@ -25,6 +25,9 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
         assertTrue(futureTaskListPanel.isListMatching(TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
         commandBox.runCommand("delete 1");
         assertListSize(td.getTypicalTasks().length);
+
+        assertTrue(newTestStorage.delete());
+        assertTrue(newTestStorage.getParentFile().delete());
     }
 
     private void assertSaveToSuccess() {
@@ -34,8 +37,6 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("saveto " + TEST_SAVE_LOCATION);
         assertTrue(FileUtil.isFileExists(newTestStorage));
-        newTestStorage.delete();
-        newTestStorage.getParentFile().delete();
     }
 
 }
