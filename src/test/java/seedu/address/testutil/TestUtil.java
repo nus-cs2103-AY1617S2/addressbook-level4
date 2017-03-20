@@ -29,6 +29,7 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.commands.SaveFileCommand;
 import seedu.address.model.TodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -52,6 +53,8 @@ public class TestUtil {
     public static final Todo[] SAMPLE_TODO_DATA = getSampleTodoData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
+
+    public static final String SAVE_FILE_TEST = "src/test/data/SaveFileTest/saveFileTest.xml";
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -354,4 +357,10 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    //@@author A0163720M
+    public static String getSaveFileCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(SaveFileCommand.COMMAND_WORD + " " + SAVE_FILE_TEST);
+        return sb.toString();
+    }
 }

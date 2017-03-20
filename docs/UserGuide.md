@@ -176,7 +176,7 @@ If the path does not exist it will be created
 
 Examples:
 
-* `save Documents/savefiles/`
+* `savefile Documents/savefiles/`
 
 ## 3. FAQ
 
