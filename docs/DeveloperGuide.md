@@ -29,6 +29,7 @@ In order to better contribute, you should:
     * [Configuration](#user-content-config)
 4. [Testing](#user-content-4)
     * [Running Tests](#user-content-rt)
+    * [Troubleshooting Tests](#user-content-tt)
     * [Writing Tests](#user-content-wt)
 5. [Dev Ops](#user-content-5)
     * [Build Automation](#user-content-ba)
@@ -135,7 +136,7 @@ interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.2 : Class Diagram of the Logic Component_
 
-##### Events-Driven nature of the design
+**Events-Driven nature of the design**
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
@@ -298,13 +299,15 @@ There are two types of tests in this project:
       how the are connected together.<br>
       e.g. `seedu.geekeep.logic.LogicManagerTest`
 
-#### Headless GUI Testing
+**Headless GUI Testing**
+
 Fortunately, because this project uses the [TestFX](https://github.com/TestFX/TestFX) library, you can
  run GUI tests in _headless_ mode where the GUI tests do not show up on the screen.
  This means you can do other things on the computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-#### Troubleshooting tests
+<h3 id="user-content-tt">Troubleshooting Tests</h3>
+
  **Problem: Tests fail because NullPointException when AssertionError is expected**
  * Reason: Assertions are not enabled for JUnit tests.
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
@@ -426,7 +429,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the System is the GeeKeep and the Actor is the user, unless specified otherwise)
 
-#### **Use case: UC01 - `Reschedule a task`**
+**Use case: UC01 - `Reschedule a task`**
 
 MSS:
 
@@ -462,7 +465,7 @@ Extensions:
 > 3c1. GeeKeep shows an error message.<br>
 > Use case resumes at step 3.
 
-#### **Use case: UC02 - `View summary of tasks for today`**
+**Use case: UC02 - `View summary of tasks for today`**
 
 MSS:
 
@@ -538,7 +541,7 @@ Extensions:
 > (e.g., do an internship).
 <h3 id="user-content-ae">Appendix E : Product Survey</h3>
 
-#### [Google Keep](https://www.google.com/keep/)
+ **[Google Keep](https://www.google.com/keep/)**
 
 Author: Goh Yi Rui
 
@@ -570,7 +573,7 @@ Cons:
 
 * No project management features
 
-#### [Google Calendar](https://www.google.com/calendar)
+**[Google Calendar](https://www.google.com/calendar)**
 
 Author: Zhang Hanming
 
@@ -594,7 +597,7 @@ Cons:
 
 * A calendar more than a task manager
 
-#### [Gmail Tasks](https://mail.google.com/tasks/canvas)
+**[Gmail Tasks](https://mail.google.com/tasks/canvas)**
 
 Author: Liu Ziyang
 
@@ -622,7 +625,7 @@ Cons:
 
 * Poor UI with no displaying difference between urgent and non-urgent tasks
 
-#### [Habitica](https://habitica.com/static/front)
+**[Habitica](https://habitica.com/static/front)**
 
 Author: How Si Wei
 
