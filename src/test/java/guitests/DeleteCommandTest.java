@@ -34,6 +34,16 @@ public class DeleteCommandTest extends TaskListGuiTest {
 
     }
 
+    @Test
+    public void deleteWithFlexibleCommand() {
+        //execute command with acceptable alternative "remove"
+        TestTask[] currentList = td.getTypicalTasks();
+        int targetIndex = 1;
+        commandBox.runCommand("remove 1");
+        TestTask[] expectedList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        assertTrue(taskListPanel.isListMatching(expectedList));
+
+    }
     /**
      * Runs the delete command to delete the task at specified index and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,

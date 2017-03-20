@@ -173,13 +173,18 @@ public class ParserUtil {
      */
     public static String parseFlexiblePrefix(String input) {
         String result = input;
-        result.toLowerCase();
+        System.out.println("input is: " + input);
         Set<String> keys = flexiblePrefixes.keySet();
         for (String key: keys) {
-            if (input.contains(key)) {
-                result = result.replaceAll(key, flexiblePrefixes.get(key));
+            System.out.println("current key: " + key);
+            //locate the case insensitive acceptable alternate prefixes from the input.
+            if (Pattern.compile(Pattern.quote(key), Pattern.CASE_INSENSITIVE).matcher(result).find()) {
+                System.out.println("match found " + key);
+                result = result.replaceAll("(?i)" + key, flexiblePrefixes.get(key));
+                System.out.println("intermediate result: " + result);
             }
         }
+        System.out.println("res is: " + result);
         return result;
     }
 }
