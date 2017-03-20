@@ -226,7 +226,7 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name d/not_numbers s/undone b/valid, address",
                 DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/notAn@Email.com b/valid, address",
-                Status.MESSAGE_EMAIL_CONSTRAINTS);
+                Status.MESSAGE_STATUS_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/undone b/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -306,7 +306,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
 
-        assertCommandSuccess("show",
+        assertCommandSuccess("lists",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
@@ -316,7 +316,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
 
-        assertCommandSuccess("showall",
+        assertCommandSuccess("displays",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
@@ -565,7 +565,7 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName("Person " + seed),
                     new DueDate("" + Math.abs(seed)),
-                    new Status(seed + "undone"),
+                    new Status("undone"),
                     new BeginDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -577,9 +577,8 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append(command);
-
             cmd.append(p.getTaskName().toString());
-            cmd.append(" s/").append(p.getEmail());
+            cmd.append(" s/").append(p.getStatus());
             cmd.append(" d/").append(p.getPhone());
             cmd.append(" b/").append(p.getAddress());
 

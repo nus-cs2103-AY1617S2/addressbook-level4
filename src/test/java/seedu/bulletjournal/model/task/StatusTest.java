@@ -1,3 +1,4 @@
+//@@author A0105748B
 package seedu.bulletjournal.model.task;
 
 import static org.junit.Assert.assertFalse;
@@ -8,33 +9,33 @@ import org.junit.Test;
 public class StatusTest {
 
     @Test
-    public void isValidEmail() {
-        // blank email
-        assertFalse(Status.isValidEmail("")); // empty string
-        assertFalse(Status.isValidEmail(" ")); // spaces only
+    public void isValidStatus() {
+        // blank status
+        assertFalse(Status.isValidStatus("")); // empty string
+        assertFalse(Status.isValidStatus(" ")); // spaces only
 
         // missing parts
-//        assertFalse(Status.isValidEmail("@webmail.com")); // missing local part
-//        assertFalse(Status.isValidEmail("peterjackwebmail.com")); // missing '@' symbol
-//        assertFalse(Status.isValidEmail("peterjack@")); // missing domain name
+        assertFalse(Status.isValidStatus("@webmail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peterjackwebmail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peterjack@")); // not specific word
 
         // invalid parts
-//        assertFalse(Status.isValidEmail("-@webmail.com")); // invalid local part
-//        assertFalse(Status.isValidEmail("peterjack@-")); // invalid domain name
-//        assertFalse(Status.isValidEmail("peter jack@webmail.com")); // spaces in local part
-//        assertFalse(Status.isValidEmail("peterjack@web mail.com")); // spaces in domain name
-//        assertFalse(Status.isValidEmail("peterjack@@webmail.com")); // double '@' symbol
-//        assertFalse(Status.isValidEmail("peter@jack@webmail.com")); // '@' symbol in local part
-//        assertFalse(Status.isValidEmail("peterjack@webmail@com")); // '@' symbol in domain name
+        assertFalse(Status.isValidStatus("-@webmail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peterjack@-")); // not specific word
+        assertFalse(Status.isValidStatus("peter jack@webmail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peterjack@web mail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peterjack@@webmail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peter@jack@webmail.com")); // not specific word
+        assertFalse(Status.isValidStatus("peterjack@webmail@com")); // not specific word
 
-        // valid email
-        assertTrue(Status.isValidEmail("done"));
-//        assertTrue(Status.isValidEmail("a@b"));  // minimal
-//        assertTrue(Status.isValidEmail("test@localhost"));   // alphabets only
-//        assertTrue(Status.isValidEmail("123@145"));  // numeric local part and domain name
-//        assertTrue(Status.isValidEmail("a1@sg50.org"));  // mixture of alphanumeric and dot characters
-//        assertTrue(Status.isValidEmail("_user_@_do_main_.com_"));    // underscores
-//        assertTrue(Status.isValidEmail("peter_jack@a_very_long_domain_AVLD.com"));   // long domain name
-//        assertTrue(Status.isValidEmail("if.you.dream.it_you.can.do.it@youth_email.com"));    // long local part
+        // valid status
+        assertTrue(Status.isValidStatus("undone"));
+        assertTrue(Status.isValidStatus("undone"));  // specific word
+        assertTrue(Status.isValidStatus("done"));   // specific word
+        assertTrue(Status.isValidStatus("done"));  // specific word
+        assertTrue(Status.isValidStatus("done"));  // specific word
+        assertTrue(Status.isValidStatus("undone"));    // specific word
+        assertTrue(Status.isValidStatus("done"));   // specific word
+        assertTrue(Status.isValidStatus("undone"));    // specific word
     }
 }

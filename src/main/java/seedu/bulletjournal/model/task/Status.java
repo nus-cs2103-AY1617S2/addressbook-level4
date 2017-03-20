@@ -1,3 +1,4 @@
+//@@author A0105748B
 package seedu.bulletjournal.model.task;
 
 
@@ -5,36 +6,36 @@ import seedu.bulletjournal.commons.exceptions.IllegalValueException;
 
 /**
  * Email morphed into completion status of task
- * Represents a Person's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Task's status in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
  */
 public class Status {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+";
+    public static final String MESSAGE_STATUS_CONSTRAINTS =
+            "Task status should be done/undone.";
+    public static final String STATUS_VALIDATION_REGEX = "(done|undone)";
 
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given status.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given status string is invalid.
      */
-    public Status(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+    public Status(String status) throws IllegalValueException {
+        assert status != null;
+        String trimmedEmail = status.trim().toLowerCase();
+        if (!isValidStatus(trimmedEmail)) {
+            throw new IllegalValueException(MESSAGE_STATUS_CONSTRAINTS);
         }
         this.value = trimmedEmail;
     }
 
     /**
-     * Returns if a given string is a valid person email.
+     * Returns if a given string is a valid task status.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidStatus(String test) {
+        return test.matches(STATUS_VALIDATION_REGEX);
     }
 
     @Override

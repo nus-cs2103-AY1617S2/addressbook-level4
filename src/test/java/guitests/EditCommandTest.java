@@ -25,6 +25,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
+
         String detailsToEdit = "Burn clothes d/91234567 s/undone b/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
@@ -98,7 +99,7 @@ public class EditCommandTest extends TodoListGuiTest {
         assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 s/yahoo!!!");
-        assertResultMessage(Status.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(Status.MESSAGE_STATUS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 b/");
         assertResultMessage(BeginDate.MESSAGE_ADDRESS_CONSTRAINTS);

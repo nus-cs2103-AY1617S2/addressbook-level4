@@ -11,11 +11,11 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Todo List App";
+    private String appTitle = "Bullet Journal";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String todoListFilePath = "data/todolist.xml";
-    private String todoListName = "MyTodoList";
+    private String todoListFilePath = "data/bulletjournal.xml";
+    private String todoListName = "MyBulletJournal";
 
 
     public String getAppTitle() {

@@ -28,7 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask personToCopy) {
         this.taskName = personToCopy.getTaskName();
         this.dueDate = personToCopy.getPhone();
-        this.status = personToCopy.getEmail();
+        this.status = personToCopy.getStatus();
         this.beginDate = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
@@ -64,7 +64,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Status getEmail() {
+    public Status getStatus() {
         return status;
     }
 
@@ -92,7 +92,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append(addCommand + this.getTaskName().fullName + " ");
         sb.append("b/" + this.getAddress().value + " ");
         sb.append("d/" + this.getPhone().value + " ");
-        sb.append("s/" + this.getEmail().value + " ");
+        sb.append("s/" + this.getStatus().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

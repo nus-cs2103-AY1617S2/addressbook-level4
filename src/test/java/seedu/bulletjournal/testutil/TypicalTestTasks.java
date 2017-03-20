@@ -19,13 +19,13 @@ public class TypicalTestTasks {
                     .withBeginDate("123, Jurong West Ave 6, #08-111").withStatus("undone")
                     .withDueDate("85355255").withTags("friends").build();
             buymilk = new TaskBuilder().withTaskName("Buy milk").withBeginDate("311, Clementi Ave 2, #02-25")
-                    .withStatus("undone").withDueDate("98765432").withTags("owesMoney", "friends").build();
+                    .withStatus("done").withDueDate("98765432").withTags("owesMoney", "friends").build();
             creatework = new TaskBuilder().withTaskName("Create more work").withDueDate("95352563")
-                    .withStatus("undone").withBeginDate("wall street").build();
+                    .withStatus("done").withBeginDate("wall street").build();
             dumpmilk = new TaskBuilder().withTaskName("Dump milk").withDueDate("87652533")
                     .withStatus("undone").withBeginDate("10th street").build();
             eatleftovers = new TaskBuilder().withTaskName("Eat leftovers").withDueDate("9482224")
-                    .withStatus("undone").withBeginDate("michegan ave").build();
+                    .withStatus("done").withBeginDate("michegan ave").build();
             findsocks = new TaskBuilder().withTaskName("Find socks").withDueDate("9482427")
                     .withStatus("undone").withBeginDate("little tokyo").build();
             getclothes = new TaskBuilder().withTaskName("Get clothes").withDueDate("9482442")
@@ -33,7 +33,7 @@ public class TypicalTestTasks {
 
             // Manually added
             hangclothes = new TaskBuilder().withTaskName("Hang up clothes").withDueDate("8482424")
-                    .withStatus("undone").withBeginDate("little india").build();
+                    .withStatus("done").withBeginDate("little india").build();
             interviewprep = new TaskBuilder().withTaskName("Interview preparation").withDueDate("8482131")
                     .withStatus("undone").withBeginDate("chicago ave").build();
         } catch (IllegalValueException e) {

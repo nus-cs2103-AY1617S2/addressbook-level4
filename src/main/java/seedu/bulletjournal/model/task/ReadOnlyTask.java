@@ -10,8 +10,9 @@ public interface ReadOnlyTask {
 
     TaskName getTaskName();
     DueDate getPhone();
-    Status getEmail();
+    Status getStatus();
     BeginDate getAddress();
+
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -27,7 +28,7 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
                 && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
+                && other.getStatus().equals(this.getStatus())
                 && other.getAddress().equals(this.getAddress()));
     }
 
@@ -40,7 +41,7 @@ public interface ReadOnlyTask {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
-                .append(getEmail())
+                .append(getStatus())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Tags: ");
