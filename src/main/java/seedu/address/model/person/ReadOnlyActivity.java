@@ -11,6 +11,11 @@ public interface ReadOnlyActivity {
     Description getDescription();
     Priority getPriority();
     Location getLocation();
+    StartTime getStartTime();
+    EndTime getEndTime();
+    FromDate getFromDate();
+    ByDate getByDate();
+    ToDate getToDate();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
