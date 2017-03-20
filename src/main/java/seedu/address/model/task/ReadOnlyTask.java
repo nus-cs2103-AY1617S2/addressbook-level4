@@ -67,4 +67,24 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    default String getAsSearchText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getTitle());
+        if (getStartTime().isPresent()) {
+            builder.append(" " + getStartTime().get().toString() + " ");
+        }
+        if (getDeadline().isPresent()) {
+            builder.append(" " + getDeadline().get().toString() + " ");
+        }
+        if (isCompleted()) {
+            builder.append(" Completed ");
+        } else {
+            builder.append(" Incomplete ");
+        }
+        getLabels().forEach(label -> builder.append(" " + label + " "));
+        getBookings().forEach(booking -> builder.append(" " + booking + " "));
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
 }

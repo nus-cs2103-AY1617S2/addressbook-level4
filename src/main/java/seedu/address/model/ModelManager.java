@@ -12,7 +12,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.exceptions.InvalidUndoCommandException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.model.datastructure.PartialSearch;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -171,18 +171,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+            String taskDetails = task.getAsSearchText();
+            PartialSearch partialSearch = new PartialSearch(taskDetails);
+            return (nameKeyWords.stream()
+                    .filter(keyword -> partialSearch.search(keyword))
                     .findAny()
-                    .isPresent() ||
-                    nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDeadline().toString(), keyword))
-                    .findAny()
-                    .isPresent() ||
-                    nameKeyWords.stream()
-                    .filter(keyword -> task.getLabels().containsStringLabel(keyword))
-                    .findAny()
-                    .isPresent();
+                    .isPresent());
         }
 
         @Override
