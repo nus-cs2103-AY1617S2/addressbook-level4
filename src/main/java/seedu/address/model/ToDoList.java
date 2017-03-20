@@ -64,12 +64,12 @@ public class ToDoList implements ReadOnlyToDoList {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "ToDoLists should not have duplicate Tasks";
+            assert false : "To-Do Lists should not have duplicate Tasks";
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "ToDoLists should not have duplicate tags";
+            assert false : "To-Do Lists should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
     }
@@ -77,7 +77,7 @@ public class ToDoList implements ReadOnlyToDoList {
 //// Task-level operations
 
     /**
-     * Adds a Task to the address book.
+     * Adds a Task to the to-do list.
      * Also checks the new Task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the Task to point to those in {@link #tags}.
      *

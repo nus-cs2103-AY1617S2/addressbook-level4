@@ -27,10 +27,15 @@ public class EndTime {
      */
     public EndTime(String endtime) throws IllegalValueException {
         assert endtime != null;
-        if (!isValidEndTime(endtime)) {
-            throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+        if (endtime.isEmpty()) {
+            this.value = endtime;
+        } else {
+            String trimmedEndTime = endtime.trim();
+            if (!isValidEndTime(trimmedEndTime)) {
+                throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+            }
+            this.value = trimmedEndTime;
         }
-        this.value = endtime;
     }
 
     /**
@@ -49,7 +54,7 @@ public class EndTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
-                && this.value.equals(((EndTime) other).value)); // state check
+                        && this.value.equals(((EndTime) other).value)); // state check
     }
 
     @Override

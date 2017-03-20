@@ -16,23 +16,23 @@ public class AddCommandTest extends ToDoListGuiTest {
     public void add() {
         //add one Task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.hoon;
+        TestTask taskToAdd = td.MA3269_Quiz;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another Task
-        taskToAdd = td.ida;
+        taskToAdd = td.laundry;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate Task
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.MA3269_Quiz.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.CS2103_Tutorial);
 
         //invalid command
         commandBox.runCommand("adds Johnny");

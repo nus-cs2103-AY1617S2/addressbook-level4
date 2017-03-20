@@ -1,57 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ToDoList>
     <tasks>
-        <title>Hans Muster</title>
-        <venue isPrivate="false">9482424</venue>
-        <startTime isPrivate="false">hans@google.com</startTime>
-        <endTime isPrivate="false">4th street</endTime>
+        <title>CS2103 Tutorial</title>
+        <venue isPrivate="false">COM1-B103</venue>
+        <startTime isPrivate="false">Tuesday 10:00</startTime>
+        <endTime isPrivate="false">Tuesday 11:00</endTime>
+        <urgencyLevel isPrivate="false">5</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Ruth Mueller</title>
-        <venue isPrivate="false">87249245</venue>
-        <startTime isPrivate="false">ruth@google.com</startTime>
-        <endTime isPrivate="false">81th street</endTime>
+        <title>DBS Internship interview</title>
+        <venue isPrivate="false">Raffles Place</venue>
+        <startTime isPrivate="false">March 31, 9:30</startTime>
+        <endTime isPrivate="false">March 31, 12:00</endTime>
+        <urgencyLevel isPrivate="false">4</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Heinz Kurz</title>
-        <venue isPrivate="false">95352563</venue>
-        <startTime isPrivate="false">heinz@yahoo.com</startTime>
-        <endTime isPrivate="false">wall street</endTime>
+        <title>Hang out with Joe </title>
+        <venue isPrivate="false">313 Somerset</venue>
+        <startTime isPrivate="false">Saturday 11:00</startTime>
+        <endTime isPrivate="false">Saturday 17:00</endTime>
+        <urgencyLevel isPrivate="false">2</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Cornelia Meier</title>
-        <venue isPrivate="false">87652533</venue>
-        <startTime isPrivate="false">cornelia@google.com</startTime>
-        <endTime isPrivate="false">10th street</endTime>
+        <title>Statistics society meeting</title>
+        <venue isPrivate="false">S16 04-30</venue>
+        <startTime isPrivate="false">Every Wednesday 19:00</startTime>
+        <endTime isPrivate="false">Every Wednesday 21:00</endTime>
+        <urgencyLevel isPrivate="false">7</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Werner Meyer</title>
-        <venue isPrivate="false">9482224</venue>
-        <startTime isPrivate="false">werner@gmail.com</startTime>
-        <endTime isPrivate="false">michegan ave</endTime>
+        <title>Tuition part-time job</title>
+        <venue isPrivate="false">Jun Wei's house at Jurong Ease Avenue 1</venue>
+        <startTime isPrivate="false">Next Thursday 19:00</startTime>
+        <endTime isPrivate="false">Next Thursday 21:00</endTime>
+        <urgencyLevel isPrivate="false">0</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Lydia Kunz</title>
-        <venue isPrivate="false">9482427</venue>
-        <startTime isPrivate="false">lydia@gmail.com</startTime>
-        <endTime isPrivate="false">little tokyo</endTime>
+        <title>Strings ensemble rehearsal</title>
+        <venue isPrivate="false">UCC hall</venue>
+        <startTime isPrivate="false">This Friday 9:00</startTime>
+        <endTime isPrivate="false">This Friday 17:00</endTime>
+        <urgencyLevel isPrivate="false">3</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Anna Best</title>
-        <venue isPrivate="false">9482442</venue>
-        <startTime isPrivate="false">anna@google.com</startTime>
-        <endTime isPrivate="false">4th street</endTime>
+        <title>Dinner with auntie</title>
+        <venue isPrivate="false">Home</venue>
+        <startTime isPrivate="false">This Friday 19:00</startTime>
+        <endTime isPrivate="false">This Friday 21:00</endTime>
+        <urgencyLevel isPrivate="false">6</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Stefan Meier</title>
-        <venue isPrivate="false">8482424</venue>
-        <startTime isPrivate="false">stefan@mail.com</startTime>
-        <endTime isPrivate="false">little india</endTime>
+        <title>MA3269 Quiz</title>
+        <venue isPrivate="false">LT26</venue>
+        <startTime isPrivate="false">April 12, 12:00</startTime>
+        <endTime isPrivate="false">April 12, 14:00</endTime>
+        <urgencyLevel isPrivate="false">8</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
     <tasks>
-        <title>Martin Mueller</title>
-        <venue isPrivate="false">8482131</venue>
-        <startTime isPrivate="false">hans@google.com</startTime>
-        <endTime isPrivate="false">chicago ave</endTime>
+        <title>Submit FIN3101 Tutorial</title>
+        <venue isPrivate="false">Biz1-0748 Prof Tan's office</venue>
+        <startTime isPrivate="false">now</startTime>
+        <endTime isPrivate="false">one hour later</endTime>
+        <urgencyLevel isPrivate="false">2</urgencyLevel>
+        <description isPrivate="false">I love you</description>
     </tasks>
 </ToDoList>

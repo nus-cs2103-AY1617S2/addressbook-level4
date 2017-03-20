@@ -3,9 +3,11 @@ package seedu.address.testutil;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
@@ -51,6 +53,16 @@ public class TaskBuilder {
 
     public TaskBuilder withStartTime(String starttime) throws IllegalValueException {
         this.task.setStartTime(new StartTime(starttime));
+        return this;
+    }
+
+    public TaskBuilder withUrgencyLevel(String urgencyLevel) throws IllegalValueException {
+        this.task.setUrgencyLevel(new UrgencyLevel(urgencyLevel));
+        return this;
+    }
+
+    public TaskBuilder withDescription(String description) throws IllegalValueException {
+        this.task.setDescription(new Description(description));
         return this;
     }
 
