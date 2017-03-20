@@ -181,15 +181,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("Ali Muster"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new DateTime("2017-04-01T10:16:30"), new DateTime("2017-05-01T10:16:30"), new Location("chicago ave"), new UniqueTagList())
+                new Task(new Title("Ali Muster"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Boris Mueller"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("81th street"), new UniqueTagList()),
+                new Task(new Title("Carl Kurz"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("wall street"), new UniqueTagList()),
+                new Task(new Title("Daniel Meier"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("10th street"), new UniqueTagList()),
+                new Task(new Title("Elle Meyer"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("michegan ave"), new UniqueTagList()),
+                new Task(new Title("Fiona Kunz"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("little tokyo"), new UniqueTagList()),
+                new Task(new Title("George Best"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("4th street"), new UniqueTagList()),
+                new Task(new Title("Hoon Meier"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("little india"), new UniqueTagList()),
+                new Task(new Title("Ida Mueller"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"), new Location("chicago ave"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
