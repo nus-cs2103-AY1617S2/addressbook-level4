@@ -2,6 +2,7 @@ package seedu.taskboss.logic.commands;
 
 import java.io.File;
 import java.io.IOException;
+import seedu.taskboss.commons.util.FileUtil;
 
 /**
  * Saves the data at specific filepath. Creates filepath if it does not exist
