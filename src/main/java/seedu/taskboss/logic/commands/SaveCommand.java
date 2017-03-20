@@ -1,9 +1,5 @@
 package seedu.taskboss.logic.commands;
 
-import java.io.File;
-import java.io.IOException;
-import seedu.taskboss.commons.util.FileUtil;
-
 /**
  * Saves the data at specific filepath. Creates filepath if it does not exist
  */
@@ -30,13 +26,7 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         assert storage != null;
-        storage.setFilePath(this.filepath);
-        
-        File file = new File(this.filepath);
-        
-        if (!file.exists() && !file.isDirectory()) {
-            FileUtil.createIfMissing(file);
-        }
+        storage.setFilePath(filepath);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
