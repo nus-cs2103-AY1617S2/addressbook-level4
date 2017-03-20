@@ -55,16 +55,16 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                         EditTaskDescriptor editEventDescriptor) {
+                                         EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
-        assert editEventDescriptor != null;
+        assert editTaskDescriptor != null;
 
-        Name updatedName = editEventDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editEventDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        StartTime updatedStartTime = editEventDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        EndTime updatedDeadline = editEventDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
-        Description updatedDescription = editEventDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStartTime,
             updatedDeadline, updatedDescription, updatedTags);

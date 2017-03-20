@@ -42,21 +42,21 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editEventDescriptor = new EditTaskDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
         try {
-            editEventDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editEventDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editEventDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_START)));
-            editEventDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_END)));
-            editEventDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
-            editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+            editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_START)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_END)));
+            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
 
-            if (!editEventDescriptor.isAnyFieldEdited()) {
+            if (!editTaskDescriptor.isAnyFieldEdited()) {
                 return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
             }
 
-            return new EditCommand(index.get(), editEventDescriptor);
+            return new EditCommand(index.get(), editTaskDescriptor);
 
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
