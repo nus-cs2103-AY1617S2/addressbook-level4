@@ -5,9 +5,9 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 ---
 
 1. [Introduction](#introduction)
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [Command Summary](#command-summary)
+2. [Quick Start](#quick-start)
+3. [Features](#features)
+4. [Command Summary](#command-summary)
 
 ## 1. Introduction
 
@@ -16,7 +16,7 @@ Now you can use ToLuist, the answer to all of your problems!<br>
 ToLuist is an application which will help you to manage all your tasks, allowing you to sort out your life.<br>
 ToLuist is designed with you in mind, ensuring that you are able to focus on what is important to you.
 
-## 1. Quick Start
+## 2. Quick Start
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
@@ -32,7 +32,7 @@ ToLuist is designed with you in mind, ensuring that you are able to focus on wha
    * **`exit`** : exits the app.
 4. Refer to the [Features](#features) section below for details of each command.<br>
 
-## 2. Features
+## 3. Features
 
 ToLuist is focused towards users who like to type.<br>
 All the features of the application can be accessed through the use of a keyboard, by entering commands into the on-screen text field.<br>
@@ -344,7 +344,7 @@ Example:
 * `untag 2 work home` <br>
   Removes the tags 'work' and 'home' from task 2.
 
-## 3. Command Summary
+## 4. Command Summary
 
 **Command** | **Format** | **Examples**
 -------- | :-------- | :---------
