@@ -16,7 +16,6 @@ public class Booking {
             "Input dates are in the wrong format, please try again!";
     public static DateTimeParser dtParser;
 
-    public String bookingID;
     public boolean confirm;
     public Date startTime;
     public Date endTime;
