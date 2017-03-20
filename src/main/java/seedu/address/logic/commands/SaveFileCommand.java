@@ -9,10 +9,10 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.storage.StorageManager;
+import seedu.address.commons.core.Messages;
 
 public class SaveFileCommand extends Command {
     private String saveFilePath;
-    public static final String MESSAGE_SAVE_FILE_ERROR = "Cannot write to a file that does not exist.";
     public static final String MESSAGE_CONFIG_ERROR = "Error handling the config file.";
     public static final String MESSAGE_SUCCESS = "Save file updated!";
     public static final String COMMAND_WORD = "savefile";
@@ -29,7 +29,7 @@ public class SaveFileCommand extends Command {
         File f = new File(saveFilePath);
 
         if (!f.exists() || f.isDirectory()) {
-            throw new CommandException(MESSAGE_SAVE_FILE_ERROR);
+            throw new CommandException(Messages.MESSAGE_FILE_NOT_FOUND);
         }
 
         try {
@@ -45,7 +45,7 @@ public class SaveFileCommand extends Command {
             // Catch for data conversion from Optional<Config> to Config
             throw new CommandException(MESSAGE_CONFIG_ERROR);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_SAVE_FILE_ERROR);
+            throw new CommandException(Messages.MESSAGE_FILE_NOT_FOUND);
         }
     }
 }
