@@ -23,6 +23,7 @@ public class TestTask implements ReadOnlyTask {
     private Optional<UrgencyLevel> urgencyLevel;
     private Optional<Description> description;
     private UniqueTagList tags;
+    private String category;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -38,6 +39,7 @@ public class TestTask implements ReadOnlyTask {
         this.urgencyLevel = taskToCopy.getUrgencyLevel();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
+        this.category = taskToCopy.getTaskCategory();
     }
     //@@author A0122017Y
     public void setTitle(Title title) {
@@ -71,6 +73,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Title getTitle() {
         return title;
+    }
+    
+    @Override
+    public String getTaskCategory() {
+        return category;
     }
     
     @Override
