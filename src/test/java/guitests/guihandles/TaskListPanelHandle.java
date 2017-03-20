@@ -7,9 +7,9 @@ import java.util.Set;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
+import seedu.task.TestApp;
 
 /**
  * Provides a handle for the panel containing the task list.
