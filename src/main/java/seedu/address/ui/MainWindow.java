@@ -241,19 +241,7 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getCompletedTaskListPanel() {
         return this.completedTaskListPanel;
     }
-
-    /*
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-    */
-
-    /*
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-    */
-
+  //@@author A0144813J
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         if (abce.floatingTasks != null && abce.nonFloatingTasks != null) {

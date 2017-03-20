@@ -72,6 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
         currentCompletedTasksExpression = new PredicateExpression(new TaskIsCompleteQualifier());
     }
 
+    //@@author A0144813J
     private void setAddressBookState() {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
@@ -97,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
                 new ArrayList<AddressBook>(this.addressBookStates.subList(0, this.currentAddressBookStateIndex));
         this.addressBookStates.add(new AddressBook(this.currentAddressBook));
     }
-
+    //@@author
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         this.currentAddressBook.resetData(newData);
@@ -123,7 +124,7 @@ public class ModelManager extends ComponentManager implements Model {
         abce.setCompletedTasks(getCompletedTaskList());
         raise(abce);
     }
-
+    //@@author A0144813J
     @Override
     public void saveTasksToIcsFile(String filePath) throws ValidationException, IOException {
         IcsFileStorage.saveDataToFile(filePath, this.currentAddressBook.getTaskList());
@@ -159,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
         setAddressBookState();
         indicateAddressBookStateChanged();
     }
-
+    //@@author
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         this.currentAddressBook.removeTask(target);
@@ -338,7 +339,7 @@ public class ModelManager extends ComponentManager implements Model {
             return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }
     }
-
+    //@@author A0144813J
     private class TaskIsFloatingQualifier implements Qualifier {
 
         @Override
@@ -365,4 +366,5 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
+    //@@author
 }

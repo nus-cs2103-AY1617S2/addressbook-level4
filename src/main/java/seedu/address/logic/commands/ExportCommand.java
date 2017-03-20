@@ -5,7 +5,7 @@ import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
- * Import a task list xml.file in Burdens.
+ * Import a task list ics in Burdens.
  */
 public class ExportCommand extends Command {
 
@@ -27,6 +27,7 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+      //@@author A0144813J
         try {
             model.saveTasksToIcsFile(filePath);
         } catch (IOException | ValidationException e) {
@@ -34,5 +35,6 @@ public class ExportCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
+      //@@author
     }
 }

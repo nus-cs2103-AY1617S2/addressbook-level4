@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
- * Import a task list xml.file in Burdens.
+ * Import a task list ics in Burdens.
  */
 public class ImportCommand extends Command {
 
@@ -30,6 +30,7 @@ public class ImportCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+      //@@author A0144813J
         try {
             model.addTasksFromIcsFile(filePath);
         } catch (IOException | ParserException e) {
@@ -38,5 +39,6 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ILLEGAL_VALUE));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
+      //@@author
     }
 }

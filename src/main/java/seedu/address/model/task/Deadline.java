@@ -1,3 +1,4 @@
+//@@author A0144813J
 package seedu.address.model.task;
 
 import java.text.SimpleDateFormat;
@@ -10,7 +11,6 @@ import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * @author ryuus
  * Represents a Task's date in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  *
