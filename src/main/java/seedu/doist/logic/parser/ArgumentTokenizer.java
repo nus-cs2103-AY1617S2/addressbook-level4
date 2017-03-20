@@ -31,6 +31,36 @@ public class ArgumentTokenizer {
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
 
+    /** Method to 'BY' parameter is used **/
+    private int validateBy(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_BY.getPrefix())) {
+                return DATE_BY;
+            }
+        }
+        return DATE_NIL;
+    }
+
+    /** Method to check if 'FROM' parameter is used**/
+    private int validateFrom(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_FROM.getPrefix())) {
+                return DATE_FROM;
+            }
+        }
+        return DATE_NIL;
+    }
+
+    /** Method to check if 'TO' parameter is used **/
+    private int validateTo(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_TO.getPrefix())) {
+                return DATE_TO;
+            }
+        }
+        return DATE_NIL;
+    }
+
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
@@ -99,7 +129,8 @@ public class ArgumentTokenizer {
      * eg. The command "add Buy milk \\from today \\by Friday" should fail, as \from should always be accompanied by \to
      * @param tokens recognized in the command
      * @return A number corresponding to the command format it matches
-     * eg 0 means no date parameters were provided, 1 means only \by was user,and -1 means the command format is illegal
+     * eg 0 means no date parameters were provided, 1 means only \by was user,
+     * 2 means both \from and \to were provided, and -1 means the command format is illegal
      */
 
     public int validateDate(ArrayList<String> tokens) {
@@ -112,33 +143,6 @@ public class ArgumentTokenizer {
         default : dateFormat = DATE_INVALID;
         }
         return dateFormat;
-    }
-
-    public int validateBy(ArrayList<String> token) {
-        for (String prefix: token) {
-            if (prefix.equals(CliSyntax.PREFIX_BY.getPrefix())) {
-                return DATE_BY;
-            }
-        }
-        return DATE_NIL;
-    }
-
-    public int validateFrom(ArrayList<String> token) {
-        for (String prefix: token) {
-            if (prefix.equals(CliSyntax.PREFIX_FROM.getPrefix())) {
-                return DATE_FROM;
-            }
-        }
-        return DATE_NIL;
-    }
-
-    public int validateTo(ArrayList<String> token) {
-        for (String prefix: token) {
-            if (prefix.equals(CliSyntax.PREFIX_TO.getPrefix())) {
-                return DATE_TO;
-            }
-        }
-        return DATE_NIL;
     }
 
     public int getDateFormat() {
