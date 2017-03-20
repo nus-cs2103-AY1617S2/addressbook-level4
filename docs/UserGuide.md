@@ -105,7 +105,7 @@ Task data are saved in the hard disk automatically after any command that change
 
 ## Advanced Features
 
-###Undo/Redo command
+### Undo/Redo command : `undo` `redo`
 **Undo** and **Redo** are classic features, allowing you to undo the previous action taken. This will result in any changes made to certain task(s) being restored.
 
 Example:
