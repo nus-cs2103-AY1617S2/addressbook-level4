@@ -6,30 +6,48 @@ import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager. Task can be of type floating, deadline or event.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the task manager. A task can have no start and end dates (floating tasks),
+ * only end date (deadline), or both start and end dates (events).
+ * Guarantees: all other details except startDate and EndDate are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
-    public enum Status { UNDONE, DONE, OVERDUE } // Represents a Task's current status in the task manager.
+    private Description description;
+    private DateTime startDate;
+    private DateTime endDate;
+    private TaskStatus status; //Default status of any new task created is UNDONE
+    private UniqueTagList tags;
 
-    protected Description description;
-    protected Status status;
-    protected UniqueTagList tags;
-
-    /* Constructs a Task object from a given description. Default status is UNDONE. */
+    /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
+        this(description, null, null, tags);
+    }
+
+    /* Constructs a Deadline Task object from a given description. */
+    public Task(Description description, DateTime deadline, UniqueTagList tags) {
+        this(description, null, deadline, tags);
+    }
+
+    /* Constructs an Event Task object from a given description. */
+    public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, tags);
         this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        status = Status.UNDONE;
+        this.status = TaskStatus.UNDONE;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTags());
+        this(source.getDescription(), source.getStartDate(), source.getEndDate(), source.getTags());
+    }
+
+    @Override
+    public Description getDescription() {
+        return description;
     }
 
     public void setDescription(Description description) {
@@ -38,18 +56,31 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Description getDescription() {
-        return description;
+    public DateTime getStartDate() {
+        return startDate;
     }
 
-    /* Changes the current status of the task. */
-    public void setStatus(Status newStatus) {
-        this.status = newStatus;
+    public void setStartDate(DateTime startDate) {
+        this.startDate = startDate;
     }
 
     @Override
-    public Status getStatus() {
+    public DateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(DateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public TaskStatus getStatus() {
         return status;
+    }
+
+    /* Changes the current status of the task. */
+    public void setStatus(TaskStatus newStatus) {
+        this.status = newStatus;
     }
 
     @Override
@@ -69,6 +100,8 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
         this.setTags(replacement.getTags());
         this.setStatus(replacement.getStatus());
     }
@@ -83,11 +116,12 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, tags);
+        return Objects.hash(description, startDate, endDate, status, tags);
     }
 
     @Override
     public String toString() {
+        //TO DO the timing
         return getAsText();
     }
 
