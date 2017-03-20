@@ -603,7 +603,7 @@ public class LogicManagerTest {
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
-            addToAddressBook(taskManager, numGenerated);
+            addToTaskManager(taskManager, numGenerated);
             return taskManager;
         }
 
@@ -617,10 +617,10 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds auto-generated Task objects to the given AddressBook
-         * @param taskManager The AddressBook to which the Tasks will be added
+         * Adds auto-generated Task objects to the given TaskManager
+         * @param taskManager The TaskManager to which the Tasks will be added
          */
-        void addToAddressBook(TaskManager taskManager, int numGenerated) throws Exception {
+        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
             addToAddressBook(taskManager, generateTaskList(numGenerated));
         }
 
