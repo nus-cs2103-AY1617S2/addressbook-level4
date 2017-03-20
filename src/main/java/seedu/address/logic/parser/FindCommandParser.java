@@ -21,8 +21,8 @@ import seedu.address.logic.commands.IncorrectCommand;
  */
 public class FindCommandParser {
 
-    public final static String NO_ARGUMENT_ERROR = "Find command found no arguments";
-    public final static String DATE_FORMAT_ERROR = "Wrong date time format";
+    public static final String NO_ARGUMENT_ERROR = "Find command found no arguments";
+    public static final String DATE_FORMAT_ERROR = "Wrong date time format";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
