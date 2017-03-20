@@ -22,8 +22,6 @@ public class DeadlineTest {
         assertFalse(Deadline.isValidDeadline("")); // Empty string
         assertFalse(Deadline.isValidDeadline(" ")); // Spaces only
         assertFalse(Deadline.isValidDeadline("^")); // Random string
-        assertFalse(Deadline.isValidDeadline("01/13/2017")); // American format
-        assertFalse(Deadline.isValidDeadline("You, Aprial 3 2000")); // Invalid month, day
         assertFalse(Deadline.isValidDeadline("from 10:00 am to Thu, March 9 2017, 10:00 pm")); // Full format in word
 
         // Valid deadline
