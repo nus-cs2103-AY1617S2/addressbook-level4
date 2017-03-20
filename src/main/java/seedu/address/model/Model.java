@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -33,6 +34,17 @@ public interface Model {
      */
     void updateTodo(int filteredTodoListIndex, ReadOnlyTodo editedTodo)
             throws UniqueTodoList.DuplicateTodoException;
+
+    /**
+     * Completes the todo located at {@code filteredTodoListIndex} with {@code completeTime}
+     */
+    void completeTodo(int filteredTodoListIndex, Date completeTime);
+
+    /**
+     * Uncompletes the todo located at {@code filteredTodoListIndex}
+     */
+    void uncompleteTodo(int filteredTodoListIndex);
+
 
     /** Returns the filtered todo list as an {@code UnmodifiableObservableList<ReadOnlyTodo>} */
     UnmodifiableObservableList<ReadOnlyTodo> getFilteredTodoList();

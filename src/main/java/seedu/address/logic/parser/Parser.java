@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -17,6 +17,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SaveFileCommand;
+import seedu.address.logic.commands.UncompleteCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 /**
@@ -34,9 +36,8 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws ParseException
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -72,6 +73,15 @@ public class Parser {
 
             case UndoCommand.COMMAND_WORD:
                 return new UndoCommand();
+
+            case CompleteCommand.COMMAND_WORD:
+                return new CompleteCommandParser().parse(arguments);
+
+            case UncompleteCommand.COMMAND_WORD:
+                return new UncompleteCommandParser().parse(arguments);
+
+            case SaveFileCommand.COMMAND_WORD:
+                return new SaveFileCommandParser().parse(arguments);
 
             default:
                 return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

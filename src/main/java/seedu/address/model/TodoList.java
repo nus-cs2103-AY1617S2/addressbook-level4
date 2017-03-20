@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +78,7 @@ public class TodoList implements ReadOnlyTodoList {
 //// todo-level operations
 
     /**
-     * Adds a todo to the address book.
+     * Adds a todo to the todo list.
      * Also checks the new todo's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the todo to point to those in {@link #tags}.
      *
@@ -115,6 +116,20 @@ public class TodoList implements ReadOnlyTodoList {
         // This can cause the tags master list to have additional tags that are not tagged to any todo
         // in the todo list.
         todos.updateTodo(index, editedTodo);
+    }
+    //@@author A0163786N
+    /**
+     * Completes the todo in the list at position {@code index} with {@code completeTime}.
+     */
+    public void completeTodo(int index, Date completeTime) {
+        todos.completeTodo(index, completeTime);
+    }
+    //@@author A0163786N
+    /**
+     * Uncompletes the todo in the list at position {@code index}.
+     */
+    public void uncompleteTodo(int index) {
+        todos.uncompleteTodo(index);
     }
 
     /**

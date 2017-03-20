@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -28,7 +29,10 @@ import junit.framework.AssertionFailedError;
 import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.commands.CompleteCommand;
+import seedu.address.logic.commands.SaveFileCommand;
 import seedu.address.model.TodoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -53,6 +57,8 @@ public class TestUtil {
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
+    public static final String SAVE_FILE_TEST = "src/test/data/SaveFileTest/saveFileTest.xml";
+
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
             executable.run();
@@ -72,15 +78,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Todo[]{
-                new Todo(new Name("Ali Muster"), new UniqueTagList()),
-                new Todo(new Name("Boris Mueller"), new UniqueTagList()),
-                new Todo(new Name("Carl Kurz"), new UniqueTagList()),
-                new Todo(new Name("Daniel Meier"), new UniqueTagList()),
-                new Todo(new Name("Elle Meyer"), new UniqueTagList()),
-                new Todo(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Todo(new Name("George Best"), new UniqueTagList()),
-                new Todo(new Name("Hoon Meier"), new UniqueTagList()),
-                new Todo(new Name("Ida Mueller"), new UniqueTagList())
+                new Todo(new Name("Walk the dog"), new UniqueTagList()),
+                new Todo(new Name("Walk the cat"), new UniqueTagList()),
+                new Todo(new Name("Do math homework"), new UniqueTagList()),
+                new Todo(new Name("Do english homework"), new UniqueTagList()),
+                new Todo(new Name("Wash dishes"), new UniqueTagList()),
+                new Todo(new Name("Mow the lawn"), new UniqueTagList()),
+                new Todo(new Name("Cook dinner"), new UniqueTagList()),
+                new Todo(new Name("Do laundry"), new UniqueTagList()),
+                new Todo(new Name("Wash car"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -329,9 +335,44 @@ public class TestUtil {
         }
         return list;
     }
+    //@@author A0163786N
+    /**
+     * Completes the todo at targetIndexOneIndexedFormat
+     * @param todos The list of todos
+     * @param targetIndexOneIndexedFormat index of todo to be completed
+     * @param completeTime
+     * @return The modified todos after completing the specified todo.
+     */
+    public static TestTodo[] completeTodoInList(final TestTodo[] todos, int targetIndexOneIndexedFormat,
+            String completeTime) {
+        Date completeDate = null;
+        try {
+            completeDate = StringUtil.parseDate(completeTime, CompleteCommand.COMPLETE_TIME_FORMAT);
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "invalid complete time format";
+        }
+        int index = targetIndexOneIndexedFormat - 1; //array is zero indexed
+        TestTodo todoToComplete = todos[index];
+        todoToComplete.setCompleteTime(completeDate);
+        return replaceTodoFromList(todos, todoToComplete, index);
+    }
+    //@@author A0163786N
+    /**
+     * Uncompletes the todo at targetIndexOneIndexedFormat
+     * @param todos The list of todos
+     * @param targetIndexOneIndexedFormat index of todo to be uncompleted
+     * @return The modified todos after uncompleting the specified todo.
+     */
+    public static TestTodo[] uncompleteTodoInList(final TestTodo[] todos, int targetIndexOneIndexedFormat) {
+        int index = targetIndexOneIndexedFormat - 1; //array is zero indexed
+        TestTodo todoToUncomplete = todos[index];
+        todoToUncomplete.setCompleteTime(null);
+        return replaceTodoFromList(todos, todoToUncomplete, index);
+    }
 
-    public static boolean compareCardAndTodo(TodoCardHandle card, ReadOnlyTodo todo) {
-        return card.isSameTodo(todo);
+    public static boolean compareCardAndTodo(TodoCardHandle card, ReadOnlyTodo todo, boolean compareCompleteTime) {
+        return card.isSameTodo(todo, compareCompleteTime);
     }
 
     public static Tag[] getTagList(String tags) {
@@ -354,4 +395,10 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    //@@author A0163720M
+    public static String getSaveFileCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(SaveFileCommand.COMMAND_WORD + " " + SAVE_FILE_TEST);
+        return sb.toString();
+    }
 }

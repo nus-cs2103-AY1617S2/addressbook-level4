@@ -7,7 +7,7 @@ import seedu.address.model.todo.ReadOnlyTodo;
 import seedu.address.model.todo.UniqueTodoList.TodoNotFoundException;
 
 /**
- * Deletes a todo identified using it's last displayed index from the address book.
+ * Deletes a todo identified using it's last displayed index from the todo list.
  */
 public class DeleteCommand extends Command {
 
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTodo(todoToDelete);
-        } catch (TodoNotFoundException pnfe) {
+        } catch (TodoNotFoundException tnfe) {
             assert false : "The target todo cannot be missing";
         }
 

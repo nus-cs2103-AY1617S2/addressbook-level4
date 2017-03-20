@@ -49,8 +49,8 @@ public class TodoListTest {
     public void resetData_withDuplicateTodos_throwsAssertionError() {
         TypicalTestTodos td = new TypicalTestTodos();
         // Repeat td.alice twice
-        List<Todo> newTodos = Arrays.asList(new Todo(td.alice), new Todo(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
+        List<Todo> newTodos = Arrays.asList(new Todo(td.dog), new Todo(td.dog));
+        List<Tag> newTags = td.dog.getTags().asObservableList();
         TodoListStub newData = new TodoListStub(newTodos, newTags);
 
         thrown.expect(AssertionError.class);

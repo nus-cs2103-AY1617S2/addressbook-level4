@@ -16,24 +16,24 @@ public class AddCommandTest extends TodoListGuiTest {
     public void add() {
         //add one todo
         TestTodo[] currentList = td.getTypicalTodos();
-        TestTodo todoToAdd = td.hoon;
+        TestTodo todoToAdd = td.laundry;
 
         assertAddSuccess(todoToAdd, currentList);
         currentList = TestUtil.addTodosToList(currentList, todoToAdd);
 
         //add another todo
-        todoToAdd = td.ida;
+        todoToAdd = td.shopping;
         assertAddSuccess(todoToAdd, currentList);
         currentList = TestUtil.addTodosToList(currentList, todoToAdd);
 
         //add duplicate todo
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.laundry.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TODO);
-        assertTrue(todoListPanel.isListMatching(currentList));
+        assertTrue(todoListPanel.isListMatching(true, currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.dog);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
@@ -44,14 +44,14 @@ public class AddCommandTest extends TodoListGuiTest {
     @Test
     public void addEventTest() {
         TestTodo[] currentList = td.getTypicalTodos();
-        TestTodo todoToAdd = td.eventTest;
+        TestTodo todoToAdd = td.lunch;
         assertAddSuccess(todoToAdd, currentList);
     }
 
     @Test
     public void addDeadLineTest() {
         TestTodo[] currentList = td.getTypicalTodos();
-        TestTodo todoToAdd = td.deadLineTest;
+        TestTodo todoToAdd = td.job;
         assertAddSuccess(todoToAdd, currentList);
     }
 
@@ -65,7 +65,7 @@ public class AddCommandTest extends TodoListGuiTest {
 
         //confirm the list now contains all previous todos plus the new todo
         TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
-        assertTrue(todoListPanel.isListMatching(expectedList));
+        assertTrue(todoListPanel.isListMatching(true, expectedList));
     }
 
 }

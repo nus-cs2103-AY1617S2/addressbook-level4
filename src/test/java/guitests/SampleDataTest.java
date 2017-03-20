@@ -25,6 +25,6 @@ public class SampleDataTest extends TodoListGuiTest {
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
         Todo[] expectedList = SampleDataUtil.getSampleTodos();
-        assertTrue(todoListPanel.isListMatching(expectedList));
+        assertTrue(todoListPanel.isListMatching(true, expectedList));
     }
 }

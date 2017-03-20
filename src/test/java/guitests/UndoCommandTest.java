@@ -1,97 +1,96 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TODO_SUCCESS;
 
 import org.junit.Test;
 
-import guitests.guihandles.TodoCardHandle;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TestTodo;
-import seedu.address.testutil.TestUtil;
 
 public class UndoCommandTest extends TodoListGuiTest {
+    //@@author A0163786N
+    /**
+     * The list of todos in the todo list panel is expected to match this list
+     */
+    private TestTodo[] originalList = td.getTypicalTodos();
+
     @Test
-    public void undoAdd() {
-        //add one todo
-        TestTodo[] currentList = td.getTypicalTodos();
-        TestTodo floatingTodoToAdd = td.hoon;
-
-        //undo floating task
-        assertAddSuccess(floatingTodoToAdd, currentList);
-        assertUndoSuccess(currentList);
-
-        //undo event
-        TestTodo todoToAdd = td.eventTest;
-        assertAddSuccess(todoToAdd, currentList);
-        assertUndoSuccess(currentList);
+    public void undo_noActionToUndo_failure() {
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(UndoCommand.MESSAGE_NO_ACTION);
     }
 
     @Test
-    public void undoClear() {
-        TestTodo[] currentList = td.getTypicalTodos();
-        //undo clear
-        assertClearCommandSuccess();
-        assertUndoSuccess(currentList);
+    public void undo_listTodos_failure() {
+        commandBox.runCommand("list");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(UndoCommand.MESSAGE_NO_ACTION);
     }
 
     @Test
-    public void undoDelete() {
-        //delete the first in the list
-        TestTodo[] currentList = td.getTypicalTodos();
-        int targetIndex = 1;
-        assertDeleteSuccess(targetIndex, currentList);
-        assertUndoSuccess(currentList);
-        assertDeleteSuccess(targetIndex, currentList);
-
-        //delete the last in the list
-        currentList = TestUtil.removeTodoFromList(currentList, targetIndex);
-        targetIndex = currentList.length;
-        assertDeleteSuccess(targetIndex, currentList);
-        assertUndoSuccess(currentList);
-        assertDeleteSuccess(targetIndex, currentList);
-
-        //delete from the middle of the list
-        currentList = TestUtil.removeTodoFromList(currentList, targetIndex);
-        targetIndex = currentList.length / 2;
-        assertDeleteSuccess(targetIndex, currentList);
-        assertUndoSuccess(currentList);
-
+    public void undo_addValidFloatingTask_success() {
+        commandBox.runCommand(td.laundry.getAddCommand());
+        assertUndoSuccess();
     }
 
-    private void assertAddSuccess(TestTodo todoToAdd, TestTodo... currentList) {
-
-        commandBox.runCommand(todoToAdd.getAddCommand());
-
-        //confirm the new card contains the right data
-        TodoCardHandle addedCard = todoListPanel.navigateToTodo(todoToAdd.getName().fullName);
-        assertMatching(todoToAdd, addedCard);
-        //confirm the list now contains all previous todos plus the new todo
-        TestTodo[] expectedList = TestUtil.addTodosToList(currentList, todoToAdd);
-        assertTrue(todoListPanel.isListMatching(expectedList));
+    @Test
+    public void undo_addValidDeadline_success() {
+        commandBox.runCommand(td.job.getAddCommand());
+        assertUndoSuccess();
     }
 
-    private void assertClearCommandSuccess() {
+    @Test
+    public void undo_addValidEvent_success() {
+        commandBox.runCommand(td.lunch.getAddCommand());
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_deleteValidTodo_success() {
+        commandBox.runCommand("delete 1");
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_clearTodos_success() {
         commandBox.runCommand("clear");
-        assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertUndoSuccess();
     }
 
-    private void assertUndoSuccess(TestTodo[] currentList) {
-        commandBox.runCommand("undo");
-        assertTrue(todoListPanel.isListMatching(currentList));
+    @Test
+    public void undo_editValidTodo_success() {
+        commandBox.runCommand("edit 1 Feed the dog");
+        assertUndoSuccess();
     }
 
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTodo[] currentList) {
-        TestTodo todoToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestTodo[] expectedRemainder = TestUtil.removeTodoFromList(currentList, targetIndexOneIndexed);
-
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
-
-        //confirm the list now contains all previous todos except the deleted todo
-        assertTrue(todoListPanel.isListMatching(expectedRemainder));
-
-        //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TODO_SUCCESS, todoToDelete));
+    @Test
+    public void undo_completeValidTodo_success() {
+        commandBox.runCommand("complete 1");
+        assertUndoSuccess();
     }
 
+    @Test
+    public void undo_uncompleteValidTodo_success() {
+        commandBox.runCommand("uncomplete 10");
+        assertUndoSuccess();
+    }
+
+    @Test
+    public void undo_invalidCommand_failure() {
+        commandBox.runCommand("undoes");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    /**
+     * Runs undo command and asserts resulting list matches currentList
+     * @param currentList
+     */
+    private void assertUndoSuccess() {
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        // confirm the list now contains all previous todos
+        assertTrue(todoListPanel.isListMatching(true, originalList));
+        assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
+    }
 }

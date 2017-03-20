@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import java.text.ParseException;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,9 +14,8 @@ public interface Logic {
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of todos */
     ObservableList<ReadOnlyTodo> getFilteredTodoList();
