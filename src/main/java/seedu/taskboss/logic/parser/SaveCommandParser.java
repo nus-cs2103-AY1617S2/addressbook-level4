@@ -1,7 +1,5 @@
 package seedu.taskboss.logic.parser;
 
-import java.io.File;
-
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.SaveCommand;
 
