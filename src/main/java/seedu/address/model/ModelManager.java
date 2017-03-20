@@ -78,6 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateToDoAppChanged();
     }
+    //@@author
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
