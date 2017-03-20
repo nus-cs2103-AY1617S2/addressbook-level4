@@ -36,6 +36,8 @@ public interface Model {
 
     /** Returns the filtered Task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredEventList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatList();
 
     /** Updates the filter of the filtered Task list to show all Tasks */
     void updateFilteredListToShowAll();
