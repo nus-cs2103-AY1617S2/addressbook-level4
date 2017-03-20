@@ -1,8 +1,8 @@
 package seedu.tasklist.model;
 
-import java.text.ParseException;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -230,56 +230,43 @@ public class TaskList implements ReadOnlyTaskList {
     }
 
     /**
-     * Tasks are sorted according to Deadline in ascending order,
-     * followed by event task, and floating task listed in no particular order
+     * Tasks are sorted according to Date in ascending order for event and deadline tasks,
+     * and floating task listed in no particular order
      */
-    public void sortByDeadline() {
+    public void sortByDate() {
+
         this.tasks.getInternalList().sort(new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {
-                try {
-                    return t1.getDeadlineParameter().compareTo(t2.getDeadlineParameter());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return 0;
+                Date t1Date = new Date(Long.MAX_VALUE);
+                Date t2Date = new Date(Long.MAX_VALUE);
+
+                    switch (t1.getType()) {
+                    case FloatingTask.TYPE:
+                        t1Date = new Date(Long.MAX_VALUE);
+                        break;
+                    case DeadlineTask.TYPE:
+                        t1Date = ((DeadlineTask) t1).getDeadline();
+                        break;
+                    case EventTask.TYPE:
+                        t1Date = ((EventTask) t1).getStartDate();
+                        break;
+                    }
+
+                    switch (t2.getType()) {
+                    case FloatingTask.TYPE:
+                        t2Date = new Date(Long.MAX_VALUE);
+                        break;
+                    case DeadlineTask.TYPE:
+                        t2Date = ((DeadlineTask) t2).getDeadline();
+                        break;
+                    case EventTask.TYPE:
+                        t2Date =  ((EventTask) t2).getStartDate();
+                        break;
+                    }
+                    return t1Date.compareTo(t2Date);
             }
         });
     }
 
-    /**
-     * Tasks are sorted according to StartDate in ascending order,
-     * followed by deadline task, and floating task listed in no particular order
-     */
-    public void sortByStartDate() {
-        this.tasks.getInternalList().sort(new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                try {
-                    return t1.getStartDateParameter().compareTo(t2.getStartDateParameter());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return 0;
-            }
-        });
-    }
-
-    /**
-     * Tasks are sorted according to EndDate in ascending order,
-     * followed by deadline task, and floating task listed in no particular order
-     */
-    public void sortByEndDate() {
-        this.tasks.getInternalList().sort(new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                try {
-                    return t1.getEndDateParameter().compareTo(t2.getEndDateParameter());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return 0;
-            }
-        });
-    }
 }
