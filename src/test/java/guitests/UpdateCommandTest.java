@@ -10,7 +10,6 @@ import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.logic.commands.UpdateCommand;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
 import seedu.geekeep.model.task.Title;
 import seedu.geekeep.testutil.PersonBuilder;
 import seedu.geekeep.testutil.TestTask;
