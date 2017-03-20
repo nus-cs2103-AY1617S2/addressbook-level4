@@ -1,7 +1,5 @@
 package seedu.doit.model;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -68,8 +66,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        String[] test = new String[] {"test"};
-        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
 
@@ -79,8 +75,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        String[] test = new String[] {"test"};
-        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
