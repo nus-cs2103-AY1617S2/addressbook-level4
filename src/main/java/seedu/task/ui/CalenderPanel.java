@@ -103,35 +103,35 @@ public class CalenderPanel extends UiPart<Region> {
 
     }
 
-    private void initDayHashMap(HashMap<String, Label> _dayHashMap) {
-        _dayHashMap.put("day1", day1);
-        _dayHashMap.put("day2", day2);
-        _dayHashMap.put("day3", day3);
-        _dayHashMap.put("day4", day4);
-        _dayHashMap.put("day5", day5);
-        _dayHashMap.put("day6", day6);
-        _dayHashMap.put("day7", day7);
-        _dayHashMap.put("day8", day8);
-        _dayHashMap.put("day9", day9);
-        _dayHashMap.put("day10", day10);
-        _dayHashMap.put("day11", day11);
-        _dayHashMap.put("day12", day12);
-        _dayHashMap.put("day13", day13);
-        _dayHashMap.put("day14", day14);
-        _dayHashMap.put("day15", day15);
-        _dayHashMap.put("day16", day16);
-        _dayHashMap.put("day17", day17);
-        _dayHashMap.put("day18", day18);
-        _dayHashMap.put("day19", day19);
-        _dayHashMap.put("day20", day20);
-        _dayHashMap.put("day21", day21);
-        _dayHashMap.put("day22", day22);
-        _dayHashMap.put("day23", day23);
-        _dayHashMap.put("day24", day24);
-        _dayHashMap.put("day25", day25);
-        _dayHashMap.put("day26", day26);
-        _dayHashMap.put("day27", day27);
-        _dayHashMap.put("day28", day28);
+    private void initDayHashMap(HashMap<String, Label> dayHash) {
+        dayHash.put("day1", day1);
+        dayHash.put("day2", day2);
+        dayHash.put("day3", day3);
+        dayHash.put("day4", day4);
+        dayHash.put("day5", day5);
+        dayHash.put("day6", day6);
+        dayHash.put("day7", day7);
+        dayHash.put("day8", day8);
+        dayHash.put("day9", day9);
+        dayHash.put("day10", day10);
+        dayHash.put("day11", day11);
+        dayHash.put("day12", day12);
+        dayHash.put("day13", day13);
+        dayHash.put("day14", day14);
+        dayHash.put("day15", day15);
+        dayHash.put("day16", day16);
+        dayHash.put("day17", day17);
+        dayHash.put("day18", day18);
+        dayHash.put("day19", day19);
+        dayHash.put("day20", day20);
+        dayHash.put("day21", day21);
+        dayHash.put("day22", day22);
+        dayHash.put("day23", day23);
+        dayHash.put("day24", day24);
+        dayHash.put("day25", day25);
+        dayHash.put("day26", day26);
+        dayHash.put("day27", day27);
+        dayHash.put("day28", day28);
     }
 
     private void setDate() {
