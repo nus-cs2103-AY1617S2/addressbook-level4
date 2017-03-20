@@ -1,8 +1,8 @@
 package seedu.taskboss.logic.commands;
 
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class FindCommand extends Command {
         } else if (prefix.equals(PREFIX_START_DATE.toString())) {
             model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else if (prefix.equals(PREFIX_END_DATE.toString())){
+        } else if (prefix.equals(PREFIX_END_DATE.toString())) {
             model.updateFilteredTaskListByEndDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
         } else { //prefix.equals(PREFIX_INFORMATION.toString()))
