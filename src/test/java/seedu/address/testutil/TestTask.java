@@ -6,10 +6,10 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
-
 
 /**
  * A mutable task object. For testing only.
@@ -17,8 +17,9 @@ import seedu.address.model.task.Venue;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
-    private Optional<EndTime> endtime;
     private Optional<Venue> venue;
+    private Optional<StartTime> starttime;
+    private Optional<EndTime> endtime;
     private Optional<UrgencyLevel> urgencyLevel;
     private Optional<Description> description;
     private UniqueTagList tags;
@@ -38,7 +39,7 @@ public class TestTask implements ReadOnlyTask {
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
-
+    //@@author A0122017Y
     public void setTitle(Title title) {
         this.title = title;
     }
@@ -52,7 +53,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
 	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
-	    this.urgencyLevel = Optional.of(urgencyLevel);
+		this.urgencyLevel = Optional.of(urgencyLevel);
 	}
 
     public void setDescription(Description description) {
@@ -67,39 +68,12 @@ public class TestTask implements ReadOnlyTask {
     public Title getTitle() {
         return title;
     }
-
+    
     @Override
-    public UniqueTagList getTags() {
-        return tags;
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
-    public String getAddCommand() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getTitle().title + " ");
-        sb.append("@@" + this.getVenueString());
-        sb.append("to:" + this.getEndTimeString());
-        sb.append("**" + this.getUrgencyLevelString());
-        sb.append("d:" + this.getDescriptionString() + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("##" + s.tagName + " "));
-        return sb.toString();
+    public Optional<StartTime> getStartTime() {
+        return starttime;
     }
     
-    public String getEditCommand() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("edit" + this.getTitle().title + " ");
-        sb.append("@@" + this.getVenueString());
-        sb.append("to:" + this.getEndTimeString());
-        sb.append("**" + this.getUrgencyLevelString());
-        sb.append("d:" + this.getDescriptionString() + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("##" + s.tagName + " "));
-        return sb.toString();
-    }
-
     @Override
     public Optional<EndTime> getEndTime() {
         return endtime;
@@ -117,7 +91,28 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Optional<UrgencyLevel> getUrgencyLevel() {
-        return urgencyLevel;
+        // TODO Auto-generated method stub
+        return null;
     }
 
+    @Override
+    public UniqueTagList getTags() {
+        return tags;
+    }
+
+    @Override
+    public String toString() {
+        return getAsText();
+    }
+
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getTitle().title + " ");
+        sb.append("@@" + this.getVenueString() + " ");
+        sb.append("by:" + this.getEndTimeString() + " ");
+        sb.append("**" + this.getUrgencyLevelString() + " ");
+        sb.append("d:" + this.getDescriptionString() + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("##" + s.tagName + " "));
+        return sb.toString();
+    }
 }
