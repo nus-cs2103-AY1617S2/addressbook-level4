@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     private final Set<String> desckeywords;
 
     public FindCommand(Set<String> namekeywords, Set<String> startTimekeywords, Set<String> endTimekeywords,
-                       Set<String> prioritykeywords,Set<String> tagskeywords,Set<String> desckeywords) {
+                       Set<String> prioritykeywords, Set<String> tagskeywords, Set<String> desckeywords) {
         this.namekeywords = namekeywords;
         this.startTimekeywords = namekeywords;
         this.endTimekeywords = namekeywords;
