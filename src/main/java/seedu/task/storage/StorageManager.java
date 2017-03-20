@@ -95,10 +95,11 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {
-    	//config.setTaskManagerFilePath(event.path);
+    	config.setTaskManagerFilePath(event.path);
     	try {
+    		taskManagerStorage.setTaskManagerFilePath(event.path);
     		taskManagerStorage.saveTaskManager(event.taskManager, event.path);
-    		//ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    		ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
     	} catch (IOException ie) {
     		logger.warning("Unable to save config file");
     	}
