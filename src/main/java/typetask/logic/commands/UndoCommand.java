@@ -1,6 +1,5 @@
 package typetask.logic.commands;
 
-import typetask.commons.core.Messages;
 
 public class UndoCommand extends Command {
 
@@ -15,19 +14,16 @@ public class UndoCommand extends Command {
     private static final int STATUS_EMPTY_HISTORY = 0;
     private static final int STATUS_ERROR_HISTORY = -1;
 
-    public UndoCommand() {
-
-    }
 
     @Override
     public CommandResult execute() {
         switch (model.restoreTaskManager()) {
-            case STATUS_ERROR_HISTORY:
-                return new CommandResult(MESSAGE_FAILURE);
-            case STATUS_EMPTY_HISTORY:
-                return new CommandResult(MESSAGE_FAILURE);
-            default:
-                return new CommandResult(MESSAGE_SUCCESS);
+        case STATUS_ERROR_HISTORY:
+            return new CommandResult(MESSAGE_FAILURE);
+        case STATUS_EMPTY_HISTORY:
+            return new CommandResult(MESSAGE_FAILURE);
+        default:
+            return new CommandResult(MESSAGE_SUCCESS);
         }
     }
 }
