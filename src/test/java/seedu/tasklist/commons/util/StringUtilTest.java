@@ -148,5 +148,37 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    //--------------- Tests for removeSquareBrackets -----------------------------
 
+    @Test
+    public void removeSquareBrackets() {
+        //normal tags
+        String testTag = "[test]";
+        String expected = "test";
+        assertEqual(StringUtil.removeSquareBrackets(testTag), expected);
+        //number tags
+        testTag = "[5]";
+        expected = "5";
+        assertEqual(StringUtil.removeSquareBrackets(testTag), expected);
+        //empty tag
+        testTag = "[]";
+        expected = "";
+        assertEqual(StringUtil.removeSquareBrackets(testTag), expected);
+        //normal string
+        testTag = "normal";
+        expected = testTag;
+        assertEqual(StringUtil.removeSquareBrackets(testTag), expected);
+        //only [
+        testTag = "[head";
+        expected = testTag;
+        assertEqual(StringUtil.removeSquareBrackets(testTag), expected);
+        //only ]
+        testTag = "]";
+        expected = testTag;
+        assertEqual(StringUtil.removeSquareBrackets(testTag), expected);
+    }
+
+    private void assertEqual(String string1, String string2) {
+        assertTrue(string1.equals(string2));
+    }
 }
