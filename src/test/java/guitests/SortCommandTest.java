@@ -34,20 +34,20 @@ public class SortCommandTest extends TaskListGuiTest {
     @Test
     public void sort() {
         //sort by name
-        TestTask[] expectedListName = {td.groceries, td.tutorial, td.homework, td.drink, td.cs2103T, td.java};
+        TestTask[] expectedListName = {td.groceries, td.tutorial, td.homework, td.drink, td.project, td.java};
         String commandName = "sort n";
         commandBox.runCommand(commandName);
         assertSortSuccess(expectedListName);
 
         //sort by date
-        TestTask[] expectedListDate = {td.tutorial, td.cs2103T, td.groceries, td.homework, td.drink, td.java };
+        TestTask[] expectedListDate = {td.tutorial, td.project, td.groceries, td.homework, td.drink, td.java };
         String commandDate = "sort d";
         commandBox.runCommand(commandDate);
         assertResultMessage(SortCommand.MESSAGE_SUCCESS);
         assertSortSuccess(expectedListDate);
 
         //sort by start priority
-        TestTask[] expectedListPriority = {td.tutorial, td.drink, td.java, td.cs2103T, td.groceries, td.homework};
+        TestTask[] expectedListPriority = {td.tutorial, td.drink, td.java, td.project, td.groceries, td.homework};
         String commandPriority = "sort p";
         commandBox.runCommand(commandPriority);
         assertResultMessage(SortCommand.MESSAGE_SUCCESS);
