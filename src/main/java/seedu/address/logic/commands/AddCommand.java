@@ -19,7 +19,6 @@ import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
-import seedu.address.logic.commands.CommandResult;
 
 /**
  * Adds a Task to the address book.
@@ -63,32 +62,25 @@ public class AddCommand extends UndoableCommand {
 
         if (venue.isPresent()) {
             tempVenue = new Venue(venue.get());
-        } else {
-            tempVenue = new Venue("");
         }
+        
         if (starttime.isPresent()) {
             tempStartTime = new StartTime(starttime.get());
-        } else {
-            tempStartTime = new StartTime("");
         }
+        
         if (endtime.isPresent()) {
             tempEndTime = new EndTime(endtime.get());
-        } else {
-            tempEndTime = new EndTime("");
         }
+        
         if (urgencyLevel.isPresent()) {
             tempUrgencyLevel = new UrgencyLevel(urgencyLevel.get());
-        } else {
-            tempUrgencyLevel = new UrgencyLevel("");
         }
+        
         if (description.isPresent()) {
             tempDescription = new Description(description.get());
-        } else {
-            tempDescription = new Description("");
         }
 
-        this.toAdd = new Task(tempTitle, tempVenue, tempStartTime, tempEndTime, tempUrgencyLevel, tempDescription,
-                new UniqueTagList(tagSet));
+        this.toAdd = new Task(tempTitle, tempVenue, tempStartTime, tempEndTime, tempUrgencyLevel, tempDescription, new UniqueTagList(tagSet));
     }
 
     // @@author A0143648Y
