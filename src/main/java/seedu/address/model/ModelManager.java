@@ -94,6 +94,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
         addressBook.setTasks(list);
     }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getCompletedTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
     //@@author
 
     //=========== Filtered Task List Accessors =============================================================

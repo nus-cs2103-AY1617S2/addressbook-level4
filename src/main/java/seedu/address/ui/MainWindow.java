@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private CompletedTaskList completedTaskList;
     private TaskListPanel taskListPanel;
     private Config config;
 
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane completedTaskListPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -108,6 +112,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+        completedTaskList = new CompletedTaskList (getCompletedTaskListPlaceHolder(), logic.getFilteredTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
@@ -130,6 +135,9 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
+    private AnchorPane getCompletedTaskListPlaceHolder() {
+        return completedTaskListPlaceholder;
+    }
     void hide() {
         primaryStage.hide();
     }
