@@ -22,11 +22,15 @@ public class Venue {
      */
     public Venue(String venue) throws IllegalValueException {
         assert venue != null;
-        String trimmedVenue = venue.trim();
-        if (!isValidVenue(trimmedVenue)) {
-            throw new IllegalValueException(MESSAGE_VENUE_CONSTRAINTS);
+        if (venue.isEmpty()) {
+            this.value = venue;
+        } else {
+            String trimmedVenue = venue.trim();
+            if (!isValidVenue(trimmedVenue)) {
+                throw new IllegalValueException(MESSAGE_VENUE_CONSTRAINTS);
+            }
+            this.value = trimmedVenue;
         }
-        this.value = trimmedVenue;
     }
 
     /**
@@ -45,7 +49,7 @@ public class Venue {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Venue // instanceof handles nulls
-                && this.value.equals(((Venue) other).value)); // state check
+                        && this.value.equals(((Venue) other).value)); // state check
     }
 
     @Override

@@ -13,6 +13,8 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
+import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -44,19 +46,20 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
+        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                raise(new TaskPanelSelectionChangedEvent(newValue));
+            }
+        });
     }
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+            DeleteCommandParser.setIndex(index + 1);
+            EditCommandParser.setIndex(index + 1);
         });
     }
 

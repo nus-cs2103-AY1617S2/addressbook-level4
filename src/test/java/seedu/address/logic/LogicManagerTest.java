@@ -41,11 +41,13 @@ import seedu.address.model.ReadOnlyToDoList;
 import seedu.address.model.ToDoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 import seedu.address.storage.StorageManager;
 
@@ -436,14 +438,16 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Title name = new Title("Adam Brown");
-            Venue privateVenue = new Venue("111111");
-            StartTime privateStartTime = new StartTime("adam@gmail.com");
-            EndTime privateEndTime = new EndTime("111, alpha street");
+            Title name = new Title("CS2103 Tutorial");
+            Venue privateVenue = new Venue("COM1 B103");
+            StartTime privateStartTime = new StartTime("Wednesday 10am");
+            EndTime privateEndTime = new EndTime("Wednesday 11am");
+            UrgencyLevel privateUrgencyLevel = new UrgencyLevel("3");
+            Description privateDescription = new Description("I love 2103!!!");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateVenue, privateStartTime, privateEndTime, tags);
+            return new Task(name, privateVenue, privateStartTime, privateEndTime, privateUrgencyLevel, privateDescription, tags);
         }
 
         /**
@@ -461,6 +465,8 @@ public class LogicManagerTest {
                     new Venue("" + Math.abs(seed)),
                     new StartTime(seed + "@email"),
                     new EndTime("House of " + seed),
+                    new UrgencyLevel("3"),
+                    new Description("I love 2103!!"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -471,10 +477,11 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" s/").append(p.getStartTime());
-            cmd.append(" v/").append(p.getVenue());
-            cmd.append(" e/").append(p.getEndTime());
-
+            cmd.append(" @@").append(p.getVenue());
+            cmd.append(" from:").append(p.getStartTime());
+            cmd.append(" to:").append(p.getEndTime());
+            cmd.append(" ul/").append(p.getUrgencyLevel());
+            cmd.append(" d/").append(p.getDescription());
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
                 cmd.append(" t/").append(t.tagName);
@@ -507,16 +514,16 @@ public class LogicManagerTest {
          * @param addressBook
          *            The ToDoList to which the Tasks will be added
          */
-        void addToToDoList(ToDoList addressBook, int numGenerated) throws Exception {
-            addToToDoList(addressBook, generateTaskList(numGenerated));
+        void addToToDoList(ToDoList toDoList, int numGenerated) throws Exception {
+            addToToDoList(toDoList, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given ToDoList
          */
-        void addToToDoList(ToDoList addressBook, List<Task> tasksToAdd) throws Exception {
+        void addToToDoList(ToDoList toDoList, List<Task> tasksToAdd) throws Exception {
             for (Task p : tasksToAdd) {
-                addressBook.addTask(p);
+                toDoList.addTask(p);
             }
         }
 
@@ -561,9 +568,11 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new Venue("1"),
-                    new StartTime("1@email"),
-                    new EndTime("House of 1"),
+                    new Venue("location"),
+                    new StartTime("dawn"),
+                    new EndTime("dusk"),
+                    new UrgencyLevel("3"),
+                    new Description("I love 2103!!"),
                     new UniqueTagList(new Tag("tag")));
         }
     }

@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_URGENCYLEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Collection;
@@ -23,20 +25,25 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class EditCommandParser {
 
+    private static Optional<Integer> index;
+
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * EditCommand and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_VENUE, PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_VENUE, PREFIX_STARTTIME, PREFIX_ENDTIME,
+                PREFIX_URGENCYLEVEL, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            index = EditCommandParser.index;
+            if (!index.isPresent()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
@@ -45,6 +52,8 @@ public class EditCommandParser {
             editTaskDescriptor.setVenue(ParserUtil.parseVenue(argsTokenizer.getValue(PREFIX_VENUE)));
             editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
             editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
+            editTaskDescriptor.setUrgencyLevel(ParserUtil.parseUrgencyLevel(argsTokenizer.getValue(PREFIX_URGENCYLEVEL)));
+            editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -58,9 +67,10 @@ public class EditCommandParser {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Optional<UniqueTagList>} containing zero tags.
+     * Parses {@code Collection<String> tags} into an
+     * {@code Optional<UniqueTagList>} if {@code tags} is non-empty. If
+     * {@code tags} contain only one element which is an empty string, it will
+     * be parsed into a {@code Optional<UniqueTagList>} containing zero tags.
      */
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
@@ -72,4 +82,7 @@ public class EditCommandParser {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    public static void setIndex(int index) {
+        EditCommandParser.index = Optional.of(index);
+    }
 }

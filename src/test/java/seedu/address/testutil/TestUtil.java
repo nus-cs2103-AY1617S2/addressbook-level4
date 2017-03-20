@@ -32,11 +32,13 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.ToDoList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 import seedu.address.storage.XmlSerializableToDoList;
 
@@ -75,24 +77,24 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                new Task(new Title("Ali Muster"), new Venue("9482424"), new StartTime("hans@google.com"),
-                        new EndTime("4th street"), new UniqueTagList()),
-                new Task(new Title("Boris Mueller"), new Venue("87249245"), new StartTime("ruth@google.com"),
-                        new EndTime("81th street"), new UniqueTagList()),
-                new Task(new Title("Carl Kurz"), new Venue("95352563"), new StartTime("heinz@yahoo.com"),
-                        new EndTime("wall street"), new UniqueTagList()),
-                new Task(new Title("Daniel Meier"), new Venue("87652533"), new StartTime("cornelia@google.com"),
-                        new EndTime("10th street"), new UniqueTagList()),
-                new Task(new Title("Elle Meyer"), new Venue("9482224"), new StartTime("werner@gmail.com"),
-                        new EndTime("michegan ave"), new UniqueTagList()),
-                new Task(new Title("Fiona Kunz"), new Venue("9482427"), new StartTime("lydia@gmail.com"),
-                        new EndTime("little tokyo"), new UniqueTagList()),
-                new Task(new Title("George Best"), new Venue("9482442"), new StartTime("anna@google.com"),
-                        new EndTime("4th street"), new UniqueTagList()),
-                new Task(new Title("Hoon Meier"), new Venue("8482424"), new StartTime("stefan@mail.com"),
-                        new EndTime("little india"), new UniqueTagList()),
-                new Task(new Title("Ida Mueller"), new Venue("8482131"), new StartTime("hans@google.com"),
-                        new EndTime("chicago ave"), new UniqueTagList()) };
+                new Task(new Title("CS2103 Tutorial"), new Venue("COM1-B103"), new StartTime("Tuesday 10:00"),
+                        new EndTime("Tuesday 11:00"), new UrgencyLevel("5"), new Description("Deadline of V0.2"), new UniqueTagList()),
+                new Task(new Title("DBS Internship interview"), new Venue("Raffles Place"), new StartTime("March 31, 9:30"),
+                        new EndTime("Wednesday 12:00"), new UrgencyLevel("5"), new Description("I love interview"), new UniqueTagList()),
+                new Task(new Title("Hang out with Joe"), new Venue("313 Somerset"), new StartTime("Saturday 11:00"),
+                        new EndTime("Saturday 17:00"), new UrgencyLevel("4"), new Description("I love Joe"), new UniqueTagList()),
+                new Task(new Title("Statistics society meeting"), new Venue("S16 04-30"), new StartTime("Every Wednesday 19:00"),
+                        new EndTime("Wednesday 21:00"), new UrgencyLevel("3"), new Description("I love meeting"), new UniqueTagList()),
+                new Task(new Title("Tuition part-time job"), new Venue("Jun Wei's house at Jurong Ease Avenue 1"), new StartTime("Next Thursday 19:00"),
+                        new EndTime("Thursday 21:00"), new UrgencyLevel("2"), new Description("I love Part-time"), new UniqueTagList()),
+                new Task(new Title("Strings ensemble rehearsal"), new Venue("UCC hall"), new StartTime("Friday 9:00"),
+                        new EndTime("Friday 17:00"), new UrgencyLevel("1"), new Description("I love rehearsal"), new UniqueTagList()),
+                new Task(new Title("Dinner with auntie"), new Venue("Home"), new StartTime("Friday 19:00"),
+                        new EndTime("Friday 20:00"), new UrgencyLevel("2"), new Description("I love auntie"), new UniqueTagList()),
+                new Task(new Title("MA3269 Quiz"), new Venue("LT26"), new StartTime("Thursday 12:00"),
+                        new EndTime("Thursday 14:00"), new UrgencyLevel("3"), new Description("I hate quiz"), new UniqueTagList()),
+                new Task(new Title("Submit FIN3101 Tutorial"), new Venue("Biz1-0748 Prof Tan's office"), new StartTime("now"),
+                        new EndTime("Thursday 11am"), new UrgencyLevel("4"), new Description("I love fanbingbing"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;

@@ -24,15 +24,21 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label endTime;
     @FXML
+    private Label urgencyLevel;
+    @FXML
+    private Label description;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        venue.setText(task.getVenue().value);
-        startTime.setText(task.getStartTime().value);
-        endTime.setText(task.getEndTime().value);
+        venue.setText("Venue at: " + task.getVenue().value);
+        startTime.setText("Start from: " + task.getStartTime().value);
+        endTime.setText("End at: " + task.getEndTime().value);
+        urgencyLevel.setText("Urgency: " + task.getUrgencyLevel().value);
+        description.setText("Description: " + task.getDescription().value);
         initTags(task);
     }
 
