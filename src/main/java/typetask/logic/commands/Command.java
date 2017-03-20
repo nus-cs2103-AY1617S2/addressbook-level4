@@ -1,5 +1,6 @@
 package typetask.logic.commands;
 
+
 import typetask.commons.core.Messages;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.Model;
@@ -36,4 +37,5 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+
 }

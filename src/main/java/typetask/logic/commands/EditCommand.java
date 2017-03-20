@@ -55,7 +55,7 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-
+        model.storeTaskManager(COMMAND_WORD);
         model.updateTask(filteredTaskListIndex, editedTask);
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
