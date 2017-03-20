@@ -11,6 +11,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.StartTime;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UrgencyLevel;
@@ -26,13 +27,13 @@ public class XmlAdaptedTask {
     @XmlElement
     private String venue;
     @XmlElement
+    private String startTime;
+    @XmlElement
     private String endTime;
     @XmlElement
     private String urgencyLevel;
     @XmlElement
     private String description;
-    @XmlElement
-    private Boolean status;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -43,18 +44,19 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask() {}
 
-    //@@author A0122017Y
+
     /**
      * Converts a given Task into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        title = source.getTitle().toString();
-        venue = source.getVenue().toString();
-        endTime = source.getEndTime().toString();
-        urgencyLevel = source.getUrgencyLevel().toString();
-        description = source.getDescription().toString();
+        title = source.getTitle().title;
+        venue = source.getVenue().isPresent() ? source.getVenue().get().toString() : "";
+        startTime = source.getStartTime().isPresent() ? source.getStartTime().get().toString() : "";
+        endTime = source.getEndTime().isPresent() ? source.getEndTime().get().toString() : "";
+        urgencyLevel = source.getUrgencyLevel().isPresent() ? source.getUrgencyLevel().get().toString() : "";
+        description = source.getDescription().isPresent() ? source.getDescription().get().toString() : "";
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -72,12 +74,12 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
-        final Venue venue = new Venue(this.venue);
-        final EndTime endTime = new EndTime(this.endTime);
-        final UrgencyLevel urgencyLevel = new UrgencyLevel(this.urgencyLevel);
-        final Description description = new Description(this.description);
-        final Boolean status = new Boolean(this.status);
+        final Venue venue = this.venue=="" ? new Venue(this.venue) : null;
+        final StartTime startTime = this.startTime=="" ? new StartTime(this.startTime) : null;
+        final EndTime endTime = this.endTime=="" ? new EndTime(this.endTime) : null;
+        final UrgencyLevel urgencyLevel = this.urgencyLevel=="" ? new UrgencyLevel(this.urgencyLevel) : null;
+        final Description description = this.description=="" ? new Description(this.description) : null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(title, venue, endTime, urgencyLevel, description, status, tags);
+        return new Task(title, venue, startTime, endTime, urgencyLevel, description, tags);
     }
 }
