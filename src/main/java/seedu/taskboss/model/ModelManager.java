@@ -123,6 +123,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredTaskListByInformation(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new InformationQualifier(keywords)));
+    }
+
+    @Override
     public void updateFilteredTaskListByCategory(Category category) {
         updateFilteredTaskList(new PredicateExpression(new CategoryQualifier(category)));
     }
@@ -183,6 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147990R
     private class StartDatetimeQualifier implements Qualifier {
         private String startDateKeyWords;
 
@@ -202,6 +208,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147990R
     private class EndDatetimeQualifier implements Qualifier {
         private String endDateKeyWords;
 
@@ -221,6 +228,30 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147990R
+    private class InformationQualifier implements Qualifier {
+        private Set<String> informationKeyWords;
+
+        InformationQualifier(Set<String> informationKeyWords) {
+            this.informationKeyWords = informationKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return informationKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                            task.getInformation().value, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "information=" + String.join(", ", informationKeyWords);
+        }
+    }
+
+    //@@author A0147990R
     private class CategoryQualifier implements Qualifier {
         private Category categoryKeyWords;
 
