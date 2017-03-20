@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class Deadline {
             if (!isEmptyDeadline(strDeadline)) {
                 try {
                     List<Date> dateList;
+                    SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy h:mm a");
                     if (dateParser.parse(strDeadline).get(0).isTimeInferred()) {
                         dateList = dateParser.parse(strDeadline + " " + DEFAULT_ENDTIME).get(0).getDates();
                     } else {
@@ -51,7 +53,7 @@ public class Deadline {
 
                     if (dateList != null && dateList.size() > 0) {
                         this.deadline = dateList.get(0);
-                        this.value = deadline.toString();
+                        this.value = df.format(deadline).toString();
                     }
                 } catch (Exception e) {
                     throw new IllegalDateTimeValueException();
@@ -94,10 +96,16 @@ public class Deadline {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                        && this.deadline.equals(((Deadline) other).deadline)); // state
-                                                                               // check
+        if (other instanceof Deadline) {
+            if (this.deadline != null && ((Deadline) other).deadline != null) {
+                return other == this // short circuit if same object
+                        || (other instanceof Deadline // instanceof handles nulls
+                                && this.deadline.equals(((Deadline) other).deadline)); // state check
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

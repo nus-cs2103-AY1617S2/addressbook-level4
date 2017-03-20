@@ -19,7 +19,7 @@ import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.label.UniqueLabelList.DuplicateLabelException;
 
 //@@author A0162877N
-public class UniqueBookingList implements Iterable<Booking> {
+public class UniqueBookingList implements Iterable<Booking>, Cloneable {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
 
     /**
@@ -67,17 +67,16 @@ public class UniqueBookingList implements Iterable<Booking> {
     /**
      * Creates a UniqueBookingList using given bookings. Enforces no nulls.
      */
-    public UniqueBookingList(Set<Booking> labels) {
-        assert !CollectionUtil.isAnyNull(labels);
-        internalList.addAll(labels);
+    public UniqueBookingList(Set<Booking> bookings) {
+        assert !CollectionUtil.isAnyNull(bookings);
+        internalList.addAll(bookings);
     }
 
     /**
      * Creates a copy of the given list. Insulates from changes in source.
      */
     public UniqueBookingList(UniqueBookingList source) {
-        internalList.addAll(source.internalList); // insulate internal list from
-                                                  // changes in argument
+        internalList.addAll(source.internalList);
     }
 
     /**
@@ -114,7 +113,6 @@ public class UniqueBookingList implements Iterable<Booking> {
     public UniqueBookingList clone() {
         UniqueBookingList bookingList = new UniqueBookingList();
         try {
-
             for (Booking booking : internalList) {
                 bookingList.add(new Booking(booking.getBookingStartDate(), booking.getBookingEndDate()));
             }
@@ -129,7 +127,7 @@ public class UniqueBookingList implements Iterable<Booking> {
      */
     public void mergeFrom(UniqueBookingList from) {
         final Set<Booking> alreadyInside = this.toSet();
-        from.internalList.stream().filter(label -> !alreadyInside.contains(label)).forEach(internalList::add);
+        from.internalList.stream().filter(booking -> !alreadyInside.contains(booking)).forEach(internalList::add);
     }
 
     /**
@@ -194,6 +192,10 @@ public class UniqueBookingList implements Iterable<Booking> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 
     /**

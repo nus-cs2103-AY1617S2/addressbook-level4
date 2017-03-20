@@ -63,7 +63,7 @@ public interface ReadOnlyTask {
         builder.append(" Label: ");
         getLabels().forEach(builder::append);
         builder.append(" Booking: ");
-        getBookings().forEach(builder::append);
+        getBookings().forEach(booking -> builder.append("[" + booking + "]\n"));
         return builder.toString();
     }
 

@@ -1,5 +1,6 @@
 package seedu.address.model.booking;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,8 @@ public class Booking {
      * Format state as text for viewing.
      */
     public String toString() {
-        return startTime.toString() + " to " + endTime.toString();
+        SimpleDateFormat df = new SimpleDateFormat("EEE dd MMM yyyy h:mm a");
+        return df.format(startTime).toString() + " to " + df.format(endTime).toString() + " ";
     }
 
 }
