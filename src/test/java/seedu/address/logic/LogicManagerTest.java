@@ -264,10 +264,10 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
-        // set AB state to 2 tasks
+        // set TM state to 2 tasks
         model.resetData(new TaskManager());
-        for (Task p : taskList) {
-            model.addTask(p);
+        for (Task t : taskList) {
+            model.addTask(t);
         }
 
         assertCommandFailure(commandWord + " 3", expectedMessage);
