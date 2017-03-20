@@ -6,9 +6,8 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.tasklist.logic.commands.DoneCommand;
+import seedu.tasklist.testutil.FloatingTaskBuilder;
 import seedu.tasklist.testutil.TestTask;
-import seedu.tasklist.testutil.TestUtil;
-
 
 /**
  * Tests the done Command for 3 types of task
@@ -20,6 +19,18 @@ public class DoneCommandTest extends TaskListGuiTest {
     // This list is updated with every successful call to assertDoneSuccess.
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    @Test
+    public void done_FloatingTask_success() throws Exception {
+        int doneTaskIndex = 3;
+
+        TestTask doneTask = new FloatingTaskBuilder().
+                withName("Buy groceries").
+                withComment("go NTUC").
+                withPriority("low").
+                withStatus(true).
+                build();
+        assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
+    }
 
     /**
      * Runs done command to mark the task at the specified index as completed
@@ -30,11 +41,12 @@ public class DoneCommandTest extends TaskListGuiTest {
      * @param doneTask is the expected task after marking a task as completed
      */
     private void assertDoneSuccess(int filteredTaskListIndex, int taskListIndex, TestTask doneTask) {
-        commandBox.runCommand("edit " + filteredTaskListIndex);
+        commandBox.runCommand("done " + filteredTaskListIndex);
 
         //Confirms the new card is marked as done
-        TaskCardHandle editedCard = taskListPanel.getTaskCardHandle(filteredTaskListIndex);
-        assertMatching(doneTask, editedCard);
+        TaskCardHandle doneCard = taskListPanel.navigateToTask(doneTask.getName().fullName);
+        System.out.println(doneCard);
+        assertMatching(doneTask, doneCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskListIndex - 1] = doneTask;
