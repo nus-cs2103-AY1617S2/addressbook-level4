@@ -22,7 +22,7 @@ public class AddCommandParser {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
-    public Command parse(String args) {
+    public Command parse(String args, int idx) {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_PRIORITY, PREFIX_TAG, PREFIX_NOTES);
         argsTokenizer.tokenize(args);
@@ -35,7 +35,7 @@ public class AddCommandParser {
 
         try {
             return new AddCommand(name, start, deadline, priority,
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)), notes
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)), notes, idx
             );
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

@@ -42,6 +42,20 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
+    //@@author A0114395E
+    /**
+     * Adds a task to the list in a specified index.
+     *
+     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     */
+    public void add(Task toAdd, int idx) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(idx, toAdd);
+    }
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *

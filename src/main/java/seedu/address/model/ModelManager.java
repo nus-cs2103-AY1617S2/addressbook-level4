@@ -71,6 +71,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoAppChanged();
     }
 
+    //@@author A0114395E
+    @Override
+    public synchronized void addTask(Task task, int idx) throws UniqueTaskList.DuplicateTaskException {
+        toDoApp.addTask(task, idx);
+        updateFilteredListToShowAll();
+        indicateToDoAppChanged();
+    }
+    //@@author
+
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
