@@ -25,11 +25,11 @@ public class FindCommand extends Command {
     public FindCommand(Set<String> namekeywords, Set<String> startTimekeywords, Set<String> endTimekeywords,
                        Set<String> prioritykeywords, Set<String> tagskeywords, Set<String> desckeywords) {
         this.namekeywords = namekeywords;
-        this.startTimekeywords = namekeywords;
-        this.endTimekeywords = namekeywords;
-        this.prioritykeywords = namekeywords;
-        this.tagskeywords = namekeywords;
-        this.desckeywords = namekeywords;
+        this.startTimekeywords = startTimekeywords;
+        this.endTimekeywords = endTimekeywords;
+        this.prioritykeywords = prioritykeywords;
+        this.tagskeywords = tagskeywords;
+        this.desckeywords = desckeywords;
     }
 
     @Override
