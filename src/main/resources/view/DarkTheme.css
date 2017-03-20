@@ -282,7 +282,7 @@
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: #ffebee;
     /* Up Right Down Left */
-    -fx-border-width: 0 0 0 5; 
+    -fx-border-width: 0 0 0 5;
     -fx-border-color: #a93a38;
 }
 
@@ -328,6 +328,6 @@
 
 #commandTextField {
     /* Up Right Down Left */
-    -fx-border-width: 0 0 2 0; 
+    -fx-border-width: 0 0 2 0;
     -fx-border-color: #FFFFFF;
 }
