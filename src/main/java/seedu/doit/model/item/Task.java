@@ -26,7 +26,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     public Task(Name name, Priority priority, StartTime startTime, EndTime endTime, Description description,
             UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, startTime, endTime, description, tags);
+        assert !CollectionUtil.isAnyNull(name, startTime, endTime);
         this.name = name;
         this.priority = priority;
         this.startTime = startTime;
@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * Task Constructor every field must be present except for startTime.
      */
     public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
+        assert !CollectionUtil.isAnyNull(name, endTime);
         this.name = name;
         this.priority = priority;
         this.startTime = new StartTime();
@@ -55,7 +55,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * endTime.
      */
     public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, tags);
+        assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.priority = priority;
         this.startTime = new StartTime();

@@ -1,6 +1,5 @@
 package seedu.doit.model.item;
 
-
 import seedu.doit.commons.exceptions.IllegalValueException;
 
 /**
@@ -10,13 +9,12 @@ import seedu.doit.commons.exceptions.IllegalValueException;
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-        "Task description can take any values, and it should not be blank";
+        "Task description can take in any string";
 
     /*
-     * The first character of the description must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     *  Any String is a valid description
      */
-    public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
+    public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;
 
