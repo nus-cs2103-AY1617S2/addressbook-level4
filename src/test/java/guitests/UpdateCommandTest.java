@@ -111,9 +111,6 @@ public class UpdateCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("update 1 s/yahoo!!!");
         assertResultMessage(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
 
-        commandBox.runCommand("update 1 l/");
-        assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
-
         commandBox.runCommand("update 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
