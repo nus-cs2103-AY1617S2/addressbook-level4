@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import seedu.doist.logic.parser.ArgumentTokenizer.Prefix;
@@ -30,6 +32,45 @@ public class ArgumentTokenizerTest {
 
         assertPreambleAbsent(tokenizer);
         assertArgumentAbsent(tokenizer, slashP);
+    }
+
+    @Test
+    public void tokenize_InvalidNumberOfTokens() {
+        ArgumentTokenizer tokenizer = new ArgumentTokenizer(CliSyntax.PREFIX_AS, CliSyntax.PREFIX_BY,
+                CliSyntax.PREFIX_FROM, CliSyntax.PREFIX_TO, CliSyntax.PREFIX_UNDER);
+        ArrayList<String> invalidTokens = new ArrayList<>();
+        invalidTokens.add("\\from");
+        invalidTokens.add("\\to");
+        invalidTokens.add("\\from");
+        assertEquals(false, tokenizer.validateTokens(invalidTokens));
+    }
+
+    @Test
+    public void tokenize_InvalidDateTokens() {
+        ArgumentTokenizer tokenizer = new ArgumentTokenizer(CliSyntax.PREFIX_BY,
+                CliSyntax.PREFIX_FROM, CliSyntax.PREFIX_TO);
+        ArrayList<String> tokensUsed = new ArrayList<>();
+
+        //Command with only '\from' should fail
+        tokensUsed.add("\\from");
+        assertEquals(ArgumentTokenizer.DATE_INVALID, tokenizer.validateDate(tokensUsed));
+
+        //Command with both '\from' and '\by' should fail
+        tokensUsed.add("\\by");
+        assertEquals(ArgumentTokenizer.DATE_INVALID, tokenizer.validateDate(tokensUsed));
+
+        //Command with '\from', '\to' and '\by' should fail
+        tokensUsed.add("\\to");
+        assertEquals(ArgumentTokenizer.DATE_INVALID, tokenizer.validateDate(tokensUsed));
+
+        //Command with '\from' and '\to' should pass
+        tokensUsed.remove("\\by");
+        assertEquals(ArgumentTokenizer.DATE_FROM, tokenizer.validateDate(tokensUsed));
+
+        //Command with no date parameters should pass
+        tokensUsed.remove("\\from");
+        tokensUsed.remove("\\to");
+        assertEquals(ArgumentTokenizer.DATE_NIL, tokenizer.validateDate(tokensUsed));
     }
 
     private void assertPreamblePresent(ArgumentTokenizer argsTokenizer, String expectedPreamble) {
