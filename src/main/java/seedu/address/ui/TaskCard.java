@@ -20,6 +20,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label venue;
     @FXML
+    private Label startTime;
+    @FXML
     private Label endTime;
     @FXML
     private Label urgencyLevel;
@@ -27,50 +29,67 @@ public class TaskCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
+    
+    private ReadOnlyTask task;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        this.task = task;
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        initEndTime(task);
-        initVenue(task);
-        initDescription(task);
+        initialiseVenue();
+        initialiseStartTime();
+        initialiseEndTime();
+        initialiseUrgencyLevel();
+        initialiseDescription();
         initTags(task);
     }
-    //@@author A0122017Y
-    private void initVenue(ReadOnlyTask task){
-        boolean isVenuePresent = task.getVenue().isPresent();
-        String venueContent = "";
-        if (isVenuePresent) {
-            venueContent = "Venue at: " + task.getVenue().toString();
+    
+    private void initialiseVenue() {
+        venue.setText(task.getVenueString().trim());
+        if (task.getVenue().isPresent()) {
+            venue.setManaged(true);
+        } else {
+            venue.setManaged(false);
         }
-        venue.setText(venueContent);
     }
     
-    private void initDescription(ReadOnlyTask task){
-        String descriptionContent = "";
-        if (task.getDescription().isPresent()) {
-            descriptionContent = "Description: " + task.getDescription().toString();
+    private void initialiseStartTime() {
+        startTime.setText(task.getStartTimeString().trim());
+        if (task.getStartTime().isPresent()) {
+            startTime.setManaged(true);
+        } else {
+            startTime.setManaged(false);
         }
-        description.setText(descriptionContent);
     }
-    
-    private void initUrgency(ReadOnlyTask task){
-        String urgencyContent = "";
-        if (task.getUrgencyLevel().isPresent()) {
-            urgencyContent = "Urgency: " + task.getDescription().toString();
-        }
-        urgencyLevel.setText(urgencyContent);
-    }
-    
-    private void initEndTime(ReadOnlyTask task){
-        String endTimeContent = "";
+  
+    private void initialiseEndTime() {
+        endTime.setText(task.getEndTimeString().trim());
         if (task.getEndTime().isPresent()) {
-            endTimeContent = "Deadline: " + task.getEndTime().toString();
+            endTime.setManaged(true);
+        } else {
+            endTime.setManaged(false);
         }
-        description.setText(endTimeContent);
+    }    
+    
+    private void initialiseUrgencyLevel() {
+        urgencyLevel.setText(task.getUrgencyLevelString().trim());
+        if (task.getVenue().isPresent()) {
+            urgencyLevel.setManaged(true);
+        } else {
+            urgencyLevel.setManaged(false);
+        }
     }
 
+    private void initialiseDescription() {
+        description.setText(task.getDescriptionString().trim());
+        if (task.getDescription().isPresent()) {
+            description.setManaged(true);
+        } else {
+            description.setManaged(false);
+        }
+    }
+    
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
