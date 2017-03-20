@@ -1,5 +1,6 @@
 package seedu.toluist.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import seedu.toluist.dispatcher.CommandResult;
@@ -20,6 +21,12 @@ public abstract class Controller {
      * UiStore to store data to be used by Ui
      */
     protected final UiStore uiStore = UiStore.getInstance();
+    
+    /**
+     * ArrayList to store previous commands entered since starting the application
+     */
+    protected static ArrayList<String> commandHistory = new ArrayList<String>();
+    protected static int historyPointer = 0;
 
     public Controller(Ui renderer) {
         this.renderer = renderer;
@@ -54,5 +61,13 @@ public abstract class Controller {
      */
     public static String[] getCommandWords() {
         return new String[] {};
+    }
+    
+    /**
+     * Adds entered command to history list
+     */
+    public static void recordCommand(String command) {
+        commandHistory.add(command);
+        historyPointer = commandHistory.size();
     }
 }

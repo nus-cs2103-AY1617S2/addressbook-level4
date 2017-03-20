@@ -23,6 +23,7 @@ import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.FindController;
+import seedu.toluist.controller.HistoryController;
 import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
@@ -49,6 +50,7 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public void dispatch(Ui renderer, String command) {
+        Controller.recordCommand(command);
         String deAliasedCommand = aliasConfig.dealias(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
@@ -75,6 +77,7 @@ public class CommandDispatcher extends Dispatcher {
                 UpdateTaskController.class,
                 DeleteTaskController.class,
                 StoreController.class,
+                HistoryController.class,
                 LoadController.class,
                 UndoController.class,
                 RedoController.class,
