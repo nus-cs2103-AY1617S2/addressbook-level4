@@ -49,15 +49,16 @@ public class AddCommand extends Command {
 
         if(isFloatingTask(hasDeadline, hasStartDate, hasEndDate)) {
             this.toAdd = new Task(new Description(description), new UniqueTagList(tagSet));
-        }
+        } else
         if(isDeadlineTask(hasDeadline, hasStartDate, hasEndDate)) {
             this.toAdd = new Task(new Description(description), new DateTime(deadline.get()), new UniqueTagList(tagSet));
-        }
+        } else
         if(isEventTask(hasDeadline, hasStartDate, hasEndDate)) {
             this.toAdd = new Task(new Description(description), new DateTime(startDate.get()),
                                   new DateTime(endDate.get()), new UniqueTagList(tagSet));
-        }
+        } else {
         throw new IllegalValueException("Too many/few DATETIME arguments!");
+        }
     }
 
     /**
