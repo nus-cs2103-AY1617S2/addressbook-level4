@@ -1,5 +1,6 @@
 package seedu.tasklist.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -9,7 +10,6 @@ import seedu.tasklist.commons.core.ComponentManager;
 import seedu.tasklist.commons.core.LogsCenter;
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
 import seedu.tasklist.commons.events.model.TaskListChangedEvent;
-import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
 import seedu.tasklist.model.task.ReadOnlyTask;
@@ -96,9 +96,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void setPreviousState() throws EmptyUndoRedoStackException {
+    public void setPreviousState() throws EmptyStackException {
         if (undoStack.empty()) {
-            throw new EmptyUndoRedoStackException();
+            throw new EmptyStackException();
         }
         redoStack.push(new TaskList(taskList));
         ReadOnlyTaskList previousState = undoStack.pop();
@@ -107,9 +107,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void setNextState() throws EmptyUndoRedoStackException {
+    public void setNextState() throws EmptyStackException {
         if (redoStack.empty()) {
-            throw new EmptyUndoRedoStackException();
+            throw new EmptyStackException();
         }
         undoStack.push(new TaskList(taskList));
         ReadOnlyTaskList nextState = redoStack.pop();
@@ -121,12 +121,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void enableUndoForClear() {
         undoStack.push(new TaskList(taskList));
     }
-    @SuppressWarnings("serial")
-    public static class EmptyUndoRedoStackException extends EmptyModelStackException {
-        protected EmptyUndoRedoStackException() {
-            super("No available states");
-        }
-    }
+
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
