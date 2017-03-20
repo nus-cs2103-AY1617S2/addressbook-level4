@@ -60,8 +60,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("find Eat");
 
         String detailsToEdit = "Buy";
-        int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
+        int filteredTaskListIndex = 1; // index of the task in the list returned by the find command
+        int taskManagerIndex = 2; // index of the task in the original list
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Buy").build();
