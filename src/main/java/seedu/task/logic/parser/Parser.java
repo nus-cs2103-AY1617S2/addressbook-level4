@@ -23,6 +23,7 @@ import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListByUndoneCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.UndoCommand;
 
 
 /**
@@ -66,6 +67,10 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_WORD_HOTKEY:
+            return new UndoCommand();
 
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_WORD_HOTKEY:

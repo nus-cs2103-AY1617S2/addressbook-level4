@@ -68,4 +68,12 @@ public class DateTest {
         assertTrue(Date.isValidDate("03:30 pm"));
         assertTrue(Date.isValidDate("3pm"));
     }
+
+    @Test
+    public void isEquals() throws IllegalValueException {
+
+        Date date1 = new Date("");
+        Date date2 = new Date("");
+        assertTrue(date1.equals(date2));
+    }
 }

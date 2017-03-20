@@ -7,7 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.task.testutil.TestTask;
 
-public class EditIsDoneCommandTest extends TaskManagerGuiTest {
+public class DoneCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void done() {
