@@ -329,50 +329,24 @@ Pressing the TAB key will auto complete the word at the current cursor if there 
 
 ## 4. Command Summary
 
-* **Help** `help`
-
-* **Add** `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`<br />
-  e.g. `add CS2106 Mid terms by tmr 13:00 #school`
-
-* **List** `list [TYPE]`<br />
-  e.g. `list outstanding tasks`
-
-* **Update** `update [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE])`<br />
-  e.g. `update 1 #label tedious work by thursday #work`
-
-* **Find** `find [TYPE] KEYWORD [MORE_KEYWORDS]...`<br />
-  e.g. `find CS2103`
-
-* **Delete** `delete [TASK_ID|LABEL]`<br />
-  e.g. `delete 1`
-
-* **Select** `select TASK_ID`<br />
-  e.g. `select 2`
-
-* **Book** `book TASKNAME [#LABEL...] on DATE, [MORE_DATES]...`<br />
-  e.g. `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`
-
-* **Confirm** `confirm TASK_ID (SLOT_NUMBER|DATE)`<br />
-  e.g. `confirm 1 1`
-
-* **Edit Label** `editlabel OLD_LABEL NEW_LABEL`<br />
-  e.g. `editlabel friends oldFriends`
-
-* **Undo** `undo`
-
-* **Clear** `clear`
-
-* **Save to a certain location** `saveas FILEPATH_RELATIVE_TO_JAR`<br />
-  e.g. `saveas data/taskmanager2.xml`
-
-* **Load data from a different file** `load FILEPATH_RELATIVE_TO_JAR`<br />
-  e.g. `load data/taskmanager2.xml`
-
-* **Push** `push`
-
-* **Pull** `pull`
-
-* **Export** `export ([by DATE] | [from START_DATE to END_DATE])`<br />
-  e.g. `export today`
-
-* **Exit** `exit`
+Command Description | Command Format | Example
+-------- | :-------- | :---------
+| Help | `help` |
+| Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]` | `add CS2106 Mid terms by tmr 13:00 #school`
+| List | `list [TYPE]`| `list outstanding tasks`
+| Update | `update [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE])` | `update 1 #label tedious work by thursday #work`
+| Find | `find [TYPE] KEYWORD [MORE_KEYWORDS]...` | `find CS2103`
+| Delete | `delete [TASK_ID|LABEL]` | `delete 1`
+| Select | `select TASK_ID` | `select 2`
+| Book | `book TASKNAME [#LABEL...] on DATE, [MORE_DATES]...` | `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`
+| Confirm | `confirm TASK_ID (SLOT_NUMBER|DATE)` | `confirm 1 1`
+| Edit Label | `editlabel OLD_LABEL NEW_LABEL` | `editlabel friends oldFriends`
+| Undo | `undo` |
+| Clear | `clear` |
+| Save to a certain location | `saveas FILEPATH_RELATIVE_TO_JAR` | `saveas data/taskmanager2.xml`
+| Load data from a different file | `load FILEPATH_RELATIVE_TO_JAR` | `load data/taskmanager2.xml`
+| Push | `push` |
+| Pull | `pull` |
+| Export | `export ([by DATE] | [from START_DATE to END_DATE])` | `export today`
+| Exit | `exit` |
+  
