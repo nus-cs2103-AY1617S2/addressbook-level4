@@ -68,7 +68,7 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments, -1);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -147,7 +147,8 @@ public class Parser {
             index = ParserUtil.parseIndex(arguments);
             // Get data of command to be deleted
             ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
-            return new AddCommandParser().parse(ParserUtil.getTaskArgs(taskToDelete));
+            return new AddCommandParser().parse(ParserUtil.getTaskArgs(taskToDelete), index.get() - 1);
+
         default:
             return null;
         }
