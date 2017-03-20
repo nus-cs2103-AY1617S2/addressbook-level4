@@ -17,6 +17,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private StartTime startTime;
     private EndTime endTime;
     private Description description;
+    private boolean isDone;
     private UniqueTagList tags;
 
     // ================ Constructor methods ==============================
@@ -32,6 +33,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.isDone = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
     }
@@ -40,14 +42,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * Task Constructor every field must be present except for startTime.
      */
     public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
-        this.name = name;
-        this.priority = priority;
-        this.startTime = new StartTime();
-        this.endTime = endTime;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
+        this(name, priority, new StartTime(), endTime, description, tags);
     }
 
     /**
@@ -55,14 +50,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * endTime.
      */
     public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, tags);
-        this.name = name;
-        this.priority = priority;
-        this.startTime = new StartTime();
-        this.endTime = new EndTime();
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
+        this(name, priority, new StartTime(), new EndTime(), description, tags);
     }
 
     /**
@@ -218,7 +206,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     private int compareName(ReadOnlyTask other) {
-        return this.getName().toString().compareTo(other.getName().toString());
+        return this.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
 
     public int compareItems(ReadOnlyTask other) {
