@@ -612,7 +612,7 @@ public class LogicManagerTest {
          */
         TaskManager generateTaskManager(List<Task> tasks) throws Exception {
             TaskManager taskManager = new TaskManager();
-            addToAddressBook(taskManager, tasks);
+            addToTaskManager(taskManager, tasks);
             return taskManager;
         }
 
@@ -621,13 +621,13 @@ public class LogicManagerTest {
          * @param taskManager The TaskManager to which the Tasks will be added
          */
         void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToAddressBook(taskManager, generateTaskList(numGenerated));
+            addToTaskManager(taskManager, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Tasks to the given AddressBook
+         * Adds the given list of Tasks to the given TaskManager
          */
-        void addToAddressBook(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
                 taskManager.addTask(p);
             }
