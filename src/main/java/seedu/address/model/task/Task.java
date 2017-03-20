@@ -71,11 +71,11 @@ public class Task implements ReadOnlyTask{
     
     private String sortCategory() {
         if (isDeadlineTask()) {
-            return "TASK_TYPE_DEADLINE";
+            return TASK_TYPE_DEADLINE;
         } else if (isEventTask()) {
-            return "TASK_TYPE_EVENT";
+            return TASK_TYPE_EVENT;
         } else {
-            return "FLOAT";
+            return TASK_TYPE_FLOAT;
         }
     }
     

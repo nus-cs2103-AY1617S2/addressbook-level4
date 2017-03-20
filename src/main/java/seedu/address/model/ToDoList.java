@@ -162,14 +162,14 @@ public class ToDoList implements ReadOnlyToDoList {
     }
     
     public ObservableList<ReadOnlyTask> getFilteredFloats() {
-        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_EVENT));
+        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_FLOAT));
     }
     
     /**
      * Returns a task list filtered to only contain Deadlines
      */
     public ObservableList<ReadOnlyTask> getFilteredTasks() {
-        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_EVENT));
+        return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_DEADLINE));
     }
     
     /**
