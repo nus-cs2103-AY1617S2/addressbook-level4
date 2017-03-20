@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.text.ParseException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -37,7 +36,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     @FXML
-    public void handleCommandInputChanged() throws ParseException {
+    public void handleCommandInputChanged() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 

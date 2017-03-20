@@ -54,16 +54,16 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find cat");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Feed the cat";
         int filteredTodoListIndex = 1;
-        int addressBookIndex = 5;
+        int todoListIndex = 2;
 
-        TestTodo todoToEdit = expectedTodosList[addressBookIndex - 1];
-        TestTodo editedTodo = new TodoBuilder(todoToEdit).withName("Belle").build();
+        TestTodo todoToEdit = expectedTodosList[todoListIndex - 1];
+        TestTodo editedTodo = new TodoBuilder(todoToEdit).withName("Feed the cat").build();
 
-        assertEditSuccess(filteredTodoListIndex, addressBookIndex, detailsToEdit, editedTodo);
+        assertEditSuccess(filteredTodoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
 
     @Test
@@ -74,7 +74,8 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_invalidTodoIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        int invalidTodoIndex = expectedTodosList.length + 1;
+        commandBox.runCommand("edit " + invalidTodoIndex + " Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
     }
 
@@ -95,7 +96,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_duplicateTodo_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline t/friends");
+        commandBox.runCommand("edit 2 Walk the dog t/petcare");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
     }
 
@@ -119,7 +120,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
         // confirm the list now contains all previous todos plus the todo with updated details
         expectedTodosList[addressBookIndex - 1] = editedTodo;
-        assertTrue(todoListPanel.isListMatching(expectedTodosList));
+        assertTrue(todoListPanel.isListMatching(true, expectedTodosList));
 
         //edit result didn't show in display
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TODO_SUCCESS, editedTodo));

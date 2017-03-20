@@ -10,25 +10,36 @@ import seedu.address.model.todo.UniqueTodoList;
  */
 public class TypicalTestTodos {
 
-    public TestTodo alice, benson, carl, daniel, elle, fiona, george, eventTest, deadLineTest, hoon, ida;
+    public TestTodo dog, cat, math, english, dishes, lawn, dinner, essay, toilet,
+                    car, library, tennis, shopping, laundry, job, lunch;
 
+    //@@author A0163786N
     public TypicalTestTodos() {
         try {
-            alice = new TodoBuilder().withName("Alice Pauline")
-                    .withTags("friends").build();
-            benson = new TodoBuilder().withName("Benson Meier")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TodoBuilder().withName("Carl Kurz").build();
-            daniel = new TodoBuilder().withName("Daniel Meier").build();
-            elle = new TodoBuilder().withName("Elle Meyer").build();
-            fiona = new TodoBuilder().withName("Fiona Kunz").build();
-            george = new TodoBuilder().withName("George Best").build();
+            dog = new TodoBuilder().withName("Walk the dog")
+                    .withTags("petcare").build();
+            cat = new TodoBuilder().withName("Walk the cat")
+                    .withTags("petcare", "cat").build();
+            math = new TodoBuilder().withName("Do math homework").build();
+            english = new TodoBuilder().withName("Do english homework").build();
+            dishes = new TodoBuilder().withName("Wash dishes").build();
+            lawn = new TodoBuilder().withName("Mow the lawn").build();
+            dinner = new TodoBuilder().withName("Cook dinner").build();
+            essay = new TodoBuilder().withName("Write essay").withEndTime("6:00PM 11/11/2017").build();
+            toilet = new TodoBuilder().withName("Go to the bathroom").withStartTime("12:00PM 11/11/2017")
+                    .withEndTime("1:00PM 11/11/2017").build();
+            car = new TodoBuilder().withName("Wash car").withCompleteTime("6:00PM 11/11/2017").build();
+            library = new TodoBuilder().withName("Return library book").withEndTime("6:00PM 11/11/2017")
+                    .withCompleteTime("6:00PM 11/11/2017").build();
+            tennis = new TodoBuilder().withName("Play tennis").withStartTime("12:00PM 11/11/2017")
+                    .withEndTime("1:00PM 11/11/2017").withCompleteTime("6:00PM 11/11/2017").build();
+
             // Manually added
-            hoon = new TodoBuilder().withName("Hoon Meier").build();
-            ida = new TodoBuilder().withName("Ida Mueller").build();
-            eventTest = new TodoBuilder().withName("eventTest").withStartTime("11-11-17T5:00")
-                    .withEndTime("11-11-17T6:00").build();
-            deadLineTest = new TodoBuilder().withName("deadLinetTest").withEndTime("11-11-17T6:00").build();
+            shopping = new TodoBuilder().withName("Go shopping").build();
+            laundry = new TodoBuilder().withName("Do laundry").build();
+            job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/2017").build();
+            lunch = new TodoBuilder().withName("lunch").withStartTime("12:00PM 11/11/2017")
+                    .withEndTime("1:00PM 11/11/2017").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -46,7 +57,7 @@ public class TypicalTestTodos {
     }
 
     public TestTodo[] getTypicalTodos() {
-        return new TestTodo[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTodo[] { dog, cat, math, english, dishes, lawn, dinner, essay, toilet, car, library, tennis};
     }
 
     public TodoList getTypicalTodoList() {
