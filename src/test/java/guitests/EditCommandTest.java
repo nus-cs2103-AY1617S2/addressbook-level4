@@ -1,3 +1,4 @@
+//@@author A0139221N
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -32,12 +33,15 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_FloatingTask_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Drink water p/low c/to improve brain function t/life";
+        String detailsToEdit = "Drink water p/low c/to hydrate t/life";
         int taskListIndex = 2;
 
-        TestTask editedTask = new FloatingTaskBuilder().withName("Drink water").withComment("to improve brain function")
-                .withTags("life").withPriority("low").build();
-
+        TestTask editedTask = new FloatingTaskBuilder().
+                withName("Drink water").
+                withComment("to hydrate").
+                withTags("life").
+                withPriority("low").
+                build();
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
@@ -66,26 +70,46 @@ public class EditCommandTest extends TaskListGuiTest {
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+    public void edit_FloatingTask_notAllFieldsSpecified_success() throws Exception {
+        String detailsToEdit = "p/medium t/healthy";
         int taskListIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
-        TestTask editedTask;
-        String type = taskToEdit.getType();
-        switch (type) {
-        case FloatingTask.TYPE:
-            editedTask = new FloatingTaskBuilder((TestFloatingTask) taskToEdit).withTags("sweetie", "bestie").build();
-            break;
-        case DeadlineTask.TYPE:
-            editedTask = new DeadlineTaskBuilder((TestDeadlineTask) taskToEdit).withTags("sweetie", "bestie").build();
-            break;
-        case EventTask.TYPE:
-            editedTask = new EventTaskBuilder((TestEventTask) taskToEdit).withTags("sweetie", "bestie").build();
-            break;
-        default:
-            editedTask = null;
-        }
+        assert taskToEdit.getType().equals(FloatingTask.TYPE);
+        TestTask editedTask = new FloatingTaskBuilder((TestFloatingTask) taskToEdit).
+                                  withTags("healthy").
+                                  withPriority("medium").
+                                  build();
+
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_DeadlineTask_notAllFieldsSpecified_success() throws Exception {
+        String detailsToEdit = "t/burger";
+        int taskListIndex = 5;
+
+
+        TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
+        assert taskToEdit.getType().equals(DeadlineTask.TYPE);
+        TestTask editedTask = new DeadlineTaskBuilder((TestDeadlineTask) taskToEdit).
+                                  withTags("burger").
+                                  build();
+
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_EventTask_notAllFieldsSpecified_success() throws Exception {
+        String detailsToEdit = "d/from 04/17/2017 12:30:00 to 04/17/2017 12:30:30";
+        int taskListIndex = 1;
+
+        TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
+        assert taskToEdit.getType().equals(EventTask.TYPE);
+        TestTask editedTask = new EventTaskBuilder((TestEventTask) taskToEdit).
+                                  withStartDate("17/04/2017 12:30:00").
+                                  withEndDate("17/04/2017 12:30:30").
+                                  build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -93,7 +117,7 @@ public class EditCommandTest extends TaskListGuiTest {
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int taskListIndex = 2;
+        int taskListIndex = 1;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
         TestTask editedTask;
@@ -142,6 +166,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
         assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
+//@@author
 
     @Test
     public void edit_missingTaskIndex_failure() {
@@ -191,6 +216,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     /**
      * Checks whether the edited task has the correct updated details.
+     * Includes checking if the rest of the tasks are affected. They should not be changed.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
      * @param taskListIndex index of task to edit in the address book.

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -373,4 +375,9 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    public static boolean isSameStringList(List<String> ls1, List<String> ls2) {
+        Set<String> s1 = new HashSet<>(ls1);
+        Set<String> s2 = new HashSet<>(ls2);
+        return s1.equals(s2);
+    }
 }
