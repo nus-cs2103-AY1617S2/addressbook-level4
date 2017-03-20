@@ -44,6 +44,10 @@ public class TestTask implements ReadOnlyTask {
         this.title = title;
     }
 
+    public void setStartTime(StartTime starttime) {
+        this.starttime = Optional.of(starttime);
+    }
+    
     public void setEndTime(EndTime endtime) {
         this.endtime = Optional.of(endtime);
     }
@@ -91,8 +95,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Optional<UrgencyLevel> getUrgencyLevel() {
-        // TODO Auto-generated method stub
-        return null;
+        return urgencyLevel;
     }
 
     @Override
