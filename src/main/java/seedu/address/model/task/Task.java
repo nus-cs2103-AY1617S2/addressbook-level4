@@ -33,6 +33,7 @@ public class Task implements ReadOnlyTask{
      */
     public Task(Title title, Venue venue, StartTime startTime, EndTime endTime, UrgencyLevel urgencyLevel, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title);
+        assert isValidTime(startTime,endTime);
         this.title = title;
         this.venue = venue;
         this.startTime = startTime;
@@ -43,12 +44,16 @@ public class Task implements ReadOnlyTask{
         this.category = sortCategory();
     }
     
+    private boolean isValidTime(StartTime startTime, EndTime endTime) {
+        return !(startTime != null && endTime != null && startTime.getTimeValue().isAfter(endTime.getTimeValue()));
+    }
+
     //@@A0122017Y
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), 
+        this(source.getTitle(),
                 source.getVenue().orElse(null),
                 source.getStartTime().orElse(null),
                 source.getEndTime().orElse(null),
