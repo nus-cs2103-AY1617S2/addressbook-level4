@@ -55,7 +55,7 @@ public class DeadlineTest {
     @Test
     public void testDateOnly() {
         try {
-            Deadline date = new Deadline("Thursday, March 9 2017");
+            Deadline date = new Deadline("09/03/2017");
             Date expectedDate = new Date();
             expectedDate.setDate(9);
             expectedDate.setMonth(2);
