@@ -536,14 +536,14 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Rehearse OP1");
             Priority priority = new Priority("hi");
-            Status email = new Status("incomplete");
+            Status status = new Status("incomplete");
             Note note = new Note("edit slides");
             DateTime startTime = new DateTime("12/12/2020 12:00");
             DateTime endTime = new DateTime("12/12/2020 13:00");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, priority, email, note, startTime, endTime, tags);
+            return new Task(name, priority, status, note, startTime, endTime, tags);
         }
 
         /**
