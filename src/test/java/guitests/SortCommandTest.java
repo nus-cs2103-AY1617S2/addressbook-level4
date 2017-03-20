@@ -47,7 +47,7 @@ public class SortCommandTest extends TaskListGuiTest {
         assertSortSuccess(expectedListDate);
 
         //sort by start priority
-        TestTask[] expectedListPriority = {td.tutorial, td.drink, td.java, td.project, td.groceries, td.homework};
+        TestTask[] expectedListPriority = {td.tutorial, td.project, td.drink, td.java, td.groceries, td.homework};
         String commandPriority = "sort p";
         commandBox.runCommand(commandPriority);
         assertResultMessage(SortCommand.MESSAGE_SUCCESS);
