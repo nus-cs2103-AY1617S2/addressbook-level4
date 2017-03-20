@@ -19,6 +19,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private Description description;
     private StartTime startTime;
     private EndTime endTime;
+    private boolean isDone;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -34,6 +35,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.priority = taskToCopy.getPriority();
         this.startTime = taskToCopy.getStartTime();
         this.endTime = taskToCopy.getEndTime();
+        this.isDone = false;
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
