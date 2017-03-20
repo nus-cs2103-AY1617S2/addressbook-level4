@@ -2,9 +2,11 @@
 
 By : `Team CS2103JAN2017-W15-B4`   &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
-Geekeep is a simple Command-Line-Interface (CLI) based Task Manager app created by us, a 4 man team, for NUS's CS2103 Software Engineering module. You can find out more about our team [here](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/AboutUs.md).
+Tired of Task Managers with fancy graphics? Want a simple task manager that you can use solely with your keyboard? If you answered yes, we have just the app for you!
 
-Geekeep automatically categorizes your tasks into events, deadlines or just plain tasks. It affords you all the basic functionalities of a task manager from just the Command-Line alone!
+Geekeep (pronounced Geek-keep) is a simple Command-Line-Interface (CLI) task manager that automatically categorizes your tasks into events, deadlines or just plain tasks. It affords you all the basic functionalities of a task manager from just the Command-Line alone!
+
+This guide will help you get started and get familiar with the commands.
 
 ---
 
@@ -38,7 +40,7 @@ e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
     * **`delete 3`** : deletes the task with TaskID 3 shown in the current list
     * **`exit`** : exits the app
 
-10. Refer to the [Features](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/UserGuide.md#features) section below for details of each command or just checkout the [Cheatsheet](#4-command-summary) section.
+10. Refer to the [Features](https://github.com/CS2103JAN2017-W15-B4/main/blob/master/docs/UserGuide.md#features) section below for details of each command or just check out the [Cheatsheet](#4-command-summary) section.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -48,28 +50,36 @@ e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
 Our UI is broken down into 4 main sections:
 
-1. *Command Box*<br>You enter your CLI commands here. When you enter an invalid command, it turns red.
-1. *Result Display*<br>The result of your command, whether success, failure or error, will be depicted here.
-1. *Event, Task, and Deadline List Panel*<br>The 3 types of tasks are displayed accordingly here. They are updated whenever you execute a relevant command.
-1. *Status Bar Footer*<br>Shows you the last updated time and the file storage location.
+1. *Command Box*
+    * You enter your CLI commands here. When you enter an invalid command, it turns red.
+1. *Result Display*
+    * The result of your command, whether success, failure or error, will be depicted here.
+1. *Event, Task, and Deadline List Panel*
+    * The 3 types of tasks are displayed accordingly here. They are updated whenever you execute a relevant command.
+1. *Status Bar Footer*
+    * Shows you the last updated time and the file storage location.
 
 **[⬆ back to top](#table-of-contents)**
 
 ## 3. Features
 
-1. [Help](#31-viewing-help-help)
-1. [Add](#32-adding-a-task-add)
-1. [Update](#33-updating-a-task-update)
-1. [Done & Undone](#34-marks-a-task-as-done-or-undone-done-undone)
-1. [Delete](#35-deleting-a-task-delete)
-1. [List](#36-listing-all-tasks-list)
-1. [List Done](#37-listing-all-completed-tasks-listdone)
-1. [List Undone](#38-listing-all-uncompleted-tasks-listundone)
-1. [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find)
-1. [Undo](#310-undo-most-recent-command-undo)
-1. [Redo](#311-redo-most-recent-undo)
-1. [Saving](#312-saving-the-data)
-1. [Exit](#313-exiting-the-program-exit)
+You can find a list of all availables commands and their detailed explanation in the following section. You can jump to the [Command Summary](#5-command-summary) for a quick summary.
+
+You may also want to be familiar with the formats and keywords, explained further below, that Geekeep uses before you continue.
+
+* [Help](#31-viewing-help-help)
+* [Add](#32-adding-a-task-add)
+* [Update](#33-updating-a-task-update)
+* [Done & Undone](#34-marking-a-task-as-done-or-undone-done-undone)
+* [Delete](#35-deleting-a-task-delete)
+* [List](#36-listing-all-tasks-list)
+* [List Done](#37-listing-all-completed-tasks-listdone)
+* [List Undone](#38-listing-all-uncompleted-tasks-listundone)
+* [Find](#39-finding-all-tasks-containing-any-keyword-in-their-title-tag-or-on-a-specific-date-find)
+* [Undo](#310-undo-most-recent-command-undo)
+* [Redo](#311-redo-most-recent-undo)
+* [Save](#312-saving-the-data)
+* [Exit](#313-exiting-the-program-exit)
 
 > **Command Format**
 >
@@ -134,7 +144,7 @@ Examples:
 * `update 2 e/`<br>
 Clears the existing deadlines for task with *TaskID 2*
 
-### 3.4. Marks a task as done or undone: `done` & `undone`
+### 3.4. Marking a task as done or undone: `done` & `undone`
 
 Marks the task with the specified *TaskID* as done.
 
@@ -240,13 +250,13 @@ Format: `exit`
 
 ## 4. FAQ
 
-**Q**: The app will not run even though I have Java 8 installed?!
+**Q**: The app will not run even though I have Java 8 installed?
 <br>
 **A**: Ensure you have Java version 1.8.0_60 or later installed in your Computer. This app will not work with earlier versions of Java 8.
 
 **Q**: Can I control each of the panel individually?
 <br>
-**A**: No, all 3 panels are controlled together.
+**A**: No, all 3 panels are controlled together, meaning a `listdone` command will list all completed tasks in all 3 panels.
 
 **Q**: Can I resize each of the panel individually?
 <br>
@@ -284,7 +294,7 @@ Format: `exit`
 | [Help](#31-viewing-help-help) | `help` | `help` |
 | [Add](#32-adding-a-task-add) | `add TASK [s/START_DATETIME] [e/END_DATETIME]` | `add Team meeting s/15-3-17 1500 e/15-3-17 1600` |
 | [Update](#33-updating-a-task-update) | `update TASKID [TASK] [e/END_DATETIME]` | `update 1 Summary Report e/15-3-17 2359` |
-| [Done & Undone](#34-marks-a-task-as-done-or-undone-done-undone) | `done TASKID` | `done 1` |
+| [Done & Undone](#34-marking-a-task-as-done-or-undone-done-undone) | `done TASKID` | `done 1` |
 | [Delete](#35-deleting-a-task-delete) | `delete TASKID` | `delete 3` |
 | [List all tasks](#36-listing-all-tasks-list) | `list` | `list` |
 | [List only completed tasks](#37-listing-all-completed-tasks-listdone) | `listdone` | `listdone` |
@@ -303,6 +313,6 @@ Format: `exit`
 
 * **Contributing** : We welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
-* **Email** : ~~Do not contact us~~ You can reach us at `e0003323@u.nus.edu`
+* **Email** : You can reach us at `e0003323@u.nus.edu`
 
 **[⬆ back to top](#table-of-contents)**

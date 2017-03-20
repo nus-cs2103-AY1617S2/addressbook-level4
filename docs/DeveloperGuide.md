@@ -2,9 +2,9 @@
 
 This guide is for developers who wish to continue developing GeeKeep.
 
-GeeKeep is a simple Command-Line-Interface (CLI) based Task Manager app. It provides an efficient way to manage tasks for those who prefer typing. In this guide, you can find information which is helpful in getting started as a GeeKeep contributor to coding, testing, or designing the architecture.
+GeeKeep is a simple Command-Line-Interface (CLI) based Task Manager app. It is a Task Manager for users who prefer typing over reliance on GUI. In this guide, you can find information which is helpful in getting started as a GeeKeep contributor with respect to the code, tests, and design of the architecture.
 
-In order to make better contribution, you should:
+In order to better contribute, you should:
 * Be proficient in object-oriented programming with Java.
 * Be familiar with [libraries](../README.md#dependencies), e.g. JavaFX, used by GeeKeep.
 * Be familiar with [testing frameworks](../README.md#dependencies), e.g. JUnit, used by GeeKeep.
@@ -299,10 +299,9 @@ There are two types of tests in this project:
       e.g. `seedu.geekeep.logic.LogicManagerTest`
 
 #### Headless GUI Testing
-A good news for you is that because this project uses the [TestFX](https://github.com/TestFX/TestFX) library, you can
- run GUI tests in the _headless_ mode.
- In the headless mode, GUI tests do not show up on the screen.
- That means you can do other things on the computer while the tests are running.<br>
+Fortunately, because this project uses the [TestFX](https://github.com/TestFX/TestFX) library, you can
+ run GUI tests in _headless_ mode where the GUI tests do not show up on the screen.
+ This means you can do other things on the computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
 #### Troubleshooting tests
@@ -327,7 +326,7 @@ If you click any of the source files in the report, for example, `InvalidDataTim
 <img src="images/coverage_in_file.png" width="800"><br>
 _Figure 4.2 Coverage Report for InvalidDataTimeException_
 
-Referring to the coverage report, you are welcomed to pick source files with low coverage and write more test cases to improve the percentage of code coverage.
+Referring to the coverage report, you are welcome to pick source files with low coverage and write more test cases to improve the percentage of code coverage.
 
 **[⬆ back to top](#user-content-table)**
 
