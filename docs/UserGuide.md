@@ -31,6 +31,7 @@ Format: `help`
 
 ### Add a task: `add`
 Add is the command word to add a task to the task handler application.
+
 Format: `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
 
 1. The commands inside square brackets are optional.
@@ -46,6 +47,7 @@ Example :
 
 ### Delete a task: `delete`
 Delete is the command word that can be used to delete a task.
+
 Format: `delete index/INDEX`
 
 Example:
