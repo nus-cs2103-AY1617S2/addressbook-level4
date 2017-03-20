@@ -22,6 +22,14 @@ public class DueDate {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DueDate // instanceof handles nulls
+                && this.dueDate.equals(((DueDate) other).dueDate)); // state check
+    }
+
+
+    @Override
     public String toString() {
         return DateParser.toString(dueDate);
     }
