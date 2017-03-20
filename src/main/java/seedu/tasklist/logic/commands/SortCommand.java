@@ -19,13 +19,7 @@ public class SortCommand extends Command {
     public SortCommand(String parameter) {
         switch (parameter) {
         case "d":
-            this.parameter = "Deadline";
-            break;
-        case "sd":
-            this.parameter = "Start Date";
-            break;
-        case "ed":
-            this.parameter = "End Date";
+            this.parameter = "Date";
             break;
         case "n":
             this.parameter = "Name";
