@@ -19,12 +19,8 @@ import seedu.tasklist.testutil.TestTask;
  */
 public class DoneCommandTest extends TaskListGuiTest {
 
-    // The list of tasks in the task list panel is expected to match this list.
-    // This list is updated with every successful call to assertDoneSuccess.
-    TestTask[] expectedTasksList = td.getTypicalTasks();
-
     @Test
-    public void done_FloatingTask_success() throws Exception {
+    public void doneFloatingTaskSuccess() throws Exception {
         int doneTaskIndex = 3;
 
         TestTask doneTask = new FloatingTaskBuilder().
@@ -37,7 +33,7 @@ public class DoneCommandTest extends TaskListGuiTest {
     }
 
     @Test
-    public void done_DeadlineTask_success() throws Exception {
+    public void doneDeadlineTaskSuccess() throws Exception {
         int doneTaskIndex = 5;
 
         TestTask doneTask = new DeadlineTaskBuilder().
@@ -51,7 +47,7 @@ public class DoneCommandTest extends TaskListGuiTest {
     }
 
     @Test
-    public void done_EventTask_success() throws Exception {
+    public void doneEventTaskSuccess() throws Exception {
         int doneTaskIndex = 1;
 
         TestTask doneTask = new EventTaskBuilder().
@@ -67,7 +63,7 @@ public class DoneCommandTest extends TaskListGuiTest {
     }
 
     @Test
-    public void done_findThenDone_success() throws Exception {
+    public void doneFindThenDoneSuccess() throws Exception {
         commandBox.runCommand("find CS3245");
         int filteredTaskListIndex = 1;
         int doneTaskIndex = 2;
@@ -83,19 +79,19 @@ public class DoneCommandTest extends TaskListGuiTest {
     }
 
     @Test
-    public void done_missingIndex_failure() throws Exception {
+    public void doneMissingIndexFailure() throws Exception {
         commandBox.runCommand("done");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void done_invalidIndex_failure() throws Exception {
+    public void doneInvalidIndexFailure() throws Exception {
         commandBox.runCommand("done 100");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
-    public void done_alreadyCompleted_failure() throws Exception {
+    public void doneAlreadyCompletedFailure() throws Exception {
         commandBox.runCommand("done 4");
         commandBox.runCommand("done 4");
         assertResultMessage(DoneCommand.MESSAGE_DONE_ERROR);
@@ -116,6 +112,8 @@ public class DoneCommandTest extends TaskListGuiTest {
         //Confirms the new card is marked as done
         TaskCardHandle doneCard = taskListPanel.navigateToTask(doneTask.getName().fullName);
         assertMatching(doneTask, doneCard);
+
+        TestTask[] expectedTasksList = td.getTypicalTasks();
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskListIndex - 1] = doneTask;
