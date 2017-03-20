@@ -21,7 +21,7 @@ public abstract class Controller {
      * UiStore to store data to be used by Ui
      */
     protected final UiStore uiStore = UiStore.getInstance();
-    
+
     /**
      * ArrayList to store previous commands entered since starting the application
      */
@@ -62,7 +62,7 @@ public abstract class Controller {
     public static String[] getCommandWords() {
         return new String[] {};
     }
-    
+
     /**
      * Adds entered command to history list
      */
