@@ -1,3 +1,4 @@
+//@@evanyeung A0163744B
 package seedu.task.model.util;
 
 import static org.junit.Assert.assertEquals;
@@ -36,6 +37,31 @@ public class DateParserTest {
         assertTrue(DateParser.isValidDateString("2000/01/01 1200"));
         assertTrue(DateParser.isValidDateString("0000/01/01 1200"));
         assertTrue(DateParser.isValidDateString("2017/03/10 0317"));
+    }
+    @Test
+    public void isValidDate() {
+        // invalid date
+        assertFalse(DateParser.isValidDate(-1, 0, 1, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, -1, 1, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, 12, 1, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, 0, 0, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, 0, 32, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, 5, 31, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, 1, 29, 0, 0));
+        assertFalse(DateParser.isValidDate(2017, 0, 1, -1, 0));
+        assertFalse(DateParser.isValidDate(2017, 0, 1, 24, 0));
+        assertFalse(DateParser.isValidDate(2017, 0, 1, 0, -1));
+        assertFalse(DateParser.isValidDate(2017, 0, 1, 0, 60));
+
+        // valid date
+        assertTrue(DateParser.isValidDate(0, 0, 1, 0, 0));
+        assertTrue(DateParser.isValidDate(2017, 0, 1, 0, 0));
+        assertTrue(DateParser.isValidDate(2017, 11, 31, 23, 59));
+        assertTrue(DateParser.isValidDate(2017, 0, 31, 0, 0));
+        assertTrue(DateParser.isValidDate(2017, 2, 31, 0, 0));
+        assertTrue(DateParser.isValidDate(2000, 1, 29, 0, 0));
+        assertTrue(DateParser.isValidDate(2008, 8, 8, 8, 0));
+        assertTrue(DateParser.isValidDate(2017, 0, 1, 15, 30));
     }
 
     @Test

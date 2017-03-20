@@ -58,7 +58,7 @@ public class DateParser {
         return test.matches(DATE_STRING_VALIDATION_REGEX);
     }
 
-    private static boolean isValidDate(int year, int month, int day, int hour, int minute) {
+    public static boolean isValidDate(int year, int month, int day, int hour, int minute) {
         if (year < 0 || month < 0 || month > 11) {
             return false;
         }
