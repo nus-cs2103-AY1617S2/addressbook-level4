@@ -67,7 +67,7 @@ public class EditCommand extends Command {
         UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStartTime,
-                        updatedDeadline, updatedDescription, updatedTags);
+            updatedDeadline, updatedDescription, updatedTags);
     }
 
 
@@ -111,8 +111,6 @@ public class EditCommand extends Command {
         protected Optional<UniqueTagList> tags = Optional.empty();
         protected Optional<EndTime> deadline = Optional.empty();
         private Optional<StartTime> startTime = Optional.empty();
-
-
 
         public EditTaskDescriptor() {
         }
@@ -178,6 +176,7 @@ public class EditCommand extends Command {
             assert startTime != null;
             this.startTime = startTime;
         }
+
         public Optional<EndTime> getDeadline() {
             return deadline;
         }
