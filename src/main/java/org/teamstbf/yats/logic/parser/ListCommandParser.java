@@ -1,5 +1,12 @@
 package org.teamstbf.yats.logic.parser;
 
+import static org.teamstbf.yats.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.ListCommand;
 import org.teamstbf.yats.logic.commands.ListCommandDate;
@@ -7,7 +14,6 @@ import org.teamstbf.yats.logic.commands.ListCommandDone;
 import org.teamstbf.yats.logic.commands.ListCommandLocation;
 import org.teamstbf.yats.logic.commands.ListCommandTag;
 import org.teamstbf.yats.logic.commands.ListCommandTiming;
-import org.teamstbf.yats.logic.commands.ListCommandTitle;
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -25,14 +31,15 @@ public class ListCommandParser {
 		if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
 			String[] commandTextArray = stringTokenizer(args);
 			switch (commandTextArray[LISTCOMMANDSUFFIX]) {
-			case (ListCommand.COMMAND_WORD_SUFFIX_TITLE):
-				return new ListCommandTitle();
 			case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
 				return new ListCommandDate();
 			case (ListCommand.COMMAND_WORD_SUFFIX_TIMING):
 				return new ListCommandTiming();
-			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
-				return new ListCommandLocation();
+			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION): {
+				final String[] keywords = args.replaceFirst("by location", " ").trim().split(" ");
+				final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+				return new ListCommandLocation(keywordSet);	
+			}
 			case (ListCommand.COMMAND_WORD_SUFFIX_DONE):
 				return new ListCommandDone();
 			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):

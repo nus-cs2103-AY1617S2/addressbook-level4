@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
 	private ObservableList<ReadOnlyEvent> observedEvents;
 	private SortedList<ReadOnlyEvent> sortedEvents;
 	private boolean toSort = false;
-	
+
 	public ModelManager() {
 		this(new TaskManager(), new UserPrefs());
 	}
@@ -109,7 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
 	}
-	
+
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList() {
 		return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
@@ -119,12 +119,17 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateFilteredListToShowAll() {
 		filteredEvents.setPredicate(null);
 	}
+	
+	@Override
+	public void updateFilteredListToShowLocation(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new LocationQualifier(keywords)));
+	}
 
 	@Override
 	public void updateFilteredEventList(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
 	}
-	
+
 	@Override
 	public void sortFilteredEventList() {
 		filteredEvents.sorted();
@@ -133,29 +138,29 @@ public class ModelManager extends ComponentManager implements Model {
 	private void updateFilteredEventList(Expression expression) {
 		filteredEvents.setPredicate(expression::satisfies);
 	}
-	
+
 	//=========== Sorted Event List Accessors =============================================================
-	
+
 	@Override
 	public void setToSortListSwitch() {
 		this.toSort = true;
 	}
-	
+
 	@Override
 	public void unSetToSortListSwitch() {
 		this.toSort =  false;
 	}
-	
+
 	@Override
 	public boolean getSortListSwitch() {
 		return toSort;
 	}
-	
+
 	@Override
 	public void updateSortedEventList() {
 		updateSortedEventListByTitle();
 	}
-	
+
 	private void updateSortedEventListByTitle() {
 		sortedEvents.sorted();
 	}
@@ -216,6 +221,26 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
-	//========== Inner classes/interfaces used for sorting =================================================
-	// TODO: include comparable and comparator classes and interface for sorting by respective attributes
+	private class LocationQualifier implements Qualifier {
+		private Set<String> locationKeyWords;
+
+		LocationQualifier(Set<String> locationKeyWords) {
+			this.locationKeyWords = locationKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return locationKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getLocation().toString(), keyword)).findAny()
+					.isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "location=" + String.join(", ", locationKeyWords);
+		}
+	}
+
+//========== Inner classes/interfaces used for sorting =================================================
+// TODO: include comparable and comparator classes and interface for sorting by respective attributes
 }

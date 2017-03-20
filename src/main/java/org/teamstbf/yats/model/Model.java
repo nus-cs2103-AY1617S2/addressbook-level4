@@ -54,6 +54,9 @@ public interface Model {
 
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
+	
+	/** Updates the filter of the filtered event list to show all events with location */
+	void updateFilteredListToShowLocation(Set<String> keywords);
 
 	/** Updates the filter of the filtered event list to filter by the given keywords */
 	void updateFilteredEventList(Set<String> keywords);
