@@ -87,6 +87,18 @@ public class ToDoApp implements ReadOnlyToDoApp {
         syncMasterTagListWith(p);
         tasks.add(p);
     }
+    
+    /**
+     * Adds a task to the address book at a specified index.
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     *
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     */
+    public void addTask(Task p, int idx) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(p);
+        tasks.add(p, idx);
+    }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
