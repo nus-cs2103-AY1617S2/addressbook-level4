@@ -289,7 +289,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedTaskManager = helper.generateAddressBook(threeTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2",
@@ -317,7 +317,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedTaskManager = helper.generateAddressBook(threeTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
         expectedTaskManager.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
@@ -332,7 +332,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedTaskManager = helper.generateAddressBook(threeTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
         Task editedTask = threeTasks.get(0);
         editedTask.setStatus(new Status("complete"));
 
@@ -371,7 +371,7 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedTaskManager = helper.generateAddressBook(fourTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
@@ -390,7 +390,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedTaskManager = helper.generateAddressBook(fourTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
@@ -409,7 +409,7 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedTaskManager = helper.generateAddressBook(fourTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
@@ -425,7 +425,7 @@ public class LogicManagerTest {
         Task testTask1 = helper.generateTaskWithName("Task1");
         Task testTask2 = helper.generateTaskWithName("Task2");
         List<Task> oneTasks = helper.generateTaskList(testTask1);
-        TaskManager expectedTaskManager = helper.generateAddressBook(oneTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
         Task testTask1Copy = helper.generateTaskWithName("Task1");
 
         //Undo adding one task
@@ -460,8 +460,8 @@ public class LogicManagerTest {
         List<Task> oneTasks = helper.generateTaskList(testTask1);
         List<Task> twoTasks = helper.generateTaskList(testTask1, testTask2);
         List<Task> taskTwoOnly = helper.generateTaskList(testTask2);
-        TaskManager expectedTaskManagerWithOneTask = helper.generateAddressBook(oneTasks);
-        TaskManager expectedTaskManagerWithTwoTask = helper.generateAddressBook(twoTasks);
+        TaskManager expectedTaskManagerWithOneTask = helper.generateTaskManager(oneTasks);
+        TaskManager expectedTaskManagerWithTwoTask = helper.generateTaskManager(twoTasks);
         Task testTask1Copy = helper.generateTaskWithName("Task1");
 
         //Redo adding one task
@@ -520,7 +520,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
         List<Task> oneTasks = helper.generateTaskList(testTask1);
-        TaskManager expectedTaskManager = helper.generateAddressBook(oneTasks);
+        TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
 
         model.addTask(testTask1);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
@@ -608,9 +608,9 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook based on the list of Tasks given.
+         * Generates an TaskManager based on the list of Tasks given.
          */
-        TaskManager generateAddressBook(List<Task> tasks) throws Exception {
+        TaskManager generateTaskManager(List<Task> tasks) throws Exception {
             TaskManager taskManager = new TaskManager();
             addToAddressBook(taskManager, tasks);
             return taskManager;
