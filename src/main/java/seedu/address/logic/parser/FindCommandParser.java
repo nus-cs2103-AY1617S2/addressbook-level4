@@ -49,8 +49,9 @@ public class FindCommandParser {
             return new FindCommand(keywordSet, null, null);
         case CliSyntax.FIND_DEADLINE:
             dates = new PrettyTimeParser().parseSyntax(key);
-            if (dates.get(0).getText().equals(keywords[1].trim()))
+            if (dates.get(0).getText().equals(keywords[1].trim())) {
                 return new FindCommand(null, dates, null);
+            }
             // if encounters wrong date time format, switch to default
         case CliSyntax.FIND_TAG:
             keywordSet = new HashSet<>(Arrays.asList(keywords));

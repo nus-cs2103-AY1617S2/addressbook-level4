@@ -57,6 +57,8 @@ public interface ReadOnlyTask {
 
     DateTime getDeadline();
 
+    DateTime getStartingTime();
+
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
      * the returned list will not affect the task's internal tags.
@@ -70,22 +72,25 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName())
-                && hasSameDateTime(other)); // state
+                        && other.getName().equals(this.getName())
+                        && hasSameDateTime(other)); // state
         // checks
         // here
         // onwards
     }
 
     default boolean hasSameDateTime(ReadOnlyTask other) {
-        return true;
-        // TODO: Implement these enums first, if throw NullPointException
-        //        if (this.getTaskType() != other.getTaskType()) {
-        //            return false;
-        //        } else {
-        //            return this.getTaskAbsoluteDateTime()
-        //                    .equals(other.getTaskAbsoluteDateTime());
-        //        }
+        if ((this.getTaskType() == null
+                || this.getTaskType() == TaskType.TaskWithNoDeadline)
+                && (other.getTaskType() == null || other
+                        .getTaskType() == TaskType.TaskWithNoDeadline)) {
+            return true;
+        } else if (this.getTaskType() != other.getTaskType()) {
+            return false;
+        } else {
+            return this.getTaskAbsoluteDateTime()
+                    .equals(other.getTaskAbsoluteDateTime());
+        }
     }
 
     /**
@@ -102,5 +107,4 @@ public interface ReadOnlyTask {
     enum TaskType {
         TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
     }
-
 }

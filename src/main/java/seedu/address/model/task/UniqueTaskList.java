@@ -1,6 +1,6 @@
 package seedu.address.model.task;
 
-
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,7 +21,8 @@ import seedu.address.commons.util.CollectionUtil;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections
+            .observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given
@@ -57,11 +58,13 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask)
+            throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(editedTask)
+                && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
@@ -94,9 +97,12 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
+            // TODO: Change Task constructor to TaskWithoutDeadline() or
+            // TaskWithDeadline() based on task type
             replacement.add(new Task(task));
         }
         setTasks(replacement);
@@ -115,7 +121,8 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                        && this.internalList.equals(((UniqueTaskList) other).internalList));
+                        && this.internalList
+                                .equals(((UniqueTaskList) other).internalList));
     }
 
     @Override

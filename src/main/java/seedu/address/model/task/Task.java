@@ -137,4 +137,9 @@ public class Task implements ReadOnlyTask {
         return null;
     }
 
+    @Override
+    public DateTime getStartingTime() {
+        return null;
+    }
+
 }
