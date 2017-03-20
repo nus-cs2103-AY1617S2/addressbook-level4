@@ -240,6 +240,29 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+### 3.3 Undo/Redo
+
+The undo and redo commands are implemented as commands in the Logic component. The command logic itself is in the `history` package of `Logic`. Within `history`, there are classes `TaskMemento` and `TaskMementos` that are data structures used by the undo/redo commands.
+
+#### 3.3.1 Memento Pattern
+
+The undo/redo implementation is based off the [Memento Design Pattern](https://en.wikipedia.org/wiki/Memento_pattern). It makes use of `TaskMemento`s to store the state of the system before a command is made. The `TaskMementos` class takes on the role of the originator and allows for saving and retrieving mementos needed to record the state of the system. The role of caretaker is taken on by the undo and redo commands themselves. The caretaker's job is to record the state of the system in the originator before the system is altered so that previous states may be restored.
+
+#### 3.3.2 Memento Implementation
+
+Whenever a command alters the state of a task in the task list, a `TaskMemento` containing the original task's data is created. This memento is added to the `TaskMementos` class. `TaskMementos` internally uses two stacks, one for undoing and one for redoing. Adding a memento in this manner pushes it onto the undo stack.
+
+When a request to undo the previous command is made, a memento is popped off the undo stack, pushed onto the redo stack, and returned to the caller. This memento contains the original state of the task object before the previous command was made. Using the ID of the task, the altered task may be returned to its original state. A call to redo performs essentially the same operations, but in reverse.
+
+Note that adding a memento to `TaskMementos` also clears the redo stack. This is done as the user should not be able to redo a previously undone action after performing new operations.
+
+#### 3.3.3 Alternative Implementations
+
+Another, fundamentally different, approach to designing the undo/redo commands was considered. In the current implementation, the state of the task objects themselves were stored. This implementation was chosen over the idea of storing commands.
+
+Storing commands means there is no duplicated data stored. With the current implementation, a snapshot of all of the data in a task is being taken before the command is executed. The snapshot contains *all* data about the task, altered or not. This may result in a lot of duplicated data. Storing a command means that only data related to the change is stored. In the case of the undo/redo pattern, only the command that would reverse the effects of original command would be stored.
+
+The "snapshot" method was chosen over the "command" method largely because of its reduced complexity and increased robustness. Building reverse commands introduces a more complex system that increases the chance of bugs. Building snapshots of the tasks is also unlikely to overload memory as tasks are fairly small. If the data held by a task ever becomes much larger, this decision should be revisited.
 
 ## 4. Testing
 
