@@ -5,11 +5,11 @@ import java.io.File;
 import java.io.IOException;
 
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.storage.StorageManager;
-import seedu.address.commons.core.Messages;
 
 public class SaveFileCommand extends Command {
     private String saveFilePath;
