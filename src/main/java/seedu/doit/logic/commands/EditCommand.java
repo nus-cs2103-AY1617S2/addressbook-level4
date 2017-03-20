@@ -122,14 +122,14 @@ public class EditCommand extends Command {
             this.tags = toCopy.getTags();
             this.deadline = toCopy.getDeadline();
             this.startTime = toCopy.getStartTime();
-
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.tags,
+                this.deadline, this.startTime);
         }
 
         public Optional<Name> getName() {
