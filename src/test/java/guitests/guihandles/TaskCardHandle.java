@@ -12,7 +12,7 @@ import seedu.bulletjournal.model.tag.UniqueTagList;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
@@ -72,12 +72,12 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getTaskName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getStatus().equals(person.getStatus().value)
-                && getAddress().equals(person.getAddress().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameTask(ReadOnlyTask task) {
+        return getFullName().equals(task.getTaskName().fullName)
+                && getPhone().equals(task.getPhone().value)
+                && getStatus().equals(task.getStatus().value)
+                && getAddress().equals(task.getAddress().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override

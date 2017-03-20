@@ -14,38 +14,38 @@ public class AddCommandTest extends TodoListGuiTest {
 
     @Test
     public void add() {
-        //add one person
+        //add one task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask personToAdd = td.hangclothes;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        TestTask taskToAdd = td.hangclothes;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add another person
-        personToAdd = td.interviewprep;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        //add another task
+        taskToAdd = td.interviewprep;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add duplicate person
+        //add duplicate task
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        //add duplicate person
+        //add duplicate task
         commandBox.runCommand(td.hangclothes.getAddCommand("adds "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        //add duplicate person with "a" command
+        //add duplicate task with "a" command
         commandBox.runCommand(td.hangclothes.getAddCommand("a "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        //add duplicate person with "new" command
+        //add duplicate task with "new" command
         commandBox.runCommand(td.hangclothes.getAddCommand("new "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        //add duplicate person with "create" command
+        //add duplicate task with "create" command
         commandBox.runCommand(td.hangclothes.getAddCommand("create "));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -59,15 +59,15 @@ public class AddCommandTest extends TodoListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask personToAdd, TestTask... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand("add "));
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand(taskToAdd.getAddCommand("add "));
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getTaskName().fullName);
-        assertMatching(personToAdd, addedCard);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTaskName().fullName);
+        assertMatching(taskToAdd, addedCard);
 
-        //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 

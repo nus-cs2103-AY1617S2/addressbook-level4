@@ -23,7 +23,7 @@ import seedu.bulletjournal.model.task.Task;
 public class XmlSerializableAddressBook implements ReadOnlyTodoList {
 
     @XmlElement
-    private List<XmlAdaptedTask> persons;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -32,7 +32,7 @@ public class XmlSerializableAddressBook implements ReadOnlyTodoList {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -41,13 +41,13 @@ public class XmlSerializableAddressBook implements ReadOnlyTodoList {
      */
     public XmlSerializableAddressBook(ReadOnlyTodoList src) {
         this();
-        persons.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        final ObservableList<Task> tasks = this.persons.stream().map(p -> {
+        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

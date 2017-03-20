@@ -8,7 +8,7 @@ import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
- * Selects a person identified using it's last displayed index from the address book.
+ * Selects a task identified using it's last displayed index from the address book.
  */
 public class SelectCommand extends Command {
 
@@ -30,7 +30,7 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

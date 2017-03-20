@@ -12,7 +12,7 @@ import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
                 new Task(new TaskName("Assignment for CS"), new DueDate("87438807"), new Status("undone"),
@@ -43,12 +43,12 @@ public class SampleDataUtil {
     public static ReadOnlyTodoList getSampleTodoList() {
         try {
             TodoList sampleAB = new TodoList();
-            for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTask(samplePerson);
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAB.addTask(sampleTask);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

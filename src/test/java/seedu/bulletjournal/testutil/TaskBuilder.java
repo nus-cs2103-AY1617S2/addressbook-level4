@@ -20,10 +20,10 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(TestTask personToCopy) {
-        this.task = new TestTask(personToCopy);
+    public TaskBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
     public TaskBuilder withTaskName(String taskName) throws IllegalValueException {

@@ -15,7 +15,7 @@ import seedu.bulletjournal.model.task.TaskName;
 import seedu.bulletjournal.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the address book.
  */
 public class AddCommand extends Command {
 
