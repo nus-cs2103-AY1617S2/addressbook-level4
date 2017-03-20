@@ -82,8 +82,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 	private final TaskManager taskManager;
 	
-	private static final Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
-    private static final Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
+	private static Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
+    private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
@@ -116,6 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
         TaskManager tempManager = new TaskManager();
 	    tempManager.resetData(taskManager);
 	    undoTaskManager.push(tempManager);
+	    redoTaskManager = new Stack<TaskManager>();
     }
 
 	@Override
