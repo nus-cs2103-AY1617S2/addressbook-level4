@@ -28,7 +28,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         //add duplicate task
         commandBox.runCommand(td.phoneCall.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(userInboxPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -43,12 +43,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getTaskName().name);
+        TaskCardHandle addedCard = userInboxPanel.navigateToPerson(taskToAdd.getTaskName().name);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
         TestCard[] expectedList = TestUtil.addPersonsToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(userInboxPanel.isListMatching(expectedList));
     }
 
 }

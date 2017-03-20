@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private UserInboxPanel userInboxPanel;
     private Config config;
 
     @FXML
@@ -42,7 +42,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane userInboxPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -108,7 +108,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        userInboxPanel = new UserInboxPanel(getUserInboxPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getUserInboxFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -126,8 +126,8 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getUserInboxPlaceholder() {
+        return userInboxPanelPlaceholder;
     }
 
     void hide() {
@@ -189,8 +189,8 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public UserInboxPanel getUserInboxPanel() {
+        return this.userInboxPanel;
     }
 
     void releaseResources() {

@@ -18,14 +18,14 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
-    private static final String FXML = "PersonListPanel.fxml";
+public class UserInboxPanel extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(UserInboxPanel.class);
+    private static final String FXML = "UserInboxPanel.fxml";
 
     @FXML
     private ListView<ReadOnlyTask> personListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
+    public UserInboxPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
         super(FXML);
         setConnections(personList);
         addToPlaceholder(personListPlaceholder);
