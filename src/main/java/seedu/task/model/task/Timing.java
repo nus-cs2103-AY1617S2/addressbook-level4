@@ -12,10 +12,10 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class Timing implements Comparable<Timing> {
 
-    public static final String MESSAGE_TIMING_CONSTRAINTS = "Task date should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
+    public static final String MESSAGE_TIMING_CONSTRAINTS =
+        "Task date should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
     public static final String[] TIMING_FORMAT = {
-            // "dd/MM/yyyy HH:mm",
-            "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
+        "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
     public static final String NULL_TIMING = "n/a";
     public final String value;
     private Date date;

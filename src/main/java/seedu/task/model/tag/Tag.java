@@ -60,11 +60,10 @@ public class Tag implements Comparable<Tag> {
         return this.tagName.compareTo(compareTag.tagName);
     }
 
-    public static Comparator<Tag> TagComparator
-        = new Comparator<Tag>() {
+    public static Comparator<Tag> TagComparator = new Comparator<Tag>() {
 
         public int compare(Tag tag1, Tag tag2) {
-             return tag1.compareTo(tag2);
+            return tag1.compareTo(tag2);
         }
 
     };
