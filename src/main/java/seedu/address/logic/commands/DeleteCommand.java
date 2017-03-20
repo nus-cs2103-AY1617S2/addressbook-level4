@@ -39,9 +39,10 @@ public class DeleteCommand extends Command {
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        //@@author A0139161J
         Task task = new Task (taskToDelete);
         task.setParserInfo("delete");
-        task.setEditTaskIndex(targetIndex - 1);
+        task.setIndex(targetIndex - 1);
         try {
             GlobalStack gStack = GlobalStack.getInstance();
             gStack.getUndoStack().push(task); // task that got deleted, to be restored
@@ -54,6 +55,7 @@ public class DeleteCommand extends Command {
             /**Debugging purpose
              * gStack.printStack();
              */
+        //@@author
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

@@ -14,7 +14,7 @@ import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-
+//@@author A0139161J
 public class UndoRedoCommandTest extends TaskManagerGuiTest {
 
     TestTask[] expectedTasksList = td.getTypicalTasks();
@@ -75,6 +75,8 @@ public class UndoRedoCommandTest extends TaskManagerGuiTest {
         assertFindResult("find Task1", editedTask);
     }
 
+    //@@author
+
     // adapted from AddCommandTest
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
@@ -96,6 +98,7 @@ public class UndoRedoCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 
+    // adapted from EditCommandTest
     /**
      * Checks whether the edited task has the correct updated details.
      *

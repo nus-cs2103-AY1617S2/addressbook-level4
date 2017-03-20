@@ -83,6 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author A0139161J
     @Override
     public void insertTasktoIndex(int indexToBeRestored, Task deletedTask)
             throws DuplicateTaskException {
@@ -93,6 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
         addressBook.setTasks(list);
     }
+    //@@author
 
     //=========== Filtered Task List Accessors =============================================================
 

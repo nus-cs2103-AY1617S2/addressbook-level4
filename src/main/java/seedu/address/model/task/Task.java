@@ -17,8 +17,12 @@ public class Task implements ReadOnlyTask {
     private PriorityLevel priority;
     private Information info;
     private UniqueTagList tags;
+
+    //@@author A0139161J
     private String parserInfo;
     private int index;
+    //@@author
+
     /**
      * Every field must be present and not null.
      */
@@ -78,6 +82,7 @@ public class Task implements ReadOnlyTask {
         return info;
     }
 
+  //@@author A0139161J
     public void setParserInfo(String info) {
         this.parserInfo = info;
     }
@@ -86,13 +91,14 @@ public class Task implements ReadOnlyTask {
         return this.parserInfo;
     }
 
-    public void setEditTaskIndex(int index) {
+    public void setIndex(int index) {
         this.index = index;
     }
 
-    public int getEditTaskIndex() {
+    public int getIndex() {
         return this.index;
     }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {

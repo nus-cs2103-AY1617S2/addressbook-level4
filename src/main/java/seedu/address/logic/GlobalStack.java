@@ -7,8 +7,7 @@ import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 
-
-
+//@@author A0139161J
 public class GlobalStack {
 
     private static GlobalStack instance = null;
