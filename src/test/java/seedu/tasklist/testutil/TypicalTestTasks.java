@@ -12,7 +12,7 @@ import seedu.tasklist.model.task.UniqueTaskList;
 
 public class TypicalTestTasks {
 
-    public TestTask tutorial, homework, groceries, java, cs2103T, drink, internship, ida;
+    public TestTask tutorial, homework, groceries, java, project, drink, internship, ida;
 
     public TypicalTestTasks() {
         try {
@@ -20,7 +20,7 @@ public class TypicalTestTasks {
             tutorial = new EventTaskBuilder().withName("CS2103T tutorial")
                     .withComment("prepare V0.2 presentation").withStatus(false)
                     .withPriority("high")
-                    .withTags("class").withStartDate("15/3/2017 15:00:10")
+                    .withTags("2103", "class").withStartDate("15/3/2017 15:00:10")
                     .withEndDate("15/3/2017 18:00:10").build();
             homework = new FloatingTaskBuilder().withName("CS3245 homework 3")
                     .withComment("discuss with classmates").withPriority("high")
@@ -29,8 +29,9 @@ public class TypicalTestTasks {
             groceries = new FloatingTaskBuilder().withName("Buy groceries").withComment("go NTUC")
                     .withPriority("low").withStatus(false).build();
             java = new FloatingTaskBuilder().withName("Update Java for CS2103T").withStatus(false)
-                    .withPriority("high").withComment("Find out why jdk is not displaying the correct ver").build();
-            cs2103T = new DeadlineTaskBuilder().withName("Implement undo for this").withComment("By today")
+                    .withPriority("high").withTags("2103")
+                    .withComment("Find out why jdk is not displaying the correct ver").build();
+            project = new DeadlineTaskBuilder().withName("Implement undo for this").withComment("By today")
                     .withPriority("high").withDeadline("15/3/2017 18:00:10").withStatus(false).build();
             drink = new FloatingTaskBuilder().withName("Drink water").withComment("To improve brain function")
                     .withPriority("high").withStatus(false).build();
@@ -72,7 +73,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{tutorial, homework, groceries, java, cs2103T, drink};
+        return new TestTask[]{tutorial, homework, groceries, java, project, drink};
     }
 
     public TaskList getTypicalTaskList() throws ParseException {
