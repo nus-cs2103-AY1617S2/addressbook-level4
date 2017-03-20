@@ -13,7 +13,7 @@ import seedu.bulletjournal.commons.util.StringUtil;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
-import seedu.bulletjournal.model.task.UniqueTaskList.PersonNotFoundException;
+import seedu.bulletjournal.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -35,7 +35,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.todoList = new TodoList(addressBook);
-        filteredTasks = new FilteredList<>(this.todoList.getPersonList());
+        filteredTasks = new FilteredList<>(this.todoList.getTaskList());
+
     }
 
     public ModelManager() {
@@ -59,25 +60,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyTask target) throws PersonNotFoundException {
-        todoList.removePerson(target);
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        todoList.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
-        todoList.addPerson(task);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        todoList.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicatePersonException {
+    public void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+            throws UniqueTaskList.DuplicateTaskException {
         assert editedPerson != null;
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
-        todoList.updatePerson(addressBookIndex, editedPerson);
+        todoList.updateTask(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
     }
 
@@ -153,7 +154,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask person) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTaskName().fullName, keyword))
                     .findAny()
                     .isPresent();
         }

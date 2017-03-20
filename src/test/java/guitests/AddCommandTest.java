@@ -10,12 +10,12 @@ import seedu.bulletjournal.logic.commands.AddCommand;
 import seedu.bulletjournal.testutil.TestTask;
 import seedu.bulletjournal.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TodoListGuiTest {
 
     @Test
     public void add() {
         //add one person
-        TestTask[] currentList = td.getTypicalPersons();
+        TestTask[] currentList = td.getTypicalTasks();
         TestTask personToAdd = td.hangclothes;
         assertAddSuccess(personToAdd, currentList);
         currentList = TestUtil.addPersonsToList(currentList, personToAdd);
@@ -27,28 +27,28 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //add duplicate person
         commandBox.runCommand(td.hangclothes.getAddCommand("add "));
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person
         commandBox.runCommand(td.hangclothes.getAddCommand("adds "));
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person with "a" command
         commandBox.runCommand(td.hangclothes.getAddCommand("a "));
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person with "new" command
         commandBox.runCommand(td.hangclothes.getAddCommand("new "));
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add duplicate person with "create" command
         commandBox.runCommand(td.hangclothes.getAddCommand("create "));
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -63,12 +63,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(personToAdd.getAddCommand("add "));
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
+        TaskCardHandle addedCard = taskListPanel.navigateToPerson(personToAdd.getTaskName().fullName);
         assertMatching(personToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
         TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

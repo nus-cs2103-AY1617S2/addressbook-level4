@@ -62,7 +62,7 @@ public class XmlTodoListStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TodoList original = td.getTypicalAddressBook();
+        TodoList original = td.getTypicalTodoList();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
         //Save in new file and read back
@@ -71,14 +71,14 @@ public class XmlTodoListStorageTest {
         assertEquals(original, new TodoList(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(new Task(td.hangclothes));
-        original.removePerson(new Task(td.assignment));
+        original.addTask(new Task(td.hangclothes));
+        original.removeTask(new Task(td.assignment));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new TodoList(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(new Task(td.interviewprep));
+        original.addTask(new Task(td.interviewprep));
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
         assertEquals(original, new TodoList(readBack));

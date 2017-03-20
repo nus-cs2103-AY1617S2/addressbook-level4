@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.bulletjournal.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 import seedu.bulletjournal.model.TodoList;
 import seedu.bulletjournal.model.tag.Tag;
 import seedu.bulletjournal.model.tag.UniqueTagList;
-import seedu.bulletjournal.model.task.BeginTime;
-import seedu.bulletjournal.model.task.Deadline;
+import seedu.bulletjournal.model.task.BeginDate;
+import seedu.bulletjournal.model.task.DueDate;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
@@ -184,27 +184,27 @@ public class LogicManagerTest {
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        model.addPerson(helper.generatePerson(1));
-        model.addPerson(helper.generatePerson(2));
-        model.addPerson(helper.generatePerson(3));
+        model.addTask(helper.generatePerson(1));
+        model.addTask(helper.generatePerson(2));
+        model.addTask(helper.generatePerson(3));
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
 
-        model.addPerson(helper.generatePerson(1));
-        model.addPerson(helper.generatePerson(2));
-        model.addPerson(helper.generatePerson(3));
+        model.addTask(helper.generatePerson(1));
+        model.addTask(helper.generatePerson(2));
+        model.addTask(helper.generatePerson(3));
 
         assertCommandSuccess("clr", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
 
-        model.addPerson(helper.generatePerson(1));
-        model.addPerson(helper.generatePerson(2));
-        model.addPerson(helper.generatePerson(3));
+        model.addTask(helper.generatePerson(1));
+        model.addTask(helper.generatePerson(2));
+        model.addTask(helper.generatePerson(3));
 
         assertCommandSuccess("c", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
 
-        model.addPerson(helper.generatePerson(1));
-        model.addPerson(helper.generatePerson(2));
-        model.addPerson(helper.generatePerson(3));
+        model.addTask(helper.generatePerson(1));
+        model.addTask(helper.generatePerson(2));
+        model.addTask(helper.generatePerson(3));
 
         assertCommandSuccess("empty", ClearCommand.MESSAGE_SUCCESS, new TodoList(), Collections.emptyList());
     }
@@ -214,20 +214,20 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 s/valid@email.butNoPhonePrefix b/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 valid@email.butNoPrefix b/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name d/12345 s/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12345 s/validEmail.butNoPhonePrefix b/valid,address", expectedMessage);
+        assertCommandFailure("add Valid Name d/12345 validEmail.butNoPrefix b/valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name d/12345 s/validEmail.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] d/12345 s/valid@e.mail b/valid, address",
-                TaskName.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/not_numbers s/valid@e.mail b/valid, address",
-                Deadline.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345 s/notAnEmail b/valid, address",
-                Status.MESSAGE_STATUS_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345 s/valid@e.mail b/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add []\\[;] d/12345 s/undone b/valid, address",
+                TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/not_numbers s/undone b/valid, address",
+                DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12345 s/notAn@Email.com b/valid, address",
+                Status.MESSAGE_EMAIL_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12345 s/undone b/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -238,31 +238,31 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TodoList expectedAB = new TodoList();
-        expectedAB.addPerson(toBeAdded);
+        expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand("add ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
-        model.deletePerson(toBeAdded);
+        model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("a ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
-        model.deletePerson(toBeAdded);
+        model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("create ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
-        model.deletePerson(toBeAdded);
+        model.deleteTask(toBeAdded);
         assertCommandSuccess(helper.generateAddCommand("new ", toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
     }
 
@@ -273,10 +273,10 @@ public class LogicManagerTest {
         Task toBeAdded = helper.adam();
 
         // setup starting state
-        model.addPerson(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // person already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand("add ", toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand("add ", toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -286,7 +286,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         TodoList expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getPersonList();
+        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
         // prepare address book state
         helper.addToModel(model, 2);
@@ -345,14 +345,14 @@ public class LogicManagerTest {
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> personList = helper.generatePersonList(2);
 
         // set AB state to 2 persons
         model.resetData(new TodoList());
         for (Task p : personList) {
-            model.addPerson(p);
+            model.addTask(p);
         }
 
         assertCommandFailure(commandWord + " 3", expectedMessage);
@@ -378,23 +378,23 @@ public class LogicManagerTest {
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
 
         assertCommandSuccess("s 2",
-                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
 
         assertCommandSuccess("choose 2",
-                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
     }
@@ -417,13 +417,13 @@ public class LogicManagerTest {
         List<Task> threePersons = helper.generatePersonList(3);
 
         TodoList expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removePerson(threePersons.get(1));
+        expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threePersons.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
                 expectedAB,
-                expectedAB.getPersonList());
+                expectedAB.getTaskList());
 
         //TODO: JUnit tests for variations of delete command
     }
@@ -545,9 +545,9 @@ public class LogicManagerTest {
 
         private Task adam() throws Exception {
             TaskName taskName = new TaskName("Adam Brown");
-            Deadline privatePhone = new Deadline("111111");
+            DueDate privatePhone = new DueDate("111111");
             Status status = new Status("undone");
-            BeginTime privateAddress = new BeginTime("111, alpha street");
+            BeginDate privateAddress = new BeginDate("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -564,9 +564,9 @@ public class LogicManagerTest {
         private Task generatePerson(int seed) throws Exception {
             return new Task(
                     new TaskName("Person " + seed),
-                    new Deadline("" + Math.abs(seed)),
-                    new Status("undone"),
-                    new BeginTime("House of " + seed),
+                    new DueDate("" + Math.abs(seed)),
+                    new Status(seed + "undone"),
+                    new BeginDate("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -577,9 +577,8 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append(command);
-
-            cmd.append(p.getName().toString());
-            cmd.append(" s/").append(p.getStatus());
+            cmd.append(p.getTaskName().toString());
+            cmd.append(" s/").append(p.getEmail());
             cmd.append(" d/").append(p.getPhone());
             cmd.append(" b/").append(p.getAddress());
 
@@ -622,7 +621,7 @@ public class LogicManagerTest {
          */
         private void addToAddressBook(TodoList todoList, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                todoList.addPerson(p);
+                todoList.addTask(p);
             }
         }
 
@@ -639,7 +638,7 @@ public class LogicManagerTest {
          */
         private void addToModel(Model model, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                model.addPerson(p);
+                model.addTask(p);
             }
         }
 
@@ -664,9 +663,9 @@ public class LogicManagerTest {
         private Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new TaskName(name),
-                    new Deadline("1"),
+                    new DueDate("1"),
                     new Status("undone"),
-                    new BeginTime("House of 1"),
+                    new BeginDate("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

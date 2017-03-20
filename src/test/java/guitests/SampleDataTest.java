@@ -9,7 +9,7 @@ import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.util.SampleDataUtil;
 import seedu.bulletjournal.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TodoListGuiTest {
     @Override
     protected TodoList getInitialData() {
         // return null to force test app to load data from file only
@@ -25,6 +25,6 @@ public class SampleDataTest extends AddressBookGuiTest {
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

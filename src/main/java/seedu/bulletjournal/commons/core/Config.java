@@ -43,19 +43,19 @@ public class Config {
     }
 
     public String getAddressBookFilePath() {
-        return addressBookFilePath;
+        return todoListFilePath;
     }
 
     public void setAddressBookFilePath(String addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+        this.todoListFilePath = addressBookFilePath;
     }
 
     public String getAddressBookName() {
-        return addressBookName;
+        return todoListName;
     }
 
     public void setAddressBookName(String addressBookName) {
-        this.addressBookName = addressBookName;
+        this.todoListName = addressBookName;
     }
 
 
@@ -73,13 +73,13 @@ public class Config {
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookName, o.addressBookName);
+                && Objects.equals(todoListFilePath, o.todoListFilePath)
+                && Objects.equals(todoListName, o.todoListName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, addressBookFilePath, addressBookName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, todoListFilePath, todoListName);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nAddressBook name : " + addressBookName);
+        sb.append("\nLocal data file location : " + todoListFilePath);
+        sb.append("\nAddressBook name : " + todoListName);
         return sb.toString();
     }
 

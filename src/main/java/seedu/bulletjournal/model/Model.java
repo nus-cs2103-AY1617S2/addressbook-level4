@@ -6,7 +6,6 @@ import seedu.bulletjournal.commons.core.UnmodifiableObservableList;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
-import seedu.bulletjournal.model.task.UniqueTaskList.DuplicatePersonException;
 
 /**
  * The API of the Model component.
@@ -19,10 +18,10 @@ public interface Model {
     ReadOnlyTodoList getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
@@ -31,8 +30,8 @@ public interface Model {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicatePersonException;
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+            throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();

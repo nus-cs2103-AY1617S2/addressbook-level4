@@ -8,10 +8,11 @@ import seedu.bulletjournal.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-    TaskName getName();
+    TaskName getTaskName();
     Deadline getPhone();
     Status getStatus();
     BeginTime getAddress();
+
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -25,7 +26,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
+                && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
                 && other.getPhone().equals(this.getPhone())
                 && other.getStatus().equals(this.getStatus())
                 && other.getAddress().equals(this.getAddress()));
@@ -36,7 +37,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getTaskName())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
