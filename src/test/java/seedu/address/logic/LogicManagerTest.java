@@ -41,8 +41,8 @@ import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
+//import seedu.address.model.task.Address;
+//import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -431,7 +431,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Time("0" + (Math.abs(seed)%30+1) + "/0" + (Math.abs(seed)%12+1)+ "/" + (Math.abs(seed)%3000+1000)),
+                    new Time("0" + (Math.abs(seed) % 30 + 1) + "/0" +
+                    (Math.abs(seed) % 12 + 1) + "/" + (Math.abs(seed) % 3000 + 1000)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
