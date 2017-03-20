@@ -36,11 +36,20 @@
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="personList" minWidth="340" prefWidth="340">
+            <VBox fx:id="personList" minWidth="570" prefWidth="570">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                <children>
+               <HBox>
+               <children>
+               <Button fx:id="allButton" text="All"/>
+               <Button fx:id="incompleteButton" text="Incomplete"/>
+               <Button fx:id="completedButton" text="Completed"/>
+               <Button fx:id="upcomingButton" text="Upcoming"/>
+               <Button fx:id="overdueButton" text="Overdue"/> 
+               </children>
+               </HBox>
                   <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
