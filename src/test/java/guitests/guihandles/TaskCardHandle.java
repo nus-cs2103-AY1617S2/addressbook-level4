@@ -84,11 +84,10 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)        
-                && getVenue().equals("Venue at: " + task.getVenue().value)
-                && getStartTime().equals("Start from: " + task.getStartTime().value)
-                && getEndTime().equals("End at: " + task.getEndTime().value)
-                && getUrgencyLevel().equals("Urgency: " + task.getUrgencyLevel().value)
-                && getDescription().equals("Description: " + task.getDescription().value);
+                && getVenue().equals("Venue at: " + task.getVenue().get().toString())
+                && getEndTime().equals("End at: " + task.getEndTime().get().toString())
+                && getUrgencyLevel().equals("Urgency: " + task.getUrgencyLevel().get().toString())
+                && getDescription().equals("Description: " + task.getDescription().get().toString());
      //         && getTags().equals(getTags(task.getTags()));
      //         this line somehow causes assertion errors so i commented it out for now. remember to debug this.
     }
@@ -98,7 +97,6 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getTitle().equals(handle.getTitle())
-                    && getStartTime().equals(handle.getStartTime())
                     && getEndTime().equals(handle.getEndTime())
                     && getVenue().equals(handle.getVenue())
                     && getUrgencyLevel().equals(handle.getUrgencyLevel())
