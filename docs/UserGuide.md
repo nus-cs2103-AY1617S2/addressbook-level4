@@ -13,7 +13,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 	* [exit](#exit-the-program--exit)
 	* [save](#save-the-data)
 * [Advanced Features](#advance-features)
-	* [undo/redo command](#undo/redo-command)
+	* [undo/redo](#undo/redo-command)
 * [Command Summary](#command-summary)
 
 
@@ -109,7 +109,7 @@ Task data are saved in the hard disk automatically after any command that change
 **Undo** and **Redo** are classic features, allowing you to undo the previous action taken. This will result in any changes made to certain task(s) being restored.
 
 Example:
-* `delete Dinner with Mom > undo (Task Dinner with Mom is restored with all its previous details)`
+* `delete 1 > undo (Task 1 is restored with all its previous details)`
 
 ## Command Summary
 Command | Format  
