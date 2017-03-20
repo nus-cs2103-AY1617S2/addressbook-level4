@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.tasklist.logic.commands.DoneCommand;
+import seedu.tasklist.testutil.DeadlineTaskBuilder;
 import seedu.tasklist.testutil.FloatingTaskBuilder;
 import seedu.tasklist.testutil.TestTask;
 
@@ -32,6 +33,21 @@ public class DoneCommandTest extends TaskListGuiTest {
         assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
     }
 
+    @Test
+    public void done_DeadlineTask_success() throws Exception {
+        int doneTaskIndex = 5;
+
+        TestTask doneTask = new DeadlineTaskBuilder().
+                withName("Implement undo for this").
+                withDeadline("15/03/2017 18:00:10").
+                withComment("By today").
+                withPriority("high").
+                withStatus(true).
+                build();
+        assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
+    }
+
+
     /**
      * Runs done command to mark the task at the specified index as completed
      * Confirms the result is correct
@@ -45,7 +61,6 @@ public class DoneCommandTest extends TaskListGuiTest {
 
         //Confirms the new card is marked as done
         TaskCardHandle doneCard = taskListPanel.navigateToTask(doneTask.getName().fullName);
-        System.out.println(doneCard);
         assertMatching(doneTask, doneCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
