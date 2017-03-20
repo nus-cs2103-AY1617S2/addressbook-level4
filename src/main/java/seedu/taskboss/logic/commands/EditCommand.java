@@ -32,7 +32,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [n/NAME] [p/PRIORITY_LEVEL]"
             + " [sd/START_DATE] [ed/END_DATE]"
             + " [i/INFORMATION ] [c/CATEGORY]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/1" + " || " + COMMAND_WORD_SHORT + " 1 p/1";
+            + "Example: " + COMMAND_WORD + " 1 p/Yes" + " || " + COMMAND_WORD_SHORT + " 1 p/No";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
