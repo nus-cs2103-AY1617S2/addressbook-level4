@@ -32,7 +32,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void editEventsuccess() throws Exception {
-        String detailsToEdit = "Bobby s/11-10-17T3:00 e/11-11-17T6:00 t/husband";
+        String detailsToEdit = "Bobby s/3:00AM 17/10/2011 e/6:00AM 17/11/2011 t/husband";
         int addressBookIndex = 1;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").withStartTime("3:00AM 17/10/2011").
@@ -43,7 +43,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void editDeadLineSuccess() throws Exception {
-        String detailsToEdit = "Bobby e/11-11-17T6:00 t/husband";
+        String detailsToEdit = "Bobby e/6:00AM 17/11/2011 t/husband";
         int addressBookIndex = 3;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").

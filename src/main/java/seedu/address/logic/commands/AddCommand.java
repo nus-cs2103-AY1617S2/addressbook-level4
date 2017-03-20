@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + "Parameters: TODO [t/TAG] \n"
             + "OR: TODO s/STARTTIME e/ENDTIME [t/TAG] \n"
             + "Example: " + COMMAND_WORD
-            + " Take dog for walk s/11-11-17T5:00 e/11-11-17T6:00 t/todoal";
+            + " Take dog for walk s/1:00PM 11/11/2017 e/2:00PM 11/11/2017 t/todoal";
 
     public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
