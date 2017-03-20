@@ -11,10 +11,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
-import seedu.tache.commons.events.ui.DetailedTaskPanelSelectionChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
-import seedu.tache.model.task.ReadOnlyDetailedTask;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
@@ -23,7 +21,6 @@ import seedu.tache.model.task.ReadOnlyTask;
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
-    private static final String FXML2 = "DetailedTaskListPanel.fxml";
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -31,12 +28,6 @@ public class TaskListPanel extends UiPart<Region> {
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setConnections(taskList);
-        addToPlaceholder(taskListPlaceholder);
-    }
-
-    public TaskListPanel(ObservableList<ReadOnlyDetailedTask> detailedTaskList, AnchorPane taskListPlaceholder) {
-        super(FXML2);
-        setDetailedTaskConnections(detailedTaskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
