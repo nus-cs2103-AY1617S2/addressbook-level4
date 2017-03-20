@@ -58,6 +58,9 @@ public class EditCommandParser {
         assert args != null;
         List<Optional<String>> editInformation = ParserUtil.splitArgument(args.trim(),3);
         
+        if (!(editInformation.size()==3)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
         Optional<Integer> index = editInformation.get(0).flatMap(ParserUtil::parseIndex);
         Optional<String> fieldWord = editInformation.get(1);
         Optional<String> updateInformation = editInformation.get(2);
