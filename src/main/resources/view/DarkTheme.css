@@ -309,7 +309,7 @@
     -fx-font-size: 11;
 }
 
-<<<<<<< HEAD
+
 #resultDisplayPlaceholder, #resultDisplay .content, #mainPane {
     -fx-font-family: "Roboto Regular";
     -fx-font-size: 16;
@@ -331,7 +331,8 @@
     /* Up Right Down Left */
     -fx-border-width: 0 0 2 0;
     -fx-border-color: #FFFFFF;
-=======
+}
+
 #bookings .label {
     -fx-text-fill: black;
     -fx-background-color: #ffa8a1;
@@ -339,5 +340,5 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 14;
->>>>>>> V0.3-james
+
 }
