@@ -1,6 +1,8 @@
 package seedu.task.logic.commands;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
+import seedu.task.model.task.Task;
 
 /**
  * Clears all task.
@@ -15,7 +17,11 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.resetData(new TaskManager());
+        try {
+            model.resetData(new TaskManager());
+        } catch (IllegalValueException e) {
+            return new CommandResult(Task.MESSAGE_TASK_CONSTRAINTS);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -3,6 +3,7 @@ package seedu.task.model;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -12,8 +13,9 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
-    /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskManager newData);
+    /** Clears existing backing model and replaces with the provided new data.
+     * @throws IllegalValueException */
+    void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
     /** Returns the TaskManager */
     ReadOnlyTaskManager getTaskManager();
@@ -32,10 +34,11 @@ public interface Model {
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
+     * @throws IllegalValueException
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

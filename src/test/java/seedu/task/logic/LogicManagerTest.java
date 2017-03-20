@@ -442,8 +442,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Date(seed + "-05-15 2200"),
-                    new Date(seed + "-05-15 2100"),
+                    new Date(seed + "-05-15 2000"),
+                    new Date(seed + "-05-15 2001"),
                     new Remark(seed + "@email"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))), false

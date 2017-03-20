@@ -28,7 +28,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertUndoSuccess(currentList);
 
         // edit task then undo
-        commandBox.runCommand(EditCommand.COMMAND_WORD + " 2 s/this weekend t/project");
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " 2 e/3 apr 17 t/project");
         assertUndoSuccess(currentList);
 
         // delete task then undo

@@ -25,7 +25,7 @@ public class Date {
     public Date(){
         this.value = null;
     }
-    
+
     /**
      * Validates given date.
      *
@@ -63,6 +63,10 @@ public class Date {
         }
     }
 
+    public boolean isNull(){
+        return this.value == null;
+    }
+
     @Override
     public String toString() {
         if (value == null) {
@@ -87,11 +91,15 @@ public class Date {
                                                                      // check
     }
 
+    public int compareTo(Date other) {
+        return this.value.compareTo(other.getDateValue());
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     public java.util.Date getDateValue(){
         return this.value;
     }
@@ -103,7 +111,7 @@ public class Date {
      * @return
      */
     public static boolean doesPrecede(Date date1, Date date2){
-        if (date1.value == null) return false; 
+        if (date1.value == null) return false;
         if (date2.value == null) return true;
        return date1.value.before(date2.value);
     }

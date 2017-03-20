@@ -8,6 +8,7 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
@@ -28,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -45,7 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -82,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
