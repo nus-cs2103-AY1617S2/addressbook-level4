@@ -108,7 +108,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        userInboxPanel = new UserInboxPanel(getUserInboxPlaceholder(), logic.getFilteredPersonList());
+        userInboxPanel = new UserInboxPanel(getUserInboxPlaceholder(),
+                logic.getFilteredPersonList(), logic.getFilteredEventList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getUserInboxFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);

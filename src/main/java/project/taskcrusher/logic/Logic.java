@@ -3,6 +3,7 @@ package project.taskcrusher.logic;
 import javafx.collections.ObservableList;
 import project.taskcrusher.logic.commands.CommandResult;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
 /**
@@ -19,5 +20,7 @@ public interface Logic {
 
     /** Returns the filtered list of persons */
     ObservableList<ReadOnlyTask> getFilteredPersonList();
+
+    ObservableList<ReadOnlyEvent> getFilteredEventList();
 
 }
