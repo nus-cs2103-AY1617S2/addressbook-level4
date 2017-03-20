@@ -8,7 +8,6 @@ public class ClearCommandTest extends TodoListGuiTest {
 
     @Test
     public void clear() {
-
         //verify a non-empty list can be cleared
         assertTrue(todoListPanel.isListMatching(true, td.getTypicalTodos()));
         assertClearCommandSuccess();

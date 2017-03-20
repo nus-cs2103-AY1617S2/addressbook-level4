@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +78,14 @@ public class EditCommand extends Command {
         Name updatedName = editTodoDescriptor.getName().orElseGet(todoToEdit::getName);
         UniqueTagList updatedTags = editTodoDescriptor.getTags().orElseGet(todoToEdit::getTags);
 
-        return new Todo(updatedName, updatedTags);
+        if (editTodoDescriptor.getStartTime().isPresent() && editTodoDescriptor.getEndTime().isPresent()) {
+            return new Todo(updatedName, editTodoDescriptor.getStartTime().get(),
+                    editTodoDescriptor.getEndTime().get(), updatedTags);
+        } else if (!editTodoDescriptor.getStartTime().isPresent() && editTodoDescriptor.getEndTime().isPresent()) {
+            return new Todo(updatedName, editTodoDescriptor.getEndTime().get(), updatedTags);
+        } else {
+            return new Todo(updatedName, updatedTags);
+        }
     }
 
     /**
@@ -86,6 +94,8 @@ public class EditCommand extends Command {
      */
     public static class EditTodoDescriptor {
         private Optional<Name> name = Optional.empty();
+        private Optional<Date> startTime = Optional.empty();
+        private Optional<Date> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTodoDescriptor() {}
@@ -93,13 +103,21 @@ public class EditCommand extends Command {
         public EditTodoDescriptor(EditTodoDescriptor toCopy) {
             this.name = toCopy.getName();
             this.tags = toCopy.getTags();
+            this.startTime = toCopy.getStartTime();
+            this.endTime = toCopy.getEndTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.tags);
+            if (!this.startTime.isPresent() && !this.endTime.isPresent()) {
+                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags);
+            } else if (this.startTime.isPresent() && !this.endTime.isPresent()) {
+                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.tags);
+            } else {
+                return CollectionUtil.isAnyPresent(this.name, this.tags);
+            }
         }
 
         public void setName(Optional<Name> name) {
@@ -111,7 +129,6 @@ public class EditCommand extends Command {
             return name;
         }
 
-
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
@@ -119,6 +136,30 @@ public class EditCommand extends Command {
 
         public Optional<UniqueTagList> getTags() {
             return tags;
+        }
+
+        public Optional<Date> getStartTime() {
+            if (this.startTime != null) {
+                return this.startTime;
+            } else {
+                return null;
+            }
+        }
+        public void setStartTime(Date startTime) {
+            assert startTime != null;
+            this.startTime = Optional.of(startTime);
+        }
+
+        public Optional<Date> getEndTime() {
+            if (this.endTime != null) {
+                return this.endTime;
+            } else {
+                return null;
+            }
+        }
+        public void setEndTime(Date endTime) {
+            assert endTime != null;
+            this.endTime = Optional.of(endTime);
         }
     }
 }
