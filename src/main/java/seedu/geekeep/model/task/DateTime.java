@@ -1,6 +1,7 @@
 package seedu.geekeep.model.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
@@ -11,8 +12,8 @@ import seedu.geekeep.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
-            "Date and time format should be in this format: YYYY-MM-DDTHH:MM:SS";
-    public static final String DATETIME_VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+            "Date and time format should be in this format: DD-MM-YY HHMM";
+    public static final String DATETIME_VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{2}\\s{1}\\d{4}";
 
     /**
      *  Validates given dateTime.
@@ -23,13 +24,14 @@ public class DateTime {
 
     public final LocalDateTime dateTime;
     public final String value;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
     public DateTime(String dateTimeString) throws IllegalValueException {
         if (!isValidDateTime(dateTimeString)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
         this.value = dateTimeString;
-        this.dateTime = LocalDateTime.parse(dateTimeString);
+        this.dateTime = LocalDateTime.parse(dateTimeString, formatter);
     }
 
     @Override

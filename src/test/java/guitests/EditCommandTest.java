@@ -50,12 +50,12 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
-            = "Bobby s/2017-04-01T10:16:30 e/2017-05-01T10:16:30 l/Block 123, Bobby Street 3 t/husband";
+            = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
         TestTask editedPerson = new PersonBuilder().withName("Bobby")
-                .withEndDateTime("2017-05-01T10:16:30")
-                .withStartDateTime("2017-04-01T10:16:30")
+                .withEndDateTime("01-05-17 1630")
+                .withStartDateTime("01-04-17 1630")
                 .withLocation("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
@@ -75,7 +75,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline s/2017-04-01T10:16:30 e/2017-05-01T10:16:30 "
+        commandBox.runCommand("edit 3 Alice Pauline s/01-04-17 1630 e/01-05-17 1630 "
                                 + "l/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
