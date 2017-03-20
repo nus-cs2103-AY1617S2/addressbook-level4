@@ -52,4 +52,7 @@ public interface Model {
 
     /** Enables undo to work after a clear command, by pushing the existing state into UndoStack. */
     public void enableUndoForClear();
+
+    /** Updates the filter of the filered task list to filter by the given tag keywords*/
+    void updateFilteredTaskListTag(Set<String> keyword);
 }

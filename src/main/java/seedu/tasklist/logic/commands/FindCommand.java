@@ -1,3 +1,4 @@
+//@@author A0139221N
 package seedu.tasklist.logic.commands;
 
 import java.util.Set;
@@ -7,13 +8,15 @@ import java.util.Set;
  * Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {
+    //boolean to know if the find command is for tags.
     private boolean isByTags = false;
 
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Or finds tasks which countains all the specified tags when t/ prefix is used.\n"
+            + "Parameters: [KEYWORD]... [t/TAGS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final Set<String> keywords;

@@ -1,9 +1,12 @@
 package seedu.tasklist.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
+import java.util.Vector;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.tasklist.commons.core.ComponentManager;
 import seedu.tasklist.commons.core.LogsCenter;
@@ -12,6 +15,7 @@ import seedu.tasklist.commons.events.model.TaskListChangedEvent;
 import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
+import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList;
@@ -148,6 +152,11 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    @Override
+    public void updateFilteredTaskListTag(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -199,5 +208,27 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    //@@author A0139221N
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeyWords;
 
+        public TagQualifier(Set<String> tagKeyWords) {
+            this.tagKeyWords = tagKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            ObservableList<Tag> tagList = task.getTags().asObservableList();
+            List<String> tagStringList = new Vector<String>();
+            for (Tag t : tagList) {
+                tagStringList.add(StringUtil.removeSquareBrackets(t.toString()));
+            }
+            return tagStringList.containsAll(tagKeyWords);
+        }
+
+        @Override
+        public String toString() {
+            return "tag=" + String.join(", ", tagKeyWords);
+        }
+    }
 }
