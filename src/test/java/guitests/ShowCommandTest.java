@@ -29,7 +29,7 @@ public class ShowCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void showInvalidCommand_fail() {
+    public void showInvalidCommandFail() {
         commandBox.runCommand("showdone");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
