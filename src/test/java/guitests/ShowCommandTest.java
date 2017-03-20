@@ -1,3 +1,4 @@
+//@@author A0105748B
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -10,7 +11,7 @@ import seedu.bulletjournal.testutil.TestTask;
 public class ShowCommandTest extends AddressBookGuiTest {
 
     @Test
-    public void show_nonEmptyList() {
+    public void showNonEmptyList() {
         assertShowResult("show finished"); // no results
         assertShowResult("show done", td.buymilk, td.creatework, td.eatleftovers); // multiple results
         assertShowResult("show undone", td.assignment, td.dumpmilk, td.findsocks, td.getclothes); //multiple results
@@ -22,13 +23,13 @@ public class ShowCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void show_emptyList() {
+    public void showEmptyList() {
         commandBox.runCommand("clear");
         assertShowResult("show done"); // no results
     }
 
     @Test
-    public void show_invalidCommand_fail() {
+    public void showInvalidCommand_fail() {
         commandBox.runCommand("showdone");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
