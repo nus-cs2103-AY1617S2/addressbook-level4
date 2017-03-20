@@ -8,7 +8,7 @@ import org.junit.Test;
 import seedu.bulletjournal.commons.core.Messages;
 import seedu.bulletjournal.testutil.TestTask;
 
-public class ShowCommandTest extends AddressBookGuiTest {
+public class ShowCommandTest extends TodoListGuiTest {
 
     @Test
     public void showNonEmptyList() {
@@ -37,7 +37,7 @@ public class ShowCommandTest extends AddressBookGuiTest {
     private void assertShowResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }

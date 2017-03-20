@@ -27,9 +27,9 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask personToCopy) {
         this.taskName = personToCopy.getTaskName();
-        this.deadline = personToCopy.getPhone();
+        this.dueDate = personToCopy.getPhone();
         this.status = personToCopy.getStatus();
-        this.beginTime = personToCopy.getAddress();
+        this.beginDate = personToCopy.getAddress();
         this.tags = personToCopy.getTags();
     }
 

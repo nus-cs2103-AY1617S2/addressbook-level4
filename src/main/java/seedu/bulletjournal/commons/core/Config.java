@@ -14,8 +14,8 @@ public class Config {
     private String appTitle = "Bullet Journal";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/bulletjournal.xml";
-    private String addressBookName = "MyBulletJournal";
+    private String todoListFilePath = "data/bulletjournal.xml";
+    private String todoListName = "MyBulletJournal";
 
 
     public String getAppTitle() {

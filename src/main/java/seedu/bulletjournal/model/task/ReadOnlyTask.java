@@ -9,9 +9,9 @@ import seedu.bulletjournal.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     TaskName getTaskName();
-    Deadline getPhone();
+    DueDate getPhone();
     Status getStatus();
-    BeginTime getAddress();
+    BeginDate getAddress();
 
 
     /**
