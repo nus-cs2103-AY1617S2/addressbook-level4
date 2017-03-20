@@ -3,8 +3,10 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.util.Optional;
 
+
 import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.SaveFilePathChangedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTodoList;
 import seedu.address.model.UserPrefs;
@@ -35,4 +37,9 @@ public interface Storage extends TodoListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTodoListChangedEvent(TodoListChangedEvent abce);
+
+    /**
+     * Updates the save file location .
+     */
+    void handleSaveFilePathChangedEvent(SaveFilePathChangedEvent evt);
 }
