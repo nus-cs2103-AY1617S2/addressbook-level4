@@ -196,4 +196,4 @@ allTests.mustRunAfter headless
 headless.mustRunAfter clean
 check.mustRunAfter clean
 
-defaultTasks 'clean', 'headless', 'allTests', 'coverage'
+defaultTasks 'clean', 'checkStyleMain', 'checkStyleTest', 'headless', 'allTests', 'coverage'
