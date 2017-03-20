@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.tasklist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
@@ -78,6 +79,12 @@ public class DoneCommandTest extends TaskListGuiTest {
                 withTags("class").
                 build();
         assertDoneSuccess(filteredTaskListIndex, doneTaskIndex, doneTask);
+    }
+
+    @Test
+    public void done_missingIndex_failure() throws Exception {
+        commandBox.runCommand("done");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
     }
 
 
