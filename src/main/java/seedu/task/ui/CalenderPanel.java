@@ -2,7 +2,6 @@ package seedu.task.ui;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,8 +25,9 @@ public class CalenderPanel extends UiPart<Region> {
     private static final DateFormat MONTH = new SimpleDateFormat("MM");
     private static final DateFormat DATE = new SimpleDateFormat("dd");
     private static final DateFormat DAY = new SimpleDateFormat("EEEE");
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private HashMap<String, Label> dayHashMap;
+    // private static final DateTimeFormatter dtf =
+    // DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    // private HashMap<String, Label> dayHashMap;
     // tutorial
     // https://www.mkyong.com/java/java-how-to-get-current-date-time-date-and-calender/
     @FXML
