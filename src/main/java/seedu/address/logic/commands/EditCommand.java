@@ -103,19 +103,73 @@ public class EditCommand extends UndoableCommand {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Venue updatedVenue = editTaskDescriptor.getVenue().orElseGet(taskToEdit::getVenue);
-        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
-        UrgencyLevel updatedUrgencyLevel = editTaskDescriptor.getUrgencyLevel().orElseGet(taskToEdit::getUrgencyLevel);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        Title updatedTitle = editTitle(taskToEdit);
+        Venue updatedVenue = editVenue(taskToEdit);
+        StartTime updatedStartTime = editStartTime(taskToEdit);
+        EndTime updatedEndTime = editEndTime(taskToEdit);
+        UrgencyLevel updatedUrgencyLevel = editUrgencyLevel(taskToEdit);
+        Description updatedDescription = editDescription(taskToEdit);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel,
                 updatedDescription, updatedTags);
+    }
+    
+    public Title editTitle(ReadOnlyTask taskToEdit){
+        return editTaskDescriptor.getTitle().isPresent() ? editTaskDescriptor.getTitle().get() : taskToEdit.getTitle();
+    }
+    
+    public Venue editVenue(ReadOnlyTask taskToEdit){
+        if (editTaskDescriptor.getVenue().isPresent()){
+            return editTaskDescriptor.getVenue().get();
+        }
+        else if (taskToEdit.getVenue().isPresent()){
+            return taskToEdit.getVenue().get();
+        }
+        return null;
+    }
+    
+    public StartTime editStartTime(ReadOnlyTask taskToEdit){
+        if (editTaskDescriptor.getStartTime().isPresent()){
+            return editTaskDescriptor.getStartTime().get();
+        }
+        else if (taskToEdit.getStartTime().isPresent()){
+            return taskToEdit.getStartTime().get();
+        }
+        return null;
+    }
+    
+    public EndTime editEndTime(ReadOnlyTask taskToEdit){
+        if (editTaskDescriptor.getEndTime().isPresent()){
+            return editTaskDescriptor.getEndTime().get();
+        }
+        else if (taskToEdit.getEndTime().isPresent()){
+            return taskToEdit.getEndTime().get();
+        }
+        return null;
+    }
+    
+    public UrgencyLevel editUrgencyLevel(ReadOnlyTask taskToEdit){
+        if (editTaskDescriptor.getUrgencyLevel().isPresent()){
+            return editTaskDescriptor.getUrgencyLevel().get();
+        }
+        else if (taskToEdit.getUrgencyLevel().isPresent()){
+            return taskToEdit.getUrgencyLevel().get();
+        }
+        return null;
+    }
+    
+    public Description editDescription(ReadOnlyTask taskToEdit){
+        if (editTaskDescriptor.getDescription().isPresent()){
+            return editTaskDescriptor.getDescription().get();
+        }
+        else if (taskToEdit.getDescription().isPresent()){
+            return taskToEdit.getDescription().get();
+        }
+        return null;
     }
 
     /**
