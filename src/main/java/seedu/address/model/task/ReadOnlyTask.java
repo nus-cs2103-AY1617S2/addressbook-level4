@@ -80,6 +80,8 @@ public interface ReadOnlyTask {
     default boolean hasSameDateTime(ReadOnlyTask other) {
         if (this.getTaskType() != other.getTaskType()) {
             return false;
+        } else if (this.getTaskType() == TaskType.TaskWithNoDeadline) {
+            return true;
         } else {
             return this.getTaskAbsoluteDateTime()
                     .equals(other.getTaskAbsoluteDateTime());
