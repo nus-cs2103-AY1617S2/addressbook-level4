@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Saves the Task Manager data to a specific path
  */
 public class SaveAsCommand extends Command {
-    public static final String COMMAND_WORD = "SAVEAS";
+    public static final String COMMAND_WORD = "saveas";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD +
             ": Save data to a new filepath relative to DoOrDie Task Manager" +

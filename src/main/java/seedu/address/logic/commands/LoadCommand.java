@@ -12,7 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 * Loads the Task Manager data from a specific path
 */
 public class LoadCommand extends Command {
-    public static final String COMMAND_WORD = "LOAD";
+    public static final String COMMAND_WORD = "load";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD +
             ": Loads data from a new file relative to DoOrDie Task Manager " +
