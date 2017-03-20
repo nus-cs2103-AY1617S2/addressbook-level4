@@ -12,6 +12,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.loadui.testfx.GuiTest;
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
 import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
@@ -73,19 +74,27 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Ali Muster"), new Date("23-02-24"), new Date("24-02-2424"), new Remark("hans@google.com"), new Location("4th street"), new UniqueTagList(), false),
-                new Task(new Name("Boris Mueller"), new Date("24-02-24"), new Date("12-09-2245"), new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList(), false),
-                new Task(new Name("Carl Kurz"), new Date("4-04-1963"), new Date("15-03-1963"), new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList(), false),
-                new Task(new Name("Daniel Meier"), new Date("2-12-2000"), new Date("17-07-2003"), new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList(), false),
-                new Task(new Name("Elle Meyer"), new Date("1-01-2000"), new Date("24-12-2004"), new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList(), false),
-                new Task(new Name("Fiona Kunz"), new Date("29-05-2424"), new Date("04-03-2027"), new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList(), false),
-                new Task(new Name("George Best"), new Date("24-09-14"), new Date("14-02-2042"), new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList(), false),
-                new Task(new Name("Hoon Meier"), new Date("14-08-2424"), new Date("04-12-2024"), new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList(), false),
-                new Task(new Name("Ida Mueller"), new Date("9-05-30"), new Date("04-12-2031"), new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList(), false)
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] {
+                    new Task(new Name("Ali Muster"), new Date("23-02-24"), new Date("24-02-2424"),
+                            new Remark("hans@google.com"), new Location("4th street"), new UniqueTagList(), false),
+                    new Task(new Name("Boris Mueller"), new Date("24-02-24"), new Date("12-09-2245"),
+                            new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList(), false),
+                    new Task(new Name("Carl Kurz"), new Date("4-04-1963"), new Date("15-03-1963"),
+                            new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList(), false),
+                    new Task(new Name("Daniel Meier"), new Date("2-12-2000"), new Date("17-07-2003"),
+                            new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList(), false),
+                    new Task(new Name("Elle Meyer"), new Date("1-01-2000"), new Date("24-12-2004"),
+                            new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList(), false),
+                    new Task(new Name("Fiona Kunz"), new Date("29-05-2424"), new Date("04-03-2027"),
+                            new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList(), false),
+                    new Task(new Name("George Best"), new Date("24-09-14"), new Date("14-02-2042"),
+                            new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList(), false),
+                    new Task(new Name("Hoon Meier"), new Date("14-08-2424"), new Date("04-12-2024"),
+                            new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList(), false),
+                    new Task(new Name("Ida Mueller"), new Date("9-05-30"), new Date("04-12-2031"),
+                            new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList(), false) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -93,17 +102,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -112,8 +117,9 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
+     * 
      * @param fileName
      * @return
      */
@@ -144,15 +150,14 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-
     public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
         return new XmlSerializableTaskManager(new TaskManager());
 
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -169,7 +174,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -188,18 +193,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -215,10 +219,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -236,6 +241,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     * 
      * @param node
      * @return
      */
@@ -247,6 +253,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     * 
      * @param node
      * @return
      */
@@ -258,6 +265,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     * 
      * @param node
      * @return
      */
@@ -283,8 +291,11 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
-     * @param tasksToRemove The subset of tasks.
+     * 
+     * @param tasks
+     *            The list of tasks
+     * @param tasksToRemove
+     *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -293,11 +304,13 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     * 
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -305,9 +318,13 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * @param tasks The array of tasks.
-     * @param task The replacement task
-     * @param index The index of the task to be replaced.
+     * 
+     * @param tasks
+     *            The array of tasks.
+     * @param task
+     *            The replacement task
+     * @param index
+     *            The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -317,8 +334,11 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
-     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * 
+     * @param tasks
+     *            A array of tasks.
+     * @param tasksToAdd
+     *            The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -341,7 +361,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -350,7 +370,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }
@@ -359,5 +379,29 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    public static TestTask[] giveSortedList(final TestTask[] tasks) {
+        List<TestTask> listOfTasks = asList(tasks);
+        Collections.sort(listOfTasks);
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
 
+    }
+
+    public static ReadOnlyTask[] giveSortedList(ReadOnlyTask... tasks) {
+        List<ReadOnlyTask> listOfTasks = asList(tasks);
+        Collections.sort(listOfTasks);
+        return listOfTasks.toArray(new ReadOnlyTask[listOfTasks.size()]);
+
+    }
+
+//     public static <T> T[] giveSortedList(T[] objs){
+//     List<T> listOfObjects = asList(objs);
+//     Collections.sort(listOfObjects);
+//     return listOfObjects.toArray(new <T>[listOfObjects.size()]);
+//     }
+//     public <E> E[] getArray(Class<E> clazz, int size) {
+//         @SuppressWarnings("unchecked")
+//         E[] arr = (E[]) Array.newInstance(clazz, size);
+//
+//         return arr;
+//     }
 }

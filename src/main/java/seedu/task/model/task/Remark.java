@@ -14,6 +14,10 @@ public class Remark {
     public static final String DEFAULT_REMARK = "DEFAULT_REMARK";
     public final String value;
 
+    //Allows an empty constructor
+    public Remark(){
+        this.value = DEFAULT_REMARK;
+    }
     /**
      * Validates given remark.
      *

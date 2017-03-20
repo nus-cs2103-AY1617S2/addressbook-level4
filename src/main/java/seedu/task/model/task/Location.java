@@ -18,6 +18,10 @@ public class Location {
     public static final String DEFAULT_LOCATION = "DEFAULT_LOCATION";
     public final String value;
 
+    //Allows an empty constructor
+    public Location(){
+        this.value = DEFAULT_LOCATION;
+    }
     /**
      * Validates given location.
      *
