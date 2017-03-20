@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -7,16 +8,19 @@ import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
-
+import net.fortuna.ical4j.data.ParserException;
+import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.address.storage.IcsFileStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -118,6 +122,20 @@ public class ModelManager extends ComponentManager implements Model {
         abce.setNonFloatingTasks(getNonFloatingTaskList());
         abce.setCompletedTasks(getCompletedTaskList());
         raise(abce);
+    }
+
+    @Override
+    public void saveTasksToIcsFile(String filePath) throws ValidationException, IOException {
+        IcsFileStorage.saveDataToFile(filePath, this.currentAddressBook.getTaskList());
+    }
+
+    @Override
+    public void addTasksFromIcsFile(String filePath)
+            throws IOException, ParserException, IllegalValueException {
+        List<Task> importedTasks = IcsFileStorage.loadDataFromSaveFile(filePath);
+        for (Task task : importedTasks) {
+            addTask(task);
+        }
     }
 
     @Override

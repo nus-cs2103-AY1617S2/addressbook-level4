@@ -1,20 +1,9 @@
 package seedu.address.logic.commands;
-/*
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Optional;
 
+import java.io.IOException;
+
+import net.fortuna.ical4j.data.ParserException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Instruction;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.Title;
-import seedu.address.model.task.UniqueTaskList;
-*/
-
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -26,38 +15,28 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": filepath";
 
-    public static final String MESSAGE_SUCCESS = "Imported successfully";
-    public static final String MESSAGE_DUPLICATE_FILE_EXISTS = "Duplicate file exists";
+    public static final String MESSAGE_SUCCESS = "Successfully imported %1$s";
+    public static final String MESSAGE_INVALID_FILE_PATH = "The file path provided is not valid!";
+    public static final String MESSAGE_ILLEGAL_VALUE = "The data is not compatible with task manager!";
 
-    //private final Task toAdd;
+    private final String filePath;
 
     /**
      * Creates an Import Command.
      */
-    public ImportCommand() {
-        /*
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        toAdd = null;
-        */
-        //Where is the hashset stored?
+    public ImportCommand(String filePath) {
+        this.filePath = filePath.trim();
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        /*
-        assert model != null;
         try {
-            model.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            model.addTasksFromIcsFile(filePath);
+        } catch (IOException | ParserException e) {
+            throw new CommandException(String.format(MESSAGE_INVALID_FILE_PATH));
+        } catch (IllegalValueException ive) {
+            throw new CommandException(String.format(MESSAGE_ILLEGAL_VALUE));
         }
-        */
-
-        // Dummy return
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
     }
 }

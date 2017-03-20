@@ -1,9 +1,13 @@
 package seedu.address.model;
 
+import java.io.IOException;
 //import java.util.List;
 import java.util.Set;
 
+import net.fortuna.ical4j.data.ParserException;
+import net.fortuna.ical4j.validate.ValidationException;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model.StateLimitReachedException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -36,6 +40,26 @@ public interface Model {
      */
     void updateTask(String targetList, int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
+
+    /**
+     * Saves the current task list to and ICS formatted file at the specified path.
+     * @param filePath The path to file output.
+     * @throws ValidationException Thrown when the task list data is not compatible with ICS format.
+     * @throws IOException Thrown when the specified file path is invalid.
+     */
+    void saveTasksToIcsFile(String filePath) throws ValidationException, IOException;
+
+    /**
+     * Extracts events from an ICS file and adds them to the current task list.
+     * @param filePath The path to file.
+     * @throws IllegalValueException Thrown when the imported data is not compatible with task format.
+     * @throws IOException Thrown when the specified file path is invalid.
+     * @throws ParserException Thrown when data in the ICS file is not compliant to ICS file format.
+     * @throws UniqueTaskList.DuplicateTaskException Thrown when a task to be imported already exists in
+     * the task manager.
+     */
+    void addTasksFromIcsFile(String filePath)
+            throws IOException, ParserException, IllegalValueException, UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered non-floating task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getNonFloatingTaskList();
