@@ -113,6 +113,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        //updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
+        //updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(keywords)));
+
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -172,6 +175,48 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    private class PriorityQualifier implements Qualifier {
+        private Set<String> priorityQualifier;
+
+        PriorityQualifier(Set<String> priorityQualifier) {
+            this.priorityQualifier = priorityQualifier;
+        }
+
+        @Override
+        public boolean run(Item task) {
+            return priorityQualifier.stream()
+                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
+                .findAny()
+                .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "priority=" + String.join(", ", priorityQualifier);
+        }
+    }
+
+    private class DescriptionQualifier implements Qualifier {
+        private Set<String> descriptionQualifier;
+
+        DescriptionQualifier(Set<String> descriptionQualifier) {
+            this.descriptionQualifier = descriptionQualifier;
+        }
+
+        @Override
+        public boolean run(Item task) {
+            return descriptionQualifier.stream()
+                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
+                .findAny()
+                .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "description=" + String.join(", ", descriptionQualifier);
         }
     }
 
