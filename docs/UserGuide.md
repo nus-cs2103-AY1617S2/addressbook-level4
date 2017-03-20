@@ -109,7 +109,7 @@ Examples:
 
 Edits the specified task's details.
 
-Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | [clear dates])`
+Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | [clear dates]) [COMPLETED | INCOMPLETE]`
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />
@@ -118,6 +118,7 @@ Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE 
 > * Existing values will be updated to the input values.
 > * When editing labels, the existing labels of the task will be removed i.e adding of labels is not cumulative.
 > * You can remove all the task's tags by typing `#` without specifying any tags after it.
+> * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
 > * Using 'clear dates' allows the user to remove the existing dates associated with the task.
 
 

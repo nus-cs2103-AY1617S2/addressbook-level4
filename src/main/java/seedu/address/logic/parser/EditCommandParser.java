@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR_DATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_COMPLETED;
@@ -34,7 +35,7 @@ public class EditCommandParser {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TIMEINTERVAL_START, PREFIX_TIMEINTERVAL_END, PREFIX_LABEL,
-                        PREFIX_STATUS_COMPLETED, PREFIX_STATUS_INCOMPLETE);
+                        PREFIX_STATUS_COMPLETED, PREFIX_STATUS_INCOMPLETE, PREFIX_CLEAR_DATES);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -51,6 +52,9 @@ public class EditCommandParser {
             editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_END)));
             if (!editTaskDescriptor.isDateEdited()) {
                 editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            }
+            if (args.trim().contains(PREFIX_CLEAR_DATES.getPrefix())) {
+                editTaskDescriptor.setClearDates(Optional.ofNullable(true));
             }
             if (args.trim().contains(PREFIX_STATUS_COMPLETED.getPrefix())) {
                 editTaskDescriptor.setIsCompleted(Optional.ofNullable(true));

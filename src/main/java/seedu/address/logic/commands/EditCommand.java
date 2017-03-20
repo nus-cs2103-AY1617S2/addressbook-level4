@@ -96,6 +96,7 @@ public class EditCommand extends Command {
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
         private Optional<Boolean> isCompleted = Optional.empty();
+        private Optional<Boolean> clearDates = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -106,6 +107,7 @@ public class EditCommand extends Command {
             this.deadline = toCopy.getDeadline();
             this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
+            this.clearDates = toCopy.getClearDates();
         }
 
         /**
@@ -113,7 +115,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.title, this.startTime,
-                    this.isCompleted, this.deadline, this.labels);
+                    this.isCompleted, this.deadline, this.labels, this.clearDates);
         }
 
         /**
@@ -162,8 +164,17 @@ public class EditCommand extends Command {
         public void setIsCompleted(Optional<Boolean> isCompleted) {
             this.isCompleted = isCompleted;
         }
+
         public Optional<Boolean> isCompleted() {
             return isCompleted;
+        }
+
+        public void setClearDates(Optional<Boolean> clearDates) {
+            this.clearDates = clearDates;
+        }
+
+        public Optional<Boolean> getClearDates() {
+            return clearDates;
         }
     }
 

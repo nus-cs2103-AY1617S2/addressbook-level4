@@ -52,6 +52,8 @@ public class Task implements ReadOnlyTask {
     public void setStartTime(Optional<Deadline> startTime) {
         if (startTime.isPresent()) {
             this.startTime = startTime;
+        } else {
+            this.startTime = Optional.empty();
         }
     }
 
@@ -63,6 +65,8 @@ public class Task implements ReadOnlyTask {
     public void setDeadline(Optional<Deadline> deadline) {
         if (deadline.isPresent()) {
             this.deadline = deadline;
+        } else {
+            this.deadline = Optional.empty();
         }
     }
 
