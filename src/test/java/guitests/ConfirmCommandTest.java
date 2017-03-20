@@ -26,7 +26,8 @@ public class ConfirmCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     @Test
-    public void confirm_isMutating_ReturnTrue() throws IllegalDateTimeValueException, IllegalValueException, CommandException {
+    public void confirm_isMutating_ReturnTrue() throws IllegalDateTimeValueException,
+            IllegalValueException, CommandException {
         ConfirmCommand cc = new ConfirmCommand(1, 1);
         assertTrue(cc.isMutating());
     }
@@ -41,7 +42,8 @@ public class ConfirmCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void confirm_validOutOfRangeIndex() throws IllegalDateTimeValueException, IllegalValueException, CommandException {
+    public void confirm_validOutOfRangeIndex() throws IllegalDateTimeValueException,
+            IllegalValueException, CommandException {
         commandBox.runCommand("confirm 18 2");
         assertResultMessage(Messages.MESSAGE_INVALID_TASKS_DISPLAYED_INDEX);
 

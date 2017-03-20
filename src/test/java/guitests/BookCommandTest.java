@@ -27,7 +27,8 @@ public class BookCommandTest extends TaskManagerGuiTest {
             "Input dates are in the wrong format, please try again!";
 
     @Test
-    public void book_isMutating_ReturnTrue() throws IllegalDateTimeValueException, IllegalValueException, CommandException {
+    public void book_isMutating_ReturnTrue() throws IllegalDateTimeValueException,
+            IllegalValueException, CommandException {
         Set<String> emptySet = new HashSet<String>();
         BookCommand bc = new BookCommand("valid", emptySet, "");
         assertTrue(bc.isMutating());
@@ -57,7 +58,7 @@ public class BookCommandTest extends TaskManagerGuiTest {
         assertResultMessage(MESSAGE_BOOKING_CONSTRAINTS);
 
         commandBox.runCommand("book Complete booking #friends 10 Oct 2017 2pm,");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,MESSAGE_USAGE));
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
 }
