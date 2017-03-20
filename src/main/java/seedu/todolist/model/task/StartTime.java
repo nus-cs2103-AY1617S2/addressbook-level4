@@ -12,7 +12,7 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
  * Represents a Task's start time in the to-do list.
  */
 
-public class StartTime {
+public class StartTime implements Comparable<StartTime> {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =
             "Start time should follow the format: DD-MM-YYYY TIME. E.g. \n"
@@ -30,6 +30,14 @@ public class StartTime {
         }
     }
 
+    public StartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    protected Date getStartTime() {
+        return this.startTime;
+    }
+
     public String toString() {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
         StringBuffer startTimeBuffer = dateFormatter.format(startTime, new StringBuffer(), new FieldPosition(0));
@@ -40,6 +48,10 @@ public class StartTime {
         return other == this // short circuit if same object
                 || (other instanceof StartTime // instanceof handles nulls
                 && this.toString().equals(((StartTime) other).toString())); // state check
+    }
+
+    public int compareTo(StartTime other) {
+        return startTime.compareTo(other.getStartTime());
     }
 
     public int hashCode() {

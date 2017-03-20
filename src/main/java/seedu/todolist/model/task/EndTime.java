@@ -12,7 +12,7 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
  * Represents a Task's end time in the to-do list.
  */
 
-public class EndTime {
+public class EndTime implements Comparable<EndTime> {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS =
             "End time should follow the format: DD-MM-YYYY TIME. E.g. \n"
@@ -30,6 +30,14 @@ public class EndTime {
         }
     }
 
+    public EndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    protected Date getEndTime() {
+        return this.endTime;
+    }
+
     public String toString() {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy h.mm a");
         StringBuffer endTimeBuffer = dateFormatter.format(endTime, new StringBuffer(), new FieldPosition(0));
@@ -40,6 +48,10 @@ public class EndTime {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
                 && this.toString().equals(((EndTime) other).toString())); // state check
+    }
+
+    public int compareTo(EndTime other) {
+        return endTime.compareTo(other.getEndTime());
     }
 
     public int hashCode() {
