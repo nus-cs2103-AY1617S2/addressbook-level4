@@ -16,8 +16,8 @@ By : `Team F12-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `ToDoApp.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your ToDoApp.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
@@ -132,7 +132,7 @@ Examples:
 * `schedule 2 07/07/17`<br>
 Adds a deadline of 7th July 2017 to task at index 2.
 
-### 2.7. Find specific tasks
+### 2.8. Find specific tasks
 
 Retrieve tasks based on various conditions.<br>
 Format: `find [d/DEADLINE] [p/PRIORITY] [t/TAG]`
@@ -149,16 +149,31 @@ Retrieve all tasks with the tag CS2103.
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.10. Undo a recent command: `undo`
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Undo the most recent command<br>
+Format: `undo`
+
+> * Can undo commands `add`, `delete`, `edit`
+
+### 2.11. Redo a recent command: `undo`
+
+Redo the most recent command<br>
+Format: `redo`
+
+> * Can redo commands that were most recently undone
+> * Inputting a new undo-able command clears the redo state history
+
+### 2.12. Saving the data
+
+ToDoApp data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous ToDoApp folder.
 
 ## 4. Command Summary
 
