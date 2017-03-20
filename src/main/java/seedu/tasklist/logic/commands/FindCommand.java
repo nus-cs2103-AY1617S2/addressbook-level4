@@ -7,6 +7,7 @@ import java.util.Set;
  * Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {
+    private boolean isByTags = false;
 
     public static final String COMMAND_WORD = "find";
 
@@ -21,9 +22,18 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
+    public FindCommand isByTags() {
+        isByTags = true;
+        return this;
+    }
+
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        if (isByTags) {
+            model.updateFilteredTaskListTag(keywords);
+        } else {
+            model.updateFilteredTaskList(keywords);
+        }
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
