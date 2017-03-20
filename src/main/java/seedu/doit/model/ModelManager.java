@@ -104,10 +104,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
-        //updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
-        //updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(keywords)));
+    public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
+            Set<String> descriptionKeywords) {
+        if (!nameKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new NameQualifier(nameKeywords)));
+        }
+
+        if (!nameKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priorityKeywords)));
+        }
+
+        if (!nameKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(descriptionKeywords)));
+        }
 
     }
 
