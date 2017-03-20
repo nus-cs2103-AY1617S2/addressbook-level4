@@ -517,7 +517,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             //@@author A0144904H
-            if(p.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
+            if (p.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
                 cmd.append(" n/").append(p.getName().toString());
             } else {
                 cmd.append(" n/").append(p.getName().toString() + "!");
