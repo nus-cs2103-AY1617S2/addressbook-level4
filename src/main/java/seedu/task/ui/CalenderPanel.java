@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -96,7 +95,7 @@ public class CalenderPanel extends UiPart<Region> {
     public CalenderPanel(AnchorPane calendertPlaceholder) {
         super(FXML);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-        ObservableList<String> data = FXCollections.observableArrayList("hey", "you");
+        /* ObservableList<String> data = */ FXCollections.observableArrayList("hey", "you");
         label1.setText("v0.1");
         setDate();
         listview1.getItems().addAll("eat pizza", "go to gym");
