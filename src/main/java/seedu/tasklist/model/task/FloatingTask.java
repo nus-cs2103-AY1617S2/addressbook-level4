@@ -1,7 +1,5 @@
 package seedu.tasklist.model.task;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.Objects;
 
 import seedu.tasklist.commons.util.CollectionUtil;

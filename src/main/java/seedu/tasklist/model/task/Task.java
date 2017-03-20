@@ -1,8 +1,5 @@
 package seedu.tasklist.model.task;
 
-import java.text.ParseException;
-import java.util.Date;
-
 import seedu.tasklist.model.tag.UniqueTagList;
 
 /**
