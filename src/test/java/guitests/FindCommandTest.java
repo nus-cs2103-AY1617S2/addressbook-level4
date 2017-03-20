@@ -10,13 +10,19 @@ import seedu.taskboss.testutil.TestTask;
 public class FindCommandTest extends TaskBossGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
+    public void find_byNameNonEmptyList() {
         assertFindResult("find n/Mark"); // no results
         assertFindResult("find n/Meier", td.benson, td.daniel); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
         assertFindResult("find n/Meier", td.daniel);
+    }
+
+    @Test
+    public void find_byInformationNonEmptyList() {
+        assertFindResult("find i/Information"); // no results
+        assertFindResult("find i/ave", td.alice, td.benson, td.elle); // multiple results
     }
 
     @Test
