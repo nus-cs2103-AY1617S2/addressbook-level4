@@ -74,6 +74,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveTaskList(ReadOnlyTaskList flexitask, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(flexitask, filePath);
+        taskListStorage = new XmlTaskListStorage(filePath);
     }
 
 
@@ -86,6 +87,11 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    @Override
+    public void loadTaskList(String filePath) {
+        taskListStorage = new XmlTaskListStorage(filePath);
     }
 
 }
