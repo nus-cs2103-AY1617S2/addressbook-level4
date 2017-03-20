@@ -1,5 +1,7 @@
 package guitests;
 
+
+
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -25,10 +27,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Alice Pauline d/04/06/2013 t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby").withTime("04/06/2013")
+        TestTask editedTask = new TaskBuilder().withName("Alice Pauline").withTime("04/06/2013")
                 .withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
@@ -93,14 +95,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
+        commandBox.runCommand("edit 1 d/abcd");
         assertResultMessage(Time.MESSAGE_TIME_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -108,8 +104,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Alice Pauline t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
