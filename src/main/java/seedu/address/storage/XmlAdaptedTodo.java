@@ -62,7 +62,7 @@ public class XmlAdaptedTodo {
             tagged.add(new XmlAdaptedTag(tag));
         }
     }
-
+    //@@author A0163786N
     /**
      * Converts this jaxb-friendly adapted todo object into the model's Todo object.
      *
@@ -78,20 +78,26 @@ public class XmlAdaptedTodo {
         Date startTime = null;
         Date endTime = null;
         Date completeTime = null;
-        try {
-            startTime = StringUtil.parseDate(this.startTime, "EEE MMM dd HH:mm:ss zzz yyyy");
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
+        if (!this.startTime.isEmpty()) {
+            try {
+                startTime = StringUtil.parseDate(this.startTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            endTime = StringUtil.parseDate(this.endTime, "EEE MMM dd HH:mm:ss zzz yyyy");
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
+        if (!this.endTime.isEmpty()) {
+            try {
+                endTime = StringUtil.parseDate(this.endTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            completeTime = StringUtil.parseDate(this.completeTime, "EEE MMM dd HH:mm:ss zzz yyyy");
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
+        if (!this.completeTime.isEmpty()) {
+            try {
+                completeTime = StringUtil.parseDate(this.completeTime, "EEE MMM dd HH:mm:ss zzz yyyy");
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
         }
         return new Todo(name, startTime, endTime, completeTime, tags);
     }

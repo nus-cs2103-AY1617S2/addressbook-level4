@@ -38,7 +38,6 @@ public class TodoBuilder {
         }
         return null;
     }
-
     public TodoBuilder withEndTime(String strDateTime) throws IllegalValueException {
         try {
             this.todo.setEndTime(StringUtil.parseDate(strDateTime, AddCommand.DATE_FORMAT));
@@ -48,6 +47,17 @@ public class TodoBuilder {
         }
         return null;
     }
+    //@@author A0163786N
+    public TodoBuilder withCompleteTime(String strDateTime) throws IllegalValueException {
+        try {
+            this.todo.setCompleteTime(StringUtil.parseDate(strDateTime, AddCommand.DATE_FORMAT));
+            return this;
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public TodoBuilder withTags(String ... tags) throws IllegalValueException {
         UniqueTagList tempList = new UniqueTagList();
         for (String tag: tags) {

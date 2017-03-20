@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.todo.Name;
 import seedu.address.model.todo.ReadOnlyTodo;
@@ -38,9 +39,21 @@ public class TestTodo implements ReadOnlyTodo {
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+    //@@author A0163786N
+    /**
+     * Constructor for a deadline
+     */
+    public TestTodo(Name name, Date endtime, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        if (endtime != null) {
+            this.endtime = endtime;
+        }
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
 
     /**
-     * Constructor for a scheduled task
+     * Constructor for an event
      */
     public TestTodo(Name name, Date starttime, Date endtime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
@@ -51,13 +64,23 @@ public class TestTodo implements ReadOnlyTodo {
         }
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+    //@@author A0163786N
+    /**
+     * General todo constructor
+     */
+    public TestTodo(Name name, Date starttime, Date endtime, Date completeTime, UniqueTagList tags) {
+        this.name = name;
+        this.starttime = starttime;
+        this.endtime = endtime;
+        this.completeTime = completeTime;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
 
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
-
     public TestTodo(ReadOnlyTodo source) {
-            this(source.getName(), source.getStartTime(), source.getEndTime(), source.getTags());
+        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getCompleteTime(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -89,11 +112,11 @@ public class TestTodo implements ReadOnlyTodo {
     public Date getEndTime() {
         return endtime;
     }
-
+    //@@author A0163786N
     public void setCompleteTime(Date completeTime) {
         this.completeTime = completeTime;
     }
-
+    //@@author A0163786N
     @Override
     public Date getCompleteTime() {
         return completeTime;
@@ -143,20 +166,13 @@ public class TestTodo implements ReadOnlyTodo {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        if (this.getStartTime() != null && this.getEndTime() != null) {
-
-            DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
-            String startDate = dateFormat.format(this.getStartTime());
-            String endDate = dateFormat.format(this.getEndTime());
-            sb.append("s/" + startDate + " e/" + endDate + " ");
-
-        } else if (this.getStartTime() == null && this.getEndTime() != null) {
-
-            DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd'T'HH:mm");
-            String endDate = dateFormat.format(this.getEndTime());
-            sb.append(" e/" + endDate + " ");
-
+        sb.append("add " + this.getName().fullName);
+        if (this.getEndTime() != null) {
+            DateFormat dateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
+            sb.append(" e/" + dateFormat.format(this.getEndTime()));
+            if (this.getStartTime() != null) {
+                sb.append(" s/" + dateFormat.format(this.getStartTime()) + " ");
+            }
         }
 
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

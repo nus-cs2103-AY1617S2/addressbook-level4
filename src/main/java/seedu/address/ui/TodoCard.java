@@ -29,7 +29,7 @@ public class TodoCard extends UiPart<Region> {
     private Label complete;
     @FXML
     private FlowPane tags;
-
+    //@@author A0163786N
     public TodoCard(ReadOnlyTodo todo, int displayedIndex) {
         super(FXML);
         name.setText(todo.getName().fullName);

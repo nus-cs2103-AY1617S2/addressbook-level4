@@ -12,6 +12,7 @@ public class TypicalTestTodos {
 
     public TestTodo dog, cat, math, english, dishes, lawn, dinner, laundry, car, job, lunch;
 
+    //@@author A0163786N
     public TypicalTestTodos() {
         try {
             dog = new TodoBuilder().withName("Walk the dog")
@@ -26,7 +27,7 @@ public class TypicalTestTodos {
 
             // Manually added
             laundry = new TodoBuilder().withName("Do laundry").build();
-            car = new TodoBuilder().withName("Wash car").build();
+            car = new TodoBuilder().withName("Wash car").withCompleteTime("6:00PM 11/11/2017").build();
             job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/2017").build();
             lunch = new TodoBuilder().withName("lunch").withStartTime("12:00PM 11/11/2017")
                     .withEndTime("1:00PM 11/11/2017").build();

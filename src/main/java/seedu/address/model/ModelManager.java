@@ -92,7 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
-
+    //@@author A0163786N
     @Override
     public synchronized void completeTodo(int filteredTodoListIndex, Date completeTime) {
         TodoList tempTodoList = new TodoList(todoList);
@@ -100,7 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
-
+    //@@author A0163786N
     @Override
     public synchronized void uncompleteTodo(int filteredTodoListIndex) {
         TodoList tempTodoList = new TodoList(todoList);
@@ -108,8 +108,7 @@ public class ModelManager extends ComponentManager implements Model {
         previousTodoList = tempTodoList;
         indicateTodoListChanged();
     }
-
-
+    //@@author A0163786N
     @Override
     public void loadPreviousState() throws NoPreviousStateException {
         if (previousTodoList == null) {

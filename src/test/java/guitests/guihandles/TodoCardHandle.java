@@ -71,11 +71,11 @@ public class TodoCardHandle extends GuiHandle {
     private String getEndTime() {
         return getTextFromLabel(ENDTIME_FIELD_ID);
     }
-
+    //@@author A0163786N
     private String getCompleteTime() {
         return getTextFromLabel(COMPLETETIME_FIELD_ID);
     }
-
+    //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo, boolean checkCompleteTime) {
         if (checkCompleteTime) {
             DateFormat completeCommandDateFormat = new SimpleDateFormat(CompleteCommand.COMPLETE_TIME_FORMAT);
@@ -86,7 +86,7 @@ public class TodoCardHandle extends GuiHandle {
         }
         return isSameTodo(todo);
     }
-
+    //@@author A0163786N
     public boolean isSameTodo(ReadOnlyTodo todo) {
         DateFormat addCommandDateFormat = new SimpleDateFormat(AddCommand.DATE_FORMAT);
         if (todo.getStartTime() != null

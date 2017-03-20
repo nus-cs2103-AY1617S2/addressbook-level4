@@ -9,7 +9,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.testutil.TestTodo;
 
 public class UndoCommandTest extends TodoListGuiTest {
-
+    //@@author A0163786N
     /**
      * The list of todos in the todo list panel is expected to match this list
      */
@@ -24,6 +24,7 @@ public class UndoCommandTest extends TodoListGuiTest {
     @Test
     public void undo_listTodos_failure() {
         commandBox.runCommand("list");
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertResultMessage(UndoCommand.MESSAGE_NO_ACTION);
     }
 
