@@ -225,7 +225,7 @@ public class LogicManagerTest {
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedTaskManager = helper.generateAddressBook(2);
+        TaskManager expectedTaskManager = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedTaskManager.getTaskList();
 
         // prepare address book state
@@ -599,9 +599,9 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook with auto-generated tasks.
+         * Generates an TaskManager with auto-generated tasks.
          */
-        TaskManager generateAddressBook(int numGenerated) throws Exception {
+        TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
             addToAddressBook(taskManager, numGenerated);
             return taskManager;
