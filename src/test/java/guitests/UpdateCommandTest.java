@@ -33,7 +33,7 @@ public class UpdateCommandTest extends AddressBookGuiTest {
      */
     private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
                                     String detailsToEdit, TestTask editedPerson) {
-        commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
+        commandBox.runCommand("update " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
         PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTitle().fullTitle);
