@@ -3,7 +3,6 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyEvent;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -16,8 +15,6 @@ public interface ReadOnlyToDoList {
      * This list will not contain any duplicate Tasks.
      */
     ObservableList<ReadOnlyTask> getTaskList();
-    
-    ObservableList<ReadOnlyEvent> getEventList();
 
     /**
      * Returns an unmodifiable view of the tags list.
