@@ -14,6 +14,6 @@ public class SaveFilePathChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return this.saveFilePath.toString();
+        return saveFilePath;
     }
 }
