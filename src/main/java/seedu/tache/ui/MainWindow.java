@@ -47,6 +47,12 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private AnchorPane taskListTypePlaceholder;
+
+    @FXML
+    private AnchorPane taskCountPlaceholder;
+
+    @FXML
     private AnchorPane taskListPanelPlaceholder;
 
     @FXML
@@ -115,6 +121,8 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        new TaskListType(getTaskListTypePlaceholder(), "please do this part");
+        new TaskCount(getTaskCountPlaceholder(), "please do this part too", "thanks :)");
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -130,6 +138,14 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
+    }
+
+    private AnchorPane getTaskCountPlaceholder() {
+        return taskCountPlaceholder;
+    }
+
+    private AnchorPane getTaskListTypePlaceholder() {
+        return taskListTypePlaceholder;
     }
 
     private AnchorPane getTaskListPlaceholder() {
