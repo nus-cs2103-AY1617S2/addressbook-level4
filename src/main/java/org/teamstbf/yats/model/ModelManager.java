@@ -1,6 +1,8 @@
 package org.teamstbf.yats.model;
 
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import org.teamstbf.yats.commons.core.ComponentManager;
@@ -79,6 +81,9 @@ public class ModelManager extends ComponentManager implements Model {
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
 	private final TaskManager taskManager;
+	
+	private static final Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
+    private static final Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
@@ -101,16 +106,41 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-		taskManager.addEvent(event);
+	    saveImage();
+	    taskManager.addEvent(event);
 		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
 	}
 
+    private void saveImage() {
+        TaskManager tempManager = new TaskManager();
+	    tempManager.resetData(taskManager);
+	    undoTaskManager.push(tempManager);
+    }
+
 	@Override
 	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+	    saveImage();
 		taskManager.removeEvent(target);
 		indicateTaskManagerChanged();
 	}
+	
+	
+	//@@author A0102778B
+	
+	@Override
+    public synchronized void getPreviousState() {
+	    TaskManager tempManager = new TaskManager();
+	    tempManager.resetData(taskManager);
+	    redoTaskManager.push(tempManager);
+        taskManager.resetData((ReadOnlyTaskManager)undoTaskManager.pop());
+    }
+	
+    @Override
+    public synchronized void getNextState() {
+        saveImage();
+        taskManager.resetData((ReadOnlyTaskManager)redoTaskManager.pop());
+    }
 
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
@@ -132,6 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void resetData(ReadOnlyTaskManager newData) {
+	    saveImage();
 		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
@@ -154,7 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException {
 		assert editedEvent != null;
-
+		saveImage();
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
