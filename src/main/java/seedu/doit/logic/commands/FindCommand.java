@@ -15,15 +15,26 @@ public class FindCommand extends Command {
         + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
         + "Example: " + COMMAND_WORD + " Task A Project 3 Print 10 pages";
 
-    private final Set<String> keywords;
+    private final Set<String> namekeywords;
+    private final Set<String> startTimekeywords;
+    private final Set<String> endTimekeywords;
+    private final Set<String> prioritykeywords;
+    private final Set<String> tagskeywords;
+    private final Set<String> desckeywords;
 
-    public FindCommand(Set<String> keywords) {
-        this.keywords = keywords;
+    public FindCommand(Set<String> namekeywords, Set<String> startTimekeywords, Set<String> endTimekeywords,
+                       Set<String> prioritykeywords, Set<String> tagskeywords, Set<String> desckeywords) {
+        this.namekeywords = namekeywords;
+        this.startTimekeywords = namekeywords;
+        this.endTimekeywords = namekeywords;
+        this.prioritykeywords = namekeywords;
+        this.tagskeywords = namekeywords;
+        this.desckeywords = namekeywords;
     }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        model.updateFilteredTaskList(namekeywords);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
