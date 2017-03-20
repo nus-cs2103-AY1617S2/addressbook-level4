@@ -14,3 +14,8 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.selected {
+	-fx-background-color: white;
+	-fx-text: black;
+}

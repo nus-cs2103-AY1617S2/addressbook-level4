@@ -12,6 +12,7 @@ import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.events.model.ToDoListChangedEvent;
+import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.model.task.ReadOnlyTask;
@@ -28,6 +29,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final ToDoList toDoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private static final String INCOMPLETE = "incomplete";
+    private static final String COMPLETE = "complete";
+    private static final String OVERDUE = "overdue";
+    private static final String ALL = "all";
+
 
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
@@ -62,12 +68,19 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ToDoListChangedEvent(toDoList));
     }
 
+    //@@author A0144240W
+    /** Raises an event to indicate that the filteredList has changed */
+    private void indicateViewListChanged(String typeOfList) {
+        raise(new ViewListChangedEvent(typeOfList));
+    }
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
 
+    @Override
     public synchronized void completeTask(int filteredTaskListIndex, ReadOnlyTask target) throws TaskNotFoundException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.completeTask(toDoListIndex, target);
@@ -104,6 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
             return !task.isComplete();
         });
+        indicateViewListChanged(INCOMPLETE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -113,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
             return task.isComplete();
         });
+        //indicateViewListChanged(COMPLETE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
