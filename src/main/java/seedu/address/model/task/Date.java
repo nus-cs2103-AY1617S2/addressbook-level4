@@ -1,6 +1,12 @@
+// @@author A0163996J
+
 package seedu.address.model.task;
 
+import com.joestelmach.natty.*;
+
 import seedu.address.commons.exceptions.IllegalValueException;
+
+import java.util.List;
 
 /**
  * Represents a Task's start or end date and time in the task manager. Guarantees: immutable; is
@@ -15,10 +21,14 @@ public class Date {
 	     */
 	    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-	    public final String date;
+	    public final java.util.Date date;
+	    public final String dateString;
+	    Parser parser = new Parser();
 
+	    
 	    public Date() {
 	    	this.date = null;
+	    	this.dateString = null;
 	    }
 	    
 	    /**
@@ -34,7 +44,21 @@ public class Date {
 	        // if (!isValidTitle(trimmedName)) {
 	        // throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
 	        // }
-	        this.date = date;
+	    	this.dateString = date;
+	    	System.out.println(date);
+	    	if (date != null && date.length() > 0) {
+	    		List groups = parser.parse(date);
+	    		if (groups.size() >= 0) {
+		    		DateGroup group = (DateGroup)groups.get(0);
+		    		this.date = group.getDates().get(0);
+	    		}
+	    		else {
+	    			this.date = null;
+	    		}
+	    	}
+	    	else {
+	    		this.date = null;
+	    	}
 	    }
 
 	    /**
@@ -46,7 +70,21 @@ public class Date {
 
 	    @Override
 	    public String toString() {
-	        return date;
+	    	if (date != null) {
+	    		return date.toString();
+	    	}
+	    	else {
+	    		return "";
+	    	}
+	    }
+	    
+	    public String originalString() {
+	    	if (dateString != null) {
+	    		return dateString;
+	    	}
+	    	else {
+	    		return "";
+	    	}
 	    }
 
 	    @Override

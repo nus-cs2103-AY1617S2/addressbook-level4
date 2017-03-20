@@ -44,8 +44,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
-        start = source.getStart().date;
-        end = source.getEnd().date;
+        start = source.getStart().originalString();
+        end = source.getEnd().originalString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -63,6 +63,7 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
+        System.out.println(this.start);
         final Date start = new Date(this.start);
         final Date end = new Date(this.end);
         final UniqueTagList tags = new UniqueTagList(taskTags);

@@ -34,6 +34,7 @@ allprojects {
     // This part is similar to global variables
     // Access them by using double-quoted strings (GStrings) and referencing by $ e.g. "Variable contains $Variable"
     project.ext {
+    	nattyVersion = '0.11'
         controlsFxVersion = '8.40.11'
         guavaVersion = '19.0'
         jacksonVersion = '2.7.0'
@@ -63,6 +64,7 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile "com.joestelmach:natty:$nattyVersion"
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
