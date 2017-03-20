@@ -64,6 +64,22 @@ public class DoneCommandTest extends TaskListGuiTest {
         assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
     }
 
+    @Test
+    public void done_findThenDone_success() throws Exception {
+        commandBox.runCommand("find CS3245");
+        int filteredTaskListIndex = 1;
+        int doneTaskIndex = 2;
+
+        TestTask doneTask = new FloatingTaskBuilder().
+                withName("CS3245 homework 3").
+                withComment("discuss with classmates").
+                withPriority("high").
+                withStatus(true).
+                withTags("class").
+                build();
+        assertDoneSuccess(filteredTaskListIndex, doneTaskIndex, doneTask);
+    }
+
 
     /**
      * Runs done command to mark the task at the specified index as completed
