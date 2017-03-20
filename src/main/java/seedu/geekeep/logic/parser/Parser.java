@@ -11,7 +11,7 @@ import seedu.geekeep.logic.commands.ClearCommand;
 import seedu.geekeep.logic.commands.Command;
 import seedu.geekeep.logic.commands.DeleteCommand;
 import seedu.geekeep.logic.commands.DoneCommand;
-import seedu.geekeep.logic.commands.EditCommand;
+import seedu.geekeep.logic.commands.UpdateCommand;
 import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
@@ -50,8 +50,8 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

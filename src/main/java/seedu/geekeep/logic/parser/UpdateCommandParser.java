@@ -13,15 +13,15 @@ import java.util.Optional;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.Command;
-import seedu.geekeep.logic.commands.EditCommand;
-import seedu.geekeep.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.geekeep.logic.commands.UpdateCommand;
+import seedu.geekeep.logic.commands.UpdateCommand.EditTaskDescriptor;
 import seedu.geekeep.logic.commands.IncorrectCommand;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser {
+public class UpdateCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -36,7 +36,7 @@ public class EditCommandParser {
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
@@ -53,10 +53,10 @@ public class EditCommandParser {
         }
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
-            return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
+            return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new UpdateCommand(index.get(), editTaskDescriptor);
     }
 
     /**
