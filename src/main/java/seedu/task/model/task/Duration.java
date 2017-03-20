@@ -1,3 +1,4 @@
+//@@evanyeung A0163744B
 package seedu.task.model.task;
 
 import java.util.Calendar;
@@ -7,6 +8,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.util.DateParser;
 
 public class Duration {
+    public static final String START_DATE_AFTER_END_DATE =
+            "The start date of a duration must be before the end date";
+
     public final Calendar start;
     public final Calendar end;
 
@@ -19,6 +23,9 @@ public class Duration {
         assert start != null && end != null;
         this.start = DateParser.parse(start);
         this.end = DateParser.parse(end);
+        if (this.start.after(this.end)) {
+            throw new IllegalValueException(START_DATE_AFTER_END_DATE);
+        }
     }
 
     public String getStartString() {

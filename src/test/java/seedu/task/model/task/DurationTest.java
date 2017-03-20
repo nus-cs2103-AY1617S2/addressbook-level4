@@ -1,3 +1,4 @@
+//@@evanyeung A0163744B
 package seedu.task.model.task;
 
 import static org.junit.Assert.assertEquals;
@@ -32,6 +33,16 @@ public class DurationTest {
     @Test(expected = AssertionError.class)
     public void nullEndTest() throws IllegalValueException {
         new Duration("2000/01/01 0000", null);
+    }
+
+    @Test(expected = IllegalValueException.class)
+    public void startAfterEndMinuteTest() throws IllegalValueException {
+        new Duration("2000/01/01 0001", "2000/01/01 0000");
+    }
+
+    @Test(expected = IllegalValueException.class)
+    public void startAfterEndYearTest() throws IllegalValueException {
+        new Duration("2001/01/01 0000", "2000/01/01 0000");
     }
 
     @Test
