@@ -41,7 +41,7 @@ public class LoadController extends Controller {
         try {
             TodoList newTodoList = TodoList.load().getStorage().load(path);
             newTodoList.save();
-            UiStore.getInstance().setTask(newTodoList.getTasks());
+            UiStore.getInstance().setTasks(newTodoList.getTasks());
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path));
         } catch (DataStorageException e) {
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));

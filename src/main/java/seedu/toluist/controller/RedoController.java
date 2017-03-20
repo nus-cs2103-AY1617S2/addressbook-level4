@@ -32,7 +32,7 @@ public class RedoController extends Controller {
         TodoList todoList = redoResult.getKey();
         int actualRedoTimes = redoResult.getValue();
 
-        uiStore.setTask(todoList.getTasks());
+        uiStore.setTasks(todoList.getTasks());
 
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualRedoTimes));
     }

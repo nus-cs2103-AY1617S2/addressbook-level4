@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Region> {
         Arrays.stream(tabNames).forEach(tabName -> {
             KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName), KeyCombination.CONTROL_DOWN);
             String switchCommand = "switch " + tabName;
-            EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(UiManager.getInstance(), switchCommand);
+            EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
             setKeyCombination(keyCombination, handler);
         });
     }

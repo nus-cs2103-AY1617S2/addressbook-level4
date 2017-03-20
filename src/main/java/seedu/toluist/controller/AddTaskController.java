@@ -49,7 +49,7 @@ public class AddTaskController extends Controller {
         commandResult = add(todoList, description, startDateTime, endDateTime, tags);
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
+            uiStore.setTasks(todoList.getTasks());
         }
 
         return commandResult;

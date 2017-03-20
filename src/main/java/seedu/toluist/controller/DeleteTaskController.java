@@ -39,7 +39,7 @@ public class DeleteTaskController extends Controller {
         commandResult = delete(todoList, tasks);
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
+            uiStore.setTasks(todoList.getTasks());
         }
 
         return commandResult;

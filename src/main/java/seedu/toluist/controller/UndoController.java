@@ -32,7 +32,7 @@ public class UndoController extends Controller {
         TodoList todoList = undoResult.getKey();
         int actualUndoTimes =  undoResult.getValue();
 
-        uiStore.setTask(todoList.getTasks());
+        uiStore.setTasks(todoList.getTasks());
 
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualUndoTimes));
     }

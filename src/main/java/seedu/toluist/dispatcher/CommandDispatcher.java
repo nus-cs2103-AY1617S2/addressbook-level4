@@ -36,7 +36,6 @@ import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
 import seedu.toluist.model.AliasTable;
-import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
@@ -48,18 +47,18 @@ public class CommandDispatcher extends Dispatcher {
         aliasConfig.setReservedKeywords(getControllerKeywords());
     }
 
-    public void dispatch(Ui renderer, String command) {
+    public void dispatch(String command) {
         String deAliasedCommand = aliasConfig.dealias(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
-        Controller controller = getBestFitController(renderer, deAliasedCommand);
+        Controller controller = getBestFitController(deAliasedCommand);
         logger.info("Controller class to be executed: " + controller.getClass());
         CommandResult feedbackToUser = controller.execute(deAliasedCommand);
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
 
-    private Controller getBestFitController(Ui renderer, String command) {
-        Collection<Controller> controllerCollection = getAllControllers(renderer);
+    private Controller getBestFitController(String command) {
+        Collection<Controller> controllerCollection = getAllControllers();
 
         return controllerCollection
                 .stream()
@@ -91,7 +90,7 @@ public class CommandDispatcher extends Dispatcher {
         ));
     }
 
-    private Collection<Controller> getAllControllers(Ui renderer) {
+    private Collection<Controller> getAllControllers() {
         return getAllControllerClasses()
                 .stream()
                 .map((Class<? extends Controller> klass) -> {

@@ -56,7 +56,7 @@ public class MarkController extends Controller {
         if (!todoList.save()) {
             return new CommandResult(Messages.MESSAGE_SAVING_FAILURE);
         }
-        UiStore.getInstance().setTask(todoList.getTasks());
+        UiStore.getInstance().setTasks(todoList.getTasks());
         return commandResult;
     }
 

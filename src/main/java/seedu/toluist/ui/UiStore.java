@@ -13,7 +13,7 @@ import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
 
 /**
- * UiStore that acts like a "single source of truth" for the Ui
+ * UiStore acts like a "single source of truth" / view model for the Ui
  * Ui will observe for changes to `shownTasks` and re-render on state change
  */
 public class UiStore {
@@ -41,7 +41,7 @@ public class UiStore {
         return switchPredicate;
     }
 
-    public void setTask(ArrayList<Task> tasks) {
+    public void setTasks(ArrayList<Task> tasks) {
         // Sorted by default
         Collections.sort(tasks);
         this.allTasks = tasks;

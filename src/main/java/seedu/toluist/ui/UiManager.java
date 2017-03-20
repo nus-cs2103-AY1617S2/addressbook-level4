@@ -48,12 +48,12 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, dispatcher);
             mainWindow.render();
             mainWindow.show();
-            String listCommand = "list";
-            dispatcher.dispatch(this, listCommand);
             // Re-render when data change is observed
             UiStore.getInstance()
-                   .getObservableTasks()
-                   .addListener((ListChangeListener.Change<? extends Task> c) -> render());
+                    .getObservableTasks()
+                    .addListener((ListChangeListener.Change<? extends Task> c) -> render());
+            String listCommand = "list";
+            dispatcher.dispatch(listCommand);
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);

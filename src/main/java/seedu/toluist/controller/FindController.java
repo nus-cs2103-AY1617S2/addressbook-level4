@@ -54,7 +54,7 @@ public class FindController extends Controller {
 
 
         ArrayList<Task> foundTasksList = TodoList.load().getFilterTasks(taskPredicate);
-        uiStore.setTask(foundTasksList);
+        uiStore.setTasks(foundTasksList);
 
         // display formatting
         return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasksList.size());

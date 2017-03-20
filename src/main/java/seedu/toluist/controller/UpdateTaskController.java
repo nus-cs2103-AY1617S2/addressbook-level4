@@ -57,7 +57,7 @@ public class UpdateTaskController extends Controller {
         commandResult = update(task, description, startDateTime, endDateTime, tags);
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
+            uiStore.setTasks(todoList.getTasks());
         }
 
         return commandResult;

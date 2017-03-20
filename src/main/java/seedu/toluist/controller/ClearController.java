@@ -25,7 +25,7 @@ public class ClearController extends Controller {
         todoList.setTasks(new ArrayList<>());
         todoList.save();
 
-        UiStore.getInstance().setTask(todoList.getTasks());
+        UiStore.getInstance().setTasks(todoList.getTasks());
 
         return new CommandResult(RESULT_MESSAGE);
     }

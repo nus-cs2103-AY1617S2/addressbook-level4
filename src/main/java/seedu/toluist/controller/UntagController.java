@@ -53,7 +53,7 @@ public class UntagController extends Controller {
         }
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
+            uiStore.setTasks(todoList.getTasks());
         }
 
         // display formatting
