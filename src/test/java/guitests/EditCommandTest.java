@@ -74,7 +74,8 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_invalidTodoIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        int invalidTodoIndex = expectedTodosList.length + 1;
+        commandBox.runCommand("edit " + invalidTodoIndex + " Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
     }
 

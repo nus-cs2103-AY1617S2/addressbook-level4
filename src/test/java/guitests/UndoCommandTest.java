@@ -72,7 +72,7 @@ public class UndoCommandTest extends TodoListGuiTest {
 
     @Test
     public void undo_uncompleteValidTodo_success() {
-        commandBox.runCommand("complete 1");
+        commandBox.runCommand("uncomplete 10");
         assertUndoSuccess();
     }
 

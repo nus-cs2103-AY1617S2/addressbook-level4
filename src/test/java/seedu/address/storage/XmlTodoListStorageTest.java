@@ -75,7 +75,7 @@ public class XmlTodoListStorageTest {
         assertEquals(original, new TodoList(readBack));
 
         //Save and read without specifying file path
-        original.addTodo(new Todo(td.car));
+        original.addTodo(new Todo(td.shopping));
         xmlTodoListStorage.saveTodoList(original); //file path not specified
         readBack = xmlTodoListStorage.readTodoList().get(); //file path not specified
         assertEquals(original, new TodoList(readBack));
