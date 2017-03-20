@@ -37,6 +37,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.History;
@@ -237,6 +238,21 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    @Test
+    public void executeSortTasks() throws Exception {
+        // prepare expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskManager expectedTaskManager = helper.generateTaskManager(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTaskManager.getSortedList();
+
+        // prepare address book state
+        helper.addToModel(model, 2);
+
+        assertCommandSuccess("sort",
+                SortCommand.MESSAGE_SUCCESS,
+                expectedTaskManager,
+                expectedList);
+    }
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
