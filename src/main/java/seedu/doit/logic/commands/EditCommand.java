@@ -34,20 +34,20 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     private final int filteredTaskListIndex;
-    private EditEventDescriptor editEventDescriptor;
+    private EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor    details to edit the task with
      */
 
-    public EditCommand(int filteredTaskListIndex, EditEventDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
-        this.editEventDescriptor = new EditEventDescriptor(editTaskDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     /**
@@ -55,19 +55,19 @@ public class EditCommand extends Command {
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                         EditEventDescriptor editEventDescriptor) {
+                                         EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
-        assert editEventDescriptor != null;
+        assert editTaskDescriptor != null;
 
-        Name updatedName = editEventDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editEventDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        StartTime updatedStartTime = editEventDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        EndTime updatedDeadline = editEventDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
-        Description updatedDescription = editEventDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
+        EndTime updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getEndTime);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
         return new Task(updatedName, updatedPriority, updatedStartTime,
-                        updatedDeadline, updatedDescription, updatedTags);
+            updatedDeadline, updatedDescription, updatedTags);
     }
 
 
@@ -84,7 +84,7 @@ public class EditCommand extends Command {
         if (filteredTaskListIndex < lastShownTaskList.size()) {
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredTaskListIndex);
             assert taskToEdit != null;
-            Task editedTask = createEditedTask(taskToEdit, editEventDescriptor);
+            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
             try {
                 model.updateTask(filteredTaskListIndex, editedTask);
@@ -104,27 +104,32 @@ public class EditCommand extends Command {
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
      */
-    public static class EditFloatingTaskDescriptor {
+    public static class EditTaskDescriptor {
         protected Optional<Name> name = Optional.empty();
         protected Optional<Priority> priority = Optional.empty();
         protected Optional<Description> description = Optional.empty();
         protected Optional<UniqueTagList> tags = Optional.empty();
+        protected Optional<EndTime> deadline = Optional.empty();
+        private Optional<StartTime> startTime = Optional.empty();
 
-        public EditFloatingTaskDescriptor() {
+        public EditTaskDescriptor() {
         }
 
-        public EditFloatingTaskDescriptor(EditFloatingTaskDescriptor toCopy) {
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.priority = toCopy.getPriority();
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
+            this.deadline = toCopy.getDeadline();
+            this.startTime = toCopy.getStartTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.tags,
+                this.deadline, this.startTime);
         }
 
         public Optional<Name> getName() {
@@ -162,57 +167,6 @@ public class EditCommand extends Command {
             assert tags != null;
             this.tags = tags;
         }
-    }
-
-    /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
-     */
-    public static class EditTaskDescriptor extends EditFloatingTaskDescriptor {
-        protected Optional<EndTime> deadline = Optional.empty();
-
-        public EditTaskDescriptor() {
-            super();
-        }
-
-        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            super(toCopy);
-            this.deadline = toCopy.getDeadline();
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        @Override
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.deadline) || super.isAnyFieldEdited();
-        }
-
-        public Optional<EndTime> getDeadline() {
-            return deadline;
-        }
-
-        public void setDeadline(Optional<EndTime> deadline) {
-            assert deadline != null;
-            this.deadline = deadline;
-        }
-    }
-
-    /**
-     * Stores the details to edit the event with. Each non-empty field value will replace the
-     * corresponding field value of the event.
-     */
-    public static class EditEventDescriptor extends EditTaskDescriptor {
-        private Optional<StartTime> startTime = Optional.empty();
-
-        public EditEventDescriptor() {
-            super();
-        }
-
-        public EditEventDescriptor(EditEventDescriptor toCopy) {
-            super(toCopy);
-            this.startTime = toCopy.getStartTime();
-        }
 
         public Optional<StartTime> getStartTime() {
             return startTime;
@@ -223,9 +177,13 @@ public class EditCommand extends Command {
             this.startTime = startTime;
         }
 
-        @Override
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.startTime) || super.isAnyFieldEdited();
+        public Optional<EndTime> getDeadline() {
+            return deadline;
+        }
+
+        public void setDeadline(Optional<EndTime> deadline) {
+            assert deadline != null;
+            this.deadline = deadline;
         }
     }
 
