@@ -2,7 +2,7 @@ package seedu.watodo.testutil;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 
 /**
@@ -19,7 +19,7 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new FloatingTask(task));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }

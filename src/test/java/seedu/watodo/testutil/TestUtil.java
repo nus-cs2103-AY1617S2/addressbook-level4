@@ -33,7 +33,7 @@ import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.storage.XmlSerializableTaskList;
@@ -50,7 +50,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final FloatingTask[] SAMPLE_TASK_DATA = getSampleTaskData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -69,17 +69,17 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static FloatingTask[] getSampleTaskData() {
+    private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new FloatingTask[]{
-                    new FloatingTask(new Description("Read Lord of The Rings"),
+            return new Task[]{
+                    new Task(new Description("Read Lord of The Rings"),
                             new UniqueTagList("reading")),
-                        new FloatingTask(new Description("Do CS2103 V0.1"),
+                        new Task(new Description("Do CS2103 V0.1"),
                             new UniqueTagList("school", "homework")),
-                        new FloatingTask(new Description("Learn airflares"),
+                        new Task(new Description("Learn airflares"),
                             new UniqueTagList("dance")),
-                        new FloatingTask(new Description("Design RPG using RPG Maker VX Ace"),
+                        new Task(new Description("Design RPG using RPG Maker VX Ace"),
                             new UniqueTagList("gamedesign"))
             };
             //CHECKSTYLE.ON: LineLength
@@ -104,7 +104,7 @@ public class TestUtil {
         }
     }
 
-    public static List<FloatingTask> generateSampleTaskData() {
+    public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);
     }
 

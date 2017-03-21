@@ -13,7 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.watodo.TestApp;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.testutil.TestUtil;
 
@@ -148,7 +148,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new FloatingTask(getListView().getItems().get(index)));
+        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public TaskCardHandle getPersonCardHandle(ReadOnlyTask person) {
