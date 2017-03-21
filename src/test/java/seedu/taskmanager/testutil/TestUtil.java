@@ -94,7 +94,7 @@ public class TestUtil {
     }
 
 
-    private static Category[] getSampleCategoryData() {
+/*    private static Category[] getSampleCategoryData() {
         try {
             return new Category[]{
                 new Category("relatives"),
@@ -105,7 +105,7 @@ public class TestUtil {
             return null;
             //not possible
         }
-    }
+    } */
 
     public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);

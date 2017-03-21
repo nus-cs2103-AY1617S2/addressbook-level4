@@ -25,7 +25,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
-        String detailsToUpdate = "eat lunch ON thursday BY friday FROM 1300 TO 1400";
+        String detailsToUpdate = "eat lunch ON thursday FROM 1300 TO 1400";
         int taskManagerIndex = 1;
 
         TestTask updatedTask = new TaskBuilder().withTaskName("eat lunch").withDate("thursday")
@@ -106,12 +106,12 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 //        assertResultMessage(Category.MESSAGE_TAG_CONSTRAINTS);
     }
 
-/*    @Test
+    @Test
     public void update_duplicateTask_failure() {
         commandBox.runCommand("UPDATE 3 Alice Pauline p/85355255 e/alice@gmail.com "
                                 + "a/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
-    } */
+    } 
 
     /**
      * Checks whether the updated task has the correct updated details.

@@ -10,33 +10,28 @@ import seedu.taskmanager.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask eatbreakfast, eatlunch, eatdinner, doCS, giveupCS, tryagainCS, regret, sampleEvent, sampleFloatingTask, sampleDeadline;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withTaskName("Alice Pauline")
-                    .withDate("123, Jurong West Ave 6, #08-111").withStartTime("alice@gmail.com")
-                    .withEndTime("85355255")
-                    /*.withCategories("friends")*/.build();
-            benson = new TaskBuilder().withTaskName("Benson Meier").withDate("311, Clementi Ave 2, #02-25")
-                    .withStartTime("johnd@gmail.com").withEndTime("98765432")
-                    /*.withCategories("owesMoney", "friends")*/.build();
-            carl = new TaskBuilder().withTaskName("Carl Kurz").withDate("95352563")
-                    .withStartTime("heinz@yahoo.com").withEndTime("wall street").build();
-            daniel = new TaskBuilder().withTaskName("Daniel Meier").withDate("87652533")
-                    .withStartTime("cornelia@google.com").withEndTime("10th street").build();
-            elle = new TaskBuilder().withTaskName("Elle Meyer").withDate("9482224")
-                    .withStartTime("werner@gmail.com").withEndTime("michegan ave").build();
-            fiona = new TaskBuilder().withTaskName("Fiona Kunz").withDate("9482427")
-                    .withStartTime("lydia@gmail.com").withEndTime("little tokyo").build();
-            george = new TaskBuilder().withTaskName("George Best").withDate("9482442")
-                    .withStartTime("anna@google.com").withEndTime("4th street").build();
+            eatbreakfast = new TaskBuilder().withTaskName("Eat breakfast with mom")
+                    .withDate("03/03/17 1000").withEndTime("1100")
+                    /*.withCategories("friends")*/.build(); // event
+            eatlunch = new TaskBuilder().withTaskName("Eat lunch @ techno").withDate("04/03/17")
+                    .withEndTime("1400").build(); // deadline
+            eatdinner = new TaskBuilder().withTaskName("Eat dinner with my only 2 friends").withDate("09/03/17 1800")
+                    .withEndTime("2000").build(); // event
+            doCS = new TaskBuilder().withTaskName("Start on the CS2103 project")
+                    .withStartTime("03/03/17").withEndTime("03/04/17").build(); // event
+            giveupCS = new TaskBuilder().withTaskName("Give up on CS2103 project").withDate("04/04/17 1400").build(); // event
+            tryagainCS = new TaskBuilder().withTaskName("Try again for CS2103")
+                    .withStartTime("05/04/17").withEndTime("05/05/17").build(); // event
+            regret = new TaskBuilder().withTaskName("Endless cycles of regret").build(); // floating task
 
             // Manually added
-            hoon = new TaskBuilder().withTaskName("Hoon Meier").withDate("8482424")
-                    .withStartTime("stefan@mail.com").withEndTime("little india").build();
-            ida = new TaskBuilder().withTaskName("Ida Mueller").withDate("8482131")
-                    .withStartTime("hans@google.com").withEndTime("chicago ave").build();
+            sampleEvent = new TaskBuilder().withTaskName("Time to relax a little").withDate("06/05/17 1300").build();
+            sampleFloatingTask = new TaskBuilder().withTaskName("Chiong all day everyday").build();
+            sampleDeadline = new TaskBuilder().withTaskName("Get it done").withDate("06/05/17").withEndTime("1700").build(); 
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -54,7 +49,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{eatbreakfast, eatlunch, eatdinner, doCS, giveupCS, tryagainCS, regret};
     }
 
     public TaskManager getTypicalTaskManager() {

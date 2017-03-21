@@ -52,11 +52,11 @@ public class TaskManagerTest {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Category> newCategories = td.alice.getCategories().asObservableList();
-        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
+//        List<Category> newCategories = td.alice.getCategories().asObservableList();
+//        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        taskManager.resetData(newTasks);
     }
 
     @Test
