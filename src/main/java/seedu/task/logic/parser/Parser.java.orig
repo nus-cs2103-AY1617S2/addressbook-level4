@@ -72,8 +72,12 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+<<<<<<< HEAD
         	UndoManager.pushCommand("List");
+            return new ListCommand();
+=======
             return new ListCommandParser().parse(arguments);
+>>>>>>> 18b308c1c2c17ff40d1539dcb728be72545a538b
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

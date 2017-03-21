@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -26,8 +27,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final ChatList chatList;
+    private final UndoManager undoManager = new UndoManager();
 
-    /**
+	/**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
@@ -57,19 +59,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
+    protected void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
+        Task deletedTask = new Task(target);
+        undoManager.pushUndo(deletedTask);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
+        undoManager.pushUndo(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -78,9 +83,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
+        Task taskBackup = new Task(filteredTasks.get(filteredTaskListIndex));
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        undoManager.pushUndo(taskBackup);
+        undoManager.pushTaskIndex(taskManagerIndex);
         indicateTaskManagerChanged();
     }
 
@@ -97,15 +104,41 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredListToShowUnchecked() {
+        filteredTasks.setPredicate(isUnchecked);
     }
 
-    private void updateFilteredPersonList(Expression expression) {
+    @Override
+    public void updateFilteredListToShowChecked() {
+        filteredTasks.setPredicate(isChecked);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+
+    private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
+
+    /** Predicate to check if completionStatus is false */
+    Predicate<ReadOnlyTask> isUnchecked = new Predicate<ReadOnlyTask> () {
+        @Override
+        public boolean test(ReadOnlyTask t) {
+            return t.getCompletionStatus().getStatus() == false;
+        }
+    };
+
+    /** Predicate to check if completionStatus is true */
+    Predicate<ReadOnlyTask> isChecked = new Predicate<ReadOnlyTask> () {
+        @Override
+        public boolean test(ReadOnlyTask t) {
+            return t.getCompletionStatus().getStatus() == true;
+        }
+    };
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -163,5 +196,32 @@ public class ModelManager extends ComponentManager implements Model {
     public ChatList getChatList() {
         return chatList;
     }
+
+    @Override
+    public synchronized void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.removeTask(target);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void addTaskUndo(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.addTask(task);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void updateTaskUndo(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+	public UndoManager getUndoManager() {
+		return undoManager;
+	}
 
 }

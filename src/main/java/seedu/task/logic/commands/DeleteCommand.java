@@ -3,7 +3,9 @@ package seedu.task.logic.commands;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.Model;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -20,14 +22,18 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    public final int targetIndex;
+    public int targetIndex;
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
 
-    @Override
+    public DeleteCommand() {
+	}
+
+
+	@Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -45,6 +51,17 @@ public class DeleteCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+    }
+
+	public CommandResult executeUndo(Task previousTask, Model model) throws CommandException {
+        try {
+            model.deleteTaskUndo(previousTask);
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target task cannot be missing";
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, previousTask));
+
     }
 
 }

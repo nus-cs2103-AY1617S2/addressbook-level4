@@ -8,6 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -41,9 +42,24 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    /** Updates the filter of the filtered task list to show all unchecked tasks */
+    void updateFilteredListToShowUnchecked();
+
+    /** Updates the filter of the filtered task list to show all checked tasks */
+    void updateFilteredListToShowChecked();
+
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
     /** Returns the chat list as an {@code FilteredList<Chat>} */
     ChatList getChatList();
+
+	void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException;
+
+	void updateTaskUndo(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException;
+
+	void addTaskUndo(Task task) throws DuplicateTaskException;
+
+	UndoManager getUndoManager();
+
 }
