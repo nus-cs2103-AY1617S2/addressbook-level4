@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DoneCommand;
@@ -19,8 +18,7 @@ public class DoneCommandParser {
     public Command parse(String args, Logic logic) {
         // TODO allow multiple index
         if (!logic.isValidUIIndex(args)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         return new DoneCommand(logic.parseUIIndex(args));

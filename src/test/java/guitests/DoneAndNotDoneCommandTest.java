@@ -1,9 +1,8 @@
 package guitests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.testutil.TestTask;
@@ -47,7 +46,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
 
     private void assertDoneIndexInvalid(String index) {
         commandBox.runCommand("done " + index);
-        assertResultMessage(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     private void assertDoneSuccess(int index) {
@@ -59,7 +58,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
 
     private void assertNotDoneIndexInvalid(String index) {
         commandBox.runCommand("notdone " + index);
-        assertResultMessage(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     private void assertNotDoneSuccess(int index) {
