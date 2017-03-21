@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Deletes the tasks identified by the index numbers used in the last task listing.\n"
             + "Parameters: INDEX [INDEX...] (must be a positive integer)\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " 1 8";
@@ -37,9 +37,5 @@ public class DeleteCommand extends Command {
             }
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

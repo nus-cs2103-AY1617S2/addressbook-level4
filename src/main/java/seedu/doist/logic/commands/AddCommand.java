@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
@@ -12,7 +10,7 @@ import seedu.doist.model.task.UniqueTaskList;
 public class AddCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords() + ": Adds a task to Doist\n"
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ": Adds a task to Doist\n"
             + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " Group meeting \\from 1600 \\to 1800 \\as IMPORTANT "
                     + "\\under school ";
@@ -37,8 +35,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
     }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
-    }
 }
+
+
+
+
+
+

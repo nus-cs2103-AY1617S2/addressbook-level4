@@ -78,4 +78,10 @@ public interface Model {
 
     /** Resets alias list to default */
     void resetToDefaultCommandWords();
+
+    /**
+     * @return a string containing the default command word and all aliases,
+     *         in the format of (word1|word2|...)
+     */
+    String formatCommandWords(String defaultCommandWord);
 }

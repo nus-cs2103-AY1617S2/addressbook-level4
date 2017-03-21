@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.events.ui.ExitAppRequestEvent;
 
@@ -18,9 +16,5 @@ public class ExitCommand extends Command {
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

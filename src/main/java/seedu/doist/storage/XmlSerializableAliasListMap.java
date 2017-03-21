@@ -40,7 +40,6 @@ public class XmlSerializableAliasListMap implements ReadOnlyAliasListMap {
         this();
         Map<String, ArrayList<String>> map = src.getAliasListMapping();
         for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
-            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
             List<String> list = entry.getValue();
             aliasListMap.put(entry.getKey(), list);
         }
@@ -53,7 +52,6 @@ public class XmlSerializableAliasListMap implements ReadOnlyAliasListMap {
     public Map<String, ArrayList<String>> getAliasListMapping() {
         Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
         for (Map.Entry<String, List<String>> entry : aliasListMap.entrySet()) {
-            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
             ArrayList<String> list = null;
             if (entry.getValue() != null) {
                 list = new ArrayList<String>(entry.getValue());

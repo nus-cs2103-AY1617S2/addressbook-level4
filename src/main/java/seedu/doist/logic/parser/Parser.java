@@ -36,13 +36,19 @@ public class Parser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    private Model model;
+
+    public Parser(Model model) {
+        this.model = model;
+    }
+
     /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput, Model model) {
+    public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -51,42 +57,43 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        if (isTriggeredByWord(model.getValidCommandList(AddCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        if (doesTriggerSameCommand(commandWord, AddCommand.DEFAULT_COMMAND_WORD)) {
             return new AddCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(EditCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, EditCommand.DEFAULT_COMMAND_WORD)) {
             return new EditCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(SelectCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, SelectCommand.DEFAULT_COMMAND_WORD)) {
             return new SelectCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(SortCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, SortCommand.DEFAULT_COMMAND_WORD)) {
             return new SortCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(DeleteCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, DeleteCommand.DEFAULT_COMMAND_WORD)) {
             return new DeleteCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(FinishCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, FinishCommand.DEFAULT_COMMAND_WORD)) {
             return new FinishCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(UnfinishCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, UnfinishCommand.DEFAULT_COMMAND_WORD)) {
             return new UnfinishCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(ClearCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, ClearCommand.DEFAULT_COMMAND_WORD)) {
             return new ClearCommand();
-        } else if (isTriggeredByWord(model.getValidCommandList(FindCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, FindCommand.DEFAULT_COMMAND_WORD)) {
             return new FindCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(ListCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, ListCommand.DEFAULT_COMMAND_WORD)) {
             return new ListCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(ExitCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, ExitCommand.DEFAULT_COMMAND_WORD)) {
             return new ExitCommand();
-        } else if (isTriggeredByWord(model.getValidCommandList(HelpCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, HelpCommand.DEFAULT_COMMAND_WORD)) {
             return new HelpCommand();
-        } else if (isTriggeredByWord(model.getValidCommandList(AliasCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, AliasCommand.DEFAULT_COMMAND_WORD)) {
             return new AliasCommandParser().parse(arguments);
-        } else if (isTriggeredByWord(model.getValidCommandList(ResetAliasCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, ResetAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ResetAliasCommand();
-        } else if (isTriggeredByWord(model.getValidCommandList(ViewAliasCommand.DEFAULT_COMMAND_WORD), commandWord)) {
+        } else if (doesTriggerSameCommand(commandWord, ViewAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ViewAliasCommand();
         } else {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
-    public boolean isTriggeredByWord(List<String> commandWords, String word) {
-        return commandWords.contains(word);
+    public boolean doesTriggerSameCommand(String word, String defaultCommandWord) {
+        List<String> validCommandList = model.getValidCommandList(defaultCommandWord);
+        return validCommandList.contains(word);
     }
 }

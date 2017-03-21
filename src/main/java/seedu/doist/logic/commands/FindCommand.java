@@ -1,6 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -11,7 +10,7 @@ public class FindCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + DEFAULT_COMMAND_WORD + " go NUS";
@@ -26,9 +25,5 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

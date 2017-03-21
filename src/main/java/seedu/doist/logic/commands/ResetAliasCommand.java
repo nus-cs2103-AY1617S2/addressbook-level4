@@ -1,6 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
 
 /**
  * Reset aliases to the default.
@@ -15,9 +14,5 @@ public class ResetAliasCommand extends Command {
     public CommandResult execute() {
         model.resetToDefaultCommandWords();
         return new CommandResult(MESSAGE_RESET_ALIAS_SUCCESS);
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

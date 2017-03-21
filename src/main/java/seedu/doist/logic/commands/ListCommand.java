@@ -1,6 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class ListCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": List tasks satisfying the requirements specified by the parameters\n"
             + "TYPE could be pending, overdue, finished\n"
             + "Parameters: TYPE [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
@@ -44,10 +43,6 @@ public class ListCommand extends Command {
                                       new CommandResult(MESSAGE_SUCCESS) :
                                       new CommandResult(getSuccessMessageListUnder(tagList));
         return commandResult;
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 
     public static String getSuccessMessageListUnder(UniqueTagList tagList) {

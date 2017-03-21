@@ -1,6 +1,4 @@
 package seedu.doist.logic.commands;
-
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -13,10 +11,6 @@ public class ViewAliasCommand extends Command {
     @Override
     public CommandResult execute() {
         return new CommandResult(formatAliasesForOutput());
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 
     private String formatAliasesForOutput() {

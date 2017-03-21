@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.doist.model.TodoList;
 
 /**
@@ -17,9 +15,5 @@ public class ClearCommand extends Command {
         assert model != null;
         model.resetData(new TodoList());
         return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

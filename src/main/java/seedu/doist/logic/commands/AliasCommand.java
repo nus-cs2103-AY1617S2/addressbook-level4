@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-
 import seedu.doist.logic.commands.exceptions.CommandException;
 
 /**
@@ -10,7 +8,7 @@ import seedu.doist.logic.commands.exceptions.CommandException;
 public class AliasCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "alias";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords() + ": Adds an alias for a command\n"
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ": Adds an alias for a command\n"
             + "Parameters: ALIAS  [\\for DEFAULT_COMMAND_WORD]\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " list_tasks \\for list";
 
@@ -37,9 +35,5 @@ public class AliasCommand extends Command {
             model.setAlias(alias, defaultCommandWord);
             return new CommandResult(String.format(MESSAGE_SUCCESS, alias, defaultCommandWord));
         }
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 }

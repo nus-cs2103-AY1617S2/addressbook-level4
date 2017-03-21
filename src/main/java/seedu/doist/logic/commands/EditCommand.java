@@ -1,6 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ public class EditCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Edits the details of the task identified " + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [DESCRIPTION] [\\as PRIORITY] [\\under TAG]...\n"
@@ -49,10 +48,6 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(new ArrayList<String>(), DEFAULT_COMMAND_WORD);
     }
 
     @Override
