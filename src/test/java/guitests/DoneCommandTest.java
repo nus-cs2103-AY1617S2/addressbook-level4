@@ -15,8 +15,8 @@ import seedu.tasklist.testutil.TestTask;
 
 /**
  * Tests the done Command for 3 types of task
- * @author A0143355J
  */
+//@@Author A0143355J
 public class DoneCommandTest extends TaskListGuiTest {
 
     @Test
