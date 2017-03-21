@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,9 +38,6 @@ public class AddCommandParser {
         if (tagsString != null) {
             tags = tagsString.split("\\s+");
         }
-        for (String tag : tags) {
-            System.out.println(tag);
-        }
 
         // find and remove starting time and deadline if the syntax is "<name>
         // from <starting time> to <deadline>"
@@ -52,7 +51,9 @@ public class AddCommandParser {
                                 .get(CliSyntax.INDEX_OF_STARTINGTIME),
                         tags);
             } catch (IllegalValueException e) {
-                return new IncorrectCommand(e.getMessage());
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                AddCommand.MESSAGE_USAGE));
             }
         }
 
@@ -63,13 +64,16 @@ public class AddCommandParser {
             try {
                 return new AddCommand(args.trim(), deadline, tags);
             } catch (IllegalValueException e) {
-                return new IncorrectCommand(e.getMessage());
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                AddCommand.MESSAGE_USAGE));
             }
         }
         try {
             return new AddCommand(args.trim(), tags);
         } catch (IllegalValueException e) {
-            return new IncorrectCommand(e.getMessage());
+            return new IncorrectCommand(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
 
@@ -124,7 +128,11 @@ public class AddCommandParser {
                             : CliSyntax.DEFAULT_DEADLINE));
             if (group == null || group.get(0).getPosition() != 0
                     || group.size() > 1
-                    || group.get(0).getDates().get(1) != null) {
+                    || group.get(0).getDates()
+                            .get(CliSyntax.INDEX_OF_DEADLINE) != null
+                    || group.get(0).getDates().get(CliSyntax.INDEX_OF_DEADLINE)
+                            .after(group.get(0).getDates()
+                                    .get(CliSyntax.INDEX_OF_STARTINGTIME))) {
                 args = tmpArgs;
                 return null;
             } else {

@@ -15,7 +15,10 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithDeadline;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -54,11 +57,13 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
-    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
+    public void setTags(Collection<Tag> tags)
+            throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
 
@@ -99,22 +104,34 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
      * updated with the tags of {@code editedReadOnlyTask}.
      *
+     * @throws DuplicateTaskException
+     *
+     * @throws IllegalValueException
+     *
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be
-     *             equivalent to another existing task in the list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+            throws DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        // TODO: Change Task constructor to TaskWithoutDeadline() or
-        // TaskWithDeadline() based on task type
-        Task editedTask = new Task(editedReadOnlyTask);
+        Task editedTask = null;
 
-        //syncMasterTagListWith(editedTask);
+        if (editedReadOnlyTask
+                .getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
+                || editedReadOnlyTask
+                        .getTaskType() == TaskType.TaskWithOnlyDeadline) {
+            try {
+                editedTask = new TaskWithDeadline(editedReadOnlyTask);
+            } catch (IllegalValueException e) {
+            }
+        } else {
+            editedTask = new TaskWithoutDeadline(editedReadOnlyTask);
+        }
+
+        // syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.
         // This can cause the tags master list to have additional tags that are
@@ -141,7 +158,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         // Rebuild the list of task tags to point to the relevant tags in the
         // master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        taskTags.forEach(
+                tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
 
@@ -157,8 +175,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     /**
      * After a tag is no longer found is in any task, ensure that it is removed
-     * from the master tag list
-     * {@link #tags} - points to a Tag object in the master list
+     * from the master tag list {@link #tags} - points to a Tag object in the
+     * master list
      */
     private void refreshMasterTagList() {
         tags.clear();
@@ -173,7 +191,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key)
+            throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             refreshMasterTagList();
             return true;
@@ -192,7 +211,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() + " tags";
+        return tasks.asObservableList().size() + " tasks, "
+                + tags.asObservableList().size() + " tags";
         // TODO: refine later
     }
 
@@ -211,7 +231,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
                         && this.tasks.equals(((TaskManager) other).tasks)
-                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+                        && this.tags.equalsOrderInsensitive(
+                                ((TaskManager) other).tags));
     }
 
     @Override

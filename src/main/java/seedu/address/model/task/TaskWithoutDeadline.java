@@ -9,6 +9,7 @@ public class TaskWithoutDeadline extends Task {
 
     public TaskWithoutDeadline(ReadOnlyTask source) {
         super(source);
+        today = source.isToday();
     }
 
     @Override
