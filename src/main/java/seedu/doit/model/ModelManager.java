@@ -9,6 +9,7 @@ import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
+import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
 import seedu.doit.model.item.EndTimeComparator;
@@ -20,6 +21,7 @@ import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
+import seedu.doit.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the task manager data. All changes to any
@@ -147,7 +149,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
-            Set<String> descriptionKeywords) {
+            Set<String> descriptionKeywords, Set<String> tagKeywords) {
         if (!nameKeywords.isEmpty()) {
             updateFilteredTaskList(new PredicateExpression(new NameQualifier(nameKeywords)));
         }
@@ -158,6 +160,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         if (!descriptionKeywords.isEmpty()) {
             updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(descriptionKeywords)));
+        }
+
+        if (!tagKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new TagQualifier(tagKeywords)));
         }
 
     }
@@ -213,8 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         public boolean run(ReadOnlyTask task) {
             return this.nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)).findAny()
-                    .isPresent();
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
         }
 
         @Override
@@ -246,9 +251,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return this.priorityKeywords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword)).findAny()
-                    .isPresent();
+            return priorityKeywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
         }
 
         @Override
@@ -266,14 +270,39 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return this.descriptionKeywords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
-                    .findAny().isPresent();
+            return descriptionKeywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
         }
 
         @Override
         public String toString() {
             return "description=" + String.join(", ", this.descriptionKeywords);
+        }
+    }
+
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeywords;
+
+        TagQualifier(Set<String> tagKeywords) {
+            this.tagKeywords = tagKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return tagKeywords.stream().anyMatch(keyword -> {
+                try {
+                    return (task.getTags().contains(new Tag(keyword)));
+                } catch (IllegalValueException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public String toString() {
+            return "tag=" + String.join(", ", tagKeywords);
         }
     }
 
