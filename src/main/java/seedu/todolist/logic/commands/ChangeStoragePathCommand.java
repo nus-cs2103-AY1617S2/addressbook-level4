@@ -27,30 +27,30 @@ public class ChangeStoragePathCommand extends Command {
 
     //takes in an absolute path
     public ChangeStoragePathCommand(String path) {
-    	this.path = path + "/todolist.xml";
+        this.path = path + "/todolist.xml";
     }
 
-	@Override
-	public CommandResult execute() throws CommandException {
-		assert config != null;
-		//config.setToDoListFilePath(this.path);
-		try {
-			config.setToDoListFilePath(this.path);
-			ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-			return new CommandResult(String.format(MESSAGE_SUCCESS, this.path));
-		} catch (IOException e) {
-			e.printStackTrace(); //is this necessary?
-			return new CommandResult(String.format(MESSAGE_FAILURE, this.path));
-		}
-	}
+    @Override
+    public CommandResult execute() throws CommandException {
+        assert config != null;
+        //config.setToDoListFilePath(this.path);
+        try {
+            config.setToDoListFilePath(this.path);
+            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.path));
+        } catch (IOException e) {
+            e.printStackTrace(); //is this necessary?
+            return new CommandResult(String.format(MESSAGE_FAILURE, this.path));
+        }
+    }
 
-	@Override
-	public boolean isMutating() {
-		return true;
-	}
+    @Override
+    public boolean isMutating() {
+        return true;
+    }
 
-	@Override
-	public String getCommandText() {
-		return commandText;
-	}
+    @Override
+    public String getCommandText() {
+        return commandText;
+    }
 }

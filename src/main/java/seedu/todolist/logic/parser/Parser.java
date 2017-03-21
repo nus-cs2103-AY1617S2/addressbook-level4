@@ -75,7 +75,7 @@ public class Parser {
             return new ListCommandParser().parse(arguments);
 
         case ChangeStoragePathCommand.COMMAND_WORD:
-        	return new ChangeStoragePathCommandParser().parse(arguments);
+            return new ChangeStoragePathCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

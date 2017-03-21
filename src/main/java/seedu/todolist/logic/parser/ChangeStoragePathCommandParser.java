@@ -3,9 +3,9 @@ package seedu.todolist.logic.parser;
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.todolist.commons.util.FileUtil;
+import seedu.todolist.logic.commands.ChangeStoragePathCommand;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.IncorrectCommand;
-import seedu.todolist.logic.commands.ChangeStoragePathCommand;
 
 //@@author A0139633B
 /**
