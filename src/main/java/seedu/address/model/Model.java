@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -55,4 +56,8 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the today's date */
     void updateUpcomingTaskList();
+
+    /** Updates the filter of the filtered task list to filter by the given tags
+     * @throws IllegalValueException */
+    void updateFilteredTagTaskList(String tagName) throws IllegalValueException;
 }
