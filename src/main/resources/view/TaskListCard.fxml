@@ -29,18 +29,18 @@
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox spacing="10.0">
-                                    <Label fx:id="id" minWidth="30.0" styleClass="cell_big_label" text="\$id" textAlignment="RIGHT" wrapText="true">
+                                    <Label fx:id="id" alignment="TOP_LEFT" minWidth="30.0" styleClass="cell_big_label" text="\$id" textAlignment="RIGHT" wrapText="true">
                               <HBox.margin>
                                  <Insets left="30.0" />
                               </HBox.margin></Label>
-                                    <Label fx:id="name" minWidth="200.0" prefWidth="300.0" styleClass="cell_big_label" text="\$first" wrapText="true">
+                                    <Label fx:id="name" alignment="TOP_LEFT" minWidth="200.0" prefWidth="300.0" styleClass="cell_big_label" text="\$first" wrapText="true">
                               <HBox.margin>
                                  <Insets right="200.0" />
                               </HBox.margin></Label>
-                                 <Label fx:id="priority" alignment="TOP_LEFT" prefWidth="60.0" styleClass="cell_big_label" text="\$priority" wrapText="true">
-                              <padding>
-                                 <Insets right="60.0" />
-                              </padding></Label>
+                                 <Label fx:id="priority" alignment="TOP_LEFT" minWidth="30.0" prefWidth="60.0" styleClass="cell_big_label" text="\$priority" wrapText="true">
+                              <HBox.margin>
+                                 <Insets right="30.0" />
+                              </HBox.margin></Label>
                                  <Label fx:id="startDate" alignment="TOP_LEFT" minWidth="120.0" prefWidth="180.0" styleClass="cell_big_label" text="\$startDate" wrapText="true">
                               <HBox.margin>
                                  <Insets right="120.0" />
