@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,7 +21,8 @@ public class DateTime {
     public final LocalDateTime dateTime;
     private static DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("dd/MM/uuuu HH:mm")
-            .withResolverStyle(ResolverStyle.STRICT);;
+            .withResolverStyle(ResolverStyle.STRICT);
+    private Clock clock;
 
     /**
      * Validates given dateTime.
@@ -29,11 +31,15 @@ public class DateTime {
      */
     public DateTime(LocalDateTime dateTime) throws IllegalValueException {
         assert dateTime != null;
+
+        this.clock = Clock.systemDefaultZone();
         this.dateTime = dateTime;
     }
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
+
+        this.clock = Clock.systemDefaultZone();
         if (!isValidDateTime(dateTime)) {
             throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
@@ -46,7 +52,7 @@ public class DateTime {
      * @return true if the DateTime is in the current week
      */
     public boolean isCurrentWeek() {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
 
         // 1 for Monday, 7 for Sunday
         int dayOfCurrentWeek = now.getDayOfWeek().getValue();
@@ -70,6 +76,10 @@ public class DateTime {
 
         }
         return false;
+    }
+
+    public void setClock(Clock clock) {
+        this.clock = clock;
     }
 
     @Override
