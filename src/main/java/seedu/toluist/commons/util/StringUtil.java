@@ -1,9 +1,9 @@
 package seedu.toluist.commons.util;
 
-import org.atteo.evo.inflector.English;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import org.atteo.evo.inflector.English;
 
 /**
  * Helper functions for handling strings.
