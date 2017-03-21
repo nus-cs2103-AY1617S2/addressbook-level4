@@ -13,17 +13,17 @@ public class SortCommandTest extends TaskBossGuiTest {
     public void sort() {
         //sort by end date time
         TestTask[] expectedList = new TestTask[] {td.carl, td.elle, td.alice,
-            td.daniel, td.benson, td.george, td.fiona};
+                        td.daniel, td.benson, td.george, td.fiona};
         assertSortSuccess(false, expectedList, "ed");
 
         //sort by start date time
         TestTask[] expectedList2 = new TestTask[] {td.george, td.alice, td.carl,
-            td.daniel, td.fiona, td.elle, td.benson};
+                        td.daniel, td.fiona, td.elle, td.benson};
         assertSortSuccess(false, expectedList2, "sd");
 
         //sort by end date time short command
         TestTask[] expectedList3 = new TestTask[] {td.carl, td.elle, td.alice,
-            td.daniel, td.benson, td.george, td.fiona};
+                        td.daniel, td.benson, td.george, td.fiona};
         assertSortSuccess(true, expectedList3, "ed");
 
         //invalid sort command
