@@ -2,6 +2,7 @@ package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import seedu.ezdo.logic.commands.Command;
@@ -19,14 +20,16 @@ public class KillCommandParser implements CommandParser {
      */
     @Override
     public Command parse(String args) {
-
-        Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        if (args.isEmpty() || args.trim().equals("0")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE));
+        }
+        ArrayList<Integer> indexes = ParserUtil.parseIndexes(args);
+        if (indexes.isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE));
         }
 
-        return new KillCommand(index.get());
+        return new KillCommand(indexes);
     }
 
 }
