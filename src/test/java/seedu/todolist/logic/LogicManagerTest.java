@@ -21,6 +21,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.EventsCenter;
 import seedu.todolist.commons.events.model.ToDoListChangedEvent;
 import seedu.todolist.commons.events.ui.JumpToListRequestEvent;
@@ -60,6 +61,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private Config config;
 
     //These are for checking the correctness of the events raised
     private ReadOnlyToDoList latestSavedToDoList;
@@ -86,7 +88,7 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempToDoListFile = saveFolder.getRoot().getPath() + "TempToDoList.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempToDoListFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempToDoListFile, tempPreferencesFile), config);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedToDoList = new ToDoList(model.getToDoList()); // last saved assumed to be up to date

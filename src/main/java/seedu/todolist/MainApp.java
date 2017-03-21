@@ -61,7 +61,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, config);
 
         ui = new UiManager(logic, config, userPrefs);
 
@@ -72,6 +72,11 @@ public class MainApp extends Application {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
+
+//    //@@author A0139633B
+//    public void setNewStorage(String pathToSaveFile) {
+//        this.storage = new StorageManager(pathToSaveFile, config.getUserPrefsFilePath());
+//    }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyToDoList> addressBookOptional;

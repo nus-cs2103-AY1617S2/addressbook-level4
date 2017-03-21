@@ -63,6 +63,7 @@ public class XmlAdaptedTask {
         } else {
             endTime = "";
         }
+
         completed = source.isComplete();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -87,6 +88,7 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         StartTime startTime;
         EndTime endTime;
+        boolean isComplete = this.completed;
 
         if (this.startTime.equals("")) {
             startTime = null;
@@ -100,6 +102,6 @@ public class XmlAdaptedTask {
         }
 
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return TaskParser.parseTask(name, startTime, endTime, tags);
+        return TaskParser.parseTask(name, startTime, endTime, tags, isComplete);
     }
 }

@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.todolist.logic.commands.AddCommand;
+import seedu.todolist.logic.commands.ChangeStoragePathCommand;
 import seedu.todolist.logic.commands.ClearCommand;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.CompleteCommand;
@@ -72,6 +73,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
+
+        case ChangeStoragePathCommand.COMMAND_WORD:
+            return new ChangeStoragePathCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

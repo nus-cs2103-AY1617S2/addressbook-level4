@@ -96,6 +96,28 @@ public class TaskParser {
     }
 
     /*
+     * An overloaded method that takes in a Name object,
+     * a StartTime object, an EndTime object, a set of Tags
+     * and a completion status
+     * and create a suitable Task object.
+     * @@author A0141647E
+     */
+    public static Task parseTask(Name name, StartTime startTime,
+            EndTime endTime, UniqueTagList uniqueTagList, boolean isComplete) {
+        assert name != null;
+
+        if (startTime != null && endTime != null) {
+            return new StartEndTask(name, startTime, endTime, uniqueTagList, isComplete);
+        } else if (startTime != null && endTime == null) {
+            return new StartTask(name, startTime, uniqueTagList, isComplete);
+        } else if (startTime == null && endTime != null) {
+            return new EndTask(name, endTime, uniqueTagList, isComplete);
+        } else {
+            return new FloatingTask(name, uniqueTagList, isComplete);
+        }
+    }
+
+    /*
      * Another overloaded method that takes in a Task object
      * and create a copy of it.
      * @@author A0141647E
