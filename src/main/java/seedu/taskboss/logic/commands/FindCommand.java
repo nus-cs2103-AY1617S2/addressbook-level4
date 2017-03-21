@@ -1,6 +1,7 @@
 package seedu.taskboss.logic.commands;
 
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 

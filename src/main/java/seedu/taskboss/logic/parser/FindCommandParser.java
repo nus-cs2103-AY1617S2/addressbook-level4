@@ -8,12 +8,12 @@ import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.regex.Matcher;
 
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
+import seedu.taskboss.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -21,6 +21,10 @@ import seedu.taskboss.logic.commands.IncorrectCommand;
 public class FindCommandParser {
 
     private static final String EMPTY_STRING = "";
+    private static final String prefixName = PREFIX_NAME.getPrefix();
+    private static final String prefixInformation = PREFIX_INFORMATION.getPrefix();
+    private static final String prefixStartDate = PREFIX_START_DATE.getPrefix();
+    private static final String prefixEndDate = PREFIX_END_DATE.getPrefix();
 
     //@@author A0147990R
     /**
@@ -28,66 +32,58 @@ public class FindCommandParser {
      * and returns an FindCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_NAME, PREFIX_START_DATE,
-                        PREFIX_END_DATE, PREFIX_INFORMATION);
-        argsTokenizer.tokenize(args);
-        String nameValue = checkEmpty(argsTokenizer.getValue(PREFIX_NAME));
-        String startDatetimeValue = checkEmpty(argsTokenizer.getValue(PREFIX_START_DATE));
-        String endDatetimeValue = checkEmpty(argsTokenizer.getValue(PREFIX_END_DATE));
-        String informationValue = checkEmpty(argsTokenizer.getValue(PREFIX_INFORMATION));
 
-        if (notValid(nameValue, startDatetimeValue, endDatetimeValue, informationValue)) {
+        String inputprefix = parsePrefix(args), pre;
+
+        if (inputprefix.equals(EMPTY_STRING)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
-        } else {
-            String keywords = getNoneNullValue(nameValue, startDatetimeValue,
-                    endDatetimeValue, informationValue);
-            String prefix = getPrefixString(nameValue, startDatetimeValue,
-                    endDatetimeValue, informationValue);
+        }
 
+        Prefix inputPrefix;
+        if (inputprefix.equals(prefixName)) {
+            inputPrefix = PREFIX_NAME;
+            pre = PREFIX_NAME.toString();
+        } else if (inputprefix.equals(prefixInformation)) {
+            inputPrefix = PREFIX_INFORMATION;
+            pre = PREFIX_INFORMATION.toString();
+        } else if (inputprefix.equals(prefixStartDate)) {
+            inputPrefix = PREFIX_START_DATE;
+            pre = PREFIX_START_DATE.toString();
+        } else if (inputprefix.equals(prefixEndDate)) {
+            inputPrefix = PREFIX_END_DATE;
+            pre = PREFIX_END_DATE.toString();
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(inputPrefix);
+            argsTokenizer.tokenize(args);
+            String keywords = argsTokenizer.getValue(inputPrefix).get();
+            
             final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(keywords.trim());
             if (!matcher.matches()) {
                 return new IncorrectCommand(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-            // keywords delimited by whitespace
-            return new FindCommand(prefix, keywords);
-        }
+            return new FindCommand(pre, keywords);
 
-    }
-
-    //@@author A0147990R
-    private String checkEmpty(Optional<String> test) {
-        try {
-            return test.get();
         } catch (NoSuchElementException nsee) {
-            return EMPTY_STRING;
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
         }
+
     }
 
-    //@@author A0147990R
-    private boolean notValid(String test1, String test2, String test3, String test4) {
-        String sum = test1 + test2 + test3 + test4;
-        return (!sum.equals(test1) && !sum.equals(test2) && !sum.equals(test3) && !sum.equals(test4));
-    }
-
-    //@@author A0147990R
-    private String getNoneNullValue(String test1, String test2, String test3, String test4) {
-        return test1 + test2 + test3 + test4;
-    }
-
-    //@@author A0147990R
-    private String getPrefixString(String test1, String test2, String test3, String test4) {
-        String sum = test1 + test2 + test3 + test4;
-        if (sum.equals(test1)) {
-            return PREFIX_NAME.toString();
-        } else if (sum.equals(test2)) {
-            return PREFIX_START_DATE.toString();
-        } else if (sum.equals(test3)) {
-            return PREFIX_END_DATE.toString();
+  //@@author A0147990R
+    private String parsePrefix(String args) {
+        int prefixIndex = args.indexOf("/");
+        if (prefixIndex == -1) {
+            return EMPTY_STRING;
         } else {
-            return PREFIX_INFORMATION.toString();
+            return args.substring(1, prefixIndex + 1);
         }
     }
 
