@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
@@ -18,39 +19,77 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
 import seedu.address.model.task.StartTime;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes
  */
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    // @@ A0143648Y
     /**
-     * Returns the specified index in the {@code command} if it is a positive unsigned integer
-     * Returns an {@code Optional.empty()} otherwise.
+     * Returns the specified index in the {@code command} if it is a positive
+     * unsigned integer Returns an {@code Optional.empty()} otherwise.
      */
-    public static Optional<Integer> parseIndex(String command) {
+    public static Optional<Pair<Character, Integer>> parseIndex(String command) {
         final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
 
         String index = matcher.group("targetIndex");
-        if (!StringUtil.isUnsignedInteger(index)) {
+
+        if (!isValidIndex(index)) {
             return Optional.empty();
         }
-        return Optional.of(Integer.parseInt(index));
+        return parseCorrectIndex(index);
 
     }
 
+    public static Optional<Pair<Character, Integer>> parseCorrectIndex(String index) {
+        Character taskType;
+        int taskNumber;
+        if (StringUtil.isUnsignedInteger(index)) {
+            taskType = Task.DEADLINE_CHAR;
+            taskNumber = Integer.parseInt(index);
+        } else {
+            taskType = index.charAt(0);
+            taskNumber = Integer.parseInt(index.substring(1));
+        }
+
+        return Optional.of(new Pair<Character, Integer>(taskType, taskNumber));
+
+    }
+
+    private static boolean isValidIndex(String index) {
+        if (StringUtil.isUnsignedInteger(index)) {
+            return true;
+        } else {
+            char taskType = index.charAt(0);
+            if (taskType != Task.DEADLINE_CHAR && taskType != Task.EVENT_CHAR && taskType != Task.FLOAT_CHAR) {
+                return false;
+            } else {
+                if (StringUtil.isUnsignedInteger(index.substring(1))) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+    }
+
+    // @@
     /**
      * Returns a new Set populated by all elements in the given list of strings
-     * Returns an empty set if the given {@code Optional} is empty,
-     * or if the list contained in the {@code Optional} is empty
+     * Returns an empty set if the given {@code Optional} is empty, or if the
+     * list contained in the {@code Optional} is empty
      */
     public static Set<String> toSet(Optional<List<String>> list) {
         List<String> elements = list.orElse(Collections.emptyList());
@@ -58,18 +97,20 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
+     * Splits a preamble string into ordered fields.
+     * 
+     * @return A list of size {@code numFields} where the ith element is the ith
+     *         field value if specified in the input, {@code Optional.empty()}
+     *         otherwise.
+     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
-                .map(Optional::ofNullable)
+        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Title>} if {@code name} is present.
+     * Parses a {@code Optional<String> name} into an {@code Optional<Title>} if
+     * {@code name} is present.
      */
     public static Optional<Title> parseTitle(Optional<String> name) throws IllegalValueException {
         assert name != null;
@@ -77,7 +118,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Venue>} if {@code phone} is present.
+     * Parses a {@code Optional<String> phone} into an {@code Optional<Venue>}
+     * if {@code phone} is present.
      */
     public static Optional<Venue> parseVenue(Optional<String> venue) throws IllegalValueException {
         assert venue != null;
@@ -85,7 +127,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<EndTime>} if {@code address} is present.
+     * Parses a {@code Optional<String> address} into an
+     * {@code Optional<EndTime>} if {@code address} is present.
      */
     public static Optional<EndTime> parseEndTime(Optional<String> address) throws IllegalValueException {
         assert address != null;
@@ -93,7 +136,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<StartTime>} if {@code email} is present.
+     * Parses a {@code Optional<String> email} into an
+     * {@code Optional<StartTime>} if {@code email} is present.
      */
     public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
         assert startTime != null;
@@ -101,7 +145,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<StartTime>} if {@code email} is present.
+     * Parses a {@code Optional<String> email} into an
+     * {@code Optional<StartTime>} if {@code email} is present.
      */
     public static Optional<UrgencyLevel> parseUrgencyLevel(Optional<String> urgencyLevel) throws IllegalValueException {
         assert urgencyLevel != null;
@@ -109,7 +154,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<StartTime>} if {@code email} is present.
+     * Parses a {@code Optional<String> email} into an
+     * {@code Optional<StartTime>} if {@code email} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
