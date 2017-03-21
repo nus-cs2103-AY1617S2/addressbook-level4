@@ -1,10 +1,11 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.testutil.TestTask;
 
 public class SortCommandTest extends TaskBossGuiTest {
@@ -28,7 +29,7 @@ public class SortCommandTest extends TaskBossGuiTest {
 
         //invalid sort command
         commandBox.runCommand("sort asdsa");
-        assertResultMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
     }
 
