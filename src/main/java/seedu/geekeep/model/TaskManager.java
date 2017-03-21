@@ -126,7 +126,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //// tag-level operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) 
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         this.tasks.setTasks(tasks);
     }
@@ -181,7 +181,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be equivalent to another existing task in the
      *             list.
-     * @throws CommandException 
+     * @throws CommandException
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */

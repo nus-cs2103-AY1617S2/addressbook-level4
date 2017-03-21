@@ -3,7 +3,6 @@ package seedu.geekeep.model.task;
 import java.util.Objects;
 
 import seedu.geekeep.commons.exceptions.IllegalValueException;
-import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
@@ -11,9 +10,9 @@ import seedu.geekeep.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask  {
 
-    public static final String MESSAGE_DATETIME_MATCH_CONSTRAINTS = 
+    public static final String MESSAGE_DATETIME_MATCH_CONSTRAINTS =
             "Starting date and time must be matched with a ending date and time";
-    public static final String MESSAGE_ENDDATETIME_LATER_CONSTRAINTS = 
+    public static final String MESSAGE_ENDDATETIME_LATER_CONSTRAINTS =
             "Starting date and time must be earlier than ending date and time";
 
     private Title title;
@@ -48,7 +47,7 @@ public class Task implements ReadOnlyTask  {
         if (startDateTime != null && endDateTime == null) {
             throw new IllegalValueException(MESSAGE_DATETIME_MATCH_CONSTRAINTS);
         }
-        if (startDateTime != null && endDateTime != null 
+        if (startDateTime != null && endDateTime != null
                 && startDateTime.dateTime.isAfter(endDateTime.dateTime)) {
             throw new IllegalValueException(MESSAGE_ENDDATETIME_LATER_CONSTRAINTS);
         }

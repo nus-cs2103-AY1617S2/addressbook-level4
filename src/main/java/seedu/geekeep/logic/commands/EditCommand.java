@@ -110,9 +110,9 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, 
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
             EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 

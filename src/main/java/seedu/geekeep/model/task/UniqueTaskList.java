@@ -96,7 +96,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) 
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws DuplicateTaskException, IllegalValueException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {

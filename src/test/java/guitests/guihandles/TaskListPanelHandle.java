@@ -119,9 +119,9 @@ public class TaskListPanelHandle extends GuiHandle {
      * Returns true if the list is showing the person details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
      * @param persons A list of person in the correct order.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... persons) 
+    public boolean isListMatching(int startPosition, ReadOnlyTask... persons)
             throws IllegalArgumentException {
         if (persons.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
