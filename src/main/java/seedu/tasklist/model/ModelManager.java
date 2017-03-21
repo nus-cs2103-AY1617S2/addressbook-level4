@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Optional;
+
 import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
@@ -15,7 +16,6 @@ import seedu.tasklist.commons.core.ComponentManager;
 import seedu.tasklist.commons.core.LogsCenter;
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
 import seedu.tasklist.commons.events.model.TaskListChangedEvent;
-
 import seedu.tasklist.commons.exceptions.DataConversionException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;

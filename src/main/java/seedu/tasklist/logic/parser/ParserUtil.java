@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,6 +27,9 @@ import seedu.tasklist.model.task.Priority;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+    private static Hashtable<String, String> flexibleCommands;
+    private static Hashtable<String, String> flexiblePrefixes;
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -108,5 +112,77 @@ public class ParserUtil {
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
+    /**
+     * Initialises the Hashtable for parsing flexible command words (Hashtable allows duplicate keys).
+     * Keys being the acceptable alternatives, values being the legitimate command words (stated in the UserGuide.md)
+     *
+     */
+    public static Hashtable<String, String> initialiseFlexibleCommands() {
+        flexibleCommands = new Hashtable<String, String>();
+        flexibleCommands.put("insert", "add");
+        flexibleCommands.put("create", "add");
+        flexibleCommands.put("new", "add");
+        flexibleCommands.put("adds", "add");
+        flexibleCommands.put("change", "edit");
+        flexibleCommands.put("modify", "edit");
+        flexibleCommands.put("edits", "edit");
+        flexibleCommands.put("remove", "delete");
+        flexibleCommands.put("deletes", "delete");
+        flexibleCommands.put("cancel", "delete");
+        flexibleCommands.put("clean", "clear");
+        flexibleCommands.put("locate", "find");
+        flexibleCommands.put("arrange", "sort");
+
+        return flexibleCommands;
+
+    }
+
+    /**
+     * Initialises the Hashtable for parsing flexible prefixes (Hashtable allows duplicate keys).
+     * Keys being the acceptable alternatives, values being the legitimate prefixes (stated in the UserGuide.md)
+     *
+     */
+    public static void initialiseFlexiblePrefixes() {
+        flexiblePrefixes = new Hashtable<String, String>();
+        //prefixes
+        flexiblePrefixes.put("tag/", "t/");
+        flexiblePrefixes.put("tags/", "t/");
+        flexiblePrefixes.put("comment/", "c/");
+        flexiblePrefixes.put("comments/", "c/");
+        flexiblePrefixes.put("info/", "c/");
+        flexiblePrefixes.put("priority/", "p/");
+        flexiblePrefixes.put("urgency/", "p/");
+        flexiblePrefixes.put("date/", "d/");
+        flexiblePrefixes.put("dates/", "d/");
+
+    }
+
+    /**
+     * Returns the Hashtable for flexible commands.
+     */
+    public static Hashtable<String, String> getFlexibleCommands() {
+        return flexibleCommands;
+    }
+
+
+
+    /**
+     * Return the legitimate prefix if the input prefix conforms to one of the listed alternatives.
+     * If it does not conform, return the input prefix as it is.
+     * If the prefix is an invalid one, the error will be detected during the tokenisation process.
+     */
+    public static String parseFlexiblePrefix(String input) {
+        String result = input;
+        Set<String> keys = flexiblePrefixes.keySet();
+        for (String key: keys) {
+            //locate the case insensitive acceptable alternate prefixes from the input.
+            if (Pattern.compile(Pattern.quote(key), Pattern.CASE_INSENSITIVE).matcher(result).find()) {
+                System.out.println("match found " + key);
+                result = result.replaceAll("(?i)" + key, flexiblePrefixes.get(key));
+            }
+        }
+        System.out.println("res is: " + result);
+        return result;
+    }
 }
 

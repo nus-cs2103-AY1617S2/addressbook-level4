@@ -45,6 +45,11 @@ public class FindCommandTest extends TaskListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void findWithFlexibleCommand() {
+        assertFindResult("locate CS2103T", td.tutorial, td.java); // multiple results
+    }
+
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
