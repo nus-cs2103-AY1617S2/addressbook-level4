@@ -94,10 +94,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        todoList.addTask(task);
+    public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        int index = todoList.addTask(task);
         updateFilteredListToShowAll();
         indicateTodoListChanged();
+        return index;
     }
 
     @Override

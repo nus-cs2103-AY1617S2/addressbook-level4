@@ -91,11 +91,15 @@ public class TodoList implements ReadOnlyTodoList {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        if (tasks.add(p)) {
+    public int addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+        int index = tasks.add(p);
+        if (index >= 0) {
             // Only sync master tag list if addition of task is successful
+            // index >= 0: indicates success
+            // index == -1: indicate failure
             syncMasterTagListWith(p);
         }
+        return index;
     }
 
     /**

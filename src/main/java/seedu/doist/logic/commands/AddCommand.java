@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import seedu.doist.commons.core.EventsCenter;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
@@ -29,7 +31,10 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addTask(toAdd);
+            int index  = model.addTask(toAdd);
+            if (index >= 0) {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
