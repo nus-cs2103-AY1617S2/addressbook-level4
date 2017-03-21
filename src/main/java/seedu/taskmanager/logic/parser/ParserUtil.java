@@ -69,12 +69,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> taskname} into an
-     * {@code Optional<TaskName>} if {@code taskname} is present.
+     * Parses a {@code Optional<String> taskName} into an
+     * {@code Optional<TaskName>} if {@code taskName} is present.
      */
-    public static Optional<TaskName> parseTaskName(Optional<String> taskname) throws IllegalValueException {
-        assert taskname != null;
-        return taskname.isPresent() ? Optional.of(new TaskName(taskname.get())) : Optional.empty();
+    public static Optional<TaskName> parseTaskName(Optional<String> taskName) throws IllegalValueException {
+        assert taskName != null;
+        return taskName.isPresent() ? Optional.of(new TaskName(taskName.get())) : Optional.empty();
     }
 
     /**
@@ -87,21 +87,21 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> starttime} into an
-     * {@code Optional<StartTime>} if {@code starttime} is present.
+     * Parses a {@code Optional<String> startTime} into an
+     * {@code Optional<StartTime>} if {@code startTime} is present.
      */
-    public static Optional<StartTime> parseStartTime(Optional<String> starttime) throws IllegalValueException {
-        assert starttime != null;
-        return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
+    public static Optional<StartTime> parseStartTime(Optional<String> startTime) throws IllegalValueException {
+        assert startTime != null;
+        return startTime.isPresent() ? Optional.of(new StartTime(startTime.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> endtime} into an
-     * {@code Optional<EndTime>} if {@code endtime} is present.
+     * Parses a {@code Optional<String> endTime} into an
+     * {@code Optional<EndTime>} if {@code endTime} is present.
      */
-    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
-        assert endtime != null;
-        return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
+    public static Optional<EndTime> parseEndTime(Optional<String> endTime) throws IllegalValueException {
+        assert endTime != null;
+        return endTime.isPresent() ? Optional.of(new EndTime(endTime.get())) : Optional.empty();
     }
 
     /**

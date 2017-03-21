@@ -3,6 +3,8 @@ package seedu.taskmanager.commons.core;
 import java.util.Objects;
 import java.util.logging.Level;
 
+import seedu.taskmanager.commons.exceptions.DuplicateDataException;
+
 /**
  * Config values used by the app
  */
@@ -46,8 +48,12 @@ public class Config {
         return taskManagerFilePath;
     }
 
-    public void setTaskManagerFilePath(String taskManagerFilePath) {
-        this.taskManagerFilePath = taskManagerFilePath;
+    public void setTaskManagerFilePath(String taskManagerFilePath) throws DuplicateTaskManagerFilePathException {
+        if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
+            throw new DuplicateTaskManagerFilePathException();
+        } else {
+            this.taskManagerFilePath = taskManagerFilePath;
+        }
     }
 
     public String getTaskManagerName() {
@@ -58,6 +64,14 @@ public class Config {
         this.taskManagerName = taskManagerName;
     }
 
+    /**
+     * Signals that the file path specified is the same as the current one.
+     */
+    public static class DuplicateTaskManagerFilePathException extends DuplicateDataException {
+        protected DuplicateTaskManagerFilePathException() {
+            super("Operation would result in duplicate tasks");
+        }
+    }
 
     @Override
     public boolean equals(Object other) {
