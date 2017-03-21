@@ -91,6 +91,12 @@ public class TaskManagerTest {
         public ObservableList<Tag> getTagList() {
             return tags;
         }
+
+        @Override
+        public ObservableList<ReadOnlyTask> getCompletedTaskList() {
+            //requires implementation @ dylan
+            return null;
+        }
     }
 
 }
