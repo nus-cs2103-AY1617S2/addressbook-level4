@@ -38,6 +38,9 @@ public class Task implements ReadOnlyTask {
     	this.taskDescription = taskDescription;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
+    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
+        	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
+    }
     /*
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
     	this.taskName = taskName;

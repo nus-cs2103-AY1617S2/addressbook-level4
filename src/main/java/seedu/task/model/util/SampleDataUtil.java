@@ -38,7 +38,7 @@ public class SampleDataUtil {
                     new UniqueTagList("colleagues"))
                 */
                 new Task(new TaskName("Buy coke"), new TaskDate("210217"), new TaskTime("0800"),
-    					new TaskTime("1000"), new String("Look out for lucky draws."),new UniqueTagList(""))
+    					new TaskTime("1000"), new String("Look out for lucky draws."),new UniqueTagList())
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
