@@ -65,7 +65,7 @@ public class XmlAdaptedTask {
         priority = source.getPriority().value;
         tagged = new ArrayList<>();
         type = source.getType();
-        status = source.getStatus().status;
+        status = source.getStatus().value;
         switch (type) {
         case DeadlineTask.TYPE:
             deadline = ((ReadOnlyDeadlineTask) source).getDeadline();
