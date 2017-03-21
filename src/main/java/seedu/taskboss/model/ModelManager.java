@@ -14,6 +14,8 @@ import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
+import seedu.taskboss.logic.commands.RenameCategoryCommand;
+import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
@@ -116,8 +118,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void renameCategory(Category oldCategory, Category newCategory)
-            throws IllegalValueException {
+            throws IllegalValueException, CommandException {
         assert oldCategory != null;
+
+        boolean exists = false;
+
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         FilteredList<ReadOnlyTask> oldCategoryTaskList = filteredTasks;
         int listSize = oldCategoryTaskList.size();
@@ -145,6 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 for (Category category : targetCategoryList) {
                     if (category.equals(oldCategory)) {
+                        exists = true;
                         newCategoryList.add(newCategory);
                     } else {
                         newCategoryList.add(category);
@@ -160,6 +166,11 @@ public class ModelManager extends ComponentManager implements Model {
                     newCategoryList);
             int taskBossIndex = taskIndex[i];
             taskBoss.updateTask(taskBossIndex, editedTask);
+        }
+
+        if (exists == false) {
+            throw new CommandException(oldCategory.toString()
+                    + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
         }
 
         indicateTaskBossChanged();

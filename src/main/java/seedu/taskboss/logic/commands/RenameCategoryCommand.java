@@ -19,6 +19,9 @@ public class RenameCategoryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Category successfully renamed!";
     public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss";
+    public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "category does"
+            + " not exist in TaskBoss";
+
 
     public final String oldCategory;
     public final String newCategory;

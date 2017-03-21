@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
+import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
@@ -68,7 +69,8 @@ public interface Model {
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;
 
-    /** Changes the name of a category of all tasks in the filtered task list*/
-    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException;
+    /** Changes the name of a category of all tasks in the filtered task list
+     * @throws CommandException */
+    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException, CommandException;
 
 }
