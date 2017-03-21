@@ -26,20 +26,20 @@ public class Task implements ReadOnlyTask {
      * @param duration may be null
      * @param tags must not be null
      */
-    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags) {
+    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags, Complete complete) {
         assert !CollectionUtil.isAnyNull(description, tags);
         this.description = description;
         this.dueDate = dueDate;
         this.duration = duration;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.complete = new Complete(false);
+        this.complete = complete;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags());
+        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(),source.getComplete());
     }
 
     @Override
@@ -144,5 +144,4 @@ public class Task implements ReadOnlyTask {
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
     }
-
 }

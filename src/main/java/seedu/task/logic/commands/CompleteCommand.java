@@ -5,6 +5,7 @@ import java.util.List;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
@@ -34,7 +35,7 @@ public class CompleteCommand extends Command {
     public final int targetIndex;
 
     public CompleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex-1;
     }
 
 
@@ -49,7 +50,6 @@ public class CompleteCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex);
         
         Task completedTask = new Task(taskToComplete);
-        
 		try {
 			completedTask = createCompletedTask(taskToComplete);
 		} catch (NoChangeException nce) {
@@ -58,11 +58,12 @@ public class CompleteCommand extends Command {
 
         try {
             model.updateTask(targetIndex, completedTask);
+            model.getFilteredTaskList().get(targetIndex).getComplete().setCompete();
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         
-        model.updateFilteredListToShowAll();
+        model.updateFilteredListToShowAll();       
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
     
@@ -71,17 +72,15 @@ public class CompleteCommand extends Command {
         UniqueTagList tags = taskToComplete.getTags();
         Duration duration = taskToComplete.getDuration();
         DueDate dueDate = taskToComplete.getDueDate();
-
-        
-        Task completedTask = new Task(description, dueDate, duration, tags);
-        if (completedTask.getComplete().getCompletion()==true) {
+        Complete complete = new Complete(true);
+       
+        Task completedTask = new Task(description, dueDate, duration, tags, complete);
+        if (taskToComplete.getComplete().getCompletion()==true) {
             throw new NoChangeException(TASK_ALREADY_COMPLETED);
         }
         
         completedTask.setComplete();
-
-        return completedTask;
-    	
+        return completedTask;	
     }
 
 }

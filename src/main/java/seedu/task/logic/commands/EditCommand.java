@@ -8,6 +8,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
@@ -85,6 +86,7 @@ public class EditCommand extends Command {
         String updatedDurationStart = editTaskDescriptor.getDurationStart().orElseGet(taskToEdit::getDurationStart);
         String updatedDurationEnd = editTaskDescriptor.getDurationEnd().orElseGet(taskToEdit::getDurationEnd);
         Duration updatedDuration = taskToEdit.getDuration();
+        Complete updatedComplete = taskToEdit.getComplete();
         try {
             // ensure that there must be start and end date if editing a non existing duration
             if (taskToEdit.getDuration() == null && (updatedDurationStart == null ^ updatedDurationEnd == null)) {
@@ -98,7 +100,7 @@ public class EditCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags);
+        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags, updatedComplete);
     }
 
     /**

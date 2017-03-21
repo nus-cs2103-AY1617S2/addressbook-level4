@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
@@ -27,6 +28,8 @@ public class XmlAdaptedTask {
     private String start;
     @XmlElement(required = false)
     private String end;
+    @XmlElement(required = false)
+    private String complete;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -53,7 +56,7 @@ public class XmlAdaptedTask {
         dueDate = source.getDueDate() != null ?
                 source.getDueDate().toString() :
                 null;
-
+        complete = source.getComplete().getString();        
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -78,6 +81,7 @@ public class XmlAdaptedTask {
                 new DueDate(this.dueDate) :
                 null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, dueDate, duration, tags);
+        final Complete complete = this.complete=="true"? new Complete(true):new Complete(false);
+        return new Task(description, dueDate, duration, tags, complete);
     }
 }

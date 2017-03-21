@@ -4,7 +4,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 
 public class Complete {
 	
-	 public boolean Completion;
+	   public boolean Completion = false;
 
 	    /**
 	     * Validates given description.
@@ -27,5 +27,8 @@ public class Complete {
 	    	return this.Completion;
 	    }
 	    
+	    public String getString(){
+	    	return Completion == true? "true" : "false";
+	    }
 
 }

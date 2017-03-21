@@ -109,8 +109,7 @@ public class TestTask implements ReadOnlyTask {
 
 	@Override
 	public Complete getComplete() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.complete;
 	}
 
 }
