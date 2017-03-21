@@ -30,7 +30,7 @@ public class ResultDisplay extends UiPart<Region> {
     Date dateobj = new Date();
     String date = df.format(dateobj);
     private final StringProperty displayed = new SimpleStringProperty("Welcome!\nToday is " + date +
-        ".\nYour tasks for today are listed below.\nUse 'list' to display all tasks.");
+        ".\nYour tasks for today are shown below.\nType 'list' to display all tasks.");
     //@@author
 
     @FXML
