@@ -30,9 +30,13 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadActivityPage(ReadOnlyActivity activity) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + activity.getDescription().description.replaceAll(" ", "+"));
+        if (activity.getLocation().value != null) {
+            loadPage("https://www.google.com.sg/maps/search/" + activity.getLocation().value.replaceAll(" ", "+"));
+        } else {
+            loadPage("https://www.google.com.sg/#safe=off&q=" + activity.getDescription().description
+                    .replaceAll(" ", "+"));
+        }
     }
-
     public void loadPage(String url) {
         browser.getEngine().load(url);
     }

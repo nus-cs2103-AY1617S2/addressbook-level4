@@ -26,17 +26,23 @@ public class Location {
      * @throws IllegalValueException if given location string is invalid.
      */
     public Location(String location) throws IllegalValueException {
-        assert location != null;
-        if (!isValidLocation(location)) {
-            throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
+        if (location == null) {
+            this.value = null;
+        } else {
+            if (!isValidLocation(location)) {
+                throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
+            }
+            this.value = location;
         }
-        this.value = location;
     }
 
     /**
      * Returns true if a given string is a valid activity location.
      */
     public static boolean isValidLocation(String test) {
+        if (test == null) {
+            return true;
+        }
         return test.matches(LOCATION_VALIDATION_REGEX);
     }
 

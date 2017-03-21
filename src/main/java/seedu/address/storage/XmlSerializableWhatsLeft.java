@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
 
     @XmlElement
-    private List<XmlAdaptedActivity> persons;
+    private List<XmlAdaptedActivity> activities;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -32,7 +32,7 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableWhatsLeft() {
-        persons = new ArrayList<>();
+        activities = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -41,13 +41,13 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
      */
     public XmlSerializableWhatsLeft(ReadOnlyWhatsLeft src) {
         this();
-        persons.addAll(src.getActivityList().stream().map(XmlAdaptedActivity::new).collect(Collectors.toList()));
+        activities.addAll(src.getActivityList().stream().map(XmlAdaptedActivity::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     @Override
     public ObservableList<ReadOnlyActivity> getActivityList() {
-        final ObservableList<Activity> persons = this.persons.stream().map(p -> {
+        final ObservableList<Activity> persons = this.activities.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {

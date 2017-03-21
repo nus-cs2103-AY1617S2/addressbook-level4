@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -89,6 +91,28 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredScheduledActivityList() {
+        ObservableList<ReadOnlyActivity> tempActivityList = FXCollections.observableArrayList();
+        for (ReadOnlyActivity activity:filteredActivities) {
+            if (activity.getByDate() != null || activity.getToDate() != null) {
+                tempActivityList.add(activity);
+            }
+        }
+        return new UnmodifiableObservableList<>(tempActivityList);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredUnscheduledActivityList() {
+        ObservableList<ReadOnlyActivity> tempActivityList =  FXCollections.observableArrayList();
+        for (ReadOnlyActivity activity:filteredActivities) {
+            if (activity.getPriority() != null) {
+                tempActivityList.add(activity);
+            }
+        }
+        return new UnmodifiableObservableList<>(tempActivityList);
+    }
+
+    @Override
     public void updateFilteredListToShowAll() {
         filteredActivities.setPredicate(null);
     }
@@ -153,6 +177,18 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredEventList() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredDeadlineList() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

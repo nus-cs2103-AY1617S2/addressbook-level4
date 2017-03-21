@@ -7,11 +7,15 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Activity;
+import seedu.address.model.person.ByDate;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.FromDate;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.ToDate;
 import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -26,12 +30,15 @@ public class EditCommand extends Command {
             + "by the index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[DESCRIPTION] [p/PRIORITY] [e/EMAIL] [l/LOCATION ] [t/TAG]...\n"
+            + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/high e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft.";
+    public static final String MESSAGE_DIFFERENT_DEADLINE = "Cannot edit Deadline into Task or Event";
+    public static final String MESSAGE_DIFFERENT_TASK = "Cannot edit Task into Event or Deadline";
+    public static final String MESSAGE_DIFFERENT_EVENT = "Cannot edit Event into Deadline or Task";
 
     private final int filteredActivityListIndex;
     private final EditActivityDescriptor editActivityDescriptor;
@@ -61,6 +68,22 @@ public class EditCommand extends Command {
         ReadOnlyActivity activityToEdit = lastShownList.get(filteredActivityListIndex);
         Activity editedActivity = createEditedActivity(activityToEdit, editActivityDescriptor);
 
+        if (editedActivity.getPriority().value != null && (editedActivity.getByDate().value != null ||
+                editedActivity.getFromDate().value != null && editedActivity.getToDate().value != null ||
+                editedActivity.getStartTime().value != null && editedActivity.getEndTime().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_TASK);
+        }
+
+        if (editedActivity.getByDate().value != null && (editedActivity.getPriority().value != null ||
+                editedActivity.getFromDate().value != null || editedActivity.getToDate().value != null ||
+                editedActivity.getStartTime().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_DEADLINE);
+        }
+
+        if (editedActivity.getFromDate().value != null && (editedActivity.getPriority().value != null ||
+                editedActivity.getByDate().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_EVENT);
+        }
         try {
             model.updateActivity(filteredActivityListIndex, editedActivity);
         } catch (UniqueActivityList.DuplicateActivityException dpe) {
@@ -80,12 +103,17 @@ public class EditCommand extends Command {
 
         Description updatedDescription = editActivityDescriptor.getDescription().orElseGet(
             activityToEdit::getDescription);
-        Priority updatedPhone = editActivityDescriptor.getPhone().orElseGet(activityToEdit::getPriority);
-        Email updatedEmail = editActivityDescriptor.getEmail().orElseGet(activityToEdit::getEmail);
+        Priority updatedPriority = editActivityDescriptor.getPriority().orElseGet(activityToEdit::getPriority);
+        StartTime updatedStartTime = editActivityDescriptor.getStartTime().orElseGet(activityToEdit::getStartTime);
+        FromDate updatedFromDate = editActivityDescriptor.getFromDate().orElseGet(activityToEdit::getFromDate);
+        EndTime updatedEndTime = editActivityDescriptor.getEndTime().orElseGet(activityToEdit::getEndTime);
+        ToDate updatedToDate = editActivityDescriptor.getToDate().orElseGet(activityToEdit::getToDate);
+        ByDate updatedByDate = editActivityDescriptor.getByDate().orElseGet(activityToEdit::getByDate);
         Location updatedLocation = editActivityDescriptor.getLocation().orElseGet(activityToEdit::getLocation);
         UniqueTagList updatedTags = editActivityDescriptor.getTags().orElseGet(activityToEdit::getTags);
 
-        return new Activity(updatedDescription, updatedPhone, updatedEmail, updatedLocation, updatedTags);
+        return new Activity(updatedDescription, updatedPriority, updatedStartTime, updatedFromDate,
+                updatedEndTime, updatedToDate, updatedByDate, updatedLocation, updatedTags);
     }
 
     /**
@@ -94,8 +122,12 @@ public class EditCommand extends Command {
      */
     public static class EditActivityDescriptor {
         private Optional<Description> description = Optional.empty();
-        private Optional<Priority> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
+        private Optional<StartTime> starttime = Optional.empty();
+        private Optional<FromDate> fromdate = Optional.empty();
+        private Optional<EndTime> endtime = Optional.empty();
+        private Optional<ToDate> todate = Optional.empty();
+        private Optional<ByDate> bydate = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
@@ -103,8 +135,12 @@ public class EditCommand extends Command {
 
         public EditActivityDescriptor(EditActivityDescriptor toCopy) {
             this.description = toCopy.getDescription();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
+            this.priority = toCopy.getPriority();
+            this.starttime = toCopy.getStartTime();
+            this.fromdate = toCopy.getFromDate();
+            this.endtime = toCopy.getEndTime();
+            this.todate = toCopy.getToDate();
+            this.bydate = toCopy.getByDate();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
@@ -113,7 +149,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.phone, this.email, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.starttime, this.endtime,
+                    this.fromdate, this.todate, this.bydate, this.priority, this.location, this.tags);
         }
 
         public void setDescription(Optional<Description> description) {
@@ -125,26 +162,55 @@ public class EditCommand extends Command {
             return description;
         }
 
-        public void setPhone(Optional<Priority> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setStartTime(Optional<StartTime> starttime) {
+            this.starttime = starttime;
         }
 
-        public Optional<Priority> getPhone() {
-            return phone;
+        public Optional<StartTime> getStartTime() {
+            return starttime;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setFromDate(Optional<FromDate> fromdate) {
+            this.fromdate = fromdate;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<FromDate> getFromDate() {
+            return fromdate;
+        }
+
+        public void setEndTime(Optional<EndTime> endtime) {
+            this.endtime = endtime;
+        }
+
+        public Optional<EndTime> getEndTime() {
+            return endtime;
+        }
+
+        public void setToDate(Optional<ToDate> todate) {
+            this.todate = todate;
+        }
+
+        public Optional<ToDate> getToDate() {
+            return todate;
+        }
+
+        public void setByDate(Optional<ByDate> bydate) {
+            this.bydate = bydate;
+        }
+
+        public Optional<ByDate> getByDate() {
+            return bydate;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setLocation(Optional<Location> location) {
-            assert location != null;
             this.location = location;
         }
 

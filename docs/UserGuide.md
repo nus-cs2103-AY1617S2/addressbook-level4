@@ -51,60 +51,56 @@ Format: `help [COMMAND]`
 
 ### 2.2. Adding an event/deadline/task : `add`
 
-#### 2.2.1. Adding an event : `add ev`
+#### 2.2.1. Adding an event : `add`
 
 Adds an event to the event list. Undoable.<br>
-Format: `add ev DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]`
+Format: `add DESCRIPTION [s/START_TIME] f/FROM_DATE [e/END_TIME] [u/TO_DATE] [t/COMMENTS]... [l/LOCATION]`
 
-> * `ev` is used as an acronym for "event"
 > * Events must be added with description.
-> * Start date is required, while other fields are optional.
-> * Start date and end date should have format `DD-MM-YY`, e.g. 23-01-17.
+> * From date is required, while other fields are optional.
+> * From date and To date should have format `DDMMYY`, e.g. 230117.
 > * Start time and end time should have format `XXXX`, e.g. 2359.
 > * If end time is entered and end date is not entered, end date is set to be start date by default.
 > * Events can have any number of comments(including 0).
-> * If description is not entered, help message for add event will appear.
+> * If description is not entered, help message for add will appear.
 
 Examples:
 
-* `add ev PhotoShop Workshop s/1900 f/13-02-17 c/take laptop l/CLB`
-* `add ev Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
+* `add PhotoShop Workshop s/1900 f/13-02-17 t/take laptop l/CLB`
+* `add Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
 
-#### 2.2.2. Adding a deadline : `add dl`
+#### 2.2.2. Adding a deadline : `add`
 
 Adds a deadline to the deadline list. Undoable.<br>
-Format: `add dl DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`
+Format: `add DESCRIPTION b/BY_DATE [e/END_TIME] [t/COMMENTS]... [l/LOCATION]`
 
-> * `dl` is used as an acronym for "deadline"
 > * Deadlines must be added with description.
 > * By date is required, while other fields are optional.
-> * By date should have format `DD-MM-YY`, e.g. 23-01-17.
+> * By date should have format `DDMMYY`, e.g. 230117.
 > * End time should have format `XXXX`, e.g. 2359.
 > * Deadlines can have any number of comments(including 0).
-> * If description is not entered, help message for add deadline will appear.
+> * If description is not entered, help message for add will appear.
 
 Examples:
 
-* `add dl Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
-* `add dl Project Report b/12-04-17 e/2359 c/submit softcopy c/online discussion`
+* `add Home Assignment 1 b/21-03-17 t/submit hardcopy l/general office`
+* `add Project Report b/12-04-17 e/2359 t/submit softcopy c/online discussion`
 
-#### 2.2.3. Adding a task : `add ts`
+#### 2.2.3. Adding a task : `add`
 
 Adds a task to the task list. Undoable.<br>
-Format: `add ts DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`
+Format: `add DESCRIPTION [c/COMMENTS]... [l/LOCATION] p/PRIORITY`
 
-> * `ts` is used as an acronym for "task"
 > * Tasks must be added with description.
+> * Priority is required, and can only take on the values "high", "medium" or "low", while other fields are optional.
 > * Other fields are optional.
 > * Tasks can have any number of comments(including 0).
-> * Tasks can have priority 0, 1, 2 or 3.
-> * If priority is not entered, it is set to be 0 by default.
-> * If description is not entered, help message for add task will appear.
+> * If description is not entered, help message for add will appear.
 
 Examples:
 
-* `add ts Review CS2103 c/watch webcast p/1`
-* `add ts Buy fruits l/FairPrice p/2`
+* `add Review CS2103 c/watch webcast p/1`
+* `add Buy fruits l/FairPrice p/2`
 
 ### 2.3. Listing all events/deadlines/tasks : `list`
 
@@ -347,14 +343,14 @@ There is no need to save manually.
 
 * **Help** : `help` <br>
 
-* **Add Event** : `add ev DESCRIPTION [s/START_TIME] f/START_DATE [e/END_TIME] [t/END_DATE] [c/COMMENTS]... [l/LOCATION]` <br>
-  e.g. `add ev Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
+* **Add Event** : `add DESCRIPTION [s/START_TIME] f/FROM_DATE [e/END_TIME] [u/TO_DATE] [t/COMMENTS]... [l/LOCATION]` <br>
+  e.g. `add Industrial Talk s/1800 f/03-05-17 e/2000 l/FoS`
 
-* **Add Deadline** : `add dl DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
-  e.g. `add dl Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
+* **Add Deadline** : `add DESCRIPTION b/BY_DATE [e/END_TIME] [c/COMMENTS]... [l/LOCATION]`<br>
+  e.g. `add Home Assignment 1 b/21-03-17 c/submit hardcopy l/general office`
 
-* **Add Task** : `add ts DESCRIPTION [c/COMMENTS]... [l/LOCATION] [p/PRIORITY]`<br>
-  e.g. `add ts Buy fruits l/FairPrice p/2`
+* **Add Task** : `add DESCRIPTION [c/COMMENTS]... [l/LOCATION] p/PRIORITY`<br>
+  e.g. `add Buy fruits l/FairPrice p/2`
 
 * **List** : `list [TYPE]` <br>
   e.g. `list dl`

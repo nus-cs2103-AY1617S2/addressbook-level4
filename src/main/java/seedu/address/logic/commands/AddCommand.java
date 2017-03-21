@@ -6,10 +6,14 @@ import java.util.Set;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Activity;
+import seedu.address.model.person.ByDate;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.FromDate;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.ToDate;
 import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -23,9 +27,11 @@ public class AddCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft. "
-            + "Parameters: DESCRIPTION p/PRIORITY e/EMAIL l/LOCATION  [t/TAG]...\n"
+            + "Parameters: DESCRIPTION p/PRIORITY l/LOCATION f/FROMDATE u/TODATE s/STARTTIME"
+            + "e/ENDTIME b/BYDATE [t/TAG]...\n"
+            + "Event must have f/FROMDATE, Task must have p/PRIORITY, Deadline must have b/BYDATE"
             + "Example: " + COMMAND_WORD
-            + " Project Discussion p/high e/johnd@gmail.com l/discussion room 4 t/friends t/owesMoney";
+            + " Project Discussion p/high l/discussion room 4 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
@@ -38,7 +44,8 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
 
-    public AddCommand(String description, String phone, String email, String location, Set<String> tags)
+    public AddCommand(String description, String priority, String starttime, String fromdate, String endtime,
+            String todate, String bydate, String location, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -46,8 +53,12 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Activity(
                 new Description(description),
-                new Priority(phone),
-                new Email(email),
+                new Priority(priority),
+                new StartTime(starttime),
+                new FromDate(fromdate),
+                new EndTime(endtime),
+                new ToDate(todate),
+                new ByDate(bydate),
                 new Location(location),
                 new UniqueTagList(tagSet)
         );

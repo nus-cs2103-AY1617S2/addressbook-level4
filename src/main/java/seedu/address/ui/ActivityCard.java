@@ -21,8 +21,7 @@ public class ActivityCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private Label locations;
-    @FXML
-    private Label email;
+
     @FXML
     private FlowPane tags;
 
@@ -32,7 +31,6 @@ public class ActivityCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         priority.setText(activity.getPriority().value);
         locations.setText(activity.getLocation().value);
-        email.setText(activity.getEmail().value);
         initTags(activity);
     }
 
