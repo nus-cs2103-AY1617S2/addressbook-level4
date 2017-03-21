@@ -45,6 +45,7 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
     }
 
+    //@@author A0143157J
     /**
      * Returns the specified sort type in the {@code command} if it is a valid sort type
      * Returns an {@code Optional.empty()} otherwise.
@@ -62,6 +63,7 @@ public class ParserUtil {
         return Optional.of(sortType);
     }
 
+    //@@author A0143157J
     /**
      * Returns a new Set populated by all elements in the given list of strings
      * Returns an empty set if the given {@code Optional} is empty,
