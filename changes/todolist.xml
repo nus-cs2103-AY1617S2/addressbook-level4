@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>test</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <completed>false</completed>
+    </persons>
+    <persons>
+        <name>something</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <completed>false</completed>
+    </persons>
+</addressbook>
