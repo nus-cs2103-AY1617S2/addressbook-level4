@@ -13,12 +13,13 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Timing implements Comparable<Timing> {
 
     public static final String MESSAGE_TIMING_CONSTRAINTS =
-        "Task date should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
+            "Task date should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
     public static final String[] TIMING_FORMAT = {
-        "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
+            "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
     public static final String NULL_TIMING = "n/a";
     public final String value;
     private Date date;
+    private static final int DATE_COMPARE_TO_OFFSET = 3800;
 
     /**
      * Validates given date.
@@ -75,7 +76,7 @@ public class Timing implements Comparable<Timing> {
         return other == this // short circuit if same object
                 || (other instanceof Timing // instanceof handles nulls
                         && this.value.equals(((Timing) other).value)); // state
-                                                                       // check
+        // check
     }
 
     @Override
@@ -111,7 +112,7 @@ public class Timing implements Comparable<Timing> {
             return -1;
         }
 
-        int compareToResult = this.date.getYear() - compareTiming.date.getYear() + 3800;
+        int compareToResult = this.date.getYear() - compareTiming.date.getYear() + DATE_COMPARE_TO_OFFSET;
 
         if (compareToResult == 0) {
             compareToResult = this.date.getMonth() - compareTiming.date.getMonth();
