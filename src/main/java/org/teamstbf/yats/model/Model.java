@@ -43,32 +43,49 @@ public interface Model {
 	void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException;
 
-	void updateEvent(int filteredEventListIndex, Event editedEvent)
-			throws DuplicateEventException;
-	
-	/** Returns the filtered event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
+	void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException;
+
+	/**
+	 * Returns the filtered event list as an
+	 * {@code UnmodifiableObservableList<ReadOnlyEvent>}
+	 */
 	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
-	
-	/** Returns the sorted event list as an {@code UnmodifiableObservableList<ReadOnlyEvent> }  */
+
+	/**
+	 * Returns the sorted event list as an
+	 * {@code UnmodifiableObservableList<ReadOnlyEvent> }
+	 */
 	UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList();
 
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
-	
-	/** Updates the filter of the filtered event list to show all events with location */
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with
+	 * location
+	 */
 	void updateFilteredListToShowLocation(Set<String> keywords);
 
-	/** Updates the filter of the filtered event list to filter by the given keywords */
+	/**
+	 * Updates the filter of the filtered event list to show all events with the
+	 * given tag
+	 */
+	void updateFilteredListToShowTags(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to filter by the given
+	 * keywords
+	 */
 	void updateFilteredEventList(Set<String> keywords);
-	
+
 	/** Updates the switch to use SortedList */
 	void setToSortListSwitch();
-	
+
 	/** Resets the switch to use FilteredList */
 	void unSetToSortListSwitch();
-	
+
 	boolean getSortListSwitch();
-	
+
 	/** Sorts the filtered event list */
 	void updateSortedEventList();
 

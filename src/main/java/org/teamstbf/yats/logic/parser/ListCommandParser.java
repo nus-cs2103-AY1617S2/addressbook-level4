@@ -1,11 +1,8 @@
 package org.teamstbf.yats.logic.parser;
 
-import static org.teamstbf.yats.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.ListCommand;
@@ -38,21 +35,24 @@ public class ListCommandParser {
 			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION): {
 				final String[] keywords = args.replaceFirst("by location", " ").trim().split(" ");
 				final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-				return new ListCommandLocation(keywordSet);	
+				return new ListCommandLocation(keywordSet);
 			}
 			case (ListCommand.COMMAND_WORD_SUFFIX_DONE):
 				return new ListCommandDone();
-			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
-				return new ListCommandTag();
+			case (ListCommand.COMMAND_WORD_SUFFIX_TAG): {
+				final String[] keywords = args.replaceFirst("by tag", " ").trim().split(" ");
+				final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+				return new ListCommandTag(keywordSet);
+			}
 			}
 		}
 		return new ListCommand();
-
-		// Need to add command input variations such as for the case of no
-		// extension
-		// for the case of wrong command
-		// for the case of repeating events, only need to list one
 	}
+
+	// Need to add command input variations such as for the case of no
+	// extension
+	// for the case of wrong command
+	// for the case of repeating events, only need to list one
 
 	/**
 	 * Returns a {@code String[]} of the command text tokens

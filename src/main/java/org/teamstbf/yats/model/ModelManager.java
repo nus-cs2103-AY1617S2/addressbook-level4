@@ -2,6 +2,7 @@ package org.teamstbf.yats.model;
 
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.teamstbf.yats.commons.core.ComponentManager;
 import org.teamstbf.yats.commons.core.LogsCenter;
@@ -119,10 +120,15 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateFilteredListToShowAll() {
 		filteredEvents.setPredicate(null);
 	}
-	
+
 	@Override
 	public void updateFilteredListToShowLocation(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new LocationQualifier(keywords)));
+	}
+
+	@Override
+	public void updateFilteredListToShowTags(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new TagQualifier(keywords)));
 	}
 
 	@Override
@@ -139,7 +145,8 @@ public class ModelManager extends ComponentManager implements Model {
 		filteredEvents.setPredicate(expression::satisfies);
 	}
 
-	//=========== Sorted Event List Accessors =============================================================
+	// =========== Sorted Event List Accessors
+	// =============================================================
 
 	@Override
 	public void setToSortListSwitch() {
@@ -148,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void unSetToSortListSwitch() {
-		this.toSort =  false;
+		this.toSort = false;
 	}
 
 	@Override
@@ -165,8 +172,8 @@ public class ModelManager extends ComponentManager implements Model {
 		sortedEvents.sorted();
 	}
 
-
-	// ========== Inner classes/interfaces used for filtering =================================================
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
 
 	interface Expression {
 		boolean satisfies(ReadOnlyEvent event);
@@ -231,8 +238,8 @@ public class ModelManager extends ComponentManager implements Model {
 		@Override
 		public boolean run(ReadOnlyEvent event) {
 			return locationKeyWords.stream()
-					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getLocation().toString(), keyword)).findAny()
-					.isPresent();
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getLocation().toString(), keyword))
+					.findAny().isPresent();
 		}
 
 		@Override
@@ -241,6 +248,30 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
-//========== Inner classes/interfaces used for sorting =================================================
-// TODO: include comparable and comparator classes and interface for sorting by respective attributes
+	private class TagQualifier implements Qualifier {
+		private Set<String> tagKeyWords;
+
+		TagQualifier(Set<String> tagKeyWords) {
+			this.tagKeyWords = tagKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			String tagObtain = event.getTags().asObservableList().stream().map(tagString -> tagString.tagName)
+					.distinct().collect(Collectors.joining(" "));
+			System.out.println(tagObtain);
+			return tagKeyWords.stream().filter(keyword -> StringUtil.containsWordIgnoreCase(tagObtain, keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "tag=" + String.join(", ", tagKeyWords);
+		}
+	}
+
+	// ========== Inner classes/interfaces used for sorting
+	// =================================================
+	// TODO: include comparable and comparator classes and interface for sorting
+	// by respective attributes
 }
