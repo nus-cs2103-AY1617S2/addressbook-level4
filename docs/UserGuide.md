@@ -98,7 +98,7 @@ FlexiTask will also be able to sort your tasks according to their priorities, da
 <a name="help"/></a>
 ### 3.1. Viewing help: help
 <img src="images/help.png" width = "600"> <br>
-_Figure 2. Userguide for FlexiTask_ 
+_Figure 2. Userguide for FlexiTask_
 
 Opens a new window which shows the User Guide of FlexiTask as shown in Figure 2
 
@@ -109,7 +109,7 @@ Format: `help`
 <br>
 
 <a name="add"></a>
-### 3.2. Adding a task: add 
+### 3.2. Adding a task: add
 
 Adds a task
 > ***Flexible command:*** `insert`, `create`, `new`, `adds`
@@ -121,13 +121,13 @@ Format: `add TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...] [d/DATES].
 * Use `TASK_DETAILS` to specify the name of the task to be added<br>
 * Use `PRIORITY_LEVEL` to specify importance. Enter one of the three options:<br>
     high, medium, low
-> ***Flexible command:*** `priority/`, `urgency`<br>    
+> ***Flexible command:*** `priority/`, `urgency`<br>
 * Use `COMMENTS` to add additional description(s) to the task<br>
 > ***Flexible command:*** `comment/`, `comments/`, `info/`<br>
 * Use `TAGS` to assign category to each task<br>
 > ***Flexible command:*** `tag/`, `tags/` <br>
 > Each tag is separated with spaces after the '/t' command<br>
-> Example: *t/project leisure* means 2 tags of "project" and "leisure" to be created 
+> Example: *t/project leisure* means 2 tags of "project" and "leisure" to be created
 * Use `DATES` to add a deadline or a timeframe to the task.<br>
 > ***Flexible command:*** `date/`, `dates/`<br>
 > Date and time can be written in any order, as it is processed by an inbuilt natural language processor
@@ -171,7 +171,7 @@ Example:
 * add Send email to boss regarding X Project p/high
 
 <img src="images/setting_priority_levels.png" width = "300"> <br>
-_Figure 3. Tasks with Priorities_ 
+_Figure 3. Tasks with Priorities_
 
 As shown in Figure 3, priority is displayed next to the task name and tags are displayed below the task name.
 
@@ -309,7 +309,7 @@ Sorts tasks based on task name, start date, end date or priority level.<br>
 
 > ***Flexible command:*** `arrange`
 
-Format: `sort {TASK_DETAILS}{DATE}{PRIORITY_LEVEL}` 
+Format: `sort {TASK_DETAILS}{DATE}{PRIORITY_LEVEL}`
 >> Only 1 of 3 parameters can be used
 
 > n: Sorts based on task name in alphabetical order<br>
@@ -376,10 +376,10 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another Computer? <br>
 **A**: Install FlexiTask in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlexiTask folder.
- 
+
 **Q**: Is FlexiTask capable of providing reminders for my upcoming tasks? <br>
 **A**: FlexiTask will display your upcoming tasks on the right panel of the User Interface. However, it will not show you a reminder.
 
-       
+
 ## 5. Command Summary <img src="images/commandSummary_21Mar.png">
 
