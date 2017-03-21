@@ -85,6 +85,6 @@ public class DoneCommand extends Command {
     }
 
     private boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
-        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size());
+        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
     }
 }
