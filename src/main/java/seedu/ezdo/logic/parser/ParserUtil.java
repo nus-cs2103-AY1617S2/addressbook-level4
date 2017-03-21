@@ -1,5 +1,6 @@
 package seedu.ezdo.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +29,7 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_CRITERIA_ARGS_FORMAT = Pattern.compile("(?<sortCriteria>.+)");
+    private static final Pattern INDEXES_ARGS_FORMAT = Pattern.compile("^([0-9]*\\s+)*[0-9]*$");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -48,6 +50,24 @@ public class ParserUtil {
     }
 
     /**
+     * Returns the specified indexes in the {@code command} if they are
+     * positive unsigned integers separated by whitespaces.
+     * Returns empty array list otherwise.
+     */
+    public static ArrayList<Integer> parseIndexes(String command) {
+        final Matcher matcher = INDEXES_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return new ArrayList<Integer>();
+        }
+        ArrayList<Integer> indexes = new ArrayList<Integer>();
+        for (String index : command.trim().split("\\s+")) {
+            indexes.add(Integer.parseInt(index));
+        }
+        return indexes;
+    }
+
+    /**
+     *
      * Returns the specified sorting criteria in the {@code command} if it is present.
      * Returns an {@code Optional.empty()} otherwise.
      */

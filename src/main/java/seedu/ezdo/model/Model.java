@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +27,7 @@ public interface Model {
     void sortTasks(SortCriteria sortCriteria);
 
     /** Deletes the given task. */
-    void killTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException;
@@ -36,9 +37,10 @@ public interface Model {
      * @throws DateException
      */
     void checkTaskDate(ReadOnlyTask task) throws DateException;
+
     /** Marks a task as done.
      * @throws TaskNotFoundException */
-    void doneTask(Task task) throws TaskNotFoundException;
+    void doneTasks(ArrayList<Task> tasksToDone) throws TaskNotFoundException;
 
     /** Undo the previous undoable command
      * @throws EmptyStackException */

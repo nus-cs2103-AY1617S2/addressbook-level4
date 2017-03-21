@@ -1,5 +1,7 @@
 package seedu.ezdo.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
@@ -23,17 +25,20 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done task: %1$s";
     public static final String MESSAGE_DONE_LISTED = "Done tasks listed";
 
-    public final int targetIndex;
-    public final boolean requestToViewDoneOnly;
+    private final ArrayList<Integer> targetIndexes;
+    private final ArrayList<Task> tasksToDone;
+    private final boolean requestToViewDoneOnly;
 
-    public DoneCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public DoneCommand(ArrayList<Integer> indexes) {
+        this.targetIndexes = new ArrayList<Integer>(indexes);
         this.requestToViewDoneOnly = false;
+        this.tasksToDone = new ArrayList<Task>();
     }
 
     public DoneCommand() {
-        this.targetIndex = 0;
+        this.targetIndexes = null;
         this.requestToViewDoneOnly = true;
+        this.tasksToDone = null;
     }
 
 
@@ -47,23 +52,39 @@ public class DoneCommand extends Command {
             return new CommandResult(MESSAGE_DONE_LISTED);
         }
 
-        if (lastShownList.size() < targetIndex) {
+        if (!isIndexValid(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task taskToDone = (Task) lastShownList.get(targetIndex - 1);
-
-        if (taskToDone.getDone()) {
+        if (isAnyTaskDone(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_WRONG_LIST);
         }
 
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Task taskToDone = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            tasksToDone.add(taskToDone);
+        }
+
         try {
-            model.doneTask(taskToDone);
+            model.doneTasks(tasksToDone);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
+        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
     }
 
+    private boolean isAnyTaskDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Task taskToDone = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            if (taskToDone.getDone()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
+    }
 }

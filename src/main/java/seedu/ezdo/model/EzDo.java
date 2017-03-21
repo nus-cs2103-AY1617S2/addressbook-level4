@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -144,16 +145,21 @@ public class EzDo implements ReadOnlyEzDo {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.remove(key)) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+    public boolean removeTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException {
+        for (int i = 0; i < tasksToKill.size(); i++) {
+            if (tasks.remove(tasksToKill.get(i))) {
+                continue;
+            } else {
+                throw new UniqueTaskList.TaskNotFoundException();
+            }
         }
+        return true;
     }
 
-    public void doneTask(Task p) {
-        p.setDone();
+    public void doneTasks(ArrayList<Task> p) {
+        for (int i = 0; i < p.size(); i++) {
+            p.get(i).setDone();
+        }
     }
 
 //// tag-level operations

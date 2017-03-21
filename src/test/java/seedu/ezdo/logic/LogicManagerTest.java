@@ -359,11 +359,13 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         EzDo expectedEZ = helper.generateEzDo(threeTasks);
-        expectedEZ.removeTask(threeTasks.get(1));
+        ArrayList<ReadOnlyTask> tasksToKill = new ArrayList<ReadOnlyTask>();
+        tasksToKill.add(threeTasks.get(1));
+        expectedEZ.removeTasks(tasksToKill);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("kill 2",
-                String.format(KillCommand.MESSAGE_KILL_TASK_SUCCESS, threeTasks.get(1)),
+                String.format(KillCommand.MESSAGE_KILL_TASK_SUCCESS, tasksToKill),
                 expectedEZ,
                 expectedEZ.getTaskList());
     }
