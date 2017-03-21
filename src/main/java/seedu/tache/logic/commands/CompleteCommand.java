@@ -1,6 +1,7 @@
 package seedu.tache.logic.commands;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.tache.commons.core.Messages;
@@ -41,6 +42,7 @@ public class CompleteCommand extends Command {
         for (int i = 0; i < indexList.size(); i++) {
             this.indexList.set(i, indexList.get(i) - 1);
         }
+        Collections.reverse(indexList);
     }
 
     @Override
