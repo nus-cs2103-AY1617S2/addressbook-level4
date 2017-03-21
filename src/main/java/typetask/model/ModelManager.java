@@ -87,6 +87,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0144902L
+    @Override
+    public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        assert target != null;
+        taskManager.completeTask(target);
+        indicateTaskManagerChanged();
+    }
+
     //@@author A0139926R
     /** Stores current TaskManager state */
     @Override
