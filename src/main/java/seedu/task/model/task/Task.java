@@ -1,6 +1,7 @@
 package seedu.task.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
@@ -68,7 +69,25 @@ public class Task implements ReadOnlyTask {
         this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(), source.getTaskDescription(),source.getTags());
     }
 
-    /*
+	public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
+			Optional<TaskTime> parseTime2, Optional<String> parseString) {
+		this.taskName = parseTaskName;
+		if (parseDate.isPresent()) {
+			this.taskDate = parseDate.get();
+		}
+		if (parseTime.isPresent()) {
+			this.taskStartTime = parseTime.get();
+		}
+		if (parseTime2.isPresent()) {
+			this.taskEndTime = parseTime2.get();
+		}
+		if (parseString.isPresent()) {
+			this.taskDescription = parseString.get();
+		}
+		this.tags = new UniqueTagList();
+		// TODO Auto-generated constructor stub
+	}
+	/*
     public void setName(Name name) {
         assert name != null;
         this.name = name;

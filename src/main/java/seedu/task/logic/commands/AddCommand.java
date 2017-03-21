@@ -1,6 +1,7 @@
 package seedu.task.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -56,7 +57,13 @@ public class AddCommand extends Command {
         );
     }
 
-    @Override
+    public AddCommand(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
+			Optional<TaskTime> parseTime2, Optional<String> parseString) throws IllegalValueException {
+    	this.toAdd = new Task(parseTaskName, parseDate, parseTime, parseTime2, parseString);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {

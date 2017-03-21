@@ -27,17 +27,33 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
         id.setText(displayedIndex + ". ");
+        Label[] labelArr = {name, phone, address, email};
+        int count = 0;
         if (person.getTaskName() != null) {
-        	name.setText(person.getTaskName().toString());
+        	labelArr[count].setText(person.getTaskName().toString());
+        	count++;
         }
         if (person.getTaskDate() != null) {
-        	phone.setText(person.getTaskDate().toString());
+        	labelArr[count].setText(person.getTaskDate().toString());
+        	count++;
         }
         if (person.getTaskStartTime() != null && person.getTaskEndTime() != null) {
-        	address.setText(person.getTaskStartTime().toString() + "-" + person.getTaskEndTime());
+        	labelArr[count].setText(person.getTaskStartTime().toString() + "-" + person.getTaskEndTime());
+        	count++;
+        } else if (person.getTaskStartTime() != null) {
+        	labelArr[count].setText(person.getTaskStartTime().toString());
+        	count++;
+        } else if (person.getTaskEndTime() != null) {
+        	labelArr[count].setText(person.getTaskEndTime().toString());
+        	count++;
         }
         if (person.getTaskDescription() != null) {
-        	email.setText(person.getTaskDescription().toString());
+        	labelArr[count].setText(person.getTaskDescription().toString());
+        	count++;
         }
+        for (int i = count; i < labelArr.length; i++) {
+        	labelArr[i].setText("");
+        }
+        
     }
 }
