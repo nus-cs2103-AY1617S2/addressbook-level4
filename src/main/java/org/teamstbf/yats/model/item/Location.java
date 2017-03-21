@@ -1,17 +1,19 @@
 package org.teamstbf.yats.model.item;
 
+import java.util.function.Predicate;
+
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
 public class Location {
 
     private static final int LOCATION_MAXIMUM_LENGTH = 500;
 
-
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
             "Location can take any values, but can only be 400 characters in length. It can be left blank.";
 
-
     public final String value;
+    
+    private boolean hasLocation;
 
     /**
      * Validates given location.
@@ -25,8 +27,24 @@ public class Location {
             throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
         }
         this.value = trimmedLocation;
+        setLocationExist();
     }
-
+    
+    public void setLocationExist() {
+    	this.hasLocation = true;
+    }
+    
+    public void setLocationNonExist() {
+    	this.hasLocation = false;
+    }
+    
+    public boolean isLocationExist() {
+    	return hasLocation;
+    }
+    
+    public Predicate<Location> locationPredicate() {
+    	return p -> p.isLocationExist();
+    }
 
     @Override
     public String toString() {

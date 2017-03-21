@@ -18,12 +18,6 @@ public interface Model {
 	/** Deletes the given Event. */
 	void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
 
-	/**
-	 * Returns the filtered event list as an
-	 * {@code UnmodifiableObservableList<ReadOnlyEvent>}
-	 */
-	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
-
 	/** Returns the TaskManager */
 	ReadOnlyTaskManager getTaskManager();
 
@@ -34,8 +28,6 @@ public interface Model {
 
 	/** Sorts the filtered event list */
 	void sortFilteredEventList();
-
-	void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException;
 
 	/**
 	 * Updates the event located at {@code filteredEventListIndex} with
@@ -51,14 +43,63 @@ public interface Model {
 	void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException;
 
+	void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException;
+
+	/**
+	 * Returns the filtered event list as an
+	 * {@code UnmodifiableObservableList<ReadOnlyEvent>}
+	 */
+	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
+
+	/**
+	 * Returns the sorted event list as an
+	 * {@code UnmodifiableObservableList<ReadOnlyEvent> }
+	 */
+	UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList();
+
+	/** Updates the filter of the filtered event list to show all events */
+	void updateFilteredListToShowAll();
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with
+	 * location
+	 */
+	void updateFilteredListToShowLocation(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with the
+	 * given date
+	 */
+	void updateFilteredListToShowDate(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with the
+	 * given start time
+	 */
+	void updateFilteredListToShowStartTime(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with the
+	 * given tag
+	 */
+	void updateFilteredListToShowTags(Set<String> keywords);
+
 	/**
 	 * Updates the filter of the filtered event list to filter by the given
 	 * keywords
 	 */
 	void updateFilteredEventList(Set<String> keywords);
 
-	/** Updates the filter of the filtered event list to show all events */
-	void updateFilteredListToShowAll();
+	/** Updates the switch to use SortedList */
+	void setToSortListSwitch();
+
+	/** Resets the switch to use FilteredList */
+	void unSetToSortListSwitch();
+
+	boolean getSortListSwitch();
+
+	/** Sorts the filtered event list */
+	void updateSortedEventList();
 
     void getPreviousState();
 
