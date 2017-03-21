@@ -20,9 +20,8 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyUserInbox newData);
 
-    /** Returns the AddressBook */
+    /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
-
 
     //========== for tasks =================================================
     /** Deletes the given task. */
@@ -55,18 +54,31 @@ public interface Model {
 
     //========== for events =================================================
 
+    /**deletes the given event */
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
 
+    /**
+     * Updates the event located at {@code filteredEventListIndex} with {@code editedEvent}.
+     *
+     * @throws UniqueEventList.DuplicateEventException if updating the event's details cause the event
+     *  to be equivalent to another existing event in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
+     */
     void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent)
             throws UniqueEventList.DuplicateEventException;
 
+    /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
+    /** Returns the filtered event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
 
+    /** Updates the filter of the filtered event list to show all events */
     void updateFilteredEventListToShowAll();
 
+    /** Updates the filter of the filtered event list to filter by the given keywords*/
     void updateFilteredEventList(Set<String> keywords);
 
+    /** Updates the filter of the filtered event list to filter by the given timeslot*/
     void updateFilteredEventList(Timeslot userInterestedTimeSlot);
 }

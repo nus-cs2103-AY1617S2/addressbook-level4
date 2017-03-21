@@ -78,7 +78,6 @@ public class XmlAdaptedEvent {
         final Location location = new Location(this.location);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(eventTags);
-        //TODO: do we need unique UniqueTimeslotList?
         return new Event(name, eventTimeslots, location, description, tags);
     }
 

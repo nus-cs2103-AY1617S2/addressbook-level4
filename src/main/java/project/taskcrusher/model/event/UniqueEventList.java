@@ -25,9 +25,9 @@ public class UniqueEventList implements Iterable<Event> {
      * @param candidate
      * @return {@code ObservableList} of events that have any overlapping timeslot with {@code candidate}.
      */
-    public ObservableList<Event> searchForOverlapingEvents(Timeslot candidate) {
+    public ObservableList<ReadOnlyEvent> getEventsWithOverlapingTimeslots(Timeslot candidate) {
         assert candidate != null;
-        ObservableList<Event> overlappingEvents =  FXCollections.observableArrayList();
+        ObservableList<ReadOnlyEvent> overlappingEvents =  FXCollections.observableArrayList();
 
         for (Event event: internalList) {
             if (event.hasOverlappingTimeslot(candidate)) {

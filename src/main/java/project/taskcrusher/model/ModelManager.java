@@ -67,6 +67,8 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
+    //=========== Task operations =========================================================================
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
@@ -81,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public synchronized void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
@@ -89,6 +91,8 @@ public class ModelManager extends ComponentManager implements Model {
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
     }
+
+    //=========== Event operations =========================================================================
 
     @Override
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
@@ -112,6 +116,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskListToShowAll();
         indicateUserInboxChanged();
     }
+
+    public UnmodifiableObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
+        return new UnmodifiableObservableList<>(userInbox.getEventsWithOverlappingTimeslots(candidate));
+    }
+
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -163,7 +172,6 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
     }
-
 
     //========== Inner classes/interfaces used for filtering =================================================
 
