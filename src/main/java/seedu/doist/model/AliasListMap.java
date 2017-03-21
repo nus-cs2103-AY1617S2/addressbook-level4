@@ -41,9 +41,6 @@ public class AliasListMap implements ReadOnlyAliasListMap {
      * @return a set of strings which are the default command words
      */
     public Set<String> getDefaultCommandWordSet() {
-        if (commandAliases == null) {
-            setDefaultCommandWords();
-        }
         return commandAliases.keySet();
     }
 
@@ -56,9 +53,6 @@ public class AliasListMap implements ReadOnlyAliasListMap {
      * Returns an unmodifiable list of the alias list of the specified default command word
      */
     public List<String> getAliasList(String defaultCommandWord) {
-        if (commandAliases == null) {
-            setDefaultCommandWords();
-        }
         return Collections.unmodifiableList(commandAliases.get(defaultCommandWord));
     }
 
