@@ -40,8 +40,6 @@ public interface Model {
 	void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException;
 
-	void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException;
-
 	/**
 	 * Returns the filtered event list as an
 	 * {@code UnmodifiableObservableList<ReadOnlyEvent>}
@@ -80,17 +78,6 @@ public interface Model {
 	 * keywords
 	 */
 	void updateFilteredEventList(Set<String> keywords);
-
-	/** Updates the switch to use SortedList */
-	void setToSortListSwitch();
-
-	/** Resets the switch to use FilteredList */
-	void unSetToSortListSwitch();
-
-	boolean getSortListSwitch();
-
-	/** Sorts the filtered event list */
-	void updateSortedEventList();
 
 	void getPreviousState();
 

@@ -14,12 +14,9 @@ import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
-import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 
 /**
  * Represents the in-memory model of the task manager data. All changes to any
@@ -35,10 +32,6 @@ public class ModelManager extends ComponentManager implements Model {
 	private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
-
-	private ObservableList<ReadOnlyEvent> observedEvents;
-	private SortedList<ReadOnlyEvent> sortedEvents;
-	private boolean toSort = false;
 
 	public ModelManager() {
 		this(new TaskManager(), new UserPrefs());
@@ -125,11 +118,6 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
-	@Override
-	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
-		// TODO Auto-generated method stub
-	}
-
 	// ========== Inner classes/interfaces used for filtering
 	// =================================================
 
@@ -171,33 +159,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	private void updateFilteredEventList(Expression expression) {
 		filteredEvents.setPredicate(expression::satisfies);
-	}
-
-	// =========== Sorted Event List Accessors
-	// =============================================================
-
-	@Override
-	public void setToSortListSwitch() {
-		this.toSort = true;
-	}
-
-	@Override
-	public void unSetToSortListSwitch() {
-		this.toSort = false;
-	}
-
-	@Override
-	public boolean getSortListSwitch() {
-		return toSort;
-	}
-
-	@Override
-	public void updateSortedEventList() {
-		updateSortedEventListByTitle();
-	}
-
-	private void updateSortedEventListByTitle() {
-		sortedEvents.sorted();
 	}
 
 	// ========== Inner classes/interfaces used for filtering
