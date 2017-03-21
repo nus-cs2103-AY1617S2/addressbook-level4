@@ -23,6 +23,10 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task);
 
+    //@@author A0144902L
+    /** Marks a given task as completed*/
+    void completeTask(int index, ReadOnlyTask taskToComplete) throws TaskList.TaskNotFoundException;
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.

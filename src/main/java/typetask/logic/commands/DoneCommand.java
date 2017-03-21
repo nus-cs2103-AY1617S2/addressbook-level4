@@ -35,8 +35,9 @@ public class DoneCommand extends Command {
 
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
 
+        //@@author A0144902L
         try {
-            model.deleteTask(taskToComplete);
+            model.completeTask(targetIndex - 1, taskToComplete);
             //Need to do: Add the completed task to the completed task list
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";

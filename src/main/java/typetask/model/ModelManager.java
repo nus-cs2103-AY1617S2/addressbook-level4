@@ -42,7 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with Task Manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredTasks = new FilteredList<>(this.taskManager.getIncompleteList());
     }
 
     public ModelManager() {
@@ -84,6 +84,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
+    }
+
+    //@@author A0144902L
+    @Override
+    public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        assert target != null;
+        taskManager.completeTask(target);
         indicateTaskManagerChanged();
     }
 

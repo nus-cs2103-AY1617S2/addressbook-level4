@@ -13,6 +13,7 @@ public class Task implements ReadOnlyTask {
     private Name name;
     private DueDate date;
     private Time time;
+    private boolean isCompleted;
 
     /**
      * Every field must be present and not null.
@@ -28,6 +29,16 @@ public class Task implements ReadOnlyTask {
         this.date = date;
         this.time = time;
     }
+
+    //@@author A0144902L
+    public Task(Name name, DueDate date, Time time, boolean isCompleted) {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.isCompleted = isCompleted;
+    }
+
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
@@ -47,6 +58,12 @@ public class Task implements ReadOnlyTask {
     public void setTime(Time time) {
         this.time = time;
     }
+
+    //@@author A0144902L
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+
     @Override
     public Name getName() {
         return name;
@@ -60,6 +77,12 @@ public class Task implements ReadOnlyTask {
         return time;
     }
 
+    //@@author A0144902L
+    @Override
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
     /**
      * Updates this task with the details of {@code replacement}.
      */
@@ -68,6 +91,15 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
         this.setTime(replacement.getTime());
+    }
+
+    /**
+     * @@author A0144902L
+     * Marks this task as completed {boolean is set TRUE}.
+     */
+    public void markComplete(ReadOnlyTask complete) {
+        assert complete != null;
+        this.setIsCompleted(true);
     }
 
     @Override

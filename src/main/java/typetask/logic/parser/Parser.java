@@ -10,6 +10,7 @@ import typetask.logic.commands.AddCommand;
 import typetask.logic.commands.ClearCommand;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.DeleteCommand;
+import typetask.logic.commands.DoneCommand;
 import typetask.logic.commands.EditCommand;
 import typetask.logic.commands.ExitCommand;
 import typetask.logic.commands.FindCommand;
@@ -65,6 +66,11 @@ public class Parser {
             return new DeleteCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD3:
             return new DeleteCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+        case DoneCommand.COMMAND_WORD2:
+            return new DoneCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

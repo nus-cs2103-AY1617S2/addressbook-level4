@@ -10,6 +10,7 @@ public interface ReadOnlyTask {
     Name getName();
     DueDate getDate();
     Time getTime();
+    boolean getIsCompleted();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -29,7 +30,9 @@ public interface ReadOnlyTask {
                .append(" DueDate: ")
                .append(getDate())
                .append(" Time: ")
-               .append(getTime());
+               .append(getTime())
+               .append(" Completed: ")
+               .append(getIsCompleted());
         return builder.toString();
     }
 

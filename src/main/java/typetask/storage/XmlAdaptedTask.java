@@ -20,7 +20,8 @@ public class XmlAdaptedTask {
     private String date;
     @XmlElement(required = true)
     private String time;
-
+    @XmlElement(required = true)
+    private Boolean isCompleted;
 
 
     /**
@@ -39,6 +40,7 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         date = source.getDate().value;
         time = source.getTime().value;
+        isCompleted = source.getIsCompleted();
     }
 
     /**
@@ -50,6 +52,10 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final DueDate date = new DueDate(this.date);
         final Time time = new Time(this.time);
-        return new Task(name, date, time);
+        boolean isCompleted = false;
+        if (this.isCompleted != null) {
+            isCompleted = this.isCompleted;
+        }
+        return new Task(name, date, time, isCompleted);
     }
 }
