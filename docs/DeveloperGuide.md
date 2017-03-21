@@ -575,14 +575,14 @@ Use case ends
 
 ## Appendix C : Non Functional Requirements
 
-*1.* Should be a desktop app (i.e. not a mobile or Web app)
+#### 1. Should be a desktop app (i.e. not a mobile or Web app)
 
 > Desktop apps are more general than other platforms such as mobile/embedded/web. Therefore, they provide a good
 starting point before you move on to those platforms.
 > You are allowed to integrate with online services such as Google Calendar as long as the app can provide a
 reasonable level of functionality even when offline.
 
-*2.* [CLI](#command-line-interface) should be the primary mode of input
+#### 2. [CLI](#command-line-interface) should be the primary mode of input
 
 > If you implement a [GUI](graphical-user-interface), it should be primarily for output (i.e. the GUI is used to give
 visual feedback rather than to collect input).
@@ -590,30 +590,30 @@ visual feedback rather than to collect input).
 > Mouse actions should have keyboard alternatives and typing compared to mouse or key combinations.
 > Design the app in a way that you can perform actions faster by typing compared to mouse or key combinations.
 
-*3.* Should work stand-alone, not a plug-in to another software
+#### 3. Should work stand-alone, not a plug-in to another software
 
 > However, you can build optional extensions that integrate your application with other existing software.
 > Furthermore, you are allowed to build extensions that can plug into your software.
 
-*4.* Should not use relational databases
+#### 4. Should not use relational databases
 
 > Data storage must be done using text files you create yourself.
 
-*5.* Data should be stored locally the form of a human editable text file
+#### 5. Data should be stored locally the form of a human editable text file
 
 > This is to allow advanced users to manipulate the data by editing the data file.
 
-*6.* Should follow object-oriented paradigm
-*7.* Should work on Windows 7 or later
-*8.* Should work without requiring an installer
+#### 6. Should follow object-oriented paradigm
+#### 7. Should work on Windows 7 or later
+#### 8. Should work without requiring an installer
 
 > Having an optional installer is fine as long as the portable (non-installed) version has all the critical
 functionality.
 
-*9.* Should conform to the Java coding standard.
-*10.* Should process and respond to user commands within 1s.
-*11.* Should work on any [mainstream OS](#mainstream-os) as long as it has Java 1.8.0_60 or higher installed.
-*12.* A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+#### 9. Should conform to the Java coding standard
+#### 10. Should process and respond to user commands within 1s
+#### 11. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 1.8.0_60 or higher installed
+#### 12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
 should be able to accomplish most of the tasks faster by typing commands as compared to using the mouse.
 
 
