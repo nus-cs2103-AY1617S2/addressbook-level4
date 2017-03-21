@@ -93,7 +93,7 @@ public class XmlTaskManagerStorageTest {
         xmlTaskManagerStorage.saveTaskManager(original, filePath); //saving task with null note
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get(); //reading task with null note
         assertEquals(original, new TaskManager(readBack));
-        
+
         original.addTask(new Task(td.taskWithoutDeadline));
         xmlTaskManagerStorage.saveTaskManager(original, filePath); //saving task with null deadline
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get(); //reading task with null deadline

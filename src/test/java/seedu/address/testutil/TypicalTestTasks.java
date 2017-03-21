@@ -11,7 +11,7 @@ import seedu.address.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask laundry, dishes, quiz, grocery, reflection, consultation,
-                        payment, submission, application, taskWithoutPriority, 
+                        payment, submission, application, taskWithoutPriority,
                         taskWithoutNote, taskWithoutDeadline;
 
     public TypicalTestTasks() {
