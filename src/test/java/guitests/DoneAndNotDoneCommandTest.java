@@ -6,6 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.testutil.TestTask;
+import seedu.address.testutil.TestUtil;
 
 public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
 
@@ -51,6 +52,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
 
     private void assertDoneSuccess(int index) {
         TestTask[] currentList = td.getTypicalTasks();
+        TestUtil.assignUiIndex(currentList);
         TestTask doneTask = currentList[index - 1];
         commandBox.runCommand("done " + doneTask.getID());
         assertResultMessage(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask));
@@ -63,6 +65,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
 
     private void assertNotDoneSuccess(int index) {
         TestTask[] currentList = td.getTypicalTasks();
+        TestUtil.assignUiIndex(currentList);
         TestTask notDoneTask = currentList[index - 1];
         commandBox.runCommand("notdone " + notDoneTask.getID());
         assertResultMessage(String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask));

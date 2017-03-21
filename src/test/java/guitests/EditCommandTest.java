@@ -12,6 +12,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Name;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestTask;
+import seedu.address.testutil.TestUtil;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
@@ -19,9 +20,10 @@ public class EditCommandTest extends TaskManagerGuiTest {
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
-
+   
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
+        TestUtil.assignUiIndex(expectedTasksList);
         String detailsToEdit = "Bobby t/husband";
         String taskManagerIndex = "F1";
 
@@ -34,6 +36,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
+        TestUtil.assignUiIndex(expectedTasksList);
         String detailsToEdit = "t/sweetie t/bestie";
         String taskManagerIndex = "F2";
 
@@ -47,7 +50,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
+        TestUtil.assignUiIndex(expectedTasksList);
+        String detailsToEdit = "tag";
         String taskManagerIndex = "F2";
 
         TestTask taskToEdit = expectedTasksList[1];
@@ -59,6 +63,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
+        TestUtil.assignUiIndex(expectedTasksList);
         commandBox.runCommand("find CS2106");
 
         String detailsToEdit = "Complete CS2103 Lab Assignment";
@@ -102,6 +107,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
+        TestUtil.assignUiIndex(expectedTasksList);
         commandBox.runCommand("edit F3 Do math assignment t/math");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
@@ -124,6 +130,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     private void assertEditSuccess(String filteredTaskListIndex,
             String detailsToEdit, TestTask editedTask)
             throws IllegalArgumentException, IllegalValueException {
+        
         commandBox.runCommand(
                 "edit " + filteredTaskListIndex + " " + detailsToEdit);
 
