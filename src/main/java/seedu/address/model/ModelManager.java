@@ -1,6 +1,9 @@
 package seedu.address.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -9,8 +12,10 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -24,7 +29,7 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager addressBook;
+    private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
     private FilteredList<ReadOnlyTask> completedTasks;
     /**
@@ -35,10 +40,10 @@ public class ModelManager extends ComponentManager implements Model {
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
-
-        this.addressBook = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-        completedTasks = new FilteredList<>(this.addressBook.getCompletedTaskList());
+ 
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        completedTasks = new FilteredList<>(this.taskManager.getCompletedTaskList());
+        this.taskManager = new TaskManager(taskManager);
     }
 
     public ModelManager() {
@@ -47,29 +52,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
-        return addressBook;
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new TaskManagerChangedEvent(addressBook));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
+        taskManager.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -80,7 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
+        taskManager.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
 
@@ -88,12 +93,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void insertTasktoIndex(int indexToBeRestored, Task deletedTask)
             throws DuplicateTaskException {
-        addressBook.addTaskToIndex(indexToBeRestored, deletedTask);
+        taskManager.addTaskToIndex(indexToBeRestored, deletedTask);
     }
 
     @Override
     public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
-        addressBook.setTasks(list);
+        taskManager.setTasks(list);
     }
 
     @Override
@@ -103,12 +108,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
-        addressBook.transferTaskToComplete(t);
+        taskManager.transferTaskToComplete(t);
     }
 
     @Override
     public void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
-        addressBook.transferTaskFromComplete(t);
+        taskManager.transferTaskFromComplete(t);
     }
     //@@author
 
@@ -132,6 +137,28 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+
+    @Override
+    public void updateUpcomingTaskList() {
+        Date currentDate = new Date();
+        String textDate1 = new SimpleDateFormat("d-MMM-yyyy").format(currentDate);
+        String textDate2 = new SimpleDateFormat("dd-MMM-yyyy").format(currentDate);
+
+        Predicate<? super ReadOnlyTask> pred  = s -> s.getDate().toString().equals(textDate1)
+            || s.getDate().toString().equals(textDate2);
+        filteredTasks.setPredicate(pred);
+    }
+
+    //@@author A0139322L
+    @Override
+    public void updateFilteredTagTaskList(String tagName) throws IllegalValueException {
+        Tag tag;
+        tag = new Tag(tagName);
+
+        Predicate<? super ReadOnlyTask> pred = s -> s.getTags().contains(tag);
+        filteredTasks.setPredicate(pred);
+    }
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -184,4 +211,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
 }

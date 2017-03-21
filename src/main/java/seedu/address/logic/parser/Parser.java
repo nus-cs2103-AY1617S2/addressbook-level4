@@ -14,6 +14,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UncompleteCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UpcomingCommand;
 
 /**
  * Parses user input.
@@ -67,6 +69,11 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        //@@author A0139322L
+        case FindTagCommand.COMMAND_WORD:
+            return new FindTagCommandParser().parse(arguments);
+        //@@author
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -75,6 +82,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UpcomingCommand.COMMAND_WORD:
+            return new UpcomingCommand();
 
         //@@Dylan Sng A0139161J
         case UndoCommand.COMMAND_WORD:

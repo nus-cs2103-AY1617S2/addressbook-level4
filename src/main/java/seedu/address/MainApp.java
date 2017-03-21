@@ -20,6 +20,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.TimedEvent;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -66,6 +67,8 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+        initNotifications();
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -160,6 +163,13 @@ public class MainApp extends Application {
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
+
+    //@@author A0141928B
+    public void initNotifications() {
+        TimedEvent event = new TimedEvent(model.getTaskManager().getTaskList(), 120000);
+        event.start();
+    }
+    //@@author
 
     @Override
     public void start(Stage primaryStage) {
