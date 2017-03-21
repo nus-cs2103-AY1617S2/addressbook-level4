@@ -710,7 +710,7 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given end date. Other fields will have some dummy values.
          */
-        Task generateTaskWithDeadline(String endTime) throws Exception {
+        private Task generateTaskWithDeadline(String endTime) throws Exception {
             return new Task(
                     new Name("Finish assignment"),
                     new Priority("hi"),
