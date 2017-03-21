@@ -26,6 +26,9 @@ public interface Model {
 	 */
 	void resetData(ReadOnlyTaskManager newData);
 
+	/** Sorts the filtered event list */
+	void sortFilteredEventList();
+
 	/**
 	 * Updates the event located at {@code filteredEventListIndex} with
 	 * {@code editedEvent}.
@@ -47,6 +50,12 @@ public interface Model {
 	 * {@code UnmodifiableObservableList<ReadOnlyEvent>}
 	 */
 	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
+
+	/**
+	 * Returns the sorted event list as an
+	 * {@code UnmodifiableObservableList<ReadOnlyEvent> }
+	 */
+	UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList();
 
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
@@ -92,8 +101,9 @@ public interface Model {
 	/** Sorts the filtered event list */
 	void updateSortedEventList();
 
-	void getPreviousState();
+    void getPreviousState();
 
-	void getNextState();
+    void getNextState();
+
 
 }
