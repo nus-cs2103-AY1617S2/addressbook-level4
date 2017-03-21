@@ -64,8 +64,9 @@ for the function to work.
 Examples: 
 * `edit 2` m/Go to Ralph's
 
-## Googling a Task or Phrase: `google [INDEX] [KEYWORDS]` 
-> Googles the task name at the specified index or Googles the key words that the user enters.  
+## Googling a Task or Phrase: `google` 
+Format: `google [INDEX] [KEYWORDS]`
+> Googles the task name at the specified index or Googles the key words that the user enters. A user can additionally Google a task name by single clicking on a task.
 
 ## Clearing All Entries : `clear`
 Clears all tasks from the task manager.<br>
