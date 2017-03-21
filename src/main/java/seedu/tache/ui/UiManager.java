@@ -2,7 +2,12 @@ package seedu.tache.ui;
 
 import java.util.logging.Logger;
 
+import javax.swing.KeyStroke;
+
 import com.google.common.eventbus.Subscribe;
+import com.tulskiy.keymaster.common.HotKey;
+import com.tulskiy.keymaster.common.HotKeyListener;
+import com.tulskiy.keymaster.common.Provider;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -31,6 +36,7 @@ public class UiManager extends ComponentManager implements Ui {
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
+    private Provider hotkeyManager;
     private MainWindow mainWindow;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
@@ -48,6 +54,8 @@ public class UiManager extends ComponentManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
+        initializeSystemHotkey(primaryStage);
+
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
@@ -64,6 +72,9 @@ public class UiManager extends ComponentManager implements Ui {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
         mainWindow.releaseResources();
+        // Unbind hotkey
+        hotkeyManager.reset();
+        hotkeyManager.stop();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -96,6 +107,31 @@ public class UiManager extends ComponentManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    /**
+     * Initialize HotkeyManager and bind show/hide hotkey
+     */
+    private void initializeSystemHotkey(Stage stage) {
+        hotkeyManager = Provider.getCurrentProvider(false);
+        hotkeyManager.register(KeyStroke.getKeyStroke("control alt D"), new HotKeyListener() {
+            public void onHotKey(HotKey hotKey) {
+                System.out.println(hotKey);
+                if (stage.isFocused()) {
+                    if (stage.isIconified()) {
+                        Platform.runLater(()-> {
+                            stage.setIconified(false); });
+                    } else {
+                        Platform.runLater(()-> {
+                            stage.setIconified(true); });
+                    }
+                } else {
+                    Platform.runLater(()-> {
+                        stage.setIconified(false);
+                        stage.toFront(); });
+                }
+            }
+        });
     }
 
     //==================== Event Handling Code ===============================================================
