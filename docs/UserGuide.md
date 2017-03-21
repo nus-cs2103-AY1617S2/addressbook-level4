@@ -1,20 +1,20 @@
 #
 # Burdens: User Guide
 
-By: TEAM W09-B1          Since: Mar 2017
+By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp;
 
 1. Introduction
 2. [Quick Start](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#quick-start)
 3. [Features](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#features)
-   >3.1 Help<br/>
-  3.2  Add tasks<br/>
-  3.3  List tasks<br/>
-  3.4  Edit tasks<br/>
-  3.5  Find tasks<br/>
-  3.6  Delete tasks<br/>
-  3.7  Mark tasks as complete<br/>
-  3.8  Mark tasks as incomplete<br/>
-  3.9  Undo<br/>
+   >3.1 &nbsp; Help<br/>
+  3.2 &nbsp; Add tasks<br/>
+  3.3 &nbsp; List tasks<br/>
+  3.4 &nbsp; Edit tasks<br/>
+  3.5 &nbsp; Find tasks<br/>
+  3.6 &nbsp; Delete tasks<br/>
+  3.7 &nbsp; Mark tasks as complete<br/>
+  3.8 &nbsp; Mark tasks as incomplete<br/>
+  3.9 &nbsp; Undo<br/>
   3.10 Redo<br/>
   3.11 Select tasks<br/>
   3.12 Clear<br/>
