@@ -1,6 +1,11 @@
 package seedu.toluist.ui;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,7 +22,9 @@ import javafx.stage.Stage;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.GuiSettings;
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
@@ -29,8 +36,8 @@ import seedu.toluist.ui.view.TaskListUiView;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
-
-    private static final String ICON = "/images/address_book_32.png";
+    private static final Logger logger = LogsCenter.getLogger(MainWindow.class);
+    private static final String LOGO_IMAGE_PATH = "/images/logo.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 800;
@@ -64,6 +71,7 @@ public class MainWindow extends UiPart<Region> {
         this.dispatcher = dispatcher;
 
         // Configure the UI
+        setLogo();
         setWindowMinSize();
         setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
@@ -165,6 +173,26 @@ public class MainWindow extends UiPart<Region> {
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
+    }
+
+    /**
+     * Sets the logo for the app
+     */
+    private void setLogo() {
+        FxViewUtil.setStageIcon(primaryStage, LOGO_IMAGE_PATH);
+        // Only in macOS, you can try to use reflection to access this library
+        // and use it to set a custom app icon
+        try {
+            Class applicationClass = Class.forName("com.apple.eawt.Application");
+            Method getApplication = applicationClass.getMethod("getApplication");
+            Object application = getApplication.invoke(applicationClass);
+            Method setDockIconImage = applicationClass.getMethod("setDockIconImage", java.awt.Image.class);
+            setDockIconImage.invoke(application,
+                    new ImageIcon(MainWindow.class.getResource(LOGO_IMAGE_PATH)).getImage());
+        } catch (NoSuchMethodException | IllegalAccessException
+                | InvocationTargetException | ClassNotFoundException e) {
+            logger.info("Not on macOS");
+        }
     }
 
     /**
