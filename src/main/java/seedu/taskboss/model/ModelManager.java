@@ -118,40 +118,42 @@ public class ModelManager extends ComponentManager implements Model {
             throws IllegalValueException {
         assert oldCategory != null;
         taskbossHistory.push(new TaskBoss(this.taskBoss));
+        FilteredList<ReadOnlyTask> oldCategoryTaskList = filteredTasks;
+        int listSize = oldCategoryTaskList.size();
 
-        for (int i = 0; i < filteredTasks.size(); i++) {
+        for (int i = 0; i < listSize; i++) {
             // get each task on the filtered task list
-            ReadOnlyTask target = filteredTasks.get(i);
+            ReadOnlyTask target = oldCategoryTaskList.get(i);
             // get the UniqueCategoryList of the task
             UniqueCategoryList targetCategoryList = target.getCategories();
 
             UniqueCategoryList newCategoryList = new UniqueCategoryList();
 
-            int targetListSize = targetCategoryList.asObservableList().size();
-            for (int j = 0; j < targetListSize; j++) {
-                Category tempCategory = targetCategoryList.asObservableList().get(j);
-                if (!tempCategory.equals(oldCategory)) {
+            for (Category category : targetCategoryList) {
+                if (category.equals(oldCategory) && !newCategoryList.contains(newCategory)) {
                     try {
-                        newCategoryList.add(tempCategory);
+                        newCategoryList.add(newCategory);
                     } catch (DuplicateCategoryException dce) {
                         dce.printStackTrace();
                     }
+                } else {
+                    newCategoryList.add(category);
                 }
             }
-
-            // at this point, we have taken care of all the categories
-            // except for the one to be renamed
-            try {
-                newCategoryList.add(newCategory);
-            } catch (DuplicateCategoryException dce) {
-                dce.printStackTrace();
-            }
+//
+//            // at this point, we have taken care of all the categories
+//            // except for the one to be renamed
+//            try {
+//                newCategoryList.add(newCategory);
+//            } catch (DuplicateCategoryException dce) {
+//                dce.printStackTrace();
+//            }
 
             Task editedTask = new Task(target.getName(),
                     target.getPriorityLevel(), target.getStartDateTime(),
                     target.getEndDateTime(), target.getInformation(),
                     newCategoryList);
-            int taskBossIndex = filteredTasks.getSourceIndex(i);
+            int taskBossIndex = oldCategoryTaskList.getSourceIndex(i);
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
 
