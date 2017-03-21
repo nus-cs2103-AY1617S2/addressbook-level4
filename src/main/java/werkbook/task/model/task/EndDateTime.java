@@ -42,7 +42,6 @@ public class EndDateTime {
      * Returns if a given string is a valid end datetime.
      */
     public static boolean isValidEndDateTime(String test) {
-        END_DATETIME_FORMATTER.setLenient(false);
         try {
             END_DATETIME_FORMATTER.parse(test);
         } catch (ParseException e) {
