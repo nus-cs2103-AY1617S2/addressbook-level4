@@ -1,6 +1,7 @@
 package seedu.ezdo.model;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.HashSet;
 import java.util.Optional;
@@ -99,9 +100,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
+    public synchronized void doneTasks(ArrayList<Task> doneTasks) throws TaskNotFoundException {
         updateStacks();
-        ezDo.doneTask(doneTask);
+        ezDo.doneTasks(doneTasks);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
@@ -306,6 +307,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
     public void sortTasks(SortCriteria sortCriteria) {
         this.currentSortCriteria = sortCriteria;
         ezDo.sortTasks(sortCriteria);
