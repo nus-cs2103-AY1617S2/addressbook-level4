@@ -21,7 +21,6 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD_SHORT + " ed";
 
     public static final String MESSAGE_SUCCESS = "Sorted all tasks.";
-    public static final String ERROR_INVALID_SORT_TYPE = "Invalid sort type.";
 
     private SortBy sortType;
 
@@ -32,10 +31,6 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException, InvalidDatesException {
         assert model != null;
-
-        if (sortType == null) {
-            return new CommandResult(ERROR_INVALID_SORT_TYPE);
-        }
 
         try {
             model.sortTasks(sortType);
