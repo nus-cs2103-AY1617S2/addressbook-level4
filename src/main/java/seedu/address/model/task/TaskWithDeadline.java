@@ -24,8 +24,8 @@ public class TaskWithDeadline extends Task {
             Date date2, boolean isDone) throws IllegalValueException {
         super(name, tags, isDone);
         if (date2 != null) {
-            this.deadline = new Deadline(date2);
-            this.startingTime = new StartingTime(date1);
+            this.deadline = new Deadline(date1);
+            this.startingTime = new StartingTime(date2);
         } else {
             this.deadline = new Deadline(date1);
         }
