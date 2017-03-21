@@ -1,5 +1,7 @@
 package seedu.tache.logic.commands;
 
+import java.util.Stack;
+
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.Model;
@@ -9,6 +11,7 @@ import seedu.tache.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected static Stack<Undoable> undoHistory = new Stack<Undoable>();
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -39,5 +42,13 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    //@@author A0150120H
+    /**
+     * Clears the undo history
+     */
+    protected static void clearUndoHistory() {
+        undoHistory = new Stack<Undoable>();
     }
 }
