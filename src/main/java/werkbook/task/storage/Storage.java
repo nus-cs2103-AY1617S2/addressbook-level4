@@ -1,6 +1,7 @@
 package werkbook.task.storage;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 
 import werkbook.task.commons.events.model.TaskListChangedEvent;
@@ -35,4 +36,6 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskListChangedEvent(TaskListChangedEvent abce);
+
+    void setTaskListFilePath(Path filePath) throws IOException;
 }

@@ -1,16 +1,19 @@
 package werkbook.task.storage;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import werkbook.task.commons.core.ComponentManager;
+import werkbook.task.commons.core.Config;
 import werkbook.task.commons.core.LogsCenter;
 import werkbook.task.commons.events.model.TaskListChangedEvent;
 import werkbook.task.commons.events.storage.DataSavingExceptionEvent;
 import werkbook.task.commons.exceptions.DataConversionException;
+import werkbook.task.commons.util.ConfigUtil;
 import werkbook.task.model.ReadOnlyTaskList;
 import werkbook.task.model.UserPrefs;
 
@@ -20,9 +23,14 @@ import werkbook.task.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private Config config;
     private TaskListStorage taskListStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    public StorageManager(Config config) {
+        this(config.getTaskListFilePath(), config.getUserPrefsFilePath());
+        this.config = config;
+    }
 
     public StorageManager(TaskListStorage taskListStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -32,6 +40,13 @@ public class StorageManager extends ComponentManager implements Storage {
 
     public StorageManager(String taskListFilePath, String userPrefsFilePath) {
         this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    }
+
+    // ================ Config methods =================================
+    @Override
+    public void setTaskListFilePath(Path filePath) throws IOException {
+        config.setTaskListFilePath(filePath.toString());
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,7 +90,6 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(taskList, filePath);
     }
-
 
     @Override
     @Subscribe
