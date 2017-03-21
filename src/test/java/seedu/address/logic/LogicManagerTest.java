@@ -484,7 +484,7 @@ public class LogicManagerTest {
             cmd.append(" d/").append(p.getDescription());
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" ##").append(t.tagName);
             }
 
             return cmd.toString();
@@ -569,8 +569,8 @@ public class LogicManagerTest {
             return new Task(
                     new Title(name),
                     new Venue("location"),
-                    new StartTime(""),
-                    new EndTime("dusk"),
+                    new StartTime("Today"),
+                    new EndTime("Tomorrow"),
                     new UrgencyLevel("3"),
                     new Description("I love 2103!!"),
                     new UniqueTagList(new Tag("tag")));
