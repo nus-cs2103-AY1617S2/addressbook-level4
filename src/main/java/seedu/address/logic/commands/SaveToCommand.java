@@ -42,7 +42,7 @@ public class SaveToCommand extends Command {
         if (FileUtil.isWritable(path)) {
             storage.setTaskManagerFilePath(path);
             config.setTaskManagerFilePath(path);
-            model.updateSaveLocation();
+            model.updateSaveLocation(path);
         } else {
             throw new CommandException(String.format(MESSAGE_WRITE_ACCESS_DENIED, path));
         }

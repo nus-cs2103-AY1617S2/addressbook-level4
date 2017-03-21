@@ -28,6 +28,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
+        commandTextField.requestFocus();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {

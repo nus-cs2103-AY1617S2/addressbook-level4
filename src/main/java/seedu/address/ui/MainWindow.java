@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.ListIterator;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -127,7 +125,7 @@ public class MainWindow extends UiPart<Region> {
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
         taskListCompleted = FXCollections.observableArrayList();
-        prepareTaskList(logic.getFilteredTaskList());
+        prepareTaskList();
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -141,23 +139,13 @@ public class MainWindow extends UiPart<Region> {
      * Prepares categorised task list for today/future/completed ListView
      *
      */
-    protected void prepareTaskList(ObservableList<ReadOnlyTask> taskList) {
-        taskListToday.clear();
-        taskListFuture.clear();
-        taskListCompleted.clear();
-        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
-        while (iter.hasNext()) {
-            ReadOnlyTask tmpTask = iter.next();
-            // set task id to be displayed, the id here is 1-based
-            tmpTask.setID(iter.nextIndex());
-            if (tmpTask.isToday() && !tmpTask.isDone()) {
-                taskListToday.add(tmpTask);
-            } else if (!tmpTask.isDone()) {
-                taskListFuture.add(tmpTask);
-            } else {
-                taskListCompleted.add(tmpTask);
-            }
-        }
+    public void prepareTaskList(){
+        // Assume the three lists will always be initialised by fillInnerParts()
+        assert taskListToday != null;
+        assert taskListFuture != null;
+        assert taskListCompleted != null;
+        
+        logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted); 
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

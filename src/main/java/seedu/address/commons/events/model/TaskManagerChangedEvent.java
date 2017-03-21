@@ -7,9 +7,15 @@ import seedu.address.model.ReadOnlyTaskManager;
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
+    public final String message;
 
-    public TaskManagerChangedEvent(ReadOnlyTaskManager data) {
+    public TaskManagerChangedEvent(ReadOnlyTaskManager data, String message) {
         this.data = data;
+        this.message = message;
+    }
+    
+    public String getMessage(){
+        return this.message;
     }
 
     @Override

@@ -33,10 +33,12 @@ public class AddCommandParser {
         // find and remove tags
         String tagsString = getArgument(CliSyntax.TAGS);
         System.out.println("tags: " + tagsString);
-        if (tagsString != null)
-            tags = tagsString.split(" ");
-        for (String tag : tags)
+        if (tagsString != null) {
+            tags = tagsString.split("\\s+");
+        }
+        for (String tag : tags) {
             System.out.println(tag);
+        }
 
         // find and remove starting time and deadline if the syntax is "<name>
         // from <starting time> to <deadline>"

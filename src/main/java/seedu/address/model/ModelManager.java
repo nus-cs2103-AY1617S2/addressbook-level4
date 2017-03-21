@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.util.Date;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -28,6 +30,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private static String MESSAGE_ON_DELETE = "Task deleted";
+    private static String MESSAGE_ON_ADD = "Task added";
+    private static String MESSAGE_ON_RESET = "Task list loaded";
+    private static String MESSAGE_ON_UPDATE = "Task updated";
+    private static String MESSAGE_ON_SAVETO = "Save location changed to ";
+    // TODO change message to fit updateFilteredTaskList's use cases
+    private static String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -50,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(MESSAGE_ON_RESET);
     }
 
     @Override
@@ -59,15 +68,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+    private void indicateTaskManagerChanged(String message) {
+        raise(new TaskManagerChangedEvent(taskManager, message));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target)
             throws TaskNotFoundException {
         taskManager.removeTask(target);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(MESSAGE_ON_DELETE);
     }
 
     @Override
@@ -75,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(MESSAGE_ON_ADD);
     }
 
     @Override
@@ -86,12 +95,12 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks
                 .getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(MESSAGE_ON_UPDATE);
     }
 
     @Override
-    public void updateSaveLocation() {
-        indicateTaskManagerChanged();
+    public void updateSaveLocation(String path) {
+        indicateTaskManagerChanged(MESSAGE_ON_SAVETO+path);
     }
 
     // =========== Filtered Task List Accessors
@@ -105,7 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(MESSAGE_ON_UPDATELIST);
     }
 
     @Override
@@ -122,7 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
             predicate = predicate.or(isTagsContainKeyword(tagKeys));
         }
         filteredTasks.setPredicate(predicate);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(MESSAGE_ON_UPDATELIST);
     }
 
     // ========== Inner classes/interfaces used for filtering
@@ -152,6 +161,27 @@ public class ModelManager extends ComponentManager implements Model {
                 return f;
             }).findAny().isPresent();
         };
+    }
+
+    @Override
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,ObservableList<ReadOnlyTask> taskListCompleted) {
+        ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
+        taskListToday.clear();
+        taskListFuture.clear();
+        taskListCompleted.clear();
+        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
+        while (iter.hasNext()) {
+            ReadOnlyTask tmpTask = iter.next();
+            // set task id to be displayed, the id here is 1-based
+            tmpTask.setID(iter.nextIndex());
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                taskListToday.add(tmpTask);
+            } else if (!tmpTask.isDone()) {
+                taskListFuture.add(tmpTask);
+            } else {
+                taskListCompleted.add(tmpTask);
+            }
+        }
     }
 
     public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
