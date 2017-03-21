@@ -160,7 +160,7 @@ public class LogicManagerTest {
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
-        if (!inputCommand.equals("sort")) {
+        if (!"sort".equals(inputCommand)) {
             assertEquals(expectedTaskManager, latestSavedTaskManager);
         }
     }
@@ -457,7 +457,7 @@ public class LogicManagerTest {
 
         //Undo adding one task
         model.addTask(testTask1);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.EMPTY_LIST);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
 
         //Undo adding task when there is 1 existing task
         model.resetData(new TaskManager());
