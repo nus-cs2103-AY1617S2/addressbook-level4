@@ -16,51 +16,51 @@ public class TypicalTestTasks {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
                     .withInformation("123, Jurong West Ave 6, #08-111")
-                    .withPriorityLevel("3")
+                    .withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
                     .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("3")
+                    .withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
+            carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
+            daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("2")
+            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("2")
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
+            george = new TaskBuilder().withName("George Best").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("4th street").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("2")
+            hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("2")
+            ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("chicago ave").build();
-            johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("2")
+            johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
-            kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("1")
+            kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("Yes")
                     .withStartDateTime("today 10am")
                     .withEndDateTime("next wed")
                     .withInformation("clementi ave 2").build();
