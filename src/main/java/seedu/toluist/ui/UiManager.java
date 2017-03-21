@@ -46,7 +46,8 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, dispatcher);
             mainWindow.render();
             mainWindow.show();
-            dispatcher.dispatch(this, "");
+            String listCommand = "list";
+            dispatcher.dispatch(this, listCommand);
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);

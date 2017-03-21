@@ -35,9 +35,9 @@ public class TabView extends UiView {
     protected void viewDidMount() {
         UiStore uiStore = UiStore.getInstance();
         String taskInfo = " ("
-                + uiStore.getShownTasks().stream()
+                + uiStore.getTasks().stream()
                          .filter(switchPredicate.getPredicate()).collect(Collectors.toList()).size()
-                + "/" + uiStore.getShownTasks().size() + ")";
+                + "/" + uiStore.getTasks().size() + ")";
         tabShortcutLabel.setText(switchPredicate.getDisplayName().substring(0, 1));
         tabLabel.setText(switchPredicate.getDisplayName().substring(1) + taskInfo);
         if (isSelected) {

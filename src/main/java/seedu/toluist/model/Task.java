@@ -21,7 +21,7 @@ public class Task implements Comparable<Task> {
     private TaskPriority priority = TaskPriority.LOW;
 
     public enum TaskPriority {
-        LOW, HIGH
+        HIGH, LOW
     }
 
     /**
@@ -188,18 +188,18 @@ public class Task implements Comparable<Task> {
 
     @Override
     /**
-     * Compare by overdue first -> end date -> start date -> priority -> description
+     * Compare by overdue first -> priority -> end date -> start date -> description
      * Floating tasks are put to the end
      */
     public int compareTo(Task comparison) {
         if (isOverdue() != comparison.isOverdue()) {
             return isOverdue() ? -1 : 1;
+        } else if (priority.compareTo(comparison.priority) != 0) {
+            return priority.compareTo(comparison.priority);
         } else if (!Objects.equals(endDateTime, comparison.endDateTime)) {
             return DateTimeUtil.isBeforeOrEqual(endDateTime, comparison.endDateTime) ? -1 : 1;
         } else if (!Objects.equals(startDateTime, comparison.startDateTime)) {
             return DateTimeUtil.isBeforeOrEqual(startDateTime, comparison.startDateTime) ? -1 : 1;
-        } else if (priority.compareTo(comparison.priority) != 0) {
-            return priority.compareTo(comparison.priority);
         } else {
             return this.description.compareToIgnoreCase(comparison.description);
         }
