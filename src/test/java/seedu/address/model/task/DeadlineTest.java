@@ -18,6 +18,8 @@ public class DeadlineTest {
         assertFalse(Deadline.isValidDeadline("12032017")); // wrong format
 
         // valid deadlines
+        assertTrue(Deadline.isValidDeadline("14-Mar-2017"));
         assertTrue(Deadline.isValidDeadline("15-Mar-2017"));
+        assertTrue(Deadline.isValidDeadline("16-Mar-2017"));
     }
 }
