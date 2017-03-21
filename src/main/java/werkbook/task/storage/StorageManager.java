@@ -12,6 +12,7 @@ import werkbook.task.commons.core.Config;
 import werkbook.task.commons.core.LogsCenter;
 import werkbook.task.commons.events.model.TaskListChangedEvent;
 import werkbook.task.commons.events.storage.DataSavingExceptionEvent;
+import werkbook.task.commons.events.storage.TaskListStorageChangedEvent;
 import werkbook.task.commons.exceptions.DataConversionException;
 import werkbook.task.commons.util.ConfigUtil;
 import werkbook.task.model.ReadOnlyTaskList;
@@ -49,6 +50,7 @@ public class StorageManager extends ComponentManager implements Storage {
         this.taskListStorage = new XmlTaskListStorage(filePath.toString());
         config.setTaskListFilePath(filePath.toString());
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        raise(new TaskListStorageChangedEvent(filePath.toString()));
     }
     //@@author
 
