@@ -9,7 +9,7 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
-    <AnchorPane fx:id="mainPane">
-        <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" AnchorPane.rightAnchor="0.0" />
+    <AnchorPane fx:id="mainPane" layoutY="16.0" prefHeight="214.0" prefWidth="582.0" styleClass="anchor-pane-with-border">
+        <TextArea fx:id="resultDisplay" editable="false" layoutX="12.0" layoutY="-10.0" prefHeight="214.0" prefWidth="559.0" styleClass="result-display" AnchorPane.rightAnchor="11.0" />
     </AnchorPane>
 </AnchorPane>
