@@ -146,14 +146,18 @@ public class ParserUtil {
         flexiblePrefixes = new Hashtable<String, String>();
         //prefixes
         flexiblePrefixes.put("tag/", "t/");
+        flexiblePrefixes.put("T/", "t/");
         flexiblePrefixes.put("tags/", "t/");
         flexiblePrefixes.put("comment/", "c/");
         flexiblePrefixes.put("comments/", "c/");
+        flexiblePrefixes.put("C/", "c/");
         flexiblePrefixes.put("info/", "c/");
         flexiblePrefixes.put("priority/", "p/");
         flexiblePrefixes.put("urgency/", "p/");
+        flexiblePrefixes.put("P/", "p/");
         flexiblePrefixes.put("date/", "d/");
         flexiblePrefixes.put("dates/", "d/");
+        flexiblePrefixes.put("D/", "d/");
 
     }
 
