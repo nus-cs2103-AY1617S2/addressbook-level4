@@ -269,6 +269,18 @@
     -fx-padding: 8 1 8 1;
 }
 
+.priority-high {
+    -fx-text-fill: #FF6464;
+}
+
+.priority-mid {
+    -fx-text-fill: #68AB1F;
+}
+
+.priority-low {
+    -fx-text-fill: #D8D8D8;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: transparent;

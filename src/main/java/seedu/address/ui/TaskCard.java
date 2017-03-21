@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Optional;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -13,6 +15,10 @@ import seedu.address.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+
+    private static final String STYLE_PRIORITY_HIGH = "priority-high";
+    private static final String STYLE_PRIORITY_MID = "priority-mid";
+    private static final String STYLE_PRIORITY_LOW = "priority-low";
 
     @FXML
     private HBox cardPane;
@@ -53,7 +59,33 @@ public class TaskCard extends UiPart<Region> {
                 .map(String::toUpperCase)
                 .orElse("");
 
+        Optional<String> styleClass = task.getPriority().flatMap(TaskCard::getPriorityStyleClass);
+        if (styleClass.isPresent()) {
+            priority.getStyleClass().clear();
+            priority.getStyleClass().add(styleClass.get());
+        }
+
         priority.setText(text);
+    }
+
+    private static Optional<String> getPriorityStyleClass(Priority priority) {
+        String styleClass;
+
+        switch(priority.getValue()) {
+        case HIGH:
+            styleClass = STYLE_PRIORITY_HIGH;
+            break;
+        case MEDIUM:
+            styleClass = STYLE_PRIORITY_MID;
+            break;
+        case LOW:
+            styleClass = STYLE_PRIORITY_LOW;
+            break;
+        default:
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(styleClass);
     }
 
     private void initTags(ReadOnlyTask task) {
