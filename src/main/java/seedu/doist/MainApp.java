@@ -79,13 +79,13 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        ReadOnlyTodoList initialData = initTodoListData();
-        ReadOnlyAliasListMap initialAliasData = initAliasListMapData();
+        ReadOnlyTodoList initialData = initTodoListData(storage);
+        ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
         return new ModelManager(initialData, initialAliasData, userPrefs);
     }
 
-    private ReadOnlyTodoList initTodoListData() {
+    private static ReadOnlyTodoList initTodoListData(Storage storage) {
         Optional<ReadOnlyTodoList> todoListOptional;
         ReadOnlyTodoList initialData;
         try {
@@ -104,7 +104,7 @@ public class MainApp extends Application {
         return initialData;
     }
 
-    private ReadOnlyAliasListMap initAliasListMapData() {
+    private static ReadOnlyAliasListMap initAliasListMapData(Storage storage) {
         Optional<ReadOnlyAliasListMap> aliasListMapOptional;
         ReadOnlyAliasListMap initialAliasData;
         try {

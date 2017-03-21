@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.exceptions.DataConversionException;
 import seedu.doist.commons.util.FileUtil;
-import seedu.doist.model.AliasListMap;
 import seedu.doist.model.ReadOnlyAliasListMap;
 
 /**
