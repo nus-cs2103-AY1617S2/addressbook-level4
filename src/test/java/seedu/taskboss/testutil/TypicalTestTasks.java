@@ -49,8 +49,8 @@ public class TypicalTestTasks {
 
             // Manually added
             hoon = new TaskBuilder().withName("Hoon Meier").withPriorityLevel("Yes")
-                    .withStartDateTime("Feb 19, 2017 5pm")
-                    .withEndDateTime("Feb 28, 2017 5pm")
+                    .withStartDateTime("Feb 19, 2018 5pm")
+                    .withEndDateTime("Feb 28, 2018 5pm")
                     .withInformation("little india").build();
             ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 5pm")
