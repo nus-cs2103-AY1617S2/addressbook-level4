@@ -51,6 +51,8 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords as end date*/
     void updateFilteredTaskListByEndDateTime(String keywords);
 
+    /** Updates the filter of the filtered task list to filter by the given keywords as information*/
+    void updateFilteredTaskListByInformation(Set<String> keywords);
 
     /** Updates the filter of the filtered task list to filter by the given keywords as category*/
     void updateFilteredTaskListByCategory(Category category);

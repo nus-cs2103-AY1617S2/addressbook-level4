@@ -25,7 +25,20 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("wall street").withCategories("Done").build();
 
-        assertMarkDoneSuccess(taskBossIndex, taskBossIndex, markedDoneTask);
+        assertMarkDoneSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask);
+    }
+
+    //@@author A0144904H
+    @Test
+    public void markTaskDone_Short_Command_success() throws Exception {
+        int taskBossIndex = 4;
+
+        TestTask markedDoneTask = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
+                .withStartDateTime("Feb 18, 2017 5pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withInformation("10th street").withCategories("Done").build();
+
+        assertMarkDoneSuccess(true, taskBossIndex, taskBossIndex, markedDoneTask);
     }
 
     @Test
@@ -38,7 +51,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
         TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
 
-        assertMarkDoneSuccess(filteredTaskListIndex, taskBossIndex, markedDoneTask);
+        assertMarkDoneSuccess(false, filteredTaskListIndex, taskBossIndex, markedDoneTask);
     }
 
     @Test
@@ -53,10 +66,15 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    private void assertMarkDoneSuccess(int filteredTaskListIndex, int taskBossIndex,
+    private void assertMarkDoneSuccess(boolean isShort, int filteredTaskListIndex, int taskBossIndex,
             TestTask markedDoneTask) {
-        commandBox.runCommand("mark " + filteredTaskListIndex);
 
+        //@@author A0144904H
+        if (isShort) {
+            commandBox.runCommand("m " + filteredTaskListIndex);
+        } else {
+            commandBox.runCommand("mark " + filteredTaskListIndex);
+        }
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskBossIndex - 1] = markedDoneTask;
