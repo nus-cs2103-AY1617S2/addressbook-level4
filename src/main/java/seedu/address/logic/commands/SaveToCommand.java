@@ -15,7 +15,7 @@ public class SaveToCommand extends Command {
 
     public static final String COMMAND_WORD = "saveto";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " to: Saves to the specified directory.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves to the specified directory.\n"
             + "Parameters: dir_location\n" + "Example: " + COMMAND_WORD + "to .\\example_folder";
     public static final String MESSAGE_SUCCESS = "Save location has been changed to: %1$s";
     public static final String MESSAGE_CONFIG_SAVE_FAILURE = "Unable to save config file.";

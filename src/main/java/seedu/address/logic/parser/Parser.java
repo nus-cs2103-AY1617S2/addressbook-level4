@@ -22,6 +22,7 @@ import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -85,6 +86,9 @@ public class Parser {
 
         case SaveToCommand.COMMAND_WORD:
             return new SaveToCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

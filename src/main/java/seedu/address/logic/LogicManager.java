@@ -8,6 +8,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
@@ -39,6 +40,9 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
         command.setStorage(storage);
         command.setConfig(config);
+        if (!(command instanceof UndoCommand)) {
+            model.saveCurrentState(commandText.trim());
+        }
         return command.execute();
     }
 
