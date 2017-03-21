@@ -128,7 +128,7 @@ public class ParserUtil {
      */
     public static Optional<Path> parsePath(String path) {
         assert path != null;
-        return !path.equals("") ? Optional.of(Paths.get(path)) : Optional.empty();
+        return !path.equals("") ? Optional.of(Paths.get(path.trim())) : Optional.empty();
     }
 
     //@@author

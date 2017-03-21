@@ -60,8 +60,8 @@ public class ModelManager extends ComponentManager implements Model {
         return taskList;
     }
 
-    /** Raises an event to indicate the model has changed */
-    private void indicateTaskListChanged() {
+    @Override
+    public void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));
     }
 

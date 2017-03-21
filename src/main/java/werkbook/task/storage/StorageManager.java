@@ -42,12 +42,15 @@ public class StorageManager extends ComponentManager implements Storage {
         this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
+    //@@author A0162266E
     // ================ Config methods =================================
     @Override
     public void setTaskListFilePath(Path filePath) throws IOException {
+        this.taskListStorage = new XmlTaskListStorage(filePath.toString());
         config.setTaskListFilePath(filePath.toString());
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
     }
+    //@@author
 
     // ================ UserPrefs methods ==============================
 
