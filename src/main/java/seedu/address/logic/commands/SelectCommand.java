@@ -40,10 +40,10 @@ public class SelectCommand extends Command {
 
         ReadOnlyTask task = model.getFilteredTaskList().get(targetIndex - 1);
 
-        String SELECT_COMMAND_RESULT = String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex) + "\n"
+        String selectCommandResult = String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex) + "\n"
                 + "Task selected: " + task.getTitle().title + "\n"
                 + "Description of task: " + task.getDescription().toString();
-        return new CommandResult(SELECT_COMMAND_RESULT);
+        return new CommandResult(selectCommandResult);
 
     }
 

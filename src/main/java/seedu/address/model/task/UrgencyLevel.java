@@ -13,7 +13,7 @@ public class UrgencyLevel {
     public static final String URGENCYLEVEL_VALIDATION_REGEX = "[1-5]";
 
     public final String value;
-    public final int int_value;
+    public final int intValue;
 
     /**
      * Validates given urgency level.
@@ -24,14 +24,14 @@ public class UrgencyLevel {
         assert urgencyLevel != null;
         if (urgencyLevel.isEmpty()) {
             this.value = urgencyLevel;
-            this.int_value = 0;
+            this.intValue = 0;
         } else {
             String trimmedUrgencyLevel = urgencyLevel.trim();
             if (!isValidUrgencyLevel(trimmedUrgencyLevel)) {
                 throw new IllegalValueException(MESSAGE_URGENCYLEVEL_CONSTRAINTS);
             }
             this.value = trimmedUrgencyLevel;
-            this.int_value = Integer.parseInt(value);
+            this.intValue = Integer.parseInt(value);
         }
     }
 
@@ -48,7 +48,7 @@ public class UrgencyLevel {
     }
 
     public int getIntValue() {
-        return int_value;
+        return intValue;
     }
 
     @Override

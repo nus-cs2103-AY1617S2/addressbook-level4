@@ -15,7 +15,7 @@ public class TextFieldListener implements ChangeListener<String> {
     private ContextMenu suggestionsList;
     private AutoCompleteTextField textField;
 
-    public TextFieldListener( AutoCompleteTextField autoCompleteTextField, ContextMenu suggestionsListMenu) {
+    public TextFieldListener(AutoCompleteTextField autoCompleteTextField, ContextMenu suggestionsListMenu) {
         suggestionsList = suggestionsListMenu;
         textField = autoCompleteTextField;
     }

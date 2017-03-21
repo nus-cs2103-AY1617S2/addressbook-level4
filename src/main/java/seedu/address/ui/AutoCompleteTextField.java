@@ -14,10 +14,10 @@ public class AutoCompleteTextField extends TextField {
     /** Initialize set of prefix strings to auto complete. */
     public static final char PREFIXSYMBOL = '/';
     public static final String[] PREFIXSTRINGS = new String[] { PREFIXSYMBOL + "venue ",
-            PREFIXSYMBOL + "from ",
-            PREFIXSYMBOL + "to ",
-            PREFIXSYMBOL + "level",
-            PREFIXSYMBOL + "description" };
+                                                                PREFIXSYMBOL + "from ",
+                                                                PREFIXSYMBOL + "to ",
+                                                                PREFIXSYMBOL + "level",
+                                                                PREFIXSYMBOL + "description" };
     public static final TreeSet<String> PREFIXCOMMANDS = new TreeSet<String>(Arrays.asList(PREFIXSTRINGS));
 
     /** List of suggestions for auto complete. */

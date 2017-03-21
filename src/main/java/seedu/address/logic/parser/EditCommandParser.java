@@ -52,7 +52,8 @@ public class EditCommandParser {
             editTaskDescriptor.setVenue(ParserUtil.parseVenue(argsTokenizer.getValue(PREFIX_VENUE)));
             editTaskDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
             editTaskDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
-            editTaskDescriptor.setUrgencyLevel(ParserUtil.parseUrgencyLevel(argsTokenizer.getValue(PREFIX_URGENCYLEVEL)));
+            editTaskDescriptor
+                    .setUrgencyLevel(ParserUtil.parseUrgencyLevel(argsTokenizer.getValue(PREFIX_URGENCYLEVEL)));
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
