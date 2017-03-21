@@ -9,7 +9,7 @@ import seedu.task.logic.commands.CompleteCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
 public class CompleteCommandParser {
-	 /**
+    /**
      * Parses the given {@code String} of arguments in the context of the CompleteCommand
      * and returns an CompleteCommand object for execution.
      */

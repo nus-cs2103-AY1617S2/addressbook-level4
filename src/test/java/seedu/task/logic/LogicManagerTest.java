@@ -45,8 +45,6 @@ import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.storage.StorageManager;
-import seedu.task.model.task.Complete;
-
 
 public class LogicManagerTest {
 

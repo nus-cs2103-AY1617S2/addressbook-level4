@@ -39,7 +39,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(),source.getComplete());
+        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(),
+             source.getComplete());
     }
 
     @Override
@@ -73,7 +74,7 @@ public class Task implements ReadOnlyTask {
     public Duration getDuration() {
         return duration;
     }
-    
+
     @Override
     public Complete getComplete() {
         return complete;
@@ -82,11 +83,11 @@ public class Task implements ReadOnlyTask {
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
-    
+
     public void setComplete() {
         this.complete.setCompete();
     }
-    
+
     public void resetComplete() {
         this.complete.setNotCompete();
     }
@@ -95,8 +96,6 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    
-
 
     /**
      * Replaces this tasks's tags with the tags in the argument tag list.

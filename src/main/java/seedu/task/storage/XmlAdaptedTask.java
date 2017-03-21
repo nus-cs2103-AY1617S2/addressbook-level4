@@ -56,7 +56,7 @@ public class XmlAdaptedTask {
         dueDate = source.getDueDate() != null ?
                 source.getDueDate().toString() :
                 null;
-        complete = source.getComplete().getString();        
+        complete = source.getComplete().getString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -81,7 +81,7 @@ public class XmlAdaptedTask {
                 new DueDate(this.dueDate) :
                 null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        final Complete complete = this.complete=="true"? new Complete(true):new Complete(false);
+        final Complete complete = this.complete == "true" ? new Complete(true) : new Complete(false);
         return new Task(description, dueDate, duration, tags, complete);
     }
 }

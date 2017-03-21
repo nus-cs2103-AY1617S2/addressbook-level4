@@ -7,7 +7,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
+//import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -24,7 +24,6 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-    
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.

@@ -107,9 +107,9 @@ public class TestTask implements ReadOnlyTask {
         return duration == null ? null : duration.getEndString();
     }
 
-	@Override
-	public Complete getComplete() {
-		return this.complete;
-	}
+    @Override
+    public Complete getComplete() {
+        return this.complete;
+    }
 
 }

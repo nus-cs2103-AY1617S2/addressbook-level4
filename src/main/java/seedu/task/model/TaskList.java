@@ -146,7 +146,6 @@ public class TaskList implements ReadOnlyTaskList {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-    
 
 //// tag-level operations
 

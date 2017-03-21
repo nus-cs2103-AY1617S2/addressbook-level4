@@ -3,32 +3,32 @@ package seedu.task.model.task;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 public class Complete {
-	
-	   public boolean Completion = false;
 
-	    /**
-	     * Validates given description.
-	     *
-	     * @throws IllegalValueException if given description string is invalid.
-	     */
-	    public Complete(boolean Completion){
-	        this.Completion = Completion;
-	    }
+    public boolean completion = false;
 
-	    public void setCompete(){
-	    	this.Completion=true;	    	
-	    }
-	    
-	    public void setNotCompete(){
-	    	this.Completion=false;	    	
-	    }
-	    
-	    public boolean getCompletion(){
-	    	return this.Completion;
-	    }
-	    
-	    public String getString(){
-	    	return Completion == true? "true" : "false";
-	    }
+    /**
+    * Validates given description.
+    *
+    * @throws IllegalValueException if given description string is invalid.
+    */
+    public Complete(boolean completion) {
+        this.completion = completion;
+    }
+
+    public void setCompete() {
+        this.completion = true;
+    }
+
+    public void setNotCompete() {
+        this.completion = false;
+    }
+
+    public boolean getCompletion() {
+        return this.completion;
+    }
+
+    public String getString() {
+        return completion == true ? "true" : "false";
+    }
 
 }
