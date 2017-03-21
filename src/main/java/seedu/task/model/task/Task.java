@@ -46,17 +46,6 @@ public class Task implements ReadOnlyTask {
     	this.taskEndTime = taskEndTime;
     	this.taskDescription = taskDescription;
     	
-    	try {
-	    	this.name = new Name("PLACEHOLDER NAME, SHOULD NOT SEE");
-	    	this.phone = new Phone("123");
-	    	this.email = new Email("asdfads@gmail.com");
-	    	this.address = new Address("22 Acacia Avenue");
-	    	tags = new UniqueTagList();
-    	} catch (IllegalValueException e) {
-	    	System.out.println("error11");
-	    }
-    	
-    }
 */
     /**
      * Creates a copy of the given ReadOnlyTask.
@@ -65,47 +54,6 @@ public class Task implements ReadOnlyTask {
         this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(), source.getTaskDescription(),source.getTags());
     }
 
-    /*
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address;
-    }
-*/
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);

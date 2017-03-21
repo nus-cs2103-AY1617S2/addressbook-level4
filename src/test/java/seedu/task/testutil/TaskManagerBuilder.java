@@ -19,7 +19,7 @@ public class TaskManagerBuilder {
 	}
 
 	public TaskManagerBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-		taskManager.addTask(task);
+		taskManager.addJobTask(task);
 		return this;
 	}
 

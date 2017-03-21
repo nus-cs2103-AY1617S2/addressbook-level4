@@ -32,16 +32,18 @@ import seedu.task.commons.util.XmlUtil;
 import seedu.task.model.TaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
+
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
-import seedu.task.model.task.Phone;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.XmlSerializableTaskManager;
-
+/*
+import seedu.task.model.task.Phone;
+import seedu.task.model.task.Address;
+import seedu.task.model.task.Email;
+ */
 /**
  * A utility class for test cases.
  */
@@ -339,7 +341,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask person) {
         return card.isSameTask(person);
     }
 

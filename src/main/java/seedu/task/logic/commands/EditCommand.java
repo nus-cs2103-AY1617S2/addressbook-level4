@@ -7,15 +7,17 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
 import seedu.task.model.task.TaskDate;
-import seedu.task.model.task.Email;
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.Phone;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.UniqueTaskList;
+/*
+import seedu.task.model.task.Phone;
+import seedu.task.model.task.Email;
+import seedu.task.model.task.Address;
+ */
 
 /**
  * Edits the details of an existing task in the task manager.
