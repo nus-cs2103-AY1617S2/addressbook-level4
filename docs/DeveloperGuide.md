@@ -35,7 +35,7 @@ We have organized the guide in a top-down manner so that, as a new developer, yo
     > Having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do step 2 onwards given in
+3. **e(fx)clipse** plugin for Eclipse (Proceed from step 2 onwards in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
@@ -91,9 +91,6 @@ _Figure 3.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of ToLuist.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
-
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -116,7 +113,7 @@ The rest of the App consists of five components:
 
 Each of the five components defines its _API_ in an `interface` with the same name as the Component.
 
-Our architecture follows the MVC Pattern. UI displays data and interacts with the user. Commands are passed through 
+Our architecture follows the *Model-View-Controller* (MVC) Pattern. UI displays data and interacts with the user. Commands are passed through 
 the Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the 
 bridge between the UI and the Model. Model & Storage store and maintain the data. A lot of inspirations for this design
  was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr
@@ -163,11 +160,11 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 **API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
 
-`UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
+`UiStore` holds the data to be used by the `Ui`. An example would be the task data to be displayed to the user. In essence, `UiStore` acts as a **View Model** for the `Ui`. 
 
 #### 3.2.3. Reactive nature of the UI ####
 
-To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`.
+To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`. `Ui` and `UiStore` together implement the **Observer-Observable** pattern where the `Ui` will listen directly to changes in `UiStore` and re-render automatically.
 
 The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the `UiStore`, without knowing what was the exact change.
 
@@ -180,7 +177,7 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
-`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command.
+`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command. In effect, `Dispatcher` is implementing the **Facade**, shielding the command logic from the Ui.
 
 ### 3.4. Controller component
 
@@ -189,11 +186,9 @@ _Figure 3.4 : Structure of the Controller Component_
 
 **API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
-- `Controller` has a `execute` method to execute the command passed by the dispatcher.
-- The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
-- The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
-- After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
+`Controller` has a `execute` method to execute the command passed by the dispatcher. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore`, which subsequently trigger a Ui re-render.
 
+Each command is represented by a different Controller class, which all extends from the abstract `Controller` class. Hence, `Controller` is implementing the `Command` pattern.
 
 ### 3.5. Model component
 
