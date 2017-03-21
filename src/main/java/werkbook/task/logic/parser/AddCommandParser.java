@@ -30,7 +30,6 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
         try {
             String test = argsTokenizer.getPreamble().get();
-            System.out.println(test);
 
             return new AddCommand(argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),

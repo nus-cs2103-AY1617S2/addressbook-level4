@@ -114,6 +114,7 @@ public class ArgumentTokenizer {
 //        System.out.println("Current prefix is:" + prefix.getPrefix() + " at pos: " + argumentStart);
 
         // If it's a date time, find the position that returns a date time behind it
+        // Does not check for invalid date format, just assumes that it is text
         if (prefix.isDateTime()) {
             while (argumentStart != -1) {
                 PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
@@ -144,12 +145,18 @@ public class ArgumentTokenizer {
      * @return              True if the command is valid
      */
     private boolean isValidDateCommand(String argsString, int startPosition) {
+        int endPosition = startPosition + " 01/01/1000 1000".length();
+
+        if (endPosition > argsString.length()) {
+//            System.out.println("length exceeded");
+            return false;
+        }
+
         // Get the value in between this prefix and the next
-        String dateTime = argsString.substring(startPosition, startPosition + " 01/01/2000 2000".length())
+        String dateTime = argsString.substring(startPosition, endPosition)
                 .trim();
 
         boolean isValid = EndDateTime.isValidEndDateTime(dateTime);
-        System.out.println("The date: " + dateTime + " is " + isValid);
         // Check if it's a valid date, if so, then break
         return isValid;
     }
