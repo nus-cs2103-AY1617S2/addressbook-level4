@@ -137,7 +137,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -154,7 +154,7 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
         return new XmlSerializableTaskManager(new TaskManager());
     }
 
@@ -312,7 +312,7 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a task.
+     * Replaces tasks[i] with a task.
      * @param tasks The array of tasks.
      * @param task The replacement task
      * @param index The index of the task to be replaced.
@@ -324,7 +324,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends persons to the array of tasks.
+     * Appends tasks to the array of tasks.
      * @param tasks A array of tasks.
      * @param tasksToAdd The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.

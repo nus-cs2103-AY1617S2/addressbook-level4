@@ -12,7 +12,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access TaskManager data stored as an xml file on the hard disk.
  */
 public class XmlTaskManagerStorage implements TaskManagerStorage {
 
