@@ -4,13 +4,10 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
-import seedu.task.model.task.Phone;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
