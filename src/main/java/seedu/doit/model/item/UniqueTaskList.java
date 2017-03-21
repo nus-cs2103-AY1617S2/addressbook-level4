@@ -112,6 +112,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void setTaskComparator(Comparator<Task> taskComparator) {
         this.taskComparator = taskComparator;
+        internalList.sort(taskComparator);
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
