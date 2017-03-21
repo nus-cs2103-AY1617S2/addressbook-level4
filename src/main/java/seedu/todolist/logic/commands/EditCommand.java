@@ -68,8 +68,8 @@ public class EditCommand extends Command {
         }
         model.updateFilteredListToShowAll();
 
-        commandText = String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        commandText = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     /**

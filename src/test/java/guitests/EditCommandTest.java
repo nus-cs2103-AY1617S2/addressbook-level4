@@ -118,6 +118,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[toDoListIndex - 1] = editedTask;
+        System.out.println(editedTask.toString());
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
