@@ -109,8 +109,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortList() {
-        filteredTasks = new FilteredList<>(this.taskManager.getSortedList());
+    public void sortList(String keyword) {
+        filteredTasks = new FilteredList<>(this.taskManager.getSortedList(keyword));
     }
 
     @Override
