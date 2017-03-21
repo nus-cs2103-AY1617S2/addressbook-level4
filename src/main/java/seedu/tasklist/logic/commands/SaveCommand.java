@@ -9,7 +9,7 @@ import seedu.tasklist.commons.util.ConfigUtil;
 
 //@@author A0141993X
 /**
- * SAve user data file for task list.
+ * Save user data file for task list.
  */
 public class SaveCommand extends Command {
 
