@@ -11,6 +11,7 @@ import seedu.taskboss.testutil.TestTask;
 
 public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
 
+    //@@author A0147990R
     @Test
     public void clearByCategory_existingCategory() {
         String categoryDetails = "c/friends";
@@ -20,6 +21,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
         assertClearSuccess(isShortedCommand, categoryDetails, expectedTaskList);
     }
 
+    //@@author A0147990R
     @Test
     public void clearByCategory_existingCategoryWithShortcut() {
         String categoryDetails = "c/friends";
@@ -29,12 +31,14 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
         assertClearSuccess(isShortedCommand, categoryDetails, expectedTaskList);
     }
 
+    //@@author A0147990R
     @Test
     public void clearByCategory_invalidCommand_fail() {
         commandBox.runCommand("clearare");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    //@@author A0147990R
     @Test
     public void clearByCategory_invalidCommandFormat_fail() {
         commandBox.runCommand("clear w/try");
@@ -42,6 +46,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
                 ClearByCategoryCommand.MESSAGE_USAGE));
     }
 
+    //@@author A0147990R
     @Test
     public void clearByCategory_nonExistingCategory() {
         commandBox.runCommand("clear c/strange");
