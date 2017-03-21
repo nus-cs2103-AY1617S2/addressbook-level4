@@ -95,6 +95,26 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    //@@author A0147990R
+    @Override
+    public void clearTasksByCategory(Category category) {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
+        int listSize = taskListWithCategory.size();
+        System.out.println("list size: " + listSize);
+        int i;
+        for (i = 0; i < listSize; i++ ) {
+            System.out.println("i is: "+i);
+            ReadOnlyTask target = taskListWithCategory.get(0);
+            try {
+                taskBoss.removeTask(target);
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target task cannot be missing";
+            }
+        }
+        updateFilteredListToShowAll();
+        indicateTaskBossChanged();
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -112,21 +132,25 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByStartDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByInformation(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new InformationQualifier(keywords)));
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByCategory(Category category) {
         updateFilteredTaskList(new PredicateExpression(new CategoryQualifier(category)));
