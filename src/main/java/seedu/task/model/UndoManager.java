@@ -11,13 +11,13 @@ public class UndoManager {
     private static CommandStack previousCommand;
 
     public UndoManager() {
-    	undoStack = new Stack<Task>();
-    	taskIndex = new Stack<Integer>();
+        undoStack = new Stack<Task>();
+        taskIndex = new Stack<Integer>();
     	previousCommand = new CommandStack();
     }
 
-	public void pushUndo(Task task) {
-	    undoStack.push(task);
+    public void pushUndo(Task task) {
+        undoStack.push(task);
     }
 
 	public void pushTaskIndex(int index){

@@ -49,49 +49,49 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Add");
+            UndoManager.pushCommand("Add");
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Edit");
+            UndoManager.pushCommand("Edit");
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Delete");
+            UndoManager.pushCommand("Delete");
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Clear");
+            UndoManager.pushCommand("Clear");
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Find");
+            UndoManager.pushCommand("Find");
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("List");
+            UndoManager.pushCommand("List");
             return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Help");
+            UndoManager.pushCommand("Help");
             return new HelpCommand();
 
         case CheckCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Check");
+            UndoManager.pushCommand("Check");
             return new CheckedCommandParser().parse(arguments);
 
         case UncheckCommand.COMMAND_WORD:
-        	UndoManager.pushCommand("Uncheck");
+            UndoManager.pushCommand("Uncheck");
             return new UncheckedCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
-        	return new UndoCommand();
+            return new UndoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

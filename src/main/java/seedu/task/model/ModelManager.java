@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final ChatList chatList;
     private final UndoManager undoManager = new UndoManager();
 
-	/**
+    /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
@@ -219,8 +219,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-	public UndoManager getUndoManager() {
-		return undoManager;
-	}
+    public UndoManager getUndoManager() {
+        return undoManager;
+    }
 
 }
