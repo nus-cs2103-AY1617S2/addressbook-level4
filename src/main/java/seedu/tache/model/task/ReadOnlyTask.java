@@ -1,5 +1,7 @@
 package seedu.tache.model.task;
 
+import java.util.Optional;
+
 import seedu.tache.model.tag.UniqueTagList;
 
 /**
@@ -9,10 +11,8 @@ import seedu.tache.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Date getStartDate();
-    Date getEndDate();
-    Time getStartTime();
-    Time getEndTime();
+    Optional<DateTime> getStartDateTime();
+    Optional<DateTime> getEndDateTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -27,10 +27,8 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName())
-                && other.getStartDate().equals(this.getStartDate())
-                && other.getEndDate().equals(this.getEndDate())
-                && other.getStartTime().equals(this.getStartTime())
-                && other.getEndTime().equals(this.getEndTime())); // state checks here onwards
+                && other.getStartDateTime().equals(this.getStartDateTime())
+                && other.getEndDateTime().equals(this.getEndDateTime())); // state checks here onwards
     }
 
     /**
@@ -39,10 +37,8 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(getStartDate())
-                .append(getEndDate())
-                .append(getStartTime())
-                .append(getEndTime())
+                .append(getStartDateTime())
+                .append(getEndDateTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

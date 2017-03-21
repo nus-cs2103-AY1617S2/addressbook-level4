@@ -39,10 +39,27 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         id.setText(Integer.toString(displayedIndex) + ". ");
         name.setText(task.getName().toString());
-        startDate.setText(task.getStartDate().toString());
-        endDate.setText(task.getEndDate().toString());
-        startTime.setText(task.getStartTime().toString());
-        endTime.setText(task.getEndTime().toString());
+        String defaultValue = "-";
+        if (task.getStartDateTime().isPresent()) {
+            startDate.setText(task.getStartDateTime().get().getDateOnly());
+        } else {
+            startDate.setText(defaultValue);
+        }
+        if (task.getEndDateTime().isPresent()) {
+            endDate.setText(task.getEndDateTime().get().getDateOnly());
+        } else {
+            endDate.setText(defaultValue);
+        }
+        if (task.getStartDateTime().isPresent()) {
+            startTime.setText(task.getStartDateTime().get().getTimeOnly());
+        } else {
+            startTime.setText(defaultValue);
+        }
+        if (task.getEndDateTime().isPresent()) {
+            endTime.setText(task.getEndDateTime().get().getTimeOnly());
+        } else {
+            endTime.setText(defaultValue);
+        }
         initTags(task);
     }
 

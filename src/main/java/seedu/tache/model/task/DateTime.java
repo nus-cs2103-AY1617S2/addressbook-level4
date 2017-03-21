@@ -1,26 +1,37 @@
 package seedu.tache.model.task;
 
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.List;
+
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
 import seedu.tache.commons.exceptions.IllegalValueException;
 
-public class Date {
+
+public class DateTime {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Task date should only contain <CONSTRAINT>";
 
-    public final String date;
+    public final Date date;
 
     /**
      * Validates given date.
      *
      * @throws IllegalValueException if given date string is invalid.
      */
-    public Date(String date) {
+    public DateTime(String date) {
         assert date != null;
         String trimmedStartDate = date.trim();
+        List<Date> temp = new PrettyTimeParser().parse(trimmedStartDate);
+
         /*if (!isValidDate(trimmedStartDate)) {
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }*/
-        this.date = trimmedStartDate;
+        this.date = temp.get(0);
     }
 
     /**
@@ -32,7 +43,17 @@ public class Date {
 
     @Override
     public String toString() {
-        return date;
+        return new PrettyTime().format(date);
+    }
+
+    public String getDateOnly() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date);
+    }
+
+    public String getTimeOnly() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(date);
     }
 
    /* @Override
