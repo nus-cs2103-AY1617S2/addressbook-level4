@@ -76,8 +76,8 @@ public class XmlAdaptedTask {
         Priority priority = (this.priority != null) ? new Priority(Priority.parseXmlString(this.priority)) : null;
         final Status status = new Status(this.status);
         final Note note = (this.note != null) ? new Note(this.note) : null;
-        final DateTime startTime = new DateTime(this.startTime);
-        final DateTime endTime = new DateTime(this.endTime);
+        final DateTime startTime = (this.startTime != null) ? new DateTime(this.startTime) : null;
+        final DateTime endTime = (this.endTime != null) ? new DateTime(this.endTime) : null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, status, note, startTime, endTime, tags);
     }
