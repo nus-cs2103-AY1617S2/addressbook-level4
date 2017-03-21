@@ -179,7 +179,7 @@ public class AddCommandParser {
                 endTime = stringBuilderEndTime.toString();
             }
 
-            if ((!startTime.equals("EMPTY_FIELD")) && (!startTime.equals("\\d+"))) {
+            if ((!startTime.equals("EMPTY_FIELD")) && (!startTime.matches("\\d+"))) {
                 String[] splitedStartTime = startTime.split("\\s+");
                 try {
                     if (splitedStartTime[0].matches(DATE_VALIDATION_REGEX2)) {

@@ -117,10 +117,8 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname,
-                    this.date/*
-                              * , this.endtime, this.categories
-                              */);
+            return CollectionUtil.isAnyPresent(this.taskname, this.date, this.starttime, this.endtime
+                    /*, this.categories*/);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
