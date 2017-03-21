@@ -19,11 +19,11 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD_1 = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Adds a task to the task manager. "
             + "Parameters: NAME s/START e/END r/REMARK l/LOCATION  [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD_1
             + " John owes money s/02-03-2017 e/03-03-2017 r/john owes me l/john's house $100 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";

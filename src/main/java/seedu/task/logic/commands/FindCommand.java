@@ -10,14 +10,14 @@ public class FindCommand extends Command {
 
     private static final boolean isExact = false;
 
-    public static final String COMMAND_WORD = "find";
-    public static final String COMMAND_WORD_HOTKEY = "f";
+    public static final String COMMAND_WORD_1 = "find";
+    public static final String COMMAND_WORD_2 = "f";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " do homework";
+            + "Example: " + COMMAND_WORD_1 + " do homework";
 
     private final Set<String> keywords;
 

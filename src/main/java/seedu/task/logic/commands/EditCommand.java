@@ -21,14 +21,14 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_1 = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [s/START] [e/END] "
             + "[r/REMARK] [l/LOCATION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 s/03-04-2017 r/walk the dog";
+            + "Example: " + COMMAND_WORD_1 + " 1 s/03-04-2017 r/walk the dog";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

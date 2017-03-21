@@ -9,8 +9,7 @@ import seedu.task.model.task.Task;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
-    public static final String COMMAND_WORD_HOTKEY = "cl";
+    public static final String COMMAND_WORD_1 = "clear";
     public static final String MESSAGE_SUCCESS = "KIT has been cleared!";
 
 

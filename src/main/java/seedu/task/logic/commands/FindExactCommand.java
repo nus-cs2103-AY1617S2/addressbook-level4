@@ -6,16 +6,15 @@ public class FindExactCommand extends Command {
 
     private static final boolean isExact = true;
 
-    public static final String COMMAND_WORD = "findexact";
-    public static final String COMMAND_WORD_SHORTER = "fexact";
-    public static final String COMMAND_WORD_SHORTEST = "finde";
-    public static final String COMMAND_WORD_HOTKEY = "fe";
+    public static final String COMMAND_WORD_1 = "findexact";
+    public static final String COMMAND_WORD_2 = "fexact";
+    public static final String COMMAND_WORD_3 = "finde";
+    public static final String COMMAND_WORD_4 = "fe";
 
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain all of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Finds all tasks whose names contain all of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " do homework";
+            + "Example: " + COMMAND_WORD_1 + " do homework";
 
     private final Set<String> keywords;
 

@@ -28,20 +28,20 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertUndoSuccess(currentList);
 
         // edit task then undo
-        commandBox.runCommand(EditCommand.COMMAND_WORD + " 2 e/3 apr 17 t/project");
+        commandBox.runCommand(EditCommand.COMMAND_WORD_1 + " 2 e/3 july t/project");
         assertUndoSuccess(currentList);
 
         // delete task then undo
-        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " 1");
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD_1 + " 1");
         assertUndoSuccess(currentList);
 
         // clear then undo
-        commandBox.runCommand(ClearCommand.COMMAND_WORD);
+        commandBox.runCommand(ClearCommand.COMMAND_WORD_1);
         assertUndoSuccess(currentList);
     }
 
     private void assertUndoSuccess(TestTask[] currentList) {
-        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
 
         // check if the list is still the same
         assertTrue(taskListPanel.isListMatching(currentList));

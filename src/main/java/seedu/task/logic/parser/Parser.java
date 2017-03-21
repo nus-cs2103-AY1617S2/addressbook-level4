@@ -20,7 +20,7 @@ import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
-import seedu.task.logic.commands.ListByUndoneCommand;
+import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
@@ -53,70 +53,70 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD_1:
             return new AddCommandParser().parse(arguments);
 
-        case EditIsDoneCommand.COMMAND_WORD:
+        case EditIsDoneCommand.COMMAND_WORD_1:
             return new EditIsDoneParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD_1:
             return new EditCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_WORD_HOTKEY:
+        case SelectCommand.COMMAND_WORD_1:
+        case SelectCommand.COMMAND_WORD_2:
             return new SelectCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD_1:
             return new DeleteCommandParser().parse(arguments);
 
-        case UndoCommand.COMMAND_WORD:
-        case UndoCommand.COMMAND_WORD_HOTKEY:
+        case UndoCommand.COMMAND_WORD_1:
+        case UndoCommand.COMMAND_WORD_2:
             return new UndoCommand();
 
-        case ClearCommand.COMMAND_WORD:
-        case ClearCommand.COMMAND_WORD_HOTKEY:
+        case ClearCommand.COMMAND_WORD_1:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_WORD_HOTKEY:
+        case FindCommand.COMMAND_WORD_1:
+        case FindCommand.COMMAND_WORD_2:
             return new FindCommandParser().parse(arguments);
 
-        case FindExactCommand.COMMAND_WORD:
-        case FindExactCommand.COMMAND_WORD_SHORTER:
-        case FindExactCommand.COMMAND_WORD_SHORTEST:
-        case FindExactCommand.COMMAND_WORD_HOTKEY:
+        case FindExactCommand.COMMAND_WORD_1:
+        case FindExactCommand.COMMAND_WORD_2:
+        case FindExactCommand.COMMAND_WORD_3:
+        case FindExactCommand.COMMAND_WORD_4:
             return new FindExactCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_WORD_SHORTFORM:
-        case ListCommand.COMMAND_WORD_HOTKEY:
+        case ListCommand.COMMAND_WORD_1:
+        case ListCommand.COMMAND_WORD_2:
+        case ListCommand.COMMAND_WORD_3:
             return new ListCommand();
 
-        case ListByDoneCommand.COMMAND_WORD:
-        case ListByDoneCommand.COMMAND_WORD_HOTKEY:
+        case ListByDoneCommand.COMMAND_WORD_1:
+        case ListByDoneCommand.COMMAND_WORD_2:
             return new ListByDoneCommand(true);
 
-        case ListByUndoneCommand.COMMAND_WORD:
-        case ListByUndoneCommand.COMMAND_WORD_HOTKEY:
-            return new ListByUndoneCommand(false);
+        case ListByNotDoneCommand.COMMAND_WORD_1:
+        case ListByNotDoneCommand.COMMAND_WORD_2:
+        case ListByNotDoneCommand.COMMAND_WORD_3:
+            return new ListByNotDoneCommand(false);
 
-        case ListByTagCommand.COMMAND_WORD:
-        case ListByTagCommand.COMMAND_WORD_SINGLE_T:
-        case ListByTagCommand.COMMAND_WORD_LONGER_HOTKEY:
-        case ListByTagCommand.COMMAND_WORD_HOTKEY:
+        case ListByTagCommand.COMMAND_WORD_1:
+        case ListByTagCommand.COMMAND_WORD_2:
+        case ListByTagCommand.COMMAND_WORD_3:
+        case ListByTagCommand.COMMAND_WORD_4:
             return new ListByTagCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD_1:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-        case HelpCommand.COMMAND_WORD_HOTKEY:
+        case HelpCommand.COMMAND_WORD_1:
+        case HelpCommand.COMMAND_WORD_2:
             return new HelpCommand();
 
-        case HelpFormatCommand.COMMAND_WORD:
-        case HelpFormatCommand.COMMAND_WORD_FULL:
-        case HelpFormatCommand.COMMAND_WORD_SHORT:
-        case HelpFormatCommand.COMMAND_WORD_SUMMARY:
+        case HelpFormatCommand.COMMAND_WORD_1:
+        case HelpFormatCommand.COMMAND_WORD_2:
+        case HelpFormatCommand.COMMAND_WORD_4:
+        case HelpFormatCommand.COMMAND_WORD_3:
             return new HelpFormatCommand();
 
         case SaveCommand.COMMAND_WORD:
