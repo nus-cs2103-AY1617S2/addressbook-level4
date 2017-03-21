@@ -11,6 +11,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  * valid as declared in {@link #isValidStartDate(String)}
  */
 public class StartDate extends Date {
+    private final static SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Start date should be of dd/mm/yyyy format "
             + "or can be empty";
@@ -18,7 +19,7 @@ public class StartDate extends Date {
             + "/[0-9]{4}$)";
 
     // @@author A0140032E
-    private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
+    
 
     /**
      * Validates given start date.
@@ -32,12 +33,12 @@ public class StartDate extends Date {
 
     private static long startDateConstructor(String startDate) throws IllegalValueException {
         assert startDate != null;
+        if (!isValidStartDate(startDate)) {
+            throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
+        }
         try {
-            if (!isValidStartDate(startDate)) {
-                throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
-            }
             return sdfInput.parse(startDate).getTime();
-        } catch (IllegalValueException | ParseException e) {
+        } catch (ParseException e) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
     }

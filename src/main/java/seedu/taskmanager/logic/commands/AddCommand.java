@@ -28,7 +28,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-
+    // @@author A0140032E
+    public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
+    // @@author
     private final Task toAdd;
 
     /**
@@ -42,6 +44,11 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        // @@author A0140032E
+        if (new StartDate(startDate).after(new EndDate(endDate))){
+            throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+        }
+        // @@author
         this.toAdd = new Task(
                 new Title(title),
                 new StartDate(startDate),
