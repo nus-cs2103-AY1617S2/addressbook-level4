@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -81,12 +82,16 @@ public class MainApp extends Application {
     /**
      * Load all fonts in the resouces/fonts folder
      */
-    private void loadFonts() throws Exception {
+    private void loadFonts() {
         File files = new File("src/main/resources/fonts/");
 
         for (File file : files.listFiles()) {
             if (file.getName().endsWith(".otf") || file.getName().endsWith(".ttf")) {
-                Font.loadFont(new FileInputStream(file), 10);
+                try {
+                    Font.loadFont(new FileInputStream(file), 10);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
