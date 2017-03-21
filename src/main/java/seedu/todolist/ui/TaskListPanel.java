@@ -18,14 +18,14 @@ import seedu.todolist.model.task.Task;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class TaskListPanel extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "PersonListPanel.fxml";
 
     @FXML
     private ListView<Task> taskListView;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<Task> personList) {
+    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<Task> personList) {
         super(FXML);
         setConnections(personList);
         addToPlaceholder(personListPlaceholder);
