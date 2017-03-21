@@ -17,8 +17,7 @@ public class PriorityLevelTest {
 
         // valid priority level
         assertTrue(PriorityLevel.isValidPriorityLevel(""));
-        assertTrue(PriorityLevel.isValidPriorityLevel("1"));
-        assertTrue(PriorityLevel.isValidPriorityLevel("2"));
-        assertTrue(PriorityLevel.isValidPriorityLevel("3"));
+        assertTrue(PriorityLevel.isValidPriorityLevel("Yes"));
+        assertTrue(PriorityLevel.isValidPriorityLevel("No"));
     }
 }

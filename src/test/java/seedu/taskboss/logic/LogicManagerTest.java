@@ -221,21 +221,19 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() throws IllegalValueException, InvalidDatesException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add Valid Name p/1 sd/today ed/tomorrow", expectedMessage);
+        assertCommandFailure("add Valid Name p/Yes sd/today ed/tomorrow", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws IllegalValueException, InvalidDatesException {
-        assertCommandFailure("add n/[]\\[;] p/1 sd/today ed/tomorrow i/valid, information",
+        assertCommandFailure("add n/[]\\[;] sd/today ed/tomorrow i/valid, information",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add n/Valid Name p/not_numbers sd/today ed/tomorrow i/valid, information",
-                PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add n/Valid Name p/1 sd/today ed/tomorrow "
+        assertCommandFailure("add n/Valid Name! sd/today ed/tomorrow "
                 + "i/valid, information c/invalid_-[.category",
                 Category.MESSAGE_CATEGORY_CONSTRAINTS);
-        assertCommandFailure("add n/Valid Name p/1 sd/today to next week ed/tomorrow i/valid, information",
+        assertCommandFailure("add n/Valid Name sd/today to next week ed/tomorrow i/valid, information",
                 DateTimeParser.getMultipleDatesError());
-        assertCommandFailure("add n/Valid Name p/1 sd/invalid date ed/tomorroq i/valid, information",
+        assertCommandFailure("add n/Valid Name sd/invalid date ed/tomorroq i/valid, information",
                 DateTime.MESSAGE_DATE_CONSTRAINTS);
     }
 
@@ -480,7 +478,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
-            PriorityLevel privatePriorityLevel = new PriorityLevel("1");
+            PriorityLevel privatePriorityLevel = new PriorityLevel("Yes");
             DateTime startDateTime = new DateTime("today 5pm");
             DateTime endDateTime = new DateTime("tomorrow 8pm");
             Information privateInformation = new Information("111, alpha street");
@@ -502,7 +500,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new PriorityLevel("" + Math.abs(seed)),
+                    new PriorityLevel("Yes"),
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of " + seed),
@@ -518,8 +516,13 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(" n/").append(p.getName().toString());
-            cmd.append(" p/").append(p.getPriorityLevel());
+            //@@author A0144904H
+            if (p.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
+                cmd.append(" n/").append(p.getName().toString());
+            } else {
+                cmd.append(" n/").append(p.getName().toString() + "!");
+            }
+
             cmd.append(" sd/").append(p.getStartDateTime().toString());
             cmd.append(" ed/").append(p.getEndDateTime().toString());
             cmd.append(" i/").append(p.getInformation());
@@ -610,7 +613,7 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new PriorityLevel("1"),
+                    new PriorityLevel("Yes"),
                     new DateTime("Feb 19 10am 2017"),
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of 1"),
@@ -625,7 +628,7 @@ public class LogicManagerTest {
         Task generateTaskWithStartDateTime(String startDatetime) throws Exception {
             return new Task(
                     new Name("testTask"),
-                    new PriorityLevel("1"),
+                    new PriorityLevel("Yes"),
                     new DateTime(startDatetime),
                     new DateTime("Feb 20 10am 2018"),
                     new Information("House of 1"),
@@ -640,7 +643,7 @@ public class LogicManagerTest {
         Task generateTaskWithEndDateTime(String endDatetime) throws Exception {
             return new Task(
                     new Name("testTask"),
-                    new PriorityLevel("1"),
+                    new PriorityLevel("Yes"),
                     new DateTime("Feb 20 10am 2017"),
                     new DateTime(endDatetime),
                     new Information("House of 1"),

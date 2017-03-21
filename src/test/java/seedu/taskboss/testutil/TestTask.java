@@ -99,8 +99,12 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + "n/" + this.getName().fullName + " ");
-        sb.append("p/" + this.getPriorityLevel().value + " ");
+        //@@author A0144904H
+        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
+            sb.append("add " + "n/" + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + "n/" + this.getName().fullName + "! ");
+        }
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");
@@ -111,8 +115,12 @@ public class TestTask implements ReadOnlyTask {
     //@@author A0143157J
     public String getShortAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("a " + "n/" + this.getName().fullName + " ");
-        sb.append("p/" + this.getPriorityLevel().value + " ");
+        //@@author A0144904H
+        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
+            sb.append("add " + "n/" + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + "n/" + this.getName().fullName + "! ");
+        }
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");

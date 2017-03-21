@@ -23,11 +23,11 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "n/Alice p/1 sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
+        String detailsToEdit = "n/Alice p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
                 + " Jurong West Ave 6, #08-111 c/friends";
         int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("1")
+        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("Yes")
                .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
                .withInformation("123, Jurong West Ave 6, #08-111").withCategories("friends").build();
 
@@ -37,10 +37,11 @@ public class EditCommandTest extends TaskBossGuiTest {
     //@@author A0143157J
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
-        String detailsToEdit = "n/Amanda p/2 sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
+
+        String detailsToEdit = "n/Amanda p/Yes sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
         int taskBossIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("2")
+        TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("Yes")
                .withStartDateTime("feb 27 2016").withEndDateTime("feb 28 2016")
                .withInformation("discuss about life").withCategories("relax").build();
 
@@ -127,7 +128,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 n/Alice Pauline p/3 sd/Feb 18, 2017 5pm ed/Feb 28, 2017 5pm"
+        commandBox.runCommand("edit 3 n/Alice Pauline p/Yes sd/Feb 18, 2017 5pm ed/Feb 28, 2017 5pm"
                                 + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);

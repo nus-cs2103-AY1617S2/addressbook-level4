@@ -20,12 +20,25 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     public void markTaskDone_success() throws Exception {
         int taskBossIndex = 3;
 
-        TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
+        TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("wall street").withCategories("Done").build();
 
-        assertMarkDoneSuccess(taskBossIndex, taskBossIndex, markedDoneTask);
+        assertMarkDoneSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask);
+    }
+
+    //@@author A0144904H
+    @Test
+    public void markTaskDone_Short_Command_success() throws Exception {
+        int taskBossIndex = 4;
+
+        TestTask markedDoneTask = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
+                .withStartDateTime("Feb 18, 2017 5pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withInformation("10th street").withCategories("Done").build();
+
+        assertMarkDoneSuccess(true, taskBossIndex, taskBossIndex, markedDoneTask);
     }
 
     @Test
@@ -38,25 +51,30 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
         TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
 
-        assertMarkDoneSuccess(filteredTaskListIndex, taskBossIndex, markedDoneTask);
+        assertMarkDoneSuccess(false, filteredTaskListIndex, taskBossIndex, markedDoneTask);
     }
 
     @Test
     public void markDone_missingTaskIndex_failure() {
-        commandBox.runCommand("done ");
+        commandBox.runCommand("mark ");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void markDone_invalidTaskIndex_failure() {
-        commandBox.runCommand("done 9");
+        commandBox.runCommand("mark 9");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    private void assertMarkDoneSuccess(int filteredTaskListIndex, int taskBossIndex,
+    private void assertMarkDoneSuccess(boolean isShort, int filteredTaskListIndex, int taskBossIndex,
             TestTask markedDoneTask) {
-        commandBox.runCommand("done " + filteredTaskListIndex);
 
+        //@@author A0144904H
+        if (isShort) {
+            commandBox.runCommand("m " + filteredTaskListIndex);
+        } else {
+            commandBox.runCommand("mark " + filteredTaskListIndex);
+        }
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskBossIndex - 1] = markedDoneTask;

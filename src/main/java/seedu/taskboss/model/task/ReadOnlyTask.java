@@ -40,7 +40,7 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Priority Level: ")
-                .append(getPriorityLevel())
+                .append(getPriorityLevel().value)
                 .append(" Start Date: ")
                 .append(getStartDateTime())
                 .append(" End Date: ")

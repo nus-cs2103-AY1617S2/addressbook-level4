@@ -9,8 +9,14 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class PriorityLevel {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
-            + " numbers 1, 2 or 3, or it can be blank.";
-    public static final String PRIORITY_VALIDATION_REGEX = "[1-3]";
+            + " the words Yes or No (case sensitive)";
+
+    //@@author A0144904H
+    public static final String PRIORITY_HIGH = "Yes";
+    public static final String PRIORITY_HIGH_VALUE = "High priority";
+    public static final String PRIORITY_NO = "No";
+    public static final String PRIORITY_NO_VALUE = "No priority";
+    public static final String PRIORITY_REGEX = "^(?:Yes|No)$";
 
     public final String value;
 
@@ -25,6 +31,14 @@ public class PriorityLevel {
         if (!isValidPriorityLevel(trimmedPriorityLevel)) {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
+
+        //@@author A0144904H
+        if (trimmedPriorityLevel.equals(PRIORITY_HIGH)) {
+            trimmedPriorityLevel = PRIORITY_HIGH_VALUE;
+        } else {
+            trimmedPriorityLevel = PRIORITY_NO_VALUE;
+        }
+
         this.value = trimmedPriorityLevel;
     }
 
@@ -32,7 +46,7 @@ public class PriorityLevel {
      * Returns true if a given string is a valid task priority level.
      */
     public static boolean isValidPriorityLevel(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX) ||
+        return test.matches(PRIORITY_REGEX) ||
                 "".equals(test);
     }
 
