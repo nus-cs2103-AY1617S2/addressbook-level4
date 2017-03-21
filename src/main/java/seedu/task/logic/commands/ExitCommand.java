@@ -8,7 +8,7 @@ import seedu.task.commons.events.ui.ExitAppRequestEvent;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_WORD = "exit";
+    public static final String COMMAND_WORD_1 = "exit";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting KIT as requested ...";
 

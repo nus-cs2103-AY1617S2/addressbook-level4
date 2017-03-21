@@ -8,12 +8,12 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class EditIsDoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD_1 = "done";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1
             + ": the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD_1 + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCE = "Done Task: %1$s";
 

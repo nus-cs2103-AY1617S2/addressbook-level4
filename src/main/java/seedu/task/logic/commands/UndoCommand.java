@@ -11,8 +11,8 @@ import seedu.task.model.ReadOnlyTaskManager;
  */
 public class UndoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
-    public static final String COMMAND_WORD_HOTKEY = "uhoh";
+    public static final String COMMAND_WORD_1 = "undo";
+    public static final String COMMAND_WORD_2 = "uhoh";
     public static final String MESSAGE_SUCCESS = "Last action undone!";
     public static final String MESSAGE_FAIL = "Unable to undo. data/backup.xml not found.";
     public static final String BACKUP_FILE_PATH = "data/backup.xml";
