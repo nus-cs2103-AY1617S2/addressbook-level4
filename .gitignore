@@ -12,3 +12,6 @@ lib/*
 classes/
 data/
 bin/
+preferences.json
+src/test/data/sandbox/
+config.json
