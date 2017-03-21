@@ -52,6 +52,10 @@ public interface Model {
     //@@author A0139633B
     UnmodifiableObservableList<Task> getFilteredOverdueTaskList();
 
+    /** Returns the list of tasks with upcoming deadlines {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    //@@author A0139633B
+    UnmodifiableObservableList<Task> getFilteredUpcomingTaskList();
+
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 

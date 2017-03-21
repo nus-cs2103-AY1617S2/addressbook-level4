@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     public static final String TYPE_UPCOMING = "upcoming";
 
     private static ArrayList<String> validCommands = new ArrayList<String>(Arrays.asList(
-            TYPE_DEFAULT, TYPE_ALL, TYPE_INCOMPLETE, TYPE_COMPLETE, TYPE_OVERDUE
+            TYPE_DEFAULT, TYPE_ALL, TYPE_INCOMPLETE, TYPE_COMPLETE, TYPE_OVERDUE, TYPE_UPCOMING
             ));
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -54,6 +54,10 @@ public class ListCommand extends Command {
 
         case TYPE_OVERDUE:
             model.getFilteredOverdueTaskList();
+            break;
+
+        case TYPE_UPCOMING:
+            model.getFilteredUpcomingTaskList();
             break;
 
         default:
