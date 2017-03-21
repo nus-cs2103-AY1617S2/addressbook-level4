@@ -198,7 +198,7 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] dl/12/12/2012 ds/valid des id/123",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name dl/192/168/201 ds/valid des",
+        assertCommandFailure("add Valid Name dl/11-dd/1111 ds/valid des",
                 Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         //assertCommandFailure("add Valid Name dl/12/12/2012 ds/valid des id/invalid",
         //        IdentificationNumber.MESSAGE_ID_CONSTRAINTS);

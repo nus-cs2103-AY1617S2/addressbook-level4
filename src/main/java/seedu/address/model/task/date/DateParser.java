@@ -4,8 +4,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 
 import seedu.address.commons.util.StringUtil;
 
@@ -20,81 +26,94 @@ public class DateParser {
     /* Preposition constants */
     public static final String FROM = "from";
 
-
     /* Regex constants */
     public static final String TIMEPERIOD_DELIMINATORS_REGEX = "(from|to)";
 
-    /* Date and time format */
-    public static final String[] DATE_VALIDATION_FORMAT = {
-        "dd-MM-yy",
-        "dd/MM/yy",
-        "dd-MM-yyyy",
-        "dd/MM/yyyy",
-        "EEE, MMM dd yyyy",
-        "EEE, dd MMM yyyy"
+    public static final String[] DATE_NUMBERIC_REGEX = {
+        "\\d{1,4}:\\d{1,2}:\\d{1,4}",
+        "\\d{1,4}/\\d{1,2}/\\d{1,4}",
+        "\\d{1,4}.\\d{1,2}.\\d{1,4}",
+        "\\d{1,4}-\\d{1,2}-\\d{1,4}"
     };
 
-    public static final String[] TIME_VALIDATION_FORMAT = {
-        "KK:mm aaa",
-        "hh:mm aaa",
-        "HH:mm"
+    public static final String[] DATE_NUMBERIC_FORMATS = {
+        "dd.MM.yy", "dd/MM/yy", "dd-MM-yy", "dd:MM:yy",
+        "dd.MM.yyyy", "dd/MM/yyyy", "dd-MM-yyyy", "dd:MM:yyyy",
+        "yyyy.MM.dd", "yyyy/MM/dd", "yyyy-MM-dd", "yyyy:MM:dd"
     };
 
-    // Separators used to combine date and time
-    public static final String[] DATE_TIME_SEPARATORS = {
-        ", ",
-        " "
-    };
+    public static String convertDateStringToAmericanFormat(String dateString) {
+
+        for (String regex : DATE_NUMBERIC_REGEX) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(dateString);
+
+            // Only attempt once
+            if (matcher.find()) {
+                String matchedSubstr = matcher.group();
+
+                // Converting
+                for (String dateFormat : DATE_NUMBERIC_FORMATS) {
+                    DateFormat df = new SimpleDateFormat(dateFormat);
+                    df.setLenient(false);
+                    try {
+                        Date date = df.parse(matchedSubstr);
+                        String convertedSubstr = (date.getMonth() + 1) + "/"   // Starting at 0
+                                                    + date.getDate() + "/"
+                                                    + (date.getYear() + 1900); // Years from 1900
+                        return matcher.replaceFirst(convertedSubstr);
+                    } catch (ParseException e) {
+                        // Do nothing
+                    }
+                }
+            }
+        }
+
+        // No conversion made
+        return dateString;
+    }
 
 
     /**
      * Parsers.
-     *
-     * - parseTimePeriodsString tries to find beginning date and ending date
-     *   and parse them separately
      */
-    public static Optional<Date> parseString(String dateString, String[] dateFormats) {
-        dateString = StringUtil.removeRedundantSpaces(dateString);
-        dateString = dateString.toLowerCase();
+    public static Optional<DateValue> parseString(String dateString) {
+        // Natty only converts dates in American format.
+        dateString = convertDateStringToAmericanFormat(dateString);
 
-        for (String dateFormat : dateFormats) {
-            try {
-                DateFormat df = new SimpleDateFormat(dateFormat);
-                df.setLenient(false);
-                return Optional.of(df.parse(dateString));
-            } catch (ParseException e) {
-                // Do nothing
+        Parser parser = new Parser();
+        List<DateGroup> groups = parser.parse(dateString);
+
+        // Accept no more than 1 result
+        int count = 0;
+        for (DateGroup group : groups) {
+            count += group.getDates().size();
+        }
+        if (count > 1) {
+            return Optional.ofNullable(null);
+        }
+
+        for (DateGroup group : groups) {
+            List<Date> dates = group.getDates();
+            for (Date date : dates) {
+                if (group.isTimeInferred()) {
+                    DateOnly result = new DateOnly(date);
+                    return Optional.of((DateValue) result);
+                } else {
+                    DateTime result = new DateTime(date);
+                    return Optional.of((DateValue) result);
+                }
             }
         }
         return Optional.ofNullable(null);
     }
 
-    public static Optional<DateValue> parseDateOnlyString(String dateString) {
-        Optional<Date> parseResult = parseString(dateString, DATE_VALIDATION_FORMAT);
-        return Optional.ofNullable((parseResult.isPresent() ?
-                                    (DateValue) new DateOnly(parseResult.get()) : null));
-    }
-
-    public static Optional<DateValue> parseDateTimeString(String dateString) {
-        Optional<Date> parseResult = parseString(dateString, TIME_VALIDATION_FORMAT);
-        if (parseResult.isPresent()) {
-            // If only time is present, date is default to be today.
-            return Optional.of((DateValue) new DateTime(new Date(), parseResult.get()));
-        } else {
-            parseResult = parseString(dateString, getAllPossibleDateTimeFormats());
-            return Optional.ofNullable((parseResult.isPresent() ?
-                                        (DateValue) new DateTime(parseResult.get()) : null));
-        }
-    }
 
     public static Optional<DateValue> parseTimePointString(String dateString) {
-        Optional<DateValue> parseResult = parseDateTimeString(dateString);
-        if (!parseResult.isPresent()) {
-            parseResult = parseDateOnlyString(dateString);
-            return Optional.ofNullable((parseResult.isPresent() ?
-                                        (DateValue) new DateOnly(parseResult.get()) : null));
-        }
-        return Optional.of((DateValue) new DateTime(parseResult.get()));
+        dateString = StringUtil.removeRedundantSpaces(dateString);
+        dateString = dateString.toLowerCase();
+
+        return parseString(dateString);
     }
 
 
@@ -122,29 +141,6 @@ public class DateParser {
         } else {
             return Optional.ofNullable(null);
         }
-    }
-
-
-    /**
-     * Returns all combinations of date, time and separator
-     */
-    public static String[] getAllPossibleDateTimeFormats() {
-        // Init date formats
-        int dateFormatsCount = DATE_VALIDATION_FORMAT.length
-                                * DATE_TIME_SEPARATORS.length
-                                * TIME_VALIDATION_FORMAT.length;
-        String[] dateFormats = new String[dateFormatsCount];
-
-        // Add all combinations of time and date
-        int index = 0;
-        for (String dateRegex : DATE_VALIDATION_FORMAT) {
-            for (String separator : DATE_TIME_SEPARATORS) {
-                for (String timeRegex : TIME_VALIDATION_FORMAT) {
-                    dateFormats[index++] = dateRegex + separator + timeRegex;
-                }
-            }
-        }
-        return dateFormats;
     }
 
     /**

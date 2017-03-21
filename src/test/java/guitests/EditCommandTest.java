@@ -92,7 +92,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 dl/11-11/1111");
+        commandBox.runCommand("edit 1 dl/11-dd/1111");
         assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
 
         //commandBox.runCommand("edit 1 e/yahoo!!!");
