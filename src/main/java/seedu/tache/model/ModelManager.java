@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowUncompleted();
         indicateTaskManagerChanged();
     }
 
