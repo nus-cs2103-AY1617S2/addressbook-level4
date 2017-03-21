@@ -177,11 +177,9 @@ public class ParserUtil {
         for (String key: keys) {
             //locate the case insensitive acceptable alternate prefixes from the input.
             if (Pattern.compile(Pattern.quote(key), Pattern.CASE_INSENSITIVE).matcher(result).find()) {
-                System.out.println("match found " + key);
                 result = result.replaceAll("(?i)" + key, flexiblePrefixes.get(key));
             }
         }
-        System.out.println("res is: " + result);
         return result;
     }
 }
