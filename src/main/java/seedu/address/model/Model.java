@@ -23,8 +23,7 @@ public interface Model {
     ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target)
-            throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -40,8 +39,7 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Returns the filtered task list as an
@@ -56,19 +54,23 @@ public interface Model {
      * Updates the filter of the filtered task list to filter by the given
      * keywords
      */
-    void updateFilteredTaskList(Set<String> keywords, Date date,
-            Set<String> tagKeys);
+    void updateFilteredTaskList(Set<String> keywords, Date date, Set<String> tagKeys);
 
     /** Informs eventbus about the change in save location */
     void updateSaveLocation(String path);
 
-    /** Divides task lists by categories into three separate ObservableList
-     *  which will be provided by UI
-     * 
-     * @param taskListToday task to be displayed under category 'Today'
-     * @param taskListFuture task to be displayed under category 'Future'
-     * @param taskListCompleted task to be displayed under category 'Completed'
+    /**
+     * Divides task lists by categories into three separate ObservableList which
+     * will be provided by UI
+     *
+     * @param taskListToday
+     *            task to be displayed under category 'Today'
+     * @param taskListFuture
+     *            task to be displayed under category 'Future'
+     * @param taskListCompleted
+     *            task to be displayed under category 'Completed'
      */
-    void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,ObservableList<ReadOnlyTask> taskListCompleted);
+    void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+            ObservableList<ReadOnlyTask> taskListCompleted);
 
 }

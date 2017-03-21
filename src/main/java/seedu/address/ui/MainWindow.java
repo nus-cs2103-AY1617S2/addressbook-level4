@@ -139,13 +139,13 @@ public class MainWindow extends UiPart<Region> {
      * Prepares categorised task list for today/future/completed ListView
      *
      */
-    public void prepareTaskList(){
+    public void prepareTaskList() {
         // Assume the three lists will always be initialised by fillInnerParts()
         assert taskListToday != null;
         assert taskListFuture != null;
         assert taskListCompleted != null;
-        
-        logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted); 
+
+        logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

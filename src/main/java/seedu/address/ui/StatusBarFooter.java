@@ -43,7 +43,7 @@ public class StatusBarFooter extends UiPart<Region> {
     private void setSaveLocation(String location) {
         setMessageStatus(location);
     }
-    
+
     private void setMessageStatus(String status) {
         this.messageStatus.setText(status);
     }
