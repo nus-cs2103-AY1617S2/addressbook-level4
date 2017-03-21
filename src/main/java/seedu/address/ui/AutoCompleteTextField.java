@@ -93,10 +93,11 @@ public class AutoCompleteTextField extends TextField {
     }
 
     private void initializeEntries() {
-        entries.add("@venue ");
-        entries.add("@start ");
-        entries.add("@end ");
-        entries.add("@tag ");
+        entries.add("/venue ");
+        entries.add("/from ");
+        entries.add("/to ");
+        entries.add("/level ");
+        entries.add("/description ");
     }
 
     /**
