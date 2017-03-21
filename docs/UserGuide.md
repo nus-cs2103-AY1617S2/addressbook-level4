@@ -69,7 +69,7 @@ Examples:
 * `add Do laundry`
 * `add Finish v0.0 documentation n/Urgent s/Incomplete b/28/02/2017 12:00 p/1 t/CS2103T`
 
-### 2.3. Sort tasks : `sort`
+### 2.3. Sort tasks : `sort` (Work in progress)
 
 Sorts the list of tasks currently being shown according to the parameters.<br>
 Format: `sort [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY]...`
@@ -106,7 +106,7 @@ Examples:
 * `mark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as complete.
 
-### 2.6. Unmark task
+### 2.6. Unmark task (Work in progress)
 
 Marks task as incomplete.<br>
 Format: `unmark INDEX...`
@@ -120,7 +120,7 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Schedule
+### 2.7. Schedule (Work in progress)
 
 Set an event or a deadline.<br>
 Format: `schedule INDEX [STARTIME] ENDTIME`
@@ -156,7 +156,7 @@ Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
 
-### 2.11. Autocomplete
+### 2.11. Autocomplete (Work in progress)
 
 Autocomplete the user's command on the CLI.
 
