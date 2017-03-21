@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.atteo.evo.inflector.English;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.CollectionUtil;
@@ -22,8 +23,8 @@ import seedu.toluist.ui.UiStore;
  * Mark Controller is responsible for marking task complete or incomplete
  */
 public class MarkController extends Controller {
-    private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "Task(s) %s marked completed";
-    private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "Task(s) %s marked incomplete";
+    private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "%s %s marked completed";
+    private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
     private static final String COMMAND_TEMPLATE = "mark(\\s+(?<markType>(complete|incomplete)))?(?<index>.*)?\\s*";
     private static final String COMMAND_WORD = "mark";
 
@@ -75,7 +76,8 @@ public class MarkController extends Controller {
         String messageTemplate = isCompleted
                 ? RESULT_MESSAGE_COMPLETED_SUCCESS
                 : RESULT_MESSAGE_INCOMPLETE_SUCCESS;
-        return new CommandResult(String.format(messageTemplate, indexString));
+        return new CommandResult(String.format(messageTemplate,
+                English.plural("Task", taskIndexes.size()), indexString));
     }
 
     public HashMap<String, String> tokenize(String command) {

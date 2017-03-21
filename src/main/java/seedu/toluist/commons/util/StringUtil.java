@@ -1,5 +1,7 @@
 package seedu.toluist.commons.util;
 
+import org.atteo.evo.inflector.English;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -64,5 +66,18 @@ public class StringUtil {
      */
     public static boolean isPositiveInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
+    }
+
+    /**
+     * Given a noun and a count, return the count followed by the noun in singular/plural form appropriately
+     * E.g:
+     * "word", 1 -> "1 word"
+     * "cat", 2 -> "2 cats"
+     * @param noun a noun
+     * @param count the quantity
+     * @return noun with count
+     */
+    public static String nounWithCount(String noun, int count) {
+        return count + " " + English.plural(noun, count);
     }
 }

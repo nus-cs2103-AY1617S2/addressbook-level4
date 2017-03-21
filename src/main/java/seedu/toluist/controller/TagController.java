@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
@@ -27,9 +28,9 @@ public class TagController extends Controller {
     private static final int INDEX_SECTION = 0;
     private static final int KEYWORDS_SECTION = 1;
 
-    private static final String SUCCESS_MESSAGE_TEMPLATE = "Sucessfully added \"%s\".\n";
+    private static final String SUCCESS_MESSAGE_TEMPLATE = "Successfully added \"%s\".\n";
     private static final String FAIL_MESSAGE_TEMPLATE = "Failed to add \"%s\".\n";
-    private static final String RESULT_MESSAGE_TEMPLATE = "%s%d tag(s) successfully added.";
+    private static final String RESULT_MESSAGE_TEMPLATE = "%s%s successfully added.";
 
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
@@ -97,7 +98,8 @@ public class TagController extends Controller {
             resultMessage += String.format(FAIL_MESSAGE_TEMPLATE, failWords);
         }
 
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, resultMessage, successCount));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, resultMessage,
+                StringUtil.nounWithCount("tag", successCount)));
     }
 
     public HashMap<String, String> tokenize(String command) {

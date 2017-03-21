@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
@@ -31,8 +32,8 @@ public class FindController extends Controller {
     private static final String COMMAND_SPLITTER_REGEX = " ";
     private static final int PARAMETER_SECTION = 1;
 
-    private static final String FIND_RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%d results found";
-    private static final String LIST_RESULT_MESSAGE_TEMPLATE = "Listing all %d tasks.";
+    private static final String FIND_RESULT_MESSAGE_TEMPLATE = "Searching for \"%s\" by %s.\n%s found";
+    private static final String LIST_RESULT_MESSAGE_TEMPLATE = "Listing all %s.";
     private static final String NAME_MESSAGE = "name";
     private static final String TAG_MESSAGE = "tag";
     private static final String NAME_AND_TAG_MESSAGE = "name and tag";
@@ -85,7 +86,8 @@ public class FindController extends Controller {
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
                                         String[] keywordList, int foundCount) {
         if (keywordList[0].equals(NULL_PARAMETER)) {
-            return new CommandResult(String.format(LIST_RESULT_MESSAGE_TEMPLATE, foundCount));
+            return new CommandResult(String.format(LIST_RESULT_MESSAGE_TEMPLATE,
+                StringUtil.nounWithCount("task", foundCount)));
         }
 
         String searchParameters;
@@ -100,7 +102,7 @@ public class FindController extends Controller {
 
         String keywords = String.join(STRING_JOINING_MESSAGE, keywordList);
         return new CommandResult(String.format(FIND_RESULT_MESSAGE_TEMPLATE,
-                                 keywords, searchParameters, foundCount));
+                                 keywords, searchParameters, StringUtil.nounWithCount("result", foundCount)));
     }
 
     public HashMap<String, String> tokenize(String command) {

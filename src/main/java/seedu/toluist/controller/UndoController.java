@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
@@ -18,7 +19,7 @@ public class UndoController extends Controller {
     private static final String COMMAND_TEMPLATE = "^undo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "undo";
     private static final String UNDO_TIMES = "number";
-    private static final String RESULT_MESSAGE_TEMPLATE = "List undo-ed %d times";
+    private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s to the data %s undone.";
 
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
@@ -40,7 +41,9 @@ public class UndoController extends Controller {
         uiStore.setTask(todoList.getTasks());
         renderer.render();
 
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualUndoTimes));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
+                StringUtil.nounWithCount ("change", actualUndoTimes),
+                actualUndoTimes == 1 ? "was" : "were"));
     }
 
     public HashMap<String, String> tokenize(String command) {
