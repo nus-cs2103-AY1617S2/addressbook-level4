@@ -1,5 +1,6 @@
 package typetask.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     @FXML
-    private void handleCommandInputChanged() {
+    private void handleCommandInputChanged() throws IOException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 

@@ -1,14 +1,20 @@
 package typetask.logic.commands;
 
+import java.io.IOException;
+
+import typetask.commons.core.Config;
 import typetask.commons.core.Messages;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.Model;
+import typetask.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
+    protected Storage storage;
+    protected Config config;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -25,15 +31,18 @@ public abstract class Command {
      *
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
+     * @throws IOException
      */
-    public abstract CommandResult execute() throws CommandException;
+    public abstract CommandResult execute() throws CommandException, IOException;
 
     /**
      * Provides any needed dependencies to the command.
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    public void setData(Model model) {
+    public void setData(Model model, Storage storage, Config config) {
         this.model = model;
+        this.storage = storage;
+        this.config = config;
     }
 }
