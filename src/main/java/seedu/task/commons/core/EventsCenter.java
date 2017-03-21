@@ -7,7 +7,7 @@ import com.google.common.eventbus.EventBus;
 import seedu.task.commons.events.BaseEvent;
 
 /**
- * Manages the event dispatching of the app.
+ * Manages the event dispatching of the application.
  */
 public class EventsCenter {
     private static final Logger logger = LogsCenter.getLogger(EventsCenter.class);
