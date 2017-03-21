@@ -55,6 +55,7 @@ public class TaskBuilder {
     }
 
     public TestTask build() {
+        this.task.initTaskType();
         return this.task;
     }
 

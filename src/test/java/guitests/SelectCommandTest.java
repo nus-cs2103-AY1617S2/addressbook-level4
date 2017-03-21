@@ -8,6 +8,8 @@ import org.junit.Test;
 //import seedu.onetwodo.logic.commands.EditCommand;
 
 import seedu.onetwodo.logic.commands.SelectCommand;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
 
 public class SelectCommandTest extends ToDoListGuiTest {
 
@@ -48,16 +50,18 @@ public class SelectCommandTest extends ToDoListGuiTest {
         String displayPrefixIndex = prefixIndex.substring(0, 1).toUpperCase()
                                         + prefixIndex.substring(1);
         assertResultMessage("Selected Task: " + displayPrefixIndex);
-        //assertTaskSelected(prefixIndex);
+        assertTaskSelected(prefixIndex);
     }
 
-/*    private void assertTaskSelected(String prefixIndex) {
-        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+    private void assertTaskSelected(String prefixIndex) {
+        TaskType taskType = TaskType.getTaskTypeFromChar(prefixIndex.charAt(0));
         int index = Integer.parseInt(prefixIndex.substring(1));
-        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
+
+        assertEquals(taskListPanel.getSelectedTasks(taskType).size(), 1);
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks(taskType).get(0);
+        assertEquals(taskListPanel.getTask(taskType, index - 1), selectedTask);
         //TODO: confirm the correct page is loaded in the Browser Panel
-    }*/
+    }
 
     private void assertNoTaskSelected() {
         assertEquals(taskListPanel.getSelectedTasks().size(), 0);

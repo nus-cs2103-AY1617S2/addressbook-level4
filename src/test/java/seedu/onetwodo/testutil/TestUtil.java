@@ -38,6 +38,7 @@ import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.storage.XmlSerializableToDoList;
 
 /**
@@ -311,6 +312,17 @@ public class TestUtil {
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
         tasks[index] = task;
         return tasks;
+    }
+
+    /**
+     * @param tasks
+     * @param type
+     * @return Filtered ReadOnlyTask[] by task type
+     */
+    public static ReadOnlyTask[] getTasksByTaskType(ReadOnlyTask[] tasks, TaskType type) {
+        return Arrays.stream(tasks)
+                .filter(task -> task.getTaskType() == type)
+                .toArray(TestTask[]::new);
     }
 
     /**

@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,23 +50,22 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public List<String> getTags() {
-        return getTags(getTagsContainer());
+        List<String> result = getTags(getTagsContainer());
+        Collections.sort(result);
+        return result;
     }
 
     private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(node -> ((Labeled) node).getText())
+        return tagsContainer.getChildrenUnmodifiable().stream().map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
 
     private List<String> getTags(UniqueTagList tags) {
-        return tags
-                .asObservableList()
-                .stream()
+        List<String> result = tags.asObservableList().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList());
+        Collections.sort(result);
+        return result;
     }
 
     private Region getTagsContainer() {
@@ -84,10 +84,8 @@ public class TaskCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getTime().equals(handle.getTime())
-                    && getDate().equals(handle.getDate())
-                    && getDescription().equals(handle.getDescription())
+            return getFullName().equals(handle.getFullName()) && getTime().equals(handle.getTime())
+                    && getDate().equals(handle.getDate()) && getDescription().equals(handle.getDescription())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);

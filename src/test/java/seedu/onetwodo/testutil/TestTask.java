@@ -24,7 +24,7 @@ public class TestTask implements ReadOnlyTask {
 
     public TestTask() {
         tags = new UniqueTagList();
-        type = TaskType.TODO;
+        type = null;
     }
 
     /**
@@ -37,6 +37,10 @@ public class TestTask implements ReadOnlyTask {
         this.description = taskToCopy.getDescription();
         this.isDone = taskToCopy.getDoneStatus();
         this.tags = taskToCopy.getTags();
+        initTaskType();
+    }
+
+    public void initTaskType() {
         if (!startDate.hasDate() && !endDate.hasDate()) {
             this.type = TaskType.TODO;
         } else if (!startDate.hasDate() && endDate.hasDate()) {
