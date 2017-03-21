@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.todolist.commons.core.ComponentManager;
+import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.logic.commands.Command;
 import seedu.todolist.logic.commands.CommandResult;
@@ -21,19 +22,21 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final Config config;
     private UndoManager undoManager;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, Config config) {
         this.model = model;
         this.parser = new Parser();
         this.undoManager = new UndoManager(model);
+        this.config = config;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model, undoManager);
+        command.setData(model, undoManager, config);
         if (command.isMutating()) {
             undoManager.addMutatingTask(command);
         }

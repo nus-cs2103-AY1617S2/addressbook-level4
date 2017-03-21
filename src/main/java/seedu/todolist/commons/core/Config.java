@@ -39,7 +39,7 @@ public class Config {
     }
 
     public void setUserPrefsFilePath(String userPrefsFilePath) {
-        this.userPrefsFilePath = userPrefsFilePath;
+    	this.userPrefsFilePath = userPrefsFilePath;
     }
 
     public String getToDoListFilePath() {
