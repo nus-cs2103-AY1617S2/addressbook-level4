@@ -103,8 +103,8 @@ public class ModelManager extends ComponentManager implements Model {
         int listSize = taskListWithCategory.size();
         System.out.println("list size: " + listSize);
         int i;
-        for (i = 0; i < listSize; i++ ) {
-            System.out.println("i is: "+i);
+        for (i = 0; i < listSize; i++) {
+            System.out.println("i is: " + i);
             ReadOnlyTask target = taskListWithCategory.get(0);
             try {
                 taskBoss.removeTask(target);
