@@ -23,7 +23,7 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Name name, Time time, ClockTime clockTime, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, time, tags);
+        assert !CollectionUtil.isAnyNull(name, time, clockTime, tags);
         this.name = name;
         this.time = time;
         this.clockTime = clockTime;
@@ -58,7 +58,7 @@ public class Task implements ReadOnlyTask {
     }
     
     //@@author A0143873Y
-    public void setEmail(ClockTime clockTime) {
+    public void setClockTime(ClockTime clockTime) {
         assert clockTime != null;
         this.clockTime = clockTime;
     }
@@ -66,6 +66,7 @@ public class Task implements ReadOnlyTask {
     public ClockTime getClockTime() {
         return clockTime;
     }
+    //@@author
 
     @Override
     public UniqueTagList getTags() {
@@ -87,7 +88,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setTime(replacement.getTime());
-        //this.setClockTime(replacement.getClockTime());
+        this.setClockTime(replacement.getClockTime());
         //this.setAddress(replacement.getAddress());
         this.setTags(replacement.getTags());
     }

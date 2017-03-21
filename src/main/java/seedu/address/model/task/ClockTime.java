@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 //@@author A0143873Y
@@ -10,6 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 
 public class ClockTime {
+    //private final Logger logger = LogsCenter.getLogger(ClockTime.class);
 
     public static final String MESSAGE_CLOCKTIME_CONSTRAINTS =
             "Time of task should be 2 alphanumeric/period strings separated by '@'";
@@ -18,13 +18,13 @@ public class ClockTime {
     public final String value;
 
     /**
-     * Validates given email.
+     * Validates given clockTime.
      *
-     * @throws IllegalValueException if given email address string is invalid.
+     * @throws IllegalValueException if given clockTime address string is invalid.
      */
-    public ClockTime(String email) throws IllegalValueException {
-        assert email != null;
-        String trimmedClockTime = email.trim();
+    public ClockTime(String clockTime) throws IllegalValueException {
+        assert (clockTime != null);  
+        String trimmedClockTime = clockTime.trim();
         if (!isValidClockTime(trimmedClockTime)) {
             throw new IllegalValueException(MESSAGE_CLOCKTIME_CONSTRAINTS);
         }
@@ -32,7 +32,7 @@ public class ClockTime {
     }
 
     /**
-     * Returns if a given string is a valid task email.
+     * Returns if a given string is a valid task clockTime.
      */
     public static boolean isValidClockTime(String test) {
         return test.matches(CLOCKTIME_VALIDATION_REGEX);

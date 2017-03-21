@@ -27,6 +27,7 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getTime().equals(this.getTime())
+                && other.getClockTime().equals(this.getClockTime())
                 );
     }
 
@@ -38,6 +39,8 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" Time: ")
                 .append(getTime())
+                .append(" ClockTime: ")
+                .append(getClockTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

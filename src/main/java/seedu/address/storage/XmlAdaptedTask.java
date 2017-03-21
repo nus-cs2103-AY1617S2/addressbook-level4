@@ -18,6 +18,7 @@ import seedu.address.model.task.Time;
  * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
+    //private final Logger logger = LogsCenter.getLogger(XmlAdaptedTask.class);
 
     @XmlElement(required = true)
     private String name;
@@ -46,6 +47,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         time = source.getTime().value;
+        clockTime = source.getClockTime().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -62,6 +64,14 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+        
+        /*
+        logger.setLevel(Level.INFO);
+        logger.info("name: " + this.name);
+        logger.info("time: " + this.time);
+        logger.info("clockTime: " + this.clockTime);
+        */
+        
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
         final ClockTime clockTime = new ClockTime(this.clockTime);
