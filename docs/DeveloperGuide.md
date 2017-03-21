@@ -16,7 +16,14 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+<br>
+FlexiTask is a task manager that helps users to manage schedules and tasks using simple command-line interfaces commands.
 
+This guide describes the design and implementation of FlexiTask. This developer guide is for both existing and new developers who are interested in working on FlexiTask in the future.
+
+It will walk you through the Setup, Architecture, APIs and the details regarding the different components of the program.
+
+<br>
 ## 1. Setting up
 
 ### 1.1. Prerequisites
@@ -28,7 +35,7 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 2. **Eclipse** IDE
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+   [this link](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
@@ -45,7 +52,7 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
+      (This is because Gradle downloads library files from servers during the project setup process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 1.3. Configuring Checkstyle
@@ -78,17 +85,18 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 ### 2.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 1: Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+The **_Architecture Diagram_** given above explains the high-level design of FlexiTask.
+Given below is a quick overview of the main components and their main responsibilities.
 
-
+#### 2.1. Main
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/tasklist/MainApp.java). It is responsible for,
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* Initializing the components in the correct sequence, and connects them up with each other when FlexiTask launches 
+* Shutting down the components and invokes cleanup method where necessary, when FlexiTask shuts down.
 
+#### 2.2. Commons
 [**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
@@ -100,47 +108,50 @@ The rest of the App consists of four components.
 
 * [**`UI`**](#22-ui-component) : The UI of the App.
 * [**`Logic`**](#23-logic-component) : The command executor.
-* [**`Model`**](#24-model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#25-storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`Model`**](#24-model-component) : The in-memory representation of the task list.
+* [**`Storage`**](#25-storage-component) : The component responsible for reading data from, and writing data to, the hard disk.
+<br>
+
 
 Each of the four components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
+<br>
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
+
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+_Figure 2: Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
+Figure 3 below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
 <img src="images/SDforDeleteTask.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+_Figure 3: Component Interactions for `delete 1` Command (Part 1)_
 
->Note how the `Model` simply raises a `TaskListChangedEvent` when the FlexiTask data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when FlexiTask data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
+Figure 4 below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 <img src="images/SDforDeleteTaskEvent.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 4: Component Interactions for `delete 1` Command (Part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
+  to be coupled to either of them. This is an example of how this Events-Driven approach helps us reduce direct
   coupling between components.
 
 The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 5: Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/tasklist/ui/Ui.java)
 
@@ -160,43 +171,43 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+_Figure 6: Structure of the Logic Component_
 
+Figure 6 shows how different components interact with each other.<br>
 **API** : [`Logic.java`](../src/main/java/seedu/tasklist/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Figure 7 below shows the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 7: Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+_Figure 8: Structure of the Model Component_
+
+Figure 8 shows the dependency of the classes within the `Model` and how they depend on each other.<br>
 
 **API** : [`Model.java`](../src/main/java/seedu/tasklist/model/Model.java)
 
-The `Model`,
+The `Model` has the following features:
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the FlexiTask data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* stays independent on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -210,7 +221,13 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.tasklist.commons` package.
+Classes used by multiple components are in the `seedu.tasklist.commons` package.<br>
+They are divided into four sub-packages, namely `core`, `events`, `exceptions` and `util`.
+
+* `core` - consists of the essential classes that are required by multiple components.
+* `events` - consists of the different type of events that can occue; these are used mainly by `EventManager` and `EventBus`.
+* `exceptions` - consists of exceptions that may occur with the use of the program.
+* `util` - consists of additional utilities for the different components.
 
 ## 3. Implementation
 
@@ -219,13 +236,17 @@ Classes used by multiple components are in the `seedu.tasklist.commons` package.
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#32-configuration))
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+> The logging level can be controlled using the `logLevel` setting in the configuration file
+  (See [Configuration](#32-configuration))<br>
+  
+> The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
+  the specified logging level<br>
+  
+> The log messages are currently output through: `Console` and to a `.log` file.
 
-**Logging Levels**
+####3.1.1. **Logging Levels**
+
+Currently, FlexiTask has 4 logging levels: `SEVERE`, `WARNING`, `INFO` and `FINE`. They record information pertaining to: 
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Can continue, but with caution
