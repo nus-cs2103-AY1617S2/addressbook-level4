@@ -37,6 +37,25 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBook = new TaskManager(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getTaskList());
     }
+    
+    public static boolean patternStringMatch(String p, String t) {
+    	int i = 0;
+    	int j = 0;
+    	System.out.println(p);
+    	System.out.println(t);
+    	while (i <= t.length() - p.length()) {
+    		if (p.substring(j, j + 1).equals(t.substring(i + j, i + j + 1))) {
+    			j++;
+    			if (j >= p.length()) {
+    				return true;
+    			}
+    		} else {
+				j = 0;
+				i++;
+    		}
+    	}
+    	return false;
+    }
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
@@ -142,11 +161,20 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask person) {
-            return nameKeyWords.stream()
+        	for (String s : nameKeyWords) {
+        		assert s.length() > 0;
+        		if (patternStringMatch(s, person.getTaskName().fullName)) {
+        			return true;
+        		}
+        	}
+        	return false;
+            /*return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getTaskName().fullName, keyword))
                     .findAny()
                     .isPresent();
+                    */
         }
+        
 
         @Override
         public String toString() {
