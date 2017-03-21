@@ -15,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -26,11 +27,12 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/app_icon.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 500;
+    private static final int MIN_WIDTH = 800;
 
     private Stage primaryStage;
     private Logic logic;
+    private Model model;
     private CommandBox commandBox;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -38,10 +40,11 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    private LeftPanel leftPanel;
     private Config config;
 
-    @FXML
-    private AnchorPane browserPlaceholder;
+    //@FXML
+    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -58,13 +61,17 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    @FXML
+    private AnchorPane leftPanelPlaceholder;
+
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
         super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.config = config;
+        this.model = model;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -121,13 +128,19 @@ public class MainWindow extends UiPart<Region> {
      * but only update appropriate components if already initialized
      */
     public void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        //browserPanel = new BrowserPanel(browserPlaceholder);
 
         if (taskListPanel == null) {
             taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         } else {
             //Update the logic only
             taskListPanel.setConnections(logic.getFilteredTaskList());
+        }
+
+        if (leftPanel == null) {
+            leftPanel = new LeftPanel(getleftPanelPlaceholder(), logic.getFilteredTaskList(), model.getTaskManager().getLabelList());
+        } else {
+            leftPanel.setConnections(model.getTaskManager().getLabelList());
         }
 
         if (resultDisplay == null) {
@@ -162,6 +175,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getleftPanelPlaceholder() {
+        return leftPanelPlaceholder;
     }
 
     public void hide() {
@@ -228,11 +245,11 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
+        //browserPanel.loadTaskPage(task);
     }
 
     public void releaseResources() {
-        browserPanel.freeResources();
+        //browserPanel.freeResources();
     }
 
     public void setLogic(Logic logic) {
