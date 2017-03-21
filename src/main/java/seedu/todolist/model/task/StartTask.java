@@ -19,6 +19,19 @@ public class StartTask extends Task {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.completed = false;
     }
+    
+    /**
+     * Overloaded constructor that also takes in isComplete attribute
+     * to ensure proper loading from the database.
+     */
+    public StartTask(Name name, StartTime startTime, 
+    		UniqueTagList tags, boolean isComplete) {
+        assert !CollectionUtil.isAnyNull(name, startTime, tags);
+        this.name = name;
+        this.startTime = startTime;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.completed = isComplete;
+    }
 
     public void setName(Name name) {
         assert name != null;

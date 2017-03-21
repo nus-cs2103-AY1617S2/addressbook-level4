@@ -16,6 +16,17 @@ public class FloatingTask extends Task {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.completed = false;
     }
+    
+    /**
+     * Overloaded constructor that also takes in isComplete attribute
+     * to ensure proper loading from the database.
+     */
+    public FloatingTask(Name name, UniqueTagList tags, boolean isComplete) {
+        assert !CollectionUtil.isAnyNull(name, tags);
+        this.name = name;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.completed = isComplete;
+    }
 
     public void setName(Name name) {
         assert name != null;
