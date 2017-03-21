@@ -272,5 +272,4 @@ public class TaskList implements ReadOnlyTaskList {
             }
         });
     }
-
 }
