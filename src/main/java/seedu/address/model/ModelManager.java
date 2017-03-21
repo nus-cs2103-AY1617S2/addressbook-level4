@@ -179,4 +179,16 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredEventList() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredDeadlineList() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

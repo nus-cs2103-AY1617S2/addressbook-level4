@@ -51,4 +51,8 @@ public interface Model {
     /** Updates the filter of the filtered activity list to filter by the given keywords*/
     void updateFilteredActivityList(Set<String> keywords);
 
+    UnmodifiableObservableList<ReadOnlyActivity> getFilteredEventList();
+
+    UnmodifiableObservableList<ReadOnlyActivity> getFilteredDeadlineList();
+
 }
