@@ -24,7 +24,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private UniqueTagList tags;
 
     public TestTask() {
-        tags = new UniqueTagList();
+        this.tags = new UniqueTagList();
     }
 
     /**
@@ -34,7 +34,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.startTime = taskToCopy.getStartTime();
-        this.endTime = taskToCopy.getEndTime();
+        this.endTime = taskToCopy.getDeadline();
         this.isDone = false;
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
@@ -42,7 +42,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(Name name) {
@@ -51,7 +51,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public Priority getPriority() {
-        return priority;
+        return this.priority;
     }
 
     public void setPriority(Priority priority) {
@@ -69,7 +69,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public StartTime getStartTime() {
-        return startTime;
+        return this.startTime;
     }
 
     public void setStartTime(StartTime startTime) {
@@ -77,8 +77,8 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     @Override
-    public EndTime getEndTime() {
-        return endTime;
+    public EndTime getDeadline() {
+        return this.endTime;
     }
 
     public void setDeadline(EndTime endTime) {
@@ -87,7 +87,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public Description getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(Description description) {
@@ -98,7 +98,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public boolean hasStartTime() {
-        if (startTime != null) {
+        if (this.startTime != null) {
             return true;
         }
         return false;
@@ -106,7 +106,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public boolean hasEndTime() {
-        if (endTime != null) {
+        if (this.endTime != null) {
             return true;
         }
         return false;
@@ -114,7 +114,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     @Override
     public UniqueTagList getTags() {
-        return tags;
+        return this.tags;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -126,7 +126,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     @Override
     public boolean isEvent() {
-        return (hasStartTime() && hasEndTime());
+        return hasStartTime() && hasEndTime();
     }
 
     /**
@@ -134,7 +134,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     @Override
     public boolean isFloatingTask() {
-        return (!hasStartTime() && !hasEndTime());
+        return !hasStartTime() && !hasEndTime();
     }
 
     /**
@@ -142,7 +142,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     @Override
     public boolean isTask() {
-        return (!hasStartTime() && hasEndTime());
+        return !hasStartTime() && hasEndTime();
     }
 
     @Override
@@ -152,11 +152,11 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
-        sb.append("d/" + this.getDescription().value + " ");
+        sb.append("add " + getName().fullName + " ");
+        sb.append("d/" + getDescription().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        sb.append(((this.hasStartTime()) ? "s/" + this.getStartTime().value : "") + " ");
-        sb.append(((this.hasEndTime()) ? "e/" + this.getEndTime().value : "") + " ");
+        sb.append((this.hasStartTime() ? "s/" + this.getStartTime().value : "") + " ");
+        sb.append((this.hasEndTime() ? "e/" + this.getDeadline().value : "") + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

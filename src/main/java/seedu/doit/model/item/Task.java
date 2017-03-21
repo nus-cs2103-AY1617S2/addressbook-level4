@@ -86,8 +86,9 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getTags());
         this.startTime = source.getStartTime();
-        this.endTime = source.getEndTime();
+        this.endTime = source.getDeadline();
         this.isDone = source.getIsDone();
+
     }
 
     // ================ Getter and Setter methods ==============================
@@ -132,7 +133,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     @Override
-    public EndTime getEndTime() {
+    public EndTime getDeadline() {
         return this.endTime;
     }
 
@@ -218,7 +219,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.setName(replacement.getName());
         this.setPriority(replacement.getPriority());
         this.setStartTime(replacement.getStartTime());
-        this.setEndTime(replacement.getEndTime());
+        this.setEndTime(replacement.getDeadline());
         this.setIsDone(replacement.getIsDone());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());

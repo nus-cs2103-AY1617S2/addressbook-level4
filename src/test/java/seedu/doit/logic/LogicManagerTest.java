@@ -496,7 +496,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEndTime());
+            cmd.append(" e/").append(p.getDeadline());
             cmd.append(" p/").append(p.getPriority());
             cmd.append(" d/").append(p.getDescription());
 
