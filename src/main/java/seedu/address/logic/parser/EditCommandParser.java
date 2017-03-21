@@ -76,9 +76,15 @@ public class EditCommandParser {
         try {
             String fieldWordName = fieldWord.get();
             if (FIELDWORD_TITLE.equals(fieldWordName)) {
+                if(!Title.isValidName(updateInformation.get())) {
+                    return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
+                }
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
             }
             if (FIELDWORD_TAG.equals(fieldWordName)) {
+                if(!Tag.isValidTagName(updateInformation.get())) {
+                    return new IncorrectCommand(Tag.MESSAGE_TAG_CONSTRAINTS);
+                }
                 editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
             } 
         }catch (IllegalValueException ive) {
