@@ -26,8 +26,6 @@ public class Timeslot {
         if (!isValidTimeslot(this.start, this.end)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
         }
-
-//      TODO in model API. THis is to be done outside the timeslot class. if clashing etc.
     }
 
     /**Checks if {@code another} has overlapping timeslot with this Timeslot object.
