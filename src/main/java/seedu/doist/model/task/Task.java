@@ -76,6 +76,14 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -126,6 +134,8 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority());
         this.setFinishedStatus(replacement.getFinishedStatus());
         this.setTags(replacement.getTags());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
     }
 
     @Override
