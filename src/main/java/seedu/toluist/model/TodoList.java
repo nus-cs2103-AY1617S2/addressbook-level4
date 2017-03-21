@@ -3,12 +3,10 @@ package seedu.toluist.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.storage.JsonStorage;
 import seedu.toluist.storage.TodoListStorage;
@@ -17,16 +15,14 @@ import seedu.toluist.storage.TodoListStorage;
  * TodoList Model
  */
 public class TodoList {
-    private static final Logger logger = LogsCenter.getLogger(TodoList.class);
-    public static final TodoListStorage DEFAULT_STORAGE = new JsonStorage();
-    private static TodoList currentTodoList;
+    private static TodoList instance;
 
     private ArrayList<Task> allTasks = new ArrayList<>();
     @JsonIgnore
     private TodoListStorage storage = new JsonStorage();
 
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
+        return other == this // short circuit if same objectå
                 || (other instanceof TodoList // instanceof handles nulls
                 && allTasks.equals(((TodoList) other).getTasks()));
     }
@@ -39,37 +35,13 @@ public class TodoList {
      * Load the todo list data using the default storage if currentTodoList is null
      * Otherwise returns the current in-memory todo list
      */
-    public static TodoList load() {
+    public static TodoList getInstance() {
         // Initialize currentTodoList if not done
-        if (currentTodoList == null) {
-            currentTodoList = new TodoList(DEFAULT_STORAGE);
+        if (instance == null) {
+            instance = new TodoList();
         }
 
-        return currentTodoList;
-    }
-
-    /**
-     * Construct a todo list. Use the tasks saved in the storage
-     * Replaces the static currentTodoList
-     * @param storage a todo list storage
-     */
-    public TodoList(TodoListStorage storage) {
-        currentTodoList = this;
-        this.storage = storage;
-        try {
-            TodoList todoList = storage.load();
-            allTasks = todoList.getTasks();
-        } catch (DataStorageException e) {
-            logger.severe("Data cannot be loaded");
-        }
-    }
-
-    /**
-     * Construct a todo list. use the default storage
-     */
-    public TodoList() {
-        currentTodoList = this;
-        this.storage = DEFAULT_STORAGE;
+        return instance;
     }
 
     public void setStorage(TodoListStorage storage) {
@@ -80,12 +52,21 @@ public class TodoList {
         return storage;
     }
 
+    public void load() throws DataStorageException {
+        TodoList loadedTodoList = storage.load();
+        setTasks(loadedTodoList.getTasks());
+    }
+
+    public void load(String storagePath) throws DataStorageException {
+        TodoList loadedTodoList = storage.load(storagePath);
+        setTasks(loadedTodoList.getTasks());
+    }
+
     /**
      * Save the todo list data to disk
      * @return true / false
      */
     public boolean save() {
-        currentTodoList = this;
         return storage.save(this);
     }
 
@@ -95,7 +76,7 @@ public class TodoList {
      */
     public void add(Task task) {
         // Don't allow duplicate tasks
-        if (allTasks.indexOf(task) > -1) {
+        if (allTasks.contains(task)) {
             return;
         }
 

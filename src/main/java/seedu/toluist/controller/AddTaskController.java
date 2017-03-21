@@ -30,7 +30,7 @@ public class AddTaskController extends Controller {
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
-        TodoList todoList = TodoList.load();
+        TodoList todoList = TodoList.getInstance();
         CommandResult commandResult = new CommandResult("");
 
         HashMap<String, String> tokens = tokenize(command);

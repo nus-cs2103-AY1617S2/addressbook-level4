@@ -54,7 +54,7 @@ public class MarkController extends Controller {
             commandResult = mark(indexes, true);
         }
 
-        TodoList todoList = TodoList.load();
+        TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
             return new CommandResult(Messages.MESSAGE_SAVING_FAILURE);
         }

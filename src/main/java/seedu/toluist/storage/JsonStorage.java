@@ -23,8 +23,6 @@ public class JsonStorage implements TodoListStorage {
     private ArrayDeque<String> historyStack = new ArrayDeque<>();
     private ArrayDeque<String> redoHistoryStack = new ArrayDeque<>();
 
-    public JsonStorage() {}
-
     public boolean save(TodoList todoList) {
         return save(todoList, Config.getInstance().getTodoListFilePath());
     }

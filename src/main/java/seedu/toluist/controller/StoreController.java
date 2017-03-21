@@ -43,7 +43,7 @@ public class StoreController extends Controller {
             message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + "\n";
         }
 
-        if (TodoList.load().getStorage().move(path)) {
+        if (TodoList.getInstance().getStorage().move(path)) {
             message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, config.getTodoListFilePath());
             return new CommandResult(message);
         } else {

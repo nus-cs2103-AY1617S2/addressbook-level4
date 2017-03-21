@@ -40,7 +40,7 @@ public class SwitchController extends Controller {
             return new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
         }
 
-        String messageTemplate = uiStore.getTasks().size() == TodoList.load().getTasks().size()
+        String messageTemplate = uiStore.getTasks().size() == TodoList.getInstance().getTasks().size()
                 ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
                 : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
         TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();

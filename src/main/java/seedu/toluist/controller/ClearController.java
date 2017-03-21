@@ -21,7 +21,7 @@ public class ClearController extends Controller {
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
-        TodoList todoList = TodoList.load();
+        TodoList todoList = TodoList.getInstance();
         todoList.setTasks(new ArrayList<>());
         todoList.save();
 

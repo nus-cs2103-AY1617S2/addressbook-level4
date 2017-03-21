@@ -40,7 +40,7 @@ public class UntagController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER)) - 1;
-        TodoList todoList = TodoList.load();
+        TodoList todoList = TodoList.getInstance();
         Task task = UiStore.getInstance().getShownTasks().get(index);
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();

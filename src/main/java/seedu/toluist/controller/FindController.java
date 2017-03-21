@@ -54,7 +54,7 @@ public class FindController extends Controller {
                 || (isSearchByName && task.isAnyKeywordsContainedInDescriptionIgnoreCase(keywordList)));
 
 
-        ArrayList<Task> foundTasksList = TodoList.load().getFilterTasks(taskPredicate);
+        ArrayList<Task> foundTasksList = TodoList.getInstance().getFilterTasks(taskPredicate);
         uiStore.setTasks(foundTasksList);
 
         // display formatting

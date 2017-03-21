@@ -19,7 +19,7 @@ import seedu.toluist.ui.UiStore;
 public class LoadController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(LoadController.class);
     private static final String COMMAND_TEMPLATE = "^load(\\s+(?<directory>\\S+))?\\s*";
-    public static final String COMMAND_WORD = "load";
+    public static final String COMMAND_WORD = "getInstance";
     public static final String STORE_DIRECTORY = "directory";
 
     public CommandResult execute(String command) {
@@ -37,11 +37,10 @@ public class LoadController extends Controller {
             return new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
         }
 
-        // Attemp to load from new storage
         try {
-            TodoList newTodoList = TodoList.load().getStorage().load(path);
-            newTodoList.save();
-            UiStore.getInstance().setTasks(newTodoList.getTasks());
+            TodoList todoList = TodoList.getInstance();
+            todoList.load(path);
+            UiStore.getInstance().setTasks(todoList.getTasks());
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path));
         } catch (DataStorageException e) {
             return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));

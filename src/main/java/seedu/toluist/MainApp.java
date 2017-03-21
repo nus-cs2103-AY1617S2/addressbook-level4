@@ -14,6 +14,7 @@ import seedu.toluist.commons.core.Version;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.dispatcher.CommandDispatcher;
 import seedu.toluist.dispatcher.Dispatcher;
+import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiManager;
 
@@ -41,6 +42,7 @@ public class MainApp extends Application {
         dispatcher = new CommandDispatcher();
         ui = UiManager.getInstance();
         ui.init(dispatcher);
+        TodoList.getInstance().load();
 
         initEventsCenter();
     }
