@@ -33,29 +33,34 @@ public class AddCommandParser {
 
         try {
             if (doesStartDateExist && doesEndDateExist) {
+                //for event
                 return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
+                    argsTokenizer.getValue(PREFIX_PRIORITY).orElse("low"),
                     argsTokenizer.getValue(PREFIX_START).get(),
                     argsTokenizer.getValue(PREFIX_END).get(),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                 );
             } else if (doesEndDateExist) {
+                //for task
                 return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
+                    argsTokenizer.getValue(PREFIX_PRIORITY).orElse("low"),
                     argsTokenizer.getValue(PREFIX_END).get(),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
+                );
+            } else if (!doesStartDateExist && !doesEndDateExist) {
+                //for floating task
+                return new AddCommand(
+                    argsTokenizer.getPreamble().get(),
+                    argsTokenizer.getValue(PREFIX_PRIORITY).orElse("low"),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                 );
             } else {
-                return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-                );
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

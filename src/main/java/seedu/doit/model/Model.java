@@ -34,6 +34,12 @@ public interface Model {
     void addTask(Task task) throws DuplicateTaskException;
 
     /**
+     * Marks the given task as completed
+     */
+    void markTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException;
+
+    /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
      *
@@ -61,7 +67,8 @@ public interface Model {
      * Updates the filter of the filtered task list to filter by the given
      * keywords
      */
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
+            Set<String> descriptionKeywords);
 
     /**
      * Undo the previous undoable command.

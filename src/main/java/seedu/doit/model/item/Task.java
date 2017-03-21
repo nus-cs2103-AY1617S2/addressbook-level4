@@ -17,6 +17,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private StartTime startTime;
     private EndTime endTime;
     private Description description;
+    private boolean isDone;
     private UniqueTagList tags;
 
     // ================ Constructor methods ==============================
@@ -25,44 +26,58 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * Event Constructor where every field must be present and not null.
      */
     public Task(Name name, Priority priority, StartTime startTime, EndTime endTime, Description description,
-            UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, startTime, endTime, description, tags);
+            UniqueTagList tags, boolean isDone) {
+        assert !CollectionUtil.isAnyNull(name, startTime, endTime);
         this.name = name;
         this.priority = priority;
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
+    }
+
+    /**
+     * Event Constructor where every field must be present except isDone.
+     */
+    public Task(Name name, Priority priority, StartTime startTime, EndTime endTime, Description description,
+            UniqueTagList tags) {
+        this(name, priority, startTime, endTime, description, tags, false);
+    }
+
+    /**
+     * Task Constructor every field must be present except for startTime and
+     * isDone.
+     */
+    public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags,
+            boolean isDone) {
+        this(name, priority, new StartTime(), endTime, description, tags, isDone);
     }
 
     /**
      * Task Constructor every field must be present except for startTime.
      */
     public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, endTime, description, tags);
-        this.name = name;
-        this.priority = priority;
-        this.startTime = new StartTime();
-        this.endTime = endTime;
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
+        this(name, priority, new StartTime(), endTime, description, tags);
+        assert !CollectionUtil.isAnyNull(name, endTime);
     }
 
     /**
-     * Task Constructor every field must be present except for startTime and
-     * endTime.
+     * FloatingTask Constructor every field must be present except for
+     * startTime, endTime and isDone.
+     */
+    public Task(Name name, Priority priority, Description description, UniqueTagList tags, boolean isDone) {
+        this(name, priority, new StartTime(), new EndTime(), description, tags, isDone);
+    }
+
+    /**
+     * FloatingTask Constructor every field must be present except for startTime
+     * and endTime.
      */
     public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, description, tags);
-        this.name = name;
-        this.priority = priority;
-        this.startTime = new StartTime();
-        this.endTime = new EndTime();
-        this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
+        this(name, priority, new StartTime(), new EndTime(), description, tags);
+        assert !CollectionUtil.isAnyNull(name);
     }
 
     /**
@@ -72,6 +87,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getTags());
         this.startTime = source.getStartTime();
         this.endTime = source.getEndTime();
+        this.isDone = source.getIsDone();
     }
 
     // ================ Getter and Setter methods ==============================
@@ -94,6 +110,15 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public void setPriority(Priority priority) {
         assert priority != null;
         this.priority = priority;
+    }
+
+    @Override
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
@@ -194,6 +219,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.setPriority(replacement.getPriority());
         this.setStartTime(replacement.getStartTime());
         this.setEndTime(replacement.getEndTime());
+        this.setIsDone(replacement.getIsDone());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -201,8 +227,8 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     @Override
     public boolean equals(Object other) {
         return (other == this // short circuit if same object
-            ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
-            ) && this.isSameStateAs((ReadOnlyTask) other));
+                    ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
+                    ) && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     /**
@@ -214,13 +240,37 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     @Override
     public int compareTo(ReadOnlyTask other) {
-        return compareItems(other);
+        return compareDone(other);
     }
 
     private int compareName(ReadOnlyTask other) {
-        return this.getName().toString().compareTo(other.getName().toString());
+        return this.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
 
+    /**
+     * Compares the current task with another Task other. The current item is
+     * considered to be less than the other item if it is done and the other is
+     * not done Items that have equal done status will be compared using
+     * compareItems
+     */
+    private int compareDone(ReadOnlyTask other) {
+        if ((this.getIsDone() == true) && (other.getIsDone() == true)) {
+            compareItems(other);
+        } else if ((this.getIsDone() == true) && (other.getIsDone() == false)) {
+            return 1;
+        } else if ((this.getIsDone() == false) && (other.getIsDone() == true)) {
+            return -1;
+        }
+        return compareItems(other);
+    }
+
+    /**
+     * Compares the current item with another item other. returns -1 if other
+     * item is greater than current item return 0 is both items are equal return
+     * 1 if other item is smaller than current item The ranking are as follows
+     * from highest: 1) tasks 2) events 3) floating tasks If both have same
+     * rankings, then compare names
+     */
     public int compareItems(ReadOnlyTask other) {
 
         if (this.isTask() && other.isTask()) {
@@ -269,6 +319,5 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
             return t1.compareTo(t2);
         }
     }
-
 
 }

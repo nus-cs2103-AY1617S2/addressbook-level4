@@ -1,6 +1,5 @@
 package seedu.doit.logic.commands;
 
-
 import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.ui.ShowHelpRequestEvent;
 
@@ -11,8 +10,8 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-        + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n" + "Example: "
+            + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
