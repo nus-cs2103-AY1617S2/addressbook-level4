@@ -15,7 +15,7 @@ public class FindCommandTest extends TaskBossGuiTest {
         assertFindResult("find n/Meier", td.daniel, td.benson); // multiple results
 
         //find after deleting one result
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand("delete 5");
         assertFindResult("find n/Meier", td.daniel);
     }
 
@@ -27,7 +27,7 @@ public class FindCommandTest extends TaskBossGuiTest {
 
     @Test
     public void find_usingShortCommand() {
-        assertFindResult("f sd/Dec 18"); // no results
+        assertFindResult("f sd/Jul"); // no results
         assertFindResult("f sd/5pm", td.elle, td.alice, td.george); // multiple results
     }
 
