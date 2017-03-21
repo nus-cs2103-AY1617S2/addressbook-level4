@@ -20,8 +20,11 @@ public interface Logic {
     /** Returns the filtered list of activities */
     ObservableList<ReadOnlyActivity> getFilteredActivityList();
 
-    /** Returns the filtered list of events and deadlines */
-    ObservableList<ReadOnlyActivity> getFilteredTimeList();
+    /** Returns the filtered list of events */
+    ObservableList<ReadOnlyActivity> getFilteredEventList();
+
+    /** Returns the filtered list of deadlines */
+    ObservableList<ReadOnlyActivity> getFilteredDeadlineList();
 
     /** Returns the filtered list of floating tasks */
     ObservableList<ReadOnlyActivity> getFilteredTaskList();
