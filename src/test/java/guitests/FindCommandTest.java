@@ -28,7 +28,7 @@ public class FindCommandTest extends TaskBossGuiTest {
     @Test
     public void find_usingShortCommand() {
         assertFindResult("f sd/Jul"); // no results
-        assertFindResult("f sd/5pm", td.elle, td.alice, td.george); // multiple results
+        assertFindResult("f sd/5:00 PM", td.elle, td.alice, td.george); // multiple results
     }
 
     @Test
