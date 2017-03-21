@@ -4,7 +4,6 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 
 import java.util.Optional;
 
-import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.SortCommand;
@@ -18,7 +17,6 @@ public class SortCommandParser {
 
     private static final String SORT_PARAM_START_DATE_TIME = "sd";
     private static final String SORT_PARAM_END_DATE_TIME = "ed";
-    public static final String ERROR_INVALID_SORT_TYPE = "Invalid sort type.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
