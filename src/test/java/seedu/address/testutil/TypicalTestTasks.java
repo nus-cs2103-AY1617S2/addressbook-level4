@@ -49,8 +49,8 @@ public class TypicalTestTasks {
             taskWithoutPriority = new TaskBuilder().withName("Submit research proposal")
                     .withNullPriority().withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
-            taskWithoutNote = new TaskBuilder().withName("No note").withPriority("low").withStatus("incomplete").withStartTime("12/12/2017 12:00")
-                        .withEndTime("12/12/2017 13:00").withNullNote().build();
+            taskWithoutNote = new TaskBuilder().withName("No note").withPriority("low").withStatus("incomplete")
+                    .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").withNullNote().build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
