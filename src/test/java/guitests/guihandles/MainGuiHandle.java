@@ -24,7 +24,7 @@ public class MainGuiHandle extends GuiHandle {
         return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public MainMenuHandle getMainMenu() {
-        return new MainMenuHandle(guiRobot, primaryStage);
+    public TabBarViewHandle getTabBar() {
+        return new TabBarViewHandle(guiRobot, primaryStage);
     }
 }

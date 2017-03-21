@@ -16,6 +16,7 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TabBarViewHandle;
 import guitests.guihandles.TaskListHandle;
 
 import javafx.application.Platform;
@@ -45,6 +46,7 @@ public abstract class ToLuistGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected TaskListHandle taskList;
+    protected TabBarViewHandle tabBar;
 
     private Stage stage;
 
@@ -65,6 +67,7 @@ public abstract class ToLuistGuiTest {
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             taskList = mainGui.getTaskList();
+            tabBar = mainGui.getTabBar();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
@@ -117,6 +120,13 @@ public abstract class ToLuistGuiTest {
      */
     protected void assertResultMessage(String expected) {
         assertEquals(resultDisplay.getText(), expected);
+    }
+
+    /**
+     * Asserts the label of the highlighted tab is same as the given string.
+     */
+    protected void assertTabShown(String expected) {
+        assertEquals(tabBar.getHighlightedTabText(), expected);
     }
 
     /**
