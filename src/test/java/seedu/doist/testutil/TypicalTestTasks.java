@@ -1,5 +1,7 @@
 package seedu.doist.testutil;
 
+import java.util.Date;
+
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.task.Task;
@@ -10,7 +12,7 @@ import seedu.doist.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask laundry, homework, chores, work, school, groceries, shopping, email, exercise;
+    public TestTask laundry, homework, chores, work, school, groceries, shopping, email, exercise, meeting;
 
     public TypicalTestTasks() {
         try {
@@ -25,6 +27,7 @@ public class TypicalTestTasks {
             email = new TaskBuilder().withName("Send emails to client").build();
             exercise = new TaskBuilder().withName("Go for a run").build();
             chores = new TaskBuilder().withName("Clean up house").withPriority("VERY IMPORTANT").build();
+            meeting = new TaskBuilder().withName("Meet coworkers").withDates(new Date(), new Date()).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
