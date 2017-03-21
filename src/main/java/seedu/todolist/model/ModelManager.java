@@ -2,12 +2,14 @@ package seedu.todolist.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
@@ -149,6 +151,53 @@ public class ModelManager extends ComponentManager implements Model {
         indicateViewListChanged(ListCommand.TYPE_OVERDUE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
+
+    @Override
+    //@@author A0139633B
+    public UnmodifiableObservableList<Task> getFilteredUpcomingTaskList() {
+        //get tasks that are incomplete and are not overdue
+        filteredTasks.setPredicate((Predicate<? super Task>) task -> {
+            //get current time and compare with the task's end time
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy h.mm a");
+            Date currentDate = new Date();
+            if (task.getEndTime() != null) {
+                String taskDateString = task.getEndTime().toString();
+                try {
+                    Date taskDate = dateFormat.parse(taskDateString);
+                    return currentDate.compareTo(taskDate) <= 0;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        });
+        System.out.println(filteredTasks);
+        SortedList<Task> sortedList = new SortedList<Task>(filteredTasks, dateComparator);
+        System.out.println(sortedList);
+
+        return new UnmodifiableObservableList<>(sortedList);
+    }
+
+    //Comparator for Date
+    //@@author A0139633B
+    Comparator<? super Task> dateComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task firstTask, Task secondTask) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy h.mm a");
+            String firstTaskDueDateString = firstTask.getEndTime().toString();
+            String secondTaskDueDateString = secondTask.getEndTime().toString();
+            try {
+                Date firstTaskDueDate = dateFormat.parse(firstTaskDueDateString);
+                Date secondTaskDueDate = dateFormat.parse(secondTaskDueDateString);
+                return firstTaskDueDate.compareTo(secondTaskDueDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0; //dummy value
+            }
+        }
+    };
 
     @Override
     public void updateFilteredListToShowAll() {
