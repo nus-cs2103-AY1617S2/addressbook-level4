@@ -240,18 +240,21 @@ public class LogicManagerTest {
 
     @Test
     public void executeSortTasks() throws Exception {
-        // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedTaskManager = helper.generateTaskManager(2);
-        List<? extends ReadOnlyTask> expectedList = expectedTaskManager.getSortedList();
+        Task p1 = helper.generateTaskWithDeadline("02/01/2017 00:00");
+        Task p2 = helper.generateTaskWithDeadline("02/01/2017 23:59");
+        Task p3 = helper.generateTaskWithDeadline("03/01/2017 00:00");
+        Task p4 = helper.generateTaskWithDeadline("03/02/2017 00:00");
+        Task p5 = helper.generateTaskWithDeadline("03/02/2018 00:00");
 
-        // prepare address book state
-        helper.addToModel(model, 2);
+        List<Task> fiveTasks = helper.generateTaskList(p2, p1, p4, p5, p3);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
+        model.sortList();
 
         assertCommandSuccess("sort",
                 SortCommand.MESSAGE_SUCCESS,
                 expectedTaskManager,
-                expectedList);
+                expectedTaskManager.getSortedList());
     }
 
     /**
@@ -692,6 +695,21 @@ public class LogicManagerTest {
                     new Note("House of 1"),
                     new DateTime("12/12/2020 12:00"),
                     new DateTime("12/12/2020 13:00"),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given start and end date. Other fields will have some dummy values.
+         */
+        Task generateTaskWithDeadline(String end) throws Exception {
+            return new Task(
+                    new Name("Finish assignment"),
+                    new Priority("hi"),
+                    new Status("incomplete"),
+                    new Note("House of 1"),
+                    new DateTime("01/01/2017 00:00"),
+                    new DateTime(end),
                     new UniqueTagList(new Tag("tag"))
             );
         }
