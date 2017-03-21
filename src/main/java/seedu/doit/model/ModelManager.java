@@ -132,6 +132,7 @@ public class ModelManager extends ComponentManager implements Model {
             //fallthrough
         default:
             taskManager.setTaskComparator(new TaskNameComparator());
+            break;
         }
     }
 

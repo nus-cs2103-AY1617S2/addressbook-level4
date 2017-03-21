@@ -13,11 +13,9 @@ public class StartTimeComparator implements TaskComparator {
      * if it is done and the other is not done.
      */
     private int compareDone(ReadOnlyTask curr, ReadOnlyTask other) {
-        if ((curr.getIsDone() == true) && (other.getIsDone() == true)) {
-            compareItems(curr, other);
-        } else if ((curr.getIsDone() == true) && (other.getIsDone() == false)) {
+        if (curr.getIsDone() && !other.getIsDone()) {
             return 1;
-        } else if ((curr.getIsDone() == false) && (other.getIsDone() == true)) {
+        } else if (!curr.getIsDone() && other.getIsDone()) {
             return -1;
         }
         return compareItems(curr, other);

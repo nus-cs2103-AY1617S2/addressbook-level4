@@ -43,6 +43,8 @@ public class SortCommandTest extends TaskManagerGuiTest {
         case "end time":
             Arrays.sort(currentList, new EndTimeComparator());
             break;
+        default:
+            break;
         }
 
         assertTrue(taskListPanel.isListMatching(currentList));

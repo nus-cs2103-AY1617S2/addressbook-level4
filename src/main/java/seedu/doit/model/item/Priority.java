@@ -10,6 +10,9 @@ public class Priority implements Comparable<Priority> {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be low med high";
     public static final String PRIORITY_VALIDATION_REGEX = "(low)|(med)|(high)";
+    public static final String PRIORITY_LOW = "low";
+    public static final String PRIORITY_MED = "med";
+
 
     public final String value;
 
@@ -52,9 +55,9 @@ public class Priority implements Comparable<Priority> {
     }
 
     private int getPriorityValue() {
-        if (value.equals("low")) {
+        if (PRIORITY_LOW.equals(value)) {
             return 3;
-        } else if (value.equals("med")) {
+        } else if (PRIORITY_MED.equals(value)) {
             return 2;
         } else {
             return 1;
