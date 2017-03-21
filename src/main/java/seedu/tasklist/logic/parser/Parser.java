@@ -34,6 +34,7 @@ public class Parser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    //@@author A0139747N
     /**
      * Default constructor that initialises the hashtables for flexible commands and prefixes at program startup.
      */
@@ -41,6 +42,8 @@ public class Parser {
         ParserUtil.initialiseFlexibleCommands();
         ParserUtil.initialiseFlexiblePrefixes();
     }
+    //@@author
+    
     /**
      * Parses user input into command for execution.
      *

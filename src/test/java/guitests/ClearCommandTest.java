@@ -23,13 +23,14 @@ public class ClearCommandTest extends TaskListGuiTest {
         assertClearCommandSuccess();
     }
 
+    //@@author A0139747N
     @Test
     public void clearWithFlexibleCommand() {
         commandBox.runCommand("clean");
         assertListSize(0);
         assertResultMessage("Task list has been cleared!");
     }
-
+    //@@author
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
         assertListSize(0);

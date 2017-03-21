@@ -1,5 +1,6 @@
 package seedu.tasklist.model.task;
 
+//@@author A0139747N
 /**
  * A read-only immutable interface for a floating task in the task list.
  * Implementations should guarantee: details are present and not null, field values are validated.

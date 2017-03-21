@@ -42,6 +42,7 @@ public class AddCommandTest extends TaskListGuiTest {
 
     }
 
+    //@@author A0139747N
     @Test
     public void addWithFlexibleCommands() {
         try {
@@ -75,7 +76,7 @@ public class AddCommandTest extends TaskListGuiTest {
             assert false : "not possible";
         }
     }
-
+    //@@author
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
@@ -88,6 +89,7 @@ public class AddCommandTest extends TaskListGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
+    //@@author A0139747N
     /**
      * Checks if the addition is successful.
      * Very similar to the preceding method, except without running the command.
