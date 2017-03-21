@@ -17,8 +17,8 @@ public class SortCommandParser {
      * and returns an FindCommand object for execution.
      */
     public Command parse(String args) {
-        if (args.matches(SORT_VALIDATION_REGEX)) {
-            return new SortCommand(args);
+        if (args.trim().matches(SORT_VALIDATION_REGEX)) {
+            return new SortCommand(args.trim());
         } else {
             return new IncorrectCommand(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
