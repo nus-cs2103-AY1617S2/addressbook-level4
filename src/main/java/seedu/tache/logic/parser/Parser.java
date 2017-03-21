@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.tache.logic.commands.AddCommand;
 import seedu.tache.logic.commands.ClearCommand;
 import seedu.tache.logic.commands.Command;
+import seedu.tache.logic.commands.CompleteCommand;
 import seedu.tache.logic.commands.DeleteCommand;
 import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.ExitCommand;
@@ -70,6 +71,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case CompleteCommand.COMMAND_WORD:
+            return new CompleteCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
