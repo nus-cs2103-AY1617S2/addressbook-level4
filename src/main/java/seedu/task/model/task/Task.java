@@ -148,8 +148,9 @@ public class Task implements ReadOnlyTask,Comparable<ReadOnlyTask> {
     
     @Override
     public int compareTo(ReadOnlyTask o) {
-        //Same end date then compare according to names
-        if (this.getEndDate()== null && o.getEndDate() == null) {
+        //Same end date then compare according to names lexicographically
+        if ((this.getEndDate()== null && o.getEndDate() == null)
+                ||(this.getEndDate().equals(o.getEndDate()))) {
             return this.getName().fullName.compareTo(o.getName().fullName);
         } else {
             return (Date.doesPrecede(this.getEndDate(), o.getEndDate())) ? -1 : 1;
