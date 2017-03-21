@@ -41,14 +41,6 @@ public class DateTime {
     }
 
     /**
-     * Initialise a date time with current time plus month of a certain value
-     */
-    public DateTime(long value) {
-        LocalDateTime ldt = LocalDateTime.now();
-        this.dateTime = ldt.plusMonths(value);
-    }
-
-    /**
      * Returns true if a given date is a valid task dateTime.
      * @throws IllegalValueException
      */
