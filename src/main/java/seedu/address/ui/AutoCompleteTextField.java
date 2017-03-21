@@ -9,7 +9,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
@@ -43,10 +42,11 @@ public class AutoCompleteTextField extends TextField {
                     LinkedList<String> searchResult = new LinkedList<>();
                     int lastPrefixIndex = getLastPrefixIndex(currentTextInput);
                     String stringToCheck = getCommandInString(currentTextInput, lastPrefixIndex);
+                    String stringBeforePrefix = getTextInFrontOfCommand(currentTextInput, lastPrefixIndex);
                     searchResult.addAll(entries.subSet(stringToCheck, stringToCheck + Character.MAX_VALUE));
                     if (entries.size() > 0) {
-                        populatePopup(searchResult, currentTextInput.substring(0, lastPrefixIndex));
-                        entriesPopup.show(AutoCompleteTextField.this, Side.BOTTOM, currentTextInput.length(), 0);
+                        populatePopup(searchResult, stringBeforePrefix);
+                        entriesPopup.show(AutoCompleteTextField.this, getCaretPosition(), 0);
                     } else {
                         entriesPopup.hide();
                     }
@@ -67,7 +67,7 @@ public class AutoCompleteTextField extends TextField {
     private int getLastPrefixIndex(String currentText) {
         int indexOfPrefix = currentText.lastIndexOf('@', currentText.length() - 1);
         int indexOfSpace = currentText.lastIndexOf(' ', currentText.length() - 1);
-        if (indexOfPrefix == -1 || indexOfPrefix > indexOfSpace) {
+        if (indexOfPrefix == -1 || indexOfPrefix < indexOfSpace) {
             return -1;
         } else {
             return indexOfPrefix;
@@ -81,6 +81,15 @@ public class AutoCompleteTextField extends TextField {
         }
 
         return processedString;
+    }
+
+    private String getTextInFrontOfCommand(String currentText, int lastPrefixIndex) {
+        String stringBeforePrefix = new String("");
+        if (lastPrefixIndex != -1) {
+            stringBeforePrefix = currentText.substring(0, lastPrefixIndex);
+        }
+
+        return stringBeforePrefix;
     }
 
     private void initializeEntries() {
@@ -106,7 +115,7 @@ public class AutoCompleteTextField extends TextField {
      * @param searchResult
      *            The set of matching strings.
      */
-    private void populatePopup(List<String> searchResult, String textBeforePrefix) {
+    private void populatePopup(List<String> searchResult, String stringBeforePrefix) {
         List<CustomMenuItem> menuItems = new LinkedList<>();
         // If you'd like more entries, modify this line.
         int maxEntries = 10;
@@ -118,8 +127,9 @@ public class AutoCompleteTextField extends TextField {
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    String output = textBeforePrefix.concat(result);
+                    String output = stringBeforePrefix.concat(result);
                     setText(output);
+                    positionCaret(output.length());
                     entriesPopup.hide();
                 }
             });
