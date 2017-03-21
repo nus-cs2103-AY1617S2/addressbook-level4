@@ -3,7 +3,7 @@ package seedu.todolist.logic.commands;
 import seedu.todolist.commons.core.Messages;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.logic.commands.exceptions.CommandException;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -32,13 +32,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<Task> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        Task taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deleteTask(taskToDelete);

@@ -4,7 +4,7 @@ import seedu.todolist.commons.core.Messages;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.exceptions.CommandException;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -34,13 +34,13 @@ public class CompleteCommand extends Command {
 
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex);
+        Task taskToComplete = lastShownList.get(targetIndex);
 
         try {
             model.completeTask(targetIndex, taskToComplete);

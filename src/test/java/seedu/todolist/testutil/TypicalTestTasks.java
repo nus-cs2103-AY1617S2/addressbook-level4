@@ -4,6 +4,7 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.model.ToDoList;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
+import seedu.todolist.model.task.parser.TaskParser;
 
 /**
  *
@@ -36,7 +37,7 @@ public class TypicalTestTasks {
     public static void loadToDoListWithSampleData(ToDoList ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(task));
+                ab.addTask(TaskParser.parseTask(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }

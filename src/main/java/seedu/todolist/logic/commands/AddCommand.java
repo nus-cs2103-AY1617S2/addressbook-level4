@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.exceptions.CommandException;
+import seedu.todolist.model.task.parser.TaskParser;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
@@ -28,29 +29,20 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
+    private seedu.todolist.model.task.parser.TaskParser taskParser;
     private String commandText;
     private final Task toAdd;
 
     /**
      * Creates an AddCommand using raw values.
+     * @param rawCommandText TODO
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name,
-            String startTime,
-            String endTime,
-            Set<String> tags)
+    public AddCommand(String rawCommandText)
             throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toAdd = new Task(
-                new Name(name),
-                (startTime != null ? new StartTime(startTime) : null),
-                (endTime != null ? new EndTime(endTime) : null),
-                new UniqueTagList(tagSet)
-        );
+        this.taskParser = new TaskParser();
+        this.toAdd = taskParser.parseTask(rawCommandText);
     }
 
     @Override

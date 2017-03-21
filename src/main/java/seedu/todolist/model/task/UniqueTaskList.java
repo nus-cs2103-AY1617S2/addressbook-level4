@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.exceptions.DuplicateDataException;
 import seedu.todolist.commons.util.CollectionUtil;
+import seedu.todolist.model.task.parser.TaskParser;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -24,7 +25,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
-    public boolean contains(ReadOnlyTask toCheck) {
+    public boolean contains(Task toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
@@ -49,19 +50,18 @@ public class UniqueTaskList implements Iterable<Task> {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
-
-        taskToUpdate.resetData(editedTask);
+        
         // TODO: The code below is just a workaround to notify observers of the updated task.
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
-        internalList.set(index, taskToUpdate);
+        internalList.set(index, editedTask);
     }
 
     /*
@@ -70,7 +70,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * It is guaranteed that internalList contains the index provided,
      * and that internalList contains the targetTask.
      */
-    public void completeTask(int index, ReadOnlyTask targetTask) {
+    public void completeTask(int index, Task targetTask) {
         assert targetTask != null;
         assert this.contains(targetTask) == true;
 
@@ -85,7 +85,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+    public boolean remove(Task toRemove) throws TaskNotFoundException {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
@@ -98,10 +98,10 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends Task> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
+        for (final Task task : tasks) {
+            replacement.add(TaskParser.parseTask(task));
         }
         setTasks(replacement);
     }

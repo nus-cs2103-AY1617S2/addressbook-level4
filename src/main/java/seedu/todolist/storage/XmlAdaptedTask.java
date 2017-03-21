@@ -10,9 +10,10 @@ import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
+import seedu.todolist.model.task.parser.TaskParser;
 
 /**
  * JAXB-friendly version of the Task.
@@ -45,15 +46,19 @@ public class XmlAdaptedTask {
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedTask(ReadOnlyTask source) {
+    public XmlAdaptedTask(Task source) {
         name = source.getName().fullName;
-        if (source.getStartTime() != null) {
-            startTime = source.getStartTime().toString();
+        if (startTime != null) {
+            startTime = (source.getStartTime() != null ? 
+            		source.getStartTime().toString() 
+            		: "");
         } else {
             startTime = "";
         }
-        if (source.getEndTime() != null) {
-            endTime = source.getEndTime().toString();
+        if (endTime != null) {
+            endTime = (source.getEndTime() != null ? 
+            		source.getEndTime().toString() 
+            		: "");
         } else {
             endTime = "";
         }
@@ -88,6 +93,6 @@ public class XmlAdaptedTask {
             endTime = new EndTime(this.endTime);
         }
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startTime, endTime, tags);
+        return TaskParser.parseTask(name, startTime, endTime, tags);
     }
 }

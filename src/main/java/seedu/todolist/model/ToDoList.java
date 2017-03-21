@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
 import seedu.todolist.model.task.UniqueTaskList.DuplicateTaskException;
@@ -56,7 +56,7 @@ public class ToDoList implements ReadOnlyToDoList {
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks)
+    public void setTasks(List<? extends Task> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
@@ -103,11 +103,10 @@ public class ToDoList implements ReadOnlyToDoList {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+    public void updateTask(int index, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException {
-        assert editedReadOnlyTask != null;
+        assert editedTask != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
@@ -115,7 +114,7 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.updateTask(index, editedTask);
     }
 
-    public void completeTask(int index, ReadOnlyTask targetTask) throws UniqueTaskList.TaskNotFoundException {
+    public void completeTask(int index, Task targetTask) throws UniqueTaskList.TaskNotFoundException {
         assert targetTask != null;
         assert index >= 0;
 
@@ -156,7 +155,7 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(Task key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
@@ -180,7 +179,7 @@ public class ToDoList implements ReadOnlyToDoList {
 
 
     @Override
-    public ObservableList<ReadOnlyTask> getTaskList() {
+    public ObservableList<Task> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 

@@ -6,6 +6,7 @@ import static seedu.todolist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.logic.commands.AddCommand;
 import seedu.todolist.logic.commands.ClearCommand;
 import seedu.todolist.logic.commands.Command;

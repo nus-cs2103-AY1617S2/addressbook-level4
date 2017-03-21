@@ -1,15 +1,18 @@
 package seedu.todolist.testutil;
 
+import java.util.Objects;
+
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.StartEndTask;
+import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.StartTime;
 
 /**
  * A mutable task object. For testing only.
  */
-public class TestTask implements ReadOnlyTask {
+public class TestTask extends Task {
 
     private Name name;
     private StartTime startTime;
@@ -72,7 +75,22 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        return getAsText();
+        return toString();
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hash(name, startTime, endTime, tags);
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TestTask // instanceof handles nulls
+                		&& ((TestTask) other).getName().equals(this.getName())
+                        && ((TestTask) other).getStartTime().equals(this.getStartTime())
+                        && ((TestTask) other).getEndTime().equals(this.getEndTime())
+                        && (((TestTask) other).isComplete() == this.isComplete()));
     }
 
     public String getAddCommand() {

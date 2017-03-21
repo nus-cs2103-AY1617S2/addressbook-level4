@@ -3,7 +3,7 @@ package seedu.todolist.logic;
 import javafx.collections.ObservableList;
 import seedu.todolist.logic.commands.CommandResult;
 import seedu.todolist.logic.commands.exceptions.CommandException;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 
 /**
  * API of the Logic component
@@ -18,6 +18,6 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of persons */
-    ObservableList<ReadOnlyTask> getFilteredTaskList();
+    ObservableList<Task> getFilteredTaskList();
 
 }

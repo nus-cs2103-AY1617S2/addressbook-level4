@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -26,7 +26,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
@@ -36,7 +36,7 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
 
-    private void initTags(ReadOnlyTask task) {
+    private void initTags(Task task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

@@ -33,7 +33,8 @@ import seedu.todolist.model.ToDoList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
+import seedu.todolist.model.task.parser.TaskParser;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.storage.XmlSerializableToDoList;
 
@@ -72,15 +73,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), null, null, new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), null, null, new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), null, null, new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), null, null, new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), null, null, new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), null, null, new UniqueTagList()),
-                new Task(new Name("George Best"), null, null, new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), null, null, new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), null, null, new UniqueTagList())
+            	TaskParser.parseTask(new Name("Ali Muster"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Boris Mueller"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Carl Kurz"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Daniel Meier"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Elle Meyer"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Fiona Kunz"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("George Best"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Hoon Meier"), null, null, new UniqueTagList()),
+            	TaskParser.parseTask(new Name("Ida Mueller"), null, null, new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -330,7 +331,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+    public static boolean compareCardAndTask(TaskCardHandle card, Task task) {
         return card.isSameTask(task);
     }
 

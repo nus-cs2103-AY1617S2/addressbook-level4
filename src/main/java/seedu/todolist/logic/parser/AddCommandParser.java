@@ -22,25 +22,11 @@ public class AddCommandParser {
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
-        try {
-            return new AddCommand(
-                    argsTokenizer.getPreamble().get(),
-                    (argsTokenizer.getValue(PREFIX_START).isPresent() ?
-                            argsTokenizer.getValue(PREFIX_START).get()
-                                : null),
-                    (argsTokenizer.getValue(PREFIX_END).isPresent() ?
-                            argsTokenizer.getValue(PREFIX_END).get()
-                            : null),
-                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
-        } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
+    	try {
+    		AddCommand resultCommand = new AddCommand(args);
+    		return resultCommand;
+    	} catch (IllegalValueException ive) {
+    		return new IncorrectCommand(ive.getMessage());
+    	}
     }
-
 }
