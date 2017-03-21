@@ -1,13 +1,14 @@
 package seedu.tache.model.util;
 
+import java.util.Optional;
+
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Date;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Time;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
@@ -20,12 +21,9 @@ public class SampleDataUtil {
                 new Task(new Name("Pay David 20 for cab"), new UniqueTagList("LowPriority")),
                 new Task(new Name("Get Fit"), new UniqueTagList("LowPriority")),
                 new Task(new Name("Find a girlfriend"), new UniqueTagList("LowPriority")),
-                new Task(new Name("Walk the Dog"), new Date("14 April 2017"), new Date("14 April 2017"),
-                         new Time("17:00"), new Time("17:00"), new UniqueTagList("MediumPriority")),
-                new Task(new Name("Buy Medicine"), new Date("15 April 2017"), new Date("-"),
-                         new Time("12:00"), new Time("12:00"), new UniqueTagList("LowPriority")),
-                new Task(new Name("Submit Project Proposal"), new Date("-"), new Date("17 April 2017"),
-                         new Time("15:00"), new Time("15:00"), new UniqueTagList("HighPriority")),
+                new Task(new Name("Walk the Dog"), Optional.of(new DateTime("14 April 2017")), Optional.of(new DateTime("14 April 2017")), new UniqueTagList("MediumPriority")),
+                new Task(new Name("Buy Medicine"), Optional.of(new DateTime("15 April 2017")), Optional.empty(), new UniqueTagList("LowPriority")),
+                new Task(new Name("Submit Project Proposal"), Optional.empty(), Optional.of(new DateTime("17 April 2017")), new UniqueTagList("HighPriority")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

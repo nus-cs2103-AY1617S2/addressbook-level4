@@ -21,9 +21,7 @@ import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Date;
 import seedu.tache.model.task.Name;
-import seedu.tache.model.task.Time;
 
 
 /**
@@ -54,20 +52,19 @@ public class EditCommandParser {
 
                 switch(updateParameter) {
                 case NAME_PARAMETER:
-                    String quotesRemovedValue = updateValue.substring(1, updateValue.length() - 1);
-                    editTaskDescriptor.setName(Optional.of(new Name(quotesRemovedValue)));
+                    editTaskDescriptor.setName(Optional.of(new Name(updateValue)));
                     break;
                 case START_DATE_PARAMETER:
-                    editTaskDescriptor.setStartDate(Optional.of(new Date(updateValue)));
+                    editTaskDescriptor.setStartDate(Optional.of(updateValue));
                     break;
                 case END_DATE_PARAMETER:
-                    editTaskDescriptor.setEndDate(Optional.of(new Date(updateValue)));
+                    editTaskDescriptor.setEndDate(Optional.of(updateValue));
                     break;
                 case START_TIME_PARAMETER:
-                    editTaskDescriptor.setStartTime(Optional.of(new Time(updateValue)));
+                    editTaskDescriptor.setStartTime(Optional.of(updateValue));
                     break;
                 case END_TIME_PARAMETER:
-                    editTaskDescriptor.setEndTime(Optional.of(new Time(updateValue)));
+                    editTaskDescriptor.setEndTime(Optional.of(updateValue));
                     break;
                 case TAG_PARAMETER:
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue

@@ -8,10 +8,9 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Date;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Time;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -60,18 +59,21 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         Name name = new Name(nameStr);
-        Date startDate = new Date(startDateStr);
-        Time startTime = new Time(startTimeStr);
-        Date endDate = null;
+        Optional<DateTime> startDateTime = Optional.of(new DateTime(startDateStr + startTimeStr));
+        Optional<DateTime> endDateTime = Optional.empty();
+        String endDate = "";
+        String endTime = "";
         if (endDateStr.isPresent()) {
-            endDate = new Date(endDateStr.get());
+            endDate = endDateStr.get();
         }
-        Time endTime = null;
         if (endTimeStr.isPresent()) {
-            endTime = new Time(endTimeStr.get());
+            endTime = endTimeStr.get();
+        }
+        if(!(endDate.equals("") && endTime.equals(""))){
+            endDateTime = Optional.of(new DateTime(endDate + endTime));
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDate, endDate, startTime, endTime, tagList);
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList);
     }
 
     @Override

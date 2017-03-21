@@ -15,9 +15,7 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Date;
 import seedu.tache.model.task.Name;
-import seedu.tache.model.task.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -168,21 +166,7 @@ public class ParserUtil {
             return false;
         }
     }
-
-    /**
-     * Returns data type based on the input
-     */
-    public static Object determineType(String input) throws IllegalValueException {
-        if (isValidDate(input)) {
-            return new Date(input);
-        } else if (isValidTime(input)) {
-            return new Time(input);
-        } else if (isValidName(input)) {
-            return new Name(input);
-        }
-        throw new IllegalValueException("Invalid Input");
-    }
-
+    
     /**
      * Returns the first time String encountered
      */

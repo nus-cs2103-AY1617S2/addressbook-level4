@@ -7,11 +7,10 @@ import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Date;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Time;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -79,8 +78,42 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
+        Optional<DateTime> updatedStartDateTime = taskToEdit.getStartDateTime();
+        Optional<DateTime> updatedEndDateTime = taskToEdit.getEndDateTime();
+        if(editTaskDescriptor.getStartDate().isPresent()){
+            String timeNoChange = "";
+            if(updatedStartDateTime.isPresent()) {
+                timeNoChange = updatedStartDateTime.get().getTimeOnly();
+            }
+            DateTime tempStartDateTime = new DateTime(editTaskDescriptor.getStartDate().orElse("") + timeNoChange);
+            updatedStartDateTime = Optional.of(tempStartDateTime);
+        }
+        if(editTaskDescriptor.getEndDate().isPresent()){
+            String timeNoChange = "";
+            if(updatedEndDateTime.isPresent()) {
+                timeNoChange = updatedEndDateTime.get().getTimeOnly();
+            }
+            DateTime tempEndDateTime = new DateTime(editTaskDescriptor.getEndDate().orElse("") + timeNoChange);
+            updatedEndDateTime = Optional.of(tempEndDateTime);
+        }
+        if(editTaskDescriptor.getStartTime().isPresent()){
+            String dateNoChange = "";
+            if(updatedStartDateTime.isPresent()) {
+                dateNoChange = updatedStartDateTime.get().getDateOnly();
+            }
+            DateTime tempStartDateTime = new DateTime(dateNoChange + editTaskDescriptor.getStartTime().orElse(""));
+            updatedStartDateTime = Optional.of(tempStartDateTime);
+        }
+        if(editTaskDescriptor.getEndTime().isPresent()){
+            String dateNoChange = "";
+            if(updatedEndDateTime.isPresent()) {
+                dateNoChange = updatedEndDateTime.get().getDateOnly();
+            }
+            DateTime tempEndDateTime = new DateTime(dateNoChange + editTaskDescriptor.getEndTime().orElse(""));
+            updatedEndDateTime = Optional.of(tempEndDateTime);
+        }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        return new Task(updatedName, updatedTags);
+        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags);
 
     }
 
@@ -90,10 +123,10 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> startDate = Optional.empty();
-        private Optional<Date> endDate = Optional.empty();
-        private Optional<Time> startTime = Optional.empty();
-        private Optional<Time> endTime = Optional.empty();
+        private Optional<String> startDate = Optional.empty();
+        private Optional<String> endDate = Optional.empty();
+        private Optional<String> startTime = Optional.empty();
+        private Optional<String> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -124,39 +157,39 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setStartDate(Optional<Date> date) {
+        public void setStartDate(Optional<String> date) {
             assert date != null;
             this.startDate = date;
         }
 
-        public Optional<Date> getStartDate() {
+        public Optional<String> getStartDate() {
             return startDate;
         }
 
-        public void setEndDate(Optional<Date> date) {
+        public void setEndDate(Optional<String> date) {
             assert date != null;
             this.endDate = date;
         }
 
-        public Optional<Date> getEndDate() {
+        public Optional<String> getEndDate() {
             return endDate;
         }
 
-        public void setStartTime(Optional<Time> startTime) {
+        public void setStartTime(Optional<String> startTime) {
             assert startTime != null;
             this.startTime = startTime;
         }
 
-        public Optional<Time> getStartTime() {
+        public Optional<String> getStartTime() {
             return startTime;
         }
 
-        public void setEndTime(Optional<Time> endTime) {
+        public void setEndTime(Optional<String> endTime) {
             assert endTime != null;
             this.endTime = endTime;
         }
 
-        public Optional<Time> getEndTime() {
+        public Optional<String> getEndTime() {
             return endTime;
         }
 
