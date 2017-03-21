@@ -27,8 +27,8 @@ public class AddCommandParser {
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DESCRIPTION, PREFIX_STARTDATETIME,
                 PREFIX_ENDDATETIME, PREFIX_DEADLINE, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
         try {
+            argsTokenizer.tokenize(args);
             String test = argsTokenizer.getPreamble().get();
 
             return new AddCommand(argsTokenizer.getPreamble().get(),

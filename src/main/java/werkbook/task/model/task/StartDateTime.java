@@ -40,13 +40,14 @@ public class StartDateTime {
 
     /**
      * Returns if a given string is a valid start datetime.
+     * @throws IllegalValueException
      */
-    public static boolean isValidStartDateTime(String test) {
+    public static boolean isValidStartDateTime(String test) throws IllegalValueException {
         START_DATETIME_FORMATTER.setLenient(false);
         try {
             START_DATETIME_FORMATTER.parse(test);
         } catch (ParseException e) {
-            return false;
+            throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
         }
         return true;
     }

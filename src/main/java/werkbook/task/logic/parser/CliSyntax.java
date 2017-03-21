@@ -12,9 +12,9 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
-    public static final Prefix PREFIX_STARTDATETIME = new Prefix("from", true);
-    public static final Prefix PREFIX_ENDDATETIME = new Prefix("to", true);
-    public static final Prefix PREFIX_DEADLINE = new Prefix("by", true);
+    public static final Prefix PREFIX_STARTDATETIME = new Prefix("from", true, true);
+    public static final Prefix PREFIX_ENDDATETIME = new Prefix("to", true, false);
+    public static final Prefix PREFIX_DEADLINE = new Prefix("by", true, false);
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Patterns definitions */

@@ -16,6 +16,7 @@ public class EndDateTime {
     public static final String MESSAGE_END_DATETIME_CONSTRAINTS = "End Date/Time must be in the format of "
             + "DD/MM/YYYY HHMM, where time is represented in 24 hours";
     public static final SimpleDateFormat END_DATETIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static final SimpleDateFormat LENIENT_FORMATTER = new SimpleDateFormat("dd/MM");
 
     public final Optional<Date> value;
 
@@ -40,12 +41,14 @@ public class EndDateTime {
 
     /**
      * Returns if a given string is a valid end datetime.
+     * @throws IllegalValueException
      */
-    public static boolean isValidEndDateTime(String test) {
+    public static boolean isValidEndDateTime(String test) throws IllegalValueException {
+        END_DATETIME_FORMATTER.setLenient(false);
         try {
             END_DATETIME_FORMATTER.parse(test);
         } catch (ParseException e) {
-            return false;
+            throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
         }
         return true;
     }

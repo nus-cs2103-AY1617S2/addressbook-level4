@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.model.task.EndDateTime;
+import werkbook.task.model.task.StartDateTime;
 
 /**
  * Tokenizes arguments string of the form:
@@ -42,8 +44,9 @@ public class ArgumentTokenizer {
     /**
      * @param argsString arguments string of the form: preamble <prefix>value
      *            <prefix>value ...
+     * @throws IllegalValueException
      */
-    public void tokenize(String argsString) {
+    public void tokenize(String argsString) throws IllegalValueException {
         resetTokenizerState();
         List<PrefixPosition> positions = findAllPrefixPositions(argsString);
         extractArguments(argsString, positions);
@@ -90,8 +93,10 @@ public class ArgumentTokenizer {
 
     /**
      * Finds all positions in an arguments string at which any prefix appears
+     *
+     * @throws IllegalValueException
      */
-    private List<PrefixPosition> findAllPrefixPositions(String argsString) {
+    private List<PrefixPosition> findAllPrefixPositions(String argsString) throws IllegalValueException {
         List<PrefixPosition> positions = new ArrayList<>();
 
         for (Prefix prefix : this.prefixes) {
@@ -101,25 +106,30 @@ public class ArgumentTokenizer {
         return positions;
     }
 
-    //@@author A0139903B
+    // @@author A0139903B
     /**
      * Finds all positions in an arguments string at which a given
      * {@code prefix} appears
+     *
+     * @throws IllegalValueException
      */
-    private List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
+    private List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix)
+            throws IllegalValueException {
         List<PrefixPosition> positions = new ArrayList<>();
 
         // -1 means not found
         int argumentStart = argsString.indexOf(prefix.getPrefix());
-//        System.out.println("Current prefix is:" + prefix.getPrefix() + " at pos: " + argumentStart);
+        // System.out.println("Current prefix is:" + prefix.getPrefix() + " at
+        // pos: " + argumentStart);
 
-        // If it's a date time, find the position that returns a date time behind it
+        // If it's a date time, find the position that returns a date time
+        // behind it
         // Does not check for invalid date format, just assumes that it is text
         if (prefix.isDateTime()) {
             while (argumentStart != -1) {
                 PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
-//                System.out.println("Current index: " + argumentStart);
-                if (isValidDateCommand(argsString, argumentStart + prefix.getPrefix().length())) {
+                // System.out.println("Current index: " + argumentStart);
+                if (isValidDateCommand(argsString, argumentStart + prefix.getPrefix().length(), prefix)) {
                     positions.add(extendedPrefix);
                 }
                 argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
@@ -135,28 +145,36 @@ public class ArgumentTokenizer {
         return positions;
     }
 
-    //@@author A0139903B
+    // @@author A0139903B
     /**
-     * Checks if a command is a date time command by checking the string
-     * after the command to see if a valid date exists.
-     * If there is no valid date, then it will return false.
-     * @param argsString    String entered by user
-     * @param prefix        Starting position of the command
-     * @return              True if the command is valid
+     * Checks if a command is a date time command by checking the string after
+     * the command to see if a valid date exists. If there is no valid date,
+     * then it will return false.
+     *
+     * @param argsString String entered by user
+     * @param startPosition Starting position of the command
+     * @return True if the command is valid
+     * @throws IllegalValueException
      */
-    private boolean isValidDateCommand(String argsString, int startPosition) {
+    private boolean isValidDateCommand(String argsString, int startPosition, Prefix prefix)
+            throws IllegalValueException {
         int endPosition = startPosition + " 01/01/1000 1000".length();
 
         if (endPosition > argsString.length()) {
-//            System.out.println("length exceeded");
+            // System.out.println("length exceeded");
             return false;
         }
 
         // Get the value in between this prefix and the next
-        String dateTime = argsString.substring(startPosition, endPosition)
-                .trim();
+        String dateTime = argsString.substring(startPosition, endPosition).trim();
 
-        boolean isValid = EndDateTime.isValidEndDateTime(dateTime);
+        // EndDateTime.isValidLenientEndDateTime(dateTime);
+        boolean isValid;
+        if (prefix.isFrom()) {
+            isValid = StartDateTime.isValidStartDateTime(dateTime);
+        } else {
+            isValid = EndDateTime.isValidEndDateTime(dateTime);
+        }
         // Check if it's a valid date, if so, then break
         return isValid;
     }
@@ -181,12 +199,14 @@ public class ArgumentTokenizer {
 
         // Extract the prefixed arguments and preamble (if any)
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
-//            System.out.println("Looking command at: " + prefixPositions.get(i).getPrefix().getPrefix());
+            // System.out.println("Looking command at: " +
+            // prefixPositions.get(i).getPrefix().getPrefix());
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i),
                     prefixPositions.get(i + 1));
 
-//            System.out.println("Extracted: " + argValue + " from: " + prefixPositions.get(i).startPosition + " to: "
-//                    + prefixPositions.get(i + 1).startPosition);
+            // System.out.println("Extracted: " + argValue + " from: " +
+            // prefixPositions.get(i).startPosition + " to: "
+            // + prefixPositions.get(i + 1).startPosition);
             saveArgument(prefixPositions.get(i).getPrefix(), argValue);
         }
 
@@ -228,16 +248,19 @@ public class ArgumentTokenizer {
     public static class Prefix {
         final String prefix;
         private final boolean isDateTime;
+        private final boolean isFrom;
 
         public Prefix(String prefix) {
             this.prefix = prefix;
             this.isDateTime = false;
+            this.isFrom = false;
         }
 
         // Overloaded constructor for prefixes with date time that follows
-        public Prefix(String prefix, boolean isDateTime) {
+        public Prefix(String prefix, boolean isDateTime, boolean isFrom) {
             this.prefix = prefix;
             this.isDateTime = isDateTime;
+            this.isFrom = isFrom;
         }
 
         public String getPrefix() {
@@ -246,6 +269,10 @@ public class ArgumentTokenizer {
 
         public boolean isDateTime() {
             return this.isDateTime;
+        }
+
+        public boolean isFrom() {
+            return this.isFrom;
         }
 
         @Override
