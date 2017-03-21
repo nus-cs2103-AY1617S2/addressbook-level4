@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Optional;
 import java.util.Set;
@@ -36,9 +37,10 @@ public interface Model {
      * @throws DateException
      */
     void checkTaskDate(ReadOnlyTask task) throws DateException;
+
     /** Marks a task as done.
      * @throws TaskNotFoundException */
-    void doneTask(Task task) throws TaskNotFoundException;
+    void doneTasks(ArrayList<Task> tasksToDone) throws TaskNotFoundException;
 
     /** Undo the previous undoable command
      * @throws EmptyStackException */
