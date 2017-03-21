@@ -18,33 +18,33 @@ public class TypicalTestTasks {
                     .withInformation("123, Jurong West Ave 6, #08-111")
                     .withPriorityLevel("3")
                     .withStartDateTime("Feb 18, 2017 5pm")
-                    .withEndDateTime("Mar 28, 2017 5pm")
+                    .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
                     .withInformation("311, Clementi Ave 2, #02-25")
                     .withPriorityLevel("3")
-                    .withStartDateTime("Feb 23, 2017 10pm")
-                    .withEndDateTime("Jun 28, 2017 5pm")
+                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("owesMoney", "friends").build();
             carl = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("3")
-                    .withStartDateTime("Feb 19, 2017 11pm")
+                    .withStartDateTime("Feb 18, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("wall street").build();
             daniel = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
-                    .withStartDateTime("Feb 20, 2017 11.30pm")
-                    .withEndDateTime("Apr 28, 2017 3pm")
+                    .withStartDateTime("Feb 18, 2017 5pm")
+                    .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("10th street").build();
             elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("2")
-                    .withStartDateTime("Feb 22, 2017 5pm")
+                    .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("michegan ave").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("2")
-                    .withStartDateTime("Feb 21, 2017 1pm")
-                    .withEndDateTime("Dec 10, 2017 5pm")
+                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("little tokyo").build();
             george = new TaskBuilder().withName("George Best").withPriorityLevel("2")
-                    .withStartDateTime("Jan 1, 2017 5pm")
-                    .withEndDateTime("Nov 28, 2017 5pm")
+                    .withStartDateTime("Feb 19, 2017 5pm")
+                    .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("4th street").build();
 
             // Manually added
