@@ -5,18 +5,34 @@ import seedu.todolist.model.ReadOnlyToDoList;
 
 public class CommandAndState {
     Command command;
-    ReadOnlyToDoList state;
+    ReadOnlyToDoList beforeState;
+    ReadOnlyToDoList afterState;
 
-    public CommandAndState(Command command, ReadOnlyToDoList state) {
+
+    public CommandAndState(Command command, ReadOnlyToDoList beforeState, ReadOnlyToDoList afterState) {
         this.command = command;
-        this.state = state;
+        this.beforeState = beforeState;
+        this.afterState = afterState;
     }
 
     public Command getCommand() {
         return command;
     }
 
-    public ReadOnlyToDoList getState() {
-        return state;
+    public ReadOnlyToDoList getStateBeforeCommand() {
+        return beforeState;
     }
+
+    public ReadOnlyToDoList getStateAfterCommand() {
+        return afterState;
+    }
+
+    public void setCurrentState(ReadOnlyToDoList afterState) {
+        this.afterState = afterState;
+    }
+
+
+
+
+
 }

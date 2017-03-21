@@ -33,7 +33,7 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
-    private String commandText;
+    private String commandResultText;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
@@ -67,8 +67,8 @@ public class EditCommand extends Command {
         }
         model.updateFilteredListToShowAll();
 
-        commandText = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        commandResultText = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
+        return new CommandResult(commandResultText);
     }
 
     /**
@@ -160,6 +160,6 @@ public class EditCommand extends Command {
 
     @Override
     public String getCommandText() {
-        return commandText;
+        return commandResultText;
     }
 }

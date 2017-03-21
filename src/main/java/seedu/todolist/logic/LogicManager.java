@@ -11,6 +11,8 @@ import seedu.todolist.logic.commands.CommandResult;
 import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.logic.parser.Parser;
 import seedu.todolist.model.Model;
+import seedu.todolist.model.ReadOnlyToDoList;
+import seedu.todolist.model.ToDoList;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.storage.Storage;
 
@@ -42,7 +44,12 @@ public class LogicManager extends ComponentManager implements Logic {
         if (command.isMutating()) {
             undoManager.addMutatingTask(command);
         }
-        return command.execute();
+        CommandResult result = command.execute();
+        if (command.isMutating()) {
+            ReadOnlyToDoList currentState = new ToDoList(model.getToDoList());
+            undoManager.setCurrentStateForMutatingTask(currentState);
+        }
+        return result;
     }
 
     @Override
