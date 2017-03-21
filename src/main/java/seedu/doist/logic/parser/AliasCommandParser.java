@@ -17,10 +17,13 @@ import seedu.doist.logic.commands.IncorrectCommand;
 public class AliasCommandParser {
     private static final Pattern ALIAS_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
+    public static final String MESSAGE_COMMAND_WORD_NOT_SPECIFIED = "Command word must be specified. \n%1$s";
+    public static final String MESSAGE_ALIAS_FORMAT_INVALID = "Alias can only contain alphabet"
+                                                                    + "and underscores. \n%1$s";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ListCommand
-     * and returns an ListCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AliasCommand
+     * and returns an AliasCommand object for execution.
      */
     public Command parse(String args) {
         final Matcher matcher = ALIAS_COMMAND_REGEX.matcher(args.trim());
@@ -42,10 +45,12 @@ public class AliasCommandParser {
         try {
             List<String> parameter = argsTokenizer.getTokenizedArguments().get(PREFIX_FOR.toString());
             if (parameter == null || parameter.isEmpty()) {
-                throw new IllegalValueException("command word must be specified");
+                throw new IllegalValueException(String.format(MESSAGE_COMMAND_WORD_NOT_SPECIFIED,
+                                                    AliasCommand.MESSAGE_USAGE));
             }
-            if (!preamble.matches("[a-zA-Z]+")) {
-                throw new IllegalValueException("alias can only contain alphabets");
+            if (!preamble.matches("[a-zA-Z_]+")) {
+                throw new IllegalValueException(String.format(MESSAGE_ALIAS_FORMAT_INVALID,
+                                                    AliasCommand.MESSAGE_USAGE));
             }
             String commandWord = parameter.get(0);
             return new AliasCommand(preamble, commandWord);

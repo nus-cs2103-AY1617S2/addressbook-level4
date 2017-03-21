@@ -14,7 +14,7 @@ public class FinishCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "finish";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Marks the tasks as 'finished' identified by the index numbers used in the last task listing.\n"
             + "Parameters: INDEX [INDEX...] (must be a positive integer)\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " 1 8";
@@ -53,9 +53,5 @@ public class FinishCommand extends Command {
             outputMessage += String.format(MESSAGE_FINISH_TASK_SUCCESS, tasksFinished);
         }
         return new CommandResult(outputMessage);
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

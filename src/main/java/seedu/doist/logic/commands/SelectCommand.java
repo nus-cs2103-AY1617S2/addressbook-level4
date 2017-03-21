@@ -15,7 +15,7 @@ public class SelectCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "select";
 
-    public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
+    public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Selects the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + DEFAULT_COMMAND_WORD + " 1";
 
@@ -37,9 +37,5 @@ public class SelectCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

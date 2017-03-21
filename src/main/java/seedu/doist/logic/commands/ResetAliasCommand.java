@@ -1,21 +1,18 @@
 package seedu.doist.logic.commands;
 
+
 /**
- * Terminates the program.
+ * Reset aliases to the default.
  */
 public class ResetAliasCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "reset_alias";
 
-    public static final String MESSAGE_RESET_ALIAS_SUCCESS = "all aliases reset to the default";
+    public static final String MESSAGE_RESET_ALIAS_SUCCESS = "All aliases reset to default!";
 
     @Override
     public CommandResult execute() {
-        Command.setDefaultCommandWords();
+        model.resetToDefaultCommandWords();
         return new CommandResult(MESSAGE_RESET_ALIAS_SUCCESS);
-    }
-
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }
