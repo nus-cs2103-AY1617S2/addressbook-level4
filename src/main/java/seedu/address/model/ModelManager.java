@@ -16,17 +16,17 @@ import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the to-do list data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the to-do list data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    // @@author A0143648Y
     private final ToDoList todoList;
     private FilteredList<ReadOnlyTask> filteredFloats;
     private FilteredList<ReadOnlyTask> filteredTasks;
     private FilteredList<ReadOnlyTask> filteredEvents;
-    
+
     /**
      * Initializes a ModelManager with the given ToDoList and userPrefs.
      */
@@ -42,6 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents = new FilteredList<>(this.todoList.getFilteredEvents());
     }
 
+    // @@
     public ModelManager() {
         this(new ToDoList(), new UserPrefs());
     }
@@ -56,9 +57,9 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyToDoList getToDoList() {
         return todoList;
     }
-    
+
     @Override
-    public String getTagListToString(){
+    public String getTagListToString() {
         return todoList.getTagListToString();
     }
 
@@ -89,22 +90,39 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.updateTask(todoListIndex, editedTask);
         indicateToDoListChanged();
     }
- //@@author A0143648Y
-    //=========== Filtered Task List Accessors =============================================================
 
+    // =========== Filtered Task List Accessors
+    // =============================================================
+    // @@author A0143648Y
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
-    
+
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventList() {
         return new UnmodifiableObservableList<>(filteredEvents);
     }
-    
+
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatList() {
         return new UnmodifiableObservableList<>(filteredFloats);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getListFromChar(Character type) {
+        switch (type) {
+
+        case Task.DEADLINE_CHAR:
+            return getFilteredTaskList();
+
+        case Task.EVENT_CHAR:
+            return getFilteredEventList();
+
+        case Task.FLOAT_CHAR:
+            return getFilteredFloatList();
+        }
+        return getFilteredTaskList();
     }
 
     @Override
@@ -125,10 +143,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         @Override
         String toString();
     }
@@ -154,6 +174,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         @Override
         String toString();
     }
@@ -164,7 +185,8 @@ public class ModelManager extends ComponentManager implements Model {
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-//@@author A0143648Y
+
+        // @@author A0143648Y
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
@@ -173,8 +195,7 @@ public class ModelManager extends ComponentManager implements Model {
                             || hasContainedKeyword(task.getEndTimeString(), keyword)
                             || hasContainedKeyword(task.getDescriptionString(), keyword)
                             || hasContainedKeyword(task.getVenueString(), keyword))
-                    .findAny()
-                    .isPresent();
+                    .findAny().isPresent();
         }
 
         @Override
@@ -183,18 +204,16 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private boolean hasContainedKeyword (String searchMe, String findMe ){
+    private boolean hasContainedKeyword(String searchMe, String findMe) {
         int searchMeLength = searchMe.length();
         int findMeLength = findMe.length();
         boolean foundIt = false;
-        for (int i = 0; 
-             i <= (searchMeLength - findMeLength);
-             i++) {
-           if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
-              foundIt = true;
-              break;
-           }
-    }
+        for (int i = 0; i <= (searchMeLength - findMeLength); i++) {
+            if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+                foundIt = true;
+                break;
+            }
+        }
         return foundIt;
     }
 

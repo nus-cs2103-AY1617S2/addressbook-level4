@@ -15,6 +15,10 @@ public class Task implements ReadOnlyTask{
     public static final String TASK_TYPE_DEADLINE = "deadline";
     public static final String TASK_TYPE_EVENT = "event";
     public static final String TASK_TYPE_FLOAT = "float";
+    
+    public static final char FLOAT_CHAR = 'f';
+    public static final char DEADLINE_CHAR = 'd';
+    public static final char EVENT_CHAR = 'e';
 
     private Title title;
     private Venue venue;
@@ -91,6 +95,19 @@ public class Task implements ReadOnlyTask{
     
     //@@
     
+    //@@ A0143648Y
+    @Override
+    public Character getTaskChar() {
+        if (isDeadlineTask()) {
+            return DEADLINE_CHAR;
+        } else if (isEventTask()) {
+            return EVENT_CHAR;
+        } else {
+            return FLOAT_CHAR;
+        }
+    }
+    //@@
+
     public void setTitle(Title name) {
         assert name != null;
         this.title = name;

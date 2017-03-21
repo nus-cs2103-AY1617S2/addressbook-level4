@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.ArrayList;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,27 +25,27 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    public final int targetIndex;
+    public final Pair<Character, Integer> targetIndex;
 
     private ReadOnlyToDoList originalToDoList;
     private CommandResult commandResultToUndo;
 
-    public DeleteCommand(int targetIndex) {
+    public DeleteCommand(Pair<Character, Integer> targetIndex) {
         this.targetIndex = targetIndex;
     }
 
-    // @@author A0143648Y
+    // @@ A0143648Y
     @Override
     public CommandResult execute() throws CommandException {
         originalToDoList = new ToDoList(model.getToDoList());
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getListFromChar(targetIndex.getKey());
 
-        if (lastShownList.size() < targetIndex) {
+        if (lastShownList.size() < targetIndex.getValue()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask personToDelete = lastShownList.get(targetIndex.getValue() - 1);
 
         try {
             model.deleteTask(personToDelete);

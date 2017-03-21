@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.Optional;
 
+import javafx.util.Pair;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -18,13 +19,13 @@ public class SelectCommandParser {
      * and returns an SelectCommand object for execution.
      */
     public Command parse(String args) {
-        Optional<Integer> index = ParserUtil.parseIndex(args);
+        Optional<Pair<Character,Integer>> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
 
-        return new SelectCommand(index.get());
+        return new SelectCommand(index.get().getValue());
     }
 
 }
