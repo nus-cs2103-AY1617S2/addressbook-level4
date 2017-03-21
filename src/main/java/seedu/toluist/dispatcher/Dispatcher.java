@@ -6,5 +6,17 @@ package seedu.toluist.dispatcher;
  * the controller to dispatch the command to
  */
 public abstract class Dispatcher {
+
+    /**
+     * Dispatch a command from the Ui to a suitable Controller
+     * The command will be saved in the dispatcher's command history
+     * @param command
+     */
+    public abstract void dispatchRecordingHistory(String command);
+
+    /**
+     * Dispatch a command from the Ui to a suitable Controller.
+     * @param command command to be executed
+     */
     public abstract void dispatch(String command);
 }

@@ -55,8 +55,12 @@ public class CommandDispatcher extends Dispatcher {
         commandHistory = new ArrayList<>();
     }
 
-    public void dispatch(String command) {
+    public void dispatchRecordingHistory(String command) {
         recordCommand(command);
+        dispatch(command);
+    }
+
+    public void dispatch(String command) {
         String deAliasedCommand = aliasConfig.dealias(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 

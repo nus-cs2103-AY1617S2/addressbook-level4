@@ -10,7 +10,7 @@ public class HistoryCommandTest extends ToLuistGuiTest {
     public void viewHistoryWithoutAnythingElse() {
         String command = "history";
         commandBox.runCommand(command);
-        assertResultMessage("\n" + command + "\n2 commands displayed.");
+        assertResultMessage("\n" + command + "\n2 command displayed.");
     }
 
     @Test

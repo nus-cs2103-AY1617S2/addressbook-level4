@@ -29,7 +29,7 @@ public class CommandBox extends UiView {
 
     @FXML
     private void handleCommandInputChanged() {
-        dispatcher.dispatch(commandTextField.getText());
+        dispatcher.dispatchRecordingHistory(commandTextField.getText());
         commandTextField.setText("");
     }
 }
