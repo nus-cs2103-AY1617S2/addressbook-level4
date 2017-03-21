@@ -49,7 +49,7 @@ public class CommandDispatcher extends Dispatcher {
      * ArrayList to store previous commands entered since starting the application
      */
     private ArrayList<String> commandHistory;
-    private Integer historyPointer = 0;
+    private int historyPointer = 0;
 
     public CommandDispatcher() {
         super();
