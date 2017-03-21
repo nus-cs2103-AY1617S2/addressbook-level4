@@ -22,7 +22,7 @@ public class SortCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns an SortCommand object for execution.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Command parse(String args) throws IllegalValueException {
         Optional<String> sortTypeOp = ParserUtil.parseSortType(args);
