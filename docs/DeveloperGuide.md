@@ -369,9 +369,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | be able to delete a task after adding | delete tasks that I no longer need
 `* * *` | user | find specific tasks by keywords | locate my task easily
 `* * *` | user | specify a particular path or folder to store my task lists | retrieve the file easily and conveniently
-`* * *` | user | undo the recent action | revert back in case I decide to change my mind.
+`* * *` | user | undo the recent action | revert in case I decide to change my mind.
 `* * *` | user | list all tasts I created | so that I can plan my day more efficiently.
-`* *` | user | add tasks that recur on a consistent basis (e.g. Tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
+`* *` | user | add tasks that recur on a consistent basis (e.g. tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
 `* *` | user | add some comments for a particular task | store additional information that I will need when handling that task
 `* *` | user | include a tag on the task | retrieve all the tasks that belong to the same tag
 `* *` | user | be able to set how important a task is | know which tasks I should prioritize first
@@ -379,7 +379,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | be able to delete a group of task by keywords | avoid deleting one by one
 `* *` | user | have a view of my pending tasks for the day/week/month | know what I need to do for that particular period of time
 `* *` | user | see my overdue tasks | know what actions to take on them
-`* *` | advanced user | have the choice of a few preset themes | change it to my liking.
+`* *` | advanced user | have the choice of a few preset themes | change it to my liking
 `*` | user | sort my tasks according to task names | delegate my time appropriately
 `*` | user | delete all my tasks | hand in my resignation letter afterwards
 
@@ -454,8 +454,8 @@ Use case ends
 **MSS**
 
 1. User requests to delete a task and inputs the command with correct keywords
-2. FlexiTask shows a message to ask for confirmation of deletion.
-3. User inputs the command for confirmation.
+2. FlexiTask shows a message to ask for confirmation of deletion
+3. User inputs the command for confirmation
 4. FlexiTask deletes the task <br>
 
 > Use case ends
@@ -542,6 +542,9 @@ Use case ends
 
 > commandline commands based on UNIX System
 
+####Headless Mode:
+> In the headless mode, GUI tests do not show up on the screen
+> This means you can do other things on the computer while the tests are running
 
 ## Appendix E : Product Survey
 
@@ -550,65 +553,65 @@ Use case ends
 Author: Wang Pengcheng
 
 Pros:
-* Simplistic and elegant UI
-* Ability to add task items directly from Gmail into Google Task.
-* Not a lot of buttons to click. Convenient and easy to learn.
-* Allow different colour codings for easy references.
-* Able to import other existing calendars (e.g. NUSmods) into the user's calendar.
+* Has a simplistic and elegant UI
+* Has the ability to add task items directly from Gmail into Google Task.
+* Does not have a lot of buttons to click. Convenient and easy to learn.
+* Allows different colour codings for easy references.
+* Allows the user to import other existing calendars (e.g. NUSmods) into the user's calendar.
 
 Cons:
-* Web application (especially for Google Task) that requires Internet connection for usage.
-* UI for Google Tasks needs improvement; The deletion of items is quite a hassle and can be messy.
-* May not cater to Jim who prefers keyboard inputs.
+* Requires Internet connection for usage.
+* Needs improvement on the UI for Google Tasks; The deletion of items is quite a hassle and can be messy.
+* Requires mouse usage instead of CLI commands, which may not cater to Jim who prefers keyboard inputs.
 
 **Priority Matrix**
 
 Author: Ellango Vesali
 
 Pros:
-* Simple and easy to use UI
-* Create multiple task under a main project
-* Group the list of items based on the different levels of priorities
-* Integrate with Mail to keep track of important mails
+* Has a simple and easy to use UI
+* Creates multiple task under a main project
+* Groups the list of items based on the different levels of priorities
+* Integrates with Mail to keep track of important mails
 * Syncs with iOS, Android and Windows
-* Upload files
-* Daily reports reminding one of their deadlines
-* Collaborative aspects for teams
+* Uploads files
+* Has daily reports to remind one of their deadlines
+* Has collaborative aspects for teams
 
 Cons:
-* Require mouse usage, may not cater Jim who prefers keyboard inputs
-* Monthly subscription fee
+* Requires mouse usage instead of CLI commands, which may not cater to Jim who prefers keyboard inputs.
+* Requires a monthly subscription fee
 
 **Assembla**
 
 Author: Lim Jie
 
 Pros:
-* Advanced coding task manager
+* Caters to advanced coding purposes
 * Allows collaboration with different project groups at the same time
-* 3 types of communication channel for different purposes and importance
+* Has three types of communication channel for different purposes and importance
 * Connects to different software such as Git, Goggle Drive, Dropbox etc.
-* Able to track issues and milestones from Github projects
-* Extensive support portal that offers 3 level of assistance
+* Allows tracking of issues and milestones from Github projects
+* Has extensive support portal that offers 3 level of assistance
 
 Cons:
-* Absence of phone application
-* Steep learning curve
-* Group pricing rather than individual pricing
+* Lacks mobile application
+* Has a steep learning curve
+* Imposes group pricing rather than individual pricing
 
 **Wunderlist**
 
 Author: Sherina Toh Shi Pei
 
 Pros:
-* Intuitive UI
+* Has an intuitive UI
 * Allows categories to be created where tasks can be placed in
 * Allows subtasks, notes and files to be added to a task
 * Allows for collaboration on tasks with other people
 * Allows users to set a reminder for their tasks
 * Shows a daily and weekly overview of all tasks
-* A large number of themes for user to choose from to suit their preferences
+* Has a large number of themes for user to choose from to suit their preferences
 
 Cons:
-* Web Version requires internet to access
-* Not suitable for users that prefer keyboard inputs as most commands require the mouse
+* Requires internet to access
+* Requires mouse usage instead of CLI commands, which may not cater to Jim who prefers keyboard inputs.
