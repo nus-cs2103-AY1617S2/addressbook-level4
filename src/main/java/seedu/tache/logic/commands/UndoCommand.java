@@ -19,7 +19,7 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_EMPTY_HISTORY);
         } else {
             Undoable lastCommand = undoHistory.pop();
-            assert lastCommand.isUndoable();
+            assert lastCommand.isUndoable() : "The popped command can't be undone!";
             try {
                 String undoResult = lastCommand.undo();
                 return new CommandResult(String.format(MESSAGE_SUCCESS, undoResult));
