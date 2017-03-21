@@ -85,11 +85,11 @@ public class AddCommand extends Command {
     }
 
     public CommandResult executeUndo(Task previousTask, Model model) throws CommandException {
-        try{
-        	model.addTaskUndo(previousTask);
-        	return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        try {
+            model.addTaskUndo(previousTask);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-        	throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

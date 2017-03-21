@@ -30,10 +30,10 @@ public class DeleteCommand extends Command {
 
 
     public DeleteCommand() {
-	}
+    }
 
 
-	@Override
+    @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -53,7 +53,7 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
-	public CommandResult executeUndo(Task previousTask, Model model) throws CommandException {
+    public CommandResult executeUndo(Task previousTask, Model model) throws CommandException {
         try {
             model.deleteTaskUndo(previousTask);
         } catch (TaskNotFoundException pnfe) {
