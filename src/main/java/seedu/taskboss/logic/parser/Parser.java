@@ -51,6 +51,7 @@ public class Parser {
             return new AddCommandParser().parse(arguments);
 
         case MarkDoneCommand.COMMAND_WORD:
+        case MarkDoneCommand.COMMAND_WORD_SHORT:
             return new MarkDoneCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
