@@ -20,20 +20,20 @@ import seedu.todolist.model.task.Task;
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
     private ListView<Task> taskListView;
 
-    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<Task> personList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<Task> taskList) {
         super(FXML);
-        setConnections(personList);
-        addToPlaceholder(personListPlaceholder);
+        setConnections(taskList);
+        addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<Task> personList) {
-        taskListView.setItems(personList);
-        taskListView.setCellFactory(listView -> new PersonListViewCell());
+    private void setConnections(ObservableList<Task> taskList) {
+        taskListView.setItems(taskList);
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -60,17 +60,17 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    class PersonListViewCell extends ListCell<Task> {
+    class TaskListViewCell extends ListCell<Task> {
 
         @Override
-        protected void updateItem(Task person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Task task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || person == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }
