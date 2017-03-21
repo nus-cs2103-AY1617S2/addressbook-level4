@@ -17,5 +17,6 @@
 
 .selected {
 	-fx-background-color: white;
-	-fx-text: black;
+	-fx-text-fill: black;
+	
 }

@@ -130,9 +130,9 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleViewListChangedEvent(ViewListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (event.toString().startsWith("incomplete")) {
-            mainWindow.indicateButtonChange();
-        }
+        int firstSpaceIndex = event.toString().indexOf(" ");
+        String typeOfList = event.toString().substring(0, firstSpaceIndex);
+        mainWindow.indicateButtonChange(typeOfList);
     }
 
 }

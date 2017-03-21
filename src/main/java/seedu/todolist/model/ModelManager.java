@@ -15,6 +15,7 @@ import seedu.todolist.commons.events.model.ToDoListChangedEvent;
 import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
+import seedu.todolist.logic.commands.ListCommand;
 import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
@@ -29,11 +30,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final ToDoList toDoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private static final String INCOMPLETE = "incomplete";
-    private static final String COMPLETE = "complete";
-    private static final String OVERDUE = "overdue";
-    private static final String ALL = "all";
-
 
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
@@ -117,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
             return !task.isComplete();
         });
-        indicateViewListChanged(INCOMPLETE);
+        indicateViewListChanged(ListCommand.TYPE_INCOMPLETE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -127,7 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
             return task.isComplete();
         });
-        //indicateViewListChanged(COMPLETE);
+        indicateViewListChanged(ListCommand.TYPE_COMPLETE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -148,11 +144,13 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
         });
+        indicateViewListChanged(ListCommand.TYPE_OVERDUE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
+        indicateViewListChanged(ListCommand.TYPE_ALL);
         filteredTasks.setPredicate(null);
     }
 

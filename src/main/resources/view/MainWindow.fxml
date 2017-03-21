@@ -43,11 +43,11 @@
                <children>
                <HBox>
                <children>
-               <Button fx:id="allButton" text="All"/>
-               <Button fx:id="incompleteButton" text="Incomplete"/>
-               <Button fx:id="completedButton" text="Completed"/>
-               <Button fx:id="upcomingButton" text="Upcoming"/>
-               <Button fx:id="overdueButton" text="Overdue"/>
+               <Button fx:id="allButton"  onAction="#handleAllButton" text="All"/>
+               <Button fx:id="incompleteButton" onAction="#handleIncompleteButton" text="Incomplete"/>
+               <Button fx:id="completedButton"  onAction="#handleCompletedButton" text="Completed"/>
+               <Button fx:id="upcomingButton"  onAction="#handleUpcomingButton" text="Upcoming"/>
+               <Button fx:id="overdueButton"  onAction="#handleOverdueButton" text="Overdue"/>
                </children>
                </HBox>
                   <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
