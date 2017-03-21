@@ -32,7 +32,7 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
-import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
@@ -42,10 +42,9 @@ import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-// import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.category.Category;
@@ -87,7 +86,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
@@ -200,13 +199,15 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+                TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+                Date.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Category.MESSAGE_TAG_CONSTRAINTS);
+                StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+                EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
+//        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+//                Category.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -350,7 +351,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE);
         assertCommandFailure("FINE ", expectedMessage);
     }
 
@@ -420,13 +421,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             TaskName taskName = new TaskName("Adam Brown");
             Date privateDate = new Date("111111");
-            Deadline deadline = new Deadline("adam@gmail.com");
-//            StartTime privateStartTime = new StartTime("111, alpha street");
+            StartTime privateStartTime = new StartTime("111, alpha street");
             EndTime privateEndTime = new EndTime("1400");
 //            Category category1 = new Category("category1");
 //            Category category2 = new Category("longercategory2");
 //            UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(taskName, privateDate, deadline, /* privateStartTime, */privateEndTime /*, categories*/);
+            return new Task(taskName, privateDate, privateStartTime, privateEndTime /*, categories*/);
         }
 
         /**
@@ -440,8 +440,7 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName("Task " + seed),
                     new Date("" + Math.abs(seed)),
-                    new Deadline(seed + "@email"),
-//                    new StartTime("House of " + seed),
+                    new StartTime("House of " + seed),
                     new EndTime("What this " + seed)
 //                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
             );
@@ -455,8 +454,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getTaskName().toString());
             cmd.append(" ON").append(p.getDate());
-            cmd.append(" BY").append(p.getDeadline());
-//            cmd.append(" FROM").append(p.getStartTime());
+            cmd.append(" FROM").append(p.getStartTime());
             cmd.append(" TO").append(p.getEndTime());
 
 /*            UniqueCategoryList categories = p.getCategories();
@@ -541,8 +539,7 @@ public class LogicManagerTest {
             return new Task(
                     new TaskName(taskname),
                     new Date("1"),
-                    new Deadline("1@email"),
-//                    new StartTime("House of 1"),
+                    new StartTime("House of 1"),
                     new EndTime("whutwhut")
 //                    new UniqueCategoryList(new Category("category"))
             );

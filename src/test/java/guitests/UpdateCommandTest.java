@@ -5,11 +5,10 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartTime;
@@ -30,7 +29,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 1;
 
         TestTask updatedTask = new TaskBuilder().withTaskName("eat lunch").withDate("thursday")
-                .withDeadline("friday").withStartTime("1300").withEndTime("1400");//.withCategories("husband").build();
+               .withStartTime("1300").withEndTime("1400").build();//.withCategories("husband").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     }
@@ -56,7 +55,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     } */
-/*
+
     @Test
     public void update_searchThenUpdate_success() throws Exception {
         commandBox.runCommand("SEARCH Elle");
@@ -69,7 +68,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         TestTask updatedTask = new TaskBuilder(taskToUpdate).withTaskName("Belle").build();
 
         assertUpdateSuccess(filteredTaskListIndex, taskManagerIndex, detailsToUpdate, updatedTask);
-    } */
+    } 
 
     @Test
     public void update_missingTaskIndex_failure() {
@@ -97,11 +96,8 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 BY 1500hrs");
-        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
-
-//        commandBox.runCommand("UPDATE 1 FROM 1200hrs");
-//        assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
+        commandBox.runCommand("UPDATE 1 FROM 1200hrs");
+        assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 TO 1300hrs");
         assertResultMessage(EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
@@ -131,11 +127,11 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("UPDATE " + filteredTaskListIndex + " " + detailsToUpdate);
 
         // confirm the new card contains the right data
-        TaskCardHandle updatedCard = taskListPanel.navigateToTask(updatedTask.getTaskName().fullName);
+        TaskCardHandle updatedCard = taskListPanel.navigateToTask(updatedTask.getTaskName().fullTaskName);
         assertMatching(updatedTask, updatedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[taskManagerIndex - 1] = editedTask;
+        expectedTasksList[taskManagerIndex - 1] = updatedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask));
     }

@@ -5,7 +5,6 @@ import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 
@@ -43,12 +42,6 @@ public class TaskBuilder {
 		this.task.setDate(new Date(date));
 		return this;
 	}
-
-	public TaskBuilder withDeadline(String deadline) throws IllegalValueException {
-		this.task.setDeadline(new Deadline(deadline));
-		return this;
-	}
-
 	
 	public TaskBuilder withStartTime(String startTime) throws IllegalValueException { 
 		this.task.setStartTime(new StartTime(startTime));
@@ -60,7 +53,6 @@ public class TaskBuilder {
 		return this;
 	}
 	 
-
 	public TestTask build() {
 		return this.task;
 	}
