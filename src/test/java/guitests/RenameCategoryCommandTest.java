@@ -25,11 +25,12 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
     public void renameCategory_Short_Command_success() throws IllegalValueException {
         TestTask sampleA = td.alice;
         TestTask sampleB = td.benson;
-        TestTask[] taskList= {sampleA, sampleB};
+        TestTask[] taskList = {sampleA, sampleB};
         assertRenameCategoryResult(true, "n owesMoney Project", taskList);
     }
 
-    private void assertRenameCategoryResult(boolean isShort, String command, TestTask[] taskList) throws IllegalValueException {
+    private void assertRenameCategoryResult(boolean isShort, 
+                   String command, TestTask[] taskList) throws IllegalValueException {
         TestTask sampleA;
         TestTask sampleB;
         if (!isShort) {
