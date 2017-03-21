@@ -75,6 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    @Override
     public synchronized void completeTask(int filteredTaskListIndex, Task target) throws TaskNotFoundException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.completeTask(toDoListIndex, target);
@@ -132,13 +133,16 @@ public class ModelManager extends ComponentManager implements Model {
             //get current time and compare with the task's end time
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy h.mm a");
             Date currentDate = new Date();
-            String taskDateString = task.getEndTime().toString();
-
-            try {
-                Date taskDate = dateFormat.parse(taskDateString);
-                return currentDate.compareTo(taskDate) > 0;
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (task.getEndTime() != null) {
+                String taskDateString = task.getEndTime().toString();
+                try {
+                    Date taskDate = dateFormat.parse(taskDateString);
+                    return currentDate.compareTo(taskDate) > 0;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            } else {
                 return false;
             }
         });

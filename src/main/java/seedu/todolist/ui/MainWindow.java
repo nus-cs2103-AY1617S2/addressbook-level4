@@ -28,10 +28,10 @@ import seedu.todolist.model.task.Task;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/todo_list_filled_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_WIDTH = 600;
     private static final String LIST = "list";
     private static final String SELECTED = "selected";
 
@@ -40,7 +40,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private Config config;
 
     @FXML
@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -154,8 +154,8 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
 
     void hide() {
@@ -223,10 +223,10 @@ public class MainWindow extends UiPart<Region> {
         logic.execute(command);
     }
 
-    //TODO some issue with overdue?
     @FXML
-    public void handleOverdueButton() {
-        raise(new ViewListChangedEvent(ListCommand.TYPE_OVERDUE));
+    public void handleOverdueButton() throws CommandException {
+        String command = LIST + " " + ListCommand.TYPE_OVERDUE;
+        logic.execute(command);
     }
 
     //TODO not done yet
@@ -247,17 +247,14 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public TaskListPanel getTaskListPanel() {
+        return this.taskListPanel;
     }
 
     void loadPersonPage(Task person) {
         browserPanel.loadPersonPage(person);
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
 
     //@@author A0144240W
     public void changeButtonsBackToOriginalState() {
@@ -283,6 +280,10 @@ public class MainWindow extends UiPart<Region> {
 
         case ListCommand.TYPE_OVERDUE:
             overdueButton.getStyleClass().add(SELECTED);
+            break;
+
+        case ListCommand.TYPE_UPCOMING:
+            upcomingButton.getStyleClass().add(SELECTED);
             break;
 
         default:

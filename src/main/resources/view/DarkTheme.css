@@ -116,6 +116,15 @@
      -fx-border-top-width: 1px;
 }
 
+#taskselectiondisplay {
+	-fx-background-color: #ffffff;
+}
+
+#textForTaskDetails {
+	-fx-font-weight: bold;
+    -fx-font-size:20 em;
+}
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-text-fill: black;
@@ -283,7 +292,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

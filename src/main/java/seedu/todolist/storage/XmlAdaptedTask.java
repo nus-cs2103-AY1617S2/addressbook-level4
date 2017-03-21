@@ -53,8 +53,17 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(Task source) {
         name = source.getName().fullName;
-        startTime = (source.getStartTime() != null ? source.getStartTime().toString() : "");
-        endTime = (source.getEndTime() != null ? source.getEndTime().toString() : "");
+        if (source.getStartTime() != null) {
+            startTime = (source.getStartTime() != null ? source.getStartTime().toString() : "");
+        } else {
+            startTime = "";
+        }
+        if (source.getEndTime() != null) {
+            endTime = (source.getEndTime() != null ? source.getEndTime().toString() : "");
+        } else {
+            endTime = "";
+        }
+
         completed = source.isComplete();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
