@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
     
     private ReadOnlyTask task;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
         this.task = task;
         title.setText(task.getTitle().title);
