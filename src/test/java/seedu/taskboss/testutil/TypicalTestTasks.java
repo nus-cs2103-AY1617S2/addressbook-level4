@@ -34,11 +34,11 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 20, 2017 11.30pm")
                     .withEndDateTime("Apr 28, 2017 3pm")
                     .withInformation("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("Yes")
+            elle = new TaskBuilder().withName("Elle Meyer").withPriorityLevel("No")
                     .withStartDateTime("Feb 22, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withInformation("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("Yes")
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPriorityLevel("No")
                     .withStartDateTime("Feb 21, 2017 1pm")
                     .withEndDateTime("Dec 10, 2017 5pm")
                     .withInformation("little tokyo").build();

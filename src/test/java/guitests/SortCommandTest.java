@@ -27,6 +27,11 @@ public class SortCommandTest extends TaskBossGuiTest {
             td.daniel, td.benson, td.george, td.fiona};
         assertSortSuccess(true, expectedList3, "ed");
 
+        //sort by priority short command
+        TestTask[] expectedList4 = new TestTask[] {td.alice, td.carl, td.daniel,
+            td.george, td.benson, td.elle, td.fiona};
+        assertSortSuccess(true, expectedList4, "p");
+
         //invalid sort command
         commandBox.runCommand("sort asdsa");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
