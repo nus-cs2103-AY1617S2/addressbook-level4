@@ -1,33 +1,46 @@
 package seedu.taskmanager.model.task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's start date in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidEndDate(String)}
+ * Represents a Task's start date in the task manager. Guarantees: immutable; is
+ * valid as declared in {@link #isValidEndDate(String)}
  */
-public class EndDate {
+public class EndDate extends Date {
 
-    public static final String MESSAGE_ENDDATE_CONSTRAINTS =
-            "Start date should be of dd/mm/yyyy format or can be empty";
+    public static final String MESSAGE_ENDDATE_CONSTRAINTS = "Start date should be of dd/mm/yyyy format or "
+            + "can be empty";
     public static final String ENDDATE_VALIDATION_REGEX = "(^$)|(^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$)";
 
-    public final String value;
+    // @@author A0140032E
+    private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Validates given end date.
      *
-     * @throws IllegalValueException if given end date string is invalid.
+     * @throws IllegalValueException
+     *             if given end date string is invalid.
      */
     public EndDate(String endDate) throws IllegalValueException {
+        super(endDateConstructor(endDate));
+    }
+
+    private static long endDateConstructor(String endDate) throws IllegalValueException {
         assert endDate != null;
-        String trimmedEndDate = endDate.trim();
-        if (!isValidEndDate(trimmedEndDate)) {
+        if (!isValidEndDate(endDate)) {
             throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
         }
-        this.value = trimmedEndDate;
+        try {
+            return sdfInput.parse(endDate).getTime();
+        } catch (ParseException e) {
+            throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+        }
     }
+    // @@author
 
     /**
      * Returns if a given string is a valid task end date.
@@ -36,21 +49,24 @@ public class EndDate {
         return test.matches(ENDDATE_VALIDATION_REGEX);
     }
 
+    // @@author A0140032E
     @Override
     public String toString() {
-        return value;
+        return sdfInput.format(this);
     }
+    // @@author
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EndDate // instanceof handles nulls
-                && this.value.equals(((EndDate) other).value)); // state check
+                        && this.toString().equals(((EndDate) other).toString())); // state
+                                                                                  // check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return toString().hashCode();
     }
 
 }
