@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.task.Task;
 
 /**
  * Undo last task.
@@ -36,13 +38,15 @@ public class UndoCommand extends Command {
                 return new CommandResult(MESSAGE_FAIL);
             }
             backupData = taskManagerOptional.get();
+            model.resetData(backupData);
         } catch (DataConversionException e) {
             return new CommandResult(MESSAGE_FAIL);
         } catch (IOException e) {
             return new CommandResult(MESSAGE_FAIL);
+        } catch (IllegalValueException ive) {
+            return new CommandResult(Task.MESSAGE_TASK_CONSTRAINTS);
         }
 
-        model.resetData(backupData);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

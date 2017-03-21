@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
 
-import javafx.collections.ObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
-import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
@@ -70,19 +68,21 @@ public class TypicalTestTasks {
                 tm.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
+            } catch (IllegalValueException ive) {
+                assert false : "not possible";
             }
         }
     }
 
     /**
-     * 
+     *
      * @return the typical tasks in sorted order
      */
     public TestTask[] getTypicalTasks() {
         ArrayList<TestTask> typicalTaskList = new ArrayList<>();
         TestTask[] typicalTasks = new TestTask[] { apply, buy, calculate, decide, eat, find, give};
         //, handle, identify, jump , kick, look, mark, neglect   manually added tasks, that cause errors because of empty fields
-        
+
         for (TestTask t : typicalTasks) {
             typicalTaskList.add(t);
         }

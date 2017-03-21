@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.events.model.FilePathChangedEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.util.FxViewUtil;
 
@@ -49,6 +50,11 @@ public class StatusBarFooter extends UiPart<Region> {
         this.syncStatus.setText(status);
     }
 
+    @Subscribe
+    public void handleFilePathChangedEvent(FilePathChangedEvent fpce) {
+    	setSaveLocation("./" + fpce.path);
+    }
+    
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
         PrettyTime pretty = new PrettyTime();

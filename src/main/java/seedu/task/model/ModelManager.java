@@ -7,7 +7,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.model.FilePathChangedEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
@@ -28,6 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -45,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -58,6 +61,11 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
+    }
+    
+    /** Raises an event to indicate the file path has changed */
+    private void indicateFilePathChanged(String newPath) {
+    	raise(new FilePathChangedEvent(newPath, taskManager));
     }
 
     @Override
@@ -82,12 +90,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+    }
+    
+    @Override
+    public void changeFilePath(String newPath) {
+    	indicateFilePathChanged(newPath);
+    	indicateTaskManagerChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================

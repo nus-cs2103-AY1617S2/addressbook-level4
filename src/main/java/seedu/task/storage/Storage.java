@@ -3,6 +3,7 @@ package seedu.task.storage;
 import java.io.IOException;
 import java.util.Optional;
 
+import seedu.task.commons.events.model.FilePathChangedEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
@@ -29,11 +30,12 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     @Override
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
+    void handleFilePathChangedEvent(FilePathChangedEvent fpce);
     /**
      * Saves the current version of KIT to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+    void handleTaskManagerChangedEvent(TaskManagerChangedEvent tmce);
 
 }

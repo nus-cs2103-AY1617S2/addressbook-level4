@@ -76,23 +76,23 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                    new Task(new Name("Ali Muster"), new Date("23-02-24"), new Date("24-02-2424"),
+                    new Task(new Name("Ali Muster"), new Date("1-02-24"), new Date("1-03-2424"),
                             new Remark("hans@google.com"), new Location("4th street"), new UniqueTagList(), false),
-                    new Task(new Name("Boris Mueller"), new Date("24-02-24"), new Date("12-09-2245"),
+                    new Task(new Name("Boris Mueller"), new Date("1-02-24"), new Date("1-09-2245"),
                             new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList(), false),
-                    new Task(new Name("Carl Kurz"), new Date("4-04-1963"), new Date("15-03-1963"),
+                    new Task(new Name("Carl Kurz"), new Date("1-04-1963"), new Date("1-13-1963"),
                             new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList(), false),
-                    new Task(new Name("Daniel Meier"), new Date("2-12-2000"), new Date("17-07-2003"),
+                    new Task(new Name("Daniel Meier"), new Date("2-12-2000"), new Date("2-17-2003"),
                             new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList(), false),
-                    new Task(new Name("Elle Meyer"), new Date("1-01-2000"), new Date("24-12-2004"),
+                    new Task(new Name("Elle Meyer"), new Date("1-01-2000"), new Date("2-12-2004"),
                             new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList(), false),
-                    new Task(new Name("Fiona Kunz"), new Date("29-05-2424"), new Date("04-03-2027"),
+                    new Task(new Name("Fiona Kunz"), new Date("2-05-2024"), new Date("04-03-2027"),
                             new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList(), false),
-                    new Task(new Name("George Best"), new Date("24-09-14"), new Date("14-02-2042"),
+                    new Task(new Name("George Best"), new Date("4-09-14"), new Date("1-02-2042"),
                             new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList(), false),
-                    new Task(new Name("Hoon Meier"), new Date("14-08-2424"), new Date("04-12-2024"),
+                    new Task(new Name("Hoon Meier"), new Date("1-08-2024"), new Date("04-12-2024"),
                             new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList(), false),
-                    new Task(new Name("Ida Mueller"), new Date("9-05-30"), new Date("04-12-2031"),
+                    new Task(new Name("Ida Mueller"), new Date("2-05-30"), new Date("04-12-2031"),
                             new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList(), false) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -119,7 +119,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
-     * 
+     *
      * @param fileName
      * @return
      */
@@ -241,7 +241,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
-     * 
+     *
      * @param node
      * @return
      */
@@ -253,7 +253,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -265,7 +265,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -291,7 +291,7 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * 
+     *
      * @param tasks
      *            The list of tasks
      * @param tasksToRemove
@@ -306,7 +306,7 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * 
+     *
      * @param list
      *            original list to copy from
      * @param targetIndexInOneIndexedFormat
@@ -318,7 +318,7 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * 
+     *
      * @param tasks
      *            The array of tasks.
      * @param task
@@ -334,7 +334,7 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * 
+     *
      * @param tasks
      *            A array of tasks.
      * @param tasksToAdd

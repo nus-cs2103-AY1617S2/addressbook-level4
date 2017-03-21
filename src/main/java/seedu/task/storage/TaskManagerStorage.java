@@ -15,6 +15,8 @@ public interface TaskManagerStorage {
      * Returns the file path of the data file.
      */
     String getTaskManagerFilePath();
+    
+    void setTaskManagerFilePath(String path);
 
     /**
      * Returns TaskManager data as a {@link ReadOnlyTaskManager}.
