@@ -92,5 +92,5 @@ public class TaskManagerTest {
 //        @Override
 //        public ObservableList<Category> getCategoryList() {
 //            return categories;
-        }
+        }    
     }

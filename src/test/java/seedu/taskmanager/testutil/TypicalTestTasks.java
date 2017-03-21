@@ -31,7 +31,7 @@ public class TypicalTestTasks {
             // Manually added
             sampleEvent = new TaskBuilder().withTaskName("Time to relax a little").withDate("06/05/17 1300").build();
             sampleFloatingTask = new TaskBuilder().withTaskName("Chiong all day everyday").build();
-            sampleDeadline = new TaskBuilder().withTaskName("Get it done").withDate("06/05/17").withEndTime("1700").build(); 
+            sampleDeadline = new TaskBuilder().withTaskName("Get it done").withDate("06/05/17").withEndTime("1700").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

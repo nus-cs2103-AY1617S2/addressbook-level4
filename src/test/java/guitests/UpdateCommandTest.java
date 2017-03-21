@@ -25,25 +25,25 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
-        String detailsToUpdate = "eat lunch ON thursday FROM 1300 TO 1400";
+        String detailsToUpdate = "take a snack break ON thursday 1500 TO 1600";
         int taskManagerIndex = 1;
 
-        TestTask updatedTask = new TaskBuilder().withTaskName("eat lunch").withDate("thursday")
-               .withStartTime("1300").withEndTime("1400").build();//.withCategories("husband").build();
+        TestTask updatedTask = new TaskBuilder().withTaskName("take a snack break").withDate("thursday")
+               .withStartTime("1500").withEndTime("1600").build();//.withCategories("husband").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     }
 
-/*    @Test
+    @Test
     public void update_notAllFieldsSpecified_success() throws Exception {
-        String detailsToUpdate = "t/sweetie t/bestie";
+        String detailsToUpdate = "ON friday";
         int taskManagerIndex = 2;
 
         TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
-        TestTask updatedTask = new TaskBuilder(taskToUpdate).withCategories("sweetie", "bestie").build();
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withDate("friday").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
-    } */
+    } 
 /*
     @Test
     public void update_clearCategories_success() throws Exception {
@@ -58,27 +58,27 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_searchThenUpdate_success() throws Exception {
-        commandBox.runCommand("SEARCH Elle");
+        commandBox.runCommand("SEARCH lunch");
 
-        String detailsToUpdate = "Belle";
+        String detailsToUpdate = "Lunch";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
+        int taskManagerIndex = 2;
 
         TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
-        TestTask updatedTask = new TaskBuilder(taskToUpdate).withTaskName("Belle").build();
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withTaskName("Lunch").build();
 
         assertUpdateSuccess(filteredTaskListIndex, taskManagerIndex, detailsToUpdate, updatedTask);
-    } 
+    }
 
     @Test
     public void update_missingTaskIndex_failure() {
-        commandBox.runCommand("UPDATE Bobby");
+        commandBox.runCommand("UPDATE supper");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void update_invalidTaskIndex_failure() {
-        commandBox.runCommand("UPDATE 8 Bobby");
+        commandBox.runCommand("UPDATE 10 supper");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -90,8 +90,8 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_invalidValues_failure() {
-        commandBox.runCommand("UPDATE 1 *&");
-        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
+//        commandBox.runCommand("UPDATE 1 *&");
+//        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
@@ -108,10 +108,9 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_duplicateTask_failure() {
-        commandBox.runCommand("UPDATE 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("UPDATE 3 Eat lunch @ techno BY 04/03/17 1400");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
-    } 
+    }
 
     /**
      * Checks whether the updated task has the correct updated details.

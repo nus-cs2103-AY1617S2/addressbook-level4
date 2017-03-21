@@ -44,7 +44,7 @@ public class TestTask implements ReadOnlyTask {
 
     public void setStartTime(StartTime starttime) {
         this.starttime = starttime;
-    } 
+    }
 
     public void setEndTime(EndTime endtime) {
     	this.endtime = endtime;
@@ -67,7 +67,7 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public StartTime getStartTime() {
         return starttime;
-    } 
+    }
 
     @Override
     public EndTime getEndTime() {
