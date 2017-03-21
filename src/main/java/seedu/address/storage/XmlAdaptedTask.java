@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -23,7 +24,7 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String time;
     @XmlElement(required = true)
-    private String email;
+    private String clockTime;
     @XmlElement(required = true)
     private String address;
 
@@ -63,7 +64,8 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
+        final ClockTime clockTime = new ClockTime(this.clockTime);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, time, tags);
+        return new Task(name, time, clockTime, tags);
     }
 }

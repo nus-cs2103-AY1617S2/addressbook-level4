@@ -10,7 +10,7 @@ public interface ReadOnlyTask {
 
     Name getName();
     Time getTime();
-    //ClockTime getClockTime();
+    ClockTime getClockTime();
     //Address getAddress();
 
     /**

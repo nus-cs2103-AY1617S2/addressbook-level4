@@ -14,7 +14,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
-    private ClockTime email;
+    private ClockTime clockTime;
     private Time time;
     private UniqueTagList tags;
 
@@ -51,6 +51,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Time getTime() {
         return time;
+    }
+    
+    @Override
+    public ClockTime getClockTime() {
+        return clockTime;
     }
 
     @Override

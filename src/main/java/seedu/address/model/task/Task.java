@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.task.ClockTime;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -13,7 +14,7 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Time time;
-    private ClockTime email;
+    private ClockTime clockTime;
     private Address address;
 
     private UniqueTagList tags;
@@ -21,10 +22,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, UniqueTagList tags) {
+    public Task(Name name, Time time, ClockTime clockTime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, time, tags);
         this.name = name;
         this.time = time;
+        this.clockTime = clockTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -32,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTime(), source.getTags());
+        this(source.getName(), source.getTime(), source.getClockTime(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -53,6 +55,16 @@ public class Task implements ReadOnlyTask {
     @Override
     public Time getTime() {
         return time;
+    }
+    
+    //@@author A0143873Y
+    public void setEmail(ClockTime clockTime) {
+        assert clockTime != null;
+        this.clockTime = clockTime;
+    }
+
+    public ClockTime getClockTime() {
+        return clockTime;
     }
 
     @Override
@@ -90,7 +102,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, email, address, tags);
+        return Objects.hash(name, time, clockTime, address, tags);
     }
 
     @Override

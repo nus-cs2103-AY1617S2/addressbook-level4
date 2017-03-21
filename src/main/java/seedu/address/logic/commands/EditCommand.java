@@ -79,11 +79,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
-        //ClockTime updatedClockTime = editTaskDescriptor.getClockTime().orElseGet(taskToEdit::getClockTime);
+        ClockTime updatedClockTime = editTaskDescriptor.getClockTime().orElseGet(taskToEdit::getClockTime);
         //Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedTags);
+        return new Task(updatedName, updatedTime, updatedClockTime, updatedTags);
     }
 
     /**
