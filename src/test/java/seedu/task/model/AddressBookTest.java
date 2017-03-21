@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.testutil.TypicalTestPersons;
 
 public class AddressBookTest {
@@ -90,6 +91,12 @@ public class AddressBookTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public Task getTaskById(TaskId mementoTaskId) {
+            // TODO Auto-generated method stub
+            return null;
         }
     }
 

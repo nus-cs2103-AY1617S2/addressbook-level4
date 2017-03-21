@@ -20,6 +20,7 @@ import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
+import seedu.task.logic.history.TaskMementos;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskList;
@@ -45,6 +46,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    public static TaskMementos taskMementos;
 
 
     @Override
@@ -61,7 +63,9 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        taskMementos = new TaskMementos();
+
+        logic = new LogicManager(model, storage, taskMementos);
 
         ui = new UiManager(logic, config, userPrefs);
 
