@@ -66,6 +66,13 @@ public class DateTimeParser {
         args = args.replaceAll(PREFIX_ON.getPrefix(), ""); 
         args = args.replaceAll(PREFIX_FROM.getPrefix(), ""); 
         args = args.replaceAll(PREFIX_TO.getPrefix(), "");
+        if (startDate != null) {
+            args = args.replaceAll("\\b" + startDate + "\\b", "");
+        }
+        if (endDate != null) {
+            args = args.replaceAll("\\b" + endDate + "\\b", "");
+        }
+        return args.trim();
     }
     
     
@@ -114,6 +121,7 @@ public class DateTimeParser {
         for (String arg : argsWithDate) {
             if (arg != null) {
                 List<DateGroup> dateGroups = parser.parse(arg.trim());
+                if (dateGroups.size() == 0 || dateGroups.get(0).getPosition() != 0) {
                     throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
                 }                
                 datesInText.add(dateGroups.get(0).getText().trim());
