@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.GuiSettings;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
@@ -30,7 +31,7 @@ import seedu.toluist.ui.view.TaskListUiView;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String LOGO_IMAGE_PATH = "/images/logo.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 800;
@@ -64,6 +65,7 @@ public class MainWindow extends UiPart<Region> {
         this.dispatcher = dispatcher;
 
         // Configure the UI
+        FxViewUtil.setStageIcon(primaryStage, LOGO_IMAGE_PATH);
         setWindowMinSize();
         setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
