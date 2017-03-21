@@ -88,7 +88,8 @@ public class AddCommandParser {
         int dateFormat = tokenizer.getDateFormat();
         switch (dateFormat) {
         case ArgumentTokenizer.DATE_NIL : break;
-        case ArgumentTokenizer.DATE_BY :  endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get()); break;
+        case ArgumentTokenizer.DATE_BY :  startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get());
+                                          endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get()); break;
         case ArgumentTokenizer.DATE_FROM : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_FROM).get());
                                            endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_TO).get());
                                            break;
