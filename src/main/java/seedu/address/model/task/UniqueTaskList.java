@@ -1,15 +1,12 @@
 package seedu.address.model.task;
 
-import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
@@ -30,34 +27,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
         return internalList.contains(toCheck);
-    }
-    
-    /**
-     * Returns true if the end time is later than both the start time and the current time 
-     */
-    public static boolean isValidEvent(ReadOnlyTask toCheck) {
-    	LocalDateTime currentTime = LocalDateTime.now();
-    	LocalDateTime endTime, startTime;
-    	
-    	// If both start time and end time does not exist
-    	if (!toCheck.getEndTime().isPresent() && !toCheck.getEndTime().isPresent()) {
-    		return true;
-    	}
-    	
-    	// If only start time exists
-    	if(!toCheck.getEndTime().isPresent() && toCheck.getStartTime().isPresent()) {
-			return false; 
-    	}
-    	
-		try {
-			endTime = toCheck.getEndTime().orElse(new DateTime(currentTime)).dateTime;
-			startTime = toCheck.getStartTime().orElse(new DateTime(currentTime)).dateTime;
-			return startTime.isBefore(endTime) && endTime.isAfter(currentTime);
-		} catch (IllegalValueException e) {
-			e.printStackTrace();
-		}    
-		
-    	return false;
     }
 
     /**
