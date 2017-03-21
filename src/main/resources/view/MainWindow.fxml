@@ -41,6 +41,7 @@
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
+      <!-- @@author A0142255M -->
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
          <items>
             <SplitPane dividerPositions="0.3" maxWidth="270.0" orientation="VERTICAL">
@@ -74,6 +75,7 @@
               </items>
             </SplitPane>
             <AnchorPane fx:id="browserPlaceholder" minWidth="410.0" prefWidth="410.0">
+            <!-- @@author -->
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
