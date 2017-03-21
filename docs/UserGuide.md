@@ -268,7 +268,7 @@ Here are some reasons why you might want to _select_ a task:
 
 * **You want to know the [parameters](#parameter) of a certain task** <br>
 
-  > You can refer to [here](#34-find-a-task--find).
+  > You can refer to the earlier section on the [find](#34-find-a-task--find) command. 
 
 * **You want to edit the [parameters](#parameter) of a certain task** <br>
 
