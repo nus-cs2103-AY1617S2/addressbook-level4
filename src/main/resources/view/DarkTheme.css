@@ -247,7 +247,7 @@
 .dialog-pane:header *.header-panel *.label {
     -fx-font-size: 18px;
     -fx-font-style: italic;
-    -fx-fill: white;
+    -fx-fill: #FFFFFF;
     -fx-text-fill: white;
 }
 
@@ -311,7 +311,7 @@
 
 
 #resultDisplayPlaceholder, #resultDisplay .content, #mainPane {
-    -fx-font-family: "Roboto Regular";
+    -fx-font-family: "Roboto";
     -fx-font-size: 16;
     -fx-text-box-border: none;
     -fx-background-color: #dd4b39;
@@ -324,7 +324,7 @@
 #commandTextField, #commandBoxPlaceholder {
     -fx-background-color: #c03231;
     -fx-text-fill: #FFFFFF;
-    -fx-font-family: "Roboto Regular";
+    -fx-font-family: "Roboto";
 }
 
 #commandTextField {
@@ -334,11 +334,12 @@
 }
 
 #bookings .label {
-    -fx-text-fill: black;
+    -fx-text-fill: #000000;
     -fx-background-color: #ffa8a1;
-    -fx-padding: 1 3 1 3;
+    -fx-padding: 0 1 0 1;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #dd4b39;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 14;
-
 }

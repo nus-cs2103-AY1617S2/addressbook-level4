@@ -1,5 +1,7 @@
 package seedu.address;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -9,6 +11,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
@@ -56,6 +59,8 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing DoOrDie ]===========================");
         super.init();
 
+        loadFonts();
+
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
@@ -71,6 +76,21 @@ public class MainApp extends Application {
 
         initEventsCenter();
     }
+
+    //@@author A0140042A
+    /**
+     * Load all fonts in the resouces/fonts folder
+     */
+    private void loadFonts() throws Exception {
+        File files = new File("src/main/resources/fonts/");
+
+        for (File file : files.listFiles()) {
+            if (file.getName().endsWith(".otf") || file.getName().endsWith(".ttf")) {
+                Font.loadFont(new FileInputStream(file), 10);
+            }
+        }
+    }
+    //@@author
 
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
