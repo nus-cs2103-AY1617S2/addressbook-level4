@@ -189,15 +189,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class PriorityQualifier implements Qualifier {
-        private Set<String> priorityQualifier;
+        private Set<String> priorityKeywords;
 
-        PriorityQualifier(Set<String> priorityQualifier) {
-            this.priorityQualifier = priorityQualifier;
+        PriorityQualifier(Set<String> priorityKeywords) {
+            this.priorityKeywords = priorityKeywords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return priorityQualifier.stream()
+            return priorityKeywords.stream()
                 .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
                 .findAny()
                 .isPresent();
@@ -205,20 +205,20 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "priority=" + String.join(", ", priorityQualifier);
+            return "priority=" + String.join(", ", priorityKeywords);
         }
     }
 
     private class DescriptionQualifier implements Qualifier {
-        private Set<String> descriptionQualifier;
+        private Set<String> descriptionKeywords;
 
-        DescriptionQualifier(Set<String> descriptionQualifier) {
-            this.descriptionQualifier = descriptionQualifier;
+        DescriptionQualifier(Set<String> descriptionKeywords) {
+            this.descriptionKeywords = descriptionKeywords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return descriptionQualifier.stream()
+            return descriptionKeywords.stream()
                 .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
                 .findAny()
                 .isPresent();
@@ -226,7 +226,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "description=" + String.join(", ", descriptionQualifier);
+            return "description=" + String.join(", ", descriptionKeywords);
         }
     }
 
