@@ -29,6 +29,10 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     public String getTaskManagerFilePath() {
         return filePath;
     }
+    
+    public void setTaskManagerFilePath(String filePath) {
+    	this.filePath = filePath;
+    }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {

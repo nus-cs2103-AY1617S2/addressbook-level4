@@ -7,10 +7,13 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.events.model.FilePathChangedEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
 
@@ -22,6 +25,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private TaskManagerStorage taskManagerStorage;
     private UserPrefsStorage userPrefsStorage;
+    private Config config;
 
 
     public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
@@ -32,6 +36,11 @@ public class StorageManager extends ComponentManager implements Storage {
 
     public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    }
+    
+    public StorageManager(Config config) {
+    	this(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+    	this.config = config;
     }
 
     // ================ UserPrefs methods ==============================
@@ -52,6 +61,11 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public String getTaskManagerFilePath() {
         return taskManagerStorage.getTaskManagerFilePath();
+    }
+    
+    @Override
+    public void setTaskManagerFilePath(String path) {
+    	taskManagerStorage.setTaskManagerFilePath(path);
     }
 
     @Override
@@ -76,6 +90,19 @@ public class StorageManager extends ComponentManager implements Storage {
 
         logger.fine("Attempting to write to data file: " + filePath);
         taskManagerStorage.saveTaskManager(taskManager, filePath);
+    }
+    
+    @Override
+    @Subscribe
+    public void handleFilePathChangedEvent(FilePathChangedEvent event) {
+    	config.setTaskManagerFilePath(event.path);
+    	try {
+    		taskManagerStorage.setTaskManagerFilePath(event.path);
+    		taskManagerStorage.saveTaskManager(event.taskManager, event.path);
+    		ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    	} catch (IOException ie) {
+    		logger.warning("Unable to save config file");
+    	}
     }
 
 

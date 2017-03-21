@@ -8,16 +8,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
-
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the task-manager level
@@ -53,7 +51,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
@@ -67,6 +65,8 @@ public class TaskManager implements ReadOnlyTaskManager {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManagers should not have duplicate tasks";
+        } catch (IllegalValueException ive) {
+            assert false : Task.MESSAGE_TASK_CONSTRAINTS;
         }
         try {
             setTags(newData.getTagList());
@@ -93,14 +93,13 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
+     * @throws IllegalValueException
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
