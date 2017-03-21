@@ -36,13 +36,6 @@ public class UserInboxPanel extends UiPart<Region> {
         addToPlaceholder(userInboxPlaceholder);
     }
 
-//Before
-//    public UserInboxPanel(AnchorPane userInboxPlaceholder, ObservableList<ReadOnlyTask> taskList) {
-//        super(FXML);
-//        setConnections(taskList);
-//        addToPlaceholder(userInboxPlaceholder);
-//    }
-
     private void setConnections(ObservableList<ReadOnlyTask> taskList, ObservableList<ReadOnlyEvent> eventList) {
         taskListView.setItems(taskList);
         eventListView.setItems(eventList);
@@ -50,13 +43,6 @@ public class UserInboxPanel extends UiPart<Region> {
         eventListView.setCellFactory(listView -> new EventListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
-
-//Before
-//    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-//        taskListView.setItems(taskList);
-//        taskListView.setCellFactory(listView -> new PersonListViewCell());
-//        setEventHandlerForSelectionChangeEvent();
-//    }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);

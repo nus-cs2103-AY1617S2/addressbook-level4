@@ -11,7 +11,6 @@ public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
     private static final String MESSAGE_NO_LOCATION = "No location specified";
-    private static final String MESSAGE_DEADLINE_BY = "By ";
 
     @FXML
     private HBox cardPane;
@@ -30,7 +29,7 @@ public class EventListCard extends UiPart<Region> {
 
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
-        name.setText(event.getEventName().toString());
+        name.setText(event.getEventName().name);
         id.setText(displayedIndex + ". ");
         showLocation(event);
         showDescription(event);
@@ -51,6 +50,7 @@ public class EventListCard extends UiPart<Region> {
     }
 
     private void showEventTimeSlots(ReadOnlyEvent event) {
+        event.getTimeslots().forEach(timeslot -> timeSlots.getChildren().add(new Label(timeslot.toString())));
     }
 
     private void initTags(ReadOnlyEvent event) {
