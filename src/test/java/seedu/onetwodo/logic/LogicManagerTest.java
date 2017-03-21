@@ -584,6 +584,19 @@ public class LogicManagerTest {
         }
 
         /**
+         * Generates a ToDo Task object with given names. Other fields will have some dummy values.
+         */
+        Task generateToDoTaskWithTags(String name, String tag1, String tag2) throws Exception {
+            return new Task (
+                    new Name(name),
+                    new StartDate(""),
+                    new EndDate(""),
+                    new Description(""),
+                    new UniqueTagList(tag1, tag2)
+            );
+        }
+
+        /**
          * Generates a valid task using the given seed.
          * Running this function with the same parameter values guarantees the returned task will have the same state.
          * Each unique seed will generate a unique Task object.
