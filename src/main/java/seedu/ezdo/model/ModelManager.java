@@ -81,9 +81,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void killTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
         updateStacks();
-        ezDo.removeTask(target);
+        ezDo.removeTasks(tasksToKill);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
