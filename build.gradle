@@ -64,6 +64,7 @@ allprojects {
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
         compile "com.joestelmach:natty:0.6"
+        compile group: 'org.atteo', name: 'evo-inflector', version: '1.2.2'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
