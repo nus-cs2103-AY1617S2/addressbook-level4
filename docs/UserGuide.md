@@ -70,7 +70,7 @@ Try FlexiTask now and benefit from its convenient features.
 > * Commands entered must be alphanumeric (only contains letters and words)
 > * Commands support ***flexible commands:*** Common alternatives for the keywords will be accepted. These will be listed in the respective sections below.
 
-`Entering in dates`: Flexitask supports flexible date formats that can be entered in the foramts specified below:
+`Entering in dates`: Flexitask supports flexible date formats that can be entered in the formats specified below:
 
 >  1. `Formal dates`:
 > * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included The format DDMMYYYY is used
