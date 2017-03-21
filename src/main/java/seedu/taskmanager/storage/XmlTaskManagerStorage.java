@@ -18,7 +18,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
 
-    private String filePath;
+    private static String filePath;
 
     public XmlTaskManagerStorage(String filePath) {
         this.filePath = filePath;
@@ -26,6 +26,14 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 
     public String getTaskManagerFilePath() {
         return filePath;
+    }
+
+    public static String giveTaskManagerFilePath() {
+        return filePath;
+    }
+
+    public static void setTaskManagerFilePath(String newFilePath) {
+        filePath = newFilePath;
     }
 
     @Override
