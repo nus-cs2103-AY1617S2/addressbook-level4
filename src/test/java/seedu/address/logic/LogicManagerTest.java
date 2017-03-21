@@ -37,6 +37,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.History;
@@ -159,7 +160,9 @@ public class LogicManagerTest {
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
-        assertEquals(expectedTaskManager, latestSavedTaskManager);
+        if (!"sort".equals(inputCommand)) {
+            assertEquals(expectedTaskManager, latestSavedTaskManager);
+        }
     }
 
     @Test
@@ -235,6 +238,52 @@ public class LogicManagerTest {
                 ListCommand.MESSAGE_SUCCESS,
                 expectedTaskManager,
                 expectedList);
+    }
+
+    @Test
+    public void executeSortTasksByDeadline() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithDeadline("02/01/2017 00:00");
+        Task p2 = helper.generateTaskWithDeadline("02/01/2017 23:59");
+        Task p3 = helper.generateTaskWithDeadline("03/01/2017 00:00");
+        Task p4 = helper.generateTaskWithDeadline("03/02/2017 00:00");
+        Task p5 = helper.generateTaskWithDeadline("03/02/2018 00:00");
+
+        List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
+        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
+
+        model.resetData(new TaskManager());
+        model.addTask(p2);
+        model.addTask(p3);
+        model.addTask(p5);
+        model.addTask(p1);
+        model.addTask(p4);
+
+        assertCommandSuccess("sort deadline",
+                SortCommand.MESSAGE_SUCCESS,
+                expectedTaskManager,
+                fiveTasks);
+    }
+
+    @Test
+    public void executeSortTasksByPriority() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task p1 = helper.generateTaskWithPriority("hi");
+        Task p2 = helper.generateTaskWithPriority("mid");
+        Task p3 = helper.generateTaskWithPriority("low");
+
+        List<Task> threeTasks = helper.generateTaskList(p1, p2, p3);
+        TaskManager expectedTaskManager = helper.generateTaskManager(threeTasks);
+
+        model.resetData(new TaskManager());
+        model.addTask(p2);
+        model.addTask(p3);
+        model.addTask(p1);
+
+        assertCommandSuccess("sort priority",
+                SortCommand.MESSAGE_SUCCESS,
+                expectedTaskManager,
+                threeTasks);
     }
 
     /**
@@ -690,6 +739,21 @@ public class LogicManagerTest {
                     new Note("House of 1"),
                     new DateTime("01/01/2017 00:00"),
                     new DateTime(endTime),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given end date. Other fields will have some dummy values.
+         */
+        private Task generateTaskWithPriority(String priority) throws Exception {
+            return new Task(
+                    new Name("Finish assignment"),
+                    new Priority(priority),
+                    new Status("incomplete"),
+                    new Note("House of 1"),
+                    new DateTime("01/01/2017 00:00"),
+                    new DateTime("01/01/2017 23:59"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
