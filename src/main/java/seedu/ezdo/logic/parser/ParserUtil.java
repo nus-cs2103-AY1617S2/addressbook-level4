@@ -50,7 +50,8 @@ public class ParserUtil {
     }
 
     /**
-     * Returns the specified indexes in the {@code command} if they are positive unsigned integers separated by whitespaces.
+     * Returns the specified indexes in the {@code command} if they are
+     * positive unsigned integers separated by whitespaces.
      * Returns empty array list otherwise.
      */
     public static ArrayList<Integer> parseIndexes(String command) {
