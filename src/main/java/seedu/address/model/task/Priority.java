@@ -18,14 +18,14 @@ public class Priority {
         @Override
         public String toString() {
             switch(this) {
-            case NONE:
-                return PRIORITY_NONE;
             case HIGH:
                 return PRIORITY_HIGH;
             case MEDIUM:
                 return PRIORITY_MEDIUM;
             case LOW:
                 return PRIORITY_LOW;
+            case NONE:
+                return PRIORITY_NONE;
             default:
                 throw new AssertionError();
             }
@@ -80,14 +80,14 @@ public class Priority {
     public static Priority.Type parseUserInputString(String priority) throws IllegalValueException {
         assert priority != null;
         switch (priority.toLowerCase()) {
-        case PRIORITY_NONE:
-            return Type.NONE;
         case PRIORITY_HIGH:
             return Type.HIGH;
         case PRIORITY_MEDIUM:
             return Type.MEDIUM;
         case PRIORITY_LOW:
             return Type.LOW;
+        case PRIORITY_NONE:
+            return Type.NONE;
         default:
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
