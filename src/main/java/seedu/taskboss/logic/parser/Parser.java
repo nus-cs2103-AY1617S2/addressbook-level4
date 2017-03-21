@@ -6,6 +6,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.ClearCommand;
 import seedu.taskboss.logic.commands.Command;
@@ -18,6 +19,7 @@ import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.logic.commands.SelectCommand;
+import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.logic.commands.UndoCommand;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 /**
@@ -35,8 +37,9 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      * @throws InvalidDatesException
+     * @throws IllegalValueException 
      */
-    public Command parseCommand(String userInput) throws InvalidDatesException {
+    public Command parseCommand(String userInput) throws InvalidDatesException, IllegalValueException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -88,6 +91,10 @@ public class Parser {
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.COMMAND_WORD_SHORT:
             return new UndoCommand();
+
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.COMMAND_WORD_SHORT:
+            return new SortCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
