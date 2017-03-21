@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.DuplicateDataException;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
 
 /**
@@ -83,8 +84,11 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      *
      */
-    public void done(int index) {
+    public void done(int index) throws IllegalValueException {
         Task taskToComplete = internalList.get(index);
+        if (taskToComplete.getDoneStatus() == true) {
+            throw new IllegalValueException("This task has been done");
+        }
         taskToComplete.setDone();
         internalList.set(index, taskToComplete);
     }

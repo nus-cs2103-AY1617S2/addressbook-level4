@@ -8,6 +8,7 @@ import seedu.onetwodo.commons.core.ComponentManager;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.parser.DoneStatus;
@@ -68,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void doneTask(int filteredTaskListIndex) {
+    public synchronized void doneTask(int filteredTaskListIndex) throws IllegalValueException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
         setDoneStatus(DoneStatus.UNDONE);

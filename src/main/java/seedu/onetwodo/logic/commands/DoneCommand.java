@@ -3,6 +3,7 @@ package seedu.onetwodo.logic.commands;
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
@@ -47,6 +48,8 @@ public class DoneCommand extends Command {
             model.doneTask(internalIndex);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
         }
 
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToComplete));

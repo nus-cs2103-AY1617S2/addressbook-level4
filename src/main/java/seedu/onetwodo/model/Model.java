@@ -3,6 +3,7 @@ package seedu.onetwodo.model;
 import java.util.Set;
 
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
@@ -22,8 +23,9 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Mark the given tasks completed. */
-    void doneTask(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException;
+    /** Mark the given tasks completed.
+     * @throws IllegalValueException */
+    void doneTask(int filteredTaskListIndex) throws UniqueTaskList.TaskNotFoundException, IllegalValueException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
