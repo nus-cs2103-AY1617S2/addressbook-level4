@@ -13,6 +13,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -112,13 +113,16 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: Change Task constructor to TaskWithoutDeadline() or
         // TaskWithDeadline() based on task type
         Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
+
+        //syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.
         // This can cause the tags master list to have additional tags that are
         // not tagged to any task
         // in the task list.
+        // Current idea is to redo the tag implementation.
         tasks.updateTask(index, editedTask);
+        refreshMasterTagList();
     }
 
     /**
@@ -151,8 +155,27 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
+    /**
+     * After a tag is no longer found is in any task, ensure that it is removed
+     * from the master tag list
+     * {@link #tags} - points to a Tag object in the master list
+     */
+    private void refreshMasterTagList() {
+        tags.clear();
+        for (Task task : tasks) {
+            for (Tag tag : task.getTags()) {
+                try {
+                    tags.add(tag);
+                } catch (DuplicateTagException e) {
+                    // Ignore
+                }
+            }
+        }
+    }
+
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
+            refreshMasterTagList();
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
