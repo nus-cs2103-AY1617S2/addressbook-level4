@@ -1,5 +1,6 @@
 package seedu.ezdo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -152,8 +153,10 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
 
-    public void doneTask(Task p) {
-        p.setDone();
+    public void doneTasks(ArrayList<Task> p) {
+        for (int i = 0; i < p.size(); i++) {
+            p.get(i).setDone();
+        }
     }
 
 //// tag-level operations
