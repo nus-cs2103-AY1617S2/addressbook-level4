@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Pos?>
 <?import javafx.scene.web.WebView?>
- 
 <AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <WebView fx:id="browser"></WebView>
     <AnchorPane fx:id="display" id="taskselectiondisplay">
@@ -24,7 +23,5 @@
     <Label fx:id="endLabel"></Label>
      </children>
     </VBox>
-    
-
     </AnchorPane>
 </AnchorPane>
