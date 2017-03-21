@@ -48,7 +48,6 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
         int taskManagerIndex = 2;
-
         TestTask taskToEdit = this.expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 

@@ -17,7 +17,6 @@ import seedu.doit.model.tag.UniqueTagList;
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String DESCRIPTION_FIELD_ID = "#description";
-    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -40,13 +39,10 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
-    public String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
-    }
-
     public String getDeadline() {
         return getTextFromLabel(DEADLINE_FIELD_ID);
     }
+
 
     public List<String> getTags() {
         return getTags(getTagsContainer());
@@ -74,8 +70,6 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
-            && getPriority().equals(task.getPriority().value)
-           // && (task.isFloatingTask() || getDeadline().equals(task.getDeadline().value))
             && getDescription().equals(task.getDescription().value);
     }
 
@@ -86,7 +80,6 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                && getPriority().equals(handle.getPriority())
                 && getDeadline().equals(handle.getDeadline())
                 && getDescription().equals(handle.getDescription())
                 && getTags().equals(handle.getTags());

@@ -288,6 +288,10 @@
     -fx-vgap: 3;
 }
 
+.taglist-item-bullet {
+  -fx-fill-color: #999999;
+}
+
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #383838;
