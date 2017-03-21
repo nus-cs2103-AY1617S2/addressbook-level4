@@ -87,7 +87,7 @@ It will walk you through the Setup, Architecture, APIs and the details regarding
 <img src="images/Architecture.png" width="600"><br>
 _Figure 1: Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of FlexiTask.
+Figure 1 given above explains the high-level design of FlexiTask.
 Given below is a quick overview of the main components and their main responsibilities.
 
 #### 2.1. Main
@@ -130,14 +130,14 @@ _Figure 2: Class Diagram of the Logic Component_
 Figure 3 below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images/SDforDeleteTask.png" width="800"><br>
+<img src="images/SDforDeleteTask.png" width="800">
 _Figure 3: Component Interactions for `delete 1` Command (Part 1)_
 
 >Note how the `Model` simply raises a `TaskListChangedEvent` when FlexiTask data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 Figure 4 below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 <img src="images/SDforDeleteTaskEvent.png" width="800"><br>
 _Figure 4: Component Interactions for `delete 1` Command (Part 2)_
 
