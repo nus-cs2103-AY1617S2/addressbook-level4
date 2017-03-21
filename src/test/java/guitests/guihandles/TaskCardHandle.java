@@ -90,8 +90,8 @@ public class TaskCardHandle extends GuiHandle {
                 && getPriority().equals(task.getPriority().map(Priority::toString).map(String::toUpperCase).orElse(""))
                 && getStatus().equals(task.getStatus().value)
                 && getNote().equals(task.getNote().map(Note::toString).orElse(""))
-                && getStartTime().equals(task.getStartTime().map(DateTime::toString).orElse(""))
-                && getEndTime().equals(task.getEndTime().map(DateTime::toString).orElse(""))
+                && getStartTime().equals(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""))
+                && getEndTime().equals(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""))
                 && getTags().equals(getTags(task.getTags()));
     }
 

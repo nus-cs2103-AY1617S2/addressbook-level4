@@ -48,8 +48,8 @@ public class TaskCard extends UiPart<Region> {
         setPriorityView(task);
         note.setText(task.getNote().map(Note::toString).orElse(""));
         status.setText(task.getStatus().value);
-        startTime.setText(task.getStartTime().map(DateTime::toString).orElse(""));
-        endTime.setText(task.getEndTime().map(DateTime::toString).orElse(""));
+        startTime.setText(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""));
+        endTime.setText(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""));
         initTags(task);
     }
 
