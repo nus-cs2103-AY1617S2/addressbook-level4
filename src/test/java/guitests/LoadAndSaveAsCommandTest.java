@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.After;
@@ -103,5 +104,11 @@ public class LoadAndSaveAsCommandTest extends TaskManagerGuiTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //Delete files
+        File file = new File(rootFolder + file1);
+        file.delete();
+        file = new File(rootFolder + file2);
+        file.delete();
     }
 }
