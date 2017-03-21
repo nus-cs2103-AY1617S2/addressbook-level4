@@ -31,7 +31,7 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 5. **Checkstyle Plug-in**.
 
 ### 1.2. Installing Checkstyle manually
-    As of August 16, 2017, the Checkstyle repository in Eclipse Marketplace is unavailable. 
+    As of August 16, 2016, the Checkstyle repository in Eclipse Marketplace is unavailable. 
 
 1. Download the compressed .zip file [here](https://sourceforge.net/projects/eclipse-cs/?source=typ_redirect). **Do not** extract the contents.
 2. Launch Eclipse Neon.
