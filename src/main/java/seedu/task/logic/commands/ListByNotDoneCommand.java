@@ -16,6 +16,7 @@ public class ListByNotDoneCommand extends Command {
     
     @Override
     public CommandResult execute() {
+        model.sortTaskList();
         model.updateFilteredTaskList(this.value);
         return new CommandResult(MESSAGE_SUCCESS);
     }

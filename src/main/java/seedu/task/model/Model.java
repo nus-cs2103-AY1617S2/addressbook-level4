@@ -61,4 +61,7 @@ public interface Model {
 	/** Changes the file path for data to be saved in*/
     void changeFilePath(String pathName);
 
+    /** Sorts the task list */
+    void sortTaskList();
+
 }

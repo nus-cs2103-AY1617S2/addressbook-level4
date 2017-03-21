@@ -14,7 +14,6 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskComparator;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -39,8 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-//        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList().sorted(new TaskComparator()));
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -97,6 +95,13 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
+    
+    @Override 
+    public void sortTaskList(){
+        taskManager.sortTaskList();
+        indicateTaskManagerChanged();
+    }
+    
     
     @Override
     public void changeFilePath(String newPath) {

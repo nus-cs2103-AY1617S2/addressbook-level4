@@ -41,7 +41,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);
+        internalList.add(0, toAdd);// the most recently added task will be displayed at the top
     }
 
     /**
@@ -64,6 +64,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        
     }
 
     public void done(int index) {
@@ -91,7 +92,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
-        FXCollections.sort(internalList, new TaskComparator());
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
@@ -139,5 +139,10 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    public void sort() {
+        // TODO Auto-generated method stub
+        FXCollections.sort(internalList, new TaskComparator());
+    }
 
 }
