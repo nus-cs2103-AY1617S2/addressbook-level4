@@ -27,7 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
     private TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
 
-    private static TaskManagerStack taskManagerStack;
+    private static final TaskManagerStack taskManagerStack = TaskManagerStack.getInstance();
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -39,7 +39,6 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        taskManagerStack = TaskManagerStack.getInstance();
         updateFilteredTasks();
 
     }

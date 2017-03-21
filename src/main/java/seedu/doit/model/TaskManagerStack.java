@@ -9,15 +9,13 @@ import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 public class TaskManagerStack {
     public static final String NOTHING_TO_REDO = "There is nothing to redo!";
     public static final String NOTHING_TO_UNDO = "There is nothing to undo!";
-    private static Stack<ReadOnlyItemManager> undoStack;
-    private static Stack<ReadOnlyItemManager> redoStack;
+    private static final Stack<ReadOnlyItemManager> undoStack = new Stack<ReadOnlyItemManager>();
+    private static final Stack<ReadOnlyItemManager> redoStack = new Stack<ReadOnlyItemManager>();
     private static final Logger logger = LogsCenter.getLogger(TaskManagerStack.class);
     private static TaskManagerStack instance = null;
-    private static final int STACK_SIZE = 10;
+    // private static final int STACK_SIZE = 10;
 
     protected TaskManagerStack() {
-        undoStack = new Stack<ReadOnlyItemManager>();
-        redoStack = new Stack<ReadOnlyItemManager>();
     }
 
     public static TaskManagerStack getInstance() {

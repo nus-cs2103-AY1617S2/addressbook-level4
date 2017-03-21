@@ -9,23 +9,18 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n" + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Task undid: %1$s";
-    public static final String MESSAGE_FAILURE = "Unable to undo. You cannot undo a save, find and list";
+    public static final String MESSAGE_SUCCESS = "Task undone";
+    public static final String MESSAGE_FAILURE = "Unable to undo. There is nothing to undo.\n"
+            + "You cannot undo a save, find and list";
 
     // public static Command toUndo;
-
-    /**
-     * Creates an UndoCommand
-     */
-    public UndoCommand() {
-    }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert this.model != null;
         try {
             this.model.undo();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, "dummy"));
+            return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyTaskManagerStackException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
