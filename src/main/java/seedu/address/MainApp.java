@@ -80,7 +80,7 @@ public class MainApp extends Application {
 
     //@@author A0140042A
     /**
-     * Load all fonts in the resouces/fonts folder
+     * Load all fonts in the resources/fonts folder
      */
     private void loadFonts() {
         File files = new File("src/main/resources/fonts/");
