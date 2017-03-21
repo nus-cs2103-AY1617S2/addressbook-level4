@@ -39,12 +39,21 @@ public class TaskCard extends UiPart<Region> {
         if (showIndex) id.setText(displayedIndex + ". ");
 
         name.setText(task.getName().fullName);
-        priority.setText(task.getPriority().map(Priority::toString).orElse(""));
+        setPriorityView(task);
         note.setText(task.getNote().map(Note::toString).orElse(""));
         status.setText(task.getStatus().value);
         startTime.setText(task.getStartTime().map(DateTime::toString).orElse(""));
         endTime.setText(task.getEndTime().map(DateTime::toString).orElse(""));
         initTags(task);
+    }
+
+    private void setPriorityView(ReadOnlyTask task) {
+        String text = task.getPriority()
+                .map(Priority::toString)
+                .map(String::toUpperCase)
+                .orElse("");
+
+        priority.setText(text);
     }
 
     private void initTags(ReadOnlyTask task) {
