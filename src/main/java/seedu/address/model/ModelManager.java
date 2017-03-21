@@ -111,7 +111,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void sortList() {
         filteredTasks = new FilteredList<>(this.taskManager.getSortedList());
-        updateFilteredListToShowAll();
     }
 
     @Override
