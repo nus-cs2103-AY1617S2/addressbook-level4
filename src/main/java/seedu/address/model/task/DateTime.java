@@ -41,13 +41,6 @@ public class DateTime {
     }
 
     /**
-     * Initialise a date time with current time
-     */
-    public DateTime() {
-        this.dateTime = LocalDateTime.now();
-    }
-
-    /**
      * Initialise a date time with current time plus month of a certain value
      */
     public DateTime(long value) {
