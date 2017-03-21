@@ -88,7 +88,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         String detailsToEdit = "n/Belle";
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 5;
+        int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
@@ -128,7 +128,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 n/Alice Pauline p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
+        commandBox.runCommand("edit 1 n/Alice Pauline p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
                                 + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
