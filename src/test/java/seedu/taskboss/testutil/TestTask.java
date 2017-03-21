@@ -9,7 +9,7 @@ import seedu.taskboss.model.task.PriorityLevel;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
