@@ -6,28 +6,28 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.UiStore;
 
 /**
- * UnknownCommandController is responsible for rendering the initial UI
+ * ListController is responsible for rendering the initial UI
  */
-public class ClearController extends Controller {
+public class HistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(ClearController.class);
-    private static final String RESULT_MESSAGE = "All tasks cleared.";
-    private static final String COMMAND_WORD = "clear";
-    private static final String COMMAND_REGEX = "^clear\\s*";
+    private static final String RESULT_MESSAGE = "%s\n%d commands displayed.";
+    private static final String COMMAND_WORD = "history";
+    private static final String COMMAND_REGEX = "^history\\s*";
+
+    private ArrayList<String> commandHistory;
+
+    public void setCommandHistory(ArrayList<String> commandHistory) {
+        this.commandHistory = commandHistory;
+    }
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
-        TodoList todoList = TodoList.load();
-        todoList.setTasks(new ArrayList<>());
-        todoList.save();
+        String result = String.join("\n", commandHistory);
 
-        UiStore.getInstance().setTasks(todoList.getTasks());
-
-        return new CommandResult(RESULT_MESSAGE);
+        return new CommandResult(String.format(RESULT_MESSAGE, result, commandHistory.size()));
     }
 
     public HashMap<String, String> tokenize(String command) {

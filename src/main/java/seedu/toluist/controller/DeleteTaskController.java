@@ -10,7 +10,6 @@ import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * DeleteTaskController is responsible for deleting a task
@@ -26,10 +25,6 @@ public class DeleteTaskController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
-    public DeleteTaskController(Ui renderer) {
-        super(renderer);
-    }
-
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
@@ -44,8 +39,7 @@ public class DeleteTaskController extends Controller {
         commandResult = delete(todoList, tasks);
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
-            renderer.render();
+            uiStore.setTasks(todoList.getTasks());
         }
 
         return commandResult;

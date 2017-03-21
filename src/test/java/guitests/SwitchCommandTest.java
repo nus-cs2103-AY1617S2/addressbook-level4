@@ -139,6 +139,9 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.CONTROL, KeyCode.I);
         assertSwitchResult(new Task[] { floatingTask, eventIn6Days }, new Task[] { taskWithDeadline },
                 SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_INCOMPLETE, 2, 3);
+
+        commandBox.runCommand("history");
+        assertResultMessage("list\nswitch i\nhistory\n3 commands displayed.");
     }
 
     /**

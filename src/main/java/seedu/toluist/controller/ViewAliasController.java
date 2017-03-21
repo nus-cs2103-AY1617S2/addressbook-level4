@@ -9,7 +9,6 @@ import java.util.TreeSet;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.AliasTable;
-import seedu.toluist.ui.Ui;
 
 /**
  * Alias Controller is responsible for handling viewalias requests
@@ -22,10 +21,6 @@ public class ViewAliasController extends Controller {
     public static final String NO_ALIAS_MESSAGE = "No aliases found";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
-
-    public ViewAliasController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();

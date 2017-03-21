@@ -11,7 +11,6 @@ import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -41,10 +40,6 @@ public class FindController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
-    public FindController(Ui renderer) {
-        super(renderer);
-    }
-
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
 
@@ -60,8 +55,7 @@ public class FindController extends Controller {
 
 
         ArrayList<Task> foundTasksList = TodoList.load().getFilterTasks(taskPredicate);
-        uiStore.setTask(foundTasksList);
-        renderer.render();
+        uiStore.setTasks(foundTasksList);
 
         // display formatting
         return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasksList.size());

@@ -9,14 +9,12 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import seedu.toluist.ui.Ui;
-
 /**
  * Tests for LoadController
  */
 public class LoadControllerTest extends ControllerTest {
-    protected Controller controllerUnderTest(Ui renderer) {
-        return new LoadController(renderer);
+    protected Controller controllerUnderTest() {
+        return new LoadController();
     }
 
     @Test

@@ -14,7 +14,6 @@ import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.TodoListStorage;
 import seedu.toluist.testutil.TypicalTestTodoLists;
-import seedu.toluist.ui.Ui;
 
 /**
  * Base class for Controller tests. All Controller tests should extend this class
@@ -25,8 +24,6 @@ public abstract class ControllerTest {
 
     @Mock
     protected TodoListStorage storage;
-    @Mock
-    protected Ui renderer;
     protected Controller controller;
     protected TodoList todoList;
 
@@ -34,13 +31,13 @@ public abstract class ControllerTest {
      * Returns an instance of the controller to be teste
      * @return the controller instance to be tested
      */
-    protected abstract Controller controllerUnderTest(Ui renderer);
+    protected abstract Controller controllerUnderTest();
 
     @Before
     public void setUp() throws DataStorageException {
         when(storage.load()).thenReturn(new TypicalTestTodoLists().getTypicalTodoList());
         todoList = new TodoList(storage);
-        controller = controllerUnderTest(renderer);
+        controller = controllerUnderTest();
     }
 
     /**
