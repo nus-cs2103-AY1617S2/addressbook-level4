@@ -37,10 +37,10 @@ public class CompletedTaskList extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
-    private void addToPlaceholder(AnchorPane placeHolderPane) {
-        SplitPane.setResizableWithParent(placeHolderPane, false);
+    private void addToPlaceholder(AnchorPane completedTaskListPlaceHolder) {
+        SplitPane.setResizableWithParent(completedTaskListPlaceHolder, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-        placeHolderPane.getChildren().add(getRoot());
+        completedTaskListPlaceHolder.getChildren().add(getRoot());
     }
 
     private void setEventHandlerForSelectionChangeEvent() {

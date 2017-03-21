@@ -26,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager addressBook;
     private FilteredList<ReadOnlyTask> filteredTasks;
-
+    private FilteredList<ReadOnlyTask> completedTasks;
     /**
      * Initializes a ModelManager with the given task manager and userPrefs.
      */
@@ -38,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        completedTasks = new FilteredList<>(this.addressBook.getCompletedTaskList());
     }
 
     public ModelManager() {
@@ -97,7 +98,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ObservableList<ReadOnlyTask> getCompletedTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        return new UnmodifiableObservableList<>(completedTasks);
+    }
+
+    @Override
+    public void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
+        addressBook.transferTaskToComplete(t);
+    }
+
+    @Override
+    public void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
+        addressBook.transferTaskFromComplete(t);
     }
     //@@author
 

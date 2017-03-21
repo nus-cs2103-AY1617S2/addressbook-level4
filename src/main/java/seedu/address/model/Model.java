@@ -8,6 +8,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -53,5 +54,12 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    //@@author A0139161J
+    /** Returns the filtered completed task list */
     ObservableList<ReadOnlyTask> getCompletedTaskList();
+
+    /** Transfers the specified task to the completed task list section */
+    void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
+
+    void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
 }

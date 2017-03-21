@@ -42,6 +42,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
+    //@@author A0139161J
     /**
      * Adds a task to the specified index in the list
      * @param index
@@ -51,6 +52,7 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toAdd != null;
         internalList.add(index, toAdd);
     }
+    //@@author
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *

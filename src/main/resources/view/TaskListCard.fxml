@@ -47,6 +47,5 @@
             <RowConstraints />
          </rowConstraints>
         </GridPane>
-      <CheckBox mnemonicParsing="false" prefHeight="106.0" prefWidth="90.0" text="Done" />
     </children>
 </HBox>

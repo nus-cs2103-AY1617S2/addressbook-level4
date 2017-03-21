@@ -21,4 +21,6 @@ public interface ReadOnlyTaskManager {
      */
     ObservableList<Tag> getTagList();
 
+    ObservableList<ReadOnlyTask> getCompletedTaskList();
+
 }

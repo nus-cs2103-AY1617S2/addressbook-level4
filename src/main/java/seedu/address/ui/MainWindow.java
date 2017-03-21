@@ -32,8 +32,9 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private CompletedTaskList completedTaskList;
+    //private CompletedTaskList completedTaskList;
     private TaskListPanel taskListPanel;
+    private CompletedTaskList completedTaskList;
     private Config config;
 
     @FXML
@@ -112,10 +113,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        completedTaskList = new CompletedTaskList (getCompletedTaskListPlaceHolder(), logic.getFilteredTaskList());
+        completedTaskList = new CompletedTaskList (getCompletedTaskListPlaceholder(), logic.getCompletedTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        //new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
@@ -123,9 +124,9 @@ public class MainWindow extends UiPart<Region> {
         return commandBoxPlaceholder;
     }
 
-    private AnchorPane getStatusbarPlaceholder() {
+    /*private AnchorPane getStatusbarPlaceholder() {
         return statusbarPlaceholder;
-    }
+    }*/
 
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
@@ -135,9 +136,10 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
-    private AnchorPane getCompletedTaskListPlaceHolder() {
+    private AnchorPane getCompletedTaskListPlaceholder() {
         return completedTaskListPlaceholder;
     }
+
     void hide() {
         primaryStage.hide();
     }
