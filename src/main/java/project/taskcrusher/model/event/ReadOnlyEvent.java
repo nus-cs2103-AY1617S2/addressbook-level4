@@ -1,6 +1,6 @@
 package project.taskcrusher.model.event;
 
-import java.util.Optional;
+import java.util.List;
 
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
@@ -13,12 +13,9 @@ import project.taskcrusher.model.tag.UniqueTagList;
 public interface ReadOnlyEvent {
 
     Name getEventName();
-
-    EventDate getEventDate();
-
-    Optional<Description> getDescription();
-
-    Optional<Location> getLocation();
+    List<Timeslot> getTimeslots();
+    Description getDescription();
+    Location getLocation();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -34,7 +31,7 @@ public interface ReadOnlyEvent {
                 || (other != null // this is first to avoid NPE below
                 && other.getEventName().equals(this.getEventName()) // state checks here onwards
                 && other.getDescription().equals(this.getDescription())
-                && other.getEventDate().equals(this.getEventDate()));
+                && other.getTimeslots().equals(this.getTimeslots()));
     }
 
     /**
@@ -43,7 +40,7 @@ public interface ReadOnlyEvent {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getEventName() + " ")
-                .append(getEventDate() + " ")
+                .append(getTimeslots() + " ")
                 .append(getDescription() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);

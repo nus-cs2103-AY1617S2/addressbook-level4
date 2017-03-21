@@ -20,7 +20,7 @@ public class DateUtil {
     public static final String MESSAGE_DATE_NOT_FOUND = "Input provided cannot be parsed as Date" +
         "Please provide one date in a supported format";;
 
-    public static Date parseDate(String toParse) throws IllegalValueException {
+    public static Date parseDate(String toParse, boolean isNew) throws IllegalValueException {
         PrettyTimeParser dateParser = new PrettyTimeParser();
         List<Date> parseResults = dateParser.parse(toParse);
 
@@ -35,7 +35,7 @@ public class DateUtil {
         // }
 
         Date parsed = parseResults.get(0);
-        if (hasPassed(parsed)) {
+        if (isNew && hasPassed(parsed)) { //short circuit if not new/from storage
             throw new IllegalValueException(MESSAGE_DATE_PASSED);
         }
 

@@ -1,7 +1,7 @@
 package project.taskcrusher.logic.parser;
 
 import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DATE;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,7 +33,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_DESCRIPTION);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_DESCRIPTION);
         argsTokenizer.tokenize(args);
 
         Matcher matcher;
@@ -53,7 +53,7 @@ public class AddCommandParser {
 
         //TODO Modify below for events; will need PrettyTimeParser
         String deadline = Deadline.NO_DEADLINE;
-        Optional<String> rawDeadline = argsTokenizer.getValue(PREFIX_DEADLINE);
+        Optional<String> rawDeadline = argsTokenizer.getValue(PREFIX_DATE);
         if (rawDeadline.isPresent()) {
             deadline = rawDeadline.get();
         }

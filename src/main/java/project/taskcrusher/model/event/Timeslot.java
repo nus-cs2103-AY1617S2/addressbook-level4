@@ -20,8 +20,8 @@ public class Timeslot {
         assert start != null;
         assert end != null;
 
-        this.start = DateUtil.parseDate(start);
-        this.end = DateUtil.parseDate(end);
+        this.start = DateUtil.parseDate(start, true);
+        this.end = DateUtil.parseDate(end, true);
 
         if (!isValidTimeslot(this.start, this.end)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
@@ -31,14 +31,41 @@ public class Timeslot {
 //        else if (isClashing(this)) {
 //
 //        }
+    }
 
+    public Timeslot(String start, String end, boolean isNew) throws IllegalValueException {
+        assert start != null;
+        assert end != null;
+
+        this.start = DateUtil.parseDate(start, isNew);
+        this.end = DateUtil.parseDate(end, isNew);
+
+        if (!isValidTimeslot(this.start, this.end, isNew)) {
+            throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
+        }
+
+//      TODO in model API
+//        else if (isClashing(this)) {
+//
+//        }
     }
 
     private boolean isValidTimeslot(Date start, Date end) {
-        if (end.before(start)) {
-            return false;
-        } else {
+        if (!end.before(start)) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isValidTimeslot(Date start, Date end, boolean isNew) {
+
+        if (!isNew) {
+            return true;
+        } else if (!end.before(start)) {
+            return true;
+        } else {
+            return false;
         }
     }
 

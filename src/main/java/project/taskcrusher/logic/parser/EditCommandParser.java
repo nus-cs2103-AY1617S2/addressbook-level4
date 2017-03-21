@@ -1,7 +1,7 @@
 package project.taskcrusher.logic.parser;
 
 import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DATE;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
@@ -30,7 +30,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DATE, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -43,7 +43,7 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
+            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DATE)));
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
