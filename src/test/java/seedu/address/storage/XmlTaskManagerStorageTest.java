@@ -83,7 +83,7 @@ public class XmlTaskManagerStorageTest {
         readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
 
-        //Sane and read tasks with null attributes
+        //Save and read tasks with null attributes
         original.addTask(new Task(td.taskWithoutPriority));
         xmlTaskManagerStorage.saveTaskManager(original, filePath); //saving task with null priority
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get(); //reading task with null priority
