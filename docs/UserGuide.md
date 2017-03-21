@@ -32,7 +32,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
    * **`list`** : lists all tasks
    * **`add`**: `n/submit proposal p/high i/group project ed/tomorrow c/project`
      adds a task named `submit proposal` to the TaskBoss
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`delete`**` 3` : deletes the third task shown in the current list
    * **`exit`** : exits the app <br>
 
 
@@ -172,7 +172,7 @@ Examples:
   
 * `find n/Meeting`<br>
   `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+  Deletes the first task in the results of the `find` command.
 
 ### 3.7. Creating a category : `new`
 
