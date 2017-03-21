@@ -33,7 +33,15 @@ public class SortCommandTest extends TaskBossGuiTest {
         assertSortSuccess(true, expectedList4, "p");
 
         //invalid sort command
-        commandBox.runCommand("sort asdsa");
+        commandBox.runCommand("sort byname");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        //invalid sort command
+        commandBox.runCommand("sort");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        //invalid sort command
+        commandBox.runCommand("s");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
     }
