@@ -40,6 +40,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList, new EndTimeComparator());
     }
 
     /**
