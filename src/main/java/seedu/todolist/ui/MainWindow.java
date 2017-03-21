@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/todo_list_filled_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_WIDTH = 600;
     private static final String LIST = "list";
     private static final String SELECTED = "selected";
 
@@ -255,9 +255,6 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.loadPersonPage(person);
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
 
     //@@author A0144240W
     public void changeButtonsBackToOriginalState() {
@@ -283,6 +280,10 @@ public class MainWindow extends UiPart<Region> {
 
         case ListCommand.TYPE_OVERDUE:
             overdueButton.getStyleClass().add(SELECTED);
+            break;
+
+        case ListCommand.TYPE_UPCOMING:
+            upcomingButton.getStyleClass().add(SELECTED);
             break;
 
         default:

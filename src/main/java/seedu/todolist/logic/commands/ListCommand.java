@@ -16,6 +16,7 @@ public class ListCommand extends Command {
     public static final String TYPE_INCOMPLETE = "incomplete";
     public static final String TYPE_COMPLETE = "complete";
     public static final String TYPE_OVERDUE = "overdue";
+    public static final String TYPE_UPCOMING = "upcoming";
 
     private static ArrayList<String> validCommands = new ArrayList<String>(Arrays.asList(
             TYPE_DEFAULT, TYPE_ALL, TYPE_INCOMPLETE, TYPE_COMPLETE, TYPE_OVERDUE
@@ -27,6 +28,8 @@ public class ListCommand extends Command {
             + "Example: " + COMMAND_WORD + " incomplete";
 
     public static final String MESSAGE_SUCCESS = "Listed tasks";
+
+
 
     private final String taskType;
 

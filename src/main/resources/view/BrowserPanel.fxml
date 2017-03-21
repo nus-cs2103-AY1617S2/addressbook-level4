@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.web.WebView?>
+ 
+<AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<WebView fx:id="browser"></WebView>
+    <AnchorPane fx:id="display" id="taskselectiondisplay">
+    <VBox prefHeight="50.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml" VBox.vgrow = "ALWAYS">
+         <padding>
+             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+          </padding>
+    <children>
+    <Label id="textForTaskDetails" text ="Task Details" VBox.vgrow="ALWAYS"></Label>
+    <Label fx:id="nameLabel"></Label>
+    <Label fx:id="tagsLabel"></Label>
+    <Label fx:id="startLabel"></Label>
+    <Label fx:id="endLabel"></Label>
+     </children>
+    </VBox>
+    
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-    <WebView fx:id="browser"/>
+    </AnchorPane>
 </AnchorPane>
