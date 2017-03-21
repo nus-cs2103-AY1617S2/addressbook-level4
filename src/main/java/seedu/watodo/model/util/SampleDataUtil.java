@@ -5,20 +5,20 @@ import seedu.watodo.model.ReadOnlyTaskManger;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
-    public static FloatingTask[] getSampleTasks() {
+    public static Task[] getSampleTasks() {
         try {
-            return new FloatingTask[] {
-                new FloatingTask(new Description("Read Lord of The Rings"),
+            return new Task[] {
+                new Task(new Description("Read Lord of The Rings"),
                     new UniqueTagList("reading")),
-                new FloatingTask(new Description("Do CS2103 V0.1"),
+                new Task(new Description("Do CS2103 V0.1"),
                     new UniqueTagList("school", "homework")),
-                new FloatingTask(new Description("Learn airflares"),
+                new Task(new Description("Learn airflares"),
                     new UniqueTagList("dance")),
-                new FloatingTask(new Description("Design RPG using RPG Maker VX Ace"),
+                new Task(new Description("Design RPG using RPG Maker VX Ace"),
                     new UniqueTagList("gamedesign"))
             };
         } catch (IllegalValueException e) {
@@ -29,7 +29,7 @@ public class SampleDataUtil {
     public static ReadOnlyTaskManger getSampleWatodo() {
         try {
             TaskManager sampleAB = new TaskManager();
-            for (FloatingTask sampleTask : getSampleTasks()) {
+            for (Task sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }
             return sampleAB;

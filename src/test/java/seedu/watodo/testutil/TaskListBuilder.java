@@ -3,7 +3,7 @@ package seedu.watodo.testutil;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 
 /**
@@ -19,7 +19,7 @@ public class TaskListBuilder {
         this.taskList = taskList;
     }
 
-    public TaskListBuilder withPerson(FloatingTask person) throws UniqueTaskList.DuplicateTaskException {
+    public TaskListBuilder withPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
         taskList.addTask(person);
         return this;
     }

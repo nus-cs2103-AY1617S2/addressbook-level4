@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.watodo.model.ReadOnlyTaskManger;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.testutil.TypicalTestTasks;
 
@@ -51,7 +51,7 @@ public class TaskListTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<FloatingTask> newPersons = Arrays.asList(new FloatingTask(td.alice), new FloatingTask(td.alice));
+        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 

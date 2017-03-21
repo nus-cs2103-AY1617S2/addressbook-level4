@@ -9,7 +9,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
@@ -54,13 +54,13 @@ public class XmlAdaptedTask {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
-    public FloatingTask toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
         final Description name = new Description(this.name);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new FloatingTask(name, tags);
+        return new Task(name, tags);
     }
 }
