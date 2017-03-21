@@ -13,13 +13,14 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                TaskParser.parseTask(new Name("Reply Bob's Email"), null, null, new UniqueTagList("work")),
-                TaskParser.parseTask(new Name("Buy Groceries"), null, null, new UniqueTagList("home", "errand")),
-                TaskParser.parseTask(new Name("Project Meet"), null, null, new UniqueTagList("school")),
-                TaskParser.parseTask(new Name("Lunch With David"), null, null, new UniqueTagList("family")),
-                TaskParser.parseTask(new Name("Look for Birthday Present"), null, null, new UniqueTagList("errand")),
-                TaskParser.parseTask(new Name("Finish Tutorial"), null, null, new UniqueTagList("school"))
-            };
+                    TaskParser.parseTask(new Name("Reply Email"), null, null, new UniqueTagList("friends")),
+                    TaskParser.parseTask(new Name("buy groceries"), null, null,
+                                         new UniqueTagList("colleagues", "friends")),
+                    TaskParser.parseTask(new Name("exercise"), null, null, new UniqueTagList("neighbours")),
+                    TaskParser.parseTask(new Name("project meeting"), null, null, new UniqueTagList("family")),
+                    TaskParser.parseTask(new Name("buy present"), null, null, new UniqueTagList("classmates")),
+                    TaskParser.parseTask(new Name("lunch with david"), null, null, new UniqueTagList("colleagues"))
+                };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
