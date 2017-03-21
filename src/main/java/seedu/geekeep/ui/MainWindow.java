@@ -117,10 +117,18 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
 
+<<<<<<< HEAD
         //to-do: correctly display the lists
         floatingTaskListPanel = new TaskListPanel("floatingTask", getTaskListPlaceholder());
         eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredTaskList());
         deadlineListPanel = new TaskListPanel("deadline", getDeadlineListPlaceholder());
+=======
+        eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredEventList());
+        floatingTaskListPanel = new TaskListPanel("floatingTask",
+                getFloatingTaskListPlaceholder(), logic.getFilteredFloatingTaskList());
+        deadlineListPanel = new TaskListPanel("deadline",
+                getDeadlineListPlaceholder(), logic.getFilteredDeadlineList());
+>>>>>>> ffef178... UI: Allow switching tabs with different command
 
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
@@ -209,7 +217,7 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
+    public TaskListPanel getFloatingTaskListPanel() {
         return this.floatingTaskListPanel;
     }
 
