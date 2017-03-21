@@ -559,3 +559,19 @@ Cons:
 * Require mouse usage, may not cater Jim who prefers keyboard inputs
 * Monthly subscription fee
 
+**Assembla**
+
+Author: Lim Jie
+
+Pros:
+* Advanced coding task manager
+* Allows collaboration with different project groups at the same time
+* 3 types of communication channel for different purposes and importance
+* Connects to different software such as Git, Goggle Drive, Dropbox etc.
+* Able to track issues and milestones from Github projects
+* Extensive support portal that offers 3 level of assistance
+
+Cons:
+* Absence of phone application
+* Steep learning curve
+* Group pricing rather than individual pricing
