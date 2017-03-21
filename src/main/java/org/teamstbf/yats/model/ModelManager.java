@@ -17,7 +17,6 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -55,9 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
 		logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
 		this.taskManager = new TaskManager(taskManager);
-		observedEvents = FXCollections.observableList(this.taskManager.getTaskList());
-		filteredEvents = observedEvents.filtered(null);
-		sortedEvents = observedEvents.sorted();
+		filteredEvents = new FilteredList<ReadOnlyEvent>(taskManager.getTaskList());
 	}
 
 	@Override
@@ -98,11 +95,6 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.resetData(redoTaskManager.pop());
 	}
 
-	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
-		return new UnmodifiableObservableList<>(filteredEvents);
-	}
-
 	// =========== Filtered Event List Accessors
 	// =============================================================
 
@@ -124,14 +116,6 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
-		// TODO Auto-generated method stub
-	}
-
-	// ========== Inner classes/interfaces used for filtering
-	// =================================================
-
-	@Override
 	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException {
 		assert editedEvent != null;
@@ -142,8 +126,16 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList() {
-		return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
+	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
+		// TODO Auto-generated method stub
+	}
+
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
+
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
+		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
 	@Override
@@ -151,6 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
 		filteredEvents.setPredicate(null);
 	}
 
+	// @@author A0138952W
 	@Override
 	public void updateFilteredListToShowLocation(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new LocationQualifier(keywords)));
@@ -178,11 +171,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	private void updateFilteredEventList(Expression expression) {
 		filteredEvents.setPredicate(expression::satisfies);
-	}
-
-	@Override
-	public void sortFilteredEventList() {
-		filteredEvents.sorted();
 	}
 
 	// =========== Sorted Event List Accessors
