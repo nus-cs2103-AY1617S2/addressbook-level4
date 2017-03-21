@@ -164,7 +164,7 @@ public class ModelManager extends ComponentManager implements Model {
                 String taskDateString = task.getEndTime().toString();
                 try {
                     Date taskDate = dateFormat.parse(taskDateString);
-                    return currentDate.compareTo(taskDate) > 0;
+                    return currentDate.compareTo(taskDate) <= 0;
                 } catch (ParseException e) {
                     e.printStackTrace();
                     return false;
@@ -173,7 +173,9 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
         });
+        System.out.println(filteredTasks);
         SortedList<Task> sortedList = new SortedList<Task>(filteredTasks, dateComparator);
+        System.out.println(sortedList);
 
         return new UnmodifiableObservableList<>(sortedList);
     }

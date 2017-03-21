@@ -13,7 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.GuiSettings;
-import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.events.ui.ExitAppRequestEvent;
 import seedu.todolist.commons.util.FxViewUtil;
 import seedu.todolist.logic.Logic;
@@ -231,8 +230,9 @@ public class MainWindow extends UiPart<Region> {
 
     //TODO not done yet
     @FXML
-    public void handleUpcomingButton() {
-        raise(new ViewListChangedEvent(ListCommand.TYPE_OVERDUE));
+    public void handleUpcomingButton() throws CommandException {
+        String command = LIST + " " + ListCommand.TYPE_UPCOMING;
+        logic.execute(command);
     }
 
     void show() {
