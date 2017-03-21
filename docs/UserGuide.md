@@ -193,7 +193,7 @@ Format: `find KEYWORD...`
 Example: <br>
 
 * find assignments
-> Returns all tasks with assignemnts in their name or as a tag
+> Returns all tasks with assignments in their name or as a tag
 
 * find lecture tutorial
 > Returns all tasks with lecture and tutorial in their name or tasks with both lecture and tutorial as tags
