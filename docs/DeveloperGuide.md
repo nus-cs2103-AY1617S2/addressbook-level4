@@ -575,3 +575,20 @@ Cons:
 * Absence of phone application
 * Steep learning curve
 * Group pricing rather than individual pricing
+
+**Wunderlist**
+
+Author: Sherina Toh Shi Pei
+
+Pros:
+* Intuitive UI
+* Allows categories to be created where tasks can be placed in
+* Allows subtasks, notes and files to be added to a task
+* Allows for collaboration on tasks with other people
+* Allows users to set a reminder for their tasks
+* Shows a daily and weekly overview of all tasks
+* A large number of themes for user to choose from to suit their preferences
+
+Cons:
+* Web Version requires internet to access
+* Not suitable for users that prefer keyboard inputs as most commands require the mouse
