@@ -28,6 +28,8 @@ public class AddCommandParser {
     private String startDate = null;
     private String endDate = null;
 
+    public static final String MESSAGE_INVALID_NUM_DATETIME = "Too many/few dateTime arguments!";
+
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddCommand and returns an AddCommand object for execution.
@@ -87,7 +89,7 @@ public class AddCommandParser {
         if ((!hasBy && !hasOn && hasFrom && hasTo) || (!hasBy && hasOn && !hasFrom && hasTo)) {
             return TaskType.EVENT;
         }
-        throw new IllegalValueException("Too many/few DATETIME arguments!");
+        throw new IllegalValueException(MESSAGE_INVALID_NUM_DATETIME);
     }
 
     private void extractDates(String... args) throws IllegalValueException {
