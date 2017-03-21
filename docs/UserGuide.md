@@ -24,8 +24,8 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
-<br>
 ## 1. Introduction
+
 FlexiTask is a task manager that allows you to manage your tasks through simple command-line interface (CLI) commands.<br>
 
 It has many useful features that help to organise your tasks, notably a convenient "upcoming events" feature that let you see your urgent tasks at the top of the list.<br>
