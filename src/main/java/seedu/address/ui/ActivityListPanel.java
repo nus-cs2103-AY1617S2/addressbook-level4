@@ -69,11 +69,11 @@ public class ActivityListPanel extends UiPart<Region> {
             if (empty || activity == null) {
                 setGraphic(null);
                 setText(null);
-            } else if (activity.getFromDate().value!=null){
+            } else if (activity.getFromDate().value != null) {
                 setGraphic(new EventCard(activity, getIndex() + 1).getRoot());
-            } else if (activity.getPriority().value!=null){
+            } else if (activity.getPriority().value != null) {
                 setGraphic(new ActivityCard(activity, getIndex() + 1).getRoot());
-            } else{
+            } else {
                 setGraphic(new DeadlineCard(activity, getIndex() + 1).getRoot());
             }
         }

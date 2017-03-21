@@ -28,7 +28,7 @@ public class ActivityCard extends UiPart<Region> {
     public ActivityCard(ReadOnlyActivity activity, int displayedIndex) {
         super(FXML);
         description.setText(activity.getDescription().description);
-        id.setText(displayedIndex + ". "); 
+        id.setText(displayedIndex + ". ");
         priority.setText(activity.getPriority().value);
         locations.setText(activity.getLocation().value);
         initTags(activity);

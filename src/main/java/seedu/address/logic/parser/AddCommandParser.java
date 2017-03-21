@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CAN_ONLY_ADD_ONE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BYDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
@@ -45,26 +46,26 @@ public class AddCommandParser {
             }
 
             if (priorityExists != null && (bydateExists != null || fromdateExists != null)) {
-                throw new IllegalValueException("Task or Event or Deadline");
+                throw new IllegalValueException(MESSAGE_CAN_ONLY_ADD_ONE);
             }
 
             if (bydateExists != null && fromdateExists != null) {
-                throw new IllegalValueException("Task or Event or Deadline");
+                throw new IllegalValueException(MESSAGE_CAN_ONLY_ADD_ONE);
             }
 
             if (priorityExists != null && (fromdateExists != null || todateExists != null || bydateExists != null ||
                     starttimeExists != null || endtimeExists != null)) {
-                throw new IllegalValueException("Task or Event or Deadline");
+                throw new IllegalValueException(MESSAGE_CAN_ONLY_ADD_ONE);
             }
 
             if (bydateExists != null && (fromdateExists != null || todateExists != null || starttimeExists != null
                     || priorityExists != null)) {
-                throw new IllegalValueException("Task or Event or Deadline");
+                throw new IllegalValueException(MESSAGE_CAN_ONLY_ADD_ONE);
             }
 
             if (priorityExists != null && (fromdateExists != null || todateExists != null || starttimeExists != null ||
                     endtimeExists != null || bydateExists != null)) {
-                throw new IllegalValueException("Task or Event or Deadline");
+                throw new IllegalValueException(MESSAGE_CAN_ONLY_ADD_ONE);
             }
 
             return new AddCommand(

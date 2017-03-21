@@ -6,8 +6,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.ReadOnlyActivity;
-import seedu.address.model.person.ByDate;
-import seedu.address.model.person.EndTime;
 
 
 public class DeadlineCard extends UiPart<Region> {
@@ -32,7 +30,7 @@ public class DeadlineCard extends UiPart<Region> {
     public DeadlineCard(ReadOnlyActivity deadline, int displayedIndex) {
         super(FXML);
         description.setText(deadline.getDescription().description);
-        id.setText(displayedIndex + ". "); 
+        id.setText(displayedIndex + ". ");
         byDate.setText("By Date: " + deadline.getByDate().value);
         byTime.setText("By Time: " + deadline.getEndTime().value);
         locations.setText(deadline.getLocation().value);
@@ -40,6 +38,6 @@ public class DeadlineCard extends UiPart<Region> {
     }
 
     private void initTags(ReadOnlyActivity deadline) {
-    	deadline.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        deadline.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

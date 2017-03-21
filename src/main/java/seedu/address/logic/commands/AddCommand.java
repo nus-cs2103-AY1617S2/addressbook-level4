@@ -27,7 +27,9 @@ public class AddCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft. "
-            + "Parameters: DESCRIPTION p/PRIORITY l/LOCATION  [t/TAG]...\n"
+            + "Parameters: DESCRIPTION p/PRIORITY l/LOCATION f/FROMDATE u/TODATE s/STARTTIME"
+            + "e/ENDTIME b/BYDATE [t/TAG]...\n"
+            + "Event must have f/FROMDATE, Task must have p/PRIORITY, Deadline must have b/BYDATE"
             + "Example: " + COMMAND_WORD
             + " Project Discussion p/high l/discussion room 4 t/friends t/owesMoney";
 

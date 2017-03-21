@@ -68,6 +68,22 @@ public class EditCommand extends Command {
         ReadOnlyActivity activityToEdit = lastShownList.get(filteredActivityListIndex);
         Activity editedActivity = createEditedActivity(activityToEdit, editActivityDescriptor);
 
+        if (editedActivity.getPriority().value != null && (editedActivity.getByDate().value != null ||
+                editedActivity.getFromDate().value != null && editedActivity.getToDate().value != null ||
+                editedActivity.getStartTime().value != null && editedActivity.getEndTime().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_TASK);
+        }
+
+        if (editedActivity.getByDate().value != null && (editedActivity.getPriority().value != null ||
+                editedActivity.getFromDate().value != null || editedActivity.getToDate().value != null ||
+                editedActivity.getStartTime().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_DEADLINE);
+        }
+
+        if (editedActivity.getFromDate().value != null && (editedActivity.getPriority().value != null ||
+                editedActivity.getByDate().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_EVENT);
+        }
         try {
             model.updateActivity(filteredActivityListIndex, editedActivity);
         } catch (UniqueActivityList.DuplicateActivityException dpe) {
