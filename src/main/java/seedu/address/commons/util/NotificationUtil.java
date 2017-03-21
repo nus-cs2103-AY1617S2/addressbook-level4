@@ -14,7 +14,7 @@ public class NotificationUtil {
      * Creates a notification on the system tray
      * @param description the message to be displayed in the notification
      */
-    public static void displayNotification(String description) {
+    public void displayNotification(String description) {
 
         SystemTray tray = SystemTray.getSystemTray();
 

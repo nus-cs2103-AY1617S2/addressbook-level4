@@ -24,7 +24,7 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager addressBook;
+    private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
@@ -36,8 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.addressBook = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        this.taskManager = new TaskManager(taskManager);
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -46,29 +46,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        addressBook.resetData(newData);
+        taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
-        return addressBook;
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new TaskManagerChangedEvent(addressBook));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
+        taskManager.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -79,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
+        taskManager.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
 
@@ -87,12 +87,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void insertTasktoIndex(int indexToBeRestored, Task deletedTask)
             throws DuplicateTaskException {
-        addressBook.addTaskToIndex(indexToBeRestored, deletedTask);
+        taskManager.addTaskToIndex(indexToBeRestored, deletedTask);
     }
 
     @Override
     public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
-        addressBook.setTasks(list);
+        taskManager.setTasks(list);
     }
     //@@author
 
