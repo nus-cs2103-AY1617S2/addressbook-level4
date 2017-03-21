@@ -52,23 +52,26 @@ public class DoneCommand extends Command {
             return new CommandResult(MESSAGE_DONE_LISTED);
         }
 
-        if (lastShownList.size() < targetIndex) {
+        if (!isIndexValid(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task taskToDone = (Task) lastShownList.get(targetIndex - 1);
-
-        if (taskToDone.getDone()) {
+        if (isAnyTaskDone(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_WRONG_LIST);
         }
 
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Task taskToDone = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            tasksToDone.add(taskToDone);
+        }
+
         try {
-            model.doneTask(taskToDone);
+            model.doneTasks(tasksToDone);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
+        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
     }
 
     private boolean isAnyTaskDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
