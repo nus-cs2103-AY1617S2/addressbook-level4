@@ -41,10 +41,11 @@ public class AutoCompleteTextField extends TextField {
                     entriesPopup.hide();
                 } else {
                     LinkedList<String> searchResult = new LinkedList<>();
-                    String stringToCheck = findCommandTextInString(currentTextInput, prevTextInput);
+                    int lastPrefixIndex = getLastPrefixIndex(currentTextInput);
+                    String stringToCheck = getCommandInString(currentTextInput, lastPrefixIndex);
                     searchResult.addAll(entries.subSet(stringToCheck, stringToCheck + Character.MAX_VALUE));
                     if (entries.size() > 0) {
-                        populatePopup(searchResult);
+                        populatePopup(searchResult, currentTextInput.substring(0, lastPrefixIndex));
                         entriesPopup.show(AutoCompleteTextField.this, Side.BOTTOM, currentTextInput.length(), 0);
                     } else {
                         entriesPopup.hide();
@@ -63,12 +64,20 @@ public class AutoCompleteTextField extends TextField {
 
     }
 
-    private String findCommandTextInString(String currentText, String prevText) {
-        String processedString = new String(" ");
+    private int getLastPrefixIndex(String currentText) {
         int indexOfPrefix = currentText.lastIndexOf('@', currentText.length() - 1);
         int indexOfSpace = currentText.lastIndexOf(' ', currentText.length() - 1);
-        if (indexOfPrefix != -1 && indexOfPrefix > indexOfSpace) {
-            processedString = currentText.substring(indexOfPrefix, currentText.length());
+        if (indexOfPrefix == -1 || indexOfPrefix > indexOfSpace) {
+            return -1;
+        } else {
+            return indexOfPrefix;
+        }
+    }
+
+    private String getCommandInString(String currentText, int lastPrefixIndex) {
+        String processedString = new String(" ");
+        if (lastPrefixIndex != -1) {
+            processedString = currentText.substring(lastPrefixIndex, currentText.length());
         }
 
         return processedString;
@@ -97,7 +106,7 @@ public class AutoCompleteTextField extends TextField {
      * @param searchResult
      *            The set of matching strings.
      */
-    private void populatePopup(List<String> searchResult) {
+    private void populatePopup(List<String> searchResult, String textBeforePrefix) {
         List<CustomMenuItem> menuItems = new LinkedList<>();
         // If you'd like more entries, modify this line.
         int maxEntries = 10;
@@ -109,7 +118,8 @@ public class AutoCompleteTextField extends TextField {
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    setText(result);
+                    String output = textBeforePrefix.concat(result);
+                    setText(output);
                     entriesPopup.hide();
                 }
             });
