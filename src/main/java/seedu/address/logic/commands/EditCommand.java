@@ -36,6 +36,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft.";
+    public static final String MESSAGE_DIFFERENT_DEADLINE = "Cannot edit Deadline into Task or Event";
+    public static final String MESSAGE_DIFFERENT_TASK = "Cannot edit Task into Event or Deadline";
+    public static final String MESSAGE_DIFFERENT_EVENT = "Cannot edit Event into Deadline or Task";
 
     private final int filteredActivityListIndex;
     private final EditActivityDescriptor editActivityDescriptor;
@@ -130,7 +133,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.priority, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.starttime, this.endtime,
+                    this.fromdate, this.todate, this.bydate, this.priority, this.location, this.tags);
         }
 
         public void setDescription(Optional<Description> description) {
