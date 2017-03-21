@@ -10,7 +10,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n" + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Task undid: %1$s";
-    public static final String MESSAGE_FAILURE = "Unable to undo: ";
+    public static final String MESSAGE_FAILURE = "Unable to undo. You cannot undo a save, find and list";
 
     // public static Command toUndo;
 

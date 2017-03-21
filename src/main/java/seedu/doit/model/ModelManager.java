@@ -77,6 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        logger.info("delete task in model manager");
         TaskManagerStack.addToUndoStack(this.getTaskManager());
         this.taskManager.removeTask(target);
         String[] test = new String[] { "test" };
@@ -88,6 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
+        logger.info("add task in model manager");
         TaskManagerStack.addToUndoStack(this.getTaskManager());
         this.taskManager.addTask(task);
         String[] test = new String[] { "test" };
@@ -99,6 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
+        logger.info("update task in model manager");
         TaskManagerStack.addToUndoStack(this.getTaskManager());
         int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
         this.taskManager.updateTask(taskManagerIndex, editedTask);
@@ -185,17 +188,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void undo() throws EmptyTaskManagerStackException {
-        this.taskManager.resetData(taskManagerStack.loadOlderTaskManager());
-        // updateFilteredTasks();
-        updateFilteredListToShowAll();
+        this.taskManager.resetData(taskManagerStack.loadOlderTaskManager(this.getTaskManager()));
+        updateFilteredTasks();
         indicateTaskManagerChanged();
     }
 
     @Override
     public void redo() throws EmptyTaskManagerStackException {
-        this.taskManager.resetData(taskManagerStack.loadNewerTaskManager());
-        // updateFilteredTasks();
-        updateFilteredListToShowAll();
+        this.taskManager.resetData(taskManagerStack.loadNewerTaskManager(this.getTaskManager()));
+        updateFilteredTasks();
         indicateTaskManagerChanged();
     }
 
