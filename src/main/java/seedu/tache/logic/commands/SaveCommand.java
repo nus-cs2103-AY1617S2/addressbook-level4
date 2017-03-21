@@ -1,3 +1,4 @@
+//@@author A0139961U
 package seedu.tache.logic.commands;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
@@ -32,7 +33,6 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert storage != null;
-        System.out.println("Check Directory: " + newPath);
         storage.setTaskManagerFilePath(newPath + "\\data\\taskmanager.xml");
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPath));
     }
