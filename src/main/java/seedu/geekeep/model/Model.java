@@ -10,6 +10,19 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 public interface Model {
+
+    /**
+     * Signals that an undo command would fail because there is nothing to undo.
+     */
+    public static class NothingToUndoException extends Exception {
+    }
+
+    /**
+     * Signals that an undo command would fail because there is nothing to redo.
+     */
+    public static class NothingToRedoException extends Exception {
+    }
+
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -62,6 +75,10 @@ public interface Model {
 
     /** Mark the specified task as undone */
     void markTaskUndone(int filteredTaskListIndex);
+
+    void undo() throws NothingToUndoException;
+
+    void redo() throws NothingToRedoException;
 
 }
 
