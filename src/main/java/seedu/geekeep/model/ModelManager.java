@@ -1,6 +1,7 @@
 package seedu.geekeep.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -8,6 +9,7 @@ import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
@@ -19,10 +21,13 @@ import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
  * Represents the in-memory model of the address book data. All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final Stack<TaskManager> pastTaskManagers;
+    private final Stack<TaskManager> futureTaskManagers;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -35,6 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        pastTaskManagers = new Stack<>();
+        futureTaskManagers = new Stack<>();
 
     }
 
@@ -44,6 +51,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
@@ -60,12 +69,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -73,11 +86,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskListIndex, editedTask);
+
         indicateTaskManagerChanged();
     }
 
@@ -159,6 +175,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskDone(int filteredTaskListIndex) {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTaskDone(taskListIndex);
         indicateTaskManagerChanged();
@@ -166,6 +184,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void markTaskUndone(int filteredTaskListIndex) {
+        pastTaskManagers.add(new TaskManager(taskManager));
+        futureTaskManagers.clear();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.markTaskUndone(taskListIndex);
         indicateTaskManagerChanged();
@@ -199,6 +219,26 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListToShowFloatingTasks() {
         filteredTasks.setPredicate(t -> t.isFloatingTask());
 
+    }
+
+    @Override
+    public void undo() throws NothingToUndoException {
+        if (pastTaskManagers.empty()) {
+            throw new NothingToUndoException();
+        }
+        futureTaskManagers.push(new TaskManager(taskManager));
+        taskManager.resetData(pastTaskManagers.pop());
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void redo() throws NothingToRedoException {
+        if (futureTaskManagers.empty()) {
+            throw new NothingToRedoException();
+        }
+        pastTaskManagers.push(new TaskManager(taskManager));
+        taskManager.resetData(futureTaskManagers.pop());
+        indicateTaskManagerChanged();
     }
 
 }
