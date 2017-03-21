@@ -46,7 +46,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                priority.isPresent() ? new Priority(priority.get()) : new Priority(),
+                priority.isPresent() ? new Priority(priority.get()) : null,
                 status.isPresent() ? new Status(status.get()) : new Status(),
                 note.isPresent() ? new Note(note.get()) : new Note(),
                 startTime.isPresent() ? new DateTime(startTime.get()) : new DateTime(),
