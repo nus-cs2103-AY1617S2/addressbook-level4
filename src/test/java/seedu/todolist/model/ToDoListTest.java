@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.parser.TaskParser;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.testutil.TypicalTestTasks;
 
 public class ToDoListTest {

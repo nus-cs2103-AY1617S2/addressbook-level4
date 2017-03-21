@@ -14,7 +14,6 @@ import seedu.todolist.commons.exceptions.IllegalValueException;
 import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.task.Task;
-import seedu.todolist.model.task.Task;
 
 /**
  * An Immutable ToDoList that is serializable to XML format

@@ -9,7 +9,6 @@ import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;

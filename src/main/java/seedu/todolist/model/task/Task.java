@@ -1,7 +1,5 @@
 package seedu.todolist.model.task;
 
-import java.util.Objects;
-
 import seedu.todolist.model.tag.UniqueTagList;
 
 /**
@@ -37,9 +35,9 @@ public abstract class Task {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    
+
     public abstract StartTime getStartTime();
-    
+
     public abstract EndTime getEndTime();
 
     /**
@@ -48,7 +46,7 @@ public abstract class Task {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
+
     /*
      * Return a Hash Code that is unique to this Task object.
      */

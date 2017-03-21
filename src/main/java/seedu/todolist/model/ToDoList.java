@@ -13,7 +13,6 @@ import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.Task;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
 import seedu.todolist.model.task.UniqueTaskList.DuplicateTaskException;
 

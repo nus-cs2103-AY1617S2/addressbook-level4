@@ -17,109 +17,109 @@ import seedu.todolist.model.task.EndTask;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.FloatingTask;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.StartEndTask;
 import seedu.todolist.model.task.StartTask;
 import seedu.todolist.model.task.StartTime;
+import seedu.todolist.model.task.Task;
 
 /*
  * Parse input into a suitable type of Task
  */
 public class TaskParser {
-	
-	public static final String MESSAGE_INVALID_TASK = "Name must be present";
-	
-	/**
+
+    public static final String MESSAGE_INVALID_TASK = "Name must be present";
+
+    /**
      * Parses the given {@code String} of input that contains parameters
      * of a Task object and calls the suitable TaskParser based on the parameters.
      */
-	public static Task parseTask(String taskInput) throws IllegalValueException {
-		ArgumentTokenizer argsTokenizer =
+    public static Task parseTask(String taskInput) throws IllegalValueException {
+        ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_TAG);
         argsTokenizer.tokenize(taskInput);
         try {
             String name = argsTokenizer.getPreamble().get();
-            String startTime = (argsTokenizer.getValue(PREFIX_START).isPresent() ? 
-            		argsTokenizer.getValue(PREFIX_START).get() 
-            		: null);
-            String endTime = (argsTokenizer.getValue(PREFIX_END).isPresent() ? 
-            		argsTokenizer.getValue(PREFIX_END).get() 
-            		: null);
+            String startTime = (argsTokenizer.getValue(PREFIX_START).isPresent() ?
+                    argsTokenizer.getValue(PREFIX_START).get()
+                    : null);
+            String endTime = (argsTokenizer.getValue(PREFIX_END).isPresent() ?
+                    argsTokenizer.getValue(PREFIX_END).get()
+                    : null);
             Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
 
             final Set<Tag> tagSet = new HashSet<>();
             for (String tagName : tags) {
                 tagSet.add(new Tag(tagName));
             }
-            
+
             if (startTime != null && endTime != null) {
-            	return new StartEndTask(new Name(name), 
-            			new StartTime(startTime), 
-            			new EndTime(endTime), 
-            			new UniqueTagList(tagSet));
+                return new StartEndTask(new Name(name),
+                        new StartTime(startTime),
+                        new EndTime(endTime),
+                        new UniqueTagList(tagSet));
             } else if (startTime != null && endTime == null) {
-            	return new StartTask(new Name(name), 
-            			new StartTime(startTime),
-            			new UniqueTagList(tagSet));
+                return new StartTask(new Name(name),
+                        new StartTime(startTime),
+                        new UniqueTagList(tagSet));
             } else if (startTime == null && endTime != null) {
-            	return new EndTask(new Name(name), 
-            			new EndTime(endTime), 
-            			new UniqueTagList(tagSet));
+                return new EndTask(new Name(name),
+                        new EndTime(endTime),
+                        new UniqueTagList(tagSet));
             } else {
-            	return new FloatingTask(new Name(name), 
-            			new UniqueTagList(tagSet));
+                return new FloatingTask(new Name(name),
+                        new UniqueTagList(tagSet));
             }
         } catch (NoSuchElementException nsse) {
-        	throw new NoSuchElementException(MESSAGE_INVALID_TASK);
+            throw new NoSuchElementException(MESSAGE_INVALID_TASK);
         }
-	}
-	
-	/*
-	 * An overloaded method that takes in a Name object,
-	 * a StartTime object, an EndTime object and a set of Tags
-	 * and create a suitable Task object.
-	 * @@author A0141647E 
-	 */
-	public static Task parseTask(Name name, StartTime startTime,
-			EndTime endTime, UniqueTagList uniqueTagList) {
-		assert name != null;
-		
-		if (startTime != null && endTime != null) {
-        	return new StartEndTask(name, startTime, endTime, uniqueTagList);
+    }
+
+    /*
+     * An overloaded method that takes in a Name object,
+     * a StartTime object, an EndTime object and a set of Tags
+     * and create a suitable Task object.
+     * @@author A0141647E
+     */
+    public static Task parseTask(Name name, StartTime startTime,
+            EndTime endTime, UniqueTagList uniqueTagList) {
+        assert name != null;
+
+        if (startTime != null && endTime != null) {
+            return new StartEndTask(name, startTime, endTime, uniqueTagList);
         } else if (startTime != null && endTime == null) {
-        	return new StartTask(name, startTime, uniqueTagList);
+            return new StartTask(name, startTime, uniqueTagList);
         } else if (startTime == null && endTime != null) {
-        	return new EndTask(name, endTime, uniqueTagList);
+            return new EndTask(name, endTime, uniqueTagList);
         } else {
-        	return new FloatingTask(name, uniqueTagList);
+            return new FloatingTask(name, uniqueTagList);
         }
-	}
-	
-	/*
-	 * Another overloaded method that takes in a Task object
-	 * and create a copy of it.
-	 * @@author A0141647E
-	 */
-	public static Task parseTask(Task taskToCopy) {
-		assert taskToCopy != null;
-		
-		Name name = taskToCopy.getName();
-		StartTime startTime = taskToCopy.getStartTime();
-		EndTime endTime = taskToCopy.getEndTime();
-		UniqueTagList uniqueTagList = taskToCopy.getTags();
-		boolean isComplete = taskToCopy.isComplete();
-		
-		if (startTime != null && endTime != null) {
-        	return new StartEndTask(name, startTime, endTime, 
-        			uniqueTagList, isComplete);
+    }
+
+    /*
+     * Another overloaded method that takes in a Task object
+     * and create a copy of it.
+     * @@author A0141647E
+     */
+    public static Task parseTask(Task taskToCopy) {
+        assert taskToCopy != null;
+
+        Name name = taskToCopy.getName();
+        StartTime startTime = taskToCopy.getStartTime();
+        EndTime endTime = taskToCopy.getEndTime();
+        UniqueTagList uniqueTagList = taskToCopy.getTags();
+        boolean isComplete = taskToCopy.isComplete();
+
+        if (startTime != null && endTime != null) {
+            return new StartEndTask(name, startTime, endTime,
+                    uniqueTagList, isComplete);
         } else if (startTime != null && endTime == null) {
-        	return new StartTask(name, startTime, 
-        			uniqueTagList, isComplete);
+            return new StartTask(name, startTime,
+                    uniqueTagList, isComplete);
         } else if (startTime == null && endTime != null) {
-        	return new EndTask(name, endTime, 
-        			uniqueTagList, isComplete);
+            return new EndTask(name, endTime,
+                    uniqueTagList, isComplete);
         } else {
-        	return new FloatingTask(name, uniqueTagList, isComplete);
+            return new FloatingTask(name, uniqueTagList, isComplete);
         }
-	}
+    }
 }

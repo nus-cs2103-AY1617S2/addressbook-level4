@@ -1,9 +1,6 @@
 package seedu.todolist.logic.parser;
 
 import static seedu.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.todolist.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.todolist.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
@@ -18,18 +15,17 @@ import seedu.todolist.logic.commands.IncorrectCommand;
 public class AddCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddCommand and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
-    	try {
-    		AddCommand resultCommand = new AddCommand(args);
-    		return resultCommand;
-    	} catch (IllegalValueException ive) {
-    		return new IncorrectCommand(ive.getMessage());
-    	} catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
-            		AddCommand.MESSAGE_USAGE));
+        try {
+            AddCommand resultCommand = new AddCommand(args);
+            return resultCommand;
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        } catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
 }

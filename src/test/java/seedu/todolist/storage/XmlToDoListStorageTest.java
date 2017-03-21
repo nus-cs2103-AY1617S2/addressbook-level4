@@ -15,7 +15,6 @@ import seedu.todolist.commons.exceptions.DataConversionException;
 import seedu.todolist.commons.util.FileUtil;
 import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.ToDoList;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.parser.TaskParser;
 import seedu.todolist.testutil.TypicalTestTasks;
 

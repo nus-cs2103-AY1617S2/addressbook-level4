@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import seedu.todolist.TestApp;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.parser.TaskParser;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.testutil.TestUtil;
 
 /**

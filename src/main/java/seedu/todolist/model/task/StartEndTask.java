@@ -9,8 +9,8 @@ import seedu.todolist.model.tag.UniqueTagList;
  * Represent a Task with a StartTime and an EndTime.
  */
 public class StartEndTask extends Task {
-	
-	private StartTime startTime;
+
+    private StartTime startTime;
     private EndTime endTime;
 
     /**
@@ -21,21 +21,22 @@ public class StartEndTask extends Task {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+        // changes in the arg list
         this.completed = false;
     }
-    
+
     /**
-     * Overloaded constructor that also takes in isComplete attribute
-     * to ensure proper loading from the database.
+     * Overloaded constructor that also takes in isComplete attribute to ensure
+     * proper loading from the database.
      */
-    public StartEndTask(Name name, StartTime startTime, EndTime endTime, 
-    		UniqueTagList tags, boolean isComplete) {
+    public StartEndTask(Name name, StartTime startTime, EndTime endTime, UniqueTagList tags, boolean isComplete) {
         assert !CollectionUtil.isAnyNull(name, startTime, endTime, tags);
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+        // changes in the arg list
         this.completed = isComplete;
     }
 
@@ -70,7 +71,7 @@ public class StartEndTask extends Task {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartEndTask // instanceof handles nulls
-                		&& ((StartEndTask) other).getName().equals(this.getName())
+                        && ((StartEndTask) other).getName().equals(this.getName())
                         && ((StartEndTask) other).getStartTime().equals(this.getStartTime())
                         && ((StartEndTask) other).getEndTime().equals(this.getEndTime())
                         && (((StartEndTask) other).isComplete() == this.isComplete()));
@@ -85,7 +86,7 @@ public class StartEndTask extends Task {
 
     @Override
     public String toString() {
-    	final StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append(getName());
         builder.append(" Start Time: " + getStartTime().toString());
         builder.append(" End Time: " + getEndTime().toString());

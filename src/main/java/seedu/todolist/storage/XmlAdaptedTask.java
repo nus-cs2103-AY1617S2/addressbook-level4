@@ -10,7 +10,6 @@ import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.parser.TaskParser;
@@ -22,12 +21,16 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
+
     @XmlElement
     private String startTime;
+
     @XmlElement
     private String endTime;
+
     @XmlElement(required = true)
     private boolean completed;
+
     @XmlElement
     private String description;
 
@@ -35,30 +38,28 @@ public class XmlAdaptedTask {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedTask.
-     * This is the no-arg constructor that is required by JAXB.
+     * Constructs an XmlAdaptedTask. This is the no-arg constructor that is
+     * required by JAXB.
      */
-    public XmlAdaptedTask() {}
-
+    public XmlAdaptedTask() {
+    }
 
     /**
      * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedTask
+     * @param source
+     *            future changes to this will not affect the created
+     *            XmlAdaptedTask
      */
     public XmlAdaptedTask(Task source) {
         name = source.getName().fullName;
         if (startTime != null) {
-            startTime = (source.getStartTime() != null ? 
-            		source.getStartTime().toString() 
-            		: "");
+            startTime = (source.getStartTime() != null ? source.getStartTime().toString() : "");
         } else {
             startTime = "";
         }
         if (endTime != null) {
-            endTime = (source.getEndTime() != null ? 
-            		source.getEndTime().toString() 
-            		: "");
+            endTime = (source.getEndTime() != null ? source.getEndTime().toString() : "");
         } else {
             endTime = "";
         }
@@ -70,18 +71,23 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted task object into the model's Task object.
+     * Converts this jaxb-friendly adapted task object into the model's Task
+     * object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted task
+     * @throws IllegalValueException
+     *             if there were any data constraints violated in the adapted
+     *             task
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+
         final Name name = new Name(this.name);
         StartTime startTime;
         EndTime endTime;
+
         if (this.startTime.equals("")) {
             startTime = null;
         } else {
@@ -92,6 +98,7 @@ public class XmlAdaptedTask {
         } else {
             endTime = new EndTime(this.endTime);
         }
+
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return TaskParser.parseTask(name, startTime, endTime, tags);
     }
