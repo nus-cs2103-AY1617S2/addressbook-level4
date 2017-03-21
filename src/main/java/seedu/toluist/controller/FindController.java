@@ -47,7 +47,7 @@ public class FindController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         boolean isSearchByTag = tokens.get(TAG_PARAMETER).equals(TRUE_PARAMETER);
         boolean isSearchByName = tokens.get(NAME_PARAMETER).equals(TRUE_PARAMETER);
-        String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
+        String[] keywordList = StringUtil.convertToArray(tokens.get(KEYWORDS_PARAMETER));
 
         Predicate<Task> taskPredicate = task ->
                 (isSearchByTag && task.isAnyKeywordsContainedInAnyTagIgnoreCase(keywordList)
@@ -59,22 +59,6 @@ public class FindController extends Controller {
 
         // display formatting
         return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasksList.size());
-    }
-
-    private String[] convertToArray(String keywords) {
-        if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { NULL_PARAMETER };
-        }
-
-        String trimmedKeywords = keywords.trim();
-        String[] keywordList = trimmedKeywords.split(" ");
-        ArrayList<String> replacementList = new ArrayList<>();
-        for (String keyword : keywordList) {
-            if (!keyword.equals(NULL_PARAMETER)) {
-                replacementList.add(keyword);
-            }
-        }
-        return replacementList.toArray(new String[0]);
     }
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,

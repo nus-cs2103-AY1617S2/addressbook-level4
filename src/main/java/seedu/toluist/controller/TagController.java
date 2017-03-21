@@ -38,7 +38,7 @@ public class TagController extends Controller {
 
         // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
-        String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
+        String[] keywordList = StringUtil.convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER)) - 1;
         TodoList todoList = TodoList.load();
         Task task = UiStore.getInstance().getShownTasks().get(index);
@@ -61,23 +61,6 @@ public class TagController extends Controller {
         return formatDisplay(successfulList.toArray(new String[successfulList.size()]),
                                 failedList.toArray(new String[failedList.size()]),
                                 successfulList.size());
-    }
-
-    //!!!!!same as FindController method
-    private String[] convertToArray(String keywords) {
-        if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { "" };
-        }
-
-        String trimmedKeywords = keywords.trim();
-        String[] keywordList = trimmedKeywords.split(" ");
-        ArrayList<String> replacementList = new ArrayList<>();
-        for (String keyword : keywordList) {
-            if (!keyword.equals("")) {
-                replacementList.add(keyword);
-            }
-        }
-        return replacementList.toArray(new String[0]);
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {
