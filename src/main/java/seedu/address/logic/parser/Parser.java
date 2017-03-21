@@ -19,6 +19,7 @@ import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UncompleteCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 /**
@@ -84,6 +85,9 @@ public class Parser {
 
         case CompleteCommand.COMMAND_WORD:
             return new CompleteCommandParser().parse(arguments);
+
+        case UncompleteCommand.COMMAND_WORD:
+            return new UncompleteCommandParser().parse(arguments);
         //@@Dylan Sng
 
         default:

@@ -8,40 +8,41 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 //@@author A0139161J
-public class CompleteCommand extends Command {
-    public static final String COMMAND_WORD = "complete";
+public class UncompleteCommand extends Command {
+    public static final String COMMAND_WORD = "uncomplete";
 
-    public static final String MESSAGE_SUCCESS = "Task completed: %1$s";
+    public static final String MESSAGE_SUCCESS = "Task uncompleted: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task as completed, identified by the index number used in the last task listing.\n"
+            + ": Marks the task as uncompleted, identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private final int indexToComplete;
+    private final int indexToUncomplete;
 
-    public CompleteCommand(int targetIndex) {
-        indexToComplete = targetIndex;
+    public UncompleteCommand(int targetIndex) {
+        indexToUncomplete = targetIndex;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
 
-        UnmodifiableObservableList<ReadOnlyTask> list = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> list =
+                (UnmodifiableObservableList<ReadOnlyTask>) model.getCompletedTaskList();
 
-        if (list.size() < indexToComplete) {
+        if (list.size() < indexToUncomplete) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToComplete = list.get(indexToComplete - 1);
-        Task task = new Task(taskToComplete);
-        task.setParserInfo("complete");
+        ReadOnlyTask taskToUncomplete = list.get(indexToUncomplete - 1);
+        Task task = new Task(taskToUncomplete);
+        task.setParserInfo("uncomplete");
         try {
-            model.completeTask(task);
+            model.uncompleteTask(task);
             return new CommandResult(String.format(MESSAGE_SUCCESS, task));
         } catch (DuplicateTaskException | TaskNotFoundException e) {
-            throw new CommandException("Unable to complete specified task");
+            throw new CommandException("Unable to uncomplete specified task");
         }
     }
 }
