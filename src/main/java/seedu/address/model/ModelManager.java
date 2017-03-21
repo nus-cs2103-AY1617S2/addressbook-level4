@@ -120,6 +120,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void discardCurrentState() {
+        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size();
+        assert (!commandHistory.isEmpty());
+        String toUndo = commandHistory.pop();
+        taskHistory.pop();
+        predicateHistory.pop();
+    }
+
+    @Override
     public String undoLastCommand() throws NoPreviousCommandException {
         assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size();
 

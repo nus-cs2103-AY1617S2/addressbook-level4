@@ -40,10 +40,20 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
         command.setStorage(storage);
         command.setConfig(config);
-        if (!(command instanceof UndoCommand)) {
-            model.saveCurrentState(commandText.trim());
+        try {
+            if (!(command instanceof UndoCommand)) {
+                model.saveCurrentState(commandText.trim());
+            }
+            CommandResult result = command.execute();
+
+            return result;
+        } catch (CommandException e) {
+            if (!(command instanceof UndoCommand)) {
+                model.discardCurrentState();
+            }
+
+            throw e;
         }
-        return command.execute();
     }
 
     @Override
