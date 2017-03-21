@@ -48,7 +48,7 @@ public class CommandDispatcher extends Dispatcher {
      * ArrayList to store previous commands entered since starting the application
      */
     private ArrayList<String> commandHistory;
-    protected static int historyPointer = 0;
+    private Integer historyPointer = 0;
 
     public CommandDispatcher() {
         super();
@@ -66,10 +66,10 @@ public class CommandDispatcher extends Dispatcher {
 
         CommandResult feedbackToUser;
         if (controller.getClass().isInstance(new HistoryController(renderer))) {
-            feedbackToUser = ((HistoryController) controller).execute(deAliasedCommand, commandHistory);
-        } else {
-            feedbackToUser = controller.execute(deAliasedCommand);
+            ((HistoryController) controller).setCommandHistory(commandHistory);
         }
+
+        feedbackToUser = controller.execute(deAliasedCommand);
 
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }

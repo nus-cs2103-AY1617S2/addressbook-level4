@@ -17,16 +17,17 @@ public class HistoryController extends Controller {
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "^history\\s*";
 
+    private ArrayList<String> commandHistory;
+
     public HistoryController(Ui renderer) {
         super(renderer);
     }
 
-    @Override
-    public CommandResult execute(String command) {
-        return null; //not used
+    public void setCommandHistory(ArrayList<String> commandHistory) {
+        this.commandHistory = commandHistory;
     }
 
-    public CommandResult execute(String command, ArrayList<String> commandHistory) {
+    public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         String result = String.join("\n", commandHistory);
