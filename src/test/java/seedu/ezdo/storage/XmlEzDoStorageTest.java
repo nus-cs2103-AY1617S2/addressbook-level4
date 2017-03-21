@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,6 +24,7 @@ import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.ReadOnlyEzDo;
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.testutil.TypicalTestTasks;
 
@@ -83,7 +85,9 @@ public class XmlEzDoStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addTask(new Task(td.hoon));
-        original.removeTask(new Task(td.alice));
+        ArrayList<ReadOnlyTask> tasksToKill = new ArrayList<ReadOnlyTask>();
+        tasksToKill.add(new Task(td.alice));
+        original.removeTasks(tasksToKill);
         xmlEzDoStorage.saveEzDo(original, filePath);
         readBack = xmlEzDoStorage.readEzDo(filePath).get();
         assertEquals(original, new EzDo(readBack));
