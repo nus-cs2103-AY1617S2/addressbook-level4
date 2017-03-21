@@ -1,5 +1,7 @@
 package seedu.doist.ui;
 
+import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -29,8 +31,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
 
-    final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
-    final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+    final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
+    final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
     @FXML
     private TextField commandTextField;
