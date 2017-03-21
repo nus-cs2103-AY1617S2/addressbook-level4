@@ -220,7 +220,7 @@ public class LogicManagerTest {
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
-    
+
     @Test
     public void execute_addInvalidEvent_notAllowed() throws Exception {
         // setup expectations
