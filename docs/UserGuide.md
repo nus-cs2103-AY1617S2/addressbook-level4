@@ -36,10 +36,10 @@ Having any Java 8 version is not enough.
 This app will not work with earlier versions of Java 8.
 
 1. Download the latest Burdens-0.2.jar from the [releases](https://github.com/CS2103JAN2017-W09-B1/main/releases) tab.
-
+   > <img src="images/Releases.png" width="600">
 1. Copy the jar file to the folder you want to use as the home folder for Burdens.
 2. Double-click Burdens-0.2.jar to start the app. The GUI should appear in a few seconds.
-
+   > <img src="images/Ui.png" width="600">
 Figure 1: UI Mockup
 
 You will see three columns:
