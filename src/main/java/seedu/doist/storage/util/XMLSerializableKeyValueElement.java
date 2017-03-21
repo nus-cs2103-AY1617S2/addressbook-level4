@@ -3,7 +3,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class HashMapElement {
+/**
+ * An Immutable class with key and value that is serializable to XML format
+ */
+public class XMLSerializableKeyValueElement {
 
     @XmlElement(name = "key")
     private String key;
@@ -11,10 +14,10 @@ public class HashMapElement {
     @XmlElement(name = "value")
     private List<String> value;
 
-    HashMapElement() {
+    XMLSerializableKeyValueElement() {
     }
 
-    HashMapElement(String name, List<String> value) {
+    XMLSerializableKeyValueElement(String name, List<String> value) {
         this.key = name;
         this.value = value;
     }

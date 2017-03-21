@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import seedu.doist.model.ReadOnlyAliasListMap;
-import seedu.doist.storage.util.HashMapElementAdapter;
+import seedu.doist.storage.util.XMLHashMapAdapter;
 
 /**
  * An Immutable AliasListMap that is serializable to XML format
@@ -22,7 +22,7 @@ import seedu.doist.storage.util.HashMapElementAdapter;
 public class XmlSerializableAliasListMap implements ReadOnlyAliasListMap {
 
     @XmlElement(name = "aliasListMap")
-    @XmlJavaTypeAdapter(HashMapElementAdapter.class)
+    @XmlJavaTypeAdapter(XMLHashMapAdapter.class)
     Map<String, List<String>> aliasListMap;
 
     /**

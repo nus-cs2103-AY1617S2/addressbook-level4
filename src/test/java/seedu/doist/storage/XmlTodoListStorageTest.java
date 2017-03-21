@@ -17,8 +17,8 @@ import seedu.doist.model.TodoList;
 import seedu.doist.model.task.Task;
 import seedu.doist.testutil.TypicalTestTasks;
 
-public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+public class XmlTodoListStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTodoListStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -51,7 +51,7 @@ public class XmlAddressBookStorageTest {
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatAddressBook.xml");
+        readAddressBook("NotXmlFormatTodoList.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -60,7 +60,7 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String filePath = testFolder.getRoot().getPath() + "TempTodoList.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TodoList original = td.getTypicalAddressBook();
         XmlTodoListStorage xmlAddressBookStorage = new XmlTodoListStorage(filePath);
