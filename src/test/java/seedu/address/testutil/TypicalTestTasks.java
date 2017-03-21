@@ -6,7 +6,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 public class TypicalTestTasks {
-    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, movie;
+    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment;
 
     public TypicalTestTasks() {
         try {
@@ -20,7 +20,6 @@ public class TypicalTestTasks {
                     .withTags("career").build();
             shopping = new TaskBuilder().withTitle("Shopping with friends")
                     .withTags("leisure", "friends").build();
-            movie = new TaskBuilder().withTitle("Beauty and Beast").build();
             
             // Manually added
             meeting = new TaskBuilder().withTitle("Software Engineering Meeting")
@@ -45,7 +44,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{hw1, hw2, lunch, interview, shopping, movie};
+        return new TestTask[]{hw1, hw2, lunch, interview, shopping};
     }
 
     public AddressBook getTypicalAddressBook() {

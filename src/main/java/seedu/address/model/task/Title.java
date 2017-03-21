@@ -29,9 +29,9 @@ public class Title {
         assert title != null;
         String trimmedTitle= title.trim();
 
-        // if (!isValidName(trimmedName)) {
-        // throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-        // }
+         if (!isValidName(trimmedTitle)) {
+         throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
+         }
         this.title = trimmedTitle;
     }
 

@@ -76,15 +76,9 @@ public class EditCommandParser {
         try {
             String fieldWordName = fieldWord.get();
             if (FIELDWORD_TITLE.equals(fieldWordName)) {
-                if(!Title.isValidName(updateInformation.get())) {
-                    return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
-                }
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
             }
             if (FIELDWORD_TAG.equals(fieldWordName)) {
-                if(!Tag.isValidTagName(updateInformation.get())) {
-                    return new IncorrectCommand(Tag.MESSAGE_TAG_CONSTRAINTS);
-                }
                 editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
             } 
         }catch (IllegalValueException ive) {
@@ -110,11 +104,11 @@ public class EditCommandParser {
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
 
-        if (tags.equals("null")) {
+        if (tags.isEmpty()) {
             return Optional.empty();
         }
         
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("null") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
