@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.doist.logic.commands.AddCommand;
+import seedu.doist.logic.commands.AliasCommand;
 import seedu.doist.logic.commands.ClearCommand;
 import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.DeleteCommand;
@@ -17,6 +18,7 @@ import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
+import seedu.doist.logic.commands.ResetAliasCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.SortCommand;
 import seedu.doist.logic.commands.UnfinishCommand;
@@ -70,6 +72,10 @@ public class Parser {
             return new ExitCommand();
         } else if (HelpCommand.info().canBeTriggeredByWord(commandWord)) {
             return new HelpCommand();
+        } else if (AliasCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new AliasCommandParser().parse(arguments);
+        } else if (ResetAliasCommand.info().canBeTriggeredByWord(commandWord)) {
+            return new ResetAliasCommand();
         } else {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

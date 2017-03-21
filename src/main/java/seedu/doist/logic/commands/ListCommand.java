@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +14,6 @@ import seedu.doist.model.tag.UniqueTagList;
  */
 public class ListCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("list", "ls"));
     public static final String DEFAULT_COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -27,8 +24,12 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
     private UniqueTagList tagList = new UniqueTagList();
+    private TaskType type = null;
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
+        try {
+            type = TaskType.valueOf(preamble.trim());
+        } catch (IllegalArgumentException e) { }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
@@ -37,17 +38,15 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (tagList.isEmpty()) {
-            model.updateFilteredListToShowAll();
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else {
-            model.updateFilteredTaskList(tagList);
-            return new CommandResult(getSuccessMessageListUnder(tagList));
-        }
+        model.updateFilteredTaskList(type, tagList);
+        CommandResult commandResult = tagList.isEmpty() ?
+                                      new CommandResult(MESSAGE_SUCCESS) :
+                                      new CommandResult(getSuccessMessageListUnder(tagList));
+        return commandResult;
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 
     public static String getSuccessMessageListUnder(UniqueTagList tagList) {
@@ -57,5 +56,11 @@ public class ListCommand extends Command {
         }
         message = message.trim();
         return message;
+    }
+
+    public enum TaskType {
+        pending,
+        finished,
+        overdue
     }
 }

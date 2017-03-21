@@ -1,8 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.events.ui.ShowHelpRequestEvent;
 
@@ -11,7 +8,6 @@ import seedu.doist.commons.events.ui.ShowHelpRequestEvent;
  */
 public class HelpCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("help"));
     public static final String DEFAULT_COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -27,6 +23,6 @@ public class HelpCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

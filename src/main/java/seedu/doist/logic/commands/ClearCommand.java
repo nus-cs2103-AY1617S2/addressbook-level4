@@ -1,8 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import seedu.doist.model.TodoList;
 
 /**
@@ -10,7 +7,6 @@ import seedu.doist.model.TodoList;
  */
 public class ClearCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("clear"));
     public static final String DEFAULT_COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "To-do list has been cleared!";
 
@@ -22,6 +18,6 @@ public class ClearCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

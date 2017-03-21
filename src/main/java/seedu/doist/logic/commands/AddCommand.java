@@ -1,8 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
@@ -11,8 +8,6 @@ import seedu.doist.model.task.UniqueTaskList;
  * Adds a person to the address book.
  */
 public class AddCommand extends Command {
-
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("add", "do"));
     public static final String DEFAULT_COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords() + ": Adds a task to Doist\n"
@@ -42,6 +37,6 @@ public class AddCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

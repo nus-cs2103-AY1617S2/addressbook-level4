@@ -1,8 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
@@ -14,10 +11,8 @@ import seedu.doist.model.task.ReadOnlyTask;
  * Selects a task identified using it's last displayed index from the to-do list
  */
 public class SelectCommand extends Command {
-
     public final int targetIndex;
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("select"));
     public static final String DEFAULT_COMMAND_WORD = "select";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -45,6 +40,6 @@ public class SelectCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

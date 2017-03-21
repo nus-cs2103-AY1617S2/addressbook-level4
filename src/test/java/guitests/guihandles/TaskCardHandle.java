@@ -80,7 +80,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSamePerson(ReadOnlyTask person) {
         return getDesc().equals(person.getDescription().desc)
                 && getPriority().equals(person.getPriority().toString())
-                && getFinishStatus().equals(person.getFinishedStatus().toString())
+                && getFinishStatus().equals("finished: " + person.getFinishedStatus().toString())
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -92,7 +92,7 @@ public class TaskCardHandle extends GuiHandle {
                     && getStartTime().equals(handle.getStartTime())
                     && getEndTime().equals(handle.getEndTime())
                     && getPriority().equals(handle.getPriority())
-                    && getFinishStatus().equals(handle.getFinishStatus())
+                    && getFinishStatus().equals("finished: " + handle.getFinishStatus())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);

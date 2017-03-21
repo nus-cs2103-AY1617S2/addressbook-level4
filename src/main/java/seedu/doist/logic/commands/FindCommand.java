@@ -1,7 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -10,7 +8,6 @@ import java.util.Set;
  */
 public class FindCommand extends Command {
 
-    public static ArrayList<String> commandWords = new ArrayList<>(Arrays.asList("find"));
     public static final String DEFAULT_COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = info().getUsageTextForCommandWords()
@@ -31,6 +28,6 @@ public class FindCommand extends Command {
     }
 
     public static CommandInfo info() {
-        return new CommandInfo(commandWords, DEFAULT_COMMAND_WORD);
+        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
     }
 }

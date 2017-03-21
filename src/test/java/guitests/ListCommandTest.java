@@ -33,6 +33,46 @@ public class ListCommandTest extends DoistGUITest {
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
+    @Test
+    public void testListFinished() {
+        commandBox.runCommand("ls finished");
+        assertListFinished();
+    }
+
+    @Test
+    public void testListPending() {
+        commandBox.runCommand("list pending");
+        assertListPending();
+    }
+
+    @Test
+    public void testListFinishedUnderValidTagName() {
+        try {
+            commandBox.runCommand("list finished \\under health");
+            assertListFinished();
+            UniqueTagList tagList = new UniqueTagList();
+            tagList.add(new Tag("health"));
+            assertListUnderTags(tagList);
+            assertListFinished();
+        } catch (IllegalValueException exception) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testListPendingUnderValidTagName() {
+        try {
+            commandBox.runCommand("list pending \\under health");
+            assertListFinished();
+            UniqueTagList tagList = new UniqueTagList();
+            tagList.add(new Tag("health"));
+            assertListUnderTags(tagList);
+            assertListPending();
+        } catch (IllegalValueException exception) {
+            fail();
+        }
+    }
+
     private void assertListUnderTags(UniqueTagList tagList) {
         List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
@@ -45,5 +85,20 @@ public class ListCommandTest extends DoistGUITest {
             assertTrue(doesContainAny);
         }
         assertResultMessage(ListCommand.getSuccessMessageListUnder(tagList));
+    }
+
+    private void assertListFinished() {
+        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        for (ReadOnlyTask task : displayedList) {
+            assertTrue(task.getFinishedStatus().getIsFinished());
+        }
+    }
+
+    private void assertListPending() {
+        // TODO: should add check for start time to differentiate between pending and overdue
+        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        for (ReadOnlyTask task : displayedList) {
+            assertTrue(!task.getFinishedStatus().getIsFinished());
+        }
     }
 }
