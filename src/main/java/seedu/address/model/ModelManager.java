@@ -50,7 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyTaskManager newData) {
         history.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
@@ -67,7 +67,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         history.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
@@ -86,22 +86,22 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
-        indicateAddressBookChanged();
+        indicateTaskManagerChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -115,10 +115,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
+    private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 

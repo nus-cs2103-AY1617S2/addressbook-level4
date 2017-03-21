@@ -70,6 +70,21 @@ public class TaskBuilder {
         return this;
     }
 
+    public TaskBuilder withNullNote() {
+        this.task.setNote(null);
+        return this;
+    }
+
+    public TaskBuilder withNullStartTime() {
+        this.task.setStartTime(null);
+        return this;
+    }
+
+    public TaskBuilder withNullEndTime() {
+        this.task.setEndTime(null);
+        return this;
+    }
+
     public TestTask build() {
         return this.task;
     }
