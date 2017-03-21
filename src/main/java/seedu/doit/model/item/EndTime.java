@@ -10,7 +10,7 @@ import seedu.doit.logic.parser.DateTimeParser;
  * Represents a Item's end time in the item manager. Guarantees: immutable; is
  * valid as declared in {@link #isValidEndTime(String)}
  */
-public class EndTime {
+public class EndTime  implements Comparable<EndTime> {
 
     public static final String NO_END_TIME = null;
     public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Item End Time should be 2 alphanumeric"
@@ -79,6 +79,7 @@ public class EndTime {
         return this.value.hashCode();
     }
 
+    @Override
     public int compareTo(EndTime other) {
         return this.value.compareTo(other.value);
     }

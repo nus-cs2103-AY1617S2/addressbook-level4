@@ -6,7 +6,7 @@ import seedu.doit.commons.exceptions.IllegalValueException;
  * Represents a Task's priority in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
-public class Priority {
+public class Priority implements Comparable<Priority> {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be low med high";
     public static final String PRIORITY_VALIDATION_REGEX = "(low)|(med)|(high)";
@@ -49,6 +49,23 @@ public class Priority {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    private int getPriorityValue() {
+        if (value.equals("low")) {
+            return 3;
+        } else if (value.equals("med")) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    @Override
+    public int compareTo(Priority other) {
+        Integer currPriorityValue = getPriorityValue();
+        Integer otherPriorityValue = other.getPriorityValue();
+        return currPriorityValue.compareTo(otherPriorityValue);
     }
 
 }

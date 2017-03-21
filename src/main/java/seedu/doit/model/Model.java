@@ -1,6 +1,5 @@
 package seedu.doit.model;
 
-import java.util.Comparator;
 import java.util.Set;
 
 import seedu.doit.commons.core.UnmodifiableObservableList;
@@ -68,7 +67,7 @@ public interface Model {
     /**
      * Set how the tasks are sorted
      */
-    void setTaskComparator(Comparator<Task> taskComparator);
+    void sortBy(String sortType);
 
 
 
