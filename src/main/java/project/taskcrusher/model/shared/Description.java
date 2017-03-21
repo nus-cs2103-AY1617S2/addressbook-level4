@@ -19,8 +19,7 @@ public class Description {
     /**
      * Creates a Description using the String passed
      *
-     * @throws IllegalValueException
-     *             if given description string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;

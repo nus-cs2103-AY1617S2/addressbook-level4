@@ -1,11 +1,14 @@
 package project.taskcrusher.logic.parser;
 
 import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DATE;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +19,8 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.logic.commands.AddCommand;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.IncorrectCommand;
+import project.taskcrusher.model.event.Location;
+import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.task.Deadline;
 import project.taskcrusher.model.task.Priority;
@@ -33,7 +38,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_DESCRIPTION);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG, PREFIX_PRIORITY, PREFIX_LOCATION, PREFIX_DESCRIPTION);
         argsTokenizer.tokenize(args);
 
         Matcher matcher;
@@ -51,17 +56,10 @@ public class AddCommandParser {
         final String flag = matcher.group("flag");
         final String name = matcher.group("name");
 
-        //TODO Modify below for events; will need PrettyTimeParser
-        String deadline = Deadline.NO_DEADLINE;
-        Optional<String> rawDeadline = argsTokenizer.getValue(PREFIX_DEADLINE);
-        if (rawDeadline.isPresent()) {
-            deadline = rawDeadline.get();
-        }
-
-        String priority = Priority.NO_PRIORITY;
-        Optional<String> rawPriority = argsTokenizer.getValue(PREFIX_PRIORITY);
-        if (rawPriority.isPresent()) {
-            priority = rawPriority.get();
+        String date = Deadline.NO_DEADLINE;
+        Optional<String> rawDate = argsTokenizer.getValue(PREFIX_DATE);
+        if (rawDate.isPresent()) {
+            date = rawDate.get();
         }
 
         String description = Description.NO_DESCRIPTION;
@@ -74,10 +72,21 @@ public class AddCommandParser {
 
         switch (flag) {
         case AddCommand.EVENT_FLAG:
-            //TODO when events are supported
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            String location = Location.NO_LOCATION;
+            Optional<String> rawLocation = argsTokenizer.getValue(PREFIX_LOCATION);
+            if (rawLocation.isPresent()) {
+                location = rawLocation.get();
+            }
+
+            return addEvent(name, date, location, description, tags);
         case AddCommand.TASK_FLAG:
-            return addTask(name, deadline, priority, description, tags);
+            String priority = Priority.NO_PRIORITY;
+            Optional<String> rawPriority = argsTokenizer.getValue(PREFIX_PRIORITY);
+            if (rawPriority.isPresent()) {
+                priority = rawPriority.get();
+            }
+
+            return addTask(name, date, priority, description, tags);
         default:
             //TODO fix messages
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -100,8 +109,28 @@ public class AddCommandParser {
         }
     }
 
-    private void addEvent() {
-        //TODO when events are supported
+    private Command addEvent(String name, String timesToParse, String location, String description, Set<String> tags) {
+
+        try {
+
+            String[] timeslotsAsStrings = timesToParse.split("or");
+            List<Timeslot> timeslots = new ArrayList<>();
+            for (String t: timeslotsAsStrings) {
+                String[] dates = t.split("to");
+                timeslots.add(new Timeslot(dates[0], dates[1]));
+            }
+
+            return new AddCommand(
+                    name,
+                    timeslots,
+                    location,
+                    description,
+                    tags);
+        } catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
 
 }
