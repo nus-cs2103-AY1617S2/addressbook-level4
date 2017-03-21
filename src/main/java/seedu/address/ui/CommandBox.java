@@ -68,9 +68,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0140042A
     /**
      * Hijacks the tab character for auto-completion, up/down for iterating through the command
-     * @param ke
      */
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
