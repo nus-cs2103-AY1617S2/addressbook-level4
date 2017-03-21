@@ -32,9 +32,6 @@ public interface Model {
 	 */
 	void resetData(ReadOnlyTaskManager newData);
 
-	/** Sorts the filtered event list */
-	void sortFilteredEventList();
-
 	void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException;
 
 	/**
@@ -60,9 +57,16 @@ public interface Model {
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
 
-    void getPreviousState();
+	void updateFilteredListToShowLocation(Set<String> keywords);
 
-    void getNextState();
+	void updateFilteredListToShowDate(Set<String> keywords);
 
+	void updateFilteredListToShowStartTime(Set<String> keywords);
+
+	void updateFilteredListToShowTags(Set<String> keywords);
+
+	void getPreviousState();
+
+	void getNextState();
 
 }
