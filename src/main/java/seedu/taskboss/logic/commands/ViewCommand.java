@@ -10,7 +10,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 /**
  * Selects a task identified using it's last displayed index from TaskBoss.
  */
-public class SelectCommand extends Command {
+public class ViewCommand extends Command {
 
     public final int targetIndex;
 
@@ -24,7 +24,7 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
 
-    public SelectCommand(int targetIndex) {
+    public ViewCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 

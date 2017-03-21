@@ -34,7 +34,7 @@ import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.ListCommand;
-import seedu.taskboss.logic.commands.SelectCommand;
+import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.logic.parser.DateTimeParser;
@@ -332,7 +332,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
     }
 
@@ -349,7 +349,7 @@ public class LogicManagerTest {
         TaskBoss expectedAB = helper.generateTaskBoss(threeTasks);
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
+        assertCommandSuccess("select 2", String.format(ViewCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
