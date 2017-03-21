@@ -1,5 +1,7 @@
 package typetask.logic;
 
+import java.io.IOException;
+
 import javafx.collections.ObservableList;
 import typetask.logic.commands.CommandResult;
 import typetask.logic.commands.exceptions.CommandException;
@@ -15,8 +17,9 @@ public interface Logic {
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
+     * @throws IOException
      */
-    CommandResult execute(String commandText) throws CommandException;
+    CommandResult execute(String commandText) throws CommandException, IOException;
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();

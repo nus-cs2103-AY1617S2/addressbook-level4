@@ -24,6 +24,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     String getTaskManagerFilePath();
 
     @Override
+    void setTaskManagerFilePath(String pathName);
+
+    @Override
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     @Override

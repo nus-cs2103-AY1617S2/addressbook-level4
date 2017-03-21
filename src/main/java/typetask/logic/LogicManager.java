@@ -1,9 +1,11 @@
 package typetask.logic;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import typetask.commons.core.ComponentManager;
+import typetask.commons.core.Config;
 import typetask.commons.core.LogsCenter;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.CommandResult;
@@ -21,17 +23,21 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final Storage storage;
+    private final Config config;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, Config config) {
         this.model = model;
+        this.config = config;
+        this.storage = storage;
         this.parser = new Parser();
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException {
+    public CommandResult execute(String commandText) throws CommandException, IOException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model);
+        command.setData(model, storage, config);
         return command.execute();
     }
 
