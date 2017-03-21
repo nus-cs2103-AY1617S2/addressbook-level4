@@ -7,6 +7,7 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMemento;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
@@ -60,6 +61,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToEdit));
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
@@ -99,6 +101,7 @@ public class EditCommand extends Command {
         } catch (IllegalValueException e) {
             throw new CommandException(e.getMessage());
         }
+
 
         return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags, originalId);
     }

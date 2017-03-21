@@ -14,6 +14,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -109,6 +110,18 @@ public class TaskList implements ReadOnlyTaskList {
         tasks.updateTask(index, editedTask);
     }
 
+    public void updateTaskById(TaskId id, ReadOnlyTask newReadOnlyTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert newReadOnlyTask != null;
+
+        Task newTask = new Task(newReadOnlyTask);
+        syncMasterTagListWith(newTask);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // in the task list.
+        tasks.updateTaskById(id, newTask);
+    }
+
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
@@ -183,5 +196,9 @@ public class TaskList implements ReadOnlyTaskList {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
+    }
+
+    public Task getTaskById(TaskId id) {
+        return tasks.getTaskById(id);
     }
 }

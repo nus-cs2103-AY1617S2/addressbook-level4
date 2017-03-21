@@ -14,7 +14,6 @@ public class TaskMemento {
     public final Task oldTask;
     public final Task newTask;
 
-
     public TaskMemento(Task oldTask, Task newTask) {
         assert oldTask != null || newTask != null;
         if (oldTask != null && newTask != null) {

@@ -8,6 +8,7 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMementos;
 import seedu.task.logic.parser.Parser;
 import seedu.task.model.Model;
 import seedu.task.model.task.ReadOnlyTask;
@@ -21,10 +22,12 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final TaskMementos taskMementos;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, TaskMementos taskMementos) {
         this.model = model;
         this.parser = new Parser();
+        this.taskMementos = taskMementos;
     }
 
     @Override
@@ -32,6 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+        command.setHistory(taskMementos);
         return command.execute();
     }
 
