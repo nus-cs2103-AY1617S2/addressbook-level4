@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
@@ -15,12 +17,13 @@ import seedu.address.model.task.Venue;
 public class TestTask implements ReadOnlyTask {
 
     private Title title;
-    private EndTime endtime;
-    private StartTime starttime;
-    private Venue venue;
-    private UrgencyLevel urgencyLevel;
-    private Description description;
+    private Optional<Venue> venue;
+    private Optional<StartTime> starttime;
+    private Optional<EndTime> endtime;
+    private Optional<UrgencyLevel> urgencyLevel;
+    private Optional<Description> description;
     private UniqueTagList tags;
+    private String category;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -32,35 +35,35 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.title = taskToCopy.getTitle();
         this.venue = taskToCopy.getVenue();
-        this.starttime = taskToCopy.getStartTime();
         this.endtime = taskToCopy.getEndTime();
         this.urgencyLevel = taskToCopy.getUrgencyLevel();
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
+        this.category = taskToCopy.getTaskCategory();
     }
-
+    //@@author A0122017Y
     public void setTitle(Title title) {
         this.title = title;
     }
 
-    public void setEndTime(EndTime endtime) {
-        this.endtime = endtime;
-    }
-
     public void setStartTime(StartTime starttime) {
-        this.starttime = starttime;
+        this.starttime = Optional.of(starttime);
+    }
+    
+    public void setEndTime(EndTime endtime) {
+        this.endtime = Optional.of(endtime);
     }
 
     public void setVenue(Venue venue) {
-        this.venue = venue;
+        this.venue = Optional.of(venue);
     }
 
 	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
-		this.urgencyLevel = urgencyLevel;
+		this.urgencyLevel = Optional.of(urgencyLevel);
 	}
 
     public void setDescription(Description description) {
-        this.description = description;
+        this.description = Optional.of(description);
     }
 
     public void setTags(UniqueTagList tags) {
@@ -71,30 +74,35 @@ public class TestTask implements ReadOnlyTask {
     public Title getTitle() {
         return title;
     }
+    
+    @Override
+    public String getTaskCategory() {
+        return category;
+    }
+    
+    @Override
+    public Optional<StartTime> getStartTime() {
+        return starttime;
+    }
+    
+    @Override
+    public Optional<EndTime> getEndTime() {
+        return endtime;
+    }
 
     @Override
-    public Venue getVenue() {
+    public Optional<Venue> getVenue() {
         return venue;
     }
 
     @Override
-    public StartTime getStartTime() {
-        return starttime;
-    }
-
-    @Override
-    public EndTime getEndTime() {
-        return endtime;
-    }
-
-	@Override
-	public UrgencyLevel getUrgencyLevel() {
-		return urgencyLevel;
-	}
-
-    @Override
-    public Description getDescription() {
+    public Optional<Description> getDescription() {
         return description;
+    }
+
+    @Override
+    public Optional<UrgencyLevel> getUrgencyLevel() {
+        return urgencyLevel;
     }
 
     @Override
@@ -110,12 +118,12 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("@@" + this.getVenue().value + " ");
-        sb.append("from:" + this.getStartTime().value + " ");
-        sb.append("to:" + this.getEndTime().value + " ");
-        sb.append("**" + this.getUrgencyLevel().value + " ");
-        sb.append("d:" + this.getDescription().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("##" + s.tagName + " "));
+        sb.append("place/" + this.getVenueString() + " ");
+        sb.append("from/" + this.getStartTimeString() + " ");
+        sb.append("to/" + this.getEndTimeString() + " ");
+        sb.append("level/" + this.getUrgencyLevelString() + " ");
+        sb.append("des/" + this.getDescriptionString() + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
 }

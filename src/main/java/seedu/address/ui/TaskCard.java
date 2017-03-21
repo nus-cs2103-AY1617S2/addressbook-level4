@@ -29,20 +29,69 @@ public class TaskCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
+    
+    private ReadOnlyTask task;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
+        this.task = task;
         title.setText(task.getTitle().title);
         id.setText(displayedIndex + ". ");
-        venue.setText("Venue at: " + task.getVenue().value);
-        startTime.setText("Start from: " + task.getStartTime().value);
-        endTime.setText("End at: " + task.getEndTime().value);
-        urgencyLevel.setText("Urgency: " + task.getUrgencyLevel().value);
-        description.setText("Description: " + task.getDescription().value);
+        initialiseVenue();
+        initialiseStartTime();
+        initialiseEndTime();
+        initialiseUrgencyLevel();
+        initialiseDescription();
         initTags(task);
     }
+    
+    private void initialiseVenue() {
+        venue.setText(task.getVenueString().trim());
+        if (task.getVenue().isPresent()) {
+            venue.setManaged(true);
+        } else {
+            venue.setManaged(false);
+        }
+    }
+    
+    private void initialiseStartTime() {
+        startTime.setText(task.getStartTimeString().trim());
+        if (task.getStartTime().isPresent()) {
+            startTime.setManaged(true);
+        } else {
+            startTime.setManaged(false);
+        }
+    }
+  
+    private void initialiseEndTime() {
+        endTime.setText(task.getEndTimeString().trim());
+        if (task.getEndTime().isPresent()) {
+            endTime.setManaged(true);
+        } else {
+            endTime.setManaged(false);
+        }
+    }    
+    
+    private void initialiseUrgencyLevel() {
+        urgencyLevel.setText(task.getUrgencyLevelString().trim());
+        if (task.getVenue().isPresent()) {
+            urgencyLevel.setManaged(true);
+        } else {
+            urgencyLevel.setManaged(false);
+        }
+    }
 
+    private void initialiseDescription() {
+        description.setText(task.getDescriptionString().trim());
+        if (task.getDescription().isPresent()) {
+            description.setManaged(true);
+        } else {
+            description.setManaged(false);
+        }
+    }
+    
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+    //@@
 }

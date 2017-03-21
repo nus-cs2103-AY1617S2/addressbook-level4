@@ -25,19 +25,21 @@ import seedu.address.commons.util.CollectionUtil;
  */
 public class UniqueTagList implements Iterable<Tag> {
 
+    private static final String NO_TAGS_AVAILABLE_MESSAGE = "There are no tags in the to-do list!";
     private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs empty TagList.
      */
-    public UniqueTagList() {}
+    public UniqueTagList() {
+    }
 
     /**
      * Creates a UniqueTagList using given String tags.
      * Enforces no nulls or duplicates.
      */
     public UniqueTagList(String... tags) throws DuplicateTagException, IllegalValueException {
-        final List<Tag> tagList = new ArrayList<Tag>();
+        ArrayList<Tag> tagList = new ArrayList<Tag>();
         for (String tag : tags) {
             tagList.add(new Tag(tag));
         }
@@ -81,6 +83,18 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public UniqueTagList(UniqueTagList source) {
         internalList.addAll(source.internalList); // insulate internal list from changes in argument
+    }
+    
+    public String getTagListToString() {
+        if (this.internalList.isEmpty()) {
+            return NO_TAGS_AVAILABLE_MESSAGE;
+        } else {
+            String display = "Available tags in to-do list: ";
+            for (Tag tag: internalList){
+                display += tag.toString() + " ";
+            }
+            return display;
+        }
     }
 
     /**

@@ -23,7 +23,9 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final ToDoList todoList;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredFloats;
+    private FilteredList<ReadOnlyTask> filteredTasks;
+    private FilteredList<ReadOnlyTask> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given ToDoList and userPrefs.
@@ -35,7 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with to-do list: " + todoList + " and user prefs " + userPrefs);
 
         this.todoList = new ToDoList(todoList);
-        filteredTasks = new FilteredList<>(this.todoList.getTaskList());
+        filteredTasks = new FilteredList<>(this.todoList.getFilteredTasks());
+        filteredFloats = new FilteredList<>(this.todoList.getFilteredFloats());
+        filteredEvents = new FilteredList<>(this.todoList.getFilteredEvents());
     }
 
     public ModelManager() {
@@ -80,17 +84,29 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.updateTask(todoListIndex, editedTask);
         indicateToDoListChanged();
     }
-
+ //@@author A0143648Y
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredEventList() {
+        return new UnmodifiableObservableList<>(filteredEvents);
+    }
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredFloatList() {
+        return new UnmodifiableObservableList<>(filteredFloats);
+    }
 
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        filteredFloats.setPredicate(null);
+        filteredEvents.setPredicate(null);
     }
 
     @Override
@@ -100,6 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        filteredFloats.setPredicate(expression::satisfies);
+        filteredEvents.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -141,11 +159,15 @@ public class ModelManager extends ComponentManager implements Model {
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-
+//@@author A0143648Y
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+                    .filter(keyword -> hasContainedKeyword(task.getTitle().title, keyword)
+                            || hasContainedKeyword(task.getStartTimeString(), keyword)
+                            || hasContainedKeyword(task.getEndTimeString(), keyword)
+                            || hasContainedKeyword(task.getDescriptionString(), keyword)
+                            || hasContainedKeyword(task.getVenueString(), keyword))
                     .findAny()
                     .isPresent();
         }
@@ -154,6 +176,21 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    private boolean hasContainedKeyword (String searchMe, String findMe ){
+        int searchMeLength = searchMe.length();
+        int findMeLength = findMe.length();
+        boolean foundIt = false;
+        for (int i = 0; 
+             i <= (searchMeLength - findMeLength);
+             i++) {
+           if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+              foundIt = true;
+              break;
+           }
+    }
+        return foundIt;
     }
 
 }

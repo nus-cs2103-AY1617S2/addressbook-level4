@@ -24,7 +24,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         int todoListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby").withVenue("91234567")
-                .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3").withTags("husband").build();
+                .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3").withUrgencyLevel("1").withDescription("i love you").withTags("husband").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTask);
     }
@@ -53,7 +53,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Tuition part-time job");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
@@ -105,7 +105,7 @@ public class EditCommandTest extends ToDoListGuiTest {
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline v/85355255 s/alice@gmail.com "
                                 + "e/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -128,6 +128,6 @@ public class EditCommandTest extends ToDoListGuiTest {
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[todoListIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
