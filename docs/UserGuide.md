@@ -59,29 +59,30 @@ FlexiTask will also be able to sort your tasks according to their priorities, da
 
 `General Command Format`
 
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items in `CURLY_BRACKETS` are exclusive, only one of them can be used.
-> * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
-> * Commands entered must be alphanumeric (only contains letters and words).
+> * Words in `UPPER_CASE` are the parameters
+> * Items in `SQUARE_BRACKETS` are optional
+> * Items in `CURLY_BRACKETS` are exclusive, only one of them can be used
+> * Items with `...` after them can have multiple instances
+> * Parameters can be in any order
+> * Commands can be case-insensitive (Both "Add" and "add" are acceptable)
+> * Commands entered must be alphanumeric (only contains letters and words)
 > * Commands support ***flexible commands:*** Common alternatives for the keywords will be accepted. These will be listed in the respective sections below.
 
 `Entering in dates`: Flexitask supports flexible date formats that can be entered in the foramts specified below:
 
 >  1. `Formal dates`: 
-> * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included. The format DDMMYYYY is used.
+> * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included The format DDMMYYYY is used
 >  2.  `Relaxed dates`:
-> * FlexiTask also supports a more casual style of Relaxed dates. There is no standard format to it.
+> * FlexiTask also supports a more casual style of Relaxed dates. There is no standard format to it
 >  3. `Relative dates`:
-> * FlexiTask supports text that describes a relation with the current date.
+> * FlexiTask supports text that describes a relation with the current date
 
 <br>
 
 <a name="help"/>
-### 3.1. Viewing help: `help` 
+### 3.1. Viewing help: help 
 
-Opens a new window which shows the User Guide of FlexiTask as shown in Figure 2.
+Opens a new window which shows the User Guide of FlexiTask as shown in Figure 2
 
 Format: `help`
 
@@ -89,8 +90,8 @@ Format: `help`
 
 <br>
 
-<a name="add"/>
-### 3.2. Adding a task: `add` 
+<a name="add"></a>
+### 3.2. Adding a task: add 
 
 Adds a task
 > ***Flexible command:*** `insert`, `create`, `new`, `adds`
@@ -102,11 +103,15 @@ Format: `add TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...] [d/DATES].
 * Use `TASK_DETAILS` to specify the name of the task to be added<br>
 * Use `PRIORITY_LEVEL` to specify importance. Enter one of the three options:<br>
     high, medium, low
+> ***Flexible command:*** `priority/`, `urgency`<br>    
 * Use `COMMENTS` to add additional description(s) to the task<br>
+> ***Flexible command:*** `comment/`, `comments/`, `info/`<br>
 * Use `TAGS` to assign category to each task<br>
+> ***Flexible command:*** `tag/`, `tags/` <br>
 > Each tag is separated with spaces after the '/t' command<br>
 > Example: *t/project leisure* means 2 tags of "project" and "leisure" to be created 
 * Use `DATES` to add a deadline or a timeframe to the task.<br>
+> ***Flexible command:*** `date/`, `dates/`<br>
 > Date and time can be written in any order, as it is processed by an inbuilt natural language processor
 
 Example:
@@ -137,9 +142,11 @@ As shown in Figure 3, priority is displayed next to the task name and tags are d
 
 <br>
 
-<a name="find"/>
-### 3.3. Finding a task: `find`
+<a name="find"></a>
+### 3.3. Finding a task: find
 Finds all tasks with the following keywords<br>
+
+> ***Flexible command:*** `locate`
 
 Format: `find KEYWORD...`
 
@@ -155,8 +162,8 @@ Example:
 
 <br>
 
-<a name="list"/>
-### 3.4. Listing all tasks: `list`
+<a name="list"></a>
+### 3.4. Listing all tasks: list
 Shows a list of all tasks or groups of tasks<br>
 
 Format: `list`
@@ -166,10 +173,12 @@ Format: `list`
 
 <br>
 
-<a name="delete"/>
-### 3.5. Deleting a task: `delete`
+<a name="delete"></a>
+### 3.5. Deleting a task: delete
 
 Deletes a task <br>
+
+> ***Flexible command:*** `remove`, `deletes`, `cancel`
 
 Format: `delete INDEX`
 
@@ -188,8 +197,8 @@ delete 1
 
 <br>
 
-<a name="done"/>
-### 3.6. Marking a task: `done`
+<a name="done"></a>
+### 3.6. Marking a task: done
 
 Marks a tasks as completed<br>
 
@@ -211,10 +220,12 @@ Example:
 
 <br>
 
-<a name="edit"/>
-### 3.7. Modifies a current task: `edit`
+<a name="edit"></a>
+### 3.7. Modifies a current task: edit
 
 Edits a task with the specified index. All parameters in the task with the specified index can be edited<br>
+
+> ***Flexible command:*** `modify`, `change`, `edits`
 
 Format: `edit INDEX TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...] [d/DATES]...`
 
@@ -224,8 +235,8 @@ Example:
 
 <br>
 
-<a name="undo"/>
-### 3.8 Undoing changes: `undo`
+<a name="undo"></a>
+### 3.8 Undoing changes: undo
 
 Reverts the results of the previous action, in the event a mistake is made
 
@@ -248,17 +259,20 @@ Example:
 
 <br>
 
-<a name="redo"/>
-### 3.9 Reverting undos: `redo`
+<a name="redo"></a>
+### 3.9 Reverting undos: redo
 
 Reverts previous undo command(s)
 
 Format: `redo`
 
 <br>
-<a name="sort"/>
-### 3.10. Sorting tasks: `sort`
+<a name="sort"></a>
+## 3.10. Sorting tasks: sort
 Sorts tasks based on task name, start date, end date or priority level.<br>
+
+> ***Flexible command:*** `arrange`
+
 Format: `sort {TASK_DETAILS}{d/START_DATE}{d/END_DATE}{PRIORITY_LEVEL}` 
 >> Only 1 of 3 parameters can be used
 
@@ -273,8 +287,8 @@ Example:
 
 <br>
 
-<a name="clear"/>
-### 3.11. Clearing entries: `clear`
+<a name="clear"></a>
+### 3.11. Clearing entries: clear
 Clears all tasks or groups of task<br>
 Format: `clear [TAG]...`
 > Without parameters, clear will delete all tasks from the task manager<br>
@@ -286,8 +300,8 @@ Example:
 
 <br>
 
-<a name="save"/>
-### 3.12. Saving the program data to a specified path: `save`
+<a name="save"></a>
+### 3.12. Saving the program data to a specified path: save
 Save FlexiTask list to a file specified by user<br>
 Format: `save FILE_PATH/FILE_NAME.xml`
 
@@ -299,8 +313,8 @@ Example:
 
 <br>
 
-<a name="load"/>
-### 3.13. Loading the program data from a specified path: `load`
+<a name="load"></a>
+### 3.13. Loading the program data from a specified path: load
 Load FlexiTask list from file specified by user<br>
 Format: `load FILE_PATH/FILE_NAME.xml`
 
@@ -310,8 +324,8 @@ Format: `load FILE_PATH/FILE_NAME.xml`
 Example:
 * load users/user/Documents/mytasklist.xml
 
-<a name="exit"/>
-### 3.14. Exiting the program: `exit`
+<a name="exit"></a>
+### 3.14. Exiting the program: exit
 Exits the program<br>
 Format: `exit`
 
