@@ -26,6 +26,7 @@ import seedu.taskboss.model.task.PriorityLevel;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern SORT_TYPE_ARGS_FORMAT = Pattern.compile("(?<sortType>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -42,7 +43,23 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
+    }
 
+    /**
+     * Returns the specified sort type in the {@code command} if it is a valid sort type
+     * Returns an {@code Optional.empty()} otherwise.
+     */
+    public static Optional<String> parseSortType(String command) {
+        final Matcher matcher = SORT_TYPE_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String sortType = matcher.group("sortType");
+        if (sortType == null) {
+            return Optional.empty();
+        }
+        return Optional.of(sortType);
     }
 
     /**
