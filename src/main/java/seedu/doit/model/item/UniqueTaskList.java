@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.DuplicateDataException;
 import seedu.doit.commons.util.CollectionUtil;
-import seedu.doit.model.item.Task.DefaultTaskComparator;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -22,7 +21,7 @@ import seedu.doit.model.item.Task.DefaultTaskComparator;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-    private Comparator<Task> taskComparator = new DefaultTaskComparator();
+    private Comparator<Task> taskComparator = new TaskNameComparator();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
