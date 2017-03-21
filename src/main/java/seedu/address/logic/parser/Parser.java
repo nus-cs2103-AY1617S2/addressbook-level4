@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -131,17 +129,7 @@ public class Parser {
             return new DeleteCommand(lastShownList.size() + 1);
 
         case EditCommand.COMMAND_WORD:
-            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
-            argsTokenizer.tokenize(arguments);
-            List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
-            index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-            ReadOnlyTask taskToEdit = lastShownList.get(index.get() - 1);
-            final StringBuilder editBuilder = new StringBuilder();
-            editBuilder.append(" ");
-            editBuilder.append(index.get().toString());
-            editBuilder.append(" ");
-            editBuilder.append(ParserUtil.getTaskArgs(taskToEdit));
-            return new EditCommandParser().parse(editBuilder.toString());
+            return new EditCommandParser().parseInverse(arguments, lastShownList);
 
         case DeleteCommand.COMMAND_WORD:
             index = ParserUtil.parseIndex(arguments);
