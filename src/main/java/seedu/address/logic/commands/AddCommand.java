@@ -30,6 +30,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_INVALID_EVENT = "Please make sure to define an end time "
+            + "if the start time is already set. The end time "
+            + "should also be after the current time and the start time.";
 
     private final Task toAdd;
 
@@ -59,12 +62,14 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
+            if (!Task.isValidEvent(toAdd)) {
+                throw new CommandException(MESSAGE_INVALID_EVENT);
+            }
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
     }
 
 }

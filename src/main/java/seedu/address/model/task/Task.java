@@ -1,8 +1,10 @@
 package seedu.address.model.task;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -136,6 +138,35 @@ public class Task implements ReadOnlyTask {
         this.setNote(replacement.getNote().orElse(null));
         this.setStartTime(replacement.getStartTime().orElse(null));
         this.setTags(replacement.getTags());
+    }
+
+    /**
+     * Returns true if the end time is later than both the start time and the current time
+     */
+    public static boolean isValidEvent(ReadOnlyTask toCheck) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime endTime;
+        LocalDateTime startTime;
+
+        // If both start time and end time does not exist
+        if (!toCheck.getEndTime().isPresent() && !toCheck.getEndTime().isPresent()) {
+            return true;
+        }
+
+        // If only start time exists
+        if (!toCheck.getEndTime().isPresent() && toCheck.getStartTime().isPresent()) {
+            return false;
+        }
+
+        try {
+            endTime = toCheck.getEndTime().orElse(new DateTime(currentTime)).dateTime;
+            startTime = toCheck.getStartTime().orElse(new DateTime(currentTime)).dateTime;
+            return startTime.isBefore(endTime) && endTime.isAfter(currentTime);
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

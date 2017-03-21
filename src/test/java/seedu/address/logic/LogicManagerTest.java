@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -220,6 +221,22 @@ public class LogicManagerTest {
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
+
+    }
+
+    @Test
+    public void executeAddInvalidEventNotAllowed() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask(1);
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+        toBeAdded.setEndTime(new DateTime(yesterday));
+
+        // setup starting state
+        model.addTask(toBeAdded); // task already in internal TaskManager
+
+        // execute command and verify result
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_INVALID_EVENT);
 
     }
 
