@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
@@ -41,6 +42,7 @@ public class UniqueTagList implements Iterable<Tag> {
         for (String tag : tags) {
             tagList.add(new Tag(tag));
         }
+        Collections.sort(tagList);
         setTags(tagList);
     }
 
@@ -54,6 +56,7 @@ public class UniqueTagList implements Iterable<Tag> {
         if (!CollectionUtil.elementsAreUnique(initialTags)) {
             throw new DuplicateTagException();
         }
+        Collections.sort(initialTags);
         internalList.addAll(initialTags);
     }
 
@@ -150,8 +153,8 @@ public class UniqueTagList implements Iterable<Tag> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTagList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTagList) other).internalList));
+                && this.internalList.sorted().equals(
+                ((UniqueTagList) other).internalList.sorted()));
     }
 
     public boolean equalsOrderInsensitive(UniqueTagList other) {
@@ -176,4 +179,8 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
 
+    public UniqueTagList sort() {
+        Collections.sort(internalList);
+        return new UniqueTagList(this.toSet());
+    }
 }

@@ -68,8 +68,8 @@ public class TaskListPanelHandle extends GuiHandle {
 
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
-     * @param taskModified Task that was modified
-     * @param tasks A list of task in the correct order.
+     * @param taskType of list under comparison
+     * @param tasks A list of task in the correct order to compare with panel.
      */
     public boolean isListMatching(TaskType taskType, ReadOnlyTask... tasks) {
         return this.isListMatching(0, taskType, tasks);
@@ -85,6 +85,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
         ListView<ReadOnlyTask> listView = getListView(taskType);
         ReadOnlyTask[] filteredTasks = TestUtil.getTasksByTaskType(tasks, taskType);
+
 
         if (filteredTasks.length + startPosition != listView.getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +

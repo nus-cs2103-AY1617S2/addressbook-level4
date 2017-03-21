@@ -83,7 +83,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public UniqueTagList getTags() {
-        return tags;
+        return tags.sort();
     }
 
     // Setter

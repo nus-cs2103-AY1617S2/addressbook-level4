@@ -37,7 +37,7 @@ public class AddCommandTest extends ToDoListGuiTest {
         assertAddSuccess(td.task1);
 
         //invalid command
-        commandBox.runCommand(AddCommand.COMMAND_WORD);
+        commandBox.runCommand(AddCommand.COMMAND_WORD + " e-1");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 

@@ -319,7 +319,7 @@ public class TestUtil {
      * @param type
      * @return Filtered ReadOnlyTask[] by task type
      */
-    public static ReadOnlyTask[] getTasksByTaskType(ReadOnlyTask[] tasks, TaskType type) {
+    public static TestTask[] getTasksByTaskType(ReadOnlyTask[] tasks, TaskType type) {
         return Arrays.stream(tasks)
                 .filter(task -> task.getTaskType() == type)
                 .toArray(TestTask[]::new);
