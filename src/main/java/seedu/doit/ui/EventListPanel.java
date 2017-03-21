@@ -34,7 +34,8 @@ public class EventListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> eventList) {
         mainTaskList = eventList;
-        this.taskListView.setItems(eventList.filtered(task -> task.hasStartTime() && task.hasEndTime()));
+        this.taskListView.setItems(eventList.filtered(task -> task.hasStartTime()
+                                   && task.hasEndTime() && !task.getIsDone()));
         this.taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }

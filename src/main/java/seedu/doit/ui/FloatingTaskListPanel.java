@@ -35,7 +35,8 @@ public class FloatingTaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> floatingTaskList) {
         mainTaskList = floatingTaskList;
-        this.taskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime() && !task.hasEndTime()));
+        this.taskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime()
+                                   && !task.hasEndTime() && !task.getIsDone()));
         this.taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }

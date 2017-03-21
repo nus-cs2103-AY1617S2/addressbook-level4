@@ -19,6 +19,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private Description description;
     private StartTime startTime;
     private EndTime endTime;
+    private boolean isDone;
     private Priority priority;
     private UniqueTagList tags;
 
@@ -34,6 +35,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.priority = taskToCopy.getPriority();
         this.startTime = taskToCopy.getStartTime();
         this.endTime = taskToCopy.getEndTime();
+        this.isDone = false;
         this.description = taskToCopy.getDescription();
         this.tags = taskToCopy.getTags();
     }
@@ -54,6 +56,15 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
@@ -82,6 +93,8 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public void setDescription(Description description) {
         this.description = description;
     }
+
+
 
     @Override
     public boolean hasStartTime() {
@@ -161,7 +174,7 @@ public class TestTask implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     private int compareName(ReadOnlyTask other) {
-        return this.getName().toString().compareTo(other.getName().toString());
+        return this.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
 
     public int compareItems(ReadOnlyTask other) {

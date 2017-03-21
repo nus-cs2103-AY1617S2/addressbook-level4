@@ -33,6 +33,12 @@ public interface Model {
     void addTask(Task task) throws DuplicateTaskException;
 
     /**
+     * Marks the given task as completed
+     */
+    void markTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException;
+
+    /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
      * @throws DuplicateTaskException    if updating the task's details causes the task to be equivalent to
@@ -55,6 +61,9 @@ public interface Model {
     /**
      * Updates the filter of the filtered task list to filter by the given keywords
      */
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
+            Set<String> descriptionKeywords);
+
+
 
 }

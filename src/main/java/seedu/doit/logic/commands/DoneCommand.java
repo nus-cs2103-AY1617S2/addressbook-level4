@@ -15,6 +15,8 @@ public class DoneCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Completed Task: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+
     public final int targetIndex;
 
     public DoneCommand(int targetIndex) {
@@ -30,9 +32,11 @@ public class DoneCommand extends Command {
             ReadOnlyTask taskToDone = lastShownTaskList.get(targetIndex - 1);
 
             try {
-                model.deleteTask(taskToDone);
+                model.markTask(targetIndex - 1, taskToDone);
             } catch (UniqueTaskList.TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
 
             return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
