@@ -34,6 +34,11 @@ public class DateTimeTest {
             DateTime nextWeek = new DateTime(now.plusDays(7));
             assertFalse(nextWeek.isCurrentWeek());
 
+            // This Sunday should be in current week
+            int daysToSunday = 7 - now.getDayOfWeek().getValue();
+            DateTime sunday = new DateTime(now.plusDays(daysToSunday));
+            assertTrue(sunday.isCurrentWeek());
+
             // Next Monday should not be in current week
             DateTime nextMonday = new DateTime(now.plusDays(daysToSunday + 1));
             assertFalse(nextMonday.isCurrentWeek());
