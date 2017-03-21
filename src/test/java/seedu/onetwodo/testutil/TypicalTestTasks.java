@@ -99,6 +99,9 @@ public class TypicalTestTasks {
         }
     }
 
+    /**
+     * @return TestTask[] containing default tasks A to I
+     */
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{taskA, taskB, taskC, taskD, taskE, taskF, taskG, taskH, taskI};
     }

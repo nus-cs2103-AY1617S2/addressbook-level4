@@ -27,6 +27,11 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
     private TaskType taskType;
 
+    // For tests robot.lookup(#{ID})
+    public static final String DEADLINE_PANEL_ID = "deadline-panel";
+    public static final String EVENT_PANEL_ID = "event-panel";
+    public static final String TODO_PANEL_ID = "todo-panel";
+
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
@@ -34,8 +39,23 @@ public class TaskListPanel extends UiPart<Region> {
             TaskType taskType) {
         super(FXML);
         this.taskType = taskType;
+        setId(taskType);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
+    }
+
+    private void setId(TaskType taskType) {
+        switch (taskType) {
+        case DEADLINE:
+            taskListView.setId(DEADLINE_PANEL_ID);
+            break;
+        case EVENT:
+            taskListView.setId(EVENT_PANEL_ID);
+            break;
+        case TODO:
+            taskListView.setId(TODO_PANEL_ID);
+            break;
+        }
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {

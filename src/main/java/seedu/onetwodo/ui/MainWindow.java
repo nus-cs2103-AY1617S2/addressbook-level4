@@ -150,6 +150,7 @@ public class MainWindow extends UiPart<Region> {
         deadlineTaskListPanel = new TaskListPanel(getDeadlineListPlaceholder(), getDoneTaskList(), TaskType.DEADLINE);
         eventTaskListPanel = new TaskListPanel(getEventListPlaceholder(), getDoneTaskList(), TaskType.EVENT);
         todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), getDoneTaskList(), TaskType.TODO);
+
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
 
