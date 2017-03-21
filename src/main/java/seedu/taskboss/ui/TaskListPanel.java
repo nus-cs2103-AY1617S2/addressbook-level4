@@ -34,7 +34,7 @@ public class TaskListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+        setEventHandlerForViewingChangeEvent();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -43,11 +43,11 @@ public class TaskListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-    private void setEventHandlerForSelectionChangeEvent() {
+    private void setEventHandlerForViewingChangeEvent() {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                        logger.fine("Viewing in task list panel changed to : '" + newValue + "'");
                         raise(new TaskPanelViewingChangedEvent(newValue));
                     }
                 });
