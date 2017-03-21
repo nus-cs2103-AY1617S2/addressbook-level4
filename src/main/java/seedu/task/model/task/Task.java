@@ -148,9 +148,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         if (this.isComplete() && compareTask.isComplete()) {
             compareToResult = 0;
         } else if (this.isComplete()) {
-            compareToResult = -1;
-        } else if (compareTask.isComplete()) {
             compareToResult = 1;
+        } else if (compareTask.isComplete()) {
+            compareToResult = -1;
         }
 
         if (compareToResult == 0) {
