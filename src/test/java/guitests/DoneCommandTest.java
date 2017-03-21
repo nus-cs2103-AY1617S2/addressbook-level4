@@ -5,6 +5,8 @@ import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_WRONG_LIST;
 import static seedu.ezdo.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -66,6 +68,8 @@ public class DoneCommandTest extends EzDoGuiTest {
                                    final TestTask[] doneList) {
 
         TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
+        tasksToDone.add(taskToDone);
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
         TestTask[] expectedDone = TestUtil.addTasksToList(doneList, taskToDone);
 
@@ -79,7 +83,7 @@ public class DoneCommandTest extends EzDoGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
+        assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
 
         //confirm the new done list contains the right data
         commandBox.runCommand("done");
