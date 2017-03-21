@@ -15,7 +15,7 @@ public class FindCommandTest extends TaskBossGuiTest {
         assertFindResult("find n/Meier", td.daniel, td.benson); // multiple results
 
         //find after deleting one result
-        commandBox.runCommand("delete 5");
+        commandBox.runCommand("delete 2");
         assertFindResult("find n/Meier", td.daniel);
     }
 
