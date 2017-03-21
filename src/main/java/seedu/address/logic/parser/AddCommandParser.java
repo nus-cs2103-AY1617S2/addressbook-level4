@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
@@ -24,14 +23,15 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_ID, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_DEADLINE).get(),
-                    argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
-                    argsTokenizer.getValue(PREFIX_ID).get(),
+                    argsTokenizer.getValue(PREFIX_DEADLINE).orElse(null),
+                    //ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION).get()),
+                    argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(null),
+                    //argsTokenizer.getValue(PREFIX_ID).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {

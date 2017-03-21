@@ -10,7 +10,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -26,8 +25,6 @@ public class XmlAdaptedTask {
     private String deadline;
     @XmlElement(required = true)
     private String description;
-    @XmlElement(required = true)
-    private String id;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,7 +45,6 @@ public class XmlAdaptedTask {
         name = source.getName().toString();
         deadline = source.getDeadline().toString();
         description = source.getDescription().toString();
-        id = source.getID().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -66,10 +62,9 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Deadline phone = new Deadline(this.deadline);
-        final Description email = new Description(this.description);
-        final IdentificationNumber address = new IdentificationNumber(this.id);
+        final Deadline deadline = (!this.deadline.equals("Unassigned") ? new Deadline(this.deadline) : new Deadline());
+        final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, deadline, description, tags);
     }
 }

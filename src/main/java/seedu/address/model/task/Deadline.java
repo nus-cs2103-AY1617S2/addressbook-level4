@@ -1,10 +1,8 @@
 package seedu.address.model.task;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.parser.DeadlineParser;
+import seedu.address.model.task.date.DateFactory;
+import seedu.address.model.task.date.TaskDate;
 
 /**
  * Represents a Task's deadline in the TaskManager.
@@ -12,89 +10,61 @@ import seedu.address.model.parser.DeadlineParser;
  */
 public class Deadline {
 
-    public enum DeadlineType {
-        DATEONLY, DATETIME
-    };
-
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-        "Task deadline should strictly follow this format DD/MM/YYYY";
+        "Deadline accepts following formats: 30-10-2012 10:10 am; Sun, March 14 2017 23:59, ...\n"
+        + "Please make sure valid existing date is used";
 
-    /**
-     * Output format used to display deadline with both date and time.
-     * Day, Month Date Year at Hour:Minute
-     * Example: Tuesday, April 1 2013 at 23:59
-     */
-    public static final String READABLE_DATETIME_OUTPUT_FORMAT = "EEE, MMM dd yyyy, hh:mm aaa";
 
-    /**
-     * Output format used to display deadline with only date.
-     * Day, Month Date Year
-     * Example: Tuesday, April 1 2013
-     */
-    public static final String READABLE_DATEONLY_OUTPUT_FORMAT = "EEE, MMM dd yyyy";
+    private final TaskDate date;
 
-    private final Date date;
-    private final DeadlineType type;
+    public Deadline() {
+        DateFactory dateFactory = new DateFactory();
+        date = dateFactory.getUnassignedTime();
+    }
 
     /**
      * Constructor for Deadline.
      */
     public Deadline(String dateString) throws IllegalValueException {
         assert dateString != null;
-        // Trim and remove continuous whitespace
-        String trimmedDateString = dateString.trim().replace(" +", " ");
 
-        // Try date-only format
-        if (DeadlineParser.isParsableDate(dateString)) {
-            date = DeadlineParser.parseDateString(dateString);
-            type = DeadlineType.DATEONLY;
-
-        // Try time-only format
-        } else if (DeadlineParser.isParsableTime(dateString)) {
-            // The default date value to be assigned is today
-            date = combineDateTime(new Date(), DeadlineParser.parseTimeString(dateString));
-            type = DeadlineType.DATETIME;
-
-        // Try complete date-time formats
-        } else if (DeadlineParser.isParsableDateTime(dateString)) {
-            date = DeadlineParser.parseDateTimeString(dateString);
-            type = DeadlineType.DATETIME;
-
-        } else {
+        DateFactory dateFactory = new DateFactory();
+        try {
+            date = dateFactory.getTaskDateFromString(dateString);
+        } catch (IllegalValueException e) {
             throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
         }
-
     }
 
-    /**
-     * Validates given date.
-     *
-     * @throws IllegalValueException if given date string is invalid.
-     */
     public static boolean isValidDeadline(String dateString) {
-        return DeadlineParser.isParsable(dateString);
+        DateFactory dateFactory = new DateFactory();
+        try {
+            TaskDate date = dateFactory.getTaskDateFromString(dateString);
+            return true;
+        } catch (IllegalValueException e) {
+            return false;
+        }
     }
 
-    /**
-     * Combine date and time from 2 different sources.
-     */
-    public static Date combineDateTime(Date date, Date time) {
-        return new Date(date.getYear(), date.getMonth(), date.getDate(),
-                        time.getHours(), time.getMinutes());
+    public boolean isFloating() {
+        return date.isFloating();
+    }
+
+    public boolean isOverdue() {
+        return date.hasPassed();
+    }
+
+    public boolean isToday() {
+        return date.isHappeningToday();
+    }
+
+    public boolean isTomorrow() {
+        return date.isHappeningTomorrow();
     }
 
     @Override
     public String toString() {
-        switch (type) {
-        case DATETIME:
-            return new SimpleDateFormat(READABLE_DATETIME_OUTPUT_FORMAT).format(date);
-
-        case DATEONLY:
-            return new SimpleDateFormat(READABLE_DATEONLY_OUTPUT_FORMAT).format(date);
-
-        default:
-            return date.toString();
-        }
+        return date.toString();
     }
 
     @Override

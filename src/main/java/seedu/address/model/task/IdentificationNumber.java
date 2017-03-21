@@ -18,7 +18,13 @@ public class IdentificationNumber {
         return new IdentificationNumber(Math.max(i1.value, i2.value));
     }
 
+    public static final int DEFAULT_VALUE = 0;
+
     public Integer value;
+
+    public IdentificationNumber() {
+        this.value = DEFAULT_VALUE;
+    }
 
     /**
      * Value just needs to be not null

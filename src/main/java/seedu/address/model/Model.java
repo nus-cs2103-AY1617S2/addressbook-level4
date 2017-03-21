@@ -47,10 +47,10 @@ public interface Model {
     /** Returns undo copy of task list*/
     ReadOnlyTaskManager getCopy();
 
-    /** Clears undo copy of task list*/
-    void clearCopy();
+    /** Updates flag for copy of address book*/
+    void updateFlag(String newFlag);
 
-    /** Checks if there are any undoable commands*/
-    boolean checkChanges();
+    /** Returns flag for copy of address book*/
+    String getFlag();
 
 }

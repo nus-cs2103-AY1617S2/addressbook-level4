@@ -14,6 +14,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.storage.StorageFileChangeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
@@ -184,6 +185,20 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
+    }
+
+    @Subscribe
+    public void handleStorageFileChangeEvent(StorageFileChangeEvent event) {
+        logger.info("============================ [ Restarting Address Book ] =============================");
+
+        config.setTaskManagerFilePath(event.filePath);
+
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage);
+        ui = new UiManager(logic, config, userPrefs);
+
+        ui.start(new Stage());
     }
 
     public static void main(String[] args) {

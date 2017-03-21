@@ -74,16 +74,9 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        /*System.out.println(getID() + task.getID().toString());
-        System.out.println(getName() + task.getName().toString());
-        System.out.println(getDeadline() + task.getDeadline().toString());
-        System.out.println(getDescription() + task.getDescription().toString());
-        System.out.println(getTags());
-        System.out.println(getTags(task.getTags()));*/
         return getName().equals(task.getName().toString())
                 && getDeadline().equals(task.getDeadline().toString())
                 && getDescription().equals(task.getDescription().toString())
-                && getID().equals(task.getID().toString())
                 && compareStringListOrderInsensitive(getTags(), getTags(task.getTags()));
     }
 
@@ -94,7 +87,6 @@ public class TaskCardHandle extends GuiHandle {
             return getName().equals(handle.getName())
                     && getDeadline().equals(handle.getDeadline())
                     && getDescription().equals(handle.getDescription())
-                    && getID().equals(handle.getID())
                     && compareStringListOrderInsensitive(getTags(), handle.getTags());
         }
         return super.equals(obj);

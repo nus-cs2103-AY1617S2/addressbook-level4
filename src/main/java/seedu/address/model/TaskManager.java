@@ -73,12 +73,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      */
     public void addTask(Task t) {
-        // TODO: Need to check if task with given ID already exists
-        if (t.isIDUnassigned()) {
-            t.setID(new IdentificationNumber(nextAvailableID));
-            nextAvailableID.inc();
-            syncMasterTagListWith(t);
-        }
+        syncMasterTagListWith(t);
         tasks.add(t);
     }
 
@@ -174,14 +169,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
-    }
-
-    // Checks if task list is empty
-    public boolean isEmpty() {
-        if (this.tasks.isEmpty()) {
-            return true;
-        }
-        return false;
     }
 
 }

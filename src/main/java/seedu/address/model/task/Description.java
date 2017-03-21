@@ -6,7 +6,13 @@ package seedu.address.model.task;
  */
 public class Description {
 
+    public final String DEFAULT_DESCRIPTION = "";
+
     public final String description;
+
+    public Description() {
+        this.description = DEFAULT_DESCRIPTION;
+    }
 
     /**
      * Description just needs to be not null

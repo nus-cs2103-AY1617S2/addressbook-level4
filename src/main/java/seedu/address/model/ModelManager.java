@@ -24,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private TaskManager taskManagerCopy;
+    private String flag;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         this.taskManagerCopy = new TaskManager(taskManager);
+        this.flag = "empty copy";
     }
 
     public ModelManager() {
@@ -89,12 +91,12 @@ public class ModelManager extends ComponentManager implements Model {
         taskManagerCopy = new TaskManager(newData);
     }
 
-    public void clearCopy() {
-        taskManagerCopy = new TaskManager(); // can change to delete all tasks once implemented
+    public void updateFlag(String newFlag) {
+        flag = newFlag;
     }
 
-    public boolean checkChanges() {
-        return taskManagerCopy.isEmpty();
+    public String getFlag() {
+        return this.flag;
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -111,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -149,24 +151,28 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class TaskQualifier implements Qualifier {
+        private Set<String> keyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        TaskQualifier(Set<String> keyWords) {
+            this.keyWords = keyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
+            return (keyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().name, keyword))
                     .findAny()
-                    .isPresent();
+                    .isPresent())
+                    || (keyWords.stream()
+                       .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
+                       .findAny()
+                       .isPresent());
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", keyWords);
         }
     }
 

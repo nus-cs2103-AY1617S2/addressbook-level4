@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# Task Manager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,18 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list`** : lists all tasks
+   * **`add`**` Meeting dl/15-05-2017 ds/Meeting Room 1 t/important` :
+     adds a task named `Meeting` to the Task Manager.
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -51,22 +51,27 @@ Format: help
 ## 2.2. Adding a task: `add`
 
 Adds a task to task list
-Format: add -n TASKNAME -d DATE [-o DESCRIPTION] [-p]
+<<<<<<< HEAD
+Format: add TASKNAME -d DATE [-o DESCRIPTION] [-p]
+=======
+Format: add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]
+>>>>>>> origin/master
 
 Examples:
 
-* `add -n Make payment -d 01/08/2017 -o Pay credit card bills -p`
-* `add -n Complete project -d 12/12/2017`
+* `add Make payment dl/01/08/2017 ds/Pay credit card bills -p`
+* `add Complete project dl/12/12/2017`
 
-## 2.3. Modifying a task: `update`
+## 2.3. Modifying a task: `edit`
 
 Updates an existing task in the task list
 Format: update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]
+Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
 
 Examples:
 
-* `update 3 -n buy eggs -d 29/02/2017 -o as soon as possible`
-* `update 1 -n tie shoelace -d 25/12/2017`
+* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
+* `edit 1 tie shoelace dl/25-12-2017`
 
 ## 2.4. Delete a task: `delete`
 
@@ -77,17 +82,22 @@ Examples:
 
 * `delete 1`
 
-## 2.5. Listing all tasks: `list`
+## 2.5. Undo a command: 'undo'
+
+Undo most recent command
+Format: undo
+
+## 2.6. Listing all tasks: `list`
 
 Shows a list of all tasks
 Format: list
 
-## 2.6. Exiting the program : `exit`
+## 2.7. Exiting the program : `exit`
 
 Exits the program.
 Format: exit
 
-## 2.7. View tasks : `view`
+## 2.8. View tasks : `view`
 
 Views the details of a task
 Format: view INDEX
@@ -96,28 +106,26 @@ Examples:
 
 * `view 1`
 
-## 2.8. Finding all tasks containing any keyword in the task name: `find`
+## 2.9. Finding all tasks containing any keyword in the task name: `find`
 
 Finds tasks that satisfy given parameters
-Format: find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]
+Format: find KEYWORDS [dl/DATE]
 
-> ‘find -n’ finds tasks whose task name contain any of the given keywords
-> ‘find -o’ finds tasks whose task description contain any of the given keywords
-> ‘find -d’ finds tasks whose deadline falls on specified date
+> finds tasks whose task name or description contains any of the given keywords
+> ‘find dl/’ finds tasks whose deadline falls on specified date
 > 
-> The search is case sensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
+> The search is case insensitive, the order of the keywords does not matter, only the name is searched, and tasks matching at least one keyword will be returned
 
 Examples:
 
-* `find -n Project`
-* `find -o Project`
-* `find -d 12/08/2017`
+* `find Project Name/Description`
+* `find dl/12-08-2017`
 
-## 2.9. Clearing all entries : `clear`
+## 2.10. Clearing all entries : `clear`
 
 Format: clear
 
-## 2.10. Saving the data
+## 2.11. Saving the data
 
 Application data are saved onto hard drive automatically after any commands are executed that changes the data.
 There is no need to manually save the data
@@ -132,16 +140,16 @@ There is no need to manually save the data
 
 * **Help** : `help`
 
-* **Add**  `add -n TASKNAME -d DATE [-o DESCRIPTION] [-p]` <br>
-  e.g. `add -n Make payment -d 01/08/2017 -o Pay credit card bills -p`
+* **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]` <br>
+  e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills -p`
 
-* **Update** : `update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]` <br>
-  e.g. `update 3 -n buy eggs -d 29/02/2017 -o as soon as possible`
+* **Update** : `update INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
+  e.g. `update 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find [-n KEYWORDS] [-o KEYWORDS] [-d DATE]` <br>
+* **Find** : `find [KEYWORDS] [ds/KEYWORDS] [dl/DATE]` <br>
   e.g. `find James Jake`
 
 * **List** : `list` <br>

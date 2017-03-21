@@ -25,20 +25,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
-import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableTaskManager;
+import seedu.task.TestApp;
 
 /**
  * A utility class for test cases.
@@ -75,15 +74,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Deadline("20/2/2012"), new Description("hans@google.com"), new IdentificationNumber("9482424"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Deadline("20/2/2012"), new Description("ruth@google.com"), new IdentificationNumber("87249245"), new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), new Deadline("20/2/2012"), new Description("heinz@yahoo.com"), new IdentificationNumber("95352563"), new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), new Deadline("20/2/2012"), new Description("cornelia@google.com"), new IdentificationNumber("87652533"), new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), new Deadline("20/2/2012"), new Description("werner@gmail.com"), new IdentificationNumber("9482224"), new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), new Deadline("20/2/2012"), new Description("lydia@gmail.com"), new IdentificationNumber("9482427"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Deadline("20/2/2012"), new Description("anna@google.com"), new IdentificationNumber("9482442"), new UniqueTagList()),
-                new Task(new Name("Hoon Meier"),  new Deadline("20/2/2012"), new Description("stefan@mail.com"), new IdentificationNumber("8482424"), new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), new Deadline("20/2/2012"), new Description("hans@google.com"), new IdentificationNumber("8482131"), new UniqueTagList())
+                new Task(new Name("Ali Muster"), new Deadline("20/2/2012"), new Description("hans@google.com"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Deadline("20/2/2012"), new Description("ruth@google.com"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Deadline("20/2/2012"), new Description("heinz@yahoo.com"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Deadline("20/2/2012"), new Description("cornelia@google.com"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Deadline("20/2/2012"), new Description("werner@gmail.com"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Deadline("20/2/2012"), new Description("lydia@gmail.com"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Deadline("20/2/2012"), new Description("anna@google.com"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"),  new Deadline("20/2/2012"), new Description("stefan@mail.com"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Deadline("20/2/2012"), new Description("hans@google.com"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -127,7 +126,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -144,8 +143,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new AddressBook());
+    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
+        return new XmlSerializableTaskManager(new TaskManager());
     }
 
     /**
