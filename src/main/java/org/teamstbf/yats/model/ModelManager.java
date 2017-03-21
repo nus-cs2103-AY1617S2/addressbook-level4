@@ -25,7 +25,10 @@ import javafx.collections.transformation.SortedList;
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-	interface Expression {
+	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 50;
+	private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 25;
+
+    interface Expression {
 		boolean satisfies(ReadOnlyEvent event);
 
 		@Override
@@ -81,10 +84,10 @@ public class ModelManager extends ComponentManager implements Model {
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
 	private final TaskManager taskManager;
-	
-	private static Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
-    private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
-
+	//@@author A0102778B
+	private static Stack<TaskManager> undoTaskManager;
+    private static Stack<TaskManager> redoTaskManager;
+    
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	public ModelManager() {
@@ -102,26 +105,68 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		undoTaskManager = new Stack<TaskManager>();
+		redoTaskManager = new Stack<TaskManager>();
 	}
 
 	@Override
 	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-	    saveImage();
+	    saveImageOfCurrentTaskManager();
 	    taskManager.addEvent(event);
 		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
 	}
-
-    private void saveImage() {
+	
+    /**
+     * Saves an image of the previous state of the TaskManager for the undo command - also clears the redo 
+     * stack images because once the state is mutated the previous redoes state are invalid because they are no 
+     * longer part of the same chain. This is an internal method used by the addEvent, deteleEvent, clearEvent,
+     * editEvent methods. This method also contains a check - if there are currently too many task manager states,
+     * it will remove half of the earlier saved states and only keep the later half.
+     */
+    private void saveImageOfCurrentTaskManager() {
+        checkIfUndoStackSizeTooLarge();
         TaskManager tempManager = new TaskManager();
 	    tempManager.resetData(taskManager);
 	    undoTaskManager.push(tempManager);
-	    redoTaskManager = new Stack<TaskManager>();
+	    clearRedoStack();
+    }
+
+    /**
+     * This method clears the redo stack of taskmanagers. This occurs when a new arraylist is created.
+     */
+    private void clearRedoStack() {
+        redoTaskManager = new Stack<TaskManager>();
+    }
+
+    /**
+     * This method checks if the undo stack size is above the maximum allowed size
+     */
+    private void checkIfUndoStackSizeTooLarge() {
+        if (undoTaskManager.size() >= MAXIMUM_SIZE_OF_UNDO_STACK){
+            removeHalfOfUndoStack(undoTaskManager);
+        }
+    }
+
+    /**
+     * This method removes half of a stack of TaskManagers given to it. TODO- test this method
+     */
+    private void removeHalfOfUndoStack(Stack<TaskManager> currStack) {
+        Stack<TaskManager> tempUndoTaskManager = new Stack<TaskManager>();
+        for (int i = 0; i < NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE ; i++){
+            tempUndoTaskManager.push(undoTaskManager.pop());
+        }
+        while (!undoTaskManager.isEmpty()){
+            undoTaskManager.pop();
+        }
+        while (!tempUndoTaskManager.isEmpty()){
+            undoTaskManager.push(tempUndoTaskManager.pop());
+        }
     }
 
 	@Override
 	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-	    saveImage();
+	    saveImageOfCurrentTaskManager();
 		taskManager.removeEvent(target);
 		indicateTaskManagerChanged();
 	}
@@ -129,6 +174,16 @@ public class ModelManager extends ComponentManager implements Model {
 	
 	//@@author A0102778B
 	
+    @Override
+    public boolean checkEmptyUndoStack() {
+        return undoTaskManager.isEmpty();
+    }
+
+    @Override
+    public boolean checkEmptyRedoStack() {
+        return redoTaskManager.isEmpty();
+    }
+    
 	@Override
     public synchronized void getPreviousState() {
 	    TaskManager tempManager = new TaskManager();
@@ -139,7 +194,9 @@ public class ModelManager extends ComponentManager implements Model {
 	
     @Override
     public synchronized void getNextState() {
-        saveImage();
+        TaskManager tempManager = new TaskManager();
+        tempManager.resetData(taskManager);
+        undoTaskManager.push(tempManager);
         taskManager.resetData((ReadOnlyTaskManager)redoTaskManager.pop());
     }
 
@@ -163,7 +220,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void resetData(ReadOnlyTaskManager newData) {
-	    saveImage();
+	    saveImageOfCurrentTaskManager();
 		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
@@ -178,7 +235,7 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException {
 		assert editedEvent != null;
-		saveImage();
+		saveImageOfCurrentTaskManager();
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
@@ -197,5 +254,6 @@ public class ModelManager extends ComponentManager implements Model {
 	public void updateFilteredListToShowAll() {
 		filteredEvents.setPredicate(null);
 	}
+
 
 }
