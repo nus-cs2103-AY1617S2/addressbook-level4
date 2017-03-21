@@ -48,8 +48,7 @@ public class DeleteTagCommand extends Command {
             Set<Tag> newTagList = new HashSet<Tag>();
             Set<Tag> tags = taskToEdit.getTags().toSet();
             for (Tag tag : tags) {
-                if (tag.getTagName().toLowerCase()
-                        .equals(oldTag.getTagName().toLowerCase())) {
+                if (tag.getTagName().equals(oldTag.getTagName())) {
                     containsOldTag = true;
                 } else {
                     newTagList.add(tag);
