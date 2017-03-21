@@ -275,7 +275,7 @@ Example:
 <br>
 
 <a name="undo"></a>
-### 3.8 Undoing changes: undo
+### 3.8. Undoing changes: undo
 
 Reverts the results of the previous action, in the event a mistake is made
 
@@ -299,15 +299,17 @@ Example:
 <br>
 
 <a name="redo"></a>
-### 3.9 Reverting undos: redo
+### 3.9. Reverting undos: redo
 
 Reverts previous undo command(s)
 
 Format: `redo`
 
 <br>
+
 <a name="sort"></a>
 ### 3.10. Sorting tasks: sort
+
 Sorts tasks based on task name, start date, end date or priority level.<br>
 
 > ***Flexible command:*** `arrange`
