@@ -30,7 +30,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTaskName("Go Hiking").withTaskStartTime("0600")
-				.withTaskEndTime("2300").withTaskDate("04012017").withTaskDescription("Bring lots of water.").withTags().build();
+				.withTaskEndTime("2300").withTaskDate("040117").withTaskDescription("Bring lots of water.").withTags().build();
         /*
         TestTask editedPerson = new TaskBuilder().withName("Bobby").withPhone("91234567")
                 .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
