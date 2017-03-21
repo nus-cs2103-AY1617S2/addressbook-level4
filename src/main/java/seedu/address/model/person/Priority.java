@@ -18,18 +18,24 @@ public class Priority {
      * @throws IllegalValueException if given priority level is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
-        assert priority != null;
-        String trimmedPriority = priority.trim();
-        if (!isValidPriority(trimmedPriority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        if (priority == null) {
+            this.value = null;
+        } else {
+            String trimmedPriority = priority.trim();
+            if (!isValidPriority(trimmedPriority)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+            }
+            this.value = trimmedPriority;
         }
-        this.value = trimmedPriority;
     }
 
     /**
      * Returns true if a given string is a valid person phone number.
      */
     public static boolean isValidPriority(String test) {
+        if (test == null) {
+            return true;
+        }
         return PriorityLevel.isInEnum(test);
     }
 

@@ -25,17 +25,23 @@ public class EndTime {
      * @throws IllegalValueException if given EndTime string is invalid.
      */
     public EndTime(String endtime) throws IllegalValueException {
-        assert endtime != null;
-        if (!isValidEndTime(endtime)) {
-            throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+        if (endtime == null) {
+            this.value = null;
+        } else {
+            if (!isValidEndTime(endtime)) {
+                throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+            }
+            this.value = endtime;
         }
-        this.value = endtime;
     }
 
     /**
      * Returns true if a given string is a valid event EndTime.
      */
     public static boolean isValidEndTime(String test) {
+        if (test == null) {
+            return true;
+        }
         return (test.matches(ENDTIME_VALIDATION_REGEX) && (Integer.parseInt(test) < 2400));
     }
 

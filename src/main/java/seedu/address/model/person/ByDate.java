@@ -29,17 +29,23 @@ public class ByDate {
      * @throws IllegalValueException if given ByDate string is invalid.
      */
     public ByDate(String bydate) throws IllegalValueException {
-        assert bydate != null;
-        if (!isValidByDate(bydate)) {
-            throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
+        if (bydate == null) {
+            this.value = null;
+        } else {
+            if (!isValidByDate(bydate)) {
+                throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
+            }
+            this.value = bydate;
         }
-        this.value = bydate;
     }
 
     /**
      * Returns true if a given string is a valid deadline ByDate.
      */
     public static boolean isValidByDate(String test) {
+        if (test == null) {
+            return true;
+        }
         Pattern pattern = Pattern.compile(BYDATE_VALIDATION_REGEX);
         Matcher matchers = pattern.matcher(test);
         if (test.matches(BYDATE_VALIDATION_REGEX)) {

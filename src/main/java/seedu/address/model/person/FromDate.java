@@ -29,17 +29,23 @@ public class FromDate {
      * @throws IllegalValueException if given FromDate string is invalid.
      */
     public FromDate(String fromdate) throws IllegalValueException {
-        assert fromdate != null;
-        if (!isValidFromDate(fromdate)) {
-            throw new IllegalValueException(MESSAGE_FROMDATE_CONSTRAINTS);
+        if (fromdate == null) {
+            this.value = null;
+        } else {
+            if (!isValidFromDate(fromdate)) {
+                throw new IllegalValueException(MESSAGE_FROMDATE_CONSTRAINTS);
+            }
+            this.value = fromdate;
         }
-        this.value = fromdate;
     }
 
     /**
      * Returns true if a given string is a valid event FromDate.
      */
     public static boolean isValidFromDate(String test) {
+        if (test == null) {
+            return true;
+        }
         Pattern pattern = Pattern.compile(FROMDATE_VALIDATION_REGEX);
         Matcher matchers = pattern.matcher(test);
         if (test.matches(FROMDATE_VALIDATION_REGEX)) {

@@ -29,17 +29,23 @@ public class ToDate {
      * @throws IllegalValueException if given ToDate string is invalid.
      */
     public ToDate(String todate) throws IllegalValueException {
-        assert todate != null;
-        if (!isValidToDate(todate)) {
-            throw new IllegalValueException(MESSAGE_TODATE_CONSTRAINTS);
+        if (todate == null) {
+            this.value = null;
+        } else {
+            if (!isValidToDate(todate)) {
+                throw new IllegalValueException(MESSAGE_TODATE_CONSTRAINTS);
+            }
+            this.value = todate;
         }
-        this.value = todate;
     }
 
     /**
      * Returns true if a given string is a valid event ToDate.
      */
     public static boolean isValidToDate(String test) {
+        if (test == null) {
+            return true;
+        }
         Pattern pattern = Pattern.compile(TODATE_VALIDATION_REGEX);
         Matcher matchers = pattern.matcher(test);
         if (test.matches(TODATE_VALIDATION_REGEX)) {

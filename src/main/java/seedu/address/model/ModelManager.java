@@ -92,23 +92,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyActivity> getFilteredScheduledActivityList() {
-    	ObservableList<ReadOnlyActivity> tempActivityList = FXCollections.observableArrayList();
-    	for (ReadOnlyActivity activity:filteredActivities) {
-    		if (activity.getByDate() != null||activity.getToDate() != null) {
-    			tempActivityList.add(activity);
-    		}
-    	}
+        ObservableList<ReadOnlyActivity> tempActivityList = FXCollections.observableArrayList();
+        for (ReadOnlyActivity activity:filteredActivities) {
+            if (activity.getByDate() != null || activity.getToDate() != null) {
+                tempActivityList.add(activity);
+            }
+        }
         return new UnmodifiableObservableList<>(tempActivityList);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyActivity> getFilteredUnscheduledActivityList() {
-    	ObservableList<ReadOnlyActivity> tempActivityList =  FXCollections.observableArrayList();
-    	for (ReadOnlyActivity activity:filteredActivities) {
-    		if (activity.getPriority() != null) {
-    			tempActivityList.add(activity);
-    		}
-    	}
+        ObservableList<ReadOnlyActivity> tempActivityList =  FXCollections.observableArrayList();
+        for (ReadOnlyActivity activity:filteredActivities) {
+            if (activity.getPriority() != null) {
+                tempActivityList.add(activity);
+            }
+        }
         return new UnmodifiableObservableList<>(tempActivityList);
     }
 

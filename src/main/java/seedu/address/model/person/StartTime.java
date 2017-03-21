@@ -26,17 +26,23 @@ public class StartTime {
      * @throws IllegalValueException if given StartTime string is invalid.
      */
     public StartTime(String starttime) throws IllegalValueException {
-        assert starttime != null;
-        if (!isValidStartTime(starttime)) {
-            throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+        if (starttime == null) {
+            this.value = null;
+        } else {
+            if (!isValidStartTime(starttime)) {
+                throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+            }
+            this.value = starttime;
         }
-        this.value = starttime;
     }
 
     /**
      * Returns true if a given string is a valid event StartTime.
      */
     public static boolean isValidStartTime(String test) {
+        if (test == null) {
+            return true;
+        }
         return (test.matches(STARTTIME_VALIDATION_REGEX) && (Integer.parseInt(test) < 2400));
     }
 

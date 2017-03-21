@@ -25,9 +25,9 @@ public class Activity implements ReadOnlyActivity {
      * Every field must be present and not null.
      */
     public Activity(Description description, Priority priority, StartTime startTime,
-    		FromDate fromDate, EndTime endTime, ToDate toDate, ByDate byDate, Location location,
-    		UniqueTagList tags) {
-    	assert description != null;
+            FromDate fromDate, EndTime endTime, ToDate toDate, ByDate byDate, Location location,
+            UniqueTagList tags) {
+        assert description != null;
         this.description = description;
         this.priority = priority;
         this.startTime = startTime;
@@ -44,57 +44,57 @@ public class Activity implements ReadOnlyActivity {
      */
     public Activity(ReadOnlyActivity source) {
         this(source.getDescription(),
-    		source.getPriority(),
-    		source.getStartTime(),
-    		source.getFromDate(),
-    		source.getEndTime(),
-    		source.getToDate(),
-        	source.getByDate(),
-    		source.getLocation(),
-    		source.getTags());
+            source.getPriority(),
+            source.getStartTime(),
+            source.getFromDate(),
+            source.getEndTime(),
+            source.getToDate(),
+            source.getByDate(),
+            source.getLocation(),
+            source.getTags());
     }
 
     public StartTime getStartTime() {
-		return startTime;
-	}
+        return startTime;
+    }
 
-	public void setStartTime(StartTime startTime) {
-		this.startTime = startTime;
-	}
+    public void setStartTime(StartTime startTime) {
+        this.startTime = startTime;
+    }
 
-	public FromDate getFromDate() {
-		return fromDate;
-	}
+    public FromDate getFromDate() {
+        return fromDate;
+    }
 
-	public void setFromDate(FromDate fromDate) {
-		this.fromDate = fromDate;
-	}
+    public void setFromDate(FromDate fromDate) {
+        this.fromDate = fromDate;
+    }
 
-	public EndTime getEndTime() {
-		return endTime;
-	}
+    public EndTime getEndTime() {
+        return endTime;
+    }
 
-	public void setEndTime(EndTime endTime) {
-		this.endTime = endTime;
-	}
+    public void setEndTime(EndTime endTime) {
+        this.endTime = endTime;
+    }
 
-	public ToDate getToDate() {
-		return toDate;
-	}
+    public ToDate getToDate() {
+        return toDate;
+    }
 
-	public void setToDate(ToDate toDate) {
-		this.toDate = toDate;
-	}
+    public void setToDate(ToDate toDate) {
+        this.toDate = toDate;
+    }
 
-	public ByDate getByDate() {
-		return byDate;
-	}
+    public ByDate getByDate() {
+        return byDate;
+    }
 
-	public void setByDate(ByDate byDate) {
-		this.byDate = byDate;
-	}
+    public void setByDate(ByDate byDate) {
+        this.byDate = byDate;
+    }
 
-	public void setDescription(Description description) {
+    public void setDescription(Description description) {
         assert description != null;
         this.description = description;
     }
