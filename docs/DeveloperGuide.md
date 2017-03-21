@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 
 Priority | As a ... | I want to ... | So that I can...
-:-------- | :----------- | :--------- | :-----------
+:----------- | :----------- | :--------- | :-----------
 `* * *` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
 `* * *` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
 `* * *` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
