@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Date;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -29,6 +31,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    private Stack<String> commandHistory;
+    private Stack<TaskManager> taskHistory;
+    private Stack<Predicate> predicateHistory;
+    private Stack<String> redoCommandHistory;
+
     private static final String MESSAGE_ON_DELETE = "Task deleted";
     private static final String MESSAGE_ON_ADD = "Task added";
     private static final String MESSAGE_ON_RESET = "Task list loaded";
@@ -36,6 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
+    private static final String MESSAGE_ON_UNDO = "Undo completed";
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -48,6 +57,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        commandHistory = new Stack<String>();
+        taskHistory = new Stack<TaskManager>();
+        predicateHistory = new Stack<Predicate>();
+        redoCommandHistory = new Stack<String>();
     }
 
     public ModelManager() {
@@ -96,6 +109,34 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateSaveLocation(String path) {
         indicateTaskManagerChanged(MESSAGE_ON_SAVETO + path);
+    }
+
+    @Override
+    public void saveCurrentState(String commandText) {
+        TaskManager copiedTaskManager = new TaskManager(taskManager);
+        taskHistory.add(copiedTaskManager);
+        predicateHistory.add(filteredTasks.getPredicate());
+        commandHistory.add(commandText);
+    }
+
+    @Override
+    public String undoLastCommand() throws NoPreviousCommandException {
+        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size();
+
+        if (commandHistory.isEmpty()) {
+            throw new NoPreviousCommandException("No previous commands were found.");
+        }
+
+        // Get previous command, taskManager and view
+        String toUndo = commandHistory.pop();
+        taskManager.resetData(taskHistory.pop());
+        filteredTasks.setPredicate(predicateHistory.pop());
+
+        // Store it in case of redo
+        redoCommandHistory.add(toUndo);
+
+        indicateTaskManagerChanged(MESSAGE_ON_UNDO);
+        return toUndo;
     }
 
     // =========== Filtered Task List Accessors

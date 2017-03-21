@@ -41,6 +41,7 @@ import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -97,13 +98,13 @@ public class LogicManagerTest {
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
-        // saved
-        // assumed
-        // to
-        // be
-        // up
-        // to
-        // date
+                                                                          // saved
+                                                                          // assumed
+                                                                          // to
+                                                                          // be
+                                                                          // up
+                                                                          // to
+                                                                          // date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -257,14 +258,14 @@ public class LogicManagerTest {
             throws Exception {
         assertCommandFailure(commandWord, expectedMessage); // index missing
         assertCommandFailure(commandWord + " +1", expectedMessage); // index
-        // should be
-        // unsigned
+                                                                    // should be
+                                                                    // unsigned
         assertCommandFailure(commandWord + " -1", expectedMessage); // index
-        // should be
-        // unsigned
+                                                                    // should be
+                                                                    // unsigned
         assertCommandFailure(commandWord + " 0", expectedMessage); // index
-        // cannot be
-        // 0
+                                                                   // cannot be
+                                                                   // 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
@@ -482,11 +483,9 @@ public class LogicManagerTest {
     public void execute_renametag_onlyMatchesFullWordsInTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
         Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla", "newkey");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "newkey");
         Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
@@ -497,20 +496,16 @@ public class LogicManagerTest {
         helper.addToModel(model, fiveTasks);
 
         assertCommandSuccess("renametag KEY newkey",
-                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY",
-                        "newkey"), expectedAB,
-                expectedList);
+                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY", "newkey"), expectedAB, expectedList);
     }
 
     @Test
     public void execute_renametag_onlyMatchesCorrectCaseInTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
         Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla", "newkey");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "newkey");
         Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEy");
@@ -521,9 +516,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fiveTasks);
 
         assertCommandSuccess("renametag KEY newkey",
-                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY",
-                        "newkey"), expectedAB,
-                expectedList);
+                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY", "newkey"), expectedAB, expectedList);
     }
 
     // DeleteTagCommand Tests
@@ -538,11 +531,9 @@ public class LogicManagerTest {
     public void execute_deletetag_onlyMatchesFullWordsInTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
         Task r1 = helper.generateTaskWithNameAndTags("bla bla bla");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla");
         Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
@@ -552,8 +543,7 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(expectedList);
         helper.addToModel(model, fiveTasks);
 
-        assertCommandSuccess("deletetag KEY",
-                String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
+        assertCommandSuccess("deletetag KEY", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
                 expectedAB, expectedList);
     }
 
@@ -561,11 +551,9 @@ public class LogicManagerTest {
     public void execute_deletetag_onlyMatchesCorrectCaseInTags() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
         Task r1 = helper.generateTaskWithNameAndTags("bla bla bla");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-                "blahbla");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla");
         Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEy");
@@ -575,8 +563,7 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(expectedList);
         helper.addToModel(model, fiveTasks);
 
-        assertCommandSuccess("deletetag KEY",
-                String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
+        assertCommandSuccess("deletetag KEY", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
                 expectedAB, expectedList);
     }
 
@@ -654,6 +641,35 @@ public class LogicManagerTest {
     }
 
     // End SaveToCommand tests
+
+    // UndoCommand tests
+
+    @Test
+    public void execute_undoAdd_successful() throws Exception {
+        // add adam to list
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // verify added
+        String addCommand = helper.generateAddCommand(toBeAdded);
+        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
+                expectedAB.getTaskList());
+
+        // undo command
+        expectedAB.removeTask(toBeAdded);
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, addCommand), expectedAB,
+                expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_undo_nothingToUndo() throws Exception {
+        // undo command
+        assertCommandFailure("undo", UndoCommand.MESSAGE_NO_PREV_COMMAND);
+    }
+
+    // End UndoCommand tests
 
     /**
      * A utility class to generate test data.

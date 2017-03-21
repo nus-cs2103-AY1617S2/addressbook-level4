@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -73,4 +74,17 @@ public interface Model {
     void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted);
 
+    /**
+     * Undo the last command entered by the user.
+     *
+     * @return the last command entered by the user
+     * @throws NoPreviousCommandException
+     *             if there are no previously executed commands to be reversed
+     */
+    public String undoLastCommand() throws NoPreviousCommandException;
+
+    /**
+     * Saves the command and current filteredTasks list.
+     */
+    public void saveCurrentState(String commandText);
 }
