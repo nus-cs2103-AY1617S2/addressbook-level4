@@ -18,9 +18,8 @@ public class RenameCategoryCommand extends Command {
             + " || " + COMMAND_WORD_SHORT + " Home HomeSweetHome";
 
     public static final String MESSAGE_SUCCESS = "Category successfully renamed!";
-    public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss";
-    public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "category does"
-            + " not exist in TaskBoss";
+    public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss.";
+    public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "This category does not exist in TaskBoss.";
 
 
     public final String oldCategory;

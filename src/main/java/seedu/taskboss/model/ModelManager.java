@@ -121,7 +121,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws IllegalValueException, CommandException {
         assert oldCategory != null;
 
-        boolean exists = false;
+        boolean isFound = false;
 
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         FilteredList<ReadOnlyTask> oldCategoryTaskList = filteredTasks;
@@ -150,7 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 for (Category category : targetCategoryList) {
                     if (category.equals(oldCategory)) {
-                        exists = true;
+                        isFound = true;
                         newCategoryList.add(newCategory);
                     } else {
                         newCategoryList.add(category);
@@ -166,7 +166,8 @@ public class ModelManager extends ComponentManager implements Model {
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
 
-        if (exists == false) {
+        if (isFound == false) {
+            updateFilteredListToShowAll();
             throw new CommandException(oldCategory.toString()
                     + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
         }
