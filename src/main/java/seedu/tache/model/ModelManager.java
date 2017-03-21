@@ -98,7 +98,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowUncompleted() {
-        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier()));
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
+    }
+
+    @Override
+    public void updateFilteredListToShowCompleted() {
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
     }
 
     @Override
@@ -174,12 +179,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class ActiveQualifier implements Qualifier {
+        private boolean isActive;
 
-        ActiveQualifier() { }
+        ActiveQualifier(boolean isActive) {
+            this.isActive = isActive;
+        }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getActiveStatus();
+            if (isActive) {
+                return task.getActiveStatus();
+            } else {
+                return !task.getActiveStatus();
+            }
         }
 
         @Override

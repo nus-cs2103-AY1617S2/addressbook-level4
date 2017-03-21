@@ -28,6 +28,11 @@ public class CliSyntax {
     public static final String END_TIME_PARAMETER = "end_time";
     public static final String TAG_PARAMETER = "tag";
 
+    /* List filter definitions */
+    public static final String COMPLETED_FILTER = "name";
+    public static final String UNCOMPLETED_FILTER = "start_date";
+    public static final String ALL_FILTER = "end_date";
+
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
