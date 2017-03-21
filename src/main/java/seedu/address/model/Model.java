@@ -41,6 +41,8 @@ public interface Model {
 
     /** Updates the filter of the filtered Task list to show all Tasks */
     void updateFilteredListToShowAll();
+    
+    String getTagListToString();
 
     /** Updates the filter of the filtered Task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);

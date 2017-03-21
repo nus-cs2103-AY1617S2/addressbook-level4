@@ -26,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
     private FilteredList<ReadOnlyTask> filteredFloats;
     private FilteredList<ReadOnlyTask> filteredTasks;
     private FilteredList<ReadOnlyTask> filteredEvents;
-
+    
     /**
      * Initializes a ModelManager with the given ToDoList and userPrefs.
      */
@@ -55,6 +55,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ReadOnlyToDoList getToDoList() {
         return todoList;
+    }
+    
+    @Override
+    public String getTagListToString(){
+        return todoList.getTagListToString();
     }
 
     /** Raises an event to indicate the model has changed */
