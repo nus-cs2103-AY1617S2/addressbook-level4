@@ -13,7 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
 
     /* Prefix definitions for events*/
-    public static final Prefix PREFIX_LOCATION = new Prefix("//");
+    public static final Prefix PREFIX_LOCATION = new Prefix("l/");
 
     /* Prefix definitions for both tasks and events*/
     public static final Prefix PREFIX_DATE = new Prefix("d/");
