@@ -8,7 +8,10 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -80,8 +83,8 @@ public class TestUtil {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
                 new EventTask(new Name("CS2103T tutorial"), new Comment("prepare V0.2 presentation"),
-                                new Priority("high"), new Status(), new Date(117, 5, 5, 15, 0),
-                                new Date(117, 5, 5, 17, 0), new UniqueTagList("class")),
+                                new Priority("high"), new Status(), new GregorianCalendar(2017, 5, 5, 15, 0).getTime(),
+                                new GregorianCalendar(2017, 5, 5, 17, 0).getTime(), new UniqueTagList("class")),
                 new FloatingTask(new Name("CS3245 homework 3"), new Comment("discuss with classmates"),
                                     new Priority("medium"), new Status(), new UniqueTagList("class")),
                 new FloatingTask(new Name("Buy groceries"), new Comment("go NTUC"), new Priority("low"),
@@ -94,9 +97,11 @@ public class TestUtil {
                 new FloatingTask(new Name("Drink water"), new Comment("To improve brain function"),
                                     new Priority("medium"), new Status(), new UniqueTagList()),
                 new EventTask(new Name("Internship interview"), new Comment("at mediacorp"), new Priority("high"),
-                                    new Status(), new Date(117, 5, 5, 17, 0), new Date(117, 5, 5, 17, 0), new UniqueTagList()),
+                                    new Status(), new GregorianCalendar(2017, 4, 25, 13, 0).getTime(),
+                                    new GregorianCalendar(2017, 4, 25, 14, 30).getTime(), new UniqueTagList()),
                 new EventTask(new Name("Yet another interview"), new Comment("also at mediacorp"),
-                                    new Priority("high"), new Status(), new Date(117, 5, 5, 17, 0), new Date(117, 5, 5, 17, 0), new UniqueTagList())
+                                    new Priority("high"), new Status(), new GregorianCalendar(2017, 5, 10, 10, 30).getTime(),
+                                    new GregorianCalendar(2017, 5, 10, 11, 15).getTime(), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -370,4 +375,9 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    public static boolean isSameStringList(List<String> ls1, List<String> ls2) {
+        Set<String> s1 = new HashSet<>(ls1);
+        Set<String> s2 = new HashSet<>(ls2);
+        return s1.equals(s2);
+    }
 }

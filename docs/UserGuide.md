@@ -51,21 +51,23 @@ Format: help
 ### 2.2. Adding a task: add
 
 Adds a task to the task manager<br>
-Format: add TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...
+Format: add TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...]...
 
 > Add an event<br>
 > Add a task with deadline<br>
 > Add a floating task
 
 TASK_DETAILS include task name, date and time, which can be written in any order as it is processed by an inbuilt natural language processor<br>
-PRIORITY_LEVEL: high, medium, low
-Each task can have any number of tags (including 0)
+PRIORITY_LEVEL: high, medium, low<br>
+Each task can have any number of tags (including 0)<br>
+Each tag can only be a single word<br>
+Each tag is separated with spaces after the '/t' command
 
 Example:
 
 * Add Orientation camp from 22 Feb 9am to 27 Feb 9pm
-* Add Tetris AI Project due by 30th March priority/high tag/cs3243 project
-* Add Revision for cs3243 priority/ medium comment/ find people to study with tag/ cs3243
+* Add Tetris AI Project due by 30th March p/high t/cs3243 project
+* Add Do Homework p/medium c/find people to study with t/maths science
 
 ### 2.3. Deleting a task: delete
 
@@ -103,11 +105,11 @@ done 1
 ### 2.5. Modifies a current task: edit
 
 Edits a task of the following index, starting date or priority level if given from the task manager<br>
-Format: edit INDEX TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...
+Format: edit INDEX TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...]...
 
 Example:
 * find homework<br>
-edit 2 cs3243 homework due 3 March 11.59pm priority/ high
+edit 2 cs3243 homework due 3 March 11.59pm p/ high
 
 ### 2.6. Finding all tasks including any keyword: find
 Finds all task with the following keywords<br>
@@ -128,18 +130,18 @@ Shows a list of all tasks or groups of tasks<br>
 Format: list
 
 > List shows uncompleted tasks first before completed tasks
-
+//@@author A0141993X
 ### 2.8. Sorting the tasks: sort
-Sorts command based on task name, starting date, ending date or priority level.<br>
-Format: sort {TASK}{FROM}{TO}{PRIORITY}
+Sorts command based on task name, date, priority level.<br>
+Format: sort {TASK_DETAILS}{DATE}{PRIORITY}
+>> Only 1 of 3 parameters can be used
 
-> task: Sorts based on task name in alphabetical order<br>
-> start: Sorts based on start date<br>
-> end: Sorts based on end date<br>
-> priority: Sorts based on priority assigned starting with the highest priority
+> n: Sorts based on task name in alphabetical order<br>
+> d: Sorts based on date starting with the earliest date<br>
+> p: Sorts based on priority assigned starting with the highest priority <br>
 
 Example:
-* sort priority<br>
+* sort p<br>
 
 > Displays all tasks sorted according to priority
 
@@ -163,8 +165,28 @@ Format: clear [TAG]...
 Example:
 * clear completed
 * clear completed 2103
+//@@author A0141993X
+### 2.11. Saving the program data to a specified path: save
+Save FlexiTask list to a file specified by user<br>
+Format: save FILE_PATH/FILE_NAME.xml
 
-### 2.11. Exiting the program: exit
+> File extension must be xml<br>
+> If specified file does not exists, FlexiTask will create the file.
+
+Example:
+* save data/mytasklist.xml
+//@@author A0141993X
+### 2.12. Loading the program data from a specified path: load
+Load FlexiTask list from file specified by user<br>
+Format: load FILE_PATH/FILE_NAME.xml
+
+> File extension must be xml<br>
+> File specified must exist
+
+Example:
+* load users/user/Documents/mytasklist.xml
+
+### 2.13. Exiting the program: exit
 Exits the program<br>
 Format: exit
 
@@ -197,14 +219,20 @@ Format: exit
 * **Help** : `help` <br>
   	e.g. `help`
 
-* **Sort** : `sort {TASK}{FROM}{TO}{PRIORITY}` <br>
-  	e.g.`sort high`
+* **Sort** : `sort {TASK_DETAILS}{DATE}{PRIORITY}` <br>
+  	e.g.`sort n`
 
 * **Undo** : `undo` <br>
 	e.g. `undo`
 
 * **Clear** : `clear [TAG]...`<br>
 	e.g. `clear completed 2103
+
+* **Save** : `save FILE_PATH/FILE_NAME.xml`<br>
+e.g. `save data/mytasklist.xml
+
+* **Load** : `load FILE_PATH/FILE_NAME.xml`<br>
+e.g. `load users/user/Documents/mytasklist.xml
 
 * **Exit** : `exit`<br>
 	e.g. `exit`

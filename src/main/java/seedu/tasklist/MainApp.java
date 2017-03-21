@@ -72,16 +72,16 @@ public class MainApp extends Application {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
-
+//@@author A0141993X
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskList> addressBookOptional;
+        Optional<ReadOnlyTaskList> flexiTaskOptional;
         ReadOnlyTaskList initialData;
         try {
-            addressBookOptional = storage.readTaskList();
-            if (!addressBookOptional.isPresent()) {
+            flexiTaskOptional = storage.readTaskList();
+            if (!flexiTaskOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleTaskList);
+            initialData = flexiTaskOptional.orElseGet(SampleDataUtil::getSampleTaskList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
             initialData = new TaskList();
@@ -90,9 +90,9 @@ public class MainApp extends Application {
             initialData = new TaskList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, storage, userPrefs);
     }
-
+//@@author
     private void initLogging(Config config) {
         LogsCenter.init(config);
     }

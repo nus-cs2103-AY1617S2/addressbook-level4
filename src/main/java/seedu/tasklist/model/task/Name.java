@@ -58,4 +58,9 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /** Compares this.name with name lexicographically for sortByName method */
+    public int compareTo(Name name) {
+        return this.toString().compareTo(name.toString());
+    }
+
 }

@@ -1,7 +1,7 @@
 package seedu.tasklist.model.task;
 
 import seedu.tasklist.model.tag.UniqueTagList;
-
+//@@author A0141993X
 /**
  * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated.
@@ -30,6 +30,5 @@ public abstract class Task implements ReadOnlyTask {
      * Replaces this task's tags with the tags in the argument tag list.
      */
     public abstract void setTags(UniqueTagList replacement);
-
 
 }

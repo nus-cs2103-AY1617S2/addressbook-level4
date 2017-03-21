@@ -55,4 +55,15 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+
+    /**
+     * Returns a string with its square brackets, [ ]
+     */
+    public static String removeSquareBrackets(String tag) {
+        if (tag.startsWith("[") && tag.endsWith("]")) {
+            return tag.substring(1, tag.length() - 1);
+        } else {
+            return tag;
+        }
+    }
 }

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
-
+//@@author A0141993X
 /**
  * Represents a Floating Task in the task list.
  * Guarantees: details are present and not null, field values are validated.

@@ -23,7 +23,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private TaskListStorage taskListStorage;
     private UserPrefsStorage userPrefsStorage;
 
-
+//@@author A0141993X
     public StorageManager(TaskListStorage taskListStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.taskListStorage = taskListStorage;
@@ -33,7 +33,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public StorageManager(String flexiTaskFilePath, String userPrefsFilePath) {
         this(new XmlTaskListStorage(flexiTaskFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
-
+//@@author
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -74,6 +74,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveTaskList(ReadOnlyTaskList flexitask, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(flexitask, filePath);
+        taskListStorage = new XmlTaskListStorage(filePath);
     }
 
 
@@ -86,6 +87,11 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+//@@author A0141993X
+    @Override
+    public void loadTaskList(String filePath) {
+        taskListStorage = new XmlTaskListStorage(filePath);
     }
 
 }

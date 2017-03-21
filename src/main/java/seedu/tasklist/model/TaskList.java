@@ -1,6 +1,8 @@
 package seedu.tasklist.model;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -201,5 +203,73 @@ public class TaskList implements ReadOnlyTaskList {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
+    }
+//@@author A0141993X
+    /**
+     * Tasks are sorted according to Name in ascending order
+     */
+    public void sortByName() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.getName().compareTo(t2.getName());
+            }
+        });
+    }
+
+    /**
+     * Tasks are sorted according to Priority in descending order
+     */
+    public void sortByPriority() {
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.getPriority().compareTo(t2.getPriority());
+            }
+        });
+    }
+
+    /**
+     * Tasks are sorted according to Date in ascending order for event and deadline tasks,
+     * and floating task listed in no particular order
+     */
+    public void sortByDate() {
+
+        this.tasks.getInternalList().sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                Date t1Date = new Date(Long.MAX_VALUE);
+                Date t2Date = new Date(Long.MAX_VALUE);
+
+                    switch (t1.getType()) {
+                    case FloatingTask.TYPE:
+                        t1Date = new Date(Long.MAX_VALUE);
+                        break;
+                    case DeadlineTask.TYPE:
+                        t1Date = ((DeadlineTask) t1).getDeadline();
+                        break;
+                    case EventTask.TYPE:
+                        t1Date = ((EventTask) t1).getStartDate();
+                        break;
+                    default:
+                        break;
+                    }
+
+                    switch (t2.getType()) {
+                    case FloatingTask.TYPE:
+                        t2Date = new Date(Long.MAX_VALUE);
+                        break;
+                    case DeadlineTask.TYPE:
+                        t2Date = ((DeadlineTask) t2).getDeadline();
+                        break;
+                    case EventTask.TYPE:
+                        t2Date =  ((EventTask) t2).getStartDate();
+                        break;
+                    default:
+                        break;
+                    }
+                    return t1Date.compareTo(t2Date);
+            }
+        });
     }
 }

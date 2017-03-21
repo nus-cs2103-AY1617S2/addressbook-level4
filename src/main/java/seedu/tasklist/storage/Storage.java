@@ -35,4 +35,9 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskListChangedEvent(TaskListChangedEvent abce);
+  //@@author A0141993X
+    /**
+     * Loads new XmlTaskListStorage from file path.
+     */
+    void loadTaskList(String filePath);
 }

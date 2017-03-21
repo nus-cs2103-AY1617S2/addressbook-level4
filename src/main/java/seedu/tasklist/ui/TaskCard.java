@@ -29,6 +29,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label priority;
     @FXML
+    private Label deadline;
+    @FXML
     private Label startDate;
     @FXML
     private Label endDate;
@@ -49,14 +51,17 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
         switch(taskType) {
         case DeadlineTask.TYPE:
-            startDate.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
+            deadline.setText("Deadline: " + ((ReadOnlyDeadlineTask) task).getDeadlineString());
+            startDate.setVisible(false);
             endDate.setVisible(false);
             break;
         case EventTask.TYPE:
+            deadline.setVisible(false);
             startDate.setText("Start Date: " + ((ReadOnlyEventTask) task).getStartDateString());
             endDate.setText("End Date: " + ((ReadOnlyEventTask) task).getEndDateString());
             break;
         case FloatingTask.TYPE:
+            deadline.setVisible(false);
             startDate.setVisible(false);
             endDate.setVisible(false);
             break;
