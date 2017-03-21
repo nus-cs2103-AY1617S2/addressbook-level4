@@ -108,6 +108,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBossChanged();
     }
 
+    //@@author A0143157J
     @Override
     public void sortTasks(SortBy sortType) throws IllegalValueException {
         assert sortType != null;
@@ -177,6 +178,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Task List Accessors =============================================================
 
+    //@@author
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);

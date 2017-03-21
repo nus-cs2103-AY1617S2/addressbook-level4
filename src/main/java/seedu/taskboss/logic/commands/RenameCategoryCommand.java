@@ -6,13 +6,17 @@ import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 
+//@@author A0143157J
+/**
+ * Renames an existing category in TaskBoss. 
+ */
 public class RenameCategoryCommand extends Command {
 
     public static final String COMMAND_WORD = "name";
     public static final String COMMAND_WORD_SHORT = "n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
-            + ": Renames a category.\n"
+            + ": Renames an existing category.\n"
             + "Parameters: OLD_CATEGORY_NAME NEW_CATEGORY_NAME.\n"
             + "Example: " + COMMAND_WORD + " Work Workplace"
             + " || " + COMMAND_WORD_SHORT + " Home HomeSweetHome";

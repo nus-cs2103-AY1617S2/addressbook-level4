@@ -6,6 +6,10 @@ import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 
+//@@author A0143157J
+/**
+ * Parses input arguments and creates a new RenameCategoryCommand object
+ */
 public class RenameCategoryCommandParser {
 
     private static final int NUM_CATEGORIES_PARAM = 2;
