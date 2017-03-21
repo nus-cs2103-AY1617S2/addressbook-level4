@@ -16,7 +16,7 @@ import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.events.ui.ShowHelpRequestEvent;
-import seedu.taskboss.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.taskboss.commons.events.ui.TaskPanelViewingChangedEvent;
 import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.logic.Logic;
 import seedu.taskboss.model.UserPrefs;
@@ -120,9 +120,9 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+    private void handleTaskPanelViewingChangedEvent(TaskPanelViewingChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewViewing());
     }
 
 }

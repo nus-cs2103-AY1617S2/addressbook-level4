@@ -11,7 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskboss.commons.core.LogsCenter;
-import seedu.taskboss.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.taskboss.commons.events.ui.TaskPanelViewingChangedEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
@@ -34,7 +34,7 @@ public class TaskListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+        setEventHandlerForViewingChangeEvent();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -43,12 +43,12 @@ public class TaskListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-    private void setEventHandlerForSelectionChangeEvent() {
+    private void setEventHandlerForViewingChangeEvent() {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
+                        logger.fine("Viewing in task list panel changed to : '" + newValue + "'");
+                        raise(new TaskPanelViewingChangedEvent(newValue));
                     }
                 });
     }
