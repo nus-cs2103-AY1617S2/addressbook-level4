@@ -307,6 +307,7 @@ Format: `redo`
 
 <br>
 
+//@@author A0141993X
 <a name="sort"></a>
 ### 3.10. Sorting tasks: sort
 
@@ -315,6 +316,9 @@ Sorts tasks based on task name, start date, end date or priority level<br>
 > ***Flexible command:*** `arrange`
 
 Format: `sort {TASK_DETAILS}{DATE}{PRIORITY_LEVEL}`
+
+> List shows uncompleted tasks first before completed tasks
+
 >> Only 1 of 3 parameters can be used
 
 > n: Sorts based on task name in alphabetical order<br>
@@ -342,8 +346,9 @@ Example:
 * clear completed
 * clear completed 2103
 
-<br>
 
+<br>
+//@@author A0141993X
 <a name="save"></a>
 ### 3.12. Saving the program data to a specified path: save
 Save FlexiTask list to a file specified by user<br>
@@ -357,10 +362,14 @@ Example:
 
 * save data/mytasklist.xml
 
+
 <br>
 
+//@@author A0141993X
 <a name="load"></a>
 ### 3.13. Loading the program data from a specified path: load
+
+
 Load FlexiTask list from file specified by user<br>
 
 Format: `load FILE_PATH/FILE_NAME.xml`

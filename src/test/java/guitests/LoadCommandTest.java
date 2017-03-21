@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.tasklist.commons.core.Messages;
 import seedu.tasklist.logic.commands.LoadCommand;
 import seedu.tasklist.testutil.TestUtil;
-
+//@@author A0141993X
 public class LoadCommandTest extends TaskListGuiTest {
     private static String newFilePath = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
 

@@ -40,7 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private Stack<ReadOnlyTaskList> undoStack;
     private Stack<ReadOnlyTaskList> redoStack;
-
+//@@author A0141993X
     /**
      * Initializes a ModelManager with the given taskList and userPrefs.
      */
@@ -62,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(Storage storage) {
         this(new TaskList(), storage, new UserPrefs());
     }
-
+//@@author
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void enableUndoForClear() {
         undoStack.push(new TaskList(taskList));
     }
-
+//@@author A0141993X
     @Override
     public synchronized void loadTaskList(String filePath) throws IOException {
         Optional<ReadOnlyTaskList> flexiTaskOptional;
@@ -159,7 +159,7 @@ public class ModelManager extends ComponentManager implements Model {
         storage.saveTaskList(taskList, filePath);
         indicateTaskListChanged();
     }
-
+//@@author
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -180,7 +180,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-
+//@@author A0141993X
     /**
      * Sort based on parameter specified
      * @param parameter
@@ -202,7 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         indicateTaskListChanged();
     }
-
+//@@author
     @Override
     public void updateFilteredTaskListTag(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
