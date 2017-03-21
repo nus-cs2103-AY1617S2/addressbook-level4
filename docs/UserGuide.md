@@ -51,21 +51,23 @@ Format: help
 ### 2.2. Adding a task: add
 
 Adds a task to the task manager<br>
-Format: add TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...
+Format: add TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...]...
 
 > Add an event<br>
 > Add a task with deadline<br>
 > Add a floating task
 
 TASK_DETAILS include task name, date and time, which can be written in any order as it is processed by an inbuilt natural language processor<br>
-PRIORITY_LEVEL: high, medium, low
-Each task can have any number of tags (including 0)
+PRIORITY_LEVEL: high, medium, low<br>
+Each task can have any number of tags (including 0)<br>
+Each tag can only be a single word<br>
+Each tag is separated with spaces after the '/t' command
 
 Example:
 
 * Add Orientation camp from 22 Feb 9am to 27 Feb 9pm
-* Add Tetris AI Project due by 30th March priority/high tag/cs3243 project
-* Add Revision for cs3243 priority/ medium comment/ find people to study with tag/ cs3243
+* Add Tetris AI Project due by 30th March p/high t/cs3243 project
+* Add Do Homework p/medium c/find people to study with t/maths science
 
 ### 2.3. Deleting a task: delete
 
@@ -103,11 +105,11 @@ done 1
 ### 2.5. Modifies a current task: edit
 
 Edits a task of the following index, starting date or priority level if given from the task manager<br>
-Format: edit INDEX TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...
+Format: edit INDEX TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...]...
 
 Example:
 * find homework<br>
-edit 2 cs3243 homework due 3 March 11.59pm priority/ high
+edit 2 cs3243 homework due 3 March 11.59pm p/ high
 
 ### 2.6. Finding all tasks including any keyword: find
 Finds all task with the following keywords<br>

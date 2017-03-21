@@ -34,7 +34,6 @@ public class AddCommandTest extends TaskListGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        System.out.println(td.tutorial.getAddCommand());
         assertAddSuccess(td.tutorial);
 
         //invalid command

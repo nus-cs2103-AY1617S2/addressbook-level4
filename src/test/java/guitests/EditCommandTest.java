@@ -47,7 +47,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_DeadlineTask_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Eat food d/03-16-17 00:00:00 p/medium c/to fill stomach t/life t/yummy";
+        String detailsToEdit = "Eat food d/03-16-17 00:00:00 p/medium c/to fill stomach t/life yummy";
         int taskListIndex = 5;
 
         TestTask editedTask = new DeadlineTaskBuilder().withDeadline("16/03/2017 00:00:00").withName("Eat food")

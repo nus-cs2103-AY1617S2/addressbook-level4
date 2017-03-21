@@ -180,7 +180,8 @@ public class TestEventTask extends TestTask implements ReadOnlyEventTask {
                     + endSeconds + " ");
         sb.append("c/" + this.getComment().value + " ");
         sb.append("p/" + this.getPriority().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        sb.append("t/");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
         return sb.toString();
     }
 
