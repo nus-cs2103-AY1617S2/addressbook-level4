@@ -28,7 +28,7 @@ public class ListCommandParser {
             case COMPLETED_FILTER:
             case UNCOMPLETED_FILTER:
             case ALL_FILTER:
-                return new ListCommand(args);
+                return new ListCommand(trimmedArgs);
             default:
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }
