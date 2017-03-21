@@ -207,7 +207,7 @@ Shows a list of all tasks or groups of tasks<br>
 
 Format: `list`
 
-> List shows uncompleted tasks first before completed tasks<br>
+> `list` shows uncompleted tasks first before completed tasks<br>
 > Tasks are displayed in the left panel of the GUI as shown in Figure 4
 
 <br>
@@ -221,7 +221,7 @@ Deletes a task <br>
 
 Format: `delete INDEX`
 
-> Deletes a task at the specified INDEX. The index refers to the index number shown in the most recent listing.
+> Deletes a task at the specified `INDEX`. The `INDEX` refers to the index number shown in the most recent listing.
 
 Example:
 * list<br>delete 2
@@ -307,7 +307,7 @@ Format: `redo`
 
 <br>
 <a name="sort"></a>
-## 3.10. Sorting tasks: sort
+### 3.10. Sorting tasks: sort
 Sorts tasks based on task name, start date, end date or priority level.<br>
 
 > ***Flexible command:*** `arrange`
