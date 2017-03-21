@@ -44,4 +44,8 @@ public class UndoManager {
 		return undoStack.empty();
 	}
 
+	public boolean getCommandHistoryStatus(){
+		return previousCommand.getCommandHistoryStatus();
+	}
+
 }

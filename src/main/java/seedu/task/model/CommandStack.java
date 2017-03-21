@@ -12,4 +12,8 @@ public class CommandStack {
     public String popCommand() {
     	return commandStack.pop();
     }
+
+    public boolean getCommandHistoryStatus() {
+    	return commandStack.empty();
+    }
 }

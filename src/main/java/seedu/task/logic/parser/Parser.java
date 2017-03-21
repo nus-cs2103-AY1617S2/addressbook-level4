@@ -64,9 +64,11 @@ public class Parser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Clear");
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Find");
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
@@ -77,12 +79,15 @@ public class Parser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Help");
             return new HelpCommand();
 
         case CheckCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Check");
             return new CheckedCommandParser().parse(arguments);
 
         case UncheckCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Uncheck");
             return new UncheckedCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:

@@ -18,22 +18,30 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-    	if(model.getUndoManager().getStackStatus()){
+    	if (model.getUndoManager().getCommandHistoryStatus()) {
     		return new CommandResult(NOTHING_TO_UNDO);
     	}
 
     	String previousCommand = model.getUndoManager().popCommand();
-    	Task previousTask = model.getUndoManager().popUndo();
+
+
+    	if(model.getUndoManager().getStackStatus()){
+    		return new CommandResult(NOTHING_TO_UNDO);
+    	}
+
     	System.out.println(previousCommand);
 
     	switch (previousCommand) {
         case "Add":
+        	Task previousTask = model.getUndoManager().popUndo();
         	new DeleteCommand().executeUndo(previousTask, model);
         	break;
         case "Delete":
+        	previousTask = model.getUndoManager().popUndo();
         	new AddCommand().executeUndo(previousTask, model);
         	break;
         case "Edit":
+        	previousTask = model.getUndoManager().popUndo();
         	Integer previousIndex = model.getUndoManager().popTaskIndex();
         	new EditCommand().executeUndo(model, previousIndex, previousTask);
         	break;
