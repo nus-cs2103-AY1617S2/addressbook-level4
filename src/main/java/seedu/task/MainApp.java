@@ -14,6 +14,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
+import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -66,6 +67,8 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(model.getTaskManager()));
     }
 
     private String getApplicationParameter(String parameterName) {

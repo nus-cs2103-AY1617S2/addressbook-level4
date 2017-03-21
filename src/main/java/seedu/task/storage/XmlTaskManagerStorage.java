@@ -73,6 +73,22 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
 
+        saveBackUp();
+
+        assert taskManager != null;
+        assert filePath != null;
+
+        File file = new File(filePath);
+        FileUtil.createIfMissing(file);
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+    }
+
+    /**
+     * Reads from kit.xml and creates backup
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    private void saveBackUp() throws IOException, FileNotFoundException {
         try {
             Optional<ReadOnlyTaskManager> optionalTaskManagerBackup = readTaskManager();
             ReadOnlyTaskManager taskManagerBackup;
@@ -90,13 +106,6 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         } catch (DataConversionException e) {
             logger.info("Data file not found. Unable to backup.");
         }
-
-        assert taskManager != null;
-        assert filePath != null;
-
-        File file = new File(filePath);
-        FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
 }
