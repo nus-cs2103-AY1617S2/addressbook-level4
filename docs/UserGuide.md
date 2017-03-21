@@ -130,7 +130,7 @@ Shows a list of all tasks or groups of tasks<br>
 Format: list
 
 > List shows uncompleted tasks first before completed tasks
-
+//@@author A0141993X
 ### 2.8. Sorting the tasks: sort
 Sorts command based on task name, date, priority level.<br>
 Format: sort {TASK_DETAILS}{DATE}{PRIORITY}
@@ -165,7 +165,7 @@ Format: clear [TAG]...
 Example:
 * clear completed
 * clear completed 2103
-
+//@@author A0141993X
 ### 2.11. Saving the program data to a specified path: save
 Save FlexiTask list to a file specified by user<br>
 Format: save FILE_PATH/FILE_NAME.xml
@@ -175,7 +175,7 @@ Format: save FILE_PATH/FILE_NAME.xml
 
 Example:
 * save data/mytasklist.xml
-
+//@@author A0141993X
 ### 2.12. Loading the program data from a specified path: load
 Load FlexiTask list from file specified by user<br>
 Format: load FILE_PATH/FILE_NAME.xml

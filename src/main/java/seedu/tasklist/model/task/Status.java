@@ -1,6 +1,6 @@
 package seedu.tasklist.model.task;
 
-
+//@@author A0141993X
 /**
  * Represents a Task's status (completed/uncompleted) in the task list.
  */
