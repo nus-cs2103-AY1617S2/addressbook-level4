@@ -18,8 +18,8 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -83,7 +83,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -104,10 +105,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -132,6 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -145,19 +149,16 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             boolean hasName = nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword))
-                    .findAny()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword)).findAny()
                     .isPresent();
             boolean hasDescription = nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
-                    .findAny()
-                    .isPresent();
+                    .findAny().isPresent();
             boolean hasTag = false;
             UniqueTagList tagList = task.getTags();
             for (Tag tag : tagList) {
-            	hasTag = hasTag || nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
-                        .findAny()
+                hasTag = hasTag || nameKeyWords.stream()
+                        .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)).findAny()
                         .isPresent();
             }
             return hasName || hasDescription || hasTag;
