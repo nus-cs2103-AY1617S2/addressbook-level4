@@ -35,19 +35,6 @@ public interface Model {
 	/** Sorts the filtered event list */
 	void sortFilteredEventList();
 
-	void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException;
-
-	/**
-	 * Updates the event located at {@code filteredEventListIndex} with
-	 * {@code editedEvent}.
-	 *
-	 * @throws DuplicateEventException
-	 *             if updating the event's details causes the event to be
-	 *             equivalent to another existing event in the list.
-	 * @throws IndexOutOfBoundsException
-	 *             if {@code filteredEventListIndex} < 0 or >= the size of the
-	 *             filtered list.
-	 */
 	void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException;
 

@@ -175,14 +175,6 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
-		// TODO Auto-generated method stub
-	}
-
-	// ========== Inner classes/interfaces used for filtering
-	// =================================================
-
-	@Override
 	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException {
 		assert editedEvent != null;
