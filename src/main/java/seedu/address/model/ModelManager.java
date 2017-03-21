@@ -12,8 +12,10 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -131,6 +133,17 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(pred);
     }
 
+    //@@author A0139322L
+    @Override
+    public void updateFilteredTagTaskList(String tagName) throws IllegalValueException {
+        Tag tag;
+        tag = new Tag(tagName);
+
+        Predicate<? super ReadOnlyTask> pred = s -> s.getTags().contains(tag);
+        filteredTasks.setPredicate(pred);
+    }
+    //@@author
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -182,4 +195,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
 }
