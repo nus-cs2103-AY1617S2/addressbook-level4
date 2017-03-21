@@ -186,7 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undo() throws EmptyTaskManagerStackException {
         this.taskManager.resetData(taskManagerStack.loadOlderTaskManager());
-        updateFilteredTasks();
+        // updateFilteredTasks();
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }

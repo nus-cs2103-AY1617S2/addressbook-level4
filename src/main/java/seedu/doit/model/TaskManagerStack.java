@@ -28,7 +28,8 @@ public class TaskManagerStack {
     }
 
     public static void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
-        undoStack.push(readOnlyItemManager);
+        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
+        undoStack.push(oldReadOnlyTaskManager);
     }
 
     /**
@@ -44,7 +45,8 @@ public class TaskManagerStack {
             throw new EmptyTaskManagerStackException(NOTHING_TO_UNDO);
         }
         ReadOnlyItemManager undidTaskManager = undoStack.pop();
-        redoStack.push(undidTaskManager);
+        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(undidTaskManager);
+        redoStack.push(oldReadOnlyTaskManager);
         return undidTaskManager;
     }
 
@@ -61,7 +63,8 @@ public class TaskManagerStack {
             throw new EmptyTaskManagerStackException(NOTHING_TO_REDO);
         }
         ReadOnlyItemManager redidTaskManager = redoStack.pop();
-        undoStack.push(redidTaskManager);
+        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(redidTaskManager);
+        undoStack.push(oldReadOnlyTaskManager);
         return redidTaskManager;
     }
 
