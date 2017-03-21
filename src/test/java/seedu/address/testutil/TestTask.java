@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Time;
@@ -14,7 +14,7 @@ public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
-    private Email email;
+    private ClockTime email;
     private Time time;
     private UniqueTagList tags;
 

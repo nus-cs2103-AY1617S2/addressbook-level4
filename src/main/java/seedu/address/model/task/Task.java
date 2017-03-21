@@ -13,7 +13,7 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Time time;
-    private Email email;
+    private ClockTime email;
     private Address address;
 
     private UniqueTagList tags;
@@ -75,7 +75,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setTime(replacement.getTime());
-        //this.setEmail(replacement.getEmail());
+        //this.setClockTime(replacement.getClockTime());
         //this.setAddress(replacement.getAddress());
         this.setTags(replacement.getTags());
     }
