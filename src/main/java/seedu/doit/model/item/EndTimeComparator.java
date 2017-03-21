@@ -47,7 +47,7 @@ public class EndTimeComparator implements TaskComparator {
     }
 
     private int compareEndTime(ReadOnlyTask curr, ReadOnlyTask other) {
-        return curr.getEndTime().compareTo(other.getEndTime());
+        return curr.getDeadline().compareTo(other.getDeadline());
     }
 
     private int compareName(ReadOnlyTask curr, ReadOnlyTask other) {
