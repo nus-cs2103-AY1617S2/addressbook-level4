@@ -51,18 +51,18 @@ public class ViewCommandTest extends TaskBossGuiTest {
 
     private void assertSelectionInvalid(boolean isShortCommand, int index) {
         if (isShortCommand) {
-            commandBox.runCommand("sl " + index);
+            commandBox.runCommand("v " + index);
         } else {
-            commandBox.runCommand("select " + index);
+            commandBox.runCommand("view " + index);
         }
         assertResultMessage("The task index provided is invalid");
     }
 
     private void assertSelectionSuccess(boolean isShortCommand, int index) {
         if (isShortCommand) {
-            commandBox.runCommand("sl " + index);
+            commandBox.runCommand("v " + index);
         } else {
-            commandBox.runCommand("select " + index);
+            commandBox.runCommand("view " + index);
         }
         assertResultMessage("Selected Task: " + index);
         assertTaskSelected(index);
