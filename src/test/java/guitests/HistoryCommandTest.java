@@ -52,4 +52,26 @@ public class HistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command3);
         assertResultMessage("\n" + command1 + "\n" + command2 + "\n" + command3 + "\n4 commands displayed.");
     }
+
+    @Test
+    public void addMutatingCommandAndUndoAndViewHistory() {
+        String command1 = "add task";
+        commandBox.runCommand(command1);
+        String command2 = "undo";
+        commandBox.runCommand(command2);
+        String command3 = "history";
+        commandBox.runCommand(command3);
+        assertResultMessage("\n" + command1 + "\n" + command2 + "\n" + command3 + "\n4 commands displayed.");
+    }
+
+    @Test
+    public void addRandomGibberishAndViewHistory() {
+        String command1 = "sadfkjhaslfhka";
+        commandBox.runCommand(command1);
+        String command2 = "98371497632841892346";
+        commandBox.runCommand(command2);
+        String command3 = "history";
+        commandBox.runCommand(command3);
+        assertResultMessage("\n" + command1 + "\n" + command2 + "\n" + command3 + "\n4 commands displayed.");
+    }
 }
