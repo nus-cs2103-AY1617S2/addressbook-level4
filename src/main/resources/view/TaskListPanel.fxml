@@ -5,7 +5,6 @@
 <?import java.net.URL?>
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@GradientTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>

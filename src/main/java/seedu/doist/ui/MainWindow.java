@@ -1,5 +1,7 @@
 package seedu.doist.ui;
 
+import com.sun.glass.ui.monocle.linux.LinuxInputProcessor.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -55,6 +57,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
+    private String gradientThemeUrl = getClass().getResource("/view/GradientTheme.css").toExternalForm();
+    private String darkThemeUrl = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -70,6 +75,10 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+
+        if (!scene.getStylesheets().contains(gradientThemeUrl)) {
+            scene.getStylesheets().add(gradientThemeUrl);
+        }
 
         setAccelerators();
     }
@@ -193,6 +202,24 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    @FXML
+    private void handleDarkTheme() {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().remove(gradientThemeUrl);
+        if (!scene.getStylesheets().contains(darkThemeUrl)) {
+            scene.getStylesheets().add(darkThemeUrl);
+        }
+    }
+
+    @FXML
+    private void handleGradientTheme() {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().remove(gradientThemeUrl);
+        if (!scene.getStylesheets().contains(gradientThemeUrl)) {
+            scene.getStylesheets().add(gradientThemeUrl);
+        }
     }
 
     public TaskListPanel getPersonListPanel() {
