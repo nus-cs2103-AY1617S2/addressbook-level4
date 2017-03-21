@@ -1,10 +1,8 @@
 package typetask.storage;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import typetask.commons.core.Config;
-import typetask.commons.exceptions.DataConversionException;
 import typetask.commons.util.JsonUtil;
 
 public class ModifyConfigData {

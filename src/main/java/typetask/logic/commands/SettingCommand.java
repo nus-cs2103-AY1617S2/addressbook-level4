@@ -2,11 +2,9 @@ package typetask.logic.commands;
 
 import java.io.IOException;
 
-import typetask.commons.exceptions.DataConversionException;
 import typetask.commons.util.FileUtil;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.storage.ModifyConfigData;
-import typetask.storage.Storage;
 
 public class SettingCommand extends Command {
 
@@ -28,6 +26,7 @@ public class SettingCommand extends Command {
         ModifyConfigData mcd = new ModifyConfigData(config);
         mcd.setTaskManagerFilePath(FileUtil.getPath(path));
         storage.setTaskManagerFilePath(path);
+        storage.saveTaskManager(model.getTaskManager());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
