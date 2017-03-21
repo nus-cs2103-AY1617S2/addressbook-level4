@@ -26,7 +26,7 @@ import seedu.todolist.model.task.StartTime;
  */
 public class TaskParser {
 	
-	public static final String MESSAGE_INVALID_TASK = "Name and tags must be present";
+	public static final String MESSAGE_INVALID_TASK = "Name must be present";
 	
 	/**
      * Parses the given {@code String} of input that contains parameters
@@ -45,7 +45,7 @@ public class TaskParser {
         		: null);
         Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
         
-        if (name == null || tags.size() == 0) {
+        if (name == null) {
         	throw new IllegalValueException(MESSAGE_INVALID_TASK);
         }
 
@@ -82,7 +82,6 @@ public class TaskParser {
 	public static Task parseTask(Name name, StartTime startTime,
 			EndTime endTime, UniqueTagList uniqueTagList) {
 		assert name != null;
-		assert uniqueTagList.toSet().size() > 0;
 		
 		if (startTime != null && endTime != null) {
         	return new StartEndTask(name, startTime, endTime, uniqueTagList);

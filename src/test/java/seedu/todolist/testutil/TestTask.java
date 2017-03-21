@@ -75,7 +75,17 @@ public class TestTask extends Task {
 
     @Override
     public String toString() {
-        return toString();
+    	final StringBuilder builder = new StringBuilder();
+        builder.append(getName());
+        if (this.startTime != null) {
+        	builder.append(" Start Time: " + getStartTime().toString());
+        }
+        if (this.endTime != null) {
+        	builder.append(" End Time: " + getEndTime().toString());
+        }
+        builder.append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
     }
     
     @Override
