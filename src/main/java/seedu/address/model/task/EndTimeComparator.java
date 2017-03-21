@@ -12,10 +12,8 @@ public class EndTimeComparator implements Comparator<ReadOnlyTask> {
             } else {
                 return 0;
             }
-        } else if (p.getEndTime().isPresent()) {
+        } else if (p.getEndTime().isPresent() || q.getEndTime().isPresent()) {
             return -1;
-        } else if (q.getEndTime().isPresent()) {
-            return 1;
         } else {
             return 0;
         }
