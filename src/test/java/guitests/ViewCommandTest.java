@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import seedu.taskboss.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends TaskBossGuiTest {
+public class ViewCommandTest extends TaskBossGuiTest {
 
     @Test
     public void selectTask_nonEmptyList() {
