@@ -217,7 +217,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TaskManager expectedAB = new TaskManager();
-        expectedAB.addTaskPerson(toBeAdded);
+        expectedAB.addTaskTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -339,7 +339,7 @@ public class LogicManagerTest {
         List<Task> threePersons = helper.generatePersonList(3);
 
         TaskManager expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removePerson(threePersons.get(1));
+        expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("delete 2",
@@ -512,7 +512,7 @@ public class LogicManagerTest {
          */
         void addToAddressBook(TaskManager addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
-                addressBook.addTaskPerson(p);
+                addressBook.addTaskTask(p);
             }
         }
 

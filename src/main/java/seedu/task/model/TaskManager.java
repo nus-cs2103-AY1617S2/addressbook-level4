@@ -83,7 +83,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent person already exists.
      */
-    public void addTaskPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTaskTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
         tasks.add(p);
     }
@@ -97,7 +97,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updatePerson(int index, ReadOnlyTask editedReadOnlyPerson)
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyPerson)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyPerson != null;
         
@@ -138,11 +138,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removePerson(ReadOnlyTask key) throws UniqueTaskList.PersonNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.PersonNotFoundException();
+            throw new UniqueTaskList.TaskNotFoundException();
         }
     }
 

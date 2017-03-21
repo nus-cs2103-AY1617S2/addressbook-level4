@@ -46,7 +46,7 @@ public class SampleDataUtil {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task samplePerson : getSamplePersons()) {
-                sampleAB.addTaskPerson(samplePerson);
+                sampleAB.addTaskTask(samplePerson);
             }
             return sampleAB;
         } catch (DuplicateTaskException e) {

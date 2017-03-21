@@ -60,7 +60,7 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTaskPerson(new Task(task));
+                ab.addTaskTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
