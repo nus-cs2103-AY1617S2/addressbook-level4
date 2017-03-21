@@ -5,6 +5,7 @@ import static seedu.todolist.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.todolist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import seedu.todolist.commons.exceptions.IllegalValueException;
@@ -36,40 +37,40 @@ public class TaskParser {
 		ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START, PREFIX_END, PREFIX_TAG);
         argsTokenizer.tokenize(taskInput);
-        String name = argsTokenizer.getPreamble().get();
-        String startTime = (argsTokenizer.getValue(PREFIX_START).isPresent() ? 
-        		argsTokenizer.getValue(PREFIX_START).get() 
-        		: null);
-        String endTime = (argsTokenizer.getValue(PREFIX_END).isPresent() ? 
-        		argsTokenizer.getValue(PREFIX_END).get() 
-        		: null);
-        Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
-        
-        if (name == null) {
-        	throw new IllegalValueException(MESSAGE_INVALID_TASK);
-        }
+        try {
+            String name = argsTokenizer.getPreamble().get();
+            String startTime = (argsTokenizer.getValue(PREFIX_START).isPresent() ? 
+            		argsTokenizer.getValue(PREFIX_START).get() 
+            		: null);
+            String endTime = (argsTokenizer.getValue(PREFIX_END).isPresent() ? 
+            		argsTokenizer.getValue(PREFIX_END).get() 
+            		: null);
+            Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
 
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        
-        if (startTime != null && endTime != null) {
-        	return new StartEndTask(new Name(name), 
-        			new StartTime(startTime), 
-        			new EndTime(endTime), 
-        			new UniqueTagList(tagSet));
-        } else if (startTime != null && endTime == null) {
-        	return new StartTask(new Name(name), 
-        			new StartTime(startTime),
-        			new UniqueTagList(tagSet));
-        } else if (startTime == null && endTime != null) {
-        	return new EndTask(new Name(name), 
-        			new EndTime(endTime), 
-        			new UniqueTagList(tagSet));
-        } else {
-        	return new FloatingTask(new Name(name), 
-        			new UniqueTagList(tagSet));
+            final Set<Tag> tagSet = new HashSet<>();
+            for (String tagName : tags) {
+                tagSet.add(new Tag(tagName));
+            }
+            
+            if (startTime != null && endTime != null) {
+            	return new StartEndTask(new Name(name), 
+            			new StartTime(startTime), 
+            			new EndTime(endTime), 
+            			new UniqueTagList(tagSet));
+            } else if (startTime != null && endTime == null) {
+            	return new StartTask(new Name(name), 
+            			new StartTime(startTime),
+            			new UniqueTagList(tagSet));
+            } else if (startTime == null && endTime != null) {
+            	return new EndTask(new Name(name), 
+            			new EndTime(endTime), 
+            			new UniqueTagList(tagSet));
+            } else {
+            	return new FloatingTask(new Name(name), 
+            			new UniqueTagList(tagSet));
+            }
+        } catch (NoSuchElementException nsse) {
+        	throw new NoSuchElementException(MESSAGE_INVALID_TASK);
         }
 	}
 	

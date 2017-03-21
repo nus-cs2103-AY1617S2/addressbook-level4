@@ -27,6 +27,9 @@ public class AddCommandParser {
     		return resultCommand;
     	} catch (IllegalValueException ive) {
     		return new IncorrectCommand(ive.getMessage());
-    	}
+    	} catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+            		AddCommand.MESSAGE_USAGE));
+        }
     }
 }
