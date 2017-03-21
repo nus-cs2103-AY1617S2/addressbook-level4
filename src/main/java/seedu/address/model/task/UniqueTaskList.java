@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
@@ -33,29 +34,30 @@ public class UniqueTaskList implements Iterable<Task> {
     
     /**
      * Returns true if the end time is later than both the start time and the current time 
-     * @param toCheck
-     * @return
      */
-    public boolean isEventValid(ReadOnlyTask toCheck) {
-    	LocalDateTime currentDateTime = LocalDateTime.now();
-    	LocalDateTime endTime = null, startTime = null;
+    public static boolean isValidEvent(ReadOnlyTask toCheck) {
+    	LocalDateTime currentTime = LocalDateTime.now();
+    	LocalDateTime endTime, startTime;
     	
-    	if (toCheck.getEndTime().isPresent()) {
-    		endTime = toCheck.getEndTime().get().dateTime;
+    	// If both start time and end time does not exist
+    	if (!toCheck.getEndTime().isPresent() && !toCheck.getEndTime().isPresent()) {
+    		return true;
     	}
     	
-    	if (toCheck.getStartTime().isPresent()) {
-    		startTime = toCheck.getStartTime().get().dateTime;
+    	// If only start time exists
+    	if(!toCheck.getEndTime().isPresent() && toCheck.getStartTime().isPresent()) {
+			return false; 
     	}
     	
-    	if (endTime != null) {
-    		if(startTime != null) {
-    			return endTime.isAfter(startTime) && endTime.isAfter(currentDateTime);
-    		} 
-    		return endTime.isAfter(currentDateTime);
-    	}
-    		
-		return true;
+		try {
+			endTime = toCheck.getEndTime().orElse(new DateTime(currentTime)).dateTime;
+			startTime = toCheck.getStartTime().orElse(new DateTime(currentTime)).dateTime;
+			return startTime.isBefore(endTime) && endTime.isAfter(currentTime);
+		} catch (IllegalValueException e) {
+			e.printStackTrace();
+		}    
+		
+    	return false;
     }
 
     /**
@@ -67,9 +69,6 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
-        }
-        if (!isEventValid(toAdd)) {
-        	throw new InvalidEventTimeException();
         }
         internalList.add(toAdd);
     }
