@@ -271,7 +271,7 @@ public class MainWindow extends UiPart<Region> {
     //@@author A0144240W
     public void indicateButtonChange(String typeOfButton) {
         changeButtonsBackToOriginalState();
-        switch (typeOfButton) {
+        switch(typeOfButton) {
 
         case ListCommand.TYPE_INCOMPLETE:
             incompleteButton.getStyleClass().add(SELECTED);
