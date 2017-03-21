@@ -25,4 +25,5 @@ public class FocusListener implements ChangeListener<Boolean> {
             suggestionsList.hide();
         }
     }
+
 }
