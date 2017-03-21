@@ -34,6 +34,7 @@ public class Comment {
         this.value = comment;
     }
 
+    //@@Author A0143355J
     public Comment(Optional<String> comment) throws IllegalValueException {
         if (isCommentPresent(comment)) {
             String commentString = comment.get();
@@ -47,6 +48,7 @@ public class Comment {
         }
     }
 
+    //@@Author A0143355J
     public boolean isCommentPresent(Optional<String> comment) {
         return comment.isPresent();
     }
