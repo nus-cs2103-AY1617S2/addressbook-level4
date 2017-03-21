@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListToShowUncompleted();
         indicateTaskManagerChanged();
     }
 
@@ -94,6 +94,16 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredListToShowUncompleted() {
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
+    }
+
+    @Override
+    public void updateFilteredListToShowCompleted() {
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
     }
 
     @Override
@@ -165,6 +175,28 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    private class ActiveQualifier implements Qualifier {
+        private boolean isActive;
+
+        ActiveQualifier(boolean isActive) {
+            this.isActive = isActive;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (isActive) {
+                return task.getActiveStatus();
+            } else {
+                return !task.getActiveStatus();
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "active=true";
         }
     }
 

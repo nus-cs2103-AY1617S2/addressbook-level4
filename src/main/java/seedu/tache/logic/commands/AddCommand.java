@@ -11,6 +11,7 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -73,7 +74,7 @@ public class AddCommand extends Command {
             endDateTime = Optional.of(new DateTime(endDate + endTime));
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDateTime, endDateTime, tagList);
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, false, RecurInterval.NONE);
     }
 
     @Override

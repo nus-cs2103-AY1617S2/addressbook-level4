@@ -6,6 +6,7 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task.RecurInterval;
 
 /**
  * A mutable task object. For testing only.
@@ -16,6 +17,9 @@ public class TestTask implements ReadOnlyTask {
     private Optional<DateTime> startDateTime;
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
+    private boolean isActive;
+    private boolean isRecurring;
+    private RecurInterval interval;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -69,6 +73,21 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append(";" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public boolean getActiveStatus() {
+        return isActive;
+    }
+
+    @Override
+    public boolean getRecurringStatus() {
+        return isRecurring;
+    }
+
+    @Override
+    public RecurInterval getRecurInterval() {
+        return interval;
     }
 
 }

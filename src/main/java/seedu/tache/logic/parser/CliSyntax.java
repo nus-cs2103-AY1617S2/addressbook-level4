@@ -17,6 +17,7 @@ public class CliSyntax {
 
     /* Parameter delimiter definitions */
     public static final String PARAMETER_DELIMITER = new String(";");
+    public static final String INDEX_DELIMITER = new String(",");
     public static final String EDIT_PARAMETER_DELIMITER = new String(" ");
 
     /* Parameter names definitions */
@@ -26,6 +27,11 @@ public class CliSyntax {
     public static final String START_TIME_PARAMETER = "start_time";
     public static final String END_TIME_PARAMETER = "end_time";
     public static final String TAG_PARAMETER = "tag";
+
+    /* List filter definitions */
+    public static final String COMPLETED_FILTER = "completed";
+    public static final String UNCOMPLETED_FILTER = "uncompleted";
+    public static final String ALL_FILTER = "all";
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

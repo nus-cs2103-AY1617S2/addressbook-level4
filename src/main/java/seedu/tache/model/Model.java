@@ -43,4 +43,10 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Updates the filter of the filtered task list to show all uncompleted tasks */
+    void updateFilteredListToShowUncompleted();
+
+    /** Updates the filter of the filtered task list to show all completed tasks */
+    void updateFilteredListToShowCompleted();
+
 }

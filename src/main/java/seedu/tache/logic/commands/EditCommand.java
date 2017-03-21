@@ -11,14 +11,13 @@ import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
-
-    public enum TaskType { TypeTask, TypeDetailedTask };
 
     public static final String COMMAND_WORD = "edit";
 
@@ -113,7 +112,8 @@ public class EditCommand extends Command {
             updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags);
+        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
+                            updatedTags, true, false, RecurInterval.NONE);
 
     }
 
