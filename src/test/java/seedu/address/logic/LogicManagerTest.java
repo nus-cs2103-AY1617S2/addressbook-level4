@@ -160,9 +160,7 @@ public class LogicManagerTest {
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
-        if (!"sort".equals(inputCommand)) {
-            assertEquals(expectedTaskManager, latestSavedTaskManager);
-        }
+        assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
 
     @Test
@@ -238,31 +236,6 @@ public class LogicManagerTest {
                 ListCommand.MESSAGE_SUCCESS,
                 expectedTaskManager,
                 expectedList);
-    }
-
-    @Test
-    public void executeSortTasks() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithDeadline("02/01/2017 00:00");
-        Task p2 = helper.generateTaskWithDeadline("02/01/2017 23:59");
-        Task p3 = helper.generateTaskWithDeadline("03/01/2017 00:00");
-        Task p4 = helper.generateTaskWithDeadline("03/02/2017 00:00");
-        Task p5 = helper.generateTaskWithDeadline("03/02/2018 00:00");
-
-        List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
-        TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
-
-        model.resetData(new TaskManager());
-        model.addTask(p2);
-        model.addTask(p3);
-        model.addTask(p5);
-        model.addTask(p1);
-        model.addTask(p4);
-
-        assertCommandSuccess("sort",
-                SortCommand.message,
-                expectedTaskManager,
-                fiveTasks);
     }
 
     /**
