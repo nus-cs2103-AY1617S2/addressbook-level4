@@ -13,10 +13,8 @@ import seedu.tache.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Optional<Date> startDate;
-    private Optional<Date> endDate;
-    private Optional<Time> startTime;
-    private Optional<Time> endTime;
+    private Optional<DateTime> startDateTime;
+    private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
 
     /**
@@ -25,29 +23,24 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
-        this.startDate = Optional.ofNullable(new Date("-"));
-        this.endDate = Optional.ofNullable(new Date("-"));
-        this.startTime = Optional.ofNullable(new Time("-"));
-        this.endTime = Optional.ofNullable(new Time("-"));
+        this.startDateTime = Optional.empty();
+        this.endDateTime = Optional.empty();
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    public Task(Name name, Date startDate, Date endDate, Time startTime, Time endTime, UniqueTagList tags) {
+    public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.startDate = Optional.ofNullable(startDate);
-        this.endDate = Optional.ofNullable(endDate);
-        this.startTime = Optional.ofNullable(startTime);
-        this.endTime = Optional.ofNullable(endTime);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(),
-                source.getTags());
+        this(source.getName(), Optional.of(source.getStartDateTime()), Optional.of(source.getEndDateTime()), source.getTags());
     }
 
     public void setName(Name name) {
@@ -61,39 +54,21 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Date getStartDate() {
-        return startDate.orElse(new Date("-"));
+    public DateTime getStartDateTime() {
+        return startDateTime.orElse(new DateTime("-"));
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = Optional.ofNullable(startDate);
-    }
-
-    @Override
-    public Date getEndDate() {
-        return endDate.orElse(getStartDate());
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = Optional.ofNullable(endDate);
+    public void setStartDateTime(DateTime startDate) {
+        this.startDateTime = Optional.ofNullable(startDate);
     }
 
     @Override
-    public Time getStartTime() {
-        return startTime.orElse(new Time("-"));
+    public DateTime getEndDateTime() {
+        return endDateTime.orElse(getStartDateTime());
     }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = Optional.ofNullable(startTime);
-    }
-
-    @Override
-    public Time getEndTime() {
-        return endTime.orElse(getStartTime());
-    }
-
-    public void setEndTime(Time endTime) {
-        this.endTime = Optional.ofNullable(endTime);
+    public void setEndDateTime(DateTime endDate) {
+        this.endDateTime = Optional.ofNullable(endDate);
     }
 
     @Override
@@ -114,10 +89,8 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
         this.setName(replacement.getName());
-        this.setEndDate(replacement.getEndDate());
-        this.setStartDate(replacement.getStartDate());
-        this.setStartTime(replacement.getStartTime());
-        this.setEndTime(replacement.getEndTime());
+        this.setStartDateTime(replacement.getStartDateTime());
+        this.setEndDateTime(replacement.getEndDateTime());
         this.setTags(replacement.getTags());
     }
 
