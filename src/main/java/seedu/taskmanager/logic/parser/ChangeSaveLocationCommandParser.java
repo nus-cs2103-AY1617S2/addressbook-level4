@@ -33,7 +33,7 @@ public class ChangeSaveLocationCommandParser {
             return new IncorrectCommand(String.format(ChangeSaveLocationCommand.MESSAGE_USAGE, INVALID_SAVE_LOCATION));
         }
 
-        if (!(stringSaveLocation.substring(stringSaveLocation.length() - 1).equals("/"))){
+        if (!(stringSaveLocation.substring(stringSaveLocation.length() - 1).equals("/"))) {
             stringSaveLocation += "/";
         }
 
