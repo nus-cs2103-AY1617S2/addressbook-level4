@@ -57,7 +57,7 @@ public class DoneCommandTest extends TaskListGuiTest {
                 withComment("prepare V0.2 presentation").
                 withPriority("high").
                 withStatus(true).
-                withTags("class").
+                withTags("2103", "class").
                 build();
         assertDoneSuccess(doneTaskIndex, doneTaskIndex, doneTask);
     }
@@ -71,7 +71,7 @@ public class DoneCommandTest extends TaskListGuiTest {
         TestTask doneTask = new FloatingTaskBuilder().
                 withName("CS3245 homework 3").
                 withComment("discuss with classmates").
-                withPriority("high").
+                withPriority("low").
                 withStatus(true).
                 withTags("class").
                 build();

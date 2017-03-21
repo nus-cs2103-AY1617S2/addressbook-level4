@@ -40,6 +40,7 @@ public class EditCommandTest extends TaskListGuiTest {
                 withName("Drink water").
                 withComment("to hydrate").
                 withTags("life").
+                withStatus(false).
                 withPriority("low").
                 build();
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
@@ -50,8 +51,14 @@ public class EditCommandTest extends TaskListGuiTest {
         String detailsToEdit = "Eat food d/03-16-17 00:00:00 p/medium c/to fill stomach t/life yummy";
         int taskListIndex = 5;
 
-        TestTask editedTask = new DeadlineTaskBuilder().withDeadline("16/03/2017 00:00:00").withName("Eat food")
-                .withComment("to fill stomach").withTags("yummy", "life").withPriority("medium").build();
+        TestTask editedTask = new DeadlineTaskBuilder().
+                withDeadline("16/03/2017 00:00:00").
+                withName("Eat food").
+                withStatus(false).
+                withComment("to fill stomach").
+                withTags("yummy", "life").
+                withPriority("medium").
+                build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
@@ -62,9 +69,15 @@ public class EditCommandTest extends TaskListGuiTest {
                 + "p/high c/to relieve myself t/urgent";
         int taskListIndex = 1;
 
-        TestTask editedTask = new EventTaskBuilder().withStartDate("17/04/2017 12:12:12")
-                .withEndDate("17/04/2017 12:42:12").withName("Pass motion").withComment("to relieve myself")
-                .withTags("urgent").withPriority("high").build();
+        TestTask editedTask = new EventTaskBuilder().
+                withStartDate("17/04/2017 12:12:12").
+                withEndDate("17/04/2017 12:42:12").
+                withStatus(false).
+                withName("Pass motion").
+                withComment("to relieve myself").
+                withTags("urgent").
+                withPriority("high").
+                build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
