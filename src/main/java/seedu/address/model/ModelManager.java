@@ -31,7 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
-
+    private FilteredList<ReadOnlyTask> completedTasks;
     /**
      * Initializes a ModelManager with the given task manager and userPrefs.
      */
@@ -40,9 +40,9 @@ public class ModelManager extends ComponentManager implements Model {
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
-
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        completedTasks = new FilteredList<>(this.taskManager.getCompletedTaskList());
     }
 
     public ModelManager() {
@@ -98,6 +98,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void loadList(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException {
         taskManager.setTasks(list);
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getCompletedTaskList() {
+        return new UnmodifiableObservableList<>(completedTasks);
+    }
+
+    @Override
+    public void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
+        taskManager.transferTaskToComplete(t);
+    }
+
+    @Override
+    public void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
+        taskManager.transferTaskFromComplete(t);
     }
     //@@author
 

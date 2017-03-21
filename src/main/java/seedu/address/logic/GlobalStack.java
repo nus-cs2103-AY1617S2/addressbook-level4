@@ -104,6 +104,7 @@ public class GlobalStack {
 
     /** Debugging purpose */
     public void printStack () {
+        @SuppressWarnings("unchecked")
         Stack<Object> temp = (Stack<Object>) undoStack.clone();
         for (int i = 0; i < temp.size(); i++) {
             System.out.println(temp.pop().toString());

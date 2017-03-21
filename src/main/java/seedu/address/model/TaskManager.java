@@ -16,14 +16,16 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
     private UniqueTaskList tasks;
+    private UniqueTaskList completedTasks;
     private final UniqueTagList tags;
 
     /*
@@ -35,13 +37,14 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     {
         tasks = new UniqueTaskList();
+        completedTasks = new UniqueTaskList();
         tags = new UniqueTagList();
     }
 
     public TaskManager() {}
 
     /**
-     * Creates an AddressBook using the Tasks and Tags in the {@code toBeCopied}
+     * Creates a task manager using the Tasks and Tags in the {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
@@ -89,6 +92,33 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     //@@author A0139161J
+    /**
+     * Transfers a task to from the main list to the completed list
+     *
+     * @param t
+     * @throws TaskNotFoundException
+     * @throws DuplicateTaskException
+     */
+    public void transferTaskToComplete(Task t) throws TaskNotFoundException, DuplicateTaskException {
+        syncMasterTagListWith(t);
+        tasks.remove(t);
+        completedTasks.add(t);
+    }
+
+    /**
+     * Transfer a task from completed list to main list
+     * when user feels that he hasn't really completed the task
+     *
+     * @param t
+     * @throws TaskNotFoundException
+     * @throws DuplicateTaskException
+     */
+    public void transferTaskFromComplete(Task t) throws TaskNotFoundException, DuplicateTaskException {
+        syncMasterTagListWith(t);
+        completedTasks.remove(t);
+        tasks.add(t);
+    }
+
     /**
      * Adds a task to the task manager at specified index
      * Adapted from addTask method
@@ -161,10 +191,13 @@ public class TaskManager implements ReadOnlyTaskManager {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
+
+    //@@author A0139161J
     // Usage for undo/redo command
     public void loadTaskManagerList(UniqueTaskList tasks) {
         this.tasks.setTasks(tasks);
     }
+    //@@author
 
 //// tag-level operations
 
@@ -185,6 +218,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
 
+    @Override
+    public ObservableList<ReadOnlyTask> getCompletedTaskList() {
+        return new UnmodifiableObservableList<>(completedTasks.asObservableList());
+    }
     @Override
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());

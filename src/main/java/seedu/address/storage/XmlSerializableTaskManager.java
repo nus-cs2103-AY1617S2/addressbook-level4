@@ -27,6 +27,9 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
+    @XmlElement
+    private List<XmlAdaptedTask> completedTasks;
+
     /**
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
@@ -34,6 +37,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
+        completedTasks = new ArrayList<>();
     }
 
     /**
@@ -73,4 +77,17 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         return new UnmodifiableObservableList<>(tags);
     }
 
+    @Override
+    public ObservableList<ReadOnlyTask> getCompletedTaskList() {
+        final ObservableList<Task> tasks = this.completedTasks.stream().map(p -> {
+            try {
+                return p.toModelType();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+                //TODO: better error handling
+                return null;
+            }
+        }).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        return new UnmodifiableObservableList<>(tasks);
+    }
 }
