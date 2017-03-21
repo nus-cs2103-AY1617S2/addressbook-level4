@@ -31,7 +31,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.endTiming = endTiming;
         this.complete = false;
         this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
+        // changes in the arg list
     }
 
     /**
@@ -136,14 +136,26 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     /**
-     * Results in Tasks sorted by priority, followed by endDate, then startDate.
+     * Results in Tasks sorted by completed state, followed by priority, endTiming, startTiming
+     * and lastly by description.
      * Note: If a and b are tasks and a.compareTo(b) == 0, that does not imply
      * a.equals(b).
      */
     @Override
     public int compareTo(Task compareTask) {
+        int compareToResult = 0;
 
-        int compareToResult = this.priority.compareTo(compareTask.priority);
+        if (this.isComplete() && compareTask.isComplete()) {
+            compareToResult = 0;
+        } else if (this.isComplete()) {
+            compareToResult = 1;
+        } else if (compareTask.isComplete()) {
+            compareToResult = -1;
+        }
+
+        if (compareToResult == 0) {
+            compareToResult = this.priority.compareTo(compareTask.priority);
+        }
 
         if (compareToResult == 0) {
             compareToResult = this.endTiming.compareTo(compareTask.endTiming);
@@ -152,11 +164,17 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         if (compareToResult == 0) {
             compareToResult = this.startTiming.compareTo(compareTask.startTiming);
         }
+
+        if (compareToResult == 0) {
+            compareToResult = this.getDescription().compareTo(compareTask.getDescription());
+        }
+
         return compareToResult;
     }
 
     public static Comparator<Task> TaskComparator = new Comparator<Task>() {
 
+        @Override
         public int compare(Task task1, Task task2) {
             return task1.compareTo(task2);
         }
