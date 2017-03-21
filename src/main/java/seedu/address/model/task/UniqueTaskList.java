@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,7 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -17,12 +16,11 @@ import seedu.address.commons.util.CollectionUtil;
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
+ * @see CollectionUtil#elementsAreUnique({@link java.util.Collection})
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections
-            .observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given
@@ -58,13 +56,11 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask)
-            throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask)
-                && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
 
@@ -97,13 +93,25 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
+        Task toAdd = null;
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
-            // TODO: Change Task constructor to TaskWithoutDeadline() or
-            // TaskWithDeadline() based on task type
-            replacement.add(new Task(task));
+            switch (task.getTaskType()) {
+            case TaskWithNoDeadline:
+                toAdd = new TaskWithoutDeadline(task);
+                break;
+            case TaskWithOnlyDeadline:
+                toAdd = new TaskWithDeadline(task);
+                break;
+            case TaskWithDeadlineAndStartingTime:
+                toAdd = new TaskWithDeadline(task);
+                break;
+            default:
+                throw new IllegalValueException("No valid task type provided");
+            }
+
+            replacement.add(toAdd);
         }
         setTasks(replacement);
     }
@@ -121,8 +129,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                        && this.internalList
-                                .equals(((UniqueTaskList) other).internalList));
+                        && this.internalList.equals(((UniqueTaskList) other).internalList));
     }
 
     @Override
