@@ -3,7 +3,6 @@ package seedu.tache.model.task;
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
 
@@ -54,15 +53,6 @@ public class DateTime {
     public String getTimeOnly(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(date);
-    }
-    
-    public Date changeDate(int day, int month, int year){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.DAY_OF_MONTH, day);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.YEAR, year);
-        return cal.getTime();
     }
 
    /* @Override

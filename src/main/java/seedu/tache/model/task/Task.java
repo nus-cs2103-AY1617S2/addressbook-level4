@@ -40,7 +40,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), Optional.of(source.getStartDateTime()), Optional.of(source.getEndDateTime()), source.getTags());
+        this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -54,21 +54,21 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public DateTime getStartDateTime() {
-        return startDateTime.orElse(new DateTime("-"));
+    public Optional<DateTime> getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setStartDateTime(DateTime startDate) {
-        this.startDateTime = Optional.ofNullable(startDate);
+    public void setStartDateTime(Optional<DateTime> startDate) {
+        this.startDateTime = startDate;
     }
 
     @Override
-    public DateTime getEndDateTime() {
-        return endDateTime.orElse(getStartDateTime());
+    public Optional<DateTime> getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setEndDateTime(DateTime endDate) {
-        this.endDateTime = Optional.ofNullable(endDate);
+    public void setEndDateTime(Optional<DateTime> endDate) {
+        this.endDateTime = endDate;
     }
 
     @Override

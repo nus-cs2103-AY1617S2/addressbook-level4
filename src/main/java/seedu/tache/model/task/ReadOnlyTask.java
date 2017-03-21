@@ -1,5 +1,7 @@
 package seedu.tache.model.task;
 
+import java.util.Optional;
+
 import seedu.tache.model.tag.UniqueTagList;
 
 /**
@@ -9,8 +11,8 @@ import seedu.tache.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    DateTime getStartDateTime();
-    DateTime getEndDateTime();
+    Optional<DateTime> getStartDateTime();
+    Optional<DateTime> getEndDateTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
