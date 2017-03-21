@@ -15,6 +15,10 @@ import seedu.address.model.task.Venue;
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
+    
+    public static final char FLOAT_CHAR = 'f';
+    public static final char DEADLINE_CHAR = 'd';
+    public static final char EVENT_CHAR = 'e';
 
     private Title title;
     private Optional<Venue> venue;
@@ -125,5 +129,15 @@ public class TestTask implements ReadOnlyTask {
         sb.append("des/" + this.getDescriptionString() + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
+    }
+    
+    public Character getTaskChar() {
+        if (starttime.isPresent()) {
+            return EVENT_CHAR;
+        } else if (endtime.isPresent()) {
+            return DEADLINE_CHAR;
+        } else {
+            return FLOAT_CHAR;
+        }
     }
 }
