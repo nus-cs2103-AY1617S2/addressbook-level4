@@ -43,7 +43,6 @@ public class Parser {
         ParserUtil.initialiseFlexiblePrefixes();
     }
     //@@author
-    
     /**
      * Parses user input into command for execution.
      *
