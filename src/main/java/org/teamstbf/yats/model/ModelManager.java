@@ -127,6 +127,16 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
+	public void updateFilteredListToShowDate(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new DateQualifier(keywords)));
+	}
+
+	@Override
+	public void updateFilteredListToShowStartTime(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	}
+
+	@Override
 	public void updateFilteredListToShowTags(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new TagQualifier(keywords)));
 	}
@@ -248,6 +258,46 @@ public class ModelManager extends ComponentManager implements Model {
 		}
 	}
 
+	private class DateQualifier implements Qualifier {
+		private Set<String> dateKeyWords;
+
+		DateQualifier(Set<String> dateKeyWords) {
+			this.dateKeyWords = dateKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return dateKeyWords.stream().filter(
+					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getDate().toString(), keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "date=" + String.join(", ", dateKeyWords);
+		}
+	}
+
+	private class StartTimeQualifier implements Qualifier {
+		private Set<String> startTimeKeyWords;
+
+		StartTimeQualifier(Set<String> startTimeKeyWords) {
+			this.startTimeKeyWords = startTimeKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return startTimeKeyWords.stream().filter(
+					keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().getTime().toString(), keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "startTime=" + String.join(", ", startTimeKeyWords);
+		}
+	}
+
 	private class TagQualifier implements Qualifier {
 		private Set<String> tagKeyWords;
 
@@ -259,7 +309,6 @@ public class ModelManager extends ComponentManager implements Model {
 		public boolean run(ReadOnlyEvent event) {
 			String tagObtain = event.getTags().asObservableList().stream().map(tagString -> tagString.tagName)
 					.distinct().collect(Collectors.joining(" "));
-			System.out.println(tagObtain);
 			return tagKeyWords.stream().filter(keyword -> StringUtil.containsWordIgnoreCase(tagObtain, keyword))
 					.findAny().isPresent();
 		}

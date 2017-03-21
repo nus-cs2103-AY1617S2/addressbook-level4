@@ -68,6 +68,18 @@ public interface Model {
 
 	/**
 	 * Updates the filter of the filtered event list to show all events with the
+	 * given date
+	 */
+	void updateFilteredListToShowDate(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with the
+	 * given start time
+	 */
+	void updateFilteredListToShowStartTime(Set<String> keywords);
+
+	/**
+	 * Updates the filter of the filtered event list to show all events with the
 	 * given tag
 	 */
 	void updateFilteredListToShowTags(Set<String> keywords);

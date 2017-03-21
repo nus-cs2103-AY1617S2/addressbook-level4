@@ -28,10 +28,16 @@ public class ListCommandParser {
 		if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
 			String[] commandTextArray = stringTokenizer(args);
 			switch (commandTextArray[LISTCOMMANDSUFFIX]) {
-			case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
-				return new ListCommandDate();
-			case (ListCommand.COMMAND_WORD_SUFFIX_TIMING):
-				return new ListCommandTiming();
+			case (ListCommand.COMMAND_WORD_SUFFIX_DATE): {
+				final String[] keywords = args.replaceFirst("by date", " ").trim().split(" ");
+				final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+				return new ListCommandDate(keywordSet);
+			}
+			case (ListCommand.COMMAND_WORD_SUFFIX_TIMING): {
+				final String[] keywords = args.replaceFirst("by date", " ").trim().split(" ");
+				final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+				return new ListCommandTiming(keywordSet);
+			}
 			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION): {
 				final String[] keywords = args.replaceFirst("by location", " ").trim().split(" ");
 				final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
