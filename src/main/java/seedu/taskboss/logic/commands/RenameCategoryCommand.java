@@ -22,7 +22,7 @@ public class RenameCategoryCommand extends Command {
 
     public final String oldCategory;
     public final String newCategory;
-    
+
     public RenameCategoryCommand(String oldCategory, String newCategory) {
         this.oldCategory = oldCategory;
         this.newCategory = newCategory;

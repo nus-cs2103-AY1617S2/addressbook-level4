@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
                         newCategoryList.add(tempCategory);
                     } catch (DuplicateCategoryException dce) {
                         dce.printStackTrace();
-                    } 
+                    }
                 }
             }
 

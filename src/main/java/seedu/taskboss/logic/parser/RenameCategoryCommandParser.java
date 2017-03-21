@@ -7,7 +7,7 @@ import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 
 public class RenameCategoryCommandParser {
-    
+
     private static final int NUM_CATEGORIES_PARAM = 2;
     private static final int INDEX_OLD_CATEGORY = 0;
     private static final int INDEX_NEW_CATEGORY = 1;
