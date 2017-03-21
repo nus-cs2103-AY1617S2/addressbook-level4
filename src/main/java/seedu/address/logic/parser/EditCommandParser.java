@@ -110,15 +110,14 @@ public class EditCommandParser {
 
     private List<String> getMoreThanOneArguments(String reverseRegex) {
         String reverseString = new StringBuilder(args).reverse().toString();
-        System.out.println(reverseString);
         Pattern pattern = Pattern.compile(reverseRegex);
         Matcher matcher = pattern.matcher(reverseString);
         if (matcher.matches()) {
             int length = matcher.groupCount();
             List<String> arguments = new ArrayList<String>();
             for (int i = length - 1; i >= 0; i--) {
-                arguments.add(matcher.group(i));
-                System.out.println(matcher.group(i));
+                arguments.add(new StringBuilder(matcher.group(i)).reverse()
+                        .toString());
             }
             args = matcher.group(length);
             return arguments;
@@ -138,24 +137,23 @@ public class EditCommandParser {
         assert datesString
                 .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
             List<DateGroup> group = new PrettyTimeParser()
                     .parseSyntax(datesString.get(i)
                             + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
                                     : CliSyntax.DEFAULT_DEADLINE));
-            System.out.println(group.get(0).getDates().get(0));
             if (group == null || group.get(0).getPosition() != 0
-                    || group.size() > 1
-                    || group.get(0).getDates()
-                            .get(CliSyntax.INDEX_OF_DEADLINE) != null
-                    || group.get(0).getDates().get(CliSyntax.INDEX_OF_DEADLINE)
-                            .after(group.get(0).getDates()
-                                    .get(CliSyntax.INDEX_OF_STARTINGTIME))) {
+                    || group.size() > 1) {
                 args = tmpArgs;
                 return null;
             } else {
                 dates.addAll(group.get(0).getDates());
             }
+        }
+        if (dates.get(CliSyntax.INDEX_OF_STARTINGTIME)
+                .after(dates.get(CliSyntax.INDEX_OF_DEADLINE))) {
+            args = tmpArgs;
+            return null;
         }
         return dates;
     }

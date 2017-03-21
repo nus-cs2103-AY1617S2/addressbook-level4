@@ -22,6 +22,7 @@ import seedu.address.logic.commands.IncorrectCommand;
 public class AddCommandParser {
 
     private String args;
+    private static final int NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE = 2;
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -93,19 +94,18 @@ public class AddCommandParser {
         }
     }
 
-    private String[] getMoreThanOneArguments(String[] keys) {
+    private List<String> getMoreThanOneArguments(String reverseRegex) {
         String reverseString = new StringBuilder(args).reverse().toString();
-        String reverseKeysRegex = new StringBuilder(
-                String.join(CliSyntax.END_OF_A_WORD_REVERSE, keys)).reverse()
-                        .toString();
-        Pattern pattern = Pattern.compile(reverseKeysRegex);
+        Pattern pattern = Pattern.compile(reverseRegex);
         Matcher matcher = pattern.matcher(reverseString);
-        if (matcher.find()) {
-            String[] arguments = new String[keys.length];
-            for (int i = keys.length - 1; i >= 0; i--) {
-                arguments[i] = new StringBuilder(getArgument(keys[i])).reverse()
-                        .toString().trim();
+        if (matcher.matches()) {
+            int length = matcher.groupCount();
+            List<String> arguments = new ArrayList<String>();
+            for (int i = length - 1; i >= 0; i--) {
+                arguments.add(new StringBuilder(matcher.group(i)).reverse()
+                        .toString());
             }
+            args = matcher.group(length);
             return arguments;
         } else {
             return null;
@@ -114,30 +114,32 @@ public class AddCommandParser {
 
     private List<Date> getStartingTimeAndDeadline() {
         String tmpArgs = args;
-        String[] datesString = getMoreThanOneArguments(
-                CliSyntax.STARTINGTIME_AND_DEADLINE);
+        List<String> datesString = getMoreThanOneArguments(
+                CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX);
         if (datesString == null) {
             args = tmpArgs;
             return null;
         }
-        assert (datesString.length == 2);
+        assert datesString
+                .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();
-        for (int i = 0; i < 1; i++) {
-            List<DateGroup> group = new PrettyTimeParser().parseSyntax(
-                    dates.get(i) + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
-                            : CliSyntax.DEFAULT_DEADLINE));
+        for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
+            List<DateGroup> group = new PrettyTimeParser()
+                    .parseSyntax(datesString.get(i)
+                            + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
+                                    : CliSyntax.DEFAULT_DEADLINE));
             if (group == null || group.get(0).getPosition() != 0
-                    || group.size() > 1
-                    || group.get(0).getDates()
-                            .get(CliSyntax.INDEX_OF_DEADLINE) != null
-                    || group.get(0).getDates().get(CliSyntax.INDEX_OF_DEADLINE)
-                            .after(group.get(0).getDates()
-                                    .get(CliSyntax.INDEX_OF_STARTINGTIME))) {
+                    || group.size() > 1) {
                 args = tmpArgs;
                 return null;
             } else {
                 dates.addAll(group.get(0).getDates());
             }
+        }
+        if (dates.get(CliSyntax.INDEX_OF_STARTINGTIME)
+                .after(dates.get(CliSyntax.INDEX_OF_DEADLINE))) {
+            args = tmpArgs;
+            return null;
         }
         return dates;
     }
