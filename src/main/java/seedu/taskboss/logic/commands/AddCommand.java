@@ -80,7 +80,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         assert model != null;
         try {
             model.addTask(toAdd);
