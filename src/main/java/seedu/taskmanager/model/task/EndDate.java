@@ -31,12 +31,12 @@ public class EndDate extends Date {
 
     private static long endDateConstructor(String endDate) throws IllegalValueException {
         assert endDate != null;
-        if (!isValidEndDate(endDate)) {
-            throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
-        }
         try {
+            if (!isValidEndDate(endDate)) {
+                throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+            }
             return sdfInput.parse(endDate).getTime();
-        } catch (ParseException e) {
+        } catch (IllegalValueException | ParseException e) {
             throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
         }
     }
