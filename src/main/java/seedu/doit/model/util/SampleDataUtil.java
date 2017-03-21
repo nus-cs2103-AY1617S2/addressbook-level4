@@ -33,11 +33,6 @@ public class SampleDataUtil {
                 new Task(new Name("UI interface"), new Priority("low"), new EndTime("next week"),
                     new Description("have 3 lists"),
                     new UniqueTagList("Huanhui")),
-                new Task(new Name("invalidSample"), new Priority("h"), new EndTime("today"),
-                        new Description("xxxxxxxxx"), new UniqueTagList("")),
-                new Task(new Name("Refactor"), new Priority("low"), new EndTime("today"),
-                        new Description("Refactor all mentions of task / taskManager"),
-                        new UniqueTagList("Huanhui"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
