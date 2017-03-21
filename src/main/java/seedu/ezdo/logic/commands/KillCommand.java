@@ -6,7 +6,6 @@ import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
-import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
