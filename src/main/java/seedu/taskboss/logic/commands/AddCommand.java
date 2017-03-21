@@ -61,13 +61,16 @@ public class AddCommand extends Command {
         }
 
         //@@author A0144904H
+        String filteredName;
         if (name.contains("!")) {
-            name = name.replaceAll("!", "");
+            filteredName = name.replaceAll("!", "");
             priorityLevel = PriorityLevel.PRIORITY_HIGH;
+        } else {
+            filteredName = name;
         }
 
         this.toAdd = new Task(
-                new Name(name),
+                new Name(filteredName),
                 new PriorityLevel(priorityLevel),
                 startDateTimeObj,
                 endDateTimeObj,
