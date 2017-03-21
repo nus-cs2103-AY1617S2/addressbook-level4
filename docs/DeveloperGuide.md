@@ -240,6 +240,9 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+### 3.3. Undo/Redo
+
+
 
 ## 4. Testing
 
@@ -362,6 +365,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
 `* * *` | user | assign priority to tasks | so that I can keep track of the priority of tasks
 `* * *` | user | retrieve tasks based on priority | so that I can see tasks ranked by priority
+`* * *` | user | undo a command | correct mistakes
+`* * *` | user | redo a command | correct mistakes
 `* *` | advanced user | use shorter versions of a command to type faster | more quickly use the app
 `* *` | complex user | break a task into subtasks | keep track of complex tasks
 `* *` | frequent user | add a recurring task | keep track of task that needs to be done many times
