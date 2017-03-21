@@ -1,5 +1,7 @@
 package org.teamstbf.yats.model;
 
+import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +19,8 @@ import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 import javafx.collections.ObservableList;
+
+//@@author A0102778B
 
 /**
  * Wraps all data at the address-book level
@@ -85,10 +89,18 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueEventList.DuplicateEventException if an equivalent person already exists.
      */
     public void addEvent(Event p) throws UniqueEventList.DuplicateEventException {
+        storeEventTagImage();
         syncMasterTagListWith(p);
         events.add(p);
     }
 
+    private void storeEventTagImage() {
+        UniqueEventList tempEvents = new UniqueEventList();
+        tempEvents.setEvents(events);
+        UniqueTagList tempTags = new UniqueTagList();
+        tempTags.setTags(tags);
+    }
+    
     /**
      * Updates the person in the list at position {@code index} with {@code editedReadOnlyPerson}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.

@@ -1,6 +1,8 @@
 package org.teamstbf.yats.model;
 
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -26,9 +28,66 @@ import javafx.collections.transformation.SortedList;
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
+	interface Expression {
+		boolean satisfies(ReadOnlyEvent event);
+
+		@Override
+		String toString();
+	}
+
+	private class NameQualifier implements Qualifier {
+		private Set<String> nameKeyWords;
+
+		NameQualifier(Set<String> nameKeyWords) {
+			this.nameKeyWords = nameKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return nameKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getTitle().fullName, keyword)).findAny()
+					.isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "title=" + String.join(", ", nameKeyWords);
+		}
+	}
+
+	private class PredicateExpression implements Expression {
+
+		private final Qualifier qualifier;
+
+		PredicateExpression(Qualifier qualifier) {
+			this.qualifier = qualifier;
+		}
+
+		@Override
+		public boolean satisfies(ReadOnlyEvent event) {
+			return qualifier.run(event);
+		}
+
+		@Override
+		public String toString() {
+			return qualifier.toString();
+		}
+	}
+
+	interface Qualifier {
+		boolean run(ReadOnlyEvent event);
+
+		@Override
+		String toString();
+	}
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+
 	private final TaskManager taskManager;
+	
+	private static Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
+    private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
+
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
 
 	private ObservableList<ReadOnlyEvent> observedEvents;
@@ -56,23 +115,50 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-		taskManager.addEvent(event);
+	    saveImage();
+	    taskManager.addEvent(event);
 		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
 	}
 
+    private void saveImage() {
+        TaskManager tempManager = new TaskManager();
+	    tempManager.resetData(taskManager);
+	    undoTaskManager.push(tempManager);
+	    redoTaskManager = new Stack<TaskManager>();
+    }
+
 	@Override
 	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+	    saveImage();
 		taskManager.removeEvent(target);
 		indicateTaskManagerChanged();
 	}
+	
+	
+	//@@author A0102778B
+	
+	@Override
+    public synchronized void getPreviousState() {
+	    TaskManager tempManager = new TaskManager();
+	    tempManager.resetData(taskManager);
+	    redoTaskManager.push(tempManager);
+        taskManager.resetData((ReadOnlyTaskManager)undoTaskManager.pop());
+    }
+	
+    @Override
+    public synchronized void getNextState() {
+        saveImage();
+        taskManager.resetData((ReadOnlyTaskManager)redoTaskManager.pop());
+    }
 
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
 		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
-	// =========== Filtered Event List Accessors ============================
+	// =========== Filtered Event List Accessors
+	// =============================================================
 
 	@Override
 	public ReadOnlyTaskManager getTaskManager() {
@@ -86,30 +172,35 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void resetData(ReadOnlyTaskManager newData) {
+	    saveImage();
 		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
 
-	// ========== Inner classes/interfaces used for filtering ===============
+	@Override
+	public void sortFilteredEventList() {
+		SortedList<ReadOnlyEvent> sortedEventList = new SortedList<ReadOnlyEvent>(filteredEvents);
+		sortedEventList.sorted();
+	}
+
+	@Override
+	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
+		// TODO Auto-generated method stub
+	}
+
+	// ========== Inner classes/interfaces used for filtering
+	// =================================================
 
 	@Override
 	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException {
 		assert editedEvent != null;
-
+		saveImage();
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
 	}
 
-	@Override
-	public void updateEvent(int filteredEventListIndex, Event editedEvent) throws DuplicateEventException {
-		assert editedEvent != null;
-
-		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
-		taskManager.updateEvent(taskManagerIndex, editedEvent);
-		indicateTaskManagerChanged();
-	}
 
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getSortedTaskList() {
@@ -119,6 +210,9 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void updateFilteredListToShowAll() {
 		filteredEvents.setPredicate(null);
+=======
+	private void updateFilteredEventList(Expression expression) {
+		filteredEvents.setPredicate(expression::satisfies);
 	}
 
 	@Override
@@ -149,10 +243,6 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void sortFilteredEventList() {
 		filteredEvents.sorted();
-	}
-
-	private void updateFilteredEventList(Expression expression) {
-		filteredEvents.setPredicate(expression::satisfies);
 	}
 
 	// =========== Sorted Event List Accessors

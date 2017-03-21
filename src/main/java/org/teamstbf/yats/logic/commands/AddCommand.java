@@ -81,7 +81,6 @@ public class AddCommand extends Command {
         } catch (UniqueEventList.DuplicateEventException e) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-
     }
 
 }

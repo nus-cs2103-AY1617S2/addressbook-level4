@@ -101,4 +101,9 @@ public interface Model {
 	/** Sorts the filtered event list */
 	void updateSortedEventList();
 
+    void getPreviousState();
+
+    void getNextState();
+
+
 }
