@@ -84,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.updateTask(todoListIndex, editedTask);
         indicateToDoListChanged();
     }
-
+ //@@author A0143648Y
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -159,15 +159,15 @@ public class ModelManager extends ComponentManager implements Model {
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-
+//@@author A0143648Y
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getVenueString(), keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getDescriptionString(), keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getStartTimeString(), keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getEndTimeString(), keyword))
+                    .filter(keyword -> hasContainedKeyword(task.getTitle().title, keyword)
+                            || hasContainedKeyword(task.getStartTimeString(), keyword)
+                            || hasContainedKeyword(task.getEndTimeString(), keyword)
+                            || hasContainedKeyword(task.getDescriptionString(), keyword)
+                            || hasContainedKeyword(task.getVenueString(), keyword))
                     .findAny()
                     .isPresent();
         }
@@ -176,6 +176,21 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    private boolean hasContainedKeyword (String searchMe, String findMe ){
+        int searchMeLength = searchMe.length();
+        int findMeLength = findMe.length();
+        boolean foundIt = false;
+        for (int i = 0; 
+             i <= (searchMeLength - findMeLength);
+             i++) {
+           if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+              foundIt = true;
+              break;
+           }
+    }
+        return foundIt;
     }
 
 }
