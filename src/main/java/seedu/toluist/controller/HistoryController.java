@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 
 /**
@@ -12,7 +13,7 @@ import seedu.toluist.dispatcher.CommandResult;
  */
 public class HistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(ClearController.class);
-    private static final String RESULT_MESSAGE = "%s\n%d commands displayed.";
+    private static final String RESULT_MESSAGE = "%s\n%s displayed.";
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "^history\\s*";
 
@@ -27,7 +28,8 @@ public class HistoryController extends Controller {
 
         String result = String.join("\n", commandHistory);
 
-        return new CommandResult(String.format(RESULT_MESSAGE, result, commandHistory.size()));
+        return new CommandResult(String.format(RESULT_MESSAGE, result,
+                StringUtil.nounWithCount("command", commandHistory.size())));
     }
 
     public HashMap<String, String> tokenize(String command) {
