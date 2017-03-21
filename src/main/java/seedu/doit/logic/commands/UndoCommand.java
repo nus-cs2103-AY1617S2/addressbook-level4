@@ -1,5 +1,6 @@
 package seedu.doit.logic.commands;
 
+import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.exceptions.CommandException;
 
@@ -12,7 +13,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Task undid: %1$s";
     public static final String MESSAGE_FAILURE = "Unable to undo: ";
 
-    //public static Command toUndo;
+    // public static Command toUndo;
 
     /**
      * Creates an AddCommand using raw values for task.
@@ -28,8 +29,8 @@ public class UndoCommand extends Command {
         assert this.model != null;
         try {
             this.model.undo();
-            return new CommandResult(String.format(MESSAGE_SUCCESS));
-        } catch (Exception e) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, "dummy"));
+        } catch (EmptyTaskManagerStackException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
     }
