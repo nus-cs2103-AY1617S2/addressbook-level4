@@ -19,59 +19,7 @@ By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &n
 
 ## 1. Setting up
 
-### 1.1. Prerequisites
-
-1. **JDK `1.8.0_60`**  or later<br>
-
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
-
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
-
-
-### 1.2. Importing the project into Eclipse
-
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
-
-  > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
-
-### 1.3. Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. taskmanager
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
-
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
-
-### 1.4. Troubleshooting project setup
-
-**Problem: Eclipse reports compile errors after new commits are pulled from Git**
-
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
-* Solution: Refresh the project in Eclipse:<br>
-  Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
-
-**Problem: Eclipse reports some required libraries missing**
-
-* Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
-
+> Locate the .jar file and run.
 
 ## 2. Design
 
@@ -349,7 +297,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new task|
 `* * *` | user | delete a task | remove tasks that I have completed.
-`* * *` | user | delete multiple task| remove multiple tasks that I have completed.
 `* * *` | user | edit a task | update relevant information about the task
 `* * *` | user | search for a task | see detailed information about the task.
 `* * *` | user | update the status of a task | view completed or pending tasks. 
@@ -441,7 +388,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks
-2. Task manager shows a list of completed and not completed tasks.
+2. Task manager shows a list of tasks.
 3. User requests to delete a specific task in the list
 4. Task manager deletes the task <br>
 Use case ends.
@@ -493,6 +440,23 @@ Cons:
 * Can only have a limited number of tasks
 * Cannot set a deadline for when the task must be completed
 * Cannot write a description for the task
+
+**Google Calendar**
+
+Author: Daniel
+
+Pros:
+
+* Can add a new event to your calendar
+* Can edit your calendar
+* Can see upcoming events
+* Can have overlapping events
+
+Cons:
+
+* Cannot search for an event
+* Can only have a limited number of events
+* Cannot share your calendar with others
 
 ## Appendix E : Product Survey
 
