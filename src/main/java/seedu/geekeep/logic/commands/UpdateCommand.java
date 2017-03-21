@@ -102,8 +102,8 @@ public class UpdateCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[TITLE] [s/STARTING_TIME] [e/ENDING_TIME] [l/LOCATION] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 s/2017-04-01T10:16:30 e/2017-04-01T10:16:30m";
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Updated Task: %1$s";
+            + "Example: " + COMMAND_WORD + " 1 s/01-04-17 1630 e/01-04-17 1730";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";

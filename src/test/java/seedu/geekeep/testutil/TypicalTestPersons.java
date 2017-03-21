@@ -15,28 +15,28 @@ public class TypicalTestPersons {
     public TypicalTestPersons() {
         try {
             alice = new PersonBuilder().withName("Alice Pauline")
-                    .withLocation("123, Jurong West Ave 6, #08-111").withStartDateTime("2017-04-01T10:16:30")
-                    .withEndDateTime("2017-05-01T10:16:30")
+                    .withLocation("123, Jurong West Ave 6, #08-111").withStartDateTime("01-04-17 1630")
+                    .withEndDateTime("01-05-17 1630")
                     .withTags("friends").build();
             benson = new PersonBuilder().withName("Benson Meier").withLocation("311, Clementi Ave 2, #02-25")
-                    .withStartDateTime("2017-04-01T10:16:30").withEndDateTime("2017-05-01T10:16:30")
+                    .withStartDateTime("01-04-17 1630").withEndDateTime("01-05-17 1630")
                     .withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("wall street").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("10th street").build();
-            elle = new PersonBuilder().withName("Elle Meyer").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("michegan ave").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("little tokyo").build();
-            george = new PersonBuilder().withName("George Best").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("4th street").build();
+            carl = new PersonBuilder().withName("Carl Kurz").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("wall street").build();
+            daniel = new PersonBuilder().withName("Daniel Meier").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("10th street").build();
+            elle = new PersonBuilder().withName("Elle Meyer").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("michegan ave").build();
+            fiona = new PersonBuilder().withName("Fiona Kunz").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("little tokyo").build();
+            george = new PersonBuilder().withName("George Best").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("4th street").build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("little india").build();
-            ida = new PersonBuilder().withName("Ida Mueller").withEndDateTime("2017-05-01T10:16:30")
-                    .withStartDateTime("2017-04-01T10:16:30").withLocation("chicago ave").build();
+            hoon = new PersonBuilder().withName("Hoon Meier").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("little india").build();
+            ida = new PersonBuilder().withName("Ida Mueller").withEndDateTime("01-05-17 1630")
+                    .withStartDateTime("01-04-17 1630").withLocation("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
