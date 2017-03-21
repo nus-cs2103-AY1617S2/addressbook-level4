@@ -14,6 +14,8 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
+        model.updateCopy(model.getTaskManager());
+        model.updateFlag("undo copy");
         model.resetData(new TaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }
