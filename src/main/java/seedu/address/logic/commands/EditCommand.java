@@ -113,8 +113,8 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             if (!this.startTime.isPresent() && !this.endTime.isPresent()) {
                 return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags);
-            } else if (this.startTime.isPresent() && !this.endTime.isPresent()) {
-                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.tags);
+            } else if (!this.startTime.isPresent() && this.endTime.isPresent()) {
+                return CollectionUtil.isAnyPresent(this.name, this.endTime, this.tags);
             } else {
                 return CollectionUtil.isAnyPresent(this.name, this.tags);
             }
@@ -146,8 +146,11 @@ public class EditCommand extends Command {
             }
         }
         public void setStartTime(Date startTime) {
-            assert startTime != null;
-            this.startTime = Optional.of(startTime);
+            if (startTime == null) {
+                this.startTime = Optional.empty();
+            } else {
+                this.startTime = Optional.of(startTime);
+            }
         }
 
         public Optional<Date> getEndTime() {
@@ -158,8 +161,11 @@ public class EditCommand extends Command {
             }
         }
         public void setEndTime(Date endTime) {
-            assert endTime != null;
-            this.endTime = Optional.of(endTime);
+            if (endTime == null) {
+                this.endTime = Optional.empty();
+            } else {
+                this.endTime = Optional.of(endTime);
+            }
         }
     }
 }
