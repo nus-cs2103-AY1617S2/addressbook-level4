@@ -6,9 +6,14 @@ By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 0. [Introduction](#introduction)
 1. [Setting Up](#setting-up)
+   > 1.1 Prerequisites<br/>
+     1.2 Importing the project into Eclipse<br/>
+     1.3 Configuring Checkstyle<br/>
+     1.4 Troubleshooting project setup<br/>
 2. [Design](#design)
 3. [Implementation](#implementation)
 4. [Testing](#testing)
+   > 4.1 Troubleshooting Tests
 5. [Dev Ops](#dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
@@ -19,26 +24,21 @@ By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 0. Introduction
 
-We are making Burdens to make sense of our daily lives and list our tasks and deadlines on a command-line platform.
+**Burdens** is a task manager to make sense of our daily lives and list our tasks and deadlines on a command-line platform. It is a Java desktop application that has a GUI implemented with JavaFX.<br/>
 You are welcome to contribute in any way!
 
-## 1. Setting up
+## 1. Getting Started
 
 ### 1.1. Prerequisites
 
-Please ensure you have this prerequisites before contributing to development:
+Please ensure you have the following prerequisites before contributing to development:
 
-1. **JDK `1.8.0_60`**  or later<br>
-
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
-
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
-
+   > 1. **JDK `1.8.0_60`**  or later<br/>
+     2. **Eclipse** IDE<br/>
+     3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in<br/>
+     [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))<br/>
+     4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace<br/>
+     5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace<br/>
 
 ### 1.2. Importing the project into Eclipse
 
@@ -51,14 +51,14 @@ Please ensure you have this prerequisites before contributing to development:
 5. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
+  > * Depending on your connection speed and server load, it can take up to 30 minutes for the set-up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. burdens
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -130,7 +130,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -146,22 +146,12 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
-
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
-
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
- that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
-
-The `UI` component,
+The `UI` component:
 
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
@@ -169,17 +159,16 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
-
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+The `Logic` component:
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
@@ -188,34 +177,30 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
-
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model`component:
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
-
-Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-The `Storage` component,
+The `Storage` component:
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -713,17 +698,84 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Trello**
+Author: Johann Wong Jun Guo
 
 Pros:
 
-* ...
-* ...
+* Beautiful kanban interface (sticky notes)
+* Supports attachments like images and documents
+* Fully customisable
+* Able to sync across all devices by cloud
+* Able to sync to third party applications like Google Calendar
+* Able to include add ons
+
 
 Cons:
 
-* ...
-* ...
+* Non-command line interface
+* Too powerful for a simple to do manager
+* Unable to work offline
+
+**Wunderlist**
+Author: Nguyen Quoc Bao
+
+Pros:
+
+* Clearly displays tasks that have not been completed
+* Tasks can be categorized under different lists
+* Tasks can have sub tasks
+* Possible to highlight tasks by marking as important (starred) or pinning tasks
+* Can set deadlines for tasks
+* Can create recurring tasks
+* Can associate files with tasks
+* Can be used offline
+* Keyboard friendly – keyboard shortcuts to mark tasks as completed and important
+* Search and sort functionality makes finding and organizing tasks easier
+* Possible to synchronize across devices
+* Give notifications and reminders for tasks near deadline or overdue
+
+Cons:
+
+* Wunderlist has a complex interface and might require multiple clicks to get specific tasks done. For example, it has separate field to add tasks, search for tasks and a sort button. There are various lists and sub-lists. Each list has a completed/uncompleted section and each task needs to be clicked to display the associated subtasks, notes, files and comment
+* New users might not know how to use the advanced features e.g. creating recurring tasks
+
+**Google Keep**
+Author: Gerald Wong Wei Chuen
+
+Pros:
+
+* Available on all devices (Desktop, Web, Mobile) and also on all platforms (Android, iOS, macOS, Windows 10)
+* Minimalist interface
+* Need a Google account
+* Able to collaborate and share with other people
+* Able to archive and add labels to each note
+
+Cons:
+
+* Text based with no advanced functionality
+* Primary function to store text notes, not for reminders and tasks
+* Lack of CLI functionality or NLP for text parsing of dates
+
+**Remember The Milk**
+Author: Lee Wan Qing
+
+Pros:
+
+* Allows the management of large number of tasks
+* Clean GUI
+* Predefined search terms allows for easy access to tasks that are due in the near future
+* Allows for multiple lists which allows for separation of tasks according to user’s preference (such as work-related tasks and personal  tasks not in the same list)
+* Allows for transferring of tasks to others using the app which can be used as a collaboration tool in an organisation
+* Has a mobile app which allows for usage in multiple devices in different occasions
+
+
+Cons:
+
+* Requires many clicks to add simple deadline that is due on some day but not in the near future because of the calendar GUI
+* Very confusing for a new user due to functions hidden behind small buttons with icons that are not very intuitive.
+* Lots of information is hidden in the UI which requires the user to click on each task individually in order to view them
+* Offline mode is only available to paying users
+
+
 
