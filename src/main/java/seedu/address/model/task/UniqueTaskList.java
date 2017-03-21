@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -20,7 +21,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections
+            .observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given
@@ -56,15 +58,25 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask)
+            throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(editedTask)
+                && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
+        if (editedTask.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
+                || editedTask.getTaskType() == TaskType.TaskWithOnlyDeadline) {
+            try {
+                taskToUpdate = new TaskWithDeadline(editedTask);
+            } catch (IllegalValueException e) {
+            }
+        } else {
+            taskToUpdate = new TaskWithoutDeadline(editedTask);
+        }
 
-        taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the
         // updated task.
         // The right way is to implement observable properties in the Task
@@ -93,7 +105,8 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks)
+            throws IllegalValueException {
         Task toAdd = null;
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
@@ -129,7 +142,8 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                        && this.internalList.equals(((UniqueTaskList) other).internalList));
+                        && this.internalList
+                                .equals(((UniqueTaskList) other).internalList));
     }
 
     @Override
