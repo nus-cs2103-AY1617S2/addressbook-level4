@@ -33,7 +33,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     public void markTaskDone_Short_Command_success() throws Exception {
         int taskBossIndex = 4;
 
-        TestTask markedDoneTask = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("2")
+        TestTask markedDoneTask = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 18, 2017 5pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("10th street").withCategories("Done").build();
