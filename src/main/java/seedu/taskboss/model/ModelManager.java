@@ -142,16 +142,16 @@ public class ModelManager extends ComponentManager implements Model {
 
             UniqueCategoryList newCategoryList = new UniqueCategoryList();
 
-            for (Category category : targetCategoryList) {
-                if (category.equals(oldCategory) && !newCategoryList.contains(newCategory)) {
-                    try {
+            try {
+                for (Category category : targetCategoryList) {
+                    if (category.equals(oldCategory)) {
                         newCategoryList.add(newCategory);
-                    } catch (DuplicateCategoryException dce) {
-                        dce.printStackTrace();
+                    } else {
+                        newCategoryList.add(category);
                     }
-                } else {
-                    newCategoryList.add(category);
                 }
+            } catch (DuplicateCategoryException dce) {
+                dce.printStackTrace();
             }
 
             Task editedTask = new Task(target.getName(),
