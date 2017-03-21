@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyActivity;
 
 public class PersonCard extends UiPart<Region> {
 
@@ -14,29 +14,26 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label description;
     @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label place;
     @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyPerson person, int displayedIndex) {
+    public PersonCard(ReadOnlyActivity person, int displayedIndex) {
         super(FXML);
-        name.setText(person.getName().fullName);
+        description.setText(person.getDescription().description);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText(person.getPriority().value);
+        place.setText(person.getLocation().value);
         initTags(person);
     }
 
-    private void initTags(ReadOnlyPerson person) {
+    private void initTags(ReadOnlyActivity person) {
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

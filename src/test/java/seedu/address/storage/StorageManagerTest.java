@@ -12,13 +12,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.WhatsLeft;
 import seedu.address.testutil.EventsCollector;
-import seedu.address.testutil.TypicalTestPersons;
+import seedu.address.testutil.TypicalTestActivities;
 
 public class StorageManagerTest {
 
@@ -54,30 +54,30 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void whatsLeftReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * {@link XmlWhatsLeftStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlWhatsLeftStorageTest} class.
          */
-        AddressBook original = new TypicalTestPersons().getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        WhatsLeft original = new TypicalTestActivities().getTypicalWhatsLeft();
+        storageManager.saveWhatsLeft(original);
+        ReadOnlyWhatsLeft retrieved = storageManager.readWhatsLeft().get();
+        assertEquals(original, new WhatsLeft(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getWhatsLeftFilePath() {
+        assertNotNull(storageManager.getWhatsLeftFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleWhatsLeftChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlWhatsLeftStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        storage.handleWhatsLeftChangedEvent(new WhatsLeftChangedEvent(new WhatsLeft()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlWhatsLeftStorageExceptionThrowingStub extends XmlWhatsLeftStorage {
 
-        public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
+        public XmlWhatsLeftStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        public void saveWhatsLeft(ReadOnlyWhatsLeft whatsLeft, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

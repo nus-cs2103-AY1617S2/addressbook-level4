@@ -4,31 +4,31 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.ActivityCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
+import seedu.address.testutil.TestActivity;
 import seedu.address.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void add() {
-        //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        //add one activity
+        TestActivity[] currentList = td.getTypicalActivities();
+        TestActivity activityToAdd = td.hoon;
+        assertAddSuccess(activityToAdd, currentList);
+        currentList = TestUtil.addActivitiesToList(currentList, activityToAdd);
 
-        //add another person
-        personToAdd = td.ida;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        //add another activity
+        activityToAdd = td.ida;
+        assertAddSuccess(activityToAdd, currentList);
+        currentList = TestUtil.addActivitiesToList(currentList, activityToAdd);
 
-        //add duplicate person
+        //add duplicate activity
         commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_ACTIVITY);
+        assertTrue(activityListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -39,16 +39,16 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+    private void assertAddSuccess(TestActivity activityToAdd, TestActivity... currentList) {
+        commandBox.runCommand(activityToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
+        ActivityCardHandle addedCard = activityListPanel.navigateToActivity(activityToAdd.getDescription().description);
+        assertMatching(activityToAdd, addedCard);
 
-        //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        //confirm the list now contains all previous activities plus the new activity
+        TestActivity[] expectedList = TestUtil.addActivitiesToList(currentList, activityToAdd);
+        assertTrue(activityListPanel.isListMatching(expectedList));
     }
 
 }

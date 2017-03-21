@@ -1,55 +1,55 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_ACTIVITY_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestPerson;
+import seedu.address.testutil.TestActivity;
 import seedu.address.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+public class DeleteCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void delete() {
 
         //delete the first in the list
-        TestPerson[] currentList = td.getTypicalPersons();
+        TestActivity[] currentList = td.getTypicalActivities();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
         //delete the last in the list
-        currentList = TestUtil.removePersonFromList(currentList, targetIndex);
+        currentList = TestUtil.removeActivityFromList(currentList, targetIndex);
         targetIndex = currentList.length;
         assertDeleteSuccess(targetIndex, currentList);
 
         //delete from the middle of the list
-        currentList = TestUtil.removePersonFromList(currentList, targetIndex);
+        currentList = TestUtil.removeActivityFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The activity index provided is invalid");
 
     }
 
     /**
-     * Runs the delete command to delete the person at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. index 1 to delete the first person in the list,
-     * @param currentList A copy of the current list of persons (before deletion).
+     * Runs the delete command to delete the activity at specified index and confirms the result is correct.
+     * @param targetIndexOneIndexed e.g. index 1 to delete the first activity in the list,
+     * @param currentList A copy of the current list of activities (before deletion).
      */
-    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestPerson[] currentList) {
-        TestPerson personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-        TestPerson[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
+    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestActivity[] currentList) {
+        TestActivity activityToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestActivity[] expectedRemainder = TestUtil.removeActivityFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        //confirm the list now contains all previous activities except the deleted activity
+        assertTrue(activityListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, activityToDelete));
     }
 
 }

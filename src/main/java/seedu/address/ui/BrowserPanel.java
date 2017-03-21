@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyActivity;
 
 /**
  * The Browser Panel of the App.
@@ -29,10 +29,14 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadPersonPage(ReadOnlyPerson person) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getName().fullName.replaceAll(" ", "+"));
+    public void loadActivityPage(ReadOnlyActivity activity) {
+        if (activity.getLocation().value != null) {
+            loadPage("https://www.google.com.sg/maps/search/" + activity.getLocation().value.replaceAll(" ", "+"));
+        } else {
+            loadPage("https://www.google.com.sg/#safe=off&q=" + activity.getDescription().description
+                    .replaceAll(" ", "+"));
+        }
     }
-
     public void loadPage(String url) {
         browser.getEngine().load(url);
     }

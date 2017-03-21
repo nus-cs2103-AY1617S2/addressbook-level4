@@ -6,104 +6,142 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.Activity;
+import seedu.address.model.person.ByDate;
+import seedu.address.model.person.Description;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.FromDate;
+import seedu.address.model.person.Location;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.ToDate;
+import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing activity in WhatsLeft.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the activity identified "
+            + "by the index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/high e/johndoe@yahoo.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft.";
+    public static final String MESSAGE_DIFFERENT_DEADLINE = "Cannot edit Deadline into Task or Event";
+    public static final String MESSAGE_DIFFERENT_TASK = "Cannot edit Task into Event or Deadline";
+    public static final String MESSAGE_DIFFERENT_EVENT = "Cannot edit Event into Deadline or Task";
 
-    private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final int filteredActivityListIndex;
+    private final EditActivityDescriptor editActivityDescriptor;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
+     * @param editActivityDescriptor details to edit the activity with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
-        assert filteredPersonListIndex > 0;
-        assert editPersonDescriptor != null;
+    public EditCommand(int filteredActivityListIndex, EditActivityDescriptor editActivityDescriptor) {
+        assert filteredActivityListIndex > 0;
+        assert editActivityDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
+        // converts filteredActivityListIndex from one-based to zero-based.
+        this.filteredActivityListIndex = filteredActivityListIndex - 1;
 
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editActivityDescriptor = new EditActivityDescriptor(editActivityDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyActivity> lastShownList = model.getFilteredActivityList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (filteredActivityListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyActivity activityToEdit = lastShownList.get(filteredActivityListIndex);
+        Activity editedActivity = createEditedActivity(activityToEdit, editActivityDescriptor);
 
+        if (editedActivity.getPriority().value != null && (editedActivity.getByDate().value != null ||
+                editedActivity.getFromDate().value != null && editedActivity.getToDate().value != null ||
+                editedActivity.getStartTime().value != null && editedActivity.getEndTime().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_TASK);
+        }
+
+        if (editedActivity.getByDate().value != null && (editedActivity.getPriority().value != null ||
+                editedActivity.getFromDate().value != null || editedActivity.getToDate().value != null ||
+                editedActivity.getStartTime().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_DEADLINE);
+        }
+
+        if (editedActivity.getFromDate().value != null && (editedActivity.getPriority().value != null ||
+                editedActivity.getByDate().value != null)) {
+            throw new CommandException(MESSAGE_DIFFERENT_EVENT);
+        }
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            model.updateActivity(filteredActivityListIndex, editedActivity);
+        } catch (UniqueActivityList.DuplicateActivityException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, activityToEdit));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
+     * edited with {@code editActivityDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Activity createEditedActivity(ReadOnlyActivity activityToEdit,
+                                             EditActivityDescriptor editActivityDescriptor) {
+        assert activityToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Description updatedDescription = editActivityDescriptor.getDescription().orElseGet(
+            activityToEdit::getDescription);
+        Priority updatedPriority = editActivityDescriptor.getPriority().orElseGet(activityToEdit::getPriority);
+        StartTime updatedStartTime = editActivityDescriptor.getStartTime().orElseGet(activityToEdit::getStartTime);
+        FromDate updatedFromDate = editActivityDescriptor.getFromDate().orElseGet(activityToEdit::getFromDate);
+        EndTime updatedEndTime = editActivityDescriptor.getEndTime().orElseGet(activityToEdit::getEndTime);
+        ToDate updatedToDate = editActivityDescriptor.getToDate().orElseGet(activityToEdit::getToDate);
+        ByDate updatedByDate = editActivityDescriptor.getByDate().orElseGet(activityToEdit::getByDate);
+        Location updatedLocation = editActivityDescriptor.getLocation().orElseGet(activityToEdit::getLocation);
+        UniqueTagList updatedTags = editActivityDescriptor.getTags().orElseGet(activityToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Activity(updatedDescription, updatedPriority, updatedStartTime, updatedFromDate,
+                updatedEndTime, updatedToDate, updatedByDate, updatedLocation, updatedTags);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the activity with. Each non-empty field value will replace the
+     * corresponding field value of the activity.
      */
-    public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+    public static class EditActivityDescriptor {
+        private Optional<Description> description = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
+        private Optional<StartTime> starttime = Optional.empty();
+        private Optional<FromDate> fromdate = Optional.empty();
+        private Optional<EndTime> endtime = Optional.empty();
+        private Optional<ToDate> todate = Optional.empty();
+        private Optional<ByDate> bydate = Optional.empty();
+        private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditActivityDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+        public EditActivityDescriptor(EditActivityDescriptor toCopy) {
+            this.description = toCopy.getDescription();
+            this.priority = toCopy.getPriority();
+            this.starttime = toCopy.getStartTime();
+            this.fromdate = toCopy.getFromDate();
+            this.endtime = toCopy.getEndTime();
+            this.todate = toCopy.getToDate();
+            this.bydate = toCopy.getByDate();
+            this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
 
@@ -111,43 +149,73 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.starttime, this.endtime,
+                    this.fromdate, this.todate, this.bydate, this.priority, this.location, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
-        public Optional<Name> getName() {
-            return name;
+        public Optional<Description> getDescription() {
+            return description;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setStartTime(Optional<StartTime> starttime) {
+            this.starttime = starttime;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<StartTime> getStartTime() {
+            return starttime;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setFromDate(Optional<FromDate> fromdate) {
+            this.fromdate = fromdate;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<FromDate> getFromDate() {
+            return fromdate;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setEndTime(Optional<EndTime> endtime) {
+            this.endtime = endtime;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<EndTime> getEndTime() {
+            return endtime;
+        }
+
+        public void setToDate(Optional<ToDate> todate) {
+            this.todate = todate;
+        }
+
+        public Optional<ToDate> getToDate() {
+            return todate;
+        }
+
+        public void setByDate(Optional<ByDate> bydate) {
+            this.bydate = bydate;
+        }
+
+        public Optional<ByDate> getByDate() {
+            return bydate;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+
+        public void setLocation(Optional<Location> location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return location;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

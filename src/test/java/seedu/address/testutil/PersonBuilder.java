@@ -1,10 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Description;
+import seedu.address.model.person.Location;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -27,7 +26,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+        this.person.setName(new Description(name));
         return this;
     }
 
@@ -40,17 +39,12 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+        this.person.setAddress(new Location(address));
         return this;
     }
 
     public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
-        return this;
-    }
-
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+        this.person.setPhone(new Priority(phone));
         return this;
     }
 
