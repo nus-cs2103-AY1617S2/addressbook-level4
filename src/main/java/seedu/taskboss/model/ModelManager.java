@@ -154,10 +154,8 @@ public class ModelManager extends ComponentManager implements Model {
                 dce.printStackTrace();
             }
 
-            Task editedTask = new Task(target.getName(),
-                    target.getPriorityLevel(), target.getStartDateTime(),
-                    target.getEndDateTime(), target.getInformation(),
-                    newCategoryList);
+            Task editedTask = new Task(target);
+            editedTask.setCategories(newCategoryList);
             int taskBossIndex = taskIndex[i];
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
