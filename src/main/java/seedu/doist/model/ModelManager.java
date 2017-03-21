@@ -95,17 +95,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AliasListMapChangedEvent(aliasListMap));
     }
 
-    public String formatCommandWords(String defaultCommandWord) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        List<String> commandWords = getValidCommandList(defaultCommandWord);
-        for (String commandWord : commandWords) {
-            sb.append(commandWord + "|");
-        }
-        sb.setCharAt(sb.length() - 1, ')');
-        return sb.toString();
-    }
-
     //=========== TodoList =============================================================
 
     @Override
