@@ -7,6 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
@@ -82,8 +83,8 @@ public class EditCommand extends Command {
         Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
         Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
-
-        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels);
+        UniqueBookingList updatedBookings = editTaskDescriptor.getBookings().orElseGet(taskToEdit::getBookings);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels, updatedBookings);
     }
 
     /**
@@ -96,7 +97,7 @@ public class EditCommand extends Command {
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
         private Optional<Boolean> isCompleted = Optional.empty();
-
+        private Optional<UniqueBookingList> bookings = Optional.empty();
         public EditTaskDescriptor() {}
 
 
@@ -106,6 +107,7 @@ public class EditCommand extends Command {
             this.deadline = toCopy.getDeadline();
             this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
+            this.bookings = toCopy.getBookings();
         }
 
         /**
@@ -157,6 +159,10 @@ public class EditCommand extends Command {
 
         public Optional<UniqueLabelList> getLabels() {
             return labels;
+        }
+
+        public Optional<UniqueBookingList> getBookings() {
+            return bookings;
         }
 
         public void setIsCompleted(Optional<Boolean> isCompleted) {

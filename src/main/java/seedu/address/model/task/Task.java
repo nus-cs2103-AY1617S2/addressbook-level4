@@ -123,6 +123,7 @@ public class Task implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setLabels(replacement.getLabels());
         this.setIsCompleted(replacement.isCompleted());
+        this.setBookings(replacement.getBookings());
     }
 
     @Override

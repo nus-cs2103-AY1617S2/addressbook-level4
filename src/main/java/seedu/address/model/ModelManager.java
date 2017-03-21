@@ -12,7 +12,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.exceptions.InvalidUndoCommandException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.model.datastructure.PartialSearch;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -75,6 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0162877N
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -84,6 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0162877N
     @Override
     public void undoPrevious(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState)
             throws InvalidUndoCommandException {
@@ -169,20 +171,15 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0162877N
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+            String taskDetails = task.getAsSearchText();
+            PartialSearch partialSearch = new PartialSearch(taskDetails);
+            return (nameKeyWords.stream()
+                    .filter(keyword -> partialSearch.search(keyword))
                     .findAny()
-                    .isPresent() ||
-                    nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDeadline().toString(), keyword))
-                    .findAny()
-                    .isPresent() ||
-                    nameKeyWords.stream()
-                    .filter(keyword -> task.getLabels().containsStringLabel(keyword))
-                    .findAny()
-                    .isPresent();
+                    .isPresent());
         }
 
         @Override
@@ -191,6 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0162877N
     private class DateFilter {
         private Date startTime;
         private Date endTime;

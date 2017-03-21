@@ -15,16 +15,17 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
 import seedu.address.model.task.UniqueTaskList;
 
+//@@author A0162877N
 public class BookCommand extends Command {
 
     public static final String COMMAND_WORD = "book";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Books time slots for a task. "
             + "Parameters: TITLE [#LABEL] on DATE STARTTIME to ENDTIME, DATE STARTTIME to ENDTIME...\n"
             + "Example: " + COMMAND_WORD
-            + " Meet John Doe #friends #owesMoney on 31-10-2017 2pm to 5pm,"
-            + " 01-10-2017 2pm to 5pm, 30-10-2017 1pm to 2pm";
+            + " Meet John Doe #friends #owesMoney on 31 Mar 2017 2pm to 5pm,"
+            + " 01 Oct 2017 2pm to 5pm, 30 Oct 2017 1pm to 2pm";
     public static final String MESSAGE_SUCCESS = "New booking added: %1$s";
-    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking slot already exists in the task manager";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the task manager";
 
     private final Task toAdd;
 
@@ -59,8 +60,6 @@ public class BookCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
-        } catch (Exception e) {
-            throw new CommandException(MESSAGE_USAGE);
         }
     }
 
