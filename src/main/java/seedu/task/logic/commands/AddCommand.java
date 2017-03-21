@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.Model;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
@@ -29,7 +30,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
-    private final Task toAdd;
+    private Task toAdd;
+
+    public AddCommand(){
+    }
 
     /**
      * Creates an AddCommand using raw values.
@@ -76,6 +80,16 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
+    }
+
+    public CommandResult executeUndo(Task previousTask, Model model) throws CommandException {
+        try{
+        	model.addTaskUndo(previousTask);
+        	return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+        	throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

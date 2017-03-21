@@ -2,8 +2,6 @@ package seedu.task.logic.commands;
 
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class UndoCommand extends Command {
 	public static final String COMMAND_WORD = "undo";
@@ -14,38 +12,33 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNDO_SUCCESS = "Undo Command Successful";
+	public static final String NOTHING_TO_UNDO = "Nothing To Undo LAR";
 
 
     @Override
     public CommandResult execute() throws CommandException {
 
-    	String previousCommand = model.previousCommand();
-    	Task previousTask = model.previousTask();
+    	if(model.getUndoManager().getStackStatus()){
+    		return new CommandResult(NOTHING_TO_UNDO);
+    	}
 
-        switch (previousCommand){
+    	String previousCommand = model.getUndoManager().popCommand();
+    	Task previousTask = model.getUndoManager().popUndo();
+    	System.out.println(previousCommand);
+
+    	switch (previousCommand) {
         case "Add":
-        	try {
-				model.deleteTaskUndo(previousTask);
-			} catch (TaskNotFoundException pnfe) {
-				assert false : "The target task cannot be missing";
-			}
+        	new DeleteCommand().executeUndo(previousTask, model);
         	break;
         case "Delete":
-        	try {
-				model.addTaskUndo(previousTask);
-			} catch (DuplicateTaskException e1) {
-				// TODO Auto-generated catch block
-			}
+        	new AddCommand().executeUndo(previousTask, model);
         	break;
         case "Edit":
-			try {
-				model.updateTaskUndo(model.previousIndex(), previousTask);
-			} catch (DuplicateTaskException e) {
-				e.printStackTrace();
-			}
+        	Integer previousIndex = model.getUndoManager().popTaskIndex();
+        	new EditCommand().executeUndo(model, previousIndex, previousTask);
         	break;
 		default:
-			System.out.println("HELPPPP");
+			return new CommandResult(NOTHING_TO_UNDO);
         }
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }

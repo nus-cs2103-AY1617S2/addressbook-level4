@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.Model;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.CompletionStatus;
 import seedu.task.model.task.EndTime;
@@ -33,8 +34,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
-    private final int filteredTaskListIndex;
-    private final EditTaskDescriptor editTaskDescriptor;
+    private int filteredTaskListIndex;
+    private EditTaskDescriptor editTaskDescriptor;
+
+    public EditCommand(){
+
+    }
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
@@ -68,6 +73,16 @@ public class EditCommand extends Command {
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+
+    public CommandResult executeUndo(Model model, Integer previousIndex, Task previousTask) throws CommandException {
+        try {
+            model.updateTask(previousIndex, previousTask);
+        } catch (UniqueTaskList.DuplicateTaskException dte) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+        model.updateFilteredListToShowAll();
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, previousTask));
     }
 
     /**

@@ -26,9 +26,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final ChatList chatList;
-    private final UndoRedo undoRedo = new UndoRedo();
+    private final UndoManager undoManager = new UndoManager();
 
-    /**
+	/**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
@@ -58,7 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
+    protected void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
@@ -66,16 +66,14 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
         Task deletedTask = new Task(target);
-        undoRedo.pushUndo(deletedTask);
-        undoRedo.pushCommand("Delete");
+        undoManager.pushUndo(deletedTask);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        undoRedo.pushUndo(task);
-        undoRedo.pushCommand("Add");
+        undoManager.pushUndo(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -87,9 +85,8 @@ public class ModelManager extends ComponentManager implements Model {
         Task taskBackup = new Task(filteredTasks.get(filteredTaskListIndex));
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        undoRedo.pushUndo(taskBackup);
-        undoRedo.pushTaskIndex(taskManagerIndex);
-        undoRedo.pushCommand("Edit");
+        undoManager.pushUndo(taskBackup);
+        undoManager.pushTaskIndex(taskManagerIndex);
         indicateTaskManagerChanged();
     }
 
@@ -174,23 +171,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public Task previousTask(){
-    	return undoRedo.popUndo();
-    }
-
-    @Override
-    public String previousCommand(){
-    	return undoRedo.popCommand();
-    }
-
-    @Override
-    public int previousIndex(){
-    	return undoRedo.popTaskIndex();
-    }
-
-    @Override
     public synchronized void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException {
-    	taskManager.removeTask(target);
+        taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
@@ -209,5 +191,10 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
+
+    @Override
+	public UndoManager getUndoManager() {
+		return undoManager;
+	}
 
 }

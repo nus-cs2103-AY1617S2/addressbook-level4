@@ -20,6 +20,7 @@ import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UncheckCommand;
 import seedu.task.logic.commands.UndoCommand;
+import seedu.task.model.UndoManager;
 
 /**
  * Parses user input.
@@ -48,15 +49,18 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Add");
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Edit");
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("Delete");
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -66,6 +70,7 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        	UndoManager.pushCommand("List");
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:

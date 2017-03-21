@@ -48,16 +48,12 @@ public interface Model {
     /** Returns the chat list as an {@code FilteredList<Chat>} */
     ChatList getChatList();
 
-    /** Returns undo tasks */
-    Task previousTask();
-
-	String previousCommand();
-
 	void deleteTaskUndo(ReadOnlyTask target) throws TaskNotFoundException;
-
-	void addTaskUndo(Task task) throws DuplicateTaskException;
 
 	void updateTaskUndo(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException;
 
-	int previousIndex();
+	void addTaskUndo(Task task) throws DuplicateTaskException;
+
+	UndoManager getUndoManager();
+
 }
