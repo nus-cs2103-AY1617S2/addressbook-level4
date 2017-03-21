@@ -55,8 +55,7 @@ In order to better contribute, you should:
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+3. **e(fx)clipse** plugin for Eclipse (Follow the instructions given in [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious) from Step 2 onwards.)
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace or its [official website](http://eclipse-cs.sourceforge.net/#!/install)
 
@@ -97,7 +96,7 @@ In order to better contribute, you should:
 
 **Problem: Eclipse reports some required libraries missing**
 * Reason: Required libraries may not have been downloaded during the project import.
-* Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 **[⬆ back to top](#user-content-table)**
 
@@ -112,8 +111,8 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Given below is a quick overview of each component.
 
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/geekeep/MainApp.java). It is responsible for:
-* At app launch: initializing the components in the correct sequence, and connecting them up with each other.
-* At shut down: shutting down the components and invoking cleanup method where necessary.
+* App Launching: initialize the components in the correct sequence, and connect them up with each other.
+* Shutting Down: shut down the components and invoke cleanup method where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
@@ -132,9 +131,7 @@ Each of the four components:
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
-interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.2 : Class Diagram of the Logic Component_
+interface and exposes its functionality using the `LogicManager.java` class.
 
 **Events-Driven nature of the design**
 
@@ -186,10 +183,20 @@ _Figure 2.5 : Class Diagram of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/geekeep/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+The `Logic` component: 
+
+* Parses the user command using each command's respective `Parser`.
+* Executes a `Command` object based on the command and user input.
+* Encapsulates the result, a feedback `string` in a `CommandResult` object.
+
+For example, the following is what happens when the API `execute("delete 1")` is called:
+
+1. `LogicManager` parses the user command using the  `Parser` class.
+1. `Parser` subsequently uses `DeleteCommandParser` to parse the argument `1`.
+1. This results in a `DeleteCommand` object which is returned to `LogicManager`.
+1. `LogicManager` executes the `DeleteCommand` object.
+1. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
@@ -248,7 +255,7 @@ and logging destinations.
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application.
 * `WARNING` : Can continue, but with caution.
 * `INFO` : Information showing the noteworthy actions by the App.
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+* `FINE` : Details that are not noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size.
 
 <h3 id="user-content-config">Configuration</h3>
@@ -363,7 +370,7 @@ Here are the steps to convert the project documentation files to PDF format:
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/geekeep/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
