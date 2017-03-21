@@ -38,7 +38,8 @@ public class SortCommandParser {
             return new SortCommand(SortBy.END_DATE_TIME);
 
         default:
-            return new SortCommand(null);
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
     }
 }
