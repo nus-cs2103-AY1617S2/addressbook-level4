@@ -92,7 +92,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<Note> getNote() {
-        return Optional.of(note);
+        return Optional.ofNullable(note);
     }
 
     @Override
