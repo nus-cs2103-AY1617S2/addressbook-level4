@@ -34,7 +34,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * Sorts tasks based on the specified sort type.
      * Start and end dates are sorted in ascending order,
      * whereas priority level is sorted in descending order
-     * (i.e tasks with high priority will be listed on top) 
+     * (i.e tasks with high priority will be listed on top)
      * @throws IllegalValueException
      */
     public void sort(SortBy sortType) throws IllegalValueException {
