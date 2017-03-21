@@ -478,33 +478,55 @@ public class LogicManagerTest {
         assertCommandFailure("renametag ", expectedMessage);
     }
 
-    // TODO, fix sync of tag list
-    // @Test
-    // public void execute_renametag_onlyMatchesFullWordsInTags() throws
-    // Exception {
-    // TestDataHelper helper = new TestDataHelper();
-    // Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-    // Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-    // "blahbla", "KEY");
-    // Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
-    // Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
-    // "blahbla", "newkey");
-    // Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-    // Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-    // Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
-    //
-    // List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
-    // TaskManager expectedAB = helper.generateTaskManager(fiveTasks);
-    // List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
-    // helper.addToModel(model, fiveTasks);
-    //
-    // assertCommandSuccess("renametag KEY newkey",
-    // String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY",
-    // "newkey"), expectedAB,
-    // expectedList);
-    // }
+    @Test
+    public void execute_renametag_onlyMatchesFullWordsInTags() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla", "KEY");
+        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla", "newkey");
+        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
 
-    // TODO casesensitive test for renametag
+        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
+        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
+        TaskManager expectedAB = helper.generateTaskManager(expectedList);
+        helper.addToModel(model, fiveTasks);
+
+        assertCommandSuccess("renametag KEY newkey",
+                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY",
+                        "newkey"), expectedAB,
+                expectedList);
+    }
+
+    @Test
+    public void execute_renametag_onlyMatchesCorrectCaseInTags() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla", "KEY");
+        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla", "newkey");
+        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEy");
+
+        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
+        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
+        TaskManager expectedAB = helper.generateTaskManager(expectedList);
+        helper.addToModel(model, fiveTasks);
+
+        assertCommandSuccess("renametag KEY newkey",
+                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY",
+                        "newkey"), expectedAB,
+                expectedList);
+    }
+
+    // DeleteTagCommand Tests
 
     @Test
     public void execute_deletetag_invalidArgsFormat() {
@@ -512,8 +534,51 @@ public class LogicManagerTest {
         assertCommandFailure("deletetag ", expectedMessage);
     }
 
-    // TODO matchfullwords in deletetag
-    // TODO casesensitive test for deletetag
+    @Test
+    public void execute_deletetag_onlyMatchesFullWordsInTags() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla", "KEY");
+        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla");
+        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
+
+        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
+        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
+        TaskManager expectedAB = helper.generateTaskManager(expectedList);
+        helper.addToModel(model, fiveTasks);
+
+        assertCommandSuccess("deletetag KEY",
+                String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
+                expectedAB, expectedList);
+    }
+
+    @Test
+    public void execute_deletetag_onlyMatchesCorrectCaseInTags() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
+        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla", "KEY");
+        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla");
+        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia",
+                "blahbla");
+        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEy");
+
+        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
+        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
+        TaskManager expectedAB = helper.generateTaskManager(expectedList);
+        helper.addToModel(model, fiveTasks);
+
+        assertCommandSuccess("deletetag KEY",
+                String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
+                expectedAB, expectedList);
+    }
 
     // SaveToCommand Tests
 
