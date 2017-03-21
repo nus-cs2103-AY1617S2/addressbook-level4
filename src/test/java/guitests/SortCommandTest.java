@@ -28,8 +28,8 @@ public class SortCommandTest extends TaskBossGuiTest {
         assertSortSuccess(true, expectedList3, "ed");
 
         //sort by priority short command
-        TestTask[] expectedList4 = new TestTask[] {td.alice, td.carl, td.daniel,
-            td.george, td.benson, td.elle, td.fiona};
+        TestTask[] expectedList4 = new TestTask[] {td.carl, td.alice, td.daniel,
+            td.george, td.elle, td.benson, td.fiona};
         assertSortSuccess(true, expectedList4, "p");
 
         //invalid sort command
