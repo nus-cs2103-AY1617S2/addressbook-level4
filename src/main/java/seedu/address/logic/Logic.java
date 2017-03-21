@@ -25,4 +25,13 @@ public interface Logic {
      */
     void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,ObservableList<ReadOnlyTask> taskListCompleted);
 
+    /*
+     * translates task index on ui to internal integer index 
+     */
+    int parseUIIndex(String uiIndex);
+
+    /*
+     * checks if a given ui index is present in model
+     */
+    boolean isValidUIIndex(String uiIndex);
 }

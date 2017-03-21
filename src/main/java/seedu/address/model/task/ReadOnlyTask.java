@@ -32,9 +32,9 @@ public interface ReadOnlyTask {
     boolean isToday();
 
     // id field reserved for UI to store temporary index
-    int getID();
+    String getID();
 
-    void setID(int id);
+    void setID(String string);
 
     /**
      *

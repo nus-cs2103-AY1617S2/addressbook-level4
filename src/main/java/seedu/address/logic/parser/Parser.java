@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -40,33 +41,33 @@ public class Parser {
      *            full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput, LogicManager logicManager) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments, logicManager);
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            return new SelectCommandParser().parse(arguments, logicManager);
 
         case DoneCommand.COMMAND_WORD:
-            return new DoneCommandParser().parse(arguments);
+            return new DoneCommandParser().parse(arguments, logicManager);
 
         case NotDoneCommand.COMMAND_WORD:
-            return new NotDoneCommandParser().parse(arguments);
+            return new NotDoneCommandParser().parse(arguments, logicManager);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments, logicManager);
 
         case RenameTagCommand.COMMAND_WORD:
             return new RenameTagCommandParser().parse(arguments);

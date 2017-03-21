@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Logic;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
@@ -24,15 +25,14 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
-    public Command parse(String args) {
+    public Command parse(String args,Logic logic) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
-        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-        if (!index.isPresent()) {
+        if (!logic.isValidUIIndex(args)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
@@ -48,7 +48,7 @@ public class EditCommandParser {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(logic.parseUIIndex(args), editTaskDescriptor);
     }
 
     /**
