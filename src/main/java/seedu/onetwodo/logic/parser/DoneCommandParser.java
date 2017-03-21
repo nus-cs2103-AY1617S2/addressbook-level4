@@ -20,6 +20,10 @@ public class DoneCommandParser {
      */
     public Command parse(String args) {
         String argsTrimmed = args.trim();
+        if (argsTrimmed.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+        }
         char taskType = argsTrimmed.charAt(0);
         Optional<Integer> index = ParserUtil.parseIndex(argsTrimmed.substring(1));
         if (!index.isPresent() || TaskType.getTaskTypeFromChar(taskType) == null) {

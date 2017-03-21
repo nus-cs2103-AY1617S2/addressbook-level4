@@ -30,6 +30,10 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         String argsTrimmed = args.trim();
+        if (argsTrimmed.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
         char taskType = argsTrimmed.charAt(0);
 
         ArgumentTokenizer argsTokenizer =
