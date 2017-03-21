@@ -18,13 +18,13 @@ public class SortCommandParser {
 
     private static final String SORT_PARAM_START_DATE_TIME = "sd";
     private static final String SORT_PARAM_END_DATE_TIME = "ed";
+    public static final String ERROR_INVALID_SORT_TYPE = "Invalid sort type.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns an SortCommand object for execution.
-     * @throws IllegalValueException
      */
-    public Command parse(String args) throws IllegalValueException {
+    public Command parse(String args) {
         Optional<String> sortTypeOp = ParserUtil.parseSortType(args);
         if (!sortTypeOp.isPresent()) {
             return new IncorrectCommand(
@@ -40,7 +40,7 @@ public class SortCommandParser {
             return new SortCommand(SortBy.END_DATE_TIME);
 
         default:
-            throw new IllegalValueException(SortCommand.ERROR_INVALID_SORT_TYPE);
+            return new SortCommand(null);
         }
     }
 }

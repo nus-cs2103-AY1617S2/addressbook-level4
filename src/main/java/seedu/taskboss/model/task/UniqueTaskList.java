@@ -11,7 +11,7 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.DuplicateDataException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
-import seedu.taskboss.logic.commands.SortCommand;
+import seedu.taskboss.logic.parser.SortCommandParser;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -74,7 +74,7 @@ public class UniqueTaskList implements Iterable<Task> {
             break;
 
         default:
-            throw new IllegalValueException(SortCommand.ERROR_INVALID_SORT_TYPE);
+            throw new IllegalValueException(SortCommandParser.ERROR_INVALID_SORT_TYPE);
         }
 
         FXCollections.sort(internalList, taskCmp);
