@@ -22,11 +22,21 @@ public class CliSyntax {
 
     /* Parameter names definitions */
     public static final String NAME_PARAMETER = "name";
+    public static final String NAME_PARAMETER_2 = "n";
     public static final String START_DATE_PARAMETER = "start_date";
+    public static final String START_DATE_PARAMETER_2 = "startdate";
+    public static final String START_DATE_PARAMETER_3 = "sd";
     public static final String END_DATE_PARAMETER = "end_date";
+    public static final String END_DATE_PARAMETER_2 = "enddate";
+    public static final String END_DATE_PARAMETER_3 = "ed";
     public static final String START_TIME_PARAMETER = "start_time";
+    public static final String START_TIME_PARAMETER_2 = "starttime";
+    public static final String START_TIME_PARAMETER_3 = "st";
     public static final String END_TIME_PARAMETER = "end_time";
+    public static final String END_TIME_PARAMETER_2 = "endtime";
+    public static final String END_TIME_PARAMETER_3 = "et";
     public static final String TAG_PARAMETER = "tag";
+    public static final String TAG_PARAMETER_2 = "t";
 
     /* List filter definitions */
     public static final String COMPLETED_FILTER = "completed";
