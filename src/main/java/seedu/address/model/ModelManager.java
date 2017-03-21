@@ -167,7 +167,12 @@ public class ModelManager extends ComponentManager implements Model {
                     || (keyWords.stream()
                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
                        .findAny()
-                       .isPresent());
+                       .isPresent())
+                    || (keyWords.stream()
+                            .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                    task.getDeadline().date.toString(), keyword))
+                            .findAny()
+                            .isPresent());
         }
 
         @Override
