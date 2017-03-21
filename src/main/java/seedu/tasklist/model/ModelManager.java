@@ -202,7 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         indicateTaskListChanged();
     }
-//@@author 
+//@@author
     @Override
     public void updateFilteredTaskListTag(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));

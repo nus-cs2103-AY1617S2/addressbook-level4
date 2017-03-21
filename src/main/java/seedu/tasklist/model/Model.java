@@ -56,7 +56,7 @@ public interface Model {
 //@@author A0141993X
     /**Sort tasks according to parameter specified by user */
     public void sortTaskList(String parameter);
-//@@author 
+//@@author
     /** Updates the filter of the filered task list to filter by the given tag keywords*/
     void updateFilteredTaskListTag(Set<String> keyword);
 //@@author A0141993X
