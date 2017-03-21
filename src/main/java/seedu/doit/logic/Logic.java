@@ -3,8 +3,6 @@ package seedu.doit.logic;
 import javafx.collections.ObservableList;
 import seedu.doit.logic.commands.CommandResult;
 import seedu.doit.logic.commands.exceptions.CommandException;
-import seedu.doit.model.item.ReadOnlyEvent;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
 /**
  * API of the Logic component
@@ -23,7 +21,4 @@ public interface Logic {
      * Returns the filtered list of tasks
      */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
-    ObservableList<ReadOnlyEvent> getFilteredEventList();
-    ObservableList<ReadOnlyFloatingTask> getFilteredFloatingTaskList();
-
 }

@@ -1,12 +1,30 @@
 package seedu.doit.model.item;
 
+import seedu.doit.model.tag.UniqueTagList;
+
 /**
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyTask extends Item {
+public interface ReadOnlyTask {
+
+    Name getName();
+
+    Priority getPriority();
+
+    Description getDescription();
+
+    StartTime getStartTime();
 
     EndTime getEndTime();
+
+    boolean getIsDone();
+
+    /**
+     * The returned TagList is a deep copy of the internal TagList, changes on
+     * the returned list will not affect the task's internal tags.
+     */
+    UniqueTagList getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -16,26 +34,44 @@ public interface ReadOnlyTask extends Item {
             || (other != null // this is first to avoid NPE below
             && other.getName().equals(this.getName()) // state checks here onwards
             && other.getPriority().equals(this.getPriority())
-            && other.getEndTime().equals(this.getEndTime())
             && other.getDescription().equals(this.getDescription()));
     }
 
     /**
-     * Formats the task as text, showing all details.
+     * Formats the event as text, showing all details.
      */
-    @Override
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        String startTime = (getStartTime() != null) ? getStartTime().toString() : "None";
+        String endTime = (getEndTime() != null) ? getEndTime().toString() : "None";
+
         builder.append(getName())
-            .append(" Priority: ")
-            .append(getPriority())
-            .append(" End Time: ")
-            .append(getEndTime())
-            .append(" Description: ")
-            .append(getDescription())
-            .append(" Tags: ");
+               .append(" Priority: ")
+               .append(getPriority());
+        if (hasStartTime()) {
+            builder.append(" Start Time: ");
+            builder.append(getStartTime());
+        }
+        if (hasEndTime()) {
+            builder.append(" End Time: ");
+            builder.append(getEndTime());
+        }
+        builder.append(" Description: ")
+               .append(getDescription())
+               .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
+    boolean hasStartTime();
+
+    boolean hasEndTime();
+
+    int compareTo(ReadOnlyTask other);
+
+    boolean isTask();
+
+    boolean isEvent();
+
+    boolean isFloatingTask();
 }

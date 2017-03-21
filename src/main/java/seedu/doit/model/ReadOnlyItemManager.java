@@ -1,20 +1,19 @@
 package seedu.doit.model;
 
-
 import javafx.collections.ObservableList;
-import seedu.doit.model.item.ReadOnlyEvent;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.tag.Tag;
 
 /**
- * Unmodifiable view of an event manager
+ * Unmodifiable view of an task manager
  */
-public interface ReadOnlyEventManager {
+public interface ReadOnlyItemManager {
 
     /**
-     * Returns an unmodifiable view of the event s list.
-     * This list will not contain any duplicate event s.
+     * Returns an unmodifiable view of the task s list.
+     * This list will not contain any duplicate task s.
      */
-    ObservableList<ReadOnlyEvent> getEventList();
+    ObservableList<ReadOnlyTask> getTaskList();
 
     /**
      * Returns an unmodifiable view of the tags list.

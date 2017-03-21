@@ -10,8 +10,6 @@ import seedu.doit.logic.commands.CommandResult;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.logic.parser.Parser;
 import seedu.doit.model.Model;
-import seedu.doit.model.item.ReadOnlyEvent;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.storage.Storage;
 
@@ -42,15 +40,5 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return this.model.getFilteredTaskList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyEvent> getFilteredEventList() {
-        return this.model.getFilteredEventList();
-    }
-
-    @Override
-    public ObservableList<ReadOnlyFloatingTask> getFilteredFloatingTaskList() {
-        return this.model.getFilteredFloatingTaskList();
     }
 }

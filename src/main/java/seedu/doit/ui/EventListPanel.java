@@ -11,10 +11,9 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doit.commons.core.LogsCenter;
-import seedu.doit.commons.events.ui.EventPanelSelectionChangedEvent;
+import seedu.doit.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.doit.commons.util.FxViewUtil;
-import seedu.doit.logic.Logic;
-import seedu.doit.model.item.ReadOnlyEvent;
+import seedu.doit.model.item.ReadOnlyTask;
 
 /**
  * Panel containing the list of tasks.
@@ -22,20 +21,21 @@ import seedu.doit.model.item.ReadOnlyEvent;
 public class EventListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
-    @FXML
-    private ListView<ReadOnlyEvent> taskListView;
-    Logic logic;
 
-    public EventListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyEvent> eventList,
-                          Logic logic) {
+    private static ObservableList<ReadOnlyTask> mainTaskList;
+    @FXML
+    private ListView<ReadOnlyTask> taskListView;
+
+    public EventListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyTask> eventList) {
         super(FXML);
-        this.logic = logic;
         setConnections(eventList);
         addToPlaceholder(eventListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyEvent> eventList) {
-        this.taskListView.setItems(eventList);
+    private void setConnections(ObservableList<ReadOnlyTask> eventList) {
+        mainTaskList = eventList;
+        this.taskListView.setItems(eventList.filtered(task -> task.hasStartTime()
+                                   && task.hasEndTime() && !task.getIsDone()));
         this.taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -51,7 +51,7 @@ public class EventListPanel extends UiPart<Region> {
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     this.logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                    raise(new EventPanelSelectionChangedEvent(newValue));
+                    raise(new TaskPanelSelectionChangedEvent(newValue));
                 }
             });
     }
@@ -63,17 +63,17 @@ public class EventListPanel extends UiPart<Region> {
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyEvent> {
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyEvent event, boolean empty) {
+        protected void updateItem(ReadOnlyTask event, boolean empty) {
             super.updateItem(event, empty);
 
             if (empty || event == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1, logic).getRoot());
+                setGraphic(new TaskCard(event, mainTaskList.indexOf(event) + 1).getRoot());
             }
         }
     }

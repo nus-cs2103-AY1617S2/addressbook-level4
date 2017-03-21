@@ -20,13 +20,9 @@ import seedu.doit.commons.util.ConfigUtil;
 import seedu.doit.commons.util.StringUtil;
 import seedu.doit.logic.Logic;
 import seedu.doit.logic.LogicManager;
-import seedu.doit.model.EventManager;
-import seedu.doit.model.FloatingTaskManager;
 import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
-import seedu.doit.model.ReadOnlyEventManager;
-import seedu.doit.model.ReadOnlyFloatingTaskManager;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.UserPrefs;
 import seedu.doit.model.util.SampleDataUtil;
@@ -79,10 +75,9 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> taskManagereOptional;
-        ReadOnlyTaskManager initialTaskManagerData;
-        ReadOnlyFloatingTaskManager initialFloatingTaskManagerData;
-        ReadOnlyEventManager initialEventManagerData;
+        Optional<ReadOnlyItemManager> taskManagereOptional;
+        ReadOnlyItemManager initialTaskManagerData;
+
         try {
             taskManagereOptional = storage.readTaskManager();
             if (!taskManagereOptional.isPresent()) {
@@ -98,10 +93,7 @@ public class MainApp extends Application {
             initialTaskManagerData = new TaskManager();
         }
 
-        initialFloatingTaskManagerData = new FloatingTaskManager();
-        initialEventManagerData = new EventManager();
-        return new ModelManager(initialTaskManagerData, initialFloatingTaskManagerData, initialEventManagerData,
-                userPrefs);
+        return new ModelManager(initialTaskManagerData, userPrefs);
     }
 
     private void initLogging(Config config) {

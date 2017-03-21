@@ -7,6 +7,7 @@ import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.ui.JumpToListRequestEvent;
 import seedu.doit.commons.events.ui.ShowHelpRequestEvent;
+import seedu.doit.commons.util.FileUtil;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.Command;
@@ -33,11 +35,12 @@ import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
@@ -47,6 +50,7 @@ import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
+import seedu.doit.storage.Storage;
 import seedu.doit.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -58,10 +62,11 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    private Storage storage;
     private Logic logic;
 
     // These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedTaskManager;
+    private ReadOnlyItemManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
 
@@ -85,7 +90,8 @@ public class LogicManagerTest {
         this.model = new ModelManager();
         String tempTaskManagerFile = this.saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = this.saveFolder.getRoot().getPath() + "TempPreferences.json";
-        this.logic = new LogicManager(this.model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        this.storage = new StorageManager(tempTaskManagerFile, tempPreferencesFile);
+        this.logic = new LogicManager(this.model, this.storage);
         EventsCenter.getInstance().registerHandler(this);
 
         this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last
@@ -116,11 +122,11 @@ public class LogicManagerTest {
      * that the result message is correct. Also confirms that both the 'task
      * manager' and the 'last shown list' are as specified.
      *
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyItemManager,
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyItemManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
@@ -129,7 +135,7 @@ public class LogicManagerTest {
      * the result message is correct. Both the 'task manager' and the 'last
      * shown list' are verified to be unchanged.
      *
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyItemManager,
      *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -149,7 +155,7 @@ public class LogicManagerTest {
      * - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyItemManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = this.logic.execute(inputCommand);
@@ -361,8 +367,10 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+        Collections.sort(fourTasks);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        Collections.sort(expectedList);
         helper.addToModel(this.model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
@@ -378,6 +386,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
+        Collections.sort(fourTasks);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(this.model, fourTasks);
@@ -401,6 +410,43 @@ public class LogicManagerTest {
 
         assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
+    }
+
+    @Test
+    public void execute_save_successful() throws Exception {
+        String filePath = "data/testfile1.xml";
+        File file = new File(filePath);
+        file.delete();
+        assertCommandSuccess("save " + filePath, String.format(SaveCommand.MESSAGE_SUCCESS, filePath),
+                this.model.getTaskManager(), this.model.getFilteredTaskList());
+        file.delete();
+    }
+
+    @Test
+    public void execute_save_not_xml() throws Exception {
+        String filePath = "";
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_NOT_XML_FILE);
+    }
+
+    @Test
+    public void execute_save_invalidFileName() throws Exception {
+        String filePath = "data/??.xml";
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_INVALID_FILE_NAME);
+    }
+
+    @Test
+    public void execute_save_duplicateFile() throws Exception {
+        String filePath = "data/testfile3.xml";
+        File file = new File(filePath);
+        FileUtil.createIfMissing(file);
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_DUPLICATE_FILE);
+        file.delete();
+    }
+
+    @Test
+    public void execute_save_inSameFile() throws Exception {
+        String filePath = this.storage.getTaskManagerFilePath();
+        assertCommandFailure("save " + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
     }
 
     /**

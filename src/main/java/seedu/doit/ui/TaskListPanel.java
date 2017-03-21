@@ -21,6 +21,8 @@ import seedu.doit.model.item.ReadOnlyTask;
 public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
+
+    private static ObservableList<ReadOnlyTask> mainTaskList;
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
@@ -33,7 +35,9 @@ public class TaskListPanel extends UiPart<Region> {
 
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskListView.setItems(taskList);
+        mainTaskList = taskList;
+        taskListView.setItems(taskList.filtered(task -> !task.hasStartTime()
+                              && task.hasEndTime() && !task.getIsDone()));
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -71,7 +75,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, mainTaskList.indexOf(task) + 1).getRoot());
             }
         }
     }

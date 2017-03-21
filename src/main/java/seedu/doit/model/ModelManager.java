@@ -1,7 +1,5 @@
 package seedu.doit.model;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -9,22 +7,12 @@ import javafx.collections.transformation.FilteredList;
 import seedu.doit.commons.core.ComponentManager;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.core.UnmodifiableObservableList;
-import seedu.doit.commons.events.model.EventManagerChangedEvent;
-import seedu.doit.commons.events.model.FloatingTaskManagerChangedEvent;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
-import seedu.doit.model.item.Event;
-import seedu.doit.model.item.FloatingTask;
-import seedu.doit.model.item.Item;
-import seedu.doit.model.item.ReadOnlyEvent;
-import seedu.doit.model.item.ReadOnlyFloatingTask;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
-import seedu.doit.model.item.UniqueEventList.DuplicateEventException;
-import seedu.doit.model.item.UniqueEventList.EventNotFoundException;
-import seedu.doit.model.item.UniqueFloatingTaskList.DuplicateFloatingTaskException;
-import seedu.doit.model.item.UniqueFloatingTaskList.FloatingTaskNotFoundException;
+import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
@@ -36,44 +24,36 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FloatingTaskManager floatingTaskManager;
-    private final EventManager eventManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final FilteredList<ReadOnlyFloatingTask> filteredFloatingTasks;
-    private final FilteredList<ReadOnlyEvent> filteredEvents;
+
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskManager taskManager, ReadOnlyFloatingTaskManager floatingTaskManager,
-            ReadOnlyEventManager eventManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyItemManager taskManager, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        this.floatingTaskManager = new FloatingTaskManager(floatingTaskManager);
-        this.eventManager = new EventManager(eventManager);
-
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        filteredFloatingTasks = new FilteredList<>(this.floatingTaskManager.getFloatingTaskList());
-        filteredEvents = new FilteredList<>(this.eventManager.getEventList());
+
 
     }
 
     public ModelManager() {
-        this(new TaskManager(), new FloatingTaskManager(), new EventManager(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void resetData(ReadOnlyItemManager newData) {
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public ReadOnlyTaskManager getTaskManager() {
+    public ReadOnlyItemManager getTaskManager() {
         return taskManager;
     }
 
@@ -84,69 +64,29 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
-    private void indicateFloatingTaskManagerChanged() {
-        raise(new FloatingTaskManagerChangedEvent(floatingTaskManager));
-    }
-
-    private void indicateEventManagerChanged() {
-        raise(new EventManagerChangedEvent(eventManager));
-    }
-
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        String[] test = new String[] {"test"};
-        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
-        indicateFloatingTaskManagerChanged();
-        indicateEventManagerChanged();
+
     }
 
-    @Override
-    public synchronized void deleteFloatingTask(ReadOnlyFloatingTask target) throws FloatingTaskNotFoundException {
-        floatingTaskManager.removeFloatingTask(target);
-        String[] test = new String[] {"test"};
-        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
-        indicateFloatingTaskManagerChanged();
-        indicateEventManagerChanged();
-    }
-
-    @Override
-    public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-        eventManager.removeEvent(target);
-        String[] test = new String[] {"test"};
-        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
-        indicateFloatingTaskManagerChanged();
-        indicateEventManagerChanged();
-    }
 
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        String[] test = new String[] {"test"};
-        updateFilteredTaskList(new HashSet<>(Arrays.asList(test)));
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addFloatingTask(FloatingTask floatingTask) throws DuplicateFloatingTaskException {
-        floatingTaskManager.addFloatingTask(floatingTask);
-        updateFilteredListToShowAll();
-        indicateFloatingTaskManagerChanged();
+    public synchronized void markTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        taskManager.markTask(taskIndex, taskToDone);
+        indicateTaskManagerChanged();
     }
 
-    @Override
-    public synchronized void addEvent(Event event) throws DuplicateEventException {
-        eventManager.addEvent(event);
-        updateFilteredListToShowAll();
-        indicateEventManagerChanged();
-    }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
@@ -157,24 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    @Override
-    public void updateFloatingTask(int filteredFloatingTaskListIndex, ReadOnlyFloatingTask editedFloatingTask)
-        throws DuplicateFloatingTaskException {
-        assert editedFloatingTask != null;
 
-        int floatingTaskManagerIndex = filteredFloatingTasks.getSourceIndex(filteredFloatingTaskListIndex);
-        floatingTaskManager.updateFloatingTask(floatingTaskManagerIndex, editedFloatingTask);
-        indicateFloatingTaskManagerChanged();
-    }
-
-    @Override
-    public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent) throws DuplicateEventException {
-        assert editedEvent != null;
-
-        int eventManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
-        eventManager.updateEvent(eventManagerIndex, editedEvent);
-        indicateEventManagerChanged();
-    }
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -184,44 +107,42 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyFloatingTask> getFilteredFloatingTaskList() {
-        return new UnmodifiableObservableList<>(filteredFloatingTasks);
-    }
-
-    @Override
-    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
-        return new UnmodifiableObservableList<>(filteredEvents);
-    }
-
-    @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-        filteredFloatingTasks.setPredicate(null);
-        filteredEvents.setPredicate(null);
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
+            Set<String> descriptionKeywords) {
+        if (!nameKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new NameQualifier(nameKeywords)));
+        }
+
+        if (!priorityKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priorityKeywords)));
+        }
+
+        if (!descriptionKeywords.isEmpty()) {
+            updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(descriptionKeywords)));
+        }
+
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
-        filteredFloatingTasks.setPredicate(expression::satisfies);
-        filteredEvents.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(Item task);
+        boolean satisfies(ReadOnlyTask task);
 
         @Override
         String toString();
     }
 
     interface Qualifier {
-        boolean run(Item task);
+        boolean run(ReadOnlyTask task);
 
         @Override
         String toString();
@@ -236,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(Item task) {
+        public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
         }
 
@@ -254,7 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(Item task) {
+        public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                 .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
                 .findAny()
@@ -264,6 +185,48 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    private class PriorityQualifier implements Qualifier {
+        private Set<String> priorityKeywords;
+
+        PriorityQualifier(Set<String> priorityKeywords) {
+            this.priorityKeywords = priorityKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return priorityKeywords.stream()
+                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
+                .findAny()
+                .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "priority=" + String.join(", ", priorityKeywords);
+        }
+    }
+
+    private class DescriptionQualifier implements Qualifier {
+        private Set<String> descriptionKeywords;
+
+        DescriptionQualifier(Set<String> descriptionKeywords) {
+            this.descriptionKeywords = descriptionKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return descriptionKeywords.stream()
+                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
+                .findAny()
+                .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "description=" + String.join(", ", descriptionKeywords);
         }
     }
 

@@ -1,13 +1,13 @@
 package seedu.doit.commons.events.storage;
 
 import seedu.doit.commons.events.BaseEvent;
-import seedu.doit.model.ReadOnlyTaskManager;
+import seedu.doit.model.ReadOnlyItemManager;
 
 public class TaskManagerSaveChangedEvent extends BaseEvent {
-    private ReadOnlyTaskManager data;
+    private ReadOnlyItemManager data;
     private String filePath;
 
-    public TaskManagerSaveChangedEvent(ReadOnlyTaskManager data, String filePath) {
+    public TaskManagerSaveChangedEvent(ReadOnlyItemManager data, String filePath) {
         this.data = data;
         this.filePath = filePath;
     }
@@ -16,7 +16,7 @@ public class TaskManagerSaveChangedEvent extends BaseEvent {
         return this.filePath;
     }
 
-    public ReadOnlyTaskManager getData() {
+    public ReadOnlyItemManager getData() {
         return this.data;
     }
 
