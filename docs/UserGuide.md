@@ -42,7 +42,7 @@ Ready? Let's begin!
 
 ## 2. Getting Started
 
-0. Ensure that you have Java version `1.8.0_60` or later installed in your Computer.<br>
+0. Ensure that you have Java version `1.8.0_60` or later installed in your computer.<br>
 
    > Unfortunately, having any Java 8 version is not enough because I cannot work with earlier versions of Java 8.
 
@@ -95,7 +95,7 @@ Ready? Let's begin!
 When typing in your commands, do take note of the following specifications: <br>
 
 * Durations for your tasks must be specified in _hr_, _min_ and/or _sec_.
-* Times must be specified in _am_ and/or _pm_.
+* Times must be specified in _am_ or _pm_.
 * Dates must be specified in _DDMMYY_ format.
 * Either date or time but not both can be left out in the <... date and time> parameters.
 
@@ -153,35 +153,31 @@ Here are some examples of floating tasks: <br>
    be very popular and hence, many theatres might offer showtimes for it for an extended period
    of time.
 
-So, how do you add floating tasks? Just type in the following command:
-
-> **`add`** `<task>` <br>
+Format: **`add`** `<task>` <br>
 
 <img src="images/UiAddCommand.png" width="600"><br>
 _Figure 3.2.1. Add Command_
-
-That's it!
 
 Here are other formats to follow when adding tasks that _have specific dates / times_:
 
 #### Add a task with a _deadline_:
 
-> **`add`** `<task>; <due date and time>` <br>
+Format: **`add`** `<task>; <due date and time>` <br>
 E.g. **`add`** `project proposal; 041216 2pm`
 
 #### Add an _event_:
 
-> **`add`** `<task>; <start date and time>; <end date and time>` <br>
+Format: **`add`** `<task>; <start date and time>; <end date and time>` <br>
 E.g. **`add`** `sushi restaurant promotion; 040117 10am; 110117 9pm`
 
 OR
 
-> **`add`** `<task>; <start date and time>; <duration>` <br>
+Format: **`add`** `<task>; <start date and time>; <duration>` <br>
 E.g. **`add`** `committee meeting; 150617 1pm; 2.5hr`
 
 #### Add a task with a _duration_ only:
 
-> **`add`** `<task>; <duration>` <br>
+Format: **`add`** `<task>; <duration>` <br>
 E.g. **`add`** `watch tv with the children; 1hr`
 
 ### 3.3. Delete a task : `delete`
@@ -199,13 +195,13 @@ Here are some examples of tasks that you might want to _delete_ from your task l
 
   E.g. **_Visit the dentist_** <br>
   You have just visited your dentist last week and have not scheduled your next appointment.
-
-> * **`delete`** `<task>` <br>
+  
+Format: **`delete`** `<task>` <br>
 
 <img src="images/UiDeleteCommand.png" width="600"><br>
 _Figure 3.3.1. Delete Command_
 
-> * **`delete /all`** <br>
+Format: **`delete /all`** <br>
 This command will direct me to clear your _entire task list_. <br>
 Do think twice before instructing me to do so!
 
@@ -231,14 +227,14 @@ Here are some reasons why you might want to _find_ a task or some tasks:
   E.g. **Finding the tasks that contain the word _buy_** <br>
   You are going to the mall and wish to clear some items on your grocery list.
 
-> * **`find`** `<task>` <br>
+Format: **`find`** `<task>` <br>
 I will show you the tasks from your search in my right panel as shown
 in the following diagram.
 
 <img src="images/UiFindCommand.png" width="600"><br>
 _Figure 3.4.1. Find Command_
 
-> * **`find`** `<task>; <due date>` <br>
+Format: **`find`** `<task>; <due date>` <br>
 E.g. **`find`** `project proposal; 041216` <br>
 
 This command shows:
@@ -258,7 +254,7 @@ Here is a reason why you might want to _list_ all your tasks:
   > You want to have an overview of all your tasks based on how urgent they are, then
   manually select some of these tasks to focus on.
 
-> * **`list`** <br>
+Format: **`list`** <br>
 Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
@@ -278,7 +274,7 @@ Here are some reasons why you might want to _select_ a task:
 
   > You can refer to the later section on the [update](#37-update-a-task--update) command.
 
-> * **`select`** `<task>` <br>
+Format: **`select`** `<task>` <br>
 
 <img src="images/UiSelectCommand.png" width="600"><br>
 _Figure 3.6.1. Select Command_
@@ -287,7 +283,7 @@ _Figure 3.6.1. Select Command_
 those tasks for you. You will then have to choose one of those displayed tasks manually by navigating
 to your desired task using your arrow keys, then pressing <kbd>Enter</kbd>. <br>
 
-> * **`unselect`** <br>
+Format: **`unselect`** <br>
 This command _cancels your previous selection_ so that you can select another one of your
 tasks instead. <br>
 
@@ -316,7 +312,7 @@ Here are some examples of tasks which you might want to _update_: <br>
   Your friend Jamie has come back from her overseas trip, and has finally arranged a meet-up with
   you!
 
-> * **`update`** `<task>; <parameter> <new_value>` <br>
+Format: **`update`** `<task>; <parameter> <new_value>` <br>
 This command will direct me to make the specified update to a task with the name `<task>`. <br>
 You can edit more parameters for your task concurrently using the following format: <br>
 **`update`** `<task>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
@@ -324,7 +320,7 @@ You can edit more parameters for your task concurrently using the following form
 <img src="images/UiUpdateCommand.png" width="600"><br>
 _Figure 3.7.1. Update Command_
 
-> * **`update`** `<parameter> <new_value>` <br>
+Format: **`update`** `<parameter> <new_value>` <br>
 E.g. **`update`** `start time 10am` <br>
 This command will direct me to make the specified update to a task which has already been
 selected using the [select](#36-select-a-task--select) command. <br>
@@ -334,13 +330,13 @@ Similarly, you can edit multiple parameters concurrently.
 
 Shows a list of all commands I can execute and their usage instructions. <br>
 
-> * **`help`** `<command>` <br>
+Format: **`help`** `<command>` <br>
 This command will instruct me to provide you specific information on how to use `<command>`.
 
 <img src="images/UiHelpCommand.png" width="600"><br>
 _Figure 3.8.1. Help Command_
 
-> * **`help /all`** <br>
+Format: **`help /all`** <br>
 This command will help to direct you back to this user guide.
 
 > Help will also be shown if you enter an incorrect command! e.g. `abcd`
@@ -356,10 +352,10 @@ Here is a reason why you might want to _change my data file location_:
   > You can choose to store my data file in a local folder controlled by a cloud
   syncing device (e.g. Dropbox) so that you can access my data from multiple computers.
 
-> * **`save`** <br>
+Format: **`save`** <br>
 This command directs me to save all my data into the data file.
 
-> * **`save`** `<new_save_location_directory>` <br>
+Format: **`save`** `<new_save_location_directory>` <br>
 This command directs me to set my new data file in a `<new_save_location_directory>`,
 then save all my data in that file.
 
@@ -371,7 +367,7 @@ _Figure 3.9.1. Save Command_
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
 
-> * **`exit`** <br>
+Format: **`exit`** <br>
 
 <img src="images/UiExitCommand.png" width="600"><br>
 _Figure 3.10.1. Exit Command_
