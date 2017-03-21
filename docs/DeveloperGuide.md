@@ -289,10 +289,9 @@ We have two types of tests:
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
       e.g. `seedu.tasklist.logic.LogicManagerTest`
-
-#### Headless GUI Testing
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode.
+      
+3. **Headless GUI Testing** - These are test involving GUI.
+  [TestFX](https://github.com/TestFX/TestFX) library allows GUI tests to be run in the _headless_ mode.
  In the headless mode, GUI tests do not show up on the screen.
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
