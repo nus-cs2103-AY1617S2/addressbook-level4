@@ -137,7 +137,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 <!-- @@author A0114395E -->
 The Activity Diagram below shows the flow when a Command is being executed in ToDoApp<br><br>
-<img src="images/ToDoApp_Activity-Diagram.png" width="800"><br>
+<img src="images/ToDoApp_Activity-Diagram.png" width="600"><br>
 _Figure 2.1.4 : Component interactions for commands_
 
 The Sequence Diagram below shows the flow when `add`, `edit`, `delete` Command is being executed in ToDoApp<br><br>
