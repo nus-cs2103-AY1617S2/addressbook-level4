@@ -14,8 +14,8 @@ public class ViewCommand extends Command {
 
     public final int targetIndex;
 
-    public static final String COMMAND_WORD = "select";
-    public static final String COMMAND_WORD_SHORT = "sl";
+    public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD_SHORT = "v";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": Selects the task identified by the index number used in the last task listing.\n"
