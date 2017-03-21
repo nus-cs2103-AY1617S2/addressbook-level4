@@ -1,6 +1,7 @@
 package seedu.doit.model;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -73,6 +74,10 @@ public class TaskManager implements ReadOnlyItemManager {
             assert false : "Task Manager should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
+    }
+
+    public void setTaskComparator(Comparator<Task> taskComparator) {
+        tasks.setTaskComparator(taskComparator);
     }
 
 //// task-level operations

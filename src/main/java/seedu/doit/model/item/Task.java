@@ -224,6 +224,22 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.setTags(replacement.getTags());
     }
 
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(this.name, this.priority, this.endTime, this.description, this.tags);
+    }
+
+    @Override
+    public String toString() {
+        return getAsText();
+    }
+
+
+    // ================ Sort methods ==============================
+
     @Override
     public boolean equals(Object other) {
         return (other == this // short circuit if same object
@@ -301,22 +317,74 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return 0;
     }
 
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing
-        // your own
-        return Objects.hash(this.name, this.priority, this.endTime, this.description, this.tags);
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
-    static class TaskComparator implements Comparator<Task> {
+    static class DefaultTaskComparator implements Comparator<Task> {
         @Override
         public int compare(Task t1, Task t2) {
             return t1.compareTo(t2);
+        }
+    }
+
+    static class PriorityTaskComparator implements Comparator<Task> {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t1.compareDone(t2);
+        }
+
+        /**
+         * Compares the current task with another Task other.
+         * The current item is considered to be less than the other item
+         * if it is done and the other is not done.
+         */
+        private int compareDone(ReadOnlyTask curr, ReadOnlyTask other) {
+            if ((curr.getIsDone() == true) && (other.getIsDone() == true)) {
+                compareItems(curr, other);
+            } else if ((curr.getIsDone() == true) && (other.getIsDone() == false)) {
+                return 1;
+            } else if ((curr.getIsDone() == false) && (other.getIsDone() == true)) {
+                return -1;
+            }
+            return compareItems(curr, other);
+        }
+
+        /**
+         * Compares the current item with another item other. returns -1 if other
+         * item is greater than current item return 0 is both items are equal return
+         * 1 if other item is smaller than current item The ranking are as follows
+         * from highest: 1) tasks 2) events 3) floating tasks If both have same
+         * rankings, then compare names
+         */
+        private int compareItems(ReadOnlyTask curr, ReadOnlyTask other) {
+
+            if (curr.isTask() && other.isTask()) {
+                return compareName(curr, other);
+            } else if (curr.isTask() && other.isEvent()) {
+                return -1;
+            } else if (curr.isTask() && other.isFloatingTask()) {
+                return -1;
+            }
+
+            if (curr.isEvent() && other.isEvent()) {
+                return compareName(curr, other);
+            } else if (curr.isEvent() && other.isTask()) {
+                return 1;
+            } else if (curr.isEvent() && other.isFloatingTask()) {
+                return -1;
+            }
+
+            if (curr.isFloatingTask() && other.isFloatingTask()) {
+                return compareName(curr, other);
+            } else if (curr.isFloatingTask() && other.isTask()) {
+                return 1;
+            } else if (curr.isFloatingTask() && other.isEvent()) {
+                return 1;
+            }
+
+            // Should never reach this
+            return 0;
+        }
+
+        private int compareName(ReadOnlyTask curr, ReadOnlyTask other) {
+            return curr.getName().toString().compareToIgnoreCase(other.getName().toString());
         }
     }
 

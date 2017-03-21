@@ -1,5 +1,6 @@
 package seedu.doit.model;
 
+import java.util.Comparator;
 import java.util.Set;
 
 import seedu.doit.commons.core.UnmodifiableObservableList;
@@ -63,6 +64,11 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
             Set<String> descriptionKeywords);
+
+    /**
+     * Set how the tasks are sorted
+     */
+    void setTaskComparator(Comparator<Task> taskComparator);
 
 
 

@@ -1,5 +1,6 @@
 package seedu.doit.model;
 
+import java.util.Comparator;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -93,6 +94,11 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void setTaskComparator(Comparator<Task> taskComparator) {
+        taskManager.setTaskComparator(taskComparator);
     }
 
 
