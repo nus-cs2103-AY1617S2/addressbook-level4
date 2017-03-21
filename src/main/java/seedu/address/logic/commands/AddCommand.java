@@ -49,8 +49,8 @@ public class AddCommand extends Command {
                 priority.isPresent() ? new Priority(priority.get()) : null,
                 status.isPresent() ? new Status(status.get()) : new Status(),
                 note.isPresent() ? new Note(note.get()) : null,
-                startTime.isPresent() ? new DateTime(startTime.get()) : new DateTime(),
-                endTime.isPresent() ? new DateTime(endTime.get()) : new DateTime(1),
+                startTime.isPresent() ? new DateTime(startTime.get()) : null,
+                endTime.isPresent() ? new DateTime(endTime.get()) : null,
                 new UniqueTagList(tagSet)
         );
     }
