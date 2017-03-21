@@ -33,7 +33,8 @@ public class FindCommandParser {
      */
     public Command parse(String args) {
 
-        String inputprefix = parsePrefix(args), pre;
+        String inputprefix = parsePrefix(args);
+        String pre;
 
         if (inputprefix.equals(EMPTY_STRING)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
