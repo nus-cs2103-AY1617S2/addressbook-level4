@@ -2,13 +2,19 @@ package seedu.geekeep.model.task;
 
 import java.util.Objects;
 
+import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.model.tag.UniqueTagList;
 
 /**
  * Represents a Task in the Task Manager. Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task implements ReadOnlyTask  {
+
+    public static final String MESSAGE_DATETIME_MATCH_CONSTRAINTS = 
+            "Starting date and time must be matched with a ending date and time";
+    public static final String MESSAGE_ENDDATETIME_LATER_CONSTRAINTS = 
+            "Starting date and time must be earlier than ending date and time";
 
     private Title title;
     private DateTime endDateTime;
@@ -21,7 +27,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
-    public Task(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
              source.getEndDateTime(), source.getLocation(), source.getTags());
     }
@@ -30,20 +36,22 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags) {
+                DateTime endDateTime, Location location,
+                UniqueTagList tags) throws IllegalValueException {
         this(title, startDateTime, endDateTime, location, tags, false);
     }
 
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location, UniqueTagList tags, boolean isDone) {
-        assert !CollectionUtil.isAnyNull(title);
-        if (startDateTime != null) {
-            assert endDateTime != null;
+                DateTime endDateTime, Location location,
+                UniqueTagList tags, boolean isDone) throws IllegalValueException {
+        assert title != null;
+        if (startDateTime != null && endDateTime == null) {
+            throw new IllegalValueException(MESSAGE_DATETIME_MATCH_CONSTRAINTS);
         }
-        if (startDateTime != null && endDateTime != null) {
-            assert endDateTime.dateTime.isAfter(startDateTime.dateTime);
+        if (startDateTime != null && endDateTime != null 
+                && startDateTime.dateTime.isAfter(endDateTime.dateTime)) {
+            throw new IllegalValueException(MESSAGE_ENDDATETIME_LATER_CONSTRAINTS);
         }
-
 
         this.title = title;
         this.endDateTime = endDateTime;

@@ -8,6 +8,7 @@ import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
+import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
@@ -73,11 +74,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskListIndex, editedTask);
+
         indicateTaskManagerChanged();
     }
 

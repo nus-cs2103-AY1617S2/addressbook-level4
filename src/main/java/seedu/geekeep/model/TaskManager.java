@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
+import seedu.geekeep.commons.exceptions.IllegalValueException;
+import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.ReadOnlyTask;
@@ -110,6 +112,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManager should not have duplicate tasks";
+        } catch (IllegalValueException ive) {
+            assert false : "TaskManager tasks startDateTime should be matched"
+                    + "with a later endDateTime";
         }
         try {
             setTags(newData.getTagList());
@@ -121,7 +126,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //// tag-level operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) 
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
@@ -175,14 +181,20 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be equivalent to another existing task in the
      *             list.
+     * @throws CommandException 
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
+        Task editedTask;
+        try {
+            editedTask = new Task(editedReadOnlyTask);
+        } catch (IllegalValueException ive) {
+            throw new IllegalValueException(ive.getMessage());
+        }
         syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
