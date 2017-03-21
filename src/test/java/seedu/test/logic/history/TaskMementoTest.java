@@ -50,6 +50,12 @@ public class TaskMementoTest {
                                                         duration,
                                                         new UniqueTagList("Other"), id));
         assertFalse(memento1.equals(memento6));
+
+        TaskMemento memento7 = new TaskMemento(null, id);
+        TaskMemento memento8 = new TaskMemento(null, id);
+        assertTrue(memento7.equals(memento8));
+        TaskMemento memento9 = new TaskMemento(null, new TaskId(101));
+        assertFalse(memento7.equals(memento9));
     }
 
 }
