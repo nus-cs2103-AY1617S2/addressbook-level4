@@ -27,11 +27,11 @@ public class XmlAdaptedTask {
     private String priority;
     @XmlElement(required = true)
     private String status;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String note;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String startTime;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String endTime;
 
     @XmlElement
