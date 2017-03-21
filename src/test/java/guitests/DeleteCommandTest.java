@@ -58,7 +58,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList,
                 targetIndexOneIndexed);
 
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
+        commandBox.runCommand("delete " + currentList[targetIndexOneIndexed - 1].getID());
 
         // confirm the list now contains all previous tasks except the deleted
         // task

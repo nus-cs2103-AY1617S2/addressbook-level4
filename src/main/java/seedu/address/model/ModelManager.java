@@ -185,17 +185,17 @@ public class ModelManager extends ComponentManager implements Model {
             ReadOnlyTask tmpTask = iter.next();
             // set task id to be displayed, the id here is 1-based
             if (tmpTask.isToday() && !tmpTask.isDone()) {
-                tmpTask.setID("T"+todayID+"="+(iter.nextIndex()-1));
+                tmpTask.setID("T"+todayID);
                 taskListToday.add(tmpTask);
                 indexMap.put("T"+todayID, iter.nextIndex()-1);
                 todayID++;
             } else if (!tmpTask.isDone()) {
-                tmpTask.setID("F"+futureID+"="+(iter.nextIndex()-1));
+                tmpTask.setID("F"+futureID);
                 taskListFuture.add(tmpTask);
                 indexMap.put("F"+futureID, iter.nextIndex()-1);
                 futureID++;
             } else {
-                tmpTask.setID("C"+completedID+"="+(iter.nextIndex()-1));
+                tmpTask.setID("C"+completedID);
                 taskListCompleted.add(tmpTask);
                 indexMap.put("C"+completedID, iter.nextIndex()-1);
                 completedID++;

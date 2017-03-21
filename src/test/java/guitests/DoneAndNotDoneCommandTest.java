@@ -14,7 +14,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
     public void doneTask_nonEmptyList() {
 
         // --- Done ---
-        assertDoneIndexInvalid(10); // invalid index
+        assertDoneIndexInvalid("T100"); // invalid index
 
         assertDoneSuccess(1); // first task in the list
         int taskCount = td.getTypicalTasks().length;
@@ -22,16 +22,14 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
         int middleIndex = taskCount / 2;
         assertDoneSuccess(middleIndex); // a task in the middle of the list
 
-        assertDoneIndexInvalid(taskCount + 1); // invalid index
+        assertDoneIndexInvalid("F100"); // invalid index
 
         // --- Not Done ---
-        assertNotDoneIndexInvalid(10);
+        assertNotDoneIndexInvalid("C100");
 
         assertNotDoneSuccess(1);
         assertNotDoneSuccess(taskCount);
         assertNotDoneSuccess(2);
-
-        assertNotDoneIndexInvalid(taskCount + 1); // invalid index
 
         /*
          * Testing other invalid indexes such as -1 should be done when testing
@@ -43,11 +41,11 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
     public void doneTask_emptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertDoneIndexInvalid(1); // invalid index
-        assertNotDoneIndexInvalid(1); // invalid index
+        assertDoneIndexInvalid("F1"); // invalid index
+        assertNotDoneIndexInvalid("C1"); // invalid index
     }
 
-    private void assertDoneIndexInvalid(int index) {
+    private void assertDoneIndexInvalid(String index) {
         commandBox.runCommand("done " + index);
         assertResultMessage(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -55,12 +53,11 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
     private void assertDoneSuccess(int index) {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask doneTask = currentList[index - 1];
-        doneTask.setDone(true);
-        commandBox.runCommand("done " + index);
+        commandBox.runCommand("done " + doneTask.getID());
         assertResultMessage(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask));
     }
 
-    private void assertNotDoneIndexInvalid(int index) {
+    private void assertNotDoneIndexInvalid(String index) {
         commandBox.runCommand("notdone " + index);
         assertResultMessage(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -68,8 +65,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
     private void assertNotDoneSuccess(int index) {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask notDoneTask = currentList[index - 1];
-        notDoneTask.setDone(false);
-        commandBox.runCommand("notdone " + index);
+        commandBox.runCommand("notdone " + notDoneTask.getID());
         assertResultMessage(String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask));
     }
 
