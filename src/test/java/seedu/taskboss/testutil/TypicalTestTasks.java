@@ -53,16 +53,16 @@ public class TypicalTestTasks {
                     .withEndDateTime("Feb 28, 2018 5pm")
                     .withInformation("little india").build();
             ida = new TaskBuilder().withName("Ida Mueller").withPriorityLevel("Yes")
-                    .withStartDateTime("Feb 19, 2017 5pm")
-                    .withEndDateTime("Feb 28, 2017 5pm")
+                    .withStartDateTime("Feb 19, 2019 5pm")
+                    .withEndDateTime("Feb 28, 2019 5pm")
                     .withInformation("chicago ave").build();
             johnny = new TaskBuilder().withName("Johnny Depp").withPriorityLevel("Yes")
                     .withStartDateTime("next sat 5pm")
                     .withEndDateTime("tomorrow")
                     .withInformation("Silicon Valley").build();
             kelvin = new TaskBuilder().withName("Kelvin Koo").withPriorityLevel("Yes")
-                    .withStartDateTime("next tue 10am")
-                    .withEndDateTime("next wed")
+                    .withStartDateTime("Dec 20 2019")
+                    .withEndDateTime("Dec 21 2019")
                     .withInformation("clementi ave 2").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
