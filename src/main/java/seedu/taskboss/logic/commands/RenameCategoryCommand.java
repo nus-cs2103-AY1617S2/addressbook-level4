@@ -8,7 +8,7 @@ import seedu.taskboss.model.category.UniqueCategoryList;
 
 //@@author A0143157J
 /**
- * Renames an existing category in TaskBoss. 
+ * Renames an existing category in TaskBoss.
  */
 public class RenameCategoryCommand extends Command {
 
