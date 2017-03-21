@@ -77,9 +77,17 @@ public class EditCommand extends Command {
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
+        Optional<Deadline> updatedStartTime;
+        Optional<Deadline> updatedDeadline;
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Optional<Deadline> updatedStartTime = editTaskDescriptor.getStartTime();
-        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
+        if ((editTaskDescriptor.getClearDates().isPresent() && editTaskDescriptor.getClearDates().get() == true)
+                || editTaskDescriptor.isDateEdited()) {
+            updatedStartTime = editTaskDescriptor.getStartTime();
+            updatedDeadline = editTaskDescriptor.getDeadline();
+        } else {
+            updatedStartTime = taskToEdit.getStartTime();
+            updatedDeadline = taskToEdit.getDeadline();
+        }
         Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
 

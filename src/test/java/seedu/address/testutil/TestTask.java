@@ -87,7 +87,7 @@ public class TestTask implements ReadOnlyTask {
     private String getAddCommandWithDeadline() {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTitle().title + " ");
-        sb.append(" BY " + this.getDeadline().get().toString() + " ");
+        sb.append(" by " + this.getDeadline().get().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("#" + s.labelName + " "));
         return sb.toString();
     }
@@ -95,8 +95,8 @@ public class TestTask implements ReadOnlyTask {
     private String getAddCommandWithInterval() {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTitle().title + " ");
-        sb.append(" FROM " + this.getStartTime().get().toString() + " ");
-        sb.append(" TO " + this.getDeadline().get().toString() + " ");
+        sb.append(" from " + this.getStartTime().get().toString() + " ");
+        sb.append(" to " + this.getDeadline().get().toString() + " ");
         this.getLabels().asObservableList().stream().forEach(s -> sb.append("#" + s.labelName + " "));
         return sb.toString();
     }

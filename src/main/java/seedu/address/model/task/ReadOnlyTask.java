@@ -8,7 +8,7 @@ import seedu.address.model.label.UniqueLabelList;
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyTask {
+public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
 
     Title getTitle();
     Optional<Deadline> getDeadline();

@@ -23,7 +23,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
 
-        String detailsToEdit = "Meet Bob FROM 20-04-2017 0900 TO 20-04-2017 2359 #husband";
+        String detailsToEdit = "Meet Bob from 20-04-2017 0900 to 20-04-2017 2359 #husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Meet Bob").withStartTime("20-04-2017 0900")
@@ -49,7 +49,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withLabels().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit)
+                .withLabels().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -98,11 +99,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("EDIT 3 Complete task 4"
-                                + " BY 11-11-2017 2300 #friends");
-        commandBox.runCommand("ADD Complete task 5 FROM 10-10-2017 0100 TO 11-11-2017 "
+                                + " by 11-11-2017 2300 #friends");
+        commandBox.runCommand("ADD Complete task 5 from 10-10-2017 0100 to 11-11-2017 "
                 + "2300 #friends");
         commandBox.runCommand("EDIT 3 Complete task 5"
-                                + " FROM 10-10-2017 0100 TO 11-11-2017 2300 #friends");
+                                + " from 10-10-2017 0100 to 11-11-2017 2300 #friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

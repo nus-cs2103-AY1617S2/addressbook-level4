@@ -50,7 +50,7 @@ public class EditCommandParser {
             editTaskDescriptor.setStartTime(ParserUtil.parseDeadline(
                     argsTokenizer.getValue(PREFIX_TIMEINTERVAL_START)));
             editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_TIMEINTERVAL_END)));
-            if (!editTaskDescriptor.isDateEdited()) {
+            if (!editTaskDescriptor.isDateEdited() && args.trim().contains(PREFIX_DEADLINE.getPrefix())) {
                 editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argsTokenizer.getValue(PREFIX_DEADLINE)));
             }
             if (args.trim().contains(PREFIX_CLEAR_DATES.getPrefix())) {

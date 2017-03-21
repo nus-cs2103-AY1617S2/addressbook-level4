@@ -450,9 +450,9 @@ public class LogicManagerTest {
 
             cmd.append("ADD ");
             cmd.append(p.getTitle().toString());
-            cmd.append(" FROM ");
+            cmd.append(" from ");
             cmd.append(p.getStartTime());
-            cmd.append(" TO ");
+            cmd.append(" to ");
             cmd.append(p.getDeadline());
 
             UniqueLabelList labels = p.getLabels();
