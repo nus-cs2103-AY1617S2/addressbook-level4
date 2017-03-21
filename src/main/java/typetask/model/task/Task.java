@@ -58,7 +58,7 @@ public class Task implements ReadOnlyTask {
     public void setTime(Time time) {
         this.time = time;
     }
-    
+
     //@@author A0144902L
     public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
