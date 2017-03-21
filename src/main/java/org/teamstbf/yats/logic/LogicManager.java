@@ -37,11 +37,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyEvent> getTaskList() {
-    	boolean sortSwitch = model.getSortListSwitch();
-    	if (sortSwitch == true) {
-    		return model.getSortedTaskList();
-    	}
+    public ObservableList<ReadOnlyEvent> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
 }
