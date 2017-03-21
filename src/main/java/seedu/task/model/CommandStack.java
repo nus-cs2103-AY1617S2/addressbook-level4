@@ -6,14 +6,14 @@ public class CommandStack {
     private Stack<String> commandStack = new Stack<String>();
 
     public void pushCommand(String command) {
-    	commandStack.push(command);
+        commandStack.push(command);
     }
 
     public String popCommand() {
-    	return commandStack.pop();
+        return commandStack.pop();
     }
 
     public boolean getCommandHistoryStatus() {
-    	return commandStack.empty();
+        return commandStack.empty();
     }
 }

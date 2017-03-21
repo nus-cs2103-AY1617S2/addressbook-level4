@@ -1,4 +1,4 @@
-	package seedu.task.logic.commands;
+package seedu.task.logic.commands;
 
 import seedu.task.model.TaskManager;
 
