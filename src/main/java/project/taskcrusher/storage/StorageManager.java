@@ -34,10 +34,6 @@ public class StorageManager extends ComponentManager implements Storage {
         this(new XmlUserInboxStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
-//    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-//        this(new TextFileInboxStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
-//    }
-
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -49,7 +45,6 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ AddressBook methods ==============================
 

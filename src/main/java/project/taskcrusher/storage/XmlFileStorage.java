@@ -15,10 +15,10 @@ public class XmlFileStorage {
     /**
      * Saves the given userInbox data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableUserInbox addressBook)
+    public static void saveDataToFile(File file, XmlSerializableUserInbox userInbox)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, addressBook);
+            XmlUtil.saveDataToFile(file, userInbox);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }

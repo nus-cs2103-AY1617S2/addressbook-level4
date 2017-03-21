@@ -11,7 +11,6 @@ import project.taskcrusher.commons.exceptions.DuplicateDataException;
 public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
-    //what to do when the events clash?
 
     /**
      * Returns true if the list contains an equivalent event as the given argument.
@@ -21,10 +20,22 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.contains(toCheck);
     }
 
+    public ObservableList<Event> searchForOverlapingEvents(Timeslot candidate) {
+        assert candidate != null;
+        ObservableList<Event> overlappingEvents =  FXCollections.observableArrayList();
+
+        for (Event event: internalList) {
+            if (event.hasOverlappingTimeslot(candidate)) {
+                overlappingEvents.add(event);
+            }
+        }
+        return overlappingEvents;
+    }
+
     /**
      * Adds an event to the list.
      *
-     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     * @throws DuplicateTaskException if the event to add is a duplicate of an existing event in the list.
      */
     public void add(Event toAdd) throws DuplicateEventException {
         assert toAdd != null;
@@ -35,21 +46,21 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedPerson}.
+     * Updates the event in the list at position {@code index} with {@code editedEvent}.
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyEvent editedTask) throws DuplicateEventException {
-        assert editedTask != null;
+    public void updateEvent(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException {
+        assert editedEvent != null;
 
         Event eventToUpdate = internalList.get(index);
-        if (!eventToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if (!eventToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
             throw new DuplicateEventException();
         }
 
-        eventToUpdate.resetData(editedTask);
+        eventToUpdate.resetData(editedEvent);
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
@@ -57,7 +68,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent event from the list.
      *
      * @throws EventNotFoundException if no such event could be found in the list.
      */
@@ -114,8 +125,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
+     * Signals that an operation targeting a specified event in the list would fail because
+     * there is no such matching event in the list.
      */
     public static class EventNotFoundException extends Exception {}
 
