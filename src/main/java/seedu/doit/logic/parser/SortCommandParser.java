@@ -2,29 +2,22 @@ package seedu.doit.logic.parser;
 
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.SortCommand;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new SortCommand object
  */
 public class SortCommandParser {
+    public static final String SORT_VALIDATION_REGEX = "(priority)|(deadline)|(start time)";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
      */
     public Command parse(String args) {
-        if (args.equals("priority")) {
-            return new SortCommand(args);
-        } else if (args.equals("deadline")) {
-            return new SortCommand(args);
-        } else if (args.equals("starttime")) {
+        if (args.matches(SORT_VALIDATION_REGEX)) {
             return new SortCommand(args);
         } else {
             return new IncorrectCommand(
