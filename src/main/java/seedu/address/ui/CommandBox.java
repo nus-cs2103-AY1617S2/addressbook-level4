@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -22,7 +21,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
 
     @FXML
-    private TextField commandTextField;
+    //private TextField commandTextField;
+   private AutoCompleteTextField commandTextField;
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
