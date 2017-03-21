@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doist.commons.core.LogsCenter;
@@ -38,7 +37,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
-        SplitPane.setResizableWithParent(placeHolderPane, false);
+        //SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
     }
