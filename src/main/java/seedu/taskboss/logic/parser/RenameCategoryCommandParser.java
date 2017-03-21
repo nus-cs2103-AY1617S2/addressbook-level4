@@ -15,8 +15,8 @@ public class RenameCategoryCommandParser {
 
     private static final String FORMAT_ALPHANUMERIC = "[A-Za-z0-9]+";
 
-    private static final String ERROR_NON_ALPHANUMERIC = "Category names should be alphanumeric.";
-    private static final String ERROR_SAME_FIELDS = "Warning: old and new category names are the same.";
+    public static final String ERROR_NON_ALPHANUMERIC = "Category names should be alphanumeric.";
+    public static final String ERROR_SAME_FIELDS = "Warning: old and new category names are the same.";
 
     public Command parse(String args) {
         String[] categories = ParserUtil.parseRenameCategory(args);
