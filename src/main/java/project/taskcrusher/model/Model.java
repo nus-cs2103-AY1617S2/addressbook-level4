@@ -59,7 +59,7 @@ public interface Model {
     void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent)
             throws UniqueEventList.DuplicateEventException;
 
-    void addEvent(Event event) throws UniqueEventList.EventNotFoundException;
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
 
 }

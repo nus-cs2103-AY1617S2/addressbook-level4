@@ -24,15 +24,12 @@ public class DateUtil {
         PrettyTimeParser dateParser = new PrettyTimeParser();
         List<Date> parseResults = dateParser.parse(toParse);
 
+      //TODO define formats to avoid ambiguous/multiple deadlines
         if (parseResults.size() < 1) {
             throw new IllegalValueException(MESSAGE_DATE_NOT_FOUND);
+        }  else if (parseResults.size() > 1) {
+            throw new IllegalValueException(MESSAGE_DATE_AMBIGUOUS);
         }
-
-        //TODO define formats to avoid ambiguous/multiple deadlines
-        // deadlines
-        // if (parsedDeadline.size() != 1) {
-        // return false;
-        // }
 
         Date parsed = parseResults.get(0);
         if (isNew && hasPassed(parsed)) { //short circuit if not new/from storage
@@ -52,7 +49,7 @@ public class DateUtil {
         }
     }
 
-    public static String toString(Date date) {
+    public static String dateAsString(Date date) {
         assert date != null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mma");
         return sdf.format(date);

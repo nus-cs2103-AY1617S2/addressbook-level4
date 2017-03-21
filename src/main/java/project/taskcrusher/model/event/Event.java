@@ -14,6 +14,7 @@ public class Event implements ReadOnlyEvent {
     private Location location;
     private Description description;
     private UniqueTagList tags;
+    private boolean isOverdue;
 
     public Event(Name name, List<Timeslot> timeslots, Location location,
             Description description, UniqueTagList tags) {
@@ -21,6 +22,7 @@ public class Event implements ReadOnlyEvent {
 
         this.name = name;
         this.timeslots = timeslots;
+        this.isOverdue = false;
         this.location = location;
         this.description = description;
         this.tags = new UniqueTagList(tags);
@@ -76,6 +78,14 @@ public class Event implements ReadOnlyEvent {
 
     public void setTags(UniqueTagList tags) {
         this.tags.setTags(tags);;
+    }
+
+    public boolean isOverdue() {
+        return this.isOverdue;
+    }
+
+    public void setOverdue(boolean toSet) {
+        isOverdue = toSet;
     }
 
 

@@ -59,4 +59,8 @@ public class Location {
     public static boolean isValidLocation(String location) {
         return location.matches(LOCATION_VALIDATION_REGEX);
     }
+
+    public boolean hasLocation() {
+        return !location.equals(NO_LOCATION);
+    }
 }

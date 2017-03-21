@@ -71,7 +71,7 @@ public class Timeslot {
 
     @Override
     public String toString() {
-        return DateUtil.toString(start) + " to " + DateUtil.toString(end);
+        return DateUtil.dateAsString(start) + " to " + DateUtil.dateAsString(end);
     }
 
     @Override

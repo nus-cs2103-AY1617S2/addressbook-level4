@@ -30,7 +30,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtil.toString(DateUtil.parseDate(deadline, true));
+            this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, true));
         }
     }
 
@@ -49,7 +49,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtil.toString(DateUtil.parseDate(deadline, isNew));
+            this.deadline = DateUtil.dateAsString(DateUtil.parseDate(deadline, isNew));
         }
 
     }
@@ -58,7 +58,7 @@ public class Deadline {
     public String toString() {
         try {
             if (this.hasDeadline()) {
-                return DateUtil.toString(this.getDate().get());
+                return DateUtil.dateAsString(this.getDate().get());
             } else {
                 return Deadline.NO_DEADLINE;
             }
