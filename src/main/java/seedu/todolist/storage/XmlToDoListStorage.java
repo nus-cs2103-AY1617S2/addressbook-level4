@@ -24,6 +24,12 @@ public class XmlToDoListStorage implements ToDoListStorage {
         this.filePath = filePath;
     }
 
+    //@@author A0139633B
+    @Override
+    public void changeXmlToDoListStorage(String newFilePath) {
+        this.filePath = newFilePath;
+    }
+
     public String getToDoListFilePath() {
         return filePath;
     }

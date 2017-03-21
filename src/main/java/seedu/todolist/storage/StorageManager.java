@@ -15,7 +15,7 @@ import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ToDoList data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -47,7 +47,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ ToDoList methods ==============================
+
+    public void changeToDoListFilePath(String newPath) {
+        this.toDoListStorage.changeXmlToDoListStorage(newPath);
+    }
 
     @Override
     public String getToDoListFilePath() {
@@ -66,14 +70,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveToDoList(ReadOnlyToDoList addressBook) throws IOException {
-        saveToDoList(addressBook, toDoListStorage.getToDoListFilePath());
+    public void saveToDoList(ReadOnlyToDoList toDoList) throws IOException {
+        saveToDoList(toDoList, toDoListStorage.getToDoListFilePath());
     }
 
     @Override
-    public void saveToDoList(ReadOnlyToDoList addressBook, String filePath) throws IOException {
+    public void saveToDoList(ReadOnlyToDoList toDoList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        toDoListStorage.saveToDoList(addressBook, filePath);
+        toDoListStorage.saveToDoList(toDoList, filePath);
     }
 
 
@@ -86,6 +90,12 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    @Override
+    public void changeXmlToDoListStorage(String newPath) {
+        // TODO Auto-generated method stub
+
     }
 
 }

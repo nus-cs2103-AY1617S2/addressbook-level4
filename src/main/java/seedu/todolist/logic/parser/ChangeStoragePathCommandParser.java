@@ -20,7 +20,7 @@ public class ChangeStoragePathCommandParser {
     public Command parse(String args) {
         String path = FileUtil.getPath(args.trim().toLowerCase());
 
-        if (path.equals("")) {
+        if (path.equals("")) { //need to think of more things to check for
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeStoragePathCommand.MESSAGE_USAGE));
         }

@@ -23,6 +23,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
     private final Config config;
+    private final Storage storage;
     private UndoManager undoManager;
 
     public LogicManager(Model model, Storage storage, Config config) {
@@ -30,13 +31,14 @@ public class LogicManager extends ComponentManager implements Logic {
         this.parser = new Parser();
         this.undoManager = new UndoManager(model);
         this.config = config;
+        this.storage = storage;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model, undoManager, config);
+        command.setData(model, undoManager, config, storage);
         if (command.isMutating()) {
             undoManager.addMutatingTask(command);
         }

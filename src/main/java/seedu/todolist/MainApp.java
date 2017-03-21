@@ -73,6 +73,11 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
+//    //@@author A0139633B
+//    public void setNewStorage(String pathToSaveFile) {
+//        this.storage = new StorageManager(pathToSaveFile, config.getUserPrefsFilePath());
+//    }
+
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyToDoList> addressBookOptional;
         ReadOnlyToDoList initialData;

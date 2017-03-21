@@ -41,4 +41,9 @@ public interface ToDoListStorage {
      */
     void saveToDoList(ReadOnlyToDoList toDoList, String filePath) throws IOException;
 
+    /**
+     * TODO
+     */
+    void changeXmlToDoListStorage(String newPath);
+
 }

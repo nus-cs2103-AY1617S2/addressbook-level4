@@ -25,7 +25,7 @@ public class ChangeStoragePathCommand extends Command {
     private String commandText;
     private final String path;
 
-    //takes in an absolute path
+    //takes in an relative path
     public ChangeStoragePathCommand(String path) {
         this.path = path + "/todolist.xml";
     }
@@ -33,10 +33,11 @@ public class ChangeStoragePathCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert config != null;
-        //config.setToDoListFilePath(this.path);
         try {
             config.setToDoListFilePath(this.path);
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+            storage.changeToDoListFilePath(this.path);
+            storage.saveToDoList(model.getToDoList(), this.path);
             return new CommandResult(String.format(MESSAGE_SUCCESS, this.path));
         } catch (IOException e) {
             e.printStackTrace(); //is this necessary?
@@ -46,7 +47,7 @@ public class ChangeStoragePathCommand extends Command {
 
     @Override
     public boolean isMutating() {
-        return true;
+        return false;
     }
 
     @Override
