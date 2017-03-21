@@ -1,7 +1,9 @@
 package seedu.address.model.task;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +30,33 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
+    
+    /**
+     * Returns true if the end time is later than both the start time and the current time 
+     * @param toCheck
+     * @return
+     */
+    public boolean isEventValid(ReadOnlyTask toCheck) {
+    	LocalDateTime currentDateTime = LocalDateTime.now();
+    	LocalDateTime endTime = null, startTime = null;
+    	
+    	if (toCheck.getEndTime().isPresent()) {
+    		endTime = toCheck.getEndTime().get().dateTime;
+    	}
+    	
+    	if (toCheck.getStartTime().isPresent()) {
+    		startTime = toCheck.getStartTime().get().dateTime;
+    	}
+    	
+    	if (endTime != null) {
+    		if(startTime != null) {
+    			return endTime.isAfter(startTime) && endTime.isAfter(currentDateTime);
+    		} 
+    		return endTime.isAfter(currentDateTime);
+    	}
+    		
+		return true;
+    }
 
     /**
      * Adds a task to the list.
@@ -38,6 +67,9 @@ public class UniqueTaskList implements Iterable<Task> {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
+        }
+        if (!isEventValid(toAdd)) {
+        	throw new InvalidEventTimeException();
         }
         internalList.add(toAdd);
     }
