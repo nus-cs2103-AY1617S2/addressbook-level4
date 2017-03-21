@@ -11,7 +11,7 @@ import seedu.toluist.model.Task;
  * Provides a handle for the TaskList.
  */
 public class TaskListHandle extends GuiHandle {
-    private static final String TASK_LIST_VIEW_ID = "#taskListView";
+    public static final String TASK_LIST_VIEW_ID = "#taskListView";
 
     public TaskListHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);

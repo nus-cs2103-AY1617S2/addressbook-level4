@@ -29,7 +29,8 @@ public class TabBarView extends UiView {
         tabContainer.getChildren().clear();
         for (TaskSwitchPredicate switchPredicate : switchConfig.getAllPredicates()) {
             TabView tabView = new TabView(switchPredicate,
-                                          switchPredicate.equals(UiStore.getInstance().getSwitchPredicate()));
+                                          switchPredicate.equals(UiStore.getInstance()
+                                                                        .getSwitchPredicate().getValue()));
             tabView.setParent(tabContainer);
             tabView.render();
         }

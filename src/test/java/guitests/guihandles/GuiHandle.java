@@ -75,6 +75,10 @@ public class GuiHandle {
         guiRobot.type(KeyCode.ENTER).sleep(RESPONSE_SLEEP_TIME);
     }
 
+    public void focusOnView(String viewId) {
+        guiRobot.clickOn(viewId);
+    }
+
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
     }

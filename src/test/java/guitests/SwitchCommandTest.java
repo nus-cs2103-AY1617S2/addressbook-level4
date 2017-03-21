@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import guitests.guihandles.TaskListHandle;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -131,6 +132,8 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.CONTROL, KeyCode.C);
         assertSwitchResult(new Task[] { taskWithDeadline }, new Task[] { eventIn6Days, floatingTask },
                 SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_COMPLETED, 1, 3);
+
+        mainGui.focusOnView(TaskListHandle.TASK_LIST_VIEW_ID);
 
         mainGui.press(KeyCode.CONTROL, KeyCode.A);
         assertSwitchResult(new Task[] { taskWithDeadline, eventIn6Days, floatingTask }, new Task[] {},

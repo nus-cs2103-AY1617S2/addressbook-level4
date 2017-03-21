@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Region> {
          * in CommandBox or ResultView.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+            if (keyCombination.match(event)) {
                 handler.handle(new ActionEvent());
                 event.consume();
             }

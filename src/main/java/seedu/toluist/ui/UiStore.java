@@ -6,7 +6,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import seedu.toluist.model.Task;
@@ -20,7 +24,8 @@ public class UiStore {
     private static UiStore instance;
 
     private ArrayList<Task> allTasks = new ArrayList<>();
-    private TaskSwitchPredicate switchPredicate = TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE;
+    private ObjectProperty<TaskSwitchPredicate> switchPredicate =
+            new SimpleObjectProperty<>(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE);
     private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
 
     public static UiStore getInstance() {
@@ -32,12 +37,17 @@ public class UiStore {
 
     private UiStore() {}
 
+    public void bind(Ui renderer) {
+        shownTasks.addListener((ListChangeListener.Change<? extends Task> c) -> renderer.render());
+        switchPredicate.addListener(observable -> renderer.render());
+    }
+
     public void setSwitchPredicate(TaskSwitchPredicate switchPredicate) {
-        this.switchPredicate = switchPredicate;
+        this.switchPredicate.setValue(switchPredicate);
         changeShownTasks();
     }
 
-    public TaskSwitchPredicate getSwitchPredicate() {
+    public ObservableValue<TaskSwitchPredicate> getSwitchPredicate() {
         return switchPredicate;
     }
 
@@ -76,6 +86,7 @@ public class UiStore {
     }
 
     private void changeShownTasks() {
-        shownTasks.setAll(allTasks.stream().filter(switchPredicate.getPredicate()).collect(Collectors.toList()));
+        shownTasks.setAll(allTasks.stream()
+                .filter(switchPredicate.getValue().getPredicate()).collect(Collectors.toList()));
     }
 }
