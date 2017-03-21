@@ -50,6 +50,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
     private void assertDeleteSuccess(int targetIndexOneIndexed,
             final TestTask[] currentList)
             throws IllegalArgumentException, IllegalValueException {
+        // update ui index
+        TestUtil.assignUiIndex(currentList);
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
                                                                         // array
                                                                         // uses
@@ -57,6 +59,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
                                                                         // indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList,
                 targetIndexOneIndexed);
+
 
         commandBox.runCommand("delete " + currentList[targetIndexOneIndexed - 1].getID());
 
@@ -68,5 +71,4 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertResultMessage(
                 String.format(MESSAGE_DELETE_PERSON_SUCCESS, taskToDelete));
     }
-
 }

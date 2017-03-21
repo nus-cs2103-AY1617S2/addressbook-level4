@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
+import seedu.address.logic.Logic;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
@@ -56,6 +57,7 @@ public abstract class TaskManagerGuiTest {
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
     private Stage stage;
+    protected Logic logic;
 
     @BeforeClass
     public static void setupSpec() {

@@ -395,7 +395,7 @@ public class LogicManagerTest {
         ;
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("done 2",
+        assertCommandSuccess("done F2",
                 String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask),
                 expectedAB, expectedAB.getTaskList());
     }
