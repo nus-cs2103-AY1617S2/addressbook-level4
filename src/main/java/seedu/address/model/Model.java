@@ -2,45 +2,64 @@ package seedu.address.model;
 
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTaskManager newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TaskManager */
+    ReadOnlyTaskManager getTaskManager();
 
-    /** Deletes the given person. */
-    void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
+    /** Deletes the given task. */
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    /** Adds the given task */
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+
+    //@@author A0139161J
+    /** Adds an item into a specific index in the list of tasks*/
+    void insertTasktoIndex(int index, Task task)
+             throws UniqueTaskList.DuplicateTaskException;
+
+    /** Replaces the current list of tasks with the specified list*/
+    void loadList (ObservableList<ReadOnlyTask> list) throws DuplicateTaskException;
+    //@@author
 
     /**
-     * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * Updates the task located at {@code filteredTakkListIndex} with {@code editedTask}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException;
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
 
-    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
-    UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();
+    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList <ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered person list to show all persons */
+    /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredPersonList(Set<String> keywords);
+    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    void updateFilteredTaskList(Set<String> keywords);
 
+    //@@author A0139161J
+    /** Returns the filtered completed task list */
+    ObservableList<ReadOnlyTask> getCompletedTaskList();
+
+    /** Transfers the specified task to the completed task list section */
+    void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
+
+    void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
 }
