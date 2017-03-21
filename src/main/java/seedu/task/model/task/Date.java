@@ -1,6 +1,7 @@
 package seedu.task.model.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.ocpsoft.prettytime.PrettyTime;
@@ -45,7 +46,12 @@ public class Date {
             }
 
             List<java.util.Date> dates = p.parse(date);
-            this.value = dates.get(0);
+            Calendar cal = Calendar.getInstance(); // locale-specific
+            cal.setTime(dates.get(0));
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            long time = cal.getTimeInMillis();
+            this.value = new java.util.Date(time);
         }
     }
 
