@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import guitests.guihandles.TaskListHandle;
 import org.junit.Before;
 import org.junit.Test;
 
+import guitests.guihandles.TaskListHandle;
 import javafx.scene.input.KeyCode;
 import seedu.toluist.controller.SwitchController;
 import seedu.toluist.model.Task;
