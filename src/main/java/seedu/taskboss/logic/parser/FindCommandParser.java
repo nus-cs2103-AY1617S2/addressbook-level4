@@ -62,7 +62,7 @@ public class FindCommandParser {
             ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(inputPrefix);
             argsTokenizer.tokenize(args);
             String keywords = argsTokenizer.getValue(inputPrefix).get();
-            
+
             final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(keywords.trim());
             if (!matcher.matches()) {
                 return new IncorrectCommand(
