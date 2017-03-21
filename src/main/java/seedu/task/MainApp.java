@@ -68,7 +68,7 @@ public class MainApp extends Application {
 
         initEventsCenter();
 
-        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(model.getTaskManager()));
+        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(model.getTaskManager(), true));
     }
 
     private String getApplicationParameter(String parameterName) {
