@@ -32,7 +32,10 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName())
                 && other.getStartDateTime().equals(this.getStartDateTime())
-                && other.getEndDateTime().equals(this.getEndDateTime())); // state checks here onwards
+                && other.getEndDateTime().equals(this.getEndDateTime())
+                && (other.getActiveStatus() == this.getActiveStatus())
+                && (other.getRecurringStatus() == this.getRecurringStatus())
+                && other.getRecurInterval().equals(this.getRecurInterval())); // state checks here onwards
     }
 
     /**

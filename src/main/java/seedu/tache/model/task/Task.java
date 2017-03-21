@@ -132,6 +132,9 @@ public class Task implements ReadOnlyTask {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setEndDateTime(replacement.getEndDateTime());
         this.setTags(replacement.getTags());
+        this.setActiveStatus(replacement.getActiveStatus());
+        this.setRecurringStatus(replacement.getRecurringStatus());
+        this.setRecurInterval(replacement.getRecurInterval());
     }
 
     @Override

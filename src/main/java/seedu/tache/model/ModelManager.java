@@ -97,6 +97,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredListToShowUncompleted() {
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier()));
+    }
+
+    @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
@@ -165,6 +170,21 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    private class ActiveQualifier implements Qualifier {
+
+        ActiveQualifier() { }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getActiveStatus();
+        }
+
+        @Override
+        public String toString() {
+            return "active=true";
         }
     }
 

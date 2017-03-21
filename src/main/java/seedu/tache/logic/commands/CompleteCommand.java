@@ -1,5 +1,6 @@
 package seedu.tache.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.tache.commons.core.Messages;
@@ -26,83 +27,57 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_NOT_COMPLETED = "At least one task's index must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
-    private final int filteredTaskListIndex;
-    private final CompleteTaskDescriptor completeTaskDescriptor;
+    private final List<Integer> indexList;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param completeTaskDescriptor details to edit the task with
      */
-    public CompleteCommand(int filteredTaskListIndex, CompleteTaskDescriptor completeTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
-        assert completeTaskDescriptor != null;
+    public CompleteCommand(List<Integer> indexList) {
+        assert indexList.size() > 0;
+        this.indexList = indexList;
 
-        // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
-        this.completeTaskDescriptor = new CompleteTaskDescriptor(completeTaskDescriptor);
+        // converts indexList from one-based to zero-based.
+        for (int i = 0; i < indexList.size(); i++) {
+            this.indexList.set(i, indexList.get(i) - 1);
+        }
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = new ArrayList<ReadOnlyTask>(model.getFilteredTaskList());
+        List<ReadOnlyTask> completedList = new ArrayList<ReadOnlyTask>();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        //Check all indexes are valid before proceeding
+        for (int i = 0; i < indexList.size(); i++) {
+            if (indexList.get(i) >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task completedTask = createCompletedTask(taskToEdit, completeTaskDescriptor);
-        try {
-            model.updateTask(filteredTaskListIndex, completedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        for (int i = 0; i < indexList.size(); i++) {
+            ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
+            Task completedTask = createCompletedTask(taskToEdit);
+            try {
+                model.updateTask(indexList.get(i), completedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+            completedList.add(taskToEdit);
         }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, taskToEdit));
+        model.updateFilteredListToShowUncompleted();
+        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, completedList.toString()));
     }
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createCompletedTask(ReadOnlyTask taskToEdit,
-                                             CompleteTaskDescriptor completeTaskDescriptor) {
+    private static Task createCompletedTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
 
-        boolean updatedActiveStatus = completeTaskDescriptor.getActiveStatus();
-
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), updatedActiveStatus, false, RecurInterval.NONE);
+                            taskToEdit.getTags(), false, false, RecurInterval.NONE);
 
-    }
-
-    /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
-     */
-    public static class CompleteTaskDescriptor {
-        private boolean isActive;
-
-        public CompleteTaskDescriptor() {}
-
-        public CompleteTaskDescriptor(CompleteTaskDescriptor toCopy) {
-            this.isActive = toCopy.getActiveStatus();
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return true;
-        }
-
-        public void setActiveStatus(boolean isActive) {
-            this.isActive = isActive;
-        }
-
-        public boolean getActiveStatus() {
-            return isActive;
-        }
     }
 }
