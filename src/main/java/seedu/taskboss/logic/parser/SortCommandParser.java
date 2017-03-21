@@ -17,6 +17,7 @@ public class SortCommandParser {
 
     private static final String SORT_PARAM_START_DATE_TIME = "sd";
     private static final String SORT_PARAM_END_DATE_TIME = "ed";
+    private static final String SORT_PARAM_PRIORITY_LEVEL = "p";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -36,6 +37,9 @@ public class SortCommandParser {
 
         case SORT_PARAM_END_DATE_TIME:
             return new SortCommand(SortBy.END_DATE_TIME);
+
+        case SORT_PARAM_PRIORITY_LEVEL:
+            return new SortCommand(SortBy.PRIORITY_LEVEL);
 
         default:
             return new IncorrectCommand(
