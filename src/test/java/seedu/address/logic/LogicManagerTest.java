@@ -708,16 +708,16 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given start and end date. Other fields will have some dummy values.
+         * Generates a Task object with given end date. Other fields will have some dummy values.
          */
-        Task generateTaskWithDeadline(String end) throws Exception {
+        Task generateTaskWithDeadline(String endTime) throws Exception {
             return new Task(
                     new Name("Finish assignment"),
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
                     new DateTime("01/01/2017 00:00"),
-                    new DateTime(end),
+                    new DateTime(endTime),
                     new UniqueTagList(new Tag("tag"))
             );
         }
