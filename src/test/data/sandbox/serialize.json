@@ -1,9 +1,0 @@
-{
-  "name" : "This is a test class",
-  "listOfLocalDateTimes" : [ "-999999999-01-01T00:00:00", "+999999999-12-31T23:59:59.999999999", "0001-01-01T01:01:00" ],
-  "mapOfIntegerToString" : {
-    "1" : "One",
-    "2" : "Two",
-    "3" : "Three"
-  }
-}

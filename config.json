@@ -1,7 +1,0 @@
-{
-  "appTitle" : "Task Manager App",
-  "logLevel" : "INFO",
-  "userPrefsFilePath" : "preferences.json",
-  "taskManagerFilePath" : "data/taskmanager.xml",
-  "taskManagerName" : "MyTaskManager"
-}
