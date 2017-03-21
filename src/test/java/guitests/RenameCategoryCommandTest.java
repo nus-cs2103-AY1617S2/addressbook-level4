@@ -28,5 +28,9 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("name owesMoney !!!");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RenameCategoryCommandParser.ERROR_NON_ALPHANUMERIC));
+
+        //specified category to be re-named does not exist
+        commandBox.runCommand("name superman batman");
+        assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
     }
 }
