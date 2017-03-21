@@ -95,8 +95,9 @@ FlexiTask will also be able to sort your tasks according to their priorities, da
 >>* 3 days from now
 <br>
 
-<a name="help"/>
+<a name="help"/></a>
 ### 3.1. Viewing help: help 
+<img src="images/help.png" width = "600"> <br>
 
 Opens a new window which shows the User Guide of FlexiTask as shown in Figure 2
 
@@ -168,6 +169,7 @@ Example:
 
 * add Send email to boss regarding X Project p/high
 
+<img src="images/setting_priority_levels.png" width = "300"> <br>
 
 As shown in Figure 3, priority is displayed next to the task name and tags are displayed below the task name.
 
