@@ -82,6 +82,10 @@ public class StringUtil {
         return count + " " + English.plural(noun, count);
     }
 
+    /**
+     * Returns an array containing each word in the string.
+     * @param string
+     */
     public static String[] convertToArray(String keywords) {
         if (keywords == null || keywords.trim().isEmpty()) {
             return new String[] { "" };

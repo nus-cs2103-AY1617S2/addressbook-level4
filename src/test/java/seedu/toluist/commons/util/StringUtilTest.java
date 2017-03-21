@@ -147,4 +147,62 @@ public class StringUtilTest {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
     }
+
+    //---------------- Tests for convertToArray --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid throwable object
+     */
+
+    @Test
+    public void convertToArray_nullCondition() {
+        String testString = null;
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals(""));
+    }
+
+    @Test
+    public void convertToArray_oneCondition() {
+        String testString = "test";
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals("test"));
+    }
+
+    @Test
+    public void convertToArray_twoConditions() {
+        String testString = "test1 test2";
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals("test1"));
+        assertTrue(testArray[1].equals("test2"));
+    }
+
+    @Test
+    public void convertToArray_whiteSpaceInFront() {
+        String testString = "              test";
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals("test"));
+    }
+
+    @Test
+    public void convertToArray_whiteSpaceBehind() {
+        String testString = "test          ";
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals("test"));
+    }
+
+    @Test
+    public void convertToArray_whiteSpaceInbetween() {
+        String testString = "test1              test2";
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals("test1"));
+        assertTrue(testArray[1].equals("test2"));
+    }
+
+    @Test
+    public void convertToArray_whiteSpaceEverywhere() {
+        String testString = "          test1              test2            ";
+        String[] testArray = StringUtil.convertToArray(testString);
+        assertTrue(testArray[0].equals("test1"));
+        assertTrue(testArray[1].equals("test2"));
+    }
 }
