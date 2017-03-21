@@ -27,10 +27,6 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
-        //invalid index
-        this.commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
-
     }
 
     /**

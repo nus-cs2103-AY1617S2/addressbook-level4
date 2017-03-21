@@ -81,7 +81,8 @@ public class TypicalTestTasks {
         return new TaskBuilder().withName("due soon")
                                         .withDescription("task")
                                         .withPriority("high")
-                                        .withDeadline("tomorrow").build();
+                                        .withDeadline("tomorrow")
+                                        .withTags("tttttttttag").build();
     }
 
     public static TestTask getFloatingTestTask() throws IllegalValueException {
