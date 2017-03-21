@@ -43,7 +43,7 @@ public class XmlAdaptedEvent {
      * @param source future changes to this will not affect the created XmlAdaptedEvent
      */
     public XmlAdaptedEvent(ReadOnlyEvent source) {
-        name = source.getEventName().name;
+        name = source.getName().name;
         location = source.getLocation().location;
         description = source.getDescription().description;
 

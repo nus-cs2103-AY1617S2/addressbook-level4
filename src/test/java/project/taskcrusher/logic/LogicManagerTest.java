@@ -219,7 +219,8 @@ public class LogicManagerTest {
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_TASK_SUCCESS, toBeAdded),
                 expectedAB, expectedAB.getTaskList());
 
     }
@@ -440,7 +441,7 @@ public class LogicManagerTest {
             cmd.append("add ");
             cmd.append("t ");
 
-            cmd.append(task.getTaskName().toString());
+            cmd.append(task.getName().toString());
             cmd.append(" d/").append(task.getDeadline());
             cmd.append(" p/").append(task.getPriority());
             cmd.append(" //").append(task.getDescription());

@@ -33,7 +33,7 @@ public class TaskListCard extends UiPart<Region> {
 
     public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getTaskName().toString());
+        name.setText(task.getName().toString());
         id.setText(displayedIndex + ". ");
         showDeadline(task);
         showPriority(task);

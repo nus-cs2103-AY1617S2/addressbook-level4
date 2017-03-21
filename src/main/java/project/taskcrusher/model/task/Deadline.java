@@ -67,7 +67,6 @@ public class Deadline {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Deadline // instanceof handles nulls
-                        // TODO: change it so that it deals with Optional
                         && this.deadline.equals(((Deadline) other).deadline));
     }
 

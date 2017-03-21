@@ -47,7 +47,7 @@ public class Event implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getEventName(), source.getTimeslots(), source.getLocation(),
+        this(source.getName(), source.getTimeslots(), source.getLocation(),
                 source.getDescription(), source.getTags());
     }
 
@@ -55,7 +55,8 @@ public class Event implements ReadOnlyEvent {
         return this.tags;
     }
 
-    public Name getEventName() {
+    @Override
+    public Name getName() {
         return this.name;
     }
 
@@ -111,7 +112,7 @@ public class Event implements ReadOnlyEvent {
     public void resetData(ReadOnlyEvent replacement) {
         assert replacement != null;
 
-        this.setEventName(replacement.getEventName());
+        this.setEventName(replacement.getName());
         this.setEventDate(replacement.getTimeslots());
         this.setLocation(replacement.getLocation());
         this.setDescription(replacement.getDescription());

@@ -16,6 +16,7 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
+import project.taskcrusher.model.shared.UserItem;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
@@ -167,7 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask task);
+        boolean satisfies(UserItem item);
         String toString();
     }
 
@@ -180,8 +181,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
+        public boolean satisfies(UserItem item) {
+            return qualifier.run(item);
         }
 
         @Override
@@ -191,7 +192,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask task);
+        boolean run(UserItem item);
         String toString();
     }
 
@@ -203,9 +204,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask task) {
+        public boolean run(UserItem item) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().toString(), keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(item.getName().toString(), keyword))
                     .findAny()
                     .isPresent();
         }
@@ -225,7 +226,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask task) {
+        public boolean run(UserItem item) {
+            assert item instanceof ReadOnlyTask;
+            ReadOnlyTask task = (ReadOnlyTask) item;
+
             //has no deadline
             if (!task.getDeadline().getDate().isPresent()) {
                 return false;
@@ -253,7 +257,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyEvent event) {
+        public boolean run(UserItem item) {
+            assert item instanceof ReadOnlyEvent;
+            ReadOnlyEvent event = (ReadOnlyEvent) item;
             if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {
                 return true;
             } else {

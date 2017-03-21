@@ -90,7 +90,7 @@ public class UserInboxPanelHandle extends GuiHandle {
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
-            if (!personsInList.get(startPosition + i).getTaskName().name.equals(persons[i].getTaskName().name)) {
+            if (!personsInList.get(startPosition + i).getName().name.equals(persons[i].getName().name)) {
                 return false;
             }
         }
@@ -101,7 +101,7 @@ public class UserInboxPanelHandle extends GuiHandle {
     public TaskCardHandle navigateToPerson(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> person = getListView().getItems().stream()
-                                                    .filter(p -> p.getTaskName().name.equals(name))
+                                                    .filter(p -> p.getName().name.equals(name))
                                                     .findAny();
         if (!person.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
@@ -132,7 +132,7 @@ public class UserInboxPanelHandle extends GuiHandle {
     public int getPersonIndex(ReadOnlyTask targetPerson) {
         List<ReadOnlyTask> personsInList = getListView().getItems();
         for (int i = 0; i < personsInList.size(); i++) {
-            if (personsInList.get(i).getTaskName().equals(targetPerson.getTaskName())) {
+            if (personsInList.get(i).getName().equals(targetPerson.getName())) {
                 return i;
             }
         }

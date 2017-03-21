@@ -1,7 +1,8 @@
 package project.taskcrusher.model.task;
 
 import project.taskcrusher.model.shared.Description;
-import project.taskcrusher.model.shared.Name;
+//import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.UserItem;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
@@ -9,9 +10,8 @@ import project.taskcrusher.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null (just empty as Optional<>),
  * field values are validated.
  */
-public interface ReadOnlyTask {
+public interface ReadOnlyTask extends UserItem {
 
-    Name getTaskName();
     Priority getPriority();
     Description getDescription();
     Deadline getDeadline();
@@ -29,7 +29,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
+                && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getDeadline().equals(this.getDeadline())
                 && other.getDescription().equals(this.getDescription()));
     }
@@ -39,7 +39,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTaskName());
+        builder.append(getName());
         if (getDeadline().hasDeadline()) {
             builder.append(" " + getDeadline().toString() + " ");
         }

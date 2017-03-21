@@ -10,6 +10,7 @@ import project.taskcrusher.logic.commands.CommandResult;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 import project.taskcrusher.logic.parser.Parser;
 import project.taskcrusher.model.Model;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.storage.Storage;
 
@@ -38,5 +39,10 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ObservableList<ReadOnlyEvent> getFilteredEventList() {
+        return model.getFilteredEventList();
     }
 }

@@ -37,7 +37,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getDeadline(), source.getPriority(),
+        this(source.getName(), source.getDeadline(), source.getPriority(),
                 source.getDescription(), source.getTags());
     }
 
@@ -47,7 +47,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Name getTaskName() {
+    public Name getName() {
         return name;
     }
 
@@ -103,7 +103,7 @@ public class Task implements ReadOnlyTask {
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
-        this.setTaskName(replacement.getTaskName());
+        this.setTaskName(replacement.getName());
         this.setPriority(replacement.getPriority());
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());

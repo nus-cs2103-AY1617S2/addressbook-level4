@@ -29,7 +29,7 @@ public class EventListCard extends UiPart<Region> {
 
     public EventListCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
-        name.setText(event.getEventName().name);
+        name.setText(event.getName().name);
         id.setText(displayedIndex + ". ");
         showLocation(event);
         showDescription(event);
