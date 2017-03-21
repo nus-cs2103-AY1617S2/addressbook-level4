@@ -23,6 +23,7 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_INDEX_CONSTRAINTS = "Index number of the task must be at least 1.";
 
     public final int targetIndex;
+
     private String commandText;
 
     public CompleteCommand (int targetIndex) throws IllegalValueException {
@@ -32,6 +33,7 @@ public class CompleteCommand extends Command {
         this.targetIndex = targetIndex - 1;
     }
 
+    @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<Task> lastShownList = model.getFilteredTaskList();
@@ -47,14 +49,16 @@ public class CompleteCommand extends Command {
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
-
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
+        commandText = String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete);
+        return new CommandResult(commandText);
     }
 
+    @Override
     public boolean isMutating() {
         return true;
     }
 
+    @Override
     public String getCommandText() {
         return commandText;
     }

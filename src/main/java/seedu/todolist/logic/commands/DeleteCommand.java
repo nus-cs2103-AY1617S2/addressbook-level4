@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
 
     public final int targetIndex;
 
-    private String commandText;
+    private String commandResultText;
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
@@ -46,8 +46,8 @@ public class DeleteCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        commandText = String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        commandResultText = String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
+        return new CommandResult(commandResultText);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String getCommandText() {
-        return commandText;
+        return commandResultText;
     }
 
 }

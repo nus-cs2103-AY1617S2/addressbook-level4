@@ -176,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
         System.out.println(filteredTasks);
         SortedList<Task> sortedList = new SortedList<Task>(filteredTasks, dateComparator);
         System.out.println(sortedList);
-
+        indicateViewListChanged(ListCommand.TYPE_UPCOMING);
         return new UnmodifiableObservableList<>(sortedList);
     }
 

@@ -10,31 +10,76 @@ import seedu.todolist.model.ToDoList;
 public class UndoManager {
 
     protected Model model;
-    private Stack <CommandAndState> stateStack;
     private Stack <CommandAndState> undoStack;
+    private Stack <CommandAndState> redoStack;
 
     public UndoManager(Model model) {
         this.model = model;
-        stateStack = new Stack <CommandAndState> ();
         undoStack = new Stack <CommandAndState> ();
+        redoStack = new Stack <CommandAndState> ();
     }
 
+    /**
+     * Add a new mutating task into the undoStack
+     * @return
+     */
     public void addMutatingTask(Command command) {
         ReadOnlyToDoList previousState = new ToDoList(model.getToDoList());
-        stateStack.push(new CommandAndState(command, previousState));
+        undoStack.push(new CommandAndState(command, previousState, (ReadOnlyToDoList) null));
     }
 
-    public Stack<CommandAndState> getStack() {
-        return stateStack;
+    public void setCurrentStateForMutatingTask(ReadOnlyToDoList state) {
+        undoStack.peek().setCurrentState(state);
     }
 
+    /**
+     * Get the stack that stores the undo commands and states
+     * @return Stack<CommandAndState>
+     */
+    public Stack<CommandAndState> getUndoStack() {
+        return undoStack;
+    }
+
+    /**
+     * Get the stack that stores the redo commands and states
+     * @return Stack<CommandAndState>
+     */
+    public Stack<CommandAndState> getRedoStack() {
+        return redoStack;
+    }
+
+    /**
+     * Get the command and state of the latest command to undo
+     * @return CommandAndState
+     */
     public CommandAndState getCommandAndStateToUndo() {
-        return stateStack.peek();
+        return undoStack.peek();
     }
 
+    /**
+     * Transfer the latest undone command into the redo stack
+     *
+     */
     public void undoLatestTask() {
-        undoStack.push(stateStack.pop());
+        redoStack.push(undoStack.pop());
     }
+
+    /**
+     * Get the command and state of the latest command to redo
+     * @return CommandAndState
+     */
+    public CommandAndState getCommandAndStateToRedo() {
+        return redoStack.peek();
+    }
+
+    /**
+     * Transfer the latest redone command into the undo stack
+     *
+     */
+    public void redoLatestUndoneTask() {
+        undoStack.push(redoStack.pop());
+    }
+
 
 
 }

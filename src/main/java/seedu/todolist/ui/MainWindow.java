@@ -139,6 +139,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        allButton.getStyleClass().add(SELECTED);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

@@ -16,7 +16,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final Set<String> keywords;
-    private String commandText;
+    private String commandResultText;
 
     public FindCommand(Set<String> keywords) {
         this.keywords = keywords;
@@ -25,8 +25,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
-        commandText = getMessageForTaskListShownSummary(model.getFilteredTaskList().size());
-        return new CommandResult(commandText);
+        commandResultText = getMessageForTaskListShownSummary(model.getFilteredTaskList().size());
+        return new CommandResult(commandResultText);
     }
 
     @Override
@@ -36,6 +36,6 @@ public class FindCommand extends Command {
 
     @Override
     public String getCommandText() {
-        return commandText;
+        return commandResultText;
     }
 }

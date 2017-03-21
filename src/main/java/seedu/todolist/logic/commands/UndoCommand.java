@@ -16,13 +16,13 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (undoManager.getStack().empty()) {
+        if (undoManager.getUndoStack().empty()) {
             return new CommandResult(MESSAGE_NOTHING_TO_UNDO);
         }
         commAndState =  undoManager.getCommandAndStateToUndo();
         undoManager.undoLatestTask();
         String command = commAndState.getCommand().getCommandText();
-        ReadOnlyToDoList previousState = commAndState.getState();
+        ReadOnlyToDoList previousState = commAndState.getStateBeforeCommand();
         model.resetData(previousState);
         commandText = String.format(MESSAGE_UNDO_TASK_SUCCESS, command);
         return new CommandResult(commandText);
