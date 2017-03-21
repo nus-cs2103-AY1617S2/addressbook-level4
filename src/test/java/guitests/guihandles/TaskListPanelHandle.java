@@ -59,16 +59,20 @@ public class TaskListPanelHandle extends GuiHandle {
         }
     }
 
+    /**
+     * @return ListView containing all the lists
+     */
     public ListView<ReadOnlyTask> getListView() {
         return getNode(TASK_LIST_VIEW_ID);
     }
 
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
+     * @param taskModified Task that was modified
      * @param tasks A list of task in the correct order.
      */
-    public boolean isListMatching(ReadOnlyTask taskModified, ReadOnlyTask... tasks) {
-        return this.isListMatching(0, taskModified.getTaskType(), tasks);
+    public boolean isListMatching(TaskType taskType, ReadOnlyTask... tasks) {
+        return this.isListMatching(0, taskType, tasks);
     }
 
     /**
@@ -206,7 +210,9 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public int getNumberOfTask() {
-        return getListView().getItems().size();
+        return getListView(TaskType.DEADLINE).getItems().size()
+                + getListView(TaskType.EVENT).getItems().size()
+                + getListView(TaskType.TODO).getItems().size();
     }
 
     public int getNumberOfTask(TaskType taskType) {

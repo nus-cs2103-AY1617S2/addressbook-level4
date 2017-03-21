@@ -30,7 +30,7 @@ public class AddCommandTest extends ToDoListGuiTest {
         //add duplicate task
         commandBox.runCommand(taskToAdd.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(taskListPanel.isListMatching(taskToAdd, currentList));
+        assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), currentList));
 
         //add to empty list
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
@@ -50,6 +50,6 @@ public class AddCommandTest extends ToDoListGuiTest {
 
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(taskListPanel.isListMatching(taskToAdd, expectedList));
+        assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), expectedList));
     }
 }
