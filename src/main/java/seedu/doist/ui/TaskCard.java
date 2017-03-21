@@ -1,6 +1,7 @@
 package seedu.doist.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -9,18 +10,18 @@ import seedu.doist.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
+    @FXML
+    CheckBox checkbox;
     @FXML
     private Label desc;
     @FXML
     private Label id;
     @FXML
     private Label priority;
-    @FXML
-    private Label isFinished;
     @FXML
     private Label startTime;
     @FXML
@@ -30,16 +31,22 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+        checkbox.setDisable(true);
+        checkbox.setStyle("-fx-opacity: 1");
         desc.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().toString());
-        isFinished.setText(task.getFinishedStatus().toString());
+        if (task.getFinishedStatus().getIsFinished()) {
+            checkbox.setSelected(true);
+        } else {
+            checkbox.setSelected(false);
+        }
         startTime.setText(" no more start time");
         endTime.setText(" no more end time");
         initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
