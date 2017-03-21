@@ -30,6 +30,13 @@ public class Status {
     }
 
     /**
+     * Initialise a Status with value of incomplete
+     */
+    public Status() {
+        this.value = "incomplete";
+    }
+
+    /**
      * Returns if a given string is a valid task status.
      */
     public static boolean isValidStatus(String test) {

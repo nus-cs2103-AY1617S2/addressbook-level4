@@ -85,17 +85,17 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Optional<Note> getNote() {
-        return Optional.of(note);
+        return Optional.ofNullable(note);
     }
 
     @Override
     public Optional<DateTime> getStartTime() {
-        return Optional.of(startTime);
+        return Optional.ofNullable(startTime);
     }
 
     @Override
     public Optional<DateTime> getEndTime() {
-        return Optional.of(endTime);
+        return Optional.ofNullable(endTime);
     }
 
     @Override

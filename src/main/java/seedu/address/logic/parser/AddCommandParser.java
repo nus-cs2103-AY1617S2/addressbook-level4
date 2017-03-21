@@ -29,19 +29,19 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STATUS, PREFIX_NOTE,
                         PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
-        argsTokenizer.createFloatingTask();
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).get(),
-                    argsTokenizer.getValue(PREFIX_STATUS).get(),
-                    argsTokenizer.getValue(PREFIX_NOTE).get(),
-                    argsTokenizer.getValue(PREFIX_STARTTIME).get(),
-                    argsTokenizer.getValue(PREFIX_ENDTIME).get(),
+                    argsTokenizer.getValue(PREFIX_PRIORITY),
+                    argsTokenizer.getValue(PREFIX_STATUS),
+                    argsTokenizer.getValue(PREFIX_NOTE),
+                    argsTokenizer.getValue(PREFIX_STARTTIME),
+                    argsTokenizer.getValue(PREFIX_ENDTIME),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
