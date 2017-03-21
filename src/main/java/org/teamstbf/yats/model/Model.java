@@ -32,9 +32,17 @@ public interface Model {
 	 */
 	void resetData(ReadOnlyTaskManager newData);
 
-	/** Sorts the filtered event list */
-	void sortFilteredEventList();
-
+	/**
+	 * Updates the event located at {@code filteredEventListIndex} with
+	 * {@code editedEvent}.
+	 *
+	 * @throws DuplicateEventException
+	 *             if updating the event's details causes the event to be
+	 *             equivalent to another existing event in the list.
+	 * @throws IndexOutOfBoundsException
+	 *             if {@code filteredEventListIndex} < 0 or >= the size of the
+	 *             filtered list.
+	 */
 	void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
 			throws UniqueEventList.DuplicateEventException;
 
@@ -46,7 +54,6 @@ public interface Model {
 
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
-
 	
 	//@@author A0102778B
 	
@@ -63,4 +70,17 @@ public interface Model {
     boolean checkEmptyUndoStack();
 
     boolean checkEmptyRedoStack();
+
+	void updateFilteredListToShowLocation(Set<String> keywords);
+
+	void updateFilteredListToShowDate(Set<String> keywords);
+
+	void updateFilteredListToShowStartTime(Set<String> keywords);
+
+	void updateFilteredListToShowTags(Set<String> keywords);
+
+	void getPreviousState();
+
+	void getNextState();
+
 }
