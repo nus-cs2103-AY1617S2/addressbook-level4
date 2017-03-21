@@ -390,5 +390,7 @@ Format: `exit`
 **A**: FlexiTask will display your upcoming tasks on the right panel of the User Interface. However, it will not show you a reminder.
 
 
-## 5. Command Summary <img src="images/commandSummary_21Mar.png">
+## 5. Command Summary
+
+<img src="images/commandSummary_21Mar.png">
 
