@@ -27,7 +27,7 @@ public interface Model {
     void sortTasks(SortCriteria sortCriteria);
 
     /** Deletes the given task. */
-    void killTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException;
