@@ -30,7 +30,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-  //@@author A0138628W
+    //@@author A0138628W
     private TaskListPanel taskListPanel, eventListPanel, floatingListPanel;
     private Config config;
 
@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        //@@author A0143648Y
+        //@@author A0138628W
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         eventListPanel = new TaskListPanel(eventListPlaceholder, logic.getFilteredEventList());
         floatingListPanel = new TaskListPanel(floatingListPlaceholder, logic.getFilteredFloatList());
@@ -166,7 +166,7 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-    //@@author A0143648Y
+    //@@author A0138628W
     private void setWindowMaxSize() {
         primaryStage.setMaximized(true);
     }

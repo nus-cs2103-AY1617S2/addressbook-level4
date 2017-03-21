@@ -42,36 +42,31 @@
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
          <items>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
                <children>
-                  <Label alignment="CENTER" styleClass="label-bright" text="Events">
-                      <padding>
-                          <Insets left="10" right="10" />
-                      </padding>
-                  </Label>
-                  <AnchorPane fx:id="eventListPlaceholder" prefWidth="200.0">
-                      <padding>
-                          <Insets left="10" right="10" />
-                      </padding>
-                  </AnchorPane>
-                  <Label alignment="CENTER" styleClass="label-bright" text="Floating">
-                      <padding>
-                          <Insets left="10" right="10" />
-                      </padding>
-                  </Label>
-                  <AnchorPane fx:id="floatingListPlaceholder" prefWidth="200.0">
-                      <padding>
-                          <Insets bottom="10" left="10" right="10" />
-                      </padding>
-                  </AnchorPane>
+                  <VBox prefWidth="100.0">
+                     <children>
+                        <Label styleClass="label-event" text="Events" />
+                        <AnchorPane fx:id="eventListPlaceholder" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="100.0">
+                     <children>
+                        <Label styleClass="label-float" text="Floating" />
+                        <AnchorPane fx:id="floatingListPlaceholder" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
             <VBox fx:id="taskList" minWidth="340" prefWidth="340">
                 <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <Label styleClass="label-bright" text="Tasks" />
+                  <Label styleClass="label-task" text="Tasks" />
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
