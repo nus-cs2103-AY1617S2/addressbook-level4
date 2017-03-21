@@ -269,7 +269,7 @@ TaskBoss saves your data to ‘data/taskboss.xml’ by default whenever your tas
 |[new](#27-creating-a-category--new)               |**`new CATEGORY`**      |
 |[clear](#28-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
 |[view](#29-viewing-a-task--view)                    |**`view INDEX`**             |
-|[name](#210-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY,NEW_CATEGORY`**       |
+|[name](#210-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
 |[done](#211-marking-a-task-done--done)               |**`done INDEX`**        |
 |[undo](#212-undoing-a-command--undo)                 |**`undo`**            |
 |[sort](#213-sorting-tasks--sort)                     |**`sort` `sort p`**   |
