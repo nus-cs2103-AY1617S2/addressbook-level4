@@ -33,6 +33,7 @@ public class EventListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         showLocation(event);
         showDescription(event);
+        showEventTimeSlots(event);
 
         initTags(event);
     }
