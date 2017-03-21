@@ -161,7 +161,7 @@ public class LogicManagerTest {
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
         if (!inputCommand.equals("sort")) {
-             assertEquals(expectedTaskManager, latestSavedTaskManager);
+            assertEquals(expectedTaskManager, latestSavedTaskManager);
         }
     }
 
@@ -251,7 +251,7 @@ public class LogicManagerTest {
 
         List<Task> fiveTasks = helper.generateTaskList(p1, p2, p3, p4, p5);
         TaskManager expectedTaskManager = helper.generateTaskManager(fiveTasks);
-        
+
         model.resetData(new TaskManager());
         model.addTask(p2);
         model.addTask(p3);
