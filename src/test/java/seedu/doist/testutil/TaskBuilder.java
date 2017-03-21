@@ -1,5 +1,7 @@
 package seedu.doist.testutil;
 
+import java.util.Date;
+
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
@@ -39,6 +41,12 @@ public class TaskBuilder {
         for (String tag: tags) {
             task.getTags().add(new Tag(tag));
         }
+        return this;
+    }
+
+    public TaskBuilder withDates(Date startDate, Date endDate) throws IllegalValueException {
+        this.task.setStartDate(startDate);
+        this.task.setEndDate(endDate);
         return this;
     }
 

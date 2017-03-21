@@ -53,6 +53,14 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public Description getDescription() {
         return desc;
