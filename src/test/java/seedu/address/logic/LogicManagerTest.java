@@ -222,7 +222,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_addInvalidEvent_notAllowed() throws Exception {
+    public void executeAddInvalidEventNotAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateTask(1);

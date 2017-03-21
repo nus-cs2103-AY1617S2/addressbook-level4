@@ -145,7 +145,8 @@ public class Task implements ReadOnlyTask {
      */
     public static boolean isValidEvent(ReadOnlyTask toCheck) {
         LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime endTime, startTime;
+        LocalDateTime endTime;
+        LocalDateTime startTime;
 
         // If both start time and end time does not exist
         if (!toCheck.getEndTime().isPresent() && !toCheck.getEndTime().isPresent()) {
