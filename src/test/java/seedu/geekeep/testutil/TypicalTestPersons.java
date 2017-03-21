@@ -49,6 +49,8 @@ public class TypicalTestPersons {
                 ab.addTask(new Task(person));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
+            } catch (IllegalValueException ive) {
+                assert false : "not possible";
             }
         }
     }
