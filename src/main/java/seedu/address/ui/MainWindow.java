@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -113,11 +115,31 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), getFilteredTasks());
+        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), getCurrentWeekTasks());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+    }
+
+    private ObservableList<ReadOnlyTask> getFilteredTasks() {
+        return logic.getFilteredTaskList();
+    }
+
+    private ObservableList<ReadOnlyTask> getCurrentWeekTasks() {
+        return logic.getFilteredTaskList().filtered(t -> isCurrentWeek(t));
+    }
+
+    /**
+     * Returns true if the task's deadline is in the current week.
+     *
+     * @param task
+     * @return
+     */
+    private boolean isCurrentWeek(ReadOnlyTask task) {
+        if (!task.getEndTime().isPresent()) return false;
+
+        return task.getEndTime().get().isCurrentWeek();
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
