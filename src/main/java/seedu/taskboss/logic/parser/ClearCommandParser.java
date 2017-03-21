@@ -18,7 +18,7 @@ import seedu.taskboss.model.category.Category;
 public class ClearCommandParser {
 
     private static final String EMPTY_STRING = "";
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the ClearCommand
      * and returns an ClearCommand object for execution.

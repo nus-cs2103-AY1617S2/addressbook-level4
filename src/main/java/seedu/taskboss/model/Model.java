@@ -58,7 +58,7 @@ public interface Model {
     void updateFilteredTaskListByCategory(Category category);
 
     /** clear all tasks in the filtered task list by the given keywords as category*/
-    void clearTasksByCategory(Category category);  
+    void clearTasksByCategory(Category category);
 
     /** Undoes previous command of TaskBoss */
     void undoTaskboss() throws EmptyStackException;
