@@ -332,6 +332,7 @@ Example:
 <a name="clear"></a>
 ### 3.11. Clearing entries: clear
 Clears all tasks or groups of task<br>
+
 Format: `clear [TAGS] [MORE_TAGS]`
 > Without parameters, clear will delete all tasks from the task manager<br>
 > With parameters, clear will only delete tasks containing all of the tags from the task manager
@@ -346,6 +347,7 @@ Example:
 <a name="save"></a>
 ### 3.12. Saving the program data to a specified path: save
 Save FlexiTask list to a file specified by user<br>
+
 Format: `save FILE_PATH/FILE_NAME.xml`
 
 > File extension must be xml<br>
@@ -360,6 +362,7 @@ Example:
 <a name="load"></a>
 ### 3.13. Loading the program data from a specified path: load
 Load FlexiTask list from file specified by user<br>
+
 Format: `load FILE_PATH/FILE_NAME.xml`
 
 > File extension must be xml<br>
@@ -372,6 +375,7 @@ Example:
 <a name="exit"></a>
 ### 3.14. Exiting the program: exit
 Exits the program<br>
+
 Format: `exit`
 
 ## 4. FAQ
