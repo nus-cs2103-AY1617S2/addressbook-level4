@@ -74,7 +74,7 @@ public class AddCommand extends Command {
             endDateTime = Optional.of(new DateTime(endDate + endTime));
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, false, RecurInterval.NONE);
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, false, RecurInterval.NONE);
     }
 
     @Override
