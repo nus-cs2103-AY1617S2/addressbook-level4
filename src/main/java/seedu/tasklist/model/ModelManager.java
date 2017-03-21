@@ -1,7 +1,7 @@
 package seedu.tasklist.model;
 
-import java.util.EmptyStackException;
 import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
@@ -14,7 +14,6 @@ import seedu.tasklist.commons.core.UnmodifiableObservableList;
 import seedu.tasklist.commons.events.model.TaskListChangedEvent;
 
 import seedu.tasklist.commons.exceptions.DataConversionException;
-import seedu.tasklist.commons.exceptions.EmptyModelStackException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
 import seedu.tasklist.model.task.ReadOnlyTask;
@@ -131,13 +130,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void enableUndoForClear() {
         undoStack.push(new TaskList(taskList));
-    }
-
-    @SuppressWarnings("serial")
-    public static class EmptyUndoRedoStackException extends EmptyModelStackException {
-        protected EmptyUndoRedoStackException() {
-            super("No available states");
-        }
     }
 
     @Override

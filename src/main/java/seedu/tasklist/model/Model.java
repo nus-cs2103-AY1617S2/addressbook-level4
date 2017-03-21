@@ -1,7 +1,7 @@
 package seedu.tasklist.model;
 
-import java.util.EmptyStackException;
 import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.Set;
 
 import seedu.tasklist.commons.core.UnmodifiableObservableList;
