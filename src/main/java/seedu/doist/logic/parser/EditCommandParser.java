@@ -37,13 +37,10 @@ public class EditCommandParser {
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
         ArrayList<String> tokens = ParserUtil.getParameterKeysFromString(args);
-        if (!argsTokenizer.validateTokens(tokens) ||
-                (argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID)) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-        if (!index.isPresent()) {
+        if (!index.isPresent() ||
+            !argsTokenizer.validateTokens(tokens) ||
+            (argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 

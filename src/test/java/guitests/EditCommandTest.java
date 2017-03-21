@@ -3,6 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -62,7 +64,8 @@ public class EditCommandTest extends DoistGUITest {
         int addressBookIndex = 2;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
+        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework")
+                .withDates(new Date(), new Date()).build();
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
@@ -91,6 +94,15 @@ public class EditCommandTest extends DoistGUITest {
 
         commandBox.runCommand("edit 1 \\under *&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+    }
+
+    @Test
+    public void edit_invalidDateFormat_failure() {
+        commandBox.runCommand("edit 1 \\from today \\by tomorrow");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("edit 1 \\from today");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
