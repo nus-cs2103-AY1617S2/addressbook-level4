@@ -21,7 +21,7 @@ import seedu.doit.commons.util.CollectionUtil;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-    private Comparator<Task> taskComparator = new TaskNameComparator();
+    private Comparator<ReadOnlyTask> taskComparator = new TaskNameComparator();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -110,7 +110,7 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacement);
     }
 
-    public void setTaskComparator(Comparator<Task> taskComparator) {
+    public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
         this.taskComparator = taskComparator;
         internalList.sort(taskComparator);
     }

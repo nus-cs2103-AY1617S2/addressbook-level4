@@ -2,9 +2,9 @@ package seedu.doit.model.item;
 
 import java.util.Comparator;
 
-public interface TaskComparator extends Comparator<Task> {
+public interface TaskComparator extends Comparator<ReadOnlyTask> {
 
     @Override
-    public int compare(Task t1, Task t2);
+    public int compare(ReadOnlyTask t1, ReadOnlyTask t2);
 
 }

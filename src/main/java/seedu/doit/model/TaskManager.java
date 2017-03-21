@@ -76,7 +76,7 @@ public class TaskManager implements ReadOnlyItemManager {
         syncMasterTagListWith(tasks);
     }
 
-    public void setTaskComparator(Comparator<Task> taskComparator) {
+    public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
         tasks.setTaskComparator(taskComparator);
     }
 

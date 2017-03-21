@@ -3,7 +3,7 @@ package seedu.doit.model.item;
 public class PriorityComparator implements TaskComparator {
 
     @Override
-    public int compare(Task t1, Task t2) {
+    public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
         return compareDone(t1, t2);
     }
 
