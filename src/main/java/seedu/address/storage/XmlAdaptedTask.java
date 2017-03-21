@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,10 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithDeadline;
+import seedu.address.model.task.TaskWithoutDeadline;
 
 /**
  * JAXB-friendly version of the Task.
@@ -19,6 +23,15 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
+
+    @XmlElement(required = false)
+    private long startingTime;
+
+    @XmlElement(required = false)
+    private long deadline;
+
+    @XmlElement(required = true)
+    private String taskType;
 
     @XmlElement(required = true)
     private boolean done;
@@ -42,6 +55,23 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
+        TaskType tempTaskType = source.getTaskType();
+        if (tempTaskType == null) {
+            taskType = TaskType.TaskWithNoDeadline.toString();
+        } else {
+            taskType = tempTaskType.toString();
+            switch (tempTaskType) {
+            case TaskWithNoDeadline:
+                break;
+            case TaskWithOnlyDeadline:
+                deadline = source.getDeadline().getDate().getTime();
+                break;
+            case TaskWithDeadlineAndStartingTime:
+                startingTime = source.getStartingTime().getDate().getTime();
+                deadline = source.getDeadline().getDate().getTime();
+            }
+        }
+
         done = source.isDone();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -64,9 +94,27 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final UniqueTagList tags = new UniqueTagList(taskTags);
+        if (this.taskType == null) {
+            this.taskType = TaskType.TaskWithNoDeadline.toString();
+        }
+        final TaskType taskType = TaskType.valueOf(this.taskType);
         final boolean done = this.done;
-        // TODO: Change Task constructor to TaskWithoutDeadline() or
-        // TaskWithDeadline() based on task type
-        return new Task(name, tags, done);
+        Task t = null;
+        switch (taskType) {
+        case TaskWithNoDeadline:
+            t = new TaskWithoutDeadline(name, tags, done);
+            break;
+        case TaskWithOnlyDeadline:
+            t = new TaskWithDeadline(name, tags, new Date(this.deadline), null, done);
+            break;
+        case TaskWithDeadlineAndStartingTime:
+            t = new TaskWithDeadline(name, tags, new Date(this.deadline), new Date(this.startingTime), done);
+        }
+
+        if (t == null) {
+            throw new IllegalValueException("Task type invalid");
+        }
+
+        return t;
     }
 }
