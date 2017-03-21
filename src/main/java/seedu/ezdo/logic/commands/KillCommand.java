@@ -1,9 +1,12 @@
 package seedu.ezdo.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -21,10 +24,12 @@ public class KillCommand extends Command {
 
     public static final String MESSAGE_KILL_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    public final int targetIndex;
+    public final ArrayList<Integer> targetIndexes;
+    public final ArrayList<ReadOnlyTask> tasksToKill;
 
-    public KillCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public KillCommand(ArrayList<Integer> targetIndexes) {
+        this.targetIndexes = targetIndexes;
+        tasksToKill = new ArrayList<ReadOnlyTask>();
     }
 
 
@@ -33,19 +38,26 @@ public class KillCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (lastShownList.size() < targetIndex) {
+        if (!isIndexValid(lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToKill = lastShownList.get(targetIndex - 1);
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            ReadOnlyTask taskToKill = lastShownList.get(targetIndexes.get(i) - 1);
+            tasksToKill.add(taskToKill);
+            System.out.println(tasksToKill);
+        }
 
         try {
-            model.killTask(taskToKill);
+            model.killTasks(tasksToKill);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_KILL_TASK_SUCCESS, taskToKill));
+        return new CommandResult(String.format(MESSAGE_KILL_TASK_SUCCESS, tasksToKill));
     }
 
+    private boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
+    }
 }
