@@ -13,12 +13,12 @@ import seedu.todolist.commons.util.XmlUtil;
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given todolist data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableToDoList addressBook)
+    public static void saveDataToFile(File file, XmlSerializableToDoList toDoList)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, addressBook);
+            XmlUtil.saveDataToFile(file, toDoList);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }

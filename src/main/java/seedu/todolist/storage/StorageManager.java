@@ -15,23 +15,23 @@ import seedu.todolist.model.ReadOnlyToDoList;
 import seedu.todolist.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ToDoList data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ToDoListStorage addressBookStorage;
+    private ToDoListStorage toDoListStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(ToDoListStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ToDoListStorage toDoListStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.toDoListStorage = toDoListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
-        this(new XmlToDoListStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String toDoListFilePath, String userPrefsFilePath) {
+        this(new XmlToDoListStorage(toDoListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,33 +47,37 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ ToDoList methods ==============================
+
+    public void changeToDoListFilePath(String newPath) {
+        this.toDoListStorage.changeXmlToDoListStorage(newPath);
+    }
 
     @Override
     public String getToDoListFilePath() {
-        return addressBookStorage.getToDoListFilePath();
+        return toDoListStorage.getToDoListFilePath();
     }
 
     @Override
     public Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException {
-        return readToDoList(addressBookStorage.getToDoListFilePath());
+        return readToDoList(toDoListStorage.getToDoListFilePath());
     }
 
     @Override
     public Optional<ReadOnlyToDoList> readToDoList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readToDoList(filePath);
+        return toDoListStorage.readToDoList(filePath);
     }
 
     @Override
-    public void saveToDoList(ReadOnlyToDoList addressBook) throws IOException {
-        saveToDoList(addressBook, addressBookStorage.getToDoListFilePath());
+    public void saveToDoList(ReadOnlyToDoList toDoList) throws IOException {
+        saveToDoList(toDoList, toDoListStorage.getToDoListFilePath());
     }
 
     @Override
-    public void saveToDoList(ReadOnlyToDoList addressBook, String filePath) throws IOException {
+    public void saveToDoList(ReadOnlyToDoList toDoList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveToDoList(addressBook, filePath);
+        toDoListStorage.saveToDoList(toDoList, filePath);
     }
 
 
@@ -86,6 +90,12 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    @Override
+    public void changeXmlToDoListStorage(String newPath) {
+        // TODO Auto-generated method stub
+
     }
 
 }
