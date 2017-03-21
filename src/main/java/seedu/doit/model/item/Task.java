@@ -192,6 +192,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.setPriority(replacement.getPriority());
         this.setStartTime(replacement.getStartTime());
         this.setEndTime(replacement.getEndTime());
+        this.setIsDone(replacement.getIsDone());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -212,13 +213,41 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     @Override
     public int compareTo(ReadOnlyTask other) {
-        return compareItems(other);
+        return compareDone(other);
     }
 
     private int compareName(ReadOnlyTask other) {
         return this.getName().toString().compareToIgnoreCase(other.getName().toString());
     }
 
+    /**
+     * Compares the current task with another Task other. The current item is
+     * considered to be less than the other item if it is done and the other is not done
+     * Items that have equal done status will be compared using compareItems
+     */
+    private int compareDone(ReadOnlyTask other) {
+        if (this.getIsDone()  == true && other.getIsDone() == true) {
+            compareItems(other);
+        } else if (this.getIsDone() == true && other.getIsDone() == false) {
+            return 1;
+        } else if (this.getIsDone() == false && other.getIsDone() == true) {
+            return -1;
+        }
+        return compareItems(other);
+    }
+
+
+    /**
+     * Compares the current item with another item other.
+     * returns -1 if other item is greater than current item
+     * return 0 is both items are equal
+     * return 1 if other item is smaller than current item
+     * The ranking are as follows from highest:
+     * 1) tasks
+     * 2) events
+     * 3) floating tasks
+     * If both have same rankings, then compare names
+     */
     public int compareItems(ReadOnlyTask other) {
 
         if (this.isTask() && other.isTask()) {

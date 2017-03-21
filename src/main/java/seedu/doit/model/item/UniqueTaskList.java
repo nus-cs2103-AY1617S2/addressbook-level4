@@ -79,6 +79,7 @@ public class UniqueTaskList implements Iterable<Task> {
         Task markedTask = new Task(toMark);
         markedTask.setIsDone(true);
         updateTask(taskIndex, markedTask);
+        internalList.sort(taskComparator);
     }
 
     /**

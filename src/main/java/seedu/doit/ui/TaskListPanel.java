@@ -36,7 +36,8 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         mainTaskList = taskList;
-        taskListView.setItems(taskList.filtered(task -> !task.hasStartTime() && task.hasEndTime()));
+        taskListView.setItems(taskList.filtered(task -> !task.hasStartTime()
+                              && task.hasEndTime() && !task.getIsDone()));
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
