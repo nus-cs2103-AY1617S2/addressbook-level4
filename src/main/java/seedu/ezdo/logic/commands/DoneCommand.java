@@ -1,5 +1,7 @@
 package seedu.ezdo.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.ezdo.commons.core.Messages;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
@@ -23,17 +25,20 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done task: %1$s";
     public static final String MESSAGE_DONE_LISTED = "Done tasks listed";
 
-    public final int targetIndex;
-    public final boolean requestToViewDoneOnly;
+    private final ArrayList<Integer> targetIndexes;
+    private final ArrayList<Task> tasksToDone;
+    private final boolean requestToViewDoneOnly;
 
-    public DoneCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+    public DoneCommand(ArrayList<Integer> indexes) {
+        this.targetIndexes = new ArrayList<Integer>(indexes);
         this.requestToViewDoneOnly = false;
+        this.tasksToDone = new ArrayList<Task>();
     }
 
     public DoneCommand() {
-        this.targetIndex = 0;
+        this.targetIndexes = null;
         this.requestToViewDoneOnly = true;
+        this.tasksToDone = null;
     }
 
 
