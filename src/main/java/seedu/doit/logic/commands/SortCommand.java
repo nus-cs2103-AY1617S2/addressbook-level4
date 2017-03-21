@@ -20,7 +20,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         model.sortBy(type);
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        return new CommandResult(getMessageForTaskListShownSortedSummary(model.getFilteredTaskList().size()));
     }
 
 }
