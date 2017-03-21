@@ -1,5 +1,6 @@
 package seedu.taskboss.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.Stack;
@@ -121,9 +122,21 @@ public class ModelManager extends ComponentManager implements Model {
         FilteredList<ReadOnlyTask> oldCategoryTaskList = filteredTasks;
         int listSize = oldCategoryTaskList.size();
 
+        // remember all tasks
+        ArrayList<ReadOnlyTask> allReadOnlyTasks = new ArrayList<ReadOnlyTask> ();
+        for (ReadOnlyTask task : oldCategoryTaskList) {
+            allReadOnlyTasks.add(task);
+        }
+
+        // remember all task index
+        int[] taskIndex = new int[listSize];
+        for (int i = 0; i < listSize; i++) {
+            taskIndex[i] = oldCategoryTaskList.getSourceIndex(i);
+        }
+
         for (int i = 0; i < listSize; i++) {
             // get each task on the filtered task list
-            ReadOnlyTask target = oldCategoryTaskList.get(i);
+            ReadOnlyTask target = allReadOnlyTasks.get(i);
             // get the UniqueCategoryList of the task
             UniqueCategoryList targetCategoryList = target.getCategories();
 
@@ -140,20 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
                     newCategoryList.add(category);
                 }
             }
-//
-//            // at this point, we have taken care of all the categories
-//            // except for the one to be renamed
-//            try {
-//                newCategoryList.add(newCategory);
-//            } catch (DuplicateCategoryException dce) {
-//                dce.printStackTrace();
-//            }
 
             Task editedTask = new Task(target.getName(),
                     target.getPriorityLevel(), target.getStartDateTime(),
                     target.getEndDateTime(), target.getInformation(),
                     newCategoryList);
-            int taskBossIndex = oldCategoryTaskList.getSourceIndex(i);
+            int taskBossIndex = taskIndex[i];
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
 
