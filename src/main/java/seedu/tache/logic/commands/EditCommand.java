@@ -11,6 +11,7 @@ import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 
 /**
@@ -113,7 +114,7 @@ public class EditCommand extends Command {
             updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags);
+        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime, updatedTags, false, RecurInterval.NONE);
 
     }
 

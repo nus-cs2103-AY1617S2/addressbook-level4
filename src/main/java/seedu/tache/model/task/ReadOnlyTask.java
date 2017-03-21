@@ -3,6 +3,7 @@ package seedu.tache.model.task;
 import java.util.Optional;
 
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.Task.RecurInterval;
 
 /**
  * A read-only immutable interface for a Task in the task manager.
@@ -13,6 +14,9 @@ public interface ReadOnlyTask {
     Name getName();
     Optional<DateTime> getStartDateTime();
     Optional<DateTime> getEndDateTime();
+    boolean getActiveStatus();
+    boolean getRecurringStatus();
+    RecurInterval getRecurInterval();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

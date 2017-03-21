@@ -12,10 +12,15 @@ import seedu.tache.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
+    public enum RecurInterval { NONE, DAY, WEEK, MONTH, YEAR };
+
     private Name name;
     private Optional<DateTime> startDateTime;
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
+    private boolean isActive;
+    private boolean isRecurring;
+    private RecurInterval interval;
 
     /**
      * Every field must be present and not null.
@@ -26,31 +31,39 @@ public class Task implements ReadOnlyTask {
         this.startDateTime = Optional.empty();
         this.endDateTime = Optional.empty();
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.isActive = true;
+        this.isRecurring = false;
+        this.interval = RecurInterval.NONE;
     }
 
-    public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime, UniqueTagList tags) {
+    public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
+                    UniqueTagList tags, boolean isRecurring, RecurInterval interval) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.isActive = true;
+        this.isRecurring = isRecurring;
+        this.interval = interval;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags());
-    }
-
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
+        this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
+                    source.getRecurringStatus(), source.getRecurInterval());
     }
 
     @Override
     public Name getName() {
         return name;
+    }
+
+    public void setName(Name name) {
+        assert name != null;
+        this.name = name;
     }
 
     @Override
@@ -81,6 +94,33 @@ public class Task implements ReadOnlyTask {
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
+    }
+
+    @Override
+    public boolean getActiveStatus() {
+        return isActive;
+    }
+
+    public void setActiveStatus(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    @Override
+    public boolean getRecurringStatus() {
+        return isRecurring;
+    }
+
+    public void setRecurringStatus(boolean isRecurring) {
+        this.isRecurring = isRecurring;
+    }
+
+    @Override
+    public RecurInterval getRecurInterval() {
+        return interval;
+    }
+
+    public void setRecurInterval(RecurInterval interval) {
+        this.interval = interval;
     }
 
     /**
