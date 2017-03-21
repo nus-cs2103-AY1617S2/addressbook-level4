@@ -70,13 +70,13 @@ FlexiTask will also be able to sort your tasks according to their priorities, da
 
 `Entering in dates`: Flexitask supports flexible date formats that can be entered in the foramts specified below:
 
->  1. `Formal dates`: 
-> * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included The format DDMMYYYY is used 
+>  1. `Formal dates`:
+> * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included The format DDMMYYYY is used
 
 >>Example: <br>
 
 >>* 12/03/2017
->>* 12-05-2017 
+>>* 12-05-2017
 
 >  2.  `Relaxed dates`:
 > * FlexiTask also supports a more casual style of Relaxed dates. There is no standard format to it
@@ -96,8 +96,9 @@ FlexiTask will also be able to sort your tasks according to their priorities, da
 <br>
 
 <a name="help"/></a>
-### 3.1. Viewing help: help 
+### 3.1. Viewing help: help
 <img src="images/help.png" width = "600"> <br>
+_Figure 2. Userguide for FlexiTask_ 
 
 Opens a new window which shows the User Guide of FlexiTask as shown in Figure 2
 
@@ -170,6 +171,7 @@ Example:
 * add Send email to boss regarding X Project p/high
 
 <img src="images/setting_priority_levels.png" width = "300"> <br>
+_Figure 3. Tasks with Priorities_ 
 
 As shown in Figure 3, priority is displayed next to the task name and tags are displayed below the task name.
 
