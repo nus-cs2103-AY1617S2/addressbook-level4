@@ -120,21 +120,35 @@ Examples:
 * `unmark 3 4 5`<br>
 Marks tasks at index 3, 4 and 5 as incomplete.
 
-### 2.7. Undo
+### 2.7. Schedule
+
+Set an event or a deadline.<br>
+Format: `schedule INDEX [STARTIME] ENDTIME`
+
+> * Set the start time and the end time of the task.
+    The index refers to the index number shown in the last task listing.<br>
+    The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `schedule 6 12/05/2017-13:00 12/05/2017-15:00`<br>
+Set the start time as 1pm on May 12, 2017 and the end time as 3pm on May 12, 2017.
+
+### 2.8. Undo
 
 Undo the latest command.<br>
 Format: `undo`
 
 > * Reverts the change done by the command that was run previously.
 
-### 2.8. Redo
+### 2.9. Redo
 
 Reverts the previous undo.<br>
 Format: `redo`
 
 > * Reverts the change done by the previous undo.
 
-### 2.9. Find
+### 2.10. Find
 
 Displays a list of tasks based on keywords and/or tags.<br>
 Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
@@ -142,7 +156,7 @@ Format: `find [NAME] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
 
-### 2.10. Autocomplete
+### 2.11. Autocomplete
 
 Autocomplete the user's command on the CLI.
 
