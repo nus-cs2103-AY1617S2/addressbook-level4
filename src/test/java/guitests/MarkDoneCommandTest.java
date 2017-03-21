@@ -97,11 +97,11 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markTaskDone_Long_Command_success() throws Exception {
-        int taskBossIndex = 3;
+    public void markTaskDoneLong_success() throws Exception {
+        int taskBossIndex = 1;
 
         TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
-                .withStartDateTime("Feb 18, 2017 5pm")
+                .withStartDateTime("Feb 19, 2017 11pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("wall street").withCategories("Done").build();
 
