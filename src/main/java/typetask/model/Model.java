@@ -38,4 +38,16 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Stores current TaskManager state */
+    void storeTaskManager(String command);
+
+    /** Restores most recently stored TaskManager state */
+    int restoreTaskManager();
+
+    /** Undo most recently restored TaskManager state */
+    int revertTaskManager();
+
+    /** Removes most recently stored TaskManager state upon fail in check */
+    void rollBackTaskManager(boolean isStorageOperation);
+
 }
