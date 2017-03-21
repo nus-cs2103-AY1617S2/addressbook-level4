@@ -32,7 +32,8 @@ public class EditCommand extends UndoableCommand {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)[TITLE][place/VENUE][from/STARTTIME]"
-            + "[level/URGENCYLEVEL][des/DESCRIPTION][to/ENDTIME][#TAG]..\n" + "Example: " + COMMAND_WORD + " 1 place/Toilet";
+            + "[level/URGENCYLEVEL][des/DESCRIPTION][to/ENDTIME][#TAG]..\n" + "Example: " + COMMAND_WORD
+            + " 1 place/Toilet";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -50,7 +51,7 @@ public class EditCommand extends UndoableCommand {
      * @param editTaskDescriptor
      *            details to edit the task with
      */
-    public EditCommand(Pair<Character,Integer> filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(Pair<Character, Integer> filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex.getValue() > 0;
         assert editTaskDescriptor != null;
 
@@ -61,7 +62,7 @@ public class EditCommand extends UndoableCommand {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
-    // @@author A0143648Y
+    // @@ A0143648Y
     @Override
     public CommandResult execute() throws CommandException {
         originalToDoList = new ToDoList(model.getToDoList());
@@ -121,55 +122,50 @@ public class EditCommand extends UndoableCommand {
                 updatedDescription, updatedTags);
     }
 
-    public Title editTitle(ReadOnlyTask taskToEdit){
+    public Title editTitle(ReadOnlyTask taskToEdit) {
         return editTaskDescriptor.getTitle().isPresent() ? editTaskDescriptor.getTitle().get() : taskToEdit.getTitle();
     }
 
-    public Venue editVenue(ReadOnlyTask taskToEdit){
-        if (editTaskDescriptor.getVenue().isPresent()){
+    public Venue editVenue(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getVenue().isPresent()) {
             return editTaskDescriptor.getVenue().get();
-        }
-        else if (taskToEdit.getVenue().isPresent()){
+        } else if (taskToEdit.getVenue().isPresent()) {
             return taskToEdit.getVenue().get();
         }
         return null;
     }
 
-    public StartTime editStartTime(ReadOnlyTask taskToEdit){
-        if (editTaskDescriptor.getStartTime().isPresent()){
+    public StartTime editStartTime(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getStartTime().isPresent()) {
             return editTaskDescriptor.getStartTime().get();
-        }
-        else if (taskToEdit.getStartTime().isPresent()){
+        } else if (taskToEdit.getStartTime().isPresent()) {
             return taskToEdit.getStartTime().get();
         }
         return null;
     }
 
-    public EndTime editEndTime(ReadOnlyTask taskToEdit){
-        if (editTaskDescriptor.getEndTime().isPresent()){
+    public EndTime editEndTime(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getEndTime().isPresent()) {
             return editTaskDescriptor.getEndTime().get();
-        }
-        else if (taskToEdit.getEndTime().isPresent()){
+        } else if (taskToEdit.getEndTime().isPresent()) {
             return taskToEdit.getEndTime().get();
         }
         return null;
     }
 
-    public UrgencyLevel editUrgencyLevel(ReadOnlyTask taskToEdit){
-        if (editTaskDescriptor.getUrgencyLevel().isPresent()){
+    public UrgencyLevel editUrgencyLevel(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getUrgencyLevel().isPresent()) {
             return editTaskDescriptor.getUrgencyLevel().get();
-        }
-        else if (taskToEdit.getUrgencyLevel().isPresent()){
+        } else if (taskToEdit.getUrgencyLevel().isPresent()) {
             return taskToEdit.getUrgencyLevel().get();
         }
         return null;
     }
 
-    public Description editDescription(ReadOnlyTask taskToEdit){
-        if (editTaskDescriptor.getDescription().isPresent()){
+    public Description editDescription(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getDescription().isPresent()) {
             return editTaskDescriptor.getDescription().get();
-        }
-        else if (taskToEdit.getDescription().isPresent()){
+        } else if (taskToEdit.getDescription().isPresent()) {
             return taskToEdit.getDescription().get();
         }
         return null;
