@@ -12,14 +12,14 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.EventListPanelHandle;
+import guitests.guihandles.FloatingTaskListPanelHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TaskListPanelHandle;
-
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.doit.TestApp;
@@ -27,6 +27,7 @@ import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.BaseEvent;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;
 import seedu.doit.testutil.TypicalTestTasks;
 
@@ -46,9 +47,10 @@ public abstract class TaskManagerGuiTest {
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
     protected TaskListPanelHandle taskListPanel;
+    protected EventListPanelHandle eventListPanel;
+    protected FloatingTaskListPanelHandle floatingTaskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
     protected TestApp testApp;
     private Stage stage;
 
@@ -65,19 +67,24 @@ public abstract class TaskManagerGuiTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.setupStage((stage) -> {
-            mainGui = new MainGuiHandle(new GuiRobot(), stage);
-            mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getTaskListPanel();
-            resultDisplay = mainGui.getResultDisplay();
-            commandBox = mainGui.getCommandBox();
-            browserPanel = mainGui.getBrowserPanel();
+            this.mainGui = new MainGuiHandle(new GuiRobot(), stage);
+            this.mainMenu = this.mainGui.getMainMenu();
+            this.eventListPanel = this.mainGui.getEventListPanel();
+            this.taskListPanel = this.mainGui.getTaskListPanel();
+            this.floatingTaskListPanel = this.mainGui.getFloatingTaskListPanel();
+            this.resultDisplay = this.mainGui.getResultDisplay();
+            this.commandBox = this.mainGui.getCommandBox();
+
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
-        testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
+        this.testApp = (TestApp) FxToolkit.setupApplication(() ->
+           new TestApp(this::getInitialData, getDataFileLocation()));
         FxToolkit.showStage();
-        while (!stage.isShowing()) ;
-        mainGui.focusOnMainApp();
+        while (!this.stage.isShowing()) {
+            ;
+        }
+        this.mainGui.focusOnMainApp();
     }
 
     /**
@@ -113,7 +120,7 @@ public abstract class TaskManagerGuiTest {
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfTasks();
+        int numberOfPeople = this.taskListPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
 
@@ -121,11 +128,24 @@ public abstract class TaskManagerGuiTest {
      * Asserts the message shown in the Result Display area is same as the given string.
      */
     protected void assertResultMessage(String expected) {
-        assertEquals(expected, resultDisplay.getText());
+        assertEquals(expected, this.resultDisplay.getText());
     }
 
     public void raise(BaseEvent e) {
         //JUnit doesn't run its test cases on the UI thread. Platform.runLater is used to post event on the UI thread.
         Platform.runLater(() -> EventsCenter.getInstance().post(e));
+    }
+
+    /**
+     * Asserts the tasks shown in each panel will match
+     */
+    protected void assertAllPanelsMatch(TestTask[] expectedList) {
+        TestUtil.sortTasks(expectedList);
+        TestTask[] expectedEvents = TestUtil.getEvents(expectedList);
+        TestTask[] expectedTasks = TestUtil.getTasks(expectedList);
+        TestTask[] expectedFloatingTasks = TestUtil.getFloatingTasks(expectedList);
+        assertTrue(this.eventListPanel.isListMatching(expectedEvents));
+        assertTrue(this.taskListPanel.isListMatching(expectedTasks));
+        assertTrue(this.floatingTaskListPanel.isListMatching(expectedFloatingTasks));
     }
 }

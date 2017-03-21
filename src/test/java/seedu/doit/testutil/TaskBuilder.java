@@ -5,6 +5,7 @@ import seedu.doit.model.item.Description;
 import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.StartTime;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 
@@ -32,9 +33,9 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withTags(String... tags) throws IllegalValueException {
-        task.setTags(new UniqueTagList());
+        this.task.setTags(new UniqueTagList());
         for (String tag : tags) {
-            task.getTags().add(new Tag(tag));
+            this.task.getTags().add(new Tag(tag));
         }
         return this;
     }
@@ -46,6 +47,11 @@ public class TaskBuilder {
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
+        return this;
+    }
+
+    public TaskBuilder withStartTime(String startTime) throws IllegalValueException {
+        this.task.setStartTime(new StartTime(startTime));
         return this;
     }
 

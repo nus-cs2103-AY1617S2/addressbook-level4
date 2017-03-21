@@ -16,7 +16,7 @@ public interface ReadOnlyTask {
 
     StartTime getStartTime();
 
-    EndTime getEndTime();
+    EndTime getDeadline();
 
     boolean getIsDone();
 
@@ -43,7 +43,7 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         String startTime = (getStartTime() != null) ? getStartTime().toString() : "None";
-        String endTime = (getEndTime() != null) ? getEndTime().toString() : "None";
+        String endTime = (getDeadline() != null) ? getDeadline().toString() : "None";
 
         builder.append(getName())
                .append(" Priority: ")
@@ -54,7 +54,7 @@ public interface ReadOnlyTask {
         }
         if (hasEndTime()) {
             builder.append(" End Time: ");
-            builder.append(getEndTime());
+            builder.append(getDeadline());
         }
         builder.append(" Description: ")
                .append(getDescription())
