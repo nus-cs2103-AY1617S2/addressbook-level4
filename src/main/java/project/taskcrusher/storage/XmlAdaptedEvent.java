@@ -9,6 +9,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.Tag;
@@ -70,7 +71,7 @@ public class XmlAdaptedEvent {
 
         final List<Timeslot> eventTimeslots = new ArrayList<>();
         for (XmlAdaptedTimeslot timeslot: timeslots) {
-            timeslots.add(timeslot.toModelType());
+            eventTimeslots.add(timeslot.toModelType());
         }
 
         final Name name = new Name(this.name);

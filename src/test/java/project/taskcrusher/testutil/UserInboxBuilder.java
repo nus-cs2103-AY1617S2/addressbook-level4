@@ -2,6 +2,8 @@ package project.taskcrusher.testutil;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.UserInbox;
+import project.taskcrusher.model.event.Event;
+import project.taskcrusher.model.event.UniqueEventList;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
@@ -23,6 +25,11 @@ public class UserInboxBuilder {
 
     public UserInboxBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         userInbox.addTask(task);
+        return this;
+    }
+
+    public UserInboxBuilder withEvent(Event event) throws UniqueEventList.DuplicateEventException {
+        userInbox.addEvent(event);
         return this;
     }
 

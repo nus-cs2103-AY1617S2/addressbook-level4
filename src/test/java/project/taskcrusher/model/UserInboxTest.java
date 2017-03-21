@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
@@ -75,6 +76,7 @@ public class UserInboxTest {
      */
     private static class UserInboxStub implements ReadOnlyUserInbox {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyEvent> events = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
         UserInboxStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
@@ -86,6 +88,12 @@ public class UserInboxTest {
         public ObservableList<ReadOnlyTask> getTaskList() {
             return tasks;
         }
+
+        @Override
+        public ObservableList<ReadOnlyEvent> getEventList() {
+            return events;
+        }
+
 
         @Override
         public ObservableList<Tag> getTagList() {

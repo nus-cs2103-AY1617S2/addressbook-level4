@@ -3,7 +3,7 @@ package project.taskcrusher.storage;
 import javax.xml.bind.annotation.XmlValue;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
-import project.taskcrusher.model.tag.Tag;
+import project.taskcrusher.model.event.Timeslot;
 
 public class XmlAdaptedTimeslot {
 
@@ -24,8 +24,8 @@ public class XmlAdaptedTimeslot {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedTimeslot(Timeslot timeslot) {
-        startDate = timeslot.startDate.toString();
-        endDate = timeslot.endDate.toString();
+        startDate = timeslot.start.toString();
+        endDate = timeslot.end.toString();
     }
 
     /**
@@ -33,7 +33,7 @@ public class XmlAdaptedTimeslot {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted timeslot
      */
-    public Tag toModelType() throws IllegalValueException {
+    public Timeslot toModelType() throws IllegalValueException {
         return new Timeslot(startDate, endDate);
     }
 }
