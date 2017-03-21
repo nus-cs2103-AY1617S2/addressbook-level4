@@ -71,4 +71,17 @@ public class DoneCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
     }
 
+    private boolean isAnyTaskDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Task taskToDone = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            if (taskToDone.getDone()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size());
+    }
 }
