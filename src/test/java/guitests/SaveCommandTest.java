@@ -33,7 +33,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
         assertEquals(Config.getInstance().getTodoListFilePath(), newPath);
 
         // Check that todo list loaded is the same as previous todo list
-        TodoList todoListAtSavedLocation = TodoList.load();
+        TodoList todoListAtSavedLocation = TodoList.getInstance();
         assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
                                                     new TypicalTestTodoLists().getTypicalTodoList()));
         assertResultMessage(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, newPath));
@@ -51,7 +51,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
             assertEquals(Config.getInstance().getTodoListFilePath(), newPath);
 
             // Check that todo list loaded is the same as previous todo list
-            TodoList todoListAtSavedLocation = TodoList.load();
+            TodoList todoListAtSavedLocation = TodoList.getInstance();
             assertTrue(TestUtil.compareTasksOfTodoLists(todoListAtSavedLocation,
                     new TypicalTestTodoLists().getTypicalTodoList()));
             assertResultMessage(String.format(StoreController.RESULT_MESSAGE_WARNING_OVERWRITE, newPath)

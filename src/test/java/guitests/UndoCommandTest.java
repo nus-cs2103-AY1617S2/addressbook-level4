@@ -24,7 +24,7 @@ public class UndoCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(undoCommand);
         assertFalse(isTaskShown(task));
 
-        assertFalse(TodoList.load().getTasks().contains(task));
+        assertFalse(TodoList.getInstance().getTasks().contains(task));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class UndoCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
 
-        assertFalse(TodoList.load().getTasks().contains(task));
-        assertFalse(TodoList.load().getTasks().contains(task2));
+        assertFalse(TodoList.getInstance().getTasks().contains(task));
+        assertFalse(TodoList.getInstance().getTasks().contains(task2));
     }
 }

@@ -18,7 +18,6 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.storage.JsonStorage;
 
 /**
  * A utility class for test cases.
@@ -71,7 +70,7 @@ public class TestUtil {
         Config config = Config.getInstance();
         config.setTodoListFilePath(todoListFilePath);
         config.save();
-        todoList.setStorage(new JsonStorage());
+        TodoList.getInstance().setTasks(todoList.getTasks());
         todoList.save();
     }
 

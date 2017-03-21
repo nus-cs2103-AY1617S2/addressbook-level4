@@ -13,6 +13,7 @@ import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.storage.TodoListStorage;
+import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
@@ -34,9 +35,12 @@ public abstract class ControllerTest {
     protected abstract Controller controllerUnderTest();
 
     @Before
-    public void setUp() throws DataStorageException {
+    public void setUp() throws DataStorageException, NoSuchFieldException, IllegalAccessException {
         when(storage.load()).thenReturn(new TypicalTestTodoLists().getTypicalTodoList());
-        todoList = new TodoList(storage);
+        TestUtil.resetSingleton(TodoList.class);
+        todoList = TodoList.getInstance();
+        todoList.setStorage(storage);
+        todoList.load();
         controller = controllerUnderTest();
     }
 
@@ -58,7 +62,7 @@ public abstract class ControllerTest {
      */
     protected void assertTasksNotExist(Task... tasks) {
         for (Task task : tasks) {
-            if (TodoList.load().getTasks().contains(task)) {
+            if (TodoList.getInstance().getTasks().contains(task)) {
                 fail("Task should not exist");
             }
         }

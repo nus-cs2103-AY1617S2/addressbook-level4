@@ -17,6 +17,7 @@ import org.mockito.junit.MockitoRule;
 
 import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.storage.TodoListStorage;
+import seedu.toluist.testutil.TestUtil;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
 /**
@@ -38,49 +39,29 @@ public class TodoListTest {
     private final Task task5 = new Task("Task 5");
 
     @Before
-    public void setUp() throws DataStorageException {
+    public void setUp() throws DataStorageException, NoSuchFieldException, IllegalAccessException {
+        TestUtil.resetSingleton(TodoList.class);
         when(storage.load()).thenReturn(sampleTodoList);
         todoList1 = new TodoList();
         todoList1.add(task1);
         todoList1.add(task2);
         todoList1.add(task3);
         todoList1.add(task4);
-        todoListWithStorage = new TodoList(storage);
+
+        todoListWithStorage = new TodoList();
+        todoListWithStorage.setStorage(storage);
+        todoListWithStorage.load();
     }
 
-    @Test
-    public void constructor_withoutStorage_defaultStorage() {
-        assertEquals(todoList1.getStorage(), TodoList.DEFAULT_STORAGE);
-    }
 
     @Test
-    public void constructor_withStorage_usesStorage() {
-        assertEquals(todoListWithStorage.getStorage(), storage);
-    }
-
-    @Test
-    public void constructor_withStorage_loadTasks() {
+    public void todoList_withStorage_loadTasks() {
         assertEquals(todoListWithStorage.getTasks(), sampleTodoList.getTasks());
     }
 
     @Test
-    public void constructor_replaceCurrentTodoList() {
-        TodoList anotherTodoList = new TodoList();
-        assertEquals(anotherTodoList, TodoList.load());
-    }
-
-    @Test
-    public void save_replaceCurrentTodoList() {
-        TodoList anotherTodoList = new TodoList();
-        anotherTodoList.add(new Task("ask"));
-        TodoList emptyTodoList = new TodoList();
-        anotherTodoList.save();
-        assertEquals(anotherTodoList, TodoList.load());
-    }
-
-    @Test
     public void multipleLoad_returnsSameTodoList() {
-        assertEquals(TodoList.load(), TodoList.load());
+        assertEquals(TodoList.getInstance(), TodoList.getInstance());
     }
 
     @Test

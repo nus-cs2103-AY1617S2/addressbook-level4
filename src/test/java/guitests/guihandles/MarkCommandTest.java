@@ -19,7 +19,7 @@ import seedu.toluist.testutil.TypicalTestTodoLists;
 public class MarkCommandTest extends ToLuistGuiTest {
     @Before
     public void setUp() {
-        for (Task task : TodoList.load().getTasks()) {
+        for (Task task : TodoList.getInstance().getTasks()) {
             task.setCompleted(false);
         }
         String switchViewtoAll = "switch a";
