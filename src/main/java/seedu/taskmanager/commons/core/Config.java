@@ -49,7 +49,7 @@ public class Config {
     }
 
     public void setTaskManagerFilePath(String taskManagerFilePath) throws DuplicateTaskManagerFilePathException {
-        if (this.taskManagerFilePath.equals(taskManagerFilePath)){
+        if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
             throw new DuplicateTaskManagerFilePathException();
         } else {
             this.taskManagerFilePath = taskManagerFilePath;

@@ -22,9 +22,10 @@ public class ChangeSaveLocationCommandParser {
 
         // assert args != null;
 
+        String stringLocation  = args;
         File checkLocation = new File(args.trim());
 
-        if (args.equals("")) {
+        if (("".equals(args))) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeSaveLocationCommand.MESSAGE_USAGE));
         }
@@ -32,11 +33,11 @@ public class ChangeSaveLocationCommandParser {
             return new IncorrectCommand(String.format(ChangeSaveLocationCommand.MESSAGE_USAGE, INVALID_SAVE_LOCATION));
         }
 
-        if (!(args.substring(args.length()-1).equals("/"))){
+        if (!(args.substring(args.length() - 1).equals("/"))){
             args += "/";
         }
 
-        String stringLocation = new String(args + "taskmanager.xml");
+        stringLocation += "taskmanager.xml";
         File saveLocation = new File(stringLocation.trim());
 
         return new ChangeSaveLocationCommand(saveLocation);

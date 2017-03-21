@@ -1,7 +1,6 @@
 package seedu.taskmanager.ui;
 
 import java.util.Date;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.controlsfx.control.StatusBar;
@@ -11,10 +10,8 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
-import seedu.taskmanager.commons.util.ConfigUtil;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.storage.XmlTaskManagerStorage;
 
