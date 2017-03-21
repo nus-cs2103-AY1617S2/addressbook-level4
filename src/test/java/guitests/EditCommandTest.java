@@ -57,15 +57,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find 5");
-
         String detailsToEdit = "Complete task 25";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 5;
-
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Complete task 25").build();
-
-        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
+        assertTrue(editedCard.getTitle().equals(detailsToEdit));
     }
 
     @Test

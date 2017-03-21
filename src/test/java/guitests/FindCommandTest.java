@@ -22,11 +22,6 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find 38"); // no results
-        assertFindResult("find 3", td.task3); // multiple results
-
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find 3");
     }
 
     @Test

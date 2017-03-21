@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.BookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConfirmCommand;
@@ -48,7 +49,7 @@ public class ConfirmCommandParser extends Parser {
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookCommand.MESSAGE_USAGE));
         } catch (Exception e) {
-            return new IncorrectCommand(e.getMessage());
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_TASKS_DISPLAYED_INDEX);
         }
     }
 

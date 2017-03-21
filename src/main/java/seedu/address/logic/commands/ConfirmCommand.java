@@ -78,7 +78,7 @@ public class ConfirmCommand extends Command {
         if (!taskToEdit.getBookings().isEmpty()) {
             ObservableList<Booking> bookingList = taskToEdit.getBookings().asObservableList();
             System.out.println(bookingList.size());
-            if (bookingSlotIndex > bookingList.size()) {
+            if (bookingSlotIndex >= bookingList.size()) {
                 throw new CommandException(MESSAGE_NO_SUCH_BOOKING);
             }
             Booking booking = bookingList.get(bookingSlotIndex);
