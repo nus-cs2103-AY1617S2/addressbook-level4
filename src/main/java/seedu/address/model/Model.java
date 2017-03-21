@@ -87,4 +87,14 @@ public interface Model {
      * Saves the command and current filteredTasks list.
      */
     public void saveCurrentState(String commandText);
+
+    /*
+     * translates task index on ui to internal integer index 
+     */
+    int parseUIIndex(String uiIndex);
+
+    /*
+     * checks if a given ui index is present in model
+     */
+    boolean isValidUIIndex(String uiIndex);
 }

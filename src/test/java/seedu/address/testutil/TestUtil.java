@@ -365,4 +365,28 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    /**
+     * Assigns relative indexes for test tasks
+     * The index is the same as the actual index shown on the UI
+     */
+    public static void assignUiIndex(TestTask[] taskList){
+        // initialise displayed index
+        int todayID = 1;
+        int futureID = 1;
+        int completedID = 1;
+        for(int i=0;i<taskList.length;i++){
+            TestTask tmpTask = taskList[i];
+            // set task id to be displayed, the id here is 1-based
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                tmpTask.setID("T"+todayID);
+                todayID++;
+            } else if (!tmpTask.isDone()) {
+                tmpTask.setID("F"+futureID);
+                futureID++;
+            } else {
+                tmpTask.setID("C"+completedID);
+                completedID++;
+            }
+        }
+    }
 }

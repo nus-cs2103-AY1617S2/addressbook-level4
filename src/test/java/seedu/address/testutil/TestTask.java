@@ -13,6 +13,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private UniqueTagList tags;
     private boolean done;
+    private String id;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -100,18 +101,6 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public int getID() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setID(int id) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public String getTaskAbsoluteDateTime() {
         // TODO Auto-generated method stub
         return null;
@@ -121,5 +110,15 @@ public class TestTask implements ReadOnlyTask {
     public DateTime getStartingTime() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getID() {
+        return this.id;
     }
 }
