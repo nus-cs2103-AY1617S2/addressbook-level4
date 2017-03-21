@@ -85,6 +85,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getTags());
         this.startTime = source.getStartTime();
         this.endTime = source.getEndTime();
+        this.isDone = source.getIsDone();
     }
 
     // ================ Getter and Setter methods ==============================
@@ -224,8 +225,8 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     @Override
     public boolean equals(Object other) {
         return (other == this // short circuit if same object
-        ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
-        ) && this.isSameStateAs((ReadOnlyTask) other));
+                    ) || ((other instanceof ReadOnlyTask // instanceof handles nulls
+                    ) && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     /**
