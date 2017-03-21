@@ -41,6 +41,23 @@ public class DateTime {
     }
 
     /**
+     * Checks if the DateTime is in the current week.
+     *
+     * @return true if the DateTime is in the current week
+     */
+    public boolean isCurrentWeek() {
+        LocalDateTime now = LocalDateTime.now();
+
+        // 1 for Monday, 7 for Sunday
+        int dayOfCurrentWeek = now.getDayOfWeek().getValue();
+
+        LocalDateTime startOfWeek = now.minusDays(dayOfCurrentWeek);
+        LocalDateTime endOfWeek = now.plusDays(7 - dayOfCurrentWeek);
+
+        return dateTime.isAfter(startOfWeek) && dateTime.isBefore(endOfWeek);
+    }
+
+    /**
      * Returns true if a given date is a valid task dateTime.
      * @throws IllegalValueException
      */
