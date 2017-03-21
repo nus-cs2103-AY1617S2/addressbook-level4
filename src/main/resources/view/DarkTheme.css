@@ -309,16 +309,15 @@
     -fx-font-size: 11;
 }
 
-
-#resultDisplayPlaceholder, #resultDisplay .content, #mainPane {
+#resultDisplayPlaceholder, #resultDisplay .content, #resultDisplay, #mainPane {
     -fx-font-family: "Roboto";
     -fx-font-size: 16;
-    -fx-text-box-border: none;
     -fx-background-color: #dd4b39;
+    -fx-background-radius: 0 0 0 0;
     -fx-focus-color: #dd4b39;
     -fx-faint-focus-color: #dd4b39;
     -fx-border-radius: 0 0 0 0;
-    -fx-background-radius: 0 0 0 0;
+    -fx-border-width: 0 0 0 0;
 }
 
 #commandTextField, #commandBoxPlaceholder {
