@@ -8,86 +8,89 @@ import java.util.logging.Level;
  */
 public class Config {
 
-	public static final String DEFAULT_CONFIG_FILE = "config.json";
+    public static final String DEFAULT_CONFIG_FILE = "config.json";
 
-	// Config values customizable through config file
-	private String appTitle = "Fast Task";
-	private Level logLevel = Level.INFO;
-	private String userPrefsFilePath = "preferences.json";
-	private String taskManagerFilePath = "data/TaskManagerData.xml";
-	private String taskManagerName = "MyTaskManager";
+    // Config values customizable through config file
+    private String appTitle = "Fast Task";
+    private Level logLevel = Level.INFO;
+    private String userPrefsFilePath = "preferences.json";
+    private String taskManagerFilePath = "data/TaskManagerData.xml";
+    private String taskManagerName = "MyTaskManager";
 
-	public String getAppTitle() {
-		return appTitle;
-	}
 
-	public void setAppTitle(String appTitle) {
-		this.appTitle = appTitle;
-	}
+    public String getAppTitle() {
+        return appTitle;
+    }
 
-	public Level getLogLevel() {
-		return logLevel;
-	}
+    public void setAppTitle(String appTitle) {
+        this.appTitle = appTitle;
+    }
 
-	public void setLogLevel(Level logLevel) {
-		this.logLevel = logLevel;
-	}
+    public Level getLogLevel() {
+        return logLevel;
+    }
 
-	public String getUserPrefsFilePath() {
-		return userPrefsFilePath;
-	}
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
+    }
 
-	public void setUserPrefsFilePath(String userPrefsFilePath) {
-		this.userPrefsFilePath = userPrefsFilePath;
-	}
+    public String getUserPrefsFilePath() {
+        return userPrefsFilePath;
+    }
 
-	public String getTaskManagerFilePath() {
-		return taskManagerFilePath;
-	}
+    public void setUserPrefsFilePath(String userPrefsFilePath) {
+        this.userPrefsFilePath = userPrefsFilePath;
+    }
 
-	public void setTaskManagerFilePath(String taskManagerFilePath) {
-		this.taskManagerFilePath = taskManagerFilePath;
-	}
+    public String getTaskManagerFilePath() {
+        return taskManagerFilePath;
+    }
 
-	public String getTaskManagerName() {
-		return taskManagerName;
-	}
+    public void setTaskManagerFilePath(String taskManagerFilePath) {
+        this.taskManagerFilePath = taskManagerFilePath;
+    }
 
-	public void setTaskManagerName(String taskManagerName) {
-		this.taskManagerName = taskManagerName;
-	}
+    public String getTaskManagerName() {
+        return taskManagerName;
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		if (other == this) {
-			return true;
-		}
-		if (!(other instanceof Config)) { // this handles null as well.
-			return false;
-		}
+    public void setTaskManagerName(String taskManagerName) {
+        this.taskManagerName = taskManagerName;
+    }
 
-		Config o = (Config) other;
 
-		return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
-				&& Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-				&& Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
-				&& Objects.equals(taskManagerName, o.taskManagerName);
-	}
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Config)) { //this handles null as well.
+            return false;
+        }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskManagerFilePath, taskManagerName);
-	}
+        Config o = (Config) other;
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("App title : " + appTitle);
-		sb.append("\nCurrent log level : " + logLevel);
-		sb.append("\nPreference file Location : " + userPrefsFilePath);
-		sb.append("\nLocal data file location : " + taskManagerFilePath);
-		sb.append("\nTask Manager name : " + taskManagerName);
-		return sb.toString();
-	}
+        return Objects.equals(appTitle, o.appTitle)
+                && Objects.equals(logLevel, o.logLevel)
+                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
+                && Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
+                && Objects.equals(taskManagerName, o.taskManagerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskManagerFilePath, taskManagerName);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("App title : " + appTitle);
+        sb.append("\nCurrent log level : " + logLevel);
+        sb.append("\nPreference file Location : " + userPrefsFilePath);
+        sb.append("\nLocal data file location : " + taskManagerFilePath);
+        sb.append("\nTask Manager name : " + taskManagerName);
+        return sb.toString();
+    }
 
 }
