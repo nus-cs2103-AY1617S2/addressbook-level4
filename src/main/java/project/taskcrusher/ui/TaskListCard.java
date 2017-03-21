@@ -9,9 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
-public class TaskCard extends UiPart<Region> {
+public class TaskListCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
     private static final String MESSAGE_NO_DEADLINE = "no deadline";
     private static final String MESSAGE_DEADLINE_BY = "By ";
     private static final String PRIORITY_PREPEND = " ";
@@ -31,7 +31,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskListCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getTaskName().toString());
         id.setText(displayedIndex + ". ");
@@ -65,7 +65,6 @@ public class TaskCard extends UiPart<Region> {
             //deadline.setText(MESSAGE_DEADLINE_BY + task.getDeadline().toString());
         } else {
             deadline.setText(MESSAGE_NO_DEADLINE);
-
         }
     }
 
