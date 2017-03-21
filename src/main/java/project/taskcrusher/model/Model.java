@@ -6,6 +6,7 @@ import java.util.Set;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
@@ -44,7 +45,7 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowAll();
+    void updateFilteredTaskListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
@@ -61,5 +62,11 @@ public interface Model {
 
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
+    UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
 
+    void updateFilteredEventListToShowAll();
+
+    void updateFilteredEventList(Set<String> keywords);
+
+    void updateFilteredEventList(Timeslot userInterestedTimeSlot);
 }

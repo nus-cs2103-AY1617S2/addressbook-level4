@@ -14,7 +14,7 @@ public class Event implements ReadOnlyEvent {
     private Location location;
     private Description description;
     private UniqueTagList tags;
-    private boolean isOverdue;
+    private boolean isPast;
 
     public Event(Name name, List<Timeslot> timeslots, Location location,
             Description description, UniqueTagList tags) {
@@ -22,10 +22,25 @@ public class Event implements ReadOnlyEvent {
 
         this.name = name;
         this.timeslots = timeslots;
-        this.isOverdue = false;
+        this.isPast = false;
         this.location = location;
         this.description = description;
         this.tags = new UniqueTagList(tags);
+    }
+
+    /**Checks if any of the Timeslot object in the timeslots list has overlapping start and end date with
+     * {@code another}
+     * @param another
+     * @return true if overlapping, false otherwise
+     */
+    public boolean hasOverlappingTimeslot(Timeslot another) {
+        assert another != null;
+        for (Timeslot ts : timeslots) {
+            if (ts.isOverlapping(another)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -56,6 +71,10 @@ public class Event implements ReadOnlyEvent {
         return this.location;
     }
 
+    public boolean isPast() {
+        //TODO: make this method take in a date object, and compare on the spot
+        return this.isPast;
+    }
     public void setEventName(Name name) {
         assert name != null;
         this.name = name;
@@ -81,11 +100,11 @@ public class Event implements ReadOnlyEvent {
     }
 
     public boolean isOverdue() {
-        return this.isOverdue;
+        return this.isPast;
     }
 
     public void setOverdue(boolean toSet) {
-        isOverdue = toSet;
+        isPast = toSet;
     }
 
 

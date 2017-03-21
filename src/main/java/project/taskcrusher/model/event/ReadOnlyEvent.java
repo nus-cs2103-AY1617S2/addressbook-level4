@@ -16,7 +16,8 @@ public interface ReadOnlyEvent {
     List<Timeslot> getTimeslots();
     Description getDescription();
     Location getLocation();
-    boolean isOverdue();
+    boolean isPast();
+    boolean hasOverlappingTimeslot(Timeslot another);
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

@@ -47,7 +47,7 @@ public class ListCommand extends Command {
     public CommandResult execute() {
 
         if (this.start == null) {
-            model.updateFilteredListToShowAll();
+            model.updateFilteredTaskListToShowAll();
         } else {
             model.updateFilteredTaskList(start);
         }

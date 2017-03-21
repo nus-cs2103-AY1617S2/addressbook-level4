@@ -56,14 +56,10 @@ public class Deadline {
 
     @Override
     public String toString() {
-        try {
-            if (this.hasDeadline()) {
-                return DateUtil.dateAsString(this.getDate().get());
-            } else {
-                return Deadline.NO_DEADLINE;
-            }
-        } catch (IllegalValueException e) {
-            return e.getMessage();
+        if (this.hasDeadline()) {
+            return DateUtil.dateAsString(this.getDate().get());
+        } else {
+            return Deadline.NO_DEADLINE;
         }
     }
 
@@ -82,12 +78,18 @@ public class Deadline {
      *         no deadline
      * @throws IllegalValueException
      */
-    public Optional<Date> getDate() throws IllegalValueException {
+    public Optional<Date> getDate() {
 
         Optional<Date> deadlineAsDate = Optional.empty();
 
         if (this.hasDeadline()) {
-            return Optional.of(DateUtil.parseDate(this.deadline, false));
+            try {
+                return Optional.of(DateUtil.parseDate(this.deadline, false));
+            } catch (IllegalValueException e) {
+                // TODO this should not occur by default, provided that this object was instantiated successfully.
+                e.printStackTrace();
+                return deadlineAsDate;
+            }
         } else {
             return deadlineAsDate;
         }

@@ -20,6 +20,11 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.contains(toCheck);
     }
 
+    /**search through the {@code internalList} to find any events with overlapping timeslot with the {@code
+     * candidate}.
+     * @param candidate
+     * @return {@code ObservableList} of events that have any overlapping timeslot with {@code candidate}.
+     */
     public ObservableList<Event> searchForOverlapingEvents(Timeslot candidate) {
         assert candidate != null;
         ObservableList<Event> overlappingEvents =  FXCollections.observableArrayList();
