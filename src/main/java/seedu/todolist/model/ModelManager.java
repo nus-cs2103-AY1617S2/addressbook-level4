@@ -12,8 +12,10 @@ import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.events.model.ToDoListChangedEvent;
+import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
+import seedu.todolist.logic.commands.ListCommand;
 import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
@@ -62,12 +64,19 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ToDoListChangedEvent(toDoList));
     }
 
+    //@@author A0144240W
+    /** Raises an event to indicate that the filteredList has changed */
+    private void indicateViewListChanged(String typeOfList) {
+        raise(new ViewListChangedEvent(typeOfList));
+    }
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
 
+    @Override
     public synchronized void completeTask(int filteredTaskListIndex, ReadOnlyTask target) throws TaskNotFoundException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.completeTask(toDoListIndex, target);
@@ -104,6 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
             return !task.isComplete();
         });
+        indicateViewListChanged(ListCommand.TYPE_INCOMPLETE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -113,6 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
             return task.isComplete();
         });
+        indicateViewListChanged(ListCommand.TYPE_COMPLETE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -133,11 +144,13 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
         });
+        indicateViewListChanged(ListCommand.TYPE_OVERDUE);
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
+        indicateViewListChanged(ListCommand.TYPE_ALL);
         filteredTasks.setPredicate(null);
     }
 

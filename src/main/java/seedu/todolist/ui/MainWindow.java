@@ -3,6 +3,7 @@ package seedu.todolist.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -12,9 +13,12 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.GuiSettings;
+import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.events.ui.ExitAppRequestEvent;
 import seedu.todolist.commons.util.FxViewUtil;
 import seedu.todolist.logic.Logic;
+import seedu.todolist.logic.commands.ListCommand;
+import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.UserPrefs;
 import seedu.todolist.model.task.ReadOnlyTask;
 
@@ -28,6 +32,8 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    private static final String LIST = "list";
+    private static final String SELECTED = "selected";
 
     private Stage primaryStage;
     private Logic logic;
@@ -54,6 +60,22 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private Button incompleteButton;
+
+    @FXML
+    private Button allButton;
+
+    @FXML
+    private Button completedButton;
+
+    @FXML
+    private Button overdueButton;
+
+    @FXML
+    private Button upcomingButton;
+
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -183,6 +205,36 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
+    @FXML
+    public void handleAllButton() throws CommandException {
+        String command = LIST + " " + ListCommand.TYPE_ALL;
+        logic.execute(command);
+    }
+
+    @FXML
+    public void handleCompletedButton() throws CommandException {
+        String command = LIST + " " + ListCommand.TYPE_COMPLETE;
+        logic.execute(command);
+    }
+
+    @FXML
+    public void handleIncompleteButton() throws CommandException {
+        String command = LIST + " " + ListCommand.TYPE_INCOMPLETE;
+        logic.execute(command);
+    }
+
+    //TODO some issue with overdue?
+    @FXML
+    public void handleOverdueButton() {
+        raise(new ViewListChangedEvent(ListCommand.TYPE_OVERDUE));
+    }
+
+    //TODO not done yet
+    @FXML
+    public void handleUpcomingButton() {
+        raise(new ViewListChangedEvent(ListCommand.TYPE_OVERDUE));
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -206,5 +258,38 @@ public class MainWindow extends UiPart<Region> {
     void releaseResources() {
         browserPanel.freeResources();
     }
+
+    //@@author A0144240W
+    public void changeButtonsBackToOriginalState() {
+        incompleteButton.getStyleClass().remove(SELECTED);
+        completedButton.getStyleClass().remove(SELECTED);
+        upcomingButton.getStyleClass().remove(SELECTED);
+        overdueButton.getStyleClass().remove(SELECTED);
+        allButton.getStyleClass().remove(SELECTED);
+    }
+
+    //@@author A0144240W
+    public void indicateButtonChange(String typeOfButton) {
+        changeButtonsBackToOriginalState();
+        switch(typeOfButton) {
+
+        case ListCommand.TYPE_INCOMPLETE:
+            incompleteButton.getStyleClass().add(SELECTED);
+            break;
+
+        case ListCommand.TYPE_COMPLETE:
+            completedButton.getStyleClass().add(SELECTED);
+            break;
+
+        case ListCommand.TYPE_OVERDUE:
+            overdueButton.getStyleClass().add(SELECTED);
+            break;
+
+        default:
+            allButton.getStyleClass().add(SELECTED);
+
+        }
+    }
+
 
 }

@@ -1,0 +1,7 @@
+{
+  "appTitle" : "DoMe!",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json",
+  "toDoListFilePath" : "data/todolist.xml",
+  "toDoListName" : "MyToDoList"
+}
