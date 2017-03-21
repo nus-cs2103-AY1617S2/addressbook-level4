@@ -89,18 +89,25 @@ public class CompletedTaskListPanel extends UiPart<Region> {
             flag = true;
 
             Timeline timeline = new Timeline();
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0)),
-                    new KeyFrame(Duration.millis(300.0d),
-                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT)));
+            timeline.getKeyFrames()
+                    .addAll(new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                            new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
+                            new KeyFrame(Duration.millis(300.0d),
+                                    new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 1)));
             timeline.play();
         } else {
             // collapse
             Timeline timeline = new Timeline();
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.ZERO,
-                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT)),
-                    new KeyFrame(Duration.millis(300.0d), new KeyValue(completedTaskListView.prefHeightProperty(), 0)));
+            timeline.getKeyFrames()
+                    .addAll(new KeyFrame(Duration.ZERO,
+                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT),
+                            new KeyValue(completedTaskListView.opacityProperty(), 1)),
+                            new KeyFrame(Duration.millis(200.0d),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
+                            new KeyFrame(Duration.millis(300.0d),
+                                    new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 0)));
             timeline.play();
             flag = false;
         }
