@@ -1,6 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.doit.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
@@ -14,7 +13,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
     public void delete() {
 
         //delete the first in the list
-        TestTask[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = this.td.getTypicalTasks();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
@@ -29,7 +28,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("delete " + currentList.length + 1);
+        this.commandBox.runCommand("delete " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
     }
@@ -42,12 +41,13 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestUtil.sortTasks(currentList);
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
+        this.commandBox.runCommand("delete " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous tasks except the deleted task
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertAllPanelsMatch(expectedRemainder);
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));

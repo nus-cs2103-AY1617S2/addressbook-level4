@@ -10,13 +10,13 @@ public class ClearCommandTest extends TaskManagerGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+        assertAllPanelsMatch(this.td.getTypicalTasks());
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(taskListPanel.isListMatching(td.hoon));
-        commandBox.runCommand("delete 1");
+        this.commandBox.runCommand(this.td.hoon.getAddCommand());
+        assertTrue(this.taskListPanel.isListMatching(this.td.hoon));
+        this.commandBox.runCommand("delete 1");
         assertListSize(0);
 
         //verify clear command works when the list is empty
@@ -24,7 +24,7 @@ public class ClearCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+        this.commandBox.runCommand("clear");
         assertListSize(0);
         assertResultMessage("All tasks has been cleared!");
     }

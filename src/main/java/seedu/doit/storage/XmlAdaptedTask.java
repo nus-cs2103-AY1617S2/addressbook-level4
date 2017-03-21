@@ -58,7 +58,7 @@ public class XmlAdaptedTask {
             this.startTime = null;
         }
         if (source.hasEndTime()) {
-            this.deadline = source.getEndTime().value;
+            this.deadline = source.getDeadline().value;
         } else {
             this.deadline = null;
         }

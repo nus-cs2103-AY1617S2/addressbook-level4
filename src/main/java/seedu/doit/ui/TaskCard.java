@@ -35,9 +35,9 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
 
         if (task.hasStartTime()) {
-            this.deadline.setText(task.getStartTime().value + " - " + task.getEndTime().value);
+            this.deadline.setText(task.getStartTime().value + " - " + task.getDeadline().value);
         } else if (task.hasEndTime()) {
-            this.deadline.setText(task.getEndTime().value);
+            this.deadline.setText(task.getDeadline().value);
         } else {
             this.deadline.setText("");
         }

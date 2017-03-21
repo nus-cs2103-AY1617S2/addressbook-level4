@@ -30,7 +30,6 @@
             </Menu>
          </menus>
       </MenuBar>
-
        <AnchorPane styleClass="status-bar" maxHeight="20.0" minHeight="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" VBox.vgrow="NEVER">
          <children>
             <Label  text="BY" textFill="WHITE" AnchorPane.leftAnchor="100" />
@@ -39,7 +38,6 @@
          </children>
       </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4, 0.5" VBox.vgrow="ALWAYS">
-
          <items>
             <VBox fx:id="taskList" minWidth="340" prefWidth="340">
                 <padding>
@@ -58,7 +56,6 @@
                   <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
-
             <VBox fx:id="floatingTaskList" minWidth="340" prefWidth="340">
 
                 <padding>
@@ -70,7 +67,6 @@
             </VBox>
           </items>
       </SplitPane>
-
       <AnchorPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder"  styleClass="anchor-pane-with-border" minHeight="100" prefHeight="100" maxHeight="100">
            <padding>
                <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>

@@ -29,7 +29,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     protected String getTextFromLabel(String fieldId) {
-        return getTextFromLabel(fieldId, node);
+        return getTextFromLabel(fieldId, this.node);
     }
 
     public String getFullName() {
@@ -69,16 +69,17 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     private Region getTagsContainer() {
-        return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
+        return this.guiRobot.from(this.node).lookup(TAGS_FIELD_ID).query();
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
             && getPriority().equals(task.getPriority().value)
-            && getDeadline().equals(task.getEndTime().value)
-            && getDescription().equals(task.getDescription().value)
-            && getTags().equals(getTags(task.getTags()));
+           // && (task.isFloatingTask() || getDeadline().equals(task.getDeadline().value))
+            && getDescription().equals(task.getDescription().value);
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
