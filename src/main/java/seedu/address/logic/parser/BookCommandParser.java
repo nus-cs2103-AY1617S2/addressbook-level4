@@ -10,6 +10,10 @@ import seedu.address.logic.commands.BookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 
+//@@author A0162877N
+/**
+* Parses input arguments and creates a new BookCommand object
+*/
 public class BookCommandParser extends Parser {
 
     public Command parse(String args) {

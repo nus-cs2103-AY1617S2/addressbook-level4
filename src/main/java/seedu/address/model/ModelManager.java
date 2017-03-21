@@ -75,6 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0162877N
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -84,6 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0162877N
     @Override
     public void undoPrevious(ObservableList<ReadOnlyTask> oldTaskState, ObservableList<Label> oldLabelState)
             throws InvalidUndoCommandException {
@@ -169,6 +171,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0162877N
         @Override
         public boolean run(ReadOnlyTask task) {
             String taskDetails = task.getAsSearchText();
@@ -185,6 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0162877N
     private class DateFilter {
         private Date startTime;
         private Date endTime;

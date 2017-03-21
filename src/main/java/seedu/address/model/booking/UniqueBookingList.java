@@ -19,6 +19,13 @@ import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.label.UniqueLabelList.DuplicateLabelException;
 
 //@@author A0162877N
+/**
+ * A list of bookings that enforces no nulls and uniqueness between its elements.
+ *
+ * Supports minimal set of list operations for the app's features.
+ *
+ * @see CollectionUtil#elementsAreUnique(Collection)
+ */
 public class UniqueBookingList implements Iterable<Booking>, Cloneable {
     private final ObservableList<Booking> internalList = FXCollections.observableArrayList();
 

@@ -12,6 +12,10 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+//@@author A0162877N
+/**
+* Parses input arguments and creates a new ConfirmCommand object
+*/
 public class ConfirmCommandParser extends Parser {
 
     private static final String DELIMITER = " ";

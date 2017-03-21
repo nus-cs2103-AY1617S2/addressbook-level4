@@ -11,6 +11,10 @@ import seedu.address.logic.dateparser.DateTimeManager;
 import seedu.address.logic.dateparser.DateTimeParser;
 
 //@@author A0162877N
+/**
+ * Represents a booking in DoOrDie Task Manager Application
+ * Guarantees: immutable; dates are valid as declared in {@link #isDateParsable(String)}
+ */
 public class Booking {
 
     public static final String MESSAGE_BOOKING_CONSTRAINTS =
