@@ -27,7 +27,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     public Task(Name name, Priority priority, StartTime startTime, EndTime endTime, Description description,
             UniqueTagList tags, boolean isDone) {
-        assert !CollectionUtil.isAnyNull(name, priority, startTime, endTime, description, tags, isDone);
+        assert !CollectionUtil.isAnyNull(name, startTime, endTime);
         this.name = name;
         this.priority = priority;
         this.startTime = startTime;
@@ -60,6 +60,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     public Task(Name name, Priority priority, EndTime endTime, Description description, UniqueTagList tags) {
         this(name, priority, new StartTime(), endTime, description, tags);
+        assert !CollectionUtil.isAnyNull(name, endTime);
     }
 
     /**
@@ -76,6 +77,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     public Task(Name name, Priority priority, Description description, UniqueTagList tags) {
         this(name, priority, new StartTime(), new EndTime(), description, tags);
+        assert !CollectionUtil.isAnyNull(name);
     }
 
     /**

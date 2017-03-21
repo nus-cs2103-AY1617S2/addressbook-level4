@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.doit.model.item.EndTime.MESSAGE_ENDTIME_CONSTRAINTS;
+import static seedu.doit.model.item.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
+import static seedu.doit.model.item.StartTime.MESSAGE_STARTTIME_CONSTRAINTS;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -205,11 +208,16 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 5 e/valid,deadline.butNoPriorityPrefix d/valid,description",
+        assertCommandFailure("add wrong args wrong args s/gg" +
+            "", expectedMessage);
+        assertCommandFailure("add Valid Name 5 s/valid,deadline.butNoPriorityPrefix d/valid,description",
                 expectedMessage);
-        assertCommandFailure("add Valid Name d/valid", expectedMessage);
-        assertCommandFailure("add Valid Name e/valid", expectedMessage);
+        assertCommandFailure("add d/valid", expectedMessage);
+        assertCommandFailure("add e/valid", expectedMessage);
+        assertCommandFailure("add Valid Task p/1",  MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Task e/invalid time" , MESSAGE_ENDTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Task s/invalid e/tomorrow ",  MESSAGE_STARTTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name e/gogo ",  MESSAGE_ENDTIME_CONSTRAINTS);
     }
 
     @Test
@@ -457,12 +465,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("low");
-            EndTime deadline = new EndTime("tomorrow");
+            EndTime endTime = new EndTime("tomorrow");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePriority, deadline, description, tags);
+            return new Task(name, privatePriority, endTime, description, tags);
         }
 
         /**
