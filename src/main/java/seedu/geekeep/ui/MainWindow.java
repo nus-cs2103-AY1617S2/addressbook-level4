@@ -33,14 +33,10 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    //private BrowserPanel browserPanel;
     private TaskListPanel floatingTaskListPanel;
     private TaskListPanel eventListPanel;
     private TaskListPanel deadlineListPanel;
     private Config config;
-
-    //@FXML
-    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -122,7 +118,6 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
 
-        //browserPanel = new BrowserPanel(browserPlaceholder);
         //to-do: correctly display the lists
         floatingTaskListPanel = new TaskListPanel("floatingTask", getTaskListPlaceholder());
         eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredTaskList());
@@ -225,14 +220,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getDeadlineListPanel() {
         return this.deadlineListPanel;
-    }
-
-    void loadPersonPage(ReadOnlyTask person) {
-        //browserPanel.loadPersonPage(person);
-    }
-
-    void releaseResources() {
-        //browserPanel.freeResources();
     }
 
 }
