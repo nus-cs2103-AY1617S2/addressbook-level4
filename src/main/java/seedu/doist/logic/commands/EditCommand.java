@@ -1,5 +1,6 @@
 package seedu.doist.logic.commands;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,8 +86,10 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
+        Date startDate = editTaskDescriptor.getStartDate().orElse(taskToEdit.getStartDate());
+        Date endDate = editTaskDescriptor.getEndDate().orElse(taskToEdit.getEndDate());
 
-        return new Task(updatedName, updatedPriority, finishStatus, updatedTags);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedTags, startDate, endDate);
     }
 
     /**
@@ -98,6 +101,8 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
         private Optional<FinishedStatus> finishStatus = Optional.empty();
+        private Optional<Date> startDate = Optional.empty();
+        private Optional<Date> endDate = Optional.empty();
 
         public EditTaskDescriptor() {
         }
@@ -106,14 +111,17 @@ public class EditCommand extends Command {
             this.desc = toCopy.getDesc();
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
-            this.finishStatus = toCopy.finishStatus;
+            this.finishStatus = toCopy.getFinishStatus();
+            this.startDate = toCopy.getStartDate();
+            this.endDate = toCopy.getEndDate();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags);
+            return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags,
+                    this.finishStatus, this.startDate, this.endDate);
 
         }
 
@@ -127,6 +135,16 @@ public class EditCommand extends Command {
             this.priority = priority;
         }
 
+        public void setStartDate(Optional<Date> startDate) {
+            assert startDate != null;
+            this.startDate = startDate;
+        }
+
+        public void setEndDate(Optional<Date> endDate) {
+            assert endDate != null;
+            this.endDate = endDate;
+        }
+
         public Optional<Description> getDesc() {
             return desc;
         }
@@ -137,6 +155,14 @@ public class EditCommand extends Command {
 
         public Optional<Priority> getPriority() {
             return priority;
+        }
+
+        public Optional<Date> getStartDate() {
+            return startDate;
+        }
+
+        public Optional<Date> getEndDate() {
+            return endDate;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
