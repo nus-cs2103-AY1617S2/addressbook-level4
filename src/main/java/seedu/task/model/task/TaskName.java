@@ -3,59 +3,59 @@ package seedu.task.model.task;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in the task manager. Guarantees: immutable; is valid
- * as declared in {@link #isValidTaskName(String)}
+ * Represents a Person's name in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class TaskName {
 
-	public static final String MESSAGE_TASK_NAME_CONSTRAINTS = "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS =
+            "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
 
-	/*
-	 * The first character of the address must not be a whitespace, otherwise
-	 * " " (a blank string) becomes a valid input.
-	 */
-	public static final String TASK_NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-	public final String fullTaskName;
+    public final String fullName;
 
-	/**
-	 * Validates given name.
-	 *
-	 * @throws IllegalValueException
-	 *             if given name string is invalid.
-	 */
-	public TaskName(String taskName) throws IllegalValueException {
-		assert taskName != null;
-		String trimmedTaskName = taskName.trim();
-		if (!isValidTaskName(trimmedTaskName)) {
-			throw new IllegalValueException(MESSAGE_TASK_NAME_CONSTRAINTS);
-		}
-		this.fullTaskName = trimmedTaskName;
-	}
+    /**
+     * Validates given name.
+     *
+     * @throws IllegalValueException if given name string is invalid.
+     */
+    public TaskName(String name) throws IllegalValueException {
+        assert name != null;
+        String trimmedName = name.trim();
+        if (!isValidName(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        }
+        this.fullName = trimmedName;
+    }
 
-	/**
-	 * Returns true if a given string is a valid task name.
-	 */
-	public static boolean isValidTaskName(String test) {
-		return test.matches(TASK_NAME_VALIDATION_REGEX);
-	}
+    /**
+     * Returns true if a given string is a valid person name.
+     */
+    public static boolean isValidName(String test) {
+        return test.matches(NAME_VALIDATION_REGEX);
+    }
 
-	@Override
-	public String toString() {
-		return fullTaskName;
-	}
 
-	@Override
-	public boolean equals(Object other) {
-		return other == this // short circuit if same object
-				|| (other instanceof TaskName // instanceof handles nulls
-						&& this.fullTaskName.equals(((TaskName) other).fullTaskName)); // state
-																						// check
-	}
+    @Override
+    public String toString() {
+        return fullName;
+    }
 
-	@Override
-	public int hashCode() {
-		return fullTaskName.hashCode();
-	}
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskName // instanceof handles nulls
+                && this.fullName.equals(((TaskName) other).fullName)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return fullName.hashCode();
+    }
 
 }

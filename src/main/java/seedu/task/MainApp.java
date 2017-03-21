@@ -36,6 +36,9 @@ import seedu.task.ui.UiManager;
  */
 public class MainApp extends Application {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final Version VERSION = new Version(1, 0, 0, true);
@@ -50,11 +53,19 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
+<<<<<<< HEAD
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+=======
+        logger.info("=============================[ Initializing Task Manager ]===========================");
+        super.init();
+
+        config = initConfig(getApplicationParameter("config"));
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
 
         userPrefs = initPrefs(config);
 
@@ -75,6 +86,7 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+<<<<<<< HEAD
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
@@ -89,6 +101,22 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
+=======
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
+        try {
+            taskManagerOptional = storage.readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample Task Manager");
+            }
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty Task Manager");
+            initialData = new TaskManager();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
+            initialData = new TaskManager();
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -144,7 +172,11 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
+<<<<<<< HEAD
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+=======
+            logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
             initializedPrefs = new UserPrefs();
         }
 
@@ -164,13 +196,21 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+<<<<<<< HEAD
         logger.info("Starting AddressBook " + MainApp.VERSION);
+=======
+        logger.info("Starting Task Manager " + MainApp.VERSION);
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
+<<<<<<< HEAD
         logger.info("============================ [ Stopping Address Book ] =============================");
+=======
+        logger.info("============================ [ Stopping Task Manager ] =============================");
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
@@ -188,6 +228,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+<<<<<<< HEAD
     	launch(args);        
     }
 }
@@ -350,3 +391,10 @@ public class MainApp extends Application {
 	}
 }
 >>>>>>> 202e325d26b599e44fa62606d82944632311936b
+=======
+        launch(args);
+    }
+}
+//test
+//test2
+>>>>>>> e1ca31a31eb3aa92bebcc274cdc0f5a5210e390a
