@@ -35,6 +35,10 @@ public class TaskCard extends UiPart<Region> {
 		}
 		if (task.getTaskStartTime() != null && task.getTaskEndTime() != null) {
 			taskEndTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
+		} else if (task.getTaskStartTime() != null) {
+			taskEndTime.setText(task.getTaskStartTime().toString());
+		} else if (task.getTaskEndTime() != null) {
+			taskEndTime.setText(task.getTaskEndTime().toString());
 		}
 		if (task.getTaskDescription() != null) {
 			taskDescription.setText(task.getTaskDescription().toString());

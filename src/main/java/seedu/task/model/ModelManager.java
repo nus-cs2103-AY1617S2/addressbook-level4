@@ -37,12 +37,10 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskmanager = new TaskManager(addressBook);
         filteredTasks = new FilteredList<>(this.taskmanager.getTaskList());
     }
-    
+    //brute force pattern matching algorithm
     public static boolean patternStringMatch(String p, String t) {
     	int i = 0;
     	int j = 0;
-    	System.out.println(p);
-    	System.out.println(t);
     	while (i <= t.length() - p.length()) {
     		if (p.substring(j, j + 1).equals(t.substring(i + j, i + j + 1))) {
     			j++;

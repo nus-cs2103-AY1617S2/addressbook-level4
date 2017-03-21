@@ -10,26 +10,29 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 3. Click `Run As` > `Java Application`
 4. The GUI should appear in a few seconds.
 
-## Viewing help : `help`
+## Getting Help : `help`
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> Typing `help` will create a pop up of this User Guide on the user's computer. Internet connection is required. 
+
+## Listing All Tasks : `list`
+Shows a list of all active tasks.<br>
+Format: `list`
  
-## Adding a task : `add`
+## Adding a Task : `add`
 Adds a task to the task manager<br>
 Format: `add TASKNAME [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` 
  
-> Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional, 
-> A format hint will be added to the command line so users know how to input the correct format
+> Words in `UPPER_CASE` are the parameters, items in `[SQUARE_BRACKETS]` are optional. 
+> `add` and `TASKNAME` must be in the order shown, but there is not set order for all other parameters.
+> A format hint will be added if the user types in an incorrect command. 
 
-Examples: 
-* `add groceries shopping 030117 0900 1200 Cold Storage Buy Extra milk`
+> `d/DATE` can be entered in the format `12/12/12` or `12-12-12`. `s/STARTTIME` and `e/ENDTIME` can be entered in the format `12:12` or `1212`. Time is formated using a 24 hour clock. 
 
-## Listing all tasks : `list`
-Shows a list of all active tasks.<br>
-Format: `list`
+Example: 
+* `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
 
-## Finding all tasks containing any keyword in their name: `find`
+## Finding a Task: `find`
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -37,10 +40,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 and tasks matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples: 
-* `find groceries`<br>
-  Returns `groceries shopping` but not `groceries`
+* `find groceries` returns `Groceries Shopping`
 
-## Deleting a task : `delete`
+## Deleting a Task : `delete`
 Deletes a specified task from the task manager. Irreversible.<br>
 Format: `delete INDEX`
 
@@ -49,11 +51,9 @@ Format: `delete INDEX`
   `INDEX` must be an exact match in order for the function to work.
 
 Examples: 
-* `list`<br>
-  `delete groceries shopping`<br>
-  Deletes groceries shopping in the task manager.
+* `delete 2`<br>
   
-## Editing a task : `edit`
+## Editing a Task : `edit`
 Edits a specified tasks from the task manager. Irreversible.<br>
 Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
@@ -61,23 +61,24 @@ Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 task number shown in the list. `INDEX` must be an exact match in order 
 for the function to work.
 
-## Clearing all entries : `clear`
+Examples: 
+* `edit 2` m/Go to Ralph's
+
+## Googling a Task or Phrase: `google` 
+Format: `google [INDEX] [KEYWORDS]`
+> Googles the task name at the specified index or Googles the key words that the user enters. A user can additionally Google a task name by single clicking on a task.
+
+## Clearing All Entries : `clear`
 Clears all tasks from the task manager.<br>
 Format: `clear`  
 
-## Exiting the program : `exit`
+## Exiting the Program : `exit`
 Exits the program.<br>
 Format: `exit`  
 
-## Saving the data 
+## Saving the Data 
 Tasks manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-## Changing the save location
-Tasks manager data are saved in a file called `Tasksmanager.txt` in the project root folder.
-You can change the location by specifying the file path as a program argument.<br>
-
-> The file name must end in `.txt` for it to be acceptable to the program.
->
-> When running the program inside Eclipse, you can 
-  [set command line parameters before running the program](http://stackoverflow.com/questions/7574543/how-to-pass-console-arguments-to-application-in-eclipse).
+## Save Location
+Tasks manager data are saved in a file called `TasksManagerData.xml` in the project root folder.

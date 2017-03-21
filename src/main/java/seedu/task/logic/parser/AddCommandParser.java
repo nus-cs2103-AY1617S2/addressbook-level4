@@ -10,6 +10,7 @@ import static seedu.task.logic.parser.CliSyntax.PREFIX_START_TIME;
 import java.util.NoSuchElementException;
 
 import seedu.task.logic.parser.ParserUtil;
+import seedu.task.model.task.TaskName;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
@@ -29,14 +30,22 @@ public class AddCommandParser {
                 new ArgumentTokenizer(PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
-            return new AddCommand(
+            /*return new AddCommand(
                     argsTokenizer.getPreamble().get(),
                     argsTokenizer.getValue(PREFIX_DATE).get(),
                     argsTokenizer.getValue(PREFIX_START_TIME).get(),
                     argsTokenizer.getValue(PREFIX_END_TIME).get(),
                     argsTokenizer.getValue(PREFIX_DESCRIPTION).get(),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
-            );
+            );*/
+        	return new AddCommand(
+        			new TaskName(argsTokenizer.getPreamble().get()),
+                    ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)),
+                    ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_START_TIME)),
+                    ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_END_TIME)),
+                    ParserUtil.parseString(argsTokenizer.getValue(PREFIX_DESCRIPTION))
+                    );
+                    
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
