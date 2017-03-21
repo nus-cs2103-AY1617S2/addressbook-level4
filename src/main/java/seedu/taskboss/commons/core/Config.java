@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "TaskBoss App";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskBossFilePath = "data/taskboss.xml";
+    private String taskBossFilePath = "/taskboss.xml";
     private String taskBossName = "MyTaskBoss";
 
 
