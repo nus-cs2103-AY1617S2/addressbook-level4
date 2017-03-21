@@ -73,10 +73,7 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        Priority priority = null;
-        if (this.priority != null) {
-            priority = new Priority(Priority.parseXmlString(this.priority));
-        }
+        Priority priority = (this.priority != null) ? new Priority(Priority.parseXmlString(this.priority)) : null;
         final Status status = new Status(this.status);
         final Note note = new Note(this.note);
         final DateTime startTime = new DateTime(this.startTime);
