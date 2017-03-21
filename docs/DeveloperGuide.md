@@ -135,6 +135,19 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+<!-- @@author A0114395E -->
+The Sequence Diagram below shows how ToDoApp handles undo request from the user.
+
+@TODO insert diagram here
+
+> Note how `StateManager` is implemented as a Singleton. This is by design, as we do not want more than one instance of a `StateManager` to handle undo/redo states. The `StateManager` consists of 2 stacks - `undoStack` & `redoStack`, holding a `StateCommandPair` object. <br>
+> The `StateCommandPair` class contains of 2 commands. The Command itself, and the inverse of it's Command. The inverse command is evaluated during the parsing of the actual command. <br><br>
+> When `undo` command is invoked, we pop the `StateCommandPair` from `undoStack` and put it on `redoStack`. We invoke the `undoCommand` from the `StateCommandPair`. <br>
+> Vice versa, when `redo` command is invoked, we pop the `StateCommandPair` from `redoStack` and put it on the `undoStack`. We then invoke the `executeCommand` from `StateCommandPair`. <br><br>
+> When the user performs any action, the redo stack is cleared. <br>
+> Undoability and Redoability are defined by whether either stack is empty, as well as if an action is undo-able, i.e only `add`, `edit`, `delete` commands.
+<!-- @@author -->
+
 The sections below give more details of each component.
 
 ### 2.2. UI component
@@ -602,4 +615,3 @@ Cons:
 * Not much integrations
 * No options for subtasks
 * No repeat options
-
