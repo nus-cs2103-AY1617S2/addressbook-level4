@@ -9,7 +9,7 @@ import seedu.doit.model.tag.UniqueTagList;
  * Represents a Task in the task manager. Guarantees: details are present and
  * not null, field values are validated.
  */
-public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
+public class Task implements ReadOnlyTask {
 
     private Name name;
     private Priority priority;
@@ -206,6 +206,22 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return (!hasStartTime() && hasEndTime());
     }
 
+    /**
+     * Returns 1 for task
+     * 2 for event
+     * 3 for floating tasks
+     */
+    @Override
+    public int getItemType() {
+        if (isTask()) {
+            return 1;
+        } else if (isEvent()) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
     // ================ Misc methods ==============================
 
     /**
@@ -236,9 +252,6 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return getAsText();
     }
 
-
-    // ================ Sort methods ==============================
-
     @Override
     public boolean equals(Object other) {
         return (other == this // short circuit if same object
@@ -246,73 +259,4 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
                     ) && this.isSameStateAs((ReadOnlyTask) other));
     }
 
-    /**
-     * Compares the current task with another Task other. The current task is
-     * considered to be less than the other task if 1) This item has a earlier
-     * start time associated 2) both items are not events but this item has a
-     * later end time 3) but this task has a lexicographically smaller name
-     * (useful when sorting tasks in testing)
-     */
-    @Override
-    public int compareTo(ReadOnlyTask other) {
-        return compareDone(other);
-    }
-
-    private int compareName(ReadOnlyTask other) {
-        return this.getName().toString().compareToIgnoreCase(other.getName().toString());
-    }
-
-    /**
-     * Compares the current task with another Task other. The current item is
-     * considered to be less than the other item if it is done and the other is
-     * not done Items that have equal done status will be compared using
-     * compareItems
-     */
-    private int compareDone(ReadOnlyTask other) {
-        if ((this.getIsDone() == true) && (other.getIsDone() == true)) {
-            compareItems(other);
-        } else if ((this.getIsDone() == true) && (other.getIsDone() == false)) {
-            return 1;
-        } else if ((this.getIsDone() == false) && (other.getIsDone() == true)) {
-            return -1;
-        }
-        return compareItems(other);
-    }
-
-    /**
-     * Compares the current item with another item other. returns -1 if other
-     * item is greater than current item return 0 is both items are equal return
-     * 1 if other item is smaller than current item The ranking are as follows
-     * from highest: 1) tasks 2) events 3) floating tasks If both have same
-     * rankings, then compare names
-     */
-    public int compareItems(ReadOnlyTask other) {
-
-        if (this.isTask() && other.isTask()) {
-            return compareName(other);
-        } else if (this.isTask() && other.isEvent()) {
-            return -1;
-        } else if (this.isTask() && other.isFloatingTask()) {
-            return -1;
-        }
-
-        if (this.isEvent() && other.isEvent()) {
-            return compareName(other);
-        } else if (this.isEvent() && other.isTask()) {
-            return 1;
-        } else if (this.isEvent() && other.isFloatingTask()) {
-            return -1;
-        }
-
-        if (this.isFloatingTask() && other.isFloatingTask()) {
-            return compareName(other);
-        } else if (this.isFloatingTask() && other.isTask()) {
-            return 1;
-        } else if (this.isFloatingTask() && other.isEvent()) {
-            return 1;
-        }
-
-        // Should never reach this
-        return 0;
-    }
 }

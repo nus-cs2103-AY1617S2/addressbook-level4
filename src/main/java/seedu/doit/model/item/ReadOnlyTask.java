@@ -67,7 +67,7 @@ public interface ReadOnlyTask {
 
     boolean hasEndTime();
 
-    int compareTo(ReadOnlyTask other);
+    int getItemType();
 
     boolean isTask();
 

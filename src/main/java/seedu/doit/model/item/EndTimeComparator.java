@@ -29,36 +29,24 @@ public class EndTimeComparator implements TaskComparator {
      * rankings, then compare names
      */
     private int compareItems(ReadOnlyTask curr, ReadOnlyTask other) {
+        Integer currType = curr.getItemType();
+        Integer otherType = other.getItemType();
+        int compareInt = currType.compareTo(otherType);
 
-        if (curr.isTask() && other.isTask()) {
-            return compareName(curr, other);
-        } else if (curr.isTask() && other.isEvent()) {
-            return -1;
-        } else if (curr.isTask() && other.isFloatingTask()) {
-            return -1;
+        if (compareInt == 0) {
+            switch(currType) {
+            case 1:
+                //fallthrough
+            case 2:
+                return compareEndTime(curr, other);
+            default:
+                return compareName(curr, other);
+            }
         }
-
-        if (curr.isEvent() && other.isEvent()) {
-            return compareStartTime(curr, other);
-        } else if (curr.isEvent() && other.isTask()) {
-            return 1;
-        } else if (curr.isEvent() && other.isFloatingTask()) {
-            return -1;
-        }
-
-        if (curr.isFloatingTask() && other.isFloatingTask()) {
-            return compareName(curr, other);
-        } else if (curr.isFloatingTask() && other.isTask()) {
-            return 1;
-        } else if (curr.isFloatingTask() && other.isEvent()) {
-            return 1;
-        }
-
-        // Should never reach this
-        return 0;
+        return compareInt;
     }
 
-    private int compareStartTime(ReadOnlyTask curr, ReadOnlyTask other) {
+    private int compareEndTime(ReadOnlyTask curr, ReadOnlyTask other) {
         return curr.getEndTime().compareTo(other.getEndTime());
     }
 

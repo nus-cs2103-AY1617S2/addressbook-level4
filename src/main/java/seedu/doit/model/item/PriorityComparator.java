@@ -29,33 +29,14 @@ public class PriorityComparator implements TaskComparator {
      * rankings, then compare names
      */
     private int compareItems(ReadOnlyTask curr, ReadOnlyTask other) {
+        Integer currType = curr.getItemType();
+        Integer otherType = other.getItemType();
+        int compareInt = currType.compareTo(otherType);
 
-        if (curr.isTask() && other.isTask()) {
+        if (compareInt == 0) {
             return comparePriority(curr, other);
-        } else if (curr.isTask() && other.isEvent()) {
-            return -1;
-        } else if (curr.isTask() && other.isFloatingTask()) {
-            return -1;
         }
-
-        if (curr.isEvent() && other.isEvent()) {
-            return comparePriority(curr, other);
-        } else if (curr.isEvent() && other.isTask()) {
-            return 1;
-        } else if (curr.isEvent() && other.isFloatingTask()) {
-            return -1;
-        }
-
-        if (curr.isFloatingTask() && other.isFloatingTask()) {
-            return comparePriority(curr, other);
-        } else if (curr.isFloatingTask() && other.isTask()) {
-            return 1;
-        } else if (curr.isFloatingTask() && other.isEvent()) {
-            return 1;
-        }
-
-        // Should never reach this
-        return 0;
+        return compareInt;
     }
 
     private int comparePriority(ReadOnlyTask curr, ReadOnlyTask other) {
