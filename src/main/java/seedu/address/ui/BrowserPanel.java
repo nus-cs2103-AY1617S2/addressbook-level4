@@ -30,7 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     public void loadActivityPage(ReadOnlyActivity activity) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + activity.getDescription().description.replaceAll(" ", "+"));
+        loadPage("https://www.google.com.sg/maps/search/" + activity.getLocation().value.replaceAll(" ", "+"));
     }
 
     public void loadPage(String url) {
