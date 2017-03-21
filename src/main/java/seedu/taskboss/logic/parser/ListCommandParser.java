@@ -17,6 +17,8 @@ import seedu.taskboss.model.category.Category;
  */
 public class ListCommandParser {
 
+    private static final String EMPTY_STRING = "";
+
     //@@author A0147990R
     /**
      * Returns a ListCommand if there is no argument.
@@ -24,7 +26,7 @@ public class ListCommandParser {
      * and returns an ListByCategoryCommand object for execution.
      */
     public Command parse(String args) {
-        if ("".equals(args)) {
+        if (EMPTY_STRING.equals(args)) {
             return new ListCommand();
         }
 
