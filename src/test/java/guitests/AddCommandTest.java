@@ -13,6 +13,10 @@ import seedu.doit.testutil.TypicalTestTasks;
 
 public class AddCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be low med high";
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be "
+            + "2 alphanumeric/period strings separated by '@'";
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Item End Time should be 2 alphanumeric"
+            + "/period strings separated by '@'";
     @Test
     public void add() throws IllegalValueException {
         //add one floating task
@@ -55,11 +59,11 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
         //invalid start time
-        //this.commandBox.runCommand("add invalid2 s/kjsdf e/today p/high d/sss");
-        //assertResultMessage(StartTime¡£MESSAGE_STARTTIME_CONSTRAINTS);
+        this.commandBox.runCommand("add invalid2 s/kjsdf e/today p/high d/sss");
+        assertResultMessage(MESSAGE_STARTTIME_CONSTRAINTS);
         //invalid end time
-        //this.commandBox.runCommand("add invalid3 e/kjdgf p/high d/sss");
-        //assertResultMessage("Invalid Date Format: " + "kjdgf");
+        this.commandBox.runCommand("add invalid3 e/kjdgf p/high d/sss");
+        assertResultMessage(MESSAGE_ENDTIME_CONSTRAINTS);
         //invalid priority
         this.commandBox.runCommand("add invalid4 p/dfjkhd d/sss");
         assertResultMessage(MESSAGE_PRIORITY_CONSTRAINTS);
