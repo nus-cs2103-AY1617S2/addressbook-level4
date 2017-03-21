@@ -40,10 +40,9 @@ public class ModelManager extends ComponentManager implements Model {
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
- 
+        this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         completedTasks = new FilteredList<>(this.taskManager.getCompletedTaskList());
-        this.taskManager = new TaskManager(taskManager);
     }
 
     public ModelManager() {
