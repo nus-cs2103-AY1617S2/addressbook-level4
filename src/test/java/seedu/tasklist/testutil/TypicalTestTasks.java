@@ -23,7 +23,7 @@ public class TypicalTestTasks {
                     .withTags("2103", "class").withStartDate("15/3/2017 15:00:10")
                     .withEndDate("15/3/2017 18:00:10").build();
             homework = new FloatingTaskBuilder().withName("CS3245 homework 3")
-                    .withComment("discuss with classmates").withPriority("high")
+                    .withComment("discuss with classmates").withPriority("low")
                     .withStatus(false)
                     .withTags("class").build();
             groceries = new FloatingTaskBuilder().withName("Buy groceries").withComment("go NTUC")

@@ -132,16 +132,16 @@ Format: list
 > List shows uncompleted tasks first before completed tasks
 
 ### 2.8. Sorting the tasks: sort
-Sorts command based on task name, starting date, ending date or priority level.<br>
-Format: sort {TASK}{FROM}{TO}{PRIORITY}
+Sorts command based on task name, date, priority level.<br>
+Format: sort {TASK_DETAILS}{DATE}{PRIORITY}
+>> Only 1 of 3 parameters can be used
 
-> task: Sorts based on task name in alphabetical order<br>
-> start: Sorts based on start date<br>
-> end: Sorts based on end date<br>
-> priority: Sorts based on priority assigned starting with the highest priority
+> n: Sorts based on task name in alphabetical order<br>
+> d: Sorts based on date starting with the earliest date<br>
+> p: Sorts based on priority assigned starting with the highest priority <br>
 
 Example:
-* sort priority<br>
+* sort p<br>
 
 > Displays all tasks sorted according to priority
 
@@ -219,8 +219,8 @@ Format: exit
 * **Help** : `help` <br>
   	e.g. `help`
 
-* **Sort** : `sort {TASK}{FROM}{TO}{PRIORITY}` <br>
-  	e.g.`sort high`
+* **Sort** : `sort {TASK_DETAILS}{DATE}{PRIORITY}` <br>
+  	e.g.`sort n`
 
 * **Undo** : `undo` <br>
 	e.g. `undo`

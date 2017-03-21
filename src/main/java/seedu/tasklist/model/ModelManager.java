@@ -181,6 +181,28 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    /**
+     * Sort based on parameter specified
+     * @param parameter
+     */
+    public void sortTaskList(String parameter) {
+        assert parameter != null;
+        switch (parameter) {
+        case "Name":
+            taskList.sortByName();
+            break;
+        case "Priority":
+            taskList.sortByPriority();
+            break;
+        case "Date":
+            taskList.sortByDate();
+            break;
+        default:
+            break;
+        }
+        indicateTaskListChanged();
+    }
+
     @Override
     public void updateFilteredTaskListTag(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));

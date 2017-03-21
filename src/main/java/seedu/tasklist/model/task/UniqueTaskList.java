@@ -150,4 +150,7 @@ public class UniqueTaskList implements Iterable<Task> {
     @SuppressWarnings("serial")
     public static class TaskNotFoundException extends Exception {}
 
+    public ObservableList<Task> getInternalList() {
+        return internalList;
+    }
 }
