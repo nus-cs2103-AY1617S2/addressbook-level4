@@ -61,6 +61,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords as category*/
     void updateFilteredTaskListByCategory(Category category);
 
+    /** clear all tasks in the filtered task list by the given keywords as category*/
+    void clearTasksByCategory(Category category);
+
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException;
 

@@ -21,6 +21,8 @@ import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
  */
 public class AddCommandParser {
 
+    private static final String EMPTY_STRING = "";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -52,7 +54,7 @@ public class AddCommandParser {
         try {
             return test.get();
         } catch (NoSuchElementException nsee) {
-            return "";
+            return EMPTY_STRING;
         }
     }
 
@@ -60,7 +62,7 @@ public class AddCommandParser {
         try {
             return test.get();
         } catch (NoSuchElementException nsee) {
-            return "";
+            return EMPTY_STRING;
         }
     }
 
@@ -68,7 +70,7 @@ public class AddCommandParser {
         try {
             return test.get();
         } catch (NoSuchElementException nsee) {
-            return "";
+            return EMPTY_STRING;
         }
     }
 

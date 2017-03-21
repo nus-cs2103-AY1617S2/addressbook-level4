@@ -72,7 +72,7 @@ public class Parser {
 
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_WORD_SHORT:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD_SHORT:
