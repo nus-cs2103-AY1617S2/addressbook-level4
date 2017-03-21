@@ -160,7 +160,7 @@ public class LogicManagerTest {
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
-        if (!"sort".equals(inputCommand)) {
+        if (!inputCommand.contains("sort")) {
             assertEquals(expectedTaskManager, latestSavedTaskManager);
         }
     }
