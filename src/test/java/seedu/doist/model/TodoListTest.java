@@ -19,30 +19,30 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
 import seedu.doist.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class TodoListTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final TodoList addressBook = new TodoList();
+    private final TodoList todoList = new TodoList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), todoList.getTaskList());
+        assertEquals(Collections.emptyList(), todoList.getTagList());
     }
 
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        addressBook.resetData(null);
+        todoList.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         TodoList newData = new TypicalTestTasks().getTypicalTodoList();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        todoList.resetData(newData);
+        assertEquals(newData, todoList);
     }
 
     @Test
@@ -51,10 +51,10 @@ public class AddressBookTest {
         // Repeat td.alice twice
         List<Task> newPersons = Arrays.asList(new Task(td.laundry), new Task(td.laundry));
         List<Tag> newTags = td.laundry.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TodoListStub newData = new TodoListStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        todoList.resetData(newData);
     }
 
     @Test
@@ -64,20 +64,20 @@ public class AddressBookTest {
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        TodoListStub newData = new TodoListStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        todoList.resetData(newData);
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTodoList {
+    private static class TodoListStub implements ReadOnlyTodoList {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
+        TodoListStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }

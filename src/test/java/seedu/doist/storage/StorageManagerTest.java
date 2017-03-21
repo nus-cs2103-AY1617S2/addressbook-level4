@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.doist.model.AliasListMap;
@@ -97,6 +98,17 @@ public class StorageManagerTest {
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
+    @Test
+    public void handleAliasListMapChangedEvent_exceptionThrown_eventRaised() throws IOException {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlTodoListStorage("dummy"),
+                                             new XmlAliasListMapStorageExceptionThrowingStub("dummy"),
+                                             new JsonUserPrefsStorage("dummy"));
+        EventsCollector eventCollector = new EventsCollector();
+        storage.handleAliasListMapChangedEvent(new AliasListMapChangedEvent(new AliasListMap()));
+        assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
+    }
+
 
     /**
      * A Stub class to throw an exception when the save method is called
@@ -113,5 +125,19 @@ public class StorageManagerTest {
         }
     }
 
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlAliasListMapStorageExceptionThrowingStub extends XmlAliasListMapStorage {
+
+        public XmlAliasListMapStorageExceptionThrowingStub(String filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveAliasListMap(ReadOnlyAliasListMap todoList, String filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
 
 }
