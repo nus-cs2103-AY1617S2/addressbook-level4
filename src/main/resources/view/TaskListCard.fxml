@@ -49,8 +49,11 @@
                               <HBox.margin>
                                  <Insets right="120.0" />
                               </HBox.margin></Label>
+                                 <FlowPane fx:id="tags">
+                              <HBox.margin>
+                                 <Insets top="5.0" />
+                              </HBox.margin></FlowPane>
                                 </HBox>
-                              <FlowPane fx:id="tags" />
                             </children>
                         </HBox>
                     </children>
