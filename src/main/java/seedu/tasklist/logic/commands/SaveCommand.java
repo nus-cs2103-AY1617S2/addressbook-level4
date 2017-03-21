@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import seedu.tasklist.commons.core.Config;
 import seedu.tasklist.commons.util.ConfigUtil;
 
+//@@author A0141993X
+/**
+ * SAve user data file for task list.
+ */
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";

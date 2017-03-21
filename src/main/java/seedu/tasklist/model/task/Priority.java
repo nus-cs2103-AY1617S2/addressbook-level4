@@ -104,7 +104,7 @@ public class Priority {
     public int hashCode() {
         return value.hashCode();
     }
-
+//@@author A0141993X
     /** Compares the priority of one task with another */
     public int compareTo(Priority priority) {
         Integer thisValue = 0;
