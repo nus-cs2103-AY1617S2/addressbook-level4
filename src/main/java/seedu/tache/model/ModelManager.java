@@ -95,7 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-
+    //@@author A0139925U
     @Override
     public void updateFilteredListToShowUncompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
@@ -105,10 +105,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowCompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
     }
-
+    //@@author
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -152,7 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-
+        //@@author A0139925U
         @Override
         public boolean run(ReadOnlyTask task) {
             String[] nameElements = task.getName().fullName.split(" ");
@@ -171,13 +171,13 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent()
                     || partialMatch;
         }
-
+        //@@author
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
+    //@@author A0139925U
     private class ActiveQualifier implements Qualifier {
         private boolean isActive;
 
@@ -200,40 +200,37 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private class DateQualifier implements Qualifier {
-        private Set<String> dateKeyWords;
+    private class DateTimeQualifier implements Qualifier {
+        private Set<String> dateTimeKeyWords;
 
-        DateQualifier(Set<String> dateKeyWords) {
-            this.dateKeyWords = dateKeyWords;
+        DateTimeQualifier(Set<String> dateTimeKeyWords) {
+            this.dateTimeKeyWords = dateTimeKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            if (task.getStartDateTime().isPresent()) {
+                for (int i = 0; i < dateTimeKeyWords.size(); i++) {
+                    if (dateTimeKeyWords.toArray()[i].equals(task.getStartDateTime().get().getDateOnly()) ||
+                                dateTimeKeyWords.toArray()[i].equals(task.getStartDateTime().get().getTimeOnly())) {
+                        return true;
+                    }
+                }
+            }
+            if (task.getEndDateTime().isPresent()) {
+                for (int i = 0; i < dateTimeKeyWords.size(); i++) {
+                    if (dateTimeKeyWords.toArray()[i].equals(task.getEndDateTime().get().getDateOnly()) ||
+                                dateTimeKeyWords.toArray()[i].equals(task.getEndDateTime().get().getTimeOnly())) {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
         @Override
         public String toString() {
-            return "date=" + String.join(", ", dateKeyWords);
-        }
-
-    }
-
-    private class TimeQualifier implements Qualifier {
-        private Set<String> timeKeyWords;
-
-        TimeQualifier(Set<String> timeKeyWords) {
-            this.timeKeyWords = timeKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return "time=" + String.join(", ", timeKeyWords);
+            return "datetime=" + String.join(", ", dateTimeKeyWords);
         }
 
     }
@@ -241,19 +238,17 @@ public class ModelManager extends ComponentManager implements Model {
     private class MultiQualifier implements Qualifier {
         private Set<String> multiKeyWords;
         private NameQualifier nameQualifier;
-        private DateQualifier dateQualifier;
-        private TimeQualifier timeQualifier;
+        private DateTimeQualifier dateTimeQualifier;
 
         MultiQualifier(Set<String> multiKeyWords) {
             this.multiKeyWords = multiKeyWords;
             nameQualifier = new NameQualifier(multiKeyWords);
-            dateQualifier = new DateQualifier(multiKeyWords);
-            timeQualifier = new TimeQualifier(multiKeyWords);
+            dateTimeQualifier = new DateTimeQualifier(multiKeyWords);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return false;
+            return nameQualifier.run(task) || dateTimeQualifier.run(task);
         }
 
         @Override

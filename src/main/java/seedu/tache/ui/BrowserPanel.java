@@ -41,7 +41,7 @@ public class BrowserPanel extends UiPart<Region> {
     public void loadPage(String url) {
         browser.getEngine().load(url);
     }
-
+    //@@author A0139925U
     private void loadCalendar() {
         try {
             String calendarTemplate = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")
@@ -55,7 +55,7 @@ public class BrowserPanel extends UiPart<Region> {
     public void add_event_today(String name) {
         browser.getEngine().executeScript("add_event('" + name + "')");
     }
-
+    //@@author
     /**
      * Frees resources allocated to the browser.
      */
