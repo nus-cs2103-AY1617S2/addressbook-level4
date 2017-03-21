@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class PriorityLevel {
 
     public static final String MESSAGE_PRIORITY_LEVEL_CONSTRAINTS = "Priority Levels should be indicated by an integer,"
-            + "ranging from 1 to 4; with 1 being the highest priority and 4 being the lowest priority.";
+            + " ranging from 1 to 4; with 1 being the highest priority and 4 being the lowest priority.";
 
     public static final String PRIORITY_LEVEL_VALIDATION_REGEX = "[1-4]";
 

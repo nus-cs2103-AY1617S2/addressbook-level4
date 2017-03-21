@@ -1,6 +1,9 @@
 package seedu.address.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -115,6 +118,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+    }
+
+    @Override
+    public void updateUpcomingTaskList() {
+        Date currentDate = new Date();
+        String textDate1 = new SimpleDateFormat("d-MMM-yyyy").format(currentDate);
+        String textDate2 = new SimpleDateFormat("dd-MMM-yyyy").format(currentDate);
+
+        Predicate<? super ReadOnlyTask> pred  = s -> s.getDate().toString().equals(textDate1)
+            || s.getDate().toString().equals(textDate2);
+        filteredTasks.setPredicate(pred);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
