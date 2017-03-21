@@ -63,12 +63,12 @@ public class TestUtil {
             if (actualException.getClass().isAssignableFrom(expected)) {
                 return;
             }
-            String message = String.format("Expected thrown: %s, actual: %s", expected.getTaskName(),
-                    actualException.getClass().getTaskName());
+            String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
+                    actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
         throw new AssertionFailedError(
-                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getTaskName()));
+                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {

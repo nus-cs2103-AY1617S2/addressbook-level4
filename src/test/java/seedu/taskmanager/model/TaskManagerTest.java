@@ -76,7 +76,7 @@ public class TaskManagerTest {
      * A stub ReadOnlyTaskManager whose tasks and categories lists can violate interface constraints.
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
         TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
@@ -89,10 +89,8 @@ public class TaskManagerTest {
             return tasks;
         }
 
-        @Override
-        public ObservableList<Category> getCategoryList() {
-            return categories;
+//        @Override
+//        public ObservableList<Category> getCategoryList() {
+//            return categories;
         }
     }
-
-}

@@ -1,5 +1,6 @@
 package seedu.taskmanager.testutil;
 
+import seedu.taskmanager.model.category.UniqueCategoryList;
 // import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.Date;
 import seedu.taskmanager.model.task.TaskName;
@@ -16,11 +17,11 @@ public class TestTask implements ReadOnlyTask {
     private Date date;
     private StartTime starttime;
     private EndTime endtime;
-//    private UniqueCategoryList categories;
+    private UniqueCategoryList categories;
 
-//    public TestTask() {
-//        categories = new UniqueCategoryList();
-//    }
+    public TestTask() {
+        categories = new UniqueCategoryList();
+    }
 
     /**
      * Creates a copy of {@code taskToCopy}.
