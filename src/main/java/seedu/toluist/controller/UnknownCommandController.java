@@ -4,15 +4,11 @@ import java.util.HashMap;
 
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.ui.Ui;
 
 /**
  * UnknownCommandController is responsible for rendering the initial UI
  */
 public class UnknownCommandController extends Controller {
-    public UnknownCommandController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         return new CommandResult(Messages.MESSAGE_UNKNOWN_COMMAND);

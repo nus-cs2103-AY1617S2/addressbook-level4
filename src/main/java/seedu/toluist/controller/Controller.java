@@ -3,7 +3,6 @@ package seedu.toluist.controller;
 import java.util.HashMap;
 
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 
@@ -13,17 +12,10 @@ import seedu.toluist.ui.UiStore;
  * modifies the models as appropriate, and render the updated UI subsequently
  */
 public abstract class Controller {
-
-    protected final Ui renderer;
-
     /**
      * UiStore to store data to be used by Ui
      */
     protected final UiStore uiStore = UiStore.getInstance();
-
-    public Controller(Ui renderer) {
-        this.renderer = renderer;
-    }
 
     /**
      * Given a command string, execute the command

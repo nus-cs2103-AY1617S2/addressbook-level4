@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
-import seedu.toluist.ui.Ui;
 
 /**
  * ListController is responsible for rendering the initial UI
@@ -18,10 +17,6 @@ public class HistoryController extends Controller {
     private static final String COMMAND_REGEX = "^history\\s*";
 
     private ArrayList<String> commandHistory;
-
-    public HistoryController(Ui renderer) {
-        super(renderer);
-    }
 
     public void setCommandHistory(ArrayList<String> commandHistory) {
         this.commandHistory = commandHistory;

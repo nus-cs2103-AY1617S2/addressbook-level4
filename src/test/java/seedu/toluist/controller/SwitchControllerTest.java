@@ -8,14 +8,12 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import seedu.toluist.ui.Ui;
-
 /**
  * Tests for SwitchController
  */
 public class SwitchControllerTest extends ControllerTest {
-    protected Controller controllerUnderTest(Ui renderer) {
-        return new SwitchController(renderer);
+    protected Controller controllerUnderTest() {
+        return new SwitchController();
     }
 
     @Test

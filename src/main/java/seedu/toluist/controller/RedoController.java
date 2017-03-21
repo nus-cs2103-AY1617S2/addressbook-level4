@@ -9,7 +9,6 @@ import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * Responsible for redo-related task
@@ -22,10 +21,6 @@ public class RedoController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(RedoController.class);
 
-    public RedoController(Ui renderer) {
-        super(renderer);
-    }
-
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
 
@@ -37,8 +32,7 @@ public class RedoController extends Controller {
         TodoList todoList = redoResult.getKey();
         int actualRedoTimes = redoResult.getValue();
 
-        uiStore.setTask(todoList.getTasks());
-        renderer.render();
+        uiStore.setTasks(todoList.getTasks());
 
         return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualRedoTimes));
     }

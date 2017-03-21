@@ -13,7 +13,6 @@ import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * AddTaskController is responsible for adding a task (and event)
@@ -27,10 +26,6 @@ public class AddTaskController extends Controller {
     private static final String COMMAND_ADD_TASK = "add";
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
-
-    public AddTaskController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
@@ -54,8 +49,7 @@ public class AddTaskController extends Controller {
         commandResult = add(todoList, description, startDateTime, endDateTime, tags);
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
-            renderer.render();
+            uiStore.setTasks(todoList.getTasks());
         }
 
         return commandResult;

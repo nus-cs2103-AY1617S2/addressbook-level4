@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -19,10 +18,6 @@ public class ClearController extends Controller {
     private static final String COMMAND_WORD = "clear";
     private static final String COMMAND_REGEX = "^clear\\s*";
 
-    public ClearController(Ui renderer) {
-        super(renderer);
-    }
-
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
@@ -30,8 +25,7 @@ public class ClearController extends Controller {
         todoList.setTasks(new ArrayList<>());
         todoList.save();
 
-        UiStore.getInstance().setTask(todoList.getTasks());
-        renderer.render();
+        UiStore.getInstance().setTasks(todoList.getTasks());
 
         return new CommandResult(RESULT_MESSAGE);
     }

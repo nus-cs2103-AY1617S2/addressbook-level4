@@ -15,7 +15,6 @@ import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -32,10 +31,6 @@ public class MarkController extends Controller {
     private static final String MARK_COMPLETE = "complete";
     private static final String MARK_INCOMPLETE = "incomplete";
     private static final Logger logger = LogsCenter.getLogger(MarkController.class);
-
-    public MarkController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         logger.info(getClass().toString() + " will handle command");
@@ -61,8 +56,7 @@ public class MarkController extends Controller {
         if (!todoList.save()) {
             return new CommandResult(Messages.MESSAGE_SAVING_FAILURE);
         }
-        UiStore.getInstance().setTask(todoList.getTasks());
-        renderer.render();
+        UiStore.getInstance().setTasks(todoList.getTasks());
         return commandResult;
     }
 

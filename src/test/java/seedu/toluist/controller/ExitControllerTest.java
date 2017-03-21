@@ -8,14 +8,12 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import seedu.toluist.ui.Ui;
-
 /**
  * Tests for ExitController
  */
 public class ExitControllerTest extends ControllerTest {
-    protected Controller controllerUnderTest(Ui renderer) {
-        return new ExitController(renderer);
+    protected Controller controllerUnderTest() {
+        return new ExitController();
     }
 
     @Test

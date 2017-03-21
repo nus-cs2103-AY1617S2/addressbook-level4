@@ -10,15 +10,12 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import seedu.toluist.ui.Ui;
-
-
 /**
  * Tests for AliasController
  */
 public class AliasControllerTest extends ControllerTest {
-    protected Controller controllerUnderTest(Ui renderer) {
-        return new AliasController(renderer);
+    protected Controller controllerUnderTest() {
+        return new AliasController();
     }
 
     @Test

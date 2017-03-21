@@ -24,7 +24,6 @@ import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.HistoryController;
-import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
 import seedu.toluist.controller.RedoController;
@@ -38,7 +37,6 @@ import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
 import seedu.toluist.model.AliasTable;
-import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
@@ -49,24 +47,24 @@ public class CommandDispatcher extends Dispatcher {
      * ArrayList to store previous commands entered since starting the application
      */
     private ArrayList<String> commandHistory;
-    private Integer historyPointer = 0;
+    private int historyPointer = 0;
 
     public CommandDispatcher() {
         super();
         aliasConfig.setReservedKeywords(getControllerKeywords());
-        commandHistory = new ArrayList<String>();
+        commandHistory = new ArrayList<>();
     }
 
-    public void dispatch(Ui renderer, String command) {
+    public void dispatch(String command) {
         recordCommand(command);
         String deAliasedCommand = aliasConfig.dealias(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
-        Controller controller = getBestFitController(renderer, deAliasedCommand);
+        Controller controller = getBestFitController(deAliasedCommand);
         logger.info("Controller class to be executed: " + controller.getClass());
 
         CommandResult feedbackToUser;
-        if (controller.getClass().isInstance(new HistoryController(renderer))) {
+        if (controller instanceof HistoryController) {
             ((HistoryController) controller).setCommandHistory(commandHistory);
         }
 
@@ -80,14 +78,14 @@ public class CommandDispatcher extends Dispatcher {
         historyPointer = commandHistory.size();
     }
 
-    private Controller getBestFitController(Ui renderer, String command) {
-        Collection<Controller> controllerCollection = getAllControllers(renderer);
+    private Controller getBestFitController(String command) {
+        Collection<Controller> controllerCollection = getAllControllers();
 
         return controllerCollection
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
-                .orElse(new UnknownCommandController(renderer)); // fail-safe
+                .orElse(new UnknownCommandController()); // fail-safe
     }
 
     private Collection<Class <? extends Controller>> getAllControllerClasses() {
@@ -114,17 +112,17 @@ public class CommandDispatcher extends Dispatcher {
         ));
     }
 
-    private Collection<Controller> getAllControllers(Ui renderer) {
+    private Collection<Controller> getAllControllers() {
         return getAllControllerClasses()
                 .stream()
                 .map((Class<? extends Controller> klass) -> {
                     try {
-                        Constructor constructor = klass.getConstructor(Ui.class);
-                        return (Controller) constructor.newInstance(renderer);
+                        Constructor constructor = klass.getConstructor();
+                        return (Controller) constructor.newInstance();
                     } catch (NoSuchMethodException | InstantiationException
                             | IllegalAccessException | InvocationTargetException e) {
                         // fail-safe. But should not actually reach here
-                        return new UnknownCommandController(renderer);
+                        return new UnknownCommandController();
                     }
                 })
                 .collect(Collectors.toList());
