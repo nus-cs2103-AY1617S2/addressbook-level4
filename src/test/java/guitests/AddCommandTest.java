@@ -6,56 +6,49 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.doit.commons.core.Messages;
-import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.testutil.TestTask;
 import seedu.doit.testutil.TestUtil;
-import seedu.doit.testutil.TypicalTestTasks;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void add() throws IllegalValueException{
-        //add one floating task
-        TestTask[] currentList = this.td.getTypicalTasks();
-        TestTask taskToAdd = TypicalTestTasks.getFloatingTestTask();
+    public void add() {
+        //add one task
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.hoon;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
-        //add another task with deadline
-        taskToAdd = TypicalTestTasks.getDeadlineTestTask();
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-
-        //add another event
-        taskToAdd = TypicalTestTasks.getEventTestTask();
+        //add another task
+        taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
-        this.commandBox.runCommand(TypicalTestTasks.getFloatingTestTask().getAddCommand());
+        commandBox.runCommand(td.hoon.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertAllColmnsMatch(currentList);
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
-        this.commandBox.runCommand("clear");
-        assertAddSuccess(TypicalTestTasks.getFloatingTestTask());
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.hoon);
 
         //invalid command
-        this.commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
-        this.commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = this.taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(this.taskListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

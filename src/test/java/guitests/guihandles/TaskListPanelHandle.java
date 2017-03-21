@@ -24,6 +24,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public static final int NOT_FOUND = -1;
     public static final String CARD_PANE_ID = "#cardPane";
+
     private static final String TASK_LIST_VIEW_ID = "#taskListView";
 
     public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
@@ -62,8 +63,8 @@ public class TaskListPanelHandle extends GuiHandle {
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
-            this.guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            this.guiRobot.sleep(200);
+            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+            guiRobot.sleep(200);
             if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
@@ -76,7 +77,7 @@ public class TaskListPanelHandle extends GuiHandle {
      */
     public void clickOnListView() {
         Point2D point = TestUtil.getScreenMidPoint(getListView());
-        this.guiRobot.clickOn(point.getX(), point.getY());
+        guiRobot.clickOn(point.getX(), point.getY());
     }
 
     /**
@@ -101,7 +102,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        this.guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
             .filter(p -> p.getName().fullName.equals(name))
             .findAny();
@@ -118,12 +119,12 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle navigateToTask(ReadOnlyTask task) {
         int index = getTaskIndex(task);
 
-        this.guiRobot.interact(() -> {
+        guiRobot.interact(() -> {
             getListView().scrollTo(index);
-            this.guiRobot.sleep(150);
+            guiRobot.sleep(150);
             getListView().getSelectionModel().select(index);
         });
-        this.guiRobot.sleep(100);
+        guiRobot.sleep(100);
         return getTaskCardHandle(task);
     }
 
@@ -155,17 +156,17 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-            .filter(n -> new TaskCardHandle(this.guiRobot, this.primaryStage, n).isSameTask(task))
+            .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
             .findFirst();
         if (taskCardNode.isPresent()) {
-            return new TaskCardHandle(this.guiRobot, this.primaryStage, taskCardNode.get());
+            return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
             return null;
         }
     }
 
     protected Set<Node> getAllCardNodes() {
-        return this.guiRobot.lookup(CARD_PANE_ID).queryAll();
+        return guiRobot.lookup(CARD_PANE_ID).queryAll();
     }
 
     public int getNumberOfTasks() {

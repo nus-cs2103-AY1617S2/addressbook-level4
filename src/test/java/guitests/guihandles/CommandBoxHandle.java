@@ -15,6 +15,12 @@ public class CommandBoxHandle extends GuiHandle {
         super(guiRobot, primaryStage, stageTitle);
     }
 
+    /**
+     * Clicks on the TextField.
+     */
+    public void clickOnTextField() {
+        guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
+    }
 
     public void enterCommand(String command) {
         setTextField(COMMAND_INPUT_FIELD_ID, command);
@@ -30,13 +36,13 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
-        this.guiRobot.sleep(200); //Give time for the command to take effect
+        guiRobot.sleep(200); //Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {
         enterCommand("help");
         pressEnter();
-        return new HelpWindowHandle(this.guiRobot, this.primaryStage);
+        return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
     public ObservableList<String> getStyleClass() {

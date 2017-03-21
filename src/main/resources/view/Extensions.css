@@ -4,7 +4,7 @@
 }
 
 .tag-selector {
-    -fx-border-width: 0;
+    -fx-border-width: 1;
     -fx-border-color: white;
     -fx-border-radius: 3;
     -fx-background-radius: 3;

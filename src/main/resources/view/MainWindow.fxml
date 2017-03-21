@@ -31,18 +31,19 @@
          </menus>
       </MenuBar>
 
-       <SplitPane id="splitPane" fx:id="header" dividerPositions="0.4, 0.5" VBox.vgrow="ALWAYS">
-         <items>
-            <Label  text="BY" textFill="WHITE" minWidth="340" prefWidth="340" textAlignment="CENTER"  />
-            <Label  text="ON" minWidth="340" prefWidth="340"/>
-            <Label  text="ANYTIME" minWidth="340" prefWidth="340"  />
-         </items>
-      </SplitPane>
+       <AnchorPane styleClass="status-bar" maxHeight="20.0" minHeight="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" VBox.vgrow="NEVER">
+         <children>
+            <Label  text="BY" textFill="WHITE" AnchorPane.leftAnchor="100" />
+            <Label  text="ON" AnchorPane.leftAnchor="500.0" />
+            <Label  text="ANYTIME" AnchorPane.rightAnchor="150" />
+         </children>
+      </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4, 0.5" VBox.vgrow="ALWAYS">
+
          <items>
             <VBox fx:id="taskList" minWidth="340" prefWidth="340">
                 <padding>
-                    <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                <children>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
@@ -51,15 +52,17 @@
             <VBox fx:id="eventList" minWidth="340" prefWidth="340">
 
                 <padding>
-                    <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                <children>
                   <AnchorPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                </children>
             </VBox>
+
             <VBox fx:id="floatingTaskList" minWidth="340" prefWidth="340">
+
                 <padding>
-                    <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                <children>
                   <AnchorPane fx:id="floatingListPanelPlaceholder" VBox.vgrow="ALWAYS"/>

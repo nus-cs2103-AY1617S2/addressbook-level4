@@ -3,7 +3,6 @@ package seedu.doit.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -60,16 +59,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    @FXML
-    private Label taskHeader;
-
-   // @FXML
-    //private AnchorPane statusbarPlaceholder;
-
-   // @FXML
-   // private AnchorPane statusbarPlaceholder;
-
-
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -85,6 +74,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+
         setAccelerators();
     }
 

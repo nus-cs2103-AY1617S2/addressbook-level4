@@ -33,8 +33,8 @@ public class TaskListPanel extends UiPart<Region> {
 
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        this.taskListView.setItems(taskList);
-        this.taskListView.setCellFactory(listView -> new TaskListViewCell());
+        taskListView.setItems(taskList);
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -45,19 +45,19 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        this.taskListView.getSelectionModel().selectedItemProperty()
-             .addListener((observable, oldValue, newValue) -> {
-                 if (newValue != null) {
-                     this.logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                     raise(new TaskPanelSelectionChangedEvent(newValue));
-                 }
-             });
+        taskListView.getSelectionModel().selectedItemProperty()
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                    raise(new TaskPanelSelectionChangedEvent(newValue));
+                }
+            });
     }
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            this.taskListView.scrollTo(index);
-            this.taskListView.getSelectionModel().clearAndSelect(index);
+            taskListView.scrollTo(index);
+            taskListView.getSelectionModel().clearAndSelect(index);
         });
     }
 

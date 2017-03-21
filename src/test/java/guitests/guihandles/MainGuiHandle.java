@@ -14,26 +14,27 @@ public class MainGuiHandle extends GuiHandle {
     }
 
     public TaskListPanelHandle getTaskListPanel() {
-        return new TaskListPanelHandle(this.guiRobot, this.primaryStage);
-    }
-
-    public EventListPanelHandle getEventListPanel() {
-        return new EventListPanelHandle(this.guiRobot, this.primaryStage);
-    }
-
-    public FloatingTaskListPanelHandle getFloatingTaskListPanel() {
-        return new FloatingTaskListPanelHandle(this.guiRobot, this.primaryStage);
+        return new TaskListPanelHandle(guiRobot, primaryStage);
     }
 
     public ResultDisplayHandle getResultDisplay() {
-        return new ResultDisplayHandle(this.guiRobot, this.primaryStage);
+        return new ResultDisplayHandle(guiRobot, primaryStage);
     }
 
     public CommandBoxHandle getCommandBox() {
-        return new CommandBoxHandle(this.guiRobot, this.primaryStage, TestApp.APP_TITLE);
+        return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
     public MainMenuHandle getMainMenu() {
-        return new MainMenuHandle(this.guiRobot, this.primaryStage);
+        return new MainMenuHandle(guiRobot, primaryStage);
+    }
+
+    public BrowserPanelHandle getBrowserPanel() {
+        return new BrowserPanelHandle(guiRobot, primaryStage);
+    }
+
+    public AlertDialogHandle getAlertDialog(String title) {
+        guiRobot.sleep(1000);
+        return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
 }
