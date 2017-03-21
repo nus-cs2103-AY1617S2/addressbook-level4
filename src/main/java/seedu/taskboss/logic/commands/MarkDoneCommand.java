@@ -12,8 +12,10 @@ import seedu.taskboss.model.task.Task;
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "done";
+
+    public static final String COMMAND_WORD = "mark";
     public static final String COMMAND_WORD_SHORT = "m";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
             + ": marks the task, identified by the index"

@@ -56,23 +56,24 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markDone_missingTaskIndex_failure() {
-        commandBox.runCommand("done ");
+        commandBox.runCommand("mark ");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void markDone_invalidTaskIndex_failure() {
-        commandBox.runCommand("done 9");
+        commandBox.runCommand("mark 9");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     private void assertMarkDoneSuccess(boolean isShort, int filteredTaskListIndex, int taskBossIndex,
             TestTask markedDoneTask) {
+
         //@@author A0144904H
         if (isShort) {
             commandBox.runCommand("m " + filteredTaskListIndex);
         } else {
-            commandBox.runCommand("done " + filteredTaskListIndex);
+            commandBox.runCommand("mark " + filteredTaskListIndex);
         }
 
         // confirm the list now contains all previous tasks plus the task with updated details
