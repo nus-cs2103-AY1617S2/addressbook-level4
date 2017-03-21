@@ -12,18 +12,15 @@ import seedu.taskboss.model.task.Task;
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
 
-
     public static final String COMMAND_WORD = "mark";
     public static final String COMMAND_WORD_SHORT = "m";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
-            + ": marks the task, identified by the index"
-            + " the index nnumber used in the last lisitng, as done in TaskBoss once"
-            + " the task is completed. "
-            + "Parameters: INDEX (must be a positive integer)...\n"
+            + ": Marks the task identified by the index"
+            + " number used in the last listing as done. "
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD
-            + " 1" +  "||" + COMMAND_WORD_SHORT + " 1";
+            + " 1" +  " || " + COMMAND_WORD_SHORT + " 1";
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
 
