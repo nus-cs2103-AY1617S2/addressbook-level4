@@ -6,6 +6,7 @@ import static seedu.watodo.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.joestelmach.natty.DateGroup;
@@ -36,7 +37,13 @@ public class DateTimeParser {
         endDate = null;
     }
     
-    public String parse(String args) throws IllegalValueException {
+    /**
+     *                 
+     * @param args
+     * @return
+     * @throws IllegalValueException
+     */
+    public void parse(String args) throws IllegalValueException {
         ArgumentTokenizer datesTokenizer = new ArgumentTokenizer(PREFIX_BY, PREFIX_ON,
                 PREFIX_FROM, PREFIX_TO);
         datesTokenizer.tokenize(args);
@@ -46,15 +53,21 @@ public class DateTimeParser {
         if (type.equals(TaskType.DEADLINE) || type.equals(TaskType.EVENT)) {
             extractDates(datesTokenizer);
         }
-      
-        return groups.get(0).getText();
+    }
+
+    /**
+     * 
+     * @param args
+     * @return
+     */
+    public String trimArgsOfDates(String args) {
+
+        args = args.replaceAll(PREFIX_BY.getPrefix(), "");
+        args = args.replaceAll(PREFIX_ON.getPrefix(), ""); 
+        args = args.replaceAll(PREFIX_FROM.getPrefix(), ""); 
+        args = args.replaceAll(PREFIX_TO.getPrefix(), "");
     }
     
- 
-        
-       
-        trimArgsOfDates(args, startDate, endDate);
-    }
     
     /**
      * Checks the type of task(floating, deadline or event) to be added based on
@@ -82,30 +95,31 @@ public class DateTimeParser {
         throw new IllegalValueException(MESSAGE_INVALID_NUM_DATETIME);
     }
 
+    /**
+     * 
+     * @param datesTokenizer
+     * @throws IllegalValueException
+     */
     private void extractDates(ArgumentTokenizer datesTokenizer) throws IllegalValueException {
             
+        List<String> argsWithDate = new ArrayList<String>();
+        Collections.addAll(argsWithDate, datesTokenizer.getValue(PREFIX_BY).orElse(null), 
+          datesTokenizer.getValue(PREFIX_ON).orElse(null), 
+          datesTokenizer.getValue(PREFIX_FROM).orElse(null),
+          datesTokenizer.getValue(PREFIX_TO).orElse(null));
+
         Parser parser = new Parser();
-        List<DateGroup> groups = parser.parse(args);
-        if (groups.size() == 0) {
-            throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        }
-        
-        datesTokenizer.getValue(PREFIX_BY).orElse(null); 
-            datesTokenizer.getValue(PREFIX_ON).orElse(null);
-            datesTokenizer.getValue(PREFIX_FROM).orElse(null); 
-            datesTokenizer.getValue(PREFIX_TO).orElse(null));
-        }
-        
-        
-        
-        
         List<String> datesInText = new ArrayList<String>();
-        for (String arg : args) {
+        
+        for (String arg : argsWithDate) {
             if (arg != null) {
-                String dateText = DateTimeParser.parse(arg);
-                datesInText.add(dateText);
+                List<DateGroup> dateGroups = parser.parse(arg.trim());
+                    throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+                }                
+                datesInText.add(dateGroups.get(0).getText().trim());
             }
         }
+
         if (datesInText.size() == 1) {
             endDate = datesInText.get(0);
         }
@@ -114,23 +128,17 @@ public class DateTimeParser {
             endDate = datesInText.get(1);
         }
     }
-    private String trimArgsOfDates(String args, String startDate, String endDate) {
 
-        args = args.replaceAll(PREFIX_BY.getPrefix(), "");
-        args = args.replaceAll(PREFIX_ON.getPrefix(), ""); 
-        args = args.replaceAll(PREFIX_FROM.getPrefix(), ""); 
-        args = args.replaceAll(PREFIX_TO.getPrefix(), "");
-        if (startDate != null) {
-            args = args.replaceAll(startDate, "");
-        }
-        if (endDate != null) {
-            args = args.replaceAll(endDate, "");
-        }
-        return args.trim();
-    }
 
     public TaskType getTaskType() {
         return type;
     }
+    public String getStartDate() {
+        return startDate;
+    }
+    public String getEndDate() {
+        return endDate;
+    }
+
 
 }
