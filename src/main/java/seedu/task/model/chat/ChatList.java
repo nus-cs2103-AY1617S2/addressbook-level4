@@ -1,10 +1,9 @@
-package seedu.task.model;
+package seedu.task.model.chat;
 
 import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.task.model.task.Chat;
 
 public class ChatList implements Iterable<Chat> {
     private ObservableList<Chat> internalList = FXCollections.observableArrayList();
@@ -25,6 +24,11 @@ public class ChatList implements Iterable<Chat> {
 
     public ObservableList<Chat> asObservableList() {
         return internalList;
+    }
+
+    public int size() {
+        // TODO Auto-generated method stub
+        return internalList.size();
     }
 
 }

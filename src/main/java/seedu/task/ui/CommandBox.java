@@ -18,7 +18,6 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
-
     private final Logic logic;
 
     @FXML
@@ -41,7 +40,6 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandInputChanged() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
-
             // process result of the command
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
@@ -55,7 +53,6 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
-
 
     /**
      * Sets the command box style to indicate a successful command.

@@ -3,7 +3,7 @@ package seedu.task.logic;
 import javafx.collections.ObservableList;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.commands.exceptions.CommandException;
-import seedu.task.model.ChatList;
+import seedu.task.model.chat.ChatList;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**

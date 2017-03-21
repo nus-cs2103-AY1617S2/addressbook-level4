@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.model.chat.ChatList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;

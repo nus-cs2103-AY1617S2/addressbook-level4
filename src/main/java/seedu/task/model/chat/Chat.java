@@ -1,8 +1,10 @@
-package seedu.task.model.task;
+package seedu.task.model.chat;
+
+import seedu.task.model.Sender;
 
 public class Chat {
     private String message;
-    //    private String sender;
+    private Sender sender;
     /**
      * @return the message
      */
@@ -12,9 +14,9 @@ public class Chat {
     /**
      * @return the sender
      */
-    //    public String getSender() {
-    //        return sender;
-    //    }
+    public Sender getSender() {
+        return sender;
+    }
     /**
      * @param message the message to set
      */
@@ -24,14 +26,15 @@ public class Chat {
     /**
      * @param sender the sender to set
      */
-    //    public void setSender(String sender) {
-    //        this.sender = sender;
-    //    }
+    public void setSender(Sender sender) {
+        this.sender = sender;
+    }
     /**
      * @param message
      */
-    public Chat(String message) {
+    public Chat(String message, Sender sender) {
         super();
         this.message = message;
+        this.sender = sender;
     }
 }
