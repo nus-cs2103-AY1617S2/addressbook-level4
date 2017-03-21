@@ -47,7 +47,7 @@ public class TaskListPanelHandle extends GuiHandle {
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatching(ReadOnlyTask... tasks) {
-        return this.isListMatching(0, TestUtil.giveSortedList(tasks));
+        return this.isListMatching(0, tasks);
     }
 
     /**

@@ -62,8 +62,7 @@ public class TypicalTestTasks {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
-        TestTask[] tasksToAdd = new TypicalTestTasks().getTypicalTasks();
-        for (TestTask task : tasksToAdd) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 tm.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -76,20 +75,20 @@ public class TypicalTestTasks {
 
     /**
      *
-     * @return the typical tasks in sorted order
+     * @return the typical tasks in original order
      */
     public TestTask[] getTypicalTasks() {
-        ArrayList<TestTask> typicalTaskList = new ArrayList<>();
         TestTask[] typicalTasks = new TestTask[] { apply, buy, calculate, decide, eat, find, give};
         //, handle, identify, jump , kick, look, mark, neglect   manually added tasks, that cause errors because of empty fields
 
-        for (TestTask t : typicalTasks) {
-            typicalTaskList.add(t);
-        }
-        Collections.sort(typicalTaskList);
-        for (int i = 0; i < typicalTasks.length; i++) {
-            typicalTasks[i] = typicalTaskList.get(i);
-        }
+//        ArrayList<TestTask> typicalTaskList = new ArrayList<>();
+//        for (TestTask t : typicalTasks) {
+//            typicalTaskList.add(t);
+//        }
+//        Collections.sort(typicalTaskList);
+//        for (int i = 0; i < typicalTasks.length; i++) {
+//            typicalTasks[i] = typicalTaskList.get(i);
+//        }
         return typicalTasks;
     }
 
