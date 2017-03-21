@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# FlexiTask - User Guide
 
 By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -71,12 +71,28 @@ FlexiTask will also be able to sort your tasks according to their priorities, da
 `Entering in dates`: Flexitask supports flexible date formats that can be entered in the foramts specified below:
 
 >  1. `Formal dates`: 
-> * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included The format DDMMYYYY is used
+> * Formal dates are dates in which the month, day and year are represented as numbers separated by a '-' or a '/'. The year is optional, and the current year will be used if it is not included The format DDMMYYYY is used 
+
+>>Example: <br>
+
+>>* 12/03/2017
+>>* 12-05-2017 
+
 >  2.  `Relaxed dates`:
 > * FlexiTask also supports a more casual style of Relaxed dates. There is no standard format to it
+
+>>Example: <br>
+
+>>* 3rd March
+>>* April 4 2017
+
 >  3. `Relative dates`:
 > * FlexiTask supports text that describes a relation with the current date
 
+>>Example: <br>
+
+>>* Next Thursday
+>>* 3 days from now
 <br>
 
 <a name="help"/>
@@ -116,27 +132,42 @@ Format: `add TASK_DETAILS [p/PRIORITY_LEVEL] [c/COMMENTS] [t/TAGS...] [d/DATES].
 
 Example:
 
-* Add Orientation camp from 22 Feb 9am to 27 Feb 9pm
-* Add Tetris AI Project due by 30th March p/high t/project
-* Add Do Homework p/medium c/find people to study with t/maths science
+* add attend meeting with boss d/12 march 4pm to 6pm
 
 #### 3.2.1 Adding a floating task
 > Floating tasks refers to tasks that do not have a deadline or a timeframe
 
 A task can be entered with just its name
 
+Example:
+
+* add Meet mom for lunch
+
 #### 3.2.2 Adding a task with deadline
 
 If the task is required to be completed by a certain date, you can enter a deadline by specifying a single date and time with the `d/` prefix
+
+Example:
+
+* add Finish up report d/3rd November 3pm
 
 #### 3.2.3 Adding an event
 
 Events can be added by specifying a start and end date or time
 
+Example:
+
+* add attend meeting with boss d/12 march 4pm to 6pm
+
 #### 3.2.4 Setting priority levels
 
-A priority lcan be assigned to tasks to help you plan your day. <br>
-Priorities will be displayed next to the task name.
+A priority can be assigned to tasks to help you plan your day. <br>
+Priorities will be displayed next to the task name. <br>
+
+Example:
+
+* add Send email to boss regarding X Project p/high
+
 
 As shown in Figure 3, priority is displayed next to the task name and tags are displayed below the task name.
 
@@ -153,7 +184,8 @@ Format: `find KEYWORD...`
 > Search is case insensitive, the order of keywords does not matter.<br>
 > Tasks containing all keywords will be returned
 
-Example:
+Example: <br>
+
 * find assignments
 > Returns all tasks with assignemnts in their name or as a tag
 
@@ -273,7 +305,7 @@ Sorts tasks based on task name, start date, end date or priority level.<br>
 
 > ***Flexible command:*** `arrange`
 
-Format: `sort {TASK_DETAILS}{d/START_DATE}{d/END_DATE}{PRIORITY_LEVEL}` 
+Format: `sort {TASK_DETAILS}{DATE}{PRIORITY_LEVEL}` 
 >> Only 1 of 3 parameters can be used
 
 > no prefix: Sorts based on task name in alphabetical order<br>
@@ -281,6 +313,7 @@ Format: `sort {TASK_DETAILS}{d/START_DATE}{d/END_DATE}{PRIORITY_LEVEL}`
 > p: Sorts based on priority assigned starting with the highest priority <br>
 
 Example:
+
 * sort p<br>
 
 > Displays all tasks sorted according to priority
@@ -295,6 +328,7 @@ Format: `clear [TAG]...`
 > With parameters, clear will only delete tasks containing all of the tags from the task manager
 
 Example:
+
 * clear completed
 * clear completed 2103
 
@@ -309,6 +343,7 @@ Format: `save FILE_PATH/FILE_NAME.xml`
 > If specified file does not exists, FlexiTask will create the file.
 
 Example:
+
 * save data/mytasklist.xml
 
 <br>
@@ -322,6 +357,7 @@ Format: `load FILE_PATH/FILE_NAME.xml`
 > File specified must exist
 
 Example:
+
 * load users/user/Documents/mytasklist.xml
 
 <a name="exit"></a>
@@ -334,44 +370,6 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Task Manager folder.
+       
+## 5. Command Summary <img src="images/commandSummary_21Mar.png">
 
-## 5. Command Summary
-
-* **Add** : `add TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...` <br>
-	e.g. `add 2103 Lecture from 4-6 comment/ICube tag/2103`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Done** : `done INDEX` <br>
-	e.g. `done 2`
-
-* **Edit** : `edit INDEX TASK_DETAILS [priority/ PRIORITY_LEVEL] [comment/ COMMENTS] [tag/ TAG]...`<br>
-	e.g. `edit 1 2103 Lecture from 2-4 priority/high comment/ICube tag/2103
-
-* **Find** : `find KEYWORD...` <br>
- 	e.g. `find James Jake`
-
-* **List** : `list` <br>
-	e.g. `list`
-
-* **Help** : `help` <br>
-  	e.g. `help`
-
-* **Sort** : `sort {TASK_DETAILS}{DATE}{PRIORITY}` <br>
-  	e.g.`sort n`
-
-* **Undo** : `undo` <br>
-	e.g. `undo`
-
-* **Clear** : `clear [TAG]...`<br>
-	e.g. `clear completed 2103
-
-* **Save** : `save FILE_PATH/FILE_NAME.xml`<br>
-e.g. `save data/mytasklist.xml
-
-* **Load** : `load FILE_PATH/FILE_NAME.xml`<br>
-e.g. `load users/user/Documents/mytasklist.xml
-
-* **Exit** : `exit`<br>
-	e.g. `exit`
