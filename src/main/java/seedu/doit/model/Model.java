@@ -68,7 +68,7 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
-            Set<String> descriptionKeywords);
+            Set<String> descriptionKeywords, Set<String> tagKeywords);
 
     /**
      * Undo the previous undoable command.
