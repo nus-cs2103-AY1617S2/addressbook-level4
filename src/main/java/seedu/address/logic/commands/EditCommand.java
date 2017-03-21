@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -38,6 +39,7 @@ public class EditCommand extends UndoableCommand {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list.";
 
     private final int filteredTaskListIndex;
+    private final char filteredTaskListChar;
     private final EditTaskDescriptor editTaskDescriptor;
     private ReadOnlyToDoList originalToDoList;
     private CommandResult commandResultToUndo;
@@ -48,12 +50,13 @@ public class EditCommand extends UndoableCommand {
      * @param editTaskDescriptor
      *            details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
+    public EditCommand(Pair<Character,Integer> filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+        assert filteredTaskListIndex.getValue() > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredTaskListIndex = filteredTaskListIndex.getValue() - 1;
+        this.filteredTaskListChar = filteredTaskListIndex.getKey();
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
@@ -62,7 +65,7 @@ public class EditCommand extends UndoableCommand {
     @Override
     public CommandResult execute() throws CommandException {
         originalToDoList = new ToDoList(model.getToDoList());
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = model.getListFromChar(filteredTaskListChar);
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
