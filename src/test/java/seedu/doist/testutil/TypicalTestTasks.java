@@ -65,7 +65,7 @@ public class TypicalTestTasks {
         return testTasks;
     }
 
-    public TodoList getTypicalAddressBook() {
+    public TodoList getTypicalTodoList() {
         TodoList ab = new TodoList();
         loadDoistWithSampleData(ab);
         return ab;

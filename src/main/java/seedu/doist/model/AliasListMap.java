@@ -15,6 +15,9 @@ public class AliasListMap implements ReadOnlyAliasListMap {
 
     private HashMap<String, ArrayList<String>> commandAliases;
 
+    /**
+     * Initializes the entire hashmap for all aliases, resets to default
+     */
     public void setDefaultCommandWords() {
         commandAliases = new HashMap<String, ArrayList<String>>();
         commandAliases.put("add",  new ArrayList<>(Arrays.asList("do")));
@@ -34,6 +37,9 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         commandAliases.put("view_alias",  new ArrayList<>(Arrays.asList("list_alias", "ls_alias")));
     }
 
+    /**
+     * @return a set of strings which are the default command words
+     */
     public Set<String> getDefaultCommandWordSet() {
         if (commandAliases == null) {
             setDefaultCommandWords();
@@ -46,6 +52,9 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         return Collections.unmodifiableMap(commandAliases);
     }
 
+    /**
+     * Returns an unmodifiable list of the alias list of the specified default command word
+     */
     public List<String> getAliasList(String defaultCommandWord) {
         if (commandAliases == null) {
             setDefaultCommandWords();
@@ -53,6 +62,10 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         return Collections.unmodifiableList(commandAliases.get(defaultCommandWord));
     }
 
+    /**
+     * Adds an alias to the alias list for that default command word
+     * Also removes any occurance of that alias in the alias list of other default command words
+     */
     public void setAlias(String alias, String commandWord) {
         assert(commandAliases.get(commandWord) != null);
         if (commandAliases == null) {

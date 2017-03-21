@@ -13,8 +13,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.doist.model.TodoList;
 import seedu.doist.storage.XmlSerializableTodoList;
-import seedu.doist.testutil.TodoListBuilder;
 import seedu.doist.testutil.TestUtil;
+import seedu.doist.testutil.TodoListBuilder;
 
 public class XmlUtilTest {
 

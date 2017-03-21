@@ -40,7 +40,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TodoList newData = new TypicalTestTasks().getTypicalAddressBook();
+        TodoList newData = new TypicalTestTasks().getTypicalTodoList();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -59,7 +59,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TodoList typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
+        TodoList typicalAddressBook = new TypicalTestTasks().getTypicalTodoList();
         List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice

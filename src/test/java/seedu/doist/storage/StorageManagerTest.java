@@ -13,6 +13,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
+import seedu.doist.model.AliasListMap;
+import seedu.doist.model.ReadOnlyAliasListMap;
 import seedu.doist.model.ReadOnlyTodoList;
 import seedu.doist.model.TodoList;
 import seedu.doist.model.UserPrefs;
@@ -53,27 +55,41 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void todoListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlTodoListStorageTest} class.
+         * {@link XmlTodoListStorage} class.
+         * More extensive testing of TodoList saving/reading is done in {@link XmlTodoListStorageTest} class.
          */
-        TodoList original = new TypicalTestTasks().getTypicalAddressBook();
+        TodoList original = new TypicalTestTasks().getTypicalTodoList();
         storageManager.saveTodoList(original);
         ReadOnlyTodoList retrieved = storageManager.readTodoList().get();
         assertEquals(original, new TodoList(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void aliasListMapReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlAliasListMapStorage} class.
+         * More extensive testing of AliasListMap saving/reading is done in {@link XmlAliasListMapStorageTest} class.
+         */
+        AliasListMap original = new AliasListMap();
+        original.setAlias("hello", "add");
+        storageManager.saveAliasListMap(original);
+        ReadOnlyAliasListMap retrieved = storageManager.readAliasListMap().get();
+        assertEquals(original, new AliasListMap(retrieved));
+    }
+
+    @Test
+    public void getTodoListFilePath() {
         assertNotNull(storageManager.getTodoListFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleTodoListChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlTodoListStorageExceptionThrowingStub("dummy"),
                                              new XmlAliasListMapStorage("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
@@ -85,14 +101,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlTodoListStorage {
+    class XmlTodoListStorageExceptionThrowingStub extends XmlTodoListStorage {
 
-        public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
+        public XmlTodoListStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException {
+        public void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
