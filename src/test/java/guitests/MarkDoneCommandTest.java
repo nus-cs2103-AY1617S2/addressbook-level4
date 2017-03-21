@@ -18,10 +18,10 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markTaskDone_success() throws Exception {
-        int taskBossIndex = 3;
+        int taskBossIndex = 1;
 
         TestTask markedDoneTask = new TaskBuilder().withName("Carl Kurz").withPriorityLevel("Yes")
-                .withStartDateTime("Feb 18, 2017 5pm")
+                .withStartDateTime("Feb 19, 2017 11pm")
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withInformation("wall street").withCategories("Done").build();
 
@@ -34,8 +34,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 4;
 
         TestTask markedDoneTask = new TaskBuilder().withName("Daniel Meier").withPriorityLevel("Yes")
-                .withStartDateTime("Feb 18, 2017 5pm")
-                .withEndDateTime("Feb 28, 2017 5pm")
+                .withStartDateTime("Feb 20, 2017 11.30pm")
+                .withEndDateTime("Apr 28, 2017 3pm")
                 .withInformation("10th street").withCategories("Done").build();
 
         assertMarkDoneSuccess(true, taskBossIndex, taskBossIndex, markedDoneTask);
@@ -46,7 +46,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("find n/Carl");
 
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 3;
+        int taskBossIndex = 1;
 
         TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
         TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
