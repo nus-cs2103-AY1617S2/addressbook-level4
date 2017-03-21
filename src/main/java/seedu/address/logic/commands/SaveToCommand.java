@@ -19,7 +19,7 @@ public class SaveToCommand extends Command {
             + "Parameters: dir_location\n" + "Example: " + COMMAND_WORD + "to .\\example_folder";
     public static final String MESSAGE_SUCCESS = "Save location has been changed to: %1$s";
     public static final String MESSAGE_CONFIG_SAVE_FAILURE = "Unable to save config file.";
-    public static final String MESSAGE_WRITE_ACCESS_DENIED = "No write permissions to: %1$s";
+    public static final String MESSAGE_WRITE_FILE_ERROR = "Unable to write data to: %1$s";
 
     public static final String TASK_MANAGER_FILE_NAME = "taskmanager.xml";
 
@@ -44,7 +44,7 @@ public class SaveToCommand extends Command {
             config.setTaskManagerFilePath(path);
             model.updateSaveLocation(path);
         } else {
-            throw new CommandException(String.format(MESSAGE_WRITE_ACCESS_DENIED, path));
+            throw new CommandException(String.format(MESSAGE_WRITE_FILE_ERROR, path));
         }
 
         try {
