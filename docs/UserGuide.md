@@ -187,7 +187,8 @@ Finds all tasks with the following keywords<br>
 
 Format: `find KEYWORD...`
 
-> Search is case insensitive, the order of keywords does not matter.<br>
+> Search is case insensitive <br>
+> Order of keywords does not matter <br>
 > Tasks containing all keywords will be returned
 
 Example: <br>
