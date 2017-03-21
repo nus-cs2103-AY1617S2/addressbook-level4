@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,8 +96,17 @@ public class UniqueTaskList implements Iterable<Task> {
         return new UnmodifiableObservableList<>(internalList);
     }
 
-    public UnmodifiableObservableList<Task> asSortedList() {
-        FXCollections.sort(internalList, new EndTimeComparator());
+    public UnmodifiableObservableList<Task> asSortedList(String keyword) {
+        switch (keyword) {
+        case "priority":
+            FXCollections.sort(internalList, new PriorityComparator());
+            break;
+        case "deadline":
+            FXCollections.sort(internalList, new EndTimeComparator());
+            break;
+        default:
+            break;
+        }
         return new UnmodifiableObservableList<>(internalList);
     }
 
