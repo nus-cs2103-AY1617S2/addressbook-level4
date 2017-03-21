@@ -1,7 +1,5 @@
 package seedu.doist.ui;
 
-import com.sun.glass.ui.monocle.linux.LinuxInputProcessor.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
