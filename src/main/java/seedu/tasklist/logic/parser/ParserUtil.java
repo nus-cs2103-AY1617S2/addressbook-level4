@@ -28,9 +28,10 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    //@@author A0139747N
     private static Hashtable<String, String> flexibleCommands;
     private static Hashtable<String, String> flexiblePrefixes;
-
+    //@@author
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -112,6 +113,7 @@ public class ParserUtil {
         return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
+    //@@author A0139747N
     /**
      * Initialises the Hashtable for parsing flexible command words (Hashtable allows duplicate keys).
      * Keys being the acceptable alternatives, values being the legitimate command words (stated in the UserGuide.md)

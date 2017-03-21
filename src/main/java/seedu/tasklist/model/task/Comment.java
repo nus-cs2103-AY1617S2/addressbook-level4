@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
+//@@author A0139747N
 /**
  * Represents a Task's comment in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidComment(String)}

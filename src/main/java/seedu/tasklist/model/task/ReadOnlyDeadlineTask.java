@@ -2,6 +2,7 @@ package seedu.tasklist.model.task;
 
 import java.util.Date;
 
+//@@author A0139747N
 /**
  * A read-only immutable interface for an event task (contains 2 dates) in the task list.
  * Implementations should guarantee: details are present and not null, field values are validated.

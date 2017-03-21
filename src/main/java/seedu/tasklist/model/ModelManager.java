@@ -109,6 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    //@@author A0139747N
     @Override
     public void setPreviousState() throws EmptyStackException {
         if (undoStack.empty()) {

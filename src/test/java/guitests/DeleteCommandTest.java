@@ -34,6 +34,7 @@ public class DeleteCommandTest extends TaskListGuiTest {
 
     }
 
+    //@@author A0139747N
     @Test
     public void deleteWithFlexibleCommand() {
         //execute command with acceptable alternative "remove"
@@ -44,6 +45,7 @@ public class DeleteCommandTest extends TaskListGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
 
     }
+    //@@author
     /**
      * Runs the delete command to delete the task at specified index and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
