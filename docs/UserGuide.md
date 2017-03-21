@@ -6,20 +6,20 @@ By: TEAM W09-B1          Since: Mar 2017
 1. Introduction
 2. [Quick Start](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#quick-start)
 3. [Features](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#features)
-  1. Help
-  3.2  Add tasks
-  3.3  List tasks
-  3.4  Edit tasks
-  3.5  Find tasks
-  3.6  Delete tasks
-  3.7  Mark tasks as complete
-  3.8  Mark tasks as incomplete
-  3.9  Undo
-  3.10 Redo
-  3.11 Select tasks
-  3.12 Clear
-  3.13 Exit
-  3.14 Save
+   >3.1 Help<br/>
+  3.2  Add tasks<br/>
+  3.3  List tasks<br/>
+  3.4  Edit tasks<br/>
+  3.5  Find tasks<br/>
+  3.6  Delete tasks<br/>
+  3.7  Mark tasks as complete<br/>
+  3.8  Mark tasks as incomplete<br/>
+  3.9  Undo<br/>
+  3.10 Redo<br/>
+  3.11 Select tasks<br/>
+  3.12 Clear<br/>
+  3.13 Exit<br/>
+  3.14 Save<br/>
 4. [FAQ](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#faq)
 5. [Command Summary](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#command-summary)
 
