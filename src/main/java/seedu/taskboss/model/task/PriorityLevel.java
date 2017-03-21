@@ -1,5 +1,6 @@
 package seedu.taskboss.model.task;
 
+
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 
 /**
@@ -9,7 +10,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 public class PriorityLevel {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
-            + " the words Yes or No (case sensitive)";
+            + " the words Yes or No (case-sensitive)";
 
     //@@author A0144904H
     public static final String PRIORITY_HIGH = "Yes";

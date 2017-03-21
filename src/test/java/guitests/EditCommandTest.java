@@ -37,11 +37,12 @@ public class EditCommandTest extends TaskBossGuiTest {
     //@@author A0143157J
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
-        String detailsToEdit = "n/Amanda p/Yes sd/today 5.30pm ed/next fri 1am i/discuss about life c/relax";
+
+        String detailsToEdit = "n/Amanda p/Yes sd/feb 27 2016 ed/feb 28 2016 i/discuss about life c/relax";
         int taskBossIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Amanda").withPriorityLevel("Yes")
-               .withStartDateTime("today 5.30pm").withEndDateTime("next fri 1am")
+               .withStartDateTime("feb 27 2016").withEndDateTime("feb 28 2016")
                .withInformation("discuss about life").withCategories("relax").build();
 
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
@@ -87,7 +88,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         String detailsToEdit = "n/Belle";
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 5;
+        int taskBossIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
@@ -127,7 +128,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 n/Alice Pauline p/Yes sd/Feb 18, 2017 5pm ed/Feb 28, 2017 5pm"
+        commandBox.runCommand("edit 1 n/Alice Pauline p/Yes sd/Feb 18, 2017 5pm 5pm ed/Mar 28, 2017 5pm"
                                 + "i/123, Jurong West Ave 6, #08-111 c/friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);

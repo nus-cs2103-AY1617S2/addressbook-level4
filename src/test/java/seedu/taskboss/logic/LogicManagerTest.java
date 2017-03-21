@@ -34,7 +34,7 @@ import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.ListCommand;
-import seedu.taskboss.logic.commands.SelectCommand;
+import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.logic.parser.DateTimeParser;
@@ -84,7 +84,7 @@ public class LogicManagerTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IllegalValueException {
         model = new ModelManager();
         String tempTaskBossFile = saveFolder.getRoot().getPath() + "TempTaskBoss.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
@@ -331,25 +331,25 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
+    public void execute_viewInvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("view", expectedMessage);
     }
 
     @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
+    public void execute_viewIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("view");
     }
 
     @Test
-    public void execute_select_jumpsToCorrectTask() throws Exception {
+    public void execute_view_jumpsToCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskBoss expectedAB = helper.generateTaskBoss(threeTasks);
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
+        assertCommandSuccess("view 2", String.format(ViewCommand.MESSAGE_VIEW_TASK_SUCCESS, 2), expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));

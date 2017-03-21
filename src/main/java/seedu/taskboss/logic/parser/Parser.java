@@ -6,6 +6,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.ClearCommand;
 import seedu.taskboss.logic.commands.Command;
@@ -17,8 +18,10 @@ import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
-import seedu.taskboss.logic.commands.SelectCommand;
+import seedu.taskboss.logic.commands.SaveCommand;
+import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.logic.commands.UndoCommand;
+import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 /**
  * Parses user input.
@@ -35,8 +38,9 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      * @throws InvalidDatesException
+     * @throws IllegalValueException
      */
-    public Command parseCommand(String userInput) throws InvalidDatesException {
+    public Command parseCommand(String userInput) throws InvalidDatesException, IllegalValueException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -58,9 +62,9 @@ public class Parser {
         case EditCommand.COMMAND_WORD_SHORT:
             return new EditCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_WORD_SHORT:
-            return new SelectCommandParser().parse(arguments);
+        case ViewCommand.COMMAND_WORD:
+        case ViewCommand.COMMAND_WORD_SHORT:
+            return new ViewCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_WORD_SHORT:
@@ -89,6 +93,13 @@ public class Parser {
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.COMMAND_WORD_SHORT:
             return new UndoCommand();
+
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.COMMAND_WORD_SHORT:
+            return new SortCommandParser().parse(arguments);
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

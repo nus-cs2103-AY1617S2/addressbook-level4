@@ -31,7 +31,7 @@ public class TaskListPanelHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public List<ReadOnlyTask> getSelectedTasks() {
+    public List<ReadOnlyTask> getViewingTasks() {
         ListView<ReadOnlyTask> taskList = getListView();
         return taskList.getSelectionModel().getSelectedItems();
     }
@@ -112,7 +112,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Navigates the listview to display and select the person.
+     * Navigates the listview to display and view the person.
      */
     public TaskCardHandle navigateToTask(ReadOnlyTask task) {
         int index = getTaskIndex(task);

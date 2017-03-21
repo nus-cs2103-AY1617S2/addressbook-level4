@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
-import seedu.taskboss.logic.commands.SelectCommand;
+import seedu.taskboss.logic.commands.ViewCommand;
 
 /**
  * Parses input arguments and creates a new SelectCommand object
  */
-public class SelectCommandParser {
+public class ViewCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
@@ -21,10 +21,10 @@ public class SelectCommandParser {
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        return new SelectCommand(index.get());
+        return new ViewCommand(index.get());
     }
 
 }

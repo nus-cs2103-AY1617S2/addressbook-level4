@@ -10,12 +10,13 @@ import seedu.taskboss.commons.core.ComponentManager;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
-import seedu.taskboss.model.task.UniqueTaskList;
+import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -28,22 +29,27 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskBoss taskBoss;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final Stack<ReadOnlyTaskBoss> taskbossHistory;
+    private SortBy currentSortType;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
+     * @throws IllegalValueException
      */
-    public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) throws IllegalValueException {
         super();
         assert !CollectionUtil.isAnyNull(taskBoss, userPrefs);
 
         logger.fine("Initializing with TaskBoss: " + taskBoss + " and user prefs " + userPrefs);
 
         this.taskBoss = new TaskBoss(taskBoss);
+        // sort by end date time by default
+        currentSortType = SortBy.END_DATE_TIME;
+        sortTasks(currentSortType);
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
     }
 
-    public ModelManager() {
+    public ModelManager() throws IllegalValueException {
         this(new TaskBoss(), new UserPrefs());
     }
 
@@ -78,20 +84,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.addTask(task);
+        taskBoss.sortTasks(currentSortType);
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         assert editedTask != null;
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
+        taskBoss.sortTasks(currentSortType);
+        indicateTaskBossChanged();
+    }
+
+    @Override
+    public void sortTasks(SortBy sortType) throws IllegalValueException {
+        assert sortType != null;
+        this.currentSortType = sortType;
+        taskBoss.sortTasks(sortType);
         indicateTaskBossChanged();
     }
 
