@@ -30,8 +30,7 @@ public interface ReadOnlyActivity {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getPriority().equals(this.getPriority())
-                && other.getLocation().equals(this.getLocation()));
+                && other.getPriority().equals(this.getPriority()));
     }
 
     /**

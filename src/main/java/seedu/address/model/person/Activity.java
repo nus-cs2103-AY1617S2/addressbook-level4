@@ -143,7 +143,7 @@ public class Activity implements ReadOnlyActivity {
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
         this.setStartTime(replacement.getStartTime());
-        this.setToDate(replacement.getToDate());
+        this.setFromDate(replacement.getFromDate());
         this.setEndTime(replacement.getEndTime());
         this.setToDate(replacement.getToDate());
         this.setByDate(replacement.getByDate());
