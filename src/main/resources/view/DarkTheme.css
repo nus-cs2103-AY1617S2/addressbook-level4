@@ -76,13 +76,13 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #fafafa transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#fafafa, 10%);
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
 }
 
 .split-pane {
     -fx-border-radius: 1;
-    -fx-border-width: 1;
+    -fx-border-width: 0;
     -fx-background-color: derive(#fafafa, 20%);
     -fx-text-box-border: none;
     -fx-focus-color: transparent;
@@ -93,6 +93,8 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-width: 0;
+    -fx-background-color: #ffffff;
 }
 
 .list-cell .label {
@@ -167,8 +169,8 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Roboto";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -276,7 +278,17 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-width: 0 0 1 0;
+}
+
+#taskListView .track {
+    -fx-border-color: #fafafa;
+    -fx-background-color: #fafafa;
+}
+
+#taskListView, #taskList, #taskListPanelPlaceHolder, .list-cell {
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
@@ -301,12 +313,16 @@
 }
 
 #labels .label {
-    -fx-text-fill: #FFFFFF;
-    -fx-background-color: #383838;
-    -fx-padding: 1 3 1 3;
+    -fx-text-fill: #000000;
+    -fx-background-color: #ffa8a1;
+    -fx-padding: 0 1 0 1;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #dd4b39;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12;
+    -fx-text-alignment: center;
+    -fx-alignment: bottom-center;
 }
 
 #resultDisplayPlaceholder, #resultDisplay .content, #resultDisplay, #mainPane {
@@ -332,13 +348,6 @@
     -fx-border-color: #FFFFFF;
 }
 
-#bookings .label {
-    -fx-text-fill: #000000;
-    -fx-background-color: #ffa8a1;
-    -fx-padding: 0 1 0 1;
-    -fx-border-width: 0 0 2 0;
-    -fx-border-color: #dd4b39;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 14;
+#taskListPanelPlaceholder {
+    -fx-border-width: 0 0 0 0;
 }
