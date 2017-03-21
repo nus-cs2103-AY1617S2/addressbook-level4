@@ -71,8 +71,8 @@ public class TaskList implements Iterable<Task> {
             Task taskToUpdate = internalList.get(internalIndex);
             taskToUpdate.markComplete(completedTask);
             internalList.set(internalIndex, taskToUpdate);
-        }
-        else {
+
+        } else {
             throw new TaskNotFoundException();
         }
     }

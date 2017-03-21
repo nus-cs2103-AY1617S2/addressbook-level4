@@ -90,7 +90,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     public ObservableList<ReadOnlyTask> getIncompleteList() {
         FilteredList<Task> incompleteList = new FilteredList<>(tasks.asObservableList().
-                filtered(p -> p.getIsCompleted() == false));
+                filtered(p -> !p.getIsCompleted()));
         return new UnmodifiableObservableList<>(incompleteList);
     }
 
