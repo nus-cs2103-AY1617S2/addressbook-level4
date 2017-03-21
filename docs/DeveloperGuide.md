@@ -397,12 +397,19 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case 1: Add a task
+#### Use case 1: View usage instructions
 
 **MSS**
 
-1. Actor requests to add a task with `description` in the input box.
-2. System adds the task. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
+1. Actor requests to see usage instructions.
+2. System displays the usage instructions for all the commands.
+
+#### Use case 2: Add a task/event
+
+**MSS**
+
+1. Actor requests to add a task/event with `description` in the input box.
+2. System adds the task/event. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
@@ -412,12 +419,12 @@ Use case ends.
 > 1a1. System shows an error message ("Please provide a task description") with the correct format example.<br>
 > Use case resumes at step 1
 
-#### Use case 2: Delete a task
+#### Use case 3: Update a task/event
 
 **MSS**
 
-1. Actor requests to delete a task with `index` number in the input box.
-2. System finds the task and deletes it. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+1. Actor requests to update a task/event with `index` number in the input box.
+2. System finds the task/event and updates it. System shows a feedback message ("Task successfully updated") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
@@ -427,7 +434,37 @@ Use case ends.
 > 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
 > Use case resumes at step 1
 
-#### Use case 3: Undo previous mutated command
+#### Use case 3: Delete a task/event
+
+**MSS**
+
+1. Actor requests to delete a task/event with `index` number in the input box.
+2. System finds the task/event and deletes it. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
+#### Use case 4: Mark a task/event as completed/incomplete
+
+**MSS**
+
+1. Actor requests to mark a task/event with `index` number as completed or incomplete.
+2. System finds the task/event and updates its status. System shows a feedback message and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
+#### Use case 5: Undo previous mutated command
 
 **MSS**
 
@@ -442,7 +479,23 @@ Use case ends.
 > 2a1. System does nothing since there is nothing to undo.
 > Use case ends
 
-#### Use case 4: Add alias command
+
+#### Use case 6: Redo previous undone command
+
+**MSS**
+
+1. Actor requests to `redo` action in the input box.
+2. System finds the most recent undone command that mutates the list and redoes it. System shows a feedback message ("Redo '`previous command`'") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. No previous undone command to redo
+
+> 2a1. System does nothing since there is nothing to redo.
+> Use case ends
+
+#### Use case 7: Add alias for a command
 
 **MSS**
 
@@ -450,12 +503,35 @@ Use case ends.
 2. System finds the command and alias it. System shows a feedback message ("`new alias name` is set as the new alias for `command`.").<br>
 Use case ends.
 
+**Extensions**
 2a. The alias is already reserved for other commands.
 
 > 2a1. System updates the alias name to refer to the new command.<br>
 > Use case resumes at step 3.
 
-#### Use case 5: Set data storage file path
+#### Use case 8: Remove an alias
+
+**MSS**
+
+1. Actor requests to `unalias` an `alias` in the input box.
+2. System finds the alias and removes it. System shows a feedback message ("The alias `alias` is removed").<br>
+Use case ends.
+
+**Extensions**
+2a. No such existing alias exist.
+
+> 2a1. System shows a feedback message "There is no such existing alias".<br>
+> Use case ends
+
+#### Use case 9: View existing aliases
+
+**MSS**
+
+1. Actor requests to display all the existing aliases in the system.
+2. System displays all existing aliases.<br>
+Use case ends.
+
+#### Use case 10: Set data storage file path
 
 **MSS**
 
@@ -480,6 +556,21 @@ Use case ends.
 > 1c1. System shows an error message ("Storage file path is already being used, please choose another location.").<br>
 > Use case resumes at step 1.
 
+#### Use case 11: View command history
+
+**MSS**
+
+1. Actor requests to display the history of all commands in the current session.
+2. System displays the command history.<br>
+Use case ends.
+
+#### Use case 12: Exit the program
+
+**MSS**
+
+1. Actor requests to exit the program.
+2. System exits.<br>
+Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
