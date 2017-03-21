@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 
 public class SelectCommandTest extends ToDoListGuiTest {
 
@@ -47,7 +47,7 @@ public class SelectCommandTest extends ToDoListGuiTest {
 
     private void assertTaskSelected(int index) {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        Task selectedTask = taskListPanel.getSelectedTasks().get(0);
         assertEquals(taskListPanel.getTask(index - 1), selectedTask);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }

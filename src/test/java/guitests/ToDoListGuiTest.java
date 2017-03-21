@@ -25,7 +25,7 @@ import seedu.todolist.TestApp;
 import seedu.todolist.commons.core.EventsCenter;
 import seedu.todolist.commons.events.BaseEvent;
 import seedu.todolist.model.ToDoList;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 import seedu.todolist.testutil.TestUtil;
 import seedu.todolist.testutil.TypicalTestTasks;
 
@@ -107,7 +107,7 @@ public abstract class ToDoListGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+    public void assertMatching(Task task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 

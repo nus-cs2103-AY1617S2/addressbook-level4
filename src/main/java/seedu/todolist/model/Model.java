@@ -3,7 +3,6 @@ package seedu.todolist.model;
 import java.util.Set;
 
 import seedu.todolist.commons.core.UnmodifiableObservableList;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
 import seedu.todolist.model.task.UniqueTaskList.DuplicateTaskException;
@@ -19,13 +18,13 @@ public interface Model {
     ReadOnlyToDoList getToDoList();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(Task target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /** Mark the given task as completed */
-    void completeTask(int filteredTaskListIndex, ReadOnlyTask targetTask)
+    void completeTask(int filteredTaskListIndex, Task targetTask)
             throws UniqueTaskList.TaskNotFoundException;
 
     /**
@@ -35,23 +34,23 @@ public interface Model {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    void updateTask(int filteredTaskListIndex, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    UnmodifiableObservableList<Task> getFilteredTaskList();
 
     /** Returns the filtered task list of incomplete tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     //@@author A0139633B
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredIncompleteTaskList();
+    UnmodifiableObservableList<Task> getFilteredIncompleteTaskList();
 
     /** Returns the filtered task list of complete tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     //@@author A0139633B
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredCompleteTaskList();
+    UnmodifiableObservableList<Task> getFilteredCompleteTaskList();
 
     /** Returns the filtered task list of overdue tasks as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     //@@author A0139633B
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+    UnmodifiableObservableList<Task> getFilteredOverdueTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();

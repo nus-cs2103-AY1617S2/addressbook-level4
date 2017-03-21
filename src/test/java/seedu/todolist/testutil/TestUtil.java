@@ -33,8 +33,8 @@ import seedu.todolist.model.ToDoList;
 import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
+import seedu.todolist.model.task.parser.TaskParser;
 import seedu.todolist.storage.XmlSerializableToDoList;
 
 /**
@@ -70,19 +70,17 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Ali Muster"), null, null, new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), null, null, new UniqueTagList()),
-                new Task(new Name("Carl Kurz"), null, null, new UniqueTagList()),
-                new Task(new Name("Daniel Meier"), null, null, new UniqueTagList()),
-                new Task(new Name("Elle Meyer"), null, null, new UniqueTagList()),
-                new Task(new Name("Fiona Kunz"), null, null, new UniqueTagList()),
-                new Task(new Name("George Best"), null, null, new UniqueTagList()),
-                new Task(new Name("Hoon Meier"), null, null, new UniqueTagList()),
-                new Task(new Name("Ida Mueller"), null, null, new UniqueTagList())
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] { TaskParser.parseTask(new Name("Ali Muster"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Boris Mueller"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Carl Kurz"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Daniel Meier"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Elle Meyer"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Fiona Kunz"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("George Best"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Hoon Meier"), null, null, new UniqueTagList()),
+                    TaskParser.parseTask(new Name("Ida Mueller"), null, null, new UniqueTagList()) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -90,17 +88,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -109,8 +103,8 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
      * @param fileName
      * @return
      */
@@ -146,8 +140,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -164,7 +158,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -183,18 +177,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-        IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -210,10 +203,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -288,7 +282,6 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
@@ -330,13 +323,13 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+    public static boolean compareCardAndTask(TaskCardHandle card, Task task) {
         return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -345,7 +338,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

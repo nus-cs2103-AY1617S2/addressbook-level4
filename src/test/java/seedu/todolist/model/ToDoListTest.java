@@ -15,8 +15,8 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.todolist.model.tag.Tag;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
+import seedu.todolist.model.task.parser.TaskParser;
 import seedu.todolist.testutil.TypicalTestTasks;
 
 public class ToDoListTest {
@@ -49,7 +49,7 @@ public class ToDoListTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = Arrays.asList(TaskParser.parseTask(td.alice), TaskParser.parseTask(td.alice));
         List<Tag> newTags = td.alice.getTags().asObservableList();
         ToDoListStub newData = new ToDoListStub(newTasks, newTags);
 
@@ -60,7 +60,7 @@ public class ToDoListTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         ToDoList typicalToDoList = new TypicalTestTasks().getTypicalToDoList();
-        List<ReadOnlyTask> newTasks = typicalToDoList.getTaskList();
+        List<Task> newTasks = typicalToDoList.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalToDoList.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -74,16 +74,16 @@ public class ToDoListTest {
      * A stub ReadOnlyToDoList whose tasks and tags lists can violate interface constraints.
      */
     private static class ToDoListStub implements ReadOnlyToDoList {
-        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
+        private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        ToDoListStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+        ToDoListStub(Collection<? extends Task> tasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getTaskList() {
+        public ObservableList<Task> getTaskList() {
             return tasks;
         }
 

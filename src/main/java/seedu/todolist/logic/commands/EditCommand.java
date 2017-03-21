@@ -9,10 +9,10 @@ import seedu.todolist.logic.commands.exceptions.CommandException;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
+import seedu.todolist.model.task.parser.TaskParser;
 
 /**
  * Edits the details of an existing task in the to-do list.
@@ -51,13 +51,13 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<Task> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
@@ -67,15 +67,15 @@ public class EditCommand extends Command {
         }
         model.updateFilteredListToShowAll();
 
-        commandText = String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        commandText = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+    private static Task createEditedTask(Task taskToEdit,
             EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
@@ -84,7 +84,7 @@ public class EditCommand extends Command {
         EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedStartTime, updatedEndTime, updatedTags);
+        return TaskParser.parseTask(updatedName, updatedStartTime, updatedEndTime, updatedTags);
     }
 
     /**

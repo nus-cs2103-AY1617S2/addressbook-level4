@@ -1,15 +1,17 @@
 package seedu.todolist.testutil;
 
+import java.util.Objects;
+
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.StartTime;
+import seedu.todolist.model.task.Task;
 
 /**
  * A mutable task object. For testing only.
  */
-public class TestTask implements ReadOnlyTask {
+public class TestTask extends Task {
 
     private Name name;
     private StartTime startTime;
@@ -64,7 +66,7 @@ public class TestTask implements ReadOnlyTask {
         return tags;
     }
 
-    //TODO
+    // TODO
     @Override
     public boolean isComplete() {
         return false;
@@ -72,7 +74,32 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        return getAsText();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName());
+        if (this.startTime != null) {
+            builder.append(" Start Time: " + getStartTime().toString());
+        }
+        if (this.endTime != null) {
+            builder.append(" End Time: " + getEndTime().toString());
+        }
+        builder.append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, startTime, endTime, tags);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TestTask // instanceof handles nulls
+                        && ((TestTask) other).getName().equals(this.getName())
+                        && ((TestTask) other).getStartTime().equals(this.getStartTime())
+                        && ((TestTask) other).getEndTime().equals(this.getEndTime())
+                        && (((TestTask) other).isComplete() == this.isComplete()));
     }
 
     public String getAddCommand() {

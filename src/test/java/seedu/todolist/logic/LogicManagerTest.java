@@ -44,9 +44,9 @@ import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.tag.UniqueTagList;
 import seedu.todolist.model.task.EndTime;
 import seedu.todolist.model.task.Name;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.StartTime;
 import seedu.todolist.model.task.Task;
+import seedu.todolist.model.task.parser.TaskParser;
 import seedu.todolist.storage.StorageManager;
 
 
@@ -112,7 +112,7 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             ReadOnlyToDoList expectedToDoList,
-            List<? extends ReadOnlyTask> expectedShownList) {
+            List<? extends Task> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedToDoList, expectedShownList);
     }
 
@@ -123,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         ToDoList expectedToDoList = new ToDoList(model.getToDoList());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
+        List<Task> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedToDoList, expectedShownList);
     }
 
@@ -137,7 +137,7 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
             ReadOnlyToDoList expectedToDoList,
-            List<? extends ReadOnlyTask> expectedShownList) {
+            List<? extends Task> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -236,7 +236,7 @@ public class LogicManagerTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         ToDoList expectedAB = helper.generateToDoList(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        List<? extends Task> expectedList = expectedAB.getTaskList();
 
         // prepare to-do list state
         helper.addToModel(model, 2);
@@ -414,7 +414,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, startTime, endTime, tags);
+            return TaskParser.parseTask(name, startTime, endTime, tags);
         }
 
         /**
@@ -425,7 +425,7 @@ public class LogicManagerTest {
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(
+            return TaskParser.parseTask(
                     new Name("Task " + seed),
                     new StartTime("01-01-2017 4.00 PM"),
                     new EndTime("01-01-2017 5.00 PM"),
@@ -528,7 +528,7 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(
+            return TaskParser.parseTask(
                     new Name(name),
                     new StartTime("01-01-1995 4.00 PM"),
                     new EndTime("01-01-1995 5.00 PM"),

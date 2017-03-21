@@ -1,7 +1,7 @@
 package seedu.todolist.commons.events.ui;
 
 import seedu.todolist.commons.events.BaseEvent;
-import seedu.todolist.model.task.ReadOnlyTask;
+import seedu.todolist.model.task.Task;
 
 /**
  * Represents a selection change in the Person List Panel
@@ -9,9 +9,9 @@ import seedu.todolist.model.task.ReadOnlyTask;
 public class TaskPanelSelectionChangedEvent extends BaseEvent {
 
 
-    private final ReadOnlyTask newSelection;
+    private final Task newSelection;
 
-    public TaskPanelSelectionChangedEvent(ReadOnlyTask newSelection) {
+    public TaskPanelSelectionChangedEvent(Task newSelection) {
         this.newSelection = newSelection;
     }
 
@@ -20,7 +20,7 @@ public class TaskPanelSelectionChangedEvent extends BaseEvent {
         return this.getClass().getSimpleName();
     }
 
-    public ReadOnlyTask getNewSelection() {
+    public Task getNewSelection() {
         return newSelection;
     }
 }

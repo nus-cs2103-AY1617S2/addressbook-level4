@@ -16,7 +16,6 @@ import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.logic.commands.ListCommand;
-import seedu.todolist.model.task.ReadOnlyTask;
 import seedu.todolist.model.task.Task;
 import seedu.todolist.model.task.UniqueTaskList;
 import seedu.todolist.model.task.UniqueTaskList.TaskNotFoundException;
@@ -29,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final ToDoList toDoList;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
@@ -71,13 +70,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(Task target) throws TaskNotFoundException {
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
 
-    @Override
-    public synchronized void completeTask(int filteredTaskListIndex, ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void completeTask(int filteredTaskListIndex, Task target) throws TaskNotFoundException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.completeTask(toDoListIndex, target);
         indicateToDoListChanged();
@@ -91,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(int filteredTaskListIndex, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
@@ -103,14 +101,14 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+    public UnmodifiableObservableList<Task> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     //@@author A0139633B
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredIncompleteTaskList() {
-        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+    public UnmodifiableObservableList<Task> getFilteredIncompleteTaskList() {
+        filteredTasks.setPredicate((Predicate<? super Task>) task -> {
             return !task.isComplete();
         });
         indicateViewListChanged(ListCommand.TYPE_INCOMPLETE);
@@ -119,8 +117,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     //@@author A0139633B
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredCompleteTaskList() {
-        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+    public UnmodifiableObservableList<Task> getFilteredCompleteTaskList() {
+        filteredTasks.setPredicate((Predicate<? super Task>) task -> {
             return task.isComplete();
         });
         indicateViewListChanged(ListCommand.TYPE_COMPLETE);
@@ -129,8 +127,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     //@@author A0139633B
-    public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
-        filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
+    public UnmodifiableObservableList<Task> getFilteredOverdueTaskList() {
+        filteredTasks.setPredicate((Predicate<? super Task>) task -> {
             //get current time and compare with the task's end time
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy h.mm a");
             Date currentDate = new Date();
@@ -166,7 +164,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask task);
+        boolean satisfies(Task task);
         @Override
         String toString();
     }
@@ -180,7 +178,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask task) {
+        public boolean satisfies(Task task) {
             return qualifier.run(task);
         }
 
@@ -191,7 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask task);
+        boolean run(Task task);
         @Override
         String toString();
     }
@@ -204,7 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask task) {
+        public boolean run(Task task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName,
                             task.getTags().toSet(), keyword))
