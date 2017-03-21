@@ -110,23 +110,11 @@ public class TaskManager implements ReadOnlyTaskManager {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateEvent(int index, Event editedReadOnlyPerson)
+    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
             throws UniqueEventList.DuplicateEventException {
-        assert editedReadOnlyPerson != null;
+        assert editedReadOnlyEvent != null;
 
-        Event editedPerson = new Event(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        events.updateEvent(index, editedPerson);
-    }
-
-    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyPerson)
-            throws UniqueEventList.DuplicateEventException {
-        assert editedReadOnlyPerson != null;
-
-        Event editedPerson = new Event(editedReadOnlyPerson);
+        Event editedPerson = new Event(editedReadOnlyEvent);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person

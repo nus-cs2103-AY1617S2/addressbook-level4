@@ -117,7 +117,7 @@ public class EditCommand extends Command {
 			this.location = toCopy.getLocation();
 			this.deadline = toCopy.getDeadline();
 			this.startTime = toCopy.getStartTime();
-			this.endTime = toCopy.getStartTime();
+			this.endTime = toCopy.getEndTime();
 			this.description = toCopy.getDescription();
 			this.periodic = toCopy.getPeriodic();
 			this.tags = toCopy.getTags();
@@ -127,7 +127,7 @@ public class EditCommand extends Command {
 		 * Returns true if at least one field is edited.
 		 */
 		public boolean isAnyFieldEdited() {
-			return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.description,
+			return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.endTime, this.description,
 					this.periodic, this.tags);
 		}
 
