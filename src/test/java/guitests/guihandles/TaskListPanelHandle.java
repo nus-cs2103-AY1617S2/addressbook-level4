@@ -45,21 +45,20 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param tasks
      *            A list of task in the correct order.
      * @throws IllegalValueException
      * @throws IllegalArgumentException
      */
-    public boolean isListMatching(ReadOnlyTask... tasks)
-            throws IllegalArgumentException, IllegalValueException {
+    public boolean isListMatching(ReadOnlyTask... tasks) throws IllegalArgumentException, IllegalValueException {
         return this.isListMatching(0, tasks);
     }
 
     /**
      * Returns true if the list is showing the task details correctly and in
      * correct order.
-     * 
+     *
      * @param startPosition
      *            The starting position of the sub list.
      * @param tasks
@@ -70,16 +69,14 @@ public class TaskListPanelHandle extends GuiHandle {
             throws IllegalArgumentException, IllegalValueException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException(
-                    "List size mismatched\n" + "Expected "
-                            + (getListView().getItems().size() - 1) + " tasks");
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTask(
-                    getTaskCardHandle(startPosition + i), tasks[i])) {
+            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
         }
@@ -109,8 +106,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getName().fullName
-                    .equals(tasks[i].getName().fullName)) {
+            if (!tasksInList.get(startPosition + i).getName().fullName.equals(tasks[i].getName().fullName)) {
                 return false;
             }
         }
@@ -165,27 +161,21 @@ public class TaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public TaskCardHandle getTaskCardHandle(int index)
-            throws IllegalValueException {
+    public TaskCardHandle getTaskCardHandle(int index) throws IllegalValueException {
         ReadOnlyTask source = getListView().getItems().get(index);
         if (source.getTaskType() == TaskType.TaskWithNoDeadline) {
-            return getTaskCardHandle(new TaskWithoutDeadline(
-                    getListView().getItems().get(index)));
+            return getTaskCardHandle(new TaskWithoutDeadline(getListView().getItems().get(index)));
         } else {
-            return getTaskCardHandle(
-                    new TaskWithDeadline(getListView().getItems().get(index)));
+            return getTaskCardHandle(new TaskWithDeadline(getListView().getItems().get(index)));
         }
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n)
-                        .isSameTask(task))
-                .findFirst();
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task)).findFirst();
         if (taskCardNode.isPresent()) {
-            return new TaskCardHandle(guiRobot, primaryStage,
-                    taskCardNode.get());
+            return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
             return null;
         }

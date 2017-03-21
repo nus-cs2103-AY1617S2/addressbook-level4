@@ -48,52 +48,39 @@ public class TestUtil {
     /**
      * Folder used for temp files created during testing. Ignored by Git.
      */
-    public static final String SANDBOX_FOLDER = FileUtil
-            .getPath("./src/test/data/sandbox/");
+    public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
     public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
-    public static void assertThrows(Class<? extends Throwable> expected,
-            Runnable executable) {
+    public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
             executable.run();
         } catch (Throwable actualException) {
             if (actualException.getClass().isAssignableFrom(expected)) {
                 return;
             }
-            String message = String.format("Expected thrown: %s, actual: %s",
-                    expected.getName(), actualException.getClass().getName());
+            String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
+                    actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
-        throw new AssertionFailedError(String.format(
-                "Expected %s to be thrown, but nothing was thrown.",
-                expected.getName()));
+        throw new AssertionFailedError(
+                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
-            return new Task[] {
-                    new TaskWithoutDeadline(new Name("Ali Muster"),
-                            new UniqueTagList(), false),
-                    new TaskWithoutDeadline(new Name("Boris Mueller"),
-                            new UniqueTagList(), false),
-                    new TaskWithoutDeadline(new Name("Carl Kurz"),
-                            new UniqueTagList(), true),
-                    new TaskWithoutDeadline(new Name("Daniel Meier"),
-                            new UniqueTagList(), false),
-                    new TaskWithoutDeadline(new Name("Elle Meyer"),
-                            new UniqueTagList(), true),
-                    new TaskWithoutDeadline(new Name("Fiona Kunz"),
-                            new UniqueTagList(), false),
-                    new TaskWithoutDeadline(new Name("George Best"),
-                            new UniqueTagList(), false),
-                    new TaskWithoutDeadline(new Name("Hoon Meier"),
-                            new UniqueTagList(), false),
-                    new TaskWithoutDeadline(new Name("Ida Mueller"),
-                            new UniqueTagList(), true) };
+            return new Task[] { new TaskWithoutDeadline(new Name("Ali Muster"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Boris Mueller"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Carl Kurz"), new UniqueTagList(), true),
+                                new TaskWithoutDeadline(new Name("Daniel Meier"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Elle Meyer"), new UniqueTagList(), true),
+                                new TaskWithoutDeadline(new Name("Fiona Kunz"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("George Best"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Hoon Meier"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Ida Mueller"), new UniqueTagList(), true) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -119,7 +106,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
-     * 
+     *
      * @param fileName
      * @return
      */
@@ -163,15 +150,13 @@ public class TestUtil {
         if (keyCodeCombination.getAlt() == KeyCombination.ModifierValue.DOWN) {
             keys.add(KeyCode.ALT);
         }
-        if (keyCodeCombination
-                .getShift() == KeyCombination.ModifierValue.DOWN) {
+        if (keyCodeCombination.getShift() == KeyCombination.ModifierValue.DOWN) {
             keys.add(KeyCode.SHIFT);
         }
         if (keyCodeCombination.getMeta() == KeyCombination.ModifierValue.DOWN) {
             keys.add(KeyCode.META);
         }
-        if (keyCodeCombination
-                .getControl() == KeyCombination.ModifierValue.DOWN) {
+        if (keyCodeCombination.getControl() == KeyCombination.ModifierValue.DOWN) {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
@@ -193,8 +178,8 @@ public class TestUtil {
     }
 
     public static String descOnFail(Object... comparedObjects) {
-        return "Comparison failed \n" + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString).collect(Collectors.joining("\n"));
+        return "Comparison failed \n"
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
     public static void setFinalStatic(Field field, Object newValue)
@@ -226,8 +211,7 @@ public class TestUtil {
      * Caveat: only find method declared in the current Class, not inherited
      * from supertypes
      */
-    public static Method getPrivateMethod(Class<?> objectClass,
-            String methodName) throws NoSuchMethodException {
+    public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
         method.setAccessible(true);
         return method;
@@ -243,35 +227,31 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
-     * 
+     *
      * @param node
      * @return
      */
     public static Point2D getScreenMidPoint(Node node) {
-        double x = getScreenPos(node).getMinX()
-                + node.getLayoutBounds().getWidth() / 2;
-        double y = getScreenPos(node).getMinY()
-                + node.getLayoutBounds().getHeight() / 2;
+        double x = getScreenPos(node).getMinX() + node.getLayoutBounds().getWidth() / 2;
+        double y = getScreenPos(node).getMinY() + node.getLayoutBounds().getHeight() / 2;
         return new Point2D(x, y);
     }
 
     /**
      * Gets mid point of a node relative to its scene.
-     * 
+     *
      * @param node
      * @return
      */
     public static Point2D getSceneMidPoint(Node node) {
-        double x = getScenePos(node).getMinX()
-                + node.getLayoutBounds().getWidth() / 2;
-        double y = getScenePos(node).getMinY()
-                + node.getLayoutBounds().getHeight() / 2;
+        double x = getScenePos(node).getMinX() + node.getLayoutBounds().getWidth() / 2;
+        double y = getScenePos(node).getMinY() + node.getLayoutBounds().getHeight() / 2;
         return new Point2D(x, y);
     }
 
     /**
      * Gets the bound of the node relative to the parent scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -297,15 +277,14 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * 
+     *
      * @param tasks
      *            The list of tasks
      * @param tasksToRemove
      *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] tasks,
-            TestTask... tasksToRemove) {
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
@@ -313,21 +292,19 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * 
+     *
      * @param list
      *            original list to copy from
      * @param targetIndexInOneIndexedFormat
      *            e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removeTaskFromList(final TestTask[] list,
-            int targetIndexInOneIndexedFormat) {
-        return removeTasksFromList(list,
-                list[targetIndexInOneIndexedFormat - 1]);
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
      * Replaces tasks[i] with a task.
-     * 
+     *
      * @param tasks
      *            The array of tasks.
      * @param task
@@ -336,23 +313,21 @@ public class TestUtil {
      *            The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replaceTaskFromList(TestTask[] tasks,
-            TestTask task, int index) {
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
         tasks[index] = task;
         return tasks;
     }
 
     /**
      * Appends tasks to the array of tasks.
-     * 
+     *
      * @param tasks
      *            A array of tasks.
      * @param tasksToAdd
      *            The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
-    public static TestTask[] addTasksToList(final TestTask[] tasks,
-            TestTask... tasksToAdd) {
+    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.addAll(asList(tasksToAdd));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
@@ -366,8 +341,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTask(TaskCardHandle card,
-            ReadOnlyTask task) {
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
 

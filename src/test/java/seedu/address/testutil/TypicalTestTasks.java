@@ -10,21 +10,15 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask mathAssgn, buyStove, writeEssay, buyRiceCooker, finishLab,
-            markCode, nightRun, hoon, ida;
+    public TestTask mathAssgn, buyStove, writeEssay, buyRiceCooker, finishLab, markCode, nightRun, hoon, ida;
 
     public TypicalTestTasks() {
         try {
-            mathAssgn = new TaskBuilder().withName("Do math assignment")
-                    .withTags("math").build();
-            buyStove = new TaskBuilder().withName("Buy Meier stove")
-                    .withTags("appliance", "stove").build();
-            writeEssay = new TaskBuilder().withName("Write english essay")
-                    .build();
-            buyRiceCooker = new TaskBuilder().withName("Buy Meier rice cooker")
-                    .build();
-            finishLab = new TaskBuilder()
-                    .withName("Complete CS2106 Lab Assignment").build();
+            mathAssgn = new TaskBuilder().withName("Do math assignment").withTags("math").build();
+            buyStove = new TaskBuilder().withName("Buy Meier stove").withTags("appliance", "stove").build();
+            writeEssay = new TaskBuilder().withName("Write english essay").build();
+            buyRiceCooker = new TaskBuilder().withName("Buy Meier rice cooker").build();
+            finishLab = new TaskBuilder().withName("Complete CS2106 Lab Assignment").build();
             markCode = new TaskBuilder().withName("Mark CS1010S").build();
             nightRun = new TaskBuilder().withName("Go for a night run").build();
 
@@ -48,8 +42,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[] { mathAssgn, buyStove, writeEssay, buyRiceCooker,
-                finishLab, markCode, nightRun };
+        return new TestTask[] { mathAssgn, buyStove, writeEssay, buyRiceCooker, finishLab, markCode, nightRun };
     }
 
     public TaskManager getTypicalTaskManager() {
