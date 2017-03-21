@@ -43,7 +43,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         TestTask updatedTask = new TaskBuilder(taskToUpdate).withDate("friday").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
-    } 
+    }
 /*
     @Test
     public void update_clearCategories_success() throws Exception {

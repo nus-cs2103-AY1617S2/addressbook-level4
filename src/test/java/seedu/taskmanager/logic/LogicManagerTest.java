@@ -190,21 +190,20 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("ADD wrong args wrong args", expectedMessage);
-        assertCommandFailure("ADD Valid TaskName 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("ADD Valid TaskName p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("ADD Valid TaskName p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("ADD Valid TaskName ON date FROM starttime TO endtime", expectedMessage);
+        assertCommandFailure("ADD Valid TaskName TO endtime", expectedMessage);
+        assertCommandFailure("ADD Valid TaskName FROM starttime", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+    public void execute_add_invalidTaskData() {
+        assertCommandFailure("ADD []\\[;] ON date starttime TO endtime",
                 TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+        assertCommandFailure("ADD Valid TaskName ON wrongdateformat starttime TO endtime",
                 Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("ADD Valid TaskName ON date wrongstarttimeformat TO endtime",
                 StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("ADD Valid Name ON date starttime TO wrongendtimeformat",
                 EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
 //        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 //                Category.MESSAGE_TAG_CONSTRAINTS);
@@ -215,7 +214,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.travis();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
@@ -231,7 +230,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.travis();
 
         // setup starting state
         model.addTask(toBeAdded); // person already in internal address book
@@ -418,10 +417,10 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            TaskName taskName = new TaskName("Adam Brown");
-            Date privateDate = new Date("111111");
-            StartTime privateStartTime = new StartTime("111, alpha street");
+        Task travis() throws Exception {
+            TaskName taskName = new TaskName("Travis the bro");
+            Date privateDate = new Date("03/03/17");
+            StartTime privateStartTime = new StartTime("1200");
             EndTime privateEndTime = new EndTime("1400");
 //            Category category1 = new Category("category1");
 //            Category category2 = new Category("longercategory2");

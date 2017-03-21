@@ -51,7 +51,7 @@ public class TaskManagerTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
+        List<Task> newTasks = Arrays.asList(new Task(td.eatbreakfast), new Task(td.eatbreakfast));
 //        List<Category> newCategories = td.alice.getCategories().asObservableList();
 //        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
 
@@ -92,5 +92,5 @@ public class TaskManagerTest {
 //        @Override
 //        public ObservableList<Category> getCategoryList() {
 //            return categories;
-        }    
+        }
     }
