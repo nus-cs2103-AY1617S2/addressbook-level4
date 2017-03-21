@@ -308,7 +308,7 @@ Sorts tasks based on task name, start date, end date or priority level.<br>
 Format: `sort {TASK_DETAILS}{DATE}{PRIORITY_LEVEL}` 
 >> Only 1 of 3 parameters can be used
 
-> no prefix: Sorts based on task name in alphabetical order<br>
+> n: Sorts based on task name in alphabetical order<br>
 > d: Sorts based on date starting with the earliest date<br>
 > p: Sorts based on priority assigned starting with the highest priority <br>
 
@@ -323,7 +323,7 @@ Example:
 <a name="clear"></a>
 ### 3.11. Clearing entries: clear
 Clears all tasks or groups of task<br>
-Format: `clear [TAG]...`
+Format: `clear [TAGS] [MORE_TAGS]`
 > Without parameters, clear will delete all tasks from the task manager<br>
 > With parameters, clear will only delete tasks containing all of the tags from the task manager
 
@@ -367,9 +367,15 @@ Format: `exit`
 
 ## 4. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Task Manager folder.
+**Q**: How do I save my data in FlexiTask? <br>
+**A**: FlexiTask saves your data automatically, whenever the task list is updated. Data is saved to ‘data/tasklist.xml’.
+
+**Q**: How do I transfer my data to another Computer? <br>
+**A**: Install FlexiTask in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlexiTask folder.
+ 
+**Q**: Is FlexiTask capable of providing reminders for my upcoming tasks? <br>
+**A**: FlexiTask will display your upcoming tasks on the right panel of the User Interface. However, it will not show you a reminder.
+
        
 ## 5. Command Summary <img src="images/commandSummary_21Mar.png">
 
