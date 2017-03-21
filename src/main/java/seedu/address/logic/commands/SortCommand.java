@@ -13,7 +13,7 @@ public class SortCommand extends Command {
 
     private String keyword;
 
-    public String message;
+    public static String message;
 
     public SortCommand(String keyword) {
         this.keyword = keyword;

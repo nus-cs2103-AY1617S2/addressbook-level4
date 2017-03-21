@@ -260,7 +260,7 @@ public class LogicManagerTest {
         model.addTask(p4);
 
         assertCommandSuccess("sort",
-                SortCommand.MESSAGE_SUCCESS,
+                SortCommand.message,
                 expectedTaskManager,
                 fiveTasks);
     }

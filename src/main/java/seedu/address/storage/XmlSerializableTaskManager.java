@@ -60,7 +60,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getSortedList() {
+    public ObservableList<ReadOnlyTask> getSortedList(String keyword) {
         final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
