@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-//@@author A0142255M
+<!-- @@author A0142255M -->
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
