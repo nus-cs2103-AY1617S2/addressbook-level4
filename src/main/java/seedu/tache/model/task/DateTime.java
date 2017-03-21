@@ -1,13 +1,14 @@
 package seedu.tache.model.task;
 
-import seedu.tache.commons.exceptions.IllegalValueException;
-
 import java.text.SimpleDateFormat;
-import java.util.List;
+
 import java.util.Date;
+import java.util.List;
 
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
+import seedu.tache.commons.exceptions.IllegalValueException;
 
 
 public class DateTime {
@@ -26,7 +27,7 @@ public class DateTime {
         assert date != null;
         String trimmedStartDate = date.trim();
         List<Date> temp = new PrettyTimeParser().parse(trimmedStartDate);
-        
+
         /*if (!isValidDate(trimmedStartDate)) {
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }*/
@@ -44,13 +45,13 @@ public class DateTime {
     public String toString() {
         return new PrettyTime().format(date);
     }
-    
-    public String getDateOnly(){
+
+    public String getDateOnly() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(date);
     }
-    
-    public String getTimeOnly(){
+
+    public String getTimeOnly() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(date);
     }

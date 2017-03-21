@@ -69,7 +69,7 @@ public class AddCommand extends Command {
         if (endTimeStr.isPresent()) {
             endTime = endTimeStr.get();
         }
-        if(!(endDate.equals("") && endTime.equals(""))){
+        if (!(endDate.equals("") && endTime.equals(""))) {
             endDateTime = Optional.of(new DateTime(endDate + endTime));
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
