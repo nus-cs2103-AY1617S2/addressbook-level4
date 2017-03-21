@@ -28,6 +28,7 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_CRITERIA_ARGS_FORMAT = Pattern.compile("(?<sortCriteria>.+)");
+    private static final Pattern INDEXES_ARGS_FORMAT = Pattern.compile("^([0-9]*\\s+)*[0-9]*$");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
