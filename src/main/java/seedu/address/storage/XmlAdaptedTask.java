@@ -53,10 +53,9 @@ public class XmlAdaptedTask {
         name = source.getName().fullName;
         priority = source.getPriority().isPresent() ? source.getPriority().get().getValue().name() : null;
         status = source.getStatus().value;
-        //note = source.getNote().map(Note::toString).orElse("");
         note = source.getNote().isPresent() ? source.getNote().get().toString() : null;
-        startTime = source.getStartTime().map(DateTime::toString).orElse("");
-        endTime = source.getEndTime().map(DateTime::toString).orElse("");
+        startTime = source.getStartTime().isPresent() ? source.getStartTime().get().toString() : null;
+        endTime = source.getEndTime().isPresent() ? source.getEndTime().get().toString() : null;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
