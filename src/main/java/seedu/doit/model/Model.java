@@ -3,6 +3,7 @@ package seedu.doit.model;
 import java.util.Set;
 
 import seedu.doit.commons.core.UnmodifiableObservableList;
+import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
 import seedu.doit.model.item.UniqueTaskList;
@@ -39,17 +40,21 @@ public interface Model {
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException;
 
     /**
-     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * Updates the task located at {@code filteredTaskListIndex} with
+     * {@code editedTask}.
      *
-     * @throws DuplicateTaskException    if updating the task's details causes the task to be equivalent to
-     *                                   another existing task in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateTaskException
+     *             if updating the task's details causes the task to be
+     *             equivalent to another existing task in the list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code filteredTaskListIndex} < 0 or >= the size of the
+     *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-        throws DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException;
 
     /**
-     * Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>}
+     * Returns the filtered task list as an
+     * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -59,7 +64,8 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /**
-     * Updates the filter of the filtered task list to filter by the given keywords
+     * Updates the filter of the filtered task list to filter by the given
+     * keywords
      */
     void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
             Set<String> descriptionKeywords);
@@ -69,6 +75,23 @@ public interface Model {
      */
     void sortBy(String sortType);
 
+    /**
+     * Undo the previous undoable command.
+     *
+     * Undo command is not undoable
+     *
+     * @throws EmptyTaskManagerStackException
+     */
+    void undo() throws EmptyTaskManagerStackException;
 
+
+    /**
+     * Reverse the undo command.
+     *
+     * Only undo command is redoable
+     *
+     * @throws EmptyTaskManagerStackException
+     */
+    void redo() throws EmptyTaskManagerStackException;
 
 }

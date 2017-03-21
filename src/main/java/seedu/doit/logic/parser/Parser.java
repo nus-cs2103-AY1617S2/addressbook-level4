@@ -17,9 +17,12 @@ import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.SortCommand;
+import seedu.doit.logic.commands.UndoCommand;
+
 
 /**
  * Parses user input.
@@ -83,6 +86,12 @@ public class Parser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
