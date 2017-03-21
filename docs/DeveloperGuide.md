@@ -16,7 +16,14 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
+<br>
+FlexiTask is a task manager that helps users to manage schedules and tasks using simple command-line interfaces commands.
 
+This guide describes the design and implementation of FlexiTask. This developer guide is for both existing and new developers who are interested in working on FlexiTask in the future.
+
+It will walk you through the Setup, Architecture, APIs and the details regarding the different components of the program.
+
+<br>
 ## 1. Setting up
 
 ### 1.1. Prerequisites
@@ -28,7 +35,7 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 2. **Eclipse** IDE
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+   [this link](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
@@ -45,7 +52,7 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
+      (This is because Gradle downloads library files from servers during the project setup process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 1.3. Configuring Checkstyle
@@ -78,17 +85,18 @@ By : `Team W14-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 ### 2.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 1: Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+Figure 1 given above explains the high-level design of FlexiTask.
+Given below is a quick overview of the main components and their main responsibilities.
 
-
+#### 2.1. Main
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/tasklist/MainApp.java). It is responsible for,
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* Initializing the components in the correct sequence, and connects them up with each other when FlexiTask launches 
+* Shutting down the components and invokes cleanup method where necessary, when FlexiTask shuts down.
 
+#### 2.2. Commons
 [**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
@@ -100,47 +108,50 @@ The rest of the App consists of four components.
 
 * [**`UI`**](#22-ui-component) : The UI of the App.
 * [**`Logic`**](#23-logic-component) : The command executor.
-* [**`Model`**](#24-model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#25-storage-component) : Reads data from, and writes data to, the hard disk.
+* [**`Model`**](#24-model-component) : The in-memory representation of the task list.
+* [**`Storage`**](#25-storage-component) : The component responsible for reading data from, and writing data to, the hard disk.
+<br>
+
 
 Each of the four components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
+<br>
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
+
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+_Figure 2: Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
+Figure 3 below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images/SDforDeleteTask.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images/SDforDeleteTask.png" width="800">
+_Figure 3: Component Interactions for `delete 1` Command (Part 1)_
 
->Note how the `Model` simply raises a `TaskListChangedEvent` when the FlexiTask data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when FlexiTask data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
-The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
-being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+Figure 4 below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
+being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 <img src="images/SDforDeleteTaskEvent.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 4: Component Interactions for `delete 1` Command (Part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
+  to be coupled to either of them. This is an example of how this Events-Driven approach helps us reduce direct
   coupling between components.
 
 The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 5: Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/tasklist/ui/Ui.java)
 
@@ -160,43 +171,43 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+_Figure 6: Structure of the Logic Component_
 
+Figure 6 shows how different components interact with each other.<br>
 **API** : [`Logic.java`](../src/main/java/seedu/tasklist/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Figure 7 below shows the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 7: Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+_Figure 8: Structure of the Model Component_
+
+Figure 8 shows the dependency of the classes within the `Model` and how they depend on each other.<br>
 
 **API** : [`Model.java`](../src/main/java/seedu/tasklist/model/Model.java)
 
-The `Model`,
+The `Model` has the following features:
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the FlexiTask data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* stays independent on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -210,7 +221,13 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.tasklist.commons` package.
+Classes used by multiple components are in the `seedu.tasklist.commons` package.<br>
+They are divided into four sub-packages, namely `core`, `events`, `exceptions` and `util`.
+
+* `core` - consists of the essential classes that are required by multiple components.
+* `events` - consists of the different type of events that can occue; these are used mainly by `EventManager` and `EventBus`.
+* `exceptions` - consists of exceptions that may occur with the use of the program.
+* `util` - consists of additional utilities for the different components.
 
 ## 3. Implementation
 
@@ -219,13 +236,17 @@ Classes used by multiple components are in the `seedu.tasklist.commons` package.
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#32-configuration))
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+> The logging level can be controlled using the `logLevel` setting in the configuration file
+  (See [Configuration](#32-configuration))<br>
+  
+> The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
+  the specified logging level<br>
+  
+> The log messages are currently output through: `Console` and to a `.log` file.
 
-**Logging Levels**
+####3.1.1. **Logging Levels**
+
+Currently, FlexiTask has 4 logging levels: `SEVERE`, `WARNING`, `INFO` and `FINE`. They record information pertaining to: 
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Can continue, but with caution
@@ -268,10 +289,9 @@ We have two types of tests:
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
       e.g. `seedu.tasklist.logic.LogicManagerTest`
-
-#### Headless GUI Testing
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode.
+      
+3. **Headless GUI Testing** - These are test involving GUI.
+  [TestFX](https://github.com/TestFX/TestFX) library allows GUI tests to be run in the _headless_ mode.
  In the headless mode, GUI tests do not show up on the screen.
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
@@ -349,9 +369,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | be able to delete a task after adding | delete tasks that I no longer need
 `* * *` | user | find specific tasks by keywords | locate my task easily
 `* * *` | user | specify a particular path or folder to store my task lists | retrieve the file easily and conveniently
-`* * *` | user | undo the recent action | revert back in case I decide to change my mind.
+`* * *` | user | undo the recent action | revert in case I decide to change my mind.
 `* * *` | user | list all tasts I created | so that I can plan my day more efficiently.
-`* *` | user | add tasks that recur on a consistent basis (e.g. Tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
+`* *` | user | add tasks that recur on a consistent basis (e.g. tutorials and lectures) | add recurring tasks more conveniently, since the item only needs to be added once
 `* *` | user | add some comments for a particular task | store additional information that I will need when handling that task
 `* *` | user | include a tag on the task | retrieve all the tasks that belong to the same tag
 `* *` | user | be able to set how important a task is | know which tasks I should prioritize first
@@ -359,7 +379,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | be able to delete a group of task by keywords | avoid deleting one by one
 `* *` | user | have a view of my pending tasks for the day/week/month | know what I need to do for that particular period of time
 `* *` | user | see my overdue tasks | know what actions to take on them
-`* *` | advanced user | have the choice of a few preset themes | change it to my liking.
+`* *` | advanced user | have the choice of a few preset themes | change it to my liking
 `*` | user | sort my tasks according to task names | delegate my time appropriately
 `*` | user | delete all my tasks | hand in my resignation letter afterwards
 
@@ -434,8 +454,8 @@ Use case ends
 **MSS**
 
 1. User requests to delete a task and inputs the command with correct keywords
-2. FlexiTask shows a message to ask for confirmation of deletion.
-3. User inputs the command for confirmation.
+2. FlexiTask shows a message to ask for confirmation of deletion
+3. User inputs the command for confirmation
 4. FlexiTask deletes the task <br>
 
 > Use case ends
@@ -522,6 +542,9 @@ Use case ends
 
 > commandline commands based on UNIX System
 
+####Headless Mode:
+> In the headless mode, GUI tests do not show up on the screen
+> This means you can do other things on the computer while the tests are running
 
 ## Appendix E : Product Survey
 
@@ -530,32 +553,65 @@ Use case ends
 Author: Wang Pengcheng
 
 Pros:
-* Simplistic and elegant UI
-* Ability to add task items directly from Gmail into Google Task.
-* Not a lot of buttons to click. Convenient and easy to learn.
-* Allow different colour codings for easy references.
-* Able to import other existing calendars (e.g. NUSmods) into the user's calendar.
+* Has a simplistic and elegant UI
+* Has the ability to add task items directly from Gmail into Google Task.
+* Does not have a lot of buttons to click. Convenient and easy to learn.
+* Allows different colour codings for easy references.
+* Allows the user to import other existing calendars (e.g. NUSmods) into the user's calendar.
 
 Cons:
-* Web application (especially for Google Task) that requires Internet connection for usage.
-* UI for Google Tasks needs improvement; The deletion of items is quite a hassle and can be messy.
-* May not cater to Jim who prefers keyboard inputs.
+* Requires Internet connection for usage.
+* Needs improvement on the UI for Google Tasks; The deletion of items is quite a hassle and can be messy.
+* Requires mouse usage instead of CLI commands, which may not cater to Jim who prefers keyboard inputs.
 
 **Priority Matrix**
 
 Author: Ellango Vesali
 
 Pros:
-* Simple and easy to use UI
-* Create multiple task under a main project
-* Group the list of items based on the different levels of priorities
-* Integrate with Mail to keep track of important mails
+* Has a simple and easy to use UI
+* Creates multiple task under a main project
+* Groups the list of items based on the different levels of priorities
+* Integrates with Mail to keep track of important mails
 * Syncs with iOS, Android and Windows
-* Upload files
-* Daily reports reminding one of their deadlines
-* Collaborative aspects for teams
+* Uploads files
+* Has daily reports to remind one of their deadlines
+* Has collaborative aspects for teams
 
 Cons:
-* Require mouse usage, may not cater Jim who prefers keyboard inputs
-* Monthly subscription fee
+* Requires mouse usage instead of CLI commands, which may not cater to Jim who prefers keyboard inputs.
+* Requires a monthly subscription fee
 
+**Assembla**
+
+Author: Lim Jie
+
+Pros:
+* Caters to advanced coding purposes
+* Allows collaboration with different project groups at the same time
+* Has three types of communication channel for different purposes and importance
+* Connects to different software such as Git, Goggle Drive, Dropbox etc.
+* Allows tracking of issues and milestones from Github projects
+* Has extensive support portal that offers 3 level of assistance
+
+Cons:
+* Lacks mobile application
+* Has a steep learning curve
+* Imposes group pricing rather than individual pricing
+
+**Wunderlist**
+
+Author: Sherina Toh Shi Pei
+
+Pros:
+* Has an intuitive UI
+* Allows categories to be created where tasks can be placed in
+* Allows subtasks, notes and files to be added to a task
+* Allows for collaboration on tasks with other people
+* Allows users to set a reminder for their tasks
+* Shows a daily and weekly overview of all tasks
+* Has a large number of themes for user to choose from to suit their preferences
+
+Cons:
+* Requires internet to access
+* Requires mouse usage instead of CLI commands, which may not cater to Jim who prefers keyboard inputs.
