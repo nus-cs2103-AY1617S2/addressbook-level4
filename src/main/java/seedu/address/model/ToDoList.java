@@ -152,6 +152,10 @@ public class ToDoList implements ReadOnlyToDoList {
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
+    
+    public String getTagListToString(){
+        return this.tags.getTagListToString();
+    }
 
 //// util methods
 
