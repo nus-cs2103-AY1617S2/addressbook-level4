@@ -8,6 +8,7 @@ import seedu.doit.commons.core.ComponentManager;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
+import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
 import seedu.doit.model.item.ReadOnlyTask;
@@ -17,15 +18,16 @@ import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
+    private TaskManager taskManager;
+    private FilteredList<ReadOnlyTask> filteredTasks;
 
+    private static final TaskManagerStack taskManagerStack = TaskManagerStack.getInstance();
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -37,7 +39,15 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        updateFilteredTasks();
+
+    }
+
+    /**
+     * Updates the filteredTasks after the taskmanager have changed
+     */
+    public void updateFilteredTasks() {
+        this.filteredTasks = new FilteredList<ReadOnlyTask>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -46,34 +56,37 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyItemManager newData) {
-        taskManager.resetData(newData);
+        this.taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
 
     @Override
     public ReadOnlyItemManager getTaskManager() {
-        return taskManager;
+        return this.taskManager;
     }
 
     /**
      * Raises an event to indicate the model has changed
      */
     private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(this.taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskManager.removeTask(target);
+        logger.info("delete task in model manager");
+        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        this.taskManager.removeTask(target);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
 
     }
 
-
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
-        taskManager.addTask(task);
+        logger.info("add task in model manager");
+        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        this.taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -81,32 +94,33 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void markTask(int taskIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
-        taskManager.markTask(taskIndex, taskToDone);
+        logger.info("marked a task in model manager as done");
+        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        this.taskManager.markTask(taskIndex, taskToDone);
         indicateTaskManagerChanged();
     }
-
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
-
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskManagerIndex, editedTask);
+        logger.info("update task in model manager");
+        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
+        this.taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
 
-
-
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        return new UnmodifiableObservableList<>(this.filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        this.filteredTasks.setPredicate(null);
     }
 
     @Override
@@ -127,10 +141,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+        this.filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -156,12 +171,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
+            return this.qualifier.run(task);
         }
 
         @Override
         public String toString() {
-            return qualifier.toString();
+            return this.qualifier.toString();
         }
     }
 
@@ -173,17 +188,31 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
+
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                .findAny()
-                .isPresent();
+            return this.nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)).findAny()
+                    .isPresent();
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", this.nameKeyWords);
         }
+    }
+
+    @Override
+    public void undo() throws EmptyTaskManagerStackException {
+        this.taskManager.resetData(taskManagerStack.loadOlderTaskManager(this.getTaskManager()));
+        updateFilteredTasks();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void redo() throws EmptyTaskManagerStackException {
+        this.taskManager.resetData(taskManagerStack.loadNewerTaskManager(this.getTaskManager()));
+        updateFilteredTasks();
+        indicateTaskManagerChanged();
     }
 
     private class PriorityQualifier implements Qualifier {
@@ -195,15 +224,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return priorityKeywords.stream()
-                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
-                .findAny()
-                .isPresent();
+            return this.priorityKeywords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword)).findAny()
+                    .isPresent();
         }
 
         @Override
         public String toString() {
-            return "priority=" + String.join(", ", priorityKeywords);
+            return "priority=" + String.join(", ", this.priorityKeywords);
         }
     }
 
@@ -216,15 +244,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return descriptionKeywords.stream()
-                .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
-                .findAny()
-                .isPresent();
+            return this.descriptionKeywords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword))
+                    .findAny().isPresent();
         }
 
         @Override
         public String toString() {
-            return "description=" + String.join(", ", descriptionKeywords);
+            return "description=" + String.join(", ", this.descriptionKeywords);
         }
     }
 
