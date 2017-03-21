@@ -16,7 +16,6 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -26,19 +25,20 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
+  //@@author A0138628W
+    private TaskListPanel taskListPanel, eventListPanel, floatingListPanel;
     private Config config;
 
     @FXML
-    private AnchorPane browserPlaceholder;
+    private AnchorPane eventListPlaceholder;
+
+    @FXML
+    private AnchorPane floatingListPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -66,7 +66,7 @@ public class MainWindow extends UiPart<Region> {
         // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
-        setWindowMinSize();
+        setWindowMaxSize();
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
@@ -113,8 +113,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        //@@author A0143648Y
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        eventListPanel = new TaskListPanel(eventListPlaceholder, logic.getFilteredEventList());
+        floatingListPanel = new TaskListPanel(floatingListPlaceholder, logic.getFilteredFloatList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -164,9 +166,9 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-    private void setWindowMinSize() {
-        primaryStage.setMinHeight(MIN_HEIGHT);
-        primaryStage.setMinWidth(MIN_WIDTH);
+    //@@author A0143648Y
+    private void setWindowMaxSize() {
+        primaryStage.setMaximized(true);
     }
 
     /**
@@ -197,14 +199,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
-    }
-
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
 }

@@ -14,7 +14,7 @@ public class TitleTest {
         assertFalse(Title.isValidTitle(" ")); // spaces only
         assertFalse(Title.isValidTitle("^")); // only non-alphanumeric characters
         assertFalse(Title.isValidTitle("????")); //several non-alphanumeric characters
-        
+
         // valid name
         assertTrue(Title.isValidTitle("debugging")); // alphabets only
         assertTrue(Title.isValidTitle("12345")); // numbers only

@@ -22,7 +22,7 @@ import seedu.address.model.task.UrgencyLevel;
 import seedu.address.model.task.Venue;
 
 /**
- * Edits the details of an existing task in the to-do list.
+ * Edits the details of an existing task in the address book.
  */
 public class EditCommand extends UndoableCommand {
 
@@ -36,7 +36,7 @@ public class EditCommand extends UndoableCommand {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
     private final int filteredTaskListIndex;
     private final char filteredTaskListChar;
@@ -120,11 +120,11 @@ public class EditCommand extends UndoableCommand {
         return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel,
                 updatedDescription, updatedTags);
     }
-    
+
     public Title editTitle(ReadOnlyTask taskToEdit){
         return editTaskDescriptor.getTitle().isPresent() ? editTaskDescriptor.getTitle().get() : taskToEdit.getTitle();
     }
-    
+
     public Venue editVenue(ReadOnlyTask taskToEdit){
         if (editTaskDescriptor.getVenue().isPresent()){
             return editTaskDescriptor.getVenue().get();
@@ -134,7 +134,7 @@ public class EditCommand extends UndoableCommand {
         }
         return null;
     }
-    
+
     public StartTime editStartTime(ReadOnlyTask taskToEdit){
         if (editTaskDescriptor.getStartTime().isPresent()){
             return editTaskDescriptor.getStartTime().get();
@@ -144,7 +144,7 @@ public class EditCommand extends UndoableCommand {
         }
         return null;
     }
-    
+
     public EndTime editEndTime(ReadOnlyTask taskToEdit){
         if (editTaskDescriptor.getEndTime().isPresent()){
             return editTaskDescriptor.getEndTime().get();
@@ -154,7 +154,7 @@ public class EditCommand extends UndoableCommand {
         }
         return null;
     }
-    
+
     public UrgencyLevel editUrgencyLevel(ReadOnlyTask taskToEdit){
         if (editTaskDescriptor.getUrgencyLevel().isPresent()){
             return editTaskDescriptor.getUrgencyLevel().get();
@@ -164,7 +164,7 @@ public class EditCommand extends UndoableCommand {
         }
         return null;
     }
-    
+
     public Description editDescription(ReadOnlyTask taskToEdit){
         if (editTaskDescriptor.getDescription().isPresent()){
             return editTaskDescriptor.getDescription().get();
