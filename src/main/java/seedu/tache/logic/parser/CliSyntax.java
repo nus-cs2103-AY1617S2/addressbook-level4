@@ -29,9 +29,9 @@ public class CliSyntax {
     public static final String TAG_PARAMETER = "tag";
 
     /* List filter definitions */
-    public static final String COMPLETED_FILTER = "name";
-    public static final String UNCOMPLETED_FILTER = "start_date";
-    public static final String ALL_FILTER = "end_date";
+    public static final String COMPLETED_FILTER = "completed";
+    public static final String UNCOMPLETED_FILTER = "uncompleted";
+    public static final String ALL_FILTER = "all";
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
