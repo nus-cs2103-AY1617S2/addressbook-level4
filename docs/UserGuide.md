@@ -195,7 +195,7 @@ Here are some examples of tasks that you might want to _delete_ from your task l
 
   E.g. **_Visit the dentist_** <br>
   You have just visited your dentist last week and have not scheduled your next appointment.
-  
+
 Format: **`delete`** `<task>` <br>
 
 <img src="images/UiDeleteCommand.png" width="600"><br>
@@ -268,7 +268,7 @@ Here are some reasons why you might want to _select_ a task:
 
 * **You want to know the [parameters](#parameter) of a certain task** <br>
 
-  > You can refer to the earlier section on the [find](#34-find-a-task--find) command. 
+  > You can refer to the earlier section on the [find](#34-find-a-task--find) command.
 
 * **You want to edit the [parameters](#parameter) of a certain task** <br>
 

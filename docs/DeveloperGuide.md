@@ -164,8 +164,8 @@ The rest of Tache consists of the following four components:
 
 * [**`Storage`**](#35-storage-component) : Reads data from, and writes data to, the hard disk
 
-The interactions between these components are integral in providing the functionality of Tache. For example, 
-the [_Sequence Diagram_](#sequence-diagram) below shows how some of these components interact with one another 
+The interactions between these components are integral in providing the functionality of Tache. For example,
+the [_Sequence Diagram_](#sequence-diagram) below shows how some of these components interact with one another
 to execute the user command `delete 1`.
 
 <img src="images/SDforDeleteTask.png" width="800"><br>
