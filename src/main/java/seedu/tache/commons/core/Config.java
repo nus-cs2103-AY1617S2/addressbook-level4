@@ -15,7 +15,7 @@ public class Config {
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
     private String taskManagerFilePath = "data/taskmanager.xml";
-    private String taskManagerName = "MyTaskManager";
+    private String taskManagerName = "Tache";
 
 
     public String getAppTitle() {
