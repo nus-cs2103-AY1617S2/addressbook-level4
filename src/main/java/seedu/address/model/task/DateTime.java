@@ -51,7 +51,7 @@ public class DateTime {
         // 1 for Monday, 7 for Sunday
         int dayOfCurrentWeek = now.getDayOfWeek().getValue();
 
-        LocalDateTime startOfWeek = now.minusDays(dayOfCurrentWeek - 1);
+        LocalDateTime startOfWeek = now.minusDays(dayOfCurrentWeek);
         LocalDateTime endOfWeek = now.plusDays(7 - dayOfCurrentWeek);
 
         return dateTime.isAfter(startOfWeek) && dateTime.isBefore(endOfWeek);
