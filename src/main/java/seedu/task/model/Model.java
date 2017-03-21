@@ -3,7 +3,6 @@ package seedu.task.model;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.model.task.ChatList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -41,6 +40,12 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
+
+    /** Updates the filter of the filtered task list to show all unchecked tasks */
+    void updateFilteredListToShowUnchecked();
+
+    /** Updates the filter of the filtered task list to show all checked tasks */
+    void updateFilteredListToShowChecked();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
