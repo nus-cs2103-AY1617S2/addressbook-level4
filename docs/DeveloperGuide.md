@@ -240,10 +240,6 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
-### 3.3. Undo/Redo
-
-
-
 ## 4. Testing
 
 Tests can be found in the `./src/test/java` folder.
@@ -512,6 +508,37 @@ Use case resumes at step 2
 
 > 3b1. TodoApp shows an error message
 Use case resumes at step 2
+
+#### Use case: Undo a command
+
+**MSS**
+
+1. User does `add`, `edit` or `delete` command
+2. TodoApp executes command
+3. User wants to undo previous command, executes `undo`
+4. ToDoApp reverts the command
+5. Use case ends
+
+**Extensions**
+
+3a. No command to revert
+
+> Use case ends
+
+#### Use case: Redo a command
+
+**MSS**
+
+1. User executes an `undo` command
+2. User wants to undo previous `undo` command, executes `redo`
+4. ToDoApp undoes the `undo` command
+5. Use case ends
+
+**Extensions**
+
+2a. No command to redo
+
+> Use case ends
 
 {More to be added}
 
