@@ -118,11 +118,11 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredTaskList(new PredicateExpression(new NameQualifier(nameKeywords)));
         }
 
-        if (!nameKeywords.isEmpty()) {
+        if (!priorityKeywords.isEmpty()) {
             updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priorityKeywords)));
         }
 
-        if (!nameKeywords.isEmpty()) {
+        if (!descriptionKeywords.isEmpty()) {
             updateFilteredTaskList(new PredicateExpression(new DescriptionQualifier(descriptionKeywords)));
         }
 
