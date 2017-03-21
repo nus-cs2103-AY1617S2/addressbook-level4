@@ -1,4 +1,5 @@
 /* @@author A0140462R */
+
 .combo-box .arrow, .arrow-button, .text-field {
-	-fx-background-color: transparent;
+    -fx-background-color: transparent;
 }
