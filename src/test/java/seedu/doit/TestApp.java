@@ -49,7 +49,7 @@ public class TestApp extends MainApp {
     protected Config initConfig(String configFilePath) {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
-        config.setTaskManagerFilePath(saveFileLocation);
+        config.setTaskManagerFilePath(this.saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
         config.setTaskManagerName(TASK_MANAGER_NAME);
         return config;
@@ -60,12 +60,12 @@ public class TestApp extends MainApp {
         UserPrefs userPrefs = super.initPrefs(config);
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
-        userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
+        userPrefs.updateLastUsedGuiSetting(new GuiSettings(1100.0, 700.0, (int) x, (int) y));
         return userPrefs;
     }
 
     @Override
     public void start(Stage primaryStage) {
-        ui.start(primaryStage);
+        this.ui.start(primaryStage);
     }
 }
