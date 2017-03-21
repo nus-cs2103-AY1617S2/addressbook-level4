@@ -45,4 +45,5 @@ public abstract class Command {
         this.storage = storage;
         this.config = config;
     }
+
 }
