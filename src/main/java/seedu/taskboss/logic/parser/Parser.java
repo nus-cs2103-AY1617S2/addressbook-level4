@@ -18,8 +18,8 @@ import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.logic.commands.SaveCommand;
-import seedu.taskboss.logic.commands.SelectCommand;
 import seedu.taskboss.logic.commands.UndoCommand;
+import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 /**
  * Parses user input.
@@ -59,9 +59,9 @@ public class Parser {
         case EditCommand.COMMAND_WORD_SHORT:
             return new EditCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_WORD_SHORT:
-            return new SelectCommandParser().parse(arguments);
+        case ViewCommand.COMMAND_WORD:
+        case ViewCommand.COMMAND_WORD_SHORT:
+            return new ViewCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_WORD_SHORT:
