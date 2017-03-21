@@ -22,7 +22,7 @@ public class TypicalTestTasks {
                     .withCategories("friends").build();
             benson = new TaskBuilder().withName("Benson Meier")
                     .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("Yes")
+                    .withPriorityLevel("No")
                     .withStartDateTime("Feb 19, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withCategories("owesMoney", "friends").build();
