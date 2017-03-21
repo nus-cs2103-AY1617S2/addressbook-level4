@@ -29,6 +29,7 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
+        args = ParserUtil.parseFlexiblePrefix(args);
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_COMMENT, PREFIX_TAG, PREFIX_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);

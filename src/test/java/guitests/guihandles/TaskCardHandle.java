@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.tasklist.commons.util.StringUtil;
 import seedu.tasklist.model.tag.UniqueTagList;
 import seedu.tasklist.model.task.DeadlineTask;
 import seedu.tasklist.model.task.EventTask;
@@ -15,6 +16,7 @@ import seedu.tasklist.model.task.FloatingTask;
 import seedu.tasklist.model.task.ReadOnlyDeadlineTask;
 import seedu.tasklist.model.task.ReadOnlyEventTask;
 import seedu.tasklist.model.task.ReadOnlyTask;
+import seedu.tasklist.testutil.TestUtil;
 
 /**
  * Provides a handle to a task card in the task list panel.
@@ -64,7 +66,7 @@ public class TaskCardHandle extends GuiHandle {
         return tags
                 .asObservableList()
                 .stream()
-                .map(tag -> tag.tagName)
+                .map(tag -> StringUtil.removeSquareBrackets(tag.tagName))
                 .collect(Collectors.toList());
     }
 
@@ -100,7 +102,7 @@ public class TaskCardHandle extends GuiHandle {
         }
         return getFullName().equals(task.getName().fullName)
                 && getComment().equals(task.getComment().value)
-                && getTags().equals(getTags(task.getTags()))
+                && TestUtil.isSameStringList(getTags(), getTags(task.getTags()))
                 //TODO
                 //&& getStatus() == task.getStatus().value
                 && getPriority().equals(task.getPriority().value)
