@@ -18,6 +18,7 @@ import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
+import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.commands.SaveCommand;
 import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.logic.commands.UndoCommand;
@@ -100,6 +101,10 @@ public class Parser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+
+        case RenameCategoryCommand.COMMAND_WORD:
+        case RenameCategoryCommand.COMMAND_WORD_SHORT:
+            return new RenameCategoryCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

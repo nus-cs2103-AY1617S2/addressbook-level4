@@ -63,7 +63,13 @@ public class ParserUtil {
         return Optional.of(sortType);
     }
 
-    //@@author A0143157J
+    public static String[] parseRenameCategory(String command) {
+        String trimmedCommand = command.trim();
+        String[] categories = trimmedCommand.split(" ");
+        return categories;
+    }
+
+    //@@author
     /**
      * Returns a new Set populated by all elements in the given list of strings
      * Returns an empty set if the given {@code Optional} is empty,
