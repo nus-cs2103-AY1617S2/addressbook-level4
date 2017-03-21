@@ -33,10 +33,12 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex, boolean showIndex) {
         super(FXML);
+
+        if (showIndex) id.setText(displayedIndex + ". ");
+
         name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().map(Priority::toString).orElse(""));
         note.setText(task.getNote().map(Note::toString).orElse(""));
         status.setText(task.getStatus().value);

@@ -27,6 +27,8 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    private static final boolean SHOW_INDEX_SIDE_PANEL = false;
+    private static final boolean SHOW_INDEX_MAIN_PANEL = true;
 
     private Stage primaryStage;
     private Logic logic;
@@ -113,8 +115,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(), SHOW_INDEX_MAIN_PANEL);
+        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), logic.getFilteredTaskList(), SHOW_INDEX_SIDE_PANEL);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
