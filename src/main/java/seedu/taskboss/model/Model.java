@@ -68,4 +68,7 @@ public interface Model {
      * @throws IllegalValueException */
     void sortTasks(SortBy sortType) throws IllegalValueException;
 
+    /** Changes the name of a category of all tasks in the filtered task list*/
+    void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException;
+
 }

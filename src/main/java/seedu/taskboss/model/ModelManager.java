@@ -14,6 +14,8 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
 import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList.SortBy;
@@ -108,6 +110,51 @@ public class ModelManager extends ComponentManager implements Model {
         assert sortType != null;
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
+        indicateTaskBossChanged();
+    }
+
+    @Override
+    public void renameCategory(Category oldCategory, Category newCategory)
+            throws IllegalValueException {
+        assert oldCategory != null;
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            // get each task on the filtered task list
+            ReadOnlyTask target = filteredTasks.get(i);
+            // get the UniqueCategoryList of the task
+            UniqueCategoryList targetCategoryList = target.getCategories();
+
+            UniqueCategoryList newCategoryList = new UniqueCategoryList();
+
+            int targetListSize = targetCategoryList.asObservableList().size();
+            for (int j = 0; j < targetListSize; j++) {
+                Category tempCategory = targetCategoryList.asObservableList().get(j);
+                if (!tempCategory.equals(oldCategory)) {
+                    try {
+                        newCategoryList.add(tempCategory);
+                    } catch (DuplicateCategoryException dce) {
+                        dce.printStackTrace();
+                    } 
+                }
+            }
+
+            // at this point, we have taken care of all the categories
+            // except for the one to be renamed
+            try {
+                newCategoryList.add(newCategory);
+            } catch (DuplicateCategoryException dce) {
+                dce.printStackTrace();
+            }
+
+            Task editedTask = new Task(target.getName(),
+                    target.getPriorityLevel(), target.getStartDateTime(),
+                    target.getEndDateTime(), target.getInformation(),
+                    newCategoryList);
+            int taskBossIndex = filteredTasks.getSourceIndex(i);
+            taskBoss.updateTask(taskBossIndex, editedTask);
+        }
+
         indicateTaskBossChanged();
     }
 
