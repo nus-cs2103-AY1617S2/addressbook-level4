@@ -60,7 +60,7 @@ public class Parser {
 
         case ViewCommand.COMMAND_WORD:
         case ViewCommand.COMMAND_WORD_SHORT:
-            return new SelectCommandParser().parse(arguments);
+            return new ViewCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_WORD_SHORT:

@@ -21,9 +21,9 @@ public class ViewCommandTest extends TaskBossGuiTest {
         assertViewSuccess(false, middleIndex); // a task in the middle of the list
 
         assertViewInvalid(false, taskCount + 1); // invalid index
-        assertTaskViewed(middleIndex); // assert previous selection remains
+        assertTaskViewed(middleIndex); // assert previous viewing remains
 
-        /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
+        /* Testing other invalid indexes such as -1 should be done when testing the ViewCommand */
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ViewCommandTest extends TaskBossGuiTest {
         assertViewSuccess(true, middleIndex); // a task in the middle of the list
 
         assertViewInvalid(true, taskCount + 1); // invalid index
-        assertTaskViewed(middleIndex); // assert previous selection remains
+        assertTaskViewed(middleIndex); // assert previous viewing remains
     }
 
     @Test
@@ -64,19 +64,19 @@ public class ViewCommandTest extends TaskBossGuiTest {
         } else {
             commandBox.runCommand("view " + index);
         }
-        assertResultMessage("Selected Task: " + index);
+        assertResultMessage("Viewed Task: " + index);
         assertTaskViewed(index);
     }
 
     private void assertTaskViewed(int index) {
-        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
-        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
+        assertEquals(taskListPanel.getViewingTasks().size(), 1);
+        ReadOnlyTask viewedTask = taskListPanel.getViewingTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), viewedTask);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskViewed() {
-        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
+        assertEquals(taskListPanel.getViewingTasks().size(), 0);
     }
 
 }

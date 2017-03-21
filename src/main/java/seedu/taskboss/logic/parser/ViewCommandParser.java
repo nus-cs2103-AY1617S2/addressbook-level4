@@ -11,7 +11,7 @@ import seedu.taskboss.logic.commands.ViewCommand;
 /**
  * Parses input arguments and creates a new SelectCommand object
  */
-public class SelectCommandParser {
+public class ViewCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand

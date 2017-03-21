@@ -8,7 +8,7 @@ import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
- * Selects a task identified using it's last displayed index from TaskBoss.
+ * views a task identified using it's last displayed index from TaskBoss.
  */
 public class ViewCommand extends Command {
 
@@ -18,11 +18,11 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "v";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
-            + ": Selects the task identified by the index number used in the last task listing.\n"
+            + ": Views the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1" + " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_VIEW_TASK_SUCCESS = "Selected Task: %1$s";
+    public static final String MESSAGE_VIEW_TASK_SUCCESS = "Viewed Task: %1$s";
 
     public ViewCommand(int targetIndex) {
         this.targetIndex = targetIndex;
