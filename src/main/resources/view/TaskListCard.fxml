@@ -19,7 +19,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="60.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css"/>
                         <URL value="@Extensions.css"/>
@@ -27,15 +27,14 @@
                     <padding>
                         <Insets bottom="5" left="15" right="5" top="5"/>
                     </padding>
-
                     <children>
-                        <HBox spacing="5" alignment="CENTER_LEFT">
+                        <HBox spacing="1" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Circle fx:id="labelBullet" styleClass="taglist-item-bullet" radius="4">
+                                    <Circle fx:id="labelBullet" styleClass="taglist-item-bullet" radius="5">
                                         <HBox.margin>
-                                            <Insets left="5.0" right="10.0" top="10.0" />
+                                            <Insets left="5.0" right="5.0" top="8.0" />
                                         </HBox.margin>
                                     </Circle>
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
