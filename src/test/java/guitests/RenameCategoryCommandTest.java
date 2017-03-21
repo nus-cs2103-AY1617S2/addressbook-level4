@@ -1,5 +1,6 @@
 package guitests;
 
+import static org.junit.Assert.assertTrue;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
