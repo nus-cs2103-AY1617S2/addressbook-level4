@@ -27,11 +27,11 @@ public class XmlAdaptedTask {
     private String priority;
     @XmlElement(required = true)
     private String status;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String note;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String startTime;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String endTime;
 
     @XmlElement
@@ -51,13 +51,11 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        if (source.getPriority().isPresent()) {
-            priority = source.getPriority().get().getValue().name();
-        }
+        priority = source.getPriority().isPresent() ? source.getPriority().get().getValue().name() : null;
         status = source.getStatus().value;
-        note = source.getNote().map(Note::toString).orElse("");
-        startTime = source.getStartTime().map(DateTime::toString).orElse("");
-        endTime = source.getEndTime().map(DateTime::toString).orElse("");
+        note = source.getNote().isPresent() ? source.getNote().get().toString() : null;
+        startTime = source.getStartTime().isPresent() ? source.getStartTime().get().toString() : null;
+        endTime = source.getEndTime().isPresent() ? source.getEndTime().get().toString() : null;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -75,14 +73,11 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        Priority priority = null;
-        if (this.priority != null) {
-            priority = new Priority(Priority.parseXmlString(this.priority));
-        }
+        Priority priority = (this.priority != null) ? new Priority(Priority.parseXmlString(this.priority)) : null;
         final Status status = new Status(this.status);
-        final Note note = new Note(this.note);
-        final DateTime startTime = new DateTime(this.startTime);
-        final DateTime endTime = new DateTime(this.endTime);
+        final Note note = (this.note != null) ? new Note(this.note) : null;
+        final DateTime startTime = (this.startTime != null) ? new DateTime(this.startTime) : null;
+        final DateTime endTime = (this.endTime != null) ? new DateTime(this.endTime) : null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, priority, status, note, startTime, endTime, tags);
     }
