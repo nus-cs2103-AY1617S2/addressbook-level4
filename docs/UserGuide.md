@@ -51,7 +51,7 @@ Try FlexiTask now and benefit from its convenient features.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`**` Meet mother for dinner ` :
-     adds a task named `Meet mother for dinner` to FlexiTask.
+     adds a task named `Meet mother for dinner` to FlexiTask
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#2-features) section below for details of each command.<br>
@@ -165,8 +165,8 @@ Example:
 
 #### 3.2.4 Setting priority levels
 
-A priority can be assigned to tasks to help you plan your day. <br>
-Priorities will be displayed next to the task name. <br>
+A priority can be assigned to tasks to help you plan your day <br>
+Priorities will be displayed next to the task name <br>
 
 Example:
 
@@ -175,7 +175,7 @@ Example:
 <img src="images/setting_priority_levels.png" width = "300"> <br>
 _Figure 3. Tasks with Priorities_
 
-As shown in Figure 3, priority is displayed next to the task name and tags are displayed below the task name.
+As shown in Figure 3, priority is displayed next to the task name and tags are displayed below the task name
 
 <br>
 
@@ -221,14 +221,14 @@ Deletes a task <br>
 
 Format: `delete INDEX`
 
-> Deletes a task at the specified `INDEX`. The `INDEX` refers to the index number shown in the most recent listing.
+> Deletes a task at the specified `INDEX`. The `INDEX` refers to the index number shown in the most recent listing
 
 Example:
 * list<br>delete 2
 
 > Deletes 2nd task from the task list
 
-Deletion is also possible after finding keywords. Delete the task by specifying the INDEX that follows the results of find.
+Deletion is also possible after finding keywords. Delete the task by specifying the INDEX that follows the results of find
 * find tutorial<br>
 delete 1
 
@@ -310,7 +310,7 @@ Format: `redo`
 <a name="sort"></a>
 ### 3.10. Sorting tasks: sort
 
-Sorts tasks based on task name, start date, end date or priority level.<br>
+Sorts tasks based on task name, start date, end date or priority level<br>
 
 > ***Flexible command:*** `arrange`
 
@@ -349,7 +349,7 @@ Save FlexiTask list to a file specified by user<br>
 Format: `save FILE_PATH/FILE_NAME.xml`
 
 > File extension must be xml<br>
-> If specified file does not exists, FlexiTask will create the file.
+> If specified file does not exists, FlexiTask will create the file
 
 Example:
 
