@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -25,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
             + "Parameters: NAME p/PRIORITY s/STATUS n/NOTES b/STARTTIME e/ENDTIME [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Finish assignment p/hi s/incomplete n/dead s/25/02/2017 23:59 e/30/02/2017 23:59 t/CS1234";
+            + " Finish assignment p/hi s/incomplete n/dead b/25/12/2017 23:59 e/30/12/2017 23:59 t/CS1234";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -37,19 +38,19 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String priority, String status, String note,
-            String startTime, String endTime, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, Optional<String> priority, Optional<String> status, Optional<String> note,
+            Optional<String> startTime, Optional<String> endTime, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Priority(priority),
-                new Status(status),
-                new Note(note),
-                new DateTime(startTime),
-                new DateTime(endTime),
+                priority.isPresent() ? new Priority(priority.get()) : new Priority(),
+                status.isPresent() ? new Status(status.get()) : new Status(),
+                note.isPresent() ? new Note(note.get()) : new Note(),
+                startTime.isPresent() ? new DateTime(startTime.get()) : new DateTime(),
+                endTime.isPresent() ? new DateTime(endTime.get()) : new DateTime(1),
                 new UniqueTagList(tagSet)
         );
     }

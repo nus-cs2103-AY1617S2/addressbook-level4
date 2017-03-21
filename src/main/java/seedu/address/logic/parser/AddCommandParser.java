@@ -1,11 +1,14 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.NoSuchElementException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
@@ -29,13 +32,16 @@ public class AddCommandParser {
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PRIORITY).orElse("none"),
-                    argsTokenizer.getValue(PREFIX_STATUS).orElse("incomplete"),
-                    argsTokenizer.getValue(PREFIX_NOTE).orElse(""),
-                    argsTokenizer.getValue(PREFIX_STARTTIME).orElse("31/12/2017 00:00"),
-                    argsTokenizer.getValue(PREFIX_ENDTIME).orElse("31/12/2017 23:59"),
+                    argsTokenizer.getValue(PREFIX_PRIORITY),
+                    argsTokenizer.getValue(PREFIX_STATUS),
+                    argsTokenizer.getValue(PREFIX_NOTE),
+                    argsTokenizer.getValue(PREFIX_STARTTIME),
+                    argsTokenizer.getValue(PREFIX_ENDTIME),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
+        } catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

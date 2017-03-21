@@ -34,6 +34,13 @@ public class Note {
     }
 
     /**
+     * Initialise a Note with an empty value
+     */
+    public Note() {
+        this.value = "";
+    }
+
+    /**
      * Returns true if a given string is a valid task note.
      */
     public static boolean isValidNote(String test) {
