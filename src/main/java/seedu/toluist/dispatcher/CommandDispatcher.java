@@ -24,7 +24,6 @@ import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.FindController;
 import seedu.toluist.controller.HistoryController;
-import seedu.toluist.controller.ListController;
 import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
 import seedu.toluist.controller.RedoController;
