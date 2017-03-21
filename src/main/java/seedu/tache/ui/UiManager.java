@@ -73,8 +73,10 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.hide();
         mainWindow.releaseResources();
         // Unbind hotkey
-        hotkeyManager.reset();
-        hotkeyManager.stop();
+        if (hotkeyManager != null) {
+            hotkeyManager.reset();
+            hotkeyManager.stop();
+        }
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
