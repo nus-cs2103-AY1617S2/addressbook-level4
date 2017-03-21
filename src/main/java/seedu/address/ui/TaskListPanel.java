@@ -22,11 +22,15 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
 
+    private final boolean showIndex;
+
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, boolean showIndex) {
         super(FXML);
+        this.showIndex = showIndex;
+
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
@@ -70,7 +74,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1, showIndex).getRoot());
             }
         }
 
