@@ -2,6 +2,7 @@ package seedu.watodo.model.task;
 
 import java.util.Objects;
 
+
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 
