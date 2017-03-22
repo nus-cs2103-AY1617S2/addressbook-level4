@@ -1,5 +1,6 @@
 package seedu.taskboss.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.Stack;
@@ -10,12 +11,17 @@ import seedu.taskboss.commons.core.ComponentManager;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
+import seedu.taskboss.logic.commands.RenameCategoryCommand;
+import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
-import seedu.taskboss.model.task.UniqueTaskList;
+import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -28,22 +34,27 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskBoss taskBoss;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final Stack<ReadOnlyTaskBoss> taskbossHistory;
+    private SortBy currentSortType;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
+     * @throws IllegalValueException
      */
-    public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBoss taskBoss, UserPrefs userPrefs) throws IllegalValueException {
         super();
         assert !CollectionUtil.isAnyNull(taskBoss, userPrefs);
 
         logger.fine("Initializing with TaskBoss: " + taskBoss + " and user prefs " + userPrefs);
 
         this.taskBoss = new TaskBoss(taskBoss);
+        // sort by end date time by default
+        currentSortType = SortBy.END_DATE_TIME;
+        sortTasks(currentSortType);
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
     }
 
-    public ModelManager() {
+    public ModelManager() throws IllegalValueException {
         this(new TaskBoss(), new UserPrefs());
     }
 
@@ -78,25 +89,115 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.addTask(task);
+        taskBoss.sortTasks(currentSortType);
         updateFilteredListToShowAll();
         indicateTaskBossChanged();
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws IllegalValueException {
         assert editedTask != null;
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
+        taskBoss.sortTasks(currentSortType);
+        indicateTaskBossChanged();
+    }
+
+    //@@author A0143157J
+    @Override
+    public void sortTasks(SortBy sortType) throws IllegalValueException {
+        assert sortType != null;
+        this.currentSortType = sortType;
+        taskBoss.sortTasks(sortType);
+        indicateTaskBossChanged();
+    }
+
+    @Override
+    public void renameCategory(Category oldCategory, Category newCategory)
+            throws IllegalValueException, CommandException {
+        assert oldCategory != null;
+
+        boolean isFound = false;
+
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        FilteredList<ReadOnlyTask> oldCategoryTaskList = filteredTasks;
+        int listSize = oldCategoryTaskList.size();
+
+        // remember all tasks
+        ArrayList<ReadOnlyTask> allReadOnlyTasks = new ArrayList<ReadOnlyTask> ();
+        for (ReadOnlyTask task : oldCategoryTaskList) {
+            allReadOnlyTasks.add(task);
+        }
+
+        // remember all task index
+        int[] taskIndex = new int[listSize];
+        for (int i = 0; i < listSize; i++) {
+            taskIndex[i] = oldCategoryTaskList.getSourceIndex(i);
+        }
+
+        for (int i = 0; i < listSize; i++) {
+            // get each task on the filtered task list
+            ReadOnlyTask target = allReadOnlyTasks.get(i);
+            // get the UniqueCategoryList of the task
+            UniqueCategoryList targetCategoryList = target.getCategories();
+
+            UniqueCategoryList newCategoryList = new UniqueCategoryList();
+
+            try {
+                for (Category category : targetCategoryList) {
+                    if (category.equals(oldCategory)) {
+                        isFound = true;
+                        newCategoryList.add(newCategory);
+                    } else {
+                        newCategoryList.add(category);
+                    }
+                }
+            } catch (DuplicateCategoryException dce) {
+                dce.printStackTrace();
+            }
+
+            Task editedTask = new Task(target);
+            editedTask.setCategories(newCategoryList);
+            int taskBossIndex = taskIndex[i];
+            taskBoss.updateTask(taskBossIndex, editedTask);
+        }
+
+        if (!isFound) {
+            updateFilteredListToShowAll();
+            throw new CommandException(oldCategory.toString()
+                    + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+        }
+
+        indicateTaskBossChanged();
+    }
+
+    //@@author A0147990R
+    @Override
+    public void clearTasksByCategory(Category category) {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        FilteredList<ReadOnlyTask> taskListWithCategory = filteredTasks;
+        int listSize = taskListWithCategory.size();
+        int i;
+        for (i = 0; i < listSize; i++) {
+            ReadOnlyTask target = taskListWithCategory.get(0);
+            try {
+                taskBoss.removeTask(target);
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target task cannot be missing";
+            }
+        }
+        updateFilteredListToShowAll();
         indicateTaskBossChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
 
+    //@@author
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -112,16 +213,25 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByStartDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
     }
 
+    //@@author A0147990R
+    @Override
+    public void updateFilteredTaskListByInformation(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new InformationQualifier(keywords)));
+    }
+
+    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByCategory(Category category) {
         updateFilteredTaskList(new PredicateExpression(new CategoryQualifier(category)));
@@ -183,6 +293,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147990R
     private class StartDatetimeQualifier implements Qualifier {
         private String startDateKeyWords;
 
@@ -202,6 +313,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147990R
     private class EndDatetimeQualifier implements Qualifier {
         private String endDateKeyWords;
 
@@ -221,6 +333,30 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147990R
+    private class InformationQualifier implements Qualifier {
+        private Set<String> informationKeyWords;
+
+        InformationQualifier(Set<String> informationKeyWords) {
+            this.informationKeyWords = informationKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return informationKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                            task.getInformation().value, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "information=" + String.join(", ", informationKeyWords);
+        }
+    }
+
+    //@@author A0147990R
     private class CategoryQualifier implements Qualifier {
         private Category categoryKeyWords;
 

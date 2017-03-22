@@ -1,5 +1,7 @@
 package seedu.taskboss.model.task;
 
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,7 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.DuplicateDataException;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
+import seedu.taskboss.logic.commands.SortCommand;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -21,6 +25,88 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    //@@author A0143157J
+    public enum SortBy {
+        START_DATE_TIME, END_DATE_TIME, PRIORITY_LEVEL
+    }
+
+    /**
+     * Sorts tasks based on the specified sort type.
+     * Start and end dates are sorted in ascending order,
+     * whereas priority level is sorted in descending order
+     * (i.e tasks with high priority will be listed on top)
+     * @throws IllegalValueException
+     */
+    public void sort(SortBy sortType) throws IllegalValueException {
+        Comparator<ReadOnlyTask> taskCmp = null;
+        switch(sortType) {
+        case START_DATE_TIME:
+            taskCmp =  new Comparator<ReadOnlyTask>() {
+                @Override
+                public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+                    Date startDateTime1 = task1.getStartDateTime().getDate();
+                    Date startDateTime2 = task2.getStartDateTime().getDate();
+                    if (startDateTime1 == null &&
+                        startDateTime2 == null) {
+                        return 0;
+                    } else if (startDateTime1 == null) {
+                        return 1;
+                    } else if (startDateTime2 == null) {
+                        return -1;
+                    } else {
+                        return startDateTime1.compareTo(startDateTime2);
+                    }
+                }
+            };
+            break;
+
+        case END_DATE_TIME:
+            taskCmp = new Comparator<ReadOnlyTask> () {
+                @Override
+                public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+                    Date endDateTime1 = task1.getEndDateTime().getDate();
+                    Date endDateTime2 = task2.getEndDateTime().getDate();
+                    if (endDateTime1 == null &&
+                        endDateTime2 == null) {
+                        return 0;
+                    } else if (endDateTime1 == null) {
+                        return 1;
+                    } else if (endDateTime2 == null) {
+                        return -1;
+                    } else {
+                        return endDateTime1.compareTo(endDateTime2);
+                    }
+                }
+            };
+            break;
+
+        case PRIORITY_LEVEL:
+            taskCmp = new Comparator<ReadOnlyTask> () {
+                @Override
+                public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+                    String priorityLevel1 = task1.getPriorityLevel().toString();
+                    String priorityLevel2 = task2.getPriorityLevel().toString();
+                    if (priorityLevel1.equals(priorityLevel2)) {
+                        return 0;
+                    } else if (priorityLevel1.equals(PriorityLevel.PRIORITY_HIGH_VALUE)) {
+                        return -1;
+                    } else if (priorityLevel2.equals(PriorityLevel.PRIORITY_HIGH_VALUE)) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            };
+            break;
+
+        default:
+            throw new IllegalValueException(SortCommand.MESSAGE_USAGE);
+        }
+
+        FXCollections.sort(internalList, taskCmp);
+    }
+
+    //@@author
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */

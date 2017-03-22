@@ -1,7 +1,6 @@
 package seedu.taskboss.testutil;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
-import seedu.taskboss.logic.parser.ParserUtil;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
@@ -50,12 +49,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     public void setStartDateTime(DateTime startDateTime) throws IllegalValueException {
-        DateTime parsedStartDateTime = new DateTime(ParserUtil.parseStartDate(startDateTime.value));
+        DateTime parsedStartDateTime = new DateTime(startDateTime.value);
         this.startDateTime = parsedStartDateTime;
     }
 
     public void setEndDateTime(DateTime endDateTime) throws IllegalValueException {
-        DateTime parsedEndDateTime = new DateTime(ParserUtil.parseEndDate(endDateTime.value));
+        DateTime parsedEndDateTime = new DateTime(endDateTime.value);
         this.endDateTime = parsedEndDateTime;
     }
 
@@ -100,8 +99,28 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + "n/" + this.getName().fullName + " ");
-        sb.append("p/" + this.getPriorityLevel().value + " ");
+        //@@author A0144904H
+        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
+            sb.append("add " + "n/" + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + "n/" + this.getName().fullName + "! ");
+        }
+        sb.append("sd/" + this.getStartDateTime().value + " ");
+        sb.append("ed/" + this.getEndDateTime().value + " ");
+        sb.append("i/" + this.getInformation().value + " ");
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("c/" + s.categoryName + " "));
+        return sb.toString();
+    }
+
+    //@@author A0143157J
+    public String getShortAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        //@@author A0144904H
+        if (this.getPriorityLevel().equals(PriorityLevel.PRIORITY_NO)) {
+            sb.append("add " + "n/" + this.getName().fullName + " ");
+        } else {
+            sb.append("add " + "n/" + this.getName().fullName + "! ");
+        }
         sb.append("sd/" + this.getStartDateTime().value + " ");
         sb.append("ed/" + this.getEndDateTime().value + " ");
         sb.append("i/" + this.getInformation().value + " ");

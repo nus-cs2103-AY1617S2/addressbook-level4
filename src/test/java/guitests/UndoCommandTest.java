@@ -23,18 +23,42 @@ public class UndoCommandTest extends TaskBossGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
         commandBox.runCommand("delete " + currentList.length);
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertUndoCommandSuccess(expectedList);
+        assertUndoCommandSuccess(false, expectedList);
 
         //undo another command after undoing one command
-        assertUndoCommandSuccess(currentList);
+        assertUndoCommandSuccess(false, currentList);
 
         //invalid command
         commandBox.runCommand("undo2");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertUndoCommandSuccess(TestTask[] expectedList) {
-        commandBox.runCommand("undo");
+    @Test
+    public void undoShortCommand() {
+        //without any last command
+        commandBox.runCommand("u");
+        assertResultMessage(UndoCommand.MESSAGE_WITHOUT_PREVIOUS_OPERATION);
+
+        //undo one command
+        TestTask[] currentList = td.getTypicalTasks();
+
+        TestTask taskToAdd = td.ida;
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand("delete " + currentList.length);
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertUndoCommandSuccess(true, expectedList);
+
+        //undo another command after undoing one command
+        assertUndoCommandSuccess(true, currentList);
+
+    }
+
+    private void assertUndoCommandSuccess(boolean isShortCommand, TestTask[] expectedList) {
+        if (isShortCommand) {
+            commandBox.runCommand("u");
+        } else {
+            commandBox.runCommand("undo");
+        }
         assertTrue(taskListPanel.isListMatching(expectedList));
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }

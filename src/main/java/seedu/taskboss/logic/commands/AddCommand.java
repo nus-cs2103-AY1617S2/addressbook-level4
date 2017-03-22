@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.task.DateTime;
@@ -20,15 +21,20 @@ import seedu.taskboss.model.task.UniqueTaskList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD_SHORT = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskBoss. "
-            + "Parameters: NAME [p/PRIORITY_LEVEL] [sd/START_DATE] [ed/END_DATE] "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
+            + ": Adds a task to TaskBoss. "
+            + "Parameters: n/NAME [sd/START_DATE] [ed/END_DATE] "
             + "[i/INFORMATION] [c/CATEGORY]...\n"
             + "Example: " + COMMAND_WORD
-            + " n/Submit report p/3 sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project";
+            + " n/Submit report sd/today 5pm ed/next friday 11.59pm i/inform partner c/Work c/Project\n"
+            + "Example: " + COMMAND_WORD_SHORT
+            + " n/Watch movie sd/feb 19 c/Fun";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
+    public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
 
     private final Task toAdd;
 
@@ -36,25 +42,45 @@ public class AddCommand extends Command {
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
+     * @throws InvalidDatesException
      */
-    public AddCommand(String name, String priorityLevel, String startDateTime, String endDateTime,
-            String information, Set<String> categories) throws IllegalValueException {
+    public AddCommand(String name, String startDateTime, String endDateTime,
+            String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }
+        //@@author A0144904H
+        String priorityLevel = PriorityLevel.PRIORITY_NO;
+        DateTime startDateTimeObj = new DateTime(startDateTime);
+        DateTime endDateTimeObj = new DateTime(endDateTime);
+
+        if (startDateTimeObj.getDate() != null && endDateTimeObj.getDate() != null &&
+                startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
+            throw new InvalidDatesException(ERROR_INVALID_DATES);
+        }
+
+        //@@author A0144904H
+        String filteredName;
+        if (name.contains("!")) {
+            filteredName = name.replaceAll("!", "");
+            priorityLevel = PriorityLevel.PRIORITY_HIGH;
+        } else {
+            filteredName = name;
+        }
+
         this.toAdd = new Task(
-                new Name(name),
+                new Name(filteredName),
                 new PriorityLevel(priorityLevel),
-                new DateTime(startDateTime),
-                new DateTime(endDateTime),
+                startDateTimeObj,
+                endDateTimeObj,
                 new Information(information),
                 new UniqueCategoryList(categorySet)
         );
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         assert model != null;
         try {
             model.addTask(toAdd);

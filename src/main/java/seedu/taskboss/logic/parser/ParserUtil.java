@@ -25,7 +25,9 @@ import seedu.taskboss.model.task.PriorityLevel;
  */
 public class ParserUtil {
 
+    private static final String WHITESPACE = " ";
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern SORT_TYPE_ARGS_FORMAT = Pattern.compile("(?<sortType>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -42,9 +44,37 @@ public class ParserUtil {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
-
     }
 
+    //@@author A0143157J
+    /**
+     * Returns the specified sort type in the {@code command} if it is a valid sort type
+     * Returns an {@code Optional.empty()} otherwise.
+     */
+    public static Optional<String> parseSortType(String command) {
+        final Matcher matcher = SORT_TYPE_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String sortType = matcher.group("sortType");
+        if (sortType == null) {
+            return Optional.empty();
+        }
+        return Optional.of(sortType);
+    }
+
+    /**
+     * Splits {@code command} by whitespace as delimiter into a {@code String[]}
+     * Returns the {@code String[]}.
+     */
+    public static String[] parseRenameCategory(String command) {
+        String trimmedCommand = command.trim();
+        String[] categories = trimmedCommand.split(WHITESPACE);
+        return categories;
+    }
+
+    //@@author
     /**
      * Returns a new Set populated by all elements in the given list of strings
      * Returns an empty set if the given {@code Optional} is empty,
@@ -84,13 +114,18 @@ public class ParserUtil {
         return priorityLevel.isPresent() ? Optional.of(new PriorityLevel(priorityLevel.get())) : Optional.empty();
     }
 
-    public static Optional<DateTime> parseStartDateTime(Optional<String> startDateTime) {
-        assert startDateTime != null;
+    //@@author A0143157J
+    /**
+     * Parses a {@code Optional<String> dateTime into an {@code Optional<DateTime>}
+     * if {@code dateTime} is present.
+     */
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) {
+        assert dateTime != null;
 
-        if (startDateTime.isPresent()) {
+        if (dateTime.isPresent()) {
             try {
-                DateParser dateParser = new DateParser();
-                DateTime dt = dateParser.parseStartDate(startDateTime.toString().trim());
+                DateTimeParser dateParser = new DateTimeParser();
+                DateTime dt = dateParser.parseDate(dateTime.toString().trim());
                 return Optional.of(dt);
             } catch (IllegalValueException ive) {
                 return Optional.empty();
@@ -100,58 +135,7 @@ public class ParserUtil {
         }
     }
 
-    public static Optional<DateTime> parseEndDateTime(Optional<String> endDateTime) {
-        assert endDateTime != null;
-
-        if (endDateTime.isPresent()) {
-            try {
-                DateParser dateParser = new DateParser();
-                DateTime dt = dateParser.parseEndDate(endDateTime.toString().trim());
-                return Optional.of(dt);
-            } catch (IllegalValueException ive) {
-                return Optional.empty();
-            }
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    /**
-     * Parses a {@code String date}
-     *
-     * @return parsed dateTime in String
-     */
-    public static String parseStartDate(String startDateTime) throws IllegalValueException {
-        assert startDateTime != null;
-
-        try {
-            DateParser dateParser = new DateParser();
-            DateTime dateTimeParsed = dateParser.parseStartDate(startDateTime.trim());
-            return dateTimeParsed.toString();
-        } catch (IllegalValueException ive) {
-            throw new IllegalValueException(ive.getMessage());
-        }
-
-    }
-
-    /**
-     * Parses a {@code String date}
-     *
-     * @return parsed dateTime in String
-     */
-    public static String parseEndDate(String endDateTime) throws IllegalValueException {
-        assert endDateTime != null;
-
-        try {
-            DateParser dateParser = new DateParser();
-            DateTime dateTimeParsed = dateParser.parseEndDate(endDateTime.trim());
-            return dateTimeParsed.toString();
-        } catch (IllegalValueException ive) {
-            throw new IllegalValueException(ive.getMessage());
-        }
-
-    }
-
+    //@@author
     /**
      * Parses a {@code Optional<String> information} into an {@code Optional<Information>}
      * if {@code information} is present.

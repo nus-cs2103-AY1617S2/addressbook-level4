@@ -9,6 +9,7 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.CommandResult;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.logic.parser.Parser;
 import seedu.taskboss.model.Model;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -22,17 +23,21 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final Storage storage;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
+        this.storage = storage;
         this.parser = new Parser();
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, IllegalValueException {
+    public CommandResult execute(String commandText) throws CommandException,
+        IllegalValueException, InvalidDatesException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+        command.setStorage(storage);
         return command.execute();
     }
 

@@ -75,24 +75,29 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Ali Muster"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Boris Mueller"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Boris Mueller"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("81th street"), new UniqueCategoryList()),
-                new Task(new Name("Carl Kurz"), new PriorityLevel("3"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Carl Kurz"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("wall street"), new UniqueCategoryList()),
-                new Task(new Name("Daniel Meier"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Daniel Meier"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("10th street"), new UniqueCategoryList()),
-                new Task(new Name("Elle Meyer"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Elle Meyer"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("michegan ave"), new UniqueCategoryList()),
-                new Task(new Name("Fiona Kunz"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Fiona Kunz"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("little tokyo"), new UniqueCategoryList()),
-                new Task(new Name("George Best"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("George Best"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 20, 2017"), new Information("4th street"), new UniqueCategoryList()),
-                new Task(new Name("Hoon Meier"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
+                new Task(new Name("Hoon Meier"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
                         new DateTime("Feb 28, 2017"), new Information("little india"), new UniqueCategoryList()),
-                new Task(new Name("Ida Mueller"), new PriorityLevel("2"), new DateTime("Feb 19, 2017"),
-                        new DateTime("Feb 20, 2017"), new Information("chicago ave"), new UniqueCategoryList())
+                new Task(new Name("Ida Mueller"), new PriorityLevel("Yes"), new DateTime("Feb 19, 2017"),
+                        new DateTime("Feb 20, 2017"), new Information("chicago ave"), new UniqueCategoryList()),
+                new Task(new Name("Johnny Depp"), new PriorityLevel("Yes"), new DateTime("next sat 5pm"),
+                        new DateTime("tomorrow"), new Information("Silicon Valley"), new UniqueCategoryList()),
+                new Task(new Name("Kelvin Koo"), new PriorityLevel("Yes"), new DateTime("today 10am"),
+                        new DateTime("next wed"), new Information("clementi ave 2"), new UniqueCategoryList())
+
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

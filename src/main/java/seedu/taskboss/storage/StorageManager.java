@@ -50,6 +50,12 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ TaskBoss methods ==============================
 
     @Override
+    public void setFilePath(String filepath) {
+        String actualFilePath = filepath + "/taskboss.xml";
+        taskBossStorage = new XmlTaskBossStorage(actualFilePath);
+    }
+
+    @Override
     public String getTaskBossFilePath() {
         return taskBossStorage.getTaskBossFilePath();
     }

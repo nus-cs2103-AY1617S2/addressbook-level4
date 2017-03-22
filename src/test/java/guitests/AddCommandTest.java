@@ -17,12 +17,17 @@ public class AddCommandTest extends TaskBossGuiTest {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
-        assertAddSuccess(taskToAdd, currentList);
+        assertAddSuccess(false, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
         taskToAdd = td.ida;
-        assertAddSuccess(taskToAdd, currentList);
+        assertAddSuccess(false, taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+        //add another task using short command
+        taskToAdd = td.kelvin;
+        assertAddSuccess(true, taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
@@ -30,17 +35,26 @@ public class AddCommandTest extends TaskBossGuiTest {
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
+        //add invalid dates task
+        commandBox.runCommand(td.johnny.getAddCommand());
+        assertResultMessage(AddCommand.ERROR_INVALID_DATES);
+        assertTrue(taskListPanel.isListMatching(currentList));
+
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(false, td.alice);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
-        commandBox.runCommand(taskToAdd.getAddCommand());
+    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList) {
+        if (isShortCommand) {
+            commandBox.runCommand(taskToAdd.getShortAddCommand());
+        } else {
+            commandBox.runCommand(taskToAdd.getAddCommand());
+        }
 
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
