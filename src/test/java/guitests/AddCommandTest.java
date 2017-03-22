@@ -53,5 +53,4 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
-
 }
