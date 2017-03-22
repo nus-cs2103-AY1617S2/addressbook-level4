@@ -198,7 +198,7 @@ The `Model`,
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Tyler Rocha
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -208,11 +208,11 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task List data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.taskbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
 ## 3. Implementation
 
