@@ -118,19 +118,18 @@ Examples:
 * `unmark 2 4 7`<br>
 Marks tasks at index 2, 4 and 7 as incomplete.
 
-### 2.7. Set a deadline for task
+### 2.7. Clear the list
 
-Sets a new deadline for task.<br>
-Format: `schedule INDEX DEADLINE`
+Deletes all the tasks in the list.<br>
+Format: `clear`
 
-> * Updates the task deadline at the specified `INDEX` as `DEADLINE`.
-> * The index refers to the index number shown in the most recent task listing.
-> * The index **must be a positive integer** 1, 2, ...
+> * Will remove ALL tasks in the list
+> * Use with **caution**!
 
 Examples:
 
-* `schedule 2 07/07/17`<br>
-Adds a deadline of 7th July 2017 to task at index 2.
+* `clear`<br>
+All tasks in the ToDoApp will be deleted.
 
 ### 2.8. Find specific tasks
 
@@ -144,25 +143,26 @@ Examples:
 * `find t/CS2103`<br>
 Retrieve all tasks with the tag CS2103.
 
-### 2.9. Exiting the program : `exit`
-
-Exits the program.<br>
-Format: `exit`
-
-### 2.10. Undo a recent command: `undo`
+### 2.9. Undo a recent command: `undo`
 
 Undo the most recent command<br>
 Format: `undo`
 
 > * Can undo commands `add`, `delete`, `edit`
 
-### 2.11. Redo a recent command: `undo`
+### 2.10. Redo a recent command: `undo`
 
 Redo the most recent command<br>
 Format: `redo`
 
 > * Can redo commands that were most recently undone
 > * Inputting a new undo-able command clears the redo state history
+
+
+### 2.11. Exiting the program : `exit`
+
+Exits the program.<br>
+Format: `exit`
 
 ### 2.12. Saving the data
 
