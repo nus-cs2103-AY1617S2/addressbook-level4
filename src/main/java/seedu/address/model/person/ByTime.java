@@ -13,7 +13,7 @@ import seedu.address.commons.util.StringUtil;
 public class ByTime {
 
     public static final String MESSAGE_BYTIME_CONSTRAINTS =
-            "Deadline ByTime can take only 6 digits, and it should be in HH:MM(AM/PM) format, e.g. 12:00 pm";
+            "Deadline ByTime can only be in this format: HH:MM(AM/PM) format, e.g. 12:00pm";
 
     /*
      * must be in digits only
@@ -35,7 +35,7 @@ public class ByTime {
             if (!isValidByTime(byTime)) {
                 throw new IllegalValueException(MESSAGE_BYTIME_CONSTRAINTS);
             }
-            this.value = new LocalTime(StringUtil.parseStringToTime(byTime));
+            this.value = StringUtil.parseStringToTime(byTime);
         }
     }
 
