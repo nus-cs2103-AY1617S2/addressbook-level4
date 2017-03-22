@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -85,8 +86,9 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         Notes updatedNotes = editTaskDescriptor.getNotes().orElseGet(taskToEdit::getNotes);
+        Completion updatedCompletion = editTaskDescriptor.getCompletion().orElseGet(taskToEdit::getCompletion);
 
-        return new Task(updatedName, updatedStart, updatedDeadline, updatedPriority, updatedTags, updatedNotes);
+        return new Task(updatedName, updatedStart, updatedDeadline, updatedPriority, updatedTags, updatedNotes, updatedCompletion);
     }
 
     /**
@@ -100,6 +102,7 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
         private Optional<Notes> notes = Optional.empty();
+        private Optional<Completion> completion = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -110,6 +113,7 @@ public class EditCommand extends Command {
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
             this.notes = toCopy.getNotes();
+            this.completion = toCopy.getCompletion();
         }
 
         /**
@@ -163,6 +167,7 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
+        
         public void setNotes(Optional<Notes> notes) {
             assert notes != null;
             this.notes = notes;
@@ -170,6 +175,15 @@ public class EditCommand extends Command {
 
         public Optional<Notes> getNotes() {
             return notes;
+        }
+
+        public void setCompletion(Optional<Completion> completion) {
+            assert completion != null;
+            this.completion = completion;
+        }
+
+        public Optional<Completion> getCompletion() {
+            return completion;
         }
     }
 }
