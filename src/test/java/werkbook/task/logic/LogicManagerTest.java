@@ -202,23 +202,23 @@ public class LogicManagerTest {
         // Add without any arguments
         assertCommandFailure("add", expectedMessage);
         // Add without task name
-        assertCommandFailure("add s/01/01/1980 1111", expectedMessage);
+        assertCommandFailure("add to 01/01/1980 1111", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] d/12345 s/01/01/1980 0000 e/01/01/1980 0100",
+        assertCommandFailure("add []\\[;] d/12345 from 01/01/1980 0000 to 01/01/1980 0100",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/12345 s/invaliddate e/01/01/1980 0100",
+        assertCommandFailure("add Valid Name d/12345 from 99/99/9999 9999 to 01/01/1980 1000",
                 StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name d/12345 s/01/01/1980 0000 e/01/01/1980 0000 t/invalid_-[.tag",
+                "add Valid Name d/12345 from 01/01/1980 0000 to 01/01/1980 0100 t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name d/12345 s/01/01/1980 0000",
+                "add Valid Name d/12345 from 01/01/1980 0000",
                 Task.MESSAGE_START_WITHOUT_END_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name d/12345 s/01/01/1980 0000 e/01/01/1979 0000",
+                "add Valid Name d/12345 from 01/01/1980 0000 to 01/01/1979 0000",
                 Task.MESSAGE_END_BEFORE_START_CONSTRAINTS);
 
     }
@@ -479,8 +479,8 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" d/").append(p.getDescription().toString());
-            cmd.append(" s/").append(p.getStartDateTime().toString());
-            cmd.append(" e/").append(p.getEndDateTime().toString());
+            cmd.append(" from ").append(p.getStartDateTime().toString());
+            cmd.append(" to ").append(p.getEndDateTime().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {

@@ -31,7 +31,11 @@ public class EditCommandParser {
         assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DESCRIPTION, PREFIX_STARTDATETIME,
                 PREFIX_ENDDATETIME, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
+        try {
+            argsTokenizer.tokenize(args);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
         List<Optional<String>> preambleFields = ParserUtil
                 .splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 

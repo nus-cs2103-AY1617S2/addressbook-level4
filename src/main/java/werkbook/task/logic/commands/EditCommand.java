@@ -28,8 +28,8 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [d/Description]"
-            + "[s/Start date and time] [e/End date and time] [t/Tag]...\n" + "Example: " + COMMAND_WORD
-            + " 1 d/Walk the dog e/08/03/2017 0300";
+            + "[from Start date and time] [to End date and time] [t/Tag]...\n" + "Example: " + COMMAND_WORD
+            + " 1 d/Walk the dog to 08/03/2017 0300";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -74,6 +74,7 @@ public class EditCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }

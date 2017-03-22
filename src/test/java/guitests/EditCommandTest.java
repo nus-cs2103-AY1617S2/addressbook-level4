@@ -10,7 +10,7 @@ import werkbook.task.commons.core.Messages;
 import werkbook.task.logic.commands.EditCommand;
 import werkbook.task.model.tag.Tag;
 import werkbook.task.model.task.Name;
-import werkbook.task.model.task.StartDateTime;
+// import werkbook.task.model.task.StartDateTime;
 import werkbook.task.testutil.TaskBuilder;
 import werkbook.task.testutil.TestTask;
 
@@ -25,7 +25,7 @@ public class EditCommandTest extends TaskListGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Walk the dog d/Take Zelda on a walk around the park "
-                + "s/01/01/2016 0900 e/01/01/2016 1000 t/Incomplete";
+                + "from 01/01/2016 0900 to 01/01/2016 1000 t/Incomplete";
         int taskListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Walk the dog")
@@ -98,8 +98,9 @@ public class EditCommandTest extends TaskListGuiTest {
         // commandBox.runCommand("edit 1 d/abcd");
         // assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 s/yahoo!!!");
-        assertResultMessage(StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
+        // Constraints won't matter
+        // commandBox.runCommand("edit 1 from yahoo!!!");
+        // assertResultMessage(StartDateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -108,7 +109,7 @@ public class EditCommandTest extends TaskListGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Walk the dog d/Take Zelda on a walk at the park"
-                + "s/01/01/2016 0900 e/01/01/2016 1000 t/Important");
+                + "from 01/01/2016 0900 to 01/01/2016 1000 t/Important");
     }
 
     /**
