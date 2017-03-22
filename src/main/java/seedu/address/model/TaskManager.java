@@ -51,7 +51,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
-        this();
         resetData(toBeCopied);
     }
 

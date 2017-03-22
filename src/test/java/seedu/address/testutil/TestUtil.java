@@ -390,7 +390,7 @@ public class TestUtil {
             }
         }
     }
-    
+
     /**
      * Assigns relative indexes for test tasks
      * The index is the same as the actual index shown on the UI
@@ -401,7 +401,7 @@ public class TestUtil {
         int futureID = 1;
         int completedID = 1;
         Iterator<Task> iter = taskList.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Task tmpTask = iter.next();
             // set task id to be displayed, the id here is 1-based
             if (tmpTask.isToday() && !tmpTask.isDone()) {
