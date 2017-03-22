@@ -5,13 +5,13 @@ import javafx.stage.Stage;
 import seedu.tache.TestApp;
 
 /**
- * A handler for the BrowserPanel of the UI
+ * A handler for the CalendarPanel of the UI
  */
-public class BrowserPanelHandle extends GuiHandle {
+public class CalendarPanelHandle extends GuiHandle {
 
-    private static final String BROWSER_ID = "#browser";
+    private static final String CALENDAR_ID = "#browser";
 
-    public BrowserPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
+    public CalendarPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
@@ -19,7 +19,7 @@ public class BrowserPanelHandle extends GuiHandle {
      * Clicks on the WebView.
      */
     public void clickOnWebView() {
-        guiRobot.clickOn(BROWSER_ID);
+        guiRobot.clickOn(CALENDAR_ID);
     }
 
 }

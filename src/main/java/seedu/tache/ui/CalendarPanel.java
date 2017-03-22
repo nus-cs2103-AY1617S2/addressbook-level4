@@ -74,6 +74,7 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    //@@author A0142255M
     private String getLoadTaskExecuteScript(ReadOnlyTask task) {
         String title = task.getName().toString();
         String start = task.getStartDateTime().get().getDateTimeForFullCalendar();
@@ -86,7 +87,7 @@ public class CalendarPanel extends UiPart<Region> {
         return "add_event('" + title + "', '" + start + "', '" + end + "', '" + isActive + "')";
 
     }
-    //@@author A0142255M
+
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
