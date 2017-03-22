@@ -1,16 +1,19 @@
 package seedu.taskboss.storage;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import seedu.taskboss.commons.core.ComponentManager;
+import seedu.taskboss.commons.core.Config;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskboss.commons.exceptions.DataConversionException;
+import seedu.taskboss.commons.util.ConfigUtil;
 import seedu.taskboss.model.ReadOnlyTaskBoss;
 import seedu.taskboss.model.UserPrefs;
 
@@ -20,9 +23,14 @@ import seedu.taskboss.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private Config config;
     private TaskBossStorage taskBossStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    public StorageManager(Config config) {
+        this(config.getTaskBossFilePath(), config.getUserPrefsFilePath());
+        this.config = config;
+    }
 
     public StorageManager(TaskBossStorage taskBossStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -48,6 +56,12 @@ public class StorageManager extends ComponentManager implements Storage {
 
 
     // ================ TaskBoss methods ==============================
+
+    @Override
+    public void setTaskBossFilePath(Path filepath) throws IOException {
+        config.setTaskBossFilePath(filepath.toString());
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
 
     @Override
     public void setFilePath(String filepath) {
