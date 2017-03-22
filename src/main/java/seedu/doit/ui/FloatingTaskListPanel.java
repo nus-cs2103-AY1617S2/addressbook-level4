@@ -19,12 +19,12 @@ import seedu.doit.model.item.ReadOnlyTask;
  * Panel containing the list of tasks.
  */
 public class FloatingTaskListPanel extends UiPart<Region> {
-    private static final String FXML = "TaskListPanel.fxml";
+    private static final String FXML = "FloatingTaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(FloatingTaskListPanel.class);
 
     private static ObservableList<ReadOnlyTask> mainTaskList;
     @FXML
-    private ListView<ReadOnlyTask> taskListView;
+    private ListView<ReadOnlyTask> floatingTaskListView;
 
 
     public FloatingTaskListPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> floatingTaskList) {
@@ -35,8 +35,9 @@ public class FloatingTaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> floatingTaskList) {
         mainTaskList = floatingTaskList;
-        this.taskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime() && !task.hasEndTime()));
-        this.taskListView.setCellFactory(listView -> new TaskListViewCell());
+        this.floatingTaskListView.setItems(floatingTaskList.filtered(task -> !task.hasStartTime()
+                                   && !task.hasEndTime() && !task.getIsDone()));
+        this.floatingTaskListView.setCellFactory(listView -> new FloatingTaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -47,7 +48,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        this.taskListView.getSelectionModel().selectedItemProperty()
+        this.floatingTaskListView.getSelectionModel().selectedItemProperty()
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     this.logger.fine("Selection in task list panel changed to : '" + newValue + "'");
@@ -58,12 +59,12 @@ public class FloatingTaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            this.taskListView.scrollTo(index);
-            this.taskListView.getSelectionModel().clearAndSelect(index);
+            this.floatingTaskListView.scrollTo(index);
+            this.floatingTaskListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyTask> {
+    class FloatingTaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask floatingTask, boolean empty) {

@@ -1,5 +1,6 @@
 package seedu.doit.model.item;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.commons.exceptions.DuplicateDataException;
 import seedu.doit.commons.util.CollectionUtil;
-import seedu.doit.model.item.Task.TaskComparator;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -21,7 +21,7 @@ import seedu.doit.model.item.Task.TaskComparator;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-    private TaskComparator taskComparator = new TaskComparator();
+    private Comparator<ReadOnlyTask> taskComparator = new TaskNameComparator();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -69,6 +69,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Marks the equivalent task in the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DuplicateTaskException
+     */
+    public void mark(int taskIndex, ReadOnlyTask toMark) throws TaskNotFoundException, DuplicateTaskException {
+        assert toMark != null;
+        Task markedTask = new Task(toMark);
+        markedTask.setIsDone(true);
+        updateTask(taskIndex, markedTask);
+        internalList.sort(taskComparator);
+    }
+
+    /**
      * Removes the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
@@ -94,6 +108,11 @@ public class UniqueTaskList implements Iterable<Task> {
             replacement.add(new Task(task));
         }
         setTasks(replacement);
+    }
+
+    public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
+        this.taskComparator = taskComparator;
+        internalList.sort(taskComparator);
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {

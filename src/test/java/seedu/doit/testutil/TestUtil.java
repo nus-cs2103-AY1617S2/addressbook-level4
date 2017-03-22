@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -35,7 +36,9 @@ import seedu.doit.model.item.EndTime;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
+import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 import seedu.doit.storage.XmlSerializableTaskManager;
@@ -82,6 +85,13 @@ public class TestUtil {
                 new Task(new Name("Elle Meyer"), new Priority("med"), new EndTime("next monday"), new Description("michegan ave"), new UniqueTagList()),
                 new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
                 new Task(new Name("George Best"), new Priority("high"), new EndTime("22/12/17"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("AAAAAFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("BBBBBFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("CCCCCFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("3/19/17"), new EndTime("3/20/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("3/19/17"), new EndTime("3/20/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("3/19/17"), new EndTime("3/20/17"), new Description("l"), new UniqueTagList()),
                 new Task(new Name("Hoon Meier"), new Priority("med"), new EndTime("9pm"), new Description("little india"), new UniqueTagList()),
                 new Task(new Name("Ida Mueller"), new Priority("low"), new EndTime("tomorrow 5pm"), new Description("chicago ave"), new UniqueTagList())
             };
@@ -341,8 +351,46 @@ public class TestUtil {
         return list;
     }
 
+    public static TestTask[] getTasks(TestTask[] tasks) {
+        ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
+        for (TestTask task: tasks) {
+            if (!task.getIsDone() && task.hasEndTime() && !task.hasStartTime()) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks.toArray(new TestTask[filteredTasks.size()]);
+    }
+
+    public static TestTask[] getEvents(TestTask[] tasks) {
+        ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
+        for (TestTask task: tasks) {
+            if (!task.getIsDone() && task.hasEndTime() && task.hasStartTime()) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks.toArray(new TestTask[filteredTasks.size()]);
+    }
+
+    public static TestTask[] getFloatingTasks(TestTask[] tasks) {
+        ArrayList<TestTask> filteredTasks = new ArrayList<TestTask>();
+        for (TestTask task: tasks) {
+            if (!task.getIsDone() && task.isFloatingTask()) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks.toArray(new TestTask[filteredTasks.size()]);
+    }
+
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
+    }
+
+    public static void sortTasks(TestTask[] tasks) {
+        Arrays.sort(tasks, new TaskNameComparator());
+    }
+
+    public static void sortTasks(TestTask[] tasks, Comparator<ReadOnlyTask> taskComparator) {
+        Arrays.sort(tasks, taskComparator);
     }
 
     public static Tag[] getTagList(String tags) {

@@ -10,13 +10,13 @@ import seedu.doit.logic.parser.DateTimeParser;
  * Represents a Item's end time in the item manager. Guarantees: immutable; is
  * valid as declared in {@link #isValidEndTime(String)}
  */
-public class EndTime {
+public class EndTime  implements Comparable<EndTime> {
 
     public static final String NO_END_TIME = null;
     public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Item End Time should be 2 alphanumeric"
-            + "/period strings separated by '@'";
+        + "/period strings separated by '@'";
     public static final String ENDTIME_VALIDATION_REGEX = "^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
-            + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
+        + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
 
     public final String value;
 
@@ -30,8 +30,7 @@ public class EndTime {
     /**
      * Validates given endTime.
      *
-     * @throws IllegalValueException
-     *             if given endTime string is invalid.
+     * @throws IllegalValueException if given endTime string is invalid.
      */
     public EndTime(String endTime) throws IllegalValueException {
         if (endTime == NO_END_TIME) {
@@ -40,7 +39,7 @@ public class EndTime {
             String trimmedEndTime = endTime.trim();
 
             LocalDateTime date = DateTimeParser.parseDateTime(trimmedEndTime)
-                    .orElseThrow(() -> new IllegalValueException("Invalid Date Format: " + trimmedEndTime));
+                .orElseThrow(() -> new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS));
 
             String dateInString = formatDate(date);
 
@@ -56,6 +55,11 @@ public class EndTime {
      */
     public static boolean isValidEndTime(String test) {
         return test.matches(ENDTIME_VALIDATION_REGEX);
+    }
+
+    private static String formatDate(LocalDateTime input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        return input.format(formatter);
     }
 
     @Override
@@ -75,11 +79,7 @@ public class EndTime {
         return this.value.hashCode();
     }
 
-    private static String formatDate(LocalDateTime input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
-        return input.format(formatter);
-    }
-
+    @Override
     public int compareTo(EndTime other) {
         return this.value.compareTo(other.value);
     }

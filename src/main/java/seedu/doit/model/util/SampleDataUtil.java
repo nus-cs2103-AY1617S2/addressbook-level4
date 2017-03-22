@@ -32,7 +32,7 @@ public class SampleDataUtil {
                     new UniqueTagList("ChiaSin")),
                 new Task(new Name("UI interface"), new Priority("low"), new EndTime("next week"),
                     new Description("have 3 lists"),
-                    new UniqueTagList("Huanhui"))
+                    new UniqueTagList("Huanhui")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

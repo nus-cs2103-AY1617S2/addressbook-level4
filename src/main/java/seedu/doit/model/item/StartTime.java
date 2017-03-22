@@ -10,13 +10,13 @@ import seedu.doit.logic.parser.DateTimeParser;
  * Represents a Item's start time in the task manager. Guarantees: immutable; is
  * valid as declared in {@link #isValidStartTime(String)}
  */
-public class StartTime {
+public class StartTime implements Comparable<StartTime> {
 
     public static final String NO_START_TIME = null;
     public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be "
-            + "2 alphanumeric/period strings separated by '@'";
+        + "2 alphanumeric/period strings separated by '@'";
     public static final String STARTTIME_VALIDATION_REGEX = "^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
-            + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
+        + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
 
     public final String value;
 
@@ -30,8 +30,7 @@ public class StartTime {
     /**
      * Validates given startTime.
      *
-     * @throws IllegalValueException
-     *             if given startTime string is invalid.
+     * @throws IllegalValueException if given startTime string is invalid.
      */
     public StartTime(String startTime) throws IllegalValueException {
         if (startTime == NO_START_TIME) {
@@ -40,7 +39,7 @@ public class StartTime {
             String trimmedStartTime = startTime.trim();
 
             LocalDateTime date = DateTimeParser.parseDateTime(trimmedStartTime)
-                    .orElseThrow(() -> new IllegalValueException("Invalid Date Format: " + trimmedStartTime));
+                .orElseThrow(() -> new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS));
 
             String dateInString = formatDate(date);
 
@@ -57,6 +56,12 @@ public class StartTime {
      */
     public static boolean isValidStartTime(String test) {
         return test.matches(STARTTIME_VALIDATION_REGEX);
+    }
+
+    private static String formatDate(LocalDateTime input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        return input.format(formatter);
+
     }
 
     @Override
@@ -76,11 +81,7 @@ public class StartTime {
         return this.value.hashCode();
     }
 
-    private static String formatDate(LocalDateTime input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
-        return input.format(formatter);
-    }
-
+    @Override
     public int compareTo(StartTime other) {
         return this.value.compareTo(other.value);
     }

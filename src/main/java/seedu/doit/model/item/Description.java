@@ -1,29 +1,26 @@
 package seedu.doit.model.item;
 
-
 import seedu.doit.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's description in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Represents a Task's description in the task manager. Guarantees: immutable;
+ * is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
-
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-        "Task description can take any values, and it should not be blank";
-
+        "Task description can take in any string";
     /*
-     * The first character of the description must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     *  Any String is a valid description
      */
-    public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
+    public static final String DESCRIPTION_VALIDATION_REGEX = ".*";
 
     public final String value;
 
     /**
      * Validates given description.
      *
-     * @throws IllegalValueException if given description string is invalid.
+     * @throws IllegalValueException
+     *             if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;

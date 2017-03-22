@@ -19,12 +19,12 @@ import seedu.doit.model.item.ReadOnlyTask;
  * Panel containing the list of tasks.
  */
 public class EventListPanel extends UiPart<Region> {
-    private static final String FXML = "TaskListPanel.fxml";
+    private static final String FXML = "EventListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     private static ObservableList<ReadOnlyTask> mainTaskList;
     @FXML
-    private ListView<ReadOnlyTask> taskListView;
+    private ListView<ReadOnlyTask> eventListView;
 
     public EventListPanel(AnchorPane eventListPlaceholder, ObservableList<ReadOnlyTask> eventList) {
         super(FXML);
@@ -34,8 +34,9 @@ public class EventListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> eventList) {
         mainTaskList = eventList;
-        this.taskListView.setItems(eventList.filtered(task -> task.hasStartTime() && task.hasEndTime()));
-        this.taskListView.setCellFactory(listView -> new TaskListViewCell());
+        this.eventListView.setItems(eventList.filtered(task -> task.hasStartTime()
+                                   && task.hasEndTime() && !task.getIsDone()));
+        this.eventListView.setCellFactory(listView -> new EventListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -46,7 +47,7 @@ public class EventListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        this.taskListView.getSelectionModel().selectedItemProperty()
+        this.eventListView.getSelectionModel().selectedItemProperty()
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     this.logger.fine("Selection in task list panel changed to : '" + newValue + "'");
@@ -57,12 +58,12 @@ public class EventListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            this.taskListView.scrollTo(index);
-            this.taskListView.getSelectionModel().clearAndSelect(index);
+            this.eventListView.scrollTo(index);
+            this.eventListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyTask> {
+    class EventListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask event, boolean empty) {

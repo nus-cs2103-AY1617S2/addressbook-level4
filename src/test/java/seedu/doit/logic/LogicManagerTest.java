@@ -6,7 +6,11 @@ import static org.junit.Assert.assertTrue;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.doit.model.item.EndTime.MESSAGE_ENDTIME_CONSTRAINTS;
+import static seedu.doit.model.item.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
+import static seedu.doit.model.item.StartTime.MESSAGE_STARTTIME_CONSTRAINTS;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +28,7 @@ import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.events.model.TaskManagerChangedEvent;
 import seedu.doit.commons.events.ui.JumpToListRequestEvent;
 import seedu.doit.commons.events.ui.ShowHelpRequestEvent;
+import seedu.doit.commons.util.FileUtil;
 import seedu.doit.logic.commands.AddCommand;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.Command;
@@ -33,6 +38,7 @@ import seedu.doit.logic.commands.ExitCommand;
 import seedu.doit.logic.commands.FindCommand;
 import seedu.doit.logic.commands.HelpCommand;
 import seedu.doit.logic.commands.ListCommand;
+import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.Model;
@@ -45,8 +51,10 @@ import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.Task;
+import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
+import seedu.doit.storage.Storage;
 import seedu.doit.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -58,6 +66,7 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    private Storage storage;
     private Logic logic;
 
     // These are for checking the correctness of the events raised
@@ -85,7 +94,8 @@ public class LogicManagerTest {
         this.model = new ModelManager();
         String tempTaskManagerFile = this.saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = this.saveFolder.getRoot().getPath() + "TempPreferences.json";
-        this.logic = new LogicManager(this.model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        this.storage = new StorageManager(tempTaskManagerFile, tempPreferencesFile);
+        this.logic = new LogicManager(this.model, this.storage);
         EventsCenter.getInstance().registerHandler(this);
 
         this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last
@@ -199,11 +209,16 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 5 e/valid,deadline.butNoPriorityPrefix d/valid,description",
+        assertCommandFailure("add wrong args wrong args s/gg" +
+            "", expectedMessage);
+        assertCommandFailure("add Valid Name 5 s/valid,deadline.butNoPriorityPrefix d/valid,description",
                 expectedMessage);
-        assertCommandFailure("add Valid Name d/valid", expectedMessage);
-        assertCommandFailure("add Valid Name e/valid", expectedMessage);
+        assertCommandFailure("add d/valid", expectedMessage);
+        assertCommandFailure("add e/valid", expectedMessage);
+        assertCommandFailure("add Valid Task p/1",  MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Task e/invalid time" , MESSAGE_ENDTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Task s/invalid e/tomorrow ",  MESSAGE_STARTTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name e/gogo ",  MESSAGE_ENDTIME_CONSTRAINTS);
     }
 
     @Test
@@ -361,10 +376,10 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        Collections.sort(fourTasks);
+        Collections.sort(fourTasks, new TaskNameComparator());
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
-        Collections.sort(expectedList);
+        Collections.sort(expectedList, new TaskNameComparator());
         helper.addToModel(this.model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
@@ -380,7 +395,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        Collections.sort(fourTasks);
+        Collections.sort(fourTasks, new TaskNameComparator());
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = fourTasks;
         helper.addToModel(this.model, fourTasks);
@@ -406,6 +421,43 @@ public class LogicManagerTest {
                 expectedAB, expectedList);
     }
 
+    @Test
+    public void execute_save_successful() throws Exception {
+        String filePath = "data/testfile1.xml";
+        File file = new File(filePath);
+        file.delete();
+        assertCommandSuccess("save " + filePath, String.format(SaveCommand.MESSAGE_SUCCESS, filePath),
+                this.model.getTaskManager(), this.model.getFilteredTaskList());
+        file.delete();
+    }
+
+    @Test
+    public void execute_save_not_xml() throws Exception {
+        String filePath = "";
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_NOT_XML_FILE);
+    }
+
+    @Test
+    public void execute_save_invalidFileName() throws Exception {
+        String filePath = "data/??.xml";
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_INVALID_FILE_NAME);
+    }
+
+    @Test
+    public void execute_save_duplicateFile() throws Exception {
+        String filePath = "data/testfile3.xml";
+        File file = new File(filePath);
+        FileUtil.createIfMissing(file);
+        assertCommandFailure("save " + filePath, SaveCommand.MESSAGE_DUPLICATE_FILE);
+        file.delete();
+    }
+
+    @Test
+    public void execute_save_inSameFile() throws Exception {
+        String filePath = this.storage.getTaskManagerFilePath();
+        assertCommandFailure("save " + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
+    }
+
     /**
      * A utility class to generate test data.
      */
@@ -414,12 +466,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Priority privatePriority = new Priority("low");
-            EndTime deadline = new EndTime("tomorrow");
+            EndTime endTime = new EndTime("tomorrow");
             Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePriority, deadline, description, tags);
+            return new Task(name, privatePriority, endTime, description, tags);
         }
 
         /**
@@ -445,7 +497,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEndTime());
+            cmd.append(" e/").append(p.getDeadline());
             cmd.append(" p/").append(p.getPriority());
             cmd.append(" d/").append(p.getDescription());
 

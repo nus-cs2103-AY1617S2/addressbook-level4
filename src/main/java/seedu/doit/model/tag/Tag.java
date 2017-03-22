@@ -1,11 +1,10 @@
 package seedu.doit.model.tag;
 
-
 import seedu.doit.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the task manager.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a Tag in the task manager. Guarantees: immutable; name is valid as
+ * declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
@@ -17,7 +16,8 @@ public class Tag {
     /**
      * Validates given tag name.
      *
-     * @throws IllegalValueException if the given tag name string is invalid.
+     * @throws IllegalValueException
+     *             if the given tag name string is invalid.
      */
     public Tag(String name) throws IllegalValueException {
         assert name != null;
@@ -50,6 +50,7 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + tagName + ']';
     }

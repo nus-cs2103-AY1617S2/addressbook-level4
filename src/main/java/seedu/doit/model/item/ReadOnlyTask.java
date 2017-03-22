@@ -1,13 +1,30 @@
 package seedu.doit.model.item;
 
+import seedu.doit.model.tag.UniqueTagList;
+
 /**
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyTask extends Item {
+public interface ReadOnlyTask {
+
+    Name getName();
+
+    Priority getPriority();
+
+    Description getDescription();
 
     StartTime getStartTime();
-    EndTime getEndTime();
+
+    EndTime getDeadline();
+
+    boolean getIsDone();
+
+    /**
+     * The returned TagList is a deep copy of the internal TagList, changes on
+     * the returned list will not affect the task's internal tags.
+     */
+    UniqueTagList getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -18,23 +35,15 @@ public interface ReadOnlyTask extends Item {
             && other.getName().equals(this.getName()) // state checks here onwards
             && other.getPriority().equals(this.getPriority())
             && other.getDescription().equals(this.getDescription()));
-
-            /*
-            && ((other.getStartTime() == null &&  this.getStartTime() == null)
-            || (other.getStartTime().equals(this.getStartTime())))
-            && ((other.getEndTime() == null &&  this.getEndTime() == null)
-            || other.getEndTime().equals(this.getEndTime()))
-            */
     }
 
     /**
      * Formats the event as text, showing all details.
      */
-    @Override
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         String startTime = (getStartTime() != null) ? getStartTime().toString() : "None";
-        String endTime = (getEndTime() != null) ? getEndTime().toString() : "None";
+        String endTime = (getDeadline() != null) ? getDeadline().toString() : "None";
 
         builder.append(getName())
                .append(" Priority: ")
@@ -45,7 +54,7 @@ public interface ReadOnlyTask extends Item {
         }
         if (hasEndTime()) {
             builder.append(" End Time: ");
-            builder.append(getEndTime());
+            builder.append(getDeadline());
         }
         builder.append(" Description: ")
                .append(getDescription())
@@ -58,7 +67,7 @@ public interface ReadOnlyTask extends Item {
 
     boolean hasEndTime();
 
-    int compareTo(ReadOnlyTask other);
+    int getItemType();
 
     boolean isTask();
 

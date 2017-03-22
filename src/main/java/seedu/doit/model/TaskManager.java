@@ -1,6 +1,7 @@
 package seedu.doit.model;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -75,6 +76,10 @@ public class TaskManager implements ReadOnlyItemManager {
         syncMasterTagListWith(tasks);
     }
 
+    public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
+        tasks.setTaskComparator(taskComparator);
+    }
+
 //// task-level operations
 
     /**
@@ -108,6 +113,17 @@ public class TaskManager implements ReadOnlyItemManager {
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
+    }
+
+    /**
+     * Marks an existing task in the to-do list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws DuplicateTaskException
+     */
+    public void markTask(int taskIndex, ReadOnlyTask taskToDone)
+            throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
+        tasks.mark(taskIndex, taskToDone);
     }
 
     /**

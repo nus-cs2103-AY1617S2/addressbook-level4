@@ -17,8 +17,7 @@ public abstract class Command {
      * Constructs a feedback message to summarise an operation that displayed a
      * listing of tasks.
      *
-     * @param displaySize
-     *            used to generate summary
+     * @param displaySize used to generate summary
      * @return summary message for tasks displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
@@ -26,11 +25,21 @@ public abstract class Command {
     }
 
     /**
+     * Constructs a feedback message to summarise an operation that sorted a
+     * listing of tasks.
+     *
+     * @param displaySize used to generate summary
+     * @return summary message for tasks displayed
+     */
+    public static String getMessageForTaskListShownSortedSummary(int displaySize) {
+        return String.format(Messages.MESSAGE_TASKS_SORTED_OVERVIEW, displaySize);
+    }
+
+    /**
      * Executes the command and returns the result message.
      *
      * @return feedback message of the operation result for display
-     * @throws CommandException
-     *             If an error occurs during command execution.
+     * @throws CommandException If an error occurs during command execution.
      */
     public abstract CommandResult execute() throws CommandException;
 
@@ -41,7 +50,6 @@ public abstract class Command {
      *
      * @param model
      * @param storage
-     *
      */
     public void setData(Model model, Storage storage) {
         this.model = model;
