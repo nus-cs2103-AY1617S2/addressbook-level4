@@ -18,7 +18,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
     public void renameCategory_Long_Command_success() throws IllegalValueException {
         TestTask sampleA = td.alice;
         TestTask sampleB = td.benson;
-        TestTask[] taskList= {sampleA, sampleB};
+        TestTask[] taskList = {sampleA, sampleB};
         assertRenameCategoryResult(false, "name friends Project", taskList);
     }
 
