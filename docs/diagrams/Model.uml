@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:PapyrusJava="http://www.eclipse.org/papyrus/PapyrusJava/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_esqvgP9XEeaGAZ7d1LgItA" name="RootElement">
+    <packagedElement xmi:type="uml:Component" xmi:id="_ClWqEP9YEeaGAZ7d1LgItA" name="Task List" useCase="_asm98P9YEeaGAZ7d1LgItA _z5onEP9YEeaGAZ7d1LgItA _dXNtkP9ZEeaGAZ7d1LgItA _szdZIP9ZEeaGAZ7d1LgItA _tcwNwP9ZEeaGAZ7d1LgItA _uF87wP9ZEeaGAZ7d1LgItA _ynsooP9ZEeaGAZ7d1LgItA _zdIb0P9ZEeaGAZ7d1LgItA _9uxqwP9ZEeaGAZ7d1LgItA __nuwcP9ZEeaGAZ7d1LgItA _BqEboP9aEeaGAZ7d1LgItA _YGbT8P9aEeaGAZ7d1LgItA _ZB9TYP_vEeaQtJ2BNnfZRg">
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_asm98P9YEeaGAZ7d1LgItA" name="Add Floating Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <ownedUseCase xmi:type="uml:UseCase" xmi:id="_zZB0YP9YEeaGAZ7d1LgItA" name="Add Task"/>
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_X6JA4P9ZEeaGAZ7d1LgItA" name="ExtensionPoint1"/>
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_homqQP9ZEeaGAZ7d1LgItA" name="ExtensionPoint2"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_z5onEP9YEeaGAZ7d1LgItA" name="Add Event" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <extend xmi:type="uml:Extend" xmi:id="_ixngwP9ZEeaGAZ7d1LgItA" extendedCase="_dXNtkP9ZEeaGAZ7d1LgItA" extensionLocation="_ixngwf9ZEeaGAZ7d1LgItA"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_dXNtkP9ZEeaGAZ7d1LgItA" name="Add Deadlined Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <extend xmi:type="uml:Extend" xmi:id="_homDMP9ZEeaGAZ7d1LgItA" extendedCase="_asm98P9YEeaGAZ7d1LgItA" extensionLocation="_homqQP9ZEeaGAZ7d1LgItA"/>
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_ixngwf9ZEeaGAZ7d1LgItA" name="ExtensionPoint1"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_szdZIP9ZEeaGAZ7d1LgItA" name="Edit Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <include xmi:type="uml:Include" xmi:id="_QbcIwP9bEeaGAZ7d1LgItA" addition="_YGbT8P9aEeaGAZ7d1LgItA"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_tcwNwP9ZEeaGAZ7d1LgItA" name="Delete Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <include xmi:type="uml:Include" xmi:id="_RiWGcP9bEeaGAZ7d1LgItA" addition="_YGbT8P9aEeaGAZ7d1LgItA"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_uF87wP9ZEeaGAZ7d1LgItA" name="Mark Task as Completed" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <include xmi:type="uml:Include" xmi:id="_cLAHMP9bEeaGAZ7d1LgItA" addition="_YGbT8P9aEeaGAZ7d1LgItA"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ynsooP9ZEeaGAZ7d1LgItA" name="Undo Action" subject="_ClWqEP9YEeaGAZ7d1LgItA"/>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_zdIb0P9ZEeaGAZ7d1LgItA" name="Redo Action" subject="_ClWqEP9YEeaGAZ7d1LgItA"/>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_9uxqwP9ZEeaGAZ7d1LgItA" name="Find Task" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <extend xmi:type="uml:Extend" xmi:id="_d9OTgP_vEeaQtJ2BNnfZRg" extendedCase="_YGbT8P9aEeaGAZ7d1LgItA" extensionLocation="_d9OTgf_vEeaQtJ2BNnfZRg"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="__nuwcP9ZEeaGAZ7d1LgItA" name="Save to File" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <include xmi:type="uml:Include" xmi:id="_mmBUkP9bEeaGAZ7d1LgItA" addition="_BqEboP9aEeaGAZ7d1LgItA"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_BqEboP9aEeaGAZ7d1LgItA" name="Change File storage" subject="_ClWqEP9YEeaGAZ7d1LgItA"/>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_YGbT8P9aEeaGAZ7d1LgItA" name="List Tasks" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_w_zBQP9aEeaGAZ7d1LgItA" name="ExtensionPoint1"/>
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_xVTXMf9aEeaGAZ7d1LgItA" name="ExtensionPoint2"/>
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_dZpFUP_vEeaQtJ2BNnfZRg" name="ExtensionPoint3"/>
+        <extensionPoint xmi:type="uml:ExtensionPoint" xmi:id="_d9OTgf_vEeaQtJ2BNnfZRg" name="ExtensionPoint4"/>
+      </ownedUseCase>
+      <ownedUseCase xmi:type="uml:UseCase" xmi:id="_ZB9TYP_vEeaQtJ2BNnfZRg" name="List all Tasks" subject="_ClWqEP9YEeaGAZ7d1LgItA">
+        <extend xmi:type="uml:Extend" xmi:id="_dZn3MP_vEeaQtJ2BNnfZRg" extendedCase="_YGbT8P9aEeaGAZ7d1LgItA" extensionLocation="_dZpFUP_vEeaQtJ2BNnfZRg"/>
+      </ownedUseCase>
+      <nestedClassifier xmi:type="uml:Actor" xmi:id="_SeOAMP9YEeaGAZ7d1LgItA" name="User"/>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_mAuhEP9ZEeaGAZ7d1LgItA" memberEnd="_mA7VYP9ZEeaGAZ7d1LgItA _mA7VYf9ZEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mAvvMP9ZEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mAvvMf9ZEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_mA7VYP9ZEeaGAZ7d1LgItA" name="add event" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_mAuhEP9ZEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_mA7VYf9ZEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_mAuhEP9ZEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_mVrdYP9ZEeaGAZ7d1LgItA" memberEnd="_mVsrgf9ZEeaGAZ7d1LgItA _mVsrgv9ZEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mVsEcP9ZEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mVsrgP9ZEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_mVsrgf9ZEeaGAZ7d1LgItA" name="add deadline" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_mVrdYP9ZEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_mVsrgv9ZEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_mVrdYP9ZEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_mqKfoP9ZEeaGAZ7d1LgItA" memberEnd="_mqKfo_9ZEeaGAZ7d1LgItA _mqLGsP9ZEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_mqKfof9ZEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mqKfov9ZEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_mqKfo_9ZEeaGAZ7d1LgItA" name="add task" type="_asm98P9YEeaGAZ7d1LgItA" association="_mqKfoP9ZEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_mqLGsP9ZEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_mqKfoP9ZEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_rf50oP9bEeaGAZ7d1LgItA" memberEnd="_rf6bsv9bEeaGAZ7d1LgItA _rf6bs_9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_rf6bsP9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rf6bsf9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_rf6bsv9bEeaGAZ7d1LgItA" name="edit task" type="_szdZIP9ZEeaGAZ7d1LgItA" association="_rf50oP9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_rf6bs_9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_rf50oP9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_r4SfcP9bEeaGAZ7d1LgItA" memberEnd="_r4Sfc_9bEeaGAZ7d1LgItA _r4TGgP9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_r4Sfcf9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_r4Sfcv9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_r4Sfc_9bEeaGAZ7d1LgItA" name="mark task as completed" type="_uF87wP9ZEeaGAZ7d1LgItA" association="_r4SfcP9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_r4TGgP9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_r4SfcP9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_sOex4P9bEeaGAZ7d1LgItA" memberEnd="_sOfY8P9bEeaGAZ7d1LgItA _sOfY8f9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sOex4f9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_sOex4v9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_sOfY8P9bEeaGAZ7d1LgItA" name="delete task" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_sOex4P9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_sOfY8f9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_sOex4P9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_sr_0UP9bEeaGAZ7d1LgItA" memberEnd="_sr_0U_9bEeaGAZ7d1LgItA _ssAbYP9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_sr_0Uf9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_sr_0Uv9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_sr_0U_9bEeaGAZ7d1LgItA" name="save to file" type="__nuwcP9ZEeaGAZ7d1LgItA" association="_sr_0UP9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_ssAbYP9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_sr_0UP9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_tDdSEP9bEeaGAZ7d1LgItA" memberEnd="_tDd5If9bEeaGAZ7d1LgItA _tDd5Iv9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tDdSEf9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tDd5IP9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_tDd5If9bEeaGAZ7d1LgItA" name="find task" type="_ClWqEP9YEeaGAZ7d1LgItA" association="_tDdSEP9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_tDd5Iv9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_tDdSEP9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_taAJ0P9bEeaGAZ7d1LgItA" memberEnd="_taAw4f9bEeaGAZ7d1LgItA _taAw4v9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_taAJ0f9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_taAw4P9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_taAw4f9bEeaGAZ7d1LgItA" name="redo action" type="_zdIb0P9ZEeaGAZ7d1LgItA" association="_taAJ0P9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_taAw4v9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_taAJ0P9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_tvvwUP9bEeaGAZ7d1LgItA" memberEnd="_tvwXYv9bEeaGAZ7d1LgItA _tvwXY_9bEeaGAZ7d1LgItA">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tvwXYP9bEeaGAZ7d1LgItA" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tvwXYf9bEeaGAZ7d1LgItA" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_tvwXYv9bEeaGAZ7d1LgItA" name="undo action" type="_ynsooP9ZEeaGAZ7d1LgItA" association="_tvvwUP9bEeaGAZ7d1LgItA"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_tvwXY_9bEeaGAZ7d1LgItA" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_tvvwUP9bEeaGAZ7d1LgItA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Association" xmi:id="_a5Mh0P_vEeaQtJ2BNnfZRg" memberEnd="_a5PlIP_vEeaQtJ2BNnfZRg _a5QMMP_vEeaQtJ2BNnfZRg">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_a5NI4P_vEeaQtJ2BNnfZRg" source="org.eclipse.papyrus">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_a5Nv8P_vEeaQtJ2BNnfZRg" key="nature" value="UML_Nature"/>
+        </eAnnotations>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_a5PlIP_vEeaQtJ2BNnfZRg" name="list all tasks" type="_ZB9TYP_vEeaQtJ2BNnfZRg" association="_a5Mh0P_vEeaQtJ2BNnfZRg"/>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_a5QMMP_vEeaQtJ2BNnfZRg" name="user" type="_SeOAMP9YEeaGAZ7d1LgItA" association="_a5Mh0P_vEeaQtJ2BNnfZRg"/>
+      </nestedClassifier>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_jDa-AP__EeaxCot-tOEekw" name="main">
+      <packagedElement xmi:type="uml:Package" xmi:id="_jGNzUP__EeaxCot-tOEekw" name="seedu">
+        <packagedElement xmi:type="uml:Package" xmi:id="_jGOaYP__EeaxCot-tOEekw" name="address">
+          <packagedElement xmi:type="uml:Package" xmi:id="_jGOaYf__EeaxCot-tOEekw" name="model">
+            <packagedElement xmi:type="uml:Interface" xmi:id="_jGPBcP__EeaxCot-tOEekw" name="Model" visibility="public">
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGPogP__EeaxCot-tOEekw" name="resetData" visibility="private">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGPogf__EeaxCot-tOEekw" name="newData" type="_jH4AMP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGQPkP__EeaxCot-tOEekw" name="getAddressBook" visibility="private">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGQPkf__EeaxCot-tOEekw" type="_jH4AMP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGTS4P__EeaxCot-tOEekw" name="deletePerson" visibility="private" raisedException="_jGT58v__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGT58P__EeaxCot-tOEekw" name="target" type="_jGSEwP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGW9QP__EeaxCot-tOEekw" name="addPerson" visibility="private" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGXkUP__EeaxCot-tOEekw" name="person" type="_jGVIEP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGZZgP__EeaxCot-tOEekw" name="updatePerson" visibility="private" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGaAkP__EeaxCot-tOEekw" name="filteredPersonListIndex">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGanoP__EeaxCot-tOEekw" name="editedPerson" type="_jGSEwP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGanof__EeaxCot-tOEekw" name="getFilteredPersonList" visibility="private">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGcc0f__EeaxCot-tOEekw" type="_jGbOsv__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGdD4P__EeaxCot-tOEekw" name="updateFilteredListToShowAll" visibility="private"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jGe5EP__EeaxCot-tOEekw" name="updateFilteredPersonList" visibility="private">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jGe5Ef__EeaxCot-tOEekw" name="keywords" type="_jGdq8f__EeaxCot-tOEekw"/>
+              </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Interface" xmi:id="_jH4AMP__EeaxCot-tOEekw" name="ReadOnlyAddressBook" visibility="public">
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jH4nQP__EeaxCot-tOEekw" name="getPersonList" visibility="private">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jH51Yf__EeaxCot-tOEekw" type="_jH5OUP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jH6ccP__EeaxCot-tOEekw" name="getTagList" visibility="private">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jH6ccf__EeaxCot-tOEekw" type="_jH5OUP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_jH84sP__EeaxCot-tOEekw" name="AddressBook" visibility="public">
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_jH-t4P__EeaxCot-tOEekw" name="persons" visibility="private" isLeaf="true" type="_jH9fwf__EeaxCot-tOEekw" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_jIBKIf__EeaxCot-tOEekw" name="tags" visibility="private" isLeaf="true" type="_jH_8Af__EeaxCot-tOEekw" isUnique="false"/>
+              <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_jH9fwP__EeaxCot-tOEekw" name="AddressBook implements ReadOnlyAddressBook" client="_jH84sP__EeaxCot-tOEekw" supplier="_jH4AMP__EeaxCot-tOEekw" contract="_jH4AMP__EeaxCot-tOEekw"/>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIC_UP__EeaxCot-tOEekw" name="AddressBook" specification="_jIBxMP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIFbkP__EeaxCot-tOEekw" name="AddressBook" specification="_jIDmYP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    this();&#xD;
+    resetData(toBeCopied);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIIe4P__EeaxCot-tOEekw" name="setPersons" specification="_jIHQwP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    this.persons.setPersons(persons);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIMJQP__EeaxCot-tOEekw" name="setTags" specification="_jIJtAf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    this.tags.setTags(tags);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jINXYP__EeaxCot-tOEekw" name="resetData" specification="_jIMwUP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    assert newData != null;&#xD;
+    try {&#xD;
+        setPersons(newData.getPersonList());&#xD;
+    } catch (UniquePersonList.DuplicatePersonException e) {&#xD;
+        assert false : &quot;AddressBooks should not have duplicate persons&quot;;&#xD;
+    }&#xD;
+    try {&#xD;
+        setTags(newData.getTagList());&#xD;
+    } catch (UniqueTagList.DuplicateTagException e) {&#xD;
+        assert false : &quot;AddressBooks should not have duplicate tags&quot;;&#xD;
+    }&#xD;
+    syncMasterTagListWith(persons);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIOlgP__EeaxCot-tOEekw" name="addPerson" specification="_jIN-cP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    syncMasterTagListWith(p);&#xD;
+    persons.add(p);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIQasP__EeaxCot-tOEekw" name="updatePerson" specification="_jIPMkP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    assert editedReadOnlyPerson != null;&#xD;
+    Person editedPerson = new Person(editedReadOnlyPerson);&#xD;
+    syncMasterTagListWith(editedPerson);&#xD;
+    // TODO: the tags master list will be updated even though the below line fails.&#xD;
+    // This can cause the tags master list to have additional tags that are not tagged to any person&#xD;
+    // in the person list.&#xD;
+    persons.updatePerson(index, editedPerson);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIRo0f__EeaxCot-tOEekw" name="syncMasterTagListWith" specification="_jIRBwP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    final UniqueTagList personTags = person.getTags();&#xD;
+    tags.mergeFrom(personTags);&#xD;
+    // Create map with values = tag object references in the master list&#xD;
+    // used for checking person tag references&#xD;
+    final Map&lt;Tag, Tag> masterTagObjects = new HashMap&lt;>();&#xD;
+    tags.forEach( tag -> masterTagObjects.put(tag, tag));&#xD;
+    // Rebuild the list of person tags to point to the relevant tags in the master tag list.&#xD;
+    final Set&lt;Tag> correctTagReferences = new HashSet&lt;>();&#xD;
+    personTags.forEach( tag -> correctTagReferences.add(masterTagObjects.get(tag)));&#xD;
+    person.setTags(new UniqueTagList(correctTagReferences));&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIS28f__EeaxCot-tOEekw" name="syncMasterTagListWith" specification="_jISP4P__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    persons.forEach(this::syncMasterTagListWith);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIUFEP__EeaxCot-tOEekw" name="removePerson" specification="_jITeAP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    if (persons.remove(key)) {&#xD;
+        return true;&#xD;
+    } else {&#xD;
+        throw new UniquePersonList.PersonNotFoundException();&#xD;
+    }&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIVTMP__EeaxCot-tOEekw" name="addTag" specification="_jIUsIP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    tags.add(t);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIXvcP__EeaxCot-tOEekw" name="toString" specification="_jIV6QP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return persons.asObservableList().size() + &quot; persons, &quot; + tags.asObservableList().size() + &quot; tags&quot;;&#xD;
+// TODO: refine later&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIYWgf__EeaxCot-tOEekw" name="getPersonList" specification="_jIXvcf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return new UnmodifiableObservableList&lt;>(persons.asObservableList());&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIZkoP__EeaxCot-tOEekw" name="getTagList" specification="_jIY9kP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return new UnmodifiableObservableList&lt;>(tags.asObservableList());&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIcn8P__EeaxCot-tOEekw" name="equals" specification="_jIbZ0P__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return // short circuit if same object&#xD;
+    other == this || (// instanceof handles nulls&#xD;
+    other instanceof AddressBook &amp;&amp; this.persons.equals(((AddressBook) other).persons) &amp;&amp; this.tags.equalsOrderInsensitive(((AddressBook) other).tags));&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIdPAf__EeaxCot-tOEekw" name="hashCode" specification="_jIcn8f__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    // use this method for custom fields hashing instead of implementing your own&#xD;
+    return Objects.hash(persons, tags);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIBxMP__EeaxCot-tOEekw" name="AddressBook" visibility="public" method="_jIC_UP__EeaxCot-tOEekw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIDmYP__EeaxCot-tOEekw" name="AddressBook" visibility="public" method="_jIFbkP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIE0gP__EeaxCot-tOEekw" name="toBeCopied" type="_jH4AMP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIHQwP__EeaxCot-tOEekw" name="setPersons" visibility="public" method="_jIIe4P__EeaxCot-tOEekw" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIHQwf__EeaxCot-tOEekw" name="persons" type="_jIGCoP__EeaxCot-tOEekw">
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jIH30P__EeaxCot-tOEekw"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jIH30f__EeaxCot-tOEekw" value="*"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIJtAf__EeaxCot-tOEekw" name="setTags" visibility="public" method="_jIMJQP__EeaxCot-tOEekw" raisedException="_jIK7I___EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIKUEP__EeaxCot-tOEekw" name="tags" type="_jIJF8P__EeaxCot-tOEekw">
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jIK7IP__EeaxCot-tOEekw"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jIK7If__EeaxCot-tOEekw" value="*"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIMwUP__EeaxCot-tOEekw" name="resetData" visibility="public" method="_jINXYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIMwUf__EeaxCot-tOEekw" name="newData" type="_jH4AMP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIN-cP__EeaxCot-tOEekw" name="addPerson" visibility="public" method="_jIOlgP__EeaxCot-tOEekw" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIN-cf__EeaxCot-tOEekw" name="p" type="_jGVIEP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIPMkP__EeaxCot-tOEekw" name="updatePerson" visibility="public" method="_jIQasP__EeaxCot-tOEekw" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIPMkf__EeaxCot-tOEekw" name="index">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIPzoP__EeaxCot-tOEekw" name="editedReadOnlyPerson" type="_jGSEwP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIRBwP__EeaxCot-tOEekw" name="syncMasterTagListWith" visibility="private" method="_jIRo0f__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIRo0P__EeaxCot-tOEekw" name="person" type="_jGVIEP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jISP4P__EeaxCot-tOEekw" name="syncMasterTagListWith" visibility="private" method="_jIS28f__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIS28P__EeaxCot-tOEekw" name="persons" type="_jH9fwf__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jITeAP__EeaxCot-tOEekw" name="removePerson" visibility="public" method="_jIUFEP__EeaxCot-tOEekw" raisedException="_jGT58v__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jITeAf__EeaxCot-tOEekw" direction="return">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jITeAv__EeaxCot-tOEekw" name="key" type="_jGSEwP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIUsIP__EeaxCot-tOEekw" name="addTag" visibility="public" method="_jIVTMP__EeaxCot-tOEekw" raisedException="_jIK7I___EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIUsIf__EeaxCot-tOEekw" name="t" type="_jIJF8P__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIV6QP__EeaxCot-tOEekw" name="toString" visibility="public" method="_jIXvcP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIXIYf__EeaxCot-tOEekw" type="_jIV6Qv__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIXvcf__EeaxCot-tOEekw" name="getPersonList" visibility="public" method="_jIYWgf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIYWgP__EeaxCot-tOEekw" type="_jH5OUP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIY9kP__EeaxCot-tOEekw" name="getTagList" visibility="public" method="_jIZkoP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIY9kf__EeaxCot-tOEekw" type="_jH5OUP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIbZ0P__EeaxCot-tOEekw" name="equals" visibility="public" method="_jIcn8P__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIbZ0f__EeaxCot-tOEekw" direction="return">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIcA4P__EeaxCot-tOEekw" name="other" type="_jIaLsP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIcn8f__EeaxCot-tOEekw" name="hashCode" visibility="public" method="_jIdPAf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIdPAP__EeaxCot-tOEekw" direction="return">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+              </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_jIfrQP__EeaxCot-tOEekw" name="ModelManager" visibility="public">
+              <generalization xmi:type="uml:Generalization" xmi:id="_jIg5YP__EeaxCot-tOEekw" general="_jIfrQf__EeaxCot-tOEekw"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_jIiukP__EeaxCot-tOEekw" name="logger" visibility="private" isLeaf="true" isStatic="true" type="_jIhgcf__EeaxCot-tOEekw" isUnique="false">
+                <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_jIjVoP__EeaxCot-tOEekw" name="defaultValue">
+                  <language>JAVA</language>
+                  <body>LogsCenter.getLogger(ModelManager.class)</body>
+                </defaultValue>
+              </ownedAttribute>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_jIj8sP__EeaxCot-tOEekw" name="addressBook" visibility="private" isLeaf="true" type="_jH84sP__EeaxCot-tOEekw" isUnique="false"/>
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_jImY8P__EeaxCot-tOEekw" name="filteredPersons" visibility="private" isLeaf="true" type="_jIlK0P__EeaxCot-tOEekw" isUnique="false"/>
+              <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_jIg5Yf__EeaxCot-tOEekw" name="ModelManager implements Model" client="_jIfrQP__EeaxCot-tOEekw" supplier="_jGPBcP__EeaxCot-tOEekw" contract="_jGPBcP__EeaxCot-tOEekw"/>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIo1MP__EeaxCot-tOEekw" name="ModelManager" specification="_jInAAf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    super();&#xD;
+    assert !CollectionUtil.isAnyNull(addressBook, userPrefs);&#xD;
+    logger.fine(&quot;Initializing with address book: &quot; + addressBook + &quot; and user prefs &quot; + userPrefs);&#xD;
+    this.addressBook = new AddressBook(addressBook);&#xD;
+    filteredPersons = new FilteredList&lt;>(this.addressBook.getPersonList());&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIqqYP__EeaxCot-tOEekw" name="ModelManager" specification="_jIpcQP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    this(new AddressBook(), new UserPrefs());&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIrRcf__EeaxCot-tOEekw" name="resetData" specification="_jIqqYf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    addressBook.resetData(newData);&#xD;
+    indicateAddressBookChanged();&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIsfkf__EeaxCot-tOEekw" name="getAddressBook" specification="_jIr4gP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return addressBook;&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jItGof__EeaxCot-tOEekw" name="indicateAddressBookChanged" specification="_jItGoP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    raise(new AddressBookChangedEvent(addressBook));&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIxYEP__EeaxCot-tOEekw" name="deletePerson" specification="_jIttsP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    addressBook.removePerson(target);&#xD;
+    indicateAddressBookChanged();&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jIzNQf__EeaxCot-tOEekw" name="addPerson" specification="_jIxYEf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    addressBook.addPerson(person);&#xD;
+    updateFilteredListToShowAll();&#xD;
+    indicateAddressBookChanged();&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jI1CcP__EeaxCot-tOEekw" name="updatePerson" specification="_jIz0UP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    assert editedPerson != null;&#xD;
+    int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);&#xD;
+    addressBook.updatePerson(addressBookIndex, editedPerson);&#xD;
+    indicateAddressBookChanged();&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jI2QkP__EeaxCot-tOEekw" name="getFilteredPersonList" specification="_jI1pgP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return new UnmodifiableObservableList&lt;>(filteredPersons);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jI23oP__EeaxCot-tOEekw" name="updateFilteredListToShowAll" specification="_jI2Qkf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    filteredPersons.setPredicate(null);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jI4FwP__EeaxCot-tOEekw" name="updateFilteredPersonList" specification="_jI3esP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jI6iAP__EeaxCot-tOEekw" name="updateFilteredPersonList" specification="_jI5T4f__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    filteredPersons.setPredicate(expression::satisfies);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jInAAf__EeaxCot-tOEekw" name="ModelManager" visibility="public" method="_jIo1MP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIoOIP__EeaxCot-tOEekw" name="addressBook" type="_jH4AMP__EeaxCot-tOEekw"/>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIoOIf__EeaxCot-tOEekw" name="userPrefs" type="_jInAAP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIpcQP__EeaxCot-tOEekw" name="ModelManager" visibility="public" method="_jIqqYP__EeaxCot-tOEekw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIqqYf__EeaxCot-tOEekw" name="resetData" visibility="public" method="_jIrRcf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIrRcP__EeaxCot-tOEekw" name="newData" type="_jH4AMP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIr4gP__EeaxCot-tOEekw" name="getAddressBook" visibility="public" method="_jIsfkf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIsfkP__EeaxCot-tOEekw" type="_jH4AMP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jItGoP__EeaxCot-tOEekw" name="indicateAddressBookChanged" visibility="private" method="_jItGof__EeaxCot-tOEekw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIttsP__EeaxCot-tOEekw" name="deletePerson" visibility="public" method="_jIxYEP__EeaxCot-tOEekw" raisedException="_jIvi4v__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIvi4P__EeaxCot-tOEekw" name="target" type="_jGSEwP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIxYEf__EeaxCot-tOEekw" name="addPerson" visibility="public" method="_jIzNQf__EeaxCot-tOEekw" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jIzNQP__EeaxCot-tOEekw" name="person" type="_jGVIEP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jIz0UP__EeaxCot-tOEekw" name="updatePerson" visibility="public" method="_jI1CcP__EeaxCot-tOEekw" raisedException="_jGYLYP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jI0bYP__EeaxCot-tOEekw" name="filteredPersonListIndex">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jI0bYf__EeaxCot-tOEekw" name="editedPerson" type="_jGSEwP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jI1pgP__EeaxCot-tOEekw" name="getFilteredPersonList" visibility="public" method="_jI2QkP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jI1pgf__EeaxCot-tOEekw" type="_jGbOsv__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jI2Qkf__EeaxCot-tOEekw" name="updateFilteredListToShowAll" visibility="public" method="_jI23oP__EeaxCot-tOEekw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jI3esP__EeaxCot-tOEekw" name="updateFilteredPersonList" visibility="public" method="_jI4FwP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jI3esf__EeaxCot-tOEekw" name="keywords" type="_jGdq8f__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jI5T4f__EeaxCot-tOEekw" name="updateFilteredPersonList" visibility="private" method="_jI6iAP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jI568P__EeaxCot-tOEekw" name="expression" type="_jKU3QP__EeaxCot-tOEekw"/>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_HsiagAABEeexCot-tOEekw" name="expression" type="_Hqo9EAABEeexCot-tOEekw"/>
+              </ownedOperation>
+              <nestedClassifier xmi:type="uml:Interface" xmi:id="_jKU3QP__EeaxCot-tOEekw" name="Expression" visibility="public">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jKVeUP__EeaxCot-tOEekw" name="satisfies" visibility="private">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKVeUf__EeaxCot-tOEekw" direction="return">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                  </ownedParameter>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKWFYP__EeaxCot-tOEekw" name="person" type="_jGSEwP__EeaxCot-tOEekw"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jKWFYf__EeaxCot-tOEekw" name="toString" visibility="private">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKWscP__EeaxCot-tOEekw" type="_jIV6Qv__EeaxCot-tOEekw" direction="return"/>
+                </ownedOperation>
+              </nestedClassifier>
+              <nestedClassifier xmi:type="uml:Class" xmi:id="_jKXTgP__EeaxCot-tOEekw" name="PredicateExpression" visibility="private">
+                <generalization xmi:type="uml:Generalization" xmi:id="_HteOoAABEeexCot-tOEekw" general="_Hqo9EAABEeexCot-tOEekw"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_jKYhof__EeaxCot-tOEekw" name="qualifier" visibility="private" isLeaf="true" type="_jLtXUP__EeaxCot-tOEekw" isUnique="false"/>
+                <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_jKXTgf__EeaxCot-tOEekw" name="PredicateExpression implements Expression" client="_jKXTgP__EeaxCot-tOEekw" supplier="_jKU3QP__EeaxCot-tOEekw" contract="_jKU3QP__EeaxCot-tOEekw"/>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jKa94P__EeaxCot-tOEekw" name="PredicateExpression" specification="_jKZIsP__EeaxCot-tOEekw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    this.qualifier = qualifier;&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jKcMAf__EeaxCot-tOEekw" name="satisfies" specification="_jKbk8P__EeaxCot-tOEekw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    return qualifier.run(person);&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jKdaIP__EeaxCot-tOEekw" name="toString" specification="_jKczEP__EeaxCot-tOEekw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    return qualifier.toString();&#xD;
+</body>
+                </ownedBehavior>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jKZIsP__EeaxCot-tOEekw" name="PredicateExpression" visibility="private" method="_jKa94P__EeaxCot-tOEekw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKaW0P__EeaxCot-tOEekw" name="qualifier" type="_jLtXUP__EeaxCot-tOEekw"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jKbk8P__EeaxCot-tOEekw" name="satisfies" visibility="public" method="_jKcMAf__EeaxCot-tOEekw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKbk8f__EeaxCot-tOEekw" direction="return">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                  </ownedParameter>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKcMAP__EeaxCot-tOEekw" name="person" type="_jGSEwP__EeaxCot-tOEekw"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jKczEP__EeaxCot-tOEekw" name="toString" visibility="public" method="_jKdaIP__EeaxCot-tOEekw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jKczEf__EeaxCot-tOEekw" type="_jIV6Qv__EeaxCot-tOEekw" direction="return"/>
+                </ownedOperation>
+              </nestedClassifier>
+              <nestedClassifier xmi:type="uml:Interface" xmi:id="_jLtXUP__EeaxCot-tOEekw" name="Qualifier" visibility="public">
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jLulcP__EeaxCot-tOEekw" name="run" visibility="private">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jLulcf__EeaxCot-tOEekw" direction="return">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                  </ownedParameter>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jLvMgP__EeaxCot-tOEekw" name="person" type="_jGSEwP__EeaxCot-tOEekw"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jLvzkP__EeaxCot-tOEekw" name="toString" visibility="private">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jLvzkf__EeaxCot-tOEekw" type="_jIV6Qv__EeaxCot-tOEekw" direction="return"/>
+                </ownedOperation>
+              </nestedClassifier>
+              <nestedClassifier xmi:type="uml:Class" xmi:id="_jLvzkv__EeaxCot-tOEekw" name="NameQualifier" visibility="private">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_jLxBsP__EeaxCot-tOEekw" name="nameKeyWords" visibility="private" type="_jGdq8f__EeaxCot-tOEekw" isUnique="false"/>
+                <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_jLwaoP__EeaxCot-tOEekw" name="NameQualifier implements Qualifier" client="_jLvzkv__EeaxCot-tOEekw" supplier="_jLtXUP__EeaxCot-tOEekw" contract="_jLtXUP__EeaxCot-tOEekw"/>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jLy24f__EeaxCot-tOEekw" name="NameQualifier" specification="_jLxBsf__EeaxCot-tOEekw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    this.nameKeyWords = nameKeyWords;&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL0FAv__EeaxCot-tOEekw" name="run" specification="_jLzd8P__EeaxCot-tOEekw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    return nameKeyWords.stream().filter( keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)).findAny().isPresent();&#xD;
+</body>
+                </ownedBehavior>
+                <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL1TIf__EeaxCot-tOEekw" name="toString" specification="_jL0sEP__EeaxCot-tOEekw">
+                  <language>JAVA</language>
+                  <body>&#xD;
+    return &quot;name=&quot; + String.join(&quot;, &quot;, nameKeyWords);&#xD;
+</body>
+                </ownedBehavior>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jLxBsf__EeaxCot-tOEekw" name="NameQualifier" visibility="private" method="_jLy24f__EeaxCot-tOEekw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jLy24P__EeaxCot-tOEekw" name="nameKeyWords" type="_jGdq8f__EeaxCot-tOEekw"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jLzd8P__EeaxCot-tOEekw" name="run" visibility="public" method="_jL0FAv__EeaxCot-tOEekw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL0FAP__EeaxCot-tOEekw" direction="return">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                  </ownedParameter>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL0FAf__EeaxCot-tOEekw" name="person" type="_jGSEwP__EeaxCot-tOEekw"/>
+                </ownedOperation>
+                <ownedOperation xmi:type="uml:Operation" xmi:id="_jL0sEP__EeaxCot-tOEekw" name="toString" visibility="public" method="_jL1TIf__EeaxCot-tOEekw">
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL1TIP__EeaxCot-tOEekw" type="_jIV6Qv__EeaxCot-tOEekw" direction="return"/>
+                </ownedOperation>
+              </nestedClassifier>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_jInAAP__EeaxCot-tOEekw" name="UserPrefs" visibility="public">
+              <ownedAttribute xmi:type="uml:Property" xmi:id="_jL4WcP__EeaxCot-tOEekw" name="guiSettings" visibility="public" type="_jL3IUP__EeaxCot-tOEekw" isUnique="false"/>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL49gf__EeaxCot-tOEekw" name="getGuiSettings" specification="_jL4Wcf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return guiSettings == null ? new GuiSettings() : guiSettings;&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL6Lof__EeaxCot-tOEekw" name="updateLastUsedGuiSetting" specification="_jL5kkP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    this.guiSettings = guiSettings;&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL8A0P__EeaxCot-tOEekw" name="UserPrefs" specification="_jL6ysP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    this.setGuiSettings(500, 500, 0, 0);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL92Af__EeaxCot-tOEekw" name="setGuiSettings" specification="_jL8n4P__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    guiSettings = new GuiSettings(width, height, x, y);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jL_EIf__EeaxCot-tOEekw" name="equals" specification="_jL-dEP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    if (other == this) {&#xD;
+        return true;&#xD;
+    }&#xD;
+    if (!(other instanceof UserPrefs)) {&#xD;
+        //this handles null as well.&#xD;
+        return false;&#xD;
+    }&#xD;
+    UserPrefs o = (UserPrefs) other;&#xD;
+    return Objects.equals(guiSettings, o.guiSettings);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jMASQP__EeaxCot-tOEekw" name="hashCode" specification="_jL_rMP__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return Objects.hash(guiSettings);&#xD;
+</body>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_jMA5Uf__EeaxCot-tOEekw" name="toString" specification="_jMASQf__EeaxCot-tOEekw">
+                <language>JAVA</language>
+                <body>&#xD;
+    return guiSettings.toString();&#xD;
+</body>
+              </ownedBehavior>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jL4Wcf__EeaxCot-tOEekw" name="getGuiSettings" visibility="public" method="_jL49gf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL49gP__EeaxCot-tOEekw" type="_jL3IUP__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jL5kkP__EeaxCot-tOEekw" name="updateLastUsedGuiSetting" visibility="public" method="_jL6Lof__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL6LoP__EeaxCot-tOEekw" name="guiSettings" type="_jL3IUP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jL6ysP__EeaxCot-tOEekw" name="UserPrefs" visibility="public" method="_jL8A0P__EeaxCot-tOEekw"/>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jL8n4P__EeaxCot-tOEekw" name="setGuiSettings" visibility="public" method="_jL92Af__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL8n4f__EeaxCot-tOEekw" name="width">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_6j0jABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL9O8P__EeaxCot-tOEekw" name="height">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_6j0jABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL9O8f__EeaxCot-tOEekw" name="x">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL92AP__EeaxCot-tOEekw" name="y">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jL-dEP__EeaxCot-tOEekw" name="equals" visibility="public" method="_jL_EIf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL-dEf__EeaxCot-tOEekw" direction="return">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                </ownedParameter>
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL_EIP__EeaxCot-tOEekw" name="other" type="_jIaLsP__EeaxCot-tOEekw"/>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jL_rMP__EeaxCot-tOEekw" name="hashCode" visibility="public" method="_jMASQP__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jL_rMf__EeaxCot-tOEekw" direction="return">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                </ownedParameter>
+              </ownedOperation>
+              <ownedOperation xmi:type="uml:Operation" xmi:id="_jMASQf__EeaxCot-tOEekw" name="toString" visibility="public" method="_jMA5Uf__EeaxCot-tOEekw">
+                <ownedParameter xmi:type="uml:Parameter" xmi:id="_jMA5UP__EeaxCot-tOEekw" type="_jIV6Qv__EeaxCot-tOEekw" direction="return"/>
+              </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_pNLKgP__EeaxCot-tOEekw" visibility="public" client="_jIfrQP__EeaxCot-tOEekw" supplier="_esqvgP9XEeaGAZ7d1LgItA"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_Hqo9EAABEeexCot-tOEekw" name="Expression"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_jGQ2oP__EeaxCot-tOEekw" name="importedTypes">
+      <packagedElement xmi:type="uml:Package" xmi:id="_jGRdsP__EeaxCot-tOEekw" name="seedu">
+        <packagedElement xmi:type="uml:Package" xmi:id="_jGRdsf__EeaxCot-tOEekw" name="address">
+          <packagedElement xmi:type="uml:Package" xmi:id="_jGRdsv__EeaxCot-tOEekw" name="model">
+            <packagedElement xmi:type="uml:Package" xmi:id="_jGRds___EeaxCot-tOEekw" name="person">
+              <packagedElement xmi:type="uml:Class" xmi:id="_jGSEwP__EeaxCot-tOEekw" name="ReadOnlyPerson"/>
+              <packagedElement xmi:type="uml:Class" xmi:id="_jGVIEP__EeaxCot-tOEekw" name="Person"/>
+              <packagedElement xmi:type="uml:Class" xmi:id="_jH9fwf__EeaxCot-tOEekw" name="UniquePersonList"/>
+              <packagedElement xmi:type="uml:Package" xmi:id="_jIvi4f__EeaxCot-tOEekw" name="UniquePersonList">
+                <packagedElement xmi:type="uml:Class" xmi:id="_jIvi4v__EeaxCot-tOEekw" name="PersonNotFoundException"/>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_jH_8AP__EeaxCot-tOEekw" name="tag">
+              <packagedElement xmi:type="uml:Class" xmi:id="_jH_8Af__EeaxCot-tOEekw" name="UniqueTagList"/>
+              <packagedElement xmi:type="uml:Class" xmi:id="_jIJF8P__EeaxCot-tOEekw" name="Tag"/>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_jGbOsP__EeaxCot-tOEekw" name="commons">
+            <packagedElement xmi:type="uml:Package" xmi:id="_jGbOsf__EeaxCot-tOEekw" name="core">
+              <packagedElement xmi:type="uml:Class" xmi:id="_jGbOsv__EeaxCot-tOEekw" name="UnmodifiableObservableList"/>
+              <packagedElement xmi:type="uml:Class" xmi:id="_jIfrQf__EeaxCot-tOEekw" name="ComponentManager"/>
+              <packagedElement xmi:type="uml:Class" xmi:id="_jL3IUP__EeaxCot-tOEekw" name="GuiSettings"/>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_jGT58f__EeaxCot-tOEekw" name="UniquePersonList">
+        <packagedElement xmi:type="uml:Class" xmi:id="_jGT58v__EeaxCot-tOEekw" name="PersonNotFoundException"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_jGYLYP__EeaxCot-tOEekw" name="DuplicatePersonException"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_jH4nQf__EeaxCot-tOEekw" name="javafx">
+        <packagedElement xmi:type="uml:Package" xmi:id="_jH4nQv__EeaxCot-tOEekw" name="collections">
+          <packagedElement xmi:type="uml:Class" xmi:id="_jH5OUP__EeaxCot-tOEekw" name="ObservableList"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_jIkjwP__EeaxCot-tOEekw" name="transformation">
+            <packagedElement xmi:type="uml:Class" xmi:id="_jIlK0P__EeaxCot-tOEekw" name="FilteredList"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_jIK7Iv__EeaxCot-tOEekw" name="UniqueTagList">
+        <packagedElement xmi:type="uml:Class" xmi:id="_jIK7I___EeaxCot-tOEekw" name="DuplicateTagException"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_jGdD4f__EeaxCot-tOEekw" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_jGdD4v__EeaxCot-tOEekw" name="java">
+        <packagedElement xmi:type="uml:Package" xmi:id="_jGdq8P__EeaxCot-tOEekw" name="util">
+          <packagedElement xmi:type="uml:Class" xmi:id="_jGdq8f__EeaxCot-tOEekw" name="Set"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_jIGCoP__EeaxCot-tOEekw" name="List"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_jIhgcP__EeaxCot-tOEekw" name="logging">
+            <packagedElement xmi:type="uml:Class" xmi:id="_jIhgcf__EeaxCot-tOEekw" name="Logger"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_jIV6Qf__EeaxCot-tOEekw" name="lang">
+          <packagedElement xmi:type="uml:Class" xmi:id="_jIV6Qv__EeaxCot-tOEekw" name="String"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_jIaLsP__EeaxCot-tOEekw" name="Object"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_2gURAP_-EeaxCot-tOEekw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2gWGMP_-EeaxCot-tOEekw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PapyrusJava_PROFILES/PapyrusJava.profile.uml#_j9REUByGEduN1bTiWJ0lyw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_2grdYP_-EeaxCot-tOEekw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2gt5oP_-EeaxCot-tOEekw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_2gvu0P_-EeaxCot-tOEekw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2gw88P_-EeaxCot-tOEekw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <PapyrusJava:External xmi:id="_jGSr0P__EeaxCot-tOEekw" name="seedu.address.model.person.ReadOnlyPerson" base_Classifier="_jGSEwP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jGUhAP__EeaxCot-tOEekw" name="UniquePersonList.PersonNotFoundException" base_Classifier="_jGT58v__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jGVvIP__EeaxCot-tOEekw" name="seedu.address.model.person.Person" base_Classifier="_jGVIEP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jGYycP__EeaxCot-tOEekw" name="UniquePersonList.DuplicatePersonException" base_Classifier="_jGYLYP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jGcc0P__EeaxCot-tOEekw" name="seedu.address.commons.core.UnmodifiableObservableList" base_Classifier="_jGbOsv__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jGeSAP__EeaxCot-tOEekw" name="java.util.Set" base_Classifier="_jGdq8f__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jH51YP__EeaxCot-tOEekw" name="javafx.collections.ObservableList" base_Classifier="_jH5OUP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jH-G0P__EeaxCot-tOEekw" name="seedu.address.model.person.UniquePersonList" base_Classifier="_jH9fwf__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIBKIP__EeaxCot-tOEekw" name="seedu.address.model.tag.UniqueTagList" base_Classifier="_jH_8Af__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jICYQP__EeaxCot-tOEekw" base_BehavioralFeature="_jIBxMP__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jIENcP__EeaxCot-tOEekw" base_BehavioralFeature="_jIDmYP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIGpsP__EeaxCot-tOEekw" name="java.util.List" base_Classifier="_jIGCoP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIJtAP__EeaxCot-tOEekw" name="seedu.address.model.tag.Tag" base_Classifier="_jIJF8P__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jILiMP__EeaxCot-tOEekw" name="UniqueTagList.DuplicateTagException" base_Classifier="_jIK7I___EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIXIYP__EeaxCot-tOEekw" name="java.lang.String" base_Classifier="_jIV6Qv__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIaywP__EeaxCot-tOEekw" name="java.lang.Object" base_Classifier="_jIaLsP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIgSUP__EeaxCot-tOEekw" name="seedu.address.commons.core.ComponentManager" base_Classifier="_jIfrQf__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIiHgP__EeaxCot-tOEekw" name="java.util.logging.Logger" base_Classifier="_jIhgcf__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIlx4P__EeaxCot-tOEekw" name="javafx.collections.transformation.FilteredList" base_Classifier="_jIlK0P__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jInnEP__EeaxCot-tOEekw" base_BehavioralFeature="_jInAAf__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jIqDUP__EeaxCot-tOEekw" base_BehavioralFeature="_jIpcQP__EeaxCot-tOEekw"/>
+  <PapyrusJava:Synchronized xmi:id="_jIuUwP__EeaxCot-tOEekw" base_Operation="_jIttsP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jIwxAP__EeaxCot-tOEekw" name="seedu.address.model.person.UniquePersonList.PersonNotFoundException" base_Classifier="_jIvi4v__EeaxCot-tOEekw"/>
+  <PapyrusJava:Synchronized xmi:id="_jIymMP__EeaxCot-tOEekw" base_Operation="_jIxYEf__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jI5T4P__EeaxCot-tOEekw" name="Expression" base_Classifier="_jKU3QP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jKYhoP__EeaxCot-tOEekw" name="Qualifier" base_Classifier="_jLtXUP__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jKZvwP__EeaxCot-tOEekw" base_BehavioralFeature="_jKZIsP__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jLyP0P__EeaxCot-tOEekw" base_BehavioralFeature="_jLxBsf__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_jL3vYP__EeaxCot-tOEekw" name="seedu.address.commons.core.GuiSettings" base_Classifier="_jL3IUP__EeaxCot-tOEekw"/>
+  <standard:Create xmi:id="_jL7ZwP__EeaxCot-tOEekw" base_BehavioralFeature="_jL6ysP__EeaxCot-tOEekw"/>
+  <PapyrusJava:External xmi:id="_HqpkIAABEeexCot-tOEekw" name="Expression" base_Classifier="_Hqo9EAABEeexCot-tOEekw"/>
+</xmi:XMI>
