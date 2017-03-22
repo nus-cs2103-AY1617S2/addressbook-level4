@@ -450,21 +450,21 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
 `* * *` | user | add new tasks | track what i need to do
 `* * *` | user | delete tasks | delete task that was inaccurately entered
-`* *` | advanced user | use shorter versions of commands | type my commands faster
-`* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
-`* *` | user | secure my task list | prevent other people from viewing my task list
-`* *` | user | [sync](#sync) my task list to Google or Microsoft | view my tasks through their respective calendars
-`* *` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
-`* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
-`* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
-`* *` | new user | view command hints when typing commands | ensure my commands are correct
-`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots
-`* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
-`*` | user sharing this computer with other users | switch between different accounts on this task manager | share this application with the other users of this computer
-`*` | user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
-`*` | user | create shared tasks across different users | track the progress of other users for shared tasks
-`*` | user | import previously exported data back | continue from where I left off
-`*` | user | receive a daily email at a preferred time that contains tasks due that day | plan my schedule for that day effectively
+&nbsp;&nbsp;`* *` | advanced user | use shorter versions of commands | type my commands faster
+&nbsp;&nbsp;`* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
+&nbsp;&nbsp;`* *` | user | secure my task list | prevent other people from viewing my task list
+&nbsp;&nbsp;`* *` | user | [sync](#sync) my task list to Google or Microsoft | view my tasks through their respective calendars
+&nbsp;&nbsp;`* *` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
+&nbsp;&nbsp;`* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
+&nbsp;&nbsp;`* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
+&nbsp;&nbsp;`* *` | new user | view command hints when typing commands | ensure my commands are correct
+&nbsp;&nbsp;`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots
+&nbsp;&nbsp;`* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user sharing<br/> this computer<br/> with other users | switch between different accounts on this task manager | share this application with the other users of this computer
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | create shared tasks across different users | track the progress of other users for shared tasks
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | import previously exported data back | continue from where I left off
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | receive a daily email at a preferred time that contains tasks due that day | plan my schedule for that day effectively
 
 
 ## Appendix B : Use Cases
