@@ -88,7 +88,6 @@ public class AddCommandParser {
 
             return addTask(name, date, priority, description, tags);
         default:
-            //TODO fix messages
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 

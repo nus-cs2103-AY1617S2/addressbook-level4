@@ -15,7 +15,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 public class DateUtil {
 
     public static final String MESSAGE_DATE_PASSED = "Dates provided must not be in the past";
-    public static final String MESSAGE_DATE_AMBIGUOUS = "Multiple possible dates provided." +
+    public static final String MESSAGE_DATE_AMBIGUOUS = "Multiple dates provided." +
         "Please provide one date in a supported format";
     public static final String MESSAGE_DATE_NOT_FOUND = "Input provided cannot be parsed as Date" +
         "Please provide one date in a supported format";;
@@ -24,7 +24,6 @@ public class DateUtil {
         PrettyTimeParser dateParser = new PrettyTimeParser();
         List<Date> parseResults = dateParser.parse(toParse);
 
-      //TODO define formats to avoid ambiguous/multiple deadlines
         if (parseResults.size() < 1) {
             throw new IllegalValueException(MESSAGE_DATE_NOT_FOUND);
         }  else if (parseResults.size() > 1) {

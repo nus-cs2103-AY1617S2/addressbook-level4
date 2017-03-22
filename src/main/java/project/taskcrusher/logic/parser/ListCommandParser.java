@@ -98,7 +98,7 @@ public class ListCommandParser {
             }
 
             if (timeslots.size() != 1) {
-                throw new IllegalValueException("SHOULD HAVE ONLY ONE TIMESLOT... FIX THIS MESSAGE LATER");
+                throw new IllegalValueException("Multiple timeslots supplied. Supply only one timeslot");
             }
 
             return new ListCommand(timeslots.get(0));
@@ -128,7 +128,7 @@ public class ListCommandParser {
         } else if (isOverdueOrCompleteFlag(flag)) {
             this.overdueOrCompleteFlag = flag;
         } else {
-            throw new IllegalValueException("EDIT THIS");
+            throw new IllegalValueException("Invalid flag supplied. Supply t for tasks, e for events");
         }
     }
 }
