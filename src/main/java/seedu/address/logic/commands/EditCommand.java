@@ -105,12 +105,9 @@ public class EditCommand extends Command {
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
         private Optional<Boolean> isCompleted = Optional.empty();
-<<<<<<< HEAD
         private Optional<Boolean> clearDates = Optional.empty();
 
-=======
         private Optional<UniqueBookingList> bookings = Optional.empty();
->>>>>>> refs/remotes/origin/V0.3-bernard
         public EditTaskDescriptor() {}
 
 
@@ -120,11 +117,9 @@ public class EditCommand extends Command {
             this.deadline = toCopy.getDeadline();
             this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
-<<<<<<< HEAD
             this.clearDates = toCopy.getClearDates();
-=======
             this.bookings = toCopy.getBookings();
->>>>>>> refs/remotes/origin/V0.3-bernard
+
         }
 
         /**
