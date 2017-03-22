@@ -9,11 +9,11 @@ import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores tasklist data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given tasklist data to the specified file.
      */
     public static void saveDataToFile(File file, XmlSerializableTaskList taskList)
             throws FileNotFoundException {

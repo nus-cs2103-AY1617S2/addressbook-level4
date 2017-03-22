@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import seedu.watodo.MainApp;
 import seedu.watodo.commons.core.Config;
 import seedu.watodo.commons.core.GuiSettings;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.UserPrefs;
 import seedu.watodo.storage.XmlSerializableTaskList;
 import seedu.watodo.testutil.TestUtil;
@@ -23,13 +23,13 @@ public class TestApp extends MainApp {
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String WATODO_NAME = "Test";
-    protected Supplier<ReadOnlyTaskManger> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyTaskManger> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyTaskManager> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;

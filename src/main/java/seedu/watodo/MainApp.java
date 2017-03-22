@@ -22,7 +22,7 @@ import seedu.watodo.logic.Logic;
 import seedu.watodo.logic.LogicManager;
 import seedu.watodo.model.Model;
 import seedu.watodo.model.ModelManager;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
 import seedu.watodo.model.util.SampleDataUtil;
@@ -74,19 +74,19 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManger> addressBookOptional;
-        ReadOnlyTaskManger initialData;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
         try {
-            addressBookOptional = storage.readTaskList();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            taskManagerOptional = storage.readTaskList();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample task manager");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleWatodo);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleWatodo);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty task manager");
             initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty task manager");
             initialData = new TaskManager();
         }
 
@@ -143,7 +143,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty task manager");
             initializedPrefs = new UserPrefs();
         }
 

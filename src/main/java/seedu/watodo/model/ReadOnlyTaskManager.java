@@ -8,7 +8,7 @@ import seedu.watodo.model.task.ReadOnlyTask;
 /**
  * Unmodifiable view of a task manager
  */
-public interface ReadOnlyTaskManger {
+public interface ReadOnlyTaskManager {
 
     /**
      * Returns an unmodifiable view of the tasks list.

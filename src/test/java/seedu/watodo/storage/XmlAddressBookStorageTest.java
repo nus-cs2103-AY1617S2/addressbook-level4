@@ -13,7 +13,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.util.FileUtil;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.storage.XmlTaskListStorage;
@@ -34,7 +34,7 @@ public class XmlAddressBookStorageTest {
         readTaskList(null);
     }
 
-    private java.util.Optional<ReadOnlyTaskManger> readTaskList(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyTaskManager> readTaskList(String filePath) throws Exception {
         return new XmlTaskListStorage(filePath).readTaskList(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -69,7 +69,7 @@ public class XmlAddressBookStorageTest {
 
         //Save in new file and read back
         xmlTaskListStorage.saveTaskList(original, filePath);
-        ReadOnlyTaskManger readBack = xmlTaskListStorage.readTaskList(filePath).get();
+        ReadOnlyTaskManager readBack = xmlTaskListStorage.readTaskList(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
@@ -93,7 +93,7 @@ public class XmlAddressBookStorageTest {
         saveAddressBook(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyTaskManger addressBook, String filePath) throws IOException {
+    private void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         new XmlTaskListStorage(filePath).saveTaskList(addressBook, addToTestDataPathIfNotNull(filePath));
     }
 

@@ -59,9 +59,6 @@ public class AddCommand extends Command {
             if (start.isLater(end)) {
                 throw new IllegalValueException("End date must be later than start date!");
             }
-            
-            
-            
             this.toAdd = new Task(new Description(description), start, end, new UniqueTagList(tagSet));
             break;
         }

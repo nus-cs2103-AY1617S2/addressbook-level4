@@ -14,7 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.task.Task;
@@ -75,7 +75,7 @@ public class TaskListTest {
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskManger {
+    private static class AddressBookStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
