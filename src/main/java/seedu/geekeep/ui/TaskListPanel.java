@@ -58,15 +58,6 @@ public class TaskListPanel extends UiPart<Region> {
         addToPlaceholder(taskListPlaceholder);
     }
 
-    //TODO only works for v0.2 checks
-    public TaskListPanel(AnchorPane taskListPlaceholder, String type, ObservableList<ReadOnlyTask>... categories) {
-        super(getFxmlFromType(type));
-        for (ObservableList<ReadOnlyTask> list : categories) {
-            setConnections(list);
-        }
-        addToPlaceholder(taskListPlaceholder);
-    }
-
     //TODO this method should not be there. After v0.2 it is to remove
     private static String getFxmlFromType(String type) {
         if (type.equals("deadline")) {
@@ -102,8 +93,8 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            allListView.scrollTo(index);
-            allListView.getSelectionModel().clearAndSelect(index);
+            currentListView.scrollTo(index);
+            currentListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -120,7 +111,7 @@ public class TaskListPanel extends UiPart<Region> {
             tabPanePlaceHolder.getSelectionModel().select(0);
             break;
         }
-        logger.info("Switched to " + category);
+        logger.info("Switched to " + category + " in " + type);
     }
 
 /*  //TODO scrollTo should works for all the ListView
