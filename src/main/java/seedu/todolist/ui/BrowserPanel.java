@@ -3,6 +3,7 @@ package seedu.todolist.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.todolist.commons.util.FxViewUtil;
 import seedu.todolist.model.tag.Tag;
@@ -22,7 +23,7 @@ public class BrowserPanel extends UiPart<Region> {
     private Label nameLabel;
 
     @FXML
-    private Label tagsLabel;
+    private FlowPane tagsFlow;
 
 
 
@@ -46,10 +47,11 @@ public class BrowserPanel extends UiPart<Region> {
     public void loadPersonPage(Task task) {
         nameLabel.setText(task.getName().toString());
         //will need to fix this
-        for (Tag tag: task.getTags()) {
-            tagsLabel.setText(tag.getTagName());
-        }
+        task.getTags().forEach(tag -> tagsFlow.getChildren().add(new Label(tag.tagName)));
+    }
 
+    public void freeResources() {
+        tagsFlow.getChildren().clear();
     }
 
 

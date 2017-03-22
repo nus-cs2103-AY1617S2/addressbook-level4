@@ -256,6 +256,10 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.loadPersonPage(person);
     }
 
+    void releaseResources() {
+        browserPanel.freeResources();
+    }
+
 
     //@@author A0144240W
     public void changeButtonsBackToOriginalState() {
