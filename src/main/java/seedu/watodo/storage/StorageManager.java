@@ -11,7 +11,7 @@ import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.UserPrefs;
 
 /**
@@ -55,23 +55,23 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManger> readTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskList() throws DataConversionException, IOException {
         return readTaskList(TaskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskManger> readTaskList(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return TaskListStorage.readTaskList(filePath);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskManger TaskList) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManager TaskList) throws IOException {
         saveTaskList(TaskList, TaskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskManger TaskList, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManager TaskList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         TaskListStorage.saveTaskList(TaskList, filePath);
     }
