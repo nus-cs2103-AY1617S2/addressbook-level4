@@ -30,7 +30,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class ParserUtil {
 
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -48,6 +48,16 @@ public class ParserUtil {
         }
         return Optional.of(Integer.parseInt(index));
 
+    }
+
+    public static Optional<String> parseType(String command) {
+        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String type = matcher.group("targetType");
+        return Optional.of(type);
     }
 
     /**
