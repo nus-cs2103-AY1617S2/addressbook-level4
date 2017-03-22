@@ -1,12 +1,14 @@
 package seedu.task.model.task;
 
+import java.util.Comparator;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's description in the ToDo list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
-public class Description {
+public class Description implements Comparable<Description> {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
             "Task descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -50,12 +52,26 @@ public class Description {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && this.description.equals(((Description) other).description)); // state check
+                        && this.description.equals(((Description) other).description)); // state check
     }
 
     @Override
     public int hashCode() {
         return description.hashCode();
     }
+
+    @Override
+    public int compareTo(Description other) {
+        return this.description.compareTo(other.description);
+    }
+
+    public static Comparator<Description> DescriptionComparator = new Comparator<Description>() {
+
+        @Override
+        public int compare(Description description1, Description description2) {
+            return description1.compareTo(description2);
+        }
+
+    };
 
 }
