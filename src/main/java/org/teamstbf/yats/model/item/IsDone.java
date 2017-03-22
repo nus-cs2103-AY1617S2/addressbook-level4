@@ -8,10 +8,10 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
  */
 //@author A0139448U
 public class IsDone {
-	
-	private final String ISDONE_NOTDONE = "not done";
-	private final String ISDONE_DONE = "done";
-	
+
+	public final static String ISDONE_NOTDONE = "No";
+	public final static String ISDONE_DONE = "Yes";
+
 	private boolean isDone;
 	public String value;
 
@@ -19,7 +19,7 @@ public class IsDone {
 		this.isDone = false;
 		this.value = ISDONE_NOTDONE;
 	}
-	
+
 	public IsDone(String done) throws IllegalValueException{
 		assert done != null;
 		this.value = done;
@@ -30,11 +30,11 @@ public class IsDone {
 			this.isDone = false;
 		}
 	}
-	
+
 	public boolean getIsDone() {
 		return isDone;
 	}
-	
+
 	public void markDone() {
 		this.isDone = true;
 		this.value = ISDONE_DONE;

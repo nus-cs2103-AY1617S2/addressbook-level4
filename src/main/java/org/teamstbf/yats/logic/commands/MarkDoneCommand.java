@@ -1,10 +1,8 @@
 package org.teamstbf.yats.logic.commands;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.teamstbf.yats.commons.core.Messages;
-import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
@@ -18,7 +16,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
- * 
+ *
  * Marks an existing task as done in the task scheduler.
  */
 //@@author A0139448U
@@ -27,9 +25,8 @@ public class MarkDoneCommand extends EditCommand{
 	public MarkDoneCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
 		super(filteredTaskListIndex, editTaskDescriptor);
 	}
-	
+
 	public static final String COMMAND_WORD = "done";
-	
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
 	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
@@ -46,6 +43,9 @@ public class MarkDoneCommand extends EditCommand{
 			throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 		}
 		ReadOnlyEvent taskToEdit = lastShownList.get(filteredTaskListIndex);
+		if (taskToEdit.isTaskDone()) {
+			return new CommandResult(MESSAGE_ALR_MARKED);
+		}
 		Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
 		try {
@@ -56,13 +56,13 @@ public class MarkDoneCommand extends EditCommand{
 		model.updateFilteredListToShowAll();
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 	}
-	
+
 	/**
 	 * Creates and returns a {@code Task} with the details of {@code taskToEdit}
 	 * edited with {@code editTaskDescriptor}.
 	 */
-	
-	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+
+	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor){
 		assert taskToEdit != null;
 
 		Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);

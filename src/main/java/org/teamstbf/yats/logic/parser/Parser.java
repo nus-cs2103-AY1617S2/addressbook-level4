@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.teamstbf.yats.logic.commands.AddCommand;
 import org.teamstbf.yats.logic.commands.ClearCommand;
+import org.teamstbf.yats.logic.commands.ClearDoneCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.DeleteCommand;
 import org.teamstbf.yats.logic.commands.EditCommand;
@@ -73,16 +74,19 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-        
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         case MarkDoneCommand.COMMAND_WORD:
         	return new MarkDoneCommandParser().parse(arguments);
-            
+        	
+        case ClearDoneCommand.COMMAND_WORD:
+        	return new ClearDoneCommand();
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
