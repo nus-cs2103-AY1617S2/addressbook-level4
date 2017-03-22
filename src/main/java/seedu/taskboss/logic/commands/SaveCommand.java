@@ -31,10 +31,12 @@ public class SaveCommand extends Command {
         if (filepath.contains("+") || filepath.contains ("#") ||
                 filepath.contains ("^") || filepath.contains ("*")) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
-        } else {
-            storage.setFilePath(filepath);
-        }
+        } 
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        try {
+            storage.setFilePath(filepath);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (IOException e) {
+            return new CommandResult(MESSAGE_INVALID_FILEPATH);
     }
 }
