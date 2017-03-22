@@ -1,12 +1,11 @@
 package seedu.watodo.logic.commands;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.logic.parser.AddCommandParser.TaskType;
+import seedu.watodo.logic.parser.DateTimeParser.TaskType;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;

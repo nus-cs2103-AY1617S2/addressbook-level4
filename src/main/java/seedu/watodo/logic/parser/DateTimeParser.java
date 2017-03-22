@@ -85,10 +85,10 @@ public class DateTimeParser {
      */
     private TaskType checkTaskType(ArgumentTokenizer datesTokenizer) throws IllegalValueException {
         
-        boolean hasBy = datesTokenizer.getValue(PREFIX_BY).isPresent();
-        boolean hasOn = datesTokenizer.getValue(PREFIX_ON).isPresent();
-        boolean hasFrom = datesTokenizer.getValue(PREFIX_FROM).isPresent();
-        boolean hasTo = datesTokenizer.getValue(PREFIX_TO).isPresent();
+        boolean hasBy = datesTokenizer.getUniqueValue(PREFIX_BY).isPresent();
+        boolean hasOn = datesTokenizer.getUniqueValue(PREFIX_ON).isPresent();
+        boolean hasFrom = datesTokenizer.getUniqueValue(PREFIX_FROM).isPresent();
+        boolean hasTo = datesTokenizer.getUniqueValue(PREFIX_TO).isPresent();
         
         if (!hasBy && !hasOn && !hasFrom && !hasTo) {
             return TaskType.FLOAT;
@@ -110,10 +110,10 @@ public class DateTimeParser {
     private void extractDates(ArgumentTokenizer datesTokenizer) throws IllegalValueException {
             
         List<String> argsWithDate = new ArrayList<String>();
-        Collections.addAll(argsWithDate, datesTokenizer.getValue(PREFIX_BY).orElse(null), 
-          datesTokenizer.getValue(PREFIX_ON).orElse(null), 
-          datesTokenizer.getValue(PREFIX_FROM).orElse(null),
-          datesTokenizer.getValue(PREFIX_TO).orElse(null));
+        Collections.addAll(argsWithDate, datesTokenizer.getUniqueValue(PREFIX_BY).orElse(null), 
+          datesTokenizer.getUniqueValue(PREFIX_ON).orElse(null), 
+          datesTokenizer.getUniqueValue(PREFIX_FROM).orElse(null),
+          datesTokenizer.getUniqueValue(PREFIX_TO).orElse(null));
 
         Parser parser = new Parser();
         List<String> datesInText = new ArrayList<String>();
