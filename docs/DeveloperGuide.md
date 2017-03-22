@@ -9,6 +9,7 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 3. [Implementation](#3-implementation)
 4. [Code Quality and Testing](#4-code-quality-and-testing)
 5. [Dev Ops](#5-dev-ops)
+6. [Version Control](#6-version-control)
 
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
 * [Appendix B: Glossary](#appendix-b--glossary)
@@ -427,16 +428,16 @@ In Opus, Gradle is used to managed all dependencies and external libraries. The 
 
 ### 6.1. Git + GitHub
 
-Opus version control depends highly on Git, and is [hosted on GitHub](https://github.com/CS2103JAN2017-W15-B3/main). We make heavily utlise [GitHub's issue tracker](https://github.com/CS2103JAN2017-W15-B3/main/issues) to manage each release's deliverables.
+Opus version control depends highly on Git, and is [hosted on GitHub](https://github.com/CS2103JAN2017-W15-B3/main). We heavily utilised [GitHub's issue tracker](https://github.com/CS2103JAN2017-W15-B3/main/issues) to manage each release's deliverables.
 
 #### 6.1.1. Labels
 
 There are several predefined labels included in our issue tracker:
 
 1. `docs`: assigned if the issue/pull request is related to documentation of the project.
-2. `priority.high/medium/low`: assigned to indicate how important this issue is to the project.
-3. `status.complete/ongoing`: assigned to indicate which PR/tasks are work in progress, and which are PRs are completed and ready for review.
-4. `type.bug`: assigned to issues that addresses a bug in the application.
+2. `priority.high/medium/low`: assigned to indicate how important the issue is to the project.
+3. `status.complete/ongoing`: assigned to indicate which PR/tasks are work in progress, and which PRs are completed and ready for review.
+4. `type.bug`: assigned to issues that address a bug in the application.
 5. `type.enhancement`: assigned to issues that improve either the code quality or user experience of the application.
 6. `type.epic`: assigned to issues that comprise of a very large feature to be implemented.
 7. `type.task`: assigned to issues that are misc chores/tasks to be completed.
