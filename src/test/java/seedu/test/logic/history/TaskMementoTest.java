@@ -41,7 +41,9 @@ public class TaskMementoTest {
         TaskMemento memento2 = new TaskMemento(new Task(description, dueDate, duration, tags, id), defaultTask);
         assertTrue(memento1.equals(memento2));
 
-        TaskMemento memento3 = new TaskMemento(new Task(new Description("Other"), dueDate, duration, tags, id), defaultTask);
+        TaskMemento memento3 = new TaskMemento(
+                new Task(new Description("Other"), dueDate, duration, tags, id),
+                defaultTask);
         assertFalse(memento1.equals(memento3));
         TaskMemento memento4 = new TaskMemento(new Task(description, null, duration, tags, id), defaultTask);
         assertFalse(memento1.equals(memento4));
