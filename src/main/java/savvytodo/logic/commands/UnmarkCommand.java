@@ -32,7 +32,6 @@ public class UnmarkCommand extends Command {
 
     @Override
     public CommandResult execute()  throws CommandException {
-
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         LinkedList<Integer> targettedIndices = new LinkedList<Integer>();
@@ -48,13 +47,13 @@ public class UnmarkCommand extends Command {
 
         StringBuilder resultSb = new StringBuilder();
         try {
-            for (Task taskToMark : tasksToMark) {
-                if (taskToMark.isCompleted().value) {
-                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_FAIL, taskToMark));
+            for (Task taskToUnmark : tasksToMark) {
+                if (!taskToUnmark.isCompleted().value) {
+                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_FAIL, taskToUnmark));
                 } else {
-                    taskToMark.setStatus(new Status(true));
-                    model.updateTask(targettedIndices.peekFirst(), taskToMark);
-                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, taskToMark));
+                    taskToUnmark.setStatus(new Status());
+                    model.updateTask(targettedIndices.peekFirst(), taskToUnmark);
+                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, targettedIndices.peekFirst() + 1));
                 }
                 targettedIndices.removeFirst();
             }

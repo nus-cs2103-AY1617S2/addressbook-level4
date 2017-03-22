@@ -3,6 +3,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static savvytodo.logic.commands.UnmarkCommand.MESSAGE_UNMARK_TASK_SUCCESS;
 
+import java.util.LinkedList;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -44,12 +46,76 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
 
     }
 
+    @Test
+    public void unmarkMultiple() {
+
+        LinkedList<Integer> targetIndices = new LinkedList<Integer>();
+        LinkedList<TestTask> unmarkedTasks = new LinkedList<TestTask>();
+
+        //mark the first in the list
+        int targetIndex = 1;
+        TestTask unmarkedTask = expectedTasksList[targetIndex - 1];
+        unmarkedTask.setCompleted(new Status());
+        targetIndices.add(targetIndex);
+        unmarkedTasks.add(unmarkedTask);
+
+        //mark the last in the list
+        targetIndex = expectedTasksList.length;
+        TestTask unmarkedTask2 = expectedTasksList[targetIndex - 1];
+        unmarkedTask2.setCompleted(new Status());
+        targetIndices.add(targetIndex);
+        unmarkedTasks.add(unmarkedTask2);
+
+        //mark from the middle of the list
+        targetIndex = expectedTasksList.length / 2;
+        TestTask unmarkedTask3 = expectedTasksList[targetIndex - 1];
+        unmarkedTask3.setCompleted(new Status());
+        targetIndices.add(targetIndex);
+        unmarkedTasks.add(unmarkedTask3);
+
+        assertUnmarkMultipleSuccess(targetIndices, unmarkedTasks);
+
+    }
+
+    /**
+     * Checks whether the unmarked tasks has the correct updated details.
+     *
+     * @param targetIndices
+     *            indices of task to unmark in filtered list
+     * @param unmarkedTasks
+     *            the expected task after unmarking the task's details
+     */
+    private void assertUnmarkMultipleSuccess(LinkedList<Integer> targetIndices, LinkedList<TestTask> unmarkedTasks) {
+        StringBuilder indices = new StringBuilder();
+
+        for (Integer unmarkedTaskIndex : targetIndices) {
+            indices.append(unmarkedTaskIndex  + " ");
+        }
+        commandBox.runCommand("mark " + indices);
+        commandBox.runCommand("unmark " + indices);
+
+
+        StringBuilder resultSb = new StringBuilder();
+
+        for (TestTask unmarkedTask : unmarkedTasks) {
+            // confirm the new card contains the right data
+            TaskCardHandle editedCard = taskListPanel.navigateToTask(unmarkedTask.getName().name);
+            assertMatching(unmarkedTask, editedCard);
+
+            expectedTasksList[targetIndices.peek() - 1] = unmarkedTask;
+            resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, targetIndices.pop()));
+        }
+
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(resultSb.toString());
+    }
+
     /**
      * Checks whether the unmarked task has the correct updated details.
      *
      * @param filteredTaskListIndex
      *            index of task to  in filtered list
-     * @param taskManagerIndex
+     * @param umarkedTaskIndex
      *            index of task to unmark in the task manager. Must refer to the
      *            same task as {@code filteredTaskListIndex}
      * @param detailsToMark
@@ -57,7 +123,7 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
      * @param umarkedTask
      *            the expected task after unmarking the task's details
      */
-    private void assertMarkSuccess(int filteredTaskListIndex, int taskManagerIndex, TestTask umarkedTask) {
+    private void assertMarkSuccess(int filteredTaskListIndex, int umarkedTaskIndex, TestTask umarkedTask) {
         commandBox.runCommand("mark " + filteredTaskListIndex);
         commandBox.runCommand("unmark " + filteredTaskListIndex);
 
@@ -67,9 +133,9 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
-        expectedTasksList[taskManagerIndex - 1] = umarkedTask;
+        expectedTasksList[umarkedTaskIndex - 1] = umarkedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(MESSAGE_UNMARK_TASK_SUCCESS, taskManagerIndex));
+        assertResultMessage(String.format(MESSAGE_UNMARK_TASK_SUCCESS, umarkedTaskIndex));
     }
 
 }

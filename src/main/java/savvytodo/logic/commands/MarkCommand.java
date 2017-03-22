@@ -32,17 +32,16 @@ public class MarkCommand extends Command {
 
     @Override
     public CommandResult execute()  throws CommandException {
-
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        LinkedList<Integer> targettedIndices = new LinkedList<Integer>();
+        LinkedList<Integer> filteredTargettedIndices = new LinkedList<Integer>();
         LinkedList<Task> tasksToMark = new LinkedList<Task>();
         for (int targetIndex : targetIndices) {
             int filteredTaskListIndex = targetIndex - 1;
             if (filteredTaskListIndex >= lastShownList.size() || filteredTaskListIndex < 0) {
                 return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
-            targettedIndices.add(filteredTaskListIndex);
+            filteredTargettedIndices.add(filteredTaskListIndex);
             tasksToMark.add((Task) lastShownList.get(filteredTaskListIndex));
         }
 
@@ -53,12 +52,13 @@ public class MarkCommand extends Command {
                     resultSb.append(String.format(MESSAGE_MARK_TASK_FAIL, taskToMark));
                 } else {
                     taskToMark.setStatus(new Status(true));
-                    model.updateTask(targettedIndices.peekFirst(), taskToMark);
-                    resultSb.append(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark));
+                    model.updateTask(filteredTargettedIndices.peekFirst(), taskToMark);
+                    resultSb.append(String.format(MESSAGE_MARK_TASK_SUCCESS, filteredTargettedIndices.peekFirst() + 1));
                 }
-                targettedIndices.removeFirst();
+                filteredTargettedIndices.removeFirst();
             }
         } catch (DuplicateTaskException e) {
+            //ignore for completed
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(resultSb.toString());
