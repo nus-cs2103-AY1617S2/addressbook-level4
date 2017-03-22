@@ -10,12 +10,14 @@ import werkbook.task.commons.core.ComponentManager;
 import werkbook.task.commons.core.LogsCenter;
 import werkbook.task.commons.core.UnmodifiableObservableList;
 import werkbook.task.commons.events.model.TaskListChangedEvent;
+import werkbook.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import werkbook.task.commons.util.CollectionUtil;
 import werkbook.task.commons.util.StringUtil;
 import werkbook.task.model.task.ReadOnlyTask;
 import werkbook.task.model.task.Task;
 import werkbook.task.model.task.UniqueTaskList;
 import werkbook.task.model.task.UniqueTaskList.TaskNotFoundException;
+import werkbook.task.ui.BrowserPanel;
 
 /**
  * Represents the in-memory model of the task book data.
@@ -64,12 +66,21 @@ public class ModelManager extends ComponentManager implements Model {
     public void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));
     }
+    
+    //@@author A0139903B
+    @Override
+    public void indicateTaskChanged(ReadOnlyTask editedTask) {
+        raise (new TaskPanelSelectionChangedEvent(editedTask));
+    }
+    //@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         undoStack.push(new TaskList(taskList));
         redoStack.clear();
         taskList.removeTask(target);
+        // To fix, possible array index out of range
+        indicateTaskChanged(taskList.getTaskList().get(0));
         indicateTaskListChanged();
     }
 
@@ -79,6 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
         redoStack.clear();
         taskList.addTask(task);
         updateFilteredListToShowAll();
+        indicateTaskChanged(task);
         indicateTaskListChanged();
     }
 
@@ -91,6 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
         redoStack.clear();
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(addressBookIndex, editedTask);
+        indicateTaskChanged(editedTask);
         indicateTaskListChanged();
     }
 
