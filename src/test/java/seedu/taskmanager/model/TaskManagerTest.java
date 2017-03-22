@@ -50,16 +50,16 @@ public class TaskManagerTest {
     @Test
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
-        // Repeat td.alice twice
+        // Repeat td.eatbreakfast twice
         List<Task> newTasks = Arrays.asList(new Task(td.eatbreakfast), new Task(td.eatbreakfast));
 //        List<Category> newCategories = td.alice.getCategories().asObservableList();
-//        TaskManagerStub newData = new TaskManagerStub(newTasks, newCategories);
+        TaskManagerStub newData = new TaskManagerStub(newTasks/*, newCategories*/);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newTasks);
+        taskManager.resetData(newData);
     }
 
-    @Test
+/*    @Test
     public void resetData_withDuplicateCategories_throwsAssertionError() {
         TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
@@ -71,17 +71,17 @@ public class TaskManagerTest {
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
     }
-
+*/
     /**
      * A stub ReadOnlyTaskManager whose tasks and categories lists can violate interface constraints.
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
-        private final ObservableList<Category> categories = FXCollections.observableArrayList();
+//        private final ObservableList<Category> categories = FXCollections.observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Category> categories) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks/*, Collection<? extends Category> categories*/) {
             this.tasks.setAll(tasks);
-            this.categories.setAll(categories);
+//            this.categories.setAll(categories);
         }
 
         @Override

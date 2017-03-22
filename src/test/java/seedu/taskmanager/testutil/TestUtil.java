@@ -54,7 +54,7 @@ public class TestUtil {
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
-    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
+//    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {

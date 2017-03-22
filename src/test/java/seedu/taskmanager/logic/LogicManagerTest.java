@@ -349,13 +349,13 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_find_invalidArgsFormat() {
+    public void execute_search_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE);
-        assertCommandFailure("FINE ", expectedMessage);
+        assertCommandFailure("search ", expectedMessage);
     }
 
     @Test
-    public void execute_find_onlyMatchesFullTaskWordsInNames() throws Exception {
+    public void execute_search_onlyMatchesFullTaskWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -367,7 +367,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("SEARCH KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -386,7 +386,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("SEARCH KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -405,7 +405,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM",
+        assertCommandSuccess("SEARCH key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -418,7 +418,7 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task travis() throws Exception {
-            TaskName taskName = new TaskName("Travis the bro");
+            TaskName taskName = new TaskName("Travis the bro is assisting");
             Date privateDate = new Date("03/03/17");
             StartTime privateStartTime = new StartTime("1200");
             EndTime privateEndTime = new EndTime("1400");
@@ -436,11 +436,17 @@ public class LogicManagerTest {
          * @param seed used to generate the person data field values
          */
         Task generateTask(int seed) throws Exception {
+            if (seed > 100) {
+                seed = seed/100;
+            } else if (seed > 10) {
+                seed = seed/10;
+            }
+
             return new Task(
                     new TaskName("Task " + seed),
-                    new Date("" + Math.abs(seed)),
-                    new StartTime("House of " + seed),
-                    new EndTime("What this " + seed)
+                    new Date(seed + "/02/17"),
+                    new StartTime("140 " + seed),
+                    new EndTime("160 " + seed)
 //                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
             );
         }
@@ -537,9 +543,9 @@ public class LogicManagerTest {
         Task generateTaskWithName(String taskname) throws Exception {
             return new Task(
                     new TaskName(taskname),
-                    new Date("1"),
-                    new StartTime("House of 1"),
-                    new EndTime("whutwhut")
+                    new Date("03/03/17"),
+                    new StartTime("1400"),
+                    new EndTime("1600")
 //                    new UniqueCategoryList(new Category("category"))
             );
         }
