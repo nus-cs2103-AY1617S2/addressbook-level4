@@ -78,9 +78,17 @@ public class EditCommand extends Command {
                                              EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
+        Optional<Deadline> updatedStartTime;
+        Optional<Deadline> updatedDeadline;
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Optional<Deadline> updatedStartTime = editTaskDescriptor.getStartTime();
-        Optional<Deadline> updatedDeadline = editTaskDescriptor.getDeadline();
+        if ((editTaskDescriptor.getClearDates().isPresent() && editTaskDescriptor.getClearDates().get() == true)
+                || editTaskDescriptor.isDateEdited()) {
+            updatedStartTime = editTaskDescriptor.getStartTime();
+            updatedDeadline = editTaskDescriptor.getDeadline();
+        } else {
+            updatedStartTime = taskToEdit.getStartTime();
+            updatedDeadline = taskToEdit.getDeadline();
+        }
         Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
         UniqueBookingList updatedBookings = editTaskDescriptor.getBookings().orElseGet(taskToEdit::getBookings);
@@ -97,6 +105,8 @@ public class EditCommand extends Command {
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
         private Optional<Boolean> isCompleted = Optional.empty();
+        private Optional<Boolean> clearDates = Optional.empty();
+
         private Optional<UniqueBookingList> bookings = Optional.empty();
         public EditTaskDescriptor() {}
 
@@ -107,7 +117,9 @@ public class EditCommand extends Command {
             this.deadline = toCopy.getDeadline();
             this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
+            this.clearDates = toCopy.getClearDates();
             this.bookings = toCopy.getBookings();
+
         }
 
         /**
@@ -115,7 +127,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.title, this.startTime,
-                    this.isCompleted, this.deadline, this.labels);
+                    this.isCompleted, this.deadline, this.labels, this.clearDates);
         }
 
         /**
@@ -168,8 +180,17 @@ public class EditCommand extends Command {
         public void setIsCompleted(Optional<Boolean> isCompleted) {
             this.isCompleted = isCompleted;
         }
+
         public Optional<Boolean> isCompleted() {
             return isCompleted;
+        }
+
+        public void setClearDates(Optional<Boolean> clearDates) {
+            this.clearDates = clearDates;
+        }
+
+        public Optional<Boolean> getClearDates() {
+            return clearDates;
         }
     }
 

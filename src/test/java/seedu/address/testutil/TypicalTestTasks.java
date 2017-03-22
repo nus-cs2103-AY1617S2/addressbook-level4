@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskManager;
@@ -54,7 +55,9 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{task1, task2, task3, task4, task5, task6, task7};
+        TestTask[] tasks = new TestTask[]{task1, task2, task3, task4, task5, task6, task7};
+        Arrays.sort(tasks);
+        return tasks;
     }
 
     public TaskManager getTypicalTaskManager() {

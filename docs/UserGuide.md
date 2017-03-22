@@ -108,17 +108,11 @@ Examples:
 * `list booking`<br />
  Lists all unconfirmed tasks with their respective bookings
 
-### 2.4. Editing a task : `update`
-
-Edits the specified task's details.
-
-Format:`update [TASK_ID] [TASKNAME] [#Label...] ([by DATE] | [from start_date to end_date]) [done]`
-
 ### 2.4. Editing a task : `edit`
 
 Edits the specified task's details.
 
-Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE]) [Completed|Incomplete]`
+Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE to END_DATE] | [clear dates]) [COMPLETED | INCOMPLETE]`
 
 > * Edits the task with the `TASK_ID`
     The index refers to the id of the task.<br />
@@ -127,11 +121,13 @@ Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE 
 > * Existing values will be updated to the input values.
 > * When editing labels, the existing labels of the task will be removed i.e adding of labels is not cumulative.
 > * You can remove all the task's tags by typing `#` without specifying any tags after it.
-> * Marking a task as `done` will indicate that the task is completed
+> * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
+> * Using 'clear dates' allows the user to remove the existing dates associated with the task.
+
 
 Examples:
 
-* `update CS2106Assignment label`<br />
+* `edit CS2106Assignment label`<br />
   Edits the name of the currently selected task to be `CS2106Assignment` and clears all existing labels.
 
 * `update 1 label tedious work by thursday`<br />
@@ -329,6 +325,23 @@ Pressing the UP or DOWN key will allow you to iterate through previous commands 
 
 ### 2.21. Autocompletion of commands and reserved keywords
 Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
+
+### 2.22. Changing status of a task: `mark`
+
+Edits the specified task's status.
+
+Format:`mark [TASK_ID] [COMPLETED | INCOMPLETE]`
+
+> * Edits the task with the `TASK_ID`
+    The index refers to the id of the task.<br />
+    The index **must be a positive integer** 1, 2, 3, ...
+> * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
+
+Examples:
+
+* `mark 3 completed`<br />
+  Edits the status of the currently selected task at index 3 as completed.
+
 
 ## 3. FAQ
 

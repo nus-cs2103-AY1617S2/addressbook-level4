@@ -157,8 +157,8 @@ public class LeftPanel extends UiPart<Region> {
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent tmce) {
         updateLabelCount();
         setTodayListView(taskList);
-        logger.info(LogsCenter.getEventHandlingLogMessage(
-                tmce, "Updating label list count and total number of tasks for today"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(tmce,
+                "Updating label list count and total number of tasks for today"));
     }
 
     class LabelListViewCell extends ListCell<Label> {

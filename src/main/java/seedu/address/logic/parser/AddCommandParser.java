@@ -29,6 +29,7 @@ public class AddCommandParser extends Parser {
         argsTokenizer.tokenize(args);
         try {
             String title = argsTokenizer.getPreamble().get();
+
             if (args.contains(PREFIX_TIMEINTERVAL_START.getPrefix())
                     && args.contains(PREFIX_TIMEINTERVAL_END.getPrefix())) {
                 argsTokenizer = new ArgumentTokenizer(PREFIX_TIMEINTERVAL_START, PREFIX_TIMEINTERVAL_END, PREFIX_LABEL);

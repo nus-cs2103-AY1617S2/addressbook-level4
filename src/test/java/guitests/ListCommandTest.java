@@ -53,12 +53,18 @@ public class ListCommandTest extends TaskManagerGuiTest {
     @Test
     public void list_TaskByDateTime_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
+
         commandBox.runCommand("list by 12-12-2017 0000");
+
         assertTrue(taskListPanel.isListMatching(currentList)); // No change should occur
+
         commandBox.runCommand("list by ");
+
         assertTrue(taskListPanel.isListMatching(currentList)); // No change should occur
+
         assertListResult("list by 2301 10-11-2017", td.task6); // Only task 6 should appear
         assertListResult("list from 0000 10-11-2017 to 2359 10-11-2017", td.task6); // Only task 6 should appear
+
     }
 
     private void assertListResult(String command, TestTask... expectedHits) {

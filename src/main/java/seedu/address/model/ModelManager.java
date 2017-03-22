@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -98,12 +99,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        sortFilteredTasks();
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        sortFilteredTasks();
     }
 
     @Override
@@ -118,11 +121,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        sortFilteredTasks();
     }
 
     @Override
     public void updateFilteredTaskList(Boolean isCompleted) {
         updateFilteredTaskListByCompletion(new StatusFilter(isCompleted));
+        sortFilteredTasks();
     }
 
     private void updateFilteredTaskListByDate(DateFilter dateFilter) {
@@ -208,7 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private class StatusFilter {
+    private class StatusFilter implements Qualifier {
         private boolean isCompleted;
 
         StatusFilter(boolean isCompleted) {
@@ -219,4 +224,14 @@ public class ModelManager extends ComponentManager implements Model {
             return task.isCompleted().booleanValue() == isCompleted;
         }
     }
+
+    private void sortFilteredTasks() {
+        Comparator comparator = new Comparator<ReadOnlyTask> () {
+            public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+                return task1.compareTo(task2);
+            }
+        };;
+        filteredTasks.sorted(comparator);
+    }
+
 }

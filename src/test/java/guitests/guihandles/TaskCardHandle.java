@@ -72,7 +72,7 @@ public class TaskCardHandle extends GuiHandle {
         assert(task != null);
         boolean result;
         if (task.getDeadline().isPresent() && task.getStartTime().isPresent()
-                && this.getDeadline() != null && this.getDeadline() != null) {
+                && this.getDeadline() != null && this.getStartTime() != null) {
             result = getTitle().equals(task.getTitle().title)
                 && getDeadline().equals(task.getDeadline().get().toString())
                 && getLabels().equals(getLabels(task.getLabels()))
@@ -82,11 +82,17 @@ public class TaskCardHandle extends GuiHandle {
             result = getTitle().equals(task.getTitle().title)
                     && getDeadline().equals(task.getDeadline().get().toString())
                     && getLabels().equals(getLabels(task.getLabels()))
-                    && isCompleted().equals(task.isCompleted());
+                    && isCompleted().equals(task.isCompleted()
+                    && getStartTime() == null
+                    && !task.getStartTime().isPresent());
         } else {
             result = getTitle().equals(task.getTitle().title)
                     && getLabels().equals(getLabels(task.getLabels()))
-                    && isCompleted().equals(task.isCompleted());
+                    && isCompleted().equals(task.isCompleted()
+                    && getDeadline() == null
+                    && !task.getDeadline().isPresent()
+                    && getStartTime() == null
+                    && !task.getStartTime().isPresent());
         }
         return result;
     }

@@ -1,8 +1,8 @@
 package seedu.address.model.task;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,8 +104,8 @@ public class UniqueTaskList implements Iterable<Task>, Cloneable {
                 UniqueLabelList labelList = task.getLabels().clone();
                 UniqueBookingList bookingList = task.getBookings().clone();
                 taskList.add(new Task(new Title(task.getTitle().toString()),
-                        Optional.ofNullable(new Deadline(task.getStartTime().orElse(new Deadline("")).toString())),
-                        Optional.ofNullable(new Deadline(task.getDeadline().orElse(new Deadline("")).toString())),
+                        task.getStartTime(),
+                        task.getDeadline(),
                         task.isCompleted(),
                         labelList,
                         bookingList));
@@ -147,6 +147,15 @@ public class UniqueTaskList implements Iterable<Task>, Cloneable {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    public void sortList() {
+        Comparator comparator = new Comparator<ReadOnlyTask> () {
+            public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+                return task1.compareTo(task2);
+            }
+        };;
+        FXCollections.sort(internalList, comparator);
     }
 
     /**
