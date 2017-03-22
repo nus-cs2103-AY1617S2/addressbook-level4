@@ -11,7 +11,10 @@ import seedu.taskboss.testutil.TestTask;
 
 public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
 
+  //---------------- Tests for ClearByCategoryCommand --------------------------------------
+
     //@@author A0147990R
+    // Equivalence partition: clear by an existing category
     @Test
     public void clearByCategory_existingCategory() {
         String categoryDetails = "c/friends";
@@ -22,6 +25,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     }
 
     //@@author A0147990R
+    // EP: use short command to clear by an existing category
     @Test
     public void clearByCategory_existingCategoryWithShortcut() {
         String categoryDetails = "c/friends";
@@ -32,6 +36,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     }
 
     //@@author A0147990R
+    // EP: invalid command word
     @Test
     public void clearByCategory_invalidCommand_fail() {
         commandBox.runCommand("clearare");
@@ -39,6 +44,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     }
 
     //@@author A0147990R
+    // EP: invalid command format
     @Test
     public void clearByCategory_invalidCommandFormat_fail() {
         commandBox.runCommand("clear w/try");
@@ -47,6 +53,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     }
 
     //@@author A0147990R
+    // EP: clear by an inexistent category
     @Test
     public void clearByCategory_nonExistingCategory() {
         commandBox.runCommand("clear c/strange");
