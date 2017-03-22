@@ -72,30 +72,30 @@ Format: `list undone`
 ### 2.4. Editing an existing task : `edit`
 
 Edits an existing task in TaskIt.<br>
-Format: `edit <index>  <title|description|deadline|tag> <new>`
+Format: `edit <index>  <title|deadline|tag> <new>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it. 
+> * You can remove all the task's tags by typing `null`. 
 
 Examples:
 
 * `edit 2 title finish SWE HW`<br>
   Edit the second task title to finish SWE HW.
-
-* `edit 4 description work on user guide`<br>
-  Edit the fourth task description to work on user guide.
   
 * `edit 1 deadline this Friday 3 pm`<br>
   Edit the first task deadline to this Friday 3pm.
+  
+* `edit 1 tag null`<br>
+  Remove all the tags of first task.
 
 ### 2.5. Searching all tasks containing any keyword in their name: `find`
 
-Finds tasks which matched name/description/deadline/tag.<br>
-Format: ` search <name|description|deadline|tag>`
+Finds tasks which matched name/deadline/tag.<br>
+Format: ` search <name|deadline|tag>`
 
 > * The search is case insensitive. e.g `do HW` will match `do hw`
 > * The order of the keywords does not matter. e.g. `HW do` will match `do HW`
@@ -112,7 +112,7 @@ Examples:
 ### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the TaskIt. 
-Format: `delete index <name|description|deadline|tag>`
+Format: `delete index <name|deadline|tag>`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -180,6 +180,9 @@ There is no need to save manually.
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
+
+* **Edit**  `edit INDEX [TAG|TITLE|DATE] <new>` <br>
+  e.g. `edit 1 title Movie at 3pm`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`
