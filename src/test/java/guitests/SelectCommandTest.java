@@ -48,8 +48,7 @@ public class SelectCommandTest extends ToDoListGuiTest {
 
     private void assertSelectionSuccess(String prefixIndex) {
         commandBox.runCommand("select " + prefixIndex);
-        String displayPrefixIndex = prefixIndex.substring(0, 1).toUpperCase()
-                                        + prefixIndex.substring(1);
+        String displayPrefixIndex = TestUtil.getTaskTypeFromIndex(prefixIndex).getPrefix() + prefixIndex.substring(1);
         assertResultMessage("Selected Task: " + displayPrefixIndex);
         assertTaskSelected(prefixIndex);
     }

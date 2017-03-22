@@ -3,6 +3,7 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import seedu.onetwodo.logic.commands.SelectCommand;
 
 /**
  * A handle to the Command Box in the GUI.
@@ -36,7 +37,10 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
-        guiRobot.sleep(300); //Give time for the command to take effect
+        if (command.length() > 5 && command.substring(0, 6).equals(SelectCommand.COMMAND_WORD)) {
+            pressEnter();
+        }
+        guiRobot.sleep(200); //Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {
