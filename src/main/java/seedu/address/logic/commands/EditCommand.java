@@ -116,7 +116,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.start, this.deadline, this.priority, this.notes, this.tags);
         }
 
         public void setName(Optional<Name> name) {
