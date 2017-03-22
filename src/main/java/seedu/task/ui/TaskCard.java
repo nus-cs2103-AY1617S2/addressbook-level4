@@ -20,9 +20,7 @@ public class TaskCard extends UiPart<Region> {
 	@FXML
 	private Label taskDate;
 	@FXML
-	private Label taskStartTime;
-	@FXML
-	private Label taskEndTime;
+	private Label taskTime;
 	@FXML
 	private Label taskDescription;
 	@FXML
@@ -34,16 +32,16 @@ public class TaskCard extends UiPart<Region> {
 		
 		id.setText(displayedIndex + ". ");
 		if (task.getTaskName() != null) {
-			taskName.setText(task.getTaskName().fullTaskName);
+			taskName.setText(task.getTaskName().toString());
 		}
 		if (task.getTaskDate() != null) {
-			taskStartTime.setText(task.getTaskDate().value);
+			taskDate.setText(task.getTaskDate().toString());
 		}
 		if (task.getTaskStartTime() != null && task.getTaskEndTime() != null) {
-			taskEndTime.setText(task.getTaskStartTime().value + "-" + task.getTaskEndTime().value);
+			taskTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime().toString());
 		}
 		if (task.getTaskDescription() != null) {
-			taskDescription.setText(task.getTaskDescription());
+			taskDescription.setText(task.getTaskDescription().toString());
 		}
 		initTags(task);
 	}
