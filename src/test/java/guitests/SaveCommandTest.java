@@ -11,6 +11,7 @@ import static seedu.task.logic.commands.SaveCommand.MESSAGE_FAILURE_DIRECTORY;
 import org.junit.Test;
 
 import seedu.task.testutil.TestUtil;
+import seedu.task.TestApp;
 
 public class SaveCommandTest extends TaskManagerGuiTest {
 
@@ -22,17 +23,22 @@ public class SaveCommandTest extends TaskManagerGuiTest {
 		//saves to new file
 		assertNewFileSaved(TestUtil.getFilePathInSandboxFolder("saveTestDummy.xml"));
 		assertNewFileSaved("./src/test/data/saveTestDummy2.xml");
+		//resets config back to testdummy
+		testApp.restartConfig();
 	}
 	
 	/**
 	 * Saves the file and assert that it exists then deletes the file
-	 * @param location referes to the path of the file
+	 * @param location refers to the path of the file
 	 */
 	public void assertNewFileSaved(String location) {
 		File target = new File(location);
 		assertFalse(target.exists());
 		commandBox.runCommand("save " + location);
+		assertResultMessage(String.format(MESSAGE_SUCCESS, location));
 		assertTrue(target.exists());
 		assertTrue(target.delete());
 	}
+	
+	
 }

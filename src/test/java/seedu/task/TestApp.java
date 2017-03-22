@@ -50,7 +50,11 @@ public class TestApp extends MainApp {
         config.setTaskManagerName(TASK_MANAGER_NAME);
         return config;
     }
-
+    
+    public void restartConfig() {
+    	super.restartConfig();
+    }
+    
     @Override
     protected UserPrefs initPrefs(Config config) {
         UserPrefs userPrefs = super.initPrefs(config);
