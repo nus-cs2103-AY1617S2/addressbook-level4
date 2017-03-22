@@ -16,7 +16,7 @@ public class ClearCommandTest extends AddressBookGuiTest {
         //verify other commands can work after a clear command
         commandBox.runCommand(td.assignment.getAddCommand());
         assertTrue(userInboxPanel.isListMatching(td.assignment));
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand("delete t 1");
         assertListSize(0);
 
         //verify clear command works when the list is empty

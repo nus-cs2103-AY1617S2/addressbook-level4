@@ -30,7 +30,10 @@ public class DeleteCommandTest extends AddressBookGuiTest {
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage("Invalid command format! \ndelete"
+                + ": Deletes the task/event identified by the index number used in the last task/event listing.\n"
+                + "Parameters: FLAG INDEX (must be a positive integer)\n"
+                + "Example: " + "delete" + " e 1");
 
     }
 
@@ -40,16 +43,16 @@ public class DeleteCommandTest extends AddressBookGuiTest {
      * @param currentList A copy of the current list of persons (before deletion).
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestCard[] currentList) {
-        TestCard personToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestCard taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestCard[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
 
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
+        commandBox.runCommand("delete t " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
         assertTrue(userInboxPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
 }
