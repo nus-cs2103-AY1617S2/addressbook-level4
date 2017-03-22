@@ -65,7 +65,6 @@ allprojects {
         compile "com.google.guava:guava:$guavaVersion"
 		compile group: 'com.joestelmach', name: 'natty', version: '0.12'  // for time parser
 		compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'  // for highlight feature
-		
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
