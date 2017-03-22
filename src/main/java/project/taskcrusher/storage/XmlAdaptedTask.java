@@ -54,6 +54,7 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+        System.out.println("In constructor of XmlAdaptedTask");
     }
 
     /**

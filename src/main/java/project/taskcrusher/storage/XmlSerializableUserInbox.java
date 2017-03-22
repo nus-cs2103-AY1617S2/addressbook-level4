@@ -21,7 +21,7 @@ import project.taskcrusher.model.task.Task;
 /**
  * An Immutable User Inbox that is serializable to XML format
  */
-@XmlRootElement(name = "userInbox")
+@XmlRootElement(name = "userinbox")
 public class XmlSerializableUserInbox implements ReadOnlyUserInbox {
 
     @XmlElement
@@ -49,6 +49,7 @@ public class XmlSerializableUserInbox implements ReadOnlyUserInbox {
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        System.out.println("In constructor of Xmlserializable User inbox");
     }
 
     @Override

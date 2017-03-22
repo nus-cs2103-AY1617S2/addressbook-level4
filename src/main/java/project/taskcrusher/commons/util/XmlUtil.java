@@ -58,11 +58,16 @@ public class XmlUtil {
             throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
         }
 
+        System.out.println("After file not found");
         JAXBContext context = JAXBContext.newInstance(data.getClass());
+        System.out.println("JAXB1");
         Marshaller m = context.createMarshaller();
+        System.out.println("JAXB2");
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        System.out.println("JAXB3");
 
         m.marshal(data, file);
+        System.out.println("marshalled");
     }
 
 }

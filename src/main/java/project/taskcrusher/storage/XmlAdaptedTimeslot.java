@@ -1,15 +1,15 @@
 package project.taskcrusher.storage;
 
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.XmlElement;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
 
 public class XmlAdaptedTimeslot {
 
-    @XmlValue
+    @XmlElement(required = true)
     public String startDate;
-    @XmlValue
+    @XmlElement(required = true)
     public String endDate;
 
     /**
