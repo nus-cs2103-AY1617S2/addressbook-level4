@@ -160,6 +160,26 @@ public class ModelManager extends ComponentManager implements Model {
         setAddressBookState();
         indicateAddressBookStateChanged();
     }
+
+    @Override
+    public void setAddressBookStateToZero() throws StateLimitReachedException {
+        if (this.currentAddressBookStateIndex <= 0) {
+            throw new StateLimitReachedException();
+        }
+        while (this.currentAddressBookStateIndex > 0) {
+            setAddressBookStateBackwards();
+        }
+    }
+
+    @Override
+    public void setAddressBookStateToFrontier() throws StateLimitReachedException {
+        if (this.currentAddressBookStateIndex >= this.addressBookStates.size() - 1) {
+            throw new StateLimitReachedException();
+        }
+        while (this.currentAddressBookStateIndex < this.addressBookStates.size() - 1) {
+            setAddressBookStateForwards();
+        }
+    }
     //@@author
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {

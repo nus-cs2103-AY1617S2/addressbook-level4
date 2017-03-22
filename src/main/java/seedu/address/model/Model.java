@@ -87,6 +87,15 @@ public interface Model {
     void setAddressBookStateBackwards() throws StateLimitReachedException;
 
     /**
+     * Overwrites TaskManager state to zero.
+     */
+    void setAddressBookStateToZero() throws StateLimitReachedException;
+
+    /**
+     * Overwrites TaskManager state to the furthermost.
+     */
+    void setAddressBookStateToFrontier() throws StateLimitReachedException;
+    /**
      * Signals that the state change command would fail because
      * the border of the state space is reached.
      */
