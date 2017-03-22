@@ -33,7 +33,7 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert storage != null;
-        storage.setTaskManagerFilePath(newPath + "\\data\\taskmanager.xml");
+        storage.setTaskManagerFilePath(newPath + "\\taskmanager.xml");
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPath));
     }
 }
