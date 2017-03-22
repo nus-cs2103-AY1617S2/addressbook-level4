@@ -67,7 +67,7 @@ Format: `add NAME [n/NOTES] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/
 Examples:
 
 * `add Do laundry`
-* `add Finish v0.0 documentation n/Urgent s/Incomplete b/28/02/2017 12:00 p/1 t/CS2103T`
+* `add Finish v0.0 documentation n/Urgent s/incomplete b/28/02/2017 12:00 e/29/02/2017 23:59 p/hi t/CS2103T`
 
 ### 2.3. Sort tasks : `sort` (Work in progress)
 
