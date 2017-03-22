@@ -213,6 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0105287E
     private class StatusFilter implements Qualifier {
         private boolean isCompleted;
 
@@ -225,6 +226,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0105287E
     private void sortFilteredTasks() {
         Comparator comparator = new Comparator<ReadOnlyTask> () {
             public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
