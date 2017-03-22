@@ -24,11 +24,19 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    // @@author A0163996J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         title.setText(task.getTitle().title);
-        start.setText(task.getStart());;
-        end.setText(task.getEnd());
+        start.setText(task.getStart().toString());
+        end.setText(task.getEnd().toString());
+        if (start.getText().length() > 0) {
+        	start.setText("Start Time: " + start.getText());
+        	end.setText("End Time: " + end.getText());
+        }
+        else if (end.getText().length() > 0) {
+        	end.setText("Deadline: " + end.getText());
+        }
         id.setText(displayedIndex + ". ");
         initTags(task);
     }

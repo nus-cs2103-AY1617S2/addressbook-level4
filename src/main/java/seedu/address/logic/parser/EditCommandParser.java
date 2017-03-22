@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FIELDWORD_TITLE;
 import static seedu.address.logic.parser.CliSyntax.FIELDWORD_TAG;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_START;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_END;
+
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,6 +21,7 @@ import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.Date;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -76,7 +80,7 @@ public class EditCommandParser {
         try {
             String fieldWordName = fieldWord.get();
             if (FIELDWORD_TITLE.equals(fieldWordName)) {
-                if(!Title.isValidName(updateInformation.get())) {
+                if(!Title.isValidTitle(updateInformation.get())) {
                     return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
                 }
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
@@ -86,7 +90,13 @@ public class EditCommandParser {
                     return new IncorrectCommand(Tag.MESSAGE_TAG_CONSTRAINTS);
                 }
                 editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
-            } 
+            }
+            if (FIELDWORD_START.equals(fieldWordName)) {
+            	editTaskDescriptor.setStart(ParserUtil.parseDate(updateInformation));
+            }
+            if (FIELDWORD_END.equals(fieldWordName)) {
+            	editTaskDescriptor.setEnd(ParserUtil.parseDate(updateInformation));
+            }            
         }catch (IllegalValueException ive) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }

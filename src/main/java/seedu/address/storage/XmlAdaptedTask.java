@@ -11,6 +11,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.Date;
 
 /**
  * JAXB-friendly version of the Task.
@@ -43,8 +44,8 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().title;
-        start = source.getStart();
-        end = source.getEnd();
+        start = source.getStart().originalString();
+        end = source.getEnd().originalString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -62,9 +63,14 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Title title = new Title(this.title);
-        final String start = this.start;
-        final String end = this.end;
+        System.out.println(this.start);
+        final Date start = new Date(this.start);
+        final Date end = new Date(this.end);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(title, start, end, tags);
+    }
+    
+    public String getEnd() {
+    	return this.end;
     }
 }

@@ -1,3 +1,5 @@
+// @@author A0163996J
+
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
@@ -7,6 +9,7 @@ import java.util.Calendar;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.tag.Tag;
@@ -29,6 +32,7 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
 
+    // @@author A0163996J
     /**
      * Creates an AddCommand using raw values.
      *
@@ -42,8 +46,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Title(title),
-                start,
-                end,
+                new Date(start),
+                new Date(end),
                 new UniqueTagList(tagSet)
         );
     }

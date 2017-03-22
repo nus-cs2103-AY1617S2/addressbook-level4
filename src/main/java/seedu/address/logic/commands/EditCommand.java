@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
@@ -47,7 +49,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -69,15 +71,18 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException 
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+                                             EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 
         Title updatedTask = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
+        Date updatedStart = editTaskDescriptor.getStart().orElseGet(taskToEdit::getStart);
+        Date updatedEnd = editTaskDescriptor.getEnd().orElseGet(taskToEdit::getEnd);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTask, updatedTags);
+        return new Task(updatedTask, updatedStart, updatedEnd, updatedTags);
     }
 
     /**
@@ -86,12 +91,16 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
+        private Optional<Date> start = Optional.empty();
+        private Optional<Date> end = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
+            this.start = toCopy.getStart();
+            this.end = toCopy.getEnd();
             this.tags = toCopy.getTags();
         }
 
@@ -99,7 +108,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.start, this.end, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {
@@ -110,6 +119,27 @@ public class EditCommand extends Command {
         private Optional<Title> getTitle() {
             return title;
         }
+        
+        // @@author A0163996J
+        
+        public void setStart(Optional<Date> start) {
+            this.start = start;
+        }
+
+        private Optional<Date> getStart() {
+            return start;
+        }
+        
+        public void setEnd(Optional<Date> end) {
+            assert title != null;
+            this.end = end;
+        }
+
+        private Optional<Date> getEnd() {
+            return end;
+        }
+        
+        // @@ author
 
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;

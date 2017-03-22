@@ -4,6 +4,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.task.Title;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.UniqueTagList;
@@ -12,9 +13,9 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("HW"), new UniqueTagList("school")),
-                new Task(new Title("Meet with friend"),new UniqueTagList("leisure", "friends")),
-                new Task(new Title("clean room"), new UniqueTagList("household"))
+                new Task(new Title("HW"), new Date(), new Date(),new UniqueTagList("school")),
+                new Task(new Title("Meet with friend"), new Date(), new Date(), new UniqueTagList("leisure", "friends")),
+                new Task(new Title("clean room"), new Date(), new Date(), new UniqueTagList("household"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
