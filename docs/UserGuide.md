@@ -4,18 +4,27 @@ By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nb
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [About](#about)
+2. [Quick Start](#quick-start)
+3. [Features](#features)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
-## 1. Quick Start
+## 1. About
+Ever had the feeling that you are forgetting to do something important? Tired of always
+forgetting events because you forgot to write it down? Docket is the application that 
+will solve all your problems. 
+
+Docket is a simple and lightweight application that will keep track of your tasks for you.
+It will tell you if a task's due date is coming in a quick and easy to understand manner.
+
+In contrast to other comprenhensive task managers out there, Docket is simple and 
+straightforward. A single mode of input and a boiled down interface. Let's get started
+on simplifying the way you handle tasks now.
+
+## 2. Quick Start
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
-
-   > Having any Java 8 version is not enough. <br>
-   > This app will not work with earlier versions of Java 8.
-
 1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
@@ -32,7 +41,7 @@ By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nb
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
-## 2. Features
+## 3. Features
 
 > **Command Format**
 >
@@ -42,30 +51,33 @@ By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nb
 > * Parameters can be in any order.
 > * Date has to be in the format DD-MM-YYYY
 
-## 2.1. Viewing help : `help`
+## 3.1. Viewing help : `help`
 
+Brings up user guide 
 Format: help
 
 > Is also displayed when an incorrect command is entered
 
-## 2.2. Adding a task: `add`
+## 3.2. Adding a task: `add`
 
 Adds a task to task list
-<<<<<<< HEAD
-Format: add TASKNAME -d DATE [-o DESCRIPTION] [-p]
-=======
-Format: add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]
->>>>>>> origin/master
+Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
+> Tasks includes:
+> * Event tasks where deadlines include a specific timing
+> * Floating tasks where deadlines are not specified
+> * Normal tasks with deadlines
 
 Examples:
 
 * `add Make payment dl/01/08/2017 ds/Pay credit card bills -p`
+* `add Lose weight dl/from 12/12/2017 to 24/12/2017`
+* `add Performance rehearsal dl/today 10pm`
 * `add Complete project dl/12/12/2017`
+* `add Buy a cake`
 
-## 2.3. Modifying a task: `edit`
+## 3.3. Modifying a task: `edit`
 
 Updates an existing task in the task list
-Format: update INDEX [-n TASKNAME] [-d DATE] [-o DESCRIPTION] [-p]
 Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
 
 Examples:
@@ -73,7 +85,7 @@ Examples:
 * `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 * `edit 1 tie shoelace dl/25-12-2017`
 
-## 2.4. Delete a task: `delete`
+## 3.4. Delete a task: `delete`
 
 Deletes an existing task
 Format: delete INDEX
@@ -82,31 +94,37 @@ Examples:
 
 * `delete 1`
 
-## 2.5. Undo a command: 'undo'
+## 3.5. Undo a command: 'undo'
 
 Undo most recent command
 Format: undo
 
-## 2.6. Listing all tasks: `list`
+## 3.6. Redo a command: 'redo'
+
+Redo most recent command
+Format: redo
+
+## 3.7. Listing all tasks: `list`
 
 Shows a list of all tasks
 Format: list
 
-## 2.7. Exiting the program : `exit`
+## 3.8. Exiting the program : `exit`
 
 Exits the program.
 Format: exit
 
-## 2.8. View tasks : `view`
+## 3.9. View tasks : `view`
 
-Views the details of a task
-Format: view INDEX
+Changes the different views of the task managers
+Format: view all|calendar|done|floating|overdue|today|tomorrow|future
 
 Examples:
 
-* `view 1`
+* `view all`
+* `view floating`
 
-## 2.9. Finding all tasks containing any keyword in the task name: `find`
+## 3.10. Finding all tasks containing any keyword in the task name or description: `find`
 
 Finds tasks that satisfy given parameters
 Format: find KEYWORDS [dl/DATE]
@@ -121,22 +139,30 @@ Examples:
 * `find Project Name/Description`
 * `find dl/12-08-2017`
 
-## 2.10. Clearing all entries : `clear`
+## 3.11. Marking entries as done : `mark`
+
+Format: mark INDEX
+
+Examples:
+
+* `mark 3`
+
+## 3.12. Clearing all entries : `clear`
 
 Format: clear
 
-## 2.11. Saving the data
+## 3.13. Saving the data
 
 Application data are saved onto hard drive automatically after any commands are executed that changes the data.
 There is no need to manually save the data
 
-## 3. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Task Manager folder.
 
-## 4. Command Summary
+## 5. Command Summary
 
 * **Help** : `help`
 
