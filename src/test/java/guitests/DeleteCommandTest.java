@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUC
 
 import org.junit.Test;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.testutil.TestTask;
@@ -50,6 +51,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
+        Arrays.sort(expectedRemainder);
 
         //confirm the list now contains all previous tasks except the deleted tasks
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
