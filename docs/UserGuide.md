@@ -25,8 +25,8 @@ By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`** : add Study for midterm s/02-03-17 d/04-03-17 t/study t/midterm :
-     adds the task Study for Midterm, starting from 02-03-17 to 04-03-17 with tag "study" and "midterm" to the task manager.
+   * **`add`** : add Study for midterm sd/02/03/17 ed/04/03/17 t/study t/midterm :
+     adds the task Study for Midterm, starting from 02/03/17 to 04/03/17 with tags "study" and "midterm" to the task manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -51,22 +51,23 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Format: `add TASK_NAME p/PRIORITY_LEVEL d/DATE [t/TAG]...`
-Date Format: ddmmyyyy
+Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
+Date Format: HH:mm dd/MM/yyyy
+Note: HH:MM is optional
 
-> Task can have any number of tags (including 0)
+> Tasks can have any number of tags (including 0).
 
 Examples:
 
-* `add Study for midterm p/1 d/04032017 t/study t/midterm`
-* `add Attend CS2103 tutorial p/1 d/02032017 t/lesson t/school t/tutorial`
+* `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
+* `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
 
 ### 2.3. Listing tasks : `list`
 
 Shows a list of all tasks in the task manager on that day.<br>
 Format: `list`<br>
 Shows a list of all tasks in the task manager on a particular day.<br>
-Format: `list d/dd-mm-yy`<br>
+Format: `list d/dd/mm/yy`<br>
 Shows a list of all tasks in the task manager with a particular tag.<br>
 Format: `list t/TAG`<br>
 Shows a list of all tasks in the task manager<br>
@@ -78,13 +79,13 @@ Examples:
 * `list t/complete`<br>
   Shows a list of all completed tasks. The `complete` tag is a reserved tag.
 
-* `list d/04-03-17`
-  Shows a list of all tasks due on 04-03-17.
+* `list ed/04/03/17`
+  Shows a list of all tasks due on 04/03/17.
 
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the task manager.<br>
-Format: `edit INDEX [NAME] s/START_DATE d/DUE_DATE [t/TAG]...`
+Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -96,8 +97,8 @@ Format: `edit INDEX [NAME] s/START_DATE d/DUE_DATE [t/TAG]...`
 
 Examples:
 
-* `edit 1 s/03-03-17` <br>
-  Edits the start date of task 1 as 03-03-17.
+* `edit 1 sd/03/03/17` <br>
+  Edits the start date of task 1 as 03/03/17.
 
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
@@ -109,7 +110,7 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 Format 2: `find [t/TAG]`
 
 > * The search is case insensitive. e.g `assignment` will match `AssIGNmEnt`
-> * The order of the keywords does not matter. e.g. `do assignment Bo` will match `assignment to do`
+> * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Persons matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `assignemnt` will match `do algorightm assignment`
@@ -165,12 +166,12 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 
 > Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
 > The index **must be a positive interger** 1, 2, 3,...
-> The priority level **must be a positive integer from 1 to 5**, 1 being the highest priority and 5 being the least.
+> The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
 
 Examples:
 * `list t/ALL`<br>
-  `prioritize 2 5`
-  Puts a priority level of 5 to the 2nd task in the task manager
+  `prioritize 2 3`
+  Puts a priority level of 3 to the 2nd task in the task manager
 
 ### 2.9. Clearing all entries : `clear`
 
@@ -205,8 +206,8 @@ Format: `history`,
 
 ## 4. Command Summary
 
-* **Add**  `add TASK_NAME s/START_DATE d/DUE_DATE [t/TAG]...` <br>
-   e.g. `add Study for midterm p/1 d/04032017 t/study t/midterm`
+* **Add**  `add TASK_NAME p/1 sd/START_DATE ed/DUE_DATE [t/TAG]...` <br>
+   e.g. `add Study for midterm p/1 sd/04/03/2017 ed/04/04/2017 t/study t/midterm`
 
 * **Clear** : `clear`
 
@@ -214,7 +215,7 @@ Format: `history`,
    e.g. `delete 3`
 
 * **Edit** : `edit INDEX` <br>
-   e.g. `edit 1 d/03032017`
+   e.g. `edit 1 ed/03032017`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
    e.g. `find assignment`
@@ -230,7 +231,7 @@ Format: `history`,
    e.g. `complete 2`
 
 * **Prioritze** : `prioritize INDEX PRIORITY_LEVEL` <br>
-   e.g. `priority 2 5`
+   e.g. `priority 2 3`
 
 * **Undo** : `undo` <br>
 
