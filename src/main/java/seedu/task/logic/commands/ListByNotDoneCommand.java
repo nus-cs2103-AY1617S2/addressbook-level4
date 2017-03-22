@@ -17,6 +17,6 @@ public class ListByNotDoneCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(this.value);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(getMessageForUnDoneTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 }
