@@ -21,9 +21,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task(s) identified by the index number or task name or task date used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1\n"
-            + "Parameters: TASK NAME (must be a valid task name)\n" + "Example: " + COMMAND_WORD + " Eat lunch with mum\n"
-            + "Parameters: TASK DATE (must be a valid task date)\n" + "Example: " + COMMAND_WORD
-            + " 15/07/17";
+            + "Parameters: TASK NAME (must be a valid task name)\n" + "Example: " + COMMAND_WORD
+            + " Eat lunch with mum\n" + "Parameters: TASK DATE (must be a valid task date)\n" + "Example: "
+            + COMMAND_WORD + " 15/07/17";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
     public static final String MESSAGE_DELETE_TASKS_DATE_SUCCESS = "Deleted tasks on: ";
