@@ -206,7 +206,7 @@ _Format:_
 > Next command
 
 ## 3.1.17 Clear the data : `clear`
-You can clear your entire todo list
+You can clear your entire to-do list
 
 _Format:_
 `clear`
@@ -295,7 +295,7 @@ There is no need to save manually.
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Copy the app to the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task Manager folder.
+**A**: Copy the app to the other computer and overwrite the empty data file it creates with the file that contains the data of your previous *DoMe!* folder.
 
 ## 5. Command Summary
 
@@ -355,5 +355,5 @@ There is no need to save manually.
   
   | Word | Definition |
 |-----|-----|
-|[GUI](#GUI)|Graphic User Interface. The interface presented to users to interact with TaskManager.|
+|[GUI](#GUI)|Graphic User Interface. The interface presented to users to interact with *DoMe!*.|
 |[Storage Path](#storage-path)|This is the directory where your data will be saved.|
