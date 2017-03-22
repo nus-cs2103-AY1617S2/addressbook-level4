@@ -17,7 +17,6 @@ import werkbook.task.model.task.ReadOnlyTask;
 import werkbook.task.model.task.Task;
 import werkbook.task.model.task.UniqueTaskList;
 import werkbook.task.model.task.UniqueTaskList.TaskNotFoundException;
-import werkbook.task.ui.BrowserPanel;
 
 /**
  * Represents the in-memory model of the task book data.
