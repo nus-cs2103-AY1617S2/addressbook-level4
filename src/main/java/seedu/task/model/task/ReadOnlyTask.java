@@ -3,15 +3,10 @@ package seedu.task.model.task;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Person in the taskmanager.
+ * A read-only immutable interface for a Person in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
-
-   // TaskName getName();
-  //  Phone getPhone();
-  //  Email getEmail();
-  //  Address getAddress();
     TaskName getTaskName();
     TaskDate getTaskDate();
     TaskTime getTaskStartTime();

@@ -27,9 +27,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: TASKNAME d/date s/startTime e/endTime m/description\n"
+            + "Parameters: TaskName [d/date1 [date2]] [s/startTime] [e/endTime] [m/description] - all items in [] are optional \n"
             + "Example: " + COMMAND_WORD
-            + "Example task d/090317 s/0946 e/1200 m/sample message";
+            + " Example d/090317 s/09:45 e/12:00 m/Sample Message";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -52,15 +52,14 @@ public class AddCommand extends Command {
                 new TaskDate(taskDate),
                 new TaskTime(taskStartTime),
                 new TaskTime(taskEndTime),
-                new String(taskDescription),
-                new UniqueTagList(tagSet)
-        );
+                new String(taskDescription));
+                //new UniqueTagList(tagSet)
+        //);
     }
 
     public AddCommand(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 			Optional<TaskTime> parseTime2, Optional<String> parseString) throws IllegalValueException {
     	this.toAdd = new Task(parseTaskName, parseDate, parseTime, parseTime2, parseString);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

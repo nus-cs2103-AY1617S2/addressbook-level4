@@ -87,47 +87,7 @@ public class Task implements ReadOnlyTask {
 		this.tags = new UniqueTagList();
 		// TODO Auto-generated constructor stub
 	}
-	/*
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
 
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address;
-    }
-*/
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);

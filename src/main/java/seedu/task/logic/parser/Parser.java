@@ -24,7 +24,7 @@ import seedu.task.logic.commands.SelectCommand;
 public class Parser {
 
     /**
-     * Used for initial separation of command word and args.
+     * Used for initial separation of command word and arguments.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
