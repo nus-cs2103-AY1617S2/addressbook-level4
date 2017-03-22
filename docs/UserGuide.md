@@ -3,27 +3,27 @@
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-    1.1 [About Doit](#11-about-doit)
-    1.2 [Terminologies Used](#12-terminologies-used)
+   * 1.1 [About Doit](#11-about-doit)
+   * 1.2 [Terminologies Used](#12-terminologies-used)
 2. [Getting Started](#2-getting-started)
-    2.1 [Downloading Doit](#21-downloading-doit)
-    2.2 [Launching Doit](#22-launching-doit)
+   * 2.1 [Downloading Doit](#21-downloading-doit)
+   * 2.2 [Launching Doit](#22-launching-doit)
 3. [Quick Start](#3-quick-start)
-    3.1 [Visual Walkthrough](#31-visual-walkthrough)
-    3.2 [Command Format](#32-command-format)
+   * 3.1 [Visual Walkthrough](#31-visual-walkthrough)
+   * 3.2 [Command Format](#32-command-format)
 4. [Features](#4-features)
-    4.1 [Getting Help](#)
-    4.2 [Adding an Item](#)
-    4.3 [Undoing a Command](#)
-    4.4 [Editing an Item](#)
-    4.5 [Finding an Item](#)
-    4.6 [Marking Item as Done](#)
-    4.7 [Delete an Item](#)
-    4.8 [Clear All Items](#)
-    4.9 [Sorting The Items](#)
-    4.10 [Saving to New Location](#)
-    4.11 [Exiting The Program](#)
-    4.12 [Saving at Local file](#)
+   * 4.1 [Getting Help](#)
+   * 4.2 [Adding an Item](#)
+   * 4.3 [Undoing a Command](#)
+   * 4.4 [Editing an Item](#)
+   * 4.5 [Finding an Item](#)
+   * 4.6 [Marking Item as Done](#)
+   * 4.7 [Delete an Item](#)
+   * 4.8 [Clear All Items](#)
+   * 4.9 [Sorting The Items](#)
+   * 4.10 [Saving to New Location](#)
+   * 4.11 [Exiting The Program](#)
+   * 4.12 [Saving at Local file](#)
 5. [FAQ](#faq)
 6. [Command Summary](#command-summary)
 
@@ -206,9 +206,7 @@ Marking the specified item from the task manager as done.<br>
 Format: `done INDEX`
 
 > * Marks the item at the specified `INDEX` as done. <br>
-<img src="" width>
 > * The index refers to the index number shown in the currently displayed UI.
-<img src="" width>
 > * The index **must be a positive integer** 1, 2, 3, ...<br>
 > * Events cannot be marked.<br>
 
