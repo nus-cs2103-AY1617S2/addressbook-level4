@@ -91,7 +91,7 @@ public class TaskCardHandle extends GuiHandle {
 //        //return true;
         //TODO: match priority (because it is shown as stars), and also the deadline
         //(it is formatted differently, may change if the test takes too long)
-        return getTaskName().equals(task.getTaskName().name)
+        return getTaskName().equals(task.getName().name)
                 //&& getPriority().equals(task.getPriority().priority)
                 //&& getDeadline().equals(task.getDeadline().deadline)
                 && getDescription().equals(task.getDescription().description)

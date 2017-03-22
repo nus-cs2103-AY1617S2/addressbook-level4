@@ -1,7 +1,7 @@
 package project.taskcrusher.model.event;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.shared.Description;
@@ -9,28 +9,45 @@ import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 public class Event implements ReadOnlyEvent {
-    private Name eventName;
-    private EventDate eventDate;
-    private Optional<Location> location;
-    private Optional<Description> description;
+    private Name name;
+    private List<Timeslot> timeslots;
+    private Location location;
+    private Description description;
     private UniqueTagList tags;
+    private boolean isPast;
 
-    public Event(Name eventName, EventDate eventDate, Optional<Location> location,
-            Optional<Description> description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(eventName, eventDate, location, description, tags);
+    public Event(Name name, List<Timeslot> timeslots, Location location,
+            Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, timeslots, location, description, tags);
 
-        this.eventName = eventName;
-        this.eventDate = eventDate;
+        this.name = name;
+        this.timeslots = timeslots;
+        this.isPast = false;
         this.location = location;
         this.description = description;
         this.tags = new UniqueTagList(tags);
+    }
+
+    /**Checks if any of the Timeslot object in the timeslots list has overlapping start and end date with
+     * {@code another}
+     * @param another
+     * @return true if overlapping, false otherwise
+     */
+    public boolean hasOverlappingTimeslot(Timeslot another) {
+        assert another != null;
+        for (Timeslot ts : timeslots) {
+            if (ts.isOverlapping(another)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getEventName(), source.getEventDate(), source.getLocation(),
+        this(source.getName(), source.getTimeslots(), source.getLocation(),
                 source.getDescription(), source.getTags());
     }
 
@@ -38,35 +55,44 @@ public class Event implements ReadOnlyEvent {
         return this.tags;
     }
 
-    public Name getEventName() {
-        return this.eventName;
+    @Override
+    public Name getName() {
+        return this.name;
     }
 
-    public Optional<Description> getDescription() {
+    public Description getDescription() {
         return this.description;
     }
 
-    public EventDate getEventDate() {
-        return this.eventDate;
+    public List<Timeslot> getTimeslots() {
+        return this.timeslots;
     }
 
-    public Optional<Location> getLocation() {
+    public Location getLocation() {
         return this.location;
     }
 
-    public void setEventName(Name eventName) {
-        this.eventName = eventName;
+    public boolean isPast() {
+        //TODO: make this method take in a date object, and compare on the spot
+        return this.isPast;
+    }
+    public void setEventName(Name name) {
+        assert name != null;
+        this.name = name;
     }
 
-    public void setEventDate(EventDate eventDate) {
-        this.eventDate = eventDate;
+    public void setEventDate(List<Timeslot> timeslots) {
+        assert timeslots != null;
+        this.timeslots = timeslots;
     }
 
-    public void setLocation(Optional<Location> location) {
+    public void setLocation(Location location) {
+        assert location != null;
         this.location = location;
     }
 
-    public void setDescription(Optional<Description> description) {
+    public void setDescription(Description description) {
+        assert description != null;
         this.description = description;
     }
 
@@ -74,10 +100,20 @@ public class Event implements ReadOnlyEvent {
         this.tags.setTags(tags);;
     }
 
+    public boolean isOverdue() {
+        return this.isPast;
+    }
+
+    public void setOverdue(boolean toSet) {
+        isPast = toSet;
+    }
+
 
     public void resetData(ReadOnlyEvent replacement) {
-        this.setEventName(replacement.getEventName());
-        this.setEventDate(replacement.getEventDate());
+        assert replacement != null;
+
+        this.setEventName(replacement.getName());
+        this.setEventDate(replacement.getTimeslots());
         this.setLocation(replacement.getLocation());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
@@ -93,7 +129,7 @@ public class Event implements ReadOnlyEvent {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(eventName, eventDate, location, description, tags);
+        return Objects.hash(name, timeslots, location, description, tags);
     }
 
     @Override

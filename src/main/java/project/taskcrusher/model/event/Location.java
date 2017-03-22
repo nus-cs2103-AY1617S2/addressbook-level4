@@ -9,50 +9,58 @@ public class Location {
 
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
             "Location should only contain alphanumeric characters and spaces";
-
-    /*
-     * The first character of the location must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
+    public static final String NO_LOCATION = "";
     public static final String LOCATION_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String value;
+    public final String location;
 
     /**
-     * Validates given location string. This DOES NOT mean that the location must be identifiable on a map.
+     * Creates a Location using the String passed
      *
+     * @param deadline
      * @throws IllegalValueException if given location string is invalid.
      */
-    public Location(String loc) throws IllegalValueException {
-        assert loc != null;
-        String trimmedloc = loc.trim();
-        if (!isValidLocation(trimmedloc)) {
+    public Location(String location) throws IllegalValueException {
+        assert location != null;
+
+        if (location.equals(NO_LOCATION)) {
+            this.location = NO_LOCATION;
+        } else if (isValidLocation(location)) {
+            this.location = location;
+        } else {
             throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
         }
-        this.value = trimmedloc;
-    }
-
-    /**
-     * Returns true if a given string is a valid location name.
-     */
-    public static boolean isValidLocation(String test) {
-        return test.matches(LOCATION_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value;
+        return location;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Location // instanceof handles nulls
-                && this.value.equals(((Location) other).value)); // state check
+                && this.location.equals(((Location) other).location)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return location.hashCode();
+    }
+
+    /**
+     * Checks whether a location is valid
+     *
+     * @param location
+     * @return true if description exists and contains at least one
+     *         non-whitespace character
+     */
+    public static boolean isValidLocation(String location) {
+        return location.matches(LOCATION_VALIDATION_REGEX);
+    }
+
+    public boolean hasLocation() {
+        return !location.equals(NO_LOCATION);
     }
 }

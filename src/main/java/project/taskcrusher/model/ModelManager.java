@@ -13,8 +13,10 @@ import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
+import project.taskcrusher.model.shared.UserItem;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
@@ -29,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyEvent> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given userInbox and userPrefs.
@@ -41,6 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.userInbox = new UserInbox(userInbox);
         filteredTasks = new FilteredList<>(this.userInbox.getTaskList());
+        filteredEvents = new FilteredList<>(this.userInbox.getEventList());
     }
 
     public ModelManager() {
@@ -63,6 +67,8 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
+    //=========== Task operations =========================================================================
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         userInbox.removeTask(target);
@@ -72,18 +78,47 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         userInbox.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredTaskListToShowAll();
         indicateUserInboxChanged();
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public synchronized void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        userInbox.updateTask(addressBookIndex, editedTask);
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
+    }
+
+    //=========== Event operations =========================================================================
+
+    @Override
+    public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
+        userInbox.removeEvent(target);
+        indicateUserInboxChanged();
+    }
+
+    @Override
+    public synchronized void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
+            throws DuplicateEventException {
+        assert editedEvent != null;
+
+        int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
+        userInbox.updateEvent(eventListIndex, editedEvent);
+        indicateUserInboxChanged();
+    }
+
+    @Override
+    public synchronized void addEvent(Event event) throws DuplicateEventException {
+        userInbox.addEvent(event);
+        updateFilteredTaskListToShowAll();
+        indicateUserInboxChanged();
+    }
+
+    public UnmodifiableObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
+        return new UnmodifiableObservableList<>(userInbox.getEventsWithOverlappingTimeslots(candidate));
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -94,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredListToShowAll() {
+    public void updateFilteredTaskListToShowAll() {
         filteredTasks.setPredicate(null);
     }
 
@@ -112,10 +147,36 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //=========== Filtered Event List Accessors =============================================================
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
+        return new UnmodifiableObservableList<>(filteredEvents);
+    }
+
+    @Override
+    public void updateFilteredEventListToShowAll() {
+        filteredEvents.setPredicate(null);
+    }
+
+    @Override
+    public void updateFilteredEventList(Set<String> keywords) {
+        updateFilteredEventList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredEventList(Timeslot userInterestedTimeslot) {
+        updateFilteredEventList(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
+    }
+
+    private void updateFilteredEventList(Expression expression) {
+        filteredEvents.setPredicate(expression::satisfies);
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask task);
+        boolean satisfies(UserItem item);
         String toString();
     }
 
@@ -128,8 +189,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
+        public boolean satisfies(UserItem item) {
+            return qualifier.run(item);
         }
 
         @Override
@@ -139,7 +200,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask task);
+        boolean run(UserItem item);
         String toString();
     }
 
@@ -151,9 +212,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask task) {
+        public boolean run(UserItem item) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().toString(), keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(item.getName().toString(), keyword))
                     .findAny()
                     .isPresent();
         }
@@ -173,7 +234,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask task) {
+        public boolean run(UserItem item) {
+            assert item instanceof ReadOnlyTask;
+            ReadOnlyTask task = (ReadOnlyTask) item;
+
             //has no deadline
             if (!task.getDeadline().getDate().isPresent()) {
                 return false;
@@ -192,22 +256,28 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    @Override
-    public void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-        // TODO Auto-generated method stub
+    private class TimeslotQualifier implements Qualifier {
+        private Timeslot userInterestedTimeslot;
 
+        TimeslotQualifier(Timeslot timeslot) {
+            assert timeslot != null;
+            this.userInterestedTimeslot = timeslot;
+        }
+
+        @Override
+        public boolean run(UserItem item) {
+            assert item instanceof ReadOnlyEvent;
+            ReadOnlyEvent event = (ReadOnlyEvent) item;
+            if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "user-interested timeslot is " + userInterestedTimeslot.toString();
+        }
     }
-
-    @Override
-    public void updateEvent(int fileteredEventListIndex, ReadOnlyEvent editedEvent) throws DuplicateEventException {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void addEvent(Event event) throws EventNotFoundException {
-        // TODO Auto-generated method stub
-
-    }
-
 }

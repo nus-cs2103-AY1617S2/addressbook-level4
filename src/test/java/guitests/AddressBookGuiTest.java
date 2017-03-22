@@ -15,9 +15,9 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.UserInboxPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import project.taskcrusher.TestApp;
@@ -50,10 +50,9 @@ public abstract class AddressBookGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected PersonListPanelHandle personListPanel;
+    protected UserInboxPanelHandle userInboxPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    //protected BrowserPanelHandle browserPanel;
     private Stage stage;
 
     @BeforeClass
@@ -71,10 +70,9 @@ public abstract class AddressBookGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            personListPanel = mainGui.getPersonListPanel();
+            userInboxPanel = mainGui.getUserInboxPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
-            //browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
@@ -118,7 +116,7 @@ public abstract class AddressBookGuiTest {
      * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = personListPanel.getNumberOfPeople();
+        int numberOfPeople = userInboxPanel.getNumberOfPeople();
         assertEquals(size, numberOfPeople);
     }
 

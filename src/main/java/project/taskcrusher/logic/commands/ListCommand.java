@@ -1,8 +1,10 @@
 package project.taskcrusher.logic.commands;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import project.taskcrusher.commons.exceptions.IllegalValueException;
+import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.task.Deadline;
 
 /**
@@ -17,42 +19,56 @@ public class ListCommand extends Command {
     public static final String COMPLETE_FLAG = "c";
     public static final String NO_FLAG = "";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks in the active list "
-            + "before the deadline, if provided"
-            + "Parameters: [t] [d/DEADLINE] \n"
-            + "Example: " + COMMAND_WORD + " t d/tomorrow";
-    public static final String MESSAGE_SUCCESS = "Listed all relevant tasks";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks/events that satisfies the given qualifier "
+            + "list: list command with no qualifier lists all tasks and events\n"
+            + "list d/DEADLINE: lists all tasks whose deadline is set before DEADLINE"
+            + "list d/TIMESLOT: lists all events whose timeslot overlaps with TIMESLOT";
 
-    //TODO some values here reserved for later
-    private final Date start;
-    private final Date end;
-    private boolean listTasksOnly;
-    private boolean listEventsOnly;
+    public static final String MESSAGE_SUCCESS = "Listed all relevant events/tasks";
 
-    public ListCommand(String deadline, boolean listTasksOnly, boolean listEventsOnly) throws IllegalValueException {
-        Deadline parsedDeadline = new Deadline(deadline);
-        if (parsedDeadline.hasDeadline()) {
-            this.start = parsedDeadline.getDate().get();
-            this.end = parsedDeadline.getDate().get();
-        } else { //TODO only a temporary solution
-            this.start = null;
-            this.end = null;
-        }
-        //TODO won't use for now
-        this.listTasksOnly = listTasksOnly;
-        this.listEventsOnly = listEventsOnly;
+    private final Date until;
+    private final Timeslot dateRange;
+
+    public ListCommand(Deadline deadline) {
+        this.until = deadline.getDate().get();
+        this.dateRange = null;
+    }
+
+    public ListCommand(Timeslot timeslot) {
+        this.dateRange = timeslot;
+        this.until = null;
+    }
+
+    public ListCommand() {
+        this.until = null;
+        this.dateRange = null;
     }
 
     @Override
     public CommandResult execute() {
+        assert model != null;
+        assert !(until != null && dateRange != null);
 
-        if (this.start == null) {
-            model.updateFilteredListToShowAll();
-        } else {
-            model.updateFilteredTaskList(start);
+        if (until == null && dateRange == null) {
+            model.updateFilteredTaskListToShowAll();
+            model.updateFilteredEventListToShowAll();
+        } else if (until != null) {
+            model.updateFilteredTaskList(until);
+
+            // TODO ghetto fix
+            Set<String> keywords = new HashSet<String>();
+            keywords.add("4yuf5g24f4trfty");
+            model.updateFilteredEventList(keywords);
+
+        } else if (dateRange != null) {
+            model.updateFilteredEventList(dateRange);
+
+            // TODO ghetto fix
+            Set<String> keywords = new HashSet<String>();
+            keywords.add("4yuf5g24f4trfty");
+            model.updateFilteredTaskList(keywords);
         }
 
-        //TODO updateFilteredTaskList(Date a, Date b) and updateFilteredEventList(Date a, Date b)
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

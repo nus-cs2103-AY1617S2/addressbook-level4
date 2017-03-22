@@ -66,7 +66,7 @@ public class EditCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        model.updateFilteredListToShowAll();
+        model.updateFilteredTaskListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
@@ -79,7 +79,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         //After these statements, each field should NOT be null
-        Name updatedName = editPersonDescriptor.getName().orElseGet(taskToEdit::getTaskName);
+        Name updatedName = editPersonDescriptor.getName().orElseGet(taskToEdit::getName);
         Priority updatedPriority = editPersonDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Deadline updatedDeadline = editPersonDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
         Description updatedDescription = editPersonDescriptor.getDescription().orElseGet(taskToEdit::getDescription);

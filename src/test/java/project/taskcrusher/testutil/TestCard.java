@@ -25,7 +25,7 @@ public class TestCard implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestCard(TestCard taskToCopy) {
-        this.name = taskToCopy.getTaskName();
+        this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.deadline = taskToCopy.getDeadline();
         this.description = taskToCopy.getDescription();
@@ -53,7 +53,7 @@ public class TestCard implements ReadOnlyTask {
     }
 
     @Override
-    public Name getTaskName() {
+    public Name getName() {
         return name;
     }
 
@@ -84,7 +84,7 @@ public class TestCard implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add t " + this.getTaskName().name);
+        sb.append("add t " + this.getName().name);
         if (this.getDeadline().hasDeadline()) {
             sb.append("d/" + this.getDeadline().deadline + " ");
         }

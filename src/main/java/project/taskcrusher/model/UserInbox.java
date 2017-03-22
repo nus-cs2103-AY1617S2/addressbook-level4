@@ -10,6 +10,10 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
+import project.taskcrusher.model.event.Event;
+import project.taskcrusher.model.event.ReadOnlyEvent;
+import project.taskcrusher.model.event.Timeslot;
+import project.taskcrusher.model.event.UniqueEventList;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.ReadOnlyTask;
@@ -25,8 +29,11 @@ public class UserInbox implements ReadOnlyUserInbox {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
+    private final UniqueEventList events;
+
     {
         tasks = new UniqueTaskList();
+        events = new UniqueEventList();
         tags = new UniqueTagList();
     }
 
@@ -40,17 +47,26 @@ public class UserInbox implements ReadOnlyUserInbox {
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
 
-    //TODO added this
     public void setTasks(UniqueTaskList tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
+    }
+
+    public void setEvents(List<? extends ReadOnlyEvent> events)
+            throws UniqueEventList.DuplicateEventException {
+        this.events.setEvents(events);
+    }
+
+    public void setEvents(UniqueEventList events)
+            throws UniqueEventList.DuplicateEventException {
+        this.events.setEvents(events);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -62,8 +78,14 @@ public class UserInbox implements ReadOnlyUserInbox {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "AddressBooks should not have duplicate persons";
+            assert false : "User inbox should not have duplicate tasks";
         }
+        try {
+            setEvents(newData.getEventList());
+        } catch (UniqueEventList.DuplicateEventException e) {
+            assert false : "User inbox should not have duplicate events";
+        }
+        syncMasterTagListWith(events);
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
@@ -72,7 +94,7 @@ public class UserInbox implements ReadOnlyUserInbox {
         syncMasterTagListWith(tasks);
     }
 
-//// task-level operations
+    //// task-level operations
 
     /**
      * Adds a task to the user inbox.
@@ -107,6 +129,14 @@ public class UserInbox implements ReadOnlyUserInbox {
         tasks.updateTask(index, editedTask);
     }
 
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+        if (tasks.remove(key)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
@@ -137,31 +167,106 @@ public class UserInbox implements ReadOnlyUserInbox {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-        if (tasks.remove(key)) {
+    /**
+     * Ensures that every tag in this task:
+     *  - exists in the master list {@link #tags}
+     *  - points to a Tag object in the master list
+     */
+    private void syncMasterTagListWith(Event event) {
+        final UniqueTagList eventTags = event.getTags();
+        tags.mergeFrom(eventTags);
+
+        // Create map with values = tag object references in the master list
+        // used for checking person tag references
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        eventTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        event.setTags(new UniqueTagList(correctTagReferences));
+    }
+
+    /**
+     * Ensures that every tag in these tasks:
+     *  - exists in the master list {@link #tags}
+     *  - points to a Tag object in the master list
+     *  @see #syncMasterTagListWith(Task)
+     */
+    private void syncMasterTagListWith(UniqueEventList events) {
+        events.forEach(this::syncMasterTagListWith);
+    }
+
+    //// event-level operations
+
+    /**
+     * Adds a task to the user inbox.
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     *
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     */
+    public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
+        syncMasterTagListWith(e);
+        events.add(e);
+    }
+
+    /**
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyPerson}.
+     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
+     * @see #syncMasterTagListWith(Task)
+     *
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
+            throws UniqueEventList.DuplicateEventException {
+        assert editedReadOnlyEvent != null;
+
+        Event editedEvent = new Event(editedReadOnlyEvent);
+        syncMasterTagListWith(editedEvent);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // in the task list.
+        events.updateEvent(index, editedEvent);
+    }
+
+    public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
+        if (events.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+            throw new UniqueEventList.EventNotFoundException();
         }
     }
 
-//// tag-level operations
+    public ObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
+        return events.getEventsWithOverlapingTimeslots(candidate);
+    }
+
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return tasks.asObservableList().size() + " tasks, " + events.asObservableList().size() +
+                "events, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+
+    @Override
+    public ObservableList<ReadOnlyEvent> getEventList() {
+        return new UnmodifiableObservableList<>(events.asObservableList());
     }
 
     @Override
@@ -173,13 +278,14 @@ public class UserInbox implements ReadOnlyUserInbox {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UserInbox // instanceof handles nulls
-                && this.tasks.equals(((UserInbox) other).tasks)
-                && this.tags.equalsOrderInsensitive(((UserInbox) other).tags));
+                        && this.tasks.equals(((UserInbox) other).tasks)
+                        && this.events.equals(((UserInbox) other).events)
+                        && this.tags.equalsOrderInsensitive(((UserInbox) other).tags));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks, tags);
+        return Objects.hash(tasks, events, tags);
     }
 }
