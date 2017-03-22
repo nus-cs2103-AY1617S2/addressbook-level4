@@ -4,12 +4,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="placeHolder" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="placeHolder" prefHeight="110.0" styleClass="anchor-pane-with-border" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
-    <AnchorPane fx:id="mainPane" layoutY="16.0" prefHeight="214.0" prefWidth="582.0" styleClass="anchor-pane-with-border">
-        <TextArea fx:id="resultDisplay" editable="false" layoutX="12.0" layoutY="-10.0" prefHeight="214.0" prefWidth="559.0" styleClass="result-display" AnchorPane.rightAnchor="11.0" />
+    <AnchorPane fx:id="mainPane" layoutY="16.0" prefHeight="110.0" prefWidth="582.0" styleClass="anchor-pane-with-border">
+        <TextArea fx:id="resultDisplay" editable="false" layoutX="12.0" layoutY="-10.0" prefHeight="150.0" prefWidth="559.0" styleClass="result-display" AnchorPane.rightAnchor="11.0" />
     </AnchorPane>
 </AnchorPane>
