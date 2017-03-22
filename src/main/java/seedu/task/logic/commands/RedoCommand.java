@@ -10,24 +10,21 @@ import seedu.task.model.task.TaskId;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
-/**
- * Undo previous commands executed
- */
-public class UndoCommand extends Command {
-    public static final String COMMAND_WORD = "undo";
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_SUCCESS = "Command undone";
-    public static final String MESSAGE_NO_HISTORY = "No commands to undo";
+    public static final String MESSAGE_SUCCESS = "Command redone";
+    public static final String MESSAGE_NO_HISTORY = "No commands to redo";
 
     @Override
     public CommandResult execute() throws CommandException {
-        final Optional<TaskMemento> memento = mementos.getUndoMemento();
+        final Optional<TaskMemento> memento = mementos.getRedoMemento();
         final Task mementoTask = memento.orElseThrow(
-            () -> new CommandException(MESSAGE_NO_HISTORY)).oldTask;
+            () -> new CommandException(MESSAGE_NO_HISTORY)).newTask;
         final TaskId mementoTaskId = memento.orElse(null).taskId;
         Task taskToBeReplaced = model.getTaskList().getTaskById(mementoTaskId);
 
-        if (mementoTask == null && taskToBeReplaced != null) { //In case of undoing add
+        if (mementoTask == null && taskToBeReplaced != null) { //In case of redoing delete
             try {
                 model.deleteTask(taskToBeReplaced);
             } catch (TaskNotFoundException e) {
@@ -35,7 +32,7 @@ public class UndoCommand extends Command {
             }
         }
 
-        if (taskToBeReplaced == null && mementoTask != null) { //In case of undoing delete
+        if (taskToBeReplaced == null && mementoTask != null) { //In case of undoing add
             try {
                 model.addTask(mementoTask);
             } catch (DuplicateTaskException e) {
@@ -52,4 +49,5 @@ public class UndoCommand extends Command {
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
 }
