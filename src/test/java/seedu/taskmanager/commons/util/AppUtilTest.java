@@ -12,10 +12,9 @@ public class AppUtilTest {
     public ExpectedException thrown = ExpectedException.none();
 
 
-
     @Test
     public void getImage_exitingImage() {
-        assertNotNull(AppUtil.getImage("/images/task_manager_32.png"));
+        assertNotNull(AppUtil.getImage("/images/task_manager.png"));
     }
 
 

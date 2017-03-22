@@ -15,8 +15,8 @@ public class CurrentDate {
 	public static final String CURRENTDATE_VALIDATION_REGEX_TODAY2 = "today";
 	public static final String CURRENTDATE_VALIDATION_REGEX_TOMORROW1 = "Tomorrow";
 	public static final String CURRENTDATE_VALIDATION_REGEX_TOMORROW2 = "tomorrow";
-	public static final String CURRENTDATE_VALIDATION_REGEX_TOMORROW3 = "Tom";
-	public static final String CURRENTDATE_VALIDATION_REGEX_TOMORROW4 = "tom";
+	public static final String CURRENTDATE_VALIDATION_REGEX_TOMORROW3 = "Tmr";
+	public static final String CURRENTDATE_VALIDATION_REGEX_TOMORROW4 = "tmr";
 	public static final String CURRENTDATE_VALIDATION_REGEX_MONDAY1 = "Monday";
 	public static final String CURRENTDATE_VALIDATION_REGEX_MONDAY2 = "monday";
 	public static final String CURRENTDATE_VALIDATION_REGEX_MONDAY3 = "Mon";

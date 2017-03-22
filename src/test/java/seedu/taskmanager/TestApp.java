@@ -45,7 +45,11 @@ public class TestApp extends MainApp {
     protected Config initConfig(String configFilePath) {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
-        config.setTaskManagerFilePath(saveFileLocation);
+        try {
+            config.setTaskManagerFilePath(saveFileLocation); 
+        } catch (RuntimeException e) {
+            
+        }
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
         config.setTaskManagerName(TASK_MANAGER_NAME);
         return config;
