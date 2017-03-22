@@ -32,7 +32,7 @@ public class Completion {
         if (!isValidCompletion(completion)) {
             throw new IllegalValueException(MESSAGE_COMPLETION_CONSTRAINTS);
         }
-        this.value = Boolean.getBoolean(completion);
+        this.value = Boolean.parseBoolean(completion);
     }
 
     /**

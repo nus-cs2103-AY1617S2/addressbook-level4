@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -19,6 +20,7 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private UniqueTagList tags;
     private Notes notes;
+    private Completion completion;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -34,6 +36,7 @@ public class TestTask implements ReadOnlyTask {
         this.priority = taskToCopy.getPriority();
         this.tags = taskToCopy.getTags();
         this.notes = taskToCopy.getNotes();
+        this.completion = taskToCopy.getCompletion();
     }
 
     public void setName(Name name) {
@@ -59,6 +62,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public void setCompletion(Completion completion) {
+        this.completion = completion;
     }
 
     @Override
@@ -90,6 +97,11 @@ public class TestTask implements ReadOnlyTask {
     public Notes getNotes() {
         return notes;
     }
+    
+    @Override
+    public Completion getCompletion() {
+        return completion;
+    }
 
     @Override
     public String toString() {
@@ -104,6 +116,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("p/" + this.getPriority().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         sb.append("n/" + this.getNotes().value + " ");
+        sb.append("c/" + String.valueOf(this.getCompletion().value) + " ");
         return sb.toString();
     }
 }
