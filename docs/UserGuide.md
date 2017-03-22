@@ -133,7 +133,23 @@ Examples:
 * `update 1 label tedious work by thursday`<br />
   Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday 23:59 hr` respectively.
 
-### 2.5. Finding all task containing any keyword in task name and labels : `find`
+### 2.5. Changing status of a task: `mark`
+
+Edits the specified task's status.
+
+Format:`mark [TASK_ID] [COMPLETED | INCOMPLETE]`
+
+> * Marks the task with the `TASK_ID` as completed/incomplete
+    The index refers to the id of the task.<br />
+    The index **must be a positive integer** 1, 2, 3, ...
+> * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
+
+Examples:
+
+* `mark 3 completed`<br />
+  Edits the status of the currently selected task at index 3 as completed.
+
+### 2.6. Finding all task containing any keyword in task name and labels : `find`
 
 Finds tasks whose name and labels containing any of the specified keywords.
 
@@ -168,7 +184,7 @@ Returns all task with the label name containing `glocery` & `Glocery`.
 * `find project glocery`<br />
 Returns all tasks having name or label name containing `project`, `Project`,  `glocery`, `Glocery`.
 
-### 2.6. Deleting a task : `delete`
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task from the task manager. Reversible via undo command.
 
@@ -188,7 +204,7 @@ Examples:
 * `delete school`<br />
   Deletes all task with the label `school`.
 
-### 2.7. Select a Task : `select`
+### 2.8. Select a Task : `select`
 
 Selects the task identified by its `id`<br />
 Format: `select TASK_ID`
@@ -202,7 +218,7 @@ Examples:
 * `select 2`<br />
   Selects the task of id 2
 
-### 2.8. Add a booking : `book`
+### 2.9. Add a booking : `book`
 
 Reserve time slots for a certain task that has not been confirmed yet.<br />
 Format: `book TASKNAME [#LABEL...] on DATE, DATE, [MORE_DATES]...`
@@ -222,7 +238,7 @@ Examples:
 * `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
   Reserves time slots on the 1st January 2017 4pm and 2nd January 8pm for CS2103 Meeting
 
-### 2.9. Confirm a booking : `confirm`
+### 2.10. Confirm a booking : `confirm`
 
 Confirm booking of a task and releases other bookings for the confirmed task.<br />
 Format: `confirm TASK_ID (SLOT_NUMBER|DATE)`
@@ -241,7 +257,7 @@ Examples:
   `confirm 1 1`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 9pm slot
 
-### 2.10. Edit a label : `editlabel`
+### 2.11. Edit a label : `editlabel`
 
 Renames a specific label to another label<br />
 Format: `editlabel OLD_LABEL NEW_LABEL`
@@ -253,17 +269,17 @@ Examples:
 * `editlabel friends oldfriends`<br />
   Renames all task with the tag `friends` to `oldfriends`.
 
-### 2.11. Undo the previously executed command : `undo`
+### 2.12. Undo the previously executed command : `undo`
 
 Revert results of a previously executed command. If the previously executed command does not modify the data of DoOrDie, nothing will be reverted.<br />
 Format: `undo`
 
-### 2.12. Clearing all entries : `clear`
+### 2.13. Clearing all entries : `clear`
 
 Clears all entries from DoOrDie.<br />
 Format: `clear`
 
-### 2.13. Save current Task Manager to a specified location : `saveas`
+### 2.14. Save current Task Manager to a specified location : `saveas`
 
 Saves current Task Manager tasks to a location provided<br />
 After saving, the Task Manager will save changes to the new location<br />
@@ -271,7 +287,7 @@ Format: `saveas FILEPATH_RELATIVE_TO_JAR`
 
 > * FILEPATH_RELATIVE_TO_JAR must be a file ending with `*.xml`
 
-### 2.14. Load data from a specified file to the Task Manager : `load`
+### 2.15. Load data from a specified file to the Task Manager : `load`
 
 Replaces all task with the newly loaded data in the specified file path<br />
 After loading, the Task Manager will save changes to the new location<br />
@@ -279,17 +295,17 @@ Format: `load FILEPATH_RELATIVE_TO_JAR`
 
 > * FILEPATH_RELATIVE_TO_JAR must be a file ending with `*.xml`
 
-### 2.15. Push task changes to Google Calendar : `push`
+### 2.16. Push task changes to Google Calendar : `push`
 
 Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
 Format: `push`
 
-### 2.16. Pull task changes from Google Calendar : `pull`
+### 2.17. Pull task changes from Google Calendar : `pull`
 
 Downloads data from Google Calendar. Priority goes to `Google Calendar` if there is a conflict.<br />
 Format: `pull`
 
-### 2.17. Export agenda to PDF file : `export`
+### 2.18. Export agenda to PDF file : `export`
 
 Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
 Format: `export ([DATE] | [from START_DATE to END_DATE])`
@@ -310,37 +326,21 @@ Examples:
 * `export from 2nd Feb to 9th Feb`<br />
   Saves a PDF with tasks and details from 2nd February to 9th February of the current year
 
-### 2.18. Exiting the program : `exit`
+### 2.19. Exiting the program : `exit`
 
 Exits DoOrDie<br />
 Format: `exit`
 
-### 2.19. Saving the data
+### 2.20. Saving the data
 
 DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
 
-### 2.20. Iterating through previously executed commands
+### 2.21. Iterating through previously executed commands
 Pressing the UP or DOWN key will allow you to iterate through previous commands executed (if any).
 
-### 2.21. Autocompletion of commands and reserved keywords
+### 2.22. Autocompletion of commands and reserved keywords
 Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
-
-### 2.22. Changing status of a task: `mark`
-
-Edits the specified task's status.
-
-Format:`mark [TASK_ID] [COMPLETED | INCOMPLETE]`
-
-> * Edits the task with the `TASK_ID`
-    The index refers to the id of the task.<br />
-    The index **must be a positive integer** 1, 2, 3, ...
-> * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
-
-Examples:
-
-* `mark 3 completed`<br />
-  Edits the status of the currently selected task at index 3 as completed.
 
 
 ## 3. FAQ
@@ -355,7 +355,8 @@ Command Description | Command Format | Example
 | Help | `help` |
 | Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]` | `add CS2106 Mid terms by tmr 13:00 #school`
 | List | `list [TYPE]`| `list outstanding tasks`
-| Update | `update [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE])` | `update 1 #label tedious work by thursday #work`
+| Edit | `edit [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE] | clear dates) [completed|incomplete]` | `update 1 #label tedious work by thursday #work`
+| Mark | `mark [TASK_ID] [completed|incomplete]` | `mark 1 completed`
 | Find | `find [TYPE] KEYWORD [MORE_KEYWORDS]...` | `find CS2103`
 | Delete | `delete [TASK_ID|LABEL]` | `delete 1`
 | Select | `select TASK_ID` | `select 2`
