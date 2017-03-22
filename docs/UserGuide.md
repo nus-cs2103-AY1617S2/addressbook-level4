@@ -391,6 +391,7 @@ Your wish is my command!
 |Select       |**`select`** `<task>`                        |**`select`** `presentation`                         |
 |Update       |**`update`** `<task> <parameter> <new_value>`|**`update`** `<buy bread> <name> <buy white bread>` |
 |Help         |**`help`**                                   |                                                    |
+|Save         |**`save`** `<directory>`                     |**`save`** `C:\Users\Jim\Desktop`                   |
 |Exit         |**`exit`**                                   |                                                    |
 
 
