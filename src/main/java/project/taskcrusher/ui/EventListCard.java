@@ -19,7 +19,7 @@ public class EventListCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label location;
+    private Label eventLocation; //named like this to avoid collision between the builtin name
     @FXML
     private Label description;
     @FXML
@@ -44,9 +44,9 @@ public class EventListCard extends UiPart<Region> {
 
     private void showLocation(ReadOnlyEvent event) {
         if (event.getLocation().hasLocation()) {
-            location.setText(event.getLocation().location);
+            eventLocation.setText(event.getLocation().location);
         } else {
-            location.setText(MESSAGE_NO_LOCATION);
+            eventLocation.setText(MESSAGE_NO_LOCATION);
         }
     }
 

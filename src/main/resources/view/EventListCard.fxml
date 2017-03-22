@@ -36,7 +36,7 @@
                         </HBox>
                         <FlowPane fx:id="tags" />
                         <FlowPane fx:id="timeSlots" />
-                        <Label fx:id="location" styleClass="cell_small_label" text="\$location" />
+                        <Label fx:id="eventLocation" styleClass="cell_small_label" text="\$location" />
                         <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
                     </children>
                 </VBox>
