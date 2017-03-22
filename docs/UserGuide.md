@@ -130,13 +130,8 @@ Examples:
 * `edit CS2106Assignment label`<br />
   Edits the name of the currently selected task to be `CS2106Assignment` and clears all existing labels.
 
-<<<<<<< HEAD
-* `edit 1 label tedious work by thursday`<br />
-  Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday` respectively.
-=======
 * `update 1 label tedious work by thursday`<br />
   Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday 23:59 hr` respectively.
->>>>>>> refs/remotes/origin/V0.3-bernard
 
 ### 2.5. Finding all task containing any keyword in task name and labels : `find`
 
@@ -330,6 +325,23 @@ Pressing the UP or DOWN key will allow you to iterate through previous commands 
 
 ### 2.21. Autocompletion of commands and reserved keywords
 Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
+
+### 2.22. Changing status of a task: `mark`
+
+Edits the specified task's status.
+
+Format:`mark [TASK_ID] [COMPLETED | INCOMPLETE]`
+
+> * Edits the task with the `TASK_ID`
+    The index refers to the id of the task.<br />
+    The index **must be a positive integer** 1, 2, 3, ...
+> * You can mark a task completed or incomplete by specifying 'completed' or 'incomplete' respective.
+
+Examples:
+
+* `mark 3 completed`<br />
+  Edits the status of the currently selected task at index 3 as completed.
+
 
 ## 3. FAQ
 
