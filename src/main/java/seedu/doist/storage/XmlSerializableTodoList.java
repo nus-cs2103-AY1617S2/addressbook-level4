@@ -28,7 +28,7 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableTodoList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableTodoList() {
