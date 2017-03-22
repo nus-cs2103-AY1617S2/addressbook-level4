@@ -24,9 +24,8 @@ public class Priority {
         else {
             this.priorityLevel = "low";
         }
-        
     }
-    
+
     public static boolean isPriorityLevel(String test) {
             return test.matches(PRIORITY_VALIDATION_REGEX);
     }

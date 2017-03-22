@@ -54,7 +54,7 @@ public class TestTask implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
-    
+
     @Override
     public Priority getPriority() {
         return priority;

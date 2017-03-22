@@ -56,14 +56,14 @@ public class Task implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
-    
+
     /* @@author A0119505J */
 
     @Override
 	public Priority getPriority() {
 		return priority;
 	}
-    
+
     public void setPriority(Priority priority){
 		this.priority = priority;
 	}

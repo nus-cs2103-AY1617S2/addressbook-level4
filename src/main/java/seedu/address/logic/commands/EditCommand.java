@@ -153,7 +153,7 @@ public class EditCommand extends Command {
         public Optional<Priority> getPriority() {
             return priority;
         }
-        
+
         public void setPriority(Optional<Priority> priority) {
             assert priority != null;
             this.priority = priority;
