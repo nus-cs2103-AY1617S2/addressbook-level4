@@ -1,6 +1,8 @@
+//@@author A0164212U
 package seedu.task.model.task;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -8,48 +10,73 @@ public class TimingTest {
 
 
 	@Test
-	public void isValidEmail() {
-		// // blank email
+	public void isValidTiming() {
+		// // blank timing
 		assertFalse(Timing.isValidTiming("")); // empty string
-		// assertFalse(Timing.isValidTiming(" ")); // spaces only
+		assertFalse(Timing.isValidTiming(" ")); // spaces only
 		//
-		// // missing parts
-		// assertFalse(Timing.isValidTiming("@webmail.com")); // missing local
-		// part
-		// assertFalse(Timing.isValidTiming("peterjackwebmail.com")); // missing
-		// '@' symbol
-		// assertFalse(Timing.isValidTiming("peterjack@")); // missing domain
-		// name
+		// // missing parts ("dd/MM/yyyy")
+		assertFalse(Timing.isValidTiming("05/2017")); // missing day
+		assertFalse(Timing.isValidTiming("31/2017")); // missing month
+		assertFalse(Timing.isValidTiming("05/30")); // missing year
+		// // missing parts ("HH:mm dd/MM/yyyy")
+		assertFalse(Timing.isValidTiming("25 02/03/2018")); // missing hour
+		assertFalse(Timing.isValidTiming("12 02/03/2018")); // missing minute
+		assertFalse(Timing.isValidTiming("12:25 03/2018")); // missing day
+		assertFalse(Timing.isValidTiming("12:25 02/2018")); // missing month
+		assertFalse(Timing.isValidTiming("12:25 02/03")); // missing year
 		//
-		// // invalid parts
-		// assertFalse(Timing.isValidTiming("-@webmail.com")); // invalid local
-		// part
-		// assertFalse(Timing.isValidTiming("peterjack@-")); // invalid domain
-		// name
-		// assertFalse(Timing.isValidTiming("peter jack@webmail.com")); //
-		// spaces in local part
-		// assertFalse(Timing.isValidTiming("peterjack@web mail.com")); //
-		// spaces in domain name
-		// assertFalse(Timing.isValidTiming("peterjack@@webmail.com")); //
-		// double '@' symbol
-		// assertFalse(Timing.isValidTiming("peter@jack@webmail.com")); // '@'
-		// symbol in local part
-		// assertFalse(Timing.isValidTiming("peterjack@webmail@com")); // '@'
-		// symbol in domain name
+		// // invalid parts ("dd/MM/yyyy")
+		assertFalse(Timing.isValidTiming("0/06/2017")); // invalid day (boundary case)
+		assertFalse(Timing.isValidTiming("32/01/2017")); // invalid day (boundary case)
+		assertFalse(Timing.isValidTiming("29/2/2017")); // invalid day (non-leap year)
+		assertFalse(Timing.isValidTiming("10/0/2017")); // invalid month (boundary case)
+		assertFalse(Timing.isValidTiming("10/13/2017")); // invalid month (boundary case)
+		assertFalse(Timing.isValidTiming("05/12/999")); // invalid year (boundary case)
+		assertFalse(Timing.isValidTiming("05/12/10000")); // invalid year (boundary case)
+		assertFalse(Timing.isValidTiming("05.12.2017")); // invalid symbol
+		assertFalse(Timing.isValidTiming("05/12/20175")); // invalid year
+		//		assertFalse(Timing.isValidTiming("05/12/2017@")); // invalid symbol
+		// // invalid parts ("HH:mm dd/MM/yyyy")
+		assertFalse(Timing.isValidTiming("15:30 0/06/2017")); // invalid day (boundary case)
+		assertFalse(Timing.isValidTiming("15:30 32/01/2017")); // invalid day (boundary case)
+		assertFalse(Timing.isValidTiming("15:30 10/0/2017")); // invalid month (boundary case)
+		assertFalse(Timing.isValidTiming("15:30 10/13/2017")); // invalid month(boundary case)
+		assertFalse(Timing.isValidTiming("15:30 29/2/2017")); // invalid day (non-leap year)
+		assertFalse(Timing.isValidTiming("24:30 05/12/2017")); // invalid hour (boundary case)
+		assertFalse(Timing.isValidTiming("-1:30 05/12/2017")); // invalid hour (boundary case)
+		assertFalse(Timing.isValidTiming("15:60 05/12/999")); // invalid year (boundary case)
+		assertFalse(Timing.isValidTiming("15:60 05/12/10000")); // invalid year (boundary case)
+		assertFalse(Timing.isValidTiming("15:60 05/12/2017")); // invalid minute (boundary case)
+		assertFalse(Timing.isValidTiming("15:-1 05/12/2017")); // invalid minute (boundary case)
+		assertFalse(Timing.isValidTiming("5:45 05.12.2017")); // invalid symbol
+		assertFalse(Timing.isValidTiming("5.45 05/12/2017")); // invalid symbol
+		//		assertFalse(Timing.isValidTiming("8:36 05/12/2017@")); // invalid symbol
 		//
-		// // valid email
-		// assertTrue(Timing.isValidTiming("PeterJack_1190@WEB.Mail.com"));
-		// assertTrue(Timing.isValidTiming("a@b")); // minimal
-		// assertTrue(Timing.isValidTiming("test@localhost")); // alphabets only
-		// assertTrue(Timing.isValidTiming("123@145")); // numeric local part
-		// and domain name
-		// assertTrue(Timing.isValidTiming("a1@sg50.org")); // mixture of
-		// alphanumeric and dot characters
-		// assertTrue(Timing.isValidTiming("_user_@_do_main_.com_")); //
-		// underscores
-		// assertTrue(Timing.isValidTiming("peter_jack@a_very_long_domain_AVLD.com"));
-		// // long domain name
-		// assertTrue(Timing.isValidTiming("if.you.dream.it_you.can.do.it@youth_email.com"));
-		// // long local part
+		// // valid timing ("dd/MM/yyyy")
+		assertTrue(Timing.isValidTiming("29/2/2016")); // valid leap year
+		assertTrue(Timing.isValidTiming("31/7/2016")); // boundary case for day
+		assertTrue(Timing.isValidTiming("1/8/2016")); // boundary case for day
+		assertTrue(Timing.isValidTiming("30/6/2016")); // boundary case for day
+		assertTrue(Timing.isValidTiming("05/1/2019")); // boundary case for month
+		assertTrue(Timing.isValidTiming("15/12/2016")); // boundary case for month
+		assertTrue(Timing.isValidTiming("17/10/1000")); // boundary case for year
+		assertTrue(Timing.isValidTiming("15/11/9999")); // boundary case for year
+		assertTrue(Timing.isValidTiming("14/9/2020")); // random, "normal" date (no boundary parameter)
+		// // valid timing ("HH:mm dd/MM/yyyy")
+		assertTrue(Timing.isValidTiming("6:35 29/2/2016")); // valid leap year
+		assertTrue(Timing.isValidTiming("6:35 31/7/2016")); // boundary case for day
+		assertTrue(Timing.isValidTiming("7:56 1/8/2016")); // boundary case for day
+		assertTrue(Timing.isValidTiming("20:39 30/6/2016")); // boundary case for day
+		assertTrue(Timing.isValidTiming("3:34 05/1/2019")); // boundary case for month
+		assertTrue(Timing.isValidTiming("2:15 15/12/2016")); // boundary case for month
+		assertTrue(Timing.isValidTiming("5:15 17/10/1000")); // boundary case for year
+		assertTrue(Timing.isValidTiming("6:25 15/11/9999")); // boundary case for year
+		assertTrue(Timing.isValidTiming("13:16 14/9/2020")); // random, "normal" date (no boundary parameter)
+		assertTrue(Timing.isValidTiming("0:15 14/9/2020")); // boundary case for hour
+		assertTrue(Timing.isValidTiming("23:15 14/9/2020")); // boundary case for hour
+		assertTrue(Timing.isValidTiming("10:00 14/9/2020")); // boundary case for minute
+		assertTrue(Timing.isValidTiming("15:59 14/9/2020")); // boundary case for minute
+		assertTrue(Timing.isValidTiming("0:00 14/9/2020")); // boundary case for hour and minute
 	}
 }

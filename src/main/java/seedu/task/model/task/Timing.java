@@ -3,6 +3,7 @@ package seedu.task.model.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -55,7 +56,13 @@ public class Timing implements Comparable<Timing> {
 				try {
 					// throws ParseException if timing is not valid
 					Date date = sdf.parse(test);
-					isValid = true;
+					// check if year is truly 4 digits (the 'yyyy' regex does not support this)
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(date);
+					System.out.println(cal.get(Calendar.YEAR));
+					if(cal.get(Calendar.YEAR) >= 1000 && cal.get(Calendar.YEAR) <= 9999){
+						isValid = true;
+					}
 					break;
 				} catch (ParseException e) {
 				}
