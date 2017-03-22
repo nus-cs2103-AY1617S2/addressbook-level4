@@ -184,6 +184,11 @@ There is no need to save manually.
 * **Edit**  `edit INDEX [NAME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]` <br>
   e.g. `edit 1 Finish CS2103 work`
 
+* **Undo** : `undo` <br>
+  e.g. `undo`
+
+* **Redo** : `redo` <br>
+  e.g. `redo`
 
 * **Find** : `find [d/DEADLINE] [p/PRIORITY] [t/TAG]` <br>
   e.g. `find t/CS2103`
@@ -196,6 +201,9 @@ There is no need to save manually.
 
 * **List** : `list` <br>
   e.g. `list`
+
+* **Clear** : `clear` <br>
+  e.g. `clear`
 
 * **Help** : `help` <br>
   e.g. `help`
