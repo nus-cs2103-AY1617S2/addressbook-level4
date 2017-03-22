@@ -13,9 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.jobs.commons.util.FxViewUtil;
-import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.ReadOnlyTask;
-import seedu.jobs.ui.TaskListPanel.TaskListViewCell;
 
 /**
  * Panel containing the list of persons.

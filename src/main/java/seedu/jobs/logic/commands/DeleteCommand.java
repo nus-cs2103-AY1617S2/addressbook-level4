@@ -3,7 +3,6 @@ package seedu.jobs.logic.commands;
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.logic.commands.exceptions.CommandException;
-import seedu.jobs.model.task.ReadOnlyPerson;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
