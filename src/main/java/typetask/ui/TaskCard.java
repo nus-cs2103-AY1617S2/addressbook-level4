@@ -61,7 +61,7 @@ public class TaskCard extends UiPart<Region> {
         setColourCode();
         //add endDate.setText(...);
 
-	}
+    }
 
     //@@author A0139154E
     private void setColourCode() {
