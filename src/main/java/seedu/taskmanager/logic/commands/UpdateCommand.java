@@ -5,16 +5,16 @@ import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.util.CollectionUtil;
-import seedu.taskmanager.commons.util.CurrentDate;
+//import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.TaskName;
-import seedu.taskmanager.model.task.Task;
-import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.UniqueTaskList;
-import seedu.taskmanager.model.category.UniqueCategoryList;
-import seedu.taskmanager.logic.commands.exceptions.CommandException;
+//import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * Updates the details of an existing task in the task manager.
@@ -37,8 +37,10 @@ public class UpdateCommand extends Command {
     private final UpdateTaskDescriptor updateTaskDescriptor;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to update
-     * @param updateTaskDescriptor details to update the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to update
+     * @param updateTaskDescriptor
+     *            details to update the task with
      */
     public UpdateCommand(int filteredTaskListIndex, UpdateTaskDescriptor updateTaskDescriptor) {
         assert filteredTaskListIndex > 0;
@@ -75,46 +77,50 @@ public class UpdateCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createUpdatedTask(ReadOnlyTask taskToUpdate,
-                                             UpdateTaskDescriptor updateTaskDescriptor) {
+    private static Task createUpdatedTask(ReadOnlyTask taskToUpdate, UpdateTaskDescriptor updateTaskDescriptor) {
         assert taskToUpdate != null;
 
         TaskName updatedTaskName = updateTaskDescriptor.getTaskName().orElseGet(taskToUpdate::getTaskName);
         Date updatedDate = updateTaskDescriptor.getDate().orElseGet(taskToUpdate::getDate);
         StartTime updatedStartTime = updateTaskDescriptor.getStartTime().orElseGet(taskToUpdate::getStartTime);
         EndTime updatedEndTime = updateTaskDescriptor.getEndTime().orElseGet(taskToUpdate::getEndTime);
-//        UniqueCategoryList updatedCategories = updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
+        // UniqueCategoryList updatedCategories =
+        // updateTaskDescriptor.getCategories().orElseGet(taskToUpdate::getCategories);
 
-        return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime/*, updatedCategories*/);
+        return new Task(updatedTaskName, updatedDate, updatedStartTime,
+                updatedEndTime/* , updatedCategories */);
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class UpdateTaskDescriptor {
         private Optional<TaskName> taskname = Optional.empty();
         private Optional<Date> date = Optional.empty();
         private Optional<StartTime> starttime = Optional.empty();
         private Optional<EndTime> endtime = Optional.empty();
-//        private Optional<UniqueCategoryList> categories = Optional.empty();
+        // private Optional<UniqueCategoryList> categories = Optional.empty();
 
-        public UpdateTaskDescriptor() {}
+        public UpdateTaskDescriptor() {
+        }
 
         public UpdateTaskDescriptor(UpdateTaskDescriptor toCopy) {
             this.taskname = toCopy.getTaskName();
             this.date = toCopy.getDate();
             this.starttime = toCopy.getStartTime();
             this.endtime = toCopy.getEndTime();
-//            this.categories = toCopy.getCategories();
+            // this.categories = toCopy.getCategories();
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyPresent(this.taskname, this.date,
-            		                           this.starttime, this.endtime);
+            return CollectionUtil.isAnyPresent(this.taskname,
+                    this.date/*
+                              * , this.endtime, this.categories
+                              */);
         }
 
         public void setTaskName(Optional<TaskName> taskname) {
@@ -136,32 +142,29 @@ public class UpdateCommand extends Command {
         }
 
         public void setStartTime(Optional<StartTime> starttime) {
-        	assert starttime != null;
-        	this.starttime = starttime;
+            assert starttime != null;
+            this.starttime = starttime;
         }
 
         public Optional<StartTime> getStartTime() {
-        	return starttime;
+            return starttime;
         }
 
         public void setEndTime(Optional<EndTime> endtime) {
-        	assert endtime != null;
-        	this.endtime = endtime;
+            assert endtime != null;
+            this.endtime = endtime;
         }
 
         public Optional<EndTime> getEndTime() {
-        	return endtime;
+            return endtime;
         }
 
         /*
-        public void setCategories(Optional<UniqueCategoryList> categories) {
-            assert categories != null;
-            this.categories = categories;
-        }
-
-        public Optional<UniqueCategoryList> getCategories() {
-            return categories;
-        }
-*/
+         * public void setCategories(Optional<UniqueCategoryList> categories) {
+         * assert categories != null; this.categories = categories; }
+         *
+         * public Optional<UniqueCategoryList> getCategories() { return
+         * categories; }
+         */
     }
 }

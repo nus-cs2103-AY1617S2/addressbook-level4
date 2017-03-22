@@ -7,16 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.logic.commands.ChangeSaveLocationCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DeleteCommand;
-import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
-import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
+import seedu.taskmanager.logic.commands.UpdateCommand;
 
 /**
  * Parses user input.
@@ -70,6 +71,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ChangeSaveLocationCommand.COMMAND_WORD:
+            return new ChangeSaveLocationCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

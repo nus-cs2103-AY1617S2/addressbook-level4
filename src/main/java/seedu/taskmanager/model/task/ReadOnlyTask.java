@@ -1,34 +1,42 @@
 package seedu.taskmanager.model.task;
 
-import seedu.taskmanager.model.category.UniqueCategoryList;
+//import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
  * A read-only immutable interface for a Task in ProcrastiNomore.
- * Implementations should guarantee: details are present and not null, field values are validated.
+ * Implementations should guarantee: details are present and not null, field
+ * values are validated.
  */
 public interface ReadOnlyTask {
 
     TaskName getTaskName();
+
     Date getDate();
+
     StartTime getStartTime();
+
     EndTime getEndTime();
 
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
-     * changes on the returned list will not affect the task's internal categories.
+     * changes on the returned list will not affect the task's internal
+     * categories.
      */
-//    UniqueCategoryList getCategories();
+    // UniqueCategoryList getCategories();
 
     /**
-     * Returns true if both have the same state. (interfaces cannot override .equals)
+     * Returns true if both have the same state. (interfaces cannot override
+     * .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getTaskName().equals(this.getTaskName()) // state checks here onwards
-                && other.getStartTime().equals(this.getStartTime())
-                && other.getEndTime().equals(this.getEndTime())
-                && other.getDate().equals(this.getDate()));
+                        && other.getTaskName().equals(this.getTaskName()) // state
+                        // checks
+                        // here
+                        // onwards
+                        && other.getStartTime().equals(this.getStartTime())
+                        && other.getEndTime().equals(this.getEndTime()) && other.getDate().equals(this.getDate()));
     }
 
     /**
@@ -38,22 +46,19 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTaskName());
 
-        if (getDate().toString() != "EMPTY_FIELD"){
-        	builder.append(" Date: ")
-        	.append(getDate());
+        if (getDate().toString() != "EMPTY_FIELD") {
+            builder.append(" Date: ").append(getDate());
         }
 
-        if (getStartTime().toString() != "EMPTY_FIELD"){
-                builder.append(" Start Time: ")
-                .append(getStartTime());
+        if (getStartTime().toString() != "EMPTY_FIELD") {
+            builder.append(" Start Time: ").append(getStartTime());
         }
 
-        if (getEndTime().toString() != "EMPTY_FIELD"){
-                builder.append(" End Time: ")
-                .append(getEndTime());
+        if (getEndTime().toString() != "EMPTY_FIELD") {
+            builder.append(" End Time: ").append(getEndTime());
         }
-//                .append(" Categories: ");
-//        getCategories().forEach(builder::append);
+        // .append(" Categories: ");
+        // getCategories().forEach(builder::append);
         return builder.toString();
     }
 }
