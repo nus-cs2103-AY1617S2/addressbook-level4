@@ -15,6 +15,10 @@ import seedu.task.model.task.ReadOnlyTask;
  * Provides a handle to a person card in the person list panel.
  */
 public class TaskCardHandle extends GuiHandle {
+    private static final String DESC_FIELD_ID = "#description";
+    private static final String STARTING_TIMING_FIELD_ID = "#startTiming";
+    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String END_TIMING_FIELD_ID = "#endTiming";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
@@ -31,7 +35,18 @@ public class TaskCardHandle extends GuiHandle {
     protected String getTextFromLabel(String fieldId) {
         return getTextFromLabel(fieldId, node);
     }
-
+    public String getDescription() {
+        return getTextFromLabel(DESC_FIELD_ID);
+    }
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
+    }
+    public String getStartingTiming() {
+        return getTextFromLabel(STARTING_TIMING_FIELD_ID);
+    }
+    public String getEndTiming() {
+        return getTextFromLabel(END_TIMING_FIELD_ID);
+    }
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
@@ -66,9 +81,11 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask person) {
-        return getFullName().equals(person.getDescription().description)
-                && getPhone().equals(person.getPriority().value) && getEmail().equals(person.getStartTiming().value)
-                && getEmail().equals(person.getEndTiming().value) && getTags().equals(getTags(person.getTags()));
+        return getDescription().equals(person.getDescription().description)
+                && getPriority().equals("Priority: " + person.getPriority().value)
+                && getStartingTiming().equals("Start Timing: " + person.getStartTiming().value)
+                && getEndTiming().equals("End Timing: " + person.getEndTiming().value)
+                && getTags().equals(getTags(person.getTags()));
     }
 
     @Override
@@ -84,6 +101,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getDescription() + " " + getPriority();
     }
 }
