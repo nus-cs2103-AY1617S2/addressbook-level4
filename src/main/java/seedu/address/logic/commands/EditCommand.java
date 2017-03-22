@@ -49,7 +49,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, IllegalValueException {
+    public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -57,7 +57,12 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
+        try {
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        } catch (IllegalValueException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);

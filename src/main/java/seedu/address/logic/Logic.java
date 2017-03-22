@@ -17,7 +17,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws IllegalValueException If an error occurs in creating a task
      */
-    CommandResult execute(String commandText) throws CommandException, IllegalValueException;
+    CommandResult execute(String commandText) throws CommandException;
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
