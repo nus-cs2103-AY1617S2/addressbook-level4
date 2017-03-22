@@ -85,10 +85,10 @@ public class AddCommand extends Command {
         try {
             if (eventToAdd != null) {
                 model.addEvent(eventToAdd);
-                return new CommandResult(String.format(MESSAGE_TASK_SUCCESS, eventToAdd));
+                return new CommandResult(String.format(MESSAGE_EVENT_SUCCESS, eventToAdd));
             } else {
                 model.addTask(taskToAdd);
-                return new CommandResult(String.format(MESSAGE_EVENT_SUCCESS, taskToAdd));
+                return new CommandResult(String.format(MESSAGE_TASK_SUCCESS, taskToAdd));
             }
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

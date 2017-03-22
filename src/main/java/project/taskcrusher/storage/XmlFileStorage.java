@@ -23,7 +23,6 @@ public class XmlFileStorage {
             assert false : "Unexpected exception " + e.getMessage();
             System.out.println("JAXBException thrown");
         }
-        System.out.println("XmlFileStorage: in save data to file exiting");
     }
 
     /**

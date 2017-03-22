@@ -69,7 +69,6 @@ public class XmlUserInboxStorage implements UserInboxStorage {
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        logger.info("after createIfMissing");
         XmlFileStorage.saveDataToFile(file, new XmlSerializableUserInbox(userInbox));
     }
 

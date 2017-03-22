@@ -17,11 +17,13 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the active list.
  */
 public class UserInboxPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(UserInboxPanel.class);
     private static final String FXML = "UserInboxPanel.fxml";
+    //TODO: define a custom XML element that contains the header (either "Tasks" or "Events")
+    //and the listView corresponding to that header.
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -54,7 +56,7 @@ public class UserInboxPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                        //logger.fine("Selection in person list panel changed to : '" + newValue + "'");
                         raise(new PersonPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -67,6 +69,8 @@ public class UserInboxPanel extends UiPart<Region> {
         });
     }
 
+    ///////taskListViewEmptyEvent, eventListViewEmptyEvent to render the booleanProperty of visibleProperty
+    ////what if both are empty => default window? maybe like 404 not found?
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
