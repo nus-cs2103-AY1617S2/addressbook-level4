@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -257,18 +256,17 @@ public class MainWindow extends UiPart<Region> {
         return this.todoTaskListPanel;
     }
 
-/*    public TaskListPanel getTaskListPanel(TaskType type) {
+    public TaskListPanel getTaskListPanel(TaskType type) {
         switch(type) {
         case DEADLINE:
             return getDeadlineTaskListPanel();
         case EVENT:
             return getEventTaskListPanel();
         case TODO:
-            return getTodoTaskListPanel();
         default:
             return getTodoTaskListPanel();
         }
-    }*/
+    }
 
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
@@ -282,25 +280,16 @@ public class MainWindow extends UiPart<Region> {
         descriptionText.setWrappingWidth(MIN_WIDTH);
         content.setHeading(nameText);
         content.setBody(descriptionText);
-        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        dialog.show();
-        setCloseDialogHandler();
-    }
-
-    private void setCloseDialogHandler() {
-        EventHandler<KeyEvent> eventHandler = new EventHandler<KeyEvent>() {
+        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
+            @Override
             public void handle(KeyEvent ke) {
-                if (ke.getCode() == KeyCode.ENTER) {
-                    // Ignore initial enter event from command,
-                    // instead handle empty string commands in parser.
-                    return;
-                }
                 ke.consume();
                 closeDialog();
-                primaryStage.getScene().setOnKeyReleased(null);
+                commandBox.removeKeyListeners();
             }
-        };
-        primaryStage.getScene().setOnKeyReleased(eventHandler);
+        });
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
     }
 
     void closeDialog() {

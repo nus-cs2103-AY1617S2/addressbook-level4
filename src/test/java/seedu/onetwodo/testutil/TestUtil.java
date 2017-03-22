@@ -319,7 +319,7 @@ public class TestUtil {
      * @param type
      * @return Filtered ReadOnlyTask[] by task type
      */
-    public static ReadOnlyTask[] getTasksByTaskType(ReadOnlyTask[] tasks, TaskType type) {
+    public static TestTask[] getTasksByTaskType(ReadOnlyTask[] tasks, TaskType type) {
         return Arrays.stream(tasks)
                 .filter(task -> task.getTaskType() == type)
                 .toArray(TestTask[]::new);
@@ -367,6 +367,14 @@ public class TestUtil {
         }).collect(Collectors.toList());
 
         return collect.toArray(new Tag[split.length]);
+    }
+
+    public static TaskType getTaskTypeFromIndex(String filteredIndex) {
+        return TaskType.getTaskTypeFromChar(filteredIndex.charAt(0));
+    }
+
+    public static int getFilteredIndexInt(String filteredIndex) {
+        return Integer.parseInt(filteredIndex.substring(1)) - 1;
     }
 
 }

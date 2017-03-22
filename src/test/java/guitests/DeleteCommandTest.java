@@ -1,18 +1,17 @@
 package guitests;
 
+import static org.junit.Assert.assertTrue;
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-//import org.controlsfx.control.PropertySheet.Item;
-
-//import static org.junit.Assert.assertTrue;
-//import static seedu.onetwodo.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
+import static seedu.onetwodo.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
-//import seedu.onetwodo.testutil.TestTask;
-//import seedu.onetwodo.testutil.TestUtil;
+import seedu.onetwodo.model.task.ReadOnlyTask;
+import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TestTask;
+import seedu.onetwodo.testutil.TestUtil;
 
 public class DeleteCommandTest extends ToDoListGuiTest {
 
@@ -27,17 +26,25 @@ public class DeleteCommandTest extends ToDoListGuiTest {
                     3) Delete the item that was just deleted
 */
 
-        //TestTask[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = td.getTypicalTasks();
 
         // invalid index
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e99999");
         assertResultMessage("The task index provided is invalid");
 
+        // invalid command
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e-1");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
 
-        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " e0");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        // delete first event
+        assertDeleteSuccess(TaskType.EVENT, 3, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 3);
+
+        assertDeleteSuccess(TaskType.EVENT, 2, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 2);
+
+        assertDeleteSuccess(TaskType.EVENT, 1, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 1);
 
         // empty list
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
@@ -50,20 +57,18 @@ public class DeleteCommandTest extends ToDoListGuiTest {
      * @param targetIndexOneIndexed e.g. index 1 to delete the first task in the list,
      * @param currentList A copy of the current list of tasks (before deletion).
      */
-/*    private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
-         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
-         commandBox.runCommand("delete " + targetIndexOneIndexed);
+    private void assertDeleteSuccess(TaskType taskType, int targetIndexOneIndexed, final TestTask[] currentList) {
+        TestTask[] filteredTasks = TestUtil.getTasksByTaskType(currentList, taskType);
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(filteredTasks, targetIndexOneIndexed);
 
-         //confirm the list now contains all previous tasks except the deleted task
-         assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        commandBox.runCommand("delete " + taskType.getPrefix() + targetIndexOneIndexed);
 
-         //confirm the result message is correct
-         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
-s
-         TODO: Make a method that checks if delete is success.
-         Suggestion: 1) check if deleted item is really gone/ result list is as expected
-                     2) check if delete result message is what we expected.
+        //confirm the list now contains all previous tasks except the deleted task
+        assertTrue(taskListPanel.isListMatching(taskType, expectedRemainder));
+
+        //confirm the result message is correct
+        ReadOnlyTask taskToDelete = filteredTasks[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
-*/
+
 }

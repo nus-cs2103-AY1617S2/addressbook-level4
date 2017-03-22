@@ -10,6 +10,7 @@ import org.junit.Test;
 import seedu.onetwodo.logic.commands.SelectCommand;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TestUtil;
 
 public class SelectCommandTest extends ToDoListGuiTest {
 
@@ -53,13 +54,13 @@ public class SelectCommandTest extends ToDoListGuiTest {
         assertTaskSelected(prefixIndex);
     }
 
-    private void assertTaskSelected(String prefixIndex) {
-        TaskType taskType = TaskType.getTaskTypeFromChar(prefixIndex.charAt(0));
-        int index = Integer.parseInt(prefixIndex.substring(1));
+    private void assertTaskSelected(String filteredIndex) {
+        TaskType taskType = TestUtil.getTaskTypeFromIndex(filteredIndex);
+        int index = TestUtil.getFilteredIndexInt(filteredIndex);
 
         assertEquals(taskListPanel.getSelectedTasks(taskType).size(), 1);
         ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks(taskType).get(0);
-        assertEquals(taskListPanel.getTask(taskType, index - 1), selectedTask);
+        assertEquals(taskListPanel.getTask(taskType, index), selectedTask);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
