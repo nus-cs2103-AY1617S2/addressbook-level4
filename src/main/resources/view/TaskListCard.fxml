@@ -30,7 +30,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox spacing="10.0">
-                           <AnchorPane fx:id="priorityColor" prefWidth="10.0" styleClass="anchor-pane" />
+                           <AnchorPane fx:id="priorityColor" minWidth="10.0" prefWidth="10.0" styleClass="anchor-pane" />
                                     <Label fx:id="id" alignment="TOP_LEFT" minWidth="30.0" styleClass="cell_big_label" text="\$id" textAlignment="RIGHT" wrapText="true">
                               <HBox.margin>
                                  <Insets left="30.0" />
