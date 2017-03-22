@@ -1,8 +1,8 @@
 package seedu.taskmanager.testutil;
 
 import seedu.taskmanager.model.category.UniqueCategoryList;
+// import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
@@ -15,7 +15,6 @@ public class TestTask implements ReadOnlyTask {
 
     private TaskName taskname;
     private Date date;
-    private Deadline deadline;
     private StartTime starttime;
     private EndTime endtime;
     private UniqueCategoryList categories;
@@ -30,7 +29,6 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.taskname = taskToCopy.getTaskName();
         this.date = taskToCopy.getDate();
-        this.deadline = taskToCopy.getDeadline();
         this.starttime = taskToCopy.getStartTime();
         this.endtime = taskToCopy.getEndTime();
 //        this.categories = taskToCopy.getCategories();
@@ -44,13 +42,9 @@ public class TestTask implements ReadOnlyTask {
         this.date = date;
     }
 
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
-    }
-
     public void setStartTime(StartTime starttime) {
         this.starttime = starttime;
-    } 
+    }
 
     public void setEndTime(EndTime endtime) {
     	this.endtime = endtime;
@@ -71,25 +65,20 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Deadline getDeadline() {
-        return deadline;
-    }
-
-    @Override
     public StartTime getStartTime() {
         return starttime;
-    } 
+    }
 
     @Override
     public EndTime getEndTime() {
     	return endtime;
     }
-
+/*
     @Override
     public UniqueCategoryList getCategories() {
         return categories;
     }
-
+*/
     @Override
     public String toString() {
         return getAsText();
@@ -99,7 +88,6 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTaskName().fullTaskName + " ");
         sb.append("ON" + this.getDate().value + " ");
-        sb.append("BY" + this.getDeadline().value + " ");
         sb.append("FROM" + this.getStartTime().value + " ");
         sb.append("TO" + this.getEndTime().value + " ");
 //        this.getCategories().asObservableList().stream().forEach(s -> sb.append("t/" + s.categoryTaskName + " "));

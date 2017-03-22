@@ -33,10 +33,9 @@ import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-// import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.storage.XmlSerializableTaskManager;
@@ -55,7 +54,7 @@ public class TestUtil {
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
-    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
+//    public static final Category[] SAMPLE_CATEGORY_DATA = getSampleCategoryData();
 
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
@@ -64,27 +63,28 @@ public class TestUtil {
             if (actualException.getClass().isAssignableFrom(expected)) {
                 return;
             }
-            String message = String.format("Expected thrown: %s, actual: %s", expected.getTaskName(),
-                    actualException.getClass().getTaskName());
+            String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
+                    actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
         throw new AssertionFailedError(
-                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getTaskName()));
+                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new TaskName("Ali Muster"), new Date("9482424"), new Deadline("hans@google.com"), new StartTime("4th street"), new UniqueCategoryList()),
-                new Task(new TaskName("Boris Mueller"), new Date("87249245"), new Deadline("ruth@google.com"), new StartTime("81th street"), new UniqueCategoryList()),
-                new Task(new TaskName("Carl Kurz"), new Date("95352563"), new Deadline("heinz@yahoo.com"), new StartTime("wall street"), new UniqueCategoryList()),
-                new Task(new TaskName("Daniel Meier"), new Date("87652533"), new Deadline("cornelia@google.com"), new StartTime("10th street"), new UniqueCategoryList()),
-                new Task(new TaskName("Elle Meyer"), new Date("9482224"), new Deadline("werner@gmail.com"), new StartTime("michegan ave"), new UniqueCategoryList()),
-                new Task(new TaskName("Fiona Kunz"), new Date("9482427"), new Deadline("lydia@gmail.com"), new StartTime("little tokyo"), new UniqueCategoryList()),
-                new Task(new TaskName("George Best"), new Date("9482442"), new Deadline("anna@google.com"), new StartTime("4th street"), new UniqueCategoryList()),
-                new Task(new TaskName("Hoon Meier"), new Date("8482424"), new Deadline("stefan@mail.com"), new StartTime("little india"), new UniqueCategoryList()),
-                new Task(new TaskName("Ida Mueller"), new Date("8482131"), new Deadline("hans@google.com"), new StartTime("chicago ave"), new UniqueCategoryList())
+                new Task(new TaskName("Eat breakfast with mom"), new Date("03/03/17"), new StartTime("1000"), new EndTime("1100")),
+                new Task(new TaskName("Eat lunch at techno"), new Date("04/03/17"), new StartTime(""), new EndTime("1400")),
+                new Task(new TaskName("Eat dinner with my only 2 friends"), new Date("09/03/17"), new StartTime("1800"), new EndTime("2000")),
+                new Task(new TaskName("Start on the CS2103 project"), new Date(""), new StartTime("03/03/17"), new EndTime("03/04/17")),
+                new Task(new TaskName("Give up on CS2103 project"), new Date("04/04/17"), new StartTime("1400"), new EndTime("1500")),
+                new Task(new TaskName("Try again for CS2103"), new Date(""), new StartTime("05/04/17"), new EndTime("05/05/17")),
+                new Task(new TaskName("Endless cycles of regret"), new Date(""), new StartTime(""), new EndTime("")),
+                new Task(new TaskName("Time to relax a little"), new Date("06/05/17"), new StartTime("1400"), new EndTime("1800")),
+                new Task(new TaskName("Chiong all day everyday"), new Date(""), new StartTime(""), new EndTime("")),
+                new Task(new TaskName("Get it done"), new Date("06/05/17"), new StartTime(""), new EndTime("1700"))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -94,8 +94,7 @@ public class TestUtil {
         }
     }
 
-
-    private static Category[] getSampleCategoryData() {
+/*    private static Category[] getSampleCategoryData() {
         try {
             return new Category[]{
                 new Category("relatives"),
@@ -106,7 +105,7 @@ public class TestUtil {
             return null;
             //not possible
         }
-    }
+    } */
 
     public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);
