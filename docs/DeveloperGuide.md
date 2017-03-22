@@ -148,11 +148,11 @@ The sections below give more details of each component.
 
 Author: Alice Bee
 
-<img src="images/UIClassDiagram1.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+<img src="images/UiClassDiagram1.png" width="800"><br>
+_Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/
-/ui/Ui.java)
+/ui/U.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
