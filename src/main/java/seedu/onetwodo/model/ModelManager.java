@@ -1,6 +1,7 @@
 package seedu.onetwodo.model;
 
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -24,9 +25,12 @@ import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ToDoList toDoList;
+    private ToDoList toDoList;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private DoneStatus doneStatus;
+
+    private Stack<ToDoList> previousToDoLists;
+    private Stack<ToDoList> nextToDoLists;
 
     /**
      * Initializes a ModelManager with the given toDoList and userPrefs.
@@ -40,6 +44,9 @@ public class ModelManager extends ComponentManager implements Model {
         this.toDoList = new ToDoList(toDoList);
         this.filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
         this.doneStatus = DoneStatus.UNDONE;
+
+        this.previousToDoLists = new Stack<ToDoList>();
+        this.nextToDoLists = new Stack<ToDoList>();
     }
 
     public ModelManager() {
@@ -79,6 +86,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        //make a copy of current toDoList
+        ToDoList copiedCurrentToDoList = new ToDoList(toDoList);
+        //push copied toDoList into previousToDoLists
+        previousToDoLists.push(copiedCurrentToDoList);
+
         toDoList.addTask(task);
         setDoneStatus(DoneStatus.UNDONE);
         updateFilteredUndoneTaskList();
@@ -93,6 +105,15 @@ public class ModelManager extends ComponentManager implements Model {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.updateTask(toDoListIndex, editedTask);
         indicateToDoListChanged();
+    }
+
+    @Override
+    public void undo () {
+        if (!previousToDoLists.isEmpty()) {
+            toDoList = previousToDoLists.pop();
+            setDoneStatus(DoneStatus.UNDONE);
+            updateFilteredUndoneTaskList();
+        }
     }
 
     //=========== Filtered Task List Accessors =============================================================
