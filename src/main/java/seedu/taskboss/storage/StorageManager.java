@@ -1,7 +1,6 @@
 package seedu.taskboss.storage;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -59,10 +58,10 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ TaskBoss methods ==============================
 
     @Override
-    public void setTaskBossFilePath(Path filepath) throws IOException {
-        config.setTaskBossFilePath(filepath.toString());
+    public void setTaskBossFilePath(String filepath) throws IOException {
+        config.setTaskBossFilePath(filepath);
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-        raise(new TaskBossStorageChangedEvent(filepath.toString()));
+        raise(new TaskBossStorageChangedEvent(filepath));
     }
 
     @Override
