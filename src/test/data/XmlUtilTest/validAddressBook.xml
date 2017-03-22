@@ -2,29 +2,47 @@
 <tasklist>
     <tasks>
         <description>Hans Muster</description>
+        <complete>false</complete>
+        <id>1</id>
     </tasks>
     <tasks>
         <description>Ruth Mueller</description>
+        <complete>false</complete>
+        <id>2</id>
     </tasks>
     <tasks>
         <description>Heinz Kurz</description>
+        <complete>false</complete>
+        <id>3</id>
     </tasks>
     <tasks>
         <description>Cornelia Meier</description>
+        <complete>false</complete>
+        <id>4</id>
     </tasks>
     <tasks>
         <description>Werner Meyer</description>
+        <complete>false</complete>
+        <id>5</id>
     </tasks>
     <tasks>
         <description>Lydia Kunz</description>
+        <complete>false</complete>
+        <id>6</id>
     </tasks>
     <tasks>
         <description>Anna Best</description>
+        <complete>false</complete>
+        <id>7</id>
     </tasks>
     <tasks>
         <description>Stefan Meier</description>
+        <complete>false</complete>
+        <id>8</id>
     </tasks>
     <tasks>
         <description>Martin Mueller</description>
+        <complete>false</complete>
+        <id>9</id>
     </tasks>
 </tasklist>

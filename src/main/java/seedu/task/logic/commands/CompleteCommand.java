@@ -12,6 +12,7 @@ import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -71,8 +72,9 @@ public class CompleteCommand extends Command {
         Duration duration = taskToComplete.getDuration();
         DueDate dueDate = taskToComplete.getDueDate();
         Complete complete = new Complete(true);
+        TaskId id = taskToComplete.getTaskId();
 
-        Task completedTask = new Task(description, dueDate, duration, tags, complete);
+        Task completedTask = new Task(description, dueDate, duration, tags, complete, id);
         if (taskToComplete.getComplete().getCompletion() == true) {
             throw new NoChangeException(TASK_ALREADY_COMPLETED);
         }

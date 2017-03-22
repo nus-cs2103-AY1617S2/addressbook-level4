@@ -26,7 +26,14 @@ public class Task implements ReadOnlyTask {
      * @param duration may be null
      * @param tags must not be null
      */
-    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags, Complete complete, TaskId id) {
+    public Task(
+            Description description,
+            DueDate dueDate,
+            Duration duration,
+            UniqueTagList tags,
+            Complete complete,
+            TaskId id
+    ) {
         assert !CollectionUtil.isAnyNull(description, tags, complete, id);
         this.description = description;
         this.dueDate = dueDate;

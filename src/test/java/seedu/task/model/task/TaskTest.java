@@ -16,6 +16,7 @@ public class TaskTest {
     private static DueDate dueDate;
     private static Duration duration;
     private static UniqueTagList tags;
+    private static Complete complete;
     private static TaskId id;
 
     @Before
@@ -24,13 +25,14 @@ public class TaskTest {
         dueDate = new DueDate("2017/01/01 0100");
         duration = new Duration("2017/01/01 0000", "2017/01/01 0100");
         tags = new UniqueTagList("Task");
+        complete = new Complete(false);
         id = new TaskId(100);
     }
 
     @Test
     public void equivalenceTest() throws DuplicateTagException, IllegalValueException {
-        Task task1 = new Task(description, dueDate, duration, tags, id);
-        Task task2 = new Task(description, dueDate, duration, tags, id);
+        Task task1 = new Task(description, dueDate, duration, tags, complete, id);
+        Task task2 = new Task(description, dueDate, duration, tags, complete, id);
         assertTrue(task1.equals(task2));
 
         task2.setDescription(new Description("Other"));
@@ -55,26 +57,27 @@ public class TaskTest {
 
     @Test(expected = AssertionError.class)
     public void setTagsTest() {
-        Task task = new Task(description, dueDate, duration, tags, id);
+        Task task = new Task(description, dueDate, duration, tags, complete, id);
         task.setTags(null);
     }
 
     @Test(expected = AssertionError.class)
     public void setDescription() {
-        Task task = new Task(description, dueDate, duration, tags, id);
+        Task task = new Task(description, dueDate, duration, tags, complete, id);
         task.setDescription(null);
     }
 
     @Test
     public void resetDataTest() throws DuplicateTagException, IllegalValueException {
-        Task replacement = new Task(description, dueDate, duration, tags, id);
+        Task replacement = new Task(description, dueDate, duration, tags, complete, id);
         Task task = new Task(
                 new Description("Other"),
                 new DueDate("2000/01/01 2300"),
                 new Duration("2000/01/01 0000", "2000/01/01 0100"),
                 new UniqueTagList("Other"),
+                new Complete(false),
                 new TaskId(101)
-                );
+        );
         assertFalse(task.equals(replacement));
         task.resetData(replacement);
         assertTrue(task.equals(replacement));

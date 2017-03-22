@@ -13,6 +13,7 @@ import seedu.task.logic.history.TaskMemento;
 import seedu.task.logic.history.TaskMementos;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
@@ -32,6 +33,7 @@ public class TaskMementosTest {
                     new DueDate("2017/01/01 0100"),
                     new Duration("2017/01/01 0000", "2017/01/01 0100"),
                     new UniqueTagList("Task1"),
+                    new Complete(false),
                     new TaskId(101)
                 ),
                 new Task(
@@ -39,6 +41,7 @@ public class TaskMementosTest {
                     new DueDate("2017/01/01 0100"),
                     new Duration("2017/01/01 0000", "2017/01/01 0100"),
                     new UniqueTagList("Task"),
+                    new Complete(false),
                     new TaskId(101)
                 )
         );
@@ -48,6 +51,7 @@ public class TaskMementosTest {
                     new DueDate("2017/01/01 0100"),
                     new Duration("2015/01/01 1200", "2016/02/01 0100"),
                     new UniqueTagList("Task2"),
+                    new Complete(false),
                     new TaskId(102)
                 ),
                 new Task(
@@ -55,6 +59,7 @@ public class TaskMementosTest {
                     new DueDate("2017/01/01 0100"),
                     new Duration("2017/01/01 0000", "2017/01/01 0100"),
                     new UniqueTagList("Task"),
+                    new Complete(false),
                     new TaskId(102)
                 )
         );
@@ -64,6 +69,7 @@ public class TaskMementosTest {
                     new DueDate("2017/02/22 2300"),
                     new Duration("2017/02/19 1243", "2017/05/25 1245"),
                     new UniqueTagList("Task3"),
+                    new Complete(false),
                     new TaskId(103)
                 ),
                 new Task(
@@ -71,6 +77,7 @@ public class TaskMementosTest {
                     new DueDate("2017/01/01 0100"),
                     new Duration("2017/01/01 0000", "2017/01/01 0100"),
                     new UniqueTagList("Task"),
+                    new Complete(false),
                     new TaskId(103)
                 )
         );
