@@ -37,6 +37,7 @@ import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
+import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 import seedu.doit.storage.XmlSerializableTaskManager;
@@ -384,7 +385,7 @@ public class TestUtil {
     }
 
     public static void sortTasks(TestTask[] tasks) {
-        Arrays.sort(tasks);
+        Arrays.sort(tasks, new TaskNameComparator());
     }
 
     public static Tag[] getTagList(String tags) {
