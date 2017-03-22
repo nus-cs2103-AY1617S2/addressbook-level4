@@ -21,7 +21,7 @@ public class TypicalTestTasks {
             eatdinner = new TaskBuilder().withTaskName("Eat dinner with my only 2 friends").withDate("09/03/17")
                     .withStartTime("1800").withEndTime("2000").build();                                 // event
             doCS = new TaskBuilder().withTaskName("Start on the CS2103 project").withDate("EMPTY_FIELD")
-                    .withStartTime("03/03/17").withEndTime("03/04/17").build();                         // event
+                    .withStartTime("03/03/17 1400").withEndTime("03/04/17 1800").build();               // event
             giveupCS = new TaskBuilder().withTaskName("Give up on CS2103 project").withDate("04/04/17")
                     .withStartTime("1400").withEndTime("1500").build();                                 // event
             tryagainCS = new TaskBuilder().withTaskName("Try again for CS2103").withDate("EMPTY_FIELD")

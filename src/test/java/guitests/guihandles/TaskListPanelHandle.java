@@ -18,7 +18,7 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.testutil.TestUtil;
 
 /**
- * Provides a handle for the panel containing the person list.
+ * Provides a handle for the panel containing the task list.
  */
 public class TaskListPanelHandle extends GuiHandle {
 
@@ -49,9 +49,9 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the person details correctly and in correct order.
+     * Returns true if the list is showing the task details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
-     * @param persons A list of person in the correct order.
+     * @param persons A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {

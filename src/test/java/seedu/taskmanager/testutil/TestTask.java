@@ -20,7 +20,7 @@ public class TestTask implements ReadOnlyTask {
     private UniqueCategoryList categories;
 
     public TestTask() {
-        categories = new UniqueCategoryList();
+//        categories = new UniqueCategoryList();
     }
 
     /**

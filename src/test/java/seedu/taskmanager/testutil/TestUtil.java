@@ -81,7 +81,7 @@ public class TestUtil {
                 new Task(new TaskName("Start on the CS2103 project"), new Date("EMPTY_FIELD"), new StartTime("03/03/17"), new EndTime("03/04/17")),
                 new Task(new TaskName("Give up on CS2103 project"), new Date("04/04/17"), new StartTime("1400"), new EndTime("1500")),
                 new Task(new TaskName("Try again for CS2103"), new Date("EMPTY_FIELD"), new StartTime("05/04/17 1400"), new EndTime("05/05/17 1500")),
-                new Task(new TaskName("Endless cycles of regret"), new Date(""), new StartTime("EMPTY_FIELD"), new EndTime("")),
+                new Task(new TaskName("Endless cycles of regret"), new Date("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
                 new Task(new TaskName("Time to relax a little"), new Date("06/05/17"), new StartTime("1400"), new EndTime("1800")),
                 new Task(new TaskName("Chiong all day everyday"), new Date("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"), new EndTime("EMPTY_FIELD")),
                 new Task(new TaskName("Get it done"), new Date("06/05/17"), new StartTime("EMPTY_FIELD"), new EndTime("1700"))

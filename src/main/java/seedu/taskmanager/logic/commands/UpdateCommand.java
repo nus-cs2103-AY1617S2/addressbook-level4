@@ -31,7 +31,7 @@ public class UpdateCommand extends Command {
 
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     private final int filteredTaskListIndex;
     private final UpdateTaskDescriptor updateTaskDescriptor;

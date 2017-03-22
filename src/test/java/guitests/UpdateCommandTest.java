@@ -29,7 +29,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         String detailsToUpdate = "take a snack break ON thursday 1500 TO 1600";
         int taskManagerIndex = 1;
 
-        updatedTask = new TaskBuilder(updatedTask).withTaskName("take a snack break").withDate("thursday")
+        updatedTask = new TaskBuilder().withTaskName("take a snack break").withDate("thursday")
                .withStartTime("1500").withEndTime("1600").build();//.withCategories("husband").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
@@ -97,10 +97,10 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 FROM 1200hrs");
+        commandBox.runCommand("UPDATE 1 FROM 1200hrs TO 1400");
         assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 TO 1300hrs");
+        commandBox.runCommand("UPDATE 1 FROM 1200 TO 1300hrs");
         assertResultMessage(EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
 
 //        commandBox.runCommand("UPDATE 1 t/*&");
@@ -109,7 +109,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_duplicateTask_failure() {
-        commandBox.runCommand("UPDATE 3 Eat lunch @ techno BY 04/03/17 1400");
+        commandBox.runCommand("UPDATE 3 Eat lunch at techno BY 04/03/17 1400");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
 
