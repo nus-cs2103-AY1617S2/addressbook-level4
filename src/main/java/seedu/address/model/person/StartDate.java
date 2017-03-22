@@ -1,67 +1,38 @@
 package seedu.address.model.person;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 
 
 /**
- * Represents an Event's StartDate in WhatsLeft.
+ * Represents an event's start date in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidStartDate(String)}
  */
 public class StartDate {
+	
+	public static final String MESSAGE_STARTDATE_CONSTRAINTS =
+            "Event start date should be in YYYY-MM-DD format e.g. 2010-12-05";
 
-    public static final String MESSAGE_STARTDATE_CONSTRAINTS =
-            "Event StartDate can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
-
-    /*
-     * must be in digits only
-     *
-     */
-    public static final String STARTDATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
-
-    public final String value;
+    public final LocalDate value;
 
     /**
-     * Validates given StartDate.
+     * Validates given start date.
      *
-     * @throws IllegalValueException if given StartDate string is invalid.
+     * @throws IllegalValueException if given start date is invalid.
      */
-    public StartDate(String startdate) throws IllegalValueException {
-        if (startdate == null) {
-            this.value = null;
-        } else {
-            if (!isValidStartDate(startdate)) {
-                throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
-            }
-            this.value = startdate;
+    public StartDate(String startDateArg) throws IllegalValueException {
+        try {
+        	this.value = StringUtil.parseStringToDate(startDateArg);
+        } catch (IllegalValueException illegalValueException) {
+        	throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Returns true if a given string is a valid event StartDate.
-     */
-    public static boolean isValidStartDate(String test) {
-        if (test == null) {
-            return true;
-        }
-        Pattern pattern = Pattern.compile(STARTDATE_VALIDATION_REGEX);
-        Matcher matchers = pattern.matcher(test);
-        if (test.matches(STARTDATE_VALIDATION_REGEX)) {
-            matchers.matches();
-            String day = matchers.group(1);
-            String month = matchers.group(2);
-            boolean daytrue = Integer.parseInt(day) < 32;
-            boolean monthtrue = (Integer.parseInt(month) < 13) && (Integer.parseInt(month) > 0);
-            return daytrue && monthtrue;
-        }
-        return false;
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
