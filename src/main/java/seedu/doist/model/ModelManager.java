@@ -1,6 +1,7 @@
 package seedu.doist.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -8,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.doist.commons.core.ComponentManager;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.core.UnmodifiableObservableList;
+import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
 import seedu.doist.commons.util.History;
@@ -31,27 +33,74 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
+
     private final History<TodoList> todoListHistory = new History<TodoList>();
+    private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList todoList, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(todoList, userPrefs);
+        assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs);
 
-        logger.fine("Initializing with To-do List: " + todoList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with To-do List: " + todoList + " aliasListMap: " + aliasListMap
+                + " and user prefs " + userPrefs);
 
         this.todoList = new TodoList(todoList);
+        this.aliasListMap = new AliasListMap(aliasListMap);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
         saveCurrentToHistory();
     }
 
     public ModelManager() {
-        this(new TodoList(), new UserPrefs());
+        this(new TodoList(), new AliasListMap(), new UserPrefs());
     }
+
+
+    //=========== AliasListMap =============================================================
+    /** Raises an event to indicate the alias list model has changed */
+
+    @Override
+    public ReadOnlyAliasListMap getAliasListMap() {
+        return aliasListMap;
+    }
+
+    @Override
+    public void setAlias(String alias, String commandWord) {
+        aliasListMap.setAlias(alias, commandWord);
+        indicateAliasListMapChanged();
+    }
+
+    @Override
+    public List<String> getAliasList(String defaultCommandWord) {
+        return aliasListMap.getAliasList(defaultCommandWord);
+    }
+
+    @Override
+    public List<String> getValidCommandList(String defaultCommandWord) {
+        List<String> list = new ArrayList<String>(aliasListMap.getAliasList(defaultCommandWord));
+        list.add(defaultCommandWord);
+        return list;
+    }
+
+    @Override
+    public Set<String> getDefaultCommandWordSet() {
+        return aliasListMap.getDefaultCommandWordSet();
+    }
+
+    @Override
+    public void resetToDefaultCommandWords() {
+        aliasListMap.setDefaultCommandWords();
+    }
+
+    private void indicateAliasListMapChanged() {
+        raise(new AliasListMapChangedEvent(aliasListMap));
+    }
+
+    //=========== TodoList =============================================================
 
     @Override
     public void resetData(ReadOnlyTodoList newData) {
@@ -98,10 +147,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        todoList.addTask(task);
+    public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        int index = todoList.addTask(task);
         updateFilteredListToShowAll();
         indicateTodoListChanged();
+        return index;
     }
 
     @Override

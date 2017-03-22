@@ -16,8 +16,4 @@ public class ClearCommand extends Command {
         model.resetData(new TodoList());
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
-
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
-    }
 }

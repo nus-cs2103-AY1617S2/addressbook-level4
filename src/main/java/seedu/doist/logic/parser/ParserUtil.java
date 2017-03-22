@@ -49,7 +49,7 @@ public class ParserUtil {
      */
     public static List<Optional<Integer>> parseIndices(String command) {
         ArrayList<Optional<Integer>> indices = new ArrayList<Optional<Integer>>();
-        String[] commandStringComponents = command.trim().split(" ");
+        String[] commandStringComponents = command.trim().split(" +");
         for (String component : commandStringComponents) {
             indices.add(parseIndex(component));
         }

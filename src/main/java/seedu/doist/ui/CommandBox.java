@@ -55,8 +55,12 @@ public class CommandBox extends UiPart<Region> {
         if (event.getCode() == KeyCode.ENTER) {
             handleEnterKey();
         } else if (event.getCode() == KeyCode.UP) {
+            // up and down arrow key will move the cursor to the position 0
+            // use consume() method to marks this Event as consumed. This stops such further propagation.
+            event.consume();
             handleUpKey();
         } else if (event.getCode() == KeyCode.DOWN) {
+            event.consume();
             handleDownKey();
         } else {  // use control+z and control+y to execute undo and re-do operation
             try {
@@ -128,6 +132,9 @@ public class CommandBox extends UiPart<Region> {
 
     private void setCommandInput(String string) {
         commandTextField.setText(string);
+
+        // move the cursor to the end of the input string
+        commandTextField.positionCaret(string.length());
     }
 
     /**

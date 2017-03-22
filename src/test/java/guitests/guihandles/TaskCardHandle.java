@@ -20,7 +20,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String START_TIME_FIELD_ID = "#startTime";
     private static final String END_TIME_FIELD_ID = "#endTime";
     private static final String TAGS_FIELD_ID = "#tags";
-    private static final String FINISH_STATUS_FIELD_ID = "#isFinished";
+    private static final String FINISH_STATUS_FIELD_ID = "#checkbox";
 
     private Node node;
 
@@ -41,8 +41,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
-    private String getFinishStatus() {
-        return getTextFromLabel(FINISH_STATUS_FIELD_ID);
+    private boolean getFinishStatus() {
+        return getIsSelectedFromCheckbox(FINISH_STATUS_FIELD_ID, node);
     }
 
     private String getStartTime() {
@@ -80,7 +80,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSamePerson(ReadOnlyTask person) {
         return getDesc().equals(person.getDescription().desc)
                 && getPriority().equals(person.getPriority().toString())
-                && getFinishStatus().equals("finished: " + person.getFinishedStatus().toString())
+                && getFinishStatus() == person.getFinishedStatus().getIsFinished()
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -92,7 +92,7 @@ public class TaskCardHandle extends GuiHandle {
                     && getStartTime().equals(handle.getStartTime())
                     && getEndTime().equals(handle.getEndTime())
                     && getPriority().equals(handle.getPriority())
-                    && getFinishStatus().equals("finished: " + handle.getFinishStatus())
+                    && getFinishStatus() == handle.getFinishStatus()
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);

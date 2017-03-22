@@ -33,8 +33,8 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    //private BrowserPanel browserPanel;
+    private TaskListPanel personListPanel;
     private Config config;
 
     @FXML
@@ -55,6 +55,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
+    private String gradientThemeUrl = getClass().getResource("/view/GradientTheme.css").toExternalForm();
+    private String darkThemeUrl = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -70,6 +73,10 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+
+        if (!scene.getStylesheets().contains(gradientThemeUrl)) {
+            scene.getStylesheets().add(gradientThemeUrl);
+        }
 
         setAccelerators();
     }
@@ -113,8 +120,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     protected void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+       // browserPanel = new BrowserPanel(browserPlaceholder);
+        personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -195,16 +202,34 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
+    @FXML
+    private void handleDarkTheme() {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().remove(gradientThemeUrl);
+        if (!scene.getStylesheets().contains(darkThemeUrl)) {
+            scene.getStylesheets().add(darkThemeUrl);
+        }
+    }
+
+    @FXML
+    private void handleGradientTheme() {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().remove(gradientThemeUrl);
+        if (!scene.getStylesheets().contains(gradientThemeUrl)) {
+            scene.getStylesheets().add(gradientThemeUrl);
+        }
+    }
+
+    public TaskListPanel getPersonListPanel() {
         return this.personListPanel;
     }
 
     protected void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadTaskPage(person);
+      //  browserPanel.loadTaskPage(person);
     }
 
     protected void releaseResources() {
-        browserPanel.freeResources();
+      //  browserPanel.freeResources();
     }
 
 }

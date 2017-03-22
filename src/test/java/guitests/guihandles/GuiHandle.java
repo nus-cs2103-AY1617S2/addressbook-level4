@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import guitests.GuiRobot;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -72,6 +73,10 @@ public class GuiHandle {
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
+    }
+
+    protected boolean getIsSelectedFromCheckbox(String fieldId, Node parentNode) {
+        return ((CheckBox) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).isSelected();
     }
 
     public void focusOnSelf() {
