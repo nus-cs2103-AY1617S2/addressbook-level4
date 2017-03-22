@@ -34,7 +34,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
    * **`sort`**` priority` : Jim wants to see the most urgent tasks at the top of his list.
    * **`mark`**` 1 2` : Jim realises he has completed the 1st and 2nd task so he marks them as completed.
    * **`delete`**` 3` : Jim realises he does not have to complete the 3rd task so he deletes it from his current list.
-   * **`find`**` laundry` : Jim gets a call from his mother that the laundry must be completed by 3pm.
+   * **`find`**` laundry` : Jim gets a call from his mother that the laundry must be completed by 3pm so he searches for the task.
    * **`edit`**` 1 p/hi` : Jim updates the priority of the found laundry task to high.
    * **`list`** : Jim wants to get back to the overview of his list of tasks.
    * **`exit`** : Jim is done for the day so he decides to exit the application!
