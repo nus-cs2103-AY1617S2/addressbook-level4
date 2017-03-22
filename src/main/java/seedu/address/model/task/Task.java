@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.task.ClockTime;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -56,7 +55,7 @@ public class Task implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
-    
+
     //@@author A0143873Y
     public void setClockTime(ClockTime clockTime) {
         assert clockTime != null;

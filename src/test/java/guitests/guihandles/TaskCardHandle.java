@@ -18,7 +18,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String TIME_FIELD_ID = "#time";
-    private static final String CLOCKTIME_FIELD_ID = "#email";
+    private static final String CLOCKTIME_FIELD_ID = "#clockTime";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -75,6 +75,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getTime().equals(task.getTime().value)
+                && getClockTime().equals(task.getClockTime().value)
                 && getTags().equals(getTags(task.getTags()));
     }
 

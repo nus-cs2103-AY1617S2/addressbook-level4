@@ -12,7 +12,7 @@ public class ClockTime {
     //private final Logger logger = LogsCenter.getLogger(ClockTime.class);
 
     public static final String MESSAGE_CLOCKTIME_CONSTRAINTS =
-            "Time of task should be 2 alphanumeric/period strings separated by '@'";
+            "Clock time of task should be 24-hour form, eg: 23:59";
     public static final String CLOCKTIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
 
     public final String value;
@@ -23,7 +23,7 @@ public class ClockTime {
      * @throws IllegalValueException if given clockTime address string is invalid.
      */
     public ClockTime(String clockTime) throws IllegalValueException {
-        assert (clockTime != null);  
+        assert (clockTime != null);
         String trimmedClockTime = clockTime.trim();
         if (!isValidClockTime(trimmedClockTime)) {
             throw new IllegalValueException(MESSAGE_CLOCKTIME_CONSTRAINTS);

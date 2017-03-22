@@ -64,14 +64,14 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        
+
         /*
         logger.setLevel(Level.INFO);
         logger.info("name: " + this.name);
         logger.info("time: " + this.time);
         logger.info("clockTime: " + this.clockTime);
         */
-        
+
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
         final ClockTime clockTime = new ClockTime(this.clockTime);

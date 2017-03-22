@@ -23,7 +23,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TIME, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_TIME, PREFIX_CLOCKTIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(

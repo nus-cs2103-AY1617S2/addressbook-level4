@@ -52,7 +52,7 @@ public class TestTask implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
-    
+
     @Override
     public ClockTime getClockTime() {
         return clockTime;
