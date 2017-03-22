@@ -17,6 +17,10 @@ public class MainGuiHandle extends GuiHandle {
         return new FutureTaskListPanelHandle(guiRobot, primaryStage);
     }
 
+    public CompletedTaskListHandle getCompletedTaskList() {
+        return new CompletedTaskListHandle(guiRobot, primaryStage);
+    }
+
     public ResultDisplayHandle getResultDisplay() {
         return new ResultDisplayHandle(guiRobot, primaryStage);
     }
