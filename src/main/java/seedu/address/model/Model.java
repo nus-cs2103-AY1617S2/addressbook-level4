@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.InvalidUndoException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -37,10 +38,25 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    /** Sorts the filtered task list to show all tasks */
+    void sortList(String keyword);
+
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
+    /**
+     * Reset current data to the previous state to undo changes
+     * @throws InvalidUndoException
+     */
+    void resetToPreviousState() throws InvalidUndoException;
+
+    /**
+     * Reset current data to preceding state to rollback changes due to previous undo operation
+     * @throws InvalidUndoException
+     */
+    void resetToPrecedingState() throws InvalidUndoException;
 
 }

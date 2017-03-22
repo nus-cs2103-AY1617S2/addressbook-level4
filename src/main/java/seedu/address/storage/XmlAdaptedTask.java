@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -23,14 +23,16 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String priority;
     @XmlElement(required = true)
     private String status;
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String note;
-    @XmlElement(required = true)
-    private String deadline;
+    @XmlElement(required = false)
+    private String startTime;
+    @XmlElement(required = false)
+    private String endTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -49,10 +51,11 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
-        priority = source.getPriority().value.toString();
+        priority = source.getPriority().isPresent() ? source.getPriority().get().getValue().name() : null;
         status = source.getStatus().value;
-        note = source.getNote().value;
-        deadline = source.getDeadline().toString();
+        note = source.getNote().isPresent() ? source.getNote().get().toString() : null;
+        startTime = source.getStartTime().isPresent() ? source.getStartTime().get().toString() : null;
+        endTime = source.getEndTime().isPresent() ? source.getEndTime().get().toString() : null;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -70,11 +73,12 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Priority priority = new Priority(Priority.parseXmlString(this.priority));
+        Priority priority = (this.priority != null) ? new Priority(Priority.parseXmlString(this.priority)) : null;
         final Status status = new Status(this.status);
-        final Note note = new Note(this.note);
-        final Deadline deadline = new Deadline(this.deadline);
+        final Note note = (this.note != null) ? new Note(this.note) : null;
+        final DateTime startTime = (this.startTime != null) ? new DateTime(this.startTime) : null;
+        final DateTime endTime = (this.endTime != null) ? new DateTime(this.endTime) : null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, priority, status, note, deadline, tags);
+        return new Task(name, priority, status, note, startTime, endTime, tags);
     }
 }

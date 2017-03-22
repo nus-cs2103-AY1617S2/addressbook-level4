@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -27,12 +29,16 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    private static final boolean SHOW_INDEX_SIDE_PANEL = false;
+    private static final boolean SHOW_INDEX_MAIN_PANEL = true;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
+    private TaskListPanel sidePanel;
+
     private Config config;
 
     @FXML
@@ -43,6 +49,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane sidePanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -108,10 +117,31 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), getFilteredTasks(), SHOW_INDEX_MAIN_PANEL);
+        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), getCurrentWeekTasks(), SHOW_INDEX_SIDE_PANEL);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+    }
+
+    private ObservableList<ReadOnlyTask> getFilteredTasks() {
+        return logic.getFilteredTaskList();
+    }
+
+    private ObservableList<ReadOnlyTask> getCurrentWeekTasks() {
+        return logic.getFilteredTaskList().filtered(t -> isCurrentWeek(t));
+    }
+
+    /**
+     * Returns true if the task's deadline is in the current week.
+     *
+     * @param task
+     * @return
+     */
+    private boolean isCurrentWeek(ReadOnlyTask task) {
+        if (!task.getEndTime().isPresent()) return false;
+
+        return task.getEndTime().get().isCurrentWeek();
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -128,6 +158,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getSidePanelPlaceholder() {
+        return sidePanelPlaceholder;
     }
 
     void hide() {
@@ -191,6 +225,10 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+
+    public TaskListPanel getSidePanel() {
+        return sidePanel;
     }
 
     void releaseResources() {

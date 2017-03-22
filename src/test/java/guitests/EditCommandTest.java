@@ -20,35 +20,37 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Create a google doc p/low s/incomplete n/For our project proposal t/";
-        int addressBookIndex = 1;
+        String detailsToEdit = "Create a google doc p/low s/incomplete n/For our project proposal "
+                + "b/12/12/2017 12:00 e/12/12/2017 13:00 t/";
+        int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Create a google doc").withPriority("low")
-                .withStatus("incomplete").withNote("For our project proposal").withDeadline("12/12/2017").build();
+                .withStatus("incomplete").withNote("For our project proposal")
+                .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/cs2103";
-        int addressBookIndex = 2;
+        int taskManagerIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("cs2103").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int taskManagerIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -57,12 +59,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "Presentation for CS2101";
         int filteredTaskListIndex = 1;
-        int addressBookIndex = 5;
+        int taskManagerIndex = 5;
 
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Presentation for CS2101").build();
 
-        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -90,7 +92,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Do laundry p/hi s/incomplete "
-                                + "n/Twice as many detergent this time d/12/12/2017 t/chores");
+                + "n/Twice as many detergent this time "
+                + "b/12/12/2017 12:00 e/12/12/2017 13:00 t/chores");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -98,12 +101,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
-     * @param addressBookIndex index of task to edit in the address book.
+     * @param taskManagerIndex index of task to edit in the task manager.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int addressBookIndex,
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
@@ -112,7 +115,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[addressBookIndex - 1] = editedTask;
+        expectedTasksList[taskManagerIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }

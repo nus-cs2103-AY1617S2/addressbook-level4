@@ -9,7 +9,28 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Priority {
 
     public static enum Type {
-        NONE, HIGH, MEDIUM, LOW;
+
+        NONE,
+        HIGH,
+        MEDIUM,
+        LOW;
+
+        @Override
+        public String toString() {
+            switch(this) {
+            case HIGH:
+                return PRIORITY_HIGH;
+            case MEDIUM:
+                return PRIORITY_MEDIUM;
+            case LOW:
+                return PRIORITY_LOW;
+            case NONE:
+                return PRIORITY_NONE;
+            default:
+                throw new AssertionError();
+            }
+        }
+
     }
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority can only take specific string "
@@ -20,7 +41,7 @@ public class Priority {
     public static final String PRIORITY_LOW = "low";
     public static final String PRIORITY_NONE = "none";
 
-    public final Type value;
+    private final Type value;
 
     /**
      * Validates given priority.
@@ -59,38 +80,16 @@ public class Priority {
     public static Priority.Type parseUserInputString(String priority) throws IllegalValueException {
         assert priority != null;
         switch (priority.toLowerCase()) {
-        case PRIORITY_NONE:
-            return Type.NONE;
         case PRIORITY_HIGH:
             return Type.HIGH;
         case PRIORITY_MEDIUM:
             return Type.MEDIUM;
         case PRIORITY_LOW:
             return Type.LOW;
+        case PRIORITY_NONE:
+            return Type.NONE;
         default:
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-        }
-    }
-
-    /**
-     * parse a priority into user input string
-     *
-     * @param priority
-     * @return null if invalid
-     */
-    public static String toUserInputString(Type priority) {
-        assert priority != null;
-        switch (priority) {
-        case NONE:
-            return PRIORITY_NONE;
-        case HIGH:
-            return PRIORITY_HIGH;
-        case MEDIUM:
-            return PRIORITY_MEDIUM;
-        case LOW:
-            return PRIORITY_LOW;
-        default:
-            throw new AssertionError();
         }
     }
 
@@ -119,6 +118,13 @@ public class Priority {
         default:
             return false;
         }
+    }
+
+    /**
+     * @return the current value of the priority
+     */
+    public Type getValue() {
+        return value;
     }
 
     @Override

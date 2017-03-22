@@ -10,40 +10,50 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask laundry, dishes, quiz, grocery, reflection, consultation,
+                        payment, submission, application, taskWithoutPriority,
+                        taskWithoutNote, taskWithoutDeadline;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Do laundry")
+            laundry = new TaskBuilder().withName("Do laundry")
                     .withNote("Twice as many detergent this time").withStatus("incomplete")
-                    .withPriority("hi").withDeadline("12/12/2017")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
-            benson = new TaskBuilder().withName("Wash the dishes").withNote("They're in the sink")
-                    .withStatus("incomplete").withPriority("mid").withDeadline("12/12/2017")
+            dishes = new TaskBuilder().withName("Wash the dishes")
+                    .withNote("They're in the sink").withStatus("incomplete")
+                    .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
-            carl = new TaskBuilder().withName("Do CS2103T post lecture quiz")
-                    .withPriority("hi").withDeadline("12/12/2017")
+            quiz = new TaskBuilder().withName("Do CS2103T post lecture quiz")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("On IVLE").build();
-            daniel = new TaskBuilder().withName("Buy milk")
-                    .withPriority("low").withDeadline("12/12/2017")
+            grocery = new TaskBuilder().withName("Buy milk")
+                    .withPriority("low").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Low fat").build();
-            elle = new TaskBuilder().withName("Write reflections for CS2101")
-                    .withPriority("hi").withDeadline("12/12/2017")
+            reflection = new TaskBuilder().withName("Write reflections for CS2101")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Include more reflection rather than description").build();
-            fiona = new TaskBuilder().withName("Meet Prof Joe for consultation")
-                    .withPriority("mid").withDeadline("12/12/2017")
+            consultation = new TaskBuilder().withName("Meet Prof Joe for consultation")
+                    .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("COM02-01").build();
-            george = new TaskBuilder().withName("Pay school fees")
-                    .withPriority("hi").withDeadline("12/12/2017")
+            payment = new TaskBuilder().withName("Pay school fees")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Submit research proposal")
-                    .withPriority("hi").withDeadline("12/12/2017")
+            submission = new TaskBuilder().withName("Submit research proposal")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
-            ida = new TaskBuilder().withName("Apply for scholarship")
-                    .withPriority("low").withDeadline("12/12/2017")
+            application = new TaskBuilder().withName("Apply for scholarship")
+                    .withPriority("low").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Apply via iDA website").build();
+            taskWithoutPriority = new TaskBuilder().withName("Submit research proposal")
+                    .withNullPriority().withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
+                    .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
+            taskWithoutNote = new TaskBuilder().withName("No note").withPriority("low").withStatus("incomplete")
+                    .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").withNullNote().build();
+            taskWithoutDeadline = new TaskBuilder().withName("No deadlines").withPriority("hi")
+                    .withNullStartTime().withNullEndTime().withStatus("incomplete").withNote("no deadlines").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -61,7 +71,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{laundry, dishes, quiz, grocery, reflection, consultation, payment};
     }
 
     public TaskManager getTypicalTaskManager() {

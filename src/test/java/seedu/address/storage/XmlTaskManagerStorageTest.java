@@ -71,18 +71,33 @@ public class XmlTaskManagerStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.hoon));
-        original.removeTask(new Task(td.alice));
+        original.addTask(new Task(td.submission));
+        original.removeTask(new Task(td.laundry));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(td.ida));
+        original.addTask(new Task(td.application));
         xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
         readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
 
+        //Save and read tasks with null attributes
+        original.addTask(new Task(td.taskWithoutPriority));
+        xmlTaskManagerStorage.saveTaskManager(original, filePath); //saving task with null priority
+        readBack = xmlTaskManagerStorage.readTaskManager(filePath).get(); //reading task with null priority
+        assertEquals(original, new TaskManager(readBack));
+
+        original.addTask(new Task(td.taskWithoutNote));
+        xmlTaskManagerStorage.saveTaskManager(original, filePath); //saving task with null note
+        readBack = xmlTaskManagerStorage.readTaskManager(filePath).get(); //reading task with null note
+        assertEquals(original, new TaskManager(readBack));
+
+        original.addTask(new Task(td.taskWithoutDeadline));
+        xmlTaskManagerStorage.saveTaskManager(original, filePath); //saving task with null deadline
+        readBack = xmlTaskManagerStorage.readTaskManager(filePath).get(); //reading task with null deadline
+        assertEquals(original, new TaskManager(readBack));
     }
 
     @Test(expected = AssertionError.class)
@@ -98,6 +113,4 @@ public class XmlTaskManagerStorageTest {
     public void saveTaskManagerWithNullFilePathTestAssertionFailure() throws IOException {
         saveTaskManager(new TaskManager(), null);
     }
-
-
 }

@@ -15,7 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -76,35 +76,35 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
      */
-    public static Optional<Priority> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Priority(phone.get())) : Optional.empty();
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> note} into an {@code Optional<Note>} if {@code note} is present.
      */
-    public static Optional<Note> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Note(address.get())) : Optional.empty();
+    public static Optional<Note> parseNote(Optional<String> note) throws IllegalValueException {
+        assert note != null;
+        return note.isPresent() ? Optional.of(new Note(note.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Parses a {@code Optional<String> status} into an {@code Optional<Status>} if {@code status} is present.
      */
-    public static Optional<Status> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Status(email.get())) : Optional.empty();
+    public static Optional<Status> parseStatus(Optional<String> status) throws IllegalValueException {
+        assert status != null;
+        return status.isPresent() ? Optional.of(new Status(status.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> deadline} into an {@code Optional<Deadline>} if {@code deadline} is present.
+     * Parses a {@code Optional<String> dateTime} into an {@code Optional<DateTime>} if {@code dateTime} is present.
      */
-    public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
-        assert deadline != null;
-        return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
+        assert dateTime != null;
+        return dateTime.isPresent() ? Optional.of(new DateTime(dateTime.get())) : Optional.empty();
     }
 
     /**

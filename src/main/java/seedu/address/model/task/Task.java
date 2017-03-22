@@ -1,7 +1,10 @@
 package seedu.address.model.task;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -15,20 +18,33 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private Status status;
     private Note note;
-    private Deadline deadline;
+    private DateTime startTime;
+    private DateTime endTime;
 
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * Accepts null values for priority, note and deadline only.
+     * @param name
+     * @param priority
+     * @param status
+     * @param note
+     * @param deadline
+     * @param tags
      */
-    public Task(Name name, Priority priority, Status status, Note note, Deadline deadline, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, priority, status, note, tags);
+    public Task(Name name, Priority priority, Status status,
+            Note note, DateTime startTime, DateTime endTime, UniqueTagList tags) {
+        // Name should never be null because it is required for each task.
+        // Status should never be null because every created task should be marked as incomplete.
+        // Tags should never be null because zero tags is represented as an empty list.
+        assert !CollectionUtil.isAnyNull(name, status, tags);
+
         this.name = name;
         this.priority = priority;
         this.status = status;
         this.note = note;
-        this.deadline = deadline;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -36,8 +52,9 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPriority(), source.getStatus(),
-                source.getNote(), source.getDeadline(), source.getTags());
+        this(source.getName(), source.getPriority().orElse(null), source.getStatus(),
+                source.getNote().orElse(null), source.getStartTime().orElse(null),
+                source.getEndTime().orElse(null), source.getTags());
     }
 
     public void setName(Name name) {
@@ -56,8 +73,8 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
+    public Optional<Priority> getPriority() {
+        return Optional.ofNullable(priority);
     }
 
     public void setStatus(Status status) {
@@ -76,17 +93,25 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Note getNote() {
-        return note;
+    public Optional<Note> getNote() {
+        return Optional.ofNullable(note);
     }
 
     @Override
-    public Deadline getDeadline() {
-        return deadline;
+    public Optional<DateTime> getStartTime() {
+        return Optional.ofNullable(startTime);
     }
 
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
+    public void setStartTime(DateTime dateTime) {
+        this.startTime = dateTime;
+    }
+
+    public Optional<DateTime> getEndTime() {
+        return Optional.ofNullable(endTime);
+    }
+
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -108,11 +133,40 @@ public class Task implements ReadOnlyTask {
         assert replacement != null;
 
         this.setName(replacement.getName());
-        this.setPriority(replacement.getPriority());
+        this.setPriority(replacement.getPriority().orElse(null));
         this.setStatus(replacement.getStatus());
-        this.setNote(replacement.getNote());
-        this.setDeadline(replacement.getDeadline());
+        this.setNote(replacement.getNote().orElse(null));
+        this.setStartTime(replacement.getStartTime().orElse(null));
         this.setTags(replacement.getTags());
+    }
+
+    /**
+     * Returns true if the end time is later than both the start time and the current time
+     */
+    public static boolean isValidEvent(ReadOnlyTask toCheck) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime endTime;
+        LocalDateTime startTime;
+
+        // If both start time and end time does not exist
+        if (!toCheck.getEndTime().isPresent() && !toCheck.getEndTime().isPresent()) {
+            return true;
+        }
+
+        // If only start time exists
+        if (!toCheck.getEndTime().isPresent() && toCheck.getStartTime().isPresent()) {
+            return false;
+        }
+
+        try {
+            endTime = toCheck.getEndTime().orElse(new DateTime(currentTime)).dateTime;
+            startTime = toCheck.getStartTime().orElse(new DateTime(currentTime)).dateTime;
+            return startTime.isBefore(endTime) && endTime.isAfter(currentTime);
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

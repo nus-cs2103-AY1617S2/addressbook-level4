@@ -40,6 +40,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList, new EndTimeComparator());
     }
 
     /**
@@ -91,6 +92,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
+        return new UnmodifiableObservableList<>(internalList);
+    }
+
+    public UnmodifiableObservableList<Task> asSortedList(String keyword) {
+        switch (keyword) {
+        case "priority":
+            FXCollections.sort(internalList, new PriorityComparator());
+            break;
+        case "deadline":
+            FXCollections.sort(internalList, new EndTimeComparator());
+            break;
+        default:
+            break;
+        }
         return new UnmodifiableObservableList<>(internalList);
     }
 

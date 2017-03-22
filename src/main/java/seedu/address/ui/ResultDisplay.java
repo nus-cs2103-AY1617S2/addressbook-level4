@@ -21,8 +21,9 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
+    private static final String MESSAGE_DEFAULT = "Welcome to Opus.";
 
-    private final StringProperty displayed = new SimpleStringProperty("");
+    private final StringProperty displayed = new SimpleStringProperty(MESSAGE_DEFAULT);
 
     @FXML
     private AnchorPane mainPane;

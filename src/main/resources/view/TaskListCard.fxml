@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -29,17 +30,22 @@
                     <children>
                         <HBox spacing="5" alignment="CENTER_LEFT">
                             <children>
-                                <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
-                                </HBox>
+                                <AnchorPane HBox.hgrow="ALWAYS">
+                                    <HBox AnchorPane.leftAnchor="0.0">
+                                        <Label fx:id="id" styleClass="cell_big_label"></Label>
+                                        <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                                    </HBox>
+                                    <HBox AnchorPane.rightAnchor="0.0">
+                                        <Label fx:id="priority" text="\$priority" />
+                                    </HBox>
+                                </AnchorPane>
                             </children>
                         </HBox>
                         <FlowPane fx:id="tags" />
-                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
                         <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
-                        <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+                        <Label fx:id="startTime" styleClass="cell_small_label" text="\$startTime" />
+                        <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" />
                     </children>
                 </VBox>
             </children>

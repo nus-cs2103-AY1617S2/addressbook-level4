@@ -42,7 +42,6 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
-        assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 
     @Test

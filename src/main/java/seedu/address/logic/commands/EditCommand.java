@@ -7,7 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Note;
 import seedu.address.model.task.Priority;
@@ -27,12 +27,15 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [n/NOTE] [s/STATUS] [d/DEADLINE] [t/TAG]...\n"
+            + "[NAME] [p/PRIORITY] [n/NOTE] [s/STATUS] [b/STARTTIME] [e/ENDTIME] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/mid s/complete";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_INVALID_EVENT = "Please make sure to define an end time "
+            + "if the start time is already set. The end time "
+            + "should also be after the current time and the start time.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -63,6 +66,9 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
+            if (!Task.isValidEvent(editedTask)) {
+                throw new CommandException(MESSAGE_INVALID_EVENT);
+            }
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -80,13 +86,30 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        Priority updatedPriority = editTaskDescriptor
+                .getPriority()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getPriority)
+                .orElse(null);
         Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
-        Note updatedNote = editTaskDescriptor.getNote().orElseGet(taskToEdit::getNote);
-        Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElseGet(taskToEdit::getDeadline);
+        Note updatedNote = editTaskDescriptor.getNote()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getNote)
+                .orElse(null);
+        DateTime updatedStartTime = editTaskDescriptor
+                .getStartTime()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getStartTime)
+                .orElse(null);
+        DateTime updatedEndTime = editTaskDescriptor
+                .getEndTime()
+                .map(Optional::of)
+                .orElseGet(taskToEdit::getEndTime)
+                .orElse(null);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedStatus, updatedNote, updatedDeadline, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedStatus, updatedNote,
+                updatedStartTime, updatedEndTime, updatedTags);
     }
 
     /**
@@ -98,7 +121,8 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<Status> status = Optional.empty();
         private Optional<Note> note = Optional.empty();
-        private Optional<Deadline> deadline = Optional.empty();
+        private Optional<DateTime> startTime = Optional.empty();
+        private Optional<DateTime> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -108,7 +132,8 @@ public class EditCommand extends Command {
             this.priority = toCopy.getPriority();
             this.status = toCopy.getStatus();
             this.note = toCopy.getNote();
-            this.deadline = toCopy.getDeadline();
+            this.startTime = toCopy.getStartTime();
+            this.endTime = toCopy.getEndTime();
             this.tags = toCopy.getTags();
         }
 
@@ -117,7 +142,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.priority, this.status,
-                    this.note, this.deadline, this.tags);
+                    this.note, this.startTime, this.endTime, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -156,13 +181,22 @@ public class EditCommand extends Command {
             return note;
         }
 
-        public void setDeadline(Optional<Deadline> deadline) {
-            assert deadline != null;
-            this.deadline = deadline;
+        public void setStartTime(Optional<DateTime> startTime) {
+            assert startTime != null;
+            this.startTime = startTime;
         }
 
-        public Optional<Deadline> getDeadline() {
-            return deadline;
+        public Optional<DateTime> getStartTime() {
+            return startTime;
+        }
+
+        public void setEndTime(Optional<DateTime> endTime) {
+            assert endTime != null;
+            this.endTime = endTime;
+        }
+
+        public Optional<DateTime> getEndTime() {
+            return endTime;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

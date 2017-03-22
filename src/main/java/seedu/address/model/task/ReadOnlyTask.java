@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -9,10 +11,11 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
-    Priority getPriority();
+    Optional<Priority> getPriority();
     Status getStatus();
-    Note getNote();
-    Deadline getDeadline();
+    Optional<Note> getNote();
+    Optional<DateTime> getStartTime();
+    Optional<DateTime> getEndTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -30,7 +33,8 @@ public interface ReadOnlyTask {
                 && other.getPriority().equals(this.getPriority())
                 && other.getStatus().equals(this.getStatus())
                 && other.getNote().equals(this.getNote())
-                && other.getDeadline().equals(this.getDeadline()));
+                && other.getStartTime().equals(this.getStartTime())
+                && other.getEndTime().equals(this.getEndTime()));
     }
 
     /**
@@ -38,16 +42,29 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Status: ")
-                .append(getStatus())
-                .append(" Note: ")
-                .append(getNote())
-                .append(" Deadline: ")
-                .append(getDeadline().toString())
-                .append(" Tags: ");
+
+        builder.append(getName());
+
+        if (getPriority().isPresent()) {
+            builder.append(" Priority: ").append(getPriority().get().toString());
+        }
+
+        builder.append(" Status: ");
+        builder.append(getStatus());
+
+        if (getNote().isPresent()) {
+            builder.append(" Note: ").append(getNote().get().toString());
+        }
+
+        if (getStartTime().isPresent()) {
+            builder.append(" Start Time: ").append(getStartTime().get().toString());
+        }
+
+        if (getEndTime().isPresent()) {
+            builder.append(" End Time: ").append(getEndTime().get().toString());
+        }
+
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
