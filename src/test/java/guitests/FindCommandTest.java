@@ -11,6 +11,14 @@ public class FindCommandTest extends TaskBossGuiTest {
 
     //---------------- Tests for FindCommand --------------------------------------
 
+    /*
+     * Valid equivalence partitions:
+     * - task name
+     * - start datetime
+     * - end datetime
+     * - information
+     */
+
     // Equivalence partition: find by name in a non-empty list
     @Test
     public void find_byNameNonEmptyList() {
