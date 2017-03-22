@@ -1,28 +1,10 @@
 # Developer Guide
-1. [Setting Up](#setting-up)
-   * 1.1. [Prerequisites](#prerequisites)
-   * 1.2. [Importing the project into Eclipse](#importing-the-project-into-eclipse)
-   * 1.3. [Configuring Checkstyle](#configuring-checkstyle)
-   * 1.4. Troubleshooting project setup
-2. [Design](#design)
-   * 2.1. Architecture
-   * 2.2. UI component
-   * 2.3. Logic component
-   * 2.4. Model component
-   * 2.5. Storage component
-   * 2.6. Common classes
-3. [Implementation](#implementation)
-   * 3.1. Logging
-   * 3.2. Configuration
-4. [Testing](#testing)
-   * 4.1. Troubleshooting tests
-5. [Dev Ops](#dev-ops)
-   * 5.1. Build Automation
-   * 5.2. Continuous Integration
-   * 5.3. Publishing Documentation
-   * 5.4. Making a Release
-   * 5.5. Converting Documentation to PDF format
-   
+*  [Setting Up](#setting-up)
+* [Design](#design)
+* [Implementation](#implementation)
+* [Testing](#testing)
+* [Dev Ops](#dev-ops)
+
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
@@ -30,12 +12,12 @@
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+## Setting up
 
-### 1.1. Prerequisites
+### Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
-    > Having any Java 8 version is not enough.
+1. **JDK `1.8.0_121`**  or later<br>
+    > Having any Java 8 version is not enough. 
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
@@ -45,7 +27,7 @@
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### Importing the project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -58,9 +40,9 @@
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse has auto-changed any settings files during the import process, you can discard those changes.
+  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. taskManager
@@ -71,7 +53,7 @@
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -85,9 +67,9 @@
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+## Design
 
-### 2.1. Architecture
+### Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -98,7 +80,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` only has one class called [`MainApp`](../src/main/java/seedu/description/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -106,14 +88,14 @@ Given below is a quick overview of each component.
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : Used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-  (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
+* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
+  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component) : Displays the User interface(UI) of the App.
-* [**`Logic`**](#logic-component) : Executes commands input by the user.
+* [**`UI`**](#ui-component) : The UI of the App.
+* [**`Logic`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
 
@@ -132,15 +114,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeleteTask.png" width="800"><br>
+<img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
-> Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
+<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -149,21 +131,21 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### UI component
 
 Author: Ye Huan Hui
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/description/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/doit/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/description/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/doit/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -172,14 +154,14 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
+### Logic component
 
 Author: Lee Jin Shun
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/description/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -188,47 +170,47 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
+<img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
+### Model component
 
 Author: Hon Kean Wai
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/description/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model` component,
+The `Model`,
 
-* Stores a `UserPref` object that represents the user's preferences.
-* Stores the Task Manager data.
-* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* stores a `UserPref` object that represents the user's preferences.
+* stores the Task Manager data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* Does not depend on any of the other three components.
+* does not depend on any of the other three components.
 
-### 2.5. Storage component
+### Storage component
 
 Author: Chew Chia Sin
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/description/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/doit/storage/Storage.java)
 
 The `Storage` component,
 
-* Saves `UserPref` objects in json format and reads it back.
-* Saves the Task Manager data in xml format and reads it back.
+* can save `UserPref` objects in json format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
-### 2.6. Common classes
+### Common classes
 
 Classes used by multiple components are in the `seedu.doit.commons` package.
 
-## 3. Implementation
+## Implementation
 
-### 3.1. Logging
+### Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -247,13 +229,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -275,13 +257,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.description.commons.UrlUtilTest`
+      e.g. `seedu.doit.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.description.storage.StorageManagerTest`
+      e.g. `seedu.doit.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.description.logic.LogicManagerTest`
+      e.g. `seedu.doit.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -290,7 +272,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -300,23 +282,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## Dev Ops
 
-### 5.1. Build Automation
+### Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### Making a Release
 
 Here are the steps to create a new release.
 
@@ -325,7 +307,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -342,7 +324,7 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### Managing Dependencies
 
 A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
@@ -374,8 +356,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | set task as completed | see past tasks
 `* * *` | user | set floating task as completed | see past floating tasks
 `* * *` | user | set event as completed | see past events
-`* * *` | forgetful user | set reminders for tasks | be reminded for events
-`* * *` | forgetful user | set reminders for event | be reminded for events
+
 `* * *` | user | be able to undo the most recent action | revert changes made
 `* * *` | user | block multiple timeslots when the timing is uncertain | know which times are available for me to add new tasks
 `* * *` | user | be able set priority to a task | know which is the highest priority that I should do 1st.
@@ -384,25 +365,18 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | be able tag/categorise a task | know what to do when I am in the current context
 `* * *` | user | be able tag/categorise a floating task | know what to do when I am in the current context
 `* * *` | user | be able tag/categorise an event | know what to do when I am in the current context
-`* * *` | user | set tasks as recurring | dont need to keep adding for repeating tasks
-`* * *` | user | set events as recurring | don't need to keep adding for repeating events
 `* * *` | user | sort tasks by date, priority, deadline, recurrence, tags | view important tasks first
 `* * *` | user | sort floating tasks by priority and tags | view important floating tasks first
 `* * *` | user | sort events by date, priority, deadline, recurrence, tags | view important events first
-`* * *` | user | see a list of done tasks and to-do tasks when I enter a command | have a overview of tasks to be done
+
 `* *` | user | be able know what should he do today | so they can plan what task to do first
 `* *` | user | select task/events by index | to reduce typing of full name
-`* *` | paranoid user | require a password to use the task manager | prevent others from accessing my task, floating tasks and events
-`* *` | user | be able to filter items by date | so that you can see all items and free slots only on that date
-`* *` | user | automatically delete events after they have passed | so that they do not clutter the space
-`* *` | user | be able to repeat the command Eg. by pressing up | easy typing if command similar
-`*` | user | launch the program with a keyboard shortcut | start the program
+`*` | user | set events as recurring | don't need to keep adding for repeating events
+
 `*` | user | color scheme of priority | to make it obvious
-`*` | user | color scheme of overdue tasks | to make it obvious
-`*` | user | I want to import task data from a file | sync
-`*` | user | be able to sync tasks with deadline | add task automatically
-`*` | user | be able to delete all items based on date/category at one go | so that I do not need to delete one by one when there are changes to the plan of the whole day
-`*` | user | be able to set progress of task. Eg pending, postpone, waiting for reply etc.
+
+
+
 
 
 ## Appendix B : Use Cases
@@ -472,14 +446,58 @@ Use case ends.
 
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
-
+  
 4a. User undos task delete command
 
 > System adds the deleted task back and shows feedback to user
 > Use case ends
 
+### User Case : Undoing a command 
 
-### User Case : Marking a task as done
+**MSS**
+1. User enters command to undo prev undoable command
+2. System undo previous undoable command shows feedback to user
+3. Use case ends
+
+**Extensions**
+1a. The user enters undo but there is no previous undoable command
+> System shows an error message
+> Use case ends
+
+3a. User redo undone command
+> System redo the undone command and shows feedback to user
+> Use case ends
+
+### User Case : Redoing a command 
+
+**MSS**
+1. User enters command to redo the previously undone command
+2. System redo previously undone command and shows feedback to user
+3. Use case ends
+
+**Extensions**
+1a. The user enters redo but there is no undone command
+> System shows an error message
+> Use case ends
+
+3a. User undo redone command
+> System undo the redone command and shows feedback to user
+> Use case ends
+
+### User Case : Sorting the displayed tasks
+
+**MSS**
+1. User enters command to sort that tasks displayed
+2. System marks sorts the task by what the user wants and shows feedback to user
+3. Use case ends
+
+**Extensions**
+1a. The user enters an invalid sort
+> System shows an error message
+> Use case ends
+
+
+### User Case : Marking a task as done 
 
 **MSS**
 1. User enters command to mark task as done
@@ -504,6 +522,30 @@ Use case ends.
 
 **Extensions**
 1a. The user enters an invalid date
+> System shows an error message
+> Use case ends
+
+## Use Case : Save to new location
+
+**MSS**
+1. User enters command to save data to specified location
+2. System saves the data and feedback to user the success
+3. Use case ends
+
+**Extensions**
+1a. User enters an invalid location to save
+> System shows an error message
+> Use case ends
+
+1b. User enters the current save location to save
+> System shows an error message
+> Use case ends
+
+1c. User enters a duplicated save location to save
+> System shows an error message
+> Use case ends
+
+1d. User enters invalid file name to save
 > System shows an error message
 > Use case ends
 
@@ -569,7 +611,7 @@ Use case ends.
 
 **MSS**
 1. User enters command to update priority of task
-2. System updates priority to user specified priority
+2. System updates priority to user specified priority 
 3. Use case ends
 
 **Extensions**
@@ -590,6 +632,7 @@ Use case ends.
 3. Use case ends
 
 
+
 ## Use Case : Clear by date/category
 
 **MSS**
@@ -602,6 +645,7 @@ Use case ends.
 > System shows an error message
 > Use case ends
 
+
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
@@ -609,7 +653,7 @@ Use case ends.
 2. Should be able to hold up to 1000 items without a noticeable sluggishness in performance for typical usage.
 
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+   
 4. Enter an event/tasks in one command instead of multiple clicks
 
 5. Be able to access the program offline access tasks in areas without internet
@@ -630,7 +674,7 @@ Use case ends.
 **Items** : Refers to tasks, floating tasks and events
 
 **UI**: User interface is the means by which the user  and the system interact with each other
-
+    
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
 **CRUD**: Create, Read, Update and Delete.
@@ -656,53 +700,53 @@ Use case ends.
 ### Author: Chia Sin
 ### Product: Toodledo
 ### Advantages:
-* Has many features to use
-* Email Sync
-* Tells you what to do
-* Able to set default so minimal adjustment is needed
+* Has many features to use 
+* Email Sync 
+* Tells you what to do 
+* Able to set default so minimal adjustment is needed 
 * Able to type commands
-
-### Disadvantages:
-* Need too many clicks for settings and other features other than task
-* Need to click to delete and update
-* Need internet for desktop version to use.
+ 
+### Disadvantages: 
+* Need too many clicks for settings and other features other than task 
+* Need to click to delete and update 
+* Need internet for desktop version to use. 
 
 ### Author: Kean Wai
 ### Product: Sticky Notes
 ### Advantages:
 * Simple and easy to use (functions like text document)
-* Can be navigated using keyboard only
-* Starts up automatically on entering desktop
+* Can be navigated using keyboard only 
+* Starts up automatically on entering desktop 
 * Works offline
 * Comes preinstalled on windows so no need for special IT permissions
 ### Disadvantages:
-* Unable to sync with deadline
-* Lack of functionality (No reminders, calendar view, etc.)
+* Unable to sync with email 
+* Lack of functionality (No reminders, calendar view, etc.) 
 * Requires windows to be installed
 
 ### Author: Jin Shun
-### Product: Momentum
+### Product: Momentum 
 ### Advantages:
-* Simple to use
-* Nice background
+* Simple to use 
+* Nice background 
 * Helpful way of reminding users of pending tasks, every time user opens new tab in chrome
-* Has integration with full fledged task managers like trello
-### Disadvantages:
-* Only works with chrome browser
-* Requires internet connection
-* Unable to set deadline for tasks
-* Minimal features
-
+* Has integration with full fledged task managers like trello 
+### Disadvantages: 
+* Only works with chrome browser 
+* Requires internet connection 
+* Unable to set deadline for tasks 
+* Minimal features 
+ 
 ### Author: Huanhui
-### Product: Wunderlist
+### Product: Wunderlist 
 ### Advantages:
-* Some shortcut keys available, good user flexibility
-* CRUD can function offline
-* Many features such as the ability to set reminders, due dates, recurring tasks
-* Tasks are automatically sorted by due date
-* Able to display completed tasks
+* Some shortcut keys available, good user flexibility 
+* CRUD can function offline 
+* Many features such as the ability to set reminders, due dates, recurring tasks 
+* Tasks are automatically sorted by due date 
+* Able to display completed tasks 
 * Well designed UI
 ### Disadvantages:
-* Not fully functional on keyboard, still need to use mouse to do operations such as select task
-* Do not have an undo function
+* Not fully functional on keyboard, still need to use mouse to do operations such as select task 
+* Do not have an undo function 
 * Requires installation
