@@ -29,7 +29,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
-    private static final String COMMAND_WORD_STYLE = "-fx-fill: blue;";
+    private static final String COMMAND_WORD_STYLE = "-fx-fill: orange;";
     private static final String PARAMETER_KEY_STYLE = "-fx-fill: green;";
     private static final String NORMAL_STYLE = "-fx-fill: black;";
 
