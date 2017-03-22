@@ -1,12 +1,11 @@
 package project.taskcrusher.ui;
 
-import java.text.SimpleDateFormat;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import project.taskcrusher.model.shared.DateUtil;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
 public class TaskListCard extends UiPart<Region> {
@@ -60,8 +59,9 @@ public class TaskListCard extends UiPart<Region> {
 
     private void showDeadline(ReadOnlyTask task) {
         if (task.getDeadline().hasDeadline()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-            deadline.setText(MESSAGE_DEADLINE_BY + sdf.format(task.getDeadline().getDate().get()));
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+//            deadline.setText(MESSAGE_DEADLINE_BY + sdf.format(task.getDeadline().getDate().get()));
+            deadline.setText(MESSAGE_DEADLINE_BY + DateUtil.dateAsString(task.getDeadline().getDate().get()));
         } else {
             deadline.setText(MESSAGE_NO_DEADLINE);
         }
