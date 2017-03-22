@@ -48,7 +48,7 @@ public class TaskCard extends UiPart<Region> {
     private LocalDate parsedDate;
     private boolean parsedDateFlag = false;
 
-	public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
