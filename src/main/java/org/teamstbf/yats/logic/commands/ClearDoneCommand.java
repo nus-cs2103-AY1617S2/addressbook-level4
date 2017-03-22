@@ -12,10 +12,13 @@ public class ClearDoneCommand extends Command {
 
 	public static final String COMMAND_WORD = "clear";
 	public static final String MESSAGE_SUCCESS = "All done tasks have been cleared!";
+	public static final String MESSAGE_ALREADY_CLEAR = "There are no done tasks to clear!";
 
 	@Override
 	public CommandResult execute() {
 		UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+
+		int formerSize = lastShownList.size();
 
 		for (int index = 0; index < lastShownList.size(); index++) {
 			if (lastShownList.get(index).isTaskDone()) {
@@ -27,6 +30,9 @@ public class ClearDoneCommand extends Command {
 				}
 				index--;
 			}
+		}
+		if (formerSize == lastShownList.size()) {
+			return new CommandResult(MESSAGE_ALREADY_CLEAR);
 		}
 		return new CommandResult(MESSAGE_SUCCESS);
 	}
