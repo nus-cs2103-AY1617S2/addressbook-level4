@@ -372,26 +372,43 @@ Vbox, SplitPane {
     -fx-font-size: 68px;
     -fx-text-alignment: center;
     -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-pref-height: 50;
+    -fx-pref-width: 500;
 }
 
-#todayLabel {
-    -fx-padding: 20;
+#labelTitle, #calendarLabel, #todayLabel {
+    -fx-padding: 20 20 20 10;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: #000000;
 }
 
-#calendarLabel {
-    -fx-padding: 20;
-}
-
-#labelTitle {
-    -fx-padding: 20;
+#todayCounterLabel, #labelCounterLabel {
+    -fx-font-family: "Roboto";
+    -fx-alignment: center-right;
+    -fx-text-alignment: right;
+    -fx-padding: 20 20 0 0;
+    -fx-opacity: 0.54;
 }
 
 #labelListView {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 0 50;
+    -fx-padding: 0 0 0 45;
 }
 
 #labelListView .list-cell {
     -fx-background-color: transparent;
-    -fx-padding: 10;
+}
+
+#labelListCard {
+    -fx-opacity: 0.75;
+}
+
+#labelText {
+    -fx-padding: 0 0 30 5;
+}
+
+#taskCountText {
+    -fx-padding: 0 20 0 0;
+    -fx-opacity: 0.54;
 }

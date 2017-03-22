@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,7 +30,28 @@ public class LeftPanel extends UiPart<Region> {
     private javafx.scene.control.Label todayLabel;
 
     @FXML
+    private javafx.scene.control.Label todayCounterLabel;
+
+    @FXML
     private javafx.scene.control.Label calendarLabel;
+
+    @FXML
+    private javafx.scene.control.Label labelCounterLabel;
+
+    @FXML
+    private javafx.scene.control.Label labelTitleLabel;
+
+    @FXML
+    private FontAwesomeIconView todayIconLabel;
+
+    @FXML
+    private FontAwesomeIconView calendarIconLabel;
+
+    @FXML
+    private FontAwesomeIconView labelArrow;
+
+    @FXML
+    private FontAwesomeIconView labelIconLabel;
 
     @FXML
     private ListView<Label> labelListView;
@@ -37,14 +60,23 @@ public class LeftPanel extends UiPart<Region> {
             ObservableList<ReadOnlyTask> taskList,
             ObservableList<Label> labelList) {
         super(FXML);
+        initIcons();
         setConnections(labelList);
         setTodayListView(taskList);
         setCalendarListView(taskList);
         addToPlaceholder(leftListPlaceholder);
     }
 
+    private void initIcons() {
+        todayIconLabel.setIcon(FontAwesomeIcon.CALENDAR_ALT);
+        calendarIconLabel.setIcon(FontAwesomeIcon.CALENDAR);
+        labelIconLabel.setIcon(FontAwesomeIcon.HASHTAG);
+        labelArrow.setIcon(FontAwesomeIcon.ANGLE_UP);
+    }
+
     public void setTodayListView(ObservableList<ReadOnlyTask> taskList) {
-        todayLabel.setText("Today " + taskList.size());
+        todayLabel.setText("Today");
+        todayCounterLabel.setText(Integer.toString(taskList.size()));
     }
 
     public void setCalendarListView(ObservableList<ReadOnlyTask> taskList) {
@@ -52,6 +84,7 @@ public class LeftPanel extends UiPart<Region> {
     }
 
     public void setConnections(ObservableList<Label> labelList) {
+        labelCounterLabel.setText(Integer.toString(labelList.size()));
         labelListView.setItems(labelList);
         labelListView.setCellFactory(listView -> new LabelListViewCell());
         setEventHandlerForSelectionChangeEvent();

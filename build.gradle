@@ -72,6 +72,10 @@ allprojects {
         compile group: 'com.itextpdf', name: 'forms', version: '7.0.2'
         compile group: 'com.itextpdf', name: 'pdfa', version: '7.0.2'
         compile group: 'com.itextpdf', name: 'pdftest', version: '7.0.2'
+        compile 'de.jensd:fontawesomefx-commons:8.15'
+        compile 'de.jensd:fontawesomefx-controls:8.15'
+        compile 'de.jensd:fontawesomefx-fontawesome:4.7.0-5'
+        compile 'de.jensd:fontawesomefx-icons525:3.0.0-4'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
