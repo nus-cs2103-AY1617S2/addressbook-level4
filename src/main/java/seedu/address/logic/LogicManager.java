@@ -46,13 +46,16 @@ public class LogicManager extends ComponentManager implements Logic {
     private CommandResult executeCommand(String commandText, Command toExecute) throws CommandException {
         try {
             if (!(toExecute instanceof UndoCommand)) {
-                model.saveCurrentState(commandText.trim());
 
                 if (toExecute instanceof RedoCommand) {
-                    toExecute = getCommand(((RedoCommand) toExecute).getToRedo());
+                    commandText = ((RedoCommand) toExecute).getToRedo();
+                    toExecute = getCommand(commandText);
                 } else {
                     model.clearRedoCommandHistory();
                 }
+
+                model.saveCurrentState(commandText.trim());
+
             }
 
             return toExecute.execute();
