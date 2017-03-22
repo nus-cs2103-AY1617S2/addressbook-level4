@@ -147,7 +147,7 @@ class AddressBookTest extends Test {
 }
 
 task guiTests(type: AddressBookTest) {
-    include 'guitests/RedoCommandTest.*'
+    include 'guitests/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
