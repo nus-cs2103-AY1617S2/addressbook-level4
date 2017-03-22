@@ -29,7 +29,7 @@ public class DoneCommandTest extends TaskManagerGuiTest {
 
     private void assertIsDoneSuccess(int targetIndex, final TestTask[] currentList) {
         // TODO Auto-generated method stub
-        //boolean taskIsDone = currentList[targetIndex -1].isDone();
+        currentList[targetIndex -1].setIsDone(true);
         //boolean expectedRemainder = TestUtil.taskIsDone();
 
         commandBox.runCommand("done " + targetIndex);
