@@ -14,11 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.watodo.model.ReadOnlyTaskManager;
-import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.testutil.TypicalTestTasks;
 
 public class TaskListTest {

@@ -1,7 +1,6 @@
 package seedu.watodo.storage;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -9,10 +8,10 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
-import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 
 /**
  * JAXB-friendly version of the Task.
@@ -46,11 +45,11 @@ public class XmlAdaptedTask {
         if (source.getStartDate() != null) {
             startDate = source.getStartDate().toString();
         }
-        
+
         if (source.getEndDate() != null) {
             endDate = source.getEndDate().toString();
         }
-        
+
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -82,7 +81,7 @@ public class XmlAdaptedTask {
 
             return new Task(name, sDate, eDate, tags);
         }
-        
+
         return new Task(name, tags);
     }
 }

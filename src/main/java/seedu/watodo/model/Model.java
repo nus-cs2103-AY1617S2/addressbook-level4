@@ -42,15 +42,19 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
-    
+    void updateFilteredByNameTaskList(Set<String> keywords);
+
     /** Updates the filter of the filtered task list to filter by the given keywords for tags*/
     void updateFilteredByTagsTaskList(Set<String> keywords);
-    
+
     /** Updates the filter of the filtered task list to filter by the given number of days
      * @throws IllegalValueException */
     void updateFilteredByDatesTaskList(int days) throws IllegalValueException;
-    
+
+    /** Updates the filter of the filtered task list to filter by the given number of months
+     * @throws IllegalValueException */
+    void updateFilteredByMonthsTaskList(int months) throws IllegalValueException;
+
     /** Updates the filter of the filtered task list to filter by the given keyword for type*/
     void updateFilteredByTypesTaskList(String type);
 

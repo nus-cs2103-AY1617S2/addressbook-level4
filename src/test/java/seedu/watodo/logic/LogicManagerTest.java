@@ -44,8 +44,8 @@ import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.storage.StorageManager;
 
 
@@ -147,7 +147,7 @@ public class LogicManagerTest {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());
         } catch (IllegalValueException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
         //Confirm the ui display elements should contain the right data
