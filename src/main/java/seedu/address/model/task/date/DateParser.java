@@ -27,7 +27,7 @@ public class DateParser {
     public static final String FROM = "from";
 
     /* Regex constants */
-    public static final String TIMEPERIOD_DELIMINATORS_REGEX = "(from|to)";
+    public static final String TIMEPERIOD_DELIMINATORS_REGEX = "(from|\\sto\\s)";
 
     public static final String[] DATE_NUMBERIC_REGEX = {
         "\\d{1,4}:\\d{1,2}:\\d{1,4}",
