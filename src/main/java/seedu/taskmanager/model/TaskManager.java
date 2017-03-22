@@ -16,6 +16,7 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
+//import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by
@@ -156,6 +157,28 @@ public class TaskManager implements ReadOnlyTaskManager {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+
+    /**
+     * Marks the task in the list at position {@code index} as complete.
+     *
+     * @see #syncMasterCategoryListWith(Task)
+     *
+     * @throws DuplicateTaskException
+     *             if marking task as complete causes the task to be equivalent
+     *             to another completed task in the list.
+     * @throws IndexOutOfBoundsException
+     *             if {@code index} < 0 or >= the size of the list.
+     */
+    public void markTask(int index, boolean isCompleted) throws UniqueTaskList.DuplicateTaskException {
+
+        // syncMasterCategoryListWith(editedTask);
+        // TODO: the categories master list will be updated even though the
+        // below line fails.
+        // This can cause the categories master list to have additional
+        // categories that are not categorized to any task
+        // in the task list.
+        tasks.markTask(index, isCompleted);
     }
 
     //// tag-level operations

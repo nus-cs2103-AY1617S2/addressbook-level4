@@ -15,6 +15,7 @@ public class Task implements ReadOnlyTask {
     private Date date;
     private StartTime startTime;
     private EndTime endTime;
+    private boolean isMarkedAsComplete;
     // private UniqueCategoryList categories;
 
     /**
@@ -28,6 +29,7 @@ public class Task implements ReadOnlyTask {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isMarkedAsComplete = false;
         // this.categories = new UniqueCategoryList(categories); // protect
         // internal tags from changes in the arg list
     }
@@ -79,6 +81,15 @@ public class Task implements ReadOnlyTask {
     public EndTime getEndTime() {
         return endTime;
     }
+    
+    public void setIsMarkedAsComplete(boolean isMarkedAsComplete) {
+        this.isMarkedAsComplete = isMarkedAsComplete;
+    }
+
+    @Override
+    public Boolean getIsMarkedAsComplete() {
+        return isMarkedAsComplete;
+    }
 
     /*
      * @Override public UniqueCategoryList getCategories() { return new
@@ -101,6 +112,7 @@ public class Task implements ReadOnlyTask {
         this.setDate(replacement.getDate());
         this.setStartTime(replacement.getStartTime());
         this.setEndTime(replacement.getEndTime());
+        this.setIsMarkedAsComplete(replacement.getIsMarkedAsComplete());
         // this.setCategories(replacement.getCategories());
     }
 

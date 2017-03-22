@@ -17,6 +17,8 @@ public interface ReadOnlyTask {
 
     EndTime getEndTime();
 
+    Boolean getIsMarkedAsComplete();
+
     /**
      * The returned CategoryList is a deep copy of the internal CategoryList,
      * changes on the returned list will not affect the task's internal
@@ -36,7 +38,8 @@ public interface ReadOnlyTask {
                         // here
                         // onwards
                         && other.getStartTime().equals(this.getStartTime())
-                        && other.getEndTime().equals(this.getEndTime()) && other.getDate().equals(this.getDate()));
+                        && other.getEndTime().equals(this.getEndTime()) && other.getDate().equals(this.getDate())
+                        && other.getIsMarkedAsComplete().equals(this.getIsMarkedAsComplete()));
     }
 
     /**
