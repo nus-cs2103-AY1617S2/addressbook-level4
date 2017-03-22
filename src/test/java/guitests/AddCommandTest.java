@@ -30,6 +30,16 @@ public class AddCommandTest extends DoistGUITest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+        //add another task with dates
+        taskToAdd = td.meeting;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
+      //add another task with from to dates
+        taskToAdd = td.movie;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
         //add duplicate task
         commandBox.runCommand(td.email.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
@@ -44,8 +54,20 @@ public class AddCommandTest extends DoistGUITest {
         assertAddSuccess(td.laundry);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds Do laundry");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        //invalid command since \from and \by are used together
+        commandBox.runCommand("add Do laundry \\from today \\by tomorrow");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        //invalid command since \to and \by are used together
+        commandBox.runCommand("add Do laundry \\to today \\by tomorrow");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        //invalid command since \from and \to aren't used together
+        commandBox.runCommand("add Do laundry \\from today ");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {

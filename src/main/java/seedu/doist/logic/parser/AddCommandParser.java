@@ -10,6 +10,7 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,9 +49,11 @@ public class AddCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_FROM, PREFIX_TO, PREFIX_REMIND, PREFIX_EVERY,
                                                                 PREFIX_AS, PREFIX_BY, PREFIX_UNDER);
 
-        if (!argsTokenizer.validateTokens(tokens)) {
+        if (!argsTokenizer.validateTokens(tokens) ||
+                (argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
         argsTokenizer.tokenize(parameters);
 
         try {
@@ -79,8 +82,21 @@ public class AddCommandParser {
         if (tagsParameterString.isPresent()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
         }
-        Task toAdd = new Task(new Description(preamble), tagList);
 
+        Date startDate = null;
+        Date endDate = null;
+        int dateFormat = tokenizer.getDateFormat();
+        switch (dateFormat) {
+        case ArgumentTokenizer.DATE_NIL : break;
+        case ArgumentTokenizer.DATE_BY : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get());
+                                         endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get()); break;
+        case ArgumentTokenizer.DATE_FROM : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_FROM).get());
+                                           endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_TO).get());
+                                           break;
+        default : break;
+        }
+
+        Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);
         // set priority
         Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
         if (priority.isPresent()) {

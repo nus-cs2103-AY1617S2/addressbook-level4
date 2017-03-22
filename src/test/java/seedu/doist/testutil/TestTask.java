@@ -1,5 +1,7 @@
 package seedu.doist.testutil;
 
+import java.util.Date;
+
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.FinishedStatus;
@@ -15,11 +17,14 @@ public class TestTask implements ReadOnlyTask {
     private Priority priority;
     private FinishedStatus finishedStatus;
     private UniqueTagList tags;
+    private Date startDate;
+    private Date endDate;
 
     public TestTask() {
         tags = new UniqueTagList();
         finishedStatus = new FinishedStatus();
         priority = new Priority();
+        startDate = endDate = null;
     }
 
     /**
@@ -48,6 +53,14 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public Description getDescription() {
         return desc;
@@ -69,6 +82,16 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -77,6 +100,8 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");
         sb.append("\\as " + this.getPriority().toString());
+        //TODO: add dates to getAddCommand
+        //if (!this.getEndDate().)
         if (!this.getTags().isEmpty()) {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));

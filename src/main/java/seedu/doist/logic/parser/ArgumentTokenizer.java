@@ -21,15 +21,52 @@ public class ArgumentTokenizer {
     /** Given prefixes **/
     private final List<Prefix> prefixes;
     private ArrayList<Prefix> temp;
+    private int dateFormat;
+    public static final int DATE_BY = 1;
+    public static final int DATE_FROM = 2;
+    public static final int DATE_TO = 2;
+    public static final int DATE_INVALID = -1;
+    public static final int DATE_NIL = 0;
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
+
+    /** Method to 'BY' parameter is used **/
+    private int validateBy(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_BY.getPrefix())) {
+                return DATE_BY;
+            }
+        }
+        return DATE_NIL;
+    }
+
+    /** Method to check if 'FROM' parameter is used**/
+    private int validateFrom(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_FROM.getPrefix())) {
+                return DATE_FROM;
+            }
+        }
+        return DATE_NIL;
+    }
+
+    /** Method to check if 'TO' parameter is used **/
+    private int validateTo(ArrayList<String> token) {
+        for (String prefix: token) {
+            if (prefix.equals(CliSyntax.PREFIX_TO.getPrefix())) {
+                return DATE_TO;
+            }
+        }
+        return DATE_NIL;
+    }
 
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
     public ArgumentTokenizer(Prefix... prefixes) {
         this.prefixes = Arrays.asList(prefixes);
+        dateFormat = -1;
     }
 
     /**
@@ -85,6 +122,31 @@ public class ArgumentTokenizer {
             }
         }
         return flag;
+    }
+
+    /**
+     * Method to validate whether the date parameters in the command are valid
+     * eg. The command "add Buy milk \\from today \\by Friday" should fail, as \from should always be accompanied by \to
+     * @param tokens recognized in the command
+     * @return A number corresponding to the command format it matches
+     * eg 0 means no date parameters were provided, 1 means only \by was user,
+     * 2 means both \from and \to were provided, and -1 means the command format is illegal
+     */
+
+    public int validateDate(ArrayList<String> tokens) {
+        int count = 0;
+        count = count + validateBy(tokens) + validateFrom(tokens) + validateTo(tokens);
+        switch (count) {
+        case DATE_NIL : dateFormat = DATE_NIL; break;
+        case DATE_BY : dateFormat = DATE_BY; break;
+        case (DATE_FROM + DATE_TO) : dateFormat = DATE_TO; break;
+        default : dateFormat = DATE_INVALID; break;
+        }
+        return dateFormat;
+    }
+
+    public int getDateFormat() {
+        return dateFormat;
     }
 
     /**
@@ -210,7 +272,7 @@ public class ArgumentTokenizer {
 
     /**
      * A prefix that marks the beginning of an argument.
-     * e.g. '/t' in 'add James /t friend'
+     * e.g. '\\under' in 'add James \\under friend'
      */
     public static class Prefix {
         final String prefix;

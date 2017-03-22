@@ -1,5 +1,6 @@
 package seedu.doist.model.task;
 
+import java.util.Date;
 import java.util.Objects;
 
 import seedu.doist.commons.util.CollectionUtil;
@@ -15,31 +16,49 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private FinishedStatus finishedStatus;
     private UniqueTagList tags;
+    private Date startDate;
+    private Date endDate;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description name, Priority priority, FinishedStatus finishedStatus, UniqueTagList tags) {
+    public Task(Description name, Priority priority, FinishedStatus finishedStatus,
+            UniqueTagList tags, Date startDate, Date endDate) {
         assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, tags);
         this.desc = name;
         this.priority = priority;
         this.finishedStatus = finishedStatus;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Task(Description name, Priority priority, FinishedStatus finishedStatus, UniqueTagList tags) {
+        this(name, priority, finishedStatus, tags, null, null);
     }
 
     public Task(Description name, Priority priority, UniqueTagList tags) {
-        this(name, priority, new FinishedStatus(), tags);
+        this(name, priority, new FinishedStatus(), tags, null, null);
     }
 
     public Task(Description name, UniqueTagList tags) {
-        this(name, new Priority(), new FinishedStatus(), tags);
+        this(name, new Priority(), new FinishedStatus(), tags, null, null);
+    }
+
+    public Task(Description name, Date startDate, Date endDate) {
+        this(name, new Priority(), new FinishedStatus(), new UniqueTagList(), startDate, endDate);
+    }
+
+    public Task(Description name, UniqueTagList tags, Date startDate, Date endDate) {
+        this(name, new Priority(), new FinishedStatus(), tags, startDate, endDate);
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getPriority(), source.getFinishedStatus(), source.getTags());
+        this(source.getDescription(), source.getPriority(), source.getFinishedStatus(),
+                source.getTags(), source.getStartDate(), source.getEndDate());
     }
 
     public void setDescription(Description desc) {
@@ -55,6 +74,22 @@ public class Task implements ReadOnlyTask {
     public void setPriority(Priority priority) {
         assert priority != null;
         this.priority = priority;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     @Override
@@ -99,6 +134,8 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority());
         this.setFinishedStatus(replacement.getFinishedStatus());
         this.setTags(replacement.getTags());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
     }
 
     @Override

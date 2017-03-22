@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import com.joestelmach.natty.DateGroup;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.commons.util.StringUtil;
@@ -54,6 +57,22 @@ public class ParserUtil {
             indices.add(parseIndex(component));
         }
         return indices;
+    }
+
+
+    public static Date parseDate (String date) {
+        com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
+        List<DateGroup> groups = parser.parse(date);
+        Date extractDate = null;
+        boolean flag = false;
+        for (DateGroup group:groups) {
+            List<Date> dates = group.getDates();
+            if (!dates.isEmpty()) {
+                extractDate = dates.get(0);
+                flag = true;
+            }
+        }
+        return (flag ? extractDate : null);
     }
 
     /**

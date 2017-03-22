@@ -36,13 +36,21 @@ public class TaskCard extends UiPart<Region> {
         desc.setText(task.getDescription().desc);
         id.setText(displayedIndex + ". ");
         priority.setText(task.getPriority().toString());
+        if (task.getStartDate() == null) {
+            startTime.setText("");
+        } else {
+            startTime.setText(task.getStartDate().toString());
+        }
+        if (task.getEndDate() == null) {
+            endTime.setText("");
+        } else {
+            endTime.setText(task.getEndDate().toString());
+        }
         if (task.getFinishedStatus().getIsFinished()) {
             checkbox.setSelected(true);
         } else {
             checkbox.setSelected(false);
         }
-        startTime.setText(" no more start time");
-        endTime.setText(" no more end time");
         initTags(task);
     }
 
