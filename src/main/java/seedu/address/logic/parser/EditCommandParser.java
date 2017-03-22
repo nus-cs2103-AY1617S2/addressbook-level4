@@ -16,6 +16,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.person.Deadline;
@@ -83,13 +84,17 @@ public class EditCommandParser {
         argsTokenizer.tokenize(arguments);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-        ReadOnlyTask taskToEdit = lastShownList.get(index.get() - 1);
-        final StringBuilder editBuilder = new StringBuilder();
-        editBuilder.append(" ");
-        editBuilder.append(index.get().toString());
-        editBuilder.append(" ");
-        editBuilder.append(ParserUtil.getTaskArgs(taskToEdit));
-        return parse(editBuilder.toString());
+        if (index.isPresent()) {
+            ReadOnlyTask taskToEdit = lastShownList.get(index.get() - 1);
+            final StringBuilder editBuilder = new StringBuilder();
+            editBuilder.append(" ");
+            editBuilder.append(index.get().toString());
+            editBuilder.append(" ");
+            editBuilder.append(ParserUtil.getTaskArgs(taskToEdit));
+            return parse(editBuilder.toString());
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
