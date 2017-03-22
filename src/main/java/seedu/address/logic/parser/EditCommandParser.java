@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -14,7 +18,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Notes;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Start;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -29,7 +37,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_PRIORITY, PREFIX_TAG, PREFIX_NOTES);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -42,6 +50,10 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setStart(Optional.of(new Start(argsTokenizer.getValue(PREFIX_START).orElse(""))));
+            editTaskDescriptor.setDeadline(Optional.of(new Deadline(argsTokenizer.getValue(PREFIX_DEADLINE).orElse(""))));
+            editTaskDescriptor.setPriority(Optional.of(new Priority(Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0")))));
+            editTaskDescriptor.setNotes(Optional.of(new Notes(argsTokenizer.getValue(PREFIX_NOTES).orElse(""))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
