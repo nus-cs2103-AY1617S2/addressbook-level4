@@ -206,9 +206,7 @@ Marking the specified item from the task manager as done.<br>
 Format: `done INDEX`
 
 > * Marks the item at the specified `INDEX` as done. <br>
-<img src="" width>
 > * The index refers to the index number shown in the currently displayed UI.
-<img src="" width>
 > * The index **must be a positive integer** 1, 2, 3, ...<br>
 > * Events cannot be marked.<br>
 
