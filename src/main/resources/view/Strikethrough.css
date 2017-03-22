@@ -2,3 +2,7 @@
 	-fx-strikethrough: true;
 	-fx-opacity: 0.5;
 }
+
+#cardPane:done {
+	-fx-background-color: lightgray;
+}

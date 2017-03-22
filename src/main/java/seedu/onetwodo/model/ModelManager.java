@@ -126,6 +126,20 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
     }
 
+    @Override
+    public void updatefilteredTaskListByDoneStatus() {
+        switch (doneStatus) {
+        case DONE:
+            updateFilteredDoneTaskList();
+            break;
+        case UNDONE:
+            updateFilteredUndoneTaskList();
+            break;
+        case ALL:
+            updateFilteredListToShowAll();
+            break;
+        }
+    };
     //========== Inner classes/interfaces used for filtering =================================================
 
     @Override

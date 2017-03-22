@@ -52,6 +52,7 @@ public class DoneCommand extends Command {
             throw new CommandException(ive.getMessage());
         }
 
+        model.updatefilteredTaskListByDoneStatus();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToComplete));
     }
 }

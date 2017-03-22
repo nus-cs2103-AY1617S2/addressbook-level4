@@ -148,9 +148,9 @@ public class EditCommand extends Command {
             return endDate;
         }
 
-        public void setDescription(Optional<Description> address) {
-            assert address != null;
-            this.description = address;
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
         public Optional<Description> getDescription() {

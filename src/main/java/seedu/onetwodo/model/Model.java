@@ -56,4 +56,6 @@ public interface Model {
     DoneStatus getDoneStatus();
 
     void setDoneStatus(DoneStatus doneStatus);
+
+    void updatefilteredTaskListByDoneStatus();
 }

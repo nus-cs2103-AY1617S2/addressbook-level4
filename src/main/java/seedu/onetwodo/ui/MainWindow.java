@@ -33,7 +33,6 @@ import seedu.onetwodo.model.task.TaskType;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
@@ -88,7 +87,6 @@ public class MainWindow extends UiPart<Region> {
 
         // Configure the UI
         setTitle(config.getAppTitle());
-        setIcon(ICON);
         setWindowMinSize();
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
@@ -191,14 +189,6 @@ public class MainWindow extends UiPart<Region> {
 
     private void setTitle(String appTitle) {
         primaryStage.setTitle(appTitle);
-    }
-
-    /**
-     * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
-     */
-    private void setIcon(String iconSource) {
-        FxViewUtil.setStageIcon(primaryStage, iconSource);
     }
 
     /**

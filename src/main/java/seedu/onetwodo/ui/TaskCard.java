@@ -1,5 +1,8 @@
 package seedu.onetwodo.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +14,10 @@ import seedu.onetwodo.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+    private static final String DONE_PSUEDO_CLASS = "done";
+    private static final String DATE_SPACING = "  -  ";
+    private static final DateTimeFormatter INFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter OUTFORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
     @FXML
     private HBox cardPane;
@@ -39,8 +46,9 @@ public class TaskCard extends UiPart<Region> {
         setDescription(task);
         initTags(task);
         if (task.getDoneStatus()) {
-            PseudoClass donePseudoClass = PseudoClass.getPseudoClass("done");
+            PseudoClass donePseudoClass = PseudoClass.getPseudoClass(DONE_PSUEDO_CLASS);
             name.pseudoClassStateChanged(donePseudoClass, true);
+            cardPane.pseudoClassStateChanged(donePseudoClass, true);
         }
     }
 
@@ -48,8 +56,14 @@ public class TaskCard extends UiPart<Region> {
         String startDateText = task.getStartDate().value;
         String endDateText = task.getEndDate().value;
         if (startDateText.length() > 0 || endDateText.length() > 0) {
-            startDate.setText(startDateText);
-            endDate.setText(endDateText);
+            if (startDateText.length() > 0) {
+                LocalDateTime startDateTime = LocalDateTime.parse(startDateText.substring(7), INFORMATTER);
+                startDate.setText(startDateTime.format(OUTFORMATTER) + DATE_SPACING);
+            }
+            if (endDateText.length() > 0) {
+                LocalDateTime endDateTime = LocalDateTime.parse(endDateText.substring(5), INFORMATTER);
+                endDate.setText(endDateTime.format(OUTFORMATTER));
+            }
         } else {
             dateBox.getChildren().clear();
         }
