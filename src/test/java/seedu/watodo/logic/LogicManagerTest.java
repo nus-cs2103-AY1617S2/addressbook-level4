@@ -24,6 +24,7 @@ import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.watodo.commons.events.ui.ShowHelpRequestEvent;
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.AddCommand;
 import seedu.watodo.logic.commands.ClearCommand;
 import seedu.watodo.logic.commands.Command;
@@ -138,12 +139,15 @@ public class LogicManagerTest {
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
-            CommandResult result = logic.execute(inputCommand);
+            CommandResult result;
+            result = logic.execute(inputCommand);
             assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, result.feedbackToUser);
         } catch (CommandException e) {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());
+        } catch (IllegalValueException e) {
+                e.printStackTrace();
         }
 
         //Confirm the ui display elements should contain the right data

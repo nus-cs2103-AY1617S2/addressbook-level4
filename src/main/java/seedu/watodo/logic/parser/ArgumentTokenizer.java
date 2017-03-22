@@ -45,10 +45,9 @@ public class ArgumentTokenizer {
      * Returns unique value when there is only one occurrence of given prefix.
      * @throws IllegalValueException if there is more than one occurrence of the prefix in the args
      */
-    public Optional<String> getUniqueValue(Prefix prefix) {
+    public Optional<String> getUniqueValue(Prefix prefix) throws IllegalValueException {
         if (getAllValues(prefix).isPresent() && getAllValues(prefix).get().size() > 1) {
-            IllegalValueException e = new IllegalValueException(DateTimeParser.MESSAGE_INVALID_NUM_DATETIME);
-            return Optional.of(e.getMessage());
+            throw new IllegalValueException(DateTimeParser.MESSAGE_INVALID_NUM_DATETIME);
         }
         return getAllValues(prefix).flatMap((values) -> Optional.of(values.get(values.size() - 1)));
     }
@@ -69,7 +68,7 @@ public class ArgumentTokenizer {
      *     If the string before the first prefix is empty, Optional.empty() will be returned.
      * @throws IllegalValueException 
      */
-    public Optional<String> getPreamble() {
+    public Optional<String> getPreamble() throws IllegalValueException {
 
         Optional<String> storedPreamble = getUniqueValue(new Prefix(""));
 
