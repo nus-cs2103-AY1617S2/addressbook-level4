@@ -3,12 +3,14 @@ package werkbook.task.logic.commands;
 import werkbook.task.commons.core.Messages;
 import werkbook.task.logic.commands.exceptions.CommandException;
 import werkbook.task.model.Model;
+import werkbook.task.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
+    protected Storage storage;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -36,6 +38,11 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
     /**
      * Checks if the command is mutable or not
      * @return true if command is mutable, false if not
