@@ -19,7 +19,7 @@ By : `Team F12-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 1. Download the latest `ToDoApp.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your ToDoApp.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   > <img src="images/ToDoApp.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
