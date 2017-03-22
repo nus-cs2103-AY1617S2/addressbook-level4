@@ -8,8 +8,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class Event implements ReadOnlyEvent {
 
     private Description description;
-    private FromDate fromdate;
-    private ToDate todate;
+    private StartDate startdate;
+    private EndDate enddate;
     private StartTime starttime;
     private EndTime endtime;
     private Location location;
@@ -17,14 +17,14 @@ public class Event implements ReadOnlyEvent {
     private UniqueTagList tags;
 
     /**
-     * Description must be present, FromDate must be present.
+     * Description must be present, StartDate must be present.
      */
-    public Event(Description description, FromDate fromdate, ToDate todate,
+    public Event(Description description, StartDate startdate, EndDate enddate,
             StartTime starttime, EndTime endtime, Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, fromdate, tags);
+        assert !CollectionUtil.isAnyNull(description, startdate);
         this.description = description;
-        this.fromdate = fromdate;
-        this.todate = todate;
+        this.startdate = startdate;
+        this.enddate = enddate;
         this.starttime = starttime;
         this.endtime = endtime;
         this.location = location;
@@ -35,7 +35,7 @@ public class Event implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getDescription(), source.getFromDate(), source.getToDate(), source.getStartTime(),
+        this(source.getDescription(), source.getStartDate(), source.getEndDate(), source.getStartTime(),
                 source.getEndTime(), source.getLocation(), source.getTags());
     }
 
@@ -49,23 +49,23 @@ public class Event implements ReadOnlyEvent {
         return description;
     }
 
-    public void setFromDate(FromDate fromdate) {
-        assert fromdate != null;
-        this.fromdate = fromdate;
+    public void setStartDate(StartDate startdate) {
+        assert startdate != null;
+        this.startdate = startdate;
     }
 
     @Override
-    public FromDate getFromDate() {
-        return fromdate;
+    public StartDate getStartDate() {
+        return startdate;
     }
 
-    public void setToDate(ToDate todate) {
-        this.todate = todate;
+    public void setEndDate(EndDate enddate) {
+        this.enddate = enddate;
     }
 
     @Override
-    public ToDate getToDate() {
-        return todate;
+    public EndDate getEndDate() {
+        return enddate;
     }
 
     public void setStartTime(StartTime starttime) {
@@ -116,8 +116,8 @@ public class Event implements ReadOnlyEvent {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
-        this.setFromDate(replacement.getFromDate());
-        this.setToDate(replacement.getToDate());
+        this.setStartDate(replacement.getStartDate());
+        this.setEndDate(replacement.getEndDate());
         this.setStartTime(replacement.getStartTime());
         this.setEndTime(replacement.getEndTime());
         this.setLocation(replacement.getLocation());
@@ -133,8 +133,8 @@ public class Event implements ReadOnlyEvent {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, fromdate, todate, starttime, endtime, location, tags);
+        // use this method for custend fields hashing instead of implementing your own
+        return Objects.hash(description, startdate, enddate, starttime, endtime, location, tags);
     }
 
     @Override
