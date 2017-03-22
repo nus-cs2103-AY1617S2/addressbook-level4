@@ -10,7 +10,7 @@ import seedu.doit.logic.parser.DateTimeParser;
  * Represents a Item's start time in the task manager. Guarantees: immutable; is
  * valid as declared in {@link #isValidStartTime(String)}
  */
-public class StartTime {
+public class StartTime implements Comparable<StartTime> {
 
     public static final String NO_START_TIME = null;
     public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be "
@@ -81,6 +81,7 @@ public class StartTime {
         return this.value.hashCode();
     }
 
+    @Override
     public int compareTo(StartTime other) {
         return this.value.compareTo(other.value);
     }

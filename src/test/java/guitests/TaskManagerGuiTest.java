@@ -3,6 +3,7 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Comparator;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.After;
@@ -141,6 +142,19 @@ public abstract class TaskManagerGuiTest {
      */
     protected void assertAllPanelsMatch(TestTask[] expectedList) {
         TestUtil.sortTasks(expectedList);
+        TestTask[] expectedEvents = TestUtil.getEvents(expectedList);
+        TestTask[] expectedTasks = TestUtil.getTasks(expectedList);
+        TestTask[] expectedFloatingTasks = TestUtil.getFloatingTasks(expectedList);
+        assertTrue(this.eventListPanel.isListMatching(expectedEvents));
+        assertTrue(this.taskListPanel.isListMatching(expectedTasks));
+        assertTrue(this.floatingTaskListPanel.isListMatching(expectedFloatingTasks));
+    }
+
+    /**
+     * Asserts the tasks shown in each panel will match
+     */
+    protected void assertAllPanelsMatch(TestTask[] expectedList, Comparator<ReadOnlyTask> taskComparator) {
+        TestUtil.sortTasks(expectedList, taskComparator);
         TestTask[] expectedEvents = TestUtil.getEvents(expectedList);
         TestTask[] expectedTasks = TestUtil.getTasks(expectedList);
         TestTask[] expectedFloatingTasks = TestUtil.getFloatingTasks(expectedList);

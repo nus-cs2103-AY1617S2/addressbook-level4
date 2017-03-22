@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ import seedu.doit.model.item.Priority;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTime;
 import seedu.doit.model.item.Task;
+import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 import seedu.doit.storage.XmlSerializableTaskManager;
@@ -384,7 +386,11 @@ public class TestUtil {
     }
 
     public static void sortTasks(TestTask[] tasks) {
-        Arrays.sort(tasks);
+        Arrays.sort(tasks, new TaskNameComparator());
+    }
+
+    public static void sortTasks(TestTask[] tasks, Comparator<ReadOnlyTask> taskComparator) {
+        Arrays.sort(tasks, taskComparator);
     }
 
     public static Tag[] getTagList(String tags) {

@@ -11,6 +11,7 @@ import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.EditCommand;
 import seedu.doit.model.item.Name;
 import seedu.doit.model.item.Priority;
+import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.testutil.TaskBuilder;
 import seedu.doit.testutil.TestTask;
@@ -132,7 +133,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         }
         // confirm the list now contains all previous tasks plus the task with updated details
         this.expectedTasksList[taskManagerIndex - 1] = editedTask;
-        Arrays.sort(this.expectedTasksList);
+        Arrays.sort(this.expectedTasksList, new TaskNameComparator());
         assertAllPanelsMatch(this.expectedTasksList);
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }

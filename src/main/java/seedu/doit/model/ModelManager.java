@@ -12,8 +12,12 @@ import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.commons.util.CollectionUtil;
 import seedu.doit.commons.util.StringUtil;
+import seedu.doit.model.item.EndTimeComparator;
+import seedu.doit.model.item.PriorityComparator;
 import seedu.doit.model.item.ReadOnlyTask;
+import seedu.doit.model.item.StartTimeComparator;
 import seedu.doit.model.item.Task;
+import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.model.item.UniqueTaskList;
 import seedu.doit.model.item.UniqueTaskList.DuplicateTaskException;
 import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
@@ -112,8 +116,27 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    // =========== Filtered Task List Accessors
-    // =============================================================
+    @Override
+    public void sortBy(String sortType) {
+        switch (sortType) {
+        case "start time":
+            taskManager.setTaskComparator(new StartTimeComparator());
+            break;
+        case "end time":
+            taskManager.setTaskComparator(new EndTimeComparator());
+            break;
+        case "priority":
+            taskManager.setTaskComparator(new PriorityComparator());
+            break;
+        case "name":
+            //fallthrough
+        default:
+            taskManager.setTaskComparator(new TaskNameComparator());
+            break;
+        }
+    }
+
+    //=========== Filtered Task List Accessors ============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
