@@ -20,7 +20,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a task with and without date to the task list. \n"
             + " Does not allow time without date. \n"
-            + "Parameters: NAME d/DATE t/TIME\n"
+            + "Parameters: NAME by:DATE @TIME\n"
             + "Example: " + COMMAND_WORD
             + " Read Harry Potter book 1 ";
 
