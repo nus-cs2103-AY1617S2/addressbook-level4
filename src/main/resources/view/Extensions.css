@@ -3,6 +3,17 @@
     -fx-background-color: red;
 }
 
+.overdue {
+	-fx-background-color: red;
+}
+
+.pending {
+	-fx-background-color: #17ef22;
+}
+
+.priority {
+	-fx-background-color: yellow;
+}
 
 .tag-selector {
     -fx-border-width: 1;

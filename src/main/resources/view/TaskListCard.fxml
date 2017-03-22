@@ -7,17 +7,19 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" prefWidth="473.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane HBox.hgrow="ALWAYS">
+      <Pane fx:id="colourTag" prefWidth="26.0" styleClass="pending" stylesheets="@Extensions.css" />
+        <GridPane prefHeight="76.0" prefWidth="447.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="105.0" prefHeight="105.0" prefWidth="173.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -27,20 +29,36 @@
                     </padding>
 
                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="5">
-                            <children>
-                                <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label" />
-                                    <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-                                </HBox>
-                            </children>
+                  <HBox>
+                     <children>
+                        <Label fx:id="id" styleClass="cell_big_label" />
+                        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                        <HBox fx:id="datePane" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="427.0" spacing="5">
+                     <children>
+                        <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+                        <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
+                     </children>
                         </HBox>
+                  <HBox fx:id="timePane" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="427.0" spacing="5">
+                     <children>
+                        <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+                        <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" />
+                     </children>
+                  </HBox>
                         <FlowPane fx:id="tags" />
-                  <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-                  <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
                     </children>
                 </VBox>
             </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+         </rowConstraints>
 
         </GridPane>
     </children>
