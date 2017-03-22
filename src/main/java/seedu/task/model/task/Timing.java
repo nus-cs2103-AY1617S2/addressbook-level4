@@ -16,7 +16,7 @@ public class Timing implements Comparable<Timing> {
     public static final String MESSAGE_TIMING_CONSTRAINTS =
             "Task date should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
     public static final String[] TIMING_FORMAT = {
-            "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
+        "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
     public static final String NULL_TIMING = "n/a";
     public final String value;
     private Date date;
@@ -83,7 +83,7 @@ public class Timing implements Comparable<Timing> {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
 //@@author A0163559U
     /**
      * Results in Timing sorted in ascending order.
