@@ -30,6 +30,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
     private static final String RESOURCE_FONT_UBUNTU = "/resources/fonts/Ubuntu.ttf";
     private static final String RESOURCE_FONT_CONSOLAS = "/resources/fonts/Consolas.ttf";
+    private static final int TYPICAL_FONT_SIZE = -1;
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -53,7 +54,6 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         // Loads application fonts
-        int TYPICAL_FONT_SIZE = -1;
         Font.loadFont(getClass().getResourceAsStream(RESOURCE_FONT_UBUNTU), TYPICAL_FONT_SIZE);
         Font.loadFont(getClass().getResourceAsStream(RESOURCE_FONT_CONSOLAS), TYPICAL_FONT_SIZE);
 

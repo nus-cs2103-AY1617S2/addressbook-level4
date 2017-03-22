@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.opus.commons.exceptions.IllegalValueException;
-import seedu.opus.model.task.Priority;
 import seedu.opus.model.task.Priority.Type;
 
 public class PriorityTest {

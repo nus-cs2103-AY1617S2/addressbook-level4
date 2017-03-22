@@ -25,8 +25,6 @@ import seedu.opus.commons.core.EventsCenter;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
 import seedu.opus.commons.events.ui.JumpToListRequestEvent;
 import seedu.opus.commons.events.ui.ShowHelpRequestEvent;
-import seedu.opus.logic.Logic;
-import seedu.opus.logic.LogicManager;
 import seedu.opus.logic.commands.AddCommand;
 import seedu.opus.logic.commands.ClearCommand;
 import seedu.opus.logic.commands.Command;

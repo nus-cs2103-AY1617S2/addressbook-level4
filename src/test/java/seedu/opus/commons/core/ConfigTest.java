@@ -8,8 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.opus.commons.core.Config;
-
 public class ConfigTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -16,8 +16,8 @@ import java.util.Optional;
 import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.logic.commands.Command;
 import seedu.opus.logic.commands.EditCommand;
-import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.opus.logic.commands.IncorrectCommand;
 import seedu.opus.model.tag.UniqueTagList;
 
 /**

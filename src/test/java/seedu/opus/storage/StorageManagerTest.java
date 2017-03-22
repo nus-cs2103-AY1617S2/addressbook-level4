@@ -17,10 +17,6 @@ import seedu.opus.commons.events.storage.DataSavingExceptionEvent;
 import seedu.opus.model.ReadOnlyTaskManager;
 import seedu.opus.model.TaskManager;
 import seedu.opus.model.UserPrefs;
-import seedu.opus.storage.JsonUserPrefsStorage;
-import seedu.opus.storage.Storage;
-import seedu.opus.storage.StorageManager;
-import seedu.opus.storage.XmlTaskManagerStorage;
 import seedu.opus.testutil.EventsCollector;
 import seedu.opus.testutil.TypicalTestTasks;
 

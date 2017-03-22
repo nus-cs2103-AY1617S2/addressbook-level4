@@ -11,7 +11,6 @@ import java.time.ZoneId;
 import org.junit.Test;
 
 import seedu.opus.commons.exceptions.IllegalValueException;
-import seedu.opus.model.task.DateTime;
 
 public class DateTimeTest {
 

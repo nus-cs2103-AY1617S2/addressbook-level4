@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.opus.MainApp;
 import seedu.opus.commons.core.Config;
 import seedu.opus.commons.core.GuiSettings;
 import seedu.opus.model.ReadOnlyTaskManager;
