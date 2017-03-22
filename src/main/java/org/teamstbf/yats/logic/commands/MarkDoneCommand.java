@@ -25,7 +25,7 @@ public class MarkDoneCommand extends EditCommand{
 	public MarkDoneCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
 		super(filteredTaskListIndex, editTaskDescriptor);
 	}
-	
+
 	public static final String COMMAND_WORD = "done";
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
 	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
@@ -53,12 +53,12 @@ public class MarkDoneCommand extends EditCommand{
 		model.updateFilteredListToShowAll();
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 	}
-	
+
 	/**
 	 * Creates and returns a {@code Task} with the details of {@code taskToEdit}
 	 * edited with {@code editTaskDescriptor}.
 	 */
-	
+
 	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor){
 		assert taskToEdit != null;
 

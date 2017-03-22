@@ -9,7 +9,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
  * Undoes the last option that mutated the save state of the data
  */
 public class RedoCommand extends Command {
-	
+
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_UNDO_TASK_SUCCESS = "Redo completed";

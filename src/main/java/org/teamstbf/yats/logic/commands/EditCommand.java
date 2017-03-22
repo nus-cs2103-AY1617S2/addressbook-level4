@@ -201,11 +201,11 @@ public class EditCommand extends Command {
 		public Optional<UniqueTagList> getTags() {
 			return tags;
 		}
-		
+
 		public IsDone getIsDone() {
 			return isDone;
 		}
-		
+
 		public IsDone markDone() {
 			isDone.markDone();
 			return isDone;
