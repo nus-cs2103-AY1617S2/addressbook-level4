@@ -23,9 +23,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to TaskIt. "
-            + "Parameters: TITLE [t/TAG]...\n"
+            + "Parameters: TITLE [t/TAG][from START to END][by End]...\n"
             + "Example: " + COMMAND_WORD
-            + " Finish SWE project t/school";
+            + " Finish SWE project by 11pm t/school";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskIt";

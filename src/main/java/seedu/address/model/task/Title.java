@@ -17,7 +17,7 @@ public class Title {
      * The first character of the task must not be a whitespace, otherwise
      * " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String title;
 
@@ -30,9 +30,9 @@ public class Title {
     public Title(String title) throws IllegalValueException {
         assert title != null;
         String trimmedTitle= title.trim();
-        // if (!isValidTitle(trimmedName)) {
-        // throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-        // }
+        if (!isValidTitle(trimmedTitle)) {
+            throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
+        }
         this.title = trimmedTitle;
     }
 
@@ -40,7 +40,7 @@ public class Title {
      * Returns true if a given string is a valid person name.
      */
     public static boolean isValidTitle(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+        return test.matches(TITLE_VALIDATION_REGEX);
     }
 
     @Override
