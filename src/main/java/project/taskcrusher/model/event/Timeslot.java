@@ -13,6 +13,8 @@ public class Timeslot {
     public static final String MESSAGE_TIMESLOT_CONSTRAINTS = "Start date must be before end date";
     public static final String MESSAGE_TIMESLOT_CLASH = "Timeslot clashes with one or more pre-existing events";
 
+    public static final boolean IS_LOADING_FROM_STORAGE = false;
+
     public final Date start;
     public final Date end;
 
@@ -24,6 +26,18 @@ public class Timeslot {
         this.end = DateUtil.parseDate(end, true);
 
         if (!isValidTimeslot(this.start, this.end)) {
+            throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
+        }
+    }
+
+    public Timeslot(String start, String end, boolean isNew) throws IllegalValueException {
+        assert start != null;
+        assert end != null;
+
+        this.start = DateUtil.parseDate(start, isNew);
+        this.end = DateUtil.parseDate(end, isNew);
+
+        if (!isValidTimeslot(this.start, this.end, isNew)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
         }
     }
@@ -42,18 +56,6 @@ public class Timeslot {
             return true;
         } else {
             return false;
-        }
-    }
-
-    public Timeslot(String start, String end, boolean isNew) throws IllegalValueException {
-        assert start != null;
-        assert end != null;
-
-        this.start = DateUtil.parseDate(start, isNew);
-        this.end = DateUtil.parseDate(end, isNew);
-
-        if (!isValidTimeslot(this.start, this.end, isNew)) {
-            throw new IllegalValueException(MESSAGE_TIMESLOT_CONSTRAINTS);
         }
     }
 
