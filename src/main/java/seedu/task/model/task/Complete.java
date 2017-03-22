@@ -4,7 +4,13 @@ import seedu.task.commons.exceptions.IllegalValueException;
 
 public class Complete {
 
-    public boolean completion = false;
+    public static final String COMPLETE_WORD = "true";
+    public static final String UNCOMPLETE_WORD = "false";
+
+    public static final boolean COMPLETE_VALUE = true;
+    public static final boolean UNCOMPLETE_VALUE = false;
+
+    public boolean completion = UNCOMPLETE_VALUE;
 
     /**
     * Validates given description.
@@ -16,11 +22,11 @@ public class Complete {
     }
 
     public void setComplete() {
-        this.completion = true;
+        this.completion = COMPLETE_VALUE;
     }
 
     public void setNotComplete() {
-        this.completion = false;
+        this.completion = UNCOMPLETE_VALUE;
     }
 
     public boolean getCompletion() {
@@ -28,7 +34,7 @@ public class Complete {
     }
 
     public String getString() {
-        return completion == true ? "true" : "false";
+        return completion == true ? COMPLETE_WORD : UNCOMPLETE_WORD;
     }
 
 }
