@@ -9,8 +9,8 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 //@author A0139448U
 public class IsDone {
 
-	private final String ISDONE_NOTDONE = "not done";
-	private final String ISDONE_DONE = "done";
+	public final static String ISDONE_NOTDONE = "No";
+	public final static String ISDONE_DONE = "Yes";
 
 	private boolean isDone;
 	public String value;

@@ -33,7 +33,7 @@ public class EditCommand extends Command {
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
 	protected final int filteredTaskListIndex;
 	protected final EditTaskDescriptor editTaskDescriptor;
