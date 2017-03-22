@@ -338,7 +338,7 @@ Here are some examples of tasks which you might want to _edit_: <br>
 This command will direct me to make the specified update to a task with the task's index `<task_index>`. <br>
 > * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
 You can edit more parameters for your task concurrently using the following format<br>
-E.g. **`edit`** ` 1; start_time 3pm; end_time 8pm;` <br>
+E.g. **`edit`** `1; start_time 3pm; end_time 8pm;` <br>
 
 <img src="images/UiUpdateCommand.png" width="600"><br>
 _Figure 3.7.1. Edit Command_
@@ -357,7 +357,7 @@ Here are some reasons why you might want to _completed_ a task:
 E.g. **`complete`** ` 1` <br>
 > * **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
 You can complete multiple tasks simultaneously using the following format<br>
-E.g. **`complete`** ` 1,3,4` <br>
+E.g. **`complete`** `1,3,4` <br>
 
 ### 3.9. Get help : `help`
 
@@ -416,9 +416,10 @@ Your wish is my command!
 |Add          |**`add`** `<task>; <due date and time>`      |**`add`** `project proposal; 041216 2pm`            |
 |Delete       |**`delete`** `<task>`                        |**`delete`** `watch tv with the children`           |
 |Find         |**`find`** `<task>`                          |**`find`** `project`                                |
-|List         |**`list`**                                   |                                                    |
+|List         |**`list`** `<optional filter>`               |**`list`** `uncompleted`                            |
 |Select       |**`select`** `<task>`                        |**`select`** `presentation`                         |
-|Update       |**`update`** `<task> <parameter> <new_value>`|**`update`** `<buy bread> <name> <buy white bread>` |
+|Edit         |**`edit`** `<task_index>; <parameter> <new_value>;` |**`edit`** `1; name buy white bread;`        |
+|Complete     |**`complete`** `<task_index>`                |**`complete`** `1`                                  |
 |Help         |**`help`**                                   |                                                    |
 |Save         |**`save`** `<directory>`                     |**`save`** `C:\Users\Jim\Desktop`                   |
 |Exit         |**`exit`**                                   |                                                    |
