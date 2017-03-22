@@ -55,17 +55,20 @@ public class TaskCard extends UiPart<Region> {
     private void setDate(ReadOnlyTask task) {
         String startDateText = task.getStartDate().value;
         String endDateText = task.getEndDate().value;
-        if (startDateText.length() > 0 || endDateText.length() > 0) {
-            if (startDateText.length() > 0) {
-                LocalDateTime startDateTime = LocalDateTime.parse(startDateText.substring(7), INFORMATTER);
-                startDate.setText(startDateTime.format(OUTFORMATTER) + DATE_SPACING);
-            }
-            if (endDateText.length() > 0) {
-                LocalDateTime endDateTime = LocalDateTime.parse(endDateText.substring(5), INFORMATTER);
-                endDate.setText(endDateTime.format(OUTFORMATTER));
-            }
-        } else {
+        switch (task.getTaskType()) {
+        case DEADLINE:
+            LocalDateTime endDateTime = LocalDateTime.parse(endDateText.substring(5), INFORMATTER);
+            endDate.setText("by: " + endDateTime.format(OUTFORMATTER));
+            break;
+        case EVENT:
+            LocalDateTime startDateTime = LocalDateTime.parse(startDateText.substring(7), INFORMATTER);
+            startDate.setText(startDateTime.format(OUTFORMATTER) + DATE_SPACING);
+            LocalDateTime endDateTime1 = LocalDateTime.parse(endDateText.substring(5), INFORMATTER);
+            endDate.setText(endDateTime1.format(OUTFORMATTER));
+            break;
+        case TODO:
             dateBox.getChildren().clear();
+            break;
         }
     }
 
