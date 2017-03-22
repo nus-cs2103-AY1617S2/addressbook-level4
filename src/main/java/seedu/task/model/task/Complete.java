@@ -15,11 +15,11 @@ public class Complete {
         this.completion = completion;
     }
 
-    public void setCompete() {
+    public void setComplete() {
         this.completion = true;
     }
 
-    public void setNotCompete() {
+    public void setNotComplete() {
         this.completion = false;
     }
 

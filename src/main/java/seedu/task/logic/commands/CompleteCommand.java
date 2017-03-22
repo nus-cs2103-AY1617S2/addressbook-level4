@@ -58,7 +58,6 @@ public class CompleteCommand extends Command {
 
         try {
             model.updateTask(targetIndex, completedTask);
-            model.getFilteredTaskList().get(targetIndex).getComplete().setCompete();
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

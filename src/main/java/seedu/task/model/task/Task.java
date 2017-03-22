@@ -85,11 +85,11 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setComplete() {
-        this.complete.setCompete();
+        this.complete.setComplete();
     }
 
-    public void resetComplete() {
-        this.complete.setNotCompete();
+    public void setNotComplete() {
+        this.complete.setNotComplete();
     }
 
     @Override
@@ -113,6 +113,11 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setDuration(replacement.getDuration());
         this.setDueDate(replacement.getDueDate());
+        if (replacement.getComplete().getCompletion()) {
+            this.setComplete();
+        } else {
+            this.setNotComplete();
+        }
         this.setTags(replacement.getTags());
     }
 
