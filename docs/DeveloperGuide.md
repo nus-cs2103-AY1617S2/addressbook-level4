@@ -1,6 +1,6 @@
 # TodoList Level 4 - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team AwesomeTodo`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -191,10 +191,15 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the TodoList data.
+* stores another TodoList instance which holds the previous state of the todo list before the most recent modifying change.
 * exposes a `UnmodifiableObservableList<ReadOnlyTodo>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+
+**Handling Undo Command**
+
+The second TodoList object stored by the Model makes undoing commands very simple. When the Logic component instructs the Model to undo the last command, the Model simply copies the previous state into the TodoList data and sets the previous state to null. Of course, as with other modifying commands, a TodoListEventChanged event is raised.
 
 ### 2.5. Storage component
 

@@ -1,4 +1,4 @@
-# Awesome Todo (Level 4)
+# Awesome Todo
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T11-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T11-B2/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/36su1ufd5q8ka33g/branch/master?svg=true)](https://ci.appveyor.com/project/jjamay/main/branch/master)

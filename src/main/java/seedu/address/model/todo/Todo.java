@@ -48,7 +48,7 @@ public class Todo implements ReadOnlyTodo {
         this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    //@@author A0163786Nm
+    //@@author A0163786N
     /**
      * Constructor for general todo
      */
