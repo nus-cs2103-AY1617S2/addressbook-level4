@@ -67,7 +67,7 @@ public class ChatPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         displayed.setValue(event.message);
         chatList.add(new Chat(event.message, Sender.SURU));
-        chatListView.scrollTo(chatList.size()-1);
+        chatListView.scrollTo(chatList.size() - 1);
     }
 
 
@@ -80,7 +80,7 @@ public class ChatPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                switch(chat.getSender()){
+                switch(chat.getSender()) {
                 case SURU:
                     setGraphic(new SuruChatMessage(chat).getRoot());
                     break;
