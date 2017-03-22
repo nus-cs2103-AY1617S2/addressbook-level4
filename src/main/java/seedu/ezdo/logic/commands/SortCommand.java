@@ -1,5 +1,7 @@
 package seedu.ezdo.logic.commands;
 
+import seedu.ezdo.commons.core.EventsCenter;
+import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
@@ -32,6 +34,7 @@ public class SortCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_FIELD);
         }
         model.sortTasks(sortCriteria);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(0));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
