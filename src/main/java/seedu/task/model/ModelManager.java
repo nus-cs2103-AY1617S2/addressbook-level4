@@ -87,7 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         undoManager.pushUndo(taskBackup);
-        undoManager.pushTaskIndex(taskManagerIndex);
+        undoManager.pushEditedTask(new Task(editedTask));
         indicateTaskManagerChanged();
     }
 
@@ -222,6 +222,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UndoManager getUndoManager() {
         return undoManager;
+    }
+
+    @Override
+    public int getTaskID(Task task) {
+        return taskManager.getTaskID(task);
     }
 
 }

@@ -75,9 +75,12 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
-    public CommandResult executeUndo(Model model, Integer previousIndex, Task previousTask) throws CommandException {
+    public CommandResult executeUndo(Task previousTask, Task editedTask, Model model) throws CommandException {
+
+        int taskID = model.getTaskID(editedTask);
+
         try {
-            model.updateTask(previousIndex, previousTask);
+            model.updateTaskUndo(taskID, previousTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

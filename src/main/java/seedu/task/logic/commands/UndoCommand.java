@@ -12,7 +12,7 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNDO_SUCCESS = "Undo Command Successful";
-    public static final String NOTHING_TO_UNDO = "Nothing To Undo LAR";
+    public static final String NOTHING_TO_UNDO = "Nothing To Undo";
 
 
     @Override
@@ -42,8 +42,8 @@ public class UndoCommand extends Command {
             break;
         case "Edit":
             previousTask = model.getUndoManager().popUndo();
-            Integer previousIndex = model.getUndoManager().popTaskIndex();
-            new EditCommand().executeUndo(model, previousIndex, previousTask);
+            Task editedTask = model.getUndoManager().popEdited();
+            new EditCommand().executeUndo(previousTask, editedTask, model);
             break;
         default:
             return new CommandResult(NOTHING_TO_UNDO);

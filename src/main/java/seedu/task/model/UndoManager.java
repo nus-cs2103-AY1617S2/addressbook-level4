@@ -7,12 +7,12 @@ import seedu.task.model.task.Task;
 public class UndoManager {
 
     private Stack<Task> undoStack;
-    private Stack<Integer> taskIndex;
+    private Stack<Task> editedStack;
     private static CommandStack previousCommand;
 
     public UndoManager() {
         undoStack = new Stack<Task>();
-        taskIndex = new Stack<Integer>();
+        editedStack = new Stack<Task>();
         previousCommand = new CommandStack();
     }
 
@@ -20,24 +20,24 @@ public class UndoManager {
         undoStack.push(task);
     }
 
-    public void pushTaskIndex(int index) {
-        taskIndex.push(index);
-    }
-
     public static void pushCommand(String command) {
         previousCommand.pushCommand(command);
+    }
+
+    public void pushEditedTask(Task task) {
+        editedStack.push(task);
     }
 
     public Task popUndo () {
         return undoStack.pop();
     }
 
-    public int popTaskIndex() {
-        return taskIndex.pop();
-    }
-
     public String popCommand() {
         return previousCommand.popCommand();
+    }
+
+    public Task popEdited() {
+        return editedStack.pop();
     }
 
     public boolean getStackStatus() {

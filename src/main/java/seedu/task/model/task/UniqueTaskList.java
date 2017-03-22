@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -126,5 +127,9 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    public int getTaskID(Task task) {
+        return internalList.indexOf(task);
+    }
 
 }

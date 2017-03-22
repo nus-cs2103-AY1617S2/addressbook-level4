@@ -191,4 +191,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ChatList getChatList() {
         return chats;
     }
+
+    public int getTaskID(Task task) {
+        return tasks.getTaskID(task);
+    }
 }
