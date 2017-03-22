@@ -20,7 +20,9 @@ import seedu.doit.logic.commands.ListCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.SaveCommand;
 import seedu.doit.logic.commands.SelectCommand;
+import seedu.doit.logic.commands.SortCommand;
 import seedu.doit.logic.commands.UndoCommand;
+
 
 /**
  * Parses user input.
@@ -60,6 +62,9 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

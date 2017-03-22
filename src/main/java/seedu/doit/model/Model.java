@@ -71,6 +71,11 @@ public interface Model {
             Set<String> descriptionKeywords, Set<String> tagKeywords);
 
     /**
+     * Set how the tasks are sorted
+     */
+    void sortBy(String sortType);
+
+    /**
      * Undo the previous undoable command.
      *
      * Undo command is not undoable
@@ -78,6 +83,7 @@ public interface Model {
      * @throws EmptyTaskManagerStackException
      */
     void undo() throws EmptyTaskManagerStackException;
+
 
     /**
      * Reverse the undo command.
