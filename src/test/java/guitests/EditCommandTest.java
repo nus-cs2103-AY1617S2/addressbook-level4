@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import org.junit.Test;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
@@ -108,6 +109,53 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
+    @Test
+    public void edit_editStartAndEndDate_success() throws Exception {
+        String detailsToEdit = "from today to next week";
+        int taskManagerIndex = 2;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 2").withStartTime("today")
+                .withDeadline("next week").withLabels("owesMoney", "friends")
+                .withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_clearDates_success() throws Exception {
+        String detailsToEdit = "clear dates";
+        int taskManagerIndex = 1;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 1")
+                .withLabels("friends")
+                .withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_changeFromTwoToOneDate_success() throws Exception {
+        String detailsToEdit = "by next week";
+        int taskManagerIndex = 7;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 3")
+                .withDeadline("next week").withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_changeFromOneToTwoDates_success() throws Exception {
+        String detailsToEdit = "from today to next week";
+        int taskManagerIndex = 7;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 7").withStartTime("today")
+                .withDeadline("next week").withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+
     /**
      * Checks whether the edited task has the correct updated details.
      *
@@ -130,6 +178,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
+        Arrays.sort(expectedTasksList);
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }

@@ -1,8 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_COMPLETED;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS_INCOMPLETE;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +15,12 @@ import seedu.address.model.task.UniqueTaskList;
 
 public class MarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "MARK";
+    public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task as completed or incomplete, task is "
-            + "identified by the index number used in the last task listing. "
-            + "Parameters: INDEX [" + PREFIX_STATUS_COMPLETED + " | " + PREFIX_STATUS_INCOMPLETE + "]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_STATUS_INCOMPLETE;
+            + "identified by the index number used in the last task listing.\n "
+            + "Parameters: INDEX [completed|incomplete]\n"
+            + "Example: mark 1 completed\n";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
     public static final String MESSAGE_NOT_MARKED = "Status must be provided.";

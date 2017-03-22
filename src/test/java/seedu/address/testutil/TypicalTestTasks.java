@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskManager;
@@ -29,7 +30,7 @@ public class TypicalTestTasks {
                     .withDeadline("11-11-2017 2300").withStatus(false).build();
             task6 = new TaskBuilder().withTitle("Complete task 6").withStartTime("10-10-2017 0100")
                     .withDeadline("10-11-2017 2300").withStatus(false).build();
-            task7 = new TaskBuilder().withTitle("Complete task 7").withStartTime("10-10-2017 0100")
+            task7 = new TaskBuilder().withTitle("Complete task 7")
                     .withDeadline("11-11-2017 2300").withStatus(false).build();
 
             // Manually added
@@ -54,7 +55,9 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{task1, task2, task3, task4, task5, task6, task7};
+        TestTask[] tasks = new TestTask[]{task1, task2, task3, task4, task5, task6, task7};
+        Arrays.sort(tasks);
+        return tasks;
     }
 
     public TaskManager getTypicalTaskManager() {
