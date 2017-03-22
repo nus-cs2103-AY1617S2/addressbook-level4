@@ -67,7 +67,9 @@ public class TypicalTestTasks {
             }
         }
     }
-
+    public TestTask[] getEmptyTasks() {
+        return new TestTask[]{};
+    }
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{fiona};
     }
