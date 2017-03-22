@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
@@ -14,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@DarkTheme.css" />
       <URL value="@Extensions.css" />
@@ -36,9 +31,9 @@
       </MenuBar>
       <SplitPane id="splitPane" fx:id="contentSplitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" style="-fx-max-width: 250; -fx-min-width: 250;" SplitPane.resizableWithParent="false">
+            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1300.0" prefWidth="300.0" style="-fx-max-width: 250; -fx-min-width: 250;" SplitPane.resizableWithParent="false">
                <children>
-                  <AnchorPane fx:id="leftPanelPlaceholder" prefHeight="200.0" prefWidth="100.0" />
+                  <AnchorPane fx:id="leftPanelPlaceholder" prefHeight="1300.0" prefWidth="100.0" />
                </children>
             </VBox>
             <VBox>
@@ -49,14 +44,8 @@
                      </padding>
                   </AnchorPane>
                    <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border">
-                       <padding>
-                           <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                       </padding>
                    </AnchorPane>
                   <VBox fx:id="taskList" prefHeight="1200.0">
-                      <padding>
-                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                      </padding>
                      <children>
                         <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                      </children>

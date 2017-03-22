@@ -22,10 +22,13 @@ public class LeftPanel extends UiPart<Region> {
     private static final String FXML = "LeftPanel.fxml";
 
     @FXML
-    private javafx.scene.control.Label todayListView;
+    private javafx.scene.control.Label appTitleLabel;
 
     @FXML
-    private javafx.scene.control.Label calendarListView;
+    private javafx.scene.control.Label todayLabel;
+
+    @FXML
+    private javafx.scene.control.Label calendarLabel;
 
     @FXML
     private ListView<Label> labelListView;
@@ -41,11 +44,11 @@ public class LeftPanel extends UiPart<Region> {
     }
 
     public void setTodayListView(ObservableList<ReadOnlyTask> taskList) {
-        todayListView.setText("Today " + taskList.size());
+        todayLabel.setText("Today " + taskList.size());
     }
 
     public void setCalendarListView(ObservableList<ReadOnlyTask> taskList) {
-        calendarListView.setText("Calendar");
+        calendarLabel.setText("Calendar");
     }
 
     public void setConnections(ObservableList<Label> labelList) {

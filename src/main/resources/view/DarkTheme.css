@@ -2,6 +2,12 @@
     -fx-background-color: #fafafa;
 }
 
+Vbox, SplitPane {
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 0;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Roboto";
@@ -76,7 +82,8 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: #bdbdbd;
     -fx-background-color: transparent;
 }
 
@@ -88,6 +95,10 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
+
+.split-pane > .split-pane-divider {  
+    -fx-padding: 0 0 0 0;  
+} 
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
@@ -265,6 +276,8 @@
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-shape: " ";
+    -fx-padding: 0;
+    -fx-border-width: 0;
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
@@ -289,6 +302,7 @@
 #taskListView, #taskList, #taskListPanelPlaceHolder, .list-cell {
     -fx-border-width: 0;
     -fx-background-insets: 0;
+    -fx-padding: 1 0 0 0;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
@@ -350,4 +364,34 @@
 
 #taskListPanelPlaceholder {
     -fx-border-width: 0 0 0 0;
+}
+
+#appTitleLabel {
+    -fx-text-fill: #831313;
+    -fx-font-family: "YouMurderer BB";
+    -fx-font-size: 68px;
+    -fx-text-alignment: center;
+    -fx-padding: 10;
+}
+
+#todayLabel {
+    -fx-padding: 20;
+}
+
+#calendarLabel {
+    -fx-padding: 20;
+}
+
+#labelTitle {
+    -fx-padding: 20;
+}
+
+#labelListView {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 50;
+}
+
+#labelListView .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
 }
