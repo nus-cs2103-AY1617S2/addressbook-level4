@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
+        <HBox>
+            <Label fx:id="header_index" text="Index" styleClass="cell_big_label" minWidth="70.0" prefWidth="70.0" wrapText="true"/>
+            <Label fx:id="header_description" text="Description" styleClass="cell_big_label" minWidth="200.0" prefWidth="200.0" wrapText="true"/>
+            <Label fx:id="header_due" text="Due" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <Label fx:id="header_duration_start" text="Starts" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <Label fx:id="header_duration_end" text="Ends" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <padding>
+                <Insets left="10" bottom="10"/>
+            </padding>
+        </HBox>
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
