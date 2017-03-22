@@ -7,12 +7,12 @@ import seedu.jobs.model.tag.UniqueTagList;
 
 public class Task implements ReadOnlyTask {
 
-    private Name name;
-    private Time startTime;
-    private Time endTime;
-    private Description description;
-    private boolean isCompleted;
-    private UniqueTagList tags;
+    protected Name name;
+    protected Time startTime;
+    protected Time endTime;
+    protected Description description;
+    protected boolean isCompleted;
+    protected UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
@@ -124,4 +124,9 @@ public class Task implements ReadOnlyTask {
     public boolean isCompleted() {
         return isCompleted;
     }
+
+	@Override
+	public void markComplete() {
+		this.isCompleted = true;
+	}
 }

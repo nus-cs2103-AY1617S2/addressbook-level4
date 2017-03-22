@@ -15,6 +15,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
  * as declared in {@link #isValidTime(String)}
  */
 
+
 public class Time {
 
     public static final String MESSAGE_TIME_CONSTRAINT = "Time should always follow the dd/mm/yy hh:mm format";
@@ -64,7 +65,7 @@ public class Time {
     /**
      * Extract date (dd/mm/yyyy) from an input string
      */
-    private static String extractDate(String date){
+    public static String extractDate(String date){
 		Pattern datePattern = Pattern.compile(DATE_VALIDATION_REGEX);
 		Matcher dateMatcher = datePattern.matcher(date);
 		String value = "";
@@ -77,7 +78,7 @@ public class Time {
     /**
      * extract time (HH:mm) from an input string
      */
-    private static String extractTime(String time){
+    public static String extractTime(String time){
 		Pattern timePattern = Pattern.compile(TIME_VALIDATION_REGEX);
 		Matcher timeMatcher = timePattern.matcher(time);
 		String value = "";
@@ -85,6 +86,18 @@ public class Time {
 			value+=(timeMatcher.group());
 		}
 		return value;
+    }
+    
+    /**
+     * Increment the time value by the specified number of days
+     *
+     */
+    public void addDays(int days){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+		String oldDate = extractDate(this.value);
+		String time = extractTime(this.value);
+		LocalDate date = LocalDate.parse(oldDate,formatter);
+		this.value = date.plusDays(days).format(formatter) + " " + time;
     }
     
     @Override
@@ -104,5 +117,5 @@ public class Time {
     public int hashCode() {
         return value.hashCode();
     }
-
+    
 }
