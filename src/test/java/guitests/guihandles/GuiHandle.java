@@ -10,7 +10,6 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -66,6 +65,7 @@ public class GuiHandle {
     protected void setTextField(String textFieldId, String newText) {
         guiRobot.clickOn(textFieldId);
         InlineCssTextArea textField = getNode(textFieldId);
+        // Only FX application thread can modify UI but this might be on main thread
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 textField.clear();
