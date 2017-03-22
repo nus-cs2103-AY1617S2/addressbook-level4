@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# Docket - User Guide
 
 By : `W13-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
