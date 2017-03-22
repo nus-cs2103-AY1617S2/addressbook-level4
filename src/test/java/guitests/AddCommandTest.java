@@ -9,8 +9,14 @@ import seedu.task.commons.core.Messages;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
 
+
+
+
+
+
+
+public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void add() {
         // add one task
@@ -40,8 +46,9 @@ public class AddCommandTest extends AddressBookGuiTest {
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
-        for (int i = 0; i < currentList.length; i++)
+        for (int i = 0; i < currentList.length; i++) {
             commandBox.runCommand(currentList[i].getAddCommand());
+        }
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         // confirm the new card contains the right data

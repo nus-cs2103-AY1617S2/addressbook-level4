@@ -15,10 +15,10 @@ import seedu.task.model.task.ReadOnlyTask;
  * Provides a handle to a person card in the person list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-	private static final String DESC_FIELD_ID = "#description";
-	private static final String STARTING_TIMING_FIELD_ID = "#startTiming";
-	private static final String PRIORITY_FIELD_ID = "#priority";
-	private static final String END_TIMING_FIELD_ID = "#endTiming";
+    private static final String DESC_FIELD_ID = "#description";
+    private static final String STARTING_TIMING_FIELD_ID = "#startTiming";
+    private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String END_TIMING_FIELD_ID = "#endTiming";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
@@ -81,10 +81,10 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask person) {
-    	return getDescription().equals(person.getDescription().description)
-                && getPriority().equals("Priority: "+person.getPriority().value)
-                && getStartingTiming().equals("Start Timing: "+person.getStartTiming().value)
-                && getEndTiming().equals("End Timing: "+person.getEndTiming().value)
+        return getDescription().equals(person.getDescription().description)
+                && getPriority().equals("Priority: " + person.getPriority().value)
+                && getStartingTiming().equals("Start Timing: " + person.getStartTiming().value)
+                && getEndTiming().equals("End Timing: " + person.getEndTiming().value)
                 && getTags().equals(getTags(person.getTags()));
     }
 
