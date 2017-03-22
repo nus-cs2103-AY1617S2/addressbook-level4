@@ -38,5 +38,5 @@ public class SaveCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
-    }
+        }
 }
