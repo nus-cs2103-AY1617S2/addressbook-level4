@@ -135,6 +135,30 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+The diagram below shows the interaction between different components for the `AutoComplete` feature. <br>
+<img src="images\SDforAutocomplete.png" width="800"><br>
+_Figure 2.2 : Component interactions for `Autocomplete` feature when user presses the `tab` key_
+
+The diagram below shows the interaction between different components for the `book` command. <br>
+<img src="images\SDforBook.png" width="800"><br>
+_Figure 2.3 : Component interactions for `book` command_
+
+The diagram below shows the interaction between different components for the `Command History` feature. <br>
+<img src="images\SDforCommandHistory.png" width="800"><br>
+_Figure 2.4 : Component interactions for `Command History` feature when user iterate through their command history for the session by pressing the up or down key_
+
+The diagram below shows the interaction between different components for the delete label command via `delete`. <br>
+<img src="images\SDforDeleteLabel.png" width="800"><br>
+_Figure 2.5 : Component interactions for `delete` label command_
+
+The diagram below shows the interaction between different components for the `find` command. <br>
+<img src="images\SDforFind.png" width="800"><br>
+_Figure 2.6 : Component interactions for `find` command_
+
+The diagram below shows the interaction between different components for the `undo` command. <br>
+<img src="images\SDforUndo.png" width="800"><br>
+_Figure 2.7 : Component interactions for `undo` command_
+
 The sections below give more details of each component.
 
 ### 2.2. UI component

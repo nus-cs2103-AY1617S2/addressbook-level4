@@ -38,7 +38,7 @@ public class MainWindow extends UiPart<Region> {
     private StatusBarFooter statusBarFooter;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private LeftPanel leftPanel;
     private Config config;
