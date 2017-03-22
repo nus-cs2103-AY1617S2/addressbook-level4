@@ -313,18 +313,19 @@ and logging destinations.
 ### 3.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
+(default: `config.json`).
 
 
 ## 4. Code Quality and Testing
 
 ### 4.1. Code Quality
 
-In Opus, we asipre to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive coding are:
-* Using assertions to check validity of arguments before passing them into functions.
+In Opus, we aspire to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
+* Using Assertions to check validity of arguments before passing them into functions.
 * Throwing Excpetions when encountering unexpected events.
-* Enforcing 1-to-1 associations
-A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf) 
+* Enforcing 1-to-1 associations.
+
+A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf). 
 
 ### 4.2. Testing
 
@@ -383,7 +384,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 ### 4.4. Troubleshooting tests
 
 #### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests.
+    This is because Assertions are not enabled for JUnit tests. <br>
 1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
 2. Delete run configurations created when you ran tests earlier.
