@@ -255,18 +255,18 @@ The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that 
 
 The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`. 
 
-Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data object.
+Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data.
 
 In Opus, we have:
 * `ModelManager` as the `originator`.
-* `TaskManagers` as `momento`.
+* `TaskManagers` as `momento` objects.
 * `History` as the `momento collector`. 
 
 `History` contains two list of `TaskManager`, one for the backward `undo` operation and another for the forward `redo` operation.
 
-Using the entire `TaskManager` as the `momento` object rather than the individual data change simplfies the design and implementation. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command. 
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplfies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command. 
 
-Futhermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation at all. The reason is that the entire `TaskManager` is captured as a snapshot, including any attribute that is newly added to the `Task` or `Tag` implementation.
+Futhermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
 
 ### 2.5. Storage component
 
