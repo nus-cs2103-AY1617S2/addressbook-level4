@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Region> {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new TaskListType(getTaskListTypePlaceholder(), "to be completed");
-        new TaskCount(getTaskCountPlaceholder(), logic.getTimedTasks(), logic.getFloatingTasks());
+        new TaskCount(getTaskCountPlaceholder(), logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);

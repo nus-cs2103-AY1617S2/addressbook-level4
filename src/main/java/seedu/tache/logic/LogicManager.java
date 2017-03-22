@@ -40,29 +40,4 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredTaskList();
     }
 
-    //@@author A0142255M
-    @Override
-    public String getTimedTasks() {
-        int count = 0;
-        ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
-        for (ReadOnlyTask task : taskList) {
-            if (task.getStartDateTime().isPresent() || task.getEndDateTime().isPresent()) {
-                count++;
-            }
-        }
-        return Integer.toString(count);
-    }
-
-    @Override
-    public String getFloatingTasks() {
-        int count = 0;
-        ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
-        for (ReadOnlyTask task : taskList) {
-            if (!task.getStartDateTime().isPresent() && !task.getEndDateTime().isPresent()) {
-                count++;
-            }
-        }
-        return Integer.toString(count);
-    }
-
 }
