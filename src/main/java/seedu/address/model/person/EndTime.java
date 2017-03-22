@@ -1,53 +1,40 @@
 package seedu.address.model.person;
 
+import java.time.LocalTime;
+
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 
 /**
  * Represents an Event's EndTime in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
-    public static final String MESSAGE_ENDTIME_CONSTRAINTS =
-            "Event EndTime can take only 4 digits, and it should be in military time format"
-            + " e.g. 0545 to represent 5.30am and 1430 to represent 2.30pm";
+	public static final String MESSAGE_ENDTIME_CONSTRAINTS =
+            "Event start time should be in HH:MM format e.g. 00:00 represents midnight";
 
-    /*
-     * The first character of the EndTime must be 0,1, or 2 since it follows military format,
-     * third character can only range from 0 to 5 to represent the number of minutes
-     */
-    public static final String ENDTIME_VALIDATION_REGEX = "[012][\\d][012345][\\d]";
-
-    public final String value;
-
+    public final LocalTime value;
+    
     /**
-     * Validates given EndTime.
+     * Validates given start time.
      *
-     * @throws IllegalValueException if given EndTime string is invalid.
+     * @throws IllegalValueException if given start time is invalid.
      */
-    public EndTime(String endtime) throws IllegalValueException {
-        if (endtime == null) {
+    public EndTime(String endTimeArg) throws IllegalValueException {
+        if (endTimeArg == null) {
             this.value = null;
         } else {
-            if (!isValidEndTime(endtime)) {
-                throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
-            }
-            this.value = endtime;
+        	try {
+        		this.value = StringUtil.parseStringToTime(endTimeArg);
+        	} catch (IllegalValueException illegalValueException) {
+        		throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+        	}
         }
-    }
-
-    /**
-     * Returns true if a given string is a valid event EndTime.
-     */
-    public static boolean isValidEndTime(String test) {
-        if (test == null) {
-            return true;
-        }
-        return (test.matches(ENDTIME_VALIDATION_REGEX) && (Integer.parseInt(test) < 2400));
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override

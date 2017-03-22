@@ -33,7 +33,7 @@ public interface Model {
 
     /** Adds the given Event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
-
+    
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -61,10 +61,10 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
 
     /** Updates the filter of the filtered Task list to show all activities */
-    void updateFilteredListToShowAll();
+    void updateFilteredTaskListToShowAll();
 
     /** Updates the filter of the filtered Event list to show all activities */
-    void updateFilteredListToShowAll();
+    void updateFilteredEventListToShowAll();
 
     /** Updates the filter of the filtered Task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
