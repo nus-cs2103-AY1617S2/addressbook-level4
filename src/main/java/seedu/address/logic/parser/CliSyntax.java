@@ -18,10 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LABEL = new Prefix("#");
     public static final Prefix PREFIX_STATUS_COMPLETED = new Prefix("completed");
     public static final Prefix PREFIX_STATUS_INCOMPLETE = new Prefix("incomplete");
-<<<<<<< HEAD
     public static final Prefix PREFIX_CLEAR_DATES = new Prefix("clear dates");
-=======
->>>>>>> refs/remotes/origin/V0.3-bernard
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
