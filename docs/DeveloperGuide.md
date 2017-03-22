@@ -423,6 +423,52 @@ In Opus, Gradle is used to managed all dependencies and external libraries. The 
 * [TestFx](https://github.com/TestFX/TestFX) `4.0`
 * [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle) `1.8.0_20`
 
+## 6. Version Control 
+
+### 6.1. Git + GitHub
+
+Opus version control depends highly on Git, and is [hosted on GitHub](https://github.com/CS2103JAN2017-W15-B3/main). We make heavily utlise [GitHub's issue tracker](https://github.com/CS2103JAN2017-W15-B3/main/issues) to manage each release's deliverables.
+
+#### 6.1.1. Labels
+
+There are several predefined labels included in our issue tracker:
+
+1. `docs`: assigned if the issue/pull request is related to documentation of the project.
+2. `priority.high/medium/low`: assigned to indicate how important this issue is to the project.
+3. `status.complete/ongoing`: assigned to indicate which PR/tasks are work in progress, and which are PRs are completed and ready for review.
+4. `type.bug`: assigned to issues that addresses a bug in the application.
+5. `type.enhancement`: assigned to issues that improve either the code quality or user experience of the application.
+6. `type.epic`: assigned to issues that comprise of a very large feature to be implemented.
+7. `type.task`: assigned to issues that are misc chores/tasks to be completed.
+8. `ui/storage/logic/model`: assigned to issues that are specific to a certain component of the project. This allows for the developer in charge of the component to provide more detailed feedback.
+9. `tests`: assigned to issues that are related to unit/GUI testing of the code.
+
+Assigning correct labels to your issue will result in faster response from the developer that understands your problem best.
+
+### 6.2. Branching and Workflow
+
+Branch name should always be `kebab-case`, i.e. all small letters with hyphens-replacing-spaces. The branch name should be descriptive of what you are trying to implement/achieve with that branch. **Avoid naming branches after your own name.**
+
+All PRs are to be made to `development` branch, except for special/unique scenarios. Both `master` and `development` branches are **PROTECTED**, i.e. you cannot push directly to the branch. On each release, we will make a PR to the `master` branch. It will only be merged after a sanity check and thumbs up from each team member.
+
+We follow the [GitHub Flow](https://guides.github.com/introduction/flow/). Each pull request (PR) has to be reviewed by the code QA (@gjlam95) and another team member before it can be approved for merging. This is enforced to ensure that code quality is kept up to standard and get all team members on the same page with regards to implementation details.
+
+Code review also encourages learning from each other's mistakes or strengths, benefiting the overall productivity and competency of the team over time.
+
+### 6.3. Commit Messages
+
+The seven rules of writing a great Git commit message (as seen [here](https://chris.beams.io/posts/git-commit/)):
+
+1. Separate subject from body with a blank line
+2. Limit the subject line to 50 characters
+3. Capitalize the subject line
+4. Do not end the subject line with a period
+5. Use the imperative mood in the subject line
+6. Wrap the body at 72 characters
+7. Use the body to explain *what* and *why* vs. *how*
+
+Please follow these strictly when writing commit messages, it makes life easier for all developers who are trying to debug your code by looking through the commit history.
+
 ## Appendix A : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
