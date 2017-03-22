@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import werkbook.task.commons.core.LogsCenter;
 import werkbook.task.commons.events.model.TaskListChangedEvent;
+import werkbook.task.commons.events.storage.TaskListStorageChangedEvent;
 import werkbook.task.commons.util.FxViewUtil;
 
 /**
@@ -31,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
 
@@ -54,4 +55,11 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
+
+    //@@author A0162266E
+    @Subscribe
+    public void handleTaskListStorageChangedEvent(TaskListStorageChangedEvent tlsce) {
+        setSaveLocation(tlsce.newPath);
+    }
+    //@@author
 }

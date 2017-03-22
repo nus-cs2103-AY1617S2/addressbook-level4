@@ -49,4 +49,10 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Raises an event to indicate the model has changed */
+    void indicateTaskListChanged();
+
+    //@@author A0139903B
+    /** Raises an event to indicate a task has changed */
+    void indicateTaskChanged(ReadOnlyTask editedTask);
 }

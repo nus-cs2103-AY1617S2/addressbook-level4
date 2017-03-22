@@ -1,5 +1,7 @@
 package werkbook.task.logic.parser;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -118,4 +120,16 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
+
+    //@@author A0162266E
+    /**
+     * Parses a {@code Optional<String> Path} into an
+     * {@code Optional<Path>} if {@code path} is present.
+     */
+    public static Optional<Path> parsePath(String path) {
+        assert path != null;
+        return !path.equals("") ? Optional.of(Paths.get(path.trim())) : Optional.empty();
+    }
+
+    //@@author
 }

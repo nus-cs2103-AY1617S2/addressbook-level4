@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
+import werkbook.task.commons.exceptions.IllegalValueException;
 import werkbook.task.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
@@ -26,7 +27,12 @@ public class ArgumentTokenizerTest {
     public void tokenize_emptyArgsString_noValues() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP);
         String argsString = "  ";
-        tokenizer.tokenize(argsString);
+        try {
+            tokenizer.tokenize(argsString);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         assertPreambleAbsent(tokenizer);
         assertArgumentAbsent(tokenizer, slashP);
@@ -62,7 +68,12 @@ public class ArgumentTokenizerTest {
     public void tokenize_noPrefixes_allTakenAsPreamble() {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer();
         String argsString = "  some random string /t tag with leading and trailing spaces ";
-        tokenizer.tokenize(argsString);
+        try {
+            tokenizer.tokenize(argsString);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
         assertPreamblePresent(tokenizer, argsString.trim());
@@ -74,12 +85,22 @@ public class ArgumentTokenizerTest {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP);
 
         // Preamble present
-        tokenizer.tokenize("  Some preamble string /p Argument value ");
+        try {
+            tokenizer.tokenize("  Some preamble string /p Argument value ");
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertPreamblePresent(tokenizer, "Some preamble string");
         assertArgumentPresent(tokenizer, slashP, "Argument value");
 
         // No preamble
-        tokenizer.tokenize(" /p   Argument value ");
+        try {
+            tokenizer.tokenize(" /p   Argument value ");
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertPreambleAbsent(tokenizer);
         assertArgumentPresent(tokenizer, slashP, "Argument value");
 
@@ -90,7 +111,12 @@ public class ArgumentTokenizerTest {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP, dashT, hatQ);
 
         // Only two arguments are present
-        tokenizer.tokenize("SomePreambleString -t dashT-Value/pslashP value");
+        try {
+            tokenizer.tokenize("SomePreambleString -t dashT-Value/pslashP value");
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertPreamblePresent(tokenizer, "SomePreambleString");
         assertArgumentPresent(tokenizer, slashP, "slashP value");
         assertArgumentPresent(tokenizer, dashT, "dashT-Value");
@@ -99,7 +125,12 @@ public class ArgumentTokenizerTest {
         /* Also covers: Cases where the prefix doesn't have a space before/after it */
 
         // All three arguments are present, no spaces before the prefixes
-        tokenizer.tokenize("Different Preamble String^Q 111-t dashT-Value/p slashP value");
+        try {
+            tokenizer.tokenize("Different Preamble String^Q 111-t dashT-Value/p slashP value");
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertPreamblePresent(tokenizer, "Different Preamble String");
         assertArgumentPresent(tokenizer, slashP, "slashP value");
         assertArgumentPresent(tokenizer, dashT, "dashT-Value");
@@ -109,7 +140,12 @@ public class ArgumentTokenizerTest {
 
         // Reuse tokenizer on an empty string to ensure state is correctly reset
         //   (i.e. no stale values from the previous tokenizing remain in the state)
-        tokenizer.tokenize("");
+        try {
+            tokenizer.tokenize("");
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertPreambleAbsent(tokenizer);
         assertArgumentAbsent(tokenizer, slashP);
 
@@ -117,7 +153,12 @@ public class ArgumentTokenizerTest {
 
         // Prefixes not previously given to the tokenizer should not return any values
         String stringWithUnknownPrefix = unknownPrefix.getPrefix() + "some value";
-        tokenizer.tokenize(stringWithUnknownPrefix);
+        try {
+            tokenizer.tokenize(stringWithUnknownPrefix);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertArgumentAbsent(tokenizer, unknownPrefix);
         assertPreamblePresent(tokenizer, stringWithUnknownPrefix); // Unknown prefix is taken as part of preamble
     }
@@ -127,7 +168,12 @@ public class ArgumentTokenizerTest {
         ArgumentTokenizer tokenizer = new ArgumentTokenizer(slashP, dashT, hatQ);
 
         // Two arguments repeated, some have empty values
-        tokenizer.tokenize("SomePreambleString -t dashT-Value ^Q ^Q-t another dashT value /p slashP value -t");
+        try {
+            tokenizer.tokenize("SomePreambleString -t dashT-Value ^Q ^Q-t another dashT value /p slashP value -t");
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         assertPreamblePresent(tokenizer, "SomePreambleString");
         assertArgumentPresent(tokenizer, slashP, "slashP value");
         assertArgumentPresent(tokenizer, dashT, "dashT-Value", "another dashT value", "");
