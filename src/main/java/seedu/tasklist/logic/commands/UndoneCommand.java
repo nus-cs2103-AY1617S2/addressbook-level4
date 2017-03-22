@@ -17,24 +17,24 @@ import seedu.tasklist.model.task.Task;
 import seedu.tasklist.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Marks a task as done using its last displayed index from FlexiTask
+ * Marks a completed task as undone using its last displayed index from FlexiTask
  */
 //@@Author A0143355J
-public class DoneCommand extends Command {
+public class UndoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "undone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task identified by the index number used in the last task listing as done.\n"
+            + ": Marks the task identified by the index number used in the last task listing as undone.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_TASK_SUCCESS = "Done Task: %1$s";
-    public static final String MESSAGE_DONE_ERROR = "Task is already marked as done!";
+    public static final String MESSAGE_UNDONE_TASK_SUCCESS = "Undone Task: %1$s";
+    public static final String MESSAGE_UNDONE_ERROR = "Task has not been completed!";
 
     public final int targetIndex;
 
-    public DoneCommand(int targetIndex) {
+    public UndoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -49,24 +49,24 @@ public class DoneCommand extends Command {
         //Index adjusted to 0 based
         int adjustedIndex = targetIndex - 1;
 
-        ReadOnlyTask taskToDone = lastShownList.get(adjustedIndex);
+        ReadOnlyTask taskToUndone = lastShownList.get(adjustedIndex);
 
-        Task doneTask;
+        Task undoneTask;
 
         try {
-            doneTask = createDoneTask(taskToDone);
+            undoneTask = createUndoneTask(taskToUndone);
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
 
         try {
-            model.updateTask(adjustedIndex, doneTask);
+            model.updateTask(adjustedIndex, undoneTask);
         } catch (DuplicateTaskException e) {
             assert false;
         }
 
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
+        return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, taskToUndone));
     }
 
     /**
@@ -74,29 +74,29 @@ public class DoneCommand extends Command {
      * edited with status as COMPLETED.
      * @throws IllegalValueException
      */
-    private Task createDoneTask(ReadOnlyTask taskToDone) throws IllegalValueException {
-        assert taskToDone != null;
+    private Task createUndoneTask(ReadOnlyTask taskToUndone) throws IllegalValueException {
+        assert taskToUndone != null;
 
-        Status status = taskToDone.getStatus();
-        if (status.value == Status.COMPLETED) {
-            throw new IllegalValueException(MESSAGE_DONE_ERROR);
+        Status status = taskToUndone.getStatus();
+        if (status.value == Status.UNCOMPLETED) {
+            throw new IllegalValueException(MESSAGE_UNDONE_ERROR);
         }
 
-        String type = taskToDone.getType();
+        String type = taskToUndone.getType();
         switch (type) {
         case FloatingTask.TYPE:
-            FloatingTask doneFloatingTask = new FloatingTask((ReadOnlyFloatingTask) taskToDone);
-            doneFloatingTask.setStatus(new Status(Status.COMPLETED));
-            return doneFloatingTask;
+            FloatingTask undoneFloatingTask = new FloatingTask((ReadOnlyFloatingTask) taskToUndone);
+            undoneFloatingTask.setStatus(new Status(Status.UNCOMPLETED));
+            return undoneFloatingTask;
         case DeadlineTask.TYPE:
-            DeadlineTask doneDeadlineTask = new DeadlineTask((ReadOnlyDeadlineTask) taskToDone);
-            doneDeadlineTask.setStatus(new Status(Status.COMPLETED));
-            return doneDeadlineTask;
+            DeadlineTask undoneDeadlineTask = new DeadlineTask((ReadOnlyDeadlineTask) taskToUndone);
+            undoneDeadlineTask.setStatus(new Status(Status.UNCOMPLETED));
+            return undoneDeadlineTask;
 
         case EventTask.TYPE:
-            EventTask doneEventTask = new EventTask((ReadOnlyEventTask) taskToDone);
-            doneEventTask.setStatus(new Status(Status.COMPLETED));
-            return doneEventTask;
+            EventTask undoneEventTask = new EventTask((ReadOnlyEventTask) taskToUndone);
+            undoneEventTask.setStatus(new Status(Status.UNCOMPLETED));
+            return undoneEventTask;
 
         default:
             return null;

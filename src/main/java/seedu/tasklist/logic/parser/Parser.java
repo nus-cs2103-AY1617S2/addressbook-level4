@@ -24,6 +24,7 @@ import seedu.tasklist.logic.commands.SaveCommand;
 import seedu.tasklist.logic.commands.SelectCommand;
 import seedu.tasklist.logic.commands.SortCommand;
 import seedu.tasklist.logic.commands.UndoCommand;
+import seedu.tasklist.logic.commands.UndoneCommand;
 
 /**
  * Parses user input.
@@ -80,6 +81,9 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
+
+        case UndoneCommand.COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
