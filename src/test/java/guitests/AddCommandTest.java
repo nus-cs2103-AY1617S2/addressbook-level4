@@ -35,6 +35,11 @@ public class AddCommandTest extends DoistGUITest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+      //add another task with from to dates
+        taskToAdd = td.movie;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
         //add duplicate task
         commandBox.runCommand(td.email.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);

@@ -100,6 +100,8 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");
         sb.append("\\as " + this.getPriority().toString());
+        //TODO: add dates to getAddCommand
+        //if (!this.getEndDate().)
         if (!this.getTags().isEmpty()) {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
