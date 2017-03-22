@@ -37,15 +37,23 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" StartDate: ")
-                .append(getStartDate())
-                .append(" DueDate: ")
-                .append(getDueDate())
-                .append(" Tags: ");
+        builder.append("Task: ").append(getName());
+        if (!getPriority().toString().isEmpty()) {
+                builder.append(" Priority: ")
+                .append(getPriority());
+        }
+        if (!getStartDate().toString().isEmpty()) {
+                builder.append(" StartDate: ")
+                .append(getStartDate());
+        }
+        if (!getDueDate().toString().isEmpty()) {
+                builder.append(" DueDate: ")
+                .append(getDueDate());
+        }
+        if (!getTags().toSet().isEmpty()) {
+                builder.append(" Tags: ");
         getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
 
