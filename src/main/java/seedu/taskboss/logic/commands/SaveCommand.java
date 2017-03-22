@@ -1,6 +1,6 @@
 package seedu.taskboss.logic.commands;
 
-import java.util.IOException;
+import java.io.IOException;
 
 /**
  * Saves the data at specific filepath. Creates filepath if it does not exist
