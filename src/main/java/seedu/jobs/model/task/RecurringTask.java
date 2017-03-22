@@ -10,7 +10,7 @@ public class RecurringTask extends Task{
 	
 	int period; //period of recurrence in days
 	
-	public RecurringTask(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags,int period) {
+	public RecurringTask(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags,int period) throws IllegalTimeException {
 		super(name, startTime, endTime, description, tags);
 		this.period = period;
 	}
