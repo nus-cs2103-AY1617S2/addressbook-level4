@@ -13,7 +13,7 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filepath";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " path/to/file.ics";
 
     public static final String MESSAGE_SUCCESS = "Successfully imported %1$s";
     public static final String MESSAGE_INVALID_FILE_PATH = "The file path provided is not valid!";

@@ -11,7 +11,7 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filepath";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " path/to/file.ics";
 
     public static final String MESSAGE_SUCCESS = "Exported successfully to %1$s";
     public static final String MESSAGE_INVALID_FILE_PATH = "The file path provided is not valid!";
