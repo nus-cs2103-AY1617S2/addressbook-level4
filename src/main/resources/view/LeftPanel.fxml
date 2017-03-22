@@ -35,7 +35,7 @@
                   <FontAwesomeIconView fx:id="calendarIconLabel" size="20">
                      <HBox.margin>
                         <Insets left="20.0" top="17.0" />
-                     </HBox.margin></FontAwesomeIconView>                  
+                     </HBox.margin></FontAwesomeIconView>
                   <Label fx:id="calendarLabel" text="Calendar" />
                </children>
             </HBox>
@@ -44,14 +44,14 @@
                   <FontAwesomeIconView fx:id="labelIconLabel" size="20">
                      <HBox.margin>
                         <Insets left="20.0" top="17.0" />
-                     </HBox.margin></FontAwesomeIconView>   
+                     </HBox.margin></FontAwesomeIconView>
                   <Label fx:id="labelTitle" text="Labels" />
                   <Pane HBox.hgrow="ALWAYS" />
                   <Label fx:id="labelCounterLabel" text="0" />
                   <FontAwesomeIconView fx:id="labelArrow" opacity="0.54" size="22">
                      <HBox.margin>
                         <Insets right="20" top="17.0" />
-                     </HBox.margin></FontAwesomeIconView>   
+                     </HBox.margin></FontAwesomeIconView>
                </children>
             </HBox>
             <ListView fx:id="labelListView" />

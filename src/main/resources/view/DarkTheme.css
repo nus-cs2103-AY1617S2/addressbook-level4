@@ -97,9 +97,9 @@ Vbox, SplitPane {
     -fx-faint-focus-color: transparent;
 }
 
-.split-pane > .split-pane-divider {  
-    -fx-padding: 0 0 0 0;  
-} 
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0 0 0;
+}
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;

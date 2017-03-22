@@ -31,11 +31,11 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
-> 
+>
 > **Date Input Format**
-> 
+>
 > * Date specified without timing after the `by` and `to` keyword is default to 23:59 hr
-> * Date specified without timing after the `from` keyword is default to 00:00 hr 
+> * Date specified without timing after the `from` keyword is default to 00:00 hr
 
 ### 2.1. Viewing help : `help`
 
