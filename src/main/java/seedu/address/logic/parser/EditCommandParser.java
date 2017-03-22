@@ -16,8 +16,8 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
@@ -51,37 +51,17 @@ public class EditCommandParser {
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            // Check which prefixes are present
-            boolean startPresent = args.contains(PREFIX_START.prefix);
-            boolean deadlinePresent = args.contains(PREFIX_DEADLINE.prefix);
-            boolean priorityPresent = args.contains(PREFIX_PRIORITY.prefix);
-            boolean notesPresent = args.contains(PREFIX_NOTES.prefix);
-            
+            editTaskDescriptor.setTags(parseTagsForEdit
+                    (ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
             // We only set new values if user had input something.
             Optional<Name> nameStr = ParserUtil.parseName(preambleFields.get(1));
             if (nameStr.isPresent() && nameStr.get().fullName.length() > 0) editTaskDescriptor.setName(nameStr);
-            
-            // Check start time stamp
-            String startStr = argsTokenizer.getValue(PREFIX_START).orElse("");
-            if (startStr.length() > 0) editTaskDescriptor.setStart(Optional.of(new Start(startStr)));
-            else if (startPresent) editTaskDescriptor.setStart(Optional.of(new Start("-")));
-            
-            // Check deadline
-            String deadlineStr = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
-            if (deadlineStr.length() > 0) editTaskDescriptor.setDeadline(Optional.of(new Deadline(deadlineStr)));
-            else if (deadlinePresent) editTaskDescriptor.setDeadline(Optional.of(new Deadline("-")));
-            
-            // Check priority
-            int priorityInt = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
-            if (priorityInt > 0) editTaskDescriptor.setPriority(Optional.of(new Priority(priorityInt)));
-            else if (priorityPresent) editTaskDescriptor.setPriority(Optional.of(new Priority(0)));
-            
-            // Check notes
-            String notesStr = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
-            if (notesStr.length() > 0) editTaskDescriptor.setNotes(Optional.of(new Notes(notesStr)));
-            else if (notesPresent) editTaskDescriptor.setNotes(Optional.of(new Notes("-")));
-            
+
+            setStartValueForDescriptor(args.contains(PREFIX_START.prefix), argsTokenizer, editTaskDescriptor);
+            setDeadlineValueForDescriptor(args.contains(PREFIX_DEADLINE.prefix), argsTokenizer, editTaskDescriptor);
+            setPriorityValueForDescriptor(args.contains(PREFIX_PRIORITY.prefix), argsTokenizer, editTaskDescriptor);
+            setNotesValueForDescriptor(args.contains(PREFIX_NOTES.prefix), argsTokenizer, editTaskDescriptor);
+
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -133,4 +113,64 @@ public class EditCommandParser {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    //@@author A0114395E
+    /**
+     * Handler for building editTaskDescriptor for Start
+     * @throws IllegalValueException
+     */
+    private void setStartValueForDescriptor(boolean containsPrefix,
+            ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
+        // Check start time stamp
+        String startStr = argsTokenizer.getValue(PREFIX_START).orElse("");
+        if (startStr.length() > 0) {
+            editTaskDescriptor.setStart(Optional.of(new Start(startStr)));
+        } else if (containsPrefix) {
+            editTaskDescriptor.setStart(Optional.of(new Start("-")));
+        }
+    }
+
+    /**
+     * Handler for building editTaskDescriptor for Deadline
+     * @throws IllegalValueException
+     */
+    private void setDeadlineValueForDescriptor(boolean containsPrefix,
+            ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
+        // Check deadline
+        String deadlineStr = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
+        if (deadlineStr.length() > 0) {
+            editTaskDescriptor.setDeadline(Optional.of(new Deadline(deadlineStr)));
+        } else if (containsPrefix) {
+            editTaskDescriptor.setDeadline(Optional.of(new Deadline("-")));
+        }
+    }
+
+    /**
+     * Handler for building editTaskDescriptor for Priority
+     * @throws IllegalValueException
+     */
+    private void setPriorityValueForDescriptor(boolean containsPrefix,
+            ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
+        // Check priority
+        int priorityInt = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
+        if (priorityInt > 0) {
+            editTaskDescriptor.setPriority(Optional.of(new Priority(priorityInt)));
+        } else if (containsPrefix) {
+            editTaskDescriptor.setPriority(Optional.of(new Priority(0)));
+        }
+    }
+
+    /**
+     * Handler for building editTaskDescriptor for Notes
+     * @throws IllegalValueException
+     */
+    private void setNotesValueForDescriptor(boolean containsPrefix,
+            ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
+        // Check notes
+        String notesStr = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
+        if (notesStr.length() > 0) {
+            editTaskDescriptor.setNotes(Optional.of(new Notes(notesStr)));
+        } else if (containsPrefix) {
+            editTaskDescriptor.setNotes(Optional.of(new Notes("-")));
+        }
+    }
 }
