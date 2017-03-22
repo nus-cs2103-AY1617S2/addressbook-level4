@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeoutException;
@@ -331,6 +332,12 @@ public class TestUtil {
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.addAll(asList(tasksToAdd));
+        Comparator comparator = new Comparator<ReadOnlyTask> () {
+            public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+                return task1.compareTo(task2);
+            }
+        };;
+        listOfTasks.sort(comparator);
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 

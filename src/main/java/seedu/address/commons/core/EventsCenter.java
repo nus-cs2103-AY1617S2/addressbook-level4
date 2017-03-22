@@ -29,6 +29,11 @@ public class EventsCenter {
         eventBus = new EventBus();
     }
 
+    public EventsCenter unregisterHandler(Object handler) {
+        eventBus.unregister(handler);
+        return this;
+    }
+
     public EventsCenter registerHandler(Object handler) {
         eventBus.register(handler);
         return this;

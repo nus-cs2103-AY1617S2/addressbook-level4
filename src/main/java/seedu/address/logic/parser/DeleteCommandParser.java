@@ -10,6 +10,7 @@ import seedu.address.logic.commands.DeleteLabelCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+//@@author A0140042A
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
@@ -36,9 +37,7 @@ public class DeleteCommandParser {
             }
 
             String parameter = arguments[ARGUMENT_LABEL_TO_DELETE_INDEX];
-            if (parameter.length() < 1) {
-                throw new Exception();
-            } else if (parameter.matches(REGEX_INDEX)) { //matches 0-9 or + or - for the first character
+            if (parameter.matches(REGEX_INDEX)) { //matches 0-9 or + or - for the first character
                 return tryParseAsIndex(args);
             } else {
                 return new DeleteLabelCommand(arguments[ARGUMENT_LABEL_TO_DELETE_INDEX]);

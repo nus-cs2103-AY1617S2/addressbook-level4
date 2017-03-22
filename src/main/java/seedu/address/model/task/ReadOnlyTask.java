@@ -2,13 +2,14 @@ package seedu.address.model.task;
 
 import java.util.Optional;
 
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyTask {
+public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
 
     Title getTitle();
     Optional<Deadline> getDeadline();
@@ -20,6 +21,12 @@ public interface ReadOnlyTask {
      * changes on the returned list will not affect the task's internal labels.
      */
     UniqueLabelList getLabels();
+
+    /**
+     * The returned BookingList is a deep copy of the internal BookingList,
+     * changes on the returned list will not affect the task's internal bookings.
+     */
+    UniqueBookingList getBookings();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -55,8 +62,72 @@ public interface ReadOnlyTask {
         }
         builder.append(" Label: ");
         getLabels().forEach(builder::append);
+        builder.append(" Booking: ");
+        getBookings().forEach(booking -> builder.append("[" + booking + "]\n"));
         return builder.toString();
     }
 
+
+    default int compareTo(ReadOnlyTask other) {
+        return compareCompletionStatus(other);
+    }
+
+    default int compareCompletionStatus(ReadOnlyTask other) {
+        if (this.isCompleted() && !other.isCompleted()) {
+            return 1;
+        } else if (!this.isCompleted() && other.isCompleted()) {
+            return -1;
+        } else {
+            return compareDates(other);
+        }
+    }
+
+    default int compareDates(ReadOnlyTask other) {
+        Deadline dateToCompareForOther;
+        Deadline dateToCompareForThis;
+        if (other.getStartTime().isPresent()) {
+            dateToCompareForOther = other.getStartTime().get();
+        } else if (other.getDeadline().isPresent()) {
+            dateToCompareForOther = other.getDeadline().get();
+        } else {
+            dateToCompareForOther = null;
+        }
+        if (this.getStartTime().isPresent()) {
+            dateToCompareForThis = this.getStartTime().get();
+        } else if (this.getDeadline().isPresent()) {
+            dateToCompareForThis = this.getDeadline().get();
+        } else {
+            dateToCompareForThis = null;
+        }
+        if (dateToCompareForThis != null && dateToCompareForOther != null) {
+            return dateToCompareForThis.getDateTime().compareTo(dateToCompareForOther.getDateTime());
+        } else if (dateToCompareForThis == null && dateToCompareForOther == null) {
+            return 0;
+        } else if (dateToCompareForThis == null) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    default String getAsSearchText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getTitle());
+        if (getStartTime().isPresent()) {
+            builder.append(" " + getStartTime().get().toString() + " ");
+        }
+        if (getDeadline().isPresent()) {
+            builder.append(" " + getDeadline().get().toString() + " ");
+        }
+        if (isCompleted()) {
+            builder.append(" Completed ");
+        } else {
+            builder.append(" Incomplete ");
+        }
+        getLabels().forEach(label -> builder.append(" " + label + " "));
+        getBookings().forEach(booking -> builder.append(" " + booking + " "));
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
 
 }

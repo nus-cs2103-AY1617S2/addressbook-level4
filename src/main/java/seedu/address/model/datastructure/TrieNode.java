@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
+//@@author A0140042A
 /**
  * Nodes that are contained in data structure {@link Trie}
  */

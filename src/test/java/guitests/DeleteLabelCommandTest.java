@@ -7,6 +7,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.testutil.TestTask;
@@ -20,26 +21,22 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("DELETE nonexistentlabel");
-
         //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
+        runAndAssertTrue(DeleteCommand.COMMAND_WORD + " nonexistentlabel", currentList);
+        runAndAssertTrue("delete nonexistentlabel", currentList);
     }
 
     @Test
     public void editLabel_invalidCommands() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("DELETE");
         //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
-
-        commandBox.runCommand("DELETE !@#asdajn");
-        //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
+        runAndAssertTrue(DeleteCommand.COMMAND_WORD, currentList);
+        runAndAssertTrue(DeleteCommand.COMMAND_WORD + " !@#asdajn", currentList);
     }
 
     @Test
     public void editLabel_EditLabelValid_ReturnTrue() throws IllegalValueException {
+        //Deletes all labels with the label name 'friends' from all tasks
         Label labelToDelete = new Label("friends");
 
         TestTask[] currentList = td.getTypicalTasks();
@@ -52,9 +49,14 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
             }
         }
 
+        runAndAssertTrue("delete friends", currentList);
+    }
 
-        commandBox.runCommand("DELETE friends");
-
+    /**
+     * Runs a command on the GUI text field and asserts whether the displayed list is equal to the provided list
+     */
+    private void runAndAssertTrue(String command, TestTask[] currentList) {
+        commandBox.runCommand(command);
         assertTrue(taskListPanel.isListMatching(currentList));
     }
 }

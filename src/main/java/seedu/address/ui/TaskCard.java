@@ -25,6 +25,8 @@ public class TaskCard extends UiPart<Region> {
     private Label status;
     @FXML
     private FlowPane labels;
+    @FXML
+    private FlowPane bookings;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -46,9 +48,14 @@ public class TaskCard extends UiPart<Region> {
             status.setText("Incomplete");
         }
         initLabels(task);
+        initBookings(task);
     }
 
     private void initLabels(ReadOnlyTask task) {
         task.getLabels().forEach(label -> labels.getChildren().add(new Label(label.labelName)));
+    }
+
+    private void initBookings(ReadOnlyTask task) {
+        task.getBookings().forEach(booking -> bookings.getChildren().add(new Label(booking.toString() + "\n")));
     }
 }

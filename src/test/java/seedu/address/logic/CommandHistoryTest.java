@@ -13,7 +13,7 @@ public class CommandHistoryTest {
 
     @Before
     public void setup() {
-        history = new CommandHistoryLinkedList();
+        history = CommandHistoryLinkedList.getInstance();
     }
 
     @Test
@@ -39,8 +39,6 @@ public class CommandHistoryTest {
         assertTrue(history.previous().equals("command3"));
         assertTrue(history.previous().equals("command2"));
         assertTrue(history.previous().equals("command1"));
-        assertTrue(history.previous() == null); //No more commands, stop at command1
-        assertTrue(history.previous() == null); //No more commands, stop at command1
         //Next will be command2 since "current command" should be at command1
         assertTrue(history.next().equals("command2"));
 
@@ -68,27 +66,8 @@ public class CommandHistoryTest {
         assertTrue(history.previous().equals("command3"));
         assertTrue(history.previous().equals("command2"));
         assertTrue(history.previous().equals("command1"));
+        //Loop until no more history left
+        while (history.previous() != null);
         assertTrue(history.previous() == null);
-        assertTrue(history.previous() == null);
-        assertTrue(history.previous() == null);
-        assertTrue(history.next().equals("command2"));
-        assertTrue(history.next().equals("command3"));
-        assertTrue(history.next().equals("command4"));
-        assertTrue(history.next().equals("command5"));
-        assertTrue(history.next().equals("command6"));
-        assertTrue(history.next().equals("command7"));
-        assertTrue(history.next().equals("command8"));
-        assertTrue(history.next() == null);
-        assertTrue(history.next() == null);
-        assertTrue(history.next() == null);
-        assertTrue(history.previous().equals("command8"));
-        assertTrue(history.previous().equals("command7"));
-        assertTrue(history.previous().equals("command6"));
-        assertTrue(history.previous().equals("command5"));
-        assertTrue(history.previous().equals("command4"));
-        assertTrue(history.previous().equals("command3"));
-        assertTrue(history.previous().equals("command2"));
-        assertTrue(history.previous().equals("command1"));
-
     }
 }

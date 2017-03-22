@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.undo.UndoManager;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.ReadOnlyTask;
@@ -50,6 +51,7 @@ public class DeleteLabelCommand extends Command {
      */
     private boolean deleteLabelInTasks(List<ReadOnlyTask> allTaskList) throws CommandException {
         boolean labelExist = false;
+        saveCurrentState();
         for (int i = 0; i < allTaskList.size(); i++) {
             Task task = new Task(allTaskList.get(i));
             UniqueLabelList labels = task.getLabels();
@@ -61,13 +63,17 @@ public class DeleteLabelCommand extends Command {
                 labelExist = true;
 
                 try {
-                    saveCurrentState();
                     model.updateTask(i, task);
                 } catch (DuplicateTaskException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_TASK);
                 }
             }
         }
+
+        if (!labelExist) {
+            deleteCurrentState();
+        }
+
         return labelExist;
     }
 
@@ -77,12 +83,19 @@ public class DeleteLabelCommand extends Command {
     public void saveCurrentState() {
         if (isMutating()) {
             try {
-                LogicManager.undoCommandHistory.addStorageHistory(model.getRawTaskManager().getImmutableTaskList(),
-                        model.getRawTaskManager().getImmutableLabelList());
+                LogicManager.undoCommandHistory.addStorageHistory(model.getTaskManager().getImmutableTaskList(),
+                        model.getTaskManager().getImmutableLabelList());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Deletes the data in task manager if command is mutating the data
+     */
+    public void deleteCurrentState() {
+        UndoManager.getInstance().getUndoData();
     }
 
     @Override

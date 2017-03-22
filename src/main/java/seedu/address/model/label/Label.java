@@ -3,6 +3,7 @@ package seedu.address.model.label;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author A0140042A
 /**
  * Represents a Label in DoOrDie Task Manager Application
  * Guarantees: immutable; name is valid as declared in {@link #isValidLabelName(String)}

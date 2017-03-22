@@ -9,24 +9,20 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.address.logic.autocomplete.AutocompleteManager;
+
+//@@author A0140042A
 /**
  * Testing class for Trie and TrieNode data structure used for auto completion
  */
 public class TrieTest {
 
     private Trie trie;
-    private String[] data = {"help", "add", "by", "repeat", "list"
-            , "update", "find", "delete", "select", "book"
-            , "confirm", "editlabel", "undo", "clear", "push"
-            , "pull", "export", "exit", "to", "on"
-            , "hourly", "daily", "weekly", "monthly", "yearly"
-            , "overdue", "outstanding", "completed", "today", "yesterday"
-            , "tomorrow", "bookings"};
 
     @Before
     public void setup() {
         trie = new Trie();
-        for (String line : data) {
+        for (String line : AutocompleteManager.AUTOCOMPLETE_DATA) {
             trie.load(line);
         }
     }
@@ -48,15 +44,8 @@ public class TrieTest {
     public void trie_TestInvalidCommands_ReturnTrue() {
         //Check if test order matters
         testAutocomplete("aNonExistentCommand", "");
-        testAutocomplete("", data);
+        testAutocomplete("", AutocompleteManager.AUTOCOMPLETE_DATA);
         testAutocomplete("!@#!@!@@@!", "");
-    }
-
-    @Test
-    public void trie_TestMatchPrefix_ReturnTrue() {
-        assertTrue(trie.matchPrefix("ex"));
-        assertTrue(trie.matchPrefix(""));
-        assertFalse(trie.matchPrefix("nonexistentprefix"));
     }
 
     @Test
