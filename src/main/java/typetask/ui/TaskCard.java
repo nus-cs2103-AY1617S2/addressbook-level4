@@ -1,6 +1,5 @@
 package typetask.ui;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,12 +41,12 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Pane colourTag;
 
-    private ReadOnlyTask task;
     private LocalDateTime now = LocalDateTime.now();
     private LocalDate nowDate = now.toLocalDate();
     private String inputPattern = "dd/MM/yyyy";
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(inputPattern);
-    private LocalDate parsedDate;// NOTE: only instantiated for non-floating task
+    // NOTE: only instantiated for non-floating task
+    private LocalDate parsedDate;
     private boolean parsedDateFlag = false;
 
 	public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -56,7 +55,6 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
         time.setText(task.getTime().value);
-        this.task = task;
         if (!task.getDate().value.equals("")) {
         	parsedDateFlag = true;
         	parsedDate = LocalDate.parse(task.getDate().value, dtf);
