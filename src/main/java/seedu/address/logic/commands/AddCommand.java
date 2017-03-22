@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + " study english d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the todo list";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
     private final Person toAdd;
 
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             model.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }

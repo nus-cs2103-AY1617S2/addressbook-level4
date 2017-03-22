@@ -32,7 +32,7 @@ public class SampleDataUtil {
                     new UniqueTagList("undone")),
                 new Person(new Name("painting"), new Date("03.06"), new Email("royb@gmail.com"),
                     new Group("leisure time"),
-                    new UniqueTagList("undone"))
+                    new UniqueTagList("done"))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
