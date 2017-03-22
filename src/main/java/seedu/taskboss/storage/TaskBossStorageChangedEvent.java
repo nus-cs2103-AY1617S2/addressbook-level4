@@ -1,4 +1,4 @@
-package seedu.taskboss.storage;
+package seedu.taskboss.commons.events.storage;
 
 import seedu.taskboss.commons.events.BaseEvent;
 
