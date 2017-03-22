@@ -34,10 +34,10 @@
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane fx:id="resultDisplayPlaceholder" prefHeight="8.0" prefWidth="692.0" styleClass="anchor-pane-with-border">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
+      <AnchorPane fx:id="resultDisplayPlaceholder" prefWidth="340" styleClass="anchor-pane-with-border">
+          <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+          </padding>
       </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" VBox.vgrow="ALWAYS">
          <items>
