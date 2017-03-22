@@ -30,7 +30,9 @@ public class LeftPanel extends UiPart<Region> {
     @FXML
     private ListView<Label> labelListView;
 
-    public LeftPanel(AnchorPane leftListPlaceholder, ObservableList<ReadOnlyTask> taskList, ObservableList<Label> labelList) {
+    public LeftPanel(AnchorPane leftListPlaceholder,
+            ObservableList<ReadOnlyTask> taskList,
+            ObservableList<Label> labelList) {
         super(FXML);
         setConnections(labelList);
         setTodayListView(taskList);

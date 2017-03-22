@@ -4,6 +4,6 @@
 <?import javafx.scene.control.Label?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<Label fx:id="labelText" styleClass="cell_big_label" />
+    <Label fx:id="labelText" styleClass="cell_big_label" />
 </AnchorPane>
 
