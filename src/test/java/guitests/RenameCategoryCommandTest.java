@@ -16,21 +16,15 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
 
     @Test
     public void renameCategory_Long_Command_success() throws IllegalValueException {
-        TestTask sampleA = td.alice;
-        TestTask sampleB = td.benson;
-        TestTask[] taskList = {sampleA, sampleB};
-        assertRenameCategoryResult("name friends Project", taskList);
+        assertRenameCategoryResult("name friends Project");
     }
 
     @Test
     public void renameCategory_Short_Command_success() throws IllegalValueException {
-        TestTask sampleA = td.alice;
-        TestTask sampleB = td.benson;
-        TestTask[] taskList = {sampleA, sampleB};
-        assertRenameCategoryResult("n friends Project", taskList);
+        assertRenameCategoryResult("n friends Project");
     }
 
-    private void assertRenameCategoryResult(String command, TestTask[] taskList) throws IllegalValueException {
+    private void assertRenameCategoryResult(String command) throws IllegalValueException {
         TestTask sampleA;
         TestTask sampleB;
         sampleA = new TaskBuilder().withName("Alice Pauline")
