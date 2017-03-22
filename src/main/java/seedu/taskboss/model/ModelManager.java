@@ -167,7 +167,7 @@ public class ModelManager extends ComponentManager implements Model {
             taskBoss.updateTask(taskBossIndex, editedTask);
         }
 
-        if (isFound == false) {
+        if (!isFound) {
             updateFilteredListToShowAll();
             throw new CommandException(oldCategory.toString()
                     + " " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
