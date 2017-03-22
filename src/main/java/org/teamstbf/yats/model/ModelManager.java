@@ -140,6 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
 	    tempManager.resetData(taskManager);
 	    redoTaskManager.push(tempManager);
         taskManager.resetData((ReadOnlyTaskManager)undoTaskManager.pop());
+        indicateTaskManagerChanged();
     }
 
     @Override
@@ -148,6 +149,7 @@ public class ModelManager extends ComponentManager implements Model {
         tempManager.resetData(taskManager);
         undoTaskManager.push(tempManager);
         taskManager.resetData((ReadOnlyTaskManager)redoTaskManager.pop());
+        indicateTaskManagerChanged();
     }
 
 /*	@Override
