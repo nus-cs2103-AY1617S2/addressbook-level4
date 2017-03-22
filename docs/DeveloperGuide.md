@@ -355,7 +355,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | set task as completed | see past tasks
 `* * *` | user | set floating task as completed | see past floating tasks
 `* * *` | user | set event as completed | see past events
-
 `* * *` | user | be able to undo the most recent action | revert changes made
 `* * *` | user | block multiple timeslots when the timing is uncertain | know which times are available for me to add new tasks
 `* * *` | user | be able set priority to a task | know which is the highest priority that I should do 1st.
@@ -367,11 +366,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | sort tasks by date, priority, deadline, recurrence, tags | view important tasks first
 `* * *` | user | sort floating tasks by priority and tags | view important floating tasks first
 `* * *` | user | sort events by date, priority, deadline, recurrence, tags | view important events first
-
 `* *` | user | be able know what should he do today | so they can plan what task to do first
 `* *` | user | select task/events by index | to reduce typing of full name
 `*` | user | set events as recurring | don't need to keep adding for repeating events
-
 `*` | user | color scheme of priority | to make it obvious
 
 
