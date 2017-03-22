@@ -10,38 +10,47 @@ import seedu.taskboss.testutil.TestTask;
 
 public class SortCommandTest extends TaskBossGuiTest {
 
+    //---------------- Tests for SortCommand --------------------------------------
+
+    /*
+     * Valid equivalence partitions:
+     * - end date time
+     * - start date time
+     * - priority level
+     */
+
     @Test
     public void sort() {
-        //sort by end date time
+        // Equivalence partition: sort by end date time
         TestTask[] expectedList = new TestTask[] {td.carl, td.elle, td.alice,
             td.daniel, td.benson, td.george, td.fiona};
         assertSortSuccess(false, expectedList, "ed");
 
-        //sort by start date time
+        // EP: sort by start date time
         TestTask[] expectedList2 = new TestTask[] {td.george, td.alice, td.carl,
             td.daniel, td.fiona, td.elle, td.benson};
         assertSortSuccess(false, expectedList2, "sd");
 
-        //sort by end date time short command
+        // EP: sort by end date time short command
         TestTask[] expectedList3 = new TestTask[] {td.carl, td.elle, td.alice,
             td.daniel, td.benson, td.george, td.fiona};
         assertSortSuccess(true, expectedList3, "ed");
 
-        //sort by priority short command
+        // EP: sort by priority short command
         TestTask[] expectedList4 = new TestTask[] {td.carl, td.alice, td.daniel,
             td.george, td.elle, td.benson, td.fiona};
         assertSortSuccess(true, expectedList4, "p");
 
-        //invalid sort command
+        // EP: invalid sort command
         commandBox.runCommand("sort byname");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
-        //invalid sort command
-        commandBox.runCommand("sort");
+        // EP: invalid sort command
+        commandBox.runCommand("sort"); // boundary value with no sort type specified
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
-        //invalid sort command
-        commandBox.runCommand("s");
+        // EP: invalid sort command
+        commandBox.runCommand("s"); // boundary value with no sort type specified
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
     }
