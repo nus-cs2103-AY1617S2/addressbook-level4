@@ -53,14 +53,14 @@ on simplifying the way you handle tasks now.
 
 ## 3.1. Viewing help : `help`
 
-Brings up user guide.<br>
+Brings up user guide<br>
 Format: help
 
 > Is also displayed when an incorrect command is entered
 
 ## 3.2. Adding a task: `add`
 
-Adds a task to task list <br>
+Adds a task to task list<br>
 Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
 > Tasks includes:
 > * Event tasks where deadlines include a specific timing
@@ -87,7 +87,7 @@ Examples:
 
 ## 3.4. Delete a task: `delete`
 
-Deletes an existing task <br>
+Deletes an existing task<br>
 Format: delete INDEX
 
 Examples:
@@ -96,7 +96,7 @@ Examples:
 
 ## 3.5. Undo a command: 'undo'
 
-Undo most recent command <br>
+Undo most recent command<br>
 Format: undo
 
 ## 3.6. Redo a command: 'redo'
@@ -171,18 +171,25 @@ There is no need to manually save the data
 * **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]` <br>
   e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills -p`
 
-* **Update** : `update INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
-  e.g. `update 3 buy eggs dl/29-02-2017 ds/as soon as possible`
+* **Edit** : `edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
+  e.g. `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
+   
+* **Undo** : `undo` <br>
 
+* **Redo** : `redo` <br> 
+
+* **View** : `view all|calendar|done|floating|overdue|today|tomorrow|future` <br>
+  e.g. `view all`
+  
 * **Find** : `find [KEYWORDS] [ds/KEYWORDS] [dl/DATE]` <br>
   e.g. `find James Jake`
 
 * **List** : `list` <br>
 
-* **View** : `view INDEX` <br>
-  e.g. `view 1`
+* **Mark** : `mark INDEX` <br>
+  e.g. `mark 4`
 
 * **Exit** : `exit` <br>
