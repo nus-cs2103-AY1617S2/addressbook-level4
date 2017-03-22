@@ -7,6 +7,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
@@ -17,6 +18,7 @@ import seedu.address.model.task.ReadOnlyTask;
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -30,17 +32,32 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command = getCommand(commandText);
+        CommandResult result = executeCommand(commandText, command);
+        return result;
+    }
+
+    private Command getCommand(String commandText) {
         Command command = parser.parseCommand(commandText.trim(), this);
         command.setData(model);
-        try {
-            if (!(command instanceof UndoCommand)) {
-                model.saveCurrentState(commandText.trim());
-            }
-            CommandResult result = command.execute();
+        return command;
+    }
 
-            return result;
+    private CommandResult executeCommand(String commandText, Command toExecute) throws CommandException {
+        try {
+            if (!(toExecute instanceof UndoCommand)) {
+                model.saveCurrentState(commandText.trim());
+
+                if (toExecute instanceof RedoCommand) {
+                    toExecute = getCommand(((RedoCommand) toExecute).getToRedo());
+                } else {
+                    model.clearRedoCommandHistory();
+                }
+            }
+
+            return toExecute.execute();
         } catch (CommandException e) {
-            if (!(command instanceof UndoCommand)) {
+            if (!(toExecute instanceof UndoCommand)) {
                 model.discardCurrentState();
             }
 

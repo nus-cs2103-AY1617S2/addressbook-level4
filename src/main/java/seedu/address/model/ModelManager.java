@@ -41,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
     private Stack<TaskManager> taskHistory;
     private Stack<Predicate> predicateHistory;
     private Stack<String> redoCommandHistory;
+    private Stack<Boolean> completedViewHistory;
 
     private static final String MESSAGE_ON_DELETE = "Task deleted";
     private static final String MESSAGE_ON_ADD = "Task added";
@@ -53,6 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_UNDO = "Undo completed";
 
     private final HashMap<String, Integer> indexMap;
+    private boolean completedViewOpen;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -63,13 +65,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.taskManager = new TaskManager();
+        this.taskManager = new TaskManager(taskManager);
         this.indexMap = new HashMap<String, Integer>();
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         commandHistory = new Stack<String>();
         taskHistory = new Stack<TaskManager>();
         predicateHistory = new Stack<Predicate>();
         redoCommandHistory = new Stack<String>();
+        completedViewHistory = new Stack<Boolean>();
+        completedViewOpen = false;
     }
 
     public ModelManager() {
@@ -78,11 +82,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void showCompletedTaskList() {
+        completedViewOpen = true;
         raise(new ShowCompletedTaskEvent(ShowCompletedTaskEvent.Action.SHOW));
     }
 
     @Override
     public void hideCompletedTaskList() {
+        completedViewOpen = false;
         raise(new ShowCompletedTaskEvent(ShowCompletedTaskEvent.Action.HIDE));
     }
 
@@ -141,12 +147,13 @@ public class ModelManager extends ComponentManager implements Model {
         taskHistory.add(copiedTaskManager);
         predicateHistory.add(filteredTasks.getPredicate());
         commandHistory.add(commandText);
+        completedViewHistory.add(completedViewOpen);
     }
-
 
     @Override
     public void discardCurrentState() {
-        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size();
+        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
+                && predicateHistory.size() == completedViewHistory.size();
         assert (!commandHistory.isEmpty());
         String toUndo = commandHistory.pop();
         taskHistory.pop();
@@ -155,7 +162,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String undoLastCommand() throws NoPreviousCommandException {
-        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size();
+        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
+                && predicateHistory.size() == completedViewHistory.size();
 
         if (commandHistory.isEmpty()) {
             throw new NoPreviousCommandException("No previous commands were found.");
@@ -166,7 +174,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(taskHistory.pop());
         filteredTasks.setPredicate(predicateHistory.pop());
 
-        // Store it in case of redo
+        // Set completed tasks view
+        if (completedViewHistory.pop()) {
+            showCompletedTaskList();
+        } else {
+            hideCompletedTaskList();
+        }
+
+        // Store command in case of redo
         redoCommandHistory.add(toUndo);
 
         if (toUndo.startsWith(SaveToCommand.COMMAND_WORD)) {
@@ -176,6 +191,21 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         return toUndo;
+    }
+
+    @Override
+    public String getRedoCommand() throws NoPreviousCommandException {
+
+        if (redoCommandHistory.isEmpty()) {
+            throw new NoPreviousCommandException("No previous commands were found.");
+        }
+
+        return redoCommandHistory.pop();
+    }
+
+    @Override
+    public void clearRedoCommandHistory() {
+        redoCommandHistory.clear();
     }
 
     // =========== Filtered Task List Accessors
@@ -272,7 +302,7 @@ public class ModelManager extends ComponentManager implements Model {
     // For debugging
     public void printIndexMap(HashMap<String, Integer> map) {
         logger.info("=============indexmap content==============");
-        for (String name: map.keySet()) {
+        for (String name : map.keySet()) {
             String key = name.toString();
             String value = map.get(name).toString();
             logger.info(key + " " + value);

@@ -113,4 +113,18 @@ public interface Model {
      * checks if a given ui index is present in model
      */
     boolean isValidUIIndex(String uiIndex);
+
+    /**
+     * Get the undone command entered by the user.
+     *
+     * @return the last undone command
+     * @throws NoPreviousCommandException
+     *             if there are no previously undone commands
+     */
+    String getRedoCommand() throws NoPreviousCommandException;
+
+    /**
+     * Clears the commands that were undone by the user
+     */
+    void clearRedoCommandHistory();
 }
