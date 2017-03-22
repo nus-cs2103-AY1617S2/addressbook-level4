@@ -1,5 +1,7 @@
 package seedu.task.logic.commands;
 
+import java.util.Arrays;
+
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -20,31 +22,36 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
 
-    public final int targetIndex;
+    public final int[] targetIndex;
 
-    public DeleteCommand(int targetIndex) {
+    public DeleteCommand(int[] targetIndex) {
+    	Arrays.sort(targetIndex);
         this.targetIndex = targetIndex;
     }
 
 
     @Override
     public CommandResult execute() throws CommandException {
+    	UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i< targetIndex.length ;i++){
+        	
+        	if (lastShownList.size() < targetIndex[i]-i) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        	ReadOnlyTask taskToDelete = lastShownList.get(targetIndex[i] - 1 -i);
 
-        if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            try {
+                model.deleteTask(taskToDelete);
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target task cannot be missing";
+            }
+            
+            sb.append(String.format(MESSAGE_DELETE_TASK_SUCCESS, targetIndex[i]));
+            sb.append("\n");
         }
-
-        ReadOnlyTask personToDelete = lastShownList.get(targetIndex - 1);
-
-        try {
-            model.deleteTask(personToDelete);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target person cannot be missing";
-        }
-
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
+        return new CommandResult(sb.toString());
     }
 
 }

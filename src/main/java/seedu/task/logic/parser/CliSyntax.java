@@ -20,5 +20,6 @@ public class CliSyntax {
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
+    public static final Pattern DELETE_ARGS_FORMAT = 
+    		Pattern.compile("(?<index>\\d+(?:\\s+\\d+)*)"); // one or more number separated by whitespace
 }
