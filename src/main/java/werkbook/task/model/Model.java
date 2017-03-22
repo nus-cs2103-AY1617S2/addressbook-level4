@@ -51,7 +51,7 @@ public interface Model {
 
     /** Raises an event to indicate the model has changed */
     void indicateTaskListChanged();
-    
+
     //@@author A0139903B
     /** Raises an event to indicate a task has changed */
     void indicateTaskChanged(ReadOnlyTask editedTask);

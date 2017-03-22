@@ -66,7 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));
     }
-    
+
     //@@author A0139903B
     @Override
     public void indicateTaskChanged(ReadOnlyTask editedTask) {
