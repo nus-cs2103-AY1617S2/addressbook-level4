@@ -274,10 +274,12 @@
 .text-area {
     -fx-background-insets: 0;
     -fx-background-color: #bfe7fc;
+    -fx-text-fill: #3869bc;
 }
 
 .text-area .content {
     -fx-background-color: #bfe7fc;
+    -fx-text-fill: #bfe7fc;
 }
 
 .text-area:focused .content {
