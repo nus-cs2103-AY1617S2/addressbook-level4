@@ -13,7 +13,7 @@
       <Label fx:id="label11121" layoutX="398.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Wednesday" />
       <Label fx:id="label11131" layoutX="483.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Thursday" />
       <Label fx:id="label11141" layoutX="568.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Friday" />
-      <Label fx:id="label11151" layoutX="657.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Saturday" />  
+      <Label fx:id="label11151" layoutX="657.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Saturday" />
       <ListView fx:id="listview1" editable="true" layoutX="130.0" layoutY="64.0" prefHeight="54.0" prefWidth="86" style="-fx-border-color: pink;" />
       <ListView layoutX="215.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
       <ListView layoutX="640.0" layoutY="64.0" prefHeight="54.0" prefWidth="86.0" />
