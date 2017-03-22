@@ -122,13 +122,17 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author A0142255M
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
+        browserPanel = new BrowserPanel(getBrowserPlaceholder(), logic.getFilteredTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new TaskListType(getTaskListTypePlaceholder(), logic.getFilteredTaskListType());
         new TaskCount(getTaskCountPlaceholder(), logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+    }
+
+    private AnchorPane getBrowserPlaceholder() {
+        return browserPlaceholder;
     }
     //@@author
 
@@ -221,13 +225,11 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
+    //@@author A0142255M
+    void viewTaskEvent(ReadOnlyTask task) {
+        //browserPanel.viewEvent(task);
     }
-
-    void addTaskEvent(ReadOnlyTask task) {
-        browserPanel.add_event_today(task.getName().fullName);
-    }
+    //@@author
 
     void releaseResources() {
         browserPanel.freeResources();

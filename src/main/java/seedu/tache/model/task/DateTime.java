@@ -57,6 +57,12 @@ public class DateTime {
         return sdf.format(date);
     }
 
+    //@@author A0142255M
+    public String getDateTimeForFullCalendar() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        return sdf.format(date);
+    }
+
    /* @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
