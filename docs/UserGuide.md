@@ -78,10 +78,10 @@ Format: `sort [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY]...`
 
 Examples:
 
-* 'sort status' <br>
+* `sort status` <br>
 Sorts the list of tasks according to status
 * `sort status priority`<br>
-Sorts the list of tasks according to status, followed by priority`.
+Sorts the list of tasks according to status, followed by priority.
 
 ### 2.4. Editing a task : `edit`
 
