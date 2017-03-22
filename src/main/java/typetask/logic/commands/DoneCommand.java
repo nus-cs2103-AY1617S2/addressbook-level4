@@ -37,6 +37,7 @@ public class DoneCommand extends Command {
 
         //@@author A0144902L
         try {
+            model.storeTaskManager(COMMAND_WORD);
             model.completeTask(targetIndex - 1, taskToComplete);
             //Need to do: Add the completed task to the completed task list
         } catch (TaskNotFoundException tnfe) {
