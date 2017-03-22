@@ -44,11 +44,11 @@ public class TypicalTestTasks {
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
                     .withPriority("3").build();
-            ida = new TaskBuilder().withDescription("Say greetings to Ida Noasdergen")
+            ida = new TaskBuilder().withDescription("eat pizza")
                     .withStartDate("01/02/2020")
                     .withEndDate("02/10/2100")
-                    .withPriority("1").build();
-            hoon = new TaskBuilder().withDescription("Say greetings to Hoon Loffschringer")
+                    .withPriority("2").build();
+            hoon = new TaskBuilder().withDescription("go gym")
                     .withStartDate("01/02/2020")
                     .withEndDate("12/10/2100")
                     .withPriority("3").build();
@@ -69,7 +69,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{fiona};
     }
 
     public TaskList getTypicalTaskList() {
