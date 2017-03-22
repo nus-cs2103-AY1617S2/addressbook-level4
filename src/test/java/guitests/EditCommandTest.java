@@ -137,7 +137,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_changeFromTwoToOneDate_success() throws Exception {
         String detailsToEdit = "by next week";
-        int taskManagerIndex = 7;
+        int taskManagerIndex = 3;
 
         TestTask editedTask = new TaskBuilder().withTitle("Complete task 3")
                 .withDeadline("next week").withStatus(false).build();

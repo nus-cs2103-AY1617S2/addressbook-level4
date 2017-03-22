@@ -30,7 +30,7 @@ public class TypicalTestTasks {
                     .withDeadline("11-11-2017 2300").withStatus(false).build();
             task6 = new TaskBuilder().withTitle("Complete task 6").withStartTime("10-10-2017 0100")
                     .withDeadline("10-11-2017 2300").withStatus(false).build();
-            task7 = new TaskBuilder().withTitle("Complete task 7")
+            task7 = new TaskBuilder().withTitle("Complete task 7").withStartTime("10-10-2017 0100")
                     .withDeadline("11-11-2017 2300").withStatus(false).build();
 
             // Manually added
