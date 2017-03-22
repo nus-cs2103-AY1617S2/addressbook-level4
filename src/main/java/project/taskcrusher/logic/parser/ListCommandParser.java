@@ -36,10 +36,10 @@ public class ListCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE);
         argsTokenizer.tokenize(args);
 
-        String taskOrEventFlag = ListCommand.NO_FLAG;
+        this.taskOrEventFlag = ListCommand.NO_FLAG;
 
         // TODO this flag is currently unused
-        String overdueOrCompleteFlag = ListCommand.NO_FLAG;
+        this.overdueOrCompleteFlag = ListCommand.NO_FLAG;
 
         Optional<String> rawFlag = argsTokenizer.getPreamble();
         if (rawFlag.isPresent()) {
@@ -64,7 +64,7 @@ public class ListCommandParser {
             date = rawDate.get();
         }
 
-        switch (taskOrEventFlag) {
+        switch (this.taskOrEventFlag) {
         case ListCommand.NO_FLAG:
             return listAll();
         case ListCommand.TASK_FLAG:
