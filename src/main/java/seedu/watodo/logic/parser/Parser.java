@@ -6,6 +6,7 @@ import static seedu.watodo.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.AddCommand;
 import seedu.watodo.logic.commands.ClearCommand;
 import seedu.watodo.logic.commands.Command;
@@ -33,8 +34,9 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
+     * @throws IllegalValueException 
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput) throws IllegalValueException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
