@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -154,7 +154,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component
 
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
@@ -188,7 +188,7 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model`
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
@@ -570,15 +570,15 @@ Use case ends
 
 **Wunderlist**
 
-Author: Kristen
+Author: Marianne
 
 Pros:
 
-* Calendar Feed, able to export to google calendar → If Jim still wishes to have a copy of his tasks on Google Calendar
-* Tasks need not necessarily need a deadline → Jim cannot decide when is a good time to complete the task. 
-* Easy input (using only task name) → Jim prefers a one shot approach
-* Subtasks function → Jim can include follow up action if needed
-* Desktop and mobile application → Jim wants a desktop software he can activate quickly
+* Calendar Feed, able to export to google calendar
+* Tasks need not necessarily need a deadline
+* Easy input, using only task name
+* Subtasks function
+* Desktop and mobile application
 * Notifications
 * Bookmark task function
 * Able to add notes to each task
@@ -586,5 +586,5 @@ Pros:
 
 Cons:
 
-* Requires subscription for unlimited subtasks, file uploads and assignment of tasks → not really applicable to Jim as it is a personal task manager
+* Requires subscription for unlimited subtasks, file uploads and assignment of tasks
 
