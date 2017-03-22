@@ -41,14 +41,14 @@ public interface ReadOnlyEvent {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" Start Date: ")
-                .append(getStartDate())
-                .append(" End Date: ")
-                .append(getEndDate())
                 .append(" Start Time: ")
                 .append(getStartTime())
+                .append(" Start Date: ")
+                .append(getStartDate())
                 .append(" End Time: ")
                 .append(getEndTime())
+                .append(" End Date: ")
+                .append(getEndDate())
                 .append(" Location: ")
                 .append(getLocation())
                 .append(" Tags: ");
