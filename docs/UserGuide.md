@@ -53,12 +53,15 @@ Format: `switch WINDOWIDENTIFIER`
 > * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
 > * If a letter is given, it will be the underlined letter in the window list name.
 > * If a word is given, it will be the word with the underlined letter in the window list name.
+> * You can also use key combination <kbd>Ctrl</kbd> with an underlined letter to switch between different window.
 
 Example:
 * `switch 2` <br>
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
+* Press <kbd>Ctrl</kbd> + <kbd>A</kbd>
+  Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
 
