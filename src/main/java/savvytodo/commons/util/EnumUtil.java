@@ -1,7 +1,7 @@
 package savvytodo.commons.util;
 
 import java.util.Arrays;
-
+//@@author A0140016B
 /**
  * @author A0140016B
  * Utility methods related to Enum
@@ -16,3 +16,4 @@ public class EnumUtil {
         return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 }
+//@@author A0140016B

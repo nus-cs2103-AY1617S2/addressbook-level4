@@ -60,6 +60,7 @@ public class StringUtil {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
 
+    //@@author A0140016B
     /**
      * @author A0140016B
      * @param string cannot be null
@@ -69,5 +70,6 @@ public class StringUtil {
     public static String firstCharUpperCaseRestLowerCase(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
     }
+    //@@author A0140016B
 
 }
