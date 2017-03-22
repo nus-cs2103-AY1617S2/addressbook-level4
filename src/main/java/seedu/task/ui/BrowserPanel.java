@@ -29,8 +29,8 @@ public class BrowserPanel extends UiPart<Region> {
         placeholder.getChildren().add(browser);
     }
 
-    public void loadPersonPage(ReadOnlyTask person) {
-        loadPage("https://www.google.com.sg/#safe=off&q=" + person.getTaskName().fullName.replaceAll(" ", "+"));
+    public void loadPersonPage(ReadOnlyTask task) {
+        loadPage("https://www.google.com.sg/#safe=off&q=" + task.getTaskName().fullTaskName.replaceAll(" ", "+"));
     }
 
     public void loadPage(String url) {

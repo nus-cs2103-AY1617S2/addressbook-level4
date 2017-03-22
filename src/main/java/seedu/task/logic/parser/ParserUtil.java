@@ -18,7 +18,11 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskTime;
-
+/*
+ import seedu.task.model.task.Email;
+import seedu.task.model.task.Address;
+import seedu.task.model.task.Phone;
+ */
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
@@ -72,7 +76,6 @@ public class ParserUtil {
         assert name != null;
         return name.isPresent() ? Optional.of(new TaskName(name.get())) : Optional.empty();
     }
-
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.

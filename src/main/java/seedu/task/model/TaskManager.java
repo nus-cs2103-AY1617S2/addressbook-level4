@@ -18,7 +18,7 @@ import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task-manager level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
@@ -77,20 +77,22 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// task-level operations
 
     /**
-     * Adds a task to the address book.
+     * Adds a task to the task manager.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTaskTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+
+    public void addJobTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+
         syncMasterTagListWith(p);
         tasks.add(p);
     }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
+     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
      * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to

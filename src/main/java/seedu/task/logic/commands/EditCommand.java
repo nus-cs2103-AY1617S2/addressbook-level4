@@ -13,6 +13,11 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.UniqueTaskList;
+/*
+import seedu.task.model.task.Phone;
+import seedu.task.model.task.Email;
+import seedu.task.model.task.Address;
+ */
 
 /**
  * Edits the details of an existing task in the task manager.

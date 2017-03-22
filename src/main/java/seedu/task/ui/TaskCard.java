@@ -16,17 +16,21 @@ public class TaskCard extends UiPart<Region> {
 	@FXML
 	private Label taskName;
 	@FXML
+    private Label id;
+	@FXML
 	private Label taskDate;
 	@FXML
-	private Label taskStartTime;
-	@FXML
-	private Label taskEndTime;
+	private Label taskTime;
 	@FXML
 	private Label taskDescription;
+	@FXML
+    private FlowPane tags;
 
+	
 	public TaskCard(ReadOnlyTask task, int displayedIndex) {
 		super(FXML);
-		taskDate.setText(displayedIndex + ". ");
+		
+		id.setText(displayedIndex + ". ");
 		if (task.getTaskName() != null) {
 			taskName.setText(task.getTaskName().toString());
 		}
@@ -34,14 +38,18 @@ public class TaskCard extends UiPart<Region> {
 			taskDate.setText(task.getTaskDate().toString());
 		}
 		if (task.getTaskStartTime() != null && task.getTaskEndTime() != null) {
-			taskEndTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
+			taskTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
 		} else if (task.getTaskStartTime() != null) {
-			taskEndTime.setText(task.getTaskStartTime().toString());
+			taskTime.setText(task.getTaskStartTime().toString());
 		} else if (task.getTaskEndTime() != null) {
-			taskEndTime.setText(task.getTaskEndTime().toString());
+			taskTime.setText(task.getTaskEndTime().toString());
 		}
 		if (task.getTaskDescription() != null) {
 			taskDescription.setText(task.getTaskDescription().toString());
 		}
+		initTags(task);
 	}
+	private void initTags(ReadOnlyTask task) {
+       task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
 }

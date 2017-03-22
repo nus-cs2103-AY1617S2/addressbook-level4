@@ -12,16 +12,16 @@ public class NameTest {
     @Test
     public void isValidName() {
         // invalid name
-        assertFalse(TaskName.isValidName("")); // empty string
-        assertFalse(TaskName.isValidName(" ")); // spaces only
-        assertFalse(TaskName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(TaskName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(TaskName.isValidTaskName("")); // empty string
+        assertFalse(TaskName.isValidTaskName(" ")); // spaces only
+        assertFalse(TaskName.isValidTaskName("^")); // only non-alphanumeric characters
+        assertFalse(TaskName.isValidTaskName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(TaskName.isValidName("peter jack")); // alphabets only
-        assertTrue(TaskName.isValidName("12345")); // numbers only
-        assertTrue(TaskName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(TaskName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(TaskName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(TaskName.isValidTaskName("peter jack")); // alphabets only
+        assertTrue(TaskName.isValidTaskName("12345")); // numbers only
+        assertTrue(TaskName.isValidTaskName("peter the 2nd")); // alphanumeric characters
+        assertTrue(TaskName.isValidTaskName("Capital Tan")); // with capital letters
+        assertTrue(TaskName.isValidTaskName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

@@ -39,36 +39,7 @@ public class Task implements ReadOnlyTask {
     	this.taskDescription = taskDescription;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
-        	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
-    }
-    /*
-    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
-    	this.taskName = taskName;
-    	this.taskDate = taskDate;
-    	this.taskStartTime = taskStartTime;
-    	this.taskEndTime = taskEndTime;
-    	this.taskDescription = taskDescription;
-    	
-    	try {
-	    	this.name = new Name("PLACEHOLDER NAME, SHOULD NOT SEE");
-	    	this.phone = new Phone("123");
-	    	this.email = new Email("asdfads@gmail.com");
-	    	this.address = new Address("22 Acacia Avenue");
-	    	tags = new UniqueTagList();
-    	} catch (IllegalValueException e) {
-	    	System.out.println("error11");
-	    }
-    	
-    }
-*/
-    /**
-     * Creates a copy of the given ReadOnlyTask.
-     */
-    public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(), source.getTaskDescription(),source.getTags());
-    }
-
+    
 	public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 			Optional<TaskTime> parseTime2, Optional<String> parseString) {
 		this.taskName = parseTaskName;
@@ -85,8 +56,18 @@ public class Task implements ReadOnlyTask {
 			this.taskDescription = parseString.get();
 		}
 		this.tags = new UniqueTagList();
-		// TODO Auto-generated constructor stub
+		
 	}
+    
+    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
+        	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
+    }
+    /**
+     * Creates a copy of the given ReadOnlyTask.
+     */
+    public Task(ReadOnlyTask source) {
+        this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(), source.getTaskDescription(),source.getTags());
+    }
 
     @Override
     public UniqueTagList getTags() {

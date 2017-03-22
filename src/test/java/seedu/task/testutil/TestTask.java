@@ -2,14 +2,15 @@ package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
 import seedu.task.model.task.TaskDate;
-import seedu.task.model.task.Email;
 import seedu.task.model.task.TaskName;
-import seedu.task.model.task.Phone;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
-
+/*
+import seedu.task.model.task.Phone;
+import seedu.task.model.task.Email;
+import seedu.task.model.task.Address;
+ */
 /**
  * A mutable task object. For testing only.
  */
@@ -104,7 +105,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getTaskName().fullName + " ");
+        sb.append("add " + this.getTaskName().fullTaskName + " ");
         sb.append("d/" + this.getTaskDate().value + " ");
         sb.append("s/" + this.getTaskStartTime().value + " ");
         sb.append("e/" + this.getTaskEndTime().value + " ");
