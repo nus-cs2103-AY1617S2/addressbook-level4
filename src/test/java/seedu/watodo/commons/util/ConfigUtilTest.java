@@ -75,11 +75,11 @@ public class ConfigUtilTest {
 
     private Config getTypicalConfig() {
         Config config = new Config();
-        config.setAppTitle("Watodo");
+        config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setWatodoFilePath("data/watodo.xml");
-        config.setWatodoName("My Tasks");
+        config.setWatodoFilePath("watodo.xml");
+        config.setWatodoName("TypicalWatodoName");
         return config;
     }
 

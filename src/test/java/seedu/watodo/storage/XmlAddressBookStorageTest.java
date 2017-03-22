@@ -20,7 +20,7 @@ import seedu.watodo.storage.XmlTaskListStorage;
 import seedu.watodo.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -53,7 +53,7 @@ public class XmlAddressBookStorageTest {
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readTaskList("NotXmlFormatTaskManager.xml");
+        readTaskList("NotXmlFormatAddressBook.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
