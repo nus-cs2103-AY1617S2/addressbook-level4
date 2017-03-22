@@ -42,12 +42,12 @@ public class TaskComparableTest {
         }
     }
 
-    private void printDescriptions(ArrayList<Task> al) {
-        System.out.println("Starting print...");
-        for (Task t : al) {
-            System.out.println(t.getDescription());
-        }
-        System.out.println("Ending print.");
-
-    }
+    //    private void printDescriptions(ArrayList<Task> al) {
+    //        System.out.println("Starting print...");
+    //        for (Task t : al) {
+    //            System.out.println(t.getDescription());
+    //        }
+    //        System.out.println("Ending print.");
+    //
+    //    }
 }
