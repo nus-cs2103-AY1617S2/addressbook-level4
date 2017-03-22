@@ -11,8 +11,8 @@ public interface ReadOnlyEvent {
     Description getDescription();
     StartTime getStartTime();
     EndTime getEndTime();
-    FromDate getFromDate();
-    ToDate getToDate();
+    StartDate getStartDate();
+    EndDate getEndDate();
     Location getLocation();
 
     /**
@@ -30,8 +30,8 @@ public interface ReadOnlyEvent {
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())
-                && other.getFromDate().equals(this.getFromDate())
-                && other.getToDate().equals(this.getToDate())
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
                 && other.getLocation().equals(this.getLocation()));
     }
 
@@ -41,10 +41,10 @@ public interface ReadOnlyEvent {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" From Date: ")
-                .append(getFromDate())
-                .append(" To Date: ")
-                .append(getToDate())
+                .append(" Start Date: ")
+                .append(getStartDate())
+                .append(" End Date: ")
+                .append(getEndDate())
                 .append(" Start Time: ")
                 .append(getStartTime())
                 .append(" End Time: ")
