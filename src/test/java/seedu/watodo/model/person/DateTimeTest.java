@@ -1,4 +1,4 @@
-package seedu.watodo.model.task;
+package seedu.watodo.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
