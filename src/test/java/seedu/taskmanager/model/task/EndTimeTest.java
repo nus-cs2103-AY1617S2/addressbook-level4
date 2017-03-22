@@ -10,17 +10,16 @@ import seedu.taskmanager.model.task.EndTime;
 public class EndTimeTest {
 
     @Test
-    public void isValidPhone() {
+    public void isValidEndTime() {
         // invalid phone numbers
         assertFalse(EndTime.isValidEndTime("")); // empty string
         assertFalse(EndTime.isValidEndTime(" ")); // spaces only
-        assertFalse(EndTime.isValidEndTime("phone")); // non-numeric
         assertFalse(EndTime.isValidEndTime("9011p041")); // alphabets within digits
         assertFalse(EndTime.isValidEndTime("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(EndTime.isValidEndTime("93121534"));
-        assertTrue(EndTime.isValidEndTime("4")); // short phone numbers
-        assertTrue(EndTime.isValidEndTime("124293842033123")); // long phone numbers
+        assertTrue(EndTime.isValidEndTime("1600"));
+        assertTrue(EndTime.isValidEndTime("1200"));
+        assertTrue(EndTime.isValidEndTime("03/03/17 1400")); // long phone numbers
     }
 }

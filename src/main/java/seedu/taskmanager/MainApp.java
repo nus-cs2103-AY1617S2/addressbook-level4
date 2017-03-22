@@ -96,7 +96,7 @@ public class MainApp extends Application {
         LogsCenter.init(config);
     }
 
-    protected Config initConfig(String configFilePath) {
+    protected Config initConfig(String configFilePath) throws Exception {
         Config initializedConfig;
         String configFilePathUsed;
 
