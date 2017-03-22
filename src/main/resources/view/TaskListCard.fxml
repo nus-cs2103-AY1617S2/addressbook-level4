@@ -24,7 +24,7 @@
                         <Insets left="18.0" right="6.0" top="21.0" />
                      </HBox.margin>
                   </Label>
-                      <VBox alignment="CENTER_LEFT" minHeight="105.0">
+                      <VBox alignment="CENTER_LEFT">
                           <stylesheets>
                               <URL value="@DarkTheme.css" />
                               <URL value="@Extensions.css" />

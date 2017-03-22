@@ -2,279 +2,205 @@
 
 <!-- @author A0141138N -->
 <html>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<h1 align="center" style="font-size: 30pt;">
-	<span style="color: #00ccff;"><strong>Cheat Sheet</strong></span>
-</h1>
-<table style="height: 615px;" width="800" ; align="center">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<h1><span class="blue">&lt;</span>Cheat Sheet<span class="blue">&gt;</span></h1>
+<h2>Command summary for  <a href="http://github.com/CS2103JAN2017-F14-B1/main" target="_blank">OneTwoDo</a></h2>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Command</h1></th>
+			<th><h1>Format</h1></th>
+			<th><h1>Description</h1></th>
+		</tr>
+	</thead>
 	<tbody>
 		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 20pt;"><strong>Command</strong></span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<span style="font-size: 20pt;"><strong>Format</strong></span>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 20pt;"><strong><em>Description</em></strong></span>
-				</p>
-			</td>
+			<td>Help</td>
+			<td class="code">help</td>
+			<td>Open help window</td>
 		</tr>
 		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Help</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">help</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Open help window</em></span>
-				</p>
-			</td>
+			<td>Add</td>
+			<td class="code">add NAME [s/START_DATE e/END_DATE | d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...</td>
+			<td>Add a task</td>
 		</tr>
 		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Add</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">add
-							NAME [s/START_DATE e/END_DATE | d/DURATION] [r/RECUR]
-							[p/PRIORITY] [i/INFORMATION] [t/TAG]...</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Add a task</em></span>
-				</p>
-			</td>
+			<td>Find</td>
+			<td class="code">find KEYWORD [MORE_KEYWORDS] [s/SPECIFICITY] [f/FIELDS]...</td>
+			<td>Find tasks with keywords</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Find</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">find
-							KEYWORD [MORE_KEYWORDS] [s/SPECIFICITY] [f/FIELDS]...</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Find tasks with
-							keywords</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>List</td>
+			<td class="code">list [s/START_DATE e/END_DATE | d/DURATION] [o/ORDER] [rev/] [done/]</td>
+			<td>List specified tasks</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">List</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">list
-							[s/START_DATE e/END_DATE | d/DURATION] [o/ORDER] [rev/] [done/]</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>List specified tasks</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Edit</td>
+			<td class="code">edit PREFIX_INDEX [NAME] [s/START_DATE e/END_DATE | d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...</td>
+			<td>Edit any specified task&rsquo;s information</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Edit</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">edit
-							PREFIX_INDEX [NAME] [s/START_DATE e/END_DATE d/DURATION]
-							[r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Edit any specified
-							task&rsquo;s information</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Delete</td>
+			<td class="code">delete PREFIX_INDEX</td>
+			<td>Delete specified task</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Delete</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">delete
-							PREFIX_INDEX</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Delete specified
-							task</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Clear</td>
+			<td class="code">clear</td>
+			<td>Clear all data in OneTwoDo</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Clear</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">clear</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Clear all data in
-							OneTwoDo</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Undo</td>
+			<td class="code">undo</td>
+			<td>Undo previous action</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Undo</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">undo</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Undo previous action</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Redo</td>
+			<td class="code">Redo previous action</td>
+      		<td>Redo previous action</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Redo</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">redo</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Redo previous action</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Done</td>
+			<td class="code">done PREFIX_INDEX</td>
+			<td>Archive the specified task</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Done</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">done
-							PREFIX_INDEX</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Archive the
-							specified task</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Undone</td>
+			<td class="code">undone PREFIX_INDEX</td>
+			<td>Unarchive the specified task</td>
 		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Undone</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">undone
-							PREFIX_INDEX</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Unarchive the
-							specified task</em></span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Save</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">save
-							FILE_PATH</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Save file to
-							specified location</em></span>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width: 111px;">
-				<p>
-					<span style="font-size: 16pt;">Exit</span>
-				</p>
-			</td>
-			<td style="width: 384px;">
-				<p>
-					<strong><span style="font-size: 16pt; color: #993366;">exit</span></strong>
-				</p>
-			</td>
-			<td style="width: 193px;">
-				<p>
-					<span style="font-size: 16pt;"><em>Quit the program</em></span>
-				</p>
-			</td>
+    	<tr>
+			<td>Save</td>
+			<td class="code">save FILE_PATH</td>
+			<td>Save file to specified location</td>
+		</tr>    <tr>
+			<td>Exit</td>
+			<td class="code">exit</td>
+			<td>Quit the program</td>
 		</tr>
 	</tbody>
 </table>
 <p>&nbsp;</p>
 <style>
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
+
+html {
+	height: 615px;
+	width: 750px;
+}
+@charset "UTF-8";
+@font-face {
+    font-family: 'Avenir Light';
+    src: url('/fonts/avenir-light.ttf');
 }
 
-th, td {
-	padding: 10px;
+body {
+  font-family: 'Open Sans', 'Avenir Light', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color: #A7A1AE;
+  background-color: #1F2739;
+}
+
+h1 {
+  font-size:3em; 
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+  color: #4DC3FA;
+}
+
+h2 {
+  font-size:1em; 
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: #FB667A;
+}
+
+h2 a {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FB667A;
+  text-decoration: none;
+}
+
+.blue { color: #185875; }
+
+.container th h1 {
+	  font-weight: bold;
+	  font-size: 1em;
+  text-align: left;
+  color: #185875;
+}
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	        box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	  text-align: left;
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	  padding-bottom: 2%;
+	  padding-top: 2%;
+  padding-left:2%;
+  
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+	  background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+	  background-color: #2C3446;
+}
+
+.container th {
+	  background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
+
+.container tr:hover {
+   background-color: #464A52;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+  background-color: #69F0AE;
+  color: #403E10;
+  font-weight: bold;
+  
+  box-shadow: #00C853 -1px 1px, #00C853 -2px 2px, #00C853 -3px 3px, #00C853 -4px 4px, #00C853 -5px 5px, #00C853 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+
+.code {
+  font-size: 0.8em !important;
+  font-family: "Lucida Console", Monaco, monospace;
 }
 </style>
 </html>
