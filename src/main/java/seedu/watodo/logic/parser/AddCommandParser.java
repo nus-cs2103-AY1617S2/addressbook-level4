@@ -26,10 +26,10 @@ public class AddCommandParser {
 
     /** Creates an AddCommandParser object that contains a dateTimeParser object */
     public AddCommandParser() {
-        dateTimeParser = new DateTimeParser(); 
+        dateTimeParser = new DateTimeParser();
         tags = new HashSet<String>();
     }
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddCommand and returns an AddCommand object for execution.
@@ -39,7 +39,7 @@ public class AddCommandParser {
             dateTimeParser.parse(args);
             String argsWithDatesExtracted = dateTimeParser.trimArgsOfDates(args);
 
-            extractTags(argsWithDatesExtracted);         
+            extractTags(argsWithDatesExtracted);
             String argsWithDatesAndTagsExtracted = trimArgsOfTags(argsWithDatesExtracted);
             description = argsWithDatesAndTagsExtracted;
 
@@ -54,7 +54,7 @@ public class AddCommandParser {
     }
 
     /**
-     * 
+     *
      * @param argsWithDatesExtracted
      */
     private void extractTags(String argsWithDatesExtracted) {
@@ -71,10 +71,10 @@ public class AddCommandParser {
     }
 
     /**
-     * 
+     *
      */
     private String trimArgsOfTags(String args) {
-        return args.replaceAll(PREFIX_TAG.getPrefix()+"(\\S+)", ""); 
+        return args.replaceAll(PREFIX_TAG.getPrefix() + "(\\S+)", "");
     }
-    
+
 }

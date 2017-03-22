@@ -10,7 +10,7 @@ public class ListDayCommand extends ListCommand {
     public static final String COMMAND_WORD = "day";
 
     public static final String MESSAGE_SUCCESS = "Listed today's tasks";
-    
+
     public static final int DEADLINE = 0;
 
     @Override

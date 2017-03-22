@@ -1,6 +1,5 @@
 package seedu.watodo.testutil;
 
-import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
@@ -10,17 +9,10 @@ import seedu.watodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask eat, study, shop, code, play, sleep;
-    
+    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+
     public TypicalTestTasks() {
-        try {
-            eat = new TaskBuilder().withDescription("Time to eat").build(); //TODO continue
-        
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
-        }
-        
+
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
@@ -34,12 +26,12 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{eat, study, sleep};
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalTaskManager() {
-        TaskManager tm = new TaskManager();
-        loadTaskManagerWithSampleData(tm);
-        return tm;
+        TaskManager ab = new TaskManager();
+        loadTaskManagerWithSampleData(ab);
+        return ab;
     }
 }

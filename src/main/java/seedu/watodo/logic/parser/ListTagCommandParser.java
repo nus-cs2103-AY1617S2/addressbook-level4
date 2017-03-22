@@ -6,8 +6,8 @@ import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.NoSuchElementException;
 
 import seedu.watodo.logic.commands.Command;
-import seedu.watodo.logic.commands.ListTagCommand;
 import seedu.watodo.logic.commands.IncorrectCommand;
+import seedu.watodo.logic.commands.ListTagCommand;
 
 /**
  * Parses input arguments and creates a new ListTagCommand object

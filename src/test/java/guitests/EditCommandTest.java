@@ -9,8 +9,8 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.logic.commands.EditCommand;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.Description;
 import seedu.watodo.testutil.TaskBuilder;
 import seedu.watodo.testutil.TestTask;
 
@@ -26,7 +26,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withDescription("Bobby").withPhone("91234567")
+        TestTask editedTask = new TaskBuilder().withName("Bobby").withPhone("91234567")
                 .withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
@@ -63,7 +63,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         int taskManagerIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withDescription("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
