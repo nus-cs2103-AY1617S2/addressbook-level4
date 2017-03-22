@@ -40,7 +40,6 @@ public class TaskCard extends UiPart<Region> {
     private Label endTime;
     @FXML
     private Pane colourTag;
-
     private LocalDateTime now = LocalDateTime.now();
     private LocalDate nowDate = now.toLocalDate();
     private String inputPattern = "dd/MM/yyyy";
@@ -76,8 +75,6 @@ public class TaskCard extends UiPart<Region> {
         	} else {
         		setStyleToIndicatePending();
         	}
-        } else {
-        	//floating tasks has no date
         }
     }
 
@@ -95,4 +92,5 @@ public class TaskCard extends UiPart<Region> {
     private void setStyleToIndicatePriority() {
         colourTag.getStyleClass().add(PRIORITY_STYLE_CLASS);
     }
+    
 }
