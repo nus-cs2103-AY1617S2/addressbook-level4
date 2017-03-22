@@ -5,6 +5,7 @@ import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
@@ -14,7 +15,7 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Name("Alex Yeoh"), new Time("07/05/1990"),
-                    new UniqueTagList("friends"))
+                    new UniqueTagList("friends"),new Status(0))
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

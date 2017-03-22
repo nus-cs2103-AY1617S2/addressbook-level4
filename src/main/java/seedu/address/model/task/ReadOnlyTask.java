@@ -10,6 +10,7 @@ public interface ReadOnlyTask {
 
     Name getName();
     Time getTime();
+    Status getStatus();
     //Email getEmail();
     //Address getAddress();
 
@@ -42,5 +43,5 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
+    
 }

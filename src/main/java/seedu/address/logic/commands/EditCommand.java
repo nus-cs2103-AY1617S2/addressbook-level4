@@ -11,6 +11,7 @@ import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 import seedu.address.model.task.UniqueTaskList;
@@ -79,11 +80,12 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
+        Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
         //Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         //Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedTags);
+        return new Task(updatedName, updatedTime, updatedTags, updatedStatus);
     }
 
     /**
@@ -96,6 +98,7 @@ public class EditCommand extends Command {
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Status> status = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -105,6 +108,7 @@ public class EditCommand extends Command {
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
             this.tags = toCopy.getTags();
+            this.status = toCopy.getStatus();
         }
 
         /**
@@ -148,6 +152,15 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return address;
+        }
+        
+        public void setStatus(Optional<Status> status) {
+            assert status != null;
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return status;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

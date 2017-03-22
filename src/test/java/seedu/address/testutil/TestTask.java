@@ -5,6 +5,7 @@ import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Time;
 
 /**
@@ -17,6 +18,7 @@ public class TestTask implements ReadOnlyTask {
     private Email email;
     private Time time;
     private UniqueTagList tags;
+    private Status status;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -29,6 +31,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.time = taskToCopy.getTime();
         this.tags = taskToCopy.getTags();
+        this.status = taskToCopy.getStatus();
     }
 
     public void setName(Name name) {
@@ -41,6 +44,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
+    }
+    
+    public void setStatus(Status status){
+        this.status = status;
     }
 
     @Override
@@ -56,6 +63,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public UniqueTagList getTags() {
         return tags;
+    }
+    
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
     @Override

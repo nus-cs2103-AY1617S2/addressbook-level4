@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -15,24 +16,26 @@ public class Task implements ReadOnlyTask {
     private Time time;
     private Email email;
     private Address address;
+    private Status status;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, time, tags);
+    public Task(Name name, Time time, UniqueTagList tags, Status status) {
+        assert !CollectionUtil.isAnyNull(name, time, tags,status);
         this.name = name;
         this.time = time;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.status = status;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTime(), source.getTags());
+        this(source.getName(), source.getTime(), source.getTags(), source.getStatus());
     }
 
     public void setName(Name name) {
@@ -65,6 +68,16 @@ public class Task implements ReadOnlyTask {
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
+    }
+    
+    public void setStatus(Status status) {
+        assert status.status != this.status.status;
+        this.status = status;
+    }
+    
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
     /**
