@@ -5,12 +5,14 @@ import java.util.Stack;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.Model;
+import seedu.tache.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
+    protected Storage storage;
     protected static Stack<Undoable> undoHistory = new Stack<Undoable>();
 
     /**
@@ -42,6 +44,10 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
     }
 
     //@@author A0150120H

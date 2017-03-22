@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @@author A0142255M -->
-<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="70.0" minWidth="70.0" prefHeight="70.0" prefWidth="70.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxWidth="50.0" minHeight="70.0" prefHeight="70.0" prefWidth="50.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/clock.png" />
          </image>
       </ImageView>
-      <TextField fx:id="detailedTaskCount" minHeight="35.0" minWidth="35.0" prefHeight="35.0" prefWidth="35.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="timedTaskCount" minHeight="35.0" minWidth="15.0" prefHeight="35.0" prefWidth="15.0" textFill="WHITE" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <image>
             <Image url="@../images/task.png" />
          </image>
       </ImageView>
-      <TextField fx:id="floatingTaskCount" minHeight="35.0" minWidth="35.0" prefHeight="35.0" prefWidth="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label fx:id="floatingTaskCount" minHeight="35.0" minWidth="15.0" prefHeight="35.0" prefWidth="15.0" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

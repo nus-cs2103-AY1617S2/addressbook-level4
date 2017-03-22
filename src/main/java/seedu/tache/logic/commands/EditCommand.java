@@ -1,3 +1,4 @@
+//@@author A0139925U
 package seedu.tache.logic.commands;
 
 import java.util.List;
@@ -84,7 +85,8 @@ public class EditCommand extends Command {
             if (updatedStartDateTime.isPresent()) {
                 timeNoChange = updatedStartDateTime.get().getTimeOnly();
             }
-            DateTime tempStartDateTime = new DateTime(editTaskDescriptor.getStartDate().orElse("") + timeNoChange);
+            DateTime tempStartDateTime = new DateTime(editTaskDescriptor.getStartDate().orElse("") + " "
+                                                                                + timeNoChange);
             updatedStartDateTime = Optional.of(tempStartDateTime);
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
@@ -92,7 +94,7 @@ public class EditCommand extends Command {
             if (updatedEndDateTime.isPresent()) {
                 timeNoChange = updatedEndDateTime.get().getTimeOnly();
             }
-            DateTime tempEndDateTime = new DateTime(editTaskDescriptor.getEndDate().orElse("") + timeNoChange);
+            DateTime tempEndDateTime = new DateTime(editTaskDescriptor.getEndDate().orElse("") + " " + timeNoChange);
             updatedEndDateTime = Optional.of(tempEndDateTime);
         }
         if (editTaskDescriptor.getStartTime().isPresent()) {
@@ -100,7 +102,8 @@ public class EditCommand extends Command {
             if (updatedStartDateTime.isPresent()) {
                 dateNoChange = updatedStartDateTime.get().getDateOnly();
             }
-            DateTime tempStartDateTime = new DateTime(dateNoChange + editTaskDescriptor.getStartTime().orElse(""));
+            DateTime tempStartDateTime = new DateTime(dateNoChange + " "
+                                                        + editTaskDescriptor.getStartTime().orElse(""));
             updatedStartDateTime = Optional.of(tempStartDateTime);
         }
         if (editTaskDescriptor.getEndTime().isPresent()) {
@@ -108,12 +111,18 @@ public class EditCommand extends Command {
             if (updatedEndDateTime.isPresent()) {
                 dateNoChange = updatedEndDateTime.get().getDateOnly();
             }
-            DateTime tempEndDateTime = new DateTime(dateNoChange + editTaskDescriptor.getEndTime().orElse(""));
+            DateTime tempEndDateTime = new DateTime(dateNoChange + " " + editTaskDescriptor.getEndTime().orElse(""));
             updatedEndDateTime = Optional.of(tempEndDateTime);
+        }
+        boolean isTimed;
+        if (updatedStartDateTime.isPresent() || updatedEndDateTime.isPresent()) {
+            isTimed = true;
+        } else {
+            isTimed = false;
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, true, false, RecurInterval.NONE);
+                            updatedTags, isTimed, true, false, RecurInterval.NONE);
 
     }
 

@@ -17,12 +17,19 @@ public class TestTask implements ReadOnlyTask {
     private Optional<DateTime> startDateTime;
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
+    private boolean isTimed;
     private boolean isActive;
     private boolean isRecurring;
     private RecurInterval interval;
 
     public TestTask() {
         tags = new UniqueTagList();
+        this.startDateTime = Optional.empty();
+        this.endDateTime = Optional.empty();
+        this.interval = RecurInterval.NONE;
+        this.isTimed = false;
+        this.isActive = true;
+        this.isRecurring = false;
     }
 
     /**
@@ -31,6 +38,9 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.tags = taskToCopy.getTags();
+        this.startDateTime = taskToCopy.getStartDateTime();
+        this.endDateTime = taskToCopy.getEndDateTime();
+        this.interval = taskToCopy.getRecurInterval();
     }
 
     public void setName(Name name) {
@@ -73,6 +83,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append(";" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public boolean getTimedStatus() {
+        return isTimed;
     }
 
     @Override

@@ -1,3 +1,4 @@
+//@@author A0139961U
 package seedu.tache.model.task;
 
 import java.util.Optional;
@@ -15,6 +16,7 @@ public interface ReadOnlyTask {
     Optional<DateTime> getStartDateTime();
     Optional<DateTime> getEndDateTime();
     boolean getActiveStatus();
+    boolean getTimedStatus();
     boolean getRecurringStatus();
     RecurInterval getRecurInterval();
 
@@ -34,6 +36,7 @@ public interface ReadOnlyTask {
                 && other.getStartDateTime().equals(this.getStartDateTime())
                 && other.getEndDateTime().equals(this.getEndDateTime())
                 && (other.getActiveStatus() == this.getActiveStatus())
+                && (other.getTimedStatus() == this.getTimedStatus())
                 && (other.getRecurringStatus() == this.getRecurringStatus())
                 && other.getRecurInterval().equals(this.getRecurInterval())); // state checks here onwards
     }
