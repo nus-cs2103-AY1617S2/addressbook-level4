@@ -33,12 +33,12 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    private CalendarPanel calendarPanel;
     private TaskListPanel taskListPanel;
     private Config config;
 
     @FXML
-    private AnchorPane browserPlaceholder;
+    private AnchorPane calendarPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -122,7 +122,7 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author A0142255M
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(getBrowserPlaceholder(), logic.getFilteredTaskList());
+        calendarPanel = new CalendarPanel(getCalendarPlaceholder(), logic.getFilteredTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new TaskListType(getTaskListTypePlaceholder(), logic.getFilteredTaskListType());
         new TaskCount(getTaskCountPlaceholder(), logic);
@@ -131,8 +131,8 @@ public class MainWindow extends UiPart<Region> {
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
-    private AnchorPane getBrowserPlaceholder() {
-        return browserPlaceholder;
+    private AnchorPane getCalendarPlaceholder() {
+        return calendarPlaceholder;
     }
     //@@author
 
@@ -232,7 +232,7 @@ public class MainWindow extends UiPart<Region> {
     //@@author
 
     void releaseResources() {
-        browserPanel.freeResources();
+        calendarPanel.freeResources();
     }
 
 }

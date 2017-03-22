@@ -72,7 +72,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <AnchorPane fx:id="browserPlaceholder" minWidth="410.0" prefWidth="410.0">
+            <AnchorPane fx:id="calendarPlaceholder" minWidth="410.0" prefWidth="410.0">
             <!-- @@author -->
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />

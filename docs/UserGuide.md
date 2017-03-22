@@ -115,7 +115,7 @@ When typing in your commands, do take note of the following specifications: <br>
   > * Start_Time
   > * End_Date
   > * End_Time
-  
+
 * [Filters](#filter) for your tasks include the following:
 
   > * All
@@ -260,11 +260,11 @@ Here are some reasons why you might want to _list_ your tasks:
 
   > You want to have an overview of all your tasks based on how urgent they are, then
   manually select some of these tasks to focus on.
-  
+
 * **You want to view completed your tasks** <br>
 
   > You want to have an overview of all your tasks you completed to help track what you have already done.
-  
+
 * **You want to view uncompleted your tasks** <br>
 
   > You want to have an overview of all your tasks so that you can better plan your time to get them done.
@@ -273,7 +273,7 @@ Here are some reasons why you might want to _list_ your tasks:
 This lists all tasks. Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
 
 > * **`list`** `<filter>`<br>
-E.g. **`list`** `uncompleted` <br>
+E.g. **`list`** `uncompleted`, **`list`** `floating` <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
 _Figure 3.5.1. List Command_
@@ -347,7 +347,7 @@ Here are some reasons why you might want to _completed_ a task:
 
 * **Tasks have already been completed** <br>
 
-  > You finished a task and do not want it to show up in the task list.
+  > You finished a task and do not want it to show up in the default task list anymore.
 
 > * **`complete`** `<task_index>`<br>
 E.g. **`complete`** `1` <br>

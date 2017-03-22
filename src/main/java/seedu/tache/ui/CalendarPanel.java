@@ -25,24 +25,24 @@ import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
- * The Browser Panel of the App.
+ * The Calendar Panel of the App.
  */
-public class BrowserPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(BrowserPanel.class);
-    private static final String FXML = "BrowserPanel.fxml";
+public class CalendarPanel extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
+    private static final String FXML = "CalendarPanel.fxml";
 
     @FXML
-    private WebView browser;
+    private WebView calendar;
 
     /**
-     * @param placeholder The AnchorPane where the BrowserPanel must be inserted
+     * @param placeholder The AnchorPane where the CalendarPanel must be inserted
      */
-    public BrowserPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> taskList) {
+    public CalendarPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
                                                      // loaded Web page.
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-        placeholder.getChildren().add(browser);
+        FxViewUtil.applyAnchorBoundaryParameters(calendar, 0.0, 0.0, 0.0, 0.0);
+        placeholder.getChildren().add(calendar);
         registerAsAnEventHandler(this);
         loadCalendar(taskList);
     }
@@ -52,7 +52,7 @@ public class BrowserPanel extends UiPart<Region> {
         try {
             String calendarTemplate = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")
                     + "/src/main/resources/html/calendar.html")));
-            WebEngine engine = browser.getEngine();
+            WebEngine engine = calendar.getEngine();
             engine.loadContent(calendarTemplate);
             for (ReadOnlyTask task : taskList) {
                 if (!task.getStartDateTime().isPresent()) {
@@ -90,10 +90,10 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
-        WebEngine engine = browser.getEngine();
+        WebEngine engine = calendar.getEngine();
         engine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
-                browser.getEngine().executeScript("'remove_all'");
+                calendar.getEngine().executeScript("'remove_all'");
             }
         });
         loadCalendar(taskList);
@@ -101,10 +101,10 @@ public class BrowserPanel extends UiPart<Region> {
     //@@author
 
     /**
-     * Frees resources allocated to the browser.
+     * Frees resources allocated to the calendar.
      */
     public void freeResources() {
-        browser = null;
+        calendar = null;
     }
 
 }
