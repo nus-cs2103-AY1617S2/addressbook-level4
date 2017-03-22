@@ -24,7 +24,7 @@ Unlike other software, *DoMe!* is simple and intuitive. All you need is your key
 2. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Address Book.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-> <img src="images/Ui.png" width="600">
+> <img src="images/UISketch.png" width="600">
 
 ## 3. Features
 
