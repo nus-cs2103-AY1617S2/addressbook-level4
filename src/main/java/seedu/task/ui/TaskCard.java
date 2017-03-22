@@ -41,20 +41,20 @@ public class TaskCard extends UiPart<Region> {
 
     private void updateDueLabel(ReadOnlyTask task) {
         if (task.getDueDate() == null) {
-            due.setManaged(false);
+            due.setVisible(false);
         } else {
-            due.setManaged(true);
+            due.setVisible(true);
             due.setText(task.getDueDate().toString());
         }
     }
 
     private void updateDurationLabel(ReadOnlyTask task) {
         if (task.getDuration() == null) {
-            duration_start.setManaged(false);
-            duration_end.setManaged(false);
+            duration_start.setVisible(false);
+            duration_end.setVisible(false);
         } else {
-            duration_start.setManaged(true);
-            duration_end.setManaged(true);
+            duration_start.setVisible(true);
+            duration_end.setVisible(true);
             duration_start.setText(task.getDurationStart());
             duration_end.setText(task.getDurationEnd());
         }

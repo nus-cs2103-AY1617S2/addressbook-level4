@@ -17,6 +17,7 @@
             <Label fx:id="header_due" text="Due" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
             <Label fx:id="header_duration_start" text="Starts" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
             <Label fx:id="header_duration_end" text="Ends" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <Label fx:id="header_tags" text="Tags" styleClass="cell_big_label" minWidth="150.0" prefWidth="150.0" wrapText="true"/>
             <padding>
                 <Insets left="10" bottom="10"/>
             </padding>
