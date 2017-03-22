@@ -7,7 +7,7 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
  * Represents a Tag in the toDo list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag implements Comparable<Tag> {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
@@ -47,6 +47,10 @@ public class Tag {
         return tagName.hashCode();
     }
 
+    @Override
+    public int compareTo(Tag tag) {
+        return tagName.compareTo(tag.tagName);
+    }
     /**
      * Format state as text for viewing.
      */

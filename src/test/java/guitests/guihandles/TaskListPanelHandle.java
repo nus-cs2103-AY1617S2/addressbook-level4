@@ -139,9 +139,9 @@ public class TaskListPanelHandle extends GuiHandle {
         return true;
     }
 
-    public TaskCardHandle navigateToTask(String name) {
+    public TaskCardHandle navigateToTask(TaskType taskType, String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> task = getListView().getItems().stream()
+        final Optional<ReadOnlyTask> task = getListView(taskType).getItems().stream()
                                                     .filter(p -> p.getName().fullName.equals(name))
                                                     .findAny();
         if (!task.isPresent()) {

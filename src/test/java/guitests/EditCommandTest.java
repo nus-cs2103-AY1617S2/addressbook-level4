@@ -1,36 +1,35 @@
 package guitests;
 
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
-//import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskCardHandle;
 
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.EditCommand;
-//import seedu.onetwodo.logic.commands.FindCommand;
+import seedu.onetwodo.logic.commands.FindCommand;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.task.EndDate;
-//import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.Name;
-//import seedu.onetwodo.model.task.StartDate;
-//import seedu.onetwodo.testutil.TaskBuilder;
+import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
+import seedu.onetwodo.testutil.TestUtil;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends ToDoListGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedTasksList = td.getTypicalTasks();
+    TestTask[] tasksList = td.getTypicalTasks();
 
-/*
+
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "GUARD duties s/15-12-2018 7:30am e/16-12-2018 11:30pm d/bring helmet t/army";
         String filteredTaskListIndex = "e1";
-        int testTaskIndex = 0;
 
         TestTask editedTask = new TaskBuilder().withName("GUARD duties")
                 .withStartDate("15-12-2018 7:30am").withEndDate("16-12-2018 11:30pm")
@@ -38,53 +37,63 @@ public class EditCommandTest extends ToDoListGuiTest {
                 .withTags("army")
                 .build();
 
-        assertEditSuccess(filteredTaskListIndex, testTaskIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredTaskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/interest t/hobby";
-        String filteredTaskListIndex = "t1";
-        int testTaskIndex = 6;
+        String filteredIndex = "t1";
 
-        TestTask testTask = expectedTasksList[testTaskIndex];
-        TestTask editedTask = new TaskBuilder(testTask)
+        TaskType type = getTaskTypeFromIndex(filteredIndex);
+        TestTask[] todoTasks = TestUtil.getTasksByTaskType(tasksList, type);
+
+        TestTask taskToEdit = todoTasks[getFilteredIndexInt(filteredIndex)];
+        TestTask editedTask = new TaskBuilder(taskToEdit)
                 .withTags("interest", "hobby")
                 .build();
 
-        assertEditSuccess(filteredTaskListIndex, testTaskIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredIndex, detailsToEdit, editedTask, todoTasks);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        String filteredTaskListIndex = "e2";
-        int testTaskIndex = 1;
+        String filteredIndex = "e2";
 
-        TestTask taskToEdit = expectedTasksList[1];
+        TaskType type = getTaskTypeFromIndex(filteredIndex);
+        TestTask[] expectedTasksList = TestUtil.getTasksByTaskType(tasksList, type);
+
+        TestTask taskToEdit = expectedTasksList[getFilteredIndexInt(filteredIndex)];
         TestTask editedTask = new TaskBuilder(taskToEdit)
                 .withTags()
                 .build();
 
-        assertEditSuccess(filteredTaskListIndex, testTaskIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand(FindCommand.COMMAND_WORD + " boss");
-
         String detailsToEdit = "meet bossy boss";
-        String filteredTaskListIndex = "e1";
-        int testTaskIndex = 2;
+        String filteredIndex = "e1";
 
+        TaskType type = getTaskTypeFromIndex(filteredIndex);
+        TestTask[] expectedTasksList = TestUtil.getTasksByTaskType(tasksList, type);
+
+        // simulate find result at index 2 in expectedTasksList
+        int testTaskIndex = 2;
         TestTask taskToEdit = expectedTasksList[testTaskIndex];
+        TestTask[] foundTasks = new TestTask[] {taskToEdit};
+
+        // simulate result of edited task
         TestTask editedTask = new TaskBuilder(taskToEdit)
                 .withName("meet bossy boss")
                 .build();
 
-        assertEditSuccess(filteredTaskListIndex, testTaskIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredIndex, detailsToEdit, editedTask, foundTasks);
     }
-*/
+
     @Test
     public void edit_missingTaskIndex_failure() {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " Bobby");
@@ -136,18 +145,33 @@ public class EditCommandTest extends ToDoListGuiTest {
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-/*    private void assertEditSuccess(String filteredTaskListIndex, int testTaskIndex,
-                                    String detailsToEdit, TestTask editedTask) {
+    private void assertEditSuccess(String filteredTaskListIndex, String detailsToEdit, TestTask editedTask) {
+        assertEditSuccess(filteredTaskListIndex, detailsToEdit, editedTask, tasksList);
+    }
+
+    private void assertEditSuccess(String filteredTaskListIndex, String detailsToEdit, TestTask editedTask,
+            TestTask[] expected) {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " " + filteredTaskListIndex + " " + detailsToEdit);
 
+        int testTaskIndex = getFilteredIndexInt(filteredTaskListIndex);
+
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[testTaskIndex] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        expected[testTaskIndex] = editedTask;
+        assertTrue(taskListPanel.isListMatching(editedTask.getTaskType(), expected));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
-*/
+
+    private TaskType getTaskTypeFromIndex(String filteredIndex) {
+        return TaskType.getTaskTypeFromChar(filteredIndex.charAt(0));
+    }
+
+    private int getFilteredIndexInt(String filteredIndex) {
+        return Integer.parseInt(filteredIndex.substring(1)) - 1;
+    }
+
 }
+

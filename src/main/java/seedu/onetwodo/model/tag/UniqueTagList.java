@@ -42,7 +42,6 @@ public class UniqueTagList implements Iterable<Tag> {
         for (String tag : tags) {
             tagList.add(new Tag(tag));
         }
-        Collections.sort(tagList);
         setTags(tagList);
     }
 
@@ -76,6 +75,7 @@ public class UniqueTagList implements Iterable<Tag> {
     public UniqueTagList(Set<Tag> tags) {
         assert !CollectionUtil.isAnyNull(tags);
         internalList.addAll(tags);
+        Collections.sort(internalList);
     }
 
     /**
@@ -84,6 +84,7 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public UniqueTagList(UniqueTagList source) {
         internalList.addAll(source.internalList); // insulate internal list from changes in argument
+        Collections.sort(internalList);
     }
 
     /**
@@ -99,6 +100,7 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public void setTags(UniqueTagList replacement) {
         this.internalList.setAll(replacement.internalList);
+        Collections.sort(internalList);
     }
 
     public void setTags(Collection<Tag> tags) throws DuplicateTagException {
@@ -107,6 +109,7 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.setAll(tags);
+        Collections.sort(internalList);
     }
 
     /**
@@ -117,6 +120,7 @@ public class UniqueTagList implements Iterable<Tag> {
         from.internalList.stream()
                 .filter(tag -> !alreadyInside.contains(tag))
                 .forEach(internalList::add);
+        Collections.sort(internalList);
     }
 
     /**
@@ -138,6 +142,7 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.add(toAdd);
+        Collections.sort(internalList);
     }
 
     @Override
@@ -181,6 +186,6 @@ public class UniqueTagList implements Iterable<Tag> {
 
     public UniqueTagList sort() {
         Collections.sort(internalList);
-        return new UniqueTagList(this.toSet());
+        return this;
     }
 }
