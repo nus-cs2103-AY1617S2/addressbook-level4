@@ -27,6 +27,10 @@ public class ModelManager extends ComponentManager implements Model {
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
+
+	private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 5;
+
 	private final TaskManager taskManager;
   
 	//@@author A0102778B
@@ -146,11 +150,11 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData((ReadOnlyTaskManager)redoTaskManager.pop());
     }
 
-	@Override
+/*	@Override
 	public synchronized void getNextState() {
 		saveImage();
 		taskManager.resetData(redoTaskManager.pop());
-	}
+	} */
 
 	@Override
 	public ReadOnlyTaskManager getTaskManager() {
@@ -176,8 +180,6 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
-
-	@Override
 
 	// ========== Inner classes/interfaces used for filtering
 	// =================================================

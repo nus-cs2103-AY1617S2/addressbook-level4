@@ -16,6 +16,7 @@ import org.teamstbf.yats.logic.commands.FindCommand;
 import org.teamstbf.yats.logic.commands.HelpCommand;
 import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.logic.commands.ListCommand;
+import org.teamstbf.yats.logic.commands.MarkDoneCommand;
 import org.teamstbf.yats.logic.commands.RedoCommand;
 import org.teamstbf.yats.logic.commands.SelectCommand;
 import org.teamstbf.yats.logic.commands.UndoCommand;
@@ -78,6 +79,9 @@ public class Parser {
         
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+            
+        case MarkDoneCommand.COMMAND_WORD:
+        	return new MarkDoneCommandParser().parse(arguments);
             
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

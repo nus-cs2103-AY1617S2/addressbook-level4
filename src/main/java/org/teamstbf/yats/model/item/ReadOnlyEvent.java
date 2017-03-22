@@ -20,6 +20,7 @@ public interface ReadOnlyEvent {
 		builder.append(getTitle()).append(MESSAGE_NEWLINE).append("Location: ").append(getLocation())
 				.append(MESSAGE_NEWLINE).append("Description: ").append(getDescription()).append(MESSAGE_NEWLINE)
 				.append("Time: ").append(getStartTime()).append(MESSAGE_HYPEN).append(getEndTime())
+				.append(MESSAGE_NEWLINE).append(getIsDone().value)
 				.append(MESSAGE_NEWLINE).append("Tags: ");
 		getTags().forEach(builder::append);
 		return builder.toString();
@@ -38,6 +39,10 @@ public interface ReadOnlyEvent {
 	Schedule getStartTime();
 
 	Schedule getEndTime();
+	
+	IsDone getIsDone();
+	
+	void markDone();
 
 	/**
 	 * The returned TagList is a deep copy of the internal TagList, changes on

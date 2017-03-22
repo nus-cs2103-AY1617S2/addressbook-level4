@@ -8,6 +8,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Schedule;
@@ -55,7 +56,8 @@ public class AddCommand extends Command {
                 new Schedule(startTime),
                 new Schedule(endTime),
                 new Description(description),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                new IsDone()
         );
     }
 

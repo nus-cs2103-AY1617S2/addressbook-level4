@@ -79,8 +79,5 @@ public interface Model {
 
 	void updateFilteredListToShowTags(Set<String> keywords);
 
-	void getPreviousState();
-
-	void getNextState();
 
 }

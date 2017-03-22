@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
@@ -33,6 +34,8 @@ public class XmlAdaptedTask {
     private String endTime;
     @XmlElement(required = true)
     private String description;
+    @XmlElement(required = true)
+    private String completed;
 
 
     /**
@@ -61,6 +64,7 @@ public class XmlAdaptedTask {
         startTime = source.getStartTime().value;
         endTime = source.getEndTime().value;
         description = source.getDescription().value;
+        completed = source.getIsDone().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -84,6 +88,7 @@ public class XmlAdaptedTask {
         final Schedule endTime = new Schedule(this.endTime);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Event(title, location, period, startTime, endTime, description, tags);
+        final IsDone isDone = new IsDone(this.completed);
+        return new Event(title, location, period, startTime, endTime, description, tags, isDone);
     }
 }

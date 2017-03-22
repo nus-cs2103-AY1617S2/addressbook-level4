@@ -9,6 +9,7 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
@@ -34,8 +35,8 @@ public class EditCommand extends Command {
 	public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
-	private final int filteredTaskListIndex;
-	private final EditTaskDescriptor editTaskDescriptor;
+	protected final int filteredTaskListIndex;
+	protected final EditTaskDescriptor editTaskDescriptor;
 
 	/**
 	 * @param filteredTaskListIndex
@@ -77,7 +78,7 @@ public class EditCommand extends Command {
 	 * Creates and returns a {@code Task} with the details of {@code taskToEdit}
 	 * edited with {@code editTaskDescriptor}.
 	 */
-	private static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
 		assert taskToEdit != null;
 
 		Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
@@ -90,14 +91,15 @@ public class EditCommand extends Command {
 		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
 			updatedTags.removeAndMerge(taskToEdit.getTags());
 		}
+		IsDone isDone = editTaskDescriptor.getIsDone();
 
 		return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime, updatedEndTime,
-				updatedDescription, updatedTags);
+				updatedDescription, updatedTags, isDone);
 	}
 
 	/**
-	 * Stores the details to edit the person with. Each non-empty field value
-	 * will replace the corresponding field value of the person.
+	 * Stores the details to edit the task with. Each non-empty field value
+	 * will replace the corresponding field value of the task.
 	 */
 	public static class EditTaskDescriptor {
 		private Optional<Title> name = Optional.empty();
@@ -107,7 +109,8 @@ public class EditCommand extends Command {
 		private Optional<Schedule> endTime = Optional.empty();
 		private Optional<Description> description = Optional.empty();
 		private Optional<Periodic> periodic = Optional.empty();
-		private Optional<UniqueTagList> tags = Optional.empty();
+		Optional<UniqueTagList> tags = Optional.empty();
+		private IsDone isDone = new IsDone();
 
 		public EditTaskDescriptor() {
 		}
@@ -121,6 +124,7 @@ public class EditCommand extends Command {
 			this.description = toCopy.getDescription();
 			this.periodic = toCopy.getPeriodic();
 			this.tags = toCopy.getTags();
+			this.isDone = toCopy.getIsDone();
 		}
 
 		/**
@@ -196,6 +200,15 @@ public class EditCommand extends Command {
 
 		public Optional<UniqueTagList> getTags() {
 			return tags;
+		}
+		
+		public IsDone getIsDone() {			
+			return isDone;
+		}
+		
+		public IsDone markDone() {
+			isDone.markDone();
+			return isDone;
 		}
 	}
 
