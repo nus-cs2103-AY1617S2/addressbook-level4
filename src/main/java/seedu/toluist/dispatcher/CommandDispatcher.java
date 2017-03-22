@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.dispatcher;
 
 import java.lang.reflect.Constructor;
@@ -43,12 +44,14 @@ public class CommandDispatcher extends Dispatcher {
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
+    //@@author A0162011A
     /**
      * ArrayList to store previous commands entered since starting the application
      */
     private ArrayList<String> commandHistory;
     private int historyPointer = 0;
 
+    //@@author A0131125Y
     public CommandDispatcher() {
         super();
         aliasConfig.setReservedKeywords(getControllerKeywords());

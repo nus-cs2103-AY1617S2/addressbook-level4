@@ -37,7 +37,7 @@ public class FileUtil {
         return file.createNewFile();
     }
 
-
+    //@@author A0131125Y
     /**
      * Remove a file
      *
@@ -51,6 +51,7 @@ public class FileUtil {
         return file.delete();
     }
 
+    //@@author
     /**
      * Creates the given directory along with its parent directories
      *
@@ -90,6 +91,7 @@ public class FileUtil {
         Files.write(file.toPath(), content.getBytes(CHARSET));
     }
 
+    //@@author A0131125Y
     /**
      * Converts a string to a platform-specific file path
      * @param pathWithForwardSlash A String representing a file path but using '/' as the separator

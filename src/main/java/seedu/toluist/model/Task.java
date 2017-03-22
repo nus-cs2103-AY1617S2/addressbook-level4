@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.model;
 
 import java.time.LocalDateTime;
@@ -37,6 +38,7 @@ public class Task implements Comparable<Task> {
         this(description, null, endDateTime);
     }
 
+    //@@author Melvin
     public Task(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.setDescription(description.trim());
         this.setStartDateTime(startDateTime);
@@ -71,6 +73,7 @@ public class Task implements Comparable<Task> {
         return startDateTime == null || endDateTime != null;
     }
 
+    //@@author A0131125Y
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -83,6 +86,10 @@ public class Task implements Comparable<Task> {
                 && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime); // handles null
     }
 
+    /**
+     * Set a task as completed or incomplete
+     * @param isCompleted true/false
+     */
     public void setCompleted(boolean isCompleted) {
         if (isCompleted) {
             completionDateTime = LocalDateTime.now();
@@ -91,17 +98,28 @@ public class Task implements Comparable<Task> {
         }
     }
 
+    /**
+     * Set a deadline for a task
+     * @param deadLine a LocalDateTime object
+     */
     public void setDeadLine(LocalDateTime deadLine) {
         setStartDateTime(null);
         setEndDateTime(deadLine);
     }
 
+    /**
+     * Set a from and to date for an event
+     * from should be before to
+     * @param from a LocalDateTime object
+     * @param to a LocalDateTime object
+     */
     public void setFromTo(LocalDateTime from, LocalDateTime to) {
-        assert from.isBefore(to);
+        assert DateTimeUtil.isBeforeOrEqual(startDateTime, endDateTime);
         setStartDateTime(from);
         setEndDateTime(to);
     }
 
+    //@@author A0162011A
     public boolean addTag(Tag tag) {
         if (allTags.contains(tag)) {
             return false;
@@ -120,6 +138,12 @@ public class Task implements Comparable<Task> {
         return true;
     }
 
+    //@@author A0131125Y
+
+    /**
+     * Replace the tags in the task with the given tags
+     * @param tags a collection of tags
+     */
     public void replaceTags(Collection<Tag> tags) {
         this.allTags = new TreeSet<>(tags);
     }
@@ -148,6 +172,7 @@ public class Task implements Comparable<Task> {
         return completionDateTime != null && DateTimeUtil.isBeforeOrEqual(completionDateTime, LocalDateTime.now());
     }
 
+    //@@author A0162011A
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
         for (String keyword: keywords) {
             if (description.toLowerCase().contains(keyword.toLowerCase())) {
@@ -168,6 +193,7 @@ public class Task implements Comparable<Task> {
         return false;
     }
 
+    //@@author A0131125Y
     /**
      * Check if the task datetimes are within interval
      * @param from interval from
@@ -205,6 +231,7 @@ public class Task implements Comparable<Task> {
         }
     }
 
+    //@@author Melvin
     public String getDescription() {
         return description;
     }
@@ -229,6 +256,7 @@ public class Task implements Comparable<Task> {
         this.startDateTime = startDateTime;
     }
 
+    //@@author A0131125Y
     public TaskPriority getTaskPriority() {
         return priority;
     }

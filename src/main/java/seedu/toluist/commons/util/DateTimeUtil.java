@@ -1,3 +1,4 @@
+//@@author A0131125Y
 package seedu.toluist.commons.util;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import com.joestelmach.natty.Parser;
  * Utility class for DateTime
  */
 public class DateTimeUtil {
+    //@@author Melvin
     public static LocalDateTime parseDateString(String stringDate) {
         if (stringDate == null) {
             return null;
@@ -32,6 +34,7 @@ public class DateTimeUtil {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
+    //@@author A0131125Y
     /**
      * Check if datetime is from today
      *
