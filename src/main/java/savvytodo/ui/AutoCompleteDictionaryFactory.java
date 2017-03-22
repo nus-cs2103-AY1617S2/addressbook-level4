@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-//@@A0147827U
+//@@author A0147827U
 /**
  * Class to generate dictionaries (as Collections<String>) for auto-complete feature in CommandBox
  * 

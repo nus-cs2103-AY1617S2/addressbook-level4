@@ -26,7 +26,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
     
-    //@@A0147827U
+    //@@author A0147827U
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
@@ -59,8 +59,30 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
+    
+    //@@authoer A0147827U
+    /**
+     * Executes the given string as a command as though it was from the text input
+     * @author jingloon
+     * @param command
+     */
+    public void executeExternalCommand(String command){
+        try {
+            CommandResult commandResult = logic.execute(command);
 
+            // process result of the command
+            setStyleToIndicateCommandSuccess();
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
+        } catch (CommandException e) {
+            // handle command failure
+            setStyleToIndicateCommandFailure();
+            logger.info("Invalid command: " + commandTextField.getText());
+            raise(new NewResultAvailableEvent(e.getMessage()));
+        }
+    }
+    
     /**
      * Sets the command box style to indicate a successful command.
      */

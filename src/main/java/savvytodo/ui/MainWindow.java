@@ -1,6 +1,7 @@
 package savvytodo.ui;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
@@ -17,6 +18,7 @@ import savvytodo.commons.util.FxViewUtil;
 import savvytodo.logic.Logic;
 import savvytodo.model.UserPrefs;
 import savvytodo.model.task.ReadOnlyTask;
+import savvytodo.ui.hotkeys.HotKeysManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -72,6 +74,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowMinSize();
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
+        setHotkeysListeners(scene);
         primaryStage.setScene(scene);
 
         setAccelerators();
@@ -241,5 +244,21 @@ public class MainWindow extends UiPart<Region> {
     public void setLogic(Logic logic) {
         this.logic = logic;
         this.fillInnerParts();
+    }
+    
+    //@@author A0147827U
+    /**
+     * Adds listeners for hotkeys to the scene
+     * @author jingloon
+     */
+    public void setHotkeysListeners(Scene scene){
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+            public void handle(KeyEvent event) {
+                String command = HotKeysManager.getCommand(event);
+                if(!command.equals(HotKeysManager.NOT_HOTKEY)) {
+                   commandBox.executeExternalCommand(command);
+                }
+            }
+        });
     }
 }
