@@ -14,7 +14,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
     public void delete() {
         //  valid-partition: Boundary value just above the boundary
         //  delete the first in the list
-
+        TestTask[] currentList = {td.fiona , td.ida};
         for (int i = 0; i < currentList.length; i++) commandBox.runCommand(currentList[i].getAddCommand());
 
         int targetIndex = 1;
@@ -30,7 +30,8 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         //  valid-partition: Boundary value just below the boundary
         //delete from the middle of the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-
+        TestTask[] temp = {td.fiona , td.ida , td.hoon};
+        currentList = temp;
         for (int i = 0; i < currentList.length; i++) commandBox.runCommand(currentList[i].getAddCommand());
 
         targetIndex = currentList.length / 2;
