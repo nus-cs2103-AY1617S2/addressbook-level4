@@ -55,7 +55,7 @@ public class MainApp extends Application {
 
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getTaskBossFilePath(), config.getUserPrefsFilePath());
-        
+
         userPrefs = initPrefs(config);
 
         initLogging(config);
