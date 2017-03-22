@@ -336,7 +336,7 @@ Here are some examples of tasks which you might want to _edit_: <br>
 
 > * **`edit`** `<task_index>; <parameter> <new_value>` <br>
 This command will direct me to make the specified update to a task with the task's index `<task_index>`. <br>
-> * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
+> * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
 You can edit more parameters for your task concurrently using the following format<br>
 E.g. **`edit`** ` 1; start_time 3pm; end_time 8pm;` <br>
 
