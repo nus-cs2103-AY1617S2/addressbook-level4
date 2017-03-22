@@ -2,6 +2,8 @@ package savvytodo.ui;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -23,10 +25,12 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
-
+    
+    //@@A0147827U
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
+        TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());     
         addToPlaceholder(commandBoxPlaceholder);
     }
 
