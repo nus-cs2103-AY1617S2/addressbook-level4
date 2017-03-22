@@ -1,12 +1,11 @@
 package seedu.watodo.logic.commands;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.logic.parser.AddCommandParser.TaskType;
+import seedu.watodo.logic.parser.DateTimeParser.TaskType;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
@@ -55,8 +54,15 @@ public class AddCommand extends Command {
                     new UniqueTagList(tagSet));
             break;
         case EVENT:
-            this.toAdd = new Task(new Description(description), new DateTime(startDate),
-                    new DateTime(endDate), new UniqueTagList(tagSet));
+            DateTime start = new DateTime(startDate);
+            DateTime end = new DateTime(endDate);
+            if (start.isLater(end)) {
+                throw new IllegalValueException("End date must be later than start date!");
+            }
+            
+            
+            
+            this.toAdd = new Task(new Description(description), start, end, new UniqueTagList(tagSet));
             break;
         }
     }

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.watodo.commons.core.ComponentManager;
 import seedu.watodo.commons.core.LogsCenter;
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.CommandResult;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -28,7 +29,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException {
+    public CommandResult execute(String commandText) throws CommandException, IllegalValueException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
