@@ -121,9 +121,10 @@ public class DateTimeParser {
         for (String arg : argsWithDate) {
             if (arg != null) {
                 List<DateGroup> dateGroups = parser.parse(arg.trim());
-                if (dateGroups.size() == 0 || dateGroups.get(0).getPosition() != 0) {
+                System.out.println(dateGroups.get(0).getPosition());
+                if (dateGroups.size() == 0 || dateGroups.get(0).getPosition() != 1) {
                     throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-                }                
+                }
                 datesInText.add(dateGroups.get(0).getText().trim());
             }
         }
