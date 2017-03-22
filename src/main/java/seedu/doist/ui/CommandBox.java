@@ -4,9 +4,11 @@ import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
 import java.util.logging.Logger;
 
+import org.fxmisc.richtext.InlineCssTextArea;
+
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -27,6 +29,10 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
+    private static final String COMMAND_WORD_STYLE = "-fx-fill: blue;";
+    private static final String PARAMETER_KEY_STYLE = "-fx-fill: green;";
+    private static final String NORMAL_STYLE = "-fx-fill: black;";
+
 
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
@@ -35,12 +41,15 @@ public class CommandBox extends UiPart<Region> {
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
     @FXML
-    private TextField commandTextField;
+    private InlineCssTextArea commandTextField;
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
+
+        commandTextField.textProperty().addListener((observable, oldValue, newValue)
+            -> highlightSyntax(observable, oldValue, newValue));
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -50,9 +59,32 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
+    private void highlightSyntax(ObservableValue<?> value, String oldValue, String newValue) {
+        String content = newValue;
+        int i = 0;
+        while (i < content.length() && content.charAt(i) != ' ') {
+            commandTextField.setStyle(i, i + 1, COMMAND_WORD_STYLE);
+            i++;
+        }
+        while (i < content.length()) {
+            if (content.charAt(i) == '\\') {
+                while (i < content.length() && content.charAt(i) != ' ') {
+                    commandTextField.setStyle(i, i + 1, PARAMETER_KEY_STYLE);
+                    i++;
+                }
+            }
+            if (i >= content.length()) {
+                break;
+            }
+            commandTextField.setStyle(i, i + 1, NORMAL_STYLE);
+            i++;
+        }
+    }
+
     @FXML
     private void handleKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
+            event.consume();
             handleEnterKey();
         } else if (event.getCode() == KeyCode.UP) {
             // up and down arrow key will move the cursor to the position 0
@@ -74,7 +106,7 @@ public class CommandBox extends UiPart<Region> {
             } catch (CommandException e) {
                 // handle command failure
                 setStyleToIndicateCommandFailure();
-                commandTextField.setText("");
+                setCommandInput("");
                 logger.info("Invalid command: " + commandTextField.getText());
                 raise(new NewResultAvailableEvent(e.getMessage()));
             }
@@ -107,14 +139,14 @@ public class CommandBox extends UiPart<Region> {
             CommandResult commandResult = logic.execute(userCommandText);
             // process result of the command
             setStyleToIndicateCommandSuccess();
-            commandTextField.setText("");
+            setCommandInput("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
-            commandTextField.setText("");
+            setCommandInput("");
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
@@ -131,7 +163,7 @@ public class CommandBox extends UiPart<Region> {
 
 
     private void setCommandInput(String string) {
-        commandTextField.setText(string);
+        commandTextField.replaceText(string);
 
         // move the cursor to the end of the input string
         commandTextField.positionCaret(string.length());
