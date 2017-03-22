@@ -1,3 +1,4 @@
+//@@author Melvin
 package seedu.toluist.model;
 
 import static org.junit.Assert.assertEquals;
@@ -48,6 +49,7 @@ public class TodoListTest {
         todoListWithStorage = new TodoList(storage);
     }
 
+    //@@author A0131125Y
     @Test
     public void constructor_withoutStorage_defaultStorage() {
         assertEquals(todoList1.getStorage(), TodoList.DEFAULT_STORAGE);
@@ -83,6 +85,7 @@ public class TodoListTest {
         assertEquals(TodoList.load(), TodoList.load());
     }
 
+    //@@author Melvin
     @Test
     public void testEquals() {
         TodoList todoList2 = new TodoList();
