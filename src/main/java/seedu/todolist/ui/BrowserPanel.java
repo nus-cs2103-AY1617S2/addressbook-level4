@@ -6,7 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.todolist.commons.util.FxViewUtil;
-import seedu.todolist.model.tag.Tag;
 import seedu.todolist.model.task.Task;
 
 /**
