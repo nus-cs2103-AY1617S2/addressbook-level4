@@ -105,7 +105,8 @@ public class AddCommandParser {
                 arguments.add(new StringBuilder(matcher.group(i)).reverse()
                         .toString());
             }
-            args = matcher.group(length);
+            args = new StringBuilder(matcher.group(length)).reverse()
+                    .toString();
             return arguments;
         } else {
             return null;
