@@ -13,6 +13,6 @@
         <Label fx:id="taskLabel" text="Tasks" styleClass="cell_big_label" />
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
         <Label fx:id="eventLabel" text="Events" styleClass="cell_big_label" />
-        <ListView fx:id="eventListView" />
+        <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
