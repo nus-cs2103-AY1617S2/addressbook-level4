@@ -2,11 +2,19 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+    public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
+                            + "HH:MM(AM/PM) format, e.g. 12:00pm";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -44,6 +52,18 @@ public class StringUtil {
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
         return t.getMessage() + "\n" + sw.toString();
+    }
+
+    /**
+     * Parse a String argument into date format.
+     * @param dateArg
+     * @return time in localTime format
+     * @throws IllegalValueException
+     */
+    public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
+        //empty start date
+        if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
+        return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
     }
 
     /**
