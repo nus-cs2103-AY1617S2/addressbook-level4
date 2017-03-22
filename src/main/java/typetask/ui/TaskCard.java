@@ -15,7 +15,6 @@ import typetask.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    
     public static final String OVERDUE_STYLE_CLASS = "overdue";
     public static final String PENDING_STYLE_CLASS = "pending";
     public static final String PRIORITY_STYLE_CLASS = "priority";
@@ -51,8 +50,6 @@ public class TaskCard extends UiPart<Region> {
     private LocalDate parsedDate;// NOTE: only instantiated for non-floating task
     private boolean parsedDateFlag = false;
     
-
-    
 	public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
@@ -85,7 +82,7 @@ public class TaskCard extends UiPart<Region> {
         	//floating tasks has no date
         }
     }
-    
+
     //@@author A0139154E
     private void setStyleToIndicateOverdue() {
         colourTag.getStyleClass().add(OVERDUE_STYLE_CLASS);
