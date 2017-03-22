@@ -13,7 +13,7 @@
 
 <HBox id="cardPane" fx:id="cardPane" prefWidth="473.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <Pane fx:id="colourTag" prefWidth="26.0" styleClass="pending" stylesheets="@Extensions.css" />
+      <Pane fx:id="colourTag" prefWidth="26.0" stylesheets="@Extensions.css" />
         <GridPane prefHeight="76.0" prefWidth="447.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
