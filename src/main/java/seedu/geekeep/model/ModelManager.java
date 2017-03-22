@@ -7,7 +7,9 @@ import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
+import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
+import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
 import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
@@ -107,11 +109,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
     }
 
     private void updateFilteredPersonList(Expression expression) {
@@ -194,13 +198,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowDone() {
         filteredTasks.setPredicate(t -> t.isDone());
-
+        raise(new SwitchTaskCategoryEvent(TaskCategory.DONE));
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
         filteredTasks.setPredicate(t -> !t.isDone());
-
+        raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
     }
 
     @Override

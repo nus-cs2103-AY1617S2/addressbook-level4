@@ -8,9 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.geekeep.commons.core.LogsCenter;
+import seedu.geekeep.commons.core.TaskCategory;
 import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
@@ -23,6 +25,11 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String EVENTFXML = "EventListPanel.fxml";
     private static final String FTASKFXML = "FloatingTaskListPanel.fxml";
     private static final String DEADLINEFXML = "DeadlineListPanel.fxml";
+    private ListView<ReadOnlyTask> currentListView;
+    private String type;
+
+    @FXML
+    private TabPane tabPanePlaceHolder;
 
     @FXML
     private ListView<ReadOnlyTask> allListView;
@@ -43,16 +50,11 @@ public class TaskListPanel extends UiPart<Region> {
     //TODO  only works for v0.2 checks
     public TaskListPanel(String type, AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> allList) {
         super(getFxmlFromType(type));
-        setConnections(allList);
-        addToPlaceholder(taskListPlaceholder);
-    }
-
-    //TODO only works for v0.2 checks
-    public TaskListPanel(AnchorPane taskListPlaceholder, String type, ObservableList<ReadOnlyTask>... categories) {
-        super(getFxmlFromType(type));
-        for (ObservableList<ReadOnlyTask> list : categories) {
-            setConnections(list);
-        }
+        this.type = type;
+        currentListView = allListView;
+        setConnections(allList, allListView);
+        setConnections(allList.filtered(t -> t.isDone()), completedListView);
+        setConnections(allList.filtered(t -> !t.isDone()), upcomingListView);
         addToPlaceholder(taskListPlaceholder);
     }
 
@@ -65,11 +67,6 @@ public class TaskListPanel extends UiPart<Region> {
         } else {
             return EVENTFXML;
         }
-    }
-
-    //TODO this method should not be there. After v0.2 it is to remove
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        setConnections(taskList, allListView);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList, ListView<ReadOnlyTask> taskListView) {
@@ -96,9 +93,25 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            allListView.scrollTo(index);
-            allListView.getSelectionModel().clearAndSelect(index);
+            currentListView.scrollTo(index);
+            currentListView.getSelectionModel().clearAndSelect(index);
         });
+    }
+
+
+    public void switchListView(TaskCategory category) {
+        switch (category) {
+        case UNDONE:
+            tabPanePlaceHolder.getSelectionModel().select(1);
+            break;
+        case DONE:
+            tabPanePlaceHolder.getSelectionModel().select(2);
+            break;
+        default:
+            tabPanePlaceHolder.getSelectionModel().select(0);
+            break;
+        }
+        logger.info("Switched to " + category + " in " + type);
     }
 
 /*  //TODO scrollTo should works for all the ListView
