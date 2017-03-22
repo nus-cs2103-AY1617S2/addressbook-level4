@@ -158,8 +158,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void discardCurrentState() {
+<<<<<<< HEAD
         assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
+=======
+        assert commandHistory.size() == taskHistory.size()
+                && taskHistory.size() == predicateHistory.size();
+>>>>>>> refs/remotes/origin/develop
         assert (!commandHistory.isEmpty());
         String toUndo = commandHistory.pop();
         taskHistory.pop();
@@ -168,8 +173,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String undoLastCommand() throws NoPreviousCommandException {
+<<<<<<< HEAD
         assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
+=======
+        assert commandHistory.size() == taskHistory.size()
+                && taskHistory.size() == predicateHistory.size();
+>>>>>>> refs/remotes/origin/develop
 
         if (commandHistory.isEmpty()) {
             throw new NoPreviousCommandException(

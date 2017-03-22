@@ -90,9 +90,7 @@ public class EditCommandParser {
                 return new IncorrectCommand(e.getMessage());
             }
         }
-        // TODO dummy!
-        return null;
-        //return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(logic.parseUIIndex(index.get()), editTaskDescriptor);
     }
 
     private String getArgument(String key) {
