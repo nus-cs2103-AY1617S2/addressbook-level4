@@ -24,11 +24,11 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     public static final int MARGIN_OF_ERROR = 1;
     //@@author A0142255M
-    public static final String ALL_TASK_LIST_TYPE = "all";
-    public static final String COMPLETED_TASK_LIST_TYPE = "completed";
-    public static final String UNCOMPLETED_TASK_LIST_TYPE = "uncompleted";
-    public static final String TIMED_TASK_LIST_TYPE = "timed";
-    public static final String FLOATING_TASK_LIST_TYPE = "floating";
+    public static final String ALL_TASK_LIST_TYPE = "all tasks";
+    public static final String COMPLETED_TASK_LIST_TYPE = "completed tasks";
+    public static final String UNCOMPLETED_TASK_LIST_TYPE = "uncompleted tasks";
+    public static final String TIMED_TASK_LIST_TYPE = "timed tasks";
+    public static final String FLOATING_TASK_LIST_TYPE = "floating tasks";
     //@@author
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
