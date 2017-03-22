@@ -53,14 +53,14 @@ on simplifying the way you handle tasks now.
 
 ## 3.1. Viewing help : `help`
 
-Brings up user guide 
+Brings up user guide<br>
 Format: help
 
 > Is also displayed when an incorrect command is entered
 
 ## 3.2. Adding a task: `add`
 
-Adds a task to task list
+Adds a task to task list<br>
 Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
 > Tasks includes:
 > * Event tasks where deadlines include a specific timing
@@ -77,7 +77,7 @@ Examples:
 
 ## 3.3. Modifying a task: `edit`
 
-Updates an existing task in the task list
+Updates an existing task in the task list<br>
 Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
 
 Examples:
@@ -87,7 +87,7 @@ Examples:
 
 ## 3.4. Delete a task: `delete`
 
-Deletes an existing task
+Deletes an existing task<br>
 Format: delete INDEX
 
 Examples:
@@ -96,27 +96,27 @@ Examples:
 
 ## 3.5. Undo a command: 'undo'
 
-Undo most recent command
+Undo most recent command<br>
 Format: undo
 
 ## 3.6. Redo a command: 'redo'
 
-Redo most recent command
+Redo most recent command<br>
 Format: redo
 
 ## 3.7. Listing all tasks: `list`
 
-Shows a list of all tasks
+Shows a list of all tasks<br>
 Format: list
 
 ## 3.8. Exiting the program : `exit`
 
-Exits the program.
+Exits the program.<br>
 Format: exit
 
 ## 3.9. View tasks : `view`
 
-Changes the different views of the task managers
+Changes the different views of the task managers<br>
 Format: view all|calendar|done|floating|overdue|today|tomorrow|future
 
 Examples:
@@ -126,7 +126,7 @@ Examples:
 
 ## 3.10. Finding all tasks containing any keyword in the task name or description: `find`
 
-Finds tasks that satisfy given parameters
+Finds tasks that satisfy given parameters<br>
 Format: find KEYWORDS [dl/DATE]
 
 > finds tasks whose task name or description contains any of the given keywords
@@ -141,6 +141,7 @@ Examples:
 
 ## 3.11. Marking entries as done : `mark`
 
+Marks completed tasks as done<br>
 Format: mark INDEX
 
 Examples:
@@ -149,6 +150,7 @@ Examples:
 
 ## 3.12. Clearing all entries : `clear`
 
+Clears all tasks in task manager<br>
 Format: clear
 
 ## 3.13. Saving the data
