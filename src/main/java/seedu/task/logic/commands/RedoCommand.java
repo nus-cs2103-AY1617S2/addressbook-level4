@@ -21,8 +21,11 @@ public class RedoCommand extends Command {
         final Optional<TaskMemento> memento = mementos.getRedoMemento();
         final Task mementoTask = memento.orElseThrow(
             () -> new CommandException(MESSAGE_NO_HISTORY)).newTask;
-        final TaskId mementoTaskId = memento.orElse(null).taskId;
+        final TaskId mementoTaskId = memento.orElseThrow(
+            () -> new CommandException(MESSAGE_NO_HISTORY)).taskId;
         Task taskToBeReplaced = model.getTaskList().getTaskById(mementoTaskId);
+
+        assert !(mementoTask == null && taskToBeReplaced == null);
 
         if (mementoTask == null && taskToBeReplaced != null) { //In case of redoing delete
             try {

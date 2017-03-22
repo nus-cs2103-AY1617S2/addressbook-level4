@@ -24,8 +24,11 @@ public class UndoCommand extends Command {
         final Optional<TaskMemento> memento = mementos.getUndoMemento();
         final Task mementoTask = memento.orElseThrow(
             () -> new CommandException(MESSAGE_NO_HISTORY)).oldTask;
-        final TaskId mementoTaskId = memento.orElse(null).taskId;
+        final TaskId mementoTaskId = memento.orElseThrow(
+            () -> new CommandException(MESSAGE_NO_HISTORY)).taskId;
         Task taskToBeReplaced = model.getTaskList().getTaskById(mementoTaskId);
+
+        assert !(mementoTask == null && taskToBeReplaced == null);
 
         if (mementoTask == null && taskToBeReplaced != null) { //In case of undoing add
             try {
