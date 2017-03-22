@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -386,6 +387,10 @@ public class TestUtil {
 
     public static void sortTasks(TestTask[] tasks) {
         Arrays.sort(tasks, new TaskNameComparator());
+    }
+
+    public static void sortTasks(TestTask[] tasks, Comparator<ReadOnlyTask> taskComparator) {
+        Arrays.sort(tasks, taskComparator);
     }
 
     public static Tag[] getTagList(String tags) {

@@ -1,8 +1,7 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
+import java.util.Comparator;
 
 //import java.util.Arrays;
 
@@ -10,6 +9,7 @@ import org.junit.Test;
 
 import seedu.doit.model.item.EndTimeComparator;
 import seedu.doit.model.item.PriorityComparator;
+import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.StartTimeComparator;
 import seedu.doit.model.item.TaskNameComparator;
 import seedu.doit.testutil.TestTask;
@@ -32,22 +32,30 @@ public class SortCommandTest extends TaskManagerGuiTest {
 
         switch (sortType) {
         case "name":
-            Arrays.sort(currentList, new TaskNameComparator());
+            Comparator<ReadOnlyTask> nameComparator = new TaskNameComparator();
+            Arrays.sort(currentList, nameComparator);
+            assertAllPanelsMatch(currentList, nameComparator);
             break;
         case "priority":
-            Arrays.sort(currentList, new PriorityComparator());
+            Comparator<ReadOnlyTask> priorityComparator = new PriorityComparator();
+            Arrays.sort(currentList, priorityComparator);
+            assertAllPanelsMatch(currentList, priorityComparator);
             break;
         case "start time":
-            Arrays.sort(currentList, new StartTimeComparator());
+            Comparator<ReadOnlyTask> startTimeComparator = new StartTimeComparator();
+            Arrays.sort(currentList, startTimeComparator);
+            assertAllPanelsMatch(currentList, startTimeComparator);
             break;
         case "end time":
-            Arrays.sort(currentList, new EndTimeComparator());
+            Comparator<ReadOnlyTask> endTimeComparator = new EndTimeComparator();
+            Arrays.sort(currentList, endTimeComparator);
+            assertAllPanelsMatch(currentList, endTimeComparator);
             break;
         default:
             break;
         }
 
-        assertTrue(taskListPanel.isListMatching(currentList));
+
     }
 
 }
