@@ -1,7 +1,7 @@
 # Savvy To-Do
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-F12-B1/Main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F12-B1/Main)
-[![Build status](https://ci.appveyor.com/api/projects/status/3trsa89ro8uvhaah/branch/master?svg=true)](https://ci.appveyor.com/project/yeejfe/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/3trsa89ro8uvhaah/branch/master?svg=true)](https://ci.appveyor.com/project/yeejfe/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F12-B1/Main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F12-B1/Main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e4a7af777828437db063e09c823cc8e2)](https://www.codacy.com/app/CS2103JAN2017-F12/Main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-F12-B1/Main&amp;utm_campaign=Badge_Grade)
 
