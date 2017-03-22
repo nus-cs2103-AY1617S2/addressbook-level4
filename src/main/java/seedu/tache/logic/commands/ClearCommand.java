@@ -15,6 +15,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         model.resetData(new TaskManager());
+        clearUndoHistory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
