@@ -26,7 +26,6 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public static final int NOT_FOUND = -1;
     public static final String CARD_PANE_ID = "#cardPane";
-
     private static final String TASK_LIST_VIEW_ID = "#taskListView";
 
     public TaskListPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
@@ -68,7 +67,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
-     * @param taskType of list under comparison
+     * @param taskType of current list panel handle & list under comparison.
      * @param tasks A list of task in the correct order to compare with panel.
      */
     public boolean isListMatching(TaskType taskType, ReadOnlyTask... tasks) {
@@ -78,6 +77,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
+     * @param taskType of current list panel handle & list under comparison.
      * @param tasks A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, TaskType taskType, ReadOnlyTask... tasks)

@@ -15,9 +15,10 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
     private static final String DONE_PSUEDO_CLASS = "done";
-    private static final String DATE_SPACING = "  -  ";
-    private static final DateTimeFormatter INFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final DateTimeFormatter OUTFORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
+    public static final String DATE_SPACING = "  -  ";
+    public static final String DEADLINE_PREFIX = "by: ";
+    public static final DateTimeFormatter INFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final DateTimeFormatter OUTFORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
 
     @FXML
     private HBox cardPane;
@@ -31,8 +32,6 @@ public class TaskCard extends UiPart<Region> {
     private Label startDate;
     @FXML
     private Label endDate;
-    @FXML
-    private HBox descriptionBox;
     @FXML
     private Label description;
     @FXML
@@ -53,18 +52,16 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void setDate(ReadOnlyTask task) {
-        String startDateText = task.getStartDate().value;
-        String endDateText = task.getEndDate().value;
         switch (task.getTaskType()) {
         case DEADLINE:
-            LocalDateTime endDateTime = LocalDateTime.parse(endDateText.substring(5), INFORMATTER);
-            endDate.setText("by: " + endDateTime.format(OUTFORMATTER));
+            LocalDateTime deadlineDateTime = task.getEndDate().getLocalDateTime();
+            endDate.setText(DEADLINE_PREFIX + deadlineDateTime.format(OUTFORMATTER));
             break;
         case EVENT:
-            LocalDateTime startDateTime = LocalDateTime.parse(startDateText.substring(7), INFORMATTER);
-            startDate.setText(startDateTime.format(OUTFORMATTER) + DATE_SPACING);
-            LocalDateTime endDateTime1 = LocalDateTime.parse(endDateText.substring(5), INFORMATTER);
-            endDate.setText(endDateTime1.format(OUTFORMATTER));
+            LocalDateTime eventStartDateTime = task.getStartDate().getLocalDateTime();
+            LocalDateTime eventEndDateTime = task.getEndDate().getLocalDateTime();
+            startDate.setText(eventStartDateTime.format(OUTFORMATTER) + DATE_SPACING);
+            endDate.setText(eventEndDateTime.format(OUTFORMATTER));
             break;
         case TODO:
             dateBox.getChildren().clear();
@@ -77,7 +74,7 @@ public class TaskCard extends UiPart<Region> {
         if (descriptionText.length() > 0) {
             description.setText(descriptionText);
         } else {
-            descriptionBox.getChildren().clear();
+            description.setText("");
         }
     }
 

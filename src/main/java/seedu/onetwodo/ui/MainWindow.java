@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import seedu.onetwodo.commons.core.Config;
 import seedu.onetwodo.commons.core.GuiSettings;
 import seedu.onetwodo.commons.events.ui.ExitAppRequestEvent;
-import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.model.UserPrefs;
 import seedu.onetwodo.model.task.ReadOnlyTask;

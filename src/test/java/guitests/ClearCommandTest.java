@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
+import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.testutil.TestTask;
 
 public class ClearCommandTest extends ToDoListGuiTest {
 
@@ -13,7 +15,10 @@ public class ClearCommandTest extends ToDoListGuiTest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(taskListPanel.isListMatching(td.task1.getTaskType(), td.getTypicalTasks()));
+        TestTask[] tasks = td.getTypicalTasks();
+        TaskType td1TaskType = td.task1.getTaskType();
+
+        assertTrue(taskListPanel.isListMatching(td1TaskType, tasks));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
