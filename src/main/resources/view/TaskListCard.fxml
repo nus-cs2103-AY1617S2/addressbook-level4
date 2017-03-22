@@ -14,30 +14,33 @@
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="690.0" prefWidth="690.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="50.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
                     </stylesheets>
                     <padding>
-                        <Insets bottom="5" left="15" right="5" top="5" />
+                        <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
 
                     <children>
                         <HBox spacing="5" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="40.0" wrapText="true"></Label>
+                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label" minWidth="200.0" prefWidth="200.0" wrapText="true">
+                                        <padding><Insets right="20"/></padding>
+                                    </Label>
+                                    <Label fx:id="due" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <Label fx:id="duration_start" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <Label fx:id="duration_end" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <FlowPane fx:id="tags" orientation="horizontal" minWidth="150.0"/>
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="due" text="\$first" styleClass="cell_big_label"/>
-                        <Label fx:id="duration" text="\$first" styleClass="cell_big_label"/>
-                        <FlowPane fx:id="tags" />
                     </children>
                 </VBox>
             </children>
