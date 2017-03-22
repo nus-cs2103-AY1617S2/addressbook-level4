@@ -31,6 +31,11 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
+> 
+> **Date Input Format**
+> 
+> * Date specified without timing after the `by` and `to` keyword is default to 23:59 hr
+> * Date specified without timing after the `from` keyword is default to 00:00 hr 
 
 ### 2.1. Viewing help : `help`
 
@@ -61,7 +66,7 @@ Examples:
 
  * `add CS2106 Mid terms`
  * `add CS2103 V0.0 by tmr #module`
- * `add Make baby by next wednesday`
+ * `add Make baby by next wednesday 11pm`
  * `add go to school repeat daily`
 
 ### 2.3 Listing all tasks : `list`
@@ -70,35 +75,35 @@ Shows a list of all tasks in DoOrDie. Able to filter by type of task (task), or 
 
 Format: `list [TYPE]`
 
-> Valid parameters for TYPE:
-> * `tasks` / `task`
-> * `completed`
-> * `incomplete`
-> * `overdue` / `over`
-> * `by DATE`
-> * `from STARTDATE to ENDDATE`
-> * `bookings` / `booking`
+> * Valid parameters for TYPE:
+>  * `tasks` / `task`
+>  * `completed`
+>  * `incomplete`
+>  * `overdue` / `over`
+>  * `by DATE`
+>  * `from STARTDATE to ENDDATE`
+>  * `bookings` / `booking`
 
 Examples:
 
 * `list`<br />
  Lists all tasks.
 
-* `list Overdue`<br />
+* `list overdue`<br />
  Lists all overdue tasks
 
-* `list Outstanding tasks`<br />
-* `list Incomplete tasks`<br />
+* `list outstanding`<br />
+* `list incomplete`<br />
  Lists all outstanding tasks
 
-* `list Completed`<br />
+* `list completed`<br />
  Lists all completed tasks
 
 * `list by today`<br />
- Lists all tasks due by today
+ Lists all tasks due by today 23:59 hr
 
 * `list from monday to friday`<br />
- Lists all tasks due within Monday-Friday
+ Lists all tasks due within Monday 00:00 hr to Friday 23:59 hr
 
 * `list booking`<br />
  Lists all unconfirmed tasks with their respective bookings
@@ -126,11 +131,11 @@ Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE 
 
 Examples:
 
-* `update CS2106Assignment label`<br />
+* `edit CS2106Assignment label`<br />
   Edits the name of the currently selected task to be `CS2106Assignment` and clears all existing labels.
 
-* `update 1 label tedious work by thursday`<br />
-  Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday` respectively.
+* `edit 1 label tedious work by thursday`<br />
+  Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday 23:59 hr` respectively.
 
 ### 2.5. Finding all task containing any keyword in task name and labels : `find`
 
@@ -157,6 +162,9 @@ Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
 
 * `find project`<br />
 Returns all task with the name containing `project` & `Project`.
+
+* `find ign`<br />
+Returns all task with the name containing `ign` like `assignment` & `Assignments`.
 
 * `find glocery`<br />
 Returns all task with the label name containing `glocery` & `Glocery`.
@@ -233,9 +241,9 @@ Examples:
 * `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
   `confirm 1 1/1/2017 4pm`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
-* `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`<br />
+* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 9pm`<br />
   `confirm 1 1`<br />
-  Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
+  Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 9pm slot
 
 ### 2.10. Edit a label : `editlabel`
 
