@@ -25,6 +25,8 @@ public class TaskCard extends UiPart<Region> {
     private Label duration_end;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label complete;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -32,6 +34,7 @@ public class TaskCard extends UiPart<Region> {
         id.setText(Integer.toString(displayedIndex));
         updateDueLabel(task);
         updateDurationLabel(task);
+        updateCompleteLabel(task);
         initTags(task);
     }
 
@@ -58,5 +61,9 @@ public class TaskCard extends UiPart<Region> {
             duration_start.setText(task.getDurationStart());
             duration_end.setText(task.getDurationEnd());
         }
+    }
+
+    private void updateCompleteLabel(ReadOnlyTask task) {
+        complete.setText("✓");
     }
 }
