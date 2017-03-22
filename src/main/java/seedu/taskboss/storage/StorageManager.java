@@ -58,16 +58,12 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ TaskBoss methods ==============================
 
     @Override
-    public void setTaskBossFilePath(String filepath) throws IOException {
-        config.setTaskBossFilePath(filepath);
-        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-        raise(new TaskBossStorageChangedEvent(filepath));
-    }
-
-    @Override
     public void setFilePath(String filepath) {
         String actualFilePath = filepath + "/taskboss.xml";
         taskBossStorage = new XmlTaskBossStorage(actualFilePath);
+        config.setTaskBossFilePath(actualFilePath);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        raise(new TaskBossStorageChangedEvent(actualFilePath));
     }
 
     @Override
