@@ -31,6 +31,78 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
+    public void editTaskToEventSuccess() throws Exception {
+        String detailsToEdit = "Bobby s/3:00AM 17/10/2011 e/6:00AM 17/11/2011 t/husband";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withStartTime("3:00AM 17/10/2011").
+                withEndTime("6:00AM 17/11/2011").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editTaskToDeadLineSuccess() throws Exception {
+        String detailsToEdit = "Bobby e/6:00AM 17/11/2011 t/husband";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").
+                withEndTime("6:00AM 17/11/2011").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editDeadLineToEventSuccess() throws Exception {
+        String detailsToEdit = "Bobby s/3:00AM 17/10/2011 e/6:00AM 17/11/2011 t/husband";
+        int addressBookIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withStartTime("3:00AM 17/10/2011").
+                withEndTime("6:00AM 17/11/2011").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editDeadLineToTaskSuccess() throws Exception {
+        String detailsToEdit = "Bobby  t/husband";
+        int addressBookIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editEventToTaskSuccess() throws Exception {
+        String detailsToEdit = "Bobby t/husband";
+        int addressBookIndex = 9;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editEventToDeadLineSuccess() throws Exception {
+        String detailsToEdit = "Bobbye/6:00AM 17/11/2011 t/husband";
+        int addressBookIndex = 9;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").
+                withEndTime("6:00AM 17/11/2011").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+    @Test
+    public void editAllFieldsSpecifiedEventSuccess() throws Exception {
+        String detailsToEdit = "Bobby t/husband";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+    @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
         int addressBookIndex = 2;

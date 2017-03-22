@@ -9,7 +9,6 @@ import seedu.address.model.todo.UniqueTodoList;
  *
  */
 public class TypicalTestTodos {
-
     public TestTodo dog, cat, math, english, dishes, lawn, dinner, essay, toilet,
                     car, library, tennis, shopping, laundry, job, lunch;
 
@@ -33,7 +32,6 @@ public class TypicalTestTodos {
                     .withCompleteTime("6:00PM 11/11/2017").build();
             tennis = new TodoBuilder().withName("Play tennis").withStartTime("12:00PM 11/11/2017")
                     .withEndTime("1:00PM 11/11/2017").withCompleteTime("6:00PM 11/11/2017").build();
-
             // Manually added
             shopping = new TodoBuilder().withName("Go shopping").build();
             laundry = new TodoBuilder().withName("Do laundry").build();

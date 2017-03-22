@@ -27,7 +27,7 @@ public class Todo implements ReadOnlyTodo {
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    //@@author A0163786N
+    //@@author A0163786N, A0163720M
     /**
      * Constructor for a deadline
      */
@@ -37,7 +37,7 @@ public class Todo implements ReadOnlyTodo {
         this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    //@@author A0163786N
+    //@@author A0163786N, A0163720M
     /**
      * Constructor for an event
      */
@@ -48,7 +48,7 @@ public class Todo implements ReadOnlyTodo {
         this.endTime = endTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    //@@author A0163786N
+    //@@author A0163786Nm
     /**
      * Constructor for general todo
      */
@@ -64,7 +64,17 @@ public class Todo implements ReadOnlyTodo {
      * Creates a copy of the given ReadOnlyTodo.
      */
     public Todo(ReadOnlyTodo source) {
-        this(source.getName(), source.getStartTime(), source.getEndTime(), source.getCompleteTime(), source.getTags());
+        this.name = source.getName();
+        this.tags = source.getTags();
+        if (source.getStartTime() != null && source.getEndTime() != null) {
+            this.startTime = source.getStartTime();
+            this.endTime = source.getEndTime();
+        } else if (source.getStartTime() == null && source.getEndTime() != null) {
+            this.endTime = source.getEndTime();
+        }
+        if (source.getCompleteTime() != null) {
+            this.completeTime = source.getCompleteTime();
+        }
     }
 
     public void setName(Name name) {
@@ -78,9 +88,7 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setStartTime(Date startTime) {
-        if (startTime != null) {
-            this.startTime = startTime;
-        }
+        this.startTime = startTime;
     }
 
     @Override
@@ -89,9 +97,7 @@ public class Todo implements ReadOnlyTodo {
     }
 
     public void setEndTime(Date endTime) {
-        if (endTime != null) {
-            this.endTime = endTime;
-        }
+        this.endTime = endTime;
     }
 
     @Override

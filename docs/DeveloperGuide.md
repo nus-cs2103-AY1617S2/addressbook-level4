@@ -198,7 +198,7 @@ The `Model`,
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Darius Foong, Justin Wong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -209,6 +209,22 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+
+**Handling Save File Location Changes**
+
+The Sequence Diagrams below show how the components interact for the scenario where the user requests to change the save file location.
+
+<img src="images/saveFile1.png" width="800"><br>
+_Figure 2.5.2 : Component interactions for `saveFile data/new.xml` command (part 1)_
+
+>The `StorageManager` raises a SaveFileChangedEvent when the save file is changed by the user
+
+The diagram below shows how the EventsCenter reacts to that event, which eventually updates the path location in the configuration file and updates the status bar of the UI to reflect the 'Last Updated' time and new save file path.
+
+<img src="images/saveFile2.png" width="800"><br>
+_Figure 2.5.3 : Component interactions for `savefile data/new.xml` command (part 2)_
+
+>The event is fired through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
 ### 2.6. Common classes
 
