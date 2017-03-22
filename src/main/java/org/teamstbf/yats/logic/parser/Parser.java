@@ -73,16 +73,16 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-        
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         case MarkDoneCommand.COMMAND_WORD:
         	return new MarkDoneCommandParser().parse(arguments);
-            
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

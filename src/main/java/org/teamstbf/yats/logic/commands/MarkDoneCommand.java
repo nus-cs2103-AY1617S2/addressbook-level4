@@ -1,10 +1,8 @@
 package org.teamstbf.yats.logic.commands;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.teamstbf.yats.commons.core.Messages;
-import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
@@ -18,7 +16,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 /**
- * 
+ *
  * Marks an existing task as done in the task scheduler.
  */
 //@@author A0139448U
@@ -29,7 +27,6 @@ public class MarkDoneCommand extends EditCommand{
 	}
 	
 	public static final String COMMAND_WORD = "done";
-	
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
 	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
@@ -62,7 +59,7 @@ public class MarkDoneCommand extends EditCommand{
 	 * edited with {@code editTaskDescriptor}.
 	 */
 	
-	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor){
 		assert taskToEdit != null;
 
 		Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);

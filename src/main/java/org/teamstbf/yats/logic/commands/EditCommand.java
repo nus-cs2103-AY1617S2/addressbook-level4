@@ -202,7 +202,7 @@ public class EditCommand extends Command {
 			return tags;
 		}
 		
-		public IsDone getIsDone() {			
+		public IsDone getIsDone() {
 			return isDone;
 		}
 		

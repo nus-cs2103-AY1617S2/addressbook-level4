@@ -39,9 +39,9 @@ public interface ReadOnlyEvent {
 	Schedule getStartTime();
 
 	Schedule getEndTime();
-	
+
 	IsDone getIsDone();
-	
+
 	void markDone();
 
 	/**

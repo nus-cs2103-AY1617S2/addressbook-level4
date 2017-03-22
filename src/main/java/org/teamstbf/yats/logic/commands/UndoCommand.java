@@ -10,11 +10,9 @@ import org.teamstbf.yats.model.item.UniqueEventList;
  * Undoes the last option that mutated the save state of the data.
  */
 public class UndoCommand extends Command {
-    
+	
     public static final String COMMAND_WORD = "undo";
-
     public static final String MESSAGE_UNDO_TASK_SUCCESS = "Undo completed";
-    
     public static final String MESSAGE_EMPTY_UNDO_STACK = "Nothing to undo";
 
     public UndoCommand() {
