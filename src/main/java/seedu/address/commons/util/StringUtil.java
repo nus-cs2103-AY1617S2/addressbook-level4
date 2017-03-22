@@ -2,11 +2,15 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.ByDate;
 
 /**
  * Helper functions for handling strings.
@@ -15,6 +19,9 @@ public class StringUtil {
 
     public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
                             + "HH:MM(AM/PM) format, e.g. 12:00pm";
+    public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
+                            + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
+    public static final int YEAR_CONVERSION_INDEX = 2000;
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -55,15 +62,35 @@ public class StringUtil {
     }
 
     /**
-     * Parse a String argument into date format.
-     * @param dateArg
-     * @return time in localTime format
+     * Parse a String argument into time format.
+     * @param timeString
+     * @return time in LocalTime format
      * @throws IllegalValueException
      */
     public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
         //empty start date
         if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
         return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+    }
+
+    /**
+     * Parse a String argument into date format.
+     * @param dateString
+     * @return time in LocalDate format
+     * @throws IllegalValueException
+     */
+    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
+        //empty start date
+        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
+        Pattern pattern = Pattern.compile(ByDate.BYDATE_VALIDATION_REGEX);
+        Matcher matchers = pattern.matcher(dateString);
+        matchers.matches();
+        int day = Integer.parseInt(matchers.group(1));
+        int month = Integer.parseInt(matchers.group(2));
+        int year = Integer.parseInt(matchers.group(3));
+        year += YEAR_CONVERSION_INDEX;
+
+        return LocalDate.of(year, month, day);
     }
 
     /**
