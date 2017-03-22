@@ -22,7 +22,7 @@ public class AddCommandParser {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
-    //@@Author A0143355J
+    //@@author A0143355J
     public Command parse(String args) {
         args = ParserUtil.parseFlexiblePrefix(args);
         ArgumentTokenizer argsTokenizer =

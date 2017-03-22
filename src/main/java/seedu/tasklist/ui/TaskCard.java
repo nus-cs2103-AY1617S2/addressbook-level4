@@ -40,6 +40,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    //@@author A0143355J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         String taskType = task.getType();

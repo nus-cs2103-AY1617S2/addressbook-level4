@@ -100,6 +100,7 @@ public class ParserUtil {
         return new UniqueTagList(tagSet);
     }
 
+    //@@author A0143355J
     public static Optional<List<Date>> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
         return date.isPresent() ? Optional.of(DateParser.parse(date.get())) : Optional.empty();

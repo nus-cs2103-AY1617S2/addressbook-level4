@@ -11,7 +11,7 @@ import seedu.tasklist.logic.commands.IncorrectCommand;
 /**
  * Parses input arguments and creates a DoneCommand object
  */
-//@@Author A0143355J
+//@@author A0143355J
 public class DoneCommandParser {
 
     /**

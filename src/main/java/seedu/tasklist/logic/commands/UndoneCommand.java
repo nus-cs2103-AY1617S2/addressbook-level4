@@ -19,7 +19,7 @@ import seedu.tasklist.model.task.UniqueTaskList.DuplicateTaskException;
 /**
  * Marks a completed task as undone using its last displayed index from FlexiTask
  */
-//@@Author A0143355J
+//@@author A0143355J
 public class UndoneCommand extends Command {
 
     public static final String COMMAND_WORD = "undone";
