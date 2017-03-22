@@ -15,7 +15,7 @@ public class Deadline {
         + "Please make sure valid existing date is used";
 
 
-    private final TaskDate date;
+    public final TaskDate date;
 
     public Deadline() {
         DateFactory dateFactory = new DateFactory();
