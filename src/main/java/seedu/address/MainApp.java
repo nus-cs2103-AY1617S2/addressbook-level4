@@ -122,6 +122,7 @@ public class MainApp extends Application {
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
+            initializedConfig.setConfigFilePath(configFilePathUsed);
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
@@ -181,6 +182,29 @@ public class MainApp extends Application {
         System.exit(0);
     }
 
+    public void saveConfig() {
+        //Update config file in case it was missing to begin with or there are new/unused fields
+        try {
+            ConfigUtil.saveConfig(config, config.getConfigFilePath());
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+    }
+
+    public void reload() {
+        ui.stop();
+        EventsCenter.clearSubscribers();
+
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage);
+        ui = new UiManager(logic, config, userPrefs);
+
+        initEventsCenter();
+
+        ui.start(new Stage());
+    }
+
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -192,13 +216,8 @@ public class MainApp extends Application {
         logger.info("============================ [ Restarting Address Book ] =============================");
 
         config.setTaskManagerFilePath(event.filePath);
-
-        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
-        model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, storage);
-        ui = new UiManager(logic, config, userPrefs);
-
-        ui.start(new Stage());
+        saveConfig();
+        reload();
     }
 
     public static void main(String[] args) {
