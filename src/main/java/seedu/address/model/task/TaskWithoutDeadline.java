@@ -9,6 +9,7 @@ public class TaskWithoutDeadline extends Task {
 
     public TaskWithoutDeadline(ReadOnlyTask source) {
         super(source);
+        today = source.isToday();
     }
 
     @Override
@@ -19,5 +20,14 @@ public class TaskWithoutDeadline extends Task {
     @Override
     public String getTaskDateTime() {
         return "";
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        if (task2 instanceof TaskWithDeadline) {
+            return -MAX_TIME_DIFF;
+        } else {
+            return 0;
+        }
     }
 }

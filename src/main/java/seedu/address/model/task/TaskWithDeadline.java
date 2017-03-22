@@ -8,7 +8,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class TaskWithDeadline extends Task {
-
     static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
 
     Deadline deadline = null;
@@ -23,11 +22,9 @@ public class TaskWithDeadline extends Task {
     public TaskWithDeadline(Name name, UniqueTagList tags, Date date1,
             Date date2, boolean isDone) throws IllegalValueException {
         super(name, tags, isDone);
+        this.deadline = new Deadline(date1);
         if (date2 != null) {
-            this.deadline = new Deadline(date2);
-            this.startingTime = new StartingTime(date1);
-        } else {
-            this.deadline = new Deadline(date1);
+            this.startingTime = new StartingTime(date2);
         }
         validateDateTime();
     }
@@ -44,8 +41,13 @@ public class TaskWithDeadline extends Task {
         }
     }
 
-    public TaskWithDeadline(ReadOnlyTask source) {
-        super(source);
+    public TaskWithDeadline(ReadOnlyTask source) throws IllegalValueException {
+
+        this(source.getName(), source.getTags(), source.getDeadline().getDate(),
+                source.getStartingTime() != null
+                        ? source.getStartingTime().getDate() : null,
+                source.isDone());
+        today = source.isToday();
     }
 
     /**
@@ -87,7 +89,7 @@ public class TaskWithDeadline extends Task {
         if (startingTime == null) {
             return "Due: " + deadline.toString();
         } else {
-            return "Begin: " + startingTime.toString() + ";Due: "
+            return "Begin: " + startingTime.toString() + "; Due: "
                     + deadline.toString();
         }
     }
@@ -102,7 +104,39 @@ public class TaskWithDeadline extends Task {
                         .get(Calendar.DAY_OF_YEAR));
     }
 
+    @Override
     public DateTime getDeadline() {
         return deadline;
+    }
+
+    @Override
+    public DateTime getStartingTime() {
+        return startingTime;
+    }
+
+    @Override
+    public String getTaskAbsoluteDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd/MM/yyyy HH:mm:ss");
+        if (startingTime == null) {
+            return "Due: " + dateFormat.format(deadline.getDate());
+        } else {
+            return "Begin: " + dateFormat.format(startingTime.getDate())
+                    + "; Due: " + dateFormat.format(deadline.getDate());
+        }
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        if (task2 instanceof TaskWithoutDeadline) {
+            return MAX_TIME_DIFF;
+        } else {
+            Calendar cal1 = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            cal1.setTime(this.getDeadline().getDate());
+            cal2.setTime(task2.getDeadline().getDate());
+            // Compares in UNIX time
+            return (int) ((cal1.getTimeInMillis() - cal2.getTimeInMillis()) / 1000);
+        }
     }
 }

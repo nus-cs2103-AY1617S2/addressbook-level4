@@ -6,31 +6,22 @@ import seedu.address.model.TaskManager;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
-            return new Task[] {
-                new Task(new Name("Alex Yeoh"),
-                    new UniqueTagList("friends"),
-                        false),
-                new Task(new Name("Bernice Yu"),
-                    new UniqueTagList("colleagues", "friends"),
-                        false),
-                new Task(new Name("Charlotte Oliveiro"),
-                    new UniqueTagList("neighbours"),
-                        true),
-                new Task(new Name("David Li"),
-                    new UniqueTagList("family"),
-                        true),
-                new Task(new Name("Irfan Ibrahim"),
-                    new UniqueTagList("classmates"),
-                        true),
-                new Task(new Name("Roy Balakrishnan"),
-                    new UniqueTagList("colleagues"),
-                        false)
-            };
+            return new Task[] { new TaskWithoutDeadline(new Name("Do math assignment"),
+                    new UniqueTagList("math"), false),
+                                new TaskWithoutDeadline(new Name("Buy Meier stove"),
+                                        new UniqueTagList("appliance", "stove"), false),
+                                new TaskWithoutDeadline(new Name("Write english essay"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Buy Meier rice cooker"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Complete CS2106 Lab Assignment"), new UniqueTagList(),
+                                        false),
+                                new TaskWithoutDeadline(new Name("Mark CS1010S"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Go for a night run"), new UniqueTagList(), false) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }

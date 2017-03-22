@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.ListIterator;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,6 +46,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
+
+    @FXML
+    private AnchorPane resultDisplayPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -124,40 +125,35 @@ public class MainWindow extends UiPart<Region> {
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
         taskListCompleted = FXCollections.observableArrayList();
-        prepareTaskList(logic.getFilteredTaskList());
+        prepareTaskList();
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
         // TODO: show completedTaskPanel when show completed command is
         // implemented
+        new ResultDisplay(getResultDisplayPlaceholder());
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
     }
-  
+
     /*
      * Prepares categorised task list for today/future/completed ListView
      *
      */
-    protected void prepareTaskList(ObservableList<ReadOnlyTask> taskList) {
-        taskListToday.clear();
-        taskListFuture.clear();
-        taskListCompleted.clear();
-        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
-        while (iter.hasNext()) {
-            ReadOnlyTask tmpTask = iter.next();
-            // set task id to be displayed, the id here is 1-based
-            tmpTask.setID(iter.nextIndex());
-            if (tmpTask.isToday() && !tmpTask.isDone()) {
-                taskListToday.add(tmpTask);
-            } else if (!tmpTask.isDone()) {
-                taskListFuture.add(tmpTask);
-            } else {
-                taskListCompleted.add(tmpTask);
-            }
-        }
+    public void prepareTaskList() {
+        // Assume the three lists will always be initialised by fillInnerParts()
+        assert taskListToday != null;
+        assert taskListFuture != null;
+        assert taskListCompleted != null;
+
+        logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
+    }
+
+    private AnchorPane getResultDisplayPlaceholder() {
+        return resultDisplayPlaceholder;
     }
 
     private AnchorPane getStatusbarPlaceholder() {
@@ -213,11 +209,6 @@ public class MainWindow extends UiPart<Region> {
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
                 (int) primaryStage.getY());
-    }
-
-    @FXML
-    public void menuTest() {
-        completedTaskListPanel.menuTest();
     }
 
     @FXML

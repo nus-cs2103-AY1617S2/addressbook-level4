@@ -5,22 +5,26 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
+    public void find_nonEmptyList()
+            throws IllegalArgumentException, IllegalValueException {
         assertFindResult("find dragon"); // no results
-        assertFindResult("find Meier", td.buyStove, td.buyRiceCooker); // multiple results
+        assertFindResult("find Meier", td.buyStove, td.buyRiceCooker); // multiple
+                                                                       // results
 
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
+        // find after deleting one result
+        commandBox.runCommand("delete F1");
         assertFindResult("find Meier", td.buyRiceCooker);
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_emptyList()
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }
@@ -31,10 +35,11 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits) {
+    private void assertFindResult(String command, TestTask... expectedHits)
+            throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");
-        assertTrue(taskListPanel.isListMatching(expectedHits));
+        assertTrue(futureTaskListPanel.isListMatching(expectedHits));
     }
 }

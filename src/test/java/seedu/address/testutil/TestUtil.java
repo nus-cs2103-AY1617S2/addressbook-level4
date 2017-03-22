@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
@@ -35,6 +36,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.storage.XmlSerializableTaskManager;
 
 /**
@@ -70,19 +72,17 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Ali Muster"), new UniqueTagList(), false),
-                new Task(new Name("Boris Mueller"), new UniqueTagList(), false),
-                new Task(new Name("Carl Kurz"), new UniqueTagList(), true),
-                new Task(new Name("Daniel Meier"), new UniqueTagList(), false),
-                new Task(new Name("Elle Meyer"), new UniqueTagList(), true),
-                new Task(new Name("Fiona Kunz"), new UniqueTagList(), false),
-                new Task(new Name("George Best"), new UniqueTagList(), false),
-                new Task(new Name("Hoon Meier"), new UniqueTagList(), false),
-                new Task(new Name("Ida Mueller"), new UniqueTagList(), true)
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] { new TaskWithoutDeadline(new Name("Ali Muster"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Boris Mueller"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Carl Kurz"), new UniqueTagList(), true),
+                                new TaskWithoutDeadline(new Name("Daniel Meier"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Elle Meyer"), new UniqueTagList(), true),
+                                new TaskWithoutDeadline(new Name("Fiona Kunz"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("George Best"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Hoon Meier"), new UniqueTagList(), false),
+                                new TaskWithoutDeadline(new Name("Ida Mueller"), new UniqueTagList(), true) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -90,17 +90,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
-            };
+            return new Tag[] { new Tag("relatives"), new Tag("friends") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -109,8 +105,9 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
+     *
      * @param fileName
      * @return
      */
@@ -146,8 +143,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -164,7 +161,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -183,18 +180,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -210,10 +206,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -231,6 +228,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -242,6 +240,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     *
      * @param node
      * @return
      */
@@ -253,6 +252,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     *
      * @param node
      * @return
      */
@@ -278,8 +278,11 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
-     * @param tasksToRemove The subset of tasks.
+     *
+     * @param tasks
+     *            The list of tasks
+     * @param tasksToRemove
+     *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -288,11 +291,13 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -300,9 +305,13 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * @param tasks The array of tasks.
-     * @param task The replacement task
-     * @param index The index of the task to be replaced.
+     *
+     * @param tasks
+     *            The array of tasks.
+     * @param task
+     *            The replacement task
+     * @param index
+     *            The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -312,8 +321,11 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
-     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     *
+     * @param tasks
+     *            A array of tasks.
+     * @param tasksToAdd
+     *            The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -336,7 +348,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -345,7 +357,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }
@@ -354,4 +366,54 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    /**
+     * Assigns relative indexes for test tasks
+     * The index is the same as the actual index shown on the UI
+     */
+    public static void assignUiIndex(TestTask[] taskList) {
+        // initialise displayed index
+        int todayID = 1;
+        int futureID = 1;
+        int completedID = 1;
+        for (int i = 0; i < taskList.length; i++) {
+            TestTask tmpTask = taskList[i];
+            // set task id to be displayed, the id here is 1-based
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                tmpTask.setID("T" + todayID);
+                todayID++;
+            } else if (!tmpTask.isDone()) {
+                tmpTask.setID("F" + futureID);
+                futureID++;
+            } else {
+                tmpTask.setID("C" + completedID);
+                completedID++;
+            }
+        }
+    }
+
+    /**
+     * Assigns relative indexes for test tasks
+     * The index is the same as the actual index shown on the UI
+     */
+    public static void assignUiIndex(List<Task> taskList) {
+        // initialise displayed index
+        int todayID = 1;
+        int futureID = 1;
+        int completedID = 1;
+        Iterator<Task> iter = taskList.iterator();
+        while (iter.hasNext()) {
+            Task tmpTask = iter.next();
+            // set task id to be displayed, the id here is 1-based
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                tmpTask.setID("T" + todayID);
+                todayID++;
+            } else if (!tmpTask.isDone()) {
+                tmpTask.setID("F" + futureID);
+                futureID++;
+            } else {
+                tmpTask.setID("C" + completedID);
+                completedID++;
+            }
+        }
+    }
 }

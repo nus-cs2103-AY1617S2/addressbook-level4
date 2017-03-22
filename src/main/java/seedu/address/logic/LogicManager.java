@@ -4,46 +4,88 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.storage.Storage;
 
 /**
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Parser parser;
-    private final Storage storage;
-    private final Config config;
 
-    public LogicManager(Model model, Storage storage, Config config) {
+    public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
-        this.storage = storage;
-        this.config = config;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        Command command = parser.parseCommand(commandText.trim());
+        Command command = getCommand(commandText);
+        CommandResult result = executeCommand(commandText, command);
+        return result;
+    }
+
+    private Command getCommand(String commandText) {
+        Command command = parser.parseCommand(commandText.trim(), this);
         command.setData(model);
-        command.setStorage(storage);
-        command.setConfig(config);
-        return command.execute();
+        return command;
+    }
+
+    private CommandResult executeCommand(String commandText, Command toExecute) throws CommandException {
+        try {
+            if (!(toExecute instanceof UndoCommand)) {
+
+                if (toExecute instanceof RedoCommand) {
+                    commandText = ((RedoCommand) toExecute).getToRedo();
+                    toExecute = getCommand(commandText);
+                } else {
+                    model.clearRedoCommandHistory();
+                }
+
+                model.saveCurrentState(commandText.trim());
+
+            }
+
+            return toExecute.execute();
+        } catch (CommandException e) {
+            if (!(toExecute instanceof UndoCommand)) {
+                model.discardCurrentState();
+            }
+
+            throw e;
+        }
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+            ObservableList<ReadOnlyTask> taskListCompleted) {
+        model.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
+    }
+
+    @Override
+    public int parseUIIndex(String uiIndex) {
+        return model.parseUIIndex(uiIndex);
+    }
+
+    @Override
+    public boolean isValidUIIndex(String uiIndex) {
+        return model.isValidUIIndex(uiIndex);
     }
 }

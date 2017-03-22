@@ -13,6 +13,7 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private UniqueTagList tags;
     private boolean done;
+    private String id;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -61,7 +62,11 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        if (!this.getTags().toSet().isEmpty()) {
+            sb.append("tag ");
+            this.getTags().asObservableList().stream()
+                    .forEach(s -> sb.append(s.tagName + " "));
+        }
         return sb.toString();
     }
 
@@ -96,14 +101,30 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public int getID() {
+    public String getTaskAbsoluteDateTime() {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
 
     @Override
-    public void setID(int id) {
+    public DateTime getStartingTime() {
         // TODO Auto-generated method stub
+        return null;
+    }
 
+    @Override
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getID() {
+        return this.id;
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

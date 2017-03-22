@@ -9,9 +9,10 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the task manager. not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
+    public static final int MAX_TIME_DIFF = 2 ^ 32 - 1;
 
     private Name name;
-    private int id;
+    private String id;
     private UniqueTagList tags;
 
     private boolean done;
@@ -26,7 +27,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.done = done;
-        this.id = -1;
+        this.id = "";
     }
 
     /**
@@ -123,13 +124,28 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public int getID() {
+    public String getID() {
         return this.id;
     }
 
     @Override
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String getTaskAbsoluteDateTime() {
+        return null;
+    }
+
+    @Override
+    public DateTime getStartingTime() {
+        return null;
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        return 0;
     }
 
 }

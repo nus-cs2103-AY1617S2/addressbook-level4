@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -49,7 +50,9 @@ public class TaskManagerTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.mathAssgn), new Task(td.mathAssgn));
+        List<Task> newTasks = Arrays.asList(
+                new TaskWithoutDeadline(td.mathAssgn),
+                new TaskWithoutDeadline(td.mathAssgn));
         List<Tag> newTags = td.mathAssgn.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
@@ -59,7 +62,8 @@ public class TaskManagerTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
+        TaskManager typicalTaskManager = new TypicalTestTasks()
+                .getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice
@@ -71,13 +75,17 @@ public class TaskManagerTest {
     }
 
     /**
-     * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and tags lists can violate
+     * interface constraints.
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
-        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
-        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections
+                .observableArrayList();
+        private final ObservableList<Tag> tags = FXCollections
+                .observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks,
+                Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }

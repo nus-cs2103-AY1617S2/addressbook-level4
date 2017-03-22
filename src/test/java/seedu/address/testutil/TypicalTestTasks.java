@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskManager;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -34,7 +34,7 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(task));
+                ab.addTask(new TaskWithoutDeadline(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -42,7 +42,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{mathAssgn, buyStove, writeEssay, buyRiceCooker, finishLab, markCode, nightRun};
+        return new TestTask[] { mathAssgn, buyStove, writeEssay, buyRiceCooker, finishLab, markCode, nightRun };
     }
 
     public TaskManager getTypicalTaskManager() {

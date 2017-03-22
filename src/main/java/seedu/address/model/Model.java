@@ -3,7 +3,9 @@ package seedu.address.model;
 import java.util.Date;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -14,6 +16,16 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public interface Model {
     /**
+     * Show completed task list
+     */
+    void showCompletedTaskList();
+
+    /**
+     * Hide completed task list
+     */
+    void hideCompletedTaskList();
+
+    /**
      * Clears existing backing model and replaces with the provided new data.
      */
     void resetData(ReadOnlyTaskManager newData);
@@ -22,8 +34,7 @@ public interface Model {
     ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target)
-            throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -39,8 +50,7 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Returns the filtered task list as an
@@ -55,9 +65,66 @@ public interface Model {
      * Updates the filter of the filtered task list to filter by the given
      * keywords
      */
-    void updateFilteredTaskList(Set<String> keywords, Date date);
+    void updateFilteredTaskList(Set<String> keywords, Date date, Set<String> tagKeys);
 
     /** Informs eventbus about the change in save location */
-    void updateSaveLocation();
+    void updateSaveLocation(String path);
 
+    /**
+     * Divides task lists by categories into three separate ObservableList which
+     * will be provided by UI
+     *
+     * @param taskListToday
+     *            task to be displayed under category 'Today'
+     * @param taskListFuture
+     *            task to be displayed under category 'Future'
+     * @param taskListCompleted
+     *            task to be displayed under category 'Completed'
+     */
+    void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+            ObservableList<ReadOnlyTask> taskListCompleted);
+
+    /**
+     * Undo the last command entered by the user.
+     *
+     * @return the last command entered by the user
+     * @throws NoPreviousCommandException
+     *             if there are no previously executed commands to be reversed
+     */
+    public String undoLastCommand() throws NoPreviousCommandException;
+
+    /**
+     * Saves the command and current filteredTasks list.
+     */
+    public void saveCurrentState(String commandText);
+
+    /**
+     * Discard the last saved command and current filteredTasks list.
+     */
+
+    public void discardCurrentState();
+
+    /*
+     * translates task index on ui to internal integer index
+     */
+    int parseUIIndex(String uiIndex);
+
+    /*
+     * checks if a given ui index is present in model
+     */
+    boolean isValidUIIndex(String uiIndex);
+
+    /**
+     * Get the undone command entered by the user.
+     *
+     * @return the last undone command
+     * @throws NoPreviousCommandException
+     *             if there are no previously undone commands
+     */
+    String getRedoCommand() throws NoPreviousCommandException;
+
+    /**
+     * Clears the commands that were undone by the user
+     */
+    void clearRedoCommandHistory();
 }
