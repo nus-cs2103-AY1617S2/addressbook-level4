@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -102,7 +103,21 @@ public class LeftPanel extends UiPart<Region> {
 
     public void setTodayListView(ObservableList<ReadOnlyTask> taskList) {
         todayLabel.setText("Today");
-        todayCounterLabel.setText(Integer.toString(taskList.size()));
+        int count = 0;
+        Date nowStart = new Date();
+        nowStart.setHours(23);
+        nowStart.setMinutes(59);
+        nowStart.setSeconds(59);
+
+        //Add all tasks that is not completed and deadline is after today
+        for (ReadOnlyTask task : taskList) {
+            if (task.getDeadline().isPresent() &&
+                    !task.isCompleted() &&
+                    task.getDeadline().get().getDateTime().after(nowStart)) {
+                count++;
+            }
+        }
+        todayCounterLabel.setText(Integer.toString(count));
     }
 
     public void setCalendarListView(ObservableList<ReadOnlyTask> taskList) {
