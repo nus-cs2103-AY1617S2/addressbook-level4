@@ -18,24 +18,24 @@ import seedu.task.model.task.UniqueTaskList;
 /**
  * Completes a task identified using it's last displayed index from the task list.
  */
-public class CompleteCommand extends Command {
+public class UncompleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "complete";
+    public static final String COMMAND_WORD = "uncomplete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified "
-            + "by the index number used in the last task listing as complete. "
+            + "by the index number used in the last task listing as uncomplete. "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed Task: %1$s, congratulations";
+    public static final String MESSAGE_UNCOMPLETE_TASK_SUCCESS = "Task: %1$s marked uncomplete";
 
-    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "You have already completed this task.";
+    public static final String MESSAGE_TASK_ALREADY_UNCOMPLETE = "Task already marked uncomplete.";
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
 
     public final int targetIndex;
 
-    public CompleteCommand(int targetIndex) {
+    public UncompleteCommand(int targetIndex) {
         this.targetIndex = targetIndex - 1;
     }
 
@@ -47,37 +47,35 @@ public class CompleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex);
+        ReadOnlyTask taskToUncomplete = lastShownList.get(targetIndex);
 
         try {
-            Task completedTask = createCompletedTask(taskToComplete);
-            model.updateTask(targetIndex, completedTask);
+            Task uncompletedTask = createUncompletedTask(taskToUncomplete);
+            model.updateTask(targetIndex, uncompletedTask);
         } catch (NoChangeException nce) {
-            throw new CommandException(MESSAGE_TASK_ALREADY_COMPLETED);
+            throw new CommandException(MESSAGE_TASK_ALREADY_UNCOMPLETE);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
+        return new CommandResult(String.format(MESSAGE_UNCOMPLETE_TASK_SUCCESS, taskToUncomplete));
     }
 
-    private static Task createCompletedTask(ReadOnlyTask taskToComplete) throws NoChangeException {
-        if (taskToComplete.getComplete().getCompletion() == true) {
-            throw new NoChangeException(MESSAGE_TASK_ALREADY_COMPLETED);
+    private static Task createUncompletedTask(ReadOnlyTask taskToComplete) throws NoChangeException {
+        if (!taskToComplete.getComplete().getCompletion()) {
+            throw new NoChangeException(MESSAGE_TASK_ALREADY_UNCOMPLETE);
         }
         Description description = taskToComplete.getDescription();
         UniqueTagList tags = taskToComplete.getTags();
         Duration duration = taskToComplete.getDuration();
         DueDate dueDate = taskToComplete.getDueDate();
-        Complete complete = new Complete(true);
+        Complete complete = new Complete(false);
         TaskId id = taskToComplete.getTaskId();
 
-        Task completedTask = new Task(description, dueDate, duration, tags, complete, id);
+        Task uncompletedTask = new Task(description, dueDate, duration, tags, complete, id);
 
-        completedTask.setComplete();
-        return completedTask;
+        return uncompletedTask;
     }
 
 }
-
