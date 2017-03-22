@@ -33,7 +33,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "d/10/10/1993";
+        String detailsToEdit = "by:10/10/1993";
         int addressBookIndex = 2;
 
         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
@@ -81,10 +81,10 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 d/1");
+        commandBox.runCommand("edit 1 by:1");
         assertResultMessage(DueDate.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/13:11am");
+        commandBox.runCommand("edit 1 @13:11am");
         assertResultMessage(Time.MESSAGE_TIME_CONSTRAINTS);
 
     }
