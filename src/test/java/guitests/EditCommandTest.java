@@ -84,7 +84,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test

@@ -31,7 +31,7 @@ public interface Logic {
             ObservableList<ReadOnlyTask> taskListCompleted);
 
     /*
-     * translates task index on ui to internal integer index 
+     * translates task index on ui to internal integer index
      */
     int parseUIIndex(String uiIndex);
 

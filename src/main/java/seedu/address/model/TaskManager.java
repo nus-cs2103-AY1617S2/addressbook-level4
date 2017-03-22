@@ -159,7 +159,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         taskTags.forEach(
-                tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+            tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
 

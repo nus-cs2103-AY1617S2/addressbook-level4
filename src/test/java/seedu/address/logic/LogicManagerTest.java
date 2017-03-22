@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.io.File;
@@ -23,6 +22,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -54,6 +54,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.TestUtil;
 
 public class LogicManagerTest {
 
@@ -278,7 +279,7 @@ public class LogicManagerTest {
      *            list based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
@@ -288,7 +289,7 @@ public class LogicManagerTest {
             model.addTask(p);
         }
 
-        assertCommandFailure(commandWord + " 3", expectedMessage);
+        assertCommandFailure(commandWord + " F100", expectedMessage);
     }
 
     @Test
@@ -318,7 +319,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
@@ -342,7 +343,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         assertCommandFailure("done ", expectedMessage);
     }
 
@@ -355,6 +356,7 @@ public class LogicManagerTest {
     public void execute_done_valid() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
+        TestUtil.assignUiIndex(threeTasks);
         Task taskToDone = threeTasks.get(1);
         Task doneTask = new TaskWithoutDeadline(taskToDone.getName(), taskToDone.getTags(), true);
 
@@ -363,13 +365,13 @@ public class LogicManagerTest {
         ;
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("done 2", String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask), expectedAB,
+        assertCommandSuccess("done F2", String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask), expectedAB,
                 expectedAB.getTaskList());
     }
 
     @Test
     public void execute_notdone_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotDoneCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         assertCommandFailure("notdone ", expectedMessage);
     }
 
@@ -390,7 +392,7 @@ public class LogicManagerTest {
         expectedAB.updateTask(1, notDoneTask);
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("notdone 2", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
+        assertCommandSuccess("notdone F2", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                 expectedAB, expectedAB.getTaskList());
 
     }

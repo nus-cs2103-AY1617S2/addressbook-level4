@@ -133,8 +133,8 @@ public abstract class TaskManagerGuiTest {
      * string.
      */
     protected void assertResultMessage(String expected) {
-        logger.info("Expected:"+expected);
-        logger.info("Actual:"+resultDisplay.getText());
+        logger.info("Expected:" + expected);
+        logger.info("Actual:" + resultDisplay.getText());
         assertEquals(expected, resultDisplay.getText());
     }
 

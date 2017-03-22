@@ -89,7 +89,7 @@ public interface Model {
     public void saveCurrentState(String commandText);
 
     /*
-     * translates task index on ui to internal integer index 
+     * translates task index on ui to internal integer index
      */
     int parseUIIndex(String uiIndex);
 

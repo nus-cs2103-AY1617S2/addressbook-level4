@@ -54,6 +54,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestUtil.assignUiIndex(currentList);
         TestTask doneTask = currentList[index - 1];
+        doneTask.setDone(true);
         commandBox.runCommand("done " + doneTask.getID());
         assertResultMessage(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask));
     }
@@ -67,6 +68,7 @@ public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestUtil.assignUiIndex(currentList);
         TestTask notDoneTask = currentList[index - 1];
+        notDoneTask.setDone(false);
         commandBox.runCommand("notdone " + notDoneTask.getID());
         assertResultMessage(String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask));
     }

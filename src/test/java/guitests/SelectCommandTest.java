@@ -19,7 +19,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
         assertSelectionInvalid(taskCount + 1); // invalid index
         assertTaskSelected(middleIndex); // assert previous selection remains
 
-        // Testing other invalid indexes such as -1 should be done when testing the SelectCommand 
+        // Testing other invalid indexes such as -1 should be done when testing the SelectCommand
     }
 
     @Test
@@ -50,7 +50,6 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     private void assertNoTaskSelected() {
         assertEquals(futureTaskListPanel.getSelectedTasks().size(), 0);
     }
-    
     */
 
 }

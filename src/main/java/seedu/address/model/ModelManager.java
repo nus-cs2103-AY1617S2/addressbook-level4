@@ -51,12 +51,6 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
     private static final String MESSAGE_ON_UNDO = "Undo completed";
 
-    private static final Logger logger = LogsCenter
-            .getLogger(ModelManager.class);
-
-    private final TaskManager taskManager;
-    private final FilteredList<ReadOnlyTask> filteredTasks;
-
     private final HashMap<String, Integer> indexMap;
 
     /**
@@ -136,6 +130,7 @@ public class ModelManager extends ComponentManager implements Model {
         predicateHistory.add(filteredTasks.getPredicate());
         commandHistory.add(commandText);
     }
+
 
     @Override
     public String undoLastCommand() throws NoPreviousCommandException {
@@ -236,47 +231,47 @@ public class ModelManager extends ComponentManager implements Model {
             ReadOnlyTask tmpTask = iter.next();
             // set task id to be displayed, the id here is 1-based
             if (tmpTask.isToday() && !tmpTask.isDone()) {
-                tmpTask.setID("T"+todayID);
+                tmpTask.setID("T" + todayID);
                 taskListToday.add(tmpTask);
-                indexMap.put("T"+todayID, iter.nextIndex()-1);
+                indexMap.put("T" + todayID, iter.nextIndex() - 1);
                 todayID++;
             } else if (!tmpTask.isDone()) {
-                tmpTask.setID("F"+futureID);
+                tmpTask.setID("F" + futureID);
                 taskListFuture.add(tmpTask);
-                indexMap.put("F"+futureID, iter.nextIndex()-1);
+                indexMap.put("F" + futureID, iter.nextIndex() - 1);
                 futureID++;
             } else {
-                tmpTask.setID("C"+completedID);
+                tmpTask.setID("C" + completedID);
                 taskListCompleted.add(tmpTask);
-                indexMap.put("C"+completedID, iter.nextIndex()-1);
+                indexMap.put("C" + completedID, iter.nextIndex() - 1);
                 completedID++;
             }
         }
         printIndexMap(indexMap);
     }
-    
-    // For debugging 
-    public void printIndexMap(HashMap<String, Integer> map){
+
+    // For debugging
+    public void printIndexMap(HashMap<String, Integer> map) {
         logger.info("=============indexmap content==============");
-        for (String name: map.keySet()){
-            String key =name.toString();
-            String value = map.get(name).toString();  
-            logger.info(key + " " + value);  
-        } 
+        for (String name: map.keySet()) {
+            String key = name.toString();
+            String value = map.get(name).toString();
+            logger.info(key + " " + value);
+        }
     }
-    
+
     @Override
-    public int parseUIIndex(String uiIndex){
-        logger.info(">>>>>>>>>>>>query UI index:"+uiIndex);
-        logger.info(">>>>>>>>>>>>Absolute index:"+(indexMap.get(uiIndex)+1));
+    public int parseUIIndex(String uiIndex) {
+        logger.info(">>>>>>>>>>>>query UI index:" + uiIndex);
+        logger.info(">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
         assert uiIndex != null;
         assert indexMap.containsKey(uiIndex);
         // plus one since all current commands take index as 1-based
-        return indexMap.get(uiIndex)+1;
+        return indexMap.get(uiIndex) + 1;
     }
-    
-    @Override 
-    public boolean isValidUIIndex(String uiIndex){
+
+    @Override
+    public boolean isValidUIIndex(String uiIndex) {
         return indexMap.containsKey(uiIndex);
     }
 
