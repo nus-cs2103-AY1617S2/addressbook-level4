@@ -6,6 +6,7 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
+import seedu.task.model.task.TaskId;
 /**
  *
  */
@@ -44,6 +45,11 @@ public class TaskBuilder {
         for (String tag: tags) {
             task.getTags().add(new Tag(tag));
         }
+        return this;
+    }
+
+    public TaskBuilder withTaskId(long id) throws IllegalValueException {
+        this.task.setTaskId(new TaskId(id));
         return this;
     }
 

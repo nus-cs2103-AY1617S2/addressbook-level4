@@ -44,6 +44,7 @@ import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -385,7 +386,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             Complete complete = new Complete(false);
-            return new Task(name, null, null, tags, complete);
+            return new Task(name, null, null, tags, complete, new TaskId(System.currentTimeMillis()));
         }
 
         /**
@@ -401,7 +402,8 @@ public class LogicManagerTest {
                     null,
                     null,
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
-                    new Complete(false)
+                    new Complete(false),
+                    new TaskId(System.currentTimeMillis())
             );
         }
 
@@ -497,7 +499,8 @@ public class LogicManagerTest {
                     null,
                     null,
                     new UniqueTagList(new Tag("tag")),
-                    new Complete(false)
+                    new Complete(false),
+                    new TaskId(System.currentTimeMillis())
             );
         }
     }

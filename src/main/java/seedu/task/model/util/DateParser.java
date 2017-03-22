@@ -1,3 +1,4 @@
+//@@evanyeung A0163744B
 package seedu.task.model.util;
 
 import java.util.Calendar;
@@ -6,7 +7,8 @@ import seedu.task.commons.exceptions.IllegalValueException;
 
 public class DateParser {
     public static final String DATE_STRING_ILLEGAL_FORMAT =
-            "String given to the DateParser must be of the form YYYY/MM/DD HHMM";
+            "String must be of the form YYYY/MM/DD HHMM";
+    public static final String DATE_ILLEGAL_DATE = "The given date is not valid";
 
     private static final int DEFAULT_SECONDS = 0;
     private static final int DEFAULT_MILLISECONDS = 0;
@@ -24,10 +26,14 @@ public class DateParser {
         int day = getDay(date);
         int hour = getHour(date);
         int minute = getMinute(date);
+        if (!isValidDate(year, month, day, hour, minute)) {
+            throw new IllegalValueException(DATE_ILLEGAL_DATE);
+        }
         cal.set(year, month, day, hour, minute, DEFAULT_SECONDS);
         cal.set(Calendar.MILLISECOND, DEFAULT_MILLISECONDS);
         return cal;
     }
+    //@@evanyeung
 
     public static String toString(Calendar date) {
         String dateString;
@@ -47,8 +53,25 @@ public class DateParser {
         return dateString;
     }
 
+    //@@evanyeung A0163744B
     public static boolean isValidDateString(String test) {
         return test.matches(DATE_STRING_VALIDATION_REGEX);
+    }
+
+    public static boolean isValidDate(int year, int month, int day, int hour, int minute) {
+        if (year < 0 || month < 0 || month > 11) {
+            return false;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        if (day < 1 || day > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+            return false;
+        }
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+            return false;
+        }
+        return true;
     }
 
     private static int getYear(String date) {

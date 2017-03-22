@@ -14,6 +14,7 @@ import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 
 /**
  * JAXB-friendly version of the Task.
@@ -30,6 +31,8 @@ public class XmlAdaptedTask {
     private String end;
     @XmlElement(required = true)
     private String complete;
+    @XmlElement(required = true)
+    private long id;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -52,11 +55,11 @@ public class XmlAdaptedTask {
         Duration duration = source.getDuration();
         start = duration != null ? duration.getStartString() : null;
         end = duration != null ? duration.getEndString() : null;
-
         dueDate = source.getDueDate() != null ?
                 source.getDueDate().toString() :
                 null;
         complete = source.getComplete().getString();
+        id = source.getTaskId().id;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -82,6 +85,7 @@ public class XmlAdaptedTask {
                 null;
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final Complete complete = this.complete.equals("true") ? new Complete(true) : new Complete(false);
-        return new Task(description, dueDate, duration, tags, complete);
+        final TaskId id = new TaskId(this.id);
+        return new Task(description, dueDate, duration, tags, complete, id);
     }
 }

@@ -11,7 +11,7 @@ import seedu.task.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private TaskId id;
+    private final TaskId id;
     private Description description;
     private DueDate dueDate;
     private Duration duration;
@@ -26,13 +26,14 @@ public class Task implements ReadOnlyTask {
      * @param duration may be null
      * @param tags must not be null
      */
-    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags, Complete complete) {
-        assert !CollectionUtil.isAnyNull(description, tags, complete);
+    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags, Complete complete, TaskId id) {
+        assert !CollectionUtil.isAnyNull(description, tags, complete, id);
         this.description = description;
         this.dueDate = dueDate;
         this.duration = duration;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.complete = complete;
+        this.id = id;
     }
 
     /**
@@ -40,12 +41,12 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(),
-             source.getComplete());
+                source.getComplete(), source.getTaskId());
     }
 
     @Override
-    public TaskId getId() {
-        return this.id;
+    public TaskId getTaskId() {
+        return id;
     }
 
     /**
@@ -70,6 +71,7 @@ public class Task implements ReadOnlyTask {
         return dueDate;
     }
 
+    //@@evanyeung A0163744B
     @Override
     public Duration getDuration() {
         return duration;
@@ -83,6 +85,7 @@ public class Task implements ReadOnlyTask {
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
+    //@@evanyeung
 
     public void setComplete() {
         this.complete.setComplete();
@@ -101,6 +104,9 @@ public class Task implements ReadOnlyTask {
      * Replaces this tasks's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
+        //@@evanyeung A0163744B
+        assert replacement != null;
+        //@@evanyeung
         tags.setTags(replacement);
     }
 
