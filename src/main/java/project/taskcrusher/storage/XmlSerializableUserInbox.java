@@ -92,5 +92,4 @@ public class XmlSerializableUserInbox implements ReadOnlyUserInbox {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
     }
-
 }
