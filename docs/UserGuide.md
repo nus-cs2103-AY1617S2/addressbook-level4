@@ -60,7 +60,7 @@ Example:
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
-* Press <kbd>Ctrl</kbd> + <kbd>A</kbd>
+* Press <kbd>Ctrl</kbd> + <kbd>A</kbd> <br>
   Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
