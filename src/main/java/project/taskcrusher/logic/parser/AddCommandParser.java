@@ -113,10 +113,10 @@ public class AddCommandParser {
 
         try {
 
-            String[] timeslotsAsStrings = timesToParse.split("or");
+            String[] timeslotsAsStrings = timesToParse.split("\\s+or\\s+");
             List<Timeslot> timeslots = new ArrayList<>();
             for (String t: timeslotsAsStrings) {
-                String[] dates = t.split("to");
+                String[] dates = t.split("\\s+to\\s+");
                 timeslots.add(new Timeslot(dates[0], dates[1]));
             }
 

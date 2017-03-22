@@ -81,7 +81,7 @@ public class AddCommand extends Command {
         assert model != null;
         assert !(eventToAdd == null && taskToAdd == null);
         try {
-            if (eventToAdd == null) {
+            if (eventToAdd != null) {
                 model.addEvent(eventToAdd);
                 return new CommandResult(String.format(MESSAGE_TASK_SUCCESS, eventToAdd));
             } else {
