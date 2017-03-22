@@ -27,6 +27,9 @@ public class TestTask implements ReadOnlyTask {
         this.startDateTime = Optional.empty();
         this.endDateTime = Optional.empty();
         this.interval = RecurInterval.NONE;
+        this.isTimed = false;
+        this.isActive = true;
+        this.isRecurring = false;
     }
 
     /**
