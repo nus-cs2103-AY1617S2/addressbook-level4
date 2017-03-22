@@ -61,19 +61,27 @@ public class EditCommandParser {
             // We only set new values if user had input something.
             Optional<Name> nameStr = ParserUtil.parseName(preambleFields.get(1));
             if (nameStr.isPresent() && nameStr.get().fullName.length() > 0) editTaskDescriptor.setName(nameStr);
-            else System.out.println("no name ");
+            
+            // Check start time stamp
             String startStr = argsTokenizer.getValue(PREFIX_START).orElse("");
             if (startStr.length() > 0) editTaskDescriptor.setStart(Optional.of(new Start(startStr)));
-            else System.out.println("no start");
+            else if (startPresent) editTaskDescriptor.setStart(Optional.of(new Start("-")));
+            
+            // Check deadline
             String deadlineStr = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
             if (deadlineStr.length() > 0) editTaskDescriptor.setDeadline(Optional.of(new Deadline(deadlineStr)));
-            else System.out.println("no dead");
+            else if (deadlinePresent) editTaskDescriptor.setDeadline(Optional.of(new Deadline("-")));
+            
+            // Check priority
             int priorityInt = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
             if (priorityInt > 0) editTaskDescriptor.setPriority(Optional.of(new Priority(priorityInt)));
-            else System.out.println("no p");
+            else if (priorityPresent) editTaskDescriptor.setPriority(Optional.of(new Priority(0)));
+            
+            // Check notes
             String notesStr = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
             if (notesStr.length() > 0) editTaskDescriptor.setNotes(Optional.of(new Notes(notesStr)));
-            else System.out.println("no n");
+            else if (notesPresent) editTaskDescriptor.setNotes(Optional.of(new Notes("-")));
+            
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
