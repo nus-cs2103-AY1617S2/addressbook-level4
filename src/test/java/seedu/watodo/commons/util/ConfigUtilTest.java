@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.watodo.commons.core.Config;
 import seedu.watodo.commons.exceptions.DataConversionException;
-import seedu.watodo.commons.util.ConfigUtil;
-import seedu.watodo.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

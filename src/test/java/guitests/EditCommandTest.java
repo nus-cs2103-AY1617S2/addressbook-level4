@@ -9,8 +9,8 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.logic.commands.EditCommand;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.Description;
 import seedu.watodo.testutil.TaskBuilder;
 import seedu.watodo.testutil.TestTask;
 

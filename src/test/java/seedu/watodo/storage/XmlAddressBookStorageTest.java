@@ -16,7 +16,6 @@ import seedu.watodo.commons.util.FileUtil;
 import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.task.Task;
-import seedu.watodo.storage.XmlTaskListStorage;
 import seedu.watodo.testutil.TypicalTestTasks;
 
 public class XmlAddressBookStorageTest {

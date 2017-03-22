@@ -17,10 +17,6 @@ import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
-import seedu.watodo.storage.JsonUserPrefsStorage;
-import seedu.watodo.storage.Storage;
-import seedu.watodo.storage.StorageManager;
-import seedu.watodo.storage.XmlTaskListStorage;
 import seedu.watodo.testutil.EventsCollector;
 import seedu.watodo.testutil.TypicalTestTasks;
 

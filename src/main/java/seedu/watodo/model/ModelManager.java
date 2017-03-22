@@ -101,25 +101,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
+    public void updateFilteredByNameTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+
     @Override
     public void updateFilteredByTagsTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
     }
-    
+
     @Override
     public void updateFilteredByDatesTaskList(int days) throws IllegalValueException {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(days)));
     }
-    
+
     @Override
     public void updateFilteredByMonthsTaskList(int months) throws IllegalValueException {
         updateFilteredTaskList(new PredicateExpression(new MonthQualifier(months)));
     }
-    
+
     @Override
     public void updateFilteredByTypesTaskList(String type) {
         updateFilteredTaskList(new PredicateExpression(new TypeQualifier(type)));
@@ -171,7 +171,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().fullDescription, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                        task.getDescription().fullDescription, keyword))
                     .findAny()
                     .isPresent();
         }
@@ -185,7 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
     private class TagQualifier implements Qualifier {
         private Set<String> tagKeyWords;
         private String tags;
-          
+
         TagQualifier(Set<String> tagKeyWords) {
             assert tagKeyWords != null;
             this.tagKeyWords = tagKeyWords;
@@ -210,12 +211,12 @@ public class ModelManager extends ComponentManager implements Model {
             return "tag=" + String.join(", ", tagKeyWords);
         }
     }
-    
+
     private class DateQualifier implements Qualifier {
         private int days;
         private Calendar temp;
         private DateTime deadline;
-        
+
         DateQualifier(int days) throws IllegalValueException {
             assert days >= 0;
             this.temp = Calendar.getInstance();
@@ -229,7 +230,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(task.getEndDate() == null){
+            if (task.getEndDate() == null) {
                 return true;
             } else {
                 return deadline.isLater(task.getEndDate());
@@ -241,77 +242,77 @@ public class ModelManager extends ComponentManager implements Model {
             return "period=" + days;
         }
     }
-    
+
     private class MonthQualifier implements Qualifier {
-      private int months;
-      private Calendar temp;
-      private DateTime deadline;
-      
-      MonthQualifier(int months) throws IllegalValueException {
-          assert months >= 0;
-          this.temp = Calendar.getInstance();
-          this.temp.add(Calendar.MONTH, months);
-          temp.set(Calendar.DATE, 1);
-          temp.set(Calendar.HOUR_OF_DAY, 0);
-          temp.set(Calendar.MINUTE, 0);
-          temp.set(Calendar.SECOND, 0);
-          temp.set(Calendar.MILLISECOND, 0);
-          this.deadline = new DateTime(temp.getTime().toString());
-      }
+        private int months;
+        private Calendar temp;
+        private DateTime deadline;
 
-      @Override
-      public boolean run(ReadOnlyTask task) {
-          if(task.getEndDate() == null){
-              return true;
-          } else {
-              return deadline.isLater(task.getEndDate());
-          }
-      }
+        MonthQualifier(int months) throws IllegalValueException {
+            assert months >= 0;
+            this.temp = Calendar.getInstance();
+            this.temp.add(Calendar.MONTH, months);
+            temp.set(Calendar.DATE, 1);
+            temp.set(Calendar.HOUR_OF_DAY, 0);
+            temp.set(Calendar.MINUTE, 0);
+            temp.set(Calendar.SECOND, 0);
+            temp.set(Calendar.MILLISECOND, 0);
+            this.deadline = new DateTime(temp.getTime().toString());
+        }
 
-      @Override
-      public String toString() {
-          return "period=" + months;
-      }
-  }
-    
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDate() == null) {
+                return true;
+            } else {
+                return deadline.isLater(task.getEndDate());
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "period=" + months;
+        }
+    }
+
     private class TypeQualifier implements Qualifier {
-      private String type;
-      
-      TypeQualifier(String type){
-          assert type != null;
-          this.type = type;
-      }
+        private String type;
 
-      @Override
-      public boolean run(ReadOnlyTask task) {
-          switch (type) {
-          case ListFloatCommand.COMMAND_WORD:
-              if(task.getStartDate() == null && task.getEndDate() == null) {
-                  return true;
-              } else {
-                  return false;
-              }
-          case ListDeadlineCommand.COMMAND_WORD:
-              if(task.getStartDate() == null && task.getEndDate() != null) {
-                  return true;
-              } else {
-                  return false;
-              }
-          case ListEventCommand.COMMAND_WORD:
-              if(task.getStartDate() != null && task.getEndDate() != null) {
-                  return true;
-              } else {
-                  return false;
-              }
-          default:
-              return false;
-          }
-      }
+        TypeQualifier(String type) {
+            assert type != null;
+            this.type = type;
+        }
 
-      @Override
-      public String toString() {
-          return "type=" + type;
-      }
-  }
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            switch (type) {
+            case ListFloatCommand.COMMAND_WORD:
+                if (task.getStartDate() == null && task.getEndDate() == null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case ListDeadlineCommand.COMMAND_WORD:
+                if (task.getStartDate() == null && task.getEndDate() != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case ListEventCommand.COMMAND_WORD:
+                if (task.getStartDate() != null && task.getEndDate() != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            default:
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "type=" + type;
+        }
+    }
 
 }

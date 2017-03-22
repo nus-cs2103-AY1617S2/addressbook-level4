@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.util.FileUtil;
 import seedu.watodo.model.UserPrefs;
-import seedu.watodo.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

@@ -1,8 +1,8 @@
 package seedu.watodo.testutil;
 
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.TaskStatus;
 

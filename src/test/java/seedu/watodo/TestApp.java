@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.watodo.MainApp;
 import seedu.watodo.commons.core.Config;
 import seedu.watodo.commons.core.GuiSettings;
 import seedu.watodo.model.ReadOnlyTaskManager;

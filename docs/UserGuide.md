@@ -251,8 +251,11 @@ There is no need to save manually.
 > * `list`<br>
 > * `list all`<br>
 > * `list float`<br>
+> * `list deadline`<br>
+> * `list event`<br>
 > * `list day`<br>
 > * `list week`<br>
+> * `list month`<br>
 > * `list #TAG`<br>
 > * `list marked`<br>
 

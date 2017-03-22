@@ -10,7 +10,7 @@ public class ListMonthCommand extends ListCommand {
     public static final String COMMAND_WORD = "month";
 
     public static final String MESSAGE_SUCCESS = "Listed this month's tasks";
-    
+
     public static final int DEADLINE = 1;
 
     @Override

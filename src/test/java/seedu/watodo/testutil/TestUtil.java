@@ -33,9 +33,8 @@ import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Task;
-import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.storage.XmlSerializableTaskList;
 
 /**
@@ -73,14 +72,14 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                    new Task(new Description("Read Lord of The Rings"),
-                            new UniqueTagList("reading")),
-                        new Task(new Description("Do CS2103 V0.1"),
-                            new UniqueTagList("school", "homework")),
-                        new Task(new Description("Learn airflares"),
-                            new UniqueTagList("dance")),
-                        new Task(new Description("Design RPG using RPG Maker VX Ace"),
-                            new UniqueTagList("gamedesign"))
+                new Task(new Description("Read Lord of The Rings"),
+                         new UniqueTagList("reading")),
+                new Task(new Description("Do CS2103 V0.1"),
+                         new UniqueTagList("school", "homework")),
+                new Task(new Description("Learn airflares"),
+                         new UniqueTagList("dance")),
+                new Task(new Description("Design RPG using RPG Maker VX Ace"),
+                         new UniqueTagList("gamedesign"))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
