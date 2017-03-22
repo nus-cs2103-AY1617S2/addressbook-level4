@@ -305,7 +305,7 @@ Vbox, SplitPane {
     -fx-padding: 1 0 0 0;
 }
 
-.list-cell:filled:selected:focused, .list-cell:filled:selected {
+#taskListView .list-cell:filled:selected:focused, #taskListView .list-cell:filled:selected {
     -fx-background-color: #ffebee;
     /* Up Right Down Left */
     -fx-border-width: 0 0 0 5;

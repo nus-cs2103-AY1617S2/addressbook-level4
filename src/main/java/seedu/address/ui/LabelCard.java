@@ -19,14 +19,14 @@ public class LabelCard extends UiPart<Region> {
     @FXML
     private Label taskCountText;
 
-    public LabelCard(seedu.address.model.label.Label labels) {
+    public LabelCard(seedu.address.model.label.Label labels, int count) {
         super(FXML);
-        initLabel(labels);
+        initLabel(labels, count);
     }
 
-    private void initLabel(seedu.address.model.label.Label labelToSet) {
+    private void initLabel(seedu.address.model.label.Label labelToSet, int count) {
         icon.setIcon(FontAwesomeIcon.TAG);
         labelText.setText(labelToSet.getLabelName());
-        taskCountText.setText("0");
+        taskCountText.setText(Integer.toString(count));
     }
 }
