@@ -1,14 +1,25 @@
+//@@author A0139925U
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_DELIMITER;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
 import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER_2;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,9 +32,7 @@ import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Date;
 import seedu.tache.model.task.Name;
-import seedu.tache.model.task.Time;
 
 
 /**
@@ -54,22 +63,31 @@ public class EditCommandParser {
 
                 switch(updateParameter) {
                 case NAME_PARAMETER:
-                    String quotesRemovedValue = updateValue.substring(1, updateValue.length() - 1);
-                    editTaskDescriptor.setName(Optional.of(new Name(quotesRemovedValue)));
+                case NAME_PARAMETER_2:
+                    editTaskDescriptor.setName(Optional.of(new Name(updateValue)));
                     break;
                 case START_DATE_PARAMETER:
-                    editTaskDescriptor.setStartDate(Optional.of(new Date(updateValue)));
+                case START_DATE_PARAMETER_2:
+                case START_DATE_PARAMETER_3:
+                    editTaskDescriptor.setStartDate(Optional.of(updateValue));
                     break;
                 case END_DATE_PARAMETER:
-                    editTaskDescriptor.setEndDate(Optional.of(new Date(updateValue)));
+                case END_DATE_PARAMETER_2:
+                case END_DATE_PARAMETER_3:
+                    editTaskDescriptor.setEndDate(Optional.of(updateValue));
                     break;
                 case START_TIME_PARAMETER:
-                    editTaskDescriptor.setStartTime(Optional.of(new Time(updateValue)));
+                case START_TIME_PARAMETER_2:
+                case START_TIME_PARAMETER_3:
+                    editTaskDescriptor.setStartTime(Optional.of(updateValue));
                     break;
                 case END_TIME_PARAMETER:
-                    editTaskDescriptor.setEndTime(Optional.of(new Time(updateValue)));
+                case END_TIME_PARAMETER_2:
+                case END_TIME_PARAMETER_3:
+                    editTaskDescriptor.setEndTime(Optional.of(updateValue));
                     break;
                 case TAG_PARAMETER:
+                case TAG_PARAMETER_2:
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(EDIT_PARAMETER_DELIMITER))));
                     break;
@@ -84,11 +102,7 @@ public class EditCommandParser {
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-        if (ParserUtil.determineIndexType(preambleFields[0]).get() == ParserUtil.TYPE_TASK) {
-            return new EditCommand(index.get(), editTaskDescriptor);
-        } else {
-            return new EditCommand(index.get(), editTaskDescriptor, EditCommand.TaskType.TypeDetailedTask);
-        }
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**

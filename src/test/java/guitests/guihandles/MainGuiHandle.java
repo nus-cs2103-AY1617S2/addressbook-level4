@@ -17,10 +17,6 @@ public class MainGuiHandle extends GuiHandle {
         return new TaskListPanelHandle(guiRobot, primaryStage);
     }
 
-    public DetailedTaskListPanelHandle getDetailedTaskListPanel() {
-        return new DetailedTaskListPanelHandle(guiRobot, primaryStage);
-    }
-
     public ResultDisplayHandle getResultDisplay() {
         return new ResultDisplayHandle(guiRobot, primaryStage);
     }

@@ -35,7 +35,6 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
-    private TaskListPanel detailedTaskListPanel;
     private Config config;
 
     @FXML
@@ -47,11 +46,16 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private MenuItem helpMenuItem;
 
+    //@@author A0142255M
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane taskListTypePlaceholder;
 
     @FXML
-    private AnchorPane detailedTaskListPanelPlaceholder;
+    private AnchorPane taskCountPlaceholder;
+    //@@author
+
+    @FXML
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -116,15 +120,17 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0142255M
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        detailedTaskListPanel = new TaskListPanel(logic.getFilteredDetailedTaskList(),
-                                                  getDetailedTaskListPlaceholder());
+        new TaskListType(getTaskListTypePlaceholder(), logic.getFilteredTaskListType());
+        new TaskCount(getTaskCountPlaceholder(), logic);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -138,12 +144,18 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    //@@author A0142255M
+    private AnchorPane getTaskCountPlaceholder() {
+        return taskCountPlaceholder;
     }
 
-    private AnchorPane getDetailedTaskListPlaceholder() {
-        return detailedTaskListPanelPlaceholder;
+    private AnchorPane getTaskListTypePlaceholder() {
+        return taskListTypePlaceholder;
+    }
+    //@@author
+
+    private AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
 
     void hide() {
@@ -209,12 +221,12 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    public TaskListPanel getDetailedTaskListPanel() {
-        return this.detailedTaskListPanel;
-    }
-
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);
+    }
+
+    void addTaskEvent(ReadOnlyTask task) {
+        browserPanel.add_event_today(task.getName().fullName);
     }
 
     void releaseResources() {

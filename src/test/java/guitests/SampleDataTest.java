@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.tache.model.TaskManager;
-import seedu.tache.model.task.DetailedTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.util.SampleDataUtil;
 import seedu.tache.testutil.TestUtil;
@@ -26,8 +25,6 @@ public class SampleDataTest extends TaskManagerGuiTest {
     @Test
     public void taskManagerDataFileDoesNotExistLoadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
-        DetailedTask[] expectedDTList = SampleDataUtil.getSampleDetailedTasks();
         assertTrue(taskListPanel.isListMatching(expectedList));
-        assertTrue(detailedTaskListPanel.isListMatching(expectedDTList));
     }
 }
