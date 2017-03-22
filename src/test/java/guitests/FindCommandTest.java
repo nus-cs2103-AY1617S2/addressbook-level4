@@ -18,7 +18,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
                                                                        // results
 
         // find after deleting one result
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand("delete F1");
         assertFindResult("find Meier", td.buyRiceCooker);
     }
 

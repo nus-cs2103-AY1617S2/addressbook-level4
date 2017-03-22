@@ -17,6 +17,7 @@ import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
@@ -36,7 +37,7 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the
      * EditCommand and returns an EditCommand object for execution.
      */
-    public Command parse(String args) {
+    public Command parse(String args, LogicManager logic) {
         assert args != null;
         this.args = args.trim();
         String[] indexAndArguments = this.args.split("\\s+", 2);
@@ -46,7 +47,7 @@ public class EditCommandParser {
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        Optional<Integer> index = ParserUtil.parseIndex(indexAndArguments[0]);
+        Optional<String> index = ParserUtil.parseIndex(indexAndArguments[0]);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -89,7 +90,9 @@ public class EditCommandParser {
                 return new IncorrectCommand(e.getMessage());
             }
         }
-        return new EditCommand(index.get(), editTaskDescriptor);
+        // TODO dummy!
+        return null;
+        //return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     private String getArgument(String key) {

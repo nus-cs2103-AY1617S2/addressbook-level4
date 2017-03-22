@@ -30,7 +30,7 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        Command command = parser.parseCommand(commandText.trim());
+        Command command = parser.parseCommand(commandText.trim(), this);
         command.setData(model);
         try {
             if (!(command instanceof UndoCommand)) {
@@ -57,5 +57,15 @@ public class LogicManager extends ComponentManager implements Logic {
     public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         model.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
+    }
+
+    @Override
+    public int parseUIIndex(String uiIndex) {
+        return model.parseUIIndex(uiIndex);
+    }
+
+    @Override
+    public boolean isValidUIIndex(String uiIndex) {
+        return model.isValidUIIndex(uiIndex);
     }
 }

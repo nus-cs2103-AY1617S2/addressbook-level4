@@ -101,5 +101,16 @@ public interface Model {
     /**
      * Discard the last saved command and current filteredTasks list.
      */
+
     public void discardCurrentState();
+
+    /*
+     * translates task index on ui to internal integer index
+     */
+    int parseUIIndex(String uiIndex);
+
+    /*
+     * checks if a given ui index is present in model
+     */
+    boolean isValidUIIndex(String uiIndex);
 }

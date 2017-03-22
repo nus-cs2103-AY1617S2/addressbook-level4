@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_S
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
@@ -31,8 +32,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(targetIndex, currentList);
 
         // invalid index
-        commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
+        commandBox.runCommand("delete F100");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
     }
 
@@ -50,6 +51,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
     private void assertDeleteSuccess(int targetIndexOneIndexed,
             final TestTask[] currentList)
             throws IllegalArgumentException, IllegalValueException {
+        // update ui index
+        TestUtil.assignUiIndex(currentList);
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
                                                                         // array
                                                                         // uses
@@ -58,7 +61,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList,
                 targetIndexOneIndexed);
 
-        commandBox.runCommand("delete " + targetIndexOneIndexed);
+
+        commandBox.runCommand("delete " + currentList[targetIndexOneIndexed - 1].getID());
 
         // confirm the list now contains all previous tasks except the deleted
         // task
@@ -68,5 +72,4 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertResultMessage(
                 String.format(MESSAGE_DELETE_PERSON_SUCCESS, taskToDelete));
     }
-
 }

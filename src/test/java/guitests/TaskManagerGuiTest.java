@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,7 +25,9 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.BaseEvent;
+import seedu.address.logic.Logic;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
@@ -34,6 +37,7 @@ import seedu.address.testutil.TypicalTestTasks;
  * A GUI Test class for TaskManager.
  */
 public abstract class TaskManagerGuiTest {
+    private static final Logger logger = LogsCenter.getLogger(TaskManagerGuiTest.class);
 
     /*
      * The TestName Rule makes the current test name available inside test
@@ -58,6 +62,7 @@ public abstract class TaskManagerGuiTest {
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
     private Stage stage;
+    protected Logic logic;
 
     @BeforeClass
     public static void setupSpec() {
@@ -131,6 +136,8 @@ public abstract class TaskManagerGuiTest {
      * string.
      */
     protected void assertResultMessage(String expected) {
+        logger.info("Expected:" + expected);
+        logger.info("Actual:" + resultDisplay.getText());
         assertEquals(expected, resultDisplay.getText());
     }
 

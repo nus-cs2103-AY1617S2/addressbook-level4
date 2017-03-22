@@ -28,7 +28,7 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(td.hoon.getAddCommand());
         assertTrue(futureTaskListPanel.isListMatching(
                 TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand("delete F1");
         assertListSize(td.getTypicalTasks().length);
 
         assertTrue(newTestStorage.delete());

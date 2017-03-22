@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.io.File;
@@ -21,8 +20,10 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.FXCollections;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -41,7 +42,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -160,8 +160,8 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that the result message is correct and
      * that a CommandException is thrown if expected and also confirms that the
-     * following three parts of the LogicManager object's state are as
-     * expected:<br>
+     * following three parts of the LogicManager object's state are as expected:
+     * <br>
      * - the internal task manager data are same as those in the
      * {@code expectedTaskManager} <br>
      * - the backing list shown by UI matches the {@code shownList} <br>
@@ -264,31 +264,8 @@ public class LogicManagerTest {
      *            to test assuming it targets a single task in the last shown
      *            list based on visible index.
      */
-    private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
-            throws Exception {
-        assertCommandFailure(commandWord, expectedMessage); // index missing
-        assertCommandFailure(commandWord + " +1", expectedMessage); // index
-                                                                    // should be
-                                                                    // unsigned
-        assertCommandFailure(commandWord + " -1", expectedMessage); // index
-                                                                    // should be
-                                                                    // unsigned
-        assertCommandFailure(commandWord + " 0", expectedMessage); // index
-                                                                   // cannot be
-                                                                   // 0
-        assertCommandFailure(commandWord + " not_a_number", expectedMessage);
-    }
-
-    /**
-     * Confirms the 'invalid argument index number behaviour' for the given
-     * command targeting a single task in the shown list, using visible index.
-     *
-     * @param commandWord
-     *            to test assuming it targets a single task in the last shown
-     *            list based on visible index.
-     */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
@@ -298,38 +275,12 @@ public class LogicManagerTest {
             model.addTask(p);
         }
 
-        assertCommandFailure(commandWord + " 3", expectedMessage);
-    }
-
-    @Test
-    public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
+        assertCommandFailure(commandWord + " F100", expectedMessage);
     }
 
     @Test
     public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("select");
-    }
-
-    @Test
-    public void execute_select_jumpsToCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        helper.addToModel(model, threeTasks);
-
-        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedAB,
-                expectedAB.getTaskList());
-        assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
-    }
-
-    @Test
-    public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
     @Test
@@ -345,14 +296,15 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
-
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threeTasks.get(1)),
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandSuccess("delete C1", String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
 
     @Test
     public void execute_done_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         assertCommandFailure("done ", expectedMessage);
     }
 
@@ -365,21 +317,23 @@ public class LogicManagerTest {
     public void execute_done_valid() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
-        Task taskToDone = threeTasks.get(1);
+        // TestUtil.assignUiIndex(threeTasks);
+        Task taskToDone = threeTasks.get(0);
         Task doneTask = new TaskWithoutDeadline(taskToDone.getName(), taskToDone.getTags(), true);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.updateTask(1, doneTask);
-        ;
-        helper.addToModel(model, threeTasks);
+        expectedAB.updateTask(0, doneTask);
 
-        assertCommandSuccess("done 2", String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask), expectedAB,
+        helper.addToModel(model, threeTasks);
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandSuccess("done F1", String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask), expectedAB,
                 expectedAB.getTaskList());
     }
 
     @Test
     public void execute_notdone_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotDoneCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         assertCommandFailure("notdone ", expectedMessage);
     }
 
@@ -399,8 +353,9 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
         expectedAB.updateTask(1, notDoneTask);
         helper.addToModel(model, threeTasks);
-
-        assertCommandSuccess("notdone 2", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
+        assertCommandSuccess("notdone C1", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                 expectedAB, expectedAB.getTaskList());
 
     }

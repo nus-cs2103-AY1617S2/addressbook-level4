@@ -22,10 +22,10 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label taskDate;
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + ".");
         taskDate.setText(task.getTaskDateTime());
         initTags(task);
     }
