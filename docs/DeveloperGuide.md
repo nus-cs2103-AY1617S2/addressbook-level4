@@ -4,17 +4,17 @@ By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&
 
 ---
 
-1. [Setting Up](setting-up)
-2. [Design](design)
-3. [Implementation](implementation)
-4. [Testing](testing)
-5. [Dev Ops](dev-ops)
+1. [Setting Up](#setting-up)
+2. [Design](#design)
+3. [Implementation](#implementation)
+4. [Testing](#testing)
+5. [Dev Ops](#dev-ops)
 
-* [Appendix A: User Stories](appendix-a--user-stories)
-* [Appendix B: Use Cases](appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](appendix-d--glossary)
-* [Appendix E : Product Survey](appendix-e--product-survey)
+* [Appendix A: User Stories](#appendix-a--user-stories)
+* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d--glossary)
+* [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
 ## 1. Setting up
@@ -323,7 +323,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task List depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
