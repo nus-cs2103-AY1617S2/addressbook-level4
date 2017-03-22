@@ -62,7 +62,6 @@ public class DoneCommand extends Command {
         try {
             model.updateTask(adjustedIndex, doneTask);
         } catch (DuplicateTaskException e) {
-            System.out.println("here");
             assert false;
         }
 

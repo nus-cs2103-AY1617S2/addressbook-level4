@@ -62,7 +62,6 @@ public class UndoneCommand extends Command {
         try {
             model.updateTask(adjustedIndex, undoneTask);
         } catch (DuplicateTaskException e) {
-            System.out.println("here");
             assert false;
         }
 
