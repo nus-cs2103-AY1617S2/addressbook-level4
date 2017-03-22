@@ -1,6 +1,5 @@
 package seedu.opus.model.tag;
 
-
 import seedu.opus.commons.exceptions.IllegalValueException;
 
 /**
