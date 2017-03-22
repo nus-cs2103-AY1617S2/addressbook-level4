@@ -2,9 +2,16 @@ package seedu.task.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import seedu.task.MainApp;
+import seedu.task.commons.util.AppUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -39,8 +46,16 @@ public class TaskCard extends UiPart<Region> {
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
             done.setText("Done");
+            done.setTextFill(Color.GREEN);
+            Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
+            done.setGraphic(new ImageView(image));
+            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         } else {
             done.setText("Not Done");
+            done.setTextFill(Color.RED);
+            Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
+            done.setGraphic(new ImageView(image));
+            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         }
         remark.setText(task.getRemark().value);
         initTags(task);
