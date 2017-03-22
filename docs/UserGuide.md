@@ -53,14 +53,14 @@ on simplifying the way you handle tasks now.
 
 ## 3.1. Viewing help : `help`
 
-Brings up user guide<br>
+Brings up user guide.<br>
 Format: help
 
 > Is also displayed when an incorrect command is entered
 
 ## 3.2. Adding a task: `add`
 
-Adds a task to task list<br>
+Adds a task to task list <br>
 Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
 > Tasks includes:
 > * Event tasks where deadlines include a specific timing
@@ -87,7 +87,7 @@ Examples:
 
 ## 3.4. Delete a task: `delete`
 
-Deletes an existing task<br>
+Deletes an existing task <br>
 Format: delete INDEX
 
 Examples:
@@ -96,7 +96,7 @@ Examples:
 
 ## 3.5. Undo a command: 'undo'
 
-Undo most recent command<br>
+Undo most recent command <br>
 Format: undo
 
 ## 3.6. Redo a command: 'redo'
