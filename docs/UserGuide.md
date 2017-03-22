@@ -335,7 +335,7 @@ Here are some examples of tasks which you might want to _edit_: <br>
   you!
 
 > * **`edit`** `<task_index>; <parameter> <new_value>` <br>
-This command will direct me to make the specified update to a task with the task's index `<task_index>`. <br>
+This command will direct me to make the specified update to a task with `<task_index>`. <br>
 > * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`<br>
 You can edit more parameters for your task concurrently using the following format<br>
 E.g. **`edit`** `1; start_time 3pm; end_time 8pm;` <br>
@@ -354,7 +354,7 @@ Here are some reasons why you might want to _completed_ a task:
   > You finished a task and do not want it to show up in the task list.
 
 > * **`complete`** `<task_index>`<br>
-E.g. **`complete`** ` 1` <br>
+E.g. **`complete`** `1` <br>
 > * **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
 You can complete multiple tasks simultaneously using the following format<br>
 E.g. **`complete`** `1,3,4` <br>
