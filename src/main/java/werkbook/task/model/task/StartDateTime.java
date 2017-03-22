@@ -47,7 +47,8 @@ public class StartDateTime {
         try {
             START_DATETIME_FORMATTER.parse(test);
         } catch (ParseException e) {
-            throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
+            return false;
+            //throw new IllegalValueException(MESSAGE_START_DATETIME_CONSTRAINTS);
         }
         return true;
     }

@@ -48,7 +48,8 @@ public class EndDateTime {
         try {
             END_DATETIME_FORMATTER.parse(test);
         } catch (ParseException e) {
-            throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
+            return false;
+            //throw new IllegalValueException(MESSAGE_END_DATETIME_CONSTRAINTS);
         }
         return true;
     }
