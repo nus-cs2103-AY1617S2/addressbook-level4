@@ -3,6 +3,7 @@ package seedu.address.model;
 
 import java.util.Stack;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -52,8 +53,9 @@ public class StateManager {
     /**
      * Undo the most recent command, then store that undo command in a redo stack
      * @throws CommandException
+     * @throws IllegalValueException 
      */
-    public void undo() throws CommandException {
+    public void undo() throws CommandException, IllegalValueException {
         if (undoStack.isEmpty()) {
             // Can't undo as no history
             System.out.println("No undo commands found");
@@ -69,8 +71,9 @@ public class StateManager {
     /**
      * Redo the most recently 'undo' command, then store that redo command in the undo stack
      * @throws CommandException
+     * @throws IllegalValueException 
      */
-    public void redo() throws CommandException {
+    public void redo() throws CommandException, IllegalValueException {
         if (redoStack.isEmpty()) {
             // Can't redo as no history
             System.out.println("No redo commands found");
