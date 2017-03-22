@@ -3,6 +3,7 @@ package seedu.watodo.logic.parser;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -61,10 +62,11 @@ public class AddCommandParser {
         tagsTokenizer.tokenize(argsWithDatesExtracted);
         if (tagsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
             List<String> tags = tagsTokenizer.getAllValues(PREFIX_TAG).get();
+            List<String> parsedTags = new ArrayList<String>();
             for (String tag : tags) {
-                tag = tag.split("\\S+", 2)[0];
+                parsedTags.add(tag.split("[\\s+]", 2)[0]);
             }
-            this.tags = ParserUtil.toSet(Optional.of(tags));
+            this.tags = ParserUtil.toSet(Optional.of(parsedTags));
         }
     }
 
