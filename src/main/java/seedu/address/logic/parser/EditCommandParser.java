@@ -20,6 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.ReadOnlyTask;
@@ -50,17 +51,29 @@ public class EditCommandParser {
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            String startStr = argsTokenizer.getValue(PREFIX_START).orElse("");
+            // Check which prefixes are present
+            boolean startPresent = args.contains(PREFIX_START.prefix);
+            boolean deadlinePresent = args.contains(PREFIX_DEADLINE.prefix);
+            boolean priorityPresent = args.contains(PREFIX_PRIORITY.prefix);
+            boolean notesPresent = args.contains(PREFIX_NOTES.prefix);
+            
             // We only set new values if user had input something.
+            Optional<Name> nameStr = ParserUtil.parseName(preambleFields.get(1));
+            if (nameStr.isPresent() && nameStr.get().fullName.length() > 0) editTaskDescriptor.setName(nameStr);
+            else System.out.println("no name ");
+            String startStr = argsTokenizer.getValue(PREFIX_START).orElse("");
             if (startStr.length() > 0) editTaskDescriptor.setStart(Optional.of(new Start(startStr)));
+            else System.out.println("no start");
             String deadlineStr = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
             if (deadlineStr.length() > 0) editTaskDescriptor.setDeadline(Optional.of(new Deadline(deadlineStr)));
+            else System.out.println("no dead");
             int priorityInt = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
             if (priorityInt > 0) editTaskDescriptor.setPriority(Optional.of(new Priority(priorityInt)));
+            else System.out.println("no p");
             String notesStr = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
             if (notesStr.length() > 0) editTaskDescriptor.setNotes(Optional.of(new Notes(notesStr)));
+            else System.out.println("no n");
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
