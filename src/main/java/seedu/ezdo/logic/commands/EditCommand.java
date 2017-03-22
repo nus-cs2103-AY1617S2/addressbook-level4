@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import seedu.ezdo.commons.core.EventsCenter;
 import seedu.ezdo.commons.core.Messages;
-import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.ui.JumpToListRequestEvent;
 import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
