@@ -25,6 +25,7 @@ import seedu.taskboss.model.task.PriorityLevel;
  */
 public class ParserUtil {
 
+    private static final String WHITESPACE = " ";
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_TYPE_ARGS_FORMAT = Pattern.compile("(?<sortType>.+)");
 
@@ -63,7 +64,17 @@ public class ParserUtil {
         return Optional.of(sortType);
     }
 
-    //@@author A0143157J
+    /**
+     * Splits {@code command} by whitespace as delimiter into a {@code String[]}
+     * Returns the {@code String[]}.
+     */
+    public static String[] parseRenameCategory(String command) {
+        String trimmedCommand = command.trim();
+        String[] categories = trimmedCommand.split(WHITESPACE);
+        return categories;
+    }
+
+    //@@author
     /**
      * Returns a new Set populated by all elements in the given list of strings
      * Returns an empty set if the given {@code Optional} is empty,
