@@ -35,6 +35,8 @@
                                 </HBox>
                             </children>
                         </HBox>
+                  <Label fx:id="startDate" styleClass="cell_big_label" text="\$startDate" />
+                  <Label fx:id="endDate" styleClass="cell_big_label" text="\$endDate" />
                         <FlowPane fx:id="tags" />
                     </children>
                 </VBox>
