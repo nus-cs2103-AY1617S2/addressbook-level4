@@ -91,7 +91,7 @@ public class EditCommand extends Command {
 		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
 			updatedTags.removeAndMerge(taskToEdit.getTags());
 		}
-		IsDone isDone = editTaskDescriptor.getIsDone();
+		IsDone isDone = taskToEdit.getIsDone();
 
 		return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime, updatedEndTime,
 				updatedDescription, updatedTags, isDone);
