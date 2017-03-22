@@ -22,6 +22,7 @@ public class TestTask implements ReadOnlyTask {
 
     public TestTask() {
         tags = new UniqueTagList();
+        complete = new Complete(false);
     }
 
     /**

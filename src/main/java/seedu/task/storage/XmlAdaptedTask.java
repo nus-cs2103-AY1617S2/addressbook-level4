@@ -28,7 +28,7 @@ public class XmlAdaptedTask {
     private String start;
     @XmlElement(required = false)
     private String end;
-    @XmlElement(required = false)
+    @XmlElement(required = true)
     private String complete;
 
     @XmlElement
