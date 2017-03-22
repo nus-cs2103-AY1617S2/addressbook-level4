@@ -14,7 +14,7 @@
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="690.0" prefWidth="690.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="720.0" prefWidth="720.0" />
             </columnConstraints>
             <children>
                 <VBox alignment="CENTER_LEFT" minHeight="50.0" GridPane.columnIndex="0">
@@ -30,7 +30,7 @@
                         <HBox spacing="5" alignment="CENTER_LEFT">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="40.0" wrapText="true"></Label>
+                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="70.0" prefWidth="70.0" wrapText="true"></Label>
                                     <Label fx:id="name" text="\$first" styleClass="cell_big_label" minWidth="200.0" prefWidth="200.0" wrapText="true">
                                         <padding><Insets right="20"/></padding>
                                     </Label>
