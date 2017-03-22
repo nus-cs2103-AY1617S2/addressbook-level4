@@ -19,7 +19,7 @@ By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &n
 
 ## 1. Setting up
 
-> Locate the .jar file and run.
+> Download and locate the .jar file. Click run as Java Application.
 
 ## 2. Design
 
@@ -34,7 +34,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -66,18 +66,18 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `edit 1 [KEYWORDS]`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images\SDForEditTask.png" width="800"><br>
+_Figure 2.1.3a : Component interactions for `edit 1 [KEYWORDS]` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+<img src="images\SDforEditTaskEventHandling.png" width="800"><br>
+_Figure 2.1.3b : Component interactions for `edit 1 [KEYWORDS]` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -87,19 +87,19 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Jacob Levy
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/UITaskDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -110,31 +110,31 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Daniel
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
 3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("edit 1 [KEYWORDS]")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+<img src="images/EditLogic.png" width="800"><br>
+_Figure 2.3.1 : Interactions Inside the Logic Component for the `edit 1 [KEYWORDS]` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Edwin Yeep
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
+<img src="images/ModelTaskDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
 
 The `Model`,
 
@@ -146,12 +146,12 @@ The `Model`,
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Yun Chun
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="images/TaskStorage.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 
@@ -187,7 +187,6 @@ and logging destinations.
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
-
 
 ## 4. Testing
 
@@ -295,14 +294,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new task|
+`* * *` | user | add a new task| keep track of things I have to do
 `* * *` | user | delete a task | remove tasks that I have completed.
 `* * *` | user | edit a task | update relevant information about the task
 `* * *` | user | search for a task | see detailed information about the task.
 `* * *` | user | update the status of a task | view completed or pending tasks. 
 `* * *` | user | see upcoming tasks | see what needs to be done soon.
 `* *`   | user | categorize a task | organize the tasks.
-`* *`   | user | favourite tasks | keep track of important tasks.
+`* *`   | user | favorite tasks | keep track of important tasks.
 `* *`   | user | see alerts on upcoming tasks | complete time sensitive tasks.
 `* *`   | user | quickly add predefined tasks | to save time defining tasks
 `* *`   | user | can undo last command | to fix mistakes.
@@ -464,7 +463,7 @@ Author: Edwin
 
 Pros:
 
-* Has simplistic view of tasks with 3 lists, today, tommorrow and yesterday.  
+* Has simplistic view of tasks with 3 lists, today, tomorrow and yesterday.  
 * Easy to use interface
 
 Cons:
