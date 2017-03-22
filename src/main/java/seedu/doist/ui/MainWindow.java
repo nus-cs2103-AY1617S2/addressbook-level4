@@ -77,7 +77,6 @@ public class MainWindow extends UiPart<Region> {
         if (!scene.getStylesheets().contains(gradientThemeUrl)) {
             scene.getStylesheets().add(gradientThemeUrl);
         }
-
         setAccelerators();
     }
 
