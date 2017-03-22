@@ -13,7 +13,5 @@ public class PriorityTest {
         assertTrue(Priority.isValidPriority(0));//zero
         assertTrue(Priority.isValidPriority(10));//integer
         
-        //invalid priority
-        assertFalse(Priority.isValidPriority(-1));//negative integer
     }
 }
