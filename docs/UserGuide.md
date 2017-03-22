@@ -82,9 +82,9 @@ Let's start by adding a new task to Werkbook. Perhaps you want to remind yoursel
 
 **Making changes**
 
-You can also specify a deadline by editing the task using the following command:
+Say you want it done by 5th March 8:30pm, you can edit the task by using the following command:
 
-`> edit 1 e/05/03/2017 2030`
+`> edit 1 by 05/03/2017 2030`
 
 **Completing a task**
 
@@ -126,11 +126,20 @@ Now you're all set to start managing your tasks! Feel free to refer to our [Feat
 
 #### a. Add task
 
-When you receive a new task, you can add it to Werkbook using the `add` command.<br>
-Format: `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
+Once you receive a new task, you can add it to Werkbook using the `add` command. You can also add in extra information by surrounding them with round brackets.<br>
+Format: `add NAME [(DESCRIPTION)]`
 
-Example:
-* `Walk the dog d/Take Zelda on a walk around the park s/01/01/2017 1000 e/01/01/2017 1200 t/Important`
+Example: `add Get the groceries (Milk, eggs, and cheese)`
+
+But if you need to get it done by a certain date, use the `by` prefix to let Werkbook know!<br>
+Format: `add NAME [(DESCRIPTION)] [by END_DATETIME]`
+
+Example: `add Get the groceries (Milk, eggs, and cheese) by 10/03/2017 1400`
+
+And if you plan to get it done in a particular timespan, you can specify the duration by using `from` and `to`!<br> 
+Format: `add NAME [(DESCRIPTION)] [from START_DATETIME] [to END_DATETIME]`
+
+Example: `add Get the groceries (Milk, eggs, and cheese) from 10/03/2017 1400 to 10/03/2017 1600`
 
 > * Date and time must be formatted as DD/MM/YYYY HHMM<br>
 > * A task must have a name, the description is optional<br>
@@ -144,18 +153,18 @@ Format: `list`
 #### c. Edit task
 
 Perhaps the deadline for your project has been pushed back, or maybe you want to change the details of a task that you have already created. You can use the `edit` command to change the description and start/end times of your existing tasks.<br>
-Format: `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]...`
+Format: `edit INDEX [NAME] [(DESCRIPTION)] [from START_DATETIME] [to/by END_DATETIME]`
 
 Examples:
-* `edit 1 e/01/01/2018 2359`<br>
+* `edit 1 by 01/01/2018 2359`<br>
   Edits the deadline of the 1st task to be `01/01/2018 2359`.<br>
-* `edit 2 d/Help to finish up essay`<br>
+* `edit 2 (Help to finish up essay)`<br>
   Edits the description of the 2nd task to be `Help to finish up essay`<br>
 
 To remove the start/end date entirely, simply add the corresponding prefix without specifying a new date.
 
 Example:
-* `edit 3 e/`<br>
+* `edit 3 by`<br>
   Removes the deadline from task 3.<br>
 
 > * Edits the task at the specified `INDEX`.
@@ -293,9 +302,9 @@ Format: `exit`
 
 Command | Purpose | Format
 --- | --- | ---
-`add` | Add a task | `add NAME [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]`
+`add` | Add a task | `add NAME [(DESCRIPTION)] [from START_DATETIME] [to/by END_DATETIME]`
 `list` | List all tasks | `list`
-`edit` | Edit specified task | `edit INDEX [NAME] [d/DESCRIPTION] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]...`
+`edit` | Edit specified task | `edit INDEX [NAME] [(DESCRIPTION)] [from START_DATETIME] [to/by END_DATETIME]`
 `find` | Find tasks based on specified keywords | `find KEYWORD [MORE_KEYWORD]`
 `mark` | Mark specified task as complete | `mark INDEX`
 `delete` | Delete specified task | `delete INDEX`
