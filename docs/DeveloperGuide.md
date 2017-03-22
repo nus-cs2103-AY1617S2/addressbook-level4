@@ -118,7 +118,7 @@ Given below is a quick overview of each component.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
 #### Commons
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -126,19 +126,19 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to the App's log file for debugging and communication between developers.
 
 #### User Interface (UI)
-The [**`UI`**](#ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists. 
+The [**`UI`**](#22-ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists. 
 
 #### Logic
-The [**`Logic`**](#logic-component) accepts commands sent from the user pass it to the model to process.
+The [**`Logic`**](#23-logic-component) accepts commands sent from the user pass it to the model to process.
 
 #### Model
-The [**`Model`**](#model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
+The [**`Model`**](#24-model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
 
 #### Storage
-The [**`Storage`**](#storage-component) Reads data from, and writes data to, the hard disk.
+The [**`Storage`**](#25-storage-component) Reads data from, and writes data to, the hard disk.
 
-Each of the four components, [**`UI`**](#ui-component), [**`Logic`**](#logic-component), 
-[**`Model`**](#model-component) and [**`Storage`**](#storage-component)
+Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-logic-component), 
+[**`Model`**](#24-model-component) and [**`Storage`**](#25-storage-component)
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
@@ -280,7 +280,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](#32-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
