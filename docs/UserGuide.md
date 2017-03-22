@@ -107,17 +107,7 @@ Examples:
 
 * `list booking`<br />
  Lists all unconfirmed tasks with their respective bookings
-<<<<<<< HEAD
- 
-=======
 
-### 2.4. Editing a task : `update`
-
-Edits the specified task's details.
-
-Format:`update [TASK_ID] [TASKNAME] [#Label...] ([by DATE] | [from start_date to end_date]) [done]`
-
->>>>>>> refs/remotes/origin/V0.3-bernard
 ### 2.4. Editing a task : `edit`
 
 Edits the specified task's details.
