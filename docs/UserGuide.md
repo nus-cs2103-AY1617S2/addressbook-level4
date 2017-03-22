@@ -174,13 +174,13 @@ There is no need to manually save the data
 
 ## 4. FAQ
 
-**Q**: Where do I download the Task Manager Application?
+**Q**: Where do I download the Task Manager Application?<br>
 **A**: The Application can be found at https://github.com/CS2103JAN2017-W13-B2/main to download.
 
-**Q**: Why are there no tasks displayed after I added some tasks?
+**Q**: Why are there no tasks displayed after I added some tasks?<br>
 **A**: Use the command `list` to display all tasks.
 
-**Q**: Where do I get the INDEX number?
+**Q**: Where do I get the INDEX number?<br>
 **A**: The INDEX number is obtained when the “list” or “find” command is used.
 
 **Q**: How do I transfer my data to another Computer?<br>
