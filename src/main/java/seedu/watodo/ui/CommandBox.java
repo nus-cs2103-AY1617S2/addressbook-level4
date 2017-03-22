@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.events.ui.NewResultAvailableEvent;
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.FxViewUtil;
 import seedu.watodo.logic.Logic;
 import seedu.watodo.logic.commands.CommandResult;
@@ -38,7 +39,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     @FXML
-    private void handleCommandInputChanged() {
+    private void handleCommandInputChanged() throws IllegalValueException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
