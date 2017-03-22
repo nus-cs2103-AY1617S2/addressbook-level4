@@ -143,7 +143,7 @@ public class EditCommandParser {
                             + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
                                     : CliSyntax.DEFAULT_DEADLINE));
             if (group == null || group.get(0).getPosition() != 0
-                    || group.size() > 1) {
+                    || group.size() > 2) {
                 args = tmpArgs;
                 return null;
             } else {
