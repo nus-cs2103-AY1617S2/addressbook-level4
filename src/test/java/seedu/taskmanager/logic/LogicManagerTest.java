@@ -439,9 +439,9 @@ public class LogicManagerTest {
             seed = seed%10;
             return new Task(
                     new TaskName("Task " + seed),
-                    new Date(seed + "/02/17"),
-                    new StartTime("140 " + seed),
-                    new EndTime("160 " + seed)
+                    new Date("0" + seed + "/02/17"),
+                    new StartTime("140" + seed),
+                    new EndTime("160" + seed)
 //                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
             );
         }
