@@ -57,5 +57,4 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
-
 }

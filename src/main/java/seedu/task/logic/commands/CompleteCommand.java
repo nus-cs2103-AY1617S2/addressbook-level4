@@ -38,7 +38,6 @@ public class CompleteCommand extends Command {
         this.targetIndex = targetIndex - 1;
     }
 
-
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
