@@ -116,8 +116,7 @@ Each of the five components defines its _API_ in an `interface` with the same na
 Our architecture follows the *Model-View-Controller* (MVC) Pattern. UI displays data and interacts with the user. Commands are passed through 
 the Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the 
 bridge between the UI and the Model. Model & Storage store and maintain the data. A lot of inspirations for this design
- was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr
- .com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
+ was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
 The sections below give more details of each component.
 
@@ -273,13 +272,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.toluist.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.toluist.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.toluist.controller.AddControllerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -323,27 +322,10 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 6.5. Converting Documentation to PDF format
+### 6.5. Managing Dependencies
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
-as Chrome's PDF engine preserves hyperlinks used in webpages.
-
-Here are the steps to convert the project documentation files to PDF format.
-
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
-    documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
-    <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
-
-### 6.6. Managing Dependencies
-
-A project often depends on third-party libraries. For example, Address Book depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
+A project often depends on third-party libraries. For example, ToLuist depends on the
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for JSON parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
