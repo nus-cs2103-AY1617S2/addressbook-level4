@@ -1,11 +1,13 @@
 package seedu.address.model.person;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 
-
+//@@author A0121668A
 /**
  * Represents a Deadline's ByDate in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidByDate(String)}
@@ -21,8 +23,13 @@ public class ByDate {
      */
     public static final String BYDATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
 
-    public final String value;
+    public final LocalDate value;
 
+    public LocalDate getValue() {
+        return value;
+    }
+
+//@@author A0110491U A0121668A
     /**
      * Validates given ByDate.
      *
@@ -35,10 +42,11 @@ public class ByDate {
             if (!isValidByDate(bydate)) {
                 throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
             }
-            this.value = bydate;
+            this.value = StringUtil.parseStringToDate(bydate);
         }
     }
 
+  //@@author A0110491U
     /**
      * Returns true if a given string is a valid deadline ByDate.
      */
@@ -59,9 +67,10 @@ public class ByDate {
         return false;
     }
 
+  //@@author
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override

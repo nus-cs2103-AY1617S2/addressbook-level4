@@ -2,12 +2,15 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.ByDate;
 
 /**
  * Helper functions for handling strings.
@@ -17,6 +20,12 @@ public class StringUtil {
 	public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments should be in HH:MM format, e.g. 12:00 represents noon";
 	
 	public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments should be in YYYY-MM-DD format, e.g. 2010-12-05";
+
+    public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
+                            + "HH:MM(AM/PM) format, e.g. 12:00pm";
+    public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
+                            + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
+    public static final int YEAR_CONVERSION_INDEX = 2000;
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -55,19 +64,7 @@ public class StringUtil {
         t.printStackTrace(new PrintWriter(sw));
         return t.getMessage() + "\n" + sw.toString();
     }
-    
-    /**
-     * Parse a String argument into time format.
-     * @param timeArg
-     * @return time in localTime format
-     * @throws IllegalValueException
-     */
-    public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
-        //empty time
-        if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
-        return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
-    }
-    
+
     /**
      * Parse a String argument into date format.
      * @param dateArg
@@ -80,6 +77,26 @@ public class StringUtil {
         return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
     }
 
+    /**
+     * Parse a String argument into date format.
+     * @param dateString
+     * @return time in LocalDate format
+     * @throws IllegalValueException
+     */
+    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
+        //empty start date
+        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
+        Pattern pattern = Pattern.compile(ByDate.BYDATE_VALIDATION_REGEX);
+        Matcher matchers = pattern.matcher(dateString);
+        matchers.matches();
+        int day = Integer.parseInt(matchers.group(1));
+        int month = Integer.parseInt(matchers.group(2));
+        int year = Integer.parseInt(matchers.group(3));
+        year += YEAR_CONVERSION_INDEX;
+
+        return LocalDate.of(year, month, day);
+    }
+//@@author
     /**
      * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
      * Will return false if the string is:
