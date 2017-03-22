@@ -13,7 +13,7 @@ import java.util.Collection;
  */
 public class AutoCompleteDictionaryFactory {
 
-    public static final String[] COMMAND_WORDS = { "add", "delete", "list", "edit", "clear", "find", "undo", "redo", "help", "select" };
+    public static final String[] COMMAND_WORDS = { "add", "delete", "list", "edit", "clear", "find", "undo", "redo", "help", "select", "mark", "unmark" };
     
     public static final String[] COMMON_WORDS = { "breakfast", "lunch", "dinner", "class", "homework", "assigment" };
     
