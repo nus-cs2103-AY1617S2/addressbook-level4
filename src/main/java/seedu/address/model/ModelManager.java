@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ListIterator;
@@ -55,6 +56,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final HashMap<String, Integer> indexMap;
     private boolean completedViewOpen;
+
+    /**
+     * Compares two ReadOnlyTask by deadline. Tasks without deadline will be
+     * deemed as the smallest. If both tasks have deadline, the result will be
+     * the difference in their UNIX time.
+     */
+    private static final Comparator<? super ReadOnlyTask> TaskDatetimeComparator = new Comparator<ReadOnlyTask>() {
+        @Override
+        public int compare(ReadOnlyTask o1, ReadOnlyTask o2) {
+            return o1.compareTo(o2);
+        }
+    };
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -297,7 +310,9 @@ public class ModelManager extends ComponentManager implements Model {
                 completedID++;
             }
         }
-        printIndexMap(indexMap);
+        taskListToday.sort(TaskDatetimeComparator);
+        taskListFuture.sort(TaskDatetimeComparator);
+        taskListCompleted.sort(TaskDatetimeComparator);
     }
 
     // For debugging

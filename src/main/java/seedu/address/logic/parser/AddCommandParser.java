@@ -105,7 +105,8 @@ public class AddCommandParser {
                 arguments.add(new StringBuilder(matcher.group(i)).reverse()
                         .toString());
             }
-            args = matcher.group(length);
+            args = new StringBuilder(matcher.group(length)).reverse()
+                    .toString();
             return arguments;
         } else {
             return null;
@@ -120,6 +121,7 @@ public class AddCommandParser {
             args = tmpArgs;
             return null;
         }
+        args = new StringBuilder(args).reverse().toString();
         assert datesString
                 .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();

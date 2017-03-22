@@ -121,4 +121,10 @@ public class TestTask implements ReadOnlyTask {
     public String getID() {
         return this.id;
     }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }
