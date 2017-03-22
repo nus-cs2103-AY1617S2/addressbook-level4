@@ -34,8 +34,10 @@ import seedu.task.testutil.TypicalTestTasks;
  */
 public abstract class AddressBookGuiTest {
 
-	/* The TestName Rule makes the current test name available inside test
-     methods */
+	/*
+	 * The TestName Rule makes the current test name available inside test
+	 * methods
+	 */
 	@Rule
 	public TestName name = new TestName();
 
@@ -77,17 +79,16 @@ public abstract class AddressBookGuiTest {
 			this.stage = stage;
 		});
 		EventsCenter.clearSubscribers();
-		testApp = (TestApp) FxToolkit.setupApplication(() -> new
-				TestApp(this::getInitialData, getDataFileLocation()));
+		testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
 		FxToolkit.showStage();
-		while (!stage.isShowing());
+		while (!stage.isShowing())
+			;
 		mainGui.focusOnMainApp();
 	}
 
 	/**
-	 * Override this in child classes to set the initial local data.
-	 * Return null to use the data in the file specified in {@link
-     #getDataFileLocation()}
+	 * Override this in child classes to set the initial local data. Return null
+	 * to use the data in the file specified in {@link #getDataFileLocation()}
 	 */
 	protected TaskList getInitialData() {
 		TaskList ab = new TaskList();
@@ -123,16 +124,17 @@ public abstract class AddressBookGuiTest {
 	}
 
 	/**
-	 * Asserts the message shown in the Result Display area is same as the
-     given string.
+	 * Asserts the message shown in the Result Display area is same as the given
+	 * string.
 	 */
 	protected void assertResultMessage(String expected) {
 		assertEquals(expected, resultDisplay.getText());
 	}
 
 	public void raise(BaseEvent e) {
-		//JUnit doesn't run its test cases on the UI thread. Platform.runLater is
-		//     used to post event on the UI thread.
+		// JUnit doesn't run its test cases on the UI thread. Platform.runLater
+		// is
+		// used to post event on the UI thread.
 		Platform.runLater(() -> EventsCenter.getInstance().post(e));
 	}
 }

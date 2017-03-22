@@ -9,18 +9,18 @@ public class ClearCommandTest extends AddressBookGuiTest {
 	@Test
 	public void clear() {
 
-		//verify a non-empty list can be cleared
+		// verify a non-empty list can be cleared
 		assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
 		assertClearCommandSuccess();
 
-		//     //verify other commands can work after a clear command
-		//     commandBox.runCommand(td.hoon.getAddCommand());
-		//     assertTrue(personListPanel.isListMatching(td.hoon));
-		//     commandBox.runCommand("delete 1");
-		//     assertListSize(0);
+		// //verify other commands can work after a clear command
+		// commandBox.runCommand(td.hoon.getAddCommand());
+		// assertTrue(personListPanel.isListMatching(td.hoon));
+		// commandBox.runCommand("delete 1");
+		// assertListSize(0);
 		//
-		//     //verify clear command works when the list is empty
-		//     assertClearCommandSuccess();
+		// //verify clear command works when the list is empty
+		// assertClearCommandSuccess();
 	}
 
 	private void assertClearCommandSuccess() {
