@@ -51,12 +51,14 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <title> [t/TAG|Deadline]`
+Format: `add <title> <t/TAG|by|from> [date] [to] [date]
 
 Examples:
 
-* `add Group Meeting t/study t/school by Wednesday 8 pm`
+* `add finish hw t/study t/school by April 5th`
 * `add Interview t/work`
+* `add friend's party t/leisure t/friend from next Wednesday 8 pm to next Wednesday at 11pm`
+
 
 > Tasks can have any number of tags (including 0)
 
@@ -86,8 +88,11 @@ Examples:
 * `edit 2 title finish SWE HW`<br>
   Edit the second task title to finish SWE HW.
   
-* `edit 1 deadline this Friday 3 pm`<br>
-  Edit the first task deadline to this Friday 3pm.
+* `edit 1 start this Friday 3 pm`<br>
+  Edit the first task start time to this Friday 3pm.
+
+* `edit 5 end April 5th at 4 pm`<br>
+  Edit the fifth task end time to April 5th at 4pm.
   
 * `edit 1 tag null`<br>
   Remove all the tags of first task.
