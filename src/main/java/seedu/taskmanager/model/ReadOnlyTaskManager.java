@@ -2,7 +2,7 @@ package seedu.taskmanager.model;
 
 
 import javafx.collections.ObservableList;
-import seedu.taskmanager.model.category.Category;
+//import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**

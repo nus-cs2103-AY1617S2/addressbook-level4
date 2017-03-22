@@ -1,8 +1,8 @@
 package seedu.taskmanager.logic.commands;
 
 import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.model.Model;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
