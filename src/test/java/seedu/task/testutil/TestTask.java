@@ -128,7 +128,9 @@ public class TestTask implements ReadOnlyTask {
                 ||(this.getEndDate().equals(o.getEndDate()))) {
             return this.getName().fullName.compareTo(o.getName().fullName);
         } else {
-            return (Date.doesPrecede(this.getEndDate(), o.getEndDate())) ? -1 : 1;
+            if (this.getEndDate().isNull()) return 1;
+            if (o.getEndDate().isNull()) return -1;
+            return (Date.isBefore(this.getEndDate(), o.getEndDate())) ? -1 : 1;
         }
     }
 }
