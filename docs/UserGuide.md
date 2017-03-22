@@ -29,11 +29,15 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Some example commands you can try:
-   * **`list`** : lists all tasks in the main application window
-   * **`add`**` Do laundry` : adds a task named `Do laundry` to the task manager.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
+5. Example of a sequence of commands entered:
+   * **`add`**` Do laundry p/low b/31/12/2017 12:00` : Jim wants to do laundry at noon, so he adds it to the task manager.
+   * **`sort`**` priority` : Jim wants to see the most urgent tasks at the top of his list.
+   * **`mark`**` 1 2` : Jim realises he has completed the 1st and 2nd task so he marks them as completed.
+   * **`delete`**` 3` : Jim realises he does not have to complete the 3rd task so he deletes it from his current list.
+   * **`find`**` laundry` : Jim gets a call from his mother that the laundry must be completed by 3pm.
+   * **`edit`**` 1 p/hi` : Jim updates the priority of the found laundry task to high.
+   * **`list`** : Jim wants to get back to the overview of his list of tasks.
+   * **`exit`** : Jim is done for the day so he decides to exit the application!
 6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
