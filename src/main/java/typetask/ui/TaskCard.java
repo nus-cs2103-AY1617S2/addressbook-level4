@@ -13,80 +13,80 @@ import typetask.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-	private static final String FXML = "TaskListCard.fxml";
-	public static final String OVERDUE_STYLE_CLASS = "overdue";
-	public static final String PENDING_STYLE_CLASS = "pending";
-	public static final String PRIORITY_STYLE_CLASS = "priority";
+    private static final String FXML = "TaskListCard.fxml";
+    public static final String OVERDUE_STYLE_CLASS = "overdue";
+    public static final String PENDING_STYLE_CLASS = "pending";
+    public static final String PRIORITY_STYLE_CLASS = "priority";
 
     @FXML
-	private HBox cardPane;
+    private HBox cardPane;
     @FXML
-	private HBox taskNamePane;
+    private HBox taskNamePane;
     @FXML
-	private HBox datePane;
+    private HBox datePane;
     @FXML
-	private HBox timePane;
+    private HBox timePane;
     @FXML
-	private Label name;
+    private Label name;
     @FXML
-	private Label id;
+    private Label id;
     @FXML
-	private Label date;
+    private Label date;
     @FXML
-	private Label time;
+    private Label time;
     @FXML
-	private Label endDate;
+    private Label endDate;
     @FXML
-	private Label endTime;
+    private Label endTime;
     @FXML
-	private Pane colourTag;
-	private LocalDateTime now = LocalDateTime.now();
-	private LocalDate nowDate = now.toLocalDate();
-	private String inputPattern = "dd/MM/yyyy";
-	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(inputPattern);
+    private Pane colourTag;
+    private LocalDateTime now = LocalDateTime.now();
+    private LocalDate nowDate = now.toLocalDate();
+    private String inputPattern = "dd/MM/yyyy";
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(inputPattern);
     // NOTE: only instantiated for non-floating task
-	private LocalDate parsedDate;
-	private boolean parsedDateFlag = false;
+    private LocalDate parsedDate;
+    private boolean parsedDateFlag = false;
 
-	public TaskCard(ReadOnlyTask task, int displayedIndex) {
-		super(FXML);
-		name.setText(task.getName().fullName);
-		id.setText(displayedIndex + ". ");
-		date.setText(task.getDate().value);
-		time.setText(task.getTime().value);
-		if (!task.getDate().value.equals("")) {
-			parsedDateFlag = true;
-			parsedDate = LocalDate.parse(task.getDate().value, dtf);
-		}
-		setColourCode();
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+        super(FXML);
+        name.setText(task.getName().fullName);
+        id.setText(displayedIndex + ". ");
+        date.setText(task.getDate().value);
+        time.setText(task.getTime().value);
+        if (!task.getDate().value.equals("")) {
+            parsedDateFlag = true;
+            parsedDate = LocalDate.parse(task.getDate().value, dtf);
+        }
+        setColourCode();
         //add endDate.setText(...);
 
 	}
 
-	//@@author A0139154E
-	private void setColourCode() {
-		if (parsedDateFlag == true) {
-			if (parsedDate.isBefore(nowDate)) {
-				setStyleToIndicateOverdue();
-			} else {
-				setStyleToIndicatePending();
-			}
-		}
-	}
-
-	//@@author A0139154E
-	private void setStyleToIndicateOverdue() {
-		colourTag.getStyleClass().add(OVERDUE_STYLE_CLASS);
-	}
-
-	//@@author A0139154E
-	private void setStyleToIndicatePending() {
-		colourTag.getStyleClass().add(PENDING_STYLE_CLASS);
+    //@@author A0139154E
+    private void setColourCode() {
+        if (parsedDateFlag == true) {
+            if (parsedDate.isBefore(nowDate)) {
+                setStyleToIndicateOverdue();
+            } else {
+                setStyleToIndicatePending();
+            }
+        }
     }
 
-	//@@author A0139154E
-	private void setStyleToIndicatePriority() {
-		colourTag.getStyleClass().add(PRIORITY_STYLE_CLASS);
-	}
+    //@@author A0139154E
+    private void setStyleToIndicateOverdue() {
+        colourTag.getStyleClass().add(OVERDUE_STYLE_CLASS);
+    }
+
+    //@@author A0139154E
+    private void setStyleToIndicatePending() {
+        colourTag.getStyleClass().add(PENDING_STYLE_CLASS);
+    }
+
+    //@@author A0139154E
+    private void setStyleToIndicatePriority() {
+        colourTag.getStyleClass().add(PRIORITY_STYLE_CLASS);
+    }
 
 }
