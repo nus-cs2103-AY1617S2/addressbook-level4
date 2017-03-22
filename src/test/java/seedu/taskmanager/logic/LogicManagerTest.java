@@ -190,6 +190,14 @@ public class LogicManagerTest {
                 + "description.butNoEndDatePrefix", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, "
                 + "description.butNoDescriptionPrefix", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
+        // @@author A0140032E
+        assertCommandFailure("add Valid Title s/02/01/2017 e/01/01/2017 d/valid, description",
+                AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
+        assertCommandFailure("add Valid Title e/01/01/1970 d/valid, description",
+                AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
+        assertCommandFailure("add Valid Title s/01/01/2099 d/valid, description",
+                AddCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
+        // @@author
     }
 
     @Test
@@ -202,7 +210,6 @@ public class LogicManagerTest {
                 EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description #invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
-
     }
 
     @Test
