@@ -29,7 +29,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-5. Example of a sequence of commands entered:
+5. Let's have a look at how Jim, an avid Opus fan, utilises the task manager:
    * **`add`**` Do laundry p/low b/31/12/2017 12:00` : Jim wants to do laundry at noon, so he adds it to the task manager.
    * **`sort`**` priority` : Jim wants to see the most urgent tasks at the top of his list.
    * **`mark`**` 1 2` : Jim realises he has completed the 1st and 2nd task so he marks them as completed.
