@@ -170,7 +170,11 @@ public class LeftPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LabelCard(label, labelCount.get(label)).getRoot());
+                Integer newCount = labelCount.get(label);
+                if (newCount == null) {
+                    newCount = 1;
+                }
+                setGraphic(new LabelCard(label, newCount).getRoot());
             }
         }
     }
