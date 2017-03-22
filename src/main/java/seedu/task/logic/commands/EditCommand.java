@@ -61,8 +61,8 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToEdit));
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToEdit, (Task) editedTask));
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);

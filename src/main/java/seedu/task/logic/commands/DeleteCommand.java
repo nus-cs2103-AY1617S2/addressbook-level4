@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
-            mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToDelete));
+            mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToDelete, null));
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
