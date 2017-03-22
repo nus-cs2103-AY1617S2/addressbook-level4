@@ -62,7 +62,7 @@ public class CompleteCommand extends Command {
             ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
             Task completedTask = createCompletedTask(taskToEdit);
             try {
-                model.updateTask(indexList.get(i), completedTask);
+                model.updateTask(taskToEdit, completedTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
