@@ -19,11 +19,15 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private HBox dateBox;
+    @FXML
     private Label startDate;
     @FXML
-    private Label description;
-    @FXML
     private Label endDate;
+    @FXML
+    private HBox descriptionBox;
+    @FXML
+    private Label description;
     @FXML
     private FlowPane tags;
 
@@ -31,13 +35,32 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(Character.toString(indexPrefix) + displayedIndex);
-        startDate.setText(task.getStartDate().value);
-        description.setText(task.getDescription().value);
-        endDate.setText(task.getEndDate().value);
+        setDate(task);
+        setDescription(task);
         initTags(task);
         if (task.getDoneStatus()) {
             PseudoClass donePseudoClass = PseudoClass.getPseudoClass("done");
             name.pseudoClassStateChanged(donePseudoClass, true);
+        }
+    }
+
+    private void setDate(ReadOnlyTask task) {
+        String startDateText = task.getStartDate().value;
+        String endDateText = task.getEndDate().value;
+        if (startDateText.length() > 0 || endDateText.length() > 0) {
+            startDate.setText(startDateText);
+            endDate.setText(endDateText);
+        } else {
+            dateBox.getChildren().clear();
+        }
+    }
+
+    private void setDescription(ReadOnlyTask task) {
+        String descriptionText = task.getDescription().value;
+        if (descriptionText.length() > 0) {
+            description.setText(descriptionText);
+        } else {
+            descriptionBox.getChildren().clear();
         }
     }
 
