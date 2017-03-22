@@ -43,7 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
     	int i = 0;
     	int j = 0;
     	while (i <= t.length() - p.length()) {
-    		if (p.substring(j, j + 1).equals(t.substring(i + j, i + j + 1))) {
+    		if (p.substring(j, j + 1).equalsIgnoreCase(t.substring(i + j, i + j + 1))) {
     			j++;
     			if (j >= p.length()) {
     				return true;
