@@ -23,12 +23,16 @@ public class DeleteCommand extends Command implements Undoable {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    //@@author A0150120H
     public static final String MESSAGE_DUPLICATE_TASK = "%1$s already exists in the task manager";
+    //@@author
 
     public final int targetIndex;
     public final TaskType type;
+    //@@author A0150120H
     private ReadOnlyTask taskToDelete;
     private boolean commandSuccess;
+    //@@author
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
@@ -75,11 +79,14 @@ public class DeleteCommand extends Command implements Undoable {
     @Override
     public String undo() throws CommandException {
         try {
-            model.addTask(new Task(taskToDelete));
+            assert taskToDelete instanceof Task;
+
+            model.addTask((Task) taskToDelete);
             return String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
         } catch (DuplicateTaskException e) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, taskToDelete));
         }
     }
+    //@@author
 
 }

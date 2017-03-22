@@ -14,11 +14,12 @@ import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
+import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Edits the details of an existing task in the task manager.
  */
-public class EditCommand extends Command {
+public class EditCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -36,6 +37,10 @@ public class EditCommand extends Command {
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
+    private boolean commandSuccess;
+    private ReadOnlyTask taskToEdit;
+    private ReadOnlyTask originalTask;
+
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
@@ -48,6 +53,7 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        commandSuccess = false;
     }
 
     @Override
@@ -58,14 +64,17 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        taskToEdit = lastShownList.get(filteredTaskListIndex);
+        originalTask = new Task(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(taskToEdit, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
+        commandSuccess = true;
+        undoHistory.push(this);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
@@ -211,4 +220,23 @@ public class EditCommand extends Command {
             return tags;
         }
     }
+
+    //@@author A0150120H
+    @Override
+    public boolean isUndoable() {
+        return commandSuccess;
+    }
+
+    @Override
+    public String undo() throws CommandException {
+        // TODO Auto-generated method stub
+        try {
+            model.updateTask(taskToEdit, originalTask);
+            model.updateFilteredListToShowAll();
+            return String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit);
+        } catch (DuplicateTaskException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+    }
+    //@@author
 }
