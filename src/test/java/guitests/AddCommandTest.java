@@ -59,5 +59,4 @@ public class AddCommandTest extends DoistGUITest {
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
-
 }
