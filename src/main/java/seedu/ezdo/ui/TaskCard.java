@@ -54,6 +54,7 @@ public class TaskCard extends UiPart<Region> {
         case "3":
             priorityColor.setStyle("-fx-background-color: red");
             break;
+        default:
 
         }
 
