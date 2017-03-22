@@ -5,6 +5,7 @@ import java.util.Set;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.Task.IllegalTimeException;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -12,8 +13,9 @@ import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
-    /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskBook newData);
+    /** Clears existing backing model and replaces with the provided new data. 
+     * @throws IllegalTimeException */
+    void resetData(ReadOnlyTaskBook newData) throws IllegalTimeException;
 
     /** Returns the AddressBook */
     ReadOnlyTaskBook getAddressBook();
@@ -29,10 +31,11 @@ public interface Model {
      *
      * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
+     * @throws IllegalTimeException 
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException; 
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
