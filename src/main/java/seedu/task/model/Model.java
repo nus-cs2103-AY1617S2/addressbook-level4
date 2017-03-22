@@ -17,16 +17,20 @@ public interface Model {
      * @throws IllegalValueException */
     void resetData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
-    /** Returns the TaskManager */
+    /** Undo last command.
+     * @throws IllegalValueException */
+    void undoData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    
+    /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Updates the task to done */
+    /** Updates the task to done. */
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given Task */
+    /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**

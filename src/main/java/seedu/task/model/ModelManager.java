@@ -48,17 +48,27 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
 
+    /**
+     * undo should not change storage files.
+     */
+    @Override
+    public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
+        taskManager.resetData(newData);      
+        indicateTaskManagerChanged(false);  
+    }
+    
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
-    /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+    /** Raises an event to indicate the model has changed 
+     * @param shouldBackup TODO*/
+    private void indicateTaskManagerChanged(boolean shouldBackup) {
+        raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
     }
     
     /** Raises an event to indicate the file path has changed */
@@ -69,21 +79,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
 
     @Override
     public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateDone(taskManagerIndex, target);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
 
     @Override
@@ -93,7 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
     
     @Override 
@@ -106,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void changeFilePath(String newPath) {
     	indicateFilePathChanged(newPath);
-    	indicateTaskManagerChanged();
+    	indicateTaskManagerChanged(false);
     }
 
     //=========== Filtered Task List Accessors =============================================================

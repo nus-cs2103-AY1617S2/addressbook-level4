@@ -7,9 +7,11 @@ import seedu.task.model.ReadOnlyTaskManager;
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
+    public final boolean shouldBackup;
 
-    public TaskManagerChangedEvent(ReadOnlyTaskManager data) {
+    public TaskManagerChangedEvent(ReadOnlyTaskManager data, boolean shouldBackup) {
         this.data = data;
+        this.shouldBackup = shouldBackup;
     }
 
     @Override

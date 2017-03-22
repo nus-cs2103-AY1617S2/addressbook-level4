@@ -17,9 +17,9 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD_2 = "uhoh";
     public static final String MESSAGE_SUCCESS = "Last action undone!";
     public static final String MESSAGE_FAIL = "Unable to undo. data/backup.xml not found.";
-    public static final String BACKUP_FILE_PATH = "data/backup.xml";
+    private static final String BACKUP_FILE_PATH = "data/backup.xml";
     public static String backupFilePath = BACKUP_FILE_PATH;
-
+    
     public static void setBackupFilePath(String backupFilePath) {
         UndoCommand.backupFilePath = backupFilePath;
     }
@@ -38,7 +38,7 @@ public class UndoCommand extends Command {
                 return new CommandResult(MESSAGE_FAIL);
             }
             backupData = taskManagerOptional.get();
-            model.resetData(backupData);
+            model.undoData(backupData);
         } catch (DataConversionException e) {
             return new CommandResult(MESSAGE_FAIL);
         } catch (IOException e) {

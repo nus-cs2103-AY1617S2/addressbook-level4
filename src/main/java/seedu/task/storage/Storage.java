@@ -1,5 +1,6 @@
 package seedu.task.storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -30,6 +31,9 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     @Override
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
+    @Override
+    void saveBackup() throws IOException, FileNotFoundException;
+    
     void handleFilePathChangedEvent(FilePathChangedEvent fpce);
     /**
      * Saves the current version of KIT to the hard disk.

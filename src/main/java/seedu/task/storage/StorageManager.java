@@ -1,5 +1,6 @@
 package seedu.task.storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -91,6 +92,12 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
+
+    @Override
+    public void saveBackup() throws IOException, FileNotFoundException {
+        logger.fine("Attempting to backup data");
+        taskManagerStorage.saveBackup();
+    }
     
     @Override
     @Subscribe
@@ -112,6 +119,9 @@ public class StorageManager extends ComponentManager implements Storage {
 
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
+            if(event.shouldBackup){
+                saveBackup();
+            }
             saveTaskManager(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));

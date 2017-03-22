@@ -1,5 +1,6 @@
 package seedu.task.storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -43,4 +44,5 @@ public interface TaskManagerStorage {
      */
     void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
 
+    void saveBackup() throws IOException, FileNotFoundException;
 }
