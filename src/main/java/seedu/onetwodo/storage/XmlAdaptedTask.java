@@ -11,6 +11,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
@@ -27,6 +28,8 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String endDate;
     @XmlElement(required = true)
+    private String priority;
+    @XmlElement(required = true)
     private String description;
     @XmlElement(required = true)
     private String isDone;
@@ -35,21 +38,24 @@ public class XmlAdaptedTask {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedTask.
-     * This is the no-arg constructor that is required by JAXB.
+     * Constructs an XmlAdaptedTask. This is the no-arg constructor that is
+     * required by JAXB.
      */
-    public XmlAdaptedTask() {}
-
+    public XmlAdaptedTask() {
+    }
 
     /**
      * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedTask
+     * @param source
+     *            future changes to this will not affect the created
+     *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         startDate = source.getStartDate().value;
         endDate = source.getEndDate().value;
+        priority = source.getPriority().value;
         description = source.getDescription().value;
         isDone = String.valueOf(source.getDoneStatus());
         tagged = new ArrayList<>();
@@ -59,9 +65,12 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted task object into the model's Task object.
+     * Converts this jaxb-friendly adapted task object into the model's Task
+     * object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted task
+     * @throws IllegalValueException
+     *             if there were any data constraints violated in the adapted
+     *             task
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
@@ -71,9 +80,10 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final StartDate startDate = new StartDate(this.startDate);
         final EndDate endDate = new EndDate(this.endDate);
+        final Priority priority = new Priority(this.priority);
         final Description description = new Description(this.description);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        Task task = new Task(name, startDate, endDate, description, tags, Boolean.valueOf(this.isDone));
+        Task task = new Task(name, startDate, endDate, priority, description, tags, Boolean.valueOf(this.isDone));
         return task;
     }
 }

@@ -5,6 +5,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.TaskType;
@@ -18,6 +19,7 @@ public class TestTask implements ReadOnlyTask {
     private Description description;
     private EndDate endDate;
     private StartDate startDate;
+    private Priority priority;
     private boolean isDone = false;
     private TaskType type;
     private UniqueTagList tags;
@@ -34,6 +36,7 @@ public class TestTask implements ReadOnlyTask {
         this.name = taskToCopy.getName();
         this.startDate = taskToCopy.getStartDate();
         this.endDate = taskToCopy.getEndDate();
+        this.priority = taskToCopy.getPriority1();
         this.description = taskToCopy.getDescription();
         this.isDone = taskToCopy.getDoneStatus();
         this.tags = taskToCopy.getTags();
@@ -64,6 +67,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public EndDate getEndDate() {
         return endDate;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
@@ -99,6 +107,10 @@ public class TestTask implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
     public void setDescription(Description description) {
         this.description = description;
     }
@@ -129,6 +141,9 @@ public class TestTask implements ReadOnlyTask {
         if (this.hasEndDate()) {
             sb.append("e/" + this.getEndDate().value + " ");
         }
+        if (this.hasPriority()) {
+            sb.append("p/" + this.getPriority().value + " ");
+        }
         if (this.hasDescription()) {
             sb.append("d/" + this.getDescription().value + " ");
         }
@@ -138,4 +153,5 @@ public class TestTask implements ReadOnlyTask {
 
         return sb.toString();
     }
+
 }
