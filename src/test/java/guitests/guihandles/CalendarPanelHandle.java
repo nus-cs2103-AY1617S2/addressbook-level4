@@ -9,7 +9,7 @@ import seedu.tache.TestApp;
  */
 public class CalendarPanelHandle extends GuiHandle {
 
-    private static final String CALENDAR_ID = "#browser";
+    private static final String CALENDAR_ID = "#calendar";
 
     public CalendarPanelHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
