@@ -44,7 +44,6 @@ import seedu.address.model.tag.UniqueTagList;
 //import seedu.address.model.task.Address;
 //import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
@@ -416,11 +415,10 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adam Brown");
             Time privateTime = new Time("12/12/2012");
-            Priority priority = new Priority("high");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateTime, priority, tags);
+            return new Task(name, privateTime, tags);
         }
 
         /**
@@ -435,7 +433,6 @@ public class LogicManagerTest {
                     new Name("Task " + seed),
                     new Time("0" + (Math.abs(seed) % 30 + 1) + "/0" +
                     (Math.abs(seed) % 12 + 1) + "/" + (Math.abs(seed) % 3000 + 1000)),
-                    new Priority("high"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -532,7 +529,6 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Time("01/01/2012"),
-                    new Priority("high"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

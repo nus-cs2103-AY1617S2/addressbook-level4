@@ -33,7 +33,6 @@ import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
@@ -74,7 +73,7 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Time("09/08/1990"), new Priority("high"), new UniqueTagList()),
+                new Task(new Name("Ali Muster"), new Time("09/08/1990"), new UniqueTagList()),
 
             };
             //CHECKSTYLE.ON: LineLength

@@ -417,7 +417,7 @@ Use case ends.
 **Extensions**
 
 1a. List is empty
->1a1. System informs user that there is no task to list.
+>1a1. System informs user that there is no task to list. 
 >Use case ends.
 
 #### Use case: remove a task
