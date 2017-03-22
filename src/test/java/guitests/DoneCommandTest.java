@@ -102,7 +102,7 @@ public class DoneCommandTest extends TaskListGuiTest {
      * Runs done command to mark the task at the specified index as completed
      * Confirms the result is correct
      * @param filteredTaskListIndex index of task to mark as complete in filtered list
-     * @param currentList index of task to mark as complete in the address book.
+     * @param currentList index of task to mark as complete in FlexiTask.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param doneTask is the expected task after marking a task as completed
      */
