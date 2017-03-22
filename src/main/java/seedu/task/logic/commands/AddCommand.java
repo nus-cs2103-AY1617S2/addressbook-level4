@@ -8,6 +8,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.logic.history.TaskMemento;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
@@ -56,6 +57,7 @@ public class AddCommand extends Command {
                 dueDate,
                 duration,
                 new UniqueTagList(tagSet),
+                new Complete(false),
                 new TaskId(id)
         );
     }

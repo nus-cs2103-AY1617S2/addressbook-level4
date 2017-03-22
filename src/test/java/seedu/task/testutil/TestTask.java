@@ -1,6 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.DueDate;
 import seedu.task.model.task.Duration;
@@ -17,9 +18,11 @@ public class TestTask implements ReadOnlyTask {
     private DueDate dueDate;
     private Duration duration;
     private UniqueTagList tags;
+    private Complete complete;
 
     public TestTask() {
         tags = new UniqueTagList();
+        complete = new Complete(false);
     }
 
     /**
@@ -31,6 +34,7 @@ public class TestTask implements ReadOnlyTask {
         this.dueDate = taskToCopy.getDueDate();
         this.duration = taskToCopy.getDuration();
         this.tags = taskToCopy.getTags();
+        this.complete = taskToCopy.getComplete();
     }
 
     public void setDescription(Description description) {
@@ -105,6 +109,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
+    }
+
+    @Override
+    public Complete getComplete() {
+        return this.complete;
     }
 
 }

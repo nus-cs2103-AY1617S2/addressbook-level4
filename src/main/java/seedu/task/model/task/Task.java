@@ -16,6 +16,7 @@ public class Task implements ReadOnlyTask {
     private DueDate dueDate;
     private Duration duration;
     private UniqueTagList tags;
+    private Complete complete;
 
 
     /**
@@ -25,12 +26,20 @@ public class Task implements ReadOnlyTask {
      * @param duration may be null
      * @param tags must not be null
      */
-    public Task(Description description, DueDate dueDate, Duration duration, UniqueTagList tags, TaskId id) {
-        assert !CollectionUtil.isAnyNull(description, tags, id);
+    public Task(
+            Description description,
+            DueDate dueDate,
+            Duration duration,
+            UniqueTagList tags,
+            Complete complete,
+            TaskId id
+    ) {
+        assert !CollectionUtil.isAnyNull(description, tags, complete, id);
         this.description = description;
         this.dueDate = dueDate;
         this.duration = duration;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.complete = complete;
         this.id = id;
     }
 
@@ -38,7 +47,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(), source.getTaskId());
+        this(source.getDescription(), source.getDueDate(), source.getDuration(), source.getTags(),
+                source.getComplete(), source.getTaskId());
     }
 
     @Override
@@ -74,10 +84,23 @@ public class Task implements ReadOnlyTask {
         return duration;
     }
 
+    @Override
+    public Complete getComplete() {
+        return complete;
+    }
+
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
     //@@evanyeung
+
+    public void setComplete() {
+        this.complete.setComplete();
+    }
+
+    public void setNotComplete() {
+        this.complete.setNotComplete();
+    }
 
     @Override
     public UniqueTagList getTags() {
@@ -103,6 +126,11 @@ public class Task implements ReadOnlyTask {
         this.setDescription(replacement.getDescription());
         this.setDuration(replacement.getDuration());
         this.setDueDate(replacement.getDueDate());
+        if (replacement.getComplete().getCompletion()) {
+            this.setComplete();
+        } else {
+            this.setNotComplete();
+        }
         this.setTags(replacement.getTags());
     }
 
@@ -133,5 +161,4 @@ public class Task implements ReadOnlyTask {
     public String getDurationEnd() {
         return duration == null ? null : duration.getEndString();
     }
-
 }
