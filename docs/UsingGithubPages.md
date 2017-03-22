@@ -7,6 +7,7 @@ webpages using files in their GitHub repositories.
 <br><br>
 
 ## Setting Up
+<br>
 
 GitHub Pages offers two kinds of sites: user/organization sites and project sites.
 Since we are using GitHub Pages to showcase the documentation for our project, we will be creating a project site.
