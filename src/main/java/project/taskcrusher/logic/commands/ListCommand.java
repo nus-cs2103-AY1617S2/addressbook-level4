@@ -1,6 +1,8 @@
 package project.taskcrusher.logic.commands;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.task.Deadline;
@@ -50,8 +52,19 @@ public class ListCommand extends Command {
             model.updateFilteredEventListToShowAll();
         } else if (until != null) {
             model.updateFilteredTaskList(until);
+
+            // TODO ghetto fix
+            Set<String> keywords = new HashSet<String>();
+            keywords.add("4yuf5g24f4trfty");
+            model.updateFilteredEventList(keywords);
+
         } else if (dateRange != null) {
             model.updateFilteredEventList(dateRange);
+
+            // TODO ghetto fix
+            Set<String> keywords = new HashSet<String>();
+            keywords.add("4yuf5g24f4trfty");
+            model.updateFilteredTaskList(keywords);
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
