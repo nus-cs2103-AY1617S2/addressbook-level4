@@ -79,7 +79,9 @@ public class DeleteCommand extends Command implements Undoable {
     @Override
     public String undo() throws CommandException {
         try {
-            model.addTask(new Task(taskToDelete));
+            assert taskToDelete instanceof Task;
+
+            model.addTask((Task) taskToDelete);
             return String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
         } catch (DuplicateTaskException e) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, taskToDelete));
