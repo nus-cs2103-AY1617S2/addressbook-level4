@@ -124,7 +124,7 @@ Examples:
 * `view all`
 * `view floating`
 
-## 3.10. Finding all tasks containing any keyword in the task name or description: `find`
+## 3.10. Finding all tasks using keyword or deadline: `find`
 
 Finds tasks that satisfy given parameters<br>
 Format: find KEYWORDS [dl/DATE]
