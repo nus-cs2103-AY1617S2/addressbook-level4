@@ -9,7 +9,9 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class CurrentDate {
 
     public static final String MESSAGE_DAY_CONSTRAINTS = "Task date should be either "
-            + "a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)";
+            + "a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
+            + "May also include time (e.g. 1400) behind date \n"
+            + "Enter HELP for user guide with detailed explanations of all commands";
 
     public static final String CURRENTDATE_VALIDATION_REGEX_TODAY1 = "Today";
     public static final String CURRENTDATE_VALIDATION_REGEX_TODAY2 = "today";

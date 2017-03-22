@@ -197,13 +197,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("ADD []\\[;] ON date starttime TO endtime",
+        assertCommandFailure("ADD []\\[;] ON 03/03/17 1400 TO 1600",
                 TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
-        assertCommandFailure("ADD Valid TaskName ON wrongdateformat starttime TO endtime",
+        assertCommandFailure("ADD Valid TaskName ON wrongdateformat 1400 TO 1600",
                 Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("ADD Valid TaskName ON date wrongstarttimeformat TO endtime",
+        assertCommandFailure("ADD Valid TaskName ON thursday 1400hrs TO 1600",
                 StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
-        assertCommandFailure("ADD Valid Name ON date starttime TO wrongendtimeformat",
+        assertCommandFailure("ADD Valid Name ON thursday 1400 TO 1600hrs",
                 EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
 //        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 //                Category.MESSAGE_TAG_CONSTRAINTS);
@@ -233,7 +233,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.travis();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // task already in internal task manager
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -324,7 +324,7 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("DELETE", expectedMessage);
+        assertIncorrectIndexFormatBehaviorForCommand("DELETE ", expectedMessage);
     }
 
     @Test
@@ -351,7 +351,7 @@ public class LogicManagerTest {
     @Test
     public void execute_search_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE);
-        assertCommandFailure("search ", expectedMessage);
+        assertCommandFailure("SEARCH ", expectedMessage);
     }
 
     @Test
@@ -436,12 +436,7 @@ public class LogicManagerTest {
          * @param seed used to generate the person data field values
          */
         Task generateTask(int seed) throws Exception {
-            if (seed > 100) {
-                seed = seed/100;
-            } else if (seed > 10) {
-                seed = seed/10;
-            }
-
+            seed = seed%10;
             return new Task(
                     new TaskName("Task " + seed),
                     new Date(seed + "/02/17"),
@@ -458,9 +453,13 @@ public class LogicManagerTest {
             cmd.append("ADD ");
 
             cmd.append(p.getTaskName().toString());
-            cmd.append(" ON").append(p.getDate());
-            cmd.append(" FROM").append(p.getStartTime());
-            cmd.append(" TO").append(p.getEndTime());
+            cmd.append(" ON");
+            cmd.append(p.getDate().toString());
+            cmd.append(" ");
+            cmd.append(p.getStartTime().toString());
+//            cmd.append(" FROM").append(p.getStartTime());
+            cmd.append(" TO");
+            cmd.append(p.getEndTime().toString());
 
 /*            UniqueCategoryList categories = p.getCategories();
             for (Category t: categories) {

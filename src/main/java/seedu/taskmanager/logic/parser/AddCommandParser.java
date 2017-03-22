@@ -84,9 +84,11 @@ public class AddCommandParser {
                         String[] splitedEndTime = endTime.split("\\s+");
                         try {
                             if (!(splitedEndTime[1].isEmpty())) {
-                                throw new IllegalValueException("Incorrect input after TO prefix.\n"
-                                        + "Example of Allowed Format: ADD task ON thursday 1200 TO 1400\n"
-                                        + "Type HELP for user guide with detailed explanations of all commands");
+                                throw new IllegalValueException("End time for task "
+                                        + "should only contain a day (e.g. thursday) "
+                                        + "or a date with the format: DD/MM/YY (e.g. 03/03/17))\n"
+                                        + "May also include time (e.g. 1400) behind date in some instances\n"
+                                        + "Enter HELP for user guide with detailed explanations of all commands");
                             }
                         } catch (ArrayIndexOutOfBoundsException aioobe) {
                             endTime = splitedEndTime[0];
@@ -103,9 +105,11 @@ public class AddCommandParser {
                         String[] splitedEndTime = endTime.split("\\s+");
                         try {
                             if (!(splitedEndTime[1].isEmpty())) {
-                                throw new IllegalValueException("Incorrect input after TO prefix.\n"
-                                        + "Example of Allowed Format: ADD task ON thursday 1200 TO 1400\n"
-                                        + "Type HELP for user guide with detailed explanations of all commands");
+                                throw new IllegalValueException("End time for task "
+                                        + "should only contain a day (e.g. thursday) "
+                                        + "or a date with the format: DD/MM/YY (e.g. 03/03/17))\n"
+                                        + "May also include time (e.g. 1400) behind date in some instances\n"
+                                        + "Enter HELP for user guide with detailed explanations of all commands");
                             }
                         } catch (ArrayIndexOutOfBoundsException aiobe) {
                             endTime = splitedEndTime[0];
@@ -231,9 +235,11 @@ public class AddCommandParser {
                     "Invalid command input!\nExample of Allowed Format: ADD e-mail John BY thursday 1400\n"
                             + "Type HELP for user guide with detailed explanations of all commands");
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand("Invalid input after prefix TO, only input of time is allowed\n"
-                    + "Example of Allowed Format: ADD project meeting ON thursday 1400 TO 1800\n"
-                    + "Type HELP for user guide with detailed explanations of all commands");
+            return new IncorrectCommand("Start/End time for task "
+                    + "should only contain a day (e.g. thursday) "
+                    + "or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
+                    + "May also include time (e.g. 1400) behind date in some instances\n"
+                    + "Enter HELP for user guide with detailed explanations of all commands");
         }
     }
 

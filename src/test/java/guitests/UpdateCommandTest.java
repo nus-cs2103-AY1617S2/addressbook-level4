@@ -22,13 +22,14 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
-
+    public TestTask updatedTask;
+    
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
         String detailsToUpdate = "take a snack break ON thursday 1500 TO 1600";
         int taskManagerIndex = 1;
 
-        TestTask updatedTask = new TaskBuilder().withTaskName("take a snack break").withDate("thursday")
+        updatedTask = new TaskBuilder(updatedTask).withTaskName("take a snack break").withDate("thursday")
                .withStartTime("1500").withEndTime("1600").build();//.withCategories("husband").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);

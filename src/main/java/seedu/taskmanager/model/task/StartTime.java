@@ -9,9 +9,9 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class StartTime {
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start time for task "
-            + "should only contain contain a day (e.g. thursday) "
-            + "or a date with the format: DD/MM/YY (e.g. 03/03/17))\n"
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start/End time for task "
+            + "should only contain a day (e.g. thursday) "
+            + "or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
             + "May also include time (e.g. 1400) behind date in some instances\n"
             + "Enter HELP for user guide with detailed explanations of all commands";
     public static final String STARTTIME_VALIDATION_REGEX1 = "\\d+";
