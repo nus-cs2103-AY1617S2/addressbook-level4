@@ -19,6 +19,7 @@ import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.ListCommand;
 import seedu.tache.logic.commands.SaveCommand;
 import seedu.tache.logic.commands.SelectCommand;
+import seedu.tache.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -78,6 +79,9 @@ public class Parser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
