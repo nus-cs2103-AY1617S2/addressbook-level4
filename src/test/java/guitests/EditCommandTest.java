@@ -45,10 +45,10 @@ public class EditCommandTest extends ToDoListGuiTest {
         String detailsToEdit = "t/interest t/hobby";
         String filteredIndex = "t1";
 
-        TaskType type = getTaskTypeFromIndex(filteredIndex);
+        TaskType type = TestUtil.getTaskTypeFromIndex(filteredIndex);
         TestTask[] todoTasks = TestUtil.getTasksByTaskType(tasksList, type);
 
-        TestTask taskToEdit = todoTasks[getFilteredIndexInt(filteredIndex)];
+        TestTask taskToEdit = todoTasks[TestUtil.getFilteredIndexInt(filteredIndex)];
         TestTask editedTask = new TaskBuilder(taskToEdit)
                 .withTags("interest", "hobby")
                 .build();
@@ -61,10 +61,10 @@ public class EditCommandTest extends ToDoListGuiTest {
         String detailsToEdit = "t/";
         String filteredIndex = "e2";
 
-        TaskType type = getTaskTypeFromIndex(filteredIndex);
+        TaskType type = TestUtil.getTaskTypeFromIndex(filteredIndex);
         TestTask[] expectedTasksList = TestUtil.getTasksByTaskType(tasksList, type);
 
-        TestTask taskToEdit = expectedTasksList[getFilteredIndexInt(filteredIndex)];
+        TestTask taskToEdit = expectedTasksList[TestUtil.getFilteredIndexInt(filteredIndex)];
         TestTask editedTask = new TaskBuilder(taskToEdit)
                 .withTags()
                 .build();
@@ -78,7 +78,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         String detailsToEdit = "meet bossy boss";
         String filteredIndex = "e1";
 
-        TaskType type = getTaskTypeFromIndex(filteredIndex);
+        TaskType type = TestUtil.getTaskTypeFromIndex(filteredIndex);
         TestTask[] expectedTasksList = TestUtil.getTasksByTaskType(tasksList, type);
 
         // simulate find result at index 2 in expectedTasksList
@@ -153,7 +153,7 @@ public class EditCommandTest extends ToDoListGuiTest {
             TestTask[] expected) {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " " + filteredTaskListIndex + " " + detailsToEdit);
 
-        int testTaskIndex = getFilteredIndexInt(filteredTaskListIndex);
+        int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask);
@@ -163,14 +163,6 @@ public class EditCommandTest extends ToDoListGuiTest {
         expected[testTaskIndex] = editedTask;
         assertTrue(taskListPanel.isListMatching(editedTask.getTaskType(), expected));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
-    }
-
-    private TaskType getTaskTypeFromIndex(String filteredIndex) {
-        return TaskType.getTaskTypeFromChar(filteredIndex.charAt(0));
-    }
-
-    private int getFilteredIndexInt(String filteredIndex) {
-        return Integer.parseInt(filteredIndex.substring(1)) - 1;
     }
 
 }

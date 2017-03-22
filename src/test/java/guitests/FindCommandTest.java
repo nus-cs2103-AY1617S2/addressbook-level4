@@ -1,6 +1,6 @@
 package guitests;
 
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -8,25 +8,27 @@ import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.FindCommand;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestTask;
 
 public class FindCommandTest extends ToDoListGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult(FindCommand.COMMAND_WORD + " Nemo"); // no results
-        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH, td.taskI); // multiple results
+        assertNoFindResults(FindCommand.COMMAND_WORD + " Nemo");
+        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH.getTaskType(), td.taskH, td.taskI);
 
         //find after deleting one result
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " t2");
-        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH);
+        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH.getTaskType(), td.taskH);
     }
 
     @Test
     public void find_emptyList() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
-        assertFindResult(FindCommand.COMMAND_WORD + " Dory"); // no results
+        assertNoFindResults(FindCommand.COMMAND_WORD + " Dory");
     }
+
 
     @Test
     public void find_invalidCommand_fail() {
@@ -34,10 +36,16 @@ public class FindCommandTest extends ToDoListGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits) {
+    private void assertNoFindResults(String command) {
+        assertFindResult(command, TaskType.DEADLINE);
+        assertFindResult(command, TaskType.EVENT);
+        assertFindResult(command, TaskType.TODO);
+    }
+
+    private void assertFindResult(String command, TaskType type, TestTask... expectedHits) {
         commandBox.runCommand(command);
-       // assertListSize(expectedHits.length);
+        assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");
-        //assertTrue(taskListPanel.isListMatching(expectedHits));
+        assertTrue(taskListPanel.isListMatching(type, expectedHits));
     }
 }

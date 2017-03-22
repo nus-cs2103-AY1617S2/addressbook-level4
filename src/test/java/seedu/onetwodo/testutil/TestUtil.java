@@ -369,4 +369,12 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+    public static TaskType getTaskTypeFromIndex(String filteredIndex) {
+        return TaskType.getTaskTypeFromChar(filteredIndex.charAt(0));
+    }
+
+    public static int getFilteredIndexInt(String filteredIndex) {
+        return Integer.parseInt(filteredIndex.substring(1)) - 1;
+    }
+
 }

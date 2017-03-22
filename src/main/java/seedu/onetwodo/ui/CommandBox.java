@@ -2,9 +2,11 @@ package seedu.onetwodo.ui;
 
 import java.util.logging.Logger;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.onetwodo.commons.core.LogsCenter;
@@ -75,4 +77,11 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.requestFocus();
     }
 
+    public void setKeyListener(EventHandler<KeyEvent> ke) {
+        commandTextField.setOnKeyPressed(ke);
+    }
+
+    public void removeKeyListeners() {
+        commandTextField.setOnKeyPressed(null);
+    }
 }

@@ -45,6 +45,7 @@ public class SelectCommand extends Command {
 
         ReadOnlyTask taskToSelect = filteredByDoneStatus.get(targetIndex - 1);
 
+        // Scroll to and open the event
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1, taskType));
         EventsCenter.getInstance().post(new TaskPanelSelectionChangedEvent(taskToSelect));
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, taskType.toString() + targetIndex));
