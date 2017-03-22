@@ -42,7 +42,7 @@ public class Timing implements Comparable<Timing> {
     /**
      * Returns if a given string is a valid date.
      */
-    private boolean isValidTiming(String test) {
+    public boolean isValidTiming(String test) {
         boolean isValid = false;
         if (test.equals(NULL_TIMING)) {
             isValid = true;

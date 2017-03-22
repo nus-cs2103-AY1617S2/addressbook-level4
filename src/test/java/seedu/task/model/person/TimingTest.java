@@ -1,15 +1,20 @@
-package seedu.task.model.person;
+// package seedu.task.model.person;
 
-import org.junit.Test;
+// import static org.junit.Assert.assertFalse;
 
-public class TimingTest {
+// import org.junit.Test;
+
+// import seedu.task.model.task.Timing;
+
+// public class TimingTest {
 
 
-    @Test
-    public void isValidEmail() {
+//     @Test
+//     public void isValidEmail() {
         // // blank email
         // Timing testTiming = new Timing("03/05/2017");
-     //     assertFalse(testTiming.isValidTiming("")); // empty string
+
+        // assertFalse(Timing.isValidTiming("")); // empty string
         // assertFalse(Timing.isValidTiming(" ")); // spaces only
         //
         // // missing parts
@@ -50,5 +55,5 @@ public class TimingTest {
         // // long domain name
         // assertTrue(Timing.isValidTiming("if.you.dream.it_you.can.do.it@youth_email.com"));
         // // long local part
-    }
-}
+//     }
+// }
