@@ -2,6 +2,7 @@ package seedu.task.logic.commands;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMementos;
 import seedu.task.model.Model;
 
 /**
@@ -9,6 +10,7 @@ import seedu.task.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected TaskMementos mementos;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -35,5 +37,9 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    public void setHistory(TaskMementos mementos) {
+        this.mementos = mementos;
     }
 }

@@ -7,6 +7,7 @@ import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMemento;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Complete;
 import seedu.task.model.task.Description;
@@ -62,6 +63,7 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToEdit, (Task) editedTask));
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);

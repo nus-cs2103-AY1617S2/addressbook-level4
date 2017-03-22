@@ -14,15 +14,14 @@ public class TaskMemento {
     public final Task oldTask;
     public final Task newTask;
 
-
     public TaskMemento(Task oldTask, Task newTask) {
         assert oldTask != null || newTask != null;
         if (oldTask != null && newTask != null) {
             assert oldTask.getTaskId().equals(newTask.getTaskId());
         }
         this.taskId = oldTask != null ? oldTask.getTaskId() : newTask.getTaskId();
-        this.oldTask = oldTask;
-        this.newTask = newTask;
+        this.oldTask = oldTask != null ? new Task(oldTask) : null;
+        this.newTask = newTask != null ? new Task(newTask) : null;
     }
 
     @Override
@@ -30,7 +29,7 @@ public class TaskMemento {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof TaskMemento)) { // instanceof handles nulls
+        if (!(other instanceof TaskMemento)) { // instance of handles nulls
             return false;
         }
 

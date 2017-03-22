@@ -15,6 +15,7 @@ import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 
 /**
  * An Immutable TaskList that is serializable to XML format
@@ -71,6 +72,12 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
+    }
+
+    @Override
+    public Task getTaskById(TaskId mementoTaskId) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

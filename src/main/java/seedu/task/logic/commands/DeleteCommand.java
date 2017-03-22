@@ -3,7 +3,9 @@ package seedu.task.logic.commands;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMemento;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -40,6 +42,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
+            mementos.addUndoMementoAndClearRedo(new TaskMemento((Task) taskToDelete, null));
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

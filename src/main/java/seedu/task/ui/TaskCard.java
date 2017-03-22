@@ -20,14 +20,16 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label due;
     @FXML
-    private Label duration;
+    private Label duration_start;
+    @FXML
+    private Label duration_end;
     @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getDescription().description);
-        id.setText(displayedIndex + ". ");
+        id.setText(Integer.toString(displayedIndex));
         updateDueLabel(task);
         updateDurationLabel(task);
         initTags(task);
@@ -42,16 +44,19 @@ public class TaskCard extends UiPart<Region> {
             due.setManaged(false);
         } else {
             due.setManaged(true);
-            due.setText("Due: " + task.getDueDate().toString());
+            due.setText(task.getDueDate().toString());
         }
     }
 
     private void updateDurationLabel(ReadOnlyTask task) {
         if (task.getDuration() == null) {
-            duration.setManaged(false);
+            duration_start.setManaged(false);
+            duration_end.setManaged(false);
         } else {
-            duration.setManaged(true);
-            duration.setText(task.getDuration().toString());
+            duration_start.setManaged(true);
+            duration_end.setManaged(true);
+            duration_start.setText(task.getDurationStart());
+            duration_end.setText(task.getDurationEnd());
         }
     }
 }

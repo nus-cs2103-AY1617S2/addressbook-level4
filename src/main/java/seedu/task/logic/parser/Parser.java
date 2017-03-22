@@ -17,7 +17,9 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.UncompleteCommand;
+import seedu.task.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -74,6 +76,12 @@ public class Parser {
 
         case UncompleteCommand.COMMAND_WORD:
             return new UncompleteCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

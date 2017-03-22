@@ -12,6 +12,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskId;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -78,6 +79,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskList.updateTask(taskListIndex, editedTask);
+        indicateTaskListChanged();
+    }
+
+    @Override
+    public void updateTaskById(TaskId id, ReadOnlyTask newTask)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert newTask != null;
+        taskList.updateTaskById(id, newTask);
         indicateTaskListChanged();
     }
 
@@ -153,5 +162,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
 }

@@ -34,6 +34,7 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.history.TaskMementos;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskList;
@@ -57,6 +58,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private TaskMementos mementos;
 
     //These are for checking the correctness of the events raised
     private ReadOnlyTaskList latestSavedTaskList;
@@ -81,9 +83,10 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
+        mementos = new TaskMementos();
         String tempTaskListFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskListFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempTaskListFile, tempPreferencesFile), mementos);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskList = new TaskList(model.getTaskList()); // last saved assumed to be up to date
