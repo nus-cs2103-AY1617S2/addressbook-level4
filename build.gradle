@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.opus.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -85,7 +85,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "opus.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -156,7 +156,7 @@ task guiTests(type: AddressBookTest) {
 
 
 task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+    include 'seedu/opus/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
