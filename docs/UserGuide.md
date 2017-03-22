@@ -54,7 +54,7 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a person to the task manager<br>
+Adds a person to the task manager.<br>
 Format: `add NAME [n/NOTES] [s/STATUS] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
 
 > * Task can be an event
