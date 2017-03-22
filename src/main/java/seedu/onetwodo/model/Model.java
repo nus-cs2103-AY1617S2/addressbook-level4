@@ -3,6 +3,7 @@ package seedu.onetwodo.model;
 import java.util.Set;
 
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
+import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -57,5 +58,5 @@ public interface Model {
 
     void setDoneStatus(DoneStatus doneStatus);
 
-    void undo();
+    void undo() throws EmptyHistoryException;
 }

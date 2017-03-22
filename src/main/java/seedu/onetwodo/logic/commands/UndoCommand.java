@@ -1,5 +1,6 @@
 package seedu.onetwodo.logic.commands;
 
+import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 
 //@@author A0135739W
@@ -18,8 +19,11 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        model.undo();
-        return new CommandResult(MESSAGE_SUCCESS);
+        try {
+            model.undo();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (EmptyHistoryException ehe) {
+            throw new CommandException(ehe.getMessage());
+        }
     }
-
 }
