@@ -37,6 +37,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
 
+    // @@author A0138909R
     /**
      * Creates a new file path for the Task Manager to save Saves the current
      * version of the Task Manager to the hard disk at the new location. Creates
@@ -44,4 +45,5 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * if there was an error during saving.
      */
     void handleTaskManagerSaveChangedEvent(TaskManagerSaveChangedEvent event);
+    // @@author
 }

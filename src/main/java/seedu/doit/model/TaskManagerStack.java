@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 
+//@@author A0138909R
 public class TaskManagerStack {
     public static final String NOTHING_TO_REDO = "There is nothing to redo!";
     public static final String NOTHING_TO_UNDO = "There is nothing to undo!";

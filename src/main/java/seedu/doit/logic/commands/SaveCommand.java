@@ -10,6 +10,7 @@ import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
 import seedu.doit.commons.util.FileUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
 
+//@@author A0138909R
 /**
  * Adds a task to the task manager.
  */
@@ -18,18 +19,18 @@ public class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks to a new file location and name. "
-        + "Parameters: FILE_PATH_IN_DOIT_FILE/FILE_NAME.xml\n" + "Example: " + COMMAND_WORD
-        + " save/xml/in/this/file/as/name.xml";
+            + "Parameters: FILE_PATH_IN_DOIT_FILE/FILE_NAME.xml\n" + "Example: " + COMMAND_WORD
+            + " save/xml/in/this/file/as/name.xml";
 
     public static final String MESSAGE_SUCCESS = " Tasks saved at %1$s";
     public static final String MESSAGE_DUPLICATE_FILE = "Another file already exists in the file path!";
     public static final String MESSAGE_NOT_XML_FILE = "It must be a .xml file!\n" + MESSAGE_USAGE;
     public static final String MESSAGE_USING_SAME_FILE = " is the current file you are choosing. "
-        + "It will be auto saved.";
+            + "It will be auto saved.";
     public static final String MESSAGE_CANNOT_CREATE_FILE = "Cannot create the .xml file!\n"
-        + "Maybe you have the : character in file name.";
+            + "Maybe you have the : character in file name.";
     public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file path!\nCannot contain characters"
-        + " * ? \" < > |\n" + MESSAGE_USAGE;
+            + " * ? \" < > |\n" + MESSAGE_USAGE;
     private static final Logger logger = LogsCenter.getLogger(SaveCommand.class);
     public final String saveFilePath;
 
@@ -67,7 +68,7 @@ public class SaveCommand extends Command {
             throw new CommandException(MESSAGE_CANNOT_CREATE_FILE);
         }
         TaskManagerSaveChangedEvent event = new TaskManagerSaveChangedEvent(this.model.getTaskManager(),
-            this.saveFilePath);
+                this.saveFilePath);
         logger.info("Created event : " + event.toString());
         EventsCenter.getInstance().post(event);
         this.storage.handleTaskManagerSaveChangedEvent(event);

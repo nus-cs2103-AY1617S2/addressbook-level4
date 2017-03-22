@@ -209,16 +209,15 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args s/gg" +
-            "", expectedMessage);
+        assertCommandFailure("add wrong args wrong args s/gg" + "", expectedMessage);
         assertCommandFailure("add Valid Name 5 s/valid,deadline.butNoPriorityPrefix d/valid,description",
                 expectedMessage);
         assertCommandFailure("add d/valid", expectedMessage);
         assertCommandFailure("add e/valid", expectedMessage);
-        assertCommandFailure("add Valid Task p/1",  MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Task e/invalid time" , MESSAGE_ENDTIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Task s/invalid e/tomorrow ",  MESSAGE_STARTTIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name e/gogo ",  MESSAGE_ENDTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Task p/1", MESSAGE_PRIORITY_CONSTRAINTS);
+        assertCommandFailure("add Valid Task e/invalid time", MESSAGE_ENDTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Task s/invalid e/tomorrow ", MESSAGE_STARTTIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name e/gogo ", MESSAGE_ENDTIME_CONSTRAINTS);
     }
 
     @Test
@@ -421,6 +420,7 @@ public class LogicManagerTest {
                 expectedAB, expectedList);
     }
 
+    // @@author A0138909R
     @Test
     public void execute_save_successful() throws Exception {
         String filePath = "data/testfile1.xml";
@@ -458,6 +458,7 @@ public class LogicManagerTest {
         assertCommandFailure("save " + filePath, filePath + SaveCommand.MESSAGE_USING_SAME_FILE);
     }
 
+    // @@author
     /**
      * A utility class to generate test data.
      */
