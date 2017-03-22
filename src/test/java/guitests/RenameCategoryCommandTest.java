@@ -19,7 +19,7 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         TestTask sampleA = td.alice;
         TestTask sampleB = td.benson;
         TestTask[] taskList = {sampleA, sampleB};
-        assertRenameCategoryResult(false, "name friends Project", taskList);
+        assertRenameCategoryResult("name friends Project", taskList);
     }
 
     @Test
@@ -27,46 +27,31 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         TestTask sampleA = td.alice;
         TestTask sampleB = td.benson;
         TestTask[] taskList = {sampleA, sampleB};
-        assertRenameCategoryResult(true, "n owesMoney Project", taskList);
+        assertRenameCategoryResult("n friends Project", taskList);
     }
 
-    private void assertRenameCategoryResult(boolean isShort,
-                   String command, TestTask[] taskList) throws IllegalValueException {
+    private void assertRenameCategoryResult(String command, TestTask[] taskList) throws IllegalValueException {
         TestTask sampleA;
         TestTask sampleB;
-        if (!isShort) {
-            sampleA = new TaskBuilder().withName("Alice Pauline")
-                    .withInformation("123, Jurong West Ave 6, #08-111")
-                    .withPriorityLevel("Yes")
-                    .withStartDateTime("Feb 18, 2017 5pm")
-                    .withEndDateTime("Mar 28, 2017 5pm")
-                    .withCategories("Project").build();
-            sampleB = new TaskBuilder().withName("Benson Meier")
-                    .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("No")
-                    .withStartDateTime("Feb 23, 2017 10pm")
-                    .withEndDateTime("Jun 28, 2017 5pm")
-                    .withCategories("owesMoney", "Project").build();
-        } else {
-            sampleA = new TaskBuilder().withName("Alice Pauline")
-                    .withInformation("123, Jurong West Ave 6, #08-111")
-                    .withPriorityLevel("Yes")
-                    .withStartDateTime("Feb 18, 2017 5pm")
-                    .withEndDateTime("Mar 28, 2017 5pm")
-                    .withCategories("friends").build();
-            sampleB = new TaskBuilder().withName("Benson Meier")
-                    .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("No")
-                    .withStartDateTime("Feb 23, 2017 10pm")
-                    .withEndDateTime("Jun 28, 2017 5pm")
-                    .withCategories("Project", "friends").build();
-        }
+        sampleA = new TaskBuilder().withName("Alice Pauline")
+                .withInformation("123, Jurong West Ave 6, #08-111")
+                .withPriorityLevel("Yes")
+                .withStartDateTime("Feb 18, 2017 5pm")
+                .withEndDateTime("Mar 28, 2017 5pm")
+                .withCategories("Project").build();
+        sampleB = new TaskBuilder().withName("Benson Meier")
+                .withInformation("311, Clementi Ave 2, #02-25")
+                .withPriorityLevel("No")
+                .withStartDateTime("Feb 23, 2017 10pm")
+                .withEndDateTime("Jun 28, 2017 5pm")
+                .withCategories("owesMoney", "Project").build();
 
         TestTask[] taskListExpected = {sampleA, sampleB};
         commandBox.runCommand(command);
         assertResultMessage(RenameCategoryCommand.MESSAGE_SUCCESS);
         assertTrue(taskListPanel.isListMatching(taskListExpected));
     }
+
 
     @Test
     public void rename_unsuccessful() {
