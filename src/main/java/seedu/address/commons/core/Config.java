@@ -1,9 +1,11 @@
 package seedu.address.commons.core;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 
 import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.JsonUtil;
 
 /**
  * Config values used by the app
@@ -113,6 +115,10 @@ public class Config {
 
     public String getFilePath() {
         return filePath;
+    }
+
+    public void save() throws IOException {
+        JsonUtil.saveJsonFile(this, filePath);
     }
 
 }

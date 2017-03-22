@@ -97,4 +97,9 @@ public interface Model {
      * Saves the command and current filteredTasks list.
      */
     public void saveCurrentState(String commandText);
+
+    /**
+     * Discard the last saved command and current filteredTasks list.
+     */
+    public void discardCurrentState();
 }

@@ -13,8 +13,11 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+<<<<<<< HEAD
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
+=======
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
+>>>>>>> undoRedo
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.SaveToCommand;
