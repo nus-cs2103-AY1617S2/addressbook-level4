@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.ReadOnlyTask;
@@ -14,8 +15,9 @@ public interface Logic {
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
+     * @throws IllegalValueException If an error occurs in creating a task
      */
-    CommandResult execute(String commandText) throws CommandException;
+    CommandResult execute(String commandText) throws CommandException, IllegalValueException;
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();

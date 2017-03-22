@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Title;
 
 /**
@@ -82,7 +83,17 @@ public class ParserUtil {
         assert title != null;
         return title.isPresent() ? Optional.of(new Title(title.get())) : Optional.empty();
     }
+    
+    // @@author A0163996J
+    /**
+     * Parses a {@code Optional<String> Date} into an {@code Optional<Date>} if {@code date} is present.
+     */
+    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+        assert date != null;
+        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+    }
 
+    // @@author
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */

@@ -32,6 +32,7 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Title;
@@ -72,9 +73,9 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Title("SE Project"), new UniqueTagList()),
-                new Task(new Title("DB Homework"), new UniqueTagList()),
-                new Task(new Title("Carl's Birthday Party"), new UniqueTagList())   
+                new Task(new Title("SE Project"), new Date(), new Date(), new UniqueTagList()),
+                new Task(new Title("DB Homework"), new Date(), new Date("next monday"), new UniqueTagList()),
+                new Task(new Title("Carl's Birthday Party"), new Date("this friday at 2 pm"), new Date("this friday at 7 pm"), new UniqueTagList())   
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

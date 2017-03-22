@@ -5,50 +5,31 @@ package seedu.address.model.task;
 import java.util.Objects;
 import java.util.Calendar;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 
 public class Task implements ReadOnlyTask{
     
     protected Title title;
-    //TODO use Calendar object
-    //protected Calendar start;
-    //protected Calendar end;
     protected Date start;
     protected Date end;
     
     protected UniqueTagList tags;
-    
+
     /**
-     * Constructor for floating task
+     * Constructor for tasks
      * @param title
+     * @param start
+     * @param end
      * @param tags
+     * @throws IllegalValueException 
      */
-    public Task(Title title, UniqueTagList tags) {
+    public Task(Title title, Date start, Date end, UniqueTagList tags) throws IllegalValueException {
         this.title = title;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.start = new Date();
-        this.end = new Date();
-    }
-    /**
-     * Constructor for deadlined tasks
-     * @param title
-     * @param tags
-     */
-    public Task(Title title, Date start, UniqueTagList tags) {
-        this.title = title;
-        this.start = start;
-        this.end = new Date();
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-    }
-    
-    /**
-     * Constructor for event tasks
-     * @param title
-     * @param tags
-     */
-    public Task(Title title, Date start, Date end, UniqueTagList tags) {
-        this.title = title;
+        if (!start.isStartValidComparedToEnd(end)) {
+            throw new IllegalValueException("Start Date must occur before End Date");
+        }
         this.start = start;
         this.end = end;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -58,7 +39,10 @@ public class Task implements ReadOnlyTask{
      * Creates a copy of the given Task.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStart(), source.getEnd(), source.getTags());
+        this.title = source.getTitle();
+        this.start = source.getStart();
+        this.end = source.getEnd();
+        this.tags = new UniqueTagList(source.getTags());
     }
     
     public void setTitle(Title title) {

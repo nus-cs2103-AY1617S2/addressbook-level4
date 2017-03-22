@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -25,8 +26,9 @@ public abstract class Command {
      *
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
+     * @throws IllegalValueException 
      */
-    public abstract CommandResult execute() throws CommandException;
+    public abstract CommandResult execute() throws CommandException, IllegalValueException;
 
     /**
      * Provides any needed dependencies to the command.

@@ -27,8 +27,16 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         title.setText(task.getTitle().title);
+        // @@author A0163996J
         start.setText(task.getStart().toString());
         end.setText(task.getEnd().toString());
+        if (start.getText().length() > 0) {
+        	start.setText("Start Time: " + start.getText());
+        	end.setText("End Time: " + end.getText());
+        }
+        else if (end.getText().length() > 0) {
+        	end.setText("Deadline: " + end.getText());
+        }
         id.setText(displayedIndex + ". ");
         initTags(task);
     }

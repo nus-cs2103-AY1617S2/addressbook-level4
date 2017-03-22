@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -50,6 +51,10 @@ public class CommandBox extends UiPart<Region> {
 
         } catch (CommandException e) {
             // handle command failure
+            setStyleToIndicateCommandFailure();
+            logger.info("Invalid command: " + commandTextField.getText());
+            raise(new NewResultAvailableEvent(e.getMessage()));
+        } catch (IllegalValueException e) {
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));

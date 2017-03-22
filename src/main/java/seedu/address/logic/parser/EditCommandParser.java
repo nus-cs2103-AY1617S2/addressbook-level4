@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FIELDWORD_TITLE;
 import static seedu.address.logic.parser.CliSyntax.FIELDWORD_TAG;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_START;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_END;
+
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,6 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -70,6 +74,12 @@ public class EditCommandParser {
             String string = fieldWord.get();
             if (FIELDWORD_TITLE.equals(string)) {
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
+            }
+            if (FIELDWORD_START.equals(string)) {
+            	editTaskDescriptor.setStart(ParserUtil.parseDate(updateInformation));
+            }
+            if (FIELDWORD_END.equals(string)) {
+            	editTaskDescriptor.setEnd(ParserUtil.parseDate(updateInformation));
             }
             if (FIELDWORD_TAG.equals(string)) {
                 editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
