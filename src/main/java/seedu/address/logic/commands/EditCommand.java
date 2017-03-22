@@ -26,8 +26,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[NAME] [p/PRIORITY] [s/START TIMESTAMP] [d/DEADLINE] [n/NOTES] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/3 d/tomorrow t/Important";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -104,6 +105,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
+            this.start = toCopy.getStart();
             this.deadline = toCopy.getDeadline();
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
