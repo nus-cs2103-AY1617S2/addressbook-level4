@@ -49,12 +49,6 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.StorageManager;
-/*
-import seedu.task.model.task.Phone;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
-
- */
 
 public class LogicManagerTest {
 
@@ -68,13 +62,13 @@ public class LogicManagerTest {
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedAddressBook;
+    private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedAddressBook = new TaskManager(abce.data);
+        latestSavedTaskManager = new TaskManager(abce.data);
     }
 
     @Subscribe
@@ -90,12 +84,12 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
+        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -159,7 +153,7 @@ public class LogicManagerTest {
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedAddressBook, model.getTaskManager());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        assertEquals(expectedAddressBook, latestSavedTaskManager);
     }
 
     @Test
@@ -221,11 +215,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TaskManager expectedAB = new TaskManager();
-<<<<<<< HEAD
-        expectedAB.addTaskTask(toBeAdded);
-=======
         expectedAB.addJobTask(toBeAdded);
->>>>>>> morphing_task_manager
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -494,7 +484,7 @@ public class LogicManagerTest {
          */
         TaskManager generateAddressBook(int numGenerated) throws Exception {
             TaskManager addressBook = new TaskManager();
-            addToAddressBook(addressBook, numGenerated);
+            addToTaskManager(addressBook, numGenerated);
             return addressBook;
         }
 
@@ -509,27 +499,23 @@ public class LogicManagerTest {
 
         /**
          * Adds auto-generated Person objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Persons will be added
+         * @param taskManager The AddressBook to which the Persons will be added
          */
-        void addToAddressBook(TaskManager addressBook, int numGenerated) throws Exception {
-            addToAddressBook(addressBook, generatePersonList(numGenerated));
+        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
+            addToAddressBook(taskManager, generatePersonList(numGenerated));
         }
 
         /**
          * Adds the given list of Persons to the given AddressBook
          */
-        void addToAddressBook(TaskManager addressBook, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
-<<<<<<< HEAD
-                addressBook.addTaskTask(p);
-=======
-                addressBook.addJobTask(p);
->>>>>>> morphing_task_manager
+        void addToAddressBook(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
+                taskManager.addJobTask(p);
             }
         }
 
         /**
-         * Adds auto-generated Person objects to the given model
+         * Adds auto-generated Task objects to the given model
          * @param model The model to which the Persons will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {

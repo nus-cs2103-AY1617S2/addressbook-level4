@@ -38,15 +38,11 @@ public class TaskCard extends UiPart<Region> {
 			taskDate.setText(task.getTaskDate().toString());
 		}
 		if (task.getTaskStartTime() != null && task.getTaskEndTime() != null) {
-<<<<<<< HEAD
-			taskEndTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
+			taskTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
 		} else if (task.getTaskStartTime() != null) {
-			taskEndTime.setText(task.getTaskStartTime().toString());
+			taskTime.setText(task.getTaskStartTime().toString());
 		} else if (task.getTaskEndTime() != null) {
-			taskEndTime.setText(task.getTaskEndTime().toString());
-=======
-			taskTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime().toString());
->>>>>>> morphing_task_manager
+			taskTime.setText(task.getTaskEndTime().toString());
 		}
 		if (task.getTaskDescription() != null) {
 			taskDescription.setText(task.getTaskDescription().toString());

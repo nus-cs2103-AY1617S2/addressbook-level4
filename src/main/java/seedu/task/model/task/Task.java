@@ -39,26 +39,7 @@ public class Task implements ReadOnlyTask {
     	this.taskDescription = taskDescription;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
-        	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
-    }
-    /*
-    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
-    	this.taskName = taskName;
-    	this.taskDate = taskDate;
-    	this.taskStartTime = taskStartTime;
-    	this.taskEndTime = taskEndTime;
-    	this.taskDescription = taskDescription;
-    	
-*/
-    /**
-     * Creates a copy of the given ReadOnlyTask.
-     */
-    public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(), source.getTaskDescription(),source.getTags());
-    }
-
-<<<<<<< HEAD
+    
 	public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 			Optional<TaskTime> parseTime2, Optional<String> parseString) {
 		this.taskName = parseTaskName;
@@ -75,51 +56,19 @@ public class Task implements ReadOnlyTask {
 			this.taskDescription = parseString.get();
 		}
 		this.tags = new UniqueTagList();
-		// TODO Auto-generated constructor stub
+		
 	}
-	/*
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
+    
+    public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime, String taskDescription) {
+        	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
+    }
+    /**
+     * Creates a copy of the given ReadOnlyTask.
+     */
+    public Task(ReadOnlyTask source) {
+        this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(), source.getTaskDescription(),source.getTags());
     }
 
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-    public void setPhone(Phone phone) {
-        assert phone != null;
-        this.phone = phone;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    public void setAddress(Address address) {
-        assert address != null;
-        this.address = address;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address;
-    }
-*/
-=======
->>>>>>> morphing_task_manager
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);

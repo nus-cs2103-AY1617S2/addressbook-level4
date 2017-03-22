@@ -20,11 +20,7 @@ public class AddressBookBuilder {
     }
 
     public AddressBookBuilder withPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
-<<<<<<< HEAD
-        addressBook.addTaskTask(person);
-=======
         addressBook.addJobTask(person);
->>>>>>> morphing_task_manager
         return this;
     }
 

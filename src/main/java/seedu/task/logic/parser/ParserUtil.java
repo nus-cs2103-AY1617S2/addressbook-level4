@@ -72,42 +72,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
      */
-<<<<<<< HEAD
     public static Optional<TaskName> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
         return name.isPresent() ? Optional.of(new TaskName(name.get())) : Optional.empty();
     }
-
-=======
-//    public static Optional<TaskName> parseName(Optional<String> name) throws IllegalValueException {
-//        assert name != null;
-//        return name.isPresent() ? Optional.of(new TaskName(name.get())) : Optional.empty();
-//    }
-
-//    /**
-//     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
-//     */
-//    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-//        assert phone != null;
-//        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
-//    }
-//
-//    /**
-//     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-//     */
-//    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-//        assert address != null;
-//        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-//    }
-//
-//    /**
-//     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-//     */
-//    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-//        assert email != null;
-//        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
-//    }
->>>>>>> morphing_task_manager
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.

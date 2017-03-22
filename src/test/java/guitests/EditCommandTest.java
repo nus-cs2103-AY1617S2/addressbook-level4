@@ -12,9 +12,6 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.task.TaskName;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
-/*import seedu.task.model.task.Phone;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;*/
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
@@ -130,7 +127,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTaskName().fullName);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTaskName().fullTaskName);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

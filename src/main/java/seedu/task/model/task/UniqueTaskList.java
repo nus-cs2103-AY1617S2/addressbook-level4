@@ -49,13 +49,10 @@ public class UniqueTaskList implements Iterable<Task> {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-<<<<<<< HEAD
-    public void updateTask(int index, ReadOnlyTask editedPerson) throws DuplicateTaskException {
-        assert editedPerson != null;
-=======
+
     public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
->>>>>>> morphing_task_manager
+
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
@@ -76,13 +73,10 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
-<<<<<<< HEAD
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
-=======
+
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
->>>>>>> morphing_task_manager
+
             throw new TaskNotFoundException();
         }
         return taskFoundAndDeleted;
@@ -92,11 +86,9 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-<<<<<<< HEAD
-    public void setTasks(List<? extends ReadOnlyTask> persons) throws DuplicateTaskException {
-=======
+
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
->>>>>>> morphing_task_manager
+
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
