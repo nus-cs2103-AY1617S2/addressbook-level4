@@ -31,8 +31,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
 
-    final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
-    final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
+    private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
+    private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
     @FXML
     private TextField commandTextField;
