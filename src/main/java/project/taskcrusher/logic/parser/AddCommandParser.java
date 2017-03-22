@@ -113,6 +113,10 @@ public class AddCommandParser {
 
         try {
 
+            if (timesToParse.equals(Deadline.NO_DEADLINE)) {
+                throw new IllegalValueException("No deadline provided");
+            }
+
             String[] timeslotsAsStrings = timesToParse.split("\\s+or\\s+");
             List<Timeslot> timeslots = new ArrayList<>();
             for (String t: timeslotsAsStrings) {
