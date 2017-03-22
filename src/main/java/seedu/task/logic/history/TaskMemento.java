@@ -11,18 +11,18 @@ import seedu.task.model.task.TaskId;
  */
 public class TaskMemento {
     public final TaskId taskId;
-    public final Task task;
+    public final Task oldTask;
+    public final Task newTask;
 
-    public TaskMemento(Task task) {
-        assert task != null;
-        this.task = task;
-        this.taskId = task.getTaskId();
-    }
 
-    public TaskMemento(Task task, TaskId taskId) {
-        assert taskId != null;
-        this.task = task;
-        this.taskId = taskId;
+    public TaskMemento(Task oldTask, Task newTask) {
+        assert oldTask != null || newTask != null;
+        if (oldTask != null && newTask != null) {
+            assert oldTask.getTaskId().equals(newTask.getTaskId());
+        }
+        this.taskId = oldTask != null ? oldTask.getTaskId() : newTask.getTaskId();
+        this.oldTask = oldTask;
+        this.newTask = newTask;
     }
 
     @Override
@@ -34,12 +34,16 @@ public class TaskMemento {
             return false;
         }
 
-        boolean isTaskEqual = this.task == null ?
-                ((TaskMemento) other).task == null :
-                this.task.equals(((TaskMemento) other).task);
+        boolean isOldTaskEqual = this.oldTask == null ?
+                ((TaskMemento) other).oldTask == null :
+                this.oldTask.equals(((TaskMemento) other).oldTask);
+
+        boolean isNewTaskEqual = this.newTask == null ?
+                ((TaskMemento) other).newTask == null :
+                this.newTask.equals(((TaskMemento) other).newTask);
 
         boolean isTaskIdEqual = this.taskId.equals(((TaskMemento) other).taskId);
 
-        return isTaskEqual && isTaskIdEqual;
+        return isOldTaskEqual && isNewTaskEqual && isTaskIdEqual;
     }
 }
