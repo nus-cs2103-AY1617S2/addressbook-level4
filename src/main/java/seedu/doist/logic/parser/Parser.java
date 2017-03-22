@@ -87,9 +87,9 @@ public class Parser {
             return new AliasCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, ResetAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ResetAliasCommand();
-        } else if (doesTriggerSameCommand(commandWord, UndotAliasCommand.DEFAULT_COMMAND_WORD) {
+        } else if (doesTriggerSameCommand(commandWord, UndoCommand.DEFAULT_COMMAND_WORD)) {
             return new UndoCommand(1);
-        } else if (doesTriggerSameCommand(commandWord, RedoCommand.DEFAULT_COMMAND_WORD) {
+        } else if (doesTriggerSameCommand(commandWord, RedoCommand.DEFAULT_COMMAND_WORD)) {
             return new RedoCommand(1);
         } else if (doesTriggerSameCommand(commandWord, ViewAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ViewAliasCommand();

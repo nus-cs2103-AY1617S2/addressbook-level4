@@ -24,8 +24,4 @@ public class UndoCommand extends Command {
     public UndoCommand(int numSteps) {
         this.numSteps = numSteps;
     }
-
-    public static CommandInfo info() {
-        return new CommandInfo(Command.getAliasList(DEFAULT_COMMAND_WORD), DEFAULT_COMMAND_WORD);
-    }
 }
