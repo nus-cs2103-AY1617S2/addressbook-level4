@@ -19,7 +19,6 @@ public class Timing implements Comparable<Timing> {
     public static final String NULL_TIMING = "n/a";
     public final String value;
     private Date date;
-    private static final int DATE_COMPARE_TO_OFFSET = 3800;
 
     /**
      * Validates given date.
@@ -112,7 +111,7 @@ public class Timing implements Comparable<Timing> {
             return -1;
         }
 
-        int compareToResult = this.date.getYear() - compareTiming.date.getYear();// + DATE_COMPARE_TO_OFFSET;
+        int compareToResult = this.date.getYear() - compareTiming.date.getYear();
 
         if (compareToResult == 0) {
             compareToResult = this.date.getMonth() - compareTiming.date.getMonth();
