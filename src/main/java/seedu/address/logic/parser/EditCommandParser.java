@@ -30,6 +30,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class EditCommandParser {
 
+    //@@author A0114395E
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -50,10 +51,15 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            editTaskDescriptor.setStart(Optional.of(new Start(argsTokenizer.getValue(PREFIX_START).orElse(""))));
-            editTaskDescriptor.setDeadline(Optional.of(new Deadline(argsTokenizer.getValue(PREFIX_DEADLINE).orElse(""))));
-            editTaskDescriptor.setPriority(Optional.of(new Priority(Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0")))));
-            editTaskDescriptor.setNotes(Optional.of(new Notes(argsTokenizer.getValue(PREFIX_NOTES).orElse(""))));
+            String startStr = argsTokenizer.getValue(PREFIX_START).orElse("");
+            // We only set new values if user had input something.
+            if (startStr.length() > 0) editTaskDescriptor.setStart(Optional.of(new Start(startStr)));
+            String deadlineStr = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
+            if (deadlineStr.length() > 0) editTaskDescriptor.setDeadline(Optional.of(new Deadline(deadlineStr)));
+            int priorityInt = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
+            if (priorityInt > 0) editTaskDescriptor.setPriority(Optional.of(new Priority(priorityInt)));
+            String notesStr = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
+            if (notesStr.length() > 0) editTaskDescriptor.setNotes(Optional.of(new Notes(notesStr)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
