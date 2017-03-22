@@ -9,7 +9,7 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String PRIORITY_CONSTRAINTS = "Priority can be high, medium or low";
+    public static final String PRIORITY_CONSTRAINTS = "Priority can only be high, medium or low";
 
     public String value;
 
@@ -21,17 +21,24 @@ public class Priority {
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
+        if (priority == null || priority == "") {
+            priority = "LOW";
+        }
         priority = priority.trim();
         String upperPriority = priority.toUpperCase();
         char firstLetter = upperPriority.charAt(0);
         if (!isValidPriority(firstLetter)) {
             throw new IllegalValueException(PRIORITY_CONSTRAINTS);
+        } else {
+            if (firstLetter == 'H') {
+                this.value = "HIGH";
+            } else if (firstLetter == 'M') {
+                this.value = "MEDIUM";
+            } else {
+                this.value = "LOW";
+            }
         }
-        /*
-         * if (firstLetter == 'H') { this.value = "HIGH"; } else if (firstLetter
-         * == 'M') { this.value = "MEDIUM"; } else { this.value = "LOW"; }
-         */
-        this.value = priority;
+
     }
 
     /**
@@ -39,10 +46,6 @@ public class Priority {
      */
     public static boolean isValidPriority(char test) {
         return ((test == 'H') || (test == 'M') || (test == 'L'));
-    }
-
-    public Priority getPriority() {
-        return this;
     }
 
     public boolean hasPriority() {
