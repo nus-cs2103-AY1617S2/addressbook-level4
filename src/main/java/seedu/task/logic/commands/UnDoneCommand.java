@@ -6,20 +6,20 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
-public class EditIsDoneCommand extends Command {
+public class UnDoneCommand extends Command {
 
-    public static final String COMMAND_WORD_1 = "done";
+    public static final String COMMAND_WORD_1 = "undone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
             + ": the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD_1 + " 1";
 
-    public static final String MESSAGE_DONE_TASK_SUCCE = "Done Task: %1$s";
+    public static final String MESSAGE_DONE_TASK_SUCCE = "UnDone Task: %1$s";
 
     public final int targetIndex;
 
-    public EditIsDoneCommand(int targetIndex) {
+    public UnDoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -35,7 +35,7 @@ public class EditIsDoneCommand extends Command {
 
         ReadOnlyTask updatedTaskDone = lastShownList.get(targetIndex - 1);
         try {
-            model.isDoneTask(targetIndex - 1, updatedTaskDone);
+            model.UnDoneTask(targetIndex - 1, updatedTaskDone);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

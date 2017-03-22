@@ -11,8 +11,8 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.EditCommand;
-import seedu.task.logic.commands.EditIsDoneCommand;
-import seedu.task.logic.commands.EditUnDoneCommand;
+import seedu.task.logic.commands.DoneCommand;
+import seedu.task.logic.commands.UnDoneCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.FindExactCommand;
@@ -57,10 +57,10 @@ public class Parser {
         case AddCommand.COMMAND_WORD_1:
             return new AddCommandParser().parse(arguments);
 
-        case EditIsDoneCommand.COMMAND_WORD_1:
+        case DoneCommand.COMMAND_WORD_1:
             return new EditIsDoneParser().parse(arguments);
             
-        case EditUnDoneCommand.COMMAND_WORD_1:
+        case UnDoneCommand.COMMAND_WORD_1:
             return new EditUnDoneParser().parse(arguments);
         
 
