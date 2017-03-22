@@ -3,10 +3,14 @@ package seedu.address.model;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.model.person.Activity;
-import seedu.address.model.person.ReadOnlyActivity;
-import seedu.address.model.person.UniqueActivityList;
-import seedu.address.model.person.UniqueActivityList.DuplicateActivityException;
+import seedu.address.model.person.Event;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.Task;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
+import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -18,41 +22,53 @@ public interface Model {
     /** Returns the WhatsLeft */
     ReadOnlyWhatsLeft getWhatsLeft();
 
-    /** Deletes the given activity. */
-    void deleteActivity(ReadOnlyActivity target) throws UniqueActivityList.ActivityNotFoundException;
+    /** Deletes the given task. */
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds the given activity */
-    void addActivity(Activity activity) throws UniqueActivityList.DuplicateActivityException;
+    /** Deletes the given Event. */
+    void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
+
+    /** Adds the given Task */
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+
+    /** Adds the given Event */
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+    
+    /**
+     * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     *
+     * @throws DuplicateTaskException if updating the Task's details causes the Task to be equivalent to
+     *      another existing Task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     */
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
 
     /**
-     * Updates the activity located at {@code filteredActivityListIndex} with {@code editedActivity}.
+     * Updates the Event located at {@code filteredEventListIndex} with {@code editedEvent}.
      *
-     * @throws DuplicateActivityException if updating the activity's details causes the activity to be equivalent to
-     *      another existing activity in the list.
-     * @throws IndexOutOfBoundsException if {@code filteredActivityListIndex} < 0 or >= the size of the filtered list.
+     * @throws DuplicateEventException if updating the Event's details causes the Event to be equivalent to
+     *      another existing Event in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredEventListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateActivity(int filteredActivityListIndex, ReadOnlyActivity editedActivity)
-            throws UniqueActivityList.DuplicateActivityException;
+    void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
+            throws UniqueEventList.DuplicateEventException;
 
-    /** Returns the filtered activity list as an {@code UnmodifiableObservableList<ReadOnlyActivity>} */
-    UnmodifiableObservableList<ReadOnlyActivity> getFilteredActivityList();
+    /** Returns the filtered Task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Returns the filtered unscheduled task activity list as an
-     * {@code UnmodifiableObservableList<ReadOnlyActivity>} */
-    UnmodifiableObservableList<ReadOnlyActivity> getFilteredScheduledActivityList();
+    /** Returns the filtered Event list as an {@code UnmodifiableObservableList<ReadOnlyEvent>} */
+    UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
 
-    /** Returns the filtered list of scheduled activity list as an
-     * {@code UnmodifiableObservableList<ReadOnlyActivity>} */
-    UnmodifiableObservableList<ReadOnlyActivity> getFilteredUnscheduledActivityList();
+    /** Updates the filter of the filtered Task list to show all activities */
+    void updateFilteredTaskListToShowAll();
 
-    /** Updates the filter of the filtered activity list to show all activities */
-    void updateFilteredListToShowAll();
+    /** Updates the filter of the filtered Event list to show all activities */
+    void updateFilteredEventListToShowAll();
 
-    /** Updates the filter of the filtered activity list to filter by the given keywords*/
-    void updateFilteredActivityList(Set<String> keywords);
+    /** Updates the filter of the filtered Task list to filter by the given keywords*/
+    void updateFilteredTaskList(Set<String> keywords);
 
-    UnmodifiableObservableList<ReadOnlyActivity> getFilteredEventList();
-
-    UnmodifiableObservableList<ReadOnlyActivity> getFilteredDeadlineList();
-
+    /** Updates the filter of the filtered Event list to filter by the given keywords*/
+    void updateFilteredEventList(Set<String> keywords);
 }

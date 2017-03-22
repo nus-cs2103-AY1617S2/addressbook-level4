@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
+import java.time.LocalTime;
+
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 
 /**
  * Represents an Event's StartTime in WhatsLeft.
@@ -9,46 +12,30 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class StartTime {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =
-            "Event StartTime can take only 4 digits, and it should be in military time format"
-            + " e.g. 0545 to represent 5.30am and 1430 to represent 2.30pm";
+            "Event start time should be in HH:MM format e.g. 00:00 represents midnight";
 
-    /*
-     * The first character of the StartTime must be 0,1 or 2 since it follows military format,
-     * third character can only range from 0 to 5 to represent the number of minutes
-     */
-    public static final String STARTTIME_VALIDATION_REGEX = "[012][\\d][012345][\\d]";
-
-    public final String value;
+    public final LocalTime value;
 
     /**
-     * Validates given StartTime.
+     * Validates given start time.
      *
-     * @throws IllegalValueException if given StartTime string is invalid.
+     * @throws IllegalValueException if given start time is invalid.
      */
-    public StartTime(String starttime) throws IllegalValueException {
-        if (starttime == null) {
+    public StartTime(String startTimeArg) throws IllegalValueException {
+        if (startTimeArg == null) {
             this.value = null;
         } else {
-            if (!isValidStartTime(starttime)) {
-                throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
-            }
-            this.value = starttime;
+        	try {
+        		this.value = StringUtil.parseStringToTime(startTimeArg);
+        	} catch (IllegalValueException illegalValueException) {
+        		throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+        	}
         }
-    }
-
-    /**
-     * Returns true if a given string is a valid event StartTime.
-     */
-    public static boolean isValidStartTime(String test) {
-        if (test == null) {
-            return true;
-        }
-        return (test.matches(STARTTIME_VALIDATION_REGEX) && (Integer.parseInt(test) < 2400));
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
