@@ -635,7 +635,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_saveTo_invalidFileName() throws Exception {
-        File invalidFileNameFile = new File("?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        File invalidFileNameFile = new File("////?!", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandFailure("saveto " + invalidFileNameFile.getParentFile().getAbsolutePath(),
                 String.format(SaveToCommand.MESSAGE_WRITE_FILE_ERROR, invalidFileNameFile.getAbsolutePath()));
     }

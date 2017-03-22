@@ -147,6 +147,13 @@ By default, **Today** already displays all your uncompleted tasks. However, if y
 
 ##### Format: `list`
 
+
+#### 3.2.4. Listing all Completed Tasks
+
+There may be times when you would wish to review the tasks you have already completed. You can easily view all your completed task through **Today**'s `listcompleted` command. This will open a drop down list that will display all the tasks you have completed. Use the previously mentioned `list` command to hide this list again.
+
+##### Format: `listcompleted`
+
 ### 3.3. Managing Tasks
 
 #### 3.3.1. Marking tasks as **Today**

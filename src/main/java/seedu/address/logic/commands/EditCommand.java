@@ -1,15 +1,18 @@
 package seedu.address.logic.commands;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithDeadline;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -23,7 +26,7 @@ public class EditCommand extends Command {
             + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [due DEADLINE] [tag TAGS]...\n"
             + "Example: " + COMMAND_WORD + " 1 CS2103 Finish Tutorial";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
@@ -60,7 +63,12 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
+        try {
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        } catch (IllegalValueException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -75,19 +83,41 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     *
+     * @throws IllegalValueException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor) {
+            EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
         assert taskToEdit != null;
 
-        Name updatedName = editTaskDescriptor.getName()
-                .orElseGet(taskToEdit::getName);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags()
-                .orElseGet(taskToEdit::getTags);
+        Name updatedName = editTaskDescriptor.getName() == null
+                ? taskToEdit.getName() : editTaskDescriptor.getName();
+        UniqueTagList updatedTags = editTaskDescriptor.getTags() == null
+                ? taskToEdit.getTags() : editTaskDescriptor.getTags();
         boolean updatedDone = taskToEdit.isDone();
-        // TODO: Change Task constructor to TaskWithoutDeadline() or
-        // TaskWithDeadline() based on task type
-        return new Task(updatedName, updatedTags, updatedDone);
+        if (taskToEdit.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
+                || taskToEdit.getTaskType() == TaskType.TaskWithOnlyDeadline
+                || editTaskDescriptor.getDeadline() != null
+                || editTaskDescriptor.getStartingTime() != null) {
+            Date deadline = editTaskDescriptor.getDeadline() == null
+                    ? taskToEdit.getDeadline().getDate()
+                    : editTaskDescriptor.getDeadline();
+            Date startingTime;
+            if (editTaskDescriptor.getDeadline() == null
+                    && taskToEdit.getStartingTime() == null) {
+                startingTime = null;
+            } else {
+                startingTime = editTaskDescriptor.getDeadline() == null
+                        ? taskToEdit.getStartingTime().getDate()
+                        : editTaskDescriptor.getStartingTime();
+            }
+            return new TaskWithDeadline(updatedName, updatedTags, deadline,
+                    startingTime, updatedDone);
+        } else {
+            return new TaskWithoutDeadline(updatedName, updatedTags,
+                    updatedDone);
+        }
     }
 
     /**
@@ -95,8 +125,10 @@ public class EditCommand extends Command {
      * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        private Name name = null;
+        private UniqueTagList tags = null;
+        private Date deadline = null;
+        private Date startingTime = null;
 
         public EditTaskDescriptor() {
         }
@@ -104,31 +136,50 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.tags = toCopy.getTags();
+            this.deadline = toCopy.getDeadline();
+            this.startingTime = toCopy.getStartingTime();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.tags);
+            return this.name != null || this.tags != null
+                    || this.deadline != null || this.startingTime != null;
         }
 
-        public void setName(Optional<Name> name) {
+        public void setName(Name name) {
             assert name != null;
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Name getName() {
             return name;
         }
 
-        public void setTags(Optional<UniqueTagList> tags) {
+        public void setTags(UniqueTagList tags) {
             assert tags != null;
             this.tags = tags;
         }
 
-        public Optional<UniqueTagList> getTags() {
+        public UniqueTagList getTags() {
             return tags;
+        }
+
+        public void setStartingTime(Date startingTime) {
+            this.startingTime = startingTime;
+        }
+
+        public Date getStartingTime() {
+            return this.startingTime;
+        }
+
+        public void setDeadline(Date deadline) {
+            this.deadline = deadline;
+        }
+
+        public Date getDeadline() {
+            return this.deadline;
         }
     }
 }
