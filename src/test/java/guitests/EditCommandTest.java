@@ -35,6 +35,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     }
 
     //@@author A0143157J
+    // EP: edit all fields
     @Test
     public void edit_allFieldsWithShortCommand_success() throws Exception {
 
@@ -48,8 +49,9 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
+    // EP: edit categories with short command
     @Test
-    public void edit_notAllFiendsWithShortCommand_success() throws Exception {
+    public void edit_notAllFieldsWithShortCommand_success() throws Exception {
         String detailsToEdit = "c/work c/fun";
         int taskBossIndex = 2;
 
@@ -135,6 +137,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     }
 
     //@@author A01431457J
+    // EP: invalid edit command with start date later than end date
     @Test
     public void edit_invalidDates_failure() {
         commandBox.runCommand("edit 3 sd/next fri 5pm ed/tomorrow");
