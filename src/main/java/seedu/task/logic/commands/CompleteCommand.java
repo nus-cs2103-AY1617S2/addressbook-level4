@@ -1,24 +1,15 @@
 package seedu.task.logic.commands;
 
-import java.util.List;
-
-import seedu.task.commons.core.Messages;
-import seedu.task.commons.exceptions.NoChangeException;
 import seedu.task.logic.commands.exceptions.CommandException;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Complete;
-import seedu.task.model.task.Description;
-import seedu.task.model.task.DueDate;
-import seedu.task.model.task.Duration;
-import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskId;
-import seedu.task.model.task.UniqueTaskList;
 
 /**
  * Completes a task identified using it's last displayed index from the task list.
  */
-public class CompleteCommand extends Command {
+public class CompleteCommand extends CompletionCommand {
+
+    public CompleteCommand(int targetIndex) {
+        super(targetIndex);
+    }
 
     public static final String COMMAND_WORD = "complete";
 
@@ -31,52 +22,14 @@ public class CompleteCommand extends Command {
 
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "You have already completed this task.";
 
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
+    public static final boolean SHOULD_MARK_TASK_COMPLETE = true;
 
-    public final int targetIndex;
-
-    public CompleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex - 1;
-    }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (targetIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex);
-
-        try {
-            Task completedTask = createCompletedTask(taskToComplete);
-            model.updateTask(targetIndex, completedTask);
-        } catch (NoChangeException nce) {
-            throw new CommandException(MESSAGE_TASK_ALREADY_COMPLETED);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
-
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
-    }
-
-    private static Task createCompletedTask(ReadOnlyTask taskToComplete) throws NoChangeException {
-        if (taskToComplete.getComplete().getCompletion() == true) {
-            throw new NoChangeException(MESSAGE_TASK_ALREADY_COMPLETED);
-        }
-        Description description = taskToComplete.getDescription();
-        UniqueTagList tags = taskToComplete.getTags();
-        Duration duration = taskToComplete.getDuration();
-        DueDate dueDate = taskToComplete.getDueDate();
-        Complete complete = new Complete(true);
-        TaskId id = taskToComplete.getTaskId();
-
-        Task completedTask = new Task(description, dueDate, duration, tags, complete, id);
-
-        completedTask.setComplete();
-        return completedTask;
+        return executeCompletion(
+                SHOULD_MARK_TASK_COMPLETE, MESSAGE_TASK_ALREADY_COMPLETED, MESSAGE_COMPLETE_TASK_SUCCESS
+        );
     }
 
 }
