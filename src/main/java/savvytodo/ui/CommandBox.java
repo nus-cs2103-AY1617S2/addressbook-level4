@@ -30,7 +30,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.logic = logic;
-        TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());     
+        TextFields.bindAutoCompletion(commandTextField, AutoCompleteDictionaryFactory.getDictionary());
         addToPlaceholder(commandBoxPlaceholder);
     }
 
