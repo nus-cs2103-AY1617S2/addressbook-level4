@@ -42,11 +42,18 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setStorage(storage);
         return command.execute();
     }
+
     //@@author A0139925U
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
-        model.updateFilteredListToShowUncompleted();
+        model.updateFilteredListToShowAll();
         return model.getFilteredTaskList();
+    }
+
+    //@@author A0142255M
+    @Override
+    public String getFilteredTaskListType() {
+        return model.getFilteredTaskListType();
     }
 
 }
