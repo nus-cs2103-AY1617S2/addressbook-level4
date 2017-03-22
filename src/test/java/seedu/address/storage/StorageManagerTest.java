@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.core.Config;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -28,7 +29,16 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        storageManager = new StorageManager(getTempFilePath("ab"), getTempFilePath("prefs"));
+        Config config = makeTestConfig();
+        storageManager = new StorageManager(config);
+    }
+
+    public Config makeTestConfig() {
+        String tempConfigFile = testFolder.getRoot().getPath() + "TempConfig.json";
+        Config config = new Config(tempConfigFile);
+        config.setTaskManagerFilePath(testFolder.getRoot().getPath() + "TempTaskManager.xml");
+        config.setUserPrefsFilePath(testFolder.getRoot().getPath() + "TempPreferences.json");
+        return config;
     }
 
     private String getTempFilePath(String fileName) {
@@ -73,7 +83,7 @@ public class StorageManagerTest {
     public void handleTaskManagerChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that throws an
         // exception when the save method is called
-        Storage storage = new StorageManager(new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(makeTestConfig(), new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
                 new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new TaskManager(), "dummy message"));

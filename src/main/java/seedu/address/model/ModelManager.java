@@ -13,8 +13,10 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
@@ -83,6 +85,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager, message));
     }
 
+    /** Raises an event to indicate the path needs to be changed */
+    private void indicateTaskManagerPathChanged(String message, String path) {
+        raise(new TaskManagerPathChangedEvent(taskManager, message, path));
+    }
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
@@ -108,7 +115,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateSaveLocation(String path) {
-        indicateTaskManagerChanged(MESSAGE_ON_SAVETO + path);
+        assert path != null;
+        indicateTaskManagerPathChanged(MESSAGE_ON_SAVETO + path, path);
     }
 
     @Override
@@ -144,7 +152,12 @@ public class ModelManager extends ComponentManager implements Model {
         // Store it in case of redo
         redoCommandHistory.add(toUndo);
 
-        indicateTaskManagerChanged(MESSAGE_ON_UNDO);
+        if (toUndo.startsWith(SaveToCommand.COMMAND_WORD)) {
+            indicateTaskManagerPathChanged(MESSAGE_ON_UNDO, null);
+        } else {
+            indicateTaskManagerChanged(MESSAGE_ON_UNDO);
+        }
+
         return toUndo;
     }
 
