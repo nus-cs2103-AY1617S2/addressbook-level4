@@ -24,6 +24,9 @@ public class TestTask implements ReadOnlyTask {
 
     public TestTask() {
         tags = new UniqueTagList();
+        this.startDateTime = Optional.empty();
+        this.endDateTime = Optional.empty();
+        this.interval = RecurInterval.NONE;
     }
 
     /**
@@ -32,6 +35,9 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.tags = taskToCopy.getTags();
+        this.startDateTime = taskToCopy.getStartDateTime();
+        this.endDateTime = taskToCopy.getEndDateTime();
+        this.interval = taskToCopy.getRecurInterval();
     }
 
     public void setName(Name name) {
