@@ -91,8 +91,8 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_invalidValues_failure() {
-//        commandBox.runCommand("UPDATE 1 *&");
-//        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
+        commandBox.runCommand("UPDATE 1 *&");
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);

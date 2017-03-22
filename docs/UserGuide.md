@@ -67,8 +67,8 @@ There are 4 forms of task that ProcrastiNomore supports:
 #### 3.2.1. Events
 
 Format: `ADD TASK ON DATE/DAY` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTTIME TO ENDTIME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY FROMSTARTTIME TO ENDTIME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
 
 #### 3.2.2. Deadlines
 
@@ -78,24 +78,20 @@ Format: `ADD TASK BY DATE/TIME/DATE+TIME`
 
 Format:	`ADD TASK`
 
-#### 3.2.4. Unconfirmed events
-
-Format: `ADD TASK ON DATE1 OR DATE2 OR DATE3`
-
-> TIME input can be in 24hrs format or 12hrs format with am/pm
-
 Examples:
 
-* `ADD eat breakfast ON 3/3/17`
+* `ADD eat breakfast ON 03/03/17`
 * `ADD eat lunch ON thursday`
-* `ADD eat dinner FROM 530pm TO 730pm`
-* `ADD eat breakfast FROM 1730 TO 1930`
-* `ADD eat lunch ON 3/3/17 FROM 530pm TO 730pm`
-* `ADD eat dinner BY 3/3/17`
-* `ADD eat breakfast BY 730pm`
-* `ADD eat lunch BY 3/3/17 330pm`
-* `ADD eat dinner ON 3/3/17 OR 4/3/17 OR 5/3/17`
+* `ADD eat dinner FROM today 1730 TO today 1930`
+* `ADD eat breakfast FROM tomorrow 0800 TO tomorrow 0830`
+* `ADD eat lunch ON 03/03/17 1400 TO 1500`
+* `ADD eat dinner BY 03/03/17`
+* `ADD eat breakfast BY 0730`
+* `ADD eat lunch BY 03/03/17 330pm`
 * `ADD eat breakfast`
+
+> TIME input can be in 24hrs format or 12hrs format with am/pm
+> If the function "ADD ... BY .." is used without stating the end time, the default end time will be 2359.
 
 ### 3.3. Update an existing task : `UPDATE`
 
@@ -110,7 +106,7 @@ Format: `UPDATE TASK`
 #### 3.3.2. Update task time
 
 Format: `UPDATE TASK TO STARTTIME ENDTIME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`update TASK to TIME`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`update TASK to TIME`
 
 #### 3.3.3. Update the entire task index
 
@@ -133,7 +129,7 @@ Examples:
 ### 3.4. Delete an existing task: `DELETE`
 
 Format: `DELETE TASKNAME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX`
 
 > In the event of DELETE TASKNAME, ProcrastiNomore will show a list of tasks
 > with the same TASKNAME and user will be required to input the TASKINDEX of
