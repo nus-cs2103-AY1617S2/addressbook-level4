@@ -9,11 +9,16 @@ import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
-
+/*
+import seedu.task.model.task.Phone;
+import seedu.task.model.task.Address;
+import seedu.task.model.task.Email;
+ */
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         try {
             return new Task[] {
+<<<<<<< HEAD
                 /*
             		new Task(new TaskName("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -36,6 +41,18 @@ public class SampleDataUtil {
                 */
                 new Task(new TaskName("Buy coke"), new TaskDate("210217"), new TaskTime("0800"),
     					new TaskTime("1000"), new String("Look out for lucky draws."),new UniqueTagList())
+=======
+                new Task(new TaskName("Buy apple juice"), new TaskDate("010117"), new TaskTime("0800"),
+    					new TaskTime("1000"), new String("Look out for lucky draws."),new UniqueTagList("")),
+                new Task(new TaskName("Buy blueberry juice"), new TaskDate("020117"), new TaskTime("0900"),
+    					new TaskTime("1001"), new String("Look out for lucky dips."),new UniqueTagList("")),
+                new Task(new TaskName("Buy coke"), new TaskDate("030117"), new TaskTime("0930"),
+    					new TaskTime("1002"), new String("Look out for traffic."),new UniqueTagList("")),
+                new Task(new TaskName("Buy isotonic drinks"), new TaskDate("040117"), new TaskTime("1000"),
+    					new TaskTime("1100"), new String("Look out for promotions."),new UniqueTagList("")),
+                new Task(new TaskName("Buy orange juice"), new TaskDate("050117"), new TaskTime("1010"),
+    					new TaskTime("1100"), new String("Look out for sweets along the way."),new UniqueTagList(""))
+>>>>>>> morphing_task_manager
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
@@ -44,13 +61,19 @@ public class SampleDataUtil {
 
     public static ReadOnlyTaskManager getSampleTaskManager() {
         try {
+<<<<<<< HEAD
             TaskManager sampleAB = new TaskManager();
             for (Task samplePerson : getSamplePersons()) {
                 sampleAB.addTaskTask(samplePerson);
+=======
+            TaskManager sampleTM = new TaskManager();
+            for (Task sampleTask : getSampleTasks()) {
+                sampleTM.addJobTask(sampleTask);
+>>>>>>> morphing_task_manager
             }
-            return sampleAB;
+            return sampleTM;
         } catch (DuplicateTaskException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
 }

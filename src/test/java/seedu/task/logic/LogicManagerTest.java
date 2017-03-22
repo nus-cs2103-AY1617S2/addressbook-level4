@@ -43,16 +43,18 @@ import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
-import seedu.task.model.task.Phone;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.StorageManager;
+/*
+import seedu.task.model.task.Phone;
+import seedu.task.model.task.Address;
+import seedu.task.model.task.Email;
 
+ */
 
 public class LogicManagerTest {
 
@@ -93,7 +95,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getAddressBook()); // last saved assumed to be up to date
+        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -126,7 +128,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedAddressBook = new TaskManager(model.getAddressBook());
+        TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
@@ -156,7 +158,7 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedAddressBook, model.getTaskManager());
         assertEquals(expectedAddressBook, latestSavedAddressBook);
     }
 
@@ -202,10 +204,12 @@ public class LogicManagerTest {
     public void execute_add_invalidPersonData() {
         assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
                 TaskName.MESSAGE_NAME_CONSTRAINTS);
+        /*
         assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
+                */
         assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -217,7 +221,11 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.adam();
         TaskManager expectedAB = new TaskManager();
+<<<<<<< HEAD
         expectedAB.addTaskTask(toBeAdded);
+=======
+        expectedAB.addJobTask(toBeAdded);
+>>>>>>> morphing_task_manager
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -512,7 +520,11 @@ public class LogicManagerTest {
          */
         void addToAddressBook(TaskManager addressBook, List<Task> personsToAdd) throws Exception {
             for (Task p: personsToAdd) {
+<<<<<<< HEAD
                 addressBook.addTaskTask(p);
+=======
+                addressBook.addJobTask(p);
+>>>>>>> morphing_task_manager
             }
         }
 

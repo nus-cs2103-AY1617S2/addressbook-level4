@@ -18,7 +18,7 @@ import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task-manager level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
@@ -77,20 +77,32 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// task-level operations
 
     /**
+<<<<<<< HEAD
      * Adds a task to the address book.
+=======
+     * Adds a task to the task manager.
+>>>>>>> morphing_task_manager
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
+<<<<<<< HEAD
     public void addTaskTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+=======
+    public void addJobTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+>>>>>>> morphing_task_manager
         syncMasterTagListWith(p);
         tasks.add(p);
     }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
+<<<<<<< HEAD
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
+=======
+     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
+>>>>>>> morphing_task_manager
      * @see #syncMasterTagListWith(Task)
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
@@ -104,7 +116,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         Task editedTask = new Task(editedReadOnlyTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
+<<<<<<< HEAD
         // in the task list.
+=======
+        // in the person list.
+>>>>>>> morphing_task_manager
         tasks.updateTask(index, editedTask);
     }
 
