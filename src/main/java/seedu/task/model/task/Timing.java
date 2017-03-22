@@ -1,3 +1,4 @@
+//@@author A0164212U
 package seedu.task.model.task;
 
 import java.text.ParseException;
@@ -82,7 +83,8 @@ public class Timing implements Comparable<Timing> {
     public int hashCode() {
         return value.hashCode();
     }
-
+    
+//@@author A0163559U
     /**
      * Results in Timing sorted in ascending order.
      */
