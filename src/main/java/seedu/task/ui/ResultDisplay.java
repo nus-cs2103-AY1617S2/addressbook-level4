@@ -21,8 +21,8 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
-
-    private final StringProperty displayed = new SimpleStringProperty("");
+    private static final String WELCOME_MESSAGE	= "Welcom to FastTask ! Type 'help' to see what you can do.";
+    private final StringProperty displayed = new SimpleStringProperty(WELCOME_MESSAGE);
 
     @FXML
     private AnchorPane mainPane;
