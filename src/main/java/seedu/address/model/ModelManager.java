@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.exceptions.NoPreviousCommandException;
@@ -68,6 +69,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
+    }
+
+    @Override
+    public void showCompletedTaskList() {
+        raise(new ShowCompletedTaskEvent(ShowCompletedTaskEvent.Action.SHOW));
+    }
+
+    @Override
+    public void hideCompletedTaskList() {
+        raise(new ShowCompletedTaskEvent(ShowCompletedTaskEvent.Action.HIDE));
     }
 
     @Override
