@@ -104,6 +104,7 @@ public class EditCommand extends Command {
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
+            this.start = toCopy.getStart();
             this.deadline = toCopy.getDeadline();
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
