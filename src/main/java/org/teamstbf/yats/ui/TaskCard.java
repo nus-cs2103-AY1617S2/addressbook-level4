@@ -35,11 +35,8 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(ReadOnlyEvent person, int displayedIndex, String FXML) {
         super(FXML);
         name.setText(person.getTitle().fullName);
-        name.setTextFill(Color.web("#00FF00"));
         id.setText(displayedIndex + ". ");
-        id.setTextFill(Color.web("#00FF00"));
         phone.setText(person.getLocation().value);
-        phone.setTextFill(Color.web("#00FF00"));
         address.setText(person.getDescription().value);
         email.setText(person.getStartTime().value);
         endTime.setText(person.getEndTime().value);
