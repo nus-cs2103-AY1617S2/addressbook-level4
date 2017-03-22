@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.util.SampleDataUtil;
 import seedu.watodo.testutil.TestUtil;
 
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        FloatingTask[] expectedList = SampleDataUtil.getSampleTasks();
+        Task[] expectedList = SampleDataUtil.getSampleTasks();
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

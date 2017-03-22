@@ -1,7 +1,6 @@
 package seedu.watodo.model.task;
 
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Task.Status;
 
 /**
  * A read-only immutable interface for a Task in the task manager.
@@ -10,7 +9,9 @@ import seedu.watodo.model.task.Task.Status;
 public interface ReadOnlyTask {
 
     Description getDescription();
-    Status getStatus();
+    DateTime getStartDate();
+    DateTime getEndDate();
+    TaskStatus getStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -24,8 +25,11 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                );
+                && other.getDescription().equals(this.getDescription())// state checks here onwards
+                && other.getStartDate() == this.getStartDate()
+                && other.getEndDate() == this.getEndDate()
+                && other.getStatus().equals(this.getStatus())
+                && other.getTags().equals(this.getTags()));
     }
 
     /**
@@ -33,10 +37,11 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDescription())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getDescription());
+        if (this.getTags() != null) { // TODO fix
+                builder.append("\nTags: ");
+                getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
-
 }

@@ -2,7 +2,7 @@ package seedu.watodo.testutil;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.TaskManager;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 
 /**
@@ -10,16 +10,23 @@ import seedu.watodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-
+    public TestTask eat, study, shop, code, play, sleep;
+    
     public TypicalTestTasks() {
-
+        try {
+            eat = new TaskBuilder().withDescription("Time to eat").build(); //TODO continue
+        
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+        
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new FloatingTask(task));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
@@ -27,12 +34,12 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{eat, study, sleep};
     }
 
     public TaskManager getTypicalTaskManager() {
-        TaskManager ab = new TaskManager();
-        loadTaskManagerWithSampleData(ab);
-        return ab;
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleData(tm);
+        return tm;
     }
 }

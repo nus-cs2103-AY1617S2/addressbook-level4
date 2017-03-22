@@ -1,6 +1,7 @@
 package seedu.watodo.storage;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -9,7 +10,8 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.FloatingTask;
+import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
@@ -19,12 +21,10 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
-    @XmlElement(required = true)
-    private String phone;
-    @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
-    private String address;
+    @XmlElement(required = false)
+    private String startDate;
+    @XmlElement(required = false)
+    private String endDate;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -43,6 +43,14 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getDescription().fullDescription;
+        if (source.getStartDate() != null) {
+            startDate = source.getStartDate().toString();
+        }
+        
+        if (source.getEndDate() != null) {
+            endDate = source.getEndDate().toString();
+        }
+        
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -54,13 +62,27 @@ public class XmlAdaptedTask {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
-    public FloatingTask toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
         final Description name = new Description(this.name);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new FloatingTask(name, tags);
+        if (startDate == null && endDate == null) {
+            return new Task(name, tags);
+        } else if (startDate == null && endDate != null) {
+            final DateTime eDate = new DateTime(endDate);
+
+            return new Task(name, eDate, tags);
+        } else if (startDate != null && endDate != null) {
+            final DateTime sDate = new DateTime(startDate);
+            final DateTime eDate = new DateTime(endDate);
+
+
+            return new Task(name, sDate, eDate, tags);
+        }
+        
+        return new Task(name, tags);
     }
 }
