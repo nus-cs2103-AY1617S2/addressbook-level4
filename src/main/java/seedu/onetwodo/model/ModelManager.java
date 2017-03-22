@@ -1,5 +1,6 @@
 package seedu.onetwodo.model;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -24,8 +26,16 @@ import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    // toDoList is data, not observable
     private final ToDoList toDoList;
+
+    // filteredTasks is observable
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    // All commands except find clears the search String filter
+    private Set<String> searchStrings;
+
+    // To persist on list command
     private DoneStatus doneStatus;
 
     /**
@@ -39,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.toDoList = new ToDoList(toDoList);
         this.filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
+        this.searchStrings = new HashSet<String>();
         this.doneStatus = DoneStatus.UNDONE;
     }
 
@@ -50,6 +61,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyToDoList newData) {
         toDoList.resetData(newData);
         indicateToDoListChanged();
+    }
+
+    @Override
+    public void resetSearchStrings() {
+        this.searchStrings = new HashSet<String>();
     }
 
     @Override
@@ -72,16 +88,12 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void doneTask(int filteredTaskListIndex) throws IllegalValueException {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
-        setDoneStatus(DoneStatus.UNDONE);
-        updateFilteredUndoneTaskList();
         indicateToDoListChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         toDoList.addTask(task);
-        setDoneStatus(DoneStatus.UNDONE);
-        updateFilteredUndoneTaskList();
         indicateToDoListChanged();
     }
 
@@ -110,6 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        searchStrings = keywords;
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -127,7 +140,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updatefilteredTaskListByDoneStatus() {
+    public void updateByTaskType(TaskType taskType) {
+        updateFilteredTaskList(new PredicateExpression(p -> p.getTaskType() == taskType));
+    }
+
+    @Override
+    public void updateByDoneStatus() {
         switch (doneStatus) {
         case DONE:
             updateFilteredDoneTaskList();
@@ -140,6 +158,32 @@ public class ModelManager extends ComponentManager implements Model {
             break;
         }
     };
+
+    @Override
+    public void updateBySearchStrings() {
+        if (searchStrings.size() > 0) {
+            updateFilteredTaskList(searchStrings);
+        }
+    }
+
+    public FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType type) {
+        // update by find before getting
+        updateBySearchStrings();
+
+        // filter by type
+        FilteredList<ReadOnlyTask> filtered = getFilteredTaskList().filtered(t -> t.getTaskType() == type);
+
+        // filter by done and return
+        switch (doneStatus) {
+        case DONE:
+            return filtered.filtered(t -> t.getDoneStatus() == true);
+        case UNDONE:
+            return filtered.filtered(t -> t.getDoneStatus() == false);
+        case ALL:
+        default:
+            return filtered;
+        }
+    }
     //========== Inner classes/interfaces used for filtering =================================================
 
     @Override

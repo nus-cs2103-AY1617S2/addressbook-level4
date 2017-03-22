@@ -2,11 +2,13 @@ package seedu.onetwodo.model;
 
 import java.util.Set;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -57,5 +59,13 @@ public interface Model {
 
     void setDoneStatus(DoneStatus doneStatus);
 
-    void updatefilteredTaskListByDoneStatus();
+    void updateByDoneStatus();
+
+    void resetSearchStrings();
+
+    void updateBySearchStrings();
+
+    void updateByTaskType(TaskType taskType);
+
+    FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType taskType);
 }

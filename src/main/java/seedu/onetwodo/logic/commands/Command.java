@@ -1,13 +1,8 @@
 package seedu.onetwodo.logic.commands;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
-//import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.Model;
-import seedu.onetwodo.model.task.ReadOnlyTask;
-//import seedu.onetwodo.model.task.TaskType;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -42,16 +37,4 @@ public abstract class Command {
         this.model = model;
     }
 
-    public FilteredList<ReadOnlyTask> filterTasksByDoneStatus(FilteredList<ReadOnlyTask> filtered) {
-        DoneStatus doneStatus = model.getDoneStatus();
-        switch (doneStatus) {
-        case DONE:
-            return filtered.filtered(t -> t.getDoneStatus() == true);
-        case UNDONE:
-            return filtered.filtered(t -> t.getDoneStatus() == false);
-        case ALL:
-        default:
-            return filtered;
-        }
-    }
 }

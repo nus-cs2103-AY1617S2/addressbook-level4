@@ -31,8 +31,14 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        // Parse input to command
         Command command = parser.parseCommand(commandText);
+
+        // Give command reference to model data
         command.setData(model);
+
+        // Return result message from executing command
         return command.execute();
     }
 

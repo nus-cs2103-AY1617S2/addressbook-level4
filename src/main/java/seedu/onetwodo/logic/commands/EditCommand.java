@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
-import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.tag.UniqueTagList;
@@ -55,16 +54,13 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
-        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
-
-        if (filteredByDoneStatus.size() < filteredTaskListIndex || taskType == null) {
+        FilteredList<ReadOnlyTask> lastShownList = model.getFilteredByDoneFindType(taskType);
+        if (lastShownList.size() < filteredTaskListIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = filteredByDoneStatus.get(filteredTaskListIndex - 1);
-        int internalIndex = lastShownList.indexOf(taskToEdit);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex - 1);
+        int internalIndex = model.getFilteredTaskList().indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
@@ -72,7 +68,6 @@ public class EditCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        // model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 

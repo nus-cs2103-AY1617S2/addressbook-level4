@@ -2,7 +2,6 @@ package seedu.onetwodo.logic.commands;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.Messages;
-import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -33,16 +32,14 @@ public class DoneCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
-        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
+        FilteredList<ReadOnlyTask> lastShownList = model.getFilteredByDoneFindType(taskType);
 
-        if (filteredByDoneStatus.size() < targetIndex || taskType == null) {
+        if (lastShownList.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        ReadOnlyTask taskToComplete = filteredByDoneStatus.get(targetIndex - 1);
-        int internalIndex = lastShownList.indexOf(taskToComplete);
+        ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
+        System.out.println(taskToComplete.getName().fullName);
+        int internalIndex = model.getFilteredTaskList().indexOf(taskToComplete);
 
         try {
             model.doneTask(internalIndex);
@@ -51,8 +48,6 @@ public class DoneCommand extends Command {
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
-
-        model.updatefilteredTaskListByDoneStatus();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToComplete));
     }
 }

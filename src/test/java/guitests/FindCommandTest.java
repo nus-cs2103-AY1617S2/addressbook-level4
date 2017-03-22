@@ -17,10 +17,13 @@ public class FindCommandTest extends ToDoListGuiTest {
     public void find_nonEmptyList() {
         assertNoFindResults(FindCommand.COMMAND_WORD + " Nemo");
         assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH.getTaskType(), td.taskH, td.taskI);
+    }
 
-        //find after deleting one result
+    @Test
+    public void find_nonEmptyList_afterDeleted() {
+        //find after deleting one result taskH
         commandBox.runCommand(DeleteCommand.COMMAND_WORD + " t2");
-        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH.getTaskType(), td.taskH);
+        assertFindResult(FindCommand.COMMAND_WORD + " change", td.taskH.getTaskType(), td.taskI);
     }
 
     @Test
@@ -38,8 +41,6 @@ public class FindCommandTest extends ToDoListGuiTest {
 
     private void assertNoFindResults(String command) {
         assertFindResult(command, TaskType.DEADLINE);
-        assertFindResult(command, TaskType.EVENT);
-        assertFindResult(command, TaskType.TODO);
     }
 
     private void assertFindResult(String command, TaskType type, TestTask... expectedHits) {

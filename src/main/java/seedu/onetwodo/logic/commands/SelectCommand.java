@@ -3,7 +3,6 @@ package seedu.onetwodo.logic.commands;
 import javafx.collections.transformation.FilteredList;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.Messages;
-import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
@@ -35,15 +34,13 @@ public class SelectCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-        FilteredList<ReadOnlyTask> filteredByTaskType = lastShownList.filtered(t -> t.getTaskType() == taskType);
-        FilteredList<ReadOnlyTask> filteredByDoneStatus = filterTasksByDoneStatus(filteredByTaskType);
+        FilteredList<ReadOnlyTask> lastShownList = model.getFilteredByDoneFindType(taskType);
 
-        if (filteredByDoneStatus.size() < targetIndex || taskType == null) {
+        if (lastShownList.size() < targetIndex || taskType == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToSelect = filteredByDoneStatus.get(targetIndex - 1);
+        ReadOnlyTask taskToSelect = lastShownList.get(targetIndex - 1);
 
         // Scroll to and open the event
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1, taskType));
