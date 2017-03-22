@@ -1,9 +1,9 @@
 package seedu.watodo.logic.parser;
 
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_END_DATETIME;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_START_DATETIME;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.watodo.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -26,8 +26,9 @@ public class EditCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     * @throws IllegalValueException 
      */
-    public Command parse(String args) {
+    public Command parse(String args) throws IllegalValueException {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_TAG);

@@ -4,7 +4,7 @@ import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
-import seedu.watodo.model.task.Task.Status;
+import seedu.watodo.model.task.TaskStatus;
 
 /**
  * A mutable person object. For testing only.
@@ -62,7 +62,19 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Status getStatus() {
+    public DateTime getStartDate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public DateTime getEndDate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public TaskStatus getStatus() {
         // TODO Auto-generated method stub
         return null;
     }

@@ -8,13 +8,8 @@ import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.FloatingTask;
-<<<<<<< HEAD
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
-=======
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
->>>>>>> de002b7849c0b4fe46fd88478eb2269ad1cf0be5
 import seedu.watodo.model.task.UniqueTaskList;
 
 /**
@@ -81,7 +76,7 @@ public class EditCommand extends Command {
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new FloatingTask(updatedName, updatedTags);
+        return new Task(updatedName, updatedTags);
     }
 
     /**
