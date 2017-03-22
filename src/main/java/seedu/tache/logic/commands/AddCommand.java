@@ -13,11 +13,12 @@ import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
+import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Adds a task to the task manager.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "add";
 
@@ -28,8 +29,10 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_TASK_NOT_FOUND = "%1$s no longer exists in the task manager";
 
     private final Task toAdd;
+    private boolean commandSuccess;
 
     /**
      * Creates an AddCommand using raw name and tags value.
@@ -46,8 +49,10 @@ public class AddCommand extends Command {
                 new Name(name),
                 new UniqueTagList(tagSet)
         );
+        commandSuccess = false;
     }
 
+    //@@author A0150120H
     /**
      * Creates an AddCommand using raw name, start date & time, end date & time, and tags values.
      *
@@ -75,6 +80,7 @@ public class AddCommand extends Command {
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
         this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, false, RecurInterval.NONE);
+        commandSuccess = false;
     }
 
     @Override
@@ -82,11 +88,28 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            commandSuccess = true;
+            undoHistory.push(this);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+    }
+
+    @Override
+    public boolean isUndoable() {
+        return commandSuccess;
+    }
+
+    @Override
+    public String undo() throws CommandException {
+        try {
+            model.deleteTask(toAdd);
+            return String.format(MESSAGE_SUCCESS, toAdd);
+        } catch (TaskNotFoundException e) {
+            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, toAdd));
+        }
     }
 }
 
