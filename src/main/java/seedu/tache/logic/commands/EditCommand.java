@@ -114,9 +114,15 @@ public class EditCommand extends Command {
             DateTime tempEndDateTime = new DateTime(dateNoChange + " " + editTaskDescriptor.getEndTime().orElse(""));
             updatedEndDateTime = Optional.of(tempEndDateTime);
         }
+        boolean isTimed;
+        if (updatedStartDateTime.isPresent() || updatedEndDateTime.isPresent()) {
+            isTimed = true;
+        } else {
+            isTimed = false;
+        }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, true, false, RecurInterval.NONE);
+                            updatedTags, isTimed, true, false, RecurInterval.NONE);
 
     }
 

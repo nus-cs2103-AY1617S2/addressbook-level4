@@ -17,6 +17,7 @@ public class TestTask implements ReadOnlyTask {
     private Optional<DateTime> startDateTime;
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
+    private boolean isTimed;
     private boolean isActive;
     private boolean isRecurring;
     private RecurInterval interval;
@@ -73,6 +74,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append(";" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public boolean getTimedStatus() {
+        return isTimed;
     }
 
     @Override

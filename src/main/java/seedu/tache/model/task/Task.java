@@ -20,6 +20,7 @@ public class Task implements ReadOnlyTask {
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
     private boolean isActive;
+    private boolean isTimed;
     private boolean isRecurring;
     private RecurInterval interval;
 
@@ -33,18 +34,25 @@ public class Task implements ReadOnlyTask {
         this.endDateTime = Optional.empty();
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isActive = true;
+        this.isTimed = false;
         this.isRecurring = false;
         this.interval = RecurInterval.NONE;
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
-                    UniqueTagList tags, boolean isActive, boolean isRecurring, RecurInterval interval) {
+                    UniqueTagList tags, boolean isTimed, boolean isActive, boolean isRecurring,
+                    RecurInterval interval) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.isActive = isActive;
+        if (startDateTime.isPresent() || endDateTime.isPresent()) {
+            this.isTimed = true;
+        } else {
+            this.isTimed = false;
+        }
         this.isRecurring = isRecurring;
         this.interval = interval;
     }
@@ -54,7 +62,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
-                    source.getActiveStatus(), source.getRecurringStatus(), source.getRecurInterval());
+                    source.getTimedStatus(), source.getActiveStatus(), source.getRecurringStatus(),
+                    source.getRecurInterval());
     }
 
     @Override
@@ -97,6 +106,17 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    //@@author A0142255M
+    @Override
+    public boolean getTimedStatus() {
+        return isTimed;
+    }
+
+    public void setTimedStatus(boolean isTimed) {
+        this.isTimed = isTimed;
+    }
+
+    //@@author A0139961U
     @Override
     public boolean getActiveStatus() {
         return isActive;
@@ -133,6 +153,7 @@ public class Task implements ReadOnlyTask {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setEndDateTime(replacement.getEndDateTime());
         this.setTags(replacement.getTags());
+        this.setTimedStatus(replacement.getTimedStatus());
         this.setActiveStatus(replacement.getActiveStatus());
         this.setRecurringStatus(replacement.getRecurringStatus());
         this.setRecurInterval(replacement.getRecurInterval());

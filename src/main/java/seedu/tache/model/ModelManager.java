@@ -105,7 +105,19 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowCompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
     }
+
+    //@@author A0142255M
+    @Override
+    public void updateFilteredListToShowTimed() {
+        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(true)));
+    }
+
+    @Override
+    public void updateFilteredListToShowFloating() {
+        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(false)));
+    }
     //@@author
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
@@ -177,6 +189,30 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    //@@author A0142255M
+    private class TimedQualifier implements Qualifier {
+        private boolean isTimed;
+
+        TimedQualifier(boolean isTimed) {
+            this.isTimed = isTimed;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (isTimed) {
+                return task.getTimedStatus();
+            } else {
+                return !task.getTimedStatus();
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "timed=" + isTimed;
+        }
+    }
+
     //@@author A0139925U
     private class ActiveQualifier implements Qualifier {
         private boolean isActive;

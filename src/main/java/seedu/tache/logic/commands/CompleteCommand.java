@@ -80,7 +80,7 @@ public class CompleteCommand extends Command {
         assert taskToEdit != null;
 
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), false, false, RecurInterval.NONE);
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false, false, RecurInterval.NONE);
 
     }
 }

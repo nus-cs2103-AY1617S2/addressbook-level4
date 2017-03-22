@@ -4,7 +4,7 @@ package seedu.tache.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
@@ -19,7 +19,7 @@ public class TaskListType extends UiPart<Region> {
     private static final String FXML = "TaskListType.fxml";
 
     @FXML
-    private TextField taskListType;
+    private Label taskListType;
 
     public TaskListType(AnchorPane taskListTypePlaceholder, String typeOfTasks) {
         super(FXML);
