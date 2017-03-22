@@ -48,7 +48,7 @@ public class EditCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
     private final EditTaskDescriptor editTaskDescriptor;
     private final String type;
-
+    //@@author A0110491U
     /**
      * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
      * @param editEventDescriptor details to edit the event with

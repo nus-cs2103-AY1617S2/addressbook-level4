@@ -24,12 +24,11 @@ public class DeleteCommand extends Command {
 
     public final int targetIndex;
     public final String targetType;
-
+    //@@author A0110491U
     public DeleteCommand(int targetIndex, String targetType) {
         this.targetIndex = targetIndex;
         this.targetType = targetType;
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
