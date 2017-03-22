@@ -157,7 +157,7 @@ public class ParserUtil {
             return false;
         }
     }
-
+    //@@author A0150120H
     /**
      * Returns the first time String encountered
      */

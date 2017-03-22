@@ -34,50 +34,29 @@ public class AddCommand extends Command implements Undoable {
     private final Task toAdd;
     private boolean commandSuccess;
 
-    /**
-     * Creates an AddCommand using raw name and tags value.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public AddCommand(String name, Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toAdd = new Task(
-                new Name(name),
-                new UniqueTagList(tagSet)
-        );
-        commandSuccess = false;
-    }
-
     //@@author A0150120H
     /**
      * Creates an AddCommand using raw name, start date & time, end date & time, and tags values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String nameStr, String startDateStr, String startTimeStr, Optional<String> endDateStr,
-            Optional<String> endTimeStr, Set<String> tagsStr) throws IllegalValueException {
+    public AddCommand(String nameStr, Optional<String> startDateTimeStr, Optional<String> endDateTimeStr,
+            Set<String> tagsStr) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tagsStr) {
             tagSet.add(new Tag(tagName));
         }
         Name name = new Name(nameStr);
-        Optional<DateTime> startDateTime = Optional.of(new DateTime(startDateStr + startTimeStr));
+
+        Optional<DateTime> startDateTime = Optional.empty();
         Optional<DateTime> endDateTime = Optional.empty();
-        String endDate = "";
-        String endTime = "";
-        if (endDateStr.isPresent()) {
-            endDate = endDateStr.get();
+        if (startDateTimeStr.isPresent()) {
+            startDateTime = Optional.of(new DateTime(startDateTimeStr.get()));
         }
-        if (endTimeStr.isPresent()) {
-            endTime = endTimeStr.get();
+        if (endDateTimeStr.isPresent()) {
+            endDateTime = Optional.of(new DateTime(endDateTimeStr.get()));
         }
-        if (!(endDate.equals("") && endTime.equals(""))) {
-            endDateTime = Optional.of(new DateTime(endDate + endTime));
-        }
+
         UniqueTagList tagList = new UniqueTagList(tagSet);
         this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, false, RecurInterval.NONE);
         commandSuccess = false;
