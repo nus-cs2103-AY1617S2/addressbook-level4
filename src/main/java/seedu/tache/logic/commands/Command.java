@@ -13,7 +13,9 @@ import seedu.tache.storage.Storage;
 public abstract class Command {
     protected Model model;
     protected Storage storage;
+    //@@author A0150120H
     protected static Stack<Undoable> undoHistory = new Stack<Undoable>();
+    //@@author
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -57,4 +59,5 @@ public abstract class Command {
     protected static void clearUndoHistory() {
         undoHistory = new Stack<Undoable>();
     }
+    //@@author
 }
