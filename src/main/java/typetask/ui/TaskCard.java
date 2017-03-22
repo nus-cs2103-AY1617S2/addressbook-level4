@@ -41,7 +41,7 @@ public class TaskCard extends UiPart<Region> {
     private Label endTime;
     @FXML
     private Pane colourTag;
-    
+
     private ReadOnlyTask task;
     private LocalDateTime now = LocalDateTime.now();
     private LocalDate nowDate = now.toLocalDate();
@@ -49,7 +49,7 @@ public class TaskCard extends UiPart<Region> {
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern(inputPattern);
     private LocalDate parsedDate;// NOTE: only instantiated for non-floating task
     private boolean parsedDateFlag = false;
-    
+
 	public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
@@ -64,7 +64,7 @@ public class TaskCard extends UiPart<Region> {
 //        time.setText(parsedDate.toString());
         setColourCode();
         //add endDate.setText(...);
-        
+
     }
 
     //@@author A0139154E
@@ -87,12 +87,12 @@ public class TaskCard extends UiPart<Region> {
     private void setStyleToIndicateOverdue() {
         colourTag.getStyleClass().add(OVERDUE_STYLE_CLASS);
     }
-    
+
     //@@author A0139154E
     private void setStyleToIndicatePending() {
         colourTag.getStyleClass().add(PENDING_STYLE_CLASS);
     }
-    
+
     //@@author A0139154E
     private void setStyleToIndicatePriority() {
         colourTag.getStyleClass().add(PRIORITY_STYLE_CLASS);
