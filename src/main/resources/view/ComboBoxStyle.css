@@ -2,4 +2,5 @@
 
 .combo-box .arrow, .arrow-button, .text-field {
     -fx-background-color: transparent;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 1);
 }
