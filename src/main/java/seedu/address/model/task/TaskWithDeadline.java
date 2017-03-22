@@ -8,7 +8,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class TaskWithDeadline extends Task {
-
     static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
 
     Deadline deadline = null;
@@ -124,6 +123,20 @@ public class TaskWithDeadline extends Task {
         } else {
             return "Begin: " + dateFormat.format(startingTime.getDate())
                     + "; Due: " + dateFormat.format(deadline.getDate());
+        }
+    }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        if (task2 instanceof TaskWithoutDeadline) {
+            return MAX_TIME_DIFF;
+        } else {
+            Calendar cal1 = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            cal1.setTime(this.getDeadline().getDate());
+            cal2.setTime(task2.getDeadline().getDate());
+            // Compares in UNIX time
+            return (int) ((cal1.getTimeInMillis() - cal2.getTimeInMillis()) / 1000);
         }
     }
 }

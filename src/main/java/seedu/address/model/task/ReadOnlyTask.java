@@ -107,4 +107,10 @@ public interface ReadOnlyTask {
     enum TaskType {
         TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
     }
+
+    /**
+     * Allows comparison of tasks by deadline. Tasks without deadline will be
+     * deemed as the smallest
+     */
+    int compareTo(ReadOnlyTask task2);
 }

@@ -21,4 +21,13 @@ public class TaskWithoutDeadline extends Task {
     public String getTaskDateTime() {
         return "";
     }
+
+    @Override
+    public int compareTo(ReadOnlyTask task2) {
+        if (task2 instanceof TaskWithDeadline) {
+            return -MAX_TIME_DIFF;
+        } else {
+            return 0;
+        }
+    }
 }
