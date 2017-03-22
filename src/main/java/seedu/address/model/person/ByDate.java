@@ -1,9 +1,11 @@
 package seedu.address.model.person;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 
 
 /**
@@ -21,7 +23,11 @@ public class ByDate {
      */
     public static final String BYDATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
 
-    public final String value;
+    public final LocalDate value;
+
+    public LocalDate getValue() {
+        return value;
+    }
 
     /**
      * Validates given ByDate.
@@ -35,7 +41,7 @@ public class ByDate {
             if (!isValidByDate(bydate)) {
                 throw new IllegalValueException(MESSAGE_BYDATE_CONSTRAINTS);
             }
-            this.value = bydate;
+            this.value = StringUtil.parseStringToDate(bydate);
         }
     }
 
@@ -61,7 +67,7 @@ public class ByDate {
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
