@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
-
+//@@author A0121668A
 /**
  * Represents a Deadline's ByDate in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidByDate(String)}
@@ -29,6 +29,7 @@ public class ByDate {
         return value;
     }
 
+//@@author A0110491U A0121668A
     /**
      * Validates given ByDate.
      *
@@ -45,6 +46,7 @@ public class ByDate {
         }
     }
 
+  //@@author A0110491U
     /**
      * Returns true if a given string is a valid deadline ByDate.
      */
@@ -65,6 +67,7 @@ public class ByDate {
         return false;
     }
 
+  //@@author
     @Override
     public String toString() {
         return value.toString();

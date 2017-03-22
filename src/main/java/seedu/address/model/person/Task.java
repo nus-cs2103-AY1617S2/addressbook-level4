@@ -5,22 +5,24 @@ import java.util.Objects;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
-public class Deadline implements ReadOnlyDeadline {
+public class Task implements ReadOnlyTask {
 
     private Description description;
+    private Priority priority;
     private ByDate bydate;
-    private EndTime bytime;
+    private ByTime bytime;
     private Location location;
 
     private UniqueTagList tags;
 
     /**
-     * Description must be present, ByDate must be present.
+     * Description and Priority must be present.
      */
-    public Deadline(Description description, ByDate bydate, EndTime bytime,
+    public Task(Description description, Priority priority, ByDate bydate, ByTime bytime,
             Location location, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, bydate, tags);
+        assert !CollectionUtil.isAnyNull(description, priority, tags);
         this.description = description;
+        this.priority = priority;
         this.bydate = bydate;
         this.bytime = bytime;
         this.location = location;
@@ -28,11 +30,11 @@ public class Deadline implements ReadOnlyDeadline {
     }
 
     /**
-     * Creates a copy of the given ReadOnlyDeadline.
+     * Creates a copy of the given ReadOnlyTask.
      */
-    public Deadline(ReadOnlyDeadline source) {
-        this(source.getDescription(), source.getByDate(),
-                source.getEndTime(), source.getLocation(), source.getTags());
+    public Task(ReadOnlyTask source) {
+        this(source.getDescription(), source.getPriority(), source.getByDate(),
+                source.getByTime(), source.getLocation(), source.getTags());
     }
 
     public void setDescription(Description description) {
@@ -45,6 +47,14 @@ public class Deadline implements ReadOnlyDeadline {
         return description;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
     public void setByDate(ByDate bydate) {
         assert bydate != null;
         this.bydate = bydate;
@@ -55,13 +65,13 @@ public class Deadline implements ReadOnlyDeadline {
         return bydate;
     }
 
-    public void setEndTime(EndTime bytime) {
+    public void setByTime(ByTime bytime) {
         //can be null
         this.bytime = bytime;
     }
 
     @Override
-    public EndTime getEndTime() {
+    public ByTime getByTime() {
         return bytime;
     }
 
@@ -81,21 +91,21 @@ public class Deadline implements ReadOnlyDeadline {
     }
 
     /**
-     * Replaces this deadline's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
 
     /**
-     * Updates this event with the details of {@code replacement}.
+     * Updates this task with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyDeadline replacement) {
+    public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setDescription(replacement.getDescription());
         this.setByDate(replacement.getByDate());
-        this.setEndTime(replacement.getEndTime());
+        this.setByTime(replacement.getByTime());
         this.setLocation(replacement.getLocation());
         this.setTags(replacement.getTags());
     }
@@ -103,8 +113,8 @@ public class Deadline implements ReadOnlyDeadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyDeadline // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyDeadline) other));
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override

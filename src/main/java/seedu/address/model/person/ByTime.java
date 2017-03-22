@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 
-
+//@@author A0121668A
 /**
  * Represents a Deadline's ByTime in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidByTime(String)}
@@ -22,7 +22,7 @@ public class ByTime {
     public static final String BYTIME_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
 
     public final LocalTime value;
-
+//@@author A0110491U A0121668A
     /**
      * Validates given ByTime.
      *
@@ -38,7 +38,7 @@ public class ByTime {
             this.value = StringUtil.parseStringToTime(byTime);
         }
     }
-
+//@@author A0121668A
     /**
      * Returns true if a given string is a valid deadline ByTime.
      */
@@ -48,7 +48,7 @@ public class ByTime {
         }
         return test.matches(BYTIME_VALIDATION_REGEX);
     }
-
+//@@author
     @Override
     public String toString() {
         return value.toString();

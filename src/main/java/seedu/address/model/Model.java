@@ -23,7 +23,7 @@ public interface Model {
     ReadOnlyWhatsLeft getWhatsLeft();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlytask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Deletes the given Event. */
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
