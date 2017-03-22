@@ -10,10 +10,9 @@ public class ListFloatCommand extends ListCommand {
 
     public static final String MESSAGE_SUCCESS = "Listed all floating tasks";
 
-
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();
+        model.updateFilteredByTypesTaskList(COMMAND_WORD);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

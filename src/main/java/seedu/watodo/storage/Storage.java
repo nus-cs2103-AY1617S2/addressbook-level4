@@ -6,7 +6,7 @@ import java.util.Optional;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.UserPrefs;
 
 /**
@@ -24,10 +24,10 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
     String getTaskListFilePath();
 
     @Override
-    Optional<ReadOnlyTaskManger> readTaskList() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskList() throws DataConversionException, IOException;
 
     @Override
-    void saveTaskList(ReadOnlyTaskManger TaskList) throws IOException;
+    void saveTaskList(ReadOnlyTaskManager TaskList) throws IOException;
 
     /**
      * Saves the current version of the Task List to the hard disk.

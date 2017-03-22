@@ -22,7 +22,7 @@ import seedu.watodo.logic.Logic;
 import seedu.watodo.logic.LogicManager;
 import seedu.watodo.model.Model;
 import seedu.watodo.model.ModelManager;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
 import seedu.watodo.model.util.SampleDataUtil;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManger> taskManagerOptional;
-        ReadOnlyTaskManger initialData;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
         try {
             taskManagerOptional = storage.readTaskList();
             if (!taskManagerOptional.isPresent()) {
