@@ -9,12 +9,12 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
 import seedu.task.model.task.TaskName;
-import seedu.task.model.task.Phone;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
+/*import seedu.task.model.task.Phone;
+import seedu.task.model.task.Address;
+import seedu.task.model.task.Email;*/
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
@@ -95,7 +95,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
-
+/*
         commandBox.runCommand("edit 1 p/abcd");
         assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
 
@@ -104,7 +104,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("edit 1 a/");
         assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
-
+*/
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
