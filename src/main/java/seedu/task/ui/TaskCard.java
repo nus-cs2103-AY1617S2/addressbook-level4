@@ -10,6 +10,7 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
+    private static final String EMPTY_STRING = "";
 
     @FXML
     private HBox cardPane;
@@ -64,6 +65,9 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void updateCompleteLabel(ReadOnlyTask task) {
-        complete.setText("✓");
+        if (task.getComplete() == null) {
+            return;
+        }
+        complete.setText(task.getComplete().getCompletion() ? "✓" : EMPTY_STRING);
     }
 }
