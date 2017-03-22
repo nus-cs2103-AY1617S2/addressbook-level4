@@ -2,6 +2,7 @@ package seedu.taskmanager.model.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -11,7 +12,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  * valid as declared in {@link #isValidStartDate(String)}
  */
 public class StartDate extends Date {
-    private final static SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Start date should be of dd/mm/yyyy format "
             + "or can be empty";
@@ -19,8 +20,6 @@ public class StartDate extends Date {
             + "/[0-9]{4}$)";
 
     // @@author A0140032E
-    
-
     /**
      * Validates given start date.
      *
@@ -37,6 +36,10 @@ public class StartDate extends Date {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);
         }
         try {
+            if (startDate.trim().equals("")) {
+                Calendar cal = Calendar.getInstance();
+                return cal.getTimeInMillis();
+            }
             return sdfInput.parse(startDate).getTime();
         } catch (ParseException e) {
             throw new IllegalValueException(MESSAGE_STARTDATE_CONSTRAINTS);

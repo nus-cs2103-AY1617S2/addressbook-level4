@@ -45,7 +45,7 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         // @@author A0140032E
-        if (new StartDate(startDate).after(new EndDate(endDate))){
+        if (new StartDate(startDate).after(new EndDate(endDate))) {
             throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
         }
         // @@author
