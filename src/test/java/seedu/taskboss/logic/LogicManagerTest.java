@@ -386,6 +386,16 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //---------------- Tests for find by name --------------------------------------
+
+    /*
+     * Valid equivalence partitions:
+     * - Find the tasks only when full words in name match the keywords
+     * - Is not case sensitive
+     * - Find the tasks when any of the keywords match the name
+     * The three test cases below test valid input as a name.
+     */
+
     @Test
     public void execute_findName_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -437,6 +447,16 @@ public class LogicManagerTest {
                 expectedAB, expectedList);
     }
 
+    //---------------- Tests for find by datetime --------------------------------------
+
+    /*
+     * Valid equivalence partitions:
+     * - Find the tasks only when the keywords present in order
+     * - Do not need match full words
+     * The two test cases below test valid input as datetime.
+     */
+
+    //@@author A0147990R
     @Test
     public void execute_findStartDatetime_matchesOnlyIfKeywordPresentInOrder() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -454,6 +474,7 @@ public class LogicManagerTest {
                 expectedTB, expectedList);
     }
 
+    //@@author A0147990R
     @Test
     public void execute_findEndDatetime_matchesOnlyIfKeywordPresentInOrder() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -621,6 +642,7 @@ public class LogicManagerTest {
             );
         }
 
+        //@@author A0147990R
         /**
          * Generates a Task object with given startDatetime. Other fields will have some
          * dummy values.
@@ -636,6 +658,7 @@ public class LogicManagerTest {
             );
         }
 
+        //@@author A0147990R
         /**
          * Generates a Task object with given endDatetime. Other fields will have some
          * dummy values.
