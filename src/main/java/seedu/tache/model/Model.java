@@ -43,10 +43,21 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    //@@author A0139925U
     /** Updates the filter of the filtered task list to show all uncompleted tasks */
     void updateFilteredListToShowUncompleted();
 
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowCompleted();
+
+    //@@author A0142255M
+    /** Updates the filter of the filtered task list to show all uncompleted tasks */
+    void updateFilteredListToShowTimed();
+
+    /** Updates the filter of the filtered task list to show all completed tasks */
+    void updateFilteredListToShowFloating();
+
+    /** Returns the filtered task list type as a {@code String} */
+    String getFilteredTaskListType();
 
 }

@@ -8,6 +8,7 @@ import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.model.task.ReadOnlyTask;
@@ -22,11 +23,21 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     public static final int MARGIN_OF_ERROR = 1;
+    //@@author A0142255M
+    public static final String ALL_TASK_LIST_TYPE = "all tasks";
+    public static final String COMPLETED_TASK_LIST_TYPE = "completed tasks";
+    public static final String UNCOMPLETED_TASK_LIST_TYPE = "uncompleted tasks";
+    public static final String TIMED_TASK_LIST_TYPE = "timed tasks";
+    public static final String FLOATING_TASK_LIST_TYPE = "floating tasks";
+    //@@author
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    //@@author A0142255M
+    private String filteredTaskListType = ALL_TASK_LIST_TYPE;
+    //@@author
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -67,12 +78,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    //@@author A0142255M
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredListToShowUncompleted();
+        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
         indicateTaskManagerChanged();
     }
+    //@@author
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -94,26 +107,59 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
     }
 
+    //@@author A0139925U
     @Override
     public void updateFilteredListToShowUncompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
+        updateFilteredTaskListType(UNCOMPLETED_TASK_LIST_TYPE);
+
     }
 
     @Override
     public void updateFilteredListToShowCompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
+        updateFilteredTaskListType(COMPLETED_TASK_LIST_TYPE);
+    }
+
+    //@@author A0142255M
+    @Override
+    public void updateFilteredListToShowTimed() {
+        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(true)));
+        updateFilteredTaskListType(TIMED_TASK_LIST_TYPE);
     }
 
     @Override
+    public void updateFilteredListToShowFloating() {
+        updateFilteredTaskList(new PredicateExpression(new TimedQualifier(false)));
+        updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
+    }
+    //@@author
+
+    @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+
+    //@@author A0142255M
+    @Override
+    public String getFilteredTaskListType() {
+        return filteredTaskListType;
+    }
+
+    private void updateFilteredTaskListType(String newFilteredTaskListType) {
+        if (!filteredTaskListType.equals(newFilteredTaskListType)) {
+            raise(new TaskListTypeChangedEvent(newFilteredTaskListType));
+        }
+        filteredTaskListType = newFilteredTaskListType;
+    }
+    //@@author
 
     //========== Inner classes/interfaces/methods used for filtering =================================================
 
@@ -152,7 +198,7 @@ public class ModelManager extends ComponentManager implements Model {
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-
+        //@@author A0139925U
         @Override
         public boolean run(ReadOnlyTask task) {
             String[] nameElements = task.getName().fullName.split(" ");
@@ -171,13 +217,37 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent()
                     || partialMatch;
         }
-
+        //@@author
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
 
+    //@@author A0142255M
+    private class TimedQualifier implements Qualifier {
+        private boolean isTimed;
+
+        TimedQualifier(boolean isTimed) {
+            this.isTimed = isTimed;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (isTimed) {
+                return task.getTimedStatus();
+            } else {
+                return !task.getTimedStatus();
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "timed=" + isTimed;
+        }
+    }
+
+    //@@author A0139925U
     private class ActiveQualifier implements Qualifier {
         private boolean isActive;
 
@@ -200,40 +270,37 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private class DateQualifier implements Qualifier {
-        private Set<String> dateKeyWords;
+    private class DateTimeQualifier implements Qualifier {
+        private Set<String> dateTimeKeyWords;
 
-        DateQualifier(Set<String> dateKeyWords) {
-            this.dateKeyWords = dateKeyWords;
+        DateTimeQualifier(Set<String> dateTimeKeyWords) {
+            this.dateTimeKeyWords = dateTimeKeyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            if (task.getStartDateTime().isPresent()) {
+                for (int i = 0; i < dateTimeKeyWords.size(); i++) {
+                    if (dateTimeKeyWords.toArray()[i].equals(task.getStartDateTime().get().getDateOnly()) ||
+                                dateTimeKeyWords.toArray()[i].equals(task.getStartDateTime().get().getTimeOnly())) {
+                        return true;
+                    }
+                }
+            }
+            if (task.getEndDateTime().isPresent()) {
+                for (int i = 0; i < dateTimeKeyWords.size(); i++) {
+                    if (dateTimeKeyWords.toArray()[i].equals(task.getEndDateTime().get().getDateOnly()) ||
+                                dateTimeKeyWords.toArray()[i].equals(task.getEndDateTime().get().getTimeOnly())) {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
         @Override
         public String toString() {
-            return "date=" + String.join(", ", dateKeyWords);
-        }
-
-    }
-
-    private class TimeQualifier implements Qualifier {
-        private Set<String> timeKeyWords;
-
-        TimeQualifier(Set<String> timeKeyWords) {
-            this.timeKeyWords = timeKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return "time=" + String.join(", ", timeKeyWords);
+            return "datetime=" + String.join(", ", dateTimeKeyWords);
         }
 
     }
@@ -241,19 +308,17 @@ public class ModelManager extends ComponentManager implements Model {
     private class MultiQualifier implements Qualifier {
         private Set<String> multiKeyWords;
         private NameQualifier nameQualifier;
-        private DateQualifier dateQualifier;
-        private TimeQualifier timeQualifier;
+        private DateTimeQualifier dateTimeQualifier;
 
         MultiQualifier(Set<String> multiKeyWords) {
             this.multiKeyWords = multiKeyWords;
             nameQualifier = new NameQualifier(multiKeyWords);
-            dateQualifier = new DateQualifier(multiKeyWords);
-            timeQualifier = new TimeQualifier(multiKeyWords);
+            dateTimeQualifier = new DateTimeQualifier(multiKeyWords);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return false;
+            return nameQualifier.run(task) || dateTimeQualifier.run(task);
         }
 
         @Override

@@ -1,14 +1,25 @@
+//@@author A0139925U
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_DELIMITER;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
 import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_3;
 import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER_2;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,21 +63,31 @@ public class EditCommandParser {
 
                 switch(updateParameter) {
                 case NAME_PARAMETER:
+                case NAME_PARAMETER_2:
                     editTaskDescriptor.setName(Optional.of(new Name(updateValue)));
                     break;
                 case START_DATE_PARAMETER:
+                case START_DATE_PARAMETER_2:
+                case START_DATE_PARAMETER_3:
                     editTaskDescriptor.setStartDate(Optional.of(updateValue));
                     break;
                 case END_DATE_PARAMETER:
+                case END_DATE_PARAMETER_2:
+                case END_DATE_PARAMETER_3:
                     editTaskDescriptor.setEndDate(Optional.of(updateValue));
                     break;
                 case START_TIME_PARAMETER:
+                case START_TIME_PARAMETER_2:
+                case START_TIME_PARAMETER_3:
                     editTaskDescriptor.setStartTime(Optional.of(updateValue));
                     break;
                 case END_TIME_PARAMETER:
+                case END_TIME_PARAMETER_2:
+                case END_TIME_PARAMETER_3:
                     editTaskDescriptor.setEndTime(Optional.of(updateValue));
                     break;
                 case TAG_PARAMETER:
+                case TAG_PARAMETER_2:
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(EDIT_PARAMETER_DELIMITER))));
                     break;

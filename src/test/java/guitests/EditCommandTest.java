@@ -20,7 +20,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void editAllFieldsSpecifiedSuccess() throws Exception {
-        String detailsToEdit = "name \"Buy Eggs and Bread\"; tag HighPriority;";
+        String detailsToEdit = "name Buy Eggs and Bread; tag HighPriority;";
         int taskManagerIndex = 1;
         TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread").withTags("HighPriority").build();
 
@@ -53,7 +53,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void editFindThenEditSuccess() throws Exception {
         commandBox.runCommand("find Grandma");
 
-        String detailsToEdit = "name \"Visit Grandpa\"";
+        String detailsToEdit = "name Visit Grandpa";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 3;
 
@@ -71,7 +71,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void editInvalidTaskIndexFailure() {
-        commandBox.runCommand("edit 8; name \"Project\"");
+        commandBox.runCommand("edit 8; name Project");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
@@ -92,7 +92,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void editDuplicateTaskFailure() {
-        commandBox.runCommand("edit 3; name \"Buy Eggs and Bread\"; tag HighPriority;");
+        commandBox.runCommand("edit 3; name Buy Eggs and Bread; tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

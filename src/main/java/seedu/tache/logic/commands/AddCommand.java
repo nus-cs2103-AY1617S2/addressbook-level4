@@ -79,7 +79,7 @@ public class AddCommand extends Command implements Undoable {
             endDateTime = Optional.of(new DateTime(endDate + endTime));
         }
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, false, RecurInterval.NONE);
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, false, RecurInterval.NONE);
         commandSuccess = false;
     }
 
