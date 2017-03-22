@@ -74,6 +74,7 @@ allprojects {
         compile group: 'org.ocpsoft.prettytime', name: 'prettytime-nlp', version: '4.0.0.Final'
         compile 'com.jfoenix:jfoenix:1.0.0'
         compile group: 'org.mnode.ical4j', name: 'ical4j', version: '2.0.0'
+        compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.25'
     }
 
     sourceSets {
