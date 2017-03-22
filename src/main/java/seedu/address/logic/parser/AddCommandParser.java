@@ -28,10 +28,10 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
 
         String name = argsTokenizer.getPreamble().get();
-        String start = argsTokenizer.getValue(PREFIX_START).orElse("");
-        String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("");
+        String start = argsTokenizer.getValue(PREFIX_START).orElse("-");
+        String deadline = argsTokenizer.getValue(PREFIX_DEADLINE).orElse("-");
         int priority = Integer.parseInt(argsTokenizer.getValue(PREFIX_PRIORITY).orElse("0"));
-        String notes = argsTokenizer.getValue(PREFIX_NOTES).orElse("");
+        String notes = argsTokenizer.getValue(PREFIX_NOTES).orElse("-");
 
         try {
             return new AddCommand(name, start, deadline, priority,
