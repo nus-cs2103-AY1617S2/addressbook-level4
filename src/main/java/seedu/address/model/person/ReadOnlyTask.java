@@ -42,21 +42,14 @@ public interface ReadOnlyTask {
         builder.append(getDescription())
                 .append(" Priority: ")
                 .append(getPriority())
-                .append(" Location: ")
-                .append(getLocation())
-                .append(" FromDate: ")
-                .append(getFromDate())
-                .append(" ToDate: ")
-                .append(getToDate())
-                .append(" StartTime: ")
-                .append(getStartTime())
-                .append(" EndTime: ")
-                .append(getEndTime())
                 .append(" ByDate: ")
                 .append(getByDate())
+                .append(" ByTime: ")
+                .append(getByTime())
+                .append(" Location: ")
+                .append(getLocation())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }
