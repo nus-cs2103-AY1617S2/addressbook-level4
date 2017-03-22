@@ -92,5 +92,5 @@ public class TaskCard extends UiPart<Region> {
     private void setStyleToIndicatePriority() {
         colourTag.getStyleClass().add(PRIORITY_STYLE_CLASS);
     }
-    
+
 }
