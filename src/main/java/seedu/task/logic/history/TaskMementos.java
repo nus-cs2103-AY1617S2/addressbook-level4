@@ -23,7 +23,7 @@ public class TaskMementos {
      * @param taskMemento the task memento to add to the undo history
      */
     public void addUndoMementoAndClearRedo(TaskMemento taskMemento) {
-        this.undoMementoStack.push(new TaskMemento(taskMemento.oldTask, taskMemento.newTask));
+        this.undoMementoStack.push(taskMemento);
         this.redoMementoStack.clear();
     }
 
