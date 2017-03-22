@@ -135,7 +135,7 @@ _Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDForDeletePersonEventHandling1.jpg" width="800"><br>
+<img src="images\SDForDeletePersonEventHandling1.png" width="800"><br>
 _Figure 3.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -148,7 +148,7 @@ The sections below give more details of each component.
 
 Author: Alice Bee
 
-<img src="images/UIClassDiagram1.jpg" width="800"><br>
+<img src="images/UIClassDiagram1.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/
@@ -191,7 +191,7 @@ _Figure 3.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 Author: Cynthia Dharman
 
-<img src="images/ModelClassDiagram1.jpg" width="800"><br>
+<img src="images/ModelClassDiagram1.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
@@ -208,7 +208,7 @@ The `Model` component,
 
 Author: Darius Foong
 
-<img src="images/StorageClassDiagram1.jpg" width="800"><br>
+<img src="images/StorageClassDiagram1.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
@@ -317,7 +317,7 @@ project site.
 Here are the steps to create a new release.
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
- 2. Tag the repo with the version number. e.g. `v0.1`
+ 2. Tag the repository with the version number. e.g. `v0.1`
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
@@ -813,7 +813,7 @@ Use case resumes at step 2.
 > * Available in iTunes and Google Play
 
 > Cons:
-> * Requires a working internet connection
+> * Requires a working Internet connection
 > * Some categories like Birthdays are only available in the premium version
 > * Calendar cannot be synced to Google Calendar
 
