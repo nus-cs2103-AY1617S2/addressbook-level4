@@ -21,3 +21,4 @@ runtests.sh
 /src/.*
 .project
 /config/checkstyle/awesometodoformat.xml
+Collate-GUI.jar
