@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 
 
 /**
@@ -12,56 +12,31 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class EndDate {
 
-    public static final String MESSAGE_ENDDATE_CONSTRAINTS =
-            "Event EndDate can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
+	public static final String MESSAGE_ENDDATE_CONSTRAINTS =
+            "Event start date should be in YYYY-MM-DD format e.g. 2010-12-05";
 
-    /*
-     * must be in digits only
-     *
-     */
-    public static final String ENDDATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
-
-    public final String value;
+    public final LocalDate value;
 
     /**
-     * Validates given EndDate.
+     * Validates given start date.
      *
-     * @throws IllegalValueException if given EndDate string is invalid.
+     * @throws IllegalValueException if given start date is invalid.
      */
-    public EndDate(String enddate) throws IllegalValueException {
-        if (enddate == null) {
+    public EndDate(String endDateArg) throws IllegalValueException {
+    	if (endDateArg == null) {
             this.value = null;
         } else {
-            if (!isValidEndDate(enddate)) {
-                throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
-            }
-            this.value = enddate;
+        	try {
+        		this.value = StringUtil.parseStringToDate(endDateArg);
+        	} catch (IllegalValueException illegalValueException) {
+        		throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+        	}
         }
-    }
-
-    /**
-     * Returns true if a given string is a valid event EndDate.
-     */
-    public static boolean isValidEndDate(String test) {
-        if (test == null) {
-            return true;
-        }
-        Pattern pattern = Pattern.compile(ENDDATE_VALIDATION_REGEX);
-        Matcher matchers = pattern.matcher(test);
-        if (test.matches(ENDDATE_VALIDATION_REGEX)) {
-            matchers.matches();
-            String day = matchers.group(1);
-            String month = matchers.group(2);
-            boolean daytrue = Integer.parseInt(day) < 32;
-            boolean monthtrue = (Integer.parseInt(month) < 13) && (Integer.parseInt(month) > 0);
-            return daytrue && monthtrue;
-        }
-        return false;
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
