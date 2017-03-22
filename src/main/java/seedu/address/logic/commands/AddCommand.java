@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -39,7 +40,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String start, String deadline,
-                        Integer priority, Set<String> tags, String notes, int idx)
+                        Integer priority, Set<String> tags, String notes, String completion, int idx)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -51,7 +52,8 @@ public class AddCommand extends Command {
                 new Deadline(deadline),
                 new Priority(priority),
                 new UniqueTagList(tagSet),
-                new Notes(notes)
+                new Notes(notes),
+                new Completion(completion)
         );
         this.idx = idx;
     }
