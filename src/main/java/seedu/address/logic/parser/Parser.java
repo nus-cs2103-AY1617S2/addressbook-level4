@@ -133,9 +133,14 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             index = ParserUtil.parseIndex(arguments);
-            // Get data of command to be deleted
-            ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
-            return new AddCommandParser().parse(ParserUtil.getTaskArgs(taskToDelete), index.get() - 1);
+            if (!index.isPresent() || index.get() > lastShownList.size()) {
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            } else {
+                // Get data of command to be deleted
+                ReadOnlyTask taskToDelete = lastShownList.get(index.get() - 1);
+                return new AddCommandParser().parse(ParserUtil.getTaskArgs(taskToDelete), index.get() - 1);
+            }
 
         default:
             return null;
