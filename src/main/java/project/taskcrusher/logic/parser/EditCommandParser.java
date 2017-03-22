@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.logic.commands.AddCommand;
@@ -26,7 +27,7 @@ import project.taskcrusher.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-
+    private static final Pattern EDIT_COMMAND_FORMAT = Pattern.compile("(?<flag>[te])(?<name>.+)");
     /**
      * Parses the given {@code String} of arguments in the context of the
      * EditCommand and returns an EditCommand object for execution.

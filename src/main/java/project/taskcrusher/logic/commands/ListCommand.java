@@ -19,10 +19,12 @@ public class ListCommand extends Command {
     public static final String COMPLETE_FLAG = "c";
     public static final String NO_FLAG = "";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks in the active list "
-            + "before the deadline, if provided" + "Parameters: [t] [d/DEADLINE] \n" + "Example: " + COMMAND_WORD
-            + " t d/tomorrow";
-    public static final String MESSAGE_SUCCESS = "Listed all relevant tasks";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks/events that satisfies the given qualifier "
+            + "list: list command with no qualifier lists all tasks and events\n"
+            + "list d/DEADLINE: lists all tasks whose deadline is set before DEADLINE"
+            + "list d/TIMESLOT: lists all events whose timeslot overlaps with TIMESLOT";
+
+    public static final String MESSAGE_SUCCESS = "Listed all relevant events/tasks";
 
     private final Date until;
     private final Timeslot dateRange;
