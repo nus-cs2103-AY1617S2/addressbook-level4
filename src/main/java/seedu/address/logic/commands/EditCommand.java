@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ReadOnlyToDoList;
+import seedu.address.model.ToDoList;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EndTime;
@@ -20,41 +24,49 @@ import seedu.address.model.task.Venue;
 /**
  * Edits the details of an existing task in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer)[TITLE][@@VENUE][from:STARTTIME]"
-            + "[**URGENCYLEVEL][d:DESCRIPTION][to:ENDTIME][##TAG]..\n"
-            + "Example: " + COMMAND_WORD + " 1 @@Toilet";
+            + "Parameters: INDEX (must be a positive integer)[TITLE][place/VENUE][from/STARTTIME]"
+            + "[level/URGENCYLEVEL][des/DESCRIPTION][to/ENDTIME][#TAG]..\n" + "Example: " + COMMAND_WORD
+            + " 1 place/Toilet";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
 
     private final int filteredTaskListIndex;
+    private final char filteredTaskListChar;
     private final EditTaskDescriptor editTaskDescriptor;
+    private ReadOnlyToDoList originalToDoList;
+    private CommandResult commandResultToUndo;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor
+     *            details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-        assert filteredTaskListIndex > 0;
+    public EditCommand(Pair<Character, Integer> filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+        assert filteredTaskListIndex.getValue() > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredTaskListIndex = filteredTaskListIndex.getValue() - 1;
+        this.filteredTaskListChar = filteredTaskListIndex.getKey();
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
+    // @@ A0143648Y
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        originalToDoList = new ToDoList(model.getToDoList());
+        List<ReadOnlyTask> lastShownList = model.getListFromChar(filteredTaskListChar);
 
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -66,35 +78,102 @@ public class EditCommand extends Command {
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, taskToEdit));
+        commandResultToUndo = new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        updateUndoLists();
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+
+    @Override
+    public void updateUndoLists() {
+        if (previousToDoLists == null) {
+            previousToDoLists = new ArrayList<ReadOnlyToDoList>(3);
+            previousCommandResults = new ArrayList<CommandResult>(3);
+        }
+        if (previousToDoLists.size() >= 3) {
+            previousToDoLists.remove(0);
+            previousCommandResults.remove(0);
+            previousToDoLists.add(originalToDoList);
+            previousCommandResults.add(commandResultToUndo);
+        } else {
+            previousToDoLists.add(originalToDoList);
+            previousCommandResults.add(commandResultToUndo);
+        }
     }
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor) {
+    private Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        Venue updatedVenue = editTaskDescriptor.getVenue().orElseGet(taskToEdit::getVenue);
-        StartTime updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
-        EndTime updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
-        UrgencyLevel updatedUrgencyLevel = editTaskDescriptor.getUrgencyLevel().orElseGet(taskToEdit::getUrgencyLevel);
-        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
+        Title updatedTitle = editTitle(taskToEdit);
+        Venue updatedVenue = editVenue(taskToEdit);
+        StartTime updatedStartTime = editStartTime(taskToEdit);
+        EndTime updatedEndTime = editEndTime(taskToEdit);
+        UrgencyLevel updatedUrgencyLevel = editUrgencyLevel(taskToEdit);
+        Description updatedDescription = editDescription(taskToEdit);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime,
-                updatedUrgencyLevel, updatedDescription, updatedTags);
+        return new Task(updatedTitle, updatedVenue, updatedStartTime, updatedEndTime, updatedUrgencyLevel,
+                updatedDescription, updatedTags);
+    }
+
+    public Title editTitle(ReadOnlyTask taskToEdit) {
+        return editTaskDescriptor.getTitle().isPresent() ? editTaskDescriptor.getTitle().get() : taskToEdit.getTitle();
+    }
+
+    public Venue editVenue(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getVenue().isPresent()) {
+            return editTaskDescriptor.getVenue().get();
+        } else if (taskToEdit.getVenue().isPresent()) {
+            return taskToEdit.getVenue().get();
+        }
+        return null;
+    }
+
+    public StartTime editStartTime(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getStartTime().isPresent()) {
+            return editTaskDescriptor.getStartTime().get();
+        } else if (taskToEdit.getStartTime().isPresent()) {
+            return taskToEdit.getStartTime().get();
+        }
+        return null;
+    }
+
+    public EndTime editEndTime(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getEndTime().isPresent()) {
+            return editTaskDescriptor.getEndTime().get();
+        } else if (taskToEdit.getEndTime().isPresent()) {
+            return taskToEdit.getEndTime().get();
+        }
+        return null;
+    }
+
+    public UrgencyLevel editUrgencyLevel(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getUrgencyLevel().isPresent()) {
+            return editTaskDescriptor.getUrgencyLevel().get();
+        } else if (taskToEdit.getUrgencyLevel().isPresent()) {
+            return taskToEdit.getUrgencyLevel().get();
+        }
+        return null;
+    }
+
+    public Description editDescription(ReadOnlyTask taskToEdit) {
+        if (editTaskDescriptor.getDescription().isPresent()) {
+            return editTaskDescriptor.getDescription().get();
+        } else if (taskToEdit.getDescription().isPresent()) {
+            return taskToEdit.getDescription().get();
+        }
+        return null;
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
@@ -105,7 +184,8 @@ public class EditCommand extends Command {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
@@ -121,8 +201,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime,
-                    this.urgencyLevel, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.venue, this.startTime, this.endTime, this.urgencyLevel,
+                    this.description, this.tags);
         }
 
         public void setTitle(Optional<Title> title) {

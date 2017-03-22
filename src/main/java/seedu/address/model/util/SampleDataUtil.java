@@ -17,25 +17,23 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Title("CS2103 Tutorial"), new Venue("COM1-B103"), new StartTime("Tuesday 10:00"),
-                        new EndTime("Tuesday 11:00"), new UrgencyLevel("3"), new Description("Deadline of V0.2"),
-                        new UniqueTagList("lesson", "tutorial")),
-                new Task(new Title("DBS Internship interview"), new Venue("Raffles Place"),
-                        new StartTime("March 31, 9:30"), new EndTime("Wednesday 12:00"), new UrgencyLevel("3"),
-                        new Description("I love Intership"),
-                        new UniqueTagList("interview", "internship", "important")),
-                new Task(new Title("Hang out with Joe"), new Venue("313 Somerset"), new StartTime("Saturday 11:00"),
-                        new EndTime("Saturday 17:00"), new UrgencyLevel("3"), new Description("I love Joe"),
-                        new UniqueTagList("friend", "shopping", "weekend")),
-                new Task(new Title("Stats society meeting"), new Venue("S16-04-30"),
-                        new StartTime("Wednesday 19:00"), new EndTime("Wednesday 21:00"), new UrgencyLevel("3"),
-                        new Description("I love stats society"), new UniqueTagList("family")),
-                new Task(new Title("String ensemble rehearsal"), new Venue("UCC Hall"),
-                        new StartTime("Friday 9:00"), new EndTime("Friday 17:00"), new UrgencyLevel("3"),
-                        new Description("I love rehearsals"), new UniqueTagList("CCA", "performance")),
-                new Task(new Title("MA3269 Quiz"), new Venue("LT26"), new StartTime("Thursday 12:00"),
-                        new EndTime("Thursday 14:00"), new UrgencyLevel("3"), new Description("I hate hate quiz"),
-                        new UniqueTagList("important", "test")) };
+                    new Task(new Title("CS2103 Tutorial"), new Venue("COM1-B103"), new StartTime("Wednesday 9:00"), new EndTime("Wednesday 10:00"), 
+                            new UrgencyLevel("5"), new Description("Deadline of V0.3"), new UniqueTagList()), //event task with full task details
+                    new Task(new Title("CS3230 Lab Quiz"), new Venue("COM1-SR1"), new StartTime("Thursday 19:00"), new EndTime("Thursday 20:00"),
+                            null, new Description("20% of final grade"), new UniqueTagList()), //event task without urgency level
+                    new Task(new Title("CS2100 Report"), null, null, new EndTime("Wednesday 2359"), 
+                            null, new Description("I love CS2100"), new UniqueTagList()), //deadline task without venue and urgency level
+                    new Task(new Title("LAJ1201 Essay"), null, null, new EndTime("Wednesday 10:00"), 
+                            null, null, new UniqueTagList()), //deadline task without venue, urgency level and description
+                    new Task(new Title("Do laundry"), null, null, null,
+                            null, null, new UniqueTagList()), //floating task with only title
+                    new Task(new Title("Do Tutorials"), null, null, null,
+                            new UrgencyLevel("3"), null, new UniqueTagList()), //floating task with urgency level
+                    new Task(new Title("Call grandma"), null, null, null,
+                            null, new Description("Interview her for project about aging population"), new UniqueTagList()), //floating task with description
+                    new Task(new Title("buy new book"), new Venue("popular bookstore at Clementi mall"), null, null,
+                            null, null, new UniqueTagList())
+                };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }

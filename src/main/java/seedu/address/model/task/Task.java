@@ -1,47 +1,112 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the endtime book.
+ * Represents a Task in the to-do list.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask, Comparable<Task> {
+public class Task implements ReadOnlyTask{
+    
+    public static final String TASK_TYPE_DEADLINE = "deadline";
+    public static final String TASK_TYPE_EVENT = "event";
+    public static final String TASK_TYPE_FLOAT = "float";
+    
+    public static final char FLOAT_CHAR = 'f';
+    public static final char DEADLINE_CHAR = 'd';
+    public static final char EVENT_CHAR = 'e';
 
     private Title title;
-    private StartTime startTime;
     private Venue venue;
+    private StartTime startTime;
     private EndTime endTime;
-    private UrgencyLevel urgencyLevel;
     private Description description;
+    private UrgencyLevel urgencyLevel;
+    
+    private String category;
+    private boolean isCompleted;
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, StartTime starttime, EndTime endtime,
-            UrgencyLevel urgencylevel, Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(title, starttime, venue, endtime, tags);
+    public Task(Title title, Venue venue, StartTime startTime, EndTime endTime, UrgencyLevel urgencyLevel, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title);
+        assert isValidTime(startTime,endTime);
         this.title = title;
         this.venue = venue;
-        this.startTime = starttime;
-        this.endTime = endtime;
-        this.urgencyLevel = urgencylevel;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.description = description;
+        this.urgencyLevel = urgencyLevel;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.category = sortCategory();
+    }
+    
+    private boolean isValidTime(StartTime startTime, EndTime endTime) {
+        return !(startTime != null && endTime != null && startTime.getTimeValue().isAfter(endTime.getTimeValue()));
     }
 
+    //@@A0122017Y
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getVenue(), source.getStartTime(), source.getEndTime(),
-                source.getUrgencyLevel(), source.getDescription(), source.getTags());
+        this(source.getTitle(),
+                source.getVenue().orElse(null),
+                source.getStartTime().orElse(null),
+                source.getEndTime().orElse(null),
+                source.getUrgencyLevel().orElse(null),
+                source.getDescription().orElse(null), 
+                source.getTags());
     }
+    
+    private boolean isDeadlineTask(){
+        return this.endTime != null && startTime == null;
+    }
+    
+    private boolean isEventTask(){
+        return this.endTime != null && startTime != null;
+    }
+    
+    private boolean isFloatingTask(){
+        return this.endTime == null;
+    }
+    
+    private String sortCategory() {
+        if (isDeadlineTask()) {
+            return TASK_TYPE_DEADLINE;
+        } else if (isEventTask()) {
+            return TASK_TYPE_EVENT;
+        } else {
+            return TASK_TYPE_FLOAT;
+        }
+    }
+    
+    @Override
+    public String getTaskCategory(){
+        return this.category;
+    }
+    
+    //@@
+    
+    //@@ A0143648Y
+    @Override
+    public Character getTaskChar() {
+        if (isDeadlineTask()) {
+            return DEADLINE_CHAR;
+        } else if (isEventTask()) {
+            return EVENT_CHAR;
+        } else {
+            return FLOAT_CHAR;
+        }
+    }
+    //@@
 
     public void setTitle(Title name) {
         assert name != null;
@@ -52,35 +117,42 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public Title getTitle() {
         return title;
     }
+    //@@author A0122017Y
+    public void setEndTime(EndTime endTime){
+        this.endTime = endTime;
+    }
+    
+    public EndTime getEndTime(EndTime endTime){
+        return this.endTime;
+    }
+    
 
+    public void setVenue(Venue venue) {
+        this.venue = venue;
+    }
+    
     public void setStartTime(StartTime startTime) {
-        assert startTime != null;
         this.startTime = startTime;
     }
 
     @Override
-    public StartTime getStartTime() {
-        return startTime;
+    public Optional<Venue> getVenue() {
+        return Optional.ofNullable(this.venue);
     }
-
-    public void setVenue(Venue venue) {
-        assert venue != null;
-        this.venue = venue;
-    }
-
+    
     @Override
-    public Venue getVenue() {
-        return venue;
+    public Optional<UrgencyLevel> getUrgencyLevel() {
+        return Optional.ofNullable(this.urgencyLevel);
     }
-
-    public void setEndTime(EndTime endTime) {
-        assert endTime != null;
-        this.endTime = endTime;
-    }
-
+    
     @Override
-    public EndTime getEndTime() {
-        return endTime;
+    public Optional<StartTime> getStartTime() {
+        return Optional.ofNullable(this.startTime);
+    }
+    
+    @Override
+    public Optional<EndTime> getEndTime() {
+        return Optional.ofNullable(this.endTime);
     }
 
     @Override
@@ -89,24 +161,14 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     @Override
-    public UrgencyLevel getUrgencyLevel() {
-        return urgencyLevel;
-    }
-
-    @Override
-    public Description getDescription() {
-        return description;
+    public Optional<Description> getDescription() {
+        return Optional.ofNullable(this.description);
     }
 
     public void setDescription(Description description) {
-        assert description != null;
         this.description = description;
     }
 
-    public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
-        assert urgencyLevel != null;
-        this.urgencyLevel = urgencyLevel;
-    }
 
     /**
      * Replaces this Task's tags with the tags in the argument tag list.
@@ -120,13 +182,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      */
     public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
-
         this.setTitle(replacement.getTitle());
-        this.setStartTime(replacement.getStartTime());
-        this.setVenue(replacement.getVenue());
-        this.setEndTime(replacement.getEndTime());
-        this.setUrgencyLevel(replacement.getUrgencyLevel());
-        this.setDescription(replacement.getDescription());
+        this.setStartTime(replacement.getStartTime().orElse(null));
+        this.setEndTime(replacement.getEndTime().orElse(null));
+        this.setVenue(replacement.getVenue().orElse(null));
+        this.setDescription(replacement.getDescription().orElse(null));
         this.setTags(replacement.getTags());
     }
 
@@ -140,17 +200,12 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, venue, startTime, endTime, urgencyLevel, description, tags);
+        return Objects.hash(title, venue, endTime, description, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
-    }
-
-    @Override
-    public int compareTo(Task task) {
-        return task.getUrgencyLevel().getIntValue() - this.getUrgencyLevel().getIntValue();
     }
 
 }
