@@ -22,8 +22,8 @@ import seedu.watodo.logic.Logic;
 import seedu.watodo.logic.LogicManager;
 import seedu.watodo.model.Model;
 import seedu.watodo.model.ModelManager;
-import seedu.watodo.model.ReadOnlyTaskList;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
 import seedu.watodo.model.util.SampleDataUtil;
 import seedu.watodo.storage.Storage;
@@ -74,20 +74,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskList> watodoOptional;
-        ReadOnlyTaskList initialData;
+        Optional<ReadOnlyTaskManger> taskManagerOptional;
+        ReadOnlyTaskManger initialData;
         try {
-            watodoOptional = storage.readTaskList();
-            if (!watodoOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Watodo");
+            taskManagerOptional = storage.readTaskList();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample task manager");
             }
-            initialData = watodoOptional.orElseGet(SampleDataUtil::getSampleWatodo);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleWatodo);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Watodo");
-            initialData = new TaskList();
+            logger.warning("Data file not in the correct format. Will be starting with an empty task manager");
+            initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Watodo");
-            initialData = new TaskList();
+            logger.warning("Problem while reading from the file. Will be starting with an empty task manager");
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -143,7 +143,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty task manager");
             initializedPrefs = new UserPrefs();
         }
 

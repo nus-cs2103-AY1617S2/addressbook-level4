@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -20,14 +20,14 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyFloatingTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
         description.setText(person.getDescription().fullDescription);
         id.setText(displayedIndex + ". ");
         initTags(person);
     }
 
-    private void initTags(ReadOnlyFloatingTask person) {
+    private void initTags(ReadOnlyTask person) {
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

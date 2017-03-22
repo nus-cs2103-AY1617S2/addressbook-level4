@@ -1,7 +1,7 @@
 package seedu.watodo.testutil;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.task.FloatingTask;
 import seedu.watodo.model.task.UniqueTaskList;
@@ -13,9 +13,9 @@ import seedu.watodo.model.task.UniqueTaskList;
  */
 public class TaskListBuilder {
 
-    private TaskList taskList;
+    private TaskManager taskList;
 
-    public TaskListBuilder(TaskList taskList) {
+    public TaskListBuilder(TaskManager taskList) {
         this.taskList = taskList;
     }
 
@@ -29,7 +29,7 @@ public class TaskListBuilder {
         return this;
     }
 
-    public TaskList build() {
+    public TaskManager build() {
         return taskList;
     }
 }

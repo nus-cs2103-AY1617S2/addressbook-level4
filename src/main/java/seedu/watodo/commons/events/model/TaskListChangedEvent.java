@@ -1,14 +1,14 @@
 package seedu.watodo.commons.events.model;
 
 import seedu.watodo.commons.events.BaseEvent;
-import seedu.watodo.model.ReadOnlyTaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
 
 /** Indicates the AddressBook in the model has changed*/
 public class TaskListChangedEvent extends BaseEvent {
 
-    public final ReadOnlyTaskList data;
+    public final ReadOnlyTaskManger data;
 
-    public TaskListChangedEvent(ReadOnlyTaskList data) {
+    public TaskListChangedEvent(ReadOnlyTaskManger data) {
         this.data = data;
     }
 

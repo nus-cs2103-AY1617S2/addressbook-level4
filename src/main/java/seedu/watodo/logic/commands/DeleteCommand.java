@@ -3,7 +3,7 @@ package seedu.watodo.logic.commands;
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -30,13 +30,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyFloatingTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyFloatingTask taskToDelete = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
 
         try {
             model.deleteTask(taskToDelete);

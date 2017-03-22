@@ -1,14 +1,11 @@
 package seedu.watodo.model.util;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.model.ReadOnlyTaskList;
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Address;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Email;
 import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.Phone;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
@@ -29,9 +26,9 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskList getSampleWatodo() {
+    public static ReadOnlyTaskManger getSampleWatodo() {
         try {
-            TaskList sampleAB = new TaskList();
+            TaskManager sampleAB = new TaskManager();
             for (FloatingTask sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }

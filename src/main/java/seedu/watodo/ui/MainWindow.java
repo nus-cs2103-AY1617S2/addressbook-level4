@@ -16,7 +16,7 @@ import seedu.watodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.watodo.commons.util.FxViewUtil;
 import seedu.watodo.logic.Logic;
 import seedu.watodo.model.UserPrefs;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
-    void loadPersonPage(ReadOnlyFloatingTask person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

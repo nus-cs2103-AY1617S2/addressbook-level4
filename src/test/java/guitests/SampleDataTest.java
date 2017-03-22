@@ -4,14 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.watodo.model.TaskList;
+import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.task.FloatingTask;
 import seedu.watodo.model.util.SampleDataUtil;
 import seedu.watodo.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookGuiTest {
     @Override
-    protected TaskList getInitialData() {
+    protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }

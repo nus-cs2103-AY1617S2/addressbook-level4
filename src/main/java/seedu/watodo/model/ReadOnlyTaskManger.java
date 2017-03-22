@@ -3,18 +3,18 @@ package seedu.watodo.model;
 
 import javafx.collections.ObservableList;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
- * Unmodifiable view of a task list
+ * Unmodifiable view of a task manager
  */
-public interface ReadOnlyTaskList {
+public interface ReadOnlyTaskManger {
 
     /**
      * Returns an unmodifiable view of the tasks list.
      * This list will not contain any duplicate tasks.
      */
-    ObservableList<ReadOnlyFloatingTask> getTaskList();
+    ObservableList<ReadOnlyTask> getTaskList();
 
     /**
      * Returns an unmodifiable view of the tags list.

@@ -11,81 +11,81 @@ import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
-import seedu.watodo.model.task.FloatingTask;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the Watodo data.
+ * Represents the in-memory model of the task manager data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskList watodo;
-    private final FilteredList<ReadOnlyFloatingTask> filteredTasks;
+    private final TaskManager taskManager;
+    private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given taskList and userPrefs.
+     * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskList taskList, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManger taskManager, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(taskList, userPrefs);
+        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with Watodo: " + taskList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.watodo = new TaskList(taskList);
-        filteredTasks = new FilteredList<>(this.watodo.getTaskList());
+        this.taskManager = new TaskManager(taskManager);
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
-        this(new TaskList(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskList newData) {
-        watodo.resetData(newData);
-        indicateWatodoChanged();
+    public void resetData(ReadOnlyTaskManger newData) {
+        taskManager.resetData(newData);
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public ReadOnlyTaskList getWatodo() {
-        return watodo;
+    public ReadOnlyTaskManger getTaskManager() {
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateWatodoChanged() {
-        raise(new TaskListChangedEvent(watodo));
+    private void indicateTaskManagerChanged() {
+        raise(new TaskListChangedEvent(taskManager));
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyFloatingTask target) throws TaskNotFoundException {
-        watodo.removeTask(target);
-        indicateWatodoChanged();
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.removeTask(target);
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addTask(FloatingTask task) throws UniqueTaskList.DuplicateTaskException {
-        watodo.addTask(task);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
-        indicateWatodoChanged();
+        indicateTaskManagerChanged();
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyFloatingTask editedTask)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        watodo.updateTask(addressBookIndex, editedTask);
-        indicateWatodoChanged();
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        indicateTaskManagerChanged();
     }
 
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyFloatingTask> getFilteredTaskList() {
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
@@ -111,7 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyFloatingTask task);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -124,7 +124,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyFloatingTask task) {
+        public boolean satisfies(ReadOnlyTask task) {
             return qualifier.run(task);
         }
 
@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyFloatingTask task);
+        boolean run(ReadOnlyTask task);
         String toString();
     }
 
@@ -147,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyFloatingTask task) {
+        public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().fullDescription, keyword))
                     .findAny()
@@ -159,7 +159,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     private class TagQualifier implements Qualifier {
       private Set<String> tagKeyWords;
 
@@ -168,7 +168,7 @@ public class ModelManager extends ComponentManager implements Model {
       }
 
       @Override
-      public boolean run(ReadOnlyFloatingTask task) {
+      public boolean run(ReadOnlyTask task) {
           String tags = task
               .getTags()
               .asObservableList()

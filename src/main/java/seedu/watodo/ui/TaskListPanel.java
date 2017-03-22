@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.watodo.commons.util.FxViewUtil;
-import seedu.watodo.model.task.ReadOnlyFloatingTask;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * Panel containing the list of persons.
@@ -23,15 +23,15 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyFloatingTask> taskListView;
+    private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyFloatingTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyFloatingTask> taskList) {
+    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -60,10 +60,10 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyFloatingTask> {
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyFloatingTask task, boolean empty) {
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
 
             if (empty || task == null) {

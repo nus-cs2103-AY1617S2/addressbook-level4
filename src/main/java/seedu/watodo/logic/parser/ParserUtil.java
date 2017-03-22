@@ -15,10 +15,8 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.StringUtil;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Address;
+import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Email;
-import seedu.watodo.model.task.Phone;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -75,28 +73,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> dateTime} into an {@code Optional<DateTime>} if {@code dateTime} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
+        assert dateTime != null;
+        return dateTime.isPresent() ? Optional.of(new DateTime(dateTime.get())) : Optional.empty();
     }
 
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
-    }
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
