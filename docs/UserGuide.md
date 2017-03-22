@@ -307,7 +307,6 @@ Format: `redo`
 
 <br>
 
-//@@author A0141993X
 <a name="sort"></a>
 ### 3.10. Sorting tasks: sort
 
@@ -348,7 +347,7 @@ Example:
 
 
 <br>
-//@@author A0141993X
+
 <a name="save"></a>
 ### 3.12. Saving the program data to a specified path: save
 Save FlexiTask list to a file specified by user<br>
