@@ -17,9 +17,11 @@ import savvytodo.logic.commands.HelpCommand;
 import savvytodo.logic.commands.IncorrectCommand;
 import savvytodo.logic.commands.ListCommand;
 import savvytodo.logic.commands.LoadCommand;
+import savvytodo.logic.commands.MarkCommand;
 import savvytodo.logic.commands.RedoCommand;
 import savvytodo.logic.commands.SelectCommand;
 import savvytodo.logic.commands.UndoCommand;
+import savvytodo.logic.commands.UnmarkCommand;
 
 /**
  * Parses user input.
@@ -82,6 +84,12 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

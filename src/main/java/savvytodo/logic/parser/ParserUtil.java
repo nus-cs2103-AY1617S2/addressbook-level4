@@ -51,6 +51,40 @@ public class ParserUtil {
 
     }
 
+    //@@author A0140016B
+    /**
+     * Returns int[] if the String is parsed <br>
+     * Returns a int[] populated by all elements in the given string
+     * Returns a int[] if the given {@code Optional} is empty,
+     * or if the int[] contained in the {@code Optional} is empty
+     */
+    public static Optional<int[]> parseMultipleInteger(String indicesString) {
+        boolean parseError = false;
+
+        String trimmedIndicesString = indicesString.trim();
+        String[] indicesStringArray = null;
+        int[] indicesArray = null;
+        try {
+            indicesStringArray = trimmedIndicesString.split(StringUtil.WHITESPACE_REGEX);
+            indicesArray = Arrays.stream(indicesStringArray).mapToInt(Integer::parseInt).toArray();
+
+            for (String index : indicesStringArray) {
+                if (!StringUtil.isUnsignedInteger(index)) {
+                    parseError = true;
+                    break;
+                }
+            }
+        } catch (NumberFormatException ex) {
+            parseError = true;
+        }
+
+        if (parseError) {
+            return Optional.empty();
+        }
+        return Optional.of(indicesArray);
+    }
+    //@@author A0140016B
+
     /**
      * Returns a new Set populated by all elements in the given list of strings
      * Returns an empty set if the given {@code Optional} is empty,
@@ -72,6 +106,7 @@ public class ParserUtil {
                 .collect(Collectors.toList());
     }
 
+    //@@author A0140016B
     /**
      * Extract a {@code Optional<String> dateTime} into an {@code String[]} if {@code dateTime} is present.
      */
@@ -96,6 +131,7 @@ public class ParserUtil {
         assert recurrence != null;
         return recurrence.isPresent() ? recurrence.get().split(StringUtil.WHITESPACE_REGEX) : Recurrence.DEFAULT_VALUES;
     }
+    //@@author A0140016B
 
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
@@ -121,6 +157,7 @@ public class ParserUtil {
         return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
     }
 
+    //@@author A0140016B
     /**
      * Parses a {@code Optional<String> dateTime} into an {@code Optional<DateTime>}
      * if {@code dateTime} is present.
@@ -153,6 +190,7 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
+    //@@author A0140016B
 
     /**
      * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
