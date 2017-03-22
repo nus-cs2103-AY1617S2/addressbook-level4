@@ -76,6 +76,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, PersonCard should then bind its text labels to those observable
         // properties.
         internalList.set(index, taskToUpdate);
+        FXCollections.sort(internalList, Task.TaskComparator);
     }
 
     /**
@@ -95,6 +96,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
+        FXCollections.sort(internalList, Task.TaskComparator);
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
