@@ -16,7 +16,7 @@ public class ClearCommandTest extends TaskManagerGuiTest {
         //verify other commands can work after a clear command
         commandBox.runCommand(td.sampleEvent.getAddCommand());
         assertTrue(taskListPanel.isListMatching(td.sampleEvent));
-        commandBox.runCommand("delete 1");
+        commandBox.runCommand("DELETE 1");
         assertListSize(0);
 
         //verify clear command works when the list is empty
