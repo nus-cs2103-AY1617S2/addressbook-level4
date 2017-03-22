@@ -175,7 +175,7 @@ public class ArgumentTokenizer {
         } else {
             isValid = EndDateTime.isValidEndDateTime(dateTime);
         }
-        // Check if it's a valid date, if so, then break 
+        // Check if it's a valid date, if so, then break
         return isValid;
     }
 
