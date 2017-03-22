@@ -11,6 +11,7 @@ public interface ReadOnlyTask {
     Name getName();
     Time getTime();
     //Email getEmail();
+    Priority getPriority();
     //Address getAddress();
 
     /**

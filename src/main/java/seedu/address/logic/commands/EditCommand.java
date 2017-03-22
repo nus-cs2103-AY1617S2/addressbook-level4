@@ -13,6 +13,7 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -25,7 +26,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [p/PRIORITY ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -81,9 +82,10 @@ public class EditCommand extends Command {
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         //Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         //Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedTags);
+        return new Task(updatedName, updatedTime, updatedPriority, updatedTags);
     }
 
     /**
@@ -95,6 +97,7 @@ public class EditCommand extends Command {
         private Optional<Time> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -104,6 +107,7 @@ public class EditCommand extends Command {
             this.phone = toCopy.getTime();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
         }
 
@@ -111,7 +115,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.priority, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -144,6 +148,15 @@ public class EditCommand extends Command {
         public void setAddress(Optional<Address> address) {
             assert address != null;
             this.address = address;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+        
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
         }
 
         public Optional<Address> getAddress() {
