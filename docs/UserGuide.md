@@ -16,9 +16,10 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 	3.5. [Listing Tasks](#35-list-all-tasks--list) <br>
     3.6. [Selecting Tasks](#36-select-a-task--select) <br>
     3.7. [Updating Tasks](#37-update-a-task--update) <br>
-	3.8. [Getting Help](#38-get-help--help) <br>
-	3.9. [Change Data File Location](#39-change-data-file-location) <br>
-	3.10. [Exit](#310-exit-the-program--exit)
+    3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
+	3.9. [Getting Help](#39-get-help--help) <br>
+	3.10. [Change Data File Location](#310-change-data-file-location) <br>
+	3.11. [Exit](#311-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 6. [Glossary](#6-glossary)
@@ -94,7 +95,6 @@ Ready? Let's begin!
 
 When typing in your commands, do take note of the following specifications: <br>
 
-* Durations for your tasks must be specified in _hr_, _min_ and/or _sec_.
 * Times must be specified in _am_ and/or _pm_.
 * Dates must be specified in _DDMMYY_ format.
 * Either date or time but not both can be left out in the <... date and time> parameters.
@@ -106,14 +106,21 @@ When typing in your commands, do take note of the following specifications: <br>
 
 * `<task>` refers to the name of your task.
 
+* `<task_index>` refers to the task's index number.
+
 * [Parameters](#parameter) for your tasks include the following:
 
   > * Name
-  > * Start Date
-  > * Start Time
-  > * End or Due Date
-  > * End or Due Time
-  > * Duration
+  > * Start_Date
+  > * Start_Time
+  > * End_Date
+  > * End_Time
+  
+* [Filters](#filter) for your tasks include the following:
+
+  > * All
+  > * Completed
+  > * Uncompleted
 
 ### 3.2. Add a task : `add`
 
@@ -247,19 +254,30 @@ This command shows:
 
 ### 3.5. List all tasks : `list`
 
-Displays all tasks in your task list.<br>
+Displays tasks in your task list.<br>
 
-I will list tasks that have specific dates and/or times in a _chronological order_.
+With this command, you will be able to list tasks that have specific statuses or dates and/or times in a _chronological order_.
 
-Here is a reason why you might want to _list_ all your tasks:
+Here are some reasons why you might want to _list_ your tasks:
 
 * **You want to prioritize your tasks based on the order of their specific dates / times** <br>
 
   > You want to have an overview of all your tasks based on how urgent they are, then
   manually select some of these tasks to focus on.
+  
+* **You want to view completed your tasks** <br>
+
+  > You want to have an overview of all your tasks you completed to help track what you have already done.
+  
+* **You want to view uncompleted your tasks** <br>
+
+  > You want to have an overview of all your tasks so that you can better plan your time to get them done.
 
 > * **`list`** <br>
-Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
+This lists all tasks. Navigate through the panels and tasks using the arrow keys on your keyboard. <br>
+
+> * **`list`** `<filter>`<br>
+E.g. **`list`** `uncompleted` <br>
 
 <img src="images/UiListCommand.png" width="600"><br>
 _Figure 3.5.1. List Command_
@@ -294,11 +312,11 @@ tasks instead. <br>
 <img src="images/UiUnselectCommand.png" width="600"><br>
 _Figure 3.6.2. Unselect Command_
 
-### 3.7. Update a task : `update`
+### 3.7. Edit a task : `edit`
 
 Edits 1 or more [parameters](#parameter) of a task. <br>
 
-Here are some examples of tasks which you might want to _update_: <br>
+Here are some examples of tasks which you might want to _edit_: <br>
 
 * **Tasks that have already exceeded their deadline**
 
@@ -316,21 +334,32 @@ Here are some examples of tasks which you might want to _update_: <br>
   Your friend Jamie has come back from her overseas trip, and has finally arranged a meet-up with
   you!
 
-> * **`update`** `<task>; <parameter> <new_value>` <br>
-This command will direct me to make the specified update to a task with the name `<task>`. <br>
-You can edit more parameters for your task concurrently using the following format: <br>
-**`update`** `<task>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
+> * **`edit`** `<task_index>; <parameter> <new_value>` <br>
+This command will direct me to make the specified update to a task with the task's index `<task_index>`. <br>
+> * **`edit`** `<task_index>; <parameter1> <new_value1>; <parameter2> <new_value2>; ...`
+You can edit more parameters for your task concurrently using the following format<br>
+E.g. **`edit`** ` 1; start_time 3pm; end_time 8pm;` <br>
 
 <img src="images/UiUpdateCommand.png" width="600"><br>
-_Figure 3.7.1. Update Command_
+_Figure 3.7.1. Edit Command_
 
-> * **`update`** `<parameter> <new_value>` <br>
-E.g. **`update`** `start time 10am` <br>
-This command will direct me to make the specified update to a task which has already been
-selected using the [select](#36-select-a-task--select) command. <br>
-Similarly, you can edit multiple parameters concurrently.
+### 3.8. Complete a task : `complete`
 
-### 3.8. Get help : `help`
+Set a task as completed. <br>
+
+Here are some reasons why you might want to _completed_ a task:
+
+* **Tasks have already been completed** <br>
+
+  > You finished a task and do not want it to show up in the task list.
+
+> * **`complete`** `<task_index>`<br>
+E.g. **`complete`** ` 1` <br>
+> * **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
+You can complete multiple tasks simultaneously using the following format<br>
+E.g. **`complete`** ` 1,3,4` <br>
+
+### 3.9. Get help : `help`
 
 Shows a list of all commands I can execute and their usage instructions. <br>
 
@@ -345,7 +374,7 @@ This command will help to direct you back to this user guide.
 
 > Help will also be shown if you enter an incorrect command! e.g. `abcd`
 
-### 3.9. Change data file location
+### 3.10. Change data file location
 
 Modifies the file path of my data file. <br>
 
@@ -366,7 +395,7 @@ then save all my data in that file.
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.9.1. Save Command_
 
-### 3.10. Exit the program : `exit`
+### 3.11. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
