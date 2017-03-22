@@ -118,9 +118,31 @@
      -fx-border-top-width: 1px;
 }
 
+.commandbox {
+    -fx-background-color: derive(#1D1D1D, 20%);
+}
+
+.commandbox-textfield {
+    -fx-background-color: derive(#1D1D1D, 20%);
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: "Avenir Light";
+    -fx-font-size: 18px;
+}
+
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-text-fill: black;
+    -fx-background-color: derive(#1D1D1D, 20%);
+}
+
+.status-bar-sync {
+    -fx-font-size: 12px;
+    -fx-opacity: 0.5;
+}
+
+.status-bar-location {
+    -fx-font-size: 12px;
+    -fx-opacity: 0.5;
+    -fx-text-align: right;
 }
 
 .result-display {
@@ -158,7 +180,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;

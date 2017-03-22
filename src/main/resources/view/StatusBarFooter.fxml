@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import org.controlsfx.control.StatusBar?>
-<GridPane styleClass="grid-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@DarkTheme.css">
-<columnConstraints>
-  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-</columnConstraints>
- <children>
-      <StatusBar styleClass="anchor-pane" fx:id="syncStatus" minWidth="0.0"/>
-      <StatusBar styleClass="anchor-pane" fx:id="saveLocationStatus" minWidth="0.0" GridPane.columnIndex="1"/>
- </children>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" styleClass="status-bar" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label fx:id="syncStatus" styleClass="status-bar-sync" stylesheets="@DarkTheme.css" text="Label" GridPane.rowIndex="1" />
+      <Label fx:id="saveLocationStatus" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="status-bar-location" stylesheets="@DarkTheme.css" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="24.0" right="24.0" top="10.0" />
+   </padding>
 </GridPane>

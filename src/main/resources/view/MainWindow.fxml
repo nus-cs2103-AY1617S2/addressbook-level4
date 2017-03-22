@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -36,12 +36,12 @@
          <children>
             <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5, 0.5">
                <items>
-                  <VBox fx:id="DeadlineList" alignment="CENTER" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
+                  <VBox fx:id="DeadlineList" alignment="CENTER" minWidth="340.0" prefWidth="340" styleClass="panel-shadow" stylesheets="@PanelTheme.css">
                       <padding>
                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                       </padding>
                      <children>
-                        <HBox prefHeight="64.0" prefWidth="320.0" styleClass="header-deadlines" stylesheets="@PanelTheme.css">
+                        <HBox minHeight="64.0" prefHeight="64.0" prefWidth="320.0" styleClass="header-deadlines" stylesheets="@PanelTheme.css">
                            <children>
                               <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
                                  <viewport>
@@ -69,7 +69,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <HBox prefHeight="64.0" prefWidth="320.0" styleClass="header-events" stylesheets="@PanelTheme.css">
+                        <HBox minHeight="64.0" prefHeight="64.0" prefWidth="320.0" styleClass="header-events" stylesheets="@PanelTheme.css">
                            <children>
                               <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
                                  <viewport>
@@ -97,7 +97,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <HBox prefHeight="64.0" prefWidth="320.0" stylesheets="@PanelTheme.css">
+                        <HBox minHeight="64.0" prefHeight="64.0" prefWidth="320.0" stylesheets="@PanelTheme.css">
                            <children>
                               <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true">
                                  <viewport>
@@ -133,7 +133,7 @@
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
-      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="commandbox" VBox.vgrow="NEVER">
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
