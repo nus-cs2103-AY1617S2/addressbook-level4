@@ -164,8 +164,9 @@ The rest of Tache consists of the following four components:
 
 * [**`Storage`**](#35-storage-component) : Reads data from, and writes data to, the hard disk
 
-The [_Sequence Diagram_](#sequence-diagram) below shows how the different components interact when the user issues the
-command `delete 1`.
+The interactions between these components are integral in providing the functionality of Tache. For example,
+the [_Sequence Diagram_](#sequence-diagram) below shows how some of these components interact with one another
+to execute the user command `delete 1`.
 
 <img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 3.1.2a : Component Interactions for `delete 1` Command (Part 1)_
@@ -352,7 +353,7 @@ our GUI tests can be run in the _headless_ mode. <br>
  > That means that you can do other things on the computer while the tests are running. <br>
  You can refer to [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in the headless mode.
 
-### 5.1. Troubleshooting Tests
+### 5.4. Troubleshooting Tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -424,46 +425,47 @@ Managing these dependencies can be automated using Gradle.
 a. Include those libraries in the repo (this bloats the repo size) <br>
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-| Priority | As a ...                                    | I want to ...                                                                                                        | So that I can...                                                                      |
-|----------|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `* * *`  | user                                        | obtain a list of tasks due today / this week                                                                         | plan my time to complete these urgent tasks before they are due                       |
-| `* * *`  | user                                        | view tasks planned to be completed within a certain time range                                                       | easily decide on tasks I should work on during that period                            |
-| `* * *`  | user                                        | indicate a starting and ending time for my tasks                                                                     | keep track of events I need to attend                                                 |
-| `* * *`  | user                                        | display my tasks in a calendar view                                                                                  | obtain a general overview of the tasks I need to complete                             |
-| `* * *`  | user                                        | set tasks as [recurring](#recurring-tasks) at certain intervals                                                      | save time having to add the task repeatedly for different times                       |
-| `* * *`  | user                                        | add [subtasks](#subtask) to existing tasks                                                                           | keep track of and manage subtasks to be completed as part of bigger tasks             |
-| `* * *`  | user                                        | mark a task as completed and filter tasks that are not completed                                                     | keep tracks of tasks that I have to complete                                          |
-| `* * *`  | user                                        | view completed tasks                                                                                                 | avoid working on tasks that are already completed                                     |
-| `* * *`  | user                                        | set notifications to go off when certain tasks are nearing their deadline                                            | avoid missing those deadlines                                                         |
-| `* * *`  | user                                        | set notifications to go off when I have planned to work on certain tasks                                             | remind myself to work on those tasks that need to be completed                        |
-| `* * *`  | user                                        | undo previous commands                                                                                               | revert back to previous states in case of wrongly entered commands                    |
-| `* * *`  | user                                        | activate the application quickly using a keyboard shortcut                                                           | access my task manager conveniently and efficiently                                   |
-| `* * *`  | advanced user                               | [autocomplete](#autocomplete) my command by pressing a key (e.g. enter)                                              | type my commands faster                                                               |
-| `* * *`  | user                                        | specify a particular location I want to save the data file of my task manager                                        | [sync](#sync) my task list and access it from other devices                           |
-| `* * *`  | user                                        | search for names of particular tasks                                                                                 | update or view specific tasks efficiently                                             |
-| `* * *`  | user                                        | add new tasks                                                                                                        | track what i need to do                                                               |
-| `* * *`  | user                                        | delete tasks                                                                                                         | delete task that was inaccurately entered                                             |
-| `* *`    | advanced user                               | use shorter versions of commands                                                                                     | type my commands faster                                                               |
-| `* *`    | new user                                    | view additional usage information for particular commands                                                            | learn how to use specific commands effectively                                        |
-| `* *`    | user                                        | secure my task list                                                                                                  | prevent other people from viewing my task list                                        |
-| `* *`    | user                                        | [sync](#sync) my task list to Google or Microsoft                                                                    | view my tasks through their respective calendars                                      |
-| `* *`    | user                                        | retrieve previously typed commands using the UP and DOWN keys and execute them directly                              | save time having to retype similar commands repeatedly                                |
-| `* *`    | user                                        | postpone an existing task via a specific command                                                                     | save time having to specifically enter the new deadline                               |
-| `* *`    | user                                        | attach related documents and links to my tasks                                                                       | conveniently access documents needed for me to work on the tasks                      |
-| `* *`    | new user                                    | view command hints when typing commands                                                                              | ensure my commands are correct                                                        |
-| `* *`    | user                                        | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots |
-| `* *`    | user                                        | view the slots at which I have not planned for any task to be completed                                              | find a suitable slot for new tasks easily                                             |
-| `*`      | user sharing this computer with other users | switch between different accounts on this task manager                                                               | share this application with the other users of this computer                          |
-| `*`      | user                                        | backup my entire task list to the cloud or external storage via export                                               | have extra redundancy against system failures                                         |
-| `*`      | user                                        | create shared tasks across different users                                                                           | track the progress of other users for shared tasks                                    |
-| `*`      | user                                        | import previously exported data back                                                                                 | continue from where I left off                                                        |
-| `*`      | user                                        | receive a daily email at a preferred time that contains tasks due that day                                           | plan my schedule for that day effectively                                             |
 
-{More to be added}
+Priority | As a ... | I want to ... | So that I can...
+:----------- | :----------- | :--------- | :-----------
+`* * *` | user | obtain a list of tasks due today / this week | plan my time to complete these urgent tasks before they are due
+`* * *` | user | view tasks planned to be completed within a certain time range | easily decide on tasks I should work on during that period
+`* * *` | user | indicate a starting and ending time for my tasks | keep track of events I need to attend
+`* * *` | user | display my tasks in a calendar view | obtain a general overview of the tasks I need to complete
+`* * *` | user | set tasks as [recurring](#recurring-tasks) at certain intervals | save time having to add the task repeatedly for different times
+`* * *` | user | add [subtasks](#subtask) to existing tasks | keep track of and manage subtasks to be completed as part of bigger tasks
+`* * *` | user | mark a task as completed and filter tasks that are not completed | keep tracks of tasks that I have to complete
+`* * *` | user | view completed tasks | avoid working on tasks that are already completed
+`* * *` | user | set notifications to go off when certain tasks are nearing their deadline | avoid missing those deadlines
+`* * *` | user | set notifications to go off when I have planned to work on certain tasks | remind myself to work on those tasks that need to be completed
+`* * *` | user | undo previous commands | revert back to previous states in case of wrongly entered commands
+`* * *` | user  | activate the application quickly using a keyboard shortcut | access my task manager conveniently and efficiently
+`* * *` | advanced user | [autocomplete](#autocomplete) my command by pressing a key (e.g. enter) | type my commands faster
+`* * *` | user | specify a particular location I want to save the data file of my task manager | [sync](#sync) my task list and access it from other devices
+`* * *` | user | search for names of particular tasks | update or view specific tasks efficiently
+`* * *` | user | add new tasks | track what i need to do
+`* * *` | user | delete tasks | delete task that was inaccurately entered
+&nbsp;&nbsp;`* *` | advanced user | use shorter versions of commands | type my commands faster
+&nbsp;&nbsp;`* *` | new user | view additional usage information for particular commands | learn how to use specific commands effectively
+&nbsp;&nbsp;`* *` | user | secure my task list | prevent other people from viewing my task list
+&nbsp;&nbsp;`* *` | user | [sync](#sync) my task list to Google or Microsoft | view my tasks through their respective calendars
+&nbsp;&nbsp;`* *` | user | retrieve previously typed commands using the UP and DOWN keys and execute them directly | save time having to retype similar commands repeatedly
+&nbsp;&nbsp;`* *` | user | postpone an existing task via a specific command | save time having to specifically enter the new deadline
+&nbsp;&nbsp;`* *` | user | attach related documents and links to my tasks | conveniently access documents needed for me to work on the tasks
+&nbsp;&nbsp;`* *` | new user | view command hints when typing commands | ensure my commands are correct
+&nbsp;&nbsp;`* *` | user | block off multiple slots for the same task and release the unused slots when the exact timing of a task is confirmed | avoid having to add multiple copies of the same task to multiple potential time slots
+&nbsp;&nbsp;`* *` | user | view the slots at which I have not planned for any task to be completed | find a suitable slot for new tasks easily
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user sharing<br/> this computer<br/> with other users | switch between different accounts on this task manager | share this application with the other users of this computer
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | backup my entire task list to the cloud or external storage via export | have extra redundancy against system failures
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | create shared tasks across different users | track the progress of other users for shared tasks
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | import previously exported data back | continue from where I left off
+&nbsp;&nbsp;&nbsp;&nbsp;`*`&nbsp;&nbsp;&nbsp;&nbsp;| user | receive a daily email at a preferred time that contains tasks due that day | plan my schedule for that day effectively
+
 
 ## Appendix B : Use Cases
 
@@ -474,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 1. `User` types a letter or a sequence of letters
 2. `Tache` shows a list of commands that contain that letter or sequence of letters
 3. `User` selects specific command in list
-4. `Tache` performs an [autocomplete](#autocomplete) on user's command
+4. `Tache` performs an [autocomplete](#autocomplete) on user's command <br>
 Use case ends.
 
 **Extensions**
@@ -495,7 +497,7 @@ Use case ends.
 1. `User` requests to change data file location
 2. `Tache` displays a directory chooser
 3. `User` selects a directory
-4. `Tache` changes the save location to the one selected
+4. `Tache` changes the save location to the one selected <br>
 Use case ends.
 
 **Extensions**
@@ -511,7 +513,7 @@ Use case ends.
 1. `User` types in predefined keyboard shortcut
 2. `Tache` displays main window
 3. `User` types in shortcut again
-4. `Tache` minimizes main window
+4. `Tache` minimizes main window <br>
 Use case ends.
 
 ### Use case: Delete task
@@ -521,7 +523,7 @@ Use case ends.
 1. `User` requests to list tasks
 2. `Tache` shows a list of tasks
 3. `User` requests to delete a specific task in the list
-4.  deletes the task
+4. `User` deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -540,7 +542,7 @@ Use case resumes at step 2
 **MSS**
 
 1. `User` requests to add a task
-2. `Tache` shows user that task is added
+2. `Tache` shows user that task is added <br>
 Use case ends.
 
 **Extensions**
@@ -560,14 +562,14 @@ Use case ends
 **MSS**
 
 1. `User` requests to undo previous command
-2. `Tache` reverts back to previous state before last change
+2. `Tache` reverts back to previous state before last change <br>
 Use case ends.
 
 **Extensions**
 
 2a. No user command executed beforehand
 
-> 2a1. `Tache` shows that it has nothing to undo<br>
+> 2a1. `Tache` shows that it has nothing to undo <br>
 Use case ends
 
 ### Use case: Edit task
@@ -620,18 +622,16 @@ Use case ends.
 > 1a1. `Tache` informs `User` that the parameters for the complete command are wrong<br>
 Use case ends.
 
-{More to be added}
-
 ## Appendix C : Non Functional Requirements
 
-1. Should be a desktop app (i.e. not a mobile or Web app)
+#### 1. Should be a desktop app (i.e. not a mobile or Web app)
 
 > Desktop apps are more general than other platforms such as mobile/embedded/web. Therefore, they provide a good
 starting point before you move on to those platforms.
 > You are allowed to integrate with online services such as Google Calendar as long as the app can provide a
 reasonable level of functionality even when offline.
 
-2. [CLI](#command-line-interface) should be the primary mode of input
+#### 2. [CLI](#command-line-interface) should be the primary mode of input
 
 > If you implement a [GUI](graphical-user-interface), it should be primarily for output (i.e. the GUI is used to give
 visual feedback rather than to collect input).
@@ -639,34 +639,32 @@ visual feedback rather than to collect input).
 > Mouse actions should have keyboard alternatives and typing compared to mouse or key combinations.
 > Design the app in a way that you can perform actions faster by typing compared to mouse or key combinations.
 
-3. Should work stand-alone, not a plug-in to another software
+#### 3. Should work stand-alone, not a plug-in to another software
 
 > However, you can build optional extensions that integrate your application with other existing software.
 > Furthermore, you are allowed to build extensions that can plug into your software.
 
-4. Should not use relational databases
+#### 4. Should not use relational databases
 
 > Data storage must be done using text files you create yourself.
 
-5. Data should be stored locally the form of a human editable text file
+#### 5. Data should be stored locally the form of a human editable text file
 
 > This is to allow advanced users to manipulate the data by editing the data file.
 
-6. Should follow object-oriented paradigm
-7. Should work on Windows 7 or later
-8. Should work without requiring an installer
+#### 6. Should follow object-oriented paradigm
+#### 7. Should work on Windows 7 or later
+#### 8. Should work without requiring an installer
 
 > Having an optional installer is fine as long as the portable (non-installed) version has all the critical
 functionality.
 
-9. Should conform to the Java coding standard.
-10. Should process and respond to user commands within 1s.
-11. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 1.8.0_60 or higher installed.
-12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+#### 9. Should conform to the Java coding standard
+#### 10. Should process and respond to user commands within 1s
+#### 11. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 1.8.0_60 or higher installed
+#### 12. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
 should be able to accomplish most of the tasks faster by typing commands as compared to using the mouse.
 
-
-{More to be added}
 
 ## Appendix D : Glossary
 
