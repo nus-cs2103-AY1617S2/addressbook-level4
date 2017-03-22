@@ -120,17 +120,17 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0142255M
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        //@@author A0142255M
         new TaskListType(getTaskListTypePlaceholder(), "to be completed");
-        new TaskCount(getTaskCountPlaceholder(), "sample", "sample");
-        //@@author
+        new TaskCount(getTaskCountPlaceholder(), logic.getTimedTasks(), logic.getFloatingTasks());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
+    //@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;

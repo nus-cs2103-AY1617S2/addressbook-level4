@@ -20,4 +20,15 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    //@@author A0142255M
+    /**
+     * Returns the no. of timed tasks in String form.
+     */
+    String getTimedTasks();
+
+    /**
+     * Returns the no. of floating tasks in String form.
+     */
+    String getFloatingTasks();
+
 }

@@ -1,13 +1,17 @@
 //@@author A0142255M
 package seedu.tache.ui;
 
+import java.util.Date;
 import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.tache.commons.core.LogsCenter;
+import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.ui.DetailedTaskCountChangedEvent;
 import seedu.tache.commons.events.ui.FloatingTaskCountChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
@@ -45,6 +49,13 @@ public class TaskCount extends UiPart<Region> {
     private void setFloatingTaskCount(String numFloatingTasks) {
         this.floatingTaskCount.setText(numFloatingTasks);
     }
+    
+    /*@Subscribe
+    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
+        String lastUpdated = (new Date()).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus("Last Updated: " + lastUpdated);
+    }*/
 
     private void setEventHandlerForDetailedTaskCountChangeEvent() {
         detailedTaskCount.textProperty().addListener((observable, oldValue, newValue) -> {
