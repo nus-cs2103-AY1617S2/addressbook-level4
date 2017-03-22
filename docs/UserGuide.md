@@ -131,10 +131,10 @@ Format:`edit [TASK_ID] [TASKNAME] [label LABEL] ([(by) DATE] | [from START_DATE 
 
 Examples:
 
-* `edit CS2106Assignment label`<br />
+* `update CS2106Assignment label`<br />
   Edits the name of the currently selected task to be `CS2106Assignment` and clears all existing labels.
 
-* `edit 1 label tedious work by thursday`<br />
+* `update 1 label tedious work by thursday`<br />
   Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday 23:59 hr` respectively.
 
 ### 2.5. Finding all task containing any keyword in task name and labels : `find`
