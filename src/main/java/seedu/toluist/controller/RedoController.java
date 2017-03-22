@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * Responsible for redo-related task
@@ -18,13 +18,9 @@ public class RedoController extends Controller {
     private static final String COMMAND_TEMPLATE = "^redo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "redo";
     private static final String REDO_TIMES = "number";
-    private static final String RESULT_MESSAGE_TEMPLATE = "List redo-ed %d times";
+    private static final String RESULT_MESSAGE_TEMPLATE = "Your last undone %s %s re-applied.";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
-
-    public RedoController(Ui renderer) {
-        super(renderer);
-    }
+    private static final Logger logger = LogsCenter.getLogger(RedoController.class);
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
@@ -37,10 +33,11 @@ public class RedoController extends Controller {
         TodoList todoList = redoResult.getKey();
         int actualRedoTimes = redoResult.getValue();
 
-        uiStore.setTask(todoList.getTasks());
-        renderer.render();
+        uiStore.setTasks(todoList.getTasks());
 
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, actualRedoTimes));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
+                StringUtil.nounWithCount("change", actualRedoTimes),
+                actualRedoTimes == 1 ? "was" : "were"));
     }
 
     public HashMap<String, String> tokenize(String command) {

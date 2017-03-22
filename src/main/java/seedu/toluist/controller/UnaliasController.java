@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.AliasTable;
-import seedu.toluist.ui.Ui;
 
 /**
  * Alias Controller is responsible for handling unalias requests
@@ -22,10 +21,6 @@ public class UnaliasController extends Controller {
     private static final String ALIAS_TERM = "alias";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
-
-    public UnaliasController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         HashMap<String, String> tokens = tokenize(command);

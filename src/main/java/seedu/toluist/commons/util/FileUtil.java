@@ -3,6 +3,7 @@ package seedu.toluist.commons.util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 
 /**
  * Writes and reads files
@@ -76,7 +77,7 @@ public class FileUtil {
     /**
      * Assumes file exists
      */
-    public static String readFromFile(File file) throws IOException {
+    public static String readFromFile(File file) throws IOException, InvalidPathException {
         return new String(Files.readAllBytes(file.toPath()), CHARSET);
     }
 

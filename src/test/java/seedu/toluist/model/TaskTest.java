@@ -199,7 +199,18 @@ public class TaskTest {
     }
 
     @Test
-    public void compareTo_differentEndDateTime() {
+    public void compareTo_differentPriority() {
+        Task testTask = new Task("floating");
+        Task highPriorityTask = new Task("high priority");
+        Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
+        highPriorityTask.setTaskPriority(Task.TaskPriority.HIGH);
+
+        assertEquals(highPriorityTask.compareTo(event), -1);
+        assertEquals(highPriorityTask.compareTo(testTask), -1);
+    }
+
+    @Test
+    public void compareTo_samePriorityDifferentEndDateTime() {
         Task testTask = new Task("floating");
         Task taskWithDeadline = new Task("task with deadline", LocalDateTime.now());
         Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
@@ -209,34 +220,12 @@ public class TaskTest {
     }
 
     @Test
-    public void compareTo_sameEndDateTimeDifferentStartDateTime() {
-        LocalDateTime to = LocalDateTime.now();
-        Task event1 = new Task("event 1", to.minusDays(1), to);
-        Task event2 = new Task("event 2", to.minusDays(2), to);
-        assertEquals(event2.compareTo(event1), -1);
-    }
-
-    @Test
-    public void compareTo_sameEndDateTimeSameStartDateTimeDifferentPriority() {
+    public void compareTo_sameEndDateTimeSamePriorityDifferentStartDateTime() {
         LocalDateTime to = LocalDateTime.now();
         LocalDateTime from  = to.minusDays(1);
         Task event1 = new Task("event 1", from, to);
-        Task event2 = new Task("event 2", from, to);
-        event1.setTaskPriority(Task.TaskPriority.HIGH);
-        event2.setTaskPriority(Task.TaskPriority.LOW);
+        Task event2 = new Task("event 2", from.minusDays(1), to);
         assertEquals(event2.compareTo(event1), -1);
-
-        Task taskWithDeadline1 = new Task("task 1", to);
-        Task taskWithDeadline2 = new Task("task 2", to);
-        taskWithDeadline1.setTaskPriority(Task.TaskPriority.LOW);
-        taskWithDeadline2.setTaskPriority(Task.TaskPriority.HIGH);
-        assertEquals(taskWithDeadline1.compareTo(taskWithDeadline2), -1);
-
-        Task testTask1 = new Task("floating 1");
-        Task testTask2 = new Task("floating 2");
-        testTask1.setTaskPriority(Task.TaskPriority.HIGH);
-        testTask2.setTaskPriority(Task.TaskPriority.LOW);
-        assertEquals(testTask2.compareTo(testTask1), -1);
     }
 
     @Test
@@ -254,6 +243,63 @@ public class TaskTest {
         Task testTask1 = new Task("floating 1");
         Task testTask2 = new Task("floating 2");
         assertEquals(testTask1.compareTo(testTask2), -1);
+    }
+
+    @Test
+    public void compareTo_nonOverdueOverdue() {
+        Task task1 = new Task("yesterday", LocalDateTime.now().minusDays(1));
+        task1.setCompleted(true);
+        Task task2 = new Task("today", LocalDateTime.now());
+
+        assertEquals(task2.compareTo(task1), -1);
+    }
+
+    @Test
+    public void isWithinInterval_nullFromNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.MIN);
+        Task event = new Task("event", LocalDateTime.MIN, LocalDateTime.MAX);
+
+        assertTrue(floatingTask.isWithinInterval(null, null));
+        assertTrue(taskWithDeadline.isWithinInterval(null, null));
+        assertTrue(event.isWithinInterval(null, null));
+    }
+
+    @Test
+    public void isWithinInterval_nonNullFromNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.MIN);
+        Task event = new Task("event", LocalDateTime.MIN, LocalDateTime.MAX);
+
+        assertTrue(floatingTask.isWithinInterval(LocalDateTime.MIN, null));
+        assertTrue(taskWithDeadline.isWithinInterval(LocalDateTime.MIN, null));
+        assertTrue(event.isWithinInterval(LocalDateTime.MIN, null));
+    }
+
+    @Test
+    public void isWithinInterval_nullFromNonNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline = new Task("task with deadline", LocalDateTime.MIN);
+        Task event = new Task("event", LocalDateTime.MIN, LocalDateTime.MAX);
+
+        assertTrue(floatingTask.isWithinInterval(null, LocalDateTime.MIN));
+        assertTrue(taskWithDeadline.isWithinInterval(null, LocalDateTime.MIN));
+        assertTrue(event.isWithinInterval(null, LocalDateTime.MIN));
+    }
+
+    @Test
+    public void isWithinInterval_nonNullFromNonNullTo() {
+        Task floatingTask = new Task("floating");
+        Task taskWithDeadline1 = new Task("task with deadline", LocalDateTime.MAX);
+        Task taskWithDeadline2 = new Task("task with deadline", LocalDateTime.MIN);
+        Task event1 = new Task("event", LocalDateTime.MIN, LocalDateTime.MIN.plusDays(2));
+        Task event2 = new Task("event", LocalDateTime.MAX.minusDays(2), LocalDateTime.MAX);
+
+        assertFalse(floatingTask.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX));
+        assertFalse(taskWithDeadline1.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX.minusDays(1)));
+        assertTrue(taskWithDeadline2.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX));
+        assertTrue(event1.isWithinInterval(LocalDateTime.MIN.plusDays(1), LocalDateTime.MAX));
+        assertTrue(event2.isWithinInterval(LocalDateTime.MIN, LocalDateTime.MAX.minusDays(1)));
     }
 
     /**

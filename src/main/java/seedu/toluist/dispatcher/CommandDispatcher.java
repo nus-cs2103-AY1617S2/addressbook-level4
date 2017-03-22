@@ -18,59 +18,89 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
+import seedu.toluist.controller.ClearController;
 import seedu.toluist.controller.Controller;
 import seedu.toluist.controller.DeleteTaskController;
 import seedu.toluist.controller.ExitController;
 import seedu.toluist.controller.FindController;
-import seedu.toluist.controller.ListController;
+import seedu.toluist.controller.HistoryController;
+import seedu.toluist.controller.LoadController;
 import seedu.toluist.controller.MarkController;
 import seedu.toluist.controller.RedoController;
 import seedu.toluist.controller.StoreController;
+import seedu.toluist.controller.SwitchController;
 import seedu.toluist.controller.TagController;
 import seedu.toluist.controller.UnaliasController;
 import seedu.toluist.controller.UndoController;
+import seedu.toluist.controller.UnknownCommandController;
 import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
 import seedu.toluist.model.AliasTable;
-import seedu.toluist.ui.Ui;
 
 public class CommandDispatcher extends Dispatcher {
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
     private final EventsCenter eventsCenter = EventsCenter.getInstance();
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
+
+    /**
+     * ArrayList to store previous commands entered since starting the application
+     */
+    private ArrayList<String> commandHistory;
+    private int historyPointer = 0;
 
     public CommandDispatcher() {
         super();
         aliasConfig.setReservedKeywords(getControllerKeywords());
+        commandHistory = new ArrayList<>();
     }
 
-    public void dispatch(Ui renderer, String command) {
+    public void dispatchRecordingHistory(String command) {
+        recordCommand(command);
+        dispatch(command);
+    }
+
+    public void dispatch(String command) {
         String deAliasedCommand = aliasConfig.dealias(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
-        Controller controller = getBestFitController(renderer, deAliasedCommand);
+        Controller controller = getBestFitController(deAliasedCommand);
         logger.info("Controller class to be executed: " + controller.getClass());
-        CommandResult feedbackToUser = controller.execute(deAliasedCommand);
+
+        CommandResult feedbackToUser;
+        if (controller instanceof HistoryController) {
+            ((HistoryController) controller).setCommandHistory(commandHistory);
+        }
+
+        feedbackToUser = controller.execute(deAliasedCommand);
+
         eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
     }
 
-    private Controller getBestFitController(Ui renderer, String command) {
-        Collection<Controller> controllerCollection = getAllControllers(renderer);
+    private void recordCommand(String command) {
+        commandHistory.add(command);
+        historyPointer = commandHistory.size();
+    }
+
+    private Controller getBestFitController(String command) {
+        Collection<Controller> controllerCollection = getAllControllers();
 
         return controllerCollection
                 .stream()
                 .filter(controller -> controller.matchesCommand(command))
                 .findFirst()
-                .orElse(new ListController(renderer)); // fail-safe
+                .orElse(new UnknownCommandController()); // fail-safe
     }
 
     private Collection<Class <? extends Controller>> getAllControllerClasses() {
         return new ArrayList<>(Arrays.asList(
                 AddTaskController.class,
+                ClearController.class,
                 UpdateTaskController.class,
                 DeleteTaskController.class,
                 StoreController.class,
+                HistoryController.class,
+                LoadController.class,
                 UndoController.class,
                 RedoController.class,
                 ExitController.class,
@@ -81,21 +111,22 @@ public class CommandDispatcher extends Dispatcher {
                 FindController.class,
                 TagController.class,
                 MarkController.class,
-                ListController.class
+                SwitchController.class,
+                UnknownCommandController.class
         ));
     }
 
-    private Collection<Controller> getAllControllers(Ui renderer) {
+    private Collection<Controller> getAllControllers() {
         return getAllControllerClasses()
                 .stream()
                 .map((Class<? extends Controller> klass) -> {
                     try {
-                        Constructor constructor = klass.getConstructor(Ui.class);
-                        return (Controller) constructor.newInstance(renderer);
+                        Constructor constructor = klass.getConstructor();
+                        return (Controller) constructor.newInstance();
                     } catch (NoSuchMethodException | InstantiationException
                             | IllegalAccessException | InvocationTargetException e) {
                         // fail-safe. But should not actually reach here
-                        return new ListController(renderer);
+                        return new UnknownCommandController();
                     }
                 })
                 .collect(Collectors.toList());

@@ -2,11 +2,22 @@ package seedu.toluist.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+
+import org.atteo.evo.inflector.English;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+    /**
+     * Returns true if string is not null and not empty
+     * @param string
+     */
+    public static boolean isPresent(String string) {
+        return string != null && !string.isEmpty();
+    }
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -56,5 +67,38 @@ public class StringUtil {
      */
     public static boolean isPositiveInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
+    }
+
+    /**
+     * Given a noun and a count, return the count followed by the noun in singular/plural form appropriately
+     * E.g:
+     * "word", 1 -> "1 word"
+     * "cat", 2 -> "2 cats"
+     * @param noun a noun
+     * @param count the quantity
+     * @return noun with count
+     */
+    public static String nounWithCount(String noun, int count) {
+        return count + " " + English.plural(noun, count);
+    }
+
+    /**
+     * Returns an array containing each word in the string.
+     * @param string
+     */
+    public static String[] convertToArray(String keywords) {
+        if (keywords == null || keywords.trim().isEmpty()) {
+            return new String[] { "" };
+        }
+
+        String trimmedKeywords = keywords.trim();
+        String[] keywordList = trimmedKeywords.split(" ");
+        ArrayList<String> replacementList = new ArrayList<>();
+        for (String keyword : keywordList) {
+            if (!keyword.equals("")) {
+                replacementList.add(keyword);
+            }
+        }
+        return replacementList.toArray(new String[0]);
     }
 }

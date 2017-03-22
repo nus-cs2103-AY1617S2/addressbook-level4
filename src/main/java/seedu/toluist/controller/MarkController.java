@@ -8,22 +8,23 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.atteo.evo.inflector.English;
+
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.CollectionUtil;
-import seedu.toluist.controller.commons.IndexTokenizer;
+import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
  * Mark Controller is responsible for marking task complete or incomplete
  */
 public class MarkController extends Controller {
-    private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "Task(s) %s marked completed";
-    private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "Task(s) %s marked incomplete";
+    private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "%s %s marked completed";
+    private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
     private static final String COMMAND_TEMPLATE = "mark(\\s+(?<markType>(complete|incomplete)))?(?<index>.*)?\\s*";
     private static final String COMMAND_WORD = "mark";
 
@@ -31,11 +32,7 @@ public class MarkController extends Controller {
     private static final String INDEX_TERM = "index";
     private static final String MARK_COMPLETE = "complete";
     private static final String MARK_INCOMPLETE = "incomplete";
-    private final Logger logger = LogsCenter.getLogger(getClass());
-
-    public MarkController(Ui renderer) {
-        super(renderer);
-    }
+    private static final Logger logger = LogsCenter.getLogger(MarkController.class);
 
     public CommandResult execute(String command) {
         logger.info(getClass().toString() + " will handle command");
@@ -43,8 +40,8 @@ public class MarkController extends Controller {
         HashMap<String, String> tokens = tokenize(command);
         String indexToken = tokens.get(INDEX_TERM);
         String markTypeToken = tokens.get(MARK_TERM);
-        List<Integer> indexes = IndexTokenizer.splitStringToIndexes(indexToken,
-                UiStore.getInstance().getTasks().size());
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken,
+                UiStore.getInstance().getShownTasks().size());
 
         if (indexes.isEmpty()) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX);
@@ -61,13 +58,12 @@ public class MarkController extends Controller {
         if (!todoList.save()) {
             return new CommandResult(Messages.MESSAGE_SAVING_FAILURE);
         }
-        UiStore.getInstance().setTask(todoList.getTasks());
-        renderer.render();
+        UiStore.getInstance().setTasks(todoList.getTasks());
         return commandResult;
     }
 
     private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
-        ArrayList<Task> tasks = UiStore.getInstance().getTasks(taskIndexes);
+        ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
             task.setCompleted(isCompleted);
         }
@@ -75,7 +71,8 @@ public class MarkController extends Controller {
         String messageTemplate = isCompleted
                 ? RESULT_MESSAGE_COMPLETED_SUCCESS
                 : RESULT_MESSAGE_INCOMPLETE_SUCCESS;
-        return new CommandResult(String.format(messageTemplate, indexString));
+        return new CommandResult(String.format(messageTemplate,
+                English.plural("Task", taskIndexes.size()), indexString));
     }
 
     public HashMap<String, String> tokenize(String command) {

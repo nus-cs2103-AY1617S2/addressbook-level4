@@ -70,7 +70,7 @@ Format: `help`
 ### 3.3. Adding a task: `add`
 
 Adds a task to the todo list<br>
-Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE]`
+Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
 > * Both 'startdate' and 'enddate' use the same datetime format.
 > * 'startdate' requires a valid 'enddate' to be used in the same command.
@@ -102,11 +102,13 @@ Format: `list`
 ### 3.5. Updating a task : `update`
 
 Updates an existing task in the todo list.<br>
-Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE]`
+Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.
 > * Only fields entered will be updated.
+> * When editing tags, the existing tags of the task will be set to contain the new tags; the old tags will be removed.
+
 
 Examples:
 

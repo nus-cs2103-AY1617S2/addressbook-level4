@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 import seedu.toluist.ui.UiStore;
 
 /**
@@ -27,25 +27,21 @@ public class TagController extends Controller {
     private static final int INDEX_SECTION = 0;
     private static final int KEYWORDS_SECTION = 1;
 
-    private static final String SUCCESS_MESSAGE_TEMPLATE = "Sucessfully added \"%s\".\n";
+    private static final String SUCCESS_MESSAGE_TEMPLATE = "Successfully added \"%s\".\n";
     private static final String FAIL_MESSAGE_TEMPLATE = "Failed to add \"%s\".\n";
-    private static final String RESULT_MESSAGE_TEMPLATE = "%s%d tag(s) successfully added.";
+    private static final String RESULT_MESSAGE_TEMPLATE = "%s%s successfully added.";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
-
-    public TagController(Ui renderer) {
-        super(renderer);
-    }
+    private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
     public CommandResult execute(String command) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
-        String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
+        String[] keywordList = StringUtil.convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER)) - 1;
         TodoList todoList = TodoList.load();
-        Task task = UiStore.getInstance().getTasks().get(index);
+        Task task = UiStore.getInstance().getShownTasks().get(index);
         ArrayList<String> successfulList = new ArrayList<>();
         ArrayList<String> failedList = new ArrayList<>();
 
@@ -58,31 +54,13 @@ public class TagController extends Controller {
         }
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
-            renderer.render();
+            uiStore.setTasks(todoList.getTasks());
         }
 
         // display formatting
         return formatDisplay(successfulList.toArray(new String[successfulList.size()]),
                                 failedList.toArray(new String[failedList.size()]),
                                 successfulList.size());
-    }
-
-    //!!!!!same as FindController method
-    private String[] convertToArray(String keywords) {
-        if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { "" };
-        }
-
-        String trimmedKeywords = keywords.trim();
-        String[] keywordList = trimmedKeywords.split(" ");
-        ArrayList<String> replacementList = new ArrayList<>();
-        for (String keyword : keywordList) {
-            if (!keyword.equals("")) {
-                replacementList.add(keyword);
-            }
-        }
-        return replacementList.toArray(new String[0]);
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {
@@ -97,7 +75,8 @@ public class TagController extends Controller {
             resultMessage += String.format(FAIL_MESSAGE_TEMPLATE, failWords);
         }
 
-        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, resultMessage, successCount));
+        return new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE, resultMessage,
+                StringUtil.nounWithCount("tag", successCount)));
     }
 
     public HashMap<String, String> tokenize(String command) {

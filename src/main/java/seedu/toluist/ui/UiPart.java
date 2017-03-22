@@ -23,7 +23,7 @@ public abstract class UiPart<T> {
     private FXMLLoader fxmlLoader;
 
     /**
-     * Constructs a RefreshableUiView with the specified FXML file URL.
+     * Constructs a UiPart with the specified FXML file URL.
      * The FXML file must not specify the {@code fx:controller} attribute.
      */
     public UiPart(URL fxmlFileUrl) {

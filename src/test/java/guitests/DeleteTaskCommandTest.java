@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.model.Task;
+import seedu.toluist.model.TodoList;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 import seedu.toluist.ui.UiStore;
 
@@ -85,7 +86,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         }
 
         // Use shallow copy of task list so it doesn't mutate upon calling delete command
-        List<Task> allTasks = (List<Task>) UiStore.getInstance().getTasks().clone();
+        List<Task> allTasks = (List<Task>) UiStore.getInstance().getShownTasks().clone();
 
         commandBox.runCommand(deleteCommand);
 
@@ -108,5 +109,41 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
     public void deleteMultipleTasksTogether1() {
         String command = "delete  - 2, 4 -  5, 7    9- ";
         deleteMultipleTasksTogether(command, 10, 3, 6, 8);
+    }
+
+    @Test
+    public void findThenDeleteTasksThenList() {
+        String findCommand = "find lewis";
+        commandBox.runCommand(findCommand);
+
+        String deleteCommand = "delete -";
+        commandBox.runCommand(deleteCommand);
+
+        String listCommand = "list";
+        commandBox.runCommand(listCommand);
+
+        TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
+        assertTrue(isTaskShown(todoList.getTasks().get(1)));
+        assertFalse(isTaskShown(todoList.getTasks().get(0)));
+    }
+
+
+    @Test
+    public void switchThenDeleteTasksThenSwitchBack() {
+        String addCommand = "add tomorrow enddate/Tomorrow 1:12pm";
+        commandBox.runCommand(addCommand);
+
+        String switchCommand = "switch 3";
+        commandBox.runCommand(switchCommand);
+
+        String deleteCommand = "delete 1";
+        commandBox.runCommand(deleteCommand);
+
+        String switchAgainCommand = "switch 1";
+        commandBox.runCommand(switchAgainCommand);
+
+        TodoList todoList = new TypicalTestTodoLists().getTypicalTodoList();
+        assertTrue(isTaskShown(todoList.getTasks().get(0)));
+        assertTrue(isTaskShown(todoList.getTasks().get(1)));
     }
 }

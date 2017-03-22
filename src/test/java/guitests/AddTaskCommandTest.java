@@ -5,10 +5,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Test;
 
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 
 /**
@@ -20,6 +23,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             new IllegalArgumentException("Description must not be empty.");
     private static IllegalArgumentException illegalArgumentException2 =
             new IllegalArgumentException("Start date must be before end date.");
+    private Tag tag1 = new Tag("tag1");
+    private Tag tag2 = new Tag("tag2");
+    private Tag tag3 = new Tag("tag3");
 
     @Test
     public void addFloatingTask() {
@@ -30,11 +36,12 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         Task task = new Task(taskDescription);
         assertTrue(isTaskShown(task));
 
-        // add another task
+        // add another task, with tags
         String taskDescription2 = "drink Koi after school";
-        String command2 = "add " + taskDescription2;
+        String command2 = "add " + taskDescription2 + " tags/tag1 tag2 tag3";
         commandBox.runCommand(command2);
-        Task task2 = new Task(taskDescription2);
+        Task task2 = new Task(taskDescription2, null, null);
+        task2.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2, tag3)));
         assertTrue(isTaskShown(task));
         assertTrue(isTaskShown(task2));
     }
@@ -64,12 +71,13 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         assertTrue(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
 
-        // add another task with deadline
+        // add another task with deadline and tags
         String taskDescription3 = "get v0.3 ready";
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("22 Mar 2017, 12pm");
-        String command3 = "add " + taskDescription3 + " enddate/" + endDate3;
+        String command3 = "add " + taskDescription3 + " enddate/" + endDate3 + " tags/ tag1 tag2 ";
         commandBox.runCommand(command3);
-        Task task3 = new Task(taskDescription3, endDate3);
+        Task task3 = new Task(taskDescription3, null, endDate3);
+        task3.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2)));
         assertTrue(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
         assertTrue(isTaskShown(task3));
@@ -119,13 +127,15 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
 
-        // add another event
+        // add another event with tags
         String taskDescription4 = "attend CS2101 tutorial";
         LocalDateTime startDate4 = DateTimeUtil.parseDateString("16 Mar 2017, 10am");
         LocalDateTime endDate4 = DateTimeUtil.parseDateString("16 Mar 2017, 12pm");
-        String command4 = "add " + taskDescription4 + " startdate/" + startDate4 + " enddate/" + endDate4;
+        String command4 = "add " + taskDescription4 + " tags/tag3" +
+                 " startdate/" + startDate4 + " enddate/" + endDate4;
         commandBox.runCommand(command4);
         Task task4 = new Task(taskDescription4, startDate4, endDate4);
+        task4.replaceTags(new ArrayList<>(Arrays.asList(tag3)));
         assertTrue(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));

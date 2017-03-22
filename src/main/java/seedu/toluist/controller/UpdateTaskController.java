@@ -1,16 +1,20 @@
 package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
-import seedu.toluist.controller.commons.IndexTokenizer;
+import seedu.toluist.commons.util.StringUtil;
+import seedu.toluist.controller.commons.IndexParser;
+import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
-import seedu.toluist.ui.Ui;
 
 /**
  * UpdateTaskController is responsible for updating a task
@@ -25,11 +29,7 @@ public class UpdateTaskController extends Controller {
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
 
-    private Logger logger = LogsCenter.getLogger(getClass());
-
-    public UpdateTaskController(Ui renderer) {
-        super(renderer);
-    }
+    private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
     public CommandResult execute(String command) {
         logger.info(getClass().getName() + " will handle command");
@@ -42,8 +42,8 @@ public class UpdateTaskController extends Controller {
         String description = tokens.get(TaskTokenizer.TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
-        int index = IndexTokenizer.getIndex(indexToken);
-        Task task = uiStore.getTask(index);
+        List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
+        Task task = uiStore.getShownTasks(indexes).get(0);
 
         String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
         LocalDateTime startDateTime = DateTimeUtil.parseDateString(startDateToken);
@@ -51,24 +51,25 @@ public class UpdateTaskController extends Controller {
         String endDateToken = tokens.get(TaskTokenizer.TASK_END_DATE_KEYWORD);
         LocalDateTime endDateTime = DateTimeUtil.parseDateString(endDateToken);
 
-        commandResult = update(task, description, startDateTime, endDateTime);
+        String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
+        Set<Tag> tags = TagParser.parseTags(tagsToken);
+
+        commandResult = update(task, description, startDateTime, endDateTime, tags);
 
         if (todoList.save()) {
-            uiStore.setTask(todoList.getTasks());
-            renderer.render();
+            uiStore.setTasks(todoList.getTasks());
         }
 
         return commandResult;
     }
 
     public HashMap<String, String> tokenize(String command) {
-        TaskTokenizer taskTokenizer = new TaskTokenizer(COMMAND_TEMPLATE);
-        return taskTokenizer.tokenize(command, true, true);
+        return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, true);
     }
 
     private CommandResult update(Task task, String description,
-            LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (!description.isEmpty()) {
+            LocalDateTime startDateTime, LocalDateTime endDateTime, Set<Tag> tags) {
+        if (StringUtil.isPresent(description)) {
             task.setDescription(description);
         }
         if (endDateTime != null) {
@@ -76,6 +77,9 @@ public class UpdateTaskController extends Controller {
             if (startDateTime != null) {
                 task.setStartDateTime(startDateTime);
             }
+        }
+        if (!tags.isEmpty()) {
+            task.replaceTags(tags);
         }
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
     }

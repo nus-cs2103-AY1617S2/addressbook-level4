@@ -24,7 +24,8 @@ public class TaskListUiView extends UiView {
 
     @Override
     protected void viewDidMount () {
-        ObservableList<Task> taskList = UiStore.getInstance().getUiTasks();
+        UiStore store = UiStore.getInstance();
+        ObservableList<Task> taskList = store.getObservableTasks();
         setConnections(taskList);
         FxViewUtil.makeFullWidth(getRoot());
     }

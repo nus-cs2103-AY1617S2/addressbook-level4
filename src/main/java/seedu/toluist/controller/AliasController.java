@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.AliasTable;
-import seedu.toluist.ui.Ui;
 
 /**
  * Alias Controller is responsible for handling alias requests
@@ -23,10 +22,6 @@ public class AliasController extends Controller {
     private static final String COMMAND_TEMPLATE = "alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
-
-    public AliasController(Ui renderer) {
-        super(renderer);
-    }
 
     public CommandResult execute(String command) {
         HashMap<String, String> tokens = tokenize(command);

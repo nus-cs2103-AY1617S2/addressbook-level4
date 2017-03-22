@@ -46,7 +46,10 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, dispatcher);
             mainWindow.render();
             mainWindow.show();
-            dispatcher.dispatch(this, "");
+            // Re-render when data change is observed
+            UiStore.getInstance().bind(this);
+            String listCommand = "list";
+            dispatcher.dispatch(listCommand);
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -77,7 +80,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.getDialogPane().getStylesheets().add("stylesheet/DefaultTheme.css");
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);

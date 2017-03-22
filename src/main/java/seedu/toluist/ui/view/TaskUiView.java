@@ -1,13 +1,15 @@
 package seedu.toluist.ui.view;
 
-import java.util.stream.Collectors;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import seedu.toluist.commons.util.AppUtil;
 import seedu.toluist.commons.util.DateTimeFormatterUtil;
 import seedu.toluist.commons.util.FxViewUtil;
+import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 
 /**
@@ -17,14 +19,22 @@ public class TaskUiView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
     private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
+    private static final String OVERDUE_ICON_IMAGE_PATH = "/images/warning.png";
     private static final String COMPLETED_STYLE_CLASS = "completed";
+    private static final String OVERDUE_STYLE_CLASS = "overdue";
 
+    @FXML
+    private Pane taskPane;
+    @FXML
+    private FlowPane tagsPane;
     @FXML
     private Label name;
     @FXML
     private Label id;
     @FXML
     private Label date;
+    @FXML
+    private HBox statusBox;
     @FXML
     private ImageView clockIcon;
 
@@ -40,16 +50,32 @@ public class TaskUiView extends UiView {
 
     @Override
     protected void viewDidMount() {
-        FxViewUtil.makeFullWidth(getRoot());
         boolean isFloatingTask = task.isFloatingTask();
         boolean isTaskWithDeadline = task.isTaskWithDeadline();
         boolean isTask = isFloatingTask || isTaskWithDeadline;
         boolean isEvent = task.isEvent();
 
-        String tagText = " " + String.join(" ", task.getAllTags().stream()
-                .map(tag -> "#" + tag.tagName).collect(Collectors.toList()));
-        String taskTypeText = isTask ? " (Task)" : " (Event)";
-        name.setText(task.getDescription() + taskTypeText + tagText);
+        tagsPane.getChildren().clear();
+
+        TaskTypeTagView taskTypeTagView = new TaskTypeTagView(isTask);
+        taskTypeTagView.setParent(tagsPane);
+        taskTypeTagView.render();
+
+        for (Tag tag : task.getAllTags()) {
+            TagView tagView = new TagView(tag.tagName);
+            tagView.setParent(tagsPane);
+            tagView.render();
+        }
+
+        statusBox.getChildren().clear();
+        if (task.isOverdue()) {
+            TaskStatusView statusView = new TaskStatusView(AppUtil.getImage(OVERDUE_ICON_IMAGE_PATH));
+            statusView.setParent(statusBox);
+            statusView.render();
+            FxViewUtil.addStyleClass(taskPane, OVERDUE_STYLE_CLASS);
+        }
+
+        name.setText(task.getDescription());
         id.setText(displayedIndex + ". ");
         if (isTaskWithDeadline) {
             date.setText(DateTimeFormatterUtil.formatTaskDeadline(task.getEndDateTime()));
@@ -60,7 +86,7 @@ public class TaskUiView extends UiView {
             clockIcon.setImage(AppUtil.getImage(CLOCK_ICON_IMAGE_PATH));
         }
         if (task.isCompleted()) {
-            FxViewUtil.addStyleClass(name, COMPLETED_STYLE_CLASS);
+            FxViewUtil.addStyleClass(taskPane, COMPLETED_STYLE_CLASS);
         }
     }
 }

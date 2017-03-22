@@ -1,10 +1,18 @@
 package seedu.toluist.ui;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -13,10 +21,13 @@ import javafx.stage.Stage;
 
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.GuiSettings;
+import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
+import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandBox;
 import seedu.toluist.ui.view.ResultView;
+import seedu.toluist.ui.view.TabBarView;
 import seedu.toluist.ui.view.TaskListUiView;
 
 /**
@@ -24,11 +35,11 @@ import seedu.toluist.ui.view.TaskListUiView;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
-
-    private static final String ICON = "/images/address_book_32.png";
+    private static final Logger logger = LogsCenter.getLogger(MainWindow.class);
+    private static final String LOGO_IMAGE_PATH = "/images/logo.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_WIDTH = 800;
 
     private Stage primaryStage;
     private Dispatcher dispatcher;
@@ -37,17 +48,18 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
     private AnchorPane taskListPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
+    @FXML
+    private AnchorPane tabPanePlaceholder;
+
     private CommandBox commandBox;
     private TaskListUiView taskListUiView;
     private ResultView resultView;
+    private TabBarView tabBarView;
 
 
     public MainWindow (Stage primaryStage, Dispatcher dispatcher) {
@@ -58,11 +70,12 @@ public class MainWindow extends UiPart<Region> {
         this.dispatcher = dispatcher;
 
         // Configure the UI
+        setLogo();
         setWindowMinSize();
         setWindowDefaultSize();
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-        setAccelerators();
+        configureKeyCombinations();
         configureChildrenViews();
     }
 
@@ -74,19 +87,19 @@ public class MainWindow extends UiPart<Region> {
         taskListUiView.render();
         commandBox.render();
         resultView.render();
+        tabBarView.render();
     }
 
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    private void configureKeyCombinations() {
+        configureSwitchTabKeyCombinations();
     }
 
     /**
-     * Sets the accelerator of a MenuItem.
+     * Sets the key combination on root.
      * @param keyCombination the KeyCombination value of the accelerator
+     * @param handler the event handler
      */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
-
+    private void setKeyCombination(KeyCombination keyCombination, EventHandler<ActionEvent> handler) {
         /*
          * TODO: the code below can be removed once the bug reported here
          * https://bugs.openjdk.java.net/browse/JDK-8131666
@@ -103,8 +116,8 @@ public class MainWindow extends UiPart<Region> {
          * in CommandBox or ResultView.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
+            if (keyCombination.match(event)) {
+                handler.handle(new ActionEvent());
                 event.consume();
             }
         });
@@ -112,6 +125,32 @@ public class MainWindow extends UiPart<Region> {
 
     void hide() {
         primaryStage.hide();
+    }
+
+    private void configureSwitchTabKeyCombinations() {
+        String[] tabNames = new String[] { "i", "t", "n", "c", "a" };
+        Arrays.stream(tabNames).forEach(tabName -> {
+            KeyCombination keyCombination = new KeyCodeCombination(getKeyCode(tabName), KeyCombination.CONTROL_DOWN);
+            String switchCommand = "switch " + tabName;
+            EventHandler<ActionEvent> handler = event -> dispatcher.dispatch(switchCommand);
+            setKeyCombination(keyCombination, handler);
+        });
+    }
+
+    /**
+     * Get matching key code for a string
+     * @param s string
+     * @returna key code
+     */
+    private KeyCode getKeyCode(String s) {
+        switch (s) {
+        case "i": return KeyCode.I;
+        case "t": return KeyCode.T;
+        case "n": return KeyCode.N;
+        case "c": return KeyCode.C;
+        case "a": return KeyCode.A;
+        default: return KeyCode.ESCAPE;
+        }
     }
 
     private AnchorPane getTaskListPlaceholder() {
@@ -126,9 +165,33 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
+    private AnchorPane getTabPanePlaceholder() {
+        return tabPanePlaceholder;
+    }
+
     private void setWindowMinSize() {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
+    }
+
+    /**
+     * Sets the logo for the app
+     */
+    private void setLogo() {
+        FxViewUtil.setStageIcon(primaryStage, LOGO_IMAGE_PATH);
+        // Only in macOS, you can try to use reflection to access this library
+        // and use it to set a custom app icon
+        try {
+            Class applicationClass = Class.forName("com.apple.eawt.Application");
+            Method getApplication = applicationClass.getMethod("getApplication");
+            Object application = getApplication.invoke(applicationClass);
+            Method setDockIconImage = applicationClass.getMethod("setDockIconImage", java.awt.Image.class);
+            setDockIconImage.invoke(application,
+                    new ImageIcon(MainWindow.class.getResource(LOGO_IMAGE_PATH)).getImage());
+        } catch (NoSuchMethodException | IllegalAccessException
+                | InvocationTargetException | ClassNotFoundException e) {
+            logger.info("Not on macOS");
+        }
     }
 
     /**
@@ -153,6 +216,9 @@ public class MainWindow extends UiPart<Region> {
 
         resultView = new ResultView();
         resultView.setParent(getResultDisplayPlaceholder());
+
+        tabBarView = new TabBarView();
+        tabBarView.setParent(getTabPanePlaceholder());
     }
 
     void show() {

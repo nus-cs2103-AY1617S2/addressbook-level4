@@ -9,18 +9,10 @@ import java.util.TreeSet;
 import seedu.toluist.commons.util.StringUtil;
 
 /**
- * Tokenize string of indexes into a list of integer index.
+ * Parse string of indexes into a list of integer index.
  */
-public class IndexTokenizer {
+public class IndexParser {
     private static final String HYPHEN = "-";
-
-    /**
-     * Returns the index if indexToken holds a valid index number, else returns -1
-     * @param indexToken the string holding the index number
-     */
-    public static int getIndex(String indexToken) {
-        return indexToken == null ? -1 : Integer.parseInt(indexToken) - 1;
-    }
 
     /**
      * Split a string of unprocessed indexes into a list.
@@ -52,7 +44,7 @@ public class IndexTokenizer {
      * @param maxIndex, the maximum possible index number
      * @return a list of integer containing all valid indexes
      */
-    public static List<Integer> parseIndexes(String stringIndexes, int maxIndex) {
+    private static List<Integer> parseIndexes(String stringIndexes, int maxIndex) {
         // Prepare stringIndexes in the correct format to be processed
         // Correct format example: ["2", "-", "5", "7", "11", "-", "13", "15"]
         String processedStringIndexes = stringIndexes.replaceAll(HYPHEN, " - ");
