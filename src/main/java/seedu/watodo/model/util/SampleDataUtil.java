@@ -1,7 +1,7 @@
 package seedu.watodo.model.util;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.Description;
@@ -26,7 +26,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyTaskManger getSampleWatodo() {
+    public static ReadOnlyTaskManager getSampleWatodo() {
         try {
             TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {

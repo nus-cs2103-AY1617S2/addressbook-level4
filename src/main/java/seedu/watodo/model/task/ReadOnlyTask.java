@@ -37,9 +37,11 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDescription())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getDescription());
+        if (this.getTags() != null) { // TODO fix
+                builder.append("\nTags: ");
+                getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
 }

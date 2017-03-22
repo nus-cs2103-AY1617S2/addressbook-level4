@@ -3,15 +3,15 @@ package seedu.watodo.logic.commands;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 
 /**
- * Lists all overdue tasks and upcoming tasks due the next day in the task manager to the user.
+ * Lists all tasks scheduled on the current week in the task manager to the user.
  */
-public class ListCommand extends Command {
+public class ListWeekCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "week";
 
-    public static final String MESSAGE_SUCCESS = "Listed all overdue tasks and tasks due tomorrow";
+    public static final String MESSAGE_SUCCESS = "Listed this week's tasks";
     
-    public static final int DEADLINE = 1;
+    public static final int DEADLINE = 7;
 
     @Override
     public CommandResult execute() {

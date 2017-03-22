@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.watodo.commons.exceptions.DataConversionException;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 
 /**
  * Represents a storage for {@link seedu.watodo.model.TaskManager}.
@@ -17,28 +17,28 @@ public interface TaskListStorage {
     String getTaskListFilePath();
 
     /**
-     * Returns TaskManager data as a {@link ReadOnlyTaskManger}.
+     * Returns TaskManager data as a {@link ReadOnlyTaskManager}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTaskManger> readTaskList() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskList() throws DataConversionException, IOException;
 
     /**
      * @see #getTaskListFilePath()
      */
-    Optional<ReadOnlyTaskManger> readTaskList(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskList(String filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyTaskManger} to the storage.
+     * Saves the given {@link ReadOnlyTaskManager} to the storage.
      * @param TaskManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskList(ReadOnlyTaskManger TaskList) throws IOException;
+    void saveTaskList(ReadOnlyTaskManager TaskList) throws IOException;
 
     /**
-     * @see #saveTaskList(ReadOnlyTaskManger)
+     * @see #saveTaskList(ReadOnlyTaskManager)
      */
-    void saveTaskList(ReadOnlyTaskManger TaskList, String filePath) throws IOException;
+    void saveTaskList(ReadOnlyTaskManager TaskList, String filePath) throws IOException;
 
 }

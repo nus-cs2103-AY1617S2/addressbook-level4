@@ -101,6 +101,12 @@ Shows a list of all tasks.<br>
 Format: `list float`<br>
 Shows a list of all floating tasks.<br>
 
+Format: `list deadline`<br>
+Shows a list of all tasks with deadlines.<br>
+
+Format: `list event`<br>
+Shows a list of all events.<br>
+
 Format: `list day`<br>
 Shows a list of deadlines and events scheduled on the current day.<br>
 

@@ -3,6 +3,7 @@ package seedu.watodo.model;
 import java.util.Set;
 
 import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
@@ -13,10 +14,10 @@ import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyTaskManger newData);
+    void resetData(ReadOnlyTaskManager newData);
 
     /** Returns the Task Manager */
-    ReadOnlyTaskManger getTaskManager();
+    ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
@@ -42,5 +43,15 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to filter by the given keywords for tags*/
+    void updateFilteredByTagsTaskList(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to filter by the given number of days
+     * @throws IllegalValueException */
+    void updateFilteredByDatesTaskList(int days) throws IllegalValueException;
+    
+    /** Updates the filter of the filtered task list to filter by the given keyword for type*/
+    void updateFilteredByTypesTaskList(String type);
 
 }

@@ -10,10 +10,17 @@ import seedu.watodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-
+    public TestTask eat, study, shop, code, play, sleep;
+    
     public TypicalTestTasks() {
-
+        try {
+            eat = new TaskBuilder().withDescription("Time to eat").build(); //TODO continue
+        
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+        
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
@@ -27,12 +34,12 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{eat, study, sleep};
     }
 
     public TaskManager getTypicalTaskManager() {
-        TaskManager ab = new TaskManager();
-        loadTaskManagerWithSampleData(ab);
-        return ab;
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleData(tm);
+        return tm;
     }
 }

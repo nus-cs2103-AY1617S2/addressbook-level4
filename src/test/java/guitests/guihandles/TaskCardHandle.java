@@ -12,7 +12,7 @@ import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
@@ -57,9 +57,9 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getDescription().fullDescription)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSamePerson(ReadOnlyTask task) {
+        return getFullName().equals(task.getDescription().fullDescription)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override

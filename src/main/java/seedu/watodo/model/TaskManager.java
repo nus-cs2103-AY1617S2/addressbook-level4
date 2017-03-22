@@ -21,7 +21,7 @@ import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
  * Wraps all data at the task manager level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskManager implements ReadOnlyTaskManger {
+public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -43,7 +43,7 @@ public class TaskManager implements ReadOnlyTaskManger {
     /**
      * Creates a TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
-    public TaskManager(ReadOnlyTaskManger toBeCopied) {
+    public TaskManager(ReadOnlyTaskManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -59,7 +59,7 @@ public class TaskManager implements ReadOnlyTaskManger {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskManger newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
