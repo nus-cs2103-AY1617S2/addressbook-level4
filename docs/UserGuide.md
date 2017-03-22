@@ -53,14 +53,18 @@ on simplifying the way you handle tasks now.
 
 ## 3.1. Viewing help : `help`
 
-Brings up user guide<br>
+When you are unsure about the commands used by the program, 
+use this command to bring up a list of commands you can use. 
+This is also displayed when an incorrect command is entered.<br>
 Format: help
 
 > Is also displayed when an incorrect command is entered
 
 ## 3.2. Adding a task: `add`
 
-Adds a task to task list<br>
+This command adds a task to your task list to keep track of it. 
+Enter the name, the deadline, and a brief description of the 
+task you want to keep track of.<br>
 Format: add TASKNAME [dl/DATE] [ds/DESCRIPTION] [-p]
 > Tasks includes:
 > * Event tasks where deadlines include a specific timing
@@ -75,48 +79,16 @@ Examples:
 * `add Complete project dl/12/12/2017`
 * `add Buy a cake`
 
-## 3.3. Modifying a task: `edit`
+## 3.3. Listing all tasks: `list`
 
-Updates an existing task in the task list<br>
-Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
-
-Examples:
-
-* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
-* `edit 1 tie shoelace dl/25-12-2017`
-
-## 3.4. Delete a task: `delete`
-
-Deletes an existing task<br>
-Format: delete INDEX
-
-Examples:
-
-* `delete 1`
-
-## 3.5. Undo a command: 'undo'
-
-Undo most recent command<br>
-Format: undo
-
-## 3.6. Redo a command: 'redo'
-
-Redo most recent command<br>
-Format: redo
-
-## 3.7. Listing all tasks: `list`
-
-Shows a list of all tasks<br>
+Shows you a list of all tasks with an index number attached, 
+you will need this index number to use some of the tasks below.<br>
 Format: list
 
-## 3.8. Exiting the program : `exit`
+## 3.4. View tasks : `view`
 
-Exits the program.<br>
-Format: exit
-
-## 3.9. View tasks : `view`
-
-Changes the different views of the task managers<br>
+Changes the different views of the task managers so that you can 
+better differentiate the time that the task is due.<br>
 Format: view all|calendar|done|floating|overdue|today|tomorrow|future
 
 Examples:
@@ -124,9 +96,45 @@ Examples:
 * `view all`
 * `view floating`
 
-## 3.10. Finding all tasks using keyword or deadline: `find`
+## 3.5. Modifying a task: `edit`
 
-Finds tasks that satisfy given parameters<br>
+You can change the details of a task that you are currently 
+keeping track of with the edit command.<br>
+Format: edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]
+
+Examples:
+
+* `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
+* `edit 1 tie shoelace dl/25-12-2017`
+
+## 3.6. Delete a task: `delete`
+
+No longer need to do a task? Removes it from the task list 
+to forget about it.<br>
+Format: delete INDEX
+
+Examples:
+
+* `delete 1`
+
+## 3.7. Undo a command: `undo`
+
+Made a mistake? Use this command to quickly revert the 
+changes made with the last command used. <br>
+Format: undo
+
+## 3.8. Redo a command: `redo`
+
+Changed your mind? Use this command to quickly reapply 
+the changes that were removed with undo command. 
+This can only be used after an undo command. <br>
+Format: redo
+
+## 3.9. Finding all tasks using keyword or deadline: `find`
+
+Helps you quickly finds tasks whose name contain any of the 
+given keywords. The results will come with an index number 
+attached.<br>
 Format: find KEYWORDS [dl/DATE]
 
 > finds tasks whose task name or description contains any of the given keywords
@@ -139,19 +147,25 @@ Examples:
 * `find Project Name/Description`
 * `find dl/12-08-2017`
 
-## 3.11. Marking entries as done : `mark`
+## 3.10. Marking entries as done : `mark`
 
-Marks completed tasks as done<br>
+After completing a task, use this command to mark a task as completed<br>
 Format: mark INDEX
 
 Examples:
 
 * `mark 3`
 
-## 3.12. Clearing all entries : `clear`
+## 3.11. Clearing all entries : `clear`
 
-Clears all tasks in task manager<br>
+Clears your list of tasks to start from a clean slate.<br>
 Format: clear
+
+## 3.12. Exiting the program : `exit`
+
+When you are tired and want to stop tracking tasks for the day, 
+use this command to exit the program. <br>
+Format: exit
 
 ## 3.13. Saving the data
 
@@ -159,6 +173,15 @@ Application data are saved onto hard drive automatically after any commands are 
 There is no need to manually save the data
 
 ## 4. FAQ
+
+**Q**: Where do I download the Task Manager Application?
+**A**: The Application can be found at https://github.com/CS2103JAN2017-W13-B2/main to download.
+
+**Q**: Why are there no tasks displayed after I added some tasks?
+**A**: Use the command `list` to display all tasks.
+
+**Q**: Where do I get the INDEX number?
+**A**: The INDEX number is obtained when the “list” or “find” command is used.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
@@ -171,6 +194,11 @@ There is no need to manually save the data
 * **Add**  `add TASKNAME dl/DATE [ds/DESCRIPTION] [-p]` <br>
   e.g. `add Make payment dl/01-08-2017 ds/Pay credit card bills -p`
 
+* **List** : `list` <br>
+
+* **View** : `view all|calendar|done|floating|overdue|today|tomorrow|future` <br>
+  e.g. `view all`
+  
 * **Edit** : `edit INDEX [TASKNAME] [dl/DATE] [ds/DESCRIPTION] [-p]` <br>
   e.g. `edit 3 buy eggs dl/29-02-2017 ds/as soon as possible`
 
@@ -181,15 +209,12 @@ There is no need to manually save the data
 
 * **Redo** : `redo` <br> 
 
-* **View** : `view all|calendar|done|floating|overdue|today|tomorrow|future` <br>
-  e.g. `view all`
-  
 * **Find** : `find [KEYWORDS] [ds/KEYWORDS] [dl/DATE]` <br>
   e.g. `find James Jake`
 
-* **List** : `list` <br>
-
 * **Mark** : `mark INDEX` <br>
   e.g. `mark 4`
+
+* **Clear** : `clear` <br>
 
 * **Exit** : `exit` <br>
