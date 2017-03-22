@@ -1,6 +1,10 @@
 package seedu.ezdo.model;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -9,11 +13,18 @@ import seedu.ezdo.commons.core.ComponentManager;
 import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.events.model.EzDoChangedEvent;
+import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.commons.util.CollectionUtil;
+import seedu.ezdo.commons.util.DateUtil;
 import seedu.ezdo.commons.util.StringUtil;
+import seedu.ezdo.model.tag.Tag;
+import seedu.ezdo.model.todo.DueDate;
+import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -26,6 +37,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final EzDo ezDo;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    private SortCriteria currentSortCriteria;
 
     private final FixedStack<ReadOnlyEzDo> undoStack;
     private final FixedStack<ReadOnlyEzDo> redoStack;
@@ -40,6 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.ezDo = new EzDo(ezDo);
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
+        currentSortCriteria = SortCriteria.NAME;
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         updateFilteredListToShowAll();
@@ -51,9 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyEzDo newData) {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        updateStacks();
         ezDo.resetData(newData);
         indicateEzDoChanged();
     }
@@ -69,44 +81,41 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void killTask(ReadOnlyTask target) throws TaskNotFoundException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
-        ezDo.removeTask(target);
+    public synchronized void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
+        updateStacks();
+        ezDo.removeTasks(tasksToKill);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+    public synchronized void addTask(Task task)
+            throws UniqueTaskList.DuplicateTaskException, DateException {
+        checkTaskDate(task);
+        updateStacks();
         ezDo.addTask(task);
+        ezDo.sortTasks(currentSortCriteria);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
 
     @Override
-    public synchronized void doneTask(Task doneTask) throws TaskNotFoundException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
-        ezDo.doneTask(doneTask);
+    public synchronized void doneTasks(ArrayList<Task> doneTasks) throws TaskNotFoundException {
+        updateStacks();
+        ezDo.doneTasks(doneTasks);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, DateException {
         assert editedTask != null;
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
-        undoStack.push(prevState);
-        redoStack.clear();
+        checkTaskDate(editedTask);
+        updateStacks();
         int ezDoIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         ezDo.updateTask(ezDoIndex, editedTask);
+        ezDo.sortTasks(currentSortCriteria);
         indicateEzDoChanged();
     }
 
@@ -129,6 +138,25 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    @Override
+    public void updateStacks() throws EmptyStackException {
+        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
+        undoStack.push(prevState);
+        redoStack.clear();
+    }
+
+    @Override
+    public void checkTaskDate(ReadOnlyTask task) throws DateException {
+        assert task != null;
+        try {
+            if (!DateUtil.isTaskDateValid(task)) {
+                throw new DateException("Start date after due date!");
+            }
+        } catch (ParseException pe) {
+            logger.info("Parse exception while checking if task date valid");
+            throw new DateException("Error parsing dates!");
+        }
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     private void updateFilteredTaskList(Expression expression) {
@@ -136,8 +164,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTaskList(Set<String> keywords, Optional optionalPriority,
+                                       Optional optionalStartDate, Optional optionalDueDate, Set<String> findTag) {
+        updateFilteredTaskList(
+                new PredicateExpression(new NameQualifier(
+                        keywords, optionalPriority, optionalStartDate, optionalDueDate, findTag)));
     }
 
     @Override
@@ -226,24 +257,60 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        private Optional<Priority> priority;
+        private Optional<StartDate> startDate;
+        private Optional<DueDate> dueDate;
+        private Set<String> tags;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords, Optional<Priority> priority,
+                      Optional<StartDate> startDate, Optional<DueDate> dueDate, Set<String> tags) {
             this.nameKeyWords = nameKeyWords;
+            this.priority = priority;
+            this.startDate = startDate;
+            this.dueDate = dueDate;
+            this.tags = tags;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent()
-                    && !task.getDone();
+            String taskStartDate = task.getStartDate().toString();
+            String taskDueDate = task.getDueDate().toString();
+            Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
+
+            return (nameKeyWords.contains("") || nameKeyWords.stream()
+                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
+                    && !task.getDone()
+                    && (!priority.isPresent() || task.getPriority().toString().equals(priority.get().toString()))
+                    && (!startDate.isPresent() || (taskStartDate.length() != 0)
+                            && taskStartDate.substring(0, startDate.get().toString().length())
+                                            .equals(startDate.get().toString()))
+                    && (!dueDate.isPresent() || (taskDueDate.length() != 0)
+                            && taskDueDate.substring(0, dueDate.get().toString().length())
+                                          .equals(dueDate.get().toString()))
+                    && (taskTagStringSet.containsAll(tags));
         }
 
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+
+        public Set<String> convertToTagStringSet(Set<Tag> tags) {
+            Object[] tagArray = tags.toArray();
+            Set<String> tagSet = new HashSet<String>();
+
+            for (int i = 0; i < tags.size(); i++) {
+                tagSet.add(((Tag) tagArray[i]).tagName);
+            }
+
+            return tagSet;
+        }
     }
 
+    @Override
+    public void sortTasks(SortCriteria sortCriteria) {
+        this.currentSortCriteria = sortCriteria;
+        ezDo.sortTasks(sortCriteria);
+        indicateEzDoChanged();
+    }
 }

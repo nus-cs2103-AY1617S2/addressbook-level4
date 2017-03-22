@@ -3,8 +3,11 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.logic.commands.KillCommand.MESSAGE_KILL_TASK_SUCCESS;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
+import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.testutil.TestUtil;
 
@@ -48,7 +51,9 @@ public class KillCommandTest extends EzDoGuiTest {
      * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertKillSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask taskToKill = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
+        TestTask taskToKill = currentList[targetIndexOneIndexed - 1]; // array uses zero indexing
+        ArrayList<ReadOnlyTask> tasksToKill = new ArrayList<ReadOnlyTask>();
+        tasksToKill.add(taskToKill);
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         if (usesShortCommand) {
@@ -61,7 +66,7 @@ public class KillCommandTest extends EzDoGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_KILL_TASK_SUCCESS, taskToKill));
+        assertResultMessage(String.format(MESSAGE_KILL_TASK_SUCCESS, tasksToKill));
     }
 
 }

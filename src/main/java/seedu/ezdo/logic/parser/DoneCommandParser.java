@@ -2,7 +2,7 @@ package seedu.ezdo.logic.parser;
 
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Optional;
+import java.util.ArrayList;
 
 import seedu.ezdo.logic.commands.Command;
 import seedu.ezdo.logic.commands.DoneCommand;
@@ -24,13 +24,13 @@ public class DoneCommandParser {
             return new DoneCommand();
         }
 
-        Optional<Integer> index = ParserUtil.parseIndex(args);
-        if (!index.isPresent()) {
+        ArrayList<Integer> indexes = ParserUtil.parseIndexes(args);
+        if (indexes.isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
 
-        return new DoneCommand(index.get());
+        return new DoneCommand(indexes);
     }
 
 }

@@ -2,6 +2,7 @@ package seedu.ezdo.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -13,6 +14,8 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private AnchorPane priorityColor;
     @FXML
     private Label name;
     @FXML
@@ -30,10 +33,31 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-        priority.setText(task.getPriority().value);
+        setPriority(task);
         startDate.setText(task.getStartDate().value);
         dueDate.setText(task.getDueDate().value);
         initTags(task);
+    }
+
+    private void setPriority(ReadOnlyTask task) {
+        String priorityInString = task.getPriority().value;
+        priority.setText(priorityInString);
+
+        switch (priorityInString) {
+
+        case "1":
+            priorityColor.setStyle("-fx-background-color: green");
+            break;
+        case "2":
+            priorityColor.setStyle("-fx-background-color: orange");
+            break;
+        case "3":
+            priorityColor.setStyle("-fx-background-color: red");
+            break;
+        default:
+
+        }
+
     }
 
     private void initTags(ReadOnlyTask task) {

@@ -1,13 +1,17 @@
 package seedu.ezdo.model;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
+import seedu.ezdo.commons.exceptions.DateException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -20,15 +24,23 @@ public interface Model {
     /** Returns the EzDo */
     ReadOnlyEzDo getEzDo();
 
+    void sortTasks(SortCriteria sortCriteria);
+
     /** Deletes the given task. */
-    void killTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task. */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException;
+
+    /** Checks the task and makes sure the dates are logical.
+     * i.e. start date not after due date.
+     * @throws DateException
+     */
+    void checkTaskDate(ReadOnlyTask task) throws DateException;
 
     /** Marks a task as done.
      * @throws TaskNotFoundException */
-    void doneTask(Task task) throws TaskNotFoundException;
+    void doneTasks(ArrayList<Task> tasksToDone) throws TaskNotFoundException;
 
     /** Undo the previous undoable command
      * @throws EmptyStackException */
@@ -38,6 +50,10 @@ public interface Model {
      * @throws EmptyStackException */
     void redo() throws EmptyStackException;
 
+    /** Update stack when new command is executed
+     * @throws EmptyStackException */
+    void updateStacks() throws EmptyStackException;
+
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -46,7 +62,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
+            throws UniqueTaskList.DuplicateTaskException, DateException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -54,8 +70,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    /** Updates the filter of the filtered task list to filter by multiple fields*/
+    void updateFilteredTaskList(Set<String> keywords, Optional toMatch1,
+            Optional toMatch2, Optional toMatch3, Set<String> toMatchTag);
 
     /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredDoneList();

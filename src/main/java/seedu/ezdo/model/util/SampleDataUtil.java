@@ -15,29 +15,29 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Buy one cherry"), new Priority("1"),
+                new Task(new Name("Buy one cherry fruit"), new Priority("1"),
                     new StartDate("12/12/2017"),
-                    new DueDate("13/08/2017"),
+                    new DueDate("12/13/2018"),
                     new UniqueTagList("groceries")),
                 new Task(new Name("Study for two midterms"), new Priority("2"),
                     new StartDate("12/12/2017"),
-                    new DueDate("14/09/2017"),
+                    new DueDate("12/09/2018"),
                     new UniqueTagList("school", "exams")),
                 new Task(new Name("Buy ps three"), new Priority("3"),
                     new StartDate("12/12/2017"),
-                    new DueDate("15/10/2017"),
+                    new DueDate("12/10/2018"),
                     new UniqueTagList("personal")),
                 new Task(new Name("Visit four neighbours"), new Priority("2"),
                     new StartDate("12/12/2017"),
-                    new DueDate("16/11/2017"),
+                    new DueDate("12/11/2018"),
                     new UniqueTagList("personal")),
                 new Task(new Name("Prepare for five finals"), new Priority("3"),
                     new StartDate("12/12/2017"),
-                    new DueDate("17/12/2017"),
+                    new DueDate("12/12/2018"),
                     new UniqueTagList("school", "exams")),
                 new Task(new Name("Prepare six presentations"), new Priority("3"),
                     new StartDate("12/12/2017"),
-                    new DueDate("18/12/2017"),
+                    new DueDate("12/12/2018"),
                     new UniqueTagList("school", "exams"))
             };
         } catch (IllegalValueException e) {

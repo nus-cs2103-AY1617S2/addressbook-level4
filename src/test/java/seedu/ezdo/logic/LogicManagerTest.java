@@ -55,6 +55,7 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.StartDate;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
+import seedu.ezdo.model.todo.UniqueTaskList;
 import seedu.ezdo.storage.StorageManager;
 
 
@@ -101,6 +102,9 @@ public class LogicManagerTest {
         latestSavedEzDo = new EzDo(model.getEzDo()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
+
+        // sort by a field other than name so that it does not affect the tests
+        model.sortTasks(UniqueTaskList.SortCriteria.PRIORITY);
     }
 
     @After
@@ -355,11 +359,13 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         EzDo expectedEZ = helper.generateEzDo(threeTasks);
-        expectedEZ.removeTask(threeTasks.get(1));
+        ArrayList<ReadOnlyTask> tasksToKill = new ArrayList<ReadOnlyTask>();
+        tasksToKill.add(threeTasks.get(1));
+        expectedEZ.removeTasks(tasksToKill);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("kill 2",
-                String.format(KillCommand.MESSAGE_KILL_TASK_SUCCESS, threeTasks.get(1)),
+                String.format(KillCommand.MESSAGE_KILL_TASK_SUCCESS, tasksToKill),
                 expectedEZ,
                 expectedEZ.getTaskList());
     }
@@ -414,7 +420,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
+        Task pTarget3 = helper.generateTaskWithName("key key bla");
         Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
@@ -422,7 +428,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM",
+        assertCommandSuccess("find bla",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedEZ,
                 expectedList);
