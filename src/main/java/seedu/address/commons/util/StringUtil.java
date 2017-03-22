@@ -2,11 +2,21 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+	
+	public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments should be in HH:MM format, e.g. 12:00 represents noon";
+	
+	public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments should be in YYYY-MM-DD format, e.g. 2010-12-05";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -44,6 +54,30 @@ public class StringUtil {
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
         return t.getMessage() + "\n" + sw.toString();
+    }
+    
+    /**
+     * Parse a String argument into time format.
+     * @param timeArg
+     * @return time in localTime format
+     * @throws IllegalValueException
+     */
+    public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
+        //empty time
+        if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
+        return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+    }
+    
+    /**
+     * Parse a String argument into date format.
+     * @param dateArg
+     * @return date in localDate format
+     * @throws IllegalValueException
+     */
+    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
+        //empty date
+        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
+        return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
     }
 
     /**

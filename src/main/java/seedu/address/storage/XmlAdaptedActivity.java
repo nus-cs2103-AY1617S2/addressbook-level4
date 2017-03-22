@@ -59,9 +59,9 @@ public class XmlAdaptedActivity {
     public XmlAdaptedActivity(ReadOnlyActivity source) {
         description = source.getDescription().description;
         priority = source.getPriority().value;
-        starttime = source.getStartTime().value;
+        starttime = source.getStartTime().toString();
         fromdate = source.getFromDate().value;
-        endtime = source.getEndTime().value;
+        endtime = source.getEndTime().toString();
         todate = source.getToDate().value;
         bydate = source.getByDate().value;
         location = source.getLocation().value;

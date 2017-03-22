@@ -4,9 +4,11 @@ import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.person.Activity;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.person.UniqueActivityList;
 import seedu.address.model.person.UniqueActivityList.DuplicateActivityException;
+import seedu.address.model.person.UniqueEventList;
 
 /**
  * The API of the Model component.
@@ -23,7 +25,10 @@ public interface Model {
 
     /** Adds the given activity */
     void addActivity(Activity activity) throws UniqueActivityList.DuplicateActivityException;
-
+    
+    /** Adds the given event */
+    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+    
     /**
      * Updates the activity located at {@code filteredActivityListIndex} with {@code editedActivity}.
      *
