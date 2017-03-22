@@ -12,7 +12,7 @@
 $(document).ready(function() {
     $('#calendar').fullCalendar({
         aspectRatio: 1.3,
-        height: 470,
+        height: 440,
         header: {
             left: 'prev, next, today',
             center: 'title',
@@ -79,6 +79,7 @@ $(document).ready(function() {
             }
         ]
     });
+    $('#calendar').fullCalendar('render');
 });
 
 function add_event(name) {

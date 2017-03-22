@@ -8,10 +8,14 @@ import seedu.tache.commons.events.BaseEvent;
  */
 public class TaskListTypeChangedEvent extends BaseEvent {
 
-    public final String message;
+    public final String newTaskListType;
 
-    public TaskListTypeChangedEvent(String message) {
-        this.message = message;
+    public TaskListTypeChangedEvent(String newTaskListType) {
+        this.newTaskListType = newTaskListType;
+    }
+
+    public String getTaskListType() {
+        return newTaskListType;
     }
 
     @Override

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @@author A0142255M -->
+
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="taskListTypePlaceholder" styleClass="anchor-pane"
-                                    xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="taskListTypePlaceholder" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
-    <Label fx:id="taskListType" minHeight="80" maxWidth="180" />
+    <Label fx:id="taskListType" maxWidth="180" prefWidth="180" minHeight="80" styleClass="task-list-type" />
 </AnchorPane>

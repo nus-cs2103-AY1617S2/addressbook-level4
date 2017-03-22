@@ -50,7 +50,7 @@ public class TaskCount extends UiPart<Region> {
     private String getTimedTaskCount(ObservableList<ReadOnlyTask> taskList) {
         int count = 0;
         for (ReadOnlyTask task : taskList) {
-            if (task.getStartDateTime().isPresent() || task.getEndDateTime().isPresent()) {
+            if (task.getTimedStatus() == true) {
                 count++;
             }
         }
@@ -65,7 +65,7 @@ public class TaskCount extends UiPart<Region> {
     private String getFloatingTaskCount(ObservableList<ReadOnlyTask> taskList) {
         int count = 0;
         for (ReadOnlyTask task : taskList) {
-            if (!task.getStartDateTime().isPresent() && !task.getEndDateTime().isPresent()) {
+            if (task.getTimedStatus() == false) {
                 count++;
             }
         }

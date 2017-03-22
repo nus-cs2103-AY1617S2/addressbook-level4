@@ -3,6 +3,8 @@ package seedu.tache.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -23,13 +25,9 @@ public class TaskListType extends UiPart<Region> {
 
     public TaskListType(AnchorPane taskListTypePlaceholder, String typeOfTasks) {
         super(FXML);
-        setConnections(typeOfTasks);
-        addToPlaceholder(taskListTypePlaceholder);
-    }
-
-    private void setConnections(String typeOfTasks) {
         taskListType.setText(typeOfTasks);
-        setEventHandlerForTaskListTypeChangeEvent();
+        addToPlaceholder(taskListTypePlaceholder);
+        registerAsAnEventHandler(this);
     }
 
     private void addToPlaceholder(AnchorPane placeHolder) {
@@ -37,13 +35,14 @@ public class TaskListType extends UiPart<Region> {
         placeHolder.getChildren().add(getRoot());
     }
 
-    private void setEventHandlerForTaskListTypeChangeEvent() {
-        taskListType.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                logger.fine("Task list type changed to : '" + newValue + "'");
-                raise(new TaskListTypeChangedEvent(newValue));
-            }
-        });
+    @Subscribe
+    public void handleTaskListTypeChangedEvent(TaskListTypeChangedEvent event) {
+        String oldTaskListType = this.taskListType.getText();
+        String newTaskListType = event.getTaskListType();
+        if (oldTaskListType != newTaskListType) {
+            this.taskListType.setText(newTaskListType);
+            logger.fine("Task list type changed to : '" + newTaskListType + "'");
+        }
     }
 
 }

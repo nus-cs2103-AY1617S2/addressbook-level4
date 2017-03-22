@@ -57,4 +57,7 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowFloating();
 
+    /** Returns the filtered task list type as a {@code String} */
+    String getFilteredTaskListType();
+
 }
