@@ -17,6 +17,8 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.RedoCommand;
+import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.UncompleteCommand;
 
 /**
