@@ -25,6 +25,10 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`list`** : lists all Todos
    * **`add`**` Take the dog for a walk s/5:00PM 11/11/2011 e/6:00PM 11/11/2011` :
    * **`delete`**` 3` : deletes the 3rd Todo shown in the current list
+   * **`edit`**` 3 take the cat for a walk e/6:00am 11/11/2017` : edits the 3rd Todo's title and end time shown in the current list.
+   * **`complete`**` 3`: marks the 3rd Todo shown in the current list as complete
+   * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
+   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -83,20 +87,26 @@ Format: `list e`
 
 ### 2.4. Editing a todo : `edit`
 
-Edits an event.<br>
+Edits a Todo's title, start time and endtime.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits an deadline.<br>
+Edits a Todo's name and deadline.<br>
 Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
 
-Edits an task.<br>
+Adds a deadline.<br>
+Format: `edit INDEX [e/DEADLINE]`
+
+Adds a start time and endtime.<br>
+Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
+
+Edits a todo title.<br>
 Format: `edit INDEX [TASK] [t/TAG]`
 
 
 > * Edits the todo at the specified `INDEX`.
     The index refers to the index number shown in the last todo listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
+> * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 >
 
@@ -209,8 +219,8 @@ Examples:
 * **Add Deadline** : `add TODO e/DEADLINE` <br>
   e.g. `add Finish programming project e/17-03-17T8:00`
 
-* **Edit** : `edit INDEX [TASK]` <br>
-  e.g. `edit 1 Take cat for a walk`
+* **Edit** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME t/TAGS` <br>
+  e.g. `edit 1 Take cat for a walk s/11:11am 11/11/2011 e/12:12pm 11/11/2011 t/cat`
 
 * **Clear** : `clear` <br>
   e.g. `clear`
