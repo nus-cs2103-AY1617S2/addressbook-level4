@@ -8,6 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.ClearCommand;
+import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
@@ -37,8 +38,11 @@ public class AddCommandTest extends ToDoListGuiTest {
         assertAddSuccess(td.task1);
 
         //invalid command
-        commandBox.runCommand(AddCommand.COMMAND_WORD + " e-1");
+        commandBox.runCommand(AddCommand.COMMAND_WORD);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand(AddCommand.COMMAND_WORD + " n0n-41phanumer1c");
+        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
