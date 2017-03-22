@@ -52,6 +52,6 @@ public class UnfinishCommand extends Command {
         if (!tasksUnfinished.isEmpty()) {
             outputMessage += String.format(MESSAGE_UNFINISH_TASK_SUCCESS, tasksUnfinished);
         }
-        return new CommandResult(outputMessage);
+        return new CommandResult(outputMessage, true);
     }
 }

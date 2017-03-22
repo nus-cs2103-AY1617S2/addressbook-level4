@@ -35,6 +35,8 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         commandAliases.put("alias",  new ArrayList<>());
         commandAliases.put("reset_alias",  new ArrayList<>());
         commandAliases.put("view_alias",  new ArrayList<>(Arrays.asList("list_alias", "ls_alias")));
+        commandAliases.put("undo",  new ArrayList<>());
+        commandAliases.put("redo",  new ArrayList<>());
     }
 
     /**

@@ -60,6 +60,11 @@ public interface Model {
     /** Sorts the tasks by Priority */
     void sortTasksByPriority();
 
+    //========== handle undo and redo operation =================================================
+    void saveCurrentToHistory();
+    void recoverPreviousTodoList();
+    void recoverNextTodoList();
+
     ///// Alias List Map
     /** Returns the AliasListMap */
     ReadOnlyAliasListMap getAliasListMap();

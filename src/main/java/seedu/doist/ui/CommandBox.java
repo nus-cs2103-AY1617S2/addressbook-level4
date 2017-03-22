@@ -1,20 +1,26 @@
 package seedu.doist.ui;
 
+import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.events.ui.NewResultAvailableEvent;
 import seedu.doist.commons.util.FxViewUtil;
+import seedu.doist.commons.util.History;
 import seedu.doist.logic.Logic;
-import seedu.doist.logic.commands.CommandHistory;
 import seedu.doist.logic.commands.CommandResult;
+import seedu.doist.logic.commands.RedoCommand;
+import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
@@ -23,6 +29,10 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
 
     private final Logic logic;
+    private final History<String> commandHistory = new History<String>();
+
+    private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
+    private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
     @FXML
     private TextField commandTextField;
@@ -52,12 +62,28 @@ public class CommandBox extends UiPart<Region> {
         } else if (event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleDownKey();
+        } else {  // use control+z and control+y to execute undo and re-do operation
+            try {
+                if (undoKeys.match(event)) {
+                    event.consume();
+                    logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
+                } else if (redoKeys.match(event)) {
+                    event.consume();
+                    logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
+                }
+            } catch (CommandException e) {
+                // handle command failure
+                setStyleToIndicateCommandFailure();
+                commandTextField.setText("");
+                logger.info("Invalid command: " + commandTextField.getText());
+                raise(new NewResultAvailableEvent(e.getMessage()));
+            }
         }
     }
 
     //Handles Down key press
     private void handleDownKey() {
-        String userCommandText = CommandHistory.getNextCommand();
+        String userCommandText = commandHistory.getNextState();
         if (userCommandText == null) {
             setCommandInput("");
         } else {
@@ -67,10 +93,8 @@ public class CommandBox extends UiPart<Region> {
 
     //Handle Up key press
     private void handleUpKey() {
-        String userCommandText = CommandHistory.getPreviousCommand();
-        if (userCommandText == null) {
-            setCommandInput("");
-        } else {
+        String userCommandText = commandHistory.getPreviousState();
+        if (userCommandText != null) {
             setCommandInput(userCommandText);
         }
     }
@@ -79,7 +103,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleEnterKey() {
         try {
             String userCommandText = commandTextField.getText();
-            manageCommandHistory(userCommandText);
+            restoreCommandHistoryAndAppend(userCommandText);
             CommandResult commandResult = logic.execute(userCommandText);
             // process result of the command
             setStyleToIndicateCommandSuccess();
@@ -98,9 +122,9 @@ public class CommandBox extends UiPart<Region> {
 
     //Restores the command history pointer
     //Throws exception is 'add' fails
-    private void manageCommandHistory(String userCommandText) {
-        CommandHistory.restore();
-        if (!CommandHistory.addCommandHistory(userCommandText)) {
+    private void restoreCommandHistoryAndAppend(String userCommandText) {
+        commandHistory.restore();
+        if (!commandHistory.addToHistory(userCommandText)) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }

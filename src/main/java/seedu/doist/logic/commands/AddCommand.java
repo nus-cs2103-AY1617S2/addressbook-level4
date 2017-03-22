@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             if (index >= 0) {
                 EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }

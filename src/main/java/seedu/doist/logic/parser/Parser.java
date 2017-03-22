@@ -19,9 +19,11 @@ import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
+import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.ResetAliasCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.SortCommand;
+import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.UnfinishCommand;
 import seedu.doist.logic.commands.ViewAliasCommand;
 import seedu.doist.model.Model;
@@ -85,6 +87,10 @@ public class Parser {
             return new AliasCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, ResetAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ResetAliasCommand();
+        } else if (doesTriggerSameCommand(commandWord, UndoCommand.DEFAULT_COMMAND_WORD)) {
+            return new UndoCommand(1);
+        } else if (doesTriggerSameCommand(commandWord, RedoCommand.DEFAULT_COMMAND_WORD)) {
+            return new RedoCommand(1);
         } else if (doesTriggerSameCommand(commandWord, ViewAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ViewAliasCommand();
         } else {

@@ -12,6 +12,7 @@ import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
+import seedu.doist.commons.util.History;
 import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.model.tag.Tag;
@@ -32,6 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
+
+    private final History<TodoList> todoListHistory = new History<TodoList>();
     private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
@@ -48,6 +51,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.todoList = new TodoList(todoList);
         this.aliasListMap = new AliasListMap(aliasListMap);
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
+
+        saveCurrentToHistory();
     }
 
     public ModelManager() {
@@ -290,6 +295,34 @@ public class ModelManager extends ComponentManager implements Model {
                 return true;
             }
         }
+    }
+
+    //========== handle undo and re-do operation =================================================
+    public void saveCurrentToHistory() {
+        todoListHistory.forgetStatesAfter();
+        TodoList toSave = new TodoList();
+        toSave.resetData(todoList);
+        todoListHistory.addToHistory(toSave);
+    }
+
+    public void recoverPreviousTodoList() {
+        boolean isAtMostRecentState = todoListHistory.isAtMostRecentState();
+        TodoList previousTodoList = todoListHistory.getPreviousState();
+        if (previousTodoList != null) {
+            todoList.resetData(previousTodoList);
+        }
+        if (isAtMostRecentState) {
+            recoverPreviousTodoList();
+        }
+        indicateTodoListChanged();
+    }
+
+    public void recoverNextTodoList() {
+        TodoList nextTodoList = todoListHistory.getNextState();
+        if (nextTodoList != null) {
+            todoList.resetData(nextTodoList);
+        }
+        indicateTodoListChanged();
     }
 }
 
