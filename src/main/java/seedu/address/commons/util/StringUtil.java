@@ -16,17 +16,13 @@ import seedu.address.model.person.ByDate;
  * Helper functions for handling strings.
  */
 public class StringUtil {
-	
-	public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments should be in HH:MM format, e.g. 12:00 represents noon";
-	
-	public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments should be in YYYY-MM-DD format, e.g. 2010-12-05";
-
+//@@author  A0121668A
     public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
                             + "HH:MM(AM/PM) format, e.g. 12:00pm";
     public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
                             + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
     public static final int YEAR_CONVERSION_INDEX = 2000;
-
+//@@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -65,24 +61,40 @@ public class StringUtil {
         return t.getMessage() + "\n" + sw.toString();
     }
 
+//@@author A0121668A
     /**
      * Parse a String argument into date format.
      * @param dateArg
-     * @return date in localDate format
+     * @return time in localTime format
      * @throws IllegalValueException
      */
-    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
-        //empty date
-        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
-        return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+    public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
+        //empty start date
+        if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
+        return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
     }
 
+//@@author A0148038A
+//    /**
+//     * Parse a String argument into date format.
+//     * @param dateArg
+//     * @return date in localDate format
+//     * @throws IllegalValueException
+//     */
+//    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
+//        //empty date
+//        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
+//        return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+//    }
+
+//@@author A0121668A
     /**
      * Parse a String argument into date format.
      * @param dateString
      * @return time in LocalDate format
      * @throws IllegalValueException
      */
+
     public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
         //empty start date
         if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
