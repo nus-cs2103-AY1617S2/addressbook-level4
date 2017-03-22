@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# TodoList Level 4 - Developer Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -120,15 +120,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTodo.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TodoListChangedEvent` when the Address Book data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTodoEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -146,7 +146,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TodoListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -171,12 +171,12 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a todo) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTodoSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
@@ -192,13 +192,13 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes a `UnmodifiableObservableList<ReadOnlyTodo>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Darius Foong, Justin Wong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -209,6 +209,22 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+
+**Handling Save File Location Changes**
+
+The Sequence Diagrams below show how the components interact for the scenario where the user requests to change the save file location.
+
+<img src="images/saveFile1.png" width="800"><br>
+_Figure 2.5.2 : Component interactions for `saveFile data/new.xml` command (part 1)_
+
+>The `StorageManager` raises a SaveFileChangedEvent when the save file is changed by the user
+
+The diagram below shows how the EventsCenter reacts to that event, which eventually updates the path location in the configuration file and updates the status bar of the UI to reflect the 'Last Updated' time and new save file path.
+
+<img src="images/saveFile2.png" width="800"><br>
+_Figure 2.5.3 : Component interactions for `savefile data/new.xml` command (part 2)_
+
+>The event is fired through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
 ### 2.6. Common classes
 
@@ -346,27 +362,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | create a task without a specific start time and deadline | create a task with little details
+`* * *` | user | read my task
+`* * *` | user | add a new task |
+`* * *` | user | delete a task | remove entries that I no longer need
+`* * *` | user | update the details of a task
+`* * *` | user | undo recent action | fix my error quickly
+`* * *` | user | perform a text search for a task | find my task quickly
+`* * *` | user | see my task history | determine which tasks are done and which are not
+`* * *` | user | assign a task a due date
+`* *` | new user | see usage instructions | refer to instructions when I forget how to use the App
+`* *` | user | delete tasks by tag or category | delete tasks in batches
+`* *` | user | find a task by name | locate details of task without having to go through the entire list
+`*` | user with many tasks in the todo | sort tasks by category | locate a task easily
+`*` | user | notified if a task is due soon | start on the task
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Todo` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+
+### Use case: List tasks
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. Todo shows a list of tasks
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. Todo shows a list of tasks
+3. User requests to delete a specific task in the list
+4. Todo deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,17 +416,83 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Todo shows an error message <br>
   Use case resumes at step 2
+
+### Use case: Reschedule task
+
+**MSS**
+
+1. User requests to list tasks
+2. Todo shows a list of tasks
+3. User requests to reschedule a specific task in the list with a new due date
+4. Todo reschedules the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Todo shows an error message <br>
+  Use case resumes at step 2
+
+### Use case: Completing a task
+
+**MSS**
+
+1. User requests to list tasks
+2. Todo shows a list of tasks
+3. User requests to mark a specific task in the list as complete
+4. Todo marks the task as complete <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. Todo shows an error message <br>
+  Use case resumes at step 2
+
+3b. The given task is already marked as complete
+
+> 3b1. Todo shows an error message <br>
+  Use case resumes at step 2
+
+### Use case: Searching for a task
+
+**MSS**
+
+1. User requests to search for a task
+2. Todo searches for task with exact or similar names
+3. Todo lists the tasks that best match the search query
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should work with the command line.
+5. Program should boot up in less than 3 seconds.
+6. Should work without any third party extensions.
+7. Should not require an installer
 
 {More to be added}
 
@@ -403,17 +508,78 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Wunderlist**
 
-Author: ...
+Author: Wunderlist
 
 Pros:
 
-* ...
-* ...
+* Desktop, web and mobile app available with cloud sync (access from anywhere)
+* Desktop app supports keyboard shortcuts
+* Todo-list-style-app captures tasks that need to be done before/after a specific date/time or tasks without specific times
+* Able to add a task with just the keyboard (i.e. keyboard shortcut to add a new task and then key in the new task)
+* Operates with/without internet connectivity
+* Can prioritize/flag important tasks
+* Easy and intuitive to mark a completed task or to postpone an item
+* Feature to add notes to tasks
+* Notifications, due dates and reminders
+* Folders for categorizing and grouping similar tasks
+* Tagging to add more context to to-dos
+* Search support
+* Email and web plug-ins (e.g. turn emails into actions by forwarding * them) which accelerate the process of adding an email related task
+* Sub tasks
+* File attachments to a task
 
 Cons:
 
-* ...
-* ...
+* Unable to view schedule availability (i.e. no concept of open slot, busy slot, conflicts, etc.)
+* No calendar view so it is difficult to visually understand when tasks are due
 
+**Reminders**
+
+Author: Apple Inc.
+
+Pros:
+
+* Desktop, web and mobile app available with cloud sync (access from anywhere)
+* Siri and spotlight support (with 3rd party addon) that allows users to quickly add tasks with voice commands and spotlight commands respectively
+* Keyboard shortcuts
+* Operates with/without internet connectivity
+* Easy and intuitive to mark a completed task
+* Notifications, due dates and reminders
+* Categories/folders
+* Search support
+
+Cons:
+
+* Desktop and mobile apps only available for OSX
+* No intuitive way of postponing a task
+* Cannot add notes to tasks
+* Cannot add files/attachments to tasks
+* No email and web plug-in support
+* No sub tasks
+* Unable to view schedule availability
+* No calendar view
+* Cannot prioritize tasks
+
+**Fantastical**
+
+Author: Flexibits Inc.
+
+Pros:
+
+* Desktop, web and mobile app available with cloud sync
+* Keyboard shorcuts
+* Operates with/without internet connectivity
+* Calendar view to easily visualize calendar events, task deadlines, conflicts, etc.
+* Notifications, due dates and reminders
+* Categories and tags
+* Search support
+* Supports calendar events as well as todo tasks
+* Natural language processing
+
+Cons:
+* No email forwarding
+* Cannot add notes to tasks
+* No sub tasks
+* No file or attachment support
