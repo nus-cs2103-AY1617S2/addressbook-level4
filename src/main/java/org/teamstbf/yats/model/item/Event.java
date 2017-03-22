@@ -233,7 +233,7 @@ public class Event implements ReadOnlyEvent {
 	}
 	
 	public boolean isTaskDone() {
-		return isDone.getIsDone();
+		return this.isDone.getIsDone();
 	}
 
 	@Override
