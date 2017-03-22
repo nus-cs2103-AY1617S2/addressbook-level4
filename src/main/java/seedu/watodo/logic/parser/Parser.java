@@ -23,6 +23,7 @@ import seedu.watodo.logic.commands.ListDeadlineCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListMarkedCommand;
+import seedu.watodo.logic.commands.ListMonthCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 
@@ -97,6 +98,9 @@ public class Parser {
 
         	  case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
+
+        	  case ListMonthCommand.COMMAND_WORD:
+              return new ListMonthCommand();
 
         	  default:
         		    return new ListCommand();

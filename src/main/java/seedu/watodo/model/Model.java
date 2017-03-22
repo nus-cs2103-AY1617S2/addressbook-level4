@@ -51,6 +51,10 @@ public interface Model {
      * @throws IllegalValueException */
     void updateFilteredByDatesTaskList(int days) throws IllegalValueException;
     
+    /** Updates the filter of the filtered task list to filter by the given number of months
+     * @throws IllegalValueException */
+    void updateFilteredByMonthsTaskList(int months) throws IllegalValueException;
+    
     /** Updates the filter of the filtered task list to filter by the given keyword for type*/
     void updateFilteredByTypesTaskList(String type);
 

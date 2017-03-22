@@ -111,8 +111,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void updateFilteredByDatesTaskList(int keywords) throws IllegalValueException {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(keywords)));
+    public void updateFilteredByDatesTaskList(int days) throws IllegalValueException {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(days)));
+    }
+    
+    @Override
+    public void updateFilteredByMonthsTaskList(int months) throws IllegalValueException {
+        updateFilteredTaskList(new PredicateExpression(new MonthQualifier(months)));
     }
     
     @Override
@@ -236,6 +241,38 @@ public class ModelManager extends ComponentManager implements Model {
             return "period=" + days;
         }
     }
+    
+    private class MonthQualifier implements Qualifier {
+      private int months;
+      private Calendar temp;
+      private DateTime deadline;
+      
+      MonthQualifier(int months) throws IllegalValueException {
+          assert months >= 0;
+          this.temp = Calendar.getInstance();
+          this.temp.add(Calendar.MONTH, months);
+          temp.set(Calendar.DATE, 1);
+          temp.set(Calendar.HOUR_OF_DAY, 0);
+          temp.set(Calendar.MINUTE, 0);
+          temp.set(Calendar.SECOND, 0);
+          temp.set(Calendar.MILLISECOND, 0);
+          this.deadline = new DateTime(temp.getTime().toString());
+      }
+
+      @Override
+      public boolean run(ReadOnlyTask task) {
+          if(task.getEndDate() == null){
+              return true;
+          } else {
+              return deadline.isLater(task.getEndDate());
+          }
+      }
+
+      @Override
+      public String toString() {
+          return "period=" + months;
+      }
+  }
     
     private class TypeQualifier implements Qualifier {
       private String type;

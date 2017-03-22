@@ -113,6 +113,9 @@ Shows a list of deadlines and events scheduled on the current day.<br>
 Format: `list week`<br>
 Shows a list of deadlines and events scheduled for the week.<br>
 
+Format: `list month`<br>
+Shows a list of deadlines and events scheduled for the month.<br>
+
 Format: `list #TAG`<br>
 Shows a list of tasks labeled with the given TAG.<br>
 
