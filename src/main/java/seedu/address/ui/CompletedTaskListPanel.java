@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -14,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -32,6 +35,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(completedTaskListPlaceholder);
+        registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
@@ -78,28 +82,46 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         }
     }
 
-    public void menuTest() {
-        if (!flag) {
+    public void display(boolean show) {
+        if (show) {
             // show completed task list panel
             completedTaskListView.setPrefHeight(0.0d);
             flag = true;
 
             Timeline timeline = new Timeline();
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0)),
-                    new KeyFrame(Duration.millis(300.0d),
-                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT)));
+            timeline.getKeyFrames()
+                    .addAll(new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                            new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
+                            new KeyFrame(Duration.millis(300.0d),
+                                    new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 1)));
             timeline.play();
         } else {
             // collapse
             Timeline timeline = new Timeline();
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.ZERO,
-                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT)),
-                    new KeyFrame(Duration.millis(300.0d), new KeyValue(completedTaskListView.prefHeightProperty(), 0)));
+            timeline.getKeyFrames()
+                    .addAll(new KeyFrame(Duration.ZERO,
+                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT),
+                            new KeyValue(completedTaskListView.opacityProperty(), 1)),
+                            new KeyFrame(Duration.millis(200.0d),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
+                            new KeyFrame(Duration.millis(300.0d),
+                                    new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 0)));
             timeline.play();
             flag = false;
         }
     }
 
+    @Subscribe
+    private void handleShowCompletedTasksEvent(ShowCompletedTaskEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.action == ShowCompletedTaskEvent.Action.SHOW && !flag) {
+            display(true);
+        } else if (event.action == ShowCompletedTaskEvent.Action.HIDE && flag) {
+            display(false);
+        } else if (event.action == ShowCompletedTaskEvent.Action.TOGGLE) {
+            display(!flag);
+        }
+    }
 }
