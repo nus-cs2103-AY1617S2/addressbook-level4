@@ -33,7 +33,7 @@ public class SaveCommand extends Command {
         if (filepath.contains("+") || filepath.contains ("#") ||
                 filepath.contains ("^") || filepath.contains ("*")) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
-        } 
+        }
 
         try {
             storage.setFilePath(filepath);
