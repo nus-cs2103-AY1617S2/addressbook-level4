@@ -28,8 +28,8 @@ public class HelpWindowTest extends TaskManagerGuiTest {
         taskListPanel.clickOnListView();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        browserPanel.clickOnWebView();
-        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
+        //browserPanel.clickOnWebView();
+        //assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         //use menu button
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());

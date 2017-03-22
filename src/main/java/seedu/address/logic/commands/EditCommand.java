@@ -7,6 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ReadOnlyTask;
@@ -19,14 +20,14 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "EDIT";
+    public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [BY DEADLINE] [#LABEL]...\n"
-            + "Parameters: INDEX (must be a positive integer) [TITLE] [BY DEADLINE] [FROM START TO END][#LABEL]...\n"
-            + "Example: " + COMMAND_WORD + " 1 BY Sunday #new";
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [#LABEL]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TITLE] [by DEADLINE] [from START to END][#LABEL]...\n"
+            + "Example: " + COMMAND_WORD + " 1 by Sunday #new";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -90,8 +91,8 @@ public class EditCommand extends Command {
         }
         Boolean isCompleted = editTaskDescriptor.isCompleted().orElseGet(taskToEdit::isCompleted);
         UniqueLabelList updatedLabels = editTaskDescriptor.getLabels().orElseGet(taskToEdit::getLabels);
-
-        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels);
+        UniqueBookingList updatedBookings = editTaskDescriptor.getBookings().orElseGet(taskToEdit::getBookings);
+        return new Task(updatedTitle, updatedStartTime, updatedDeadline, isCompleted, updatedLabels, updatedBookings);
     }
 
     /**
@@ -104,8 +105,12 @@ public class EditCommand extends Command {
         private Optional<Deadline> deadline = Optional.empty();
         private Optional<UniqueLabelList> labels = Optional.empty();
         private Optional<Boolean> isCompleted = Optional.empty();
+<<<<<<< HEAD
         private Optional<Boolean> clearDates = Optional.empty();
 
+=======
+        private Optional<UniqueBookingList> bookings = Optional.empty();
+>>>>>>> refs/remotes/origin/V0.3-bernard
         public EditTaskDescriptor() {}
 
 
@@ -115,7 +120,11 @@ public class EditCommand extends Command {
             this.deadline = toCopy.getDeadline();
             this.isCompleted = toCopy.isCompleted();
             this.labels = toCopy.getLabels();
+<<<<<<< HEAD
             this.clearDates = toCopy.getClearDates();
+=======
+            this.bookings = toCopy.getBookings();
+>>>>>>> refs/remotes/origin/V0.3-bernard
         }
 
         /**
@@ -167,6 +176,10 @@ public class EditCommand extends Command {
 
         public Optional<UniqueLabelList> getLabels() {
             return labels;
+        }
+
+        public Optional<UniqueBookingList> getBookings() {
+            return bookings;
         }
 
         public void setIsCompleted(Optional<Boolean> isCompleted) {

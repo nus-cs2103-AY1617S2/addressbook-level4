@@ -163,13 +163,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("HELP", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("EXIT", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskManager(), Collections.emptyList());
     }
 
@@ -180,7 +180,7 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("CLEAR", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
 
@@ -189,20 +189,20 @@ public class LogicManagerTest {
         String expectedTitleErrorMessage = "A Task's title should only contain alphanumeric characters and spaces,"
                 + " and it should not be blank";
 
-        assertCommandFailure("ADD 1234 / wrong args wrong args", expectedTitleErrorMessage);
-        assertCommandFailure("ADD Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address",
+        assertCommandFailure("add 1234 / wrong args wrong args", expectedTitleErrorMessage);
+        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address",
                 expectedTitleErrorMessage);
-        assertCommandFailure("ADD Valid Name p/12345 valid@email.butNoPrefix a/valid, address",
+        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address",
                 expectedTitleErrorMessage);
-        assertCommandFailure("ADD Valid Name p/12345 e/valid@email.butNoAddressPrefix valid,"
+        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid,"
                 + " address", expectedTitleErrorMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("ADD []\\[;] BY sunday 0900",
+        assertCommandFailure("add []\\[;] by sunday 0900",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("ADD Valid Name BY friday #invalid_-[.label",
+        assertCommandFailure("add Valid Name by friday #invalid_-[.label",
                 Label.MESSAGE_LABEL_CONSTRAINTS);
 
     }
@@ -248,7 +248,7 @@ public class LogicManagerTest {
         // prepare task manager state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("LIST",
+        assertCommandSuccess("list",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
@@ -293,12 +293,12 @@ public class LogicManagerTest {
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("SELECT", expectedMessage);
+        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
     }
 
     @Test
     public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("SELECT");
+        assertIndexNotFoundBehaviorForCommand("select");
     }
 
     @Test
@@ -309,7 +309,7 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateAddressBook(threeTasks);
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("SELECT 2",
+        assertCommandSuccess("select 2",
                 String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
                 expectedAB.getTaskList());
@@ -321,7 +321,7 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        String commandWord = "DELETE";
+        String commandWord = "delete";
         assertCommandFailure(commandWord , expectedMessage); //label or index missing
         assertCommandFailure(commandWord + " +1", expectedMessage); //signed index treated as invalid label
         assertCommandFailure(commandWord + " -1", expectedMessage); //signed index treated as invalid label
@@ -330,7 +330,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("DELETE");
+        assertIndexNotFoundBehaviorForCommand("delete");
     }
 
     @Test
@@ -342,7 +342,7 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("DELETE 2",
+        assertCommandSuccess("delete 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
@@ -351,11 +351,11 @@ public class LogicManagerTest {
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-        assertCommandFailure("FIND ", expectedMessage);
+        assertCommandFailure("find ", expectedMessage);
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_MatchesPartialWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -364,10 +364,10 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         TaskManager expectedAB = helper.generateAddressBook(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("FIND KEY",
+        assertCommandSuccess("find ey",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -386,7 +386,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("FIND KEY",
+        assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -405,7 +405,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("FIND key rAnDoM",
+        assertCommandSuccess("find key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -448,7 +448,7 @@ public class LogicManagerTest {
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
-            cmd.append("ADD ");
+            cmd.append("add ");
             cmd.append(p.getTitle().toString());
             cmd.append(" from ");
             cmd.append(p.getStartTime());

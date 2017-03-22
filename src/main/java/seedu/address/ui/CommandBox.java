@@ -28,7 +28,7 @@ public class CommandBox extends UiPart<Region> {
     private AutocompleteManager autocompleteManager;
     private CommandHistory commandHistory;
 
-    private final Logic logic;
+    private Logic logic;
 
     @FXML
     private TextField commandTextField;
@@ -68,9 +68,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0140042A
     /**
      * Hijacks the tab character for auto-completion, up/down for iterating through the command
-     * @param ke
      */
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
@@ -157,4 +157,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+    }
 }

@@ -50,6 +50,11 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ Task Manager methods ==============================
 
     @Override
+    public void setTaskManagerFilePath(String taskManagerfilePath) {
+        taskManagerStorage = new XmlTaskManagerStorage(taskManagerfilePath);
+    }
+
+    @Override
     public String getTaskManagerFilePath() {
         return taskManagerStorage.getTaskManagerFilePath();
     }

@@ -21,7 +21,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     @Test
     public void list_AllTask_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("LIST");
+        commandBox.runCommand("list");
 
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -30,17 +30,17 @@ public class ListCommandTest extends TaskManagerGuiTest {
     @Test
     public void list_TaskByDate_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("LIST BY 12-12-2017");
+        commandBox.runCommand("list by 12-12-2017");
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("LIST BY christmas");
+        commandBox.runCommand("list by christmas");
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("LIST BY Mar 2018");
+        commandBox.runCommand("list by Mar 2018");
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        commandBox.runCommand("LIST BY 01-01-2018");
+        commandBox.runCommand("list by 01-01-2018");
         assertTrue(taskListPanel.isListMatching(currentList));
     }
 
@@ -53,12 +53,18 @@ public class ListCommandTest extends TaskManagerGuiTest {
     @Test
     public void list_TaskByDateTime_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("LIST by 12-12-2017 0000");
+
+        commandBox.runCommand("list by 12-12-2017 0000");
+
         assertTrue(taskListPanel.isListMatching(currentList)); // No change should occur
-        commandBox.runCommand("LIST by ");
+
+        commandBox.runCommand("list by ");
+
         assertTrue(taskListPanel.isListMatching(currentList)); // No change should occur
-        assertListResult("LIST by 2301 10-11-2017", td.task6); // Only task 6 should appear
-        assertListResult("LIST from 0000 10-11-2017 to 2359 10-11-2017", td.task6); // Only task 6 should appear
+
+        assertListResult("list by 2301 10-11-2017", td.task6); // Only task 6 should appear
+        assertListResult("list from 0000 10-11-2017 to 2359 10-11-2017", td.task6); // Only task 6 should appear
+
     }
 
     private void assertListResult(String command, TestTask... expectedHits) {

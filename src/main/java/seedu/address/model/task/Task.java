@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -18,6 +19,7 @@ public class Task implements ReadOnlyTask {
     private Boolean isCompleted;
 
     private UniqueLabelList labels;
+    private UniqueBookingList bookings;
 
     /**
      * Every field must be present and not null.
@@ -30,13 +32,29 @@ public class Task implements ReadOnlyTask {
         this.startTime = startTime;
         this.isCompleted = isCompleted;
         this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
+        this.bookings = new UniqueBookingList();
+    }
+
+    /**
+     * Every field except bookingList must be present and not null.
+     */
+    public Task(Title title, Optional<Deadline> startTime, Optional<Deadline> deadline,
+            boolean isCompleted, UniqueLabelList labels, UniqueBookingList bookings) {
+        assert !CollectionUtil.isAnyNull(title, isCompleted, labels);
+        this.title = title;
+        this.deadline = deadline;
+        this.startTime = startTime;
+        this.isCompleted = isCompleted;
+        this.labels = new UniqueLabelList(labels); // protect internal labels from changes in the arg list
+        this.bookings = new UniqueBookingList(bookings);
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStartTime(), source.getDeadline(), source.isCompleted(), source.getLabels());
+        this(source.getTitle(), source.getStartTime(), source.getDeadline()
+                , source.isCompleted(), source.getLabels(), source.getBookings());
     }
 
     public void setName(Title name) {
@@ -87,6 +105,18 @@ public class Task implements ReadOnlyTask {
         labels.setLabels(replacement);
     }
 
+    @Override
+    public UniqueBookingList getBookings() {
+        return new UniqueBookingList(bookings);
+    }
+
+    /**
+     * Replaces this's bookings with the bookings in the argument booking list.
+     */
+    public void setBookings(UniqueBookingList replacement) {
+        bookings.setBookings(replacement);
+    }
+
     /**
      * Updates this  with the details of {@code replacement}.
      */
@@ -97,6 +127,7 @@ public class Task implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setLabels(replacement.getLabels());
         this.setIsCompleted(replacement.isCompleted());
+        this.setBookings(replacement.getBookings());
     }
 
     @Override

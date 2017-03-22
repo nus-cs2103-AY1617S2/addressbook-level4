@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.util.Optional;
 
+import seedu.address.model.booking.UniqueBookingList;
 import seedu.address.model.label.UniqueLabelList;
 
 /**
@@ -20,6 +21,12 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
      * changes on the returned list will not affect the task's internal labels.
      */
     UniqueLabelList getLabels();
+
+    /**
+     * The returned BookingList is a deep copy of the internal BookingList,
+     * changes on the returned list will not affect the task's internal bookings.
+     */
+    UniqueBookingList getBookings();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -55,8 +62,11 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         }
         builder.append(" Label: ");
         getLabels().forEach(builder::append);
+        builder.append(" Booking: ");
+        getBookings().forEach(booking -> builder.append("[" + booking + "]\n"));
         return builder.toString();
     }
+
 
     default int compareTo(ReadOnlyTask other) {
         return compareCompletionStatus(other);
@@ -98,6 +108,26 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         } else {
             return -1;
         }
+    }
+
+    default String getAsSearchText() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getTitle());
+        if (getStartTime().isPresent()) {
+            builder.append(" " + getStartTime().get().toString() + " ");
+        }
+        if (getDeadline().isPresent()) {
+            builder.append(" " + getDeadline().get().toString() + " ");
+        }
+        if (isCompleted()) {
+            builder.append(" Completed ");
+        } else {
+            builder.append(" Incomplete ");
+        }
+        getLabels().forEach(label -> builder.append(" " + label + " "));
+        getBookings().forEach(booking -> builder.append(" " + booking + " "));
+        System.out.println(builder.toString());
+        return builder.toString();
     }
 
 }

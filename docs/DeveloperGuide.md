@@ -135,6 +135,30 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+The diagram below shows the interaction between different components for the `AutoComplete` feature. <br>
+<img src="images\SDforAutocomplete.png" width="800"><br>
+_Figure 2.2 : Component interactions for `Autocomplete` feature when user presses the `tab` key_
+
+The diagram below shows the interaction between different components for the `book` command. <br>
+<img src="images\SDforBook.png" width="800"><br>
+_Figure 2.3 : Component interactions for `book` command_
+
+The diagram below shows the interaction between different components for the `Command History` feature. <br>
+<img src="images\SDforCommandHistory.png" width="800"><br>
+_Figure 2.4 : Component interactions for `Command History` feature when user iterate through their command history for the session by pressing the up or down key_
+
+The diagram below shows the interaction between different components for the delete label command via `delete`. <br>
+<img src="images\SDforDeleteLabel.png" width="800"><br>
+_Figure 2.5 : Component interactions for `delete` label command_
+
+The diagram below shows the interaction between different components for the `find` command. <br>
+<img src="images\SDforFind.png" width="800"><br>
+_Figure 2.6 : Component interactions for `find` command_
+
+The diagram below shows the interaction between different components for the `undo` command. <br>
+<img src="images\SDforUndo.png" width="800"><br>
+_Figure 2.7 : Component interactions for `undo` command_
+
 The sections below give more details of each component.
 
 ### 2.2. UI component
@@ -176,7 +200,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeleteSdForLogic.png" width="800"><br>
+<img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
@@ -364,6 +388,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a recurring task | not need to create the same task every time
 `* * *` | user | mark the completion of a task | differentiate it from other outstanding tasks I need to complete
 `* * *` | user | view my completed tasks | keep track of what tasks I have completed
+`* * *` | user | save my task manager data to a different location | create a new copy of my data elsewhere
+`* * *` | user | load data into my task manager | start working on another set of data without changing the file settings myself
 `* *` | user | add location to a task | attach location for event type of tasks
 `* *` | user | be able to view my agenda for the day | know what tasks to work on for the day
 `* *` | user | iterate through my command history | re-execute a command that I have previously executed before
@@ -822,6 +848,42 @@ Use case ends
 2a. The list is empty
 
 > 2a1. System notifies the user that there are no overdue tasks<br />
+  Use case ends
+
+#### Use case: Save current data to a new file location
+Use case ID: UC26 Save data to new file location<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to save data to a new file path specified
+2. System saves the data and changes will be saved to the new location<br />
+Use case ends
+
+**Extensions**
+
+1a. The file path specified is invalid (does not end with .xml)/not a file
+
+> 1a1. System notifies the user that the file is invalid or not a file<br />
+  Use case ends
+
+#### Use case: Replace data in task manager with new file specified
+Use case ID: UC27 Load data from new location<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to replace data in Task Manager with new file path
+2. System loads the data and changes will be saved to the new location<br />
+Use case ends
+
+**Extensions**
+
+1a. The file path specified is invalid/does not end with .xml/not a file
+
+> 1a1. System notifies the user that the file is invalid/does not end with .xml/not a file<br />
   Use case ends
 
 ## Appendix C : Non Functional Requirements

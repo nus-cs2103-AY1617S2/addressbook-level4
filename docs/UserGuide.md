@@ -11,7 +11,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 ## 1. Start Project
 
-1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br />
+1. Ensure you have Java version `1.8.0_111` or later installed in your Computer.<br />
 
    > Having any Java 8 version is not enough. <br />
    > This app will not work with earlier versions of Java 8.
@@ -22,8 +22,6 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 <img src="images/Ui.png" width="600">
 
 5. Refer to the [Features](#features) section below for details of each command.<br />
-6. Pressing the up or down key will allow you to iterate through previous commands executed (if any).
-7. Pressing the tab key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
 
 ## 2. Features
 
@@ -33,6 +31,11 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
+>
+> **Date Input Format**
+>
+> * Date specified without timing after the `by` and `to` keyword is default to 23:59 hr
+> * Date specified without timing after the `from` keyword is default to 00:00 hr
 
 ### 2.1. Viewing help : `help`
 
@@ -63,7 +66,7 @@ Examples:
 
  * `add CS2106 Mid terms`
  * `add CS2103 V0.0 by tmr #module`
- * `add Make baby by next wednesday`
+ * `add Make baby by next wednesday 11pm`
  * `add go to school repeat daily`
 
 ### 2.3 Listing all tasks : `list`
@@ -72,39 +75,49 @@ Shows a list of all tasks in DoOrDie. Able to filter by type of task (task), or 
 
 Format: `list [TYPE]`
 
-> Valid parameters for TYPE:
-> * `tasks` / `task`
-> * `completed`
-> * `incomplete`
-> * `overdue` / `over`
-> * `by DATE`
-> * `from STARTDATE to ENDDATE`
-> * `bookings` / `booking`
+> * Valid parameters for TYPE:
+>  * `tasks` / `task`
+>  * `completed`
+>  * `incomplete`
+>  * `overdue` / `over`
+>  * `by DATE`
+>  * `from STARTDATE to ENDDATE`
+>  * `bookings` / `booking`
 
 Examples:
 
 * `list`<br />
  Lists all tasks.
 
-* `list Overdue`<br />
+* `list overdue`<br />
  Lists all overdue tasks
 
-* `list Outstanding tasks`<br /> 
-* `list Incomplete tasks`<br />
+* `list outstanding`<br />
+* `list incomplete`<br />
  Lists all outstanding tasks
 
-* `list Completed`<br />
+* `list completed`<br />
  Lists all completed tasks
 
 * `list by today`<br />
- Lists all tasks due by today
+ Lists all tasks due by today 23:59 hr
 
 * `list from monday to friday`<br />
- Lists all tasks due within Monday-Friday
+ Lists all tasks due within Monday 00:00 hr to Friday 23:59 hr
 
 * `list booking`<br />
  Lists all unconfirmed tasks with their respective bookings
+<<<<<<< HEAD
  
+=======
+
+### 2.4. Editing a task : `update`
+
+Edits the specified task's details.
+
+Format:`update [TASK_ID] [TASKNAME] [#Label...] ([by DATE] | [from start_date to end_date]) [done]`
+
+>>>>>>> refs/remotes/origin/V0.3-bernard
 ### 2.4. Editing a task : `edit`
 
 Edits the specified task's details.
@@ -127,8 +140,13 @@ Examples:
 * `edit CS2106Assignment label`<br />
   Edits the name of the currently selected task to be `CS2106Assignment` and clears all existing labels.
 
+<<<<<<< HEAD
 * `edit 1 label tedious work by thursday`<br />
   Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday` respectively.
+=======
+* `update 1 label tedious work by thursday`<br />
+  Edits the label and deadline of the task with id 1 to be `tedious work` and deadline to `Thursday 23:59 hr` respectively.
+>>>>>>> refs/remotes/origin/V0.3-bernard
 
 ### 2.5. Finding all task containing any keyword in task name and labels : `find`
 
@@ -155,6 +173,9 @@ Returns all task containing the keyword or label containing `CS2103` & `cs2103`.
 
 * `find project`<br />
 Returns all task with the name containing `project` & `Project`.
+
+* `find ign`<br />
+Returns all task with the name containing `ign` like `assignment` & `Assignments`.
 
 * `find glocery`<br />
 Returns all task with the label name containing `glocery` & `Glocery`.
@@ -231,9 +252,9 @@ Examples:
 * `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`<br />
   `confirm 1 1/1/2017 4pm`<br />
   Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
-* `book CS2103 Meeting 1/1/2017 4pm, 2/1/2017 8pm`<br />
+* `book CS2103 Meeting on 1/1/2017 4pm to 5pm, 2/1/2017 8pm to 9pm`<br />
   `confirm 1 1`<br />
-  Confirms the task CS2103 Meeting for 1st January 2017 4pm and releases 2nd January 2017 8pm slot for other tasks
+  Confirms the task CS2103 Meeting for 1st January 2017 4pm to 5pm and releases 2nd January 2017 8pm to 9pm slot
 
 ### 2.10. Edit a label : `editlabel`
 
@@ -257,17 +278,33 @@ Format: `undo`
 Clears all entries from DoOrDie.<br />
 Format: `clear`
 
-### 2.13. Push task changes to Google Calendar : `push`
+### 2.13. Save current Task Manager to a specified location : `saveas`
+
+Saves current Task Manager tasks to a location provided<br />
+After saving, the Task Manager will save changes to the new location<br />
+Format: `saveas FILEPATH_RELATIVE_TO_JAR`
+
+> * FILEPATH_RELATIVE_TO_JAR must be a file ending with `*.xml`
+
+### 2.14. Load data from a specified file to the Task Manager : `load`
+
+Replaces all task with the newly loaded data in the specified file path<br />
+After loading, the Task Manager will save changes to the new location<br />
+Format: `load FILEPATH_RELATIVE_TO_JAR`
+
+> * FILEPATH_RELATIVE_TO_JAR must be a file ending with `*.xml`
+
+### 2.15. Push task changes to Google Calendar : `push`
 
 Updates `Google Calendar` with newly added/modified tasks. Priority goes to `DoOrDie` if there is a conflict.<br />
 Format: `push`
 
-### 2.14. Pull task changes from Google Calendar : `pull`
+### 2.16. Pull task changes from Google Calendar : `pull`
 
 Downloads data from Google Calendar. Priority goes to `Google Calendar` if there is a conflict.<br />
 Format: `pull`
 
-### 2.15. Export agenda to PDF file : `export`
+### 2.17. Export agenda to PDF file : `export`
 
 Saves a PDF format with all tasks and details to the same directory as `doordie.jar`.<br />
 Format: `export ([DATE] | [from START_DATE to END_DATE])`
@@ -288,15 +325,21 @@ Examples:
 * `export from 2nd Feb to 9th Feb`<br />
   Saves a PDF with tasks and details from 2nd February to 9th February of the current year
 
-### 2.16. Exiting the program : `exit`
+### 2.18. Exiting the program : `exit`
 
 Exits DoOrDie<br />
 Format: `exit`
 
-### 2.17. Saving the data
+### 2.19. Saving the data
 
 DoOrDie data are saved in the hard disk automatically after any command that changes the data.<br />
 There is no need to save manually.
+
+### 2.20. Iterating through previously executed commands
+Pressing the UP or DOWN key will allow you to iterate through previous commands executed (if any).
+
+### 2.21. Autocompletion of commands and reserved keywords
+Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
 
 ## 3. FAQ
 
@@ -305,44 +348,23 @@ There is no need to save manually.
 
 ## 4. Command Summary
 
-* **Help** `help`
-
-* **Add** `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]`<br />
-  e.g. `add CS2106 Mid terms by tmr 13:00 #school`
-
-* **List** `list [TYPE]`<br />
-  e.g. `list outstanding tasks`
-
-* **Update** `update [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE])`<br />
-  e.g. `update 1 #label tedious work by thursday #work`
-
-* **Find** `find [TYPE] KEYWORD [MORE_KEYWORDS]...`<br />
-  e.g. `find CS2103`
-
-* **Delete** `delete [TASK_ID|LABEL]`<br />
-  e.g. `delete 1`
-
-* **Select** `select TASK_ID`<br />
-  e.g. `select 2`
-
-* **Book** `book TASKNAME [#LABEL...] on DATE, [MORE_DATES]...`<br />
-  e.g. `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`
-
-* **Confirm** `confirm TASK_ID (SLOT_NUMBER|DATE)`<br />
-  e.g. `confirm 1 1`
-
-* **Edit Label** `editlabel OLD_LABEL NEW_LABEL`<br />
-  e.g. `editlabel friends oldFriends`
-
-* **Undo** `undo`
-
-* **Clear** `clear`
-
-* **Push** `push`
-
-* **Pull** `pull`
-
-* **Export** `export ([by DATE] | [from START_DATE to END_DATE])`<br />
-  e.g. `export today`
-
-* **Exit** `exit`
+Command Description | Command Format | Example
+-------- | :-------- | :---------
+| Help | `help` |
+| Add | `add TASKNAME [#LABEL...] [by DEADLINE] [repeat (hourly|daily|weekly|monthly|yearly)]` | `add CS2106 Mid terms by tmr 13:00 #school`
+| List | `list [TYPE]`| `list outstanding tasks`
+| Update | `update [TASK_ID] [TASKNAME] [#LABEL...] ([by DATE] | [from START_DATE to END_DATE])` | `update 1 #label tedious work by thursday #work`
+| Find | `find [TYPE] KEYWORD [MORE_KEYWORDS]...` | `find CS2103`
+| Delete | `delete [TASK_ID|LABEL]` | `delete 1`
+| Select | `select TASK_ID` | `select 2`
+| Book | `book TASKNAME [#LABEL...] on DATE, [MORE_DATES]...` | `book CS2103 Meeting on 1/1/2017 4pm, 2/1/2017 8pm`
+| Confirm | `confirm TASK_ID (SLOT_NUMBER|DATE)` | `confirm 1 1`
+| Edit Label | `editlabel OLD_LABEL NEW_LABEL` | `editlabel friends oldFriends`
+| Undo | `undo` |
+| Clear | `clear` |
+| Save to a certain location | `saveas FILEPATH_RELATIVE_TO_JAR` | `saveas data/taskmanager2.xml`
+| Load data from a different file | `load FILEPATH_RELATIVE_TO_JAR` | `load data/taskmanager2.xml`
+| Push | `push` |
+| Pull | `pull` |
+| Export | `export ([by DATE] | [from START_DATE to END_DATE])` | `export today`
+| Exit | `exit` |

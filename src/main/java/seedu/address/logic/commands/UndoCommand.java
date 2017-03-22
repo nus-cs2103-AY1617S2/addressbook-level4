@@ -11,10 +11,11 @@ import seedu.address.model.task.ReadOnlyTask;
 //@@author A0162877N
 public class UndoCommand extends Command {
 
-    public static final String COMMAND_WORD = "UNDO";
-    public static final String MESSAGE_SUCCESS = "Undo-ed previous command successfully!";
+    public static final String COMMAND_WORD = "undo";
+    public static final String MESSAGE_SUCCESS = "Undo-ed previous command successfully!\n"
+            + "To Redo past command, hit the up arrow key.";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
-    public static final String MESSAGE_UNSUCCESSFUL_UNDO = "No previous command to undo";
+    public static final String MESSAGE_UNSUCCESSFUL_UNDO = "No previous command to undo.";
 
     @Override
     public CommandResult execute() throws CommandException {

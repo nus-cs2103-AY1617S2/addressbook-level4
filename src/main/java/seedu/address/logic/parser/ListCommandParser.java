@@ -12,7 +12,9 @@ import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 
 //@@author A0162877N
-
+/**
+* Parses input arguments and creates a new ListCommand object
+*/
 public class ListCommandParser {
 
     /**

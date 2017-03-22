@@ -17,7 +17,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     public void undo_EditLabel_invalidCommand() {
         LogicManager.undoCommandHistory.clear();
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("UNDO");
+        commandBox.runCommand("undo");
         //No change should occur and show error message
         assertResultMessage(UndoCommand.MESSAGE_UNSUCCESSFUL_UNDO);
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -27,9 +27,9 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     public void undo_EditLabelValid_ReturnTrue() throws IllegalValueException {
         LogicManager.undoCommandHistory.clear();
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("EDITLABEL friends allies");
-        commandBox.runCommand("UNDO");
-        commandBox.runCommand("UNDO");
+        commandBox.runCommand("editlabel friends allies");
+        commandBox.runCommand("undo");
+        commandBox.runCommand("undo");
 
         assertTrue(td.getTypicalTasks().length == taskListPanel.getNumberOfTasks());
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -46,17 +46,17 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //undo command
-        commandBox.runCommand("UNDO");
+        commandBox.runCommand("undo");
         taskToAdd = td.task8;
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
 
         //undo command
-        commandBox.runCommand("UNDO");
+        commandBox.runCommand("undo");
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
 
         //empty list and undo
-        commandBox.runCommand("CLEAR");
-        commandBox.runCommand("UNDO");
+        commandBox.runCommand("clear");
+        commandBox.runCommand("undo");
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
     }
 

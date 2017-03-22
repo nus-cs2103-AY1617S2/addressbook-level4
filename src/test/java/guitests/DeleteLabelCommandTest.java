@@ -7,6 +7,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.testutil.TestTask;
@@ -21,16 +22,16 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
         //No change should occur
-        runAndAssertTrue("DELETE nonexistentlabel", currentList);
+        runAndAssertTrue(DeleteCommand.COMMAND_WORD + " nonexistentlabel", currentList);
+        runAndAssertTrue("delete nonexistentlabel", currentList);
     }
 
     @Test
     public void editLabel_invalidCommands() {
         TestTask[] currentList = td.getTypicalTasks();
         //No change should occur
-        runAndAssertTrue("DELETE", currentList);
-        runAndAssertTrue("DELETE !@#asdajn", currentList);
-
+        runAndAssertTrue(DeleteCommand.COMMAND_WORD, currentList);
+        runAndAssertTrue(DeleteCommand.COMMAND_WORD + " !@#asdajn", currentList);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class DeleteLabelCommandTest extends TaskManagerGuiTest {
             }
         }
 
-        runAndAssertTrue("DELETE friends", currentList);
+        runAndAssertTrue("delete friends", currentList);
     }
 
     /**

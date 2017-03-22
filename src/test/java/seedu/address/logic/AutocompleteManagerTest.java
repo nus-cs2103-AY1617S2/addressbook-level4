@@ -38,11 +38,11 @@ public class AutocompleteManagerTest {
     @Test
     public void autocomplete_TestAutocompleteSuggestion() {
         AutocompleteManager ac = new AutocompleteManager();
-        AutocompleteRequest request = new AutocompleteRequest("EDI", 0);
+        AutocompleteRequest request = new AutocompleteRequest("edi", 0);
         LinkedList<String> suggestions = new LinkedList<String>();
-        suggestions.add("EDIT");
-        suggestions.add("EDITLABEL");
-        AutocompleteResponse response = new AutocompleteResponse("EDIT", 4, suggestions);
+        suggestions.add("edit");
+        suggestions.add("editlabel");
+        AutocompleteResponse response = new AutocompleteResponse("edit", 4, suggestions);
         assertTrue(ac.getSuggestions(request).equals(response));
     }
 }

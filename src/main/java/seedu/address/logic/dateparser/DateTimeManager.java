@@ -34,10 +34,12 @@ import com.joestelmach.natty.generated.TreeRewrite;
 
 import seedu.address.logic.parser.Parser;
 
+//@@author A0162877N
+/**
+* Parses input arguments to Natty
+*/
 public class DateTimeManager implements DateTimeParser {
     private TimeZone defaultTimeZone;
-
-    //@@author A0162877N
     private static final Logger logger = LoggerFactory.getLogger(Parser.class);
 
     /**

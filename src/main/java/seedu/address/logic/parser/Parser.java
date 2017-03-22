@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BookCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConfirmCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditLabelCommand;
@@ -18,7 +19,12 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+<<<<<<< HEAD
 import seedu.address.logic.commands.MarkCommand;
+=======
+import seedu.address.logic.commands.LoadCommand;
+import seedu.address.logic.commands.SaveAsCommand;
+>>>>>>> refs/remotes/origin/V0.3-bernard
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.dateparser.DateTimeManager;
@@ -93,14 +99,25 @@ public class Parser {
         case BookCommand.COMMAND_WORD:
             return new BookCommandParser().parse(arguments);
 
+        case ConfirmCommand.COMMAND_WORD:
+            return new ConfirmCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+<<<<<<< HEAD
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+=======
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommand(arguments);
+
+        case SaveAsCommand.COMMAND_WORD:
+            return new SaveAsCommand(arguments);
+>>>>>>> refs/remotes/origin/V0.3-bernard
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
