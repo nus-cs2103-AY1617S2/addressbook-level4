@@ -27,6 +27,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -53,6 +54,7 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 
 public class LogicManagerTest {
@@ -66,6 +68,11 @@ public class LogicManagerTest {
     private Model model;
     private Logic logic;
     private Config config;
+    private Storage storage;
+
+    String tempTaskManagerFile;
+    String tempPreferencesFile;
+    String tempConfigFile;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -94,7 +101,10 @@ public class LogicManagerTest {
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         String tempConfigFile = saveFolder.getRoot().getPath() + "TempConfig.json";
         config = new Config(tempConfigFile);
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), config);
+        config.setTaskManagerFilePath(tempTaskManagerFile);
+        config.setUserPrefsFilePath(tempPreferencesFile);
+        storage = new StorageManager(config);
+        logic = new LogicManager(model);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
@@ -616,6 +626,21 @@ public class LogicManagerTest {
         expectedAB.removeTask(toBeAdded);
         assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, addCommand), expectedAB,
                 expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_undoSave_successful() throws Exception {
+        // save to same directory
+        File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
+        assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+                new TaskManager(), Collections.emptyList());
+        assertTrue(FileUtil.isFileExists(tmFile));
+
+        // undo command
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
+                Collections.emptyList());
+        assertFalse(FileUtil.isFileExists(tmFile));
     }
 
     @Test

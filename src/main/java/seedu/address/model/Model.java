@@ -98,6 +98,12 @@ public interface Model {
      */
     public void saveCurrentState(String commandText);
 
+    /**
+     * Discard the last saved command and current filteredTasks list.
+     */
+
+     public void discardCurrentState();
+
     /*
      * translates task index on ui to internal integer index
      */

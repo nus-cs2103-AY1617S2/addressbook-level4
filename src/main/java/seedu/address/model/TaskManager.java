@@ -56,13 +56,11 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws IllegalValueException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
-    public void setTags(Collection<Tag> tags)
-            throws UniqueTagList.DuplicateTagException {
+    public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
 
@@ -112,16 +110,13 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = null;
 
-        if (editedReadOnlyTask
-                .getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
-                || editedReadOnlyTask
-                        .getTaskType() == TaskType.TaskWithOnlyDeadline) {
+        if (editedReadOnlyTask.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
+                || editedReadOnlyTask.getTaskType() == TaskType.TaskWithOnlyDeadline) {
             try {
                 editedTask = new TaskWithDeadline(editedReadOnlyTask);
             } catch (IllegalValueException e) {
@@ -157,8 +152,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // Rebuild the list of task tags to point to the relevant tags in the
         // master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        taskTags.forEach(
-            tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
 
@@ -190,8 +184,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    public boolean removeTask(ReadOnlyTask key)
-            throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             refreshMasterTagList();
             return true;
@@ -210,8 +203,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, "
-                + tags.asObservableList().size() + " tags";
+        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() + " tags";
         // TODO: refine later
     }
 
@@ -230,8 +222,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
                         && this.tasks.equals(((TaskManager) other).tasks)
-                        && this.tags.equalsOrderInsensitive(
-                                ((TaskManager) other).tags));
+                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override

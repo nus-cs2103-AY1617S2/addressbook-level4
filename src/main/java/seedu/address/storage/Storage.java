@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTaskManager;
@@ -30,9 +31,14 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
-     *   Creates the data file if it is missing.
-     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     * Saves the current version of the Address Book to the hard disk. Creates
+     * the data file if it is missing. Raises {@link DataSavingExceptionEvent}
+     * if there was an error during saving.
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+
+    /**
+     * Updates the storage file path.
+     */
+    void handleTaskManagerPathChangedEvent(TaskManagerPathChangedEvent event);
 }

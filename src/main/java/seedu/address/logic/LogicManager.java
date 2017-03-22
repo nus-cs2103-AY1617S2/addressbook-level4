@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -13,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -23,14 +21,10 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
-    private final Storage storage;
-    private final Config config;
 
-    public LogicManager(Model model, Storage storage, Config config) {
+    public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
-        this.storage = storage;
-        this.config = config;
     }
 
     @Override
@@ -38,12 +32,20 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText.trim(), this);
         command.setData(model);
-        command.setStorage(storage);
-        command.setConfig(config);
-        if (!(command instanceof UndoCommand)) {
-            model.saveCurrentState(commandText.trim());
+        try {
+            if (!(command instanceof UndoCommand)) {
+                model.saveCurrentState(commandText.trim());
+            }
+            CommandResult result = command.execute();
+
+            return result;
+        } catch (CommandException e) {
+            if (!(command instanceof UndoCommand)) {
+                model.discardCurrentState();
+            }
+
+            throw e;
         }
-        return command.execute();
     }
 
     @Override
