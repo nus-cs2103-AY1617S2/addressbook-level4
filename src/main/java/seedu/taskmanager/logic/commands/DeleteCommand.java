@@ -19,8 +19,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "DELETE";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the task(s) identified by the index number or task name or task date used in the last task listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1\n"
+            + "Parameters: TASK NAME (must be a valid task name)\n" + "Example: " + COMMAND_WORD + " Eat lunch with mum\n"
+            + "Parameters: TASK DATE (must be a valid task date)\n" + "Example: " + COMMAND_WORD
+            + " 15/07/17";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
     public static final String MESSAGE_DELETE_TASKS_DATE_SUCCESS = "Deleted tasks on: ";
@@ -32,6 +35,9 @@ public class DeleteCommand extends Command {
     public static final int DELETE_INDEX_NOT_PRESENT_TOKEN = -1;
     public static final String DELETE_TASKNAME_KEYWORD_NOT_PRESENT_TOKEN = "";
     public static final String DELETE_DATE_KEYWORD_NOT_PRESENT_TOKEN = "";
+
+    public static final String MESSAGE_INVALID_TASK_DATE = "There is no task with the date specified to delete.";
+    public static final String MESSAGE_INVALID_TASK_NAME = "There is no task with the name specified to delete.";
 
     public final int targetIndex;
     public final String targetTaskName;
@@ -87,7 +93,7 @@ public class DeleteCommand extends Command {
 
                 if (lastShownList.size() == 0) {
                     model.updateFilteredListToShowAll();
-                    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                    throw new CommandException(MESSAGE_INVALID_TASK_DATE);
                 }
 
                 try {
@@ -110,7 +116,7 @@ public class DeleteCommand extends Command {
 
                 if (lastShownList.size() == 0) {
                     model.updateFilteredListToShowAll();
-                    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                    throw new CommandException(MESSAGE_INVALID_TASK_NAME);
                 }
 
                 try {
