@@ -651,6 +651,56 @@ public class LogicManagerTest {
 
     // End UndoCommand tests
 
+    // RedoCommand tests
+
+    @Test
+    public void execute_undoAddRedo_successful() throws Exception {
+        // add adam to list
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.adam();
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // verify added
+        String addCommand = helper.generateAddCommand(toBeAdded);
+        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
+                expectedAB.getTaskList());
+
+        // undo command
+        expectedAB.removeTask(toBeAdded);
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, addCommand), expectedAB,
+                expectedAB.getTaskList());
+
+        // redo command
+        expectedAB.addTask(toBeAdded);
+        assertCommandSuccess("redo", String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
+                expectedAB.getTaskList());
+
+    }
+
+    @Test
+    public void execute_undoSaveRedo_successful() throws Exception {
+        // save to same directory
+        File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
+        String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
+        assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+                new TaskManager(), Collections.emptyList());
+        assertTrue(FileUtil.isFileExists(tmFile));
+
+        // undo command
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
+                Collections.emptyList());
+        assertFalse(FileUtil.isFileExists(tmFile));
+
+        // redo command
+        assertCommandSuccess("redo", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+                new TaskManager(), Collections.emptyList());
+        assertTrue(FileUtil.isFileExists(tmFile));
+        tmFile.delete();
+    }
+
+    // End RedoCommand tests
+
     /**
      * A utility class to generate test data.
      */

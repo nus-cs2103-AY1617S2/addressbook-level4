@@ -21,10 +21,12 @@ import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompletedCommand;
 import seedu.address.logic.commands.NotDoneCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Parses user input.
@@ -42,6 +44,7 @@ public class Parser {
      * @param userInput
      *            full user input string
      * @return the command based on the user input
+     * @throws CommandException
      */
     public Command parseCommand(String userInput, LogicManager logicManager) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -94,6 +97,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
