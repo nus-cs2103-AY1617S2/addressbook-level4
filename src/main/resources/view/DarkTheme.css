@@ -85,6 +85,7 @@ Vbox, SplitPane {
     -fx-border-width: 0 1 0 0;
     -fx-border-color: #bdbdbd;
     -fx-background-color: transparent;
+    -fx-cursor: default;
 }
 
 .split-pane {
@@ -348,6 +349,14 @@ Vbox, SplitPane {
     -fx-faint-focus-color: #dd4b39;
     -fx-border-radius: 0 0 0 0;
     -fx-border-width: 0 0 0 0;
+}
+
+#resultDisplay .track {
+    -fx-background-color: #dd4b39;
+}
+
+#resultDisplay .thumb {
+    -fx-background-color: #FFFFFF;
 }
 
 #commandTextField, #commandBoxPlaceholder {
