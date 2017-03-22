@@ -12,6 +12,7 @@ import seedu.taskboss.commons.core.Config;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.events.storage.DataSavingExceptionEvent;
+import seedu.taskboss.commons.events.storage.TaskBossStorageChangedEvent;
 import seedu.taskboss.commons.exceptions.DataConversionException;
 import seedu.taskboss.commons.util.ConfigUtil;
 import seedu.taskboss.model.ReadOnlyTaskBoss;
@@ -61,6 +62,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void setTaskBossFilePath(Path filepath) throws IOException {
         config.setTaskBossFilePath(filepath.toString());
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        raise(new TaskBossStorageChangedEvent(filepath.toString()));
     }
 
     @Override
