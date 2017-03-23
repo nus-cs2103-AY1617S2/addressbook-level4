@@ -9,7 +9,7 @@
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
-* It is a Java application intended for users to manage and keep track of tasks on hand. 
+* It is a Java application intended for users to manage and keep track of tasks on hand.
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
   **significantly bigger** (around 12 KLoC).
 * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
