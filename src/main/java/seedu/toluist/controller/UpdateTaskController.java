@@ -28,6 +28,7 @@ public class UpdateTaskController extends Controller {
     private static final String COMMAND_UPDATE_TASK = "update";
 
     private static final String RESULT_MESSAGE_UPDATE_TASK = "Task updated";
+    private static final String RESULT_MESSAGE_ERROR_DATE_INPUT = "Something is wrong with the given dates input";
 
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
@@ -45,16 +46,21 @@ public class UpdateTaskController extends Controller {
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
         Task task = uiStore.getShownTasks(indexes).get(0);
 
-        String startDateToken = tokens.get(TaskTokenizer.TASK_START_DATE_KEYWORD);
-        LocalDateTime startDateTime = DateTimeUtil.parseDateString(startDateToken);
+        String eventStartDateToken = tokens.get(TaskTokenizer.EVENT_START_DATE_KEYWORD);
+        LocalDateTime eventStartDateTime = DateTimeUtil.parseDateString(eventStartDateToken);
 
-        String endDateToken = tokens.get(TaskTokenizer.TASK_END_DATE_KEYWORD);
-        LocalDateTime endDateTime = DateTimeUtil.parseDateString(endDateToken);
+        String eventEndDateToken = tokens.get(TaskTokenizer.EVENT_END_DATE_KEYWORD);
+        LocalDateTime eventEndDateTime = DateTimeUtil.parseDateString(eventEndDateToken);
+
+        String taskDeadlineToken = tokens.get(TaskTokenizer.TASK_DEADLINE_KEYWORD);
+        LocalDateTime taskDeadline = DateTimeUtil.parseDateString(taskDeadlineToken);
+
+        boolean isFloating = tokens.containsKey(TaskTokenizer.TASK_FLOATING_KEYWORD);
 
         String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
-        commandResult = update(task, description, startDateTime, endDateTime, tags);
+        commandResult = update(task, description, eventStartDateTime, eventEndDateTime, taskDeadline, isFloating, tags);
 
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks());
@@ -68,20 +74,59 @@ public class UpdateTaskController extends Controller {
     }
 
     private CommandResult update(Task task, String description,
-            LocalDateTime startDateTime, LocalDateTime endDateTime, Set<Tag> tags) {
+            LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
+            LocalDateTime taskDeadline, boolean isFloating, Set<Tag> tags) {
+        if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
+            return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
+        }
+
+        if (isFloating) {
+            task.setStartDateTime(null);
+            task.setEndDateTime(null);
+        } else if (taskDeadline != null) {
+            task.setStartDateTime(null);
+            task.setEndDateTime(taskDeadline);
+        } else {
+            if (eventStartDateTime != null) {
+                task.setStartDateTime(eventStartDateTime);
+            }
+            if (eventEndDateTime != null) {
+                task.setEndDateTime(eventEndDateTime);
+            }
+        }
+
         if (StringUtil.isPresent(description)) {
             task.setDescription(description);
-        }
-        if (endDateTime != null) {
-            task.setEndDateTime(endDateTime);
-            if (startDateTime != null) {
-                task.setStartDateTime(startDateTime);
-            }
         }
         if (!tags.isEmpty()) {
             task.replaceTags(tags);
         }
         return new CommandResult(RESULT_MESSAGE_UPDATE_TASK);
+    }
+
+    /**
+     * Checks whether the user input for dates is valid.
+     * The input is valid if there is only one possible task type, or zero (task type is unchanged).
+     * @param eventStartDateTime
+     * @param eventEndDateTime
+     * @param taskDeadline
+     * @param isFloating
+     * @return true if there is at most 1 possible task type
+     */
+    private boolean isValidTaskType(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
+            LocalDateTime taskDeadline, boolean isFloating) {
+        int numberOfTaskTypes = 0;
+        // Can update event start date time OR end date time
+        if (eventStartDateTime != null || eventEndDateTime != null) {
+            numberOfTaskTypes++;
+        }
+        if (taskDeadline != null) {
+            numberOfTaskTypes++;
+        }
+        if (isFloating) {
+            numberOfTaskTypes++;
+        }
+        return numberOfTaskTypes <= 1;
     }
 
     public boolean matchesCommand(String command) {

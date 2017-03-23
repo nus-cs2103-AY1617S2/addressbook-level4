@@ -43,7 +43,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         // add task with deadline
         String taskDescription2 = "get v0.2 ready";
         LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
-        String command2 = "add " + taskDescription2 + " enddate/" + endDate2;
+        String command2 = "add " + taskDescription2 + " by/" + endDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
 
@@ -51,7 +51,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
         String taskDescription3 = "attend CS2103T tutorial";
         LocalDateTime startDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
-        String command3 = "add " + taskDescription3 + " startdate/" + startDate3 + " enddate/" + endDate3;
+        String command3 = "add " + taskDescription3 + " from/" + startDate3 + " to/" + endDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
 
@@ -130,7 +130,7 @@ public class DeleteTaskCommandTest extends ToLuistGuiTest {
 
     @Test
     public void switchThenDeleteTasksThenSwitchBack() {
-        String addCommand = "add tomorrow enddate/Tomorrow 1:12pm";
+        String addCommand = "add tomorrow by/Tomorrow 1:12pm";
         commandBox.runCommand(addCommand);
 
         String switchCommand = "switch 3";
