@@ -10,11 +10,15 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 
-public class DirectoryCommandParser {
+/**
+ * @@author A0114269E
+ * Parses input arguments and creates a new ChangeDirectoryCommand object
+ */
+public class ChangeDirectoryCommandParser {
     public static final String XML_FILE_EXT = "xml";
     /**
-     * Parses the given {@code String} of path in the context of the ChangeDirCommand
-     * and returns an ChangeDirCommand object for execution.
+     * Parses the given {@code String} of path in the context of the ChangeDirectoryCommand
+     * and returns a ChangeDirectoryCommand object for execution.
      */
     public Command parse(String args) {
         final Matcher matcher = FILEPATH_ARGS_FORMAT.matcher(args.trim());
@@ -29,6 +33,9 @@ public class DirectoryCommandParser {
         return new ChangeDirectoryCommand(args.trim());
     }
     
+    /**
+     * Checks if the given file path is a path to an XML file
+     */
     public boolean isValidXmlPath (String args) {
         String filePath = args.trim();
         String extension = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());

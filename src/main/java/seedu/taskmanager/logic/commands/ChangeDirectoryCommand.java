@@ -9,13 +9,10 @@ import seedu.taskmanager.commons.util.ConfigUtil;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
-import seedu.taskmanager.storage.Storage;
-import seedu.taskmanager.storage.StorageManager;
-import seedu.taskmanager.storage.XmlTaskManagerStorage;
 
 /**
+ * @@author A0114269E
  * Change the directory of taskmanager.xml file to user-specified path to allow cloud service sync. 
  * Path matching is case sensitive.
  */
@@ -28,7 +25,6 @@ public class ChangeDirectoryCommand extends Command {
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
     
     public static final String MESSAGE_SUCCESS = "TaskManager directory changed to : ";
-    public static final String MESSAGE_FAILURE = "Failed to initialized TaskManager in new directory : '%1$s'";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
     public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load";
@@ -56,10 +52,6 @@ public class ChangeDirectoryCommand extends Command {
         
         newConfig.setTaskManagerFilePath(this.newPath);
         
-        // Overwrite method
-//        storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
-        
-        // Load method
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager newTaskManager;
         try {

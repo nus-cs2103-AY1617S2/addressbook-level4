@@ -81,13 +81,13 @@ public class Parser {
             return new HelpCommand();
             
         case ChangeDirectoryCommand.COMMAND_WORD:
-            return new DirectoryCommandParser().parse(arguments);
+            return new ChangeDirectoryCommandParser().parse(arguments);
             
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
             
         case MoveCommand.COMMAND_WORD:
-            return new DirectoryCommandParser().parse(arguments);
+            return new MoveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
