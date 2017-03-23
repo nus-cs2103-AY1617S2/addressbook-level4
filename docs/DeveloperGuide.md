@@ -525,7 +525,7 @@ Use case resumes from step 2.
     5. User confirms action.
     6. KIT update the task from undone to done from the list and display status.
         use case ends.
-		
+
 **Extensions**
 1a. KIT detects and error in the command.
 >   1a1. KIT waits for another valid command.
