@@ -178,7 +178,7 @@ the efficiency and effectiveness of test cases testing the
 
 Consider the [`StorageManagerTest.java`](../src/test/java/seedu/geekeep/storage/StorageManagerTest.java) class.
 
-* Test methods `prefsReadSave()` and `addressBookReadSave()` are integration tests. Note how they simply test if
+* Test methods `prefsReadSave()` and `taskManagerReadSave()` are integration tests. Note how they simply test if
   The `StorageManager` class is correctly wired to its dependencies.
 
 * Test method `handleTaskManagerChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses

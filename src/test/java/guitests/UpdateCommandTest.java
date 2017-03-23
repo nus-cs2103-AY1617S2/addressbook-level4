@@ -25,12 +25,12 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
      * Checks whether the edited task has the correct updated details.
      *
      * @param filteredTaskListIndex index of task to edit in filtered list
-     * @param addressBookIndex index of task to edit in the task manager.
+     * @param taskManagerIndex index of task to edit in the task manager.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
      * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredTaskListIndex, int addressBookIndex,
+    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
         commandBox.runCommand("update " + filteredTaskListIndex + " " + detailsToEdit);
 
@@ -39,7 +39,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[addressBookIndex - 1] = editedTask;
+        expectedTasksList[taskManagerIndex - 1] = editedTask;
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(UpdateCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
@@ -50,7 +50,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit
             = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
-        int addressBookIndex = 1;
+        int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Bobby")
                 .withEndDateTime("01-05-17 1630")
@@ -58,18 +58,18 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
                 .withLocation("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int taskManagerIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -86,12 +86,12 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
-        int addressBookIndex = 5;
+        int taskManagerIndex = 5;
 
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
 
-        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -130,11 +130,11 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+        int taskManagerIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 }
