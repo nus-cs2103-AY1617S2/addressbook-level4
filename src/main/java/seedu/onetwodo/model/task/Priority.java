@@ -23,7 +23,7 @@ public class Priority {
         assert priority != null;
         priority = priority.trim();
         String upperPriority = priority.toUpperCase();
-        if (upperPriority != "") {
+        if (upperPriority.length() > 0) {
             char firstLetter = upperPriority.charAt(0);
             if (!isValidPriority(firstLetter)) {
                 throw new IllegalValueException(PRIORITY_CONSTRAINTS);
