@@ -2,7 +2,6 @@ package seedu.jobs.model.task;
 
 import java.util.Objects;
 
-import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.tag.UniqueTagList;
 
@@ -17,12 +16,9 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Every field must be present and not null.
-     * @throws IllegalTimeException 
      */
-    
-    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags) throws IllegalTimeException {
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name);
-        
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -30,17 +26,12 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isCompleted = false;
-        
-        if(endTime.compareTo(startTime)<0){
-        	throw new IllegalTimeException("end time cannot preceeds start time");
-        }
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
-     * @throws IllegalTimeException 
      */
-    public Task(ReadOnlyTask source) throws IllegalTimeException {
+    public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartTime(), source.getEndTime(), source.getDescription(), source.getTags());
         this.isCompleted = source.isCompleted();
     }
@@ -138,14 +129,4 @@ public class Task implements ReadOnlyTask {
 	public void markComplete() {
 		this.isCompleted = true;
 	}
-	
-	public static class IllegalTimeException extends IllegalValueException{
-
-		public IllegalTimeException(String message) {
-			super(message);
-		}
-	}
-	
 }
-
-

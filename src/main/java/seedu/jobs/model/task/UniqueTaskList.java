@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.DuplicateDataException;
 import seedu.jobs.commons.util.CollectionUtil;
-import seedu.jobs.model.task.Task.IllegalTimeException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -83,7 +82,7 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException, IllegalTimeException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
@@ -127,5 +126,5 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching person in the list.
      */
     public static class TaskNotFoundException extends Exception {}
-    
+
 }
