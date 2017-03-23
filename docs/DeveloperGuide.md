@@ -377,6 +377,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | release a blocked period of time | make a period of time available again
 `* * *` | user | find upcoming tasks by date | can track of what is dued soon
 `* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | unmark a task as undone | differentiate between completed and uncompleted tasks
 `* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
 `* * *` | user | get more information about a command | learn how to use various commands
 `* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task
@@ -469,6 +470,32 @@ Use case ends
 
 >Use case ends
 
+
+#### Use case: Mark or unmark a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to mark/unmark a specific task in the list
+4. TodoApp sets completion of the task to true/false
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3d. Value of completion is the same as the previous value
+> 3d1. TodoApp does nothing
+
+>Use case ends
+
 #### Use case: Retrieve a task
 
 **MSS**
@@ -476,8 +503,6 @@ Use case ends
 1. User requests to retrieve tasks by name/priority/deadline/completion
 2. TodoApp shows a list of tasks that matches
 Use case ends
-
-**Extensions**
 
 1a. List is empty
 
@@ -642,3 +667,21 @@ Cons:
 * Not much integrations
 * No options for subtasks
 * No repeat options
+
+**Google Calendar**
+
+Author: Lim Huan Hock
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Mobile app, web app, etc)
+* Cloud support
+* Free
+* API-friendly
+
+Cons:
+
+* No options for subtasks
+* No repeat options
+* Plain UI/ graphics
