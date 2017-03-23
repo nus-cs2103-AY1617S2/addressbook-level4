@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# WhatsLeft - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-W10-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -9,6 +9,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 3. [Implementation](#implementation)
 4. [Testing](#testing)
 5. [Dev Ops](#dev-ops)
+
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -51,7 +52,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. whatsleft
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -120,15 +121,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteActivity.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `WhatsLeftChangedEvent` when the WhatsLeft data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteActivityEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -176,12 +177,12 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteActivitySdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Li Zihan
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -191,8 +192,8 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the WhatsLeft data.
+* exposes a `UnmodifiableObservableList<ReadOnlyActivity>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -208,7 +209,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the WhatsLeft data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -332,7 +333,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, WhatsLeft depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -346,27 +347,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | view all available commands | refer to them when I do not know how to use the App
+`* * *` | user | add a new event/deadline/task | keep track of it
+`* * *` | user | edit chosen event/deadline/task | update relevant details
+`* * *` | user | delete chosen event/deadline/task | mark it as cancelled
+`* * *` | user | view a list of events/deadlines/tasks | know what is left
+`* * *` | user | mark event/deadline/task as completed | archive the completed event/deadline/task
+`* * *` | user | sort the list of deadlines by due date | know what is due first
+`* * *` | user | sort the list of tasks by priority level | know what task to do first
+`* * *` | user | select the storage folder/file | store them on a local file controlled by a cloud syncing service
+`* * *` | user | undo my last [mutating operation](#mutating-operation) | reverse any mistake made
+`* * *` | user | let passed events automatically archive themselves | save time checking them off
+`* * *` | user | view all finished event/deadline/task | keep track of my progress in task completion
+`* *` | user | search for event/deadline/task by attribute | find out details on specific event/deadline/task
+`* *` | user | set up recurring event/deadline/task | save time setting them up every day/month/year
+`* *` | user | sync my events/deadlines/tasks with google calendar/tasks | access them online through other applications and devices (mobile)
+`* *` | user | receive an email reminder for events and deadlines | be prompt on the incoming events and deadlines
+`* *` | user | customise the reminder myself | choose how and when to be notified
+`* *` | user | block multiple slots for unconfirmed events | ensure no other events will clash
+`* *` | user | confirm an event to release blocked timeslots | maximise the use of my time
+`* *` | user | pin/star an event/deadline/task | see it at the top of my list all the time
+`* *` | user | add comments to my event/deadline/task | put in details that I might want to remember
+`* *` | user | see the overview of events and deadlines in calendar format | see how busy the month will be for me
+`*` | Advanced user | use shorter version of commands | type them easily and quickly
+`*` | user | schedule events based on day ("this wed, next tues") without knowing the date | add events quickly
+`*` | user | view a list of uncompleted events/deadlines/tasks of same nature (events, deadlines, floating tasks) | see things that are important to me
+`*` | user | send reminders to other people involved in certain event or deadline | notify collaborators
+`*` | Advanced user | color code the events/deadlines/tasks myself | see the importance of events/deadlines/tasks without opening them up
+`*` | user | view list of deleted events/deadlines/tasks | check details of deleted events/deadlines/tasks
+`*` | user | view list of finished events/deadlines/tasks | check details of finished events/deadlines/tasks
+`*` | user | move an event/deadline/task from deleted list to [active list](#active-list) | add the event/deadline/task without re-creating it entirely
+`*` | user | copy an event/deadline/task from the archived list to the active list | add the same event/deadline/task without re-creating it entirely
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WhatsLeft` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Add an event/deadline/task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add an event/deadline/task
+2. WhatsLeft adds specified event/deadline/task <br>
+Use case ends.
+
+**Extensions**
+
+1a. The command entered is not in the correct format
+
+> 1a1. WhatsLeft shows error message and suggests correct format <br>
+  Use case ends
+
+#### Use case: Delete an event/deadline/task
+**MSS**
+
+1. User requests to list all events/deadlines/tasks
+2. WhatsLeft shows user the list of all events/deadlines/tasks
+3. User requests to delete a specific event/deadline/task
+4. WhatsLeft deletes the specified event/deadline/task
 Use case ends.
 
 **Extensions**
@@ -377,17 +417,108 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. WhatsLeft shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Edit an existing event/deadline/task
+
+**MSS**
+
+1. User requests to list all events/deadlines/tasks
+2. WhatsLeft shows user the list of all events/deadlines/tasks
+3. User requests to edit a specific event/deadline/task
+4. WhatsLeft updates the specified event/deadline/task
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Finish an event/deadline/task
+
+**MSS**
+
+1. User requests to list all events/deadlines/tasks
+2. WhatsLeft shows user the list of all events/deadlines/tasks
+3. User requests to finish a specific event/deadline/task
+4. WhatsLeft archives the specified event/deadline/task
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: View an event/deadline/task
+
+**MSS**
+
+1. User requests to list all events/deadlines/tasks
+2. WhatsLeft shows user the list of all events/deadlines/tasks
+3. User requests to view a specific event/deadline/task
+4. WhatsLeft shows all Information of the specific event/deadline/task
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given parameter is invalid
+
+> 3a1. WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Undo last [mutating operation](#mutating-operation)
+
+**MSS**
+
+1. User requests to undo last operation
+2. WhatsLeft undoes last operation
+Use case ends.
+
+**Extensions**
+
+2a. There was no previous [mutating operation](#mutating-operation)
+
+> Use case ends
+
+#### Use case: Redo previous undo operation
+
+**MSS**
+
+1. User requests to redo last undo operation
+2. WhatsLeft redoes last operation
+Use case ends.
+
+**Extensions**
+
+2a. There was no previous undo operation
+
+> Use case ends
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 events/deadlines/tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Response time of 1s for each operation.
 
 {More to be added}
 
@@ -397,23 +528,105 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Active list
 
-> A contact detail that is not meant to be shared with others
+> List of all unfinished events/deadlines/tasks.
+
+##### Event
+
+> An activity that has a start date/time (and end date/time).
+
+##### Deadline
+
+> An activity with end date/time.
+
+##### Task
+
+> An floating task with no specified date or time.
+
+##### Mutating Operation
+
+> Refers to the following operations: add, edit, delete, finish, clear. These commands mutate the event/deadline/task list.
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Trello**
 
-Author: ...
+Author: Fog Creek
 
 Pros:
 
-* ...
-* ...
+* Each user can have multiple boards, each board contain multiple lists and each list contains multiple cards (tasks)
+* Allows copying
+* Allows dragging
+* Can "star" boards
 
 Cons:
 
-* ...
-* ...
+* Does not allow deleting unfinished tasks
+* Cannot sort automatically
 
+
+**Wunderlist**
+
+Author: 6Wunderkinder
+
+Pros:
+
+* Archives completed tasks automatically
+* Allows adding subtask
+* Allows creating multiple lists
+* Allows sharing with friends
+* Allows sort alphabetically/by due date/by creation date/by priority
+
+Cons:
+
+* Does not show the due date in the task list
+
+**Microsoft Outlook**
+
+Author: Microsoft
+
+Pros:
+
+* Syncs events from all connected accounts to calendar automatically, including birthdays, Facebook events
+* Color coded
+* See tasks/events in a weekly/monthly/daily view
+
+Cons:
+
+* Past events are lost forever/inaccessible
+* No integrated free-floating task list
+
+**HiTask**
+
+Author: Human Computer LLC
+
+Pros:
+
+* Allows shared calendar with collaborators
+* Allows individual tasks and to assign shared tasks
+* Integrated communication client
+* Integrated platforms for mobile and desktop
+* Create tasks by email
+
+Cons:
+
+* Steep learning curve due to many features
+
+**Remember the milk**
+
+Author: Emily Boyd, Omar Kilani
+
+Pros:
+
+* Can share with others
+* Sync on multiple devices
+* Smart add
+* Can break tasks down into subtasks
+* Smart search
+
+Cons:
+
+* Only paying users get access to full features

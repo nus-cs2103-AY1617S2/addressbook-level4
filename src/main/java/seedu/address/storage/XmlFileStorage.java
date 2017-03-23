@@ -9,28 +9,28 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores WhatsLeft data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given WhatsLeft data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableAddressBook addressBook)
+    public static void saveDataToFile(File file, XmlSerializableWhatsLeft whatsLeft)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, addressBook);
+            XmlUtil.saveDataToFile(file, whatsLeft);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns WhatsLeft in the file or an empty WhatsLeft
      */
-    public static XmlSerializableAddressBook loadDataFromSaveFile(File file) throws DataConversionException,
+    public static XmlSerializableWhatsLeft loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableWhatsLeft.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

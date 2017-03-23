@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.ReadOnlyActivity;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -18,7 +18,6 @@ public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -42,10 +41,6 @@ public class PersonCardHandle extends GuiHandle {
 
     public String getPhone() {
         return getTextFromLabel(PHONE_FIELD_ID);
-    }
-
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -72,12 +67,11 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyPerson person) {
-        return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameActivity(ReadOnlyActivity activity) {
+        return getFullName().equals(activity.getDescription().description)
+                && getPhone().equals(activity.getPriority().value)
+                && getAddress().equals(activity.getLocation().value)
+                && getTags().equals(getTags(activity.getTags()));
     }
 
     @Override
@@ -86,7 +80,6 @@ public class PersonCardHandle extends GuiHandle {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
                     && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }

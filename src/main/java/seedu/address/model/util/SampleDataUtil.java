@@ -1,37 +1,47 @@
 package seedu.address.model.util;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.ReadOnlyWhatsLeft;
+import seedu.address.model.WhatsLeft;
+import seedu.address.model.person.Activity;
+import seedu.address.model.person.ByDate;
+import seedu.address.model.person.Description;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.FromDate;
+import seedu.address.model.person.Location;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.ToDate;
+import seedu.address.model.person.UniqueActivityList.DuplicateActivityException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
+    public static Activity[] getSampleActivities() {
         try {
-            return new Person[] {
-                new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"),
+            return new Activity[] {
+                new Activity(new Description("CS2010 Written Quiz 1"), new Priority(null),
+                    new StartTime("0800"), new FromDate("010115"), new EndTime("1500"),
+                    new ToDate("010115"), new ByDate(null), new Location("SR1"),
                     new UniqueTagList("friends")),
-                new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new Activity(new Description("CS2103 Tutorial 6"), new Priority("medium"),
+                    new StartTime(null), new FromDate(null), new EndTime(null),
+                    new ToDate(null), new ByDate(null), new Location("COM-1-B1"),
                     new UniqueTagList("colleagues", "friends")),
-                new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@yahoo.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new Activity(new Description("Buy fruits"), new Priority("low"),
+                    new StartTime(null), new FromDate(null), new EndTime(null),
+                    new ToDate(null), new ByDate(null), new Location("FairPrice"),
                     new UniqueTagList("neighbours")),
-                new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@google.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new Activity(new Description("Home Assignment 2"), new Priority("high"),
+                    new StartTime(null), new FromDate(null), new EndTime(null),
+                    new ToDate(null), new ByDate(null), new Location("CLB"),
                     new UniqueTagList("family")),
-                new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@outlook.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"),
+                new Activity(new Description("CS2102 Consultation"), new Priority(null),
+                    new StartTime("1500"), new FromDate("050417"), new EndTime(null),
+                    new ToDate(null), new ByDate(null), new Location("I-Cube"),
                     new UniqueTagList("classmates")),
-                new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@gmail.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"),
+                new Activity(new Description("IVLE Survey"), new Priority("low"),
+                        new StartTime(null), new FromDate(null), new EndTime(null),
+                        new ToDate(null), new ByDate(null), new Location(null),
                     new UniqueTagList("colleagues"))
             };
         } catch (IllegalValueException e) {
@@ -39,15 +49,15 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyWhatsLeft getSampleWhatsLeft() {
         try {
-            AddressBook sampleAB = new AddressBook();
-            for (Person samplePerson : getSamplePersons()) {
-                sampleAB.addPerson(samplePerson);
+            WhatsLeft sampleAB = new WhatsLeft();
+            for (Activity sampleActivity : getSampleActivities()) {
+                sampleAB.addActivity(sampleActivity);
             }
             return sampleAB;
-        } catch (DuplicatePersonException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+        } catch (DuplicateActivityException e) {
+            throw new AssertionError("sample data cannot contain duplicate activities", e);
         }
     }
 }

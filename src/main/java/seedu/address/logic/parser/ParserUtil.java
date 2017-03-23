@@ -13,10 +13,15 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.ByDate;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.FromDate;
+import seedu.address.model.person.Location;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.ToDate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -25,7 +30,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class ParserUtil {
 
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)");
+    private static final Pattern INDEX_ALONE_ARG_FORMAT = Pattern.compile("(?<index>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -44,6 +50,31 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
+    //@@author A0110491U
+    public static Optional<Integer> parseIndexAlone(String command) {
+        final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String index = matcher.group("index");
+        if (!StringUtil.isUnsignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
+
+    }
+
+    public static Optional<String> parseType(String command) {
+        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String type = matcher.group("targetType");
+        return Optional.of(type);
+    }
+    //@@author
 
     /**
      * Returns a new Set populated by all elements in the given list of strings
@@ -67,27 +98,28 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
+     * if {@code description} is present.
      */
-    public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
+    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
+        assert description != null;
+        return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
      */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+        assert location != null;
+        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
     }
 
     /**
@@ -108,5 +140,45 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    /**
+     * Parses a {@code Optional<String> fromdate} into an {@code Optional<FromDate>} if {@code fromdate} is present.
+     */
+    public static Optional<FromDate> parseFromDate(Optional<String> fromdate) throws IllegalValueException {
+        assert fromdate != null;
+        return fromdate.isPresent() ? Optional.of(new FromDate(fromdate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> todate} into an {@code Optional<ToDate>} if {@code todate} is present.
+     */
+    public static Optional<ToDate> parseToDate(Optional<String> todate) throws IllegalValueException {
+        assert todate != null;
+        return todate.isPresent() ? Optional.of(new ToDate(todate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> bydate} into an {@code Optional<ByDate>} if {@code bydate} is present.
+     */
+    public static Optional<ByDate> parseByDate(Optional<String> bydate) throws IllegalValueException {
+        assert bydate != null;
+        return bydate.isPresent() ? Optional.of(new ByDate(bydate.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> starttime} into an {@code Optional<StartTime>} if {@code starttime} is present.
+     */
+    public static Optional<StartTime> parseStartTime(Optional<String> starttime) throws IllegalValueException {
+        assert starttime != null;
+        return starttime.isPresent() ? Optional.of(new StartTime(starttime.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> endtime} into an {@code Optional<EndTime>} if {@code endtime} is present.
+     */
+    public static Optional<EndTime> parseEndTime(Optional<String> endtime) throws IllegalValueException {
+        assert endtime != null;
+        return endtime.isPresent() ? Optional.of(new EndTime(endtime.get())) : Optional.empty();
     }
 }

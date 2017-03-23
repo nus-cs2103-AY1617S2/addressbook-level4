@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<whatsleft>
+    <persons>
+        <description>Hans Muster</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">4th street</location>
+    </persons>
+    <persons>
+        <description>Ruth Mueller</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">81th street</location>
+    </persons>
+    <persons>
+        <description>Heinz Kurz</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">wall street</location>
+    </persons>
+    <persons>
+        <description>Cornelia Meier</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">10th street</location>
+    </persons>
+    <persons>
+        <description>Werner Meyer</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">michegan ave</location>
+    </persons>
+    <persons>
+        <description>Lydia Kunz</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">little tokyo</location>
+    </persons>
+    <persons>
+        <description>Anna Best</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">4th street</location>
+    </persons>
+    <persons>
+        <description>Stefan Meier</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">little india</location>
+    </persons>
+    <persons>
+        <description>Martin Mueller</description>
+        <priority isPrivate="false">high</priority>
+        <location isPrivate="false">chicago ave</location>
+    </persons>
+</whatsleft>

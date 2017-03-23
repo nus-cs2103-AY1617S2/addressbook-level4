@@ -3,17 +3,19 @@ package seedu.address.model;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.WhatsLeftChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.address.model.person.Activity;
+import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.UniqueActivityList;
+import seedu.address.model.person.UniqueActivityList.ActivityNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,90 +24,112 @@ import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private final WhatsLeft whatsLeft;
+    private final FilteredList<ReadOnlyActivity> filteredActivities;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given whatsLeft and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyWhatsLeft whatsLeft, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(whatsLeft, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with WhatsLeft: " + whatsLeft + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.whatsLeft = new WhatsLeft(whatsLeft);
+        filteredActivities = new FilteredList<>(this.whatsLeft.getActivityList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new WhatsLeft(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyWhatsLeft newData) {
+        whatsLeft.resetData(newData);
+        indicateWhatsLeftChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyWhatsLeft getWhatsLeft() {
+        return whatsLeft;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+    private void indicateWhatsLeftChanged() {
+        raise(new WhatsLeftChangedEvent(whatsLeft));
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public synchronized void deleteActivity(ReadOnlyActivity target) throws ActivityNotFoundException {
+        whatsLeft.removeActivity(target);
+        indicateWhatsLeftChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public synchronized void addActivity(Activity activity) throws UniqueActivityList.DuplicateActivityException {
+        whatsLeft.addActivity(activity);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateWhatsLeftChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedPerson != null;
+    public void updateActivity(int filteredActivityListIndex, ReadOnlyActivity editedActivity)
+            throws UniqueActivityList.DuplicateActivityException {
+        assert editedActivity != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
-        indicateAddressBookChanged();
+        int addressBookIndex = filteredActivities.getSourceIndex(filteredActivityListIndex);
+        whatsLeft.updateActivity(addressBookIndex, editedActivity);
+        indicateWhatsLeftChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Activity List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredActivityList() {
+        return new UnmodifiableObservableList<>(filteredActivities);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredScheduledActivityList() {
+        ObservableList<ReadOnlyActivity> tempActivityList = FXCollections.observableArrayList();
+        for (ReadOnlyActivity activity:filteredActivities) {
+            if (activity.getByDate() != null || activity.getToDate() != null) {
+                tempActivityList.add(activity);
+            }
+        }
+        return new UnmodifiableObservableList<>(tempActivityList);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredUnscheduledActivityList() {
+        ObservableList<ReadOnlyActivity> tempActivityList =  FXCollections.observableArrayList();
+        for (ReadOnlyActivity activity:filteredActivities) {
+            if (activity.getPriority() != null) {
+                tempActivityList.add(activity);
+            }
+        }
+        return new UnmodifiableObservableList<>(tempActivityList);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredActivities.setPredicate(null);
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredActivityList(Set<String> keywords) {
+        updateFilteredActivityList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+    private void updateFilteredActivityList(Expression expression) {
+        filteredActivities.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyPerson person);
+        boolean satisfies(ReadOnlyActivity activity);
         String toString();
     }
 
@@ -118,8 +142,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyPerson person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyActivity activity) {
+            return qualifier.run(activity);
         }
 
         @Override
@@ -129,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyPerson person);
+        boolean run(ReadOnlyActivity activity);
         String toString();
     }
 
@@ -141,9 +165,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyPerson person) {
+        public boolean run(ReadOnlyActivity activity) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(activity.
+                    getDescription().description, keyword))
                     .findAny()
                     .isPresent();
         }
@@ -152,6 +177,18 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredEventList() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyActivity> getFilteredDeadlineList() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

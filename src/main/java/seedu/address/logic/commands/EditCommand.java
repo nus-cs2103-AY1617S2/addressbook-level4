@@ -6,104 +6,168 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.ByDate;
+import seedu.address.model.person.Description;
+import seedu.address.model.person.EndTime;
+import seedu.address.model.person.Event;
+import seedu.address.model.person.Location;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
+import seedu.address.model.person.StartDate;
+import seedu.address.model.person.StartTime;
+import seedu.address.model.person.Task;
+import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueTaskList;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing activity in WhatsLeft.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the activity identified "
+            + "by the type and index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
+            + "Parameters: TYPE (ev represents event and ts represents task, INDEX (must be a positive integer) "
+            + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + "ts 1 p/high bd/050517";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in WhatsLeft.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in WhatsLeft.";
+    public static final String MESSAGE_DIFFERENT_DEADLINE = "Cannot edit Deadline into Task or Event";
+    public static final String MESSAGE_DIFFERENT_TASK = "Cannot edit Task into Event or Deadline";
+    public static final String MESSAGE_DIFFERENT_EVENT = "Cannot edit Event into Deadline or Task";
 
-    private final int filteredPersonListIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
-
+    private final int filteredActivityListIndex;
+    private final EditEventDescriptor editEventDescriptor;
+    private final EditTaskDescriptor editTaskDescriptor;
+    private final String type;
+    //@@author A0110491U
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredActivityListIndex the index of the activity in the filtered activity list to edit
+     * @param editEventDescriptor details to edit the event with
+     * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
-        assert filteredPersonListIndex > 0;
-        assert editPersonDescriptor != null;
+    public EditCommand(int filteredActivityListIndex, EditEventDescriptor editEventDescriptor,
+            EditTaskDescriptor editTaskDescriptor, String type) {
+        assert filteredActivityListIndex > 0;
+        assert editEventDescriptor != null;
+        assert editTaskDescriptor != null;
+        assert type != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
-
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        // converts filteredActivityListIndex from one-based to zero-based.
+        this.filteredActivityListIndex = filteredActivityListIndex - 1;
+        this.type = type;
+        this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
+        List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
+        if (type.equals("ev")) {
+            if (filteredActivityListIndex >= lastShownEventList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+            }
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            ReadOnlyEvent eventToEdit = lastShownEventList.get(filteredActivityListIndex);
+            Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
+            try {
+                model.updateEvent(filteredActivityListIndex, editedEvent);
+            } catch (UniqueEventList.DuplicateEventException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+            }
+            model.updateFilteredListToShowAll();
+            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, eventToEdit));
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        if (type.equals("ts")) {
+            if (filteredActivityListIndex >= lastShownTaskList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+            }
 
-        try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredActivityListIndex);
+            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            try {
+                model.updateTask(filteredActivityListIndex, editedTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+            model.updateFilteredListToShowAll();
+            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
         }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit));
+
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
+     * edited with {@code editActivityDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Task createEditedTask(ReadOnlyTask taskToEdit,
+                                             EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(
+            taskToEdit::getDescription);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
+        EndTime updatedByTime = editTaskDescriptor.getByTime().orElseGet(taskToEdit::getByTime);
+        ByDate updatedByDate = editTaskDescriptor.getByDate().orElseGet(taskToEdit::getByDate);
+        Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Task(updatedDescription, updatedPriority, updatedByDate,
+                updatedByTime, updatedLocation, updatedTags);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
+     * edited with {@code editActivityDescriptor}.
      */
-    public static class EditPersonDescriptor {
-        private Optional<Name> name = Optional.empty();
-        private Optional<Phone> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
-        private Optional<Address> address = Optional.empty();
+    private static Event createEditedEvent(ReadOnlyEvent eventToEdit,
+                                             EditEventDescriptor editEventDescriptor) {
+        assert eventToEdit != null;
+
+        Description updatedDescription = editEventDescriptor.getDescription().orElseGet(
+            eventToEdit::getDescription);
+        StartTime updatedStartTime = editEventDescriptor.getStartTime().orElseGet(eventToEdit::getStartTime);
+        StartDate updatedStartDate = editEventDescriptor.getStartDate().orElseGet(eventToEdit::getStartDate);
+        EndTime updatedEndTime = editEventDescriptor.getEndTime().orElseGet(eventToEdit::getEndTime);
+        EndDate updatedEndDate = editEventDescriptor.getEndDate().orElseGet(eventToEdit::getEndDate);
+        Location updatedLocation = editEventDescriptor.getLocation().orElseGet(eventToEdit::getLocation);
+        UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(eventToEdit::getTags);
+
+        return new Event(updatedDescription, updatedStartDate, updatedEndDate,
+                updatedStartTime, updatedEndTime, updatedLocation, updatedTags);
+    }
+    /**
+     * Stores the details to edit the activity with. Each non-empty field value will replace the
+     * corresponding field value of the activity.
+     */
+    public static class EditEventDescriptor {
+        private Optional<Description> description = Optional.empty();
+        private Optional<StartTime> starttime = Optional.empty();
+        private Optional<StartDate> startdate = Optional.empty();
+        private Optional<EndTime> endtime = Optional.empty();
+        private Optional<EndDate> enddate = Optional.empty();
+        private Optional<Location> location = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditEventDescriptor() {}
 
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            this.name = toCopy.getName();
-            this.phone = toCopy.getPhone();
-            this.email = toCopy.getEmail();
-            this.address = toCopy.getAddress();
+        public EditEventDescriptor(EditEventDescriptor toCopy) {
+            this.description = toCopy.getDescription();
+            this.starttime = toCopy.getStartTime();
+            this.startdate = toCopy.getStartDate();
+            this.endtime = toCopy.getEndTime();
+            this.enddate = toCopy.getToDate();
+            this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
 
@@ -111,43 +175,139 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.starttime, this.endtime,
+                    this.startdate, this.enddate, this.location, this.tags);
         }
 
-        public void setName(Optional<Name> name) {
-            assert name != null;
-            this.name = name;
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
         }
 
-        public Optional<Name> getName() {
-            return name;
+        public Optional<Description> getDescription() {
+            return description;
         }
 
-        public void setPhone(Optional<Phone> phone) {
-            assert phone != null;
-            this.phone = phone;
+        public void setStartTime(Optional<StartTime> starttime) {
+            this.starttime = starttime;
         }
 
-        public Optional<Phone> getPhone() {
-            return phone;
+        public Optional<StartTime> getStartTime() {
+            return starttime;
         }
 
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        public void setStartDate(Optional<StartDate> startdate) {
+            this.startdate = startdate;
         }
 
-        public Optional<Email> getEmail() {
-            return email;
+        public Optional<StartDate> getStartDate() {
+            return startdate;
         }
 
-        public void setAddress(Optional<Address> address) {
-            assert address != null;
-            this.address = address;
+        public void setEndTime(Optional<EndTime> endtime) {
+            this.endtime = endtime;
         }
 
-        public Optional<Address> getAddress() {
-            return address;
+        public Optional<EndTime> getEndTime() {
+            return endtime;
+        }
+
+        public void setEndDate(Optional<EndDate> enddate) {
+            this.enddate = enddate;
+        }
+
+        public Optional<EndDate> getEndDate() {
+            return enddate;
+        }
+
+        public void setLocation(Optional<Location> location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return location;
+        }
+
+        public void setTags(Optional<UniqueTagList> tags) {
+            assert tags != null;
+            this.tags = tags;
+        }
+
+        public Optional<UniqueTagList> getTags() {
+            return tags;
+        }
+    }
+
+    /**
+     * Stores the details to edit the Task with. Each non-empty field value will replace the
+     * corresponding field value of the activity.
+     */
+    public static class EditTaskDescriptor {
+        private Optional<Description> description = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
+        private Optional<ByDate> bydate = Optional.empty();
+        private Optional<ByTime> bytime = Optional.empty();
+        private Optional<Location> location = Optional.empty();
+        private Optional<UniqueTagList> tags = Optional.empty();
+
+        public EditTaskDescriptor() {}
+
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            this.description = toCopy.getDescription();
+            this.priority = toCopy.getPriority();
+            this.bydate = toCopy.getByDate();
+            this.bytime = toCopy.getByTime();
+            this.location = toCopy.getLocation();
+            this.tags = toCopy.getTags();
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyPresent(this.description,
+                    this.bydate, this.bytime, this.priority, this.location, this.tags);
+        }
+
+        public void setDescription(Optional<Description> description) {
+            assert description != null;
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return description;
+        }
+
+        public void setByTime(Optional<ByTime> bytime) {
+            this.bytime = bytime;
+        }
+
+        public Optional<ByTime> getByTime() {
+            return bytime;
+        }
+
+        public void setByDate(Optional<ByDate> bydate) {
+            this.bydate = bydate;
+        }
+
+        public Optional<ByDate> getByDate() {
+            return bydate;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
+        }
+
+        public void setLocation(Optional<Location> location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return location;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

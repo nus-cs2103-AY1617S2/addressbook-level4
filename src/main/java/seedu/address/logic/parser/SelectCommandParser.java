@@ -12,7 +12,7 @@ import seedu.address.logic.commands.SelectCommand;
  * Parses input arguments and creates a new SelectCommand object
  */
 public class SelectCommandParser {
-
+    //@@author A0110491U
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
      * and returns an SelectCommand object for execution.
@@ -24,7 +24,13 @@ public class SelectCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
 
-        return new SelectCommand(index.get());
+        Optional<String> type = ParserUtil.parseType(args);
+        if (!type.isPresent()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        }
+
+        return new SelectCommand(index.get(), type.get());
     }
 
 }
