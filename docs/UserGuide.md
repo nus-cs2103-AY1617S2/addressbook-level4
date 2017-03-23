@@ -47,7 +47,8 @@ All the features of the application can be accessed through the use of a keyboar
 
 ### 3.1. Switch Display Task Window : `switch`
 
-Changes the displayed task list.
+For when you want to view different sets of tasks.<br>
+Changes the displayed task list.<br>
 Format: `switch WINDOWIDENTIFIER`
 
 > * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
@@ -65,6 +66,7 @@ Example:
 
 ### 3.2. Viewing help : `help`
 
+For when you need assistance for inputting commands.<br>
 Shows commands which are in the system.<br>
 Format: `help`
 
@@ -72,6 +74,7 @@ Format: `help`
 
 ### 3.3. Adding a task: `add`
 
+For when you have a task you need to remember.<br>
 Adds a task to the todo list<br>
 Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
@@ -96,6 +99,7 @@ Examples:
 
 ### 3.4. Viewing tasks
 
+For when you need to see your tasks.<br>
 View all tasks in the todo list<br>
 Format: `list`
 > * A list of tasks will always be displayed.
@@ -104,6 +108,7 @@ Format: `list`
 
 ### 3.5. Updating a task : `update`
 
+For when you need to update or fix a previously entered task.<br>
 Updates an existing task in the todo list.<br>
 Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
 
@@ -146,6 +151,7 @@ Examples:
 
 ### 3.7. Deleting a task : `delete`
 
+For when your task is no longer necessary.<br>
 Deletes the specified task from the todo list.<br>
 Format: `delete INDEX(ES)`
 
@@ -168,6 +174,7 @@ Examples:
 
 ### 3.8. Complete or Make Incomplete a Task : `mark`
 
+For when you need to indicate that a task is finished or not.<br>
 Marks a task to be complete or incomplete. <br>
 Format: `mark [complete/incomplete] INDEX(ES)`
 
@@ -186,6 +193,7 @@ Example:
 
 ### 3.9. Add a Tag to a Task : `tag`
 
+For when you want to differentiate your tasks by categories.<br>
 Adds a tag or multiple tags to an existing task. <br>
 Format: `tag INDEX TAG...`
 
@@ -200,6 +208,7 @@ Example:
 
 ### 3.10. Remove a Tag from a Task : `untag`
 
+For when you want to remove a category from a task.<br>
 Removes a tag or multiple tags from an existing task. <br>
 Format: `untag INDEX TAG...`
 
@@ -214,12 +223,13 @@ Example:
 
 ### 3.11. Clearing all entries : `clear`
 
+For when you want to start from a clean slate.<br>
 Clears all entries from the todo list.<br>
-Useful for when you want to start from a clean slate.<br>
 Format: `clear`
 
 ### 3.12. Undo a command : `undo`
 
+For when you accidentally entered a wrong command.<br>
 Undoes previous commands by the user.<br>
 Format: `undo [NUMBER]`
 
@@ -238,6 +248,7 @@ Examples:
 
 ### 3.13. Redo a command : `redo`
 
+For when you accidentally undo a correct command.<br>
 Redo previously undone commands by the user.<br>
 Format: `redo [NUMBER]`
 
@@ -259,6 +270,7 @@ Examples:
 
 ### 3.14. Viewing previous commands and accessing them : `history`
 
+For when you want to check what you have previously entered.<br>
 Shows previous commands entered. <br>
 Format: `history`
 
@@ -275,6 +287,7 @@ Examples:
 
 ### 3.15. Add alias for any phrase: `alias`
 
+For when you want a shortcut for entering a command.<br>
 Adds an alias for a phrase. <br>
 Format: `alias ALIAS PHRASE`
 
@@ -291,6 +304,7 @@ Example:
 
 ### 3.16. Delete alias for commands: `unalias`
 
+For when you want to remove a shortcut for entering a command.<br>
 Removes an alias for a command. <br>
 Format: `unalias ALIAS`
 
@@ -301,6 +315,7 @@ Example:
 
 ### 3.17. View aliases for commands: `viewalias`
 
+For when you want to see all your shortcuts you entered.<br>
 Views aliases in the system. <br>
 Format: `viewalias`
 
@@ -313,11 +328,13 @@ Example:
 
 ### 3.18. Saving the data
 
+For you to be able to keep your list, even if you close and re-open the application.<br>
 Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ### 3.19. Change storage location for save data: `save`
 
+For when you want to switch the save location of the application, such as if you are moving it to a Dropbox folder.<br>
 Changes the location for the storage file used in this system. <br>
 Warning: If a file with the requested name already exists, it will be overwritten. <br>
 Format: `save NEWFILELOCATION`
@@ -332,6 +349,7 @@ Example:
 
 ### 3.20. Change storage location for load data: `load`
 
+For when you want to switch the load location of the application, such as when you want to load the data from a file in Dropbox.<br>
 Changes the location for the storage file used in this system. <br>
 Format: `load NEWFILELOCATION`
 
@@ -346,6 +364,7 @@ Example:
 
 ### 3.21. Exiting the program : `exit`
 
+For when you are done with the application.<br>
 Exits the program.<br>
 Format: `exit/quit`
 
