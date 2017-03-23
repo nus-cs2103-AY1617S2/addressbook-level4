@@ -50,22 +50,31 @@ public class EditCommandParser {
             if (startTime.isPresent() && endTime.isPresent()) {
                 try {
                     DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-                    editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
-                    editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                    if (!startTime.get().equals("")) {
+                        editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
+                    }
+                    if (!endTime.get().equals("")) {
+                        editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                    }
                 } catch (NoSuchElementException | ParseException e) {
 
                 }
             } else if (endTime.isPresent() && !startTime.isPresent()) {
                 try {
-                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-                    editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                    if (!endTime.get().equals("")) {
+                        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
+                        editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                    }
                 } catch (NoSuchElementException | ParseException e) {
 
                 }
+            } else if (startTime.isPresent() && startTime.get().equals("")) { //change event to deadline
+                    //editTodoDescriptor.setStartTime(Optional.empty());
             }
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTodoDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            if (!editTodoDescriptor.isAnyFieldEdited()) {
+
+            if (!editTodoDescriptor.isAnyFieldEdited() && !startTime.isPresent() && !endTime.isPresent()) {
                 return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
             }
 

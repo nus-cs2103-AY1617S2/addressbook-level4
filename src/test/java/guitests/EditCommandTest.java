@@ -40,6 +40,72 @@ public class EditCommandTest extends TodoListGuiTest {
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
     }
+    //dog = new TodoBuilder().withName("Walk the dog").withTags("petcare").build();
+    //essay = new TodoBuilder().withName("Write essay").withEndTime("6:00PM 11/11/2017").build();
+    //toilet = new TodoBuilder().withName("Go to the bathroom").withStartTime("12:00PM 11/11/2017")
+    //.withEndTime("1:00PM 11/11/2017").build();
+    @Test
+    public void editTaskToDeadLineWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "e/6:00AM 17/11/2011";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").
+                withEndTime("6:00AM 17/11/2011").withTags("petcare").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editDeadLineToTaskWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "e/";
+        int addressBookIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editEventToTaskWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/ e/";
+        int addressBookIndex = 9;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editTaskToEventWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/6:00AM 18/11/2011 e/6:00AM 17/11/2011";
+        int addressBookIndex = 1;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Walk the dog").withStartTime("6:00AM 18/11/2011").
+                withEndTime("6:00AM 17/11/2011").withTags("petcare").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editDeadLineToEventWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/6:00AM 18/11/2011 e/6:00AM 17/11/2011";
+        int addressBookIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withStartTime("6:00AM 18/11/2011").
+                withEndTime("6:00AM 17/11/2011").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void editEventToDeadLineWithoutOtherChangeSuccess() throws Exception {
+        String detailsToEdit = "s/ e/1:00PM 11/11/2017";
+        int addressBookIndex = 9;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").withEndTime("1:00PM 11/11/2017").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
+    }
 
     @Test
     public void editTaskToDeadLineSuccess() throws Exception {
@@ -85,7 +151,7 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void editEventToDeadLineSuccess() throws Exception {
-        String detailsToEdit = "Bobbye/6:00AM 17/11/2011 t/husband";
+        String detailsToEdit = "Bobby e/6:00AM 17/11/2011 t/husband";
         int addressBookIndex = 9;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").

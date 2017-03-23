@@ -83,6 +83,9 @@ public class EditCommand extends Command {
                     editTodoDescriptor.getEndTime().get(), updatedTags);
         } else if (!editTodoDescriptor.getStartTime().isPresent() && editTodoDescriptor.getEndTime().isPresent()) {
             return new Todo(updatedName, editTodoDescriptor.getEndTime().get(), updatedTags);
+        } else if (editTodoDescriptor.getStartTime().isPresent() && !editTodoDescriptor.getEndTime().isPresent()
+                && editTodoDescriptor.getStartTime().get().equals("")) { // event to deadline
+            return new Todo(updatedName, todoToEdit.getEndTime(), updatedTags);
         } else {
             return new Todo(updatedName, updatedTags);
         }
@@ -112,11 +115,11 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             if (!this.startTime.isPresent() && !this.endTime.isPresent()) {
-                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags);
+                return CollectionUtil.isAnyPresent(this.name, this.tags);
             } else if (!this.startTime.isPresent() && this.endTime.isPresent()) {
                 return CollectionUtil.isAnyPresent(this.name, this.endTime, this.tags);
             } else {
-                return CollectionUtil.isAnyPresent(this.name, this.tags);
+                return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags);
             }
         }
 
