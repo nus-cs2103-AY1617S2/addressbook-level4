@@ -15,8 +15,11 @@ import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.ListCompletedCommand;
+import seedu.taskmanager.logic.commands.MarkCommand;
 import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
+import seedu.taskmanager.logic.commands.UnmarkCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 
 /**
@@ -32,7 +35,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -74,6 +78,15 @@ public class Parser {
 
         case ChangeSaveLocationCommand.COMMAND_WORD:
             return new ChangeSaveLocationCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
+
+        case ListCompletedCommand.COMMAND_WORD:
+            return new ListCompletedCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

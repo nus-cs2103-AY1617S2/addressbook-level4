@@ -49,6 +49,8 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
 
+    void markTask(int filteredTaskListIndex) throws DuplicateTaskException;
+
     /**
      * Returns the filtered task list as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -63,5 +65,12 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+
+    /**
+     * Updates the filter of the filtered task list to filter by completed tasks
+     */
+    void updateFilteredTaskListToShowByCompletion(boolean bool);
+
+    void unmarkTask(int filteredTaskListIndex) throws DuplicateTaskException;
 
 }

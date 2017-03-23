@@ -119,6 +119,21 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    @Override
+    public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
+
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.markTask(taskManagerIndex, true);
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
+
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.markTask(taskManagerIndex, false);
+        indicateTaskManagerChanged();
+    }
     // =========== Filtered Person List Accessors
     // =============================================================
 
@@ -129,12 +144,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        // filteredTasks.setPredicate(null);
+        updateFilteredTaskListToShowByCompletion(false);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowByCompletion(boolean isComplete) {
+        updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(isComplete)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -202,4 +223,22 @@ public class ModelManager extends ComponentManager implements Model {
             return "task name=" + String.join(", ", taskKeyWords);
         }
     }
+
+    private class CompletedQualifier implements Qualifier {
+        private boolean isComplete;
+
+        CompletedQualifier(boolean isComplete) {
+            this.isComplete = isComplete;
+        }
+
+        public boolean run(ReadOnlyTask task) {
+            return (task.getIsMarkedAsComplete().equals(isComplete));
+        }
+
+        @Override
+        public String toString() {
+            return "task name=" + String.join(", ", "w");
+        }
+    }
+
 }
