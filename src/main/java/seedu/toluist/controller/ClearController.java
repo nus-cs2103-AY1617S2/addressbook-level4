@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * UnknownCommandController is responsible for rendering the initial UI

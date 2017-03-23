@@ -14,10 +14,10 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.controller.commons.IndexParser;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Mark Controller is responsible for marking task complete or incomplete
@@ -45,6 +45,7 @@ public class MarkController extends Controller {
 
         if (indexes.isEmpty()) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX));
+            return;
         }
 
         CommandResult commandResult;

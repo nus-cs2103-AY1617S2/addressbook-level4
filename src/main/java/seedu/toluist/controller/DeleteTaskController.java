@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * DeleteTaskController is responsible for deleting a task

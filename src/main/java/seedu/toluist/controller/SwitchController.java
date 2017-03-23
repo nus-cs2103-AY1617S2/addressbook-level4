@@ -6,10 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.SwitchConfig;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Handle switch tab command
@@ -32,6 +32,7 @@ public class SwitchController extends Controller {
 
         if (keyword == null) {
             uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB));
+            return;
         }
 
         Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
@@ -39,6 +40,7 @@ public class SwitchController extends Controller {
         if (!switchPredicateOptional.isPresent()) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword)));
+            return;
         }
 
         String messageTemplate = uiStore.getTasks().size() == TodoList.load().getTasks().size()

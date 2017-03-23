@@ -20,24 +20,22 @@ public class CommandBox extends UiView {
     public CommandBox(Dispatcher dispatcher) {
         super(FXML);
         this.dispatcher = dispatcher;
-        UiStore.getInstance().bind(this, UiStore.getInstance().getObservableCommandText());
+        UiStore store = UiStore.getInstance();
+        store.bind(this, store.getObservableCommandText());
     }
 
     @Override
     protected void viewDidMount () {
         FxViewUtil.makeFullWidth(getRoot());
         FxViewUtil.makeFullWidth(commandTextField);
-        commandTextField.setText(UiStore.getInstance().getObservableCommandText().getValue());
+        UiStore store = UiStore.getInstance();
+        commandTextField.setText(store.getObservableCommandText().getValue());
+        commandTextField.end();
     }
 
     @FXML
     private void handleCommandInputEntered() {
         dispatcher.dispatchRecordingHistory(commandTextField.getText());
-        UiStore.getInstance().setCommandText("");
-    }
-
-    @FXML
-    private void handleCommandInputChanged() {
-        UiStore.getInstance().setCommandText(commandTextField.getText());
+        commandTextField.setText("");
     }
 }

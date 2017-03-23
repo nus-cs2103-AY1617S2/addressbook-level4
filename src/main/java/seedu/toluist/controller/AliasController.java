@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.AliasTable;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Alias Controller is responsible for handling alias requests
@@ -31,6 +31,7 @@ public class AliasController extends Controller {
         if (aliasConfig.isReservedWord(alias)) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias)));
+            return;
         }
 
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {

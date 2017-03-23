@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.AliasTable;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Alias Controller is responsible for handling unalias requests
@@ -28,6 +28,7 @@ public class UnaliasController extends Controller {
 
         if (!aliasConfig.isAlias(alias)) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias)));
+            return;
         }
 
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {

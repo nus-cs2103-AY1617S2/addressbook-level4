@@ -3,7 +3,7 @@ package seedu.toluist.controller;
 import java.util.HashMap;
 
 import seedu.toluist.commons.core.Messages;
-import seedu.toluist.dispatcher.CommandResult;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * UnknownCommandController is responsible for rendering the initial UI

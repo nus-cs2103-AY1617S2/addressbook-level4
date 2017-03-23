@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 import seedu.toluist.commons.core.LogsCenter;
 
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received

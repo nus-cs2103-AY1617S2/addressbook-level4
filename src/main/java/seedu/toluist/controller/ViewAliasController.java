@@ -7,8 +7,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import seedu.toluist.commons.core.Config;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.AliasTable;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Alias Controller is responsible for handling viewalias requests

@@ -10,8 +10,8 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.FileUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for saving-related task
@@ -31,12 +31,14 @@ public class StoreController extends Controller {
 
         if (path == null) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            return;
         }
 
         Config config = Config.getInstance();
         if (config.getTodoListFilePath().equals(path)) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            return;
         }
 
         String message = "";

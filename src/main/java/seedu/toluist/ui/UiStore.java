@@ -8,14 +8,15 @@ import java.util.stream.Collectors;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
+import seedu.toluist.ui.commons.CommandResult;
 import seedu.toluist.ui.view.UiView;
 
 /**
@@ -31,7 +32,7 @@ public class UiStore {
     private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
-    private ObjectProperty<String> observableCommandText = new SimpleObjectProperty<>("");
+    private SimpleStringProperty observableCommandText = new SimpleStringProperty("");
 
     public static UiStore getInstance() {
         if (instance == null) {
@@ -57,7 +58,7 @@ public class UiStore {
      * @param observableValue an observable value
      */
     public void bind(UiView view, ObservableValue<?> observableValue) {
-        observableValue.addListener(c -> view.render());
+        observableValue.addListener(c ->  view.render());
     }
 
     public void setObservableSwitchPredicate(TaskSwitchPredicate switchPredicate) {
@@ -78,7 +79,7 @@ public class UiStore {
     }
 
     public void setCommandText(String commandText) {
-        observableCommandText.setValue(commandText);
+        observableCommandText.set(commandText);
     }
 
     public ObservableValue<CommandResult> getObservableCommandResult() {

@@ -9,9 +9,9 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.DataStorageException;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for loading-related task
@@ -29,6 +29,7 @@ public class LoadController extends Controller {
 
         if (path == null) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            return;
         }
 
         Config config = Config.getInstance();
@@ -36,6 +37,7 @@ public class LoadController extends Controller {
         if (oldStoragePath.equals(path)) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            return;
         }
 
         // Attemp to load from new storage

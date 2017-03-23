@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 import javafx.util.Pair;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for redo-related task
