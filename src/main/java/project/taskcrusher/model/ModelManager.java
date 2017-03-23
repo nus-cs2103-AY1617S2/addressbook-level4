@@ -34,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private static final boolean LIST_EMPTY = true;
 
     /**
      * Initializes a ModelManager with the given userInbox and userPrefs.
@@ -71,17 +72,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void indicateIfEventListToShowIsEmpty() {
         if (filteredEvents.isEmpty()) {
-            raise(new EventListToShowUpdatedEvent(true));
+            raise(new EventListToShowUpdatedEvent(LIST_EMPTY));
         } else {
-            raise(new EventListToShowUpdatedEvent(false));
+            raise(new EventListToShowUpdatedEvent(!LIST_EMPTY));
         }
     }
 
     private void indicateIfTaskListToShowIsEmpty() {
         if (filteredTasks.isEmpty()) {
-            raise(new TaskListToShowUpdatedEvent(true));
+            raise(new TaskListToShowUpdatedEvent(LIST_EMPTY));
         } else {
-            raise(new TaskListToShowUpdatedEvent(false));
+            raise(new TaskListToShowUpdatedEvent(!LIST_EMPTY));
         }
     }
 
