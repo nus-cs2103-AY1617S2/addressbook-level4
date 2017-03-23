@@ -86,7 +86,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateTaskListPredicate();
     }
 
-    private void setCurrentComparator(String type) {
+    public void setCurrentComparator(String type) {
         switch (type) {
         case "date":
             break;
@@ -98,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
             break;
         }
         setAddressBookState();
+        indicateAddressBookStateChanged();
     }
 
     /**
