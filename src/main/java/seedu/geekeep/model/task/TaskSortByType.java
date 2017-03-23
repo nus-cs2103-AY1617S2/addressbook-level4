@@ -12,6 +12,9 @@ public class TaskSortByType implements Comparator<ReadOnlyTask> {
         if (thisTask.isFloatingTask() && otherTask.isDeadline()) {
             return -1;
         }
+        if (thisTask.isFloatingTask() && otherTask.isEvent()) {
+            return 1;
+        }
         if (thisTask.isDeadline() && (otherTask.isEvent() || otherTask.isFloatingTask())) {
             return 1;
         }
