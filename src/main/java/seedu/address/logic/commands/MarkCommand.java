@@ -72,7 +72,6 @@ public class MarkCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToMark}
      * marked with {@code markTaskDescriptor}.
-     * 
      * @throws IllegalValueException
      */
     private static Task createMarkedTask(ReadOnlyTask taskToMark) throws IllegalValueException {

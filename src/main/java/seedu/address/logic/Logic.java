@@ -12,7 +12,6 @@ import seedu.address.model.person.ReadOnlyTask;
 public interface Logic {
     /**
      * Executes the command and returns the result.
-     * 
      * @param commandText
      *            The command as entered by the user.
      * @return the result of the command execution.
