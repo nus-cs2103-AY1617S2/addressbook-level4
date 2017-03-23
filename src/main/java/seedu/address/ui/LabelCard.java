@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 
 public class LabelCard extends UiPart<Region> {
 
-    private static final String FXML = "LabelListCard.fxml";
+    private static final String FXML = "LabelCard.fxml";
 
     @FXML
     private Label labelText;

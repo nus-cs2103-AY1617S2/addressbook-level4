@@ -295,7 +295,7 @@ Vbox, SplitPane {
     -fx-border-width: 0 0 1 0;
 }
 
-#taskListView .track {
+#taskListView .track, #labelListView .track {
     -fx-border-color: #fafafa;
     -fx-background-color: #fafafa;
 }
@@ -304,6 +304,13 @@ Vbox, SplitPane {
     -fx-border-width: 0;
     -fx-background-insets: 0;
     -fx-padding: 1 0 0 0;
+}
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
 }
 
 #taskListView .list-cell:filled:selected:focused, #taskListView .list-cell:filled:selected {

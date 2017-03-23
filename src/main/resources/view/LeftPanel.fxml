@@ -54,7 +54,7 @@
                      </HBox.margin></FontAwesomeIconView>
                </children>
             </HBox>
-            <ListView fx:id="labelListView" />
+            <ListView maxHeight="1200.0" prefHeight="1200.0"  fx:id="labelListView" />
          </children>
       </VBox>
    </children>
