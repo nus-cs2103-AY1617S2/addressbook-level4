@@ -40,7 +40,7 @@ This guide will help you get started with the commands and features of GeeKeep.
 	> Having any Java 8 version is not enough. <br>
    This app will not work with earlier versions of Java 8.
 
-2. Download the latest taskmanager.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
+2. Download the latest geekeep.jar from the [releases](https://github.com/CS2103JAN2017-W15-B4/main/releases) tab.
 3. Move the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app. You should see the UI appear in a few seconds.
     <br><br>
