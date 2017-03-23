@@ -25,10 +25,10 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby d/91234567 p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Babby d/91234567 p/1 i/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Bobby").withDate("91234567")
+        TestTask editedTask = new TaskBuilder().withTitle("Babby").withDate("91234567")
                 .withPriority("1").withInstruction("Block 123, Bobby Street 3")
                 .withTags("husband").build();
 
@@ -61,12 +61,12 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Elle");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Elise";
         int filteredTaskListIndex = 2;
         int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Elise").build();
 
         assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
     }

@@ -251,7 +251,7 @@ public class LogicManagerTest {
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
+                String.format(ListCommand.MESSAGE_SUCCESS, ListCommand.COMPARATOR_NAME_PRIORITY),
                 expectedAB,
                 expectedList);
     }
@@ -382,9 +382,9 @@ public class LogicManagerTest {
         Task p3 = helper.generateTaskWithTitle("key key");
         Task p4 = helper.generateTaskWithTitle("KEy sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
+        List<Task> fourTasks = helper.generateTaskList(p4, p2, p1, p3);
         AddressBook expectedAB = helper.generateAddressBook(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(p3, p4);
+        List<Task> expectedList = helper.generateTaskList(p4, p3);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",

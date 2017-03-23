@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
- * @author ryuus
  * A list of Tasks that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
@@ -78,6 +78,10 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
         return taskFoundAndDeleted;
+    }
+
+    public void sortTaskList(Comparator<ReadOnlyTask> comparator) {
+        internalList.sort(comparator);
     }
 
     public void setTasks(UniqueTaskList replacement) {

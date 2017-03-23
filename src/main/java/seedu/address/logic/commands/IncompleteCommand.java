@@ -62,6 +62,6 @@ public class IncompleteCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        return new CommandResult(String.format(MESSAGE_MARK_INCOMPLETE_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_MARK_INCOMPLETE_SUCCESS, editedTask));
     }
 }
