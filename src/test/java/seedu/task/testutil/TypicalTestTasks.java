@@ -6,6 +6,7 @@ import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collecti
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
@@ -61,12 +62,14 @@ public class TypicalTestTasks {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
-        try {
-            tm.setTasks(asList(new TypicalTestTasks().getTypicalTasks()));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
-                assert false : "not possible";
-        } catch (IllegalValueException ive) {
-                assert false : "not possible";
+        for (TestTask task : asList(new TypicalTestTasks().getTypicalTasks())) {
+            try {
+                tm.addTask(new Task(task));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
+                    assert false : "not possible";
+            } catch (IllegalValueException ive) {
+                    assert false : "not possible";
+            }
         }
     }
 
@@ -95,6 +98,7 @@ public class TypicalTestTasks {
         loadTaskManagerWithSampleData(tm);
         return tm;
     }
+
     public static ArrayList<TestTask> asList(TestTask[] testTasks) {
         ArrayList<TestTask> testTaskList = new ArrayList<>();
         for (TestTask tt : testTasks) {

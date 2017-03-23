@@ -43,8 +43,8 @@ public class Location {
     /**
      * Returns true if a given string is a valid task email.
      */
-    public static boolean isValidLocation(String test) {
-        return test.matches(LOCATION_VALIDATION_REGEX);
+    public static boolean isValidLocation(String input) {
+        return input.matches(LOCATION_VALIDATION_REGEX);
     }
 
     @Override

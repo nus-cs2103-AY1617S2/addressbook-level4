@@ -40,8 +40,8 @@ public class Remark {
     /**
      * Returns if a given string is a valid task remark.
      */
-    public static boolean isValidRemark(String test) {
-        return test.matches(REMARK_VALIDATION_REGEX);
+    public static boolean isValidRemark(String input) {
+        return input.matches(REMARK_VALIDATION_REGEX);
     }
 
     @Override

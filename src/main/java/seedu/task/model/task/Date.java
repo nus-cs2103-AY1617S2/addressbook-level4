@@ -22,7 +22,7 @@ public class Date {
                                                         + " MM/DD/YY or MM-DD-YY";
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
     private final java.util.Date value;
-    private static PrettyTimeParser p = new PrettyTimeParser();
+    private static PrettyTimeParser pretty = new PrettyTimeParser();
 
     //Allows an empty constructor
     public Date() {
@@ -47,7 +47,7 @@ public class Date {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
 
-            List<java.util.Date> dates = p.parse(date);
+            List<java.util.Date> dates = pretty.parse(date);
             Calendar cal = Calendar.getInstance(); // locale-specific
             cal.setTime(dates.get(0));
             cal.set(Calendar.SECOND, 0);
@@ -62,7 +62,7 @@ public class Date {
      */
     public static boolean isValidDate(String input) {
 
-        List<java.util.Date> dates = p.parse(input);
+        List<java.util.Date> dates = pretty.parse(input);
 
         if (dates.isEmpty()) {
             return false;

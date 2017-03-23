@@ -218,7 +218,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.allocate();
         TaskManager expectedTM = new TaskManager();
-        expectedTM.addTask(toBeAdded);
+        expectedTM.addTaskToFront(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
@@ -474,6 +474,7 @@ public class LogicManagerTest {
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
             addToTaskManager(taskManager, numGenerated);
+            taskManager.sortTaskList();
             return taskManager;
         }
 
@@ -499,7 +500,7 @@ public class LogicManagerTest {
          */
         void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
-                taskManager.addTask(p);
+                taskManager.addTaskToFront(p);
             }
         }
 
@@ -528,7 +529,6 @@ public class LogicManagerTest {
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTask(i));
             }
-//            Collections.sort(tasks, new TaskComparator());
             return tasks;
         }
 

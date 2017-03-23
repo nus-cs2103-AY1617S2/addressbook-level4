@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,14 +81,12 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     public void done(int index) {
-    // TODO Auto-generated method stub
         Task taskDone = internalList.get(index);
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
 
-    public void Undone(int index) {
-        // TODO Auto-generated method stub
+    public void undone(int index) {
         Task taskUnDone = internalList.get(index);
         taskUnDone.setIsDone(false);
         internalList.set(index, taskUnDone);
@@ -133,6 +132,10 @@ public class UniqueTaskList implements Iterable<Task> {
 
     @Override
     public boolean equals(Object other) {
+        ObservableList<Task> list1 = this.internalList;
+        list1.sort(new TaskComparator());
+        ObservableList<Task> list2 = ((UniqueTaskList) other).internalList;
+        list2.sort(new TaskComparator());
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
                 && this.internalList.equals(

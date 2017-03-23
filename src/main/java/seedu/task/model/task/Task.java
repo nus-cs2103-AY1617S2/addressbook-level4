@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         Location location, UniqueTagList tags, boolean isDone) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, remark, location, tags);
 
-        if (!checkDates(startDate, endDate)) {
+        if (!isValidDates(startDate, endDate)) {
             throw new IllegalValueException(MESSAGE_TASK_CONSTRAINTS);
         }
 
@@ -53,7 +53,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * @return true if one of two dates is null. if both not null, only returns
      *         true if startDate is strictly before endDate
      */
-    private boolean checkDates(Date startDate, Date endDate) {
+    private boolean isValidDates(Date startDate, Date endDate) {
         return (startDate.isNull() || endDate.isNull()) ? true
                 : startDate.getDateValue().before(endDate.getDateValue());
     }
