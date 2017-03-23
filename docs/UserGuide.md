@@ -232,7 +232,7 @@ Example:
 * **Mark as Done** : `done INDEX`
    e.g. `done 1`
    
-* **Clear** : `clear` <br>
+* **Clear Done Task** : `clear` <br>
    e.g. `clear`
 
 * **Delete** : `delete INDEX` <br>
