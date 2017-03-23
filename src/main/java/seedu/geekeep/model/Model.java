@@ -61,7 +61,7 @@ public interface Model {
      * @throws IndexOutOfBoundsException
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
     /** Mark the specified task as done */

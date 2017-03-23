@@ -89,15 +89,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskListIndex, editedTask);
-
+        taskManager.updateTask(taskToEdit, editedTask);
         indicateTaskManagerChanged();
     }
 
