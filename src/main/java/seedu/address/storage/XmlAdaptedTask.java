@@ -9,6 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
@@ -29,6 +30,7 @@ public class XmlAdaptedTask {
     private String address;
     @XmlElement(required = true)
     private String status;
+    private String priority;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -66,8 +68,9 @@ public class XmlAdaptedTask {
         }
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
+        final Priority priority = new Priority(this.priority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final Status status = new Status(Integer.parseInt(this.status));
-        return new Task(name, time, tags, status);
+        return new Task(name, time, priority, tags, status);
     }
 }

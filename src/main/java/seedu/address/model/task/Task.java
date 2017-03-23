@@ -17,16 +17,18 @@ public class Task implements ReadOnlyTask {
     private Email email;
     private Address address;
     private Status status;
-
     private UniqueTagList tags;
+    private Priority priority;
 
     /**
      * Every field must be present and not null.
+     * @param priority
      */
-    public Task(Name name, Time time, UniqueTagList tags, Status status) {
-        assert !CollectionUtil.isAnyNull(name, time, tags,status);
+    public Task(Name name, Time time, Priority priority, UniqueTagList tags, Status status) {
+        assert !CollectionUtil.isAnyNull(name, time, priority, tags, status);
         this.name = name;
         this.time = time;
+        this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = status;
     }
@@ -35,7 +37,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTime(), source.getTags(), source.getStatus());
+        this(source.getName(), source.getTime(), source.getPriority(), source.getTags(), source.getStatus());
     }
 
     public void setName(Name name) {
@@ -51,6 +53,16 @@ public class Task implements ReadOnlyTask {
     public void setTime(Time time) {
         assert time != null;
         this.time = time;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
     }
 
     @Override
