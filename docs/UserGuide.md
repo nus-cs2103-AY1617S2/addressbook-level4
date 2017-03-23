@@ -1,6 +1,6 @@
 # Task Manager - User Guide
 
-By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -38,12 +38,12 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters must be in the specified order.
+> * Parameters can be in any order.
 
-> **Date and Time Format**
+> **DATETIME Format**
 >
-> A wide variety of date and time format is accepted.
-> Some examples are:
+> Watodo uses the external library Natty Date Parser to parse date and time options.
+> Some examples of the acceptable formats are:
 > * `2017-02-23` (yyyy-mm-dd) <br>
 > * `04/05` (mm/dd) <br>
 > * `today` <br>
@@ -72,23 +72,25 @@ Examples:
 
 * `add read Lord of The Rings #personal`
 
-### 2.2.2. Adding a deadline
+### 2.2.2. Adding a task with a deadline
 
-Format: `add TASK by DATETIME [#TAG]...`
+Format: `add TASK by/ DATETIME [#TAG]...` <br>
+     OR `add TASK on/ DATETIME [#TAG]...`
 
 Examples:
 
-* `add prepare meeting slides by tomorrow 9am #impt #work`
-* `add send budget proposal by next Thurs noon to boss #project A`
+* `add prepare meeting slides by/ tomorrow 9am #impt #work`
+* `add send budget proposal on/ Thurs noon to boss #project A`
 
 ### 2.2.3. Adding an event
 
-Format: `add TASK from START_DATETIME to END_DATETIME [#TAG]...`
+Format: `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...` <br>
+     OR `add TASK on/ START_DATETIME to/ END_DATE_TIME [#TAG]...`
 
 Examples:
 
-* `add attend skills upgrading workshop from 05/12 to 05/16`
-* `add meeting at board room 4 from 10am to 11am t/project A #meetings`
+* `add attend skills upgrading workshop from/next mon to/ 05/16`
+* `add meeting at board room 4 from/ 10am to/ 11am #project A #meetings`
 
 ### 2.3. Listing tasks by type : `list LIST_TYPE`
 
