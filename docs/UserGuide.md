@@ -4,10 +4,10 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Quick Start](#1-quick-start)
-2. [Features](#2-features)
-3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary)
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+3. [FAQ](#faq)
+4. [Command Summary](#command-summary)
 
 ## 1. Quick Start
 
@@ -76,36 +76,55 @@ Examples:
 Shows a list of all tasks in the task scheduler.<br>
 Format: `list all`
 
-### 2.5. Finding all tasks containing any keyword : `list`
+### 2.5. Listing tasks containing any keyword in attributes: `list by`
 
 Shows the tasks that are linked to a specific string or a specific date.<br>
-Format: `list KEYWORD [MORE_KEYWORDS]...`
+Format: `list by ATTRIBUTE KEYWORD [MORE_KEYWORDS]...`
 
-Where KEYWORD can be a title, part of a description, tag or a date
-> * The list search is case sensitive. e.g `School` will not match `school`
+Where ATTRIBUTE can be location, date, timing, done, tag
+Where KEYWORD can be any string that the user wants to list
+> * The list search is not case sensitive. e.g `School` will match `school`
+> * The order of the keywords does not matter. e.g. `singapore Work` will match `Work singapore`
+> * Only location will be searched.
+> * Only full words will be matched e.g. `Singa` will not match `Singapore`
+> * Tasks matching at least one keyword will be returned e.g. `meeting` will match `meeting MarinaSands`
+
+Examples:
+
+* `list by location My School`<br>
+  Returns `School`, `My`
+* `list by tag date1 tag2 Task3`<br>
+  Returns any task that has the tags of the keywords `date1` , `tag2`  or `Task3`
+  
+### 2.6 Finding tasks containing any keyword in title and description: `find`
+
+Shows the tasks that are linked to a specific string. <br>
+Format: `find KEYWORD [MORE KEYWORD]`
+
+Where KEYWORD can be a title or part of a description
+> * The find search is not case sensitive. e.g `School` will match `school`
 > * The order of the keywords does not matter. e.g. `calling Bob` will match `Bob calling`
-> * Titles, descriptions, dates, timings and tags will be searched.
+> * Titles and description will be searched.
 > * Only full words will be matched e.g. `home` will not match `homework`
 > * Tasks matching at least one keyword will be returned e.g. `meeting` will match `meeting Bob`
 
 Examples:
 
-* `List My Task`<br>
+* `find My Task`<br>
   Returns `My Task` but not `task`
-* `list date1 tag2 Task3`<br>
+* `find date1 tag2 Task3`<br>
   Returns any task having any of the keywords `date1` , `tag2`  or `Task3`
 
-### 2.6. Editing a task : `edit`
+### 2.7. Editing a task : `edit`
 
 Edits an existing task in the task scheduler.<br>
-Format: `edit INDEX [b/DEADLINE s/TIME d/DESCRIPTION t/TAGS]`
+Format: `edit INDEX [b/DEADLINE s/TIME e/TIME d/DESCRIPTION t/TAGS]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
@@ -116,7 +135,7 @@ Examples:
 * `edit 2 Math Homework t/`<br>
   Edits the name of the 2nd task to be Math Homework and clears all existing tags.
 
-### 2.7. Deleting a task : `delete`
+### 2.8. Deleting a task : `delete`
 
 Deletes the specified task from the task scheduler.<br>
 Format: `delete INDEX`
@@ -134,8 +153,23 @@ Examples:
 * `list Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
+  
+### 2.9 Mark task as done : `mark`
 
-### 2.8. Clearing all done items : `clear done`
+Marks the specified task from the task scheduler as done.
+Format: `mark INDEX`
+
+> Marks the task at the specified `INDEX` as done. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive interger** 1, 2, 3, ...
+> The index must be within the specified list of indexes available
+
+Examples:
+
+* `mark 1`<br>
+  Marks the 1st task in the task scheduler as done.
+
+### 2.10. Clearing all done tasks : `clear done`
 
 Clears all done tasks from TaskManager <br>
 Format: `clear done tasks`
@@ -144,18 +178,18 @@ Format: `clear done events`
 Clears all done items from TaskManager <br>
 Format: `clear done`
 
-### 2.9. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.12. Saving the data
 
 Task Scheduler data are saved in the hard disk automatically after any command that changes the data.<br>
 
 There is no need to save manually.
 
-### 2.11. Undo : `undo`
+### 2.13. Undo : `undo`
 
 Undo the last command that was performed in the task scheduler
 Format: `undo`
@@ -169,7 +203,7 @@ Example:
 * `undo`
    Undoes the delete that was just done
 
-### 2.12. Redo : `redo`
+### 2.14. Redo : `redo`
 
 Redo an undone command in the task scheduler
 Format: `redo`
