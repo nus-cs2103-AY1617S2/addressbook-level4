@@ -1,5 +1,6 @@
 package seedu.watodo.testutil;
 
+import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
@@ -12,31 +13,59 @@ import seedu.watodo.model.task.TaskStatus;
 public class TestTask implements ReadOnlyTask {
 
     private Description description;
-    private DateTime dateTime;
+    private DateTime startDate;
+    private DateTime endDate;
+    private TaskStatus status; //Default status of any new task created is UNDONE
     private UniqueTagList tags;
 
-    public TestTask() {
-        tags = new UniqueTagList();
+    public TestTask() {};
+
+    /* Constructs a Floating TestTask object from a given description. */
+    public TestTask(Description description, UniqueTagList tags) {
+        this(description, null, null, tags);
     }
 
+    /* Constructs a Deadline TestTask object from a given description. */
+    public TestTask(Description description, DateTime deadline, UniqueTagList tags) {
+        this(description, null, deadline, tags);
+    }
+
+    /* Constructs an Event TestTask object from a given description. */
+    public TestTask(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, tags);
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.status = TaskStatus.UNDONE;
+    }
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.description = personToCopy.getDescription();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this(taskToCopy.getDescription(), taskToCopy.getStartDate(), taskToCopy.getEndDate(), taskToCopy.getTags());
     }
 
-    public void setName(Description name) {
-        this.description = name;
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
     }
 
-    public void setPhone(DateTime phone) {
-        this.dateTime = phone;
+    public void setStartDate(DateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
+    public void setEndDate(DateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    /* Changes the current status of the task. */
+    public void setStatus(TaskStatus newStatus) {
+        this.status = newStatus;
+    }
+
+    public void setTags(UniqueTagList replacement) {
+        tags.setTags(replacement);
     }
 
     @Override
@@ -45,37 +74,44 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public DateTime getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public DateTime getEndDate() {
+        return endDate;
+    }
+
+    @Override
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    @Override
     public UniqueTagList getTags() {
-        return tags;
+        return new UniqueTagList(tags);
     }
 
     @Override
     public String toString() {
-        return getAsText();
+        final StringBuilder builder = new StringBuilder(); //TO DO the timing
+        builder.append(getAsText());
+        if (startDate != null) {
+            builder.append("\nStart: ").append(startDate);
+        }
+        if (endDate != null) {
+            builder.append("\nEnd: ").append(endDate);
+        }
+        return builder.toString();
     }
 
     public String getAddCommand() {
+        //TO DO update
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().fullDescription + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 
-    @Override
-    public DateTime getStartDate() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public DateTime getEndDate() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public TaskStatus getStatus() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

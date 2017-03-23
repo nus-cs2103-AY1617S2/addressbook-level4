@@ -202,8 +202,9 @@ public class LogicManagerTest {
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB, expectedAB.getTaskList());
-
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
+                             String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                             expectedAB, expectedAB.getTaskList());
     }
 
     @Test
