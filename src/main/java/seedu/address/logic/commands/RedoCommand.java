@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.StateManager;
 
@@ -14,7 +15,7 @@ public class RedoCommand extends Command {
     private final StateManager stateManager = StateManager.getInstance();
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         if (stateManager.redoStackHasCommands()) {
             stateManager.redo();
             return new CommandResult(MESSAGE_SUCCESS);
