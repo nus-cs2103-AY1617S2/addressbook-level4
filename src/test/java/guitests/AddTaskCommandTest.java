@@ -24,6 +24,8 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             new IllegalArgumentException("Description must not be empty.");
     private static IllegalArgumentException illegalArgumentException2 =
             new IllegalArgumentException("Start date must be before end date.");
+    private static IllegalArgumentException illegalArgumentException3 =
+            new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
     private Tag tag3 = new Tag("tag3");
@@ -161,5 +163,22 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
         assertFalse(isTaskShown(task4));
+    }
+
+    @Test
+    public void addTaskWithInvalidPriorityLevel_shouldNotBeCreated() {
+        String taskDescription = "attend CS2103T tutorial";
+        String command = "add " + taskDescription + " priority/high low";
+        commandBox.runCommand(command);
+        Task task1 = new Task(taskDescription);
+        Task task2 = new Task(taskDescription);
+        task2.setTaskPriority(TaskPriority.HIGH);
+        assertFalse(isTaskShown(task1));
+        assertFalse(isTaskShown(task2));
+
+        command = "add " + taskDescription + " priority/";
+        commandBox.runCommand(command);
+        assertFalse(isTaskShown(task1));
+        assertFalse(isTaskShown(task2));
     }
 }

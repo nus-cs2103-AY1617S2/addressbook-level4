@@ -313,4 +313,23 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(new TypicalTestTodoLists().getTypicalTasks()[1]));
         assertTrue(isTaskShown(task));
     }
+
+    @Test
+    public void updateTaskWithInvalidPriorityLevel_shouldNotBeUpdated() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        String command = "add " + taskDescription;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " priority/high low";
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+
+        command = "update " + eventIndex + " priority/";
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+    }
 }
