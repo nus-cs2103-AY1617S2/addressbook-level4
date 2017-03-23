@@ -113,9 +113,10 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         // update event start date and end date
         LocalDateTime newStartDate = DateTimeUtil.parseDateString("22 Mar 2017, 12pm");
         LocalDateTime newEndDate = DateTimeUtil.parseDateString("22 Mar 2017, 1pm");
-        command = "update " + eventIndex + " from/" + newStartDate + " to/" + newEndDate;
+        command = "update " + eventIndex + " from/" + newStartDate + " to/" + newEndDate + " priority/high";
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, newStartDate, newEndDate);
+        task2.setTaskPriority(TaskPriority.HIGH);
         assertFalse(isTaskShown(task));
         assertTrue(isTaskShown(task2));
 
@@ -124,6 +125,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         command = "update " + eventIndex + " " + newTaskDescription;
         commandBox.runCommand(command);
         Task task3 = new Task(newTaskDescription, newStartDate, newEndDate);
+        task3.setTaskPriority(TaskPriority.HIGH);
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertTrue(isTaskShown(task3));
@@ -133,11 +135,10 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime newerStartDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
         command = "update " + eventIndex + " " + newerTaskDescription +
-                  " priority/high to/" + newerEndDate + " tags/tag1 "  + " from/" + newerStartDate;
+                  " priority/low to/" + newerEndDate + " tags/tag1 "  + " from/" + newerStartDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerStartDate, newerEndDate);
         task4.replaceTags(new ArrayList<>(Arrays.asList(tag1)));
-        task4.setTaskPriority(TaskPriority.HIGH);
         assertFalse(isTaskShown(task));
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
