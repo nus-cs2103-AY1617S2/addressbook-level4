@@ -28,6 +28,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.time = taskToCopy.getTime();
+        this.clockTime = taskToCopy.getClockTime();
         this.tags = taskToCopy.getTags();
     }
 
@@ -37,6 +38,11 @@ public class TestTask implements ReadOnlyTask {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    //@@author A0143873Y
+    public void setClockTime(ClockTime clockTime) {
+        this.clockTime = clockTime;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -72,6 +78,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getTime().value + " ");
+        sb.append("c/" + this.getClockTime().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

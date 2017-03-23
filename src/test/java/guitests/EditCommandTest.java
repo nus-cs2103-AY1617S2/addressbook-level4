@@ -27,11 +27,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Alice Pauline d/04/06/2013 t/husband";
+        String detailsToEdit = "Alice Pauline d/04/06/2013 c/13:40 t/husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Alice Pauline").withTime("04/06/2013")
-                .withTags("husband").build();
+                .withClockTime("13:40").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
