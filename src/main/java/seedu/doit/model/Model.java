@@ -67,14 +67,15 @@ public interface Model {
      * Updates the filter of the filtered task list to filter by the given
      * keywords
      */
-    void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords,
-            Set<String> descriptionKeywords, Set<String> tagKeywords);
+    void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords, Set<String> descriptionKeywords,
+            Set<String> tagKeywords);
 
     /**
      * Set how the tasks are sorted
      */
     void sortBy(String sortType);
 
+    // @@author A0138909R
     /**
      * Undo the previous undoable command.
      *
@@ -84,7 +85,6 @@ public interface Model {
      */
     void undo() throws EmptyTaskManagerStackException;
 
-
     /**
      * Reverse the undo command.
      *
@@ -93,5 +93,11 @@ public interface Model {
      * @throws EmptyTaskManagerStackException
      */
     void redo() throws EmptyTaskManagerStackException;
+
+    /**
+     * Clears all the data into a data with no tasks
+     */
+    void clearData();
+    // @@author
 
 }
