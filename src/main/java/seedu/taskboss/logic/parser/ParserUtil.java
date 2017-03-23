@@ -116,7 +116,7 @@ public class ParserUtil {
 
     //@@author A0143157J
     /**
-     * Parses a {@code Optional<String> dateTime into an {@code Optional<DateTime>}
+     * Parses an {@code Optional<String>} dateTime into an {@code Optional<DateTime>}
      * if {@code dateTime} is present.
      */
     public static Optional<DateTime> parseDateTime(Optional<String> dateTime) {

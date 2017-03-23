@@ -19,6 +19,7 @@ import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.task.DateTime;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -47,8 +48,15 @@ public class EditCommandParser {
             editTaskDescriptor.setName(ParserUtil.parseName(argsTokenizer.getValue(PREFIX_NAME)));
             editTaskDescriptor.setPriorityLevel(ParserUtil.
                     parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editTaskDescriptor.setStartDateTime(ParserUtil.
-                    parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
+
+            Optional<DateTime> tempStartDateTimeOp = ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE));
+            // if user input is "edit INDEX sd/", we remove the current startDateTime
+            if (!tempStartDateTimeOp.isPresent() && args.contains("sd/")) {
+                editTaskDescriptor.setStartDateTime(Optional.of(new DateTime("")));
+            } else {
+                editTaskDescriptor.setStartDateTime(ParserUtil.
+                        parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
+            }
             editTaskDescriptor.setEndDateTime(ParserUtil.
                     parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE)));
             editTaskDescriptor.setInformation(ParserUtil.parseInformation

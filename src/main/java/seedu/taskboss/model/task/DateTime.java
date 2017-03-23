@@ -26,6 +26,7 @@ public class DateTime {
         this.isDateInferred = false;
         this.isTimeInferred = false;
         this.date = null;
+        this.value = EMPTY_STRING;
         String trimmedDate = date.trim();
         if (!isValidDateTime(trimmedDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
@@ -76,9 +77,10 @@ public class DateTime {
         // No time provided by user
         if (this.isTimeInferred()) {
             this.value = sdfToday.format(this.date);
-        } else {
+        } else if (!this.value.equals(EMPTY_STRING)) {
             this.value = sdfGeneral.format(this.date);
         }
+
         return this.value;
     }
 
