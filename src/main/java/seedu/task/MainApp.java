@@ -21,6 +21,7 @@ import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
+import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -69,6 +70,7 @@ public class MainApp extends Application {
         initEventsCenter();
 
         storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(model.getTaskManager(), true));
+        logic.execute(ListByNotDoneCommand.COMMAND_WORD_1);
     }
 
     private String getApplicationParameter(String parameterName) {

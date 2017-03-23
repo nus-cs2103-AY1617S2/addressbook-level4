@@ -41,9 +41,22 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(0, toAdd);// the most recently added task will be displayed at the top
+        internalList.add(toAdd);// the most recently added task will be displayed at the top
     }
 
+    /**
+     * Adds a task to the front of list.
+     *
+     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     */
+    public void addToFront(Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(0, toAdd);// the most recently added task will be displayed at the top
+    }
+    
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
