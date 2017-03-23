@@ -30,9 +30,9 @@ public class Title {
     public Title(String title) throws IllegalValueException {
         assert title != null;
         String trimmedTitle= title.trim();
-        if (!isValidTitle(trimmedTitle)) {
-            throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
-        }
+        //if (!isValidTitle(trimmedTitle)) {
+          //  throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
+        //}
         this.title = trimmedTitle;
     }
 
