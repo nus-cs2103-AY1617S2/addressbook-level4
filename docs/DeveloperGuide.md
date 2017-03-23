@@ -1,6 +1,6 @@
 # Watodo - Developer Guide
 
-By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -146,7 +146,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/watodo/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -171,7 +171,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -192,7 +192,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Task List data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -509,7 +509,7 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -532,6 +532,7 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 Pros:
 
 * Supports many variations of keywords for time and dates (eg. next week, 3 days, everyday etc.)
+* Nice interface that highlights the date arguments, tags and priorities as they can entered
 * Shortcut keys such as for adding and finding allow use of mouse clicks to be minimized
 * Auto-complete when adding tags helps to increase efficiency of usage
 * Can add a variety of tags (category, priority) to tasks to organize them better
@@ -541,12 +542,9 @@ Pros:
 
 Cons:
 
-* Requires Internet connection and web browser to use
-* Requires logging in to account which means there is an extra step to launch the software
 * Certain features (eg. sync with calendar, customize theme) are only available with paid subscription
 * Most other functions are not command line interface friendly (Eg. edit, mark as complete require mouse clicks)
 * No help feature to guide new users to keywords like date and time. Need to refer to the user guide.
-* If user backspaces after typing a keyword but retypes it again for the same task, the date will not be registered anymore, which gives little allowance if users type wrongly.
 
 **HiTask**
 

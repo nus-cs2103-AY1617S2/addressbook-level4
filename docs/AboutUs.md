@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Andrew Sugiarto](https://github.com/azraelos) <br>
 <img src="images/azraelos.png" width="150"><br>
 * **Role:** UI <br>
-* **Responsibilities:** <br>
+* **Responsibilities:** Code quality <br>
 * **Features implemented:** <br>
 * **Code written:** <br>
 * **Other major contributions:** <br>
@@ -17,7 +17,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Ching Hui Qi](http://github.com/hqching)
 <img src="images/hqching.png" width="150"><br>
 * **Role:** Logic <br>
-* **Responsibilities:** <br>
+* **Responsibilities:** Scheduling and tracking <br>
 * **Features implemented:** <br>
 * **Code written:** <br>
 * **Other major contributions:** <br>
@@ -27,7 +27,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Megan Quek](http://github.com/megan-quek)
 <img src="images/megan-quek.png" width="150"><br>
 * **Role:** Storage <br>
-* **Responsibilities:** <br>
+* **Responsibilities:** Testing, Documentation <br>
 * **Features implemented:** <br>
 * **Code written:** <br>
 * **Other major contributions:** <br>
@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Mervyn Yee](http://github.com/mervynyeezl)
 <img src="images/mervynyeezl.png" width="150"><br>
 * **Role:** Model <br>
-* **Responsibilities:** <br>
+* **Responsibilities:** Team lead, Deliverables and deadlines, Integration <br>
 * **Features implemented:** <br>
 * **Code written:** <br>
 * **Other major contributions:** <br>
