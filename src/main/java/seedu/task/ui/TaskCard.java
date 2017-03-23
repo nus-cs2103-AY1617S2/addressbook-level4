@@ -46,18 +46,18 @@ public class TaskCard extends UiPart<Region> {
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
-            done.setText("Done");
-            done.setTextFill(Color.GREEN);
+            //done.setText("Done");
+            name.setTextFill(Color.GREEN);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
             name.setGraphic(new ImageView(image));
             name.setContentDisplay(ContentDisplay.RIGHT);
             //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         } else {
-            done.setText("Not Done");
-            done.setTextFill(Color.RED);
-            Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
-            name.setGraphic(new ImageView(image));
-            name.setContentDisplay(ContentDisplay.RIGHT);
+            //done.setText("Not Done");
+            //done.setTextFill(Color.RED);
+            //Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
+            //name.setGraphic(new ImageView(image));
+            //name.setContentDisplay(ContentDisplay.RIGHT);
             //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         }
         remark.setText(task.getRemark().value);
