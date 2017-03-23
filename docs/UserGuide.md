@@ -50,12 +50,13 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add NAME [s/START_TIME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
+Format: `add NAME [s/START_TIME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES] [c/COMPLETION]...`
 
 > * Task can have a start time
 > * Task can have a deadline
 > * Task can have a priority ranking from 1 - 5
 > * Task can have any number of tags (including 0)
+> * Task can be completed or uncompleted
 > * Task can have a note
 
 Examples:
@@ -141,8 +142,8 @@ Format: `find [name NAME] [deadline DEADLINE] [priority PRIORITY] [completion CO
 
 Examples:
 
-* `find t/CS2103`<br>
-Retrieve all tasks with the tag CS2103.
+* `find deadline 5 pm`<br>
+Retrieve all tasks with the deadline at 5pm.
 
 ### 2.9. Undo a recent command: `undo`
 
@@ -190,8 +191,8 @@ There is no need to save manually.
 * **Redo** : `redo` <br>
   e.g. `redo`
 
-* **Find** : `find [d/DEADLINE] [p/PRIORITY] [t/TAG]` <br>
-  e.g. `find t/CS2103`
+* **Find** : `find [deadline DEADLINE]` <br>
+  e.g. `find deadline 5 pm`
 
 * **Mark** : `mark INDEX` <br>
   e.g.`mark 2`
