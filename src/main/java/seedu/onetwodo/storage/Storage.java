@@ -22,13 +22,16 @@ public interface Storage extends ToDoListStorage, UserPrefsStorage {
 
     @Override
     String getToDoListFilePath();
+    
+    @Override
+    void setToDoListFilePath(String newFilePath);
 
     @Override
     Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException;
 
     @Override
     void saveToDoList(ReadOnlyToDoList toDoList) throws IOException;
-
+    
     /**
      * Saves the current version of the ToDo List to the hard disk.
      *   Creates the data file if it is missing.

@@ -41,9 +41,9 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected Storage storage;
+    protected static Storage storage;
     protected Model model;
-    protected Config config;
+    protected static Config config;
     protected UserPrefs userPrefs;
 
 
@@ -71,6 +71,14 @@ public class MainApp extends Application {
     private String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
+    }
+    
+    public static Config getConfig() {
+        return config;
+    }
+    
+    public static Storage getStorage() {
+        return storage;
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
