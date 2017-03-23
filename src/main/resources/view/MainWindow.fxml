@@ -10,62 +10,76 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <stylesheets>
-      <URL value="@DarkTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
+<VBox style="-fx-background-color: derive(#ffffff, -10%);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar VBox.vgrow="NEVER">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+      <HBox prefHeight="25.0" prefWidth="720.0">
+         <children>
+            <Label prefHeight="51.0" prefWidth="597.0" style="-fx-font-size: 40;" text="  JOBS">
+               <font>
+                  <Font name="LiSong Pro" size="50.0" />
+               </font>
+            </Label>
+            <MenuBar prefHeight="51.0" prefWidth="125.0" style="-fx-background-color: derive(#ffffff, -10%);">
+               <menus>
+                  <Menu mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                     </items>
+                  </Menu>
+               </menus>
+               <stylesheets>
+                  <URL value="@DarkTheme.css" />
+                  <URL value="@Extensions.css" />
+               </stylesheets>
+            </MenuBar>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="commandBoxPlaceholder" style="-fx-border-color: derive(black, 20%);" styleClass="anchor-pane" VBox.vgrow="NEVER">
          <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+            <Insets bottom="5.0" left="10.0" right="10.0" />
          </padding>
       </AnchorPane>
-       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" style="-fx-border-color: derive(black, 20%);" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
            <padding>
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
        </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" style="-fx-background-color: derive(#ffffff, -10%);" stylesheets="@DarkTheme.css" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="taskList" maxWidth="370.0" minWidth="370.0" prefWidth="370.0">
+            <VBox fx:id="taskList" maxWidth="370.0" minWidth="370.0" prefWidth="370.0" style="-fx-background-color: derive(black, 20%);">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <HBox minWidth="340.0" prefHeight="25.0" prefWidth="340.0">
+                  <HBox minWidth="370.0" prefHeight="25.0" prefWidth="370.0">
                      <children>
-                        <Label minWidth="26.0" prefWidth="26.0" text="No" />
-                        <Label maxWidth="149.0" minWidth="149.0" prefWidth="149.0" text="Task" />
-                        <Label maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="Start" />
-                        <Label prefWidth="85.0" text="End" textAlignment="CENTER" />
+                        <Label minWidth="26.0" prefWidth="26.0" style="-fx-text-fill: white;" text="No" />
+                        <Label maxWidth="149.0" minWidth="149.0" prefWidth="149.0" style="-fx-text-fill: white;" text="Task" />
+                        <Label maxWidth="90.0" minWidth="90.0" prefWidth="90.0" style="-fx-text-fill: white;" text="Start" />
+                        <Label maxWidth="90.0" minWidth="90.0" prefWidth="90.0" style="-fx-text-fill: white;" text="End" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <AnchorPane fx:id="browserPlaceholder" prefWidth="340">
+            <AnchorPane fx:id="browserPlaceholder" prefWidth="340" style="-fx-background-color: white;">
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
             </AnchorPane>
          </items>
       </SplitPane>
-      <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+      <AnchorPane fx:id="statusbarPlaceholder" style="-fx-background-color: derive(#ffffff, -10%);" VBox.vgrow="NEVER" />
    </children>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
 </VBox>

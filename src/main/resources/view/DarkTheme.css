@@ -5,7 +5,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "LiSong Pro";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
 
@@ -76,8 +76,8 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #000000 transparent #000000;
-    -fx-background-color: transparent, derive(#000000, 10%);
+    -fx-border-color: transparent  derive(#ffffff, -20%) transparent derive(#ffffff, -20%);
+    -fx-background-color: transparent,  derive(#ffffff, -30%);
 }
 
 .split-pane {
@@ -93,7 +93,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-text-fill: #d8d8d8;
 }
 
 .cell_big_label {
@@ -112,7 +112,7 @@
 
 .anchor-pane-with-border {
      -fx-background-color: derive(#000000, 20%);
-     -fx-border-color: derive(#000000, 10%);
+     -fx-border-color: derive(#000000, 20%);
      -fx-border-top-width: 1px;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .menu-bar {
@@ -166,9 +166,9 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "LiSong Pro";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
 
@@ -183,10 +183,10 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: derive(#ffffff, -10%);
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: derive(#ffffff, -10%);
     -fx-font-family: "LiSong Pro", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
@@ -199,7 +199,7 @@
 
 .button:pressed, .button:default:hover:pressed {
   -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+  -fx-text-fill: #d8d8d8;
 }
 
 .button:focused {
@@ -274,7 +274,6 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #d3d3d3;
     -fx-border-width: 1 1 1 1;
 }
 
@@ -285,6 +284,10 @@
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+}
+
+#taskListView {
+	-fx-background-color: derive(black, 20%);
 }
 
 #tags {

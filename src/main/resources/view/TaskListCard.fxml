@@ -6,21 +6,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-background-color: derive(black, 20%); -fx-border-color: derive(black, 15%);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox id="cardPane" fx:id="cardPane" alignment="CENTER_LEFT" prefHeight="25.0">
           <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="172.0" spacing="5">
+                  <HBox alignment="CENTER_LEFT" minWidth="172.0" prefWidth="172.0" spacing="5">
                       <children>
                           <HBox alignment="CENTER_LEFT">
-                              <Label fx:id="id" alignment="CENTER" prefWidth="25.0" styleClass="cell_big_label" />
-                              <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+                              <Label fx:id="id" alignment="CENTER" prefWidth="25.0" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_big_label" />
+                              <Label fx:id="name" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_big_label" text="\$first" />
                           </HBox>
                       </children>
                   </HBox>
-                  <Label fx:id="startTime" prefWidth="86.0" styleClass="cell_small_label" text="\$start time" />
-                  <Label fx:id="endTime" prefWidth="85.0" styleClass="cell_small_label" text="\$end time" />
+                  <Label fx:id="startTime" prefWidth="90.0" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_small_label" text="\$start time" />
+                  <Label fx:id="endTime" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_small_label" text="\$end time" />
           </children>
          <VBox.margin>
             <Insets />
@@ -29,7 +28,7 @@
       <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="200.0">
          <children>
             <Label prefWidth="27.0" />
-                  <Label fx:id="description" maxWidth="250.0" prefHeight="20.0" prefWidth="200.0" styleClass="cell_small_label" text="\$description" />
+                  <Label fx:id="description" maxWidth="290.0" prefHeight="20.0" prefWidth="200.0" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_small_label" text="\$description" />
                   <FlowPane fx:id="tags" alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="100.0" />
          </children>
       </HBox>
