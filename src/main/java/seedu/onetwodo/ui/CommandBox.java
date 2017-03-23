@@ -37,6 +37,12 @@ public class CommandBox extends UiPart<Region> {
         placeHolderPane.getChildren().add(commandTextField);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
+        setKeyListener(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                setStyleToIndicateCommandSuccess();
+            }
+        });
     }
 
     @FXML
