@@ -6,3 +6,15 @@
 #cardPane:done {
 	-fx-background-color: lightgray;
 }
+
+.label:LOW {
+	-fx-text-fill: lightgray;
+}
+
+.label:MEDIUM {
+	-fx-text-fill: orange;
+}
+
+.label:HIGH {
+	-fx-text-fill: red;
+}

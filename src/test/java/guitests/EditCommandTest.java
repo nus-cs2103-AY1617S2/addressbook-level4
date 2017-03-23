@@ -34,6 +34,7 @@ public class EditCommandTest extends ToDoListGuiTest {
         TestTask editedTask = new TaskBuilder().withName("GUARD duties")
                 .withStartDate("15-12-2018 7:30am").withEndDate("16-12-2018 11:30pm")
                 .withDescription("bring helmet")
+                .withPriority('l')
                 .withTags("army")
                 .build();
 

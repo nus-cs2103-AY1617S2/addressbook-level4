@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" style="-fx-border-color: white white lightgray white; -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" prefHeight="71.0" prefWidth="202.0" style="-fx-border-color: white white lightgray white; -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane stylesheets="@PanelTheme.css" HBox.hgrow="ALWAYS">
             <columnConstraints>
@@ -39,6 +39,11 @@
                                        <Label fx:id="name" styleClass="cell_big_label" stylesheets="@PanelTheme.css" text="\$first">
                                  <HBox.margin>
                                     <Insets top="6.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="priority" alignment="BOTTOM_LEFT" minWidth="40.0" styleClass="label-priority" text="\$p">
+                                 <HBox.margin>
+                                    <Insets left="3.0" top="9.0" />
                                  </HBox.margin>
                               </Label>
                                   </children>

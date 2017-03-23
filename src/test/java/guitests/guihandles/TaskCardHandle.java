@@ -107,9 +107,11 @@ public class TaskCardHandle extends GuiHandle {
         case TODO:
             break;
         }
-        return getFullName().equals(task.getName().fullName) && dateEquals
+        return getFullName().equals(task.getName().fullName)
+                && dateEquals
                 && getPriority().equals(task.getPriority().value)
-                && getDescription().equals(task.getDescription().value) && getTags().equals(getTags(task.getTags()));
+                && getDescription().equals(task.getDescription().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override

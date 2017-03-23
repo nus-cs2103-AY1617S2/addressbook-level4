@@ -8,8 +8,10 @@ import seedu.onetwodo.commons.exceptions.IllegalValueException;
  * valid as declared in {@link #isValidPriority(Char)}
  */
 public class Priority {
-
     public static final String PRIORITY_CONSTRAINTS = "Priority can only be high, medium or low";
+    public static final String HIGH_LABEL = "HIGH";
+    public static final String MEDIUM_LABEL = "MEDIUM";
+    public static final String LOW_LABEL = "LOW";
 
     public String value;
 
@@ -29,11 +31,11 @@ public class Priority {
                 throw new IllegalValueException(PRIORITY_CONSTRAINTS);
             } else {
                 if (firstLetter == 'H') {
-                    this.value = "HIGH";
+                    this.value = HIGH_LABEL;
                 } else if (firstLetter == 'M') {
-                    this.value = "MEDIUM";
+                    this.value = MEDIUM_LABEL;
                 } else {
-                    this.value = "LOW";
+                    this.value = LOW_LABEL;
                 }
             }
         } else {

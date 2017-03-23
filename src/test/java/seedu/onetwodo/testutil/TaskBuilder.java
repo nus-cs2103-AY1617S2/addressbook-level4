@@ -6,6 +6,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.StartDate;
 
 /**
@@ -57,6 +58,11 @@ public class TaskBuilder {
     public TestTask build() {
         this.task.initTaskType();
         return this.task;
+    }
+
+    public TaskBuilder withPriority(char c) throws IllegalValueException {
+        this.task.setPriority(new Priority(String.valueOf(c)));
+        return this;
     }
 
 }
