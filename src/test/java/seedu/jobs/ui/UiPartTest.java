@@ -28,7 +28,7 @@ public class UiPartTest {
 
     @Test
     public void constructor_nullFileUrl_throwsAssertionError() {
-        thrown.expect(AssertionError.class);
+        thrown.expect(IllegalStateException.class);
         new TestUiPart<Object>((URL) null);
     }
 
@@ -54,13 +54,13 @@ public class UiPartTest {
 
     @Test
     public void constructor_nullFileName_throwsAssertionError() {
-        thrown.expect(AssertionError.class);
+        thrown.expect(IllegalStateException.class);
         new TestUiPart<Object>((String) null);
     }
 
     @Test
     public void constructor_missingFileName_throwsAssertionError() {
-        thrown.expect(AssertionError.class);
+        thrown.expect(IllegalStateException.class);
         new TestUiPart<Object>(MISSING_FILE_PATH);
     }
 

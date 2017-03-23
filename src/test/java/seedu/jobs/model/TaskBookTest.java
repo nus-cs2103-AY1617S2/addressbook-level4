@@ -34,7 +34,7 @@ public class TaskBookTest {
 
     @Test
     public void resetData_null_throwsAssertionError() {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         taskBook.resetData(null);
     }
 
@@ -46,7 +46,7 @@ public class TaskBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
         List<Task> newTasks = Arrays.asList(new Task(td.CS3101), new Task(td.CS3101));

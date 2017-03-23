@@ -144,7 +144,7 @@ public class StringUtilTest {
 
     @Test
     public void getDetails_nullGiven_assertionError() {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         StringUtil.getDetails(null);
     }
 

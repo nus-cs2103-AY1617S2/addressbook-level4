@@ -28,7 +28,7 @@ public class ConfigUtilTest {
 
     @Test
     public void read_null_assertionFailure() throws DataConversionException {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         read(null);
     }
 
@@ -94,7 +94,7 @@ public class ConfigUtilTest {
 
     @Test
     public void save_nullFile_assertionFailure() throws IOException {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         save(new Config(), null);
     }
 
