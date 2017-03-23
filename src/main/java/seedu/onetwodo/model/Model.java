@@ -43,22 +43,26 @@ public interface Model {
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
-
+    
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Updates the filter of the filtered task list to display all undone tasks */
     void updateFilteredUndoneTaskList();
 
+    /** Updates the filter of the filtered task list to display all done tasks */
     void updateFilteredDoneTaskList();
 
+    /** Return the done status of particular task */
     DoneStatus getDoneStatus();
 
+    /** Set the done status of particular task */
     void setDoneStatus(DoneStatus doneStatus);
 
     void updateByDoneStatus();

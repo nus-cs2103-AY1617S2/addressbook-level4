@@ -146,7 +146,7 @@ public class ModelManager extends ComponentManager implements Model {
             throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
         }
     }
-
+    
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
