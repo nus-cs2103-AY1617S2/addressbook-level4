@@ -1,7 +1,7 @@
 # DoTomorrow
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T11-B4/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T11-B4/main)
-[![Build status](https://ci.appveyor.com/api/projects/status/577pgluuyspav7bx?svg=true)](https://ci.appveyor.com/project/evanyeung/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/577pgluuyspav7bx/branch/master?svg=true)](https://ci.appveyor.com/project/evanyeung/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T11-B4/main/badge.svg)](https://coveralls.io/github/CS2103JAN2017-T11-B4/main)
 
 <img src="docs/images/Ui.png" width="600"><br>
