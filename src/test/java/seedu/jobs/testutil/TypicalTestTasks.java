@@ -2,7 +2,6 @@ package seedu.jobs.testutil;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.TaskBook;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 
@@ -24,14 +23,16 @@ public class TypicalTestTasks {
                     .withTags("lectures").build();
             CS3103 = new TaskBuilder().withName("CS3103").withStartTime("17/03/2017 14:00")
                     .withEndTime("17/03/2017 16:00").withDescription("group project meeting").build();
-            CS3104 = new TaskBuilder().withName("CS3104").withStartTime("")
+
+            CS3104 = new TaskBuilder().withName("CS3104").withStartTime("17/03/2017 09:00")
                     .withEndTime("19/03/2017 23:59").withDescription("assignment 3 deadline").build();
-            CS3105 = new TaskBuilder().withName("CS3105").withStartTime("")
-                    .withEndTime("14/03/2017 23:49").withDescription("feedback deadline").build();
+            CS3105 = new TaskBuilder().withName("CS3105").withStartTime("14/03/2017 09:00")
+                    .withEndTime("14/03/2017 23:59").withDescription("feedback deadline").build();
             CS3106 = new TaskBuilder().withName("CS3106").withStartTime("14/03/2017 12:00")
-                    .withEndTime("").withDescription("group poeject meeting").build();
+                    .withEndTime("14/03/2017 16:00").withDescription("group poeject meeting").build();
             CS3107 = new TaskBuilder().withName("CS3107").withStartTime("01/04/2017 8:00")
-                    .withEndTime("").withDescription("consultation with tutor").build();
+                    .withEndTime("01/04/2017 10:00").withDescription("consultation with tutor").build();
+
 
             // Manually added
             CS4101 = new TaskBuilder().withName("CS4101").withStartTime("20/03/2017 8:00")
