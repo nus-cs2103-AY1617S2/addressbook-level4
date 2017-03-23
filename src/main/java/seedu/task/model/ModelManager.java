@@ -69,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
-    /** Raises an event to indicate the model has changed 
+    /** Raises an event to indicate the model has changed
      * @param shouldBackup */
     private void indicateTaskManagerChanged(boolean shouldBackup) {
         raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
@@ -99,7 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void UnDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
         taskManager.updateUnDone(taskManagerIndex, target);
         indicateTaskManagerChanged(true);
@@ -229,7 +229,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
             }
         }
-        
+
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);

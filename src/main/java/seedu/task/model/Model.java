@@ -32,7 +32,7 @@ public interface Model {
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Updates the task from done to undone */
-    void UnDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void unDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -66,7 +66,7 @@ public interface Model {
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
 
-	/** Changes the file path for data to be saved in */
+    /** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
 
     /** Changes the load path for data to be loaded from*/

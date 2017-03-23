@@ -184,12 +184,12 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 6. The `LogicManager` exectes the returned delete command, accessing `Model`, and then returns the `CommandResult` back to `UI`.
 
 
-#### Implemenation of `CommandLibrary` class: 
+#### Implemenation of `CommandLibrary` class:
 
-This class serves as an intermediate between the `Parser` class and other utility classes like `CliSyntax`, threreby decreasing the **coupling** between `Parser` and these utility classes. 
+This class serves as an intermediate between the `Parser` class and other utility classes like `CliSyntax`, threreby decreasing the **coupling** between `Parser` and these utility classes.
 
-The `CommandLibrary` class is implemented using the **singleton pattern** as one instance is sufficient and such practice prevents the program from creating too many unnucessary instances. 
- 
+The `CommandLibrary` class is implemented using the **singleton pattern** as one instance is sufficient and such practice prevents the program from creating too many unnucessary instances.
+
 #### Rationale behind various `Command` classes:
 
 KIT can accept various commands and correctly execute them by having different command classes such as `AddCommand`, `UndoCommand` and `ListByTagCommand`, each of which dedicated to handle specific instructions. Such practice allows KIT to have higher **cohesion**.
@@ -214,21 +214,21 @@ The `Model`,
 ## Task Object
 This section briefly describes the design of the task object.
 
-<img src="images/TaskClassDiagram"><br>
+<img src="images/TaskClassDiagram.png"><br>
 
-The task object represents a task in KIT. Each of its detail such as Name and Date are objects. 
+The task object represents a task in KIT. Each of its detail such as Name and Date are objects.
 
-This clean design allows us to do the verification of each value and specify the desired regex for each detail easily. 
+This clean design allows us to do the verification of each value and specify the desired regex for each detail easily.
 
 Task only verifies that startDate is before endDate and lets each individual class do their own verification. isDone represents whether a task is completed or not. As it's function is simple we do not create unnecessary objects.
 
 **Pretty Time**
 
-To implement natural language date parsing we incorporated [pretty time library](http://www.ocpsoft.org/prettytime/), an open source, date formatting library. 
+To implement natural language date parsing we incorporated [pretty time library](http://www.ocpsoft.org/prettytime/), an open source, date formatting library.
 
 We are using it to parse user input and obtain the the date in java.util.Date format. We also use it for the display of time in a more friendly manner such as:
 
-> "10 minutes from now" or "2 days from now" 
+> "10 minutes from now" or "2 days from now"
 
 ### 2.5. Storage component
 
@@ -298,7 +298,7 @@ This section describes the design process and implementation of undo/redo featur
 
 **Designs Considered**
 
-One of the design we considered for undo involves the Command pattern. The idea is to have a History class that stores a stack of Commands executed. Each Command will have an undo method that handles the undo for itself. For example, delete will remember the deleted task and the undo method will add it back. 
+One of the design we considered for undo involves the Command pattern. The idea is to have a History class that stores a stack of Commands executed. Each Command will have an undo method that handles the undo for itself. For example, delete will remember the deleted task and the undo method will add it back.
 
 When undo command is called, it can obtain the latest command from History and invoke it's undo method. An undo call is simple with this design, however each current Command and every new Command needs it's own individual implementation of undo method.
 
@@ -308,14 +308,14 @@ The downside is the extra storage space used. To reduce the downside, the backup
 
 **Implementation Details**
 
-1. Every command that modifies data raises a `TaskManagerChangedEvent` containing the TaskManager's data and a boolean flag indicating if a backup.xml should be saved. 
+1. Every command that modifies data raises a `TaskManagerChangedEvent` containing the TaskManager's data and a boolean flag indicating if a backup.xml should be saved.
 2. Storage listens to this event, check if a backup is needed and carry out the saving to xml file. Commands that will not backup are command such as list and find commands etc. Undo itself will not create a backup.
 3. When undo command is issued, storage reads backup.xml and undo pass the data to model to load it into memory.
 
 <img src="images/UndoHighLevelSequenceDiagram.png" width="300">
 
 **Future Improvements**
-Currently only one undo is implemented. Multiple undo and redo implementation are planned. 
+Currently only one undo is implemented. Multiple undo and redo implementation are planned.
 
 ### 3.4 Done/Undone task command implementation
 
@@ -516,7 +516,7 @@ Use case resumes from step 2.
 	Steps 1a1-1a2 are repeated until the input entered is of a correct form.
 	Use case resumes from step 2.
 
-#### use case: UC3 - Done task 
+#### use case: UC3 - Done task
 **Main sucess scenario**
 
     1. User enters listundone.
@@ -526,18 +526,18 @@ Use case resumes from step 2.
     5. User confirms action.
     6. KIT update the task from undone to done from the list and display status.
         use case ends.
-        
+		
 **Extensions**
 1a. KIT detects and error in the command.
->   1a1. KIT waits for another valid command. 
->   1a2. User enters the correct command. 
->   Steps 1a1-1a2 are repeated untill the command entered is valid. 
+>   1a1. KIT waits for another valid command.
+>   1a2. User enters the correct command.
+>   Steps 1a1-1a2 are repeated untill the command entered is valid.
 >   Use case resumes from step 2.
 
 3a.KIT detects an error in the command.
 >   3a1. KIT waits for another valid command.
 >   3a2. User enters the valid command.
->   Steps 3a1-3a2 are repeated untill the command entered is valid. 
+>   Steps 3a1-3a2 are repeated untill the command entered is valid.
 >   Use case resumes from step 4.
 
 #### Use case: UC3 - Delete task
@@ -584,11 +584,11 @@ Use case resumes from step 2.
   2a. KIT find no task with similar keyword or index
 > 2a1. KIT show an message that says no similar task
 	2a2. KIT waits for another valid command..
-    
+
 #### Use case: UC5 - List tasks by Tag
 **Main success scenario**
 
-    1.User enters Listtag with tag 
+    1.User enters Listtag with tag
     2.KIT display all tasks that contain the input tag.
 	Use case ends.
 

@@ -67,7 +67,7 @@ Here are some examples:
 * `add do 2103 project r/waiting for john’s reply e/next tuesday l/nus soc t/school`
 * `add buy presents s/two week before christmas e/christmas eve l/town t/shopping`
 * `add buy groceries r/cabbage and broccoli s/this weekend t/personal`
-* `add feed the cat\/dog t/personal t/family e/tomorrow 8am` 
+* `add feed the cat\/dog t/personal t/family e/tomorrow 8am`
 
 
 Supported Date/Time formats:
@@ -82,7 +82,7 @@ If you want to view all the tasks at once, simply use the list function(s).
 
 Description: Shows a list of all the tasks in KIT. <br>
 
-Format: `list`, `ls`, `l` 
+Format: `list`, `ls`, `l`
 
 ### 2.3.2	Listing of all done task: `listdone`
 Description: Shows a list of all the tasks that has been completed. <br>
@@ -247,7 +247,7 @@ In KIT, data are saved automatically after a change has been made. There is no n
 **A**: Sure, tasks with same names are allowed.
 
 **Q**: I accidentally created two exact same tasks, how do I remove just one of them?  <br>
-**A**: If you just added the task, you can do so by typing undo. Otherwise, you can use find or list to search for the duplicate tasks and delete one of them. 
+**A**: If you just added the task, you can do so by typing undo. Otherwise, you can use find or list to search for the duplicate tasks and delete one of them.
 The other task will remain in KIT. Instructions on these commands can be found in the respective section of the commands.
 
 **Q**: Can I manually edit the storage file?  <br>
@@ -262,4 +262,3 @@ The other task will remain in KIT. Instructions on these commands can be found i
 ## 4. Command Summary
 
 <img src="images/Command Summary.png" width="600">
-   
