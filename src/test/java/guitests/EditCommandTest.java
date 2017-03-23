@@ -45,7 +45,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Do HW 1");
 
-        String detailsToEdit = "Homework due";
+        String detailsToEdit = "title Homework due";
         int filteredTaskListIndex = 1;
         int addressBookIndex = 1;
 
