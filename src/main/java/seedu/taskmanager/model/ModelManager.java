@@ -82,7 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
-    
+
     // @@author A0131278H
     @Override
     public void sortTasks(String keyword) {

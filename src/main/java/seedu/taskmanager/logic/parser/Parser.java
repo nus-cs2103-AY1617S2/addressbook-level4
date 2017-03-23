@@ -32,7 +32,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -77,7 +78,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 

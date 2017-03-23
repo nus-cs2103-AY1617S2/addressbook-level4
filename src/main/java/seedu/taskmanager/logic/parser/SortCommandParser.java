@@ -18,22 +18,21 @@ import seedu.taskmanager.logic.commands.SortCommand;
 
 public class SortCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns an SortCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * SortCommand and returns an SortCommand object for execution.
      */
     public Command parse(String args) {
         assert args != null;
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         try {
             if (!matcher.matches()) {
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
-            
+
             // keywords delimited by whitespace
             final String[] keywords = matcher.group("keywords").split("\\s+");
             final List<String> keywordList = Arrays.asList(keywords);
-            
+
             // only the first keyword is processed
             return new SortCommand(keywordList.get(0));
         } catch (IllegalValueException ive) {

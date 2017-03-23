@@ -1,5 +1,8 @@
 package seedu.taskmanager.model.task;
 
+import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
+import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_ENDDATE;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -9,8 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.exceptions.DuplicateDataException;
 import seedu.taskmanager.commons.util.CollectionUtil;
-import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
-import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_ENDDATE;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
