@@ -111,11 +111,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
 
     public void setTasks(UniqueTaskList replacement) {
-        
-        // adds the most recent task in front
-//        for(Task t : replacement.internalList){
-//        this.internalList.add(0, t);
-//        }
         this.internalList.setAll(replacement.internalList);
     }
 
