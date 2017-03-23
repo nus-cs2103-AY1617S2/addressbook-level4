@@ -31,14 +31,7 @@ public class JsonStorage implements TodoListStorage {
         if (!saveNotAffectingHistory(todoList, storagePath)) {
             return false;
         }
-        // push current todo list json string into historyStack if the stack is empty
-
-        try {
-            historyStack.addLast(JsonUtil.toJsonString(todoList));
-        } catch (JsonProcessingException e) {
-            // Should not reach here
-            e.printStackTrace();
-        }
+        addToHistory(todoList);
         redoHistoryStack.clear();
 
         Config.getInstance().setTodoListFilePath(storagePath);
@@ -55,7 +48,7 @@ public class JsonStorage implements TodoListStorage {
             String jsonString = FileUtil.readFromFile(new File(storagePath));
             // push todo list json string into historyStack if the stack is empty
             if (historyStack.isEmpty()) {
-                historyStack.addLast(jsonString);
+                addToHistory(jsonString);
             }
             TodoList todoList = JsonUtil.fromJsonString(jsonString, TodoList.class);
 
@@ -112,6 +105,37 @@ public class JsonStorage implements TodoListStorage {
         return new Pair<>(todoList, times - steps);
     }
 
+    /**
+     * Add todolist data to history, making sure that no identical todo list data appear consecutively
+     * in history
+     * @param todoList TodoList object
+     */
+    public void addToHistory(TodoList todoList) {
+        try {
+            addToHistory(JsonUtil.toJsonString(todoList));
+        } catch (JsonProcessingException e) {
+            // Should not reach here
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Add json representation of todolist data to history, making sure that no identical todo list data
+     * appear consecutively in history
+     * @param jsonString json representation of todolist data
+     */
+    public void addToHistory(String jsonString) {
+        if (historyStack.isEmpty() || (!historyStack.getLast().equals(jsonString))) {
+            historyStack.addLast(jsonString);
+        }
+    }
+
+    /**
+     * Save todo list to data file, but does not add it to the history stack
+     * @param todoList todo list data
+     * @param storagePath data file path
+     * @return true if saving succeeds, otherwise false
+     */
     private boolean saveNotAffectingHistory(TodoList todoList, String storagePath) {
         try {
             String jsonString = JsonUtil.toJsonString(todoList);
@@ -122,6 +146,11 @@ public class JsonStorage implements TodoListStorage {
         }
     }
 
+    /**
+     * Get optional of TodoList from a json string
+     * @param json json serialisation for todo list data
+     * @return optional of todolist if the data can be deserialized successfully, otherwise Optional.empty()
+     */
     private Optional<TodoList> todoListFromJson(String json) {
         try {
             TodoList todoList = JsonUtil.fromJsonString(json, TodoList.class);
