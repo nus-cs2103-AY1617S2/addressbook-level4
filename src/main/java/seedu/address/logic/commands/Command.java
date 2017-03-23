@@ -6,15 +6,18 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Represents a command with hidden internal logic and the ability to be executed.
+ * Represents a command with hidden internal logic and the ability to be
+ * executed.
  */
 public abstract class Command {
     protected Model model;
 
     /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
+     * Constructs a feedback message to summarise an operation that displayed a
+     * listing of persons.
      *
-     * @param displaySize used to generate summary
+     * @param displaySize
+     *            used to generate summary
      * @return summary message for persons displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
@@ -25,15 +28,16 @@ public abstract class Command {
      * Executes the command and returns the result message.
      *
      * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
-     * @throws IllegalValueException 
+     * @throws CommandException
+     *             If an error occurs during command execution.
+     * @throws IllegalValueException
      */
     public abstract CommandResult execute() throws CommandException, IllegalValueException;
 
     /**
-     * Provides any needed dependencies to the command.
-     * Commands making use of any of these should override this method to gain
-     * access to the dependencies.
+     * Provides any needed dependencies to the command. Commands making use of
+     * any of these should override this method to gain access to the
+     * dependencies.
      */
     public void setData(Model model) {
         this.model = model;

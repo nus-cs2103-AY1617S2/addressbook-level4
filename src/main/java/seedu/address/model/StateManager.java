@@ -20,6 +20,7 @@ public class StateManager {
         undoStack = new Stack<StateCommandPair>();
         redoStack = new Stack<StateCommandPair>();
     }
+
     // Returns the singleton instance
     public static StateManager getInstance() {
         if (instance == null) {
@@ -43,7 +44,8 @@ public class StateManager {
     }
 
     /**
-     * On each new command, add a new command onto the undo stack to track its history and clear the redo history stack
+     * On each new command, add a new command onto the undo stack to track its
+     * history and clear the redo history stack
      */
     public void onNewCommand(StateCommandPair newCommandPair) {
         this.undoStack.push(newCommandPair);
@@ -51,9 +53,11 @@ public class StateManager {
     }
 
     /**
-     * Undo the most recent command, then store that undo command in a redo stack
+     * Undo the most recent command, then store that undo command in a redo
+     * stack
+     * 
      * @throws CommandException
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void undo() throws CommandException, IllegalValueException {
         if (undoStack.isEmpty()) {
@@ -69,9 +73,11 @@ public class StateManager {
     }
 
     /**
-     * Redo the most recently 'undo' command, then store that redo command in the undo stack
+     * Redo the most recently 'undo' command, then store that redo command in
+     * the undo stack
+     * 
      * @throws CommandException
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void redo() throws CommandException, IllegalValueException {
         if (redoStack.isEmpty()) {
