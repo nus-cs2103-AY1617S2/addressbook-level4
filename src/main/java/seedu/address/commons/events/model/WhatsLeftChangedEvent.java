@@ -11,10 +11,11 @@ public class WhatsLeftChangedEvent extends BaseEvent {
     public WhatsLeftChangedEvent(ReadOnlyWhatsLeft data) {
         this.data = data;
     }
-
+//@@author A0121668A
     @Override
     public String toString() {
-        return "number of tasks and events " + (data.getTaskList().size() + data.getEventList().size()) + ","
+        return "number of tasks " + data.getTaskList().size() 
+                + "," + " number of events " + data.getEventList().size() + ", "
                 + "number of tags " + data.getTagList().size();
     }
 }
