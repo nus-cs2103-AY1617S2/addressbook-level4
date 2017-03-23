@@ -19,6 +19,7 @@ import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.UndoCommand;
+import seedu.taskmanager.logic.commands.MoveCommand;
 
 /**
  * Parses user input.
@@ -80,10 +81,13 @@ public class Parser {
             return new HelpCommand();
             
         case ChangeDirectoryCommand.COMMAND_WORD:
-            return new ChangeDirectoryCommandParser().parse(arguments);
+            return new DirectoryCommandParser().parse(arguments);
             
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+            
+        case MoveCommand.COMMAND_WORD:
+            return new DirectoryCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
