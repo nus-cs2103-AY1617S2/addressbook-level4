@@ -1,6 +1,5 @@
 package savvytodo.model.task;
 
-
 import savvytodo.commons.exceptions.IllegalValueException;
 
 /**
