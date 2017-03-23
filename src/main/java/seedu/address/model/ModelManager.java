@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
-
 import javafx.collections.transformation.FilteredList;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import net.fortuna.ical4j.data.ParserException;
@@ -23,6 +21,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.address.model.util.TaskPriorityComparator;
 import seedu.address.model.util.TaskTitleComparator;
 import seedu.address.storage.IcsFileStorage;
 
@@ -42,7 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
     public FilteredList<ReadOnlyTask> floatingTasks;
     public FilteredList<ReadOnlyTask> completedTasks;
 
-    private Comparator currentComparator;
+    private Comparator<ReadOnlyTask> currentComparator;
 
     private Expression currentNonFloatingTasksExpression;
     private Expression currentFloatingTasksExpression;
@@ -61,7 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBookStates.add(new AddressBook(addressBook));
         this.currentAddressBookStateIndex = 0;
         this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
-        this.currentComparator = new TaskPriorityComparator();
+        this.currentComparator = new TaskTitleComparator();
         setCurrentPredicateToShowAllTasks();
         setAddressBookState();
     }
@@ -81,17 +80,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0144813J
     private void setAddressBookState() {
-        this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
-        this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
-        this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
-        setComparatorToTaskLists();
+        this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
+        this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
+        this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
         updateTaskListPredicate();
-    }
-
-    private void setComparatorToTaskLists() {
-        Collections.sort(this.nonFloatingTasks, currentComparator);
-        Collections.sort(this.floatingTasks, currentComparator);
-        Collections.sort(this.completedTasks, currentComparator);
     }
 
     private void setCurrentComparator(String type) {
@@ -105,6 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.currentComparator = new TaskTitleComparator();
             break;
         }
+        setAddressBookState();
     }
 
     /**
