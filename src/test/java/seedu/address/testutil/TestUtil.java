@@ -333,7 +333,7 @@ public class TestUtil {
         }
         return list;
     }
-    
+
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
