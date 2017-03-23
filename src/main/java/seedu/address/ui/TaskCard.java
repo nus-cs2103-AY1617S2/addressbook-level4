@@ -29,7 +29,7 @@ public class TaskCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
-    
+
     private ReadOnlyTask task;
 
     public TaskCard(ReadOnlyTask task, String displayedIndex) {
@@ -44,7 +44,7 @@ public class TaskCard extends UiPart<Region> {
         initialiseDescription();
         initTags(task);
     }
-    
+
     private void initialiseVenue() {
         venue.setText(task.getVenueString().trim());
         if (task.getVenue().isPresent()) {
@@ -53,7 +53,7 @@ public class TaskCard extends UiPart<Region> {
             venue.setManaged(false);
         }
     }
-    
+
     private void initialiseStartTime() {
         startTime.setText(task.getStartTimeString().trim());
         if (task.getStartTime().isPresent()) {
@@ -62,7 +62,7 @@ public class TaskCard extends UiPart<Region> {
             startTime.setManaged(false);
         }
     }
-  
+
     private void initialiseEndTime() {
         endTime.setText(task.getEndTimeString().trim());
         if (task.getEndTime().isPresent()) {
@@ -70,8 +70,8 @@ public class TaskCard extends UiPart<Region> {
         } else {
             endTime.setManaged(false);
         }
-    }    
-    
+    }
+
     private void initialiseUrgencyLevel() {
         urgencyLevel.setText(task.getUrgencyLevelString().trim());
         if (task.getVenue().isPresent()) {
@@ -89,7 +89,7 @@ public class TaskCard extends UiPart<Region> {
             description.setManaged(false);
         }
     }
-    
+
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

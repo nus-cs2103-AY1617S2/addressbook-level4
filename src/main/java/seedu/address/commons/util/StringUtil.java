@@ -18,9 +18,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class StringUtil {
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+    public static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
     private static final int DEADLINE_INDEX = 0;
-    public static final String TIME_CONSTRAINTS = "Task time should be in the form of DD/MM/YYYY HH:MM, e.g 20/03/2017 4:18 \n"
+    public static final String TIME_CONSTRAINTS = "Task time should be in the form of DD/MM/YYYY HH:MM, "
+            + "e.g 20/03/2017 4:18 \n"
             + "Or name of the day, e.g Wed 4:18 \n"
             + "Or relative days, e.g tomorrow 4:18 \n"
             + "Notice that no abbreviation is accepted for relatives. e.g tmrw is invalid.";
@@ -77,15 +79,15 @@ public class StringUtil {
         if (timeArg == null) {
             throw new IllegalValueException(TIME_CONSTRAINTS);
         }
-        
+
         PrettyTimeParser timeParser = new PrettyTimeParser();
         List<Date> parsedResult = timeParser.parse(timeArg);
-        
+
         //cannot parse
         if (parsedResult.isEmpty()) {
-            throw new IllegalValueException(TIME_CONSTRAINTS);      
+            throw new IllegalValueException(TIME_CONSTRAINTS);
         }
-        
+
         //wrap in LocalDateTime class
         return LocalDateTime.ofInstant(parsedResult.get(DEADLINE_INDEX).toInstant(), ZoneId.systemDefault());
     }

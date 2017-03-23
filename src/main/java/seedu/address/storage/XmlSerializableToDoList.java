@@ -23,7 +23,7 @@ import seedu.address.model.task.Task;
  */
 @XmlRootElement(name = "ToDoList")
 public class XmlSerializableToDoList implements ReadOnlyToDoList {
-    
+
     private static final Logger logger = LogsCenter.getLogger(XmlSerializableToDoList.class);
 
     @XmlElement

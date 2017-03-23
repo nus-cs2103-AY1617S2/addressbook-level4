@@ -13,8 +13,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.logic.parser.DeleteCommandParser;
-import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**
@@ -73,7 +71,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task,task.getTaskChar().toString()+ (getIndex() + 1)).getRoot());
+                setGraphic(new TaskCard(task, task.getTaskChar().toString() + (getIndex() + 1)).getRoot());
             }
         }
     }

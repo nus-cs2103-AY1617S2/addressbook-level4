@@ -28,9 +28,11 @@ public class AddCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Task to the to-do list. \n"
-            + "General usage: add [place/<VENUE>] [from/<STARTTIME>] [to/<ENDTIME>] [level/<IMPORTANCE>] [des/<DESCRIPTION>] [#<TAGS>] "
+            + "General usage: add [/venue <VENUE>] [/from <STARTTIME>] [/to <ENDTIME>] "
+            + "[/level <IMPORTANCE>] [/description <DESCRIPTION>] [#<TAGS>] "
             + "Where the parameters in square brackets are optional; \n"
-            + "Date and Time format could be in the format of DD/MM/YY HH:MM, or use words like Wed, today, tomorrow \n";
+            + "Date and Time format could be in the format of DD/MM/YY HH:MM, "
+            + "or use words like Wed, today, tomorrow \n";
 
     public static final String MESSAGE_SUCCESS = "New Task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This Task already exists in the to-do list";
@@ -63,24 +65,25 @@ public class AddCommand extends UndoableCommand {
         if (venue.isPresent()) {
             tempVenue = new Venue(venue.get());
         }
-        
+
         if (starttime.isPresent()) {
             tempStartTime = new StartTime(starttime.get());
         }
-        
+
         if (endtime.isPresent()) {
             tempEndTime = new EndTime(endtime.get());
         }
-        
+
         if (urgencyLevel.isPresent()) {
             tempUrgencyLevel = new UrgencyLevel(urgencyLevel.get());
         }
-        
+
         if (description.isPresent()) {
             tempDescription = new Description(description.get());
         }
 
-        this.toAdd = new Task(tempTitle, tempVenue, tempStartTime, tempEndTime, tempUrgencyLevel, tempDescription, new UniqueTagList(tagSet));
+        this.toAdd = new Task(tempTitle, tempVenue, tempStartTime, tempEndTime,
+                tempUrgencyLevel, tempDescription, new UniqueTagList(tagSet));
     }
 
     // @@author A0143648Y

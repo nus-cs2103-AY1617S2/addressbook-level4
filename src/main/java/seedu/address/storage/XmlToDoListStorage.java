@@ -52,7 +52,7 @@ public class XmlToDoListStorage implements ToDoListStorage {
         }
 
         ReadOnlyToDoList todoListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
-        
+
         logger.info("load data from " + filePath);
 
         return Optional.of(todoListOptional);

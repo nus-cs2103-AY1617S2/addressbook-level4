@@ -66,7 +66,7 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListTagCommand.COMMAND_WORD:
             return new ListTagCommand();
 
@@ -75,7 +75,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 

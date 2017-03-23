@@ -152,8 +152,8 @@ public class ToDoList implements ReadOnlyToDoList {
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
-    
-    public String getTagListToString(){
+
+    public String getTagListToString() {
         return this.tags.getTagListToString();
     }
 
@@ -164,18 +164,18 @@ public class ToDoList implements ReadOnlyToDoList {
         return tasks.asObservableList().size() + " Tasks, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
-    
+
     public ObservableList<ReadOnlyTask> getFilteredFloats() {
         return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_FLOAT));
     }
-    
+
     /**
      * Returns a task list filtered to only contain Deadlines
      */
     public ObservableList<ReadOnlyTask> getFilteredTasks() {
         return new UnmodifiableObservableList<>(tasks.getFilteredTaskList(Task.TASK_TYPE_DEADLINE));
     }
-    
+
     /**
      * Returns a task list filtered to only contain Events
      */

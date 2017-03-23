@@ -1,15 +1,14 @@
 package seedu.address.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.task.Task;
 
 /**
  * A list of Tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -96,7 +95,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
-    
+
     public UnmodifiableObservableList<Task> getFilteredTaskList(String filter) {
         return new UnmodifiableObservableList<>(internalList.filtered(p -> p.getTaskCategory().equals(filter)));
     }

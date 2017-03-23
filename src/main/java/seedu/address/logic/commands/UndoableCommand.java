@@ -2,9 +2,6 @@ package seedu.address.logic.commands;
 
 import java.util.List;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.ReadOnlyToDoList;
 
 //@@author A0143648Y

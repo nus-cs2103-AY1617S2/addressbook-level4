@@ -19,7 +19,7 @@ public class SelectCommandParser {
      * and returns an SelectCommand object for execution.
      */
     public Command parse(String args) {
-        Optional<Pair<Character,Integer>> index = ParserUtil.parseIndex(args);
+        Optional<Pair<Character, Integer>> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));

@@ -16,7 +16,7 @@ public interface ReadOnlyTask {
     Optional<Venue> getVenue();
     Optional<Description> getDescription();
     Optional<UrgencyLevel> getUrgencyLevel();
-    
+
     String getTaskCategory();
     Character getTaskChar();
 
@@ -47,7 +47,7 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append("This is a " + getTaskCategory() + " task, ")
                 .append("Title of task is ")
-                .append(getTitle()+ " ")
+                .append(getTitle() + " ")
                 .append(getVenueString())
                 .append(getDescriptionString())
                 .append(getEndTimeString());
@@ -56,27 +56,27 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
     /**
-     * Check if venues are present. 
+     * Check if venues are present.
      * If null, empty string is returned.
      */
-    default String getVenueString(){
-        return getVenue().isPresent()? "At: " + getVenue().get().toString() + " ": "";
+    default String getVenueString() {
+        return getVenue().isPresent() ? "At: " + getVenue().get().toString() + " " : "";
     }
-    
-    default String getStartTimeString(){
-        return getStartTime().isPresent()? "Start at: "+ getStartTime().get().toString() + " ": "";
+
+    default String getStartTimeString() {
+        return getStartTime().isPresent() ? "Start at: "+ getStartTime().get().toString() + " " : "";
     }
-    
-    default String getEndTimeString(){
-        return getEndTime().isPresent()? "Done by: "+ getEndTime().get().toString() + " ": "";
+
+    default String getEndTimeString() {
+        return getEndTime().isPresent() ? "Done by: "+ getEndTime().get().toString() + " " : "";
     }
-    
-    default String getUrgencyLevelString(){
-        return getUrgencyLevel().isPresent() ? "Urgency level at: " +getUrgencyLevel().get().toString() + " ": "";
+
+    default String getUrgencyLevelString() {
+        return getUrgencyLevel().isPresent() ? "Urgency level at: " + getUrgencyLevel().get().toString() + " " : "";
     }
-    
-    default String getDescriptionString(){
-        return getDescription().isPresent()? "Description: " + getDescription().get().toString() + " ": "";
+
+    default String getDescriptionString() {
+        return getDescription().isPresent() ? "Description: " + getDescription().get().toString() + " " : "";
     }
     //@@
 

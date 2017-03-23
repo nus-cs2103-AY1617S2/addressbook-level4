@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.ReadOnlyToDoList;
-import seedu.address.model.ToDoList;
-
 import java.util.ArrayList;
 
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.ReadOnlyToDoList;
+import seedu.address.model.ToDoList;
 
 /**
  * Clears the address book.

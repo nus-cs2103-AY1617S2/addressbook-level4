@@ -9,10 +9,10 @@ import seedu.address.commons.util.StringUtil;
  * Represents a Task's end time in the to-do list.
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
-public class EndTime implements Time{
+public class EndTime implements Time {
 
     public static final String MESSAGE_ENDTIME_CONSTRAINTS = "End time shouldn't be earlier thant start time!";
-    
+
     public static final String ENDTIME_VALIDATION_REGEX = ".+";
 
     public final LocalDateTime endTime;
@@ -27,16 +27,16 @@ public class EndTime implements Time{
         endTimeArg = endTimeArg.trim();
         try {
             this.endTime = StringUtil.parseStringToTime(endTimeArg);
-        } catch (IllegalValueException e){
+        } catch (IllegalValueException e) {
             throw new IllegalValueException(StringUtil.TIME_CONSTRAINTS);
         }
     }
-    
+
     @Override
-    public LocalDateTime getTimeValue(){
+    public LocalDateTime getTimeValue() {
         return this.endTime;
     }
-    
+
     @Override
     public String toString() {
         return this.endTime.format(StringUtil.DATE_FORMATTER);
@@ -48,7 +48,7 @@ public class EndTime implements Time{
                 || (other instanceof EndTime // instanceof handles nulls
                         && this.endTime.equals(((EndTime) other).endTime)); // state check
     }
-    
+
     @Override
     public int hashCode() {
         return endTime.toString().hashCode();

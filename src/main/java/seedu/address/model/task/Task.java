@@ -10,12 +10,12 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Task in the to-do list.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask{
-    
+public class Task implements ReadOnlyTask {
+
     public static final String TASK_TYPE_DEADLINE = "deadline";
     public static final String TASK_TYPE_EVENT = "event";
     public static final String TASK_TYPE_FLOAT = "float";
-    
+
     public static final char FLOAT_CHAR = 'f';
     public static final char DEADLINE_CHAR = 'd';
     public static final char EVENT_CHAR = 'e';
@@ -26,7 +26,7 @@ public class Task implements ReadOnlyTask{
     private EndTime endTime;
     private Description description;
     private UrgencyLevel urgencyLevel;
-    
+
     private String category;
     private boolean isCompleted;
 
@@ -35,9 +35,10 @@ public class Task implements ReadOnlyTask{
     /**
      * Every field must be present and not null.
      */
-    public Task(Title title, Venue venue, StartTime startTime, EndTime endTime, UrgencyLevel urgencyLevel, Description description, UniqueTagList tags) {
+    public Task(Title title, Venue venue, StartTime startTime, EndTime endTime,
+            UrgencyLevel urgencyLevel, Description description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title);
-        assert isValidTime(startTime,endTime);
+        assert isValidTime(startTime, endTime);
         this.title = title;
         this.venue = venue;
         this.startTime = startTime;
@@ -47,7 +48,7 @@ public class Task implements ReadOnlyTask{
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.category = sortCategory();
     }
-    
+
     private boolean isValidTime(StartTime startTime, EndTime endTime) {
         return !(startTime != null && endTime != null && startTime.getTimeValue().isAfter(endTime.getTimeValue()));
     }
@@ -62,22 +63,22 @@ public class Task implements ReadOnlyTask{
                 source.getStartTime().orElse(null),
                 source.getEndTime().orElse(null),
                 source.getUrgencyLevel().orElse(null),
-                source.getDescription().orElse(null), 
+                source.getDescription().orElse(null),
                 source.getTags());
     }
-    
-    private boolean isDeadlineTask(){
+
+    private boolean isDeadlineTask() {
         return this.endTime != null && startTime == null;
     }
-    
-    private boolean isEventTask(){
+
+    private boolean isEventTask() {
         return this.endTime != null && startTime != null;
     }
-    
-    private boolean isFloatingTask(){
+
+    private boolean isFloatingTask() {
         return this.endTime == null;
     }
-    
+
     private String sortCategory() {
         if (isDeadlineTask()) {
             return TASK_TYPE_DEADLINE;
@@ -87,14 +88,14 @@ public class Task implements ReadOnlyTask{
             return TASK_TYPE_FLOAT;
         }
     }
-    
+
     @Override
-    public String getTaskCategory(){
+    public String getTaskCategory() {
         return this.category;
     }
-    
+
     //@@
-    
+
     //@@ A0143648Y
     @Override
     public Character getTaskChar() {
@@ -118,19 +119,19 @@ public class Task implements ReadOnlyTask{
         return title;
     }
     //@@author A0122017Y
-    public void setEndTime(EndTime endTime){
+    public void setEndTime(EndTime endTime) {
         this.endTime = endTime;
     }
-    
-    public EndTime getEndTime(EndTime endTime){
+
+    public EndTime getEndTime(EndTime endTime) {
         return this.endTime;
     }
-    
+
 
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
-    
+
     public void setStartTime(StartTime startTime) {
         this.startTime = startTime;
     }
@@ -139,17 +140,17 @@ public class Task implements ReadOnlyTask{
     public Optional<Venue> getVenue() {
         return Optional.ofNullable(this.venue);
     }
-    
+
     @Override
     public Optional<UrgencyLevel> getUrgencyLevel() {
         return Optional.ofNullable(this.urgencyLevel);
     }
-    
+
     @Override
     public Optional<StartTime> getStartTime() {
         return Optional.ofNullable(this.startTime);
     }
-    
+
     @Override
     public Optional<EndTime> getEndTime() {
         return Optional.ofNullable(this.endTime);
