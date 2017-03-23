@@ -711,12 +711,12 @@ Use case ends.
 ### Product: Sticky Notes
 ### Advantages:
 * Simple and easy to use (functions like text document)
-* Can be navigated using keyboard only 
-* Starts up automatically on entering desktop 
+* Can be navigated using keyboard only
+* Starts up automatically on entering desktop
 * Works offline
 * Comes preinstalled on windows so no need for special IT permissions
 ### Disadvantages:
-* Unable to sync with email 
+* Unable to sync with email
 * Lack of functionality (No reminders, calendar view, etc.)
 * Requires windows to be installed
 
