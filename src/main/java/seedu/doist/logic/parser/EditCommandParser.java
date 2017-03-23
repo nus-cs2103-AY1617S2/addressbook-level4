@@ -54,15 +54,36 @@ public class EditCommandParser {
             int dateFormat = argsTokenizer.getDateFormat();
             switch (dateFormat) {
             case ArgumentTokenizer.DATE_NIL : break;
-            case ArgumentTokenizer.DATE_BY :  endDate = ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_BY).get());
-                                              editTaskDescriptor.setStartDate(Optional.of(endDate));
-                                              editTaskDescriptor.setEndDate(Optional.of(endDate));
+            case ArgumentTokenizer.DATE_BY :  String deadline = argsTokenizer.getValue(PREFIX_BY).get();
+                if (deadline.isEmpty()) {
+                    editTaskDescriptor.setStartDate(null);
+                    editTaskDescriptor.setEndDate(null);
+                } else {
+                    startDate = ParserUtil.parseDate(deadline);
+                    endDate = ParserUtil.parseDate(deadline);
+                    boolean validDate = ParserUtil.validateDate(startDate, endDate);
+                    if (!validDate) {
+                        throw new IllegalValueException("Incorrect Dates");
+                    }
+                    editTaskDescriptor.setStartDate(Optional.of(startDate));
+                    editTaskDescriptor.setEndDate(Optional.of(endDate));
+                }
                                               break;
-            case ArgumentTokenizer.DATE_FROM : startDate =
-                                               ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_FROM).get());
-                                               endDate = ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_TO).get());
-                                               editTaskDescriptor.setStartDate(Optional.of(startDate));
-                                               editTaskDescriptor.setEndDate(Optional.of(endDate));
+            case ArgumentTokenizer.DATE_FROM : String start = argsTokenizer.getValue(PREFIX_FROM).get();
+                String end = argsTokenizer.getValue(PREFIX_TO).get();
+                if (start.isEmpty() && end.isEmpty()) {
+                    editTaskDescriptor.setStartDate(null);
+                    editTaskDescriptor.setEndDate(null);
+                } else {
+                    startDate = ParserUtil.parseDate(start);
+                    endDate = ParserUtil.parseDate(end);
+                    boolean validDate = ParserUtil.validateDate(startDate, endDate);
+                    if (!validDate) {
+                        throw new IllegalValueException("Incorrect Dates");
+                    }
+                    editTaskDescriptor.setStartDate(Optional.of(startDate));
+                    editTaskDescriptor.setEndDate(Optional.of(endDate));
+                }
                                                break;
             default : break;
             }

@@ -86,8 +86,10 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
-        Date startDate = editTaskDescriptor.getStartDate().orElse(taskToEdit.getStartDate());
-        Date endDate = editTaskDescriptor.getEndDate().orElse(taskToEdit.getEndDate());
+        Date startDate = (editTaskDescriptor.getStartDate() == null) ? null :
+            editTaskDescriptor.getStartDate().orElse(taskToEdit.getStartDate());
+        Date endDate = (editTaskDescriptor.getEndDate() == null) ? null :
+            editTaskDescriptor.getEndDate().orElse(taskToEdit.getStartDate());
 
         return new Task(updatedName, updatedPriority, finishStatus, updatedTags, startDate, endDate);
     }
@@ -136,12 +138,10 @@ public class EditCommand extends Command {
         }
 
         public void setStartDate(Optional<Date> startDate) {
-            assert startDate != null;
             this.startDate = startDate;
         }
 
         public void setEndDate(Optional<Date> endDate) {
-            assert endDate != null;
             this.endDate = endDate;
         }
 
