@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import java.util.Set;
-
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
