@@ -13,6 +13,11 @@ import seedu.toluist.commons.util.DateTimeUtil;
 public class Task implements Comparable<Task> {
     private static final String HIGH_PRIORITY_STRING = "high";
     private static final String LOW_PRIORITY_STRING = "low";
+    private static final String RECUR_DAILY_STRING = "daily";
+    private static final String RECUR_WEEKLY_STRING = "weekly";
+    private static final String RECUR_MONTHLY_STRING = "monthly";
+    private static final String RECUR_YEARLY_STRING = "yearly";
+    private static final String RECUR_FOREVER_END_DATE_STRING = "1000 years later";
 
     // List of tags is unique
     private TreeSet<Tag> allTags = new TreeSet<>();
@@ -20,10 +25,16 @@ public class Task implements Comparable<Task> {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private LocalDateTime completionDateTime;
+    private LocalDateTime recurringEndDateTime;
+    private RecurringFrequency recurringFrequency;
     private TaskPriority priority = TaskPriority.LOW;
 
     public enum TaskPriority {
         HIGH, LOW
+    }
+
+    public enum RecurringFrequency {
+        DAILY, WEEKLY, MONTHLY, YEARLY
     }
 
     /**
@@ -154,6 +165,10 @@ public class Task implements Comparable<Task> {
         return completionDateTime != null && DateTimeUtil.isBeforeOrEqual(completionDateTime, LocalDateTime.now());
     }
 
+    public boolean isRecurring() {
+        return recurringEndDateTime != null && recurringFrequency != null;
+    }
+
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
         for (String keyword: keywords) {
             if (description.toLowerCase().contains(keyword.toLowerCase())) {
@@ -244,16 +259,60 @@ public class Task implements Comparable<Task> {
     }
 
     public void setTaskPriority(String priorityString) {
-        if (priorityString.equalsIgnoreCase(HIGH_PRIORITY_STRING)) {
+        switch (priorityString.toLowerCase()) {
+        case HIGH_PRIORITY_STRING:
             setTaskPriority(TaskPriority.HIGH);
-        } else if (priorityString.equalsIgnoreCase(LOW_PRIORITY_STRING)) {
+            break;
+        case LOW_PRIORITY_STRING:
             setTaskPriority(TaskPriority.LOW);
-        } else {
+            break;
+        default:
             throw new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
         }
     }
 
     public LocalDateTime getCompletionDateTime() {
         return completionDateTime;
+    }
+
+    public RecurringFrequency getRecurringFrequency(String recurringFrequencyString) {
+        switch (recurringFrequencyString.toLowerCase()) {
+        case RECUR_DAILY_STRING:
+            return RecurringFrequency.DAILY;
+        case RECUR_WEEKLY_STRING:
+            return RecurringFrequency.WEEKLY;
+        case RECUR_MONTHLY_STRING:
+            return RecurringFrequency.MONTHLY;
+        case RECUR_YEARLY_STRING:
+            return RecurringFrequency.YEARLY;
+        default:
+            return null;
+        }
+    }
+
+    public void setRecurring(String recurringFrequencyString) {
+        setRecurring(getRecurringFrequency(recurringFrequencyString));
+    }
+
+    public void setRecurring(RecurringFrequency recurringFrequency) {
+        setRecurring(DateTimeUtil.parseDateString(RECUR_FOREVER_END_DATE_STRING), recurringFrequency);
+    }
+
+    public void setRecurring(LocalDateTime recurringEndDateTime, String recurringFrequencyString) {
+        setRecurring(recurringEndDateTime, getRecurringFrequency(recurringFrequencyString));
+    }
+
+    public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency) {
+        if (recurringEndDateTime == null || recurringFrequency == null) {
+            throw new IllegalArgumentException("Recurring task must have both an end date,"
+                    + " and a frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
+        }
+        this.recurringEndDateTime = recurringEndDateTime;
+        this.recurringFrequency = recurringFrequency;
+    }
+
+    public void unsetRecurring() {
+        this.recurringEndDateTime = null;
+        this.recurringFrequency = null;
     }
 }
