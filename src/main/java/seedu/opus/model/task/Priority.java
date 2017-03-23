@@ -80,7 +80,7 @@ public class Priority {
         }
     }
 
-    public static Priority.Level parseXmlString(String priority) throws IllegalValueException {
+    public static Priority.Level valueOf(String priority) throws IllegalValueException {
         assert priority != null;
         try {
             return Level.valueOf(priority);
