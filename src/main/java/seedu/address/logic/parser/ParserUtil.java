@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -81,5 +82,46 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    //@@author A0114395E
+    /*
+     * Helper method to parse a ReadOnlyTask into an command-line statement to be stored.
+     * @param ReadOnlyTask
+     * @returns String consisting of how a user would have typed the original command
+     */
+    public static String getTaskArgs(ReadOnlyTask task) {
+        // Build arguments
+        final StringBuilder builder = new StringBuilder();
+        builder.append(task.getName());
+        if (task.getStart().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_START.getPrefix());
+            builder.append(task.getStart().toString());
+        }
+        if (task.getDeadline().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_DEADLINE.getPrefix());
+            builder.append(task.getDeadline().toString());
+        }
+        if (task.getPriority().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_PRIORITY.getPrefix());
+            builder.append(task.getPriority().toString());
+        }
+        if (task.getNotes().toString().length() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_NOTES.getPrefix());
+            builder.append(task.getNotes().toString());
+        }
+        if (task.getTags().asObservableList().size() > 0) {
+            builder.append(" ");
+            builder.append(CliSyntax.PREFIX_TAG.getPrefix());
+            final StringBuilder tagBuilder = new StringBuilder();
+            task.getTags().forEach(tagBuilder::append);
+            // Remove square brackets for tags
+            builder.append(tagBuilder.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+        }
+        return builder.toString();
     }
 }

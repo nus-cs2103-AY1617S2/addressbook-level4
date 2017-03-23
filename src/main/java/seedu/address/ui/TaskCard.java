@@ -27,6 +27,8 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label notes;
+    @FXML
+    private Label completion;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -43,6 +45,7 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
 
         notes.setText("Notes: " + task.getNotes().value);
+        completion.setText("Completion: " + task.getCompletion().value);
     }
 
     private void initTags(ReadOnlyTask task) {

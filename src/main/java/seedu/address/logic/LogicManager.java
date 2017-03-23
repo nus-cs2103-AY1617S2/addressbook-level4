@@ -5,11 +5,14 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
+import seedu.address.model.StateCommandPair;
+import seedu.address.model.StateManager;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.storage.Storage;
 
@@ -21,6 +24,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final StateManager stateManager = StateManager.getInstance();
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -28,10 +32,20 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException {
+    public CommandResult execute(String commandText) throws CommandException, IllegalValueException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+        // Evaluate inverse of command
+        Command inverseCommand = parser.parseInverseCommand(commandText, model);
+        // Check if inverse of command exist
+        if (inverseCommand != null) {
+            // Store the command
+            StateCommandPair stateCommandPair = new StateCommandPair(command, inverseCommand);
+            stateCommandPair.setModel(model);
+            stateManager.onNewCommand(stateCommandPair);
+        }
+        // Execute the command
         return command.execute();
     }
 

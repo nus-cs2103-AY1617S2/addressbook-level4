@@ -16,6 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
+import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -29,10 +30,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.ToDoApp;
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Start;
 import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
@@ -74,15 +77,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Name("Ali Muster"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Boris Mueller"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Carl Kurz"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Daniel Meier"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Fiona Kunz"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Elle Meyer"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("George Best"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Hoon Meier"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes("")),
-                new Task(new Name("Ida Mueller"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""))
+                new Task(new Name("Ali Muster"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Boris Mueller"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Carl Kurz"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Daniel Meier"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Fiona Kunz"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Elle Meyer"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("George Best"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Hoon Meier"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion("")),
+                new Task(new Name("Ida Mueller"), new Start(""), new Deadline(""), new Priority(0), new UniqueTagList(), new Notes(""), new Completion(""))
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -330,6 +333,10 @@ public class TestUtil {
             list.add(obj);
         }
         return list;
+    }
+
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

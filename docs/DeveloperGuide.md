@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# ToDoApp - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `CS2103JAN2017-F12-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -135,6 +135,29 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+<!-- @@author A0114395E -->
+The Activity Diagram below shows the flow when a Command is being executed in ToDoApp<br><br>
+<img src="images/ToDoApp_Activity-Diagram.png" width="600"><br>
+_Figure 2.1.4 : Component interactions for commands_
+
+The Sequence Diagram below shows the flow when `add`, `edit`, `delete` Command is being executed in ToDoApp<br><br>
+<img src="images/ToDoApp_Seq-Diag-AddDelEdit.png" width="800"><br>
+_Figure 2.1.5 : Sequence diagram for commands_
+
+> Note how if a comand is `add`, `delete`, or `edit`, we will parse the inverse of it's command to be stored as well.
+
+The Sequence Diagram below shows how ToDoApp handles `undo` and `redo` requests from the user.<br><br>
+<img src="images/ToDoApp_Seq-Diag-UndoRedo.png" width="800"><br>
+_Figure 2.1.6 : Sequence diagram for `undo` & `redo` commands_
+
+> Note how `StateManager` is implemented as a Singleton. This is by design, as we do not want more than one instance of a `StateManager` to handle undo/redo states. The `StateManager` consists of 2 stacks - `undoStack` & `redoStack`, holding a `StateCommandPair` object. <br>
+> The `StateCommandPair` class contains of 2 commands. The Command itself, and the inverse of it's Command. The inverse command is evaluated during the parsing of the actual command. <br><br>
+> When `undo` command is invoked, we pop the `StateCommandPair` from `undoStack` and put it on `redoStack`. We invoke the `undoCommand` from the `StateCommandPair`. <br>
+> Vice versa, when `redo` command is invoked, we pop the `StateCommandPair` from `redoStack` and put it on the `undoStack`. We then invoke the `executeCommand` from `StateCommandPair`. <br><br>
+> When the user performs any action, the redo stack is cleared. <br>
+> Undoability and Redoability are defined by whether either stack is empty, as well as if an action is undo-able, i.e only `add`, `edit`, `delete`, `mark`, `unmark` commands.
+<!-- @@author -->
+
 The sections below give more details of each component.
 
 ### 2.2. UI component
@@ -191,7 +214,7 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the ToDoApp data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -208,7 +231,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the ToDoApp data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -239,7 +262,6 @@ and logging destinations.
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
-
 
 ## 4. Testing
 
@@ -332,7 +354,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, ToDoApp depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -355,6 +377,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | release a blocked period of time | make a period of time available again
 `* * *` | user | find upcoming tasks by date | can track of what is dued soon
 `* * *` | user | mark a task as completed | differentiate between completed and uncompleted tasks
+`* * *` | user | unmark a task as undone | differentiate between completed and uncompleted tasks
 `* * *` | user | set a deadline to a task | easily keep track of deadline for a certain task to be completed
 `* * *` | user | get more information about a command | learn how to use various commands
 `* * *` | user with different kind of tasks| tag a task | so that I can add labels associated with the task
@@ -362,6 +385,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | retrieve tasks due on certain date | so that I can see tasks due on specified date
 `* * *` | user | assign priority to tasks | so that I can keep track of the priority of tasks
 `* * *` | user | retrieve tasks based on priority | so that I can see tasks ranked by priority
+`* * *` | user | undo a command | correct mistakes
+`* * *` | user | redo a command | correct mistakes
 `* *` | advanced user | use shorter versions of a command to type faster | more quickly use the app
 `* *` | complex user | break a task into subtasks | keep track of complex tasks
 `* *` | frequent user | add a recurring task | keep track of task that needs to be done many times
@@ -425,7 +450,7 @@ Use case ends
 
 > Use case ends
 
-3a. Invalid index given to delete
+3a. Invalid index given to edit
 
 > 3a1. TodoApp shows an error message
   Use case resumes at step 2
@@ -445,6 +470,47 @@ Use case ends
 
 >Use case ends
 
+
+#### Use case: Mark or unmark a task
+
+**MSS**
+
+1. User requests to list tasks
+2. TodoApp shows a list of tasks
+3. User requests to mark/unmark a specific task in the list
+4. TodoApp sets completion of the task to true/false
+
+**Extensions**
+
+2a. List is empty
+
+> Use case ends
+
+3a. Invalid index given to delete
+
+> 3a1. TodoApp shows an error message
+  Use case resumes at step 2
+
+3d. Value of completion is the same as the previous value
+> 3d1. TodoApp does nothing
+
+>Use case ends
+
+#### Use case: Retrieve a task
+
+**MSS**
+
+1. User requests to retrieve tasks by name/priority/deadline/completion
+2. TodoApp shows a list of tasks that matches
+Use case ends
+
+1a. List is empty
+
+> Use case ends
+
+1b. Given inputs not found
+
+> Use case ends
 
 #### Use case: List task
 
@@ -507,6 +573,37 @@ Use case resumes at step 2
 
 > 3b1. TodoApp shows an error message
 Use case resumes at step 2
+
+#### Use case: Undo a command
+
+**MSS**
+
+1. User does `add`, `edit`, `delete`, `mark`, `unmark` command
+2. TodoApp executes command
+3. User wants to undo previous command, executes `undo`
+4. ToDoApp reverts the command
+5. Use case ends
+
+**Extensions**
+
+3a. No command to revert
+
+> Use case ends
+
+#### Use case: Redo a command
+
+**MSS**
+
+1. User executes an `undo` command
+2. User wants to undo previous `undo` command, executes `redo`
+4. ToDoApp undoes the `undo` command
+5. Use case ends
+
+**Extensions**
+
+2a. No command to redo
+
+> Use case ends
 
 {More to be added}
 
@@ -571,3 +668,20 @@ Cons:
 * No options for subtasks
 * No repeat options
 
+**Google Calendar**
+
+Author: Lim Huan Hock
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Mobile app, web app, etc)
+* Cloud support
+* Free
+* API-friendly
+
+Cons:
+
+* No options for subtasks
+* No repeat options
+* Plain UI/ graphics

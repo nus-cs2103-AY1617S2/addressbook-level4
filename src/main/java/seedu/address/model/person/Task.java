@@ -6,8 +6,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the address book. Guarantees: details are present and
+ * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
@@ -17,26 +17,30 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private UniqueTagList tags;
     private Notes notes;
+    private Completion completion;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Start start, Deadline deadline, Priority priority, UniqueTagList tags, Notes notes) {
+    public Task(Name name, Start start, Deadline deadline, Priority priority, UniqueTagList tags, Notes notes,
+            Completion completion) {
         assert !CollectionUtil.isAnyNull(name, start, deadline, tags, notes);
         this.name = name;
         this.start = start;
         this.deadline = deadline;
         this.priority = priority;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
         this.notes = notes;
+        this.completion = completion;
     }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStart(), source.getDeadline(),
-                source.getPriority(), source.getTags(), source.getNotes());
+        this(source.getName(), source.getStart(), source.getDeadline(), source.getPriority(), source.getTags(),
+                source.getNotes(), source.getCompletion());
     }
 
     public void setName(Name name) {
@@ -101,6 +105,16 @@ public class Task implements ReadOnlyTask {
         this.notes = notes;
     }
 
+    @Override
+    public Completion getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(Completion completion) {
+        assert completion != null;
+        this.completion = completion;
+    }
+
     /**
      * Updates this person with the details of {@code replacement}.
      */
@@ -113,18 +127,20 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
         this.setNotes(replacement.getNotes());
+        this.setCompletion(replacement.getCompletion());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(name, tags);
     }
 

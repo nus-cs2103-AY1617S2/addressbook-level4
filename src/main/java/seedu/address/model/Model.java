@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import java.util.Set;
-
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
@@ -23,6 +21,11 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
+    //@@author A0114395E
+    /** Adds the given task at a specified index */
+    void addTask(Task task, int idx) throws UniqueTaskList.DuplicateTaskException;
+    //@@author
+
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
@@ -40,6 +43,6 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(String[] keywords);
 
 }
