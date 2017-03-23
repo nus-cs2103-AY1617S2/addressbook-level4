@@ -341,6 +341,9 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ## Appendix A : User Stories
 
+Author: Amro Shohoud
+
+
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 
@@ -380,6 +383,8 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | view tasks with the same week as a deadline  | so that I can see tasks that are all due in the same week
 
 ## Appendix B : Use Cases
+
+Author: Amro Shohoud
 
 (For all use cases below, the **System** is the `TaskIt` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -569,6 +574,7 @@ Use case ends
 
 ## Appendix E : Product Survey
 
+Author: Amro Shohoud
 
 **Google Calendar**
 
