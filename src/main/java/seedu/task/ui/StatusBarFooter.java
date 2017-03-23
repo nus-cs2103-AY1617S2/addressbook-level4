@@ -52,9 +52,9 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent fpce) {
-    	setSaveLocation("./" + fpce.path);
+        setSaveLocation("./" + fpce.path);
     }
-    
+
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
         PrettyTime pretty = new PrettyTime();

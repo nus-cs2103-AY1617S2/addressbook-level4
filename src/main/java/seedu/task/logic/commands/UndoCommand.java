@@ -19,7 +19,8 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_FAIL = "Unable to undo. data/backup.xml not found.";
     private static final String BACKUP_FILE_PATH = "data/backup.xml";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
-            + ": Undo the most recent command that modifies the data. Commands like list, find and findexact will not be affected.\n"
+            + ": Undo the most recent command that modifies the data. Commands like list,"
+            + "find and findexact will not be affected.\n"
             + "Example: " + COMMAND_WORD_1;
 
     public static String backupFilePath = BACKUP_FILE_PATH;

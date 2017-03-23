@@ -10,9 +10,8 @@ import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.DeleteCommand;
-import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.DoneCommand;
-import seedu.task.logic.commands.UnDoneCommand;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.FindExactCommand;
@@ -20,11 +19,12 @@ import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListByDoneCommand;
-import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListByNotDoneCommand;
+import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.UnDoneCommand;
 import seedu.task.logic.commands.UndoCommand;
 
 
@@ -58,13 +58,13 @@ public class Parser {
             return new AddCommandParser().parse(arguments);
 
         case DoneCommand.COMMAND_WORD_1:
-        case DoneCommand.COMMAND_WORD_2:    
+        case DoneCommand.COMMAND_WORD_2:
             return new EditIsDoneParser().parse(arguments);
-            
+
         case UnDoneCommand.COMMAND_WORD_1:
-        case UnDoneCommand.COMMAND_WORD_2:    
+        case UnDoneCommand.COMMAND_WORD_2:
             return new EditUnDoneParser().parse(arguments);
-        
+
 
         case EditCommand.COMMAND_WORD_1:
             return new EditCommandParser().parse(arguments);

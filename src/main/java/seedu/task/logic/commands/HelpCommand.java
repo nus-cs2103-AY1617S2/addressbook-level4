@@ -2,16 +2,7 @@ package seedu.task.logic.commands;
 
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
-import seedu.task.logic.parser.AddCommandParser;
-import seedu.task.logic.parser.DeleteCommandParser;
-import seedu.task.logic.parser.EditCommandParser;
-import seedu.task.logic.parser.EditIsDoneParser;
-import seedu.task.logic.parser.EditUnDoneParser;
-import seedu.task.logic.parser.FindCommandParser;
-import seedu.task.logic.parser.FindExactCommandParser;
-import seedu.task.logic.parser.HelpCommandParser;
-import seedu.task.logic.parser.ListByTagCommandParser;
-import seedu.task.logic.parser.SelectCommandParser;
+
 
 /**
  * Format full help instructions for every command for display.

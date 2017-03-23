@@ -20,7 +20,7 @@ public interface Model {
     /** Undo last command.
      * @throws IllegalValueException */
     void undoData(ReadOnlyTaskManager newData) throws IllegalValueException;
-    
+
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 
@@ -29,7 +29,7 @@ public interface Model {
 
     /** Updates the task to done. */
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-    
+
     /** Updates the task from done to undone */
     void UnDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 

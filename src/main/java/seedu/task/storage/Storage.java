@@ -33,7 +33,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
 
     @Override
     void saveBackup() throws IOException, FileNotFoundException;
-    
+
     void handleFilePathChangedEvent(FilePathChangedEvent fpce);
     /**
      * Saves the current version of KIT to the hard disk.

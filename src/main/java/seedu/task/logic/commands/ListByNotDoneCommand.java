@@ -15,7 +15,7 @@ public class ListByNotDoneCommand extends Command {
     public ListByNotDoneCommand(boolean value) {
         this.value = value;
     }
-    
+
     @Override
     public CommandResult execute() {
         model.sortTaskList();

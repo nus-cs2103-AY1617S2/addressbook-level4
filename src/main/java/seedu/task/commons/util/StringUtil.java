@@ -6,8 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
+
 
 /**
  * Helper functions for handling strings.

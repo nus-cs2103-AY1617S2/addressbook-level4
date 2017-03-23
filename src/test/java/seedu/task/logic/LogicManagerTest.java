@@ -47,7 +47,6 @@ import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Remark;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskComparator;
 import seedu.task.storage.StorageManager;
 
 

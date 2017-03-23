@@ -9,10 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import seedu.task.MainApp;
-import seedu.task.commons.util.AppUtil;
 import seedu.task.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {

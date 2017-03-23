@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -150,7 +148,7 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * 
+     *
      * Returns an ArrayList of the tagNames (string)
      */
     public Collection<String> getGenericCollection() {

@@ -6,7 +6,6 @@ import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collecti
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskManager;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**

@@ -28,7 +28,7 @@ public class TestTask implements ReadOnlyTask {
 
     /**
      * Creates a copy of {@code taskToCopy}.
-     * 
+     *
      * @throws IllegalValueException
      *             when startDate is not strictly before endDate
      */
@@ -47,7 +47,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * 
+     *
      * @param startDate
      * @param endDate
      * @return true if one of two dates is null. if both not null, only returns
