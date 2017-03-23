@@ -49,7 +49,7 @@ public class ConfigUtilTest {
     }
 
     @Test
-    public void read_fileInOrder_successfullyRead() throws DataConversionException {
+    public void read_fileInOrder_successfullyRead() throws DataConversionException, Exception {
 
         Config expected = getTypicalConfig();
 
@@ -64,14 +64,14 @@ public class ConfigUtilTest {
     }
 
     @Test
-    public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
+    public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException, Exception {
         Config expected = getTypicalConfig();
         Config actual = read("ExtraValuesConfig.json").get();
 
         assertEquals(expected, actual);
     }
 
-    private Config getTypicalConfig() {
+    private Config getTypicalConfig() throws Exception {
         Config config = new Config();
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
@@ -99,7 +99,7 @@ public class ConfigUtilTest {
     }
 
     @Test
-    public void saveConfig_allInOrder_success() throws DataConversionException, IOException {
+    public void saveConfig_allInOrder_success() throws DataConversionException, IOException, Exception {
         Config original = getTypicalConfig();
 
         String configFilePath = testFolder.getRoot() + File.separator + "TempConfig.json";

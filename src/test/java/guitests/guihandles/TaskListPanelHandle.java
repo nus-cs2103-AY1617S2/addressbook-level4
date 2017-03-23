@@ -18,7 +18,7 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.testutil.TestUtil;
 
 /**
- * Provides a handle for the panel containing the person list.
+ * Provides a handle for the panel containing the task list.
  */
 public class TaskListPanelHandle extends GuiHandle {
 
@@ -49,9 +49,9 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the person details correctly and in correct order.
+     * Returns true if the list is showing the task details correctly and in correct order.
      * @param startPosition The starting position of the sub list.
-     * @param persons A list of person in the correct order.
+     * @param persons A list of task in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
@@ -101,8 +101,8 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String taskname) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> person = getListView().getItems().stream()
-                                                    .filter(p -> p.getTaskName().fullTaskName.equals(taskname))
+        final Optional<ReadOnlyTask> task = getListView().getItems().stream()
+                                                    .filter(p -> p.getTaskName().toString().equals(taskname))
                                                     .findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Task name not found: " + taskname);
@@ -153,7 +153,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
-        Optional<Node> personCardNode = nodes.stream()
+        Optional<Node> taskCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
                 .findFirst();
         if (taskCardNode.isPresent()) {

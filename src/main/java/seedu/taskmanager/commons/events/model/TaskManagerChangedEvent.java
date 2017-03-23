@@ -3,7 +3,7 @@ package seedu.taskmanager.commons.events.model;
 import seedu.taskmanager.commons.events.BaseEvent;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 
-/** Indicates the TaskManager in the model has changed*/
+/** Indicates the TaskManager in the model has changed */
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
@@ -14,6 +14,10 @@ public class TaskManagerChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of tasks " + data.getTaskList().size() /*+ ", number of categories " + data.getCategoryList().size()*/;
+        return "number of tasks "
+                + data.getTaskList().size() /*
+                 * + ", number of categories " +
+                 * data.getCategoryList().size()
+                 */;
     }
 }

@@ -32,7 +32,7 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
-import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
@@ -42,10 +42,9 @@ import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.task.Date;
-import seedu.taskmanager.model.task.Deadline;
 import seedu.taskmanager.model.task.TaskName;
 import seedu.taskmanager.model.task.Task;
-// import seedu.taskmanager.model.task.StartTime;
+import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.category.Category;
@@ -87,7 +86,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
@@ -184,29 +183,30 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("CLEAR", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
 
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("ADD Valid TaskName ON date FROM starttime TO endtime", expectedMessage);
+        assertCommandFailure("ADD Valid TaskName TO endtime", expectedMessage);
+        assertCommandFailure("ADD Valid TaskName FROM starttime", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Category.MESSAGE_TAG_CONSTRAINTS);
+    public void execute_add_invalidTaskData() {
+        assertCommandFailure("ADD []\\[;] ON 03/03/17 1400 TO 1600",
+                TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
+        assertCommandFailure("ADD Valid TaskName ON wrongdateformat 1400 TO 1600",
+                Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("ADD Valid TaskName ON thursday 1400hrs TO 1600",
+                StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
+        assertCommandFailure("ADD Valid Name ON thursday 1400 TO 1600hrs",
+                EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
+//        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+//                Category.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -214,7 +214,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.travis();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
@@ -230,10 +230,10 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.travis();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // task already in internal task manager
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -266,11 +266,11 @@ public class LogicManagerTest {
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
             throws Exception {
-        assertCommandFailure(commandWord , expectedMessage); //index missing
-        assertCommandFailure(commandWord + " +1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " -1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
-        assertCommandFailure(commandWord + " not_a_number", expectedMessage);
+        assertCommandFailure(commandWord , expectedMessage); // index or name missing
+//        assertCommandFailure(commandWord + " +1", expectedMessage); //index should be unsigned
+//        assertCommandFailure(commandWord + " -1", expectedMessage); //index should be unsigned
+//        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
+//        assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
     /**
@@ -349,13 +349,13 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_find_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-        assertCommandFailure("FINE ", expectedMessage);
+    public void execute_search_invalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE);
+        assertCommandFailure("SEARCH ", expectedMessage);
     }
 
     @Test
-    public void execute_find_onlyMatchesFullTaskWordsInNames() throws Exception {
+    public void execute_search_onlyMatchesFullTaskWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -367,7 +367,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("SEARCH KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -386,7 +386,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
+        assertCommandSuccess("SEARCH KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -405,7 +405,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM",
+        assertCommandSuccess("SEARCH key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -417,16 +417,15 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            TaskName taskName = new TaskName("Adam Brown");
-            Date privateDate = new Date("111111");
-            Deadline deadline = new Deadline("adam@gmail.com");
-//            StartTime privateStartTime = new StartTime("111, alpha street");
+        Task travis() throws Exception {
+            TaskName taskName = new TaskName("Travis the bro is assisting");
+            Date privateDate = new Date("03/03/17");
+            StartTime privateStartTime = new StartTime("1200");
             EndTime privateEndTime = new EndTime("1400");
 //            Category category1 = new Category("category1");
 //            Category category2 = new Category("longercategory2");
 //            UniqueCategoryList categories = new UniqueCategoryList(category1, category2);
-            return new Task(taskName, privateDate, deadline, /* privateStartTime, */privateEndTime /*, categories*/);
+            return new Task(taskName, privateDate, privateStartTime, privateEndTime /*, categories*/);
         }
 
         /**
@@ -437,12 +436,12 @@ public class LogicManagerTest {
          * @param seed used to generate the person data field values
          */
         Task generateTask(int seed) throws Exception {
+            seed = seed%10;
             return new Task(
                     new TaskName("Task " + seed),
-                    new Date("" + Math.abs(seed)),
-                    new Deadline(seed + "@email"),
-//                    new StartTime("House of " + seed),
-                    new EndTime("What this " + seed)
+                    new Date("0" + seed + "/02/17"),
+                    new StartTime("140" + seed),
+                    new EndTime("160" + seed)
 //                    new UniqueCategoryList(new Category("category" + Math.abs(seed)), new Category("category" + Math.abs(seed + 1)))
             );
         }
@@ -454,10 +453,13 @@ public class LogicManagerTest {
             cmd.append("ADD ");
 
             cmd.append(p.getTaskName().toString());
-            cmd.append(" ON").append(p.getDate());
-            cmd.append(" BY").append(p.getDeadline());
+            cmd.append(" ON");
+            cmd.append(p.getDate().toString());
+            cmd.append(" ");
+            cmd.append(p.getStartTime().toString());
 //            cmd.append(" FROM").append(p.getStartTime());
-            cmd.append(" TO").append(p.getEndTime());
+            cmd.append(" TO");
+            cmd.append(p.getEndTime().toString());
 
 /*            UniqueCategoryList categories = p.getCategories();
             for (Category t: categories) {
@@ -540,10 +542,9 @@ public class LogicManagerTest {
         Task generateTaskWithName(String taskname) throws Exception {
             return new Task(
                     new TaskName(taskname),
-                    new Date("1"),
-                    new Deadline("1@email"),
-//                    new StartTime("House of 1"),
-                    new EndTime("whutwhut")
+                    new Date("03/03/17"),
+                    new StartTime("1400"),
+                    new EndTime("1600")
 //                    new UniqueCategoryList(new Category("category"))
             );
         }

@@ -10,56 +10,55 @@ import seedu.taskmanager.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask eatbreakfast, eatlunch, eatdinner, doCS, giveupCS, tryagainCS, regret, sampleEvent, sampleFloatingTask, sampleDeadline;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withTaskName("Alice Pauline")
-                    .withDate("123, Jurong West Ave 6, #08-111").withDeadline("alice@gmail.com")
-                    .withStartTime("85355255")
-                    .withCategories("friends").build();
-            benson = new TaskBuilder().withTaskName("Benson Meier").withDate("311, Clementi Ave 2, #02-25")
-                    .withDeadline("johnd@gmail.com").withStartTime("98765432")
-                    .withCategories("owesMoney", "friends").build();
-            carl = new TaskBuilder().withTaskName("Carl Kurz").withStartTime("95352563")
-                    .withDeadline("heinz@yahoo.com").withDate("wall street").build();
-            daniel = new TaskBuilder().withTaskName("Daniel Meier").withStartTime("87652533")
-                    .withDeadline("cornelia@google.com").withDate("10th street").build();
-            elle = new TaskBuilder().withTaskName("Elle Meyer").withStartTime("9482224")
-                    .withDeadline("werner@gmail.com").withDate("michegan ave").build();
-            fiona = new TaskBuilder().withTaskName("Fiona Kunz").withStartTime("9482427")
-                    .withDeadline("lydia@gmail.com").withDate("little tokyo").build();
-            george = new TaskBuilder().withTaskName("George Best").withStartTime("9482442")
-                    .withDeadline("anna@google.com").withDate("4th street").build();
+            eatbreakfast = new TaskBuilder().withTaskName("Eat breakfast with mom").withDate("03/03/17")
+                    .withStartTime("1000").withEndTime("1100")/*.withCategories("friends")*/.build();   // event
+            eatlunch = new TaskBuilder().withTaskName("Eat lunch at techno").withDate("04/03/17")
+                    .withStartTime("EMPTY_FIELD").withEndTime("1400").build();                          // deadline
+            eatdinner = new TaskBuilder().withTaskName("Eat dinner with my only 2 friends").withDate("09/03/17")
+                    .withStartTime("1800").withEndTime("2000").build();                                 // event
+            doCS = new TaskBuilder().withTaskName("Start on the CS2103 project").withDate("EMPTY_FIELD")
+                    .withStartTime("03/03/17 1400").withEndTime("03/04/17 1800").build();               // event
+            giveupCS = new TaskBuilder().withTaskName("Give up on CS2103 project").withDate("04/04/17")
+                    .withStartTime("1400").withEndTime("1500").build();                                 // event
+            tryagainCS = new TaskBuilder().withTaskName("Try again for CS2103").withDate("EMPTY_FIELD")
+                    .withStartTime("05/04/17 1400").withEndTime("05/05/17 1500").build();               // event
+            regret = new TaskBuilder().withTaskName("Endless cycles of regret").withDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndTime("EMPTY_FIELD").build();                   // floating task
 
             // Manually added
-            hoon = new TaskBuilder().withTaskName("Hoon Meier").withStartTime("8482424")
-                    .withDeadline("stefan@mail.com").withDate("little india").build();
-            ida = new TaskBuilder().withTaskName("Ida Mueller").withStartTime("8482131")
-                    .withDeadline("hans@google.com").withDate("chicago ave").build();
+            sampleEvent = new TaskBuilder().withTaskName("Time to relax a little").withDate("06/05/17")
+                    .withStartTime("1400").withEndTime("1800").build();
+            sampleFloatingTask = new TaskBuilder().withTaskName("Chiong all day everyday").withDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndTime("EMPTY_FIELD").build();
+            sampleDeadline = new TaskBuilder().withTaskName("Get it done").withDate("06/05/17")
+                    .withStartTime("EMPTY_FIELD").withEndTime("1700").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
-        for (TestTask person : new TypicalTestTasks().getTypicalPersons()) {
+    public static void loadTaskManagerWithSampleData(TaskManager tm) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addPerson(new Person(person));
-            } catch (UniquePersonList.DuplicatePersonException e) {
+                tm.addTask(new Task(task));
+            } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
         }
     }
 
-    public TestTask[] getTypicalPersons() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalTasks() {
+        return new TestTask[]{eatbreakfast, eatlunch, eatdinner, doCS, giveupCS, tryagainCS, regret};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
-        return ab;
+    public TaskManager getTypicalTaskManager() {
+        TaskManager tm = new TaskManager();
+        loadTaskManagerWithSampleData(tm);
+        return tm;
     }
 }
