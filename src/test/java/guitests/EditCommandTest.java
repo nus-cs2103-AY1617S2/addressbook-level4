@@ -88,7 +88,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find k/Elle");
 
-        String detailsToEdit = "k/Belle";
+        String detailsToEdit = "n/Belle";
         int filteredTaskListIndex = 1;
         int taskBossIndex = 2;
 
@@ -97,6 +97,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
     }
+    
 
     @Test
     public void edit_missingTaskIndex_failure() {
