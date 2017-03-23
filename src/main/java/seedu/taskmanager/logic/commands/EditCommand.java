@@ -28,7 +28,8 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)"
             + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [#TAG]...\n"
-            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD + " 1 s/23/05/2017 d/Go to John's house instead";
+            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD
+            + " 1 s/23/05/2017 d/Go to John's house instead";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

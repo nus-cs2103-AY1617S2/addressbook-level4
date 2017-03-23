@@ -22,37 +22,36 @@ public class ChangeDirectoryCommand extends Command {
             + "xml file to allow user to sync with cloud services\n"
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
-    
+
     public static final String MESSAGE_SUCCESS = "TaskManager directory changed to : ";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
     public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load";
     public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to read TaskManager";
-    
+
     private final String newPath;
-    
+
     public ChangeDirectoryCommand(String path) {
         this.newPath = path;
     }
-    
+
     @Override
     public CommandResult execute() throws CommandException {
         Config newConfig;
         String configFilePathUsed;
-        
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
-        
+
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             newConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_ERROR_BUILDCONFIG);
         }
-        
+
         newConfig.setTaskManagerFilePath(this.newPath);
-        
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager newTaskManager;
+
         try {
             taskManagerOptional = storage.readTaskManager(this.newPath);
             newTaskManager = taskManagerOptional.orElse(model.getTaskManager());
@@ -63,13 +62,13 @@ public class ChangeDirectoryCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(MESSAGE_ERROR_READ_TASKMANAGER);
         }
-        
+
         try {
             ConfigUtil.saveConfig(newConfig, configFilePathUsed);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_ERROR_SAVECONFIG + StringUtil.getDetails(e));
         }
-        
+
         return new CommandResult(MESSAGE_SUCCESS + this.newPath);
     }
 }

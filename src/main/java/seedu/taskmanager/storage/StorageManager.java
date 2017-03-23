@@ -80,7 +80,7 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
-    
+
     /**
      * @@author A0114269E
      * Method for user-initiated change of Storage Directory
@@ -91,7 +91,7 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage = new XmlTaskManagerStorage(newFilePath);
         indicateTaskManagerStorageDirectoryChanged(newFilePath, newConfig);
     }
-    
+
     /**
      * @@author A0114269E
      * Raise an event that the tars storage directory has changed

@@ -8,8 +8,10 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class StartDate {
 
-    public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Start date should be of dd/mm/yyyy format or can be empty";
-    public static final String STARTDATE_VALIDATION_REGEX = "(^$)|(^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$)";
+    public static final String MESSAGE_STARTDATE_CONSTRAINTS =
+            "Start date should be of dd/mm/yyyy format or can be empty";
+    public static final String STARTDATE_VALIDATION_REGEX =
+            "(^$)|(^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$)";
 
     public final String value;
 

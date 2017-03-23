@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_XML_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -389,7 +388,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-    
+
     @Test
     public void execute_cd_invalidFilePath() throws Exception {
         assertCommandFailure("cd !asdwie34$2.xml",
@@ -397,7 +396,7 @@ public class LogicManagerTest {
         assertCommandFailure("cd data/taskmanager",
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
     }
-    
+
     @Test
     public void execute_cd_invalidXmlFile() throws Exception {
         assertCommandFailure("cd src/test/data/cd_test/empty.xml",
@@ -424,7 +423,6 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-    
 
     /**
      * A utility class to generate test data.

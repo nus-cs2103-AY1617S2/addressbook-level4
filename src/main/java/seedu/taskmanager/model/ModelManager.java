@@ -155,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
             boolean hasTag = false;
             UniqueTagList tagList = task.getTags();
             for (Tag tag : tagList) {
-            	hasTag = hasTag || nameKeyWords.stream()
+                hasTag = hasTag || nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
                         .findAny()
                         .isPresent();

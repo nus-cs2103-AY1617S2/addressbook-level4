@@ -52,7 +52,7 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-        
+
         case EditCommand.ALTERNATIVE_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -61,7 +61,7 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-        
+
         case DeleteCommand.ALTERNATIVE_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
@@ -79,13 +79,13 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case ChangeDirectoryCommand.COMMAND_WORD:
             return new ChangeDirectoryCommandParser().parse(arguments);
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case MoveCommand.COMMAND_WORD:
             return new MoveCommandParser().parse(arguments);
 
