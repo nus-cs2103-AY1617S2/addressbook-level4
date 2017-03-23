@@ -43,17 +43,17 @@
        </AnchorPane>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="taskList" minWidth="340" prefWidth="340">
+            <VBox fx:id="taskList" maxWidth="370.0" minWidth="370.0" prefWidth="370.0">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
-                  <HBox prefHeight="20.0" prefWidth="320.0">
+                  <HBox minWidth="340.0" prefHeight="25.0" prefWidth="340.0">
                      <children>
-                        <Label prefWidth="30.0" text="No." />
-                        <Label prefWidth="170.0" text="Task" />
-                        <Label prefWidth="60.0" text="Start" />
-                        <Label prefWidth="60.0" text="End" textAlignment="CENTER" />
+                        <Label minWidth="26.0" prefWidth="26.0" text="No" />
+                        <Label maxWidth="149.0" minWidth="149.0" prefWidth="149.0" text="Task" />
+                        <Label maxWidth="85.0" minWidth="85.0" prefWidth="85.0" text="Start" />
+                        <Label prefWidth="85.0" text="End" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />

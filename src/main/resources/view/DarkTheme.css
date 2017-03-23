@@ -240,7 +240,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: white;
+    -fx-background-color: derive(#000000, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
