@@ -200,6 +200,7 @@ The `Model`,
 * stores the User inbox data, including the list of events, list of tasks and list of tags associated with the items in user inbox.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` and `UnmodifiableObservableList<ReadOnlyEvent>` that can be 'observed' e.g. the `TaskListPanel` and `EventListPanel` in UI can be notified of any updates so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* `Task` and `Event` inherits of `UserItem`.
 
 **Tasks** consists of:
 1. Name
