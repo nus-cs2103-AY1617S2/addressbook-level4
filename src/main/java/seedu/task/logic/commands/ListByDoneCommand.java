@@ -5,7 +5,7 @@ public class ListByDoneCommand extends Command {
     public static final String COMMAND_WORD_1 = "listdone";
     public static final String COMMAND_WORD_2 = "ld";
 
-    public static final String MESSAGE_SUCCESS = "Listed all done tasks";
+    public static final String MESSAGE_LISTBYDONE_SUCCESS = "Listed all done tasks";
 
     private final boolean value;
 

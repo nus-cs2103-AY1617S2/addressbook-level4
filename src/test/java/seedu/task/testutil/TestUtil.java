@@ -396,4 +396,24 @@ public class TestUtil {
         return listOfTasks.toArray(new ReadOnlyTask[listOfTasks.size()]);
 
     }
+    
+    
+    public static TestTask[] filterDoneTasks(final TestTask[] tasks){
+        List<TestTask> filteredTaskList = new ArrayList<>();
+        for(TestTask tt: tasks){
+            if(tt.isDone())
+                filteredTaskList.add(tt);
+        }
+       return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
+    }
+    
+    public static TestTask[] filterUndoneTasks(final TestTask[] tasks){
+        List<TestTask> filteredTaskList = new ArrayList<>();
+        for(TestTask tt: tasks){
+            if(!tt.isDone())
+                filteredTaskList.add(tt);
+        }
+       return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
+        
+    }
 }
