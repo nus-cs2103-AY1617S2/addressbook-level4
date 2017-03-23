@@ -134,7 +134,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
-  
+
 
 The sections below give more details of each component.
 
