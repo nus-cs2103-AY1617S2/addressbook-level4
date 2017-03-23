@@ -28,10 +28,10 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String priority;
-    //@XmlElement(required = true) 
+    @XmlElement(required = true) 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate bydate;
-    //@XmlElement(required = true)
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime bytime;
     @XmlElement(required = true)

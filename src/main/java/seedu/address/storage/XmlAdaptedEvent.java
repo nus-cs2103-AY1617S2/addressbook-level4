@@ -27,16 +27,16 @@ public class XmlAdaptedEvent {
 
     @XmlElement(required = true)
     private String description;
-    //@XmlElement(required = true) 
+    @XmlElement(required = true) 
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate startdate;
-    //@XmlElement(required = true)
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate enddate;
-    //@XmlElement(required = true)
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime starttime;
-    //@XmlElement(required = true)
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(LocalTimeAdapter.class)
     private LocalTime endtime;
     @XmlElement(required = true)
