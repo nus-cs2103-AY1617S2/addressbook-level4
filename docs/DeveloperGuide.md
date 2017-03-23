@@ -140,7 +140,7 @@ Here are some of the key files in the `Ui` component:
 The `Logic` component handles the execution of the commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
 
 The following diagram represents the structure of the `Logic` component  
-<br><img src="images/LogicComponentClassDiagram.jpg" width="800"><br> 
+<br><img src="images/LogicClassDiagram.png" width="800"><br> 
 
 Here are some of the key files in the `Logic` component:
 - [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain the results of computations.  
