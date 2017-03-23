@@ -61,6 +61,9 @@ public class DateTime {
     }
 
     private void parseDateTime(String date) throws IllegalValueException {
+        if (date.equals(EMPTY_STRING)) {
+            return;
+        }
         DateTime dateTime = dtParser.parseDate(date);
         this.date = dateTime.getDate();
         this.setIsDateInferred(dateTime.isDateInferred);

@@ -118,18 +118,15 @@ public class ParserUtil {
     /**
      * Parses an {@code Optional<String>} dateTime into an {@code Optional<DateTime>}
      * if {@code dateTime} is present.
+     * @throws IllegalValueException 
      */
-    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) {
+    public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
         assert dateTime != null;
 
         if (dateTime.isPresent()) {
-            try {
-                DateTimeParser dateParser = new DateTimeParser();
-                DateTime dt = dateParser.parseDate(dateTime.toString().trim());
-                return Optional.of(dt);
-            } catch (IllegalValueException ive) {
-                return Optional.empty();
-            }
+            DateTimeParser dateParser = new DateTimeParser();
+            DateTime dt = dateParser.parseDate(dateTime.toString().trim());
+            return Optional.of(dt);
         } else {
             return Optional.empty();
         }
