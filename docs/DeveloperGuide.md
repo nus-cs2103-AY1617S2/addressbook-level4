@@ -1,4 +1,4 @@
-# AddressBook Level 4 - Developer Guide
+# TaskList - Developer Guide
 
 By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
