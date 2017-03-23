@@ -26,6 +26,13 @@ public interface Model {
     /** Deletes the task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    /** Deletes tasks by their date. */
+    void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
+
+    /** Deletes the task by its name. */
+    void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
+            throws UniqueTaskList.TaskNotFoundException;
+
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 

@@ -70,6 +70,39 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void deleteTasksDate(UnmodifiableObservableList<ReadOnlyTask> targets)
+            throws TaskNotFoundException {
+        while (targets.size() != 0) {
+            try {
+                ReadOnlyTask taskToDelete = targets.get(0);
+                taskManager.removeTask(taskToDelete);
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target task cannot be missing";
+            }
+        }
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized void deleteTasksName(UnmodifiableObservableList<ReadOnlyTask> targets, String toDeleteTaskName)
+            throws TaskNotFoundException {
+        while (targets.size() != 0) {
+            try {
+                ReadOnlyTask taskToDelete = targets.get(0);
+                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
+                    taskManager.removeTask(taskToDelete);
+                    break;
+                }
+            } catch (TaskNotFoundException pnfe) {
+                assert false : "The target task cannot be missing";
+            }
+        }
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
@@ -160,7 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
     interface Qualifier {
         boolean run(ReadOnlyTask task);
 
-        String toString();;
+        String toString();
     }
 
     private class TaskQualifier implements Qualifier {

@@ -101,7 +101,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToTask(String taskname) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> person = getListView().getItems().stream()
+        final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                                                     .filter(p -> p.getTaskName().fullTaskName.equals(taskname))
                                                     .findAny();
         if (!task.isPresent()) {
@@ -153,7 +153,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
-        Optional<Node> personCardNode = nodes.stream()
+        Optional<Node> taskCardNode = nodes.stream()
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
                 .findFirst();
         if (taskCardNode.isPresent()) {
