@@ -25,7 +25,16 @@ public class ToDoListHistoryManager implements ToDoListHistory {
     }
 
     @Override
-    public ToDoList getMostRecentToDoList() throws EmptyHistoryException {
+    public ToDoList getPreviousToDoList() throws EmptyHistoryException {
+        if (!previousToDoLists.isEmpty()) {
+            return previousToDoLists.pop();
+        } else {
+            throw new EmptyHistoryException("OneTwoDo ccannot be undone anymore");
+        }
+    }
+
+    @Override
+    public ToDoList getNextToDoList() throws EmptyHistoryException {
         if (!previousToDoLists.isEmpty()) {
             return previousToDoLists.pop();
         } else {

@@ -105,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void undo() throws EmptyHistoryException {
-        this.toDoList.resetData(history.getMostRecentToDoList());
+        this.toDoList.resetData(history.getPreviousToDoList());
         setDoneStatus(DoneStatus.UNDONE);
         updateFilteredUndoneTaskList();
         indicateToDoListChanged();

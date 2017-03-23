@@ -8,5 +8,6 @@ import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
  */
 public interface ToDoListHistory {
     void saveToDoList (ToDoList toDoList);
-    ToDoList getMostRecentToDoList() throws EmptyHistoryException;
+    ToDoList getPreviousToDoList() throws EmptyHistoryException;
+    ToDoList getNextToDoList() throws EmptyHistoryException;
 }
