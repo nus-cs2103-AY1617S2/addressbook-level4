@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DeleteCommand;
@@ -16,10 +17,9 @@ import seedu.taskmanager.logic.commands.FindCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
-import seedu.taskmanager.logic.commands.SelectCommand;
-import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
-import seedu.taskmanager.logic.commands.UndoCommand;
 import seedu.taskmanager.logic.commands.MoveCommand;
+import seedu.taskmanager.logic.commands.SelectCommand;
+import seedu.taskmanager.logic.commands.UndoCommand;
 
 /**
  * Parses user input.

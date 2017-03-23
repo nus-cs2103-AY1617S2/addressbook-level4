@@ -17,7 +17,7 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
  */
 public class MoveCommand extends Command {
     public static final String COMMAND_WORD = "mv";
-    
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Move the directory of the taskmanager."
             + "xml file to allow user to sync with cloud services. Overwrite will occur for same file name.\n"
             + "Parameters: PATH...\n"

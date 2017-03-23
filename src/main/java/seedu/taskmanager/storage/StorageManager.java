@@ -7,15 +7,14 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.taskmanager.commons.core.ComponentManager;
+import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
+import seedu.taskmanager.commons.events.storage.TaskManagerStorageDirectoryChangedEvent;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.UserPrefs;
-import seedu.taskmanager.commons.core.Config;
-import seedu.taskmanager.commons.events.storage.TaskManagerStorageDirectoryChangedEvent;
-import seedu.taskmanager.storage.XmlTaskManagerStorage;
 
 /**
  * Manages storage of TaskManager data in local storage.
@@ -36,7 +35,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
-    
+
     public StorageManager() {
     }
 
@@ -84,7 +83,7 @@ public class StorageManager extends ComponentManager implements Storage {
     
     /**
      * @@author A0114269E
-     * Method for user-initiated change of Storage Directory 
+     * Method for user-initiated change of Storage Directory
      * @param newFilePath
      * @param newConfig
      */
