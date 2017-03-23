@@ -143,6 +143,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    @Override
+    public void clear() {
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
+        resetData(new ToDoList());
+    }
+
     //=========== Filtered Task List Accessors =============================================================
 
     @Override

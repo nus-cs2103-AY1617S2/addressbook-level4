@@ -80,4 +80,6 @@ public interface Model {
     void undo() throws EmptyHistoryException;
 
     void redo() throws EmptyHistoryException;
+
+    void clear();
 }
