@@ -17,13 +17,15 @@ public class Date {
 
     // add to user guide
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date format invalid, try dates like,"
-                                                        + " tomorrow at 5pm or 4th April";
+                                                        + " tomorrow at 5pm or 4th April."
+                                                        + " Check that Month is before date,"
+                                                        + " MM/DD/YY or MM-DD-YY";
     public static final String DEFAULT_DATE = "DEFAULT_DATE";
     private final java.util.Date value;
     private static PrettyTimeParser p = new PrettyTimeParser();
 
     //Allows an empty constructor
-    public Date(){
+    public Date() {
         this.value = null;
     }
 
@@ -69,7 +71,7 @@ public class Date {
         }
     }
 
-    public boolean isNull(){
+    public boolean isNull() {
         return this.value == null;
     }
 
@@ -97,28 +99,22 @@ public class Date {
                                                                      // check
     }
 
-    public int compareTo(Date other) {
-        return this.value.compareTo(other.getDateValue());
-    }
-
     @Override
     public int hashCode() {
         return value.hashCode();
     }
 
-    public java.util.Date getDateValue(){
+    public java.util.Date getDateValue() {
         return this.value;
     }
 
     /**
-     * Compares two dates and returns true if date1 precedes date 2
+     * Compares two dates and returns true if date1 is before date 2
      * @param date1
      * @param date2
      * @return
      */
-    public static boolean doesPrecede(Date date1, Date date2){
-        if (date1.value == null) return false;
-        if (date2.value == null) return true;
-       return date1.value.before(date2.value);
+    public static boolean isBefore(Date date1, Date date2) {
+        return date1.value.before(date2.value);
     }
 }

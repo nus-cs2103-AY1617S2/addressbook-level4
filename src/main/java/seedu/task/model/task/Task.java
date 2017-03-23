@@ -10,7 +10,7 @@ import seedu.task.model.tag.UniqueTagList;
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask,Comparable<ReadOnlyTask> {
+public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     public static final String MESSAGE_TASK_CONSTRAINTS =
             "Start date/time must be earlier than end date/time";
@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask,Comparable<ReadOnlyTask> {
         Location location, UniqueTagList tags, boolean isDone) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, remark, location, tags);
 
-        if (!checkDates(startDate, endDate)){
+        if (!checkDates(startDate, endDate)) {
             throw new IllegalValueException(MESSAGE_TASK_CONSTRAINTS);
         }
 
@@ -172,11 +172,13 @@ public class Task implements ReadOnlyTask,Comparable<ReadOnlyTask> {
     @Override
     public int compareTo(ReadOnlyTask o) {
         //Same end date then compare according to names lexicographically
-        if ((this.getEndDate()== null && o.getEndDate() == null)
-                ||(this.getEndDate().equals(o.getEndDate()))) {
+        if ((this.getEndDate() == null && o.getEndDate() == null)
+                || (this.getEndDate().equals(o.getEndDate()))) {
             return this.getName().fullName.compareTo(o.getName().fullName);
         } else {
-            return (Date.doesPrecede(this.getEndDate(), o.getEndDate())) ? -1 : 1;
+            if (this.getEndDate().isNull()) return 1;
+            if (o.getEndDate().isNull()) return -1;
+            return (Date.isBefore(this.getEndDate(), o.getEndDate())) ? -1 : 1;
         }
     }
 }

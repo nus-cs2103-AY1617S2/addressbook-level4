@@ -109,7 +109,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override 
     public void sortTaskList(){
         taskManager.sortTaskList();
-        indicateTaskManagerChanged();
+        indicateTaskManagerChanged(true);
     }
     
     
