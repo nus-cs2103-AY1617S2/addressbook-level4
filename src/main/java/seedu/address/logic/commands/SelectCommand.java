@@ -5,7 +5,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 
 /**
  * Selects an activity identified using it's last displayed index from WhatsLeft.
@@ -50,6 +51,7 @@ public class SelectCommand extends Command {
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1, type));
             return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
         }
+        return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
 }

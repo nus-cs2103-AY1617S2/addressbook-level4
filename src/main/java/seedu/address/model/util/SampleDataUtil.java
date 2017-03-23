@@ -3,46 +3,42 @@ package seedu.address.model.util;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.Activity;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
-import seedu.address.model.person.FromDate;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
-import seedu.address.model.person.ToDate;
-import seedu.address.model.person.UniqueActivityList.DuplicateActivityException;
+import seedu.address.model.person.UniqueEventList.DuplicateEventException;
 import seedu.address.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
-    public static Activity[] getSampleActivities() {
+    public static Event[] getSampleActivities() {
         try {
-            return new Activity[] {
-                new Activity(new Description("CS2010 Written Quiz 1"), new Priority(null),
-                    new StartTime("0800"), new FromDate("010115"), new EndTime("1500"),
-                    new ToDate("010115"), new ByDate(null), new Location("SR1"),
+            return new Event[] {
+                new Event(new Description("CS2010 Written Quiz 1"), new StartDate("2015-03-20"),
+                    new EndDate(null), new StartTime("09:00"), new EndTime("15:00"),
+                    new Location("NUS"),
                     new UniqueTagList("friends")),
-                new Activity(new Description("CS2103 Tutorial 6"), new Priority("medium"),
-                    new StartTime(null), new FromDate(null), new EndTime(null),
-                    new ToDate(null), new ByDate(null), new Location("COM-1-B1"),
-                    new UniqueTagList("colleagues", "friends")),
-                new Activity(new Description("Buy fruits"), new Priority("low"),
-                    new StartTime(null), new FromDate(null), new EndTime(null),
-                    new ToDate(null), new ByDate(null), new Location("FairPrice"),
-                    new UniqueTagList("neighbours")),
-                new Activity(new Description("Home Assignment 2"), new Priority("high"),
-                    new StartTime(null), new FromDate(null), new EndTime(null),
-                    new ToDate(null), new ByDate(null), new Location("CLB"),
-                    new UniqueTagList("family")),
-                new Activity(new Description("CS2102 Consultation"), new Priority(null),
-                    new StartTime("1500"), new FromDate("050417"), new EndTime(null),
-                    new ToDate(null), new ByDate(null), new Location("I-Cube"),
-                    new UniqueTagList("classmates")),
-                new Activity(new Description("IVLE Survey"), new Priority("low"),
-                        new StartTime(null), new FromDate(null), new EndTime(null),
-                        new ToDate(null), new ByDate(null), new Location(null),
-                    new UniqueTagList("colleagues"))
+                new Event(new Description("CS2103 Tutorial 6"), new StartDate("2015-03-25"),
+                        new EndDate(null), new StartTime("10:00"), new EndTime("15:00"),
+                        new Location("NUS"),
+                        new UniqueTagList("friends")),
+                new Event(new Description("CS2103 Tutorial 7"), new StartDate("2017-05-23"),
+                        new EndDate(null), new StartTime("17:00"), new EndTime("18:00"),
+                        new Location("SR1"),
+                        new UniqueTagList("friends")),
+                new Event(new Description("CS2010 Written Quiz 2"), new StartDate("2015-06-01"),
+                        new EndDate(null), new StartTime("13:00"), new EndTime("15:00"),
+                        new Location("MPSH"),
+                        new UniqueTagList("friends")),
+                new Event(new Description("CS2010 Sit-In lab 1"), new StartDate("2015-05-30"),
+                        new EndDate(null), new StartTime("09:00"), new EndTime("11:00"),
+                        new Location("SR1"),
+                        new UniqueTagList("friends")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
@@ -52,11 +48,11 @@ public class SampleDataUtil {
     public static ReadOnlyWhatsLeft getSampleWhatsLeft() {
         try {
             WhatsLeft sampleAB = new WhatsLeft();
-            for (Activity sampleActivity : getSampleActivities()) {
-                sampleAB.addActivity(sampleActivity);
+            for (Event sampleEvent : getSampleActivities()) {
+                sampleAB.addEvent(sampleEvent);
             }
             return sampleAB;
-        } catch (DuplicateActivityException e) {
+        } catch (DuplicateEventException e) {
             throw new AssertionError("sample data cannot contain duplicate activities", e);
         }
     }
