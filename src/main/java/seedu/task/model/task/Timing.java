@@ -146,5 +146,4 @@ public class Timing implements Comparable<Timing> {
 		}
 		return compareToResult;
 	}
-
 }
