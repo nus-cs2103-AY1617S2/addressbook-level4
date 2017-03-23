@@ -10,7 +10,7 @@ public class DueDate {
 
     public static final String MESSAGE_DUEDATE_CONSTRAINTS =
             "Task due date can take any values, and it should not be blank";
-    
+
     /*
      * The first character of the due date must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
