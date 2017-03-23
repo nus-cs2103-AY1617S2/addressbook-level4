@@ -13,16 +13,17 @@ import java.util.Collection;
  */
 public class AutoCompleteDictionaryFactory {
 
-    public static final String[] COMMAND_WORDS = { "add", "delete", "list", "edit", "clear", "find", "undo", "redo", "help", "select", "mark", "unmark" };
-    
+    public static final String[] COMMAND_WORDS = { "add", "delete", "list", "edit", "clear", "find", "undo", "redo",
+        "help", "select", "mark", "unmark" };
+
     public static final String[] COMMON_WORDS = { "breakfast", "lunch", "dinner", "class", "homework", "assigment" };
-    
-    public static Collection<String> getDictionary(){
+
+    public static Collection<String> getDictionary() {
         ArrayList<String> dictionary = new ArrayList<String>();
         dictionary.addAll(Arrays.asList(COMMAND_WORDS));
         dictionary.addAll(Arrays.asList(COMMON_WORDS));
-        
+
         return dictionary;
     }
-    
+
 }

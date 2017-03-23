@@ -16,37 +16,37 @@ import savvytodo.logic.commands.UndoCommand;
  */
 public class HotKeysManager {
     public static final String NOT_HOTKEY = "";
-    
+
     /**
      * Compares the key event to pre-defined key combinations and returns the correct command.
      * @author jingloon
      * @param event
      * @return the command word as a String
      */
-    public static String getCommand(KeyEvent event){
+    public static String getCommand(KeyEvent event) {
         String commandWord;
-        
-        if(HotKeysCombinations.KEYS_EXIT.match(event)) {
+
+        if (HotKeysCombinations.KEYS_EXIT.match(event)) {
             commandWord = ExitCommand.COMMAND_WORD;
-            
-        } else if(HotKeysCombinations.KEYS_HELP.match(event)) {
+
+        } else if (HotKeysCombinations.KEYS_HELP.match(event)) {
             commandWord = HelpCommand.COMMAND_WORD;
-            
-        } else if(HotKeysCombinations.KEYS_LIST.match(event)) {
+
+        } else if (HotKeysCombinations.KEYS_LIST.match(event)) {
             commandWord = ListCommand.COMMAND_WORD;
-            
-        } else if(HotKeysCombinations.KEYS_CLEAR.match(event)) {
+
+        } else if (HotKeysCombinations.KEYS_CLEAR.match(event)) {
             commandWord = ClearCommand.COMMAND_WORD;
-            
-        } else if(HotKeysCombinations.KEYS_UNDO.match(event)) {
+
+        } else if (HotKeysCombinations.KEYS_UNDO.match(event)) {
             commandWord = UndoCommand.COMMAND_WORD;
-            
-        } else if(HotKeysCombinations.KEYS_REDO.match(event)) {
+
+        } else if (HotKeysCombinations.KEYS_REDO.match(event)) {
             commandWord = RedoCommand.COMMAND_WORD;
         } else {
             commandWord = NOT_HOTKEY;
         }
-        
+
         return commandWord;
     }
 }

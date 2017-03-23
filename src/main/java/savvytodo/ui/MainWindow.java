@@ -230,7 +230,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     *
      * @return logic
      */
     public Logic getLogic() {
@@ -245,18 +244,18 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.fillInnerParts();
     }
-    
+
     //@@author A0147827U
     /**
      * Adds listeners for hotkeys to the scene
      * @author jingloon
      */
-    public void setHotkeysListeners(Scene scene){
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+    public void setHotkeysListeners(Scene scene) {
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
                 String command = HotKeysManager.getCommand(event);
-                if(!command.equals(HotKeysManager.NOT_HOTKEY)) {
-                   commandBox.executeExternalCommand(command);
+                if (!command.equals(HotKeysManager.NOT_HOTKEY)) {
+                    commandBox.executeExternalCommand(command);
                 }
             }
         });
