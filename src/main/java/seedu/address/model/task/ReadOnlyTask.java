@@ -67,11 +67,12 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         return builder.toString();
     }
 
-
+    //@@author A0105287E
     default int compareTo(ReadOnlyTask other) {
         return compareCompletionStatus(other);
     }
 
+    //@@author A0105287E
     default int compareCompletionStatus(ReadOnlyTask other) {
         if (this.isCompleted() && !other.isCompleted()) {
             return 1;
@@ -82,6 +83,7 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
         }
     }
 
+    //@@author A0105287E
     default int compareDates(ReadOnlyTask other) {
         Deadline dateToCompareForOther;
         Deadline dateToCompareForThis;
