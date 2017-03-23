@@ -16,7 +16,7 @@ import seedu.geekeep.model.task.Title;
 import seedu.geekeep.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in the task manager.
  */
 public class UpdateCommand extends Command {
 

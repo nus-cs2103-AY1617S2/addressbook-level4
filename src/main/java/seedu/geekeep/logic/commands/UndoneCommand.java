@@ -6,7 +6,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Marks 'undone' for task identified using it's last displayed index from the address book.
+ * Marks 'undone' for task identified using it's last displayed index from the task manager.
  */
 public class UndoneCommand extends Command {
     public static final String COMMAND_WORD = "undone";

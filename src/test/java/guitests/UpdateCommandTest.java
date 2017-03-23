@@ -25,7 +25,7 @@ public class UpdateCommandTest extends AddressBookGuiTest {
      * Checks whether the edited person has the correct updated details.
      *
      * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
+     * @param addressBookIndex index of person to edit in the task manager.
      *      Must refer to the same person as {@code filteredPersonListIndex}
      * @param detailsToEdit details to edit the person with as input to the edit command
      * @param editedPerson the expected person after editing the person's details

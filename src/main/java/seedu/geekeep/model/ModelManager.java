@@ -20,7 +20,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data. All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
 
@@ -38,7 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + taskManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());

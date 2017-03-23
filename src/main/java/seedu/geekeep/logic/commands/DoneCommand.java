@@ -6,7 +6,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Marks 'done' for task identified using it's last displayed index from the address book.
+ * Marks 'done' for task identified using it's last displayed index from the task manager.
  */
 public class DoneCommand extends Command {
 

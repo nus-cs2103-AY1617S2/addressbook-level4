@@ -3,7 +3,7 @@ package seedu.geekeep.model.task;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's location in the address book. Guarantees: immutable; is valid as declared in
+ * Represents a Person's location in the task manager. Guarantees: immutable; is valid as declared in
  * {@link #isValidLocation(String)}
  */
 public class Location {
