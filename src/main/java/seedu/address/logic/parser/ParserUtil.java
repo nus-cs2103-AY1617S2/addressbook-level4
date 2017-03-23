@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.ByDate;
+import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.EndTime;
-import seedu.address.model.person.FromDate;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.StartTime;
-import seedu.address.model.person.ToDate;
+import seedu.address.model.person.EndDate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -125,9 +125,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
+    public static Optional<ByTime> parseByTime(Optional<String> bytime) throws IllegalValueException {
+        assert bytime != null;
+        return bytime.isPresent() ? Optional.of(new ByTime(bytime.get())) : Optional.empty();
     }
 
     /**
@@ -145,17 +145,17 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> fromdate} into an {@code Optional<FromDate>} if {@code fromdate} is present.
      */
-    public static Optional<FromDate> parseFromDate(Optional<String> fromdate) throws IllegalValueException {
-        assert fromdate != null;
-        return fromdate.isPresent() ? Optional.of(new FromDate(fromdate.get())) : Optional.empty();
+    public static Optional<StartDate> parseStartDate(Optional<String> startdate) throws IllegalValueException {
+        assert startdate != null;
+        return startdate.isPresent() ? Optional.of(new StartDate(startdate.get())) : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> todate} into an {@code Optional<ToDate>} if {@code todate} is present.
      */
-    public static Optional<ToDate> parseToDate(Optional<String> todate) throws IllegalValueException {
-        assert todate != null;
-        return todate.isPresent() ? Optional.of(new ToDate(todate.get())) : Optional.empty();
+    public static Optional<EndDate> parseEndDate(Optional<String> enddate) throws IllegalValueException {
+        assert enddate != null;
+        return enddate.isPresent() ? Optional.of(new EndDate(enddate.get())) : Optional.empty();
     }
 
     /**

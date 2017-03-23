@@ -5,7 +5,6 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Activity;
 import seedu.address.model.person.ByDate;
 import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
@@ -16,7 +15,9 @@ import seedu.address.model.person.Location;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.StartTime;
-import seedu.address.model.person.UniqueActivityList;
+import seedu.address.model.person.Task;
+import seedu.address.model.person.UniqueEventList;
+import seedu.address.model.person.UniqueTaskList;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -65,9 +66,7 @@ public class AddCommand extends Command {
                     new Location(location),
                     new UniqueTagList(tagSet));
             this.toAddEvent = null;
-        }
-
-        if (startdate != null) {
+        } else {
             this.toAddEvent = new Event(
                     new Description(description),
                     new StartDate(startdate),
@@ -91,9 +90,10 @@ public class AddCommand extends Command {
                 model.addTask(toAddTask);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
             }
-        } catch (UniqueEventList.DuplicateEventException || UniqueTaskList.DuplicateTaskException e) {
+        } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
 
     }
 

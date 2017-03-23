@@ -7,7 +7,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ByDate;
+import seedu.address.model.person.ByTime;
 import seedu.address.model.person.Description;
+import seedu.address.model.person.EndDate;
 import seedu.address.model.person.EndTime;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Location;
@@ -74,7 +76,7 @@ public class EditCommand extends Command {
         List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
         if (type.equals("ev")) {
             if (filteredActivityListIndex >= lastShownEventList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
 
             ReadOnlyEvent eventToEdit = lastShownEventList.get(filteredActivityListIndex);
@@ -90,7 +92,7 @@ public class EditCommand extends Command {
 
         if (type.equals("ts")) {
             if (filteredActivityListIndex >= lastShownTaskList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
             ReadOnlyTask taskToEdit = lastShownTaskList.get(filteredActivityListIndex);
@@ -117,7 +119,7 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(
             taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
-        EndTime updatedByTime = editTaskDescriptor.getByTime().orElseGet(taskToEdit::getByTime);
+        ByTime updatedByTime = editTaskDescriptor.getByTime().orElseGet(taskToEdit::getByTime);
         ByDate updatedByDate = editTaskDescriptor.getByDate().orElseGet(taskToEdit::getByDate);
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
@@ -166,7 +168,7 @@ public class EditCommand extends Command {
             this.starttime = toCopy.getStartTime();
             this.startdate = toCopy.getStartDate();
             this.endtime = toCopy.getEndTime();
-            this.enddate = toCopy.getToDate();
+            this.enddate = toCopy.getEndDate();
             this.location = toCopy.getLocation();
             this.tags = toCopy.getTags();
         }
