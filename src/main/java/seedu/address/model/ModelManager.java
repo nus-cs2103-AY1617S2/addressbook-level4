@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.common.base.Joiner;
 
+
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -15,6 +16,7 @@ import seedu.address.commons.events.model.ToDoAppChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.NattyParser;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
@@ -110,21 +112,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        if (keywords.contains("name")) {
-            keywords.remove("name");
-            updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
-        } else if (keywords.contains("deadline")) {
-            keywords.remove("deadline");
-            updateFilteredTaskList(new PredicateExpression(new DeadlineQualifier(keywords)));
-        } else if (keywords.contains("priority")) {
-            keywords.remove("priority");
+    public void updateFilteredTaskList(String[] keywords) {
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        String[] trimmedKeywords = Arrays.copyOfRange(keywords, 1, keywords.length);
+        if (keywordSet.contains("name")) {
+            keywordSet.remove("name");
+            updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywordSet)));
+        } else if (keywordSet.contains("deadline")) {
+            keywordSet.remove("deadline");
+            updateFilteredTaskList(new PredicateExpression(new DeadlineQualifier(trimmedKeywords)));
+        } else if (keywordSet.contains("priority")) {
+            keywordSet.remove("priority");
             updateFilteredTaskList(new PredicateExpression(
-                    new PriorityQualifier(Integer.parseInt(Joiner.on(" ").skipNulls().join(keywords)))));
-        } else if (keywords.contains("completion")) {
-            keywords.remove("completion");
-            updateFilteredTaskList(new PredicateExpression(
-                    new CompletionQualifier(Joiner.on(" ").skipNulls().join(keywords))));
+                    new PriorityQualifier(Integer.parseInt(Joiner.on(" ").skipNulls().join(keywordSet)))));
+            // } else if (keywords.contains("completion")) {
+            // keywords.remove("completion");
+            // updateFilteredTaskList(new PredicateExpression(
+            // new CompletionQualifier(Joiner.on("
+            // ").skipNulls().join(keywords))));
         }
     }
 
@@ -188,25 +193,30 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0124591H
     private class DeadlineQualifier implements Qualifier {
-        private Deadline deadlineKeyDeadline;
         private String deadlineKeyString;
+        private Deadline deadlineKeyDeadline;
 
-        DeadlineQualifier(Set<String> deadlineKeyInputs) {
-            try {
-                this.deadlineKeyDeadline = new Deadline(Joiner.on(" ").join(deadlineKeyInputs));
-                this.deadlineKeyString = deadlineKeyDeadline.toString();
-            } catch (IllegalValueException e) {
-            }
+        DeadlineQualifier(String[] deadlineKeyInput) {
+            NattyParser nattyParser = NattyParser.getInstance();
+            this.deadlineKeyString = nattyParser
+                    .parseNLPDate(Arrays.toString(deadlineKeyInput).replaceAll("[^A-Za-z0-9 ]", ""));
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getDeadline().toString().equals(deadlineKeyString);
+            try {
+                deadlineKeyDeadline = new Deadline(deadlineKeyString);
+                return task.getDeadline().equals(deadlineKeyDeadline);
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return false;
         }
 
         @Override
         public String toString() {
-            return "deadline=" + String.join(", ", deadlineKeyDeadline.value);
+            return "deadline=" + String.join(", ", deadlineKeyString);
         }
     }
 
@@ -228,24 +238,25 @@ public class ModelManager extends ComponentManager implements Model {
             return "priority=" + String.join(", ", String.valueOf(priorityNumber));
         }
     }
-
-    // @@author A0124591H
-    private class CompletionQualifier implements Qualifier {
-        private String completionValue;
-
-        CompletionQualifier(String completionValue) {
-            this.completionValue = completionValue;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
-        }
-
-        @Override
-        public String toString() {
-            return "completion=" + String.join(", ", completionValue);
-        }
-    }
+    //
+    // // @@author A0124591H
+    // private class CompletionQualifier implements Qualifier {
+    // private String completionValue;
+    //
+    // CompletionQualifier(String completionValue) {
+    // this.completionValue = completionValue;
+    // }
+    //
+    // @Override
+    // public boolean run(ReadOnlyTask task) {
+    // return
+    // String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
+    // }
+    //
+    // @Override
+    // public String toString() {
+    // return "completion=" + String.join(", ", completionValue);
+    // }
+    // }
 
 }
