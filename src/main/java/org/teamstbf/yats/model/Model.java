@@ -54,19 +54,19 @@ public interface Model {
 
 	/** Updates the filter of the filtered event list to show all events */
 	void updateFilteredListToShowAll();
-	
+
 	//@@author A0102778B
-	
+
     /**
      * Method to get the previous state (undo command) of the task manager
      */
     void getPreviousState();
 
     /**
-     * Method to get the next state (redo command) of the task manager 
+     * Method to get the next state (redo command) of the task manager
      */
     void getNextState();
-    
+
     boolean checkEmptyUndoStack();
 
     boolean checkEmptyRedoStack();
@@ -79,8 +79,5 @@ public interface Model {
 
 	void updateFilteredListToShowTags(Set<String> keywords);
 
-	void getPreviousState();
-
-	void getNextState();
 
 }

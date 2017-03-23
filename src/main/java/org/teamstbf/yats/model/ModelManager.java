@@ -27,8 +27,12 @@ public class ModelManager extends ComponentManager implements Model {
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
+
+	private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 5;
+
 	private final TaskManager taskManager;
-  
+
 	//@@author A0102778B
 
 	private static Stack<TaskManager> undoTaskManager = new Stack<TaskManager>();
@@ -62,10 +66,10 @@ public class ModelManager extends ComponentManager implements Model {
 		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
 	}
-	
+
     /**
-     * Saves an image of the previous state of the TaskManager for the undo command - also clears the redo 
-     * stack images because once the state is mutated the previous redoes state are invalid because they are no 
+     * Saves an image of the previous state of the TaskManager for the undo command - also clears the redo
+     * stack images because once the state is mutated the previous redoes state are invalid because they are no
      * longer part of the same chain. This is an internal method used by the addEvent, deteleEvent, clearEvent,
      * editEvent methods. This method also contains a check - if there are currently too many task manager states,
      * it will remove half of the earlier saved states and only keep the later half.
@@ -116,10 +120,10 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.removeEvent(target);
 		indicateTaskManagerChanged();
 	}
-	
-	
+
+
 	//@@author A0102778B
-	
+
     @Override
     public boolean checkEmptyUndoStack() {
         return undoTaskManager.isEmpty();
@@ -129,28 +133,30 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean checkEmptyRedoStack() {
         return redoTaskManager.isEmpty();
     }
-    
+
 	@Override
     public synchronized void getPreviousState() {
 	    TaskManager tempManager = new TaskManager();
 	    tempManager.resetData(taskManager);
 	    redoTaskManager.push(tempManager);
         taskManager.resetData((ReadOnlyTaskManager)undoTaskManager.pop());
+        indicateTaskManagerChanged();
     }
-	
+
     @Override
     public synchronized void getNextState() {
         TaskManager tempManager = new TaskManager();
         tempManager.resetData(taskManager);
         undoTaskManager.push(tempManager);
         taskManager.resetData((ReadOnlyTaskManager)redoTaskManager.pop());
+        indicateTaskManagerChanged();
     }
 
-	@Override
+/*	@Override
 	public synchronized void getNextState() {
 		saveImage();
 		taskManager.resetData(redoTaskManager.pop());
-	}
+	} */
 
 	@Override
 	public ReadOnlyTaskManager getTaskManager() {
@@ -176,8 +182,6 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
-
-	@Override
 
 	// ========== Inner classes/interfaces used for filtering
 	// =================================================

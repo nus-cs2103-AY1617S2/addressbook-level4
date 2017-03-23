@@ -6,10 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
+//@@author A0102778B
 
 public class TaskCard extends UiPart<Region> {
-
-    private static final String FXML = "PersonListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -30,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyEvent person, int displayedIndex) {
+    public TaskCard(ReadOnlyEvent person, int displayedIndex, String FXML) {
         super(FXML);
         name.setText(person.getTitle().fullName);
         id.setText(displayedIndex + ". ");

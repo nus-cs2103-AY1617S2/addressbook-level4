@@ -14,7 +14,7 @@ public class Event implements ReadOnlyEvent {
 	private Schedule startTime;
 	private Schedule endTime;
 	private Description description;
-	private boolean isDone;
+	private IsDone isDone;
 	private Location location;
 	private UniqueTagList tags;
 
@@ -61,14 +61,19 @@ public class Event implements ReadOnlyEvent {
 		} else {
 			this.description = new Description(" ");
 		}
-		this.isDone = false;
+		if (parameters.get("isDone") != null) {
+			this.description = new Description((String) parameters.get("description"));
+		} else {
+			this.description = new Description(" ");
+		}
 		this.tags = new UniqueTagList(tags);
+		this.isDone = new IsDone();
 	}
 
-	public Event(ReadOnlyEvent editedReadOnlyPerson) {
-		this(editedReadOnlyPerson.getTitle(), editedReadOnlyPerson.getLocation(), editedReadOnlyPerson.getPeriod(),
-				editedReadOnlyPerson.getStartTime(), editedReadOnlyPerson.getEndTime(),
-				editedReadOnlyPerson.getDescription(), editedReadOnlyPerson.getTags());
+	public Event(ReadOnlyEvent editedReadOnlyEvent) {
+		this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(), editedReadOnlyEvent.getPeriod(),
+				editedReadOnlyEvent.getStartTime(), editedReadOnlyEvent.getEndTime(),
+				editedReadOnlyEvent.getDescription(), editedReadOnlyEvent.getTags(), editedReadOnlyEvent.getIsDone());
 	}
 
 	/**
@@ -77,7 +82,7 @@ public class Event implements ReadOnlyEvent {
 	 *
 	 */
 	public Event(Title name, Location location, Periodic periodic, Schedule startTime, Schedule endTime,
-			Description description, UniqueTagList tags) {
+			Description description, UniqueTagList tags, IsDone isDone) {
 		assert !CollectionUtil.isAnyNull(name);
 		this.name = name;
 		this.period = periodic;
@@ -85,7 +90,7 @@ public class Event implements ReadOnlyEvent {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.description = description;
-		this.isDone = false;
+		this.isDone = isDone;
 		this.tags = new UniqueTagList(tags); // protect internal tags from
 		// changes in the arg list
 	}
@@ -169,6 +174,11 @@ public class Event implements ReadOnlyEvent {
 		this.setEndTime(replacement.getEndTime());
 		this.setDescription(replacement.getDescription());
 		this.setTags(replacement.getTags());
+		this.setIsDone(replacement.getIsDone());
+	}
+
+	private void setIsDone(IsDone done) {
+		this.isDone = done;
 	}
 
 	public void setDescription(Description description) {
@@ -215,6 +225,20 @@ public class Event implements ReadOnlyEvent {
 
 	public String toString() {
 		return getAsText();
+	}
+
+	@Override
+	public IsDone getIsDone() {
+		return this.isDone;
+	}
+	
+	public boolean isTaskDone() {
+		return this.isDone.getIsDone();
+	}
+
+	@Override
+	public void markDone() {
+		this.isDone.markDone();
 	}
 
 }

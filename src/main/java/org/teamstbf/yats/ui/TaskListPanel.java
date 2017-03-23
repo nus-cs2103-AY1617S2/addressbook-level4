@@ -23,6 +23,9 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "PersonListPanel.fxml";
 
+    private static final String FXMLPERSON = "PersonListCard.fxml";
+    private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
+
     @FXML
     private ListView<ReadOnlyEvent> personListView;
 
@@ -71,7 +74,11 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
+                if (person.getIsDone().getIsDone()) {
+                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSONDONE).getRoot());
+                } else {
+                    setGraphic(new TaskCard(person, getIndex() + 1,FXMLPERSON).getRoot());
+                }
             }
         }
     }

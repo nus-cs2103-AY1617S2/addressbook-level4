@@ -5,6 +5,7 @@ import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.Schedule;
@@ -24,28 +25,28 @@ public class SampleDataUtil {
 							new Schedule("8:00pm"),
 							new Description("Research to be extended and continued to "
 									+ "alleviate carcinogenic vascularity"),
-							new UniqueTagList("research")),
+							new UniqueTagList("research"), new IsDone()),
 					new Event(new Title("Grocery Shopping"),
 							new Location("FoodCourt"),
 							new Periodic("monthly"),
 							new Schedule("10:00pm"),
 							new Schedule("2:00pm"),
 							new Description("Buy some food"),
-							new UniqueTagList("necessitires")),
+							new UniqueTagList("necessitires"), new IsDone()),
 					new Event(new Title("Vscan Access Mid Term"),
 							new Location("School"),
 							new Periodic("daily"),
 							new Schedule("2:30pm"),
 							new Schedule("2:30pm"),
 							new Description("To revise on p value mathematical induction"),
-							new UniqueTagList("school", "learn")),
+							new UniqueTagList("school", "learn"), new IsDone()),
 					new Event(new Title("Project Milestone Documentation"),
 							new Location("School"),
 							new Periodic("weekly"),
 							new Schedule("4:00pm"),
 							new Schedule("5:00pm"),
 							new Description("prepare project doucments"),
-							new UniqueTagList("school","learn"))
+							new UniqueTagList("school","learn"), new IsDone())
 			};
 		} catch (IllegalValueException e) {
 			throw new AssertionError("sample data cannot be invalid", e);
