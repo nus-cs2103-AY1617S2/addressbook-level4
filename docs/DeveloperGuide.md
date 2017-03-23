@@ -118,7 +118,7 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `delete t 1`.
 
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
@@ -139,15 +139,14 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Yoshi Nishimura
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `UserInboxPanel` and its components, and `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -156,9 +155,16 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 
 The `UI` component,
 
-* Executes user commands using the `Logic` component.
+* Executes user commands using the `Logic` component through `CommandBox`.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+* Responds to events raised from various parts of the App and updates the UI accordingly. For example, when the user has made changes to the underlying `Model` data by deleting a task, the `statusBar` will update its `syncStatus` field through `UserInboxChangedEvent`.
+
+**The `UserInboxPanel`:**
+- Consists of two sub-components, namely, `TaskListPanel` and `EventListPanel`.
+- These two panels consists of:
+1. A header in the form of `Label` i.e. "Tasks" for `TaskListPanel` and "Events" for `EventListPanel`
+2. Corresponding `ListView` i.e. `taskList` for `TaskListPanel` and `eventList` for `EventListPanel`
+- The visibility of these two sub-components will be altered according to the command entered. For example, if the user wants to list tasks whose deadlines are set before next Monday, he would type in `list t d/next Monday`. This command would set the visibility of `EventListPanel` to hidden so that the user can use the entire window to list the tasks he/she is interested in. 
 
 ### 2.3. Logic component
 
@@ -181,7 +187,7 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Yoshi Nishimura
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -191,14 +197,29 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
+* stores the User inbox data, including the list of events, list of tasks and list of tags associated with the items in user inbox.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` and `UnmodifiableObservableList<ReadOnlyEvent>` that can be 'observed' e.g. the `TaskListPanel` and `EventListPanel` in UI can be notified of any updates so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+
+**Tasks** consists of:
+1. Name
+2. Deadline (may not be set)
+3. Priority (default = 0)
+4. Description (may not be set)
+5. Zero or more tags
+
+**Events** consists of:
+1. Name
+2. One or more Timeslots
+3. Location (may not be set)
+4. Description (may not be set)
+5. Zero or more tags
+
+**Note**: the reason why although some elements are optional but are still tied as composition is that when they are not supplied by the user, the `Model` would set their values to empty values (e.g. empty string).
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Yoshi Nishimura
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -208,11 +229,12 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the User inbox data in xml format and read it back.
+* gets notified of the changes in model by `UserInboxChangedEvent` posted by the `Model` each time it updates the data upon executing add, delete or edit. This way, the coupling between `Storage` and `Model` is reduced. 
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `project.taskcrusher.commons` package.
 
 ## 3. Implementation
 
