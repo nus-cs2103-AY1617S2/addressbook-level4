@@ -25,7 +25,6 @@ import seedu.jobs.model.Model;
 import seedu.jobs.model.ModelManager;
 import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.UserPrefs;
-import seedu.jobs.model.task.Task.IllegalTimeException;
 import seedu.jobs.model.util.SampleDataUtil;
 import seedu.jobs.storage.Storage;
 import seedu.jobs.storage.StorageManager;
@@ -74,7 +73,7 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) throws IllegalTimeException {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyTaskBook> addressBookOptional;
         ReadOnlyTaskBook initialData;
         try {

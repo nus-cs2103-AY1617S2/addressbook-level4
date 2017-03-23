@@ -14,7 +14,6 @@ import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
-import seedu.jobs.model.task.Task.IllegalTimeException;
 import seedu.jobs.model.task.UniqueTaskList;
 import seedu.jobs.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -45,7 +44,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      * @throws IllegalTimeException 
      */
-    public TaskBook(ReadOnlyTaskBook toBeCopied) throws IllegalTimeException {
+    public TaskBook(ReadOnlyTaskBook toBeCopied){
         this();
         resetData(toBeCopied);
     }
@@ -53,7 +52,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
+            throws UniqueTaskList.DuplicateTaskException{
         this.tasks.setTasks(tasks);
     }
 
@@ -61,7 +60,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskBook newData) throws IllegalTimeException {
+    public void resetData(ReadOnlyTaskBook newData){
         assert newData != null;
         try {
             setTasks(newData.getTaskList());
@@ -101,7 +100,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
+            throws UniqueTaskList.DuplicateTaskException{
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
