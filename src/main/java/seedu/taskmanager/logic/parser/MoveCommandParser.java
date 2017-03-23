@@ -6,9 +6,9 @@ import static seedu.taskmanager.logic.parser.CliSyntax.FILEPATH_ARGS_FORMAT;
 
 import java.util.regex.Matcher;
 
-import seedu.taskmanager.logic.commands.MoveCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
+import seedu.taskmanager.logic.commands.MoveCommand;
 
 /**
  * @@author A0114269E
@@ -32,7 +32,7 @@ public class MoveCommandParser {
         }
         return new MoveCommand(args.trim());
     }
-    
+
     /**
      * Checks if the given file path is a path to an XML file
      */

@@ -6,8 +6,8 @@ import static seedu.taskmanager.logic.parser.CliSyntax.FILEPATH_ARGS_FORMAT;
 
 import java.util.regex.Matcher;
 
-import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
+import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 
 /**
@@ -32,7 +32,7 @@ public class ChangeDirectoryCommandParser {
         }
         return new ChangeDirectoryCommand(args.trim());
     }
-    
+
     /**
      * Checks if the given file path is a path to an XML file
      */
