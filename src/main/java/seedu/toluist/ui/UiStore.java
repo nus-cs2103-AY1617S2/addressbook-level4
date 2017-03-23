@@ -31,6 +31,7 @@ public class UiStore {
     private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
     private ObjectProperty<CommandResult> observableCommandResult =
             new SimpleObjectProperty<>(new CommandResult(""));
+    private ObjectProperty<String> observableCommandText = new SimpleObjectProperty<>("");
 
     public static UiStore getInstance() {
         if (instance == null) {
@@ -70,6 +71,14 @@ public class UiStore {
 
     public void setCommandResult(CommandResult commandResult) {
         observableCommandResult.setValue(commandResult);
+    }
+
+    public ObservableValue<String> getObservableCommandText() {
+        return observableCommandText;
+    }
+
+    public void setCommandText(String commandText) {
+        observableCommandText.setValue(commandText);
     }
 
     public ObservableValue<CommandResult> getObservableCommandResult() {
