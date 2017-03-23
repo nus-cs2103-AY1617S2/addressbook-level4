@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
@@ -16,6 +17,7 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
+import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -86,7 +88,7 @@ public class UserInbox implements ReadOnlyUserInbox {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
+    	syncMasterTagListWith(p);
         tasks.add(p);
         added.add(p);
     }
@@ -110,11 +112,19 @@ public class UserInbox implements ReadOnlyUserInbox {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
-        Task editedTask = new Task(editedReadOnlyTask);
-        syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
+        FilteredList<Task> editTasks = new FilteredList<>(tasks.asObservableList());
+        int addressBookIndex = editTasks.getSourceIndex(index);
+        Task t = editTasks.get(addressBookIndex);
+        System.out.println(t.getTaskName());
+        deleted.add(t);
+        Task editedTask = new Task(editedReadOnlyTask);
+        syncMasterTagListWith(editedTask);
+        System.out.println(editedTask.getTaskName());
+        System.out.println(t.getTaskName());
+        added.add(editedTask);
         tasks.updateTask(index, editedTask);
     }
 
@@ -149,7 +159,7 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException, UniqueTaskList.DuplicateTaskException {
-        if (tasks.remove(key)) {
+    	if (tasks.remove(key)) {
         	deleted.add((Task) key);
             return true;
         } else {

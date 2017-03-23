@@ -6,6 +6,7 @@ import java.util.Optional;
 import project.taskcrusher.commons.core.Messages;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
+import project.taskcrusher.model.Model;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.tag.UniqueTagList;
@@ -48,6 +49,7 @@ public class EditCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        Model.adddel.add(2);
     }
 
     @Override

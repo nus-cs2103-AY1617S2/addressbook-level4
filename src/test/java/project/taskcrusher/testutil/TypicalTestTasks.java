@@ -14,6 +14,7 @@ public class TypicalTestTasks {
 
     public TestCard assignment, payment, shopping, phoneCall, application;
     public TestCard notAddedBuyTicket, notAddedQuiz;
+    public static TestCard Undochecker;
     public TypicalTestTasks() {
         try {
             assignment = new TaskBuilder().withName("CS2103 assignment")
@@ -33,6 +34,8 @@ public class TypicalTestTasks {
                     .withDeadline("next Tuesday").withDescription("In Portugal").build();
             notAddedQuiz = new TaskBuilder().withName("Post lecture quiz").withPriority("2")
                     .withDeadline("Saturday").withDescription("CS2103").build();
+           Undochecker = new TaskBuilder().withName("Hope it works").withPriority("2")
+                    .withDeadline("Saturday").withDescription("testing").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
