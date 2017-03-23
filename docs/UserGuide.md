@@ -141,10 +141,10 @@ Examples:
 
 * `list`<br>
   `complete 2`<br>
-  Selects the 2nd task in the task list.
+  Completes the 2nd task in the task list.
 * `find tutorial` <br>
   `complete 1`<br>
-  Selects the 1st task in the results of the `find` command.
+  Completes the 1st task in the results of the `find` command.
 
 ### 2.8. Allocate priority to a task: `prioritize`
 
@@ -157,7 +157,7 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 
 Examples:
 * `list`<br>
-  `prioritize 2 3`
+  `prioritize 2 3`<br>
   Puts a priority level of 3 to the 2nd task in the task list
 
 ### 2.9. Clearing all entries : `clear`
@@ -195,7 +195,7 @@ There is no need to save manually.
    e.g. `edit 1 ed/03/03/2017`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-   e.g. `find assignment`
+   e.g. `find assignment` <br>
 	      `find tutorial`
 
 * **List** : `list` <br>
