@@ -184,6 +184,12 @@ public class ModelManager extends ComponentManager implements Model {
             return filtered;
         }
     }
+
+    public int getTaskIndex(ReadOnlyTask task) {
+        FilteredList<ReadOnlyTask> filtered = getFilteredByDoneFindType(task.getTaskType());
+        return filtered.indexOf(task);
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     @Override

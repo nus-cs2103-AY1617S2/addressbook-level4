@@ -1,8 +1,11 @@
 package seedu.onetwodo.logic.commands;
 
+import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.Messages;
+import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.Model;
+import seedu.onetwodo.model.task.ReadOnlyTask;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -35,6 +38,16 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    /**
+     * Scroll to task provided
+     *
+     * @param task to jump to
+     */
+    public void jumpToNewTask(ReadOnlyTask task) {
+        int filteredIndex = model.getTaskIndex(task);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredIndex, task.getTaskType()));
     }
 
 }

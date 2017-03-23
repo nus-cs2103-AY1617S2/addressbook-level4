@@ -68,4 +68,6 @@ public interface Model {
     void updateByTaskType(TaskType taskType);
 
     FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType taskType);
+
+    int getTaskIndex(ReadOnlyTask task);
 }
