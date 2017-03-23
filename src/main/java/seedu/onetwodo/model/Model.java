@@ -59,4 +59,6 @@ public interface Model {
     void setDoneStatus(DoneStatus doneStatus);
 
     void undo() throws EmptyHistoryException;
+
+    void redo() throws EmptyHistoryException;
 }

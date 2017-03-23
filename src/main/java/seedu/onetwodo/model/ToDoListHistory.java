@@ -7,7 +7,11 @@ import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
  * The API of the Model component.
  */
 public interface ToDoListHistory {
-    void saveToDoList (ToDoList toDoList);
+    void saveAsPreviousToDoList (ToDoList toDoList);
+    void saveAsPreviousToDoListAndClearRedoHistory(ToDoList toDoList);
+    void saveAsNextToDoList(ToDoList toDoList);
     ToDoList getPreviousToDoList() throws EmptyHistoryException;
     ToDoList getNextToDoList() throws EmptyHistoryException;
+    boolean isUndoHistoryEmpty();
+    boolean isRedoHistoryEmpty();
 }

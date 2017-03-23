@@ -19,27 +19,49 @@ public class ToDoListHistoryManager implements ToDoListHistory {
     }
 
     @Override
-    public void saveToDoList(ToDoList toDoList) {
+    public void saveAsPreviousToDoList(ToDoList toDoList) {
         ToDoList copiedCurrentToDoList = new ToDoList(toDoList);
         previousToDoLists.push(copiedCurrentToDoList);
     }
 
     @Override
+    public void saveAsPreviousToDoListAndClearRedoHistory(ToDoList toDoList) {
+        ToDoList copiedCurrentToDoList = new ToDoList(toDoList);
+        previousToDoLists.push(copiedCurrentToDoList);
+        nextToDoLists.clear();
+    }
+
+    @Override
+    public void saveAsNextToDoList(ToDoList toDoList) {
+        ToDoList copiedCurrentToDoList = new ToDoList(toDoList);
+        nextToDoLists.push(copiedCurrentToDoList);
+    }
+
+    @Override
     public ToDoList getPreviousToDoList() throws EmptyHistoryException {
-        if (!previousToDoLists.isEmpty()) {
+        if (!isUndoHistoryEmpty()) {
             return previousToDoLists.pop();
         } else {
-            throw new EmptyHistoryException("OneTwoDo ccannot be undone anymore");
+            throw new EmptyHistoryException("OneTwoDo cannot be undone anymore");
         }
     }
 
     @Override
     public ToDoList getNextToDoList() throws EmptyHistoryException {
-        if (!previousToDoLists.isEmpty()) {
-            return previousToDoLists.pop();
+        if (!isRedoHistoryEmpty()) {
+            return nextToDoLists.pop();
         } else {
-            throw new EmptyHistoryException("OneTwoDo ccannot be undone anymore");
+            throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
         }
     }
 
+    @Override
+    public boolean isUndoHistoryEmpty() {
+        return previousToDoLists.empty();
+    }
+
+    @Override
+    public boolean isRedoHistoryEmpty() {
+        return nextToDoLists.empty();
+    }
 }

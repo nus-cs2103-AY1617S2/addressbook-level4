@@ -5,25 +5,25 @@ import seedu.onetwodo.logic.commands.exceptions.CommandException;
 
 //@@author A0135739W
 /**
- * Undo the most recent command that modifies the toDoList.
+ * Redo the most recent undo command that modifies the toDoList.
  */
-public class UndoCommand extends Command {
-
-    public static final String COMMAND_WORD = "undo";
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undo the most recent command that modifies any of the 3 lists.\n"
+            + ": Redo the most recent undo command that modifies any of the 3 lists.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Undo successful.";
+    public static final String MESSAGE_SUCCESS = "Redo successful.";
 
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            model.undo();
+            model.redo();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyHistoryException ehe) {
             throw new CommandException(ehe.getMessage());
         }
     }
+
 }

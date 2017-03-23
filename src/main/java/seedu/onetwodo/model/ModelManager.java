@@ -69,14 +69,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        history.saveToDoList(this.toDoList);
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
 
     @Override
     public synchronized void doneTask(int filteredTaskListIndex) throws IllegalValueException {
-        history.saveToDoList(this.toDoList);
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
         setDoneStatus(DoneStatus.UNDONE);
@@ -86,7 +86,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        history.saveToDoList(this.toDoList);
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
         toDoList.addTask(task);
         setDoneStatus(DoneStatus.UNDONE);
         updateFilteredUndoneTaskList();
@@ -105,10 +105,28 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void undo() throws EmptyHistoryException {
-        this.toDoList.resetData(history.getPreviousToDoList());
-        setDoneStatus(DoneStatus.UNDONE);
-        updateFilteredUndoneTaskList();
-        indicateToDoListChanged();
+        if (!history.isUndoHistoryEmpty()) {
+            history.saveAsNextToDoList(this.toDoList);
+            this.toDoList.resetData(history.getPreviousToDoList());
+            setDoneStatus(DoneStatus.UNDONE);
+            updateFilteredUndoneTaskList();
+            indicateToDoListChanged();
+        } else {
+            throw new EmptyHistoryException("OneTwoDo cannot be undone anymore");
+        }
+    }
+
+    @Override
+    public void redo() throws EmptyHistoryException {
+        if (!history.isRedoHistoryEmpty()) {
+            history.saveAsPreviousToDoList(this.toDoList);
+            this.toDoList.resetData(history.getNextToDoList());
+            setDoneStatus(DoneStatus.UNDONE);
+            updateFilteredUndoneTaskList();
+            indicateToDoListChanged();
+        } else {
+            throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
+        }
     }
 
     //=========== Filtered Task List Accessors =============================================================
