@@ -4,17 +4,17 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](#appendix-a-user-stories)
+* [Appendix B: Use Cases](#appendix-b-use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E : Product Survey](#appendix-e-product-survey)
 
 
 ## 1. Setting up
@@ -232,6 +232,16 @@ and logging destinations.
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+### 3.3 Undo/Redo Command
+
+The Undo and Redo commands were implemented by saving immutable states of the TaskManager dataset into two stacks, an undo stack
+and a redo stack. Every time a action is taken that will mutate the data stored inside the TaskManager, a state of the previous data is saved by through
+copying the TaskManager object and pushing this into an Undo stack. When the undo command is taken, the ModelManager class pops the
+last TaskManager state from the undo stack and replaces the current data with this state. Before it replaces the data, the ModelManager \
+class also saves the current data as a state and pushes this onto the redo stack. This way, the undo can be reversed by popping from the redo stack.
+Two implementation decisions made. The first is that everytime a new action is taken (not undo or redo), the redo stack will be cleared or else there might be
+logical errors in state transformation (the redo stack will contain old states). The second is that there should be no more than 50 saved states of the
+task manager, and if there are 50 saved states, 25 of the earliest saved states will be deleted.
 
 ## 4. Testing
 

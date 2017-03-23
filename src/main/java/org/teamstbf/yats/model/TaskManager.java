@@ -1,5 +1,7 @@
 package org.teamstbf.yats.model;
 
+import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +19,8 @@ import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 import javafx.collections.ObservableList;
+
+//@@author A0102778B
 
 /**
  * Wraps all data at the address-book level
@@ -85,8 +89,16 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueEventList.DuplicateEventException if an equivalent person already exists.
      */
     public void addEvent(Event p) throws UniqueEventList.DuplicateEventException {
+        storeEventTagImage();
         syncMasterTagListWith(p);
         events.add(p);
+    }
+
+    private void storeEventTagImage() {
+        UniqueEventList tempEvents = new UniqueEventList();
+        tempEvents.setEvents(events);
+        UniqueTagList tempTags = new UniqueTagList();
+        tempTags.setTags(tags);
     }
 
     /**
@@ -98,23 +110,11 @@ public class TaskManager implements ReadOnlyTaskManager {
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateEvent(int index, Event editedReadOnlyPerson)
+    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
             throws UniqueEventList.DuplicateEventException {
-        assert editedReadOnlyPerson != null;
+        assert editedReadOnlyEvent != null;
 
-        Event editedPerson = new Event(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        events.updateEvent(index, editedPerson);
-    }
-
-    public void updateEvent(int index, ReadOnlyEvent editedReadOnlyPerson)
-            throws UniqueEventList.DuplicateEventException {
-        assert editedReadOnlyPerson != null;
-
-        Event editedPerson = new Event(editedReadOnlyPerson);
+        Event editedPerson = new Event(editedReadOnlyEvent);
         syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
