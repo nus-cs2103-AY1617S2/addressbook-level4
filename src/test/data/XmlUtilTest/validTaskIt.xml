@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <tags>school</tags>
+    <tags>leisure</tags>
+    <tags>friends</tags>
+    <tags>household</tags>
+    <tasks>
+        <title>Homework 1</title>
+        <start></start>
+        <end></end>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <title>Meet with friend</title>
+        <start></start>
+        <end></end>
+        <tagged>leisure</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <title>clean room</title>
+        <start></start>
+        <end></end>
+        <tagged>household</tagged>
+    </tasks>
+    <tasks>
+        <title>project meeting</title>
+        <start></start>
+        <end></end>
+        <tagged>school</tagged>
+    </tasks>
+</addressbook>

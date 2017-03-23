@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.NoSuchElementException;
 
@@ -18,20 +18,32 @@ import seedu.address.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
+	//@@author A0163996J
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
+
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_BY, PREFIX_FROM, PREFIX_TO, PREFIX_TAG);
         argsTokenizer.tokenize(args);
+        String start = null;
+        String end = null;
+        //TODOD better way to make these fields optional
+        try {
+            start = argsTokenizer.getValue(PREFIX_FROM).get();
+            end = argsTokenizer.getValue(PREFIX_TO).get();
+        } catch (NoSuchElementException nse) {
+            try {
+                end = argsTokenizer.getValue(PREFIX_BY).get();
+            } catch (NoSuchElementException nsee1) {}
+        }
         try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    argsTokenizer.getValue(PREFIX_PHONE).get(),
-                    argsTokenizer.getValue(PREFIX_EMAIL).get(),
-                    argsTokenizer.getValue(PREFIX_ADDRESS).get(),
+                    start,
+                    end,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
@@ -40,5 +52,4 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-
 }

@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_TITLE;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_TAG;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_START;
+import static seedu.address.logic.parser.CliSyntax.FIELDWORD_END;
 
+
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +16,12 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Title;
+import seedu.address.model.task.Date;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -27,34 +32,84 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
+    //public Command parse(String args) {
+        //assert args != null;
+        //ArgumentTokenizer argsTokenizer =
+        //        new ArgumentTokenizer(PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_TAG);
+        //argsTokenizer.tokenize(args);
+        
+        //List<Optional<String>> preambleFields = ParserUtil.splitPreamble(prepareArgument(args).orElse(""), 2);
+
+        //Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        //if (!index.isPresent()) {
+        //   return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        //}
+
+        //EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        //try {
+        //    editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
+        //    editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+        //} catch (IllegalValueException ive) {
+        //    return new IncorrectCommand(ive.getMessage());
+        //}
+
+        //if (!editTaskDescriptor.isAnyFieldEdited()) {
+        //   return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
+        //}
+
+        //return new EditCommand(index.get(), editTaskDescriptor);
+    //}
+    
     public Command parse(String args) {
         assert args != null;
-        ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
-
-        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        List<Optional<String>> editInformation = ParserUtil.splitArgument(args.trim(),3);
+        
+        if (!(editInformation.size()==3)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,EditCommand.MESSAGE_USAGE));
+        }
+        
+        Optional<Integer> index = editInformation.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NOT_EDITED));
         }
-
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        
+        Optional<String> fieldWord = editInformation.get(1);
+        Optional<String> updateInformation = editInformation.get(2);
+        
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argsTokenizer.getValue(PREFIX_PHONE)));
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argsTokenizer.getValue(PREFIX_EMAIL)));
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argsTokenizer.getValue(PREFIX_ADDRESS)));
-            editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            String fieldWordName = fieldWord.get();
+            if (FIELDWORD_TITLE.equals(fieldWordName)) {
+                if(!Title.isValidTitle(updateInformation.get())) {
+                    return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
+                }
+                editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
+            }
+            if (FIELDWORD_TAG.equals(fieldWordName)) {
+                if(!Tag.isValidTagName(updateInformation.get())) {
+                    return new IncorrectCommand(Tag.MESSAGE_TAG_CONSTRAINTS);
+                }
+                editTaskDescriptor.setTags(parseTagsForEdit(separateTags(updateInformation)));
+            }
+            if (FIELDWORD_START.equals(fieldWordName)) {
+            	editTaskDescriptor.setStart(ParserUtil.parseDate(updateInformation));
+            }
+            if (FIELDWORD_END.equals(fieldWordName)) {
+            	editTaskDescriptor.setEnd(ParserUtil.parseDate(updateInformation));
+            }            
+        }catch (IllegalValueException ive) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index.get(), editPersonDescriptor);
+        
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
+               return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
+            }
+        return new EditCommand(index.get(), editTaskDescriptor);
+    }
+    
+    private Collection<String> separateTags(Optional<String> updateInformation) {
+        List<String> separatedTags = Arrays.asList(updateInformation.get().split("s//+"));
+        return separatedTags;
     }
 
     /**
@@ -68,7 +123,8 @@ public class EditCommandParser {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("null") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
