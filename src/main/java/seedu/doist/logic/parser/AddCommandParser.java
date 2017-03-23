@@ -85,17 +85,21 @@ public class AddCommandParser {
 
         Date startDate = null;
         Date endDate = null;
+        boolean validDate = true;
         int dateFormat = tokenizer.getDateFormat();
         switch (dateFormat) {
         case ArgumentTokenizer.DATE_NIL : break;
         case ArgumentTokenizer.DATE_BY : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get());
-                                         endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get()); break;
+                                         endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_BY).get());
+                                         validDate = ParserUtil.validateDate(startDate, endDate); break;
         case ArgumentTokenizer.DATE_FROM : startDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_FROM).get());
                                            endDate = ParserUtil.parseDate(tokenizer.getValue(PREFIX_TO).get());
-                                           break;
+                                           validDate = ParserUtil.validateDate(startDate, endDate); break;
         default : break;
         }
-
+        if (!validDate) {
+            throw new IllegalValueException("Incorrect Dates");
+        }
         Task toAdd = new Task(new Description(preamble), tagList, startDate, endDate);
         // set priority
         Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
