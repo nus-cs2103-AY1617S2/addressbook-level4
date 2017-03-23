@@ -41,7 +41,7 @@ public class UnmarkCommand extends Command {
             if (filteredTaskListIndex >= lastShownList.size() || filteredTaskListIndex < 0) {
                 return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
-            targettedIndices.add(filteredTaskListIndex);
+            targettedIndices.add(targetIndex);
             tasksToMark.add((Task) lastShownList.get(filteredTaskListIndex));
         }
 
@@ -49,11 +49,11 @@ public class UnmarkCommand extends Command {
         try {
             for (Task taskToUnmark : tasksToMark) {
                 if (!taskToUnmark.isCompleted().value) {
-                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_FAIL, taskToUnmark));
+                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_FAIL, targettedIndices.peekFirst()));
                 } else {
                     taskToUnmark.setStatus(new Status());
-                    model.updateTask(targettedIndices.peekFirst(), taskToUnmark);
-                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, targettedIndices.peekFirst() + 1));
+                    model.updateTask(targettedIndices.peekFirst() - 1, taskToUnmark);
+                    resultSb.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, targettedIndices.peekFirst()));
                 }
                 targettedIndices.removeFirst();
             }
