@@ -31,6 +31,7 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
+                && other.isCompleted().equals(this.isCompleted())
                 && other.getDescription().equals(this.getDescription())
                 && other.getLocation().equals(this.getLocation()));
     }

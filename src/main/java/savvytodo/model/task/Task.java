@@ -5,6 +5,7 @@ import java.util.Objects;
 import savvytodo.commons.util.CollectionUtil;
 import savvytodo.model.category.UniqueCategoryList;
 
+//@@author A0140016B
 /**
  * @author A0140016B
  * Represents a Task in the task manager.
@@ -59,7 +60,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getPriority(), source.getDescription(), source.getLocation(),
-                source.getCategories(), source.getDateTime(), source.getRecurrence());
+                source.getCategories(), source.getDateTime(), source.getRecurrence(), source.isCompleted());
     }
 
     public void setName(Name name) {
@@ -179,3 +180,4 @@ public class Task implements ReadOnlyTask {
     }
 
 }
+//@@author A0140016B
