@@ -26,6 +26,8 @@ import seedu.taskboss.model.task.DateTime;
  */
 public class EditCommandParser {
 
+    private static final String STRING_PREFIX_END_DATE = "ed/";
+    private static final String STRING_PREFIX_START_DATE = "sd/";
     private static final String EMPTY_STRING = "";
 
     /**
@@ -38,7 +40,8 @@ public class EditCommandParser {
                 new ArgumentTokenizer(PREFIX_NAME, PREFIX_PRIORITY, PREFIX_INFORMATION,
                         PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_CATEGORY);
         argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(EMPTY_STRING), 2);
+        List<Optional<String>> preambleFields = ParserUtil.
+                splitPreamble(argsTokenizer.getPreamble().orElse(EMPTY_STRING), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
@@ -51,18 +54,20 @@ public class EditCommandParser {
             editTaskDescriptor.setPriorityLevel(ParserUtil.
                     parsePriorityLevel(argsTokenizer.getValue(PREFIX_PRIORITY)));
 
-            Optional<DateTime> startDateTimeOp = ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE));
+            Optional<DateTime> startDateTimeOp = ParserUtil.
+                    parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE));
             // if user input is "edit INDEX sd/", remove the current startDateTime
-            if (!startDateTimeOp.isPresent() && args.contains("sd/")) {
+            if (!startDateTimeOp.isPresent() && args.contains(STRING_PREFIX_START_DATE)) {
                 editTaskDescriptor.setStartDateTime(Optional.of(new DateTime(EMPTY_STRING)));
             } else {
                 editTaskDescriptor.setStartDateTime(ParserUtil.
                         parseDateTime(argsTokenizer.getValue(PREFIX_START_DATE)));
             }
 
-            Optional<DateTime> endDateTimeOp = ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE));
+            Optional<DateTime> endDateTimeOp = ParserUtil.
+                    parseDateTime(argsTokenizer.getValue(PREFIX_END_DATE));
             // if user input is "edit INDEX ed/", remove the current endDateTime
-            if (!endDateTimeOp.isPresent() && args.contains("ed/")) {
+            if (!endDateTimeOp.isPresent() && args.contains(STRING_PREFIX_END_DATE)) {
                 editTaskDescriptor.setEndDateTime(Optional.of(new DateTime(EMPTY_STRING)));
             } else {
                 editTaskDescriptor.setEndDateTime(ParserUtil.
