@@ -56,19 +56,19 @@ Format: `help`
 
 **Add event**:
 
-Format: `add e event name d/START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
+Format: `add e EVENT_NAME d/START_DATE START_TIME to [END_DATE] END_TIME [t/TAG]... [//DESCRIPTION]`<br>
 
 **Add tentative event, blocks multiple time slots**:
 
-Format: `add e event name d/START_DATE START_TIME to [END_DATE] END_TIME or [dt/START_DATE] ... [t/TAG]... [//DESCRIPTION]`<br>
+Format: `add e EVENT_NAME d/START_DATE START_TIME to [END_DATE] END_TIME or [dt/START_DATE] ... [t/TAG]... [//DESCRIPTION]`<br>
 
 **Add task with deadline**:
 
-Format: `add t task name d/DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
+Format: `add t TASK_NAME d/DEADLINE [t/TAG] [p/PRIORITY] [//DESCRIPTION]`<br>
 
 **Add task without deadline**:
 
-Format: `add t task name [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
+Format: `add t TASK_NAME [t/TAG] [p/PRIORITY] [//DESCRIPTION] `<br>
 
 Examples:
 
@@ -137,11 +137,11 @@ Examples:
 
 **Marking a task or event as done**:
 
-Format: `done INDEX`<br>
+Format: `done e | t INDEX`<br>
 
 Example:
 
-`done 2`
+`done e 2`
 
 ### 3.6. Finding event or task by keyword: `find`
 
