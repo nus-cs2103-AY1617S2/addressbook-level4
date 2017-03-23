@@ -223,7 +223,7 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] d/12345 s/undone b/valid, address",
                 TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name d/not_numbers s/undone b/valid, address",
+        assertCommandFailure("add Valid Name d/  s/undone b/valid, address",
                 DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Name d/12345 s/notAn@Email.com b/valid, address",
                 Status.MESSAGE_STATUS_CONSTRAINTS);
