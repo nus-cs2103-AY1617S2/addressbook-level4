@@ -11,18 +11,18 @@ public class FindCommandTest extends ToDoAppGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+        assertFindResult("find name Mark"); // no results
+        assertFindResult("find name Meier", td.benson, td.daniel); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("find name Meier", td.daniel);
     }
 
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("find name Jean"); // no results
     }
 
     @Test

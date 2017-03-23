@@ -55,7 +55,7 @@ public class EditCommandTest extends ToDoAppGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find name Elle");
 
         String detailsToEdit = "Belle";
         int filteredTaskListIndex = 1;
