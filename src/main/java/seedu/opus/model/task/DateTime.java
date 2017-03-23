@@ -6,7 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
+import com.joestelmach.natty.Parser;
+
 import seedu.opus.commons.exceptions.IllegalValueException;
+import seedu.opus.logic.parser.DateTimeParser;
 
 public class DateTime {
 
@@ -22,6 +25,7 @@ public class DateTime {
     private static DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("dd/MM/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
+    private static Parser parser = new Parser();
     private Clock clock;
 
     /**
@@ -38,12 +42,9 @@ public class DateTime {
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
-
         this.clock = Clock.systemDefaultZone();
-        if (!isValidDateTime(dateTime)) {
-            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-        }
-        this.dateTime = LocalDateTime.parse(dateTime, formatter);
+        this.dateTime =  DateTimeParser.parse(dateTime)
+                .orElseThrow(() -> new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS));
     }
 
     /**
