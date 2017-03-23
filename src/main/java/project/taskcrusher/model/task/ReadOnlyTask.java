@@ -1,5 +1,8 @@
 package project.taskcrusher.model.task;
 
+import java.util.Comparator;
+import java.util.Date;
+
 import project.taskcrusher.model.shared.Description;
 //import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.shared.UserItem;
@@ -50,6 +53,24 @@ public interface ReadOnlyTask extends UserItem {
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public class DeadlineComparator implements Comparator<ReadOnlyTask> {
+        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
+            if (!first.getDeadline().hasDeadline() && !second.getDeadline().hasDeadline()) {
+                return 0;
+            } else if (!first.getDeadline().hasDeadline() && second.getDeadline().hasDeadline()) {
+                return 1;
+            } else if (first.getDeadline().hasDeadline() && !second.getDeadline().hasDeadline()) {
+                return -1;
+            } else { //both has deadline
+                Date firstDate = first.getDeadline().getDate().get();
+                assert firstDate != null;
+                Date secondDate = second.getDeadline().getDate().get();
+                assert secondDate != null;
+                return firstDate.compareTo(secondDate);
+            }
+        }
     }
 
 }

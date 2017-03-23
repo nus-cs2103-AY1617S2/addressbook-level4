@@ -152,5 +152,4 @@ public class Deadline {
     public boolean hasDeadline() {
         return !deadline.equals(NO_DEADLINE);
     }
-
 }
