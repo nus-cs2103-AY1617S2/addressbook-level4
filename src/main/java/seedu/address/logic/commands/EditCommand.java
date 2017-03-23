@@ -144,7 +144,7 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return email;
         }
-        
+
         public void setPriority(Optional<Priority> priority) {
             assert priority != null;
             this.priority = priority;

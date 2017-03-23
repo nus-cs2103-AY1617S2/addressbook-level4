@@ -15,13 +15,12 @@ public class Task implements ReadOnlyTask {
     private Time time;
     private Email email;
     private Address address;
-
     private UniqueTagList tags;
-	private Priority priority;
+    private Priority priority;
 
     /**
      * Every field must be present and not null.
-     * @param priority 
+     * @param priority
      */
     public Task(Name name, Time time, Priority priority, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, time, tags);
@@ -52,7 +51,7 @@ public class Task implements ReadOnlyTask {
         assert time != null;
         this.time = time;
     }
-    
+
     @Override
     public Priority getPriority() {
         return priority;

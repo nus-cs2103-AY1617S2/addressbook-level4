@@ -1,8 +1,7 @@
+/* @@author A0119505J */
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -14,8 +13,6 @@ import seedu.address.model.task.Time;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
-    private Email email;
     private Time time;
     private Priority priority;
     private UniqueTagList tags;
@@ -41,7 +38,7 @@ public class TestTask implements ReadOnlyTask {
     public void setTime(Time time) {
         this.time = time;
     }
-    
+
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
@@ -59,7 +56,7 @@ public class TestTask implements ReadOnlyTask {
     public Time getTime() {
         return time;
     }
-    
+
     @Override
     public Priority getPriority() {
         return priority;
@@ -79,6 +76,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getTime().value + " ");
+        sb.append("p/" + this.getPriority().priorityLevel + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

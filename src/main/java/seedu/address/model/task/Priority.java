@@ -8,27 +8,26 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * valid as declared in {@link #isValidName(String)}
  */
 public class Priority {
-    public static final String MESSAGE_NAME_CONSTRAINTS = "The priority should only be specified as 'high', 'med' or 'low'.";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Priority should be specified as 'high', 'med' or 'low'.";
     public static final String PRIORITY_VALIDATION_REGEX = "\\b(high)|(low)|(med)\\b";
 
     public final String priorityLevel;
 
     public Priority(String priority) throws IllegalValueException {
-        if (priority != null){
+        if (priority != null) {
             priority = priority.trim().toLowerCase();
             if (!isPriorityLevel(priority)) {
-                throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
             }
             this.priorityLevel = priority;
         }
         else {
             this.priorityLevel = "low";
         }
-        
     }
-    
+
     public static boolean isPriorityLevel(String test) {
-            return test.matches(PRIORITY_VALIDATION_REGEX);
+        return test.matches(PRIORITY_VALIDATION_REGEX);
     }
 
     public String toString() {
@@ -47,11 +46,21 @@ public class Priority {
     }
 
     public int compareTo(Priority priority) {
-        if (this.priorityLevel.equals(priority.priorityLevel)) return 0;
-        else if (this.priorityLevel.equals("high")) return -1;
-        else if (priority.priorityLevel.equals("high")) return 1;
-        else if (this.priorityLevel.equals("med")) return -1;
-        else return 1;
+        if (this.priorityLevel.equals(priority.priorityLevel)) {
+            return 0;
+        }
+        else if (this.priorityLevel.equals("high")) {
+            return -1;
+        }
+        else if (priority.priorityLevel.equals("high")) {
+            return 1;
+        }
+        else if (this.priorityLevel.equals("med")) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
     }
 
 }
