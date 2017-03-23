@@ -17,6 +17,7 @@ import seedu.onetwodo.logic.commands.FindCommand;
 import seedu.onetwodo.logic.commands.HelpCommand;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
+import seedu.onetwodo.logic.commands.SaveToCommand;
 import seedu.onetwodo.logic.commands.SelectCommand;
 
 /**
@@ -69,6 +70,9 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
+        case SaveToCommand.COMMAND_WORD:
+            return new SaveToCommandParser().parse(arguments);
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

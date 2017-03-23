@@ -13,7 +13,7 @@ import seedu.onetwodo.model.UserPrefs;
  * API of the Storage component
  */
 public interface Storage extends ToDoListStorage, UserPrefsStorage {
-
+    
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
@@ -38,4 +38,5 @@ public interface Storage extends ToDoListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleToDoListChangedEvent(ToDoListChangedEvent abce);
+
 }

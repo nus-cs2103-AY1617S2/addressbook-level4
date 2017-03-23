@@ -5,17 +5,20 @@ import java.io.IOException;
 
 import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.Config;
+import seedu.onetwodo.commons.core.EventsCenter;
+import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
+import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.ConfigUtil;
 import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
-import seedu.onetwodo.storage.Storage;
-
+import seedu.onetwodo.model.ReadOnlyToDoList;
+import seedu.onetwodo.storage.StorageManager;
 
 /**
  * Change the saving location of the task manager to a specified location.
  */
-public class SaveTo extends Command {
+public class SaveToCommand extends Command {
 
     public static final String COMMAND_WORD = "save to";
 
@@ -29,7 +32,7 @@ public class SaveTo extends Command {
 
     public final String filePath;
 
-    public SaveTo(String filePath) {
+    public SaveToCommand(String filePath) {
         this.filePath = filePath;
     }
 
@@ -46,14 +49,18 @@ public class SaveTo extends Command {
                 // change storage file path.
                 // update main window and event center
                 Config config = MainApp.getConfig();
-                Storage storage = MainApp.getStorage();
+                StorageManager storage = (StorageManager) MainApp.getStorage();
                 config.setToDoListFilePath(filePath);
                 ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
                 String updatedFilePath = config.getToDoListFilePath();
                 storage.setToDoListFilePath(updatedFilePath);
+                ReadOnlyToDoList toDoList = storage.getToDoListStorage().readToDoList().get();
+                EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
             }
         } catch (IOException ioe) {
             return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(ioe));
+        } catch (DataConversionException dce) {
+            return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(dce));
         }
 
         return new CommandResult(String.format(MESSAGE_SAVETO_SUCCESS, filePath));

@@ -10,7 +10,7 @@ import seedu.onetwodo.model.ReadOnlyToDoList;
  * Represents a storage for {@link seedu.onetwodo.model.ToDoList}.
  */
 public interface ToDoListStorage {
-
+    
     /**
      * Returns the file path of the data file.
      */

@@ -106,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
         toDoList.updateTask(toDoListIndex, editedTask);
         indicateToDoListChanged();
     }
-
+    
     //=========== Filtered Task List Accessors =============================================================
 
     @Override

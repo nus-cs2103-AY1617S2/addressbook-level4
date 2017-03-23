@@ -34,6 +34,9 @@ public class StorageManager extends ComponentManager implements Storage {
         this(new XmlToDoListStorage(toDoListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
+   public ToDoListStorage getToDoListStorage() {
+       return this.toDoListStorage;
+   }
     // ================ UserPrefs methods ==============================
 
     @Override
