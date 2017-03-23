@@ -441,7 +441,7 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should run with JRE7 or above, Windows 7 or above.
+1. Should run with JRE8 or above, Windows 7 or above.
 2. Should be able to store up to 500 tasks.
 3. Should work primarily offline.
 4. Should be able to handle exceptions from user input.
