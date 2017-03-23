@@ -28,7 +28,7 @@ public class BrowserPanel extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
     }
-
+/**
     public void loadTaskPage(ReadOnlyTask task) {
         loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
     }
@@ -36,7 +36,7 @@ public class BrowserPanel extends UiPart<Region> {
     public void loadPage(String url) {
         browser.getEngine().load(url);
     }
-
+*/
     /**
      * Frees resources allocated to the browser.
      */
