@@ -9,6 +9,7 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 public class UnDoneCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "undone";
+    public static final String COMMAND_WORD_2 = "ud";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
             + ": the task identified by the index number used in the last task listing.\n"

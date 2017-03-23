@@ -1,6 +1,7 @@
 package seedu.task.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,13 +49,15 @@ public class TaskCard extends UiPart<Region> {
             done.setText("Done");
             done.setTextFill(Color.GREEN);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
-            done.setGraphic(new ImageView(image));
+            name.setGraphic(new ImageView(image));
+            name.setContentDisplay(ContentDisplay.RIGHT);
             //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         } else {
             done.setText("Not Done");
             done.setTextFill(Color.RED);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
-            done.setGraphic(new ImageView(image));
+            name.setGraphic(new ImageView(image));
+            name.setContentDisplay(ContentDisplay.RIGHT);
             //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         }
         remark.setText(task.getRemark().value);

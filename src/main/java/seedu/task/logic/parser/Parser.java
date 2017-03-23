@@ -58,9 +58,11 @@ public class Parser {
             return new AddCommandParser().parse(arguments);
 
         case DoneCommand.COMMAND_WORD_1:
+        case DoneCommand.COMMAND_WORD_2:    
             return new EditIsDoneParser().parse(arguments);
             
         case UnDoneCommand.COMMAND_WORD_1:
+        case UnDoneCommand.COMMAND_WORD_2:    
             return new EditUnDoneParser().parse(arguments);
         
 
