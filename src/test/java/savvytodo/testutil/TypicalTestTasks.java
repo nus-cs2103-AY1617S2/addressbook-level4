@@ -9,6 +9,7 @@ import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -100,6 +101,7 @@ public class TypicalTestTasks {
                 temp.setCategories(new UniqueCategoryList());
                 temp.setDateTime(new DateTime());
                 temp.setRecurrence(new Recurrence());
+                temp.setCompleted(new Status(i % 2 == 0 ? true : false));
             } catch (IllegalValueException e) {
                 e.printStackTrace();
             }
