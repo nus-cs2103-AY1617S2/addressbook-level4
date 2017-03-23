@@ -37,6 +37,8 @@ public class Task implements ReadOnlyTask {
             this.type = TaskType.DEADLINE;
         } else if (startDate.hasDate() && endDate.hasDate()) {
             this.type = TaskType.EVENT;
+        } else {
+            this.type = null;
         }
     }
 
@@ -44,8 +46,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getDescription(),
-                source.getTags(), source.getDoneStatus());
+        this(source.getName(), source.getStartDate(), source.getEndDate(),
+                source.getDescription(), source.getTags(), source.getDoneStatus());
     }
 
     public Task(Name name, StartDate startDate, EndDate endDate, Description description,

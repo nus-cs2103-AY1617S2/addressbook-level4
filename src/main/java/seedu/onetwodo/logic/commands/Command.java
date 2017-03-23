@@ -3,6 +3,7 @@ package seedu.onetwodo.logic.commands;
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.core.Messages;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.Model;
 import seedu.onetwodo.model.task.ReadOnlyTask;
@@ -28,6 +29,7 @@ public abstract class Command {
      *
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
+     * @throws IllegalValueException
      */
     public abstract CommandResult execute() throws CommandException;
 

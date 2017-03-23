@@ -13,6 +13,7 @@ import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskAttributesChecker;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
@@ -33,6 +34,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list.";
+    public static final String MESSAGE_TYPE_ERROR = "Task is invalid.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -63,6 +65,8 @@ public class EditCommand extends Command {
         int internalIndex = model.getFilteredTaskList().indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
+        // Throw CommandException if edited task is invalid
+        TaskAttributesChecker.validateEditedAttributes(editedTask);
         try {
             model.updateTask(internalIndex, editedTask);
             jumpToNewTask(taskToEdit);

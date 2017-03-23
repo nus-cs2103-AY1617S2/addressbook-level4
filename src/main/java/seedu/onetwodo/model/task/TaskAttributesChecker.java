@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.AddCommand;
+import seedu.onetwodo.logic.commands.exceptions.CommandException;
 
 /**
  * A utility class that checks if the given Task has valid attributes.
@@ -26,8 +27,8 @@ public class TaskAttributesChecker {
     }
 
     private static void checkIsValidTodo(Task taskUnderTest) throws IllegalValueException {
+        //has start date but no end date
         if (taskUnderTest.getStartDate().hasDate() && !taskUnderTest.getEndDate().hasDate()) {
-            //has start date but no end date
             throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
         }
@@ -36,8 +37,8 @@ public class TaskAttributesChecker {
     private static void checkIsValidStartDate(Task taskUnderTest, LocalDateTime dateCreated)
             throws IllegalValueException {
         if (taskUnderTest.getStartDate().hasDate()) {
-            if (taskUnderTest.getStartDate().getLocalDateTime().compareTo(dateCreated) < 0) {
-                //startDate of Task is before the date the task is created
+            //startDate of Task is before the date the task is created
+            if (taskUnderTest.getStartDate().getLocalDateTime().isBefore(dateCreated)) {
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MESSAGE_INVALID_START) + AddCommand.MESSAGE_USAGE);
             }
@@ -47,8 +48,8 @@ public class TaskAttributesChecker {
     private static void checkIsValidEndDate(Task taskUnderTest, LocalDateTime dateCreated)
             throws IllegalValueException {
         if (taskUnderTest.getEndDate().hasDate()) {
+            //endDate of Task is before the date the task is created
             if (taskUnderTest.getEndDate().getLocalDateTime().compareTo(dateCreated) < 0) {
-                //endDate of Task is before the date the task is created
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MESSAGE_INVALID_END) + AddCommand.MESSAGE_USAGE);
             }
@@ -57,11 +58,42 @@ public class TaskAttributesChecker {
 
     private static void checkIsValidEvent(Task taskUnderTest) throws IllegalValueException {
         if (taskUnderTest.getStartDate().hasDate() && taskUnderTest.getEndDate().hasDate()) {
-            if (taskUnderTest.getEndDate().getLocalDateTime().compareTo(taskUnderTest.getStartDate()
-                    .getLocalDateTime()) < 0) {
-                //endDate of Task is before startDate
+            //endDate of Task is before startDate
+            if (taskUnderTest.getEndDate().getLocalDateTime().isBefore(
+                    taskUnderTest.getStartDate().getLocalDateTime())) {
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MESSAGE_INVALID_EVENT) + AddCommand.MESSAGE_USAGE);
+            }
+        }
+    }
+
+    public static void validateEditedAttributes(Task editedTask) throws CommandException {
+        TaskType type = editedTask.getTaskType();
+        if (type == null) {
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
+        }
+        StartDate startDate = editedTask.getStartDate();
+        EndDate endDate = editedTask.getEndDate();
+        switch (type) {
+        case DEADLINE:
+            // endDate of Task is before the date the task is created
+            if (startDate.hasDate() || !endDate.hasDate()) {
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_INVALID_END) + AddCommand.MESSAGE_USAGE);
+            }
+            break;
+        case EVENT:
+            if (endDate.getLocalDateTime().isBefore(startDate.getLocalDateTime())) {
+                //endDate of Task is before startDate
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_INVALID_EVENT) + AddCommand.MESSAGE_USAGE);
+            }
+            break;
+        case TODO:
+            if (startDate.hasDate() || endDate.hasDate()) {
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_MISSING_DATE) + AddCommand.MESSAGE_USAGE);
             }
         }
     }
