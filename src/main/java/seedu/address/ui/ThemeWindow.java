@@ -31,6 +31,7 @@ public class ThemeWindow extends Window {
         setTitle(TITLE);
         FxViewUtil.setStageIcon(stage, ICON);
         this.fxmlToApply = fxmlToApply;
+        this.prefs = prefs;
     }
     
     private AnchorPane getThemeManagerPlaceholder() {

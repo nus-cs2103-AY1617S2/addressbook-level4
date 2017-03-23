@@ -27,7 +27,7 @@ public class ThemeManager extends UiPart<Region> {
 	private static final String FXML = "ThemeManager.fxml";
 	private static final String THEME_FILE_FOLDER = "/themes/";
 	
-	public static final String DEFAULT_STYLESHEET = "Darkheme.css";
+	public static final String DEFAULT_STYLESHEET = "DarkTheme.css";
 	
 	@FXML
 	private Parent fxmlToApply;
@@ -91,6 +91,6 @@ public class ThemeManager extends UiPart<Region> {
 	}
 	
 	private void saveThemePreference(String theme, UserPrefs prefs) {
-		//prefs.getGuiSettings().setStyleSheet(theme);
+		prefs.getGuiSettings().setStyleSheet(theme);
 	}
 }
