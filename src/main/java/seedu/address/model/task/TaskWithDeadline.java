@@ -15,9 +15,6 @@ public class TaskWithDeadline extends Task {
 
     /**
      * starting time may be null
-     *
-     * the boolean variable indicates whether the default value of deadline or
-     * starting time should be used
      */
     public TaskWithDeadline(Name name, UniqueTagList tags, Date date1,
             Date date2, boolean isDone) throws IllegalValueException {
@@ -99,9 +96,15 @@ public class TaskWithDeadline extends Task {
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(deadline.getDate());
-        return today || (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
-                && cal1.get(Calendar.DAY_OF_YEAR) == cal2
-                        .get(Calendar.DAY_OF_YEAR));
+        if (startingTime == null) {
+            return today || (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+                    && cal1.get(Calendar.DAY_OF_YEAR) == cal2
+                            .get(Calendar.DAY_OF_YEAR));
+        } else {
+            Calendar cal3 = Calendar.getInstance();
+            cal3.setTime(startingTime.getDate());
+            return today || (cal1.after(cal3) && cal2.after(cal1));
+        }
     }
 
     @Override
@@ -136,7 +139,8 @@ public class TaskWithDeadline extends Task {
             cal1.setTime(this.getDeadline().getDate());
             cal2.setTime(task2.getDeadline().getDate());
             // Compares in UNIX time
-            return (int) ((cal1.getTimeInMillis() - cal2.getTimeInMillis()) / 1000);
+            return (int) ((cal1.getTimeInMillis() - cal2.getTimeInMillis())
+                    / 1000);
         }
     }
 }

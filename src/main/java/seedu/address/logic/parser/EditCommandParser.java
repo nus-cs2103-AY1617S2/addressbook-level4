@@ -90,7 +90,8 @@ public class EditCommandParser {
                 return new IncorrectCommand(e.getMessage());
             }
         }
-        return new EditCommand(logic.parseUIIndex(index.get()), editTaskDescriptor);
+        return new EditCommand(logic.parseUIIndex(index.get()),
+                editTaskDescriptor);
     }
 
     private String getArgument(String key) {
@@ -156,6 +157,7 @@ public class EditCommandParser {
             args = tmpArgs;
             return null;
         }
+        dates = new PrettyTimeParser().parse(tmpArgs);
         return dates;
     }
 

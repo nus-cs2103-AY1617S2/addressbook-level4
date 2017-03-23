@@ -143,6 +143,7 @@ public class AddCommandParser {
             args = tmpArgs;
             return null;
         }
+        dates = new PrettyTimeParser().parse(tmpArgs);
         return dates;
     }
 
