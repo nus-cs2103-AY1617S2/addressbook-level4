@@ -74,7 +74,7 @@ public class Parser {
 
         case SaveToCommand.COMMAND_WORD:
             return new SaveToCommandParser().parse(arguments);
-            
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

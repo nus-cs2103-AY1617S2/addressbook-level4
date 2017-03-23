@@ -13,7 +13,7 @@ import seedu.onetwodo.model.UserPrefs;
  * API of the Storage component
  */
 public interface Storage extends ToDoListStorage, UserPrefsStorage {
-    
+
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
@@ -22,7 +22,7 @@ public interface Storage extends ToDoListStorage, UserPrefsStorage {
 
     @Override
     String getToDoListFilePath();
-    
+
     @Override
     void setToDoListFilePath(String newFilePath);
 
@@ -31,7 +31,7 @@ public interface Storage extends ToDoListStorage, UserPrefsStorage {
 
     @Override
     void saveToDoList(ReadOnlyToDoList toDoList) throws IOException;
-    
+
     /**
      * Saves the current version of the ToDo List to the hard disk.
      *   Creates the data file if it is missing.
