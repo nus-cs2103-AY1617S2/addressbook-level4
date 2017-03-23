@@ -11,8 +11,8 @@ import seedu.address.commons.util.StringUtil;
  */
 public class StartTime implements Time {
 
-    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Task start time should be in the form of DD/MM/YYYY HH:MM, "
-            + "e.g 20/03/2017 4:18 \n"
+    public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Task start time should be in the form of "
+            + "DD/MM/YYYY HH:MM, e.g 20/03/2017 4:18 \n"
             + "Or name of the day, e.g Wed 4:18 \n"
             + "Or relative days, e.g tomorrow 4:18 \n"
             + "Notice that no abbreviation is accepted for relatives. e.g tmrw is invalid. ";

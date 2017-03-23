@@ -15,7 +15,7 @@ import seedu.address.model.task.Venue;
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
-    
+
     public static final char FLOAT_CHAR = 'f';
     public static final char DEADLINE_CHAR = 'd';
     public static final char EVENT_CHAR = 'e';
@@ -53,7 +53,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartTime(StartTime starttime) {
         this.starttime = Optional.of(starttime);
     }
-    
+
     public void setEndTime(EndTime endtime) {
         this.endtime = Optional.of(endtime);
     }
@@ -78,17 +78,17 @@ public class TestTask implements ReadOnlyTask {
     public Title getTitle() {
         return title;
     }
-    
+
     @Override
     public String getTaskCategory() {
         return category;
     }
-    
+
     @Override
     public Optional<StartTime> getStartTime() {
         return starttime;
     }
-    
+
     @Override
     public Optional<EndTime> getEndTime() {
         return endtime;
@@ -130,7 +130,8 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
-    
+
+    @Override
     public Character getTaskChar() {
         if (starttime.isPresent()) {
             return EVENT_CHAR;

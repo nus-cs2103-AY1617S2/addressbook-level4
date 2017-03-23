@@ -64,11 +64,11 @@ public interface ReadOnlyTask {
     }
 
     default String getStartTimeString() {
-        return getStartTime().isPresent() ? "Start at: "+ getStartTime().get().toString() + " " : "";
+        return getStartTime().isPresent() ? "Start at: " + getStartTime().get().toString() + " " : "";
     }
 
     default String getEndTimeString() {
-        return getEndTime().isPresent() ? "Done by: "+ getEndTime().get().toString() + " " : "";
+        return getEndTime().isPresent() ? "Done by: " + getEndTime().get().toString() + " " : "";
     }
 
     default String getUrgencyLevelString() {

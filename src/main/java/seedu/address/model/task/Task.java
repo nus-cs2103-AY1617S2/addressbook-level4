@@ -123,11 +123,6 @@ public class Task implements ReadOnlyTask {
         this.endTime = endTime;
     }
 
-    public EndTime getEndTime(EndTime endTime) {
-        return this.endTime;
-    }
-
-
     public void setVenue(Venue venue) {
         this.venue = venue;
     }

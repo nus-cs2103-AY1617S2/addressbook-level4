@@ -13,7 +13,7 @@ public class TimeTest {
         assertFalse(Time.isValidTime("")); // empty string
         //assertFalse(EndTime.isValidEndTime(" ")); // spaces only
 
-        // valid Time 
+        // valid Time
         assertTrue(Time.isValidTime("March Fifteenth"));//alphabets
         assertTrue(Time.isValidTime("20170315")); // number
         assertTrue(Time.isValidTime("By end of March")); // alphabets with capital

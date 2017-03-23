@@ -112,7 +112,7 @@ Examples:
 * `find Breakfast Lunch Dinner`<br>
   Returns any task having names `Breakfast`, `Lunch`, or `Dinner`
 
-### 2.6. Deleting a task : `delete` 
+### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the todolist. <br>
 Format: `delete INDEX`
@@ -185,7 +185,7 @@ e.g.
   e.g.
 
 * **List** : `list` <br>
-  e.g. 
+  e.g.
 
 * **ListTag** : `listtag` <br>
 e.g.
