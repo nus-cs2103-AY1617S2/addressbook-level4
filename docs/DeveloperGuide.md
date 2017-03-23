@@ -23,16 +23,16 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 1. **JDK 1.8.0_60 or later**.
     > JDK version `1.8.0_60` or later is required to run the project correctly
-2. **Eclipse IDE Neon**. 
+2. **Eclipse IDE Neon**.
     >Follow the instructions [here](https://www.eclipse.org/downloads/eclipse-packages/?show_instructions=TRUE) to download and install Eclipse.
-3. **e(fx)clipse plugin for Eclipse**. 
+3. **e(fx)clipse plugin for Eclipse**.
     >Follow the instructions [here](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious) to set up e(fx)clipse for Eclipse
 4. **Buildship Gradle Integration**.
     >Buildship is bundled together with Eclipse Neon and above.
 5. **Checkstyle Plug-in**.
 
 ### 1.2. Installing Checkstyle manually
-    As of March 16, 2017, the Checkstyle repository in Eclipse Marketplace is unavailable. 
+    As of August 16, 2016, the Checkstyle repository in Eclipse Marketplace is unavailable.
 
 1. Download the compressed .zip file [here](https://sourceforge.net/projects/eclipse-cs/?source=typ_redirect). **Do not** extract the contents.
 2. Launch Eclipse Neon.
@@ -46,7 +46,7 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 <br><img src="images/checkstyle/checkstyle_4.png" width="400"><br><br>
 7. Check `Checkstyle` and click `Next`.
 <br><img src="images/checkstyle/checkstyle_5.png" width="400"><br><br>
-8. Click `Next` and accept the user license agreement as follows. 
+8. Click `Next` and accept the user license agreement as follows.
 <br><img src="images/checkstyle/checkstyle_6.png" width="400"><br><br>
 9. Click `Finish` to install Checkstyle.
 <br><img src="images/checkstyle/checkstyle_7.png" width="400"><br><br>
@@ -86,7 +86,7 @@ More information about using Gradle can be found [here](https://github.com/CS210
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Check and select `files from packages`, click `Change...`, and select the `resource`.
 7. Click OK twice. Rebuild project as required.
-    
+
     Click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 ### 1.5. Troubleshooting project setup
@@ -119,7 +119,7 @@ Given below is a quick overview of each component.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
 #### Commons
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
@@ -127,19 +127,19 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to the App's log file for debugging and communication between developers.
 
 #### User Interface (UI)
-The [**`UI`**](#ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists. 
+The [**`UI`**](#22-ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists.
 
 #### Logic
-The [**`Logic`**](#logic-component) accepts commands sent from the user pass it to the model to process.
+The [**`Logic`**](#23-logic-component) accepts commands sent from the user pass it to the model to process.
 
 #### Model
-The [**`Model`**](#model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
+The [**`Model`**](#24-model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
 
 #### Storage
-The [**`Storage`**](#storage-component) Reads data from, and writes data to, the hard disk.
+The [**`Storage`**](#25-storage-component) Reads data from, and writes data to, the hard disk.
 
-Each of the four components, [**`UI`**](#ui-component), [**`Logic`**](#logic-component), 
-[**`Model`**](#model-component) and [**`Storage`**](#storage-component)
+Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-logic-component),
+[**`Model`**](#24-model-component) and [**`Storage`**](#25-storage-component)
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
@@ -198,7 +198,7 @@ The `WeekTaskListPanel` shows all incomplete tasks that are due within a week.
 The `FloatingTaskListPanel` shows all the incomplete tasks that do not have deadlines.
 
 The `StatusBarFooter` shows when the app has been last updated and storage file path.
- 
+
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
@@ -214,7 +214,7 @@ The `UI` component,
 
 Author: [Lam Guang Jun](http://github.com/gjlam95)
 
-The `Logic` component process all the business logic and incoming requests. 
+The `Logic` component process all the business logic and incoming requests.
 It manipulates data based on the `Model` component and communicates with the `UI` component
 to display the final output.
 
@@ -280,7 +280,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-The `Storage` component listens the `TaskManagerChangedEvent` and 
+The `Storage` component listens the `TaskManagerChangedEvent` and
 whenever there is a change to the task manager data, the component updates the storage files accordingly. It
 
 * saves `UserPref` objects in json format and read it back.
@@ -298,7 +298,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (See [Configuration](#32-configuration))
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
   the specified logging level
 * Currently log messages are output through: `Console` and to a `.log` file.
@@ -324,9 +324,8 @@ Certain properties of the application can be controlled (e.g App name, logging l
 In Opus, we aspire to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
 * Using Assertions to check validity of arguments before passing them into functions.
 * Throwing Excpetions when encountering unexpected events.
-* Enforcing 1-to-1 associations.
-
-A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf). 
+* Enforcing 1-to-1 associations
+A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf)
 
 ### 4.2. Testing
 
@@ -364,13 +363,13 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  In the headless mode, GUI tests do not show up on the screen.
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
- 
+
 ### 4.3. Improving test coverage using Coveralls
->Coveralls is a code analytic tool that tracks and analyses test coverage of a project. We have integrated Coveralls into our project to keep track and improve upon the test coverage of the code to deliver a robust and throughly-tested product. 
- 
- The Coveralls dashboard can be accessed [here](https://coveralls.io/github/CS2103JAN2017-W15-B3/main?branch=master). 
+>Coveralls is a code analytic tool that tracks and analyses test coverage of a project. We have integrated Coveralls into our project to keep track and improve upon the test coverage of the code to deliver a robust and throughly-tested product.
+
+ The Coveralls dashboard can be accessed [here](https://coveralls.io/github/CS2103JAN2017-W15-B3/main?branch=master).
  <br><img src="images/coveralls/coveralls_1.png" width="600"><br>
- 
+
  Upon every pull request, Coveralls will run an analysis of the pushed code and produce a report. To view the coverage report, nagivate the to pull request in Github.
 
  1. Click on the Coveralls badge in the pull request to open the coverage report as follows:
@@ -379,7 +378,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  <br><img src="images/coveralls/coveralls_3.png" width="600"><br><br>
  Lines that are highlighted in red indicate that there is no test coverage for the code branch.
  <br><img src="images/coveralls/coveralls_4.png" width="600"><br><br>
- 
+
     To maintain the code quality of the product, we strongly insist that all possible code branches are well covered with test cases.
 
 ### 4.4. Troubleshooting tests
