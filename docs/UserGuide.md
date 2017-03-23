@@ -26,7 +26,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 1. Introduction
 
-Love the adrenaline rush you get when you check an item off your to-do list, but too busy to actually make one? Use Doist today, and feel more organised than ever before!
+Do you love the adrenaline rush you get when you check an item off your to-do list, but are you too busy to actually make one? Use Doist today, be a Doist and feel more organised than ever before!
 
 Doist is the comprehensive tool to help you in all your planning. It allows you to key in, sort, tag, set reminders and even search for your tasks and events so that you can focus on getting things done. Your hands never need to leave the keyboard with our command-line input interface, and our easy-to-use UI will keep you coming back for more. Once you are a Doist, there's no looking back.
 
@@ -203,6 +203,7 @@ Format: `[\under TAG...]`
 You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and would need to filter them in some way to concentrate on doing those tasks. <br>
 `ls` is an alternative command word.
 
+**List pending, overdue, finished, all tasks** <br>
 List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
 <br>
 Format: `(list|ls) [TYPE]`
@@ -214,6 +215,7 @@ Format: `(list|ls) [TYPE]`
 > **Remarks:** <br>
 > - `list` will by default show both pending and overdue tasks.
 
+**List tasks during a time period** <br>
 List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
 <br>
 Format: `[\from TIME] [\to TIME] `
@@ -226,6 +228,7 @@ You can also use the `\in` key for tasks occurring `today`, `this week`, `this m
 > **Remarks:** <br>
 > - See Fig 1. for acceptable date and time formats
 
+**List tasks under tags** <br>
 List tasks that are under certain tags by using the `\under` key. <br>
 <br>
 Format: `[\under TAG]`
