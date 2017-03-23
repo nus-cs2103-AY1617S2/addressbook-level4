@@ -51,7 +51,7 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <title> <t/TAG|by|from> [date] [to] [date]
+Format: `add <TITLE> [t/TAG|by DATE|from DATE to DATE]
 
 Examples:
 
@@ -74,7 +74,7 @@ Format: `list undone`
 ### 2.4. Editing an existing task : `edit`
 
 Edits an existing task in TaskIt.<br>
-Format: `edit <index>  <title|deadline|tag> <new>`
+Format: `edit <INDEX>  <[title]|[start]|[end]|[t/]> <NEW>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -100,7 +100,7 @@ Examples:
 ### 2.5. Searching all tasks containing any keyword in their name: `find`
 
 Finds tasks which matched name/deadline/tag.<br>
-Format: ` search <name|deadline|tag>`
+Format: ` find <[NAME]|[DATE]|[TAG]>`
 
 > * The search is case insensitive. e.g `do HW` will match `do hw`
 > * The order of the keywords does not matter. e.g. `HW do` will match `do HW`
@@ -117,7 +117,7 @@ Examples:
 ### 2.6. Deleting a task : `delete`
 
 Deletes the specified task from the TaskIt. 
-Format: `delete index <name|deadline|tag>`
+Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -165,10 +165,14 @@ Format: `undo`
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data
+### 2.11. Saving the data in specified file/folder
 
-TaskIt data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+Puts all TaskIt storage in the given path to file.
+Format: 'save <PathToFile>'
+
+Example:
+
+* `save ../myFile.txt`<br>
 
 ## 3. FAQ
 
