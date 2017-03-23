@@ -31,7 +31,7 @@ public class EditCommand extends Command {
             + "[s/START_DATE] [e/END_DATE] [d/DESCRIPTION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " e1 s/tmr 9:00am d/beware of dogs";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task Result: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list.";
     public static final String MESSAGE_TYPE_ERROR = "Task is invalid.";
@@ -63,20 +63,22 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex - 1);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        int internalIdx = model.getFilteredTaskList().indexOf(taskToEdit);
 
         // Throw CommandException if edited task is invalid
         TaskAttributesChecker.validateEditedAttributes(editedTask);
         try {
-            // Not using model.update(task) as it does not trigger observers
+            // Not using model.updateTask as it does not trigger observers
+            // model.updateTask(filteredTaskListIndex, editedTask);
             model.deleteTask(taskToEdit);
-            model.addTask(editedTask);
+            model.addTask(internalIdx, editedTask);
             jumpToNewTask(editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (UniqueTaskList.TaskNotFoundException tne) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     /**

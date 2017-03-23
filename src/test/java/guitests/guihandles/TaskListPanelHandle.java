@@ -160,7 +160,7 @@ public class TaskListPanelHandle extends GuiHandle {
             guiRobot.sleep(150);
             getListView(task.getTaskType()).getSelectionModel().select(index);
         });
-        guiRobot.sleep(100);
+        guiRobot.sleep(200);
         return getTaskCardHandle(task);
     }
 

@@ -31,6 +31,7 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -70,4 +71,5 @@ public interface Model {
     FilteredList<ReadOnlyTask> getFilteredByDoneFindType(TaskType taskType);
 
     int getTaskIndex(ReadOnlyTask task);
+
 }

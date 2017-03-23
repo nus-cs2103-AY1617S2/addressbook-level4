@@ -89,6 +89,11 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.add(p);
     }
 
+    public void addTask(int internalIdx, Task p) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(p);
+        tasks.add(internalIdx, p);
+    }
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * {@code ToDoList}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
