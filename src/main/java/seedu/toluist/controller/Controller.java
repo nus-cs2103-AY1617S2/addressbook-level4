@@ -2,7 +2,6 @@ package seedu.toluist.controller;
 
 import java.util.HashMap;
 
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.ui.UiStore;
 
 
@@ -22,9 +21,8 @@ public abstract class Controller {
      * and modifies the data appropriately. Also optionally
      * update the UI
      * @param command
-     * @return
      */
-    public abstract CommandResult execute(String command);
+    public abstract void execute(String command);
 
     /**
      * Given command string, tokenize the string into

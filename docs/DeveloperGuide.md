@@ -2,12 +2,12 @@
 
 By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
-1. [Introduction](#introduction)
-2. [Setting Up](#setting-up)
-3. [Design](#design)
-4. [Implementation](#implementation)
-5. [Testing](#testing)
-6. [Dev Ops](#dev-ops)
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+4. [Implementation](#4-implementation)
+5. [Testing](#5-testing)
+6. [Dev Ops](#6-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -35,7 +35,7 @@ We have organized the guide in a top-down manner so that, as a new developer, yo
     > Having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do step 2 onwards given in
+3. **e(fx)clipse** plugin for Eclipse (Proceed from step 2 onwards in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
 5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
@@ -91,9 +91,6 @@ _Figure 3.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of ToLuist.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
-
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -116,11 +113,10 @@ The rest of the App consists of five components:
 
 Each of the five components defines its _API_ in an `interface` with the same name as the Component.
 
-Our architecture follows the MVC Pattern. UI displays data and interacts with the user. Commands are passed through 
+Our architecture follows the *Model-View-Controller* (MVC) Pattern. UI displays data and interacts with the user. Commands are passed through 
 the Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the 
 bridge between the UI and the Model. Model & Storage store and maintain the data. A lot of inspirations for this design
- was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr
- .com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
+ was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
 The sections below give more details of each component.
 
@@ -163,11 +159,11 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 **API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
 
-`UiStore` holds the data to be used by the `UI`. An example would be the task data to be displayed to the user.
+`UiStore` holds the data to be used by the `Ui`. An example would be the task data to be displayed to the user. In essence, `UiStore` acts as a **View Model** for the `Ui`. 
 
 #### 3.2.3. Reactive nature of the UI ####
 
-To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`.
+To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`. `Ui` and `UiStore` together implement the **Observer-Observable** pattern where the `Ui` will listen directly to changes in `UiStore` and re-render automatically.
 
 The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the `UiStore`, without knowing what was the exact change.
 
@@ -180,7 +176,7 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
-`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command.
+`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command. In effect, `Dispatcher` is implementing the **Facade**, shielding the command logic from the Ui.
 
 ### 3.4. Controller component
 
@@ -189,11 +185,9 @@ _Figure 3.4 : Structure of the Controller Component_
 
 **API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
-- `Controller` has a `execute` method to execute the command passed by the dispatcher.
-- The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events.
-- The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher.
-- After every `execute` invocation, `Controller` can optionally set new states in the `UiStore` and ask the `UI` to re-render.
+`Controller` has a `execute` method to execute the command passed by the dispatcher. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore`, which subsequently trigger a Ui re-render.
 
+Each command is represented by a different Controller class, which all extends from the abstract `Controller` class. Hence, `Controller` is implementing the `Command` pattern.
 
 ### 3.5. Model component
 
@@ -278,13 +272,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.toluist.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.toluist.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.toluist.controller.AddControllerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -328,27 +322,10 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 6.5. Converting Documentation to PDF format
+### 6.5. Managing Dependencies
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
-as Chrome's PDF engine preserves hyperlinks used in webpages.
-
-Here are the steps to convert the project documentation files to PDF format.
-
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
-    documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
-    <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
-
-### 6.6. Managing Dependencies
-
-A project often depends on third-party libraries. For example, Address Book depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
+A project often depends on third-party libraries. For example, ToLuist depends on the
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for JSON parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
@@ -397,12 +374,19 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is `ToLuist` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case 1: Add a task
+#### Use case 1: View usage instructions
 
 **MSS**
 
-1. Actor requests to add a task with `description` in the input box.
-2. System adds the task. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
+1. Actor requests to see usage instructions.
+2. System displays the usage instructions for all the commands.
+
+#### Use case 2: Add a task/event
+
+**MSS**
+
+1. Actor requests to add a task/event with `description` in the input box.
+2. System adds the task/event. System shows a feedback message ("Task `description` added") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
@@ -412,12 +396,12 @@ Use case ends.
 > 1a1. System shows an error message ("Please provide a task description") with the correct format example.<br>
 > Use case resumes at step 1
 
-#### Use case 2: Delete a task
+#### Use case 3: Update a task/event
 
 **MSS**
 
-1. Actor requests to delete a task with `index` number in the input box.
-2. System finds the task and deletes it. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+1. Actor requests to update a task/event with `index` number in the input box.
+2. System finds the task/event and updates it. System shows a feedback message ("Task successfully updated") and displays the updated list.<br>
 Use case ends.
 
 **Extensions**
@@ -427,7 +411,37 @@ Use case ends.
 > 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
 > Use case resumes at step 1
 
-#### Use case 3: Undo previous mutated command
+#### Use case 3: Delete a task/event
+
+**MSS**
+
+1. Actor requests to delete a task/event with `index` number in the input box.
+2. System finds the task/event and deletes it. System shows a feedback message ("Task `description` removed") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
+#### Use case 4: Mark a task/event as completed/incomplete
+
+**MSS**
+
+1. Actor requests to mark a task/event with `index` number as completed or incomplete.
+2. System finds the task/event and updates its status. System shows a feedback message and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. `index` number given is invalid or cannot be found (i.e. `index` number is not a positive integer, or an out-of-range positive integer).
+
+> 2a1. System shows an error message ("Please provide a proper index number") with the correct format example.
+> Use case resumes at step 1
+
+#### Use case 5: Undo previous mutated command
 
 **MSS**
 
@@ -442,7 +456,23 @@ Use case ends.
 > 2a1. System does nothing since there is nothing to undo.
 > Use case ends
 
-#### Use case 4: Add alias command
+
+#### Use case 6: Redo previous undone command
+
+**MSS**
+
+1. Actor requests to `redo` action in the input box.
+2. System finds the most recent undone command that mutates the list and redoes it. System shows a feedback message ("Redo '`previous command`'") and displays the updated list.<br>
+Use case ends.
+
+**Extensions**
+
+2a. No previous undone command to redo
+
+> 2a1. System does nothing since there is nothing to redo.
+> Use case ends
+
+#### Use case 7: Add alias for a command
 
 **MSS**
 
@@ -450,12 +480,35 @@ Use case ends.
 2. System finds the command and alias it. System shows a feedback message ("`new alias name` is set as the new alias for `command`.").<br>
 Use case ends.
 
+**Extensions**
 2a. The alias is already reserved for other commands.
 
 > 2a1. System updates the alias name to refer to the new command.<br>
 > Use case resumes at step 3.
 
-#### Use case 5: Set data storage file path
+#### Use case 8: Remove an alias
+
+**MSS**
+
+1. Actor requests to `unalias` an `alias` in the input box.
+2. System finds the alias and removes it. System shows a feedback message ("The alias `alias` is removed").<br>
+Use case ends.
+
+**Extensions**
+2a. No such existing alias exist.
+
+> 2a1. System shows a feedback message "There is no such existing alias".<br>
+> Use case ends
+
+#### Use case 9: View existing aliases
+
+**MSS**
+
+1. Actor requests to display all the existing aliases in the system.
+2. System displays all existing aliases.<br>
+Use case ends.
+
+#### Use case 10: Set data storage file path
 
 **MSS**
 
@@ -480,6 +533,21 @@ Use case ends.
 > 1c1. System shows an error message ("Storage file path is already being used, please choose another location.").<br>
 > Use case resumes at step 1.
 
+#### Use case 11: View command history
+
+**MSS**
+
+1. Actor requests to display the history of all commands in the current session.
+2. System displays the command history.<br>
+Use case ends.
+
+#### Use case 12: Exit the program
+
+**MSS**
+
+1. Actor requests to exit the program.
+2. System exits.<br>
+Use case ends.
 
 ## Appendix C : Non Functional Requirements
 

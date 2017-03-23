@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 import seedu.toluist.commons.core.LogsCenter;
 
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -33,12 +33,12 @@ public class TagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
         HashMap<String, String> tokens = tokenize(command);
-        String[] keywordList = convertToArray(tokens.get(KEYWORDS_PARAMETER));
+        String[] keywordList = StringUtil.convertToArray(tokens.get(KEYWORDS_PARAMETER));
         int index = Integer.parseInt(tokens.get(INDEX_PARAMETER)) - 1;
         TodoList todoList = TodoList.getInstance();
         Task task = UiStore.getInstance().getShownTasks().get(index);
@@ -58,26 +58,9 @@ public class TagController extends Controller {
         }
 
         // display formatting
-        return formatDisplay(successfulList.toArray(new String[successfulList.size()]),
+        uiStore.setCommandResult(formatDisplay(successfulList.toArray(new String[successfulList.size()]),
                                 failedList.toArray(new String[failedList.size()]),
-                                successfulList.size());
-    }
-
-    //!!!!!same as FindController method
-    private String[] convertToArray(String keywords) {
-        if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { "" };
-        }
-
-        String trimmedKeywords = keywords.trim();
-        String[] keywordList = trimmedKeywords.split(" ");
-        ArrayList<String> replacementList = new ArrayList<>();
-        for (String keyword : keywordList) {
-            if (!keyword.equals("")) {
-                replacementList.add(keyword);
-            }
-        }
-        return replacementList.toArray(new String[0]);
+                                successfulList.size()));
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {

@@ -10,9 +10,11 @@ import java.util.regex.Pattern;
 public class TaskTokenizer {
     public static final String TASK_VIEW_INDEX = "index";
     public static final String TASK_DESCRIPTION = "description";
-    public static final String TASK_START_DATE_KEYWORD = "startdate/";
-    public static final String TASK_END_DATE_KEYWORD = "enddate/";
+    public static final String TASK_DEADLINE_KEYWORD = "by/";
+    public static final String EVENT_START_DATE_KEYWORD = "from/";
+    public static final String EVENT_END_DATE_KEYWORD = "to/";
     public static final String TASK_TAGS_KEYWORD = "tags/";
+    public static final String TASK_FLOATING_KEYWORD = "floating/";
 
     public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
             boolean hasIndex, boolean hasDescription) {
@@ -28,9 +30,11 @@ public class TaskTokenizer {
             HashMap<String, String> descriptionTokens = KeywordTokenizer.tokenize(
                                                             description,
                                                             TASK_DESCRIPTION,
-                                                            TASK_START_DATE_KEYWORD,
-                                                            TASK_END_DATE_KEYWORD,
-                                                            TASK_TAGS_KEYWORD);
+                                                            EVENT_START_DATE_KEYWORD,
+                                                            EVENT_END_DATE_KEYWORD,
+                                                            TASK_DEADLINE_KEYWORD,
+                                                            TASK_TAGS_KEYWORD,
+                                                            TASK_FLOATING_KEYWORD);
             tokens.putAll(descriptionTokens);
         }
         return tokens;

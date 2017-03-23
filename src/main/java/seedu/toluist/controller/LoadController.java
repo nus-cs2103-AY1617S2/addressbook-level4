@@ -9,9 +9,9 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.DataStorageException;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for loading-related task
@@ -22,28 +22,33 @@ public class LoadController extends Controller {
     public static final String COMMAND_WORD = "getInstance";
     public static final String STORE_DIRECTORY = "directory";
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
         String path = tokens.get(STORE_DIRECTORY);
 
         if (path == null) {
-            return new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH);
+            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            return;
         }
 
         Config config = Config.getInstance();
         String oldStoragePath = config.getTodoListFilePath();
         if (oldStoragePath.equals(path)) {
-            return new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            return;
         }
 
         try {
             TodoList todoList = TodoList.getInstance();
             todoList.load(path);
             UiStore.getInstance().setTasks(todoList.getTasks());
-            return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
         } catch (DataStorageException e) {
-            return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path)));
         }
     }
 

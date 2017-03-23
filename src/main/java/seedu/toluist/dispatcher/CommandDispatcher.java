@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.events.ui.NewResultAvailableEvent;
 import seedu.toluist.controller.AddTaskController;
 import seedu.toluist.controller.AliasController;
 import seedu.toluist.controller.ClearController;
@@ -67,14 +66,10 @@ public class CommandDispatcher extends Dispatcher {
         Controller controller = getBestFitController(deAliasedCommand);
         logger.info("Controller class to be executed: " + controller.getClass());
 
-        CommandResult feedbackToUser;
         if (controller instanceof HistoryController) {
             ((HistoryController) controller).setCommandHistory(commandHistory);
         }
-
-        feedbackToUser = controller.execute(deAliasedCommand);
-
-        eventsCenter.post(new NewResultAvailableEvent(feedbackToUser.getFeedbackToUser()));
+        controller.execute(deAliasedCommand);
     }
 
     private void recordCommand(String command) {

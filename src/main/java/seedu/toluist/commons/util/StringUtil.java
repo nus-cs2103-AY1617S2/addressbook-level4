@@ -2,6 +2,7 @@ package seedu.toluist.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import org.atteo.evo.inflector.English;
 
@@ -79,5 +80,25 @@ public class StringUtil {
      */
     public static String nounWithCount(String noun, int count) {
         return count + " " + English.plural(noun, count);
+    }
+
+    /**
+     * Returns an array containing each word in the string.
+     * @param string
+     */
+    public static String[] convertToArray(String keywords) {
+        if (keywords == null || keywords.trim().isEmpty()) {
+            return new String[] { "" };
+        }
+
+        String trimmedKeywords = keywords.trim();
+        String[] keywordList = trimmedKeywords.split(" ");
+        ArrayList<String> replacementList = new ArrayList<>();
+        for (String keyword : keywordList) {
+            if (!keyword.equals("")) {
+                replacementList.add(keyword);
+            }
+        }
+        return replacementList.toArray(new String[0]);
     }
 }
