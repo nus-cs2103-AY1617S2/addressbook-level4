@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -9,6 +10,7 @@ import seedu.jobs.commons.core.Messages;
 import seedu.jobs.logic.commands.AddCommand;
 import seedu.jobs.testutil.TestTask;
 import seedu.jobs.testutil.TestUtil;
+
 
 public class AddCommandTest extends TaskBookGuiTest {
 
@@ -44,6 +46,7 @@ public class AddCommandTest extends TaskBookGuiTest {
 
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        System.out.println(addedCard);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous tasks plus the new task

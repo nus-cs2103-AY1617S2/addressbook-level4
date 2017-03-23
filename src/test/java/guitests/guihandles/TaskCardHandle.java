@@ -16,8 +16,8 @@ import seedu.jobs.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String START_FIELD_ID = "#start time";
-    private static final String END_FIELD_ID = "#end time";
+    private static final String START_FIELD_ID = "#startTime";
+    private static final String END_FIELD_ID = "#endTime";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 

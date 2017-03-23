@@ -32,6 +32,7 @@ public class Time {
         		this.value = DEFAULT_TIME;
         	}
         	else if (!isValidTime(startTime.get())) {
+        		System.out.println("The problem is : " + startTime.get());
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINT);
             }
         	else{
