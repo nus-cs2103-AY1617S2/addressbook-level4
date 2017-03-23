@@ -1,4 +1,4 @@
-package seedu.toluist.dispatcher;
+package seedu.toluist.ui.commons;
 
 /**
  * Represents the result of a command execution.

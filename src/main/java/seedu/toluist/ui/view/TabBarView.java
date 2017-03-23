@@ -21,6 +21,9 @@ public class TabBarView extends UiView {
 
     public TabBarView() {
         super(FXML);
+        UiStore store = UiStore.getInstance();
+        store.bind(this, store.getObservableSwitchPredicate());
+        store.bind(this, store.getObservableTasks());
     }
 
     @Override
@@ -30,7 +33,7 @@ public class TabBarView extends UiView {
         for (TaskSwitchPredicate switchPredicate : switchConfig.getAllPredicates()) {
             TabView tabView = new TabView(switchPredicate,
                                           switchPredicate.equals(UiStore.getInstance()
-                                                                        .getSwitchPredicate().getValue()));
+                                                                        .getObservableSwitchPredicate().getValue()));
             tabView.setParent(tabContainer);
             tabView.render();
         }

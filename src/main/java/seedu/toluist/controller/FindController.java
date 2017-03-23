@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 import seedu.toluist.commons.core.LogsCenter;
 
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Searches the task list for matches in the parameters, and displays the results received
@@ -40,7 +40,7 @@ public class FindController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
@@ -58,7 +58,8 @@ public class FindController extends Controller {
         uiStore.setTasks(foundTasksList);
 
         // display formatting
-        return formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasksList.size());
+        uiStore.setCommandResult(
+                formatDisplay(isSearchByTag, isSearchByName, keywordList, foundTasksList.size()));
     }
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,

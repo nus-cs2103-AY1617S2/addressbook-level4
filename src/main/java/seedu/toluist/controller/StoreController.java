@@ -10,8 +10,8 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.util.FileUtil;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * Responsible for saving-related task
@@ -24,18 +24,21 @@ public class StoreController extends Controller {
 
     public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
         HashMap<String, String> tokens = tokenize(command);
         String path = tokens.get(STORE_DIRECTORY);
 
         if (path == null) {
-            return new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH);
+            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            return;
         }
 
         Config config = Config.getInstance();
         if (config.getTodoListFilePath().equals(path)) {
-            return new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            return;
         }
 
         String message = "";
@@ -45,9 +48,10 @@ public class StoreController extends Controller {
 
         if (TodoList.load().getStorage().move(path)) {
             message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, config.getTodoListFilePath());
-            return new CommandResult(message);
+            uiStore.setCommandResult(new CommandResult(message));
         } else {
-            return new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path)));
         }
     }
 

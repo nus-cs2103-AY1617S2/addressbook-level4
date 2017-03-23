@@ -9,10 +9,10 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
-import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.commons.CommandResult;
 
 /**
  * AddTaskController is responsible for adding a task (and event)
@@ -28,11 +28,11 @@ public class AddTaskController extends Controller {
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
     private static final String RESULT_MESSAGE_ERROR_DATE_INPUT = "Something is wrong with the given dates input";
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.load();
-        CommandResult commandResult = new CommandResult("");
+        CommandResult commandResult;
 
         HashMap<String, String> tokens = tokenize(command);
 
@@ -56,7 +56,7 @@ public class AddTaskController extends Controller {
             uiStore.setTasks(todoList.getTasks());
         }
 
-        return commandResult;
+        uiStore.setCommandResult(commandResult);
     }
 
     public HashMap<String, String> tokenize(String command) {
