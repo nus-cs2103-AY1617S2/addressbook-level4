@@ -8,8 +8,8 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class Location {
 
-    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task locations can take any values,"
-            + " and it should not be blank";
+    public static final String MESSAGE_LOCATION_CONSTRAINTS = "Task locations can take any values";
+    
     /*
      * The first character of the location must not be a whitespace, otherwise
      * " " (a blank string) becomes a valid input.

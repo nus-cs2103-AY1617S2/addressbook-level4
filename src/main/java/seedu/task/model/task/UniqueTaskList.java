@@ -12,7 +12,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 
 /**
- * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A list of tasks that enforces uniqueness between its elements.
  *
  * Supports a minimal set of list operations.
  *
@@ -92,7 +92,6 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskUnDone);
     }
 
-
     /**
      * Removes the equivalent task from the list.
      *
@@ -107,7 +106,6 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
@@ -119,7 +117,6 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         setTasks(replacement);
     }
-
 
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);

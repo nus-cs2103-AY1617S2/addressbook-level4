@@ -56,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * undo should not change storage files.
+     * undo should not update kit.xml
      */
     @Override
     public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
@@ -69,8 +69,8 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
-    /** Raises an event to indicate the model has changed
-     * @param shouldBackup TODO*/
+    /** Raises an event to indicate the model has changed 
+     * @param shouldBackup */
     private void indicateTaskManagerChanged(boolean shouldBackup) {
         raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
     }
@@ -229,6 +229,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent();
             }
         }
+        
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
