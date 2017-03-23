@@ -19,7 +19,7 @@ public class TypicalTestTasks {
                     .withStartTime("10/03/2017 15:00")
                     .withTags("test").build();
             CS3102 = new TaskBuilder().withName("CS3102").withDescription("Data Structure")
-                    .withEndTime("17/03/2017 10:00").withStartTime("17/03/2017 8:00")
+                    .withEndTime("17/03/2017 10:00").withStartTime("17/03/2017 08:00")
                     .withTags("lectures").build();
             CS3103 = new TaskBuilder().withName("CS3103").withStartTime("17/03/2017 14:00")
                     .withEndTime("17/03/2017 16:00").withDescription("group project meeting").build();
@@ -30,12 +30,12 @@ public class TypicalTestTasks {
                     .withEndTime("14/03/2017 23:59").withDescription("feedback deadline").build();
             CS3106 = new TaskBuilder().withName("CS3106").withStartTime("14/03/2017 12:00")
                     .withEndTime("14/03/2017 16:00").withDescription("group poeject meeting").build();
-            CS3107 = new TaskBuilder().withName("CS3107").withStartTime("01/04/2017 8:00")
+            CS3107 = new TaskBuilder().withName("CS3107").withStartTime("01/04/2017 08:00")
                     .withEndTime("01/04/2017 10:00").withDescription("consultation with tutor").build();
 
 
             // Manually added
-            CS4101 = new TaskBuilder().withName("CS4101").withStartTime("20/03/2017 8:00")
+            CS4101 = new TaskBuilder().withName("CS4101").withStartTime("20/03/2017 08:00")
                     .withEndTime("20/03/2017 10:00").withDescription("in-class test").build();
             CS4102 = new TaskBuilder().withName("CS4102").withStartTime("20/03/2017 12:00")
                     .withEndTime("20/03/2017 14:00").withDescription("in-class test").build();
@@ -52,6 +52,7 @@ public class TypicalTestTasks {
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             }
+            
         }
     }
 

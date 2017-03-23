@@ -43,7 +43,6 @@ import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
-import seedu.jobs.model.task.Email;
 import seedu.jobs.model.task.Name;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
@@ -425,8 +424,8 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Name name = new Name(Optional.of("Test Task"));
-            Time start = new Time(Optional.of("03/18/17 15:00"));
-            Time end = new Time(Optional.of("03/18/17 16:00"));
+            Time start = new Time(Optional.of("03/12/2017 15:00"));
+            Time end = new Time(Optional.of("03/12/2017 16:00"));
             Description desc = new Description(Optional.of("Valid task"));
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -444,8 +443,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name(Optional.of("Task " + seed)),
-                    new Time(Optional.of("03/18/17 15:00")),
-                    new Time(Optional.of("03/18/17 16:00")),
+                    new Time(Optional.of("03/11/2017 15:00")),
+                    new Time(Optional.of("03/11/2017 16:00")),
                     new Description(Optional.of("House of " + seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), 
                     new Tag("tag" + Math.abs(seed + 1)))
@@ -544,8 +543,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Name(Optional.of(name)),
-                    new Time(Optional.of("03/18/17 15:00")),
-                    new Time(Optional.of("03/18/17 16:00")),
+                    new Time(Optional.of("03/11/2017 15:00")),
+                    new Time(Optional.of("03/11/2017 16:00")),
                     new Description(Optional.of("Valid task")),
                     new UniqueTagList(new Tag("tag"))
             );

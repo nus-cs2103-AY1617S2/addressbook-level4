@@ -103,4 +103,9 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+	@Override
+	public void markComplete() {
+		this.status = true;
+	}
+
 }

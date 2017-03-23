@@ -3,7 +3,6 @@ package seedu.jobs.testutil;
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.tag.Tag;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 
