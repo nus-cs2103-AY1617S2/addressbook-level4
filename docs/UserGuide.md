@@ -141,35 +141,33 @@ Month Day | Oct 1st
 Month / Day | 10/1
 Month / Day / Year | 10/1/17
 Relative | today, tomorrow, tmr, two days later
-<br>
+
 Time Format | Examples
 ----------- | :------- |
 Hour:Min | 03:00
 Hour.Min | 03.00, 3.00
 Hour am/pm (12 hour format) | 3pm, 3am
 Hour (24 hour format)| 3
-
-*Figure 3.2.1: Acceptable date and time formats* <br>
+ <br>
+ *Figure 3.2.1: Acceptable date and time formats* <br>
 
 > **Remarks:** <br>
 > - If you do not explicitly state the date, the date will be assumed to be within the next 24 hours <br>
 > - If you do not explicitly state the time, the time will be assumed to be the current time of the day
 > - If you do not explicitly state the year, the year will be assumed to be the current year
 > - Note that the start time and remind time must be earlier or equal to the end time
-<br>
-<br>
+
 **Priority** <br>
 Add a task with higher priorities with the `\as` key. By default, tasks are of normal priority. Since we all have certain tasks that are more important than others, you can indicate that they are important or very important! <br>
 <br>
 Format: `[\as PRIORITY]`
 > **Examples:** <br>
 > - `add buy milk \as important`<br>
-> - `add buy milk \as very important`
+> - `add buy milk \as very important` <br>
 
 > **Remarks:** <br>
-> - `Priority` can be `normal`, `important`, `very important` <br>
+> - `Priority` can be `normal`, `important`, `very important`
 
-<br>
 **Reminder** <br>
 Add a task with a reminder timing with the `\remind_at` key. State the number of hours before the task's end time that you want to be reminded. A pop-up will appear to remind you about the task at that specified time! <br>
 <br>
@@ -178,7 +176,6 @@ Format: `[\remind_at REMINDER_RELATIVE_TIME]`
 > - `add buy milk \remind_at 3` <br>
 > - `add buy milk \remind_at 5 hrs before` <br>
 
-<br>
 **Recurrence Interval** <br>
 Add a recurring task with the `\every` key. If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and reminder time of the task will be updated to its next occurrence. <br>
 <br>
@@ -187,7 +184,6 @@ Format: `[\every RECURRENCE_INTERVAL]`
 > - `add buy milk \every 4 hours` <br>
 > - `add buy milk \every week` <br>
 
-<br>
 **Tags** <br>
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
 <br>
@@ -197,19 +193,18 @@ Format: `[\under TAG...]`
 > - `add buy milk \under for_myself` <br>
 
 > **Remarks:** <br>
-> - Tasks can have any number of tags (including 0) <br>
+> - Tasks can have any number of tags (including 0)
+
 
 **Sample Commands:**
 
-* `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T` <br>
-* `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week` <br>
+* `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
+* `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
 
-<br>
 ### 3.3 Listing tasks : `list`
 
 You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and will need to filter them in some way to concentrate on doing those tasks. <br>
 
-<br>
 **List pending, overdue, finished, all tasks** <br>
 List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
 <br>
@@ -222,7 +217,6 @@ Format: `list [TYPE]`
 > **Remarks:** <br>
 > - `list` will by default show both pending and overdue tasks. <br>
 
-<br>
 **List tasks during a time period** <br>
 List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
 <br>
@@ -236,7 +230,6 @@ You can also use the `\in` key for tasks occurring `today`, `this week`, `this m
 > **Remarks:** <br>
 > - See Figure 3.2.1 for acceptable date and time formats <br>
 
-<br>
 **List tasks under tags** <br>
 List tasks that are under certain tags by using the `\under` key. <br>
 <br>
