@@ -18,9 +18,6 @@ import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 import seedu.task.model.task.ReadOnlyTask;
 
-//original master with new updates
-//test merging 1
-
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
  * and space where other JavaFX elements can be placed.
