@@ -21,6 +21,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.address.model.util.TaskDeadlineComparator;
 import seedu.address.model.util.TaskPriorityComparator;
 import seedu.address.model.util.TaskTitleComparator;
 import seedu.address.storage.IcsFileStorage;
@@ -41,6 +42,9 @@ public class ModelManager extends ComponentManager implements Model {
     public FilteredList<ReadOnlyTask> floatingTasks;
     public FilteredList<ReadOnlyTask> completedTasks;
 
+    private static final String SORT_TYPE_DATE = "date";
+    private static final String SORT_TYPE_PRIORITY = "priority";
+    private static final String SORT_TYPE_TITLE = "title";
     private Comparator<ReadOnlyTask> currentComparator;
 
     private Expression currentNonFloatingTasksExpression;
@@ -60,9 +64,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBookStates.add(new AddressBook(addressBook));
         this.currentAddressBookStateIndex = 0;
         this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
-        this.currentComparator = new TaskTitleComparator();
         setCurrentPredicateToShowAllTasks();
-        setAddressBookState();
+        setCurrentComparator(SORT_TYPE_PRIORITY);
     }
 
     public ModelManager() {
@@ -88,9 +91,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void setCurrentComparator(String type) {
         switch (type) {
-        case "date":
+        case SORT_TYPE_DATE:
+            this.currentComparator = new TaskDeadlineComparator();
             break;
-        case "priority":
+        case SORT_TYPE_PRIORITY:
             this.currentComparator = new TaskPriorityComparator();
             break;
         default:
