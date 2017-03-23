@@ -18,8 +18,12 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Last action undone!";
     public static final String MESSAGE_FAIL = "Unable to undo. data/backup.xml not found.";
     private static final String BACKUP_FILE_PATH = "data/backup.xml";
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1
+            + ": Undo the most recent command that modifies the data. Commands like list, find and findexact will not be affected.\n"
+            + "Example: " + COMMAND_WORD_1;
+
     public static String backupFilePath = BACKUP_FILE_PATH;
-    
+
     public static void setBackupFilePath(String backupFilePath) {
         UndoCommand.backupFilePath = backupFilePath;
     }
@@ -34,7 +38,8 @@ public class UndoCommand extends Command {
 
         try {
             taskManagerOptional = storage.readTaskManager(backupFilePath);
-            if (!taskManagerOptional.isPresent()) { //Possibly first command or file deleted
+            if (!taskManagerOptional.isPresent()) { // Possibly first command or
+                                                    // file deleted
                 return new CommandResult(MESSAGE_FAIL);
             }
             backupData = taskManagerOptional.get();

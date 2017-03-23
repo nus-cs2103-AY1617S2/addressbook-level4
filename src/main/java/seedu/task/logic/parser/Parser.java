@@ -118,7 +118,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD_1:
         case HelpCommand.COMMAND_WORD_2:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         case HelpFormatCommand.COMMAND_WORD_1:
         case HelpFormatCommand.COMMAND_WORD_2:
