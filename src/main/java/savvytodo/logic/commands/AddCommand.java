@@ -17,6 +17,7 @@ import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
+//@@author A0140016B
 /**
  * Adds a task to the task manager.
  */
@@ -36,7 +37,6 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
 
-    //@@author A0140016B
     /**
      * Creates an AddCommand using raw values.
      *

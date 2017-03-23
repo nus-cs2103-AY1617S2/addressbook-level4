@@ -12,6 +12,8 @@ public class StringUtil {
 
     public static final String WHITESPACE_REGEX = "\\s+";
 
+    public static final String SYSTEM_NEWLINE = System.lineSeparator();
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
