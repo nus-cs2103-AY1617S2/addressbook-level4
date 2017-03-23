@@ -60,10 +60,10 @@ public class Priority {
     }
 
     /**
-     * parse a string priority into Priority.Type.
+     * parse a string priority into Priority.Level.
      *
      * @param priority
-     * @return Priority.Type value
+     * @return Priority.Level value
      * @throws IllegalValueException
      */
     public static Priority.Level parseUserInputString(String priority) throws IllegalValueException {
