@@ -21,8 +21,10 @@ import seedu.address.logic.commands.IncompleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RevertCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnrevertCommand;
 
 /**
  * Parses user input.
@@ -94,6 +96,12 @@ public class Parser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommand(arguments);
+
+        case RevertCommand.COMMAND_WORD:
+            return new RevertCommand();
+
+        case UnrevertCommand.COMMAND_WORD:
+            return new UnrevertCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
