@@ -17,7 +17,7 @@
 ### Prerequisites
 
 1. **JDK `1.8.0_121`**  or later<br>
-    > Having any Java 8 version is not enough. 
+    > Having any Java 8 version is not enough.
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
@@ -442,13 +442,13 @@ Use case ends.
 
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
-  
+
 4a. User undos task delete command
 
 > System adds the deleted task back and shows feedback to user
 > Use case ends
 
-### User Case : Undoing a command 
+### User Case : Undoing a command
 
 **MSS**
 1. User enters command to undo prev undoable command
@@ -464,7 +464,7 @@ Use case ends.
 > System redo the undone command and shows feedback to user
 > Use case ends
 
-### User Case : Redoing a command 
+### User Case : Redoing a command
 
 **MSS**
 1. User enters command to redo the previously undone command
@@ -493,7 +493,7 @@ Use case ends.
 > Use case ends
 
 
-### User Case : Marking a task as done 
+### User Case : Marking a task as done
 
 **MSS**
 1. User enters command to mark task as done
@@ -607,7 +607,7 @@ Use case ends.
 
 **MSS**
 1. User enters command to update priority of task
-2. System updates priority to user specified priority 
+2. System updates priority to user specified priority
 3. Use case ends
 
 **Extensions**
@@ -649,7 +649,7 @@ Use case ends.
 2. Should be able to hold up to 1000 items without a noticeable sluggishness in performance for typical usage.
 
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-   
+
 4. Enter an event/tasks in one command instead of multiple clicks
 
 5. Be able to access the program offline access tasks in areas without internet
@@ -670,7 +670,7 @@ Use case ends.
 **Items** : Refers to tasks, floating tasks and events
 
 **UI**: User interface is the means by which the user  and the system interact with each other
-    
+
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
 **CRUD**: Create, Read, Update and Delete.
@@ -696,16 +696,16 @@ Use case ends.
 ### Author: Chia Sin
 ### Product: Toodledo
 ### Advantages:
-* Has many features to use 
-* Email Sync 
-* Tells you what to do 
-* Able to set default so minimal adjustment is needed 
+* Has many features to use
+* Email Sync
+* Tells you what to do
+* Able to set default so minimal adjustment is needed
 * Able to type commands
- 
-### Disadvantages: 
-* Need too many clicks for settings and other features other than task 
-* Need to click to delete and update 
-* Need internet for desktop version to use. 
+
+### Disadvantages:
+* Need too many clicks for settings and other features other than task
+* Need to click to delete and update
+* Need internet for desktop version to use.
 
 ### Author: Kean Wai
 ### Product: Sticky Notes
@@ -717,32 +717,32 @@ Use case ends.
 * Comes preinstalled on windows so no need for special IT permissions
 ### Disadvantages:
 * Unable to sync with email 
-* Lack of functionality (No reminders, calendar view, etc.) 
+* Lack of functionality (No reminders, calendar view, etc.)
 * Requires windows to be installed
 
 ### Author: Jin Shun
-### Product: Momentum 
+### Product: Momentum
 ### Advantages:
-* Simple to use 
-* Nice background 
+* Simple to use
+* Nice background
 * Helpful way of reminding users of pending tasks, every time user opens new tab in chrome
-* Has integration with full fledged task managers like trello 
-### Disadvantages: 
-* Only works with chrome browser 
-* Requires internet connection 
-* Unable to set deadline for tasks 
-* Minimal features 
- 
+* Has integration with full fledged task managers like trello
+### Disadvantages:
+* Only works with chrome browser
+* Requires internet connection
+* Unable to set deadline for tasks
+* Minimal features
+
 ### Author: Huanhui
-### Product: Wunderlist 
+### Product: Wunderlist
 ### Advantages:
-* Some shortcut keys available, good user flexibility 
-* CRUD can function offline 
-* Many features such as the ability to set reminders, due dates, recurring tasks 
-* Tasks are automatically sorted by due date 
-* Able to display completed tasks 
+* Some shortcut keys available, good user flexibility
+* CRUD can function offline
+* Many features such as the ability to set reminders, due dates, recurring tasks
+* Tasks are automatically sorted by due date
+* Able to display completed tasks
 * Well designed UI
 ### Disadvantages:
-* Not fully functional on keyboard, still need to use mouse to do operations such as select task 
-* Do not have an undo function 
+* Not fully functional on keyboard, still need to use mouse to do operations such as select task
+* Do not have an undo function
 * Requires installation
