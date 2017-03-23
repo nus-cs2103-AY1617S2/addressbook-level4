@@ -17,7 +17,7 @@ By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `TaskManager.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Task Manager.
+2. Copy the file to the folder you want to use as the home folder for your task list.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
@@ -26,7 +26,7 @@ By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
 5. Some example commands you can try:
    * **`list`** : lists all tasks
    * **`add`** : add Study for midterm sd/02/03/17 ed/04/03/17 t/study t/midterm :
-     adds the task Study for Midterm, starting from 02/03/17 to 04/03/17 with tags "study" and "midterm" to the task manager.
+     adds the task Study for Midterm, starting from 02/03/17 to 04/03/17 with tags "study" and "midterm" to the task list.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -50,7 +50,7 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a task to the task manager<br>
+Adds a task to the task list<br>
 Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
@@ -64,27 +64,18 @@ Examples:
 
 ### 2.3. Listing tasks : `list`
 
-Shows a list of all tasks in the task manager on that day.<br>
+Shows a list of all tasks in the task list.<br>
 Format: `list`<br>
-Shows a list of all tasks in the task manager on a particular day.<br>
-Format: `list d/dd/mm/yy`<br>
-Shows a list of all tasks in the task manager with a particular tag.<br>
-Format: `list t/TAG`<br>
-Shows a list of all tasks in the task manager<br>
-Format: `list t/ALL<br>
 
-> The list of tasks will be sorted accoding to priority level from 1 to 5
+> The list of tasks will be sorted accoding to priority level from 1 to 3
 
 Examples:
-* `list t/complete`<br>
-  Shows a list of all completed tasks. The `complete` tag is a reserved tag.
-
-* `list ed/04/03/17`
-  Shows a list of all tasks due on 04/03/17.
+* `list`<br>
+  Shows a list of all tasks in the task list.
 
 ### 2.4. Editing a task : `edit`
 
-Edits an existing task in the task manager.<br>
+Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
@@ -107,25 +98,21 @@ Examples:
 
 Finds tasks whose names contain any of the given keywords or tag names.<br>
 Format 1: `find KEYWORD [MORE_KEYWORDS]`
-Format 2: `find [t/TAG]`
 
 > * The search is case insensitive. e.g `assignment` will match `AssIGNmEnt`
 > * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
+> * Task matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `assignemnt` will match `do algorightm assignment`
-> * The tag name is case sensitive and must be exact match
 
 Examples:
 
 * `find midterm`<br>
   Returns `Study for midterm`
-* `find t/Tutorial`<br>
-  Returns nothing because the correct tag name is `tutorial`
 
 ### 2.6. Deleting a task : `delete`
 
-Deletes the specified task from the task manager. Irreversible.<br>
+Deletes the specified task from the task list. Irreversible.<br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
@@ -134,10 +121,10 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list t/ALL`<br>
+* `list`<br>
   `delete 2`<br>
-  Deletes the 2nd task in the task manager.
-* `find t/tutorial`<br>
+  Deletes the 2nd task in the task list.
+* `find tutorial`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
@@ -152,12 +139,12 @@ Format: `complete INDEX`
 
 Examples:
 
-* `list t/ALL`<br>
+* `list`<br>
   `complete 2`<br>
-  Selects the 2nd task in the task manager.
-* `find t/tutorial` <br>
+  Completes the 2nd task in the task list.
+* `find tutorial` <br>
   `complete 1`<br>
-  Selects the 1st task in the results of the `find` command.
+  Completes the 1st task in the results of the `find` command.
 
 ### 2.8. Allocate priority to a task: `prioritize`
 
@@ -169,40 +156,30 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 > The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
 
 Examples:
-* `list t/ALL`<br>
-  `prioritize 2 3`
-  Puts a priority level of 3 to the 2nd task in the task manager
+* `list`<br>
+  `prioritize 2 3`<br>
+  Puts a priority level of 3 to the 2nd task in the task list
 
 ### 2.9. Clearing all entries : `clear`
 
-Clears all entries from the task manager.<br>
+Clears all entries from the task list.<br>
 Format: `clear`
 
-### 2.10. Undo the last change : `undo`
-
-Undos the last modification done by the user.
-Format: `undo`
-
-### 2.11. Exiting the program : `exit`
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.12. Saving the data
+### 2.11. Saving the data
 
-Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
+task list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
-
-### 2.13. Viewing command history : `history`
-
-Displays the past 10 commands entered by the user.<br>
-Format: `history`,
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Task Manager folder.
+       the file that contains the data of your previous task list folder.
 
 ## 4. Command Summary
 
@@ -215,15 +192,14 @@ Format: `history`,
    e.g. `delete 3`
 
 * **Edit** : `edit INDEX` <br>
-   e.g. `edit 1 ed/03032017`
+   e.g. `edit 1 ed/03/03/2017`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-   e.g. `find assignment`
-	      `find t/tutorial`
+   e.g. `find assignment` <br>
+	      `find tutorial`
 
 * **List** : `list` <br>
    e.g. `list`
-        `list t/ALL`
 
 * **Help** : `help` <br>
 
@@ -233,8 +209,5 @@ Format: `history`,
 * **Prioritze** : `prioritize INDEX PRIORITY_LEVEL` <br>
    e.g. `priority 2 3`
 
-* **Undo** : `undo` <br>
-
-* **Command History** : `history` <br>
-
 * **Exit ** : `exit` <br>
+   e.g. `exit`
