@@ -21,6 +21,9 @@ public class TabBarView extends UiView {
 
     public TabBarView() {
         super(FXML);
+        UiStore store = UiStore.getInstance();
+        store.bind(this, store.getSwitchPredicate());
+        store.bind(this, store.getObservableTasks());
     }
 
     @Override

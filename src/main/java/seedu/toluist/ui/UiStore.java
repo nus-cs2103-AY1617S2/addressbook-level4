@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
+import seedu.toluist.ui.view.UiView;
 
 /**
  * UiStore acts like a "single source of truth" / view model for the Ui
@@ -37,9 +38,12 @@ public class UiStore {
 
     private UiStore() {}
 
-    public void bind(Ui renderer) {
-        shownTasks.addListener((ListChangeListener.Change<? extends Task> c) -> renderer.render());
-        switchPredicate.addListener(observable -> renderer.render());
+    public void bind(UiView view, ObservableList<?> observableList) {
+        observableList.addListener((ListChangeListener.Change<?> c) -> view.render());
+    }
+
+    public void bind(UiView view, ObservableValue<?> observableValue) {
+        observableValue.addListener(c -> view.render());
     }
 
     public void setSwitchPredicate(TaskSwitchPredicate switchPredicate) {
