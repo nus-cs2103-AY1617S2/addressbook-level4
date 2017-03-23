@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.geekeep.model.task.Title;
-
 public class TitleTest {
 
     @Test

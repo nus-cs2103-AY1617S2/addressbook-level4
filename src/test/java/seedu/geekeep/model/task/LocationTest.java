@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.geekeep.model.task.Location;
-
 public class LocationTest {
 
     @Test
