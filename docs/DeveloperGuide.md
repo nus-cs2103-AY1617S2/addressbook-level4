@@ -161,6 +161,11 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+Given below is the Sequence Diagram for interactions within the `UI` component for the for the `addTask(toAdd)`
+ API call.<br /><br />
+<img src="images/SDforAddTaskUI.jpg" width="800"><br>
+_Figure 2.2.2 : Interactions inside the UI Component for the process of executing an `add` Command_
+
 ### 2.3. Logic component
 
 Author: Lai Zhiyuan

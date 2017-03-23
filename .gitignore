@@ -17,3 +17,4 @@ classes/
 /bin/
 *.md.html
 *.pdf
+*.vpp.bak*
