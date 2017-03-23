@@ -21,9 +21,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label due;
     @FXML
-    private Label duration_start;
+    private Label durationStart;
     @FXML
-    private Label duration_end;
+    private Label durationEnd;
     @FXML
     private FlowPane tags;
     @FXML
@@ -55,13 +55,13 @@ public class TaskCard extends UiPart<Region> {
 
     private void updateDurationLabel(ReadOnlyTask task) {
         if (task.getDuration() == null) {
-            duration_start.setVisible(false);
-            duration_end.setVisible(false);
+            durationStart.setVisible(false);
+            durationEnd.setVisible(false);
         } else {
-            duration_start.setVisible(true);
-            duration_end.setVisible(true);
-            duration_start.setText(task.getDurationStart());
-            duration_end.setText(task.getDurationEnd());
+            durationStart.setVisible(true);
+            durationEnd.setVisible(true);
+            durationStart.setText(task.getDurationStart());
+            durationEnd.setText(task.getDurationEnd());
         }
     }
 

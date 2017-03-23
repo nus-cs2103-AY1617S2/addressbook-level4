@@ -37,8 +37,8 @@
                                         <padding><Insets right="20"/></padding>
                                     </Label>
                                     <Label fx:id="due" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
-                                    <Label fx:id="duration_start" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
-                                    <Label fx:id="duration_end" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <Label fx:id="durationStart" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <Label fx:id="durationEnd" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
                                     <FlowPane fx:id="tags" orientation="horizontal" minWidth="150.0"/>
                                 </HBox>
                             </children>

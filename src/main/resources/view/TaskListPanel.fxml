@@ -13,13 +13,13 @@
     </stylesheets>
     <children>
         <HBox>
-            <Label fx:id="header_complete" styleClass="cell_big_label" minWidth="40.0" prefWidth="40.0" wrapText="true"/>
-            <Label fx:id="header_index" text="Index" styleClass="cell_big_label" minWidth="70.0" prefWidth="70.0" wrapText="true"/>
-            <Label fx:id="header_description" text="Description" styleClass="cell_big_label" minWidth="200.0" prefWidth="200.0" wrapText="true"/>
-            <Label fx:id="header_due" text="Due" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
-            <Label fx:id="header_duration_start" text="Starts" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
-            <Label fx:id="header_duration_end" text="Ends" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
-            <Label fx:id="header_tags" text="Tags" styleClass="cell_big_label" minWidth="150.0" prefWidth="150.0" wrapText="true"/>
+            <Label fx:id="headerComplete" styleClass="cell_big_label" minWidth="40.0" prefWidth="40.0" wrapText="true"/>
+            <Label fx:id="headerIndex" text="Index" styleClass="cell_big_label" minWidth="70.0" prefWidth="70.0" wrapText="true"/>
+            <Label fx:id="headerDescription" text="Description" styleClass="cell_big_label" minWidth="200.0" prefWidth="200.0" wrapText="true"/>
+            <Label fx:id="headerDue" text="Due" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <Label fx:id="headerDurationStart" text="Starts" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <Label fx:id="headerDurationEnd" text="Ends" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+            <Label fx:id="headerTags" text="Tags" styleClass="cell_big_label" minWidth="150.0" prefWidth="150.0" wrapText="true"/>
             <padding>
                 <Insets left="10" bottom="10"/>
             </padding>
