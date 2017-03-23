@@ -4,10 +4,10 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 
 ---
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick Start
 
@@ -241,11 +241,12 @@ Example:
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `list KEYWORD [MORE_KEYWORDS]` <br>
-   e.g. `list homework`
+* **Find** : `list ATTRIBUTE KEYWORD [MORE_KEYWORDS]` <br>
+   e.g. `list by tag homework`
+   e.g. `list by timing 9:00pm`
 
 * **List** : `list` <br>
-   e.g. `list all`
+   e.g. `list`
 
 * **Help** : `help` <br>
    e.g. `help`
