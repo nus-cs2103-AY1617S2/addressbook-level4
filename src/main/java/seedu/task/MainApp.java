@@ -132,13 +132,13 @@ public class MainApp extends Application {
         }
         return initializedConfig;
     }
-    
+
     protected void restartConfig() {
-    	try {
-			ConfigUtil.saveConfig(new Config(), Config.DEFAULT_CONFIG_FILE);
-		} catch (IOException e) {
-			logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-		}
+        try {
+            ConfigUtil.saveConfig(new Config(), Config.DEFAULT_CONFIG_FILE);
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
     }
 
     protected UserPrefs initPrefs(Config config) {

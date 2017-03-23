@@ -19,7 +19,7 @@ public class Location {
     public final String value;
 
     //Allows an empty constructor
-    public Location(){
+    public Location() {
         this.value = DEFAULT_LOCATION;
     }
     /**

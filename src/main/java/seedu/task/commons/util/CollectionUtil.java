@@ -19,7 +19,7 @@ public class CollectionUtil {
 
     /**
      * Returns true if any element of {@code items} is null.
-     * 
+     *
      * @throws NullPointerException
      *             if {@code items} itself is null.
      */
@@ -36,17 +36,17 @@ public class CollectionUtil {
 
     /**
      * Returns true if the given item is found in the given collection
-     * 
+     *
      */
     public static boolean doesAnyMatch(Collection<?> items, Object item) {
         return items.stream().anyMatch(s ->  s.equals(item));
     }
-    
+
     /*
      * Returns true if the given string is found in the given collection
      */
-    public static boolean doesAnyStringMatch(Collection<String> words, String keyword){
-        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase((String) s,(String) keyword));
+    public static boolean doesAnyStringMatch(Collection<String> words, String keyword) {
+        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase((String) s, (String) keyword));
     }
 
     /**

@@ -2,17 +2,16 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
-
 import org.junit.Test;
 
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
-public class CheckListOrderTest extends TaskManagerGuiTest{
-    
+public class CheckListOrderTest extends TaskManagerGuiTest {
+
     @Test
-    public void check_nonemptyList(){
-        
+    public void check_nonemptyList() {
+
         //Check after deletion
         TestTask[] currentList = td.getTypicalTasks();
         assertCheckListOrder(currentList);
@@ -22,10 +21,10 @@ public class CheckListOrderTest extends TaskManagerGuiTest{
         commandBox.runCommand("delete 1");
         assertCheckListOrder(currentList);
     }
-    
-    
-    private void assertCheckListOrder(TestTask... expectedList){
-        
+
+
+    private void assertCheckListOrder(TestTask... expectedList) {
+
 //        ArrayList<TestTask> sortedTestTasks =  new ArrayList<>();
 //        for(TestTask t : expectedList){
 //            sortedTestTasks.add(t);

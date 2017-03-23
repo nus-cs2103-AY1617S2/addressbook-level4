@@ -12,6 +12,9 @@ public class ExitCommand extends Command {
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting KIT as requested ...";
 
+    public static String MESSAGE_USAGE = COMMAND_WORD_1 + "Exits KIT.\n"
+            + "Example: " + COMMAND_WORD_1;
+
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());

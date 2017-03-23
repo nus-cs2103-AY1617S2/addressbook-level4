@@ -46,8 +46,8 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    /**
-     * 
+    /***
+     * *
      * @param startDate
      * @param endDate
      * @return true if one of two dates is null. if both not null, only returns

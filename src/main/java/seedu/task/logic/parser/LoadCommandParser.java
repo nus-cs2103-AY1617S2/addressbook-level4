@@ -1,13 +1,13 @@
 package seedu.task.logic.parser;
 
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.SaveCommand;
+import seedu.task.logic.commands.LoadCommand;
 
-public class SaveCommandParser {
+public class LoadCommandParser {
 
     public Command parse(String args) {
         args = args.trim();
-        return new SaveCommand(args);
+        return new LoadCommand(args);
     }
 
 }

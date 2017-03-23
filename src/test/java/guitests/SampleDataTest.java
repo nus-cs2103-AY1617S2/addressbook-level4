@@ -30,7 +30,7 @@ public class SampleDataTest extends TaskManagerGuiTest {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         Arrays.sort(expectedList);
         assertTrue(taskListPanel.isListMatching(expectedList));
-        
+
         //clean up
         File toDelete = new File(TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml"));
         assert toDelete.exists();

@@ -5,16 +5,16 @@ import java.io.File;
 /**
  * Saves task manager in a different directory.
  */
-public class SaveCommand extends Command {
+public class LoadCommand extends Command {
 
-    public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD = "load";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves the task manager in a different directory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads the task manager from a different directory. "
             + "Parameters: PATHNAME \n"
             + "Example: " + COMMAND_WORD
             + " ";
 
-    public static final String MESSAGE_SUCCESS = "File save at: %1$s";
+    public static final String MESSAGE_SUCCESS = "File loaded from: %1$s";
     public static final String MESSAGE_FAILURE_DIRECTORY = "The path %1$s leads to a directory";
 
     private String pathName;
@@ -22,7 +22,7 @@ public class SaveCommand extends Command {
     /**
      * Creates a Save command
      */
-    public SaveCommand(String pathName) {
+    public LoadCommand(String pathName) {
         this.pathName = pathName;
     }
 
@@ -32,7 +32,7 @@ public class SaveCommand extends Command {
         if (file.isDirectory()) {
             return new CommandResult(String.format(MESSAGE_FAILURE_DIRECTORY, pathName));
         }
-        model.changeFilePath(pathName);
+        model.loadFromLocation(pathName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, pathName));
     }
 

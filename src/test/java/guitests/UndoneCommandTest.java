@@ -1,6 +1,6 @@
 package guitests;
 
-import static seedu.task.logic.commands.UnDoneCommand.MESSAGE_DONE_TASK_SUCCE;
+import static seedu.task.logic.commands.UnDoneCommand.MESSAGE_UNDONE_TASK_SUCCESS;
 
 import org.junit.Test;
 
@@ -38,6 +38,6 @@ public class UndoneCommandTest extends TaskManagerGuiTest {
         TaskCardHandle editedCard = taskListPanel.navigateToTask(currentList[targetIndex - 1].getName().fullName);
         assertMatching(currentList[targetIndex - 1], editedCard);
 
-        assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCE, currentList[targetIndex - 1]));
+        assertResultMessage(String.format(MESSAGE_UNDONE_TASK_SUCCESS, currentList[targetIndex - 1]));
     }
 }

@@ -2,8 +2,6 @@ package seedu.task.ui;
 
 import java.util.logging.Logger;
 
-import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
-
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +14,7 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.TaskComparator;
+
 
 /**
  * Panel containing the list of tasks.

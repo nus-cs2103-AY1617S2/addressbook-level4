@@ -3,6 +3,7 @@ package seedu.task.model;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -20,7 +21,7 @@ public interface Model {
     /** Undo last command.
      * @throws IllegalValueException */
     void undoData(ReadOnlyTaskManager newData) throws IllegalValueException;
-    
+
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 
@@ -29,7 +30,7 @@ public interface Model {
 
     /** Updates the task to done. */
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
-    
+
     /** Updates the task from done to undone */
     void UnDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
@@ -67,6 +68,12 @@ public interface Model {
 
 	/** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
+
+    /** Changes the load path for data to be loaded from*/
+    void loadFromLocation(String loadPath);
+
+    /** Loads the file from the path to be loaded from*/
+    void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
 
     /** Sorts the task list */
     void sortTaskList();
