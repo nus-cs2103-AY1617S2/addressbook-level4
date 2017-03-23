@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPLETION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -40,7 +42,8 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_PRIORITY, PREFIX_TAG, PREFIX_NOTES);
+                new ArgumentTokenizer(PREFIX_START, PREFIX_DEADLINE, PREFIX_PRIORITY,
+                                        PREFIX_TAG, PREFIX_NOTES, PREFIX_COMPLETION);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -61,6 +64,7 @@ public class EditCommandParser {
             setDeadlineValueForDescriptor(args.contains(PREFIX_DEADLINE.prefix), argsTokenizer, editTaskDescriptor);
             setPriorityValueForDescriptor(args.contains(PREFIX_PRIORITY.prefix), argsTokenizer, editTaskDescriptor);
             setNotesValueForDescriptor(args.contains(PREFIX_NOTES.prefix), argsTokenizer, editTaskDescriptor);
+            setCompletionValueForDescriptor(args.contains(PREFIX_COMPLETION.prefix), argsTokenizer, editTaskDescriptor);
 
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -171,6 +175,21 @@ public class EditCommandParser {
             editTaskDescriptor.setNotes(Optional.of(new Notes(notesStr)));
         } else if (containsPrefix) {
             editTaskDescriptor.setNotes(Optional.of(new Notes("-")));
+        }
+    }
+
+    /**
+     * Handler for building editTaskDescriptor for Completion
+     * @throws IllegalValueException
+     */
+    private void setCompletionValueForDescriptor(boolean containsPrefix,
+            ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
+        // Check notes
+        Boolean completionBool = Boolean.parseBoolean(argsTokenizer.getValue(PREFIX_COMPLETION).orElse("false"));
+        if (completionBool == true) {
+            editTaskDescriptor.setCompletion((Optional.of(new Completion(String.valueOf(completionBool)))));
+        } else if (containsPrefix) {
+            editTaskDescriptor.setCompletion((Optional.of(new Completion("false"))));
         }
     }
 }
