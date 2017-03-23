@@ -11,8 +11,8 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_VENUE = new Prefix("/venue");
-    public static final Prefix PREFIX_STARTTIME = new Prefix("/from:");
-    public static final Prefix PREFIX_ENDTIME = new Prefix("/to:");
+    public static final Prefix PREFIX_STARTTIME = new Prefix("/from");
+    public static final Prefix PREFIX_ENDTIME = new Prefix("/to");
     public static final Prefix PREFIX_TAG = new Prefix("#");
     public static final Prefix PREFIX_URGENCYLEVEL = new Prefix("/level");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("/description");
