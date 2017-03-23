@@ -449,7 +449,7 @@ Use case ends
 
 > Use case ends
 
-3a. Invalid index given to delete
+3a. Invalid index given to edit
 
 > 3a1. TodoApp shows an error message
   Use case resumes at step 2
@@ -469,6 +469,23 @@ Use case ends
 
 >Use case ends
 
+#### Use case: Retrieve a task
+
+**MSS**
+
+1. User requests to retrieve tasks by name/priority/deadline/completion
+2. TodoApp shows a list of tasks that matches
+Use case ends
+
+**Extensions**
+
+1a. List is empty
+
+> Use case ends
+
+1b. Given inputs not found
+
+> Use case ends
 
 #### Use case: List task
 
