@@ -26,4 +26,4 @@
 * This project was built off an address book application by SE-EDU and can be found at https://github.com/se-edu/
 
 
-#### Licence : [NUS](LICENSE)
+#### Licence : [MIT](LICENSE)
