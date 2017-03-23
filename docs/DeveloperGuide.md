@@ -252,6 +252,23 @@ The `Model` component does not depends on other three components and consists of
 
 The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
+#### 2.4.1 Undo/Redo implementation
+
+The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `oringator` the component that generates the `momento` object and the `momento collector`. 
+
+Whenever the data object is modified, the `originator` sends a copy of the current state of the data as a `memento` object to the `momento collector` to keep track of. When the undo command is given, the `momento collector` simply returns the `momento` object representing the previous state of the data.
+
+In Opus, we have:
+* `ModelManager` as the `originator`.
+* `TaskManagers` as `momento` objects.
+* `History` as the `momento collector`. 
+
+`History` contains two list of `TaskManager`, one for the backward `undo` operation and another for the forward `redo` operation.
+
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplfies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command. 
+
+Futhermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
+
 ### 2.5. Storage component
 
 Author: [Shi Yanzhang](http://github.com/mynameisyz)
@@ -297,15 +314,15 @@ and logging destinations.
 ### 3.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
+(default: `config.json`).
 
 
 ## 4. Code Quality and Testing
 
 ### 4.1. Code Quality
 
-In Opus, we asipre to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive coding are:
-* Using assertions to check validity of arguments before passing them into functions.
+In Opus, we aspire to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
+* Using Assertions to check validity of arguments before passing them into functions.
 * Throwing Excpetions when encountering unexpected events.
 * Enforcing 1-to-1 associations
 A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf)
@@ -367,7 +384,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 ### 4.4. Troubleshooting tests
 
 #### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests.
+    This is because Assertions are not enabled for JUnit tests. <br>
 1. Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
 2. Delete run configurations created when you ran tests earlier.
