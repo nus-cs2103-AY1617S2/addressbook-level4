@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -57,6 +58,11 @@ public class TaskBuilder {
 
     public TaskBuilder withNotes(String notes) throws IllegalValueException {
         this.task.setNotes(new Notes(notes));
+        return this;
+    }
+
+    public TaskBuilder withCompletion(String completion) throws IllegalValueException {
+        this.task.setCompletion(new Completion(completion));
         return this;
     }
 
