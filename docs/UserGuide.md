@@ -18,9 +18,9 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.9. [Undoing the previous commands](#39-undoing-the-previous-commands--undo)  
   3.10. [Clearing all entries](#310-clearing-all-entries--clear)  
   3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias)  
-  3.12. [Exiting the program](#312-exiting-the-program--exit)  
-  3.13. [Changing the storage destination](#313-changing-the-storage-destination--save-at)  
-  3.14. [Saving the data](#314-saving-the-data)  
+  3.12. [Changing the storage destination](#313-changing-the-storage-destination--save-at)  
+  3.13. [Saving the data](#314-saving-the-data)  
+  3.14. [Exiting the program](#312-exiting-the-program--exit)  
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -42,22 +42,22 @@ Are you ready to be a Doist?
 >    This app will not work with earlier versions of Java 8.
 
 1. Download the latest `.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for Doist. Note that you would be able to edit Doist's storage location of its data later.
-3. Almost there! Double-click the file to start the app. The GUI should appear in a few seconds.
+2. Copy the file to the folder you want to use as the home folder for Doist. Note that you change Doist's storage location of its data in the future.
+3. Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
  <img src="images/Ui.png" width="450"> <br>
  Figure 1: Doist Application Window <br>
 
-4. Voila, you are ready to be more productive! Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+4. Voila, you are ready to be more productive! Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
 ### Getting started with commands :
 
 Type the following commands and press <kbd>Enter</kbd> after each command.
-1. **`add Buy the milk \from 3pm \to 5pm`**. <br>
-Adds an event for today with a description of "Buy the milk" from 3pm to 5pm
+1. **`add Attend group meeting \from 3pm \to 5pm`**. <br>
+Adds an event for today with a description of "Attend group meeting" from 3pm to 5pm today
 2. **`add Go grocery shopping \by 6pm 25th Oct`**. <br>
-Adds a task with a description of "Go grocery shopping" which has a 6pm deadline.
+Adds a task with a description of "Go grocery shopping" which has a 6pm deadline on the 25th of October.
 3. **`finish 1`** <br>
 Marks the first task in the list as finished.
 4. **`list pending`** <br>
@@ -119,7 +119,7 @@ Format: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
 > - `add buy milk \from 12 Oct 3pm \to 4pm` <br>
 
 > **Remarks:** <br>
-> - See the table of acceptable date and time formats below
+> - See Fig 1. for acceptable date and time formats.
 
 **Deadline** <br>
 Add a task that has a deadline with the `\by` key.
@@ -130,12 +130,7 @@ Format: `(add|do) TASK_DESCRIPTION [\by TIME]`
 > - `add buy milk \by 3pm` <br>
 > - `add buy milk \by 28th Feb` <br>
 
-> **Remarks:** <br>
-> - `Start time` and `end time` will both be set to `TIME` in this format
-> - That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
-> - See the table of acceptable date and time formats below
-
-**Acceptable date and time formats** <br>
+**Fig 1. Acceptable date and time formats** <br>
 
 Date Format |Examples
 ----------- | :------- |
@@ -198,7 +193,7 @@ Format: `[\under TAG...]`
 > - Tasks can have any number of tags (including 0)
 
 
-**More examples:**
+**Sample Commands:**
 
 * `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 * `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
@@ -229,7 +224,7 @@ You can also use the `\in` key for tasks occurring `today`, `this week`, `this m
 > - `list \in this week` <br>
 
 > **Remarks:** <br>
-> - See the table of acceptable date and time formats above
+> - See Fig 1. for acceptable date and time formats
 
 List tasks that are under certain tags by using the `\under` key. <br>
 <br>
@@ -237,7 +232,7 @@ Format: `[\under TAG]`
 > **Examples:** <br>
 > `list \under shopping` <br>
 
-**More examples:**
+**Sample Commmands**
 * `list pending \under school_work`
 * `list pending \in today`
 * `list \in this week`
@@ -245,7 +240,7 @@ Format: `[\under TAG]`
 
 ### 3.4 Finding a task : `find`
 
-You can use the `find` command to find tasks which description contain any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
+You can use the `find` command to find tasks whose description contains any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
 <br>
 Format: `find 'QUERY' ['QUERY'...]`
 > **Examples:** <br>
@@ -257,17 +252,17 @@ Format: `find 'QUERY' ['QUERY'...]`
 > - The search is case sensitive. *e.g* `hans` will not match `Hans` <br>
 > - The order of the search keys does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
 > - Only the task description is searched. <br>
-> - Tasks matching at least one search query will be returned (in otherwords, it is an `OR` search).
+> - Tasks matching at least one search query will be returned (in other words, it is an `OR` search).
     *e.g.* A task with a description of `Hans` will match search query `Hans Bo` <br>
 
-**More examples:**
+**Sample Commmands**
 
 * `find 'hiking'`
 * `find 'CS2103T' 'group meeting' 'project'`
 
 ### 3.5 Deleting a task : `delete`
 
-You can use the `delete` command to delete the specified tasks. You can delete more than one task by specifying multiple indices. <br>
+You can use the `delete` command to delete the task specifed by an index. The index refers to the index number of the task shown in the most recent listing. <br>
 <br>
 Format: `delete INDEX [INDEX...]`
 > **Examples:** <br>
@@ -275,11 +270,10 @@ Format: `delete INDEX [INDEX...]`
 
 > **Remarks:** <br>
 > - Deletes the tasks at the specified `INDEX`.<br>
-> - The index refers to the index number of the task shown in the most recent listing.<br>
-> - The index must be a **positive integer** 1, 2, 3, ...
+> - You can delete more than one task by specifying multiple indices.<br>
 
 
-**More examples:**
+**Sample Commands**
 * `list finished`<br>
   `delete 1 2`<br>
   Deletes the 1st and the 2nd tasks in the result of `list` command.
@@ -303,22 +297,21 @@ Use the `unfinish` command to change the status of an already finished task to n
 
 > **Remarks:** <br>
 > - The index refers to the index number of the task shown in the most recent listing.<br>
-> - The index must be a **positive integer** 1, 2, 3, ...<br>
 > - If the task(s) at the specified `INDEX` is/are already finished, there would be no changes made.
 
-**More examples:**
+**Sample Commands**
 * `list pending \in this week`<br>
   `finish 1 2`<br>
   Marks the 1st and the 2nd tasks in the result of `list` command as finished.
 * `find 'project'`<br>
   `finish 1`<br>
-  Mark the 1st task in the results of the `find` command as finished.
+  Marks the 1st task in the results of the `find` command as finished.
 
 ### 3.7 Editing an existing task : `edit`
 
-You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task would not change! <br>
+You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task will not change! <br>
 <br>
-Format: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
+Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 > **Examples:** <br>
@@ -327,7 +320,7 @@ Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 > **Remarks:** <br>
 > - Refer to the section about the `add` command to know how to use the keys of the `edit` command because they are used in the exact same way
 
-**More examples:**
+**Sample Commands**
 * `list`<br>
   `edit 1 \desc watch NBA \remind_at this Sunday 8am`<br>
   Suppose that the description of this task is originally `watch nba`,
@@ -364,19 +357,12 @@ Format: `alias ALIAS \for COMMAND_WORD`
 
 > **Remarks:** <br>
 > - `ALIAS` should have no spaces, we suggest you use underscores to replace spaces. <br>
-> - If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word. Do try again!
-
+> - If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word.
 You can then use `view_alias` to view the list of aliases!
 <br>
 Format: `view_alias`
 
-### 3.12 Exiting the program : `exit`
-
-Use `exit` to exit Doist. Don't forget about us! <br>
-<br>
-Format: `exit`  
-
-### 3.13 Changing the storage destination : `save_at`
+### 3.12 Changing the storage destination : `save_at`
 
 You can use `save_at` to change the storage path of Doist. <br>
 <br>
@@ -387,18 +373,27 @@ Format: `save_at PATH`
 > - `save_at Desktop\todolist.xml` <br>
 
 > **Remarks:** <br>
-> - You can save at a relative path too.
+> - You can provide a relative path for this command.
 
-### 3.14 Saving the data
+### 3.13 Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 3.14 Exiting the program : `exit`
+
+Use `exit` to exit Doist. <br>
+<br>
+Format: `exit`  
 
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Doist folder.
+
+**Q**: Do I need to save my data before I ext Doist? <br>
+**A**: You do not need to explicitly save your data, as Doist automatically does this for you!
 
 ## 5. Command Summary
 
