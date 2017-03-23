@@ -21,7 +21,7 @@ public class TestApp extends MainApp {
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
-    protected static final String ADDRESS_BOOK_NAME = "Test";
+    protected static final String TASK_MANAGER_NAME = "Test";
     protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
@@ -47,7 +47,7 @@ public class TestApp extends MainApp {
         config.setAppTitle(APP_TITLE);
         config.setGeeKeepFilePath(saveFileLocation);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
-        config.setGeeKeepName(ADDRESS_BOOK_NAME);
+        config.setGeeKeepName(TASK_MANAGER_NAME);
         return config;
     }
 
