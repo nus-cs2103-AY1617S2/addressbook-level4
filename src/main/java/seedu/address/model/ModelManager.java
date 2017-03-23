@@ -1,23 +1,29 @@
 package seedu.address.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import com.google.common.base.Joiner;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.ToDoAppChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
 import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the address book data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -71,14 +77,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoAppChanged();
     }
 
-    //@@author A0114395E
+    // @@author A0114395E
     @Override
     public synchronized void addTask(Task task, int idx) throws UniqueTaskList.DuplicateTaskException {
         toDoApp.addTask(task, idx);
         updateFilteredListToShowAll();
         indicateToDoAppChanged();
     }
-    //@@author
+    // @@author
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -90,7 +96,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoAppChanged();
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -104,17 +111,33 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        if (keywords.contains("name")) {
+            keywords.remove("name");
+            updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        } else if (keywords.contains("deadline")) {
+            keywords.remove("deadline");
+            updateFilteredTaskList(new PredicateExpression(new DeadlineQualifier(keywords)));
+        } else if (keywords.contains("priority")) {
+            keywords.remove("priority");
+            updateFilteredTaskList(new PredicateExpression(
+                    new PriorityQualifier(Integer.parseInt(Joiner.on(" ").skipNulls().join(keywords)))));
+        } else if (keywords.contains("completion")) {
+            keywords.remove("completion");
+            updateFilteredTaskList(new PredicateExpression(
+                    new CompletionQualifier(Joiner.on(" ").skipNulls().join(keywords))));
+        }
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -139,6 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         String toString();
     }
 
@@ -152,14 +176,75 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)).findAny()
                     .isPresent();
         }
 
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+
+    // @@author A0124591H
+    private class DeadlineQualifier implements Qualifier {
+        private Deadline deadlineKeyDeadline;
+        private String deadlineKeyString;
+
+        DeadlineQualifier(Set<String> deadlineKeyInputs) {
+            try {
+                this.deadlineKeyDeadline = new Deadline(Joiner.on(" ").join(deadlineKeyInputs));
+                this.deadlineKeyString = deadlineKeyDeadline.toString();
+            } catch (IllegalValueException e) {
+            }
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getDeadline().toString() == deadlineKeyString;
+        }
+
+        @Override
+        public String toString() {
+            return "deadline=" + String.join(", ", deadlineKeyDeadline.value);
+        }
+    }
+
+    // @@author A0124591H
+    private class PriorityQualifier implements Qualifier {
+        private int priorityNumber;
+
+        PriorityQualifier(int priorityNumber) {
+            this.priorityNumber = priorityNumber;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getPriority().value == priorityNumber;
+        }
+
+        @Override
+        public String toString() {
+            return "priority=" + String.join(", ", String.valueOf(priorityNumber));
+        }
+    }
+
+    // @@author A0124591H
+    private class CompletionQualifier implements Qualifier {
+        private String completionValue;
+
+        CompletionQualifier(String completionValue) {
+            this.completionValue = completionValue;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return String.valueOf(task.getCompletion().value).toLowerCase() == completionValue.toLowerCase();
+        }
+
+        @Override
+        public String toString() {
+            return "completion=" + String.join(", ", completionValue);
         }
     }
 
