@@ -5,6 +5,7 @@ import seedu.taskmanager.commons.core.Config;
 
 /**
  * Indicates a change in directory of the TaskManager initiated by user
+ * @@author A0114269E
  */
 public class TaskManagerStorageDirectoryChangedEvent extends BaseEvent {
     private final String newFilePath;
@@ -25,7 +26,7 @@ public class TaskManagerStorageDirectoryChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "TaskManager Directory  changed to " + this.newFilePath;
+        return "TaskManager Directory changed to " + this.newFilePath;
     }
 
 }
