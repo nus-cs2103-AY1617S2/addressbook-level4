@@ -118,7 +118,7 @@ public class ParserUtil {
     /**
      * Parses an {@code Optional<String>} dateTime into an {@code Optional<DateTime>}
      * if {@code dateTime} is present.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public static Optional<DateTime> parseDateTime(Optional<String> dateTime) throws IllegalValueException {
         assert dateTime != null;
