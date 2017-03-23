@@ -13,12 +13,12 @@ import seedu.address.commons.util.StringUtil;
 public class EndDate {
 
 	public static final String MESSAGE_ENDDATE_CONSTRAINTS =
-            "Event start date should be in YYYY-MM-DD format e.g. 2010-12-05";
+            "Event End Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
 
     public final LocalDate value;
-
+    
     /**
-     * Validates given start date.
+     * Validates given end date.
      *
      * @throws IllegalValueException if given start date is invalid.
      */

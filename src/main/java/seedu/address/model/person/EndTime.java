@@ -10,11 +10,12 @@ import seedu.address.commons.util.StringUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidEndTime(String)}
  */
 public class EndTime {
-	public static final String MESSAGE_ENDTIME_CONSTRAINTS =
-            "Event start time should be in HH:MM format e.g. 00:00 represents midnight";
+    
+    public static final String MESSAGE_ENDTIME_CONSTRAINTS =
+            "Event end time can only be in this format: hh:mm(AM/PM) format, e.g. 12:00pm";
 
     public final LocalTime value;
-    
+
     /**
      * Validates given start time.
      *
@@ -23,14 +24,15 @@ public class EndTime {
     public EndTime(String endTimeArg) throws IllegalValueException {
         if (endTimeArg == null) {
             this.value = null;
-        } else {
-        	try {
-        		this.value = StringUtil.parseStringToTime(endTimeArg);
-        	} catch (IllegalValueException illegalValueException) {
-        		throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
-        	}
+        } 
+        else {
+            try {
+                this.value = StringUtil.parseStringToTime(endTimeArg);
+            } catch (IllegalValueException illegalValueException) {
+                throw new IllegalValueException(MESSAGE_ENDTIME_CONSTRAINTS);
+                }
+            }
         }
-    }
 
     @Override
     public String toString() {

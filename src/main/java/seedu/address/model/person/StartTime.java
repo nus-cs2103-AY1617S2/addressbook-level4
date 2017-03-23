@@ -12,7 +12,7 @@ import seedu.address.commons.util.StringUtil;
 public class StartTime {
 
     public static final String MESSAGE_STARTTIME_CONSTRAINTS =
-            "Event start time should be in HH:MM format e.g. 00:00 represents midnight";
+            "Event start time can only be in this format: hh:mm(AM/PM) format, e.g. 10:00pm";
 
     public final LocalTime value;
 
@@ -24,12 +24,13 @@ public class StartTime {
     public StartTime(String startTimeArg) throws IllegalValueException {
         if (startTimeArg == null) {
             this.value = null;
-        } else {
-        	try {
-        		this.value = StringUtil.parseStringToTime(startTimeArg);
-        	} catch (IllegalValueException illegalValueException) {
-        		throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
-        	}
+        }
+        else {
+            try {
+                this.value = StringUtil.parseStringToTime(startTimeArg);
+            } catch (IllegalValueException illegalValueException) {
+                throw new IllegalValueException(MESSAGE_STARTTIME_CONSTRAINTS);
+            }
         }
     }
 
