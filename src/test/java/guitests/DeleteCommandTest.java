@@ -12,16 +12,32 @@ public class DeleteCommandTest extends AddressBookGuiTest {
 
     @Test
     public void delete() {
-
-        //delete the first in the list
-
-        TestTask[] currentList = td.getTypicalTasks();
+        //  valid-partition: Boundary value just above the boundary
+        //  delete the first in the list
+        TestTask[] currentList = {td.fiona , td.ida};
         for (int i = 0; i < currentList.length; i++) commandBox.runCommand(currentList[i].getAddCommand());
 
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
+        //  valid-partition: Boundary value just below the boundary
+        //  delete the last in the list
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        targetIndex = currentList.length;
+        assertDeleteSuccess(targetIndex, currentList);
 
 
+
+        //  valid-partition: Boundary value just below the boundary
+        //delete from the middle of the list
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        TestTask[] temp = {td.fiona , td.ida , td.hoon};
+        currentList = temp;
+        for (int i = 0; i < currentList.length; i++) commandBox.runCommand(currentList[i].getAddCommand());
+
+        targetIndex = currentList.length / 2;
+        assertDeleteSuccess(targetIndex, currentList);
+
+        //invalid partition: value outside the boundary
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
