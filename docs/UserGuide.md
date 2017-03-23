@@ -25,8 +25,9 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all TODOs
-   * **`add`**` Email manager due 2017/01/08 0900: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`add`**`Email manager due/2017/01/08 0900`: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
+   * **`complete`**`2` : marks the 2nd task as completed
+   * **`delete`**`3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -62,7 +63,7 @@ Examples:
 ### 2.3. Listing all : `list all`, `ls`
 
 Shows a list of all **uncompleted** tasks.<br>
-Format: `list all`, `ls`
+Format: `list`, `list all`, `ls`
 
 ### 2.4. Listing completed tasks: `list complete`
 
@@ -77,19 +78,28 @@ Format: `sort by SORTCRITERIA`
 ### 2.6. Editing a task : `edit`
 
 Edits an existing task in the list.<br>
-Format: `edit INDEX PARAMETER NEW_VALUE` <br>
+Format: `edit INDEX NEWDESCRIPTION PARAMETER1/VALUE1 PARAMETER2/VALUE2 ...` <br>
 
 > * Edits the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
-> * One parameter and updated value needs to be provided.
+> * New description must follow index if necessary
+> * New value should follow the parameter and separated by a '/'
 > * Existing value will be updated to the input value.
+> * Existing value removed if no value follow parameter
+> * Can update multiple parameters in one command (see examples below)
 
 Examples:
 
-* `edit 1 due 20/03/2017`<br>
+* `edit 1 due/20/03/2017`<br>
   Edits the due date of the 1st item to 20/03/2017.
 
-* `edit 2 description buy milk`<br>
-  Edits the description of the 2nd to read “buy milk”.
+* `edit 2 buy milk t/groceries`<br>
+  Edits the description of the 2nd to read “buy milk” and change tags to "groceries".
+
+* `edit 1 t/hipri starts/2016/01/01 1230 ends/2017/01/01 1230` <br>
+Edits the tag, duration start, and duration end for the 1st task.
+
+* `edit 1 t/` <br>
+  Removes all tags from the 1st task
 
 ### 2.7. Completing a task : `complete`
 
@@ -117,10 +127,10 @@ Examples:
 * `delete 2`<br>
   Deletes the 2nd task.
 
-### 2.9. Delete all tasks : `delete all`
+### 2.9. Delete all tasks : `clear`
 
 Deletes all tasks.<br>
-Format: `delete all`
+Format: `clear`
 
 ### 2.10. Finding all tasks containing any keyword in their description: `find`
 
