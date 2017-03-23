@@ -33,7 +33,8 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter
+            .getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -76,7 +77,8 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task manager: " + taskManager
+                + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
         this.indexMap = new HashMap<String, Integer>();
@@ -127,23 +129,27 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void deleteTask(ReadOnlyTask target)
+            throws TaskNotFoundException {
         taskManager.removeTask(target);
         indicateTaskManagerChanged(MESSAGE_ON_DELETE);
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task)
+            throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged(MESSAGE_ON_ADD);
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws DuplicateTaskException {
         assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        int taskManagerIndex = filteredTasks
+                .getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged(MESSAGE_ON_UPDATE);
     }
@@ -165,7 +171,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void discardCurrentState() {
-        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
+        assert commandHistory.size() == taskHistory.size()
+                && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
         assert (!commandHistory.isEmpty());
         String toUndo = commandHistory.pop();
@@ -176,11 +183,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String undoLastCommand() throws NoPreviousCommandException {
-        assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
+        assert commandHistory.size() == taskHistory.size()
+                && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
 
         if (commandHistory.isEmpty()) {
-            throw new NoPreviousCommandException("No previous commands were found.");
+            throw new NoPreviousCommandException(
+                    "No previous commands were found.");
         }
 
         // Get previous command, taskManager and view
@@ -211,7 +220,8 @@ public class ModelManager extends ComponentManager implements Model {
     public String getRedoCommand() throws NoPreviousCommandException {
 
         if (redoCommandHistory.isEmpty()) {
-            throw new NoPreviousCommandException("No previous commands were found.");
+            throw new NoPreviousCommandException(
+                    "No previous commands were found.");
         }
 
         return redoCommandHistory.pop();
@@ -237,7 +247,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords, Date date, Set<String> tagKeys) {
+    public void updateFilteredTaskList(Set<String> keywords, Date date,
+            Set<String> tagKeys) {
         Predicate<ReadOnlyTask> predicate = t -> false;
         if (keywords != null) {
             predicate = predicate.or(isTitleContainsKeyword(keywords));
@@ -255,10 +266,14 @@ public class ModelManager extends ComponentManager implements Model {
     // ========== Inner classes/interfaces used for filtering
     // =================================================
 
-    public Predicate<ReadOnlyTask> isTitleContainsKeyword(Set<String> keywords) {
-        assert !keywords.isEmpty() : "no keywords provided for a keyword search";
+    public Predicate<ReadOnlyTask> isTitleContainsKeyword(
+            Set<String> keywords) {
+        assert !keywords
+                .isEmpty() : "no keywords provided for a keyword search";
         return t -> {
-            return keywords.stream().filter(keyword -> StringUtil.containsWordIgnoreCase(t.getName().fullName, keyword))
+            return keywords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                            t.getName().fullName, keyword))
                     .findAny().isPresent();
         };
     }
@@ -269,7 +284,8 @@ public class ModelManager extends ComponentManager implements Model {
             return keywords.stream().filter(keyword -> {
                 boolean f = false;
                 for (Tag tag : t.getTags()) {
-                    f = f || StringUtil.containsWordIgnoreCase(tag.getTagName(), keyword);
+                    f = f || StringUtil.containsWordIgnoreCase(tag.getTagName(),
+                            keyword);
                 }
                 return f;
             }).findAny().isPresent();
@@ -277,7 +293,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday,
+            ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
         taskListToday.clear();
@@ -327,8 +344,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public int parseUIIndex(String uiIndex) {
+        uiIndex = uiIndex.toUpperCase();
         logger.info(">>>>>>>>>>>>query UI index:" + uiIndex);
-        logger.info(">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
+        logger.info(
+                ">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
         assert uiIndex != null;
         assert indexMap.containsKey(uiIndex);
         // plus one since all current commands take index as 1-based

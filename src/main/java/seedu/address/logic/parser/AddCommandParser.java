@@ -31,14 +31,9 @@ public class AddCommandParser {
     public Command parse(String arguments) {
 
         this.args = arguments;
-        String tags[] = {};
 
         // find and remove tags
-        String tagsString = getArgument(CliSyntax.TAGS);
-        System.out.println("tags: " + tagsString);
-        if (tagsString != null) {
-            tags = tagsString.split("\\s+");
-        }
+        String[] tags = getTags();
 
         // find and remove starting time and deadline if the syntax is "<name>
         // from <starting time> to <deadline>"
@@ -76,6 +71,18 @@ public class AddCommandParser {
             return new IncorrectCommand(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+    }
+
+    private String[] getTags() {
+        Pattern pattern = Pattern.compile(CliSyntax.TAGS);
+        Matcher matcher = pattern.matcher(args);
+        ArrayList<String> tags = new ArrayList<String>();
+        while (matcher.find()) {
+            assert matcher.group().length() > 0;
+            tags.add(matcher.group().trim().substring(1));
+        }
+        args = matcher.replaceAll("");
+        return (tags.toArray(new String[0]));
     }
 
     private String getArgument(String key) {
