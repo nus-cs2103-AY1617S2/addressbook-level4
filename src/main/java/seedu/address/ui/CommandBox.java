@@ -17,7 +17,7 @@ import seedu.address.logic.autocomplete.AutocompleteManager;
 import seedu.address.logic.autocomplete.AutocompleteRequest;
 import seedu.address.logic.autocomplete.AutocompleteResponse;
 import seedu.address.logic.commandhistory.CommandHistory;
-import seedu.address.logic.commandhistory.CommandHistoryLinkedList;
+import seedu.address.logic.commandhistory.CommandHistoryManager;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -36,7 +36,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
         this.autocompleteManager = new AutocompleteManager();
-        this.commandHistory = CommandHistoryLinkedList.getInstance();
+        this.commandHistory = CommandHistoryManager.getInstance();
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }

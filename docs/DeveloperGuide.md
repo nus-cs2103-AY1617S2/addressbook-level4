@@ -249,6 +249,10 @@ _Figure 2.7.3 : Component interactions for `list` command when user types `list 
 The diagram below shows the interaction between different components for the `AutoComplete` feature. <br><br>
 <img src="images\SDforAutocomplete.png" width="800"><br>
 _Figure 2.7.4 : Component interactions for `Autocomplete` feature when user presses the `tab` key_
+<br /><br />
+The AutocompleteManager implements a request and response design. To use the Autocomplete feature, a response object is created with the command and the current cursor position and sent to the AutomcompleteManager. <br />
+The AutocompleteManager will create a response with the new command with the autocompleted command as well as the new cursor position.
+<br /><br />
 
 The diagram below shows the interaction between different components for the `book` command. <br><br>
 <img src="images\SDforBook.png" width="800"><br>
@@ -257,6 +261,10 @@ _Figure 2.7.5 : Component interactions for `book` command_
 The diagram below shows the interaction between different components for the `Command History` feature. <br><br>
 <img src="images\SDforCommandHistory.png" width="800"><br>
 _Figure 2.7.6 : Component interactions for `Command History` feature when user iterate through their command history for the session by pressing the up or down key_
+<br /><br />
+CommandHistoryManager implements a Singleton design as all command history should go to the same manager.<br />
+The CommandHistoryManager can be accessed through the getInstance() method.
+<br /><br />
 
 The diagram below shows the interaction between different components for the delete label command via `delete`. <br><br>
 <img src="images\SDforDeleteLabel.png" width="800"><br>
