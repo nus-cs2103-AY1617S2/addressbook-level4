@@ -28,9 +28,13 @@ public class ParserUtil {
 
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * Returns null if {@code Optional<String> phone} is an empty string.
      */
     public static Optional<DateTime> parseEndDateTime(Optional<String> phone) throws IllegalValueException {
         assert phone != null;
+        if (phone.isPresent() && phone.get().equals("")) {
+            return null;
+        }
         return phone.isPresent() ? Optional.of(new DateTime(phone.get())) : Optional.empty();
     }
 
@@ -62,9 +66,13 @@ public class ParserUtil {
 
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
+     * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<DateTime> parseStartDateTime(Optional<String> email) throws IllegalValueException {
         assert email != null;
+        if (email.isPresent() && email.get().equals("")) {
+            return null;
+        }
         return email.isPresent() ? Optional.of(new DateTime(email.get())) : Optional.empty();
     }
 

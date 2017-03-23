@@ -16,6 +16,6 @@ public class EndDateTimeTest {
         assertFalse(DateTime.isValidDateTime(" ")); // spaces only
 
         // valid end date time
-        assertTrue(DateTime.isValidDateTime("2017-04-01T10:16:30"));
+        assertTrue(DateTime.isValidDateTime("01-05-17 1630"));
     }
 }

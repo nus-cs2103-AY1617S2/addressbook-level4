@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.geekeep.commons.core.Messages;
+import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.UniqueTagList;
@@ -17,7 +18,7 @@ import seedu.geekeep.model.task.UniqueTaskList;
 /**
  * Edits the details of an existing task in the address book.
  */
-public class EditCommand extends Command {
+public class UpdateCommand extends Command {
 
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
@@ -64,12 +65,13 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.endDateTime, this.startDateTime,
-                                               this.location, this.tags);
+            if (this.startDateTime == null || this.endDateTime == null) {
+                return true;
+            }
+            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags);
         }
 
         public void setEndDateTime(Optional<DateTime> endDateTime) {
-            assert endDateTime != null;
             this.endDateTime = endDateTime;
         }
 
@@ -79,7 +81,6 @@ public class EditCommand extends Command {
         }
 
         public void setStartDateTime(Optional<DateTime> startDateTime) {
-            assert startDateTime != null;
             this.startDateTime = startDateTime;
         }
 
@@ -94,14 +95,14 @@ public class EditCommand extends Command {
         }
     }
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "update";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[TITLE] [s/STARTING_TIME] [e/ENDING_TIME] [l/LOCATION] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 s/2017-04-01T10:16:30 e/2017-04-01T10:16:30m";
+            + "Example: " + COMMAND_WORD + " 1 s/01-04-17 1630 e/01-04-17 1730";
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
@@ -109,16 +110,21 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+            EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 
         Title updatedTitle = editTaskDescriptor.getTitle().orElseGet(taskToEdit::getTitle);
-        DateTime updatedEndDateTime
-                = editTaskDescriptor.getEndDateTime().orElseGet(taskToEdit::getEndDateTime);
-        DateTime updatedStartDateTime
-                = editTaskDescriptor.getStartDateTime().orElseGet(taskToEdit::getStartDateTime);
+        DateTime updatedEndDateTime = null;
+        if (editTaskDescriptor.getEndDateTime() != null) {
+            updatedEndDateTime = editTaskDescriptor.getEndDateTime().orElseGet(taskToEdit::getEndDateTime);
+        }
+        DateTime updatedStartDateTime = null;
+        if (editTaskDescriptor.getStartDateTime() != null) {
+            updatedStartDateTime = editTaskDescriptor.getStartDateTime().orElseGet(taskToEdit::getStartDateTime);
+        }
         Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
@@ -133,7 +139,7 @@ public class EditCommand extends Command {
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public UpdateCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
@@ -152,12 +158,19 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        Task editedTask;
+        try {
+            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
