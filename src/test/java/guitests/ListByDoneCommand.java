@@ -8,14 +8,14 @@ import seedu.task.commons.core.Messages;
 import seedu.task.testutil.TestTask;
 
 public class ListByDoneCommand extends TaskManagerGuiTest {
-   
+
     @Test
     public void find_nonEmptyList() {
         //assertListByDone("listdone"); // no results
         commandBox.runCommand("done 1");
         TestTask[] currentList = td.getTypicalTasks();
-        assertListByDone("listdone",currentList[0]);
-       
+        assertListByDone("listdone", currentList[0]);
+
 
     }
 

@@ -29,7 +29,7 @@ public class UndoneCommandTest extends TaskManagerGuiTest {
 
     private void assertIsDoneSuccess(int targetIndex, final TestTask[] currentList) {
         // TODO Auto-generated method stub
-        currentList[targetIndex -1].setIsDone(false);
+        currentList[targetIndex - 1].setIsDone(false);
         //boolean expectedRemainder = TestUtil.taskIsDone();
 
         commandBox.runCommand("undone " + targetIndex);
