@@ -20,7 +20,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label location;
     @FXML
     private Label email;
     @FXML
@@ -40,9 +40,9 @@ public class TaskCard extends UiPart<Region> {
         }
 
         if (task.getLocation() == null) {
-            address.setText("");
+            location.setText("");
         } else {
-            address.setText(task.getLocation().value);
+            location.setText(task.getLocation().value);
         }
 
         initTags(task);

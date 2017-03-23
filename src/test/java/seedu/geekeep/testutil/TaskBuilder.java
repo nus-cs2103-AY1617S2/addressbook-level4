@@ -34,8 +34,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withLocation(String address) throws IllegalValueException {
-        this.task.setLocation(new Location(address));
+    public TaskBuilder withLocation(String location) throws IllegalValueException {
+        this.task.setLocation(new Location(location));
         return this;
     }
 

@@ -57,11 +57,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Address>} if {@code location} is present.
      */
-    public static Optional<Location> parseLocation(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Location(address.get())) : Optional.empty();
+    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
+        assert location != null;
+        return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
     }
 
     /**
