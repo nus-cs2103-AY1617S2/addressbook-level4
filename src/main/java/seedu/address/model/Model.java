@@ -95,6 +95,8 @@ public interface Model {
      * Overwrites TaskManager state to the furthermost.
      */
     void setAddressBookStateToFrontier() throws StateLimitReachedException;
+    
+    void setCurrentComparator(String type);
     /**
      * Signals that the state change command would fail because
      * the border of the state space is reached.

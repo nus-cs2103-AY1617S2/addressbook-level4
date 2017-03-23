@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
@@ -25,7 +26,17 @@ import seedu.address.model.task.Title;
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
 public class ParserUtil {
-
+    //@@author A0139539R
+    private static final Pattern COMPARATOR_NAME_ARGS_FORMAT = Pattern.compile(
+            "(?<comparatorName>("
+            + ListCommand.COMPARATOR_NAME_DATE
+            + "|"
+            + ListCommand.COMPARATOR_NAME_PRIORITY
+            + "|"
+            + ListCommand.COMPARATOR_NAME_TITLE
+            + ")?)"
+            );
+    //@@author
     private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile(
             "(?<listName>("
             + Task.TASK_NAME_FLOATING
@@ -36,7 +47,6 @@ public class ParserUtil {
             + ")?)"
             + "(\\s?)(?<targetIndex>[0-9]+)"
             );
-
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -68,6 +78,23 @@ public class ParserUtil {
 
         String listName = matcher.group("listName").isEmpty() ? Task.TASK_NAME_NON_FLOATING : matcher.group("listName");
         return Optional.of(listName);
+
+    }
+    //@@author
+    //@@author A0139539R
+    /**
+     * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
+     * that corresponds to a valid task list name.
+     * Returns "invalid" otherwise.
+     */
+    public static Optional<String> parseComparatorName(String command) {
+        final Matcher matcher = COMPARATOR_NAME_ARGS_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String comparatorName = matcher.group("comparatorName").isEmpty() ? "priority" : matcher.group("comparatorName");
+        return Optional.of(comparatorName);
 
     }
     //@@author
