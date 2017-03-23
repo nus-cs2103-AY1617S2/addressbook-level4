@@ -2,9 +2,12 @@ package seedu.address.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Collections;
 
 import javafx.collections.transformation.FilteredList;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
@@ -20,6 +23,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.address.model.util.TaskTitleComparator;
 import seedu.address.storage.IcsFileStorage;
 
 /**
@@ -38,6 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
     public FilteredList<ReadOnlyTask> floatingTasks;
     public FilteredList<ReadOnlyTask> completedTasks;
 
+    private Comparator currentComparator;
+
     private Expression currentNonFloatingTasksExpression;
     private Expression currentFloatingTasksExpression;
     private Expression currentCompletedTasksExpression;
@@ -55,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.addressBookStates.add(new AddressBook(addressBook));
         this.currentAddressBookStateIndex = 0;
         this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        this.currentComparator = new TaskPriorityComparator();
         setCurrentPredicateToShowAllTasks();
         setAddressBookState();
     }
@@ -77,7 +84,27 @@ public class ModelManager extends ComponentManager implements Model {
         this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
         this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        setComparatorToTaskLists();
         updateTaskListPredicate();
+    }
+
+    private void setComparatorToTaskLists() {
+        Collections.sort(this.nonFloatingTasks, currentComparator);
+        Collections.sort(this.floatingTasks, currentComparator);
+        Collections.sort(this.completedTasks, currentComparator);
+    }
+
+    private void setCurrentComparator(String type) {
+        switch (type) {
+        case "date":
+            break;
+        case "priority":
+            this.currentComparator = new TaskPriorityComparator();
+            break;
+        default:
+            this.currentComparator = new TaskTitleComparator();
+            break;
+        }
     }
 
     /**
