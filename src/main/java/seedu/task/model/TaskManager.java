@@ -192,6 +192,11 @@ public class TaskManager implements ReadOnlyTaskManager {
     // TODO Auto-generated method stub
         tasks.done(index);
     }
+    
+    public void updateUnDone(int index, ReadOnlyTask target) {
+        // TODO Auto-generated method stub
+            tasks.Undone(index);
+        }
 
     public void sortTaskList() {
         // TODO Auto-generated method stub

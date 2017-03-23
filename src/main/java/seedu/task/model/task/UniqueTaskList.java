@@ -73,6 +73,13 @@ public class UniqueTaskList implements Iterable<Task> {
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
+    
+    public void Undone(int index) {
+        // TODO Auto-generated method stub
+            Task taskUnDone = internalList.get(index);
+            taskUnDone.setIsDone(false);
+            internalList.set(index, taskUnDone);
+        }
 
 
     /**

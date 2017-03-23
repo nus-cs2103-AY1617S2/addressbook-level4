@@ -1,13 +1,13 @@
 package guitests;
 
-import static seedu.task.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCE;
+import static seedu.task.logic.commands.UnDoneCommand.MESSAGE_DONE_TASK_SUCCE;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.task.testutil.TestTask;
 
-public class DoneCommandTest extends TaskManagerGuiTest {
+public class UndoneCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void done() {
@@ -22,17 +22,17 @@ public class DoneCommandTest extends TaskManagerGuiTest {
         assertIsDoneSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("done " + currentList.length + 1);
+        commandBox.runCommand("undone " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
     }
 
     private void assertIsDoneSuccess(int targetIndex, final TestTask[] currentList) {
         // TODO Auto-generated method stub
-        currentList[targetIndex - 1].setIsDone(true);
+        currentList[targetIndex - 1].setIsDone(false);
         //boolean expectedRemainder = TestUtil.taskIsDone();
 
-        commandBox.runCommand("done " + targetIndex);
+        commandBox.runCommand("undone " + targetIndex);
 
         //confirm that task is done
         TaskCardHandle editedCard = taskListPanel.navigateToTask(currentList[targetIndex - 1].getName().fullName);

@@ -18,6 +18,6 @@ public class ListByNotDoneCommand extends Command {
     public CommandResult execute() {
         model.sortTaskList();
         model.updateFilteredTaskList(this.value);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(getMessageForUnDoneTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 }
