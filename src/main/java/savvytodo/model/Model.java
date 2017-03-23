@@ -2,6 +2,8 @@ package savvytodo.model;
 
 import java.util.Set;
 
+import java.util.function.Predicate;
+
 import savvytodo.commons.core.UnmodifiableObservableList;
 import savvytodo.model.task.ReadOnlyTask;
 import savvytodo.model.task.Task;
@@ -41,13 +43,21 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    //@@A0124863A
+    /** Updates the filter of the filtered task list to filter by the given predicate*/
+    void updateFilteredTaskList(Predicate<ReadOnlyTask> predicate);
+
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    //@@A0124863A
     /** Undo an operation */
     void undo() throws UndoFailureException;
 
+    //@@A0124863A
     /** Redo an operation */
     void redo() throws RedoFailureException;
+
+
 
 }

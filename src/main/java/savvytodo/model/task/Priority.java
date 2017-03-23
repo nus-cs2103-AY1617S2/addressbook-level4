@@ -1,5 +1,7 @@
 package savvytodo.model.task;
 
+import java.util.function.Predicate;
+
 import savvytodo.commons.exceptions.IllegalValueException;
 import savvytodo.commons.util.StringUtil;
 
@@ -50,6 +52,15 @@ public class Priority {
             }
         }
         return matches;
+    }
+
+    //@@author A0124863A
+    /**
+     * Return predicate of the priority to filter tasks
+     * @return predicate expression to help filter tasks
+     */
+    public Predicate<ReadOnlyTask> getPredicate() {
+        return (ReadOnlyTask task) -> task.getPriority().equals(this);
     }
 
     @Override
