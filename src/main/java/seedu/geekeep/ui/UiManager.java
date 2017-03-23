@@ -14,7 +14,6 @@ import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
-import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
