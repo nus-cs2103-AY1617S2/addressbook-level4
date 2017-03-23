@@ -52,6 +52,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        builder.append(getTaskType().toString() + ": ");
         builder.append(getName());
 
         if  (this.hasStartDate()) {

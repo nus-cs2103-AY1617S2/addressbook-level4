@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
+import seedu.onetwodo.logic.parser.DoneStatus;
 import seedu.onetwodo.model.tag.Tag;
 import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
@@ -64,11 +65,20 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            handleDoneStatus();
+            jumpToNewTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+    }
+
+    private void handleDoneStatus() {
+        if (model.getDoneStatus() == DoneStatus.DONE) {
+            model.setDoneStatus(DoneStatus.UNDONE);
+        }
+        model.updateByDoneStatus();
     }
 
 }

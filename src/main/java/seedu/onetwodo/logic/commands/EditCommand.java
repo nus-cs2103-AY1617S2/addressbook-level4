@@ -13,6 +13,7 @@ import seedu.onetwodo.model.task.Name;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
+import seedu.onetwodo.model.task.TaskAttributesChecker;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.model.task.UniqueTaskList;
 
@@ -30,9 +31,10 @@ public class EditCommand extends Command {
             + "[s/START_DATE] [e/END_DATE] [d/DESCRIPTION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " e1 s/tmr 9:00am d/beware of dogs";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task Result: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list.";
+    public static final String MESSAGE_TYPE_ERROR = "Task is invalid.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -60,15 +62,23 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex - 1);
-        int internalIndex = model.getFilteredTaskList().indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        int internalIdx = model.getFilteredTaskList().indexOf(taskToEdit);
 
+        // Throw CommandException if edited task is invalid
+        TaskAttributesChecker.validateEditedAttributes(editedTask);
         try {
-            model.updateTask(internalIndex, editedTask);
+            // Not using model.updateTask as it does not trigger observers
+            // model.updateTask(filteredTaskListIndex, editedTask);
+            model.deleteTask(taskToEdit);
+            model.addTask(internalIdx, editedTask);
+            jumpToNewTask(editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (UniqueTaskList.TaskNotFoundException tne) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     /**
@@ -85,7 +95,11 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
+        Task edited = new Task(updatedName, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
+        if (taskToEdit.getDoneStatus()) {
+            edited.setDone();
+        }
+        return edited;
     }
 
     /**

@@ -98,6 +98,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void addTask(int internalIdx, Task task) throws UniqueTaskList.DuplicateTaskException {
+        toDoList.addTask(internalIdx, task);
+        indicateToDoListChanged();
+    };
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
@@ -184,6 +190,12 @@ public class ModelManager extends ComponentManager implements Model {
             return filtered;
         }
     }
+
+    public int getTaskIndex(ReadOnlyTask task) {
+        FilteredList<ReadOnlyTask> filtered = getFilteredByDoneFindType(task.getTaskType());
+        return filtered.indexOf(task);
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     @Override

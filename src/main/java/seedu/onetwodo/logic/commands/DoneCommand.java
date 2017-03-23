@@ -38,7 +38,6 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
-        System.out.println(taskToComplete.getName().fullName);
         int internalIndex = model.getFilteredTaskList().indexOf(taskToComplete);
 
         try {
