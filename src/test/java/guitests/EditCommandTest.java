@@ -105,7 +105,7 @@ public class EditCommandTest extends WhatsLeftGuiTest {
     public void edit_duplicateActivity_failure() {
         commandBox.runCommand("edit 3 Alice Pauline p/high "
                                 + "l/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_ACTIVITY);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
     /**

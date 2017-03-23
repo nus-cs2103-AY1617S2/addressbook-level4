@@ -307,7 +307,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeActivities);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_ACTIVITY_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_EVENT_SUCCESS, 2),
                 expectedAB,
                 expectedAB.getActivityList());
         assertEquals(1, targetedJumpIndex);

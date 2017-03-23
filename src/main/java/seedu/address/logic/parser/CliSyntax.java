@@ -12,12 +12,13 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
+    public static final Prefix PREFIX_STARTDATE = new Prefix("sd/");
+    public static final Prefix PREFIX_ENDDATE = new Prefix("ed/");
+    public static final Prefix PREFIX_BYDATE = new Prefix("bd/");
+    public static final Prefix PREFIX_STARTTIME = new Prefix("st/");
+    public static final Prefix PREFIX_ENDTIME = new Prefix("et/");
+    public static final Prefix PREFIX_BYTIME = new Prefix("bt/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_FROMDATE = new Prefix("f/");
-    public static final Prefix PREFIX_TODATE = new Prefix("u/");
-    public static final Prefix PREFIX_BYDATE = new Prefix("b/");
-    public static final Prefix PREFIX_STARTTIME = new Prefix("s/");
-    public static final Prefix PREFIX_ENDTIME = new Prefix("e/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
