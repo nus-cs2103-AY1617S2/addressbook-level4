@@ -19,7 +19,8 @@ By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
     3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
 	3.9. [Getting Help](#39-get-help--help) <br>
 	3.10. [Change Data File Location](#310-change-data-file-location) <br>
-	3.11. [Exit](#311-exit-the-program--exit)
+	3.11. [Undo a change](#311-undo-a-change--undo) <br>
+	3.12. [Exit](#312-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 6. [Glossary](#6-glossary)
@@ -209,7 +210,7 @@ Format: **`delete`** `<task>` <br>
 _Figure 3.3.1. Delete Command_
 
 Format: **`delete /all`** <br>
-This command will direct me to clear your _entire task list_. <br>
+This command will direct me to clear your _entire task list and delete history_. <br>
 Do think twice before instructing me to do so!
 
 ### 3.4. Find a task : `find`
@@ -363,7 +364,7 @@ Format: **`help`** `<command>` <br>
 This command will instruct me to provide you specific information on how to use `<command>`.
 
 <img src="images/UiHelpCommand.png" width="600"><br>
-_Figure 3.8.1. Help Command_
+_Figure 3.9.1. Help Command_
 
 Format: **`help /all`** <br>
 This command will help to direct you back to this user guide.
@@ -389,9 +390,20 @@ This command directs me to set my new data file in a `<new_save_location_directo
 then save all my data in that file.
 
 <img src="images/UiSaveCommand.png" width="600"><br>
-_Figure 3.9.1. Save Command_
+_Figure 3.10.1. Save Command_
 
-### 3.11. Exit the program : `exit`
+### 3.11. Undo a change : `undo`
+
+Undoes the last change made to my data. <br>
+
+Accidentally deleted that all-important task, or edited the wrong details? <br>
+Don't worry! Undo is here to save the day!
+
+Format: **`undo`** <br>
+I'll undo the last change you made to your tasks. <br>
+I can't remember anything before a **`delete /all`** though.
+
+### 3.12. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
@@ -399,7 +411,7 @@ Time for you to actually perform your tasks!
 Format: **`exit`** <br>
 
 <img src="images/UiExitCommand.png" width="600"><br>
-_Figure 3.10.1. Exit Command_
+_Figure 3.12.1. Exit Command_
 
 
 ## 4. Command Summary
