@@ -50,12 +50,12 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the Task Manager<br>
-Format: `add NAME from [s/START_TIME] [s/START_DATE]  [e/END_TIME] [e/END_DATE]...` <br>
+Format: `add [TASK-NAME] d/[DD/MM/YYYY] c/[HH:MM] t/[KEY-WORD]...` <br>
 
 > * Task can have any number of tags (including 0)
-> * Tasks cannot have `START_DATE` without `END_DATE`
-> * A Task with both `START_DATE` and `END_DATE` is an `task`
-> * A Task with no `START_DATE` and no `END_DATE` is a `To-Do` task
+> * Date should follow DD/MM/YYYY format
+> * Clock time is 24-hour format
+> * the sequence of input should strictly follow the format.
 
 Examples:
 
@@ -69,7 +69,7 @@ Format: `list`
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the Task Manager.<br>
-Format: `edit INDEX [NAME] [PARMAETER] [NEW VALUE]...`
+Format: `edit [TASK-NAME] d/[DD/MM/YYYY] c/[HH:MM] t/[KEY-WORD]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -86,14 +86,11 @@ Examples:
   Change start and end times of timed tasks
 
 
-
-### 2.5. Finding all tasks containing any keyword in their name: `search`
+### 2.5. Finding all tasks containing any keyword in their name: `find`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `search [KEYWORD1] [KEYWORD2] ...`
+Format: `search [KEYWORD1]  ...`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Go Home` will match `Home Go`
 > * Only the name is searched.
 > * Only full words will be matched e.g. `Go Home` will not match `Going Home`
 
@@ -106,7 +103,7 @@ Examples:
 
 ### 2.6. Deleting a task : `delete`
 
-Deletes the specified task from the Task Manager. Irreversible.<br>
+Deletes the specified task from the Task Manager. Irreversible, meaning this operation cannot be undone.<br>
 Format: `delete [INDEX]`
 
 > Deletes the task at the specified `INDEX`. <br>
@@ -123,33 +120,14 @@ Examples:
 Clears all entries from the Task Manager.<br>
 Format: `clear`
 
+> Irreversible.
+
 ### 2.8. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.9. Marking a task as completed: `done`
-Marks a task as completed.<br>
-Format: `done [INDEX]`
-> * Marks a task at the specified PREFIX_INDEX as done
-
-
-Examples:
-
-* `done 1`<br>
-  Mark task 1 as completed.
-
-### 2.10. Marking a task as uncompleted: `undone`
-Marks a task as uncompleted.<br>
-Format: `undone [INDEX]`
-> * Marks a task at the specified INDEX as not done
-
-Examples:
-
-* `undone 1`<br>
-  Mark task 1 as uncompleted.
-
-### 2.11. Saving the data
+### 2.9. Saving the data
 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
