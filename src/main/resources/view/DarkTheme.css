@@ -40,6 +40,11 @@
     -fx-faint-focus-color: -fx-control-inner-background;
 }
 
+.label-priority {
+    -fx-font-size: 6pt;
+    -fx-font-family: "Avenir Light";
+}
+
 .tab-pane {
     -fx-padding: 0 0 0 1;
 }

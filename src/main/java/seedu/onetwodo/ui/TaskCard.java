@@ -25,6 +25,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label priority;
+    @FXML
     private Label id;
     @FXML
     private HBox dateBox;
@@ -41,6 +43,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(Character.toString(indexPrefix) + displayedIndex);
+        setPriority(task);
         setDate(task);
         setDescription(task);
         initTags(task);
@@ -49,6 +52,11 @@ public class TaskCard extends UiPart<Region> {
             name.pseudoClassStateChanged(donePseudoClass, true);
             cardPane.pseudoClassStateChanged(donePseudoClass, true);
         }
+    }
+
+    private void setPriority(ReadOnlyTask task) {
+        String priorityText = task.getPriority().value;
+        priority.setText(priorityText);
     }
 
     private void setDate(ReadOnlyTask task) {

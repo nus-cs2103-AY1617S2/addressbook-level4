@@ -10,6 +10,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
@@ -28,8 +29,8 @@ public class EditCommand extends Command {
             + "by the index used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive prefix integer) [NAME] "
-            + "[s/START_DATE] [e/END_DATE] [d/DESCRIPTION ] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " e1 s/tmr 9:00am d/beware of dogs";
+            + "[s/START_DATE] [e/END_DATE] [p/PRIORITY] [d/DESCRIPTION ] [t/TAG]...\n" + "Example: " + COMMAND_WORD
+            + " e1 s/tmr 9:00am d/beware of dogs";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task Result: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -41,8 +42,10 @@ public class EditCommand extends Command {
     private final TaskType taskType;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor
+     *            details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, char taskType) {
         assert filteredTaskListIndex > 0;
@@ -85,17 +88,18 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                             EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         StartDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         EndDate updatedEndDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getEndDate);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        Task edited = new Task(updatedName, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
+        Task edited = new Task(updatedName, updatedStartDate, updatedEndDate,
+                updatedPriority, updatedDescription, updatedTags);
         if (taskToEdit.getDoneStatus()) {
             edited.setDone();
         }
@@ -103,22 +107,25 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<StartDate> startDate = Optional.empty();
         private Optional<EndDate> endDate = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.startDate = toCopy.getStartDate();
             this.endDate = toCopy.getDate();
+            this.priority = toCopy.getPriority();
             this.description = toCopy.getDescription();
             this.tags = toCopy.getTags();
         }
@@ -127,7 +134,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate, this.priority, this.description,
+                    this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -155,6 +163,15 @@ public class EditCommand extends Command {
 
         public Optional<EndDate> getDate() {
             return endDate;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setDescription(Optional<Description> description) {

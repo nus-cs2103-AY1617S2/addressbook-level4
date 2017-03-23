@@ -5,31 +5,34 @@ import java.util.Objects;
 import seedu.onetwodo.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the toDo list.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Task in the toDo list. Guarantees: details are present and not
+ * null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
     private Name name;
     private StartDate startDate;
     private EndDate endDate;
+    private Priority priority;
     private Description description;
     private UniqueTagList tags;
 
     private TaskType type;
     private boolean isDone;
 
-    //@@author A0141138N
+    // @@author A0141138N
     /**
-     * Every field must be present and not null.
-     * Event
+     * Every field must be present and not null. Event
      */
-    public Task(Name name, StartDate startDate, EndDate endDate, Description description, UniqueTagList tags) {
+    public Task(Name name, StartDate startDate, EndDate endDate, Priority priority, Description description,
+            UniqueTagList tags) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.priority = priority;
         this.description = description;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
         this.isDone = false;
         if (!startDate.hasDate() && !endDate.hasDate()) {
             this.type = TaskType.TODO;
@@ -46,13 +49,13 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(),
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getPriority(),
                 source.getDescription(), source.getTags(), source.getDoneStatus());
     }
 
-    public Task(Name name, StartDate startDate, EndDate endDate, Description description,
+    public Task(Name name, StartDate startDate, EndDate endDate, Priority priority, Description description,
             UniqueTagList tags, boolean isDone) {
-        this(name, startDate, endDate, description, tags);
+        this(name, startDate, endDate, priority, description, tags);
         this.isDone = isDone;
     }
 
@@ -70,6 +73,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public EndDate getEndDate() {
         return endDate;
+    }
+
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
@@ -108,6 +116,11 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
+    public void setPriority(Priority priority) {
+        assert priority != null;
+        this.priority = priority;
+    }
+
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
@@ -138,6 +151,7 @@ public class Task implements ReadOnlyTask {
         this.setName(replacement.getName());
         this.setStartDate(replacement.getStartDate());
         this.setEndDate(replacement.getEndDate());
+        this.setPriority(replacement.getPriority());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
     }
@@ -146,13 +160,14 @@ public class Task implements ReadOnlyTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, startDate, endDate, description, tags);
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(name, startDate, endDate, priority, description, tags);
     }
 
     @Override

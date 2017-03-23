@@ -45,6 +45,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
@@ -433,11 +434,12 @@ public class LogicManagerTest {
             Name name = new Name("Meet boss");
             StartDate startDate = new StartDate("tomorrow 7pm");
             EndDate endDate = new EndDate("tomorrow 8pm");
+            Priority priority = new Priority("high");
             Description description = new Description("Bring report, laptop and coffee for boss");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longerTag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, startDate, endDate, description, tags);
+            return new Task(name, startDate, endDate, priority, description, tags);
         }
 
 
@@ -453,6 +455,9 @@ public class LogicManagerTest {
             }
             if (p.hasEndDate()) {
                 cmd.append(" e/").append(p.getEndDate());
+            }
+            if (p.hasPriority()) {
+                cmd.append(" p/").append(p.getPriority());
             }
             if (p.hasDescription()) {
                 cmd.append(" d/").append(p.getDescription());
@@ -553,6 +558,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new StartDate("tomorrow 8pm"),
                     new EndDate("tomorrow 9pm"),
+                    new Priority(""),
                     new Description(""),
                     new UniqueTagList(new Tag("tag"))
             );
@@ -565,6 +571,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new StartDate(""),
                     new EndDate("tomorrow 9pm"),
+                    new Priority(""),
                     new Description(""),
                     new UniqueTagList(new Tag("tag"))
             );
@@ -578,6 +585,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new StartDate(""),
                     new EndDate(""),
+                    new Priority(""),
                     new Description(""),
                     new UniqueTagList(new Tag("tag"))
             );
@@ -591,6 +599,7 @@ public class LogicManagerTest {
                     new Name(name),
                     new StartDate(""),
                     new EndDate(""),
+                    new Priority(""),
                     new Description(""),
                     new UniqueTagList(tag1, tag2)
             );
@@ -608,6 +617,7 @@ public class LogicManagerTest {
                     new Name("Task " + seed),
                     new StartDate("tomorrow 10pm"),
                     new EndDate("tomorrow 11pm"),
+                    new Priority("h"),
                     new Description("This is task numner " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );

@@ -35,6 +35,7 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.StartDate;
 import seedu.onetwodo.model.task.Task;
@@ -74,19 +75,27 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Task[]{
-                new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"), new Description(""), new UniqueTagList()),
-                new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"), new Description("get drunk"), new UniqueTagList()),
-                new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"), new Description(""), new UniqueTagList()),
-                new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"), new Description("can copy answer"), new UniqueTagList()),
-                new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Description("can copy answer"), new UniqueTagList()),
-                new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"), new Description(""), new UniqueTagList()),
-                new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Description("brown one"), new UniqueTagList()),
-                new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Description("train legs too"), new UniqueTagList()),
-                new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Description(""), new UniqueTagList())
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Task[] {
+                new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"),
+                            new Priority("l"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"),
+                            new Priority(""), new Description("get drunk"), new UniqueTagList()),
+                new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"),
+                            new Priority("m"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"),
+                            new Priority("h"), new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Priority("m"),
+                            new Description("can copy answer"), new UniqueTagList()),
+                new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"),
+                            new Priority("h"), new Description(""), new UniqueTagList()),
+                new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Priority(""),
+                            new Description("brown one"), new UniqueTagList()),
+                new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Priority("h"),
+                            new Description("train legs too"), new UniqueTagList()),
+                new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Priority(""),
+                            new Description(""), new UniqueTagList()) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -94,17 +103,13 @@ public class TestUtil {
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("work"),
-                new Tag("school")
-            };
+            return new Tag[] { new Tag("work"), new Tag("school") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -113,8 +118,9 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the fie name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
+     *
      * @param fileName
      * @return
      */
@@ -150,8 +156,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -168,7 +174,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -187,18 +193,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -214,10 +219,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -235,6 +241,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -245,7 +252,8 @@ public class TestUtil {
     }
 
     /**
-     * Gets mid point of a node relative to its scene.
+     * Gets mid point of a node relative its scene.
+     *
      * @param node
      * @return
      */
@@ -256,7 +264,8 @@ public class TestUtil {
     }
 
     /**
-     * Gets the bound of the node relative to the parent scene.
+     * Gets the bound of the node relative to the parent scene
+     *
      * @param node
      * @return
      */
@@ -281,9 +290,12 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
-     * @param tasksToRemove The subset of tasks.
+     * Removes a subset from the list of tasks
+     *
+     * @param task
+     *            The list of tasks
+     * @param taskstoRemove
+     *            The subset of tasks
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -292,11 +304,14 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed.
+     *
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -304,9 +319,13 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * @param tasks The array of tasks.
-     * @param task The replacement task
-     * @param index The index of the task to be replaced.
+     *
+     * @param tasks
+     *            The array of tasks.
+     * @param task
+     *            The replacement task
+     * @param index
+     *            The index of task to be replaced
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -320,16 +339,17 @@ public class TestUtil {
      * @return Filtered ReadOnlyTask[] by task type
      */
     public static TestTask[] getTasksByTaskType(ReadOnlyTask[] tasks, TaskType type) {
-        return Arrays.stream(tasks)
-                .filter(task -> task.getTaskType() == type)
-                .toArray(TestTask[]::new);
+        return Arrays.stream(tasks).filter(task -> task.getTaskType() == type).toArray(TestTask[]::new);
     }
 
     /**
-     * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
-     * @param tasksToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of tasks.
+     * Appends tasks to the array of tasks
+     *
+     * @param tasks
+     *            A array of tasks.
+     * @param tasksToAdd
+     *            The persons that are to be appended behind the original array
+     * @return The modified array of tasks
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
@@ -351,7 +371,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -360,7 +380,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }

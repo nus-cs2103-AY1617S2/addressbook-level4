@@ -18,18 +18,20 @@ import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
 import seedu.onetwodo.model.task.EndDate;
 import seedu.onetwodo.model.task.Name;
+import seedu.onetwodo.model.task.Priority;
 import seedu.onetwodo.model.task.StartDate;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes
  */
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     /**
-     * Returns the specified index in the {@code command} if it is a positive unsigned integer
-     * Returns an {@code Optional.empty()} otherwise.
+     * Returns the specified index in the {@code command} if it is a positive
+     * unsigned integer Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
         final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
@@ -47,8 +49,8 @@ public class ParserUtil {
 
     /**
      * Returns a new Set populated by all elements in the given list of strings
-     * Returns an empty set if the given {@code Optional} is empty,
-     * or if the list contained in the {@code Optional} is empty
+     * Returns an empty set if the given {@code Optional} is empty, or if the
+     * list contained in the {@code Optional} is empty
      */
     public static Set<String> toSet(Optional<List<String>> list) {
         List<String> elements = list.orElse(Collections.emptyList());
@@ -56,18 +58,20 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
+     * Splits a preamble string into ordered fields.
+     *
+     * @return A list of size {@code numFields} where the ith element is the ith
+     *         field value if specified in the input, {@code Optional.empty()}
+     *         otherwise.
+     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
-                .map(Optional::ofNullable)
+        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields)).map(Optional::ofNullable)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if
+     * {@code name} is present.
      */
     public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
         assert name != null;
@@ -75,7 +79,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> time} into an {@code Optional<StartDate>} if {@code time} is present.
+     * Parses a {@code Optional<String> time} into an
+     * {@code Optional<StartDate>} if {@code time} is present.
      */
     public static Optional<StartDate> parseTime(Optional<String> time) throws IllegalValueException {
         assert time != null;
@@ -83,8 +88,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> description} into an {@code Optional<Description>}
-     * if {@code description} is present.
+     * Parses a {@code Optional<String> description} into an
+     * {@code Optional<Description>} if {@code description} is present.
      */
     public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
         assert description != null;
@@ -92,11 +97,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<EndDate>} if {@code date} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<EndDate>}
+     * if {@code date} is present.
      */
     public static Optional<EndDate> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
         return date.isPresent() ? Optional.of(new EndDate(date.get())) : Optional.empty();
+    }
+
+    //@@author A0141138N
+    /**
+     * Parses a {@code Optional<String> priority} into an
+     * {@code Optional<Priority>} if {@code priority} is present.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        assert priority != null;
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
     }
 
     /**

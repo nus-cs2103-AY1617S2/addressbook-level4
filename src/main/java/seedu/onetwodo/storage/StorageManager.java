@@ -34,9 +34,9 @@ public class StorageManager extends ComponentManager implements Storage {
         this(new XmlToDoListStorage(toDoListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
-   public ToDoListStorage getToDoListStorage() {
-       return this.toDoListStorage;
-   }
+    public ToDoListStorage getToDoListStorage() {
+        return this.toDoListStorage;
+    }
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -61,7 +61,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void setToDoListFilePath(String newFilePath) {
         toDoListStorage.setToDoListFilePath(newFilePath);
     }
-    
+
     @Override
     public Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException {
         return readToDoList(toDoListStorage.getToDoListFilePath());

@@ -24,6 +24,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String START_DATE_FIELD_ID = "#startDate";
     private static final String END_DATE_FIELD_ID = "#endDate";
+    private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -54,6 +55,10 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(END_DATE_FIELD_ID);
     }
 
+    public String getPriority() {
+        return getTextFromLabel(PRIORITY_FIELD_ID);
+    }
+
     public TaskType getTaskType() {
         return TestUtil.getTaskTypeFromIndex(getTextFromLabel(PREFIX_INDEX_ID));
     }
@@ -70,9 +75,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     private List<String> getTags(UniqueTagList tags) {
-        List<String> result = tags.asObservableList().stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.toList());
+        List<String> result = tags.asObservableList().stream().map(tag -> tag.tagName).collect(Collectors.toList());
         Collections.sort(result);
         return result;
     }
@@ -106,6 +109,7 @@ public class TaskCardHandle extends GuiHandle {
         }
         return getFullName().equals(task.getName().fullName)
                 && dateEquals
+                && getPriority().equals(task.getPriority().value)
                 && getDescription().equals(task.getDescription().value)
                 && getTags().equals(getTags(task.getTags()));
     }
@@ -114,11 +118,9 @@ public class TaskCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getStartDateTime().equals(handle.getStartDateTime())
-                    && getEndDateTime().equals(handle.getEndDateTime())
-                    && getDescription().equals(handle.getDescription())
-                    && getTags().equals(handle.getTags());
+            return getFullName().equals(handle.getFullName()) && getStartDateTime().equals(handle.getStartDateTime())
+                    && getEndDateTime().equals(handle.getEndDateTime()) && getPriority().equals(handle.getPriority())
+                    && getDescription().equals(handle.getDescription()) && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
     }
