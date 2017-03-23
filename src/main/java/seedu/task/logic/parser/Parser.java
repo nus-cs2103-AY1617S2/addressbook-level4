@@ -22,6 +22,7 @@ import seedu.task.logic.commands.ListByDoneCommand;
 import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UnDoneCommand;
@@ -127,7 +128,11 @@ public class Parser {
             return new HelpFormatCommand();
 
         case SaveCommand.COMMAND_WORD:
+
             return new SaveCommandParser().parse(arguments);
+
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
