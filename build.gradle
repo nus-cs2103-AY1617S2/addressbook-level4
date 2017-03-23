@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'org.teamstbf.yats.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -85,7 +85,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "YATS.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }

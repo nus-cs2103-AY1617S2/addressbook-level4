@@ -1,8 +1,9 @@
 package guitests.guihandles;
 
+import org.teamstbf.yats.TestApp;
+
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
 
 /**
  * A handler for the BrowserPanel of the UI
