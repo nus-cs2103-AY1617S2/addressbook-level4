@@ -10,7 +10,8 @@ import project.taskcrusher.model.event.ReadOnlyEvent;
 public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-    private static final String MESSAGE_NO_LOCATION = "No location specified";
+    private static final String MESSAGE_NO_LOCATION = "No location";
+    private static final String LOCATION_AT = "@ ";
 
     @FXML
     private HBox cardPane;
@@ -23,7 +24,7 @@ public class EventListCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private FlowPane timeSlots;
+    private FlowPane timeslots;
     @FXML
     private FlowPane tags;
 
@@ -44,14 +45,14 @@ public class EventListCard extends UiPart<Region> {
 
     private void showLocation(ReadOnlyEvent event) {
         if (event.getLocation().hasLocation()) {
-            eventLocation.setText(event.getLocation().location);
+            eventLocation.setText(LOCATION_AT + event.getLocation().location);
         } else {
             eventLocation.setText(MESSAGE_NO_LOCATION);
         }
     }
 
     private void showEventTimeSlots(ReadOnlyEvent event) {
-        event.getTimeslots().forEach(timeslot -> timeSlots.getChildren().add(new Label(timeslot.toString())));
+        event.getTimeslots().forEach(timeslot -> timeslots.getChildren().add(new Label(timeslot.toString())));
     }
 
     private void initTags(ReadOnlyEvent event) {
