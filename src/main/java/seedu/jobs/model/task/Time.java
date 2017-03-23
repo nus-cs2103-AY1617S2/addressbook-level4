@@ -39,7 +39,6 @@ public class Time {
         		this.value = DEFAULT_TIME;
         	}
         	else if (!isValidTime(startTime.get())) {
-        		System.out.println(startTime.get());
                 throw new IllegalValueException(MESSAGE_TIME_CONSTRAINT);
             }
         	else{
@@ -60,7 +59,7 @@ public class Time {
         catch(DateTimeParseException e){
         	return false;
         }
-        return time.length()>0;
+        return time.length()>0; 
     }	
     
     /**

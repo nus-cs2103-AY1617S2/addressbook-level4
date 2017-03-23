@@ -29,7 +29,7 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void readAddressBook_nullFilePath_assertionFailure() throws Exception {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         readAddressBook(null);
     }
 
@@ -63,7 +63,7 @@ public class XmlAddressBookStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
-        TaskBook original = td.getTypicalAddressBook();
+        TaskBook original = td.getTypicalTaskBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
         //Save in new file and read back
@@ -88,7 +88,7 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void saveAddressBook_nullAddressBook_assertionFailure() throws IOException {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         saveAddressBook(null, "SomeFile.xml");
     }
 
@@ -98,7 +98,7 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
-        thrown.expect(AssertionError.class);
+        thrown.expect(NullPointerException.class);
         saveAddressBook(new TaskBook(), null);
     }
 

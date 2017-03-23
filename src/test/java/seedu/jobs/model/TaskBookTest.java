@@ -40,7 +40,7 @@ public class TaskBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        TaskBook newData = new TypicalTestTasks().getTypicalAddressBook();
+        TaskBook newData = new TypicalTestTasks().getTypicalTaskBook();
         taskBook.resetData(newData);
         assertEquals(newData, taskBook);
     }
@@ -59,7 +59,7 @@ public class TaskBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskBook typicalTaskBook = new TypicalTestTasks().getTypicalAddressBook();
+        TaskBook typicalTaskBook = new TypicalTestTasks().getTypicalTaskBook();
         ObservableList<ReadOnlyTask> newTask = typicalTaskBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskBook.getTagList());
         // Repeat the first tag twice
@@ -71,7 +71,7 @@ public class TaskBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskBook whose persons and tags lists can violate interface constraints.
      */
     private static class TaskBookStub implements ReadOnlyTaskBook {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();

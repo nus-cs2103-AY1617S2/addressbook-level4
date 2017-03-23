@@ -15,7 +15,7 @@ public class DescriptionTest {
     	
         assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription(" ")); // spaces only
-        assertTrue(Description.isValidDescription(ModelConstant.getLongString(149)));
+
 
         // invalid descriptions (long characters)
         assertFalse(Description.isValidDescription(ModelConstant.getLongString(150)));

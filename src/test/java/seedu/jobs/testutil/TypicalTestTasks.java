@@ -60,7 +60,7 @@ public class TypicalTestTasks {
         return new TestTask[]{CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107};
     }
 
-    public TaskBook getTypicalAddressBook() {
+    public TaskBook getTypicalTaskBook() {
         TaskBook ab = new TaskBook();
         loadTaskBookWithSampleData(ab);
         return ab;

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+
 import seedu.jobs.model.task.Time;
 
 public class TimeTest {
@@ -24,7 +26,6 @@ public class TimeTest {
         
         // valid Time
         assertTrue(Time.isValidTime("09/12/1993 15:00")); //preceding zero in the date
-        assertTrue(Time.isValidTime("9/12/1993 05:00")); //preceding zero in the hour
-
+        
     }
 }
