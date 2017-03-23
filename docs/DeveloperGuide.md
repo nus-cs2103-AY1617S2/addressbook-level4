@@ -450,7 +450,7 @@ Use case ends
 
 > Use case ends
 
-3a. Invalid index given to delete
+3a. Invalid index given to edit
 
 > 3a1. TodoApp shows an error message
   Use case resumes at step 2
@@ -470,6 +470,7 @@ Use case ends
 
 >Use case ends
 
+
 #### Use case: Mark or unmark a task
 
 **MSS**
@@ -478,7 +479,6 @@ Use case ends
 2. TodoApp shows a list of tasks
 3. User requests to mark/unmark a specific task in the list
 4. TodoApp sets completion of the task to true/false
-Use case ends
 
 **Extensions**
 
@@ -495,6 +495,22 @@ Use case ends
 > 3d1. TodoApp does nothing
 
 >Use case ends
+
+#### Use case: Retrieve a task
+
+**MSS**
+
+1. User requests to retrieve tasks by name/priority/deadline/completion
+2. TodoApp shows a list of tasks that matches
+Use case ends
+
+1a. List is empty
+
+> Use case ends
+
+1b. Given inputs not found
+
+> Use case ends
 
 #### Use case: List task
 
@@ -651,3 +667,21 @@ Cons:
 * Not much integrations
 * No options for subtasks
 * No repeat options
+
+**Google Calendar**
+
+Author: Lim Huan Hock
+
+Pros:
+
+* Straight forward to use
+* Multi-platform (Mobile app, web app, etc)
+* Cloud support
+* Free
+* API-friendly
+
+Cons:
+
+* No options for subtasks
+* No repeat options
+* Plain UI/ graphics
