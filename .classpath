@@ -22,5 +22,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="lib" path="lib/antlr-runtime-3.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/ical4j-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/natty-0.12.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
