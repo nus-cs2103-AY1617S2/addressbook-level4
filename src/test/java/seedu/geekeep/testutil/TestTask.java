@@ -7,7 +7,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Title;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -22,14 +22,14 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.title = personToCopy.getTitle();
-        this.endDateTime = personToCopy.getEndDateTime();
-        this.startDateTime = personToCopy.getStartDateTime();
-        this.location = personToCopy.getLocation();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.title = taskToCopy.getTitle();
+        this.endDateTime = taskToCopy.getEndDateTime();
+        this.startDateTime = taskToCopy.getStartDateTime();
+        this.location = taskToCopy.getLocation();
+        this.tags = taskToCopy.getTags();
     }
 
     public String getAddCommand() {

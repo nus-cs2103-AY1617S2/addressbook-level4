@@ -44,9 +44,9 @@ public class TypicalTestPersons {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (TestTask person : new TypicalTestPersons().getTypicalPersons()) {
+        for (TestTask task : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addTask(new Task(person));
+                ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
             } catch (IllegalValueException ive) {

@@ -4,7 +4,7 @@ import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.Model.NothingToRedoException;
 
 /**
- * Lists all persons in the task manager to the user.
+ * Lists all tasks in the task manager to the user.
  */
 public class RedoCommand extends Command {
 

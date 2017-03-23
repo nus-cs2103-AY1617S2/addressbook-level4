@@ -26,29 +26,29 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(person.getTitle().fullTitle);
+        name.setText(task.getTitle().fullTitle);
         id.setText("#" + displayedIndex + " ");
 
-        if (person.getEndDateTime() != null && person.getStartDateTime() != null) {
-            phone.setText(person.getStartDateTime() + " until " + person.getEndDateTime());
-        } else if (person.getEndDateTime() != null && person.getStartDateTime() == null) {
-            phone.setText(person.getEndDateTime().value);
+        if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
+            phone.setText(task.getStartDateTime() + " until " + task.getEndDateTime());
+        } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
+            phone.setText(task.getEndDateTime().value);
         } else {
             phone.setText(null);
         }
 
-        if (person.getLocation() == null) {
+        if (task.getLocation() == null) {
             address.setText("");
         } else {
-            address.setText(person.getLocation().value);
+            address.setText(task.getLocation().value);
         }
 
-        initTags(person);
+        initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

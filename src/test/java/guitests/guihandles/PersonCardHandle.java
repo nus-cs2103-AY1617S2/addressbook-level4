@@ -12,7 +12,7 @@ import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
@@ -73,19 +73,19 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     //TODO only works for v0.2
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getTitle().fullTitle)
-                && getPhone().equals(getDisplayedDate(person))
-                && getAddress().equals(person.getLocation().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSamePerson(ReadOnlyTask task) {
+        return getFullName().equals(task.getTitle().fullTitle)
+                && getPhone().equals(getDisplayedDate(task))
+                && getAddress().equals(task.getLocation().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
-    public String getDisplayedDate(ReadOnlyTask person) {
+    public String getDisplayedDate(ReadOnlyTask task) {
         String displayedDate = "";
-        if (person.getEndDateTime() != null && person.getStartDateTime() != null) {
-            displayedDate = person.getStartDateTime() + " until " + person.getEndDateTime();
-        } else if (person.getEndDateTime() != null && person.getStartDateTime() == null) {
-            displayedDate = person.getEndDateTime().value;
+        if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
+            displayedDate = task.getStartDateTime() + " until " + task.getEndDateTime();
+        } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
+            displayedDate = task.getEndDateTime().value;
         } else {
             displayedDate = "";
         }

@@ -17,18 +17,18 @@ import seedu.geekeep.testutil.TestTask;
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class UpdateCommandTest extends AddressBookGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalPersons();
 
     /**
-     * Checks whether the edited person has the correct updated details.
+     * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the task manager.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * @param filteredPersonListIndex index of task to edit in filtered list
+     * @param addressBookIndex index of task to edit in the task manager.
+     *      Must refer to the same task as {@code filteredPersonListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedPerson the expected task after editing the task's details
      */
     private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
                                     String detailsToEdit, TestTask editedPerson) {
@@ -38,7 +38,7 @@ public class UpdateCommandTest extends AddressBookGuiTest {
         PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTitle().fullTitle);
         assertMatching(editedPerson, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
+        // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[addressBookIndex - 1] = editedPerson;
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
@@ -66,8 +66,8 @@ public class UpdateCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "t/";
         int addressBookIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedPerson = new PersonBuilder(taskToEdit).withTags().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -88,8 +88,8 @@ public class UpdateCommandTest extends AddressBookGuiTest {
         int filteredPersonListIndex = 1;
         int addressBookIndex = 5;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedPerson = new PersonBuilder(taskToEdit).withName("Belle").build();
 
         assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -132,8 +132,8 @@ public class UpdateCommandTest extends AddressBookGuiTest {
         String detailsToEdit = "t/sweetie t/bestie";
         int addressBookIndex = 2;
 
-        TestTask personToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedPerson = new PersonBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

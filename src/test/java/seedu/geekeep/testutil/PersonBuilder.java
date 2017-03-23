@@ -12,47 +12,47 @@ import seedu.geekeep.model.task.Title;
  */
 public class PersonBuilder {
 
-    private TestTask person;
+    private TestTask task;
 
     public PersonBuilder() {
-        this.person = new TestTask();
+        this.task = new TestTask();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PersonBuilder with the data of {@code taskToCopy}.
      */
-    public PersonBuilder(TestTask personToCopy) {
-        this.person = new TestTask(personToCopy);
+    public PersonBuilder(TestTask taskToCopy) {
+        this.task = new TestTask(taskToCopy);
     }
 
     public TestTask build() {
-        return this.person;
+        return this.task;
     }
 
     public PersonBuilder withEndDateTime(String phone) throws IllegalValueException {
-        this.person.setEndDateTime(new DateTime(phone));
+        this.task.setEndDateTime(new DateTime(phone));
         return this;
     }
 
     public PersonBuilder withLocation(String address) throws IllegalValueException {
-        this.person.setLocation(new Location(address));
+        this.task.setLocation(new Location(address));
         return this;
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setTitle(new Title(name));
+        this.task.setTitle(new Title(name));
         return this;
     }
 
     public PersonBuilder withStartDateTime(String email) throws IllegalValueException {
-        this.person.setStartDateTime(new DateTime(email));
+        this.task.setStartDateTime(new DateTime(email));
         return this;
     }
 
     public PersonBuilder withTags(String ... tags) throws IllegalValueException {
-        person.setTags(new UniqueTagList());
+        task.setTags(new UniqueTagList());
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            task.getTags().add(new Tag(tag));
         }
         return this;
     }

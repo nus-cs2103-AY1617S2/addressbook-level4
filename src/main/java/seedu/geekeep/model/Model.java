@@ -57,10 +57,10 @@ public interface Model {
     void updateFilteredTaskListToShowFloatingTasks();
 
     /**
-     * Updates the person located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
      * @throws DuplicateTaskException
-     *             if updating the task's details causes the task to be equivalent to another existing person in the
+     *             if updating the task's details causes the task to be equivalent to another existing task in the
      *             list.
      * @throws IllegalValueException
      *             if the task's startDateTime is not matched with a later endDateTime
