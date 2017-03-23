@@ -15,6 +15,7 @@ public class TaskTokenizer {
     public static final String EVENT_END_DATE_KEYWORD = "to/";
     public static final String TASK_TAGS_KEYWORD = "tags/";
     public static final String TASK_FLOATING_KEYWORD = "floating/";
+    public static final String TASK_PRIORITY_KEYWORD = "priority/";
 
     public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
             boolean hasIndex, boolean hasDescription) {
@@ -34,7 +35,8 @@ public class TaskTokenizer {
                                                             EVENT_END_DATE_KEYWORD,
                                                             TASK_DEADLINE_KEYWORD,
                                                             TASK_TAGS_KEYWORD,
-                                                            TASK_FLOATING_KEYWORD);
+                                                            TASK_FLOATING_KEYWORD,
+                                                            TASK_PRIORITY_KEYWORD);
             tokens.putAll(descriptionTokens);
         }
         return tokens;

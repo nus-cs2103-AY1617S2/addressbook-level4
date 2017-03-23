@@ -2,6 +2,7 @@ package seedu.toluist.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
+import seedu.toluist.model.Task.TaskPriority;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -50,7 +52,14 @@ public class AddTaskController extends Controller {
         String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
-        commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime, taskDeadline, tags);
+        Optional<Boolean> isHighPriority = Optional.empty();
+        if (tokens.containsKey(TaskTokenizer.TASK_PRIORITY_KEYWORD)) {
+            String taskPriority = tokens.get(TaskTokenizer.TASK_PRIORITY_KEYWORD);
+            isHighPriority = Optional.of(taskPriority.equals("high"));
+        }
+
+        commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
+                taskDeadline, isHighPriority, tags);
 
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks());
@@ -65,7 +74,7 @@ public class AddTaskController extends Controller {
 
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
-            LocalDateTime taskDeadline, Set<Tag> tags) {
+            LocalDateTime taskDeadline, Optional<Boolean> isHighPriority, Set<Tag> tags) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
         }
@@ -77,6 +86,10 @@ public class AddTaskController extends Controller {
             task = new Task(description, taskDeadline);
         } else {
             task = new Task(description);
+        }
+        if (isHighPriority.isPresent()) {
+            TaskPriority priorityLevel = (isHighPriority.get()) ? TaskPriority.HIGH : TaskPriority.LOW;
+            task.setTaskPriority(priorityLevel);
         }
         task.replaceTags(tags);
         todoList.add(task);

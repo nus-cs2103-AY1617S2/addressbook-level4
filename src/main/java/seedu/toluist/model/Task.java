@@ -132,6 +132,10 @@ public class Task implements Comparable<Task> {
         return !isCompleted() && endDateTime != null && DateTimeUtil.isBeforeOrEqual(endDateTime, LocalDateTime.now());
     }
 
+    public boolean isHighPriority() {
+        return priority == TaskPriority.HIGH;
+    }
+
     public boolean isFloatingTask() {
         return startDateTime == null && endDateTime == null;
     }
