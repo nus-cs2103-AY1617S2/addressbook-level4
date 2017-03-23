@@ -119,17 +119,13 @@ public class ModelManager extends ComponentManager implements Model {
             keywordSet.remove("name");
             updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywordSet)));
         } else if (keywordSet.contains("deadline")) {
-            keywordSet.remove("deadline");
             updateFilteredTaskList(new PredicateExpression(new DeadlineQualifier(trimmedKeywords)));
         } else if (keywordSet.contains("priority")) {
             keywordSet.remove("priority");
             updateFilteredTaskList(new PredicateExpression(
                     new PriorityQualifier(Integer.parseInt(Joiner.on(" ").skipNulls().join(keywordSet)))));
-            // } else if (keywords.contains("completion")) {
-            // keywords.remove("completion");
-            // updateFilteredTaskList(new PredicateExpression(
-            // new CompletionQualifier(Joiner.on("
-            // ").skipNulls().join(keywords))));
+        } else if (keywordSet.contains("completion")) {
+            updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(trimmedKeywords)));
         }
     }
 
@@ -238,25 +234,25 @@ public class ModelManager extends ComponentManager implements Model {
             return "priority=" + String.join(", ", String.valueOf(priorityNumber));
         }
     }
-    //
-    // // @@author A0124591H
-    // private class CompletionQualifier implements Qualifier {
-    // private String completionValue;
-    //
-    // CompletionQualifier(String completionValue) {
-    // this.completionValue = completionValue;
-    // }
-    //
-    // @Override
-    // public boolean run(ReadOnlyTask task) {
-    // return
-    // String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
-    // }
-    //
-    // @Override
-    // public String toString() {
-    // return "completion=" + String.join(", ", completionValue);
-    // }
-    // }
+    
+     // @@author A0124591H
+     private class CompletionQualifier implements Qualifier {
+     private String completionValue;
+    
+     CompletionQualifier(String[] completionValue) {
+     this.completionValue = Arrays.toString(completionValue).replaceAll("[^A-Za-z0-9 ]", "");
+     }
+    
+     @Override
+     public boolean run(ReadOnlyTask task) {
+     return
+     String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
+     }
+    
+     @Override
+     public String toString() {
+     return "completion=" + String.join(", ", completionValue);
+     }
+     }
 
 }
