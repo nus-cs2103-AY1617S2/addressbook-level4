@@ -77,23 +77,23 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                    new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"),
+                new Task(new Name("Go party"), new StartDate("01-01-2018"), new EndDate("02-02-2018"),
                             new Priority("l"), new Description(""), new UniqueTagList()),
-                    new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"),
+                new Task(new Name("Go drinking"), new StartDate("15 may 2018 6pm"), new EndDate("15 may 2018 11pm"),
                             new Priority(""), new Description("get drunk"), new UniqueTagList()),
-                    new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"),
+                new Task(new Name("Go holiday"), new StartDate("15/02/2018 6pm"), new EndDate("02-01-2019"),
                             new Priority("m"), new Description(""), new UniqueTagList()),
-                    new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"),
+                new Task(new Name("Finish cs2103"), new StartDate(""), new EndDate("12/12/2018 22:55"),
                             new Priority("h"), new Description("can copy answer"), new UniqueTagList()),
-                    new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Priority("m"),
+                new Task(new Name("Complete tutorial"), new StartDate(""), new EndDate("today"), new Priority("m"),
                             new Description("can copy answer"), new UniqueTagList()),
-                    new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"),
+                new Task(new Name("Submit assignment"), new StartDate(""), new EndDate("17 june 2018"),
                             new Priority("h"), new Description(""), new UniqueTagList()),
-                    new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Priority(""),
+                new Task(new Name("Buy pet dog"), new StartDate(""), new EndDate(""), new Priority(""),
                             new Description("brown one"), new UniqueTagList()),
-                    new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Priority("h"),
+                new Task(new Name("Go gym when free"), new StartDate(""), new EndDate(""), new Priority("h"),
                             new Description("train legs too"), new UniqueTagList()),
-                    new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Priority(""),
+                new Task(new Name("Dye hair"), new StartDate(""), new EndDate(""), new Priority(""),
                             new Description(""), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
