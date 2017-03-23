@@ -126,8 +126,6 @@ public class ModelManager extends ComponentManager implements Model {
         if (!history.isUndoHistoryEmpty()) {
             history.saveAsNextToDoList(this.toDoList);
             this.toDoList.resetData(history.getPreviousToDoList());
-            setDoneStatus(DoneStatus.UNDONE);
-            updateFilteredUndoneTaskList();
             indicateToDoListChanged();
         } else {
             throw new EmptyHistoryException("OneTwoDo cannot be undone anymore");
@@ -139,8 +137,6 @@ public class ModelManager extends ComponentManager implements Model {
         if (!history.isRedoHistoryEmpty()) {
             history.saveAsPreviousToDoList(this.toDoList);
             this.toDoList.resetData(history.getNextToDoList());
-            setDoneStatus(DoneStatus.UNDONE);
-            updateFilteredUndoneTaskList();
             indicateToDoListChanged();
         } else {
             throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
