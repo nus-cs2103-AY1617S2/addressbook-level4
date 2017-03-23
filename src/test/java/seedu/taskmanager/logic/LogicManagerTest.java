@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_XML_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.ArrayList;
@@ -21,10 +22,12 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.taskmanager.commons.core.EventsCenter;
+import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
@@ -386,6 +389,22 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
+    
+    @Test
+    public void execute_cd_invalidFilePath() throws Exception {
+        assertCommandFailure("cd !asdwie34$2.xml",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+        assertCommandFailure("cd data/taskmanager",
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+    }
+    
+    @Test
+    public void execute_cd_invalidXmlFile() throws Exception {
+        assertCommandFailure("cd src/test/data/cd_test/empty.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+    }
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
@@ -405,7 +424,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-
+    
 
     /**
      * A utility class to generate test data.
