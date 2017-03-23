@@ -357,9 +357,10 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | Edit the deadline, name and schedule of any task | Update any task as required, as well as marking it as done and deleting it
 `* * *` | user | Undo my actions | revert any changes done accidentally.
 `* * *` | user | Redo my actions | revert any undo command.
-`* * *` | user | Mark task as done based on index, name, or any unique identifying string for that task | Clear done tasks if needed
-`* * *` | user | List all tasks based on importance | View which tasks have higher priorities
+`* * *` | user | Mark task as done based on index | Clear done tasks if needed
 `* * *` | user | List all tasks by deadlines | View which tasks needs to be completed first
+`* * ` | user | Mark task as done based name, or any unique identifying string for that task | Clear done tasks if needed
+`* * ` | user | List all tasks based on importance | View which tasks have higher priorities
 `* * ` | user | Schedule a recurring (daily/weekly/monthly..) | Not add the recurring tasks manually
 `* * ` | user | Get a calendar view list of my current blocked out times and what I have to do | Know what else I can add
 `* * ` | user | Set alarms for certain schedules | Be reminded of deadlines of my tasks
