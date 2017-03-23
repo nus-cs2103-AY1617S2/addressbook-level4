@@ -1,9 +1,9 @@
 # KIT User Guide:
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Quick Start](#1-quick-start)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Quick start
 1. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
