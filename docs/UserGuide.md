@@ -93,30 +93,30 @@ Examples:
 ### 2.5. Mark task
 
 Marks a task as complete.<br>
-Format: `mark [INDEX]...`
+Format: `mark INDEX`
 
-> * Marks the task at ALL the specified `INDEX` as completed.
+> * Marks the task at the specified `INDEX` as completed.
 > * The index refers to the index number shown in the most recent task listing.
 > * The index **must be a positive integer** 1, 2, ...
 
 Examples:
 
-* `mark 2 4 7`<br>
-Marks tasks at index 1, 4 and 7 as completed.
+* `mark 2`<br>
+Marks tasks at index 2 as completed.
 
 ### 2.6. Unmark task
 
 Marks task as incomplete.<br>
-Format: `unmark INDEX...`
+Format: `unmark INDEX`
 
-> * Marks the task at ALL the specified `INDEX` as incomplete.
+> * Marks the task at the specified `INDEX` as incomplete.
 > * The index refers to the index number shown in the most recent task listing.
 > * The index **must be a positive integer** 1, 2, ...
 
 Examples:
 
-* `unmark 2 4 7`<br>
-Marks tasks at index 2, 4 and 7 as incomplete.
+* `unmark 2`<br>
+Marks tasks at index 2 as incomplete.
 
 ### 2.7. Set a deadline for task
 
@@ -135,7 +135,7 @@ Adds a deadline of 7th July 2017 to task at index 2.
 ### 2.8. Find specific tasks
 
 Retrieve tasks based on various conditions.<br>
-Format: `find [d/DEADLINE] [p/PRIORITY] [t/TAG]`
+Format: `find [name NAME] [deadline DEADLINE] [priority PRIORITY] [completion COMPLETION]`
 
 > * Lists all tasks with the specific optional fields.
 
