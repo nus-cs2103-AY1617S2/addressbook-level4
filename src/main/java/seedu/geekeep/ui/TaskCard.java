@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;

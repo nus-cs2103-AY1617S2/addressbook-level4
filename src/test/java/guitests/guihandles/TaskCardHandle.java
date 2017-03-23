@@ -14,7 +14,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 /**
  * Provides a handle to a task card in the task list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
@@ -23,7 +23,7 @@ public class PersonCardHandle extends GuiHandle {
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -73,7 +73,7 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     //TODO only works for v0.2
-    public boolean isSamePerson(ReadOnlyTask task) {
+    public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getTitle().fullTitle)
                 && getPhone().equals(getDisplayedDate(task))
                 && getAddress().equals(task.getLocation().value)
@@ -94,8 +94,8 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPhone().equals(handle.getPhone())
                     && getAddress().equals(handle.getAddress())

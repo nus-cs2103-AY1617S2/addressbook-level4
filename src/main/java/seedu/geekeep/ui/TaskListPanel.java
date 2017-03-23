@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
-import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.geekeep.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.geekeep.commons.util.FxViewUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
 
@@ -71,7 +71,7 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList, ListView<ReadOnlyTask> taskListView) {
         taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new PersonListViewCell());
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
@@ -86,7 +86,7 @@ public class TaskListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -119,7 +119,7 @@ public class TaskListPanel extends UiPart<Region> {
 
     }*/
 
-    class PersonListViewCell extends ListCell<ReadOnlyTask> {
+    class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {

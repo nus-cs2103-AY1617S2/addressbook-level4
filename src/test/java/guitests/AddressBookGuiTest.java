@@ -17,7 +17,7 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
@@ -28,7 +28,7 @@ import seedu.geekeep.commons.events.BaseEvent;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.testutil.TestUtil;
-import seedu.geekeep.testutil.TypicalTestPersons;
+import seedu.geekeep.testutil.TypicalTestTasks;
 
 /**
  * A GUI Test class for AddressBook.
@@ -41,7 +41,7 @@ public abstract class AddressBookGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestPersons td = new TypicalTestPersons();
+    protected TypicalTestTasks td = new TypicalTestTasks();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -70,7 +70,7 @@ public abstract class AddressBookGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getPersonListPanel();
+            taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             //browserPanel = mainGui.getBrowserPanel();
@@ -89,7 +89,7 @@ public abstract class AddressBookGuiTest {
      */
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
-        TypicalTestPersons.loadTaskManagerWithSampleData(ab);
+        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
         return ab;
     }
 
@@ -108,8 +108,8 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask task, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, task));
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
     /**

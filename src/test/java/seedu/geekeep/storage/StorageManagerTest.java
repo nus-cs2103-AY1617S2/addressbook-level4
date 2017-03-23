@@ -18,7 +18,7 @@ import seedu.geekeep.model.ReadOnlyTaskManager;
 import seedu.geekeep.model.TaskManager;
 import seedu.geekeep.model.UserPrefs;
 import seedu.geekeep.testutil.EventsCollector;
-import seedu.geekeep.testutil.TypicalTestPersons;
+import seedu.geekeep.testutil.TypicalTestTasks;
 
 public class StorageManagerTest {
 
@@ -60,7 +60,7 @@ public class StorageManagerTest {
          * {@link XmlTaskManagerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlTaskManagerStorageTest} class.
          */
-        TaskManager original = new TypicalTestPersons().getTypicalTaskManager();
+        TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskManager(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new TaskManager(retrieved));

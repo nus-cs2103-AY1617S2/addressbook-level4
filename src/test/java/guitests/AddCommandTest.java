@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.geekeep.commons.core.Messages;
 import seedu.geekeep.logic.commands.AddCommand;
 import seedu.geekeep.testutil.TestTask;
@@ -15,15 +15,15 @@ public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void add() {
         //add one task
-        TestTask[] currentList = td.getTypicalPersons();
+        TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
         commandBox.runCommand(td.hoon.getAddCommand());
@@ -43,12 +43,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = taskListPanel.navigateToPerson(taskToAdd.getTitle().fullTitle);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTitle().fullTitle);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous tasks plus the new task
 
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
 
     }
