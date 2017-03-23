@@ -20,7 +20,7 @@ Features implemented: <br>
 * [Load Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#313-loading-the-program-data-from-a-specified-path-load)<br>
 
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()] [[Documentation]()]
+[[Functional Code]()] [[Testing Code]()]
 
 -----
 
@@ -35,7 +35,7 @@ Features implemented:<br>
 * [Find Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#33-finding-a-task-find)<br>
 
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()] [[Documentation]()]
+[[Functional Code]()] [[Testing Code]()]
 
 -----
 
@@ -50,7 +50,7 @@ Features implemented: <br>
 * [Done/Undone Command](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#done)<br>
 
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()] [[Documentation]()]
+[[Functional Code]()] [[Testing Code]()]
 
 -----
 
@@ -66,7 +66,7 @@ Code Written: <br>
  * [Flexible Command Format](https://github.com/CS2103JAN2017-W14-B1/main/blob/master/docs/UserGuide.md#3-features)<br>
  
 Code Written: <br>
-[[Functional Code]()] [[Testing Code]()] [[Documentation]()]
+[[Functional Code]()] [[Testing Code]()]
 
  -----
 
