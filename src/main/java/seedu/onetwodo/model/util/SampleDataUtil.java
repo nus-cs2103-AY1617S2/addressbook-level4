@@ -18,25 +18,25 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                    new Task(new Name("guard duty"), new StartDate("15/12/2018 7am"), new EndDate("16/12/2018 11pm"),
+                new Task(new Name("guard duty"), new StartDate("15/12/2018 7am"), new EndDate("16/12/2018 11pm"),
                             new Priority("l"), new Description("bring weapon"), new UniqueTagList("army", "work")),
-                    new Task(new Name("study at home"), new StartDate("10 Mar 2018"), new EndDate("13 mar 2018"),
+                new Task(new Name("study at home"), new StartDate("10 Mar 2018"), new EndDate("13 mar 2018"),
                             new Priority("h"), new Description(""), new UniqueTagList("work", "school")),
-                    new Task(new Name("meet boss"), new StartDate("10 Mar 2018 08:00"),
+                new Task(new Name("meet boss"), new StartDate("10 Mar 2018 08:00"),
                             new EndDate("10 mar 2018 12:00"), new Priority("h"), new Description(""),
                             new UniqueTagList("")),
-                    new Task(new Name("submit cs2101 reflection"), new StartDate(""), new EndDate("13-05-2018 23:30"),
+                new Task(new Name("submit cs2101 reflection"), new StartDate(""), new EndDate("13-05-2018 23:30"),
                             new Priority("m"), new Description("use the 7 C"), new UniqueTagList("school")),
-                    new Task(new Name("complete 2103 tutorial"), new StartDate(""), new EndDate("tomorrow"),
+                new Task(new Name("complete 2103 tutorial"), new StartDate(""), new EndDate("tomorrow"),
                             new Priority("l"), new Description("bring laptop"),
                             new UniqueTagList("school", "favourite")),
-                    new Task(new Name("finish assignments"), new StartDate(""), new EndDate("11pm"), new Priority("m"),
+                new Task(new Name("finish assignments"), new StartDate(""), new EndDate("11pm"), new Priority("m"),
                             new Description(""), new UniqueTagList("")),
-                    new Task(new Name("buy new bag"), new StartDate(""), new EndDate(""), new Priority("l"),
+                new Task(new Name("buy new bag"), new StartDate(""), new EndDate(""), new Priority("l"),
                             new Description("find cheap ones"), new UniqueTagList("shopping", "favourite", "hobby")),
-                    new Task(new Name("change shirt"), new StartDate(""), new EndDate(""), new Priority("l"),
+                new Task(new Name("change shirt"), new StartDate(""), new EndDate(""), new Priority("l"),
                             new Description(""), new UniqueTagList("habit", "favourite", "hobby")),
-                    new Task(new Name("change pants"), new StartDate(""), new EndDate(""), new Priority("l"),
+                new Task(new Name("change pants"), new StartDate(""), new EndDate(""), new Priority("l"),
                             new Description(""), new UniqueTagList("")), };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
