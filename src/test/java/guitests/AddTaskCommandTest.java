@@ -13,6 +13,7 @@ import org.junit.Test;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
+import seedu.toluist.model.Task.TaskPriority;
 
 /**
  * Gui tests for add task command
@@ -38,9 +39,10 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
 
         // add another task, with tags
         String taskDescription2 = "drink Koi after school";
-        String command2 = "add " + taskDescription2 + " tags/tag1 tag2 tag3";
+        String command2 = "add " + taskDescription2 + " tags/tag1 tag2 tag3 priority/high";
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, null, null);
+        task2.setTaskPriority(TaskPriority.HIGH);
         task2.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2, tag3)));
         assertTrue(isTaskShown(task));
         assertTrue(isTaskShown(task2));
@@ -74,7 +76,7 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         // add another task with deadline and tags
         String taskDescription3 = "get v0.3 ready";
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("22 Mar 2017, 12pm");
-        String command3 = "add " + taskDescription3 + " by/" + endDate3 + " tags/ tag1 tag2 ";
+        String command3 = "add " + taskDescription3 + " by/" + endDate3 + " priority/low tags/ tag1 tag2";
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, null, endDate3);
         task3.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag2)));
@@ -132,9 +134,10 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime startDate4 = DateTimeUtil.parseDateString("16 Mar 2017, 10am");
         LocalDateTime endDate4 = DateTimeUtil.parseDateString("16 Mar 2017, 12pm");
         String command4 = "add " + taskDescription4 + " tags/tag3" +
-                 " from/" + startDate4 + " to/" + endDate4;
+                 " from/" + startDate4 + " to/" + endDate4 + " priority/high";
         commandBox.runCommand(command4);
         Task task4 = new Task(taskDescription4, startDate4, endDate4);
+        task4.setTaskPriority(TaskPriority.HIGH);
         task4.replaceTags(new ArrayList<>(Arrays.asList(tag3)));
         assertTrue(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
