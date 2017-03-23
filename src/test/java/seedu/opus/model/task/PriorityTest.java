@@ -55,13 +55,13 @@ public class PriorityTest {
 
     @Test
     public void parseValidXmlString() throws IllegalValueException {
-        assertEquals(Priority.parseXmlString("HIGH"), Priority.Level.HIGH);
-        assertEquals(Priority.parseXmlString("MEDIUM"), Priority.Level.MEDIUM);
-        assertEquals(Priority.parseXmlString("LOW"), Priority.Level.LOW);
+        assertEquals(Priority.valueOf("HIGH"), Priority.Level.HIGH);
+        assertEquals(Priority.valueOf("MEDIUM"), Priority.Level.MEDIUM);
+        assertEquals(Priority.valueOf("LOW"), Priority.Level.LOW);
     }
 
     @Test (expected = IllegalValueException.class)
     public void pareseInvalidXmlString() throws IllegalValueException {
-        Priority.parseXmlString("NON");
+        Priority.valueOf("NON");
     }
 }
