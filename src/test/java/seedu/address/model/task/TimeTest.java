@@ -14,7 +14,7 @@ public class TimeTest {
         //assertFalse(EndTime.isValidEndTime(" ")); // spaces only
 
         // valid Time
-        assertTrue(Time.isValidTime("March Fifteenth"));//alphabets
+        assertTrue(Time.isValidTime("March Fifteenth")); //alphabets
         assertTrue(Time.isValidTime("20170315")); // number
         assertTrue(Time.isValidTime("By end of March")); // alphabets with capital
         assertTrue(Time.isValidTime("March 15 2017")); // numeric and alphabet

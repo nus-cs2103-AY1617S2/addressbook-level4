@@ -62,9 +62,9 @@ public class TestTask implements ReadOnlyTask {
         this.venue = Optional.of(venue);
     }
 
-	public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
-		this.urgencyLevel = Optional.of(urgencyLevel);
-	}
+    public void setUrgencyLevel(UrgencyLevel urgencyLevel) {
+        this.urgencyLevel = Optional.of(urgencyLevel);
+    }
 
     public void setDescription(Description description) {
         this.description = Optional.of(description);

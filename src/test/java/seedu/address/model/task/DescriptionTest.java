@@ -19,10 +19,13 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("a")); // Description with one small letter
         assertTrue(Description.isValidDescription("A")); // Description with one capital letter
         assertTrue(Description.isValidDescription("0122017")); // Description with only numbers
-        assertTrue(Description.isValidDescription("AG0122017Ykkkk")); // Description with both number, capital letters, and small letters
+        // Description with both number, capital letters, and small letters
+        assertTrue(Description.isValidDescription("AG0122017Ykkkk"));
         assertTrue(Description.isValidDescription("Hi there")); // Description with letters and spaces
-        assertTrue(Description.isValidDescription("I am not going to fail the test!")); // Description with letters, spaces and symbols
+        // Description with letters, spaces and symbols
+        assertTrue(Description.isValidDescription("I am not going to fail the test!"));
         assertTrue(Description.isValidDescription("I am not going to fail the test, but I don't want to study, "
-                + "but I don't want to fail the test, but then I have to study, but I don't want to study")); //Long string
+                + "but I don't want to fail the test, but then I have to study, "
+                + "but I don't want to study")); //Long string
     }
 }

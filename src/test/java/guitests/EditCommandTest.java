@@ -24,7 +24,8 @@ public class EditCommandTest extends ToDoListGuiTest {
         int todoListIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Bobby").withVenue("91234567")
-                .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3").withUrgencyLevel("1").withDescription("i love you").withTags("husband").build();
+                .withStartTime("bobby@gmail.com").withEndTime("Block 123, Bobby Street 3")
+                .withUrgencyLevel("1").withDescription("i love you").withTags("husband").build();
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTask);
     }

@@ -49,9 +49,9 @@ public class TestUtil {
 
     public static final String LS = System.lineSeparator();
 
-	/**
-	 * Folder used for temp files created during testing. Ignored by Git.
-	 */
+    /**
+     * Folder used for temp files created during testing. Ignored by Git.
+     */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
@@ -159,13 +159,13 @@ public class TestUtil {
      * Tweaks the {@code keyCodeCombination} to resolve the
      * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
-	public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
-		List<KeyCode> keys = new ArrayList<>();
-		if (keyCodeCombination.getAlt() == KeyCombination.ModifierValue.DOWN) {
-			keys.add(KeyCode.ALT);
-		}
-		if (keyCodeCombination.getShift() == KeyCombination.ModifierValue.DOWN) {
-			keys.add(KeyCode.SHIFT);
+    public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
+        List<KeyCode> keys = new ArrayList<>();
+        if (keyCodeCombination.getAlt() == KeyCombination.ModifierValue.DOWN) {
+            keys.add(KeyCode.ALT);
+        }
+        if (keyCodeCombination.getShift() == KeyCombination.ModifierValue.DOWN) {
+            keys.add(KeyCode.SHIFT);
         }
         if (keyCodeCombination.getMeta() == KeyCombination.ModifierValue.DOWN) {
             keys.add(KeyCode.META);
