@@ -304,8 +304,11 @@ public class Task implements Comparable<Task> {
 
     public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency) {
         if (recurringEndDateTime == null || recurringFrequency == null) {
-            throw new IllegalArgumentException("Recurring task must have both an end date,"
+            throw new IllegalArgumentException("Recurring task must have both an end date for recurring,"
                     + " and a frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
+        } else if (isFloatingTask()) {
+            throw new IllegalArgumentException("Floating task cannot be recurring task,"
+                    + " include at least an end date.");
         }
         this.recurringEndDateTime = recurringEndDateTime;
         this.recurringFrequency = recurringFrequency;
@@ -314,5 +317,38 @@ public class Task implements Comparable<Task> {
     public void unsetRecurring() {
         this.recurringEndDateTime = null;
         this.recurringFrequency = null;
+    }
+
+    /**
+     * For this recurring task, give the next recurring task
+     * Start date and end date will be updated (if they exist)
+     * @return new recurring task
+     * @throws CloneNotSupportedException
+     */
+    public Task getNextRecurringTask() throws CloneNotSupportedException {
+        assert this.isRecurring();
+        Task task = (Task) this.clone();
+        task.setCompleted(false);
+        task.setStartDateTime(getNextRecurringDateTime(this.getStartDateTime()));
+        task.setEndDateTime(getNextRecurringDateTime(this.getEndDateTime()));
+        return task;
+    }
+
+    public LocalDateTime getNextRecurringDateTime(LocalDateTime dateTime) {
+        if (dateTime == null || this.recurringFrequency == null) {
+            return null;
+        }
+        switch (recurringFrequency) {
+        case DAILY:
+            return dateTime.plusDays(1);
+        case WEEKLY:
+            return dateTime.plusWeeks(1);
+        case MONTHLY:
+            return dateTime.plusMonths(1);
+        case YEARLY:
+            return dateTime.plusYears(1);
+        default:
+            return null;
+        }
     }
 }
