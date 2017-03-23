@@ -46,7 +46,7 @@ Are you ready to be a Doist?
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
  <img src="images/Ui.png" width="450"> <br>
- Figure 1: Doist Application Window <br>
+ Figure 2.1: Doist Application Window <br>
 
 4. Voila, you are ready to be more productive! Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -83,9 +83,8 @@ Take note of some general information for our commands :
 > * Command words and keys that consist of multiple words will not contain spaces. Underscores are used instead. <br>
 > *e.g.* `list_tag`, `\remind_at` <br>
 > * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
-> * If you want to use backslash in the value, use `\\`. <br>
+> * If you want to use backslash `\` in the value, use `\\`. <br>
 > *e.g.* `add Remember to check file at C:\\users\\! \by 3pm` would appear as Remember to check file at C:\users\. <br>
-> * `(A|B)` means A and B can be used interchangeably. <br>
 > * Items in `[]` are optional. <br>
 > * Items with `...` after them can have multiple instances, separated by space. <br>
 > *e.g.* `[INDEX...]` means you can specify multiple indices for that command. <br>
@@ -98,58 +97,58 @@ Take note of some general information for our commands :
 Feeling a bit lost? Simply type "help" to view the handy help page! <br>
 `help`
 
-### 3.2 Adding a new task : `add`, `do`
+### 3.2 Adding a new task : `add`
 
 You can use the `add` command to add tasks. Tracking your tasks is what Doist does best! <br>
-`do` is an alternative command word.
 
 **Description** <br>
 Add a new task with a description by using just the `add` command word. <br>
 <br>
-Format: `(add|do) TASK_DESCRIPTION`
+Format: `add TASK_DESCRIPTION`
 > **Examples:** <br>
 > - `add buy milk` <br>
 
 > **Remarks:** <br>
-> - To use \ in your description, type \\\
+> - To use backslash `\` in your description, type `\\`
 
 **Start time and End time** <br>
 Add a task with a start time and end time for events that occur over a period of time with `\from` and `\to` keys. <br>
 <br>
-Format: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
+Format: `add TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
 > **Examples:** <br>
 > - `add buy milk \from 3pm \to 4pm`<br>
 > - `add buy milk \from 12 Oct 3pm \to 4pm` <br>
 
 > **Remarks:** <br>
-> - See Fig 1. for acceptable date and time formats.
+> - See Figure 3.2.1 for acceptable date and time formats.
 
 **Deadline** <br>
 Add a task that has a deadline with the `\by` key.
 <br>
-Format: `(add|do) TASK_DESCRIPTION [\by TIME]`
+Format: `add TASK_DESCRIPTION [\by TIME]`
 
 > **Examples:** <br>
 > - `add buy milk \by 3pm` <br>
 > - `add buy milk \by 28th Feb` <br>
 
-**Fig 1. Acceptable date and time formats** <br>
+**Acceptable date and time formats** <br>
 
 Date Format |Examples
 ----------- | :------- |
 Day Month | 1st Oct
 Day Month Year | 1st Oct 2017
 Month Day | Oct 1st
-Day / Month | 1/10
-Day / Month / Year | 1/10/17
+Month / Day | 10/1
+Month / Day / Year | 10/1/17
 Relative | today, tomorrow, tmr, two days later
 
 Time Format | Examples
 ----------- | :------- |
 Hour:Min | 03:00
 Hour.Min | 03.00, 3.00
-Hour am/pm | 3pm, 3am
-Hour | 3
+Hour am/pm (12 hour format) | 3pm, 3am
+Hour (24 hour format)| 3
+ Figure 3.2.1: Acceptable date and time formats <br>
 
 > **Remarks:** <br>
 > - If you do not explicitly state the date, the date will be assumed to be within the next 24 hours <br>
@@ -201,35 +200,34 @@ Format: `[\under TAG...]`
 * `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 * `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
 
-### 3.3 Listing tasks : `list`, `ls`
+### 3.3 Listing tasks : `list`
 
 You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and will need to filter them in some way to concentrate on doing those tasks. <br>
-`ls` is an alternative command word.
 
 **List pending, overdue, finished, all tasks** <br>
 List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
 <br>
-Format: `(list|ls) [TYPE]`
+Format: `list [TYPE]`
 > **Examples:** <br>
 > - `list` <br>
 > - `list all` <br>
 > - `list finished` <br>
 
 > **Remarks:** <br>
-> - `list` will by default show both pending and overdue tasks.
+> - `list` will by default show both pending and overdue tasks. <br>
 
 **List tasks during a time period** <br>
 List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
 <br>
 Format: `[\from TIME] [\to TIME] `
 You can also use the `\in` key for tasks occurring `today`, `this week`, `this month` and so on.
-`[\in STRING_REPRESENTING_TIME_INTERVAL]`
+`[\in TIME_INTERVAL]`
 > **Examples:** <br>
 > - `list \from 3pm \to 5pm` <br>
 > - `list \in this week` <br>
 
 > **Remarks:** <br>
-> - See Fig 1. for acceptable date and time formats
+> - See Figure 3.2.1 for acceptable date and time formats <br>
 
 **List tasks under tags** <br>
 List tasks that are under certain tags by using the `\under` key. <br>
@@ -239,10 +237,10 @@ Format: `[\under TAG]`
 > `list \under shopping` <br>
 
 **Sample Commmands**
-* `list pending \under school_work`
-* `list pending \in today`
-* `list \in this week`
-* `list finished \from 1st March \to 20th March \under internship`
+* `list pending \under school_work` <br>
+* `list pending \in today` <br>
+* `list \in this week` <br>
+* `list finished \from 1st March \to 20th March \under internship` <br>
 
 ### 3.4 Finding a task : `find`
 
@@ -258,13 +256,13 @@ Format: `find 'QUERY' ['QUERY'...]`
 > - The search is case sensitive. *e.g* `hans` will not match `Hans` <br>
 > - The order of the search keys does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
 > - Only the task description is searched. <br>
-> - Tasks matching at least one search query will be returned (in other words, it is an `OR` search).
+> - Tasks matching at least one search query will be returned.
     *e.g.* A task with a description of `Hans` will match search query `Hans Bo` <br>
 
 **Sample Commmands**
 
-* `find 'hiking'`
-* `find 'CS2103T' 'group meeting' 'project'`
+* `find 'hiking'` <br>
+* `find 'CS2103T' 'group meeting' 'project'` <br>
 
 ### 3.5 Deleting a task : `delete`
 
@@ -277,7 +275,6 @@ Format: `delete INDEX [INDEX...]`
 > **Remarks:** <br>
 > - Deletes the tasks at the specified `INDEX`.<br>
 > - You can delete more than one task by specifying multiple indices.<br>
-
 
 **Sample Commands**
 * `list finished`<br>
@@ -342,49 +339,51 @@ Format: `(list_tag|ls_tag)`
 
 You can use `undo` to undo previous commands. Undo as many times as you wish! <br>
 <br>
-Format: `undo`
-If you regret undoing a command, you can use `redo` to restore your changes. However if you undo a command and then you enter a new command, you will not be able to redo that command anymore.
+Format: `undo` <br>
+<br>
+If you regret undoing a command, you can use `redo` to restore your changes.
 
 ### 3.10 Clearing all tasks: `clear`
 
 Done with all your tasks? Need an empty to-do list?
-You can simply use `clear` to clear all tasks.
+You can simply use `clear` to clear all tasks. <br>
 <br>
-Format: `clear`  
+Format: `clear`
 
 ### 3.11 Setting an alias for a command word : `alias`
 
 Do you feel that our default command words are too lengthy and will like to set your own command words? <br>
-You can use `alias` to set an alias for an existing command word. You will then be able to use the alias to trigger the command! <br>
-<br>
+You can use `alias` to set an alias for an existing command word. You will then be able to use the alias to trigger the command! <br> <br>
 Format: `alias ALIAS \for COMMAND_WORD`
+
 > **Examples:** <br>
 > - `alias a \for add` <br>
 
 > **Remarks:** <br>
 > - `ALIAS` should have no spaces, we suggest you use underscores to replace spaces. <br>
-> - If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word.
-You can then use `view_alias` to view the list of aliases!
+> - If you are unable to set an alias, your alias is an existing command word.
+> - If you try to set the same alias to two different command words, the alias will only be set for the second command word.
+
+There are already some default aliases set for you. For example, `do` can be used in place of `add` and `ls` can be used in place of `list`. You can use `view_alias` to view the current list of aliases! <br>
 <br>
 Format: `view_alias`
 
 ### 3.12 Changing the storage destination : `save_at`
 
-You can use `save_at` to change the storage path of Doist. <br>
+You can use `save_at` to change the place that Doist would store its data at. <br>
 <br>
 Format: `save_at PATH`
 
 > **Examples:** <br>
-> - `save_at C:\Users\admin\Desktop\todolist.xml` <br>
-> - `save_at Desktop\todolist.xml` <br>
+> - `save_at C:\Users\admin\Desktop` <br>
+> - `save_at \Desktop` <br>
 
 > **Remarks:** <br>
 > - You can provide a relative path for this command.
 
 ### 3.13 Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+Doist will automatically save! There is no need to save manually.
 
 ### 3.14 Exiting the program : `exit`
 
@@ -395,22 +394,28 @@ Format: `exit`
 ## 4. FAQs
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Doist folder.
+**A**: Install the app in the other computer and overwrite the empty data files (namely, todolist.xml and aliaslistmap.xml) it creates with the old data files that contains the data of your previous Doist folder.
 
-**Q**: Do I need to save my data before I ext Doist? <br>
+**Q**: Do I need to save my data before I exit Doist? <br>
 **A**: You do not need to explicitly save your data, as Doist automatically does this for you!
+
+**Q**: Why does Doist not recognise the date / time that I typed? <br>
+**A**: See Figure 3.2.1 for acceptable date and time formats. Note that we use the US Date Format of MM/DD/YYYY.
+
+**Q**: Why am I unable to give an alias? <br>
+**A**: If you are unable to alias, your alias is an existing command word.
 
 ## 5. Command Summary
 
 * **Add** :
-  `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
-  `(add|do) TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
+  `add TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
+  `add TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
   e.g. `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 
 * **Alias** :
   `alias ALIAS \for COMMAND_WORD` <br>
   e.g. `alias set_alias \for alias`
+  `view_alias`
 
 * **Clear** :
   `clear` <br>
@@ -436,19 +441,21 @@ Format: `exit`
   e.g. `find 'test' 'midterm'`
 
 * **List** :
-  `(list|ls) [TYPE] [\from TIME] [\to TIME] [\under TAG]` <br>
-  `(list|ls) [TYPE] [\in STRING_REPRESENTING_TIME_INTERVAL] [\under TAG]` <br>
-  e.g. `ls pending \in this month \under internship`
+  `list [TYPE] [\from TIME] [\to TIME] [\under TAG]` <br>
+  `list [TYPE] [\in TIME_INTERVAL] [\under TAG]` <br>
+  e.g. `list pending \in this month \under internship`
 
 * **List tags** :
-  `(list_tag|ls_tag)`
+  `list_tag`
+
+* **Mark as finished** :
+  `finish INDEX [INDEX...]`<br>
+  e.g. `finish 1 8` <br>
+  `unfinish`
 
 * **Help** :
   `help`
 
-* **Undo** :
-  `undo`
-
-* **Mark as finished** :
-  `finish INDEX [INDEX...]`
-  e.g. `finish 1 8`
+* **Undo/Redo** :
+  `undo` <br>
+  `redo`
