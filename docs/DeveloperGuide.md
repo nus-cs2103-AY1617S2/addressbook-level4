@@ -209,7 +209,7 @@ Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, th
 `undo` and `redo` are implemented by navigating through the to-do list history as mentioned above.  
 To be more specific, the to-do list history is represented by 2 stacks of `TodoList` objects, as implemented in this file: [`History.java`](#../src/main/java/seedu/doist/commons/util/History.java).
 
-> Remark: There are 2 common ways to implement undo and redo feature: `1. saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
+> Remark: There are 2 common ways to implement undo and redo feature: `saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
 > 1. If we save the commands instead, we have to implement a reverse / undo method for each command, which will be time-consuming due to the complexity of the commands.
 > 2. When we copy the `TodoList` object, the constituent `Task` objects will not be copied. Thus, only new references will be created and this is less memory-intensive compared to creating a deep copy of all the `Task` objects.
 
