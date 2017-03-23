@@ -50,7 +50,11 @@ public class Deadline {
         if (trimmedDeadline.equals("floating") || parsedDeadline.get(0).isRecurring()) {
             this.value = trimmedDeadline;
         } else {
-            this.value = format(nextDeadline());
+            if (isFromTo()) {
+                this.value = "From " + format(fromDeadline()) + " to " + format(toDeadline());
+            } else {
+                this.value = format(nextDeadline());
+            }
         }
     }
 
@@ -70,6 +74,10 @@ public class Deadline {
         List<DateGroup> deadlines = parser.parseSyntax(deadline);
         return deadlines;
     }
+
+    /**
+     * Returns true if the deadline contains more than 1 date object.
+     */
 
     /**
      * Returns a formatted String of the given Date object.
@@ -99,6 +107,13 @@ public class Deadline {
     }
 
     /**
+     * Returns true if the object is From - To.
+     */
+    public boolean isFromTo() {
+        return this.parsedDeadline.get(0).getDates().size() == 2;
+    }
+
+    /**
      * Returns the next Deadline.
      */
     public Date nextDeadline() {
@@ -108,9 +123,32 @@ public class Deadline {
         return new Date();
     }
 
+    /**
+     * Returns the From date object.
+     */
+    public Date fromDeadline() {
+        if (parsedDeadline.size() != 0) {
+            return parsedDeadline.get(0).getDates().get(0);
+        }
+        return new Date();
+    }
+
+    /**
+     * Returns the To date object.
+     */
+    public Date toDeadline() {
+        if (parsedDeadline.size() != 0) {
+            if (parsedDeadline.size() == 2) {
+                return parsedDeadline.get(0).getDates().get(1);
+            }
+            return parsedDeadline.get(0).getDates().get(0);
+        }
+        return new Date();
+    }
+
     @Override
     public String toString() {
-        if (value.equals("floating")) {
+        if (value.equals("floating") || isFromTo()) {
             return value;
         }
         return formatter.format(parsedDeadline.get(0).getDates().get(0));
