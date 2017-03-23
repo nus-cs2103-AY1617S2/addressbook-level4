@@ -201,7 +201,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getDeadline().toString() == deadlineKeyString;
+            return task.getDeadline().toString().equals(deadlineKeyString);
         }
 
         @Override
@@ -239,7 +239,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return String.valueOf(task.getCompletion().value).toLowerCase() == completionValue.toLowerCase();
+            return String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
         }
 
         @Override
