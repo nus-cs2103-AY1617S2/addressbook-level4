@@ -65,8 +65,11 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags) ||
-                    this.startDateTime == null || this.endDateTime == null;
+            if(this.startDateTime == null || this.endDateTime == null) {
+                return true;
+            }
+            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags,
+                    this.startDateTime, this.endDateTime);
         }
 
         public void setEndDateTime(Optional<DateTime> endDateTime) {
