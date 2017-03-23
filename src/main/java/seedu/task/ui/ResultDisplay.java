@@ -29,7 +29,8 @@ public class ResultDisplay extends UiPart<Region> {
     DateFormat df = new SimpleDateFormat("MMMM dd, YYYY");
     Date dateobj = new Date();
     String date = df.format(dateobj);
-    private final StringProperty displayed = new SimpleStringProperty("Welcome!\nThe date today is " + date);
+    private final StringProperty displayed = new SimpleStringProperty("Welcome!\nToday is " + date +
+        ".\nYour tasks for today are shown below.\nType 'list' to display all tasks.");
     //@@author
 
     @FXML

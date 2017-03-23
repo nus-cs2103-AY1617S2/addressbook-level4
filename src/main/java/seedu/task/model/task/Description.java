@@ -1,12 +1,14 @@
 package seedu.task.model.task;
 
+import java.util.Comparator;
+
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's description in the ToDo list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
-public class Description {
+public class Description implements Comparable<Description> {
 
 	public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
 			"Task descriptions cannot start with a space, "
@@ -59,5 +61,19 @@ public class Description {
 	public int hashCode() {
 		return description.hashCode();
 	}
+
+	@Override
+	public int compareTo(Description other) {
+		return this.description.compareTo(other.description);
+	}
+
+	public static Comparator<Description> DescriptionComparator = new Comparator<Description>() {
+
+		@Override
+		public int compare(Description description1, Description description2) {
+			return description1.compareTo(description2);
+		}
+
+	};
 
 }
