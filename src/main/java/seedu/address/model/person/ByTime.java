@@ -15,39 +15,26 @@ public class ByTime {
     public static final String MESSAGE_BYTIME_CONSTRAINTS =
             "Deadline ByTime can only be in this format: HH:MM(AM/PM) format, e.g. 12:00pm";
 
-    /*
-     * must be in digits only
-     *
-     */
-    public static final String BYTIME_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
-
     public final LocalTime value;
 //@@author A0110491U A0121668A
     /**
-     * Validates given ByTime.
+     * Validates given start time.
      *
-     * @throws IllegalValueException if given ByTime string is invalid.
+     * @throws IllegalValueException if given start time is invalid.
      */
-    public ByTime(String byTime) throws IllegalValueException {
-        if (byTime == null) {
+    public ByTime(String byTimeArg) throws IllegalValueException {
+        if (byTimeArg == null) {
             this.value = null;
-        } else {
-            if (!isValidByTime(byTime)) {
+        } 
+        else {
+            try {
+                this.value = StringUtil.parseStringToTime(byTimeArg);
+            } catch (IllegalValueException illegalValueException) {
                 throw new IllegalValueException(MESSAGE_BYTIME_CONSTRAINTS);
+                }
             }
-            this.value = StringUtil.parseStringToTime(byTime);
         }
-    }
-//@@author A0121668A
-    /**
-     * Returns true if a given string is a valid deadline ByTime.
-     */
-    public static boolean isValidByTime(String test) {
-        if (test == null) {
-            return true;
-        }
-        return test.matches(BYTIME_VALIDATION_REGEX);
-    }
+
 //@@author
     @Override
     public String toString() {
