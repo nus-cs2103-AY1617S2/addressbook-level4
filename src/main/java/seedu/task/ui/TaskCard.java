@@ -11,6 +11,7 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
     private static final String EMPTY_STRING = "";
+    private static final String CHECKMARK_STRING = "✓";
 
     @FXML
     private HBox cardPane;
@@ -69,7 +70,7 @@ public class TaskCard extends UiPart<Region> {
         if (task.getComplete() == null) {
             return;
         }
-        complete.setText(task.getComplete().getCompletion() ? "✓" : EMPTY_STRING);
+        complete.setText(task.getComplete().getCompletion() ? CHECKMARK_STRING : EMPTY_STRING);
     }
     // @@author
 }
