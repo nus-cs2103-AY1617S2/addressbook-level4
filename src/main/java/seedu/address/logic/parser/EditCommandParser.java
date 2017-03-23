@@ -186,7 +186,7 @@ public class EditCommandParser {
             ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         // Check notes
         Boolean completionBool = Boolean.parseBoolean(argsTokenizer.getValue(PREFIX_COMPLETION).orElse("false"));
-        if (completionBool == true) {
+        if (completionBool) {
             editTaskDescriptor.setCompletion((Optional.of(new Completion(String.valueOf(completionBool)))));
         } else if (containsPrefix) {
             editTaskDescriptor.setCompletion((Optional.of(new Completion("false"))));
