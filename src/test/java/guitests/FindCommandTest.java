@@ -13,34 +13,27 @@ public class FindCommandTest extends TaskBossGuiTest {
 
     /*
      * Valid equivalence partitions:
-     * - task name
+     * - task keywords (name and information)
      * - start datetime
      * - end datetime
-     * - information
+     * 
      */
 
     // Equivalence partition: find by name in a non-empty list
     @Test
-    public void find_byNameNonEmptyList() {
-        assertFindResult("find n/Mark"); // no results
-        assertFindResult("find n/Meier", td.daniel, td.benson); // multiple results
+    public void find_byKeywordNonEmptyList() {
+        assertFindResult("find k/Mark"); // no results
+        assertFindResult("find k/Meier", td.daniel, td.benson); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 2");
-        assertFindResult("find n/Meier", td.daniel);
+        assertFindResult("find k/Meier", td.daniel);
     }
     // EP: find by name in an empty list
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find n/Jean"); // no results
-    }
-
-    // EP: find by information in a non-empty list
-    @Test
-    public void find_byInformationNonEmptyList() {
-        assertFindResult("find i/Information"); // no results
-        assertFindResult("find i/ave", td.elle, td.alice, td.benson); // multiple results
+        assertFindResult("find k/Jean"); // no results
     }
 
     // EP: find by start datetime with short command
