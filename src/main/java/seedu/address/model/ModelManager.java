@@ -88,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
         updateTaskListPredicate();
     }
-    
+
     public void setCurrentComparator(String type) {
         switch (type) {
         case SORT_TYPE_DATE:
