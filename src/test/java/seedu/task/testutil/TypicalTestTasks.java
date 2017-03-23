@@ -62,14 +62,14 @@ public class TypicalTestTasks {
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
-            try {
-                tm.setTasks(asList(new TypicalTestTasks().getTypicalTasks()));
-            } catch (UniqueTaskList.DuplicateTaskException e) {
+        try {
+            tm.setTasks(asList(new TypicalTestTasks().getTypicalTasks()));
+        } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
-            } catch (IllegalValueException ive) {
+        } catch (IllegalValueException ive) {
                 assert false : "not possible";
-            }
         }
+    }
 
     /**
      *
@@ -77,7 +77,8 @@ public class TypicalTestTasks {
      */
     public TestTask[] getTypicalTasks() {
         TestTask[] typicalTasks = new TestTask[] { apply, buy, calculate, decide, eat, find, give};
-        //, handle, identify, jump , kick, look, mark, neglect   manually added tasks, that cause errors because of empty fields
+        //, handle, identify, jump , kick, look, mark, neglect   manually added tasks,
+        //that cause errors because of empty fields
 
         ArrayList<TestTask> typicalTaskList = new ArrayList<>();
         for (TestTask t : typicalTasks) {
@@ -95,9 +96,9 @@ public class TypicalTestTasks {
         loadTaskManagerWithSampleData(tm);
         return tm;
     }
-    public static ArrayList<TestTask> asList(TestTask[] testTasks){
+    public static ArrayList<TestTask> asList(TestTask[] testTasks) {
         ArrayList<TestTask> testTaskList = new ArrayList<>();
-        for(TestTask tt : testTasks){
+        for (TestTask tt : testTasks) {
             testTaskList.add(tt);
         }
         return testTaskList;

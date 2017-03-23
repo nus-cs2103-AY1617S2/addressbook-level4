@@ -106,8 +106,9 @@ public class HelpCommand extends Command {
                 return new CommandResult(SHOWING_HELP_MESSAGE);
             }
         }
-        else{ EventsCenter.getInstance().post(new ShowHelpRequestEvent());
-        return new CommandResult(SHOWING_HELP_MESSAGE);
+        else {
+            EventsCenter.getInstance().post(new ShowHelpRequestEvent());
+            return new CommandResult(SHOWING_HELP_MESSAGE);
         }
     }
 }

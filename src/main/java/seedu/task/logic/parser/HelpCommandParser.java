@@ -6,8 +6,8 @@ import seedu.task.logic.commands.HelpCommand;
 public class HelpCommandParser {
 
     private String commandHelpToShowUser;
-    
-    public Command parse(String args){
+
+    public Command parse(String args) {
         return new HelpCommand(args);
     }
 }

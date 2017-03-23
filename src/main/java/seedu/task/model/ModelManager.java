@@ -57,24 +57,24 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
-        taskManager.resetData(newData);      
-        indicateTaskManagerChanged(false);  
+        taskManager.resetData(newData);
+        indicateTaskManagerChanged(false);
     }
-    
+
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
-    /** Raises an event to indicate the model has changed 
+    /** Raises an event to indicate the model has changed
      * @param shouldBackup TODO*/
     private void indicateTaskManagerChanged(boolean shouldBackup) {
         raise(new TaskManagerChangedEvent(taskManager, shouldBackup));
     }
-    
+
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
-    	raise(new FilePathChangedEvent(newPath, taskManager));
+        raise(new FilePathChangedEvent(newPath, taskManager));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateDone(taskManagerIndex, target);
         indicateTaskManagerChanged(true);
     }
-    
+
     @Override
     public synchronized void UnDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
@@ -113,18 +113,18 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged(true);
     }
-    
-    @Override 
-    public void sortTaskList(){
+
+    @Override
+    public void sortTaskList() {
         taskManager.sortTaskList();
         indicateTaskManagerChanged(false);
     }
-    
-    
+
+
     @Override
     public void changeFilePath(String newPath) {
-    	indicateFilePathChanged(newPath);
-    	indicateTaskManagerChanged(false);
+        indicateFilePathChanged(newPath);
+        indicateTaskManagerChanged(false);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -232,7 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(),tagKeyWord);
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyWord);
         }
 
         @Override

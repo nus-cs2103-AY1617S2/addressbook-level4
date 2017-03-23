@@ -41,7 +41,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);// the most recently added task will be displayed at the top
+        internalList.add(toAdd); // the most recently added task will be displayed at the top
     }
 
     /**
@@ -54,9 +54,9 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(0, toAdd);// the most recently added task will be displayed at the top
+        internalList.add(0, toAdd); // the most recently added task will be displayed at the top
     }
-    
+
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
@@ -77,7 +77,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
-        
+
     }
 
     public void done(int index) {
@@ -86,13 +86,13 @@ public class UniqueTaskList implements Iterable<Task> {
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
-    
+
     public void Undone(int index) {
         // TODO Auto-generated method stub
-            Task taskUnDone = internalList.get(index);
-            taskUnDone.setIsDone(false);
-            internalList.set(index, taskUnDone);
-        }
+        Task taskUnDone = internalList.get(index);
+        taskUnDone.setIsDone(false);
+        internalList.set(index, taskUnDone);
+    }
 
 
     /**

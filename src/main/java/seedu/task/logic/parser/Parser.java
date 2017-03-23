@@ -127,7 +127,7 @@ public class Parser {
             return new HelpFormatCommand();
 
         case SaveCommand.COMMAND_WORD:
-        	return new SaveCommandParser().parse(arguments);
+            return new SaveCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

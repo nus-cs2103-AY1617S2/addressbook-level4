@@ -38,10 +38,10 @@ public class StorageManager extends ComponentManager implements Storage {
     public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
-    
+
     public StorageManager(Config config) {
-    	this(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
-    	this.config = config;
+        this(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        this.config = config;
     }
 
     // ================ UserPrefs methods ==============================
@@ -63,10 +63,10 @@ public class StorageManager extends ComponentManager implements Storage {
     public String getTaskManagerFilePath() {
         return taskManagerStorage.getTaskManagerFilePath();
     }
-    
+
     @Override
     public void setTaskManagerFilePath(String path) {
-    	taskManagerStorage.setTaskManagerFilePath(path);
+        taskManagerStorage.setTaskManagerFilePath(path);
     }
 
     @Override
@@ -98,18 +98,18 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to backup data");
         taskManagerStorage.saveBackup();
     }
-    
+
     @Override
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {
-    	config.setTaskManagerFilePath(event.path);
-    	try {
-    		taskManagerStorage.setTaskManagerFilePath(event.path);
-    		taskManagerStorage.saveTaskManager(event.taskManager, event.path);
-    		ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-    	} catch (IOException ie) {
-    		logger.warning("Unable to save config file");
-    	}
+        config.setTaskManagerFilePath(event.path);
+        try {
+            taskManagerStorage.setTaskManagerFilePath(event.path);
+            taskManagerStorage.saveTaskManager(event.taskManager, event.path);
+            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        } catch (IOException ie) {
+            logger.warning("Unable to save config file");
+        }
     }
 
 
@@ -119,7 +119,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            if(event.shouldBackup){
+            if (event.shouldBackup) {
                 saveBackup();
             }
             saveTaskManager(event.data);

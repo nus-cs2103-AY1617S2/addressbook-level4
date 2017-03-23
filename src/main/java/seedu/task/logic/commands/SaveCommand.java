@@ -18,7 +18,7 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_FAILURE_DIRECTORY = "The path %1$s leads to a directory";
 
     private String pathName;
-    
+
     /**
      * Creates a Save command
      */
@@ -28,12 +28,12 @@ public class SaveCommand extends Command {
 
     @Override
     public CommandResult execute() {
-    	File file = new File(pathName);
-    	if (file.isDirectory()) {
-    		return new CommandResult(String.format(MESSAGE_FAILURE_DIRECTORY, pathName));
-    	}
-    	model.changeFilePath(pathName);
-    	return new CommandResult(String.format(MESSAGE_SUCCESS, pathName));
+        File file = new File(pathName);
+        if (file.isDirectory()) {
+            return new CommandResult(String.format(MESSAGE_FAILURE_DIRECTORY, pathName));
+        }
+        model.changeFilePath(pathName);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, pathName));
     }
 
 }

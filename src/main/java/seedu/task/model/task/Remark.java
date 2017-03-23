@@ -15,7 +15,7 @@ public class Remark {
     public final String value;
 
     //Allows an empty constructor
-    public Remark(){
+    public Remark() {
         this.value = DEFAULT_REMARK;
     }
     /**
