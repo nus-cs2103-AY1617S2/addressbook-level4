@@ -76,19 +76,22 @@ Refer to the [Features](#features) section below for details of each command.<br
 **Command Format**
 
 Take note of some general information for our commands :
-> * All commands begin with a command word, followed by parameters.
-> * All parameters are key-value pairs except the first parameter, whose key must be omitted.
-> *e.g.* `add Buy the milk \from 3pm \to 5pm`
-> * All keys start with the backslash `\`.
-> *e.g.* `\from`, `\every`.
-> * If you want to use backslash in the value, use `\\`.
-> * Command words and keys consisting of multiple words will not contain spaces. Underscores are used instead.
-> *e.g.* `list_tag`, `\remind_at`
-> * Words in `UPPER_CASE` are the values.
-> * `(A|B)` means A and B can be used interchangeably.
-> * Items in `[]` are optional.
-> * Items with `...` after them can have multiple instances, separated by space.
-> * Key-value pairs can be entered in any order after the command word.
+> * All commands begin with a command word. <br>
+> *e.g.* `add`, `edit` <br>
+> * All keys start with the backslash `\`. <br>
+> *e.g.* `\from`, `\to` are the keys in `add Buy the milk \from 3pm \to 5pm` <br>
+> * Command words and keys that consist of multiple words will not contain spaces. Underscores are used instead. <br>
+> *e.g.* `list_tag`, `\remind_at` <br>
+> * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
+> * If you want to use backslash in the value, use `\\`. <br>
+> *e.g.* `add Remember to check file at C:\\users\\! \by 3pm` would appear as Remember to check file at C:\users\. <br>
+> * `(A|B)` means A and B can be used interchangeably. <br>
+> * Items in `[]` are optional. <br>
+> * Items with `...` after them can have multiple instances, separated by space. <br>
+> *e.g.* `[INDEX...]` means you can specify multiple indices for that command. <br>
+> * The keys can be entered in any order after the command word. <br>
+> *e.g.* `add Buy the milk \to 3pm \from 5pm` works too! <br>
+
 
 ### 3.1 Viewing help : `help`
 
@@ -166,7 +169,7 @@ Format: `[\as PRIORITY]`
 > - `Priority` can be `normal`, `important`, `very important`
 
 **Reminder** <br>
-Add a task with a reminder timing with the `\remind_at` key. State the number of hours before the task's end time that you want to be reminded. A pop-up would appear to remind you about the task at that specified time! <br>
+Add a task with a reminder timing with the `\remind_at` key. State the number of hours before the task's end time that you want to be reminded. A pop-up will appear to remind you about the task at that specified time! <br>
 <br>
 Format: `[\remind_at REMINDER_RELATIVE_TIME]`
 > **Examples:** <br>
@@ -200,7 +203,7 @@ Format: `[\under TAG...]`
 
 ### 3.3 Listing tasks : `list`, `ls`
 
-You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and would need to filter them in some way to concentrate on doing those tasks. <br>
+You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and will need to filter them in some way to concentrate on doing those tasks. <br>
 `ls` is an alternative command word.
 
 **List pending, overdue, finished, all tasks** <br>
@@ -300,7 +303,7 @@ Use the `unfinish` command to change the status of an already finished task to n
 
 > **Remarks:** <br>
 > - The index refers to the index number of the task shown in the most recent listing.<br>
-> - If the task(s) at the specified `INDEX` is/are already finished, there would be no changes made.
+> - If the task(s) at the specified `INDEX` is/are already finished, there will be no changes made.
 
 **Sample Commands**
 * `list pending \in this week`<br>
@@ -327,7 +330,7 @@ Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 * `list`<br>
   `edit 1 \desc watch NBA \remind_at this Sunday 8am`<br>
   Suppose that the description of this task is originally `watch nba`,
-  the new description would be changed to `watch NBA`.
+  the new description will be changed to `watch NBA`.
   The reminder time will also be updated to the specified one which is `this Sunday 8am`.
 
 ### 3.8 Listing all the tags : `list_tag`, `ls_tag`
@@ -351,8 +354,8 @@ Format: `clear`
 
 ### 3.11 Setting an alias for a command word : `alias`
 
-Do you feel that our default command words are too lengthy and would like to set your own command words? <br>
-You can use `alias` to set an alias for an existing command word. You would then be able to use the alias to trigger the command! <br>
+Do you feel that our default command words are too lengthy and will like to set your own command words? <br>
+You can use `alias` to set an alias for an existing command word. You will then be able to use the alias to trigger the command! <br>
 <br>
 Format: `alias ALIAS \for COMMAND_WORD`
 > **Examples:** <br>
