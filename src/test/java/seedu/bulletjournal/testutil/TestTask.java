@@ -8,7 +8,7 @@ import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.TaskName;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -23,14 +23,14 @@ public class TestTask implements ReadOnlyTask {
     }
 
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
-    public TestTask(TestTask personToCopy) {
-        this.taskName = personToCopy.getTaskName();
-        this.dueDate = personToCopy.getPhone();
-        this.status = personToCopy.getStatus();
-        this.beginDate = personToCopy.getAddress();
-        this.tags = personToCopy.getTags();
+    public TestTask(TestTask taskToCopy) {
+        this.taskName = taskToCopy.getTaskName();
+        this.dueDate = taskToCopy.getPhone();
+        this.status = taskToCopy.getStatus();
+        this.beginDate = taskToCopy.getAddress();
+        this.tags = taskToCopy.getTags();
     }
 
     public void setName(TaskName taskName) {

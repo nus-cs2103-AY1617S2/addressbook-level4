@@ -25,7 +25,7 @@ public class ShowCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateMatchedTaskList(keywords);
-        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
 }

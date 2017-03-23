@@ -19,9 +19,9 @@ import seedu.bulletjournal.testutil.TestTask;
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TodoListGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedPersonsList = td.getTypicalTasks();
+    TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
@@ -29,10 +29,10 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "Burn clothes d/91234567 s/undone b/Block 123, Bobby Street 3 t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withTaskName("Burn clothes").withDueDate("91234567")
+        TestTask editedTask = new TaskBuilder().withTaskName("Burn clothes").withDueDate("91234567")
                 .withStatus("undone").withBeginDate("Block 123, Bobby Street 3").withTags("husband").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -40,10 +40,10 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "t/sweetie t/bestie";
         int addressBookIndex = 2;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -51,10 +51,10 @@ public class EditCommandTest extends TodoListGuiTest {
         String detailsToEdit = "t/";
         int addressBookIndex = 2;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
@@ -62,23 +62,23 @@ public class EditCommandTest extends TodoListGuiTest {
         commandBox.runCommand("find Eat");
 
         String detailsToEdit = "Burn leftovers";
-        int filteredPersonListIndex = 1;
+        int filteredTaskListIndex = 1;
         int addressBookIndex = 5;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withTaskName("Burn leftovers").build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTaskName("Burn leftovers").build();
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_missingPersonIndex_failure() {
+    public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit Bathe");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_invalidPersonIndex_failure() {
+    public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit 8 Bathe");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
@@ -94,7 +94,7 @@ public class EditCommandTest extends TodoListGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 d/abcd");
+        commandBox.runCommand("edit 1 d/");
 
         assertResultMessage(DueDate.MESSAGE_DUEDATE_CONSTRAINTS);
 
@@ -102,7 +102,7 @@ public class EditCommandTest extends TodoListGuiTest {
         assertResultMessage(Status.MESSAGE_STATUS_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 b/");
-        assertResultMessage(BeginDate.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertResultMessage(BeginDate.MESSAGE_BEGINDATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -123,32 +123,32 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_duplicatePerson_failure() {
+    public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Assignment for CS2103 d/85355255 s/undone "
                                 + "b/123, Jurong West Ave 6, #08-111 t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
-     * Checks whether the edited person has the correct updated details.
+     * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * @param filteredTaskListIndex index of task to edit in filtered list
+     * @param addressBookIndex index of task to edit in the address book.
+     *      Must refer to the same task as {@code filteredTaskListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestTask editedPerson) {
-        commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
+    private void assertEditSuccess(int filteredTaskListIndex, int addressBookIndex,
+                                    String detailsToEdit, TestTask editedTask) {
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToPerson(editedPerson.getTaskName().fullName);
-        assertMatching(editedPerson, editedCard);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTaskName().fullName);
+        assertMatching(editedTask, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
-        expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(taskListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        // confirm the list now contains all previous tasks plus the task with updated details
+        expectedTasksList[addressBookIndex - 1] = editedTask;
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
     }
 }

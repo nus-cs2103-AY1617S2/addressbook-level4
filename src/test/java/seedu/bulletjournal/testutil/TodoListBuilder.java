@@ -9,7 +9,7 @@ import seedu.bulletjournal.model.task.UniqueTaskList;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withTask("John", "Doe").withTag("Friend").build();}
  */
 public class TodoListBuilder {
 
@@ -19,7 +19,7 @@ public class TodoListBuilder {
         this.todoList = todoList;
     }
 
-    public TodoListBuilder withPerson(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public TodoListBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
         return this;
     }

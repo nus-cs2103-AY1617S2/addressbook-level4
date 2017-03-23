@@ -104,7 +104,23 @@ Examples:
 * `find Pick Do`<br>
   Returns Any tasks having names `Pick`, or `Do`
 
-### 2.6. Deleting a task : `delete`
+### 2.6. Showing done/undone tasks: `show`
+
+Shows tasks that are done or undone.<br>
+Format: `show done/undone`
+
+> * This command is case insensitive. e.g `DONE` works the same as `done`
+> * Only the status is searched.
+> * Only full words will be matched e.g `do` will not match `done`
+
+Examples:
+
+* `show done`<br>
+  Returns tasks that are done
+* `show undone`<br>
+  Returns tasks that are undone
+
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task from the address book. Irreversible.<br>
 Format: `delete INDEX`
@@ -122,7 +138,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-### 2.7. Select a task : `select`
+### 2.8. Select a task : `select`
 
 Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
@@ -140,17 +156,17 @@ Examples:
   `select 1`<br>
   Selects the 1st task in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.9. Clearing all entries : `clear`
 
 Clears all entries from the Task List.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.11. Saving the data
 
 Task List data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
