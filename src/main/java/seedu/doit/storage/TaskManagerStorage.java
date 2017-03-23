@@ -17,6 +17,7 @@ public interface TaskManagerStorage {
      */
     String getTaskManagerFilePath();
 
+    // @@author A0138909R
     /**
      * Changes the file path of the data file.
      */
@@ -53,6 +54,15 @@ public interface TaskManagerStorage {
      */
     void saveTaskManager(ReadOnlyItemManager taskManager, String filePath) throws IOException;
 
+    // @@author A0138909R
+    /**
+     * Copies the file in oldPath to file in newPath
+     *
+     * @param oldPath
+     * @param newPath
+     * @throws IOException
+     *             if there is error when copying files
+     */
     void copyTaskManager(String oldPath, String newPath) throws IOException;
-
+    // @@author
 }

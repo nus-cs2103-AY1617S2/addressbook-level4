@@ -49,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    // @@author A0138909R
     /**
      * Updates the filteredTasks after the taskmanager have changed
      */
@@ -56,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredTasks = new FilteredList<ReadOnlyTask>(this.taskManager.getTaskList());
     }
 
+    // @@author
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
@@ -120,23 +122,24 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortBy(String sortType) {
         switch (sortType) {
         case "start time":
-            taskManager.setTaskComparator(new StartTimeComparator());
+            this.taskManager.setTaskComparator(new StartTimeComparator());
             break;
         case "end time":
-            taskManager.setTaskComparator(new EndTimeComparator());
+            this.taskManager.setTaskComparator(new EndTimeComparator());
             break;
         case "priority":
-            taskManager.setTaskComparator(new PriorityComparator());
+            this.taskManager.setTaskComparator(new PriorityComparator());
             break;
         case "name":
-            //fallthrough
+            // fallthrough
         default:
-            taskManager.setTaskComparator(new TaskNameComparator());
+            this.taskManager.setTaskComparator(new TaskNameComparator());
             break;
         }
     }
 
-    //=========== Filtered Task List Accessors ============================================================
+    // =========== Filtered Task List Accessors
+    // ============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -229,6 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    // @@author A0138909R
     @Override
     public void undo() throws EmptyTaskManagerStackException {
         this.taskManager.resetData(taskManagerStack.loadOlderTaskManager(this.getTaskManager()));
@@ -243,6 +247,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author
     private class PriorityQualifier implements Qualifier {
         private Set<String> priorityKeywords;
 
@@ -252,8 +257,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return priorityKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
+            return this.priorityKeywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword));
         }
 
         @Override
@@ -271,8 +276,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return descriptionKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
+            return this.descriptionKeywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().value, keyword));
         }
 
         @Override
@@ -290,7 +295,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return tagKeywords.stream().anyMatch(keyword -> {
+            return this.tagKeywords.stream().anyMatch(keyword -> {
                 try {
                     return (task.getTags().contains(new Tag(keyword)));
                 } catch (IllegalValueException e) {
@@ -303,7 +308,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "tag=" + String.join(", ", tagKeywords);
+            return "tag=" + String.join(", ", this.tagKeywords);
         }
     }
 

@@ -74,6 +74,7 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
+    // @@author A0138909R
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyItemManager> taskManagereOptional;
         ReadOnlyItemManager initialTaskManagerData;
@@ -95,6 +96,7 @@ public class MainApp extends Application {
 
         return new ModelManager(initialTaskManagerData, userPrefs);
     }
+    // @@author
 
     private void initLogging(Config config) {
         LogsCenter.init(config);

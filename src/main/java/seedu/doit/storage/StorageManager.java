@@ -100,6 +100,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // @@author A0138909R
     @Override
     @Subscribe
     public void handleTaskManagerSaveChangedEvent(TaskManagerSaveChangedEvent event) {
@@ -133,4 +134,5 @@ public class StorageManager extends ComponentManager implements Storage {
     public void copyTaskManager(String oldPath, String newPath) throws IOException {
         this.taskManagerStorage.copyTaskManager(oldPath, newPath);
     }
+    // @@author
 }
