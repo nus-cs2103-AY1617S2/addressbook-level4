@@ -28,8 +28,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`help`** : displays help documentation
-   * **`add e`:**  `add "Cs2103 meeting" 3 Mar 17:00 to 18:00` adds an event called "Cs2103 meeting" on 3 March from 17:00 to 18:00
-   * **`view`**: `view calendar` displays the calendar with tasks and events you have added
+   * **`add e`:**  `add e Cs2103 meeting 3 Mar 17:00 to 18:00` adds an event named "Cs2103 meeting" on 3 March from 17:00 to 18:00
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 ## 3. Features
@@ -40,7 +39,7 @@ It can help you manage events, deadlines, add tasks with or without deadlines or
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items surrounding `|` means we only choose one of them (OR).
 > * Items with `...` after them can have multiple instances.
-> * Parameters should be in the order stated (at least for now).
+> * Parameters with a prefix can be entered in any order.
 
 ### 3.1. Viewing help : `help`
 
@@ -98,7 +97,7 @@ Format: `list d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
 **View active task or event list within specific time frame**:
 
-Format: `list [t or e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
+Format: `list [t | e] d/START_DATE START_TIME to [END_DATE] END_TIME`<br>
 
 **View overdue tasks** :
 
@@ -112,7 +111,7 @@ Examples:
 
 * `list c`
 * `list e d/5-5-18 00:00 to 15:00`
-* `list t d/5-7-17 00:00 to 8-7-17 16:00`
+* `list t d/8-7-17 16:00`
 
 ### 3.4 Updating a field of a task/event in the active list : `edit`
 
@@ -234,5 +233,5 @@ Format: `history`<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TaskCrusher installation.
 
 ## 6. Storage File Format
-
-**TODO**
+- User inbox data is stored in `.xml` format
+- User configurations are stored in `.json` format
