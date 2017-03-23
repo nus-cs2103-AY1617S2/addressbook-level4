@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -36,13 +35,8 @@
                   <VBox prefHeight="200.0">
                      <children>
                                 <HBox>
-                                  <children>
-                                   <Label fx:id="id" styleClass="cell_big_label">
-                                        <minWidth>
-                                            <!-- Ensures that the label text is never truncated -->
-                                            <Region fx:constant="USE_PREF_SIZE" />
-                                        </minWidth>
-                                  </Label>
+                                   <children>
+                                       <Label fx:id="id" styleClass="cell_big_label" />
                                        <Label fx:id="desc" styleClass="cell_big_label" text="\$first" />
                                    </children>
                                 </HBox>
