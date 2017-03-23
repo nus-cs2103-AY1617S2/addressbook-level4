@@ -12,6 +12,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -224,7 +225,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return StringUtil.containsTagIgnoreCase(task.getTags(), tagKeyWord);
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(),tagKeyWord);
         }
 
         @Override

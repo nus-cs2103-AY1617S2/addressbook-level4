@@ -62,24 +62,6 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code tags} contains the {@code keyword}.
-     * Ignores case, but a full word match is required.
-     *
-     * @param tags may be null
-     * @param keyword cannot be null, cannot be empty, must be a single word
-     * @return
-     */
-    public static boolean containsTagIgnoreCase(UniqueTagList tags, String keyword) {
-        for (Tag t : tags) {
-            if (containsWordIgnoreCase((t.tagName), keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
