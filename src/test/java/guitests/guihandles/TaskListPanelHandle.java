@@ -91,7 +91,7 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getTitle().title.equals(tasks[i].getTitle())) {
+            if (!tasksInList.get(startPosition + i).getTitle().title.equals(tasks[i].getTitle().title)) {
                 return false;
             }
         }
