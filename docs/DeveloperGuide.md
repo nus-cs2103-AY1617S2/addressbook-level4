@@ -140,7 +140,7 @@ Here are some of the key files in the `Ui` component:
 The `Logic` component handles the execution of the commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
 
 The following diagram represents the structure of the `Logic` component  
-<br><img src="images/LogicComponentClassDiagram.jpg" width="800"><br> 
+<br><img src="images/LogicClassDiagram.png" width="800"><br> 
 
 Here are some of the key files in the `Logic` component:
 - [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain the results of computations.  
@@ -209,7 +209,7 @@ Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, th
 `undo` and `redo` are implemented by navigating through the to-do list history as mentioned above.  
 To be more specific, the to-do list history is represented by 2 stacks of `TodoList` objects, as implemented in this file: [`History.java`](#../src/main/java/seedu/doist/commons/util/History.java).
 
-> Remark: There are 2 common ways to implement undo and redo feature: `1. saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
+> Remark: There are 2 common ways to implement undo and redo feature: `saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
 > 1. If we save the commands instead, we have to implement a reverse / undo method for each command, which will be time-consuming due to the complexity of the commands.
 > 2. When we copy the `TodoList` object, the constituent `Task` objects will not be copied. Thus, only new references will be created and this is less memory-intensive compared to creating a deep copy of all the `Task` objects.
 

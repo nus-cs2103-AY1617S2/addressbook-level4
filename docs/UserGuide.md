@@ -18,15 +18,15 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.9. [Undoing the previous commands](#39-undoing-the-previous-commands--undo)  
   3.10. [Clearing all entries](#310-clearing-all-entries--clear)  
   3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias)  
-  3.12. [Exiting the program](#312-exiting-the-program--exit)  
-  3.13. [Changing the storage destination](#313-changing-the-storage-destination--save-at)  
-  3.14. [Saving the data](#314-saving-the-data)  
+  3.12. [Changing the storage destination](#313-changing-the-storage-destination--save-at)  
+  3.13. [Saving the data](#314-saving-the-data)  
+  3.14. [Exiting the program](#312-exiting-the-program--exit)  
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
 
-Love the adrenaline rush you get when you check an item off your to-do list, but too busy to actually make one? Use Doist today, and feel more organised than ever before!
+Do you love the adrenaline rush you get when you check an item off your to-do list, but are you too busy to actually make one? Use Doist today, be a Doist and feel more organised than ever before!
 
 Doist is the comprehensive tool to help you in all your planning. It allows you to key in, sort, tag, set reminders and even search for your tasks and events so that you can focus on getting things done. Your hands never need to leave the keyboard with our command-line input interface, and our easy-to-use UI will keep you coming back for more. Once you are a Doist, there's no looking back.
 
@@ -42,22 +42,22 @@ Are you ready to be a Doist?
 >    This app will not work with earlier versions of Java 8.
 
 1. Download the latest `.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for Doist. Note that you would be able to edit Doist's storage location of its data later.
-3. Almost there! Double-click the file to start the app. The GUI should appear in a few seconds.
+2. Copy the file to the folder you want to use as the home folder for Doist. Note that you change Doist's storage location of its data in the future.
+3. Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
  <img src="images/Ui.png" width="450"> <br>
  Figure 1: Doist Application Window <br>
 
-4. Voila, you are ready to be more productive! Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+4. Voila, you are ready to be more productive! Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
 ### Getting started with commands :
 
 Type the following commands and press <kbd>Enter</kbd> after each command.
-1. **`add Buy the milk \from 3pm \to 5pm`**. <br>
-Adds an event for today with a description of "Buy the milk" from 3pm to 5pm
+1. **`add Attend group meeting \from 3pm \to 5pm`**. <br>
+Adds an event for today with a description of "Attend group meeting" from 3pm to 5pm today
 2. **`add Go grocery shopping \by 6pm 25th Oct`**. <br>
-Adds a task with a description of "Go grocery shopping" which has a 6pm deadline.
+Adds a task with a description of "Go grocery shopping" which has a 6pm deadline on the 25th of October.
 3. **`finish 1`** <br>
 Marks the first task in the list as finished.
 4. **`list pending`** <br>
@@ -76,19 +76,22 @@ Refer to the [Features](#features) section below for details of each command.<br
 **Command Format**
 
 Take note of some general information for our commands :
-> * All commands begin with a command word, followed by parameters.
-> * All parameters are key-value pairs except the first parameter, whose key must be omitted.
-> *e.g.* `add Buy the milk \from 3pm \to 5pm`
-> * All keys start with the backslash `\`.
-> *e.g.* `\from`, `\every`.
-> * If you want to use backslash in the value, use `\\`.
-> * Command words and keys consisting of multiple words will not contain spaces. Underscores are used instead.
-> *e.g.* `list_tag`, `\remind_at`
-> * Words in `UPPER_CASE` are the values.
-> * `(A|B)` means A and B can be used interchangeably.
-> * Items in `[]` are optional.
-> * Items with `...` after them can have multiple instances, separated by space.
-> * Key-value pairs can be entered in any order after the command word.
+> * All commands begin with a command word. <br>
+> *e.g.* `add`, `edit` <br>
+> * All keys start with the backslash `\`. <br>
+> *e.g.* `\from`, `\to` are the keys in `add Buy the milk \from 3pm \to 5pm` <br>
+> * Command words and keys that consist of multiple words will not contain spaces. Underscores are used instead. <br>
+> *e.g.* `list_tag`, `\remind_at` <br>
+> * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
+> * If you want to use backslash in the value, use `\\`. <br>
+> *e.g.* `add Remember to check file at C:\\users\\! \by 3pm` would appear as Remember to check file at C:\users\. <br>
+> * `(A|B)` means A and B can be used interchangeably. <br>
+> * Items in `[]` are optional. <br>
+> * Items with `...` after them can have multiple instances, separated by space. <br>
+> *e.g.* `[INDEX...]` means you can specify multiple indices for that command. <br>
+> * The keys can be entered in any order after the command word. <br>
+> *e.g.* `add Buy the milk \to 3pm \from 5pm` works too! <br>
+
 
 ### 3.1 Viewing help : `help`
 
@@ -119,7 +122,7 @@ Format: `(add|do) TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
 > - `add buy milk \from 12 Oct 3pm \to 4pm` <br>
 
 > **Remarks:** <br>
-> - See the table of acceptable date and time formats below
+> - See Fig 1. for acceptable date and time formats.
 
 **Deadline** <br>
 Add a task that has a deadline with the `\by` key.
@@ -130,12 +133,7 @@ Format: `(add|do) TASK_DESCRIPTION [\by TIME]`
 > - `add buy milk \by 3pm` <br>
 > - `add buy milk \by 28th Feb` <br>
 
-> **Remarks:** <br>
-> - `Start time` and `end time` will both be set to `TIME` in this format
-> - That is, `add ... by 8pm` is equivalent to `add ... from 8pm to 8pm`
-> - See the table of acceptable date and time formats below
-
-**Acceptable date and time formats** <br>
+**Fig 1. Acceptable date and time formats** <br>
 
 Date Format |Examples
 ----------- | :------- |
@@ -171,12 +169,12 @@ Format: `[\as PRIORITY]`
 > - `Priority` can be `normal`, `important`, `very important`
 
 **Reminder** <br>
-Add a task with a reminder timing with the `\remind` key. State the number of hours before the task's end time that you want to be reminded. A pop-up would appear to remind you about the task at that specified time! <br>
+Add a task with a reminder timing with the `\remind_at` key. State the number of hours before the task's end time that you want to be reminded. A pop-up will appear to remind you about the task at that specified time! <br>
 <br>
-Format: `[\remind REMINDER_RELATIVE_TIME]`
+Format: `[\remind_at REMINDER_RELATIVE_TIME]`
 > **Examples:** <br>
-> - `add buy milk \remind 3` <br>
-> - `add buy milk \remind 5 hrs before` <br>
+> - `add buy milk \remind_at 3` <br>
+> - `add buy milk \remind_at 5 hrs before` <br>
 
 **Recurrence Interval** <br>
 Add a recurring task with the `\every` key. If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and reminder time of the task will be updated to its next occurrence. <br>
@@ -198,16 +196,17 @@ Format: `[\under TAG...]`
 > - Tasks can have any number of tags (including 0)
 
 
-**More examples:**
+**Sample Commands:**
 
 * `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
 * `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
 
 ### 3.3 Listing tasks : `list`, `ls`
 
-You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and would need to filter them in some way to concentrate on doing those tasks. <br>
+You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and will need to filter them in some way to concentrate on doing those tasks. <br>
 `ls` is an alternative command word.
 
+**List pending, overdue, finished, all tasks** <br>
 List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
 <br>
 Format: `(list|ls) [TYPE]`
@@ -219,6 +218,7 @@ Format: `(list|ls) [TYPE]`
 > **Remarks:** <br>
 > - `list` will by default show both pending and overdue tasks.
 
+**List tasks during a time period** <br>
 List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
 <br>
 Format: `[\from TIME] [\to TIME] `
@@ -229,15 +229,16 @@ You can also use the `\in` key for tasks occurring `today`, `this week`, `this m
 > - `list \in this week` <br>
 
 > **Remarks:** <br>
-> - See the table of acceptable date and time formats above
+> - See Fig 1. for acceptable date and time formats
 
+**List tasks under tags** <br>
 List tasks that are under certain tags by using the `\under` key. <br>
 <br>
 Format: `[\under TAG]`
 > **Examples:** <br>
 > `list \under shopping` <br>
 
-**More examples:**
+**Sample Commmands**
 * `list pending \under school_work`
 * `list pending \in today`
 * `list \in this week`
@@ -245,7 +246,7 @@ Format: `[\under TAG]`
 
 ### 3.4 Finding a task : `find`
 
-You can use the `find` command to find tasks which description contain any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
+You can use the `find` command to find tasks whose description contains any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br>
 <br>
 Format: `find 'QUERY' ['QUERY'...]`
 > **Examples:** <br>
@@ -257,17 +258,17 @@ Format: `find 'QUERY' ['QUERY'...]`
 > - The search is case sensitive. *e.g* `hans` will not match `Hans` <br>
 > - The order of the search keys does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
 > - Only the task description is searched. <br>
-> - Tasks matching at least one search query will be returned (in otherwords, it is an `OR` search).
+> - Tasks matching at least one search query will be returned (in other words, it is an `OR` search).
     *e.g.* A task with a description of `Hans` will match search query `Hans Bo` <br>
 
-**More examples:**
+**Sample Commmands**
 
 * `find 'hiking'`
 * `find 'CS2103T' 'group meeting' 'project'`
 
 ### 3.5 Deleting a task : `delete`
 
-You can use the `delete` command to delete the specified tasks. You can delete more than one task by specifying multiple indices. <br>
+You can use the `delete` command to delete the task specifed by an index. The index refers to the index number of the task shown in the most recent listing. <br>
 <br>
 Format: `delete INDEX [INDEX...]`
 > **Examples:** <br>
@@ -275,11 +276,10 @@ Format: `delete INDEX [INDEX...]`
 
 > **Remarks:** <br>
 > - Deletes the tasks at the specified `INDEX`.<br>
-> - The index refers to the index number of the task shown in the most recent listing.<br>
-> - The index must be a **positive integer** 1, 2, 3, ...
+> - You can delete more than one task by specifying multiple indices.<br>
 
 
-**More examples:**
+**Sample Commands**
 * `list finished`<br>
   `delete 1 2`<br>
   Deletes the 1st and the 2nd tasks in the result of `list` command.
@@ -303,22 +303,21 @@ Use the `unfinish` command to change the status of an already finished task to n
 
 > **Remarks:** <br>
 > - The index refers to the index number of the task shown in the most recent listing.<br>
-> - The index must be a **positive integer** 1, 2, 3, ...<br>
-> - If the task(s) at the specified `INDEX` is/are already finished, there would be no changes made.
+> - If the task(s) at the specified `INDEX` is/are already finished, there will be no changes made.
 
-**More examples:**
+**Sample Commands**
 * `list pending \in this week`<br>
   `finish 1 2`<br>
   Marks the 1st and the 2nd tasks in the result of `list` command as finished.
 * `find 'project'`<br>
   `finish 1`<br>
-  Mark the 1st task in the results of the `find` command as finished.
+  Marks the 1st task in the results of the `find` command as finished.
 
 ### 3.7 Editing an existing task : `edit`
 
-You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task would not change! <br>
+You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task will not change! <br>
 <br>
-Format: `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
+Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
 
 Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 > **Examples:** <br>
@@ -327,11 +326,11 @@ Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 > **Remarks:** <br>
 > - Refer to the section about the `add` command to know how to use the keys of the `edit` command because they are used in the exact same way
 
-**More examples:**
+**Sample Commands**
 * `list`<br>
   `edit 1 \desc watch NBA \remind_at this Sunday 8am`<br>
   Suppose that the description of this task is originally `watch nba`,
-  the new description would be changed to `watch NBA`.
+  the new description will be changed to `watch NBA`.
   The reminder time will also be updated to the specified one which is `this Sunday 8am`.
 
 ### 3.8 Listing all the tags : `list_tag`, `ls_tag`
@@ -355,8 +354,8 @@ Format: `clear`
 
 ### 3.11 Setting an alias for a command word : `alias`
 
-Do you feel that our default command words are too lengthy and would like to set your own command words? <br>
-You can use `alias` to set an alias for an existing command word. You would then be able to use the alias to trigger the command! <br>
+Do you feel that our default command words are too lengthy and will like to set your own command words? <br>
+You can use `alias` to set an alias for an existing command word. You will then be able to use the alias to trigger the command! <br>
 <br>
 Format: `alias ALIAS \for COMMAND_WORD`
 > **Examples:** <br>
@@ -364,19 +363,12 @@ Format: `alias ALIAS \for COMMAND_WORD`
 
 > **Remarks:** <br>
 > - `ALIAS` should have no spaces, we suggest you use underscores to replace spaces. <br>
-> - If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word. Do try again!
-
+> - If you are unable to alias, you have either used that alias for another command word already or your alias is an existing command word.
 You can then use `view_alias` to view the list of aliases!
 <br>
 Format: `view_alias`
 
-### 3.12 Exiting the program : `exit`
-
-Use `exit` to exit Doist. Don't forget about us! <br>
-<br>
-Format: `exit`  
-
-### 3.13 Changing the storage destination : `save_at`
+### 3.12 Changing the storage destination : `save_at`
 
 You can use `save_at` to change the storage path of Doist. <br>
 <br>
@@ -387,18 +379,27 @@ Format: `save_at PATH`
 > - `save_at Desktop\todolist.xml` <br>
 
 > **Remarks:** <br>
-> - You can save at a relative path too.
+> - You can provide a relative path for this command.
 
-### 3.14 Saving the data
+### 3.13 Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-## 4. FAQ
+### 3.14 Exiting the program : `exit`
+
+Use `exit` to exit Doist. <br>
+<br>
+Format: `exit`  
+
+## 4. FAQs
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous Doist folder.
+
+**Q**: Do I need to save my data before I ext Doist? <br>
+**A**: You do not need to explicitly save your data, as Doist automatically does this for you!
 
 ## 5. Command Summary
 
