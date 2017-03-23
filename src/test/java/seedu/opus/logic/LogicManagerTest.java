@@ -784,7 +784,7 @@ public class LogicManagerTest {
             case 3:
                 return new Priority(Priority.Type.HIGH);
             default:
-                return new Priority(Priority.Type.NONE);
+                return null;
             }
         }
     }
