@@ -1,15 +1,10 @@
 package seedu.tache.ui;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.event.Event;
@@ -18,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import seedu.tache.MainApp;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
@@ -47,34 +43,19 @@ public class CalendarPanel extends UiPart<Region> {
         loadCalendar(taskList);
     }
 
-    //@@author A0139925U
+    //@@author A0142255M
     private void loadCalendar(ObservableList<ReadOnlyTask> taskList) {
-        try {
-            String calendarTemplate = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir")
-                    + "/src/main/resources/html/calendar.html")));
-            WebEngine engine = calendar.getEngine();
-            engine.loadContent(calendarTemplate);
-            for (ReadOnlyTask task : taskList) {
-                if (!task.getStartDateTime().isPresent()) {
-                    continue;
-                }
-                engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                        @Override
-                        public void changed(ObservableValue<? extends Worker.State> observable,
-                                                Worker.State oldValue, Worker.State newValue) {
-                            if (newValue != Worker.State.SUCCEEDED) {
-                                return;
-                            }
-                            engine.executeScript(getLoadTaskExecuteScript(task));
-                        }
-                });
+        String calendarURL = MainApp.class.getResource("/html/calendar.html").toExternalForm();
+        WebEngine engine = calendar.getEngine();
+        engine.load(calendarURL);
+        for (ReadOnlyTask task : taskList) {
+            if (!task.getStartDateTime().isPresent()) {
+                continue;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            engine.executeScript(getLoadTaskExecuteScript(task));
         }
     }
 
-    //@@author A0142255M
     private String getLoadTaskExecuteScript(ReadOnlyTask task) {
         String title = task.getName().toString();
         String start = task.getStartDateTime().get().getDateTimeForFullCalendar();
