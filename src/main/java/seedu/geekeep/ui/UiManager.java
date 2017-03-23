@@ -14,6 +14,7 @@ import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
+import seedu.geekeep.commons.events.model.TaskManagerChangedEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
 import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.events.ui.PersonPanelSelectionChangedEvent;
@@ -129,5 +130,11 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getFloatingTaskListPanel().switchListView(event.category);
         mainWindow.getDeadlineListPanel().switchListView(event.category);
         mainWindow.getEventListPanel().switchListView(event.category);
+    }
+    
+    @Subscribe
+    private void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.updateInnerParts();
     }
 }

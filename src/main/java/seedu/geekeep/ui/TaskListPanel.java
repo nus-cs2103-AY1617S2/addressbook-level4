@@ -48,13 +48,14 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     //TODO  only works for v0.2 checks
-    public TaskListPanel(String type, AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> allList) {
+    public TaskListPanel(String type, AnchorPane taskListPlaceholder,
+            ObservableList<ReadOnlyTask> allList, int startingIndex) {
         super(getFxmlFromType(type));
         this.type = type;
         currentListView = allListView;
-        setConnections(allList, allListView);
-        setConnections(allList.filtered(t -> t.isDone()), completedListView);
-        setConnections(allList.filtered(t -> !t.isDone()), upcomingListView);
+        setConnections(allList, allListView, startingIndex);
+        setConnections(allList.filtered(t -> t.isDone()), completedListView, startingIndex);
+        setConnections(allList.filtered(t -> !t.isDone()), upcomingListView, startingIndex);
         addToPlaceholder(taskListPlaceholder);
     }
 
@@ -69,9 +70,10 @@ public class TaskListPanel extends UiPart<Region> {
         }
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList, ListView<ReadOnlyTask> taskListView) {
+    private void setConnections(ObservableList<ReadOnlyTask> taskList,
+            ListView<ReadOnlyTask> taskListView, int startingIndex) {
         taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new PersonListViewCell());
+        taskListView.setCellFactory(listView -> new PersonListViewCell(startingIndex));
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
@@ -121,6 +123,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
+        int startingIndex = 0;
+
+        public PersonListViewCell(int startingIndex) {
+            super();
+            this.startingIndex = startingIndex;
+        }
         @Override
         protected void updateItem(ReadOnlyTask person, boolean empty) {
             super.updateItem(person, empty);
@@ -129,7 +137,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(person, getIndex() + startingIndex + 1).getRoot());
             }
         }
     }

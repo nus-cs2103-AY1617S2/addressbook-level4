@@ -117,16 +117,21 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
 
-        eventListPanel = new TaskListPanel("event", getEventListPlaceholder(), logic.getFilteredEventList());
-        floatingTaskListPanel = new TaskListPanel("floatingTask",
-                getFloatingTaskListPlaceholder(), logic.getFilteredFloatingTaskList());
-        deadlineListPanel = new TaskListPanel("deadline",
-                getDeadlineListPlaceholder(), logic.getFilteredDeadlineList());
-
+        updateInnerParts();
 
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+    }
+
+    public void updateInnerParts() {
+        eventListPanel = new TaskListPanel("event", getEventListPlaceholder(),
+                logic.getFilteredEventList(), 0);
+        floatingTaskListPanel = new TaskListPanel("floatingTask", getFloatingTaskListPlaceholder(),
+                logic.getFilteredFloatingTaskList(), logic.getFilteredEventList().size());
+        deadlineListPanel = new TaskListPanel("deadline", getDeadlineListPlaceholder(),
+                logic.getFilteredDeadlineList(),
+                logic.getFilteredEventList().size() + logic.getFilteredFloatingTaskList().size());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
