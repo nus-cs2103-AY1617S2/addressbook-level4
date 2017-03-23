@@ -33,6 +33,17 @@ public class EndDate {
         	}
         }
     }
+    
+    /*
+     * for JAXB use
+     */
+    public EndDate(LocalDate startdate) {
+            value = startdate;
+        }
+    
+    public LocalDate getValue() {
+        return value;
+    }
 
     @Override
     public String toString() {

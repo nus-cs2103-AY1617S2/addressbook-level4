@@ -30,6 +30,19 @@ public class StartDate {
         }
     }
 
+    //@@author A0121668A
+    /*
+     * for JAXB use
+     */
+    public StartDate(LocalDate startdate) {
+        value = startdate;
+    }
+   
+    public LocalDate getValue() {
+        return value;
+    }
+//@@author
+
     @Override
     public String toString() {
         return value.toString();

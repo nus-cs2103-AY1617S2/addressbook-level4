@@ -34,8 +34,15 @@ public class ByTime {
                 }
             }
         }
+//@@author A0121668A
+/*
+ * For JAXB use
+ */
+    public ByTime(LocalTime bytime) {
+            value = bytime;
+        }
 
-//@@author
+    //@@author
     @Override
     public String toString() {
         return value.toString();
@@ -51,6 +58,10 @@ public class ByTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public LocalTime getValue() {
+        return value;
     }
 
 }

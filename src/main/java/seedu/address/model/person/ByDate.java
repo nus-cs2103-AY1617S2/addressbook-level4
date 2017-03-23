@@ -39,7 +39,15 @@ public class ByDate {
         }
     }
     
-  //@@author
+//@@author A0121668A
+    /*
+     * For JAXB use
+     */
+    public ByDate(LocalDate bydate) {
+        value = bydate;
+    }
+
+    //@@author
     @Override
     public String toString() {
         return value.toString();

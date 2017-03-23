@@ -33,6 +33,17 @@ public class StartTime {
             }
         }
     }
+    
+    /*
+     * For JAXB use
+     */
+    public StartTime(LocalTime starttime) {
+        value = starttime;
+    }
+
+    public LocalTime getValue() {
+        return value;
+    }
 
     @Override
     public String toString() {
@@ -50,5 +61,4 @@ public class StartTime {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

@@ -33,6 +33,17 @@ public class EndTime {
                 }
             }
         }
+    
+    /*
+     * For JAXB use
+     */
+    public EndTime(LocalTime endtime) {
+        value = endtime;
+    }
+
+    public LocalTime getValue() {
+        return value;
+    }
 
     @Override
     public String toString() {
@@ -50,5 +61,4 @@ public class EndTime {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
