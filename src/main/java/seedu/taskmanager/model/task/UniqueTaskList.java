@@ -173,13 +173,8 @@ public class UniqueTaskList implements Iterable<Task> {
                 }
             });
             ;
+        } else {
+            return; // Error message will be thrown by SortCommand
         }
-
-        // Error message will be thrown by SortCommand
-        else {
-            return;
-        }
-
     }
-
 }
