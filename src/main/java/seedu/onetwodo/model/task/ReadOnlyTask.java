@@ -37,6 +37,7 @@ public interface ReadOnlyTask {
         return getEndDate().hasDate();
     }
 
+    // @@author A0141138N
     default boolean hasPriority() {
         return getPriority().hasPriority();
     }
@@ -56,7 +57,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()))
+                        && other.getName().equals(this.getName())) && other.getPriority().equals(this.getPriority())
                         && String.valueOf(other.getDoneStatus()).equals(String.valueOf(this.getDoneStatus()));
     }
 

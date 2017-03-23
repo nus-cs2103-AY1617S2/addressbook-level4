@@ -13,6 +13,8 @@ import seedu.onetwodo.model.task.Task;
 import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
+
+    // @@author A0141138N
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
@@ -28,8 +30,8 @@ public class SampleDataUtil {
                     new Task(new Name("complete 2103 tutorial"), new StartDate(""), new EndDate("tomorrow"),
                             new Priority("l"), new Description("bring laptop"),
                             new UniqueTagList("school", "favourite")),
-                    new Task(new Name("finish assignments"), new StartDate(""), new EndDate("11pm"),
-                            new Priority("m"), new Description(""), new UniqueTagList("")),
+                    new Task(new Name("finish assignments"), new StartDate(""), new EndDate("11pm"), new Priority("m"),
+                            new Description(""), new UniqueTagList("")),
                     new Task(new Name("buy new bag"), new StartDate(""), new EndDate(""), new Priority("l"),
                             new Description("find cheap ones"), new UniqueTagList("shopping", "favourite", "hobby")),
                     new Task(new Name("change shirt"), new StartDate(""), new EndDate(""), new Priority("l"),
