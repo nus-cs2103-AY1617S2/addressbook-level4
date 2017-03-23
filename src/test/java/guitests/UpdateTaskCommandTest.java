@@ -58,14 +58,14 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         // add task with deadline
         String taskDescription = "get v0.2 ready";
         LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
-        String command = "add " + taskDescription + " enddate/" + endDate;
+        String command = "add " + taskDescription + " by/" + endDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription, endDate);
         assertTrue(isTaskShown(task));
 
         // update task deadline
         LocalDateTime newEndDate = DateTimeUtil.parseDateString("22 Mar 2017, 11am");
-        command = "update " + eventIndex + " enddate/" + newEndDate;
+        command = "update " + eventIndex + " by/" + newEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, newEndDate);
         assertFalse(isTaskShown(task));
@@ -83,7 +83,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         // update all parameters for task with deadline and tags
         String newerTaskDescription = "get v0.2 ready";
         LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
-        command = "update " + eventIndex + " " + newerTaskDescription + " enddate/" + newerEndDate + " tags/tag1 tag3";
+        command = "update " + eventIndex + " " + newerTaskDescription + " by/" + newerEndDate + " tags/tag1 tag3";
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, null, newerEndDate);
         task4.replaceTags(new ArrayList<>(Arrays.asList(tag1, tag3)));
@@ -101,7 +101,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         String taskDescription = "attend CS2103T tutorial";
         LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
-        String command = "add " + taskDescription + " startdate/" + startDate + " enddate/" + endDate;
+        String command = "add " + taskDescription + " from/" + startDate + " to/" + endDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription, startDate, endDate);
         assertTrue(isTaskShown(task));
@@ -109,7 +109,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         // update event start date and end date
         LocalDateTime newStartDate = DateTimeUtil.parseDateString("22 Mar 2017, 12pm");
         LocalDateTime newEndDate = DateTimeUtil.parseDateString("22 Mar 2017, 1pm");
-        command = "update " + eventIndex + " startdate/" + newStartDate + " enddate/" + newEndDate;
+        command = "update " + eventIndex + " from/" + newStartDate + " to/" + newEndDate;
         commandBox.runCommand(command);
         Task task2 = new Task(taskDescription, newStartDate, newEndDate);
         assertFalse(isTaskShown(task));
@@ -129,7 +129,7 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         LocalDateTime newerStartDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime newerEndDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
         command = "update " + eventIndex + " " + newerTaskDescription +
-                  " enddate/" + newerEndDate + " tags/tag1 "  + " startdate/" + newerStartDate;
+                  " to/" + newerEndDate + " tags/tag1 "  + " from/" + newerStartDate;
         commandBox.runCommand(command);
         Task task4 = new Task(newerTaskDescription, newerStartDate, newerEndDate);
         task4.replaceTags(new ArrayList<>(Arrays.asList(tag1)));
@@ -137,6 +137,160 @@ public class UpdateTaskCommandTest extends ToLuistGuiTest {
         assertFalse(isTaskShown(task2));
         assertFalse(isTaskShown(task3));
         assertTrue(isTaskShown(task4));
+    }
+
+    @Test
+    public void updateMultipleTypeTask_shouldNotBeUpdated() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 5pm");
+        String command = "add " + taskDescription + " from/" + startDate + " to/" + endDate;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, startDate, endDate);
+        assertTrue(isTaskShown(task));
+
+        // Update to both event, and floating task
+        command = "update " + eventIndex + " floating/" + " from/" + startDate + " to/" + endDate;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+
+        // Update to both event, and task with deadline
+        command = "update " + eventIndex + " from/" + startDate + " to/" + endDate + " by/" + endDate2;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+
+        // Update to both floating task, and task with deadline
+        command = "update " + eventIndex + " floating/" + " by/" + endDate2;
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+
+        // Update to all floating task, task with deadline, event
+        command = "update " + eventIndex + " by/" + endDate2 + " from/" + startDate + " to/" + endDate + " floating/";
+        commandBox.runCommand(command);
+        assertTrue(isTaskShown(task));
+    }
+
+    @Test
+    public void updateFloatingTaskToEvent() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription);
+        assertTrue(isTaskShown(task));
+
+        // Event
+        command = "update " + eventIndex + " from/" + startDate + " to/" + endDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, startDate, endDate);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateFloatingTaskToTaskWithDeadline() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 5pm");
+        String command = "add " + taskDescription;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription);
+        assertTrue(isTaskShown(task));
+
+        // Task with deadline
+        command = "update " + eventIndex + " by/" + endDate2;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, endDate2);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateTaskWithDeadlineToFloatingTask() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 5pm");
+        String command = "add " + taskDescription + " by/" + endDate2;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, endDate2);
+        assertTrue(isTaskShown(task));
+
+        // Floating task
+        command = "update " + eventIndex + " floating/";
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateTaskWithDeadlineToEvent() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 5pm");
+        String command = "add " + taskDescription + " by/" + endDate2;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, endDate2);
+        assertTrue(isTaskShown(task));
+
+        // Task with deadline to event
+        command = "update " + eventIndex + " from/" + startDate + " to/" + endDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, startDate, endDate);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateEventToFloatingTask() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        String command = "add " + taskDescription + " from/" + startDate + " to/" + endDate;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, startDate, endDate);
+        assertTrue(isTaskShown(task));
+
+        // Event to floating task
+        command = "update " + eventIndex + " floating/";
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
+    }
+
+    @Test
+    public void updateEventToTaskWithDeadline() {
+        int eventIndex = 1;
+
+        String taskDescription = "attend CS2103T tutorial";
+        LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
+        LocalDateTime endDate = DateTimeUtil.parseDateString("15 Mar 2017, 1pm");
+        LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 5pm");
+        String command = "add " + taskDescription + " from/" + startDate + " to/" + endDate;
+        commandBox.runCommand(command);
+        Task task = new Task(taskDescription, startDate, endDate);
+        assertTrue(isTaskShown(task));
+
+        // Event to task with deadline
+        command = "update " + eventIndex + " by/" + endDate2;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, endDate2);
+        assertFalse(isTaskShown(task));
+        assertTrue(isTaskShown(task2));
     }
 
     @Test

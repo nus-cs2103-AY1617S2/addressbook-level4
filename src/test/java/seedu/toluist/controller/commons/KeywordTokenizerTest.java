@@ -95,15 +95,18 @@ public class KeywordTokenizerTest {
 
     @Test
     public void tokenize_updateTaskCommand() {
-        String description = "update v0.3 enddate/next wednesday tags/ohno tag manysubtasks startdate/today";
-        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", "startdate/",
-                                                                                               "enddate/",
+        String description = "update v0.3 to/next wednesday tags/ohno tag manysubtasks from/today floating/";
+        HashMap<String, String> actual = KeywordTokenizer.tokenize(description, "description", "from/",
+                                                                                               "to/",
+                                                                                               "by/",
+                                                                                               "floating/",
                                                                                                "tags/");
         HashMap<String, String> expected = new HashMap<String, String>();
         expected.put("description", "update v0.3");
-        expected.put("startdate/", "today");
-        expected.put("enddate/", "next wednesday");
+        expected.put("from/", "today");
+        expected.put("to/", "next wednesday");
         expected.put("tags/", "ohno tag manysubtasks");
+        expected.put("floating/", "");
         assertTrue(actual.equals(expected));
     }
 }
