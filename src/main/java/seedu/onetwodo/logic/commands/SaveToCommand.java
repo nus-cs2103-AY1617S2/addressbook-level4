@@ -14,13 +14,14 @@ import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.storage.StorageManager;
+import seedu.onetwodo.storage.ToDoListStorage;
 
 /**
  * Change the saving location of the task manager to a specified location.
  */
 public class SaveToCommand extends Command {
 
-    public static final String COMMAND_WORD = "save to";
+    public static final String COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Change the saving location of this task manager to a specified location.\n"
@@ -49,13 +50,24 @@ public class SaveToCommand extends Command {
                 // change storage file path.
                 // update main window and event center
                 Config config = MainApp.getConfig();
-                StorageManager storage = (StorageManager) MainApp.getStorage();
+                StorageManager storageManager = (StorageManager) MainApp.getStorage();
+                ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
+                
                 config.setToDoListFilePath(filePath);
                 ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
                 String updatedFilePath = config.getToDoListFilePath();
-                storage.setToDoListFilePath(updatedFilePath);
-                ReadOnlyToDoList toDoList = storage.getToDoListStorage().readToDoList().get();
+                
+                System.out.println("new path: " + updatedFilePath);
+                ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
+                storageManager.setToDoListFilePath(updatedFilePath);
+                toDoListStorage.saveToDoList(toDoList);
+                System.out.println("set storage path!");
+                
+                
                 EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
+                
+                System.out.println("called event change!");
+
             }
         } catch (IOException ioe) {
             return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(ioe));
