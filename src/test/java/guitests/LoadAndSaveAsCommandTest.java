@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.Test;
@@ -22,8 +23,9 @@ import seedu.address.testutil.TestUtil;
 public class LoadAndSaveAsCommandTest extends TaskManagerGuiTest {
 
     public String rootFolder = "src/test/data/";
-    public String file1 = "taskmanager1.xml";
-    public String file2 = "taskmanager2.xml";
+    public long timeOfTest = (new Date()).getTime();
+    public String file1 = timeOfTest + "taskmanager1.xml";
+    public String file2 = timeOfTest + "taskmanager2.xml";
 
     @Test
     public void testLoadAndSaveAs_ValidFiles() {
