@@ -27,10 +27,8 @@ public class UnmarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the task identified "
             + "by the index number used in the last task listing as not completed. "
-            + "Unmarking will set completion to false.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Unmarking will set completion to false.\n" + "Parameters: INDEX (must be a positive integer) "
+            + "[NAME]\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Unmarked Task: %1$s";
     public static final String MESSAGE_NOT_UNMARKED = "At least one field to mark must be provided.";
@@ -39,8 +37,10 @@ public class UnmarkCommand extends Command {
     private final int filteredTaskListIndex;
 
     /**
-     * @param filteredTaskListIndex the index of the person in the filtered person list to mark
-     * @param markTaskDescriptor details to mark the person with
+     * @param filteredTaskListIndex
+     *            the index of the person in the filtered person list to mark
+     * @param markTaskDescriptor
+     *            details to mark the person with
      */
     public UnmarkCommand(int filteredTaskListIndex) {
         assert filteredTaskListIndex > 0;
@@ -70,21 +70,21 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Task} with the details of {@code taskToUnmark}
-     * marked with {@code markTaskDescriptor}.
-     * @throws IllegalValueException 
+     * Creates and returns a {@code Task} with the details of
+     * {@code taskToUnmark} marked with {@code markTaskDescriptor}.
+     * 
+     * @throws IllegalValueException
      */
     private static Task createUnmarkedTask(ReadOnlyTask taskToUnmark) throws IllegalValueException {
         assert taskToUnmark != null;
 
         return new Task(taskToUnmark.getName(), taskToUnmark.getStart(), taskToUnmark.getDeadline(),
-                        taskToUnmark.getPriority(), taskToUnmark.getTags(), taskToUnmark.getNotes(),
-                        new Completion("false"));
+                taskToUnmark.getPriority(), taskToUnmark.getTags(), taskToUnmark.getNotes(), new Completion("false"));
     }
 
     /**
-     * Stores the details to mark the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to mark the person with. Each non-empty field value
+     * will replace the corresponding field value of the person.
      */
     public static class UnmarkTaskDescriptor {
         private Optional<Name> name = Optional.empty();
@@ -95,7 +95,8 @@ public class UnmarkCommand extends Command {
         private Optional<Notes> notes = Optional.empty();
         private Optional<Completion> completion = Optional.empty();
 
-        public UnmarkTaskDescriptor() {}
+        public UnmarkTaskDescriptor() {
+        }
 
         public UnmarkTaskDescriptor(UnmarkTaskDescriptor toCopy) {
             this.name = toCopy.getName();
@@ -158,7 +159,7 @@ public class UnmarkCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-        
+
         public void setNotes(Optional<Notes> notes) {
             assert notes != null;
             this.notes = notes;

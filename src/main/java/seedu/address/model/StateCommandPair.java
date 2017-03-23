@@ -24,8 +24,9 @@ public class StateCommandPair {
 
     /**
      * Executes the command previously entered (for redo)
+     * 
      * @throws CommandException
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void executeCommand() throws CommandException, IllegalValueException {
         this.executeCommand.setData(model);
@@ -34,8 +35,9 @@ public class StateCommandPair {
 
     /**
      * Executes the inverse of the command previously entered (for undo)
+     * 
      * @throws CommandException
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public void executeInverseCommand() throws CommandException, IllegalValueException {
         System.out.println("State Pair - executing undo");

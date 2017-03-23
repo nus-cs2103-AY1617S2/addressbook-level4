@@ -27,9 +27,7 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified "
             + "by the index number used in the last task listing as completed. "
-            + "Marking will set completion to true.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME]\n"
+            + "Marking will set completion to true.\n" + "Parameters: INDEX (must be a positive integer) " + "[NAME]\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
@@ -39,8 +37,10 @@ public class MarkCommand extends Command {
     private final int filteredTaskListIndex;
 
     /**
-     * @param filteredTaskListIndex the index of the person in the filtered person list to mark
-     * @param markTaskDescriptor details to mark the person with
+     * @param filteredTaskListIndex
+     *            the index of the person in the filtered person list to mark
+     * @param markTaskDescriptor
+     *            details to mark the person with
      */
     public MarkCommand(int filteredTaskListIndex) {
         assert filteredTaskListIndex > 0;
@@ -72,19 +72,19 @@ public class MarkCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToMark}
      * marked with {@code markTaskDescriptor}.
-     * @throws IllegalValueException 
+     * 
+     * @throws IllegalValueException
      */
     private static Task createMarkedTask(ReadOnlyTask taskToMark) throws IllegalValueException {
         assert taskToMark != null;
 
-        return new Task(taskToMark.getName(), taskToMark.getStart(), taskToMark.getDeadline(),
-                        taskToMark.getPriority(), taskToMark.getTags(), taskToMark.getNotes(),
-                        new Completion("true"));
+        return new Task(taskToMark.getName(), taskToMark.getStart(), taskToMark.getDeadline(), taskToMark.getPriority(),
+                taskToMark.getTags(), taskToMark.getNotes(), new Completion("true"));
     }
 
     /**
-     * Stores the details to mark the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to mark the person with. Each non-empty field value
+     * will replace the corresponding field value of the person.
      */
     public static class MarkTaskDescriptor {
         private Optional<Name> name = Optional.empty();
@@ -95,7 +95,8 @@ public class MarkCommand extends Command {
         private Optional<Notes> notes = Optional.empty();
         private Optional<Completion> completion = Optional.empty();
 
-        public MarkTaskDescriptor() {}
+        public MarkTaskDescriptor() {
+        }
 
         public MarkTaskDescriptor(MarkTaskDescriptor toCopy) {
             this.name = toCopy.getName();
@@ -158,7 +159,7 @@ public class MarkCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
-        
+
         public void setNotes(Optional<Notes> notes) {
             assert notes != null;
             this.notes = notes;

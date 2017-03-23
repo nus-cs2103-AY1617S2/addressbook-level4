@@ -43,7 +43,6 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-
     public void setStart(Start start) {
         this.start = start;
     }
@@ -97,7 +96,7 @@ public class TestTask implements ReadOnlyTask {
     public Notes getNotes() {
         return notes;
     }
-    
+
     @Override
     public Completion getCompletion() {
         return completion;
