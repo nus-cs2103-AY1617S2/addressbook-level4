@@ -37,10 +37,9 @@ public class UnmarkCommand extends Command {
     private final int filteredTaskListIndex;
 
     /**
-     * @param filteredTaskListIndex
-     *            the index of the person in the filtered person list to mark
-     * @param markTaskDescriptor
-     *            details to mark the person with
+     * @param filteredTaskListIndex the index of the person in the filtered
+     *            person list to mark
+     * @param markTaskDescriptor details to mark the person with
      */
     public UnmarkCommand(int filteredTaskListIndex) {
         assert filteredTaskListIndex > 0;
@@ -72,7 +71,6 @@ public class UnmarkCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of
      * {@code taskToUnmark} marked with {@code markTaskDescriptor}.
-     * 
      * @throws IllegalValueException
      */
     private static Task createUnmarkedTask(ReadOnlyTask taskToUnmark) throws IllegalValueException {

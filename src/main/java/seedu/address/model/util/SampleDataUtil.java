@@ -17,10 +17,10 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                    new Task(new Name("Buy printer"), new Start("today"), new Deadline("tomorrow"), new Priority(1),
-                            new UniqueTagList("shopping"), new Notes("this is a note"), new Completion("true")),
-                    new Task(new Name("Go to the gym"), new Start(""), new Deadline(""), new Priority(0),
-                            new UniqueTagList("exercise"), new Notes(""), new Completion("")), };
+                new Task(new Name("Buy printer"), new Start("today"), new Deadline("tomorrow"), new Priority(1),
+                        new UniqueTagList("shopping"), new Notes("this is a note"), new Completion("true")),
+                new Task(new Name("Go to the gym"), new Start(""), new Deadline(""), new Priority(0),
+                        new UniqueTagList("exercise"), new Notes(""), new Completion("")), };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }
