@@ -63,7 +63,7 @@ public class EditCommandTest extends TaskBossGuiTest {
     }
 
     //@@author A0143157J
-    // EP: invalid edit command with start date later than end date
+    // EP: edit to remove start date
     @Test
     public void edit_removeDate_sucess() throws IllegalValueException {
         String detailsToEdit = "sd/";
