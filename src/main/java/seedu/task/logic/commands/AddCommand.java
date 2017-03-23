@@ -5,10 +5,8 @@ import java.util.Set;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
-
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.Task;
@@ -49,7 +47,7 @@ public class AddCommand extends Command {
                 new Timing(startTiming),
                 new Timing(endTiming),
                 new UniqueTagList(tagSet)
-        );
+                );
     }
 
     @Override

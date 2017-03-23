@@ -6,11 +6,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.task.commons.exceptions.IllegalValueException;
+
 public class TimingTest {
 
 
     @Test
-    public void isValidTiming() {
+    public void isValidTiming() throws IllegalValueException {
         // // blank timing
         assertFalse(Timing.isValidTiming("")); // empty string
         assertFalse(Timing.isValidTiming(" ")); // spaces only
@@ -20,11 +22,14 @@ public class TimingTest {
         assertFalse(Timing.isValidTiming("31/2017")); // missing month
         assertFalse(Timing.isValidTiming("05/30")); // missing year
         // // missing parts ("HH:mm dd/MM/yyyy")
-        assertFalse(Timing.isValidTiming("25 02/03/2018")); // missing hour
+        assertFalse(Timing.isValidTiming(":25 02/03/2018")); // missing hour
         assertFalse(Timing.isValidTiming("12 02/03/2018")); // missing minute
         assertFalse(Timing.isValidTiming("12:25 03/2018")); // missing day
         assertFalse(Timing.isValidTiming("12:25 02/2018")); // missing month
         assertFalse(Timing.isValidTiming("12:25 02/03")); // missing year
+        // // missing parts ("HH:mm")
+        assertFalse(Timing.isValidTiming("05")); // missing minute
+        assertFalse(Timing.isValidTiming(":15")); // missing hour
         //
         // // invalid parts ("dd/MM/yyyy")
         assertFalse(Timing.isValidTiming("0/06/2017")); // invalid day (boundary case)
@@ -78,5 +83,11 @@ public class TimingTest {
         assertTrue(Timing.isValidTiming("10:00 14/9/2020")); // boundary case for minute
         assertTrue(Timing.isValidTiming("15:59 14/9/2020")); // boundary case for minute
         assertTrue(Timing.isValidTiming("0:00 14/9/2020")); // boundary case for hour and minute
+        //
+        // // valid timing (only "HH:mm" given) - Should not throw IllegalValueException
+        Timing test1 = new Timing("00:15"); // boundary case for hour
+        Timing test2 = new Timing("23:15"); // boundary case for hour
+        Timing test3 = new Timing("12:00"); // boundary case for minute
+        Timing test4 = new Timing("12:59"); // boundary case for minute
     }
 }

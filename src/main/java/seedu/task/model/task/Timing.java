@@ -1,6 +1,7 @@
 //@@author A0164212U
 package seedu.task.model.task;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,15 +16,16 @@ import seedu.task.commons.exceptions.IllegalValueException;
 public class Timing implements Comparable<Timing> {
 
     public static final String MESSAGE_TIMING_CONSTRAINTS =
-            "Task timing should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy";
-    public static final String[] TIMING_FORMAT = {
-        "HH:mm dd/MM/yyyy", "dd/MM/yyyy" };
+            "Task timing should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy " +
+                    "Use only HH:mm if today is the default date";
+    public static final String[] TIMING_FORMAT = {"HH:mm dd/MM/yyyy", "dd/MM/yyyy"};
     public static final String NULL_TIMING = "n/a";
     public final String value;
     private Date timing;
 
     /**
      * Validates given timing.
+     * Sets today's date as default if only time is specified
      *
      * @throws IllegalValueException
      *             if given timing string is invalid.
@@ -31,11 +33,14 @@ public class Timing implements Comparable<Timing> {
     public Timing(String time) throws IllegalValueException {
         if (time != null) {
             String trimmedTiming = time.trim();
+            if (!trimmedTiming.equals(NULL_TIMING) && trimmedTiming.length() <= 5) {
+                trimmedTiming = trimmedTiming + " " + Timing.getTodayDate();
+            }
             if (!isValidTiming(trimmedTiming)) {
                 throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
             }
             this.value = trimmedTiming;
-            setTiming(time);
+            setTiming(trimmedTiming);
         } else {
             this.value = NULL_TIMING;
             this.timing = null;
@@ -59,7 +64,6 @@ public class Timing implements Comparable<Timing> {
                     // check if year is truly 4 digits (the 'yyyy' regex does not support this)
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(date);
-                    System.out.println(cal.get(Calendar.YEAR));
                     if (cal.get(Calendar.YEAR) >= 1000 && cal.get(Calendar.YEAR) <= 9999) {
                         isValid = true;
                     }
@@ -104,6 +108,13 @@ public class Timing implements Comparable<Timing> {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public static String getTodayDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateString = dateFormat.format(date);
+        return dateString;
     }
 
     //@@author A0163559U
