@@ -108,8 +108,8 @@ public class Parser {
             }
 
         case MarkCommand.COMMAND_WORD:
-            return new MarkCommandParser().parse(arguments);	  
-        	  
+            return new MarkCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

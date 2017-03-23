@@ -1,19 +1,13 @@
 package seedu.watodo.logic.commands;
 
-import java.util.Optional;
-
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
-import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Marks a task identified using it's last displayed index from the task manager as completed.
@@ -36,7 +30,7 @@ public class MarkCommand extends Command {
 
     public MarkCommand(int filteredTaskListIndex) {
         assert filteredTaskListIndex > 0;
-        
+
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
     }
@@ -54,14 +48,14 @@ public class MarkCommand extends Command {
         try {
             Task markedTask = createMarkedTask(taskToMark);
             model.updateTask(filteredTaskListIndex, markedTask);
-            
-        } catch (UniqueTaskList.DuplicateTaskException dpe) { 
+
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        
+
         } catch (IllegalValueException ive) {
             throw new CommandException (MESSAGE_STATUS_DONE);
         }
-        
+
         // TODO: TaskNotFoundException?
         // TODO: Remove from list and update list
         model.updateFilteredListToShowAll();
@@ -69,7 +63,6 @@ public class MarkCommand extends Command {
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark));
     }
 
-    
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToMark}
      */
@@ -79,8 +72,9 @@ public class MarkCommand extends Command {
         if (taskToMark.getStatus() == TaskStatus.DONE) {
             throw new IllegalValueException(MESSAGE_STATUS_DONE);
         }
-        
-        Task markedTask = new Task(taskToMark.getDescription(), taskToMark.getStartDate(), taskToMark.getEndDate(), taskToMark.getTags());
+
+        Task markedTask = new Task(taskToMark.getDescription(), taskToMark.getStartDate(),
+                                   taskToMark.getEndDate(), taskToMark.getTags());
         markedTask.setStatus(TaskStatus.DONE);
 
         return markedTask;
