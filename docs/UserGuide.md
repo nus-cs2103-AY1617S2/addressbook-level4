@@ -172,10 +172,10 @@ There is no need to save manually.
 * **Delete** : `delete INDEX` <br>
    e.g. `delete f3`
 
-* **Edit** : `edit INDEX [TITLE] [/venue] [/from] [/to] [/level] [/description] [#TAG]...`
+* **Edit** : `edit INDEX [TITLE] [/venue] [/from] [/to] [/level] [/description] [#TAG]...` <br>
 e.g. `edit f7 buy calculator`
 
-* **Exit** : `exit`
+* **Exit** : `exit` <br>
 e.g.
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
@@ -187,11 +187,11 @@ e.g.
 * **List** : `list` <br>
   e.g. 
 
-* **ListTag** : `listtag`
+* **ListTag** : `listtag` <br>
 e.g.
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
 
-* **Undo** : `undo`
+* **Undo** : `undo` <br>
 e.g. 'undo'
