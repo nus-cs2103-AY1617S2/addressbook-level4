@@ -56,12 +56,6 @@ public class ChangeDirectoryCommand extends Command {
         
         newConfig.setTaskManagerFilePath(this.newPath);
         
-        try {
-            ConfigUtil.saveConfig(newConfig, configFilePathUsed);
-        } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_SAVECONFIG + StringUtil.getDetails(e));
-        }
-        
         // Overwrite method
 //        storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
         
@@ -79,6 +73,11 @@ public class ChangeDirectoryCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_READ_TASKMANAGER);
         }
         
+        try {
+            ConfigUtil.saveConfig(newConfig, configFilePathUsed);
+        } catch (IOException e) {
+            throw new CommandException(MESSAGE_ERROR_SAVECONFIG + StringUtil.getDetails(e));
+        }
         
         return new CommandResult(MESSAGE_SUCCESS + this.newPath);
     }
