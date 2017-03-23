@@ -23,7 +23,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
     public void load_fileNotExists() {
         String newPath = TestUtil.getFilePathInSandboxFolder("load_test.json");
         FileUtil.removeFile(new File(newPath));
-        String command = "getInstance " + newPath;
+        String command = "load " + newPath;
         commandBox.runCommand(command);
 
         // Check that storage path is not changed
@@ -34,7 +34,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
     @Test
     public void load_fileExists() {
         String newPath = "./src/test/data/StorageTest/TypicalData.json";
-        String command = "getInstance " + newPath;
+        String command = "load " + newPath;
         commandBox.runCommand(command);
 
         // Check that storage path is changed
@@ -50,7 +50,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
     @Test
     public void load_sameLocation() {
         String newPath = TestApp.SAVE_LOCATION_FOR_TESTING;
-        String command = "getInstance " + newPath;
+        String command = "load " + newPath;
         commandBox.runCommand(command);
 
         assertResultMessage(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, newPath));
@@ -58,7 +58,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
 
     @Test
     public void load_noStoragePath() {
-        String command = "getInstance ";
+        String command = "load ";
         commandBox.runCommand(command);
 
         assertResultMessage(Messages.MESSAGE_NO_STORAGE_PATH);
@@ -67,7 +67,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
     @Test
     public void load_invalidStoragePath() {
         String newPath = "sfas?////sffsf.json";
-        String command = "getInstance " + newPath;
+        String command = "load " + newPath;
         commandBox.runCommand(command);
         assertResultMessage(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, newPath));
     }
@@ -75,7 +75,7 @@ public class LoadCommandTest extends ToLuistGuiTest {
     @Test
     public void load_invalidData() {
         String newPath = "./src/test/data/StorageTest/NotJsonFormatData.json";
-        String command = "getInstance " + newPath;
+        String command = "load " + newPath;
         commandBox.runCommand(command);
 
         assertEquals(Config.getInstance().getTodoListFilePath(), TestApp.SAVE_LOCATION_FOR_TESTING);

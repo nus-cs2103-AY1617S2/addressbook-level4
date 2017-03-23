@@ -101,7 +101,7 @@ public class TodoList {
         return new ArrayList<>(taskList);
     }
 
-    public void setTasks(ArrayList<Task> newTaskList) {
-        allTasks = newTaskList;
+    public void setTasks(List<Task> newTaskList) {
+        allTasks = new ArrayList<>(newTaskList);
     }
 }

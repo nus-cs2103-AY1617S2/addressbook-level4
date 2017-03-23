@@ -3,15 +3,25 @@ package guitests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.testutil.TypicalTestTodoLists;
+
+import java.util.Arrays;
 
 /**
  * Gui tests for redo command
  */
 public class RedoCommandTest extends ToLuistGuiTest {
+    @Before
+    public void setUp() {
+        TodoList.getInstance().setTasks(Arrays.asList(new TypicalTestTodoLists().getTypicalTasks()));
+        TodoList.getInstance().save();
+    }
+
     @Test
     public void redoSingleCommand() {
         String taskDescription = "build a rocket";
