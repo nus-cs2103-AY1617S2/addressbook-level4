@@ -154,10 +154,10 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
   
-### 2.9 Mark task as done : `mark`
+### 2.9 Mark task as done : `done`
 
 Marks the specified task from the task scheduler as done.
-Format: `mark INDEX`
+Format: `done INDEX`
 
 > Marks the task at the specified `INDEX` as done. <br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -169,13 +169,9 @@ Examples:
 * `mark 1`<br>
   Marks the 1st task in the task scheduler as done.
 
-### 2.10. Clearing all done tasks : `clear done`
+### 2.10. Clearing all done tasks : `clear`
 
 Clears all done tasks from TaskManager <br>
-Format: `clear done tasks`
-Clears all done events from TaskManager <br>
-Format: `clear done events`
-Clears all done items from TaskManager <br>
 Format: `clear done`
 
 ### 2.11. Exiting the program : `exit`
