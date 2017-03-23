@@ -168,7 +168,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Brea Dionisio
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -176,14 +176,16 @@ _Figure 2.3.1 : Structure of the Logic Component_
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+2. `Parser` calls the appropriate parser for the identified command, e.g. `AddCommandParser` and `DeleteCommandParser`
+3. The command parser creates the appropriate task or event version of the command, e.g. `AddTaskCommand` and `AddEventCommand`
+4. This `Command` object is executed by the `LogicManager`.
+5. The command execution can affect the `Model` (e.g. editing a task) and/or raise events.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete t 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
+_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete t 1` Command_
 
 ### 2.4. Model component
 
