@@ -50,12 +50,13 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add NAME [s/START_TIME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES]...`
+Format: `add NAME [s/START_TIME] [d/DEADLINE] [p/PRIORITY] [t/TAG] [n/NOTES] [c/COMPLETION]...`
 
 > * Task can have a start time
 > * Task can have a deadline
 > * Task can have a priority ranking from 1 - 5
 > * Task can have any number of tags (including 0)
+> * Task can be completed or uncompleted
 
 Examples:
 
