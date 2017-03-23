@@ -97,7 +97,6 @@ public class EditCommandTest extends TaskBossGuiTest {
 
         assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
     }
-    
 
     @Test
     public void edit_missingTaskIndex_failure() {
