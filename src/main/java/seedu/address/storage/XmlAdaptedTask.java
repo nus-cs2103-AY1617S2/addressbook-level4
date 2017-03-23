@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Completion;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -33,6 +34,8 @@ public class XmlAdaptedTask {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     @XmlElement
     private String notes;
+    @XmlElement
+    private String completion;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -56,6 +59,7 @@ public class XmlAdaptedTask {
             tagged.add(new XmlAdaptedTag(tag));
         }
         notes = source.getNotes().value;
+        completion = String.valueOf(source.getCompletion().value);
     }
 
     /**
@@ -74,6 +78,7 @@ public class XmlAdaptedTask {
         final Priority priority = new Priority(this.priority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final Notes notes = new Notes(this.notes);
-        return new Task(name, start, deadline, priority, tags, notes);
+        final Completion completion = new Completion(this.completion);
+        return new Task(name, start, deadline, priority, tags, notes, completion);
     }
 }
