@@ -2,7 +2,6 @@ package seedu.jobs.testutil;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.TaskBook;
-import seedu.jobs.model.task.Person;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
 
@@ -11,41 +10,43 @@ import seedu.jobs.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public TestTask CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107, CS4101, CS4102;
 
     public TypicalTestTasks() {
         try {
-            alice = new TaskBuilder().withName("Alice Pauline")
-                    .withDescription("123, Jurong West Ave 6, #08-111").withEndTime("alice@gmail.com")
-                    .withStartTime("85355255")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withName("Benson Meier").withDescription("311, Clementi Ave 2, #02-25")
-                    .withEndTime("johnd@gmail.com").withStartTime("98765432")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withStartTime("95352563")
-                    .withEndTime("heinz@yahoo.com").withDescription("wall street").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withStartTime("87652533")
-                    .withEndTime("cornelia@google.com").withDescription("10th street").build();
-            elle = new TaskBuilder().withName("Elle Meyer").withStartTime("9482224")
-                    .withEndTime("werner@gmail.com").withDescription("michegan ave").build();
-            fiona = new TaskBuilder().withName("Fiona Kunz").withStartTime("9482427")
-                    .withEndTime("lydia@gmail.com").withDescription("little tokyo").build();
-            george = new TaskBuilder().withName("George Best").withStartTime("9482442")
-                    .withEndTime("anna@google.com").withDescription("4th street").build();
+            CS3101 = new TaskBuilder().withName("CS3101")
+                    .withDescription("chapter 1 to chapter 6").withEndTime("10/03/2017 17:00")
+                    .withStartTime("10/03/2017 15:00")
+                    .withTags("test").build();
+            CS3102 = new TaskBuilder().withName("CS3102").withDescription("Data Structure")
+                    .withEndTime("17/03/2017 10:00").withStartTime("17/03/2017 8:00")
+                    .withTags("lectures").build();
+            CS3103 = new TaskBuilder().withName("CS3103").withStartTime("17/03/2017 14:00")
+                    .withEndTime("17/03/2017 16:00").withDescription("group project meeting").build();
+
+            CS3104 = new TaskBuilder().withName("CS3104").withStartTime("17/03/2017 09:00")
+                    .withEndTime("19/03/2017 23:59").withDescription("assignment 3 deadline").build();
+            CS3105 = new TaskBuilder().withName("CS3105").withStartTime("14/03/2017 09:00")
+                    .withEndTime("14/03/2017 23:59").withDescription("feedback deadline").build();
+            CS3106 = new TaskBuilder().withName("CS3106").withStartTime("14/03/2017 12:00")
+                    .withEndTime("14/03/2017 16:00").withDescription("group poeject meeting").build();
+            CS3107 = new TaskBuilder().withName("CS3107").withStartTime("01/04/2017 8:00")
+                    .withEndTime("01/04/2017 10:00").withDescription("consultation with tutor").build();
+
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withStartTime("8482424")
-                    .withEndTime("stefan@mail.com").withDescription("little india").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withStartTime("8482131")
-                    .withEndTime("hans@google.com").withDescription("chicago ave").build();
+            CS4101 = new TaskBuilder().withName("CS4101").withStartTime("20/03/2017 8:00")
+                    .withEndTime("20/03/2017 10:00").withDescription("in-class test").build();
+            CS4102 = new TaskBuilder().withName("CS4102").withStartTime("20/03/2017 12:00")
+                    .withEndTime("20/03/2017 14:00").withDescription("in-class test").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskBook ab) {
-        for (TestTask task : new TypicalTestTasks().getTypicalPersons()) {
+    public static void loadTaskBookWithSampleData(TaskBook ab) {
+        for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
@@ -54,13 +55,13 @@ public class TypicalTestTasks {
         }
     }
 
-    public TestTask[] getTypicalPersons() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalTasks() {
+        return new TestTask[]{CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107};
     }
 
     public TaskBook getTypicalAddressBook() {
         TaskBook ab = new TaskBook();
-        loadAddressBookWithSampleData(ab);
+        loadTaskBookWithSampleData(ab);
         return ab;
     }
 }

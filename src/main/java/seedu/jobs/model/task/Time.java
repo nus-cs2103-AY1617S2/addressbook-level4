@@ -33,7 +33,7 @@ public class Time {
     public Time(Optional<String> startTime) throws IllegalValueException {
         if (!startTime.isPresent()) {
             this.value = DEFAULT_TIME;
-        } 
+        }
         else {
         	if(startTime.get().equals("")){
         		this.value = DEFAULT_TIME;
