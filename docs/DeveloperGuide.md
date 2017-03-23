@@ -358,18 +358,18 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | search tasks based on name | find all tasks with the same name
 `* * *` | user | search tasks based on keywords | find all similar tasks
 `* * *` | user | search tasks based on tags | find all tasks in a group
-`* * *` | user | search tasks based on deadline | find all tasks due near a certain time
+`* * *` | user | search tasks based on date | find all tasks near a certain time
 `* * *` | user | modify an existing task's name | change the name of the task
 `* * *` | user | modify an existing task's description | edit the task's requirements
-`* * *` | user | modify an existing task's deadline | keep up with changing deadlines
-`* * *` | user | sort tasks by date | see which tasks will be coming up soon
+`* * *` | user | modify an existing task's start and end date | keep up with changing deadlines
 `* * *` | user | undo an action | undo any mistakes I make
 `* * *` | user | view all tasks | see all the tasks I've ever added
 `* * *` | user | view all undone tasks | see what tasks I still need to work on
-`* * *` | user | view all floating tasks | see which tasks do not have a deadline
-`* * *` | user | view all events | see what my events are
 `* * *` | user | Save all the tasks in specified local folder/file | Store everything in local file that is controlled by a cloud syncing service (e.g. dropbox) to synchronise across multiple computers
-`* * *` | user | categorize tasks into work, study, leisure etc | group my tasks together
+`* *` | user | categorize tasks into work, study, leisure etc | group my tasks together
+`* *` | user | view all floating tasks | see which tasks do not have a deadline
+`* *` | user | view all events | see what my events are
+`* *` | user | sort tasks by date | see which tasks will be coming up soon
 `* *` | user | Assign priority to each task | rank my tasks depending on what has to get done first
 `* *` | user | sort tasks by priority | see which tasks will need my attention the most
 `*` | user | Add recurring tasks | so that I can easily add a task that occurs regularly
