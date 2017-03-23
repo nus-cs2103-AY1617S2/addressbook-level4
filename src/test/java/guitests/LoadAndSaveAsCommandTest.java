@@ -108,9 +108,9 @@ public class LoadAndSaveAsCommandTest extends TaskManagerGuiTest {
         }
 
         //Delete files
-        File file = new File(rootFolder + file1);
+        File file = new File(file1);
         file.delete();
-        file = new File(rootFolder + file2);
+        file = new File(file2);
         file.delete();
     }
 }
