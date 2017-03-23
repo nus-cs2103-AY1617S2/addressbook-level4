@@ -20,14 +20,22 @@ public class Task implements ReadOnlyTask {
 
     /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
-        this(description, null, null, tags);
-        this.status = status;
+        this(description, null, null, tags, TaskStatus.UNDONE);
+    }
+    
+    /* Constructs a Floating Task object from a given description. With Status */
+    public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, null, tags, newStatus);
     }
 
     /* Constructs a Deadline Task object from a given description. */
     public Task(Description description, DateTime deadline, UniqueTagList tags) {
-        this(description, null, deadline, tags);
-        this.status = TaskStatus.UNDONE;
+        this(description, null, deadline, tags, TaskStatus.UNDONE);
+    }
+    
+    /* Constructs a Deadline Task object from a given description. With status. */
+    public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, deadline, tags, newStatus);
     }
 
     /* Constructs an Event Task object from a given description. */
