@@ -23,7 +23,7 @@ public class ChangeDirectoryCommand extends Command {
     public static final String COMMAND_WORD = "cd";
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the directory of the taskmanager."
-            + "xml file to allow user to sync with cloud services"
+            + "xml file to allow user to sync with cloud services\n"
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
     
@@ -31,8 +31,8 @@ public class ChangeDirectoryCommand extends Command {
     public static final String MESSAGE_FAILURE = "Failed to initialized TaskManager in new directory : '%1$s'";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
-    public static final String MESSAGE_INVALID_DATA = "Failed to build new config";
-    public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to build new config";
+    public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load";
+    public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to read TaskManager";
     
     private final String newPath;
     
