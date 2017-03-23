@@ -8,9 +8,11 @@ import seedu.address.commons.events.BaseEvent;
 public class JumpToListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-
-    public JumpToListRequestEvent(int targetIndex) {
+    public final String targetType;
+    //@@author A0110491U
+    public JumpToListRequestEvent(int targetIndex, String targetType) {
         this.targetIndex = targetIndex;
+        this.targetType = targetType;
     }
 
     @Override

@@ -1,14 +1,16 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BYDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BYTIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FROMDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TODATE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,7 +20,8 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditActivityDescriptor;
+import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
+import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -26,7 +29,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-
+    //@@author A0110491U
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -34,68 +37,77 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_LOCATION, PREFIX_TAG, PREFIX_FROMDATE, PREFIX_TODATE,
-                        PREFIX_BYDATE, PREFIX_STARTTIME, PREFIX_ENDTIME);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_LOCATION, PREFIX_STARTDATE, PREFIX_ENDDATE,
+                        PREFIX_BYDATE, PREFIX_STARTTIME, PREFIX_ENDTIME, PREFIX_BYTIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
-        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 3);
 
-        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        Optional<Integer> index = preambleFields.get(1).flatMap(ParserUtil::parseIndexAlone);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditActivityDescriptor editActivityDescriptor = new EditActivityDescriptor();
+        Optional<String> typeToEdit = preambleFields.get(0);
+        if (!typeToEdit.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+
         try {
+            String type = typeToEdit.get();
             boolean priorityExists = argsTokenizer.getValue(PREFIX_PRIORITY).isPresent();
-            boolean fromdateExists = argsTokenizer.getValue(PREFIX_FROMDATE).isPresent();
-            boolean todateExists = argsTokenizer.getValue(PREFIX_TODATE).isPresent();
+            boolean startdateExists = argsTokenizer.getValue(PREFIX_STARTDATE).isPresent();
+            boolean enddateExists = argsTokenizer.getValue(PREFIX_ENDDATE).isPresent();
             boolean bydateExists = argsTokenizer.getValue(PREFIX_BYDATE).isPresent();
+            boolean bytimeExists = argsTokenizer.getValue(PREFIX_BYTIME).isPresent();
             boolean starttimeExists = argsTokenizer.getValue(PREFIX_STARTTIME).isPresent();
             boolean endtimeExists = argsTokenizer.getValue(PREFIX_ENDTIME).isPresent();
 
-            if (priorityExists && (bydateExists || fromdateExists || todateExists || starttimeExists ||
+            //trying to morph a task/deadline into an event
+            if (priorityExists && (startdateExists || enddateExists || starttimeExists ||
                     endtimeExists)) {
-                throw new IllegalValueException("Event or Deadline or Task");
+                throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
+            }
+            //trying to morph a task/deadline into an event
+            if ((bydateExists || bytimeExists) && (startdateExists || enddateExists || starttimeExists ||
+                    endtimeExists)) {
+                throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
+            }
+            //trying to morph an event to a task/deadline
+            if ((startdateExists || enddateExists || starttimeExists ||
+                    endtimeExists) && (bydateExists || priorityExists || bytimeExists)) {
+                throw new IllegalValueException(MESSAGE_CANNOT_CHANGE_TASK_TO_EVENT);
             }
 
-            if (bydateExists && (fromdateExists || todateExists || starttimeExists)) {
-                throw new IllegalValueException("Event or Deadline or Task");
+            if (type.equals("ev")) {
+                editEventDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
+                editEventDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
+                editEventDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
+                editEventDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
+                editEventDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
+                editEventDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+                editEventDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.
+                        getAllValues(PREFIX_TAG))));
+            } else if (type.equals("ts")) {
+                editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(2)));
+                editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
+                editTaskDescriptor.setByDate(ParserUtil.parseByDate(argsTokenizer.getValue(PREFIX_BYDATE)));
+                editTaskDescriptor.setByTime(ParserUtil.parseByTime(argsTokenizer.getValue(PREFIX_BYTIME)));
+                editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.
+                        getAllValues(PREFIX_TAG))));
             }
-
-            if (fromdateExists && (bydateExists || priorityExists)) {
-                throw new IllegalValueException("Event or Deadline or Task");
-            }
-
-            if (todateExists && (bydateExists || priorityExists)) {
-                throw new IllegalValueException("Event or Deadline or Task");
-            }
-
-            if (starttimeExists && (bydateExists || priorityExists)) {
-                throw new IllegalValueException("Event or Deadline or Task");
-            }
-
-            if (endtimeExists && priorityExists) {
-                throw new IllegalValueException("Event or Deadline or Task");
-            }
-
-            editActivityDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(1)));
-            editActivityDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
-            editActivityDescriptor.setFromDate(ParserUtil.parseFromDate(argsTokenizer.getValue(PREFIX_FROMDATE)));
-            editActivityDescriptor.setToDate(ParserUtil.parseToDate(argsTokenizer.getValue(PREFIX_TODATE)));
-            editActivityDescriptor.setByDate(ParserUtil.parseByDate(argsTokenizer.getValue(PREFIX_BYDATE)));
-            editActivityDescriptor.setStartTime(ParserUtil.parseStartTime(argsTokenizer.getValue(PREFIX_STARTTIME)));
-            editActivityDescriptor.setEndTime(ParserUtil.parseEndTime(argsTokenizer.getValue(PREFIX_ENDTIME)));
-            editActivityDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-            editActivityDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editActivityDescriptor.isAnyFieldEdited()) {
+        if (!editEventDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index.get(), editActivityDescriptor);
+        String taskorevent = preambleFields.get(0).get();
+        return new EditCommand(index.get(), editEventDescriptor, editTaskDescriptor, taskorevent);
     }
 
     /**

@@ -33,7 +33,7 @@ public interface Model {
 
     /** Adds the given Event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
-    
+
     /**
      * Updates the Task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
