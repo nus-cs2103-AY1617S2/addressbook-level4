@@ -9,6 +9,7 @@ import seedu.onetwodo.commons.core.ComponentManager;
 import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
+import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.commons.util.StringUtil;
@@ -38,6 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
     // To persist on list command
     private DoneStatus doneStatus;
 
+    private ToDoListHistoryManager history;
+
+
     /**
      * Initializes a ModelManager with the given toDoList and userPrefs.
      */
@@ -51,6 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.filteredTasks = new FilteredList<>(this.toDoList.getTaskList());
         this.searchStrings = new HashSet<String>();
         this.doneStatus = DoneStatus.UNDONE;
+        this.history = new ToDoListHistoryManager();
     }
 
     public ModelManager() {
@@ -80,12 +85,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
         toDoList.removeTask(target);
         indicateToDoListChanged();
     }
 
     @Override
     public synchronized void doneTask(int filteredTaskListIndex) throws IllegalValueException {
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.doneTask(toDoListIndex);
         indicateToDoListChanged();
@@ -93,6 +100,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        history.saveAsPreviousToDoListAndClearRedoHistory(this.toDoList);
         toDoList.addTask(task);
         indicateToDoListChanged();
     }
@@ -111,6 +119,32 @@ public class ModelManager extends ComponentManager implements Model {
         int toDoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         toDoList.updateTask(toDoListIndex, editedTask);
         indicateToDoListChanged();
+    }
+
+    @Override
+    public void undo() throws EmptyHistoryException {
+        if (!history.isUndoHistoryEmpty()) {
+            history.saveAsNextToDoList(this.toDoList);
+            this.toDoList.resetData(history.getPreviousToDoList());
+            setDoneStatus(DoneStatus.UNDONE);
+            updateFilteredUndoneTaskList();
+            indicateToDoListChanged();
+        } else {
+            throw new EmptyHistoryException("OneTwoDo cannot be undone anymore");
+        }
+    }
+
+    @Override
+    public void redo() throws EmptyHistoryException {
+        if (!history.isRedoHistoryEmpty()) {
+            history.saveAsPreviousToDoList(this.toDoList);
+            this.toDoList.resetData(history.getNextToDoList());
+            setDoneStatus(DoneStatus.UNDONE);
+            updateFilteredUndoneTaskList();
+            indicateToDoListChanged();
+        } else {
+            throw new EmptyHistoryException("OneTwoDo cannot be redone anymore");
+        }
     }
 
     //=========== Filtered Task List Accessors =============================================================
