@@ -214,7 +214,7 @@ The `Model`,
 ## Task Object
 This section briefly describes the design of the task object.
 
-<img src="images/TaskClassDiagram"><br>
+<img src="images/TaskClassDiagram.png"><br>
 
 The task object represents a task in KIT. Each of its detail such as Name and Date are objects. 
 
@@ -312,9 +312,10 @@ The downside is the extra storage space used. To reduce the downside, the backup
 2. Storage listens to this event, check if a backup is needed and carry out the saving to xml file. Commands that will not backup are command such as list and find commands etc. Undo itself will not create a backup.
 3. When undo command is issued, storage reads backup.xml and undo pass the data to model to load it into memory.
 
-<img src="images/UndoHighLevelSequenceDiagram.png" width="300">
+<img src="images/UndoHighLevelSequenceDiagram.png" width="800">
 
 **Future Improvements**
+
 Currently only one undo is implemented. Multiple undo and redo implementation are planned. 
 
 ### 3.4 Done/Undone task command implementation
