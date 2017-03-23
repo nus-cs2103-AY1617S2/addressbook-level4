@@ -23,7 +23,14 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-
+    
+    // @@author A0131278H
+    /**
+     * Sorts task list based on keywords (startdate or enddate).
+     */
+    void sortTasks(String keyword);
+    // @@author
+    
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *

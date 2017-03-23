@@ -82,6 +82,15 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
     }
+    
+    // @@author A0131278H
+    @Override
+    public void sortTasks(String keyword) {
+        taskManager.sortByDate(keyword);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+    // @@author
 
     // =========== Filtered Task List Accessors
     // =============================================================

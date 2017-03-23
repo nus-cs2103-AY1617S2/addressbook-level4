@@ -100,7 +100,7 @@ public class Task implements ReadOnlyTask {
         this.setEndDate(replacement.getEndDate());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
-    }
+    } 
 
     @Override
     public boolean equals(Object other) {
