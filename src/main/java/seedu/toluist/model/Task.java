@@ -245,9 +245,9 @@ public class Task implements Comparable<Task> {
 
     public void setTaskPriority(String priorityString) {
         if (priorityString.equalsIgnoreCase(HIGH_PRIORITY_STRING)) {
-            this.priority = TaskPriority.HIGH;
+            setTaskPriority(TaskPriority.HIGH);
         } else if (priorityString.equalsIgnoreCase(LOW_PRIORITY_STRING)) {
-            this.priority = TaskPriority.LOW;
+            setTaskPriority(TaskPriority.LOW);
         } else {
             throw new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
         }
