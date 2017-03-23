@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
@@ -79,19 +80,10 @@ public class MainApp extends Application {
      * Load all fonts in the resources/fonts folder
      */
     private void loadFonts() {
-        /*
-        File files = new File("src/main/resources/fonts/");
-
-        for (File file : files.listFiles()) {
-            if (file.getName().endsWith(".otf") || file.getName().endsWith(".ttf")) {
-                try {
-                    Font.loadFont(new FileInputStream(file), 10);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        */
+        Font.loadFont(getClass().getResourceAsStream("/fonts/YouMurdererBB-Regular.otf"), 10);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Roboto-Condensed.ttf"), 10);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Roboto-Regular.ttf"), 10);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/FontAwesome-Regular.otf"), 10);
     }
     //@@author
 
