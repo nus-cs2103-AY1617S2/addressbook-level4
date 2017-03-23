@@ -53,19 +53,19 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
 
-    /** Updates the filter of the filtered task list to filter by any or exactly all of the given keywords*/
+    /** Updates the filter of the filtered task list to filter by any or exactly all of the given keywords */
     void updateFilteredTaskList(Set<String> keywords, boolean isExact);
 
-    /** Updates the filter of the filtered task list to filter by the given keyword of tags*/
+    /** Updates the filter of the filtered task list to filter by the given keyword of tags */
     void updateFilteredTaskList(String keyword);
 
-    /** Updates the filer of the filtered task list to filter by done or undone task*/
+    /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
 
-	/** Changes the file path for data to be saved in*/
+	/** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
 
     /** Sorts the task list */
