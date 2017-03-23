@@ -1,0 +1,12 @@
+#commandTextField {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-max-height: 38pt;
+    -fx-min-height: 38pt;
+    -fx-padding: 12;
+}
+
+.scroll-bar:horizontal {
+    -fx-padding: -18;
+    -fx-opacity: 0;
+}
