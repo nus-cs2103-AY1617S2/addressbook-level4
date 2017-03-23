@@ -66,14 +66,14 @@ public interface Model {
     /** Updates the filer of the filtered task list to filter by done or undone task*/
     void updateFilteredTaskList(boolean value);
 
-	/** Changes the file path for data to be saved in*/
+    /** Changes the file path for data to be saved in*/
     void changeFilePath(String pathName);
-    
+
     /** Changes the load path for data to be loaded from*/
     void loadFromLocation(String loadPath);
 
     /** Loads the file from the path to be loaded from*/
-	void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
+    void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
 
     /** Sorts the task list */
     void sortTaskList();

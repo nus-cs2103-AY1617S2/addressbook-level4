@@ -79,10 +79,10 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
     }
-    
+
     private void indicateLoadChanged(String loadPath) {
-    	raise(new LoadNewFileEvent(loadPath, taskManager));
-    	raise(new FilePathChangedEvent(loadPath, taskManager));
+        raise(new LoadNewFileEvent(loadPath, taskManager));
+        raise(new FilePathChangedEvent(loadPath, taskManager));
     }
 
     @Override
@@ -134,10 +134,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateFilePathChanged(newPath);
         indicateTaskManagerChanged(false);
     }
-    
+
     @Override
     public void loadFromLocation(String loadPath) {
-    	indicateLoadChanged(loadPath);
+        indicateLoadChanged(loadPath);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -274,12 +274,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         }
     }
-    
+
     @Override
     @Subscribe
     public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {
-    	taskManager.resetData(event.readOnlyTaskManager);
-    	logger.info("Resetting data from new load location.");
+        taskManager.resetData(event.readOnlyTaskManager);
+        logger.info("Resetting data from new load location.");
     }
 
 

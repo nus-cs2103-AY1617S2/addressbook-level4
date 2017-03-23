@@ -6,7 +6,7 @@ import seedu.task.logic.commands.LoadCommand;
 public class LoadCommandParser {
 
     public Command parse(String args) {
-    	args = args.trim();
+        args = args.trim();
         return new LoadCommand(args);
     }
 
