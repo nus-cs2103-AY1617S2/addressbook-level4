@@ -16,7 +16,8 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
+import seedu.address.model.person.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -114,7 +115,7 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        activityListPanel = new ActivityListPanel(getActivityListPlaceholder(), logic.getFilteredActivityList());
+        activityListPanel = new ActivityListPanel(getActivityListPlaceholder(), logic.getFilteredEventList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWhatsLeftFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -199,8 +200,12 @@ public class MainWindow extends UiPart<Region> {
         return this.activityListPanel;
     }
 
-    void loadActivityPage(ReadOnlyActivity activity) {
-        browserPanel.loadActivityPage(activity);
+    void loadActivityPage(ReadOnlyEvent event) {
+        browserPanel.loadActivityPage(event);
+    }
+    
+    void loadActivityPage(ReadOnlyTask task) {
+        browserPanel.loadActivityPage(task);
     }
 
     void releaseResources() {

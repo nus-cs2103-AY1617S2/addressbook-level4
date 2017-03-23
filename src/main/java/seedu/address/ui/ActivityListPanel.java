@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ActivityPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.person.ReadOnlyActivity;
+import seedu.address.model.person.ReadOnlyEvent;
 
 /**
  * Panel containing the list of activities.
@@ -23,17 +23,17 @@ public class ActivityListPanel extends UiPart<Region> {
     private static final String FXML = "ActivityListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyActivity> activityListView;
+    private ListView<ReadOnlyEvent> eventListView;
 
-    public ActivityListPanel(AnchorPane activityListPlaceholder, ObservableList<ReadOnlyActivity> activityList) {
+    public ActivityListPanel(AnchorPane activityListPlaceholder, ObservableList<ReadOnlyEvent> eventList) {
         super(FXML);
-        setConnections(activityList);
+        setConnections(eventList);
         addToPlaceholder(activityListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyActivity> activityList) {
-        activityListView.setItems(activityList);
-        activityListView.setCellFactory(listView -> new ActivityListViewCell());
+    private void setConnections(ObservableList<ReadOnlyEvent> eventList) {
+        eventListView.setItems(eventList);
+        eventListView.setCellFactory(listView -> new ActivityListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -44,10 +44,10 @@ public class ActivityListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        activityListView.getSelectionModel().selectedItemProperty()
+        eventListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in activity list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in event list panel changed to : '" + newValue + "'");
                         raise(new ActivityPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -55,26 +55,22 @@ public class ActivityListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            activityListView.scrollTo(index);
-            activityListView.getSelectionModel().clearAndSelect(index);
+            eventListView.scrollTo(index);
+            eventListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class ActivityListViewCell extends ListCell<ReadOnlyActivity> {
+    class ActivityListViewCell extends ListCell<ReadOnlyEvent> {
 
         @Override
-        protected void updateItem(ReadOnlyActivity activity, boolean empty) {
-            super.updateItem(activity, empty);
+        protected void updateItem(ReadOnlyEvent event, boolean empty) {
+            super.updateItem(event, empty);
 
-            if (empty || activity == null) {
+            if (empty || event == null) {
                 setGraphic(null);
                 setText(null);
-            } else if (activity.getFromDate().value != null) {
-                setGraphic(new EventCard(activity, getIndex() + 1).getRoot());
-            } else if (activity.getPriority().value != null) {
-                setGraphic(new ActivityCard(activity, getIndex() + 1).getRoot());
-            } else {
-                setGraphic(new DeadlineCard(activity, getIndex() + 1).getRoot());
+            } else if (event.getStartDate().value != null) {
+                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
             }
         }
     }
