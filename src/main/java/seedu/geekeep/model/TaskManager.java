@@ -185,7 +185,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedReadOnlyTask != null;
 
@@ -199,14 +199,14 @@ public class TaskManager implements ReadOnlyTaskManager {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+        tasks.updateTask(taskToEdit, editedTask);
     }
 
-    public void markTaskDone(int index) {
-        tasks.markTaskDone(index);
+    public void markTaskDone(ReadOnlyTask taskToMark) {
+        tasks.markTaskDone(taskToMark);
     }
 
-    public void markTaskUndone(int index) {
-        tasks.markTaskUndone(index);
+    public void markTaskUndone(ReadOnlyTask taskToMark) {
+        tasks.markTaskUndone(taskToMark);
     }
 }

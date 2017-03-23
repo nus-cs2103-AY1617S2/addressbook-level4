@@ -50,6 +50,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        internalList.sort(new TaskSortByType());
     }
 
     public UnmodifiableObservableList<Task> asObservableList() {
@@ -93,6 +94,7 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
+        internalList.sort(new TaskSortByType());
         return taskFoundAndDeleted;
     }
 
@@ -118,10 +120,11 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
-        Task taskToUpdate = internalList.get(index);
+        int taskIndex = internalList.lastIndexOf(taskToEdit);
+        Task taskToUpdate = internalList.get(taskIndex);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
@@ -130,17 +133,18 @@ public class UniqueTaskList implements Iterable<Task> {
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(index, taskToUpdate);
+        internalList.set(taskIndex, taskToUpdate);
+        internalList.sort(new TaskSortByType());
     }
 
-    public void markTaskDone(int index) {
-        Task taskToMark = internalList.get(index);
-        taskToMark.markDone();
+    public void markTaskDone(ReadOnlyTask taskToMark) {
+        int taskIndex = internalList.lastIndexOf(taskToMark);
+        internalList.get(taskIndex).markDone();
     }
 
-    public void markTaskUndone(int index) {
-        Task taskToMark = internalList.get(index);
-        taskToMark.markUndone();
+    public void markTaskUndone(ReadOnlyTask taskToMark) {
+        int taskIndex = internalList.lastIndexOf(taskToMark);
+        internalList.get(taskIndex).markUndone();
     }
 
 }

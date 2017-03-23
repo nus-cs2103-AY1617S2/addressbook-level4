@@ -87,15 +87,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskListIndex, editedTask);
-
+        taskManager.updateTask(taskToEdit, editedTask);
         indicateTaskManagerChanged();
     }
 
@@ -178,20 +176,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void markTaskDone(int filteredTaskListIndex) {
+    public void markTaskDone(ReadOnlyTask taskToMark) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskDone(taskListIndex);
+        taskManager.markTaskDone(taskToMark);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public void markTaskUndone(int filteredTaskListIndex) {
+    public void markTaskUndone(ReadOnlyTask taskToMark) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskUndone(taskListIndex);
+        taskManager.markTaskUndone(taskToMark);
         indicateTaskManagerChanged();
     }
 
@@ -205,24 +201,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListToShowUndone() {
         filteredTasks.setPredicate(t -> !t.isDone());
         raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowEvents() {
-        filteredTasks.setPredicate(t -> t.isEvent());
-
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowDeadlines() {
-        filteredTasks.setPredicate(t -> t.isDeadline());
-
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowFloatingTasks() {
-        filteredTasks.setPredicate(t -> t.isFloatingTask());
-
     }
 
     @Override

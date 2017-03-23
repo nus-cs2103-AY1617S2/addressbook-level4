@@ -68,7 +68,8 @@ public class UpdateCommand extends Command {
             if (this.startDateTime == null || this.endDateTime == null) {
                 return true;
             }
-            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags);
+            return CollectionUtil.isAnyPresent(this.title, this.location, this.tags,
+                    this.startDateTime, this.endDateTime);
         }
 
         public void setEndDateTime(Optional<DateTime> endDateTime) {
@@ -166,7 +167,7 @@ public class UpdateCommand extends Command {
         }
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(taskToEdit, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {
