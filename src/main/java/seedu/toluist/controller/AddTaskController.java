@@ -27,11 +27,11 @@ public class AddTaskController extends Controller {
 
     private static final String RESULT_MESSAGE_ADD_TASK = "New task added";
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.load();
-        CommandResult commandResult = new CommandResult("");
+        CommandResult commandResult;
 
         HashMap<String, String> tokens = tokenize(command);
 
@@ -52,7 +52,7 @@ public class AddTaskController extends Controller {
             uiStore.setTasks(todoList.getTasks());
         }
 
-        return commandResult;
+        uiStore.setCommandResult(commandResult);
     }
 
     public HashMap<String, String> tokenize(String command) {

@@ -26,31 +26,32 @@ public class SwitchController extends Controller {
     private static final String COMMAND_TEMPLATE = "switch(\\s+(?<tab>\\S+))?\\s*";
     private SwitchConfig switchConfig = SwitchConfig.getDefaultSwitchConfig();
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String keyword = tokens.get(TAB);
 
         if (keyword == null) {
-            return new CommandResult(RESULT_MESSAGE_NO_TAB);
+            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB));
         }
 
         Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
 
         if (!switchPredicateOptional.isPresent()) {
-            return new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword)));
         }
 
         String messageTemplate = uiStore.getTasks().size() == TodoList.load().getTasks().size()
                 ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
                 : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
         TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();
-        UiStore.getInstance().setSwitchPredicate(switchPredicate);
+        UiStore.getInstance().setObservableSwitchPredicate(switchPredicate);
 
-        return new CommandResult(String.format(
+        uiStore.setCommandResult(new CommandResult(String.format(
                 messageTemplate,
                 switchPredicate.getDisplayName(),
                 UiStore.getInstance().getShownTasks().size(),
-                UiStore.getInstance().getTasks().size()));
+                UiStore.getInstance().getTasks().size())));
     }
 
     public HashMap<String, String> tokenize(String command) {

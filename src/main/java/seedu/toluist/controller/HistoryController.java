@@ -23,13 +23,13 @@ public class HistoryController extends Controller {
         this.commandHistory = commandHistory;
     }
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         String result = String.join("\n", commandHistory);
 
-        return new CommandResult(String.format(RESULT_MESSAGE, result,
-                StringUtil.nounWithCount("command", commandHistory.size())));
+        uiStore.setCommandResult(new CommandResult(String.format(
+                RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
     }
 
     public HashMap<String, String> tokenize(String command) {

@@ -23,19 +23,22 @@ public class AliasController extends Controller {
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String alias = tokens.get(ALIAS_TERM);
         String commandPhrase = tokens.get(COMMAND_TERM);
 
         if (aliasConfig.isReservedWord(alias)) {
-            return new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias)));
         }
 
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
-            return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));
         } else {
-            return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase));
+            uiStore.setCommandResult(
+                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
         }
     }
 

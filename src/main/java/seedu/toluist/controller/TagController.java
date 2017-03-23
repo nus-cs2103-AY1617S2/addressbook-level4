@@ -33,7 +33,7 @@ public class TagController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(TagController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
@@ -58,9 +58,9 @@ public class TagController extends Controller {
         }
 
         // display formatting
-        return formatDisplay(successfulList.toArray(new String[successfulList.size()]),
+        uiStore.setCommandResult(formatDisplay(successfulList.toArray(new String[successfulList.size()]),
                                 failedList.toArray(new String[failedList.size()]),
-                                successfulList.size());
+                                successfulList.size()));
     }
 
     private CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount) {

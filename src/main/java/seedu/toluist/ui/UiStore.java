@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.view.UiView;
@@ -25,9 +26,11 @@ public class UiStore {
     private static UiStore instance;
 
     private ArrayList<Task> allTasks = new ArrayList<>();
-    private ObjectProperty<TaskSwitchPredicate> switchPredicate =
+    private ObjectProperty<TaskSwitchPredicate> observableSwitchPredicate =
             new SimpleObjectProperty<>(TaskSwitchPredicate.INCOMPLETE_SWITCH_PREDICATE);
     private ObservableList<Task> shownTasks = FXCollections.observableArrayList();
+    private ObjectProperty<CommandResult> observableCommandResult =
+            new SimpleObjectProperty<>(new CommandResult(""));
 
     public static UiStore getInstance() {
         if (instance == null) {
@@ -38,21 +41,39 @@ public class UiStore {
 
     private UiStore() {}
 
+    /**
+     * Bind view to an observable list. View will re-render on list change
+     * @param view a UiView
+     * @param observableList an observable list
+     */
     public void bind(UiView view, ObservableList<?> observableList) {
         observableList.addListener((ListChangeListener.Change<?> c) -> view.render());
     }
 
+    /**
+     * Bind view to an observable value. View will re-render on value change
+     * @param view a UiView
+     * @param observableValue an observable value
+     */
     public void bind(UiView view, ObservableValue<?> observableValue) {
         observableValue.addListener(c -> view.render());
     }
 
-    public void setSwitchPredicate(TaskSwitchPredicate switchPredicate) {
-        this.switchPredicate.setValue(switchPredicate);
+    public void setObservableSwitchPredicate(TaskSwitchPredicate switchPredicate) {
+        observableSwitchPredicate.setValue(switchPredicate);
         changeShownTasks();
     }
 
-    public ObservableValue<TaskSwitchPredicate> getSwitchPredicate() {
-        return switchPredicate;
+    public ObservableValue<TaskSwitchPredicate> getObservableSwitchPredicate() {
+        return observableSwitchPredicate;
+    }
+
+    public void setCommandResult(CommandResult commandResult) {
+        observableCommandResult.setValue(commandResult);
+    }
+
+    public ObservableValue<CommandResult> getObservableCommandResult() {
+        return observableCommandResult;
     }
 
     public void setTasks(ArrayList<Task> tasks) {
@@ -91,6 +112,6 @@ public class UiStore {
 
     private void changeShownTasks() {
         shownTasks.setAll(allTasks.stream()
-                .filter(switchPredicate.getValue().getPredicate()).collect(Collectors.toList()));
+                .filter(observableSwitchPredicate.getValue().getPredicate()).collect(Collectors.toList()));
     }
 }

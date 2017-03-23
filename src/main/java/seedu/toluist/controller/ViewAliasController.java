@@ -22,9 +22,9 @@ public class ViewAliasController extends Controller {
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
-        return new CommandResult(getAliasCommandResult(aliasMapping));
+        uiStore.setCommandResult(new CommandResult(getAliasCommandResult(aliasMapping)));
     }
 
     public HashMap<String, String> tokenize(String command) {

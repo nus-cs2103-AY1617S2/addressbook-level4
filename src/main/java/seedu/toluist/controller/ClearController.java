@@ -18,7 +18,7 @@ public class ClearController extends Controller {
     private static final String COMMAND_WORD = "clear";
     private static final String COMMAND_REGEX = "^clear\\s*";
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.load();
@@ -27,7 +27,7 @@ public class ClearController extends Controller {
 
         UiStore.getInstance().setTasks(todoList.getTasks());
 
-        return new CommandResult(RESULT_MESSAGE);
+        uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE));
     }
 
     public HashMap<String, String> tokenize(String command) {

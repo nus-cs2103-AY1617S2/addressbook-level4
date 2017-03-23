@@ -25,11 +25,11 @@ public class DeleteTaskController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(DeleteTaskController.class);
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.load();
-        CommandResult commandResult = new CommandResult("");
+        CommandResult commandResult;
 
         HashMap<String, String> tokens = tokenize(command);
 
@@ -42,7 +42,7 @@ public class DeleteTaskController extends Controller {
             uiStore.setTasks(todoList.getTasks());
         }
 
-        return commandResult;
+        uiStore.setCommandResult(commandResult);
     }
 
     public HashMap<String, String> tokenize(String command) {

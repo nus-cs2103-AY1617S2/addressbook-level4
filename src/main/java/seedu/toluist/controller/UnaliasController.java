@@ -22,18 +22,18 @@ public class UnaliasController extends Controller {
 
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public CommandResult execute(String command) {
+    public void execute(String command) {
         HashMap<String, String> tokens = tokenize(command);
         String alias = tokens.get(ALIAS_TERM);
 
         if (!aliasConfig.isAlias(alias)) {
-            return new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
+            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias)));
         }
 
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
-            return new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias));
+            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
         } else {
-            return new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias));
+            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias)));
         }
     }
 

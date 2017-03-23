@@ -10,8 +10,8 @@ import seedu.toluist.dispatcher.CommandResult;
  */
 public class UnknownCommandController extends Controller {
 
-    public CommandResult execute(String command) {
-        return new CommandResult(Messages.MESSAGE_UNKNOWN_COMMAND);
+    public void execute(String command) {
+        uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_UNKNOWN_COMMAND));
     }
 
     public HashMap<String, String> tokenize(String command) {
