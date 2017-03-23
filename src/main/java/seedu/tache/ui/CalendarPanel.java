@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.event.Event;
@@ -52,7 +54,16 @@ public class CalendarPanel extends UiPart<Region> {
             if (!task.getStartDateTime().isPresent()) {
                 continue;
             }
-            engine.executeScript(getLoadTaskExecuteScript(task));
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript(getLoadTaskExecuteScript(task));
+                }
+            });
         }
     }
 
