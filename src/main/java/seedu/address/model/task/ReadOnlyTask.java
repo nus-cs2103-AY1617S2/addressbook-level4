@@ -66,8 +66,8 @@ public interface ReadOnlyTask {
             builder.append(" Start Date: " + startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
             builder.append(" End Date: " + startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
         } else {
-            builder.append(" Start Date: ");
-            builder.append(" End Date: ");
+            builder.append(" Start Date: none ");
+            builder.append(" End Date: none ");
         }
 
         // TODO although only two lines, but SLAP can still be improved
