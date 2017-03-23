@@ -118,7 +118,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * Appends the fie name to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
      * 
      * @param fileName
@@ -252,7 +252,7 @@ public class TestUtil {
     }
 
     /**
-     * Gets mid point of a node relative to its scene.
+     * Gets mid point of a node relative its scene.
      * 
      * @param node
      * @return
@@ -264,7 +264,7 @@ public class TestUtil {
     }
 
     /**
-     * Gets the bound of the node relative to the parent scene.
+     * Gets the bound of the node relative to the parent scene
      * 
      * @param node
      * @return
@@ -290,12 +290,12 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of tasks.
+     * Removes a subset from the list of tasks
      * 
-     * @param tasks
+     * @param task
      *            The list of tasks
-     * @param tasksToRemove
-     *            The subset of tasks.
+     * @param taskstoRemove
+     *            The subset of tasks
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -310,7 +310,8 @@ public class TestUtil {
      * @param list
      *            original list to copy from
      * @param targetIndexInOneIndexedFormat
-     *            e.g. index 1 if the first element is to be removed
+     *            e.g. index 1 if the first element is to be removed.
+     * 
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -324,7 +325,7 @@ public class TestUtil {
      * @param task
      *            The replacement task
      * @param index
-     *            The index of the task to be replaced.
+     *            The index of task to be replaced
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -342,13 +343,13 @@ public class TestUtil {
     }
 
     /**
-     * Appends tasks to the array of tasks.
+     * Appends tasks to the array of tasks
      * 
      * @param tasks
      *            A array of tasks.
      * @param tasksToAdd
-     *            The persons that are to be appended behind the original array.
-     * @return The modified array of tasks.
+     *            The persons that are to be appended behind the original array
+     * @return The modified array of tasks
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
