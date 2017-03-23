@@ -132,9 +132,4 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getEventListPanel().switchListView(event.category);
     }
 
-    @Subscribe
-    private void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.updateInnerParts();
-    }
 }

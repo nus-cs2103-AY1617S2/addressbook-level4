@@ -126,12 +126,11 @@ public class MainWindow extends UiPart<Region> {
 
     public void updateInnerParts() {
         eventListPanel = new TaskListPanel("event", getEventListPlaceholder(),
-                logic.getFilteredEventList(), 0);
+                logic.getFilteredEventList());
         floatingTaskListPanel = new TaskListPanel("floatingTask", getFloatingTaskListPlaceholder(),
-                logic.getFilteredFloatingTaskList(), logic.getFilteredEventList().size());
+                logic.getFilteredFloatingTaskList());
         deadlineListPanel = new TaskListPanel("deadline", getDeadlineListPlaceholder(),
-                logic.getFilteredDeadlineList(),
-                logic.getFilteredEventList().size() + logic.getFilteredFloatingTaskList().size());
+                logic.getFilteredDeadlineList());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {

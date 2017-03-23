@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -49,13 +50,13 @@ public class TaskListPanel extends UiPart<Region> {
 
     //TODO  only works for v0.2 checks
     public TaskListPanel(String type, AnchorPane taskListPlaceholder,
-            ObservableList<ReadOnlyTask> allList, int startingIndex) {
+            ObservableList<ReadOnlyTask> allList) {
         super(getFxmlFromType(type));
         this.type = type;
         currentListView = allListView;
-        setConnections(allList, allListView, startingIndex);
-        setConnections(allList.filtered(t -> t.isDone()), completedListView, startingIndex);
-        setConnections(allList.filtered(t -> !t.isDone()), upcomingListView, startingIndex);
+        setConnections(allList, allListView);
+        setConnections(allList, completedListView);
+        setConnections(allList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
     }
 
@@ -71,9 +72,9 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList,
-            ListView<ReadOnlyTask> taskListView, int startingIndex) {
+            ListView<ReadOnlyTask> taskListView) {
         taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new PersonListViewCell(startingIndex));
+        taskListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
@@ -123,12 +124,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
-        int startingIndex = 0;
 
-        public PersonListViewCell(int startingIndex) {
-            super();
-            this.startingIndex = startingIndex;
+        protected int getSourceIndex() {
+            FilteredList<ReadOnlyTask> filteredList = (FilteredList<ReadOnlyTask>) getListView().getItems();
+            return filteredList.getSourceIndex(getIndex());
         }
+
         @Override
         protected void updateItem(ReadOnlyTask person, boolean empty) {
             super.updateItem(person, empty);
@@ -137,7 +138,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(person, getIndex() + startingIndex + 1).getRoot());
+                setGraphic(new TaskCard(person, getSourceIndex() + 1).getRoot());
             }
         }
     }

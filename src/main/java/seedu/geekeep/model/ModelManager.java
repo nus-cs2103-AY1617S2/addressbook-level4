@@ -103,24 +103,19 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        // Wraps the FilteredList into a SortedList to sort it
-        SortedList<ReadOnlyTask> sortableList = new SortedList<>(filteredTasks);
-        sortableList.setComparator(new TaskSortByType());
-        return new UnmodifiableObservableList<>(sortableList);
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
-        indicateTaskManagerChanged();
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
-        indicateTaskManagerChanged();
     }
 
     private void updateFilteredPersonList(Expression expression) {
@@ -202,14 +197,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListToShowDone() {
         filteredTasks.setPredicate(t -> t.isDone());
         raise(new SwitchTaskCategoryEvent(TaskCategory.DONE));
-        indicateTaskManagerChanged();
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
         filteredTasks.setPredicate(t -> !t.isDone());
         raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
-        indicateTaskManagerChanged();
     }
 
     @Override
