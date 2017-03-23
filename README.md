@@ -5,8 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T16-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T16-B2/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7358c2cf354244e6b53bc50d2aaf727b)](https://www.codacy.com/app/bernardyip/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T16-B2/main/&amp;utm_campaign=Badge_Grade)<br><br>
 <img src="docs/images/Ui.png" width="600"><br><br>
-<img src="docs/images/UI_Today.png" width="600"><br><br>
-<img src="docs/images/UI_ViewTaskDetails.png" width="600"><br><br>
+<img src="docs/images/Ui-Calendar.png" width="600"><br><br>
 
 * This is a desktop task manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
@@ -33,5 +32,6 @@
 
 * [Natty](http://natty.joestelmach.com/) by joestelmach - A framework to parse relative dates into absolute dates
 * [itextPDF](http://itextpdf.com/) by iText Software - For exporting data to PDF files
+* [FontAwesomeFX](https://bintray.com/jerady/maven/FontAwesomeFX) by Jens Deters - For icons used in the GUI
 
 #### Licence : [MIT](LICENSE)

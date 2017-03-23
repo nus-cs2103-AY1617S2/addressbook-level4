@@ -4,10 +4,10 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 ---
 
-1. [Start Project](#start-project)
-2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+1. [Start Project](#1-start-project)
+2. [Features](#2-features)
+3. [FAQ](#3-faq)
+4. [Command Summary](#4-command-summary)
 
 ## 1. Start Project
 
@@ -341,7 +341,6 @@ Pressing the UP or DOWN key will allow you to iterate through previous commands 
 
 ### 2.22. Autocompletion of commands and reserved keywords
 Pressing the TAB key will auto complete the word at the current cursor if there is a match, otherwise a list of suggestions will be displayed.
-
 
 ## 3. FAQ
 
