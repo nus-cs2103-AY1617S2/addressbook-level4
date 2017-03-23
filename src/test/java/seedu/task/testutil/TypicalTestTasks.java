@@ -39,8 +39,8 @@ public class TypicalTestTasks {
             fiona = new TaskBuilder().withDescription("Say so long to Fiona Kunz")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
-                    .withPriority("1")
-                    .withTags("owesMoney", "friends").build();
+                    .withPriority("1").build();
+            //                    .withTags("owesMoney", "friends").build();
             george = new TaskBuilder().withDescription("Say greetings to George Best")
                     .withStartDate("01/02/2017")
                     .withEndDate("02/03/2100")
