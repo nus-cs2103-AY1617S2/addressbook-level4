@@ -5,6 +5,7 @@ import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.geekeep.commons.core.ComponentManager;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.core.TaskCategory;
@@ -16,6 +17,7 @@ import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
+import seedu.geekeep.model.task.TaskSortByType;
 import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -103,7 +105,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        // Wraps the FilteredList into a SortedList to sort it
+        SortedList<ReadOnlyTask> sortableList = new SortedList<>(filteredTasks);
+        sortableList.setComparator(new TaskSortByType());
+        return new UnmodifiableObservableList<>(sortableList);
     }
 
     @Override

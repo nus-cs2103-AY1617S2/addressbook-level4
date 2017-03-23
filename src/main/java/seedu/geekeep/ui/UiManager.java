@@ -131,7 +131,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getDeadlineListPanel().switchListView(event.category);
         mainWindow.getEventListPanel().switchListView(event.category);
     }
-    
+
     @Subscribe
     private void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
