@@ -93,7 +93,8 @@ public class ParserUtil {
             return Optional.empty();
         }
 
-        String comparatorName = matcher.group("comparatorName").isEmpty() ? "priority" : matcher.group("comparatorName");
+        String comparatorName = matcher.group("comparatorName").isEmpty()
+                ? "priority" : matcher.group("comparatorName");
         return Optional.of(comparatorName);
 
     }

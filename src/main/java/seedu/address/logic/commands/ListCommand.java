@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
-
 /**
  * Lists all persons in the address book to the user.
  */
@@ -18,9 +16,9 @@ public class ListCommand extends Command {
     public static final String COMPARATOR_NAME_DATE = "date";
     public static final String COMPARATOR_NAME_PRIORITY = "priority";
     public static final String COMPARATOR_NAME_TITLE = "title";
-    
+
     private String comparatorName;
-    
+
     public ListCommand(Optional<String> comparatorName) {
         this.comparatorName = comparatorName.get();
     }

@@ -59,7 +59,7 @@ Here are some example commands you can try:
   - `add Buy groceries d/tomorrow p/5 i/eggs x10, milk x2, bread x2 t/home t/errand` : adds a task titled Buy groceries to the list.
   - `delete 3` : deletes the 3rd task shown in the current list.
   - `exit` : exits the app.
-  
+
 Refer to the [Features](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#features) section below for details of each command.
 
 # 3. Features
