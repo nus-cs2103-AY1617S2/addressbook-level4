@@ -27,7 +27,7 @@ public class DateTime {
         this.isTimeInferred = false;
         this.date = null;
         String trimmedDate = date.trim();
-        this.value = trimmedDate.toString();
+        this.value = trimmedDate;
         if (!isValidDateTime(trimmedDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
