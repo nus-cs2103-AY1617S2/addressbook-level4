@@ -1,17 +1,17 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
+//
+//import org.junit.Test;
 
-import org.junit.Test;
+import seedu.doist.model.TodoList;
+//import seedu.doist.model.task.Task;
+//import seedu.doist.model.util.SampleDataUtil;
+import seedu.doist.testutil.TestUtil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
-
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends DoistGUITest {
     @Override
-    protected AddressBook getInitialData() {
+    protected TodoList getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -22,9 +22,9 @@ public class SampleDataTest extends AddressBookGuiTest {
         return TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
     }
 
-    @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
-    }
+//    @Test
+//    public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
+//        Task[] expectedList = SampleDataUtil.getSampleTasks();
+//        assertTrue(personListPanel.isListMatching(expectedList));
+//    }
 }

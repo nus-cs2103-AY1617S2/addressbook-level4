@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import seedu.doist.TestApp;
 
 /**
  * Provides a handle for the main GUI.
@@ -34,7 +34,7 @@ public class MainGuiHandle extends GuiHandle {
     }
 
     public AlertDialogHandle getAlertDialog(String title) {
-        guiRobot.sleep(1000);
+        guiRobot.sleep(GuiHandleSetting.LONG_SLEEP_LENGTH);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
 }
