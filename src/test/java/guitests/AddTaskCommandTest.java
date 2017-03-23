@@ -24,8 +24,6 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             new IllegalArgumentException("Description must not be empty.");
     private static IllegalArgumentException illegalArgumentException2 =
             new IllegalArgumentException("Start date must be before end date.");
-    private static IllegalArgumentException illegalArgumentException3 =
-            new IllegalArgumentException("Task priority must be either 'low' or 'high'.");
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
     private Tag tag3 = new Tag("tag3");
