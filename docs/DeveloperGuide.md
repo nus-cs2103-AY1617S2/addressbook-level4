@@ -1,20 +1,20 @@
-# AddressBook Level 4 - Developer Guide
+# TaskList - Developer Guide
 
 By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](setting-up)
+2. [Design](design)
+3. [Implementation](implementation)
+4. [Testing](testing)
+5. [Dev Ops](dev-ops)
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](appendix-a--user-stories)
+* [Appendix B: Use Cases](appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](appendix-c--non-functional-requirements)
+* [Appendix D: Glossary](appendix-d--glossary)
+* [Appendix E : Product Survey](appendix-e--product-survey)
 
 
 ## 1. Setting up
