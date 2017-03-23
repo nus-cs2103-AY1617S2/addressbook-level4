@@ -127,4 +127,16 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public static class EventNotFoundException extends Exception {}
 
+
+    public void setEvents(List<? extends ReadOnlyEvent> events) throws DuplicateEventException {
+        final UniqueEventList replacement = new UniqueEventList();
+        for (final ReadOnlyEvent event : events) {
+            replacement.add(new Event(event));
+        }
+        setEvents(replacement);
+    }
+
+    public void setEvents(UniqueEventList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
 }
