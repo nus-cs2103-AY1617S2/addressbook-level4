@@ -62,16 +62,19 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex - 1);
-        int internalIndex = model.getFilteredTaskList().indexOf(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         // Throw CommandException if edited task is invalid
         TaskAttributesChecker.validateEditedAttributes(editedTask);
         try {
-            model.updateTask(internalIndex, editedTask);
-            jumpToNewTask(taskToEdit);
+            // Not using model.update(task) as it does not trigger observers
+            model.deleteTask(taskToEdit);
+            model.addTask(editedTask);
+            jumpToNewTask(editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (UniqueTaskList.TaskNotFoundException tne) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
@@ -90,7 +93,11 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
+        Task edited = new Task(updatedName, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
+        if (taskToEdit.getDoneStatus()) {
+            edited.setDone();
+        }
+        return edited;
     }
 
     /**
