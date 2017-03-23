@@ -155,7 +155,7 @@ _Figure 2.1.6 : Sequence diagram for `undo` & `redo` commands_
 > When `undo` command is invoked, we pop the `StateCommandPair` from `undoStack` and put it on `redoStack`. We invoke the `undoCommand` from the `StateCommandPair`. <br>
 > Vice versa, when `redo` command is invoked, we pop the `StateCommandPair` from `redoStack` and put it on the `undoStack`. We then invoke the `executeCommand` from `StateCommandPair`. <br><br>
 > When the user performs any action, the redo stack is cleared. <br>
-> Undoability and Redoability are defined by whether either stack is empty, as well as if an action is undo-able, i.e only `add`, `edit`, `delete` commands.
+> Undoability and Redoability are defined by whether either stack is empty, as well as if an action is undo-able, i.e only `add`, `edit`, `delete`, `mark`, `unmark` commands.
 <!-- @@author -->
 
 The sections below give more details of each component.
@@ -578,7 +578,7 @@ Use case resumes at step 2
 
 **MSS**
 
-1. User does `add`, `edit` or `delete` command
+1. User does `add`, `edit`, `delete`, `mark`, `unmark` command
 2. TodoApp executes command
 3. User wants to undo previous command, executes `undo`
 4. ToDoApp reverts the command
