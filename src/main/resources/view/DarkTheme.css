@@ -16,6 +16,39 @@
     -fx-opacity: 1;
 }
 
+.label-event {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-background-color: #EB71A8;
+    -fx-border-color: #A5A8A7;
+    -fx-max-width: "INFINITY";
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
+.label-float {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-background-color: #7AEBB8;
+    -fx-border-color: #A5A8A7;
+    -fx-max-width: "INFINITY";
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
+.label-task {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-background-color: #73A3F5;
+    -fx-border-color: #A5A8A7;
+    -fx-max-width: "INFINITY";
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
@@ -76,14 +109,14 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent #A5A8A7 transparent #A5A8A7;
+    -fx-background-color: transparent, derive(#A5A8A7, 10%);
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#FFFFFF, 20%);
 }
 
 .list-cell {
@@ -111,8 +144,8 @@
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#FFFFFF, 20%);
+     -fx-border-color: derive(#A5A8A7, 10%);
      -fx-border-top-width: 1px;
 }
 
@@ -123,6 +156,7 @@
 
 .result-display {
     -fx-background-color: #ffffff;
+    -fx-border-color: #A5A8A7;
 }
 
 .result-display .label {

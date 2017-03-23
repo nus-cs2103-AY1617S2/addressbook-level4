@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
@@ -25,8 +26,9 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class EditCommandParser {
 
-    private static Optional<Integer> index;
+    private static Optional<Pair<Character, Integer>> index;
 
+    // @@ A0143648Y
     /**
      * Parses the given {@code String} of arguments in the context of the
      * EditCommand and returns an EditCommand object for execution.
@@ -38,14 +40,14 @@ public class EditCommandParser {
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
-        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        Optional<Pair<Character, Integer>> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
             index = EditCommandParser.index;
             if (!index.isPresent()) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
         }
-
+        // @@
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
             editTaskDescriptor.setTitle(ParserUtil.parseTitle(preambleFields.get(1)));
@@ -83,7 +85,7 @@ public class EditCommandParser {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
-    public static void setIndex(int index) {
+    public static void setIndex(Pair<Character, Integer> index) {
         EditCommandParser.index = Optional.of(index);
     }
 }

@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.Optional;
 
+import javafx.util.Pair;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
@@ -12,8 +13,8 @@ import seedu.address.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser {
-
-    private static Optional<Integer> index;
+    // @@ A0143648Y
+    private static Optional<Pair<Character, Integer>> index;
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -21,7 +22,7 @@ public class DeleteCommandParser {
      */
     public Command parse(String args) {
 
-        Optional<Integer> index = ParserUtil.parseIndex(args);
+        Optional<Pair<Character, Integer>> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             index = DeleteCommandParser.index;
             if (!index.isPresent()) {
@@ -32,7 +33,7 @@ public class DeleteCommandParser {
         return new DeleteCommand(index.get());
     }
 
-    public static void setIndex(int index) {
+    public static void setIndex(Pair<Character, Integer> index) {
         DeleteCommandParser.index = Optional.of(index);
     }
 }

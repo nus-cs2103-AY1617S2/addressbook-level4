@@ -225,7 +225,7 @@ public class LogicManagerTest {
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.cs2103();
         ToDoList expectedAB = new ToDoList();
         expectedAB.addTask(toBeAdded);
 
@@ -241,7 +241,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.cs2103();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal address book
@@ -437,10 +437,10 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
+        Task cs2103() throws Exception {
             Title name = new Title("CS2103 Tutorial");
             Venue privateVenue = new Venue("COM1 B103");
-            StartTime privateStartTime = new StartTime("Wednesday 10am");
+            StartTime privateStartTime = new StartTime("Wed 10am");
             EndTime privateEndTime = new EndTime("Wednesday 11am");
             UrgencyLevel privateUrgencyLevel = new UrgencyLevel("3");
             Description privateDescription = new Description("I love 2103!!!");
@@ -463,7 +463,7 @@ public class LogicManagerTest {
             return new Task(
                     new Title("Task " + seed),
                     new Venue("" + Math.abs(seed)),
-                    new StartTime(seed + "@email"),
+                    new StartTime("hey"),
                     new EndTime("House of " + seed),
                     new UrgencyLevel("3"),
                     new Description("I love 2103!!"),
@@ -478,13 +478,13 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
             cmd.append(" @@").append(p.getVenue());
-            cmd.append(" from:").append(p.getStartTime());
+            cmd.append("from:").append(p.getStartTime());
             cmd.append(" to:").append(p.getEndTime());
             cmd.append(" ul/").append(p.getUrgencyLevel());
             cmd.append(" d/").append(p.getDescription());
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" ##").append(t.tagName);
             }
 
             return cmd.toString();
@@ -569,8 +569,8 @@ public class LogicManagerTest {
             return new Task(
                     new Title(name),
                     new Venue("location"),
-                    new StartTime("dawn"),
-                    new EndTime("dusk"),
+                    new StartTime("Today"),
+                    new EndTime("Tomorrow"),
                     new UrgencyLevel("3"),
                     new Description("I love 2103!!"),
                     new UniqueTagList(new Tag("tag")));

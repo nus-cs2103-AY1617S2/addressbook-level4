@@ -58,8 +58,8 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
-            DeleteCommandParser.setIndex(index + 1);
-            EditCommandParser.setIndex(index + 1);
+//            DeleteCommandParser.setIndex(index + 1);
+//            EditCommandParser.setIndex(index + 1);
         });
     }
 
@@ -73,7 +73,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task,task.getTaskChar().toString()+ (getIndex() + 1)).getRoot());
             }
         }
     }

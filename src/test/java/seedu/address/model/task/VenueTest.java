@@ -17,8 +17,12 @@ public class VenueTest {
         //assertFalse(Venue.isValidVenue("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(Venue.isValidVenue("93121534"));
-        assertTrue(Venue.isValidVenue("4")); // short phone numbers
-        assertTrue(Venue.isValidVenue("124293842033123")); // long phone numbers
+        assertTrue(Venue.isValidVenue("computing")); // alphabets only
+        assertTrue(Venue.isValidVenue("12345")); // numbers only
+        assertTrue(Venue.isValidVenue("school of computing")); // alphanumeric
+                                                         // characters
+        assertTrue(Venue.isValidVenue("Computing")); // with capital letters
+        assertTrue(Venue.isValidVenue("The 2nd cubicle from the left on the 3rd rack at Basement 1 of COM1")); // long
+                                                                          // names
     }
 }

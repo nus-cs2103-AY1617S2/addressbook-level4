@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -9,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyToDoList;
@@ -21,6 +23,8 @@ import seedu.address.model.task.Task;
  */
 @XmlRootElement(name = "ToDoList")
 public class XmlSerializableToDoList implements ReadOnlyToDoList {
+    
+    private static final Logger logger = LogsCenter.getLogger(XmlSerializableToDoList.class);
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -44,7 +48,7 @@ public class XmlSerializableToDoList implements ReadOnlyToDoList {
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
-
+    //@@author A0122017Y
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
@@ -52,12 +56,13 @@ public class XmlSerializableToDoList implements ReadOnlyToDoList {
                 return p.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
-                //TODO: better error handling
+                logger.info("Task format invalid.");
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tasks);
     }
+    //@@
 
     @Override
     public ObservableList<Tag> getTagList() {
