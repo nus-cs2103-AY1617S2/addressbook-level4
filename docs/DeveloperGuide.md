@@ -573,6 +573,55 @@ Use case ends.
 > 2a1. `Tache` shows that it has nothing to undo <br>
 Use case ends
 
+### Use case: Edit task
+
+**MSS**
+
+1. `User` request to edit a specific task
+2. `Tache` shows confirmation that task has been edited and changes are reflected in UI<br>
+Use case ends.
+
+**Extensions**
+
+1a. [Parameters](#parameter) are wrong
+
+> 1a1. `Tache` informs `User` that the parameters for the edit command are wrong<br>
+Use case ends.
+
+### Use case: List tasks
+
+**MSS**
+
+1. `User` request to list tasks with optional filter parameter
+2. `Tache` shows lists of tasks<br>
+Use case ends.
+
+**Extensions**
+
+1a. [Parameters](#parameter) are wrong
+
+> 1a1. `Tache` informs `User` that the parameter for the list command is wrong<br>
+Use case ends.
+
+1b. [Parameters](#parameter) not given
+
+> 1b1. `Tache` shows `User` all tasks<br>
+Use case ends.
+
+### Use case: Complete tasks
+
+**MSS**
+
+1. `User` request to complete tasks
+2. `Tache` shows confirmation and completed tasks are no longer reflected in UI<br>
+Use case ends.
+
+**Extensions**
+
+1a. [Parameters](#parameter) are wrong
+
+> 1a1. `Tache` informs `User` that the parameters for the complete command are wrong<br>
+Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
