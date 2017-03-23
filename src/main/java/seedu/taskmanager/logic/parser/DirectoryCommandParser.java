@@ -10,7 +10,7 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 
-public class ChangeDirectoryCommandParser {
+public class DirectoryCommandParser {
     public static final String XML_FILE_EXT = "xml";
     /**
      * Parses the given {@code String} of path in the context of the ChangeDirCommand
