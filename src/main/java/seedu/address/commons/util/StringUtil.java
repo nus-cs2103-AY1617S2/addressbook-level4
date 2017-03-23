@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.ByDate;
 
 /**
  * Helper functions for handling strings.
@@ -22,6 +21,8 @@ public class StringUtil {
     public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
                             + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
     public static final int YEAR_CONVERSION_INDEX = 2000;
+    
+    public static final String DATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";
 //@@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -98,7 +99,7 @@ public class StringUtil {
     public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
         //empty start date
         if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
-        Pattern pattern = Pattern.compile(ByDate.BYDATE_VALIDATION_REGEX);
+        Pattern pattern = Pattern.compile(DATE_VALIDATION_REGEX);
         Matcher matchers = pattern.matcher(dateString);
         matchers.matches();
         int day = Integer.parseInt(matchers.group(1));
