@@ -1,4 +1,5 @@
 @import url("CommandBoxCss.css");
+@import url("Extensions.css");
 
 .background {
     -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);

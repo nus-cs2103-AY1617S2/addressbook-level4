@@ -29,6 +29,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String SUCCESS_STYLE_CLASS = "white";
 
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
@@ -154,12 +155,14 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandSuccess() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextField.getStyleClass().add(SUCCESS_STYLE_CLASS);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
+        commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 
