@@ -68,7 +68,7 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `edit 1 [KEYWORDS]`.
 
-<img src="images\SDForEditTask.png" width="800"><br>
+<img src="images\SDForEditTask2.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `edit 1 [KEYWORDS]` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task manager data are changed,
@@ -76,7 +76,7 @@ _Figure 2.1.3a : Component interactions for `edit 1 [KEYWORDS]` command (part 1)
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforEditTaskEventHandling.png" width="800"><br>
+<img src="images\SDforEditTaskEventHandling2.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `edit 1 [KEYWORDS]` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -124,7 +124,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("edit 1 [KEYWORDS]")`
  API call.<br>
-<img src="images/EditLogic.png" width="800"><br>
+<img src="images/EditLogic2.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `edit 1 [KEYWORDS]` Command_
 
 ### 2.4. Model component
