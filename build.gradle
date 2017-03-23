@@ -63,6 +63,10 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile group: 'com.joestelmach', name: 'natty', version: '0.12'
+        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.10'
+		compile group: 'org.mnode.ical4j', name: 'ical4j', version: '1.0.2'
+		compile group: 'org.antlr', name: 'antlr-runtime', version: '3.5.2'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
