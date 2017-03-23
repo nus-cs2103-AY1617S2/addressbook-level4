@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.label.Label;
 import seedu.address.model.task.ReadOnlyTask;
@@ -57,6 +58,9 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
             } catch (IllegalDateTimeValueException e) {
                 e.printStackTrace();
                 return null;
+            } catch (CommandException e) {
+                e.printStackTrace();
+                return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tasks);
@@ -74,6 +78,16 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(labels);
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getImmutableTaskList() throws CloneNotSupportedException {
+        return getTaskList();
+    }
+
+    @Override
+    public ObservableList<Label> getImmutableLabelList() throws CloneNotSupportedException {
+        return getLabelList();
     }
 
 }

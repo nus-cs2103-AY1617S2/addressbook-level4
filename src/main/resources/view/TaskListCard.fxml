@@ -36,6 +36,7 @@
                             </children>
                         </HBox>
                         <FlowPane fx:id="labels" />
+                        <FlowPane fx:id="bookings" />
                         <Label fx:id="startTime" styleClass="cell_small_label" />
                         <Label fx:id="deadline" styleClass="cell_small_label" />
                         <Label fx:id="status" styleClass="cell_big_label" />

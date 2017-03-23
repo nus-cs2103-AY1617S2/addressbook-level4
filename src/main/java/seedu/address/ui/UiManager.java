@@ -19,6 +19,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -32,13 +33,15 @@ public class UiManager extends ComponentManager implements Ui {
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
+    private Model model;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Model model) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.model = model;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, model);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -125,4 +128,10 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.loadTaskPage(event.getNewSelection());
     }
 
+    @Override
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+        mainWindow.setLogic(logic);
+        mainWindow.fillInnerParts();
+    }
 }

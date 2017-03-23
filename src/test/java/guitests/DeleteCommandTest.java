@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUC
 
 import org.junit.Test;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.testutil.TestTask;
@@ -30,13 +31,13 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("DELETE " + currentList.length + 1);
+        commandBox.runCommand("delete " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
     }
 
     @Test
     public void delete_TestInvalidArgumentLength_ReturnFalse() {
-        commandBox.runCommand("DELETE args1 args2");
+        commandBox.runCommand("delete args1 args2");
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
@@ -49,7 +50,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
-        commandBox.runCommand("DELETE " + targetIndexOneIndexed);
+        commandBox.runCommand("delete " + targetIndexOneIndexed);
+        Arrays.sort(expectedRemainder);
 
         //confirm the list now contains all previous tasks except the deleted tasks
         assertTrue(taskListPanel.isListMatching(expectedRemainder));

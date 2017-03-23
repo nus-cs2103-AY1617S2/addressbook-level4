@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.label.Label;
 
+//@@author A0140042A
 /**
  * Test class to test Label class
  */

@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
@@ -14,8 +15,9 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
+        Task[] tasks;
         try {
-            return new Task[] {
+            tasks = new Task[] {
                 new Task(new Title("Meet Prof Alex Yeoh"),
                     Optional.ofNullable(new Deadline("Tomorrow 1600")),
                     Optional.ofNullable(new Deadline("Tomorrow 2300")),
@@ -47,6 +49,8 @@ public class SampleDataUtil {
                     false,
                     new UniqueLabelList("colleagues"))
             };
+            Arrays.sort(tasks);
+            return tasks;
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         } catch (IllegalDateTimeValueException e) {

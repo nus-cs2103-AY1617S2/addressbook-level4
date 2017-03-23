@@ -118,6 +118,16 @@ public class TaskManagerTest {
         public ObservableList<Label> getLabelList() {
             return labels;
         }
+
+        @Override
+        public ObservableList<ReadOnlyTask> getImmutableTaskList() throws CloneNotSupportedException {
+            return getTaskList();
+        }
+
+        @Override
+        public ObservableList<Label> getImmutableLabelList() throws CloneNotSupportedException {
+            return getLabelList();
+        }
     }
 
 }

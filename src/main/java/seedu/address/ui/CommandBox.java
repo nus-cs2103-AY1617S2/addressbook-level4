@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -14,8 +13,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
-import seedu.address.logic.autocomplete.Autocomplete;
-import seedu.address.logic.autocomplete.AutocompleteTrie;
+import seedu.address.logic.autocomplete.AutocompleteManager;
+import seedu.address.logic.autocomplete.AutocompleteRequest;
+import seedu.address.logic.autocomplete.AutocompleteResponse;
 import seedu.address.logic.commandhistory.CommandHistory;
 import seedu.address.logic.commandhistory.CommandHistoryLinkedList;
 import seedu.address.logic.commands.CommandResult;
@@ -25,18 +25,18 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
-    private Autocomplete autocomplete;
+    private AutocompleteManager autocompleteManager;
     private CommandHistory commandHistory;
 
-    private final Logic logic;
+    private Logic logic;
 
     @FXML
     private TextField commandTextField;
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
         super(FXML);
-        this.autocomplete = new AutocompleteTrie();
-        this.commandHistory = new CommandHistoryLinkedList();
+        this.autocompleteManager = new AutocompleteManager();
+        this.commandHistory = CommandHistoryLinkedList.getInstance();
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
@@ -68,20 +68,28 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0140042A
     /**
      * Hijacks the tab character for auto-completion, up/down for iterating through the command
-     * @param ke
      */
     @FXML
     private void handleOnKeyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.TAB) {
+            //Extract the command as well as the caret position
             String command = commandTextField.getText();
             int caretPosition = commandTextField.getCaretPosition();
-            String wordAtCursor = autocomplete.getWordAtCursor(command, caretPosition);
-            List<String> suggestions = autocomplete.getSuggestions(wordAtCursor);
 
-            handleSuggestions(command, caretPosition, suggestions);
-            //Consume the event so the textfield will not go to the next ui component
+            //Create a auto complete request
+            AutocompleteRequest request = new AutocompleteRequest(command, caretPosition);
+            //Get the response using the auto complete manager
+            AutocompleteResponse response = autocompleteManager.getSuggestions(request);
+
+            //Update fields with the response
+            updateAutocompleteFeedback(response);
+            commandTextField.setText(response.getPhrase());
+            commandTextField.positionCaret(response.getCaretPosition());
+
+            //Consume the event so the text field will not go to the next ui component
             ke.consume();
         } else if (ke.getCode() == KeyCode.UP) {
             getPreviousCommand();
@@ -96,19 +104,24 @@ public class CommandBox extends UiPart<Region> {
      * Gets the next executed command from the current command (if iterated through before)
      */
     private void getNextCommand() {
-        String text = commandHistory.next();
-        text = text == null ? commandTextField.getText() : text;
-        commandTextField.setText(text);
-        moveCursorToEndOfField();
+        String command = commandHistory.next();
+        setCommandAndCursorToEnd(command);
     }
 
     /**
      * Gets the previously executed command from the current command
      */
     private void getPreviousCommand() {
-        String text = commandHistory.previous();
-        text = text == null ? commandTextField.getText() : text;
-        commandTextField.setText(text);
+        String command = commandHistory.previous();
+        setCommandAndCursorToEnd(command);
+    }
+
+    /**
+     * Sets the command to the string input given along with the cursor at the end
+     */
+    private void setCommandAndCursorToEnd(String command) {
+        command = command == null ? commandTextField.getText() : command;
+        commandTextField.setText(command);
         moveCursorToEndOfField();
     }
 
@@ -120,68 +133,14 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles suggestions to replace/suggest
-     * @param suggestions - list of suggestions
-     */
-    private void handleSuggestions(String command, int caretPosition, List<String> suggestions) {
-        //if empty or no match
-        if (suggestions.isEmpty() || suggestions.size() == AutocompleteTrie.AUTOCOMPLETE_DATA.length) {
-            return;
-        } else { //show suggestions in the output box
-            processSuggestions(command, caretPosition, suggestions);
-        }
-    }
-
-    /**
-     * Shows suggestions in the output box
-     */
-    private void processSuggestions(String command, int caretPosition, List<String> suggestions) {
-        logger.info("Suggestions: " + suggestions);
-
-        String longestString = autocomplete.getLongestString(suggestions);
-        int commonSubstringIndex = autocomplete.getCommonSubstringEndIndexFromStart(suggestions);
-        String commonSubstring = longestString.substring(0, commonSubstringIndex);
-
-        //Append a space IF AND ONLY IF the auto-completed word is the last word of the command
-        String appendCharacter = "";
-        int cursorWordEndIndex = autocomplete.getEndIndexOfWordAtCursor(command, caretPosition);
-        boolean endHasSpace = false;
-        if (cursorWordEndIndex == command.trim().length() && suggestions.size() == 1) {
-            //Append a space if there is a space at the end already
-            if (command.charAt(command.length() - 1) != ' ') {
-                appendCharacter = " ";
-            }
-            endHasSpace = true;
-        }
-        replaceCurrentWordWithSuggestion(command, caretPosition, commonSubstring, appendCharacter);
-
-        //Move position caret to after auto completed word
-        String currentWord = autocomplete.getWordAtCursor(command, caretPosition);
-        int newPositionCaret = (cursorWordEndIndex - currentWord.length() + commonSubstring.length()) +
-                                (endHasSpace ? 1 : 0);
-        commandTextField.positionCaret(newPositionCaret);
-
-        updateAutocompleteFeedback(suggestions);
-    }
-
-    /**
      * Updates the output window to either nothing or a list of suggestions
      */
-    private void updateAutocompleteFeedback(List<String> suggestions) {
-        if (suggestions.size() > 1) { //Show list of suggestions if more than 1
-            raise(new NewResultAvailableEvent(suggestions.toString()));
+    private void updateAutocompleteFeedback(AutocompleteResponse response) {
+        if (response.getSuggestions().size() > 1) { //Show list of suggestions if more than 1
+            raise(new NewResultAvailableEvent(response.getSuggestions().toString()));
         } else {
             raise(new NewResultAvailableEvent(""));
         }
-    }
-
-    /**
-     * Replaces the current word with the suggestion provided
-     */
-    private void replaceCurrentWordWithSuggestion(String command, int caretPosition,
-                                                    String suggestion, String toAppend) {
-        commandTextField.setText(autocomplete.replaceCurrentWordWithSuggestion(command, caretPosition,
-                                                                                suggestion, toAppend));
     }
 
     /**
@@ -198,4 +157,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
 
+    public void setLogic(Logic logic) {
+        this.logic = logic;
+    }
 }

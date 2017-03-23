@@ -134,12 +134,13 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
+  
 
 The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Bernard Yip
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
@@ -162,7 +163,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Lai Zhiyuan
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -175,13 +176,13 @@ _Figure 2.3.1 : Structure of the Logic Component_
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
-<img src="images/DeleteSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+ API call.<br><br>
+<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+_Figure 2.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Yesha Simaria
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -196,9 +197,14 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+Given below is the Sequence Diagram for interactions within the `Model` component for the `addTask(toAdd)`
+ API call.<br><br>
+<img src="images/SDforModel.jpg" width="800"><br>
+_Figure 2.4.2 : Interactions Inside the Model Component for the `add` Command_
+
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Yesha Simaria
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -210,9 +216,54 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Task Manager data in xml format and read it back.
 
+Given below is the Sequence Diagram for interactions within the `Storage` component for the `TaskManagerChangedEvent()`
+ API call.<br><br>
+<img src="images/SDforStorage.jpg" width="800"><br>
+_Figure 2.5.2 : Interactions Inside the Storage Component for the `add` Command_
+
 ### 2.6. Common classes
 
 Classes used by multiple components are in the `seedu.taskmanager.commons` package.
+
+### 2.7. High level sequence diagrams for commands
+
+This section aims to shed more light on the high level design for different commands.
+
+The diagram below shows the interaction between different components for the `add` command. <br><br>
+<img src="images\SDforAddTask.jpg" width="800"><br>
+_Figure 2.7.1 : Component interactions for `add` command when user types the `add [TITLE] [by DATE]` command_
+
+The diagram below shows the interaction between different components for the `edit` command. <br><br>
+<img src="images\SDforEditTask.jpg" width="800"><br>
+_Figure 2.7.2 : Component interactions for `edit` command when user types the `edit [INDEX] [TITLE] ...` command_
+
+The diagram below shows the interaction between different components for the `list` command. <br><br>
+<img src="images\SDforListCompletedTasks.jpg" width="800"><br>
+_Figure 2.7.3 : Component interactions for `list` command when user types `list completed` key_
+
+The diagram below shows the interaction between different components for the `AutoComplete` feature. <br><br>
+<img src="images\SDforAutocomplete.png" width="800"><br>
+_Figure 2.7.4 : Component interactions for `Autocomplete` feature when user presses the `tab` key_
+
+The diagram below shows the interaction between different components for the `book` command. <br><br>
+<img src="images\SDforBook.png" width="800"><br>
+_Figure 2.7.5 : Component interactions for `book` command_
+
+The diagram below shows the interaction between different components for the `Command History` feature. <br><br>
+<img src="images\SDforCommandHistory.png" width="800"><br>
+_Figure 2.7.6 : Component interactions for `Command History` feature when user iterate through their command history for the session by pressing the up or down key_
+
+The diagram below shows the interaction between different components for the delete label command via `delete`. <br><br>
+<img src="images\SDforDeleteLabel.png" width="800"><br>
+_Figure 2.7.7 : Component interactions for `delete` label command_
+
+The diagram below shows the interaction between different components for the `find` command. <br><br>
+<img src="images\SDforFind.png" width="800"><br>
+_Figure 2.7.8 : Component interactions for `find` command_
+
+The diagram below shows the interaction between different components for the `undo` command. <br><br>
+<img src="images\SDforUndo.png" width="800"><br>
+_Figure 2.7.9 : Component interactions for `undo` command_
 
 ## 3. Implementation
 
@@ -364,6 +415,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a recurring task | not need to create the same task every time
 `* * *` | user | mark the completion of a task | differentiate it from other outstanding tasks I need to complete
 `* * *` | user | view my completed tasks | keep track of what tasks I have completed
+`* * *` | user | save my task manager data to a different location | create a new copy of my data elsewhere
+`* * *` | user | load data into my task manager | start working on another set of data without changing the file settings myself
 `* *` | user | add location to a task | attach location for event type of tasks
 `* *` | user | be able to view my agenda for the day | know what tasks to work on for the day
 `* *` | user | iterate through my command history | re-execute a command that I have previously executed before
@@ -822,6 +875,42 @@ Use case ends
 2a. The list is empty
 
 > 2a1. System notifies the user that there are no overdue tasks<br />
+  Use case ends
+
+#### Use case: Save current data to a new file location
+Use case ID: UC26 Save data to new file location<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to save data to a new file path specified
+2. System saves the data and changes will be saved to the new location<br />
+Use case ends
+
+**Extensions**
+
+1a. The file path specified is invalid (does not end with .xml)/not a file
+
+> 1a1. System notifies the user that the file is invalid or not a file<br />
+  Use case ends
+
+#### Use case: Replace data in task manager with new file specified
+Use case ID: UC27 Load data from new location<br />
+Actor: User<br />
+Precondition: User has opened the applications<br />
+
+**MSS**
+
+1. User request to replace data in Task Manager with new file path
+2. System loads the data and changes will be saved to the new location<br />
+Use case ends
+
+**Extensions**
+
+1a. The file path specified is invalid/does not end with .xml/not a file
+
+> 1a1. System notifies the user that the file is invalid/does not end with .xml/not a file<br />
   Use case ends
 
 ## Appendix C : Non Functional Requirements

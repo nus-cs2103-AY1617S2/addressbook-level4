@@ -5,8 +5,8 @@ import java.util.List;
 
 import seedu.address.commons.exceptions.IllegalDateTimeValueException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.dateparser.DateTimeManager;
 import seedu.address.logic.dateparser.DateTimeParser;
-import seedu.address.logic.dateparser.DateTimeParserManager;
 
 /**
  * Represents a Task's deadline in the task manager. Guarantees: immutable; is
@@ -15,18 +15,18 @@ import seedu.address.logic.dateparser.DateTimeParserManager;
 public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Deadline can have zero or more characters";
-    public static final String DATE_VALIDATION_REGEX = "[a-zA-Z]+";
-
+    private static final DateTimeParser dateParser = new DateTimeManager();
+    public static final String DEFAULT_ENDTIME = "23:59:59";
     /*
      * The deadline must have at least one visible character TODO: change regex
      * once deadline can be translated to a date
      */
     public static final String DEADLINE_VALIDATION_REGEX = ".*";
-    private static final DateTimeParser dateParser = new DateTimeParserManager();
 
     private Date deadline;
     private String value;
 
+    //@@author A0162877N
     /**
      * Validates given deadline.
      *
@@ -43,8 +43,8 @@ public class Deadline {
             if (!isEmptyDeadline(strDeadline)) {
                 try {
                     List<Date> dateList;
-                    if (strDeadline.matches(DATE_VALIDATION_REGEX)) {
-                        dateList = dateParser.parse(strDeadline + " 235959").get(0).getDates();
+                    if (dateParser.parse(strDeadline).get(0).isTimeInferred()) {
+                        dateList = dateParser.parse(strDeadline + " " + DEFAULT_ENDTIME).get(0).getDates();
                     } else {
                         dateList = dateParser.parse(strDeadline).get(0).getDates();
                     }
@@ -94,10 +94,16 @@ public class Deadline {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                        && this.deadline.equals(((Deadline) other).deadline)); // state
-                                                                               // check
+        if (other instanceof Deadline) {
+            if (this.deadline != null && ((Deadline) other).deadline != null) {
+                return other == this // short circuit if same object
+                        || (other instanceof Deadline // instanceof handles nulls
+                                && this.deadline.equals(((Deadline) other).deadline)); // state check
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

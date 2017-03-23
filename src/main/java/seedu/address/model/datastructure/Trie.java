@@ -6,15 +6,17 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import seedu.address.logic.autocomplete.AutocompleteDataStructure;
+
 //@@author A0140042A
 /**
  * Data structure used to store auto complete data
  */
-public class Trie {
+public class Trie implements AutocompleteDataStructure {
     private TrieNode rootNode;
 
     /**
-     * Initializes a new Trie datastructure with an empty root node
+     * Initializes a new Trie data structure with an empty root node
      */
     public Trie() {
         super();
@@ -25,6 +27,7 @@ public class Trie {
      * Loads phrases used for auto completion into the Trie
      * @param phrases
      */
+    @Override
     public void load(String... phrases) {
         for (String phrase : phrases) {
             loadRecursive(rootNode, phrase + "$");
@@ -46,16 +49,6 @@ public class Trie {
         if (childNode != null) {
             loadRecursive(childNode, phrase.substring(1));
         }
-    }
-
-    /**
-     * Checks if the Trie contains a specific prefix
-     * @param prefix - the string to match
-     * @return true if there is a match to prefix
-     */
-    public boolean matchPrefix(String prefix) {
-        TrieNode matchedNode = matchPrefixRecursive(rootNode, prefix);
-        return (matchedNode != null);
     }
 
     /**
@@ -84,6 +77,7 @@ public class Trie {
      * @param prefix - to match against
      * @return a list of strings with auto completed suggestions
      */
+    @Override
     public List<String> findCompletions(String prefix) {
         TrieNode matchedNode = matchPrefixRecursive(rootNode, prefix);
         List<String> completions = new LinkedList<String>();
@@ -92,7 +86,7 @@ public class Trie {
     }
 
     /**
-     * Finds a list of compeletions that can be made using the current prefix recursively
+     * Finds a list of completions that can be made using the current prefix recursively
      * @param node - current node to check
      * @param prefix - to match against
      * @param completions - List of completions that are currently matched
@@ -103,9 +97,11 @@ public class Trie {
             return;
         }
         if (node.getNodeValue() == '$') {
-            // end reached, append prefix into completions list. Do not append
-            // the trailing $, that is only to distinguish words like ann and
-            // anne into separate branches of the tree.
+            /*
+             * end reached, append prefix into completions list. Do not append
+             * the trailing $, that is only to distinguish words like ann and
+             * anne into separate branches of the tree.
+             */
             completions.add(prefix.substring(0, prefix.length() - 1));
             return;
         }

@@ -37,18 +37,18 @@ public class SelectCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void selectTask_emptyList() {
-        commandBox.runCommand("CLEAR");
+        commandBox.runCommand("clear");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
     }
 
     private void assertSelectionInvalid(int index) {
-        commandBox.runCommand("SELECT " + index);
+        commandBox.runCommand("select " + index);
         assertResultMessage("The task index provided is invalid");
     }
 
     private void assertSelectionSuccess(int index) {
-        commandBox.runCommand("SELECT " + index);
+        commandBox.runCommand("select " + index);
         assertResultMessage("Selected Task: " + index);
         assertTaskSelected(index);
     }

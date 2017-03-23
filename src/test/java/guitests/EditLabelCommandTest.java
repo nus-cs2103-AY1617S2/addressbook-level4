@@ -7,6 +7,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.EditLabelCommand;
 import seedu.address.model.label.Label;
 import seedu.address.model.label.UniqueLabelList;
 import seedu.address.testutil.TestTask;
@@ -20,7 +21,7 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_LabelDoesNotExist_ReturnTrue() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("EDITLABEL nonexistentlabel newlabel");
+        commandBox.runCommand(EditLabelCommand.COMMAND_WORD + " nonexistentlabel newlabel");
 
         //No change should occur
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -29,25 +30,16 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
     @Test
     public void editLabel_invalidCommands() {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("EDITLABEL notEnoughArguments");
-        //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
-
-        commandBox.runCommand("EDITLABEL");
-        //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
-
-        commandBox.runCommand("EDITLABEL !@#asdajn newLabel");
-        //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
-
-        commandBox.runCommand("EDITLABEL friends !@#!@sdfs");
-        //No change should occur
-        assertTrue(taskListPanel.isListMatching(currentList));
+        //No change should occur for any of these commands
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " notEnoughArguments", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + "", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " !@#asdajn newLabel", currentList);
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " friends !@#!@sdfs", currentList);
     }
 
     @Test
     public void editLabel_EditLabelValid_ReturnTrue() throws IllegalValueException {
+        //Changes all task with the label friends to allies
         Label labelToChange = new Label("friends");
         Label newLabel = new Label("allies");
 
@@ -61,10 +53,14 @@ public class EditLabelCommandTest extends TaskManagerGuiTest {
                 task.setLabels(new UniqueLabelList(labelSet));
             }
         }
+        runAndAssertTrue(EditLabelCommand.COMMAND_WORD + " friends allies", currentList);
+    }
 
-
-        commandBox.runCommand("EDITLABEL friends allies");
-
+    /**
+     * Runs a command on the GUI text field and asserts whether the displayed list is equal to the provided list
+     */
+    private void runAndAssertTrue(String command, TestTask[] currentList) {
+        commandBox.runCommand(command);
         assertTrue(taskListPanel.isListMatching(currentList));
     }
 }

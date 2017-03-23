@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import org.junit.Test;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
@@ -23,7 +24,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
 
-        String detailsToEdit = "Meet Bob FROM 20-04-2017 0900 TO 20-04-2017 2359 #husband";
+        String detailsToEdit = "Meet Bob from 20-04-2017 0900 to 20-04-2017 2359 #husband";
         int taskManagerIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withTitle("Meet Bob").withStartTime("20-04-2017 0900")
@@ -49,63 +50,112 @@ public class EditCommandTest extends TaskManagerGuiTest {
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withLabels().build();
+        TestTask editedTask = new TaskBuilder(taskToEdit)
+                .withLabels().build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("FIND 5");
-
+        commandBox.runCommand("find 5");
         String detailsToEdit = "Complete task 25";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 5;
-
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Complete task 25").build();
-
-        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
+        assertTrue(editedCard.getTitle().equals(detailsToEdit));
     }
 
     @Test
     public void edit_missingTaskIndex_failure() {
-        commandBox.runCommand("EDIT Bobby");
+        commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
-        commandBox.runCommand("EDIT 8 Bobby");
+        commandBox.runCommand("edit 8 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASKS_DISPLAYED_INDEX);
     }
 
     @Test
     public void edit_noFieldsSpecified_failure() {
-        commandBox.runCommand("EDIT 1");
+        commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("EDIT 1 *&");
+        commandBox.runCommand("edit 1 *&");
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
-        commandBox.runCommand("EDIT 1 #*&");
+        commandBox.runCommand("edit 1 #*&");
         assertResultMessage(Label.MESSAGE_LABEL_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("EDIT 3 Complete task 4"
-                                + " BY 11-11-2017 2300 #friends");
-        commandBox.runCommand("ADD Complete task 5 FROM 10-10-2017 0100 TO 11-11-2017 "
+        commandBox.runCommand("edit 3 Complete task 4"
+                                + " by 11-11-2017 2300 #friends");
+        commandBox.runCommand("add Complete task 5 from 10-10-2017 0100 to 11-11-2017 "
+
                 + "2300 #friends");
-        commandBox.runCommand("EDIT 3 Complete task 5"
-                                + " FROM 10-10-2017 0100 TO 11-11-2017 2300 #friends");
+        commandBox.runCommand("edit 3 Complete task 5"
+
+                                + " from 10-10-2017 0100 to 11-11-2017 2300 #friends");
 
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
+
+    @Test
+    public void edit_editStartAndEndDate_success() throws Exception {
+        String detailsToEdit = "from today to next week";
+        int taskManagerIndex = 2;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 2").withStartTime("today")
+                .withDeadline("next week").withLabels("owesMoney", "friends")
+                .withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_clearDates_success() throws Exception {
+        String detailsToEdit = "clear dates";
+        int taskManagerIndex = 1;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 1")
+                .withLabels("friends")
+                .withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_changeFromTwoToOneDate_success() throws Exception {
+        String detailsToEdit = "by next week";
+        int taskManagerIndex = 3;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 3")
+                .withDeadline("next week").withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_changeFromOneToTwoDates_success() throws Exception {
+        String detailsToEdit = "from today to next week";
+        int taskManagerIndex = 7;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Complete task 7").withStartTime("today")
+                .withDeadline("next week").withStatus(false).build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
 
     /**
      * Checks whether the edited task has the correct updated details.
@@ -118,7 +168,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
      */
     private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
                                     String detailsToEdit, TestTask editedTask) {
-        commandBox.runCommand("EDIT " + filteredTaskListIndex + " " + detailsToEdit);
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
         System.out.println("details to edit: " + detailsToEdit);
         System.out.println("edited task: " + editedTask);
 
@@ -129,6 +179,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
+        Arrays.sort(expectedTasksList);
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
