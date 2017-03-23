@@ -1,8 +1,5 @@
 package seedu.address;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -12,7 +9,6 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
@@ -83,6 +79,7 @@ public class MainApp extends Application {
      * Load all fonts in the resources/fonts folder
      */
     private void loadFonts() {
+        /*
         File files = new File("src/main/resources/fonts/");
 
         for (File file : files.listFiles()) {
@@ -94,6 +91,7 @@ public class MainApp extends Application {
                 }
             }
         }
+        */
     }
     //@@author
 
