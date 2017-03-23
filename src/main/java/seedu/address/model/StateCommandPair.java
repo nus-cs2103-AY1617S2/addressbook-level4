@@ -24,7 +24,6 @@ public class StateCommandPair {
 
     /**
      * Executes the command previously entered (for redo)
-     * 
      * @throws CommandException
      * @throws IllegalValueException
      */
@@ -35,7 +34,6 @@ public class StateCommandPair {
 
     /**
      * Executes the inverse of the command previously entered (for undo)
-     * 
      * @throws CommandException
      * @throws IllegalValueException
      */

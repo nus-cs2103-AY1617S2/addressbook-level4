@@ -55,7 +55,6 @@ public class StateManager {
     /**
      * Undo the most recent command, then store that undo command in a redo
      * stack
-     * 
      * @throws CommandException
      * @throws IllegalValueException
      */
@@ -75,7 +74,6 @@ public class StateManager {
     /**
      * Redo the most recently 'undo' command, then store that redo command in
      * the undo stack
-     * 
      * @throws CommandException
      * @throws IllegalValueException
      */
