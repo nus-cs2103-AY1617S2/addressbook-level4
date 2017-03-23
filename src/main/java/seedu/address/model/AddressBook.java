@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +47,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    public void sortTaskList(Comparator<ReadOnlyTask> comparator) {
+        tasks.sortTaskList(comparator);
     }
 
 //// list overwrite operations

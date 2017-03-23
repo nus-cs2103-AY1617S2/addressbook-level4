@@ -6,8 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.Optional;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.IncorrectCommand;
+import seedu.address.logic.commands.ListCommand;
 
 /**
  * Parses input arguments and creates a new ListCommand object

@@ -17,6 +17,7 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -42,9 +43,6 @@ public class ModelManager extends ComponentManager implements Model {
     public FilteredList<ReadOnlyTask> floatingTasks;
     public FilteredList<ReadOnlyTask> completedTasks;
 
-    private static final String SORT_TYPE_DATE = "date";
-    private static final String SORT_TYPE_PRIORITY = "priority";
-    private static final String SORT_TYPE_TITLE = "title";
     private Comparator<ReadOnlyTask> currentComparator;
 
     private Expression currentNonFloatingTasksExpression;
@@ -65,7 +63,9 @@ public class ModelManager extends ComponentManager implements Model {
         this.currentAddressBookStateIndex = 0;
         this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
         setCurrentPredicateToShowAllTasks();
-        setCurrentComparator(SORT_TYPE_PRIORITY);
+        initializeTaskLists();
+        updateTaskListPredicate();
+        setCurrentComparator(ListCommand.COMPARATOR_NAME_PRIORITY);
     }
 
     public ModelManager() {
@@ -82,27 +82,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0144813J
-    private void setAddressBookState() {
-        this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
-        this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
-        this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
-        updateTaskListPredicate();
+    private void initializeTaskLists() {
+        this.nonFloatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        this.floatingTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
+        this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList());
     }
 
     public void setCurrentComparator(String type) {
         switch (type) {
-        case SORT_TYPE_DATE:
+        case ListCommand.COMPARATOR_NAME_DATE:
             this.currentComparator = new TaskDeadlineComparator();
             break;
-        case SORT_TYPE_PRIORITY:
-            this.currentComparator = new TaskPriorityComparator();
-            break;
-        default:
+        case ListCommand.COMPARATOR_NAME_TITLE:
             this.currentComparator = new TaskTitleComparator();
             break;
+        default:
+            this.currentComparator = new TaskPriorityComparator();
+            break;
         }
-        setAddressBookState();
-        indicateAddressBookStateChanged();
+        applyCurrentComparatorToTaskList();
+    }
+
+    private void applyCurrentComparatorToTaskList() {
+        this.currentAddressBook.sortTaskList(currentComparator);
     }
 
     /**
@@ -141,14 +143,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(this.currentAddressBook));
     }
 
-    /** Raises an event to indicate the model and its state have changed */
-    private void indicateAddressBookStateChanged() {
-        AddressBookChangedEvent abce = new AddressBookChangedEvent(this.currentAddressBook);
-        abce.setFloatingTasks(getFloatingTaskList());
-        abce.setNonFloatingTasks(getNonFloatingTaskList());
-        abce.setCompletedTasks(getCompletedTaskList());
-        raise(abce);
-    }
     //@@author A0144813J
     @Override
     public void saveTasksToIcsFile(String filePath) throws ValidationException, IOException {
@@ -170,9 +164,8 @@ public class ModelManager extends ComponentManager implements Model {
             throw new StateLimitReachedException();
         }
         this.currentAddressBookStateIndex++;
-        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
-        setAddressBookState();
-        indicateAddressBookStateChanged();
+        this.currentAddressBook.resetData(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        indicateAddressBookChanged();
     }
 
     @Override
@@ -181,9 +174,8 @@ public class ModelManager extends ComponentManager implements Model {
             throw new StateLimitReachedException();
         }
         this.currentAddressBookStateIndex--;
-        this.currentAddressBook = new AddressBook(this.addressBookStates.get(this.currentAddressBookStateIndex));
-        setAddressBookState();
-        indicateAddressBookStateChanged();
+        this.currentAddressBook.resetData(this.addressBookStates.get(this.currentAddressBookStateIndex));
+        indicateAddressBookChanged();
     }
 
     @Override
@@ -218,6 +210,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.currentAddressBook.addTask(task);
         recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
+        applyCurrentComparatorToTaskList();
     }
 
     @Override
@@ -241,6 +234,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskListToShowAllTasks();
         recordCurrentStateOfAddressBook();
         indicateAddressBookChanged();
+        applyCurrentComparatorToTaskList();
     }
 
     //=========== Filtered Task List Accessors =============================================================

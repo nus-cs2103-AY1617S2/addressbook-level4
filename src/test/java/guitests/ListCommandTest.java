@@ -6,8 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import org.junit.Test;
 
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.testutil.TestTask;
 
 public class ListCommandTest extends AddressBookGuiTest {
 
