@@ -16,8 +16,8 @@ import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the task manager data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of the task manager data. All changes to any
+ * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -29,151 +29,154 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
-        super();
-        assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
+	super();
+	assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
-        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
+	logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-        this.taskmanager = new TaskManager(taskManager);
-        filteredTasks = new FilteredList<>(this.taskmanager.getTaskList());
+	this.taskmanager = new TaskManager(taskManager);
+	filteredTasks = new FilteredList<>(this.taskmanager.getTaskList());
     }
-    
-    //brute force pattern matching algorithm
+
+    // brute force pattern matching algorithm
     public static boolean patternStringMatch(String p, String t) {
-    	int i = 0;
-    	int j = 0;
-    	while (i <= t.length() - p.length()) {
-    		if (p.substring(j, j + 1).equalsIgnoreCase(t.substring(i + j, i + j + 1))) {
-    			j++;
-    			if (j >= p.length()) {
-    				return true;
-    			}
-    		} else {
-				j = 0;
-				i++;
-    		}
-    	}
-    	return false;
+	int i = 0;
+	int j = 0;
+	while (i <= t.length() - p.length()) {
+	    if (p.substring(j, j + 1).equalsIgnoreCase(t.substring(i + j, i + j + 1))) {
+		j++;
+		if (j >= p.length()) {
+		    return true;
+		}
+	    } else {
+		j = 0;
+		i++;
+	    }
+	}
+	return false;
     }
 
     public ModelManager() {
-        this(new TaskManager(), new UserPrefs());
+	this(new TaskManager(), new UserPrefs());
     }
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        taskmanager.resetData(newData);
-        indicateTaskManagerChanged();
+	taskmanager.resetData(newData);
+	indicateTaskManagerChanged();
     }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
-        return taskmanager;
+	return taskmanager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskmanager));
+	raise(new TaskManagerChangedEvent(taskmanager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskmanager.removeTask(target);
-        indicateTaskManagerChanged();
+	taskmanager.removeTask(target);
+	indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskmanager.addJobTask(task);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
+	taskmanager.addJobTask(task);
+	updateFilteredListToShowAll();
+	indicateTaskManagerChanged();
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
-        assert editedTask != null;
+	    throws UniqueTaskList.DuplicateTaskException {
+	assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskmanager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged();
+	int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+	taskmanager.updateTask(taskManagerIndex, editedTask);
+	indicateTaskManagerChanged();
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+	return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+	filteredTasks.setPredicate(null);
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+	updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
+	filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask task);
-        String toString();
+	boolean satisfies(ReadOnlyTask task);
+
+	String toString();
     }
 
     private class PredicateExpression implements Expression {
 
-        private final Qualifier qualifier;
+	private final Qualifier qualifier;
 
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
-        }
+	PredicateExpression(Qualifier qualifier) {
+	    this.qualifier = qualifier;
+	}
 
-        @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
-        }
+	@Override
+	public boolean satisfies(ReadOnlyTask task) {
+	    return qualifier.run(task);
+	}
 
-        @Override
-        public String toString() {
-            return qualifier.toString();
-        }
+	@Override
+	public String toString() {
+	    return qualifier.toString();
+	}
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask task);
-        String toString();
+	boolean run(ReadOnlyTask task);
+
+	String toString();
     }
 
     private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+	private Set<String> nameKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
+	NameQualifier(Set<String> nameKeyWords) {
+	    this.nameKeyWords = nameKeyWords;
+	}
 
-        @Override
-        public boolean run(ReadOnlyTask task) {
-        	for (String s : nameKeyWords) {
-        		assert s.length() > 0;
-        		if (patternStringMatch(s, task.getTaskName().fullTaskName)) {
-        			return true;
-        		}
-        	}
-        	return false;
-        }
-        
+	@Override
+	public boolean run(ReadOnlyTask task) {
+	    for (String s : nameKeyWords) {
+		assert s.length() > 0;
+		if (patternStringMatch(s, task.getTaskName().fullTaskName)) {
+		    return true;
+		}
+	    }
+	    return false;
+	}
 
-        @Override
-        public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
-        }
+	@Override
+	public String toString() {
+	    return "name=" + String.join(", ", nameKeyWords);
+	}
     }
 
 }
