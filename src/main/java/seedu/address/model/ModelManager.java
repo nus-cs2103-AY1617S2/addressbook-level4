@@ -85,7 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.completedTasks = new FilteredList<>(this.currentAddressBook.getTaskList().sorted(currentComparator));
         updateTaskListPredicate();
     }
-
+    
     public void setCurrentComparator(String type) {
         switch (type) {
         case "date":
@@ -300,7 +300,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-
+    //@@author A0139539R
     private class NameFloatingTaskQualifier implements Qualifier {
         private Set<String> nameKeyWords;
         private FuzzyFinder fuzzyFinder;
@@ -380,6 +380,7 @@ public class ModelManager extends ComponentManager implements Model {
             return FuzzySearch.ratio(title, keyword) > MATCHING_INDEX;
         }
     }
+    //@@author
     //@@author A0144813J
     private class TaskIsFloatingQualifier implements Qualifier {
 

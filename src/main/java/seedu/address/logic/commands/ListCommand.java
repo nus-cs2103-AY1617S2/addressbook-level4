@@ -1,3 +1,4 @@
+//@@author A0139539R
 package seedu.address.logic.commands;
 
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks by %1$s.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks according to date, priority, title.";
-    
+
     public static final String COMPARATOR_NAME_DATE = "date";
     public static final String COMPARATOR_NAME_PRIORITY = "priority";
     public static final String COMPARATOR_NAME_TITLE = "title";

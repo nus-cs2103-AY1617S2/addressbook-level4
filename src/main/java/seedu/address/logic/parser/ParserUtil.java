@@ -26,7 +26,7 @@ import seedu.address.model.task.Title;
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
 public class ParserUtil {
-
+    //@@author A0139539R
     private static final Pattern COMPARATOR_NAME_ARGS_FORMAT = Pattern.compile(
             "(?<comparatorName>("
             + ListCommand.COMPARATOR_NAME_DATE
@@ -36,7 +36,7 @@ public class ParserUtil {
             + ListCommand.COMPARATOR_NAME_TITLE
             + ")?)"
             );
-    
+    //@@author
     private static final Pattern LISTNAME_INDEX_ARGS_FORMAT = Pattern.compile(
             "(?<listName>("
             + Task.TASK_NAME_FLOATING
@@ -81,7 +81,6 @@ public class ParserUtil {
 
     }
     //@@author
-    
     //@@author A0139539R
     /**
      * Returns the specified task list name in the {@code command} if it is an alpha-non-numeric string
