@@ -27,12 +27,18 @@ public interface ReadOnlyEvent {
     default boolean isSameStateAs(ReadOnlyEvent other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getStartTime().equals(this.getStartTime())
-                && other.getEndTime().equals(this.getEndTime())
-                && other.getStartDate().equals(this.getStartDate())
-                && other.getEndDate().equals(this.getEndDate())
-                && other.getLocation().equals(this.getLocation()));
+                && (other.getDescription().toString() == null? this.getDescription().toString() == null :
+                    other.getDescription().toString().equals(this.getDescription().toString())) // state checks here onwards
+                && (other.getStartTime().toString() == null? this.getStartTime().toString() == null :
+                    other.getStartTime().toString().equals(this.getStartTime().toString()))
+                && (other.getEndTime().toString() == null? this.getEndTime().toString() == null :
+                    other.getEndTime().toString().equals(this.getEndTime().toString()))
+                && (other.getStartDate().toString() == null? this.getStartDate().toString() == null :
+                    other.getStartDate().toString().equals(this.getStartDate().toString()))
+                && (other.getEndDate().toString() == null? this.getEndDate().toString() == null :
+                    other.getEndDate().toString().equals(this.getEndDate().toString()))
+                && (other.getLocation().toString() == null? this.getLocation().toString() == null :
+                    other.getLocation().toString().equals(this.getLocation().toString())));
     }
 
     /**
@@ -42,13 +48,13 @@ public interface ReadOnlyEvent {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" Start Time: ")
-                .append(getStartTime())
+                .append(getStartTime().toString())
                 .append(" Start Date: ")
-                .append(getStartDate())
+                .append(getStartDate().toString())
                 .append(" End Time: ")
-                .append(getEndTime())
+                .append(getEndTime().toString())
                 .append(" End Date: ")
-                .append(getEndDate())
+                .append(getEndDate().toString())
                 .append(" Location: ")
                 .append(getLocation())
                 .append(" Tags: ");

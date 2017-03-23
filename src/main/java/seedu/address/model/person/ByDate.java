@@ -50,6 +50,9 @@ public class ByDate {
     //@@author
     @Override
     public String toString() {
+        if (value == null) {
+            return null;
+        }
         return value.toString();
     }
 
