@@ -15,7 +15,7 @@ public class Location {
      * The first character of the location must not be a whitespace, otherwise " " (a blank string) becomes a valid
      * input.
      */
-    public static final String LOCATION_VALIDATION_REGEX = "[^\\s].*";
+    public static final String LOCATION_VALIDATION_REGEX = ".*";
 
     /**
      * Returns true if a given string is a valid task location.

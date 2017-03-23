@@ -33,7 +33,6 @@ import seedu.geekeep.logic.commands.ExitCommand;
 import seedu.geekeep.logic.commands.FindCommand;
 import seedu.geekeep.logic.commands.HelpCommand;
 import seedu.geekeep.logic.commands.ListCommand;
-import seedu.geekeep.logic.commands.SelectCommand;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.Model;
 import seedu.geekeep.model.ModelManager;
@@ -71,8 +70,8 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            DateTime privateEndDateTime = new DateTime("2017-05-01T10:16:30");
-            DateTime startDateTime = new DateTime("2017-04-01T10:16:30");
+            DateTime privateEndDateTime = new DateTime("01-05-17 1630");
+            DateTime startDateTime = new DateTime("01-04-17 1630");
             Location privateLocation = new Location("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
@@ -143,8 +142,8 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Title("Person " + seed),
-                    new DateTime("2017-04-01T10:16:30"),
-                    new DateTime("2017-05-01T10:16:30"),
+                    new DateTime("01-04-17 1630"),
+                    new DateTime("01-05-17 1630"),
                     new Location("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -189,8 +188,8 @@ public class LogicManagerTest {
         Task generateTaskWithName(String name) throws Exception {
             return new Task(
                     new Title(name),
-                    new DateTime("2017-04-01T10:16:30"),
-                    new DateTime("2017-05-01T10:16:30"),
+                    new DateTime("01-04-17 1630"),
+                    new DateTime("01-05-17 1630"),
                     new Location("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
@@ -295,14 +294,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] s/2017-04-01T10:16:30 e/2017-05-01T10:16:30 l/valid, address",
+        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, address",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/not_numbers e/2017-05-01T10:16:30 l/valid, address",
+        assertCommandFailure("add Valid Name s/not_numbers e/01-05-17 1630 l/valid, address",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/2017-04-01T10:16:30 e/notAnEmail l/valid, address",
+        assertCommandFailure("add Valid Name s/01-04-17 1630 e/not_numbers l/valid, address",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name s/2017-04-01T10:16:30 e/2017-05-01T10:16:30 l/valid, address t/invalid_-[.tag",
+                "add Valid Name s/01-04-17 1630 e/01-05-17 1630 l/valid, address t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -471,34 +470,6 @@ public class LogicManagerTest {
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
-    }
-
-    @Test
-    public void execute_select_jumpsToCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        helper.addToModel(model, threeTasks);
-
-        assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
-                expectedAB,
-                expectedAB.getTaskList());
-        assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
-    }
-
-
-    @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
-    }
-
-    @Test
-    public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
     }
 
     @Test

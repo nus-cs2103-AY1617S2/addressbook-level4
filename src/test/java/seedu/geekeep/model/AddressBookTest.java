@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
@@ -49,12 +50,17 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestPersons td = new TypicalTestPersons();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
-        AddressBookStub newData = new AddressBookStub(newTasks, newTags);
+        List<Task> newTasks;
+        try {
+            newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
+            List<Tag> newTags = td.alice.getTags().asObservableList();
+            AddressBookStub newData = new AddressBookStub(newTasks, newTags);
 
-        thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+            thrown.expect(AssertionError.class);
+            taskManager.resetData(newData);
+        } catch (IllegalValueException ive) {
+            assert false : "not possible";
+        }
     }
 
     @Test
