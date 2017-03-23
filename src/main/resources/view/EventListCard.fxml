@@ -17,7 +17,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="50.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -31,11 +31,12 @@
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
                                     <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
+                                    <FlowPane fx:id="tags" />
                                 </HBox>
                             </children>
                         </HBox>
-                        <FlowPane fx:id="tags" />
-                        <FlowPane fx:id="timeSlots" />
+<!--                         <FlowPane fx:id="tags" /> -->
+                        <FlowPane fx:id="timeslots" />
                         <Label fx:id="eventLocation" styleClass="cell_small_label" text="\$location" />
                         <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
                     </children>
