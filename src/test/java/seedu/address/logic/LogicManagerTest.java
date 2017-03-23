@@ -46,6 +46,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 import seedu.address.storage.StorageManager;
@@ -421,7 +422,8 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privateTime, priority, tags);
+            Status status = new Status(0);
+            return new Task(name, privateTime, priority, tags, status);
         }
 
         /**
@@ -437,7 +439,8 @@ public class LogicManagerTest {
                     new Time("0" + (Math.abs(seed) % 30 + 1) + "/0" +
                     (Math.abs(seed) % 12 + 1) + "/" + (Math.abs(seed) % 3000 + 1000)),
                     new Priority("high"),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
+                    new Status(0)
             );
         }
 
@@ -533,8 +536,10 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Time("01/01/2012"),
+                    new UniqueTagList(new Tag("tag")),
                     new Priority("high"),
-                    new UniqueTagList(new Tag("tag"))
+                    new UniqueTagList(new Tag("tag")),
+                    new Status(0)
             );
         }
     }
