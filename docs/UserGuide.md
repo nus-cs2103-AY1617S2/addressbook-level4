@@ -262,4 +262,3 @@ The other task will remain in KIT. Instructions on these commands can be found i
 ## 4. Command Summary
 
 <img src="images/Command Summary.png" width="600">
-   
