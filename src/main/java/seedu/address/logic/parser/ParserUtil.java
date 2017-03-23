@@ -31,6 +31,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)");
+    private static final Pattern INDEX_ALONE_ARG_FORMAT = Pattern.compile("(?<index>.+)");
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -49,6 +50,20 @@ public class ParserUtil {
         return Optional.of(Integer.parseInt(index));
 
     }
+    //@@author A0110491U
+    public static Optional<Integer> parseIndexAlone(String command) {
+        final Matcher matcher = INDEX_ALONE_ARG_FORMAT.matcher(command.trim());
+        if (!matcher.matches()) {
+            return Optional.empty();
+        }
+
+        String index = matcher.group("index");
+        if (!StringUtil.isUnsignedInteger(index)) {
+            return Optional.empty();
+        }
+        return Optional.of(Integer.parseInt(index));
+
+    }
 
     public static Optional<String> parseType(String command) {
         final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
@@ -59,6 +74,7 @@ public class ParserUtil {
         String type = matcher.group("targetType");
         return Optional.of(type);
     }
+    //@@author
 
     /**
      * Returns a new Set populated by all elements in the given list of strings

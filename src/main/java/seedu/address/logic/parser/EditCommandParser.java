@@ -42,7 +42,7 @@ public class EditCommandParser {
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 3);
 
-        Optional<Integer> index = preambleFields.get(1).flatMap(ParserUtil::parseIndex);
+        Optional<Integer> index = preambleFields.get(1).flatMap(ParserUtil::parseIndexAlone);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
