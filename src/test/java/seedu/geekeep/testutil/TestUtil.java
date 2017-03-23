@@ -115,7 +115,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static String descOnFail(Object... comparedObjects) {
@@ -125,7 +125,7 @@ public class TestUtil {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
         return new XmlSerializableTaskManager(new TaskManager());
     }
 

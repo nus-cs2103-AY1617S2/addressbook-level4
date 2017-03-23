@@ -37,7 +37,7 @@ facilitate communication between event creators and event consumers.
 
 ## Use API Design `[LO-ApiDesign]`
 
-Note how components of AddressBook have well-defined APIs. For example, the API of the `Logic` component
+Note how components of TaskManager have well-defined APIs. For example, the API of the `Logic` component
 is given in the [`Logic.java`](../src/main/java/seedu/geekeep/logic/Logic.java)
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -50,7 +50,7 @@ is given in the [`Logic.java`](../src/main/java/seedu/geekeep/logic/Logic.java)
 
 ## Use Assertions `[LO-Assertions]`
 
-Note how the AddressBook app uses Java `assert`s to verify assumptions.
+Note how the TaskManager app uses Java `assert`s to verify assumptions.
 
 **Resources**
 
@@ -63,13 +63,13 @@ Note how the AddressBook app uses Java `assert`s to verify assumptions.
  * Make sure assertions are enabled in Eclipse by forcing an assertion failure (e.g. add `assert false;` somewhere in
  the code and run the code to ensure the runtime reports an assertion failure).
 
- * Add more assertions to AddressBook as you see fit.
+ * Add more assertions to TaskManager as you see fit.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Logging `[LO-Logging]`
 
-Note [how the AddressBook app uses Java's `java.util.log` package to do logging](DeveloperGuide.md#31-logging).
+Note [how the TaskManager app uses Java's `java.util.log` package to do logging](DeveloperGuide.md#31-logging).
 
 **Resources**
 
@@ -84,18 +84,18 @@ Note [how the AddressBook app uses Java's `java.util.log` package to do logging]
 
 #### Exercise: Add more logging
 
- Add more logging to AddressBook as you see fit.
+ Add more logging to TaskManager as you see fit.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Defensive Coding `[LO-DefensiveCoding]`
 
- Note how AddressBook uses the `ReadOnly*` interfaces to prevent objects being modified by clients who are not
+ Note how TaskManager uses the `ReadOnly*` interfaces to prevent objects being modified by clients who are not
  supposed to modify them.
 
 #### Exercise: identify more places for defensive coding
 
-Analyze the AddressBook code/design to identify,
+Analyze the TaskManager code/design to identify,
 
 * where defensive coding is used
 * where the code can be more defensive
@@ -104,7 +104,7 @@ Analyze the AddressBook code/design to identify,
 
 ## Use Build Automation `[LO-BuildAutomation]`
 
-Note [how the AddressBook app uses Gradle to automate build tasks](UsingGradle.md).
+Note [how the TaskManager app uses Gradle to automate build tasks](UsingGradle.md).
 
 **Resources**
 
@@ -126,7 +126,7 @@ Note [how the AddressBook app uses Gradle to automate build tasks](UsingGradle.m
 
 ## Use Continuous Integration `[LO-ContinuousIntegration]`
 
-Note [how the AddressBook app uses Travis to perform Continuous Integration](UsingTravis.md).
+Note [how the TaskManager app uses Travis to perform Continuous Integration](UsingTravis.md).
 ([![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4))
 
 **Resources**
@@ -181,8 +181,8 @@ Consider the [`StorageManagerTest.java`](../src/test/java/seedu/geekeep/storage/
 * Test methods `prefsReadSave()` and `addressBookReadSave()` are integration tests. Note how they simply test if
   The `StorageManager` class is correctly wired to its dependencies.
 
-* Test method `handleAddressBookChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses
-  _dependency injection_ to isolate the SUT `StorageManger::handleAddressBookChangedEvent(...)` from its
+* Test method `handleTaskManagerChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses
+  _dependency injection_ to isolate the SUT `StorageManger::handleTaskManagerChangedEvent(...)` from its
   dependencies.
 
 Compare the above with [`LogicManagerTest`](../src/test/java/seedu/geekeep/logic/LogicManagerTest.java).

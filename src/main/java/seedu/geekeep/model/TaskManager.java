@@ -173,7 +173,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}. {@code AddressBook}'s
+     * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}. {@code TaskManager}'s
      * tag list will be updated with the tags of {@code editedReadOnlyTask}.
      *
      * @see #syncMasterTagListWith(Task)

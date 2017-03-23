@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.util.SampleDataUtil;
 import seedu.geekeep.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskManagerGuiTest {
     @Override
     protected TaskManager getInitialData() {
         // return null to force test app to load data from file only

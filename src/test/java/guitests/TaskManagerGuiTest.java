@@ -31,9 +31,9 @@ import seedu.geekeep.testutil.TestUtil;
 import seedu.geekeep.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for TaskManager.
  */
-public abstract class AddressBookGuiTest {
+public abstract class TaskManagerGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule

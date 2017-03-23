@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import seedu.geekeep.ui.CommandBox;
 
-public class CommandBoxTest extends AddressBookGuiTest {
+public class CommandBoxTest extends TaskManagerGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "find NOSUCHTASKEXIST";
     private static final String COMMAND_THAT_FAILS = "invalid command";

@@ -58,7 +58,7 @@ public class LogicManagerTest {
 
     private Logic logic;
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskManager latestSavedAddressBook;
+    private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
 
     private int targetedJumpIndex;
@@ -97,15 +97,15 @@ public class LogicManagerTest {
         }
 
         /**
-         * Adds auto-generated Task objects to the given AddressBook
-         * @param taskManager The AddressBook to which the Tasks will be added
+         * Adds auto-generated Task objects to the given TaskManager
+         * @param taskManager The TaskManager to which the Tasks will be added
          */
         void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
             addToTaskManager(taskManager, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Tasks to the given AddressBook
+         * Adds the given list of Tasks to the given TaskManager
          */
         void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
             for (Task p: tasksToAdd) {
@@ -165,7 +165,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook with auto-generated tasks.
+         * Generates an TaskManager with auto-generated tasks.
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
             TaskManager taskManager = new TaskManager();
@@ -174,7 +174,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook based on the list of Tasks given.
+         * Generates an TaskManager based on the list of Tasks given.
          */
         TaskManager generateTaskManager(List<Task> tasks) throws Exception {
             TaskManager taskManager = new TaskManager();
@@ -202,12 +202,12 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal task manager data are same as those in the {@code expectedAddressBook} <br>
+     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     *      - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedAddressBook,
+                                       ReadOnlyTaskManager expectedTaskManager,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
@@ -223,8 +223,8 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getTaskManager());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        assertEquals(expectedTaskManager, model.getTaskManager());
+        assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
 
     /**
@@ -244,9 +244,9 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedAddressBook,
+                                      ReadOnlyTaskManager expectedTaskManager,
                                       List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
     /**
@@ -486,7 +486,7 @@ public class LogicManagerTest {
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedAddressBook = new TaskManager(abce.data);
+        latestSavedTaskManager = new TaskManager(abce.data);
     }
 
     @Subscribe
@@ -497,12 +497,12 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
+        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }

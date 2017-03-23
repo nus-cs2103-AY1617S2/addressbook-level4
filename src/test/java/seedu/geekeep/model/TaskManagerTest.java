@@ -20,7 +20,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -40,7 +40,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyTaskManager_replacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
@@ -54,7 +54,7 @@ public class AddressBookTest {
         try {
             newTasks = Arrays.asList(new Task(td.alice), new Task(td.alice));
             List<Tag> newTags = td.alice.getTags().asObservableList();
-            AddressBookStub newData = new AddressBookStub(newTasks, newTags);
+            TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
             thrown.expect(AssertionError.class);
             taskManager.resetData(newData);
@@ -70,20 +70,20 @@ public class AddressBookTest {
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
-        AddressBookStub newData = new AddressBookStub(newTasks, newTags);
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyTaskManager {
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
