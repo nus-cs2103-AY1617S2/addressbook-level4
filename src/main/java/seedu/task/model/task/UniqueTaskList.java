@@ -41,9 +41,22 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);
+        internalList.add(toAdd);// the most recently added task will be displayed at the top
     }
 
+    /**
+     * Adds a task to the front of list.
+     *
+     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     */
+    public void addToFront(Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(0, toAdd);// the most recently added task will be displayed at the top
+    }
+    
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
@@ -64,6 +77,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        
     }
 
     public void done(int index) {
@@ -72,6 +86,13 @@ public class UniqueTaskList implements Iterable<Task> {
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
+    
+    public void Undone(int index) {
+        // TODO Auto-generated method stub
+            Task taskUnDone = internalList.get(index);
+            taskUnDone.setIsDone(false);
+            internalList.set(index, taskUnDone);
+        }
 
 
     /**
@@ -91,7 +112,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
-        FXCollections.sort(internalList, new TaskComparator());
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
@@ -139,5 +159,10 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    public void sort() {
+        // TODO Auto-generated method stub
+        FXCollections.sort(internalList, new TaskComparator());
+    }
 
 }

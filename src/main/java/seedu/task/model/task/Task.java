@@ -46,12 +46,16 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
+    /**
+     * 
+     * @param startDate
+     * @param endDate
+     * @return true if one of two dates is null. if both not null, only returns
+     *         true if startDate is strictly before endDate
+     */
     private boolean checkDates(Date startDate, Date endDate) {
-        if (startDate.isNull() || endDate.isNull()) {
-            return true;
-        }
-
-        return Date.isBefore(startDate, endDate);
+        return (startDate.isNull() || endDate.isNull()) ? true
+                : startDate.getDateValue().before(endDate.getDateValue());
     }
 
     /**

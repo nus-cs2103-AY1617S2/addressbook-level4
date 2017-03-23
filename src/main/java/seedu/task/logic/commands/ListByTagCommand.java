@@ -20,6 +20,7 @@ public class ListByTagCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        model.sortTaskList();
         model.updateFilteredTaskList(tag);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }

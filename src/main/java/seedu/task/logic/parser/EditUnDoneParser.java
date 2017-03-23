@@ -5,18 +5,18 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Optional;
 
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.DoneCommand;
+import seedu.task.logic.commands.UnDoneCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
 
-public class EditIsDoneParser {
+public class EditUnDoneParser {
 
     public Command parse(String args) {
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnDoneCommand.MESSAGE_USAGE));
         }
 
-        return new DoneCommand(index.get());
+        return new UnDoneCommand(index.get());
     }
 }

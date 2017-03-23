@@ -16,9 +16,9 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskComparator;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -43,8 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
         this.taskManager = new TaskManager(taskManager);
-//        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList().sorted(new TaskComparator()));
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -99,6 +98,13 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateDone(taskManagerIndex, target);
         indicateTaskManagerChanged(true);
     }
+    
+    @Override
+    public synchronized void UnDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+        int taskManagerIndex = filteredTasks.getSourceIndex(index);
+        taskManager.updateUnDone(taskManagerIndex, target);
+        indicateTaskManagerChanged(true);
+    }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
@@ -116,6 +122,13 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged(true);
     }
+    
+    @Override 
+    public void sortTaskList(){
+        taskManager.sortTaskList();
+        indicateTaskManagerChanged(false);
+    }
+    
     
     @Override
     public void changeFilePath(String newPath) {
@@ -233,7 +246,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return StringUtil.containsTagIgnoreCase(task.getTags(), tagKeyWord);
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(),tagKeyWord);
         }
 
         @Override

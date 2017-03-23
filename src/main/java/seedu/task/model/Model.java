@@ -30,6 +30,9 @@ public interface Model {
 
     /** Updates the task to done. */
     void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    
+    /** Updates the task from done to undone */
+    void UnDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
@@ -71,5 +74,8 @@ public interface Model {
 
     /** Loads the file from the path to be loaded from*/
 	void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
+
+    /** Sorts the task list */
+    void sortTaskList();
 
 }

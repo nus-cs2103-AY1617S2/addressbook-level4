@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -87,7 +88,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        tasks.add(p);
+        tasks.addToFront(p);
     }
 
     /**
@@ -190,6 +191,16 @@ public class TaskManager implements ReadOnlyTaskManager {
     public void updateDone(int index, ReadOnlyTask target) {
     // TODO Auto-generated method stub
         tasks.done(index);
+    }
+    
+    public void updateUnDone(int index, ReadOnlyTask target) {
+        // TODO Auto-generated method stub
+            tasks.Undone(index);
+        }
+
+    public void sortTaskList() {
+        // TODO Auto-generated method stub
+        tasks.sort();
     }
 
 }

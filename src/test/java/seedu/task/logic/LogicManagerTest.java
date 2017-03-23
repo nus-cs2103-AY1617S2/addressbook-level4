@@ -529,13 +529,13 @@ public class LogicManagerTest {
             for (int i = 1; i <= numGenerated; i++) {
                 tasks.add(generateTask(i));
             }
-            Collections.sort(tasks, new TaskComparator());
+//            Collections.sort(tasks, new TaskComparator());
             return tasks;
         }
 
         List<Task> generateTaskList(Task... tasks) {
             List<Task> toReturn = Arrays.asList(tasks);
-            Collections.sort(toReturn, new TaskComparator());
+            Collections.sort(toReturn);
             return toReturn;
         }
 

@@ -24,6 +24,7 @@ public class FindExactCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        model.sortTaskList();
         model.updateFilteredTaskList(keywords, isExact);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }

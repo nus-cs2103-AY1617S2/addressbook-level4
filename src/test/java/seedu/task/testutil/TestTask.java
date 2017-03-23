@@ -1,11 +1,13 @@
 package seedu.task.testutil;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.Location;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Remark;
+import seedu.task.model.task.Task;
 
 /**
  * A mutable task object. For testing only.
@@ -26,8 +28,15 @@ public class TestTask implements ReadOnlyTask {
 
     /**
      * Creates a copy of {@code taskToCopy}.
+     * 
+     * @throws IllegalValueException
+     *             when startDate is not strictly before endDate
      */
-    public TestTask(TestTask taskToCopy) {
+    public TestTask(TestTask taskToCopy) throws IllegalValueException {
+
+        if (!checkDates(taskToCopy.getStartDate(), taskToCopy.getEndDate())) {
+            throw new IllegalValueException(Task.MESSAGE_TASK_CONSTRAINTS);
+        }
         this.name = taskToCopy.getName();
         this.startDate = taskToCopy.getStartDate();
         this.endDate = taskToCopy.getEndDate();
@@ -35,6 +44,18 @@ public class TestTask implements ReadOnlyTask {
         this.location = taskToCopy.getLocation();
         this.isDone = false;
         this.tags = taskToCopy.getTags();
+    }
+
+    /**
+     * 
+     * @param startDate
+     * @param endDate
+     * @return true if one of two dates is null. if both not null, only returns
+     *         true if startDate is strictly before endDate
+     */
+    private boolean checkDates(Date startDate, Date endDate) {
+        return (startDate.isNull() || endDate.isNull()) ? true
+                : startDate.getDateValue().before(endDate.getDateValue());
     }
 
     public void setName(Name name) {
@@ -123,9 +144,8 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public int compareTo(ReadOnlyTask o) {
-        //Same end date then compare according to names lexicographically
-        if ((this.getEndDate()== null && o.getEndDate() == null)
-                ||(this.getEndDate().equals(o.getEndDate()))) {
+        // Same end date then compare according to names lexicographically
+        if ((this.getEndDate() == null && o.getEndDate() == null) || (this.getEndDate().equals(o.getEndDate()))) {
             return this.getName().fullName.compareTo(o.getName().fullName);
         } else {
             if (this.getEndDate().isNull()) return 1;

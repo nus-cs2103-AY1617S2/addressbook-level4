@@ -343,7 +343,11 @@ public class TestUtil {
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
-        listOfTasks.addAll(asList(tasksToAdd));
+
+        //adds each task one by one, most recent one on top
+        for(TestTask t : tasksToAdd){
+            listOfTasks.add(0, t);
+        }
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
@@ -392,16 +396,24 @@ public class TestUtil {
         return listOfTasks.toArray(new ReadOnlyTask[listOfTasks.size()]);
 
     }
-
-//     public static <T> T[] giveSortedList(T[] objs){
-//     List<T> listOfObjects = asList(objs);
-//     Collections.sort(listOfObjects);
-//     return listOfObjects.toArray(new <T>[listOfObjects.size()]);
-//     }
-//     public <E> E[] getArray(Class<E> clazz, int size) {
-//         @SuppressWarnings("unchecked")
-//         E[] arr = (E[]) Array.newInstance(clazz, size);
-//
-//         return arr;
-//     }
+    
+    
+    public static TestTask[] filterDoneTasks(final TestTask[] tasks){
+        List<TestTask> filteredTaskList = new ArrayList<>();
+        for(TestTask tt: tasks){
+            if(tt.isDone())
+                filteredTaskList.add(tt);
+        }
+       return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
+    }
+    
+    public static TestTask[] filterUndoneTasks(final TestTask[] tasks){
+        List<TestTask> filteredTaskList = new ArrayList<>();
+        for(TestTask tt: tasks){
+            if(!tt.isDone())
+                filteredTaskList.add(tt);
+        }
+       return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
+        
+    }
 }
