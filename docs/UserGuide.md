@@ -47,23 +47,23 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task : `add task`
+### 2.2. Adding a floating task : `add`
 
 Adds a task to the task scheduler <br>
 
-Format: `add TASK_NAME b/DEADLINE [t/TAG d/DESCRIPTION s/POSSIBLE TIMING 1, POSSIBLE TIMING 2 p/PERIODICITY]...`
+Format: `add TASK_NAME`
 > Tasks can have any number of tags (including 0)
 
 Examples:
 
-* `add task math homework b/03-03-2017 t/school p/N`
-* `add task pay bill b/09032017 t/house p/Y`
+* `add task math homework`
+* `add task pay bill`
 
-### 2.3 Adding an event : `add event`
+### 2.3 Adding an event : `add`
 
 Adds an event to the task scheduler <br>
 
-Format: `add  EVENT_NAME l/LOCATION p/PERIOD s/START_TIME e/END_TIME d/ DESCRIPTION t/ TAGS`
+Format: `add  EVENT_NAME [l/LOCATION p/PERIOD s/START_TIME e/END_TIME d/DESCRIPTION t/TAGS]`
 > Events can have any number of tags (including 0)
 
 Examples:
@@ -172,7 +172,7 @@ Examples:
 ### 2.10. Clearing all done tasks : `clear`
 
 Clears all done tasks from TaskManager <br>
-Format: `clear done`
+Format: `clear`
 
 ### 2.11. Exiting the program : `exit`
 
@@ -223,16 +223,17 @@ Example:
 
 ## 4. Command Summary
 
-* **Add Task** : `add task NAME b/DEADLINE [t/TAG d/DESCRIPTION s/POSSIBLE TIMING 1, POSSIBLE TIMING 2 p/PERIODICITY]... ` <br>
-   e.g. `add task math homework b/03-03-2017 t/school p/N`
+* **Add Floating Task** : `add task NAME ` <br>
+   e.g. `add task math homework`
 
 * **Add Event** : `add event NAME [s/START TIME,END TIME t/TAG d/DESCRIPTION p/PERIODICITY]` <br>
    e.g. `add event meeting with john s/mon 11.30, mon 13.30 t/work, important  d/meeting about work where I won’t fall asleep`
 
-* **Clear** : `clear done` <br>
-   e.g. `clear done tasks`
-   e.g. `clear done events`
-   e.g. `clear done`
+* **Mark as Done** : `done INDEX`
+   e.g. `done 1`
+   
+* **Clear** : `clear` <br>
+   e.g. `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
