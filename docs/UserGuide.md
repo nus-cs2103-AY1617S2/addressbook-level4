@@ -166,12 +166,12 @@ Format: `[\as PRIORITY]`
 > - `Priority` can be `normal`, `important`, `very important`
 
 **Reminder** <br>
-Add a task with a reminder timing with the `\remind` key. State the number of hours before the task's end time that you want to be reminded. A pop-up would appear to remind you about the task at that specified time! <br>
+Add a task with a reminder timing with the `\remind_at` key. State the number of hours before the task's end time that you want to be reminded. A pop-up would appear to remind you about the task at that specified time! <br>
 <br>
-Format: `[\remind REMINDER_RELATIVE_TIME]`
+Format: `[\remind_at REMINDER_RELATIVE_TIME]`
 > **Examples:** <br>
-> - `add buy milk \remind 3` <br>
-> - `add buy milk \remind 5 hrs before` <br>
+> - `add buy milk \remind_at 3` <br>
+> - `add buy milk \remind_at 5 hrs before` <br>
 
 **Recurrence Interval** <br>
 Add a recurring task with the `\every` key. If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and reminder time of the task will be updated to its next occurrence. <br>
@@ -386,7 +386,7 @@ Use `exit` to exit Doist. <br>
 <br>
 Format: `exit`  
 
-## 4. FAQ
+## 4. FAQs
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
