@@ -16,6 +16,7 @@ import seedu.watodo.commons.util.StringUtil;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
+import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
@@ -286,12 +287,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (type) {
-            case ListFloatCommand.COMMAND_WORD:
-                if (task.getStartDate() == null && task.getEndDate() == null) {
-                    return true;
-                } else {
-                    return false;
-                }
             case ListDeadlineCommand.COMMAND_WORD:
                 if (task.getStartDate() == null && task.getEndDate() != null) {
                     return true;
@@ -300,6 +295,18 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             case ListEventCommand.COMMAND_WORD:
                 if (task.getStartDate() != null && task.getEndDate() != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case ListFloatCommand.COMMAND_WORD:
+                if (task.getStartDate() == null && task.getEndDate() == null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case ListUndoneCommand.COMMAND_WORD:
+                if (StringUtil.containsWordIgnoreCase(task.getStatus().toString(), type)) {
                     return true;
                 } else {
                     return false;

@@ -7,14 +7,14 @@ package seedu.watodo.model.task;
 public enum TaskStatus {
     UNDONE("Undone"), ONGOING("Ongoing"), DONE("Done"), OVERDUE("Overdue");
 
-    private final String text;
+    private final String status;
 
     private TaskStatus (final String text) {
-        this.text = text;
+        this.status = text;
     }
 
     @Override
     public String toString() {
-        return text;
+        return status;
     }
 }
