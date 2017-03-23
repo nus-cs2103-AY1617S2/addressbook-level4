@@ -72,11 +72,11 @@ public class MainApp extends Application {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
-    
+
     public static Config getConfig() {
         return config;
     }
-    
+
     public static Storage getStorage() {
         return storage;
     }

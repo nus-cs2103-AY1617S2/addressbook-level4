@@ -31,7 +31,7 @@ public class XmlToDoListStorage implements ToDoListStorage {
     public void setToDoListFilePath(String newFilePath) {
         this.filePath = newFilePath;
     }
-    
+
     @Override
     public Optional<ReadOnlyToDoList> readToDoList() throws DataConversionException, IOException {
         return readToDoList(filePath);

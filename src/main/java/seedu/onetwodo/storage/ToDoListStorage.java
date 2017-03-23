@@ -10,7 +10,7 @@ import seedu.onetwodo.model.ReadOnlyToDoList;
  * Represents a storage for {@link seedu.onetwodo.model.ToDoList}.
  */
 public interface ToDoListStorage {
-    
+
     /**
      * Returns the file path of the data file.
      */
@@ -20,7 +20,7 @@ public interface ToDoListStorage {
      * Set a new file path
      */
     void setToDoListFilePath(String newFilePath);
-    
+
     /**
      * Returns ToDoList data as a {@link ReadOnlyToDoList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
