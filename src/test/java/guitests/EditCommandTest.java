@@ -2,11 +2,11 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
@@ -76,7 +76,7 @@ public class EditCommandTest extends ToDoAppGuiTest {
     @Test
     public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertResultMessage(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class EditCommandTest extends ToDoAppGuiTest {
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Alice Pauline s/today d/tomorrow "
                                 + "p/1 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
@@ -121,6 +121,6 @@ public class EditCommandTest extends ToDoAppGuiTest {
         // confirm the list now contains all previous persons plus the person with updated details
         expectedTasksList[toDoAppIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
