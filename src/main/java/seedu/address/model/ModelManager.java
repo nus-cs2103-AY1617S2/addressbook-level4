@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import com.google.common.base.Joiner;
 
-
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -234,25 +233,24 @@ public class ModelManager extends ComponentManager implements Model {
             return "priority=" + String.join(", ", String.valueOf(priorityNumber));
         }
     }
-    
-     // @@author A0124591H
-     private class CompletionQualifier implements Qualifier {
-     private String completionValue;
-    
-     CompletionQualifier(String[] completionValue) {
-     this.completionValue = Arrays.toString(completionValue).replaceAll("[^A-Za-z0-9 ]", "");
-     }
-    
-     @Override
-     public boolean run(ReadOnlyTask task) {
-     return
-     String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
-     }
-    
-     @Override
-     public String toString() {
-     return "completion=" + String.join(", ", completionValue);
-     }
-     }
+
+    // @@author A0124591H
+    private class CompletionQualifier implements Qualifier {
+        private String completionValue;
+
+        CompletionQualifier(String[] completionValue) {
+            this.completionValue = Arrays.toString(completionValue).replaceAll("[^A-Za-z0-9 ]", "");
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return String.valueOf(task.getCompletion().value).toLowerCase().equals(completionValue.toLowerCase());
+        }
+
+        @Override
+        public String toString() {
+            return "completion=" + String.join(", ", completionValue);
+        }
+    }
 
 }
