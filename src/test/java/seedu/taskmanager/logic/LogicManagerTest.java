@@ -118,7 +118,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is not thrown and
      * that the result message is correct. Also confirms that both the 'task
      * manager' and the 'last shown list' are as specified.
-     * 
+     *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
@@ -131,7 +131,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that
      * the result message is correct. Both the 'task manager' and the 'last
      * shown list' are verified to be unchanged.
-     * 
+     *
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
@@ -264,7 +264,7 @@ public class LogicManagerTest {
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
-     * 
+     *
      * @param commandWord
      *            to test assuming it targets a single task in the last shown
      *            list based on visible index.
@@ -287,7 +287,7 @@ public class LogicManagerTest {
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
-     * 
+     *
      * @param commandWord
      *            to test assuming it targets a single task in the last shown
      *            list based on visible index.
@@ -411,7 +411,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
-    
+
     // @@author A0131278H
     @Test
     public void execute_sort_invalidArgsFormat() {
@@ -432,8 +432,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
         helper.addToModel(model, unsortedTasks);
 
-        assertCommandSuccess("sort s/", String.format(SortCommand.MESSAGE_SUCCESS_START), expectedTM,
-                expectedList);
+        assertCommandSuccess("sort s/", String.format(SortCommand.MESSAGE_SUCCESS_START), expectedTM, expectedList);
     }
 
     @Test
@@ -449,8 +448,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
         helper.addToModel(model, unsortedTasks);
 
-        assertCommandSuccess("sort e/", String.format(SortCommand.MESSAGE_SUCCESS_END), expectedTM,
-                expectedList);
+        assertCommandSuccess("sort e/", String.format(SortCommand.MESSAGE_SUCCESS_END), expectedTM, expectedList);
     }
     // @@author
 
@@ -523,7 +521,7 @@ public class LogicManagerTest {
 
         /**
          * Adds auto-generated Task objects to the given TaskManager
-         * 
+         *
          * @param taskManager
          *            The TaskManager to which the Tasks will be added
          */
@@ -542,7 +540,7 @@ public class LogicManagerTest {
 
         /**
          * Adds auto-generated Task objects to the given model
-         * 
+         *
          * @param model
          *            The model to which the Persons will be added
          */
@@ -587,25 +585,25 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given start date. Other fields will have
          * some dummy values.
-         * 
+         *
          * @throws IllegalValueException
          * @throws DuplicateTagException
          */
         public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Clockwork Orange"), new StartDate(startDate),
-                    new EndDate("15/03/2017"), new Description("Just do it"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Title("Watch Clockwork Orange"), new StartDate(startDate), new EndDate("15/03/2017"),
+                    new Description("Just do it"), new UniqueTagList(new Tag("tag")));
         }
 
         /**
          * Generates a Task object with given end date. Other fields will have
          * some dummy values.
-         * 
+         *
          * @throws IllegalValueException
          * @throws DuplicateTagException
          */
         public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Halestorm concert"), new StartDate("01/04/2017"),
-                    new EndDate(endDate), new Description("Just do it"), new UniqueTagList(new Tag("tag")));
+            return new Task(new Title("Watch Halestorm concert"), new StartDate("01/04/2017"), new EndDate(endDate),
+                    new Description("Just do it"), new UniqueTagList(new Tag("tag")));
         }
         // @@author
     }

@@ -2,6 +2,7 @@ package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;

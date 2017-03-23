@@ -1,7 +1,7 @@
 package seedu.taskmanager.model.task;
 
-import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
 import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_ENDDATE;
+import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -176,8 +176,9 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         // Error message will be thrown by SortCommand
-        else
+        else {
             return;
+        }
 
     }
 
