@@ -72,7 +72,7 @@ public class StringUtil {
     public static LocalTime parseStringToTime(String timeString) throws IllegalValueException {
         //empty start date
         if (timeString == null) throw new IllegalValueException(TIME_FORMAT_CONSTRAINTS);
-        return LocalTime.parse(timeString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHMM"));
     }
 
 //@@author A0148038A
