@@ -4,6 +4,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Time;
 
@@ -16,6 +17,7 @@ public class TestTask implements ReadOnlyTask {
     private Address address;
     private Email email;
     private Time time;
+    private Priority priority;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -28,6 +30,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.time = taskToCopy.getTime();
+        this.priority = taskToCopy.getPriority();
         this.tags = taskToCopy.getTags();
     }
 
@@ -37,6 +40,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+    
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -51,6 +58,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Time getTime() {
         return time;
+    }
+    
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override

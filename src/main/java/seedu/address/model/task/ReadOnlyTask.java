@@ -12,6 +12,7 @@ public interface ReadOnlyTask {
     Time getTime();
     //Email getEmail();
     //Address getAddress();
+    Priority getPriority();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

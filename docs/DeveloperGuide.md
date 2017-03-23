@@ -350,11 +350,11 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new task | add task to manage all my to-do
 `* * *` | user | remove a task | remove entries that I no longer need
 `* * *` | user | mark a task as complete | mark a task as complete when I finish it
+`* * *` | user | find a task by keyword | search for specific task especially when the list is huge
 `* * *` | user | change the due time of a task | set the due time of a task to a new one
-`* * *` | user | edit a task | edit a task if there are any changes
-`* * *` | user | list all tasks | see all tasks at one glance and consider if I want to make any adjustment
+`* *` | user | edit a task | edit a task if there are any changes
 `* *` | user | clear all tasks | start from a clean slate
-`* *` | user | find a task by keyword | search for specific task especially when the list is huge
+`* *` | user | list all tasks | see all tasks at one glance and consider if I want to make any adjustment
 `* *` | user | undo most recent changes | revert back to original state(ie if i remove something, it will be unremoved; if i added something, it will be removed.)
 `*` | user | categorise my tasks(eg deadlines, events, floating tasks) | easily search for the specific task type
 `*` | user | prioritize my tasks | be reminded about the importance of a certain task among other tasks
@@ -441,7 +441,7 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should run with JRE8 or above, Windows 7 or above.
+1. Should run with JRE7 or above, Windows 7 or above.
 2. Should be able to store up to 500 tasks.
 3. Should work primarily offline.
 4. Should be able to handle exceptions from user input.

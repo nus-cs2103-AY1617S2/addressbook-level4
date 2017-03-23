@@ -10,6 +10,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
@@ -81,9 +82,10 @@ public class EditCommand extends Command {
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
         //Email updatedEmail = editTaskDescriptor.getEmail().orElseGet(taskToEdit::getEmail);
         //Address updatedAddress = editTaskDescriptor.getAddress().orElseGet(taskToEdit::getAddress);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedTime, updatedTags);
+        return new Task(updatedName, updatedTime, updatedPriority, updatedTags);
     }
 
     /**
@@ -95,6 +97,7 @@ public class EditCommand extends Command {
         private Optional<Time> phone = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditTaskDescriptor() {}
@@ -104,6 +107,7 @@ public class EditCommand extends Command {
             this.phone = toCopy.getTime();
             this.email = toCopy.getEmail();
             this.address = toCopy.getAddress();
+            this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
         }
 
@@ -139,6 +143,15 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return email;
+        }
+        
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setAddress(Optional<Address> address) {
