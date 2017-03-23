@@ -20,7 +20,8 @@ import seedu.geekeep.model.task.UniqueTaskList;
 import seedu.geekeep.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed (by .equals comparison)
+ * Wraps all data at the task manager level
+ * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
