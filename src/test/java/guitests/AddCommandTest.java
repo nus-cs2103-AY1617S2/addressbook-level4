@@ -16,7 +16,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
     public void add() {
         //add one floating task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.sampleFloatingTask;
+        TestTask taskToAdd = td.sampleEvent;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
@@ -43,7 +43,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTaskName().fullTaskName);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTaskName().toString());
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person

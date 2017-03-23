@@ -22,13 +22,14 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
-
+    public TestTask updatedTask;
+    
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
         String detailsToUpdate = "take a snack break ON thursday 1500 TO 1600";
         int taskManagerIndex = 1;
 
-        TestTask updatedTask = new TaskBuilder().withTaskName("take a snack break").withDate("thursday")
+        updatedTask = new TaskBuilder().withTaskName("take a snack break").withDate("thursday")
                .withStartTime("1500").withEndTime("1600").build();//.withCategories("husband").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
@@ -90,16 +91,16 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_invalidValues_failure() {
-//        commandBox.runCommand("UPDATE 1 *&");
-//        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
+        commandBox.runCommand("UPDATE 1 *&");
+        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 FROM 1200hrs");
+        commandBox.runCommand("UPDATE 1 FROM 1200hrs TO 1400");
         assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
 
-        commandBox.runCommand("UPDATE 1 TO 1300hrs");
+        commandBox.runCommand("UPDATE 1 FROM 1200 TO 1300hrs");
         assertResultMessage(EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
 
 //        commandBox.runCommand("UPDATE 1 t/*&");
@@ -108,7 +109,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_duplicateTask_failure() {
-        commandBox.runCommand("UPDATE 3 Eat lunch @ techno BY 04/03/17 1400");
+        commandBox.runCommand("UPDATE 3 Eat lunch at techno BY 04/03/17 1400");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
 

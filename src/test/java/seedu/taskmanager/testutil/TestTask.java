@@ -20,7 +20,7 @@ public class TestTask implements ReadOnlyTask {
     private UniqueCategoryList categories;
 
     public TestTask() {
-        categories = new UniqueCategoryList();
+//        categories = new UniqueCategoryList();
     }
 
     /**
@@ -87,9 +87,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTaskName().fullTaskName + " ");
-        sb.append("ON" + this.getDate().value + " ");
-        sb.append("FROM" + this.getStartTime().value + " ");
-        sb.append("TO" + this.getEndTime().value + " ");
+        sb.append("ON " + this.getDate().value + " ");
+        sb.append(this.getStartTime().value + " ");
+        sb.append("TO " + this.getEndTime().value + " ");
 //        this.getCategories().asObservableList().stream().forEach(s -> sb.append("t/" + s.categoryTaskName + " "));
         return sb.toString();
     }

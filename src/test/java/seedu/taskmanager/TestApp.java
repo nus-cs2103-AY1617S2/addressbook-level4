@@ -42,7 +42,7 @@ public class TestApp extends MainApp {
     }
 
     @Override
-    protected Config initConfig(String configFilePath) {
+    protected Config initConfig(String configFilePath) throws Exception {
         Config config = super.initConfig(configFilePath);
         config.setAppTitle(APP_TITLE);
         config.setTaskManagerFilePath(saveFileLocation); 

@@ -21,10 +21,8 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName taskName, Date date, StartTime startTime,
-            EndTime endTime /* ,UniqueCategoryList categories */) {
-        assert !CollectionUtil.isAnyNull(taskName, date, startTime,
-                endTime/* , categories */);
+    public Task(TaskName taskName, Date date, StartTime startTime, EndTime endTime /* ,UniqueCategoryList categories */) {
+        assert !CollectionUtil.isAnyNull(taskName, date, startTime, endTime/* , categories */);
         this.taskName = taskName;
         this.date = date;
         this.startTime = startTime;
