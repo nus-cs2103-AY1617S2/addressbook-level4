@@ -134,7 +134,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
-  
+
 
 The sections below give more details of each component.
 
@@ -148,7 +148,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+`StatusBarFooter`, `LeftPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -160,6 +160,11 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+
+Given below is the Sequence Diagram for interactions within the `UI` component for the for the `addTask(toAdd)`
+ API call.<br /><br />
+<img src="images/SDforAddTaskUI.png" width="800"><br>
+_Figure 2.2.2 : Interactions inside the UI Component for the process of executing an `add` Command_
 
 ### 2.3. Logic component
 
@@ -244,6 +249,10 @@ _Figure 2.7.3 : Component interactions for `list` command when user types `list 
 The diagram below shows the interaction between different components for the `AutoComplete` feature. <br><br>
 <img src="images\SDforAutocomplete.png" width="800"><br>
 _Figure 2.7.4 : Component interactions for `Autocomplete` feature when user presses the `tab` key_
+<br /><br />
+The AutocompleteManager implements a request and response design. To use the Autocomplete feature, a response object is created with the command and the current cursor position and sent to the AutomcompleteManager. <br />
+The AutocompleteManager will create a response with the new command with the autocompleted command as well as the new cursor position.
+<br /><br />
 
 The diagram below shows the interaction between different components for the `book` command. <br><br>
 <img src="images\SDforBook.png" width="800"><br>
@@ -252,6 +261,10 @@ _Figure 2.7.5 : Component interactions for `book` command_
 The diagram below shows the interaction between different components for the `Command History` feature. <br><br>
 <img src="images\SDforCommandHistory.png" width="800"><br>
 _Figure 2.7.6 : Component interactions for `Command History` feature when user iterate through their command history for the session by pressing the up or down key_
+<br /><br />
+CommandHistoryManager implements a Singleton design as all command history should go to the same manager.<br />
+The CommandHistoryManager can be accessed through the getInstance() method.
+<br /><br />
 
 The diagram below shows the interaction between different components for the delete label command via `delete`. <br><br>
 <img src="images\SDforDeleteLabel.png" width="800"><br>

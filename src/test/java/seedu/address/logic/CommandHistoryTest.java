@@ -6,14 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.commandhistory.CommandHistory;
-import seedu.address.logic.commandhistory.CommandHistoryLinkedList;
+import seedu.address.logic.commandhistory.CommandHistoryManager;
 
 public class CommandHistoryTest {
     private CommandHistory history;
 
     @Before
     public void setup() {
-        history = CommandHistoryLinkedList.getInstance();
+        history = CommandHistoryManager.getInstance();
     }
 
     @Test
