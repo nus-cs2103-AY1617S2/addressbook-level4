@@ -15,12 +15,14 @@ import org.teamstbf.yats.logic.commands.ListCommandTiming;
 /**
  * Parses input arguments and creates a new ListCommand object
  */
+// @@author A0138952W
 public class ListCommandParser {
 
 	private final int LIST_COMMAND_SUFFIX = 2;
 	private final String COMMAND_EXTENSION_DATE = "by date";
 	private final String COMMAND_EXTENSION_TIMING = "by timing";
 	private final String COMMAND_EXTENSION_LOCATION = "by location";
+	private final String COMMAND_EXTENSION_DONE = "by done";
 	private final String COMMAND_EXTENSION_TAG = "by tag";
 
 	/**
@@ -32,20 +34,16 @@ public class ListCommandParser {
 		if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
 			String[] commandTextArray = stringTokenizer(args);
 			switch (commandTextArray[LIST_COMMAND_SUFFIX]) {
-			case (ListCommand.COMMAND_WORD_SUFFIX_DATE): {
+			case (ListCommand.COMMAND_WORD_SUFFIX_DATE):
 				return new ListCommandDate(internalParser(args, COMMAND_EXTENSION_DATE));
-			}
-			case (ListCommand.COMMAND_WORD_SUFFIX_TIMING): {
+			case (ListCommand.COMMAND_WORD_SUFFIX_TIMING):
 				return new ListCommandTiming(internalParser(args, COMMAND_EXTENSION_TIMING));
-			}
-			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION): {
+			case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
 				return new ListCommandLocation(internalParser(args, COMMAND_EXTENSION_LOCATION));
-			}
 			case (ListCommand.COMMAND_WORD_SUFFIX_DONE):
-				return new ListCommandDone();
-			case (ListCommand.COMMAND_WORD_SUFFIX_TAG): {
+				return new ListCommandDone(internalParser(args, COMMAND_EXTENSION_DONE));
+			case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
 				return new ListCommandTag(internalParser(args, COMMAND_EXTENSION_TAG));
-			}
 			}
 		}
 		return new ListCommand();

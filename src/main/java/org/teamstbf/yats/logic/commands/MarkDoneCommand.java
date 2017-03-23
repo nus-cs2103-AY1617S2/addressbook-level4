@@ -19,8 +19,8 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  *
  * Marks an existing task as done in the task scheduler.
  */
-//@@author A0139448U
-public class MarkDoneCommand extends EditCommand{
+// @@author A0139448U
+public class MarkDoneCommand extends EditCommand {
 
 	public MarkDoneCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
 		super(filteredTaskListIndex, editTaskDescriptor);
@@ -29,12 +29,12 @@ public class MarkDoneCommand extends EditCommand{
 	public static final String COMMAND_WORD = "done";
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
 	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
-			+ "by the index number used in the last task listing. "
-			+ "Parameters: INDEX (must be a positive integer) "
+			+ "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
 			+ "Example: " + COMMAND_WORD + " 1";
+
 	@Override
 	public CommandResult execute() throws CommandException {
 		List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
@@ -62,7 +62,7 @@ public class MarkDoneCommand extends EditCommand{
 	 * edited with {@code editTaskDescriptor}.
 	 */
 
-	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor){
+	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
 		assert taskToEdit != null;
 
 		Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
