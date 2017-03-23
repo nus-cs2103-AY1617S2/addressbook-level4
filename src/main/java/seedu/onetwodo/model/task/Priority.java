@@ -21,22 +21,23 @@ public class Priority {
      */
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
-        if (priority == null || priority == "") {
-            priority = "LOW";
-        }
         priority = priority.trim();
         String upperPriority = priority.toUpperCase();
-        char firstLetter = upperPriority.charAt(0);
-        if (!isValidPriority(firstLetter)) {
-            throw new IllegalValueException(PRIORITY_CONSTRAINTS);
-        } else {
-            if (firstLetter == 'H') {
-                this.value = "HIGH";
-            } else if (firstLetter == 'M') {
-                this.value = "MEDIUM";
+        if (upperPriority != "") {
+            char firstLetter = upperPriority.charAt(0);
+            if (!isValidPriority(firstLetter)) {
+                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
             } else {
-                this.value = "LOW";
+                if (firstLetter == 'H') {
+                    this.value = "HIGH";
+                } else if (firstLetter == 'M') {
+                    this.value = "MEDIUM";
+                } else {
+                    this.value = "LOW";
+                }
             }
+        } else {
+            this.value = priority;
         }
 
     }
