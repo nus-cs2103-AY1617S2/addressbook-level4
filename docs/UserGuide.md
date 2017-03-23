@@ -82,8 +82,11 @@ Examples:
 
 ### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks in the Savvy To-Do.<br>
-Format: `list`
+Shows a list of tasks in the Savvy To-Do by category or by priority or everything.<br>
+Examples: 
+* `list c/CS2103`<br>
+* `list p/high`<br>
+* `list`<br>
 
 ### 2.4. Editing a task : `edit`
 
