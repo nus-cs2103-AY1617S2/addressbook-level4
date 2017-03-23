@@ -163,7 +163,7 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `UI` component for the for the `addTask(toAdd)`
  API call.<br /><br />
-<img src="images/SDforAddTaskUI.jpg" width="800"><br>
+<img src="images/SDforAddTaskUI.png" width="800"><br>
 _Figure 2.2.2 : Interactions inside the UI Component for the process of executing an `add` Command_
 
 ### 2.3. Logic component
