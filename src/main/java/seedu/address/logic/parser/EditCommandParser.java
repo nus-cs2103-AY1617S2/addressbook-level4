@@ -85,7 +85,7 @@ public class EditCommandParser {
         argsTokenizer.tokenize(arguments);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-        if (index.isPresent()) {
+        if (index.isPresent() && index.get() <= lastShownList.size()) {
             ReadOnlyTask taskToEdit = lastShownList.get(index.get() - 1);
             final StringBuilder editBuilder = new StringBuilder();
             editBuilder.append(" ");
