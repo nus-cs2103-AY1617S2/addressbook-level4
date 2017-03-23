@@ -39,7 +39,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-//import seedu.address.model.person.Address;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
@@ -431,13 +431,14 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             //Phone privatePhone = new Phone("111111");
             Date privateDate = new Date("12.11");
+            StartDate strDate = new StartDate("09.01");
             Email email = new Email("adam@gmail.com");
             //Address privateAddress = new Address("111, alpha street");
             Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Person(name, privateDate, email, privateGroup, tags);
+            return new Person(name, privateDate,strDate, email, privateGroup, tags);
         }
 
         /**
@@ -450,8 +451,8 @@ public class LogicManagerTest {
         Person generatePerson(int seed) throws Exception {
             return new Person(
                     new Name("Person " + seed),
-                    //new Phone("" + Math.abs(seed)),
                     new Date("" + Math.abs(seed)),
+                    new StartDate("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     //new Address("House of " + seed),
                     new Group("list of " + seed),
@@ -554,6 +555,7 @@ public class LogicManagerTest {
             return new Person(
                     new Name(name),
                     new Date("12.11"),
+                    new StartDate("09.01"),
                     new Email("1@email"),
                     new Group("list of 1"),
                     new UniqueTagList(new Tag("tag"))

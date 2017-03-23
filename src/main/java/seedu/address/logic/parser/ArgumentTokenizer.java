@@ -22,7 +22,7 @@ public class ArgumentTokenizer {
     private final List<Prefix> prefixes;
 
     /** Arguments found after tokenizing **/
-    private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
+    final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
 
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
@@ -50,6 +50,11 @@ public class ArgumentTokenizer {
     /**
      * Returns all values of given prefix.
      */
+    
+    public boolean getEmpty(Prefix prefix){
+    	
+    	return !(this.tokenizedArguments.containsKey(prefix));
+    }
     public Optional<List<String>> getAllValues(Prefix prefix) {
         if (!this.tokenizedArguments.containsKey(prefix)) {
             return Optional.empty();

@@ -6,7 +6,6 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-//import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
@@ -14,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 //import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -27,7 +27,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [d/DATE] [e/EMAIL] [g/GROUP] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [d/DATE] [e/EMAIL] [g/GROUP] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 d/01.01 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited task: %1$s";
@@ -80,14 +80,14 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        //Phone updatedPhone = editPersonDescriptor.getPhone().orElseGet(personToEdit::getPhone);
         Date updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
+        StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         //Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         Group updatedGroup = editPersonDescriptor.getGroup().orElseGet(personToEdit::getGroup);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
-        return new Person(updatedName, updatedDate, updatedEmail, updatedGroup, updatedTags);
+        return new Person(updatedName, updatedDate, updatedStartDate, updatedEmail, updatedGroup, updatedTags);
     }
 
     /**
@@ -96,8 +96,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        //private Optional<Phone> phone = Optional.empty();
         private Optional<Date> date = Optional.empty();
+        private Optional<StartDate> sdate = Optional.empty();
         private Optional<Email> email = Optional.empty();
         //private Optional<Address> address = Optional.empty();
         private Optional<Group> group = Optional.empty();
@@ -107,8 +107,8 @@ public class EditCommand extends Command {
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
-            //this.phone = toCopy.getPhone();
             this.date = toCopy.getDate();
+            this.sdate = toCopy.getStartDate();
             this.email = toCopy.getEmail();
             this.group = toCopy.getGroup();
             this.tags = toCopy.getTags();
@@ -130,20 +130,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-//        public void setPhone(Optional<Phone> phone) {
-//            assert phone != null;
-//            this.phone = phone;
-//        }
         public void setDate(Optional<Date> date) {
             assert date != null;
             this.date = date;
         }
 
-//        public Optional<Phone> getPhone() {
-//            return phone;
-//        }
         public Optional<Date> getDate() {
             return date;
+        }
+      
+        public void setStartDate(Optional<StartDate> sdate) {
+            assert sdate != null;
+            this.sdate = sdate;
+        }
+
+        public Optional<StartDate> getStartDate() {
+            return sdate;
         }
 
         public void setEmail(Optional<Email> email) {

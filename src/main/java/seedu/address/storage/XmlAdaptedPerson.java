@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 //import seedu.address.model.person.Address;
 import seedu.address.model.person.Date;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
@@ -24,14 +25,12 @@ public class XmlAdaptedPerson {
 
     @XmlElement(required = true)
     private String name;
-//    @XmlElement(required = true)
-//    private String phone;
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
+    private String sdate;
+    @XmlElement(required = true)
     private String email;
-//    @XmlElement(required = true)
-//    private String address;
     @XmlElement(required = true)
     private String group;
 
@@ -52,8 +51,8 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
-        //phone = source.getPhone().value;
         date = source.getDate().value;
+        sdate = source.getStartDate().value;
         email = source.getEmail().value;
         //address = source.getAddress().value;
         group = source.getGroup().value;
@@ -74,12 +73,12 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        //final Phone phone = new Phone(this.phone);
         final Date date = new Date(this.date);
+        final StartDate sdate = new StartDate(this.sdate);
         final Email email = new Email(this.email);
         //final Address address = new Address(this.address);
         final Group group = new Group(this.group);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, date, email, group, tags);
+        return new Person(name, date, sdate, email, group, tags);
     }
 }

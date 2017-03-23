@@ -13,6 +13,7 @@ public class Person implements ReadOnlyPerson {
 
     private Name name;
     private Date date;
+    private StartDate sdate;
     private Email email;
     private Group group;
 
@@ -21,10 +22,11 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Date date, Email email, Group group, UniqueTagList tags) {
+    public Person(Name name, Date date, StartDate sdate, Email email, Group group, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, date, email, group, tags);
         this.name = name;
         this.date = date;
+        this.sdate = sdate;
         this.email = email;
         this.group = group;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -34,7 +36,7 @@ public class Person implements ReadOnlyPerson {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getDate(), source.getEmail(), source.getGroup(), source.getTags());
+        this(source.getName(), source.getDate(), source.getStartDate(), source.getEmail(), source.getGroup(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -55,6 +57,16 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Date getDate() {
         return date;
+    }
+
+    public void setStartDate(StartDate sdate) {
+        assert sdate != null;
+        this.sdate = sdate;
+    }
+
+    @Override
+    public StartDate getStartDate() {
+        return sdate;
     }
 
     public void setEmail(Email email) {
@@ -97,6 +109,7 @@ public class Person implements ReadOnlyPerson {
 
         this.setName(replacement.getName());
         this.setDate(replacement.getDate());
+        this.setStartDate(replacement.getStartDate());
         this.setEmail(replacement.getEmail());
         this.setGroup(replacement.getGroup());
         this.setTags(replacement.getTags());
@@ -112,7 +125,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, email, group, tags);
+        return Objects.hash(name, date,sdate, email, group, tags);
     }
 
     @Override

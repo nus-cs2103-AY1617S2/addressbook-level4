@@ -10,6 +10,7 @@ public interface ReadOnlyPerson {
 
     Name getName();
     Date getDate();
+    StartDate getStartDate();
     Email getEmail();
     Group getGroup();
 
@@ -27,6 +28,7 @@ public interface ReadOnlyPerson {
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getDate().equals(this.getDate())
+                && other.getStartDate().equals(this.getStartDate())
                 && other.getEmail().equals(this.getEmail())
                 && other.getGroup().equals(this.getGroup()));
     }
@@ -37,7 +39,9 @@ public interface ReadOnlyPerson {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Date: ")
+		        .append(" Start Date: ")
+		        .append(getStartDate())
+                .append(" End Date: ")
                 .append(getDate())
                 .append(" Email: ")
                 .append(getEmail())
