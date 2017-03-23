@@ -3,7 +3,6 @@ package seedu.opus.model.task;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 import com.joestelmach.natty.Parser;
@@ -69,14 +68,7 @@ public class DateTime {
      * @throws IllegalValueException
      */
     public static boolean isValidDateTime(String test) {
-        try {
-            if (LocalDateTime.parse(test, formatter) != null) {
-                return true;
-            }
-        } catch (DateTimeParseException dtpe) {
-
-        }
-        return false;
+        return DateTimeParser.parse(test).isPresent();
     }
 
     public void setClock(Clock clock) {
