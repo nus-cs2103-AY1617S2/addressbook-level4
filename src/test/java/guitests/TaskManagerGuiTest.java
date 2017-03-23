@@ -56,16 +56,20 @@ public abstract class TaskManagerGuiTest {
 
     @BeforeClass
     public static void setupSpec() {
+
+        System.err.println("01a");
         try {
             FxToolkit.registerPrimaryStage();
             FxToolkit.hideStage();
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
+        System.err.println("01b");
     }
 
     @Before
     public void setup() throws Exception {
+        System.err.println("02a");
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
@@ -75,12 +79,14 @@ public abstract class TaskManagerGuiTest {
             browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });
+        System.err.println("02b");
         EventsCenter.clearSubscribers();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
         FxToolkit.showStage();
         while (!stage.isShowing())
             ;
         mainGui.focusOnMainApp();
+        System.err.println("02c");
     }
 
     /**
