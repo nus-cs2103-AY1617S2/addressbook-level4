@@ -26,8 +26,8 @@ public class DateTime {
         this.isDateInferred = false;
         this.isTimeInferred = false;
         this.date = null;
-        this.value = EMPTY_STRING;
         String trimmedDate = date.trim();
+        this.value = trimmedDate.toString();
         if (!isValidDateTime(trimmedDate)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
@@ -52,7 +52,7 @@ public class DateTime {
      *
      * @throws IllegalValueException
      */
-    public boolean isValidDateTime(String date) {
+    private boolean isValidDateTime(String date) {
         if (date.equals(EMPTY_STRING)) {
             return true;
         } else {
