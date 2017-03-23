@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<toDoList>
+    <tasks>
+        <name>task1</name>
+        <startDate></startDate>
+        <endDate></endDate>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>task2</name>
+        <startDate></startDate>
+        <endDate>End: 2017-03-24 23:59</endDate>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>task3</name>
+        <startDate>Start: 2017-03-23 21:00</startDate>
+        <endDate>End: 2017-03-24 22:00</endDate>
+        <description></description>
+        <isDone>false</isDone>
+    </tasks>
+</toDoList>
