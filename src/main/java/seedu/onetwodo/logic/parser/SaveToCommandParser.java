@@ -15,7 +15,7 @@ public class SaveToCommandParser {
     public static String EMPTY_WINDOW_PATH = "\\";
     public static String EMPTY_MAC_PATH = "/";
     public static String XML_EXTENSION = ".xml";
-    public static String PATH_SPLIT_REGEX = "\\W+";
+    public static String PATH_SPLIT_REGEX = "\\s+";
     public static int SIZE_ONE = 1;
     public static int SIZE_TWO = 2;
     public static int INDEX_ZERO = 0;
@@ -28,6 +28,7 @@ public class SaveToCommandParser {
     public Command parse(String argument) {
         assert argument != null;
         String args = argument.trim().toLowerCase();
+        SaveToCommand command;
         if (args.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SaveToCommand.MESSAGE_USAGE));
@@ -36,19 +37,21 @@ public class SaveToCommandParser {
         // check if the number of word in the input is correct
         String[] argArray = args.split(PATH_SPLIT_REGEX);
         int argSize = argArray.length;
-        if(argSize != SIZE_ONE || argSize != SIZE_TWO) {
+        if(argSize != SIZE_ONE && argSize != SIZE_TWO) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SaveToCommand.MESSAGE_USAGE));
         }
         
         // check if overwrite exist in the string
         String overwriteWord, pathInput;
-        pathInput = argArray[INDEX_ZERO];
-        SaveToCommand command = new SaveToCommand(pathInput);
         if(argSize == SIZE_ONE) {
+            pathInput = argArray[INDEX_ZERO];
+            command = new SaveToCommand(pathInput);
             command.setIsOverWriting(false);
         } else {    // has 2 arguments
-            overwriteWord = argArray[INDEX_ONE];
+            pathInput = argArray[INDEX_ONE];
+            overwriteWord = argArray[INDEX_ZERO];
+            command = new SaveToCommand(pathInput);
             if (!isOverWrittingFormat(overwriteWord)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         SaveToCommand.MESSAGE_USAGE));
@@ -71,7 +74,7 @@ public class SaveToCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SaveToCommand.MESSAGE_USAGE));
         } else {
-            return new SaveToCommand(args);
+            return command;
         }
     }
 

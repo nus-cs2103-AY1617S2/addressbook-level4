@@ -51,7 +51,8 @@ public class SaveToCommand extends Command {
         try {
             File file = new File(filePath);
             if (FileUtil.isFileExists(file) && !isOverWriting) {
-                return new CommandResult(String.format(MESSAGE_SAVETO_SUCCESS, filePath));
+                String result = String.format(MESSAGE_OVERWRITE_WARNING, filePath).toString();
+                throw new CommandException(result);
             } else {
                 
                 Config config = MainApp.getConfig();
@@ -70,7 +71,6 @@ public class SaveToCommand extends Command {
                 storageManager.setToDoListFilePath(updatedFilePath);
                 toDoListStorage.saveToDoList(toDoList);
                 
-                // refresh the todo list
                 EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
             }
         } catch (IOException ioe) {
@@ -78,7 +78,6 @@ public class SaveToCommand extends Command {
         } catch (DataConversionException dce) {
             return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(dce));
         }
-
         return new CommandResult(String.format(MESSAGE_SAVETO_SUCCESS, filePath));
     }
     
