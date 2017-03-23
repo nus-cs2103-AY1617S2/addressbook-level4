@@ -2,6 +2,7 @@ package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.dispatcher.CommandResult;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
+import seedu.toluist.model.Task.TaskPriority;
 import seedu.toluist.model.TodoList;
 
 /**
@@ -57,10 +59,17 @@ public class UpdateTaskController extends Controller {
 
         boolean isFloating = tokens.containsKey(TaskTokenizer.TASK_FLOATING_KEYWORD);
 
+        Optional<Boolean> isHighPriority = Optional.empty();
+        if (tokens.containsKey(TaskTokenizer.TASK_PRIORITY_KEYWORD)) {
+            String taskPriority = tokens.get(TaskTokenizer.TASK_PRIORITY_KEYWORD);
+            isHighPriority = Optional.of(taskPriority.equals("high"));
+        }
+
         String tagsToken = tokens.get(TaskTokenizer.TASK_TAGS_KEYWORD);
         Set<Tag> tags = TagParser.parseTags(tagsToken);
 
-        commandResult = update(task, description, eventStartDateTime, eventEndDateTime, taskDeadline, isFloating, tags);
+        commandResult = update(task, description, eventStartDateTime, eventEndDateTime,
+                taskDeadline, isFloating, isHighPriority, tags);
 
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks());
@@ -74,8 +83,8 @@ public class UpdateTaskController extends Controller {
     }
 
     private CommandResult update(Task task, String description,
-            LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
-            LocalDateTime taskDeadline, boolean isFloating, Set<Tag> tags) {
+            LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime, LocalDateTime taskDeadline,
+            boolean isFloating, Optional<Boolean> isHighPriority, Set<Tag> tags) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
         }
@@ -97,6 +106,10 @@ public class UpdateTaskController extends Controller {
 
         if (StringUtil.isPresent(description)) {
             task.setDescription(description);
+        }
+        if (isHighPriority.isPresent()) {
+            TaskPriority priorityLevel = (isHighPriority.get()) ? TaskPriority.HIGH : TaskPriority.LOW;
+            task.setTaskPriority(priorityLevel);
         }
         if (!tags.isEmpty()) {
             task.replaceTags(tags);
