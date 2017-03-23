@@ -20,8 +20,10 @@ public class TaskUiView extends UiView {
     private static final String FXML = "TaskView.fxml";
     private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
     private static final String OVERDUE_ICON_IMAGE_PATH = "/images/warning.png";
+    private static final String HIGH_PRIORITY_ICON_IMAGE_PATH = "/images/star.png";
     private static final String COMPLETED_STYLE_CLASS = "completed";
     private static final String OVERDUE_STYLE_CLASS = "overdue";
+    private static final double STATUS_BOX_SPACING_VALUE = 10.0;
 
     @FXML
     private Pane taskPane;
@@ -68,11 +70,17 @@ public class TaskUiView extends UiView {
         }
 
         statusBox.getChildren().clear();
+        statusBox.setSpacing(STATUS_BOX_SPACING_VALUE);
         if (task.isOverdue()) {
             TaskStatusView statusView = new TaskStatusView(AppUtil.getImage(OVERDUE_ICON_IMAGE_PATH));
             statusView.setParent(statusBox);
             statusView.render();
             FxViewUtil.addStyleClass(taskPane, OVERDUE_STYLE_CLASS);
+        }
+        if (task.isHighPriority()) {
+            TaskStatusView highPriorityView = new TaskStatusView(AppUtil.getImage(HIGH_PRIORITY_ICON_IMAGE_PATH));
+            highPriorityView.setParent(statusBox);
+            highPriorityView.render();
         }
 
         name.setText(task.getDescription());
