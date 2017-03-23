@@ -73,4 +73,11 @@ public interface ReadOnlyTask extends UserItem {
         }
     }
 
+    public class PriorityComparator implements Comparator<ReadOnlyTask> {
+        public int compare(ReadOnlyTask first, ReadOnlyTask second) {
+            String firstPriority = first.getPriority().priority;
+            String secondPriority = second.getPriority().priority;
+            return firstPriority.compareTo(secondPriority);
+        }
+    }
 }
