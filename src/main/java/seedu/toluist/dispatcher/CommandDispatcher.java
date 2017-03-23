@@ -69,7 +69,7 @@ public class CommandDispatcher extends Dispatcher {
         if (controller instanceof HistoryController) {
             ((HistoryController) controller).setCommandHistory(commandHistory);
         }
-        controller.execute(command);
+        controller.execute(deAliasedCommand);
     }
 
     private void recordCommand(String command) {
