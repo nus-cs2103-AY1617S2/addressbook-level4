@@ -38,8 +38,8 @@ public class AddCommand extends Command {
             throws IllegalValueException {
 
         assert description != null;
-        assert taskType.equals(TaskType.FLOAT) || taskType.equals(TaskType.DEADLINE) ||taskType.equals(TaskType.EVENT);
-       
+        assert taskType.equals(TaskType.FLOAT) || taskType.equals(TaskType.DEADLINE) || taskType.equals(TaskType.EVENT);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
@@ -59,9 +59,6 @@ public class AddCommand extends Command {
             if (start.isLater(end)) {
                 throw new IllegalValueException("End date must be later than start date!");
             }
-            
-            
-            
             this.toAdd = new Task(new Description(description), start, end, new UniqueTagList(tagSet));
             break;
         }

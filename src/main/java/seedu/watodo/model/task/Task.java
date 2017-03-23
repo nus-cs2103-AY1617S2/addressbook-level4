@@ -2,7 +2,6 @@ package seedu.watodo.model.task;
 
 import java.util.Objects;
 
-
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 
@@ -122,7 +121,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();//TO DO the timing
+        final StringBuilder builder = new StringBuilder(); //TO DO the timing
         builder.append(getAsText());
         if (startDate != null) {
             builder.append("\nStart: ").append(startDate);

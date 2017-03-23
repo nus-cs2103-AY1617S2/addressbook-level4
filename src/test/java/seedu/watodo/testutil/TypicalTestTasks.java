@@ -1,6 +1,5 @@
 package seedu.watodo.testutil;
 
-import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;

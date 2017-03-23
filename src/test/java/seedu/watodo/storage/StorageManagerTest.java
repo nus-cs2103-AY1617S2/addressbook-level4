@@ -14,13 +14,9 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
-import seedu.watodo.model.ReadOnlyTaskManger;
+import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.UserPrefs;
-import seedu.watodo.storage.JsonUserPrefsStorage;
-import seedu.watodo.storage.Storage;
-import seedu.watodo.storage.StorageManager;
-import seedu.watodo.storage.XmlTaskListStorage;
 import seedu.watodo.testutil.EventsCollector;
 import seedu.watodo.testutil.TypicalTestTasks;
 
@@ -66,7 +62,7 @@ public class StorageManagerTest {
          */
         TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskList(original);
-        ReadOnlyTaskManger retrieved = storageManager.readTaskList().get();
+        ReadOnlyTaskManager retrieved = storageManager.readTaskList().get();
         assertEquals(original, new TaskManager(retrieved));
     }
 
@@ -96,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveTaskList(ReadOnlyTaskManger addressBook, String filePath) throws IOException {
+        public void saveTaskList(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
