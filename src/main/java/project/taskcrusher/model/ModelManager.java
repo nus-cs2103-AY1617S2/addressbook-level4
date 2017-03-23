@@ -9,6 +9,8 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.EventListToShowEmptyEvent;
+import project.taskcrusher.commons.events.model.TaskListToShowEmptyEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
@@ -67,6 +69,18 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(userInbox));
     }
 
+    private void indicateIfEventListToShowIsEmpty() {
+        if (filteredEvents.isEmpty()) {
+            raise(new EventListToShowEmptyEvent(userInbox));
+        }
+    }
+
+    private void indicateIfTaskListToShowIsEmpty() {
+        if (filteredTasks.isEmpty()) {
+            raise(new TaskListToShowEmptyEvent(userInbox));
+        }
+    }
+
     //=========== Task operations =========================================================================
 
     @Override
@@ -113,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addEvent(Event event) throws DuplicateEventException {
         userInbox.addEvent(event);
-        updateFilteredTaskListToShowAll();
+        updateFilteredEventListToShowAll();
         indicateUserInboxChanged();
     }
 
@@ -131,6 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowAll() {
         filteredTasks.setPredicate(null);
+        indicateIfTaskListToShowIsEmpty();
     }
 
     @Override
@@ -145,6 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        indicateIfTaskListToShowIsEmpty();
     }
 
     //=========== Filtered Event List Accessors =============================================================
@@ -157,6 +173,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventListToShowAll() {
         filteredEvents.setPredicate(null);
+        indicateIfEventListToShowIsEmpty();
     }
 
     @Override
@@ -171,6 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
+        indicateIfEventListToShowIsEmpty();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
