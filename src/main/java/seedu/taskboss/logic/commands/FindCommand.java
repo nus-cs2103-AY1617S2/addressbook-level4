@@ -47,7 +47,7 @@ public class FindCommand extends Command {
         } else { //find by end datetime
             model.updateFilteredTaskListByEndDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } 
+        }
     }
 
 }

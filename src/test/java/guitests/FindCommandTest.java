@@ -16,7 +16,6 @@ public class FindCommandTest extends TaskBossGuiTest {
      * - task keywords (name and information)
      * - start datetime
      * - end datetime
-     * 
      */
 
     // Equivalence partition: find by keywords in a non-empty list
@@ -27,7 +26,7 @@ public class FindCommandTest extends TaskBossGuiTest {
 
         //find after deleting one result
         commandBox.runCommand("delete 2");
-        assertFindResult("find k/Meier", td.daniel);  
+        assertFindResult("find k/Meier", td.daniel);
     }
 
     // EP: find by name in an empty list
