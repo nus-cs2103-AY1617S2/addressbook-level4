@@ -9,8 +9,8 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
-import project.taskcrusher.commons.events.model.EventListToShowEmptyEvent;
-import project.taskcrusher.commons.events.model.TaskListToShowEmptyEvent;
+import project.taskcrusher.commons.events.model.EventListToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.TaskListToShowUpdatedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
@@ -71,13 +71,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void indicateIfEventListToShowIsEmpty() {
         if (filteredEvents.isEmpty()) {
-            raise(new EventListToShowEmptyEvent(userInbox));
+            raise(new EventListToShowUpdatedEvent(true));
+        } else {
+            raise(new EventListToShowUpdatedEvent(false));
         }
     }
 
     private void indicateIfTaskListToShowIsEmpty() {
         if (filteredTasks.isEmpty()) {
-            raise(new TaskListToShowEmptyEvent(userInbox));
+            raise(new TaskListToShowUpdatedEvent(true));
+        } else {
+            raise(new TaskListToShowUpdatedEvent(false));
         }
     }
 

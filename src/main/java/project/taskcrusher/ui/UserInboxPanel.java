@@ -2,6 +2,8 @@ package project.taskcrusher.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +13,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import project.taskcrusher.commons.core.LogsCenter;
+import project.taskcrusher.commons.events.model.EventListToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.TaskListToShowUpdatedEvent;
 import project.taskcrusher.commons.events.ui.PersonPanelSelectionChangedEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 import project.taskcrusher.model.event.ReadOnlyEvent;
@@ -22,8 +26,8 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 public class UserInboxPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(UserInboxPanel.class);
     private static final String FXML = "UserInboxPanel.fxml";
-    //TODO: define a custom XML element that contains the header (either "Tasks" or "Events")
-    //and the listView corresponding to that header.
+    private static final boolean SET_LIST_VISIBLE = true;
+    private static final boolean SET_LIST_HIDDEN = false;
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -36,6 +40,7 @@ public class UserInboxPanel extends UiPart<Region> {
         super(FXML);
         setConnections(taskList, eventList);
         addToPlaceholder(userInboxPlaceholder);
+        registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList, ObservableList<ReadOnlyEvent> eventList) {
@@ -98,6 +103,28 @@ public class UserInboxPanel extends UiPart<Region> {
             } else {
                 setGraphic(new EventListCard(event, getIndex() + 1).getRoot());
             }
+        }
+    }
+
+    @Subscribe
+    public void handleEventListToShowUpdatedEvent(EventListToShowUpdatedEvent event) {
+        if (event.eventListToShowEmpty) {
+            eventListView.setManaged(SET_LIST_VISIBLE);
+            eventListView.setVisible(SET_LIST_VISIBLE);
+        } else {
+            eventListView.setManaged(SET_LIST_HIDDEN);
+            eventListView.setVisible(SET_LIST_HIDDEN);
+        }
+    }
+
+    @Subscribe
+    public void handleTaskListToShowUpdatedEvent(TaskListToShowUpdatedEvent event) {
+        if (event.taskListToShowEmpty) {
+            taskListView.setManaged(SET_LIST_VISIBLE);
+            taskListView.setVisible(SET_LIST_VISIBLE);
+        } else {
+            taskListView.setManaged(SET_LIST_HIDDEN);
+            taskListView.setVisible(SET_LIST_HIDDEN);
         }
     }
 
