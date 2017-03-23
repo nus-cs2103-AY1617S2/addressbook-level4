@@ -115,12 +115,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
+        indicateTaskManagerChanged();
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
+        indicateTaskManagerChanged();
     }
 
     private void updateFilteredPersonList(Expression expression) {
@@ -183,20 +185,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void markTaskDone(int filteredTaskListIndex) {
+    public void markTaskDone(ReadOnlyTask taskToMark) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskDone(taskListIndex);
+        taskManager.markTaskDone(taskToMark);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public void markTaskUndone(int filteredTaskListIndex) {
+    public void markTaskUndone(ReadOnlyTask taskToMark) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.markTaskUndone(taskListIndex);
+        taskManager.markTaskUndone(taskToMark);
         indicateTaskManagerChanged();
     }
 
@@ -204,30 +204,14 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListToShowDone() {
         filteredTasks.setPredicate(t -> t.isDone());
         raise(new SwitchTaskCategoryEvent(TaskCategory.DONE));
+        indicateTaskManagerChanged();
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
         filteredTasks.setPredicate(t -> !t.isDone());
         raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowEvents() {
-        filteredTasks.setPredicate(t -> t.isEvent());
-
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowDeadlines() {
-        filteredTasks.setPredicate(t -> t.isDeadline());
-
-    }
-
-    @Override
-    public void updateFilteredTaskListToShowFloatingTasks() {
-        filteredTasks.setPredicate(t -> t.isFloatingTask());
-
+        indicateTaskManagerChanged();
     }
 
     @Override

@@ -202,11 +202,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.updateTask(index, editedTask);
     }
 
-    public void markTaskDone(int index) {
-        tasks.markTaskDone(index);
+    public void markTaskDone(ReadOnlyTask taskToMark) {
+        tasks.markTaskDone(taskToMark);
     }
 
-    public void markTaskUndone(int index) {
-        tasks.markTaskUndone(index);
+    public void markTaskUndone(ReadOnlyTask taskToMark) {
+        tasks.markTaskUndone(taskToMark);
     }
 }

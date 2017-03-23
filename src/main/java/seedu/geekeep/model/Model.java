@@ -50,12 +50,6 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by status of the tasks */
     void updateFilteredTaskListToShowUndone();
 
-    void updateFilteredTaskListToShowEvents();
-
-    void updateFilteredTaskListToShowDeadlines();
-
-    void updateFilteredTaskListToShowFloatingTasks();
-
     /**
      * Updates the person located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
@@ -71,10 +65,10 @@ public interface Model {
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
     /** Mark the specified task as done */
-    void markTaskDone(int filteredTaskListIndex);
+    void markTaskDone(ReadOnlyTask taskToMark);
 
     /** Mark the specified task as undone */
-    void markTaskUndone(int filteredTaskListIndex);
+    void markTaskUndone(ReadOnlyTask taskToMark);
 
     void undo() throws NothingToUndoException;
 

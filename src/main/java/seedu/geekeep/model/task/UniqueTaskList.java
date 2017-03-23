@@ -133,14 +133,14 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
     }
 
-    public void markTaskDone(int index) {
-        Task taskToMark = internalList.get(index);
-        taskToMark.markDone();
+    public void markTaskDone(ReadOnlyTask taskToMark) {
+        int taskIndex = internalList.lastIndexOf(taskToMark);
+        internalList.get(taskIndex).markDone();
     }
 
-    public void markTaskUndone(int index) {
-        Task taskToMark = internalList.get(index);
-        taskToMark.markUndone();
+    public void markTaskUndone(ReadOnlyTask taskToMark) {
+        int taskIndex = internalList.lastIndexOf(taskToMark);
+        internalList.get(taskIndex).markUndone();
     }
 
 }

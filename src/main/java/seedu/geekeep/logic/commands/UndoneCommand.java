@@ -35,7 +35,7 @@ public class UndoneCommand extends Command {
 
         ReadOnlyTask taskToMark = lastShownList.get(targetIndex - 1);
 
-        model.markTaskUndone(targetIndex - 1);
+        model.markTaskUndone(taskToMark);
 
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, taskToMark));
     }
