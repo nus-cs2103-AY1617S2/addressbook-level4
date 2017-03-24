@@ -536,7 +536,6 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name),
                     new Time("01/01/2012"),
-                    new UniqueTagList(new Tag("tag")),
                     new Priority("high"),
                     new UniqueTagList(new Tag("tag")),
                     new Status(0)

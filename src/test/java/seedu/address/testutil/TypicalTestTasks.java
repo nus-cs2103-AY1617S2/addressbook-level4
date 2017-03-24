@@ -16,15 +16,15 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline").withTime("17/02/2017").withPriority("high").
-                withTags("friends").build();
+                withTags("friends").withPriority("med").withStatus(0).build();
             benson = new TaskBuilder().withName("Benson Meier").withTime("17/02/2017").
-                withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withName("Carl Kurz").withTime("17/02/2017").withPriority("med").build();
-            daniel = new TaskBuilder().withName("Daniel Meier").withTime("17/02/2017").withPriority("low").build();
+                withTags("owesMoney", "friends").withPriority("med").withStatus(0).build();
+            carl = new TaskBuilder().withName("Carl Kurz").withTime("17/02/2017").withPriority("med").withStatus(0).build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withTime("17/02/2017").withPriority("low").withStatus(0).build();
 
             // Manually added
-            hoon = new TaskBuilder().withName("Hoon Meier").withTime("17/02/2017").withPriority("med").build();
-            ida = new TaskBuilder().withName("Ida Mueller").withTime("17/02/2017").withPriority("low").build();
+            hoon = new TaskBuilder().withName("Hoon Meier").withTime("17/02/2017").withPriority("med").withStatus(0).build();
+            ida = new TaskBuilder().withName("Ida Mueller").withTime("17/02/2017").withPriority("low").withStatus(0).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

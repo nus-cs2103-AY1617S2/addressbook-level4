@@ -70,7 +70,7 @@ public class XmlAdaptedTask {
         final Time time = new Time(this.time);
         final Priority priority = new Priority(this.priority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        final Status status = new Status(Integer.parseInt(this.status));
+        final Status status = new Status(0);
         return new Task(name, time, priority, tags, status);
     }
 }

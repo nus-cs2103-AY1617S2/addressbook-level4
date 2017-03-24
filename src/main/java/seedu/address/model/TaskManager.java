@@ -87,6 +87,14 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(p);
         tasks.add(p);
     }
+    
+    /**
+     * Marks the status of the task given.
+     * @throws DuplicateTaskException 
+     */
+    public void markTask(int index, Task editedTask) throws DuplicateTaskException{
+        tasks.updateTask(index, editedTask);
+    }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
