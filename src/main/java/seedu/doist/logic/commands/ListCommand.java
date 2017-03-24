@@ -27,9 +27,13 @@ public class ListCommand extends Command {
     private TaskType type = null;
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
-        try {
-            type = TaskType.valueOf(preamble.trim());
-        } catch (IllegalArgumentException e) { }
+        if (!preamble.trim().isEmpty()) {
+            try {
+                type = TaskType.valueOf(preamble.trim());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException("Incorrect argument");
+            }
+        }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
             tagList = ParserUtil.parseTagsFromString(tagsParameterStringList.get(0));
