@@ -47,8 +47,8 @@ public interface ReadOnlyTask {
             return true;
         }
         // case 2: both are not null and the values are equal
-        if (date1 != null && date2 != null && date1.equals(date2)) {
-            return true;
+        if (date1 != null && date2 != null) {
+            return date1.equals(date2);
         }
         return false;
     }
