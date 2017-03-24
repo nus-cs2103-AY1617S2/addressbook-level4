@@ -24,7 +24,7 @@ public class Title {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
-    public final String fullTitle;
+    public final String title;
 
     /**
      * Validates given title.
@@ -38,24 +38,24 @@ public class Title {
         if (!isValidTitle(trimmedTitle)) {
             throw new IllegalValueException(MESSAGE_TITLE_CONSTRAINTS);
         }
-        this.fullTitle = trimmedTitle;
+        this.title = trimmedTitle;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Title // instanceof handles nulls
-                        && this.fullTitle.equals(((Title) other).fullTitle)); // state check
+                        && this.title.equals(((Title) other).title)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullTitle.hashCode();
+        return title.hashCode();
     }
 
     @Override
     public String toString() {
-        return fullTitle;
+        return title;
     }
 
 }

@@ -35,7 +35,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("update " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().fullTitle);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details

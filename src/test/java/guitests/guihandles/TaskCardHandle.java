@@ -74,7 +74,7 @@ public class TaskCardHandle extends GuiHandle {
 
     //TODO only works for v0.2
     public boolean isSameTask(ReadOnlyTask task) {
-        return getTitle().equals(task.getTitle().fullTitle)
+        return getTitle().equals(task.getTitle().title)
                 && getPhone().equals(getDisplayedDate(task))
                 && getLocation().equals(task.getLocation().value)
                 && getTags().equals(getTags(task.getTags()));
