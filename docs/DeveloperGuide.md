@@ -455,32 +455,30 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
-| Priority | As a user I want to ... | So that I can... |
-| -------- | :-------- | :--------- | :----------- |
-| `* * *` | see usage instructions | know how to use the commands |
-| `* * *` | add a new task without deadlines | plan for the future
-| `* * *` | add a new task with deadline | know when my task is due
-| `* * *` | add a new task with start and end time | fit it into my calendar
-| `* * *` | delete a task | remove task that I no longer need
-| `* * *` | edit a task | make changes or edit mistakes
-| `* * *` | undo a command | undo a mistake
-| `* * *` | search for a task | find a task with only few keywords
-| `* * *` | mark a task as done | keep track of tasks that are done
-| `* * *` | see task by done and not done | keep track of task that are not done
-| `* * *` | list task by specific tag | only see task that under a certain tag
-| `* * *` | use short form for common commands | have flexibility when i use the app, type faster
-| `* * *` | specify folder for data storage | choose where i want to save my info
-| `* *` | sort tasks by name | locate a task easily
-| `* *` | use hotkeys for commands | do things faster
-| `* *` | get feedback for my commands | know if a command is successful or system has hanged
-| `* *` | save my task to google calendar | see them on google calendar
-| `* *` | get the app to help me find a slot for a task | find a suitable time easily
-| `* *` | block multiple slots | block slots when timing of a task is uncertain
-| `* *` | list task in sorted order | plan my time
-| `* *` | list task by due date | see which task are most urgent
-| `* *` | mark a task as not done | undone a done task
-
+| Priority | As a user I want to ... | So that I can... 
+| -------- | :-------- | :---------  
+| `* * *` | see usage instructions | know how to use the commands 
+| `* * *` | add a new task without deadlines | plan for the future 
+| `* * *` | add a new task with deadline | know when my task is due 
+| `* * *` | add a new task with start and end time | fit it into my calendar 
+| `* * *` | delete a task | remove task that I no longer need 
+| `* * *` | edit a task | make changes or edit mistakes 
+| `* * *` | undo a command | undo a mistake 
+| `* * *` | search for a task | find a task with only few keywords 
+| `* * *` | mark a task as done | keep track of tasks that are done 
+| `* * *` | see task by done and not done | keep track of task that are not done 
+| `* * *` | list task by specific tag | only see task that under a certain tag 
+| `* * *` | use short form for common commands | have flexibility when i use the app, type faster 
+| `* * *` | specify folder for data storage | choose where i want to save my info 
+| `* *` | sort tasks by name | locate a task easily 
+| `* *` | use hotkeys for commands | do things faster 
+| `* *` | get feedback for my commands | know if a command is successful or system has hanged 
+| `* *` | save my task to google calendar | see them on google calendar 
+| `* *` | get the app to help me find a slot for a task | find a suitable time easily 
+| `* *` | block multiple slots | block slots when timing of a task is uncertain 
+| `* *` | list task in sorted order | plan my time 
+| `* *` | list task by due date | see which task are most urgent 
+| `* *` | mark a task as not done | undone a done task 
 
 ## Appendix B : Use Cases
 (For all use cases below, the **System** is the `KIT` and the **Actor** is the `user`, unless specified otherwise)
