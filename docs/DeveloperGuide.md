@@ -117,17 +117,13 @@ Two of those classes play important roles at the architecture level.
 * `LogsCenter` : Used by many classes to write log messages to Burdens' log file to record system information and events.
 
 **`UI`**<br/>
-The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.
-<br/>
+The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.<br/>
 **`Logic`**<br/>
-The ['Logic'](#logic-component) component handles the process and execution of user's commands.
-<br/>
+The ['Logic'](#logic-component) component handles the process and execution of user's commands.<br/>
 **`Model`**<br/>
-The ['Model'](#model-component) handles data representation and data structures of Burdens.
-<br/>
+The ['Model'](#model-component) handles data representation and data structures of Burdens.<br/>
 **`Storage`**<br/>
-The ['Storage'](#storage-component) handles the process of reading data from and writing data to the hard disk.
-<br/>
+The ['Storage'](#storage-component) handles the process of reading data from and writing data to the hard disk.<br/>
 Each of the ** `UI` , `Logic`, `Model`, `Storage`** components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
