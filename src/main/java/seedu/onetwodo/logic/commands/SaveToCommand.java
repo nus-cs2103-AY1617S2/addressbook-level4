@@ -15,6 +15,7 @@ import seedu.onetwodo.logic.commands.exceptions.CommandException;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.storage.StorageManager;
 import seedu.onetwodo.storage.ToDoListStorage;
+import seedu.onetwodo.ui.MainWindow;
 
 //@@author A0139343E
 /**
@@ -72,7 +73,8 @@ public class SaveToCommand extends Command {
                 storageManager.setToDoListFilePath(updatedFilePath);
                 toDoListStorage.saveToDoList(toDoList);
 
-                EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
+                MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
+                //EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
             }
         } catch (IOException ioe) {
             return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(ioe));

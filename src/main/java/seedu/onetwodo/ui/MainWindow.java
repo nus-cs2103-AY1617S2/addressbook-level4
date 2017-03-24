@@ -25,6 +25,7 @@ import seedu.onetwodo.logic.Logic;
 import seedu.onetwodo.model.UserPrefs;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.ui.StatusBarFooter;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -42,6 +43,7 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private static StatusBarFooter statusBarFooter;
     private BrowserPanel browserPanel;
     private TaskListPanel deadlineTaskListPanel;
     private TaskListPanel eventTaskListPanel;
@@ -96,6 +98,10 @@ public class MainWindow extends UiPart<Region> {
         setAccelerators();
     }
 
+    public static StatusBarFooter getStatusBarFooter() {
+        return statusBarFooter;
+    }
+    
     private void loadFonts(Scene scene) {
         Font.loadFont(MainWindow.class.getResource(FONT_AVENIR).toExternalForm(), 10);
     }
@@ -148,7 +154,7 @@ public class MainWindow extends UiPart<Region> {
         todoTaskListPanel = new TaskListPanel(getTodosListPlaceholder(), getDoneTaskList(), TaskType.TODO);
 
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
+        statusBarFooter = new StatusBarFooter(getStatusbarPlaceholder(), config.getToDoListFilePath());
 
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         commandBox.focus();

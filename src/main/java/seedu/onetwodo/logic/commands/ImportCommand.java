@@ -14,6 +14,7 @@ import seedu.onetwodo.model.Model;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.storage.StorageManager;
 import seedu.onetwodo.storage.ToDoListStorage;
+import seedu.onetwodo.ui.MainWindow;
 
 //@@author A0139343E
 /**
@@ -63,6 +64,7 @@ public class ImportCommand extends Command {
                 ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
                 toDoListStorage.saveToDoList(toDoList);
                 model.resetData(toDoList);
+                MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
             }
 
         } catch (IOException ioe) {

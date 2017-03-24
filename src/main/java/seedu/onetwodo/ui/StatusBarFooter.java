@@ -39,7 +39,7 @@ public class StatusBarFooter extends UiPart<Region> {
         placeHolder.getChildren().add(getRoot());
     }
 
-    private void setSaveLocation(String location) {
+    public void setSaveLocation(String location) {
         this.saveLocationStatus.setText(location);
     }
 
