@@ -77,7 +77,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlToDoListStorageExceptionThrowingStub("dummy"),
                 new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleToDoListChangedEvent(new ToDoListChangedEvent(new ToDoList(),1));
+        storage.handleToDoListChangedEvent(new ToDoListChangedEvent(new ToDoList(), 1));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
