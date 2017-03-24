@@ -17,6 +17,10 @@ public class SaveCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("save C://user/desktop/taskboss");
         assertResultMessage(SaveCommand.MESSAGE_SUCCESS);
 
+        //valid filepath using short command
+        commandBox.runCommand("sv C://user/desktop/taskboss");
+        assertResultMessage(SaveCommand.MESSAGE_SUCCESS);
+
         //invalid command
         commandBox.runCommand("saveC://user/desktop/taskboss");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
