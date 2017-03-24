@@ -1,11 +1,11 @@
 package seedu.toluist.model;
 
-import seedu.toluist.commons.util.StringUtil;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import seedu.toluist.commons.util.StringUtil;
 
 /**
  * A model to manage alias

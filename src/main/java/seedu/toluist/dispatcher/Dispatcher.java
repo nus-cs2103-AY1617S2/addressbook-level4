@@ -1,6 +1,5 @@
 package seedu.toluist.dispatcher;
 
-import java.util.Set;
 import java.util.SortedSet;
 
 /**

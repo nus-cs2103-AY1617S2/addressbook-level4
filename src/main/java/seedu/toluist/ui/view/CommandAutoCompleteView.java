@@ -1,25 +1,14 @@
 package seedu.toluist.ui.view;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import seedu.toluist.commons.core.Config;
-import seedu.toluist.commons.core.SwitchConfig;
 import seedu.toluist.commons.util.FxViewUtil;
-import seedu.toluist.model.Task;
-import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.ui.UiStore;
-
-import java.util.Observable;
 
 /**
  * View to display suggest command
