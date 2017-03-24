@@ -24,6 +24,9 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
             new IllegalArgumentException("Description must not be empty.");
     private static IllegalArgumentException illegalArgumentException2 =
             new IllegalArgumentException("Start date must be before end date.");
+    private static IllegalArgumentException illegalArgumentException3 =
+            new IllegalArgumentException("Floating task cannot be recurring task,"
+                    + " include at least an end date.");
     private Tag tag1 = new Tag("tag1");
     private Tag tag2 = new Tag("tag2");
     private Tag tag3 = new Tag("tag3");
@@ -178,5 +181,53 @@ public class AddTaskCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command);
         assertFalse(isTaskShown(task1));
         assertFalse(isTaskShown(task2));
+    }
+
+    @Test
+    public void addRecurringTaskWithDeadline() {
+        String taskDescription = "shower";
+        String recurFrequencyString = "daily";
+        LocalDateTime endDate = DateTimeUtil.parseDateString("9pm");
+        String command = "add " + taskDescription + " by/" + endDate + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task1 = new Task(taskDescription, endDate);
+        task1.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task1));
+
+        taskDescription = "do CS2103T project";
+        recurFrequencyString = "weekly";
+        endDate = DateTimeUtil.parseDateString("28 April 2017, 11pm");
+        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017");
+        command = "add " + taskDescription + " by/" + endDate + " repeat/" + recurFrequencyString
+                + " until/" + recurUntilEndDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, endDate);
+        task2.setRecurring(recurUntilEndDate, recurFrequencyString);
+        assertTrue(isTaskShown(task1));
+    }
+
+    @Test
+    public void addRecurringEvent() {
+        String taskDescription = "shower";
+        String recurFrequencyString = "daily";
+        LocalDateTime from = DateTimeUtil.parseDateString("9pm");
+        LocalDateTime to = DateTimeUtil.parseDateString("10pm");
+        String command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString;
+        commandBox.runCommand(command);
+        Task task1 = new Task(taskDescription, from, to);
+        task1.setRecurring(recurFrequencyString);
+        assertTrue(isTaskShown(task1));
+
+        taskDescription = "do CS2103T project";
+        recurFrequencyString = "weekly";
+        from = DateTimeUtil.parseDateString("now");
+        to = DateTimeUtil.parseDateString("28 April 2017, 11pm");
+        LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("11 April 2017");
+        command = "add " + taskDescription + " from/" + from + " to/" + to + " repeat/" + recurFrequencyString
+                + " until/" + recurUntilEndDate;
+        commandBox.runCommand(command);
+        Task task2 = new Task(taskDescription, from, to);
+        task2.setRecurring(recurUntilEndDate, recurFrequencyString);
+        assertTrue(isTaskShown(task1));
     }
 }

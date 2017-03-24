@@ -86,9 +86,11 @@ public class Task implements Comparable<Task> {
                 && this.description.equals(((Task) other).description)) // state check
                 && this.priority.equals(((Task) other).priority)
                 && this.allTags.equals(((Task) other).allTags)
+                && Objects.equals(this.recurringFrequency, ((Task) other).recurringFrequency) // handles null
                 && Objects.equals(this.startDateTime, ((Task) other).startDateTime) // handles null
                 && Objects.equals(this.endDateTime, ((Task) other).endDateTime) // handles null
-                && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime); // handles null
+                && Objects.equals(this.completionDateTime, ((Task) other).completionDateTime) // handles null
+                && Objects.equals(this.recurringEndDateTime, ((Task) other).recurringEndDateTime); // handles null
     }
 
     public void setCompleted(boolean isCompleted) {
