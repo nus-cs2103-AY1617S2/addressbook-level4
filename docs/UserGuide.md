@@ -1,6 +1,6 @@
 # Task Manager - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -44,14 +44,16 @@ A command guide will be shown in the window
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task manager<br>
-Format: `add TASK from STARTING TIME by FINISHING TIME`
+Format: `add TASK s/STARTING DATE e/ENDING DATE d/Description#tags`
 
+> Only Task title is a compulsory field
 > Tasks can have any number of tags (including 0)
+> Tasks without starting starting or ending date will have it defaulted to the current time.
 
 Examples:
 
-* `add t/submit report by f/Friday #academic`
-* `add t/read Harry Potter from s/Monday by f/Saturday #personal`
+* `add submit report e/29/07/2017 d/Assignment 1 #academic`
+* `add read Harry Potter s/12/03/2017 e/25/06/2017 d/chapter 5 #personal`
 
 ### 2.3. Listing all tasks : `list`
 
@@ -81,17 +83,21 @@ Format: `edit INDEX COMPONENT`
 
 Examples:
 
-* `edit 3 f/Saturday`<br>
-  Changes the finishing time of task 3 to Saturday
+* `edit 3 e/24/06/2017`<br>
+  Changes the ENDING DATE of task 3 to 24/06/2017
+* `edit 2 s/21/01/2017 e/24/06/2017 #school`<br>
+  Changes task 3 STARTING DATE to 21/01/2017, ENDING DATE to 24/06/2017, tags to school
 
-### 2.6. Finding all tasks containing any keyword in their task description: `find`
+### 2.6. Finding all tasks containing any keyword in their task title / description / tags: `find`
 
 Format: `find KEYWORD`
 
 Examples:
 
 * `find report`<br>
-  Returns `submit report`  `print report` etc. in the column
+  Returns `submit report`  `print report` `#report` etc. in the column
+* `find schoolwork sports`<br>
+  Returns `do schoolwork`  `play sports` `#schoolwork` `#sports` etc. in the column
 
 ### 2.7. Deleting a task : `delete`
 
@@ -133,13 +139,15 @@ There is no need to save manually.
 Command | Syntax | Example
 ------- | ------ | -------
 Help    | help
-Add     | add TASK                                      | add t/submit report by f/Friday
-        | add TASK by FINISHING TIME                    |
-        | add TASK from STARTING TIME by FINISHING TIME |
+Add     | add TASK | add submit report
+Add     | add TASK s/STARTING DATE | add submit report s/24/03/2017
+Add     | add TASK s/STARTING DATE e/ENDING DATE    | add submit report s/24/03/207 e/27/03/2017
+Add     | add TASK s/STARTING DATE e/ENDING DATE d/Description   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
+Add     | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 #school
 List    | list
 Select  | select INDEX                    | select 3
-Edit    | edit INDEX COMPONENT            | edit 3 f/Saturday
-Find    | find KEYWORD                    | find report
+Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
+Find    | find KEYWORD(s)                 | find report assignment
 Delete  | delete INDEX                    | delete 3
 Clear   | clear
 History | history
