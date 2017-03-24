@@ -9,8 +9,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Status;
 import seedu.address.model.task.Priority;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Time;
 import seedu.address.model.task.UniqueTaskList;
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
             + "Parameters: NAME d/DATE c/CLOCKTIME p/PRIORITY [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe d/01/01/2001, p/High, t/friends";
+            + " John Doe d/01/01/2001 c/00:01 p/high t/friends";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";

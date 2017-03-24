@@ -2,7 +2,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Address;
 import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -59,7 +58,7 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
-    public void setStatus(Status status){
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -77,7 +76,7 @@ public class TestTask implements ReadOnlyTask {
     public ClockTime getClockTime() {
         return clockTime;
     }
-  
+
     public Priority getPriority() {
         return priority;
     }

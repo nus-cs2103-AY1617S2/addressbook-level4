@@ -13,7 +13,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
-import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -82,8 +81,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    public void markTask(int index, Task editedTask) throws UniqueTaskList.DuplicateTaskException{
-        taskManager.markTask(index,editedTask);
+    public void markTask(int index, Task editedTask) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.markTask(index, editedTask);
         indicateTaskManagerChanged();
     }
 

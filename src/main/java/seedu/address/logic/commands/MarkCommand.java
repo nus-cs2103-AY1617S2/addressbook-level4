@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ClockTime;
@@ -48,7 +45,7 @@ public class MarkCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, parameters[1]);
 
         try {
-            model.markTask(filteredTaskListIndex,editedTask);
+            model.markTask(filteredTaskListIndex, editedTask);
         } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

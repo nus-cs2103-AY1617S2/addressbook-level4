@@ -92,7 +92,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Marks the status of the task given.
      * @throws DuplicateTaskException
      */
-    public void markTask(int index, Task editedTask) throws DuplicateTaskException{
+    public void markTask(int index, Task editedTask) throws DuplicateTaskException {
         tasks.updateTask(index, editedTask);
     }
 

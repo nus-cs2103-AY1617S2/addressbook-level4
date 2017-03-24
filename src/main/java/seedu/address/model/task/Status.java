@@ -26,7 +26,7 @@ public class Status {
      * Returns true if a given string is a valid task name.
      */
     public boolean isValidTransaction(int status) {
-        if(this.status == status)
+        if (this.status == status)
             return false;
         else
             return true;
