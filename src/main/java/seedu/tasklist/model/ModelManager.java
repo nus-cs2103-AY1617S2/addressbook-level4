@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Optional;
-
 import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
@@ -181,6 +180,17 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+
+    @Override
+    public void updateFilteredTaskListStatus(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new StatusQualifier(keywords)));
+    }
+
+    @Override
+    public void updateFilteredTaskListTag(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
+    }
+
 //@@author A0141993X
     /**
      * Sort based on parameter specified
@@ -204,11 +214,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
 //@@author
-    @Override
-    public void updateFilteredTaskListTag(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new TagQualifier(keywords)));
-    }
-
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -281,6 +286,30 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "tag=" + String.join(", ", tagKeyWords);
+        }
+    }
+
+    private class StatusQualifier implements Qualifier {
+        private Set<String> statusKeyWord;
+        private String completed = "completed";
+        @SuppressWarnings("serial")
+        private List<String> notCompleted = new Vector<String>() {{ add("not"); add("completed"); }};
+
+        public StatusQualifier(Set<String> statusKeyWord) {
+            this.statusKeyWord = statusKeyWord;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (statusKeyWord.size() == 1) {
+                assert statusKeyWord.contains(completed);
+                return task.getStatus().value;
+            } else if (statusKeyWord.size() == 2) {
+                assert statusKeyWord.containsAll(notCompleted);
+                return !task.getStatus().value;
+            } else {
+                return false;
+            }
         }
     }
 }

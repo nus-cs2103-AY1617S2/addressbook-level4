@@ -70,4 +70,6 @@ public interface Model {
      * @throws IOException
      * */
     void saveTaskList(String filePath) throws IOException;
+
+    void updateFilteredTaskListStatus(Set<String> keywords);
 }
