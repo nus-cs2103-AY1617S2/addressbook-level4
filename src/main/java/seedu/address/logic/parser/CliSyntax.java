@@ -13,9 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_TIME = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    //@@author A01483873Y
     public static final Prefix PREFIX_CLOCKTIME = new Prefix("c/");
-    //@@author
+
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
