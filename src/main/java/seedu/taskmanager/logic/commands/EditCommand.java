@@ -33,7 +33,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-
+    // @@author A0140032E
+    public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
+    // @@author
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
@@ -64,6 +66,11 @@ public class EditCommand extends Command {
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
+        // @@author A0140032E
+        if (editedTask.getStartDate().after(editedTask.getEndDate())) {
+            throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+        }
+        // @@author
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {

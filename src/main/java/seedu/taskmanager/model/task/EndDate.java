@@ -2,6 +2,7 @@ package seedu.taskmanager.model.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -12,7 +13,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class EndDate extends Date {
 
-    public static final String MESSAGE_ENDDATE_CONSTRAINTS = "Start date should be of dd/mm/yyyy format or "
+    public static final String MESSAGE_ENDDATE_CONSTRAINTS = "End date should be of dd/mm/yyyy format or "
             + "can be empty";
     public static final String ENDDATE_VALIDATION_REGEX = "(^$)|(^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$)";
 
@@ -34,6 +35,10 @@ public class EndDate extends Date {
         try {
             if (!isValidEndDate(endDate)) {
                 throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
+            }
+            if (endDate.trim().equals("")) {
+                Calendar cal = Calendar.getInstance();
+                return cal.getTimeInMillis();
             }
             return sdfInput.parse(endDate).getTime();
         } catch (IllegalValueException | ParseException e) {
