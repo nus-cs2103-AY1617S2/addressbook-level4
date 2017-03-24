@@ -52,5 +52,8 @@ public class DeleteCommand extends Command {
 	}
 	return new CommandResult(sb.toString());
     }
+    public boolean isUndoable () {
+    	return true;
+    }
 
 }

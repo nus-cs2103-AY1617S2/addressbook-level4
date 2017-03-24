@@ -7,10 +7,12 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
+import seedu.task.logic.commands.UpdateBackupCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.logic.parser.Parser;
 import seedu.task.model.Model;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.UniqueTaskList;
 import seedu.task.storage.Storage;
 
 /**
@@ -29,10 +31,17 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
-	logger.info("----------------[USER COMMAND][" + commandText + "]");
-	Command command = parser.parseCommand(commandText);
-	command.setData(model);
-	return command.execute();
+		logger.info("----------------[USER COMMAND][" + commandText + "]");
+		Command command = parser.parseCommand(commandText);
+		command.setData(model);
+		if (command.isUndoable()) {
+			UpdateBackupCommand ubc = new UpdateBackupCommand();
+			ubc.setData(model);
+			ubc.execute();
+			return command.execute();
+		} else {
+			return command.execute();
+		}
     }
 
     @Override

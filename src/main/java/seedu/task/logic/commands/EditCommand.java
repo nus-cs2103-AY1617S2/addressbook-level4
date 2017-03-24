@@ -50,6 +50,9 @@ public class EditCommand extends Command {
 
 	this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
+    public boolean isUndoable () {
+    	return true;
+    }
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -176,4 +179,5 @@ public class EditCommand extends Command {
 	    return tags;
 	}
     }
+    
 }
