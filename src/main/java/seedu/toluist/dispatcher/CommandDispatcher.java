@@ -15,8 +15,6 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import seedu.toluist.commons.core.Config;
-import seedu.toluist.commons.core.EventsCenter;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.AddTaskController;
@@ -39,7 +37,6 @@ import seedu.toluist.controller.UnknownCommandController;
 import seedu.toluist.controller.UntagController;
 import seedu.toluist.controller.UpdateTaskController;
 import seedu.toluist.controller.ViewAliasController;
-import seedu.toluist.model.AliasTable;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);

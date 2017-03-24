@@ -1,9 +1,9 @@
 package seedu.toluist.dispatcher;
 
+import java.util.SortedSet;
+
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.model.AliasTable;
-
-import java.util.SortedSet;
 
 /**
  * Dispatcher is the bridge between the UI input & Controller

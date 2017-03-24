@@ -53,6 +53,10 @@
     -fx-border-color: theme-primary-dark;
 }
 
+.text-field.error {
+    -fx-border-color: theme-danger;
+}
+
 .text-area {
     -fx-background-radius: 0;
 }
@@ -100,16 +104,16 @@
 
 /* TASK */
 
-.task {
+.tasks .task {
     -fx-border-color: theme-secondary-text;
     -fx-border-width: 0 0 1 0;
 }
 
-.task.completed .status-text .text {
+.tasks .task.completed .status-text .text {
     -fx-strikethrough: true;
 }
 
-.task.overdue .status-text.label {
+.tasks .task.overdue .status-text.label {
     -fx-text-fill: theme-danger;
 }
 
@@ -140,5 +144,7 @@
 }
 
 .command-suggestions .command-suggestion.selected {
-    -fx-text-fill: theme-primary;
+    -fx-text-fill: theme-primary-dark;
 }
+
+/* COMMAND INPUT */

@@ -28,14 +28,32 @@ public class FxViewUtil {
         stage.getIcons().setAll(AppUtil.getImage(iconSource));
     }
 
+    /**
+     * Apply anchor so that the node will take full width of parent
+     * @param node a node
+     */
     public static void makeFullWidth(Node node) {
         applyAnchorBoundaryParameters(node, 0.0, 0.0, 0.0, 0.0);
     }
 
+    /**
+     * Add style class to a node. Prevent duplicate style class from being added
+     * @param node a node
+     * @param styleClass a style class string
+     */
     public static void addStyleClass(Node node, String styleClass) {
         if (!node.getStyleClass().contains(styleClass)) {
             node.getStyleClass().add(styleClass);
         }
+    }
+
+    /**
+     * Remove a style class from a node
+     * @param node a node
+     * @param styleClass a style class string
+     */
+    public static void removeStyleClass(Node node, String styleClass) {
+        node.getStyleClass().remove(styleClass);
     }
 
     /**

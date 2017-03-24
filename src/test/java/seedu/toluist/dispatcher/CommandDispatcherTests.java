@@ -1,18 +1,19 @@
 package seedu.toluist.dispatcher;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+
 import seedu.toluist.model.AliasTable;
-
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 /**
  * Tests for CommandDispatcher

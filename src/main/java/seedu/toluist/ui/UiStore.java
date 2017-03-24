@@ -26,6 +26,8 @@ import seedu.toluist.ui.view.UiView;
  * Ui will observe for changes to `shownTasks` and re-render on state change
  */
 public class UiStore {
+    public static final int INVALID_SUGGESTION_INDEX = -1;
+
     private static UiStore instance;
 
     private ArrayList<Task> allTasks = new ArrayList<>();
@@ -36,7 +38,8 @@ public class UiStore {
             new SimpleObjectProperty<>(new CommandResult(""));
     private SimpleStringProperty observableCommandText = new SimpleStringProperty("");
     private ObservableList<String> observableSuggestedCommands = FXCollections.observableArrayList();
-    private SimpleIntegerProperty observableSuggestedCommandIndex = new SimpleIntegerProperty(-1);
+    private SimpleIntegerProperty observableSuggestedCommandIndex =
+            new SimpleIntegerProperty(INVALID_SUGGESTION_INDEX);
 
     public static UiStore getInstance() {
         if (instance == null) {
