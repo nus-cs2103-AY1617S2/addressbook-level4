@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import guitests.guihandles.AlertDialogHandle;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import w10b3.todolist.commons.events.storage.DataSavingExceptionEvent;
 
 public class ErrorDialogGuiTest extends ToDoListGuiTest {
 

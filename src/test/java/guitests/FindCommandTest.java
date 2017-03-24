@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestTask;
+import w10b3.todolist.commons.core.Messages;
+import w10b3.todolist.testutil.TestTask;
 
 public class FindCommandTest extends ToDoListGuiTest {
 

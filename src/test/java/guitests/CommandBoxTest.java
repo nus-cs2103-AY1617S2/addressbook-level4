@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import w10b3.todolist.ui.CommandBox;
 
 public class CommandBoxTest extends ToDoListGuiTest {
 

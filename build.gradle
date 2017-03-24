@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'w10b3.todolist.MainApp'
 
 allprojects {
     apply plugin: 'idea'
