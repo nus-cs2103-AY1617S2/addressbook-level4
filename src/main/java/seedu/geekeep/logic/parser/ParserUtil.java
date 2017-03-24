@@ -65,15 +65,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<DateTime>} if {@code email} is present. Returns
-     * an {@code Optional.empty()} otherwise.
+     * Parses a {@code Optional<String> startDateTime} into an {@code Optional<DateTime>} if {@code startDateTime} is
+     * present. Returns an {@code Optional.empty()} otherwise.
      */
-    public static Optional<DateTime> parseStartDateTime(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        if (email.isPresent() && email.get().equals("")) {
+    public static Optional<DateTime> parseStartDateTime(Optional<String> startDateTime) throws IllegalValueException {
+        assert startDateTime != null;
+        if (startDateTime.isPresent() && startDateTime.get().equals("")) {
             return null;
         }
-        return email.isPresent() ? Optional.of(new DateTime(email.get())) : Optional.empty();
+        return startDateTime.isPresent() ? Optional.of(new DateTime(startDateTime.get())) : Optional.empty();
     }
 
     /**

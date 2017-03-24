@@ -44,8 +44,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withStartDateTime(String email) throws IllegalValueException {
-        this.task.setStartDateTime(new DateTime(email));
+    public TaskBuilder withStartDateTime(String startDateTime) throws IllegalValueException {
+        this.task.setStartDateTime(new DateTime(startDateTime));
         return this;
     }
 
