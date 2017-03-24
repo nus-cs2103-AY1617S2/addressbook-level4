@@ -1,15 +1,16 @@
 package seedu.onetwodo.logic.commands;
 
+import java.io.File;
 import java.io.IOException;
 
 import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.Config;
-import seedu.onetwodo.commons.core.EventsCenter;
-import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
 import seedu.onetwodo.commons.util.ConfigUtil;
+import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
+import seedu.onetwodo.model.Model;
 import seedu.onetwodo.model.ReadOnlyToDoList;
 import seedu.onetwodo.storage.StorageManager;
 import seedu.onetwodo.storage.ToDoListStorage;
@@ -29,6 +30,7 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported storage file from location: %1$s";
     public static final String MESSAGE_IMPORT_FAILURE = "Failed to import data from %1$s";
+    public static final String MESSAGE_IMPORT_FILE_MISSING = "File does not exist!\n";
 
     public final String filePath;
     public boolean isOverWriting;
@@ -38,26 +40,33 @@ public class ImportCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public synchronized CommandResult execute() throws CommandException {
 
         try {
-            Config config = MainApp.getConfig();
-            StorageManager storageManager = (StorageManager) MainApp.getStorage();
-            ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
-
-            // set to new path
-            // save new updates into config.json
-            config.setToDoListFilePath(filePath);
-            ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-
-            // set to new path
-            // copy data from new file to read it
-            String updatedFilePath = config.getToDoListFilePath();
-            storageManager.setToDoListFilePath(updatedFilePath);
-            ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
-            toDoListStorage.saveToDoList(toDoList);
-
-            EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
+            File file = new File(filePath);
+            if (!FileUtil.isFileExists(file)) {
+                String result = MESSAGE_IMPORT_FILE_MISSING
+                        + String.format(MESSAGE_IMPORT_FAILURE, filePath).toString();
+                throw new CommandException(result);
+            } else {
+                Config config = MainApp.getConfig();
+                Model model = MainApp.getModel();
+                StorageManager storageManager = (StorageManager) MainApp.getStorage();
+    
+                // set to new path
+                // save new updates into config.json
+                config.setToDoListFilePath(filePath);
+                ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    
+                // set to new path
+                // copy data from new file to read it
+                String updatedFilePath = config.getToDoListFilePath();
+                storageManager.setToDoListFilePath(updatedFilePath);
+                ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
+                ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
+                toDoListStorage.saveToDoList(toDoList);
+                model.resetData(toDoList);
+            }
 
         } catch (IOException ioe) {
             return new CommandResult(MESSAGE_IMPORT_FAILURE + StringUtil.getDetails(ioe));

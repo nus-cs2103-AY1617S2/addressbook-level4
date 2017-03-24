@@ -45,7 +45,6 @@ public class XmlToDoListStorage implements ToDoListStorage {
     public Optional<ReadOnlyToDoList> readToDoList(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
-
         File toDoListFile = new File(filePath);
 
         if (!toDoListFile.exists()) {
@@ -70,7 +69,6 @@ public class XmlToDoListStorage implements ToDoListStorage {
     public void saveToDoList(ReadOnlyToDoList toDoList, String filePath) throws IOException {
         assert toDoList != null;
         assert filePath != null;
-
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableToDoList(toDoList));

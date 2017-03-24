@@ -29,10 +29,10 @@ public class FileTransferCommandParser {
     }
 
     protected boolean isValidPath(String args) {
-        return args.equals(EMPTY_WINDOW_PATH) ||
-                args.equals(EMPTY_MAC_PATH) ||
-                args.length() <= XML_EXTENSION.length() ||
-                !isXmlFormat(args);
+        return !args.equals(EMPTY_WINDOW_PATH) &&
+                !args.equals(EMPTY_MAC_PATH) &&
+                args.length() > XML_EXTENSION.length() &&
+                isXmlFormat(args);
     }
 
 }

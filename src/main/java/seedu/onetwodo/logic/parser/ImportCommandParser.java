@@ -33,7 +33,7 @@ public class ImportCommandParser extends FileTransferCommandParser {
         }
 
         // check if overwrite exist in the string
-        String overwriteWord, pathInput;
+        String pathInput;
         pathInput = argArray[INDEX_ZERO];
         command = new ImportCommand(pathInput);
 
