@@ -4,45 +4,41 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
+#### [Cheuk Ting](https://github.com/ctleungac) <br>
 <img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+Roles: Deliverables and Deadlines, Scheduling and Task Tracking, GUI Component Lead 
+Responsibilities: Ensure project deliverables are done on time and in the right format. In charge of defining, assigning, and tracking project tasks. Oversees the development of the GUI component.
+
+(Subject to Change)
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
+#### [Hsieh Hsin Han](https://github.com/Tony-Hsieh)
+<img src="images/IMG_0159.PNG" width="150"><br>
 Role: Developer <br>
 Responsibilities: UI
 
+(Subject to Change)
+
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
+#### [Malik Jabati](https://github.com/SmartyMJ)
+<img src="images/MalikJabati.jpeg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Data
 
+(Subject to Change)
+
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
+#### [Ali Rizvi](https://github.com/EntitySK)
+<img src="images/MuhammadAliRizvi.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Dev Ops
 
+(Subject to Change)
+
 -----
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 

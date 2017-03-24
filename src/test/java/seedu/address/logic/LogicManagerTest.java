@@ -39,11 +39,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
+//import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+//import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -189,20 +191,31 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+//        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
+//        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
+//        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name 12.12 e/valid@email.butNoDatePrefix g/valid,group", expectedMessage);
+        assertCommandFailure("add Valid Name d/12.12 valid@email.butNoPrefix g/valid, group", expectedMessage);
+        assertCommandFailure("add Valid Name d/12.12 e/valid@email.butNoGroupPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+//        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+//                Name.MESSAGE_NAME_CONSTRAINTS);
+//        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+//                Phone.MESSAGE_PHONE_CONSTRAINTS);
+//        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+//                Email.MESSAGE_EMAIL_CONSTRAINTS);
+//        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+//                Tag.MESSAGE_TAG_CONSTRAINTS);
+    	assertCommandFailure("add []\\[;] d/12.12 e/valid@e.mail g/valid, group",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
+        assertCommandFailure("add Valid Name d/not_numbers e/valid@e.mail g/valid, group",
+                Date.MESSAGE_DATE_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12.12 e/notAnEmail g/valid, group",
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+        assertCommandFailure("add Valid Name d/12.12 e/valid@e.mail g/valid, group t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -416,13 +429,15 @@ public class LogicManagerTest {
 
         Person adam() throws Exception {
             Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
+            //Phone privatePhone = new Phone("111111");
+            Date privateDate = new Date("12.11");
             Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
+            //Address privateAddress = new Address("111, alpha street");
+            Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Person(name, privatePhone, email, privateAddress, tags);
+            return new Person(name, privateDate, email, privateGroup, tags);
         }
 
         /**
@@ -435,9 +450,11 @@ public class LogicManagerTest {
         Person generatePerson(int seed) throws Exception {
             return new Person(
                     new Name("Person " + seed),
-                    new Phone("" + Math.abs(seed)),
+                    //new Phone("" + Math.abs(seed)),
+                    new Date("" + Math.abs(seed)),
                     new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    //new Address("House of " + seed),
+                    new Group("list of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -450,8 +467,10 @@ public class LogicManagerTest {
 
             cmd.append(p.getName().toString());
             cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
+            //cmd.append(" p/").append(p.getPhone());
+            cmd.append(" d/").append(p.getDate());
+            //cmd.append(" a/").append(p.getAddress());
+            cmd.append(" g/").append(p.getGroup());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -534,9 +553,9 @@ public class LogicManagerTest {
         Person generatePersonWithName(String name) throws Exception {
             return new Person(
                     new Name(name),
-                    new Phone("1"),
+                    new Date("12.11"),
                     new Email("1@email"),
-                    new Address("House of 1"),
+                    new Group("list of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
