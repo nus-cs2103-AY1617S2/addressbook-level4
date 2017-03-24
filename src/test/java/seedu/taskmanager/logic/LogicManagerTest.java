@@ -21,11 +21,13 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.taskmanager.commons.core.EventsCenter;
+import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
@@ -441,6 +443,22 @@ public class LogicManagerTest {
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
+
+    @Test
+    public void execute_cd_invalidFilePath() throws Exception {
+        assertCommandFailure("cd !asdwie34$2.xml",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+        assertCommandFailure("cd data/taskmanager",
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+    }
+
+/*    @Test
+    public void execute_cd_invalidXmlFile() throws Exception {
+        assertCommandFailure("cd src/test/data/cd_test/empty.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+    }*/
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {

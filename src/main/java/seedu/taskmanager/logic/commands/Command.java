@@ -3,12 +3,14 @@ package seedu.taskmanager.logic.commands;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.Model;
+import seedu.taskmanager.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
+    protected Storage storage;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -35,5 +37,9 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
     }
 }

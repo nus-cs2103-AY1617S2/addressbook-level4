@@ -24,4 +24,6 @@ public class CliSyntax {
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
+    // File Path allows numbers, "/.-", space, lowercase and uppercase letters
+    public static final Pattern FILEPATH_ARGS_FORMAT = Pattern.compile("([ 0-9a-zA-Z/_.-])+");
 }

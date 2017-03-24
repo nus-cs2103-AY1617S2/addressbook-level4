@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.taskmanager.commons.core.ComponentManager;
+import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
+import seedu.taskmanager.commons.events.storage.TaskManagerStorageDirectoryChangedEvent;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.UserPrefs;
@@ -32,6 +34,9 @@ public class StorageManager extends ComponentManager implements Storage {
 
     public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
         this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    }
+
+    public StorageManager() {
     }
 
     // ================ UserPrefs methods ==============================
@@ -76,6 +81,26 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
+    /**
+     * @@author A0114269E
+     * Method for user-initiated change of Storage Directory
+     * @param newFilePath
+     * @param newConfig
+     */
+    public void updateTaskManagerStorageDirectory(String newFilePath, Config newConfig) {
+        taskManagerStorage = new XmlTaskManagerStorage(newFilePath);
+        indicateTaskManagerStorageDirectoryChanged(newFilePath, newConfig);
+    }
+
+    /**
+     * @@author A0114269E
+     * Raise an event that the tars storage directory has changed
+     * @param newFilePath
+     * @param newConfig
+     */
+    private void indicateTaskManagerStorageDirectoryChanged(String newFilePath, Config newConfig) {
+        raise(new TaskManagerStorageDirectoryChangedEvent(newFilePath, newConfig));
+    }
 
     @Override
     @Subscribe
