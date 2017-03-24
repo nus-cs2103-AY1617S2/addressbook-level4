@@ -23,26 +23,6 @@ public class EditCommandTest extends TaskBossGuiTest {
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
     //edit all field of a task.
-    //Should not affect the Done Category
-    //@@author A0144904H
-    @Test
-    public void edit_allFieldsSpecified_markedDoneTask_success() throws Exception {
-        String detailsToEdit = "n/Alice p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
-                + " Jurong West Ave 6, #08-111 c/friends";
-        int taskBossIndex = 1;
-
-        commandBox.runCommand("mark " + taskBossIndex);
-
-        TestTask editedTask = new TaskBuilder().withName("Alice").withPriorityLevel("Yes")
-               .withStartDateTime("10am Feb 19, 2017").withEndDateTime("10am Feb 28, 2017")
-               .withInformation("123, Jurong West Ave 6, #08-111").withCategories("Done").build();
-
-        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
-
-        commandBox.runCommand("undo");
-    }
-
-    //edit all field of a task.
     //Should not affect the default All Task Category
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
