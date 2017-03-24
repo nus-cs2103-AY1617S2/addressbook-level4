@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.io.File;
+import java.io.IOException;
 
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.model.TaskListChangedEvent;
 import seedu.address.commons.events.storage.FileLocationChangedEvent;
+import seedu.address.commons.util.FileUtil;
 
 
 /**
@@ -20,10 +23,9 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + "the path that you wish to save the file to/fileName.xml"
                                                + "Example: " + COMMAND_WORD + "data/File.xml";
     public static final String MESSAGE_SUCCESS = "Task list has been saved!";
-    public static final String MESSAGE_FILE_EXISTS = "File already exists";
     public static final String MESSAGE_WRONG_EXTENSION = "Wrong extension. File must be .xml";
-    public static final String MESSAGE_NO_PERMISSION = "Do not have the permission to access the file path "
-                                                     + "chosen.";
+    public static final String MESSAGE_INVALID_FILE_PATH = "Do not have the permission to access the file path "
+                                                     + "chosen" + "or cannot find file." + "Please change file path.";
 
     private String filePath;
 
@@ -37,18 +39,18 @@ public class SaveCommand extends Command {
         if (!isXMLExtension(filePath)) {
             return new CommandResult(MESSAGE_WRONG_EXTENSION);
         } else {
-            if (doesFileExists(filePath)) {
-                return new CommandResult(MESSAGE_FILE_EXISTS);
-            } else {
-                if (canAssessFile(filePath)) {
-                    message = String.format(MESSAGE_SUCCESS, filePath);
-                } else return new CommandResult(MESSAGE_NO_PERMISSION);
+            try {
+                File file = new File(filePath);
+                FileUtil.createIfMissing(file);
+                message = String.format(MESSAGE_SUCCESS, filePath);
+                EventsCenter.getInstance().post(new FileLocationChangedEvent(filePath));
+                EventsCenter.getInstance().post(new TaskListChangedEvent(model.getTaskList()));
+                return new CommandResult(message);
+            } catch (IOException e) {
+                return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                           SaveCommand.MESSAGE_INVALID_FILE_PATH));
             }
         }
-
-        EventsCenter.getInstance().post(new FileLocationChangedEvent(filePath));
-        EventsCenter.getInstance().post(new TaskListChangedEvent(model.getTaskList()));
-        return new CommandResult(message);
     }
 
     /*
@@ -58,36 +60,12 @@ public class SaveCommand extends Command {
      */
 
     private boolean isXMLExtension(String filepath) {
-        if (filepath.equals("")) {
+        if ("".equals(filepath)) {
             return false;
         } else {
             return filePath.endsWith(".xml");
         }
     }
 
-    /*
-     * Check whether the file exists already
-     * @para filePath will be checked
-     * @return true if file path given already exists
-     */
 
-    private boolean doesFileExists(String filePath) {
-        File newfile = new File(filePath);
-        return newfile.exists();
-    }
-
-    /*
-     * Check whether can write to file or not
-     * @para filePath will be checked
-     * @return true if file path give can be assessed
-     */
-
-    private boolean canAssessFile(String filePath) {
-        try {
-            File file = new File(filePath).getParentFile();
-            return file.canWrite();
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }

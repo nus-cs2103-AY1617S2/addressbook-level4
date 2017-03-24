@@ -74,7 +74,7 @@ public class Parser {
             return new HelpCommand();
 
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommand(arguments);
+            return new SaveCommand(arguments.trim());
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
