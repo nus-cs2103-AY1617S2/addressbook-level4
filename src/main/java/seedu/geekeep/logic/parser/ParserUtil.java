@@ -65,8 +65,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     * Returns an {@code Optional.empty()} otherwise.
+     * Parses a {@code Optional<String> email} into an {@code Optional<DateTime>} if {@code email} is present. Returns
+     * an {@code Optional.empty()} otherwise.
      */
     public static Optional<DateTime> parseStartDateTime(Optional<String> email) throws IllegalValueException {
         assert email != null;
