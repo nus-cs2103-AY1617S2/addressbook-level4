@@ -9,7 +9,8 @@ import seedu.doist.model.task.Priority.PriorityLevel;
 
 /**
  * A read-only immutable interface for a Task in the to-do list.
- * Implementations should guarantee: details are present and not null, field values are validated.
+ * Implementations should guarantee: details are present and not null (use Optional instead),
+ * field values are validated.
  */
 public interface ReadOnlyTask {
 
@@ -40,10 +41,14 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription());
+        if (!getTags().isEmpty()) {
+            builder.append(" ");
+        }
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
+    //@@author A0140887W
     /**
      * Compare the priority of two tasks
      * @return: -1 task2 has a lower priority than task1
@@ -83,6 +88,5 @@ public interface ReadOnlyTask {
             }
             return compareResult;
         }
-
     }
 }

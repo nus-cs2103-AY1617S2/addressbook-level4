@@ -80,7 +80,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
     - *Solution*: Refresh the project in Eclipse:
   Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
 
-* **Problem**: Eclipse reports some required libraries missing 
+* **Problem**: Eclipse reports some required libraries missing
     - *Reason*: Required libraries may not have been downloaded during the project import.
     - *Solution*: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
@@ -118,6 +118,28 @@ The `Commons` component is akin to the nervous system of the App. It contains a 
 - EventsCenter : supports the communication among different components using events
 - LogsCenter : enables writing log messages to the log file.
 
+#### Events-Driven nature of the design
+
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
+command `delete 1`.
+
+<img src="images\SDforDeletePerson.png" width="800"><br>
+_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+
+>Note how the `Model` simply raises a `TodoListChangedEvent` when the TodoList data are changed,
+ instead of asking the `Storage` to save the updates to the hard disk.
+
+The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
+being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
+<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+
+> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
+  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
+  coupling between components.
+
+The sections below give more details of each component.
+
 ### 3.2. UI component
 The `UI` is the main form of interaction between Doist and the user. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist.
 
@@ -125,7 +147,7 @@ The following diagram represents the structure of the `UI` component
 <br><img src="images/UIComponentClassDiagram.PNG" width="800"><br>
 
 Here are some of the key files in the `Ui` component:
-- [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the App. 
+- [`UI.java`](../src/main/java/seedu/doist/ui/Ui.java):  contains an `interface` that defines two operations that control the UI of the App.
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
@@ -137,10 +159,10 @@ Here are some of the key files in the `Ui` component:
 - `CommandBox.java`: contains a `class` that represents the Command Box used by the user to enter commands.
 
 ### 3.3. Logic component
-The `Logic` component handles the execution of the commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user. 
+The `Logic` component handles the execution of the commands entered by the user. It consists of several subcomponents, most notably the `Parser` and `Command` class. `Logic` also prepares the information to be used by the `UI` to display to the user.
 
 The following diagram represents the structure of the `Logic` component  
-<br><img src="images/LogicComponentClassDiagram.jpg" width="800"><br> 
+<br><img src="images/LogicClassDiagram.png" width="800"><br>
 
 Here are some of the key files in the `Logic` component:
 - [`Logic.java`](../src/main/java/seedu/doist/logic/Logic.java):  contains an `interface` that defines operations to obtain the results of computations.  
@@ -154,9 +176,14 @@ Here are some of the key files in the `Logic` component:
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
 
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+ API call.<br>
+<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+
 ### 3.4. Model component
 The `Model` component defines classes that represent the data Doist operates on. It also specifies and implements operations that work on the data.  
-  
+
 The following diagram represents the structure of the `Model` component  
 <br><img src="images/ModelClassDiagram.png" width="800"><br>  
 
@@ -209,7 +236,7 @@ Whenever a mutating command, such as `add`, `delete` and `edit`, is executed, th
 `undo` and `redo` are implemented by navigating through the to-do list history as mentioned above.  
 To be more specific, the to-do list history is represented by 2 stacks of `TodoList` objects, as implemented in this file: [`History.java`](#../src/main/java/seedu/doist/commons/util/History.java).
 
-> Remark: There are 2 common ways to implement undo and redo feature: `1. saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
+> Remark: There are 2 common ways to implement undo and redo feature: `saving states (what we are doing)` and `generating state (saving commands)`. There are 2 reasons why we chose the first implementation:
 > 1. If we save the commands instead, we have to implement a reverse / undo method for each command, which will be time-consuming due to the complexity of the commands.
 > 2. When we copy the `TodoList` object, the constituent `Task` objects will not be copied. Thus, only new references will be created and this is less memory-intensive compared to creating a deep copy of all the `Task` objects.
 
@@ -245,7 +272,7 @@ Tests can be found in the `./src/test/java` folder.
 
 ### 5.1. Types of tests
 
-#### 5.1.1. GUI Tests 
+#### 5.1.1. GUI Tests
 These are _System Tests_ that test the entire App by simulating user actions on the GUI.
    These are in the `guitests` package.
 > ##### *Headless GUI Testing*

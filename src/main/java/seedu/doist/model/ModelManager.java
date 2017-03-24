@@ -124,9 +124,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTodoListChanged();
     }
 
+    //@@author A0140887W
     @Override
     public synchronized void finishTask(ReadOnlyTask target) throws TaskNotFoundException,
         TaskAlreadyFinishedException {
+        assert target != null;
         try {
             todoList.changeTaskFinishStatus(target, true);
         } catch (TaskAlreadyUnfinishedException e) {
@@ -146,6 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTodoListChanged();
     }
 
+    //@@author
     @Override
     public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         int index = todoList.addTask(task);
@@ -164,11 +167,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTodoListChanged();
     }
 
+    //@@author A0140887W
     @Override
     public void sortTasksByPriority() {
         todoList.sortTasks(new ReadOnlyTaskPriorityComparator());
     }
 
+    //@@author
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
