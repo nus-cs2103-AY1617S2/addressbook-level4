@@ -43,8 +43,6 @@ import seedu.toluist.model.AliasTable;
 
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
-    private final EventsCenter eventsCenter = EventsCenter.getInstance();
-    private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     /**
      * ArrayList to store previous commands entered since starting the application
@@ -64,8 +62,7 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public void dispatch(String command) {
-        String trimmedCommand = command.trim();
-        String deAliasedCommand = aliasConfig.dealias(trimmedCommand);
+        String deAliasedCommand = getDealiasedCommand(command);
         logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
 
         Controller controller = getBestFitController(deAliasedCommand);
@@ -78,21 +75,27 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public SortedSet<String> getPredictedCommands(String command) {
+        String deAliasedCommand = getDealiasedCommand(command);
         SortedSet<String> predictedCommands = new TreeSet<>();
 
-        if (!StringUtil.isPresent(command)) {
+        if (!StringUtil.isPresent(deAliasedCommand)) {
             return predictedCommands;
         }
 
-        String firstWordOfCommand = command.trim().split("\\s+")[0];
+        String firstWordOfCommand = deAliasedCommand.trim().split("\\s+")[0];
         for (String commandWord : getControllerKeywords()) {
             if (commandWord.startsWith(firstWordOfCommand)) {
-                predictedCommands.add(command.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
+                predictedCommands.add(deAliasedCommand.replaceFirst(Pattern.quote(firstWordOfCommand), commandWord));
             }
         }
 
         logger.info("Predicted commands: " + predictedCommands.toString());
         return predictedCommands;
+    }
+
+    private String getDealiasedCommand(String command) {
+        String trimmedCommand = command.trim();
+        return aliasConfig.dealias(trimmedCommand);
     }
 
     private void recordCommand(String command) {

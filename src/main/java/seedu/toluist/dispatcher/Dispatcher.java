@@ -1,5 +1,8 @@
 package seedu.toluist.dispatcher;
 
+import seedu.toluist.commons.core.Config;
+import seedu.toluist.model.AliasTable;
+
 import java.util.SortedSet;
 
 /**
@@ -8,6 +11,11 @@ import java.util.SortedSet;
  * the controller to dispatch the command to
  */
 public abstract class Dispatcher {
+
+    /**
+     * Default alias config
+     */
+    protected AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     /**
      * Dispatch a command from the Ui to a suitable Controller
@@ -27,4 +35,12 @@ public abstract class Dispatcher {
      * @param command a command
      */
     public abstract SortedSet<String> getPredictedCommands(String command);
+
+    /**
+     * Setter DI to inject a alias config as a dependency
+     * @param aliasConfig an alias config
+     */
+    public void setAliasConfig(AliasTable aliasConfig) {
+        this.aliasConfig = aliasConfig;
+    }
 }

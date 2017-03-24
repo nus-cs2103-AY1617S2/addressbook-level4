@@ -15,8 +15,10 @@ import seedu.toluist.ui.UiStore;
  */
 public class CommandAutoCompleteView extends UiView {
     private static final String FXML = "CommandAutoCompleteView.fxml";
-    private static final String SELECTED_SUGGESTION_STYLE_CLASS = "selected";
-    private static final String SUGGESTION_STYLE_CLASS = "command-suggestion";
+    private static final String STYLE_CLASS_SELECTED_SUGGESTION = "selected";
+    private static final String STYLE_CLASS_SUGGESTION = "command-suggestion";
+    private static final double MARGIN = 8;
+    private static final double SUGGESTION_HEIGHT = 20;
 
     @FXML
     private VBox suggestedCommandList;
@@ -24,15 +26,12 @@ public class CommandAutoCompleteView extends UiView {
     public CommandAutoCompleteView() {
         super(FXML);
         UiStore store = UiStore.getInstance();
-        store.bind(this, store.getObservableSuggestedCommands());
-        store.bind(this, store.getObservableSuggestedCommandIndex());
+        configureConstraints();
+        configureBindings(store);
     }
 
     @Override
     protected void viewDidMount() {
-        AnchorPane.setBottomAnchor(getRoot(), 0.0);
-        AnchorPane.setLeftAnchor(getRoot(), 0.0);
-        AnchorPane.setRightAnchor(getRoot(), 0.0);
 
         suggestedCommandList.getChildren().clear();
 
@@ -44,14 +43,30 @@ public class CommandAutoCompleteView extends UiView {
         }
     }
 
+    private void configureBindings(UiStore store) {
+        store.bind(this, store.getObservableSuggestedCommands());
+        store.bind(this, store.getObservableSuggestedCommandIndex());
+    }
+
+    private void configureConstraints() {
+        AnchorPane.setBottomAnchor(getRoot(), MARGIN);
+        AnchorPane.setLeftAnchor(getRoot(), MARGIN);
+        AnchorPane.setRightAnchor(getRoot(), MARGIN);
+    }
+
+    /**
+     * Add command suggestion row to root
+     * @param suggestion suggestion
+     * @param index row index
+     */
     private void addCommandSuggestion(String suggestion, int index) {
         Label label = new Label(suggestion);
-        label.setPrefHeight(Control.USE_COMPUTED_SIZE);
+        label.setPrefHeight(SUGGESTION_HEIGHT);
         AnchorPane.setLeftAnchor(label, 0.0);
         AnchorPane.setRightAnchor(label, 0.0);
-        FxViewUtil.addStyleClass(label, SUGGESTION_STYLE_CLASS);
+        FxViewUtil.addStyleClass(label, STYLE_CLASS_SUGGESTION);
         if (index == UiStore.getInstance().getObservableSuggestedCommandIndex().get()) {
-            FxViewUtil.addStyleClass(label, SELECTED_SUGGESTION_STYLE_CLASS);
+            FxViewUtil.addStyleClass(label, STYLE_CLASS_SELECTED_SUGGESTION);
         }
         suggestedCommandList.getChildren().add(label);
     }
