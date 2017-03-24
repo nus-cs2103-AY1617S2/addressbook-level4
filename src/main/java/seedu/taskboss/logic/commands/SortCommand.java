@@ -1,5 +1,7 @@
 package seedu.taskboss.logic.commands;
 
+import seedu.taskboss.commons.core.EventsCenter;
+import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
@@ -11,6 +13,7 @@ import seedu.taskboss.model.task.UniqueTaskList.SortBy;
  */
 public class SortCommand extends Command {
 
+    private static final int INDEX_FIRST_TASK = 0;
     public static final String COMMAND_WORD = "sort";
     public static final String COMMAND_WORD_SHORT = "s";
 
@@ -34,6 +37,7 @@ public class SortCommand extends Command {
 
         try {
             model.sortTasks(sortType);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(INDEX_FIRST_TASK));
             return new CommandResult(String.format(MESSAGE_SUCCESS));
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());

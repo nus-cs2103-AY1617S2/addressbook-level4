@@ -3,7 +3,9 @@ package seedu.taskboss.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -70,6 +72,9 @@ public class EditCommand extends Command {
         try {
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             model.updateTask(filteredTaskListIndex, editedTask);
+            lastShownList = model.getFilteredTaskList();
+            int targetIndex = lastShownList.indexOf(editedTask);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         } catch (InvalidDatesException ide) {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {

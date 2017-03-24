@@ -100,6 +100,7 @@ public class Parser {
             return new SortCommandParser().parse(arguments);
 
         case SaveCommand.COMMAND_WORD:
+        case SaveCommand.COMMAND_WORD_SHORT:
             return new SaveCommandParser().parse(arguments);
 
         case RenameCategoryCommand.COMMAND_WORD:

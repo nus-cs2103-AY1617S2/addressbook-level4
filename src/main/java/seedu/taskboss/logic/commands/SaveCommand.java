@@ -7,6 +7,7 @@ package seedu.taskboss.logic.commands;
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
+    public static final String COMMAND_WORD_SHORT = "sv";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
                 + "Saves the data at specific filepath.\n"
