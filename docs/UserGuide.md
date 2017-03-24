@@ -108,7 +108,7 @@ Format: `delete INDEX`
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
-### 2.7. Sorting tasks : `sort`
+### 2.8. Sorting tasks : `sort`
 
 Sorts all tasks by their start date or end date.<br>
 Format: `sort KEYWORD`
@@ -118,22 +118,22 @@ Format: `sort KEYWORD`
 > The keyword can be `s/` for start date or `e/` for end date.<br>
 > Any trailing symbols after a valid keyword will be ignored.
 
-### 2.8. Clearing all entries : `clear`
+### 2.9. Clearing all entries : `clear`
 
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.9. Viewing history of task : `history`
+### 2.10. Viewing history of task : `history`
 
 A list of history of tasks that have been completed will be shown in the column sorted in reverse-chronological order
 Format: `history`
 
-### 2.10. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data
+### 2.12. Saving the data
 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
