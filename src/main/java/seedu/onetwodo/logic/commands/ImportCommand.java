@@ -52,14 +52,10 @@ public class ImportCommand extends Command {
                 Config config = MainApp.getConfig();
                 Model model = MainApp.getModel();
                 StorageManager storageManager = (StorageManager) MainApp.getStorage();
-    
-                // set to new path
-                // save new updates into config.json
+
                 config.setToDoListFilePath(filePath);
                 ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-    
-                // set to new path
-                // copy data from new file to read it
+
                 String updatedFilePath = config.getToDoListFilePath();
                 storageManager.setToDoListFilePath(updatedFilePath);
                 ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();

@@ -80,7 +80,7 @@ public class MainApp extends Application {
     public static Storage getStorage() {
         return storage;
     }
-    
+
     public static Model getModel() {
         return model;
     }
