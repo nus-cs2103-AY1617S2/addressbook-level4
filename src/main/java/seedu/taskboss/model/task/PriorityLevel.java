@@ -18,6 +18,7 @@ public class PriorityLevel {
     public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N)$";
 
     public final String value;
+    public final String input;
 
     /**
      * Validates given priority level.
@@ -31,14 +32,17 @@ public class PriorityLevel {
 
         if (priorityLevel.equals("")) {
             this.value = PRIORITY_NO_VALUE;
+            this.input = "No";
         } else {
             if (!isValidPriorityLevel(trimmedPriorityLevel)) {
                 throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
             }
             if (trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
                 this.value = PRIORITY_HIGH_VALUE;
+                this.input = "Yes";
             } else {
                 this.value = PRIORITY_NO_VALUE;
+                this.input = "No";
             }
         }
     }

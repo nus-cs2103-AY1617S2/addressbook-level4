@@ -49,7 +49,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         //@@author A0144904H
-        priorityLevel = source.getPriorityLevel().value;
+        priorityLevel = source.getPriorityLevel().input;
         startDateTime = source.getStartDateTime().value;
         endDateTime = source.getEndDateTime().value;
         information = source.getInformation().value;
