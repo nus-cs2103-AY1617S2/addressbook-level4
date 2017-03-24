@@ -22,6 +22,8 @@ public class EditCommandTest extends TaskBossGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    //edit all field of a task.
+    //Should not affect the default All Task Category
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "n/Alice p/Yes sd/10am Feb 19, 2017 ed/10am Feb 28, 2017 i/123,"
