@@ -82,6 +82,8 @@ public class CommandBox extends UiView {
         }
 
         int index = store.getObservableSuggestedCommandIndex().get();
-        store.setCommandText(suggestedCommands.get(index));
+        if (index > -1) {
+            store.setCommandText(suggestedCommands.get(index));
+        }
     }
 }
