@@ -74,7 +74,7 @@ public class ListCommandTest extends DoistGUITest {
     }
 
     private void assertListUnderTags(UniqueTagList tagList) {
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
             boolean doesContainAny = false;
             for (Tag tag : tagList) {
@@ -88,7 +88,7 @@ public class ListCommandTest extends DoistGUITest {
     }
 
     private void assertListFinished() {
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
             assertTrue(task.getFinishedStatus().getIsFinished());
         }
@@ -96,7 +96,7 @@ public class ListCommandTest extends DoistGUITest {
 
     private void assertListPending() {
         // TODO: should add check for start time to differentiate between pending and overdue
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
             assertTrue(!task.getFinishedStatus().getIsFinished());
         }

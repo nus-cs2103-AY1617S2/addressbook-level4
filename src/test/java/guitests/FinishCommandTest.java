@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import guitests.guihandles.TaskCardHandle;
 import seedu.doist.testutil.TestTask;
 
 public class FinishCommandTest extends DoistGUITest {
@@ -49,7 +50,11 @@ public class FinishCommandTest extends DoistGUITest {
         commandBox.runCommand("finish " + targetIndexOneIndexed);
 
         //confirm the list matching
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+
+        //confirm that UI is showing finished
+        TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(targetIndexOneIndexed - 1);
+        assertTrue(finishedCard.isStyleInStyleClass("finished"));
 
         //confirm the result message is correct
         ArrayList<TestTask> tasksToFinish = new ArrayList<TestTask>();
@@ -65,7 +70,7 @@ public class FinishCommandTest extends DoistGUITest {
         commandBox.runCommand("finish " + targetIndexOneIndexed);
 
         //confirm the list matching
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         ArrayList<TestTask> tasksToFinish = new ArrayList<TestTask>();

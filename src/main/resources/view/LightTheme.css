@@ -260,8 +260,22 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #6D929B;
     -fx-border-width: 0 0 0 4;
+}
+
+/* for normal tasks in cardPane */
+.normal {
+    -fx-border-color: #76d7ea;
+}
+
+/* for overdue tasks in cardPane */
+.overdue {
+    -fx-border-color: #fc80a5;
+}
+
+/* for finished tasks in cardPane */
+.finished {
+    -fx-border-color: #99ff99;
 }
 
 #commandTypeLabel {

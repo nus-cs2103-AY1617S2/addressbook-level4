@@ -131,12 +131,12 @@ public class EditCommandTest extends DoistGUITest {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details
         expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(personListPanel.isListMatching(expectedPersonsList));
+        assertTrue(taskListPanel.isListMatching(expectedPersonsList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
     }
 }

@@ -29,7 +29,7 @@ public class SortCommandTest extends DoistGUITest {
     }
 
     private void assertSortedByPriority() {
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         Comparator<ReadOnlyTask> priorityComparator = new ReadOnlyTaskPriorityComparator();
         for (int i = 0; i < displayedList.size() - 1; i++) {
             assertTrue(priorityComparator.compare(displayedList.get(i), displayedList.get(i + 1)) <= 0);

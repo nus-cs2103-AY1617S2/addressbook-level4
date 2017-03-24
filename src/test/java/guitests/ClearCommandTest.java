@@ -10,12 +10,12 @@ public class ClearCommandTest extends DoistGUITest {
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.email.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.email));
+        assertTrue(taskListPanel.isListMatching(td.email));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 

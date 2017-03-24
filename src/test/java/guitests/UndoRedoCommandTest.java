@@ -15,12 +15,12 @@ public class UndoRedoCommandTest extends DoistGUITest {
         TestTask taskToAdd = td.email;
         commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] newList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
 
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
     }
 
     @Test
@@ -31,20 +31,20 @@ public class UndoRedoCommandTest extends DoistGUITest {
 
         commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] newList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
 
         commandBox.runCommand("clear");
-        assertTrue(personListPanel.isListMatching(new TestTask[0]));
+        assertTrue(taskListPanel.isListMatching(new TestTask[0]));
 
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(new TestTask[0]));
+        assertTrue(taskListPanel.isListMatching(new TestTask[0]));
     }
 
     @Test
@@ -54,17 +54,17 @@ public class UndoRedoCommandTest extends DoistGUITest {
         TestTask taskToAdd = td.chores;
         commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] newList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
 
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
     }
 
     @Test
@@ -74,27 +74,27 @@ public class UndoRedoCommandTest extends DoistGUITest {
         TestTask taskToAdd = td.chores;
         commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] newList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
 
         taskToAdd = td.email;
         commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] newList2 = TestUtil.addTasksToList(newList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(newList2));
+        assertTrue(taskListPanel.isListMatching(newList2));
 
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
 
         taskToAdd = td.exercise;
         commandBox.runCommand(taskToAdd.getAddCommand());
         TestTask[] newList3 = TestUtil.addTasksToList(newList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(newList3));
+        assertTrue(taskListPanel.isListMatching(newList3));
 
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(newList3));
+        assertTrue(taskListPanel.isListMatching(newList3));
         commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(newList));
+        assertTrue(taskListPanel.isListMatching(newList));
         commandBox.runCommand("redo");
-        assertTrue(personListPanel.isListMatching(newList3));
+        assertTrue(taskListPanel.isListMatching(newList3));
     }
 }
 
