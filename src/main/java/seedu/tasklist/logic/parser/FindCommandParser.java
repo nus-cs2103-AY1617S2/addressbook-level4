@@ -22,9 +22,9 @@ public class FindCommandParser {
     private boolean isByTags = false;
     private boolean isByStatus = false;
     @SuppressWarnings("serial")
-    public static final Set<String> COMPLETED = new HashSet<String>() {{ add("completed"); }};
+    private final Set<String> completed = new HashSet<String>() {{ add("completed"); }};
     @SuppressWarnings("serial")
-    public static final Set<String> NOTCOMPLETED = new HashSet<String>() {{ add("not"); add("completed"); }};
+    private final Set<String> notCompleted = new HashSet<String>() {{ add("not"); add("completed"); }};
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -58,7 +58,7 @@ public class FindCommandParser {
             return new FindCommand(keywordSet).isByTags();
         } else if (isByStatus) {
             if ((keywordSet.size() > 2 || keywordSet.size() < 1)
-                && (!keywordSet.equals(COMPLETED) || !keywordSet.equals(NOTCOMPLETED))) {
+                && (!keywordSet.equals(completed) || !keywordSet.equals(notCompleted))) {
                 return new IncorrectCommand(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             } else {

@@ -18,7 +18,6 @@ import seedu.tasklist.commons.events.model.TaskListChangedEvent;
 import seedu.tasklist.commons.exceptions.DataConversionException;
 import seedu.tasklist.commons.util.CollectionUtil;
 import seedu.tasklist.commons.util.StringUtil;
-import seedu.tasklist.logic.parser.FindCommandParser;
 import seedu.tasklist.model.tag.Tag;
 import seedu.tasklist.model.task.ReadOnlyTask;
 import seedu.tasklist.model.task.Task;
@@ -292,6 +291,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class StatusQualifier implements Qualifier {
         private Set<String> statusKeyWord;
+        private String completed = "completed";
+        @SuppressWarnings("serial")
+        private List<String> notCompleted = new Vector<String>() {{ add("not"); add("completed"); }};
 
         public StatusQualifier(Set<String> statusKeyWord) {
             this.statusKeyWord = statusKeyWord;
@@ -300,10 +302,10 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             if (statusKeyWord.size() == 1) {
-                assert statusKeyWord.equals(FindCommandParser.COMPLETED);
+                assert statusKeyWord.contains(completed);
                 return task.getStatus().value;
             } else if (statusKeyWord.size() == 2) {
-                assert statusKeyWord.containsAll(FindCommandParser.NOTCOMPLETED);
+                assert statusKeyWord.containsAll(notCompleted);
                 return !task.getStatus().value;
             } else {
                 return false;
