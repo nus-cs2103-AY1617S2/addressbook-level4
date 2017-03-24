@@ -349,12 +349,12 @@ public class Task implements Comparable<Task> {
      * @throws CloneNotSupportedException
      */
     public Task getNextRecurringTask() {
+        assert this.isRecurring();
         LocalDateTime nextRecurringStartDateTime = getNextRecurringDateTime(this.getStartDateTime());
         LocalDateTime nextRecurringEndDateTime = getNextRecurringDateTime(this.getEndDateTime());
         if (nextRecurringEndDateTime.isAfter(recurringEndDateTime)) {
             return null;
         }
-        assert this.isRecurring();
         Task task;
         try {
             task = (Task) this.clone();
