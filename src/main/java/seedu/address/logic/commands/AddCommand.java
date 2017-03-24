@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: TITLE [d/DATE] p/PRIORITY i/INSTRUCTIOn [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Buy groceries d/05032017 p/5 i/eggs x10, milk x2, bread x2 t/home t/errand";
+            + " Buy groceries for: today priority: 3 note: eggs x3, bread x2 #chores #everydayToDos";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -38,18 +38,31 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String title, Optional<Deadline> date, String priority, String instruction, Set<String> tags)
-            throws IllegalValueException {
+    public AddCommand(
+            String title,
+            Optional<Deadline> date,
+            Optional<Priority> priority,
+            Optional<Instruction> instruction,
+            Set<String> tags
+    ) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        Deadline finalDeadline = date.isPresent() ? date.get() : new Deadline("floating");
+        Deadline finalDeadline = date.isPresent()
+                ? date.get()
+                        : new Deadline("floating");
+        Priority finalPriority = priority.isPresent()
+                ? priority.get()
+                        : new Priority(Priority.PRIORITY_LEVEL_DEFAULT_VALUE);
+        Instruction finalInstruction = instruction.isPresent()
+                ? instruction.get()
+                        : new Instruction(Instruction.DEFAULT_VALUE);
         this.toAdd = new Task(
                 new Title(title),
                 finalDeadline,
-                new Priority(priority),
-                new Instruction(instruction),
+                finalPriority,
+                finalInstruction,
                 new UniqueTagList(tagSet)
         );
     }

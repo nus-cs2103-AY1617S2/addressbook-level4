@@ -28,6 +28,7 @@ public class Priority {
     public static final String PRIORITY_LEVEL_3 = "3";
     public static final String PRIORITY_LEVEL_4 = "4";
     public static final String PRIORITY_LEVEL_5 = "5";
+    public static final String PRIORITY_LEVEL_DEFAULT_VALUE = PRIORITY_LEVEL_2;
 
     //public String value;
     public HashMap<String, String> priorityMap = new HashMap<String, String>();

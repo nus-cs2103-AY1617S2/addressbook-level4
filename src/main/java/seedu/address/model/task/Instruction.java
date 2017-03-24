@@ -19,6 +19,8 @@ public class Instruction {
      */
     public static final String INSTRUCTION_VALIDATION_REGEX = "[^\\s].*";
 
+    public static final String DEFAULT_VALUE = "nothing yet";
+
     public final String value;
 
     /**
