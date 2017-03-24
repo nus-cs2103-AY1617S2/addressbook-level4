@@ -386,18 +386,18 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
-    //---------------- Tests for find by name --------------------------------------
+    //---------------- Tests for find by keywords --------------------------------------
 
     /*
      * Valid equivalence partitions:
-     * - Find the tasks only when full words in name match the keywords
+     * - Find the tasks only when full words in name or information match the keywords
      * - Is not case sensitive
      * - Find the tasks when any of the keywords match the name
      * The three test cases below test valid input as a name.
      */
 
     @Test
-    public void execute_findName_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_findKeyword_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -409,12 +409,12 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/KEY",
+        assertCommandSuccess("find k/KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
     @Test
-    public void execute_findName_isNotCaseSensitive() throws Exception {
+    public void execute_findKeyword_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithName("bla bla KEY bla");
         Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
@@ -426,12 +426,12 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/KEY",
+        assertCommandSuccess("find k/KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB, expectedList);
     }
 
     @Test
-    public void execute_findName_matchesIfAnyKeywordPresent() throws Exception {
+    public void execute_findKeyword_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
@@ -443,7 +443,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find n/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find k/key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 

@@ -3,6 +3,9 @@ package seedu.taskboss.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.taskboss.commons.core.EventsCenter;
+import seedu.taskboss.commons.core.UnmodifiableObservableList;
+import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
@@ -12,6 +15,7 @@ import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.PriorityLevel;
+import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
 import seedu.taskboss.model.task.UniqueTaskList;
 
@@ -47,7 +51,6 @@ public class AddCommand extends Command {
     public AddCommand(String name, String startDateTime, String endDateTime,
             String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
-        categorySet.add(new Category("Alltasks"));
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }
@@ -85,6 +88,9 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+            int targetIndex = lastShownList.indexOf(toAdd);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

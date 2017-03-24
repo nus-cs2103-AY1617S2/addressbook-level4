@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.EditCommand;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.Name;
@@ -61,6 +62,19 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertEditSuccess(true, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0143157J
+    // EP: edit to remove start date
+    @Test
+    public void edit_removeDate_sucess() throws IllegalValueException {
+        String detailsToEdit = "sd/";
+        int taskBossIndex = 1;
+
+        TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withStartDateTime("").build();
+
+        assertEditSuccess(false, taskBossIndex, taskBossIndex, detailsToEdit, editedTask);
+    }
+
     //@@author
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
@@ -86,7 +100,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find n/Elle");
+        commandBox.runCommand("find k/Elle");
 
         String detailsToEdit = "n/Belle";
         int filteredTaskListIndex = 1;
@@ -136,7 +150,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
-    //@@author A01431457J
+    //@@author A0143157J
     // EP: invalid edit command with start date later than end date
     @Test
     public void edit_invalidDates_failure() {

@@ -209,8 +209,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListByName(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTaskListByKeywords(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new KeywordQualifier(keywords)));
     }
 
     //@@author A0147990R
@@ -223,12 +223,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListByEndDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new EndDatetimeQualifier(keywords)));
-    }
-
-    //@@author A0147990R
-    @Override
-    public void updateFilteredTaskListByInformation(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new InformationQualifier(keywords)));
     }
 
     //@@author A0147990R
@@ -272,24 +266,30 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class KeywordQualifier implements Qualifier {
+        private Set<String> keyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
+        KeywordQualifier(Set<String> keyWords) {
+            this.keyWords = keyWords;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+            return keyWords.stream()
+                    .filter(keyword -> StringUtil
+                            .containsWordIgnoreCase(task.getName().fullName, keyword))
+                    .findAny()
+                    .isPresent() ||
+                    keyWords.stream()
+                    .filter(keyword -> StringUtil
+                            .containsWordIgnoreCase(task.getInformation().value, keyword))
                     .findAny()
                     .isPresent();
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", keyWords);
         }
     }
 
@@ -330,29 +330,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "endDateTime=" + endDateKeyWords;
-        }
-    }
-
-    //@@author A0147990R
-    private class InformationQualifier implements Qualifier {
-        private Set<String> informationKeyWords;
-
-        InformationQualifier(Set<String> informationKeyWords) {
-            this.informationKeyWords = informationKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return informationKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                            task.getInformation().value, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-        @Override
-        public String toString() {
-            return "information=" + String.join(", ", informationKeyWords);
         }
     }
 

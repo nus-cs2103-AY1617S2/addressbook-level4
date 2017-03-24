@@ -23,9 +23,7 @@ public class RenameCategoryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Category successfully renamed!";
     public static final String MESSAGE_DUPLICATE_CATEGORY = "This category already exists in TaskBoss.";
-    public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "category does not exist in TaskBoss.";
-    public static final String MESSAGE_FAIL_ALL_TASK_CATEGORY_CANNOT_MODIFY = "All task category cannot be renamed";
-    public static final String MESSAGE_FAIL_DONE_CATEGORY_CANNOT_MODIFY = "Done category cannot be renamed";
+    public static final String MESSAGE_DOES_NOT_EXIST_CATEGORY = "This category does not exist in TaskBoss.";
 
 
     public final String oldCategory;
@@ -42,21 +40,6 @@ public class RenameCategoryCommand extends Command {
 
         Category oldCategory = new Category(this.oldCategory);
         Category newCategory = new Category(this.newCategory);
-
-        String messageThrown = null;
-
-        if(oldCategory.equals(new Category("Alltasks"))) {
-            messageThrown = MESSAGE_FAIL_ALL_TASK_CATEGORY_CANNOT_MODIFY;
-            throw new CommandException(RenameCategoryCommand.
-                    MESSAGE_FAIL_ALL_TASK_CATEGORY_CANNOT_MODIFY);
-        }
-
-        if(oldCategory.equals(new Category("Done"))) {
-            messageThrown = MESSAGE_FAIL_DONE_CATEGORY_CANNOT_MODIFY;
-            throw new CommandException(RenameCategoryCommand.
-                    MESSAGE_FAIL_DONE_CATEGORY_CANNOT_MODIFY);
-        }
-
         model.updateFilteredTaskListByCategory(oldCategory);
 
         try {
@@ -65,8 +48,8 @@ public class RenameCategoryCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (UniqueCategoryList.DuplicateCategoryException e) {
             return new CommandResult(MESSAGE_DUPLICATE_CATEGORY);
-        }  catch (CommandException ce) {
-            return new CommandResult(messageThrown);
         }
+
     }
+
 }

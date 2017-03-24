@@ -3,12 +3,13 @@ package seedu.taskboss.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
-import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.DateTime;
@@ -70,6 +71,9 @@ public class EditCommand extends Command {
         try {
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             model.updateTask(filteredTaskListIndex, editedTask);
+            lastShownList = model.getFilteredTaskList();
+            int targetIndex = lastShownList.indexOf(editedTask);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         } catch (InvalidDatesException ide) {
             throw new CommandException(ERROR_INVALID_DATES);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
@@ -84,12 +88,11 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      * @throws InvalidDatesException
-     * @throws IllegalValueException
-     * @throws DuplicateCategoryException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
-                                                     throws InvalidDatesException, DuplicateCategoryException, IllegalValueException {
+                                                     throws InvalidDatesException, DuplicateCategoryException,
+                                                     IllegalValueException, InvalidDatesException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -108,12 +111,6 @@ public class EditCommand extends Command {
                 updatedEndDateTime.getDate() != null &&
                 updatedStartDateTime.getDate().after(updatedEndDateTime.getDate())) {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
-        }
-
-        if (taskToEdit.getCategories().contains((new Category("Done")))) {
-            updatedCategories.add(new Category("Done"));
-        } else {
-            updatedCategories.add(new Category("Alltasks"));
         }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
