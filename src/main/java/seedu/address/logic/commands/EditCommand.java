@@ -83,7 +83,8 @@ public class EditCommand extends Command {
                     editTodoDescriptor.getEndTime().get(), updatedTags);
         } else if (!editTodoDescriptor.getStartTime().isPresent() && editTodoDescriptor.getEndTime().isPresent()) {
             return new Todo(updatedName, editTodoDescriptor.getEndTime().get(), updatedTags);
-        } else if (editTodoDescriptor.getStartTime().isPresent() && !editTodoDescriptor.getEndTime().isPresent()
+        } else if (editTodoDescriptor.getStartTime().isPresent() &&
+                !editTodoDescriptor.getEndTime().isPresent()
                 && editTodoDescriptor.getStartTime().get().equals("")) { // event to deadline
             return new Todo(updatedName, todoToEdit.getEndTime(), updatedTags);
         } else {

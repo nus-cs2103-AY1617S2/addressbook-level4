@@ -31,6 +31,9 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
+
+    public static final String EDIT_DEFAULT_START_TIME = "6:00AM 17/11/2011";
+    public static final String EDIT_DEFAULT_END_TIME = "7:00AM 17/11/2011";
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
@@ -47,30 +50,35 @@ public class EditCommandParser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
 
-            if (startTime.isPresent() && endTime.isPresent()) {
+            if (startTime.isPresent() && endTime.isPresent()) { //for event
                 try {
                     DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
                     if (!startTime.get().equals("")) {
                         editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
+                    } else {
+                        editTodoDescriptor.setStartTime(dateFormat.parse(EDIT_DEFAULT_START_TIME));
                     }
                     if (!endTime.get().equals("")) {
                         editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                    } else {
+                        editTodoDescriptor.setEndTime(dateFormat.parse(EDIT_DEFAULT_END_TIME));
                     }
                 } catch (NoSuchElementException | ParseException e) {
 
                 }
-            } else if (endTime.isPresent() && !startTime.isPresent()) {
+            } else if (endTime.isPresent() && !startTime.isPresent()) { //for deadLine
                 try {
+                    DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
                     if (!endTime.get().equals("")) {
-                        DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
                         editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                    } else {
+                        editTodoDescriptor.setEndTime(dateFormat.parse(EDIT_DEFAULT_END_TIME));
                     }
                 } catch (NoSuchElementException | ParseException e) {
 
                 }
-            } else if (startTime.isPresent() && startTime.get().equals("")) { //change event to deadline
-                    //editTodoDescriptor.setStartTime(Optional.empty());
             }
+
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTodoDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
 

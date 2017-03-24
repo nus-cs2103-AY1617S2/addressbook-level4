@@ -2,6 +2,8 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.EditCommandParser.EDIT_DEFAULT_START_TIME;
+import static seedu.address.logic.parser.EditCommandParser.EDIT_DEFAULT_END_TIME;
 
 import org.junit.Test;
 
@@ -56,21 +58,22 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editDeadLineToTaskWithoutOtherChangeSuccess() throws Exception {
+    public void editDeadLineWithDefaultSuccess() throws Exception {
         String detailsToEdit = "e/";
         int addressBookIndex = 8;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Write essay").build();
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime(EDIT_DEFAULT_END_TIME).build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
     }
 
     @Test
-    public void editEventToTaskWithoutOtherChangeSuccess() throws Exception {
+    public void editEventToWithDefaultSuccess() throws Exception {
         String detailsToEdit = "s/ e/";
         int addressBookIndex = 9;
 
-        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").build();
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom")
+                .withStartTime(EDIT_DEFAULT_START_TIME).withEndTime(EDIT_DEFAULT_END_TIME).build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTodo);
     }
