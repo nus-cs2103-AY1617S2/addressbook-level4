@@ -28,10 +28,7 @@ public class CommandBox extends UiView {
     public CommandBox(Dispatcher dispatcher) {
         super(FXML);
         this.dispatcher = dispatcher;
-        UiStore store = UiStore.getInstance();
-        store.bind(this, store.getObservableCommandText());
-        commandTextField.textProperty().addListener((observable, oldValue, newValue) ->
-                handleCommandInputChanged(newValue));
+        configureBindings();
         configureKeyCombinations();
     }
 
@@ -42,6 +39,13 @@ public class CommandBox extends UiView {
         UiStore store = UiStore.getInstance();
         commandTextField.setText(store.getObservableCommandText().getValue());
         commandTextField.end();
+    }
+
+    private void configureBindings() {
+        UiStore store = UiStore.getInstance();
+        store.bind(this, store.getObservableCommandText());
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) ->
+                handleCommandInputChanged(newValue));
     }
 
     private void configureKeyCombinations() {
@@ -68,7 +72,8 @@ public class CommandBox extends UiView {
 
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         if (suggestedCommands.size() == 1) {
-            store.setCommandText(suggestedCommands.get(0));
+            commandTextField.setText(suggestedCommands.get(0));
+            commandTextField.end();
         }
     }
 

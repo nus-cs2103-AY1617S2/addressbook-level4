@@ -101,6 +101,10 @@ public class UiStore {
     }
 
     public void incrementSuggestedCommandIndex() {
+        if (observableSuggestedCommands.isEmpty()) {
+            return;
+        }
+
         observableSuggestedCommandIndex.set((observableSuggestedCommandIndex.get() + 1) %
                 observableSuggestedCommands.size());
     }
