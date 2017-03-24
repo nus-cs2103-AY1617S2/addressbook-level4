@@ -20,6 +20,7 @@ import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.MoveCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.UndoCommand;
+import seedu.taskmanager.logic.commands.SortCommand;
 
 /**
  * Parses user input.
@@ -34,7 +35,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -88,6 +90,9 @@ public class Parser {
 
         case MoveCommand.COMMAND_WORD:
             return new MoveCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

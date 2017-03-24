@@ -25,17 +25,20 @@ import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
+import seedu.taskmanager.logic.commands.SortCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
@@ -43,6 +46,7 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -62,7 +66,7 @@ public class LogicManagerTest {
     private Model model;
     private Logic logic;
 
-    //These are for checking the correctness of the events raised
+    // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
@@ -90,7 +94,14 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
+        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
+                                                                          // saved
+                                                                          // assumed
+                                                                          // to
+                                                                          // be
+                                                                          // up
+                                                                          // to
+                                                                          // date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -107,20 +118,25 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Executes the command, confirms that a CommandException is not thrown and
+     * that the result message is correct. Also confirms that both the 'task
+     * manager' and the 'last shown list' are as specified.
+     *
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedTaskManager,
-                                      List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'task manager' and the 'last shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Executes the command, confirms that a CommandException is thrown and that
+     * the result message is correct. Both the 'task manager' and the 'last
+     * shown list' are verified to be unchanged.
+     *
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
         TaskManager expectedTaskManager = new TaskManager(model.getTaskManager());
@@ -129,16 +145,17 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that the result message is correct
-     * and that a CommandException is thrown if expected
-     * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
-     *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedTaskManager} was saved to the storage file. <br>
+     * Executes the command, confirms that the result message is correct and
+     * that a CommandException is thrown if expected and also confirms that the
+     * following three parts of the LogicManager object's state are as
+     * expected:<br>
+     * - the internal task manager data are same as those in the
+     * {@code expectedTaskManager} <br>
+     * - the backing list shown by UI matches the {@code shownList} <br>
+     * - {@code expectedTaskManager} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedTaskManager,
-                                       List<? extends ReadOnlyTask> expectedShownList) {
+            ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -149,10 +166,10 @@ public class LogicManagerTest {
             assertEquals(expectedMessage, e.getMessage());
         }
 
-        //Confirm the ui display elements should contain the right data
+        // Confirm the ui display elements should contain the right data
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
-        //Confirm the state of data (saved and in-memory) is as expected
+        // Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedTaskManager, model.getTaskManager());
         assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
@@ -171,8 +188,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new TaskManager(),
+                Collections.emptyList());
     }
 
     @Test
@@ -185,9 +202,9 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
-
     @Test
     public void execute_add_invalidArgsFormat() {
+
         assertCommandFailure("add Valid Title s/01/03/2017 05/03/2017 d/valid, "
                 + "description.butNoEndDatePrefix", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/05/03/2017 valid, "
@@ -223,10 +240,8 @@ public class LogicManagerTest {
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB,
-                expectedAB.getTaskList());
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB, expectedAB.getTaskList());
 
     }
 
@@ -240,10 +255,9 @@ public class LogicManagerTest {
         model.addTask(toBeAdded); // task already in internal task manager
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
-
 
     @Test
     public void execute_list_showsAllTasks() throws Exception {
@@ -255,33 +269,39 @@ public class LogicManagerTest {
         // prepare task manager state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
-                expectedAB,
-                expectedList);
+        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
     }
 
-
     /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single task in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single task in the last shown list
-     *                    based on visible index.
+     * Confirms the 'invalid argument index number behaviour' for the given
+     * command targeting a single task in the shown list, using visible index.
+     *
+     * @param commandWord
+     *            to test assuming it targets a single task in the last shown
+     *            list based on visible index.
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
             throws Exception {
-        assertCommandFailure(commandWord , expectedMessage); //index missing
-        assertCommandFailure(commandWord + " +1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " -1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
+        assertCommandFailure(commandWord, expectedMessage); // index missing
+        assertCommandFailure(commandWord + " +1", expectedMessage); // index
+                                                                    // should be
+                                                                    // unsigned
+        assertCommandFailure(commandWord + " -1", expectedMessage); // index
+                                                                    // should be
+                                                                    // unsigned
+        assertCommandFailure(commandWord + " 0", expectedMessage); // index
+                                                                   // cannot be
+                                                                   // 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
     /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single task in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single task in the last shown list
-     *                    based on visible index.
+     * Confirms the 'invalid argument index number behaviour' for the given
+     * command targeting a single task in the shown list, using visible index.
+     *
+     * @param commandWord
+     *            to test assuming it targets a single task in the last shown
+     *            list based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
@@ -316,14 +336,11 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
-                expectedAB,
+        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
-
 
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
@@ -345,12 +362,47 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
-        assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
-                expectedAB,
-                expectedAB.getTaskList());
+        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+                expectedAB, expectedAB.getTaskList());
     }
 
+    // @@author A0131278H
+    @Test
+    public void executeRemoveInvalidArgsFormatErrorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("remove", expectedMessage);
+    }
+
+    @Test
+    public void executeRemoveIndexNotFoundErrorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("remove");
+    }
+
+    @Test
+    public void executeRemoveRemovesCorrectTask() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        expectedAB.removeTask(threeTasks.get(1));
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("remove 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+                expectedAB, expectedAB.getTaskList());
+    }
+
+    @Test
+    public void executeEditInvalidArgsFormatErrorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("edit", expectedMessage);
+    }
+
+    @Test
+    public void executeChangeInvalidArgsFormatErrorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("change", expectedMessage);
+    }
+    // @@author
 
     @Test
     public void execute_find_invalidArgsFormat() {
@@ -371,9 +423,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
@@ -390,9 +440,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
+        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
@@ -425,11 +473,49 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
+        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedAB, expectedList);
     }
+
+    // @@author A0131278H
+    @Test
+    public void executeSortInvalidArgsFormat() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+        assertCommandFailure("sort ", expectedMessage);
+    }
+
+    @Test
+    public void executeSortByStartDateCorrectOrderofTasks() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task pTarget1 = helper.generateTaskWithStartDate("03/03/2017");
+        Task pTarget2 = helper.generateTaskWithStartDate("02/03/2017");
+        Task pTarget3 = helper.generateTaskWithStartDate("01/03/2017");
+
+        List<Task> sortedTasks = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
+        List<Task> unsortedTasks = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
+        helper.addToModel(model, unsortedTasks);
+
+        assertCommandSuccess("sort s/", String.format(SortCommand.MESSAGE_SUCCESS_START), expectedTM, expectedList);
+    }
+
+    @Test
+    public void executeSortByEndDateCorrectOrderofTasks() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task pTarget1 = helper.generateTaskWithEndDate("04/04/2017");
+        Task pTarget2 = helper.generateTaskWithEndDate("03/04/2017");
+        Task pTarget3 = helper.generateTaskWithEndDate("02/04/2017");
+
+        List<Task> sortedTasks = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
+        List<Task> unsortedTasks = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+        TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget3, pTarget2, pTarget1);
+        helper.addToModel(model, unsortedTasks);
+
+        assertCommandSuccess("sort e/", String.format(SortCommand.MESSAGE_SUCCESS_END), expectedTM, expectedList);
+    }
+    // @@author
 
     /**
      * A utility class to generate test data.
@@ -448,20 +534,17 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a valid task using the given seed.
-         * Running this function with the same parameter values guarantees the returned task will have the same state.
-         * Each unique seed will generate a unique Task object.
+         * Generates a valid task using the given seed. Running this function
+         * with the same parameter values guarantees the returned task will have
+         * the same state. Each unique seed will generate a unique Task object.
          *
-         * @param seed used to generate the task data field values
+         * @param seed
+         *            used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(
-                    new Title("Task " + seed),
-                    new StartDate("01/01/2017"),
-                    new EndDate("01/01/2017"),
+            return new Task(new Title("Task " + seed), new StartDate("01/01/2017"), new EndDate("01/01/2017"),
                     new Description("House of " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
-            );
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
         /** Generates the correct add command based on the task given */
@@ -476,7 +559,7 @@ public class LogicManagerTest {
             cmd.append(" d/").append(p.getDescription());
 
             UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
+            for (Tag t : tags) {
                 cmd.append(" #").append(t.tagName);
             }
 
@@ -503,7 +586,9 @@ public class LogicManagerTest {
 
         /**
          * Adds auto-generated Task objects to the given TaskManager
-         * @param taskManager The TaskManager to which the Tasks will be added
+         *
+         * @param taskManager
+         *            The TaskManager to which the Tasks will be added
          */
         void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
             addToTaskManager(taskManager, generateTaskList(numGenerated));
@@ -513,14 +598,16 @@ public class LogicManagerTest {
          * Adds the given list of Persons to the given TaskManager
          */
         void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
-            for (Task p: tasksToAdd) {
+            for (Task p : tasksToAdd) {
                 taskManager.addTask(p);
             }
         }
 
         /**
          * Adds auto-generated Task objects to the given model
-         * @param model The model to which the Persons will be added
+         *
+         * @param model
+         *            The model to which the Persons will be added
          */
         void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
@@ -530,7 +617,7 @@ public class LogicManagerTest {
          * Adds the given list of Tasks to the given model
          */
         void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
-            for (Task p: tasksToAdd) {
+            for (Task p : tasksToAdd) {
                 model.addTask(p);
             }
         }
@@ -551,16 +638,38 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given title. Other fields will have some
+         * dummy values.
          */
         Task generateTaskWithTitle(String title) throws Exception {
-            return new Task(
-                    new Title(title),
-                    new StartDate("12/03/2017"),
-                    new EndDate("15/03/2017"),
-                    new Description("Buy house for 1"),
-                    new UniqueTagList(new Tag("tag"))
-            );
+            return new Task(new Title(title), new StartDate("12/03/2017"), new EndDate("15/03/2017"),
+                    new Description("Buy house for 1"), new UniqueTagList(new Tag("tag")));
         }
+
+        // @@author A0131278H
+        /**
+         * Generates a Task object with given start date. Other fields will have
+         * some dummy values.
+         *
+         * @throws IllegalValueException
+         * @throws DuplicateTagException
+         */
+        public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
+            return new Task(new Title("Watch Clockwork Orange"), new StartDate(startDate), new EndDate("15/03/2017"),
+                    new Description("Just do it"), new UniqueTagList(new Tag("tag")));
+        }
+
+        /**
+         * Generates a Task object with given end date. Other fields will have
+         * some dummy values.
+         *
+         * @throws IllegalValueException
+         * @throws DuplicateTagException
+         */
+        public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
+            return new Task(new Title("Watch Halestorm concert"), new StartDate("01/04/2017"), new EndDate(endDate),
+                    new Description("Just do it"), new UniqueTagList(new Tag("tag")));
+        }
+        // @@author
     }
 }
