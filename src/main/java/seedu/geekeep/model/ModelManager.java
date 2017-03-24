@@ -114,7 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new TitleQualifier(keywords)));
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
     }
 
@@ -157,10 +157,10 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
+    private class TitleQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        TitleQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
