@@ -8,7 +8,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -27,7 +27,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS ] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [TASK-NAME] d/[DD/MM/YYYY] c/[HH:MM] t/[KEY-WORD]...\n"
             + "Example: " + COMMAND_WORD + " 1 p/91234567 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -81,10 +81,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         Time updatedTime = editTaskDescriptor.getTime().orElseGet(taskToEdit::getTime);
+        ClockTime updatedClockTime = editTaskDescriptor.getClockTime().orElseGet(taskToEdit::getClockTime);
         Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        return new Task(updatedName, updatedTime, updatedPriority, updatedTags, updatedStatus);
+        return new Task(updatedName, updatedTime, updatedClockTime, updatedPriority, updatedTags, updatedStatus);
     }
 
     /**
@@ -94,7 +95,7 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Time> phone = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<ClockTime> email = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
@@ -105,7 +106,7 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.name = toCopy.getName();
             this.phone = toCopy.getTime();
-            this.email = toCopy.getEmail();
+            this.email = toCopy.getClockTime();
             this.address = toCopy.getAddress();
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
@@ -137,12 +138,12 @@ public class EditCommand extends Command {
             return phone;
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setClockTime(Optional<ClockTime> email) {
             assert email != null;
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<ClockTime> getClockTime() {
             return email;
         }
 

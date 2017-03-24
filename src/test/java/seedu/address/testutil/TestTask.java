@@ -2,6 +2,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Address;
+import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -14,6 +16,7 @@ import seedu.address.model.task.Time;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private ClockTime clockTime;
     private Time time;
     private Priority priority;
     private UniqueTagList tags;
@@ -29,6 +32,7 @@ public class TestTask implements ReadOnlyTask {
     public TestTask(TestTask taskToCopy) {
         this.name = taskToCopy.getName();
         this.time = taskToCopy.getTime();
+        this.clockTime = taskToCopy.getClockTime();
         this.priority = taskToCopy.getPriority();
         this.tags = taskToCopy.getTags();
         this.status = taskToCopy.getStatus();
@@ -42,6 +46,11 @@ public class TestTask implements ReadOnlyTask {
         this.time = time;
     }
 
+    //@@author A0143873Y
+    public void setClockTime(ClockTime clockTime) {
+        this.clockTime = clockTime;
+    }
+    //@@author A0143873Y
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
@@ -65,6 +74,10 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public ClockTime getClockTime() {
+        return clockTime;
+    }
+  
     public Priority getPriority() {
         return priority;
     }
@@ -88,6 +101,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
         sb.append("d/" + this.getTime().value + " ");
+        sb.append("c/" + this.getClockTime().value + " ");
         sb.append("p/" + this.getPriority().priorityLevel + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();

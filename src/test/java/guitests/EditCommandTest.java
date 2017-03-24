@@ -11,6 +11,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
+//import seedu.address.model.task.Address;
+//import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 // import seedu.address.model.task.Priority;
 import seedu.address.model.task.Time;
@@ -26,11 +28,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Alice Pauline d/04/06/2013 p/high t/husband";
+
+        String detailsToEdit = "Alice Pauline d/04/06/2013 c/13:40 p/high t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Alice Pauline").withTime("04/06/2013").
-                withPriority("high").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Alice Pauline").withTime("04/06/2013")
+                .withClockTime("13:40").withPriority("high").withTags("husband").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }

@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.ClockTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyTask;
@@ -19,13 +20,14 @@ import seedu.address.model.task.Time;
  * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedTask {
+    //private final Logger logger = LogsCenter.getLogger(XmlAdaptedTask.class);
 
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
     private String time;
     @XmlElement(required = true)
-    private String email;
+    private String clockTime;
     @XmlElement(required = true)
     private String address;
     @XmlElement(required = true)
@@ -50,6 +52,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         time = source.getTime().value;
+        clockTime = source.getClockTime().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -66,11 +69,20 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+
+        /*
+        logger.setLevel(Level.INFO);
+        logger.info("name: " + this.name);
+        logger.info("time: " + this.time);
+        logger.info("clockTime: " + this.clockTime);
+        */
+
         final Name name = new Name(this.name);
         final Time time = new Time(this.time);
+        final ClockTime clockTime = new ClockTime(this.clockTime);
         final Priority priority = new Priority(this.priority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final Status status = new Status(0);
-        return new Task(name, time, priority, tags, status);
+        return new Task(name, time, clockTime, priority, tags, status);
     }
 }

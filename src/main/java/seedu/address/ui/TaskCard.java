@@ -22,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label clockTime;
     @FXML
     private FlowPane tags;
 
@@ -31,6 +31,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         time.setText(task.getTime().value);
+        clockTime.setText(task.getClockTime().value);
         initTags(task);
     }
 

@@ -14,7 +14,7 @@ public class Task implements ReadOnlyTask {
 
     private Name name;
     private Time time;
-    private Email email;
+    private ClockTime clockTime;
     private Address address;
     private Status status;
     private UniqueTagList tags;
@@ -24,10 +24,11 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      * @param priority
      */
-    public Task(Name name, Time time, Priority priority, UniqueTagList tags, Status status) {
+    public Task(Name name, Time time, ClockTime clockTime, Priority priority, UniqueTagList tags, Status status) {
         assert !CollectionUtil.isAnyNull(name, time, priority, tags, status);
         this.name = name;
         this.time = time;
+        this.clockTime = clockTime;
         this.priority = priority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = status;
@@ -37,7 +38,9 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTime(), source.getPriority(), source.getTags(), source.getStatus());
+
+        this(source.getName(), source.getTime(), source.getClockTime(),
+             source.getPriority(), source.getTags(), source.getStatus());
     }
 
     public void setName(Name name) {
@@ -70,6 +73,17 @@ public class Task implements ReadOnlyTask {
         return time;
     }
 
+    //@@author A0143873Y
+    public void setClockTime(ClockTime clockTime) {
+        assert clockTime != null;
+        this.clockTime = clockTime;
+    }
+
+    public ClockTime getClockTime() {
+        return clockTime;
+    }
+    //@@author
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -100,7 +114,7 @@ public class Task implements ReadOnlyTask {
 
         this.setName(replacement.getName());
         this.setTime(replacement.getTime());
-        //this.setEmail(replacement.getEmail());
+        this.setClockTime(replacement.getClockTime());
         //this.setAddress(replacement.getAddress());
         this.setTags(replacement.getTags());
     }
@@ -115,7 +129,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, email, address, tags);
+        return Objects.hash(name, time, clockTime, address, tags);
     }
 
     @Override
