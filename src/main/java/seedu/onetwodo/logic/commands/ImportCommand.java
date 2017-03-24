@@ -44,19 +44,19 @@ public class ImportCommand extends Command {
             Config config = MainApp.getConfig();
             StorageManager storageManager = (StorageManager) MainApp.getStorage();
             ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
-            
+
             // set to new path
             // save new updates into config.json
             config.setToDoListFilePath(filePath);
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-            
+
             // set to new path
             // copy data from new file to read it
             String updatedFilePath = config.getToDoListFilePath();
             storageManager.setToDoListFilePath(updatedFilePath);
             ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
             toDoListStorage.saveToDoList(toDoList);
-            
+
             EventsCenter.getInstance().post(new ToDoListChangedEvent(toDoList));
 
         } catch (IOException ioe) {
@@ -66,7 +66,7 @@ public class ImportCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath));
     }
-    
+
     public void setIsOverWriting(boolean result) {
         this.isOverWriting = result;
     }

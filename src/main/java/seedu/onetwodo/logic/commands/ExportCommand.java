@@ -5,10 +5,7 @@ import java.io.IOException;
 
 import seedu.onetwodo.MainApp;
 import seedu.onetwodo.commons.core.Config;
-import seedu.onetwodo.commons.core.EventsCenter;
-import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.exceptions.DataConversionException;
-import seedu.onetwodo.commons.util.ConfigUtil;
 import seedu.onetwodo.commons.util.FileUtil;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
@@ -24,7 +21,7 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_WORD_OVERWRITE = "overwrite";
 
-    public static final String MESSAGE_EXAMPLE = "Example: " + COMMAND_WORD + " [" 
+    public static final String MESSAGE_EXAMPLE = "Example: " + COMMAND_WORD + " ["
             + COMMAND_WORD_OVERWRITE + "] ";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Export the file of this task manager to a specified location.\n"
@@ -54,11 +51,11 @@ public class ExportCommand extends Command {
                 String result = String.format(MESSAGE_OVERWRITE_WARNING, filePath).toString();
                 throw new CommandException(result);
             } else {
-                
+
                 Config config = MainApp.getConfig();
                 StorageManager storageManager = (StorageManager) MainApp.getStorage();
                 ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
-                
+
                 // set new file path
                 // copy data to new file
                 // set back file path
@@ -76,7 +73,7 @@ public class ExportCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, filePath));
     }
-    
+
     public void setIsOverWriting(boolean result) {
         this.isOverWriting = result;
     }
