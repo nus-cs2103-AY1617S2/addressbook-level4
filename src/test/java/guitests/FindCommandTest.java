@@ -11,8 +11,8 @@ public class FindCommandTest extends ToDoListGuiTest {
 
     @Test
     public void find_nonEmptyList() {
-        assertFindResult("find CS2103"); // no results
-        assertFindResult("find Meier", td.dbsInterview, td.hangOutJoe); // multiple results
+        assertFindResult("find CS2105"); // no results
+        assertFindResult("find DBS", td.dbsInterview); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
