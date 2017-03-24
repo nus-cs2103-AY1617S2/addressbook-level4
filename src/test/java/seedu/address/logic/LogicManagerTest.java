@@ -537,7 +537,7 @@ public class LogicManagerTest {
     @Test
     public void execute_saveTo_canonicalSameDirectory() throws Exception {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
-        assertCommandSuccess("saveto .", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+        assertCommandSuccess("saveto .", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         tmFile.delete();
     }
@@ -545,7 +545,7 @@ public class LogicManagerTest {
     @Test
     public void execute_saveTo_canonicalParentDirectory() throws Exception {
         File tmFile = new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME);
-        assertCommandSuccess("saveto ..", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+        assertCommandSuccess("saveto ..", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         tmFile.delete();
     }
@@ -554,7 +554,7 @@ public class LogicManagerTest {
     public void execute_saveTo_canonicalSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto testSubDir",
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
                 Collections.emptyList());
         tmFile.delete();
         tmFile.getParentFile().delete();
@@ -564,7 +564,7 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteSameDirectory() throws Exception {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
                 Collections.emptyList());
         tmFile.delete();
     }
@@ -573,7 +573,7 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteParentDirectory() throws Exception {
         File tmFile = new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
                 Collections.emptyList());
         tmFile.delete();
     }
@@ -582,7 +582,7 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()), new TaskManager(),
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
                 Collections.emptyList());
         tmFile.delete();
         tmFile.getParentFile().delete();
@@ -633,7 +633,7 @@ public class LogicManagerTest {
         // save to same directory
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
-        assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+        assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         assertTrue(FileUtil.isFileExists(tmFile));
 
@@ -683,7 +683,7 @@ public class LogicManagerTest {
         // save to same directory
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
-        assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+        assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         assertTrue(FileUtil.isFileExists(tmFile));
 
@@ -693,7 +693,7 @@ public class LogicManagerTest {
         assertFalse(FileUtil.isFileExists(tmFile));
 
         // redo command
-        assertCommandSuccess("redo", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getAbsolutePath()),
+        assertCommandSuccess("redo", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
                 new TaskManager(), Collections.emptyList());
         assertTrue(FileUtil.isFileExists(tmFile));
         tmFile.delete();

@@ -11,7 +11,8 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
     3.2. [UI](#32-ui)<br>
     3.3. [Logic](#33-logic)<br>
     3.4. [Model](#34-model)<br>
-    3.5. [Storage](#35-storage)
+    3.5. [Storage](#35-storage)<br>
+    3.6. [Event-Driven Design](#36-event-driven-design)
 4. [Implementation](#4-implementation)
 5. [Testing](#5-testing)
 6. [Dev Ops](#6-dev-ops)
@@ -49,29 +50,29 @@ If it's your first-time working on **Today**, you'll need to follow the instruct
 
 ### 2.2. Importing the project into Eclipse
 
-1. Fork this repository, and clone the fork to your computer
+1. Fork this repository, and clone the fork to your computer.
 2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
-3. Click `File` > `Import`
-4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-5. Click `Browse`, then locate the project's directory
-6. Click `Finish`
+   in the prerequisites above).
+3. Click `File` > `Import`.
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`.
+5. Click `Browse`, then locate the project's directory.
+6. Click `Finish`.
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
+  > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish.
+      (This is because Gradle downloads library files from servers during the project set up process.)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 2.3. Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
-2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
-4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`.
+2. Choose `External Configuration File` under `Type`.
+3. Enter an arbitrary configuration name e.g. taskmanager.
+4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`.
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
-7. Click OK twice. Rebuild project if prompted
+6. Tick and select `files from packages`, click `Change...`, and select the `resources` package.
+7. Click OK twice. Rebuild project if prompted.
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
+> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button.
 
 ### 2.4. Troubleshooting project setup
 
@@ -105,8 +106,8 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+  is used by components to communicate with other components using events (i.e. a form of [Event-Driven Design](#36-event-driven-design))
+* `LogsCenter` : This class is used by many components to write log messages to the App's log file.
 
 [`UI`](#32-ui) represents a collection of classes that manages the front-end visual elements of the application.
 
@@ -179,14 +180,14 @@ Similar to the `Model`, `Storage` contains the `UserPrefsStorage` object and the
 
 `TaskManagerStorage` writes and reads an XML file which contains the user's tasks and the related details.
 
-### 3.6. Event-Driven Nature
+### 3.6. Event-Driven Design
 
 Because there are many different components that may be affected by a single command, we use events to simplify method calling. In our code, after a command has successfully executed its primary functionality like making a change to the **Model**, it raises an `Event` which is then picked up by **Storage**, and **UI** which then calls the relevant methods to make the appropriate changes.
 
 The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 2` causes a change in the model which is the command's primary task.
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerSequenceDiagram.png" width="800"><br>
-_Figure 3.6.1_ : Component interactions for `delete 2` command (part 1)_
+_Figure 3.6.1_ : Component interactions for `delete 2` command_
 
 Only after the task is complete, is an `Event` raised to modify the storage and UI components in step 1.1.1.3.
 
@@ -194,25 +195,27 @@ Only after the task is complete, is an `Event` raised to modify the storage and 
 
 ### 4.1. Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+The `LogsCenter` class manages logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
-  (See [Configuration](#configuration))
+  (see [Configuration](#configuration)).
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to
-  the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+  the specified logging level.
+* Log messages are currently output through both the `Console` and a `.log` file.
 
 **Logging Levels**
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+`
+SEVERE  : A critical problem is detected. The application is likely to be terminated.
+WARNING : A minor problem is detected. The application will continue running, but errors may be surfacing in the User Interface or the data.
+INFO    : No errors detected. The application is reporting routine actions taken while carrying out user commands.
+FINE    : No errors detected. The application is reporting minor details that may be useful in debugging.
+`
 
 ### 4.2. Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
-(default: `config.json`):
+Certain properties of the application can be controlled (e.g app name, logging level) through the configuration file
+(default: `config.json`).
 
 
 ## 5. Testing
@@ -222,8 +225,8 @@ Tests can be found in the `./src/test/java` folder.
 **In Eclipse**:
 
 * To run all tests, right-click on the `src/test/java` folder and choose
-  `Run as` > `JUnit Test`
-* To run a subset of tests, you can right-click on a test package, test class, or a test and choose
+  `Run as` > `JUnit Test`.
+* To run a subset of tests, right-click on a test package, test class, or a test and choose
   to run as a JUnit test.
 
 **Using Gradle**:
@@ -247,15 +250,15 @@ We have two types of tests:
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  our GUI tests can be run in the _headless_ mode.
  In the headless mode, GUI tests do not show up on the screen.
- That means the developer can do other things on the Computer while the tests are running.<br>
+ That means youthe developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
 ### 5.1. Troubleshooting tests
 
- **Problem: Tests fail because NullPointException when AssertionError is expected**
+ **Problem: Tests fail because NullPointException occurs when AssertionError is expected**
 
  * Reason: Assertions are not enabled for JUnit tests.
-   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
+   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later).
  * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
@@ -285,31 +288,11 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 6.5. Converting Documentation to PDF format
+### 6.5. Managing Dependencies
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
-as Chrome's PDF engine preserves hyperlinks used in webpages.
-
-Here are the steps to convert the project documentation files to PDF format.
-
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
-    documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
-    <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
-
-### 6.6. Managing Dependencies
-
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, **Today** depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
-can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
-is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)<br>
+can be automated using Gradle.
 
 ## Appendix A : User Stories
 

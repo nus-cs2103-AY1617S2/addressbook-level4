@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.io.File;
+import java.io.IOException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
@@ -34,15 +35,24 @@ public class SaveToCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        String path = new File(saveToDir, TASK_MANAGER_FILE_NAME).getAbsolutePath();
+        String path = getPath();
 
         if (FileUtil.isWritable(path)) {
             model.updateSaveLocation(path);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, path));
         } else {
             throw new CommandException(String.format(MESSAGE_WRITE_FILE_ERROR, path));
         }
+    }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, path));
+    private String getPath() {
+        File file = new File(saveToDir, TASK_MANAGER_FILE_NAME);
+
+        try {
+            return file.getCanonicalPath();
+        } catch (IOException e) {
+            return file.getAbsolutePath();
+        }
     }
 
 }
