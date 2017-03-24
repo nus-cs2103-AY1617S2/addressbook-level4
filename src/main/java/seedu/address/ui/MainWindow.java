@@ -16,7 +16,6 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,12 +32,8 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TodoListPanel todoListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -47,7 +42,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane todoListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -81,7 +76,9 @@ public class MainWindow extends UiPart<Region> {
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
-
+    public TodoListPanel getTodoListPanel() {
+        return todoListPanel;
+    }
     /**
      * Sets the accelerator of a MenuItem.
      * @param keyCombination the KeyCombination value of the accelerator
@@ -113,10 +110,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        todoListPanel = new TodoListPanel(getTodoListPlaceholder(), logic.getFilteredTodoList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
@@ -132,8 +128,8 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getTodoListPlaceholder() {
+        return todoListPanelPlaceholder;
     }
 
     void hide() {
@@ -193,18 +189,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
 }

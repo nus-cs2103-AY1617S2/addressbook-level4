@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -7,105 +8,141 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.address.model.todo.ReadOnlyTodo;
+import seedu.address.model.todo.Todo;
+import seedu.address.model.todo.UniqueTodoList;
+import seedu.address.model.todo.UniqueTodoList.TodoNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the todo list data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
-    private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private final TodoList todoList;
+    /**
+     * Holds the previous state of the todo list before the most recent modifying change
+     */
+    private TodoList previousTodoList;
+    private final FilteredList<ReadOnlyTodo> filteredTodos;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given todoList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTodoList todoList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
+        assert !CollectionUtil.isAnyNull(todoList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with todo list: " + todoList + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.todoList = new TodoList(todoList);
+        filteredTodos = new FilteredList<>(this.todoList.getTodoList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TodoList(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyTodoList newData) {
+        previousTodoList = new TodoList(todoList);
+        todoList.resetData(newData);
+        indicateTodoListChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTodoList getTodoList() {
+        return todoList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+    private void indicateTodoListChanged() {
+        raise(new TodoListChangedEvent(todoList));
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public synchronized void deleteTodo(ReadOnlyTodo target) throws TodoNotFoundException {
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.removeTodo(target);
+        previousTodoList = tempTodoList;
+        indicateTodoListChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        addressBook.addPerson(person);
+    public synchronized void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException {
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.addTodo(todo);
+        previousTodoList = tempTodoList;
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTodoListChanged();
     }
 
     @Override
-    public void updatePerson(int filteredPersonListIndex, ReadOnlyPerson editedPerson)
-            throws UniquePersonList.DuplicatePersonException {
-        assert editedPerson != null;
+    public void updateTodo(int filteredTodoListIndex, ReadOnlyTodo editedTodo)
+            throws UniqueTodoList.DuplicateTodoException {
+        assert editedTodo != null;
 
-        int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
-        addressBook.updatePerson(addressBookIndex, editedPerson);
-        indicateAddressBookChanged();
+        int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.updateTodo(todoListIndex, editedTodo);
+        previousTodoList = tempTodoList;
+        indicateTodoListChanged();
+    }
+    //@@author A0163786N
+    @Override
+    public synchronized void completeTodo(int filteredTodoListIndex, Date completeTime) {
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.completeTodo(filteredTodoListIndex, completeTime);
+        previousTodoList = tempTodoList;
+        indicateTodoListChanged();
+    }
+    //@@author A0163786N
+    @Override
+    public synchronized void uncompleteTodo(int filteredTodoListIndex) {
+        TodoList tempTodoList = new TodoList(todoList);
+        todoList.uncompleteTodo(filteredTodoListIndex);
+        previousTodoList = tempTodoList;
+        indicateTodoListChanged();
+    }
+    //@@author A0163786N
+    @Override
+    public void loadPreviousState() throws NoPreviousStateException {
+        if (previousTodoList == null) {
+            throw new NoPreviousStateException();
+        }
+        resetData(previousTodoList);
+        previousTodoList = null;
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Todo List Accessors =============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+    public UnmodifiableObservableList<ReadOnlyTodo> getFilteredTodoList() {
+        return new UnmodifiableObservableList<>(filteredTodos);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTodos.setPredicate(null);
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTodoList(Set<String> keywords) {
+        updateFilteredTodoList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+    private void updateFilteredTodoList(Expression expression) {
+        filteredTodos.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyPerson person);
+        boolean satisfies(ReadOnlyTodo todo);
         String toString();
     }
 
@@ -118,8 +155,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyPerson person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTodo todo) {
+            return qualifier.run(todo);
         }
 
         @Override
@@ -129,7 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyPerson person);
+        boolean run(ReadOnlyTodo todo);
         String toString();
     }
 
@@ -141,9 +178,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyPerson person) {
+        public boolean run(ReadOnlyTodo todo) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(todo.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
         }
