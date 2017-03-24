@@ -30,6 +30,7 @@ import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
@@ -362,6 +363,44 @@ public class LogicManagerTest {
         assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
+
+    // @@author A0131278H
+    @Test
+    public void executeRemoveInvalidArgsFormatErrorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("remove", expectedMessage);
+    }
+
+    @Test
+    public void executeRemoveIndexNotFoundErrorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("remove");
+    }
+
+    @Test
+    public void executeRemoveRemovesCorrectTask() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        expectedAB.removeTask(threeTasks.get(1));
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("remove 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
+                expectedAB, expectedAB.getTaskList());
+    }
+
+    @Test
+    public void executeEditInvalidArgsFormatErrorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("edit", expectedMessage);
+    }
+
+    @Test
+    public void executeChangeInvalidArgsFormatErrorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("change", expectedMessage);
+    }
+    // @@author
 
     @Test
     public void execute_find_invalidArgsFormat() {
