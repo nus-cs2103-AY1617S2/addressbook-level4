@@ -14,6 +14,9 @@ public class Event implements ReadOnlyEvent {
 
     public static final String MESSAGE_TOO_MANY_TIME = "There should be at most 2 time points in the task.";
     public static final String MESSAGE_INVALID_TIME = "Invalid time slots.";
+    public static final int SIZE_DEADLINE_TASK = 1;
+    public static final int SIZE_EVENT_TASK = 2;
+    public static final int SIZE_FLOATING_TASK = 0;
     public static final int INDEX_FIRST_DATE = 0;
     public static final int INDEX_SECOND_DATE = 1;
     
@@ -56,18 +59,19 @@ public class Event implements ReadOnlyEvent {
             this.description = new Description(" ");
         }
         this.isDone = new IsDone(ISDONE_NOTDONE);
+        this.period = new Periodic("none");
         this.tags = new UniqueTagList(tags);
         
         //check number of time group, if>2, throws exception
         if (parameters.get("time") != null) {
             List<Date> dateList = (List<Date>) parameters.get("time");
-            if (dateList.size() > 2) {
+            if (dateList.size() > SIZE_EVENT_TASK) {
                 throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
-            } else if (dateList.size() == 2) {
+            } else if (dateList.size() == SIZE_EVENT_TASK) {
                 //event task with start and end time
                 this.startTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
                 this.endTime = new Schedule(dateList.get(INDEX_SECOND_DATE));
-            } else if (dateList.size() == 1) {
+            } else if (dateList.size() == SIZE_DEADLINE_TASK) {
                 //deadline task with only end time
                 this.startTime = new Schedule("");
                 this.endTime = new Schedule(dateList.get(INDEX_FIRST_DATE));

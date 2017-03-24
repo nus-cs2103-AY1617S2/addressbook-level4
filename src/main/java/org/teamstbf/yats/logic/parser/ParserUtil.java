@@ -111,11 +111,16 @@ public class ParserUtil {
 
 	/**
 	 * Parses a {@code Optional<String> schedule} into an
-	 * {@code Optional<Schedule>} if {@code schedule} is present.
+	 * {@code Optional<List<Date>>} if {@code schedule} is present.
 	 */
-	public static Optional<Schedule> parseSchedule(Optional<String> schedule) throws IllegalValueException {
-		assert schedule != null;
-		return schedule.isPresent() ? Optional.of(new Schedule(schedule.get())) : Optional.empty();
+	public static Optional<List<Date>> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+		// String -> DateList -> Optional
+	    assert schedule != null;
+		if (schedule.isPresent()) {
+		    return Optional.of(parseDateTime(schedule.get()));
+		} else {
+		    return Optional.empty();
+		}
 	}
 
 	/**
