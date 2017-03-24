@@ -23,6 +23,7 @@ import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.model.Model;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -31,21 +32,31 @@ public class CommandBox extends UiPart<Region> {
     public static final String SUCCESS_STYLE_CLASS = "white";
 
     private final Logic logic;
+    private final Model model;
     private final History<String> commandHistory = new History<String>();
 
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
+    CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
+    CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
+
     @FXML
     private InlineCssTextArea commandTextField;
 
-    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
+    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, Model model) {
         super(FXML);
         this.logic = logic;
+        this.model = model;
         addToPlaceholder(commandBoxPlaceholder);
 
         commandTextField.textProperty().addListener((observable, oldValue, newValue)
-            -> highlightSyntax(newValue));
+            -> highlightAndSuggestCompletion());
+    }
+
+    private void highlightAndSuggestCompletion() {
+        highlightManager.highlight(commandTextField);
+        autoCompleteManager.suggestCompletion(commandTextField, model);
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
@@ -53,12 +64,6 @@ public class CommandBox extends UiPart<Region> {
         placeHolderPane.getChildren().add(commandTextField);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
-    }
-
-    private void highlightSyntax(String newValue) {
-        CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
-        String content = newValue;
-        highlightManager.highlight(commandTextField, content);
     }
 
     @FXML
@@ -74,6 +79,10 @@ public class CommandBox extends UiPart<Region> {
         } else if (event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleDownKey();
+        }  else if (event.getCode() == KeyCode.TAB) {  // auto complete
+            event.consume();
+            commandTextField.moveTo(commandTextField.getLength());
+            highlightManager.highlight(commandTextField);
         } else {  // use control+z and control+y to execute undo and re-do operation
             try {
                 if (undoKeys.match(event)) {

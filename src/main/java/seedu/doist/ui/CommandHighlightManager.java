@@ -25,7 +25,8 @@ public class CommandHighlightManager {
         return instance;
     }
 
-    public void highlight(InlineCssTextArea commandTextField, String content) {
+    public void highlight(InlineCssTextArea commandTextField) {
+        String content = commandTextField.getText();
         int i = 0;
         while (i < content.length() && content.charAt(i) != ' ') {
             commandTextField.setStyle(i, i + 1, COMMAND_WORD_STYLE);
