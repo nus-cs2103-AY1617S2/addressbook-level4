@@ -45,7 +45,8 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
         this.category = taskToCopy.getTaskCategory();
     }
-    //@@author A0122017Y
+
+    // @@author A0122017Y
     public void setTitle(Title title) {
         this.title = title;
     }
@@ -119,14 +120,25 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    // @@author A0110791M
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("place/" + this.getVenueString() + " ");
-        sb.append("from/" + this.getStartTimeString() + " ");
-        sb.append("to/" + this.getEndTimeString() + " ");
-        sb.append("level/" + this.getUrgencyLevelString() + " ");
-        sb.append("des/" + this.getDescriptionString() + " ");
+        if (this.getVenue().isPresent()) {
+            sb.append("/venue " + this.getVenue().get() + " ");
+        }
+        if (this.getStartTime().isPresent()) {
+            sb.append("/from " + this.getStartTime().get() + " ");
+        }
+        if (this.getEndTime().isPresent()) {
+            sb.append("/to " + this.getEndTime().get() + " ");
+        }
+        if (this.getUrgencyLevel().isPresent()) {
+            sb.append("/level " + this.getUrgencyLevel().get() + " ");
+        }
+        if (this.getDescription().isPresent()) {
+            sb.append("/description " + this.getDescription().get() + " ");
+        }
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
