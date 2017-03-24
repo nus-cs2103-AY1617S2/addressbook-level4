@@ -27,15 +27,15 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<DateTime>} if {@code phone} is present.
-     * Returns null if {@code Optional<String> phone} is an empty string.
+     * Parses a {@code Optional<String> endDateTime} into an {@code Optional<DateTime>} if {@code endDateTime} is
+     * present. Returns null if {@code Optional<String> endDateTime} is an empty string.
      */
-    public static Optional<DateTime> parseEndDateTime(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        if (phone.isPresent() && phone.get().equals("")) {
+    public static Optional<DateTime> parseEndDateTime(Optional<String> endDateTime) throws IllegalValueException {
+        assert endDateTime != null;
+        if (endDateTime.isPresent() && endDateTime.get().equals("")) {
             return null;
         }
-        return phone.isPresent() ? Optional.of(new DateTime(phone.get())) : Optional.empty();
+        return endDateTime.isPresent() ? Optional.of(new DateTime(endDateTime.get())) : Optional.empty();
     }
 
     /**

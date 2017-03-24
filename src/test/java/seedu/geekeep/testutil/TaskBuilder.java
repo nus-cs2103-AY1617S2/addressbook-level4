@@ -29,8 +29,8 @@ public class TaskBuilder {
         return this.task;
     }
 
-    public TaskBuilder withEndDateTime(String phone) throws IllegalValueException {
-        this.task.setEndDateTime(new DateTime(phone));
+    public TaskBuilder withEndDateTime(String endDateTime) throws IllegalValueException {
+        this.task.setEndDateTime(new DateTime(endDateTime));
         return this;
     }
 
