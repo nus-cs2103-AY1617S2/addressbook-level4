@@ -16,6 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_END_DATE = new Prefix("ed/");
+    public static final Prefix PREFIX_KEYWORD = new Prefix("k/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

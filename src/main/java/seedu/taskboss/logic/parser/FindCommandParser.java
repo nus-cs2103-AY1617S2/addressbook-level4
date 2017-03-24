@@ -3,8 +3,7 @@ package seedu.taskboss.logic.parser;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
-import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
@@ -21,10 +20,9 @@ import seedu.taskboss.logic.parser.ArgumentTokenizer.Prefix;
 public class FindCommandParser {
 
     private static final String EMPTY_STRING = "";
-    private static final String prefixName = PREFIX_NAME.getPrefix();
-    private static final String prefixInformation = PREFIX_INFORMATION.getPrefix();
     private static final String prefixStartDate = PREFIX_START_DATE.getPrefix();
     private static final String prefixEndDate = PREFIX_END_DATE.getPrefix();
+    private static final String prefixKeyword = PREFIX_KEYWORD.getPrefix();
 
     //@@author A0147990R
     /**
@@ -42,12 +40,9 @@ public class FindCommandParser {
         }
 
         Prefix inputPrefix;
-        if (inputprefix.equals(prefixName)) {
-            inputPrefix = PREFIX_NAME;
-            pre = PREFIX_NAME.toString();
-        } else if (inputprefix.equals(prefixInformation)) {
-            inputPrefix = PREFIX_INFORMATION;
-            pre = PREFIX_INFORMATION.toString();
+        if (inputprefix.equals(prefixKeyword)) {
+            inputPrefix = PREFIX_KEYWORD;
+            pre = PREFIX_KEYWORD.toString();
         } else if (inputprefix.equals(prefixStartDate)) {
             inputPrefix = PREFIX_START_DATE;
             pre = PREFIX_START_DATE.toString();

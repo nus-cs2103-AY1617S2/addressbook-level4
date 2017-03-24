@@ -100,7 +100,7 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find n/Elle");
+        commandBox.runCommand("find k/Elle");
 
         String detailsToEdit = "n/Belle";
         int filteredTaskListIndex = 1;
