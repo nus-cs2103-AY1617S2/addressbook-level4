@@ -94,11 +94,6 @@ public class ModelManager extends ComponentManager implements Model {
     // =============================================================
     // @@author A0143648Y
     @Override
-    public int getTotalFilteredTaskListSize() {
-        return getFilteredTaskList().size() + getFilteredEventList().size() + getFilteredFloatList().size();
-    }
-
-    @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
