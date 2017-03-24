@@ -7,7 +7,6 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.logic.parser.ArgumentTokenizer;
 import seedu.watodo.logic.parser.ArgumentTokenizer.Prefix;
 
 public class ArgumentTokenizerTest {
@@ -34,7 +33,8 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(tokenizer, slashP);
     }
 
-    private void assertPreamblePresent(ArgumentTokenizer argsTokenizer, String expectedPreamble) throws IllegalValueException {
+    private void assertPreamblePresent(ArgumentTokenizer argsTokenizer,
+        String expectedPreamble) throws IllegalValueException {
         assertEquals(expectedPreamble, argsTokenizer.getPreamble().get());
     }
 
@@ -42,7 +42,8 @@ public class ArgumentTokenizerTest {
         assertFalse(argsTokenizer.getPreamble().isPresent());
     }
 
-    private void assertArgumentPresent(ArgumentTokenizer argsTokenizer, Prefix prefix, String... expectedValues) throws IllegalValueException {
+    private void assertArgumentPresent(ArgumentTokenizer argsTokenizer,
+        Prefix prefix, String... expectedValues) throws IllegalValueException {
 
         // Verify the last value is returned
         assertEquals(expectedValues[expectedValues.length - 1], argsTokenizer.getUniqueValue(prefix).get());

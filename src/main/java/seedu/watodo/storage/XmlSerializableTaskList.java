@@ -13,8 +13,8 @@ import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 
 /**
  * An Immutable TaskManager that is serializable to XML format

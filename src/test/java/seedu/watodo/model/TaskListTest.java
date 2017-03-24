@@ -14,11 +14,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.watodo.model.ReadOnlyTaskManager;
-import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
-import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.testutil.TypicalTestTasks;
 
 public class TaskListTest {
@@ -50,9 +48,9 @@ public class TaskListTest {
     @Test
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
-        // Repeat td.alice twice
-        List<Task> newPersons = Arrays.asList(new Task(td.alice), new Task(td.alice));
-        List<Tag> newTags = td.alice.getTags().asObservableList();
+        // Repeat td.shop twice
+        List<Task> newPersons = Arrays.asList(new Task(td.shop), new Task(td.shop));
+        List<Tag> newTags = td.shop.getTags().asObservableList();
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);

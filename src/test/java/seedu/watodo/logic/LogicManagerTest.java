@@ -44,8 +44,8 @@ import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
-import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 import seedu.watodo.storage.StorageManager;
 
 
@@ -147,7 +147,7 @@ public class LogicManagerTest {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());
         } catch (IllegalValueException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
         //Confirm the ui display elements should contain the right data
@@ -186,57 +186,42 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
-
     @Test
-    public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
-    }
-
-    @Test
-    public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
-
+    public void execute_add_invalidTaskData() {
+        assertCommandFailure("add ", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        assertCommandFailure("add Valid Description by/notValidDate #validTag", DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        assertCommandFailure("add Valid Description from/wed to/3 may #><-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.floating();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB,
-                expectedAB.getTaskList());
+                             String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                             expectedAB, expectedAB.getTaskList());
+    }
 
+    @Test
+    public void execute_add_flexibleArgsFormatSuccessful() {
     }
 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task floatingTaskToBeAdded = helper.floating();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
-
+        model.addTask(floatingTaskToBeAdded); // task already in internal task manager
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
-
+        assertCommandFailure(helper.generateAddCommand(floatingTaskToBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
     }
-
 
     @Test
     public void execute_list_showsAllTasks() throws Exception {
@@ -408,33 +393,48 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-
     /**
      * A utility class to generate test data.
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-            Description name = new Description("Adam Brown");
-            DateTime privatePhone = new DateTime("111111");
+        Task floating() throws Exception {
+            Description description = new Description("read Lord of the Rings");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new Task(description, tags);
+        }
+
+        Task deadline() throws Exception {
+            Description description = new Description("project report");
+            DateTime deadline = new DateTime("thurs 4pm");
+            Tag tag1 = new Tag("urgent");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(description, deadline, tags);
+        }
+
+        Task event() throws Exception {
+            Description description = new Description("career fair exhibition");
+            DateTime startDate = new DateTime("mar 4 at 9am");
+            DateTime endDate = new DateTime("2.30pm mar 6");
+            Tag tag1 = new Tag("work");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(description, startDate, endDate, tags);
         }
 
         /**
-         * Generates a valid task using the given seed.
-         * Running this function with the same parameter values guarantees the returned task will have the same state.
-         * Each unique seed will generate a unique Task object.
+         * Generates a valid task using the given seed. Running this function
+         * with the same parameter values guarantees the returned task will have
+         * the same state. Each unique seed will generate a unique Task object.
          *
          * @param seed used to generate the task data field values
          */
         Task generateTask(int seed) throws Exception {
-            return new Task(
-                    new Description("Task " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
-            );
+            return new Task(new Description("Task "
+                    + seed), new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
         /** Generates the correct add command based on the task given */
@@ -446,8 +446,8 @@ public class LogicManagerTest {
             cmd.append(p.getDescription().toString());
 
             UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+            for (Tag t : tags) {
+                cmd.append(" #").append(t.tagName);
             }
 
             return cmd.toString();

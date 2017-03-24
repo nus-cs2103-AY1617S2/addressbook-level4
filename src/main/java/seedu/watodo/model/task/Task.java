@@ -20,12 +20,22 @@ public class Task implements ReadOnlyTask {
 
     /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
-        this(description, null, null, tags);
+        this(description, null, null, tags, TaskStatus.UNDONE);
+    }
+    
+    /* Constructs a Floating Task object from a given description. With Status */
+    public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, null, tags, newStatus);
     }
 
     /* Constructs a Deadline Task object from a given description. */
     public Task(Description description, DateTime deadline, UniqueTagList tags) {
-        this(description, null, deadline, tags);
+        this(description, null, deadline, tags, TaskStatus.UNDONE);
+    }
+    
+    /* Constructs a Deadline Task object from a given description. With status. */
+    public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, deadline, tags, newStatus);
     }
 
     /* Constructs an Event Task object from a given description. */
@@ -37,12 +47,22 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = TaskStatus.UNDONE;
     }
+    
+    /* Constructs an Event Task object from a given description. With status */
+    public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags, TaskStatus status) {
+        assert !CollectionUtil.isAnyNull(description, tags);
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.status = status;
+    }
 
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getStartDate(), source.getEndDate(), source.getTags());
+        this(source.getDescription(), source.getStartDate(), source.getEndDate(), source.getTags(), source.getStatus());
     }
 
     @Override
@@ -121,7 +141,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();//TO DO the timing
+        final StringBuilder builder = new StringBuilder(); //TO DO the timing
         builder.append(getAsText());
         if (startDate != null) {
             builder.append("\nStart: ").append(startDate);

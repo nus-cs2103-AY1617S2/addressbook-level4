@@ -11,16 +11,14 @@ import seedu.watodo.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask eat, study, shop, code, play, sleep;
-    
+
     public TypicalTestTasks() {
         try {
             eat = new TaskBuilder().withDescription("Time to eat").build(); //TODO continue
-        
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
-        
     }
 
     public static void loadTaskManagerWithSampleData(TaskManager ab) {

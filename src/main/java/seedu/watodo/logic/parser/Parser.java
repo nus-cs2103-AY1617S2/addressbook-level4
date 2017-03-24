@@ -23,6 +23,7 @@ import seedu.watodo.logic.commands.ListDeadlineCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
 import seedu.watodo.logic.commands.ListFloatCommand;
 import seedu.watodo.logic.commands.ListMarkedCommand;
+import seedu.watodo.logic.commands.ListMonthCommand;
 import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.SelectCommand;
@@ -42,7 +43,7 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Command parseCommand(String userInput) throws IllegalValueException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -73,39 +74,42 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            if(arguments.contains(""+"#")){
-              return new ListTagCommandParser().parse(arguments);
+            if (arguments.contains("" + "#")) {
+                return new ListTagCommandParser().parse(arguments);
             }
-        	  switch (arguments) {
+            switch (arguments) {
 
             case ListAllCommand.COMMAND_WORD:
                 return new ListAllCommand();
 
-        	  case ListDayCommand.COMMAND_WORD:
-        		    return new ListDayCommand();
+            case ListDayCommand.COMMAND_WORD:
+                return new ListDayCommand();
 
-        	  case ListFloatCommand.COMMAND_WORD:
+            case ListFloatCommand.COMMAND_WORD:
                 return new ListFloatCommand();
 
-        	  case ListDeadlineCommand.COMMAND_WORD:
+            case ListDeadlineCommand.COMMAND_WORD:
                 return new ListDeadlineCommand();
 
-        	  case ListEventCommand.COMMAND_WORD:
+            case ListEventCommand.COMMAND_WORD:
                 return new ListEventCommand();
 
-        	  case ListMarkedCommand.COMMAND_WORD:
+            case ListMarkedCommand.COMMAND_WORD:
                 return new ListMarkedCommand();
 
-        	  case ListWeekCommand.COMMAND_WORD:
+            case ListWeekCommand.COMMAND_WORD:
                 return new ListWeekCommand();
 
-        	  default:
-        		    return new ListCommand();
-        	  }
+            case ListMonthCommand.COMMAND_WORD:
+                return new ListMonthCommand();
+
+            default:
+                return new ListCommand();
+            }
 
         case MarkCommand.COMMAND_WORD:
-            return new MarkCommandParser().parse(arguments);	  
-        	  
+            return new MarkCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

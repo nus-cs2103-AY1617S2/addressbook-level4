@@ -16,6 +16,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private Label status;
+    @FXML
     private Label id;
     @FXML
     private Label startDate;
@@ -23,25 +25,27 @@ public class TaskCard extends UiPart<Region> {
     private Label endDate;
     @FXML
     private FlowPane tags;
-   
+
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         description.setText(task.getDescription().fullDescription);
         id.setText(displayedIndex + ". ");
-        
+
         if (task.getStartDate() != null) {
             startDate.setText("Start Task From " + task.getStartDate());
         } else {
             startDate.setText("");
         }
-        
+
         if (task.getEndDate() != null) {
             endDate.setText("Do Task By " + task.getEndDate());
         } else {
             endDate.setText("");
         }
         
+        status.setText(task.getStatus().toString());
+
         initTags(task);
     }
 

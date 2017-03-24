@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.watodo.commons.util.FileUtil;
-import seedu.watodo.commons.util.XmlUtil;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.storage.XmlSerializableTaskList;
 import seedu.watodo.testutil.TaskListBuilder;

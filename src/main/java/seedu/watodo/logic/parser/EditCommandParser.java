@@ -1,9 +1,6 @@
 package seedu.watodo.logic.parser;
 
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TO;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_FROM;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -14,8 +11,8 @@ import java.util.Optional;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.EditCommand;
-import seedu.watodo.logic.commands.IncorrectCommand;
 import seedu.watodo.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.watodo.logic.commands.IncorrectCommand;
 import seedu.watodo.model.tag.UniqueTagList;
 
 /**
@@ -26,7 +23,7 @@ public class EditCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Command parse(String args) throws IllegalValueException {
         assert args != null;

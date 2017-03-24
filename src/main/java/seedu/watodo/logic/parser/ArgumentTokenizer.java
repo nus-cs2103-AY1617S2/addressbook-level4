@@ -15,7 +15,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
  * 1. An argument's value can be an empty string e.g. the value of {@code /k} in the above example.<br>
  * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
  * 3. A prefix need not have leading and trailing spaces e.g. the {@code /d in 11.00/dToday} in the above example<br>
- * 4. An argument may be repeated and values will be accumulated and can be obtained by getting all values. 
+ * 4. An argument may be repeated and values will be accumulated and can be obtained by getting all values.
  */
 public class ArgumentTokenizer {
 
@@ -66,7 +66,7 @@ public class ArgumentTokenizer {
     /**
      * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.
      *     If the string before the first prefix is empty, Optional.empty() will be returned.
-     * @throws IllegalValueException 
+     * @throws IllegalValueException
      */
     public Optional<String> getPreamble() throws IllegalValueException {
 

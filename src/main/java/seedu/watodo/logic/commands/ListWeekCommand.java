@@ -10,7 +10,7 @@ public class ListWeekCommand extends ListCommand {
     public static final String COMMAND_WORD = "week";
 
     public static final String MESSAGE_SUCCESS = "Listed this week's tasks";
-    
+
     public static final int DEADLINE = 7;
 
     @Override

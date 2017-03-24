@@ -2,8 +2,8 @@ package seedu.watodo.testutil;
 
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.TaskStatus;
 
@@ -17,9 +17,9 @@ public class TestTask implements ReadOnlyTask {
     private DateTime endDate;
     private TaskStatus status; //Default status of any new task created is UNDONE
     private UniqueTagList tags;
-   
+
     public TestTask() {};
-    
+
     /* Constructs a Floating TestTask object from a given description. */
     public TestTask(Description description, UniqueTagList tags) {
         this(description, null, null, tags);
@@ -39,14 +39,13 @@ public class TestTask implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = TaskStatus.UNDONE;
     }
-
     /**
-     * Creates a copy of {@code personToCopy}.
+     * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
         this(taskToCopy.getDescription(), taskToCopy.getStartDate(), taskToCopy.getEndDate(), taskToCopy.getTags());
     }
-    
+
     public void setDescription(Description description) {
         assert description != null;
         this.description = description;
@@ -55,41 +54,40 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(DateTime startDate) {
         this.startDate = startDate;
     }
-    
+
     public void setEndDate(DateTime endDate) {
         this.endDate = endDate;
     }
-    
+
     /* Changes the current status of the task. */
     public void setStatus(TaskStatus newStatus) {
         this.status = newStatus;
     }
 
-    /* Replaces this task's tags with the tags in the argument tag list. */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
-    
+
     @Override
     public Description getDescription() {
         return description;
     }
-    
+
     @Override
     public DateTime getStartDate() {
         return startDate;
     }
-    
+
     @Override
     public DateTime getEndDate() {
         return endDate;
     }
-    
+
     @Override
     public TaskStatus getStatus() {
         return status;
     }
-    
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -97,7 +95,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();//TO DO the timing
+        final StringBuilder builder = new StringBuilder(); //TO DO the timing
         builder.append(getAsText());
         if (startDate != null) {
             builder.append("\nStart: ").append(startDate);
@@ -115,6 +113,5 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
-
 
 }

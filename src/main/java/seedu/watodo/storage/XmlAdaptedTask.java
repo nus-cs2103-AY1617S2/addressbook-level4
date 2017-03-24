@@ -9,10 +9,11 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.DateTime;
-import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.Description;
+import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.Task;
 
 /**
  * JAXB-friendly version of the Task.
@@ -25,6 +26,9 @@ public class XmlAdaptedTask {
     private String startDate;
     @XmlElement(required = false)
     private String endDate;
+    
+    @XmlElement(required = true)
+    private String status;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -46,11 +50,13 @@ public class XmlAdaptedTask {
         if (source.getStartDate() != null) {
             startDate = source.getStartDate().toString();
         }
-        
+
         if (source.getEndDate() != null) {
             endDate = source.getEndDate().toString();
         }
         
+        status = source.getStatus().toString();
+
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -68,21 +74,45 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Description name = new Description(this.name);
+        
+        TaskStatus status = TaskStatus.UNDONE;
+        
+        if (this.status != null) {
+            status = getStatusFromString(this.status);
+        }
+        
+        
+
         final UniqueTagList tags = new UniqueTagList(taskTags);
         if (startDate == null && endDate == null) {
-            return new Task(name, tags);
+            return new Task(name, tags, status);
         } else if (startDate == null && endDate != null) {
             final DateTime eDate = new DateTime(endDate);
 
-            return new Task(name, eDate, tags);
+            return new Task(name, eDate, tags, status);
         } else if (startDate != null && endDate != null) {
             final DateTime sDate = new DateTime(startDate);
             final DateTime eDate = new DateTime(endDate);
 
 
-            return new Task(name, sDate, eDate, tags);
+            return new Task(name, sDate, eDate, tags, status);
         }
-        
-        return new Task(name, tags);
+
+        return new Task(name, tags, status);
+    }
+    
+    private TaskStatus getStatusFromString(String string) {
+        switch (string) {
+        case "Undone":
+            return TaskStatus.UNDONE;
+        case "Ongoing":
+            return TaskStatus.ONGOING;
+        case "Done":
+            return TaskStatus.DONE;
+        case "Overdue":
+            return TaskStatus.OVERDUE;
+        default:
+            return TaskStatus.UNDONE;
+        }
     }
 }

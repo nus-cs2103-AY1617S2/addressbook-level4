@@ -38,8 +38,8 @@ public class AddCommand extends Command {
             throws IllegalValueException {
 
         assert description != null;
-        assert taskType.equals(TaskType.FLOAT) || taskType.equals(TaskType.DEADLINE) ||taskType.equals(TaskType.EVENT);
-       
+        assert taskType.equals(TaskType.FLOAT) || taskType.equals(TaskType.DEADLINE) || taskType.equals(TaskType.EVENT);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
