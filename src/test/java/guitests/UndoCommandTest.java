@@ -30,7 +30,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
      * Checks that the undo command properly restore to previous state
      * @param expectedTasksList
      */
-    public void assertUndoSuccess(TestTask...expectedTasksList ) {
+    public void assertUndoSuccess(TestTask...expectedTasksList) {
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
 
         //confirm that undo command restores TaskList to the previous state
