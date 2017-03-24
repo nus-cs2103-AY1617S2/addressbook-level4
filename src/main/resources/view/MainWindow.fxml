@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minWidth="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="25.0" prefWidth="720.0">
+      <HBox prefHeight="25.0" prefWidth="1000.0">
          <children>
-            <Label prefHeight="42.0" prefWidth="568.0" style="-fx-font-size: 40; -fx-background-color: derive(#ffffff, -10%);" text="  JOBS">
+            <Label prefHeight="42.0" prefWidth="870.0" style="-fx-font-size: 40; -fx-background-color: derive(#ffffff, -10%);" text="  JOBS">
                <font>
                   <Font name="LiSong Pro" size="50.0" />
                </font>
             </Label>
-            <MenuBar prefHeight="42.0" style="-fx-background-color: derive(#ffffff, -10%);">
+            <MenuBar prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: derive(#ffffff, -10%);">
                <menus>
                   <Menu mnemonicParsing="false" text="File">
                      <items>
