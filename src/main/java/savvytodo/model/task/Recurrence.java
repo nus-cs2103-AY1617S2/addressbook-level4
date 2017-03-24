@@ -40,7 +40,7 @@ public class Recurrence {
         /**
          * Compare enum object with String to see if it matches
          * @param String retype cannot be null
-         * @return boolean of wheather string matches enum object
+         * @return boolean of whether string matches enum object
          */
         public static boolean matches(String retype) {
             for (Type type : Type.values()) {

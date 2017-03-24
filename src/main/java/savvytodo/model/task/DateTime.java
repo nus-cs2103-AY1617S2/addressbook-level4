@@ -2,10 +2,9 @@ package savvytodo.model.task;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 
 import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.commons.util.DateTimeUtil;
 import savvytodo.commons.util.StringUtil;
 
 /**
@@ -24,16 +23,9 @@ public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Start date/time should not be after End date/time";
 
-    private static final String DATE_FORMAT = "d/M/uuuu HHmm";
-    private static final String DATE_STRING_FORMAT = "dd/MM/uuuu HHmm";
-
     private static final int COMPARE_TO_SMALLER = -1;
     private static final int COMPARE_TO_EQUAL = 0;
     private static final int COMPARE_TO_GREATER = 1;
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT)
-            .withResolverStyle(ResolverStyle.STRICT);
-    private static final DateTimeFormatter DATE_STRING_FORMATTER = DateTimeFormatter.ofPattern(DATE_STRING_FORMAT);
 
     public static final String DATETIME_STRING_CONNECTOR = " = ";
     private static final String DATETIME_STRING_TO_STRING_CONNECTOR = " ~ ";
@@ -41,29 +33,27 @@ public class DateTime implements Comparable<DateTime> {
 
     /**
      * Default constructor
-     * @throws IllegalValueException
      * @throws DateTimeException
      */
-    public DateTime() throws DateTimeException, IllegalValueException {
+    public DateTime() throws IllegalValueException {
         this(DEFAULT_VALUES);
     }
 
     /**
      * Validates given DateTime.
      * If DateTime is NULL, means that the task is not an event
-     * @throws DateTimeException if given DateTime is invalid
      * @throws IllegalValueException end date occurring before start date.
      */
-    public DateTime(String startDateTime, String endDateTime) throws DateTimeException, IllegalValueException {
+    public DateTime(String startDateTime, String endDateTime) throws IllegalValueException {
         if (endDateTime != null && !endDateTime.isEmpty()) {
-            this.end = LocalDateTime.parse(endDateTime.trim(), DATE_FORMATTER);
-            this.endValue = this.end.format(DATE_STRING_FORMATTER);
+            this.end = LocalDateTime.parse(endDateTime.trim(), DateTimeUtil.DATE_FORMATTER);
+            this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
         } else {
             this.endValue = endDateTime;
         }
         if (startDateTime != null && !startDateTime.isEmpty()) {
-            this.start = LocalDateTime.parse(startDateTime.trim(), DATE_FORMATTER);
-            this.startValue = this.start.format(DATE_STRING_FORMATTER);
+            this.start = LocalDateTime.parse(startDateTime.trim(), DateTimeUtil.DATE_FORMATTER);
+            this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
             if (!isValidDateTime(this.start, this.end)) {
                 throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
             }
@@ -77,8 +67,8 @@ public class DateTime implements Comparable<DateTime> {
         assert (startDateTime != null && endDateTime != null);
         this.start = startDateTime;
         this.end = endDateTime;
-        this.endValue = this.end.format(DATE_STRING_FORMATTER);
-        this.startValue = this.start.format(DATE_STRING_FORMATTER);
+        this.endValue = this.end.format(DateTimeUtil.DATE_STRING_FORMATTER);
+        this.startValue = this.start.format(DateTimeUtil.DATE_STRING_FORMATTER);
     }
 
     /**
@@ -160,7 +150,7 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Set method for startDateTime
+     * Set method for start
      * @param LocalDateTime
      */
     public void setStart(LocalDateTime startDateTime) {
@@ -168,7 +158,7 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Set method for endDateTime
+     * Set method for end
      * @param LocalDateTime
      */
     public void setEnd(LocalDateTime endDateTime) {

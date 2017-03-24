@@ -12,10 +12,12 @@ import savvytodo.testutil.TestUtil;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
+    //@@author A0140016B
     @Test
     public void add() {
-        //add one task
         TestTask[] currentList = td.getTypicalTasks();
+
+        //add one task
         TestTask taskToAdd = td.discussion;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
@@ -29,6 +31,11 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(td.discussion.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
+
+        //add conflicting task
+        taskToAdd = td.job;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -52,3 +59,4 @@ public class AddCommandTest extends TaskManagerGuiTest {
     }
 
 }
+//@@author A0140016B

@@ -17,6 +17,7 @@ import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
+//@@author A0140016B
 /**
  * Edits the details of an existing task in the task manager.
  */
@@ -58,7 +59,7 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (filteredTaskListIndex >= lastShownList.size() || filteredTaskListIndex < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -95,3 +96,4 @@ public class EditCommand extends Command {
     }
 
 }
+//@@author A0140016B

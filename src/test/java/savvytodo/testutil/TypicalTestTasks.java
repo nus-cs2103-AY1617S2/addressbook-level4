@@ -9,6 +9,7 @@ import savvytodo.model.task.Location;
 import savvytodo.model.task.Name;
 import savvytodo.model.task.Priority;
 import savvytodo.model.task.Recurrence;
+import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
@@ -17,7 +18,7 @@ import savvytodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask assignment, appointment, birthday, meeting, test, presentation, project, discussion, interview;
+    public TestTask assignment, appointment, birthday, meeting, test, presentation, project, discussion, interview, job;
 
     public TypicalTestTasks() {
         try {
@@ -56,6 +57,10 @@ public class TypicalTestTasks {
             interview = new TaskBuilder().withName("Google Interview").withPriority("medium")
                     .withDescription("Prepare for interview questions").withLocation("Google SG")
                     .withDateTime("09/03/2017 1400", "10/03/2017 1400").withRecurrence(Recurrence.DEFAULT_VALUES)
+                    .withStatus(false).build();
+            job = new TaskBuilder().withName("Potential Job Calling").withPriority("medium")
+                    .withDescription("Call interview").withLocation("Marina Bay")
+                    .withDateTime("10/03/2017 1000", "10/03/2017 1600").withRecurrence(Recurrence.DEFAULT_VALUES)
                     .withStatus(false).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -100,6 +105,7 @@ public class TypicalTestTasks {
                 temp.setCategories(new UniqueCategoryList());
                 temp.setDateTime(new DateTime());
                 temp.setRecurrence(new Recurrence());
+                temp.setCompleted(new Status(i % 2 == 0 ? true : false));
             } catch (IllegalValueException e) {
                 e.printStackTrace();
             }

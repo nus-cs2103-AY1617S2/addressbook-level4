@@ -47,7 +47,7 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
 
-    public static String CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
+    public String configFile = Config.DEFAULT_CONFIG_FILE;
 
     @Override
     public void init() throws Exception {
@@ -131,23 +131,23 @@ public class MainApp extends Application {
 
         if (configFilePath != null) {
             logger.info("Custom Config file specified " + configFilePath);
-            CONFIG_FILE = configFilePath;
+            configFile = configFilePath;
         }
 
-        logger.info("Using config file : " + CONFIG_FILE);
+        logger.info("Using config file : " + configFile);
 
         try {
-            Optional<Config> configOptional = ConfigUtil.readConfig(CONFIG_FILE);
+            Optional<Config> configOptional = ConfigUtil.readConfig(configFile);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + CONFIG_FILE + " is not in the correct format. "
+            logger.warning("Config file at " + configFile + " is not in the correct format. "
                     + "Using default config properties");
             initializedConfig = new Config();
         }
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
-            ConfigUtil.saveConfig(initializedConfig, CONFIG_FILE);
+            ConfigUtil.saveConfig(initializedConfig, configFile);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
@@ -226,14 +226,14 @@ public class MainApp extends Application {
         config.setTaskManagerFilePath(taskManagerFilePath);
 
         try {
-            ConfigUtil.saveConfig(config, CONFIG_FILE);
+            ConfigUtil.saveConfig(config, configFile);
         } catch (IOException e) {
             logger.severe("Failed to save config " + StringUtil.getDetails(e));
             this.stop();
         }
 
         logger.info("Setting UI with new logic");
-        initApplicationFromConfig(CONFIG_FILE, false);
+        initApplicationFromConfig(configFile, false);
 
         try {
             storage.saveTaskManager(model.getTaskManager());
