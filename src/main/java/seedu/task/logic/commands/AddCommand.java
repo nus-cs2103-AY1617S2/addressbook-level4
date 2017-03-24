@@ -10,6 +10,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.UniqueTaskList;
@@ -28,7 +29,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
-    private final Task toAdd;
+    private final Task taskToAdd;
 
     /**
      * Creates an AddCommand using raw values.
@@ -42,22 +43,22 @@ public class AddCommand extends Command {
 	for (String tagName : tags) {
 	    tagSet.add(new Tag(tagName));
 	}
-	this.toAdd = new Task(new TaskName(taskName), new TaskDate(taskDate), new TaskTime(taskStartTime),
-		new TaskTime(taskEndTime), new String(taskDescription));
+	this.taskToAdd = new Task(new TaskName(taskName), new TaskDate(taskDate), new TaskTime(taskStartTime),
+		new TaskTime(taskEndTime), new String(taskDescription), new TaskStatus("Ongoing"));
 
     }
 
     public AddCommand(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseStartTime,
 	    Optional<TaskTime> parseEndTime, Optional<String> parseString) throws IllegalValueException {
-	this.toAdd = new Task(parseTaskName, parseDate, parseStartTime, parseEndTime, parseString);
+	this.taskToAdd = new Task(parseTaskName, parseDate, parseStartTime, parseEndTime, parseString);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
 	assert model != null;
 	try {
-	    model.addTask(toAdd);
-	    return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+	    model.addTask(taskToAdd);
+	    return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd));
 	} catch (UniqueTaskList.DuplicateTaskException e) {
 	    throw new CommandException(MESSAGE_DUPLICATE_TASK);
 	}

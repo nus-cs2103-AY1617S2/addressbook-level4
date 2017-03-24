@@ -39,6 +39,7 @@
                         <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />
                         <Label fx:id="taskTime" styleClass="cell_small_label" text="\$ttaskTime" />
                         <Label fx:id="taskDescription" styleClass="cell_small_label" text="\$taskDescription" />
+                        <Label fx:id="taskStatus" styleClass="cell_small_label" text="\$taskStatus" />
                     </children>
                 </VBox>
             </children>

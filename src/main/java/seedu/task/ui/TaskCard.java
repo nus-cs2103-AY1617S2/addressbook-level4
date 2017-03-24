@@ -24,6 +24,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label taskDescription;
     @FXML
+    private Label taskStatus;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -49,6 +51,7 @@ public class TaskCard extends UiPart<Region> {
 	    taskDescription.setText(task.getTaskDescription().toString());
 	} else
 	    taskDescription.setText("Description:");
+	 taskStatus.setText("Task Status: "+task.getTaskStatus().toString());
 	initTags(task);
     }
 

@@ -8,10 +8,10 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class TaskName {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace, otherwise
+     * The first character of the task must not be a whitespace, otherwise
      * " " (a blank string) becomes a valid input.
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";

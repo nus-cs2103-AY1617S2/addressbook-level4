@@ -18,6 +18,7 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskStartTime;
     private TaskTime taskEndTime;
     private String taskDescription;
+    private TaskStatus taskStatus;
 
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time";
 
@@ -27,13 +28,15 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
-	    String taskDescription, UniqueTagList tags) {
+	    String taskDescription, TaskStatus taskStatus, UniqueTagList tags) {
 	assert !CollectionUtil.isAnyNull(taskName, taskDate, taskStartTime, taskEndTime, tags);
 	this.taskName = taskName;
 	this.taskDate = taskDate;
 	this.taskStartTime = taskStartTime;
 	this.taskEndTime = taskEndTime;
 	this.taskDescription = taskDescription;
+	this.taskStatus = new TaskStatus("Ongoing");
+	
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
     }
@@ -53,13 +56,14 @@ public class Task implements ReadOnlyTask {
 	if (parseString.isPresent()) {
 	    this.taskDescription = parseString.get();
 	}
+	this.taskStatus = new TaskStatus("Ongoing");
 	this.tags = new UniqueTagList();
 
     }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
-	    String taskDescription) {
-	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
+	    String taskDescription, TaskStatus taskStatus) {
+	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,taskStatus, new UniqueTagList());
     }
 
     /**
@@ -67,7 +71,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
 	this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(),
-		source.getTaskDescription(), source.getTags());
+		source.getTaskDescription(), source.getTaskStatus(), source.getTags());
     }
 
     @Override
@@ -94,7 +98,9 @@ public class Task implements ReadOnlyTask {
 	    this.setTaskStartTime(replacement.getTaskStartTime());
 	    this.setTaskEndTime(replacement.getTaskEndTime());
 	    this.setTaskDescription(replacement.getTaskDescription());
+	    this.setTaskStatus(replacement.getTaskStatus());
 	    this.setTags(replacement.getTags());
+	    
 	} catch (IllegalValueException ive) {
 	    System.out.println("error resetting data in read only task"); // phrase
 									  // better
@@ -114,7 +120,7 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
 	// use this method for custom fields hashing instead of implementing
 	// your own
-	return Objects.hash(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, tags);
+	return Objects.hash(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, tags);
     }
 
     @Override
@@ -138,12 +144,20 @@ public class Task implements ReadOnlyTask {
 	return taskEndTime;
     }
 
+    public TaskStatus getTaskStatus() {
+	return taskStatus;
+    }
+    
     public String getTaskDescription() {
 	return taskDescription;
     }
 
-    public void setTaskDescription(String description) {
-	this.taskDescription = description;
+    public void setTaskStatus(TaskStatus taskStatus){
+	this.taskStatus = taskStatus;
+    }
+    
+    public void setTaskDescription(String taskDescription) {
+	this.taskDescription = taskDescription;
     }
 
     public void setTaskName(TaskName taskName) {

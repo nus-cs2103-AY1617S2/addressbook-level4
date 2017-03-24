@@ -44,6 +44,7 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskName;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
@@ -61,503 +62,492 @@ public class LogicManagerTest {
     private Model model;
     private Logic logic;
 
-    //These are for checking the correctness of the events raised
+    // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedTaskManager = new TaskManager(abce.data);
+	latestSavedTaskManager = new TaskManager(abce.data);
     }
 
     @Subscribe
     private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
-        helpShown = true;
+	helpShown = true;
     }
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
-        targetedJumpIndex = je.targetIndex;
+	targetedJumpIndex = je.targetIndex;
     }
 
     @Before
     public void setUp() {
-        model = new ModelManager();
-        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
-        String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
-        EventsCenter.getInstance().registerHandler(this);
+	model = new ModelManager();
+	String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+	String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
+	logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+	EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date
-        helpShown = false;
-        targetedJumpIndex = -1; // non yet
+	latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
+									  // saved
+									  // assumed
+									  // to
+									  // be
+									  // up
+									  // to
+									  // date
+	helpShown = false;
+	targetedJumpIndex = -1; // non yet
     }
 
     @After
     public void tearDown() {
-        EventsCenter.clearSubscribers();
+	EventsCenter.clearSubscribers();
     }
 
     @Test
     public void execute_invalid() {
-        String invalidCommand = "       ";
-        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+	String invalidCommand = "       ";
+	assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
     /**
-     * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'address book' and the 'last shown list' are as specified.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Executes the command, confirms that a CommandException is not thrown and
+     * that the result message is correct. Also confirms that both the 'address
+     * book' and the 'last shown list' are as specified.
+     * 
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTaskManager expectedAddressBook,
-                                      List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+	    ReadOnlyTaskManager expectedAddressBook, List<? extends ReadOnlyTask> expectedShownList) {
+	assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'address book' and the 'last shown list' are verified to be unchanged.
-     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
+     * Executes the command, confirms that a CommandException is thrown and that
+     * the result message is correct. Both the 'address book' and the 'last
+     * shown list' are verified to be unchanged.
+     * 
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
-        TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
-        List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
-        assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+	TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
+	List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
+	assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
     /**
-     * Executes the command, confirms that the result message is correct
-     * and that a CommandException is thrown if expected
-     * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
-     *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     * Executes the command, confirms that the result message is correct and
+     * that a CommandException is thrown if expected and also confirms that the
+     * following three parts of the LogicManager object's state are as
+     * expected:<br>
+     * - the internal address book data are same as those in the
+     * {@code expectedAddressBook} <br>
+     * - the backing list shown by UI matches the {@code shownList} <br>
+     * - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskManager expectedAddressBook,
-                                       List<? extends ReadOnlyTask> expectedShownList) {
+	    ReadOnlyTaskManager expectedAddressBook, List<? extends ReadOnlyTask> expectedShownList) {
 
-        try {
-            CommandResult result = logic.execute(inputCommand);
-            assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
-            assertEquals(expectedMessage, result.feedbackToUser);
-        } catch (CommandException e) {
-            assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
-            assertEquals(expectedMessage, e.getMessage());
-        }
+	try {
+	    CommandResult result = logic.execute(inputCommand);
+	    assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
+	    assertEquals(expectedMessage, result.feedbackToUser);
+	} catch (CommandException e) {
+	    assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
+	    assertEquals(expectedMessage, e.getMessage());
+	}
 
-        //Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredTaskList());
+	// Confirm the ui display elements should contain the right data
+	assertEquals(expectedShownList, model.getFilteredTaskList());
 
-        //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getTaskManager());
-        assertEquals(expectedAddressBook, latestSavedTaskManager);
+	// Confirm the state of data (saved and in-memory) is as expected
+	assertEquals(expectedAddressBook, model.getTaskManager());
+	assertEquals(expectedAddressBook, latestSavedTaskManager);
     }
 
     @Test
     public void execute_unknownCommandWord() {
-        String unknownCommand = "uicfhmowqewca";
-        assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
+	String unknownCommand = "uicfhmowqewca";
+	assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
-        assertTrue(helpShown);
+	assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
+	assertTrue(helpShown);
     }
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
-                new TaskManager(), Collections.emptyList());
+	assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new TaskManager(),
+		Collections.emptyList());
     }
 
     @Test
     public void execute_clear() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generatePerson(1));
-        model.addTask(helper.generatePerson(2));
-        model.addTask(helper.generatePerson(3));
+	TestDataHelper helper = new TestDataHelper();
+	model.addTask(helper.generateTask(1));
+	model.addTask(helper.generateTask(2));
+	model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+	assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
-
 
     @Test
     public void execute_add_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+	assertCommandFailure("add wrong args wrong args", expectedMessage);
+	assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
+	assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
+	assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-                TaskName.MESSAGE_NAME_CONSTRAINTS);
-        /*
-        assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-                */
-        assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+	assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", TaskName.MESSAGE_NAME_CONSTRAINTS);
+	/*
+	 * assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address"
+	 * , Phone.MESSAGE_PHONE_CONSTRAINTS);
+	 * assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address"
+	 * , Email.MESSAGE_EMAIL_CONSTRAINTS);
+	 */
+	assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
+		Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
     @Test
     public void execute_add_successful() throws Exception {
-        // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
-        expectedAB.addJobTask(toBeAdded);
+	// setup expectations
+	TestDataHelper helper = new TestDataHelper();
+	Task toBeAdded = helper.adam();
+	TaskManager expectedAB = new TaskManager();
+	expectedAB.addJobTask(toBeAdded);
 
-        // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB,
-                expectedAB.getTaskList());
+	// execute command and verify result
+	assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+		expectedAB, expectedAB.getTaskList());
 
     }
 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
-        // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+	// setup expectations
+	TestDataHelper helper = new TestDataHelper();
+	Task toBeAdded = helper.adam();
 
-        // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+	// setup starting state
+	model.addTask(toBeAdded); // person already in internal address book
 
-        // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
+	// execute command and verify result
+	assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
-
 
     @Test
     public void execute_list_showsAllPersons() throws Exception {
-        // prepare expectations
-        TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateAddressBook(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+	// prepare expectations
+	TestDataHelper helper = new TestDataHelper();
+	TaskManager expectedAB = helper.generateTaskManager(2);
+	List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare address book state
-        helper.addToModel(model, 2);
+	// prepare address book state
+	helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
-                expectedAB,
-                expectedList);
+	assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
     }
 
-
     /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
-     *                    based on visible index.
+     * Confirms the 'invalid argument index number behaviour' for the given
+     * command targeting a single person in the shown list, using visible index.
+     * 
+     * @param commandWord
+     *            to test assuming it targets a single person in the last shown
+     *            list based on visible index.
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
-            throws Exception {
-        assertCommandFailure(commandWord , expectedMessage); //index missing
-        assertCommandFailure(commandWord + " +1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " -1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
-        assertCommandFailure(commandWord + " not_a_number", expectedMessage);
+	    throws Exception {
+	assertCommandFailure(commandWord, expectedMessage); // index missing
+	assertCommandFailure(commandWord + " +1", expectedMessage); // index
+								    // should be
+								    // unsigned
+	assertCommandFailure(commandWord + " -1", expectedMessage); // index
+								    // should be
+								    // unsigned
+	assertCommandFailure(commandWord + " 0", expectedMessage); // index
+								   // cannot be
+								   // 0
+	assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
     /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
-     *                    based on visible index.
+     * Confirms the 'invalid argument index number behaviour' for the given
+     * command targeting a single person in the shown list, using visible index.
+     * 
+     * @param commandWord
+     *            to test assuming it targets a single person in the last shown
+     *            list based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> personList = helper.generatePersonList(2);
+	String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+	TestDataHelper helper = new TestDataHelper();
+	List<Task> personList = helper.generateTaskList(2);
 
-        // set AB state to 2 persons
-        model.resetData(new TaskManager());
-        for (Task p : personList) {
-            model.addTask(p);
-        }
+	// set AB state to 2 persons
+	model.resetData(new TaskManager());
+	for (Task p : personList) {
+	    model.addTask(p);
+	}
 
-        assertCommandFailure(commandWord + " 3", expectedMessage);
+	assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
+	assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
     }
 
     @Test
     public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
+	assertIndexNotFoundBehaviorForCommand("select");
     }
 
     @Test
     public void execute_select_jumpsToCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+	TestDataHelper helper = new TestDataHelper();
+	List<Task> threePersons = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateAddressBook(threePersons);
-        helper.addToModel(model, threePersons);
+	TaskManager expectedAB = helper.generateTaskManager(threePersons);
+	helper.addToModel(model, threePersons);
 
-        assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
-                expectedAB,
-                expectedAB.getTaskList());
-        assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threePersons.get(1));
+	assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2), expectedAB,
+		expectedAB.getTaskList());
+	assertEquals(1, targetedJumpIndex);
+	assertEquals(model.getFilteredTaskList().get(1), threePersons.get(1));
     }
-
 
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+	assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
     @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("delete");
+	assertIndexNotFoundBehaviorForCommand("delete");
     }
 
     @Test
     public void execute_delete_removesCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generatePersonList(3);
+	TestDataHelper helper = new TestDataHelper();
+	List<Task> threePersons = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateAddressBook(threePersons);
-        expectedAB.removeTask(threePersons.get(1));
-        helper.addToModel(model, threePersons);
+	TaskManager expectedAB = helper.generateTaskManager(threePersons);
+	expectedAB.removeTask(threePersons.get(1));
+	helper.addToModel(model, threePersons);
 
-        assertCommandSuccess("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
-                expectedAB,
-                expectedAB.getTaskList());
+	assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
+		expectedAB, expectedAB.getTaskList());
     }
-
 
     @Test
     public void execute_find_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-        assertCommandFailure("find ", expectedMessage);
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+	assertCommandFailure("find ", expectedMessage);
     }
 
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generatePersonWithName("KE Y");
-        Task p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
+	TestDataHelper helper = new TestDataHelper();
+	Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+	Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+	Task p1 = helper.generateTaskWithName("KE Y");
+	Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2);
-        helper.addToModel(model, fourPersons);
+	List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+	TaskManager expectedAB = helper.generateTaskManager(fourPersons);
+	List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+	helper.addToModel(model, fourPersons);
 
-        assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
+	assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+		expectedList);
     }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task p2 = helper.generatePersonWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generatePersonWithName("key key");
-        Task p4 = helper.generatePersonWithName("KEy sduauo");
+	TestDataHelper helper = new TestDataHelper();
+	Task p1 = helper.generateTaskWithName("bla bla KEY bla");
+	Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+	Task p3 = helper.generateTaskWithName("key key");
+	Task p4 = helper.generateTaskWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = fourPersons;
-        helper.addToModel(model, fourPersons);
+	List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
+	TaskManager expectedAB = helper.generateTaskManager(fourPersons);
+	List<Task> expectedList = fourPersons;
+	helper.addToModel(model, fourPersons);
 
-        assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
+	assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+		expectedList);
     }
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generatePersonWithName("key key");
-        Task p1 = helper.generatePersonWithName("sduauo");
+	TestDataHelper helper = new TestDataHelper();
+	Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+	Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+	Task pTarget3 = helper.generateTaskWithName("key key");
+	Task p1 = helper.generateTaskWithName("sduauo");
 
-        List<Task> fourPersons = helper.generatePersonList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generatePersonList(pTarget1, pTarget2, pTarget3);
-        helper.addToModel(model, fourPersons);
+	List<Task> fourPersons = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
+	TaskManager expectedAB = helper.generateTaskManager(fourPersons);
+	List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
+	helper.addToModel(model, fourPersons);
 
-        assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
+	assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+		expectedAB, expectedList);
     }
-
 
     /**
      * A utility class to generate test data.
      */
     class TestDataHelper {
 
-        Task adam() throws Exception {
-        	TaskName taskName = new TaskName("Pick Adam");
-			TaskDate taskDate = new TaskDate("101010");
-			TaskTime taskStartTime = new TaskTime("1100");
-			TaskTime taskEndTime = new TaskTime("1130");
-			String taskDescription = new String("Buy popcorn");
-            /*
-            privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
-            */
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,tags);
-            //return new Task(name, privatePhone, email, privateAddress, tags);
-        }
+	Task adam() throws Exception {
+	    TaskName taskName = new TaskName("Pick Adam");
+	    TaskDate taskDate = new TaskDate("101010");
+	    TaskTime taskStartTime = new TaskTime("1100");
+	    TaskTime taskEndTime = new TaskTime("1130");
+	    String taskDescription = new String("Buy popcorn");
+	    TaskStatus taskStatus = new TaskStatus("Ongoing");
 
-        /**
-         * Generates a valid person using the given seed.
-         * Running this function with the same parameter values guarantees the returned person will have the same state.
-         * Each unique seed will generate a unique Person object.
-         *
-         * @param seed used to generate the person data field values
-         */
-        Task generatePerson(int seed) throws Exception {
-            return new Task(
-            		new TaskName("Person " + seed), 
-            		new TaskDate("Date " + seed),
-					new TaskTime("Start Time " + seed), 
-					new TaskTime("End Time " + seed),
-					new String("Description " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), 
-                new Tag("tag" + Math.abs(seed + 1))));
-            
-        }
+	    Tag tag1 = new Tag("tag1");
+	    Tag tag2 = new Tag("longertag2");
+	    UniqueTagList tags = new UniqueTagList(tag1, tag2);
+	    return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, tags);
 
-        /** Generates the correct add command based on the person given */
-        String generateAddCommand(Task p) {
-            StringBuffer cmd = new StringBuffer();
+	}
 
-            cmd.append("add ");
+	/**
+	 * Generates a valid task using the given seed. Running this function
+	 * with the same parameter values guarantees the returned task will have
+	 * the same state. Each unique seed will generate a unique task object.
+	 *
+	 * @param seed
+	 *            used to generate the task data field values
+	 */
+	Task generateTask(int seed) throws Exception {
+	    return new Task(new TaskName("Task Name " + seed), new TaskDate("Date " + seed),
+		    new TaskTime("Start Time " + seed), new TaskTime("End Time " + seed),
+		    new String("Description " + seed), new TaskStatus("Status " + seed),
+		    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
 
-            cmd.append(p.getTaskName().toString());
-			cmd.append(" d/").append(p.getTaskDate());
-			cmd.append(" s/").append(p.getTaskStartTime());
-			cmd.append(" e/").append(p.getTaskEndTime());
-			cmd.append(" m/").append(p.getTaskDescription());
-            
-			/*
-            cmd.append(p.getName().toString());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" a/").append(p.getAddress());
-*/
-            UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
-            }
+	}
 
-            return cmd.toString();
-        }
+	/** Generates the correct add command based on the task given */
+	String generateAddCommand(Task p) {
+	    StringBuffer cmd = new StringBuffer();
 
-        /**
-         * Generates an AddressBook with auto-generated persons.
-         */
-        TaskManager generateAddressBook(int numGenerated) throws Exception {
-            TaskManager addressBook = new TaskManager();
-            addToTaskManager(addressBook, numGenerated);
-            return addressBook;
-        }
+	    cmd.append("add ");
 
-        /**
-         * Generates an AddressBook based on the list of Persons given.
-         */
-        TaskManager generateAddressBook(List<Task> persons) throws Exception {
-            TaskManager addressBook = new TaskManager();
-            addToAddressBook(addressBook, persons);
-            return addressBook;
-        }
+	    cmd.append(p.getTaskName().toString());
+	    cmd.append(" d/").append(p.getTaskDate());
+	    cmd.append(" s/").append(p.getTaskStartTime());
+	    cmd.append(" e/").append(p.getTaskEndTime());
+	    cmd.append(" m/").append(p.getTaskDescription());
 
-        /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param taskManager The AddressBook to which the Persons will be added
-         */
-        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToAddressBook(taskManager, generatePersonList(numGenerated));
-        }
+	    UniqueTagList tags = p.getTags();
+	    for (Tag t : tags) {
+		cmd.append(" t/").append(t.tagName);
+	    }
 
-        /**
-         * Adds the given list of Persons to the given AddressBook
-         */
-        void addToAddressBook(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
-            for (Task p: tasksToAdd) {
-                taskManager.addJobTask(p);
-            }
-        }
+	    return cmd.toString();
+	}
 
-        /**
-         * Adds auto-generated Task objects to the given model
-         * @param model The model to which the Persons will be added
-         */
-        void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generatePersonList(numGenerated));
-        }
+	/**
+	 * Generates an TaskManager with auto-generated tasks.
+	 */
+	TaskManager generateTaskManager(int numGenerated) throws Exception {
+	    TaskManager taskManager = new TaskManager();
+	    addToTaskManager(taskManager, numGenerated);
+	    return taskManager;
+	}
 
-        /**
-         * Adds the given list of Persons to the given model
-         */
-        void addToModel(Model model, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
-                model.addTask(p);
-            }
-        }
+	/**
+	 * Generates an TaskManager based on the list of Tasks given.
+	 */
+	TaskManager generateTaskManager(List<Task> tasks) throws Exception {
+	    TaskManager taskManager = new TaskManager();
+	    addToTaskManager(taskManager, tasks);
+	    return taskManager;
+	}
 
-        /**
-         * Generates a list of Persons based on the flags.
-         */
-        List<Task> generatePersonList(int numGenerated) throws Exception {
-            List<Task> persons = new ArrayList<>();
-            for (int i = 1; i <= numGenerated; i++) {
-                persons.add(generatePerson(i));
-            }
-            return persons;
-        }
+	/**
+	 * Adds auto-generated Task objects to the given TaskManager
+	 * 
+	 * @param taskManager
+	 *            The TaskManager to which the Tasks will be added
+	 */
+	void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
+	    addToTaskManager(taskManager, generateTaskList(numGenerated));
+	}
 
-        List<Task> generatePersonList(Task... persons) {
-            return Arrays.asList(persons);
-        }
+	/**
+	 * Adds the given list of Tasks to the given TaskManager
+	 */
+	void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+	    for (Task p : tasksToAdd) {
+		taskManager.addJobTask(p);
+	    }
+	}
 
-        /**
-         * Generates a Person object with given name. Other fields will have some dummy values.
-         */
-        Task generatePersonWithName(String name) throws Exception {
-            return new Task(
-            		new TaskName(name), 
-            		new TaskDate("11112011"), 
-            		new TaskTime("1405"), 
-            		new TaskTime("1408"),
-					new String("This is some description."),
-                    new UniqueTagList(new Tag("tag"))
-            );
-        }
+	/**
+	 * Adds auto-generated Task objects to the given model
+	 * 
+	 * @param model
+	 *            The model to which the Tasks will be added
+	 */
+	void addToModel(Model model, int numGenerated) throws Exception {
+	    addToModel(model, generateTaskList(numGenerated));
+	}
+
+	/**
+	 * Adds the given list of Tasks to the given model
+	 */
+	void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+	    for (Task p : tasksToAdd) {
+		model.addTask(p);
+	    }
+	}
+
+	/**
+	 * Generates a list of Tasks based on the flags.
+	 */
+	List<Task> generateTaskList(int numGenerated) throws Exception {
+	    List<Task> tasks = new ArrayList<>();
+	    for (int i = 1; i <= numGenerated; i++) {
+		tasks.add(generateTask(i));
+	    }
+	    return tasks;
+	}
+
+	List<Task> generateTaskList(Task... persons) {
+	    return Arrays.asList(persons);
+	}
+
+	/**
+	 * Generates a Task object with given name. Other fields will have some
+	 * dummy values.
+	 */
+	Task generateTaskWithName(String name) throws Exception {
+	    return new Task(new TaskName(name), new TaskDate("11112011"), new TaskTime("1405"), new TaskTime("1408"),
+		    new String("This is some description."), new TaskStatus("Ongoing"),
+		    new UniqueTagList(new Tag("tag")));
+	}
     }
 }

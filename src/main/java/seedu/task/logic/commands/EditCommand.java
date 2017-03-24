@@ -9,6 +9,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
@@ -82,10 +83,11 @@ public class EditCommand extends Command {
 	TaskTime updatedStartTime = editTaskDescriptor.getTaskStartTime().orElseGet(taskToEdit::getTaskStartTime);
 	TaskTime updatedEndTime = editTaskDescriptor.getTaskEndTime().orElseGet(taskToEdit::getTaskEndTime);
 	String updatedDescription = editTaskDescriptor.getTaskDescription().orElseGet(taskToEdit::getTaskDescription);
+	TaskStatus remainStatus = new TaskStatus("Ongoing");
 	UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
 	return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription,
-		updatedTags);
+		remainStatus, updatedTags);
     }
 
     /**

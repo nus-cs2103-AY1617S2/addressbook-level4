@@ -34,16 +34,13 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 
 import seedu.task.model.task.TaskName;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.XmlSerializableTaskManager;
-/*
-import seedu.task.model.task.Phone;
-import seedu.task.model.task.Address;
-import seedu.task.model.task.Email;
- */
+
 /**
  * A utility class for test cases.
  */
@@ -56,7 +53,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
+    public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -78,20 +75,9 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-        	/*
-            return new Task[]{
-                new Task(new TaskName("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new TaskName("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                new Task(new TaskName("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                new Task(new TaskName("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                new Task(new TaskName("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                new Task(new TaskName("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                new Task(new TaskName("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                new Task(new TaskName("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                new Task(new TaskName("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
-                */
+
         	return new Task[] { new Task(new TaskName("Buy cookies"), new TaskDate("2002017"), new TaskTime("0800"),
-					new TaskTime("1000"), new String("Look out for grand lucky draws."),new UniqueTagList()) 
+					new TaskTime("1000"), new String("Look out for grand lucky draws."),new TaskStatus("Ongoing"),new UniqueTagList()) 
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -116,7 +102,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSampleTaskData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
+        return Arrays.asList(SAMPLE_TASK_DATA);
     }
 
     /**
@@ -288,43 +274,43 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removePersonsFromList(final TestTask[] persons, TestTask... personsToRemove) {
-        List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    public static TestTask[] removetasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
+        List<TestTask> listOftasks = asList(tasks);
+        listOftasks.removeAll(asList(tasksToRemove));
+        return listOftasks.toArray(new TestTask[listOftasks.size()]);
     }
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removePersonFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
-        return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+        return removetasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param tasks A array of persons.
-     * @param tasksToAdd The persons that are to be appended behind the original array.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -341,8 +327,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask person) {
-        return card.isSameTask(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
