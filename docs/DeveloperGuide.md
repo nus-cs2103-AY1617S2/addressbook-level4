@@ -1,7 +1,7 @@
 # Developer Guide
 <br>
 
-1. [Intro](#1-introduction)<br>
+1. [Introduction](#1-introduction)<br>
 2. [Setting Up](#2-setting-up)<br>
     2.1 [Prerequisites](#21-prerequisites)<br>
     2.2 [Importing the Project into Eclipse](#22-importing-the-project-into-eclipse)<br>
