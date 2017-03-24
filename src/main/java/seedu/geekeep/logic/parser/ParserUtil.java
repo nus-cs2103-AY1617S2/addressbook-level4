@@ -57,7 +57,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> location} into an {@code Optional<Address>} if {@code location} is present.
+     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
      */
     public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
         assert location != null;

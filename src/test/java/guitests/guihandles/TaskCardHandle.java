@@ -36,7 +36,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
+    public String getLocation() {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
@@ -76,7 +76,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getTitle().fullTitle)
                 && getPhone().equals(getDisplayedDate(task))
-                && getAddress().equals(task.getLocation().value)
+                && getLocation().equals(task.getLocation().value)
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -98,7 +98,7 @@ public class TaskCardHandle extends GuiHandle {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPhone().equals(handle.getPhone())
-                    && getAddress().equals(handle.getAddress())
+                    && getLocation().equals(handle.getLocation())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -106,6 +106,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getLocation();
     }
 }
