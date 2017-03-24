@@ -135,7 +135,7 @@ command `delete 1`.
 <img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when the Task List data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
