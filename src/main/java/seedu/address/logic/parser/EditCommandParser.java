@@ -147,9 +147,9 @@ public class EditCommandParser {
         List<Date> dates = new ArrayList<Date>();
         for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
             List<DateGroup> group = new PrettyTimeParser()
-                    .parseSyntax(datesString.get(i)
+                    .parseSyntax(ParserUtil.correctDateFormat(datesString.get(i)
                             + (i == 0 ? CliSyntax.DEFAULT_STARTING_TIME
-                                    : CliSyntax.DEFAULT_DEADLINE));
+                                    : CliSyntax.DEFAULT_DEADLINE)));
             if (group == null || group.get(0).getPosition() != 0
                     || group.size() > 2) {
                 args = tmpArgs;
@@ -175,7 +175,8 @@ public class EditCommandParser {
             return null;
         }
         List<DateGroup> group = new PrettyTimeParser()
-                .parseSyntax(deadlineString + CliSyntax.DEFAULT_DEADLINE);
+                .parseSyntax(ParserUtil.correctDateFormat(
+                        deadlineString + CliSyntax.DEFAULT_DEADLINE));
         if (group == null || group.get(0).getPosition() != 0 || group.size() > 2
                 || group.get(0).getDates().size() > 1) {
             args = tmpArgs;

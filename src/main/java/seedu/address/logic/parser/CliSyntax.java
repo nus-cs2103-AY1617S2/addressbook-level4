@@ -16,6 +16,7 @@ public class CliSyntax {
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern
             .compile("(?<keywords>\\S+(?:\\s+\\S+)*)");
+    public static final String DATE = "^|\\s(\\d{1,2}/\\d{1,2}/\\d{2,4})(?=$|\\s)";
 
     /* Add Command key words */
     public static final String WILDCARD = ".*";
