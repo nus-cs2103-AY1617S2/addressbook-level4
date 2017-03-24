@@ -9,38 +9,50 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
    > 3.1. Help<br/>
      3.2. Add tasks<br/>
      3.3. List tasks<br/>
-     3.4. Edit tasks<br/>
-     3.5. Find tasks<br/>
+     3.4. Find tasks<br/>
+     3.5. Edit tasks<br/>
      3.6. Delete tasks<br/>
      3.7. Mark tasks as complete<br/>
      3.8. Mark tasks as incomplete<br/>
      3.9. Undo<br/>
      3.10. Redo<br/>
      3.11. Select tasks<br/>
-     3.12. Clear<br/>
-     3.13. Exit<br/>
-     3.14. Save<br/>
+     3.12. Reset<br/>
+     3.13. Save<br/>
+     3.14. Import<br/>
+     3.15. Export<br/>
+     3.16. Exit<br/>
 4. [FAQ](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#faq)
 5. [Command Summary](https://github.com/CS2103JAN2017-W09-B1/main/blob/master/docs/UserGuide.md#command-summary)
 
 # 1. Introduction
 
-Hello! **Burdens** will help you make sense of your daily lives and list your tasks and deadlines on a command-line platform, so that you do not have to bother with post its or whiteboards. **Burdens** will enable you to organize and prioritize your tasks in a smarter and creative way.
+Hello!<br/>
+<br/>
+Are you burdened by your daily tasks and deadlines in life?<br/>
+<br/>
+Enter **Burdens**.<br/>
+<br/>
+A task manager that structures your tasks and deadlines<br/>
+on a command-line platform with a beautiful customisable interface.<br/>
+<br/>
+Read on and we will bring you through on how to install and use **Burdens**<br/>
+to make sense of your daily life activities.<br/>
+<br/>
+No more **burdens**.
 
 # 2. Quick Start
+**Download**
+Ensure you have Java version `1.8.0_60` or later installed.
 
-Ensure you have Java version `1.8.0_60` or later installed in your Computer.
-
-Having any Java 8 version is not enough.
-
-This app will not work with earlier versions of Java 8.
-
-1. Download the latest Burdens-0.2.jar from the [releases](https://github.com/CS2103JAN2017-W09-B1/main/releases) tab.
+1. Download the latest Burdens.jar from the [releases](https://github.com/CS2103JAN2017-W09-B1/main/releases) tab.
    > <img src="images/release.png" width="600">
 2. Copy the jar file to the folder you want to use as the home folder for Burdens.
-3. Double-click **Burdens-0.2.jar** to start the app. The GUI should appear in a few seconds.
+**Launch**
+To start Burdens, double click on **Burdens.jar**. Hello!<br/>
+Here is the greeting window at the very first startup.
    > <img src="images/Ui.png" width="600">
-Figure 1: UI Mockup
+As shown, there will be some sample tasks to give you a sense of what your tasks will look like.<br/>
 
 You will see four sections:
 
@@ -228,12 +240,23 @@ Exits the program.
 
 Format: `exit`
 
-**3.14. Saving the data**
+**3.14. Importing files into the program : `exit`**
+
+Exits the program.
+
+Format: `exit`
+
+**3.15. Saving the data**
 
 All data are saved in the hard disk automatically after any command that changes the data.
 
 There is no need to save manually.
 
+**3.16. Exiting the program : `exit`**
+
+Exits the program.
+
+Format: `exit`
 # 4. FAQ
 
 Q: How do I transfer my data to another Computer?
