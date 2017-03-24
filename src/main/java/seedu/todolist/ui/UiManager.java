@@ -13,6 +13,7 @@ import seedu.todolist.MainApp;
 import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.Config;
 import seedu.todolist.commons.core.LogsCenter;
+import seedu.todolist.commons.events.model.ToDoListChangedEvent;
 import seedu.todolist.commons.events.model.ViewListChangedEvent;
 import seedu.todolist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.todolist.commons.events.ui.JumpToListRequestEvent;
@@ -122,6 +123,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.releaseResources();
         mainWindow.loadPersonPage(event.getNewSelection());
     }
 
@@ -132,6 +134,11 @@ public class UiManager extends ComponentManager implements Ui {
         int firstSpaceIndex = event.toString().indexOf(" ");
         String typeOfList = event.toString().substring(0, firstSpaceIndex);
         mainWindow.indicateButtonChange(typeOfList);
+    }
+
+    @Subscribe
+    private void handleToDoListEventChanged(ToDoListChangedEvent event) {
+        mainWindow.getTaskListPanel().scrollTo(event.index);
     }
 
 }

@@ -62,7 +62,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateToDoListChanged() {
-        raise(new ToDoListChangedEvent(toDoList));
+        int index = toDoList.getTaskList().toArray().length;
+        raise(new ToDoListChangedEvent(toDoList, index));
     }
 
     //@@author A0144240W

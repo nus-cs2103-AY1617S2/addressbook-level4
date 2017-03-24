@@ -375,13 +375,12 @@ public class LogicManagerTest {
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
         ToDoList expectedAB = helper.generateToDoList(fourTasks);
-        List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(fourTasks.size()),
                 expectedAB,
-                expectedList);
+                fourTasks);
     }
 
     @Test

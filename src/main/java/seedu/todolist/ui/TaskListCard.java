@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.todolist.model.task.Task;
 
-public class TaskCard extends UiPart<Region> {
+public class TaskListCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
 
@@ -26,7 +26,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(Task task, int displayedIndex) {
+    public TaskListCard(Task task, int displayedIndex) {
         super(FXML);
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
