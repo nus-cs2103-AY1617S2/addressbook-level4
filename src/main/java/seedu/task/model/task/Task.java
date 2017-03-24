@@ -19,7 +19,7 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskEndTime;
     private String taskDescription;
 
-    public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time";
+    public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
 
     private UniqueTagList tags;
 
@@ -39,7 +39,7 @@ public class Task implements ReadOnlyTask {
     }
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
-	    Optional<TaskTime> parseTime2, Optional<String> parseString) {
+	    Optional<TaskTime> parseTime2, Optional<String> parseString) throws IllegalValueException {
 	this.taskName = parseTaskName;
 	if (parseDate.isPresent()) {
 	    this.taskDate = parseDate.get();
@@ -48,7 +48,11 @@ public class Task implements ReadOnlyTask {
 	    this.taskStartTime = parseTime.get();
 	}
 	if (parseTime2.isPresent()) {
-	    this.taskEndTime = parseTime2.get();
+		if (this.taskStartTime != null && this.taskStartTime.compareTo(parseTime2.get()) < 0) {
+			this.taskEndTime = parseTime2.get();
+		} else {
+			throw new IllegalValueException(MESSAGE_INVALID_TIME);
+		}
 	}
 	if (parseString.isPresent()) {
 	    this.taskDescription = parseString.get();

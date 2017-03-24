@@ -80,15 +80,15 @@ public class EditCommand extends Command {
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
 	assert taskToEdit != null;
 
-	TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
-	TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElseGet(taskToEdit::getTaskDate);
-	TaskTime updatedStartTime = editTaskDescriptor.getTaskStartTime().orElseGet(taskToEdit::getTaskStartTime);
-	TaskTime updatedEndTime = editTaskDescriptor.getTaskEndTime().orElseGet(taskToEdit::getTaskEndTime);
-	String updatedDescription = editTaskDescriptor.getTaskDescription().orElseGet(taskToEdit::getTaskDescription);
-	UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-
-	return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription,
-		updatedTags);
+		TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
+		TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElseGet(taskToEdit::getTaskDate);
+		TaskTime updatedStartTime = editTaskDescriptor.getTaskStartTime().orElseGet(taskToEdit::getTaskStartTime);
+		TaskTime updatedEndTime = editTaskDescriptor.getTaskEndTime().orElseGet(taskToEdit::getTaskEndTime);
+		String updatedDescription = editTaskDescriptor.getTaskDescription().orElseGet(taskToEdit::getTaskDescription);
+		UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+	
+		return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription,
+			updatedTags);
     }
 
     /**
