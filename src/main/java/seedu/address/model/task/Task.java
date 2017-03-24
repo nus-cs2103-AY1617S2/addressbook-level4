@@ -8,7 +8,7 @@ import seedu.address.model.tag.UniqueTagList;
 /**
  * Represents a Task in the task manager. not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public abstract class Task implements ReadOnlyTask {
     public static final int MAX_TIME_DIFF = 2 ^ 32 - 1;
 
     private Name name;
@@ -34,7 +34,6 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags(), source.isDone());
     }
 
     public void setName(Name name) {
@@ -71,13 +70,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Updates this task with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setName(replacement.getName());
-        this.setTags(replacement.getTags());
-        this.setDone(replacement.isDone());
-    }
+    public abstract void resetData(ReadOnlyTask replacement);
 
     @Override
     public boolean equals(Object other) {
@@ -99,14 +92,10 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskType getTaskType() {
-        return null;
-    }
+    public abstract TaskType getTaskType();
 
     @Override
-    public String getTaskDateTime() {
-        return null;
-    }
+    public abstract String getTaskDateTime();;
 
     @Override
     public void setToday() {
@@ -119,9 +108,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public DateTime getDeadline() {
-        return null;
-    }
+    public abstract DateTime getDeadline();
 
     @Override
     public String getID() {
@@ -134,18 +121,12 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public String getTaskAbsoluteDateTime() {
-        return null;
-    }
+    public abstract String getTaskAbsoluteDateTime();
 
     @Override
-    public DateTime getStartingTime() {
-        return null;
-    }
+    public abstract DateTime getStartingTime();
 
     @Override
-    public int compareTo(ReadOnlyTask task2) {
-        return 0;
-    }
+    public abstract int compareTo(ReadOnlyTask task2);
 
 }

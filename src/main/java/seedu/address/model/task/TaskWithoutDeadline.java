@@ -30,4 +30,28 @@ public class TaskWithoutDeadline extends Task {
             return 0;
         }
     }
+
+    @Override
+    public void resetData(ReadOnlyTask replacement) {
+        assert replacement != null;
+
+        this.setName(replacement.getName());
+        this.setTags(replacement.getTags());
+        this.setDone(replacement.isDone());
+    }
+
+    @Override
+    public DateTime getDeadline() {
+        return null;
+    }
+
+    @Override
+    public String getTaskAbsoluteDateTime() {
+        return "";
+    }
+
+    @Override
+    public DateTime getStartingTime() {
+        return null;
+    }
 }

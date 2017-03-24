@@ -143,4 +143,15 @@ public class TaskWithDeadline extends Task {
                     / 1000);
         }
     }
+
+    @Override
+    public void resetData(ReadOnlyTask replacement) {
+        assert replacement != null;
+
+        this.setName(replacement.getName());
+        this.setTags(replacement.getTags());
+        this.setDone(replacement.isDone());
+        this.deadline = (Deadline) replacement.getDeadline();
+        this.startingTime = (StartingTime) replacement.getDeadline();
+    }
 }

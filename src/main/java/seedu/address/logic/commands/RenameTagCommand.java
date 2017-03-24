@@ -9,7 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskWithDeadline;
+import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -64,10 +67,18 @@ public class RenameTagCommand extends Command {
             }
 
             if (containsOldTag) {
-                // TODO: Change Task constructor to TaskWithoutDeadline() or
-                // TaskWithDeadline() based on task type
-                Task newTask = new Task(taskToEdit.getName(),
-                        new UniqueTagList(newTagList), taskToEdit.isDone());
+                Task newTask = null;
+                if (taskToEdit.getTaskType() == TaskType.TaskWithNoDeadline) {
+                    newTask = new TaskWithoutDeadline(taskToEdit.getName(),
+                            new UniqueTagList(newTagList), taskToEdit.isDone());
+                } else {
+                    try {
+                        newTask = new TaskWithDeadline(taskToEdit);
+                        newTask.setTags(new UniqueTagList(newTagList));
+                    } catch (IllegalValueException e) {
+                        System.exit(1);
+                    }
+                }
                 try {
                     model.updateTask(index, newTask);
                 } catch (UniqueTaskList.DuplicateTaskException dpe) {
