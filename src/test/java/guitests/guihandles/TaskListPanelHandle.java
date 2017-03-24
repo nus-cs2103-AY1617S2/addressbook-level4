@@ -171,7 +171,7 @@ public class TaskListPanelHandle extends GuiHandle {
                                                     .filter(p -> p.getTitle().title.equals(name))
                                                     .findAny();
         if (!task.isPresent()) {
-            throw new IllegalStateException("Name not found: " + name);
+            throw new IllegalStateException("Title not found: " + name);
         }
         return navigateToTask(task.get());
     }

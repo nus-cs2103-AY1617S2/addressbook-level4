@@ -195,8 +195,8 @@ the `LogicManager` but also the `Parser`.
 @Test
 public void execute_add_invalidArgsFormat() throws Exception {
     ...
-    assertCommandBehavior("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, location", expectedMessage);
-    assertCommandBehavior("add Valid Name p/12345 valid@email.butNoPrefix a/valid, location", expectedMessage);
+    assertCommandBehavior("add Valid Title 12345 e/valid@email.butNoPhonePrefix a/valid, location", expectedMessage);
+    assertCommandBehavior("add Valid Title p/12345 valid@email.butNoPrefix a/valid, location", expectedMessage);
     ...
 }
 ```

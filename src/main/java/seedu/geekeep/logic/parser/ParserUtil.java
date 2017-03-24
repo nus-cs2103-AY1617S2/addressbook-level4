@@ -89,7 +89,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
+     * Parses a {@code Optional<String> name} into an {@code Optional<Title>} if {@code name} is present.
      */
     public static Optional<Title> parseTitle(Optional<String> name) throws IllegalValueException {
         assert name != null;

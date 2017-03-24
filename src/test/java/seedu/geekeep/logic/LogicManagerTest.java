@@ -296,12 +296,12 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() {
         assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, location",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/not_numbers e/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/not_numbers e/01-05-17 1630 l/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Name s/01-04-17 1630 e/not_numbers l/valid, location",
+        assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers l/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Name s/01-04-17 1630 e/01-05-17 1630 l/valid, location t/invalid_-[.tag",
+                "add Valid Title s/01-04-17 1630 e/01-05-17 1630 l/valid, location t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
