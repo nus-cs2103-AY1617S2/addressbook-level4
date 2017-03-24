@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#d3d3d3, 20%);
+    -fx-background-color:  derive(#ffffff, -10%);
 }
 
 .label {
@@ -26,6 +26,7 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "LiSong Pro";
+    -fx-text-fill: white;
 }
 
 .tab-pane {
@@ -83,7 +84,8 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(black, 20%);
+    -fx-border-color: derive(black, 20%);
 }
 
 .list-cell {
@@ -282,12 +284,24 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #taskListView {
 	-fx-background-color: derive(black, 20%);
+	-fx-border-color: derive(black, 20%); 
+}
+
+#commandTextField {
+	-fx-control-inner-background: derive(black, 15%);
+	-fx-prompt-text-fill: derive(white, -10%);
+}
+
+#commandTextField, #resultDisplay {
+	-fx-control-inner-background: derive(black, 25%);
+	-fx-text-fill: derive(white, -25%);
+	-fx-border-color: derive(white, -25%); 
 }
 
 #tags {

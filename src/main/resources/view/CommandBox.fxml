@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane styleClass="anchor-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." style="-fx-border-color: white;" stylesheets="@DarkTheme.css">
+   <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." style="-fx-border-color: white;"  stylesheets="@DarkTheme.css">
       <font>
          <Font name="LiSong Pro" size="13.0" />
       </font></TextField>
