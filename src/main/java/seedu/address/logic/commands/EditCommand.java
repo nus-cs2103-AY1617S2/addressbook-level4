@@ -37,8 +37,10 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredPersonListIndex
+     *            the index of the person in the filtered person list to edit
+     * @param editPersonDescriptor
+     *            details to edit the person with
      */
     public EditCommand(int filteredPersonListIndex, EditPersonDescriptor editPersonDescriptor) {
         assert filteredPersonListIndex > 0;
@@ -71,18 +73,18 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of
+     * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(ReadOnlyPerson personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
         Date updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
         StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
-        //Address updatedAddress = editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
+        // Address updatedAddress =
+        // editPersonDescriptor.getAddress().orElseGet(personToEdit::getAddress);
         Group updatedGroup = editPersonDescriptor.getGroup().orElseGet(personToEdit::getGroup);
         UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
 
@@ -90,19 +92,20 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value
+     * will replace the corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
         private Optional<Date> date = Optional.empty();
         private Optional<StartDate> sdate = Optional.empty();
         private Optional<Email> email = Optional.empty();
-        //private Optional<Address> address = Optional.empty();
+        // private Optional<Address> address = Optional.empty();
         private Optional<Group> group = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
@@ -137,7 +140,7 @@ public class EditCommand extends Command {
         public Optional<Date> getDate() {
             return date;
         }
-        
+
         public void setStartDate(Optional<StartDate> sdate) {
             assert sdate != null;
             this.sdate = sdate;
@@ -156,18 +159,18 @@ public class EditCommand extends Command {
             return email;
         }
 
-//        public void setAddress(Optional<Address> address) {
-//            assert address != null;
-//            this.address = address;
-//        }
+        // public void setAddress(Optional<Address> address) {
+        // assert address != null;
+        // this.address = address;
+        // }
         public void setGroup(Optional<Group> group) {
             assert group != null;
             this.group = group;
         }
 
-//        public Optional<Address> getAddress() {
-//            return address;
-//        }
+        // public Optional<Address> getAddress() {
+        // return address;
+        // }
         public Optional<Group> getGroup() {
             return group;
         }

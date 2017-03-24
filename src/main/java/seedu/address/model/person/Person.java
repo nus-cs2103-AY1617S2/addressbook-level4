@@ -6,8 +6,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a Person in the address book. Guarantees: details are present and
+ * not null, field values are validated.
  */
 public class Person implements ReadOnlyPerson {
 
@@ -29,14 +29,16 @@ public class Person implements ReadOnlyPerson {
         this.sdate = sdate;
         this.email = email;
         this.group = group;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
     }
 
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getDate(), source.getStartDate(), source.getEmail(), source.getGroup(), source.getTags());
+        this(source.getName(), source.getDate(), source.getStartDate(), source.getEmail(), source.getGroup(),
+                source.getTags());
     }
 
     public void setName(Name name) {
@@ -119,13 +121,14 @@ public class Person implements ReadOnlyPerson {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                        && this.isSameStateAs((ReadOnlyPerson) other));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date,sdate, email, group, tags);
+        // use this method for custom fields hashing instead of implementing
+        // your own
+        return Objects.hash(name, date, sdate, email, group, tags);
     }
 
     @Override
