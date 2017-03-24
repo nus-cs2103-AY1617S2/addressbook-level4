@@ -3,6 +3,7 @@ package seedu.task.model.task;
 import java.util.Date;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.MiscDateUtil;
 
 //@@author A0146789H
 /**
@@ -49,7 +50,7 @@ public class StartTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StartTime // instanceof handles nulls
-                        && this.value.equals(((StartTime) other).value)); // state check
+                        && MiscDateUtil.compareDatesFuzzy(this.value, ((StartTime) other).value, 1000)); // state check
     }
 
     @Override

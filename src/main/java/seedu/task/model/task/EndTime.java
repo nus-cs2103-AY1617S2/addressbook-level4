@@ -3,6 +3,7 @@ package seedu.task.model.task;
 import java.util.Date;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.MiscDateUtil;
 
 /**
  * Represents a Task's end time in the task manager.
@@ -48,7 +49,7 @@ public class EndTime {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
-                        && this.value.equals(((EndTime) other).value)); // state check
+                        && MiscDateUtil.compareDatesFuzzy(this.value, ((EndTime) other).value, 1000)); // state check
     }
 
     @Override

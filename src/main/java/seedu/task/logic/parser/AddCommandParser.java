@@ -26,7 +26,7 @@ import seedu.task.model.UndoManager;
 public class AddCommandParser {
 
     private static final String ARGUMENTS_PATTERN =
-            "^(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+to\\s+(?<enddate>.+?))?(?<tags>(?:\\s+#\\w+)+)?$";
+            "^(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+(?:to|by)\\s+(?<enddate>.+?))?(?<tags>(?:\\s+#\\w+)+)?$";
     private static final Pattern ARGUMENTS_FORMAT = Pattern.compile(ARGUMENTS_PATTERN, Pattern.CASE_INSENSITIVE);
 
     private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
@@ -54,6 +54,8 @@ public class AddCommandParser {
             if (!matcher.matches()) {
                 throw new NoSuchElementException();
             }
+
+            assert !args.isEmpty();
 
             taskName = matcher.group("description");
             startDateString = Optional.ofNullable(matcher.group("startdate")).orElse("");

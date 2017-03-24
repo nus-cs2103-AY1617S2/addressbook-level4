@@ -10,7 +10,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
@@ -24,6 +27,13 @@ import seedu.task.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
+
+    private static final String ARGUMENTS_PATTERN =
+            "^(?<index>\\d+)\\s+(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+(?:to|by)\\s+(?<enddate>.+?))?$";
+    private static final Pattern ARGUMENTS_FORMAT = Pattern.compile(ARGUMENTS_PATTERN, Pattern.CASE_INSENSITIVE);
+
+    private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
+    private static final String logPrefix = "[EditCommandParser]";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
