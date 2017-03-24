@@ -26,7 +26,7 @@ import seedu.task.model.UndoManager;
 public class AddCommandParser {
 
     private static final String ARGUMENTS_PATTERN =
-            "^(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+to\\s+(?<enddate>.+?))?$";
+            "^(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+to\\s+(?<enddate>.+?))?(?<tags>(?:\\s+#\\w+)+)$";
     private static final Pattern ARGUMENTS_FORMAT = Pattern.compile(ARGUMENTS_PATTERN, Pattern.CASE_INSENSITIVE);
 
     private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
@@ -42,6 +42,7 @@ public class AddCommandParser {
         String taskName;
         String startDateString;
         String endDateString;
+        String tagsString;
         Date startDate = null;
         Date endDate = null;
 
@@ -57,10 +58,11 @@ public class AddCommandParser {
             taskName = matcher.group("description");
             startDateString = Optional.ofNullable(matcher.group("startdate")).orElse("");
             endDateString = Optional.ofNullable(matcher.group("enddate")).orElse("");
+            tagsString = Optional.ofNullable(matcher.group("tags").trim()).orElse("");
 
             // Log tokens for debugging.
-            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s'", logPrefix,
-                    taskName, startDateString, endDateString));
+            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s', tags: '%s'", logPrefix,
+                    taskName, startDateString, endDateString, tagsString));
 
             // Convert the String to Date objects
             startDate = NattyDateUtil.parseSingleDate(startDateString);
@@ -73,6 +75,14 @@ public class AddCommandParser {
             if (endDate != null) {
                 logger.info(String.format("%s endDate: %s", logPrefix, endDate.toString()));
             }
+
+            // Add each tag to the tag set.
+            for (String i : tagsString.split("\\s+")) {
+                tagSet.add(i.substring(1));
+            }
+
+            // Log the tags
+            logger.info(String.format("%s tagSet: %s", logPrefix, tagSet.toString()));
 
             // Add the undo entry after successfully parsing an AddCommand
             UndoManager.pushCommand(AddCommand.COMMAND_WORD);

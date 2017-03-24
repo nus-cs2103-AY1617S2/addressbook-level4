@@ -76,4 +76,29 @@ public class ParserTest {
         assertTrue(name.fullName.equals("Test Task"));
         // TODO: Add the assertions to compare dates
     }
+
+    @Test
+    public void parser_add_floatingTaskWithTags() {
+        String commandString = "add Test Task #one #two";
+        Command result = this.parser.parseCommand(commandString);
+        assertTrue(result instanceof AddCommand);
+        AddCommand added = (AddCommand) result;
+        Task toAdd = added.getToAdd();
+        Name name = toAdd.getName();
+        assertTrue(name.fullName.equals("Test Task"));
+        // TODO: Add the assertions to check the tags
+    }
+
+    @Test
+    public void parser_add_basicTaskWithTags() {
+        String commandString = "add Test Task from 03/24/17 to 03/25/17 #one #two #three";
+        Command result = this.parser.parseCommand(commandString);
+        assertTrue(result instanceof AddCommand);
+        AddCommand added = (AddCommand) result;
+        Task toAdd = added.getToAdd();
+        Name name = toAdd.getName();
+        assertTrue(name.fullName.equals("Test Task"));
+        // TODO: Add the assertions to compare dates
+        // TODO: Add the assertions to check the tags
+    }
 }
