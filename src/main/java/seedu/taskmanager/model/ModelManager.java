@@ -83,7 +83,17 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    // @@author A0131278H
+    @Override
+    public void sortTasks(String keyword) {
+        taskManager.sortByDate(keyword);
+        updateFilteredListToShowAll();
+        indicateTaskManagerChanged();
+    }
+    // @@author
+
+    // =========== Filtered Task List Accessors
+    // =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -104,7 +114,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering
+    // =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -155,7 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
             boolean hasTag = false;
             UniqueTagList tagList = task.getTags();
             for (Tag tag : tagList) {
-            	hasTag = hasTag || nameKeyWords.stream()
+                hasTag = hasTag || nameKeyWords.stream()
                         .filter(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword))
                         .findAny()
                         .isPresent();

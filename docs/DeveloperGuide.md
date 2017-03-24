@@ -364,6 +364,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | mark a task as done | mark tasks as done and become part of history
 `* * *` | user | undo an action | undo action if I made a mistake in making an entry
 `* *` | user | rank tasks by deadlines | prioritise tasks I need to do
+`* *` | user | rank tasks by start dates | schedule tasks accordingly
 `* *` | user | see a walkthorough | know the features and how to use the App
 `* *` | user | create clickable links in tasks | Access important links quickly from task description
 `* *` | user | delete date/time on multiple-timings task | remove one or more timings on a certain task I no longer need
@@ -377,8 +378,6 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | advanced user | create subtasks within a task | break down complicated tasks into smaller ones
 `*` | user | find tasks in relation to collaborators | find tasks related to a person and possibly combine a few tasks in a meeting
 `*` | user with many tasks | see graphical overview of tasks | plan better
-
-{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -565,7 +564,20 @@ Use case ends.
 > 4a1. TaskManager shows that undo is successful <br>
   Use case ends
 
-{More to be added}
+#### Use case: UC08 - Sort tasks by their start dates
+
+**MSS**
+
+1. User requests to sort tasks by start dates
+2. TaskManager shows a sorted list of tasks according to their start dates in ascending order
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager asks for the correct input <br>
+  Use case resumes at step 1
 
 ## Appendix C : Non Functional Requirements
 

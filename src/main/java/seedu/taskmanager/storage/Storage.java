@@ -3,6 +3,7 @@ package seedu.taskmanager.storage;
 import java.io.IOException;
 import java.util.Optional;
 
+import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
@@ -35,4 +36,6 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+
+    void updateTaskManagerStorageDirectory(String newFilePath, Config newConfig);
 }

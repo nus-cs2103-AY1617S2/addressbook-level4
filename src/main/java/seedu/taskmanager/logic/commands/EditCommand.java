@@ -28,18 +28,23 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)"
             + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [#TAG]...\n"
-            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD + " 1 s/23/05/2017 d/Go to John's house instead";
+            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD
+            + " 1 s/23/05/2017 d/Go to John's house instead";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-
+    // @@author A0140032E
+    public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
+    // @@author
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor
+     *            details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
@@ -62,6 +67,11 @@ public class EditCommand extends Command {
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
+        // @@author A0140032E
+        if (editedTask.getStartDate().after(editedTask.getEndDate())) {
+            throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+        }
+        // @@author
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
@@ -89,8 +99,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         private Optional<Title> title = Optional.empty();
@@ -99,7 +109,8 @@ public class EditCommand extends Command {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             this.title = toCopy.getTitle();
