@@ -3,6 +3,7 @@ package seedu.address;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -72,7 +73,12 @@ public class MainApp extends Application {
     }
 
     private String getApplicationParameter(String parameterName) {
-        Map<String, String> applicationParameters = getParameters().getNamed();
+        Map<String, String> applicationParameters;
+        try {
+            applicationParameters = getParameters().getNamed();
+        } catch (Exception e) {
+            applicationParameters = new ConcurrentHashMap<String, String>();
+        }
         return applicationParameters.get(parameterName);
     }
 
