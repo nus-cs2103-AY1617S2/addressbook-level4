@@ -1,7 +1,6 @@
 package seedu.ezdo.commons.events.model;
 
 import seedu.ezdo.commons.events.BaseEvent;
-import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
 /** Indicates that the SortCriteria in the model has changed */
