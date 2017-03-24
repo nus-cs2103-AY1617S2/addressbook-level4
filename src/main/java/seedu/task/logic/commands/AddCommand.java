@@ -15,6 +15,7 @@ import seedu.task.model.task.StartTime;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
+//@@author A0146789H
 /**
  * Adds a task to the task manager.
  */
@@ -40,7 +41,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, String startDate, String endDate, String completionStatus, Set<String> tags)
+    public AddCommand(String name, String startDate, String endDate, boolean completionStatus, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -50,11 +51,20 @@ public class AddCommand extends Command {
                 new Name(name),
                 new StartTime(startDate),
                 new EndTime(endDate),
-                new CompletionStatus(Boolean.valueOf(completionStatus)),
+                new CompletionStatus(completionStatus),
                 new UniqueTagList(tagSet)
                 );
     }
 
+    //@@author A0146789H
+    /**
+     * @return the task to be added
+     */
+    public Task getToAdd() {
+        return toAdd;
+    }
+
+    //@@author
     /**
      * Creates an AddCommand using raw values.
      *

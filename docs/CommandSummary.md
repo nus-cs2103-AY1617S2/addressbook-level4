@@ -1,3 +1,7 @@
+# Example Commands
+
+## From the User Guide
+
 ```
 help
 add DESCRIPTION TAGLIST reminders: FREQUENCY
@@ -25,4 +29,12 @@ saveto PATH
 loadfrom PATH
 sort by PROPERTY
 exit
+```
+
+## Sample Commands
+
+### add
+
+```
+add Test Task
 ```

@@ -46,7 +46,7 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
-        logger.info(logPrefix + " Raw User Input: " + userInput);
+        logger.info(logPrefix + " Raw User Input: '" + userInput + "'");
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -54,10 +54,10 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
 
-        logger.info(logPrefix + " Command Word: " + commandWord);
-        logger.info(logPrefix + " Arguments: " + arguments);
+        logger.info(logPrefix + " Command Word: '" + commandWord + "'");
+        logger.info(logPrefix + " Arguments: '" + arguments + "'");
 
         switch (commandWord) {
 

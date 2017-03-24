@@ -1,16 +1,19 @@
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_COMPLETIONSTATUS;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_STARTDATE;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.NattyDateUtil;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -22,34 +25,53 @@ import seedu.task.model.UndoManager;
  */
 public class AddCommandParser {
 
+    private static final String ARGUMENTS_PATTERN =
+            "^(?<description>.+?)(?:\\s+from\\s+(?<startdate>.+?))?(?:\\s+to\\s+(?<enddate>.+?))?$";
+    private static final Pattern ARGUMENTS_FORMAT = Pattern.compile(ARGUMENTS_PATTERN, Pattern.CASE_INSENSITIVE);
+
+    private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
+    private static final String logPrefix = "[AddCommandParser]";
+
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      */
     public Command parse(String args) {
 
-        try {
-            ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_COMPLETIONSTATUS, PREFIX_TAG);
-            argsTokenizer.tokenize(args);
+        String taskName;
+        String startDateString;
+        String endDateString;
+        Date startDate = null;
+        Date endDate = null;
 
-            String taskName = argsTokenizer.getPreamble().get();
-            String startDate = "";
-            String endDate = "";
-            String completionStatus = "false";
-            Set<String> tagSet = new HashSet<String>();
-            System.out.println(args);
-            if (args.contains("s/")) {
-                startDate = argsTokenizer.getValue(PREFIX_STARTDATE).get();
+        Set<String> tagSet = new HashSet<String>();
+
+        try {
+            // Extract the tokens from the argument string.
+            final Matcher matcher = ARGUMENTS_FORMAT.matcher(args);
+            if (!matcher.matches()) {
+                throw new NoSuchElementException();
             }
-            if (args.contains("e/")) {
-                endDate = argsTokenizer.getValue(PREFIX_ENDDATE).get();
+
+            taskName = matcher.group("description");
+            startDateString = Optional.ofNullable(matcher.group("startdate")).orElse("");
+            endDateString = Optional.ofNullable(matcher.group("enddate")).orElse("");
+
+            // Log tokens for debugging.
+            logger.info(String.format("%s taskName: '%s', startDateString: '%s', endDateString: '%s'", logPrefix,
+                    taskName, startDateString, endDateString));
+
+            // Convert the String to Date objects
+            startDate = NattyDateUtil.parseSingleDate(startDateString);
+            endDate = NattyDateUtil.parseSingleDate(endDateString);
+
+            // Log the dates for debugging.
+            if (startDate != null) {
+                logger.info(String.format("%s startDate: %s", logPrefix, startDate.toString()));
             }
-            if (args.contains("c/")) {
-                completionStatus = argsTokenizer.getValue(PREFIX_COMPLETIONSTATUS).get();
-            }
-            if (args.contains("#")) {
-                tagSet = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+            if (endDate != null) {
+                logger.info(String.format("%s endDate: %s", logPrefix, endDate.toString()));
             }
 
             // Add the undo entry after successfully parsing an AddCommand
@@ -57,11 +79,12 @@ public class AddCommandParser {
 
             return new AddCommand(
                     taskName,
-                    startDate,
-                    endDate,
-                    completionStatus,
+                    startDateString,
+                    endDateString,
+                    false,
                     tagSet);
         } catch (NoSuchElementException nsee) {
+            // TODO: This needs to be changed to the default case of search.
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
