@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.util.DateTimeUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.TagParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
@@ -87,10 +88,10 @@ public class AddTaskController extends Controller {
         } else {
             task = new Task(description);
         }
-        if (taskPriority != null) {
+        if (StringUtil.isPresent(taskPriority)) {
             task.setTaskPriority(taskPriority);
         }
-        if (recurringFrequency != null) {
+        if (StringUtil.isPresent(recurringFrequency)) {
             if (recurringUntilEndDate == null) {
                 task.setRecurring(recurringFrequency);
             } else {

@@ -18,6 +18,7 @@ public class TaskTokenizer {
     public static final String TASK_PRIORITY_KEYWORD = "priority/";
     public static final String TASK_RECURRING_FREQUENCY_KEYWORD = "repeat/";
     public static final String TASK_RECURRING_UNTIL_END_DATE = "until/";
+    public static final String TASK_STOP_RECURRING_KEYWORD = "stoprepeating/";
 
     public static HashMap<String, String> tokenize(String commandTemplate, String commandArgs,
             boolean hasIndex, boolean hasDescription) {
@@ -40,7 +41,8 @@ public class TaskTokenizer {
                                                             TASK_FLOATING_KEYWORD,
                                                             TASK_PRIORITY_KEYWORD,
                                                             TASK_RECURRING_FREQUENCY_KEYWORD,
-                                                            TASK_RECURRING_UNTIL_END_DATE);
+                                                            TASK_RECURRING_UNTIL_END_DATE,
+                                                            TASK_STOP_RECURRING_KEYWORD);
             tokens.putAll(descriptionTokens);
         }
         return tokens;

@@ -166,7 +166,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isRecurring() {
-        return !isFloatingTask() && recurringEndDateTime != null && recurringFrequency != null;
+        return !isFloatingTask() && recurringFrequency != null;
     }
 
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
@@ -290,6 +290,29 @@ public class Task implements Comparable<Task> {
         }
     }
 
+    public void setRecurringFrequency(String recurringFrequencyString) {
+        setRecurringFrequency(getRecurringFrequency(recurringFrequencyString));
+    }
+
+    public void setRecurringFrequency(RecurringFrequency recurringFrequency) {
+        if (this.isFloatingTask()) {
+            throw new IllegalArgumentException("Floating task cannot be recurring.");
+        }
+        if (this.isRecurring()) {
+            this.recurringFrequency = recurringFrequency;
+        } else {
+            setRecurring(recurringFrequency);
+        }
+    }
+
+    public void setRecurringEndDateTime(LocalDateTime recurringEndDateTime) {
+        if (this.isRecurring()) {
+            this.recurringEndDateTime = recurringEndDateTime;
+        } else {
+            throw new IllegalArgumentException("Non-recurring task cannot have recurring until end date.");
+        }
+    }
+
     public void setRecurring(String recurringFrequencyString) {
         setRecurring(getRecurringFrequency(recurringFrequencyString));
     }
@@ -325,9 +348,14 @@ public class Task implements Comparable<Task> {
      * @return new recurring task
      * @throws CloneNotSupportedException
      */
-    public Task getNextRecurringTask() throws CloneNotSupportedException {
+    public Task getNextRecurringTask() {
         assert this.isRecurring();
-        Task task = (Task) this.clone();
+        Task task;
+        try {
+            task = (Task) this.clone();
+        } catch (CloneNotSupportedException cloneNotSupportedException) {
+            throw new RuntimeException("Task cannot be cloned.");
+        }
         task.setCompleted(false);
         task.setStartDateTime(getNextRecurringDateTime(this.getStartDateTime()));
         task.setEndDateTime(getNextRecurringDateTime(this.getEndDateTime()));
