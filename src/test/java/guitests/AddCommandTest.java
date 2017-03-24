@@ -52,7 +52,8 @@ public class AddCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList) throws DuplicateCategoryException, IllegalValueException {
+    private void assertAddSuccess(boolean isShortCommand, TestTask taskToAdd, TestTask... currentList) throws DuplicateCategoryException,
+                    IllegalValueException {
         if (isShortCommand) {
             commandBox.runCommand(taskToAdd.getShortAddCommand());
         } else {
