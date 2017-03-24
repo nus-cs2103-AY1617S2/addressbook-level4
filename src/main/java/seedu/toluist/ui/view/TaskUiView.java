@@ -21,7 +21,7 @@ public class TaskUiView extends UiView {
     private static final String CLOCK_ICON_IMAGE_PATH = "/images/clock.png";
     private static final String OVERDUE_ICON_IMAGE_PATH = "/images/warning.png";
     private static final String HIGH_PRIORITY_ICON_IMAGE_PATH = "/images/star.png";
-    private static final String RECURRING_ICON_IMAGE_PATH = "/images/clock.png";
+    private static final String RECURRING_ICON_IMAGE_PATH = "/images/recurring_icon.png";
     private static final String COMPLETED_STYLE_CLASS = "completed";
     private static final String OVERDUE_STYLE_CLASS = "overdue";
     private static final double STATUS_BOX_SPACING_VALUE = 10.0;

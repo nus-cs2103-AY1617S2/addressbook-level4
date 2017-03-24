@@ -27,6 +27,10 @@ public class DateTimeFormatterUtil {
     public static final String FORMAT_TIME = "hh:mm a";
     public static final String DATE_TIME_SEPARATOR = ", ";
     public static final String RECURRING_DATE_SEPARATOR = " ";
+    public static final String SUFFIX_FIRST = "st";
+    public static final String SUFFIX_SECOND = "nd";
+    public static final String SUFFIX_THIRD = "rd";
+    public static final String SUFFIX_FOURTH_ONWARDS = "th";
 
     /**
      * Format task deadline
@@ -169,17 +173,17 @@ public class DateTimeFormatterUtil {
 
     private static String getDayNumberSuffix(int day) {
         if (day >= 11 && day <= 13) {
-            return "th";
+            return SUFFIX_FOURTH_ONWARDS;
         }
         switch (day % 10) {
         case 1:
-            return "st";
+            return SUFFIX_FIRST;
         case 2:
-            return "nd";
+            return SUFFIX_SECOND;
         case 3:
-            return "rd";
+            return SUFFIX_THIRD;
         default:
-            return "th";
+            return SUFFIX_FOURTH_ONWARDS;
         }
     }
 }
