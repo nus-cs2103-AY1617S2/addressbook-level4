@@ -23,23 +23,23 @@ public class SortCommandTest extends TaskBossGuiTest {
     @Test
     public void sort() {
         // Equivalence partition: sort by end date time
-        TestTask[] expectedList = new TestTask[] {td.carl, td.elle, td.alice,
-            td.daniel, td.benson, td.george, td.fiona};
+        TestTask[] expectedList = new TestTask[] {td.taskC, td.taskE, td.taskA,
+            td.taskD, td.taskB, td.taskG, td.taskF};
         assertSortSuccess(false, expectedList, "ed");
 
         // EP: sort by start date time
-        TestTask[] expectedList2 = new TestTask[] {td.george, td.alice, td.carl,
-            td.daniel, td.fiona, td.elle, td.benson};
+        TestTask[] expectedList2 = new TestTask[] {td.taskG, td.taskA, td.taskC,
+            td.taskD, td.taskF, td.taskE, td.taskB};
         assertSortSuccess(false, expectedList2, "sd");
 
         // EP: sort by end date time short command
-        TestTask[] expectedList3 = new TestTask[] {td.carl, td.elle, td.alice,
-            td.daniel, td.benson, td.george, td.fiona};
+        TestTask[] expectedList3 = new TestTask[] {td.taskC, td.taskE, td.taskA,
+            td.taskD, td.taskB, td.taskG, td.taskF};
         assertSortSuccess(true, expectedList3, "ed");
 
         // EP: sort by priority short command
-        TestTask[] expectedList4 = new TestTask[] {td.carl, td.alice, td.daniel,
-            td.george, td.elle, td.benson, td.fiona};
+        TestTask[] expectedList4 = new TestTask[] {td.taskC, td.taskA, td.taskD,
+            td.taskG, td.taskE, td.taskB, td.taskF};
         assertSortSuccess(true, expectedList4, "p");
 
         // EP: invalid sort command
