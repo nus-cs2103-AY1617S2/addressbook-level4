@@ -132,7 +132,7 @@ _Figure 3.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
