@@ -3,6 +3,8 @@ package seedu.ezdo.model;
 import java.util.Objects;
 
 import seedu.ezdo.commons.core.GuiSettings;
+import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 
 /**
  * Represents User's preferences.
@@ -10,6 +12,7 @@ import seedu.ezdo.commons.core.GuiSettings;
 public class UserPrefs {
 
     public GuiSettings guiSettings;
+    public SortCriteria sortCriteria;
 
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
@@ -21,6 +24,7 @@ public class UserPrefs {
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
+        this.sortCriteria = UniqueTaskList.SortCriteria.NAME;
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {
