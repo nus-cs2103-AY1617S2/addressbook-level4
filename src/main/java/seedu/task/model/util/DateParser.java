@@ -7,12 +7,12 @@ import seedu.task.commons.exceptions.IllegalValueException;
 
 public class DateParser {
     public static final String DATE_STRING_ILLEGAL_FORMAT =
-            "String must be of the form YYYY/MM/DD HHMM";
+            "String must be of the form DD/MM/YYYY HHMM";
     public static final String DATE_ILLEGAL_DATE = "The given date is not valid";
 
     private static final int DEFAULT_SECONDS = 0;
     private static final int DEFAULT_MILLISECONDS = 0;
-    private static final String DATE_STRING_VALIDATION_REGEX = "[0-9]{4}/[0-1][0-9]/[0-3][0-9] [0-2][0-9][0-5][0-9]";
+    private static final String DATE_STRING_VALIDATION_REGEX = "[0-3][0-9]/[0-1][0-9]/[0-9]{4} [0-2][0-9][0-5][0-9]";
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
 
@@ -48,7 +48,7 @@ public class DateParser {
         int hour = date.get(Calendar.HOUR_OF_DAY);
         int minute = date.get(Calendar.MINUTE);
 
-        dateString = String.format("%4d/%02d/%02d %02d%02d", year, month + MONTH_OFFSET, day, hour, minute);
+        dateString = String.format("%02d/%02d/%4d %02d%02d", day, month + MONTH_OFFSET, year, hour, minute);
 
         return dateString;
     }
@@ -75,15 +75,15 @@ public class DateParser {
     }
 
     private static int getYear(String date) {
-        return Integer.parseInt(date.substring(0,  4));
+        return Integer.parseInt(date.substring(6, 10));
     }
 
     private static int getMonth(String date) {
-        return Integer.parseInt(date.substring(5,  7)) - MONTH_OFFSET;
+        return Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
     }
 
     private static int getDay(String date) {
-        return Integer.parseInt(date.substring(8, 10));
+        return Integer.parseInt(date.substring(0, 2));
     }
 
     private static int getHour(String date) {
