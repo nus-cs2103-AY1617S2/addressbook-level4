@@ -47,4 +47,13 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
+    /** Updates the filter of the filtered task list to filter by given completion */
+    void updateFilteredListToShowCompletion(boolean isComplete);
+
+    /** Updates the filter of the filtered task list to sort by id */
+    void updateFilteredListToSortById();
+
+    /** Updates the filter of the filtered task list to sort by due */
+    void updateFilteredListToSortByDue();
+
 }

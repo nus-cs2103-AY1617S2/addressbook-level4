@@ -61,7 +61,6 @@ public abstract class CompletionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.updateFilteredListToShowAll();
         return new CommandResult(String.format(messageCompleteTaskSuccess, taskToComplete));
     }
 
