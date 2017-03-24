@@ -3,9 +3,11 @@ package seedu.task.logic.parser;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.CheckCommand;
 import seedu.task.logic.commands.ClearCommand;
@@ -27,10 +29,16 @@ import seedu.task.model.UndoManager;
  */
 public class Parser {
 
+    //@@author A0146789H
     /**
      * Used for initial separation of command word and args.
+     * Allows for case insensitive matching.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)",
+            Pattern.CASE_INSENSITIVE);
+
+    private static final Logger logger = LogsCenter.getLogger(Parser.class);
+    private static final String logPrefix = "[PARSER]";
 
     /**
      * Parses user input into command for execution.
@@ -39,6 +47,8 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
+        logger.info(logPrefix + " Raw User Input: " + userInput);
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -46,6 +56,10 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        logger.info(logPrefix + " Command Word: " + commandWord);
+        logger.info(logPrefix + " Arguments: " + arguments);
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
