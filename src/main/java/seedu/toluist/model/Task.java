@@ -13,10 +13,6 @@ import seedu.toluist.commons.util.DateTimeUtil;
 public class Task implements Comparable<Task> {
     private static final String HIGH_PRIORITY_STRING = "high";
     private static final String LOW_PRIORITY_STRING = "low";
-    private static final String RECUR_DAILY_STRING = "daily";
-    private static final String RECUR_WEEKLY_STRING = "weekly";
-    private static final String RECUR_MONTHLY_STRING = "monthly";
-    private static final String RECUR_YEARLY_STRING = "yearly";
 
     // List of tags is unique
     private TreeSet<Tag> allTags = new TreeSet<>();
@@ -165,7 +161,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isRecurring() {
-        return !isFloatingTask() && recurringFrequency != null;
+        return endDateTime != null && recurringFrequency != null;
     }
 
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {
@@ -283,17 +279,10 @@ public class Task implements Comparable<Task> {
     }
 
     public RecurringFrequency toRecurringFrequency(String recurringFrequencyString) {
-        switch (recurringFrequencyString.toLowerCase()) {
-        case RECUR_DAILY_STRING:
-            return RecurringFrequency.DAILY;
-        case RECUR_WEEKLY_STRING:
-            return RecurringFrequency.WEEKLY;
-        case RECUR_MONTHLY_STRING:
-            return RecurringFrequency.MONTHLY;
-        case RECUR_YEARLY_STRING:
-            return RecurringFrequency.YEARLY;
-        default:
-            return null;
+        try {
+            return RecurringFrequency.valueOf(recurringFrequencyString.toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException exception) {
+            throw new IllegalArgumentException("Invalid recurring frequency string");
         }
     }
 
@@ -302,6 +291,7 @@ public class Task implements Comparable<Task> {
     }
 
     public void setRecurringFrequency(RecurringFrequency recurringFrequency) {
+        // This is to prevent setting a recurring floating task.
         if (isFloatingTask()) {
             throw new IllegalArgumentException("Floating task cannot be recurring.");
         }
@@ -334,7 +324,7 @@ public class Task implements Comparable<Task> {
 
     public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency) {
         if (recurringFrequency == null) {
-            throw new IllegalArgumentException("Recurring task must a"
+            throw new IllegalArgumentException("Recurring task must have a"
                     + " frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
         } else if (isFloatingTask()) {
             throw new IllegalArgumentException("Floating task cannot be recurring task,"

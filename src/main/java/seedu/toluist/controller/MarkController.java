@@ -48,14 +48,14 @@ public class MarkController extends Controller {
             return;
         }
 
-        TodoList todoList = TodoList.getInstance();
         CommandResult commandResult;
         if (Objects.equals(markTypeToken, MARK_INCOMPLETE)) {
-            commandResult = mark(todoList, indexes, false);
+            commandResult = mark(indexes, false);
         } else {
-            commandResult = mark(todoList, indexes, true);
+            commandResult = mark(indexes, true);
         }
 
+        TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE));
         }
@@ -63,11 +63,12 @@ public class MarkController extends Controller {
         uiStore.setCommandResult(commandResult);
     }
 
-    private CommandResult mark(TodoList todoList, List<Integer> taskIndexes, boolean isCompleted) {
+    private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
         ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
-            if (task.isRecurring() && (task.getRecurringEndDateTime() == null
-                    || task.getNextRecurringDateTime(task.getEndDateTime()).isBefore(task.getRecurringEndDateTime()))) {
+            if (task.isRecurring()
+                && (task.getRecurringEndDateTime() == null
+                || task.getNextRecurringDateTime(task.getEndDateTime()).isBefore(task.getRecurringEndDateTime()))) {
                 task.updateToNextRecurringTask();
             } else {
                 task.setCompleted(isCompleted);

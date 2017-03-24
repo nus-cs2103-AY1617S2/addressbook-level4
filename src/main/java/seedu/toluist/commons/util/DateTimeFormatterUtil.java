@@ -79,7 +79,7 @@ public class DateTimeFormatterUtil {
         }
         if (recurringEndDateTime != null) {
             formattedResult += RECURRING_DATE_SEPARATOR + UNTIL
-                    + RECURRING_DATE_SEPARATOR + formatDate(recurringEndDateTime);
+                             + RECURRING_DATE_SEPARATOR + formatDate(recurringEndDateTime);
         }
         return formattedResult;
     }
@@ -96,7 +96,8 @@ public class DateTimeFormatterUtil {
             if (formatTime(from).equals(formatTime(to))) {
                 formattedResult += RECURRING_DATE_SEPARATOR + formatTime(from);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatTime(from) + RECURRING_DATE_SEPARATOR + TO
+                formattedResult += RECURRING_DATE_SEPARATOR + formatTime(from)
+                                 + RECURRING_DATE_SEPARATOR + TO
                                  + RECURRING_DATE_SEPARATOR + formatTime(to);
             }
             break;
@@ -105,7 +106,8 @@ public class DateTimeFormatterUtil {
             if (formatDayOfWeek(from).equals(formatDayOfWeek(to))) {
                 formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfWeek(from);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfWeek(from) + RECURRING_DATE_SEPARATOR + TO
+                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfWeek(from)
+                                 + RECURRING_DATE_SEPARATOR + TO
                                  + RECURRING_DATE_SEPARATOR + formatDayOfWeek(to);
             }
             break;
@@ -114,7 +116,8 @@ public class DateTimeFormatterUtil {
             if (formatDayOfMonth(from).equals(formatDayOfMonth(to))) {
                 formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfMonth(from);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfMonth(from) + RECURRING_DATE_SEPARATOR + TO
+                formattedResult += RECURRING_DATE_SEPARATOR + formatDayOfMonth(from)
+                                 + RECURRING_DATE_SEPARATOR + TO
                                  + RECURRING_DATE_SEPARATOR + formatDayOfMonth(to);
             }
             break;
@@ -123,7 +126,8 @@ public class DateTimeFormatterUtil {
             if (formatDateOfYear(from).equals(formatDateOfYear(to))) {
                 formattedResult += RECURRING_DATE_SEPARATOR + formatDateOfYear(from);
             } else {
-                formattedResult += RECURRING_DATE_SEPARATOR + formatDateOfYear(from) + RECURRING_DATE_SEPARATOR + TO
+                formattedResult += RECURRING_DATE_SEPARATOR + formatDateOfYear(from)
+                                 + RECURRING_DATE_SEPARATOR + TO
                                  + RECURRING_DATE_SEPARATOR + formatDateOfYear(to);
             }
             break;
@@ -132,7 +136,7 @@ public class DateTimeFormatterUtil {
         }
         if (recurringEndDateTime != null) {
             formattedResult += RECURRING_DATE_SEPARATOR + UNTIL
-                    + RECURRING_DATE_SEPARATOR + formatDate(recurringEndDateTime);
+                             + RECURRING_DATE_SEPARATOR + formatDate(recurringEndDateTime);
         }
         return formattedResult;
     }
