@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -53,19 +52,14 @@ public class EditCommandParser {
                     MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         this.args = indexAndArguments[1];
-        String tags[] = {};
-
-        // find and remove tags
-        String tagsString = getArgument(CliSyntax.TAGS);
-        if (tagsString != null) {
-            tags = tagsString.split("\\s+");
-            try {
-                editTaskDescriptor.setTags(parseTagsForEdit(
-                        new HashSet<String>(Arrays.asList(tags))));
-            } catch (IllegalValueException e) {
-                return new IncorrectCommand(e.getMessage());
-            }
+        String tags[] = getTags();
+        try {
+            editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(tags)));
+        } catch (IllegalValueException e1) {
+            return new IncorrectCommand(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+        // find and remove tags
 
         // find and remove starting time and deadline if the syntax is "<name>
         // from <starting time> to <deadline>"
@@ -92,6 +86,18 @@ public class EditCommandParser {
         }
         return new EditCommand(logic.parseUIIndex(index.get()),
                 editTaskDescriptor);
+    }
+
+    private String[] getTags() {
+        Pattern pattern = Pattern.compile(CliSyntax.TAGS);
+        Matcher matcher = pattern.matcher(args);
+        ArrayList<String> tags = new ArrayList<String>();
+        while (matcher.find()) {
+            assert matcher.group().length() > 0;
+            tags.add(matcher.group().trim().substring(1));
+        }
+        args = matcher.replaceAll("");
+        return (tags.toArray(new String[0]));
     }
 
     private String getArgument(String key) {

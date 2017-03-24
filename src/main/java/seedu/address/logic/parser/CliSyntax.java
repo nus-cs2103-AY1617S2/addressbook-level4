@@ -28,12 +28,12 @@ public class CliSyntax {
     public static final int INDEX_OF_STARTINGTIME = 0;
     public static final int INDEX_OF_DEADLINE = 1;
     public static final String STARTINGTIME_AND_DEADLINE_REVERSE_REGEX = "(?<deadlineReverse>.*)\\b+ot\\b+"
-                                                        + "(?<startingTimeReverse>.*)\\b+morf\\b+(?<rest>.*)";
+            + "(?<startingTimeReverse>.*)\\b+morf\\b+(?<rest>.*)";
 
     public static final String STARTING_TIME = "from";
     public static final String DEADLINE = "to";
 
-    public static final String TAGS = "tag";
+    public static final String TAGS = "(?:^|\\s)(#\\S*)";
 
     public static final String DEFAULT_DEADLINE = " at 2359";
     public static final String DEFAULT_STARTING_TIME = " at 0000";
