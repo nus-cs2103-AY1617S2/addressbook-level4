@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import w10b3.todolist.commons.core.Messages;
-import w10b3.todolist.testutil.TestTask;
+import todolist.commons.core.Messages;
+import todolist.testutil.TestTask;
 
 public class FindCommandTest extends ToDoListGuiTest {
 

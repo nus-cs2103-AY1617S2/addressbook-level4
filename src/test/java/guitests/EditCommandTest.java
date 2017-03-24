@@ -1,15 +1,15 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static w10b3.todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static todolist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import w10b3.todolist.commons.core.Messages;
-import w10b3.todolist.logic.commands.EditCommand;
-import w10b3.todolist.testutil.TaskBuilder;
-import w10b3.todolist.testutil.TestTask;
+import todolist.commons.core.Messages;
+import todolist.logic.commands.EditCommand;
+import todolist.testutil.TaskBuilder;
+import todolist.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends ToDoListGuiTest {

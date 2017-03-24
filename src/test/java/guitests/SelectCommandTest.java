@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import w10b3.todolist.model.task.ReadOnlyTask;
+import todolist.model.task.ReadOnlyTask;
 
 public class SelectCommandTest extends ToDoListGuiTest {
 

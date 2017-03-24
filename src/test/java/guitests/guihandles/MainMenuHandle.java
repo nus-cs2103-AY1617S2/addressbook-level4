@@ -5,7 +5,7 @@ import java.util.Arrays;
 import guitests.GuiRobot;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import w10b3.todolist.TestApp;
+import todolist.TestApp;
 
 /**
  * Provides a handle to the main menu of the app.

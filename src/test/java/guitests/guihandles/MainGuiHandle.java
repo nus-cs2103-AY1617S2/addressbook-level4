@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import w10b3.todolist.TestApp;
+import todolist.TestApp;
 
 /**
  * Provides a handle for the main GUI.

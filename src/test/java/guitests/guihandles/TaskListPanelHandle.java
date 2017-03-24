@@ -11,10 +11,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import w10b3.todolist.TestApp;
-import w10b3.todolist.model.task.ReadOnlyTask;
-import w10b3.todolist.model.task.Task;
-import w10b3.todolist.testutil.TestUtil;
+import todolist.TestApp;
+import todolist.model.task.ReadOnlyTask;
+import todolist.model.task.Task;
+import todolist.testutil.TestUtil;
 
 /**
  * Provides a handle for the panel containing the task list.

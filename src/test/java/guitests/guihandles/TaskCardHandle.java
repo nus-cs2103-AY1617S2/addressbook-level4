@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import w10b3.todolist.model.tag.UniqueTagList;
-import w10b3.todolist.model.task.ReadOnlyTask;
+import todolist.model.tag.UniqueTagList;
+import todolist.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a task card in the task list panel.

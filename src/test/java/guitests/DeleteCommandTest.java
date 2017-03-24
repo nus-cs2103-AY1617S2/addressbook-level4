@@ -1,12 +1,12 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static w10b3.todolist.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
+import static todolist.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
-import w10b3.todolist.testutil.TestTask;
-import w10b3.todolist.testutil.TestUtil;
+import todolist.testutil.TestTask;
+import todolist.testutil.TestUtil;
 
 public class DeleteCommandTest extends ToDoListGuiTest {
 
