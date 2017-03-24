@@ -115,7 +115,11 @@ public class EditCommand extends Command {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
         }
 
-        updatedCategories.add(new Category(AddCommand.DEFAULT));
+        if (taskToEdit.getCategories().contains(new Category("Done"))) {
+            updatedCategories.setCategories(new UniqueCategoryList("Done"));
+        } else {
+            updatedCategories.add(new Category(AddCommand.DEFAULT));
+        }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
                 updatedInformation, updatedCategories);
