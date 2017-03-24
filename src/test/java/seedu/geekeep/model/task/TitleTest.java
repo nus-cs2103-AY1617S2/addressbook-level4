@@ -20,6 +20,6 @@ public class TitleTest {
         assertTrue(Title.isValidTitle("12345")); // numbers only
         assertTrue(Title.isValidTitle("peter the 2nd")); // alphanumeric characters
         assertTrue(Title.isValidTitle("Capital Tan")); // with capital letters
-        assertTrue(Title.isValidTitle("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Title.isValidTitle("David Roger Jackson Ray Jr 2nd")); // long title
     }
 }
