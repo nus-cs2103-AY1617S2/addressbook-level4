@@ -3,7 +3,7 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskmanager.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import seedu.taskmanager.testutil.TestTask;
 import seedu.taskmanager.testutil.TestUtil;

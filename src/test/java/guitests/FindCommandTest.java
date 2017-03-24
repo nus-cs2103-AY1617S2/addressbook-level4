@@ -1,11 +1,11 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+/*import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.testutil.TestTask;
+import seedu.taskmanager.testutil.TestTask;*/
 
 public class FindCommandTest extends TaskManagerGuiTest {
 // to do

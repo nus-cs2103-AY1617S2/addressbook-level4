@@ -1,6 +1,6 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+/*import static org.junit.Assert.assertTrue;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
@@ -13,7 +13,7 @@ import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Title;
-import seedu.taskmanager.testutil.TaskBuilder;
+import seedu.taskmanager.testutil.TaskBuilder;*/
 import seedu.taskmanager.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
