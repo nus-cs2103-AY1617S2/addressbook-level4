@@ -200,10 +200,9 @@ The `UI` component:
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 The `Logic` component:
-* `Logic` uses the `Parser` class to parse the user command.
-* This results in a `Command` object which is executed by the `LogicManager`.
-* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* uses the `Parser` class to parse the user command follwing which a `Command` object is executed by the `LogicManager`.
+* invokes command execution that can affect the `Model` (e.g. adding a person) and/or raise events.
+* encapsulates a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
 API call.<br>
