@@ -48,14 +48,14 @@ public class MarkController extends Controller {
             return;
         }
 
+        TodoList todoList = TodoList.getInstance();
         CommandResult commandResult;
         if (Objects.equals(markTypeToken, MARK_INCOMPLETE)) {
-            commandResult = mark(indexes, false);
+            commandResult = mark(todoList, indexes, false);
         } else {
-            commandResult = mark(indexes, true);
+            commandResult = mark(todoList, indexes, true);
         }
 
-        TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
             uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE));
         }
@@ -63,10 +63,14 @@ public class MarkController extends Controller {
         uiStore.setCommandResult(commandResult);
     }
 
-    private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
+    private CommandResult mark(TodoList todoList, List<Integer> taskIndexes, boolean isCompleted) {
         ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
             task.setCompleted(isCompleted);
+            if (task.isRecurring()) {
+                Task nextRecurringTask = task.getNextRecurringTask();
+                todoList.add(nextRecurringTask);
+            }
         }
         String indexString = CollectionUtil.toString(", ", taskIndexes);
         String messageTemplate = isCompleted
