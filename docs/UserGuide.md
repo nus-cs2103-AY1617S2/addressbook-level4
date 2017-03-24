@@ -29,14 +29,14 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
 
 Hello!<br/>
 <br/>
-Are you burdened by your daily tasks and deadlines in life?<br/>
+Are you overwhelmed by your daily tasks and deadlines in life?<br/>
 <br/>
 Enter **Burdens**.<br/>
 <br/>
 A task manager that structures your tasks and deadlines<br/>
-on a command-line platform with a beautiful customisable interface.<br/>
+using your keyboard commands with a beautiful customisable interface.<br/>
 <br/>
-Read on and we will bring you through on how to install and use **Burdens**<br/>
+Read on and discover how to install and use **Burdens**<br/>
 to make sense of your daily life activities.<br/>
 <br/>
 No more **burdens**.
