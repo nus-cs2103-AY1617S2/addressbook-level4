@@ -26,7 +26,7 @@ public class TaskManagerStack {
         return instance;
     }
 
-    public static void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
+    public void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
         ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
         undoStack.push(oldReadOnlyTaskManager);
     }
@@ -67,6 +67,13 @@ public class TaskManagerStack {
         undoStack.push(oldReadOnlyTaskManager);
         ReadOnlyItemManager redidTaskManager = redoStack.pop();
         return redidTaskManager;
+    }
+
+    /**
+     * Clears redo stack
+     */
+    public void clearRedoStack() {
+        redoStack.clear();
     }
 
 }

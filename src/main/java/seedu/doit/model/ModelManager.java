@@ -68,6 +68,17 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author A0138909R
+    @Override
+    public void clearData() {
+        logger.info("clears all tasks in model manager");
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
+        this.taskManager.resetData(new TaskManager());
+        indicateTaskManagerChanged();
+    }
+    // @@author
+
     @Override
     public ReadOnlyItemManager getTaskManager() {
         return this.taskManager;
@@ -83,7 +94,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         logger.info("delete task in model manager");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         this.taskManager.removeTask(target);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -93,7 +105,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         logger.info("add task in model manager");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         this.taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -103,7 +116,8 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void markTask(int taskIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
         logger.info("marked a task in model manager as done");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         this.taskManager.markTask(taskIndex, taskToDone);
         indicateTaskManagerChanged();
     }
@@ -112,7 +126,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
         logger.info("update task in model manager");
-        TaskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.addToUndoStack(this.getTaskManager());
+        taskManagerStack.clearRedoStack();
         int taskManagerIndex = this.filteredTasks.getSourceIndex(filteredTaskListIndex);
         this.taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();

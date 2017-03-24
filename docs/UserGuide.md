@@ -196,7 +196,7 @@ Examples:
 
 * `find OP1 OP2 Lab1`<br>
   Returns any task having names `Lab1`, `OP1`, or `OP2`<br>
-  
+
   `find t/CS3230` <br>
   Returns all task and events with CS3230 tag <br>
 
@@ -277,7 +277,7 @@ Examples:
   Saves the data file in a file named savefile.xml in the Doit Application folder.<br>
 * `save C:\Users\USER\Desktop\savefile.xml`<br>
   Saves the data file in Desktop in a file named savefile.xml outside of the Doit Application folder.<br>
-  
+
 ### 4.11 Exiting the program : `exit`
 
 Exits the program.<br>
@@ -328,7 +328,7 @@ There is no need to save manually.<br>
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g.
   * `find MA1101R assignment`
-  
+
 
 * **Done** : `done INDEX` <br>
   e.g.
@@ -342,7 +342,7 @@ There is no need to save manually.<br>
 * **Clear** : `clear` <br>
   e.g.
   * `clear`
-  
+
 * **Sort** : `sort SORT_CHOICE` <br>
   e.g.
   * `sort priority`
