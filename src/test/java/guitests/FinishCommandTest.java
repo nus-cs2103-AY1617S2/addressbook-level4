@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import seedu.doist.testutil.TestTask;
 
+//@@author A0140887W
 public class FinishCommandTest extends DoistGUITest {
 
     @Test
@@ -29,7 +30,7 @@ public class FinishCommandTest extends DoistGUITest {
         assertFinishSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("fin " + currentList.length + 1);
+        commandBox.runCommand("finish " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
         // finish a task that has already been finished

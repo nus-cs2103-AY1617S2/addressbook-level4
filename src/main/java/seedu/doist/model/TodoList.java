@@ -161,14 +161,20 @@ public class TodoList implements ReadOnlyTodoList {
         }
     }
 
-    public boolean changeTaskFinishStatus(ReadOnlyTask key, boolean isToFinish) throws TaskNotFoundException,
-            TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
-        return tasks.changeFinishStatus(key, isToFinish);
+    //@@author A0140887W
+    public boolean changeTaskFinishStatus(ReadOnlyTask readOnlyTaskToFinish, boolean isToFinish)
+            throws TaskNotFoundException, TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
+        assert readOnlyTaskToFinish != null;
+
+        Task taskToFinish = new Task(readOnlyTaskToFinish);
+        return tasks.changeFinishStatus(taskToFinish, isToFinish);
     }
 
+    //@@author
 //// tag-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+    public void addTag(
+            Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
