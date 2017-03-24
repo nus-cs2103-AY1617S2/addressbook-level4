@@ -48,8 +48,8 @@ public class RenameCategoryCommand extends Command {
         //@@author A0144904H
         if (oldCategory.equals(new Category(AddCommand.DEFAULT))) {
             throw new CommandException(MESSAGE_ALL_TASK_CATEGORY_CANNOT_RENAME);
-        } else if(oldCategory.equals(new Category("Done"))) {
-           throw new  CommandException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
+        } else if (oldCategory.equals(new Category("Done"))) {
+            throw new CommandException(MESSAGE_DONE_CATEGORY_CANNOT_RENAME);
         } else {
             try {
                 model.renameCategory(oldCategory, newCategory);
