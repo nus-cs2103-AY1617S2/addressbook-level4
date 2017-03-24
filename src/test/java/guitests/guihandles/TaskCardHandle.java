@@ -15,7 +15,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String TITLE_FIELD_ID = "#name";
     private static final String LOCATION_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
@@ -33,7 +33,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getTitle() {
-        return getTextFromLabel(NAME_FIELD_ID);
+        return getTextFromLabel(TITLE_FIELD_ID);
     }
 
     public String getLocation() {

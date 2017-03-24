@@ -15,13 +15,13 @@ public class Title {
      * The first character of the title must not be a whitespace, otherwise " " (a blank string) becomes a valid
      * input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
      * Returns true if a given string is a valid task title.
      */
     public static boolean isValidTitle(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+        return test.matches(TITLE_VALIDATION_REGEX);
     }
 
     public final String title;
