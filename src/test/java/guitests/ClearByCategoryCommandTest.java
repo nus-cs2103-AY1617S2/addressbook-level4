@@ -17,7 +17,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     // Equivalence partition: clear by an existing category
     @Test
     public void clearByCategory_existingCategory() {
-        String categoryDetails = "c/personal";
+        String categoryDetails = "c/friends";
         TestTask[] expectedTaskList =
                 new TestTask[]{td.taskC,  td.taskE, td.taskD, td.taskG, td.taskF};
         boolean isShortedCommand = false;
@@ -28,7 +28,7 @@ public class ClearByCategoryCommandTest  extends TaskBossGuiTest {
     // EP: use short command to clear by an existing category
     @Test
     public void clearByCategory_existingCategoryWithShortcut() {
-        String categoryDetails = "c/personal";
+        String categoryDetails = "c/friends";
         TestTask[] expectedTaskList =
                 new TestTask[]{td.taskC,  td.taskE, td.taskD, td.taskG, td.taskF};
         boolean isShortedCommand = true;
