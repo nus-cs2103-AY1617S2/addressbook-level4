@@ -33,13 +33,13 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
         // phone.setText(person.getPhone().value);
-        if (person.getDate().value == "00.00") {
+        if (person.getDate().value.equals("00.00")) {
             date.setText("");
         } else {
             date.setText("End date: " + person.getDate().value);
         }
 
-        if (person.getStartDate().value == "00.00") {
+        if (person.getStartDate().equals("00.00")) {
             sdate.setText("");
         } else {
             sdate.setText("Start Date: " + person.getStartDate().value);
