@@ -25,7 +25,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**` do SWE project t/school t/CS` :
+   * **`add`**` do SWE project tag school tag CS` :
      adds a task titled `do SWE project` to the TaskIt.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -51,13 +51,13 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Add a new task to TaskIt<br>
-Format: `add <TITLE> [t/TAG|by DATE|from DATE to DATE]`
+Format: `add <TITLE> [tag TAG|by DATE|from DATE to DATE]`
 
 Examples:
 
-* `add finish hw t/study t/school by April 5th`
-* `add Interview t/work`
-* `add friend's party t/leisure t/friend from next Wednesday 8 pm to next Wednesday at 11pm`
+* `add finish hw tag study tag school by April 5th`
+* `add Interview tag work`
+* `add friend's party tag leisure tag friend from next Wednesday 8 pm to next Wednesday at 11pm`
 
 
 > Tasks can have any number of tags (including 0)
@@ -74,7 +74,7 @@ Format: `list undone`
 ### 2.4. Editing an existing task : `edit`
 
 Edits an existing task in TaskIt.<br>
-Format: `edit <INDEX>  <[title]|[start]|[end]|[t/]> <NEW>`
+Format: `edit <INDEX>  <[title]|[start]|[end]|[tag]> <NEW>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -182,8 +182,8 @@ Example:
 
 ## 4. Command Summary
 
-* **Add**  `add TITLE [t/TAG]...` <br>
-  e.g. `add Lunch with Bob t/friend t/leisure`
+* **Add**  `add TITLE [tag TAG]...` <br>
+  e.g. `add Lunch with Bob tag friend tag leisure`
 
 * **Clear** : `clear`
 
