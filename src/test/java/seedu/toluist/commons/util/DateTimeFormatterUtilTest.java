@@ -201,4 +201,16 @@ public class DateTimeFormatterUtilTest {
                 DateTimeFormatterUtil.formatRecurringEvent(from, to, recurringUntilEndDate, yearly));
 
     }
+
+    @Test
+    public void getDayNumberSuffix() {
+        int[] days = {1, 2, 3, 4, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30, 31};
+        String[] suffixes = {"st", "nd", "rd", "th", "th",
+                             "th", "th", "th", "th", "th",
+                             "st", "nd", "rd", "th", "th",
+                             "st"};
+        for (int i = 0; i < 16; i++) {
+            assertEquals(suffixes[i], DateTimeFormatterUtil.getDayNumberSuffix(days[i]));
+        }
+    }
 }

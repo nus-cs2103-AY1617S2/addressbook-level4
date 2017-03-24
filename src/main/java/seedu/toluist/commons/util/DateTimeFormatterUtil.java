@@ -168,7 +168,7 @@ public class DateTimeFormatterUtil {
         return dateTime.format(formatter);
     }
 
-    private static String getDayNumberSuffix(int day) {
+    public static String getDayNumberSuffix(int day) {
         if (day >= 11 && day <= 13) {
             return SUFFIX_FOURTH_ONWARDS;
         }
