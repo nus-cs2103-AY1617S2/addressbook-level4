@@ -14,7 +14,6 @@ public class PriorityTest {
     @Test
     public void isValidPriority() {
         // blank priorities
-        assertFalse(Priority.isValidPriority("")); // empty string
         assertFalse(Priority.isValidPriority(" ")); // spaces only
 
         // invalid priorities

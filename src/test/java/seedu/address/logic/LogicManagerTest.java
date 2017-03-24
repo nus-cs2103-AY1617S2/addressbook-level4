@@ -35,6 +35,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -181,30 +182,26 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new AddressBook(), Collections.emptyList());
+        assertCommandSuccess("reset", ClearCommand.MESSAGE_SUCCESS, new AddressBook(), Collections.emptyList());
     }
 
 
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Title d/today i/valid,instruction",
-                expectedMessage);
-        assertCommandFailure("add Valid Title tomorrow validDate.butNoPrefix i/valid, instruction", expectedMessage);
-        assertCommandFailure("add Valid Title d/tomorrow p/1 valid, instruction",
-                expectedMessage);
+        assertCommandFailure("add", expectedMessage);
+        assertCommandFailure("add ", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] d/tomorrow p/1 i/valid, instruction",
+        assertCommandFailure("add []\\[;] for: tomorrow priority: 1 note: valid, instruction",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/not_valid_date p/1 i/valid, instruction",
+        assertCommandFailure("add Valid Title for: not_valid_date priority: 1 note: valid, instruction",
                 Deadline.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/tomorrow p/not@a.Priority i/valid, instruction",
+        assertCommandFailure("add Valid Title for: tomorrow priority: not@a.Priority note: valid, instruction",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add Valid Title d/tomorrow p/1 i/valid, instruction t/invalid_-[.tag",
+        assertCommandFailure("add Valid Title for: tomorrow priority:1 note:valid, instruction #invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -235,7 +232,7 @@ public class LogicManagerTest {
         model.addTask(toBeAdded); // task already in internal address book
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
 
@@ -423,7 +420,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Title title = new Title("Adam Brown");
-            Deadline privateDate = new Deadline("tomorrow");
+            Deadline privateDate = new Deadline("tomorrow 9pm");
             Priority priority = new Priority("1");
             Instruction privateInstruction = new Instruction("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -456,13 +453,13 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getTitle().toString());
-            cmd.append(" p/").append(p.getPriority().value);
-            cmd.append(" d/").append(p.getDeadline().toString());
-            cmd.append(" i/").append(p.getInstruction());
+            cmd.append(" " + CliSyntax.PREFIX_STRING_PRIORITY).append(p.getPriority().value);
+            cmd.append(" " + CliSyntax.PREFIX_STRING_DATE).append(p.getDeadline().toString());
+            cmd.append(" " + CliSyntax.PREFIX_STRING_INSTRUCTION).append(p.getInstruction());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" " + CliSyntax.PREFIX_STRING_TAG).append(t.tagName);
             }
 
             return cmd.toString();

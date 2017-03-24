@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Instruction;
@@ -97,10 +98,12 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getTitle().title + " ");
-        sb.append("i/" + this.getInstruction().value + " ");
-        sb.append("d/" + this.getDeadline().toString() + " ");
-        sb.append("p/" + this.getPriority().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        sb.append(CliSyntax.PREFIX_STRING_INSTRUCTION + this.getInstruction().value + " ");
+        sb.append(CliSyntax.PREFIX_STRING_DATE + this.getDeadline().toString() + " ");
+        sb.append(CliSyntax.PREFIX_STRING_PRIORITY + this.getPriority().value + " ");
+        this.getTags().asObservableList().stream().forEach(
+            s -> sb.append(CliSyntax.PREFIX_STRING_TAG + s.tagName + " ")
+        );
         return sb.toString();
     }
 

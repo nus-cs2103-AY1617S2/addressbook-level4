@@ -35,7 +35,7 @@ public class RedoCommandTest extends AddressBookGuiTest {
 
     @Test
     public void redo_clearThenRedo_success() throws Exception {
-        commandBox.runCommand("clear");
+        commandBox.runCommand("reset");
 
         assertRedoSuccess();
     }
@@ -49,7 +49,7 @@ public class RedoCommandTest extends AddressBookGuiTest {
 
     @Test
     public void redo_editThenRedo_success() throws Exception {
-        String detailsToEdit = "Bobby d/91234567 p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Bobby for: 91234567 priority:1 note:Block 123, Bobby Street 3 #husband";
         int taskListIndex = 1;
 
         commandBox.runCommand("edit " + taskListIndex + " " + detailsToEdit);

@@ -15,10 +15,6 @@ public class InstructionTest {
 
     @Test
     public void isValidInstruction() {
-        // invalid instructions
-        assertFalse(Instruction.isValidInstruction("")); // empty string
-        assertFalse(Instruction.isValidInstruction(" ")); // spaces only
-
         // valid instructions
         assertTrue(Instruction.isValidInstruction("Cook the egg then put it back into the shell"));
         assertTrue(Instruction.isValidInstruction("-")); // one character
