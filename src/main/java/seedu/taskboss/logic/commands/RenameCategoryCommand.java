@@ -45,13 +45,13 @@ public class RenameCategoryCommand extends Command {
 
         String messageThrown = null;
 
-        if(oldCategory.equals(new Category("Alltasks"))) {
+        if (oldCategory.equals(new Category("Alltasks"))) {
             messageThrown = MESSAGE_FAIL_ALL_TASK_CATEGORY_CANNOT_MODIFY;
             throw new CommandException(RenameCategoryCommand.
                     MESSAGE_FAIL_ALL_TASK_CATEGORY_CANNOT_MODIFY);
         }
 
-        if(oldCategory.equals(new Category("Done"))) {
+        if (oldCategory.equals(new Category("Done"))) {
             messageThrown = MESSAGE_FAIL_DONE_CATEGORY_CANNOT_MODIFY;
             throw new CommandException(RenameCategoryCommand.
                     MESSAGE_FAIL_DONE_CATEGORY_CANNOT_MODIFY);

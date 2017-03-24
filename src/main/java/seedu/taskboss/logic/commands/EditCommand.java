@@ -94,7 +94,8 @@ public class EditCommand extends Command {
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
-                                                     throws InvalidDatesException, DuplicateCategoryException, IllegalValueException {
+                                                     throws InvalidDatesException, DuplicateCategoryException,
+                                                     IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
