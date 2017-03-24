@@ -39,7 +39,7 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withName(String name) throws IllegalValueException {
+    public TaskBuilder withTitle(String name) throws IllegalValueException {
         this.task.setTitle(new Title(name));
         return this;
     }

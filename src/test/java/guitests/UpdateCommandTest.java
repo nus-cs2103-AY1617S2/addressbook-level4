@@ -52,7 +52,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
             = "Bobby s/01-04-17 1630 e/01-05-17 1630 l/Block 123, Bobby Street 3 t/husband";
         int taskManagerIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withName("Bobby")
+        TestTask editedTask = new TaskBuilder().withTitle("Bobby")
                 .withEndDateTime("01-05-17 1630")
                 .withStartDateTime("01-04-17 1630")
                 .withLocation("Block 123, Bobby Street 3")
@@ -89,7 +89,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         int taskManagerIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Belle").build();
 
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
