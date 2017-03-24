@@ -34,7 +34,7 @@ public class Priority {
         this.value = trimmedPriority;
     }
 
-    //@@Author A0143355J
+    //@@author A0143355J
     public Priority(Optional<String> priority) throws IllegalValueException {
         if (priority.isPresent()) {
             String priorityString = priority.get();
@@ -51,7 +51,7 @@ public class Priority {
     /**
      * Returns true if Priority is present
      */
-    //@@Author A0143355J
+    //@@author A0143355J
     public boolean isPriorityPresent(Optional<String> priority) {
         return priority.isPresent();
     }

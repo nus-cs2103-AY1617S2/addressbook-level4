@@ -7,7 +7,7 @@ import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 import seedu.tasklist.commons.exceptions.IllegalValueException;
 
-//@@Author A0143355J
+//@@author A0143355J
 public class DateParser {
 
     public static final String NO_DATES_MESSAGE = "No dates were detected, please enter a valid date after /d.";

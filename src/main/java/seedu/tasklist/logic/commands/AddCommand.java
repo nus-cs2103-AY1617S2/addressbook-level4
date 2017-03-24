@@ -23,7 +23,7 @@ import seedu.tasklist.model.task.UniqueTaskList;
 /**
  * Adds a task to the task list.
  */
-//@@Author A0143355J
+//@@author A0143355J
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
