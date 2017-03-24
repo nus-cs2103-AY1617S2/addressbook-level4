@@ -21,7 +21,7 @@ public class ListByCategoryCommandTest extends TaskBossGuiTest {
         assertListByCategoryResult("list c/wife"); // no results
 
         // EP: list tasks by an existing category
-        assertListByCategoryResult("list c/friends", td.alice, td.benson); // multiple results
+        assertListByCategoryResult("list c/friends", td.taskA, td.taskB); // multiple results
 
     }
 
@@ -29,7 +29,7 @@ public class ListByCategoryCommandTest extends TaskBossGuiTest {
     @Test
     public void listByCategory_emptyList() {
         commandBox.runCommand("clear");
-        assertListByCategoryResult("list c/friends"); // no results
+        assertListByCategoryResult("list c/work"); // no results
     }
 
     // EP: invalid command word
