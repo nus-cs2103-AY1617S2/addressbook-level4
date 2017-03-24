@@ -27,6 +27,7 @@ public class CommandBoxTest extends DoistGUITest {
         // build style class for error
         errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
         errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+        errorStyleOfCommandBox.remove(CommandBox.SUCCESS_STYLE_CLASS);
     }
 
     @Test

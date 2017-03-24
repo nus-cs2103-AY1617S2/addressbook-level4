@@ -47,7 +47,7 @@ public class DeleteCommandTest extends DoistGUITest {
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous tasks except the deleted task
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         ArrayList<TestTask> tasksToDelete = new ArrayList<TestTask>();

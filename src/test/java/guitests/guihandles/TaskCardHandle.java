@@ -12,7 +12,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String DESC_FIELD_ID = "#desc";
@@ -77,7 +77,11 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
+    public boolean isStyleInStyleClass(String style) {
+        return node.getStyleClass().contains(style);
+    }
+
+    public boolean isSameTask(ReadOnlyTask person) {
         return getDesc().equals(person.getDescription().desc)
                 && getPriority().equals(person.getPriority().toString())
                 && getFinishStatus() == person.getFinishedStatus().getIsFinished()

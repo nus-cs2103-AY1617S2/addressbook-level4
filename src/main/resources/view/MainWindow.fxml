@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
+<!-- @@author A0140887W -->
+
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <stylesheets>
-      <URL value="@Extensions.css" />
-   </stylesheets>
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -27,7 +26,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Theme">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleGradientTheme" text="GradientTheme" />
+                <MenuItem mnemonicParsing="false" onAction="#handleLightTheme" text="LightTheme" />
                   <MenuItem mnemonicParsing="false" onAction="#handleDarkTheme" text="DarkTheme" />
               </items>
             </Menu>

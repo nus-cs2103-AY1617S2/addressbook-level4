@@ -1,3 +1,7 @@
+/* @@author A0140887W */
+@import url("CommandBoxCss.css");
+@import url("Extensions.css");
+
 .background {
     -fx-background-color: linear-gradient(to left, #FF512F , #DD2476);
 }
@@ -21,11 +25,6 @@
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
-}
-
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
 }
 
 .tab-pane {
