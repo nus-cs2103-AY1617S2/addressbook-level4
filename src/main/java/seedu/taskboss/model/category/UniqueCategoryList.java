@@ -26,7 +26,6 @@ import seedu.taskboss.commons.util.CollectionUtil;
 public class UniqueCategoryList implements Iterable<Category> {
 
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
-
     /**
      * Constructs empty CategoryList.
      */

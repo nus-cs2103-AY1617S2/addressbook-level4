@@ -47,6 +47,7 @@ public class AddCommand extends Command {
     public AddCommand(String name, String startDateTime, String endDateTime,
             String information, Set<String> categories) throws IllegalValueException, InvalidDatesException {
         final Set<Category> categorySet = new HashSet<>();
+        categorySet.add(new Category("Alltasks"));
         for (String categoryName : categories) {
             categorySet.add(new Category(categoryName));
         }

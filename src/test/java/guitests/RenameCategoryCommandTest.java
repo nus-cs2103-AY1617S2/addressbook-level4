@@ -49,6 +49,11 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
 
     @Test
     public void rename_unsuccessful() {
+
+        //specified category to be re-named does not exist
+        commandBox.runCommand("n superman project");
+        assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+
         //old category name == new category name
         commandBox.runCommand("name friends friends");
         assertResultMessage(RenameCategoryCommandParser.ERROR_SAME_FIELDS);
@@ -67,8 +72,12 @@ public class RenameCategoryCommandTest extends TaskBossGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RenameCategoryCommandParser.ERROR_NON_ALPHANUMERIC));
 
-        //specified category to be re-named does not exist
-        commandBox.runCommand("name superman batman");
-        assertResultMessage("[superman] " + RenameCategoryCommand.MESSAGE_DOES_NOT_EXIST_CATEGORY);
+        //specified category to be re-named is the All tasks
+        commandBox.runCommand("name Alltasks batman");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_FAIL_ALL_TASK_CATEGORY_CANNOT_MODIFY);
+
+        //specified category to be re-named is the Done category
+        commandBox.runCommand("name Done batman");
+        assertResultMessage(RenameCategoryCommand.MESSAGE_FAIL_DONE_CATEGORY_CANNOT_MODIFY);
     }
 }

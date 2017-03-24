@@ -8,7 +8,9 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
+import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.DateTime;
 import seedu.taskboss.model.task.Information;
 import seedu.taskboss.model.task.Name;
@@ -82,10 +84,12 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      * @throws InvalidDatesException
+     * @throws IllegalValueException
+     * @throws DuplicateCategoryException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor)
-                                                     throws InvalidDatesException {
+                                                     throws InvalidDatesException, DuplicateCategoryException, IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
@@ -104,6 +108,12 @@ public class EditCommand extends Command {
                 updatedEndDateTime.getDate() != null &&
                 updatedStartDateTime.getDate().after(updatedEndDateTime.getDate())) {
             throw new InvalidDatesException(ERROR_INVALID_DATES);
+        }
+
+        if (taskToEdit.getCategories().contains((new Category("Done")))) {
+            updatedCategories.add(new Category("Done"));
+        } else {
+            updatedCategories.add(new Category("Alltasks"));
         }
 
         return new Task(updatedName, updatedPriorityLevel, updatedStartDateTime, updatedEndDateTime,
