@@ -414,13 +414,13 @@ public class LogicManagerTest {
 
     // @@author A0131278H
     @Test
-    public void execute_sort_invalidArgsFormat() {
+    public void executeSortInvalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
         assertCommandFailure("sort ", expectedMessage);
     }
 
     @Test
-    public void execute_sort_byStartDate_correctOrderofTasks() throws Exception {
+    public void executeSortByStartDateCorrectOrderofTasks() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithStartDate("03/03/2017");
         Task pTarget2 = helper.generateTaskWithStartDate("02/03/2017");
@@ -436,7 +436,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_sort_byEndDate_correctOrderofTasks() throws Exception {
+    public void executeSortByEndDateCorrectOrderofTasks() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithEndDate("04/04/2017");
         Task pTarget2 = helper.generateTaskWithEndDate("03/04/2017");
