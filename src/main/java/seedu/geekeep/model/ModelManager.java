@@ -87,13 +87,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException {
         assert editedTask != null;
 
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        taskManager.updateTask(taskToEdit, editedTask);
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskListIndex, editedTask);
+
         indicateTaskManagerChanged();
     }
 
@@ -176,18 +178,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void markTaskDone(ReadOnlyTask taskToMark) {
+    public void markTaskDone(int filteredTaskListIndex) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        taskManager.markTaskDone(taskToMark);
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.markTaskDone(taskListIndex);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public void markTaskUndone(ReadOnlyTask taskToMark) {
+    public void markTaskUndone(int filteredTaskListIndex) {
         pastTaskManagers.add(new TaskManager(taskManager));
         futureTaskManagers.clear();
-        taskManager.markTaskUndone(taskToMark);
+        int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.markTaskUndone(taskListIndex);
         indicateTaskManagerChanged();
     }
 
