@@ -237,6 +237,8 @@ public class ModelManager extends ComponentManager implements Model {
                 return task.getFinishedStatus().getIsFinished();
             case pending:
                 return !task.getFinishedStatus().getIsFinished();
+            case overdue:
+                return task.isOverdue();
             default:
                 return true;
             }
