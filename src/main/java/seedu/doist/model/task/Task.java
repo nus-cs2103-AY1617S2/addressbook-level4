@@ -138,6 +138,18 @@ public class Task implements ReadOnlyTask {
         this.setEndDate(replacement.getEndDate());
     }
 
+    /**Function that returns true if this task is overdue i.e, not finished and past it's deadline **/
+    public boolean isOverdue() {
+        if (this.getFinishedStatus().getIsFinished()) {
+            return false;
+        } else if (this.getStartDate() != null && this.getEndDate() != null) {
+            Date currentDate = new Date();
+            return (this.getEndDate().compareTo(currentDate) < 0);
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

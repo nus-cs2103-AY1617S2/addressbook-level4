@@ -98,6 +98,18 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    /**Function that returns true if this task is overdue i.e, not finished and past it's deadline **/
+    public boolean isOverdue() {
+        if (this.getFinishedStatus().getIsFinished()) {
+            return false;
+        } else if (this.getStartDate() != null && this.getEndDate() != null) {
+            Date currentDate = new Date();
+            return (this.getEndDate().compareTo(currentDate) < 0);
+        } else {
+            return false;
+        }
+    }
+
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");

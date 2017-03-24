@@ -44,6 +44,9 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    /** Function to check if task is Overdue or not **/
+    public boolean isOverdue();
+
     /**
      * Compare the priority of two tasks
      * @return: -1 task2 has a lower priority than task1
