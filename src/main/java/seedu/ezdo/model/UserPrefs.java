@@ -31,6 +31,14 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
+    public void updateLastUsedSortCriteria(SortCriteria sortCriteria) {
+        this.sortCriteria = sortCriteria;
+    }
+
+    public SortCriteria getSortCriteria() {
+        return sortCriteria;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
