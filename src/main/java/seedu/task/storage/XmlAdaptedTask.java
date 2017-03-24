@@ -10,6 +10,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskTime;
@@ -29,6 +30,8 @@ public class XmlAdaptedTask {
     private String taskEndTime;
     @XmlElement(required = true)
     private String taskDescription;
+    @XmlElement(required = true)
+    private String taskStatus;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -53,6 +56,7 @@ public class XmlAdaptedTask {
 	taskStartTime = source.getTaskStartTime().value;
 	taskEndTime = source.getTaskEndTime().value;
 	taskDescription = source.getTaskDescription();
+	taskStatus = source.getTaskStatus().toString();
 	tagged = new ArrayList<>();
 	for (Tag tag : source.getTags()) {
 	    tagged.add(new XmlAdaptedTag(tag));
@@ -77,7 +81,8 @@ public class XmlAdaptedTask {
 	final TaskTime taskStartTime = new TaskTime(this.taskStartTime);
 	final TaskTime taskEndTime = new TaskTime(this.taskEndTime);
 	final String taskDescription = this.taskDescription;
+	//final TaskStatus taskStatus = new TaskStatus(this.taskStatus.toString());
 	final UniqueTagList tags = new UniqueTagList(taskTags);
-	return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, tags);
+	return new Task(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,null, tags);
     }
 }

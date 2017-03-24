@@ -22,11 +22,11 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskManager taskmanager;
+    private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskManager and userPrefs.
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
 	super();
@@ -34,8 +34,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 	logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
-	this.taskmanager = new TaskManager(taskManager);
-	filteredTasks = new FilteredList<>(this.taskmanager.getTaskList());
+	this.taskManager = new TaskManager(taskManager);
+	filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     // brute force pattern matching algorithm
@@ -62,29 +62,35 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-	taskmanager.resetData(newData);
+	taskManager.resetData(newData);
 	indicateTaskManagerChanged();
     }
 
     @Override
     public ReadOnlyTaskManager getTaskManager() {
-	return taskmanager;
+	return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
-	raise(new TaskManagerChangedEvent(taskmanager));
+	raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-	taskmanager.removeTask(target);
+	taskManager.removeTask(target);
 	indicateTaskManagerChanged();
     }
 
     @Override
+	public synchronized void completeTask(ReadOnlyTask target, ReadOnlyTask toBeComplete) throws TaskNotFoundException {
+		taskManager.completeTask(target, toBeComplete);
+		indicateTaskManagerChanged();
+	}
+    
+    @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-	taskmanager.addJobTask(task);
+	taskManager.addJobTask(task);
 	updateFilteredListToShowAll();
 	indicateTaskManagerChanged();
     }
@@ -95,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
 	assert editedTask != null;
 
 	int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-	taskmanager.updateTask(taskManagerIndex, editedTask);
+	taskManager.updateTask(taskManagerIndex, editedTask);
 	indicateTaskManagerChanged();
     }
 

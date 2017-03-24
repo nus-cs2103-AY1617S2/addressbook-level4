@@ -118,6 +118,15 @@ public class TaskManager implements ReadOnlyTaskManager {
 	tasks.updateTask(index, editedTask);
     }
 
+    //Mark a task as completed
+    public boolean completeTask(ReadOnlyTask target, ReadOnlyTask toBeComplete) throws UniqueTaskList.TaskNotFoundException {
+        if (tasks.complete(target, toBeComplete)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+    
     /**
      * Ensures that every tag in this task: - exists in the master list
      * {@link #tags} - points to a Tag object in the master list

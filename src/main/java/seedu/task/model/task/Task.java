@@ -18,6 +18,7 @@ public class Task implements ReadOnlyTask {
     private TaskTime taskStartTime;
     private TaskTime taskEndTime;
     private String taskDescription;
+    private TaskStatus taskStatus;
 
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time";
 
@@ -27,19 +28,20 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
-	    String taskDescription, UniqueTagList tags) {
+	    String taskDescription, TaskStatus taskStatus, UniqueTagList tags) {
 	assert !CollectionUtil.isAnyNull(taskName, taskDate, taskStartTime, taskEndTime, tags);
 	this.taskName = taskName;
 	this.taskDate = taskDate;
 	this.taskStartTime = taskStartTime;
 	this.taskEndTime = taskEndTime;
 	this.taskDescription = taskDescription;
+	this.taskStatus = new TaskStatus("Ongoing");
 	this.tags = new UniqueTagList(tags); // protect internal tags from
 					     // changes in the arg list
     }
 
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
-	    Optional<TaskTime> parseTime2, Optional<String> parseString) {
+	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus) {
 	this.taskName = parseTaskName;
 	if (parseDate.isPresent()) {
 	    this.taskDate = parseDate.get();
@@ -53,13 +55,14 @@ public class Task implements ReadOnlyTask {
 	if (parseString.isPresent()) {
 	    this.taskDescription = parseString.get();
 	}
+	this.taskStatus = new TaskStatus("Ongoing");
 	this.tags = new UniqueTagList();
 
     }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
-	    String taskDescription) {
-	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, new UniqueTagList());
+	    String taskDescription,TaskStatus taskStatus ) {
+	this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, new UniqueTagList());
     }
 
     /**
@@ -67,7 +70,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
 	this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(),
-		source.getTaskDescription(), source.getTags());
+		source.getTaskDescription(), source.getTaskStatus(), source.getTags());
     }
 
     @Override
@@ -94,6 +97,7 @@ public class Task implements ReadOnlyTask {
 	    this.setTaskStartTime(replacement.getTaskStartTime());
 	    this.setTaskEndTime(replacement.getTaskEndTime());
 	    this.setTaskDescription(replacement.getTaskDescription());
+	    this.setTaskStatus(replacement.getTaskStatus());
 	    this.setTags(replacement.getTags());
 	} catch (IllegalValueException ive) {
 	    System.out.println("error resetting data in read only task"); // phrase
@@ -138,10 +142,18 @@ public class Task implements ReadOnlyTask {
 	return taskEndTime;
     }
 
+    public TaskStatus getTaskStatus() {
+   	return taskStatus;
+       }
+    
     public String getTaskDescription() {
 	return taskDescription;
     }
 
+    public void setTaskStatus(TaskStatus taskStatus){
+	this.taskStatus = taskStatus;
+    }
+    
     public void setTaskDescription(String description) {
 	this.taskDescription = description;
     }

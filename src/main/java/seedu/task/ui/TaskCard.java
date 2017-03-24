@@ -24,6 +24,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label taskDescription;
     @FXML
+    private Label taskStatus;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -34,21 +36,22 @@ public class TaskCard extends UiPart<Region> {
 	    taskName.setText(task.getTaskName().toString());
 	}
 	if (task.getTaskDate() != null) {
-	    taskDate.setText(task.getTaskDate().toString());
+	    taskDate.setText("Date : " + task.getTaskDate().toString());
 	} else
-	    taskDate.setText("Date:");
+	    taskDate.setText("Date: -");
 	if (task.getTaskStartTime() != null && task.getTaskEndTime() != null) {
-	    taskTime.setText(task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
+	    taskTime.setText("Time: " + task.getTaskStartTime().toString() + "-" + task.getTaskEndTime());
 	} else if (task.getTaskStartTime() != null) {
 	    taskTime.setText(task.getTaskStartTime().toString());
 	} else if (task.getTaskEndTime() != null) {
 	    taskTime.setText(task.getTaskEndTime().toString());
 	} else
-	    taskTime.setText("Time: ");
+	    taskTime.setText("Time: -");
 	if (task.getTaskDescription() != null) {
-	    taskDescription.setText(task.getTaskDescription().toString());
+	    taskDescription.setText("Description: " + task.getTaskDescription().toString());
 	} else
-	    taskDescription.setText("Description:");
+	    taskDescription.setText("Description: -");
+	taskStatus.setText("Task Status: " + task.getTaskStatus().toString() );
 	initTags(task);
     }
 
