@@ -7,6 +7,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0140887W
 /**
  * Marks the task as 'finished' identified using it's last displayed index from the to-do list.
  */
@@ -40,7 +41,7 @@ public class FinishCommand extends Command {
             try {
                 model.finishTask(task);
                 tasksFinished.add(task);
-            } catch (TaskNotFoundException pnfe) {
+            } catch (TaskNotFoundException tnfe) {
                 assert false : "The target task cannot be missing";
             } catch (TaskAlreadyFinishedException e) {
                 tasksAlreadyFinished.add(task);

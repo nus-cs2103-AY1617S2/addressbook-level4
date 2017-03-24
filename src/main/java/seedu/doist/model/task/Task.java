@@ -20,7 +20,7 @@ public class Task implements ReadOnlyTask {
     private Date endDate;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. TODO: now date is null?
      */
     public Task(Description name, Priority priority, FinishedStatus finishedStatus,
             UniqueTagList tags, Date startDate, Date endDate) {
@@ -84,10 +84,12 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
     }
 
+    @Override
     public Date getStartDate() {
         return startDate;
     }
 
+    @Override
     public Date getEndDate() {
         return endDate;
     }
@@ -95,11 +97,6 @@ public class Task implements ReadOnlyTask {
     @Override
     public Priority getPriority() {
         return priority;
-    }
-
-    public void setFinishedStatus(boolean isFinished) {
-        assert finishedStatus != null;
-        this.finishedStatus.setIsFinished(isFinished);
     }
 
     public void setFinishedStatus(FinishedStatus status) {

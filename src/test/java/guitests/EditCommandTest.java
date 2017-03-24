@@ -132,6 +132,7 @@ public class EditCommandTest extends DoistGUITest {
 
         // confirm the new card contains the right data
         TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
+        System.out.println();
         assertMatching(editedPerson, editedCard);
 
         // confirm the list now contains all previous persons plus the person with updated details

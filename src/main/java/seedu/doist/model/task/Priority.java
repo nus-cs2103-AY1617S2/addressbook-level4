@@ -2,6 +2,7 @@ package seedu.doist.model.task;
 
 import seedu.doist.commons.exceptions.IllegalValueException;
 
+//@@author A0140887W
 /**
  * Represents a task's priority in the to-do list
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
@@ -27,7 +28,7 @@ public class Priority {
             return this.strValue;
         }
     }
-    public final PriorityLevel priority;
+    private final PriorityLevel priority;
 
     /**
      * If no parameters are given, it is set to default priority
@@ -71,8 +72,10 @@ public class Priority {
     public static String processPriorityString(String priority) {
         // remove all trailing spaces, new line characters etc
         String processedPriority = priority.trim();
+
         // remove all leading spaces, new line characters etc
         processedPriority = processedPriority.replaceAll("^\\s+", "");
+
         // replace in-between spaces, new line characters etc with _
         processedPriority = processedPriority.replaceAll("\\s+", "_");
         processedPriority = processedPriority.toUpperCase();

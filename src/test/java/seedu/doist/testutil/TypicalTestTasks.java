@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.model.TodoList;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
@@ -57,11 +58,12 @@ public class TypicalTestTasks {
         }
     }
 
+    //@@author A0140887W
     public static void loadDoistWithSampleDataAllFinished(TodoList ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 Task newTask = new Task(task);
-                newTask.setFinishedStatus(true);
+                newTask.setFinishedStatus(new FinishedStatus(true));
                 ab.addTask(newTask);
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
@@ -69,6 +71,7 @@ public class TypicalTestTasks {
         }
     }
 
+    //@@author
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{laundry, homework, work, school, groceries, shopping};
     }
