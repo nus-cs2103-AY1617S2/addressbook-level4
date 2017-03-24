@@ -59,12 +59,11 @@ public class DeleteTaskController extends Controller {
     }
 
     private CommandResult delete(TodoList todoList, Task task) {
-        todoList.remove(task);
-        if (task.isRecurring()) {
-            Task nextRecurringTask = task.getNextRecurringTask();
-            if (nextRecurringTask != null) {
-                todoList.add(nextRecurringTask);
-            }
+        if (task.isRecurring() && (task.getRecurringEndDateTime() == null
+                || task.getNextRecurringDateTime(task.getEndDateTime()).isBefore(task.getRecurringEndDateTime()))) {
+            task.updateToNextRecurringTask();
+        } else {
+            todoList.remove(task);
         }
         String taskType = task.isEvent() ? "Event" : "Task";
         return new CommandResult(String.format(RESULT_MESSAGE_DELETE_TASK, taskType, task.getDescription()));

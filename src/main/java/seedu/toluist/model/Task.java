@@ -17,7 +17,6 @@ public class Task implements Comparable<Task> {
     private static final String RECUR_WEEKLY_STRING = "weekly";
     private static final String RECUR_MONTHLY_STRING = "monthly";
     private static final String RECUR_YEARLY_STRING = "yearly";
-    private static final String RECUR_FOREVER_END_DATE_STRING = "1000 years later";
 
     // List of tags is unique
     private TreeSet<Tag> allTags = new TreeSet<>();
@@ -275,7 +274,15 @@ public class Task implements Comparable<Task> {
         return completionDateTime;
     }
 
-    public RecurringFrequency getRecurringFrequency(String recurringFrequencyString) {
+    public LocalDateTime getRecurringEndDateTime() {
+        return recurringEndDateTime;
+    }
+
+    public RecurringFrequency getRecurringFrequency() {
+        return recurringFrequency;
+    }
+
+    public RecurringFrequency toRecurringFrequency(String recurringFrequencyString) {
         switch (recurringFrequencyString.toLowerCase()) {
         case RECUR_DAILY_STRING:
             return RecurringFrequency.DAILY;
@@ -291,14 +298,14 @@ public class Task implements Comparable<Task> {
     }
 
     public void setRecurringFrequency(String recurringFrequencyString) {
-        setRecurringFrequency(getRecurringFrequency(recurringFrequencyString));
+        setRecurringFrequency(toRecurringFrequency(recurringFrequencyString));
     }
 
     public void setRecurringFrequency(RecurringFrequency recurringFrequency) {
-        if (this.isFloatingTask()) {
+        if (isFloatingTask()) {
             throw new IllegalArgumentException("Floating task cannot be recurring.");
         }
-        if (this.isRecurring()) {
+        if (isRecurring()) {
             this.recurringFrequency = recurringFrequency;
         } else {
             setRecurring(recurringFrequency);
@@ -306,7 +313,7 @@ public class Task implements Comparable<Task> {
     }
 
     public void setRecurringEndDateTime(LocalDateTime recurringEndDateTime) {
-        if (this.isRecurring()) {
+        if (isRecurring()) {
             this.recurringEndDateTime = recurringEndDateTime;
         } else {
             throw new IllegalArgumentException("Non-recurring task cannot have recurring until end date.");
@@ -314,21 +321,21 @@ public class Task implements Comparable<Task> {
     }
 
     public void setRecurring(String recurringFrequencyString) {
-        setRecurring(getRecurringFrequency(recurringFrequencyString));
+        setRecurring(toRecurringFrequency(recurringFrequencyString));
     }
 
     public void setRecurring(RecurringFrequency recurringFrequency) {
-        setRecurring(DateTimeUtil.parseDateString(RECUR_FOREVER_END_DATE_STRING), recurringFrequency);
+        setRecurring(null, recurringFrequency);
     }
 
     public void setRecurring(LocalDateTime recurringEndDateTime, String recurringFrequencyString) {
-        setRecurring(recurringEndDateTime, getRecurringFrequency(recurringFrequencyString));
+        setRecurring(recurringEndDateTime, toRecurringFrequency(recurringFrequencyString));
     }
 
     public void setRecurring(LocalDateTime recurringEndDateTime, RecurringFrequency recurringFrequency) {
-        if (recurringEndDateTime == null || recurringFrequency == null) {
-            throw new IllegalArgumentException("Recurring task must have both an end date for recurring,"
-                    + " and a frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
+        if (recurringFrequency == null) {
+            throw new IllegalArgumentException("Recurring task must a"
+                    + " frequency of 'daily', 'weekly', 'monthly' or 'yearly'.");
         } else if (isFloatingTask()) {
             throw new IllegalArgumentException("Floating task cannot be recurring task,"
                     + " include at least an end date.");
@@ -343,28 +350,14 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * For this recurring task, give the next recurring task
+     * For this recurring task, update to the next recurring task
      * Start date and end date will be updated (if they exist)
-     * @return new recurring task
-     * @throws CloneNotSupportedException
      */
-    public Task getNextRecurringTask() {
-        assert this.isRecurring();
-        LocalDateTime nextRecurringStartDateTime = getNextRecurringDateTime(this.getStartDateTime());
-        LocalDateTime nextRecurringEndDateTime = getNextRecurringDateTime(this.getEndDateTime());
-        if (nextRecurringEndDateTime.isAfter(recurringEndDateTime)) {
-            return null;
-        }
-        Task task;
-        try {
-            task = (Task) this.clone();
-        } catch (CloneNotSupportedException cloneNotSupportedException) {
-            throw new RuntimeException("Task cannot be cloned.");
-        }
-        task.setCompleted(false);
-        task.setStartDateTime(nextRecurringStartDateTime);
-        task.setEndDateTime(nextRecurringEndDateTime);
-        return task;
+    public void updateToNextRecurringTask() {
+        assert isRecurring();
+        setStartDateTime(getNextRecurringDateTime(startDateTime));
+        setEndDateTime(getNextRecurringDateTime(endDateTime));
+        setCompleted(false);
     }
 
     public LocalDateTime getNextRecurringDateTime(LocalDateTime dateTime) {

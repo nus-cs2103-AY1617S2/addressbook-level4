@@ -66,12 +66,11 @@ public class MarkController extends Controller {
     private CommandResult mark(TodoList todoList, List<Integer> taskIndexes, boolean isCompleted) {
         ArrayList<Task> tasks = UiStore.getInstance().getShownTasks(taskIndexes);
         for (Task task : tasks) {
-            task.setCompleted(isCompleted);
-            if (task.isRecurring()) {
-                Task nextRecurringTask = task.getNextRecurringTask();
-                if (nextRecurringTask != null) {
-                    todoList.add(nextRecurringTask);
-                }
+            if (task.isRecurring() && (task.getRecurringEndDateTime() == null
+                    || task.getNextRecurringDateTime(task.getEndDateTime()).isBefore(task.getRecurringEndDateTime()))) {
+                task.updateToNextRecurringTask();
+            } else {
+                task.setCompleted(isCompleted);
             }
         }
         String indexString = CollectionUtil.toString(", ", taskIndexes);
