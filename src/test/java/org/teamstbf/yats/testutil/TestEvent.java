@@ -2,6 +2,7 @@ package org.teamstbf.yats.testutil;
 
 import org.teamstbf.yats.model.item.Date;
 import org.teamstbf.yats.model.item.Description;
+import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
@@ -19,7 +20,7 @@ public class TestEvent implements ReadOnlyEvent {
 	private Schedule startTime;
 	private Schedule endTime;
 	private Description description;
-	private boolean isDone;
+	private IsDone isDone;
 	private Location location;
 	private UniqueTagList tags;
 
@@ -38,6 +39,7 @@ public class TestEvent implements ReadOnlyEvent {
 		this.endTime = eventToCopy.getEndTime();
 		this.description = eventToCopy.getDescription();
 		this.tags = eventToCopy.getTags();
+		this.isDone = eventToCopy.getIsDone();
 	}
 
 	public String getAddCommand() {
@@ -124,5 +126,20 @@ public class TestEvent implements ReadOnlyEvent {
 	@Override
 	public String toString() {
 		return getAsText();
+	}
+
+	@Override
+	public IsDone getIsDone() {
+		return isDone;
+	}
+
+	@Override
+	public void markDone() {
+		isDone.markDone();
+	}
+
+	@Override
+	public boolean isTaskDone() {
+		return isDone.getIsDone();
 	}
 }
