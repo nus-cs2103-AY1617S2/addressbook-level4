@@ -11,7 +11,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-//import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.StartDate;
 import seedu.address.model.person.UniquePersonList;
@@ -138,7 +137,7 @@ public class EditCommand extends Command {
         public Optional<Date> getDate() {
             return date;
         }
-      
+        
         public void setStartDate(Optional<StartDate> sdate) {
             assert sdate != null;
             this.sdate = sdate;

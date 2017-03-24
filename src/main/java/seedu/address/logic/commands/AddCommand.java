@@ -6,11 +6,11 @@ import java.util.Set;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Date;
-import seedu.address.model.person.StartDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StartDate;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -24,8 +24,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
             + "Parameters: NAME [s/START DATE] [d/DEADLINE] e/EMAIL g/GROUP  [t/TAG]...\n "
-    		+ "Start date and deadline are not necessary. \n"
-            + "Example: " + COMMAND_WORD
+            + "Start date and deadline are not necessary. \n" + "Example: " + COMMAND_WORD
             + " study english s/01.01 d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -34,9 +33,11 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand using raw values.
-     * This case is only have the deadline
-     * @throws IllegalValueException if any of the raw values are invalid
+     * Creates an AddCommand using raw values. This case is only have the
+     * deadline
+     * 
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
      */
     public AddCommand(String name, String date, String email, String group, Set<String> tags)
             throws IllegalValueException {
@@ -44,50 +45,31 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
-                new Name(name),
-                new Date(date),
-                new StartDate("00.00"),
-                new Email(email),
-                new Group(group),
-                new UniqueTagList(tagSet)
-        );
+        this.toAdd = new Person(new Name(name), new Date(date), new StartDate("00.00"), new Email(email),
+                new Group(group), new UniqueTagList(tagSet));
     }
-    
-    /* Constructor:
-     * floating task without starting date and end date*/
-    public AddCommand(String name, String email, String group, Set<String> tags)
-            throws IllegalValueException {
+
+    /*
+     * Constructor: floating task without starting date and end date
+     */
+    public AddCommand(String name, String email, String group, Set<String> tags) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
-                new Name(name),
-                new Date("00.00"),
-                new StartDate("00.00"),
-                new Email(email),
-                new Group(group),
-                new UniqueTagList(tagSet)
-        );
+        this.toAdd = new Person(new Name(name), new Date("00.00"), new StartDate("00.00"), new Email(email),
+                new Group(group), new UniqueTagList(tagSet));
     }
-    
+
     public AddCommand(String name, String date, String sdate, String email, String group, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Person(
-                new Name(name),
-                new Date(date),
-                new StartDate(sdate),
-                new Email(email),
-                new Group(group),
-                new UniqueTagList(tagSet)
-        );
+        this.toAdd = new Person(new Name(name), new Date(date), new StartDate(sdate), new Email(email),
+                new Group(group), new UniqueTagList(tagSet));
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
