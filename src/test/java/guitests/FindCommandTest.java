@@ -21,12 +21,12 @@ public class FindCommandTest extends TaskBossGuiTest {
     // Equivalence partition: find by keywords in a non-empty list
     @Test
     public void find_byKeywordNonEmptyList() {
-        assertFindResult("find k/Mark"); // no results
-        assertFindResult("find k/Meier", td.taskD, td.taskB); // multiple results
+        assertFindResult("find k/Hey"); // no results
+        assertFindResult("find k/code", td.taskE, td.taskD); // multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 2");
-        assertFindResult("find k/Meier", td.taskD);
+        assertFindResult("find k/code", td.taskE);
     }
 
     // EP: find by name in an empty list
