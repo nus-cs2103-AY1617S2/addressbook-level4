@@ -49,7 +49,7 @@ public class UiStore {
      * @param observableList an observable list
      */
     public void bind(UiView view, ObservableList<?> observableList) {
-        observableList.addListener((ListChangeListener.Change<?> c) -> view.render());
+        observableList.addListener((ListChangeListener) (c -> view.render()));
     }
 
     /**
