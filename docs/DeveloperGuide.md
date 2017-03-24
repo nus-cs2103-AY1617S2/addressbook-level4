@@ -118,12 +118,16 @@ Two of those classes play important roles at the architecture level.
 
 **`UI`**<br/>
 The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.<br/>
+<br/>
 **`Logic`**<br/>
 The ['Logic'](#logic-component) component handles the process and execution of user's commands.<br/>
+<br/>
 **`Model`**<br/>
 The ['Model'](#model-component) handles data representation and data structures of Burdens.<br/>
+<br/>
 **`Storage`**<br/>
 The ['Storage'](#storage-component) handles the process of reading data from and writing data to the hard disk.<br/>
+<br/>
 Each of the ** `UI` , `Logic`, `Model`, `Storage`** components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
@@ -156,7 +160,7 @@ being saved to the hard disk and the status bar of the UI being updated to refle
    <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
    Figure 2.1.3b : Component interactions for `delete 1` command (part 2)
 </p>
-> Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
+>Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
