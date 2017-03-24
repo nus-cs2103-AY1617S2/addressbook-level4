@@ -7,6 +7,7 @@ public class Schedule {
 
     public static final String MESSAGE_TIME_ERROR = "Invalid or empty date/time entry";
     public static final String STRING_EMPTY = "";
+    public static final String MESSAGE_TIME_CONSTRAINTS = "by today tomorrow till";
     private Date scheduleDate;
 
     /*

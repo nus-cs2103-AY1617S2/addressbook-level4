@@ -25,8 +25,6 @@ public class Event implements ReadOnlyEvent {
     private Location location;
     private UniqueTagList tags;
     
-    private Periodic period;
-
 	public Event() {
 
 	}
@@ -82,7 +80,7 @@ public class Event implements ReadOnlyEvent {
 	}
 
 	public Event(ReadOnlyEvent editedReadOnlyEvent) {
-		this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(), editedReadOnlyEvent.getPeriod(),
+		this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(),
 				editedReadOnlyEvent.getStartTime(), editedReadOnlyEvent.getEndTime(),
 				editedReadOnlyEvent.getDescription(), editedReadOnlyEvent.getTags(), editedReadOnlyEvent.getIsDone());
 	}
@@ -92,11 +90,10 @@ public class Event implements ReadOnlyEvent {
 	 * Every field must be present and not null.
 	 *
 	 */
-	public Event(Title name, Location location, Periodic periodic, Schedule startTime, Schedule endTime,
+	public Event(Title name, Location location, Schedule startTime, Schedule endTime,
 			Description description, UniqueTagList tags, IsDone isDone) {
 		assert !CollectionUtil.isAnyNull(name);
 		this.name = name;
-		this.period = periodic;
 		this.location = location;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -114,11 +111,6 @@ public class Event implements ReadOnlyEvent {
 						&& this.isSameStateAs((ReadOnlyEvent) other));
 	}
 
-	@Override
-
-	public SimpleDate getDeadline() {
-		return null;
-	}
 
 	@Override
 
@@ -138,11 +130,6 @@ public class Event implements ReadOnlyEvent {
 		return location;
 	}
 
-	@Override
-
-	public Periodic getPeriod() {
-		return this.period;
-	}
 
 	@Override
 
@@ -167,7 +154,7 @@ public class Event implements ReadOnlyEvent {
 	public int hashCode() {
 		// use this method for custom fields hashing instead of implementing
 		// your own
-		return Objects.hash(name, location, period, startTime, endTime, description, tags);
+		return Objects.hash(name, location, startTime, endTime, description, tags);
 	}
 
 	/**
@@ -179,7 +166,6 @@ public class Event implements ReadOnlyEvent {
 	public void resetData(ReadOnlyEvent replacement) {
 		assert replacement != null;
 		this.setTitle(replacement.getTitle());
-		this.setPeriod(replacement.getPeriod());
 		this.setLocation(replacement.getLocation());
 		this.setStartTime(replacement.getStartTime());
 		this.setEndTime(replacement.getEndTime());
@@ -207,10 +193,6 @@ public class Event implements ReadOnlyEvent {
 		this.location = location;
 	}
 
-	public void setPeriod(Periodic period) {
-		assert period != null;
-		this.period = period;
-	}
 
 	public void setStartTime(Schedule schedule) {
 		assert startTime != null;

@@ -1,10 +1,8 @@
 package org.teamstbf.yats.testutil;
 
-import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
-import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
@@ -16,7 +14,6 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 public class TestEvent implements ReadOnlyEvent {
 
 	private Title name;
-	private Periodic period;
 	private Schedule startTime;
 	private Schedule endTime;
 	private Description description;
@@ -33,7 +30,6 @@ public class TestEvent implements ReadOnlyEvent {
 	 */
 	public TestEvent(TestEvent eventToCopy) {
 		this.name = eventToCopy.getTitle();
-		this.period = eventToCopy.getPeriod();
 		this.location = eventToCopy.getLocation();
 		this.startTime = eventToCopy.getStartTime();
 		this.endTime = eventToCopy.getEndTime();
@@ -46,18 +42,11 @@ public class TestEvent implements ReadOnlyEvent {
 		StringBuilder sb = new StringBuilder();
 		sb.append("add " + this.getTitle().fullName + " ");
 		sb.append("l/" + this.getLocation().value + " ");
-		sb.append("p/" + this.getPeriod().value + " ");
 		sb.append("s/" + this.getStartTime().toString() + " ");
 		sb.append("e/" + this.getEndTime().toString() + " ");
 		sb.append("d/" + this.getDescription().value + " ");
 		this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
 		return sb.toString();
-	}
-
-	@Override
-	public SimpleDate getDeadline() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -73,11 +62,6 @@ public class TestEvent implements ReadOnlyEvent {
 	@Override
 	public Location getLocation() {
 		return location;
-	}
-
-	@Override
-	public Periodic getPeriod() {
-		return period;
 	}
 
 	@Override
@@ -107,10 +91,6 @@ public class TestEvent implements ReadOnlyEvent {
 		this.location = location;
 	}
 
-	public void setPeriod(Periodic periodic) {
-		this.period = periodic;
-	}
-
 	public void setStartTime(Schedule schedule) {
 		this.startTime = schedule;
 	}
@@ -123,6 +103,10 @@ public class TestEvent implements ReadOnlyEvent {
 		this.name = name;
 	}
 
+    public void setIsDone(IsDone isDone) {
+        this.isDone = isDone;
+    }
+    
 	@Override
 	public String toString() {
 		return getAsText();

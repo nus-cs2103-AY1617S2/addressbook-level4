@@ -119,7 +119,6 @@ public class MainApp extends Application {
                     "Using default config properties");
             initializedConfig = new Config();
         }
-
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);

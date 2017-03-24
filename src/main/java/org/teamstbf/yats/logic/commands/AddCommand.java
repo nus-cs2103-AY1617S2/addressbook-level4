@@ -25,13 +25,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an task or event to the task manager. "
-            + "Parameters: task name l/location p/period(none/daily/weekly/monthly) s/START TIME  e/END TIME  d/ description [t/TAG]...\n"
+            + "Parameters: task name l/location s/START TIME  e/END TIME  d/ description [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " meeting with boss l/work p/daily s/7:00pm,18/03/2017  e/9:00pm,18/03/2017  "
             + "d/get scolded for being lazy t/kthxbye";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the task manager";
 
     private final Event toAdd;
 
@@ -52,7 +52,6 @@ public class AddCommand extends Command {
         this.toAdd = new Event(
                 new Title(name),
                 new Location(location),
-                new Periodic(period),
                 new Schedule(startTime),
                 new Schedule(endTime),
                 new Description(description),

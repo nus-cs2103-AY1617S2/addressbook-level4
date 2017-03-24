@@ -86,14 +86,13 @@ public class EditCommand extends Command {
 		Schedule updatedStartTime = editTaskDescriptor.getStartTime().orElseGet(taskToEdit::getStartTime);
 		Schedule updatedEndTime = editTaskDescriptor.getEndTime().orElseGet(taskToEdit::getEndTime);
 		Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
-		Periodic updatedPeriodic = editTaskDescriptor.getPeriodic().orElseGet(taskToEdit::getPeriod);
 		UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
 			updatedTags.removeAndMerge(taskToEdit.getTags());
 		}
 		IsDone isDone = taskToEdit.getIsDone();
 
-		return new Event(updatedName, updatedLocation, updatedPeriodic, updatedStartTime, updatedEndTime,
+		return new Event(updatedName, updatedLocation, updatedStartTime, updatedEndTime,
 				updatedDescription, updatedTags, isDone);
 	}
 

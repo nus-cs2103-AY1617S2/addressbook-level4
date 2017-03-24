@@ -8,11 +8,7 @@ build/
 *.log.*
 *.csv
 config.json
-src/test/data/sandbox/
-preferences.json
-.DS_Store
-./screenshot*.png
-classes/
-/data/
-/bin/
 /target/
+/bin/
+/data/
+preferences.json
