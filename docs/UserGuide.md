@@ -14,7 +14,7 @@
 	3.5. [Sorting a list of tasks: **`sort / s`**](#35-sorting-a-list-of-tasks-sort--s)<br>
 	3.6. [Finding tasks: **`find / f`**](#36-finding-tasks-find--f)<br>
 	3.7. [Listing all tasks: **`list / l`**](#37-listing-all-tasks-list--l)<br>
-	3.8.™ [Reverts the command: **`undo / u`**](#38-reverting-the-last-action-undo--u)<br>
+	3.8. [Reverts the command: **`undo / u`**](#38-reverting-the-last-action-undo--u)<br>
 	3.9. [Clearing all entries: **`clear /c `**](#39-clearing-all-entries-clear--c)<br>
 	3.10. [Moving the save file: **`save`**](#310-moving-the-save-file-save)<br>
 	3.11. [Exiting the program: **`quit / q`**](#311-exiting-the-program-quit--q)<br>
@@ -25,7 +25,7 @@
 <br>
 
 ## 1. About
-Have you ever felt frustrated because you were unable to manage your daily tasks? Why not try ezDo, the eziest™ way to keep track of all your tasks efficiently? Whether you’re planning a holiday, powering through your day or managing multiple work projects, ezDo is here to help you tick off all your personal and professional to-dos!™
+Have you ever felt frustrated because you were unable to manage your daily tasks? Why not try ezDo, the eziest™ way to keep track of all your tasks efficiently? Whether you’re planning a holiday, powering through your day or managing multiple work projects, ezDo is here to help you tick off all your personal and professional to-dos!
 
 With its user-friendly interface and command line style inputs, ezDo allows you to create, find and sort tasks without using the mouse at all!
 
