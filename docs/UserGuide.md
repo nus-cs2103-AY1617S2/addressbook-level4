@@ -191,13 +191,13 @@ This task has just been added at `INDEX` 1 with the `add` command:
 
 You can now edit the task in several ways:<br>
 
-* Change the task name:
+* Change the task name:<br>
 **`edit 1 Buy milk and cereal`** <br><br>
-* Change the task's priority to 3:
+* Change the task's priority to 3:<br>
 **`e 1 p/3`** <br><br>
-* Add a due date:
+* Add a due date:<br>
 **`edit 1 d/05/07/2017`**<br><br>
-* Remove a task's tag:
+* Remove a task's tag:<br>
 **`edit 1 d/05/07/2017`**<br>
 
 <br>
@@ -305,21 +305,21 @@ _**Finds tasks whose information contains any of the given keywords specified by
 
 #### Format:
 
-**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME1] [t/TAGNAME2]...`**
+**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**
 
 <br>
 
 > - Input at least one field to search for a task.<br><br>
 > - The fields are case insensitive.
-> _For example: `find Milk` will match the task with the name `milk`._ <br><br>
+> _For example: **`find Milk`** will match the task with the name `milk`._ <br><br>
 > - The order of the keywords does not matter.
-> _For example: `find Buy Milk` will match the task with the name `Milk Buy`._ <br><br>
+> _For example: **`find Buy Milk`** will match the task with the name `Milk Buy`._ <br><br>
 > - Only full words will be matched.
-> _For example: `find Milk` will not match the task with the name `Milks`._ <br><br>
+> _For example: **`find Milk`** will not match the task with the name `Milks`._ <br><br>
 > - Only tasks that match all the keywords will be returned.
-    _For example: `find Milk p/1` will not match with the task `Buy Milk` with a priority of 2._
-    _For example: `find donuts milk` will match the task with the name `Buy donuts and milk`._<br><br>
-> - Type `list` to go back to the default view.
+    _For example: **`find Milk p/1`** will not match with the task `Buy Milk` with a priority of 2._
+    _For example: **`find donuts milk`** will match the task with the name `Buy donuts and milk`._<br><br>
+> - Type **`list`** to go back to the default view.
 
 <br>
 
@@ -354,14 +354,14 @@ _**Reverts the last command.**_<br>
 
 <br>
 
-> - Only the following commands can be undone: **`add`**, **`clear`**, **`done`**, **`edit`**, **`kill`**.<br>
-> -	The command **`undo`** can only be used up to <u>5 times</u> consec
+> - Only the following commands can be undone: **`add`**, **`clear`**, **`done`**, **`edit`**, **`kill`**.<br><br>
+> -	The command **`undo`** can only be used up to <u>5 times</u> consecutively
 
 <br>
 
 #### Example:
 
-Revert the task named "buy milk" that was just deleted by typing **`undo`**
+Revert the task **`buy milk`** that was just deleted by typing **`undo`**
 
 <br>
 
@@ -385,8 +385,8 @@ _**Moves the save file of ezDo to a specified directory.**_<br>
 
 **`save DIRECTORY`**
 <br>
-> - The directory specified must be valid.
-> - Administrative permissions might be required to access the various directories in the computer.
+> - The directory specified must be valid.<br><br>
+> - Administrative permissions might be required to access directories in the computer.
 
 <br>
 
@@ -425,7 +425,7 @@ _**Brings up the help guide in a separate window.**_<br>
 ## 4. Frequently Asked Questions
 
 #### Q: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo.
+**A**: Install ezDo on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ezDo.
 
 #### Q: How do I save my ezDo tasks?<br>
 **A**: ezDo data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -443,7 +443,7 @@ For your convenience, the parameters for every command available in ezDo are sum
 |[done / d](#3-marking-a-task-as-done-done--d)  |**`done INDEX`**    |
 |[kill / k](#4-deleting-a-task-kill--k)         |**`kill INDEX`**          |
 |[sort / s](#5-sorting-a-list-of-tasks-sort--s) |**`sort ORDERTYPE`** |
-|[find / f](#6-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME]`**      |
+|[find / f](#6-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**      |
 |[list / l](#7-listing-all-tasks-list--l)       |**`list`**         |
 |[undo / u](#8-undoing-the-last-action-undo--u) |**`undo`** |
 |[clear / c](#9-clearing-all-entries-clear--c)  |**`clear`**       |
