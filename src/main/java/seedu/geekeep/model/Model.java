@@ -61,14 +61,14 @@ public interface Model {
      * @throws IndexOutOfBoundsException
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
     /** Mark the specified task as done */
-    void markTaskDone(ReadOnlyTask taskToMark);
+    void markTaskDone(int filteredTaskListIndex);
 
     /** Mark the specified task as undone */
-    void markTaskUndone(ReadOnlyTask taskToMark);
+    void markTaskUndone(int filteredTaskListIndex);
 
     void undo() throws NothingToUndoException;
 

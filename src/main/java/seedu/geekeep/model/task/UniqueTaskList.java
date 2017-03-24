@@ -120,11 +120,10 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
-        int taskIndex = internalList.lastIndexOf(taskToEdit);
-        Task taskToUpdate = internalList.get(taskIndex);
+        Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
@@ -133,18 +132,18 @@ public class UniqueTaskList implements Iterable<Task> {
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
-        internalList.set(taskIndex, taskToUpdate);
+        internalList.set(index, taskToUpdate);
         internalList.sort((thisTask, otherTask) -> thisTask.computePriority() - otherTask.computePriority());
     }
 
-    public void markTaskDone(ReadOnlyTask taskToMark) {
-        int taskIndex = internalList.lastIndexOf(taskToMark);
-        internalList.get(taskIndex).markDone();
+    public void markTaskDone(int index) {
+        Task taskToMark = internalList.get(index);
+        taskToMark.markDone();
     }
 
-    public void markTaskUndone(ReadOnlyTask taskToMark) {
-        int taskIndex = internalList.lastIndexOf(taskToMark);
-        internalList.get(taskIndex).markUndone();
+    public void markTaskUndone(int index) {
+        Task taskToMark = internalList.get(index);
+        taskToMark.markUndone();
     }
 
 }
