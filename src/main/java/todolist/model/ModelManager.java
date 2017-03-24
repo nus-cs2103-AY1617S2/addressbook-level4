@@ -94,6 +94,11 @@ public class ModelManager extends ComponentManager implements Model {
     // =============================================================
     // @@author A0143648Y
     @Override
+    public int getTotalFilteredTaskListSize() {
+        return getFilteredTaskList().size() + getFilteredEventList().size() + getFilteredFloatList().size();
+    }
+
+    @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
@@ -208,7 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
         int findMeLength = findMe.length();
         boolean foundIt = false;
         for (int i = 0; i <= (searchMeLength - findMeLength); i++) {
-            if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+            if (searchMe.regionMatches(true, i, findMe, 0, findMeLength)) {
                 foundIt = true;
                 break;
             }
