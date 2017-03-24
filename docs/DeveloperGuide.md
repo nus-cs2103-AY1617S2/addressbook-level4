@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Watodo - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103 T15-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -123,7 +123,7 @@ command `delete 1`.
 <img src="images\SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `AddressBookChangedEvent` when the Task Manager data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -171,7 +171,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -191,7 +191,7 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Task Manager data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -208,11 +208,11 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Manager data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.taskmanager.commons` package.
 
 ## 3. Implementation
 
@@ -323,7 +323,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/taskmanager-level4/docs/UserGuide.html`.
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -332,7 +332,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -347,73 +347,168 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a new task | add task to manage all my to-do
+`* * *` | user | remove a task | remove entries that I no longer need
+`* * *` | user | mark a task as complete | mark a task as complete when I finish it
+`* * *` | user | find a task by keyword | search for specific task especially when the list is huge
+`* * *` | user | change the due time of a task | set the due time of a task to a new one
+`* *` | user | edit a task | edit a task if there are any changes
+`* *` | user | clear all tasks | start from a clean slate
+`* *` | user | list all tasks | see all tasks at one glance and consider if I want to make any adjustment
+`* *` | user | undo most recent changes | revert back to original state(ie if i remove something, it will be unremoved; if i added something, it will be removed.)
+`*` | user | categorise my tasks(eg deadlines, events, floating tasks) | easily search for the specific task type
+`*` | user | prioritize my tasks | be reminded about the importance of a certain task among other tasks
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Watoodoo` and the `Actor` is the **user**, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: add a new task
+1. User requests to add a new task by specifying the name, date and time frame.
+2. System adds a new task.<br>
+Use case ends.
+
+**Extension**
+2a. Task already exists
+>2a1. System does not perform the addition and informs user that task with the same name already exists.
+
+>Use case ends
+
+2b. Invalid command format
+>2b1. System prompts user that command format is not recognized and display sample format to user.
+
+>Use case ends.
+
+
+#### Use case: mark a task as complete
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to mark a task as complete.
+2. Watoodoo changes the status of the task as complete.<br>
+Use case ends
+
+**Extensions**
+
+1a. List is empty
+>1a1. System informs user that there is no task to list.
+>Use case ends.
+
+#### Use case: search for tasks by keywords
+
+1. User searches for one/more keyword(s).
+2. Watoodoo displays all tasks containing the keywords. <br>
+Use case ends
+
+**Extensions**
+
+1a. There is no task containing the keyword(s).
+> 1a1. System informs user that no tasks found.
+> Use case ends.
+
+#### Use case: list out all tasks
+
+**MSS**
+
+1. User requests list of tasks.
+2. System displays list of tasks.
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+1a. List is empty
+>1a1. System informs user that there is no task to list. 
+>Use case ends.
 
-> Use case ends
+#### Use case: remove a task
 
-3a. The given index is invalid
+**MSS**
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+1. System display a list of tasks.
+2. User input task index to specify which task to delete.
+3. System notifies user that task has been successfully deleted.
+Use case ends.
 
-{More to be added}
+**Extensions**
+
+2a. List is empty
+>2a1. System informs user that there is no task to delete.
+>Use case ends.
+
+2b. User input index is not valid
+>2b1. System informs user that the input index is not valid.
+>Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should run with JRE7 or above, Windows 7 or above.
+2. Should be able to store up to 500 tasks.
+3. Should work primarily offline.
+4. Should be able to handle exceptions from user input.
+5. Should work as a standalone application (exe).
+6. Should not use relational databases to store data.
+7. Command line interface should be the main mode of input.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+##### Invalid Commands
 
-> Windows, Linux, Unix, OS-X
+> Invalid commands includes invalid arguments
 
-##### Private contact detail
+##### Error message
 
-> A contact detail that is not meant to be shared with others
+> Error message includes suggestion for correct command
+
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**[Remember the Milk](https://www.rememberthemilk.com/)**
 
 Pros:
 
-* ...
-* ...
+* Easy to use interface.
+* User can add recurring tasks.
+* User can set a start date and end date for the task.
+* User can add tag to the task.
+* User can view a list of all completed tasks.
+* User can set priority to task.
+* User can postpone a task.
 
 Cons:
 
-* ...
-* ...
+* Most features are only available in pro version, but pro version is very expensive.
 
+
+**[Google Calender](https://calendar.google.com)**
+
+Pros:
+
+* Calendar user interface, click on events on the calendar to view more details.
+* Users are able to import calendars using .ical files.
+* Users can add or recurring events.
+* Users can be notified of approaching events.
+* Users can access on multiple platforms, like Android and iOS.
+
+Cons:
+
+* Have to be online to access calendar.
+* Slow to sync.
+
+
+**[Apple Reminders]**
+
+Pros:
+
+* Easy to use interface
+* Good for daily task managing
+* Users can add alarms for tasks
+* Users can store lists related to their tasks
+
+Cons:
+
+* No calendar view
+* Can get confusing exponentially when more tasks are added
+* Not a great option for long term planning
+* Tagging system is really simple
+* Only available in ios system
