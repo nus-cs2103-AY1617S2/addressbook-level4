@@ -99,14 +99,24 @@ Examples:
 * `find schoolwork sports`<br>
   Returns `do schoolwork`  `play sports` `#schoolwork` `#sports` etc. in the column
 
-### 2.7. Deleting a task : `delete`
+### 2.7. Deleting a task : `delete` or `remove`
 
 Deletes the specified task from the task manager. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
+> Deletes the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
+
+### 2.7. Sorting tasks : `sort`
+
+Sorts all tasks by their start date or end date.<br>
+Format: `sort KEYWORD`
+
+> Sorts tasks according to the input `KEYWORD`.<br>
+> The keyword refers to start date or end date.<br>
+> The keyword can be `s/` for start date or `e/` for end date.<br>
+> Any trailing symbols after a valid keyword will be ignored.
 
 ### 2.8. Clearing all entries : `clear`
 
@@ -149,6 +159,7 @@ Select  | select INDEX                    | select 3
 Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
 Find    | find KEYWORD(s)                 | find report assignment
 Delete  | delete INDEX                    | delete 3
+Sort    | sort KEYWORD                    | sort e/
 Clear   | clear
 History | history
 Exit    | exit
