@@ -8,7 +8,7 @@ import org.junit.Test;
 public class TitleTest {
 
     @Test
-    public void isValidName() {
+    public void isValidTitle() {
         // invalid name
         assertFalse(Title.isValidTitle("")); // empty string
         assertFalse(Title.isValidTitle(" ")); // spaces only
