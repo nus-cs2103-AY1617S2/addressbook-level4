@@ -1,17 +1,17 @@
-# Burdens - Developer Guide
+# Burdens: Developer Guide
 
 By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-0. [Introduction](#introduction)
-1. [Setting Up](#setting-up)
-   > 1.1 Prerequisites<br/>
-     1.2 Importing the project into Eclipse<br/>
      1.3 Configuring Checkstyle<br/>
      1.4 Troubleshooting project setup<br/>
 2. [Design](#design)
 3. [Implementation](#implementation)
+0. [Introduction](#introduction)
+1. [Setting Up](#setting-up)
+   > 1.1 Prerequisites<br/>
+     1.2 Importing the project into Eclipse<br/>
 4. [Testing](#testing)
    > 4.1 Troubleshooting Tests
 5. [Dev Ops](#dev-ops)
@@ -24,49 +24,55 @@ By : `W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 ## 0. Introduction
 
-**Burdens** is a task manager to make sense of our daily lives and list our tasks and deadlines on a command-line platform. It is a Java desktop application that has a GUI implemented with JavaFX.<br/>
+**Hello Developer.**<br/>
+<br/>
+This is **Burdens**. It is a task manager created to make sense of our daily lives and list personal tasks and deadlines via keyboard commands.<br/>
+<br/>
+It is a Java desktop application that has a GUI implemented with JavaFX.<br/>
+<br/>
+This guide will aid current and future developers like you in understanding and augmenting the features and design implementations of **Burdens**.<br/>
+<br/>
 You are welcome to contribute in any way!
 
 ## 1. Getting Started
 
-### 1.1. Prerequisites
+### 1.1 Prerequisites
 
 Please ensure you have the following prerequisites before contributing to development:
 
    > 1. **JDK `1.8.0_60`**  or later<br/>
      2. **Eclipse** IDE<br/>
-     3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in<br/>
+     3. **e(fx)clipse** plugin for Eclipse (Follow from Steps 2 onwards given in<br/>
      [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))<br/>
      4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace<br/>
      5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace<br/>
 
-### 1.2. Importing the project into Eclipse
+### 1.2 Importing Project Burdens into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
-   in the prerequisites above)
+0. Fork this repository, and clone the fork to your computer
+1. Open Eclipse <br/>
+   [Note: **e(fx)clipse** and **buildship** plugins must be installed as given in 2.1 Prerequisites]
 2. Click `File` > `Import`
 3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
 4. Click `Browse`, then locate the project's directory
 5. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
-  > * Depending on your connection speed and server load, it can take up to 30 minutes for the set-up to finish
-      (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * Depending on connection speed and server load, it can take up to 30 minutes for the setup to finish
+      [Gradle downloads library files from servers during the project setup]
+  > * During the import process, Eclipse might change settings automatically, you can safely discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 1.3 Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. burdens
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
+6. Tick and select `files from packages`, click `Change...`, and select the `resources` package<br/>
+[Note: The Change.. button can be enabled by clicking on the files from packages text]
 7. Click OK twice. Rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
-
-### 1.4. Troubleshooting project setup
+### 1.4 Troubleshooting Project Setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -82,72 +88,87 @@ Please ensure you have the following prerequisites before contributing to develo
 
 ## 2. Design
 
-### 2.1. Architecture
+### 2.1 Architecture
 
-<img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+<p align="center">
+   <img src="images/Architecture.png" width="600"><br>
+   Figure 2.1.1 : Architecture Diagram
+</p>
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+The **_Architecture Diagram_** above condenses the high-level design of Burdens.<br/>
+Here is a quick overview of the main components of Burdens and their functions:
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+**`Main`**
+The 'Main' component has one class: [MainApp](../src/main/java/seedu/address/MainApp.java). <br/>
+During application launch, it intialises all components of Burdens in proper sequence and connects them.<br/>
+During application shutdown, it ceases all ongoing operations of Burdens and invokes cleanup when necessary.<br/>
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
-
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+**`Commons`**
+['Commons'](#common-classes) represents a collection of classes used by multiple other components.<br/>
 Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* `EventsCenter` : Written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained), this class
+  is used by components to communicate with other components using events.
+* `LogsCenter` : Used by many classes to write log messages to Burdens' log file to record system information and events.
 
-The rest of the App consists of four components.
+**`UI`**<br/>
+The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.
 
-* [**`UI`**](#ui-component) : The UI of the App.
-* [**`Logic`**](#logic-component) : The command executor.
-* [**`Model`**](#model-component) : Holds the data of the App in-memory.
-* [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
+**`Logic`**<br/>
+The ['Logic'](#logic-component) component handles the process and execution of user's commands.
 
-Each of the four components
+**`Model`**<br/>
+The ['Model'](#model-component) handles data representation and data structures of Burdens.
+
+**`Storage`**<br/>
+The ['Storage'](#storage-component) handles the process of reading data from and writing data to the hard disk.
+
+Each of the ** `UI` , `Logic`, `Model`, `Storage`** components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+<p align="center">
+   <img src="images/LogicClassDiagram.png" width="800"><br>
+   Figure 2.1.2 : Class Diagram of the Logic Component
+</p>
 
-#### Events-Driven nature of the design
-
+#### Event Driven Design
+Burdens has an inherent Event Driven design.<br>
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<p align="center">
+   <img src="images\SDforDeletePerson.png" width="800"><br>
+   Figure 2.1.3a : Component interactions for `delete 1` command (part 1)
+</p>
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task Manager data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when data of Burdens is changed,
+ instead of asking the `Storage` to save updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
+<p align="center">
+   <img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+   Figure 2.1.3b : Component interactions for `delete 1` command (part 2)
+</p>
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
-The sections below give more details of each component.
+The sections below will provide more details of each component.
 
-### 2.2. UI component
-
-<img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+### 2.2 UI component
+`UI` shows updates to the user; changes in data in the Model naturally updates `UI` as well.<br>
+`UI` executes user commands using the Logic Component. <br>
+`UI` responds to events raised from the other components of Burdens and updates the display accordingly.
+<p align="center">
+   <img src="images/UiClassDiagram.png" width="800"><br>
+   Figure 2.2.1 : Structure of the UI Component
+</p>
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
@@ -157,10 +178,13 @@ The `UI` component:
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
-
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+### 2.3 Logic component
+'Logic' provides several APIs for UI to execute the commands entered by the user.<br>
+'Logic' obtains information about the tasklist to render to the user.
+<p align="center">
+   <img src="images/LogicClassDiagram.png" width="800"><br>
+   Figure 2.3.1 : Structure of the Logic Component
+</p>
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
@@ -171,44 +195,50 @@ The `Logic` component:
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+API call.<br>
+<p align="center">
+   <img src="images/DeletePersonSdForLogic.png" width="800"><br>
+   Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command
+</p>
 
-### 2.4. Model component
-
-<img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+### 2.4 Model component
+`Model` manages and stores Burdens's tasklist data and user's preferences. <br>
+`Model` exposes an UnmodifiableObservableList<ReadOnlyTask> that can be 'observed' by other components<br>
+&nbsp;&nbsp; e.g. the UI can be bound to this list and will automatically update when the data in the list change.
+<p align="center">
+   <img src="images/ModelClassDiagram.png" width="800"><br>
+   Figure 2.4.1 : Structure of the Model Component
+</p>
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 The `Model`component:
-
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 2.5. Storage component
-
-<img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
+### 2.5 Storage component
+`Storage` saves `UserPref` objects in json format and reads it back.<br>
+`Storage` saves the Task Manager data in xml format and reads it back.
+<p align="center">
+   <img src="images/StorageClassDiagram.png" width="800"><br>
+   Figure 2.5.1 : Structure of the Storage Component
+</p>
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
-The `Storage` component:
-
-* can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
-
-### 2.6. Common classes
+### 2.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+Burdens further separates the packages into sub-packages - `core`, `events`, `exceptions` and `util`.
+
+* `Core` - This package consists of the essential classes that are required by multiple components.
+* `Events` -This package consists of the different type of events that can occur; these are used mainly by EventManager and EventBus.
+* `Exceptions` - This package consists of exceptions that may occur with the use of Burdens.
+* `Util` - This package consists of additional utilities for the different components.
+ 
 ## 3. Implementation
 
-### 3.1. Logging
+### 3.1 Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -221,15 +251,16 @@ and logging destinations.
 
 **Logging Levels**
 
+Burdens has 4 logging levels: `SEVERE`, `WARNING`, `INFO` and `FINE`.
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
+* `INFO` : Information showing the noteworthy actions by Burdens
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 3.2 Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
+Certain properties of Burdens can be controlled (e.g logging level) through the configuration file
 (default: `config.json`):
 
 
@@ -270,7 +301,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 4.1 Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -282,21 +313,21 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ## 5. Dev Ops
 
-### 5.1. Build Automation
+### 5.1 Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 5.2 Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 5.3 Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 5.4 Making a Release
 
 Here are the steps to create a new release.
 
@@ -305,7 +336,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 5.5 Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -322,9 +353,9 @@ Here are the steps to convert the project documentation files to PDF format.
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 5.6 Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Burdens depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
