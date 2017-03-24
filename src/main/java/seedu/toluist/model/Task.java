@@ -166,7 +166,7 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean isRecurring() {
-        return recurringEndDateTime != null && recurringFrequency != null;
+        return !isFloatingTask() && recurringEndDateTime != null && recurringFrequency != null;
     }
 
     public boolean isAnyKeywordsContainedInDescriptionIgnoreCase(String[] keywords) {

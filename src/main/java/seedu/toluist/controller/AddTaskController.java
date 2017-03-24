@@ -52,8 +52,13 @@ public class AddTaskController extends Controller {
 
         String taskPriority = tokens.get(TaskTokenizer.TASK_PRIORITY_KEYWORD);
 
+        String recurringFrequency = tokens.get(TaskTokenizer.TASK_RECURRING_FREQUENCY_KEYWORD);
+
+        String recurringUntilEndDateToken = tokens.get(TaskTokenizer.TASK_RECURRING_UNTIL_END_DATE);
+        LocalDateTime recurringUntilEndDate = DateTimeUtil.parseDateString(recurringUntilEndDateToken);
+
         commandResult = add(todoList, description, eventStartDateTime, eventEndDateTime,
-                taskDeadline, taskPriority, tags);
+                taskDeadline, taskPriority, tags, recurringFrequency, recurringUntilEndDate);
 
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks());
@@ -68,7 +73,8 @@ public class AddTaskController extends Controller {
 
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
-            LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags) {
+            LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
+            String recurringFrequency, LocalDateTime recurringUntilEndDate) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline)) {
             return new CommandResult(RESULT_MESSAGE_ERROR_DATE_INPUT);
         }
@@ -83,6 +89,13 @@ public class AddTaskController extends Controller {
         }
         if (taskPriority != null) {
             task.setTaskPriority(taskPriority);
+        }
+        if (recurringFrequency != null) {
+            if (recurringUntilEndDate == null) {
+                task.setRecurring(recurringFrequency);
+            } else {
+                task.setRecurring(recurringUntilEndDate, recurringFrequency);
+            }
         }
         task.replaceTags(tags);
         todoList.add(task);
