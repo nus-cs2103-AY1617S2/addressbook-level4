@@ -1,5 +1,6 @@
 package org.teamstbf.yats.model.item;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,7 +8,10 @@ public class Schedule {
 
     public static final String MESSAGE_TIME_ERROR = "Invalid or empty date/time entry";
     public static final String STRING_EMPTY = "";
-    public static final String MESSAGE_TIME_CONSTRAINTS = "by today tomorrow till";
+    
+    private static final SimpleDateFormat FORMATTER_DATE
+        = new SimpleDateFormat("hh:mma dd/MM/yyyy");
+    
     private Date scheduleDate;
 
     /*
@@ -19,7 +23,14 @@ public class Schedule {
     
     public Schedule(String timeString) {
         //CHANGE THIS
-        this.scheduleDate = null;
+        try {
+            this.scheduleDate = STRING_EMPTY.equals(timeString) ?
+                    null :
+                    FORMATTER_DATE.parse(timeString);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -61,8 +72,7 @@ public class Schedule {
         if (this.scheduleDate == null) {
             return STRING_EMPTY;
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mma dd/MM/yyyy");
-        String dateString = dateFormat.format(this.scheduleDate);
+        String dateString = FORMATTER_DATE.format(this.scheduleDate);
         return dateString;
     }
 

@@ -44,10 +44,11 @@ public class MarkDoneCommandParser extends EditCommandParser{
 
 		EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 		try {
+		    // THIS PART NEEDS MORE EDITING
+		    // NLP NOT APPLIED YET
 			editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
 			editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
-			editTaskDescriptor.setStartTime(ParserUtil.parseSchedule(argsTokenizer.getValue(PREFIX_START_TIME)));
-			editTaskDescriptor.setEndTime(ParserUtil.parseSchedule(argsTokenizer.getValue(PREFIX_END_TIME)));
+			editTaskDescriptor.setTime(ParserUtil.parseSchedule(argsTokenizer.getValue(PREFIX_START_TIME)));
 			editTaskDescriptor.setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
 			editTaskDescriptor.setPeriodic(ParserUtil.parsePeriodic(argsTokenizer.getValue(PREFIX_PERIOD)));
 			editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
