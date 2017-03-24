@@ -95,7 +95,18 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: white;
+}
+.list-cell {
+	-fx-background-color: derive(black, 20%);
+}
+
+.list-cell:filled {
+	-fx-border-color: derive(black, 20%);
+}
+
+.list-cell:selected {
+	-fx-background-color: derive(black, 35%);
 }
 
 .cell_big_label {
@@ -156,7 +167,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#000000, 50%);
+    -fx-background-color: derive(white, 0%);
 }
 
 .context-menu .label {
@@ -172,6 +183,14 @@
     -fx-font-family: "LiSong Pro";
     -fx-text-fill: black;
     -fx-opacity: 0.9;
+}
+
+.menu-bar :hover {
+	-fx-background-color: derive(white, -5%);
+}
+
+.menu-bar :selected {
+	-fx-background-color: derive(white, -5%);
 }
 
 .menu .left-container {
@@ -253,7 +272,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#1d1d1d, 10%);
     -fx-background-insets: 3;
 }
 
@@ -284,7 +303,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #taskListPanel, #personWebpage {
+#filterField {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

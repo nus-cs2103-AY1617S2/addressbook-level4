@@ -8,20 +8,16 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox minWidth="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="25.0" prefWidth="1000.0">
-         <children>
-            <Label prefHeight="42.0" prefWidth="870.0" style="-fx-font-size: 40; -fx-background-color: derive(#ffffff, -10%);" text="  JOBS">
-               <font>
-                  <Font name="LiSong Pro" size="50.0" />
-               </font>
-            </Label>
-            <MenuBar prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: derive(#ffffff, -10%);">
+      <BorderPane style="-fx-background-color: derive(#ffffff, -10%);">
+         <right>
+            <MenuBar prefHeight="42.0" prefWidth="130.0" style="-fx-background-color: derive(#ffffff, -10%);" BorderPane.alignment="CENTER">
                <menus>
                   <Menu mnemonicParsing="false" text="File">
                      <items>
@@ -39,8 +35,15 @@
                   <URL value="@Extensions.css" />
                </stylesheets>
             </MenuBar>
-         </children>
-      </HBox>
+         </right>
+         <left>
+            <Label prefHeight="42.0" style="-fx-font-size: 40; -fx-background-color: derive(#ffffff, -10%);" text="  JOBS" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="LiSong Pro" size="50.0" />
+               </font>
+            </Label>
+         </left>
+      </BorderPane>
       <AnchorPane fx:id="commandBoxPlaceholder" style="-fx-border-color: derive(black, 20%);" styleClass="anchor-pane" VBox.vgrow="NEVER">
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
