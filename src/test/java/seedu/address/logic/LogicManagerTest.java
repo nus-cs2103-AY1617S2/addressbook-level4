@@ -462,34 +462,34 @@ public class LogicManagerTest {
          * Generates an TaskManager with auto-generated Tasks.
          */
         TaskManager generateTaskManager(int numGenerated) throws Exception {
-            TaskManager TaskManager = new TaskManager();
-            addToTaskManager(TaskManager, numGenerated);
-            return TaskManager;
+            TaskManager taskManager = new TaskManager();
+            addToTaskManager(taskManager, numGenerated);
+            return taskManager;
         }
 
         /**
          * Generates an TaskManager based on the list of Tasks given.
          */
-        TaskManager generateTaskManager(List<Task> Tasks) throws Exception {
+        TaskManager generateTaskManager(List<Task> tasks) throws Exception {
             TaskManager TaskManager = new TaskManager();
-            addToTaskManager(TaskManager, Tasks);
+            addToTaskManager(TaskManager, tasks);
             return TaskManager;
         }
 
         /**
          * Adds auto-generated Task objects to the given TaskManager
-         * @param TaskManager The TaskManager to which the Tasks will be added
+         * @param taskManager The TaskManager to which the Tasks will be added
          */
-        void addToTaskManager(TaskManager TaskManager, int numGenerated) throws Exception {
-            addToTaskManager(TaskManager, generateTaskList(numGenerated));
+        void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
+            addToTaskManager(taskManager, generateTaskList(numGenerated));
         }
 
         /**
          * Adds the given list of Tasks to the given TaskManager
          */
-        void addToTaskManager(TaskManager TaskManager, List<Task> TasksToAdd) throws Exception {
-            for (Task p: TasksToAdd) {
-                TaskManager.addTask(p);
+        void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
+                taskManager.addTask(p);
             }
         }
 
@@ -504,8 +504,8 @@ public class LogicManagerTest {
         /**
          * Adds the given list of Tasks to the given model
          */
-        void addToModel(Model model, List<Task> TasksToAdd) throws Exception {
-            for (Task p: TasksToAdd) {
+        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
                 model.addTask(p);
             }
         }
@@ -514,15 +514,15 @@ public class LogicManagerTest {
          * Generates a list of Tasks based on the flags.
          */
         List<Task> generateTaskList(int numGenerated) throws Exception {
-            List<Task> Tasks = new ArrayList<>();
+            List<Task> tasks = new ArrayList<>();
             for (int i = 1; i <= numGenerated; i++) {
-                Tasks.add(generateTask(i));
+                tasks.add(generateTask(i));
             }
-            return Tasks;
+            return tasks;
         }
 
-        List<Task> generateTaskList(Task... Tasks) {
-            return Arrays.asList(Tasks);
+        List<Task> generateTaskList(Task... tasks) {
+            return Arrays.asList(tasks);
         }
 
         /**
