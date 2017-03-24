@@ -54,4 +54,8 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
+	void undo() throws Exception;
+
+	void updateBackup() throws DuplicateTaskException;
+
 }

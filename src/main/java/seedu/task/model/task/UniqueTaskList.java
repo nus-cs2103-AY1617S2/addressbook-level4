@@ -41,6 +41,20 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
+    
+    public void clear() {
+    	while (!internalList.isEmpty()) {
+    		internalList.remove(0);
+		}
+		// TODO Auto-generated method stub
+		
+	}
+    
+    public void addAll(UniqueTaskList toAdd) {
+    	for (Task t : toAdd) {
+    		internalList.add(t);
+    	}
+    }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
@@ -126,11 +140,13 @@ public class UniqueTaskList implements Iterable<Task> {
             super("Operation would result in duplicate tasks");
         }
     }
+    
 
     /**
      * Signals that an operation targeting a specified task in the list would fail because
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
 
 }

@@ -16,4 +16,7 @@ public class ClearCommand extends Command {
 	model.resetData(new TaskManager());
 	return new CommandResult(MESSAGE_SUCCESS);
     }
+    public boolean isUndoable () {
+    	return true;
+    }
 }
