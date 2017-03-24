@@ -2,6 +2,7 @@ package seedu.tache.logic.commands;
 
 import java.util.Stack;
 
+import seedu.tache.commons.core.Config;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.Model;
@@ -13,6 +14,7 @@ import seedu.tache.storage.Storage;
 public abstract class Command {
     protected Model model;
     protected Storage storage;
+    protected Config config;
     //@@author A0150120H
     protected static Stack<Undoable> undoHistory = new Stack<Undoable>();
     //@@author
@@ -50,6 +52,10 @@ public abstract class Command {
 
     public void setStorage(Storage storage) {
         this.storage = storage;
+    }
+
+    public void setConfig(Config config) {
+        this.config = config;
     }
 
     //@@author A0150120H
