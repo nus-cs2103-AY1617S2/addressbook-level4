@@ -106,8 +106,7 @@ public class TestTask implements ReadOnlyTask {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));
         }
-        if 
-        (this.getStartDate() != null && this.getEndDate() != null) {
+        if (this.getStartDate() != null && this.getEndDate() != null) {
             sb.append("\\from " + this.getStartDate().toString() + " \\to " + this.getEndDate().toString());
         }
         return sb.toString();
