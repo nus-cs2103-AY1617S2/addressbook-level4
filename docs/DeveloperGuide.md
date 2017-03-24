@@ -36,7 +36,7 @@
 <br><br>
 
 ## 1. Introduction
-ezDo is the eziest™ way to keep track of all your tasks efficiently with command line style inputs. It is a Java desktop application with a user-friendly GUI implemented with JavaFX.
+ezDo is the eziest™ way to keep track of all the user's tasks efficiently with command line style inputs. It is a Java desktop application with a user-friendly GUI implemented with JavaFX.
 
 ezDo is written in Java and is designed in an Object Oriented Programming (OOP) manner. As such, this guide describes the class design and technical implementation of ezDo. It will help developers (like you) understand how classes within ezDo interact with each other and how you can contribute to its development.
 
@@ -78,20 +78,20 @@ We have organized this guide in a top-down manner so that you can understand the
 ---
 <br>
 <p align="center"><img src="images/Architecture.png" width="600"></p>
-<h5 align="center">Figure 1 : Architecture Diagram</h5>
+<h5 align="center">Figure 1: Architecture Diagram</h5>
 <br><br>
 
-Figure 1 above explains the high-level design of ezDo.
+Figure 1 explains the high-level design of ezDo.
 
 > * The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 >
-> * To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+> * To update a diagram, modify the diagram in the `.pptx` file, select the objects of the diagram, and choose `Save as picture`.
 
 <br>
 
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/ezdo/MainApp.java):
 
-* At ezDo launch, it is responsible for initializing the components in the correct sequence, and connecting them up with each other.
+* At ezDo launch, it is responsible for initializing the components in the correct sequence and connecting them up with each other.
 
 * At shut down, it is responsible for shutting down the components and invoking cleanup methods where necessary.
 
@@ -120,7 +120,7 @@ Each of the four components
 * Defines its API in an `interface` with the same name as the component.
 * Exposes its functionality using a `{Component Name} Manager` class.<br>
 
-For example, **`Logic`** (see Figure 2 below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.<br><br>
+For example, **`Logic`** (see Figure 2) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.<br><br>
 
 <p align="center"><img src="images/LogicClassDiagram.png" width="800"></p>
 <h5 align="center">Figure 2: Class Diagram of the Logic Component</h5>
@@ -135,7 +135,7 @@ Figure 3 shows how the components interact for the scenario where the user issue
 <h5 align="center">Figure 3: Component Interactions for kill 1 Command (Part 1)</h5>
 <br><br>
 
->Note how **`Model`** simply raises a `EzDoChangedEvent` when ezDo data is changed, instead of asking **`Storage`** to save the updates to the hard disk.
+> Note how **`Model`** simply raises a `EzDoChangedEvent` when ezDo data is changed, instead of asking **`Storage`** to save the updates to the hard disk.
 
 <br>
 
@@ -235,10 +235,10 @@ As shown in Figure 8, **`Model`**:
 **API** : [`Storage.java`](../src/main/java/seedu/ezdo/storage/Storage.java)
 <br>
 
-As shown in Figure 9, **`Storage`** can:
-* Save `UserPref` objects in `.json` format and read it back.
+As shown in Figure 9, **`Storage`**:
+* Saves `UserPref` objects in `.json` format and read it back.
 
-* Save ezDo data in `.xml` format and read it back.
+* Saves ezDo data in `.xml` format and read it back.
 <br><br>
 
 
@@ -308,7 +308,6 @@ See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) fo
 <br>
 ### 6.3 Publishing Documentation
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the project site.
-
 <br>
 
 ### 6.4 Making a Release
@@ -320,7 +319,6 @@ See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages 
  2. ___Tag the repo___ with the version number. _(For example: `v0.1`)_
 
  3. [___Create a new release___ using GitHub](https://help.github.com/articles/creating-releases/) and ___upload the JAR file you created___.
-
 <br>
 
 ### 6.5 Converting Documentation to PDF format
@@ -337,12 +335,9 @@ We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for conve
     For best results, use the settings indicated in the screenshot (as shown in Figure 10).<br>
     <p align="center"><img src="images/chrome_save_as_pdf.png" width="300"></p>
 <h5 align="center">Figure 10: Saving Documentation as a PDF File in Google Chrome</h5>
-
 <br><br>
 
 ### 6.6 Managing Dependencies
-<br>
-
 A project often depends on third-party libraries. For example, ezDo depends on the [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Gradle can automate downloading the dependencies, which is better than these alternatives. <br><br>
 
 > 1. Include those libraries in the repo (this bloats the repo size). <br>
@@ -386,7 +381,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | list my tasks in priority order | see which tasks have different priorities
 `* *` | user | undo multiple commands | revert changes
 `* *` | user | enter recurring tasks | enter it just once
-`* *` | power user | map standard commands to my preferred shortcut commands | be familiar with my own  modified commands
+`* *` | power user | assign standard commands to my preferred shortcut commands | be familiar with my own  modified commands
 `* *` | user | make tasks that have very close deadlines to appear as special priority | remember to complete them
 `* *` | user | set notifications for deadlines for my tasks | be notified
 `* *` | power user | set how much time it requires to finish a task | know how long I need to start and finish a task and not leave it halfway
@@ -424,7 +419,7 @@ ___For all use cases below, the **System** is `ezDo` and the **Actor** is the `u
 
 1a. The user enters an invalid command.
 
-> 1a1. ezDo shows an error message and prompts the user to retry.
+> 1a1. ezDo shows an error message and prompts the user to retry. <br>
   1a2. Use case resumes at step 1.
 
 <br>
@@ -443,12 +438,12 @@ ___For all use cases below, the **System** is `ezDo` and the **Actor** is the `u
 
 1a. The user enters an invalid command.
 
-> 1a1. ezDo shows an error message and prompts the user to retry.
+> 1a1. ezDo shows an error message and prompts the user to retry.<br>
 > 1a2. Use case resumes at step 1.
 
 1b. The indexed task does not exist.
 
-> 1b1. ezDo shows an error message and prompts the user to select another index.
+> 1b1. ezDo shows an error message and prompts the user to select another index.<br>
 > 1b2. Use case resumes at step 1.
 
 <br>
@@ -467,7 +462,7 @@ ___For all use cases below, the **System** is `ezDo` and the **Actor** is the `u
 
 1a. The indexed task does not exist.
 
-> 1a1. ezDo shows an error message and prompts the user to select another index.
+> 1a1. ezDo shows an error message and prompts the user to select another index.<br>
 > 1a2. Use case resumes at step 1.
 
 <br>
@@ -486,7 +481,7 @@ ___For all use cases below, the **System** is `ezDo` and the **Actor** is the `u
 
 1a. The indexed task does not exist.
 
-> 1a1. ezDo shows an error message and prompts the user to select another index.
+> 1a1. ezDo shows an error message and prompts the user to select another index.<br>
 > 1b1. Use case resumes at step 1.
 
 <br>
@@ -505,12 +500,12 @@ ___For all use cases below, the **System** is `ezDo` and the **Actor** is the `u
 
 1a. The folder does not exist.
 
-> 1a1. ezDo shows an error message and prompts the user to choose another path.
+> 1a1. ezDo shows an error message and prompts the user to choose another path.<br>
 > 1a2. Use case resumes at step 1.
 
 1b. The user enters an invalid command.
 
-> 1b1. ezDo shows an error message and prompts the user to try again.
+> 1b1. ezDo shows an error message and prompts the user to try again.<br>
 > 1b2. Use case resumes at step 1.
 
 <br><br>
