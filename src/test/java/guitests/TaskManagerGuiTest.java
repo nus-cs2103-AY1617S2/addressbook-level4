@@ -133,6 +133,6 @@ public abstract class TaskManagerGuiTest {
     }
 
     public void sleep(int milliseconds) {
-        new GuiRobot().sleep(milliseconds);
+        new GuiRobot().sleep((milliseconds));
     }
 }

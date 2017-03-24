@@ -1,9 +1,13 @@
 package savvytodo.logic.commands;
 
+import java.time.DateTimeException;
 import java.util.HashSet;
 import java.util.Set;
 
+import savvytodo.commons.core.Messages;
 import savvytodo.commons.exceptions.IllegalValueException;
+import savvytodo.commons.util.DateTimeUtil;
+import savvytodo.commons.util.StringUtil;
 import savvytodo.logic.commands.exceptions.CommandException;
 import savvytodo.model.category.Category;
 import savvytodo.model.category.UniqueCategoryList;
@@ -17,6 +21,7 @@ import savvytodo.model.task.Status;
 import savvytodo.model.task.Task;
 import savvytodo.model.task.UniqueTaskList;
 
+//@@author A0140016B
 /**
  * Adds a task to the task manager.
  */
@@ -64,11 +69,32 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
+            String conflictingTaskList = model.getTaskConflictingDateTimeWarningMessage(toAdd.getDateTime());
             model.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            return new CommandResult(String.format(messageSummary(conflictingTaskList), toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (DateTimeException e) {
+            throw new CommandException(DateTimeUtil.MESSAGE_INCORRECT_SYNTAX);
+        } catch (IllegalValueException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
+    /**
+     * Method for conflicting tasks
+     * @param conflictingTaskList
+     * @return messageSummary
+     */
+    private String messageSummary(String conflictingTaskList) {
+        String summary = MESSAGE_SUCCESS;
+        if (!conflictingTaskList.isEmpty()) {
+            summary += StringUtil.SYSTEM_NEWLINE
+                    + Messages.MESSAGE_CONFLICTING_TASKS_WARNING
+                    + conflictingTaskList;
+        }
+        return summary;
+    }
 }
+//@@author A0140016B
+

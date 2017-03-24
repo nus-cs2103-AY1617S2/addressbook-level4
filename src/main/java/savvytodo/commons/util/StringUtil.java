@@ -12,6 +12,8 @@ public class StringUtil {
 
     public static final String WHITESPACE_REGEX = "\\s+";
 
+    public static final String SYSTEM_NEWLINE = System.lineSeparator();
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -60,6 +62,7 @@ public class StringUtil {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
 
+    //@@author A0140016B
     /**
      * @author A0140016B
      * @param string cannot be null
@@ -69,5 +72,6 @@ public class StringUtil {
     public static String firstCharUpperCaseRestLowerCase(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
     }
+    //@@author A0140016B
 
 }
