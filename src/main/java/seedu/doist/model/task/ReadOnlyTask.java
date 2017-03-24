@@ -33,12 +33,24 @@ public interface ReadOnlyTask {
                 && other.getDescription().equals(this.getDescription())  // state checks here onwards
                 && other.getFinishedStatus().equals(this.getFinishedStatus())
                 && other.getPriority().equals(this.getPriority())
-                && ((other.getStartDate() == null && this.getStartDate() == null)
-                        || (this.getStartDate() != null && other.getStartDate() != null
-                            && other.getStartDate().equals(this.getStartDate())))
-                && ((other.getEndDate() == null && this.getEndDate() == null)
-                        || (this.getEndDate() != null && other.getEndDate() != null
-                            && other.getEndDate().equals(this.getEndDate()))));
+                && areEqualDates(other.getStartDate(), this.getStartDate())
+                && areEqualDates(other.getEndDate(), this.getEndDate()));
+    }
+
+    /**
+     * Check whether 2 Date objects are equal or not
+     * @return: true if both are null, or, both are not null with the same value. false otherwise.
+     */
+    default boolean areEqualDates(Date date1, Date date2) {
+        // case 1: both are null, considered as equal
+        if (date1 == null && date2 == null) {
+            return true;
+        }
+        // case 2: both are not null and the values are equal
+        if (date1 != null && date2 != null && date1.equals(date2)) {
+            return true;
+        }
+        return false;
     }
 
     /**

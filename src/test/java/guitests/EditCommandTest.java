@@ -107,7 +107,7 @@ public class EditCommandTest extends DoistGUITest {
 
     @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Do laundry");
+        commandBox.runCommand("edit 3 Do laundry \\as normal");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
