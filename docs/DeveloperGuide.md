@@ -11,7 +11,7 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
     3.2. [UI](#32-ui)<br>
     3.3. [Logic](#33-logic)<br>
     3.4. [Model](#34-model)<br>
-    3.5. [Storage](#35-storage)
+    3.5. [Storage](#35-storage)<br>
     3.6. [Event-Driven Design](#36-event-driven-design)
 4. [Implementation](#4-implementation)
 5. [Testing](#5-testing)
