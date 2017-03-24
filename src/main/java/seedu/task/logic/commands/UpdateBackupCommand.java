@@ -2,7 +2,10 @@ package seedu.task.logic.commands;
 
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
-
+/**
+ * @author Daniel Mullen
+ *
+ */
 public class UpdateBackupCommand extends Command {
 
 	public final String COMMAND_MESSAGE = "Backing up task list";

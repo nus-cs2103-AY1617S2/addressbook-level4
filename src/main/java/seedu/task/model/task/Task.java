@@ -64,6 +64,33 @@ public class Task implements ReadOnlyTask {
 	this.tags = new UniqueTagList();
 
     }
+    
+    public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
+    	    Optional<TaskTime> parseTime2, Optional<String> parseString, Optional<TaskStatus> parseTaskStatus, UniqueTagList tags) throws IllegalValueException {
+    	this.taskName = parseTaskName;
+    	if (parseDate.isPresent()) {
+    	    this.taskDate = parseDate.get();
+    	}
+    	if (parseTime.isPresent()) {
+    	    this.taskStartTime = parseTime.get();
+    	}
+    	if (parseTime2.isPresent()) {
+    		if (this.taskStartTime != null && this.taskStartTime.compareTo(parseTime2.get()) < 0) {
+    			this.taskEndTime = parseTime2.get();
+    		} else {
+    			throw new IllegalValueException(MESSAGE_INVALID_TIME);
+    		}
+    	}
+    	if (parseString.isPresent()) {
+    	    this.taskDescription = parseString.get();
+    	}
+    	if (parseTaskStatus.isPresent()) {
+    		this.taskStatus = parseTaskStatus.get();
+    	}
+    	this.taskStatus = new TaskStatus("Ongoing");
+    	this.tags = tags;
+
+        }
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
 	    String taskDescription, TaskStatus taskStatus) {
@@ -78,7 +105,8 @@ public class Task implements ReadOnlyTask {
 		source.getTaskDescription(), source.getTaskStatus(), source.getTags());
     }
 
-    @Override
+
+	@Override
     public UniqueTagList getTags() {
 	return new UniqueTagList(tags);
     }
