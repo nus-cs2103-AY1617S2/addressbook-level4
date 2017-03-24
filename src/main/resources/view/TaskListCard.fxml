@@ -32,12 +32,7 @@
                <children>
                           <HBox>
                             <children>
-                             <Label fx:id="id" styleClass="cell_big_label">
-                                  <minWidth>
-                                      <!-- Ensures that the label text is never truncated -->
-                                      <Region fx:constant="USE_PREF_SIZE" />
-                                  </minWidth>
-                            </Label>
+                             <Label fx:id="id" styleClass="cell_big_label"></Label>
                                  <Label fx:id="desc" styleClass="cell_big_label" text="\$first" />
                              </children>
                           </HBox>
