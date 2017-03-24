@@ -167,7 +167,7 @@ public class UpdateCommand extends Command {
         }
 
         try {
-            model.updateTask(taskToEdit, editedTask);
+            model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {

@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
 
         ReadOnlyTask taskToMark = lastShownList.get(targetIndex - 1);
 
-        model.markTaskDone(taskToMark);
+        model.markTaskDone(targetIndex - 1);
 
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToMark));
     }
