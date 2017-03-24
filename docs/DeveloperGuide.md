@@ -43,12 +43,12 @@ You are welcome to contribute in any way!
 
 Please ensure you have the following prerequisites before contributing to development:
 
-   > 1. **JDK `1.8.0_60`**  or later<br/>
-     2. **Eclipse** IDE<br/>
-     3. **e(fx)clipse** plugin for Eclipse (Follow from Steps 2 onwards given in<br/>
-     [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))<br/>
-     4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace<br/>
-     5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace<br/>
+1. **JDK `1.8.0_60`**  or later
+2. **Eclipse** IDE<br>
+3. **e(fx)clipse** plugin for Eclipse (Follow from Steps 2 onwards given in<br>
+   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))<br>
+4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace<br>
+5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace<br>
 
 ### 1.2 Importing Project Burdens into Eclipse
 
@@ -97,7 +97,9 @@ Please ensure you have the following prerequisites before contributing to develo
    <img src="images/Architecture.png" width="600"><br>
    Figure 2.1.1 : Architecture Diagram
 </p>
+
 <br/>
+
 The **_Architecture Diagram_** above condenses the high-level design of Burdens.<br/>
 Here is a quick overview of the main components of Burdens and their functions:
 
@@ -113,7 +115,7 @@ Two of those classes play important roles at the architecture level.
 * `EventsCenter` : Written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained), this class
   is used by components to communicate with other components using events.
 * `LogsCenter` : Used by many classes to write log messages to Burdens' log file to record system information and events.
-<br/>
+
 **`UI`**<br/>
 The ['UI'](#ui-component) component handles display interactions on screen such as data and results of the task lists.
 <br/>
